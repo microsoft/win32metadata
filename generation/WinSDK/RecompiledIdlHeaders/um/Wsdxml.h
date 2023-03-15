@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -257,14 +257,18 @@ EXTERN_C const IID IID_IWSDXMLContext;
         virtual HRESULT STDMETHODCALLTYPE SetNamespaces( 
             /* [annotation][size_is][in] */ 
             _In_reads_(wNamespacesCount)  const PCWSDXML_NAMESPACE *pNamespaces,
-            /* [in] */ WORD wNamespacesCount,
-            /* [in] */ BYTE bLayerNumber) = 0;
+            /* [annotation][in] */ 
+            _In_  WORD wNamespacesCount,
+            /* [annotation][in] */ 
+            _In_  BYTE bLayerNumber) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTypes( 
             /* [annotation][size_is][in] */ 
             _In_reads_(dwTypesCount)  const PCWSDXML_TYPE *pTypes,
-            /* [in] */ DWORD dwTypesCount,
-            /* [in] */ BYTE bLayerNumber) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwTypesCount,
+            /* [annotation][in] */ 
+            _In_  BYTE bLayerNumber) = 0;
         
     };
     
@@ -278,7 +282,8 @@ EXTERN_C const IID IID_IWSDXMLContext;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSDXMLContext * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -315,16 +320,20 @@ EXTERN_C const IID IID_IWSDXMLContext;
             IWSDXMLContext * This,
             /* [annotation][size_is][in] */ 
             _In_reads_(wNamespacesCount)  const PCWSDXML_NAMESPACE *pNamespaces,
-            /* [in] */ WORD wNamespacesCount,
-            /* [in] */ BYTE bLayerNumber);
+            /* [annotation][in] */ 
+            _In_  WORD wNamespacesCount,
+            /* [annotation][in] */ 
+            _In_  BYTE bLayerNumber);
         
         DECLSPEC_XFGVIRT(IWSDXMLContext, SetTypes)
         HRESULT ( STDMETHODCALLTYPE *SetTypes )( 
             IWSDXMLContext * This,
             /* [annotation][size_is][in] */ 
             _In_reads_(dwTypesCount)  const PCWSDXML_TYPE *pTypes,
-            /* [in] */ DWORD dwTypesCount,
-            /* [in] */ BYTE bLayerNumber);
+            /* [annotation][in] */ 
+            _In_  DWORD dwTypesCount,
+            /* [annotation][in] */ 
+            _In_  BYTE bLayerNumber);
         
         END_INTERFACE
     } IWSDXMLContextVtbl;

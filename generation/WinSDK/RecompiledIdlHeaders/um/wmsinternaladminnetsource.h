@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -125,54 +125,82 @@ EXTERN_C const IID IID_IWMSInternalAdminNetSource;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [in] */ IUnknown *pSharedNamespace,
-            /* [in] */ IUnknown *pNamespaceNode,
-            /* [in] */ INSNetSourceCreator *pNetSourceCreator,
-            /* [in] */ BOOL fEmbeddedInServer) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *pSharedNamespace,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pNamespaceNode,
+            /* [annotation][in] */ 
+            _In_  INSNetSourceCreator *pNetSourceCreator,
+            /* [annotation][in] */ 
+            _In_  BOOL fEmbeddedInServer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNetSourceCreator( 
-            /* [out] */ INSNetSourceCreator **ppNetSourceCreator) = 0;
+            /* [annotation][out] */ 
+            _Out_  INSNetSourceCreator **ppNetSourceCreator) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCredentials( 
-            /* [in] */ BSTR bstrRealm,
-            /* [in] */ BSTR bstrName,
-            /* [in] */ BSTR bstrPassword,
-            /* [in] */ BOOL fPersist,
-            /* [in] */ BOOL fConfirmedGood) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrRealm,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrName,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrPassword,
+            /* [annotation][in] */ 
+            _In_  BOOL fPersist,
+            /* [annotation][in] */ 
+            _In_  BOOL fConfirmedGood) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCredentials( 
-            /* [in] */ BSTR bstrRealm,
-            /* [out] */ BSTR *pbstrName,
-            /* [out] */ BSTR *pbstrPassword,
-            /* [out] */ BOOL *pfConfirmedGood) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrRealm,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrName,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrPassword,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfConfirmedGood) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeleteCredentials( 
-            /* [in] */ BSTR bstrRealm) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrRealm) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCredentialFlags( 
-            /* [out] */ DWORD *lpdwFlags) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *lpdwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCredentialFlags( 
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FindProxyForURL( 
-            /* [in] */ BSTR bstrProtocol,
-            /* [in] */ BSTR bstrHost,
-            /* [out] */ BOOL *pfProxyEnabled,
-            /* [out] */ BSTR *pbstrProxyServer,
-            /* [out] */ DWORD *pdwProxyPort,
-            /* [out][in] */ DWORD *pdwProxyContext) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrProtocol,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrHost,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfProxyEnabled,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrProxyServer,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwProxyPort,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwProxyContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterProxyFailure( 
-            /* [in] */ HRESULT hrParam,
-            /* [in] */ DWORD dwProxyContext) = 0;
+            /* [annotation][in] */ 
+            _In_  HRESULT hrParam,
+            /* [annotation][in] */ 
+            _In_  DWORD dwProxyContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ShutdownProxyContext( 
-            /* [in] */ DWORD dwProxyContext) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwProxyContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsUsingIE( 
-            /* [in] */ DWORD dwProxyContext,
-            /* [out] */ BOOL *pfIsUsingIE) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwProxyContext,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfIsUsingIE) = 0;
         
     };
     
@@ -186,7 +214,8 @@ EXTERN_C const IID IID_IWMSInternalAdminNetSource;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMSInternalAdminNetSource * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -201,74 +230,102 @@ EXTERN_C const IID IID_IWMSInternalAdminNetSource;
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IWMSInternalAdminNetSource * This,
-            /* [in] */ IUnknown *pSharedNamespace,
-            /* [in] */ IUnknown *pNamespaceNode,
-            /* [in] */ INSNetSourceCreator *pNetSourceCreator,
-            /* [in] */ BOOL fEmbeddedInServer);
+            /* [annotation][in] */ 
+            _In_  IUnknown *pSharedNamespace,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pNamespaceNode,
+            /* [annotation][in] */ 
+            _In_  INSNetSourceCreator *pNetSourceCreator,
+            /* [annotation][in] */ 
+            _In_  BOOL fEmbeddedInServer);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource, GetNetSourceCreator)
         HRESULT ( STDMETHODCALLTYPE *GetNetSourceCreator )( 
             IWMSInternalAdminNetSource * This,
-            /* [out] */ INSNetSourceCreator **ppNetSourceCreator);
+            /* [annotation][out] */ 
+            _Out_  INSNetSourceCreator **ppNetSourceCreator);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource, SetCredentials)
         HRESULT ( STDMETHODCALLTYPE *SetCredentials )( 
             IWMSInternalAdminNetSource * This,
-            /* [in] */ BSTR bstrRealm,
-            /* [in] */ BSTR bstrName,
-            /* [in] */ BSTR bstrPassword,
-            /* [in] */ BOOL fPersist,
-            /* [in] */ BOOL fConfirmedGood);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrRealm,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrName,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrPassword,
+            /* [annotation][in] */ 
+            _In_  BOOL fPersist,
+            /* [annotation][in] */ 
+            _In_  BOOL fConfirmedGood);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource, GetCredentials)
         HRESULT ( STDMETHODCALLTYPE *GetCredentials )( 
             IWMSInternalAdminNetSource * This,
-            /* [in] */ BSTR bstrRealm,
-            /* [out] */ BSTR *pbstrName,
-            /* [out] */ BSTR *pbstrPassword,
-            /* [out] */ BOOL *pfConfirmedGood);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrRealm,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrName,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrPassword,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfConfirmedGood);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource, DeleteCredentials)
         HRESULT ( STDMETHODCALLTYPE *DeleteCredentials )( 
             IWMSInternalAdminNetSource * This,
-            /* [in] */ BSTR bstrRealm);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrRealm);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource, GetCredentialFlags)
         HRESULT ( STDMETHODCALLTYPE *GetCredentialFlags )( 
             IWMSInternalAdminNetSource * This,
-            /* [out] */ DWORD *lpdwFlags);
+            /* [annotation][out] */ 
+            _Out_  DWORD *lpdwFlags);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource, SetCredentialFlags)
         HRESULT ( STDMETHODCALLTYPE *SetCredentialFlags )( 
             IWMSInternalAdminNetSource * This,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource, FindProxyForURL)
         HRESULT ( STDMETHODCALLTYPE *FindProxyForURL )( 
             IWMSInternalAdminNetSource * This,
-            /* [in] */ BSTR bstrProtocol,
-            /* [in] */ BSTR bstrHost,
-            /* [out] */ BOOL *pfProxyEnabled,
-            /* [out] */ BSTR *pbstrProxyServer,
-            /* [out] */ DWORD *pdwProxyPort,
-            /* [out][in] */ DWORD *pdwProxyContext);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrProtocol,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrHost,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfProxyEnabled,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrProxyServer,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwProxyPort,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwProxyContext);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource, RegisterProxyFailure)
         HRESULT ( STDMETHODCALLTYPE *RegisterProxyFailure )( 
             IWMSInternalAdminNetSource * This,
-            /* [in] */ HRESULT hrParam,
-            /* [in] */ DWORD dwProxyContext);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrParam,
+            /* [annotation][in] */ 
+            _In_  DWORD dwProxyContext);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource, ShutdownProxyContext)
         HRESULT ( STDMETHODCALLTYPE *ShutdownProxyContext )( 
             IWMSInternalAdminNetSource * This,
-            /* [in] */ DWORD dwProxyContext);
+            /* [annotation][in] */ 
+            _In_  DWORD dwProxyContext);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource, IsUsingIE)
         HRESULT ( STDMETHODCALLTYPE *IsUsingIE )( 
             IWMSInternalAdminNetSource * This,
-            /* [in] */ DWORD dwProxyContext,
-            /* [out] */ BOOL *pfIsUsingIE);
+            /* [annotation][in] */ 
+            _In_  DWORD dwProxyContext,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfIsUsingIE);
         
         END_INTERFACE
     } IWMSInternalAdminNetSourceVtbl;
@@ -353,36 +410,60 @@ EXTERN_C const IID IID_IWMSInternalAdminNetSource2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetCredentialsEx( 
-            /* [in] */ BSTR bstrRealm,
-            /* [in] */ BSTR bstrUrl,
-            /* [in] */ BOOL fProxy,
-            /* [in] */ BSTR bstrName,
-            /* [in] */ BSTR bstrPassword,
-            /* [in] */ BOOL fPersist,
-            /* [in] */ BOOL fConfirmedGood) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrRealm,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrUrl,
+            /* [annotation][in] */ 
+            _In_  BOOL fProxy,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrName,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrPassword,
+            /* [annotation][in] */ 
+            _In_  BOOL fPersist,
+            /* [annotation][in] */ 
+            _In_  BOOL fConfirmedGood) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCredentialsEx( 
-            /* [in] */ BSTR bstrRealm,
-            /* [in] */ BSTR bstrUrl,
-            /* [in] */ BOOL fProxy,
-            /* [out] */ NETSOURCE_URLCREDPOLICY_SETTINGS *pdwUrlPolicy,
-            /* [out] */ BSTR *pbstrName,
-            /* [out] */ BSTR *pbstrPassword,
-            /* [out] */ BOOL *pfConfirmedGood) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrRealm,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrUrl,
+            /* [annotation][in] */ 
+            _In_  BOOL fProxy,
+            /* [annotation][out] */ 
+            _Out_  NETSOURCE_URLCREDPOLICY_SETTINGS *pdwUrlPolicy,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrName,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrPassword,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfConfirmedGood) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeleteCredentialsEx( 
-            /* [in] */ BSTR bstrRealm,
-            /* [in] */ BSTR bstrUrl,
-            /* [in] */ BOOL fProxy) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrRealm,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrUrl,
+            /* [annotation][in] */ 
+            _In_  BOOL fProxy) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FindProxyForURLEx( 
-            /* [in] */ BSTR bstrProtocol,
-            /* [in] */ BSTR bstrHost,
-            /* [in] */ BSTR bstrUrl,
-            /* [out] */ BOOL *pfProxyEnabled,
-            /* [out] */ BSTR *pbstrProxyServer,
-            /* [out] */ DWORD *pdwProxyPort,
-            /* [out][in] */ DWORD *pdwProxyContext) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrProtocol,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrHost,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrUrl,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfProxyEnabled,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrProxyServer,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwProxyPort,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwProxyContext) = 0;
         
     };
     
@@ -396,7 +477,8 @@ EXTERN_C const IID IID_IWMSInternalAdminNetSource2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMSInternalAdminNetSource2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -411,42 +493,66 @@ EXTERN_C const IID IID_IWMSInternalAdminNetSource2;
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource2, SetCredentialsEx)
         HRESULT ( STDMETHODCALLTYPE *SetCredentialsEx )( 
             IWMSInternalAdminNetSource2 * This,
-            /* [in] */ BSTR bstrRealm,
-            /* [in] */ BSTR bstrUrl,
-            /* [in] */ BOOL fProxy,
-            /* [in] */ BSTR bstrName,
-            /* [in] */ BSTR bstrPassword,
-            /* [in] */ BOOL fPersist,
-            /* [in] */ BOOL fConfirmedGood);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrRealm,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrUrl,
+            /* [annotation][in] */ 
+            _In_  BOOL fProxy,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrName,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrPassword,
+            /* [annotation][in] */ 
+            _In_  BOOL fPersist,
+            /* [annotation][in] */ 
+            _In_  BOOL fConfirmedGood);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource2, GetCredentialsEx)
         HRESULT ( STDMETHODCALLTYPE *GetCredentialsEx )( 
             IWMSInternalAdminNetSource2 * This,
-            /* [in] */ BSTR bstrRealm,
-            /* [in] */ BSTR bstrUrl,
-            /* [in] */ BOOL fProxy,
-            /* [out] */ NETSOURCE_URLCREDPOLICY_SETTINGS *pdwUrlPolicy,
-            /* [out] */ BSTR *pbstrName,
-            /* [out] */ BSTR *pbstrPassword,
-            /* [out] */ BOOL *pfConfirmedGood);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrRealm,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrUrl,
+            /* [annotation][in] */ 
+            _In_  BOOL fProxy,
+            /* [annotation][out] */ 
+            _Out_  NETSOURCE_URLCREDPOLICY_SETTINGS *pdwUrlPolicy,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrName,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrPassword,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfConfirmedGood);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource2, DeleteCredentialsEx)
         HRESULT ( STDMETHODCALLTYPE *DeleteCredentialsEx )( 
             IWMSInternalAdminNetSource2 * This,
-            /* [in] */ BSTR bstrRealm,
-            /* [in] */ BSTR bstrUrl,
-            /* [in] */ BOOL fProxy);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrRealm,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrUrl,
+            /* [annotation][in] */ 
+            _In_  BOOL fProxy);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource2, FindProxyForURLEx)
         HRESULT ( STDMETHODCALLTYPE *FindProxyForURLEx )( 
             IWMSInternalAdminNetSource2 * This,
-            /* [in] */ BSTR bstrProtocol,
-            /* [in] */ BSTR bstrHost,
-            /* [in] */ BSTR bstrUrl,
-            /* [out] */ BOOL *pfProxyEnabled,
-            /* [out] */ BSTR *pbstrProxyServer,
-            /* [out] */ DWORD *pdwProxyPort,
-            /* [out][in] */ DWORD *pdwProxyContext);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrProtocol,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrHost,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrUrl,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfProxyEnabled,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrProxyServer,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwProxyPort,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwProxyContext);
         
         END_INTERFACE
     } IWMSInternalAdminNetSource2Vtbl;
@@ -510,47 +616,76 @@ EXTERN_C const IID IID_IWMSInternalAdminNetSource3;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetNetSourceCreator2( 
-            /* [out] */ IUnknown **ppNetSourceCreator) = 0;
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppNetSourceCreator) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FindProxyForURLEx2( 
-            /* [in] */ BSTR bstrProtocol,
-            /* [in] */ BSTR bstrHost,
-            /* [in] */ BSTR bstrUrl,
-            /* [out] */ BOOL *pfProxyEnabled,
-            /* [out] */ BSTR *pbstrProxyServer,
-            /* [out] */ DWORD *pdwProxyPort,
-            /* [out][in] */ QWORD *pqwProxyContext) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrProtocol,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrHost,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrUrl,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfProxyEnabled,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrProxyServer,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwProxyPort,
+            /* [annotation][out][in] */ 
+            _Inout_  QWORD *pqwProxyContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterProxyFailure2( 
-            /* [in] */ HRESULT hrParam,
-            /* [in] */ QWORD qwProxyContext) = 0;
+            /* [annotation][in] */ 
+            _In_  HRESULT hrParam,
+            /* [annotation][in] */ 
+            _In_  QWORD qwProxyContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ShutdownProxyContext2( 
-            /* [in] */ QWORD qwProxyContext) = 0;
+            /* [annotation][in] */ 
+            _In_  QWORD qwProxyContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsUsingIE2( 
-            /* [in] */ QWORD qwProxyContext,
-            /* [out] */ BOOL *pfIsUsingIE) = 0;
+            /* [annotation][in] */ 
+            _In_  QWORD qwProxyContext,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfIsUsingIE) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCredentialsEx2( 
-            /* [in] */ BSTR bstrRealm,
-            /* [in] */ BSTR bstrUrl,
-            /* [in] */ BOOL fProxy,
-            /* [in] */ BSTR bstrName,
-            /* [in] */ BSTR bstrPassword,
-            /* [in] */ BOOL fPersist,
-            /* [in] */ BOOL fConfirmedGood,
-            /* [in] */ BOOL fClearTextAuthentication) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrRealm,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrUrl,
+            /* [annotation][in] */ 
+            _In_  BOOL fProxy,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrName,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrPassword,
+            /* [annotation][in] */ 
+            _In_  BOOL fPersist,
+            /* [annotation][in] */ 
+            _In_  BOOL fConfirmedGood,
+            /* [annotation][in] */ 
+            _In_  BOOL fClearTextAuthentication) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCredentialsEx2( 
-            /* [in] */ BSTR bstrRealm,
-            /* [in] */ BSTR bstrUrl,
-            /* [in] */ BOOL fProxy,
-            /* [in] */ BOOL fClearTextAuthentication,
-            /* [out] */ NETSOURCE_URLCREDPOLICY_SETTINGS *pdwUrlPolicy,
-            /* [out] */ BSTR *pbstrName,
-            /* [out] */ BSTR *pbstrPassword,
-            /* [out] */ BOOL *pfConfirmedGood) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrRealm,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrUrl,
+            /* [annotation][in] */ 
+            _In_  BOOL fProxy,
+            /* [annotation][in] */ 
+            _In_  BOOL fClearTextAuthentication,
+            /* [annotation][out] */ 
+            _Out_  NETSOURCE_URLCREDPOLICY_SETTINGS *pdwUrlPolicy,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrName,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrPassword,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfConfirmedGood) = 0;
         
     };
     
@@ -564,7 +699,8 @@ EXTERN_C const IID IID_IWMSInternalAdminNetSource3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMSInternalAdminNetSource3 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -579,99 +715,152 @@ EXTERN_C const IID IID_IWMSInternalAdminNetSource3;
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource2, SetCredentialsEx)
         HRESULT ( STDMETHODCALLTYPE *SetCredentialsEx )( 
             IWMSInternalAdminNetSource3 * This,
-            /* [in] */ BSTR bstrRealm,
-            /* [in] */ BSTR bstrUrl,
-            /* [in] */ BOOL fProxy,
-            /* [in] */ BSTR bstrName,
-            /* [in] */ BSTR bstrPassword,
-            /* [in] */ BOOL fPersist,
-            /* [in] */ BOOL fConfirmedGood);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrRealm,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrUrl,
+            /* [annotation][in] */ 
+            _In_  BOOL fProxy,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrName,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrPassword,
+            /* [annotation][in] */ 
+            _In_  BOOL fPersist,
+            /* [annotation][in] */ 
+            _In_  BOOL fConfirmedGood);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource2, GetCredentialsEx)
         HRESULT ( STDMETHODCALLTYPE *GetCredentialsEx )( 
             IWMSInternalAdminNetSource3 * This,
-            /* [in] */ BSTR bstrRealm,
-            /* [in] */ BSTR bstrUrl,
-            /* [in] */ BOOL fProxy,
-            /* [out] */ NETSOURCE_URLCREDPOLICY_SETTINGS *pdwUrlPolicy,
-            /* [out] */ BSTR *pbstrName,
-            /* [out] */ BSTR *pbstrPassword,
-            /* [out] */ BOOL *pfConfirmedGood);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrRealm,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrUrl,
+            /* [annotation][in] */ 
+            _In_  BOOL fProxy,
+            /* [annotation][out] */ 
+            _Out_  NETSOURCE_URLCREDPOLICY_SETTINGS *pdwUrlPolicy,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrName,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrPassword,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfConfirmedGood);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource2, DeleteCredentialsEx)
         HRESULT ( STDMETHODCALLTYPE *DeleteCredentialsEx )( 
             IWMSInternalAdminNetSource3 * This,
-            /* [in] */ BSTR bstrRealm,
-            /* [in] */ BSTR bstrUrl,
-            /* [in] */ BOOL fProxy);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrRealm,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrUrl,
+            /* [annotation][in] */ 
+            _In_  BOOL fProxy);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource2, FindProxyForURLEx)
         HRESULT ( STDMETHODCALLTYPE *FindProxyForURLEx )( 
             IWMSInternalAdminNetSource3 * This,
-            /* [in] */ BSTR bstrProtocol,
-            /* [in] */ BSTR bstrHost,
-            /* [in] */ BSTR bstrUrl,
-            /* [out] */ BOOL *pfProxyEnabled,
-            /* [out] */ BSTR *pbstrProxyServer,
-            /* [out] */ DWORD *pdwProxyPort,
-            /* [out][in] */ DWORD *pdwProxyContext);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrProtocol,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrHost,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrUrl,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfProxyEnabled,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrProxyServer,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwProxyPort,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwProxyContext);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource3, GetNetSourceCreator2)
         HRESULT ( STDMETHODCALLTYPE *GetNetSourceCreator2 )( 
             IWMSInternalAdminNetSource3 * This,
-            /* [out] */ IUnknown **ppNetSourceCreator);
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppNetSourceCreator);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource3, FindProxyForURLEx2)
         HRESULT ( STDMETHODCALLTYPE *FindProxyForURLEx2 )( 
             IWMSInternalAdminNetSource3 * This,
-            /* [in] */ BSTR bstrProtocol,
-            /* [in] */ BSTR bstrHost,
-            /* [in] */ BSTR bstrUrl,
-            /* [out] */ BOOL *pfProxyEnabled,
-            /* [out] */ BSTR *pbstrProxyServer,
-            /* [out] */ DWORD *pdwProxyPort,
-            /* [out][in] */ QWORD *pqwProxyContext);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrProtocol,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrHost,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrUrl,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfProxyEnabled,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrProxyServer,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwProxyPort,
+            /* [annotation][out][in] */ 
+            _Inout_  QWORD *pqwProxyContext);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource3, RegisterProxyFailure2)
         HRESULT ( STDMETHODCALLTYPE *RegisterProxyFailure2 )( 
             IWMSInternalAdminNetSource3 * This,
-            /* [in] */ HRESULT hrParam,
-            /* [in] */ QWORD qwProxyContext);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrParam,
+            /* [annotation][in] */ 
+            _In_  QWORD qwProxyContext);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource3, ShutdownProxyContext2)
         HRESULT ( STDMETHODCALLTYPE *ShutdownProxyContext2 )( 
             IWMSInternalAdminNetSource3 * This,
-            /* [in] */ QWORD qwProxyContext);
+            /* [annotation][in] */ 
+            _In_  QWORD qwProxyContext);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource3, IsUsingIE2)
         HRESULT ( STDMETHODCALLTYPE *IsUsingIE2 )( 
             IWMSInternalAdminNetSource3 * This,
-            /* [in] */ QWORD qwProxyContext,
-            /* [out] */ BOOL *pfIsUsingIE);
+            /* [annotation][in] */ 
+            _In_  QWORD qwProxyContext,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfIsUsingIE);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource3, SetCredentialsEx2)
         HRESULT ( STDMETHODCALLTYPE *SetCredentialsEx2 )( 
             IWMSInternalAdminNetSource3 * This,
-            /* [in] */ BSTR bstrRealm,
-            /* [in] */ BSTR bstrUrl,
-            /* [in] */ BOOL fProxy,
-            /* [in] */ BSTR bstrName,
-            /* [in] */ BSTR bstrPassword,
-            /* [in] */ BOOL fPersist,
-            /* [in] */ BOOL fConfirmedGood,
-            /* [in] */ BOOL fClearTextAuthentication);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrRealm,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrUrl,
+            /* [annotation][in] */ 
+            _In_  BOOL fProxy,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrName,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrPassword,
+            /* [annotation][in] */ 
+            _In_  BOOL fPersist,
+            /* [annotation][in] */ 
+            _In_  BOOL fConfirmedGood,
+            /* [annotation][in] */ 
+            _In_  BOOL fClearTextAuthentication);
         
         DECLSPEC_XFGVIRT(IWMSInternalAdminNetSource3, GetCredentialsEx2)
         HRESULT ( STDMETHODCALLTYPE *GetCredentialsEx2 )( 
             IWMSInternalAdminNetSource3 * This,
-            /* [in] */ BSTR bstrRealm,
-            /* [in] */ BSTR bstrUrl,
-            /* [in] */ BOOL fProxy,
-            /* [in] */ BOOL fClearTextAuthentication,
-            /* [out] */ NETSOURCE_URLCREDPOLICY_SETTINGS *pdwUrlPolicy,
-            /* [out] */ BSTR *pbstrName,
-            /* [out] */ BSTR *pbstrPassword,
-            /* [out] */ BOOL *pfConfirmedGood);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrRealm,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrUrl,
+            /* [annotation][in] */ 
+            _In_  BOOL fProxy,
+            /* [annotation][in] */ 
+            _In_  BOOL fClearTextAuthentication,
+            /* [annotation][out] */ 
+            _Out_  NETSOURCE_URLCREDPOLICY_SETTINGS *pdwUrlPolicy,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrName,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrPassword,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfConfirmedGood);
         
         END_INTERFACE
     } IWMSInternalAdminNetSource3Vtbl;

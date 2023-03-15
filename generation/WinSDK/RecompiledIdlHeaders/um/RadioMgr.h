@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -138,11 +138,14 @@ EXTERN_C const IID IID_IMediaRadioManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetRadioInstances( 
-            /* [out] */ IRadioInstanceCollection **ppCollection) = 0;
+            /* [annotation][out] */ 
+            _Out_  IRadioInstanceCollection **ppCollection) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnSystemRadioStateChange( 
-            /* [in] */ SYSTEM_RADIO_STATE sysRadioState,
-            /* [in] */ UINT32 uTimeoutSec) = 0;
+            /* [annotation][in] */ 
+            _In_  SYSTEM_RADIO_STATE sysRadioState,
+            /* [annotation][in] */ 
+            _In_  UINT32 uTimeoutSec) = 0;
         
     };
     
@@ -156,7 +159,8 @@ EXTERN_C const IID IID_IMediaRadioManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMediaRadioManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -171,13 +175,16 @@ EXTERN_C const IID IID_IMediaRadioManager;
         DECLSPEC_XFGVIRT(IMediaRadioManager, GetRadioInstances)
         HRESULT ( STDMETHODCALLTYPE *GetRadioInstances )( 
             IMediaRadioManager * This,
-            /* [out] */ IRadioInstanceCollection **ppCollection);
+            /* [annotation][out] */ 
+            _Out_  IRadioInstanceCollection **ppCollection);
         
         DECLSPEC_XFGVIRT(IMediaRadioManager, OnSystemRadioStateChange)
         HRESULT ( STDMETHODCALLTYPE *OnSystemRadioStateChange )( 
             IMediaRadioManager * This,
-            /* [in] */ SYSTEM_RADIO_STATE sysRadioState,
-            /* [in] */ UINT32 uTimeoutSec);
+            /* [annotation][in] */ 
+            _In_  SYSTEM_RADIO_STATE sysRadioState,
+            /* [annotation][in] */ 
+            _In_  UINT32 uTimeoutSec);
         
         END_INTERFACE
     } IMediaRadioManagerVtbl;
@@ -235,11 +242,14 @@ EXTERN_C const IID IID_IRadioInstanceCollection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [out] */ UINT32 *pcInstance) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT32 *pcInstance) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [in] */ UINT32 uIndex,
-            /* [out] */ IRadioInstance **ppRadioInstance) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT32 uIndex,
+            /* [annotation][out] */ 
+            _Out_  IRadioInstance **ppRadioInstance) = 0;
         
     };
     
@@ -253,7 +263,8 @@ EXTERN_C const IID IID_IRadioInstanceCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRadioInstanceCollection * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -268,13 +279,16 @@ EXTERN_C const IID IID_IRadioInstanceCollection;
         DECLSPEC_XFGVIRT(IRadioInstanceCollection, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             IRadioInstanceCollection * This,
-            /* [out] */ UINT32 *pcInstance);
+            /* [annotation][out] */ 
+            _Out_  UINT32 *pcInstance);
         
         DECLSPEC_XFGVIRT(IRadioInstanceCollection, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             IRadioInstanceCollection * This,
-            /* [in] */ UINT32 uIndex,
-            /* [out] */ IRadioInstance **ppRadioInstance);
+            /* [annotation][in] */ 
+            _In_  UINT32 uIndex,
+            /* [annotation][out] */ 
+            _Out_  IRadioInstance **ppRadioInstance);
         
         END_INTERFACE
     } IRadioInstanceCollectionVtbl;
@@ -332,21 +346,28 @@ EXTERN_C const IID IID_IRadioInstance;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetRadioManagerSignature( 
-            /* [out] */ GUID *pguidSignature) = 0;
+            /* [annotation][out] */ 
+            _Out_  GUID *pguidSignature) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetInstanceSignature( 
-            /* [string][out] */ BSTR *pbstrId) = 0;
+            /* [annotation][string][out] */ 
+            _Out_  BSTR *pbstrId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFriendlyName( 
-            /* [in] */ LCID lcid,
-            /* [string][out] */ BSTR *pbstrName) = 0;
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][string][out] */ 
+            _Out_  BSTR *pbstrName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRadioState( 
-            /* [out] */ DEVICE_RADIO_STATE *pRadioState) = 0;
+            /* [annotation][out] */ 
+            _Out_  DEVICE_RADIO_STATE *pRadioState) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetRadioState( 
-            /* [in] */ DEVICE_RADIO_STATE radioState,
-            /* [in] */ UINT32 uTimeoutSec) = 0;
+            /* [annotation][in] */ 
+            _In_  DEVICE_RADIO_STATE radioState,
+            /* [annotation][in] */ 
+            _In_  UINT32 uTimeoutSec) = 0;
         
         virtual BOOL STDMETHODCALLTYPE IsMultiComm( void) = 0;
         
@@ -364,7 +385,8 @@ EXTERN_C const IID IID_IRadioInstance;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRadioInstance * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -379,29 +401,36 @@ EXTERN_C const IID IID_IRadioInstance;
         DECLSPEC_XFGVIRT(IRadioInstance, GetRadioManagerSignature)
         HRESULT ( STDMETHODCALLTYPE *GetRadioManagerSignature )( 
             IRadioInstance * This,
-            /* [out] */ GUID *pguidSignature);
+            /* [annotation][out] */ 
+            _Out_  GUID *pguidSignature);
         
         DECLSPEC_XFGVIRT(IRadioInstance, GetInstanceSignature)
         HRESULT ( STDMETHODCALLTYPE *GetInstanceSignature )( 
             IRadioInstance * This,
-            /* [string][out] */ BSTR *pbstrId);
+            /* [annotation][string][out] */ 
+            _Out_  BSTR *pbstrId);
         
         DECLSPEC_XFGVIRT(IRadioInstance, GetFriendlyName)
         HRESULT ( STDMETHODCALLTYPE *GetFriendlyName )( 
             IRadioInstance * This,
-            /* [in] */ LCID lcid,
-            /* [string][out] */ BSTR *pbstrName);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][string][out] */ 
+            _Out_  BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IRadioInstance, GetRadioState)
         HRESULT ( STDMETHODCALLTYPE *GetRadioState )( 
             IRadioInstance * This,
-            /* [out] */ DEVICE_RADIO_STATE *pRadioState);
+            /* [annotation][out] */ 
+            _Out_  DEVICE_RADIO_STATE *pRadioState);
         
         DECLSPEC_XFGVIRT(IRadioInstance, SetRadioState)
         HRESULT ( STDMETHODCALLTYPE *SetRadioState )( 
             IRadioInstance * This,
-            /* [in] */ DEVICE_RADIO_STATE radioState,
-            /* [in] */ UINT32 uTimeoutSec);
+            /* [annotation][in] */ 
+            _In_  DEVICE_RADIO_STATE radioState,
+            /* [annotation][in] */ 
+            _In_  UINT32 uTimeoutSec);
         
         DECLSPEC_XFGVIRT(IRadioInstance, IsMultiComm)
         BOOL ( STDMETHODCALLTYPE *IsMultiComm )( 
@@ -482,14 +511,18 @@ EXTERN_C const IID IID_IMediaRadioManagerNotifySink;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnInstanceAdd( 
-            /* [in] */ IRadioInstance *pRadioInstance) = 0;
+            /* [annotation][in] */ 
+            _In_  IRadioInstance *pRadioInstance) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnInstanceRemove( 
-            /* [string][in] */ BSTR bstrRadioInstanceId) = 0;
+            /* [annotation][string][in] */ 
+            _In_  BSTR bstrRadioInstanceId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnInstanceRadioChange( 
-            /* [string][in] */ BSTR bstrRadioInstanceId,
-            /* [in] */ DEVICE_RADIO_STATE radioState) = 0;
+            /* [annotation][string][in] */ 
+            _In_  BSTR bstrRadioInstanceId,
+            /* [annotation][in] */ 
+            _In_  DEVICE_RADIO_STATE radioState) = 0;
         
     };
     
@@ -503,7 +536,8 @@ EXTERN_C const IID IID_IMediaRadioManagerNotifySink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMediaRadioManagerNotifySink * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -518,18 +552,22 @@ EXTERN_C const IID IID_IMediaRadioManagerNotifySink;
         DECLSPEC_XFGVIRT(IMediaRadioManagerNotifySink, OnInstanceAdd)
         HRESULT ( STDMETHODCALLTYPE *OnInstanceAdd )( 
             IMediaRadioManagerNotifySink * This,
-            /* [in] */ IRadioInstance *pRadioInstance);
+            /* [annotation][in] */ 
+            _In_  IRadioInstance *pRadioInstance);
         
         DECLSPEC_XFGVIRT(IMediaRadioManagerNotifySink, OnInstanceRemove)
         HRESULT ( STDMETHODCALLTYPE *OnInstanceRemove )( 
             IMediaRadioManagerNotifySink * This,
-            /* [string][in] */ BSTR bstrRadioInstanceId);
+            /* [annotation][string][in] */ 
+            _In_  BSTR bstrRadioInstanceId);
         
         DECLSPEC_XFGVIRT(IMediaRadioManagerNotifySink, OnInstanceRadioChange)
         HRESULT ( STDMETHODCALLTYPE *OnInstanceRadioChange )( 
             IMediaRadioManagerNotifySink * This,
-            /* [string][in] */ BSTR bstrRadioInstanceId,
-            /* [in] */ DEVICE_RADIO_STATE radioState);
+            /* [annotation][string][in] */ 
+            _In_  BSTR bstrRadioInstanceId,
+            /* [annotation][in] */ 
+            _In_  DEVICE_RADIO_STATE radioState);
         
         END_INTERFACE
     } IMediaRadioManagerNotifySinkVtbl;

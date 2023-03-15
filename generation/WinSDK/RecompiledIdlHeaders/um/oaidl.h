@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -1004,95 +1004,124 @@ EXTERN_C const IID IID_ICreateTypeInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetGuid( 
-            /* [in] */ REFGUID guid) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID guid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTypeFlags( 
-            /* [in] */ UINT uTypeFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT uTypeFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDocString( 
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR pStrDoc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetHelpContext( 
-            /* [in] */ DWORD dwHelpContext) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwHelpContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetVersion( 
-            /* [in] */ WORD wMajorVerNum,
-            /* [in] */ WORD wMinorVerNum) = 0;
+            /* [annotation][in] */ 
+            _In_  WORD wMajorVerNum,
+            /* [annotation][in] */ 
+            _In_  WORD wMinorVerNum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddRefTypeInfo( 
-            /* [in] */ ITypeInfo *pTInfo,
-            /* [in] */ HREFTYPE *phRefType) = 0;
+            /* [annotation][in] */ 
+            _In_  ITypeInfo *pTInfo,
+            /* [annotation][in] */ 
+            _In_  HREFTYPE *phRefType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddFuncDesc( 
-            /* [in] */ UINT index,
-            /* [in] */ FUNCDESC *pFuncDesc) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  FUNCDESC *pFuncDesc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddImplType( 
-            /* [in] */ UINT index,
-            /* [in] */ HREFTYPE hRefType) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  HREFTYPE hRefType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetImplTypeFlags( 
-            /* [in] */ UINT index,
-            /* [in] */ INT implTypeFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  INT implTypeFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAlignment( 
-            /* [in] */ WORD cbAlignment) = 0;
+            /* [annotation][in] */ 
+            _In_  WORD cbAlignment) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSchema( 
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR pStrSchema) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddVarDesc( 
-            /* [in] */ UINT index,
-            /* [in] */ VARDESC *pVarDesc) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  VARDESC *pVarDesc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFuncAndParamNames( 
-            /* [in] */ UINT index,
+            /* [annotation][in] */ 
+            _In_  UINT index,
             /* [annotation][in][size_is][in] */ 
             __RPC__in_ecount(cNames)  LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT cNames) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetVarName( 
-            /* [in] */ UINT index,
+            /* [annotation][in] */ 
+            _In_  UINT index,
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR szName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTypeDescAlias( 
-            /* [in] */ TYPEDESC *pTDescAlias) = 0;
+            /* [annotation][in] */ 
+            _In_  TYPEDESC *pTDescAlias) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DefineFuncAsDllEntry( 
-            /* [in] */ UINT index,
+            /* [annotation][in] */ 
+            _In_  UINT index,
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR szDllName,
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR szProcName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFuncDocString( 
-            /* [in] */ UINT index,
+            /* [annotation][in] */ 
+            _In_  UINT index,
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR szDocString) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetVarDocString( 
-            /* [in] */ UINT index,
+            /* [annotation][in] */ 
+            _In_  UINT index,
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR szDocString) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFuncHelpContext( 
-            /* [in] */ UINT index,
-            /* [in] */ DWORD dwHelpContext) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  DWORD dwHelpContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetVarHelpContext( 
-            /* [in] */ UINT index,
-            /* [in] */ DWORD dwHelpContext) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  DWORD dwHelpContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetMops( 
-            /* [in] */ UINT index,
+            /* [annotation][in] */ 
+            _In_  UINT index,
             /* [annotation][in] */ 
             _In_  BSTR bstrMops) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTypeIdldesc( 
-            /* [in] */ IDLDESC *pIdlDesc) = 0;
+            /* [annotation][in] */ 
+            _In_  IDLDESC *pIdlDesc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LayOut( void) = 0;
         
@@ -1108,7 +1137,8 @@ EXTERN_C const IID IID_ICreateTypeInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICreateTypeInfo * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1123,12 +1153,14 @@ EXTERN_C const IID IID_ICreateTypeInfo;
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetGuid)
         HRESULT ( STDMETHODCALLTYPE *SetGuid )( 
             ICreateTypeInfo * This,
-            /* [in] */ REFGUID guid);
+            /* [annotation][in] */ 
+            _In_  REFGUID guid);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetTypeFlags)
         HRESULT ( STDMETHODCALLTYPE *SetTypeFlags )( 
             ICreateTypeInfo * This,
-            /* [in] */ UINT uTypeFlags);
+            /* [annotation][in] */ 
+            _In_  UINT uTypeFlags);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetDocString)
         HRESULT ( STDMETHODCALLTYPE *SetDocString )( 
@@ -1139,42 +1171,54 @@ EXTERN_C const IID IID_ICreateTypeInfo;
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetHelpContext)
         HRESULT ( STDMETHODCALLTYPE *SetHelpContext )( 
             ICreateTypeInfo * This,
-            /* [in] */ DWORD dwHelpContext);
+            /* [annotation][in] */ 
+            _In_  DWORD dwHelpContext);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetVersion)
         HRESULT ( STDMETHODCALLTYPE *SetVersion )( 
             ICreateTypeInfo * This,
-            /* [in] */ WORD wMajorVerNum,
-            /* [in] */ WORD wMinorVerNum);
+            /* [annotation][in] */ 
+            _In_  WORD wMajorVerNum,
+            /* [annotation][in] */ 
+            _In_  WORD wMinorVerNum);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, AddRefTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *AddRefTypeInfo )( 
             ICreateTypeInfo * This,
-            /* [in] */ ITypeInfo *pTInfo,
-            /* [in] */ HREFTYPE *phRefType);
+            /* [annotation][in] */ 
+            _In_  ITypeInfo *pTInfo,
+            /* [annotation][in] */ 
+            _In_  HREFTYPE *phRefType);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, AddFuncDesc)
         HRESULT ( STDMETHODCALLTYPE *AddFuncDesc )( 
             ICreateTypeInfo * This,
-            /* [in] */ UINT index,
-            /* [in] */ FUNCDESC *pFuncDesc);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  FUNCDESC *pFuncDesc);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, AddImplType)
         HRESULT ( STDMETHODCALLTYPE *AddImplType )( 
             ICreateTypeInfo * This,
-            /* [in] */ UINT index,
-            /* [in] */ HREFTYPE hRefType);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  HREFTYPE hRefType);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetImplTypeFlags)
         HRESULT ( STDMETHODCALLTYPE *SetImplTypeFlags )( 
             ICreateTypeInfo * This,
-            /* [in] */ UINT index,
-            /* [in] */ INT implTypeFlags);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  INT implTypeFlags);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetAlignment)
         HRESULT ( STDMETHODCALLTYPE *SetAlignment )( 
             ICreateTypeInfo * This,
-            /* [in] */ WORD cbAlignment);
+            /* [annotation][in] */ 
+            _In_  WORD cbAlignment);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetSchema)
         HRESULT ( STDMETHODCALLTYPE *SetSchema )( 
@@ -1185,33 +1229,40 @@ EXTERN_C const IID IID_ICreateTypeInfo;
         DECLSPEC_XFGVIRT(ICreateTypeInfo, AddVarDesc)
         HRESULT ( STDMETHODCALLTYPE *AddVarDesc )( 
             ICreateTypeInfo * This,
-            /* [in] */ UINT index,
-            /* [in] */ VARDESC *pVarDesc);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  VARDESC *pVarDesc);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetFuncAndParamNames)
         HRESULT ( STDMETHODCALLTYPE *SetFuncAndParamNames )( 
             ICreateTypeInfo * This,
-            /* [in] */ UINT index,
+            /* [annotation][in] */ 
+            _In_  UINT index,
             /* [annotation][in][size_is][in] */ 
             __RPC__in_ecount(cNames)  LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames);
+            /* [annotation][in] */ 
+            _In_  UINT cNames);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetVarName)
         HRESULT ( STDMETHODCALLTYPE *SetVarName )( 
             ICreateTypeInfo * This,
-            /* [in] */ UINT index,
+            /* [annotation][in] */ 
+            _In_  UINT index,
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR szName);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetTypeDescAlias)
         HRESULT ( STDMETHODCALLTYPE *SetTypeDescAlias )( 
             ICreateTypeInfo * This,
-            /* [in] */ TYPEDESC *pTDescAlias);
+            /* [annotation][in] */ 
+            _In_  TYPEDESC *pTDescAlias);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, DefineFuncAsDllEntry)
         HRESULT ( STDMETHODCALLTYPE *DefineFuncAsDllEntry )( 
             ICreateTypeInfo * This,
-            /* [in] */ UINT index,
+            /* [annotation][in] */ 
+            _In_  UINT index,
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR szDllName,
             /* [annotation][in] */ 
@@ -1220,40 +1271,48 @@ EXTERN_C const IID IID_ICreateTypeInfo;
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetFuncDocString)
         HRESULT ( STDMETHODCALLTYPE *SetFuncDocString )( 
             ICreateTypeInfo * This,
-            /* [in] */ UINT index,
+            /* [annotation][in] */ 
+            _In_  UINT index,
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR szDocString);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetVarDocString)
         HRESULT ( STDMETHODCALLTYPE *SetVarDocString )( 
             ICreateTypeInfo * This,
-            /* [in] */ UINT index,
+            /* [annotation][in] */ 
+            _In_  UINT index,
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR szDocString);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetFuncHelpContext)
         HRESULT ( STDMETHODCALLTYPE *SetFuncHelpContext )( 
             ICreateTypeInfo * This,
-            /* [in] */ UINT index,
-            /* [in] */ DWORD dwHelpContext);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  DWORD dwHelpContext);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetVarHelpContext)
         HRESULT ( STDMETHODCALLTYPE *SetVarHelpContext )( 
             ICreateTypeInfo * This,
-            /* [in] */ UINT index,
-            /* [in] */ DWORD dwHelpContext);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  DWORD dwHelpContext);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetMops)
         HRESULT ( STDMETHODCALLTYPE *SetMops )( 
             ICreateTypeInfo * This,
-            /* [in] */ UINT index,
+            /* [annotation][in] */ 
+            _In_  UINT index,
             /* [annotation][in] */ 
             _In_  BSTR bstrMops);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetTypeIdldesc)
         HRESULT ( STDMETHODCALLTYPE *SetTypeIdldesc )( 
             ICreateTypeInfo * This,
-            /* [in] */ IDLDESC *pIdlDesc);
+            /* [annotation][in] */ 
+            _In_  IDLDESC *pIdlDesc);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, LayOut)
         HRESULT ( STDMETHODCALLTYPE *LayOut )( 
@@ -1380,56 +1439,82 @@ EXTERN_C const IID IID_ICreateTypeInfo2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE DeleteFuncDesc( 
-            /* [in] */ UINT index) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeleteFuncDescByMemId( 
-            /* [in] */ MEMBERID memid,
-            /* [in] */ INVOKEKIND invKind) = 0;
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
+            /* [annotation][in] */ 
+            _In_  INVOKEKIND invKind) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeleteVarDesc( 
-            /* [in] */ UINT index) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeleteVarDescByMemId( 
-            /* [in] */ MEMBERID memid) = 0;
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeleteImplType( 
-            /* [in] */ UINT index) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCustData( 
-            /* [in] */ REFGUID guid,
-            /* [in] */ VARIANT *pVarVal) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVarVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFuncCustData( 
-            /* [in] */ UINT index,
-            /* [in] */ REFGUID guid,
-            /* [in] */ VARIANT *pVarVal) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVarVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetParamCustData( 
-            /* [in] */ UINT indexFunc,
-            /* [in] */ UINT indexParam,
-            /* [in] */ REFGUID guid,
-            /* [in] */ VARIANT *pVarVal) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT indexFunc,
+            /* [annotation][in] */ 
+            _In_  UINT indexParam,
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVarVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetVarCustData( 
-            /* [in] */ UINT index,
-            /* [in] */ REFGUID guid,
-            /* [in] */ VARIANT *pVarVal) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVarVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetImplTypeCustData( 
-            /* [in] */ UINT index,
-            /* [in] */ REFGUID guid,
-            /* [in] */ VARIANT *pVarVal) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVarVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetHelpStringContext( 
-            /* [in] */ ULONG dwHelpStringContext) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG dwHelpStringContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFuncHelpStringContext( 
-            /* [in] */ UINT index,
-            /* [in] */ ULONG dwHelpStringContext) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  ULONG dwHelpStringContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetVarHelpStringContext( 
-            /* [in] */ UINT index,
-            /* [in] */ ULONG dwHelpStringContext) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  ULONG dwHelpStringContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Invalidate( void) = 0;
         
@@ -1449,7 +1534,8 @@ EXTERN_C const IID IID_ICreateTypeInfo2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1464,12 +1550,14 @@ EXTERN_C const IID IID_ICreateTypeInfo2;
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetGuid)
         HRESULT ( STDMETHODCALLTYPE *SetGuid )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ REFGUID guid);
+            /* [annotation][in] */ 
+            _In_  REFGUID guid);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetTypeFlags)
         HRESULT ( STDMETHODCALLTYPE *SetTypeFlags )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ UINT uTypeFlags);
+            /* [annotation][in] */ 
+            _In_  UINT uTypeFlags);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetDocString)
         HRESULT ( STDMETHODCALLTYPE *SetDocString )( 
@@ -1480,42 +1568,54 @@ EXTERN_C const IID IID_ICreateTypeInfo2;
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetHelpContext)
         HRESULT ( STDMETHODCALLTYPE *SetHelpContext )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ DWORD dwHelpContext);
+            /* [annotation][in] */ 
+            _In_  DWORD dwHelpContext);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetVersion)
         HRESULT ( STDMETHODCALLTYPE *SetVersion )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ WORD wMajorVerNum,
-            /* [in] */ WORD wMinorVerNum);
+            /* [annotation][in] */ 
+            _In_  WORD wMajorVerNum,
+            /* [annotation][in] */ 
+            _In_  WORD wMinorVerNum);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, AddRefTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *AddRefTypeInfo )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ ITypeInfo *pTInfo,
-            /* [in] */ HREFTYPE *phRefType);
+            /* [annotation][in] */ 
+            _In_  ITypeInfo *pTInfo,
+            /* [annotation][in] */ 
+            _In_  HREFTYPE *phRefType);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, AddFuncDesc)
         HRESULT ( STDMETHODCALLTYPE *AddFuncDesc )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ UINT index,
-            /* [in] */ FUNCDESC *pFuncDesc);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  FUNCDESC *pFuncDesc);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, AddImplType)
         HRESULT ( STDMETHODCALLTYPE *AddImplType )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ UINT index,
-            /* [in] */ HREFTYPE hRefType);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  HREFTYPE hRefType);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetImplTypeFlags)
         HRESULT ( STDMETHODCALLTYPE *SetImplTypeFlags )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ UINT index,
-            /* [in] */ INT implTypeFlags);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  INT implTypeFlags);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetAlignment)
         HRESULT ( STDMETHODCALLTYPE *SetAlignment )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ WORD cbAlignment);
+            /* [annotation][in] */ 
+            _In_  WORD cbAlignment);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetSchema)
         HRESULT ( STDMETHODCALLTYPE *SetSchema )( 
@@ -1526,33 +1626,40 @@ EXTERN_C const IID IID_ICreateTypeInfo2;
         DECLSPEC_XFGVIRT(ICreateTypeInfo, AddVarDesc)
         HRESULT ( STDMETHODCALLTYPE *AddVarDesc )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ UINT index,
-            /* [in] */ VARDESC *pVarDesc);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  VARDESC *pVarDesc);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetFuncAndParamNames)
         HRESULT ( STDMETHODCALLTYPE *SetFuncAndParamNames )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ UINT index,
+            /* [annotation][in] */ 
+            _In_  UINT index,
             /* [annotation][in][size_is][in] */ 
             __RPC__in_ecount(cNames)  LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames);
+            /* [annotation][in] */ 
+            _In_  UINT cNames);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetVarName)
         HRESULT ( STDMETHODCALLTYPE *SetVarName )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ UINT index,
+            /* [annotation][in] */ 
+            _In_  UINT index,
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR szName);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetTypeDescAlias)
         HRESULT ( STDMETHODCALLTYPE *SetTypeDescAlias )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ TYPEDESC *pTDescAlias);
+            /* [annotation][in] */ 
+            _In_  TYPEDESC *pTDescAlias);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, DefineFuncAsDllEntry)
         HRESULT ( STDMETHODCALLTYPE *DefineFuncAsDllEntry )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ UINT index,
+            /* [annotation][in] */ 
+            _In_  UINT index,
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR szDllName,
             /* [annotation][in] */ 
@@ -1561,40 +1668,48 @@ EXTERN_C const IID IID_ICreateTypeInfo2;
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetFuncDocString)
         HRESULT ( STDMETHODCALLTYPE *SetFuncDocString )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ UINT index,
+            /* [annotation][in] */ 
+            _In_  UINT index,
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR szDocString);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetVarDocString)
         HRESULT ( STDMETHODCALLTYPE *SetVarDocString )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ UINT index,
+            /* [annotation][in] */ 
+            _In_  UINT index,
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR szDocString);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetFuncHelpContext)
         HRESULT ( STDMETHODCALLTYPE *SetFuncHelpContext )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ UINT index,
-            /* [in] */ DWORD dwHelpContext);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  DWORD dwHelpContext);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetVarHelpContext)
         HRESULT ( STDMETHODCALLTYPE *SetVarHelpContext )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ UINT index,
-            /* [in] */ DWORD dwHelpContext);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  DWORD dwHelpContext);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetMops)
         HRESULT ( STDMETHODCALLTYPE *SetMops )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ UINT index,
+            /* [annotation][in] */ 
+            _In_  UINT index,
             /* [annotation][in] */ 
             _In_  BSTR bstrMops);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, SetTypeIdldesc)
         HRESULT ( STDMETHODCALLTYPE *SetTypeIdldesc )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ IDLDESC *pIdlDesc);
+            /* [annotation][in] */ 
+            _In_  IDLDESC *pIdlDesc);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo, LayOut)
         HRESULT ( STDMETHODCALLTYPE *LayOut )( 
@@ -1603,80 +1718,106 @@ EXTERN_C const IID IID_ICreateTypeInfo2;
         DECLSPEC_XFGVIRT(ICreateTypeInfo2, DeleteFuncDesc)
         HRESULT ( STDMETHODCALLTYPE *DeleteFuncDesc )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ UINT index);
+            /* [annotation][in] */ 
+            _In_  UINT index);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo2, DeleteFuncDescByMemId)
         HRESULT ( STDMETHODCALLTYPE *DeleteFuncDescByMemId )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ MEMBERID memid,
-            /* [in] */ INVOKEKIND invKind);
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
+            /* [annotation][in] */ 
+            _In_  INVOKEKIND invKind);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo2, DeleteVarDesc)
         HRESULT ( STDMETHODCALLTYPE *DeleteVarDesc )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ UINT index);
+            /* [annotation][in] */ 
+            _In_  UINT index);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo2, DeleteVarDescByMemId)
         HRESULT ( STDMETHODCALLTYPE *DeleteVarDescByMemId )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ MEMBERID memid);
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo2, DeleteImplType)
         HRESULT ( STDMETHODCALLTYPE *DeleteImplType )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ UINT index);
+            /* [annotation][in] */ 
+            _In_  UINT index);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo2, SetCustData)
         HRESULT ( STDMETHODCALLTYPE *SetCustData )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ REFGUID guid,
-            /* [in] */ VARIANT *pVarVal);
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVarVal);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo2, SetFuncCustData)
         HRESULT ( STDMETHODCALLTYPE *SetFuncCustData )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ UINT index,
-            /* [in] */ REFGUID guid,
-            /* [in] */ VARIANT *pVarVal);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVarVal);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo2, SetParamCustData)
         HRESULT ( STDMETHODCALLTYPE *SetParamCustData )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ UINT indexFunc,
-            /* [in] */ UINT indexParam,
-            /* [in] */ REFGUID guid,
-            /* [in] */ VARIANT *pVarVal);
+            /* [annotation][in] */ 
+            _In_  UINT indexFunc,
+            /* [annotation][in] */ 
+            _In_  UINT indexParam,
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVarVal);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo2, SetVarCustData)
         HRESULT ( STDMETHODCALLTYPE *SetVarCustData )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ UINT index,
-            /* [in] */ REFGUID guid,
-            /* [in] */ VARIANT *pVarVal);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVarVal);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo2, SetImplTypeCustData)
         HRESULT ( STDMETHODCALLTYPE *SetImplTypeCustData )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ UINT index,
-            /* [in] */ REFGUID guid,
-            /* [in] */ VARIANT *pVarVal);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVarVal);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo2, SetHelpStringContext)
         HRESULT ( STDMETHODCALLTYPE *SetHelpStringContext )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ ULONG dwHelpStringContext);
+            /* [annotation][in] */ 
+            _In_  ULONG dwHelpStringContext);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo2, SetFuncHelpStringContext)
         HRESULT ( STDMETHODCALLTYPE *SetFuncHelpStringContext )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ UINT index,
-            /* [in] */ ULONG dwHelpStringContext);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  ULONG dwHelpStringContext);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo2, SetVarHelpStringContext)
         HRESULT ( STDMETHODCALLTYPE *SetVarHelpStringContext )( 
             ICreateTypeInfo2 * This,
-            /* [in] */ UINT index,
-            /* [in] */ ULONG dwHelpStringContext);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  ULONG dwHelpStringContext);
         
         DECLSPEC_XFGVIRT(ICreateTypeInfo2, Invalidate)
         HRESULT ( STDMETHODCALLTYPE *Invalidate )( 
@@ -1857,19 +1998,24 @@ EXTERN_C const IID IID_ICreateTypeLib;
         virtual HRESULT STDMETHODCALLTYPE CreateTypeInfo( 
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR szName,
-            /* [in] */ TYPEKIND tkind,
-            /* [out] */ ICreateTypeInfo **ppCTInfo) = 0;
+            /* [annotation][in] */ 
+            _In_  TYPEKIND tkind,
+            /* [annotation][out] */ 
+            _Out_  ICreateTypeInfo **ppCTInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetName( 
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR szName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetVersion( 
-            /* [in] */ WORD wMajorVerNum,
-            /* [in] */ WORD wMinorVerNum) = 0;
+            /* [annotation][in] */ 
+            _In_  WORD wMajorVerNum,
+            /* [annotation][in] */ 
+            _In_  WORD wMinorVerNum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetGuid( 
-            /* [in] */ REFGUID guid) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID guid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDocString( 
             /* [annotation][in] */ 
@@ -1880,13 +2026,16 @@ EXTERN_C const IID IID_ICreateTypeLib;
             __RPC__in  LPOLESTR szHelpFileName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetHelpContext( 
-            /* [in] */ DWORD dwHelpContext) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwHelpContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetLcid( 
-            /* [in] */ LCID lcid) = 0;
+            /* [annotation][in] */ 
+            _In_  LCID lcid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetLibFlags( 
-            /* [in] */ UINT uLibFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT uLibFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SaveAllChanges( void) = 0;
         
@@ -1902,7 +2051,8 @@ EXTERN_C const IID IID_ICreateTypeLib;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICreateTypeLib * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1919,8 +2069,10 @@ EXTERN_C const IID IID_ICreateTypeLib;
             ICreateTypeLib * This,
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR szName,
-            /* [in] */ TYPEKIND tkind,
-            /* [out] */ ICreateTypeInfo **ppCTInfo);
+            /* [annotation][in] */ 
+            _In_  TYPEKIND tkind,
+            /* [annotation][out] */ 
+            _Out_  ICreateTypeInfo **ppCTInfo);
         
         DECLSPEC_XFGVIRT(ICreateTypeLib, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
@@ -1931,13 +2083,16 @@ EXTERN_C const IID IID_ICreateTypeLib;
         DECLSPEC_XFGVIRT(ICreateTypeLib, SetVersion)
         HRESULT ( STDMETHODCALLTYPE *SetVersion )( 
             ICreateTypeLib * This,
-            /* [in] */ WORD wMajorVerNum,
-            /* [in] */ WORD wMinorVerNum);
+            /* [annotation][in] */ 
+            _In_  WORD wMajorVerNum,
+            /* [annotation][in] */ 
+            _In_  WORD wMinorVerNum);
         
         DECLSPEC_XFGVIRT(ICreateTypeLib, SetGuid)
         HRESULT ( STDMETHODCALLTYPE *SetGuid )( 
             ICreateTypeLib * This,
-            /* [in] */ REFGUID guid);
+            /* [annotation][in] */ 
+            _In_  REFGUID guid);
         
         DECLSPEC_XFGVIRT(ICreateTypeLib, SetDocString)
         HRESULT ( STDMETHODCALLTYPE *SetDocString )( 
@@ -1954,17 +2109,20 @@ EXTERN_C const IID IID_ICreateTypeLib;
         DECLSPEC_XFGVIRT(ICreateTypeLib, SetHelpContext)
         HRESULT ( STDMETHODCALLTYPE *SetHelpContext )( 
             ICreateTypeLib * This,
-            /* [in] */ DWORD dwHelpContext);
+            /* [annotation][in] */ 
+            _In_  DWORD dwHelpContext);
         
         DECLSPEC_XFGVIRT(ICreateTypeLib, SetLcid)
         HRESULT ( STDMETHODCALLTYPE *SetLcid )( 
             ICreateTypeLib * This,
-            /* [in] */ LCID lcid);
+            /* [annotation][in] */ 
+            _In_  LCID lcid);
         
         DECLSPEC_XFGVIRT(ICreateTypeLib, SetLibFlags)
         HRESULT ( STDMETHODCALLTYPE *SetLibFlags )( 
             ICreateTypeLib * This,
-            /* [in] */ UINT uLibFlags);
+            /* [annotation][in] */ 
+            _In_  UINT uLibFlags);
         
         DECLSPEC_XFGVIRT(ICreateTypeLib, SaveAllChanges)
         HRESULT ( STDMETHODCALLTYPE *SaveAllChanges )( 
@@ -2056,11 +2214,14 @@ EXTERN_C const IID IID_ICreateTypeLib2;
             __RPC__in  LPOLESTR szName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCustData( 
-            /* [in] */ REFGUID guid,
-            /* [in] */ VARIANT *pVarVal) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVarVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetHelpStringContext( 
-            /* [in] */ ULONG dwHelpStringContext) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG dwHelpStringContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetHelpStringDll( 
             /* [annotation][in] */ 
@@ -2078,7 +2239,8 @@ EXTERN_C const IID IID_ICreateTypeLib2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICreateTypeLib2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2095,8 +2257,10 @@ EXTERN_C const IID IID_ICreateTypeLib2;
             ICreateTypeLib2 * This,
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR szName,
-            /* [in] */ TYPEKIND tkind,
-            /* [out] */ ICreateTypeInfo **ppCTInfo);
+            /* [annotation][in] */ 
+            _In_  TYPEKIND tkind,
+            /* [annotation][out] */ 
+            _Out_  ICreateTypeInfo **ppCTInfo);
         
         DECLSPEC_XFGVIRT(ICreateTypeLib, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
@@ -2107,13 +2271,16 @@ EXTERN_C const IID IID_ICreateTypeLib2;
         DECLSPEC_XFGVIRT(ICreateTypeLib, SetVersion)
         HRESULT ( STDMETHODCALLTYPE *SetVersion )( 
             ICreateTypeLib2 * This,
-            /* [in] */ WORD wMajorVerNum,
-            /* [in] */ WORD wMinorVerNum);
+            /* [annotation][in] */ 
+            _In_  WORD wMajorVerNum,
+            /* [annotation][in] */ 
+            _In_  WORD wMinorVerNum);
         
         DECLSPEC_XFGVIRT(ICreateTypeLib, SetGuid)
         HRESULT ( STDMETHODCALLTYPE *SetGuid )( 
             ICreateTypeLib2 * This,
-            /* [in] */ REFGUID guid);
+            /* [annotation][in] */ 
+            _In_  REFGUID guid);
         
         DECLSPEC_XFGVIRT(ICreateTypeLib, SetDocString)
         HRESULT ( STDMETHODCALLTYPE *SetDocString )( 
@@ -2130,17 +2297,20 @@ EXTERN_C const IID IID_ICreateTypeLib2;
         DECLSPEC_XFGVIRT(ICreateTypeLib, SetHelpContext)
         HRESULT ( STDMETHODCALLTYPE *SetHelpContext )( 
             ICreateTypeLib2 * This,
-            /* [in] */ DWORD dwHelpContext);
+            /* [annotation][in] */ 
+            _In_  DWORD dwHelpContext);
         
         DECLSPEC_XFGVIRT(ICreateTypeLib, SetLcid)
         HRESULT ( STDMETHODCALLTYPE *SetLcid )( 
             ICreateTypeLib2 * This,
-            /* [in] */ LCID lcid);
+            /* [annotation][in] */ 
+            _In_  LCID lcid);
         
         DECLSPEC_XFGVIRT(ICreateTypeLib, SetLibFlags)
         HRESULT ( STDMETHODCALLTYPE *SetLibFlags )( 
             ICreateTypeLib2 * This,
-            /* [in] */ UINT uLibFlags);
+            /* [annotation][in] */ 
+            _In_  UINT uLibFlags);
         
         DECLSPEC_XFGVIRT(ICreateTypeLib, SaveAllChanges)
         HRESULT ( STDMETHODCALLTYPE *SaveAllChanges )( 
@@ -2155,13 +2325,16 @@ EXTERN_C const IID IID_ICreateTypeLib2;
         DECLSPEC_XFGVIRT(ICreateTypeLib2, SetCustData)
         HRESULT ( STDMETHODCALLTYPE *SetCustData )( 
             ICreateTypeLib2 * This,
-            /* [in] */ REFGUID guid,
-            /* [in] */ VARIANT *pVarVal);
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVarVal);
         
         DECLSPEC_XFGVIRT(ICreateTypeLib2, SetHelpStringContext)
         HRESULT ( STDMETHODCALLTYPE *SetHelpStringContext )( 
             ICreateTypeLib2 * This,
-            /* [in] */ ULONG dwHelpStringContext);
+            /* [annotation][in] */ 
+            _In_  ULONG dwHelpStringContext);
         
         DECLSPEC_XFGVIRT(ICreateTypeLib2, SetHelpStringDll)
         HRESULT ( STDMETHODCALLTYPE *SetHelpStringDll )( 
@@ -2307,19 +2480,27 @@ EXTERN_C const IID IID_IDispatch;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTypeInfoCount( 
-            /* [out] */ __RPC__out UINT *pctinfo) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTypeInfo( 
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIDsOfNames( 
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId) = 0;
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Invoke( 
             /* [annotation][in] */ 
@@ -2351,7 +2532,8 @@ EXTERN_C const IID IID_IDispatch;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDispatch * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2366,23 +2548,31 @@ EXTERN_C const IID IID_IDispatch;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDispatch * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDispatch * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDispatch * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2448,17 +2638,28 @@ EXTERN_C const IID IID_IDispatch;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IDispatch_RemoteInvoke_Proxy( 
     __RPC__in IDispatch * This,
-    /* [in] */ DISPID dispIdMember,
-    /* [in] */ __RPC__in REFIID riid,
-    /* [in] */ LCID lcid,
-    /* [in] */ DWORD dwFlags,
-    /* [in] */ __RPC__in DISPPARAMS *pDispParams,
-    /* [out] */ __RPC__out VARIANT *pVarResult,
-    /* [out] */ __RPC__out EXCEPINFO *pExcepInfo,
-    /* [out] */ __RPC__out UINT *pArgErr,
-    /* [in] */ UINT cVarRef,
-    /* [size_is][in] */ __RPC__in_ecount_full(cVarRef) UINT *rgVarRefIdx,
-    /* [size_is][out][in] */ __RPC__inout_ecount_full(cVarRef) VARIANTARG *rgVarRef);
+    /* [annotation][in] */ 
+    _In_  DISPID dispIdMember,
+    /* [annotation][in] */ 
+    _In_  REFIID riid,
+    /* [annotation][in] */ 
+    _In_  LCID lcid,
+    /* [annotation][in] */ 
+    _In_  DWORD dwFlags,
+    /* [annotation][in] */ 
+    _In_  DISPPARAMS *pDispParams,
+    /* [annotation][out] */ 
+    _Out_  VARIANT *pVarResult,
+    /* [annotation][out] */ 
+    _Out_  EXCEPINFO *pExcepInfo,
+    /* [annotation][out] */ 
+    _Out_  UINT *pArgErr,
+    /* [annotation][in] */ 
+    _In_  UINT cVarRef,
+    /* [annotation][size_is][in] */ 
+    _In_reads_(cVarRef)  UINT *rgVarRefIdx,
+    /* [annotation][size_is][out][in] */ 
+    _Inout_updates_(cVarRef)  VARIANTARG *rgVarRef);
 
 
 void __RPC_STUB IDispatch_RemoteInvoke_Stub(
@@ -2490,17 +2691,22 @@ EXTERN_C const IID IID_IEnumVARIANT;
     {
     public:
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [length_is][size_is][out] */ VARIANT *rgVar,
-            /* [out] */ ULONG *pCeltFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(celt,*pCeltFetched)  VARIANT *rgVar,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pCeltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [out] */ __RPC__deref_out_opt IEnumVARIANT **ppEnum) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumVARIANT **ppEnum) = 0;
         
     };
     
@@ -2514,7 +2720,8 @@ EXTERN_C const IID IID_IEnumVARIANT;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumVARIANT * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2529,14 +2736,18 @@ EXTERN_C const IID IID_IEnumVARIANT;
         DECLSPEC_XFGVIRT(IEnumVARIANT, Next)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumVARIANT * This,
-            /* [in] */ ULONG celt,
-            /* [length_is][size_is][out] */ VARIANT *rgVar,
-            /* [out] */ ULONG *pCeltFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(celt,*pCeltFetched)  VARIANT *rgVar,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pCeltFetched);
         
         DECLSPEC_XFGVIRT(IEnumVARIANT, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumVARIANT * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumVARIANT, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -2545,7 +2756,8 @@ EXTERN_C const IID IID_IEnumVARIANT;
         DECLSPEC_XFGVIRT(IEnumVARIANT, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumVARIANT * This,
-            /* [out] */ __RPC__deref_out_opt IEnumVARIANT **ppEnum);
+            /* [annotation][out] */ 
+            _Out_  IEnumVARIANT **ppEnum);
         
         END_INTERFACE
     } IEnumVARIANTVtbl;
@@ -2591,9 +2803,12 @@ EXTERN_C const IID IID_IEnumVARIANT;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IEnumVARIANT_RemoteNext_Proxy( 
     __RPC__in IEnumVARIANT * This,
-    /* [in] */ ULONG celt,
-    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pCeltFetched) VARIANT *rgVar,
-    /* [out] */ __RPC__out ULONG *pCeltFetched);
+    /* [annotation][in] */ 
+    _In_  ULONG celt,
+    /* [annotation][length_is][size_is][out] */ 
+    _Out_writes_to_(celt,*pCeltFetched)  VARIANT *rgVar,
+    /* [annotation][out] */ 
+    _Out_  ULONG *pCeltFetched);
 
 
 void __RPC_STUB IEnumVARIANT_RemoteNext_Stub(
@@ -2647,18 +2862,26 @@ EXTERN_C const IID IID_ITypeComp;
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Bind( 
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR szName,
-            /* [in] */ ULONG lHashVal,
-            /* [in] */ WORD wFlags,
-            /* [out] */ ITypeInfo **ppTInfo,
-            /* [out] */ DESCKIND *pDescKind,
-            /* [out] */ BINDPTR *pBindPtr) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG lHashVal,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo,
+            /* [annotation][out] */ 
+            _Out_  DESCKIND *pDescKind,
+            /* [annotation][out] */ 
+            _Out_  BINDPTR *pBindPtr) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE BindType( 
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR szName,
-            /* [in] */ ULONG lHashVal,
-            /* [out] */ ITypeInfo **ppTInfo,
-            /* [out] */ ITypeComp **ppTComp) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG lHashVal,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo,
+            /* [annotation][out] */ 
+            _Out_  ITypeComp **ppTComp) = 0;
         
     };
     
@@ -2672,7 +2895,8 @@ EXTERN_C const IID IID_ITypeComp;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITypeComp * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2689,20 +2913,28 @@ EXTERN_C const IID IID_ITypeComp;
             ITypeComp * This,
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR szName,
-            /* [in] */ ULONG lHashVal,
-            /* [in] */ WORD wFlags,
-            /* [out] */ ITypeInfo **ppTInfo,
-            /* [out] */ DESCKIND *pDescKind,
-            /* [out] */ BINDPTR *pBindPtr);
+            /* [annotation][in] */ 
+            _In_  ULONG lHashVal,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo,
+            /* [annotation][out] */ 
+            _Out_  DESCKIND *pDescKind,
+            /* [annotation][out] */ 
+            _Out_  BINDPTR *pBindPtr);
         
         DECLSPEC_XFGVIRT(ITypeComp, BindType)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *BindType )( 
             ITypeComp * This,
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR szName,
-            /* [in] */ ULONG lHashVal,
-            /* [out] */ ITypeInfo **ppTInfo,
-            /* [out] */ ITypeComp **ppTComp);
+            /* [annotation][in] */ 
+            _In_  ULONG lHashVal,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo,
+            /* [annotation][out] */ 
+            _Out_  ITypeComp **ppTComp);
         
         END_INTERFACE
     } ITypeCompVtbl;
@@ -2742,15 +2974,24 @@ EXTERN_C const IID IID_ITypeComp;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeComp_RemoteBind_Proxy( 
     __RPC__in ITypeComp * This,
-    /* [in] */ __RPC__in LPOLESTR szName,
-    /* [in] */ ULONG lHashVal,
-    /* [in] */ WORD wFlags,
-    /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo,
-    /* [out] */ __RPC__out DESCKIND *pDescKind,
-    /* [out] */ __RPC__deref_out_opt LPFUNCDESC *ppFuncDesc,
-    /* [out] */ __RPC__deref_out_opt LPVARDESC *ppVarDesc,
-    /* [out] */ __RPC__deref_out_opt ITypeComp **ppTypeComp,
-    /* [out] */ __RPC__out CLEANLOCALSTORAGE *pDummy);
+    /* [annotation][in] */ 
+    _In_  LPOLESTR szName,
+    /* [annotation][in] */ 
+    _In_  ULONG lHashVal,
+    /* [annotation][in] */ 
+    _In_  WORD wFlags,
+    /* [annotation][out] */ 
+    _Out_  ITypeInfo **ppTInfo,
+    /* [annotation][out] */ 
+    _Out_  DESCKIND *pDescKind,
+    /* [annotation][out] */ 
+    _Out_  LPFUNCDESC *ppFuncDesc,
+    /* [annotation][out] */ 
+    _Out_  LPVARDESC *ppVarDesc,
+    /* [annotation][out] */ 
+    _Out_  ITypeComp **ppTypeComp,
+    /* [annotation][out] */ 
+    _Out_  CLEANLOCALSTORAGE *pDummy);
 
 
 void __RPC_STUB ITypeComp_RemoteBind_Stub(
@@ -2762,9 +3003,12 @@ void __RPC_STUB ITypeComp_RemoteBind_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeComp_RemoteBindType_Proxy( 
     __RPC__in ITypeComp * This,
-    /* [in] */ __RPC__in LPOLESTR szName,
-    /* [in] */ ULONG lHashVal,
-    /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+    /* [annotation][in] */ 
+    _In_  LPOLESTR szName,
+    /* [annotation][in] */ 
+    _In_  ULONG lHashVal,
+    /* [annotation][out] */ 
+    _Out_  ITypeInfo **ppTInfo);
 
 
 void __RPC_STUB ITypeComp_RemoteBindType_Stub(
@@ -2808,99 +3052,140 @@ EXTERN_C const IID IID_ITypeInfo;
     {
     public:
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetTypeAttr( 
-            /* [out] */ TYPEATTR **ppTypeAttr) = 0;
+            /* [annotation][out] */ 
+            _Out_  TYPEATTR **ppTypeAttr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTypeComp( 
-            /* [out] */ __RPC__deref_out_opt ITypeComp **ppTComp) = 0;
+            /* [annotation][out] */ 
+            _Out_  ITypeComp **ppTComp) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetFuncDesc( 
-            /* [in] */ UINT index,
-            /* [out] */ FUNCDESC **ppFuncDesc) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  FUNCDESC **ppFuncDesc) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetVarDesc( 
-            /* [in] */ UINT index,
-            /* [out] */ VARDESC **ppVarDesc) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  VARDESC **ppVarDesc) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetNames( 
-            /* [in] */ MEMBERID memid,
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
             /* [annotation][length_is][size_is][out] */ 
             __RPC__out_ecount_part(cMaxNames, *pcNames)  BSTR *rgBstrNames,
-            /* [in] */ UINT cMaxNames,
+            /* [annotation][in] */ 
+            _In_  UINT cMaxNames,
             /* [annotation][out] */ 
             __RPC__out  UINT *pcNames) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRefTypeOfImplType( 
-            /* [in] */ UINT index,
-            /* [out] */ __RPC__out HREFTYPE *pRefType) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  HREFTYPE *pRefType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetImplTypeFlags( 
-            /* [in] */ UINT index,
-            /* [out] */ __RPC__out INT *pImplTypeFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  INT *pImplTypeFlags) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetIDsOfNames( 
             /* [annotation][size_is][in] */ 
             __RPC__in_ecount(cNames)  LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [size_is][out] */ MEMBERID *pMemId) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT cNames,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  MEMBERID *pMemId) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Invoke( 
-            /* [in] */ PVOID pvInstance,
-            /* [in] */ MEMBERID memid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr) = 0;
+            /* [annotation][in] */ 
+            _In_  PVOID pvInstance,
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _Inout_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_  UINT *puArgErr) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetDocumentation( 
-            /* [in] */ MEMBERID memid,
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrName,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrDocString,
-            /* [out] */ DWORD *pdwHelpContext,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHelpContext,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrHelpFile) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetDllEntry( 
-            /* [in] */ MEMBERID memid,
-            /* [in] */ INVOKEKIND invKind,
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
+            /* [annotation][in] */ 
+            _In_  INVOKEKIND invKind,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrDllName,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrName,
-            /* [out] */ WORD *pwOrdinal) = 0;
+            /* [annotation][out] */ 
+            _Out_  WORD *pwOrdinal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRefTypeInfo( 
-            /* [in] */ HREFTYPE hRefType,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo) = 0;
+            /* [annotation][in] */ 
+            _In_  HREFTYPE hRefType,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE AddressOfMember( 
-            /* [in] */ MEMBERID memid,
-            /* [in] */ INVOKEKIND invKind,
-            /* [out] */ PVOID *ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
+            /* [annotation][in] */ 
+            _In_  INVOKEKIND invKind,
+            /* [annotation][out] */ 
+            _Out_  PVOID *ppv) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE CreateInstance( 
-            /* [in] */ IUnknown *pUnkOuter,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ PVOID *ppvObj) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  PVOID *ppvObj) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMops( 
-            /* [in] */ MEMBERID memid,
-            /* [out] */ __RPC__deref_out_opt BSTR *pBstrMops) = 0;
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pBstrMops) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetContainingTypeLib( 
-            /* [out] */ ITypeLib **ppTLib,
-            /* [out] */ UINT *pIndex) = 0;
+            /* [annotation][out] */ 
+            _Out_  ITypeLib **ppTLib,
+            /* [annotation][out] */ 
+            _Out_  UINT *pIndex) = 0;
         
         virtual /* [local] */ void STDMETHODCALLTYPE ReleaseTypeAttr( 
-            /* [in] */ TYPEATTR *pTypeAttr) = 0;
+            /* [annotation][in] */ 
+            _In_  TYPEATTR *pTypeAttr) = 0;
         
         virtual /* [local] */ void STDMETHODCALLTYPE ReleaseFuncDesc( 
-            /* [in] */ FUNCDESC *pFuncDesc) = 0;
+            /* [annotation][in] */ 
+            _In_  FUNCDESC *pFuncDesc) = 0;
         
         virtual /* [local] */ void STDMETHODCALLTYPE ReleaseVarDesc( 
-            /* [in] */ VARDESC *pVarDesc) = 0;
+            /* [annotation][in] */ 
+            _In_  VARDESC *pVarDesc) = 0;
         
     };
     
@@ -2914,7 +3199,8 @@ EXTERN_C const IID IID_ITypeInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITypeInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2929,135 +3215,176 @@ EXTERN_C const IID IID_ITypeInfo;
         DECLSPEC_XFGVIRT(ITypeInfo, GetTypeAttr)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetTypeAttr )( 
             ITypeInfo * This,
-            /* [out] */ TYPEATTR **ppTypeAttr);
+            /* [annotation][out] */ 
+            _Out_  TYPEATTR **ppTypeAttr);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetTypeComp)
         HRESULT ( STDMETHODCALLTYPE *GetTypeComp )( 
             __RPC__in ITypeInfo * This,
-            /* [out] */ __RPC__deref_out_opt ITypeComp **ppTComp);
+            /* [annotation][out] */ 
+            _Out_  ITypeComp **ppTComp);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetFuncDesc)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetFuncDesc )( 
             ITypeInfo * This,
-            /* [in] */ UINT index,
-            /* [out] */ FUNCDESC **ppFuncDesc);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  FUNCDESC **ppFuncDesc);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetVarDesc)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetVarDesc )( 
             ITypeInfo * This,
-            /* [in] */ UINT index,
-            /* [out] */ VARDESC **ppVarDesc);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  VARDESC **ppVarDesc);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetNames)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetNames )( 
             ITypeInfo * This,
-            /* [in] */ MEMBERID memid,
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
             /* [annotation][length_is][size_is][out] */ 
             __RPC__out_ecount_part(cMaxNames, *pcNames)  BSTR *rgBstrNames,
-            /* [in] */ UINT cMaxNames,
+            /* [annotation][in] */ 
+            _In_  UINT cMaxNames,
             /* [annotation][out] */ 
             __RPC__out  UINT *pcNames);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetRefTypeOfImplType)
         HRESULT ( STDMETHODCALLTYPE *GetRefTypeOfImplType )( 
             __RPC__in ITypeInfo * This,
-            /* [in] */ UINT index,
-            /* [out] */ __RPC__out HREFTYPE *pRefType);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  HREFTYPE *pRefType);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetImplTypeFlags)
         HRESULT ( STDMETHODCALLTYPE *GetImplTypeFlags )( 
             __RPC__in ITypeInfo * This,
-            /* [in] */ UINT index,
-            /* [out] */ __RPC__out INT *pImplTypeFlags);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  INT *pImplTypeFlags);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetIDsOfNames)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ITypeInfo * This,
             /* [annotation][size_is][in] */ 
             __RPC__in_ecount(cNames)  LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [size_is][out] */ MEMBERID *pMemId);
+            /* [annotation][in] */ 
+            _In_  UINT cNames,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  MEMBERID *pMemId);
         
         DECLSPEC_XFGVIRT(ITypeInfo, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ITypeInfo * This,
-            /* [in] */ PVOID pvInstance,
-            /* [in] */ MEMBERID memid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
+            /* [annotation][in] */ 
+            _In_  PVOID pvInstance,
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _Inout_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_  UINT *puArgErr);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetDocumentation)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetDocumentation )( 
             ITypeInfo * This,
-            /* [in] */ MEMBERID memid,
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrName,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrDocString,
-            /* [out] */ DWORD *pdwHelpContext,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHelpContext,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrHelpFile);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetDllEntry)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetDllEntry )( 
             ITypeInfo * This,
-            /* [in] */ MEMBERID memid,
-            /* [in] */ INVOKEKIND invKind,
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
+            /* [annotation][in] */ 
+            _In_  INVOKEKIND invKind,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrDllName,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrName,
-            /* [out] */ WORD *pwOrdinal);
+            /* [annotation][out] */ 
+            _Out_  WORD *pwOrdinal);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetRefTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetRefTypeInfo )( 
             __RPC__in ITypeInfo * This,
-            /* [in] */ HREFTYPE hRefType,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  HREFTYPE hRefType,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(ITypeInfo, AddressOfMember)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *AddressOfMember )( 
             ITypeInfo * This,
-            /* [in] */ MEMBERID memid,
-            /* [in] */ INVOKEKIND invKind,
-            /* [out] */ PVOID *ppv);
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
+            /* [annotation][in] */ 
+            _In_  INVOKEKIND invKind,
+            /* [annotation][out] */ 
+            _Out_  PVOID *ppv);
         
         DECLSPEC_XFGVIRT(ITypeInfo, CreateInstance)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             ITypeInfo * This,
-            /* [in] */ IUnknown *pUnkOuter,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ PVOID *ppvObj);
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  PVOID *ppvObj);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetMops)
         HRESULT ( STDMETHODCALLTYPE *GetMops )( 
             __RPC__in ITypeInfo * This,
-            /* [in] */ MEMBERID memid,
-            /* [out] */ __RPC__deref_out_opt BSTR *pBstrMops);
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pBstrMops);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetContainingTypeLib)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetContainingTypeLib )( 
             ITypeInfo * This,
-            /* [out] */ ITypeLib **ppTLib,
-            /* [out] */ UINT *pIndex);
+            /* [annotation][out] */ 
+            _Out_  ITypeLib **ppTLib,
+            /* [annotation][out] */ 
+            _Out_  UINT *pIndex);
         
         DECLSPEC_XFGVIRT(ITypeInfo, ReleaseTypeAttr)
         /* [local] */ void ( STDMETHODCALLTYPE *ReleaseTypeAttr )( 
             ITypeInfo * This,
-            /* [in] */ TYPEATTR *pTypeAttr);
+            /* [annotation][in] */ 
+            _In_  TYPEATTR *pTypeAttr);
         
         DECLSPEC_XFGVIRT(ITypeInfo, ReleaseFuncDesc)
         /* [local] */ void ( STDMETHODCALLTYPE *ReleaseFuncDesc )( 
             ITypeInfo * This,
-            /* [in] */ FUNCDESC *pFuncDesc);
+            /* [annotation][in] */ 
+            _In_  FUNCDESC *pFuncDesc);
         
         DECLSPEC_XFGVIRT(ITypeInfo, ReleaseVarDesc)
         /* [local] */ void ( STDMETHODCALLTYPE *ReleaseVarDesc )( 
             ITypeInfo * This,
-            /* [in] */ VARDESC *pVarDesc);
+            /* [annotation][in] */ 
+            _In_  VARDESC *pVarDesc);
         
         END_INTERFACE
     } ITypeInfoVtbl;
@@ -3148,8 +3475,10 @@ EXTERN_C const IID IID_ITypeInfo;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo_RemoteGetTypeAttr_Proxy( 
     __RPC__in ITypeInfo * This,
-    /* [out] */ __RPC__deref_out_opt LPTYPEATTR *ppTypeAttr,
-    /* [out] */ __RPC__out CLEANLOCALSTORAGE *pDummy);
+    /* [annotation][out] */ 
+    _Out_  LPTYPEATTR *ppTypeAttr,
+    /* [annotation][out] */ 
+    _Out_  CLEANLOCALSTORAGE *pDummy);
 
 
 void __RPC_STUB ITypeInfo_RemoteGetTypeAttr_Stub(
@@ -3161,9 +3490,12 @@ void __RPC_STUB ITypeInfo_RemoteGetTypeAttr_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo_RemoteGetFuncDesc_Proxy( 
     __RPC__in ITypeInfo * This,
-    /* [in] */ UINT index,
-    /* [out] */ __RPC__deref_out_opt LPFUNCDESC *ppFuncDesc,
-    /* [out] */ __RPC__out CLEANLOCALSTORAGE *pDummy);
+    /* [annotation][in] */ 
+    _In_  UINT index,
+    /* [annotation][out] */ 
+    _Out_  LPFUNCDESC *ppFuncDesc,
+    /* [annotation][out] */ 
+    _Out_  CLEANLOCALSTORAGE *pDummy);
 
 
 void __RPC_STUB ITypeInfo_RemoteGetFuncDesc_Stub(
@@ -3175,9 +3507,12 @@ void __RPC_STUB ITypeInfo_RemoteGetFuncDesc_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo_RemoteGetVarDesc_Proxy( 
     __RPC__in ITypeInfo * This,
-    /* [in] */ UINT index,
-    /* [out] */ __RPC__deref_out_opt LPVARDESC *ppVarDesc,
-    /* [out] */ __RPC__out CLEANLOCALSTORAGE *pDummy);
+    /* [annotation][in] */ 
+    _In_  UINT index,
+    /* [annotation][out] */ 
+    _Out_  LPVARDESC *ppVarDesc,
+    /* [annotation][out] */ 
+    _Out_  CLEANLOCALSTORAGE *pDummy);
 
 
 void __RPC_STUB ITypeInfo_RemoteGetVarDesc_Stub(
@@ -3189,10 +3524,14 @@ void __RPC_STUB ITypeInfo_RemoteGetVarDesc_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo_RemoteGetNames_Proxy( 
     __RPC__in ITypeInfo * This,
-    /* [in] */ MEMBERID memid,
-    /* [length_is][size_is][out] */ __RPC__out_ecount_part(cMaxNames, *pcNames) BSTR *rgBstrNames,
-    /* [in] */ UINT cMaxNames,
-    /* [out] */ __RPC__out UINT *pcNames);
+    /* [annotation][in] */ 
+    _In_  MEMBERID memid,
+    /* [annotation][length_is][size_is][out] */ 
+    _Out_writes_to_(cMaxNames,*pcNames)  BSTR *rgBstrNames,
+    /* [annotation][in] */ 
+    _In_  UINT cMaxNames,
+    /* [annotation][out] */ 
+    _Out_  UINT *pcNames);
 
 
 void __RPC_STUB ITypeInfo_RemoteGetNames_Stub(
@@ -3226,12 +3565,18 @@ void __RPC_STUB ITypeInfo_LocalInvoke_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo_RemoteGetDocumentation_Proxy( 
     __RPC__in ITypeInfo * This,
-    /* [in] */ MEMBERID memid,
-    /* [in] */ DWORD refPtrFlags,
-    /* [out] */ __RPC__deref_out_opt BSTR *pBstrName,
-    /* [out] */ __RPC__deref_out_opt BSTR *pBstrDocString,
-    /* [out] */ __RPC__out DWORD *pdwHelpContext,
-    /* [out] */ __RPC__deref_out_opt BSTR *pBstrHelpFile);
+    /* [annotation][in] */ 
+    _In_  MEMBERID memid,
+    /* [annotation][in] */ 
+    _In_  DWORD refPtrFlags,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pBstrName,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pBstrDocString,
+    /* [annotation][out] */ 
+    _Out_  DWORD *pdwHelpContext,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pBstrHelpFile);
 
 
 void __RPC_STUB ITypeInfo_RemoteGetDocumentation_Stub(
@@ -3243,12 +3588,18 @@ void __RPC_STUB ITypeInfo_RemoteGetDocumentation_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo_RemoteGetDllEntry_Proxy( 
     __RPC__in ITypeInfo * This,
-    /* [in] */ MEMBERID memid,
-    /* [in] */ INVOKEKIND invKind,
-    /* [in] */ DWORD refPtrFlags,
-    /* [out] */ __RPC__deref_out_opt BSTR *pBstrDllName,
-    /* [out] */ __RPC__deref_out_opt BSTR *pBstrName,
-    /* [out] */ __RPC__out WORD *pwOrdinal);
+    /* [annotation][in] */ 
+    _In_  MEMBERID memid,
+    /* [annotation][in] */ 
+    _In_  INVOKEKIND invKind,
+    /* [annotation][in] */ 
+    _In_  DWORD refPtrFlags,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pBstrDllName,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pBstrName,
+    /* [annotation][out] */ 
+    _Out_  WORD *pwOrdinal);
 
 
 void __RPC_STUB ITypeInfo_RemoteGetDllEntry_Stub(
@@ -3271,8 +3622,10 @@ void __RPC_STUB ITypeInfo_LocalAddressOfMember_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo_RemoteCreateInstance_Proxy( 
     __RPC__in ITypeInfo * This,
-    /* [in] */ __RPC__in REFIID riid,
-    /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppvObj);
+    /* [annotation][in] */ 
+    _In_  REFIID riid,
+    /* [annotation][iid_is][out] */ 
+    _COM_Outptr_  IUnknown **ppvObj);
 
 
 void __RPC_STUB ITypeInfo_RemoteCreateInstance_Stub(
@@ -3284,8 +3637,10 @@ void __RPC_STUB ITypeInfo_RemoteCreateInstance_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo_RemoteGetContainingTypeLib_Proxy( 
     __RPC__in ITypeInfo * This,
-    /* [out] */ __RPC__deref_out_opt ITypeLib **ppTLib,
-    /* [out] */ __RPC__out UINT *pIndex);
+    /* [annotation][out] */ 
+    _Out_  ITypeLib **ppTLib,
+    /* [annotation][out] */ 
+    _Out_  UINT *pIndex);
 
 
 void __RPC_STUB ITypeInfo_RemoteGetContainingTypeLib_Stub(
@@ -3350,73 +3705,108 @@ EXTERN_C const IID IID_ITypeInfo2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTypeKind( 
-            /* [out] */ __RPC__out TYPEKIND *pTypeKind) = 0;
+            /* [annotation][out] */ 
+            _Out_  TYPEKIND *pTypeKind) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTypeFlags( 
-            /* [out] */ __RPC__out ULONG *pTypeFlags) = 0;
+            /* [annotation][out] */ 
+            _Out_  ULONG *pTypeFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFuncIndexOfMemId( 
-            /* [in] */ MEMBERID memid,
-            /* [in] */ INVOKEKIND invKind,
-            /* [out] */ __RPC__out UINT *pFuncIndex) = 0;
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
+            /* [annotation][in] */ 
+            _In_  INVOKEKIND invKind,
+            /* [annotation][out] */ 
+            _Out_  UINT *pFuncIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVarIndexOfMemId( 
-            /* [in] */ MEMBERID memid,
-            /* [out] */ __RPC__out UINT *pVarIndex) = 0;
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
+            /* [annotation][out] */ 
+            _Out_  UINT *pVarIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCustData( 
-            /* [in] */ __RPC__in REFGUID guid,
-            /* [out] */ __RPC__out VARIANT *pVarVal) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pVarVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFuncCustData( 
-            /* [in] */ UINT index,
-            /* [in] */ __RPC__in REFGUID guid,
-            /* [out] */ __RPC__out VARIANT *pVarVal) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pVarVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetParamCustData( 
-            /* [in] */ UINT indexFunc,
-            /* [in] */ UINT indexParam,
-            /* [in] */ __RPC__in REFGUID guid,
-            /* [out] */ __RPC__out VARIANT *pVarVal) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT indexFunc,
+            /* [annotation][in] */ 
+            _In_  UINT indexParam,
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pVarVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVarCustData( 
-            /* [in] */ UINT index,
-            /* [in] */ __RPC__in REFGUID guid,
-            /* [out] */ __RPC__out VARIANT *pVarVal) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pVarVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetImplTypeCustData( 
-            /* [in] */ UINT index,
-            /* [in] */ __RPC__in REFGUID guid,
-            /* [out] */ __RPC__out VARIANT *pVarVal) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pVarVal) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetDocumentation2( 
-            /* [in] */ MEMBERID memid,
-            /* [in] */ LCID lcid,
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pbstrHelpString,
-            /* [out] */ DWORD *pdwHelpStringContext,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHelpStringContext,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pbstrHelpStringDll) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAllCustData( 
-            /* [out] */ __RPC__out CUSTDATA *pCustData) = 0;
+            /* [annotation][out] */ 
+            _Out_  CUSTDATA *pCustData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAllFuncCustData( 
-            /* [in] */ UINT index,
-            /* [out] */ __RPC__out CUSTDATA *pCustData) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  CUSTDATA *pCustData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAllParamCustData( 
-            /* [in] */ UINT indexFunc,
-            /* [in] */ UINT indexParam,
-            /* [out] */ __RPC__out CUSTDATA *pCustData) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT indexFunc,
+            /* [annotation][in] */ 
+            _In_  UINT indexParam,
+            /* [annotation][out] */ 
+            _Out_  CUSTDATA *pCustData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAllVarCustData( 
-            /* [in] */ UINT index,
-            /* [out] */ __RPC__out CUSTDATA *pCustData) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  CUSTDATA *pCustData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAllImplTypeCustData( 
-            /* [in] */ UINT index,
-            /* [out] */ __RPC__out CUSTDATA *pCustData) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  CUSTDATA *pCustData) = 0;
         
     };
     
@@ -3430,7 +3820,8 @@ EXTERN_C const IID IID_ITypeInfo2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITypeInfo2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3445,234 +3836,310 @@ EXTERN_C const IID IID_ITypeInfo2;
         DECLSPEC_XFGVIRT(ITypeInfo, GetTypeAttr)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetTypeAttr )( 
             ITypeInfo2 * This,
-            /* [out] */ TYPEATTR **ppTypeAttr);
+            /* [annotation][out] */ 
+            _Out_  TYPEATTR **ppTypeAttr);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetTypeComp)
         HRESULT ( STDMETHODCALLTYPE *GetTypeComp )( 
             __RPC__in ITypeInfo2 * This,
-            /* [out] */ __RPC__deref_out_opt ITypeComp **ppTComp);
+            /* [annotation][out] */ 
+            _Out_  ITypeComp **ppTComp);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetFuncDesc)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetFuncDesc )( 
             ITypeInfo2 * This,
-            /* [in] */ UINT index,
-            /* [out] */ FUNCDESC **ppFuncDesc);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  FUNCDESC **ppFuncDesc);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetVarDesc)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetVarDesc )( 
             ITypeInfo2 * This,
-            /* [in] */ UINT index,
-            /* [out] */ VARDESC **ppVarDesc);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  VARDESC **ppVarDesc);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetNames)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetNames )( 
             ITypeInfo2 * This,
-            /* [in] */ MEMBERID memid,
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
             /* [annotation][length_is][size_is][out] */ 
             __RPC__out_ecount_part(cMaxNames, *pcNames)  BSTR *rgBstrNames,
-            /* [in] */ UINT cMaxNames,
+            /* [annotation][in] */ 
+            _In_  UINT cMaxNames,
             /* [annotation][out] */ 
             __RPC__out  UINT *pcNames);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetRefTypeOfImplType)
         HRESULT ( STDMETHODCALLTYPE *GetRefTypeOfImplType )( 
             __RPC__in ITypeInfo2 * This,
-            /* [in] */ UINT index,
-            /* [out] */ __RPC__out HREFTYPE *pRefType);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  HREFTYPE *pRefType);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetImplTypeFlags)
         HRESULT ( STDMETHODCALLTYPE *GetImplTypeFlags )( 
             __RPC__in ITypeInfo2 * This,
-            /* [in] */ UINT index,
-            /* [out] */ __RPC__out INT *pImplTypeFlags);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  INT *pImplTypeFlags);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetIDsOfNames)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ITypeInfo2 * This,
             /* [annotation][size_is][in] */ 
             __RPC__in_ecount(cNames)  LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [size_is][out] */ MEMBERID *pMemId);
+            /* [annotation][in] */ 
+            _In_  UINT cNames,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  MEMBERID *pMemId);
         
         DECLSPEC_XFGVIRT(ITypeInfo, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ITypeInfo2 * This,
-            /* [in] */ PVOID pvInstance,
-            /* [in] */ MEMBERID memid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
+            /* [annotation][in] */ 
+            _In_  PVOID pvInstance,
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _Inout_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_  UINT *puArgErr);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetDocumentation)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetDocumentation )( 
             ITypeInfo2 * This,
-            /* [in] */ MEMBERID memid,
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrName,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrDocString,
-            /* [out] */ DWORD *pdwHelpContext,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHelpContext,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrHelpFile);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetDllEntry)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetDllEntry )( 
             ITypeInfo2 * This,
-            /* [in] */ MEMBERID memid,
-            /* [in] */ INVOKEKIND invKind,
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
+            /* [annotation][in] */ 
+            _In_  INVOKEKIND invKind,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrDllName,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrName,
-            /* [out] */ WORD *pwOrdinal);
+            /* [annotation][out] */ 
+            _Out_  WORD *pwOrdinal);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetRefTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetRefTypeInfo )( 
             __RPC__in ITypeInfo2 * This,
-            /* [in] */ HREFTYPE hRefType,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  HREFTYPE hRefType,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(ITypeInfo, AddressOfMember)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *AddressOfMember )( 
             ITypeInfo2 * This,
-            /* [in] */ MEMBERID memid,
-            /* [in] */ INVOKEKIND invKind,
-            /* [out] */ PVOID *ppv);
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
+            /* [annotation][in] */ 
+            _In_  INVOKEKIND invKind,
+            /* [annotation][out] */ 
+            _Out_  PVOID *ppv);
         
         DECLSPEC_XFGVIRT(ITypeInfo, CreateInstance)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             ITypeInfo2 * This,
-            /* [in] */ IUnknown *pUnkOuter,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ PVOID *ppvObj);
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  PVOID *ppvObj);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetMops)
         HRESULT ( STDMETHODCALLTYPE *GetMops )( 
             __RPC__in ITypeInfo2 * This,
-            /* [in] */ MEMBERID memid,
-            /* [out] */ __RPC__deref_out_opt BSTR *pBstrMops);
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pBstrMops);
         
         DECLSPEC_XFGVIRT(ITypeInfo, GetContainingTypeLib)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetContainingTypeLib )( 
             ITypeInfo2 * This,
-            /* [out] */ ITypeLib **ppTLib,
-            /* [out] */ UINT *pIndex);
+            /* [annotation][out] */ 
+            _Out_  ITypeLib **ppTLib,
+            /* [annotation][out] */ 
+            _Out_  UINT *pIndex);
         
         DECLSPEC_XFGVIRT(ITypeInfo, ReleaseTypeAttr)
         /* [local] */ void ( STDMETHODCALLTYPE *ReleaseTypeAttr )( 
             ITypeInfo2 * This,
-            /* [in] */ TYPEATTR *pTypeAttr);
+            /* [annotation][in] */ 
+            _In_  TYPEATTR *pTypeAttr);
         
         DECLSPEC_XFGVIRT(ITypeInfo, ReleaseFuncDesc)
         /* [local] */ void ( STDMETHODCALLTYPE *ReleaseFuncDesc )( 
             ITypeInfo2 * This,
-            /* [in] */ FUNCDESC *pFuncDesc);
+            /* [annotation][in] */ 
+            _In_  FUNCDESC *pFuncDesc);
         
         DECLSPEC_XFGVIRT(ITypeInfo, ReleaseVarDesc)
         /* [local] */ void ( STDMETHODCALLTYPE *ReleaseVarDesc )( 
             ITypeInfo2 * This,
-            /* [in] */ VARDESC *pVarDesc);
+            /* [annotation][in] */ 
+            _In_  VARDESC *pVarDesc);
         
         DECLSPEC_XFGVIRT(ITypeInfo2, GetTypeKind)
         HRESULT ( STDMETHODCALLTYPE *GetTypeKind )( 
             __RPC__in ITypeInfo2 * This,
-            /* [out] */ __RPC__out TYPEKIND *pTypeKind);
+            /* [annotation][out] */ 
+            _Out_  TYPEKIND *pTypeKind);
         
         DECLSPEC_XFGVIRT(ITypeInfo2, GetTypeFlags)
         HRESULT ( STDMETHODCALLTYPE *GetTypeFlags )( 
             __RPC__in ITypeInfo2 * This,
-            /* [out] */ __RPC__out ULONG *pTypeFlags);
+            /* [annotation][out] */ 
+            _Out_  ULONG *pTypeFlags);
         
         DECLSPEC_XFGVIRT(ITypeInfo2, GetFuncIndexOfMemId)
         HRESULT ( STDMETHODCALLTYPE *GetFuncIndexOfMemId )( 
             __RPC__in ITypeInfo2 * This,
-            /* [in] */ MEMBERID memid,
-            /* [in] */ INVOKEKIND invKind,
-            /* [out] */ __RPC__out UINT *pFuncIndex);
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
+            /* [annotation][in] */ 
+            _In_  INVOKEKIND invKind,
+            /* [annotation][out] */ 
+            _Out_  UINT *pFuncIndex);
         
         DECLSPEC_XFGVIRT(ITypeInfo2, GetVarIndexOfMemId)
         HRESULT ( STDMETHODCALLTYPE *GetVarIndexOfMemId )( 
             __RPC__in ITypeInfo2 * This,
-            /* [in] */ MEMBERID memid,
-            /* [out] */ __RPC__out UINT *pVarIndex);
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
+            /* [annotation][out] */ 
+            _Out_  UINT *pVarIndex);
         
         DECLSPEC_XFGVIRT(ITypeInfo2, GetCustData)
         HRESULT ( STDMETHODCALLTYPE *GetCustData )( 
             __RPC__in ITypeInfo2 * This,
-            /* [in] */ __RPC__in REFGUID guid,
-            /* [out] */ __RPC__out VARIANT *pVarVal);
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pVarVal);
         
         DECLSPEC_XFGVIRT(ITypeInfo2, GetFuncCustData)
         HRESULT ( STDMETHODCALLTYPE *GetFuncCustData )( 
             __RPC__in ITypeInfo2 * This,
-            /* [in] */ UINT index,
-            /* [in] */ __RPC__in REFGUID guid,
-            /* [out] */ __RPC__out VARIANT *pVarVal);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pVarVal);
         
         DECLSPEC_XFGVIRT(ITypeInfo2, GetParamCustData)
         HRESULT ( STDMETHODCALLTYPE *GetParamCustData )( 
             __RPC__in ITypeInfo2 * This,
-            /* [in] */ UINT indexFunc,
-            /* [in] */ UINT indexParam,
-            /* [in] */ __RPC__in REFGUID guid,
-            /* [out] */ __RPC__out VARIANT *pVarVal);
+            /* [annotation][in] */ 
+            _In_  UINT indexFunc,
+            /* [annotation][in] */ 
+            _In_  UINT indexParam,
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pVarVal);
         
         DECLSPEC_XFGVIRT(ITypeInfo2, GetVarCustData)
         HRESULT ( STDMETHODCALLTYPE *GetVarCustData )( 
             __RPC__in ITypeInfo2 * This,
-            /* [in] */ UINT index,
-            /* [in] */ __RPC__in REFGUID guid,
-            /* [out] */ __RPC__out VARIANT *pVarVal);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pVarVal);
         
         DECLSPEC_XFGVIRT(ITypeInfo2, GetImplTypeCustData)
         HRESULT ( STDMETHODCALLTYPE *GetImplTypeCustData )( 
             __RPC__in ITypeInfo2 * This,
-            /* [in] */ UINT index,
-            /* [in] */ __RPC__in REFGUID guid,
-            /* [out] */ __RPC__out VARIANT *pVarVal);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pVarVal);
         
         DECLSPEC_XFGVIRT(ITypeInfo2, GetDocumentation2)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetDocumentation2 )( 
             ITypeInfo2 * This,
-            /* [in] */ MEMBERID memid,
-            /* [in] */ LCID lcid,
+            /* [annotation][in] */ 
+            _In_  MEMBERID memid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pbstrHelpString,
-            /* [out] */ DWORD *pdwHelpStringContext,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHelpStringContext,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pbstrHelpStringDll);
         
         DECLSPEC_XFGVIRT(ITypeInfo2, GetAllCustData)
         HRESULT ( STDMETHODCALLTYPE *GetAllCustData )( 
             __RPC__in ITypeInfo2 * This,
-            /* [out] */ __RPC__out CUSTDATA *pCustData);
+            /* [annotation][out] */ 
+            _Out_  CUSTDATA *pCustData);
         
         DECLSPEC_XFGVIRT(ITypeInfo2, GetAllFuncCustData)
         HRESULT ( STDMETHODCALLTYPE *GetAllFuncCustData )( 
             __RPC__in ITypeInfo2 * This,
-            /* [in] */ UINT index,
-            /* [out] */ __RPC__out CUSTDATA *pCustData);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  CUSTDATA *pCustData);
         
         DECLSPEC_XFGVIRT(ITypeInfo2, GetAllParamCustData)
         HRESULT ( STDMETHODCALLTYPE *GetAllParamCustData )( 
             __RPC__in ITypeInfo2 * This,
-            /* [in] */ UINT indexFunc,
-            /* [in] */ UINT indexParam,
-            /* [out] */ __RPC__out CUSTDATA *pCustData);
+            /* [annotation][in] */ 
+            _In_  UINT indexFunc,
+            /* [annotation][in] */ 
+            _In_  UINT indexParam,
+            /* [annotation][out] */ 
+            _Out_  CUSTDATA *pCustData);
         
         DECLSPEC_XFGVIRT(ITypeInfo2, GetAllVarCustData)
         HRESULT ( STDMETHODCALLTYPE *GetAllVarCustData )( 
             __RPC__in ITypeInfo2 * This,
-            /* [in] */ UINT index,
-            /* [out] */ __RPC__out CUSTDATA *pCustData);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  CUSTDATA *pCustData);
         
         DECLSPEC_XFGVIRT(ITypeInfo2, GetAllImplTypeCustData)
         HRESULT ( STDMETHODCALLTYPE *GetAllImplTypeCustData )( 
             __RPC__in ITypeInfo2 * This,
-            /* [in] */ UINT index,
-            /* [out] */ __RPC__out CUSTDATA *pCustData);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  CUSTDATA *pCustData);
         
         END_INTERFACE
     } ITypeInfo2Vtbl;
@@ -3809,12 +4276,18 @@ EXTERN_C const IID IID_ITypeInfo2;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo2_RemoteGetDocumentation2_Proxy( 
     __RPC__in ITypeInfo2 * This,
-    /* [in] */ MEMBERID memid,
-    /* [in] */ LCID lcid,
-    /* [in] */ DWORD refPtrFlags,
-    /* [out] */ __RPC__deref_out_opt BSTR *pbstrHelpString,
-    /* [out] */ __RPC__out DWORD *pdwHelpStringContext,
-    /* [out] */ __RPC__deref_out_opt BSTR *pbstrHelpStringDll);
+    /* [annotation][in] */ 
+    _In_  MEMBERID memid,
+    /* [annotation][in] */ 
+    _In_  LCID lcid,
+    /* [annotation][in] */ 
+    _In_  DWORD refPtrFlags,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pbstrHelpString,
+    /* [annotation][out] */ 
+    _Out_  DWORD *pdwHelpStringContext,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pbstrHelpStringDll);
 
 
 void __RPC_STUB ITypeInfo2_RemoteGetDocumentation2_Stub(
@@ -3890,49 +4363,66 @@ EXTERN_C const IID IID_ITypeLib;
         virtual /* [local] */ UINT STDMETHODCALLTYPE GetTypeInfoCount( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTypeInfo( 
-            /* [in] */ UINT index,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTypeInfoType( 
-            /* [in] */ UINT index,
-            /* [out] */ __RPC__out TYPEKIND *pTKind) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  TYPEKIND *pTKind) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTypeInfoOfGuid( 
-            /* [in] */ __RPC__in REFGUID guid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTinfo) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTinfo) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetLibAttr( 
-            /* [out] */ TLIBATTR **ppTLibAttr) = 0;
+            /* [annotation][out] */ 
+            _Out_  TLIBATTR **ppTLibAttr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTypeComp( 
-            /* [out] */ __RPC__deref_out_opt ITypeComp **ppTComp) = 0;
+            /* [annotation][out] */ 
+            _Out_  ITypeComp **ppTComp) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetDocumentation( 
-            /* [in] */ INT index,
+            /* [annotation][in] */ 
+            _In_  INT index,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrName,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrDocString,
-            /* [out] */ DWORD *pdwHelpContext,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHelpContext,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrHelpFile) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE IsName( 
             /* [annotation][out][in] */ 
             __RPC__inout  LPOLESTR szNameBuf,
-            /* [in] */ ULONG lHashVal,
-            /* [out] */ BOOL *pfName) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG lHashVal,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfName) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE FindName( 
             /* [annotation][out][in] */ 
             __RPC__inout  LPOLESTR szNameBuf,
-            /* [in] */ ULONG lHashVal,
-            /* [length_is][size_is][out] */ ITypeInfo **ppTInfo,
-            /* [length_is][size_is][out] */ MEMBERID *rgMemId,
-            /* [out][in] */ USHORT *pcFound) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG lHashVal,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(*pcFound,*pcFound)  ITypeInfo **ppTInfo,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(*pcFound,*pcFound)  MEMBERID *rgMemId,
+            /* [annotation][out][in] */ 
+            _Inout_  USHORT *pcFound) = 0;
         
         virtual /* [local] */ void STDMETHODCALLTYPE ReleaseTLibAttr( 
-            /* [in] */ TLIBATTR *pTLibAttr) = 0;
+            /* [annotation][in] */ 
+            _In_  TLIBATTR *pTLibAttr) = 0;
         
     };
     
@@ -3946,7 +4436,8 @@ EXTERN_C const IID IID_ITypeLib;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITypeLib * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3965,40 +4456,50 @@ EXTERN_C const IID IID_ITypeLib;
         DECLSPEC_XFGVIRT(ITypeLib, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITypeLib * This,
-            /* [in] */ UINT index,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(ITypeLib, GetTypeInfoType)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoType )( 
             __RPC__in ITypeLib * This,
-            /* [in] */ UINT index,
-            /* [out] */ __RPC__out TYPEKIND *pTKind);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  TYPEKIND *pTKind);
         
         DECLSPEC_XFGVIRT(ITypeLib, GetTypeInfoOfGuid)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoOfGuid )( 
             __RPC__in ITypeLib * This,
-            /* [in] */ __RPC__in REFGUID guid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTinfo);
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTinfo);
         
         DECLSPEC_XFGVIRT(ITypeLib, GetLibAttr)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetLibAttr )( 
             ITypeLib * This,
-            /* [out] */ TLIBATTR **ppTLibAttr);
+            /* [annotation][out] */ 
+            _Out_  TLIBATTR **ppTLibAttr);
         
         DECLSPEC_XFGVIRT(ITypeLib, GetTypeComp)
         HRESULT ( STDMETHODCALLTYPE *GetTypeComp )( 
             __RPC__in ITypeLib * This,
-            /* [out] */ __RPC__deref_out_opt ITypeComp **ppTComp);
+            /* [annotation][out] */ 
+            _Out_  ITypeComp **ppTComp);
         
         DECLSPEC_XFGVIRT(ITypeLib, GetDocumentation)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetDocumentation )( 
             ITypeLib * This,
-            /* [in] */ INT index,
+            /* [annotation][in] */ 
+            _In_  INT index,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrName,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrDocString,
-            /* [out] */ DWORD *pdwHelpContext,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHelpContext,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrHelpFile);
         
@@ -4007,23 +4508,30 @@ EXTERN_C const IID IID_ITypeLib;
             ITypeLib * This,
             /* [annotation][out][in] */ 
             __RPC__inout  LPOLESTR szNameBuf,
-            /* [in] */ ULONG lHashVal,
-            /* [out] */ BOOL *pfName);
+            /* [annotation][in] */ 
+            _In_  ULONG lHashVal,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfName);
         
         DECLSPEC_XFGVIRT(ITypeLib, FindName)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *FindName )( 
             ITypeLib * This,
             /* [annotation][out][in] */ 
             __RPC__inout  LPOLESTR szNameBuf,
-            /* [in] */ ULONG lHashVal,
-            /* [length_is][size_is][out] */ ITypeInfo **ppTInfo,
-            /* [length_is][size_is][out] */ MEMBERID *rgMemId,
-            /* [out][in] */ USHORT *pcFound);
+            /* [annotation][in] */ 
+            _In_  ULONG lHashVal,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(*pcFound,*pcFound)  ITypeInfo **ppTInfo,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(*pcFound,*pcFound)  MEMBERID *rgMemId,
+            /* [annotation][out][in] */ 
+            _Inout_  USHORT *pcFound);
         
         DECLSPEC_XFGVIRT(ITypeLib, ReleaseTLibAttr)
         /* [local] */ void ( STDMETHODCALLTYPE *ReleaseTLibAttr )( 
             ITypeLib * This,
-            /* [in] */ TLIBATTR *pTLibAttr);
+            /* [annotation][in] */ 
+            _In_  TLIBATTR *pTLibAttr);
         
         END_INTERFACE
     } ITypeLibVtbl;
@@ -4087,7 +4595,8 @@ EXTERN_C const IID IID_ITypeLib;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeLib_RemoteGetTypeInfoCount_Proxy( 
     __RPC__in ITypeLib * This,
-    /* [out] */ __RPC__out UINT *pcTInfo);
+    /* [annotation][out] */ 
+    _Out_  UINT *pcTInfo);
 
 
 void __RPC_STUB ITypeLib_RemoteGetTypeInfoCount_Stub(
@@ -4099,8 +4608,10 @@ void __RPC_STUB ITypeLib_RemoteGetTypeInfoCount_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeLib_RemoteGetLibAttr_Proxy( 
     __RPC__in ITypeLib * This,
-    /* [out] */ __RPC__deref_out_opt LPTLIBATTR *ppTLibAttr,
-    /* [out] */ __RPC__out CLEANLOCALSTORAGE *pDummy);
+    /* [annotation][out] */ 
+    _Out_  LPTLIBATTR *ppTLibAttr,
+    /* [annotation][out] */ 
+    _Out_  CLEANLOCALSTORAGE *pDummy);
 
 
 void __RPC_STUB ITypeLib_RemoteGetLibAttr_Stub(
@@ -4112,12 +4623,18 @@ void __RPC_STUB ITypeLib_RemoteGetLibAttr_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeLib_RemoteGetDocumentation_Proxy( 
     __RPC__in ITypeLib * This,
-    /* [in] */ INT index,
-    /* [in] */ DWORD refPtrFlags,
-    /* [out] */ __RPC__deref_out_opt BSTR *pBstrName,
-    /* [out] */ __RPC__deref_out_opt BSTR *pBstrDocString,
-    /* [out] */ __RPC__out DWORD *pdwHelpContext,
-    /* [out] */ __RPC__deref_out_opt BSTR *pBstrHelpFile);
+    /* [annotation][in] */ 
+    _In_  INT index,
+    /* [annotation][in] */ 
+    _In_  DWORD refPtrFlags,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pBstrName,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pBstrDocString,
+    /* [annotation][out] */ 
+    _Out_  DWORD *pdwHelpContext,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pBstrHelpFile);
 
 
 void __RPC_STUB ITypeLib_RemoteGetDocumentation_Stub(
@@ -4129,10 +4646,14 @@ void __RPC_STUB ITypeLib_RemoteGetDocumentation_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeLib_RemoteIsName_Proxy( 
     __RPC__in ITypeLib * This,
-    /* [in] */ __RPC__in LPOLESTR szNameBuf,
-    /* [in] */ ULONG lHashVal,
-    /* [out] */ __RPC__out BOOL *pfName,
-    /* [out] */ __RPC__deref_out_opt BSTR *pBstrLibName);
+    /* [annotation][in] */ 
+    _In_  LPOLESTR szNameBuf,
+    /* [annotation][in] */ 
+    _In_  ULONG lHashVal,
+    /* [annotation][out] */ 
+    _Out_  BOOL *pfName,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pBstrLibName);
 
 
 void __RPC_STUB ITypeLib_RemoteIsName_Stub(
@@ -4144,12 +4665,18 @@ void __RPC_STUB ITypeLib_RemoteIsName_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeLib_RemoteFindName_Proxy( 
     __RPC__in ITypeLib * This,
-    /* [in] */ __RPC__in LPOLESTR szNameBuf,
-    /* [in] */ ULONG lHashVal,
-    /* [length_is][size_is][out] */ __RPC__out_ecount_part(*pcFound, *pcFound) ITypeInfo **ppTInfo,
-    /* [length_is][size_is][out] */ __RPC__out_ecount_part(*pcFound, *pcFound) MEMBERID *rgMemId,
-    /* [out][in] */ __RPC__inout USHORT *pcFound,
-    /* [out] */ __RPC__deref_out_opt BSTR *pBstrLibName);
+    /* [annotation][in] */ 
+    _In_  LPOLESTR szNameBuf,
+    /* [annotation][in] */ 
+    _In_  ULONG lHashVal,
+    /* [annotation][length_is][size_is][out] */ 
+    _Out_writes_to_(*pcFound,*pcFound)  ITypeInfo **ppTInfo,
+    /* [annotation][length_is][size_is][out] */ 
+    _Out_writes_to_(*pcFound,*pcFound)  MEMBERID *rgMemId,
+    /* [annotation][out][in] */ 
+    _Inout_  USHORT *pcFound,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pBstrLibName);
 
 
 void __RPC_STUB ITypeLib_RemoteFindName_Stub(
@@ -4204,24 +4731,32 @@ EXTERN_C const IID IID_ITypeLib2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCustData( 
-            /* [in] */ __RPC__in REFGUID guid,
-            /* [out] */ __RPC__out VARIANT *pVarVal) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pVarVal) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetLibStatistics( 
-            /* [out] */ ULONG *pcUniqueNames,
-            /* [out] */ ULONG *pcchUniqueNames) = 0;
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcUniqueNames,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcchUniqueNames) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetDocumentation2( 
-            /* [in] */ INT index,
-            /* [in] */ LCID lcid,
+            /* [annotation][in] */ 
+            _In_  INT index,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pbstrHelpString,
-            /* [out] */ DWORD *pdwHelpStringContext,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHelpStringContext,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pbstrHelpStringDll) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAllCustData( 
-            /* [out] */ __RPC__out CUSTDATA *pCustData) = 0;
+            /* [annotation][out] */ 
+            _Out_  CUSTDATA *pCustData) = 0;
         
     };
     
@@ -4235,7 +4770,8 @@ EXTERN_C const IID IID_ITypeLib2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITypeLib2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4254,40 +4790,50 @@ EXTERN_C const IID IID_ITypeLib2;
         DECLSPEC_XFGVIRT(ITypeLib, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITypeLib2 * This,
-            /* [in] */ UINT index,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(ITypeLib, GetTypeInfoType)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoType )( 
             __RPC__in ITypeLib2 * This,
-            /* [in] */ UINT index,
-            /* [out] */ __RPC__out TYPEKIND *pTKind);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][out] */ 
+            _Out_  TYPEKIND *pTKind);
         
         DECLSPEC_XFGVIRT(ITypeLib, GetTypeInfoOfGuid)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoOfGuid )( 
             __RPC__in ITypeLib2 * This,
-            /* [in] */ __RPC__in REFGUID guid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTinfo);
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTinfo);
         
         DECLSPEC_XFGVIRT(ITypeLib, GetLibAttr)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetLibAttr )( 
             ITypeLib2 * This,
-            /* [out] */ TLIBATTR **ppTLibAttr);
+            /* [annotation][out] */ 
+            _Out_  TLIBATTR **ppTLibAttr);
         
         DECLSPEC_XFGVIRT(ITypeLib, GetTypeComp)
         HRESULT ( STDMETHODCALLTYPE *GetTypeComp )( 
             __RPC__in ITypeLib2 * This,
-            /* [out] */ __RPC__deref_out_opt ITypeComp **ppTComp);
+            /* [annotation][out] */ 
+            _Out_  ITypeComp **ppTComp);
         
         DECLSPEC_XFGVIRT(ITypeLib, GetDocumentation)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetDocumentation )( 
             ITypeLib2 * This,
-            /* [in] */ INT index,
+            /* [annotation][in] */ 
+            _In_  INT index,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrName,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrDocString,
-            /* [out] */ DWORD *pdwHelpContext,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHelpContext,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pBstrHelpFile);
         
@@ -4296,51 +4842,66 @@ EXTERN_C const IID IID_ITypeLib2;
             ITypeLib2 * This,
             /* [annotation][out][in] */ 
             __RPC__inout  LPOLESTR szNameBuf,
-            /* [in] */ ULONG lHashVal,
-            /* [out] */ BOOL *pfName);
+            /* [annotation][in] */ 
+            _In_  ULONG lHashVal,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfName);
         
         DECLSPEC_XFGVIRT(ITypeLib, FindName)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *FindName )( 
             ITypeLib2 * This,
             /* [annotation][out][in] */ 
             __RPC__inout  LPOLESTR szNameBuf,
-            /* [in] */ ULONG lHashVal,
-            /* [length_is][size_is][out] */ ITypeInfo **ppTInfo,
-            /* [length_is][size_is][out] */ MEMBERID *rgMemId,
-            /* [out][in] */ USHORT *pcFound);
+            /* [annotation][in] */ 
+            _In_  ULONG lHashVal,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(*pcFound,*pcFound)  ITypeInfo **ppTInfo,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(*pcFound,*pcFound)  MEMBERID *rgMemId,
+            /* [annotation][out][in] */ 
+            _Inout_  USHORT *pcFound);
         
         DECLSPEC_XFGVIRT(ITypeLib, ReleaseTLibAttr)
         /* [local] */ void ( STDMETHODCALLTYPE *ReleaseTLibAttr )( 
             ITypeLib2 * This,
-            /* [in] */ TLIBATTR *pTLibAttr);
+            /* [annotation][in] */ 
+            _In_  TLIBATTR *pTLibAttr);
         
         DECLSPEC_XFGVIRT(ITypeLib2, GetCustData)
         HRESULT ( STDMETHODCALLTYPE *GetCustData )( 
             __RPC__in ITypeLib2 * This,
-            /* [in] */ __RPC__in REFGUID guid,
-            /* [out] */ __RPC__out VARIANT *pVarVal);
+            /* [annotation][in] */ 
+            _In_  REFGUID guid,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pVarVal);
         
         DECLSPEC_XFGVIRT(ITypeLib2, GetLibStatistics)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetLibStatistics )( 
             ITypeLib2 * This,
-            /* [out] */ ULONG *pcUniqueNames,
-            /* [out] */ ULONG *pcchUniqueNames);
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcUniqueNames,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcchUniqueNames);
         
         DECLSPEC_XFGVIRT(ITypeLib2, GetDocumentation2)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetDocumentation2 )( 
             ITypeLib2 * This,
-            /* [in] */ INT index,
-            /* [in] */ LCID lcid,
+            /* [annotation][in] */ 
+            _In_  INT index,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pbstrHelpString,
-            /* [out] */ DWORD *pdwHelpStringContext,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHelpStringContext,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pbstrHelpStringDll);
         
         DECLSPEC_XFGVIRT(ITypeLib2, GetAllCustData)
         HRESULT ( STDMETHODCALLTYPE *GetAllCustData )( 
             __RPC__in ITypeLib2 * This,
-            /* [out] */ __RPC__out CUSTDATA *pCustData);
+            /* [annotation][out] */ 
+            _Out_  CUSTDATA *pCustData);
         
         END_INTERFACE
     } ITypeLib2Vtbl;
@@ -4417,8 +4978,10 @@ EXTERN_C const IID IID_ITypeLib2;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeLib2_RemoteGetLibStatistics_Proxy( 
     __RPC__in ITypeLib2 * This,
-    /* [out] */ __RPC__out ULONG *pcUniqueNames,
-    /* [out] */ __RPC__out ULONG *pcchUniqueNames);
+    /* [annotation][out] */ 
+    _Out_  ULONG *pcUniqueNames,
+    /* [annotation][out] */ 
+    _Out_  ULONG *pcchUniqueNames);
 
 
 void __RPC_STUB ITypeLib2_RemoteGetLibStatistics_Stub(
@@ -4430,12 +4993,18 @@ void __RPC_STUB ITypeLib2_RemoteGetLibStatistics_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeLib2_RemoteGetDocumentation2_Proxy( 
     __RPC__in ITypeLib2 * This,
-    /* [in] */ INT index,
-    /* [in] */ LCID lcid,
-    /* [in] */ DWORD refPtrFlags,
-    /* [out] */ __RPC__deref_out_opt BSTR *pbstrHelpString,
-    /* [out] */ __RPC__out DWORD *pdwHelpStringContext,
-    /* [out] */ __RPC__deref_out_opt BSTR *pbstrHelpStringDll);
+    /* [annotation][in] */ 
+    _In_  INT index,
+    /* [annotation][in] */ 
+    _In_  LCID lcid,
+    /* [annotation][in] */ 
+    _In_  DWORD refPtrFlags,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pbstrHelpString,
+    /* [annotation][out] */ 
+    _Out_  DWORD *pdwHelpStringContext,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pbstrHelpStringDll);
 
 
 void __RPC_STUB ITypeLib2_RemoteGetDocumentation2_Stub(
@@ -4480,15 +5049,20 @@ EXTERN_C const IID IID_ITypeChangeEvents;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RequestTypeChange( 
-            /* [in] */ CHANGEKIND changeKind,
-            /* [in] */ ITypeInfo *pTInfoBefore,
+            /* [annotation][in] */ 
+            _In_  CHANGEKIND changeKind,
+            /* [annotation][in] */ 
+            _In_  ITypeInfo *pTInfoBefore,
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR pStrName,
-            /* [out] */ INT *pfCancel) = 0;
+            /* [annotation][out] */ 
+            _Out_  INT *pfCancel) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AfterTypeChange( 
-            /* [in] */ CHANGEKIND changeKind,
-            /* [in] */ ITypeInfo *pTInfoAfter,
+            /* [annotation][in] */ 
+            _In_  CHANGEKIND changeKind,
+            /* [annotation][in] */ 
+            _In_  ITypeInfo *pTInfoAfter,
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR pStrName) = 0;
         
@@ -4504,7 +5078,8 @@ EXTERN_C const IID IID_ITypeChangeEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITypeChangeEvents * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4519,17 +5094,22 @@ EXTERN_C const IID IID_ITypeChangeEvents;
         DECLSPEC_XFGVIRT(ITypeChangeEvents, RequestTypeChange)
         HRESULT ( STDMETHODCALLTYPE *RequestTypeChange )( 
             ITypeChangeEvents * This,
-            /* [in] */ CHANGEKIND changeKind,
-            /* [in] */ ITypeInfo *pTInfoBefore,
+            /* [annotation][in] */ 
+            _In_  CHANGEKIND changeKind,
+            /* [annotation][in] */ 
+            _In_  ITypeInfo *pTInfoBefore,
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR pStrName,
-            /* [out] */ INT *pfCancel);
+            /* [annotation][out] */ 
+            _Out_  INT *pfCancel);
         
         DECLSPEC_XFGVIRT(ITypeChangeEvents, AfterTypeChange)
         HRESULT ( STDMETHODCALLTYPE *AfterTypeChange )( 
             ITypeChangeEvents * This,
-            /* [in] */ CHANGEKIND changeKind,
-            /* [in] */ ITypeInfo *pTInfoAfter,
+            /* [annotation][in] */ 
+            _In_  CHANGEKIND changeKind,
+            /* [annotation][in] */ 
+            _In_  ITypeInfo *pTInfoAfter,
             /* [annotation][in] */ 
             __RPC__in  LPOLESTR pStrName);
         
@@ -4591,19 +5171,24 @@ EXTERN_C const IID IID_IErrorInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetGUID( 
-            /* [out] */ __RPC__out GUID *pGUID) = 0;
+            /* [annotation][out] */ 
+            _Out_  GUID *pGUID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSource( 
-            /* [out] */ __RPC__deref_out_opt BSTR *pBstrSource) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pBstrSource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDescription( 
-            /* [out] */ __RPC__deref_out_opt BSTR *pBstrDescription) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pBstrDescription) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetHelpFile( 
-            /* [out] */ __RPC__deref_out_opt BSTR *pBstrHelpFile) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pBstrHelpFile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetHelpContext( 
-            /* [out] */ __RPC__out DWORD *pdwHelpContext) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHelpContext) = 0;
         
     };
     
@@ -4617,7 +5202,8 @@ EXTERN_C const IID IID_IErrorInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IErrorInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4632,27 +5218,32 @@ EXTERN_C const IID IID_IErrorInfo;
         DECLSPEC_XFGVIRT(IErrorInfo, GetGUID)
         HRESULT ( STDMETHODCALLTYPE *GetGUID )( 
             __RPC__in IErrorInfo * This,
-            /* [out] */ __RPC__out GUID *pGUID);
+            /* [annotation][out] */ 
+            _Out_  GUID *pGUID);
         
         DECLSPEC_XFGVIRT(IErrorInfo, GetSource)
         HRESULT ( STDMETHODCALLTYPE *GetSource )( 
             __RPC__in IErrorInfo * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pBstrSource);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pBstrSource);
         
         DECLSPEC_XFGVIRT(IErrorInfo, GetDescription)
         HRESULT ( STDMETHODCALLTYPE *GetDescription )( 
             __RPC__in IErrorInfo * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pBstrDescription);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pBstrDescription);
         
         DECLSPEC_XFGVIRT(IErrorInfo, GetHelpFile)
         HRESULT ( STDMETHODCALLTYPE *GetHelpFile )( 
             __RPC__in IErrorInfo * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pBstrHelpFile);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pBstrHelpFile);
         
         DECLSPEC_XFGVIRT(IErrorInfo, GetHelpContext)
         HRESULT ( STDMETHODCALLTYPE *GetHelpContext )( 
             __RPC__in IErrorInfo * This,
-            /* [out] */ __RPC__out DWORD *pdwHelpContext);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHelpContext);
         
         END_INTERFACE
     } IErrorInfoVtbl;
@@ -4721,19 +5312,24 @@ EXTERN_C const IID IID_ICreateErrorInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetGUID( 
-            /* [in] */ __RPC__in REFGUID rguid) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID rguid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSource( 
-            /* [in] */ __RPC__in LPOLESTR szSource) = 0;
+            /* [annotation][in] */ 
+            _In_  LPOLESTR szSource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDescription( 
-            /* [in] */ __RPC__in LPOLESTR szDescription) = 0;
+            /* [annotation][in] */ 
+            _In_  LPOLESTR szDescription) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetHelpFile( 
-            /* [in] */ __RPC__in LPOLESTR szHelpFile) = 0;
+            /* [annotation][in] */ 
+            _In_  LPOLESTR szHelpFile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetHelpContext( 
-            /* [in] */ DWORD dwHelpContext) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwHelpContext) = 0;
         
     };
     
@@ -4747,7 +5343,8 @@ EXTERN_C const IID IID_ICreateErrorInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICreateErrorInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4762,27 +5359,32 @@ EXTERN_C const IID IID_ICreateErrorInfo;
         DECLSPEC_XFGVIRT(ICreateErrorInfo, SetGUID)
         HRESULT ( STDMETHODCALLTYPE *SetGUID )( 
             __RPC__in ICreateErrorInfo * This,
-            /* [in] */ __RPC__in REFGUID rguid);
+            /* [annotation][in] */ 
+            _In_  REFGUID rguid);
         
         DECLSPEC_XFGVIRT(ICreateErrorInfo, SetSource)
         HRESULT ( STDMETHODCALLTYPE *SetSource )( 
             __RPC__in ICreateErrorInfo * This,
-            /* [in] */ __RPC__in LPOLESTR szSource);
+            /* [annotation][in] */ 
+            _In_  LPOLESTR szSource);
         
         DECLSPEC_XFGVIRT(ICreateErrorInfo, SetDescription)
         HRESULT ( STDMETHODCALLTYPE *SetDescription )( 
             __RPC__in ICreateErrorInfo * This,
-            /* [in] */ __RPC__in LPOLESTR szDescription);
+            /* [annotation][in] */ 
+            _In_  LPOLESTR szDescription);
         
         DECLSPEC_XFGVIRT(ICreateErrorInfo, SetHelpFile)
         HRESULT ( STDMETHODCALLTYPE *SetHelpFile )( 
             __RPC__in ICreateErrorInfo * This,
-            /* [in] */ __RPC__in LPOLESTR szHelpFile);
+            /* [annotation][in] */ 
+            _In_  LPOLESTR szHelpFile);
         
         DECLSPEC_XFGVIRT(ICreateErrorInfo, SetHelpContext)
         HRESULT ( STDMETHODCALLTYPE *SetHelpContext )( 
             __RPC__in ICreateErrorInfo * This,
-            /* [in] */ DWORD dwHelpContext);
+            /* [annotation][in] */ 
+            _In_  DWORD dwHelpContext);
         
         END_INTERFACE
     } ICreateErrorInfoVtbl;
@@ -4851,7 +5453,8 @@ EXTERN_C const IID IID_ISupportErrorInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE InterfaceSupportsErrorInfo( 
-            /* [in] */ __RPC__in REFIID riid) = 0;
+            /* [annotation][in] */ 
+            _In_  REFIID riid) = 0;
         
     };
     
@@ -4865,7 +5468,8 @@ EXTERN_C const IID IID_ISupportErrorInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISupportErrorInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4880,7 +5484,8 @@ EXTERN_C const IID IID_ISupportErrorInfo;
         DECLSPEC_XFGVIRT(ISupportErrorInfo, InterfaceSupportsErrorInfo)
         HRESULT ( STDMETHODCALLTYPE *InterfaceSupportsErrorInfo )( 
             __RPC__in ISupportErrorInfo * This,
-            /* [in] */ __RPC__in REFIID riid);
+            /* [annotation][in] */ 
+            _In_  REFIID riid);
         
         END_INTERFACE
     } ISupportErrorInfoVtbl;
@@ -4935,9 +5540,12 @@ EXTERN_C const IID IID_ITypeFactory;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateFromTypeInfo( 
-            /* [in] */ __RPC__in_opt ITypeInfo *pTypeInfo,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  ITypeInfo *pTypeInfo,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  IUnknown **ppv) = 0;
         
     };
     
@@ -4951,7 +5559,8 @@ EXTERN_C const IID IID_ITypeFactory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITypeFactory * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4966,9 +5575,12 @@ EXTERN_C const IID IID_ITypeFactory;
         DECLSPEC_XFGVIRT(ITypeFactory, CreateFromTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *CreateFromTypeInfo )( 
             __RPC__in ITypeFactory * This,
-            /* [in] */ __RPC__in_opt ITypeInfo *pTypeInfo,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppv);
+            /* [annotation][in] */ 
+            _In_  ITypeInfo *pTypeInfo,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  IUnknown **ppv);
         
         END_INTERFACE
     } ITypeFactoryVtbl;
@@ -5023,32 +5635,44 @@ EXTERN_C const IID IID_ITypeMarshal;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Size( 
-            /* [in] */ PVOID pvType,
-            /* [in] */ DWORD dwDestContext,
-            /* [in] */ PVOID pvDestContext,
-            /* [out] */ ULONG *pSize) = 0;
+            /* [annotation][in] */ 
+            _In_  PVOID pvType,
+            /* [annotation][in] */ 
+            _In_  DWORD dwDestContext,
+            /* [annotation][in] */ 
+            _In_  PVOID pvDestContext,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Marshal( 
-            /* [in] */ PVOID pvType,
-            /* [in] */ DWORD dwDestContext,
-            /* [in] */ PVOID pvDestContext,
-            /* [in] */ ULONG cbBufferLength,
+            /* [annotation][in] */ 
+            _In_  PVOID pvType,
+            /* [annotation][in] */ 
+            _In_  DWORD dwDestContext,
+            /* [annotation][in] */ 
+            _In_  PVOID pvDestContext,
+            /* [annotation][in] */ 
+            _In_  ULONG cbBufferLength,
             /* [annotation][out] */ 
             _Out_writes_bytes_to_(cbBufferLength, *pcbWritten)  BYTE *pBuffer,
             /* [annotation][out] */ 
             _Out_  ULONG *pcbWritten) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Unmarshal( 
-            /* [out] */ PVOID pvType,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ ULONG cbBufferLength,
+            /* [annotation][out] */ 
+            _Out_  PVOID pvType,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  ULONG cbBufferLength,
             /* [annotation][in] */ 
             _In_reads_(cbBufferLength)  BYTE *pBuffer,
             /* [annotation][out] */ 
             _Out_  ULONG *pcbRead) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Free( 
-            /* [in] */ PVOID pvType) = 0;
+            /* [annotation][in] */ 
+            _In_  PVOID pvType) = 0;
         
     };
     
@@ -5062,7 +5686,8 @@ EXTERN_C const IID IID_ITypeMarshal;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITypeMarshal * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5077,18 +5702,26 @@ EXTERN_C const IID IID_ITypeMarshal;
         DECLSPEC_XFGVIRT(ITypeMarshal, Size)
         HRESULT ( STDMETHODCALLTYPE *Size )( 
             ITypeMarshal * This,
-            /* [in] */ PVOID pvType,
-            /* [in] */ DWORD dwDestContext,
-            /* [in] */ PVOID pvDestContext,
-            /* [out] */ ULONG *pSize);
+            /* [annotation][in] */ 
+            _In_  PVOID pvType,
+            /* [annotation][in] */ 
+            _In_  DWORD dwDestContext,
+            /* [annotation][in] */ 
+            _In_  PVOID pvDestContext,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pSize);
         
         DECLSPEC_XFGVIRT(ITypeMarshal, Marshal)
         HRESULT ( STDMETHODCALLTYPE *Marshal )( 
             ITypeMarshal * This,
-            /* [in] */ PVOID pvType,
-            /* [in] */ DWORD dwDestContext,
-            /* [in] */ PVOID pvDestContext,
-            /* [in] */ ULONG cbBufferLength,
+            /* [annotation][in] */ 
+            _In_  PVOID pvType,
+            /* [annotation][in] */ 
+            _In_  DWORD dwDestContext,
+            /* [annotation][in] */ 
+            _In_  PVOID pvDestContext,
+            /* [annotation][in] */ 
+            _In_  ULONG cbBufferLength,
             /* [annotation][out] */ 
             _Out_writes_bytes_to_(cbBufferLength, *pcbWritten)  BYTE *pBuffer,
             /* [annotation][out] */ 
@@ -5097,9 +5730,12 @@ EXTERN_C const IID IID_ITypeMarshal;
         DECLSPEC_XFGVIRT(ITypeMarshal, Unmarshal)
         HRESULT ( STDMETHODCALLTYPE *Unmarshal )( 
             ITypeMarshal * This,
-            /* [out] */ PVOID pvType,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ ULONG cbBufferLength,
+            /* [annotation][out] */ 
+            _Out_  PVOID pvType,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  ULONG cbBufferLength,
             /* [annotation][in] */ 
             _In_reads_(cbBufferLength)  BYTE *pBuffer,
             /* [annotation][out] */ 
@@ -5108,7 +5744,8 @@ EXTERN_C const IID IID_ITypeMarshal;
         DECLSPEC_XFGVIRT(ITypeMarshal, Free)
         HRESULT ( STDMETHODCALLTYPE *Free )( 
             ITypeMarshal * This,
-            /* [in] */ PVOID pvType);
+            /* [annotation][in] */ 
+            _In_  PVOID pvType);
         
         END_INTERFACE
     } ITypeMarshalVtbl;
@@ -5174,67 +5811,94 @@ EXTERN_C const IID IID_IRecordInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RecordInit( 
-            /* [out] */ PVOID pvNew) = 0;
+            /* [annotation][out] */ 
+            _Out_  PVOID pvNew) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RecordClear( 
-            /* [in] */ PVOID pvExisting) = 0;
+            /* [annotation][in] */ 
+            _In_  PVOID pvExisting) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RecordCopy( 
-            /* [in] */ PVOID pvExisting,
-            /* [out] */ PVOID pvNew) = 0;
+            /* [annotation][in] */ 
+            _In_  PVOID pvExisting,
+            /* [annotation][out] */ 
+            _Out_  PVOID pvNew) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGuid( 
-            /* [out] */ GUID *pguid) = 0;
+            /* [annotation][out] */ 
+            _Out_  GUID *pguid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetName( 
             /* [annotation][out] */ 
             __RPC__deref_out_opt  BSTR *pbstrName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSize( 
-            /* [out] */ ULONG *pcbSize) = 0;
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTypeInfo( 
-            /* [out] */ ITypeInfo **ppTypeInfo) = 0;
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTypeInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetField( 
-            /* [in] */ PVOID pvData,
-            /* [in] */ LPCOLESTR szFieldName,
-            /* [out] */ VARIANT *pvarField) = 0;
+            /* [annotation][in] */ 
+            _In_  PVOID pvData,
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR szFieldName,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pvarField) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFieldNoCopy( 
-            /* [in] */ PVOID pvData,
-            /* [in] */ LPCOLESTR szFieldName,
-            /* [out] */ VARIANT *pvarField,
-            /* [out] */ PVOID *ppvDataCArray) = 0;
+            /* [annotation][in] */ 
+            _In_  PVOID pvData,
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR szFieldName,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pvarField,
+            /* [annotation][out] */ 
+            _Out_  PVOID *ppvDataCArray) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PutField( 
-            /* [in] */ ULONG wFlags,
-            /* [out][in] */ PVOID pvData,
-            /* [in] */ LPCOLESTR szFieldName,
-            /* [in] */ VARIANT *pvarField) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG wFlags,
+            /* [annotation][out][in] */ 
+            _Inout_  PVOID pvData,
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR szFieldName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pvarField) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PutFieldNoCopy( 
-            /* [in] */ ULONG wFlags,
-            /* [out][in] */ PVOID pvData,
-            /* [in] */ LPCOLESTR szFieldName,
-            /* [in] */ VARIANT *pvarField) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG wFlags,
+            /* [annotation][out][in] */ 
+            _Inout_  PVOID pvData,
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR szFieldName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pvarField) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFieldNames( 
-            /* [out][in] */ ULONG *pcNames,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *pcNames,
             /* [annotation][length_is][size_is][out] */ 
             __RPC__out_ecount_part(*pcNames, *pcNames)  BSTR *rgBstrNames) = 0;
         
         virtual BOOL STDMETHODCALLTYPE IsMatchingType( 
-            /* [in] */ IRecordInfo *pRecordInfo) = 0;
+            /* [annotation][in] */ 
+            _In_  IRecordInfo *pRecordInfo) = 0;
         
         virtual PVOID STDMETHODCALLTYPE RecordCreate( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RecordCreateCopy( 
-            /* [in] */ PVOID pvSource,
-            /* [out] */ PVOID *ppvDest) = 0;
+            /* [annotation][in] */ 
+            _In_  PVOID pvSource,
+            /* [annotation][out] */ 
+            _Out_  PVOID *ppvDest) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RecordDestroy( 
-            /* [in] */ PVOID pvRecord) = 0;
+            /* [annotation][in] */ 
+            _In_  PVOID pvRecord) = 0;
         
     };
     
@@ -5248,7 +5912,8 @@ EXTERN_C const IID IID_IRecordInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRecordInfo * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5263,23 +5928,28 @@ EXTERN_C const IID IID_IRecordInfo;
         DECLSPEC_XFGVIRT(IRecordInfo, RecordInit)
         HRESULT ( STDMETHODCALLTYPE *RecordInit )( 
             IRecordInfo * This,
-            /* [out] */ PVOID pvNew);
+            /* [annotation][out] */ 
+            _Out_  PVOID pvNew);
         
         DECLSPEC_XFGVIRT(IRecordInfo, RecordClear)
         HRESULT ( STDMETHODCALLTYPE *RecordClear )( 
             IRecordInfo * This,
-            /* [in] */ PVOID pvExisting);
+            /* [annotation][in] */ 
+            _In_  PVOID pvExisting);
         
         DECLSPEC_XFGVIRT(IRecordInfo, RecordCopy)
         HRESULT ( STDMETHODCALLTYPE *RecordCopy )( 
             IRecordInfo * This,
-            /* [in] */ PVOID pvExisting,
-            /* [out] */ PVOID pvNew);
+            /* [annotation][in] */ 
+            _In_  PVOID pvExisting,
+            /* [annotation][out] */ 
+            _Out_  PVOID pvNew);
         
         DECLSPEC_XFGVIRT(IRecordInfo, GetGuid)
         HRESULT ( STDMETHODCALLTYPE *GetGuid )( 
             IRecordInfo * This,
-            /* [out] */ GUID *pguid);
+            /* [annotation][out] */ 
+            _Out_  GUID *pguid);
         
         DECLSPEC_XFGVIRT(IRecordInfo, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
@@ -5290,55 +5960,74 @@ EXTERN_C const IID IID_IRecordInfo;
         DECLSPEC_XFGVIRT(IRecordInfo, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             IRecordInfo * This,
-            /* [out] */ ULONG *pcbSize);
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbSize);
         
         DECLSPEC_XFGVIRT(IRecordInfo, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IRecordInfo * This,
-            /* [out] */ ITypeInfo **ppTypeInfo);
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTypeInfo);
         
         DECLSPEC_XFGVIRT(IRecordInfo, GetField)
         HRESULT ( STDMETHODCALLTYPE *GetField )( 
             IRecordInfo * This,
-            /* [in] */ PVOID pvData,
-            /* [in] */ LPCOLESTR szFieldName,
-            /* [out] */ VARIANT *pvarField);
+            /* [annotation][in] */ 
+            _In_  PVOID pvData,
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR szFieldName,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pvarField);
         
         DECLSPEC_XFGVIRT(IRecordInfo, GetFieldNoCopy)
         HRESULT ( STDMETHODCALLTYPE *GetFieldNoCopy )( 
             IRecordInfo * This,
-            /* [in] */ PVOID pvData,
-            /* [in] */ LPCOLESTR szFieldName,
-            /* [out] */ VARIANT *pvarField,
-            /* [out] */ PVOID *ppvDataCArray);
+            /* [annotation][in] */ 
+            _In_  PVOID pvData,
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR szFieldName,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pvarField,
+            /* [annotation][out] */ 
+            _Out_  PVOID *ppvDataCArray);
         
         DECLSPEC_XFGVIRT(IRecordInfo, PutField)
         HRESULT ( STDMETHODCALLTYPE *PutField )( 
             IRecordInfo * This,
-            /* [in] */ ULONG wFlags,
-            /* [out][in] */ PVOID pvData,
-            /* [in] */ LPCOLESTR szFieldName,
-            /* [in] */ VARIANT *pvarField);
+            /* [annotation][in] */ 
+            _In_  ULONG wFlags,
+            /* [annotation][out][in] */ 
+            _Inout_  PVOID pvData,
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR szFieldName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pvarField);
         
         DECLSPEC_XFGVIRT(IRecordInfo, PutFieldNoCopy)
         HRESULT ( STDMETHODCALLTYPE *PutFieldNoCopy )( 
             IRecordInfo * This,
-            /* [in] */ ULONG wFlags,
-            /* [out][in] */ PVOID pvData,
-            /* [in] */ LPCOLESTR szFieldName,
-            /* [in] */ VARIANT *pvarField);
+            /* [annotation][in] */ 
+            _In_  ULONG wFlags,
+            /* [annotation][out][in] */ 
+            _Inout_  PVOID pvData,
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR szFieldName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pvarField);
         
         DECLSPEC_XFGVIRT(IRecordInfo, GetFieldNames)
         HRESULT ( STDMETHODCALLTYPE *GetFieldNames )( 
             IRecordInfo * This,
-            /* [out][in] */ ULONG *pcNames,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *pcNames,
             /* [annotation][length_is][size_is][out] */ 
             __RPC__out_ecount_part(*pcNames, *pcNames)  BSTR *rgBstrNames);
         
         DECLSPEC_XFGVIRT(IRecordInfo, IsMatchingType)
         BOOL ( STDMETHODCALLTYPE *IsMatchingType )( 
             IRecordInfo * This,
-            /* [in] */ IRecordInfo *pRecordInfo);
+            /* [annotation][in] */ 
+            _In_  IRecordInfo *pRecordInfo);
         
         DECLSPEC_XFGVIRT(IRecordInfo, RecordCreate)
         PVOID ( STDMETHODCALLTYPE *RecordCreate )( 
@@ -5347,13 +6036,16 @@ EXTERN_C const IID IID_IRecordInfo;
         DECLSPEC_XFGVIRT(IRecordInfo, RecordCreateCopy)
         HRESULT ( STDMETHODCALLTYPE *RecordCreateCopy )( 
             IRecordInfo * This,
-            /* [in] */ PVOID pvSource,
-            /* [out] */ PVOID *ppvDest);
+            /* [annotation][in] */ 
+            _In_  PVOID pvSource,
+            /* [annotation][out] */ 
+            _Out_  PVOID *ppvDest);
         
         DECLSPEC_XFGVIRT(IRecordInfo, RecordDestroy)
         HRESULT ( STDMETHODCALLTYPE *RecordDestroy )( 
             IRecordInfo * This,
-            /* [in] */ PVOID pvRecord);
+            /* [annotation][in] */ 
+            _In_  PVOID pvRecord);
         
         END_INTERFACE
     } IRecordInfoVtbl;
@@ -5455,8 +6147,10 @@ EXTERN_C const IID IID_IErrorLog;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddError( 
-            /* [in] */ __RPC__in LPCOLESTR pszPropName,
-            /* [in] */ __RPC__in EXCEPINFO *pExcepInfo) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pszPropName,
+            /* [annotation][in] */ 
+            _In_  EXCEPINFO *pExcepInfo) = 0;
         
     };
     
@@ -5470,7 +6164,8 @@ EXTERN_C const IID IID_IErrorLog;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IErrorLog * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5485,8 +6180,10 @@ EXTERN_C const IID IID_IErrorLog;
         DECLSPEC_XFGVIRT(IErrorLog, AddError)
         HRESULT ( STDMETHODCALLTYPE *AddError )( 
             __RPC__in IErrorLog * This,
-            /* [in] */ __RPC__in LPCOLESTR pszPropName,
-            /* [in] */ __RPC__in EXCEPINFO *pExcepInfo);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pszPropName,
+            /* [annotation][in] */ 
+            _In_  EXCEPINFO *pExcepInfo);
         
         END_INTERFACE
     } IErrorLogVtbl;
@@ -5543,13 +6240,18 @@ EXTERN_C const IID IID_IPropertyBag;
     {
     public:
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Read( 
-            /* [in] */ LPCOLESTR pszPropName,
-            /* [out][in] */ VARIANT *pVar,
-            /* [unique][in] */ IErrorLog *pErrorLog) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pszPropName,
+            /* [annotation][out][in] */ 
+            _Inout_  VARIANT *pVar,
+            /* [annotation][unique][in] */ 
+            _In_  IErrorLog *pErrorLog) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Write( 
-            /* [in] */ __RPC__in LPCOLESTR pszPropName,
-            /* [in] */ __RPC__in VARIANT *pVar) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pszPropName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVar) = 0;
         
     };
     
@@ -5563,7 +6265,8 @@ EXTERN_C const IID IID_IPropertyBag;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPropertyBag * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5578,15 +6281,20 @@ EXTERN_C const IID IID_IPropertyBag;
         DECLSPEC_XFGVIRT(IPropertyBag, Read)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             IPropertyBag * This,
-            /* [in] */ LPCOLESTR pszPropName,
-            /* [out][in] */ VARIANT *pVar,
-            /* [unique][in] */ IErrorLog *pErrorLog);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pszPropName,
+            /* [annotation][out][in] */ 
+            _Inout_  VARIANT *pVar,
+            /* [annotation][unique][in] */ 
+            _In_  IErrorLog *pErrorLog);
         
         DECLSPEC_XFGVIRT(IPropertyBag, Write)
         HRESULT ( STDMETHODCALLTYPE *Write )( 
             __RPC__in IPropertyBag * This,
-            /* [in] */ __RPC__in LPCOLESTR pszPropName,
-            /* [in] */ __RPC__in VARIANT *pVar);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pszPropName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVar);
         
         END_INTERFACE
     } IPropertyBagVtbl;
@@ -5626,11 +6334,16 @@ EXTERN_C const IID IID_IPropertyBag;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IPropertyBag_RemoteRead_Proxy( 
     __RPC__in IPropertyBag * This,
-    /* [in] */ __RPC__in LPCOLESTR pszPropName,
-    /* [out] */ __RPC__out VARIANT *pVar,
-    /* [unique][in] */ __RPC__in_opt IErrorLog *pErrorLog,
-    /* [in] */ DWORD varType,
-    /* [in] */ __RPC__in_opt IUnknown *pUnkObj);
+    /* [annotation][in] */ 
+    _In_  LPCOLESTR pszPropName,
+    /* [annotation][out] */ 
+    _Out_  VARIANT *pVar,
+    /* [annotation][unique][in] */ 
+    _In_  IErrorLog *pErrorLog,
+    /* [annotation][in] */ 
+    _In_  DWORD varType,
+    /* [annotation][in] */ 
+    _In_  IUnknown *pUnkObj);
 
 
 void __RPC_STUB IPropertyBag_RemoteRead_Stub(
@@ -5660,7 +6373,8 @@ EXTERN_C const IID IID_ITypeLibRegistrationReader;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE EnumTypeLibRegistrations( 
-            /* [out] */ IEnumUnknown **ppEnumUnknown) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumUnknown **ppEnumUnknown) = 0;
         
     };
     
@@ -5674,7 +6388,8 @@ EXTERN_C const IID IID_ITypeLibRegistrationReader;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITypeLibRegistrationReader * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5689,7 +6404,8 @@ EXTERN_C const IID IID_ITypeLibRegistrationReader;
         DECLSPEC_XFGVIRT(ITypeLibRegistrationReader, EnumTypeLibRegistrations)
         HRESULT ( STDMETHODCALLTYPE *EnumTypeLibRegistrations )( 
             ITypeLibRegistrationReader * This,
-            /* [out] */ IEnumUnknown **ppEnumUnknown);
+            /* [annotation][out] */ 
+            _Out_  IEnumUnknown **ppEnumUnknown);
         
         END_INTERFACE
     } ITypeLibRegistrationReaderVtbl;
@@ -5744,28 +6460,36 @@ EXTERN_C const IID IID_ITypeLibRegistration;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetGuid( 
-            /* [out] */ GUID *pGuid) = 0;
+            /* [annotation][out] */ 
+            _Out_  GUID *pGuid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersion( 
-            /* [out] */ BSTR *pVersion) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pVersion) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLcid( 
-            /* [out] */ LCID *pLcid) = 0;
+            /* [annotation][out] */ 
+            _Out_  LCID *pLcid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetWin32Path( 
-            /* [out] */ BSTR *pWin32Path) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pWin32Path) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetWin64Path( 
-            /* [out] */ BSTR *pWin64Path) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pWin64Path) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDisplayName( 
-            /* [out] */ BSTR *pDisplayName) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pDisplayName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFlags( 
-            /* [out] */ DWORD *pFlags) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetHelpDir( 
-            /* [out] */ BSTR *pHelpDir) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pHelpDir) = 0;
         
     };
     
@@ -5779,7 +6503,8 @@ EXTERN_C const IID IID_ITypeLibRegistration;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITypeLibRegistration * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5794,42 +6519,50 @@ EXTERN_C const IID IID_ITypeLibRegistration;
         DECLSPEC_XFGVIRT(ITypeLibRegistration, GetGuid)
         HRESULT ( STDMETHODCALLTYPE *GetGuid )( 
             ITypeLibRegistration * This,
-            /* [out] */ GUID *pGuid);
+            /* [annotation][out] */ 
+            _Out_  GUID *pGuid);
         
         DECLSPEC_XFGVIRT(ITypeLibRegistration, GetVersion)
         HRESULT ( STDMETHODCALLTYPE *GetVersion )( 
             ITypeLibRegistration * This,
-            /* [out] */ BSTR *pVersion);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pVersion);
         
         DECLSPEC_XFGVIRT(ITypeLibRegistration, GetLcid)
         HRESULT ( STDMETHODCALLTYPE *GetLcid )( 
             ITypeLibRegistration * This,
-            /* [out] */ LCID *pLcid);
+            /* [annotation][out] */ 
+            _Out_  LCID *pLcid);
         
         DECLSPEC_XFGVIRT(ITypeLibRegistration, GetWin32Path)
         HRESULT ( STDMETHODCALLTYPE *GetWin32Path )( 
             ITypeLibRegistration * This,
-            /* [out] */ BSTR *pWin32Path);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pWin32Path);
         
         DECLSPEC_XFGVIRT(ITypeLibRegistration, GetWin64Path)
         HRESULT ( STDMETHODCALLTYPE *GetWin64Path )( 
             ITypeLibRegistration * This,
-            /* [out] */ BSTR *pWin64Path);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pWin64Path);
         
         DECLSPEC_XFGVIRT(ITypeLibRegistration, GetDisplayName)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayName )( 
             ITypeLibRegistration * This,
-            /* [out] */ BSTR *pDisplayName);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pDisplayName);
         
         DECLSPEC_XFGVIRT(ITypeLibRegistration, GetFlags)
         HRESULT ( STDMETHODCALLTYPE *GetFlags )( 
             ITypeLibRegistration * This,
-            /* [out] */ DWORD *pFlags);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pFlags);
         
         DECLSPEC_XFGVIRT(ITypeLibRegistration, GetHelpDir)
         HRESULT ( STDMETHODCALLTYPE *GetHelpDir )( 
             ITypeLibRegistration * This,
-            /* [out] */ BSTR *pHelpDir);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pHelpDir);
         
         END_INTERFACE
     } ITypeLibRegistrationVtbl;
@@ -5961,126 +6694,184 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IDispatch_Invoke_Stub( 
     __RPC__in IDispatch * This,
-    /* [in] */ DISPID dispIdMember,
-    /* [in] */ __RPC__in REFIID riid,
-    /* [in] */ LCID lcid,
-    /* [in] */ DWORD dwFlags,
-    /* [in] */ __RPC__in DISPPARAMS *pDispParams,
-    /* [out] */ __RPC__out VARIANT *pVarResult,
-    /* [out] */ __RPC__out EXCEPINFO *pExcepInfo,
-    /* [out] */ __RPC__out UINT *pArgErr,
-    /* [in] */ UINT cVarRef,
-    /* [size_is][in] */ __RPC__in_ecount_full(cVarRef) UINT *rgVarRefIdx,
-    /* [size_is][out][in] */ __RPC__inout_ecount_full(cVarRef) VARIANTARG *rgVarRef);
+    /* [annotation][in] */ 
+    _In_  DISPID dispIdMember,
+    /* [annotation][in] */ 
+    _In_  REFIID riid,
+    /* [annotation][in] */ 
+    _In_  LCID lcid,
+    /* [annotation][in] */ 
+    _In_  DWORD dwFlags,
+    /* [annotation][in] */ 
+    _In_  DISPPARAMS *pDispParams,
+    /* [annotation][out] */ 
+    _Out_  VARIANT *pVarResult,
+    /* [annotation][out] */ 
+    _Out_  EXCEPINFO *pExcepInfo,
+    /* [annotation][out] */ 
+    _Out_  UINT *pArgErr,
+    /* [annotation][in] */ 
+    _In_  UINT cVarRef,
+    /* [annotation][size_is][in] */ 
+    _In_reads_(cVarRef)  UINT *rgVarRefIdx,
+    /* [annotation][size_is][out][in] */ 
+    _Inout_updates_(cVarRef)  VARIANTARG *rgVarRef);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IEnumVARIANT_Next_Proxy( 
     IEnumVARIANT * This,
-    /* [in] */ ULONG celt,
-    /* [length_is][size_is][out] */ VARIANT *rgVar,
-    /* [out] */ ULONG *pCeltFetched);
+    /* [annotation][in] */ 
+    _In_  ULONG celt,
+    /* [annotation][length_is][size_is][out] */ 
+    _Out_writes_to_(celt,*pCeltFetched)  VARIANT *rgVar,
+    /* [annotation][out] */ 
+    _Out_  ULONG *pCeltFetched);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IEnumVARIANT_Next_Stub( 
     __RPC__in IEnumVARIANT * This,
-    /* [in] */ ULONG celt,
-    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pCeltFetched) VARIANT *rgVar,
-    /* [out] */ __RPC__out ULONG *pCeltFetched);
+    /* [annotation][in] */ 
+    _In_  ULONG celt,
+    /* [annotation][length_is][size_is][out] */ 
+    _Out_writes_to_(celt,*pCeltFetched)  VARIANT *rgVar,
+    /* [annotation][out] */ 
+    _Out_  ULONG *pCeltFetched);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ITypeComp_Bind_Proxy( 
     ITypeComp * This,
     /* [annotation][in] */ 
     __RPC__in  LPOLESTR szName,
-    /* [in] */ ULONG lHashVal,
-    /* [in] */ WORD wFlags,
-    /* [out] */ ITypeInfo **ppTInfo,
-    /* [out] */ DESCKIND *pDescKind,
-    /* [out] */ BINDPTR *pBindPtr);
+    /* [annotation][in] */ 
+    _In_  ULONG lHashVal,
+    /* [annotation][in] */ 
+    _In_  WORD wFlags,
+    /* [annotation][out] */ 
+    _Out_  ITypeInfo **ppTInfo,
+    /* [annotation][out] */ 
+    _Out_  DESCKIND *pDescKind,
+    /* [annotation][out] */ 
+    _Out_  BINDPTR *pBindPtr);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeComp_Bind_Stub( 
     __RPC__in ITypeComp * This,
-    /* [in] */ __RPC__in LPOLESTR szName,
-    /* [in] */ ULONG lHashVal,
-    /* [in] */ WORD wFlags,
-    /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo,
-    /* [out] */ __RPC__out DESCKIND *pDescKind,
-    /* [out] */ __RPC__deref_out_opt LPFUNCDESC *ppFuncDesc,
-    /* [out] */ __RPC__deref_out_opt LPVARDESC *ppVarDesc,
-    /* [out] */ __RPC__deref_out_opt ITypeComp **ppTypeComp,
-    /* [out] */ __RPC__out CLEANLOCALSTORAGE *pDummy);
+    /* [annotation][in] */ 
+    _In_  LPOLESTR szName,
+    /* [annotation][in] */ 
+    _In_  ULONG lHashVal,
+    /* [annotation][in] */ 
+    _In_  WORD wFlags,
+    /* [annotation][out] */ 
+    _Out_  ITypeInfo **ppTInfo,
+    /* [annotation][out] */ 
+    _Out_  DESCKIND *pDescKind,
+    /* [annotation][out] */ 
+    _Out_  LPFUNCDESC *ppFuncDesc,
+    /* [annotation][out] */ 
+    _Out_  LPVARDESC *ppVarDesc,
+    /* [annotation][out] */ 
+    _Out_  ITypeComp **ppTypeComp,
+    /* [annotation][out] */ 
+    _Out_  CLEANLOCALSTORAGE *pDummy);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ITypeComp_BindType_Proxy( 
     ITypeComp * This,
     /* [annotation][in] */ 
     __RPC__in  LPOLESTR szName,
-    /* [in] */ ULONG lHashVal,
-    /* [out] */ ITypeInfo **ppTInfo,
-    /* [out] */ ITypeComp **ppTComp);
+    /* [annotation][in] */ 
+    _In_  ULONG lHashVal,
+    /* [annotation][out] */ 
+    _Out_  ITypeInfo **ppTInfo,
+    /* [annotation][out] */ 
+    _Out_  ITypeComp **ppTComp);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeComp_BindType_Stub( 
     __RPC__in ITypeComp * This,
-    /* [in] */ __RPC__in LPOLESTR szName,
-    /* [in] */ ULONG lHashVal,
-    /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+    /* [annotation][in] */ 
+    _In_  LPOLESTR szName,
+    /* [annotation][in] */ 
+    _In_  ULONG lHashVal,
+    /* [annotation][out] */ 
+    _Out_  ITypeInfo **ppTInfo);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ITypeInfo_GetTypeAttr_Proxy( 
     ITypeInfo * This,
-    /* [out] */ TYPEATTR **ppTypeAttr);
+    /* [annotation][out] */ 
+    _Out_  TYPEATTR **ppTypeAttr);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo_GetTypeAttr_Stub( 
     __RPC__in ITypeInfo * This,
-    /* [out] */ __RPC__deref_out_opt LPTYPEATTR *ppTypeAttr,
-    /* [out] */ __RPC__out CLEANLOCALSTORAGE *pDummy);
+    /* [annotation][out] */ 
+    _Out_  LPTYPEATTR *ppTypeAttr,
+    /* [annotation][out] */ 
+    _Out_  CLEANLOCALSTORAGE *pDummy);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ITypeInfo_GetFuncDesc_Proxy( 
     ITypeInfo * This,
-    /* [in] */ UINT index,
-    /* [out] */ FUNCDESC **ppFuncDesc);
+    /* [annotation][in] */ 
+    _In_  UINT index,
+    /* [annotation][out] */ 
+    _Out_  FUNCDESC **ppFuncDesc);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo_GetFuncDesc_Stub( 
     __RPC__in ITypeInfo * This,
-    /* [in] */ UINT index,
-    /* [out] */ __RPC__deref_out_opt LPFUNCDESC *ppFuncDesc,
-    /* [out] */ __RPC__out CLEANLOCALSTORAGE *pDummy);
+    /* [annotation][in] */ 
+    _In_  UINT index,
+    /* [annotation][out] */ 
+    _Out_  LPFUNCDESC *ppFuncDesc,
+    /* [annotation][out] */ 
+    _Out_  CLEANLOCALSTORAGE *pDummy);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ITypeInfo_GetVarDesc_Proxy( 
     ITypeInfo * This,
-    /* [in] */ UINT index,
-    /* [out] */ VARDESC **ppVarDesc);
+    /* [annotation][in] */ 
+    _In_  UINT index,
+    /* [annotation][out] */ 
+    _Out_  VARDESC **ppVarDesc);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo_GetVarDesc_Stub( 
     __RPC__in ITypeInfo * This,
-    /* [in] */ UINT index,
-    /* [out] */ __RPC__deref_out_opt LPVARDESC *ppVarDesc,
-    /* [out] */ __RPC__out CLEANLOCALSTORAGE *pDummy);
+    /* [annotation][in] */ 
+    _In_  UINT index,
+    /* [annotation][out] */ 
+    _Out_  LPVARDESC *ppVarDesc,
+    /* [annotation][out] */ 
+    _Out_  CLEANLOCALSTORAGE *pDummy);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ITypeInfo_GetNames_Proxy( 
     ITypeInfo * This,
-    /* [in] */ MEMBERID memid,
+    /* [annotation][in] */ 
+    _In_  MEMBERID memid,
     /* [annotation][length_is][size_is][out] */ 
     __RPC__out_ecount_part(cMaxNames, *pcNames)  BSTR *rgBstrNames,
-    /* [in] */ UINT cMaxNames,
+    /* [annotation][in] */ 
+    _In_  UINT cMaxNames,
     /* [annotation][out] */ 
     __RPC__out  UINT *pcNames);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo_GetNames_Stub( 
     __RPC__in ITypeInfo * This,
-    /* [in] */ MEMBERID memid,
-    /* [length_is][size_is][out] */ __RPC__out_ecount_part(cMaxNames, *pcNames) BSTR *rgBstrNames,
-    /* [in] */ UINT cMaxNames,
-    /* [out] */ __RPC__out UINT *pcNames);
+    /* [annotation][in] */ 
+    _In_  MEMBERID memid,
+    /* [annotation][length_is][size_is][out] */ 
+    _Out_writes_to_(cMaxNames,*pcNames)  BSTR *rgBstrNames,
+    /* [annotation][in] */ 
+    _In_  UINT cMaxNames,
+    /* [annotation][out] */ 
+    _Out_  UINT *pcNames);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ITypeInfo_GetIDsOfNames_Proxy( 
     ITypeInfo * This,
     /* [annotation][size_is][in] */ 
     __RPC__in_ecount(cNames)  LPOLESTR *rgszNames,
-    /* [in] */ UINT cNames,
-    /* [size_is][out] */ MEMBERID *pMemId);
+    /* [annotation][in] */ 
+    _In_  UINT cNames,
+    /* [annotation][size_is][out] */ 
+    _Out_writes_(cNames)  MEMBERID *pMemId);
 
 
 /* [nocode][call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo_GetIDsOfNames_Stub( 
@@ -6088,13 +6879,20 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ITypeInfo_Invoke_Proxy( 
     ITypeInfo * This,
-    /* [in] */ PVOID pvInstance,
-    /* [in] */ MEMBERID memid,
-    /* [in] */ WORD wFlags,
-    /* [out][in] */ DISPPARAMS *pDispParams,
-    /* [out] */ VARIANT *pVarResult,
-    /* [out] */ EXCEPINFO *pExcepInfo,
-    /* [out] */ UINT *puArgErr);
+    /* [annotation][in] */ 
+    _In_  PVOID pvInstance,
+    /* [annotation][in] */ 
+    _In_  MEMBERID memid,
+    /* [annotation][in] */ 
+    _In_  WORD wFlags,
+    /* [annotation][out][in] */ 
+    _Inout_  DISPPARAMS *pDispParams,
+    /* [annotation][out] */ 
+    _Out_  VARIANT *pVarResult,
+    /* [annotation][out] */ 
+    _Out_  EXCEPINFO *pExcepInfo,
+    /* [annotation][out] */ 
+    _Out_  UINT *puArgErr);
 
 
 /* [nocode][call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo_Invoke_Stub( 
@@ -6102,50 +6900,70 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ITypeInfo_GetDocumentation_Proxy( 
     ITypeInfo * This,
-    /* [in] */ MEMBERID memid,
+    /* [annotation][in] */ 
+    _In_  MEMBERID memid,
     /* [annotation][out] */ 
     _Outptr_opt_  BSTR *pBstrName,
     /* [annotation][out] */ 
     _Outptr_opt_  BSTR *pBstrDocString,
-    /* [out] */ DWORD *pdwHelpContext,
+    /* [annotation][out] */ 
+    _Out_  DWORD *pdwHelpContext,
     /* [annotation][out] */ 
     _Outptr_opt_  BSTR *pBstrHelpFile);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo_GetDocumentation_Stub( 
     __RPC__in ITypeInfo * This,
-    /* [in] */ MEMBERID memid,
-    /* [in] */ DWORD refPtrFlags,
-    /* [out] */ __RPC__deref_out_opt BSTR *pBstrName,
-    /* [out] */ __RPC__deref_out_opt BSTR *pBstrDocString,
-    /* [out] */ __RPC__out DWORD *pdwHelpContext,
-    /* [out] */ __RPC__deref_out_opt BSTR *pBstrHelpFile);
+    /* [annotation][in] */ 
+    _In_  MEMBERID memid,
+    /* [annotation][in] */ 
+    _In_  DWORD refPtrFlags,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pBstrName,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pBstrDocString,
+    /* [annotation][out] */ 
+    _Out_  DWORD *pdwHelpContext,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pBstrHelpFile);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ITypeInfo_GetDllEntry_Proxy( 
     ITypeInfo * This,
-    /* [in] */ MEMBERID memid,
-    /* [in] */ INVOKEKIND invKind,
+    /* [annotation][in] */ 
+    _In_  MEMBERID memid,
+    /* [annotation][in] */ 
+    _In_  INVOKEKIND invKind,
     /* [annotation][out] */ 
     _Outptr_opt_  BSTR *pBstrDllName,
     /* [annotation][out] */ 
     _Outptr_opt_  BSTR *pBstrName,
-    /* [out] */ WORD *pwOrdinal);
+    /* [annotation][out] */ 
+    _Out_  WORD *pwOrdinal);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo_GetDllEntry_Stub( 
     __RPC__in ITypeInfo * This,
-    /* [in] */ MEMBERID memid,
-    /* [in] */ INVOKEKIND invKind,
-    /* [in] */ DWORD refPtrFlags,
-    /* [out] */ __RPC__deref_out_opt BSTR *pBstrDllName,
-    /* [out] */ __RPC__deref_out_opt BSTR *pBstrName,
-    /* [out] */ __RPC__out WORD *pwOrdinal);
+    /* [annotation][in] */ 
+    _In_  MEMBERID memid,
+    /* [annotation][in] */ 
+    _In_  INVOKEKIND invKind,
+    /* [annotation][in] */ 
+    _In_  DWORD refPtrFlags,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pBstrDllName,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pBstrName,
+    /* [annotation][out] */ 
+    _Out_  WORD *pwOrdinal);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ITypeInfo_AddressOfMember_Proxy( 
     ITypeInfo * This,
-    /* [in] */ MEMBERID memid,
-    /* [in] */ INVOKEKIND invKind,
-    /* [out] */ PVOID *ppv);
+    /* [annotation][in] */ 
+    _In_  MEMBERID memid,
+    /* [annotation][in] */ 
+    _In_  INVOKEKIND invKind,
+    /* [annotation][out] */ 
+    _Out_  PVOID *ppv);
 
 
 /* [nocode][call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo_AddressOfMember_Stub( 
@@ -6153,30 +6971,40 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ITypeInfo_CreateInstance_Proxy( 
     ITypeInfo * This,
-    /* [in] */ IUnknown *pUnkOuter,
-    /* [in] */ REFIID riid,
-    /* [iid_is][out] */ PVOID *ppvObj);
+    /* [annotation][in] */ 
+    _In_  IUnknown *pUnkOuter,
+    /* [annotation][in] */ 
+    _In_  REFIID riid,
+    /* [annotation][iid_is][out] */ 
+    _COM_Outptr_  PVOID *ppvObj);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo_CreateInstance_Stub( 
     __RPC__in ITypeInfo * This,
-    /* [in] */ __RPC__in REFIID riid,
-    /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppvObj);
+    /* [annotation][in] */ 
+    _In_  REFIID riid,
+    /* [annotation][iid_is][out] */ 
+    _COM_Outptr_  IUnknown **ppvObj);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ITypeInfo_GetContainingTypeLib_Proxy( 
     ITypeInfo * This,
-    /* [out] */ ITypeLib **ppTLib,
-    /* [out] */ UINT *pIndex);
+    /* [annotation][out] */ 
+    _Out_  ITypeLib **ppTLib,
+    /* [annotation][out] */ 
+    _Out_  UINT *pIndex);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo_GetContainingTypeLib_Stub( 
     __RPC__in ITypeInfo * This,
-    /* [out] */ __RPC__deref_out_opt ITypeLib **ppTLib,
-    /* [out] */ __RPC__out UINT *pIndex);
+    /* [annotation][out] */ 
+    _Out_  ITypeLib **ppTLib,
+    /* [annotation][out] */ 
+    _Out_  UINT *pIndex);
 
 /* [local] */ void STDMETHODCALLTYPE ITypeInfo_ReleaseTypeAttr_Proxy( 
     ITypeInfo * This,
-    /* [in] */ TYPEATTR *pTypeAttr);
+    /* [annotation][in] */ 
+    _In_  TYPEATTR *pTypeAttr);
 
 
 /* [nocode][call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo_ReleaseTypeAttr_Stub( 
@@ -6184,7 +7012,8 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
 
 /* [local] */ void STDMETHODCALLTYPE ITypeInfo_ReleaseFuncDesc_Proxy( 
     ITypeInfo * This,
-    /* [in] */ FUNCDESC *pFuncDesc);
+    /* [annotation][in] */ 
+    _In_  FUNCDESC *pFuncDesc);
 
 
 /* [nocode][call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo_ReleaseFuncDesc_Stub( 
@@ -6192,7 +7021,8 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
 
 /* [local] */ void STDMETHODCALLTYPE ITypeInfo_ReleaseVarDesc_Proxy( 
     ITypeInfo * This,
-    /* [in] */ VARDESC *pVarDesc);
+    /* [annotation][in] */ 
+    _In_  VARDESC *pVarDesc);
 
 
 /* [nocode][call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo_ReleaseVarDesc_Stub( 
@@ -6200,23 +7030,32 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ITypeInfo2_GetDocumentation2_Proxy( 
     ITypeInfo2 * This,
-    /* [in] */ MEMBERID memid,
-    /* [in] */ LCID lcid,
+    /* [annotation][in] */ 
+    _In_  MEMBERID memid,
+    /* [annotation][in] */ 
+    _In_  LCID lcid,
     /* [annotation][out] */ 
     _Outptr_opt_  BSTR *pbstrHelpString,
-    /* [out] */ DWORD *pdwHelpStringContext,
+    /* [annotation][out] */ 
+    _Out_  DWORD *pdwHelpStringContext,
     /* [annotation][out] */ 
     _Outptr_opt_  BSTR *pbstrHelpStringDll);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeInfo2_GetDocumentation2_Stub( 
     __RPC__in ITypeInfo2 * This,
-    /* [in] */ MEMBERID memid,
-    /* [in] */ LCID lcid,
-    /* [in] */ DWORD refPtrFlags,
-    /* [out] */ __RPC__deref_out_opt BSTR *pbstrHelpString,
-    /* [out] */ __RPC__out DWORD *pdwHelpStringContext,
-    /* [out] */ __RPC__deref_out_opt BSTR *pbstrHelpStringDll);
+    /* [annotation][in] */ 
+    _In_  MEMBERID memid,
+    /* [annotation][in] */ 
+    _In_  LCID lcid,
+    /* [annotation][in] */ 
+    _In_  DWORD refPtrFlags,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pbstrHelpString,
+    /* [annotation][out] */ 
+    _Out_  DWORD *pdwHelpStringContext,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pbstrHelpStringDll);
 
 /* [local] */ UINT STDMETHODCALLTYPE ITypeLib_GetTypeInfoCount_Proxy( 
     ITypeLib * This);
@@ -6224,76 +7063,105 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeLib_GetTypeInfoCount_Stub( 
     __RPC__in ITypeLib * This,
-    /* [out] */ __RPC__out UINT *pcTInfo);
+    /* [annotation][out] */ 
+    _Out_  UINT *pcTInfo);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ITypeLib_GetLibAttr_Proxy( 
     ITypeLib * This,
-    /* [out] */ TLIBATTR **ppTLibAttr);
+    /* [annotation][out] */ 
+    _Out_  TLIBATTR **ppTLibAttr);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeLib_GetLibAttr_Stub( 
     __RPC__in ITypeLib * This,
-    /* [out] */ __RPC__deref_out_opt LPTLIBATTR *ppTLibAttr,
-    /* [out] */ __RPC__out CLEANLOCALSTORAGE *pDummy);
+    /* [annotation][out] */ 
+    _Out_  LPTLIBATTR *ppTLibAttr,
+    /* [annotation][out] */ 
+    _Out_  CLEANLOCALSTORAGE *pDummy);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ITypeLib_GetDocumentation_Proxy( 
     ITypeLib * This,
-    /* [in] */ INT index,
+    /* [annotation][in] */ 
+    _In_  INT index,
     /* [annotation][out] */ 
     _Outptr_opt_  BSTR *pBstrName,
     /* [annotation][out] */ 
     _Outptr_opt_  BSTR *pBstrDocString,
-    /* [out] */ DWORD *pdwHelpContext,
+    /* [annotation][out] */ 
+    _Out_  DWORD *pdwHelpContext,
     /* [annotation][out] */ 
     _Outptr_opt_  BSTR *pBstrHelpFile);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeLib_GetDocumentation_Stub( 
     __RPC__in ITypeLib * This,
-    /* [in] */ INT index,
-    /* [in] */ DWORD refPtrFlags,
-    /* [out] */ __RPC__deref_out_opt BSTR *pBstrName,
-    /* [out] */ __RPC__deref_out_opt BSTR *pBstrDocString,
-    /* [out] */ __RPC__out DWORD *pdwHelpContext,
-    /* [out] */ __RPC__deref_out_opt BSTR *pBstrHelpFile);
+    /* [annotation][in] */ 
+    _In_  INT index,
+    /* [annotation][in] */ 
+    _In_  DWORD refPtrFlags,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pBstrName,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pBstrDocString,
+    /* [annotation][out] */ 
+    _Out_  DWORD *pdwHelpContext,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pBstrHelpFile);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ITypeLib_IsName_Proxy( 
     ITypeLib * This,
     /* [annotation][out][in] */ 
     __RPC__inout  LPOLESTR szNameBuf,
-    /* [in] */ ULONG lHashVal,
-    /* [out] */ BOOL *pfName);
+    /* [annotation][in] */ 
+    _In_  ULONG lHashVal,
+    /* [annotation][out] */ 
+    _Out_  BOOL *pfName);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeLib_IsName_Stub( 
     __RPC__in ITypeLib * This,
-    /* [in] */ __RPC__in LPOLESTR szNameBuf,
-    /* [in] */ ULONG lHashVal,
-    /* [out] */ __RPC__out BOOL *pfName,
-    /* [out] */ __RPC__deref_out_opt BSTR *pBstrLibName);
+    /* [annotation][in] */ 
+    _In_  LPOLESTR szNameBuf,
+    /* [annotation][in] */ 
+    _In_  ULONG lHashVal,
+    /* [annotation][out] */ 
+    _Out_  BOOL *pfName,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pBstrLibName);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ITypeLib_FindName_Proxy( 
     ITypeLib * This,
     /* [annotation][out][in] */ 
     __RPC__inout  LPOLESTR szNameBuf,
-    /* [in] */ ULONG lHashVal,
-    /* [length_is][size_is][out] */ ITypeInfo **ppTInfo,
-    /* [length_is][size_is][out] */ MEMBERID *rgMemId,
-    /* [out][in] */ USHORT *pcFound);
+    /* [annotation][in] */ 
+    _In_  ULONG lHashVal,
+    /* [annotation][length_is][size_is][out] */ 
+    _Out_writes_to_(*pcFound,*pcFound)  ITypeInfo **ppTInfo,
+    /* [annotation][length_is][size_is][out] */ 
+    _Out_writes_to_(*pcFound,*pcFound)  MEMBERID *rgMemId,
+    /* [annotation][out][in] */ 
+    _Inout_  USHORT *pcFound);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeLib_FindName_Stub( 
     __RPC__in ITypeLib * This,
-    /* [in] */ __RPC__in LPOLESTR szNameBuf,
-    /* [in] */ ULONG lHashVal,
-    /* [length_is][size_is][out] */ __RPC__out_ecount_part(*pcFound, *pcFound) ITypeInfo **ppTInfo,
-    /* [length_is][size_is][out] */ __RPC__out_ecount_part(*pcFound, *pcFound) MEMBERID *rgMemId,
-    /* [out][in] */ __RPC__inout USHORT *pcFound,
-    /* [out] */ __RPC__deref_out_opt BSTR *pBstrLibName);
+    /* [annotation][in] */ 
+    _In_  LPOLESTR szNameBuf,
+    /* [annotation][in] */ 
+    _In_  ULONG lHashVal,
+    /* [annotation][length_is][size_is][out] */ 
+    _Out_writes_to_(*pcFound,*pcFound)  ITypeInfo **ppTInfo,
+    /* [annotation][length_is][size_is][out] */ 
+    _Out_writes_to_(*pcFound,*pcFound)  MEMBERID *rgMemId,
+    /* [annotation][out][in] */ 
+    _Inout_  USHORT *pcFound,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pBstrLibName);
 
 /* [local] */ void STDMETHODCALLTYPE ITypeLib_ReleaseTLibAttr_Proxy( 
     ITypeLib * This,
-    /* [in] */ TLIBATTR *pTLibAttr);
+    /* [annotation][in] */ 
+    _In_  TLIBATTR *pTLibAttr);
 
 
 /* [nocode][call_as] */ HRESULT STDMETHODCALLTYPE ITypeLib_ReleaseTLibAttr_Stub( 
@@ -6301,49 +7169,70 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ITypeLib2_GetLibStatistics_Proxy( 
     ITypeLib2 * This,
-    /* [out] */ ULONG *pcUniqueNames,
-    /* [out] */ ULONG *pcchUniqueNames);
+    /* [annotation][out] */ 
+    _Out_  ULONG *pcUniqueNames,
+    /* [annotation][out] */ 
+    _Out_  ULONG *pcchUniqueNames);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeLib2_GetLibStatistics_Stub( 
     __RPC__in ITypeLib2 * This,
-    /* [out] */ __RPC__out ULONG *pcUniqueNames,
-    /* [out] */ __RPC__out ULONG *pcchUniqueNames);
+    /* [annotation][out] */ 
+    _Out_  ULONG *pcUniqueNames,
+    /* [annotation][out] */ 
+    _Out_  ULONG *pcchUniqueNames);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ITypeLib2_GetDocumentation2_Proxy( 
     ITypeLib2 * This,
-    /* [in] */ INT index,
-    /* [in] */ LCID lcid,
+    /* [annotation][in] */ 
+    _In_  INT index,
+    /* [annotation][in] */ 
+    _In_  LCID lcid,
     /* [annotation][out] */ 
     _Outptr_opt_  BSTR *pbstrHelpString,
-    /* [out] */ DWORD *pdwHelpStringContext,
+    /* [annotation][out] */ 
+    _Out_  DWORD *pdwHelpStringContext,
     /* [annotation][out] */ 
     _Outptr_opt_  BSTR *pbstrHelpStringDll);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ITypeLib2_GetDocumentation2_Stub( 
     __RPC__in ITypeLib2 * This,
-    /* [in] */ INT index,
-    /* [in] */ LCID lcid,
-    /* [in] */ DWORD refPtrFlags,
-    /* [out] */ __RPC__deref_out_opt BSTR *pbstrHelpString,
-    /* [out] */ __RPC__out DWORD *pdwHelpStringContext,
-    /* [out] */ __RPC__deref_out_opt BSTR *pbstrHelpStringDll);
+    /* [annotation][in] */ 
+    _In_  INT index,
+    /* [annotation][in] */ 
+    _In_  LCID lcid,
+    /* [annotation][in] */ 
+    _In_  DWORD refPtrFlags,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pbstrHelpString,
+    /* [annotation][out] */ 
+    _Out_  DWORD *pdwHelpStringContext,
+    /* [annotation][out] */ 
+    _Out_  BSTR *pbstrHelpStringDll);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IPropertyBag_Read_Proxy( 
     IPropertyBag * This,
-    /* [in] */ LPCOLESTR pszPropName,
-    /* [out][in] */ VARIANT *pVar,
-    /* [unique][in] */ IErrorLog *pErrorLog);
+    /* [annotation][in] */ 
+    _In_  LPCOLESTR pszPropName,
+    /* [annotation][out][in] */ 
+    _Inout_  VARIANT *pVar,
+    /* [annotation][unique][in] */ 
+    _In_  IErrorLog *pErrorLog);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IPropertyBag_Read_Stub( 
     __RPC__in IPropertyBag * This,
-    /* [in] */ __RPC__in LPCOLESTR pszPropName,
-    /* [out] */ __RPC__out VARIANT *pVar,
-    /* [unique][in] */ __RPC__in_opt IErrorLog *pErrorLog,
-    /* [in] */ DWORD varType,
-    /* [in] */ __RPC__in_opt IUnknown *pUnkObj);
+    /* [annotation][in] */ 
+    _In_  LPCOLESTR pszPropName,
+    /* [annotation][out] */ 
+    _Out_  VARIANT *pVar,
+    /* [annotation][unique][in] */ 
+    _In_  IErrorLog *pErrorLog,
+    /* [annotation][in] */ 
+    _In_  DWORD varType,
+    /* [annotation][in] */ 
+    _In_  IUnknown *pUnkObj);
 
 
 

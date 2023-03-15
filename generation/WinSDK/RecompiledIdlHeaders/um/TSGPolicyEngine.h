@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -184,15 +184,24 @@ EXTERN_C const IID IID_ITSGAuthorizeConnectionSink;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE OnConnectionAuthorized( 
-            /* [in] */ HRESULT hrIn,
-            /* [in] */ GUID mainSessionId,
-            /* [in] */ ULONG cbSoHResponse,
-            /* [size_is][in] */ __RPC__in_ecount_full(cbSoHResponse) BYTE *pbSoHResponse,
-            /* [in] */ ULONG idleTimeout,
-            /* [in] */ ULONG sessionTimeout,
-            /* [in] */ SESSION_TIMEOUT_ACTION_TYPE sessionTimeoutAction,
-            /* [in] */ AATrustClassID trustClass,
-            /* [in] */ __RPC__in_ecount_full(20) PolicyAttributes policyAttributes) = 0;
+            /* [annotation][in] */ 
+            _In_  HRESULT hrIn,
+            /* [annotation][in] */ 
+            _In_  GUID mainSessionId,
+            /* [annotation][in] */ 
+            _In_  ULONG cbSoHResponse,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbSoHResponse)  BYTE *pbSoHResponse,
+            /* [annotation][in] */ 
+            _In_  ULONG idleTimeout,
+            /* [annotation][in] */ 
+            _In_  ULONG sessionTimeout,
+            /* [annotation][in] */ 
+            _In_  SESSION_TIMEOUT_ACTION_TYPE sessionTimeoutAction,
+            /* [annotation][in] */ 
+            _In_  AATrustClassID trustClass,
+            /* [annotation][in] */ 
+            _In_  PolicyAttributes policyAttributes) = 0;
         
     };
     
@@ -206,7 +215,8 @@ EXTERN_C const IID IID_ITSGAuthorizeConnectionSink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITSGAuthorizeConnectionSink * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -221,15 +231,24 @@ EXTERN_C const IID IID_ITSGAuthorizeConnectionSink;
         DECLSPEC_XFGVIRT(ITSGAuthorizeConnectionSink, OnConnectionAuthorized)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnConnectionAuthorized )( 
             __RPC__in ITSGAuthorizeConnectionSink * This,
-            /* [in] */ HRESULT hrIn,
-            /* [in] */ GUID mainSessionId,
-            /* [in] */ ULONG cbSoHResponse,
-            /* [size_is][in] */ __RPC__in_ecount_full(cbSoHResponse) BYTE *pbSoHResponse,
-            /* [in] */ ULONG idleTimeout,
-            /* [in] */ ULONG sessionTimeout,
-            /* [in] */ SESSION_TIMEOUT_ACTION_TYPE sessionTimeoutAction,
-            /* [in] */ AATrustClassID trustClass,
-            /* [in] */ __RPC__in_ecount_full(20) PolicyAttributes policyAttributes);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrIn,
+            /* [annotation][in] */ 
+            _In_  GUID mainSessionId,
+            /* [annotation][in] */ 
+            _In_  ULONG cbSoHResponse,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbSoHResponse)  BYTE *pbSoHResponse,
+            /* [annotation][in] */ 
+            _In_  ULONG idleTimeout,
+            /* [annotation][in] */ 
+            _In_  ULONG sessionTimeout,
+            /* [annotation][in] */ 
+            _In_  SESSION_TIMEOUT_ACTION_TYPE sessionTimeoutAction,
+            /* [annotation][in] */ 
+            _In_  AATrustClassID trustClass,
+            /* [annotation][in] */ 
+            _In_  PolicyAttributes policyAttributes);
         
         END_INTERFACE
     } ITSGAuthorizeConnectionSinkVtbl;
@@ -284,13 +303,20 @@ EXTERN_C const IID IID_ITSGAuthorizeResourceSink;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE OnChannelAuthorized( 
-            /* [in] */ HRESULT hrIn,
-            /* [in] */ GUID mainSessionId,
-            /* [in] */ int subSessionId,
-            /* [size_is][in] */ __RPC__in_ecount_full(numAllowedResourceNames) BSTR *allowedResourceNames,
-            /* [in] */ ULONG numAllowedResourceNames,
-            /* [size_is][in] */ __RPC__in_ecount_full(numFailedResourceNames) BSTR *failedResourceNames,
-            /* [in] */ ULONG numFailedResourceNames) = 0;
+            /* [annotation][in] */ 
+            _In_  HRESULT hrIn,
+            /* [annotation][in] */ 
+            _In_  GUID mainSessionId,
+            /* [annotation][in] */ 
+            _In_  int subSessionId,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(numAllowedResourceNames)  BSTR *allowedResourceNames,
+            /* [annotation][in] */ 
+            _In_  ULONG numAllowedResourceNames,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(numFailedResourceNames)  BSTR *failedResourceNames,
+            /* [annotation][in] */ 
+            _In_  ULONG numFailedResourceNames) = 0;
         
     };
     
@@ -304,7 +330,8 @@ EXTERN_C const IID IID_ITSGAuthorizeResourceSink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITSGAuthorizeResourceSink * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -319,13 +346,20 @@ EXTERN_C const IID IID_ITSGAuthorizeResourceSink;
         DECLSPEC_XFGVIRT(ITSGAuthorizeResourceSink, OnChannelAuthorized)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnChannelAuthorized )( 
             __RPC__in ITSGAuthorizeResourceSink * This,
-            /* [in] */ HRESULT hrIn,
-            /* [in] */ GUID mainSessionId,
-            /* [in] */ int subSessionId,
-            /* [size_is][in] */ __RPC__in_ecount_full(numAllowedResourceNames) BSTR *allowedResourceNames,
-            /* [in] */ ULONG numAllowedResourceNames,
-            /* [size_is][in] */ __RPC__in_ecount_full(numFailedResourceNames) BSTR *failedResourceNames,
-            /* [in] */ ULONG numFailedResourceNames);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrIn,
+            /* [annotation][in] */ 
+            _In_  GUID mainSessionId,
+            /* [annotation][in] */ 
+            _In_  int subSessionId,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(numAllowedResourceNames)  BSTR *allowedResourceNames,
+            /* [annotation][in] */ 
+            _In_  ULONG numAllowedResourceNames,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(numFailedResourceNames)  BSTR *failedResourceNames,
+            /* [annotation][in] */ 
+            _In_  ULONG numFailedResourceNames);
         
         END_INTERFACE
     } ITSGAuthorizeResourceSinkVtbl;
@@ -380,36 +414,60 @@ EXTERN_C const IID IID_ITSGPolicyEngine;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AuthorizeConnection( 
-            /* [in] */ GUID mainSessionId,
-            /* [in] */ __RPC__in BSTR username,
-            /* [in] */ AAAuthSchemes authType,
-            /* [in] */ __RPC__in BSTR clientMachineIP,
-            /* [in] */ __RPC__in BSTR clientMachineName,
-            /* [size_is][in] */ __RPC__in_ecount_full(numSOHBytes) BYTE *sohData,
-            /* [in] */ ULONG numSOHBytes,
-            /* [size_is][in] */ __RPC__in_ecount_full(numCookieBytes) BYTE *cookieData,
-            /* [in] */ ULONG numCookieBytes,
-            /* [in] */ HANDLE_PTR userToken,
-            /* [in] */ __RPC__in_opt ITSGAuthorizeConnectionSink *pSink) = 0;
+            /* [annotation][in] */ 
+            _In_  GUID mainSessionId,
+            /* [annotation][in] */ 
+            _In_  BSTR username,
+            /* [annotation][in] */ 
+            _In_  AAAuthSchemes authType,
+            /* [annotation][in] */ 
+            _In_  BSTR clientMachineIP,
+            /* [annotation][in] */ 
+            _In_  BSTR clientMachineName,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(numSOHBytes)  BYTE *sohData,
+            /* [annotation][in] */ 
+            _In_  ULONG numSOHBytes,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(numCookieBytes)  BYTE *cookieData,
+            /* [annotation][in] */ 
+            _In_  ULONG numCookieBytes,
+            /* [annotation][in] */ 
+            _In_  HANDLE_PTR userToken,
+            /* [annotation][in] */ 
+            _In_  ITSGAuthorizeConnectionSink *pSink) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AuthorizeResource( 
-            /* [in] */ GUID mainSessionId,
-            /* [in] */ int subSessionId,
-            /* [in] */ __RPC__in BSTR username,
-            /* [size_is][in] */ __RPC__in_ecount_full(numResources) BSTR *resourceNames,
-            /* [in] */ ULONG numResources,
-            /* [size_is][in] */ __RPC__in_ecount_full(numAlternateResourceName) BSTR *alternateResourceNames,
-            /* [in] */ ULONG numAlternateResourceName,
-            /* [in] */ ULONG portNumber,
-            /* [in] */ __RPC__in BSTR operation,
-            /* [size_is][in] */ __RPC__in_ecount_full(numBytesInCookie) BYTE *cookie,
-            /* [in] */ ULONG numBytesInCookie,
-            /* [in] */ __RPC__in_opt ITSGAuthorizeResourceSink *pSink) = 0;
+            /* [annotation][in] */ 
+            _In_  GUID mainSessionId,
+            /* [annotation][in] */ 
+            _In_  int subSessionId,
+            /* [annotation][in] */ 
+            _In_  BSTR username,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(numResources)  BSTR *resourceNames,
+            /* [annotation][in] */ 
+            _In_  ULONG numResources,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(numAlternateResourceName)  BSTR *alternateResourceNames,
+            /* [annotation][in] */ 
+            _In_  ULONG numAlternateResourceName,
+            /* [annotation][in] */ 
+            _In_  ULONG portNumber,
+            /* [annotation][in] */ 
+            _In_  BSTR operation,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(numBytesInCookie)  BYTE *cookie,
+            /* [annotation][in] */ 
+            _In_  ULONG numBytesInCookie,
+            /* [annotation][in] */ 
+            _In_  ITSGAuthorizeResourceSink *pSink) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Refresh( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsQuarantineEnabled( 
-            /* [out] */ __RPC__out BOOL *quarantineEnabled) = 0;
+            /* [annotation][out] */ 
+            _Out_  BOOL *quarantineEnabled) = 0;
         
     };
     
@@ -423,7 +481,8 @@ EXTERN_C const IID IID_ITSGPolicyEngine;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITSGPolicyEngine * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -438,33 +497,56 @@ EXTERN_C const IID IID_ITSGPolicyEngine;
         DECLSPEC_XFGVIRT(ITSGPolicyEngine, AuthorizeConnection)
         HRESULT ( STDMETHODCALLTYPE *AuthorizeConnection )( 
             __RPC__in ITSGPolicyEngine * This,
-            /* [in] */ GUID mainSessionId,
-            /* [in] */ __RPC__in BSTR username,
-            /* [in] */ AAAuthSchemes authType,
-            /* [in] */ __RPC__in BSTR clientMachineIP,
-            /* [in] */ __RPC__in BSTR clientMachineName,
-            /* [size_is][in] */ __RPC__in_ecount_full(numSOHBytes) BYTE *sohData,
-            /* [in] */ ULONG numSOHBytes,
-            /* [size_is][in] */ __RPC__in_ecount_full(numCookieBytes) BYTE *cookieData,
-            /* [in] */ ULONG numCookieBytes,
-            /* [in] */ HANDLE_PTR userToken,
-            /* [in] */ __RPC__in_opt ITSGAuthorizeConnectionSink *pSink);
+            /* [annotation][in] */ 
+            _In_  GUID mainSessionId,
+            /* [annotation][in] */ 
+            _In_  BSTR username,
+            /* [annotation][in] */ 
+            _In_  AAAuthSchemes authType,
+            /* [annotation][in] */ 
+            _In_  BSTR clientMachineIP,
+            /* [annotation][in] */ 
+            _In_  BSTR clientMachineName,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(numSOHBytes)  BYTE *sohData,
+            /* [annotation][in] */ 
+            _In_  ULONG numSOHBytes,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(numCookieBytes)  BYTE *cookieData,
+            /* [annotation][in] */ 
+            _In_  ULONG numCookieBytes,
+            /* [annotation][in] */ 
+            _In_  HANDLE_PTR userToken,
+            /* [annotation][in] */ 
+            _In_  ITSGAuthorizeConnectionSink *pSink);
         
         DECLSPEC_XFGVIRT(ITSGPolicyEngine, AuthorizeResource)
         HRESULT ( STDMETHODCALLTYPE *AuthorizeResource )( 
             __RPC__in ITSGPolicyEngine * This,
-            /* [in] */ GUID mainSessionId,
-            /* [in] */ int subSessionId,
-            /* [in] */ __RPC__in BSTR username,
-            /* [size_is][in] */ __RPC__in_ecount_full(numResources) BSTR *resourceNames,
-            /* [in] */ ULONG numResources,
-            /* [size_is][in] */ __RPC__in_ecount_full(numAlternateResourceName) BSTR *alternateResourceNames,
-            /* [in] */ ULONG numAlternateResourceName,
-            /* [in] */ ULONG portNumber,
-            /* [in] */ __RPC__in BSTR operation,
-            /* [size_is][in] */ __RPC__in_ecount_full(numBytesInCookie) BYTE *cookie,
-            /* [in] */ ULONG numBytesInCookie,
-            /* [in] */ __RPC__in_opt ITSGAuthorizeResourceSink *pSink);
+            /* [annotation][in] */ 
+            _In_  GUID mainSessionId,
+            /* [annotation][in] */ 
+            _In_  int subSessionId,
+            /* [annotation][in] */ 
+            _In_  BSTR username,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(numResources)  BSTR *resourceNames,
+            /* [annotation][in] */ 
+            _In_  ULONG numResources,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(numAlternateResourceName)  BSTR *alternateResourceNames,
+            /* [annotation][in] */ 
+            _In_  ULONG numAlternateResourceName,
+            /* [annotation][in] */ 
+            _In_  ULONG portNumber,
+            /* [annotation][in] */ 
+            _In_  BSTR operation,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(numBytesInCookie)  BYTE *cookie,
+            /* [annotation][in] */ 
+            _In_  ULONG numBytesInCookie,
+            /* [annotation][in] */ 
+            _In_  ITSGAuthorizeResourceSink *pSink);
         
         DECLSPEC_XFGVIRT(ITSGPolicyEngine, Refresh)
         HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -473,7 +555,8 @@ EXTERN_C const IID IID_ITSGPolicyEngine;
         DECLSPEC_XFGVIRT(ITSGPolicyEngine, IsQuarantineEnabled)
         HRESULT ( STDMETHODCALLTYPE *IsQuarantineEnabled )( 
             __RPC__in ITSGPolicyEngine * This,
-            /* [out] */ __RPC__out BOOL *quarantineEnabled);
+            /* [annotation][out] */ 
+            _Out_  BOOL *quarantineEnabled);
         
         END_INTERFACE
     } ITSGPolicyEngineVtbl;
@@ -537,8 +620,10 @@ EXTERN_C const IID IID_ITSGAccountingEngine;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE DoAccounting( 
-            /* [in] */ AAAccountingDataType accountingDataType,
-            /* [in] */ AAAccountingData accountingData) = 0;
+            /* [annotation][in] */ 
+            _In_  AAAccountingDataType accountingDataType,
+            /* [annotation][in] */ 
+            _In_  AAAccountingData accountingData) = 0;
         
     };
     
@@ -552,7 +637,8 @@ EXTERN_C const IID IID_ITSGAccountingEngine;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITSGAccountingEngine * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -567,8 +653,10 @@ EXTERN_C const IID IID_ITSGAccountingEngine;
         DECLSPEC_XFGVIRT(ITSGAccountingEngine, DoAccounting)
         HRESULT ( STDMETHODCALLTYPE *DoAccounting )( 
             __RPC__in ITSGAccountingEngine * This,
-            /* [in] */ AAAccountingDataType accountingDataType,
-            /* [in] */ AAAccountingData accountingData);
+            /* [annotation][in] */ 
+            _In_  AAAccountingDataType accountingDataType,
+            /* [annotation][in] */ 
+            _In_  AAAccountingData accountingData);
         
         END_INTERFACE
     } ITSGAccountingEngineVtbl;

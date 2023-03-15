@@ -117,7 +117,8 @@ EXTERN_C const IID IID_IWebBrowserEventsService;
     {
     public:
         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE FireBeforeNavigate2Event( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfCancel) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfCancel) = 0;
         
         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE FireNavigateComplete2Event( void) = 0;
         
@@ -139,7 +140,8 @@ EXTERN_C const IID IID_IWebBrowserEventsService;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWebBrowserEventsService * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -154,7 +156,8 @@ EXTERN_C const IID IID_IWebBrowserEventsService;
         DECLSPEC_XFGVIRT(IWebBrowserEventsService, FireBeforeNavigate2Event)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *FireBeforeNavigate2Event )( 
             __RPC__in IWebBrowserEventsService * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfCancel);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfCancel);
         
         DECLSPEC_XFGVIRT(IWebBrowserEventsService, FireNavigateComplete2Event)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *FireNavigateComplete2Event )( 
@@ -237,7 +240,8 @@ EXTERN_C const IID IID_IWebBrowserEventsUrlService;
     {
     public:
         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE GetUrlForEvents( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pUrl) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pUrl) = 0;
         
     };
     
@@ -251,7 +255,8 @@ EXTERN_C const IID IID_IWebBrowserEventsUrlService;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWebBrowserEventsUrlService * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -266,7 +271,8 @@ EXTERN_C const IID IID_IWebBrowserEventsUrlService;
         DECLSPEC_XFGVIRT(IWebBrowserEventsUrlService, GetUrlForEvents)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetUrlForEvents )( 
             __RPC__in IWebBrowserEventsUrlService * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pUrl);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pUrl);
         
         END_INTERFACE
     } IWebBrowserEventsUrlServiceVtbl;

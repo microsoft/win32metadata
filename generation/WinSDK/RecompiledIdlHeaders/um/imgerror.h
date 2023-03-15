@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -160,7 +160,8 @@ EXTERN_C const IID IID_IImgErrorInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IImgErrorInfo * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -175,27 +176,32 @@ EXTERN_C const IID IID_IImgErrorInfo;
         DECLSPEC_XFGVIRT(IErrorInfo, GetGUID)
         HRESULT ( STDMETHODCALLTYPE *GetGUID )( 
             IImgErrorInfo * This,
-            /* [out] */ GUID *pGUID);
+            /* [annotation][out] */ 
+            _Out_  GUID *pGUID);
         
         DECLSPEC_XFGVIRT(IErrorInfo, GetSource)
         HRESULT ( STDMETHODCALLTYPE *GetSource )( 
             IImgErrorInfo * This,
-            /* [out] */ BSTR *pBstrSource);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pBstrSource);
         
         DECLSPEC_XFGVIRT(IErrorInfo, GetDescription)
         HRESULT ( STDMETHODCALLTYPE *GetDescription )( 
             IImgErrorInfo * This,
-            /* [out] */ BSTR *pBstrDescription);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pBstrDescription);
         
         DECLSPEC_XFGVIRT(IErrorInfo, GetHelpFile)
         HRESULT ( STDMETHODCALLTYPE *GetHelpFile )( 
             IImgErrorInfo * This,
-            /* [out] */ BSTR *pBstrHelpFile);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pBstrHelpFile);
         
         DECLSPEC_XFGVIRT(IErrorInfo, GetHelpContext)
         HRESULT ( STDMETHODCALLTYPE *GetHelpContext )( 
             IImgErrorInfo * This,
-            /* [out] */ DWORD *pdwHelpContext);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHelpContext);
         
         DECLSPEC_XFGVIRT(IImgErrorInfo, GetDeveloperDescription)
         HRESULT ( STDMETHODCALLTYPE *GetDeveloperDescription )( 
@@ -343,7 +349,8 @@ EXTERN_C const IID IID_IImgCreateErrorInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IImgCreateErrorInfo * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -358,27 +365,32 @@ EXTERN_C const IID IID_IImgCreateErrorInfo;
         DECLSPEC_XFGVIRT(ICreateErrorInfo, SetGUID)
         HRESULT ( STDMETHODCALLTYPE *SetGUID )( 
             IImgCreateErrorInfo * This,
-            /* [in] */ REFGUID rguid);
+            /* [annotation][in] */ 
+            _In_  REFGUID rguid);
         
         DECLSPEC_XFGVIRT(ICreateErrorInfo, SetSource)
         HRESULT ( STDMETHODCALLTYPE *SetSource )( 
             IImgCreateErrorInfo * This,
-            /* [in] */ LPOLESTR szSource);
+            /* [annotation][in] */ 
+            _In_  LPOLESTR szSource);
         
         DECLSPEC_XFGVIRT(ICreateErrorInfo, SetDescription)
         HRESULT ( STDMETHODCALLTYPE *SetDescription )( 
             IImgCreateErrorInfo * This,
-            /* [in] */ LPOLESTR szDescription);
+            /* [annotation][in] */ 
+            _In_  LPOLESTR szDescription);
         
         DECLSPEC_XFGVIRT(ICreateErrorInfo, SetHelpFile)
         HRESULT ( STDMETHODCALLTYPE *SetHelpFile )( 
             IImgCreateErrorInfo * This,
-            /* [in] */ LPOLESTR szHelpFile);
+            /* [annotation][in] */ 
+            _In_  LPOLESTR szHelpFile);
         
         DECLSPEC_XFGVIRT(ICreateErrorInfo, SetHelpContext)
         HRESULT ( STDMETHODCALLTYPE *SetHelpContext )( 
             IImgCreateErrorInfo * This,
-            /* [in] */ DWORD dwHelpContext);
+            /* [annotation][in] */ 
+            _In_  DWORD dwHelpContext);
         
         DECLSPEC_XFGVIRT(IImgCreateErrorInfo, AttachToErrorInfo)
         HRESULT ( STDMETHODCALLTYPE *AttachToErrorInfo )( 

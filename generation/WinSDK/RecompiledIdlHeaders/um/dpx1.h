@@ -283,7 +283,7 @@ extern RPC_IF_HANDLE __MIDL_itf_dpx1_0000_0000_v0_0_s_ifspec;
 #define __IDpxJob_INTERFACE_DEFINED__
 
 /* interface IDpxJob */
-/* [nocode][unique][object][uuid] */ 
+/* [unique][object][uuid] */ 
 
 
 EXTERN_C const IID IID_IDpxJob;
@@ -295,20 +295,26 @@ EXTERN_C const IID IID_IDpxJob;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTargetPath( 
-            /* [out] */ __RPC__deref_out_opt LPWSTR *TargetPath) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *TargetPath) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddContainer( 
-            /* [in] */ __RPC__in LPCWSTR ContainerPath,
-            /* [out] */ __RPC__deref_out_opt IDpxContainer **ppContainer) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR ContainerPath,
+            /* [annotation][out] */ 
+            _Out_  IDpxContainer **ppContainer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumContainers( 
-            /* [out] */ __RPC__deref_out_opt IEnumDpxContainers **ppEnumContainers) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumDpxContainers **ppEnumContainers) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDownloadProvider( 
-            /* [unique][in] */ __RPC__in_opt IDpxDownloadProvider *pDownloadProvider) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  IDpxDownloadProvider *pDownloadProvider) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDownloadProvider( 
-            /* [out] */ __RPC__deref_out_opt IDpxDownloadProvider **ppDownloadProvider) = 0;
+            /* [annotation][out] */ 
+            _Out_  IDpxDownloadProvider **ppDownloadProvider) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Resume( 
             DPX_RESUME_TYPE eResumeType) = 0;
@@ -318,26 +324,34 @@ EXTERN_C const IID IID_IDpxJob;
         virtual HRESULT STDMETHODCALLTYPE Cancel( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProgress( 
-            /* [out] */ __RPC__out DPX_PROGRESS *pProgress) = 0;
+            /* [annotation][out] */ 
+            _Out_  DPX_PROGRESS *pProgress) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SaveJobState( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetUserValue( 
-            /* [in] */ UINT64 UserValue) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT64 UserValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetUserValue( 
-            /* [out] */ __RPC__out UINT64 *pUserValue) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pUserValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetOptionValue( 
-            /* [in] */ __RPC__in LPCWSTR OptionName,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR OptionValue) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR OptionName,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR OptionValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOptionValue( 
-            /* [in] */ __RPC__in LPCWSTR OptionName,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pOptionValue) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR OptionName,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pOptionValue) = 0;
         
         virtual /* [local] */ void STDMETHODCALLTYPE FreeMemory( 
-            /* [in] */ void *Allocation) = 0;
+            /* [annotation][in] */ 
+            _In_  void *Allocation) = 0;
         
     };
     
@@ -351,7 +365,8 @@ EXTERN_C const IID IID_IDpxJob;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDpxJob * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -366,28 +381,34 @@ EXTERN_C const IID IID_IDpxJob;
         DECLSPEC_XFGVIRT(IDpxJob, GetTargetPath)
         HRESULT ( STDMETHODCALLTYPE *GetTargetPath )( 
             __RPC__in IDpxJob * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *TargetPath);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *TargetPath);
         
         DECLSPEC_XFGVIRT(IDpxJob, AddContainer)
         HRESULT ( STDMETHODCALLTYPE *AddContainer )( 
             __RPC__in IDpxJob * This,
-            /* [in] */ __RPC__in LPCWSTR ContainerPath,
-            /* [out] */ __RPC__deref_out_opt IDpxContainer **ppContainer);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR ContainerPath,
+            /* [annotation][out] */ 
+            _Out_  IDpxContainer **ppContainer);
         
         DECLSPEC_XFGVIRT(IDpxJob, EnumContainers)
         HRESULT ( STDMETHODCALLTYPE *EnumContainers )( 
             __RPC__in IDpxJob * This,
-            /* [out] */ __RPC__deref_out_opt IEnumDpxContainers **ppEnumContainers);
+            /* [annotation][out] */ 
+            _Out_  IEnumDpxContainers **ppEnumContainers);
         
         DECLSPEC_XFGVIRT(IDpxJob, SetDownloadProvider)
         HRESULT ( STDMETHODCALLTYPE *SetDownloadProvider )( 
             __RPC__in IDpxJob * This,
-            /* [unique][in] */ __RPC__in_opt IDpxDownloadProvider *pDownloadProvider);
+            /* [annotation][unique][in] */ 
+            _In_  IDpxDownloadProvider *pDownloadProvider);
         
         DECLSPEC_XFGVIRT(IDpxJob, GetDownloadProvider)
         HRESULT ( STDMETHODCALLTYPE *GetDownloadProvider )( 
             __RPC__in IDpxJob * This,
-            /* [out] */ __RPC__deref_out_opt IDpxDownloadProvider **ppDownloadProvider);
+            /* [annotation][out] */ 
+            _Out_  IDpxDownloadProvider **ppDownloadProvider);
         
         DECLSPEC_XFGVIRT(IDpxJob, Resume)
         HRESULT ( STDMETHODCALLTYPE *Resume )( 
@@ -405,7 +426,8 @@ EXTERN_C const IID IID_IDpxJob;
         DECLSPEC_XFGVIRT(IDpxJob, GetProgress)
         HRESULT ( STDMETHODCALLTYPE *GetProgress )( 
             __RPC__in IDpxJob * This,
-            /* [out] */ __RPC__out DPX_PROGRESS *pProgress);
+            /* [annotation][out] */ 
+            _Out_  DPX_PROGRESS *pProgress);
         
         DECLSPEC_XFGVIRT(IDpxJob, SaveJobState)
         HRESULT ( STDMETHODCALLTYPE *SaveJobState )( 
@@ -414,29 +436,36 @@ EXTERN_C const IID IID_IDpxJob;
         DECLSPEC_XFGVIRT(IDpxJob, SetUserValue)
         HRESULT ( STDMETHODCALLTYPE *SetUserValue )( 
             __RPC__in IDpxJob * This,
-            /* [in] */ UINT64 UserValue);
+            /* [annotation][in] */ 
+            _In_  UINT64 UserValue);
         
         DECLSPEC_XFGVIRT(IDpxJob, GetUserValue)
         HRESULT ( STDMETHODCALLTYPE *GetUserValue )( 
             __RPC__in IDpxJob * This,
-            /* [out] */ __RPC__out UINT64 *pUserValue);
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pUserValue);
         
         DECLSPEC_XFGVIRT(IDpxJob, SetOptionValue)
         HRESULT ( STDMETHODCALLTYPE *SetOptionValue )( 
             __RPC__in IDpxJob * This,
-            /* [in] */ __RPC__in LPCWSTR OptionName,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR OptionValue);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR OptionName,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR OptionValue);
         
         DECLSPEC_XFGVIRT(IDpxJob, GetOptionValue)
         HRESULT ( STDMETHODCALLTYPE *GetOptionValue )( 
             __RPC__in IDpxJob * This,
-            /* [in] */ __RPC__in LPCWSTR OptionName,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pOptionValue);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR OptionName,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pOptionValue);
         
         DECLSPEC_XFGVIRT(IDpxJob, FreeMemory)
         /* [local] */ void ( STDMETHODCALLTYPE *FreeMemory )( 
             IDpxJob * This,
-            /* [in] */ void *Allocation);
+            /* [annotation][in] */ 
+            _In_  void *Allocation);
         
         END_INTERFACE
     } IDpxJobVtbl;
@@ -558,11 +587,16 @@ EXTERN_C const IID IID_IFileHashProviderCallback;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetFileHash( 
-            /* [in] */ __RPC__in LPCWSTR FilePath,
-            /* [in] */ ALG_ID algId,
-            /* [out] */ __RPC__out DPX_FILE_PROVIDER_QUERY_DISPOSITION *pDisposition,
-            /* [in] */ UINT cbHashData,
-            /* [size_is][out] */ __RPC__out_ecount_full(cbHashData) BYTE pbHashData[  ]) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR FilePath,
+            /* [annotation][in] */ 
+            _In_  ALG_ID algId,
+            /* [annotation][out] */ 
+            _Out_  DPX_FILE_PROVIDER_QUERY_DISPOSITION *pDisposition,
+            /* [annotation][in] */ 
+            _In_  UINT cbHashData,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cbHashData)  BYTE pbHashData[  ]) = 0;
         
     };
     
@@ -576,7 +610,8 @@ EXTERN_C const IID IID_IFileHashProviderCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFileHashProviderCallback * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -591,11 +626,16 @@ EXTERN_C const IID IID_IFileHashProviderCallback;
         DECLSPEC_XFGVIRT(IFileHashProviderCallback, GetFileHash)
         HRESULT ( STDMETHODCALLTYPE *GetFileHash )( 
             __RPC__in IFileHashProviderCallback * This,
-            /* [in] */ __RPC__in LPCWSTR FilePath,
-            /* [in] */ ALG_ID algId,
-            /* [out] */ __RPC__out DPX_FILE_PROVIDER_QUERY_DISPOSITION *pDisposition,
-            /* [in] */ UINT cbHashData,
-            /* [size_is][out] */ __RPC__out_ecount_full(cbHashData) BYTE pbHashData[  ]);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR FilePath,
+            /* [annotation][in] */ 
+            _In_  ALG_ID algId,
+            /* [annotation][out] */ 
+            _Out_  DPX_FILE_PROVIDER_QUERY_DISPOSITION *pDisposition,
+            /* [annotation][in] */ 
+            _In_  UINT cbHashData,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cbHashData)  BYTE pbHashData[  ]);
         
         END_INTERFACE
     } IFileHashProviderCallbackVtbl;
@@ -650,8 +690,10 @@ EXTERN_C const IID IID_IDpxJob2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetInventoryProvider( 
-            /* [in] */ LOCATIONTYPE locationType,
-            /* [in] */ __RPC__in_opt IFileHashProviderCallback *pProvider) = 0;
+            /* [annotation][in] */ 
+            _In_  LOCATIONTYPE locationType,
+            /* [annotation][in] */ 
+            _In_  IFileHashProviderCallback *pProvider) = 0;
         
     };
     
@@ -665,7 +707,8 @@ EXTERN_C const IID IID_IDpxJob2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDpxJob2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -680,28 +723,34 @@ EXTERN_C const IID IID_IDpxJob2;
         DECLSPEC_XFGVIRT(IDpxJob, GetTargetPath)
         HRESULT ( STDMETHODCALLTYPE *GetTargetPath )( 
             __RPC__in IDpxJob2 * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *TargetPath);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *TargetPath);
         
         DECLSPEC_XFGVIRT(IDpxJob, AddContainer)
         HRESULT ( STDMETHODCALLTYPE *AddContainer )( 
             __RPC__in IDpxJob2 * This,
-            /* [in] */ __RPC__in LPCWSTR ContainerPath,
-            /* [out] */ __RPC__deref_out_opt IDpxContainer **ppContainer);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR ContainerPath,
+            /* [annotation][out] */ 
+            _Out_  IDpxContainer **ppContainer);
         
         DECLSPEC_XFGVIRT(IDpxJob, EnumContainers)
         HRESULT ( STDMETHODCALLTYPE *EnumContainers )( 
             __RPC__in IDpxJob2 * This,
-            /* [out] */ __RPC__deref_out_opt IEnumDpxContainers **ppEnumContainers);
+            /* [annotation][out] */ 
+            _Out_  IEnumDpxContainers **ppEnumContainers);
         
         DECLSPEC_XFGVIRT(IDpxJob, SetDownloadProvider)
         HRESULT ( STDMETHODCALLTYPE *SetDownloadProvider )( 
             __RPC__in IDpxJob2 * This,
-            /* [unique][in] */ __RPC__in_opt IDpxDownloadProvider *pDownloadProvider);
+            /* [annotation][unique][in] */ 
+            _In_  IDpxDownloadProvider *pDownloadProvider);
         
         DECLSPEC_XFGVIRT(IDpxJob, GetDownloadProvider)
         HRESULT ( STDMETHODCALLTYPE *GetDownloadProvider )( 
             __RPC__in IDpxJob2 * This,
-            /* [out] */ __RPC__deref_out_opt IDpxDownloadProvider **ppDownloadProvider);
+            /* [annotation][out] */ 
+            _Out_  IDpxDownloadProvider **ppDownloadProvider);
         
         DECLSPEC_XFGVIRT(IDpxJob, Resume)
         HRESULT ( STDMETHODCALLTYPE *Resume )( 
@@ -719,7 +768,8 @@ EXTERN_C const IID IID_IDpxJob2;
         DECLSPEC_XFGVIRT(IDpxJob, GetProgress)
         HRESULT ( STDMETHODCALLTYPE *GetProgress )( 
             __RPC__in IDpxJob2 * This,
-            /* [out] */ __RPC__out DPX_PROGRESS *pProgress);
+            /* [annotation][out] */ 
+            _Out_  DPX_PROGRESS *pProgress);
         
         DECLSPEC_XFGVIRT(IDpxJob, SaveJobState)
         HRESULT ( STDMETHODCALLTYPE *SaveJobState )( 
@@ -728,35 +778,44 @@ EXTERN_C const IID IID_IDpxJob2;
         DECLSPEC_XFGVIRT(IDpxJob, SetUserValue)
         HRESULT ( STDMETHODCALLTYPE *SetUserValue )( 
             __RPC__in IDpxJob2 * This,
-            /* [in] */ UINT64 UserValue);
+            /* [annotation][in] */ 
+            _In_  UINT64 UserValue);
         
         DECLSPEC_XFGVIRT(IDpxJob, GetUserValue)
         HRESULT ( STDMETHODCALLTYPE *GetUserValue )( 
             __RPC__in IDpxJob2 * This,
-            /* [out] */ __RPC__out UINT64 *pUserValue);
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pUserValue);
         
         DECLSPEC_XFGVIRT(IDpxJob, SetOptionValue)
         HRESULT ( STDMETHODCALLTYPE *SetOptionValue )( 
             __RPC__in IDpxJob2 * This,
-            /* [in] */ __RPC__in LPCWSTR OptionName,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR OptionValue);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR OptionName,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR OptionValue);
         
         DECLSPEC_XFGVIRT(IDpxJob, GetOptionValue)
         HRESULT ( STDMETHODCALLTYPE *GetOptionValue )( 
             __RPC__in IDpxJob2 * This,
-            /* [in] */ __RPC__in LPCWSTR OptionName,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pOptionValue);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR OptionName,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pOptionValue);
         
         DECLSPEC_XFGVIRT(IDpxJob, FreeMemory)
         /* [local] */ void ( STDMETHODCALLTYPE *FreeMemory )( 
             IDpxJob2 * This,
-            /* [in] */ void *Allocation);
+            /* [annotation][in] */ 
+            _In_  void *Allocation);
         
         DECLSPEC_XFGVIRT(IDpxJob2, SetInventoryProvider)
         HRESULT ( STDMETHODCALLTYPE *SetInventoryProvider )( 
             __RPC__in IDpxJob2 * This,
-            /* [in] */ LOCATIONTYPE locationType,
-            /* [in] */ __RPC__in_opt IFileHashProviderCallback *pProvider);
+            /* [annotation][in] */ 
+            _In_  LOCATIONTYPE locationType,
+            /* [annotation][in] */ 
+            _In_  IFileHashProviderCallback *pProvider);
         
         END_INTERFACE
     } IDpxJob2Vtbl;
@@ -845,7 +904,7 @@ EXTERN_C const IID IID_IDpxJob2;
 #define __IDpxContainer_INTERFACE_DEFINED__
 
 /* interface IDpxContainer */
-/* [nocode][unique][object][uuid] */ 
+/* [unique][object][uuid] */ 
 
 
 EXTERN_C const IID IID_IDpxContainer;
@@ -857,52 +916,70 @@ EXTERN_C const IID IID_IDpxContainer;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetContainerPath( 
-            /* [in] */ __RPC__in LPCWSTR ContainerPath) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR ContainerPath) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetContainerPath( 
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pContainerPath) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pContainerPath) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddFileToExtract( 
-            /* [in] */ __RPC__in LPCWSTR SourceFileName,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR TargetFileName,
-            /* [unique][in] */ __RPC__in_opt DPX_HASH *TargetFileHash) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR SourceFileName,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR TargetFileName,
+            /* [annotation][unique][in] */ 
+            _In_  DPX_HASH *TargetFileHash) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddFileToExtract2( 
-            /* [in] */ __RPC__in LPCWSTR SourceFileName,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR TargetFileName,
-            /* [out] */ __RPC__deref_out_opt IDpxFile **ppFile) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR SourceFileName,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR TargetFileName,
+            /* [annotation][out] */ 
+            _Out_  IDpxFile **ppFile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ExtractAllFiles( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumFilesToExtract( 
-            /* [out] */ __RPC__deref_out_opt IEnumDpxFiles **ppEnumFiles) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumDpxFiles **ppEnumFiles) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetExpectedContainerIndexHash( 
-            /* [in] */ __RPC__in DPX_HASH *pExpectedHash) = 0;
+            /* [annotation][in] */ 
+            _In_  DPX_HASH *pExpectedHash) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetExpectedContainerIndexHash( 
-            /* [out] */ __RPC__deref_out_opt DPX_HASH **ppExpectedHash) = 0;
+            /* [annotation][out] */ 
+            _Out_  DPX_HASH **ppExpectedHash) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProvideContainerIndex( 
-            /* [in] */ UINT IndexSize,
-            /* [size_is][in] */ __RPC__in_ecount_full(IndexSize) BYTE IndexData[  ]) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT IndexSize,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(IndexSize)  BYTE IndexData[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProvideContainerIndexByFile( 
-            /* [in] */ __RPC__in LPCWSTR IndexFileName) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR IndexFileName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumDirectoryEntries( 
-            /* [out] */ __RPC__deref_out_opt IEnumDpxContainerDirectoryEntries **ppEnumEntries) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumDpxContainerDirectoryEntries **ppEnumEntries) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Remove( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetUserValue( 
-            /* [in] */ UINT64 UserValue) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT64 UserValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetUserValue( 
-            /* [out] */ __RPC__out UINT64 *pUserValue) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pUserValue) = 0;
         
         virtual /* [local] */ void STDMETHODCALLTYPE FreeMemory( 
-            /* [in] */ void *Allocation) = 0;
+            /* [annotation][in] */ 
+            _In_  void *Allocation) = 0;
         
     };
     
@@ -916,7 +993,8 @@ EXTERN_C const IID IID_IDpxContainer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDpxContainer * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -931,26 +1009,34 @@ EXTERN_C const IID IID_IDpxContainer;
         DECLSPEC_XFGVIRT(IDpxContainer, SetContainerPath)
         HRESULT ( STDMETHODCALLTYPE *SetContainerPath )( 
             __RPC__in IDpxContainer * This,
-            /* [in] */ __RPC__in LPCWSTR ContainerPath);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR ContainerPath);
         
         DECLSPEC_XFGVIRT(IDpxContainer, GetContainerPath)
         HRESULT ( STDMETHODCALLTYPE *GetContainerPath )( 
             __RPC__in IDpxContainer * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pContainerPath);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pContainerPath);
         
         DECLSPEC_XFGVIRT(IDpxContainer, AddFileToExtract)
         HRESULT ( STDMETHODCALLTYPE *AddFileToExtract )( 
             __RPC__in IDpxContainer * This,
-            /* [in] */ __RPC__in LPCWSTR SourceFileName,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR TargetFileName,
-            /* [unique][in] */ __RPC__in_opt DPX_HASH *TargetFileHash);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR SourceFileName,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR TargetFileName,
+            /* [annotation][unique][in] */ 
+            _In_  DPX_HASH *TargetFileHash);
         
         DECLSPEC_XFGVIRT(IDpxContainer, AddFileToExtract2)
         HRESULT ( STDMETHODCALLTYPE *AddFileToExtract2 )( 
             __RPC__in IDpxContainer * This,
-            /* [in] */ __RPC__in LPCWSTR SourceFileName,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR TargetFileName,
-            /* [out] */ __RPC__deref_out_opt IDpxFile **ppFile);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR SourceFileName,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR TargetFileName,
+            /* [annotation][out] */ 
+            _Out_  IDpxFile **ppFile);
         
         DECLSPEC_XFGVIRT(IDpxContainer, ExtractAllFiles)
         HRESULT ( STDMETHODCALLTYPE *ExtractAllFiles )( 
@@ -959,33 +1045,40 @@ EXTERN_C const IID IID_IDpxContainer;
         DECLSPEC_XFGVIRT(IDpxContainer, EnumFilesToExtract)
         HRESULT ( STDMETHODCALLTYPE *EnumFilesToExtract )( 
             __RPC__in IDpxContainer * This,
-            /* [out] */ __RPC__deref_out_opt IEnumDpxFiles **ppEnumFiles);
+            /* [annotation][out] */ 
+            _Out_  IEnumDpxFiles **ppEnumFiles);
         
         DECLSPEC_XFGVIRT(IDpxContainer, SetExpectedContainerIndexHash)
         HRESULT ( STDMETHODCALLTYPE *SetExpectedContainerIndexHash )( 
             __RPC__in IDpxContainer * This,
-            /* [in] */ __RPC__in DPX_HASH *pExpectedHash);
+            /* [annotation][in] */ 
+            _In_  DPX_HASH *pExpectedHash);
         
         DECLSPEC_XFGVIRT(IDpxContainer, GetExpectedContainerIndexHash)
         HRESULT ( STDMETHODCALLTYPE *GetExpectedContainerIndexHash )( 
             __RPC__in IDpxContainer * This,
-            /* [out] */ __RPC__deref_out_opt DPX_HASH **ppExpectedHash);
+            /* [annotation][out] */ 
+            _Out_  DPX_HASH **ppExpectedHash);
         
         DECLSPEC_XFGVIRT(IDpxContainer, ProvideContainerIndex)
         HRESULT ( STDMETHODCALLTYPE *ProvideContainerIndex )( 
             __RPC__in IDpxContainer * This,
-            /* [in] */ UINT IndexSize,
-            /* [size_is][in] */ __RPC__in_ecount_full(IndexSize) BYTE IndexData[  ]);
+            /* [annotation][in] */ 
+            _In_  UINT IndexSize,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(IndexSize)  BYTE IndexData[  ]);
         
         DECLSPEC_XFGVIRT(IDpxContainer, ProvideContainerIndexByFile)
         HRESULT ( STDMETHODCALLTYPE *ProvideContainerIndexByFile )( 
             __RPC__in IDpxContainer * This,
-            /* [in] */ __RPC__in LPCWSTR IndexFileName);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR IndexFileName);
         
         DECLSPEC_XFGVIRT(IDpxContainer, EnumDirectoryEntries)
         HRESULT ( STDMETHODCALLTYPE *EnumDirectoryEntries )( 
             __RPC__in IDpxContainer * This,
-            /* [out] */ __RPC__deref_out_opt IEnumDpxContainerDirectoryEntries **ppEnumEntries);
+            /* [annotation][out] */ 
+            _Out_  IEnumDpxContainerDirectoryEntries **ppEnumEntries);
         
         DECLSPEC_XFGVIRT(IDpxContainer, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
@@ -994,17 +1087,20 @@ EXTERN_C const IID IID_IDpxContainer;
         DECLSPEC_XFGVIRT(IDpxContainer, SetUserValue)
         HRESULT ( STDMETHODCALLTYPE *SetUserValue )( 
             __RPC__in IDpxContainer * This,
-            /* [in] */ UINT64 UserValue);
+            /* [annotation][in] */ 
+            _In_  UINT64 UserValue);
         
         DECLSPEC_XFGVIRT(IDpxContainer, GetUserValue)
         HRESULT ( STDMETHODCALLTYPE *GetUserValue )( 
             __RPC__in IDpxContainer * This,
-            /* [out] */ __RPC__out UINT64 *pUserValue);
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pUserValue);
         
         DECLSPEC_XFGVIRT(IDpxContainer, FreeMemory)
         /* [local] */ void ( STDMETHODCALLTYPE *FreeMemory )( 
             IDpxContainer * This,
-            /* [in] */ void *Allocation);
+            /* [annotation][in] */ 
+            _In_  void *Allocation);
         
         END_INTERFACE
     } IDpxContainerVtbl;
@@ -1089,7 +1185,7 @@ EXTERN_C const IID IID_IDpxContainer;
 #define __IDpxFile_INTERFACE_DEFINED__
 
 /* interface IDpxFile */
-/* [nocode][unique][object][uuid] */ 
+/* [unique][object][uuid] */ 
 
 
 EXTERN_C const IID IID_IDpxFile;
@@ -1101,30 +1197,38 @@ EXTERN_C const IID IID_IDpxFile;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSourceFileName( 
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pSourceFileName) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pSourceFileName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTargetFileName( 
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pTargetFileName) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pTargetFileName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetExpectedHash( 
-            /* [in] */ __RPC__in DPX_HASH *pExpectedHash) = 0;
+            /* [annotation][in] */ 
+            _In_  DPX_HASH *pExpectedHash) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetExpectedHash( 
-            /* [out] */ __RPC__deref_out_opt DPX_HASH **ppExpectedHash) = 0;
+            /* [annotation][out] */ 
+            _Out_  DPX_HASH **ppExpectedHash) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Remove( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetUserValue( 
-            /* [in] */ UINT64 UserValue) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT64 UserValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetUserValue( 
-            /* [out] */ __RPC__out UINT64 *pUserValue) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pUserValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStatus( 
-            /* [out] */ __RPC__out HRESULT *pStatus) = 0;
+            /* [annotation][out] */ 
+            _Out_  HRESULT *pStatus) = 0;
         
         virtual /* [local] */ void STDMETHODCALLTYPE FreeMemory( 
-            /* [in] */ void *Allocation) = 0;
+            /* [annotation][in] */ 
+            _In_  void *Allocation) = 0;
         
     };
     
@@ -1138,7 +1242,8 @@ EXTERN_C const IID IID_IDpxFile;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDpxFile * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1153,22 +1258,26 @@ EXTERN_C const IID IID_IDpxFile;
         DECLSPEC_XFGVIRT(IDpxFile, GetSourceFileName)
         HRESULT ( STDMETHODCALLTYPE *GetSourceFileName )( 
             __RPC__in IDpxFile * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pSourceFileName);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pSourceFileName);
         
         DECLSPEC_XFGVIRT(IDpxFile, GetTargetFileName)
         HRESULT ( STDMETHODCALLTYPE *GetTargetFileName )( 
             __RPC__in IDpxFile * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pTargetFileName);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pTargetFileName);
         
         DECLSPEC_XFGVIRT(IDpxFile, SetExpectedHash)
         HRESULT ( STDMETHODCALLTYPE *SetExpectedHash )( 
             __RPC__in IDpxFile * This,
-            /* [in] */ __RPC__in DPX_HASH *pExpectedHash);
+            /* [annotation][in] */ 
+            _In_  DPX_HASH *pExpectedHash);
         
         DECLSPEC_XFGVIRT(IDpxFile, GetExpectedHash)
         HRESULT ( STDMETHODCALLTYPE *GetExpectedHash )( 
             __RPC__in IDpxFile * This,
-            /* [out] */ __RPC__deref_out_opt DPX_HASH **ppExpectedHash);
+            /* [annotation][out] */ 
+            _Out_  DPX_HASH **ppExpectedHash);
         
         DECLSPEC_XFGVIRT(IDpxFile, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
@@ -1177,22 +1286,26 @@ EXTERN_C const IID IID_IDpxFile;
         DECLSPEC_XFGVIRT(IDpxFile, SetUserValue)
         HRESULT ( STDMETHODCALLTYPE *SetUserValue )( 
             __RPC__in IDpxFile * This,
-            /* [in] */ UINT64 UserValue);
+            /* [annotation][in] */ 
+            _In_  UINT64 UserValue);
         
         DECLSPEC_XFGVIRT(IDpxFile, GetUserValue)
         HRESULT ( STDMETHODCALLTYPE *GetUserValue )( 
             __RPC__in IDpxFile * This,
-            /* [out] */ __RPC__out UINT64 *pUserValue);
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pUserValue);
         
         DECLSPEC_XFGVIRT(IDpxFile, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in IDpxFile * This,
-            /* [out] */ __RPC__out HRESULT *pStatus);
+            /* [annotation][out] */ 
+            _Out_  HRESULT *pStatus);
         
         DECLSPEC_XFGVIRT(IDpxFile, FreeMemory)
         /* [local] */ void ( STDMETHODCALLTYPE *FreeMemory )( 
             IDpxFile * This,
-            /* [in] */ void *Allocation);
+            /* [annotation][in] */ 
+            _In_  void *Allocation);
         
         END_INTERFACE
     } IDpxFileVtbl;
@@ -1271,7 +1384,8 @@ EXTERN_C const IID IID_IDpxFile2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSize( 
-            /* [out] */ __RPC__out UINT64 *pSize) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pSize) = 0;
         
     };
     
@@ -1285,7 +1399,8 @@ EXTERN_C const IID IID_IDpxFile2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDpxFile2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1300,22 +1415,26 @@ EXTERN_C const IID IID_IDpxFile2;
         DECLSPEC_XFGVIRT(IDpxFile, GetSourceFileName)
         HRESULT ( STDMETHODCALLTYPE *GetSourceFileName )( 
             __RPC__in IDpxFile2 * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pSourceFileName);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pSourceFileName);
         
         DECLSPEC_XFGVIRT(IDpxFile, GetTargetFileName)
         HRESULT ( STDMETHODCALLTYPE *GetTargetFileName )( 
             __RPC__in IDpxFile2 * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pTargetFileName);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pTargetFileName);
         
         DECLSPEC_XFGVIRT(IDpxFile, SetExpectedHash)
         HRESULT ( STDMETHODCALLTYPE *SetExpectedHash )( 
             __RPC__in IDpxFile2 * This,
-            /* [in] */ __RPC__in DPX_HASH *pExpectedHash);
+            /* [annotation][in] */ 
+            _In_  DPX_HASH *pExpectedHash);
         
         DECLSPEC_XFGVIRT(IDpxFile, GetExpectedHash)
         HRESULT ( STDMETHODCALLTYPE *GetExpectedHash )( 
             __RPC__in IDpxFile2 * This,
-            /* [out] */ __RPC__deref_out_opt DPX_HASH **ppExpectedHash);
+            /* [annotation][out] */ 
+            _Out_  DPX_HASH **ppExpectedHash);
         
         DECLSPEC_XFGVIRT(IDpxFile, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
@@ -1324,27 +1443,32 @@ EXTERN_C const IID IID_IDpxFile2;
         DECLSPEC_XFGVIRT(IDpxFile, SetUserValue)
         HRESULT ( STDMETHODCALLTYPE *SetUserValue )( 
             __RPC__in IDpxFile2 * This,
-            /* [in] */ UINT64 UserValue);
+            /* [annotation][in] */ 
+            _In_  UINT64 UserValue);
         
         DECLSPEC_XFGVIRT(IDpxFile, GetUserValue)
         HRESULT ( STDMETHODCALLTYPE *GetUserValue )( 
             __RPC__in IDpxFile2 * This,
-            /* [out] */ __RPC__out UINT64 *pUserValue);
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pUserValue);
         
         DECLSPEC_XFGVIRT(IDpxFile, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in IDpxFile2 * This,
-            /* [out] */ __RPC__out HRESULT *pStatus);
+            /* [annotation][out] */ 
+            _Out_  HRESULT *pStatus);
         
         DECLSPEC_XFGVIRT(IDpxFile, FreeMemory)
         /* [local] */ void ( STDMETHODCALLTYPE *FreeMemory )( 
             IDpxFile2 * This,
-            /* [in] */ void *Allocation);
+            /* [annotation][in] */ 
+            _In_  void *Allocation);
         
         DECLSPEC_XFGVIRT(IDpxFile2, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IDpxFile2 * This,
-            /* [out] */ __RPC__out UINT64 *pSize);
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pSize);
         
         END_INTERFACE
     } IDpxFile2Vtbl;
@@ -1415,7 +1539,7 @@ EXTERN_C const IID IID_IDpxFile2;
 #define __IDpxContainerDirectoryEntry_INTERFACE_DEFINED__
 
 /* interface IDpxContainerDirectoryEntry */
-/* [nocode][unique][object][uuid] */ 
+/* [unique][object][uuid] */ 
 
 
 EXTERN_C const IID IID_IDpxContainerDirectoryEntry;
@@ -1427,19 +1551,24 @@ EXTERN_C const IID IID_IDpxContainerDirectoryEntry;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetName( 
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pDirEntryName) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pDirEntryName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetHash( 
-            /* [out] */ __RPC__deref_out_opt DPX_HASH **pDirEntryHash) = 0;
+            /* [annotation][out] */ 
+            _Out_  DPX_HASH **pDirEntryHash) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSize( 
-            /* [out] */ __RPC__out UINT64 *pDirEntrySize) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pDirEntrySize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTime( 
-            /* [out] */ __RPC__out FILETIME *pDirEntryTime) = 0;
+            /* [annotation][out] */ 
+            _Out_  FILETIME *pDirEntryTime) = 0;
         
         virtual /* [local] */ void STDMETHODCALLTYPE FreeMemory( 
-            /* [in] */ void *Allocation) = 0;
+            /* [annotation][in] */ 
+            _In_  void *Allocation) = 0;
         
     };
     
@@ -1453,7 +1582,8 @@ EXTERN_C const IID IID_IDpxContainerDirectoryEntry;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDpxContainerDirectoryEntry * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1468,27 +1598,32 @@ EXTERN_C const IID IID_IDpxContainerDirectoryEntry;
         DECLSPEC_XFGVIRT(IDpxContainerDirectoryEntry, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IDpxContainerDirectoryEntry * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pDirEntryName);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pDirEntryName);
         
         DECLSPEC_XFGVIRT(IDpxContainerDirectoryEntry, GetHash)
         HRESULT ( STDMETHODCALLTYPE *GetHash )( 
             __RPC__in IDpxContainerDirectoryEntry * This,
-            /* [out] */ __RPC__deref_out_opt DPX_HASH **pDirEntryHash);
+            /* [annotation][out] */ 
+            _Out_  DPX_HASH **pDirEntryHash);
         
         DECLSPEC_XFGVIRT(IDpxContainerDirectoryEntry, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IDpxContainerDirectoryEntry * This,
-            /* [out] */ __RPC__out UINT64 *pDirEntrySize);
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pDirEntrySize);
         
         DECLSPEC_XFGVIRT(IDpxContainerDirectoryEntry, GetTime)
         HRESULT ( STDMETHODCALLTYPE *GetTime )( 
             __RPC__in IDpxContainerDirectoryEntry * This,
-            /* [out] */ __RPC__out FILETIME *pDirEntryTime);
+            /* [annotation][out] */ 
+            _Out_  FILETIME *pDirEntryTime);
         
         DECLSPEC_XFGVIRT(IDpxContainerDirectoryEntry, FreeMemory)
         /* [local] */ void ( STDMETHODCALLTYPE *FreeMemory )( 
             IDpxContainerDirectoryEntry * This,
-            /* [in] */ void *Allocation);
+            /* [annotation][in] */ 
+            _In_  void *Allocation);
         
         END_INTERFACE
     } IDpxContainerDirectoryEntryVtbl;
@@ -1543,7 +1678,7 @@ EXTERN_C const IID IID_IDpxContainerDirectoryEntry;
 #define __IDpxDownloadProvider_INTERFACE_DEFINED__
 
 /* interface IDpxDownloadProvider */
-/* [nocode][unique][object][uuid] */ 
+/* [unique][object][uuid] */ 
 
 
 EXTERN_C const IID IID_IDpxDownloadProvider;
@@ -1555,33 +1690,48 @@ EXTERN_C const IID IID_IDpxDownloadProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetProvideDataCallback( 
-            /* [in] */ __RPC__in_opt IDpxDownloadCallback *pProvideData) = 0;
+            /* [annotation][in] */ 
+            _In_  IDpxDownloadCallback *pProvideData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProvideDataCallback( 
-            /* [out] */ __RPC__deref_out_opt IDpxDownloadCallback **ppProvideData) = 0;
+            /* [annotation][out] */ 
+            _Out_  IDpxDownloadCallback **ppProvideData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddContainer( 
-            /* [in] */ __RPC__in LPCWSTR ContainerFilePath,
-            /* [in] */ UINT64 ContainerId) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR ContainerFilePath,
+            /* [annotation][in] */ 
+            _In_  UINT64 ContainerId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddRanges( 
-            /* [in] */ UINT64 ContainerId,
-            /* [in] */ UINT RangeCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(RangeCount) DPX_BYTE_RANGE RangeList[  ]) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT64 ContainerId,
+            /* [annotation][in] */ 
+            _In_  UINT RangeCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(RangeCount)  DPX_BYTE_RANGE RangeList[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetContainers( 
-            /* [out] */ __RPC__out UINT *ContainerCount,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*ContainerCount) UINT64 **ppContainerIdArray) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *ContainerCount,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*ContainerCount)  UINT64 **ppContainerIdArray) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetContainerPath( 
-            /* [in] */ UINT64 ContainerId,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ContainerPath) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT64 ContainerId,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ContainerPath) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRanges( 
-            /* [in] */ UINT64 ContainerId,
-            /* [in] */ BOOL IncludeCompletedRanges,
-            /* [out] */ __RPC__out UINT *RangeCount,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*RangeCount) DPX_BYTE_RANGE **ppRangeArray) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT64 ContainerId,
+            /* [annotation][in] */ 
+            _In_  BOOL IncludeCompletedRanges,
+            /* [annotation][out] */ 
+            _Out_  UINT *RangeCount,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*RangeCount)  DPX_BYTE_RANGE **ppRangeArray) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Resume( void) = 0;
         
@@ -1590,15 +1740,18 @@ EXTERN_C const IID IID_IDpxDownloadProvider;
         virtual HRESULT STDMETHODCALLTYPE Cancel( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WaitForCompletion( 
-            /* [in] */ DWORD TimeoutMilliseconds) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD TimeoutMilliseconds) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProgress( 
-            /* [out] */ __RPC__out DPX_PROGRESS_REMAIN *pDownloadProgress) = 0;
+            /* [annotation][out] */ 
+            _Out_  DPX_PROGRESS_REMAIN *pDownloadProgress) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ClearRequest( void) = 0;
         
         virtual /* [local] */ void STDMETHODCALLTYPE FreeMemory( 
-            /* [in] */ void *Allocation) = 0;
+            /* [annotation][in] */ 
+            _In_  void *Allocation) = 0;
         
     };
     
@@ -1612,7 +1765,8 @@ EXTERN_C const IID IID_IDpxDownloadProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDpxDownloadProvider * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1627,45 +1781,60 @@ EXTERN_C const IID IID_IDpxDownloadProvider;
         DECLSPEC_XFGVIRT(IDpxDownloadProvider, SetProvideDataCallback)
         HRESULT ( STDMETHODCALLTYPE *SetProvideDataCallback )( 
             __RPC__in IDpxDownloadProvider * This,
-            /* [in] */ __RPC__in_opt IDpxDownloadCallback *pProvideData);
+            /* [annotation][in] */ 
+            _In_  IDpxDownloadCallback *pProvideData);
         
         DECLSPEC_XFGVIRT(IDpxDownloadProvider, GetProvideDataCallback)
         HRESULT ( STDMETHODCALLTYPE *GetProvideDataCallback )( 
             __RPC__in IDpxDownloadProvider * This,
-            /* [out] */ __RPC__deref_out_opt IDpxDownloadCallback **ppProvideData);
+            /* [annotation][out] */ 
+            _Out_  IDpxDownloadCallback **ppProvideData);
         
         DECLSPEC_XFGVIRT(IDpxDownloadProvider, AddContainer)
         HRESULT ( STDMETHODCALLTYPE *AddContainer )( 
             __RPC__in IDpxDownloadProvider * This,
-            /* [in] */ __RPC__in LPCWSTR ContainerFilePath,
-            /* [in] */ UINT64 ContainerId);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR ContainerFilePath,
+            /* [annotation][in] */ 
+            _In_  UINT64 ContainerId);
         
         DECLSPEC_XFGVIRT(IDpxDownloadProvider, AddRanges)
         HRESULT ( STDMETHODCALLTYPE *AddRanges )( 
             __RPC__in IDpxDownloadProvider * This,
-            /* [in] */ UINT64 ContainerId,
-            /* [in] */ UINT RangeCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(RangeCount) DPX_BYTE_RANGE RangeList[  ]);
+            /* [annotation][in] */ 
+            _In_  UINT64 ContainerId,
+            /* [annotation][in] */ 
+            _In_  UINT RangeCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(RangeCount)  DPX_BYTE_RANGE RangeList[  ]);
         
         DECLSPEC_XFGVIRT(IDpxDownloadProvider, GetContainers)
         HRESULT ( STDMETHODCALLTYPE *GetContainers )( 
             __RPC__in IDpxDownloadProvider * This,
-            /* [out] */ __RPC__out UINT *ContainerCount,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*ContainerCount) UINT64 **ppContainerIdArray);
+            /* [annotation][out] */ 
+            _Out_  UINT *ContainerCount,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*ContainerCount)  UINT64 **ppContainerIdArray);
         
         DECLSPEC_XFGVIRT(IDpxDownloadProvider, GetContainerPath)
         HRESULT ( STDMETHODCALLTYPE *GetContainerPath )( 
             __RPC__in IDpxDownloadProvider * This,
-            /* [in] */ UINT64 ContainerId,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ContainerPath);
+            /* [annotation][in] */ 
+            _In_  UINT64 ContainerId,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ContainerPath);
         
         DECLSPEC_XFGVIRT(IDpxDownloadProvider, GetRanges)
         HRESULT ( STDMETHODCALLTYPE *GetRanges )( 
             __RPC__in IDpxDownloadProvider * This,
-            /* [in] */ UINT64 ContainerId,
-            /* [in] */ BOOL IncludeCompletedRanges,
-            /* [out] */ __RPC__out UINT *RangeCount,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*RangeCount) DPX_BYTE_RANGE **ppRangeArray);
+            /* [annotation][in] */ 
+            _In_  UINT64 ContainerId,
+            /* [annotation][in] */ 
+            _In_  BOOL IncludeCompletedRanges,
+            /* [annotation][out] */ 
+            _Out_  UINT *RangeCount,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*RangeCount)  DPX_BYTE_RANGE **ppRangeArray);
         
         DECLSPEC_XFGVIRT(IDpxDownloadProvider, Resume)
         HRESULT ( STDMETHODCALLTYPE *Resume )( 
@@ -1682,12 +1851,14 @@ EXTERN_C const IID IID_IDpxDownloadProvider;
         DECLSPEC_XFGVIRT(IDpxDownloadProvider, WaitForCompletion)
         HRESULT ( STDMETHODCALLTYPE *WaitForCompletion )( 
             __RPC__in IDpxDownloadProvider * This,
-            /* [in] */ DWORD TimeoutMilliseconds);
+            /* [annotation][in] */ 
+            _In_  DWORD TimeoutMilliseconds);
         
         DECLSPEC_XFGVIRT(IDpxDownloadProvider, GetProgress)
         HRESULT ( STDMETHODCALLTYPE *GetProgress )( 
             __RPC__in IDpxDownloadProvider * This,
-            /* [out] */ __RPC__out DPX_PROGRESS_REMAIN *pDownloadProgress);
+            /* [annotation][out] */ 
+            _Out_  DPX_PROGRESS_REMAIN *pDownloadProgress);
         
         DECLSPEC_XFGVIRT(IDpxDownloadProvider, ClearRequest)
         HRESULT ( STDMETHODCALLTYPE *ClearRequest )( 
@@ -1696,7 +1867,8 @@ EXTERN_C const IID IID_IDpxDownloadProvider;
         DECLSPEC_XFGVIRT(IDpxDownloadProvider, FreeMemory)
         /* [local] */ void ( STDMETHODCALLTYPE *FreeMemory )( 
             IDpxDownloadProvider * This,
-            /* [in] */ void *Allocation);
+            /* [annotation][in] */ 
+            _In_  void *Allocation);
         
         END_INTERFACE
     } IDpxDownloadProviderVtbl;
@@ -1778,7 +1950,7 @@ EXTERN_C const IID IID_IDpxDownloadProvider;
 #define __IDpxDownloadCallback_INTERFACE_DEFINED__
 
 /* interface IDpxDownloadCallback */
-/* [nocode][unique][object][uuid] */ 
+/* [unique][object][uuid] */ 
 
 
 EXTERN_C const IID IID_IDpxDownloadCallback;
@@ -1790,21 +1962,32 @@ EXTERN_C const IID IID_IDpxDownloadCallback;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ProvideRequestedData( 
-            /* [in] */ UINT64 ContainerId,
-            /* [in] */ UINT RangeCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(RangeCount) DPX_BYTE_RANGE RangeList[  ],
-            /* [size_is][in] */ __RPC__in_ecount_full(RangeCount) const BYTE *RangeData[  ]) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT64 ContainerId,
+            /* [annotation][in] */ 
+            _In_  UINT RangeCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(RangeCount)  DPX_BYTE_RANGE RangeList[  ],
+            /* [annotation][size_is][in] */ 
+            _In_reads_(RangeCount)  const BYTE *RangeData[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProvideRequestedDataByFile( 
-            /* [in] */ UINT64 ContainerId,
-            /* [in] */ __RPC__in LPCWSTR ResponseFilePath,
-            /* [in] */ UINT RangeCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(RangeCount) DPX_BYTE_RANGE RangeArray[  ],
-            /* [size_is][in] */ __RPC__in_ecount_full(RangeCount) UINT64 OffsetInResponseFile[  ]) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT64 ContainerId,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR ResponseFilePath,
+            /* [annotation][in] */ 
+            _In_  UINT RangeCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(RangeCount)  DPX_BYTE_RANGE RangeArray[  ],
+            /* [annotation][size_is][in] */ 
+            _In_reads_(RangeCount)  UINT64 OffsetInResponseFile[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProvideRequestedDataByPackedRangeFile( 
-            /* [in] */ UINT64 ContainerId,
-            /* [in] */ __RPC__in LPCWSTR ResponseFilePath) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT64 ContainerId,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR ResponseFilePath) = 0;
         
     };
     
@@ -1818,7 +2001,8 @@ EXTERN_C const IID IID_IDpxDownloadCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDpxDownloadCallback * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1833,25 +2017,36 @@ EXTERN_C const IID IID_IDpxDownloadCallback;
         DECLSPEC_XFGVIRT(IDpxDownloadCallback, ProvideRequestedData)
         HRESULT ( STDMETHODCALLTYPE *ProvideRequestedData )( 
             __RPC__in IDpxDownloadCallback * This,
-            /* [in] */ UINT64 ContainerId,
-            /* [in] */ UINT RangeCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(RangeCount) DPX_BYTE_RANGE RangeList[  ],
-            /* [size_is][in] */ __RPC__in_ecount_full(RangeCount) const BYTE *RangeData[  ]);
+            /* [annotation][in] */ 
+            _In_  UINT64 ContainerId,
+            /* [annotation][in] */ 
+            _In_  UINT RangeCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(RangeCount)  DPX_BYTE_RANGE RangeList[  ],
+            /* [annotation][size_is][in] */ 
+            _In_reads_(RangeCount)  const BYTE *RangeData[  ]);
         
         DECLSPEC_XFGVIRT(IDpxDownloadCallback, ProvideRequestedDataByFile)
         HRESULT ( STDMETHODCALLTYPE *ProvideRequestedDataByFile )( 
             __RPC__in IDpxDownloadCallback * This,
-            /* [in] */ UINT64 ContainerId,
-            /* [in] */ __RPC__in LPCWSTR ResponseFilePath,
-            /* [in] */ UINT RangeCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(RangeCount) DPX_BYTE_RANGE RangeArray[  ],
-            /* [size_is][in] */ __RPC__in_ecount_full(RangeCount) UINT64 OffsetInResponseFile[  ]);
+            /* [annotation][in] */ 
+            _In_  UINT64 ContainerId,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR ResponseFilePath,
+            /* [annotation][in] */ 
+            _In_  UINT RangeCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(RangeCount)  DPX_BYTE_RANGE RangeArray[  ],
+            /* [annotation][size_is][in] */ 
+            _In_reads_(RangeCount)  UINT64 OffsetInResponseFile[  ]);
         
         DECLSPEC_XFGVIRT(IDpxDownloadCallback, ProvideRequestedDataByPackedRangeFile)
         HRESULT ( STDMETHODCALLTYPE *ProvideRequestedDataByPackedRangeFile )( 
             __RPC__in IDpxDownloadCallback * This,
-            /* [in] */ UINT64 ContainerId,
-            /* [in] */ __RPC__in LPCWSTR ResponseFilePath);
+            /* [annotation][in] */ 
+            _In_  UINT64 ContainerId,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR ResponseFilePath);
         
         END_INTERFACE
     } IDpxDownloadCallbackVtbl;
@@ -1900,7 +2095,7 @@ EXTERN_C const IID IID_IDpxDownloadCallback;
 #define __IEnumDpxContainers_INTERFACE_DEFINED__
 
 /* interface IEnumDpxContainers */
-/* [nocode][unique][object][uuid] */ 
+/* [unique][object][uuid] */ 
 
 
 EXTERN_C const IID IID_IEnumDpxContainers;
@@ -1912,20 +2107,26 @@ EXTERN_C const IID IID_IEnumDpxContainers;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ UINT ItemCount,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ItemCount, *pFetchedCount) IDpxContainer **ppContainers,
-            /* [out] */ __RPC__out UINT *pFetchedCount) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT ItemCount,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(ItemCount,*pFetchedCount)  IDpxContainer **ppContainers,
+            /* [annotation][out] */ 
+            _Out_  UINT *pFetchedCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ UINT ItemCount) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT ItemCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [out] */ __RPC__deref_out_opt IEnumDpxContainers **ppEnum) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumDpxContainers **ppEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [out] */ __RPC__out UINT *pItemCount) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *pItemCount) = 0;
         
     };
     
@@ -1939,7 +2140,8 @@ EXTERN_C const IID IID_IEnumDpxContainers;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumDpxContainers * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1954,14 +2156,18 @@ EXTERN_C const IID IID_IEnumDpxContainers;
         DECLSPEC_XFGVIRT(IEnumDpxContainers, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumDpxContainers * This,
-            /* [in] */ UINT ItemCount,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ItemCount, *pFetchedCount) IDpxContainer **ppContainers,
-            /* [out] */ __RPC__out UINT *pFetchedCount);
+            /* [annotation][in] */ 
+            _In_  UINT ItemCount,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(ItemCount,*pFetchedCount)  IDpxContainer **ppContainers,
+            /* [annotation][out] */ 
+            _Out_  UINT *pFetchedCount);
         
         DECLSPEC_XFGVIRT(IEnumDpxContainers, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumDpxContainers * This,
-            /* [in] */ UINT ItemCount);
+            /* [annotation][in] */ 
+            _In_  UINT ItemCount);
         
         DECLSPEC_XFGVIRT(IEnumDpxContainers, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -1970,12 +2176,14 @@ EXTERN_C const IID IID_IEnumDpxContainers;
         DECLSPEC_XFGVIRT(IEnumDpxContainers, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumDpxContainers * This,
-            /* [out] */ __RPC__deref_out_opt IEnumDpxContainers **ppEnum);
+            /* [annotation][out] */ 
+            _Out_  IEnumDpxContainers **ppEnum);
         
         DECLSPEC_XFGVIRT(IEnumDpxContainers, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IEnumDpxContainers * This,
-            /* [out] */ __RPC__out UINT *pItemCount);
+            /* [annotation][out] */ 
+            _Out_  UINT *pItemCount);
         
         END_INTERFACE
     } IEnumDpxContainersVtbl;
@@ -2030,7 +2238,7 @@ EXTERN_C const IID IID_IEnumDpxContainers;
 #define __IEnumDpxFiles_INTERFACE_DEFINED__
 
 /* interface IEnumDpxFiles */
-/* [nocode][unique][object][uuid] */ 
+/* [unique][object][uuid] */ 
 
 
 EXTERN_C const IID IID_IEnumDpxFiles;
@@ -2042,20 +2250,26 @@ EXTERN_C const IID IID_IEnumDpxFiles;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ UINT ItemCount,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ItemCount, *pFetchedCount) IDpxFile **ppFiles,
-            /* [out] */ __RPC__out UINT *pFetchedCount) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT ItemCount,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(ItemCount,*pFetchedCount)  IDpxFile **ppFiles,
+            /* [annotation][out] */ 
+            _Out_  UINT *pFetchedCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ UINT ItemCount) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT ItemCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [out] */ __RPC__deref_out_opt IEnumDpxFiles **ppEnum) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumDpxFiles **ppEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [out] */ __RPC__out UINT *pItemCount) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *pItemCount) = 0;
         
     };
     
@@ -2069,7 +2283,8 @@ EXTERN_C const IID IID_IEnumDpxFiles;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumDpxFiles * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2084,14 +2299,18 @@ EXTERN_C const IID IID_IEnumDpxFiles;
         DECLSPEC_XFGVIRT(IEnumDpxFiles, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumDpxFiles * This,
-            /* [in] */ UINT ItemCount,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ItemCount, *pFetchedCount) IDpxFile **ppFiles,
-            /* [out] */ __RPC__out UINT *pFetchedCount);
+            /* [annotation][in] */ 
+            _In_  UINT ItemCount,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(ItemCount,*pFetchedCount)  IDpxFile **ppFiles,
+            /* [annotation][out] */ 
+            _Out_  UINT *pFetchedCount);
         
         DECLSPEC_XFGVIRT(IEnumDpxFiles, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumDpxFiles * This,
-            /* [in] */ UINT ItemCount);
+            /* [annotation][in] */ 
+            _In_  UINT ItemCount);
         
         DECLSPEC_XFGVIRT(IEnumDpxFiles, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -2100,12 +2319,14 @@ EXTERN_C const IID IID_IEnumDpxFiles;
         DECLSPEC_XFGVIRT(IEnumDpxFiles, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumDpxFiles * This,
-            /* [out] */ __RPC__deref_out_opt IEnumDpxFiles **ppEnum);
+            /* [annotation][out] */ 
+            _Out_  IEnumDpxFiles **ppEnum);
         
         DECLSPEC_XFGVIRT(IEnumDpxFiles, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IEnumDpxFiles * This,
-            /* [out] */ __RPC__out UINT *pItemCount);
+            /* [annotation][out] */ 
+            _Out_  UINT *pItemCount);
         
         END_INTERFACE
     } IEnumDpxFilesVtbl;
@@ -2160,7 +2381,7 @@ EXTERN_C const IID IID_IEnumDpxFiles;
 #define __IEnumDpxContainerDirectoryEntries_INTERFACE_DEFINED__
 
 /* interface IEnumDpxContainerDirectoryEntries */
-/* [nocode][unique][object][uuid] */ 
+/* [unique][object][uuid] */ 
 
 
 EXTERN_C const IID IID_IEnumDpxContainerDirectoryEntries;
@@ -2172,20 +2393,26 @@ EXTERN_C const IID IID_IEnumDpxContainerDirectoryEntries;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ UINT ItemCount,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ItemCount, *pFetchedCount) IDpxContainerDirectoryEntry **ppDirectoryEntries,
-            /* [out] */ __RPC__out UINT *pFetchedCount) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT ItemCount,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(ItemCount,*pFetchedCount)  IDpxContainerDirectoryEntry **ppDirectoryEntries,
+            /* [annotation][out] */ 
+            _Out_  UINT *pFetchedCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ UINT ItemCount) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT ItemCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [out] */ __RPC__deref_out_opt IEnumDpxContainerDirectoryEntries **ppEnum) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumDpxContainerDirectoryEntries **ppEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [out] */ __RPC__out UINT *pItemCount) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *pItemCount) = 0;
         
     };
     
@@ -2199,7 +2426,8 @@ EXTERN_C const IID IID_IEnumDpxContainerDirectoryEntries;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumDpxContainerDirectoryEntries * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2214,14 +2442,18 @@ EXTERN_C const IID IID_IEnumDpxContainerDirectoryEntries;
         DECLSPEC_XFGVIRT(IEnumDpxContainerDirectoryEntries, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumDpxContainerDirectoryEntries * This,
-            /* [in] */ UINT ItemCount,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ItemCount, *pFetchedCount) IDpxContainerDirectoryEntry **ppDirectoryEntries,
-            /* [out] */ __RPC__out UINT *pFetchedCount);
+            /* [annotation][in] */ 
+            _In_  UINT ItemCount,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(ItemCount,*pFetchedCount)  IDpxContainerDirectoryEntry **ppDirectoryEntries,
+            /* [annotation][out] */ 
+            _Out_  UINT *pFetchedCount);
         
         DECLSPEC_XFGVIRT(IEnumDpxContainerDirectoryEntries, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumDpxContainerDirectoryEntries * This,
-            /* [in] */ UINT ItemCount);
+            /* [annotation][in] */ 
+            _In_  UINT ItemCount);
         
         DECLSPEC_XFGVIRT(IEnumDpxContainerDirectoryEntries, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -2230,12 +2462,14 @@ EXTERN_C const IID IID_IEnumDpxContainerDirectoryEntries;
         DECLSPEC_XFGVIRT(IEnumDpxContainerDirectoryEntries, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumDpxContainerDirectoryEntries * This,
-            /* [out] */ __RPC__deref_out_opt IEnumDpxContainerDirectoryEntries **ppEnum);
+            /* [annotation][out] */ 
+            _Out_  IEnumDpxContainerDirectoryEntries **ppEnum);
         
         DECLSPEC_XFGVIRT(IEnumDpxContainerDirectoryEntries, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IEnumDpxContainerDirectoryEntries * This,
-            /* [out] */ __RPC__out UINT *pItemCount);
+            /* [annotation][out] */ 
+            _Out_  UINT *pItemCount);
         
         END_INTERFACE
     } IEnumDpxContainerDirectoryEntriesVtbl;
@@ -2324,9 +2558,12 @@ EXTERN_C const IID IID_IDpxEncryptedContainer;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetContainerDecryption( 
-            /* [in] */ UINT DecryptionDataCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(DecryptionDataCount) DpxContainerDecryptionData DecryptionData[  ],
-            /* [in] */ DPX_CONTAINER_ENCRYPTION_ENUM EncryptionType) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT DecryptionDataCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(DecryptionDataCount)  DpxContainerDecryptionData DecryptionData[  ],
+            /* [annotation][in] */ 
+            _In_  DPX_CONTAINER_ENCRYPTION_ENUM EncryptionType) = 0;
         
     };
     
@@ -2340,7 +2577,8 @@ EXTERN_C const IID IID_IDpxEncryptedContainer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDpxEncryptedContainer * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2355,26 +2593,34 @@ EXTERN_C const IID IID_IDpxEncryptedContainer;
         DECLSPEC_XFGVIRT(IDpxContainer, SetContainerPath)
         HRESULT ( STDMETHODCALLTYPE *SetContainerPath )( 
             __RPC__in IDpxEncryptedContainer * This,
-            /* [in] */ __RPC__in LPCWSTR ContainerPath);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR ContainerPath);
         
         DECLSPEC_XFGVIRT(IDpxContainer, GetContainerPath)
         HRESULT ( STDMETHODCALLTYPE *GetContainerPath )( 
             __RPC__in IDpxEncryptedContainer * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pContainerPath);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pContainerPath);
         
         DECLSPEC_XFGVIRT(IDpxContainer, AddFileToExtract)
         HRESULT ( STDMETHODCALLTYPE *AddFileToExtract )( 
             __RPC__in IDpxEncryptedContainer * This,
-            /* [in] */ __RPC__in LPCWSTR SourceFileName,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR TargetFileName,
-            /* [unique][in] */ __RPC__in_opt DPX_HASH *TargetFileHash);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR SourceFileName,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR TargetFileName,
+            /* [annotation][unique][in] */ 
+            _In_  DPX_HASH *TargetFileHash);
         
         DECLSPEC_XFGVIRT(IDpxContainer, AddFileToExtract2)
         HRESULT ( STDMETHODCALLTYPE *AddFileToExtract2 )( 
             __RPC__in IDpxEncryptedContainer * This,
-            /* [in] */ __RPC__in LPCWSTR SourceFileName,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR TargetFileName,
-            /* [out] */ __RPC__deref_out_opt IDpxFile **ppFile);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR SourceFileName,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR TargetFileName,
+            /* [annotation][out] */ 
+            _Out_  IDpxFile **ppFile);
         
         DECLSPEC_XFGVIRT(IDpxContainer, ExtractAllFiles)
         HRESULT ( STDMETHODCALLTYPE *ExtractAllFiles )( 
@@ -2383,33 +2629,40 @@ EXTERN_C const IID IID_IDpxEncryptedContainer;
         DECLSPEC_XFGVIRT(IDpxContainer, EnumFilesToExtract)
         HRESULT ( STDMETHODCALLTYPE *EnumFilesToExtract )( 
             __RPC__in IDpxEncryptedContainer * This,
-            /* [out] */ __RPC__deref_out_opt IEnumDpxFiles **ppEnumFiles);
+            /* [annotation][out] */ 
+            _Out_  IEnumDpxFiles **ppEnumFiles);
         
         DECLSPEC_XFGVIRT(IDpxContainer, SetExpectedContainerIndexHash)
         HRESULT ( STDMETHODCALLTYPE *SetExpectedContainerIndexHash )( 
             __RPC__in IDpxEncryptedContainer * This,
-            /* [in] */ __RPC__in DPX_HASH *pExpectedHash);
+            /* [annotation][in] */ 
+            _In_  DPX_HASH *pExpectedHash);
         
         DECLSPEC_XFGVIRT(IDpxContainer, GetExpectedContainerIndexHash)
         HRESULT ( STDMETHODCALLTYPE *GetExpectedContainerIndexHash )( 
             __RPC__in IDpxEncryptedContainer * This,
-            /* [out] */ __RPC__deref_out_opt DPX_HASH **ppExpectedHash);
+            /* [annotation][out] */ 
+            _Out_  DPX_HASH **ppExpectedHash);
         
         DECLSPEC_XFGVIRT(IDpxContainer, ProvideContainerIndex)
         HRESULT ( STDMETHODCALLTYPE *ProvideContainerIndex )( 
             __RPC__in IDpxEncryptedContainer * This,
-            /* [in] */ UINT IndexSize,
-            /* [size_is][in] */ __RPC__in_ecount_full(IndexSize) BYTE IndexData[  ]);
+            /* [annotation][in] */ 
+            _In_  UINT IndexSize,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(IndexSize)  BYTE IndexData[  ]);
         
         DECLSPEC_XFGVIRT(IDpxContainer, ProvideContainerIndexByFile)
         HRESULT ( STDMETHODCALLTYPE *ProvideContainerIndexByFile )( 
             __RPC__in IDpxEncryptedContainer * This,
-            /* [in] */ __RPC__in LPCWSTR IndexFileName);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR IndexFileName);
         
         DECLSPEC_XFGVIRT(IDpxContainer, EnumDirectoryEntries)
         HRESULT ( STDMETHODCALLTYPE *EnumDirectoryEntries )( 
             __RPC__in IDpxEncryptedContainer * This,
-            /* [out] */ __RPC__deref_out_opt IEnumDpxContainerDirectoryEntries **ppEnumEntries);
+            /* [annotation][out] */ 
+            _Out_  IEnumDpxContainerDirectoryEntries **ppEnumEntries);
         
         DECLSPEC_XFGVIRT(IDpxContainer, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
@@ -2418,24 +2671,30 @@ EXTERN_C const IID IID_IDpxEncryptedContainer;
         DECLSPEC_XFGVIRT(IDpxContainer, SetUserValue)
         HRESULT ( STDMETHODCALLTYPE *SetUserValue )( 
             __RPC__in IDpxEncryptedContainer * This,
-            /* [in] */ UINT64 UserValue);
+            /* [annotation][in] */ 
+            _In_  UINT64 UserValue);
         
         DECLSPEC_XFGVIRT(IDpxContainer, GetUserValue)
         HRESULT ( STDMETHODCALLTYPE *GetUserValue )( 
             __RPC__in IDpxEncryptedContainer * This,
-            /* [out] */ __RPC__out UINT64 *pUserValue);
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pUserValue);
         
         DECLSPEC_XFGVIRT(IDpxContainer, FreeMemory)
         /* [local] */ void ( STDMETHODCALLTYPE *FreeMemory )( 
             IDpxEncryptedContainer * This,
-            /* [in] */ void *Allocation);
+            /* [annotation][in] */ 
+            _In_  void *Allocation);
         
         DECLSPEC_XFGVIRT(IDpxEncryptedContainer, SetContainerDecryption)
         HRESULT ( STDMETHODCALLTYPE *SetContainerDecryption )( 
             __RPC__in IDpxEncryptedContainer * This,
-            /* [in] */ UINT DecryptionDataCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(DecryptionDataCount) DpxContainerDecryptionData DecryptionData[  ],
-            /* [in] */ DPX_CONTAINER_ENCRYPTION_ENUM EncryptionType);
+            /* [annotation][in] */ 
+            _In_  UINT DecryptionDataCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(DecryptionDataCount)  DpxContainerDecryptionData DecryptionData[  ],
+            /* [annotation][in] */ 
+            _In_  DPX_CONTAINER_ENCRYPTION_ENUM EncryptionType);
         
         END_INTERFACE
     } IDpxEncryptedContainerVtbl;
@@ -2551,10 +2810,14 @@ EXTERN_C const IID IID_IDpxContainer2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddPredecessorContainer( 
-            /* [in] */ __RPC__in LPCWSTR ContainerPath,
-            /* [in] */ UINT PredecessorFilePathsCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(PredecessorFilePathsCount) PredecessorFilePathInfo PredecessorFilePaths[  ],
-            /* [out] */ __RPC__deref_out_opt IDpxContainer2 **ppContainer) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR ContainerPath,
+            /* [annotation][in] */ 
+            _In_  UINT PredecessorFilePathsCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(PredecessorFilePathsCount)  PredecessorFilePathInfo PredecessorFilePaths[  ],
+            /* [annotation][out] */ 
+            _Out_  IDpxContainer2 **ppContainer) = 0;
         
     };
     
@@ -2568,7 +2831,8 @@ EXTERN_C const IID IID_IDpxContainer2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDpxContainer2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2583,26 +2847,34 @@ EXTERN_C const IID IID_IDpxContainer2;
         DECLSPEC_XFGVIRT(IDpxContainer, SetContainerPath)
         HRESULT ( STDMETHODCALLTYPE *SetContainerPath )( 
             __RPC__in IDpxContainer2 * This,
-            /* [in] */ __RPC__in LPCWSTR ContainerPath);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR ContainerPath);
         
         DECLSPEC_XFGVIRT(IDpxContainer, GetContainerPath)
         HRESULT ( STDMETHODCALLTYPE *GetContainerPath )( 
             __RPC__in IDpxContainer2 * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pContainerPath);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pContainerPath);
         
         DECLSPEC_XFGVIRT(IDpxContainer, AddFileToExtract)
         HRESULT ( STDMETHODCALLTYPE *AddFileToExtract )( 
             __RPC__in IDpxContainer2 * This,
-            /* [in] */ __RPC__in LPCWSTR SourceFileName,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR TargetFileName,
-            /* [unique][in] */ __RPC__in_opt DPX_HASH *TargetFileHash);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR SourceFileName,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR TargetFileName,
+            /* [annotation][unique][in] */ 
+            _In_  DPX_HASH *TargetFileHash);
         
         DECLSPEC_XFGVIRT(IDpxContainer, AddFileToExtract2)
         HRESULT ( STDMETHODCALLTYPE *AddFileToExtract2 )( 
             __RPC__in IDpxContainer2 * This,
-            /* [in] */ __RPC__in LPCWSTR SourceFileName,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR TargetFileName,
-            /* [out] */ __RPC__deref_out_opt IDpxFile **ppFile);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR SourceFileName,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR TargetFileName,
+            /* [annotation][out] */ 
+            _Out_  IDpxFile **ppFile);
         
         DECLSPEC_XFGVIRT(IDpxContainer, ExtractAllFiles)
         HRESULT ( STDMETHODCALLTYPE *ExtractAllFiles )( 
@@ -2611,33 +2883,40 @@ EXTERN_C const IID IID_IDpxContainer2;
         DECLSPEC_XFGVIRT(IDpxContainer, EnumFilesToExtract)
         HRESULT ( STDMETHODCALLTYPE *EnumFilesToExtract )( 
             __RPC__in IDpxContainer2 * This,
-            /* [out] */ __RPC__deref_out_opt IEnumDpxFiles **ppEnumFiles);
+            /* [annotation][out] */ 
+            _Out_  IEnumDpxFiles **ppEnumFiles);
         
         DECLSPEC_XFGVIRT(IDpxContainer, SetExpectedContainerIndexHash)
         HRESULT ( STDMETHODCALLTYPE *SetExpectedContainerIndexHash )( 
             __RPC__in IDpxContainer2 * This,
-            /* [in] */ __RPC__in DPX_HASH *pExpectedHash);
+            /* [annotation][in] */ 
+            _In_  DPX_HASH *pExpectedHash);
         
         DECLSPEC_XFGVIRT(IDpxContainer, GetExpectedContainerIndexHash)
         HRESULT ( STDMETHODCALLTYPE *GetExpectedContainerIndexHash )( 
             __RPC__in IDpxContainer2 * This,
-            /* [out] */ __RPC__deref_out_opt DPX_HASH **ppExpectedHash);
+            /* [annotation][out] */ 
+            _Out_  DPX_HASH **ppExpectedHash);
         
         DECLSPEC_XFGVIRT(IDpxContainer, ProvideContainerIndex)
         HRESULT ( STDMETHODCALLTYPE *ProvideContainerIndex )( 
             __RPC__in IDpxContainer2 * This,
-            /* [in] */ UINT IndexSize,
-            /* [size_is][in] */ __RPC__in_ecount_full(IndexSize) BYTE IndexData[  ]);
+            /* [annotation][in] */ 
+            _In_  UINT IndexSize,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(IndexSize)  BYTE IndexData[  ]);
         
         DECLSPEC_XFGVIRT(IDpxContainer, ProvideContainerIndexByFile)
         HRESULT ( STDMETHODCALLTYPE *ProvideContainerIndexByFile )( 
             __RPC__in IDpxContainer2 * This,
-            /* [in] */ __RPC__in LPCWSTR IndexFileName);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR IndexFileName);
         
         DECLSPEC_XFGVIRT(IDpxContainer, EnumDirectoryEntries)
         HRESULT ( STDMETHODCALLTYPE *EnumDirectoryEntries )( 
             __RPC__in IDpxContainer2 * This,
-            /* [out] */ __RPC__deref_out_opt IEnumDpxContainerDirectoryEntries **ppEnumEntries);
+            /* [annotation][out] */ 
+            _Out_  IEnumDpxContainerDirectoryEntries **ppEnumEntries);
         
         DECLSPEC_XFGVIRT(IDpxContainer, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
@@ -2646,32 +2925,42 @@ EXTERN_C const IID IID_IDpxContainer2;
         DECLSPEC_XFGVIRT(IDpxContainer, SetUserValue)
         HRESULT ( STDMETHODCALLTYPE *SetUserValue )( 
             __RPC__in IDpxContainer2 * This,
-            /* [in] */ UINT64 UserValue);
+            /* [annotation][in] */ 
+            _In_  UINT64 UserValue);
         
         DECLSPEC_XFGVIRT(IDpxContainer, GetUserValue)
         HRESULT ( STDMETHODCALLTYPE *GetUserValue )( 
             __RPC__in IDpxContainer2 * This,
-            /* [out] */ __RPC__out UINT64 *pUserValue);
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pUserValue);
         
         DECLSPEC_XFGVIRT(IDpxContainer, FreeMemory)
         /* [local] */ void ( STDMETHODCALLTYPE *FreeMemory )( 
             IDpxContainer2 * This,
-            /* [in] */ void *Allocation);
+            /* [annotation][in] */ 
+            _In_  void *Allocation);
         
         DECLSPEC_XFGVIRT(IDpxEncryptedContainer, SetContainerDecryption)
         HRESULT ( STDMETHODCALLTYPE *SetContainerDecryption )( 
             __RPC__in IDpxContainer2 * This,
-            /* [in] */ UINT DecryptionDataCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(DecryptionDataCount) DpxContainerDecryptionData DecryptionData[  ],
-            /* [in] */ DPX_CONTAINER_ENCRYPTION_ENUM EncryptionType);
+            /* [annotation][in] */ 
+            _In_  UINT DecryptionDataCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(DecryptionDataCount)  DpxContainerDecryptionData DecryptionData[  ],
+            /* [annotation][in] */ 
+            _In_  DPX_CONTAINER_ENCRYPTION_ENUM EncryptionType);
         
         DECLSPEC_XFGVIRT(IDpxContainer2, AddPredecessorContainer)
         HRESULT ( STDMETHODCALLTYPE *AddPredecessorContainer )( 
             __RPC__in IDpxContainer2 * This,
-            /* [in] */ __RPC__in LPCWSTR ContainerPath,
-            /* [in] */ UINT PredecessorFilePathsCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(PredecessorFilePathsCount) PredecessorFilePathInfo PredecessorFilePaths[  ],
-            /* [out] */ __RPC__deref_out_opt IDpxContainer2 **ppContainer);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR ContainerPath,
+            /* [annotation][in] */ 
+            _In_  UINT PredecessorFilePathsCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(PredecessorFilePathsCount)  PredecessorFilePathInfo PredecessorFilePaths[  ],
+            /* [annotation][out] */ 
+            _Out_  IDpxContainer2 **ppContainer);
         
         END_INTERFACE
     } IDpxContainer2Vtbl;
@@ -2776,15 +3065,20 @@ EXTERN_C const IID IID_IDpxContainer3;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddPeerContainer( 
-            /* [in] */ __RPC__in LPCWSTR ContainerPath,
-            /* [out] */ __RPC__deref_out_opt IDpxContainer3 **ppContainer) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR ContainerPath,
+            /* [annotation][out] */ 
+            _Out_  IDpxContainer3 **ppContainer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsPeer( 
-            /* [in] */ __RPC__in_opt IDpxContainer3 *ppOtherContainer,
-            /* [out] */ __RPC__out BOOL *pIsPeer) = 0;
+            /* [annotation][in] */ 
+            _In_  IDpxContainer3 *ppOtherContainer,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pIsPeer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPeerGroupId( 
-            /* [out] */ __RPC__out UINT64 *pnPeerGroupId) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pnPeerGroupId) = 0;
         
     };
     
@@ -2798,7 +3092,8 @@ EXTERN_C const IID IID_IDpxContainer3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDpxContainer3 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2813,26 +3108,34 @@ EXTERN_C const IID IID_IDpxContainer3;
         DECLSPEC_XFGVIRT(IDpxContainer, SetContainerPath)
         HRESULT ( STDMETHODCALLTYPE *SetContainerPath )( 
             __RPC__in IDpxContainer3 * This,
-            /* [in] */ __RPC__in LPCWSTR ContainerPath);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR ContainerPath);
         
         DECLSPEC_XFGVIRT(IDpxContainer, GetContainerPath)
         HRESULT ( STDMETHODCALLTYPE *GetContainerPath )( 
             __RPC__in IDpxContainer3 * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pContainerPath);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pContainerPath);
         
         DECLSPEC_XFGVIRT(IDpxContainer, AddFileToExtract)
         HRESULT ( STDMETHODCALLTYPE *AddFileToExtract )( 
             __RPC__in IDpxContainer3 * This,
-            /* [in] */ __RPC__in LPCWSTR SourceFileName,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR TargetFileName,
-            /* [unique][in] */ __RPC__in_opt DPX_HASH *TargetFileHash);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR SourceFileName,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR TargetFileName,
+            /* [annotation][unique][in] */ 
+            _In_  DPX_HASH *TargetFileHash);
         
         DECLSPEC_XFGVIRT(IDpxContainer, AddFileToExtract2)
         HRESULT ( STDMETHODCALLTYPE *AddFileToExtract2 )( 
             __RPC__in IDpxContainer3 * This,
-            /* [in] */ __RPC__in LPCWSTR SourceFileName,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR TargetFileName,
-            /* [out] */ __RPC__deref_out_opt IDpxFile **ppFile);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR SourceFileName,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR TargetFileName,
+            /* [annotation][out] */ 
+            _Out_  IDpxFile **ppFile);
         
         DECLSPEC_XFGVIRT(IDpxContainer, ExtractAllFiles)
         HRESULT ( STDMETHODCALLTYPE *ExtractAllFiles )( 
@@ -2841,33 +3144,40 @@ EXTERN_C const IID IID_IDpxContainer3;
         DECLSPEC_XFGVIRT(IDpxContainer, EnumFilesToExtract)
         HRESULT ( STDMETHODCALLTYPE *EnumFilesToExtract )( 
             __RPC__in IDpxContainer3 * This,
-            /* [out] */ __RPC__deref_out_opt IEnumDpxFiles **ppEnumFiles);
+            /* [annotation][out] */ 
+            _Out_  IEnumDpxFiles **ppEnumFiles);
         
         DECLSPEC_XFGVIRT(IDpxContainer, SetExpectedContainerIndexHash)
         HRESULT ( STDMETHODCALLTYPE *SetExpectedContainerIndexHash )( 
             __RPC__in IDpxContainer3 * This,
-            /* [in] */ __RPC__in DPX_HASH *pExpectedHash);
+            /* [annotation][in] */ 
+            _In_  DPX_HASH *pExpectedHash);
         
         DECLSPEC_XFGVIRT(IDpxContainer, GetExpectedContainerIndexHash)
         HRESULT ( STDMETHODCALLTYPE *GetExpectedContainerIndexHash )( 
             __RPC__in IDpxContainer3 * This,
-            /* [out] */ __RPC__deref_out_opt DPX_HASH **ppExpectedHash);
+            /* [annotation][out] */ 
+            _Out_  DPX_HASH **ppExpectedHash);
         
         DECLSPEC_XFGVIRT(IDpxContainer, ProvideContainerIndex)
         HRESULT ( STDMETHODCALLTYPE *ProvideContainerIndex )( 
             __RPC__in IDpxContainer3 * This,
-            /* [in] */ UINT IndexSize,
-            /* [size_is][in] */ __RPC__in_ecount_full(IndexSize) BYTE IndexData[  ]);
+            /* [annotation][in] */ 
+            _In_  UINT IndexSize,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(IndexSize)  BYTE IndexData[  ]);
         
         DECLSPEC_XFGVIRT(IDpxContainer, ProvideContainerIndexByFile)
         HRESULT ( STDMETHODCALLTYPE *ProvideContainerIndexByFile )( 
             __RPC__in IDpxContainer3 * This,
-            /* [in] */ __RPC__in LPCWSTR IndexFileName);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR IndexFileName);
         
         DECLSPEC_XFGVIRT(IDpxContainer, EnumDirectoryEntries)
         HRESULT ( STDMETHODCALLTYPE *EnumDirectoryEntries )( 
             __RPC__in IDpxContainer3 * This,
-            /* [out] */ __RPC__deref_out_opt IEnumDpxContainerDirectoryEntries **ppEnumEntries);
+            /* [annotation][out] */ 
+            _Out_  IEnumDpxContainerDirectoryEntries **ppEnumEntries);
         
         DECLSPEC_XFGVIRT(IDpxContainer, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
@@ -2876,49 +3186,64 @@ EXTERN_C const IID IID_IDpxContainer3;
         DECLSPEC_XFGVIRT(IDpxContainer, SetUserValue)
         HRESULT ( STDMETHODCALLTYPE *SetUserValue )( 
             __RPC__in IDpxContainer3 * This,
-            /* [in] */ UINT64 UserValue);
+            /* [annotation][in] */ 
+            _In_  UINT64 UserValue);
         
         DECLSPEC_XFGVIRT(IDpxContainer, GetUserValue)
         HRESULT ( STDMETHODCALLTYPE *GetUserValue )( 
             __RPC__in IDpxContainer3 * This,
-            /* [out] */ __RPC__out UINT64 *pUserValue);
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pUserValue);
         
         DECLSPEC_XFGVIRT(IDpxContainer, FreeMemory)
         /* [local] */ void ( STDMETHODCALLTYPE *FreeMemory )( 
             IDpxContainer3 * This,
-            /* [in] */ void *Allocation);
+            /* [annotation][in] */ 
+            _In_  void *Allocation);
         
         DECLSPEC_XFGVIRT(IDpxEncryptedContainer, SetContainerDecryption)
         HRESULT ( STDMETHODCALLTYPE *SetContainerDecryption )( 
             __RPC__in IDpxContainer3 * This,
-            /* [in] */ UINT DecryptionDataCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(DecryptionDataCount) DpxContainerDecryptionData DecryptionData[  ],
-            /* [in] */ DPX_CONTAINER_ENCRYPTION_ENUM EncryptionType);
+            /* [annotation][in] */ 
+            _In_  UINT DecryptionDataCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(DecryptionDataCount)  DpxContainerDecryptionData DecryptionData[  ],
+            /* [annotation][in] */ 
+            _In_  DPX_CONTAINER_ENCRYPTION_ENUM EncryptionType);
         
         DECLSPEC_XFGVIRT(IDpxContainer2, AddPredecessorContainer)
         HRESULT ( STDMETHODCALLTYPE *AddPredecessorContainer )( 
             __RPC__in IDpxContainer3 * This,
-            /* [in] */ __RPC__in LPCWSTR ContainerPath,
-            /* [in] */ UINT PredecessorFilePathsCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(PredecessorFilePathsCount) PredecessorFilePathInfo PredecessorFilePaths[  ],
-            /* [out] */ __RPC__deref_out_opt IDpxContainer2 **ppContainer);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR ContainerPath,
+            /* [annotation][in] */ 
+            _In_  UINT PredecessorFilePathsCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(PredecessorFilePathsCount)  PredecessorFilePathInfo PredecessorFilePaths[  ],
+            /* [annotation][out] */ 
+            _Out_  IDpxContainer2 **ppContainer);
         
         DECLSPEC_XFGVIRT(IDpxContainer3, AddPeerContainer)
         HRESULT ( STDMETHODCALLTYPE *AddPeerContainer )( 
             __RPC__in IDpxContainer3 * This,
-            /* [in] */ __RPC__in LPCWSTR ContainerPath,
-            /* [out] */ __RPC__deref_out_opt IDpxContainer3 **ppContainer);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR ContainerPath,
+            /* [annotation][out] */ 
+            _Out_  IDpxContainer3 **ppContainer);
         
         DECLSPEC_XFGVIRT(IDpxContainer3, IsPeer)
         HRESULT ( STDMETHODCALLTYPE *IsPeer )( 
             __RPC__in IDpxContainer3 * This,
-            /* [in] */ __RPC__in_opt IDpxContainer3 *ppOtherContainer,
-            /* [out] */ __RPC__out BOOL *pIsPeer);
+            /* [annotation][in] */ 
+            _In_  IDpxContainer3 *ppOtherContainer,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pIsPeer);
         
         DECLSPEC_XFGVIRT(IDpxContainer3, GetPeerGroupId)
         HRESULT ( STDMETHODCALLTYPE *GetPeerGroupId )( 
             __RPC__in IDpxContainer3 * This,
-            /* [out] */ __RPC__out UINT64 *pnPeerGroupId);
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pnPeerGroupId);
         
         END_INTERFACE
     } IDpxContainer3Vtbl;

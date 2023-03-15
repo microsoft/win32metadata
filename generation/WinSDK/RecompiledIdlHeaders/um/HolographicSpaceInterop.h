@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -90,9 +90,12 @@ EXTERN_C const IID IID_IHolographicSpaceInterop;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateForWindow( 
-            /* [in] */ __RPC__in HWND window,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **holographicSpace) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND window,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **holographicSpace) = 0;
         
     };
     
@@ -106,7 +109,8 @@ EXTERN_C const IID IID_IHolographicSpaceInterop;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IHolographicSpaceInterop * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -137,9 +141,12 @@ EXTERN_C const IID IID_IHolographicSpaceInterop;
         DECLSPEC_XFGVIRT(IHolographicSpaceInterop, CreateForWindow)
         HRESULT ( STDMETHODCALLTYPE *CreateForWindow )( 
             __RPC__in IHolographicSpaceInterop * This,
-            /* [in] */ __RPC__in HWND window,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **holographicSpace);
+            /* [annotation][in] */ 
+            _In_  HWND window,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **holographicSpace);
         
         END_INTERFACE
     } IHolographicSpaceInteropVtbl;

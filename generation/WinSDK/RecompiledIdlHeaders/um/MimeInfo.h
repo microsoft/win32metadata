@@ -107,9 +107,12 @@ EXTERN_C const IID IID_IMimeInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetMimeCLSIDMapping( 
-            /* [out] */ UINT *pcTypes,
-            /* [out] */ LPCSTR **ppszTypes,
-            /* [out] */ CLSID **ppclsID) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *pcTypes,
+            /* [annotation][out] */ 
+            _Out_  LPCSTR **ppszTypes,
+            /* [annotation][out] */ 
+            _Out_  CLSID **ppclsID) = 0;
         
     };
     
@@ -123,7 +126,8 @@ EXTERN_C const IID IID_IMimeInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMimeInfo * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -138,9 +142,12 @@ EXTERN_C const IID IID_IMimeInfo;
         DECLSPEC_XFGVIRT(IMimeInfo, GetMimeCLSIDMapping)
         HRESULT ( STDMETHODCALLTYPE *GetMimeCLSIDMapping )( 
             IMimeInfo * This,
-            /* [out] */ UINT *pcTypes,
-            /* [out] */ LPCSTR **ppszTypes,
-            /* [out] */ CLSID **ppclsID);
+            /* [annotation][out] */ 
+            _Out_  UINT *pcTypes,
+            /* [annotation][out] */ 
+            _Out_  LPCSTR **ppszTypes,
+            /* [annotation][out] */ 
+            _Out_  CLSID **ppclsID);
         
         END_INTERFACE
     } IMimeInfoVtbl;

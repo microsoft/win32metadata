@@ -843,10 +843,12 @@ EXTERN_C const IID IID_IRDPSRAPIDebug;
     {
     public:
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_CLXCmdLine( 
-            /* [in] */ __RPC__in BSTR CLXCmdLine) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR CLXCmdLine) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_CLXCmdLine( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pCLXCmdLine) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pCLXCmdLine) = 0;
         
     };
     
@@ -860,7 +862,8 @@ EXTERN_C const IID IID_IRDPSRAPIDebug;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPIDebug * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -875,12 +878,14 @@ EXTERN_C const IID IID_IRDPSRAPIDebug;
         DECLSPEC_XFGVIRT(IRDPSRAPIDebug, put_CLXCmdLine)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CLXCmdLine )( 
             __RPC__in IRDPSRAPIDebug * This,
-            /* [in] */ __RPC__in BSTR CLXCmdLine);
+            /* [annotation][in] */ 
+            _In_  BSTR CLXCmdLine);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIDebug, get_CLXCmdLine)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CLXCmdLine )( 
             __RPC__in IRDPSRAPIDebug * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pCLXCmdLine);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pCLXCmdLine);
         
         END_INTERFACE
     } IRDPSRAPIDebugVtbl;
@@ -938,7 +943,8 @@ EXTERN_C const IID IID_IRDPSRAPIPerfCounterLogger;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE LogValue( 
-            /* [in] */ __int64 lValue) = 0;
+            /* [annotation][in] */ 
+            _In_  __int64 lValue) = 0;
         
     };
     
@@ -952,7 +958,8 @@ EXTERN_C const IID IID_IRDPSRAPIPerfCounterLogger;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPIPerfCounterLogger * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -967,7 +974,8 @@ EXTERN_C const IID IID_IRDPSRAPIPerfCounterLogger;
         DECLSPEC_XFGVIRT(IRDPSRAPIPerfCounterLogger, LogValue)
         HRESULT ( STDMETHODCALLTYPE *LogValue )( 
             __RPC__in IRDPSRAPIPerfCounterLogger * This,
-            /* [in] */ __int64 lValue);
+            /* [annotation][in] */ 
+            _In_  __int64 lValue);
         
         END_INTERFACE
     } IRDPSRAPIPerfCounterLoggerVtbl;
@@ -1022,8 +1030,10 @@ EXTERN_C const IID IID_IRDPSRAPIPerfCounterLoggingManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateLogger( 
-            /* [in] */ __RPC__in BSTR bstrCounterName,
-            /* [out] */ __RPC__deref_out_opt IRDPSRAPIPerfCounterLogger **ppLogger) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrCounterName,
+            /* [annotation][out] */ 
+            _Out_  IRDPSRAPIPerfCounterLogger **ppLogger) = 0;
         
     };
     
@@ -1037,7 +1047,8 @@ EXTERN_C const IID IID_IRDPSRAPIPerfCounterLoggingManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPIPerfCounterLoggingManager * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1052,8 +1063,10 @@ EXTERN_C const IID IID_IRDPSRAPIPerfCounterLoggingManager;
         DECLSPEC_XFGVIRT(IRDPSRAPIPerfCounterLoggingManager, CreateLogger)
         HRESULT ( STDMETHODCALLTYPE *CreateLogger )( 
             __RPC__in IRDPSRAPIPerfCounterLoggingManager * This,
-            /* [in] */ __RPC__in BSTR bstrCounterName,
-            /* [out] */ __RPC__deref_out_opt IRDPSRAPIPerfCounterLogger **ppLogger);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrCounterName,
+            /* [annotation][out] */ 
+            _Out_  IRDPSRAPIPerfCounterLogger **ppLogger);
         
         END_INTERFACE
     } IRDPSRAPIPerfCounterLoggingManagerVtbl;
@@ -1108,16 +1121,20 @@ EXTERN_C const IID IID_IRDPSRAPIAudioStream;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [out] */ __RPC__out __int64 *pnPeriodInHundredNsIntervals) = 0;
+            /* [annotation][out] */ 
+            _Out_  __int64 *pnPeriodInHundredNsIntervals) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Start( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Stop( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBuffer( 
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcbData) BYTE **ppbData,
-            /* [out] */ __RPC__out UINT32 *pcbData,
-            /* [out] */ __RPC__out UINT64 *pTimestamp) = 0;
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcbData)  BYTE **ppbData,
+            /* [annotation][out] */ 
+            _Out_  UINT32 *pcbData,
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pTimestamp) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FreeBuffer( void) = 0;
         
@@ -1133,7 +1150,8 @@ EXTERN_C const IID IID_IRDPSRAPIAudioStream;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPIAudioStream * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1148,7 +1166,8 @@ EXTERN_C const IID IID_IRDPSRAPIAudioStream;
         DECLSPEC_XFGVIRT(IRDPSRAPIAudioStream, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IRDPSRAPIAudioStream * This,
-            /* [out] */ __RPC__out __int64 *pnPeriodInHundredNsIntervals);
+            /* [annotation][out] */ 
+            _Out_  __int64 *pnPeriodInHundredNsIntervals);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIAudioStream, Start)
         HRESULT ( STDMETHODCALLTYPE *Start )( 
@@ -1161,9 +1180,12 @@ EXTERN_C const IID IID_IRDPSRAPIAudioStream;
         DECLSPEC_XFGVIRT(IRDPSRAPIAudioStream, GetBuffer)
         HRESULT ( STDMETHODCALLTYPE *GetBuffer )( 
             __RPC__in IRDPSRAPIAudioStream * This,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcbData) BYTE **ppbData,
-            /* [out] */ __RPC__out UINT32 *pcbData,
-            /* [out] */ __RPC__out UINT64 *pTimestamp);
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcbData)  BYTE **ppbData,
+            /* [annotation][out] */ 
+            _Out_  UINT32 *pcbData,
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pTimestamp);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIAudioStream, FreeBuffer)
         HRESULT ( STDMETHODCALLTYPE *FreeBuffer )( 
@@ -1234,9 +1256,12 @@ EXTERN_C const IID IID_IRDPSRAPIClipboardUseEvents;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnPasteFromClipboard( 
-            /* [in] */ UINT clipboardFormat,
-            /* [in] */ __RPC__in_opt IDispatch *pAttendee,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pRetVal) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT clipboardFormat,
+            /* [annotation][in] */ 
+            _In_  IDispatch *pAttendee,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pRetVal) = 0;
         
     };
     
@@ -1250,7 +1275,8 @@ EXTERN_C const IID IID_IRDPSRAPIClipboardUseEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPIClipboardUseEvents * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1265,9 +1291,12 @@ EXTERN_C const IID IID_IRDPSRAPIClipboardUseEvents;
         DECLSPEC_XFGVIRT(IRDPSRAPIClipboardUseEvents, OnPasteFromClipboard)
         HRESULT ( STDMETHODCALLTYPE *OnPasteFromClipboard )( 
             __RPC__in IRDPSRAPIClipboardUseEvents * This,
-            /* [in] */ UINT clipboardFormat,
-            /* [in] */ __RPC__in_opt IDispatch *pAttendee,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pRetVal);
+            /* [annotation][in] */ 
+            _In_  UINT clipboardFormat,
+            /* [annotation][in] */ 
+            _In_  IDispatch *pAttendee,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pRetVal);
         
         END_INTERFACE
     } IRDPSRAPIClipboardUseEventsVtbl;
@@ -1331,24 +1360,30 @@ EXTERN_C const IID IID_IRDPSRAPIWindow;
     {
     public:
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
-            /* [retval][out] */ __RPC__out long *pRetVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pRetVal) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Application( 
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIApplication **pApplication) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIApplication **pApplication) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Shared( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pRetVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pRetVal) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Shared( 
-            /* [in] */ VARIANT_BOOL NewVal) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL NewVal) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pRetVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pRetVal) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Show( void) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Flags( 
-            /* [retval][out] */ __RPC__out unsigned long *pdwFlags) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  unsigned long *pdwFlags) = 0;
         
     };
     
@@ -1362,7 +1397,8 @@ EXTERN_C const IID IID_IRDPSRAPIWindow;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPIWindow * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1377,23 +1413,31 @@ EXTERN_C const IID IID_IRDPSRAPIWindow;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRDPSRAPIWindow * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRDPSRAPIWindow * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRDPSRAPIWindow * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1418,27 +1462,32 @@ EXTERN_C const IID IID_IRDPSRAPIWindow;
         DECLSPEC_XFGVIRT(IRDPSRAPIWindow, get_Id)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IRDPSRAPIWindow * This,
-            /* [retval][out] */ __RPC__out long *pRetVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pRetVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIWindow, get_Application)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Application )( 
             __RPC__in IRDPSRAPIWindow * This,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIApplication **pApplication);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIApplication **pApplication);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIWindow, get_Shared)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Shared )( 
             __RPC__in IRDPSRAPIWindow * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pRetVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIWindow, put_Shared)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Shared )( 
             __RPC__in IRDPSRAPIWindow * This,
-            /* [in] */ VARIANT_BOOL NewVal);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL NewVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIWindow, get_Name)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IRDPSRAPIWindow * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pRetVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pRetVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIWindow, Show)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Show )( 
@@ -1447,7 +1496,8 @@ EXTERN_C const IID IID_IRDPSRAPIWindow;
         DECLSPEC_XFGVIRT(IRDPSRAPIWindow, get_Flags)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Flags )( 
             __RPC__in IRDPSRAPIWindow * This,
-            /* [retval][out] */ __RPC__out unsigned long *pdwFlags);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  unsigned long *pdwFlags);
         
         END_INTERFACE
     } IRDPSRAPIWindowVtbl;
@@ -1533,11 +1583,14 @@ EXTERN_C const IID IID_IRDPSRAPIWindowList;
     {
     public:
         virtual /* [id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **retval) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [in] */ long item,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIWindow **pWindow) = 0;
+            /* [annotation][in] */ 
+            _In_  long item,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIWindow **pWindow) = 0;
         
     };
     
@@ -1551,7 +1604,8 @@ EXTERN_C const IID IID_IRDPSRAPIWindowList;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPIWindowList * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1566,23 +1620,31 @@ EXTERN_C const IID IID_IRDPSRAPIWindowList;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRDPSRAPIWindowList * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRDPSRAPIWindowList * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRDPSRAPIWindowList * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1607,13 +1669,16 @@ EXTERN_C const IID IID_IRDPSRAPIWindowList;
         DECLSPEC_XFGVIRT(IRDPSRAPIWindowList, get__NewEnum)
         /* [id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IRDPSRAPIWindowList * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **retval);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIWindowList, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IRDPSRAPIWindowList * This,
-            /* [in] */ long item,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIWindow **pWindow);
+            /* [annotation][in] */ 
+            _In_  long item,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIWindow **pWindow);
         
         END_INTERFACE
     } IRDPSRAPIWindowListVtbl;
@@ -1684,22 +1749,28 @@ EXTERN_C const IID IID_IRDPSRAPIApplication;
     {
     public:
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Windows( 
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIWindowList **pWindowList) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIWindowList **pWindowList) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
-            /* [retval][out] */ __RPC__out long *pRetVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pRetVal) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Shared( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pRetVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pRetVal) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Shared( 
-            /* [in] */ VARIANT_BOOL NewVal) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL NewVal) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pRetVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pRetVal) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Flags( 
-            /* [retval][out] */ __RPC__out unsigned long *pdwFlags) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  unsigned long *pdwFlags) = 0;
         
     };
     
@@ -1713,7 +1784,8 @@ EXTERN_C const IID IID_IRDPSRAPIApplication;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPIApplication * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1728,23 +1800,31 @@ EXTERN_C const IID IID_IRDPSRAPIApplication;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRDPSRAPIApplication * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRDPSRAPIApplication * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRDPSRAPIApplication * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1769,32 +1849,38 @@ EXTERN_C const IID IID_IRDPSRAPIApplication;
         DECLSPEC_XFGVIRT(IRDPSRAPIApplication, get_Windows)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Windows )( 
             __RPC__in IRDPSRAPIApplication * This,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIWindowList **pWindowList);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIWindowList **pWindowList);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIApplication, get_Id)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IRDPSRAPIApplication * This,
-            /* [retval][out] */ __RPC__out long *pRetVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pRetVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIApplication, get_Shared)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Shared )( 
             __RPC__in IRDPSRAPIApplication * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pRetVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIApplication, put_Shared)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Shared )( 
             __RPC__in IRDPSRAPIApplication * This,
-            /* [in] */ VARIANT_BOOL NewVal);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL NewVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIApplication, get_Name)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IRDPSRAPIApplication * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pRetVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pRetVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIApplication, get_Flags)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Flags )( 
             __RPC__in IRDPSRAPIApplication * This,
-            /* [retval][out] */ __RPC__out unsigned long *pdwFlags);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  unsigned long *pdwFlags);
         
         END_INTERFACE
     } IRDPSRAPIApplicationVtbl;
@@ -1877,11 +1963,14 @@ EXTERN_C const IID IID_IRDPSRAPIApplicationList;
     {
     public:
         virtual /* [id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **retval) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [in] */ long item,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIApplication **pApplication) = 0;
+            /* [annotation][in] */ 
+            _In_  long item,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIApplication **pApplication) = 0;
         
     };
     
@@ -1895,7 +1984,8 @@ EXTERN_C const IID IID_IRDPSRAPIApplicationList;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPIApplicationList * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1910,23 +2000,31 @@ EXTERN_C const IID IID_IRDPSRAPIApplicationList;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRDPSRAPIApplicationList * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRDPSRAPIApplicationList * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRDPSRAPIApplicationList * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1951,13 +2049,16 @@ EXTERN_C const IID IID_IRDPSRAPIApplicationList;
         DECLSPEC_XFGVIRT(IRDPSRAPIApplicationList, get__NewEnum)
         /* [id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IRDPSRAPIApplicationList * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **retval);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIApplicationList, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IRDPSRAPIApplicationList * This,
-            /* [in] */ long item,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIApplication **pApplication);
+            /* [annotation][in] */ 
+            _In_  long item,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIApplication **pApplication);
         
         END_INTERFACE
     } IRDPSRAPIApplicationListVtbl;
@@ -2028,16 +2129,20 @@ EXTERN_C const IID IID_IRDPSRAPIApplicationFilter;
     {
     public:
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Applications( 
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIApplicationList **pApplications) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIApplicationList **pApplications) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Windows( 
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIWindowList **pWindows) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIWindowList **pWindows) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Enabled( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pRetVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pRetVal) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Enabled( 
-            /* [in] */ VARIANT_BOOL NewVal) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL NewVal) = 0;
         
     };
     
@@ -2051,7 +2156,8 @@ EXTERN_C const IID IID_IRDPSRAPIApplicationFilter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPIApplicationFilter * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2066,23 +2172,31 @@ EXTERN_C const IID IID_IRDPSRAPIApplicationFilter;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRDPSRAPIApplicationFilter * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRDPSRAPIApplicationFilter * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRDPSRAPIApplicationFilter * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2107,22 +2221,26 @@ EXTERN_C const IID IID_IRDPSRAPIApplicationFilter;
         DECLSPEC_XFGVIRT(IRDPSRAPIApplicationFilter, get_Applications)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Applications )( 
             __RPC__in IRDPSRAPIApplicationFilter * This,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIApplicationList **pApplications);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIApplicationList **pApplications);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIApplicationFilter, get_Windows)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Windows )( 
             __RPC__in IRDPSRAPIApplicationFilter * This,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIWindowList **pWindows);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIWindowList **pWindows);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIApplicationFilter, get_Enabled)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             __RPC__in IRDPSRAPIApplicationFilter * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pRetVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIApplicationFilter, put_Enabled)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             __RPC__in IRDPSRAPIApplicationFilter * This,
-            /* [in] */ VARIANT_BOOL NewVal);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL NewVal);
         
         END_INTERFACE
     } IRDPSRAPIApplicationFilterVtbl;
@@ -2199,12 +2317,16 @@ EXTERN_C const IID IID_IRDPSRAPISessionProperties;
     {
     public:
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Property( 
-            /* [in] */ __RPC__in BSTR PropertyName,
-            /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR PropertyName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVal) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Property( 
-            /* [in] */ __RPC__in BSTR PropertyName,
-            /* [in] */ VARIANT newVal) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR PropertyName,
+            /* [annotation][in] */ 
+            _In_  VARIANT newVal) = 0;
         
     };
     
@@ -2218,7 +2340,8 @@ EXTERN_C const IID IID_IRDPSRAPISessionProperties;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPISessionProperties * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2233,23 +2356,31 @@ EXTERN_C const IID IID_IRDPSRAPISessionProperties;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRDPSRAPISessionProperties * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRDPSRAPISessionProperties * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRDPSRAPISessionProperties * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2274,14 +2405,18 @@ EXTERN_C const IID IID_IRDPSRAPISessionProperties;
         DECLSPEC_XFGVIRT(IRDPSRAPISessionProperties, get_Property)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Property )( 
             __RPC__in IRDPSRAPISessionProperties * This,
-            /* [in] */ __RPC__in BSTR PropertyName,
-            /* [retval][out] */ __RPC__out VARIANT *pVal);
+            /* [annotation][in] */ 
+            _In_  BSTR PropertyName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPISessionProperties, put_Property)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Property )( 
             __RPC__in IRDPSRAPISessionProperties * This,
-            /* [in] */ __RPC__in BSTR PropertyName,
-            /* [in] */ VARIANT newVal);
+            /* [annotation][in] */ 
+            _In_  BSTR PropertyName,
+            /* [annotation][in] */ 
+            _In_  VARIANT newVal);
         
         END_INTERFACE
     } IRDPSRAPISessionPropertiesVtbl;
@@ -2352,25 +2487,32 @@ EXTERN_C const IID IID_IRDPSRAPIInvitation;
     {
     public:
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ConnectionString( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pbstrVal) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_GroupName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pbstrVal) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Password( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pbstrVal) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_AttendeeLimit( 
-            /* [retval][out] */ __RPC__out long *pRetVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pRetVal) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_AttendeeLimit( 
-            /* [in] */ long NewVal) = 0;
+            /* [annotation][in] */ 
+            _In_  long NewVal) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Revoked( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pRetVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pRetVal) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Revoked( 
-            /* [in] */ VARIANT_BOOL NewVal) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL NewVal) = 0;
         
     };
     
@@ -2384,7 +2526,8 @@ EXTERN_C const IID IID_IRDPSRAPIInvitation;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPIInvitation * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2399,23 +2542,31 @@ EXTERN_C const IID IID_IRDPSRAPIInvitation;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRDPSRAPIInvitation * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRDPSRAPIInvitation * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRDPSRAPIInvitation * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2440,37 +2591,44 @@ EXTERN_C const IID IID_IRDPSRAPIInvitation;
         DECLSPEC_XFGVIRT(IRDPSRAPIInvitation, get_ConnectionString)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectionString )( 
             __RPC__in IRDPSRAPIInvitation * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pbstrVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIInvitation, get_GroupName)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_GroupName )( 
             __RPC__in IRDPSRAPIInvitation * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pbstrVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIInvitation, get_Password)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Password )( 
             __RPC__in IRDPSRAPIInvitation * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pbstrVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIInvitation, get_AttendeeLimit)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AttendeeLimit )( 
             __RPC__in IRDPSRAPIInvitation * This,
-            /* [retval][out] */ __RPC__out long *pRetVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pRetVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIInvitation, put_AttendeeLimit)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AttendeeLimit )( 
             __RPC__in IRDPSRAPIInvitation * This,
-            /* [in] */ long NewVal);
+            /* [annotation][in] */ 
+            _In_  long NewVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIInvitation, get_Revoked)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Revoked )( 
             __RPC__in IRDPSRAPIInvitation * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pRetVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIInvitation, put_Revoked)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Revoked )( 
             __RPC__in IRDPSRAPIInvitation * This,
-            /* [in] */ VARIANT_BOOL NewVal);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL NewVal);
         
         END_INTERFACE
     } IRDPSRAPIInvitationVtbl;
@@ -2556,21 +2714,30 @@ EXTERN_C const IID IID_IRDPSRAPIInvitationManager;
     {
     public:
         virtual /* [id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **retval) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [in] */ VARIANT item,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIInvitation **ppInvitation) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT item,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIInvitation **ppInvitation) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [retval][out] */ __RPC__out long *pRetVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pRetVal) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateInvitation( 
-            /* [in] */ __RPC__in BSTR bstrAuthString,
-            /* [in] */ __RPC__in BSTR bstrGroupName,
-            /* [in] */ __RPC__in BSTR bstrPassword,
-            /* [in] */ long AttendeeLimit,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIInvitation **ppInvitation) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrAuthString,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrGroupName,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrPassword,
+            /* [annotation][in] */ 
+            _In_  long AttendeeLimit,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIInvitation **ppInvitation) = 0;
         
     };
     
@@ -2584,7 +2751,8 @@ EXTERN_C const IID IID_IRDPSRAPIInvitationManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPIInvitationManager * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2599,23 +2767,31 @@ EXTERN_C const IID IID_IRDPSRAPIInvitationManager;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRDPSRAPIInvitationManager * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRDPSRAPIInvitationManager * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRDPSRAPIInvitationManager * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2640,27 +2816,36 @@ EXTERN_C const IID IID_IRDPSRAPIInvitationManager;
         DECLSPEC_XFGVIRT(IRDPSRAPIInvitationManager, get__NewEnum)
         /* [id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IRDPSRAPIInvitationManager * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **retval);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIInvitationManager, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IRDPSRAPIInvitationManager * This,
-            /* [in] */ VARIANT item,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIInvitation **ppInvitation);
+            /* [annotation][in] */ 
+            _In_  VARIANT item,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIInvitation **ppInvitation);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIInvitationManager, get_Count)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IRDPSRAPIInvitationManager * This,
-            /* [retval][out] */ __RPC__out long *pRetVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pRetVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIInvitationManager, CreateInvitation)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateInvitation )( 
             __RPC__in IRDPSRAPIInvitationManager * This,
-            /* [in] */ __RPC__in BSTR bstrAuthString,
-            /* [in] */ __RPC__in BSTR bstrGroupName,
-            /* [in] */ __RPC__in BSTR bstrPassword,
-            /* [in] */ long AttendeeLimit,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIInvitation **ppInvitation);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrAuthString,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrGroupName,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrPassword,
+            /* [annotation][in] */ 
+            _In_  long AttendeeLimit,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIInvitation **ppInvitation);
         
         END_INTERFACE
     } IRDPSRAPIInvitationManagerVtbl;
@@ -2737,19 +2922,24 @@ EXTERN_C const IID IID_IRDPSRAPITcpConnectionInfo;
     {
     public:
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Protocol( 
-            /* [retval][out] */ __RPC__out long *plProtocol) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plProtocol) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_LocalPort( 
-            /* [retval][out] */ __RPC__out long *plPort) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plPort) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_LocalIP( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbsrLocalIP) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pbsrLocalIP) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_PeerPort( 
-            /* [retval][out] */ __RPC__out long *plPort) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plPort) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_PeerIP( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrIP) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pbstrIP) = 0;
         
     };
     
@@ -2763,7 +2953,8 @@ EXTERN_C const IID IID_IRDPSRAPITcpConnectionInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPITcpConnectionInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2778,23 +2969,31 @@ EXTERN_C const IID IID_IRDPSRAPITcpConnectionInfo;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRDPSRAPITcpConnectionInfo * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRDPSRAPITcpConnectionInfo * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRDPSRAPITcpConnectionInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2819,27 +3018,32 @@ EXTERN_C const IID IID_IRDPSRAPITcpConnectionInfo;
         DECLSPEC_XFGVIRT(IRDPSRAPITcpConnectionInfo, get_Protocol)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Protocol )( 
             __RPC__in IRDPSRAPITcpConnectionInfo * This,
-            /* [retval][out] */ __RPC__out long *plProtocol);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plProtocol);
         
         DECLSPEC_XFGVIRT(IRDPSRAPITcpConnectionInfo, get_LocalPort)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LocalPort )( 
             __RPC__in IRDPSRAPITcpConnectionInfo * This,
-            /* [retval][out] */ __RPC__out long *plPort);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plPort);
         
         DECLSPEC_XFGVIRT(IRDPSRAPITcpConnectionInfo, get_LocalIP)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LocalIP )( 
             __RPC__in IRDPSRAPITcpConnectionInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbsrLocalIP);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pbsrLocalIP);
         
         DECLSPEC_XFGVIRT(IRDPSRAPITcpConnectionInfo, get_PeerPort)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PeerPort )( 
             __RPC__in IRDPSRAPITcpConnectionInfo * This,
-            /* [retval][out] */ __RPC__out long *plPort);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plPort);
         
         DECLSPEC_XFGVIRT(IRDPSRAPITcpConnectionInfo, get_PeerIP)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PeerIP )( 
             __RPC__in IRDPSRAPITcpConnectionInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrIP);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pbstrIP);
         
         END_INTERFACE
     } IRDPSRAPITcpConnectionInfoVtbl;
@@ -2919,27 +3123,34 @@ EXTERN_C const IID IID_IRDPSRAPIAttendee;
     {
     public:
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
-            /* [retval][out] */ __RPC__out long *pId) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pId) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_RemoteName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ControlLevel( 
-            /* [retval][out] */ __RPC__out CTRL_LEVEL *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CTRL_LEVEL *pVal) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_ControlLevel( 
-            /* [in] */ CTRL_LEVEL pNewVal) = 0;
+            /* [annotation][in] */ 
+            _In_  CTRL_LEVEL pNewVal) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Invitation( 
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIInvitation **ppVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIInvitation **ppVal) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE TerminateConnection( void) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Flags( 
-            /* [retval][out] */ __RPC__out long *plFlags) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plFlags) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ConnectivityInfo( 
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **ppVal) = 0;
         
     };
     
@@ -2953,7 +3164,8 @@ EXTERN_C const IID IID_IRDPSRAPIAttendee;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPIAttendee * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2968,23 +3180,31 @@ EXTERN_C const IID IID_IRDPSRAPIAttendee;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRDPSRAPIAttendee * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRDPSRAPIAttendee * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRDPSRAPIAttendee * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3009,27 +3229,32 @@ EXTERN_C const IID IID_IRDPSRAPIAttendee;
         DECLSPEC_XFGVIRT(IRDPSRAPIAttendee, get_Id)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IRDPSRAPIAttendee * This,
-            /* [retval][out] */ __RPC__out long *pId);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pId);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIAttendee, get_RemoteName)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RemoteName )( 
             __RPC__in IRDPSRAPIAttendee * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIAttendee, get_ControlLevel)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ControlLevel )( 
             __RPC__in IRDPSRAPIAttendee * This,
-            /* [retval][out] */ __RPC__out CTRL_LEVEL *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CTRL_LEVEL *pVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIAttendee, put_ControlLevel)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ControlLevel )( 
             __RPC__in IRDPSRAPIAttendee * This,
-            /* [in] */ CTRL_LEVEL pNewVal);
+            /* [annotation][in] */ 
+            _In_  CTRL_LEVEL pNewVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIAttendee, get_Invitation)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Invitation )( 
             __RPC__in IRDPSRAPIAttendee * This,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIInvitation **ppVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIInvitation **ppVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIAttendee, TerminateConnection)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *TerminateConnection )( 
@@ -3038,12 +3263,14 @@ EXTERN_C const IID IID_IRDPSRAPIAttendee;
         DECLSPEC_XFGVIRT(IRDPSRAPIAttendee, get_Flags)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Flags )( 
             __RPC__in IRDPSRAPIAttendee * This,
-            /* [retval][out] */ __RPC__out long *plFlags);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plFlags);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIAttendee, get_ConnectivityInfo)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectivityInfo )( 
             __RPC__in IRDPSRAPIAttendee * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **ppVal);
         
         END_INTERFACE
     } IRDPSRAPIAttendeeVtbl;
@@ -3132,11 +3359,14 @@ EXTERN_C const IID IID_IRDPSRAPIAttendeeManager;
     {
     public:
         virtual /* [id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **retval) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [in] */ long id,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIAttendee **ppItem) = 0;
+            /* [annotation][in] */ 
+            _In_  long id,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIAttendee **ppItem) = 0;
         
     };
     
@@ -3150,7 +3380,8 @@ EXTERN_C const IID IID_IRDPSRAPIAttendeeManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPIAttendeeManager * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3165,23 +3396,31 @@ EXTERN_C const IID IID_IRDPSRAPIAttendeeManager;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRDPSRAPIAttendeeManager * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRDPSRAPIAttendeeManager * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRDPSRAPIAttendeeManager * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3206,13 +3445,16 @@ EXTERN_C const IID IID_IRDPSRAPIAttendeeManager;
         DECLSPEC_XFGVIRT(IRDPSRAPIAttendeeManager, get__NewEnum)
         /* [id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IRDPSRAPIAttendeeManager * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **retval);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIAttendeeManager, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IRDPSRAPIAttendeeManager * This,
-            /* [in] */ long id,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIAttendee **ppItem);
+            /* [annotation][in] */ 
+            _In_  long id,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIAttendee **ppItem);
         
         END_INTERFACE
     } IRDPSRAPIAttendeeManagerVtbl;
@@ -3283,13 +3525,16 @@ EXTERN_C const IID IID_IRDPSRAPIAttendeeDisconnectInfo;
     {
     public:
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Attendee( 
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIAttendee **retval) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIAttendee **retval) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Reason( 
-            /* [retval][out] */ __RPC__out ATTENDEE_DISCONNECT_REASON *pReason) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ATTENDEE_DISCONNECT_REASON *pReason) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Code( 
-            /* [retval][out] */ __RPC__out long *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pVal) = 0;
         
     };
     
@@ -3303,7 +3548,8 @@ EXTERN_C const IID IID_IRDPSRAPIAttendeeDisconnectInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPIAttendeeDisconnectInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3318,23 +3564,31 @@ EXTERN_C const IID IID_IRDPSRAPIAttendeeDisconnectInfo;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRDPSRAPIAttendeeDisconnectInfo * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRDPSRAPIAttendeeDisconnectInfo * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRDPSRAPIAttendeeDisconnectInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3359,17 +3613,20 @@ EXTERN_C const IID IID_IRDPSRAPIAttendeeDisconnectInfo;
         DECLSPEC_XFGVIRT(IRDPSRAPIAttendeeDisconnectInfo, get_Attendee)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Attendee )( 
             __RPC__in IRDPSRAPIAttendeeDisconnectInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIAttendee **retval);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIAttendee **retval);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIAttendeeDisconnectInfo, get_Reason)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Reason )( 
             __RPC__in IRDPSRAPIAttendeeDisconnectInfo * This,
-            /* [retval][out] */ __RPC__out ATTENDEE_DISCONNECT_REASON *pReason);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ATTENDEE_DISCONNECT_REASON *pReason);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIAttendeeDisconnectInfo, get_Code)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Code )( 
             __RPC__in IRDPSRAPIAttendeeDisconnectInfo * This,
-            /* [retval][out] */ __RPC__out long *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pVal);
         
         END_INTERFACE
     } IRDPSRAPIAttendeeDisconnectInfoVtbl;
@@ -3443,22 +3700,30 @@ EXTERN_C const IID IID_IRDPSRAPIVirtualChannel;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SendData( 
-            /* [in] */ __RPC__in BSTR bstrData,
-            /* [in] */ long lAttendeeId,
-            /* [in] */ unsigned long ChannelSendFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrData,
+            /* [annotation][in] */ 
+            _In_  long lAttendeeId,
+            /* [annotation][in] */ 
+            _In_  unsigned long ChannelSendFlags) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetAccess( 
-            /* [in] */ long lAttendeeId,
-            /* [in] */ CHANNEL_ACCESS_ENUM AccessType) = 0;
+            /* [annotation][in] */ 
+            _In_  long lAttendeeId,
+            /* [annotation][in] */ 
+            _In_  CHANNEL_ACCESS_ENUM AccessType) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pbstrName) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Flags( 
-            /* [retval][out] */ __RPC__out long *plFlags) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plFlags) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Priority( 
-            /* [retval][out] */ __RPC__out CHANNEL_PRIORITY *pPriority) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CHANNEL_PRIORITY *pPriority) = 0;
         
     };
     
@@ -3472,7 +3737,8 @@ EXTERN_C const IID IID_IRDPSRAPIVirtualChannel;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPIVirtualChannel * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3487,23 +3753,31 @@ EXTERN_C const IID IID_IRDPSRAPIVirtualChannel;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRDPSRAPIVirtualChannel * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRDPSRAPIVirtualChannel * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRDPSRAPIVirtualChannel * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3528,30 +3802,38 @@ EXTERN_C const IID IID_IRDPSRAPIVirtualChannel;
         DECLSPEC_XFGVIRT(IRDPSRAPIVirtualChannel, SendData)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SendData )( 
             __RPC__in IRDPSRAPIVirtualChannel * This,
-            /* [in] */ __RPC__in BSTR bstrData,
-            /* [in] */ long lAttendeeId,
-            /* [in] */ unsigned long ChannelSendFlags);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrData,
+            /* [annotation][in] */ 
+            _In_  long lAttendeeId,
+            /* [annotation][in] */ 
+            _In_  unsigned long ChannelSendFlags);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIVirtualChannel, SetAccess)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetAccess )( 
             __RPC__in IRDPSRAPIVirtualChannel * This,
-            /* [in] */ long lAttendeeId,
-            /* [in] */ CHANNEL_ACCESS_ENUM AccessType);
+            /* [annotation][in] */ 
+            _In_  long lAttendeeId,
+            /* [annotation][in] */ 
+            _In_  CHANNEL_ACCESS_ENUM AccessType);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIVirtualChannel, get_Name)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IRDPSRAPIVirtualChannel * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIVirtualChannel, get_Flags)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Flags )( 
             __RPC__in IRDPSRAPIVirtualChannel * This,
-            /* [retval][out] */ __RPC__out long *plFlags);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plFlags);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIVirtualChannel, get_Priority)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Priority )( 
             __RPC__in IRDPSRAPIVirtualChannel * This,
-            /* [retval][out] */ __RPC__out CHANNEL_PRIORITY *pPriority);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CHANNEL_PRIORITY *pPriority);
         
         END_INTERFACE
     } IRDPSRAPIVirtualChannelVtbl;
@@ -3631,17 +3913,24 @@ EXTERN_C const IID IID_IRDPSRAPIVirtualChannelManager;
     {
     public:
         virtual /* [id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **retval) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [in] */ VARIANT item,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIVirtualChannel **pChannel) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT item,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIVirtualChannel **pChannel) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateVirtualChannel( 
-            /* [in] */ __RPC__in BSTR bstrChannelName,
-            /* [in] */ CHANNEL_PRIORITY Priority,
-            /* [in] */ unsigned long ChannelFlags,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIVirtualChannel **ppChannel) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrChannelName,
+            /* [annotation][in] */ 
+            _In_  CHANNEL_PRIORITY Priority,
+            /* [annotation][in] */ 
+            _In_  unsigned long ChannelFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIVirtualChannel **ppChannel) = 0;
         
     };
     
@@ -3655,7 +3944,8 @@ EXTERN_C const IID IID_IRDPSRAPIVirtualChannelManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPIVirtualChannelManager * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3670,23 +3960,31 @@ EXTERN_C const IID IID_IRDPSRAPIVirtualChannelManager;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRDPSRAPIVirtualChannelManager * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRDPSRAPIVirtualChannelManager * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRDPSRAPIVirtualChannelManager * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3711,21 +4009,28 @@ EXTERN_C const IID IID_IRDPSRAPIVirtualChannelManager;
         DECLSPEC_XFGVIRT(IRDPSRAPIVirtualChannelManager, get__NewEnum)
         /* [id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IRDPSRAPIVirtualChannelManager * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **retval);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIVirtualChannelManager, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IRDPSRAPIVirtualChannelManager * This,
-            /* [in] */ VARIANT item,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIVirtualChannel **pChannel);
+            /* [annotation][in] */ 
+            _In_  VARIANT item,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIVirtualChannel **pChannel);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIVirtualChannelManager, CreateVirtualChannel)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateVirtualChannel )( 
             __RPC__in IRDPSRAPIVirtualChannelManager * This,
-            /* [in] */ __RPC__in BSTR bstrChannelName,
-            /* [in] */ CHANNEL_PRIORITY Priority,
-            /* [in] */ unsigned long ChannelFlags,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIVirtualChannel **ppChannel);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrChannelName,
+            /* [annotation][in] */ 
+            _In_  CHANNEL_PRIORITY Priority,
+            /* [annotation][in] */ 
+            _In_  unsigned long ChannelFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIVirtualChannel **ppChannel);
         
         END_INTERFACE
     } IRDPSRAPIVirtualChannelManagerVtbl;
@@ -3799,50 +4104,68 @@ EXTERN_C const IID IID_IRDPSRAPIViewer;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Connect( 
-            /* [in] */ __RPC__in BSTR bstrConnectionString,
-            /* [in] */ __RPC__in BSTR bstrName,
-            /* [in] */ __RPC__in BSTR bstrPassword) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrConnectionString,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrName,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrPassword) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Disconnect( void) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Attendees( 
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIAttendeeManager **ppVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIAttendeeManager **ppVal) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Invitations( 
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIInvitationManager **ppVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIInvitationManager **ppVal) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ApplicationFilter( 
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIApplicationFilter **ppVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIApplicationFilter **ppVal) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_VirtualChannelManager( 
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIVirtualChannelManager **ppVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIVirtualChannelManager **ppVal) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_SmartSizing( 
-            /* [in] */ VARIANT_BOOL vbSmartSizing) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL vbSmartSizing) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_SmartSizing( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pvbSmartSizing) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pvbSmartSizing) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE RequestControl( 
-            /* [in] */ CTRL_LEVEL CtrlLevel) = 0;
+            /* [annotation][in] */ 
+            _In_  CTRL_LEVEL CtrlLevel) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_DisconnectedText( 
-            /* [in] */ __RPC__in BSTR bstrDisconnectedText) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrDisconnectedText) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DisconnectedText( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDisconnectedText) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pbstrDisconnectedText) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE RequestColorDepthChange( 
-            /* [in] */ long Bpp) = 0;
+            /* [annotation][in] */ 
+            _In_  long Bpp) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Properties( 
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPISessionProperties **ppVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPISessionProperties **ppVal) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE StartReverseConnectListener( 
-            /* [in] */ __RPC__in BSTR bstrConnectionString,
-            /* [in] */ __RPC__in BSTR bstrUserName,
-            /* [in] */ __RPC__in BSTR bstrPassword,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrReverseConnectString) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrConnectionString,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrUserName,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrPassword,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pbstrReverseConnectString) = 0;
         
     };
     
@@ -3856,7 +4179,8 @@ EXTERN_C const IID IID_IRDPSRAPIViewer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPIViewer * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3871,23 +4195,31 @@ EXTERN_C const IID IID_IRDPSRAPIViewer;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRDPSRAPIViewer * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRDPSRAPIViewer * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRDPSRAPIViewer * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3912,9 +4244,12 @@ EXTERN_C const IID IID_IRDPSRAPIViewer;
         DECLSPEC_XFGVIRT(IRDPSRAPIViewer, Connect)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in IRDPSRAPIViewer * This,
-            /* [in] */ __RPC__in BSTR bstrConnectionString,
-            /* [in] */ __RPC__in BSTR bstrName,
-            /* [in] */ __RPC__in BSTR bstrPassword);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrConnectionString,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrName,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrPassword);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIViewer, Disconnect)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
@@ -3923,65 +4258,80 @@ EXTERN_C const IID IID_IRDPSRAPIViewer;
         DECLSPEC_XFGVIRT(IRDPSRAPIViewer, get_Attendees)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Attendees )( 
             __RPC__in IRDPSRAPIViewer * This,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIAttendeeManager **ppVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIAttendeeManager **ppVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIViewer, get_Invitations)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Invitations )( 
             __RPC__in IRDPSRAPIViewer * This,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIInvitationManager **ppVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIInvitationManager **ppVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIViewer, get_ApplicationFilter)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationFilter )( 
             __RPC__in IRDPSRAPIViewer * This,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIApplicationFilter **ppVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIApplicationFilter **ppVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIViewer, get_VirtualChannelManager)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_VirtualChannelManager )( 
             __RPC__in IRDPSRAPIViewer * This,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIVirtualChannelManager **ppVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIVirtualChannelManager **ppVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIViewer, put_SmartSizing)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SmartSizing )( 
             __RPC__in IRDPSRAPIViewer * This,
-            /* [in] */ VARIANT_BOOL vbSmartSizing);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL vbSmartSizing);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIViewer, get_SmartSizing)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SmartSizing )( 
             __RPC__in IRDPSRAPIViewer * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pvbSmartSizing);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pvbSmartSizing);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIViewer, RequestControl)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RequestControl )( 
             __RPC__in IRDPSRAPIViewer * This,
-            /* [in] */ CTRL_LEVEL CtrlLevel);
+            /* [annotation][in] */ 
+            _In_  CTRL_LEVEL CtrlLevel);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIViewer, put_DisconnectedText)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DisconnectedText )( 
             __RPC__in IRDPSRAPIViewer * This,
-            /* [in] */ __RPC__in BSTR bstrDisconnectedText);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrDisconnectedText);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIViewer, get_DisconnectedText)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DisconnectedText )( 
             __RPC__in IRDPSRAPIViewer * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDisconnectedText);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pbstrDisconnectedText);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIViewer, RequestColorDepthChange)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RequestColorDepthChange )( 
             __RPC__in IRDPSRAPIViewer * This,
-            /* [in] */ long Bpp);
+            /* [annotation][in] */ 
+            _In_  long Bpp);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIViewer, get_Properties)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IRDPSRAPIViewer * This,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPISessionProperties **ppVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPISessionProperties **ppVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIViewer, StartReverseConnectListener)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *StartReverseConnectListener )( 
             __RPC__in IRDPSRAPIViewer * This,
-            /* [in] */ __RPC__in BSTR bstrConnectionString,
-            /* [in] */ __RPC__in BSTR bstrUserName,
-            /* [in] */ __RPC__in BSTR bstrPassword,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrReverseConnectString);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrConnectionString,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrUserName,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrPassword,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pbstrReverseConnectString);
         
         END_INTERFACE
     } IRDPSRAPIViewerVtbl;
@@ -4088,35 +4438,52 @@ EXTERN_C const IID IID_IRDPViewerInputSink;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SendMouseButtonEvent( 
-            /* [in] */ RDPSRAPI_MOUSE_BUTTON_TYPE buttonType,
-            /* [in] */ VARIANT_BOOL vbButtonDown,
-            /* [in] */ ULONG xPos,
-            /* [in] */ ULONG yPos) = 0;
+            /* [annotation][in] */ 
+            _In_  RDPSRAPI_MOUSE_BUTTON_TYPE buttonType,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL vbButtonDown,
+            /* [annotation][in] */ 
+            _In_  ULONG xPos,
+            /* [annotation][in] */ 
+            _In_  ULONG yPos) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SendMouseMoveEvent( 
-            /* [in] */ ULONG xPos,
-            /* [in] */ ULONG yPos) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG xPos,
+            /* [annotation][in] */ 
+            _In_  ULONG yPos) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SendMouseWheelEvent( 
-            /* [in] */ UINT16 wheelRotation) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT16 wheelRotation) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SendKeyboardEvent( 
-            /* [in] */ RDPSRAPI_KBD_CODE_TYPE codeType,
-            /* [in] */ UINT16 keycode,
-            /* [in] */ VARIANT_BOOL vbKeyUp,
-            /* [in] */ VARIANT_BOOL vbRepeat,
-            /* [in] */ VARIANT_BOOL vbExtended) = 0;
+            /* [annotation][in] */ 
+            _In_  RDPSRAPI_KBD_CODE_TYPE codeType,
+            /* [annotation][in] */ 
+            _In_  UINT16 keycode,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL vbKeyUp,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL vbRepeat,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL vbExtended) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SendSyncEvent( 
-            /* [in] */ ULONG syncFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG syncFlags) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE BeginTouchFrame( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddTouchInput( 
-            /* [in] */ UINT32 contactId,
-            /* [in] */ UINT32 event,
-            /* [in] */ INT32 x,
-            /* [in] */ INT32 y) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT32 contactId,
+            /* [annotation][in] */ 
+            _In_  UINT32 event,
+            /* [annotation][in] */ 
+            _In_  INT32 x,
+            /* [annotation][in] */ 
+            _In_  INT32 y) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE EndTouchFrame( void) = 0;
         
@@ -4132,7 +4499,8 @@ EXTERN_C const IID IID_IRDPViewerInputSink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPViewerInputSink * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4147,35 +4515,48 @@ EXTERN_C const IID IID_IRDPViewerInputSink;
         DECLSPEC_XFGVIRT(IRDPViewerInputSink, SendMouseButtonEvent)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SendMouseButtonEvent )( 
             __RPC__in IRDPViewerInputSink * This,
-            /* [in] */ RDPSRAPI_MOUSE_BUTTON_TYPE buttonType,
-            /* [in] */ VARIANT_BOOL vbButtonDown,
-            /* [in] */ ULONG xPos,
-            /* [in] */ ULONG yPos);
+            /* [annotation][in] */ 
+            _In_  RDPSRAPI_MOUSE_BUTTON_TYPE buttonType,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL vbButtonDown,
+            /* [annotation][in] */ 
+            _In_  ULONG xPos,
+            /* [annotation][in] */ 
+            _In_  ULONG yPos);
         
         DECLSPEC_XFGVIRT(IRDPViewerInputSink, SendMouseMoveEvent)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SendMouseMoveEvent )( 
             __RPC__in IRDPViewerInputSink * This,
-            /* [in] */ ULONG xPos,
-            /* [in] */ ULONG yPos);
+            /* [annotation][in] */ 
+            _In_  ULONG xPos,
+            /* [annotation][in] */ 
+            _In_  ULONG yPos);
         
         DECLSPEC_XFGVIRT(IRDPViewerInputSink, SendMouseWheelEvent)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SendMouseWheelEvent )( 
             __RPC__in IRDPViewerInputSink * This,
-            /* [in] */ UINT16 wheelRotation);
+            /* [annotation][in] */ 
+            _In_  UINT16 wheelRotation);
         
         DECLSPEC_XFGVIRT(IRDPViewerInputSink, SendKeyboardEvent)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SendKeyboardEvent )( 
             __RPC__in IRDPViewerInputSink * This,
-            /* [in] */ RDPSRAPI_KBD_CODE_TYPE codeType,
-            /* [in] */ UINT16 keycode,
-            /* [in] */ VARIANT_BOOL vbKeyUp,
-            /* [in] */ VARIANT_BOOL vbRepeat,
-            /* [in] */ VARIANT_BOOL vbExtended);
+            /* [annotation][in] */ 
+            _In_  RDPSRAPI_KBD_CODE_TYPE codeType,
+            /* [annotation][in] */ 
+            _In_  UINT16 keycode,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL vbKeyUp,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL vbRepeat,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL vbExtended);
         
         DECLSPEC_XFGVIRT(IRDPViewerInputSink, SendSyncEvent)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SendSyncEvent )( 
             __RPC__in IRDPViewerInputSink * This,
-            /* [in] */ ULONG syncFlags);
+            /* [annotation][in] */ 
+            _In_  ULONG syncFlags);
         
         DECLSPEC_XFGVIRT(IRDPViewerInputSink, BeginTouchFrame)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *BeginTouchFrame )( 
@@ -4184,10 +4565,14 @@ EXTERN_C const IID IID_IRDPViewerInputSink;
         DECLSPEC_XFGVIRT(IRDPViewerInputSink, AddTouchInput)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddTouchInput )( 
             __RPC__in IRDPViewerInputSink * This,
-            /* [in] */ UINT32 contactId,
-            /* [in] */ UINT32 event,
-            /* [in] */ INT32 x,
-            /* [in] */ INT32 y);
+            /* [annotation][in] */ 
+            _In_  UINT32 contactId,
+            /* [annotation][in] */ 
+            _In_  UINT32 event,
+            /* [annotation][in] */ 
+            _In_  INT32 x,
+            /* [annotation][in] */ 
+            _In_  INT32 y);
         
         DECLSPEC_XFGVIRT(IRDPViewerInputSink, EndTouchFrame)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EndTouchFrame )( 
@@ -4267,20 +4652,28 @@ EXTERN_C const IID IID_IRDPSRAPIFrameBuffer;
     {
     public:
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Width( 
-            /* [retval][out] */ __RPC__out long *plWidth) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plWidth) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Height( 
-            /* [retval][out] */ __RPC__out long *plHeight) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plHeight) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Bpp( 
-            /* [retval][out] */ __RPC__out long *plBpp) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plBpp) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetFrameBufferBits( 
-            /* [in] */ long x,
-            /* [in] */ long y,
-            /* [in] */ long Width,
-            /* [in] */ long Heigth,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *ppBits) = 0;
+            /* [annotation][in] */ 
+            _In_  long x,
+            /* [annotation][in] */ 
+            _In_  long y,
+            /* [annotation][in] */ 
+            _In_  long Width,
+            /* [annotation][in] */ 
+            _In_  long Heigth,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *ppBits) = 0;
         
     };
     
@@ -4294,7 +4687,8 @@ EXTERN_C const IID IID_IRDPSRAPIFrameBuffer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPIFrameBuffer * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4309,23 +4703,31 @@ EXTERN_C const IID IID_IRDPSRAPIFrameBuffer;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRDPSRAPIFrameBuffer * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRDPSRAPIFrameBuffer * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRDPSRAPIFrameBuffer * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4350,26 +4752,34 @@ EXTERN_C const IID IID_IRDPSRAPIFrameBuffer;
         DECLSPEC_XFGVIRT(IRDPSRAPIFrameBuffer, get_Width)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Width )( 
             __RPC__in IRDPSRAPIFrameBuffer * This,
-            /* [retval][out] */ __RPC__out long *plWidth);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plWidth);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIFrameBuffer, get_Height)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Height )( 
             __RPC__in IRDPSRAPIFrameBuffer * This,
-            /* [retval][out] */ __RPC__out long *plHeight);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plHeight);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIFrameBuffer, get_Bpp)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Bpp )( 
             __RPC__in IRDPSRAPIFrameBuffer * This,
-            /* [retval][out] */ __RPC__out long *plBpp);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plBpp);
         
         DECLSPEC_XFGVIRT(IRDPSRAPIFrameBuffer, GetFrameBufferBits)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetFrameBufferBits )( 
             __RPC__in IRDPSRAPIFrameBuffer * This,
-            /* [in] */ long x,
-            /* [in] */ long y,
-            /* [in] */ long Width,
-            /* [in] */ long Heigth,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *ppBits);
+            /* [annotation][in] */ 
+            _In_  long x,
+            /* [annotation][in] */ 
+            _In_  long y,
+            /* [annotation][in] */ 
+            _In_  long Width,
+            /* [annotation][in] */ 
+            _In_  long Heigth,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *ppBits);
         
         END_INTERFACE
     } IRDPSRAPIFrameBufferVtbl;
@@ -4446,34 +4856,44 @@ EXTERN_C const IID IID_IRDPSRAPITransportStreamBuffer;
     {
     public:
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Storage( 
-            /* [retval][out] */ __RPC__deref_out_opt BYTE **ppbStorage) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BYTE **ppbStorage) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_StorageSize( 
-            /* [retval][out] */ __RPC__out long *plMaxStore) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plMaxStore) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_PayloadSize( 
-            /* [retval][out] */ __RPC__out long *plRetVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plRetVal) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_PayloadSize( 
-            /* [in] */ long lVal) = 0;
+            /* [annotation][in] */ 
+            _In_  long lVal) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_PayloadOffset( 
-            /* [retval][out] */ __RPC__out long *plRetVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plRetVal) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_PayloadOffset( 
-            /* [in] */ long lRetVal) = 0;
+            /* [annotation][in] */ 
+            _In_  long lRetVal) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Flags( 
-            /* [retval][out] */ __RPC__out long *plFlags) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plFlags) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Flags( 
-            /* [in] */ long lFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  long lFlags) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Context( 
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppContext) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **ppContext) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_Context( 
-            /* [in] */ __RPC__in_opt IUnknown *pContext) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *pContext) = 0;
         
     };
     
@@ -4487,7 +4907,8 @@ EXTERN_C const IID IID_IRDPSRAPITransportStreamBuffer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPITransportStreamBuffer * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4502,52 +4923,62 @@ EXTERN_C const IID IID_IRDPSRAPITransportStreamBuffer;
         DECLSPEC_XFGVIRT(IRDPSRAPITransportStreamBuffer, get_Storage)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Storage )( 
             __RPC__in IRDPSRAPITransportStreamBuffer * This,
-            /* [retval][out] */ __RPC__deref_out_opt BYTE **ppbStorage);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BYTE **ppbStorage);
         
         DECLSPEC_XFGVIRT(IRDPSRAPITransportStreamBuffer, get_StorageSize)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StorageSize )( 
             __RPC__in IRDPSRAPITransportStreamBuffer * This,
-            /* [retval][out] */ __RPC__out long *plMaxStore);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plMaxStore);
         
         DECLSPEC_XFGVIRT(IRDPSRAPITransportStreamBuffer, get_PayloadSize)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PayloadSize )( 
             __RPC__in IRDPSRAPITransportStreamBuffer * This,
-            /* [retval][out] */ __RPC__out long *plRetVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plRetVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPITransportStreamBuffer, put_PayloadSize)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PayloadSize )( 
             __RPC__in IRDPSRAPITransportStreamBuffer * This,
-            /* [in] */ long lVal);
+            /* [annotation][in] */ 
+            _In_  long lVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPITransportStreamBuffer, get_PayloadOffset)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PayloadOffset )( 
             __RPC__in IRDPSRAPITransportStreamBuffer * This,
-            /* [retval][out] */ __RPC__out long *plRetVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plRetVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPITransportStreamBuffer, put_PayloadOffset)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PayloadOffset )( 
             __RPC__in IRDPSRAPITransportStreamBuffer * This,
-            /* [in] */ long lRetVal);
+            /* [annotation][in] */ 
+            _In_  long lRetVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPITransportStreamBuffer, get_Flags)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Flags )( 
             __RPC__in IRDPSRAPITransportStreamBuffer * This,
-            /* [retval][out] */ __RPC__out long *plFlags);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plFlags);
         
         DECLSPEC_XFGVIRT(IRDPSRAPITransportStreamBuffer, put_Flags)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Flags )( 
             __RPC__in IRDPSRAPITransportStreamBuffer * This,
-            /* [in] */ long lFlags);
+            /* [annotation][in] */ 
+            _In_  long lFlags);
         
         DECLSPEC_XFGVIRT(IRDPSRAPITransportStreamBuffer, get_Context)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Context )( 
             __RPC__in IRDPSRAPITransportStreamBuffer * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppContext);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **ppContext);
         
         DECLSPEC_XFGVIRT(IRDPSRAPITransportStreamBuffer, put_Context)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Context )( 
             __RPC__in IRDPSRAPITransportStreamBuffer * This,
-            /* [in] */ __RPC__in_opt IUnknown *pContext);
+            /* [annotation][in] */ 
+            _In_  IUnknown *pContext);
         
         END_INTERFACE
     } IRDPSRAPITransportStreamBufferVtbl;
@@ -4629,13 +5060,16 @@ EXTERN_C const IID IID_IRDPSRAPITransportStreamEvents;
     {
     public:
         virtual /* [id] */ void STDMETHODCALLTYPE OnWriteCompleted( 
-            /* [in] */ IRDPSRAPITransportStreamBuffer *pBuffer) = 0;
+            /* [annotation][in] */ 
+            _In_  IRDPSRAPITransportStreamBuffer *pBuffer) = 0;
         
         virtual /* [id] */ void STDMETHODCALLTYPE OnReadCompleted( 
-            /* [in] */ IRDPSRAPITransportStreamBuffer *pBuffer) = 0;
+            /* [annotation][in] */ 
+            _In_  IRDPSRAPITransportStreamBuffer *pBuffer) = 0;
         
         virtual /* [id] */ void STDMETHODCALLTYPE OnStreamClosed( 
-            /* [in] */ HRESULT hrReason) = 0;
+            /* [annotation][in] */ 
+            _In_  HRESULT hrReason) = 0;
         
     };
     
@@ -4649,7 +5083,8 @@ EXTERN_C const IID IID_IRDPSRAPITransportStreamEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRDPSRAPITransportStreamEvents * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4664,17 +5099,20 @@ EXTERN_C const IID IID_IRDPSRAPITransportStreamEvents;
         DECLSPEC_XFGVIRT(IRDPSRAPITransportStreamEvents, OnWriteCompleted)
         /* [id] */ void ( STDMETHODCALLTYPE *OnWriteCompleted )( 
             IRDPSRAPITransportStreamEvents * This,
-            /* [in] */ IRDPSRAPITransportStreamBuffer *pBuffer);
+            /* [annotation][in] */ 
+            _In_  IRDPSRAPITransportStreamBuffer *pBuffer);
         
         DECLSPEC_XFGVIRT(IRDPSRAPITransportStreamEvents, OnReadCompleted)
         /* [id] */ void ( STDMETHODCALLTYPE *OnReadCompleted )( 
             IRDPSRAPITransportStreamEvents * This,
-            /* [in] */ IRDPSRAPITransportStreamBuffer *pBuffer);
+            /* [annotation][in] */ 
+            _In_  IRDPSRAPITransportStreamBuffer *pBuffer);
         
         DECLSPEC_XFGVIRT(IRDPSRAPITransportStreamEvents, OnStreamClosed)
         /* [id] */ void ( STDMETHODCALLTYPE *OnStreamClosed )( 
             IRDPSRAPITransportStreamEvents * This,
-            /* [in] */ HRESULT hrReason);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrReason);
         
         END_INTERFACE
     } IRDPSRAPITransportStreamEventsVtbl;
@@ -4735,20 +5173,26 @@ EXTERN_C const IID IID_IRDPSRAPITransportStream;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE AllocBuffer( 
-            /* [in] */ long maxPayload,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPITransportStreamBuffer **ppBuffer) = 0;
+            /* [annotation][in] */ 
+            _In_  long maxPayload,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPITransportStreamBuffer **ppBuffer) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE FreeBuffer( 
-            /* [in] */ __RPC__in_opt IRDPSRAPITransportStreamBuffer *pBuffer) = 0;
+            /* [annotation][in] */ 
+            _In_  IRDPSRAPITransportStreamBuffer *pBuffer) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE WriteBuffer( 
-            /* [in] */ __RPC__in_opt IRDPSRAPITransportStreamBuffer *pBuffer) = 0;
+            /* [annotation][in] */ 
+            _In_  IRDPSRAPITransportStreamBuffer *pBuffer) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ReadBuffer( 
-            /* [in] */ __RPC__in_opt IRDPSRAPITransportStreamBuffer *pBuffer) = 0;
+            /* [annotation][in] */ 
+            _In_  IRDPSRAPITransportStreamBuffer *pBuffer) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Open( 
-            /* [in] */ __RPC__in_opt IRDPSRAPITransportStreamEvents *pCallbacks) = 0;
+            /* [annotation][in] */ 
+            _In_  IRDPSRAPITransportStreamEvents *pCallbacks) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Close( void) = 0;
         
@@ -4764,7 +5208,8 @@ EXTERN_C const IID IID_IRDPSRAPITransportStream;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPITransportStream * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4779,28 +5224,34 @@ EXTERN_C const IID IID_IRDPSRAPITransportStream;
         DECLSPEC_XFGVIRT(IRDPSRAPITransportStream, AllocBuffer)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AllocBuffer )( 
             __RPC__in IRDPSRAPITransportStream * This,
-            /* [in] */ long maxPayload,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPITransportStreamBuffer **ppBuffer);
+            /* [annotation][in] */ 
+            _In_  long maxPayload,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPITransportStreamBuffer **ppBuffer);
         
         DECLSPEC_XFGVIRT(IRDPSRAPITransportStream, FreeBuffer)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *FreeBuffer )( 
             __RPC__in IRDPSRAPITransportStream * This,
-            /* [in] */ __RPC__in_opt IRDPSRAPITransportStreamBuffer *pBuffer);
+            /* [annotation][in] */ 
+            _In_  IRDPSRAPITransportStreamBuffer *pBuffer);
         
         DECLSPEC_XFGVIRT(IRDPSRAPITransportStream, WriteBuffer)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *WriteBuffer )( 
             __RPC__in IRDPSRAPITransportStream * This,
-            /* [in] */ __RPC__in_opt IRDPSRAPITransportStreamBuffer *pBuffer);
+            /* [annotation][in] */ 
+            _In_  IRDPSRAPITransportStreamBuffer *pBuffer);
         
         DECLSPEC_XFGVIRT(IRDPSRAPITransportStream, ReadBuffer)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ReadBuffer )( 
             __RPC__in IRDPSRAPITransportStream * This,
-            /* [in] */ __RPC__in_opt IRDPSRAPITransportStreamBuffer *pBuffer);
+            /* [annotation][in] */ 
+            _In_  IRDPSRAPITransportStreamBuffer *pBuffer);
         
         DECLSPEC_XFGVIRT(IRDPSRAPITransportStream, Open)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Open )( 
             __RPC__in IRDPSRAPITransportStream * This,
-            /* [in] */ __RPC__in_opt IRDPSRAPITransportStreamEvents *pCallbacks);
+            /* [annotation][in] */ 
+            _In_  IRDPSRAPITransportStreamEvents *pCallbacks);
         
         DECLSPEC_XFGVIRT(IRDPSRAPITransportStream, Close)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Close )( 
@@ -4878,44 +5329,60 @@ EXTERN_C const IID IID_IRDPSRAPISharingSession;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Close( void) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_ColorDepth( 
-            /* [in] */ long colorDepth) = 0;
+            /* [annotation][in] */ 
+            _In_  long colorDepth) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ColorDepth( 
-            /* [retval][out] */ __RPC__out long *pColorDepth) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pColorDepth) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Properties( 
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPISessionProperties **ppVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPISessionProperties **ppVal) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Attendees( 
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIAttendeeManager **ppVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIAttendeeManager **ppVal) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Invitations( 
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIInvitationManager **ppVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIInvitationManager **ppVal) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ApplicationFilter( 
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIApplicationFilter **ppVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIApplicationFilter **ppVal) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_VirtualChannelManager( 
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIVirtualChannelManager **ppVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIVirtualChannelManager **ppVal) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Pause( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Resume( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ConnectToClient( 
-            /* [in] */ __RPC__in BSTR bstrConnectionString) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrConnectionString) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetDesktopSharedRect( 
-            /* [in] */ long left,
-            /* [in] */ long top,
-            /* [in] */ long right,
-            /* [in] */ long bottom) = 0;
+            /* [annotation][in] */ 
+            _In_  long left,
+            /* [annotation][in] */ 
+            _In_  long top,
+            /* [annotation][in] */ 
+            _In_  long right,
+            /* [annotation][in] */ 
+            _In_  long bottom) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetDesktopSharedRect( 
-            /* [out] */ __RPC__out long *pleft,
-            /* [out] */ __RPC__out long *ptop,
-            /* [out] */ __RPC__out long *pright,
-            /* [out] */ __RPC__out long *pbottom) = 0;
+            /* [annotation][out] */ 
+            _Out_  long *pleft,
+            /* [annotation][out] */ 
+            _Out_  long *ptop,
+            /* [annotation][out] */ 
+            _Out_  long *pright,
+            /* [annotation][out] */ 
+            _Out_  long *pbottom) = 0;
         
     };
     
@@ -4929,7 +5396,8 @@ EXTERN_C const IID IID_IRDPSRAPISharingSession;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPISharingSession * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4944,23 +5412,31 @@ EXTERN_C const IID IID_IRDPSRAPISharingSession;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRDPSRAPISharingSession * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRDPSRAPISharingSession * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRDPSRAPISharingSession * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4993,37 +5469,44 @@ EXTERN_C const IID IID_IRDPSRAPISharingSession;
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession, put_ColorDepth)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ColorDepth )( 
             __RPC__in IRDPSRAPISharingSession * This,
-            /* [in] */ long colorDepth);
+            /* [annotation][in] */ 
+            _In_  long colorDepth);
         
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession, get_ColorDepth)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ColorDepth )( 
             __RPC__in IRDPSRAPISharingSession * This,
-            /* [retval][out] */ __RPC__out long *pColorDepth);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pColorDepth);
         
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession, get_Properties)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IRDPSRAPISharingSession * This,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPISessionProperties **ppVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPISessionProperties **ppVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession, get_Attendees)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Attendees )( 
             __RPC__in IRDPSRAPISharingSession * This,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIAttendeeManager **ppVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIAttendeeManager **ppVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession, get_Invitations)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Invitations )( 
             __RPC__in IRDPSRAPISharingSession * This,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIInvitationManager **ppVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIInvitationManager **ppVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession, get_ApplicationFilter)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationFilter )( 
             __RPC__in IRDPSRAPISharingSession * This,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIApplicationFilter **ppVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIApplicationFilter **ppVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession, get_VirtualChannelManager)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_VirtualChannelManager )( 
             __RPC__in IRDPSRAPISharingSession * This,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIVirtualChannelManager **ppVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIVirtualChannelManager **ppVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession, Pause)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Pause )( 
@@ -5036,23 +5519,32 @@ EXTERN_C const IID IID_IRDPSRAPISharingSession;
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession, ConnectToClient)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ConnectToClient )( 
             __RPC__in IRDPSRAPISharingSession * This,
-            /* [in] */ __RPC__in BSTR bstrConnectionString);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrConnectionString);
         
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession, SetDesktopSharedRect)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetDesktopSharedRect )( 
             __RPC__in IRDPSRAPISharingSession * This,
-            /* [in] */ long left,
-            /* [in] */ long top,
-            /* [in] */ long right,
-            /* [in] */ long bottom);
+            /* [annotation][in] */ 
+            _In_  long left,
+            /* [annotation][in] */ 
+            _In_  long top,
+            /* [annotation][in] */ 
+            _In_  long right,
+            /* [annotation][in] */ 
+            _In_  long bottom);
         
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession, GetDesktopSharedRect)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetDesktopSharedRect )( 
             __RPC__in IRDPSRAPISharingSession * This,
-            /* [out] */ __RPC__out long *pleft,
-            /* [out] */ __RPC__out long *ptop,
-            /* [out] */ __RPC__out long *pright,
-            /* [out] */ __RPC__out long *pbottom);
+            /* [annotation][out] */ 
+            _Out_  long *pleft,
+            /* [annotation][out] */ 
+            _Out_  long *ptop,
+            /* [annotation][out] */ 
+            _Out_  long *pright,
+            /* [annotation][out] */ 
+            _Out_  long *pbottom);
         
         END_INTERFACE
     } IRDPSRAPISharingSessionVtbl;
@@ -5159,17 +5651,24 @@ EXTERN_C const IID IID_IRDPSRAPISharingSession2;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ConnectUsingTransportStream( 
-            /* [in] */ __RPC__in_opt IRDPSRAPITransportStream *pStream,
-            /* [in] */ __RPC__in BSTR bstrGroup,
-            /* [in] */ __RPC__in BSTR bstrAuthenticatedAttendeeName) = 0;
+            /* [annotation][in] */ 
+            _In_  IRDPSRAPITransportStream *pStream,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrGroup,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrAuthenticatedAttendeeName) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_FrameBuffer( 
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIFrameBuffer **ppVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIFrameBuffer **ppVal) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SendControlLevelChangeResponse( 
-            /* [in] */ __RPC__in_opt IRDPSRAPIAttendee *pAttendee,
-            /* [in] */ CTRL_LEVEL RequestedLevel,
-            /* [in] */ long ReasonCode) = 0;
+            /* [annotation][in] */ 
+            _In_  IRDPSRAPIAttendee *pAttendee,
+            /* [annotation][in] */ 
+            _In_  CTRL_LEVEL RequestedLevel,
+            /* [annotation][in] */ 
+            _In_  long ReasonCode) = 0;
         
     };
     
@@ -5183,7 +5682,8 @@ EXTERN_C const IID IID_IRDPSRAPISharingSession2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRDPSRAPISharingSession2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5198,23 +5698,31 @@ EXTERN_C const IID IID_IRDPSRAPISharingSession2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRDPSRAPISharingSession2 * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRDPSRAPISharingSession2 * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRDPSRAPISharingSession2 * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5247,37 +5755,44 @@ EXTERN_C const IID IID_IRDPSRAPISharingSession2;
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession, put_ColorDepth)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ColorDepth )( 
             __RPC__in IRDPSRAPISharingSession2 * This,
-            /* [in] */ long colorDepth);
+            /* [annotation][in] */ 
+            _In_  long colorDepth);
         
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession, get_ColorDepth)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ColorDepth )( 
             __RPC__in IRDPSRAPISharingSession2 * This,
-            /* [retval][out] */ __RPC__out long *pColorDepth);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pColorDepth);
         
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession, get_Properties)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IRDPSRAPISharingSession2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPISessionProperties **ppVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPISessionProperties **ppVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession, get_Attendees)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Attendees )( 
             __RPC__in IRDPSRAPISharingSession2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIAttendeeManager **ppVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIAttendeeManager **ppVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession, get_Invitations)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Invitations )( 
             __RPC__in IRDPSRAPISharingSession2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIInvitationManager **ppVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIInvitationManager **ppVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession, get_ApplicationFilter)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationFilter )( 
             __RPC__in IRDPSRAPISharingSession2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIApplicationFilter **ppVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIApplicationFilter **ppVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession, get_VirtualChannelManager)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_VirtualChannelManager )( 
             __RPC__in IRDPSRAPISharingSession2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIVirtualChannelManager **ppVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIVirtualChannelManager **ppVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession, Pause)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Pause )( 
@@ -5290,42 +5805,58 @@ EXTERN_C const IID IID_IRDPSRAPISharingSession2;
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession, ConnectToClient)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ConnectToClient )( 
             __RPC__in IRDPSRAPISharingSession2 * This,
-            /* [in] */ __RPC__in BSTR bstrConnectionString);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrConnectionString);
         
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession, SetDesktopSharedRect)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetDesktopSharedRect )( 
             __RPC__in IRDPSRAPISharingSession2 * This,
-            /* [in] */ long left,
-            /* [in] */ long top,
-            /* [in] */ long right,
-            /* [in] */ long bottom);
+            /* [annotation][in] */ 
+            _In_  long left,
+            /* [annotation][in] */ 
+            _In_  long top,
+            /* [annotation][in] */ 
+            _In_  long right,
+            /* [annotation][in] */ 
+            _In_  long bottom);
         
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession, GetDesktopSharedRect)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetDesktopSharedRect )( 
             __RPC__in IRDPSRAPISharingSession2 * This,
-            /* [out] */ __RPC__out long *pleft,
-            /* [out] */ __RPC__out long *ptop,
-            /* [out] */ __RPC__out long *pright,
-            /* [out] */ __RPC__out long *pbottom);
+            /* [annotation][out] */ 
+            _Out_  long *pleft,
+            /* [annotation][out] */ 
+            _Out_  long *ptop,
+            /* [annotation][out] */ 
+            _Out_  long *pright,
+            /* [annotation][out] */ 
+            _Out_  long *pbottom);
         
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession2, ConnectUsingTransportStream)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ConnectUsingTransportStream )( 
             __RPC__in IRDPSRAPISharingSession2 * This,
-            /* [in] */ __RPC__in_opt IRDPSRAPITransportStream *pStream,
-            /* [in] */ __RPC__in BSTR bstrGroup,
-            /* [in] */ __RPC__in BSTR bstrAuthenticatedAttendeeName);
+            /* [annotation][in] */ 
+            _In_  IRDPSRAPITransportStream *pStream,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrGroup,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrAuthenticatedAttendeeName);
         
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession2, get_FrameBuffer)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FrameBuffer )( 
             __RPC__in IRDPSRAPISharingSession2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IRDPSRAPIFrameBuffer **ppVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRDPSRAPIFrameBuffer **ppVal);
         
         DECLSPEC_XFGVIRT(IRDPSRAPISharingSession2, SendControlLevelChangeResponse)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SendControlLevelChangeResponse )( 
             __RPC__in IRDPSRAPISharingSession2 * This,
-            /* [in] */ __RPC__in_opt IRDPSRAPIAttendee *pAttendee,
-            /* [in] */ CTRL_LEVEL RequestedLevel,
-            /* [in] */ long ReasonCode);
+            /* [annotation][in] */ 
+            _In_  IRDPSRAPIAttendee *pAttendee,
+            /* [annotation][in] */ 
+            _In_  CTRL_LEVEL RequestedLevel,
+            /* [annotation][in] */ 
+            _In_  long ReasonCode);
         
         END_INTERFACE
     } IRDPSRAPISharingSession2Vtbl;
@@ -5488,7 +6019,8 @@ EXTERN_C const IID DIID__IRDPSessionEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _IRDPSessionEvents * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5503,23 +6035,31 @@ EXTERN_C const IID DIID__IRDPSessionEvents;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _IRDPSessionEvents * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _IRDPSessionEvents * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _IRDPSessionEvents * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 

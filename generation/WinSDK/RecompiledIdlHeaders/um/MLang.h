@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -273,8 +273,10 @@ EXTERN_C const IID IID_IMLangStringBufW;
             _Out_opt_  long *pcchActual) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Delete( 
-            /* [in] */ long cchOffset,
-            /* [in] */ long cchDelete) = 0;
+            /* [annotation][in] */ 
+            _In_  long cchOffset,
+            /* [annotation][in] */ 
+            _In_  long cchDelete) = 0;
         
     };
     
@@ -288,7 +290,8 @@ EXTERN_C const IID IID_IMLangStringBufW;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMLangStringBufW * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -337,8 +340,10 @@ EXTERN_C const IID IID_IMLangStringBufW;
         DECLSPEC_XFGVIRT(IMLangStringBufW, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             IMLangStringBufW * This,
-            /* [in] */ long cchOffset,
-            /* [in] */ long cchDelete);
+            /* [annotation][in] */ 
+            _In_  long cchOffset,
+            /* [annotation][in] */ 
+            _In_  long cchDelete);
         
         END_INTERFACE
     } IMLangStringBufWVtbl;
@@ -431,8 +436,10 @@ EXTERN_C const IID IID_IMLangStringBufA;
             _Out_opt_  long *pcchActual) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Delete( 
-            /* [in] */ long cchOffset,
-            /* [in] */ long cchDelete) = 0;
+            /* [annotation][in] */ 
+            _In_  long cchOffset,
+            /* [annotation][in] */ 
+            _In_  long cchDelete) = 0;
         
     };
     
@@ -446,7 +453,8 @@ EXTERN_C const IID IID_IMLangStringBufA;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMLangStringBufA * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -495,8 +503,10 @@ EXTERN_C const IID IID_IMLangStringBufA;
         DECLSPEC_XFGVIRT(IMLangStringBufA, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             IMLangStringBufA * This,
-            /* [in] */ long cchOffset,
-            /* [in] */ long cchDelete);
+            /* [annotation][in] */ 
+            _In_  long cchOffset,
+            /* [annotation][in] */ 
+            _In_  long cchDelete);
         
         END_INTERFACE
     } IMLangStringBufAVtbl;
@@ -563,7 +573,8 @@ EXTERN_C const IID IID_IMLangString;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Sync( 
-            /* [in] */ BOOL fNoAccess) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL fNoAccess) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
             /* [annotation][retval][out] */ 
@@ -604,7 +615,8 @@ EXTERN_C const IID IID_IMLangString;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMLangString * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -619,7 +631,8 @@ EXTERN_C const IID IID_IMLangString;
         DECLSPEC_XFGVIRT(IMLangString, Sync)
         HRESULT ( STDMETHODCALLTYPE *Sync )( 
             IMLangString * This,
-            /* [in] */ BOOL fNoAccess);
+            /* [annotation][in] */ 
+            _In_  BOOL fNoAccess);
         
         DECLSPEC_XFGVIRT(IMLangString, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
@@ -777,9 +790,12 @@ EXTERN_C const IID IID_IMLangStringWStr;
             _Out_opt_  long *plActualLen) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetLocale( 
-            /* [in] */ long lDestPos,
-            /* [in] */ long lDestLen,
-            /* [in] */ LCID locale) = 0;
+            /* [annotation][in] */ 
+            _In_  long lDestPos,
+            /* [annotation][in] */ 
+            _In_  long lDestLen,
+            /* [annotation][in] */ 
+            _In_  LCID locale) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLocale( 
             /* [in] */ long lSrcPos,
@@ -803,7 +819,8 @@ EXTERN_C const IID IID_IMLangStringWStr;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMLangStringWStr * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -818,7 +835,8 @@ EXTERN_C const IID IID_IMLangStringWStr;
         DECLSPEC_XFGVIRT(IMLangString, Sync)
         HRESULT ( STDMETHODCALLTYPE *Sync )( 
             IMLangStringWStr * This,
-            /* [in] */ BOOL fNoAccess);
+            /* [annotation][in] */ 
+            _In_  BOOL fNoAccess);
         
         DECLSPEC_XFGVIRT(IMLangString, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
@@ -929,9 +947,12 @@ EXTERN_C const IID IID_IMLangStringWStr;
         DECLSPEC_XFGVIRT(IMLangStringWStr, SetLocale)
         HRESULT ( STDMETHODCALLTYPE *SetLocale )( 
             IMLangStringWStr * This,
-            /* [in] */ long lDestPos,
-            /* [in] */ long lDestLen,
-            /* [in] */ LCID locale);
+            /* [annotation][in] */ 
+            _In_  long lDestPos,
+            /* [annotation][in] */ 
+            _In_  long lDestLen,
+            /* [annotation][in] */ 
+            _In_  LCID locale);
         
         DECLSPEC_XFGVIRT(IMLangStringWStr, GetLocale)
         HRESULT ( STDMETHODCALLTYPE *GetLocale )( 
@@ -1103,9 +1124,12 @@ EXTERN_C const IID IID_IMLangStringAStr;
             _Out_opt_  long *plActualLen) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetLocale( 
-            /* [in] */ long lDestPos,
-            /* [in] */ long lDestLen,
-            /* [in] */ LCID locale) = 0;
+            /* [annotation][in] */ 
+            _In_  long lDestPos,
+            /* [annotation][in] */ 
+            _In_  long lDestLen,
+            /* [annotation][in] */ 
+            _In_  LCID locale) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLocale( 
             /* [in] */ long lSrcPos,
@@ -1129,7 +1153,8 @@ EXTERN_C const IID IID_IMLangStringAStr;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMLangStringAStr * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1144,7 +1169,8 @@ EXTERN_C const IID IID_IMLangStringAStr;
         DECLSPEC_XFGVIRT(IMLangString, Sync)
         HRESULT ( STDMETHODCALLTYPE *Sync )( 
             IMLangStringAStr * This,
-            /* [in] */ BOOL fNoAccess);
+            /* [annotation][in] */ 
+            _In_  BOOL fNoAccess);
         
         DECLSPEC_XFGVIRT(IMLangString, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
@@ -1265,9 +1291,12 @@ EXTERN_C const IID IID_IMLangStringAStr;
         DECLSPEC_XFGVIRT(IMLangStringAStr, SetLocale)
         HRESULT ( STDMETHODCALLTYPE *SetLocale )( 
             IMLangStringAStr * This,
-            /* [in] */ long lDestPos,
-            /* [in] */ long lDestLen,
-            /* [in] */ LCID locale);
+            /* [annotation][in] */ 
+            _In_  long lDestPos,
+            /* [annotation][in] */ 
+            _In_  long lDestLen,
+            /* [annotation][in] */ 
+            _In_  LCID locale);
         
         DECLSPEC_XFGVIRT(IMLangStringAStr, GetLocale)
         HRESULT ( STDMETHODCALLTYPE *GetLocale )( 
@@ -1414,7 +1443,8 @@ EXTERN_C const IID IID_IMLangLineBreakConsole;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMLangLineBreakConsole * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1593,7 +1623,8 @@ EXTERN_C const IID IID_IEnumCodePage;
             _Reserved_  IEnumCodePage **ppEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
             /* [annotation][out] */ 
             _Out_  PMIMECPINFO rgelt,
             /* [annotation][out] */ 
@@ -1602,7 +1633,8 @@ EXTERN_C const IID IID_IEnumCodePage;
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
     };
     
@@ -1616,7 +1648,8 @@ EXTERN_C const IID IID_IEnumCodePage;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumCodePage * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1637,7 +1670,8 @@ EXTERN_C const IID IID_IEnumCodePage;
         DECLSPEC_XFGVIRT(IEnumCodePage, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumCodePage * This,
-            /* [in] */ ULONG celt,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
             /* [annotation][out] */ 
             _Out_  PMIMECPINFO rgelt,
             /* [annotation][out] */ 
@@ -1650,7 +1684,8 @@ EXTERN_C const IID IID_IEnumCodePage;
         DECLSPEC_XFGVIRT(IEnumCodePage, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             IEnumCodePage * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         END_INTERFACE
     } IEnumCodePageVtbl;
@@ -1733,7 +1768,8 @@ EXTERN_C const IID IID_IEnumRfc1766;
             _Reserved_  IEnumRfc1766 **ppEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
             /* [annotation][out] */ 
             _Out_  PRFC1766INFO rgelt,
             /* [annotation][out] */ 
@@ -1742,7 +1778,8 @@ EXTERN_C const IID IID_IEnumRfc1766;
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
     };
     
@@ -1756,7 +1793,8 @@ EXTERN_C const IID IID_IEnumRfc1766;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumRfc1766 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1777,7 +1815,8 @@ EXTERN_C const IID IID_IEnumRfc1766;
         DECLSPEC_XFGVIRT(IEnumRfc1766, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumRfc1766 * This,
-            /* [in] */ ULONG celt,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
             /* [annotation][out] */ 
             _Out_  PRFC1766INFO rgelt,
             /* [annotation][out] */ 
@@ -1790,7 +1829,8 @@ EXTERN_C const IID IID_IEnumRfc1766;
         DECLSPEC_XFGVIRT(IEnumRfc1766, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             IEnumRfc1766 * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         END_INTERFACE
     } IEnumRfc1766Vtbl;
@@ -1926,7 +1966,8 @@ EXTERN_C const IID IID_IEnumScript;
             _Reserved_  IEnumScript **ppEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
             /* [annotation][out] */ 
             _Out_  PSCRIPTINFO rgelt,
             /* [annotation][out] */ 
@@ -1935,7 +1976,8 @@ EXTERN_C const IID IID_IEnumScript;
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
     };
     
@@ -1949,7 +1991,8 @@ EXTERN_C const IID IID_IEnumScript;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumScript * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1970,7 +2013,8 @@ EXTERN_C const IID IID_IEnumScript;
         DECLSPEC_XFGVIRT(IEnumScript, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumScript * This,
-            /* [in] */ ULONG celt,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
             /* [annotation][out] */ 
             _Out_  PSCRIPTINFO rgelt,
             /* [annotation][out] */ 
@@ -1983,7 +2027,8 @@ EXTERN_C const IID IID_IEnumScript;
         DECLSPEC_XFGVIRT(IEnumScript, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             IEnumScript * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         END_INTERFACE
     } IEnumScriptVtbl;
@@ -2074,9 +2119,12 @@ EXTERN_C const IID IID_IMLangConvertCharset;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [in] */ UINT uiSrcCodePage,
-            /* [in] */ UINT uiDstCodePage,
-            /* [in] */ DWORD dwProperty) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT uiSrcCodePage,
+            /* [annotation][in] */ 
+            _In_  UINT uiDstCodePage,
+            /* [annotation][in] */ 
+            _In_  DWORD dwProperty) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSourceCodePage( 
             /* [annotation][out] */ 
@@ -2132,7 +2180,8 @@ EXTERN_C const IID IID_IMLangConvertCharset;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMLangConvertCharset * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2147,9 +2196,12 @@ EXTERN_C const IID IID_IMLangConvertCharset;
         DECLSPEC_XFGVIRT(IMLangConvertCharset, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IMLangConvertCharset * This,
-            /* [in] */ UINT uiSrcCodePage,
-            /* [in] */ UINT uiDstCodePage,
-            /* [in] */ DWORD dwProperty);
+            /* [annotation][in] */ 
+            _In_  UINT uiSrcCodePage,
+            /* [annotation][in] */ 
+            _In_  UINT uiDstCodePage,
+            /* [annotation][in] */ 
+            _In_  DWORD dwProperty);
         
         DECLSPEC_XFGVIRT(IMLangConvertCharset, GetSourceCodePage)
         HRESULT ( STDMETHODCALLTYPE *GetSourceCodePage )( 
@@ -2282,34 +2334,42 @@ EXTERN_C const IID IID_IMultiLanguage;
             _Out_  UINT *pcCodePage) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCodePageInfo( 
-            /* [in] */ UINT uiCodePage,
+            /* [annotation][in] */ 
+            _In_  UINT uiCodePage,
             /* [annotation][out] */ 
             _Out_  PMIMECPINFO pCodePageInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFamilyCodePage( 
-            /* [in] */ UINT uiCodePage,
+            /* [annotation][in] */ 
+            _In_  UINT uiCodePage,
             /* [annotation][out] */ 
             _Out_  UINT *puiFamilyCodePage) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumCodePages( 
-            /* [in] */ DWORD grfFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD grfFlags,
             /* [annotation][out] */ 
             _Outptr_  IEnumCodePage **ppEnumCodePage) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCharsetInfo( 
-            /* [in] */ BSTR Charset,
+            /* [annotation][in] */ 
+            _In_  BSTR Charset,
             /* [annotation][out] */ 
             _Out_  PMIMECSETINFO pCharsetInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsConvertible( 
-            /* [in] */ DWORD dwSrcEncoding,
-            /* [in] */ DWORD dwDstEncoding) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwSrcEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwDstEncoding) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ConvertString( 
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwSrcEncoding,
-            /* [in] */ DWORD dwDstEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSrcEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwDstEncoding,
             /* [annotation][in] */ 
             _In_reads_bytes_opt_(*pcSrcSize)  BYTE *pSrcStr,
             /* [annotation][out][in] */ 
@@ -2322,7 +2382,8 @@ EXTERN_C const IID IID_IMultiLanguage;
         virtual HRESULT STDMETHODCALLTYPE ConvertStringToUnicode( 
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEncoding,
             /* [annotation][in] */ 
             _In_reads_bytes_opt_(*pcSrcSize)  CHAR *pSrcStr,
             /* [annotation][out][in] */ 
@@ -2335,7 +2396,8 @@ EXTERN_C const IID IID_IMultiLanguage;
         virtual HRESULT STDMETHODCALLTYPE ConvertStringFromUnicode( 
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEncoding,
             /* [annotation][in] */ 
             _In_reads_opt_(*pcSrcSize)  WCHAR *pSrcStr,
             /* [annotation][out][in] */ 
@@ -2348,7 +2410,8 @@ EXTERN_C const IID IID_IMultiLanguage;
         virtual HRESULT STDMETHODCALLTYPE ConvertStringReset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRfc1766FromLcid( 
-            /* [in] */ LCID Locale,
+            /* [annotation][in] */ 
+            _In_  LCID Locale,
             /* [annotation][out] */ 
             _Outptr_  BSTR *pbstrRfc1766) = 0;
         
@@ -2363,14 +2426,18 @@ EXTERN_C const IID IID_IMultiLanguage;
             _Outptr_  IEnumRfc1766 **ppEnumRfc1766) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRfc1766Info( 
-            /* [in] */ LCID Locale,
+            /* [annotation][in] */ 
+            _In_  LCID Locale,
             /* [annotation][out] */ 
             _Out_  PRFC1766INFO pRfc1766Info) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateConvertCharset( 
-            /* [in] */ UINT uiSrcCodePage,
-            /* [in] */ UINT uiDstCodePage,
-            /* [in] */ DWORD dwProperty,
+            /* [annotation][in] */ 
+            _In_  UINT uiSrcCodePage,
+            /* [annotation][in] */ 
+            _In_  UINT uiDstCodePage,
+            /* [annotation][in] */ 
+            _In_  DWORD dwProperty,
             /* [annotation][out] */ 
             _Outptr_  IMLangConvertCharset **ppMLangConvertCharset) = 0;
         
@@ -2386,7 +2453,8 @@ EXTERN_C const IID IID_IMultiLanguage;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMultiLanguage * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2407,44 +2475,52 @@ EXTERN_C const IID IID_IMultiLanguage;
         DECLSPEC_XFGVIRT(IMultiLanguage, GetCodePageInfo)
         HRESULT ( STDMETHODCALLTYPE *GetCodePageInfo )( 
             IMultiLanguage * This,
-            /* [in] */ UINT uiCodePage,
+            /* [annotation][in] */ 
+            _In_  UINT uiCodePage,
             /* [annotation][out] */ 
             _Out_  PMIMECPINFO pCodePageInfo);
         
         DECLSPEC_XFGVIRT(IMultiLanguage, GetFamilyCodePage)
         HRESULT ( STDMETHODCALLTYPE *GetFamilyCodePage )( 
             IMultiLanguage * This,
-            /* [in] */ UINT uiCodePage,
+            /* [annotation][in] */ 
+            _In_  UINT uiCodePage,
             /* [annotation][out] */ 
             _Out_  UINT *puiFamilyCodePage);
         
         DECLSPEC_XFGVIRT(IMultiLanguage, EnumCodePages)
         HRESULT ( STDMETHODCALLTYPE *EnumCodePages )( 
             IMultiLanguage * This,
-            /* [in] */ DWORD grfFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD grfFlags,
             /* [annotation][out] */ 
             _Outptr_  IEnumCodePage **ppEnumCodePage);
         
         DECLSPEC_XFGVIRT(IMultiLanguage, GetCharsetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetCharsetInfo )( 
             IMultiLanguage * This,
-            /* [in] */ BSTR Charset,
+            /* [annotation][in] */ 
+            _In_  BSTR Charset,
             /* [annotation][out] */ 
             _Out_  PMIMECSETINFO pCharsetInfo);
         
         DECLSPEC_XFGVIRT(IMultiLanguage, IsConvertible)
         HRESULT ( STDMETHODCALLTYPE *IsConvertible )( 
             IMultiLanguage * This,
-            /* [in] */ DWORD dwSrcEncoding,
-            /* [in] */ DWORD dwDstEncoding);
+            /* [annotation][in] */ 
+            _In_  DWORD dwSrcEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwDstEncoding);
         
         DECLSPEC_XFGVIRT(IMultiLanguage, ConvertString)
         HRESULT ( STDMETHODCALLTYPE *ConvertString )( 
             IMultiLanguage * This,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwSrcEncoding,
-            /* [in] */ DWORD dwDstEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSrcEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwDstEncoding,
             /* [annotation][in] */ 
             _In_reads_bytes_opt_(*pcSrcSize)  BYTE *pSrcStr,
             /* [annotation][out][in] */ 
@@ -2459,7 +2535,8 @@ EXTERN_C const IID IID_IMultiLanguage;
             IMultiLanguage * This,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEncoding,
             /* [annotation][in] */ 
             _In_reads_bytes_opt_(*pcSrcSize)  CHAR *pSrcStr,
             /* [annotation][out][in] */ 
@@ -2474,7 +2551,8 @@ EXTERN_C const IID IID_IMultiLanguage;
             IMultiLanguage * This,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEncoding,
             /* [annotation][in] */ 
             _In_reads_opt_(*pcSrcSize)  WCHAR *pSrcStr,
             /* [annotation][out][in] */ 
@@ -2491,7 +2569,8 @@ EXTERN_C const IID IID_IMultiLanguage;
         DECLSPEC_XFGVIRT(IMultiLanguage, GetRfc1766FromLcid)
         HRESULT ( STDMETHODCALLTYPE *GetRfc1766FromLcid )( 
             IMultiLanguage * This,
-            /* [in] */ LCID Locale,
+            /* [annotation][in] */ 
+            _In_  LCID Locale,
             /* [annotation][out] */ 
             _Outptr_  BSTR *pbstrRfc1766);
         
@@ -2512,16 +2591,20 @@ EXTERN_C const IID IID_IMultiLanguage;
         DECLSPEC_XFGVIRT(IMultiLanguage, GetRfc1766Info)
         HRESULT ( STDMETHODCALLTYPE *GetRfc1766Info )( 
             IMultiLanguage * This,
-            /* [in] */ LCID Locale,
+            /* [annotation][in] */ 
+            _In_  LCID Locale,
             /* [annotation][out] */ 
             _Out_  PRFC1766INFO pRfc1766Info);
         
         DECLSPEC_XFGVIRT(IMultiLanguage, CreateConvertCharset)
         HRESULT ( STDMETHODCALLTYPE *CreateConvertCharset )( 
             IMultiLanguage * This,
-            /* [in] */ UINT uiSrcCodePage,
-            /* [in] */ UINT uiDstCodePage,
-            /* [in] */ DWORD dwProperty,
+            /* [annotation][in] */ 
+            _In_  UINT uiSrcCodePage,
+            /* [annotation][in] */ 
+            _In_  UINT uiDstCodePage,
+            /* [annotation][in] */ 
+            _In_  DWORD dwProperty,
             /* [annotation][out] */ 
             _Outptr_  IMLangConvertCharset **ppMLangConvertCharset);
         
@@ -2676,36 +2759,46 @@ EXTERN_C const IID IID_IMultiLanguage2;
             _Out_  UINT *pcCodePage) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCodePageInfo( 
-            /* [in] */ UINT uiCodePage,
-            /* [in] */ LANGID LangId,
+            /* [annotation][in] */ 
+            _In_  UINT uiCodePage,
+            /* [annotation][in] */ 
+            _In_  LANGID LangId,
             /* [annotation][out] */ 
             _Out_  PMIMECPINFO pCodePageInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFamilyCodePage( 
-            /* [in] */ UINT uiCodePage,
+            /* [annotation][in] */ 
+            _In_  UINT uiCodePage,
             /* [annotation][out] */ 
             _Out_  UINT *puiFamilyCodePage) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumCodePages( 
-            /* [in] */ DWORD grfFlags,
-            /* [in] */ LANGID LangId,
+            /* [annotation][in] */ 
+            _In_  DWORD grfFlags,
+            /* [annotation][in] */ 
+            _In_  LANGID LangId,
             /* [annotation][out] */ 
             _Outptr_  IEnumCodePage **ppEnumCodePage) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCharsetInfo( 
-            /* [in] */ BSTR Charset,
+            /* [annotation][in] */ 
+            _In_  BSTR Charset,
             /* [annotation][out] */ 
             _Out_  PMIMECSETINFO pCharsetInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsConvertible( 
-            /* [in] */ DWORD dwSrcEncoding,
-            /* [in] */ DWORD dwDstEncoding) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwSrcEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwDstEncoding) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ConvertString( 
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwSrcEncoding,
-            /* [in] */ DWORD dwDstEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSrcEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwDstEncoding,
             /* [annotation][in] */ 
             _In_reads_bytes_opt_(*pcSrcSize)  BYTE *pSrcStr,
             /* [annotation][out][in] */ 
@@ -2718,7 +2811,8 @@ EXTERN_C const IID IID_IMultiLanguage2;
         virtual HRESULT STDMETHODCALLTYPE ConvertStringToUnicode( 
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEncoding,
             /* [annotation][in] */ 
             _In_reads_bytes_opt_(*pcSrcSize)  CHAR *pSrcStr,
             /* [annotation][out][in] */ 
@@ -2731,7 +2825,8 @@ EXTERN_C const IID IID_IMultiLanguage2;
         virtual HRESULT STDMETHODCALLTYPE ConvertStringFromUnicode( 
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEncoding,
             /* [annotation][in] */ 
             _In_reads_opt_(*pcSrcSize)  WCHAR *pSrcStr,
             /* [annotation][out][in] */ 
@@ -2744,7 +2839,8 @@ EXTERN_C const IID IID_IMultiLanguage2;
         virtual HRESULT STDMETHODCALLTYPE ConvertStringReset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRfc1766FromLcid( 
-            /* [in] */ LCID Locale,
+            /* [annotation][in] */ 
+            _In_  LCID Locale,
             /* [annotation][out] */ 
             _Outptr_  BSTR *pbstrRfc1766) = 0;
         
@@ -2755,31 +2851,40 @@ EXTERN_C const IID IID_IMultiLanguage2;
             _In_  BSTR bstrRfc1766) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumRfc1766( 
-            /* [in] */ LANGID LangId,
+            /* [annotation][in] */ 
+            _In_  LANGID LangId,
             /* [annotation][out] */ 
             _Outptr_  IEnumRfc1766 **ppEnumRfc1766) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRfc1766Info( 
-            /* [in] */ LCID Locale,
-            /* [in] */ LANGID LangId,
+            /* [annotation][in] */ 
+            _In_  LCID Locale,
+            /* [annotation][in] */ 
+            _In_  LANGID LangId,
             /* [annotation][out] */ 
             _Out_  PRFC1766INFO pRfc1766Info) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateConvertCharset( 
-            /* [in] */ UINT uiSrcCodePage,
-            /* [in] */ UINT uiDstCodePage,
-            /* [in] */ DWORD dwProperty,
+            /* [annotation][in] */ 
+            _In_  UINT uiSrcCodePage,
+            /* [annotation][in] */ 
+            _In_  UINT uiDstCodePage,
+            /* [annotation][in] */ 
+            _In_  DWORD dwProperty,
             /* [annotation][out] */ 
             _Outptr_  IMLangConvertCharset **ppMLangConvertCharset) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ConvertStringInIStream( 
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwFlag,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlag,
             /* [annotation][in] */ 
             _In_opt_  WCHAR *lpFallBack,
-            /* [in] */ DWORD dwSrcEncoding,
-            /* [in] */ DWORD dwDstEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSrcEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwDstEncoding,
             /* [annotation][in] */ 
             _In_  IStream *pstmIn,
             /* [annotation][in] */ 
@@ -2788,7 +2893,8 @@ EXTERN_C const IID IID_IMultiLanguage2;
         virtual HRESULT STDMETHODCALLTYPE ConvertStringToUnicodeEx( 
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEncoding,
             /* [annotation][in] */ 
             _In_reads_bytes_(*pcSrcSize)  CHAR *pSrcStr,
             /* [annotation][out][in] */ 
@@ -2797,14 +2903,16 @@ EXTERN_C const IID IID_IMultiLanguage2;
             _Out_writes_(*pcDstSize)  WCHAR *pDstStr,
             /* [annotation][out][in] */ 
             _Inout_opt_  UINT *pcDstSize,
-            /* [in] */ DWORD dwFlag,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlag,
             /* [annotation][in] */ 
             _In_opt_  WCHAR *lpFallBack) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ConvertStringFromUnicodeEx( 
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEncoding,
             /* [annotation][in] */ 
             _In_reads_(*pcSrcSize)  WCHAR *pSrcStr,
             /* [annotation][out][in] */ 
@@ -2813,13 +2921,16 @@ EXTERN_C const IID IID_IMultiLanguage2;
             _Out_writes_bytes_(*pcDstSize)  CHAR *pDstStr,
             /* [annotation][out][in] */ 
             _Inout_opt_  UINT *pcDstSize,
-            /* [in] */ DWORD dwFlag,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlag,
             /* [annotation][in] */ 
             _In_opt_  WCHAR *lpFallBack) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DetectCodepageInIStream( 
-            /* [in] */ DWORD dwFlag,
-            /* [in] */ DWORD dwPrefWinCodePage,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlag,
+            /* [annotation][in] */ 
+            _In_  DWORD dwPrefWinCodePage,
             /* [annotation][in] */ 
             _In_  IStream *pstmIn,
             /* [annotation][out] */ 
@@ -2828,8 +2939,10 @@ EXTERN_C const IID IID_IMultiLanguage2;
             _Inout_  INT *pnScores) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DetectInputCodepage( 
-            /* [in] */ DWORD dwFlag,
-            /* [in] */ DWORD dwPrefWinCodePage,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlag,
+            /* [annotation][in] */ 
+            _In_  DWORD dwPrefWinCodePage,
             /* [annotation][in] */ 
             _In_reads_bytes_(*pcSrcSize)  CHAR *pSrcStr,
             /* [annotation][out][in] */ 
@@ -2840,36 +2953,48 @@ EXTERN_C const IID IID_IMultiLanguage2;
             _Inout_  INT *pnScores) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ValidateCodePage( 
-            /* [in] */ UINT uiCodePage,
-            /* [in] */ HWND hwnd) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT uiCodePage,
+            /* [annotation][in] */ 
+            _In_  HWND hwnd) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCodePageDescription( 
-            /* [in] */ UINT uiCodePage,
-            /* [in] */ LCID lcid,
+            /* [annotation][in] */ 
+            _In_  UINT uiCodePage,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
             /* [annotation][size_is][out] */ 
             _Out_writes_(cchWideChar)  LPWSTR lpWideCharStr,
-            /* [in] */ int cchWideChar) = 0;
+            /* [annotation][in] */ 
+            _In_  int cchWideChar) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsCodePageInstallable( 
-            /* [in] */ UINT uiCodePage) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT uiCodePage) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetMimeDBSource( 
-            /* [in] */ MIMECONTF dwSource) = 0;
+            /* [annotation][in] */ 
+            _In_  MIMECONTF dwSource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNumberOfScripts( 
             /* [annotation][out] */ 
             _Out_  UINT *pnScripts) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumScripts( 
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ LANGID LangId,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  LANGID LangId,
             /* [annotation][out] */ 
             _Outptr_  IEnumScript **ppEnumScript) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ValidateCodePageEx( 
-            /* [in] */ UINT uiCodePage,
-            /* [in] */ HWND hwnd,
-            /* [in] */ DWORD dwfIODControl) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT uiCodePage,
+            /* [annotation][in] */ 
+            _In_  HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwfIODControl) = 0;
         
     };
     
@@ -2883,7 +3008,8 @@ EXTERN_C const IID IID_IMultiLanguage2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMultiLanguage2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2904,46 +3030,56 @@ EXTERN_C const IID IID_IMultiLanguage2;
         DECLSPEC_XFGVIRT(IMultiLanguage2, GetCodePageInfo)
         HRESULT ( STDMETHODCALLTYPE *GetCodePageInfo )( 
             IMultiLanguage2 * This,
-            /* [in] */ UINT uiCodePage,
-            /* [in] */ LANGID LangId,
+            /* [annotation][in] */ 
+            _In_  UINT uiCodePage,
+            /* [annotation][in] */ 
+            _In_  LANGID LangId,
             /* [annotation][out] */ 
             _Out_  PMIMECPINFO pCodePageInfo);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, GetFamilyCodePage)
         HRESULT ( STDMETHODCALLTYPE *GetFamilyCodePage )( 
             IMultiLanguage2 * This,
-            /* [in] */ UINT uiCodePage,
+            /* [annotation][in] */ 
+            _In_  UINT uiCodePage,
             /* [annotation][out] */ 
             _Out_  UINT *puiFamilyCodePage);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, EnumCodePages)
         HRESULT ( STDMETHODCALLTYPE *EnumCodePages )( 
             IMultiLanguage2 * This,
-            /* [in] */ DWORD grfFlags,
-            /* [in] */ LANGID LangId,
+            /* [annotation][in] */ 
+            _In_  DWORD grfFlags,
+            /* [annotation][in] */ 
+            _In_  LANGID LangId,
             /* [annotation][out] */ 
             _Outptr_  IEnumCodePage **ppEnumCodePage);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, GetCharsetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetCharsetInfo )( 
             IMultiLanguage2 * This,
-            /* [in] */ BSTR Charset,
+            /* [annotation][in] */ 
+            _In_  BSTR Charset,
             /* [annotation][out] */ 
             _Out_  PMIMECSETINFO pCharsetInfo);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, IsConvertible)
         HRESULT ( STDMETHODCALLTYPE *IsConvertible )( 
             IMultiLanguage2 * This,
-            /* [in] */ DWORD dwSrcEncoding,
-            /* [in] */ DWORD dwDstEncoding);
+            /* [annotation][in] */ 
+            _In_  DWORD dwSrcEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwDstEncoding);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, ConvertString)
         HRESULT ( STDMETHODCALLTYPE *ConvertString )( 
             IMultiLanguage2 * This,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwSrcEncoding,
-            /* [in] */ DWORD dwDstEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSrcEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwDstEncoding,
             /* [annotation][in] */ 
             _In_reads_bytes_opt_(*pcSrcSize)  BYTE *pSrcStr,
             /* [annotation][out][in] */ 
@@ -2958,7 +3094,8 @@ EXTERN_C const IID IID_IMultiLanguage2;
             IMultiLanguage2 * This,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEncoding,
             /* [annotation][in] */ 
             _In_reads_bytes_opt_(*pcSrcSize)  CHAR *pSrcStr,
             /* [annotation][out][in] */ 
@@ -2973,7 +3110,8 @@ EXTERN_C const IID IID_IMultiLanguage2;
             IMultiLanguage2 * This,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEncoding,
             /* [annotation][in] */ 
             _In_reads_opt_(*pcSrcSize)  WCHAR *pSrcStr,
             /* [annotation][out][in] */ 
@@ -2990,7 +3128,8 @@ EXTERN_C const IID IID_IMultiLanguage2;
         DECLSPEC_XFGVIRT(IMultiLanguage2, GetRfc1766FromLcid)
         HRESULT ( STDMETHODCALLTYPE *GetRfc1766FromLcid )( 
             IMultiLanguage2 * This,
-            /* [in] */ LCID Locale,
+            /* [annotation][in] */ 
+            _In_  LCID Locale,
             /* [annotation][out] */ 
             _Outptr_  BSTR *pbstrRfc1766);
         
@@ -3005,24 +3144,30 @@ EXTERN_C const IID IID_IMultiLanguage2;
         DECLSPEC_XFGVIRT(IMultiLanguage2, EnumRfc1766)
         HRESULT ( STDMETHODCALLTYPE *EnumRfc1766 )( 
             IMultiLanguage2 * This,
-            /* [in] */ LANGID LangId,
+            /* [annotation][in] */ 
+            _In_  LANGID LangId,
             /* [annotation][out] */ 
             _Outptr_  IEnumRfc1766 **ppEnumRfc1766);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, GetRfc1766Info)
         HRESULT ( STDMETHODCALLTYPE *GetRfc1766Info )( 
             IMultiLanguage2 * This,
-            /* [in] */ LCID Locale,
-            /* [in] */ LANGID LangId,
+            /* [annotation][in] */ 
+            _In_  LCID Locale,
+            /* [annotation][in] */ 
+            _In_  LANGID LangId,
             /* [annotation][out] */ 
             _Out_  PRFC1766INFO pRfc1766Info);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, CreateConvertCharset)
         HRESULT ( STDMETHODCALLTYPE *CreateConvertCharset )( 
             IMultiLanguage2 * This,
-            /* [in] */ UINT uiSrcCodePage,
-            /* [in] */ UINT uiDstCodePage,
-            /* [in] */ DWORD dwProperty,
+            /* [annotation][in] */ 
+            _In_  UINT uiSrcCodePage,
+            /* [annotation][in] */ 
+            _In_  UINT uiDstCodePage,
+            /* [annotation][in] */ 
+            _In_  DWORD dwProperty,
             /* [annotation][out] */ 
             _Outptr_  IMLangConvertCharset **ppMLangConvertCharset);
         
@@ -3031,11 +3176,14 @@ EXTERN_C const IID IID_IMultiLanguage2;
             IMultiLanguage2 * This,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwFlag,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlag,
             /* [annotation][in] */ 
             _In_opt_  WCHAR *lpFallBack,
-            /* [in] */ DWORD dwSrcEncoding,
-            /* [in] */ DWORD dwDstEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSrcEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwDstEncoding,
             /* [annotation][in] */ 
             _In_  IStream *pstmIn,
             /* [annotation][in] */ 
@@ -3046,7 +3194,8 @@ EXTERN_C const IID IID_IMultiLanguage2;
             IMultiLanguage2 * This,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEncoding,
             /* [annotation][in] */ 
             _In_reads_bytes_(*pcSrcSize)  CHAR *pSrcStr,
             /* [annotation][out][in] */ 
@@ -3055,7 +3204,8 @@ EXTERN_C const IID IID_IMultiLanguage2;
             _Out_writes_(*pcDstSize)  WCHAR *pDstStr,
             /* [annotation][out][in] */ 
             _Inout_opt_  UINT *pcDstSize,
-            /* [in] */ DWORD dwFlag,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlag,
             /* [annotation][in] */ 
             _In_opt_  WCHAR *lpFallBack);
         
@@ -3064,7 +3214,8 @@ EXTERN_C const IID IID_IMultiLanguage2;
             IMultiLanguage2 * This,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEncoding,
             /* [annotation][in] */ 
             _In_reads_(*pcSrcSize)  WCHAR *pSrcStr,
             /* [annotation][out][in] */ 
@@ -3073,15 +3224,18 @@ EXTERN_C const IID IID_IMultiLanguage2;
             _Out_writes_bytes_(*pcDstSize)  CHAR *pDstStr,
             /* [annotation][out][in] */ 
             _Inout_opt_  UINT *pcDstSize,
-            /* [in] */ DWORD dwFlag,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlag,
             /* [annotation][in] */ 
             _In_opt_  WCHAR *lpFallBack);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, DetectCodepageInIStream)
         HRESULT ( STDMETHODCALLTYPE *DetectCodepageInIStream )( 
             IMultiLanguage2 * This,
-            /* [in] */ DWORD dwFlag,
-            /* [in] */ DWORD dwPrefWinCodePage,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlag,
+            /* [annotation][in] */ 
+            _In_  DWORD dwPrefWinCodePage,
             /* [annotation][in] */ 
             _In_  IStream *pstmIn,
             /* [annotation][out] */ 
@@ -3092,8 +3246,10 @@ EXTERN_C const IID IID_IMultiLanguage2;
         DECLSPEC_XFGVIRT(IMultiLanguage2, DetectInputCodepage)
         HRESULT ( STDMETHODCALLTYPE *DetectInputCodepage )( 
             IMultiLanguage2 * This,
-            /* [in] */ DWORD dwFlag,
-            /* [in] */ DWORD dwPrefWinCodePage,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlag,
+            /* [annotation][in] */ 
+            _In_  DWORD dwPrefWinCodePage,
             /* [annotation][in] */ 
             _In_reads_bytes_(*pcSrcSize)  CHAR *pSrcStr,
             /* [annotation][out][in] */ 
@@ -3106,27 +3262,34 @@ EXTERN_C const IID IID_IMultiLanguage2;
         DECLSPEC_XFGVIRT(IMultiLanguage2, ValidateCodePage)
         HRESULT ( STDMETHODCALLTYPE *ValidateCodePage )( 
             IMultiLanguage2 * This,
-            /* [in] */ UINT uiCodePage,
-            /* [in] */ HWND hwnd);
+            /* [annotation][in] */ 
+            _In_  UINT uiCodePage,
+            /* [annotation][in] */ 
+            _In_  HWND hwnd);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, GetCodePageDescription)
         HRESULT ( STDMETHODCALLTYPE *GetCodePageDescription )( 
             IMultiLanguage2 * This,
-            /* [in] */ UINT uiCodePage,
-            /* [in] */ LCID lcid,
+            /* [annotation][in] */ 
+            _In_  UINT uiCodePage,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
             /* [annotation][size_is][out] */ 
             _Out_writes_(cchWideChar)  LPWSTR lpWideCharStr,
-            /* [in] */ int cchWideChar);
+            /* [annotation][in] */ 
+            _In_  int cchWideChar);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, IsCodePageInstallable)
         HRESULT ( STDMETHODCALLTYPE *IsCodePageInstallable )( 
             IMultiLanguage2 * This,
-            /* [in] */ UINT uiCodePage);
+            /* [annotation][in] */ 
+            _In_  UINT uiCodePage);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, SetMimeDBSource)
         HRESULT ( STDMETHODCALLTYPE *SetMimeDBSource )( 
             IMultiLanguage2 * This,
-            /* [in] */ MIMECONTF dwSource);
+            /* [annotation][in] */ 
+            _In_  MIMECONTF dwSource);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, GetNumberOfScripts)
         HRESULT ( STDMETHODCALLTYPE *GetNumberOfScripts )( 
@@ -3137,17 +3300,22 @@ EXTERN_C const IID IID_IMultiLanguage2;
         DECLSPEC_XFGVIRT(IMultiLanguage2, EnumScripts)
         HRESULT ( STDMETHODCALLTYPE *EnumScripts )( 
             IMultiLanguage2 * This,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ LANGID LangId,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  LANGID LangId,
             /* [annotation][out] */ 
             _Outptr_  IEnumScript **ppEnumScript);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, ValidateCodePageEx)
         HRESULT ( STDMETHODCALLTYPE *ValidateCodePageEx )( 
             IMultiLanguage2 * This,
-            /* [in] */ UINT uiCodePage,
-            /* [in] */ HWND hwnd,
-            /* [in] */ DWORD dwfIODControl);
+            /* [annotation][in] */ 
+            _In_  UINT uiCodePage,
+            /* [annotation][in] */ 
+            _In_  HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwfIODControl);
         
         END_INTERFACE
     } IMultiLanguage2Vtbl;
@@ -3331,7 +3499,8 @@ EXTERN_C const IID IID_IMLangCodePages;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMLangCodePages * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3454,7 +3623,8 @@ EXTERN_C const IID IID_IMLangFontLink;
             _Out_opt_  HFONT *phDestFont) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE ReleaseFont( 
-            /* [in] */ HFONT hFont) = 0;
+            /* [annotation][in] */ 
+            _In_  HFONT hFont) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE ResetFontMapping( void) = 0;
         
@@ -3470,7 +3640,8 @@ EXTERN_C const IID IID_IMLangFontLink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMLangFontLink * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3536,7 +3707,8 @@ EXTERN_C const IID IID_IMLangFontLink;
         DECLSPEC_XFGVIRT(IMLangFontLink, ReleaseFont)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ReleaseFont )( 
             IMLangFontLink * This,
-            /* [in] */ HFONT hFont);
+            /* [annotation][in] */ 
+            _In_  HFONT hFont);
         
         DECLSPEC_XFGVIRT(IMLangFontLink, ResetFontMapping)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ResetFontMapping )( 
@@ -3631,7 +3803,8 @@ EXTERN_C const IID IID_IMLangFontLink2;
             _Out_opt_  DWORD *pdwCodePages) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE ReleaseFont( 
-            /* [in] */ HFONT hFont) = 0;
+            /* [annotation][in] */ 
+            _In_  HFONT hFont) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE ResetFontMapping( void) = 0;
         
@@ -3674,7 +3847,8 @@ EXTERN_C const IID IID_IMLangFontLink2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMLangFontLink2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3731,7 +3905,8 @@ EXTERN_C const IID IID_IMLangFontLink2;
         DECLSPEC_XFGVIRT(IMLangFontLink2, ReleaseFont)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ReleaseFont )( 
             IMLangFontLink2 * This,
-            /* [in] */ HFONT hFont);
+            /* [annotation][in] */ 
+            _In_  HFONT hFont);
         
         DECLSPEC_XFGVIRT(IMLangFontLink2, ResetFontMapping)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ResetFontMapping )( 
@@ -3858,13 +4033,16 @@ EXTERN_C const IID IID_IMultiLanguage3;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE DetectOutboundCodePage( 
-            /* [in] */ DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
             /* [annotation][size_is][in] */ 
             _In_reads_(cchWideChar)  LPCWSTR lpWideCharStr,
-            /* [in] */ UINT cchWideChar,
+            /* [annotation][in] */ 
+            _In_  UINT cchWideChar,
             /* [annotation][size_is][in] */ 
             _In_reads_opt_(nPreferredCodePages)  const UINT *puiPreferredCodePages,
-            /* [in] */ UINT nPreferredCodePages,
+            /* [annotation][in] */ 
+            _In_  UINT nPreferredCodePages,
             /* [annotation][size_is][out] */ 
             _Out_writes_to_(*pnDetectedCodePages, *pnDetectedCodePages)  UINT *puiDetectedCodePages,
             /* [annotation][out][in] */ 
@@ -3873,12 +4051,14 @@ EXTERN_C const IID IID_IMultiLanguage3;
             _In_opt_  LPCWSTR lpSpecialChar) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DetectOutboundCodePageInIStream( 
-            /* [in] */ DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
             /* [annotation][in] */ 
             _In_  IStream *pStrIn,
             /* [annotation][size_is][in] */ 
             _In_reads_opt_(nPreferredCodePages)  const UINT *puiPreferredCodePages,
-            /* [in] */ UINT nPreferredCodePages,
+            /* [annotation][in] */ 
+            _In_  UINT nPreferredCodePages,
             /* [annotation][size_is][out] */ 
             _Out_writes_to_(*pnDetectedCodePages, *pnDetectedCodePages)  UINT *puiDetectedCodePages,
             /* [annotation][out][in] */ 
@@ -3898,7 +4078,8 @@ EXTERN_C const IID IID_IMultiLanguage3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMultiLanguage3 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3919,46 +4100,56 @@ EXTERN_C const IID IID_IMultiLanguage3;
         DECLSPEC_XFGVIRT(IMultiLanguage2, GetCodePageInfo)
         HRESULT ( STDMETHODCALLTYPE *GetCodePageInfo )( 
             IMultiLanguage3 * This,
-            /* [in] */ UINT uiCodePage,
-            /* [in] */ LANGID LangId,
+            /* [annotation][in] */ 
+            _In_  UINT uiCodePage,
+            /* [annotation][in] */ 
+            _In_  LANGID LangId,
             /* [annotation][out] */ 
             _Out_  PMIMECPINFO pCodePageInfo);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, GetFamilyCodePage)
         HRESULT ( STDMETHODCALLTYPE *GetFamilyCodePage )( 
             IMultiLanguage3 * This,
-            /* [in] */ UINT uiCodePage,
+            /* [annotation][in] */ 
+            _In_  UINT uiCodePage,
             /* [annotation][out] */ 
             _Out_  UINT *puiFamilyCodePage);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, EnumCodePages)
         HRESULT ( STDMETHODCALLTYPE *EnumCodePages )( 
             IMultiLanguage3 * This,
-            /* [in] */ DWORD grfFlags,
-            /* [in] */ LANGID LangId,
+            /* [annotation][in] */ 
+            _In_  DWORD grfFlags,
+            /* [annotation][in] */ 
+            _In_  LANGID LangId,
             /* [annotation][out] */ 
             _Outptr_  IEnumCodePage **ppEnumCodePage);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, GetCharsetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetCharsetInfo )( 
             IMultiLanguage3 * This,
-            /* [in] */ BSTR Charset,
+            /* [annotation][in] */ 
+            _In_  BSTR Charset,
             /* [annotation][out] */ 
             _Out_  PMIMECSETINFO pCharsetInfo);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, IsConvertible)
         HRESULT ( STDMETHODCALLTYPE *IsConvertible )( 
             IMultiLanguage3 * This,
-            /* [in] */ DWORD dwSrcEncoding,
-            /* [in] */ DWORD dwDstEncoding);
+            /* [annotation][in] */ 
+            _In_  DWORD dwSrcEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwDstEncoding);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, ConvertString)
         HRESULT ( STDMETHODCALLTYPE *ConvertString )( 
             IMultiLanguage3 * This,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwSrcEncoding,
-            /* [in] */ DWORD dwDstEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSrcEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwDstEncoding,
             /* [annotation][in] */ 
             _In_reads_bytes_opt_(*pcSrcSize)  BYTE *pSrcStr,
             /* [annotation][out][in] */ 
@@ -3973,7 +4164,8 @@ EXTERN_C const IID IID_IMultiLanguage3;
             IMultiLanguage3 * This,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEncoding,
             /* [annotation][in] */ 
             _In_reads_bytes_opt_(*pcSrcSize)  CHAR *pSrcStr,
             /* [annotation][out][in] */ 
@@ -3988,7 +4180,8 @@ EXTERN_C const IID IID_IMultiLanguage3;
             IMultiLanguage3 * This,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEncoding,
             /* [annotation][in] */ 
             _In_reads_opt_(*pcSrcSize)  WCHAR *pSrcStr,
             /* [annotation][out][in] */ 
@@ -4005,7 +4198,8 @@ EXTERN_C const IID IID_IMultiLanguage3;
         DECLSPEC_XFGVIRT(IMultiLanguage2, GetRfc1766FromLcid)
         HRESULT ( STDMETHODCALLTYPE *GetRfc1766FromLcid )( 
             IMultiLanguage3 * This,
-            /* [in] */ LCID Locale,
+            /* [annotation][in] */ 
+            _In_  LCID Locale,
             /* [annotation][out] */ 
             _Outptr_  BSTR *pbstrRfc1766);
         
@@ -4020,24 +4214,30 @@ EXTERN_C const IID IID_IMultiLanguage3;
         DECLSPEC_XFGVIRT(IMultiLanguage2, EnumRfc1766)
         HRESULT ( STDMETHODCALLTYPE *EnumRfc1766 )( 
             IMultiLanguage3 * This,
-            /* [in] */ LANGID LangId,
+            /* [annotation][in] */ 
+            _In_  LANGID LangId,
             /* [annotation][out] */ 
             _Outptr_  IEnumRfc1766 **ppEnumRfc1766);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, GetRfc1766Info)
         HRESULT ( STDMETHODCALLTYPE *GetRfc1766Info )( 
             IMultiLanguage3 * This,
-            /* [in] */ LCID Locale,
-            /* [in] */ LANGID LangId,
+            /* [annotation][in] */ 
+            _In_  LCID Locale,
+            /* [annotation][in] */ 
+            _In_  LANGID LangId,
             /* [annotation][out] */ 
             _Out_  PRFC1766INFO pRfc1766Info);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, CreateConvertCharset)
         HRESULT ( STDMETHODCALLTYPE *CreateConvertCharset )( 
             IMultiLanguage3 * This,
-            /* [in] */ UINT uiSrcCodePage,
-            /* [in] */ UINT uiDstCodePage,
-            /* [in] */ DWORD dwProperty,
+            /* [annotation][in] */ 
+            _In_  UINT uiSrcCodePage,
+            /* [annotation][in] */ 
+            _In_  UINT uiDstCodePage,
+            /* [annotation][in] */ 
+            _In_  DWORD dwProperty,
             /* [annotation][out] */ 
             _Outptr_  IMLangConvertCharset **ppMLangConvertCharset);
         
@@ -4046,11 +4246,14 @@ EXTERN_C const IID IID_IMultiLanguage3;
             IMultiLanguage3 * This,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwFlag,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlag,
             /* [annotation][in] */ 
             _In_opt_  WCHAR *lpFallBack,
-            /* [in] */ DWORD dwSrcEncoding,
-            /* [in] */ DWORD dwDstEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSrcEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwDstEncoding,
             /* [annotation][in] */ 
             _In_  IStream *pstmIn,
             /* [annotation][in] */ 
@@ -4061,7 +4264,8 @@ EXTERN_C const IID IID_IMultiLanguage3;
             IMultiLanguage3 * This,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEncoding,
             /* [annotation][in] */ 
             _In_reads_bytes_(*pcSrcSize)  CHAR *pSrcStr,
             /* [annotation][out][in] */ 
@@ -4070,7 +4274,8 @@ EXTERN_C const IID IID_IMultiLanguage3;
             _Out_writes_(*pcDstSize)  WCHAR *pDstStr,
             /* [annotation][out][in] */ 
             _Inout_opt_  UINT *pcDstSize,
-            /* [in] */ DWORD dwFlag,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlag,
             /* [annotation][in] */ 
             _In_opt_  WCHAR *lpFallBack);
         
@@ -4079,7 +4284,8 @@ EXTERN_C const IID IID_IMultiLanguage3;
             IMultiLanguage3 * This,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwMode,
-            /* [in] */ DWORD dwEncoding,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEncoding,
             /* [annotation][in] */ 
             _In_reads_(*pcSrcSize)  WCHAR *pSrcStr,
             /* [annotation][out][in] */ 
@@ -4088,15 +4294,18 @@ EXTERN_C const IID IID_IMultiLanguage3;
             _Out_writes_bytes_(*pcDstSize)  CHAR *pDstStr,
             /* [annotation][out][in] */ 
             _Inout_opt_  UINT *pcDstSize,
-            /* [in] */ DWORD dwFlag,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlag,
             /* [annotation][in] */ 
             _In_opt_  WCHAR *lpFallBack);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, DetectCodepageInIStream)
         HRESULT ( STDMETHODCALLTYPE *DetectCodepageInIStream )( 
             IMultiLanguage3 * This,
-            /* [in] */ DWORD dwFlag,
-            /* [in] */ DWORD dwPrefWinCodePage,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlag,
+            /* [annotation][in] */ 
+            _In_  DWORD dwPrefWinCodePage,
             /* [annotation][in] */ 
             _In_  IStream *pstmIn,
             /* [annotation][out] */ 
@@ -4107,8 +4316,10 @@ EXTERN_C const IID IID_IMultiLanguage3;
         DECLSPEC_XFGVIRT(IMultiLanguage2, DetectInputCodepage)
         HRESULT ( STDMETHODCALLTYPE *DetectInputCodepage )( 
             IMultiLanguage3 * This,
-            /* [in] */ DWORD dwFlag,
-            /* [in] */ DWORD dwPrefWinCodePage,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlag,
+            /* [annotation][in] */ 
+            _In_  DWORD dwPrefWinCodePage,
             /* [annotation][in] */ 
             _In_reads_bytes_(*pcSrcSize)  CHAR *pSrcStr,
             /* [annotation][out][in] */ 
@@ -4121,27 +4332,34 @@ EXTERN_C const IID IID_IMultiLanguage3;
         DECLSPEC_XFGVIRT(IMultiLanguage2, ValidateCodePage)
         HRESULT ( STDMETHODCALLTYPE *ValidateCodePage )( 
             IMultiLanguage3 * This,
-            /* [in] */ UINT uiCodePage,
-            /* [in] */ HWND hwnd);
+            /* [annotation][in] */ 
+            _In_  UINT uiCodePage,
+            /* [annotation][in] */ 
+            _In_  HWND hwnd);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, GetCodePageDescription)
         HRESULT ( STDMETHODCALLTYPE *GetCodePageDescription )( 
             IMultiLanguage3 * This,
-            /* [in] */ UINT uiCodePage,
-            /* [in] */ LCID lcid,
+            /* [annotation][in] */ 
+            _In_  UINT uiCodePage,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
             /* [annotation][size_is][out] */ 
             _Out_writes_(cchWideChar)  LPWSTR lpWideCharStr,
-            /* [in] */ int cchWideChar);
+            /* [annotation][in] */ 
+            _In_  int cchWideChar);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, IsCodePageInstallable)
         HRESULT ( STDMETHODCALLTYPE *IsCodePageInstallable )( 
             IMultiLanguage3 * This,
-            /* [in] */ UINT uiCodePage);
+            /* [annotation][in] */ 
+            _In_  UINT uiCodePage);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, SetMimeDBSource)
         HRESULT ( STDMETHODCALLTYPE *SetMimeDBSource )( 
             IMultiLanguage3 * This,
-            /* [in] */ MIMECONTF dwSource);
+            /* [annotation][in] */ 
+            _In_  MIMECONTF dwSource);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, GetNumberOfScripts)
         HRESULT ( STDMETHODCALLTYPE *GetNumberOfScripts )( 
@@ -4152,28 +4370,36 @@ EXTERN_C const IID IID_IMultiLanguage3;
         DECLSPEC_XFGVIRT(IMultiLanguage2, EnumScripts)
         HRESULT ( STDMETHODCALLTYPE *EnumScripts )( 
             IMultiLanguage3 * This,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ LANGID LangId,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  LANGID LangId,
             /* [annotation][out] */ 
             _Outptr_  IEnumScript **ppEnumScript);
         
         DECLSPEC_XFGVIRT(IMultiLanguage2, ValidateCodePageEx)
         HRESULT ( STDMETHODCALLTYPE *ValidateCodePageEx )( 
             IMultiLanguage3 * This,
-            /* [in] */ UINT uiCodePage,
-            /* [in] */ HWND hwnd,
-            /* [in] */ DWORD dwfIODControl);
+            /* [annotation][in] */ 
+            _In_  UINT uiCodePage,
+            /* [annotation][in] */ 
+            _In_  HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwfIODControl);
         
         DECLSPEC_XFGVIRT(IMultiLanguage3, DetectOutboundCodePage)
         HRESULT ( STDMETHODCALLTYPE *DetectOutboundCodePage )( 
             IMultiLanguage3 * This,
-            /* [in] */ DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
             /* [annotation][size_is][in] */ 
             _In_reads_(cchWideChar)  LPCWSTR lpWideCharStr,
-            /* [in] */ UINT cchWideChar,
+            /* [annotation][in] */ 
+            _In_  UINT cchWideChar,
             /* [annotation][size_is][in] */ 
             _In_reads_opt_(nPreferredCodePages)  const UINT *puiPreferredCodePages,
-            /* [in] */ UINT nPreferredCodePages,
+            /* [annotation][in] */ 
+            _In_  UINT nPreferredCodePages,
             /* [annotation][size_is][out] */ 
             _Out_writes_to_(*pnDetectedCodePages, *pnDetectedCodePages)  UINT *puiDetectedCodePages,
             /* [annotation][out][in] */ 
@@ -4184,12 +4410,14 @@ EXTERN_C const IID IID_IMultiLanguage3;
         DECLSPEC_XFGVIRT(IMultiLanguage3, DetectOutboundCodePageInIStream)
         HRESULT ( STDMETHODCALLTYPE *DetectOutboundCodePageInIStream )( 
             IMultiLanguage3 * This,
-            /* [in] */ DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
             /* [annotation][in] */ 
             _In_  IStream *pStrIn,
             /* [annotation][size_is][in] */ 
             _In_reads_opt_(nPreferredCodePages)  const UINT *puiPreferredCodePages,
-            /* [in] */ UINT nPreferredCodePages,
+            /* [annotation][in] */ 
+            _In_  UINT nPreferredCodePages,
             /* [annotation][size_is][out] */ 
             _Out_writes_to_(*pnDetectedCodePages, *pnDetectedCodePages)  UINT *puiDetectedCodePages,
             /* [annotation][out][in] */ 

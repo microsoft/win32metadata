@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -197,7 +197,8 @@ EXTERN_C const IID IID_IDODownload;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Start( 
-            /* [unique][in] */ __RPC__in_opt const DO_DOWNLOAD_RANGES_INFO *ranges) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  const DO_DOWNLOAD_RANGES_INFO *ranges) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Pause( void) = 0;
         
@@ -206,15 +207,20 @@ EXTERN_C const IID IID_IDODownload;
         virtual HRESULT STDMETHODCALLTYPE Finalize( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStatus( 
-            /* [out] */ __RPC__out DO_DOWNLOAD_STATUS *status) = 0;
+            /* [annotation][out] */ 
+            _Out_  DO_DOWNLOAD_STATUS *status) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProperty( 
-            /* [in] */ DODownloadProperty propId,
-            /* [out] */ __RPC__out VARIANT *propVal) = 0;
+            /* [annotation][in] */ 
+            _In_  DODownloadProperty propId,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *propVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetProperty( 
-            /* [in] */ DODownloadProperty propId,
-            /* [in] */ __RPC__in const VARIANT *propVal) = 0;
+            /* [annotation][in] */ 
+            _In_  DODownloadProperty propId,
+            /* [annotation][in] */ 
+            _In_  const VARIANT *propVal) = 0;
         
     };
     
@@ -228,7 +234,8 @@ EXTERN_C const IID IID_IDODownload;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDODownload * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -243,7 +250,8 @@ EXTERN_C const IID IID_IDODownload;
         DECLSPEC_XFGVIRT(IDODownload, Start)
         HRESULT ( STDMETHODCALLTYPE *Start )( 
             __RPC__in IDODownload * This,
-            /* [unique][in] */ __RPC__in_opt const DO_DOWNLOAD_RANGES_INFO *ranges);
+            /* [annotation][unique][in] */ 
+            _In_  const DO_DOWNLOAD_RANGES_INFO *ranges);
         
         DECLSPEC_XFGVIRT(IDODownload, Pause)
         HRESULT ( STDMETHODCALLTYPE *Pause )( 
@@ -260,19 +268,24 @@ EXTERN_C const IID IID_IDODownload;
         DECLSPEC_XFGVIRT(IDODownload, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in IDODownload * This,
-            /* [out] */ __RPC__out DO_DOWNLOAD_STATUS *status);
+            /* [annotation][out] */ 
+            _Out_  DO_DOWNLOAD_STATUS *status);
         
         DECLSPEC_XFGVIRT(IDODownload, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IDODownload * This,
-            /* [in] */ DODownloadProperty propId,
-            /* [out] */ __RPC__out VARIANT *propVal);
+            /* [annotation][in] */ 
+            _In_  DODownloadProperty propId,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *propVal);
         
         DECLSPEC_XFGVIRT(IDODownload, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IDODownload * This,
-            /* [in] */ DODownloadProperty propId,
-            /* [in] */ __RPC__in const VARIANT *propVal);
+            /* [annotation][in] */ 
+            _In_  DODownloadProperty propId,
+            /* [annotation][in] */ 
+            _In_  const VARIANT *propVal);
         
         END_INTERFACE
     } IDODownloadVtbl;
@@ -345,8 +358,10 @@ EXTERN_C const IID IID_IDODownloadStatusCallback;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnStatusChange( 
-            /* [in] */ __RPC__in_opt IDODownload *download,
-            /* [in] */ __RPC__in const DO_DOWNLOAD_STATUS *status) = 0;
+            /* [annotation][in] */ 
+            _In_  IDODownload *download,
+            /* [annotation][in] */ 
+            _In_  const DO_DOWNLOAD_STATUS *status) = 0;
         
     };
     
@@ -360,7 +375,8 @@ EXTERN_C const IID IID_IDODownloadStatusCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDODownloadStatusCallback * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -375,8 +391,10 @@ EXTERN_C const IID IID_IDODownloadStatusCallback;
         DECLSPEC_XFGVIRT(IDODownloadStatusCallback, OnStatusChange)
         HRESULT ( STDMETHODCALLTYPE *OnStatusChange )( 
             __RPC__in IDODownloadStatusCallback * This,
-            /* [in] */ __RPC__in_opt IDODownload *download,
-            /* [in] */ __RPC__in const DO_DOWNLOAD_STATUS *status);
+            /* [annotation][in] */ 
+            _In_  IDODownload *download,
+            /* [annotation][in] */ 
+            _In_  const DO_DOWNLOAD_STATUS *status);
         
         END_INTERFACE
     } IDODownloadStatusCallbackVtbl;
@@ -431,11 +449,14 @@ EXTERN_C const IID IID_IDOManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateDownload( 
-            /* [out] */ __RPC__deref_out_opt IDODownload **download) = 0;
+            /* [annotation][out] */ 
+            _Out_  IDODownload **download) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumDownloads( 
-            /* [unique][in] */ __RPC__in_opt const DO_DOWNLOAD_ENUM_CATEGORY *category,
-            /* [out] */ __RPC__deref_out_opt IEnumUnknown **ppEnum) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  const DO_DOWNLOAD_ENUM_CATEGORY *category,
+            /* [annotation][out] */ 
+            _Out_  IEnumUnknown **ppEnum) = 0;
         
     };
     
@@ -449,7 +470,8 @@ EXTERN_C const IID IID_IDOManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDOManager * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -464,13 +486,16 @@ EXTERN_C const IID IID_IDOManager;
         DECLSPEC_XFGVIRT(IDOManager, CreateDownload)
         HRESULT ( STDMETHODCALLTYPE *CreateDownload )( 
             __RPC__in IDOManager * This,
-            /* [out] */ __RPC__deref_out_opt IDODownload **download);
+            /* [annotation][out] */ 
+            _Out_  IDODownload **download);
         
         DECLSPEC_XFGVIRT(IDOManager, EnumDownloads)
         HRESULT ( STDMETHODCALLTYPE *EnumDownloads )( 
             __RPC__in IDOManager * This,
-            /* [unique][in] */ __RPC__in_opt const DO_DOWNLOAD_ENUM_CATEGORY *category,
-            /* [out] */ __RPC__deref_out_opt IEnumUnknown **ppEnum);
+            /* [annotation][unique][in] */ 
+            _In_  const DO_DOWNLOAD_ENUM_CATEGORY *category,
+            /* [annotation][out] */ 
+            _Out_  IEnumUnknown **ppEnum);
         
         END_INTERFACE
     } IDOManagerVtbl;

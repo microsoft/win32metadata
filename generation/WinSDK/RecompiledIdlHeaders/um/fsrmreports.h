@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -175,46 +175,68 @@ EXTERN_C const IID IID_IFsrmReportManager;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumReportJobs( 
-            /* [defaultvalue][in] */ FsrmEnumOptions options,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **reportJobs) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **reportJobs) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateReportJob( 
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmReportJob **reportJob) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmReportJob **reportJob) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetReportJob( 
-            /* [in] */ __RPC__in BSTR taskName,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmReportJob **reportJob) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR taskName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmReportJob **reportJob) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetOutputDirectory( 
-            /* [in] */ FsrmReportGenerationContext context,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *path) = 0;
+            /* [annotation][in] */ 
+            _In_  FsrmReportGenerationContext context,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *path) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetOutputDirectory( 
-            /* [in] */ FsrmReportGenerationContext context,
-            /* [in] */ __RPC__in BSTR path) = 0;
+            /* [annotation][in] */ 
+            _In_  FsrmReportGenerationContext context,
+            /* [annotation][in] */ 
+            _In_  BSTR path) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IsFilterValidForReportType( 
-            /* [in] */ FsrmReportType reportType,
-            /* [in] */ FsrmReportFilter filter,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *valid) = 0;
+            /* [annotation][in] */ 
+            _In_  FsrmReportType reportType,
+            /* [annotation][in] */ 
+            _In_  FsrmReportFilter filter,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *valid) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetDefaultFilter( 
-            /* [in] */ FsrmReportType reportType,
-            /* [in] */ FsrmReportFilter filter,
-            /* [retval][out] */ __RPC__out VARIANT *filterValue) = 0;
+            /* [annotation][in] */ 
+            _In_  FsrmReportType reportType,
+            /* [annotation][in] */ 
+            _In_  FsrmReportFilter filter,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *filterValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetDefaultFilter( 
-            /* [in] */ FsrmReportType reportType,
-            /* [in] */ FsrmReportFilter filter,
-            /* [in] */ VARIANT filterValue) = 0;
+            /* [annotation][in] */ 
+            _In_  FsrmReportType reportType,
+            /* [annotation][in] */ 
+            _In_  FsrmReportFilter filter,
+            /* [annotation][in] */ 
+            _In_  VARIANT filterValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetReportSizeLimit( 
-            /* [in] */ FsrmReportLimit limit,
-            /* [retval][out] */ __RPC__out VARIANT *limitValue) = 0;
+            /* [annotation][in] */ 
+            _In_  FsrmReportLimit limit,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *limitValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetReportSizeLimit( 
-            /* [in] */ FsrmReportLimit limit,
-            /* [in] */ VARIANT limitValue) = 0;
+            /* [annotation][in] */ 
+            _In_  FsrmReportLimit limit,
+            /* [annotation][in] */ 
+            _In_  VARIANT limitValue) = 0;
         
     };
     
@@ -228,7 +250,8 @@ EXTERN_C const IID IID_IFsrmReportManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmReportManager * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -243,23 +266,31 @@ EXTERN_C const IID IID_IFsrmReportManager;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmReportManager * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmReportManager * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmReportManager * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -284,64 +315,86 @@ EXTERN_C const IID IID_IFsrmReportManager;
         DECLSPEC_XFGVIRT(IFsrmReportManager, EnumReportJobs)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumReportJobs )( 
             __RPC__in IFsrmReportManager * This,
-            /* [defaultvalue][in] */ FsrmEnumOptions options,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **reportJobs);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **reportJobs);
         
         DECLSPEC_XFGVIRT(IFsrmReportManager, CreateReportJob)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateReportJob )( 
             __RPC__in IFsrmReportManager * This,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmReportJob **reportJob);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmReportJob **reportJob);
         
         DECLSPEC_XFGVIRT(IFsrmReportManager, GetReportJob)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetReportJob )( 
             __RPC__in IFsrmReportManager * This,
-            /* [in] */ __RPC__in BSTR taskName,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmReportJob **reportJob);
+            /* [annotation][in] */ 
+            _In_  BSTR taskName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmReportJob **reportJob);
         
         DECLSPEC_XFGVIRT(IFsrmReportManager, GetOutputDirectory)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetOutputDirectory )( 
             __RPC__in IFsrmReportManager * This,
-            /* [in] */ FsrmReportGenerationContext context,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *path);
+            /* [annotation][in] */ 
+            _In_  FsrmReportGenerationContext context,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *path);
         
         DECLSPEC_XFGVIRT(IFsrmReportManager, SetOutputDirectory)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetOutputDirectory )( 
             __RPC__in IFsrmReportManager * This,
-            /* [in] */ FsrmReportGenerationContext context,
-            /* [in] */ __RPC__in BSTR path);
+            /* [annotation][in] */ 
+            _In_  FsrmReportGenerationContext context,
+            /* [annotation][in] */ 
+            _In_  BSTR path);
         
         DECLSPEC_XFGVIRT(IFsrmReportManager, IsFilterValidForReportType)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsFilterValidForReportType )( 
             __RPC__in IFsrmReportManager * This,
-            /* [in] */ FsrmReportType reportType,
-            /* [in] */ FsrmReportFilter filter,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *valid);
+            /* [annotation][in] */ 
+            _In_  FsrmReportType reportType,
+            /* [annotation][in] */ 
+            _In_  FsrmReportFilter filter,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *valid);
         
         DECLSPEC_XFGVIRT(IFsrmReportManager, GetDefaultFilter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDefaultFilter )( 
             __RPC__in IFsrmReportManager * This,
-            /* [in] */ FsrmReportType reportType,
-            /* [in] */ FsrmReportFilter filter,
-            /* [retval][out] */ __RPC__out VARIANT *filterValue);
+            /* [annotation][in] */ 
+            _In_  FsrmReportType reportType,
+            /* [annotation][in] */ 
+            _In_  FsrmReportFilter filter,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *filterValue);
         
         DECLSPEC_XFGVIRT(IFsrmReportManager, SetDefaultFilter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetDefaultFilter )( 
             __RPC__in IFsrmReportManager * This,
-            /* [in] */ FsrmReportType reportType,
-            /* [in] */ FsrmReportFilter filter,
-            /* [in] */ VARIANT filterValue);
+            /* [annotation][in] */ 
+            _In_  FsrmReportType reportType,
+            /* [annotation][in] */ 
+            _In_  FsrmReportFilter filter,
+            /* [annotation][in] */ 
+            _In_  VARIANT filterValue);
         
         DECLSPEC_XFGVIRT(IFsrmReportManager, GetReportSizeLimit)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetReportSizeLimit )( 
             __RPC__in IFsrmReportManager * This,
-            /* [in] */ FsrmReportLimit limit,
-            /* [retval][out] */ __RPC__out VARIANT *limitValue);
+            /* [annotation][in] */ 
+            _In_  FsrmReportLimit limit,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *limitValue);
         
         DECLSPEC_XFGVIRT(IFsrmReportManager, SetReportSizeLimit)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetReportSizeLimit )( 
             __RPC__in IFsrmReportManager * This,
-            /* [in] */ FsrmReportLimit limit,
-            /* [in] */ VARIANT limitValue);
+            /* [annotation][in] */ 
+            _In_  FsrmReportLimit limit,
+            /* [annotation][in] */ 
+            _In_  VARIANT limitValue);
         
         END_INTERFACE
     } IFsrmReportManagerVtbl;
@@ -436,54 +489,72 @@ EXTERN_C const IID IID_IFsrmReportJob;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Task( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *taskName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *taskName) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Task( 
-            /* [in] */ __RPC__in BSTR taskName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR taskName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NamespaceRoots( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *namespaceRoots) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *namespaceRoots) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_NamespaceRoots( 
-            /* [in] */ __RPC__in SAFEARRAY * namespaceRoots) = 0;
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * namespaceRoots) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Formats( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *formats) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *formats) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Formats( 
-            /* [in] */ __RPC__in SAFEARRAY * formats) = 0;
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * formats) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MailTo( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailTo) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *mailTo) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MailTo( 
-            /* [in] */ __RPC__in BSTR mailTo) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR mailTo) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RunningStatus( 
-            /* [retval][out] */ __RPC__out FsrmReportRunningStatus *runningStatus) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FsrmReportRunningStatus *runningStatus) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LastRun( 
-            /* [retval][out] */ __RPC__out DATE *lastRun) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DATE *lastRun) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LastError( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *lastError) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *lastError) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LastGeneratedInDirectory( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *path) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *path) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumReports( 
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **reports) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **reports) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateReport( 
-            /* [in] */ FsrmReportType reportType,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmReport **report) = 0;
+            /* [annotation][in] */ 
+            _In_  FsrmReportType reportType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmReport **report) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Run( 
-            /* [in] */ FsrmReportGenerationContext context) = 0;
+            /* [annotation][in] */ 
+            _In_  FsrmReportGenerationContext context) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE WaitForCompletion( 
-            /* [in] */ long waitSeconds,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *completed) = 0;
+            /* [annotation][in] */ 
+            _In_  long waitSeconds,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *completed) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Cancel( void) = 0;
         
@@ -499,7 +570,8 @@ EXTERN_C const IID IID_IFsrmReportJob;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmReportJob * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -514,23 +586,31 @@ EXTERN_C const IID IID_IFsrmReportJob;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmReportJob * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmReportJob * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmReportJob * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -555,17 +635,20 @@ EXTERN_C const IID IID_IFsrmReportJob;
         DECLSPEC_XFGVIRT(IFsrmObject, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFsrmReportJob * This,
-            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FSRM_OBJECT_ID *id);
         
         DECLSPEC_XFGVIRT(IFsrmObject, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IFsrmReportJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *description);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IFsrmReportJob * This,
-            /* [in] */ __RPC__in BSTR description);
+            /* [annotation][in] */ 
+            _In_  BSTR description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -578,84 +661,102 @@ EXTERN_C const IID IID_IFsrmReportJob;
         DECLSPEC_XFGVIRT(IFsrmReportJob, get_Task)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Task )( 
             __RPC__in IFsrmReportJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *taskName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *taskName);
         
         DECLSPEC_XFGVIRT(IFsrmReportJob, put_Task)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Task )( 
             __RPC__in IFsrmReportJob * This,
-            /* [in] */ __RPC__in BSTR taskName);
+            /* [annotation][in] */ 
+            _In_  BSTR taskName);
         
         DECLSPEC_XFGVIRT(IFsrmReportJob, get_NamespaceRoots)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NamespaceRoots )( 
             __RPC__in IFsrmReportJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *namespaceRoots);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *namespaceRoots);
         
         DECLSPEC_XFGVIRT(IFsrmReportJob, put_NamespaceRoots)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_NamespaceRoots )( 
             __RPC__in IFsrmReportJob * This,
-            /* [in] */ __RPC__in SAFEARRAY * namespaceRoots);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * namespaceRoots);
         
         DECLSPEC_XFGVIRT(IFsrmReportJob, get_Formats)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Formats )( 
             __RPC__in IFsrmReportJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *formats);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *formats);
         
         DECLSPEC_XFGVIRT(IFsrmReportJob, put_Formats)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Formats )( 
             __RPC__in IFsrmReportJob * This,
-            /* [in] */ __RPC__in SAFEARRAY * formats);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * formats);
         
         DECLSPEC_XFGVIRT(IFsrmReportJob, get_MailTo)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MailTo )( 
             __RPC__in IFsrmReportJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailTo);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *mailTo);
         
         DECLSPEC_XFGVIRT(IFsrmReportJob, put_MailTo)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MailTo )( 
             __RPC__in IFsrmReportJob * This,
-            /* [in] */ __RPC__in BSTR mailTo);
+            /* [annotation][in] */ 
+            _In_  BSTR mailTo);
         
         DECLSPEC_XFGVIRT(IFsrmReportJob, get_RunningStatus)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RunningStatus )( 
             __RPC__in IFsrmReportJob * This,
-            /* [retval][out] */ __RPC__out FsrmReportRunningStatus *runningStatus);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FsrmReportRunningStatus *runningStatus);
         
         DECLSPEC_XFGVIRT(IFsrmReportJob, get_LastRun)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastRun )( 
             __RPC__in IFsrmReportJob * This,
-            /* [retval][out] */ __RPC__out DATE *lastRun);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DATE *lastRun);
         
         DECLSPEC_XFGVIRT(IFsrmReportJob, get_LastError)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastError )( 
             __RPC__in IFsrmReportJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *lastError);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *lastError);
         
         DECLSPEC_XFGVIRT(IFsrmReportJob, get_LastGeneratedInDirectory)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastGeneratedInDirectory )( 
             __RPC__in IFsrmReportJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *path);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *path);
         
         DECLSPEC_XFGVIRT(IFsrmReportJob, EnumReports)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumReports )( 
             __RPC__in IFsrmReportJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **reports);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **reports);
         
         DECLSPEC_XFGVIRT(IFsrmReportJob, CreateReport)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateReport )( 
             __RPC__in IFsrmReportJob * This,
-            /* [in] */ FsrmReportType reportType,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmReport **report);
+            /* [annotation][in] */ 
+            _In_  FsrmReportType reportType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmReport **report);
         
         DECLSPEC_XFGVIRT(IFsrmReportJob, Run)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Run )( 
             __RPC__in IFsrmReportJob * This,
-            /* [in] */ FsrmReportGenerationContext context);
+            /* [annotation][in] */ 
+            _In_  FsrmReportGenerationContext context);
         
         DECLSPEC_XFGVIRT(IFsrmReportJob, WaitForCompletion)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *WaitForCompletion )( 
             __RPC__in IFsrmReportJob * This,
-            /* [in] */ long waitSeconds,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *completed);
+            /* [annotation][in] */ 
+            _In_  long waitSeconds,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *completed);
         
         DECLSPEC_XFGVIRT(IFsrmReportJob, Cancel)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Cancel )( 
@@ -791,30 +892,40 @@ EXTERN_C const IID IID_IFsrmReport;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
-            /* [retval][out] */ __RPC__out FsrmReportType *reportType) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FsrmReportType *reportType) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
-            /* [in] */ __RPC__in BSTR name) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR name) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *description) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *description) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
-            /* [in] */ __RPC__in BSTR description) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR description) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LastGeneratedFileNamePrefix( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *prefix) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *prefix) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetFilter( 
-            /* [in] */ FsrmReportFilter filter,
-            /* [retval][out] */ __RPC__out VARIANT *filterValue) = 0;
+            /* [annotation][in] */ 
+            _In_  FsrmReportFilter filter,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *filterValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetFilter( 
-            /* [in] */ FsrmReportFilter filter,
-            /* [in] */ VARIANT filterValue) = 0;
+            /* [annotation][in] */ 
+            _In_  FsrmReportFilter filter,
+            /* [annotation][in] */ 
+            _In_  VARIANT filterValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Delete( void) = 0;
         
@@ -830,7 +941,8 @@ EXTERN_C const IID IID_IFsrmReport;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmReport * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -845,23 +957,31 @@ EXTERN_C const IID IID_IFsrmReport;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmReport * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmReport * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmReport * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -886,44 +1006,54 @@ EXTERN_C const IID IID_IFsrmReport;
         DECLSPEC_XFGVIRT(IFsrmReport, get_Type)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IFsrmReport * This,
-            /* [retval][out] */ __RPC__out FsrmReportType *reportType);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FsrmReportType *reportType);
         
         DECLSPEC_XFGVIRT(IFsrmReport, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IFsrmReport * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(IFsrmReport, put_Name)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IFsrmReport * This,
-            /* [in] */ __RPC__in BSTR name);
+            /* [annotation][in] */ 
+            _In_  BSTR name);
         
         DECLSPEC_XFGVIRT(IFsrmReport, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IFsrmReport * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *description);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *description);
         
         DECLSPEC_XFGVIRT(IFsrmReport, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IFsrmReport * This,
-            /* [in] */ __RPC__in BSTR description);
+            /* [annotation][in] */ 
+            _In_  BSTR description);
         
         DECLSPEC_XFGVIRT(IFsrmReport, get_LastGeneratedFileNamePrefix)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastGeneratedFileNamePrefix )( 
             __RPC__in IFsrmReport * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *prefix);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *prefix);
         
         DECLSPEC_XFGVIRT(IFsrmReport, GetFilter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetFilter )( 
             __RPC__in IFsrmReport * This,
-            /* [in] */ FsrmReportFilter filter,
-            /* [retval][out] */ __RPC__out VARIANT *filterValue);
+            /* [annotation][in] */ 
+            _In_  FsrmReportFilter filter,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *filterValue);
         
         DECLSPEC_XFGVIRT(IFsrmReport, SetFilter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetFilter )( 
             __RPC__in IFsrmReport * This,
-            /* [in] */ FsrmReportFilter filter,
-            /* [in] */ VARIANT filterValue);
+            /* [annotation][in] */ 
+            _In_  FsrmReportFilter filter,
+            /* [annotation][in] */ 
+            _In_  VARIANT filterValue);
         
         DECLSPEC_XFGVIRT(IFsrmReport, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -1019,20 +1149,28 @@ EXTERN_C const IID IID_IFsrmReportScheduler;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE VerifyNamespaces( 
-            /* [in] */ __RPC__in VARIANT *namespacesSafeArray) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT *namespacesSafeArray) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateScheduleTask( 
-            /* [in] */ __RPC__in BSTR taskName,
-            /* [in] */ __RPC__in VARIANT *namespacesSafeArray,
-            /* [in] */ __RPC__in BSTR serializedTask) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR taskName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *namespacesSafeArray,
+            /* [annotation][in] */ 
+            _In_  BSTR serializedTask) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ModifyScheduleTask( 
-            /* [in] */ __RPC__in BSTR taskName,
-            /* [in] */ __RPC__in VARIANT *namespacesSafeArray,
-            /* [in] */ __RPC__in BSTR serializedTask) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR taskName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *namespacesSafeArray,
+            /* [annotation][in] */ 
+            _In_  BSTR serializedTask) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteScheduleTask( 
-            /* [in] */ __RPC__in BSTR taskName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR taskName) = 0;
         
     };
     
@@ -1046,7 +1184,8 @@ EXTERN_C const IID IID_IFsrmReportScheduler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmReportScheduler * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1061,23 +1200,31 @@ EXTERN_C const IID IID_IFsrmReportScheduler;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmReportScheduler * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmReportScheduler * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmReportScheduler * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1102,26 +1249,34 @@ EXTERN_C const IID IID_IFsrmReportScheduler;
         DECLSPEC_XFGVIRT(IFsrmReportScheduler, VerifyNamespaces)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *VerifyNamespaces )( 
             __RPC__in IFsrmReportScheduler * This,
-            /* [in] */ __RPC__in VARIANT *namespacesSafeArray);
+            /* [annotation][in] */ 
+            _In_  VARIANT *namespacesSafeArray);
         
         DECLSPEC_XFGVIRT(IFsrmReportScheduler, CreateScheduleTask)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateScheduleTask )( 
             __RPC__in IFsrmReportScheduler * This,
-            /* [in] */ __RPC__in BSTR taskName,
-            /* [in] */ __RPC__in VARIANT *namespacesSafeArray,
-            /* [in] */ __RPC__in BSTR serializedTask);
+            /* [annotation][in] */ 
+            _In_  BSTR taskName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *namespacesSafeArray,
+            /* [annotation][in] */ 
+            _In_  BSTR serializedTask);
         
         DECLSPEC_XFGVIRT(IFsrmReportScheduler, ModifyScheduleTask)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ModifyScheduleTask )( 
             __RPC__in IFsrmReportScheduler * This,
-            /* [in] */ __RPC__in BSTR taskName,
-            /* [in] */ __RPC__in VARIANT *namespacesSafeArray,
-            /* [in] */ __RPC__in BSTR serializedTask);
+            /* [annotation][in] */ 
+            _In_  BSTR taskName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *namespacesSafeArray,
+            /* [annotation][in] */ 
+            _In_  BSTR serializedTask);
         
         DECLSPEC_XFGVIRT(IFsrmReportScheduler, DeleteScheduleTask)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteScheduleTask )( 
             __RPC__in IFsrmReportScheduler * This,
-            /* [in] */ __RPC__in BSTR taskName);
+            /* [annotation][in] */ 
+            _In_  BSTR taskName);
         
         END_INTERFACE
     } IFsrmReportSchedulerVtbl;
@@ -1198,21 +1353,28 @@ EXTERN_C const IID IID_IFsrmFileManagementJobManager;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ActionVariables( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *variables) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *variables) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ActionVariableDescriptions( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *descriptions) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *descriptions) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumFileManagementJobs( 
-            /* [defaultvalue][in] */ FsrmEnumOptions options,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **fileManagementJobs) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **fileManagementJobs) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateFileManagementJob( 
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmFileManagementJob **fileManagementJob) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmFileManagementJob **fileManagementJob) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetFileManagementJob( 
-            /* [in] */ __RPC__in BSTR name,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmFileManagementJob **fileManagementJob) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR name,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmFileManagementJob **fileManagementJob) = 0;
         
     };
     
@@ -1226,7 +1388,8 @@ EXTERN_C const IID IID_IFsrmFileManagementJobManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmFileManagementJobManager * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1241,23 +1404,31 @@ EXTERN_C const IID IID_IFsrmFileManagementJobManager;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmFileManagementJobManager * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmFileManagementJobManager * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmFileManagementJobManager * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1282,29 +1453,36 @@ EXTERN_C const IID IID_IFsrmFileManagementJobManager;
         DECLSPEC_XFGVIRT(IFsrmFileManagementJobManager, get_ActionVariables)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActionVariables )( 
             __RPC__in IFsrmFileManagementJobManager * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *variables);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *variables);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJobManager, get_ActionVariableDescriptions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActionVariableDescriptions )( 
             __RPC__in IFsrmFileManagementJobManager * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *descriptions);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *descriptions);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJobManager, EnumFileManagementJobs)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumFileManagementJobs )( 
             __RPC__in IFsrmFileManagementJobManager * This,
-            /* [defaultvalue][in] */ FsrmEnumOptions options,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **fileManagementJobs);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **fileManagementJobs);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJobManager, CreateFileManagementJob)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateFileManagementJob )( 
             __RPC__in IFsrmFileManagementJobManager * This,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmFileManagementJob **fileManagementJob);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmFileManagementJob **fileManagementJob);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJobManager, GetFileManagementJob)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetFileManagementJob )( 
             __RPC__in IFsrmFileManagementJobManager * This,
-            /* [in] */ __RPC__in BSTR name,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmFileManagementJob **fileManagementJob);
+            /* [annotation][in] */ 
+            _In_  BSTR name,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmFileManagementJob **fileManagementJob);
         
         END_INTERFACE
     } IFsrmFileManagementJobManagerVtbl;
@@ -1388,156 +1566,210 @@ EXTERN_C const IID IID_IFsrmFileManagementJob;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
-            /* [in] */ __RPC__in BSTR name) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR name) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NamespaceRoots( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *namespaceRoots) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *namespaceRoots) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_NamespaceRoots( 
-            /* [in] */ __RPC__in SAFEARRAY * namespaceRoots) = 0;
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * namespaceRoots) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Enabled( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *enabled) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Enabled( 
-            /* [in] */ VARIANT_BOOL enabled) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enabled) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_OperationType( 
-            /* [retval][out] */ __RPC__out FsrmFileManagementType *operationType) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FsrmFileManagementType *operationType) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_OperationType( 
-            /* [in] */ FsrmFileManagementType operationType) = 0;
+            /* [annotation][in] */ 
+            _In_  FsrmFileManagementType operationType) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ExpirationDirectory( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *expirationDirectory) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *expirationDirectory) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ExpirationDirectory( 
-            /* [in] */ __RPC__in BSTR expirationDirectory) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR expirationDirectory) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CustomAction( 
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmActionCommand **action) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmActionCommand **action) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Notifications( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *notifications) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *notifications) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Logging( 
-            /* [retval][out] */ __RPC__out long *loggingFlags) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *loggingFlags) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Logging( 
-            /* [in] */ long loggingFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  long loggingFlags) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ReportEnabled( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *reportEnabled) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *reportEnabled) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ReportEnabled( 
-            /* [in] */ VARIANT_BOOL reportEnabled) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL reportEnabled) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Formats( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *formats) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *formats) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Formats( 
-            /* [in] */ __RPC__in SAFEARRAY * formats) = 0;
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * formats) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MailTo( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailTo) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *mailTo) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MailTo( 
-            /* [in] */ __RPC__in BSTR mailTo) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR mailTo) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DaysSinceFileCreated( 
-            /* [retval][out] */ __RPC__out long *daysSinceCreation) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *daysSinceCreation) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_DaysSinceFileCreated( 
-            /* [in] */ long daysSinceCreation) = 0;
+            /* [annotation][in] */ 
+            _In_  long daysSinceCreation) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DaysSinceFileLastAccessed( 
-            /* [retval][out] */ __RPC__out long *daysSinceAccess) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *daysSinceAccess) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_DaysSinceFileLastAccessed( 
-            /* [in] */ long daysSinceAccess) = 0;
+            /* [annotation][in] */ 
+            _In_  long daysSinceAccess) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DaysSinceFileLastModified( 
-            /* [retval][out] */ __RPC__out long *daysSinceModify) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *daysSinceModify) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_DaysSinceFileLastModified( 
-            /* [in] */ long daysSinceModify) = 0;
+            /* [annotation][in] */ 
+            _In_  long daysSinceModify) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PropertyConditions( 
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **propertyConditions) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **propertyConditions) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FromDate( 
-            /* [retval][out] */ __RPC__out DATE *fromDate) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DATE *fromDate) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_FromDate( 
-            /* [in] */ DATE fromDate) = 0;
+            /* [annotation][in] */ 
+            _In_  DATE fromDate) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Task( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *taskName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *taskName) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Task( 
-            /* [in] */ __RPC__in BSTR taskName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR taskName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Parameters( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *parameters) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *parameters) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Parameters( 
-            /* [in] */ __RPC__in SAFEARRAY * parameters) = 0;
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * parameters) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RunningStatus( 
-            /* [retval][out] */ __RPC__out FsrmReportRunningStatus *runningStatus) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FsrmReportRunningStatus *runningStatus) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LastError( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *lastError) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *lastError) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LastReportPathWithoutExtension( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *path) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *path) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LastRun( 
-            /* [retval][out] */ __RPC__out DATE *lastRun) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DATE *lastRun) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FileNamePattern( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *fileNamePattern) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *fileNamePattern) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_FileNamePattern( 
-            /* [in] */ __RPC__in BSTR fileNamePattern) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR fileNamePattern) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Run( 
-            /* [in] */ FsrmReportGenerationContext context) = 0;
+            /* [annotation][in] */ 
+            _In_  FsrmReportGenerationContext context) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE WaitForCompletion( 
-            /* [in] */ long waitSeconds,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *completed) = 0;
+            /* [annotation][in] */ 
+            _In_  long waitSeconds,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *completed) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Cancel( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddNotification( 
-            /* [in] */ long days) = 0;
+            /* [annotation][in] */ 
+            _In_  long days) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteNotification( 
-            /* [in] */ long days) = 0;
+            /* [annotation][in] */ 
+            _In_  long days) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ModifyNotification( 
-            /* [in] */ long days,
-            /* [in] */ long newDays) = 0;
+            /* [annotation][in] */ 
+            _In_  long days,
+            /* [annotation][in] */ 
+            _In_  long newDays) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateNotificationAction( 
-            /* [in] */ long days,
-            /* [in] */ FsrmActionType actionType,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmAction **action) = 0;
+            /* [annotation][in] */ 
+            _In_  long days,
+            /* [annotation][in] */ 
+            _In_  FsrmActionType actionType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAction **action) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumNotificationActions( 
-            /* [in] */ long days,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **actions) = 0;
+            /* [annotation][in] */ 
+            _In_  long days,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **actions) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreatePropertyCondition( 
-            /* [in] */ __RPC__in BSTR name,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmPropertyCondition **propertyCondition) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR name,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmPropertyCondition **propertyCondition) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateCustomAction( 
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmActionCommand **customAction) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmActionCommand **customAction) = 0;
         
     };
     
@@ -1551,7 +1783,8 @@ EXTERN_C const IID IID_IFsrmFileManagementJob;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1566,23 +1799,31 @@ EXTERN_C const IID IID_IFsrmFileManagementJob;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1607,17 +1848,20 @@ EXTERN_C const IID IID_IFsrmFileManagementJob;
         DECLSPEC_XFGVIRT(IFsrmObject, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FSRM_OBJECT_ID *id);
         
         DECLSPEC_XFGVIRT(IFsrmObject, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *description);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ __RPC__in BSTR description);
+            /* [annotation][in] */ 
+            _In_  BSTR description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -1630,208 +1874,250 @@ EXTERN_C const IID IID_IFsrmFileManagementJob;
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, put_Name)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ __RPC__in BSTR name);
+            /* [annotation][in] */ 
+            _In_  BSTR name);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_NamespaceRoots)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NamespaceRoots )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *namespaceRoots);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *namespaceRoots);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, put_NamespaceRoots)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_NamespaceRoots )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ __RPC__in SAFEARRAY * namespaceRoots);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * namespaceRoots);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_Enabled)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *enabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, put_Enabled)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ VARIANT_BOOL enabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enabled);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_OperationType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OperationType )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__out FsrmFileManagementType *operationType);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FsrmFileManagementType *operationType);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, put_OperationType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OperationType )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ FsrmFileManagementType operationType);
+            /* [annotation][in] */ 
+            _In_  FsrmFileManagementType operationType);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_ExpirationDirectory)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExpirationDirectory )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *expirationDirectory);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *expirationDirectory);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, put_ExpirationDirectory)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ExpirationDirectory )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ __RPC__in BSTR expirationDirectory);
+            /* [annotation][in] */ 
+            _In_  BSTR expirationDirectory);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_CustomAction)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CustomAction )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmActionCommand **action);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmActionCommand **action);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_Notifications)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Notifications )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *notifications);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *notifications);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_Logging)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Logging )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__out long *loggingFlags);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *loggingFlags);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, put_Logging)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Logging )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ long loggingFlags);
+            /* [annotation][in] */ 
+            _In_  long loggingFlags);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_ReportEnabled)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReportEnabled )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *reportEnabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *reportEnabled);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, put_ReportEnabled)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReportEnabled )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ VARIANT_BOOL reportEnabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL reportEnabled);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_Formats)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Formats )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *formats);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *formats);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, put_Formats)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Formats )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ __RPC__in SAFEARRAY * formats);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * formats);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_MailTo)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MailTo )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailTo);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *mailTo);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, put_MailTo)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MailTo )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ __RPC__in BSTR mailTo);
+            /* [annotation][in] */ 
+            _In_  BSTR mailTo);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_DaysSinceFileCreated)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DaysSinceFileCreated )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__out long *daysSinceCreation);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *daysSinceCreation);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, put_DaysSinceFileCreated)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DaysSinceFileCreated )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ long daysSinceCreation);
+            /* [annotation][in] */ 
+            _In_  long daysSinceCreation);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_DaysSinceFileLastAccessed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DaysSinceFileLastAccessed )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__out long *daysSinceAccess);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *daysSinceAccess);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, put_DaysSinceFileLastAccessed)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DaysSinceFileLastAccessed )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ long daysSinceAccess);
+            /* [annotation][in] */ 
+            _In_  long daysSinceAccess);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_DaysSinceFileLastModified)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DaysSinceFileLastModified )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__out long *daysSinceModify);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *daysSinceModify);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, put_DaysSinceFileLastModified)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DaysSinceFileLastModified )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ long daysSinceModify);
+            /* [annotation][in] */ 
+            _In_  long daysSinceModify);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_PropertyConditions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PropertyConditions )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **propertyConditions);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **propertyConditions);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_FromDate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FromDate )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__out DATE *fromDate);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DATE *fromDate);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, put_FromDate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FromDate )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ DATE fromDate);
+            /* [annotation][in] */ 
+            _In_  DATE fromDate);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_Task)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Task )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *taskName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *taskName);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, put_Task)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Task )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ __RPC__in BSTR taskName);
+            /* [annotation][in] */ 
+            _In_  BSTR taskName);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_Parameters)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Parameters )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *parameters);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *parameters);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, put_Parameters)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Parameters )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ __RPC__in SAFEARRAY * parameters);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * parameters);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_RunningStatus)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RunningStatus )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__out FsrmReportRunningStatus *runningStatus);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FsrmReportRunningStatus *runningStatus);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_LastError)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastError )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *lastError);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *lastError);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_LastReportPathWithoutExtension)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastReportPathWithoutExtension )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *path);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *path);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_LastRun)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastRun )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__out DATE *lastRun);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DATE *lastRun);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, get_FileNamePattern)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileNamePattern )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *fileNamePattern);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *fileNamePattern);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, put_FileNamePattern)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileNamePattern )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ __RPC__in BSTR fileNamePattern);
+            /* [annotation][in] */ 
+            _In_  BSTR fileNamePattern);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, Run)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Run )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ FsrmReportGenerationContext context);
+            /* [annotation][in] */ 
+            _In_  FsrmReportGenerationContext context);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, WaitForCompletion)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *WaitForCompletion )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ long waitSeconds,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *completed);
+            /* [annotation][in] */ 
+            _In_  long waitSeconds,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *completed);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, Cancel)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Cancel )( 
@@ -1840,42 +2126,54 @@ EXTERN_C const IID IID_IFsrmFileManagementJob;
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, AddNotification)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddNotification )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ long days);
+            /* [annotation][in] */ 
+            _In_  long days);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, DeleteNotification)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteNotification )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ long days);
+            /* [annotation][in] */ 
+            _In_  long days);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, ModifyNotification)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ModifyNotification )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ long days,
-            /* [in] */ long newDays);
+            /* [annotation][in] */ 
+            _In_  long days,
+            /* [annotation][in] */ 
+            _In_  long newDays);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, CreateNotificationAction)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateNotificationAction )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ long days,
-            /* [in] */ FsrmActionType actionType,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmAction **action);
+            /* [annotation][in] */ 
+            _In_  long days,
+            /* [annotation][in] */ 
+            _In_  FsrmActionType actionType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAction **action);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, EnumNotificationActions)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumNotificationActions )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ long days,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **actions);
+            /* [annotation][in] */ 
+            _In_  long days,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **actions);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, CreatePropertyCondition)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreatePropertyCondition )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [in] */ __RPC__in BSTR name,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmPropertyCondition **propertyCondition);
+            /* [annotation][in] */ 
+            _In_  BSTR name,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmPropertyCondition **propertyCondition);
         
         DECLSPEC_XFGVIRT(IFsrmFileManagementJob, CreateCustomAction)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateCustomAction )( 
             __RPC__in IFsrmFileManagementJob * This,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmActionCommand **customAction);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmActionCommand **customAction);
         
         END_INTERFACE
     } IFsrmFileManagementJobVtbl;
@@ -2103,22 +2401,28 @@ EXTERN_C const IID IID_IFsrmPropertyCondition;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
-            /* [in] */ __RPC__in BSTR name) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR name) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
-            /* [retval][out] */ __RPC__out FsrmPropertyConditionType *type) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FsrmPropertyConditionType *type) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Type( 
-            /* [in] */ FsrmPropertyConditionType type) = 0;
+            /* [annotation][in] */ 
+            _In_  FsrmPropertyConditionType type) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Value( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *value) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *value) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Value( 
-            /* [in] */ __RPC__in BSTR value) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR value) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Delete( void) = 0;
         
@@ -2134,7 +2438,8 @@ EXTERN_C const IID IID_IFsrmPropertyCondition;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmPropertyCondition * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2149,23 +2454,31 @@ EXTERN_C const IID IID_IFsrmPropertyCondition;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmPropertyCondition * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmPropertyCondition * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmPropertyCondition * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2190,32 +2503,38 @@ EXTERN_C const IID IID_IFsrmPropertyCondition;
         DECLSPEC_XFGVIRT(IFsrmPropertyCondition, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IFsrmPropertyCondition * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(IFsrmPropertyCondition, put_Name)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IFsrmPropertyCondition * This,
-            /* [in] */ __RPC__in BSTR name);
+            /* [annotation][in] */ 
+            _In_  BSTR name);
         
         DECLSPEC_XFGVIRT(IFsrmPropertyCondition, get_Type)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IFsrmPropertyCondition * This,
-            /* [retval][out] */ __RPC__out FsrmPropertyConditionType *type);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FsrmPropertyConditionType *type);
         
         DECLSPEC_XFGVIRT(IFsrmPropertyCondition, put_Type)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Type )( 
             __RPC__in IFsrmPropertyCondition * This,
-            /* [in] */ FsrmPropertyConditionType type);
+            /* [annotation][in] */ 
+            _In_  FsrmPropertyConditionType type);
         
         DECLSPEC_XFGVIRT(IFsrmPropertyCondition, get_Value)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             __RPC__in IFsrmPropertyCondition * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *value);
         
         DECLSPEC_XFGVIRT(IFsrmPropertyCondition, put_Value)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Value )( 
             __RPC__in IFsrmPropertyCondition * This,
-            /* [in] */ __RPC__in BSTR value);
+            /* [annotation][in] */ 
+            _In_  BSTR value);
         
         DECLSPEC_XFGVIRT(IFsrmPropertyCondition, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -2305,7 +2624,8 @@ EXTERN_C const IID IID_IFsrmFileCondition;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
-            /* [retval][out] */ __RPC__out FsrmFileConditionType *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FsrmFileConditionType *pVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Delete( void) = 0;
         
@@ -2321,7 +2641,8 @@ EXTERN_C const IID IID_IFsrmFileCondition;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmFileCondition * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2336,23 +2657,31 @@ EXTERN_C const IID IID_IFsrmFileCondition;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmFileCondition * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmFileCondition * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmFileCondition * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2377,7 +2706,8 @@ EXTERN_C const IID IID_IFsrmFileCondition;
         DECLSPEC_XFGVIRT(IFsrmFileCondition, get_Type)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IFsrmFileCondition * This,
-            /* [retval][out] */ __RPC__out FsrmFileConditionType *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FsrmFileConditionType *pVal);
         
         DECLSPEC_XFGVIRT(IFsrmFileCondition, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -2452,34 +2782,44 @@ EXTERN_C const IID IID_IFsrmFileConditionProperty;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PropertyName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PropertyName( 
-            /* [in] */ __RPC__in BSTR newVal) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PropertyId( 
-            /* [retval][out] */ __RPC__out FsrmFileSystemPropertyId *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FsrmFileSystemPropertyId *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PropertyId( 
-            /* [in] */ FsrmFileSystemPropertyId newVal) = 0;
+            /* [annotation][in] */ 
+            _In_  FsrmFileSystemPropertyId newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Operator( 
-            /* [retval][out] */ __RPC__out FsrmPropertyConditionType *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FsrmPropertyConditionType *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Operator( 
-            /* [in] */ FsrmPropertyConditionType newVal) = 0;
+            /* [annotation][in] */ 
+            _In_  FsrmPropertyConditionType newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ValueType( 
-            /* [retval][out] */ __RPC__out FsrmPropertyValueType *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FsrmPropertyValueType *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ValueType( 
-            /* [in] */ FsrmPropertyValueType newVal) = 0;
+            /* [annotation][in] */ 
+            _In_  FsrmPropertyValueType newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Value( 
-            /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Value( 
-            /* [in] */ VARIANT newVal) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT newVal) = 0;
         
     };
     
@@ -2493,7 +2833,8 @@ EXTERN_C const IID IID_IFsrmFileConditionProperty;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmFileConditionProperty * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2508,23 +2849,31 @@ EXTERN_C const IID IID_IFsrmFileConditionProperty;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmFileConditionProperty * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmFileConditionProperty * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmFileConditionProperty * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2549,7 +2898,8 @@ EXTERN_C const IID IID_IFsrmFileConditionProperty;
         DECLSPEC_XFGVIRT(IFsrmFileCondition, get_Type)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IFsrmFileConditionProperty * This,
-            /* [retval][out] */ __RPC__out FsrmFileConditionType *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FsrmFileConditionType *pVal);
         
         DECLSPEC_XFGVIRT(IFsrmFileCondition, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -2558,52 +2908,62 @@ EXTERN_C const IID IID_IFsrmFileConditionProperty;
         DECLSPEC_XFGVIRT(IFsrmFileConditionProperty, get_PropertyName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PropertyName )( 
             __RPC__in IFsrmFileConditionProperty * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IFsrmFileConditionProperty, put_PropertyName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PropertyName )( 
             __RPC__in IFsrmFileConditionProperty * This,
-            /* [in] */ __RPC__in BSTR newVal);
+            /* [annotation][in] */ 
+            _In_  BSTR newVal);
         
         DECLSPEC_XFGVIRT(IFsrmFileConditionProperty, get_PropertyId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PropertyId )( 
             __RPC__in IFsrmFileConditionProperty * This,
-            /* [retval][out] */ __RPC__out FsrmFileSystemPropertyId *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FsrmFileSystemPropertyId *pVal);
         
         DECLSPEC_XFGVIRT(IFsrmFileConditionProperty, put_PropertyId)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PropertyId )( 
             __RPC__in IFsrmFileConditionProperty * This,
-            /* [in] */ FsrmFileSystemPropertyId newVal);
+            /* [annotation][in] */ 
+            _In_  FsrmFileSystemPropertyId newVal);
         
         DECLSPEC_XFGVIRT(IFsrmFileConditionProperty, get_Operator)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Operator )( 
             __RPC__in IFsrmFileConditionProperty * This,
-            /* [retval][out] */ __RPC__out FsrmPropertyConditionType *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FsrmPropertyConditionType *pVal);
         
         DECLSPEC_XFGVIRT(IFsrmFileConditionProperty, put_Operator)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Operator )( 
             __RPC__in IFsrmFileConditionProperty * This,
-            /* [in] */ FsrmPropertyConditionType newVal);
+            /* [annotation][in] */ 
+            _In_  FsrmPropertyConditionType newVal);
         
         DECLSPEC_XFGVIRT(IFsrmFileConditionProperty, get_ValueType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ValueType )( 
             __RPC__in IFsrmFileConditionProperty * This,
-            /* [retval][out] */ __RPC__out FsrmPropertyValueType *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FsrmPropertyValueType *pVal);
         
         DECLSPEC_XFGVIRT(IFsrmFileConditionProperty, put_ValueType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ValueType )( 
             __RPC__in IFsrmFileConditionProperty * This,
-            /* [in] */ FsrmPropertyValueType newVal);
+            /* [annotation][in] */ 
+            _In_  FsrmPropertyValueType newVal);
         
         DECLSPEC_XFGVIRT(IFsrmFileConditionProperty, get_Value)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             __RPC__in IFsrmFileConditionProperty * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(IFsrmFileConditionProperty, put_Value)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Value )( 
             __RPC__in IFsrmFileConditionProperty * This,
-            /* [in] */ VARIANT newVal);
+            /* [annotation][in] */ 
+            _In_  VARIANT newVal);
         
         END_INTERFACE
     } IFsrmFileConditionPropertyVtbl;

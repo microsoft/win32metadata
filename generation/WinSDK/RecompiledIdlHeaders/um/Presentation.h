@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -30,8 +30,8 @@
 #include "ole2.h"
 #endif /*COM_NO_WINDOWS_H*/
 
-#ifndef __Presentation_h__
-#define __Presentation_h__
+#ifndef __presentation_h__
+#define __presentation_h__
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
@@ -134,10 +134,12 @@ EXTERN_C const IID IID_IPresentationBuffer;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetAvailableEvent( 
-            /* [retval][out] */ HANDLE *availableEventHandle) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HANDLE *availableEventHandle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsAvailable( 
-            /* [retval][out] */ boolean *isAvailable) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  boolean *isAvailable) = 0;
         
     };
     
@@ -151,7 +153,8 @@ EXTERN_C const IID IID_IPresentationBuffer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPresentationBuffer * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -166,12 +169,14 @@ EXTERN_C const IID IID_IPresentationBuffer;
         DECLSPEC_XFGVIRT(IPresentationBuffer, GetAvailableEvent)
         HRESULT ( STDMETHODCALLTYPE *GetAvailableEvent )( 
             IPresentationBuffer * This,
-            /* [retval][out] */ HANDLE *availableEventHandle);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HANDLE *availableEventHandle);
         
         DECLSPEC_XFGVIRT(IPresentationBuffer, IsAvailable)
         HRESULT ( STDMETHODCALLTYPE *IsAvailable )( 
             IPresentationBuffer * This,
-            /* [retval][out] */ boolean *isAvailable);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  boolean *isAvailable);
         
         END_INTERFACE
     } IPresentationBufferVtbl;
@@ -229,7 +234,8 @@ EXTERN_C const IID IID_IPresentationContent;
     {
     public:
         virtual void STDMETHODCALLTYPE SetTag( 
-            /* [in] */ UINT_PTR tag) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT_PTR tag) = 0;
         
     };
     
@@ -243,7 +249,8 @@ EXTERN_C const IID IID_IPresentationContent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPresentationContent * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -258,7 +265,8 @@ EXTERN_C const IID IID_IPresentationContent;
         DECLSPEC_XFGVIRT(IPresentationContent, SetTag)
         void ( STDMETHODCALLTYPE *SetTag )( 
             IPresentationContent * This,
-            /* [in] */ UINT_PTR tag);
+            /* [annotation][in] */ 
+            _In_  UINT_PTR tag);
         
         END_INTERFACE
     } IPresentationContentVtbl;
@@ -313,31 +321,42 @@ EXTERN_C const IID IID_IPresentationSurface;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetBuffer( 
-            /* [in] */ IPresentationBuffer *presentationBuffer) = 0;
+            /* [annotation][in] */ 
+            _In_  IPresentationBuffer *presentationBuffer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetColorSpace( 
-            /* [in] */ DXGI_COLOR_SPACE_TYPE colorSpace) = 0;
+            /* [annotation][in] */ 
+            _In_  DXGI_COLOR_SPACE_TYPE colorSpace) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAlphaMode( 
-            /* [in] */ DXGI_ALPHA_MODE alphaMode) = 0;
+            /* [annotation][in] */ 
+            _In_  DXGI_ALPHA_MODE alphaMode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSourceRect( 
-            /* [in] */ const RECT *sourceRect) = 0;
+            /* [annotation][in] */ 
+            _In_  const RECT *sourceRect) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTransform( 
-            /* [in] */ PresentationTransform *transform) = 0;
+            /* [annotation][in] */ 
+            _In_  PresentationTransform *transform) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RestrictToOutput( 
-            /* [in] */ IUnknown *output) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *output) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDisableReadback( 
-            /* [in] */ boolean value) = 0;
+            /* [annotation][in] */ 
+            _In_  boolean value) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetLetterboxingMargins( 
-            /* [in] */ float leftLetterboxSize,
-            /* [in] */ float topLetterboxSize,
-            /* [in] */ float rightLetterboxSize,
-            /* [in] */ float bottomLetterboxSize) = 0;
+            /* [annotation][in] */ 
+            _In_  float leftLetterboxSize,
+            /* [annotation][in] */ 
+            _In_  float topLetterboxSize,
+            /* [annotation][in] */ 
+            _In_  float rightLetterboxSize,
+            /* [annotation][in] */ 
+            _In_  float bottomLetterboxSize) = 0;
         
     };
     
@@ -351,7 +370,8 @@ EXTERN_C const IID IID_IPresentationSurface;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPresentationSurface * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -366,50 +386,62 @@ EXTERN_C const IID IID_IPresentationSurface;
         DECLSPEC_XFGVIRT(IPresentationContent, SetTag)
         void ( STDMETHODCALLTYPE *SetTag )( 
             IPresentationSurface * This,
-            /* [in] */ UINT_PTR tag);
+            /* [annotation][in] */ 
+            _In_  UINT_PTR tag);
         
         DECLSPEC_XFGVIRT(IPresentationSurface, SetBuffer)
         HRESULT ( STDMETHODCALLTYPE *SetBuffer )( 
             IPresentationSurface * This,
-            /* [in] */ IPresentationBuffer *presentationBuffer);
+            /* [annotation][in] */ 
+            _In_  IPresentationBuffer *presentationBuffer);
         
         DECLSPEC_XFGVIRT(IPresentationSurface, SetColorSpace)
         HRESULT ( STDMETHODCALLTYPE *SetColorSpace )( 
             IPresentationSurface * This,
-            /* [in] */ DXGI_COLOR_SPACE_TYPE colorSpace);
+            /* [annotation][in] */ 
+            _In_  DXGI_COLOR_SPACE_TYPE colorSpace);
         
         DECLSPEC_XFGVIRT(IPresentationSurface, SetAlphaMode)
         HRESULT ( STDMETHODCALLTYPE *SetAlphaMode )( 
             IPresentationSurface * This,
-            /* [in] */ DXGI_ALPHA_MODE alphaMode);
+            /* [annotation][in] */ 
+            _In_  DXGI_ALPHA_MODE alphaMode);
         
         DECLSPEC_XFGVIRT(IPresentationSurface, SetSourceRect)
         HRESULT ( STDMETHODCALLTYPE *SetSourceRect )( 
             IPresentationSurface * This,
-            /* [in] */ const RECT *sourceRect);
+            /* [annotation][in] */ 
+            _In_  const RECT *sourceRect);
         
         DECLSPEC_XFGVIRT(IPresentationSurface, SetTransform)
         HRESULT ( STDMETHODCALLTYPE *SetTransform )( 
             IPresentationSurface * This,
-            /* [in] */ PresentationTransform *transform);
+            /* [annotation][in] */ 
+            _In_  PresentationTransform *transform);
         
         DECLSPEC_XFGVIRT(IPresentationSurface, RestrictToOutput)
         HRESULT ( STDMETHODCALLTYPE *RestrictToOutput )( 
             IPresentationSurface * This,
-            /* [in] */ IUnknown *output);
+            /* [annotation][in] */ 
+            _In_  IUnknown *output);
         
         DECLSPEC_XFGVIRT(IPresentationSurface, SetDisableReadback)
         HRESULT ( STDMETHODCALLTYPE *SetDisableReadback )( 
             IPresentationSurface * This,
-            /* [in] */ boolean value);
+            /* [annotation][in] */ 
+            _In_  boolean value);
         
         DECLSPEC_XFGVIRT(IPresentationSurface, SetLetterboxingMargins)
         HRESULT ( STDMETHODCALLTYPE *SetLetterboxingMargins )( 
             IPresentationSurface * This,
-            /* [in] */ float leftLetterboxSize,
-            /* [in] */ float topLetterboxSize,
-            /* [in] */ float rightLetterboxSize,
-            /* [in] */ float bottomLetterboxSize);
+            /* [annotation][in] */ 
+            _In_  float leftLetterboxSize,
+            /* [annotation][in] */ 
+            _In_  float topLetterboxSize,
+            /* [annotation][in] */ 
+            _In_  float rightLetterboxSize,
+            /* [annotation][in] */ 
+            _In_  float bottomLetterboxSize);
         
         END_INTERFACE
     } IPresentationSurfaceVtbl;
@@ -504,7 +536,8 @@ EXTERN_C const IID IID_IPresentStatistics;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPresentStatistics * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -580,46 +613,62 @@ EXTERN_C const IID IID_IPresentationManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddBufferFromResource( 
-            /* [in] */ IUnknown *resource,
-            /* [retval][out] */ IPresentationBuffer **presentationBuffer) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *resource,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IPresentationBuffer **presentationBuffer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePresentationSurface( 
-            /* [in] */ HANDLE compositionSurfaceHandle,
-            /* [retval][out] */ IPresentationSurface **presentationSurface) = 0;
+            /* [annotation][in] */ 
+            _In_  HANDLE compositionSurfaceHandle,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IPresentationSurface **presentationSurface) = 0;
         
         virtual UINT64 STDMETHODCALLTYPE GetNextPresentId( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTargetTime( 
-            /* [in] */ SystemInterruptTime targetTime) = 0;
+            /* [annotation][in] */ 
+            _In_  SystemInterruptTime targetTime) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetPreferredPresentDuration( 
-            /* [in] */ SystemInterruptTime preferredDuration,
-            /* [in] */ SystemInterruptTime deviationTolerance) = 0;
+            /* [annotation][in] */ 
+            _In_  SystemInterruptTime preferredDuration,
+            /* [annotation][in] */ 
+            _In_  SystemInterruptTime deviationTolerance) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ForceVSyncInterrupt( 
-            /* [in] */ boolean forceVsyncInterrupt) = 0;
+            /* [annotation][in] */ 
+            _In_  boolean forceVsyncInterrupt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Present( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPresentRetiringFence( 
-            /* [in] */ REFIID riid,
-            /* [retval][out] */ void **fence) = 0;
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  void **fence) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CancelPresentsFrom( 
-            /* [in] */ UINT64 presentIdToCancelFrom) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT64 presentIdToCancelFrom) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLostEvent( 
-            /* [retval][out] */ HANDLE *lostEventHandle) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HANDLE *lostEventHandle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPresentStatisticsAvailableEvent( 
-            /* [retval][out] */ HANDLE *presentStatisticsAvailableEventHandle) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HANDLE *presentStatisticsAvailableEventHandle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnablePresentStatisticsKind( 
-            /* [in] */ PresentStatisticsKind presentStatisticsKind,
-            /* [in] */ boolean enabled) = 0;
+            /* [annotation][in] */ 
+            _In_  PresentStatisticsKind presentStatisticsKind,
+            /* [annotation][in] */ 
+            _In_  boolean enabled) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNextPresentStatistics( 
-            /* [retval][out] */ IPresentStatistics **nextPresentStatistics) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IPresentStatistics **nextPresentStatistics) = 0;
         
     };
     
@@ -633,7 +682,8 @@ EXTERN_C const IID IID_IPresentationManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPresentationManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -648,14 +698,18 @@ EXTERN_C const IID IID_IPresentationManager;
         DECLSPEC_XFGVIRT(IPresentationManager, AddBufferFromResource)
         HRESULT ( STDMETHODCALLTYPE *AddBufferFromResource )( 
             IPresentationManager * This,
-            /* [in] */ IUnknown *resource,
-            /* [retval][out] */ IPresentationBuffer **presentationBuffer);
+            /* [annotation][in] */ 
+            _In_  IUnknown *resource,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IPresentationBuffer **presentationBuffer);
         
         DECLSPEC_XFGVIRT(IPresentationManager, CreatePresentationSurface)
         HRESULT ( STDMETHODCALLTYPE *CreatePresentationSurface )( 
             IPresentationManager * This,
-            /* [in] */ HANDLE compositionSurfaceHandle,
-            /* [retval][out] */ IPresentationSurface **presentationSurface);
+            /* [annotation][in] */ 
+            _In_  HANDLE compositionSurfaceHandle,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IPresentationSurface **presentationSurface);
         
         DECLSPEC_XFGVIRT(IPresentationManager, GetNextPresentId)
         UINT64 ( STDMETHODCALLTYPE *GetNextPresentId )( 
@@ -664,18 +718,22 @@ EXTERN_C const IID IID_IPresentationManager;
         DECLSPEC_XFGVIRT(IPresentationManager, SetTargetTime)
         HRESULT ( STDMETHODCALLTYPE *SetTargetTime )( 
             IPresentationManager * This,
-            /* [in] */ SystemInterruptTime targetTime);
+            /* [annotation][in] */ 
+            _In_  SystemInterruptTime targetTime);
         
         DECLSPEC_XFGVIRT(IPresentationManager, SetPreferredPresentDuration)
         HRESULT ( STDMETHODCALLTYPE *SetPreferredPresentDuration )( 
             IPresentationManager * This,
-            /* [in] */ SystemInterruptTime preferredDuration,
-            /* [in] */ SystemInterruptTime deviationTolerance);
+            /* [annotation][in] */ 
+            _In_  SystemInterruptTime preferredDuration,
+            /* [annotation][in] */ 
+            _In_  SystemInterruptTime deviationTolerance);
         
         DECLSPEC_XFGVIRT(IPresentationManager, ForceVSyncInterrupt)
         HRESULT ( STDMETHODCALLTYPE *ForceVSyncInterrupt )( 
             IPresentationManager * This,
-            /* [in] */ boolean forceVsyncInterrupt);
+            /* [annotation][in] */ 
+            _In_  boolean forceVsyncInterrupt);
         
         DECLSPEC_XFGVIRT(IPresentationManager, Present)
         HRESULT ( STDMETHODCALLTYPE *Present )( 
@@ -684,34 +742,42 @@ EXTERN_C const IID IID_IPresentationManager;
         DECLSPEC_XFGVIRT(IPresentationManager, GetPresentRetiringFence)
         HRESULT ( STDMETHODCALLTYPE *GetPresentRetiringFence )( 
             IPresentationManager * This,
-            /* [in] */ REFIID riid,
-            /* [retval][out] */ void **fence);
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  void **fence);
         
         DECLSPEC_XFGVIRT(IPresentationManager, CancelPresentsFrom)
         HRESULT ( STDMETHODCALLTYPE *CancelPresentsFrom )( 
             IPresentationManager * This,
-            /* [in] */ UINT64 presentIdToCancelFrom);
+            /* [annotation][in] */ 
+            _In_  UINT64 presentIdToCancelFrom);
         
         DECLSPEC_XFGVIRT(IPresentationManager, GetLostEvent)
         HRESULT ( STDMETHODCALLTYPE *GetLostEvent )( 
             IPresentationManager * This,
-            /* [retval][out] */ HANDLE *lostEventHandle);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HANDLE *lostEventHandle);
         
         DECLSPEC_XFGVIRT(IPresentationManager, GetPresentStatisticsAvailableEvent)
         HRESULT ( STDMETHODCALLTYPE *GetPresentStatisticsAvailableEvent )( 
             IPresentationManager * This,
-            /* [retval][out] */ HANDLE *presentStatisticsAvailableEventHandle);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HANDLE *presentStatisticsAvailableEventHandle);
         
         DECLSPEC_XFGVIRT(IPresentationManager, EnablePresentStatisticsKind)
         HRESULT ( STDMETHODCALLTYPE *EnablePresentStatisticsKind )( 
             IPresentationManager * This,
-            /* [in] */ PresentStatisticsKind presentStatisticsKind,
-            /* [in] */ boolean enabled);
+            /* [annotation][in] */ 
+            _In_  PresentStatisticsKind presentStatisticsKind,
+            /* [annotation][in] */ 
+            _In_  boolean enabled);
         
         DECLSPEC_XFGVIRT(IPresentationManager, GetNextPresentStatistics)
         HRESULT ( STDMETHODCALLTYPE *GetNextPresentStatistics )( 
             IPresentationManager * This,
-            /* [retval][out] */ IPresentStatistics **nextPresentStatistics);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IPresentStatistics **nextPresentStatistics);
         
         END_INTERFACE
     } IPresentationManagerVtbl;
@@ -806,7 +872,8 @@ EXTERN_C const IID IID_IPresentationFactory;
         virtual boolean STDMETHODCALLTYPE IsPresentationSupportedWithIndependentFlip( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePresentationManager( 
-            /* [retval][out] */ IPresentationManager **ppPresentationManager) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IPresentationManager **ppPresentationManager) = 0;
         
     };
     
@@ -820,7 +887,8 @@ EXTERN_C const IID IID_IPresentationFactory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPresentationFactory * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -843,7 +911,8 @@ EXTERN_C const IID IID_IPresentationFactory;
         DECLSPEC_XFGVIRT(IPresentationFactory, CreatePresentationManager)
         HRESULT ( STDMETHODCALLTYPE *CreatePresentationManager )( 
             IPresentationFactory * This,
-            /* [retval][out] */ IPresentationManager **ppPresentationManager);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IPresentationManager **ppPresentationManager);
         
         END_INTERFACE
     } IPresentationFactoryVtbl;
@@ -888,7 +957,7 @@ EXTERN_C const IID IID_IPresentationFactory;
 #endif 	/* __IPresentationFactory_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_Presentation_0000_0006 */
+/* interface __MIDL_itf_presentation_0000_0006 */
 /* [local] */ 
 
 typedef 
@@ -901,8 +970,8 @@ enum PresentStatus
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_Presentation_0000_0006_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_Presentation_0000_0006_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_presentation_0000_0006_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_presentation_0000_0006_v0_0_s_ifspec;
 
 #ifndef __IPresentStatusPresentStatistics_INTERFACE_DEFINED__
 #define __IPresentStatusPresentStatistics_INTERFACE_DEFINED__
@@ -935,7 +1004,8 @@ EXTERN_C const IID IID_IPresentStatusPresentStatistics;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPresentStatusPresentStatistics * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1010,7 +1080,7 @@ EXTERN_C const IID IID_IPresentStatusPresentStatistics;
 #endif 	/* __IPresentStatusPresentStatistics_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_Presentation_0000_0007 */
+/* interface __MIDL_itf_presentation_0000_0007 */
 /* [local] */ 
 
 typedef 
@@ -1035,8 +1105,8 @@ typedef struct CompositionFrameDisplayInstance
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_Presentation_0000_0007_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_Presentation_0000_0007_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_presentation_0000_0007_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_presentation_0000_0007_v0_0_s_ifspec;
 
 #ifndef __ICompositionFramePresentStatistics_INTERFACE_DEFINED__
 #define __ICompositionFramePresentStatistics_INTERFACE_DEFINED__
@@ -1058,8 +1128,10 @@ EXTERN_C const IID IID_ICompositionFramePresentStatistics;
         virtual CompositionFrameId STDMETHODCALLTYPE GetCompositionFrameId( void) = 0;
         
         virtual void STDMETHODCALLTYPE GetDisplayInstanceArray( 
-            /* [out] */ UINT *displayInstanceArrayCount,
-            /* [out] */ const CompositionFrameDisplayInstance **displayInstanceArray) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *displayInstanceArrayCount,
+            /* [annotation][out] */ 
+            _Out_  const CompositionFrameDisplayInstance **displayInstanceArray) = 0;
         
     };
     
@@ -1073,7 +1145,8 @@ EXTERN_C const IID IID_ICompositionFramePresentStatistics;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICompositionFramePresentStatistics * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1104,8 +1177,10 @@ EXTERN_C const IID IID_ICompositionFramePresentStatistics;
         DECLSPEC_XFGVIRT(ICompositionFramePresentStatistics, GetDisplayInstanceArray)
         void ( STDMETHODCALLTYPE *GetDisplayInstanceArray )( 
             ICompositionFramePresentStatistics * This,
-            /* [out] */ UINT *displayInstanceArrayCount,
-            /* [out] */ const CompositionFrameDisplayInstance **displayInstanceArray);
+            /* [annotation][out] */ 
+            _Out_  UINT *displayInstanceArrayCount,
+            /* [annotation][out] */ 
+            _Out_  const CompositionFrameDisplayInstance **displayInstanceArray);
         
         END_INTERFACE
     } ICompositionFramePresentStatisticsVtbl;
@@ -1194,7 +1269,8 @@ EXTERN_C const IID IID_IIndependentFlipFramePresentStatistics;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIndependentFlipFramePresentStatistics * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1323,7 +1399,7 @@ void __RPC_STUB IIndependentFlipFramePresentStatistics_GetPresentDuration_Stub(
 #endif 	/* __IIndependentFlipFramePresentStatistics_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_Presentation_0000_0009 */
+/* interface __MIDL_itf_presentation_0000_0009 */
 /* [local] */ 
 
 //
@@ -1336,8 +1412,8 @@ STDAPI CreatePresentationFactory(
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_Presentation_0000_0009_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_Presentation_0000_0009_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_presentation_0000_0009_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_presentation_0000_0009_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -132,7 +132,8 @@ EXTERN_C const IID IID_IAMWMBufferPass;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetNotify( 
-            /* [in] */ __RPC__in_opt IAMWMBufferPassCallback *pCallback) = 0;
+            /* [annotation][in] */ 
+            _In_  IAMWMBufferPassCallback *pCallback) = 0;
         
     };
     
@@ -146,7 +147,8 @@ EXTERN_C const IID IID_IAMWMBufferPass;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAMWMBufferPass * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -161,7 +163,8 @@ EXTERN_C const IID IID_IAMWMBufferPass;
         DECLSPEC_XFGVIRT(IAMWMBufferPass, SetNotify)
         HRESULT ( STDMETHODCALLTYPE *SetNotify )( 
             __RPC__in IAMWMBufferPass * This,
-            /* [in] */ __RPC__in_opt IAMWMBufferPassCallback *pCallback);
+            /* [annotation][in] */ 
+            _In_  IAMWMBufferPassCallback *pCallback);
         
         END_INTERFACE
     } IAMWMBufferPassVtbl;
@@ -216,10 +219,14 @@ EXTERN_C const IID IID_IAMWMBufferPassCallback;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Notify( 
-            /* [in] */ __RPC__in_opt INSSBuffer3 *pNSSBuffer3,
-            /* [in] */ __RPC__in_opt IPin *pPin,
-            /* [in] */ __RPC__in REFERENCE_TIME *prtStart,
-            /* [in] */ __RPC__in REFERENCE_TIME *prtEnd) = 0;
+            /* [annotation][in] */ 
+            _In_  INSSBuffer3 *pNSSBuffer3,
+            /* [annotation][in] */ 
+            _In_  IPin *pPin,
+            /* [annotation][in] */ 
+            _In_  REFERENCE_TIME *prtStart,
+            /* [annotation][in] */ 
+            _In_  REFERENCE_TIME *prtEnd) = 0;
         
     };
     
@@ -233,7 +240,8 @@ EXTERN_C const IID IID_IAMWMBufferPassCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAMWMBufferPassCallback * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -248,10 +256,14 @@ EXTERN_C const IID IID_IAMWMBufferPassCallback;
         DECLSPEC_XFGVIRT(IAMWMBufferPassCallback, Notify)
         HRESULT ( STDMETHODCALLTYPE *Notify )( 
             __RPC__in IAMWMBufferPassCallback * This,
-            /* [in] */ __RPC__in_opt INSSBuffer3 *pNSSBuffer3,
-            /* [in] */ __RPC__in_opt IPin *pPin,
-            /* [in] */ __RPC__in REFERENCE_TIME *prtStart,
-            /* [in] */ __RPC__in REFERENCE_TIME *prtEnd);
+            /* [annotation][in] */ 
+            _In_  INSSBuffer3 *pNSSBuffer3,
+            /* [annotation][in] */ 
+            _In_  IPin *pPin,
+            /* [annotation][in] */ 
+            _In_  REFERENCE_TIME *prtStart,
+            /* [annotation][in] */ 
+            _In_  REFERENCE_TIME *prtEnd);
         
         END_INTERFACE
     } IAMWMBufferPassCallbackVtbl;
@@ -321,28 +333,36 @@ EXTERN_C const IID IID_IConfigAsfWriter;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ConfigureFilterUsingProfileId( 
-            /* [in] */ DWORD dwProfileId) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwProfileId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentProfileId( 
-            /* [out] */ __RPC__out DWORD *pdwProfileId) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwProfileId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ConfigureFilterUsingProfileGuid( 
-            /* [in] */ __RPC__in REFGUID guidProfile) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID guidProfile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentProfileGuid( 
-            /* [out] */ __RPC__out GUID *pProfileGuid) = 0;
+            /* [annotation][out] */ 
+            _Out_  GUID *pProfileGuid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ConfigureFilterUsingProfile( 
-            /* [in] */ __RPC__in_opt IWMProfile *pProfile) = 0;
+            /* [annotation][in] */ 
+            _In_  IWMProfile *pProfile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentProfile( 
-            /* [out] */ __RPC__deref_out_opt IWMProfile **ppProfile) = 0;
+            /* [annotation][out] */ 
+            _Out_  IWMProfile **ppProfile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetIndexMode( 
-            /* [in] */ BOOL bIndexFile) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL bIndexFile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIndexMode( 
-            /* [out] */ __RPC__out BOOL *pbIndexFile) = 0;
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbIndexFile) = 0;
         
     };
     
@@ -356,7 +376,8 @@ EXTERN_C const IID IID_IConfigAsfWriter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IConfigAsfWriter * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -371,42 +392,50 @@ EXTERN_C const IID IID_IConfigAsfWriter;
         DECLSPEC_XFGVIRT(IConfigAsfWriter, ConfigureFilterUsingProfileId)
         HRESULT ( STDMETHODCALLTYPE *ConfigureFilterUsingProfileId )( 
             __RPC__in IConfigAsfWriter * This,
-            /* [in] */ DWORD dwProfileId);
+            /* [annotation][in] */ 
+            _In_  DWORD dwProfileId);
         
         DECLSPEC_XFGVIRT(IConfigAsfWriter, GetCurrentProfileId)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentProfileId )( 
             __RPC__in IConfigAsfWriter * This,
-            /* [out] */ __RPC__out DWORD *pdwProfileId);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwProfileId);
         
         DECLSPEC_XFGVIRT(IConfigAsfWriter, ConfigureFilterUsingProfileGuid)
         HRESULT ( STDMETHODCALLTYPE *ConfigureFilterUsingProfileGuid )( 
             __RPC__in IConfigAsfWriter * This,
-            /* [in] */ __RPC__in REFGUID guidProfile);
+            /* [annotation][in] */ 
+            _In_  REFGUID guidProfile);
         
         DECLSPEC_XFGVIRT(IConfigAsfWriter, GetCurrentProfileGuid)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentProfileGuid )( 
             __RPC__in IConfigAsfWriter * This,
-            /* [out] */ __RPC__out GUID *pProfileGuid);
+            /* [annotation][out] */ 
+            _Out_  GUID *pProfileGuid);
         
         DECLSPEC_XFGVIRT(IConfigAsfWriter, ConfigureFilterUsingProfile)
         HRESULT ( STDMETHODCALLTYPE *ConfigureFilterUsingProfile )( 
             __RPC__in IConfigAsfWriter * This,
-            /* [in] */ __RPC__in_opt IWMProfile *pProfile);
+            /* [annotation][in] */ 
+            _In_  IWMProfile *pProfile);
         
         DECLSPEC_XFGVIRT(IConfigAsfWriter, GetCurrentProfile)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentProfile )( 
             __RPC__in IConfigAsfWriter * This,
-            /* [out] */ __RPC__deref_out_opt IWMProfile **ppProfile);
+            /* [annotation][out] */ 
+            _Out_  IWMProfile **ppProfile);
         
         DECLSPEC_XFGVIRT(IConfigAsfWriter, SetIndexMode)
         HRESULT ( STDMETHODCALLTYPE *SetIndexMode )( 
             __RPC__in IConfigAsfWriter * This,
-            /* [in] */ BOOL bIndexFile);
+            /* [annotation][in] */ 
+            _In_  BOOL bIndexFile);
         
         DECLSPEC_XFGVIRT(IConfigAsfWriter, GetIndexMode)
         HRESULT ( STDMETHODCALLTYPE *GetIndexMode )( 
             __RPC__in IConfigAsfWriter * This,
-            /* [out] */ __RPC__out BOOL *pbIndexFile);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbIndexFile);
         
         END_INTERFACE
     } IConfigAsfWriterVtbl;
@@ -482,18 +511,26 @@ EXTERN_C const IID IID_IConfigAsfWriter2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE StreamNumFromPin( 
-            /* [in] */ __RPC__in_opt IPin *pPin,
-            /* [out] */ __RPC__out WORD *pwStreamNum) = 0;
+            /* [annotation][in] */ 
+            _In_  IPin *pPin,
+            /* [annotation][out] */ 
+            _Out_  WORD *pwStreamNum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetParam( 
-            /* [in] */ DWORD dwParam,
-            /* [in] */ DWORD dwParam1,
-            /* [in] */ DWORD dwParam2) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwParam,
+            /* [annotation][in] */ 
+            _In_  DWORD dwParam1,
+            /* [annotation][in] */ 
+            _In_  DWORD dwParam2) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetParam( 
-            /* [in] */ DWORD dwParam,
-            /* [out] */ __RPC__out DWORD *pdwParam1,
-            /* [out] */ __RPC__out DWORD *pdwParam2) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwParam,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwParam1,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwParam2) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ResetMultiPassState( void) = 0;
         
@@ -509,7 +546,8 @@ EXTERN_C const IID IID_IConfigAsfWriter2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IConfigAsfWriter2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -524,62 +562,78 @@ EXTERN_C const IID IID_IConfigAsfWriter2;
         DECLSPEC_XFGVIRT(IConfigAsfWriter, ConfigureFilterUsingProfileId)
         HRESULT ( STDMETHODCALLTYPE *ConfigureFilterUsingProfileId )( 
             __RPC__in IConfigAsfWriter2 * This,
-            /* [in] */ DWORD dwProfileId);
+            /* [annotation][in] */ 
+            _In_  DWORD dwProfileId);
         
         DECLSPEC_XFGVIRT(IConfigAsfWriter, GetCurrentProfileId)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentProfileId )( 
             __RPC__in IConfigAsfWriter2 * This,
-            /* [out] */ __RPC__out DWORD *pdwProfileId);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwProfileId);
         
         DECLSPEC_XFGVIRT(IConfigAsfWriter, ConfigureFilterUsingProfileGuid)
         HRESULT ( STDMETHODCALLTYPE *ConfigureFilterUsingProfileGuid )( 
             __RPC__in IConfigAsfWriter2 * This,
-            /* [in] */ __RPC__in REFGUID guidProfile);
+            /* [annotation][in] */ 
+            _In_  REFGUID guidProfile);
         
         DECLSPEC_XFGVIRT(IConfigAsfWriter, GetCurrentProfileGuid)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentProfileGuid )( 
             __RPC__in IConfigAsfWriter2 * This,
-            /* [out] */ __RPC__out GUID *pProfileGuid);
+            /* [annotation][out] */ 
+            _Out_  GUID *pProfileGuid);
         
         DECLSPEC_XFGVIRT(IConfigAsfWriter, ConfigureFilterUsingProfile)
         HRESULT ( STDMETHODCALLTYPE *ConfigureFilterUsingProfile )( 
             __RPC__in IConfigAsfWriter2 * This,
-            /* [in] */ __RPC__in_opt IWMProfile *pProfile);
+            /* [annotation][in] */ 
+            _In_  IWMProfile *pProfile);
         
         DECLSPEC_XFGVIRT(IConfigAsfWriter, GetCurrentProfile)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentProfile )( 
             __RPC__in IConfigAsfWriter2 * This,
-            /* [out] */ __RPC__deref_out_opt IWMProfile **ppProfile);
+            /* [annotation][out] */ 
+            _Out_  IWMProfile **ppProfile);
         
         DECLSPEC_XFGVIRT(IConfigAsfWriter, SetIndexMode)
         HRESULT ( STDMETHODCALLTYPE *SetIndexMode )( 
             __RPC__in IConfigAsfWriter2 * This,
-            /* [in] */ BOOL bIndexFile);
+            /* [annotation][in] */ 
+            _In_  BOOL bIndexFile);
         
         DECLSPEC_XFGVIRT(IConfigAsfWriter, GetIndexMode)
         HRESULT ( STDMETHODCALLTYPE *GetIndexMode )( 
             __RPC__in IConfigAsfWriter2 * This,
-            /* [out] */ __RPC__out BOOL *pbIndexFile);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbIndexFile);
         
         DECLSPEC_XFGVIRT(IConfigAsfWriter2, StreamNumFromPin)
         HRESULT ( STDMETHODCALLTYPE *StreamNumFromPin )( 
             __RPC__in IConfigAsfWriter2 * This,
-            /* [in] */ __RPC__in_opt IPin *pPin,
-            /* [out] */ __RPC__out WORD *pwStreamNum);
+            /* [annotation][in] */ 
+            _In_  IPin *pPin,
+            /* [annotation][out] */ 
+            _Out_  WORD *pwStreamNum);
         
         DECLSPEC_XFGVIRT(IConfigAsfWriter2, SetParam)
         HRESULT ( STDMETHODCALLTYPE *SetParam )( 
             __RPC__in IConfigAsfWriter2 * This,
-            /* [in] */ DWORD dwParam,
-            /* [in] */ DWORD dwParam1,
-            /* [in] */ DWORD dwParam2);
+            /* [annotation][in] */ 
+            _In_  DWORD dwParam,
+            /* [annotation][in] */ 
+            _In_  DWORD dwParam1,
+            /* [annotation][in] */ 
+            _In_  DWORD dwParam2);
         
         DECLSPEC_XFGVIRT(IConfigAsfWriter2, GetParam)
         HRESULT ( STDMETHODCALLTYPE *GetParam )( 
             __RPC__in IConfigAsfWriter2 * This,
-            /* [in] */ DWORD dwParam,
-            /* [out] */ __RPC__out DWORD *pdwParam1,
-            /* [out] */ __RPC__out DWORD *pdwParam2);
+            /* [annotation][in] */ 
+            _In_  DWORD dwParam,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwParam1,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwParam2);
         
         DECLSPEC_XFGVIRT(IConfigAsfWriter2, ResetMultiPassState)
         HRESULT ( STDMETHODCALLTYPE *ResetMultiPassState )( 

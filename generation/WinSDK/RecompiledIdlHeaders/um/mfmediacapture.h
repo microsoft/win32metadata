@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -103,7 +103,8 @@ EXTERN_C const IID IID_IAdvancedMediaCaptureInitializationSettings;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetDirectxDeviceManager( 
-            /* [in] */ IMFDXGIDeviceManager *value) = 0;
+            /* [annotation][in] */ 
+            _In_  IMFDXGIDeviceManager *value) = 0;
         
     };
     
@@ -117,7 +118,8 @@ EXTERN_C const IID IID_IAdvancedMediaCaptureInitializationSettings;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAdvancedMediaCaptureInitializationSettings * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -132,7 +134,8 @@ EXTERN_C const IID IID_IAdvancedMediaCaptureInitializationSettings;
         DECLSPEC_XFGVIRT(IAdvancedMediaCaptureInitializationSettings, SetDirectxDeviceManager)
         HRESULT ( STDMETHODCALLTYPE *SetDirectxDeviceManager )( 
             IAdvancedMediaCaptureInitializationSettings * This,
-            /* [in] */ IMFDXGIDeviceManager *value);
+            /* [annotation][in] */ 
+            _In_  IMFDXGIDeviceManager *value);
         
         END_INTERFACE
     } IAdvancedMediaCaptureInitializationSettingsVtbl;
@@ -187,7 +190,8 @@ EXTERN_C const IID IID_IAdvancedMediaCaptureSettings;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDirectxDeviceManager( 
-            /* [out] */ IMFDXGIDeviceManager **value) = 0;
+            /* [annotation][out] */ 
+            _Out_  IMFDXGIDeviceManager **value) = 0;
         
     };
     
@@ -201,7 +205,8 @@ EXTERN_C const IID IID_IAdvancedMediaCaptureSettings;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAdvancedMediaCaptureSettings * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -216,7 +221,8 @@ EXTERN_C const IID IID_IAdvancedMediaCaptureSettings;
         DECLSPEC_XFGVIRT(IAdvancedMediaCaptureSettings, GetDirectxDeviceManager)
         HRESULT ( STDMETHODCALLTYPE *GetDirectxDeviceManager )( 
             IAdvancedMediaCaptureSettings * This,
-            /* [out] */ IMFDXGIDeviceManager **value);
+            /* [annotation][out] */ 
+            _Out_  IMFDXGIDeviceManager **value);
         
         END_INTERFACE
     } IAdvancedMediaCaptureSettingsVtbl;
@@ -271,7 +277,8 @@ EXTERN_C const IID IID_IAdvancedMediaCapture;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetAdvancedMediaCaptureSettings( 
-            /* [out] */ __RPC__deref_out_opt IAdvancedMediaCaptureSettings **value) = 0;
+            /* [annotation][out] */ 
+            _Out_  IAdvancedMediaCaptureSettings **value) = 0;
         
     };
     
@@ -285,7 +292,8 @@ EXTERN_C const IID IID_IAdvancedMediaCapture;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAdvancedMediaCapture * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -300,7 +308,8 @@ EXTERN_C const IID IID_IAdvancedMediaCapture;
         DECLSPEC_XFGVIRT(IAdvancedMediaCapture, GetAdvancedMediaCaptureSettings)
         HRESULT ( STDMETHODCALLTYPE *GetAdvancedMediaCaptureSettings )( 
             __RPC__in IAdvancedMediaCapture * This,
-            /* [out] */ __RPC__deref_out_opt IAdvancedMediaCaptureSettings **value);
+            /* [annotation][out] */ 
+            _Out_  IAdvancedMediaCaptureSettings **value);
         
         END_INTERFACE
     } IAdvancedMediaCaptureVtbl;

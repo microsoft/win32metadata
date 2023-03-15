@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -308,152 +308,248 @@ EXTERN_C const IID IID_ITextStoreACP;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AdviseSink( 
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][in] */ __RPC__in_opt IUnknown *punk,
-            /* [in] */ DWORD dwMask) = 0;
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][in] */ 
+            _In_  IUnknown *punk,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMask) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnadviseSink( 
-            /* [in] */ __RPC__in_opt IUnknown *punk) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *punk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestLock( 
-            /* [in] */ DWORD dwLockFlags,
-            /* [out] */ __RPC__out HRESULT *phrSession) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwLockFlags,
+            /* [annotation][out] */ 
+            _Out_  HRESULT *phrSession) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStatus( 
-            /* [out] */ __RPC__out TS_STATUS *pdcs) = 0;
+            /* [annotation][out] */ 
+            _Out_  TS_STATUS *pdcs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryInsert( 
-            /* [in] */ LONG acpTestStart,
-            /* [in] */ LONG acpTestEnd,
-            /* [in] */ ULONG cch,
-            /* [out] */ __RPC__out LONG *pacpResultStart,
-            /* [out] */ __RPC__out LONG *pacpResultEnd) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG acpTestStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpTestEnd,
+            /* [annotation][in] */ 
+            _In_  ULONG cch,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpResultStart,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpResultEnd) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSelection( 
-            /* [in] */ ULONG ulIndex,
-            /* [in] */ ULONG ulCount,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ulCount, *pcFetched) TS_SELECTION_ACP *pSelection,
-            /* [out] */ __RPC__out ULONG *pcFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ulIndex,
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(ulCount,*pcFetched)  TS_SELECTION_ACP *pSelection,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSelection( 
-            /* [in] */ ULONG ulCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(ulCount) const TS_SELECTION_ACP *pSelection) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(ulCount)  const TS_SELECTION_ACP *pSelection) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetText( 
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpEnd,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(cchPlainReq, *pcchPlainRet) WCHAR *pchPlain,
-            /* [in] */ ULONG cchPlainReq,
-            /* [out] */ __RPC__out ULONG *pcchPlainRet,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(cRunInfoReq, *pcRunInfoRet) TS_RUNINFO *prgRunInfo,
-            /* [in] */ ULONG cRunInfoReq,
-            /* [out] */ __RPC__out ULONG *pcRunInfoRet,
-            /* [out] */ __RPC__out LONG *pacpNext) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpEnd,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cchPlainReq,*pcchPlainRet)  WCHAR *pchPlain,
+            /* [annotation][in] */ 
+            _In_  ULONG cchPlainReq,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcchPlainRet,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cRunInfoReq,*pcRunInfoRet)  TS_RUNINFO *prgRunInfo,
+            /* [annotation][in] */ 
+            _In_  ULONG cRunInfoReq,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcRunInfoRet,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpNext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetText( 
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpEnd,
-            /* [size_is][in] */ __RPC__in_ecount_full(cch) const WCHAR *pchText,
-            /* [in] */ ULONG cch,
-            /* [out] */ __RPC__out TS_TEXTCHANGE *pChange) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpEnd,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cch)  const WCHAR *pchText,
+            /* [annotation][in] */ 
+            _In_  ULONG cch,
+            /* [annotation][out] */ 
+            _Out_  TS_TEXTCHANGE *pChange) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFormattedText( 
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpEnd,
-            /* [out] */ __RPC__deref_out_opt IDataObject **ppDataObject) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpEnd,
+            /* [annotation][out] */ 
+            _Out_  IDataObject **ppDataObject) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEmbedded( 
-            /* [in] */ LONG acpPos,
-            /* [in] */ __RPC__in REFGUID rguidService,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppunk) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG acpPos,
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidService,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  IUnknown **ppunk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryInsertEmbedded( 
-            /* [in] */ __RPC__in const GUID *pguidService,
-            /* [in] */ __RPC__in const FORMATETC *pFormatEtc,
-            /* [out] */ __RPC__out BOOL *pfInsertable) = 0;
+            /* [annotation][in] */ 
+            _In_  const GUID *pguidService,
+            /* [annotation][in] */ 
+            _In_  const FORMATETC *pFormatEtc,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfInsertable) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertEmbedded( 
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpEnd,
-            /* [in] */ __RPC__in_opt IDataObject *pDataObject,
-            /* [out] */ __RPC__out TS_TEXTCHANGE *pChange) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpEnd,
+            /* [annotation][in] */ 
+            _In_  IDataObject *pDataObject,
+            /* [annotation][out] */ 
+            _Out_  TS_TEXTCHANGE *pChange) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertTextAtSelection( 
-            /* [in] */ DWORD dwFlags,
-            /* [size_is][in] */ __RPC__in_ecount_full(cch) const WCHAR *pchText,
-            /* [in] */ ULONG cch,
-            /* [out] */ __RPC__out LONG *pacpStart,
-            /* [out] */ __RPC__out LONG *pacpEnd,
-            /* [out] */ __RPC__out TS_TEXTCHANGE *pChange) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cch)  const WCHAR *pchText,
+            /* [annotation][in] */ 
+            _In_  ULONG cch,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpStart,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpEnd,
+            /* [annotation][out] */ 
+            _Out_  TS_TEXTCHANGE *pChange) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertEmbeddedAtSelection( 
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ __RPC__in_opt IDataObject *pDataObject,
-            /* [out] */ __RPC__out LONG *pacpStart,
-            /* [out] */ __RPC__out LONG *pacpEnd,
-            /* [out] */ __RPC__out TS_TEXTCHANGE *pChange) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  IDataObject *pDataObject,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpStart,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpEnd,
+            /* [annotation][out] */ 
+            _Out_  TS_TEXTCHANGE *pChange) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestSupportedAttrs( 
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestAttrsAtPosition( 
-            /* [in] */ LONG acpPos,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG acpPos,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestAttrsTransitioningAtPosition( 
-            /* [in] */ LONG acpPos,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG acpPos,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FindNextAttrTransition( 
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpHalt,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs,
-            /* [in] */ DWORD dwFlags,
-            /* [out] */ __RPC__out LONG *pacpNext,
-            /* [out] */ __RPC__out BOOL *pfFound,
-            /* [out] */ __RPC__out LONG *plFoundOffset) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpHalt,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpNext,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfFound,
+            /* [annotation][out] */ 
+            _Out_  LONG *plFoundOffset) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RetrieveRequestedAttrs( 
-            /* [in] */ ULONG ulCount,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ulCount, *pcFetched) TS_ATTRVAL *paAttrVals,
-            /* [out] */ __RPC__out ULONG *pcFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(ulCount,*pcFetched)  TS_ATTRVAL *paAttrVals,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEndACP( 
-            /* [out] */ __RPC__out LONG *pacp) = 0;
+            /* [annotation][out] */ 
+            _Out_  LONG *pacp) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetActiveView( 
-            /* [out] */ __RPC__out TsViewCookie *pvcView) = 0;
+            /* [annotation][out] */ 
+            _Out_  TsViewCookie *pvcView) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetACPFromPoint( 
-            /* [in] */ TsViewCookie vcView,
-            /* [in] */ __RPC__in const POINT *ptScreen,
-            /* [in] */ DWORD dwFlags,
-            /* [out] */ __RPC__out LONG *pacp) = 0;
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView,
+            /* [annotation][in] */ 
+            _In_  const POINT *ptScreen,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacp) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTextExt( 
-            /* [in] */ TsViewCookie vcView,
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpEnd,
-            /* [out] */ __RPC__out RECT *prc,
-            /* [out] */ __RPC__out BOOL *pfClipped) = 0;
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView,
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpEnd,
+            /* [annotation][out] */ 
+            _Out_  RECT *prc,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfClipped) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetScreenExt( 
-            /* [in] */ TsViewCookie vcView,
-            /* [out] */ __RPC__out RECT *prc) = 0;
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView,
+            /* [annotation][out] */ 
+            _Out_  RECT *prc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetWnd( 
-            /* [in] */ TsViewCookie vcView,
-            /* [out] */ __RPC__deref_out_opt HWND *phwnd) = 0;
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView,
+            /* [annotation][out] */ 
+            _Out_  HWND *phwnd) = 0;
         
     };
     
@@ -467,7 +563,8 @@ EXTERN_C const IID IID_ITextStoreACP;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -482,202 +579,298 @@ EXTERN_C const IID IID_ITextStoreACP;
         DECLSPEC_XFGVIRT(ITextStoreACP, AdviseSink)
         HRESULT ( STDMETHODCALLTYPE *AdviseSink )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][in] */ __RPC__in_opt IUnknown *punk,
-            /* [in] */ DWORD dwMask);
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][in] */ 
+            _In_  IUnknown *punk,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMask);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, UnadviseSink)
         HRESULT ( STDMETHODCALLTYPE *UnadviseSink )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ __RPC__in_opt IUnknown *punk);
+            /* [annotation][in] */ 
+            _In_  IUnknown *punk);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, RequestLock)
         HRESULT ( STDMETHODCALLTYPE *RequestLock )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ DWORD dwLockFlags,
-            /* [out] */ __RPC__out HRESULT *phrSession);
+            /* [annotation][in] */ 
+            _In_  DWORD dwLockFlags,
+            /* [annotation][out] */ 
+            _Out_  HRESULT *phrSession);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in ITextStoreACP * This,
-            /* [out] */ __RPC__out TS_STATUS *pdcs);
+            /* [annotation][out] */ 
+            _Out_  TS_STATUS *pdcs);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, QueryInsert)
         HRESULT ( STDMETHODCALLTYPE *QueryInsert )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ LONG acpTestStart,
-            /* [in] */ LONG acpTestEnd,
-            /* [in] */ ULONG cch,
-            /* [out] */ __RPC__out LONG *pacpResultStart,
-            /* [out] */ __RPC__out LONG *pacpResultEnd);
+            /* [annotation][in] */ 
+            _In_  LONG acpTestStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpTestEnd,
+            /* [annotation][in] */ 
+            _In_  ULONG cch,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpResultStart,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpResultEnd);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, GetSelection)
         HRESULT ( STDMETHODCALLTYPE *GetSelection )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ ULONG ulIndex,
-            /* [in] */ ULONG ulCount,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ulCount, *pcFetched) TS_SELECTION_ACP *pSelection,
-            /* [out] */ __RPC__out ULONG *pcFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG ulIndex,
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(ulCount,*pcFetched)  TS_SELECTION_ACP *pSelection,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcFetched);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, SetSelection)
         HRESULT ( STDMETHODCALLTYPE *SetSelection )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ ULONG ulCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(ulCount) const TS_SELECTION_ACP *pSelection);
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(ulCount)  const TS_SELECTION_ACP *pSelection);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpEnd,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(cchPlainReq, *pcchPlainRet) WCHAR *pchPlain,
-            /* [in] */ ULONG cchPlainReq,
-            /* [out] */ __RPC__out ULONG *pcchPlainRet,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(cRunInfoReq, *pcRunInfoRet) TS_RUNINFO *prgRunInfo,
-            /* [in] */ ULONG cRunInfoReq,
-            /* [out] */ __RPC__out ULONG *pcRunInfoRet,
-            /* [out] */ __RPC__out LONG *pacpNext);
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpEnd,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cchPlainReq,*pcchPlainRet)  WCHAR *pchPlain,
+            /* [annotation][in] */ 
+            _In_  ULONG cchPlainReq,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcchPlainRet,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cRunInfoReq,*pcRunInfoRet)  TS_RUNINFO *prgRunInfo,
+            /* [annotation][in] */ 
+            _In_  ULONG cRunInfoReq,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcRunInfoRet,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpNext);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, SetText)
         HRESULT ( STDMETHODCALLTYPE *SetText )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpEnd,
-            /* [size_is][in] */ __RPC__in_ecount_full(cch) const WCHAR *pchText,
-            /* [in] */ ULONG cch,
-            /* [out] */ __RPC__out TS_TEXTCHANGE *pChange);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpEnd,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cch)  const WCHAR *pchText,
+            /* [annotation][in] */ 
+            _In_  ULONG cch,
+            /* [annotation][out] */ 
+            _Out_  TS_TEXTCHANGE *pChange);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, GetFormattedText)
         HRESULT ( STDMETHODCALLTYPE *GetFormattedText )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpEnd,
-            /* [out] */ __RPC__deref_out_opt IDataObject **ppDataObject);
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpEnd,
+            /* [annotation][out] */ 
+            _Out_  IDataObject **ppDataObject);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, GetEmbedded)
         HRESULT ( STDMETHODCALLTYPE *GetEmbedded )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ LONG acpPos,
-            /* [in] */ __RPC__in REFGUID rguidService,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppunk);
+            /* [annotation][in] */ 
+            _In_  LONG acpPos,
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidService,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  IUnknown **ppunk);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, QueryInsertEmbedded)
         HRESULT ( STDMETHODCALLTYPE *QueryInsertEmbedded )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ __RPC__in const GUID *pguidService,
-            /* [in] */ __RPC__in const FORMATETC *pFormatEtc,
-            /* [out] */ __RPC__out BOOL *pfInsertable);
+            /* [annotation][in] */ 
+            _In_  const GUID *pguidService,
+            /* [annotation][in] */ 
+            _In_  const FORMATETC *pFormatEtc,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfInsertable);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, InsertEmbedded)
         HRESULT ( STDMETHODCALLTYPE *InsertEmbedded )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpEnd,
-            /* [in] */ __RPC__in_opt IDataObject *pDataObject,
-            /* [out] */ __RPC__out TS_TEXTCHANGE *pChange);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpEnd,
+            /* [annotation][in] */ 
+            _In_  IDataObject *pDataObject,
+            /* [annotation][out] */ 
+            _Out_  TS_TEXTCHANGE *pChange);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, InsertTextAtSelection)
         HRESULT ( STDMETHODCALLTYPE *InsertTextAtSelection )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ DWORD dwFlags,
-            /* [size_is][in] */ __RPC__in_ecount_full(cch) const WCHAR *pchText,
-            /* [in] */ ULONG cch,
-            /* [out] */ __RPC__out LONG *pacpStart,
-            /* [out] */ __RPC__out LONG *pacpEnd,
-            /* [out] */ __RPC__out TS_TEXTCHANGE *pChange);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cch)  const WCHAR *pchText,
+            /* [annotation][in] */ 
+            _In_  ULONG cch,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpStart,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpEnd,
+            /* [annotation][out] */ 
+            _Out_  TS_TEXTCHANGE *pChange);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, InsertEmbeddedAtSelection)
         HRESULT ( STDMETHODCALLTYPE *InsertEmbeddedAtSelection )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ __RPC__in_opt IDataObject *pDataObject,
-            /* [out] */ __RPC__out LONG *pacpStart,
-            /* [out] */ __RPC__out LONG *pacpEnd,
-            /* [out] */ __RPC__out TS_TEXTCHANGE *pChange);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  IDataObject *pDataObject,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpStart,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpEnd,
+            /* [annotation][out] */ 
+            _Out_  TS_TEXTCHANGE *pChange);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, RequestSupportedAttrs)
         HRESULT ( STDMETHODCALLTYPE *RequestSupportedAttrs )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, RequestAttrsAtPosition)
         HRESULT ( STDMETHODCALLTYPE *RequestAttrsAtPosition )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ LONG acpPos,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  LONG acpPos,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, RequestAttrsTransitioningAtPosition)
         HRESULT ( STDMETHODCALLTYPE *RequestAttrsTransitioningAtPosition )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ LONG acpPos,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  LONG acpPos,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, FindNextAttrTransition)
         HRESULT ( STDMETHODCALLTYPE *FindNextAttrTransition )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpHalt,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs,
-            /* [in] */ DWORD dwFlags,
-            /* [out] */ __RPC__out LONG *pacpNext,
-            /* [out] */ __RPC__out BOOL *pfFound,
-            /* [out] */ __RPC__out LONG *plFoundOffset);
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpHalt,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpNext,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfFound,
+            /* [annotation][out] */ 
+            _Out_  LONG *plFoundOffset);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, RetrieveRequestedAttrs)
         HRESULT ( STDMETHODCALLTYPE *RetrieveRequestedAttrs )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ ULONG ulCount,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ulCount, *pcFetched) TS_ATTRVAL *paAttrVals,
-            /* [out] */ __RPC__out ULONG *pcFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(ulCount,*pcFetched)  TS_ATTRVAL *paAttrVals,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcFetched);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, GetEndACP)
         HRESULT ( STDMETHODCALLTYPE *GetEndACP )( 
             __RPC__in ITextStoreACP * This,
-            /* [out] */ __RPC__out LONG *pacp);
+            /* [annotation][out] */ 
+            _Out_  LONG *pacp);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, GetActiveView)
         HRESULT ( STDMETHODCALLTYPE *GetActiveView )( 
             __RPC__in ITextStoreACP * This,
-            /* [out] */ __RPC__out TsViewCookie *pvcView);
+            /* [annotation][out] */ 
+            _Out_  TsViewCookie *pvcView);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, GetACPFromPoint)
         HRESULT ( STDMETHODCALLTYPE *GetACPFromPoint )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ TsViewCookie vcView,
-            /* [in] */ __RPC__in const POINT *ptScreen,
-            /* [in] */ DWORD dwFlags,
-            /* [out] */ __RPC__out LONG *pacp);
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView,
+            /* [annotation][in] */ 
+            _In_  const POINT *ptScreen,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacp);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, GetTextExt)
         HRESULT ( STDMETHODCALLTYPE *GetTextExt )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ TsViewCookie vcView,
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpEnd,
-            /* [out] */ __RPC__out RECT *prc,
-            /* [out] */ __RPC__out BOOL *pfClipped);
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView,
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpEnd,
+            /* [annotation][out] */ 
+            _Out_  RECT *prc,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfClipped);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, GetScreenExt)
         HRESULT ( STDMETHODCALLTYPE *GetScreenExt )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ TsViewCookie vcView,
-            /* [out] */ __RPC__out RECT *prc);
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView,
+            /* [annotation][out] */ 
+            _Out_  RECT *prc);
         
         DECLSPEC_XFGVIRT(ITextStoreACP, GetWnd)
         HRESULT ( STDMETHODCALLTYPE *GetWnd )( 
             __RPC__in ITextStoreACP * This,
-            /* [in] */ TsViewCookie vcView,
-            /* [out] */ __RPC__deref_out_opt HWND *phwnd);
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView,
+            /* [annotation][out] */ 
+            _Out_  HWND *phwnd);
         
         END_INTERFACE
     } ITextStoreACPVtbl;
@@ -819,148 +1012,242 @@ EXTERN_C const IID IID_ITextStoreACP2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AdviseSink( 
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][in] */ __RPC__in_opt IUnknown *punk,
-            /* [in] */ DWORD dwMask) = 0;
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][in] */ 
+            _In_  IUnknown *punk,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMask) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnadviseSink( 
-            /* [in] */ __RPC__in_opt IUnknown *punk) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *punk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestLock( 
-            /* [in] */ DWORD dwLockFlags,
-            /* [out] */ __RPC__out HRESULT *phrSession) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwLockFlags,
+            /* [annotation][out] */ 
+            _Out_  HRESULT *phrSession) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStatus( 
-            /* [out] */ __RPC__out TS_STATUS *pdcs) = 0;
+            /* [annotation][out] */ 
+            _Out_  TS_STATUS *pdcs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryInsert( 
-            /* [in] */ LONG acpTestStart,
-            /* [in] */ LONG acpTestEnd,
-            /* [in] */ ULONG cch,
-            /* [out] */ __RPC__out LONG *pacpResultStart,
-            /* [out] */ __RPC__out LONG *pacpResultEnd) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG acpTestStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpTestEnd,
+            /* [annotation][in] */ 
+            _In_  ULONG cch,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpResultStart,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpResultEnd) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSelection( 
-            /* [in] */ ULONG ulIndex,
-            /* [in] */ ULONG ulCount,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ulCount, *pcFetched) TS_SELECTION_ACP *pSelection,
-            /* [out] */ __RPC__out ULONG *pcFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ulIndex,
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(ulCount,*pcFetched)  TS_SELECTION_ACP *pSelection,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSelection( 
-            /* [in] */ ULONG ulCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(ulCount) const TS_SELECTION_ACP *pSelection) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(ulCount)  const TS_SELECTION_ACP *pSelection) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetText( 
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpEnd,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(cchPlainReq, *pcchPlainRet) WCHAR *pchPlain,
-            /* [in] */ ULONG cchPlainReq,
-            /* [out] */ __RPC__out ULONG *pcchPlainRet,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(cRunInfoReq, *pcRunInfoRet) TS_RUNINFO *prgRunInfo,
-            /* [in] */ ULONG cRunInfoReq,
-            /* [out] */ __RPC__out ULONG *pcRunInfoRet,
-            /* [out] */ __RPC__out LONG *pacpNext) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpEnd,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cchPlainReq,*pcchPlainRet)  WCHAR *pchPlain,
+            /* [annotation][in] */ 
+            _In_  ULONG cchPlainReq,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcchPlainRet,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cRunInfoReq,*pcRunInfoRet)  TS_RUNINFO *prgRunInfo,
+            /* [annotation][in] */ 
+            _In_  ULONG cRunInfoReq,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcRunInfoRet,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpNext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetText( 
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpEnd,
-            /* [size_is][in] */ __RPC__in_ecount_full(cch) const WCHAR *pchText,
-            /* [in] */ ULONG cch,
-            /* [out] */ __RPC__out TS_TEXTCHANGE *pChange) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpEnd,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cch)  const WCHAR *pchText,
+            /* [annotation][in] */ 
+            _In_  ULONG cch,
+            /* [annotation][out] */ 
+            _Out_  TS_TEXTCHANGE *pChange) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFormattedText( 
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpEnd,
-            /* [out] */ __RPC__deref_out_opt IDataObject **ppDataObject) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpEnd,
+            /* [annotation][out] */ 
+            _Out_  IDataObject **ppDataObject) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEmbedded( 
-            /* [in] */ LONG acpPos,
-            /* [in] */ __RPC__in REFGUID rguidService,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppunk) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG acpPos,
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidService,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  IUnknown **ppunk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryInsertEmbedded( 
-            /* [in] */ __RPC__in const GUID *pguidService,
-            /* [in] */ __RPC__in const FORMATETC *pFormatEtc,
-            /* [out] */ __RPC__out BOOL *pfInsertable) = 0;
+            /* [annotation][in] */ 
+            _In_  const GUID *pguidService,
+            /* [annotation][in] */ 
+            _In_  const FORMATETC *pFormatEtc,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfInsertable) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertEmbedded( 
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpEnd,
-            /* [in] */ __RPC__in_opt IDataObject *pDataObject,
-            /* [out] */ __RPC__out TS_TEXTCHANGE *pChange) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpEnd,
+            /* [annotation][in] */ 
+            _In_  IDataObject *pDataObject,
+            /* [annotation][out] */ 
+            _Out_  TS_TEXTCHANGE *pChange) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertTextAtSelection( 
-            /* [in] */ DWORD dwFlags,
-            /* [size_is][in] */ __RPC__in_ecount_full(cch) const WCHAR *pchText,
-            /* [in] */ ULONG cch,
-            /* [out] */ __RPC__out LONG *pacpStart,
-            /* [out] */ __RPC__out LONG *pacpEnd,
-            /* [out] */ __RPC__out TS_TEXTCHANGE *pChange) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cch)  const WCHAR *pchText,
+            /* [annotation][in] */ 
+            _In_  ULONG cch,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpStart,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpEnd,
+            /* [annotation][out] */ 
+            _Out_  TS_TEXTCHANGE *pChange) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertEmbeddedAtSelection( 
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ __RPC__in_opt IDataObject *pDataObject,
-            /* [out] */ __RPC__out LONG *pacpStart,
-            /* [out] */ __RPC__out LONG *pacpEnd,
-            /* [out] */ __RPC__out TS_TEXTCHANGE *pChange) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  IDataObject *pDataObject,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpStart,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpEnd,
+            /* [annotation][out] */ 
+            _Out_  TS_TEXTCHANGE *pChange) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestSupportedAttrs( 
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestAttrsAtPosition( 
-            /* [in] */ LONG acpPos,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG acpPos,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestAttrsTransitioningAtPosition( 
-            /* [in] */ LONG acpPos,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG acpPos,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FindNextAttrTransition( 
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpHalt,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs,
-            /* [in] */ DWORD dwFlags,
-            /* [out] */ __RPC__out LONG *pacpNext,
-            /* [out] */ __RPC__out BOOL *pfFound,
-            /* [out] */ __RPC__out LONG *plFoundOffset) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpHalt,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpNext,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfFound,
+            /* [annotation][out] */ 
+            _Out_  LONG *plFoundOffset) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RetrieveRequestedAttrs( 
-            /* [in] */ ULONG ulCount,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ulCount, *pcFetched) TS_ATTRVAL *paAttrVals,
-            /* [out] */ __RPC__out ULONG *pcFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(ulCount,*pcFetched)  TS_ATTRVAL *paAttrVals,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEndACP( 
-            /* [out] */ __RPC__out LONG *pacp) = 0;
+            /* [annotation][out] */ 
+            _Out_  LONG *pacp) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetActiveView( 
-            /* [out] */ __RPC__out TsViewCookie *pvcView) = 0;
+            /* [annotation][out] */ 
+            _Out_  TsViewCookie *pvcView) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetACPFromPoint( 
-            /* [in] */ TsViewCookie vcView,
-            /* [in] */ __RPC__in const POINT *ptScreen,
-            /* [in] */ DWORD dwFlags,
-            /* [out] */ __RPC__out LONG *pacp) = 0;
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView,
+            /* [annotation][in] */ 
+            _In_  const POINT *ptScreen,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacp) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTextExt( 
-            /* [in] */ TsViewCookie vcView,
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpEnd,
-            /* [out] */ __RPC__out RECT *prc,
-            /* [out] */ __RPC__out BOOL *pfClipped) = 0;
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView,
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpEnd,
+            /* [annotation][out] */ 
+            _Out_  RECT *prc,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfClipped) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetScreenExt( 
-            /* [in] */ TsViewCookie vcView,
-            /* [out] */ __RPC__out RECT *prc) = 0;
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView,
+            /* [annotation][out] */ 
+            _Out_  RECT *prc) = 0;
         
     };
     
@@ -974,7 +1261,8 @@ EXTERN_C const IID IID_ITextStoreACP2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -989,196 +1277,290 @@ EXTERN_C const IID IID_ITextStoreACP2;
         DECLSPEC_XFGVIRT(ITextStoreACP2, AdviseSink)
         HRESULT ( STDMETHODCALLTYPE *AdviseSink )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][in] */ __RPC__in_opt IUnknown *punk,
-            /* [in] */ DWORD dwMask);
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][in] */ 
+            _In_  IUnknown *punk,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMask);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, UnadviseSink)
         HRESULT ( STDMETHODCALLTYPE *UnadviseSink )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ __RPC__in_opt IUnknown *punk);
+            /* [annotation][in] */ 
+            _In_  IUnknown *punk);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, RequestLock)
         HRESULT ( STDMETHODCALLTYPE *RequestLock )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ DWORD dwLockFlags,
-            /* [out] */ __RPC__out HRESULT *phrSession);
+            /* [annotation][in] */ 
+            _In_  DWORD dwLockFlags,
+            /* [annotation][out] */ 
+            _Out_  HRESULT *phrSession);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [out] */ __RPC__out TS_STATUS *pdcs);
+            /* [annotation][out] */ 
+            _Out_  TS_STATUS *pdcs);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, QueryInsert)
         HRESULT ( STDMETHODCALLTYPE *QueryInsert )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ LONG acpTestStart,
-            /* [in] */ LONG acpTestEnd,
-            /* [in] */ ULONG cch,
-            /* [out] */ __RPC__out LONG *pacpResultStart,
-            /* [out] */ __RPC__out LONG *pacpResultEnd);
+            /* [annotation][in] */ 
+            _In_  LONG acpTestStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpTestEnd,
+            /* [annotation][in] */ 
+            _In_  ULONG cch,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpResultStart,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpResultEnd);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, GetSelection)
         HRESULT ( STDMETHODCALLTYPE *GetSelection )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ ULONG ulIndex,
-            /* [in] */ ULONG ulCount,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ulCount, *pcFetched) TS_SELECTION_ACP *pSelection,
-            /* [out] */ __RPC__out ULONG *pcFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG ulIndex,
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(ulCount,*pcFetched)  TS_SELECTION_ACP *pSelection,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcFetched);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, SetSelection)
         HRESULT ( STDMETHODCALLTYPE *SetSelection )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ ULONG ulCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(ulCount) const TS_SELECTION_ACP *pSelection);
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(ulCount)  const TS_SELECTION_ACP *pSelection);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpEnd,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(cchPlainReq, *pcchPlainRet) WCHAR *pchPlain,
-            /* [in] */ ULONG cchPlainReq,
-            /* [out] */ __RPC__out ULONG *pcchPlainRet,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(cRunInfoReq, *pcRunInfoRet) TS_RUNINFO *prgRunInfo,
-            /* [in] */ ULONG cRunInfoReq,
-            /* [out] */ __RPC__out ULONG *pcRunInfoRet,
-            /* [out] */ __RPC__out LONG *pacpNext);
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpEnd,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cchPlainReq,*pcchPlainRet)  WCHAR *pchPlain,
+            /* [annotation][in] */ 
+            _In_  ULONG cchPlainReq,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcchPlainRet,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cRunInfoReq,*pcRunInfoRet)  TS_RUNINFO *prgRunInfo,
+            /* [annotation][in] */ 
+            _In_  ULONG cRunInfoReq,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcRunInfoRet,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpNext);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, SetText)
         HRESULT ( STDMETHODCALLTYPE *SetText )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpEnd,
-            /* [size_is][in] */ __RPC__in_ecount_full(cch) const WCHAR *pchText,
-            /* [in] */ ULONG cch,
-            /* [out] */ __RPC__out TS_TEXTCHANGE *pChange);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpEnd,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cch)  const WCHAR *pchText,
+            /* [annotation][in] */ 
+            _In_  ULONG cch,
+            /* [annotation][out] */ 
+            _Out_  TS_TEXTCHANGE *pChange);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, GetFormattedText)
         HRESULT ( STDMETHODCALLTYPE *GetFormattedText )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpEnd,
-            /* [out] */ __RPC__deref_out_opt IDataObject **ppDataObject);
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpEnd,
+            /* [annotation][out] */ 
+            _Out_  IDataObject **ppDataObject);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, GetEmbedded)
         HRESULT ( STDMETHODCALLTYPE *GetEmbedded )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ LONG acpPos,
-            /* [in] */ __RPC__in REFGUID rguidService,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppunk);
+            /* [annotation][in] */ 
+            _In_  LONG acpPos,
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidService,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  IUnknown **ppunk);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, QueryInsertEmbedded)
         HRESULT ( STDMETHODCALLTYPE *QueryInsertEmbedded )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ __RPC__in const GUID *pguidService,
-            /* [in] */ __RPC__in const FORMATETC *pFormatEtc,
-            /* [out] */ __RPC__out BOOL *pfInsertable);
+            /* [annotation][in] */ 
+            _In_  const GUID *pguidService,
+            /* [annotation][in] */ 
+            _In_  const FORMATETC *pFormatEtc,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfInsertable);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, InsertEmbedded)
         HRESULT ( STDMETHODCALLTYPE *InsertEmbedded )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpEnd,
-            /* [in] */ __RPC__in_opt IDataObject *pDataObject,
-            /* [out] */ __RPC__out TS_TEXTCHANGE *pChange);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpEnd,
+            /* [annotation][in] */ 
+            _In_  IDataObject *pDataObject,
+            /* [annotation][out] */ 
+            _Out_  TS_TEXTCHANGE *pChange);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, InsertTextAtSelection)
         HRESULT ( STDMETHODCALLTYPE *InsertTextAtSelection )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ DWORD dwFlags,
-            /* [size_is][in] */ __RPC__in_ecount_full(cch) const WCHAR *pchText,
-            /* [in] */ ULONG cch,
-            /* [out] */ __RPC__out LONG *pacpStart,
-            /* [out] */ __RPC__out LONG *pacpEnd,
-            /* [out] */ __RPC__out TS_TEXTCHANGE *pChange);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cch)  const WCHAR *pchText,
+            /* [annotation][in] */ 
+            _In_  ULONG cch,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpStart,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpEnd,
+            /* [annotation][out] */ 
+            _Out_  TS_TEXTCHANGE *pChange);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, InsertEmbeddedAtSelection)
         HRESULT ( STDMETHODCALLTYPE *InsertEmbeddedAtSelection )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ __RPC__in_opt IDataObject *pDataObject,
-            /* [out] */ __RPC__out LONG *pacpStart,
-            /* [out] */ __RPC__out LONG *pacpEnd,
-            /* [out] */ __RPC__out TS_TEXTCHANGE *pChange);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  IDataObject *pDataObject,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpStart,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpEnd,
+            /* [annotation][out] */ 
+            _Out_  TS_TEXTCHANGE *pChange);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, RequestSupportedAttrs)
         HRESULT ( STDMETHODCALLTYPE *RequestSupportedAttrs )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, RequestAttrsAtPosition)
         HRESULT ( STDMETHODCALLTYPE *RequestAttrsAtPosition )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ LONG acpPos,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  LONG acpPos,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, RequestAttrsTransitioningAtPosition)
         HRESULT ( STDMETHODCALLTYPE *RequestAttrsTransitioningAtPosition )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ LONG acpPos,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  LONG acpPos,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, FindNextAttrTransition)
         HRESULT ( STDMETHODCALLTYPE *FindNextAttrTransition )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpHalt,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs,
-            /* [in] */ DWORD dwFlags,
-            /* [out] */ __RPC__out LONG *pacpNext,
-            /* [out] */ __RPC__out BOOL *pfFound,
-            /* [out] */ __RPC__out LONG *plFoundOffset);
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpHalt,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacpNext,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfFound,
+            /* [annotation][out] */ 
+            _Out_  LONG *plFoundOffset);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, RetrieveRequestedAttrs)
         HRESULT ( STDMETHODCALLTYPE *RetrieveRequestedAttrs )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ ULONG ulCount,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ulCount, *pcFetched) TS_ATTRVAL *paAttrVals,
-            /* [out] */ __RPC__out ULONG *pcFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(ulCount,*pcFetched)  TS_ATTRVAL *paAttrVals,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcFetched);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, GetEndACP)
         HRESULT ( STDMETHODCALLTYPE *GetEndACP )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [out] */ __RPC__out LONG *pacp);
+            /* [annotation][out] */ 
+            _Out_  LONG *pacp);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, GetActiveView)
         HRESULT ( STDMETHODCALLTYPE *GetActiveView )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [out] */ __RPC__out TsViewCookie *pvcView);
+            /* [annotation][out] */ 
+            _Out_  TsViewCookie *pvcView);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, GetACPFromPoint)
         HRESULT ( STDMETHODCALLTYPE *GetACPFromPoint )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ TsViewCookie vcView,
-            /* [in] */ __RPC__in const POINT *ptScreen,
-            /* [in] */ DWORD dwFlags,
-            /* [out] */ __RPC__out LONG *pacp);
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView,
+            /* [annotation][in] */ 
+            _In_  const POINT *ptScreen,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  LONG *pacp);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, GetTextExt)
         HRESULT ( STDMETHODCALLTYPE *GetTextExt )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ TsViewCookie vcView,
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpEnd,
-            /* [out] */ __RPC__out RECT *prc,
-            /* [out] */ __RPC__out BOOL *pfClipped);
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView,
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpEnd,
+            /* [annotation][out] */ 
+            _Out_  RECT *prc,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfClipped);
         
         DECLSPEC_XFGVIRT(ITextStoreACP2, GetScreenExt)
         HRESULT ( STDMETHODCALLTYPE *GetScreenExt )( 
             __RPC__in ITextStoreACP2 * This,
-            /* [in] */ TsViewCookie vcView,
-            /* [out] */ __RPC__out RECT *prc);
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView,
+            /* [annotation][out] */ 
+            _Out_  RECT *prc);
         
         END_INTERFACE
     } ITextStoreACP2Vtbl;
@@ -1305,26 +1687,36 @@ EXTERN_C const IID IID_ITextStoreACPSink;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnTextChange( 
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ __RPC__in const TS_TEXTCHANGE *pChange) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  const TS_TEXTCHANGE *pChange) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnSelectionChange( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnLayoutChange( 
-            /* [in] */ TsLayoutCode lcode,
-            /* [in] */ TsViewCookie vcView) = 0;
+            /* [annotation][in] */ 
+            _In_  TsLayoutCode lcode,
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnStatusChange( 
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnAttrsChange( 
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpEnd,
-            /* [in] */ ULONG cAttrs,
-            /* [size_is][in] */ __RPC__in_ecount_full(cAttrs) const TS_ATTRID *paAttrs) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpEnd,
+            /* [annotation][in] */ 
+            _In_  ULONG cAttrs,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cAttrs)  const TS_ATTRID *paAttrs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnLockGranted( 
-            /* [in] */ DWORD dwLockFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwLockFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnStartEditTransaction( void) = 0;
         
@@ -1342,7 +1734,8 @@ EXTERN_C const IID IID_ITextStoreACPSink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITextStoreACPSink * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1357,8 +1750,10 @@ EXTERN_C const IID IID_ITextStoreACPSink;
         DECLSPEC_XFGVIRT(ITextStoreACPSink, OnTextChange)
         HRESULT ( STDMETHODCALLTYPE *OnTextChange )( 
             __RPC__in ITextStoreACPSink * This,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ __RPC__in const TS_TEXTCHANGE *pChange);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  const TS_TEXTCHANGE *pChange);
         
         DECLSPEC_XFGVIRT(ITextStoreACPSink, OnSelectionChange)
         HRESULT ( STDMETHODCALLTYPE *OnSelectionChange )( 
@@ -1367,26 +1762,34 @@ EXTERN_C const IID IID_ITextStoreACPSink;
         DECLSPEC_XFGVIRT(ITextStoreACPSink, OnLayoutChange)
         HRESULT ( STDMETHODCALLTYPE *OnLayoutChange )( 
             __RPC__in ITextStoreACPSink * This,
-            /* [in] */ TsLayoutCode lcode,
-            /* [in] */ TsViewCookie vcView);
+            /* [annotation][in] */ 
+            _In_  TsLayoutCode lcode,
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView);
         
         DECLSPEC_XFGVIRT(ITextStoreACPSink, OnStatusChange)
         HRESULT ( STDMETHODCALLTYPE *OnStatusChange )( 
             __RPC__in ITextStoreACPSink * This,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(ITextStoreACPSink, OnAttrsChange)
         HRESULT ( STDMETHODCALLTYPE *OnAttrsChange )( 
             __RPC__in ITextStoreACPSink * This,
-            /* [in] */ LONG acpStart,
-            /* [in] */ LONG acpEnd,
-            /* [in] */ ULONG cAttrs,
-            /* [size_is][in] */ __RPC__in_ecount_full(cAttrs) const TS_ATTRID *paAttrs);
+            /* [annotation][in] */ 
+            _In_  LONG acpStart,
+            /* [annotation][in] */ 
+            _In_  LONG acpEnd,
+            /* [annotation][in] */ 
+            _In_  ULONG cAttrs,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cAttrs)  const TS_ATTRID *paAttrs);
         
         DECLSPEC_XFGVIRT(ITextStoreACPSink, OnLockGranted)
         HRESULT ( STDMETHODCALLTYPE *OnLockGranted )( 
             __RPC__in ITextStoreACPSink * This,
-            /* [in] */ DWORD dwLockFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwLockFlags);
         
         DECLSPEC_XFGVIRT(ITextStoreACPSink, OnStartEditTransaction)
         HRESULT ( STDMETHODCALLTYPE *OnStartEditTransaction )( 
@@ -1496,43 +1899,60 @@ EXTERN_C const IID IID_IAnchor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetGravity( 
-            /* [in] */ TsGravity gravity) = 0;
+            /* [annotation][in] */ 
+            _In_  TsGravity gravity) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGravity( 
-            /* [out] */ __RPC__out TsGravity *pgravity) = 0;
+            /* [annotation][out] */ 
+            _Out_  TsGravity *pgravity) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsEqual( 
-            /* [in] */ __RPC__in_opt IAnchor *paWith,
-            /* [out] */ __RPC__out BOOL *pfEqual) = 0;
+            /* [annotation][in] */ 
+            _In_  IAnchor *paWith,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfEqual) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Compare( 
-            /* [in] */ __RPC__in_opt IAnchor *paWith,
-            /* [out] */ __RPC__out LONG *plResult) = 0;
+            /* [annotation][in] */ 
+            _In_  IAnchor *paWith,
+            /* [annotation][out] */ 
+            _Out_  LONG *plResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Shift( 
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ LONG cchReq,
-            /* [out] */ __RPC__out LONG *pcch,
-            /* [in] */ __RPC__in_opt IAnchor *paHaltAnchor) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  LONG cchReq,
+            /* [annotation][out] */ 
+            _Out_  LONG *pcch,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paHaltAnchor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ShiftTo( 
-            /* [in] */ __RPC__in_opt IAnchor *paSite) = 0;
+            /* [annotation][in] */ 
+            _In_  IAnchor *paSite) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ShiftRegion( 
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ TsShiftDir dir,
-            /* [out] */ __RPC__out BOOL *pfNoRegion) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  TsShiftDir dir,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfNoRegion) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetChangeHistoryMask( 
-            /* [in] */ DWORD dwMask) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwMask) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetChangeHistory( 
-            /* [out] */ __RPC__out DWORD *pdwHistory) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHistory) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ClearChangeHistory( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [out] */ __RPC__deref_out_opt IAnchor **ppaClone) = 0;
+            /* [annotation][out] */ 
+            _Out_  IAnchor **ppaClone) = 0;
         
     };
     
@@ -1546,7 +1966,8 @@ EXTERN_C const IID IID_IAnchor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAnchor * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1561,54 +1982,70 @@ EXTERN_C const IID IID_IAnchor;
         DECLSPEC_XFGVIRT(IAnchor, SetGravity)
         HRESULT ( STDMETHODCALLTYPE *SetGravity )( 
             __RPC__in IAnchor * This,
-            /* [in] */ TsGravity gravity);
+            /* [annotation][in] */ 
+            _In_  TsGravity gravity);
         
         DECLSPEC_XFGVIRT(IAnchor, GetGravity)
         HRESULT ( STDMETHODCALLTYPE *GetGravity )( 
             __RPC__in IAnchor * This,
-            /* [out] */ __RPC__out TsGravity *pgravity);
+            /* [annotation][out] */ 
+            _Out_  TsGravity *pgravity);
         
         DECLSPEC_XFGVIRT(IAnchor, IsEqual)
         HRESULT ( STDMETHODCALLTYPE *IsEqual )( 
             __RPC__in IAnchor * This,
-            /* [in] */ __RPC__in_opt IAnchor *paWith,
-            /* [out] */ __RPC__out BOOL *pfEqual);
+            /* [annotation][in] */ 
+            _In_  IAnchor *paWith,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfEqual);
         
         DECLSPEC_XFGVIRT(IAnchor, Compare)
         HRESULT ( STDMETHODCALLTYPE *Compare )( 
             __RPC__in IAnchor * This,
-            /* [in] */ __RPC__in_opt IAnchor *paWith,
-            /* [out] */ __RPC__out LONG *plResult);
+            /* [annotation][in] */ 
+            _In_  IAnchor *paWith,
+            /* [annotation][out] */ 
+            _Out_  LONG *plResult);
         
         DECLSPEC_XFGVIRT(IAnchor, Shift)
         HRESULT ( STDMETHODCALLTYPE *Shift )( 
             __RPC__in IAnchor * This,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ LONG cchReq,
-            /* [out] */ __RPC__out LONG *pcch,
-            /* [in] */ __RPC__in_opt IAnchor *paHaltAnchor);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  LONG cchReq,
+            /* [annotation][out] */ 
+            _Out_  LONG *pcch,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paHaltAnchor);
         
         DECLSPEC_XFGVIRT(IAnchor, ShiftTo)
         HRESULT ( STDMETHODCALLTYPE *ShiftTo )( 
             __RPC__in IAnchor * This,
-            /* [in] */ __RPC__in_opt IAnchor *paSite);
+            /* [annotation][in] */ 
+            _In_  IAnchor *paSite);
         
         DECLSPEC_XFGVIRT(IAnchor, ShiftRegion)
         HRESULT ( STDMETHODCALLTYPE *ShiftRegion )( 
             __RPC__in IAnchor * This,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ TsShiftDir dir,
-            /* [out] */ __RPC__out BOOL *pfNoRegion);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  TsShiftDir dir,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfNoRegion);
         
         DECLSPEC_XFGVIRT(IAnchor, SetChangeHistoryMask)
         HRESULT ( STDMETHODCALLTYPE *SetChangeHistoryMask )( 
             __RPC__in IAnchor * This,
-            /* [in] */ DWORD dwMask);
+            /* [annotation][in] */ 
+            _In_  DWORD dwMask);
         
         DECLSPEC_XFGVIRT(IAnchor, GetChangeHistory)
         HRESULT ( STDMETHODCALLTYPE *GetChangeHistory )( 
             __RPC__in IAnchor * This,
-            /* [out] */ __RPC__out DWORD *pdwHistory);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHistory);
         
         DECLSPEC_XFGVIRT(IAnchor, ClearChangeHistory)
         HRESULT ( STDMETHODCALLTYPE *ClearChangeHistory )( 
@@ -1617,7 +2054,8 @@ EXTERN_C const IID IID_IAnchor;
         DECLSPEC_XFGVIRT(IAnchor, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IAnchor * This,
-            /* [out] */ __RPC__deref_out_opt IAnchor **ppaClone);
+            /* [annotation][out] */ 
+            _Out_  IAnchor **ppaClone);
         
         END_INTERFACE
     } IAnchorVtbl;
@@ -1706,149 +2144,240 @@ EXTERN_C const IID IID_ITextStoreAnchor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AdviseSink( 
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][in] */ __RPC__in_opt IUnknown *punk,
-            /* [in] */ DWORD dwMask) = 0;
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][in] */ 
+            _In_  IUnknown *punk,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMask) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnadviseSink( 
-            /* [in] */ __RPC__in_opt IUnknown *punk) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *punk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestLock( 
-            /* [in] */ DWORD dwLockFlags,
-            /* [out] */ __RPC__out HRESULT *phrSession) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwLockFlags,
+            /* [annotation][out] */ 
+            _Out_  HRESULT *phrSession) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStatus( 
-            /* [out] */ __RPC__out TS_STATUS *pdcs) = 0;
+            /* [annotation][out] */ 
+            _Out_  TS_STATUS *pdcs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryInsert( 
-            /* [in] */ __RPC__in_opt IAnchor *paTestStart,
-            /* [in] */ __RPC__in_opt IAnchor *paTestEnd,
-            /* [in] */ ULONG cch,
-            /* [out] */ __RPC__deref_out_opt IAnchor **ppaResultStart,
-            /* [out] */ __RPC__deref_out_opt IAnchor **ppaResultEnd) = 0;
+            /* [annotation][in] */ 
+            _In_  IAnchor *paTestStart,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paTestEnd,
+            /* [annotation][in] */ 
+            _In_  ULONG cch,
+            /* [annotation][out] */ 
+            _Out_  IAnchor **ppaResultStart,
+            /* [annotation][out] */ 
+            _Out_  IAnchor **ppaResultEnd) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSelection( 
-            /* [in] */ ULONG ulIndex,
-            /* [in] */ ULONG ulCount,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ulCount, *pcFetched) TS_SELECTION_ANCHOR *pSelection,
-            /* [out] */ __RPC__out ULONG *pcFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ulIndex,
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(ulCount,*pcFetched)  TS_SELECTION_ANCHOR *pSelection,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSelection( 
-            /* [in] */ ULONG ulCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(ulCount) const TS_SELECTION_ANCHOR *pSelection) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(ulCount)  const TS_SELECTION_ANCHOR *pSelection) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetText( 
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ __RPC__in_opt IAnchor *paStart,
-            /* [in] */ __RPC__in_opt IAnchor *paEnd,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(cchReq, *pcch) WCHAR *pchText,
-            /* [in] */ ULONG cchReq,
-            /* [out] */ __RPC__out ULONG *pcch,
-            /* [in] */ BOOL fUpdateAnchor) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paStart,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paEnd,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cchReq,*pcch)  WCHAR *pchText,
+            /* [annotation][in] */ 
+            _In_  ULONG cchReq,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcch,
+            /* [annotation][in] */ 
+            _In_  BOOL fUpdateAnchor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetText( 
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ __RPC__in_opt IAnchor *paStart,
-            /* [in] */ __RPC__in_opt IAnchor *paEnd,
-            /* [size_is][in] */ __RPC__in_ecount_full(cch) const WCHAR *pchText,
-            /* [in] */ ULONG cch) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paStart,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paEnd,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cch)  const WCHAR *pchText,
+            /* [annotation][in] */ 
+            _In_  ULONG cch) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFormattedText( 
-            /* [in] */ __RPC__in_opt IAnchor *paStart,
-            /* [in] */ __RPC__in_opt IAnchor *paEnd,
-            /* [out] */ __RPC__deref_out_opt IDataObject **ppDataObject) = 0;
+            /* [annotation][in] */ 
+            _In_  IAnchor *paStart,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paEnd,
+            /* [annotation][out] */ 
+            _Out_  IDataObject **ppDataObject) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEmbedded( 
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ __RPC__in_opt IAnchor *paPos,
-            /* [in] */ __RPC__in REFGUID rguidService,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppunk) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paPos,
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidService,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  IUnknown **ppunk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertEmbedded( 
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ __RPC__in_opt IAnchor *paStart,
-            /* [in] */ __RPC__in_opt IAnchor *paEnd,
-            /* [in] */ __RPC__in_opt IDataObject *pDataObject) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paStart,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paEnd,
+            /* [annotation][in] */ 
+            _In_  IDataObject *pDataObject) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestSupportedAttrs( 
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestAttrsAtPosition( 
-            /* [in] */ __RPC__in_opt IAnchor *paPos,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  IAnchor *paPos,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestAttrsTransitioningAtPosition( 
-            /* [in] */ __RPC__in_opt IAnchor *paPos,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  IAnchor *paPos,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FindNextAttrTransition( 
-            /* [in] */ __RPC__in_opt IAnchor *paStart,
-            /* [in] */ __RPC__in_opt IAnchor *paHalt,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs,
-            /* [in] */ DWORD dwFlags,
-            /* [out] */ __RPC__out BOOL *pfFound,
-            /* [out] */ __RPC__out LONG *plFoundOffset) = 0;
+            /* [annotation][in] */ 
+            _In_  IAnchor *paStart,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paHalt,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfFound,
+            /* [annotation][out] */ 
+            _Out_  LONG *plFoundOffset) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RetrieveRequestedAttrs( 
-            /* [in] */ ULONG ulCount,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ulCount, *pcFetched) TS_ATTRVAL *paAttrVals,
-            /* [out] */ __RPC__out ULONG *pcFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(ulCount,*pcFetched)  TS_ATTRVAL *paAttrVals,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStart( 
-            /* [out] */ __RPC__deref_out_opt IAnchor **ppaStart) = 0;
+            /* [annotation][out] */ 
+            _Out_  IAnchor **ppaStart) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEnd( 
-            /* [out] */ __RPC__deref_out_opt IAnchor **ppaEnd) = 0;
+            /* [annotation][out] */ 
+            _Out_  IAnchor **ppaEnd) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetActiveView( 
-            /* [out] */ __RPC__out TsViewCookie *pvcView) = 0;
+            /* [annotation][out] */ 
+            _Out_  TsViewCookie *pvcView) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAnchorFromPoint( 
-            /* [in] */ TsViewCookie vcView,
-            /* [in] */ __RPC__in const POINT *ptScreen,
-            /* [in] */ DWORD dwFlags,
-            /* [out] */ __RPC__deref_out_opt IAnchor **ppaSite) = 0;
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView,
+            /* [annotation][in] */ 
+            _In_  const POINT *ptScreen,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  IAnchor **ppaSite) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTextExt( 
-            /* [in] */ TsViewCookie vcView,
-            /* [in] */ __RPC__in_opt IAnchor *paStart,
-            /* [in] */ __RPC__in_opt IAnchor *paEnd,
-            /* [out] */ __RPC__out RECT *prc,
-            /* [out] */ __RPC__out BOOL *pfClipped) = 0;
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paStart,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paEnd,
+            /* [annotation][out] */ 
+            _Out_  RECT *prc,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfClipped) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetScreenExt( 
-            /* [in] */ TsViewCookie vcView,
-            /* [out] */ __RPC__out RECT *prc) = 0;
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView,
+            /* [annotation][out] */ 
+            _Out_  RECT *prc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetWnd( 
-            /* [in] */ TsViewCookie vcView,
-            /* [out] */ __RPC__deref_out_opt HWND *phwnd) = 0;
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView,
+            /* [annotation][out] */ 
+            _Out_  HWND *phwnd) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryInsertEmbedded( 
-            /* [in] */ __RPC__in const GUID *pguidService,
-            /* [in] */ __RPC__in const FORMATETC *pFormatEtc,
-            /* [out] */ __RPC__out BOOL *pfInsertable) = 0;
+            /* [annotation][in] */ 
+            _In_  const GUID *pguidService,
+            /* [annotation][in] */ 
+            _In_  const FORMATETC *pFormatEtc,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfInsertable) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertTextAtSelection( 
-            /* [in] */ DWORD dwFlags,
-            /* [size_is][in] */ __RPC__in_ecount_full(cch) const WCHAR *pchText,
-            /* [in] */ ULONG cch,
-            /* [out] */ __RPC__deref_out_opt IAnchor **ppaStart,
-            /* [out] */ __RPC__deref_out_opt IAnchor **ppaEnd) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cch)  const WCHAR *pchText,
+            /* [annotation][in] */ 
+            _In_  ULONG cch,
+            /* [annotation][out] */ 
+            _Out_  IAnchor **ppaStart,
+            /* [annotation][out] */ 
+            _Out_  IAnchor **ppaEnd) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertEmbeddedAtSelection( 
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ __RPC__in_opt IDataObject *pDataObject,
-            /* [out] */ __RPC__deref_out_opt IAnchor **ppaStart,
-            /* [out] */ __RPC__deref_out_opt IAnchor **ppaEnd) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  IDataObject *pDataObject,
+            /* [annotation][out] */ 
+            _Out_  IAnchor **ppaStart,
+            /* [annotation][out] */ 
+            _Out_  IAnchor **ppaEnd) = 0;
         
     };
     
@@ -1862,7 +2391,8 @@ EXTERN_C const IID IID_ITextStoreAnchor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1877,201 +2407,292 @@ EXTERN_C const IID IID_ITextStoreAnchor;
         DECLSPEC_XFGVIRT(ITextStoreAnchor, AdviseSink)
         HRESULT ( STDMETHODCALLTYPE *AdviseSink )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][in] */ __RPC__in_opt IUnknown *punk,
-            /* [in] */ DWORD dwMask);
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][in] */ 
+            _In_  IUnknown *punk,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMask);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, UnadviseSink)
         HRESULT ( STDMETHODCALLTYPE *UnadviseSink )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ __RPC__in_opt IUnknown *punk);
+            /* [annotation][in] */ 
+            _In_  IUnknown *punk);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, RequestLock)
         HRESULT ( STDMETHODCALLTYPE *RequestLock )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ DWORD dwLockFlags,
-            /* [out] */ __RPC__out HRESULT *phrSession);
+            /* [annotation][in] */ 
+            _In_  DWORD dwLockFlags,
+            /* [annotation][out] */ 
+            _Out_  HRESULT *phrSession);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [out] */ __RPC__out TS_STATUS *pdcs);
+            /* [annotation][out] */ 
+            _Out_  TS_STATUS *pdcs);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, QueryInsert)
         HRESULT ( STDMETHODCALLTYPE *QueryInsert )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ __RPC__in_opt IAnchor *paTestStart,
-            /* [in] */ __RPC__in_opt IAnchor *paTestEnd,
-            /* [in] */ ULONG cch,
-            /* [out] */ __RPC__deref_out_opt IAnchor **ppaResultStart,
-            /* [out] */ __RPC__deref_out_opt IAnchor **ppaResultEnd);
+            /* [annotation][in] */ 
+            _In_  IAnchor *paTestStart,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paTestEnd,
+            /* [annotation][in] */ 
+            _In_  ULONG cch,
+            /* [annotation][out] */ 
+            _Out_  IAnchor **ppaResultStart,
+            /* [annotation][out] */ 
+            _Out_  IAnchor **ppaResultEnd);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, GetSelection)
         HRESULT ( STDMETHODCALLTYPE *GetSelection )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ ULONG ulIndex,
-            /* [in] */ ULONG ulCount,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ulCount, *pcFetched) TS_SELECTION_ANCHOR *pSelection,
-            /* [out] */ __RPC__out ULONG *pcFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG ulIndex,
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(ulCount,*pcFetched)  TS_SELECTION_ANCHOR *pSelection,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcFetched);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, SetSelection)
         HRESULT ( STDMETHODCALLTYPE *SetSelection )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ ULONG ulCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(ulCount) const TS_SELECTION_ANCHOR *pSelection);
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(ulCount)  const TS_SELECTION_ANCHOR *pSelection);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ __RPC__in_opt IAnchor *paStart,
-            /* [in] */ __RPC__in_opt IAnchor *paEnd,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(cchReq, *pcch) WCHAR *pchText,
-            /* [in] */ ULONG cchReq,
-            /* [out] */ __RPC__out ULONG *pcch,
-            /* [in] */ BOOL fUpdateAnchor);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paStart,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paEnd,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cchReq,*pcch)  WCHAR *pchText,
+            /* [annotation][in] */ 
+            _In_  ULONG cchReq,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcch,
+            /* [annotation][in] */ 
+            _In_  BOOL fUpdateAnchor);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, SetText)
         HRESULT ( STDMETHODCALLTYPE *SetText )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ __RPC__in_opt IAnchor *paStart,
-            /* [in] */ __RPC__in_opt IAnchor *paEnd,
-            /* [size_is][in] */ __RPC__in_ecount_full(cch) const WCHAR *pchText,
-            /* [in] */ ULONG cch);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paStart,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paEnd,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cch)  const WCHAR *pchText,
+            /* [annotation][in] */ 
+            _In_  ULONG cch);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, GetFormattedText)
         HRESULT ( STDMETHODCALLTYPE *GetFormattedText )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ __RPC__in_opt IAnchor *paStart,
-            /* [in] */ __RPC__in_opt IAnchor *paEnd,
-            /* [out] */ __RPC__deref_out_opt IDataObject **ppDataObject);
+            /* [annotation][in] */ 
+            _In_  IAnchor *paStart,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paEnd,
+            /* [annotation][out] */ 
+            _Out_  IDataObject **ppDataObject);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, GetEmbedded)
         HRESULT ( STDMETHODCALLTYPE *GetEmbedded )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ __RPC__in_opt IAnchor *paPos,
-            /* [in] */ __RPC__in REFGUID rguidService,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppunk);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paPos,
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidService,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  IUnknown **ppunk);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, InsertEmbedded)
         HRESULT ( STDMETHODCALLTYPE *InsertEmbedded )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ __RPC__in_opt IAnchor *paStart,
-            /* [in] */ __RPC__in_opt IAnchor *paEnd,
-            /* [in] */ __RPC__in_opt IDataObject *pDataObject);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paStart,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paEnd,
+            /* [annotation][in] */ 
+            _In_  IDataObject *pDataObject);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, RequestSupportedAttrs)
         HRESULT ( STDMETHODCALLTYPE *RequestSupportedAttrs )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, RequestAttrsAtPosition)
         HRESULT ( STDMETHODCALLTYPE *RequestAttrsAtPosition )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ __RPC__in_opt IAnchor *paPos,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  IAnchor *paPos,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, RequestAttrsTransitioningAtPosition)
         HRESULT ( STDMETHODCALLTYPE *RequestAttrsTransitioningAtPosition )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ __RPC__in_opt IAnchor *paPos,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  IAnchor *paPos,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, FindNextAttrTransition)
         HRESULT ( STDMETHODCALLTYPE *FindNextAttrTransition )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ __RPC__in_opt IAnchor *paStart,
-            /* [in] */ __RPC__in_opt IAnchor *paHalt,
-            /* [in] */ ULONG cFilterAttrs,
-            /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cFilterAttrs) const TS_ATTRID *paFilterAttrs,
-            /* [in] */ DWORD dwFlags,
-            /* [out] */ __RPC__out BOOL *pfFound,
-            /* [out] */ __RPC__out LONG *plFoundOffset);
+            /* [annotation][in] */ 
+            _In_  IAnchor *paStart,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paHalt,
+            /* [annotation][in] */ 
+            _In_  ULONG cFilterAttrs,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cFilterAttrs)  const TS_ATTRID *paFilterAttrs,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfFound,
+            /* [annotation][out] */ 
+            _Out_  LONG *plFoundOffset);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, RetrieveRequestedAttrs)
         HRESULT ( STDMETHODCALLTYPE *RetrieveRequestedAttrs )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ ULONG ulCount,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ulCount, *pcFetched) TS_ATTRVAL *paAttrVals,
-            /* [out] */ __RPC__out ULONG *pcFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(ulCount,*pcFetched)  TS_ATTRVAL *paAttrVals,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcFetched);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, GetStart)
         HRESULT ( STDMETHODCALLTYPE *GetStart )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [out] */ __RPC__deref_out_opt IAnchor **ppaStart);
+            /* [annotation][out] */ 
+            _Out_  IAnchor **ppaStart);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, GetEnd)
         HRESULT ( STDMETHODCALLTYPE *GetEnd )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [out] */ __RPC__deref_out_opt IAnchor **ppaEnd);
+            /* [annotation][out] */ 
+            _Out_  IAnchor **ppaEnd);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, GetActiveView)
         HRESULT ( STDMETHODCALLTYPE *GetActiveView )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [out] */ __RPC__out TsViewCookie *pvcView);
+            /* [annotation][out] */ 
+            _Out_  TsViewCookie *pvcView);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, GetAnchorFromPoint)
         HRESULT ( STDMETHODCALLTYPE *GetAnchorFromPoint )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ TsViewCookie vcView,
-            /* [in] */ __RPC__in const POINT *ptScreen,
-            /* [in] */ DWORD dwFlags,
-            /* [out] */ __RPC__deref_out_opt IAnchor **ppaSite);
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView,
+            /* [annotation][in] */ 
+            _In_  const POINT *ptScreen,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  IAnchor **ppaSite);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, GetTextExt)
         HRESULT ( STDMETHODCALLTYPE *GetTextExt )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ TsViewCookie vcView,
-            /* [in] */ __RPC__in_opt IAnchor *paStart,
-            /* [in] */ __RPC__in_opt IAnchor *paEnd,
-            /* [out] */ __RPC__out RECT *prc,
-            /* [out] */ __RPC__out BOOL *pfClipped);
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paStart,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paEnd,
+            /* [annotation][out] */ 
+            _Out_  RECT *prc,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfClipped);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, GetScreenExt)
         HRESULT ( STDMETHODCALLTYPE *GetScreenExt )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ TsViewCookie vcView,
-            /* [out] */ __RPC__out RECT *prc);
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView,
+            /* [annotation][out] */ 
+            _Out_  RECT *prc);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, GetWnd)
         HRESULT ( STDMETHODCALLTYPE *GetWnd )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ TsViewCookie vcView,
-            /* [out] */ __RPC__deref_out_opt HWND *phwnd);
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView,
+            /* [annotation][out] */ 
+            _Out_  HWND *phwnd);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, QueryInsertEmbedded)
         HRESULT ( STDMETHODCALLTYPE *QueryInsertEmbedded )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ __RPC__in const GUID *pguidService,
-            /* [in] */ __RPC__in const FORMATETC *pFormatEtc,
-            /* [out] */ __RPC__out BOOL *pfInsertable);
+            /* [annotation][in] */ 
+            _In_  const GUID *pguidService,
+            /* [annotation][in] */ 
+            _In_  const FORMATETC *pFormatEtc,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfInsertable);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, InsertTextAtSelection)
         HRESULT ( STDMETHODCALLTYPE *InsertTextAtSelection )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ DWORD dwFlags,
-            /* [size_is][in] */ __RPC__in_ecount_full(cch) const WCHAR *pchText,
-            /* [in] */ ULONG cch,
-            /* [out] */ __RPC__deref_out_opt IAnchor **ppaStart,
-            /* [out] */ __RPC__deref_out_opt IAnchor **ppaEnd);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cch)  const WCHAR *pchText,
+            /* [annotation][in] */ 
+            _In_  ULONG cch,
+            /* [annotation][out] */ 
+            _Out_  IAnchor **ppaStart,
+            /* [annotation][out] */ 
+            _Out_  IAnchor **ppaEnd);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchor, InsertEmbeddedAtSelection)
         HRESULT ( STDMETHODCALLTYPE *InsertEmbeddedAtSelection )( 
             __RPC__in ITextStoreAnchor * This,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ __RPC__in_opt IDataObject *pDataObject,
-            /* [out] */ __RPC__deref_out_opt IAnchor **ppaStart,
-            /* [out] */ __RPC__deref_out_opt IAnchor **ppaEnd);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  IDataObject *pDataObject,
+            /* [annotation][out] */ 
+            _Out_  IAnchor **ppaStart,
+            /* [annotation][out] */ 
+            _Out_  IAnchor **ppaEnd);
         
         END_INTERFACE
     } ITextStoreAnchorVtbl;
@@ -2204,27 +2825,38 @@ EXTERN_C const IID IID_ITextStoreAnchorSink;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnTextChange( 
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ __RPC__in_opt IAnchor *paStart,
-            /* [in] */ __RPC__in_opt IAnchor *paEnd) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paStart,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paEnd) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnSelectionChange( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnLayoutChange( 
-            /* [in] */ TsLayoutCode lcode,
-            /* [in] */ TsViewCookie vcView) = 0;
+            /* [annotation][in] */ 
+            _In_  TsLayoutCode lcode,
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnStatusChange( 
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnAttrsChange( 
-            /* [in] */ __RPC__in_opt IAnchor *paStart,
-            /* [in] */ __RPC__in_opt IAnchor *paEnd,
-            /* [in] */ ULONG cAttrs,
-            /* [size_is][in] */ __RPC__in_ecount_full(cAttrs) const TS_ATTRID *paAttrs) = 0;
+            /* [annotation][in] */ 
+            _In_  IAnchor *paStart,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paEnd,
+            /* [annotation][in] */ 
+            _In_  ULONG cAttrs,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cAttrs)  const TS_ATTRID *paAttrs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnLockGranted( 
-            /* [in] */ DWORD dwLockFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwLockFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnStartEditTransaction( void) = 0;
         
@@ -2242,7 +2874,8 @@ EXTERN_C const IID IID_ITextStoreAnchorSink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITextStoreAnchorSink * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2257,9 +2890,12 @@ EXTERN_C const IID IID_ITextStoreAnchorSink;
         DECLSPEC_XFGVIRT(ITextStoreAnchorSink, OnTextChange)
         HRESULT ( STDMETHODCALLTYPE *OnTextChange )( 
             __RPC__in ITextStoreAnchorSink * This,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ __RPC__in_opt IAnchor *paStart,
-            /* [in] */ __RPC__in_opt IAnchor *paEnd);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paStart,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paEnd);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchorSink, OnSelectionChange)
         HRESULT ( STDMETHODCALLTYPE *OnSelectionChange )( 
@@ -2268,26 +2904,34 @@ EXTERN_C const IID IID_ITextStoreAnchorSink;
         DECLSPEC_XFGVIRT(ITextStoreAnchorSink, OnLayoutChange)
         HRESULT ( STDMETHODCALLTYPE *OnLayoutChange )( 
             __RPC__in ITextStoreAnchorSink * This,
-            /* [in] */ TsLayoutCode lcode,
-            /* [in] */ TsViewCookie vcView);
+            /* [annotation][in] */ 
+            _In_  TsLayoutCode lcode,
+            /* [annotation][in] */ 
+            _In_  TsViewCookie vcView);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchorSink, OnStatusChange)
         HRESULT ( STDMETHODCALLTYPE *OnStatusChange )( 
             __RPC__in ITextStoreAnchorSink * This,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchorSink, OnAttrsChange)
         HRESULT ( STDMETHODCALLTYPE *OnAttrsChange )( 
             __RPC__in ITextStoreAnchorSink * This,
-            /* [in] */ __RPC__in_opt IAnchor *paStart,
-            /* [in] */ __RPC__in_opt IAnchor *paEnd,
-            /* [in] */ ULONG cAttrs,
-            /* [size_is][in] */ __RPC__in_ecount_full(cAttrs) const TS_ATTRID *paAttrs);
+            /* [annotation][in] */ 
+            _In_  IAnchor *paStart,
+            /* [annotation][in] */ 
+            _In_  IAnchor *paEnd,
+            /* [annotation][in] */ 
+            _In_  ULONG cAttrs,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cAttrs)  const TS_ATTRID *paAttrs);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchorSink, OnLockGranted)
         HRESULT ( STDMETHODCALLTYPE *OnLockGranted )( 
             __RPC__in ITextStoreAnchorSink * This,
-            /* [in] */ DWORD dwLockFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwLockFlags);
         
         DECLSPEC_XFGVIRT(ITextStoreAnchorSink, OnStartEditTransaction)
         HRESULT ( STDMETHODCALLTYPE *OnStartEditTransaction )( 

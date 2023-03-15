@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -143,10 +143,12 @@ EXTERN_C const IID IID_ITravelLogEntry;
     {
     public:
         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE GetTitle( 
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszTitle) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppszTitle) = 0;
         
         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE GetURL( 
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszURL) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppszURL) = 0;
         
     };
     
@@ -160,7 +162,8 @@ EXTERN_C const IID IID_ITravelLogEntry;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITravelLogEntry * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -175,12 +178,14 @@ EXTERN_C const IID IID_ITravelLogEntry;
         DECLSPEC_XFGVIRT(ITravelLogEntry, GetTitle)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTitle )( 
             __RPC__in ITravelLogEntry * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszTitle);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppszTitle);
         
         DECLSPEC_XFGVIRT(ITravelLogEntry, GetURL)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetURL )( 
             __RPC__in ITravelLogEntry * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszURL);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppszURL);
         
         END_INTERFACE
     } ITravelLogEntryVtbl;
@@ -238,16 +243,22 @@ EXTERN_C const IID IID_ITravelLogClient;
     {
     public:
         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE FindWindowByIndex( 
-            /* [in] */ DWORD dwID,
-            /* [out] */ __RPC__deref_out_opt IUnknown **ppunk) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwID,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppunk) = 0;
         
         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE GetWindowData( 
-            /* [in] */ __RPC__in_opt IStream *pStream,
-            /* [out] */ __RPC__out LPWINDOWDATA pWinData) = 0;
+            /* [annotation][in] */ 
+            _In_  IStream *pStream,
+            /* [annotation][out] */ 
+            _Out_  LPWINDOWDATA pWinData) = 0;
         
         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE LoadHistoryPosition( 
-            /* [in] */ __RPC__in LPWSTR pszUrlLocation,
-            /* [in] */ DWORD dwPosition) = 0;
+            /* [annotation][in] */ 
+            _In_  LPWSTR pszUrlLocation,
+            /* [annotation][in] */ 
+            _In_  DWORD dwPosition) = 0;
         
     };
     
@@ -261,7 +272,8 @@ EXTERN_C const IID IID_ITravelLogClient;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITravelLogClient * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -276,20 +288,26 @@ EXTERN_C const IID IID_ITravelLogClient;
         DECLSPEC_XFGVIRT(ITravelLogClient, FindWindowByIndex)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *FindWindowByIndex )( 
             __RPC__in ITravelLogClient * This,
-            /* [in] */ DWORD dwID,
-            /* [out] */ __RPC__deref_out_opt IUnknown **ppunk);
+            /* [annotation][in] */ 
+            _In_  DWORD dwID,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppunk);
         
         DECLSPEC_XFGVIRT(ITravelLogClient, GetWindowData)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetWindowData )( 
             __RPC__in ITravelLogClient * This,
-            /* [in] */ __RPC__in_opt IStream *pStream,
-            /* [out] */ __RPC__out LPWINDOWDATA pWinData);
+            /* [annotation][in] */ 
+            _In_  IStream *pStream,
+            /* [annotation][out] */ 
+            _Out_  LPWINDOWDATA pWinData);
         
         DECLSPEC_XFGVIRT(ITravelLogClient, LoadHistoryPosition)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *LoadHistoryPosition )( 
             __RPC__in ITravelLogClient * This,
-            /* [in] */ __RPC__in LPWSTR pszUrlLocation,
-            /* [in] */ DWORD dwPosition);
+            /* [annotation][in] */ 
+            _In_  LPWSTR pszUrlLocation,
+            /* [annotation][in] */ 
+            _In_  DWORD dwPosition);
         
         END_INTERFACE
     } ITravelLogClientVtbl;
@@ -350,17 +368,21 @@ EXTERN_C const IID IID_IEnumTravelLogEntry;
     {
     public:
         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG cElt,
+            /* [annotation][in] */ 
+            _In_  ULONG cElt,
             /* [length_is][size_is][out] */ __RPC__out_ecount_part(cElt, *pcEltFetched) ITravelLogEntry **rgElt,
-            /* [out] */ __RPC__out ULONG *pcEltFetched) = 0;
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcEltFetched) = 0;
         
         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG cElt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG cElt) = 0;
         
         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE Clone( 
-            /* [out] */ __RPC__deref_out_opt IEnumTravelLogEntry **ppEnum) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumTravelLogEntry **ppEnum) = 0;
         
     };
     
@@ -374,7 +396,8 @@ EXTERN_C const IID IID_IEnumTravelLogEntry;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumTravelLogEntry * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -389,14 +412,17 @@ EXTERN_C const IID IID_IEnumTravelLogEntry;
         DECLSPEC_XFGVIRT(IEnumTravelLogEntry, Next)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumTravelLogEntry * This,
-            /* [in] */ ULONG cElt,
+            /* [annotation][in] */ 
+            _In_  ULONG cElt,
             /* [length_is][size_is][out] */ __RPC__out_ecount_part(cElt, *pcEltFetched) ITravelLogEntry **rgElt,
-            /* [out] */ __RPC__out ULONG *pcEltFetched);
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcEltFetched);
         
         DECLSPEC_XFGVIRT(IEnumTravelLogEntry, Skip)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumTravelLogEntry * This,
-            /* [in] */ ULONG cElt);
+            /* [annotation][in] */ 
+            _In_  ULONG cElt);
         
         DECLSPEC_XFGVIRT(IEnumTravelLogEntry, Reset)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -405,7 +431,8 @@ EXTERN_C const IID IID_IEnumTravelLogEntry;
         DECLSPEC_XFGVIRT(IEnumTravelLogEntry, Clone)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumTravelLogEntry * This,
-            /* [out] */ __RPC__deref_out_opt IEnumTravelLogEntry **ppEnum);
+            /* [annotation][out] */ 
+            _Out_  IEnumTravelLogEntry **ppEnum);
         
         END_INTERFACE
     } IEnumTravelLogEntryVtbl;
@@ -482,34 +509,50 @@ EXTERN_C const IID IID_ITravelLogStg;
     {
     public:
         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE CreateEntry( 
-            /* [in] */ __RPC__in LPCWSTR pszUrl,
-            /* [in] */ __RPC__in LPCWSTR pszTitle,
-            /* [in] */ __RPC__in_opt ITravelLogEntry *ptleRelativeTo,
-            /* [in] */ BOOL fPrepend,
-            /* [out] */ __RPC__deref_out_opt ITravelLogEntry **pptle) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszUrl,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszTitle,
+            /* [annotation][in] */ 
+            _In_  ITravelLogEntry *ptleRelativeTo,
+            /* [annotation][in] */ 
+            _In_  BOOL fPrepend,
+            /* [annotation][out] */ 
+            _Out_  ITravelLogEntry **pptle) = 0;
         
         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE TravelTo( 
-            /* [in] */ __RPC__in_opt ITravelLogEntry *ptle) = 0;
+            /* [annotation][in] */ 
+            _In_  ITravelLogEntry *ptle) = 0;
         
         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE EnumEntries( 
-            /* [in] */ TLENUMF flags,
-            /* [out] */ __RPC__deref_out_opt IEnumTravelLogEntry **ppenum) = 0;
+            /* [annotation][in] */ 
+            _In_  TLENUMF flags,
+            /* [annotation][out] */ 
+            _Out_  IEnumTravelLogEntry **ppenum) = 0;
         
         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE FindEntries( 
-            /* [in] */ TLENUMF flags,
-            /* [in] */ __RPC__in LPCWSTR pszUrl,
-            /* [out] */ __RPC__deref_out_opt IEnumTravelLogEntry **ppenum) = 0;
+            /* [annotation][in] */ 
+            _In_  TLENUMF flags,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszUrl,
+            /* [annotation][out] */ 
+            _Out_  IEnumTravelLogEntry **ppenum) = 0;
         
         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [in] */ TLENUMF flags,
-            /* [out] */ __RPC__out DWORD *pcEntries) = 0;
+            /* [annotation][in] */ 
+            _In_  TLENUMF flags,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcEntries) = 0;
         
         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE RemoveEntry( 
-            /* [in] */ __RPC__in_opt ITravelLogEntry *ptle) = 0;
+            /* [annotation][in] */ 
+            _In_  ITravelLogEntry *ptle) = 0;
         
         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE GetRelativeEntry( 
-            /* [in] */ int iOffset,
-            /* [out] */ __RPC__deref_out_opt ITravelLogEntry **ptle) = 0;
+            /* [annotation][in] */ 
+            _In_  int iOffset,
+            /* [annotation][out] */ 
+            _Out_  ITravelLogEntry **ptle) = 0;
         
     };
     
@@ -523,7 +566,8 @@ EXTERN_C const IID IID_ITravelLogStg;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITravelLogStg * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -538,46 +582,62 @@ EXTERN_C const IID IID_ITravelLogStg;
         DECLSPEC_XFGVIRT(ITravelLogStg, CreateEntry)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateEntry )( 
             __RPC__in ITravelLogStg * This,
-            /* [in] */ __RPC__in LPCWSTR pszUrl,
-            /* [in] */ __RPC__in LPCWSTR pszTitle,
-            /* [in] */ __RPC__in_opt ITravelLogEntry *ptleRelativeTo,
-            /* [in] */ BOOL fPrepend,
-            /* [out] */ __RPC__deref_out_opt ITravelLogEntry **pptle);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszUrl,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszTitle,
+            /* [annotation][in] */ 
+            _In_  ITravelLogEntry *ptleRelativeTo,
+            /* [annotation][in] */ 
+            _In_  BOOL fPrepend,
+            /* [annotation][out] */ 
+            _Out_  ITravelLogEntry **pptle);
         
         DECLSPEC_XFGVIRT(ITravelLogStg, TravelTo)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *TravelTo )( 
             __RPC__in ITravelLogStg * This,
-            /* [in] */ __RPC__in_opt ITravelLogEntry *ptle);
+            /* [annotation][in] */ 
+            _In_  ITravelLogEntry *ptle);
         
         DECLSPEC_XFGVIRT(ITravelLogStg, EnumEntries)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *EnumEntries )( 
             __RPC__in ITravelLogStg * This,
-            /* [in] */ TLENUMF flags,
-            /* [out] */ __RPC__deref_out_opt IEnumTravelLogEntry **ppenum);
+            /* [annotation][in] */ 
+            _In_  TLENUMF flags,
+            /* [annotation][out] */ 
+            _Out_  IEnumTravelLogEntry **ppenum);
         
         DECLSPEC_XFGVIRT(ITravelLogStg, FindEntries)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *FindEntries )( 
             __RPC__in ITravelLogStg * This,
-            /* [in] */ TLENUMF flags,
-            /* [in] */ __RPC__in LPCWSTR pszUrl,
-            /* [out] */ __RPC__deref_out_opt IEnumTravelLogEntry **ppenum);
+            /* [annotation][in] */ 
+            _In_  TLENUMF flags,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszUrl,
+            /* [annotation][out] */ 
+            _Out_  IEnumTravelLogEntry **ppenum);
         
         DECLSPEC_XFGVIRT(ITravelLogStg, GetCount)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in ITravelLogStg * This,
-            /* [in] */ TLENUMF flags,
-            /* [out] */ __RPC__out DWORD *pcEntries);
+            /* [annotation][in] */ 
+            _In_  TLENUMF flags,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcEntries);
         
         DECLSPEC_XFGVIRT(ITravelLogStg, RemoveEntry)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *RemoveEntry )( 
             __RPC__in ITravelLogStg * This,
-            /* [in] */ __RPC__in_opt ITravelLogEntry *ptle);
+            /* [annotation][in] */ 
+            _In_  ITravelLogEntry *ptle);
         
         DECLSPEC_XFGVIRT(ITravelLogStg, GetRelativeEntry)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetRelativeEntry )( 
             __RPC__in ITravelLogStg * This,
-            /* [in] */ int iOffset,
-            /* [out] */ __RPC__deref_out_opt ITravelLogEntry **ptle);
+            /* [annotation][in] */ 
+            _In_  int iOffset,
+            /* [annotation][out] */ 
+            _Out_  ITravelLogEntry **ptle);
         
         END_INTERFACE
     } ITravelLogStgVtbl;

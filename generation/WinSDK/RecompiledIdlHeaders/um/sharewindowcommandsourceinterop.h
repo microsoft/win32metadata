@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -44,15 +44,6 @@
 #define DECLSPEC_XFGVIRT(base, func)
 #endif
 #endif
-
-#if defined(__cplusplus)
-#if defined(__MIDL_USE_C_ENUM)
-#define MIDL_ENUM enum
-#else
-#define MIDL_ENUM enum class
-#endif
-#endif
-
 
 /* Forward Declarations */ 
 
@@ -106,7 +97,8 @@ EXTERN_C const IID IID_IShareWindowCommandEventArgsInterop;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetWindow( 
-            /* [retval][out] */ __RPC__deref_out_opt HWND *value) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HWND *value) = 0;
         
     };
     
@@ -120,7 +112,8 @@ EXTERN_C const IID IID_IShareWindowCommandEventArgsInterop;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IShareWindowCommandEventArgsInterop * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -135,7 +128,8 @@ EXTERN_C const IID IID_IShareWindowCommandEventArgsInterop;
         DECLSPEC_XFGVIRT(IShareWindowCommandEventArgsInterop, GetWindow)
         HRESULT ( STDMETHODCALLTYPE *GetWindow )( 
             __RPC__in IShareWindowCommandEventArgsInterop * This,
-            /* [retval][out] */ __RPC__deref_out_opt HWND *value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HWND *value);
         
         END_INTERFACE
     } IShareWindowCommandEventArgsInteropVtbl;
@@ -190,9 +184,12 @@ EXTERN_C const IID IID_IShareWindowCommandSourceInterop;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetForWindow( 
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **shareWindowCommandSource) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **shareWindowCommandSource) = 0;
         
     };
     
@@ -206,7 +203,8 @@ EXTERN_C const IID IID_IShareWindowCommandSourceInterop;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IShareWindowCommandSourceInterop * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -221,9 +219,12 @@ EXTERN_C const IID IID_IShareWindowCommandSourceInterop;
         DECLSPEC_XFGVIRT(IShareWindowCommandSourceInterop, GetForWindow)
         HRESULT ( STDMETHODCALLTYPE *GetForWindow )( 
             __RPC__in IShareWindowCommandSourceInterop * This,
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **shareWindowCommandSource);
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **shareWindowCommandSource);
         
         END_INTERFACE
     } IShareWindowCommandSourceInteropVtbl;

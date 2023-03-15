@@ -119,8 +119,10 @@ EXTERN_C const IID IID_IDialEventSink;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnEvent( 
-            /* [in] */ DWORD dwEvent,
-            /* [in] */ DWORD dwStatus) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwEvent,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStatus) = 0;
         
     };
     
@@ -134,7 +136,8 @@ EXTERN_C const IID IID_IDialEventSink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDialEventSink * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -149,8 +152,10 @@ EXTERN_C const IID IID_IDialEventSink;
         DECLSPEC_XFGVIRT(IDialEventSink, OnEvent)
         HRESULT ( STDMETHODCALLTYPE *OnEvent )( 
             __RPC__in IDialEventSink * This,
-            /* [in] */ DWORD dwEvent,
-            /* [in] */ DWORD dwStatus);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEvent,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStatus);
         
         END_INTERFACE
     } IDialEventSinkVtbl;
@@ -205,27 +210,36 @@ EXTERN_C const IID IID_IDialEngine;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [in] */ __RPC__in LPCWSTR pwzConnectoid,
-            /* [in] */ __RPC__in_opt IDialEventSink *pIDES) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzConnectoid,
+            /* [annotation][in] */ 
+            _In_  IDialEventSink *pIDES) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProperty( 
-            /* [in] */ __RPC__in LPCWSTR pwzProperty,
-            /* [in] */ __RPC__in LPWSTR pwzValue,
-            /* [in] */ DWORD dwBufSize) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzProperty,
+            /* [annotation][in] */ 
+            _In_  LPWSTR pwzValue,
+            /* [annotation][in] */ 
+            _In_  DWORD dwBufSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetProperty( 
-            /* [in] */ __RPC__in LPCWSTR pwzProperty,
-            /* [in] */ __RPC__in LPCWSTR pwzValue) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzProperty,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Dial( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE HangUp( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetConnectedState( 
-            /* [out] */ __RPC__out DWORD *pdwState) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwState) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetConnectHandle( 
-            /* [out] */ __RPC__out DWORD_PTR *pdwHandle) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD_PTR *pdwHandle) = 0;
         
     };
     
@@ -239,7 +253,8 @@ EXTERN_C const IID IID_IDialEngine;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDialEngine * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -254,21 +269,28 @@ EXTERN_C const IID IID_IDialEngine;
         DECLSPEC_XFGVIRT(IDialEngine, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IDialEngine * This,
-            /* [in] */ __RPC__in LPCWSTR pwzConnectoid,
-            /* [in] */ __RPC__in_opt IDialEventSink *pIDES);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzConnectoid,
+            /* [annotation][in] */ 
+            _In_  IDialEventSink *pIDES);
         
         DECLSPEC_XFGVIRT(IDialEngine, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IDialEngine * This,
-            /* [in] */ __RPC__in LPCWSTR pwzProperty,
-            /* [in] */ __RPC__in LPWSTR pwzValue,
-            /* [in] */ DWORD dwBufSize);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzProperty,
+            /* [annotation][in] */ 
+            _In_  LPWSTR pwzValue,
+            /* [annotation][in] */ 
+            _In_  DWORD dwBufSize);
         
         DECLSPEC_XFGVIRT(IDialEngine, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IDialEngine * This,
-            /* [in] */ __RPC__in LPCWSTR pwzProperty,
-            /* [in] */ __RPC__in LPCWSTR pwzValue);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzProperty,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzValue);
         
         DECLSPEC_XFGVIRT(IDialEngine, Dial)
         HRESULT ( STDMETHODCALLTYPE *Dial )( 
@@ -281,12 +303,14 @@ EXTERN_C const IID IID_IDialEngine;
         DECLSPEC_XFGVIRT(IDialEngine, GetConnectedState)
         HRESULT ( STDMETHODCALLTYPE *GetConnectedState )( 
             __RPC__in IDialEngine * This,
-            /* [out] */ __RPC__out DWORD *pdwState);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwState);
         
         DECLSPEC_XFGVIRT(IDialEngine, GetConnectHandle)
         HRESULT ( STDMETHODCALLTYPE *GetConnectHandle )( 
             __RPC__in IDialEngine * This,
-            /* [out] */ __RPC__out DWORD_PTR *pdwHandle);
+            /* [annotation][out] */ 
+            _Out_  DWORD_PTR *pdwHandle);
         
         END_INTERFACE
     } IDialEngineVtbl;
@@ -359,11 +383,14 @@ EXTERN_C const IID IID_IDialBranding;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [in] */ __RPC__in LPCWSTR pwzConnectoid) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzConnectoid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBitmap( 
-            /* [in] */ DWORD dwIndex,
-            /* [out] */ __RPC__deref_out_opt HBITMAP *phBitmap) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][out] */ 
+            _Out_  HBITMAP *phBitmap) = 0;
         
     };
     
@@ -377,7 +404,8 @@ EXTERN_C const IID IID_IDialBranding;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDialBranding * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -392,13 +420,16 @@ EXTERN_C const IID IID_IDialBranding;
         DECLSPEC_XFGVIRT(IDialBranding, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IDialBranding * This,
-            /* [in] */ __RPC__in LPCWSTR pwzConnectoid);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzConnectoid);
         
         DECLSPEC_XFGVIRT(IDialBranding, GetBitmap)
         HRESULT ( STDMETHODCALLTYPE *GetBitmap )( 
             __RPC__in IDialBranding * This,
-            /* [in] */ DWORD dwIndex,
-            /* [out] */ __RPC__deref_out_opt HBITMAP *phBitmap);
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][out] */ 
+            _Out_  HBITMAP *phBitmap);
         
         END_INTERFACE
     } IDialBrandingVtbl;

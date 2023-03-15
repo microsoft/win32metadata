@@ -185,40 +185,52 @@ EXTERN_C const IID IID_ICertSrvSetupKeyInformation;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ProviderName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ProviderName( 
-            /* [in] */ __RPC__in const BSTR bstrVal) = 0;
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Length( 
-            /* [retval][out] */ __RPC__out LONG *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LONG *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Length( 
-            /* [in] */ LONG lVal) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG lVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Existing( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Existing( 
-            /* [in] */ VARIANT_BOOL bVal) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ContainerName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ContainerName( 
-            /* [in] */ __RPC__in const BSTR bstrVal) = 0;
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_HashAlgorithm( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_HashAlgorithm( 
-            /* [in] */ __RPC__in const BSTR bstrVal) = 0;
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ExistingCACertificate( 
-            /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ExistingCACertificate( 
-            /* [in] */ VARIANT varVal) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT varVal) = 0;
         
     };
     
@@ -232,7 +244,8 @@ EXTERN_C const IID IID_ICertSrvSetupKeyInformation;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertSrvSetupKeyInformation * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -247,23 +260,31 @@ EXTERN_C const IID IID_ICertSrvSetupKeyInformation;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertSrvSetupKeyInformation * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertSrvSetupKeyInformation * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertSrvSetupKeyInformation * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -288,62 +309,74 @@ EXTERN_C const IID IID_ICertSrvSetupKeyInformation;
         DECLSPEC_XFGVIRT(ICertSrvSetupKeyInformation, get_ProviderName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderName )( 
             __RPC__in ICertSrvSetupKeyInformation * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal);
         
         DECLSPEC_XFGVIRT(ICertSrvSetupKeyInformation, put_ProviderName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProviderName )( 
             __RPC__in ICertSrvSetupKeyInformation * This,
-            /* [in] */ __RPC__in const BSTR bstrVal);
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrVal);
         
         DECLSPEC_XFGVIRT(ICertSrvSetupKeyInformation, get_Length)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Length )( 
             __RPC__in ICertSrvSetupKeyInformation * This,
-            /* [retval][out] */ __RPC__out LONG *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LONG *pVal);
         
         DECLSPEC_XFGVIRT(ICertSrvSetupKeyInformation, put_Length)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Length )( 
             __RPC__in ICertSrvSetupKeyInformation * This,
-            /* [in] */ LONG lVal);
+            /* [annotation][in] */ 
+            _In_  LONG lVal);
         
         DECLSPEC_XFGVIRT(ICertSrvSetupKeyInformation, get_Existing)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Existing )( 
             __RPC__in ICertSrvSetupKeyInformation * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pVal);
         
         DECLSPEC_XFGVIRT(ICertSrvSetupKeyInformation, put_Existing)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Existing )( 
             __RPC__in ICertSrvSetupKeyInformation * This,
-            /* [in] */ VARIANT_BOOL bVal);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bVal);
         
         DECLSPEC_XFGVIRT(ICertSrvSetupKeyInformation, get_ContainerName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContainerName )( 
             __RPC__in ICertSrvSetupKeyInformation * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal);
         
         DECLSPEC_XFGVIRT(ICertSrvSetupKeyInformation, put_ContainerName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ContainerName )( 
             __RPC__in ICertSrvSetupKeyInformation * This,
-            /* [in] */ __RPC__in const BSTR bstrVal);
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrVal);
         
         DECLSPEC_XFGVIRT(ICertSrvSetupKeyInformation, get_HashAlgorithm)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_HashAlgorithm )( 
             __RPC__in ICertSrvSetupKeyInformation * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal);
         
         DECLSPEC_XFGVIRT(ICertSrvSetupKeyInformation, put_HashAlgorithm)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_HashAlgorithm )( 
             __RPC__in ICertSrvSetupKeyInformation * This,
-            /* [in] */ __RPC__in const BSTR bstrVal);
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrVal);
         
         DECLSPEC_XFGVIRT(ICertSrvSetupKeyInformation, get_ExistingCACertificate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExistingCACertificate )( 
             __RPC__in ICertSrvSetupKeyInformation * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(ICertSrvSetupKeyInformation, put_ExistingCACertificate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ExistingCACertificate )( 
             __RPC__in ICertSrvSetupKeyInformation * This,
-            /* [in] */ VARIANT varVal);
+            /* [annotation][in] */ 
+            _In_  VARIANT varVal);
         
         END_INTERFACE
     } ICertSrvSetupKeyInformationVtbl;
@@ -444,17 +477,22 @@ EXTERN_C const IID IID_ICertSrvSetupKeyInformationCollection;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **ppVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [in] */ LONG Index,
-            /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG Index,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [retval][out] */ __RPC__out LONG *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LONG *pVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Add( 
-            /* [in] */ __RPC__in_opt ICertSrvSetupKeyInformation *pIKeyInformation) = 0;
+            /* [annotation][in] */ 
+            _In_  ICertSrvSetupKeyInformation *pIKeyInformation) = 0;
         
     };
     
@@ -468,7 +506,8 @@ EXTERN_C const IID IID_ICertSrvSetupKeyInformationCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertSrvSetupKeyInformationCollection * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -483,23 +522,31 @@ EXTERN_C const IID IID_ICertSrvSetupKeyInformationCollection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertSrvSetupKeyInformationCollection * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertSrvSetupKeyInformationCollection * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertSrvSetupKeyInformationCollection * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -524,23 +571,28 @@ EXTERN_C const IID IID_ICertSrvSetupKeyInformationCollection;
         DECLSPEC_XFGVIRT(ICertSrvSetupKeyInformationCollection, get__NewEnum)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ICertSrvSetupKeyInformationCollection * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **ppVal);
         
         DECLSPEC_XFGVIRT(ICertSrvSetupKeyInformationCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ICertSrvSetupKeyInformationCollection * This,
-            /* [in] */ LONG Index,
-            /* [retval][out] */ __RPC__out VARIANT *pVal);
+            /* [annotation][in] */ 
+            _In_  LONG Index,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(ICertSrvSetupKeyInformationCollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ICertSrvSetupKeyInformationCollection * This,
-            /* [retval][out] */ __RPC__out LONG *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LONG *pVal);
         
         DECLSPEC_XFGVIRT(ICertSrvSetupKeyInformationCollection, Add)
         HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in ICertSrvSetupKeyInformationCollection * This,
-            /* [in] */ __RPC__in_opt ICertSrvSetupKeyInformation *pIKeyInformation);
+            /* [annotation][in] */ 
+            _In_  ICertSrvSetupKeyInformation *pIKeyInformation);
         
         END_INTERFACE
     } ICertSrvSetupKeyInformationCollectionVtbl;
@@ -648,76 +700,110 @@ EXTERN_C const IID IID_ICertSrvSetup;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CAErrorId( 
-            /* [retval][out] */ __RPC__out LONG *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LONG *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CAErrorString( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InitializeDefaults( 
-            /* [in] */ VARIANT_BOOL bServer,
-            /* [in] */ VARIANT_BOOL bClient) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bServer,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bClient) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCASetupProperty( 
-            /* [in] */ CASetupProperty propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *pPropertyValue) = 0;
+            /* [annotation][in] */ 
+            _In_  CASetupProperty propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pPropertyValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCASetupProperty( 
-            /* [in] */ CASetupProperty propertyId,
-            /* [in] */ __RPC__in VARIANT *pPropertyValue) = 0;
+            /* [annotation][in] */ 
+            _In_  CASetupProperty propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pPropertyValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsPropertyEditable( 
-            /* [in] */ CASetupProperty propertyId,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbEditable) = 0;
+            /* [annotation][in] */ 
+            _In_  CASetupProperty propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pbEditable) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSupportedCATypes( 
-            /* [retval][out] */ __RPC__out VARIANT *pCATypes) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pCATypes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProviderNameList( 
-            /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetKeyLengthList( 
-            /* [in] */ __RPC__in const BSTR bstrProviderName,
-            /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrProviderName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetHashAlgorithmList( 
-            /* [in] */ __RPC__in const BSTR bstrProviderName,
-            /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrProviderName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPrivateKeyContainerList( 
-            /* [in] */ __RPC__in const BSTR bstrProviderName,
-            /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrProviderName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetExistingCACertificates( 
-            /* [retval][out] */ __RPC__deref_out_opt ICertSrvSetupKeyInformationCollection **ppVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ICertSrvSetupKeyInformationCollection **ppVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CAImportPFX( 
-            /* [in] */ __RPC__in const BSTR bstrFileName,
-            /* [in] */ __RPC__in const BSTR bstrPasswd,
-            /* [in] */ VARIANT_BOOL bOverwriteExistingKey,
-            /* [retval][out] */ __RPC__deref_out_opt ICertSrvSetupKeyInformation **ppVal) = 0;
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrFileName,
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrPasswd,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bOverwriteExistingKey,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ICertSrvSetupKeyInformation **ppVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCADistinguishedName( 
-            /* [in] */ __RPC__in const BSTR bstrCADN,
-            /* [in] */ VARIANT_BOOL bIgnoreUnicode,
-            /* [in] */ VARIANT_BOOL bOverwriteExistingKey,
-            /* [in] */ VARIANT_BOOL bOverwriteExistingCAInDS) = 0;
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrCADN,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bIgnoreUnicode,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bOverwriteExistingKey,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bOverwriteExistingCAInDS) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDatabaseInformation( 
-            /* [in] */ __RPC__in const BSTR bstrDBDirectory,
-            /* [in] */ __RPC__in const BSTR bstrLogDirectory,
-            /* [in] */ __RPC__in const BSTR bstrSharedFolder,
-            /* [in] */ VARIANT_BOOL bForceOverwrite) = 0;
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrDBDirectory,
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrLogDirectory,
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrSharedFolder,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bForceOverwrite) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetParentCAInformation( 
-            /* [in] */ __RPC__in const BSTR bstrCAConfiguration) = 0;
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrCAConfiguration) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetWebCAInformation( 
-            /* [in] */ __RPC__in const BSTR bstrCAConfiguration) = 0;
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrCAConfiguration) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Install( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PreUnInstall( 
-            /* [in] */ VARIANT_BOOL bClientOnly) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bClientOnly) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PostUnInstall( void) = 0;
         
@@ -733,7 +819,8 @@ EXTERN_C const IID IID_ICertSrvSetup;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertSrvSetup * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -748,23 +835,31 @@ EXTERN_C const IID IID_ICertSrvSetup;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertSrvSetup * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertSrvSetup * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertSrvSetup * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -789,103 +884,136 @@ EXTERN_C const IID IID_ICertSrvSetup;
         DECLSPEC_XFGVIRT(ICertSrvSetup, get_CAErrorId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAErrorId )( 
             __RPC__in ICertSrvSetup * This,
-            /* [retval][out] */ __RPC__out LONG *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LONG *pVal);
         
         DECLSPEC_XFGVIRT(ICertSrvSetup, get_CAErrorString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAErrorString )( 
             __RPC__in ICertSrvSetup * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal);
         
         DECLSPEC_XFGVIRT(ICertSrvSetup, InitializeDefaults)
         HRESULT ( STDMETHODCALLTYPE *InitializeDefaults )( 
             __RPC__in ICertSrvSetup * This,
-            /* [in] */ VARIANT_BOOL bServer,
-            /* [in] */ VARIANT_BOOL bClient);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bServer,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bClient);
         
         DECLSPEC_XFGVIRT(ICertSrvSetup, GetCASetupProperty)
         HRESULT ( STDMETHODCALLTYPE *GetCASetupProperty )( 
             __RPC__in ICertSrvSetup * This,
-            /* [in] */ CASetupProperty propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *pPropertyValue);
+            /* [annotation][in] */ 
+            _In_  CASetupProperty propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pPropertyValue);
         
         DECLSPEC_XFGVIRT(ICertSrvSetup, SetCASetupProperty)
         HRESULT ( STDMETHODCALLTYPE *SetCASetupProperty )( 
             __RPC__in ICertSrvSetup * This,
-            /* [in] */ CASetupProperty propertyId,
-            /* [in] */ __RPC__in VARIANT *pPropertyValue);
+            /* [annotation][in] */ 
+            _In_  CASetupProperty propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pPropertyValue);
         
         DECLSPEC_XFGVIRT(ICertSrvSetup, IsPropertyEditable)
         HRESULT ( STDMETHODCALLTYPE *IsPropertyEditable )( 
             __RPC__in ICertSrvSetup * This,
-            /* [in] */ CASetupProperty propertyId,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbEditable);
+            /* [annotation][in] */ 
+            _In_  CASetupProperty propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pbEditable);
         
         DECLSPEC_XFGVIRT(ICertSrvSetup, GetSupportedCATypes)
         HRESULT ( STDMETHODCALLTYPE *GetSupportedCATypes )( 
             __RPC__in ICertSrvSetup * This,
-            /* [retval][out] */ __RPC__out VARIANT *pCATypes);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pCATypes);
         
         DECLSPEC_XFGVIRT(ICertSrvSetup, GetProviderNameList)
         HRESULT ( STDMETHODCALLTYPE *GetProviderNameList )( 
             __RPC__in ICertSrvSetup * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(ICertSrvSetup, GetKeyLengthList)
         HRESULT ( STDMETHODCALLTYPE *GetKeyLengthList )( 
             __RPC__in ICertSrvSetup * This,
-            /* [in] */ __RPC__in const BSTR bstrProviderName,
-            /* [retval][out] */ __RPC__out VARIANT *pVal);
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrProviderName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(ICertSrvSetup, GetHashAlgorithmList)
         HRESULT ( STDMETHODCALLTYPE *GetHashAlgorithmList )( 
             __RPC__in ICertSrvSetup * This,
-            /* [in] */ __RPC__in const BSTR bstrProviderName,
-            /* [retval][out] */ __RPC__out VARIANT *pVal);
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrProviderName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(ICertSrvSetup, GetPrivateKeyContainerList)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateKeyContainerList )( 
             __RPC__in ICertSrvSetup * This,
-            /* [in] */ __RPC__in const BSTR bstrProviderName,
-            /* [retval][out] */ __RPC__out VARIANT *pVal);
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrProviderName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(ICertSrvSetup, GetExistingCACertificates)
         HRESULT ( STDMETHODCALLTYPE *GetExistingCACertificates )( 
             __RPC__in ICertSrvSetup * This,
-            /* [retval][out] */ __RPC__deref_out_opt ICertSrvSetupKeyInformationCollection **ppVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ICertSrvSetupKeyInformationCollection **ppVal);
         
         DECLSPEC_XFGVIRT(ICertSrvSetup, CAImportPFX)
         HRESULT ( STDMETHODCALLTYPE *CAImportPFX )( 
             __RPC__in ICertSrvSetup * This,
-            /* [in] */ __RPC__in const BSTR bstrFileName,
-            /* [in] */ __RPC__in const BSTR bstrPasswd,
-            /* [in] */ VARIANT_BOOL bOverwriteExistingKey,
-            /* [retval][out] */ __RPC__deref_out_opt ICertSrvSetupKeyInformation **ppVal);
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrFileName,
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrPasswd,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bOverwriteExistingKey,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ICertSrvSetupKeyInformation **ppVal);
         
         DECLSPEC_XFGVIRT(ICertSrvSetup, SetCADistinguishedName)
         HRESULT ( STDMETHODCALLTYPE *SetCADistinguishedName )( 
             __RPC__in ICertSrvSetup * This,
-            /* [in] */ __RPC__in const BSTR bstrCADN,
-            /* [in] */ VARIANT_BOOL bIgnoreUnicode,
-            /* [in] */ VARIANT_BOOL bOverwriteExistingKey,
-            /* [in] */ VARIANT_BOOL bOverwriteExistingCAInDS);
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrCADN,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bIgnoreUnicode,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bOverwriteExistingKey,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bOverwriteExistingCAInDS);
         
         DECLSPEC_XFGVIRT(ICertSrvSetup, SetDatabaseInformation)
         HRESULT ( STDMETHODCALLTYPE *SetDatabaseInformation )( 
             __RPC__in ICertSrvSetup * This,
-            /* [in] */ __RPC__in const BSTR bstrDBDirectory,
-            /* [in] */ __RPC__in const BSTR bstrLogDirectory,
-            /* [in] */ __RPC__in const BSTR bstrSharedFolder,
-            /* [in] */ VARIANT_BOOL bForceOverwrite);
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrDBDirectory,
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrLogDirectory,
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrSharedFolder,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bForceOverwrite);
         
         DECLSPEC_XFGVIRT(ICertSrvSetup, SetParentCAInformation)
         HRESULT ( STDMETHODCALLTYPE *SetParentCAInformation )( 
             __RPC__in ICertSrvSetup * This,
-            /* [in] */ __RPC__in const BSTR bstrCAConfiguration);
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrCAConfiguration);
         
         DECLSPEC_XFGVIRT(ICertSrvSetup, SetWebCAInformation)
         HRESULT ( STDMETHODCALLTYPE *SetWebCAInformation )( 
             __RPC__in ICertSrvSetup * This,
-            /* [in] */ __RPC__in const BSTR bstrCAConfiguration);
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrCAConfiguration);
         
         DECLSPEC_XFGVIRT(ICertSrvSetup, Install)
         HRESULT ( STDMETHODCALLTYPE *Install )( 
@@ -894,7 +1022,8 @@ EXTERN_C const IID IID_ICertSrvSetup;
         DECLSPEC_XFGVIRT(ICertSrvSetup, PreUnInstall)
         HRESULT ( STDMETHODCALLTYPE *PreUnInstall )( 
             __RPC__in ICertSrvSetup * This,
-            /* [in] */ VARIANT_BOOL bClientOnly);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bClientOnly);
         
         DECLSPEC_XFGVIRT(ICertSrvSetup, PostUnInstall)
         HRESULT ( STDMETHODCALLTYPE *PostUnInstall )( 
@@ -1050,36 +1179,50 @@ EXTERN_C const IID IID_IMSCEPSetup;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MSCEPErrorId( 
-            /* [retval][out] */ __RPC__out LONG *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LONG *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MSCEPErrorString( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InitializeDefaults( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMSCEPSetupProperty( 
-            /* [in] */ MSCEPSetupProperty propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
+            /* [annotation][in] */ 
+            _In_  MSCEPSetupProperty propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetMSCEPSetupProperty( 
-            /* [in] */ MSCEPSetupProperty propertyId,
-            /* [in] */ __RPC__in VARIANT *pPropertyValue) = 0;
+            /* [annotation][in] */ 
+            _In_  MSCEPSetupProperty propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pPropertyValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAccountInformation( 
-            /* [in] */ __RPC__in const BSTR bstrUserName,
-            /* [in] */ __RPC__in const BSTR bstrPassword) = 0;
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrUserName,
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrPassword) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsMSCEPStoreEmpty( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbEmpty) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pbEmpty) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProviderNameList( 
-            /* [in] */ VARIANT_BOOL bExchange,
-            /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bExchange,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetKeyLengthList( 
-            /* [in] */ VARIANT_BOOL bExchange,
-            /* [in] */ __RPC__in const BSTR bstrProviderName,
-            /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bExchange,
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrProviderName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Install( void) = 0;
         
@@ -1099,7 +1242,8 @@ EXTERN_C const IID IID_IMSCEPSetup;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSCEPSetup * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1114,23 +1258,31 @@ EXTERN_C const IID IID_IMSCEPSetup;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSCEPSetup * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSCEPSetup * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSCEPSetup * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1155,12 +1307,14 @@ EXTERN_C const IID IID_IMSCEPSetup;
         DECLSPEC_XFGVIRT(IMSCEPSetup, get_MSCEPErrorId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MSCEPErrorId )( 
             __RPC__in IMSCEPSetup * This,
-            /* [retval][out] */ __RPC__out LONG *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LONG *pVal);
         
         DECLSPEC_XFGVIRT(IMSCEPSetup, get_MSCEPErrorString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MSCEPErrorString )( 
             __RPC__in IMSCEPSetup * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IMSCEPSetup, InitializeDefaults)
         HRESULT ( STDMETHODCALLTYPE *InitializeDefaults )( 
@@ -1169,38 +1323,50 @@ EXTERN_C const IID IID_IMSCEPSetup;
         DECLSPEC_XFGVIRT(IMSCEPSetup, GetMSCEPSetupProperty)
         HRESULT ( STDMETHODCALLTYPE *GetMSCEPSetupProperty )( 
             __RPC__in IMSCEPSetup * This,
-            /* [in] */ MSCEPSetupProperty propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *pVal);
+            /* [annotation][in] */ 
+            _In_  MSCEPSetupProperty propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(IMSCEPSetup, SetMSCEPSetupProperty)
         HRESULT ( STDMETHODCALLTYPE *SetMSCEPSetupProperty )( 
             __RPC__in IMSCEPSetup * This,
-            /* [in] */ MSCEPSetupProperty propertyId,
-            /* [in] */ __RPC__in VARIANT *pPropertyValue);
+            /* [annotation][in] */ 
+            _In_  MSCEPSetupProperty propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pPropertyValue);
         
         DECLSPEC_XFGVIRT(IMSCEPSetup, SetAccountInformation)
         HRESULT ( STDMETHODCALLTYPE *SetAccountInformation )( 
             __RPC__in IMSCEPSetup * This,
-            /* [in] */ __RPC__in const BSTR bstrUserName,
-            /* [in] */ __RPC__in const BSTR bstrPassword);
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrUserName,
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrPassword);
         
         DECLSPEC_XFGVIRT(IMSCEPSetup, IsMSCEPStoreEmpty)
         HRESULT ( STDMETHODCALLTYPE *IsMSCEPStoreEmpty )( 
             __RPC__in IMSCEPSetup * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbEmpty);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pbEmpty);
         
         DECLSPEC_XFGVIRT(IMSCEPSetup, GetProviderNameList)
         HRESULT ( STDMETHODCALLTYPE *GetProviderNameList )( 
             __RPC__in IMSCEPSetup * This,
-            /* [in] */ VARIANT_BOOL bExchange,
-            /* [retval][out] */ __RPC__out VARIANT *pVal);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bExchange,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(IMSCEPSetup, GetKeyLengthList)
         HRESULT ( STDMETHODCALLTYPE *GetKeyLengthList )( 
             __RPC__in IMSCEPSetup * This,
-            /* [in] */ VARIANT_BOOL bExchange,
-            /* [in] */ __RPC__in const BSTR bstrProviderName,
-            /* [retval][out] */ __RPC__out VARIANT *pVal);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bExchange,
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrProviderName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(IMSCEPSetup, Install)
         HRESULT ( STDMETHODCALLTYPE *Install )( 
@@ -1333,21 +1499,28 @@ EXTERN_C const IID IID_ICertificateEnrollmentServerSetup;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ErrorString( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InitializeInstallDefaults( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProperty( 
-            /* [in] */ CESSetupProperty propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *pPropertyValue) = 0;
+            /* [annotation][in] */ 
+            _In_  CESSetupProperty propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pPropertyValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetProperty( 
-            /* [in] */ CESSetupProperty propertyId,
-            /* [in] */ __RPC__in VARIANT *pPropertyValue) = 0;
+            /* [annotation][in] */ 
+            _In_  CESSetupProperty propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pPropertyValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetApplicationPoolCredentials( 
-            /* [in] */ __RPC__in const BSTR bstrUsername,
-            /* [in] */ __RPC__in const BSTR bstrPassword) = 0;
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrUsername,
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrPassword) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Install( void) = 0;
         
@@ -1367,7 +1540,8 @@ EXTERN_C const IID IID_ICertificateEnrollmentServerSetup;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertificateEnrollmentServerSetup * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1382,23 +1556,31 @@ EXTERN_C const IID IID_ICertificateEnrollmentServerSetup;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertificateEnrollmentServerSetup * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertificateEnrollmentServerSetup * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertificateEnrollmentServerSetup * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1423,7 +1605,8 @@ EXTERN_C const IID IID_ICertificateEnrollmentServerSetup;
         DECLSPEC_XFGVIRT(ICertificateEnrollmentServerSetup, get_ErrorString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ErrorString )( 
             __RPC__in ICertificateEnrollmentServerSetup * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal);
         
         DECLSPEC_XFGVIRT(ICertificateEnrollmentServerSetup, InitializeInstallDefaults)
         HRESULT ( STDMETHODCALLTYPE *InitializeInstallDefaults )( 
@@ -1432,20 +1615,26 @@ EXTERN_C const IID IID_ICertificateEnrollmentServerSetup;
         DECLSPEC_XFGVIRT(ICertificateEnrollmentServerSetup, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in ICertificateEnrollmentServerSetup * This,
-            /* [in] */ CESSetupProperty propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *pPropertyValue);
+            /* [annotation][in] */ 
+            _In_  CESSetupProperty propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pPropertyValue);
         
         DECLSPEC_XFGVIRT(ICertificateEnrollmentServerSetup, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in ICertificateEnrollmentServerSetup * This,
-            /* [in] */ CESSetupProperty propertyId,
-            /* [in] */ __RPC__in VARIANT *pPropertyValue);
+            /* [annotation][in] */ 
+            _In_  CESSetupProperty propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pPropertyValue);
         
         DECLSPEC_XFGVIRT(ICertificateEnrollmentServerSetup, SetApplicationPoolCredentials)
         HRESULT ( STDMETHODCALLTYPE *SetApplicationPoolCredentials )( 
             __RPC__in ICertificateEnrollmentServerSetup * This,
-            /* [in] */ __RPC__in const BSTR bstrUsername,
-            /* [in] */ __RPC__in const BSTR bstrPassword);
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrUsername,
+            /* [annotation][in] */ 
+            _In_  const BSTR bstrPassword);
         
         DECLSPEC_XFGVIRT(ICertificateEnrollmentServerSetup, Install)
         HRESULT ( STDMETHODCALLTYPE *Install )( 
@@ -1558,17 +1747,22 @@ EXTERN_C const IID IID_ICertificateEnrollmentPolicyServerSetup;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ErrorString( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InitializeInstallDefaults( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProperty( 
-            /* [in] */ CEPSetupProperty propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *pPropertyValue) = 0;
+            /* [annotation][in] */ 
+            _In_  CEPSetupProperty propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pPropertyValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetProperty( 
-            /* [in] */ CEPSetupProperty propertyId,
-            /* [in] */ __RPC__in VARIANT *pPropertyValue) = 0;
+            /* [annotation][in] */ 
+            _In_  CEPSetupProperty propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pPropertyValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Install( void) = 0;
         
@@ -1587,7 +1781,8 @@ EXTERN_C const IID IID_ICertificateEnrollmentPolicyServerSetup;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertificateEnrollmentPolicyServerSetup * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1602,23 +1797,31 @@ EXTERN_C const IID IID_ICertificateEnrollmentPolicyServerSetup;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertificateEnrollmentPolicyServerSetup * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertificateEnrollmentPolicyServerSetup * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertificateEnrollmentPolicyServerSetup * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1643,7 +1846,8 @@ EXTERN_C const IID IID_ICertificateEnrollmentPolicyServerSetup;
         DECLSPEC_XFGVIRT(ICertificateEnrollmentPolicyServerSetup, get_ErrorString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ErrorString )( 
             __RPC__in ICertificateEnrollmentPolicyServerSetup * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal);
         
         DECLSPEC_XFGVIRT(ICertificateEnrollmentPolicyServerSetup, InitializeInstallDefaults)
         HRESULT ( STDMETHODCALLTYPE *InitializeInstallDefaults )( 
@@ -1652,14 +1856,18 @@ EXTERN_C const IID IID_ICertificateEnrollmentPolicyServerSetup;
         DECLSPEC_XFGVIRT(ICertificateEnrollmentPolicyServerSetup, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in ICertificateEnrollmentPolicyServerSetup * This,
-            /* [in] */ CEPSetupProperty propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *pPropertyValue);
+            /* [annotation][in] */ 
+            _In_  CEPSetupProperty propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pPropertyValue);
         
         DECLSPEC_XFGVIRT(ICertificateEnrollmentPolicyServerSetup, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in ICertificateEnrollmentPolicyServerSetup * This,
-            /* [in] */ CEPSetupProperty propertyId,
-            /* [in] */ __RPC__in VARIANT *pPropertyValue);
+            /* [annotation][in] */ 
+            _In_  CEPSetupProperty propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pPropertyValue);
         
         DECLSPEC_XFGVIRT(ICertificateEnrollmentPolicyServerSetup, Install)
         HRESULT ( STDMETHODCALLTYPE *Install )( 

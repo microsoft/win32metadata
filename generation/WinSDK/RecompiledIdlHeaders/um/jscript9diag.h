@@ -169,10 +169,14 @@ EXTERN_C const IID IID_IJsDebug;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OpenVirtualProcess( 
-            /* [in] */ DWORD processId,
-            /* [in] */ UINT64 runtimeJsBaseAddress,
-            /* [in] */ IJsDebugDataTarget *pDataTarget,
-            /* [out] */ IJsDebugProcess **ppProcess) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD processId,
+            /* [annotation][in] */ 
+            _In_  UINT64 runtimeJsBaseAddress,
+            /* [annotation][in] */ 
+            _In_  IJsDebugDataTarget *pDataTarget,
+            /* [annotation][out] */ 
+            _Out_  IJsDebugProcess **ppProcess) = 0;
         
     };
     
@@ -186,7 +190,8 @@ EXTERN_C const IID IID_IJsDebug;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IJsDebug * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -201,10 +206,14 @@ EXTERN_C const IID IID_IJsDebug;
         DECLSPEC_XFGVIRT(IJsDebug, OpenVirtualProcess)
         HRESULT ( STDMETHODCALLTYPE *OpenVirtualProcess )( 
             IJsDebug * This,
-            /* [in] */ DWORD processId,
-            /* [in] */ UINT64 runtimeJsBaseAddress,
-            /* [in] */ IJsDebugDataTarget *pDataTarget,
-            /* [out] */ IJsDebugProcess **ppProcess);
+            /* [annotation][in] */ 
+            _In_  DWORD processId,
+            /* [annotation][in] */ 
+            _In_  UINT64 runtimeJsBaseAddress,
+            /* [annotation][in] */ 
+            _In_  IJsDebugDataTarget *pDataTarget,
+            /* [annotation][out] */ 
+            _Out_  IJsDebugProcess **ppProcess);
         
         END_INTERFACE
     } IJsDebugVtbl;
@@ -259,21 +268,30 @@ EXTERN_C const IID IID_IJsDebugProcess;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateStackWalker( 
-            /* [in] */ DWORD threadId,
-            /* [out] */ IJsDebugStackWalker **ppStackWalker) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD threadId,
+            /* [annotation][out] */ 
+            _Out_  IJsDebugStackWalker **ppStackWalker) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateBreakPoint( 
-            /* [in] */ UINT64 documentId,
-            /* [in] */ DWORD characterOffset,
-            /* [in] */ DWORD characterCount,
-            /* [in] */ BOOL isEnabled,
-            /* [out] */ IJsDebugBreakPoint **ppDebugBreakPoint) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT64 documentId,
+            /* [annotation][in] */ 
+            _In_  DWORD characterOffset,
+            /* [annotation][in] */ 
+            _In_  DWORD characterCount,
+            /* [annotation][in] */ 
+            _In_  BOOL isEnabled,
+            /* [annotation][out] */ 
+            _Out_  IJsDebugBreakPoint **ppDebugBreakPoint) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PerformAsyncBreak( 
-            /* [in] */ DWORD threadId) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD threadId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetExternalStepAddress( 
-            /* [out] */ UINT64 *pCodeAddress) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pCodeAddress) = 0;
         
     };
     
@@ -287,7 +305,8 @@ EXTERN_C const IID IID_IJsDebugProcess;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IJsDebugProcess * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -302,27 +321,36 @@ EXTERN_C const IID IID_IJsDebugProcess;
         DECLSPEC_XFGVIRT(IJsDebugProcess, CreateStackWalker)
         HRESULT ( STDMETHODCALLTYPE *CreateStackWalker )( 
             IJsDebugProcess * This,
-            /* [in] */ DWORD threadId,
-            /* [out] */ IJsDebugStackWalker **ppStackWalker);
+            /* [annotation][in] */ 
+            _In_  DWORD threadId,
+            /* [annotation][out] */ 
+            _Out_  IJsDebugStackWalker **ppStackWalker);
         
         DECLSPEC_XFGVIRT(IJsDebugProcess, CreateBreakPoint)
         HRESULT ( STDMETHODCALLTYPE *CreateBreakPoint )( 
             IJsDebugProcess * This,
-            /* [in] */ UINT64 documentId,
-            /* [in] */ DWORD characterOffset,
-            /* [in] */ DWORD characterCount,
-            /* [in] */ BOOL isEnabled,
-            /* [out] */ IJsDebugBreakPoint **ppDebugBreakPoint);
+            /* [annotation][in] */ 
+            _In_  UINT64 documentId,
+            /* [annotation][in] */ 
+            _In_  DWORD characterOffset,
+            /* [annotation][in] */ 
+            _In_  DWORD characterCount,
+            /* [annotation][in] */ 
+            _In_  BOOL isEnabled,
+            /* [annotation][out] */ 
+            _Out_  IJsDebugBreakPoint **ppDebugBreakPoint);
         
         DECLSPEC_XFGVIRT(IJsDebugProcess, PerformAsyncBreak)
         HRESULT ( STDMETHODCALLTYPE *PerformAsyncBreak )( 
             IJsDebugProcess * This,
-            /* [in] */ DWORD threadId);
+            /* [annotation][in] */ 
+            _In_  DWORD threadId);
         
         DECLSPEC_XFGVIRT(IJsDebugProcess, GetExternalStepAddress)
         HRESULT ( STDMETHODCALLTYPE *GetExternalStepAddress )( 
             IJsDebugProcess * This,
-            /* [out] */ UINT64 *pCodeAddress);
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pCodeAddress);
         
         END_INTERFACE
     } IJsDebugProcessVtbl;
@@ -386,7 +414,8 @@ EXTERN_C const IID IID_IJsDebugStackWalker;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetNext( 
-            /* [out] */ IJsDebugFrame **ppFrame) = 0;
+            /* [annotation][out] */ 
+            _Out_  IJsDebugFrame **ppFrame) = 0;
         
     };
     
@@ -400,7 +429,8 @@ EXTERN_C const IID IID_IJsDebugStackWalker;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IJsDebugStackWalker * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -415,7 +445,8 @@ EXTERN_C const IID IID_IJsDebugStackWalker;
         DECLSPEC_XFGVIRT(IJsDebugStackWalker, GetNext)
         HRESULT ( STDMETHODCALLTYPE *GetNext )( 
             IJsDebugStackWalker * This,
-            /* [out] */ IJsDebugFrame **ppFrame);
+            /* [annotation][out] */ 
+            _Out_  IJsDebugFrame **ppFrame);
         
         END_INTERFACE
     } IJsDebugStackWalkerVtbl;
@@ -470,32 +501,46 @@ EXTERN_C const IID IID_IJsDebugFrame;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetStackRange( 
-            /* [out] */ UINT64 *pStart,
-            /* [out] */ UINT64 *pEnd) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pStart,
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pEnd) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetName( 
-            /* [out] */ BSTR *pName) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDocumentPositionWithId( 
-            /* [out] */ UINT64 *pDocumentId,
-            /* [out] */ DWORD *pCharacterOffset,
-            /* [out] */ DWORD *pStatementCharCount) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pDocumentId,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pCharacterOffset,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pStatementCharCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDocumentPositionWithName( 
-            /* [out] */ BSTR *pDocumentName,
-            /* [out] */ DWORD *pLine,
-            /* [out] */ DWORD *pColumn) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pDocumentName,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pLine,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pColumn) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDebugProperty( 
-            /* [out] */ IJsDebugProperty **ppDebugProperty) = 0;
+            /* [annotation][out] */ 
+            _Out_  IJsDebugProperty **ppDebugProperty) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetReturnAddress( 
-            /* [out] */ UINT64 *pReturnAddress) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pReturnAddress) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Evaluate( 
-            /* [in] */ LPCOLESTR pExpressionText,
-            /* [out] */ IJsDebugProperty **ppDebugProperty,
-            /* [out] */ BSTR *pError) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pExpressionText,
+            /* [annotation][out] */ 
+            _Out_  IJsDebugProperty **ppDebugProperty,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pError) = 0;
         
     };
     
@@ -509,7 +554,8 @@ EXTERN_C const IID IID_IJsDebugFrame;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IJsDebugFrame * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -524,44 +570,58 @@ EXTERN_C const IID IID_IJsDebugFrame;
         DECLSPEC_XFGVIRT(IJsDebugFrame, GetStackRange)
         HRESULT ( STDMETHODCALLTYPE *GetStackRange )( 
             IJsDebugFrame * This,
-            /* [out] */ UINT64 *pStart,
-            /* [out] */ UINT64 *pEnd);
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pStart,
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pEnd);
         
         DECLSPEC_XFGVIRT(IJsDebugFrame, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             IJsDebugFrame * This,
-            /* [out] */ BSTR *pName);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pName);
         
         DECLSPEC_XFGVIRT(IJsDebugFrame, GetDocumentPositionWithId)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentPositionWithId )( 
             IJsDebugFrame * This,
-            /* [out] */ UINT64 *pDocumentId,
-            /* [out] */ DWORD *pCharacterOffset,
-            /* [out] */ DWORD *pStatementCharCount);
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pDocumentId,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pCharacterOffset,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pStatementCharCount);
         
         DECLSPEC_XFGVIRT(IJsDebugFrame, GetDocumentPositionWithName)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentPositionWithName )( 
             IJsDebugFrame * This,
-            /* [out] */ BSTR *pDocumentName,
-            /* [out] */ DWORD *pLine,
-            /* [out] */ DWORD *pColumn);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pDocumentName,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pLine,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pColumn);
         
         DECLSPEC_XFGVIRT(IJsDebugFrame, GetDebugProperty)
         HRESULT ( STDMETHODCALLTYPE *GetDebugProperty )( 
             IJsDebugFrame * This,
-            /* [out] */ IJsDebugProperty **ppDebugProperty);
+            /* [annotation][out] */ 
+            _Out_  IJsDebugProperty **ppDebugProperty);
         
         DECLSPEC_XFGVIRT(IJsDebugFrame, GetReturnAddress)
         HRESULT ( STDMETHODCALLTYPE *GetReturnAddress )( 
             IJsDebugFrame * This,
-            /* [out] */ UINT64 *pReturnAddress);
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pReturnAddress);
         
         DECLSPEC_XFGVIRT(IJsDebugFrame, Evaluate)
         HRESULT ( STDMETHODCALLTYPE *Evaluate )( 
             IJsDebugFrame * This,
-            /* [in] */ LPCOLESTR pExpressionText,
-            /* [out] */ IJsDebugProperty **ppDebugProperty,
-            /* [out] */ BSTR *pError);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pExpressionText,
+            /* [annotation][out] */ 
+            _Out_  IJsDebugProperty **ppDebugProperty,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pError);
         
         END_INTERFACE
     } IJsDebugFrameVtbl;
@@ -672,12 +732,16 @@ EXTERN_C const IID IID_IJsDebugProperty;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetPropertyInfo( 
-            /* [in] */ UINT nRadix,
-            /* [out] */ JsDebugPropertyInfo *pPropertyInfo) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT nRadix,
+            /* [annotation][out] */ 
+            _Out_  JsDebugPropertyInfo *pPropertyInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMembers( 
-            /* [in] */ JS_PROPERTY_MEMBERS members,
-            /* [out] */ IJsEnumDebugProperty **ppEnum) = 0;
+            /* [annotation][in] */ 
+            _In_  JS_PROPERTY_MEMBERS members,
+            /* [annotation][out] */ 
+            _Out_  IJsEnumDebugProperty **ppEnum) = 0;
         
     };
     
@@ -691,7 +755,8 @@ EXTERN_C const IID IID_IJsDebugProperty;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IJsDebugProperty * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -706,14 +771,18 @@ EXTERN_C const IID IID_IJsDebugProperty;
         DECLSPEC_XFGVIRT(IJsDebugProperty, GetPropertyInfo)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyInfo )( 
             IJsDebugProperty * This,
-            /* [in] */ UINT nRadix,
-            /* [out] */ JsDebugPropertyInfo *pPropertyInfo);
+            /* [annotation][in] */ 
+            _In_  UINT nRadix,
+            /* [annotation][out] */ 
+            _Out_  JsDebugPropertyInfo *pPropertyInfo);
         
         DECLSPEC_XFGVIRT(IJsDebugProperty, GetMembers)
         HRESULT ( STDMETHODCALLTYPE *GetMembers )( 
             IJsDebugProperty * This,
-            /* [in] */ JS_PROPERTY_MEMBERS members,
-            /* [out] */ IJsEnumDebugProperty **ppEnum);
+            /* [annotation][in] */ 
+            _In_  JS_PROPERTY_MEMBERS members,
+            /* [annotation][out] */ 
+            _Out_  IJsEnumDebugProperty **ppEnum);
         
         END_INTERFACE
     } IJsDebugPropertyVtbl;
@@ -771,12 +840,16 @@ EXTERN_C const IID IID_IJsEnumDebugProperty;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG count,
-            /* [length_is][size_is][out] */ IJsDebugProperty **ppDebugProperty,
-            /* [out] */ ULONG *pActualCount) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG count,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(count,*pActualCount)  IJsDebugProperty **ppDebugProperty,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pActualCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [out] */ ULONG *pCount) = 0;
+            /* [annotation][out] */ 
+            _Out_  ULONG *pCount) = 0;
         
     };
     
@@ -790,7 +863,8 @@ EXTERN_C const IID IID_IJsEnumDebugProperty;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IJsEnumDebugProperty * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -805,14 +879,18 @@ EXTERN_C const IID IID_IJsEnumDebugProperty;
         DECLSPEC_XFGVIRT(IJsEnumDebugProperty, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IJsEnumDebugProperty * This,
-            /* [in] */ ULONG count,
-            /* [length_is][size_is][out] */ IJsDebugProperty **ppDebugProperty,
-            /* [out] */ ULONG *pActualCount);
+            /* [annotation][in] */ 
+            _In_  ULONG count,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(count,*pActualCount)  IJsDebugProperty **ppDebugProperty,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pActualCount);
         
         DECLSPEC_XFGVIRT(IJsEnumDebugProperty, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             IJsEnumDebugProperty * This,
-            /* [out] */ ULONG *pCount);
+            /* [annotation][out] */ 
+            _Out_  ULONG *pCount);
         
         END_INTERFACE
     } IJsEnumDebugPropertyVtbl;
@@ -870,7 +948,8 @@ EXTERN_C const IID IID_IJsDebugBreakPoint;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE IsEnabled( 
-            /* [out] */ BOOL *pIsEnabled) = 0;
+            /* [annotation][out] */ 
+            _Out_  BOOL *pIsEnabled) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Enable( void) = 0;
         
@@ -879,9 +958,12 @@ EXTERN_C const IID IID_IJsDebugBreakPoint;
         virtual HRESULT STDMETHODCALLTYPE Delete( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDocumentPosition( 
-            /* [out] */ UINT64 *pDocumentId,
-            /* [out] */ DWORD *pCharacterOffset,
-            /* [out] */ DWORD *pStatementCharCount) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pDocumentId,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pCharacterOffset,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pStatementCharCount) = 0;
         
     };
     
@@ -895,7 +977,8 @@ EXTERN_C const IID IID_IJsDebugBreakPoint;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IJsDebugBreakPoint * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -910,7 +993,8 @@ EXTERN_C const IID IID_IJsDebugBreakPoint;
         DECLSPEC_XFGVIRT(IJsDebugBreakPoint, IsEnabled)
         HRESULT ( STDMETHODCALLTYPE *IsEnabled )( 
             IJsDebugBreakPoint * This,
-            /* [out] */ BOOL *pIsEnabled);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pIsEnabled);
         
         DECLSPEC_XFGVIRT(IJsDebugBreakPoint, Enable)
         HRESULT ( STDMETHODCALLTYPE *Enable )( 
@@ -927,9 +1011,12 @@ EXTERN_C const IID IID_IJsDebugBreakPoint;
         DECLSPEC_XFGVIRT(IJsDebugBreakPoint, GetDocumentPosition)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentPosition )( 
             IJsDebugBreakPoint * This,
-            /* [out] */ UINT64 *pDocumentId,
-            /* [out] */ DWORD *pCharacterOffset,
-            /* [out] */ DWORD *pStatementCharCount);
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pDocumentId,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pCharacterOffset,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pStatementCharCount);
         
         END_INTERFACE
     } IJsDebugBreakPointVtbl;
@@ -1012,9 +1099,12 @@ EXTERN_C const IID IID_IEnumJsStackFrames;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG cFrameCount,
-            /* [length_is][size_is][out] */ JS_NATIVE_FRAME *pFrames,
-            /* [out] */ ULONG *pcFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG cFrameCount,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cFrameCount,*pcFetched)  JS_NATIVE_FRAME *pFrames,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
@@ -1030,7 +1120,8 @@ EXTERN_C const IID IID_IEnumJsStackFrames;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumJsStackFrames * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1045,9 +1136,12 @@ EXTERN_C const IID IID_IEnumJsStackFrames;
         DECLSPEC_XFGVIRT(IEnumJsStackFrames, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumJsStackFrames * This,
-            /* [in] */ ULONG cFrameCount,
-            /* [length_is][size_is][out] */ JS_NATIVE_FRAME *pFrames,
-            /* [out] */ ULONG *pcFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG cFrameCount,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cFrameCount,*pcFetched)  JS_NATIVE_FRAME *pFrames,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcFetched);
         
         DECLSPEC_XFGVIRT(IEnumJsStackFrames, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -1124,53 +1218,84 @@ EXTERN_C const IID IID_IJsDebugDataTarget;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ReadMemory( 
-            /* [in] */ UINT64 address,
-            /* [in] */ JsDebugReadMemoryFlags flags,
-            /* [length_is][size_is][out] */ BYTE *pBuffer,
-            /* [in] */ DWORD size,
-            /* [out] */ DWORD *pBytesRead) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT64 address,
+            /* [annotation][in] */ 
+            _In_  JsDebugReadMemoryFlags flags,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(size,*pBytesRead)  BYTE *pBuffer,
+            /* [annotation][in] */ 
+            _In_  DWORD size,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pBytesRead) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WriteMemory( 
-            /* [in] */ UINT64 address,
-            /* [size_is][in] */ const BYTE *pMemory,
-            /* [in] */ DWORD size) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT64 address,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(size)  BYTE *pMemory,
+            /* [annotation][in] */ 
+            _In_  DWORD size) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AllocateVirtualMemory( 
-            /* [in] */ UINT64 address,
-            /* [in] */ DWORD size,
-            /* [in] */ DWORD allocationType,
-            /* [in] */ DWORD pageProtection,
-            /* [out] */ UINT64 *pAllocatedAddress) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT64 address,
+            /* [annotation][in] */ 
+            _In_  DWORD size,
+            /* [annotation][in] */ 
+            _In_  DWORD allocationType,
+            /* [annotation][in] */ 
+            _In_  DWORD pageProtection,
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pAllocatedAddress) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FreeVirtualMemory( 
-            /* [in] */ UINT64 address,
-            /* [in] */ DWORD size,
-            /* [in] */ DWORD freeType) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT64 address,
+            /* [annotation][in] */ 
+            _In_  DWORD size,
+            /* [annotation][in] */ 
+            _In_  DWORD freeType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTlsValue( 
-            /* [in] */ DWORD threadId,
-            /* [in] */ UINT32 tlsIndex,
-            /* [out] */ UINT64 *pValue) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD threadId,
+            /* [annotation][in] */ 
+            _In_  UINT32 tlsIndex,
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReadBSTR( 
-            /* [in] */ UINT64 address,
-            /* [out] */ BSTR *pString) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT64 address,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pString) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReadNullTerminatedString( 
-            /* [in] */ UINT64 address,
-            /* [in] */ UINT16 characterSize,
-            /* [in] */ UINT32 maxCharacters,
-            /* [out] */ BSTR *pString) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT64 address,
+            /* [annotation][in] */ 
+            _In_  UINT16 characterSize,
+            /* [annotation][in] */ 
+            _In_  UINT32 maxCharacters,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pString) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateStackFrameEnumerator( 
-            /* [in] */ DWORD threadId,
-            /* [out] */ IEnumJsStackFrames **ppEnumerator) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD threadId,
+            /* [annotation][out] */ 
+            _Out_  IEnumJsStackFrames **ppEnumerator) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetThreadContext( 
-            /* [in] */ DWORD threadId,
-            /* [in] */ ULONG32 contextFlags,
-            /* [in] */ ULONG32 contextSize,
-            /* [size_is][out] */ void *pContext) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD threadId,
+            /* [annotation][in] */ 
+            _In_  ULONG32 contextFlags,
+            /* [annotation][in] */ 
+            _In_  ULONG32 contextSize,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(contextSize)  void *pContext) = 0;
         
     };
     
@@ -1184,7 +1309,8 @@ EXTERN_C const IID IID_IJsDebugDataTarget;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IJsDebugDataTarget * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1199,69 +1325,100 @@ EXTERN_C const IID IID_IJsDebugDataTarget;
         DECLSPEC_XFGVIRT(IJsDebugDataTarget, ReadMemory)
         HRESULT ( STDMETHODCALLTYPE *ReadMemory )( 
             IJsDebugDataTarget * This,
-            /* [in] */ UINT64 address,
-            /* [in] */ JsDebugReadMemoryFlags flags,
-            /* [length_is][size_is][out] */ BYTE *pBuffer,
-            /* [in] */ DWORD size,
-            /* [out] */ DWORD *pBytesRead);
+            /* [annotation][in] */ 
+            _In_  UINT64 address,
+            /* [annotation][in] */ 
+            _In_  JsDebugReadMemoryFlags flags,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(size,*pBytesRead)  BYTE *pBuffer,
+            /* [annotation][in] */ 
+            _In_  DWORD size,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pBytesRead);
         
         DECLSPEC_XFGVIRT(IJsDebugDataTarget, WriteMemory)
         HRESULT ( STDMETHODCALLTYPE *WriteMemory )( 
             IJsDebugDataTarget * This,
-            /* [in] */ UINT64 address,
-            /* [size_is][in] */ const BYTE *pMemory,
-            /* [in] */ DWORD size);
+            /* [annotation][in] */ 
+            _In_  UINT64 address,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(size)  BYTE *pMemory,
+            /* [annotation][in] */ 
+            _In_  DWORD size);
         
         DECLSPEC_XFGVIRT(IJsDebugDataTarget, AllocateVirtualMemory)
         HRESULT ( STDMETHODCALLTYPE *AllocateVirtualMemory )( 
             IJsDebugDataTarget * This,
-            /* [in] */ UINT64 address,
-            /* [in] */ DWORD size,
-            /* [in] */ DWORD allocationType,
-            /* [in] */ DWORD pageProtection,
-            /* [out] */ UINT64 *pAllocatedAddress);
+            /* [annotation][in] */ 
+            _In_  UINT64 address,
+            /* [annotation][in] */ 
+            _In_  DWORD size,
+            /* [annotation][in] */ 
+            _In_  DWORD allocationType,
+            /* [annotation][in] */ 
+            _In_  DWORD pageProtection,
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pAllocatedAddress);
         
         DECLSPEC_XFGVIRT(IJsDebugDataTarget, FreeVirtualMemory)
         HRESULT ( STDMETHODCALLTYPE *FreeVirtualMemory )( 
             IJsDebugDataTarget * This,
-            /* [in] */ UINT64 address,
-            /* [in] */ DWORD size,
-            /* [in] */ DWORD freeType);
+            /* [annotation][in] */ 
+            _In_  UINT64 address,
+            /* [annotation][in] */ 
+            _In_  DWORD size,
+            /* [annotation][in] */ 
+            _In_  DWORD freeType);
         
         DECLSPEC_XFGVIRT(IJsDebugDataTarget, GetTlsValue)
         HRESULT ( STDMETHODCALLTYPE *GetTlsValue )( 
             IJsDebugDataTarget * This,
-            /* [in] */ DWORD threadId,
-            /* [in] */ UINT32 tlsIndex,
-            /* [out] */ UINT64 *pValue);
+            /* [annotation][in] */ 
+            _In_  DWORD threadId,
+            /* [annotation][in] */ 
+            _In_  UINT32 tlsIndex,
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pValue);
         
         DECLSPEC_XFGVIRT(IJsDebugDataTarget, ReadBSTR)
         HRESULT ( STDMETHODCALLTYPE *ReadBSTR )( 
             IJsDebugDataTarget * This,
-            /* [in] */ UINT64 address,
-            /* [out] */ BSTR *pString);
+            /* [annotation][in] */ 
+            _In_  UINT64 address,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pString);
         
         DECLSPEC_XFGVIRT(IJsDebugDataTarget, ReadNullTerminatedString)
         HRESULT ( STDMETHODCALLTYPE *ReadNullTerminatedString )( 
             IJsDebugDataTarget * This,
-            /* [in] */ UINT64 address,
-            /* [in] */ UINT16 characterSize,
-            /* [in] */ UINT32 maxCharacters,
-            /* [out] */ BSTR *pString);
+            /* [annotation][in] */ 
+            _In_  UINT64 address,
+            /* [annotation][in] */ 
+            _In_  UINT16 characterSize,
+            /* [annotation][in] */ 
+            _In_  UINT32 maxCharacters,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pString);
         
         DECLSPEC_XFGVIRT(IJsDebugDataTarget, CreateStackFrameEnumerator)
         HRESULT ( STDMETHODCALLTYPE *CreateStackFrameEnumerator )( 
             IJsDebugDataTarget * This,
-            /* [in] */ DWORD threadId,
-            /* [out] */ IEnumJsStackFrames **ppEnumerator);
+            /* [annotation][in] */ 
+            _In_  DWORD threadId,
+            /* [annotation][out] */ 
+            _Out_  IEnumJsStackFrames **ppEnumerator);
         
         DECLSPEC_XFGVIRT(IJsDebugDataTarget, GetThreadContext)
         HRESULT ( STDMETHODCALLTYPE *GetThreadContext )( 
             IJsDebugDataTarget * This,
-            /* [in] */ DWORD threadId,
-            /* [in] */ ULONG32 contextFlags,
-            /* [in] */ ULONG32 contextSize,
-            /* [size_is][out] */ void *pContext);
+            /* [annotation][in] */ 
+            _In_  DWORD threadId,
+            /* [annotation][in] */ 
+            _In_  ULONG32 contextFlags,
+            /* [annotation][in] */ 
+            _In_  ULONG32 contextSize,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(contextSize)  void *pContext);
         
         END_INTERFACE
     } IJsDebugDataTargetVtbl;

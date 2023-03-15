@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -489,7 +489,8 @@ EXTERN_C const IID IID_ICredentialProviderCredential;
         virtual HRESULT STDMETHODCALLTYPE SetDeselected( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFieldState( 
-            /* [in] */ DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
             /* [annotation][out] */ 
             _Out_  CREDENTIAL_PROVIDER_FIELD_STATE *pcpfs,
             /* [annotation][out] */ 
@@ -536,15 +537,20 @@ EXTERN_C const IID IID_ICredentialProviderCredential;
             _In_  LPCWSTR psz) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCheckboxValue( 
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ BOOL bChecked) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  BOOL bChecked) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetComboBoxSelectedValue( 
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ DWORD dwSelectedItem) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSelectedItem) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CommandLinkClicked( 
-            /* [in] */ DWORD dwFieldID) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSerialization( 
             /* [annotation][out] */ 
@@ -557,8 +563,10 @@ EXTERN_C const IID IID_ICredentialProviderCredential;
             _Out_  CREDENTIAL_PROVIDER_STATUS_ICON *pcpsiOptionalStatusIcon) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReportResult( 
-            /* [in] */ NTSTATUS ntsStatus,
-            /* [in] */ NTSTATUS ntsSubstatus,
+            /* [annotation][in] */ 
+            _In_  NTSTATUS ntsStatus,
+            /* [annotation][in] */ 
+            _In_  NTSTATUS ntsSubstatus,
             /* [annotation][out] */ 
             _Outptr_result_maybenull_  LPWSTR *ppszOptionalStatusText,
             /* [annotation][out] */ 
@@ -576,7 +584,8 @@ EXTERN_C const IID IID_ICredentialProviderCredential;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICredentialProviderCredential * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -611,7 +620,8 @@ EXTERN_C const IID IID_ICredentialProviderCredential;
         DECLSPEC_XFGVIRT(ICredentialProviderCredential, GetFieldState)
         HRESULT ( STDMETHODCALLTYPE *GetFieldState )( 
             ICredentialProviderCredential * This,
-            /* [in] */ DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
             /* [annotation][out] */ 
             _Out_  CREDENTIAL_PROVIDER_FIELD_STATE *pcpfs,
             /* [annotation][out] */ 
@@ -674,19 +684,24 @@ EXTERN_C const IID IID_ICredentialProviderCredential;
         DECLSPEC_XFGVIRT(ICredentialProviderCredential, SetCheckboxValue)
         HRESULT ( STDMETHODCALLTYPE *SetCheckboxValue )( 
             ICredentialProviderCredential * This,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ BOOL bChecked);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  BOOL bChecked);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredential, SetComboBoxSelectedValue)
         HRESULT ( STDMETHODCALLTYPE *SetComboBoxSelectedValue )( 
             ICredentialProviderCredential * This,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ DWORD dwSelectedItem);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSelectedItem);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredential, CommandLinkClicked)
         HRESULT ( STDMETHODCALLTYPE *CommandLinkClicked )( 
             ICredentialProviderCredential * This,
-            /* [in] */ DWORD dwFieldID);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredential, GetSerialization)
         HRESULT ( STDMETHODCALLTYPE *GetSerialization )( 
@@ -703,8 +718,10 @@ EXTERN_C const IID IID_ICredentialProviderCredential;
         DECLSPEC_XFGVIRT(ICredentialProviderCredential, ReportResult)
         HRESULT ( STDMETHODCALLTYPE *ReportResult )( 
             ICredentialProviderCredential * This,
-            /* [in] */ NTSTATUS ntsStatus,
-            /* [in] */ NTSTATUS ntsSubstatus,
+            /* [annotation][in] */ 
+            _In_  NTSTATUS ntsStatus,
+            /* [annotation][in] */ 
+            _In_  NTSTATUS ntsSubstatus,
             /* [annotation][out] */ 
             _Outptr_result_maybenull_  LPWSTR *ppszOptionalStatusText,
             /* [annotation][out] */ 
@@ -826,7 +843,8 @@ EXTERN_C const IID IID_IQueryContinueWithStatus;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IQueryContinueWithStatus * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -922,7 +940,8 @@ EXTERN_C const IID IID_IConnectableCredentialProviderCredential;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IConnectableCredentialProviderCredential * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -957,7 +976,8 @@ EXTERN_C const IID IID_IConnectableCredentialProviderCredential;
         DECLSPEC_XFGVIRT(ICredentialProviderCredential, GetFieldState)
         HRESULT ( STDMETHODCALLTYPE *GetFieldState )( 
             IConnectableCredentialProviderCredential * This,
-            /* [in] */ DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
             /* [annotation][out] */ 
             _Out_  CREDENTIAL_PROVIDER_FIELD_STATE *pcpfs,
             /* [annotation][out] */ 
@@ -1020,19 +1040,24 @@ EXTERN_C const IID IID_IConnectableCredentialProviderCredential;
         DECLSPEC_XFGVIRT(ICredentialProviderCredential, SetCheckboxValue)
         HRESULT ( STDMETHODCALLTYPE *SetCheckboxValue )( 
             IConnectableCredentialProviderCredential * This,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ BOOL bChecked);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  BOOL bChecked);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredential, SetComboBoxSelectedValue)
         HRESULT ( STDMETHODCALLTYPE *SetComboBoxSelectedValue )( 
             IConnectableCredentialProviderCredential * This,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ DWORD dwSelectedItem);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSelectedItem);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredential, CommandLinkClicked)
         HRESULT ( STDMETHODCALLTYPE *CommandLinkClicked )( 
             IConnectableCredentialProviderCredential * This,
-            /* [in] */ DWORD dwFieldID);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredential, GetSerialization)
         HRESULT ( STDMETHODCALLTYPE *GetSerialization )( 
@@ -1049,8 +1074,10 @@ EXTERN_C const IID IID_IConnectableCredentialProviderCredential;
         DECLSPEC_XFGVIRT(ICredentialProviderCredential, ReportResult)
         HRESULT ( STDMETHODCALLTYPE *ReportResult )( 
             IConnectableCredentialProviderCredential * This,
-            /* [in] */ NTSTATUS ntsStatus,
-            /* [in] */ NTSTATUS ntsSubstatus,
+            /* [annotation][in] */ 
+            _In_  NTSTATUS ntsStatus,
+            /* [annotation][in] */ 
+            _In_  NTSTATUS ntsSubstatus,
             /* [annotation][out] */ 
             _Outptr_result_maybenull_  LPWSTR *ppszOptionalStatusText,
             /* [annotation][out] */ 
@@ -1174,53 +1201,82 @@ EXTERN_C const IID IID_ICredentialProviderCredentialEvents;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetFieldState( 
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ CREDENTIAL_PROVIDER_FIELD_STATE cpfs) = 0;
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  CREDENTIAL_PROVIDER_FIELD_STATE cpfs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFieldInteractiveState( 
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ CREDENTIAL_PROVIDER_FIELD_INTERACTIVE_STATE cpfis) = 0;
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  CREDENTIAL_PROVIDER_FIELD_INTERACTIVE_STATE cpfis) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFieldString( 
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [unique][string][in] */ __RPC__in_opt_string LPCWSTR psz) = 0;
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][unique][string][in] */ 
+            _In_  LPCWSTR psz) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFieldCheckbox( 
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ BOOL bChecked,
-            /* [in] */ __RPC__in LPCWSTR pszLabel) = 0;
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  BOOL bChecked,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszLabel) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFieldBitmap( 
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ __RPC__in HBITMAP hbmp) = 0;
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  HBITMAP hbmp) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFieldComboBoxSelectedItem( 
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ DWORD dwSelectedItem) = 0;
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSelectedItem) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeleteFieldComboBoxItem( 
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ DWORD dwItem) = 0;
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  DWORD dwItem) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AppendFieldComboBoxItem( 
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [string][in] */ __RPC__in_string LPCWSTR pszItem) = 0;
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszItem) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFieldSubmitButton( 
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ DWORD dwAdjacentTo) = 0;
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAdjacentTo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnCreatingWindow( 
-            /* [out] */ __RPC__deref_out_opt HWND *phwndOwner) = 0;
+            /* [annotation][out] */ 
+            _Out_  HWND *phwndOwner) = 0;
         
     };
     
@@ -1234,7 +1290,8 @@ EXTERN_C const IID IID_ICredentialProviderCredentialEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICredentialProviderCredentialEvents * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1249,71 +1306,100 @@ EXTERN_C const IID IID_ICredentialProviderCredentialEvents;
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialEvents, SetFieldState)
         HRESULT ( STDMETHODCALLTYPE *SetFieldState )( 
             __RPC__in ICredentialProviderCredentialEvents * This,
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ CREDENTIAL_PROVIDER_FIELD_STATE cpfs);
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  CREDENTIAL_PROVIDER_FIELD_STATE cpfs);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialEvents, SetFieldInteractiveState)
         HRESULT ( STDMETHODCALLTYPE *SetFieldInteractiveState )( 
             __RPC__in ICredentialProviderCredentialEvents * This,
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ CREDENTIAL_PROVIDER_FIELD_INTERACTIVE_STATE cpfis);
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  CREDENTIAL_PROVIDER_FIELD_INTERACTIVE_STATE cpfis);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialEvents, SetFieldString)
         HRESULT ( STDMETHODCALLTYPE *SetFieldString )( 
             __RPC__in ICredentialProviderCredentialEvents * This,
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [unique][string][in] */ __RPC__in_opt_string LPCWSTR psz);
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][unique][string][in] */ 
+            _In_  LPCWSTR psz);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialEvents, SetFieldCheckbox)
         HRESULT ( STDMETHODCALLTYPE *SetFieldCheckbox )( 
             __RPC__in ICredentialProviderCredentialEvents * This,
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ BOOL bChecked,
-            /* [in] */ __RPC__in LPCWSTR pszLabel);
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  BOOL bChecked,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszLabel);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialEvents, SetFieldBitmap)
         HRESULT ( STDMETHODCALLTYPE *SetFieldBitmap )( 
             __RPC__in ICredentialProviderCredentialEvents * This,
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ __RPC__in HBITMAP hbmp);
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  HBITMAP hbmp);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialEvents, SetFieldComboBoxSelectedItem)
         HRESULT ( STDMETHODCALLTYPE *SetFieldComboBoxSelectedItem )( 
             __RPC__in ICredentialProviderCredentialEvents * This,
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ DWORD dwSelectedItem);
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSelectedItem);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialEvents, DeleteFieldComboBoxItem)
         HRESULT ( STDMETHODCALLTYPE *DeleteFieldComboBoxItem )( 
             __RPC__in ICredentialProviderCredentialEvents * This,
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ DWORD dwItem);
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  DWORD dwItem);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialEvents, AppendFieldComboBoxItem)
         HRESULT ( STDMETHODCALLTYPE *AppendFieldComboBoxItem )( 
             __RPC__in ICredentialProviderCredentialEvents * This,
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [string][in] */ __RPC__in_string LPCWSTR pszItem);
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszItem);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialEvents, SetFieldSubmitButton)
         HRESULT ( STDMETHODCALLTYPE *SetFieldSubmitButton )( 
             __RPC__in ICredentialProviderCredentialEvents * This,
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ DWORD dwAdjacentTo);
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAdjacentTo);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialEvents, OnCreatingWindow)
         HRESULT ( STDMETHODCALLTYPE *OnCreatingWindow )( 
             __RPC__in ICredentialProviderCredentialEvents * This,
-            /* [out] */ __RPC__deref_out_opt HWND *phwndOwner);
+            /* [annotation][out] */ 
+            _Out_  HWND *phwndOwner);
         
         END_INTERFACE
     } ICredentialProviderCredentialEventsVtbl;
@@ -1404,8 +1490,10 @@ EXTERN_C const IID IID_ICredentialProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetUsageScenario( 
-            /* [in] */ CREDENTIAL_PROVIDER_USAGE_SCENARIO cpus,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  CREDENTIAL_PROVIDER_USAGE_SCENARIO cpus,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSerialization( 
             /* [annotation][in] */ 
@@ -1424,7 +1512,8 @@ EXTERN_C const IID IID_ICredentialProvider;
             _Out_  DWORD *pdwCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFieldDescriptorAt( 
-            /* [in] */ DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
             /* [annotation][out] */ 
             _Outptr_result_nullonfailure_  CREDENTIAL_PROVIDER_FIELD_DESCRIPTOR **ppcpfd) = 0;
         
@@ -1437,7 +1526,8 @@ EXTERN_C const IID IID_ICredentialProvider;
             _Out_  BOOL *pbAutoLogonWithDefault) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCredentialAt( 
-            /* [in] */ DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
             /* [annotation][out] */ 
             _COM_Outptr_  ICredentialProviderCredential **ppcpc) = 0;
         
@@ -1453,7 +1543,8 @@ EXTERN_C const IID IID_ICredentialProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICredentialProvider * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1468,8 +1559,10 @@ EXTERN_C const IID IID_ICredentialProvider;
         DECLSPEC_XFGVIRT(ICredentialProvider, SetUsageScenario)
         HRESULT ( STDMETHODCALLTYPE *SetUsageScenario )( 
             ICredentialProvider * This,
-            /* [in] */ CREDENTIAL_PROVIDER_USAGE_SCENARIO cpus,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  CREDENTIAL_PROVIDER_USAGE_SCENARIO cpus,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(ICredentialProvider, SetSerialization)
         HRESULT ( STDMETHODCALLTYPE *SetSerialization )( 
@@ -1498,7 +1591,8 @@ EXTERN_C const IID IID_ICredentialProvider;
         DECLSPEC_XFGVIRT(ICredentialProvider, GetFieldDescriptorAt)
         HRESULT ( STDMETHODCALLTYPE *GetFieldDescriptorAt )( 
             ICredentialProvider * This,
-            /* [in] */ DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
             /* [annotation][out] */ 
             _Outptr_result_nullonfailure_  CREDENTIAL_PROVIDER_FIELD_DESCRIPTOR **ppcpfd);
         
@@ -1515,7 +1609,8 @@ EXTERN_C const IID IID_ICredentialProvider;
         DECLSPEC_XFGVIRT(ICredentialProvider, GetCredentialAt)
         HRESULT ( STDMETHODCALLTYPE *GetCredentialAt )( 
             ICredentialProvider * This,
-            /* [in] */ DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
             /* [annotation][out] */ 
             _COM_Outptr_  ICredentialProviderCredential **ppcpc);
         
@@ -1593,7 +1688,8 @@ EXTERN_C const IID IID_ICredentialProviderEvents;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CredentialsChanged( 
-            /* [in] */ UINT_PTR upAdviseContext) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT_PTR upAdviseContext) = 0;
         
     };
     
@@ -1607,7 +1703,8 @@ EXTERN_C const IID IID_ICredentialProviderEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICredentialProviderEvents * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1622,7 +1719,8 @@ EXTERN_C const IID IID_ICredentialProviderEvents;
         DECLSPEC_XFGVIRT(ICredentialProviderEvents, CredentialsChanged)
         HRESULT ( STDMETHODCALLTYPE *CredentialsChanged )( 
             __RPC__in ICredentialProviderEvents * This,
-            /* [in] */ UINT_PTR upAdviseContext);
+            /* [annotation][in] */ 
+            _In_  UINT_PTR upAdviseContext);
         
         END_INTERFACE
     } ICredentialProviderEventsVtbl;
@@ -1677,13 +1775,16 @@ EXTERN_C const IID IID_ICredentialProviderFilter;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Filter( 
-            /* [in] */ CREDENTIAL_PROVIDER_USAGE_SCENARIO cpus,
-            /* [in] */ DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  CREDENTIAL_PROVIDER_USAGE_SCENARIO cpus,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
             /* [annotation][size_is][in] */ 
             _In_reads_(cProviders)  GUID *rgclsidProviders,
             /* [annotation][size_is][out][in] */ 
             _Inout_updates_(cProviders)  BOOL *rgbAllow,
-            /* [in] */ DWORD cProviders) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD cProviders) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UpdateRemoteCredential( 
             /* [annotation][in] */ 
@@ -1703,7 +1804,8 @@ EXTERN_C const IID IID_ICredentialProviderFilter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICredentialProviderFilter * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1718,13 +1820,16 @@ EXTERN_C const IID IID_ICredentialProviderFilter;
         DECLSPEC_XFGVIRT(ICredentialProviderFilter, Filter)
         HRESULT ( STDMETHODCALLTYPE *Filter )( 
             ICredentialProviderFilter * This,
-            /* [in] */ CREDENTIAL_PROVIDER_USAGE_SCENARIO cpus,
-            /* [in] */ DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  CREDENTIAL_PROVIDER_USAGE_SCENARIO cpus,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
             /* [annotation][size_is][in] */ 
             _In_reads_(cProviders)  GUID *rgclsidProviders,
             /* [annotation][size_is][out][in] */ 
             _Inout_updates_(cProviders)  BOOL *rgbAllow,
-            /* [in] */ DWORD cProviders);
+            /* [annotation][in] */ 
+            _In_  DWORD cProviders);
         
         DECLSPEC_XFGVIRT(ICredentialProviderFilter, UpdateRemoteCredential)
         HRESULT ( STDMETHODCALLTYPE *UpdateRemoteCredential )( 
@@ -1814,7 +1919,8 @@ EXTERN_C const IID IID_ICredentialProviderCredential2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICredentialProviderCredential2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1849,7 +1955,8 @@ EXTERN_C const IID IID_ICredentialProviderCredential2;
         DECLSPEC_XFGVIRT(ICredentialProviderCredential, GetFieldState)
         HRESULT ( STDMETHODCALLTYPE *GetFieldState )( 
             ICredentialProviderCredential2 * This,
-            /* [in] */ DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
             /* [annotation][out] */ 
             _Out_  CREDENTIAL_PROVIDER_FIELD_STATE *pcpfs,
             /* [annotation][out] */ 
@@ -1912,19 +2019,24 @@ EXTERN_C const IID IID_ICredentialProviderCredential2;
         DECLSPEC_XFGVIRT(ICredentialProviderCredential, SetCheckboxValue)
         HRESULT ( STDMETHODCALLTYPE *SetCheckboxValue )( 
             ICredentialProviderCredential2 * This,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ BOOL bChecked);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  BOOL bChecked);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredential, SetComboBoxSelectedValue)
         HRESULT ( STDMETHODCALLTYPE *SetComboBoxSelectedValue )( 
             ICredentialProviderCredential2 * This,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ DWORD dwSelectedItem);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSelectedItem);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredential, CommandLinkClicked)
         HRESULT ( STDMETHODCALLTYPE *CommandLinkClicked )( 
             ICredentialProviderCredential2 * This,
-            /* [in] */ DWORD dwFieldID);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredential, GetSerialization)
         HRESULT ( STDMETHODCALLTYPE *GetSerialization )( 
@@ -1941,8 +2053,10 @@ EXTERN_C const IID IID_ICredentialProviderCredential2;
         DECLSPEC_XFGVIRT(ICredentialProviderCredential, ReportResult)
         HRESULT ( STDMETHODCALLTYPE *ReportResult )( 
             ICredentialProviderCredential2 * This,
-            /* [in] */ NTSTATUS ntsStatus,
-            /* [in] */ NTSTATUS ntsSubstatus,
+            /* [annotation][in] */ 
+            _In_  NTSTATUS ntsStatus,
+            /* [annotation][in] */ 
+            _In_  NTSTATUS ntsSubstatus,
             /* [annotation][out] */ 
             _Outptr_result_maybenull_  LPWSTR *ppszOptionalStatusText,
             /* [annotation][out] */ 
@@ -2059,7 +2173,8 @@ EXTERN_C const IID IID_ICredentialProviderCredentialWithFieldOptions;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetFieldOptions( 
-            /* [in] */ DWORD fieldID,
+            /* [annotation][in] */ 
+            _In_  DWORD fieldID,
             /* [annotation][out] */ 
             _Out_  CREDENTIAL_PROVIDER_CREDENTIAL_FIELD_OPTIONS *options) = 0;
         
@@ -2075,7 +2190,8 @@ EXTERN_C const IID IID_ICredentialProviderCredentialWithFieldOptions;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICredentialProviderCredentialWithFieldOptions * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2090,7 +2206,8 @@ EXTERN_C const IID IID_ICredentialProviderCredentialWithFieldOptions;
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialWithFieldOptions, GetFieldOptions)
         HRESULT ( STDMETHODCALLTYPE *GetFieldOptions )( 
             ICredentialProviderCredentialWithFieldOptions * This,
-            /* [in] */ DWORD fieldID,
+            /* [annotation][in] */ 
+            _In_  DWORD fieldID,
             /* [annotation][out] */ 
             _Out_  CREDENTIAL_PROVIDER_CREDENTIAL_FIELD_OPTIONS *options);
         
@@ -2151,9 +2268,12 @@ EXTERN_C const IID IID_ICredentialProviderCredentialEvents2;
         virtual HRESULT STDMETHODCALLTYPE EndFieldUpdates( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFieldOptions( 
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *credential,
-            /* [in] */ DWORD fieldID,
-            /* [in] */ CREDENTIAL_PROVIDER_CREDENTIAL_FIELD_OPTIONS options) = 0;
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *credential,
+            /* [annotation][in] */ 
+            _In_  DWORD fieldID,
+            /* [annotation][in] */ 
+            _In_  CREDENTIAL_PROVIDER_CREDENTIAL_FIELD_OPTIONS options) = 0;
         
     };
     
@@ -2167,7 +2287,8 @@ EXTERN_C const IID IID_ICredentialProviderCredentialEvents2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICredentialProviderCredentialEvents2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2182,71 +2303,100 @@ EXTERN_C const IID IID_ICredentialProviderCredentialEvents2;
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialEvents, SetFieldState)
         HRESULT ( STDMETHODCALLTYPE *SetFieldState )( 
             __RPC__in ICredentialProviderCredentialEvents2 * This,
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ CREDENTIAL_PROVIDER_FIELD_STATE cpfs);
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  CREDENTIAL_PROVIDER_FIELD_STATE cpfs);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialEvents, SetFieldInteractiveState)
         HRESULT ( STDMETHODCALLTYPE *SetFieldInteractiveState )( 
             __RPC__in ICredentialProviderCredentialEvents2 * This,
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ CREDENTIAL_PROVIDER_FIELD_INTERACTIVE_STATE cpfis);
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  CREDENTIAL_PROVIDER_FIELD_INTERACTIVE_STATE cpfis);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialEvents, SetFieldString)
         HRESULT ( STDMETHODCALLTYPE *SetFieldString )( 
             __RPC__in ICredentialProviderCredentialEvents2 * This,
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [unique][string][in] */ __RPC__in_opt_string LPCWSTR psz);
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][unique][string][in] */ 
+            _In_  LPCWSTR psz);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialEvents, SetFieldCheckbox)
         HRESULT ( STDMETHODCALLTYPE *SetFieldCheckbox )( 
             __RPC__in ICredentialProviderCredentialEvents2 * This,
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ BOOL bChecked,
-            /* [in] */ __RPC__in LPCWSTR pszLabel);
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  BOOL bChecked,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszLabel);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialEvents, SetFieldBitmap)
         HRESULT ( STDMETHODCALLTYPE *SetFieldBitmap )( 
             __RPC__in ICredentialProviderCredentialEvents2 * This,
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ __RPC__in HBITMAP hbmp);
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  HBITMAP hbmp);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialEvents, SetFieldComboBoxSelectedItem)
         HRESULT ( STDMETHODCALLTYPE *SetFieldComboBoxSelectedItem )( 
             __RPC__in ICredentialProviderCredentialEvents2 * This,
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ DWORD dwSelectedItem);
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSelectedItem);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialEvents, DeleteFieldComboBoxItem)
         HRESULT ( STDMETHODCALLTYPE *DeleteFieldComboBoxItem )( 
             __RPC__in ICredentialProviderCredentialEvents2 * This,
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ DWORD dwItem);
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  DWORD dwItem);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialEvents, AppendFieldComboBoxItem)
         HRESULT ( STDMETHODCALLTYPE *AppendFieldComboBoxItem )( 
             __RPC__in ICredentialProviderCredentialEvents2 * This,
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [string][in] */ __RPC__in_string LPCWSTR pszItem);
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszItem);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialEvents, SetFieldSubmitButton)
         HRESULT ( STDMETHODCALLTYPE *SetFieldSubmitButton )( 
             __RPC__in ICredentialProviderCredentialEvents2 * This,
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *pcpc,
-            /* [in] */ DWORD dwFieldID,
-            /* [in] */ DWORD dwAdjacentTo);
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *pcpc,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFieldID,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAdjacentTo);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialEvents, OnCreatingWindow)
         HRESULT ( STDMETHODCALLTYPE *OnCreatingWindow )( 
             __RPC__in ICredentialProviderCredentialEvents2 * This,
-            /* [out] */ __RPC__deref_out_opt HWND *phwndOwner);
+            /* [annotation][out] */ 
+            _Out_  HWND *phwndOwner);
         
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialEvents2, BeginFieldUpdates)
         HRESULT ( STDMETHODCALLTYPE *BeginFieldUpdates )( 
@@ -2259,9 +2409,12 @@ EXTERN_C const IID IID_ICredentialProviderCredentialEvents2;
         DECLSPEC_XFGVIRT(ICredentialProviderCredentialEvents2, SetFieldOptions)
         HRESULT ( STDMETHODCALLTYPE *SetFieldOptions )( 
             __RPC__in ICredentialProviderCredentialEvents2 * This,
-            /* [in] */ __RPC__in_opt ICredentialProviderCredential *credential,
-            /* [in] */ DWORD fieldID,
-            /* [in] */ CREDENTIAL_PROVIDER_CREDENTIAL_FIELD_OPTIONS options);
+            /* [annotation][in] */ 
+            _In_  ICredentialProviderCredential *credential,
+            /* [annotation][in] */ 
+            _In_  DWORD fieldID,
+            /* [annotation][in] */ 
+            _In_  CREDENTIAL_PROVIDER_CREDENTIAL_FIELD_OPTIONS options);
         
         END_INTERFACE
     } ICredentialProviderCredentialEvents2Vtbl;
@@ -2384,7 +2537,8 @@ EXTERN_C const IID IID_ICredentialProviderUser;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICredentialProviderUser * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2495,7 +2649,8 @@ EXTERN_C const IID IID_ICredentialProviderUserArray;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetProviderFilter( 
-            /* [in] */ REFGUID guidProviderToFilterTo) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID guidProviderToFilterTo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAccountOptions( 
             /* [annotation][out] */ 
@@ -2522,7 +2677,8 @@ EXTERN_C const IID IID_ICredentialProviderUserArray;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICredentialProviderUserArray * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2537,7 +2693,8 @@ EXTERN_C const IID IID_ICredentialProviderUserArray;
         DECLSPEC_XFGVIRT(ICredentialProviderUserArray, SetProviderFilter)
         HRESULT ( STDMETHODCALLTYPE *SetProviderFilter )( 
             ICredentialProviderUserArray * This,
-            /* [in] */ REFGUID guidProviderToFilterTo);
+            /* [annotation][in] */ 
+            _In_  REFGUID guidProviderToFilterTo);
         
         DECLSPEC_XFGVIRT(ICredentialProviderUserArray, GetAccountOptions)
         HRESULT ( STDMETHODCALLTYPE *GetAccountOptions )( 
@@ -2635,7 +2792,8 @@ EXTERN_C const IID IID_ICredentialProviderSetUserArray;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICredentialProviderSetUserArray * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         

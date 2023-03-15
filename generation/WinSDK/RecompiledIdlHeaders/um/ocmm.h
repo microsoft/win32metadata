@@ -214,16 +214,22 @@ EXTERN_C const IID IID_ITimerService;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateTimer( 
-            /* [in] */ __RPC__in_opt ITimer *pReferenceTimer,
-            /* [out] */ __RPC__deref_out_opt ITimer **ppNewTimer) = 0;
+            /* [annotation][in] */ 
+            _In_  ITimer *pReferenceTimer,
+            /* [annotation][out] */ 
+            _Out_  ITimer **ppNewTimer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNamedTimer( 
-            /* [in] */ __RPC__in REFGUID rguidName,
-            /* [out] */ __RPC__deref_out_opt ITimer **ppTimer) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidName,
+            /* [annotation][out] */ 
+            _Out_  ITimer **ppTimer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetNamedTimerReference( 
-            /* [in] */ __RPC__in REFGUID rguidName,
-            /* [in] */ __RPC__in_opt ITimer *pReferenceTimer) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidName,
+            /* [annotation][in] */ 
+            _In_  ITimer *pReferenceTimer) = 0;
         
     };
     
@@ -237,7 +243,8 @@ EXTERN_C const IID IID_ITimerService;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITimerService * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -252,20 +259,26 @@ EXTERN_C const IID IID_ITimerService;
         DECLSPEC_XFGVIRT(ITimerService, CreateTimer)
         HRESULT ( STDMETHODCALLTYPE *CreateTimer )( 
             __RPC__in ITimerService * This,
-            /* [in] */ __RPC__in_opt ITimer *pReferenceTimer,
-            /* [out] */ __RPC__deref_out_opt ITimer **ppNewTimer);
+            /* [annotation][in] */ 
+            _In_  ITimer *pReferenceTimer,
+            /* [annotation][out] */ 
+            _Out_  ITimer **ppNewTimer);
         
         DECLSPEC_XFGVIRT(ITimerService, GetNamedTimer)
         HRESULT ( STDMETHODCALLTYPE *GetNamedTimer )( 
             __RPC__in ITimerService * This,
-            /* [in] */ __RPC__in REFGUID rguidName,
-            /* [out] */ __RPC__deref_out_opt ITimer **ppTimer);
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidName,
+            /* [annotation][out] */ 
+            _Out_  ITimer **ppTimer);
         
         DECLSPEC_XFGVIRT(ITimerService, SetNamedTimerReference)
         HRESULT ( STDMETHODCALLTYPE *SetNamedTimerReference )( 
             __RPC__in ITimerService * This,
-            /* [in] */ __RPC__in REFGUID rguidName,
-            /* [in] */ __RPC__in_opt ITimer *pReferenceTimer);
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidName,
+            /* [annotation][in] */ 
+            _In_  ITimer *pReferenceTimer);
         
         END_INTERFACE
     } ITimerServiceVtbl;
@@ -326,21 +339,30 @@ EXTERN_C const IID IID_ITimer;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Advise( 
-            /* [in] */ VARIANT vtimeMin,
-            /* [in] */ VARIANT vtimeMax,
-            /* [in] */ VARIANT vtimeInterval,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ __RPC__in_opt ITimerSink *pTimerSink,
-            /* [out] */ __RPC__out DWORD *pdwCookie) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT vtimeMin,
+            /* [annotation][in] */ 
+            _In_  VARIANT vtimeMax,
+            /* [annotation][in] */ 
+            _In_  VARIANT vtimeInterval,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  ITimerSink *pTimerSink,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Unadvise( 
-            /* [in] */ DWORD dwCookie) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Freeze( 
-            /* [in] */ BOOL fFreeze) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL fFreeze) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTime( 
-            /* [out] */ __RPC__out VARIANT *pvtime) = 0;
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pvtime) = 0;
         
     };
     
@@ -354,7 +376,8 @@ EXTERN_C const IID IID_ITimer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITimer * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -369,27 +392,36 @@ EXTERN_C const IID IID_ITimer;
         DECLSPEC_XFGVIRT(ITimer, Advise)
         HRESULT ( STDMETHODCALLTYPE *Advise )( 
             __RPC__in ITimer * This,
-            /* [in] */ VARIANT vtimeMin,
-            /* [in] */ VARIANT vtimeMax,
-            /* [in] */ VARIANT vtimeInterval,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ __RPC__in_opt ITimerSink *pTimerSink,
-            /* [out] */ __RPC__out DWORD *pdwCookie);
+            /* [annotation][in] */ 
+            _In_  VARIANT vtimeMin,
+            /* [annotation][in] */ 
+            _In_  VARIANT vtimeMax,
+            /* [annotation][in] */ 
+            _In_  VARIANT vtimeInterval,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  ITimerSink *pTimerSink,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwCookie);
         
         DECLSPEC_XFGVIRT(ITimer, Unadvise)
         HRESULT ( STDMETHODCALLTYPE *Unadvise )( 
             __RPC__in ITimer * This,
-            /* [in] */ DWORD dwCookie);
+            /* [annotation][in] */ 
+            _In_  DWORD dwCookie);
         
         DECLSPEC_XFGVIRT(ITimer, Freeze)
         HRESULT ( STDMETHODCALLTYPE *Freeze )( 
             __RPC__in ITimer * This,
-            /* [in] */ BOOL fFreeze);
+            /* [annotation][in] */ 
+            _In_  BOOL fFreeze);
         
         DECLSPEC_XFGVIRT(ITimer, GetTime)
         HRESULT ( STDMETHODCALLTYPE *GetTime )( 
             __RPC__in ITimer * This,
-            /* [out] */ __RPC__out VARIANT *pvtime);
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pvtime);
         
         END_INTERFACE
     } ITimerVtbl;
@@ -453,7 +485,8 @@ EXTERN_C const IID IID_ITimerEx;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetMode( 
-            /* [in] */ DWORD dwMode) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwMode) = 0;
         
     };
     
@@ -467,7 +500,8 @@ EXTERN_C const IID IID_ITimerEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITimerEx * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -482,32 +516,42 @@ EXTERN_C const IID IID_ITimerEx;
         DECLSPEC_XFGVIRT(ITimer, Advise)
         HRESULT ( STDMETHODCALLTYPE *Advise )( 
             __RPC__in ITimerEx * This,
-            /* [in] */ VARIANT vtimeMin,
-            /* [in] */ VARIANT vtimeMax,
-            /* [in] */ VARIANT vtimeInterval,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ __RPC__in_opt ITimerSink *pTimerSink,
-            /* [out] */ __RPC__out DWORD *pdwCookie);
+            /* [annotation][in] */ 
+            _In_  VARIANT vtimeMin,
+            /* [annotation][in] */ 
+            _In_  VARIANT vtimeMax,
+            /* [annotation][in] */ 
+            _In_  VARIANT vtimeInterval,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  ITimerSink *pTimerSink,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwCookie);
         
         DECLSPEC_XFGVIRT(ITimer, Unadvise)
         HRESULT ( STDMETHODCALLTYPE *Unadvise )( 
             __RPC__in ITimerEx * This,
-            /* [in] */ DWORD dwCookie);
+            /* [annotation][in] */ 
+            _In_  DWORD dwCookie);
         
         DECLSPEC_XFGVIRT(ITimer, Freeze)
         HRESULT ( STDMETHODCALLTYPE *Freeze )( 
             __RPC__in ITimerEx * This,
-            /* [in] */ BOOL fFreeze);
+            /* [annotation][in] */ 
+            _In_  BOOL fFreeze);
         
         DECLSPEC_XFGVIRT(ITimer, GetTime)
         HRESULT ( STDMETHODCALLTYPE *GetTime )( 
             __RPC__in ITimerEx * This,
-            /* [out] */ __RPC__out VARIANT *pvtime);
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pvtime);
         
         DECLSPEC_XFGVIRT(ITimerEx, SetMode)
         HRESULT ( STDMETHODCALLTYPE *SetMode )( 
             __RPC__in ITimerEx * This,
-            /* [in] */ DWORD dwMode);
+            /* [annotation][in] */ 
+            _In_  DWORD dwMode);
         
         END_INTERFACE
     } ITimerExVtbl;
@@ -575,7 +619,8 @@ EXTERN_C const IID IID_ITimerSink;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnTimer( 
-            /* [in] */ VARIANT vtimeAdvise) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT vtimeAdvise) = 0;
         
     };
     
@@ -589,7 +634,8 @@ EXTERN_C const IID IID_ITimerSink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITimerSink * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -604,7 +650,8 @@ EXTERN_C const IID IID_ITimerSink;
         DECLSPEC_XFGVIRT(ITimerSink, OnTimer)
         HRESULT ( STDMETHODCALLTYPE *OnTimer )( 
             __RPC__in ITimerSink * This,
-            /* [in] */ VARIANT vtimeAdvise);
+            /* [annotation][in] */ 
+            _In_  VARIANT vtimeAdvise);
         
         END_INTERFACE
     } ITimerSinkVtbl;
@@ -695,7 +742,8 @@ EXTERN_C const IID IID_IMapMIMEToCLSID;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMapMIMEToCLSID * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -804,7 +852,8 @@ EXTERN_C const IID IID_IImageDecodeFilter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IImageDecodeFilter * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -890,28 +939,40 @@ EXTERN_C const IID IID_IImageDecodeEventSink;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSurface( 
-            /* [in] */ LONG nWidth,
-            /* [in] */ LONG nHeight,
-            /* [in] */ __RPC__in REFGUID bfid,
-            /* [in] */ ULONG nPasses,
-            /* [in] */ DWORD dwHints,
-            /* [out] */ __RPC__deref_out_opt IUnknown **ppSurface) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG nWidth,
+            /* [annotation][in] */ 
+            _In_  LONG nHeight,
+            /* [annotation][in] */ 
+            _In_  REFGUID bfid,
+            /* [annotation][in] */ 
+            _In_  ULONG nPasses,
+            /* [annotation][in] */ 
+            _In_  DWORD dwHints,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppSurface) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnBeginDecode( 
-            /* [out] */ __RPC__out DWORD *pdwEvents,
-            /* [out] */ __RPC__out ULONG *pnFormats,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnFormats) BFID **ppFormats) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwEvents,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pnFormats,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pnFormats)  BFID **ppFormats) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnBitsComplete( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnDecodeComplete( 
-            /* [in] */ HRESULT hrStatus) = 0;
+            /* [annotation][in] */ 
+            _In_  HRESULT hrStatus) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnPalette( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnProgress( 
-            /* [in] */ __RPC__in RECT *pBounds,
-            /* [in] */ BOOL bComplete) = 0;
+            /* [annotation][in] */ 
+            _In_  RECT *pBounds,
+            /* [annotation][in] */ 
+            _In_  BOOL bComplete) = 0;
         
     };
     
@@ -925,7 +986,8 @@ EXTERN_C const IID IID_IImageDecodeEventSink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IImageDecodeEventSink * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -940,19 +1002,28 @@ EXTERN_C const IID IID_IImageDecodeEventSink;
         DECLSPEC_XFGVIRT(IImageDecodeEventSink, GetSurface)
         HRESULT ( STDMETHODCALLTYPE *GetSurface )( 
             __RPC__in IImageDecodeEventSink * This,
-            /* [in] */ LONG nWidth,
-            /* [in] */ LONG nHeight,
-            /* [in] */ __RPC__in REFGUID bfid,
-            /* [in] */ ULONG nPasses,
-            /* [in] */ DWORD dwHints,
-            /* [out] */ __RPC__deref_out_opt IUnknown **ppSurface);
+            /* [annotation][in] */ 
+            _In_  LONG nWidth,
+            /* [annotation][in] */ 
+            _In_  LONG nHeight,
+            /* [annotation][in] */ 
+            _In_  REFGUID bfid,
+            /* [annotation][in] */ 
+            _In_  ULONG nPasses,
+            /* [annotation][in] */ 
+            _In_  DWORD dwHints,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppSurface);
         
         DECLSPEC_XFGVIRT(IImageDecodeEventSink, OnBeginDecode)
         HRESULT ( STDMETHODCALLTYPE *OnBeginDecode )( 
             __RPC__in IImageDecodeEventSink * This,
-            /* [out] */ __RPC__out DWORD *pdwEvents,
-            /* [out] */ __RPC__out ULONG *pnFormats,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pnFormats) BFID **ppFormats);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwEvents,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pnFormats,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pnFormats)  BFID **ppFormats);
         
         DECLSPEC_XFGVIRT(IImageDecodeEventSink, OnBitsComplete)
         HRESULT ( STDMETHODCALLTYPE *OnBitsComplete )( 
@@ -961,7 +1032,8 @@ EXTERN_C const IID IID_IImageDecodeEventSink;
         DECLSPEC_XFGVIRT(IImageDecodeEventSink, OnDecodeComplete)
         HRESULT ( STDMETHODCALLTYPE *OnDecodeComplete )( 
             __RPC__in IImageDecodeEventSink * This,
-            /* [in] */ HRESULT hrStatus);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrStatus);
         
         DECLSPEC_XFGVIRT(IImageDecodeEventSink, OnPalette)
         HRESULT ( STDMETHODCALLTYPE *OnPalette )( 
@@ -970,8 +1042,10 @@ EXTERN_C const IID IID_IImageDecodeEventSink;
         DECLSPEC_XFGVIRT(IImageDecodeEventSink, OnProgress)
         HRESULT ( STDMETHODCALLTYPE *OnProgress )( 
             __RPC__in IImageDecodeEventSink * This,
-            /* [in] */ __RPC__in RECT *pBounds,
-            /* [in] */ BOOL bComplete);
+            /* [annotation][in] */ 
+            _In_  RECT *pBounds,
+            /* [annotation][in] */ 
+            _In_  BOOL bComplete);
         
         END_INTERFACE
     } IImageDecodeEventSinkVtbl;
@@ -1041,7 +1115,8 @@ EXTERN_C const IID IID_IImageDecodeEventSink2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE IsAlphaPremultRequired( 
-            /* [out] */ BOOL *pfPremultAlpha) = 0;
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfPremultAlpha) = 0;
         
     };
     
@@ -1055,7 +1130,8 @@ EXTERN_C const IID IID_IImageDecodeEventSink2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IImageDecodeEventSink2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1070,19 +1146,28 @@ EXTERN_C const IID IID_IImageDecodeEventSink2;
         DECLSPEC_XFGVIRT(IImageDecodeEventSink, GetSurface)
         HRESULT ( STDMETHODCALLTYPE *GetSurface )( 
             IImageDecodeEventSink2 * This,
-            /* [in] */ LONG nWidth,
-            /* [in] */ LONG nHeight,
-            /* [in] */ REFGUID bfid,
-            /* [in] */ ULONG nPasses,
-            /* [in] */ DWORD dwHints,
-            /* [out] */ IUnknown **ppSurface);
+            /* [annotation][in] */ 
+            _In_  LONG nWidth,
+            /* [annotation][in] */ 
+            _In_  LONG nHeight,
+            /* [annotation][in] */ 
+            _In_  REFGUID bfid,
+            /* [annotation][in] */ 
+            _In_  ULONG nPasses,
+            /* [annotation][in] */ 
+            _In_  DWORD dwHints,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppSurface);
         
         DECLSPEC_XFGVIRT(IImageDecodeEventSink, OnBeginDecode)
         HRESULT ( STDMETHODCALLTYPE *OnBeginDecode )( 
             IImageDecodeEventSink2 * This,
-            /* [out] */ DWORD *pdwEvents,
-            /* [out] */ ULONG *pnFormats,
-            /* [size_is][size_is][out] */ BFID **ppFormats);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwEvents,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pnFormats,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pnFormats)  BFID **ppFormats);
         
         DECLSPEC_XFGVIRT(IImageDecodeEventSink, OnBitsComplete)
         HRESULT ( STDMETHODCALLTYPE *OnBitsComplete )( 
@@ -1091,7 +1176,8 @@ EXTERN_C const IID IID_IImageDecodeEventSink2;
         DECLSPEC_XFGVIRT(IImageDecodeEventSink, OnDecodeComplete)
         HRESULT ( STDMETHODCALLTYPE *OnDecodeComplete )( 
             IImageDecodeEventSink2 * This,
-            /* [in] */ HRESULT hrStatus);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrStatus);
         
         DECLSPEC_XFGVIRT(IImageDecodeEventSink, OnPalette)
         HRESULT ( STDMETHODCALLTYPE *OnPalette )( 
@@ -1100,13 +1186,16 @@ EXTERN_C const IID IID_IImageDecodeEventSink2;
         DECLSPEC_XFGVIRT(IImageDecodeEventSink, OnProgress)
         HRESULT ( STDMETHODCALLTYPE *OnProgress )( 
             IImageDecodeEventSink2 * This,
-            /* [in] */ RECT *pBounds,
-            /* [in] */ BOOL bComplete);
+            /* [annotation][in] */ 
+            _In_  RECT *pBounds,
+            /* [annotation][in] */ 
+            _In_  BOOL bComplete);
         
         DECLSPEC_XFGVIRT(IImageDecodeEventSink2, IsAlphaPremultRequired)
         HRESULT ( STDMETHODCALLTYPE *IsAlphaPremultRequired )( 
             IImageDecodeEventSink2 * This,
-            /* [out] */ BOOL *pfPremultAlpha);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfPremultAlpha);
         
         END_INTERFACE
     } IImageDecodeEventSink2Vtbl;

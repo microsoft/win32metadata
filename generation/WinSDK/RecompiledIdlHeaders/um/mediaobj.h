@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -218,7 +218,8 @@ EXTERN_C const IID IID_IMediaBuffer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMediaBuffer * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -444,7 +445,8 @@ EXTERN_C const IID IID_IMediaObject;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMediaObject * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -747,7 +749,8 @@ EXTERN_C const IID IID_IEnumDMO;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumDMO * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -861,11 +864,14 @@ EXTERN_C const IID IID_IMediaObjectInPlace;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Process( 
-            /* [in] */ ULONG ulSize,
+            /* [annotation][in] */ 
+            _In_  ULONG ulSize,
             /* [annotation][size_is][out][in] */ 
             _Out_writes_bytes_(ulSize)  BYTE *pData,
-            /* [in] */ REFERENCE_TIME refTimeStart,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  REFERENCE_TIME refTimeStart,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
             /* [annotation][out] */ 
@@ -887,7 +893,8 @@ EXTERN_C const IID IID_IMediaObjectInPlace;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMediaObjectInPlace * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -902,11 +909,14 @@ EXTERN_C const IID IID_IMediaObjectInPlace;
         DECLSPEC_XFGVIRT(IMediaObjectInPlace, Process)
         HRESULT ( STDMETHODCALLTYPE *Process )( 
             IMediaObjectInPlace * This,
-            /* [in] */ ULONG ulSize,
+            /* [annotation][in] */ 
+            _In_  ULONG ulSize,
             /* [annotation][size_is][out][in] */ 
             _Out_writes_bytes_(ulSize)  BYTE *pData,
-            /* [in] */ REFERENCE_TIME refTimeStart,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  REFERENCE_TIME refTimeStart,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IMediaObjectInPlace, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
@@ -992,10 +1002,12 @@ EXTERN_C const IID IID_IDMOQualityControl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetNow( 
-            /* [in] */ REFERENCE_TIME rtNow) = 0;
+            /* [annotation][in] */ 
+            _In_  REFERENCE_TIME rtNow) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStatus( 
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStatus( 
             /* [annotation][out] */ 
@@ -1013,7 +1025,8 @@ EXTERN_C const IID IID_IDMOQualityControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDMOQualityControl * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1028,12 +1041,14 @@ EXTERN_C const IID IID_IDMOQualityControl;
         DECLSPEC_XFGVIRT(IDMOQualityControl, SetNow)
         HRESULT ( STDMETHODCALLTYPE *SetNow )( 
             IDMOQualityControl * This,
-            /* [in] */ REFERENCE_TIME rtNow);
+            /* [annotation][in] */ 
+            _In_  REFERENCE_TIME rtNow);
         
         DECLSPEC_XFGVIRT(IDMOQualityControl, SetStatus)
         HRESULT ( STDMETHODCALLTYPE *SetStatus )( 
             IDMOQualityControl * This,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IDMOQualityControl, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
@@ -1143,7 +1158,8 @@ EXTERN_C const IID IID_IDMOVideoOutputOptimizations;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDMOVideoOutputOptimizations * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         

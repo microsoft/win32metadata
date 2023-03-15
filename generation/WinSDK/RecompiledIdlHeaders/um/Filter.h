@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -67,15 +67,15 @@ extern "C"{
 /* interface __MIDL_itf_filter_0000_0000 */
 /* [local] */ 
 
-#include <winapifamily.h>
-#pragma region Desktop Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 //+-------------------------------------------------------------------------
 //
 //  Microsoft Windows
 //  Copyright (C) Microsoft Corporation, 1993-1998.
 //
 //--------------------------------------------------------------------------
+#include <winapifamily.h>
+#pragma region Desktop Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 #if !defined(_TAGFULLPROPSPEC_DEFINED_)
 #define _TAGFULLPROPSPEC_DEFINED_
 typedef struct tagFULLPROPSPEC
@@ -94,7 +94,7 @@ extern RPC_IF_HANDLE __MIDL_itf_filter_0000_0000_v0_0_s_ifspec;
 #define __IFilter_INTERFACE_DEFINED__
 
 /* interface IFilter */
-/* [unique][uuid][object][local] */ 
+/* [unique][uuid][object] */ 
 
 #ifndef _tagIFILTER_INIT_DEFINED
 typedef 
@@ -191,25 +191,36 @@ EXTERN_C const IID IID_IFilter;
     {
     public:
         virtual SCODE STDMETHODCALLTYPE Init( 
-            /* [in] */ ULONG grfFlags,
-            /* [in] */ ULONG cAttributes,
-            /* [size_is][in] */ const FULLPROPSPEC *aAttributes,
-            /* [out] */ ULONG *pFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG grfFlags,
+            /* [annotation][in] */ 
+            _In_  ULONG cAttributes,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cAttributes)  const FULLPROPSPEC *aAttributes,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pFlags) = 0;
         
         virtual SCODE STDMETHODCALLTYPE GetChunk( 
-            /* [out] */ STAT_CHUNK *pStat) = 0;
+            /* [annotation][out] */ 
+            _Out_  STAT_CHUNK *pStat) = 0;
         
         virtual SCODE STDMETHODCALLTYPE GetText( 
-            /* [out][in] */ ULONG *pcwcBuffer,
-            /* [size_is][out] */ WCHAR *awcBuffer) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *pcwcBuffer,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(*pcwcBuffer)  WCHAR *awcBuffer) = 0;
         
         virtual SCODE STDMETHODCALLTYPE GetValue( 
-            /* [out] */ PROPVARIANT **ppPropValue) = 0;
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT **ppPropValue) = 0;
         
-        virtual SCODE STDMETHODCALLTYPE BindRegion( 
-            /* [in] */ FILTERREGION origPos,
-            /* [in] */ REFIID riid,
-            /* [out] */ void **ppunk) = 0;
+        virtual /* [local] */ SCODE STDMETHODCALLTYPE BindRegion( 
+            /* [annotation][in] */ 
+            _In_  FILTERREGION origPos,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][out] */ 
+            _Out_  void **ppunk) = 0;
         
     };
     
@@ -222,49 +233,61 @@ EXTERN_C const IID IID_IFilter;
         
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IFilter * This,
-            /* [in] */ REFIID riid,
+            __RPC__in IFilter * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IFilter * This);
+            __RPC__in IFilter * This);
         
         DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            IFilter * This);
+            __RPC__in IFilter * This);
         
         DECLSPEC_XFGVIRT(IFilter, Init)
         SCODE ( STDMETHODCALLTYPE *Init )( 
-            IFilter * This,
-            /* [in] */ ULONG grfFlags,
-            /* [in] */ ULONG cAttributes,
-            /* [size_is][in] */ const FULLPROPSPEC *aAttributes,
-            /* [out] */ ULONG *pFlags);
+            __RPC__in IFilter * This,
+            /* [annotation][in] */ 
+            _In_  ULONG grfFlags,
+            /* [annotation][in] */ 
+            _In_  ULONG cAttributes,
+            /* [annotation][unique][size_is][in] */ 
+            _In_reads_(cAttributes)  const FULLPROPSPEC *aAttributes,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pFlags);
         
         DECLSPEC_XFGVIRT(IFilter, GetChunk)
         SCODE ( STDMETHODCALLTYPE *GetChunk )( 
-            IFilter * This,
-            /* [out] */ STAT_CHUNK *pStat);
+            __RPC__in IFilter * This,
+            /* [annotation][out] */ 
+            _Out_  STAT_CHUNK *pStat);
         
         DECLSPEC_XFGVIRT(IFilter, GetText)
         SCODE ( STDMETHODCALLTYPE *GetText )( 
-            IFilter * This,
-            /* [out][in] */ ULONG *pcwcBuffer,
-            /* [size_is][out] */ WCHAR *awcBuffer);
+            __RPC__in IFilter * This,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *pcwcBuffer,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(*pcwcBuffer)  WCHAR *awcBuffer);
         
         DECLSPEC_XFGVIRT(IFilter, GetValue)
         SCODE ( STDMETHODCALLTYPE *GetValue )( 
-            IFilter * This,
-            /* [out] */ PROPVARIANT **ppPropValue);
+            __RPC__in IFilter * This,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT **ppPropValue);
         
         DECLSPEC_XFGVIRT(IFilter, BindRegion)
-        SCODE ( STDMETHODCALLTYPE *BindRegion )( 
+        /* [local] */ SCODE ( STDMETHODCALLTYPE *BindRegion )( 
             IFilter * This,
-            /* [in] */ FILTERREGION origPos,
-            /* [in] */ REFIID riid,
-            /* [out] */ void **ppunk);
+            /* [annotation][in] */ 
+            _In_  FILTERREGION origPos,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][out] */ 
+            _Out_  void **ppunk);
         
         END_INTERFACE
     } IFilterVtbl;
@@ -326,6 +349,26 @@ extern RPC_IF_HANDLE __MIDL_itf_filter_0000_0001_v0_0_c_ifspec;
 extern RPC_IF_HANDLE __MIDL_itf_filter_0000_0001_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
+
+unsigned long             __RPC_USER  BSTR_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
+unsigned char * __RPC_USER  BSTR_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
+unsigned char * __RPC_USER  BSTR_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
+void                      __RPC_USER  BSTR_UserFree(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+
+unsigned long             __RPC_USER  LPSAFEARRAY_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in LPSAFEARRAY * ); 
+unsigned char * __RPC_USER  LPSAFEARRAY_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in LPSAFEARRAY * ); 
+unsigned char * __RPC_USER  LPSAFEARRAY_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out LPSAFEARRAY * ); 
+void                      __RPC_USER  LPSAFEARRAY_UserFree(     __RPC__in unsigned long *, __RPC__in LPSAFEARRAY * ); 
+
+unsigned long             __RPC_USER  BSTR_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
+unsigned char * __RPC_USER  BSTR_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
+unsigned char * __RPC_USER  BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
+void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+
+unsigned long             __RPC_USER  LPSAFEARRAY_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in LPSAFEARRAY * ); 
+unsigned char * __RPC_USER  LPSAFEARRAY_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in LPSAFEARRAY * ); 
+unsigned char * __RPC_USER  LPSAFEARRAY_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out LPSAFEARRAY * ); 
+void                      __RPC_USER  LPSAFEARRAY_UserFree64(     __RPC__in unsigned long *, __RPC__in LPSAFEARRAY * ); 
 
 /* end of Additional Prototypes */
 

@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -98,10 +98,12 @@ EXTERN_C const IID IID_ITAMMediaFormat;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MediaFormat( 
-            /* [retval][out] */ __RPC__deref_out_opt AM_MEDIA_TYPE **ppmt) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  AM_MEDIA_TYPE **ppmt) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MediaFormat( 
-            /* [in] */ __RPC__in const AM_MEDIA_TYPE *pmt) = 0;
+            /* [annotation][in] */ 
+            _In_  const AM_MEDIA_TYPE *pmt) = 0;
         
     };
     
@@ -115,7 +117,8 @@ EXTERN_C const IID IID_ITAMMediaFormat;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITAMMediaFormat * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -130,12 +133,14 @@ EXTERN_C const IID IID_ITAMMediaFormat;
         DECLSPEC_XFGVIRT(ITAMMediaFormat, get_MediaFormat)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaFormat )( 
             __RPC__in ITAMMediaFormat * This,
-            /* [retval][out] */ __RPC__deref_out_opt AM_MEDIA_TYPE **ppmt);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  AM_MEDIA_TYPE **ppmt);
         
         DECLSPEC_XFGVIRT(ITAMMediaFormat, put_MediaFormat)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MediaFormat )( 
             __RPC__in ITAMMediaFormat * This,
-            /* [in] */ __RPC__in const AM_MEDIA_TYPE *pmt);
+            /* [annotation][in] */ 
+            _In_  const AM_MEDIA_TYPE *pmt);
         
         END_INTERFACE
     } ITAMMediaFormatVtbl;
@@ -193,22 +198,28 @@ EXTERN_C const IID IID_ITAllocatorProperties;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetAllocatorProperties( 
-            /* [in] */ __RPC__in ALLOCATOR_PROPERTIES *pAllocProperties) = 0;
+            /* [annotation][in] */ 
+            _In_  ALLOCATOR_PROPERTIES *pAllocProperties) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetAllocatorProperties( 
-            /* [out] */ __RPC__out ALLOCATOR_PROPERTIES *pAllocProperties) = 0;
+            /* [annotation][out] */ 
+            _Out_  ALLOCATOR_PROPERTIES *pAllocProperties) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetAllocateBuffers( 
-            /* [in] */ BOOL bAllocBuffers) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL bAllocBuffers) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetAllocateBuffers( 
-            /* [out] */ __RPC__out BOOL *pbAllocBuffers) = 0;
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbAllocBuffers) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetBufferSize( 
-            /* [in] */ DWORD BufferSize) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD BufferSize) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetBufferSize( 
-            /* [out] */ __RPC__out DWORD *pBufferSize) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pBufferSize) = 0;
         
     };
     
@@ -222,7 +233,8 @@ EXTERN_C const IID IID_ITAllocatorProperties;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITAllocatorProperties * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -237,32 +249,38 @@ EXTERN_C const IID IID_ITAllocatorProperties;
         DECLSPEC_XFGVIRT(ITAllocatorProperties, SetAllocatorProperties)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetAllocatorProperties )( 
             __RPC__in ITAllocatorProperties * This,
-            /* [in] */ __RPC__in ALLOCATOR_PROPERTIES *pAllocProperties);
+            /* [annotation][in] */ 
+            _In_  ALLOCATOR_PROPERTIES *pAllocProperties);
         
         DECLSPEC_XFGVIRT(ITAllocatorProperties, GetAllocatorProperties)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetAllocatorProperties )( 
             __RPC__in ITAllocatorProperties * This,
-            /* [out] */ __RPC__out ALLOCATOR_PROPERTIES *pAllocProperties);
+            /* [annotation][out] */ 
+            _Out_  ALLOCATOR_PROPERTIES *pAllocProperties);
         
         DECLSPEC_XFGVIRT(ITAllocatorProperties, SetAllocateBuffers)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetAllocateBuffers )( 
             __RPC__in ITAllocatorProperties * This,
-            /* [in] */ BOOL bAllocBuffers);
+            /* [annotation][in] */ 
+            _In_  BOOL bAllocBuffers);
         
         DECLSPEC_XFGVIRT(ITAllocatorProperties, GetAllocateBuffers)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetAllocateBuffers )( 
             __RPC__in ITAllocatorProperties * This,
-            /* [out] */ __RPC__out BOOL *pbAllocBuffers);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbAllocBuffers);
         
         DECLSPEC_XFGVIRT(ITAllocatorProperties, SetBufferSize)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetBufferSize )( 
             __RPC__in ITAllocatorProperties * This,
-            /* [in] */ DWORD BufferSize);
+            /* [annotation][in] */ 
+            _In_  DWORD BufferSize);
         
         DECLSPEC_XFGVIRT(ITAllocatorProperties, GetBufferSize)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetBufferSize )( 
             __RPC__in ITAllocatorProperties * This,
-            /* [out] */ __RPC__out DWORD *pBufferSize);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pBufferSize);
         
         END_INTERFACE
     } ITAllocatorPropertiesVtbl;

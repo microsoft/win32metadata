@@ -1,21 +1,16 @@
-/*-------------------------------------------------------------------------------------
- *
- * Copyright (c) Microsoft Corporation
- * Licensed under the MIT license
- *
- *-------------------------------------------------------------------------------------*/
 
 
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
  /* File created by MIDL compiler version 8.01.0628 */
+/* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -156,27 +151,38 @@ EXTERN_C const IID IID_ID3D12CompatibilityDevice;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateSharedResource( 
+            /* [annotation] */ 
             _In_  const D3D12_HEAP_PROPERTIES *pHeapProperties,
             D3D12_HEAP_FLAGS HeapFlags,
+            /* [annotation] */ 
             _In_  const D3D12_RESOURCE_DESC *pDesc,
             D3D12_RESOURCE_STATES InitialResourceState,
+            /* [annotation] */ 
             _In_opt_  const D3D12_CLEAR_VALUE *pOptimizedClearValue,
+            /* [annotation] */ 
             _In_opt_  const D3D11_RESOURCE_FLAGS *pFlags11,
             D3D12_COMPATIBILITY_SHARED_FLAGS CompatibilityFlags,
+            /* [annotation] */ 
             _In_opt_  ID3D12LifetimeTracker *pLifetimeTracker,
+            /* [annotation] */ 
             _In_opt_  ID3D12SwapChainAssistant *pOwningSwapchain,
             REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateSharedHeap( 
+            /* [annotation] */ 
             _In_  const D3D12_HEAP_DESC *pHeapDesc,
             D3D12_COMPATIBILITY_SHARED_FLAGS CompatibilityFlags,
             REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppHeap) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReflectSharedProperties( 
+            /* [annotation] */ 
             _In_  ID3D12Object *pHeapOrResource,
             D3D12_REFLECT_SHARED_PROPERTY ReflectType,
+            /* [annotation] */ 
             _Out_writes_bytes_(DataSize)  void *pData,
             UINT DataSize) = 0;
         
@@ -192,7 +198,9 @@ EXTERN_C const IID IID_ID3D12CompatibilityDevice;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12CompatibilityDevice * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -206,31 +214,42 @@ EXTERN_C const IID IID_ID3D12CompatibilityDevice;
         DECLSPEC_XFGVIRT(ID3D12CompatibilityDevice, CreateSharedResource)
         HRESULT ( STDMETHODCALLTYPE *CreateSharedResource )( 
             ID3D12CompatibilityDevice * This,
+            /* [annotation] */ 
             _In_  const D3D12_HEAP_PROPERTIES *pHeapProperties,
             D3D12_HEAP_FLAGS HeapFlags,
+            /* [annotation] */ 
             _In_  const D3D12_RESOURCE_DESC *pDesc,
             D3D12_RESOURCE_STATES InitialResourceState,
+            /* [annotation] */ 
             _In_opt_  const D3D12_CLEAR_VALUE *pOptimizedClearValue,
+            /* [annotation] */ 
             _In_opt_  const D3D11_RESOURCE_FLAGS *pFlags11,
             D3D12_COMPATIBILITY_SHARED_FLAGS CompatibilityFlags,
+            /* [annotation] */ 
             _In_opt_  ID3D12LifetimeTracker *pLifetimeTracker,
+            /* [annotation] */ 
             _In_opt_  ID3D12SwapChainAssistant *pOwningSwapchain,
             REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppResource);
         
         DECLSPEC_XFGVIRT(ID3D12CompatibilityDevice, CreateSharedHeap)
         HRESULT ( STDMETHODCALLTYPE *CreateSharedHeap )( 
             ID3D12CompatibilityDevice * This,
+            /* [annotation] */ 
             _In_  const D3D12_HEAP_DESC *pHeapDesc,
             D3D12_COMPATIBILITY_SHARED_FLAGS CompatibilityFlags,
             REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppHeap);
         
         DECLSPEC_XFGVIRT(ID3D12CompatibilityDevice, ReflectSharedProperties)
         HRESULT ( STDMETHODCALLTYPE *ReflectSharedProperties )( 
             ID3D12CompatibilityDevice * This,
+            /* [annotation] */ 
             _In_  ID3D12Object *pHeapOrResource,
             D3D12_REFLECT_SHARED_PROPERTY ReflectType,
+            /* [annotation] */ 
             _Out_writes_bytes_(DataSize)  void *pData,
             UINT DataSize);
         
@@ -304,7 +323,9 @@ EXTERN_C const IID IID_D3D11On12CreatorID;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             D3D11On12CreatorID * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -376,7 +397,9 @@ EXTERN_C const IID IID_D3D9On12CreatorID;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             D3D9On12CreatorID * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -448,7 +471,9 @@ EXTERN_C const IID IID_OpenGLOn12CreatorID;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             OpenGLOn12CreatorID * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -520,7 +545,9 @@ EXTERN_C const IID IID_OpenCLOn12CreatorID;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             OpenCLOn12CreatorID * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -592,7 +619,9 @@ EXTERN_C const IID IID_DirectMLTensorFlowCreatorID;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             DirectMLTensorFlowCreatorID * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -664,7 +693,9 @@ EXTERN_C const IID IID_DirectMLPyTorchCreatorID;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             DirectMLPyTorchCreatorID * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)

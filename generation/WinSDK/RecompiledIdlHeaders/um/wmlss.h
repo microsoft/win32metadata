@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -144,10 +144,12 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingDeviceProperty;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ BSTR *name) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Value( 
-            /* [retval][out] */ VARIANT *value) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *value) = 0;
         
     };
     
@@ -161,7 +163,8 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingDeviceProperty;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWindowsMediaLibrarySharingDeviceProperty * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -176,23 +179,31 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingDeviceProperty;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWindowsMediaLibrarySharingDeviceProperty * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWindowsMediaLibrarySharingDeviceProperty * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWindowsMediaLibrarySharingDeviceProperty * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -217,12 +228,14 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingDeviceProperty;
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingDeviceProperty, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             IWindowsMediaLibrarySharingDeviceProperty * This,
-            /* [retval][out] */ BSTR *name);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingDeviceProperty, get_Value)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             IWindowsMediaLibrarySharingDeviceProperty * This,
-            /* [retval][out] */ VARIANT *value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *value);
         
         END_INTERFACE
     } IWindowsMediaLibrarySharingDevicePropertyVtbl;
@@ -293,15 +306,20 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingDeviceProperties;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [in] */ LONG index,
-            /* [retval][out] */ IWindowsMediaLibrarySharingDeviceProperty **property) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG index,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IWindowsMediaLibrarySharingDeviceProperty **property) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [retval][out] */ LONG *count) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LONG *count) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetProperty( 
-            /* [in] */ BSTR name,
-            /* [retval][out] */ IWindowsMediaLibrarySharingDeviceProperty **property) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR name,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IWindowsMediaLibrarySharingDeviceProperty **property) = 0;
         
     };
     
@@ -315,7 +333,8 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingDeviceProperties;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWindowsMediaLibrarySharingDeviceProperties * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -330,23 +349,31 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingDeviceProperties;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWindowsMediaLibrarySharingDeviceProperties * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWindowsMediaLibrarySharingDeviceProperties * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWindowsMediaLibrarySharingDeviceProperties * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -371,19 +398,24 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingDeviceProperties;
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingDeviceProperties, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             IWindowsMediaLibrarySharingDeviceProperties * This,
-            /* [in] */ LONG index,
-            /* [retval][out] */ IWindowsMediaLibrarySharingDeviceProperty **property);
+            /* [annotation][in] */ 
+            _In_  LONG index,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IWindowsMediaLibrarySharingDeviceProperty **property);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingDeviceProperties, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             IWindowsMediaLibrarySharingDeviceProperties * This,
-            /* [retval][out] */ LONG *count);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LONG *count);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingDeviceProperties, GetProperty)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             IWindowsMediaLibrarySharingDeviceProperties * This,
-            /* [in] */ BSTR name,
-            /* [retval][out] */ IWindowsMediaLibrarySharingDeviceProperty **property);
+            /* [annotation][in] */ 
+            _In_  BSTR name,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IWindowsMediaLibrarySharingDeviceProperty **property);
         
         END_INTERFACE
     } IWindowsMediaLibrarySharingDevicePropertiesVtbl;
@@ -457,16 +489,20 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingDevice;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DeviceID( 
-            /* [retval][out] */ BSTR *deviceID) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *deviceID) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Authorization( 
-            /* [retval][out] */ WindowsMediaLibrarySharingDeviceAuthorizationStatus *authorization) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WindowsMediaLibrarySharingDeviceAuthorizationStatus *authorization) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Authorization( 
-            /* [in] */ WindowsMediaLibrarySharingDeviceAuthorizationStatus authorization) = 0;
+            /* [annotation][in] */ 
+            _In_  WindowsMediaLibrarySharingDeviceAuthorizationStatus authorization) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Properties( 
-            /* [retval][out] */ IWindowsMediaLibrarySharingDeviceProperties **deviceProperties) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IWindowsMediaLibrarySharingDeviceProperties **deviceProperties) = 0;
         
     };
     
@@ -480,7 +516,8 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingDevice;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWindowsMediaLibrarySharingDevice * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -495,23 +532,31 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingDevice;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWindowsMediaLibrarySharingDevice * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWindowsMediaLibrarySharingDevice * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWindowsMediaLibrarySharingDevice * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -536,22 +581,26 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingDevice;
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingDevice, get_DeviceID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeviceID )( 
             IWindowsMediaLibrarySharingDevice * This,
-            /* [retval][out] */ BSTR *deviceID);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *deviceID);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingDevice, get_Authorization)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Authorization )( 
             IWindowsMediaLibrarySharingDevice * This,
-            /* [retval][out] */ WindowsMediaLibrarySharingDeviceAuthorizationStatus *authorization);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WindowsMediaLibrarySharingDeviceAuthorizationStatus *authorization);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingDevice, put_Authorization)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Authorization )( 
             IWindowsMediaLibrarySharingDevice * This,
-            /* [in] */ WindowsMediaLibrarySharingDeviceAuthorizationStatus authorization);
+            /* [annotation][in] */ 
+            _In_  WindowsMediaLibrarySharingDeviceAuthorizationStatus authorization);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingDevice, get_Properties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             IWindowsMediaLibrarySharingDevice * This,
-            /* [retval][out] */ IWindowsMediaLibrarySharingDeviceProperties **deviceProperties);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IWindowsMediaLibrarySharingDeviceProperties **deviceProperties);
         
         END_INTERFACE
     } IWindowsMediaLibrarySharingDeviceVtbl;
@@ -628,15 +677,20 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingDevices;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [in] */ LONG index,
-            /* [retval][out] */ IWindowsMediaLibrarySharingDevice **device) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG index,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IWindowsMediaLibrarySharingDevice **device) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [retval][out] */ LONG *count) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LONG *count) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetDevice( 
-            /* [in] */ BSTR deviceID,
-            /* [retval][out] */ IWindowsMediaLibrarySharingDevice **device) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR deviceID,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IWindowsMediaLibrarySharingDevice **device) = 0;
         
     };
     
@@ -650,7 +704,8 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingDevices;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWindowsMediaLibrarySharingDevices * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -665,23 +720,31 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingDevices;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWindowsMediaLibrarySharingDevices * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWindowsMediaLibrarySharingDevices * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWindowsMediaLibrarySharingDevices * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -706,19 +769,24 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingDevices;
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingDevices, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             IWindowsMediaLibrarySharingDevices * This,
-            /* [in] */ LONG index,
-            /* [retval][out] */ IWindowsMediaLibrarySharingDevice **device);
+            /* [annotation][in] */ 
+            _In_  LONG index,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IWindowsMediaLibrarySharingDevice **device);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingDevices, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             IWindowsMediaLibrarySharingDevices * This,
-            /* [retval][out] */ LONG *count);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LONG *count);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingDevices, GetDevice)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             IWindowsMediaLibrarySharingDevices * This,
-            /* [in] */ BSTR deviceID,
-            /* [retval][out] */ IWindowsMediaLibrarySharingDevice **device);
+            /* [annotation][in] */ 
+            _In_  BSTR deviceID,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IWindowsMediaLibrarySharingDevice **device);
         
         END_INTERFACE
     } IWindowsMediaLibrarySharingDevicesVtbl;
@@ -792,64 +860,86 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingServices;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE showShareMediaCPL( 
-            /* [in] */ BSTR device) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR device) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_userHomeMediaSharingState( 
-            /* [retval][out] */ VARIANT_BOOL *sharingEnabled) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *sharingEnabled) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_userHomeMediaSharingState( 
-            /* [in] */ VARIANT_BOOL sharingEnabled) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL sharingEnabled) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_userHomeMediaSharingLibraryName( 
-            /* [retval][out] */ BSTR *libraryName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *libraryName) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_userHomeMediaSharingLibraryName( 
-            /* [in] */ BSTR libraryName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR libraryName) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_computerHomeMediaSharingAllowedState( 
-            /* [retval][out] */ VARIANT_BOOL *sharingAllowed) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *sharingAllowed) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_computerHomeMediaSharingAllowedState( 
-            /* [in] */ VARIANT_BOOL sharingAllowed) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL sharingAllowed) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_userInternetMediaSharingState( 
-            /* [retval][out] */ VARIANT_BOOL *sharingEnabled) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *sharingEnabled) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_userInternetMediaSharingState( 
-            /* [in] */ VARIANT_BOOL sharingEnabled) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL sharingEnabled) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_computerInternetMediaSharingAllowedState( 
-            /* [retval][out] */ VARIANT_BOOL *sharingAllowed) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *sharingAllowed) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_computerInternetMediaSharingAllowedState( 
-            /* [in] */ VARIANT_BOOL sharingAllowed) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL sharingAllowed) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_internetMediaSharingSecurityGroup( 
-            /* [retval][out] */ BSTR *securityGroup) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *securityGroup) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_internetMediaSharingSecurityGroup( 
-            /* [in] */ BSTR securityGroup) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR securityGroup) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_allowSharingToAllDevices( 
-            /* [retval][out] */ VARIANT_BOOL *sharingEnabled) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *sharingEnabled) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_allowSharingToAllDevices( 
-            /* [in] */ VARIANT_BOOL sharingEnabled) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL sharingEnabled) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE setDefaultAuthorization( 
-            /* [in] */ BSTR MACAddresses,
-            /* [in] */ BSTR friendlyName,
-            /* [in] */ VARIANT_BOOL authorization) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR MACAddresses,
+            /* [annotation][in] */ 
+            _In_  BSTR friendlyName,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL authorization) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE setAuthorizationState( 
-            /* [in] */ BSTR MACAddress,
-            /* [in] */ VARIANT_BOOL authorizationState) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR MACAddress,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL authorizationState) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getAllDevices( 
-            /* [retval][out] */ IWindowsMediaLibrarySharingDevices **devices) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IWindowsMediaLibrarySharingDevices **devices) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_customSettingsApplied( 
-            /* [retval][out] */ VARIANT_BOOL *customSettingsApplied) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *customSettingsApplied) = 0;
         
     };
     
@@ -863,7 +953,8 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingServices;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -878,23 +969,31 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingServices;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -919,100 +1018,122 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingServices;
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingServices, showShareMediaCPL)
         HRESULT ( STDMETHODCALLTYPE *showShareMediaCPL )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [in] */ BSTR device);
+            /* [annotation][in] */ 
+            _In_  BSTR device);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingServices, get_userHomeMediaSharingState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_userHomeMediaSharingState )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [retval][out] */ VARIANT_BOOL *sharingEnabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *sharingEnabled);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingServices, put_userHomeMediaSharingState)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_userHomeMediaSharingState )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [in] */ VARIANT_BOOL sharingEnabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL sharingEnabled);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingServices, get_userHomeMediaSharingLibraryName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_userHomeMediaSharingLibraryName )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [retval][out] */ BSTR *libraryName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *libraryName);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingServices, put_userHomeMediaSharingLibraryName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_userHomeMediaSharingLibraryName )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [in] */ BSTR libraryName);
+            /* [annotation][in] */ 
+            _In_  BSTR libraryName);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingServices, get_computerHomeMediaSharingAllowedState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_computerHomeMediaSharingAllowedState )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [retval][out] */ VARIANT_BOOL *sharingAllowed);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *sharingAllowed);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingServices, put_computerHomeMediaSharingAllowedState)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_computerHomeMediaSharingAllowedState )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [in] */ VARIANT_BOOL sharingAllowed);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL sharingAllowed);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingServices, get_userInternetMediaSharingState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_userInternetMediaSharingState )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [retval][out] */ VARIANT_BOOL *sharingEnabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *sharingEnabled);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingServices, put_userInternetMediaSharingState)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_userInternetMediaSharingState )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [in] */ VARIANT_BOOL sharingEnabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL sharingEnabled);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingServices, get_computerInternetMediaSharingAllowedState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_computerInternetMediaSharingAllowedState )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [retval][out] */ VARIANT_BOOL *sharingAllowed);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *sharingAllowed);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingServices, put_computerInternetMediaSharingAllowedState)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_computerInternetMediaSharingAllowedState )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [in] */ VARIANT_BOOL sharingAllowed);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL sharingAllowed);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingServices, get_internetMediaSharingSecurityGroup)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_internetMediaSharingSecurityGroup )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [retval][out] */ BSTR *securityGroup);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *securityGroup);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingServices, put_internetMediaSharingSecurityGroup)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_internetMediaSharingSecurityGroup )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [in] */ BSTR securityGroup);
+            /* [annotation][in] */ 
+            _In_  BSTR securityGroup);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingServices, get_allowSharingToAllDevices)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_allowSharingToAllDevices )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [retval][out] */ VARIANT_BOOL *sharingEnabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *sharingEnabled);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingServices, put_allowSharingToAllDevices)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_allowSharingToAllDevices )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [in] */ VARIANT_BOOL sharingEnabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL sharingEnabled);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingServices, setDefaultAuthorization)
         HRESULT ( STDMETHODCALLTYPE *setDefaultAuthorization )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [in] */ BSTR MACAddresses,
-            /* [in] */ BSTR friendlyName,
-            /* [in] */ VARIANT_BOOL authorization);
+            /* [annotation][in] */ 
+            _In_  BSTR MACAddresses,
+            /* [annotation][in] */ 
+            _In_  BSTR friendlyName,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL authorization);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingServices, setAuthorizationState)
         HRESULT ( STDMETHODCALLTYPE *setAuthorizationState )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [in] */ BSTR MACAddress,
-            /* [in] */ VARIANT_BOOL authorizationState);
+            /* [annotation][in] */ 
+            _In_  BSTR MACAddress,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL authorizationState);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingServices, getAllDevices)
         HRESULT ( STDMETHODCALLTYPE *getAllDevices )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [retval][out] */ IWindowsMediaLibrarySharingDevices **devices);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IWindowsMediaLibrarySharingDevices **devices);
         
         DECLSPEC_XFGVIRT(IWindowsMediaLibrarySharingServices, get_customSettingsApplied)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_customSettingsApplied )( 
             IWindowsMediaLibrarySharingServices * This,
-            /* [retval][out] */ VARIANT_BOOL *customSettingsApplied);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *customSettingsApplied);
         
         END_INTERFACE
     } IWindowsMediaLibrarySharingServicesVtbl;

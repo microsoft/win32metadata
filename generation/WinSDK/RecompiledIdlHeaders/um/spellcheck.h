@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -174,16 +174,20 @@ EXTERN_C const IID IID_ISpellingError;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_StartIndex( 
-            /* [retval][out] */ __RPC__out ULONG *value) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Length( 
-            /* [retval][out] */ __RPC__out ULONG *value) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CorrectiveAction( 
-            /* [retval][out] */ __RPC__out CORRECTIVE_ACTION *value) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CORRECTIVE_ACTION *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Replacement( 
-            /* [retval][out] */ __RPC__deref_out_opt LPWSTR *value) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
     };
     
@@ -197,7 +201,8 @@ EXTERN_C const IID IID_ISpellingError;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpellingError * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -212,22 +217,26 @@ EXTERN_C const IID IID_ISpellingError;
         DECLSPEC_XFGVIRT(ISpellingError, get_StartIndex)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartIndex )( 
             __RPC__in ISpellingError * This,
-            /* [retval][out] */ __RPC__out ULONG *value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *value);
         
         DECLSPEC_XFGVIRT(ISpellingError, get_Length)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Length )( 
             __RPC__in ISpellingError * This,
-            /* [retval][out] */ __RPC__out ULONG *value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *value);
         
         DECLSPEC_XFGVIRT(ISpellingError, get_CorrectiveAction)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CorrectiveAction )( 
             __RPC__in ISpellingError * This,
-            /* [retval][out] */ __RPC__out CORRECTIVE_ACTION *value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CORRECTIVE_ACTION *value);
         
         DECLSPEC_XFGVIRT(ISpellingError, get_Replacement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Replacement )( 
             __RPC__in ISpellingError * This,
-            /* [retval][out] */ __RPC__deref_out_opt LPWSTR *value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         END_INTERFACE
     } ISpellingErrorVtbl;
@@ -291,7 +300,8 @@ EXTERN_C const IID IID_IEnumSpellingError;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [retval][out] */ __RPC__deref_out_opt ISpellingError **value) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISpellingError **value) = 0;
         
     };
     
@@ -305,7 +315,8 @@ EXTERN_C const IID IID_IEnumSpellingError;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumSpellingError * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -320,7 +331,8 @@ EXTERN_C const IID IID_IEnumSpellingError;
         DECLSPEC_XFGVIRT(IEnumSpellingError, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumSpellingError * This,
-            /* [retval][out] */ __RPC__deref_out_opt ISpellingError **value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISpellingError **value);
         
         END_INTERFACE
     } IEnumSpellingErrorVtbl;
@@ -375,16 +387,20 @@ EXTERN_C const IID IID_IOptionDescription;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
-            /* [retval][out] */ __RPC__deref_out_opt LPWSTR *value) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Heading( 
-            /* [retval][out] */ __RPC__deref_out_opt LPWSTR *value) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
-            /* [retval][out] */ __RPC__deref_out_opt LPWSTR *value) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Labels( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumString **value) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumString **value) = 0;
         
     };
     
@@ -398,7 +414,8 @@ EXTERN_C const IID IID_IOptionDescription;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOptionDescription * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -413,22 +430,26 @@ EXTERN_C const IID IID_IOptionDescription;
         DECLSPEC_XFGVIRT(IOptionDescription, get_Id)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IOptionDescription * This,
-            /* [retval][out] */ __RPC__deref_out_opt LPWSTR *value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(IOptionDescription, get_Heading)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Heading )( 
             __RPC__in IOptionDescription * This,
-            /* [retval][out] */ __RPC__deref_out_opt LPWSTR *value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(IOptionDescription, get_Description)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IOptionDescription * This,
-            /* [retval][out] */ __RPC__deref_out_opt LPWSTR *value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(IOptionDescription, get_Labels)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Labels )( 
             __RPC__in IOptionDescription * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumString **value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumString **value);
         
         END_INTERFACE
     } IOptionDescriptionVtbl;
@@ -501,7 +522,8 @@ EXTERN_C const IID IID_ISpellCheckerChangedEventHandler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Invoke( 
-            /* [in] */ __RPC__in_opt ISpellChecker *sender) = 0;
+            /* [annotation][in] */ 
+            _In_  ISpellChecker *sender) = 0;
         
     };
     
@@ -515,7 +537,8 @@ EXTERN_C const IID IID_ISpellCheckerChangedEventHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpellCheckerChangedEventHandler * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -530,7 +553,8 @@ EXTERN_C const IID IID_ISpellCheckerChangedEventHandler;
         DECLSPEC_XFGVIRT(ISpellCheckerChangedEventHandler, Invoke)
         HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             __RPC__in ISpellCheckerChangedEventHandler * This,
-            /* [in] */ __RPC__in_opt ISpellChecker *sender);
+            /* [annotation][in] */ 
+            _In_  ISpellChecker *sender);
         
         END_INTERFACE
     } ISpellCheckerChangedEventHandlerVtbl;
@@ -585,53 +609,74 @@ EXTERN_C const IID IID_ISpellChecker;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_LanguageTag( 
-            /* [retval][out] */ __RPC__deref_out_opt LPWSTR *value) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Check( 
-            /* [in] */ __RPC__in LPCWSTR text,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumSpellingError **value) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR text,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumSpellingError **value) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Suggest( 
-            /* [in] */ __RPC__in LPCWSTR word,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumString **value) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR word,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumString **value) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Add( 
-            /* [in] */ __RPC__in LPCWSTR word) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR word) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Ignore( 
-            /* [in] */ __RPC__in LPCWSTR word) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR word) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AutoCorrect( 
-            /* [in] */ __RPC__in LPCWSTR from,
-            /* [in] */ __RPC__in LPCWSTR to) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR from,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR to) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOptionValue( 
-            /* [in] */ __RPC__in LPCWSTR optionId,
-            /* [retval][out] */ __RPC__out BYTE *value) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR optionId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BYTE *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_OptionIds( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumString **value) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumString **value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
-            /* [retval][out] */ __RPC__deref_out_opt LPWSTR *value) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_LocalizedName( 
-            /* [retval][out] */ __RPC__deref_out_opt LPWSTR *value) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE add_SpellCheckerChanged( 
-            /* [in] */ __RPC__in_opt ISpellCheckerChangedEventHandler *handler,
-            /* [retval][out] */ __RPC__out DWORD *eventCookie) = 0;
+            /* [annotation][in] */ 
+            _In_  ISpellCheckerChangedEventHandler *handler,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *eventCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE remove_SpellCheckerChanged( 
-            /* [in] */ DWORD eventCookie) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD eventCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOptionDescription( 
-            /* [in] */ __RPC__in LPCWSTR optionId,
-            /* [retval][out] */ __RPC__deref_out_opt IOptionDescription **value) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR optionId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IOptionDescription **value) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ComprehensiveCheck( 
-            /* [in] */ __RPC__in LPCWSTR text,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumSpellingError **value) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR text,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumSpellingError **value) = 0;
         
     };
     
@@ -645,7 +690,8 @@ EXTERN_C const IID IID_ISpellChecker;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpellChecker * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -660,79 +706,100 @@ EXTERN_C const IID IID_ISpellChecker;
         DECLSPEC_XFGVIRT(ISpellChecker, get_LanguageTag)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LanguageTag )( 
             __RPC__in ISpellChecker * This,
-            /* [retval][out] */ __RPC__deref_out_opt LPWSTR *value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISpellChecker, Check)
         HRESULT ( STDMETHODCALLTYPE *Check )( 
             __RPC__in ISpellChecker * This,
-            /* [in] */ __RPC__in LPCWSTR text,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumSpellingError **value);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR text,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumSpellingError **value);
         
         DECLSPEC_XFGVIRT(ISpellChecker, Suggest)
         HRESULT ( STDMETHODCALLTYPE *Suggest )( 
             __RPC__in ISpellChecker * This,
-            /* [in] */ __RPC__in LPCWSTR word,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumString **value);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR word,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumString **value);
         
         DECLSPEC_XFGVIRT(ISpellChecker, Add)
         HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in ISpellChecker * This,
-            /* [in] */ __RPC__in LPCWSTR word);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR word);
         
         DECLSPEC_XFGVIRT(ISpellChecker, Ignore)
         HRESULT ( STDMETHODCALLTYPE *Ignore )( 
             __RPC__in ISpellChecker * This,
-            /* [in] */ __RPC__in LPCWSTR word);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR word);
         
         DECLSPEC_XFGVIRT(ISpellChecker, AutoCorrect)
         HRESULT ( STDMETHODCALLTYPE *AutoCorrect )( 
             __RPC__in ISpellChecker * This,
-            /* [in] */ __RPC__in LPCWSTR from,
-            /* [in] */ __RPC__in LPCWSTR to);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR from,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR to);
         
         DECLSPEC_XFGVIRT(ISpellChecker, GetOptionValue)
         HRESULT ( STDMETHODCALLTYPE *GetOptionValue )( 
             __RPC__in ISpellChecker * This,
-            /* [in] */ __RPC__in LPCWSTR optionId,
-            /* [retval][out] */ __RPC__out BYTE *value);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR optionId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BYTE *value);
         
         DECLSPEC_XFGVIRT(ISpellChecker, get_OptionIds)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_OptionIds )( 
             __RPC__in ISpellChecker * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumString **value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumString **value);
         
         DECLSPEC_XFGVIRT(ISpellChecker, get_Id)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in ISpellChecker * This,
-            /* [retval][out] */ __RPC__deref_out_opt LPWSTR *value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISpellChecker, get_LocalizedName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LocalizedName )( 
             __RPC__in ISpellChecker * This,
-            /* [retval][out] */ __RPC__deref_out_opt LPWSTR *value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISpellChecker, add_SpellCheckerChanged)
         HRESULT ( STDMETHODCALLTYPE *add_SpellCheckerChanged )( 
             __RPC__in ISpellChecker * This,
-            /* [in] */ __RPC__in_opt ISpellCheckerChangedEventHandler *handler,
-            /* [retval][out] */ __RPC__out DWORD *eventCookie);
+            /* [annotation][in] */ 
+            _In_  ISpellCheckerChangedEventHandler *handler,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *eventCookie);
         
         DECLSPEC_XFGVIRT(ISpellChecker, remove_SpellCheckerChanged)
         HRESULT ( STDMETHODCALLTYPE *remove_SpellCheckerChanged )( 
             __RPC__in ISpellChecker * This,
-            /* [in] */ DWORD eventCookie);
+            /* [annotation][in] */ 
+            _In_  DWORD eventCookie);
         
         DECLSPEC_XFGVIRT(ISpellChecker, GetOptionDescription)
         HRESULT ( STDMETHODCALLTYPE *GetOptionDescription )( 
             __RPC__in ISpellChecker * This,
-            /* [in] */ __RPC__in LPCWSTR optionId,
-            /* [retval][out] */ __RPC__deref_out_opt IOptionDescription **value);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR optionId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IOptionDescription **value);
         
         DECLSPEC_XFGVIRT(ISpellChecker, ComprehensiveCheck)
         HRESULT ( STDMETHODCALLTYPE *ComprehensiveCheck )( 
             __RPC__in ISpellChecker * This,
-            /* [in] */ __RPC__in LPCWSTR text,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumSpellingError **value);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR text,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumSpellingError **value);
         
         END_INTERFACE
     } ISpellCheckerVtbl;
@@ -826,7 +893,8 @@ EXTERN_C const IID IID_ISpellChecker2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Remove( 
-            /* [in] */ __RPC__in LPCWSTR word) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR word) = 0;
         
     };
     
@@ -840,7 +908,8 @@ EXTERN_C const IID IID_ISpellChecker2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpellChecker2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -855,84 +924,106 @@ EXTERN_C const IID IID_ISpellChecker2;
         DECLSPEC_XFGVIRT(ISpellChecker, get_LanguageTag)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LanguageTag )( 
             __RPC__in ISpellChecker2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt LPWSTR *value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISpellChecker, Check)
         HRESULT ( STDMETHODCALLTYPE *Check )( 
             __RPC__in ISpellChecker2 * This,
-            /* [in] */ __RPC__in LPCWSTR text,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumSpellingError **value);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR text,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumSpellingError **value);
         
         DECLSPEC_XFGVIRT(ISpellChecker, Suggest)
         HRESULT ( STDMETHODCALLTYPE *Suggest )( 
             __RPC__in ISpellChecker2 * This,
-            /* [in] */ __RPC__in LPCWSTR word,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumString **value);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR word,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumString **value);
         
         DECLSPEC_XFGVIRT(ISpellChecker, Add)
         HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in ISpellChecker2 * This,
-            /* [in] */ __RPC__in LPCWSTR word);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR word);
         
         DECLSPEC_XFGVIRT(ISpellChecker, Ignore)
         HRESULT ( STDMETHODCALLTYPE *Ignore )( 
             __RPC__in ISpellChecker2 * This,
-            /* [in] */ __RPC__in LPCWSTR word);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR word);
         
         DECLSPEC_XFGVIRT(ISpellChecker, AutoCorrect)
         HRESULT ( STDMETHODCALLTYPE *AutoCorrect )( 
             __RPC__in ISpellChecker2 * This,
-            /* [in] */ __RPC__in LPCWSTR from,
-            /* [in] */ __RPC__in LPCWSTR to);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR from,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR to);
         
         DECLSPEC_XFGVIRT(ISpellChecker, GetOptionValue)
         HRESULT ( STDMETHODCALLTYPE *GetOptionValue )( 
             __RPC__in ISpellChecker2 * This,
-            /* [in] */ __RPC__in LPCWSTR optionId,
-            /* [retval][out] */ __RPC__out BYTE *value);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR optionId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BYTE *value);
         
         DECLSPEC_XFGVIRT(ISpellChecker, get_OptionIds)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_OptionIds )( 
             __RPC__in ISpellChecker2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumString **value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumString **value);
         
         DECLSPEC_XFGVIRT(ISpellChecker, get_Id)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in ISpellChecker2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt LPWSTR *value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISpellChecker, get_LocalizedName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LocalizedName )( 
             __RPC__in ISpellChecker2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt LPWSTR *value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISpellChecker, add_SpellCheckerChanged)
         HRESULT ( STDMETHODCALLTYPE *add_SpellCheckerChanged )( 
             __RPC__in ISpellChecker2 * This,
-            /* [in] */ __RPC__in_opt ISpellCheckerChangedEventHandler *handler,
-            /* [retval][out] */ __RPC__out DWORD *eventCookie);
+            /* [annotation][in] */ 
+            _In_  ISpellCheckerChangedEventHandler *handler,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *eventCookie);
         
         DECLSPEC_XFGVIRT(ISpellChecker, remove_SpellCheckerChanged)
         HRESULT ( STDMETHODCALLTYPE *remove_SpellCheckerChanged )( 
             __RPC__in ISpellChecker2 * This,
-            /* [in] */ DWORD eventCookie);
+            /* [annotation][in] */ 
+            _In_  DWORD eventCookie);
         
         DECLSPEC_XFGVIRT(ISpellChecker, GetOptionDescription)
         HRESULT ( STDMETHODCALLTYPE *GetOptionDescription )( 
             __RPC__in ISpellChecker2 * This,
-            /* [in] */ __RPC__in LPCWSTR optionId,
-            /* [retval][out] */ __RPC__deref_out_opt IOptionDescription **value);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR optionId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IOptionDescription **value);
         
         DECLSPEC_XFGVIRT(ISpellChecker, ComprehensiveCheck)
         HRESULT ( STDMETHODCALLTYPE *ComprehensiveCheck )( 
             __RPC__in ISpellChecker2 * This,
-            /* [in] */ __RPC__in LPCWSTR text,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumSpellingError **value);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR text,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumSpellingError **value);
         
         DECLSPEC_XFGVIRT(ISpellChecker2, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in ISpellChecker2 * This,
-            /* [in] */ __RPC__in LPCWSTR word);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR word);
         
         END_INTERFACE
     } ISpellChecker2Vtbl;
@@ -1030,15 +1121,20 @@ EXTERN_C const IID IID_ISpellCheckerFactory;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_SupportedLanguages( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumString **value) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumString **value) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsSupported( 
-            /* [in] */ __RPC__in LPCWSTR languageTag,
-            /* [retval][out] */ __RPC__out BOOL *value) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR languageTag,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *value) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateSpellChecker( 
-            /* [in] */ __RPC__in LPCWSTR languageTag,
-            /* [retval][out] */ __RPC__deref_out_opt ISpellChecker **value) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR languageTag,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISpellChecker **value) = 0;
         
     };
     
@@ -1052,7 +1148,8 @@ EXTERN_C const IID IID_ISpellCheckerFactory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpellCheckerFactory * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1067,19 +1164,24 @@ EXTERN_C const IID IID_ISpellCheckerFactory;
         DECLSPEC_XFGVIRT(ISpellCheckerFactory, get_SupportedLanguages)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedLanguages )( 
             __RPC__in ISpellCheckerFactory * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumString **value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumString **value);
         
         DECLSPEC_XFGVIRT(ISpellCheckerFactory, IsSupported)
         HRESULT ( STDMETHODCALLTYPE *IsSupported )( 
             __RPC__in ISpellCheckerFactory * This,
-            /* [in] */ __RPC__in LPCWSTR languageTag,
-            /* [retval][out] */ __RPC__out BOOL *value);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR languageTag,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *value);
         
         DECLSPEC_XFGVIRT(ISpellCheckerFactory, CreateSpellChecker)
         HRESULT ( STDMETHODCALLTYPE *CreateSpellChecker )( 
             __RPC__in ISpellCheckerFactory * This,
-            /* [in] */ __RPC__in LPCWSTR languageTag,
-            /* [retval][out] */ __RPC__deref_out_opt ISpellChecker **value);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR languageTag,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISpellChecker **value);
         
         END_INTERFACE
     } ISpellCheckerFactoryVtbl;
@@ -1152,12 +1254,16 @@ EXTERN_C const IID IID_IUserDictionariesRegistrar;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RegisterUserDictionary( 
-            /* [in] */ __RPC__in LPCWSTR dictionaryPath,
-            /* [in] */ __RPC__in LPCWSTR languageTag) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR dictionaryPath,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR languageTag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnregisterUserDictionary( 
-            /* [in] */ __RPC__in LPCWSTR dictionaryPath,
-            /* [in] */ __RPC__in LPCWSTR languageTag) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR dictionaryPath,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR languageTag) = 0;
         
     };
     
@@ -1171,7 +1277,8 @@ EXTERN_C const IID IID_IUserDictionariesRegistrar;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUserDictionariesRegistrar * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1186,14 +1293,18 @@ EXTERN_C const IID IID_IUserDictionariesRegistrar;
         DECLSPEC_XFGVIRT(IUserDictionariesRegistrar, RegisterUserDictionary)
         HRESULT ( STDMETHODCALLTYPE *RegisterUserDictionary )( 
             __RPC__in IUserDictionariesRegistrar * This,
-            /* [in] */ __RPC__in LPCWSTR dictionaryPath,
-            /* [in] */ __RPC__in LPCWSTR languageTag);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR dictionaryPath,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR languageTag);
         
         DECLSPEC_XFGVIRT(IUserDictionariesRegistrar, UnregisterUserDictionary)
         HRESULT ( STDMETHODCALLTYPE *UnregisterUserDictionary )( 
             __RPC__in IUserDictionariesRegistrar * This,
-            /* [in] */ __RPC__in LPCWSTR dictionaryPath,
-            /* [in] */ __RPC__in LPCWSTR languageTag);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR dictionaryPath,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR languageTag);
         
         END_INTERFACE
     } IUserDictionariesRegistrarVtbl;

@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -108,31 +108,42 @@ EXTERN_C const IID IID_ICorrelationEngine;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RetainGlobalEvents( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_RetainGlobalEvents( 
-            /* [in] */ VARIANT_BOOL newVal) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL newVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Filter( 
-            /* [in] */ __RPC__in BSTR InputTraceFile,
-            /* [in] */ __RPC__in BSTR OutputTraceFile,
-            /* [in] */ __RPC__in BSTR FilterActivityId) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR InputTraceFile,
+            /* [annotation][in] */ 
+            _In_  BSTR OutputTraceFile,
+            /* [annotation][in] */ 
+            _In_  BSTR FilterActivityId) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Normalize( 
-            /* [in] */ __RPC__in BSTR InputTraceFile,
-            /* [in] */ __RPC__in BSTR OutputTraceFile) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR InputTraceFile,
+            /* [annotation][in] */ 
+            _In_  BSTR OutputTraceFile) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RetainPII( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_RetainPII( 
-            /* [in] */ VARIANT_BOOL newVal) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RetainCorrelationEvents( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_RetainCorrelationEvents( 
-            /* [in] */ VARIANT_BOOL newVal) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL newVal) = 0;
         
     };
     
@@ -146,7 +157,8 @@ EXTERN_C const IID IID_ICorrelationEngine;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICorrelationEngine * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -161,23 +173,31 @@ EXTERN_C const IID IID_ICorrelationEngine;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICorrelationEngine * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICorrelationEngine * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICorrelationEngine * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -202,45 +222,56 @@ EXTERN_C const IID IID_ICorrelationEngine;
         DECLSPEC_XFGVIRT(ICorrelationEngine, get_RetainGlobalEvents)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RetainGlobalEvents )( 
             __RPC__in ICorrelationEngine * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pVal);
         
         DECLSPEC_XFGVIRT(ICorrelationEngine, put_RetainGlobalEvents)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_RetainGlobalEvents )( 
             __RPC__in ICorrelationEngine * This,
-            /* [in] */ VARIANT_BOOL newVal);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL newVal);
         
         DECLSPEC_XFGVIRT(ICorrelationEngine, Filter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Filter )( 
             __RPC__in ICorrelationEngine * This,
-            /* [in] */ __RPC__in BSTR InputTraceFile,
-            /* [in] */ __RPC__in BSTR OutputTraceFile,
-            /* [in] */ __RPC__in BSTR FilterActivityId);
+            /* [annotation][in] */ 
+            _In_  BSTR InputTraceFile,
+            /* [annotation][in] */ 
+            _In_  BSTR OutputTraceFile,
+            /* [annotation][in] */ 
+            _In_  BSTR FilterActivityId);
         
         DECLSPEC_XFGVIRT(ICorrelationEngine, Normalize)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Normalize )( 
             __RPC__in ICorrelationEngine * This,
-            /* [in] */ __RPC__in BSTR InputTraceFile,
-            /* [in] */ __RPC__in BSTR OutputTraceFile);
+            /* [annotation][in] */ 
+            _In_  BSTR InputTraceFile,
+            /* [annotation][in] */ 
+            _In_  BSTR OutputTraceFile);
         
         DECLSPEC_XFGVIRT(ICorrelationEngine, get_RetainPII)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RetainPII )( 
             __RPC__in ICorrelationEngine * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pVal);
         
         DECLSPEC_XFGVIRT(ICorrelationEngine, put_RetainPII)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_RetainPII )( 
             __RPC__in ICorrelationEngine * This,
-            /* [in] */ VARIANT_BOOL newVal);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL newVal);
         
         DECLSPEC_XFGVIRT(ICorrelationEngine, get_RetainCorrelationEvents)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RetainCorrelationEvents )( 
             __RPC__in ICorrelationEngine * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pVal);
         
         DECLSPEC_XFGVIRT(ICorrelationEngine, put_RetainCorrelationEvents)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_RetainCorrelationEvents )( 
             __RPC__in ICorrelationEngine * This,
-            /* [in] */ VARIANT_BOOL newVal);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL newVal);
         
         END_INTERFACE
     } ICorrelationEngineVtbl;

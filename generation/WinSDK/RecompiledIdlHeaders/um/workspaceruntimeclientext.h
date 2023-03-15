@@ -90,10 +90,12 @@ EXTERN_C const IID IID_IWorkspaceClientExt;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetResourceId( 
-            /* [out] */ __RPC__deref_out_opt BSTR *bstrWorkspaceId) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *bstrWorkspaceId) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetResourceDisplayName( 
-            /* [out] */ __RPC__deref_out_opt BSTR *bstrWorkspaceDisplayName) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *bstrWorkspaceDisplayName) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE IssueDisconnect( void) = 0;
         
@@ -109,7 +111,8 @@ EXTERN_C const IID IID_IWorkspaceClientExt;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWorkspaceClientExt * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -124,12 +127,14 @@ EXTERN_C const IID IID_IWorkspaceClientExt;
         DECLSPEC_XFGVIRT(IWorkspaceClientExt, GetResourceId)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetResourceId )( 
             __RPC__in IWorkspaceClientExt * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *bstrWorkspaceId);
+            /* [annotation][out] */ 
+            _Out_  BSTR *bstrWorkspaceId);
         
         DECLSPEC_XFGVIRT(IWorkspaceClientExt, GetResourceDisplayName)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetResourceDisplayName )( 
             __RPC__in IWorkspaceClientExt * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *bstrWorkspaceDisplayName);
+            /* [annotation][out] */ 
+            _Out_  BSTR *bstrWorkspaceDisplayName);
         
         DECLSPEC_XFGVIRT(IWorkspaceClientExt, IssueDisconnect)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *IssueDisconnect )( 

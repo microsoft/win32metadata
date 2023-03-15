@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -96,25 +96,32 @@ EXTERN_C const IID IID_IUserDataPathsInterop;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_AdminTools( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CDBurning( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_NetworkShortcuts( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Programs( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_SendTo( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_StartMenu( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Startup( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
     };
     
@@ -128,7 +135,8 @@ EXTERN_C const IID IID_IUserDataPathsInterop;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUserDataPathsInterop * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -143,37 +151,44 @@ EXTERN_C const IID IID_IUserDataPathsInterop;
         DECLSPEC_XFGVIRT(IUserDataPathsInterop, get_AdminTools)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AdminTools )( 
             __RPC__in IUserDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(IUserDataPathsInterop, get_CDBurning)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CDBurning )( 
             __RPC__in IUserDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(IUserDataPathsInterop, get_NetworkShortcuts)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkShortcuts )( 
             __RPC__in IUserDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(IUserDataPathsInterop, get_Programs)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Programs )( 
             __RPC__in IUserDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(IUserDataPathsInterop, get_SendTo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SendTo )( 
             __RPC__in IUserDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(IUserDataPathsInterop, get_StartMenu)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartMenu )( 
             __RPC__in IUserDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(IUserDataPathsInterop, get_Startup)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Startup )( 
             __RPC__in IUserDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         END_INTERFACE
     } IUserDataPathsInteropVtbl;
@@ -246,58 +261,76 @@ EXTERN_C const IID IID_ISystemDataPathsInterop;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CommonAdminTools( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CommonOemLinks( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CommonPrograms( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CommonStartMenu( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CommonStartup( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CommonTemplates( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_LocalizedResources( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProgramFiles( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProgramFilesCommon( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProgramFilesCommonHost( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProgramFilesCommonX64( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProgramFilesCommonX86( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProgramFilesCommonArm( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProgramFilesHost( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProgramFilesX64( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProgramFilesX86( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProgramFilesArm( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Resource( 
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
     };
     
@@ -311,7 +344,8 @@ EXTERN_C const IID IID_ISystemDataPathsInterop;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISystemDataPathsInterop * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -326,92 +360,110 @@ EXTERN_C const IID IID_ISystemDataPathsInterop;
         DECLSPEC_XFGVIRT(ISystemDataPathsInterop, get_CommonAdminTools)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CommonAdminTools )( 
             __RPC__in ISystemDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISystemDataPathsInterop, get_CommonOemLinks)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CommonOemLinks )( 
             __RPC__in ISystemDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISystemDataPathsInterop, get_CommonPrograms)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CommonPrograms )( 
             __RPC__in ISystemDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISystemDataPathsInterop, get_CommonStartMenu)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CommonStartMenu )( 
             __RPC__in ISystemDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISystemDataPathsInterop, get_CommonStartup)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CommonStartup )( 
             __RPC__in ISystemDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISystemDataPathsInterop, get_CommonTemplates)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CommonTemplates )( 
             __RPC__in ISystemDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISystemDataPathsInterop, get_LocalizedResources)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LocalizedResources )( 
             __RPC__in ISystemDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISystemDataPathsInterop, get_ProgramFiles)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProgramFiles )( 
             __RPC__in ISystemDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISystemDataPathsInterop, get_ProgramFilesCommon)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProgramFilesCommon )( 
             __RPC__in ISystemDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISystemDataPathsInterop, get_ProgramFilesCommonHost)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProgramFilesCommonHost )( 
             __RPC__in ISystemDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISystemDataPathsInterop, get_ProgramFilesCommonX64)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProgramFilesCommonX64 )( 
             __RPC__in ISystemDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISystemDataPathsInterop, get_ProgramFilesCommonX86)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProgramFilesCommonX86 )( 
             __RPC__in ISystemDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISystemDataPathsInterop, get_ProgramFilesCommonArm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProgramFilesCommonArm )( 
             __RPC__in ISystemDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISystemDataPathsInterop, get_ProgramFilesHost)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProgramFilesHost )( 
             __RPC__in ISystemDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISystemDataPathsInterop, get_ProgramFilesX64)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProgramFilesX64 )( 
             __RPC__in ISystemDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISystemDataPathsInterop, get_ProgramFilesX86)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProgramFilesX86 )( 
             __RPC__in ISystemDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISystemDataPathsInterop, get_ProgramFilesArm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProgramFilesArm )( 
             __RPC__in ISystemDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(ISystemDataPathsInterop, get_Resource)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Resource )( 
             __RPC__in ISystemDataPathsInterop * This,
-            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         END_INTERFACE
     } ISystemDataPathsInteropVtbl;

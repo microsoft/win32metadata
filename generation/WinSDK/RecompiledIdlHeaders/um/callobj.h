@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -203,11 +203,14 @@ EXTERN_C const IID IID_ICallFrame;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetInfo( 
-            /* [out] */ CALLFRAMEINFO *pInfo) = 0;
+            /* [annotation][out] */ 
+            _Out_  CALLFRAMEINFO *pInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIIDAndMethod( 
-            /* [out] */ IID *pIID,
-            /* [out] */ ULONG *piMethod) = 0;
+            /* [annotation][out] */ 
+            _Out_  IID *pIID,
+            /* [annotation][out] */ 
+            _Out_  ULONG *piMethod) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNames( 
             /* [annotation][out] */ 
@@ -218,78 +221,122 @@ EXTERN_C const IID IID_ICallFrame;
         virtual PVOID STDMETHODCALLTYPE GetStackLocation( void) = 0;
         
         virtual void STDMETHODCALLTYPE SetStackLocation( 
-            /* [in] */ PVOID pvStack) = 0;
+            /* [annotation][in] */ 
+            _In_  PVOID pvStack) = 0;
         
         virtual void STDMETHODCALLTYPE SetReturnValue( 
-            /* [in] */ HRESULT hr) = 0;
+            /* [annotation][in] */ 
+            _In_  HRESULT hr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetReturnValue( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetParamInfo( 
-            /* [in] */ ULONG iparam,
-            /* [out] */ CALLFRAMEPARAMINFO *pInfo) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG iparam,
+            /* [annotation][out] */ 
+            _Out_  CALLFRAMEPARAMINFO *pInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetParam( 
-            /* [in] */ ULONG iparam,
-            /* [in] */ VARIANT *pvar) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG iparam,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pvar) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetParam( 
-            /* [in] */ ULONG iparam,
-            /* [out] */ VARIANT *pvar) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG iparam,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pvar) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Copy( 
-            /* [in] */ CALLFRAME_COPY copyControl,
-            /* [in] */ ICallFrameWalker *pWalker,
-            /* [out] */ ICallFrame **ppFrame) = 0;
+            /* [annotation][in] */ 
+            _In_  CALLFRAME_COPY copyControl,
+            /* [annotation][in] */ 
+            _In_  ICallFrameWalker *pWalker,
+            /* [annotation][out] */ 
+            _Out_  ICallFrame **ppFrame) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Free( 
-            /* [in] */ ICallFrame *pframeArgsDest,
-            /* [in] */ ICallFrameWalker *pWalkerDestFree,
-            /* [in] */ ICallFrameWalker *pWalkerCopy,
-            /* [in] */ DWORD freeFlags,
-            /* [in] */ ICallFrameWalker *pWalkerFree,
-            /* [in] */ DWORD nullFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  ICallFrame *pframeArgsDest,
+            /* [annotation][in] */ 
+            _In_  ICallFrameWalker *pWalkerDestFree,
+            /* [annotation][in] */ 
+            _In_  ICallFrameWalker *pWalkerCopy,
+            /* [annotation][in] */ 
+            _In_  DWORD freeFlags,
+            /* [annotation][in] */ 
+            _In_  ICallFrameWalker *pWalkerFree,
+            /* [annotation][in] */ 
+            _In_  DWORD nullFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FreeParam( 
-            /* [in] */ ULONG iparam,
-            /* [in] */ DWORD freeFlags,
-            /* [in] */ ICallFrameWalker *pWalkerFree,
-            /* [in] */ DWORD nullFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG iparam,
+            /* [annotation][in] */ 
+            _In_  DWORD freeFlags,
+            /* [annotation][in] */ 
+            _In_  ICallFrameWalker *pWalkerFree,
+            /* [annotation][in] */ 
+            _In_  DWORD nullFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WalkFrame( 
-            /* [in] */ DWORD walkWhat,
-            /* [in] */ ICallFrameWalker *pWalker) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD walkWhat,
+            /* [annotation][in] */ 
+            _In_  ICallFrameWalker *pWalker) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMarshalSizeMax( 
-            /* [in] */ CALLFRAME_MARSHALCONTEXT *pmshlContext,
-            /* [in] */ MSHLFLAGS mshlflags,
-            /* [out] */ ULONG *pcbBufferNeeded) = 0;
+            /* [annotation][in] */ 
+            _In_  CALLFRAME_MARSHALCONTEXT *pmshlContext,
+            /* [annotation][in] */ 
+            _In_  MSHLFLAGS mshlflags,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbBufferNeeded) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Marshal( 
-            /* [in] */ CALLFRAME_MARSHALCONTEXT *pmshlContext,
-            /* [in] */ MSHLFLAGS mshlflags,
-            /* [size_is][in] */ PVOID pBuffer,
-            /* [in] */ ULONG cbBuffer,
-            /* [out] */ ULONG *pcbBufferUsed,
-            /* [out] */ RPCOLEDATAREP *pdataRep,
-            /* [out] */ ULONG *prpcFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  CALLFRAME_MARSHALCONTEXT *pmshlContext,
+            /* [annotation][in] */ 
+            _In_  MSHLFLAGS mshlflags,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbBuffer)  PVOID pBuffer,
+            /* [annotation][in] */ 
+            _In_  ULONG cbBuffer,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbBufferUsed,
+            /* [annotation][out] */ 
+            _Out_  RPCOLEDATAREP *pdataRep,
+            /* [annotation][out] */ 
+            _Out_  ULONG *prpcFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Unmarshal( 
-            /* [size_is][in] */ PVOID pBuffer,
-            /* [in] */ ULONG cbBuffer,
-            /* [in] */ RPCOLEDATAREP dataRep,
-            /* [in] */ CALLFRAME_MARSHALCONTEXT *pcontext,
-            /* [out] */ ULONG *pcbUnmarshalled) = 0;
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbBuffer)  PVOID pBuffer,
+            /* [annotation][in] */ 
+            _In_  ULONG cbBuffer,
+            /* [annotation][in] */ 
+            _In_  RPCOLEDATAREP dataRep,
+            /* [annotation][in] */ 
+            _In_  CALLFRAME_MARSHALCONTEXT *pcontext,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbUnmarshalled) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReleaseMarshalData( 
-            /* [size_is][in] */ PVOID pBuffer,
-            /* [in] */ ULONG cbBuffer,
-            /* [in] */ ULONG ibFirstRelease,
-            /* [in] */ RPCOLEDATAREP dataRep,
-            /* [in] */ CALLFRAME_MARSHALCONTEXT *pcontext) = 0;
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbBuffer)  PVOID pBuffer,
+            /* [annotation][in] */ 
+            _In_  ULONG cbBuffer,
+            /* [annotation][in] */ 
+            _In_  ULONG ibFirstRelease,
+            /* [annotation][in] */ 
+            _In_  RPCOLEDATAREP dataRep,
+            /* [annotation][in] */ 
+            _In_  CALLFRAME_MARSHALCONTEXT *pcontext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Invoke( 
-            /* [in] */ void *pvReceiver,
+            /* [annotation][in] */ 
+            _In_  void *pvReceiver,
             ...) = 0;
         
     };
@@ -304,7 +351,8 @@ EXTERN_C const IID IID_ICallFrame;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICallFrame * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -319,13 +367,16 @@ EXTERN_C const IID IID_ICallFrame;
         DECLSPEC_XFGVIRT(ICallFrame, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             ICallFrame * This,
-            /* [out] */ CALLFRAMEINFO *pInfo);
+            /* [annotation][out] */ 
+            _Out_  CALLFRAMEINFO *pInfo);
         
         DECLSPEC_XFGVIRT(ICallFrame, GetIIDAndMethod)
         HRESULT ( STDMETHODCALLTYPE *GetIIDAndMethod )( 
             ICallFrame * This,
-            /* [out] */ IID *pIID,
-            /* [out] */ ULONG *piMethod);
+            /* [annotation][out] */ 
+            _Out_  IID *pIID,
+            /* [annotation][out] */ 
+            _Out_  ULONG *piMethod);
         
         DECLSPEC_XFGVIRT(ICallFrame, GetNames)
         HRESULT ( STDMETHODCALLTYPE *GetNames )( 
@@ -342,12 +393,14 @@ EXTERN_C const IID IID_ICallFrame;
         DECLSPEC_XFGVIRT(ICallFrame, SetStackLocation)
         void ( STDMETHODCALLTYPE *SetStackLocation )( 
             ICallFrame * This,
-            /* [in] */ PVOID pvStack);
+            /* [annotation][in] */ 
+            _In_  PVOID pvStack);
         
         DECLSPEC_XFGVIRT(ICallFrame, SetReturnValue)
         void ( STDMETHODCALLTYPE *SetReturnValue )( 
             ICallFrame * This,
-            /* [in] */ HRESULT hr);
+            /* [annotation][in] */ 
+            _In_  HRESULT hr);
         
         DECLSPEC_XFGVIRT(ICallFrame, GetReturnValue)
         HRESULT ( STDMETHODCALLTYPE *GetReturnValue )( 
@@ -356,92 +409,134 @@ EXTERN_C const IID IID_ICallFrame;
         DECLSPEC_XFGVIRT(ICallFrame, GetParamInfo)
         HRESULT ( STDMETHODCALLTYPE *GetParamInfo )( 
             ICallFrame * This,
-            /* [in] */ ULONG iparam,
-            /* [out] */ CALLFRAMEPARAMINFO *pInfo);
+            /* [annotation][in] */ 
+            _In_  ULONG iparam,
+            /* [annotation][out] */ 
+            _Out_  CALLFRAMEPARAMINFO *pInfo);
         
         DECLSPEC_XFGVIRT(ICallFrame, SetParam)
         HRESULT ( STDMETHODCALLTYPE *SetParam )( 
             ICallFrame * This,
-            /* [in] */ ULONG iparam,
-            /* [in] */ VARIANT *pvar);
+            /* [annotation][in] */ 
+            _In_  ULONG iparam,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pvar);
         
         DECLSPEC_XFGVIRT(ICallFrame, GetParam)
         HRESULT ( STDMETHODCALLTYPE *GetParam )( 
             ICallFrame * This,
-            /* [in] */ ULONG iparam,
-            /* [out] */ VARIANT *pvar);
+            /* [annotation][in] */ 
+            _In_  ULONG iparam,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pvar);
         
         DECLSPEC_XFGVIRT(ICallFrame, Copy)
         HRESULT ( STDMETHODCALLTYPE *Copy )( 
             ICallFrame * This,
-            /* [in] */ CALLFRAME_COPY copyControl,
-            /* [in] */ ICallFrameWalker *pWalker,
-            /* [out] */ ICallFrame **ppFrame);
+            /* [annotation][in] */ 
+            _In_  CALLFRAME_COPY copyControl,
+            /* [annotation][in] */ 
+            _In_  ICallFrameWalker *pWalker,
+            /* [annotation][out] */ 
+            _Out_  ICallFrame **ppFrame);
         
         DECLSPEC_XFGVIRT(ICallFrame, Free)
         HRESULT ( STDMETHODCALLTYPE *Free )( 
             ICallFrame * This,
-            /* [in] */ ICallFrame *pframeArgsDest,
-            /* [in] */ ICallFrameWalker *pWalkerDestFree,
-            /* [in] */ ICallFrameWalker *pWalkerCopy,
-            /* [in] */ DWORD freeFlags,
-            /* [in] */ ICallFrameWalker *pWalkerFree,
-            /* [in] */ DWORD nullFlags);
+            /* [annotation][in] */ 
+            _In_  ICallFrame *pframeArgsDest,
+            /* [annotation][in] */ 
+            _In_  ICallFrameWalker *pWalkerDestFree,
+            /* [annotation][in] */ 
+            _In_  ICallFrameWalker *pWalkerCopy,
+            /* [annotation][in] */ 
+            _In_  DWORD freeFlags,
+            /* [annotation][in] */ 
+            _In_  ICallFrameWalker *pWalkerFree,
+            /* [annotation][in] */ 
+            _In_  DWORD nullFlags);
         
         DECLSPEC_XFGVIRT(ICallFrame, FreeParam)
         HRESULT ( STDMETHODCALLTYPE *FreeParam )( 
             ICallFrame * This,
-            /* [in] */ ULONG iparam,
-            /* [in] */ DWORD freeFlags,
-            /* [in] */ ICallFrameWalker *pWalkerFree,
-            /* [in] */ DWORD nullFlags);
+            /* [annotation][in] */ 
+            _In_  ULONG iparam,
+            /* [annotation][in] */ 
+            _In_  DWORD freeFlags,
+            /* [annotation][in] */ 
+            _In_  ICallFrameWalker *pWalkerFree,
+            /* [annotation][in] */ 
+            _In_  DWORD nullFlags);
         
         DECLSPEC_XFGVIRT(ICallFrame, WalkFrame)
         HRESULT ( STDMETHODCALLTYPE *WalkFrame )( 
             ICallFrame * This,
-            /* [in] */ DWORD walkWhat,
-            /* [in] */ ICallFrameWalker *pWalker);
+            /* [annotation][in] */ 
+            _In_  DWORD walkWhat,
+            /* [annotation][in] */ 
+            _In_  ICallFrameWalker *pWalker);
         
         DECLSPEC_XFGVIRT(ICallFrame, GetMarshalSizeMax)
         HRESULT ( STDMETHODCALLTYPE *GetMarshalSizeMax )( 
             ICallFrame * This,
-            /* [in] */ CALLFRAME_MARSHALCONTEXT *pmshlContext,
-            /* [in] */ MSHLFLAGS mshlflags,
-            /* [out] */ ULONG *pcbBufferNeeded);
+            /* [annotation][in] */ 
+            _In_  CALLFRAME_MARSHALCONTEXT *pmshlContext,
+            /* [annotation][in] */ 
+            _In_  MSHLFLAGS mshlflags,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbBufferNeeded);
         
         DECLSPEC_XFGVIRT(ICallFrame, Marshal)
         HRESULT ( STDMETHODCALLTYPE *Marshal )( 
             ICallFrame * This,
-            /* [in] */ CALLFRAME_MARSHALCONTEXT *pmshlContext,
-            /* [in] */ MSHLFLAGS mshlflags,
-            /* [size_is][in] */ PVOID pBuffer,
-            /* [in] */ ULONG cbBuffer,
-            /* [out] */ ULONG *pcbBufferUsed,
-            /* [out] */ RPCOLEDATAREP *pdataRep,
-            /* [out] */ ULONG *prpcFlags);
+            /* [annotation][in] */ 
+            _In_  CALLFRAME_MARSHALCONTEXT *pmshlContext,
+            /* [annotation][in] */ 
+            _In_  MSHLFLAGS mshlflags,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbBuffer)  PVOID pBuffer,
+            /* [annotation][in] */ 
+            _In_  ULONG cbBuffer,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbBufferUsed,
+            /* [annotation][out] */ 
+            _Out_  RPCOLEDATAREP *pdataRep,
+            /* [annotation][out] */ 
+            _Out_  ULONG *prpcFlags);
         
         DECLSPEC_XFGVIRT(ICallFrame, Unmarshal)
         HRESULT ( STDMETHODCALLTYPE *Unmarshal )( 
             ICallFrame * This,
-            /* [size_is][in] */ PVOID pBuffer,
-            /* [in] */ ULONG cbBuffer,
-            /* [in] */ RPCOLEDATAREP dataRep,
-            /* [in] */ CALLFRAME_MARSHALCONTEXT *pcontext,
-            /* [out] */ ULONG *pcbUnmarshalled);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbBuffer)  PVOID pBuffer,
+            /* [annotation][in] */ 
+            _In_  ULONG cbBuffer,
+            /* [annotation][in] */ 
+            _In_  RPCOLEDATAREP dataRep,
+            /* [annotation][in] */ 
+            _In_  CALLFRAME_MARSHALCONTEXT *pcontext,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbUnmarshalled);
         
         DECLSPEC_XFGVIRT(ICallFrame, ReleaseMarshalData)
         HRESULT ( STDMETHODCALLTYPE *ReleaseMarshalData )( 
             ICallFrame * This,
-            /* [size_is][in] */ PVOID pBuffer,
-            /* [in] */ ULONG cbBuffer,
-            /* [in] */ ULONG ibFirstRelease,
-            /* [in] */ RPCOLEDATAREP dataRep,
-            /* [in] */ CALLFRAME_MARSHALCONTEXT *pcontext);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbBuffer)  PVOID pBuffer,
+            /* [annotation][in] */ 
+            _In_  ULONG cbBuffer,
+            /* [annotation][in] */ 
+            _In_  ULONG ibFirstRelease,
+            /* [annotation][in] */ 
+            _In_  RPCOLEDATAREP dataRep,
+            /* [annotation][in] */ 
+            _In_  CALLFRAME_MARSHALCONTEXT *pcontext);
         
         DECLSPEC_XFGVIRT(ICallFrame, Invoke)
         HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICallFrame * This,
-            /* [in] */ void *pvReceiver,
+            /* [annotation][in] */ 
+            _In_  void *pvReceiver,
             ...);
         
         END_INTERFACE
@@ -551,20 +646,28 @@ EXTERN_C const IID IID_ICallIndirect;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CallIndirect( 
-            /* [out] */ HRESULT *phrReturn,
-            /* [in] */ ULONG iMethod,
-            /* [in] */ void *pvArgs,
-            /* [out] */ ULONG *cbArgs) = 0;
+            /* [annotation][out] */ 
+            _Out_  HRESULT *phrReturn,
+            /* [annotation][in] */ 
+            _In_  ULONG iMethod,
+            /* [annotation][in] */ 
+            _In_  void *pvArgs,
+            /* [annotation][out] */ 
+            _Out_  ULONG *cbArgs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMethodInfo( 
-            /* [in] */ ULONG iMethod,
-            /* [out] */ CALLFRAMEINFO *pInfo,
+            /* [annotation][in] */ 
+            _In_  ULONG iMethod,
+            /* [annotation][out] */ 
+            _Out_  CALLFRAMEINFO *pInfo,
             /* [annotation][out] */ 
             _Outptr_result_maybenull_  LPWSTR *pwszMethod) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStackSize( 
-            /* [in] */ ULONG iMethod,
-            /* [out] */ ULONG *cbArgs) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG iMethod,
+            /* [annotation][out] */ 
+            _Out_  ULONG *cbArgs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIID( 
             /* [annotation][out] */ 
@@ -588,7 +691,8 @@ EXTERN_C const IID IID_ICallIndirect;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICallIndirect * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -603,24 +707,32 @@ EXTERN_C const IID IID_ICallIndirect;
         DECLSPEC_XFGVIRT(ICallIndirect, CallIndirect)
         HRESULT ( STDMETHODCALLTYPE *CallIndirect )( 
             ICallIndirect * This,
-            /* [out] */ HRESULT *phrReturn,
-            /* [in] */ ULONG iMethod,
-            /* [in] */ void *pvArgs,
-            /* [out] */ ULONG *cbArgs);
+            /* [annotation][out] */ 
+            _Out_  HRESULT *phrReturn,
+            /* [annotation][in] */ 
+            _In_  ULONG iMethod,
+            /* [annotation][in] */ 
+            _In_  void *pvArgs,
+            /* [annotation][out] */ 
+            _Out_  ULONG *cbArgs);
         
         DECLSPEC_XFGVIRT(ICallIndirect, GetMethodInfo)
         HRESULT ( STDMETHODCALLTYPE *GetMethodInfo )( 
             ICallIndirect * This,
-            /* [in] */ ULONG iMethod,
-            /* [out] */ CALLFRAMEINFO *pInfo,
+            /* [annotation][in] */ 
+            _In_  ULONG iMethod,
+            /* [annotation][out] */ 
+            _Out_  CALLFRAMEINFO *pInfo,
             /* [annotation][out] */ 
             _Outptr_result_maybenull_  LPWSTR *pwszMethod);
         
         DECLSPEC_XFGVIRT(ICallIndirect, GetStackSize)
         HRESULT ( STDMETHODCALLTYPE *GetStackSize )( 
             ICallIndirect * This,
-            /* [in] */ ULONG iMethod,
-            /* [out] */ ULONG *cbArgs);
+            /* [annotation][in] */ 
+            _In_  ULONG iMethod,
+            /* [annotation][out] */ 
+            _Out_  ULONG *cbArgs);
         
         DECLSPEC_XFGVIRT(ICallIndirect, GetIID)
         HRESULT ( STDMETHODCALLTYPE *GetIID )( 
@@ -696,10 +808,12 @@ EXTERN_C const IID IID_ICallInterceptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RegisterSink( 
-            /* [in] */ ICallFrameEvents *psink) = 0;
+            /* [annotation][in] */ 
+            _In_  ICallFrameEvents *psink) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRegisteredSink( 
-            /* [out] */ ICallFrameEvents **ppsink) = 0;
+            /* [annotation][out] */ 
+            _Out_  ICallFrameEvents **ppsink) = 0;
         
     };
     
@@ -713,7 +827,8 @@ EXTERN_C const IID IID_ICallInterceptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICallInterceptor * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -728,24 +843,32 @@ EXTERN_C const IID IID_ICallInterceptor;
         DECLSPEC_XFGVIRT(ICallIndirect, CallIndirect)
         HRESULT ( STDMETHODCALLTYPE *CallIndirect )( 
             ICallInterceptor * This,
-            /* [out] */ HRESULT *phrReturn,
-            /* [in] */ ULONG iMethod,
-            /* [in] */ void *pvArgs,
-            /* [out] */ ULONG *cbArgs);
+            /* [annotation][out] */ 
+            _Out_  HRESULT *phrReturn,
+            /* [annotation][in] */ 
+            _In_  ULONG iMethod,
+            /* [annotation][in] */ 
+            _In_  void *pvArgs,
+            /* [annotation][out] */ 
+            _Out_  ULONG *cbArgs);
         
         DECLSPEC_XFGVIRT(ICallIndirect, GetMethodInfo)
         HRESULT ( STDMETHODCALLTYPE *GetMethodInfo )( 
             ICallInterceptor * This,
-            /* [in] */ ULONG iMethod,
-            /* [out] */ CALLFRAMEINFO *pInfo,
+            /* [annotation][in] */ 
+            _In_  ULONG iMethod,
+            /* [annotation][out] */ 
+            _Out_  CALLFRAMEINFO *pInfo,
             /* [annotation][out] */ 
             _Outptr_result_maybenull_  LPWSTR *pwszMethod);
         
         DECLSPEC_XFGVIRT(ICallIndirect, GetStackSize)
         HRESULT ( STDMETHODCALLTYPE *GetStackSize )( 
             ICallInterceptor * This,
-            /* [in] */ ULONG iMethod,
-            /* [out] */ ULONG *cbArgs);
+            /* [annotation][in] */ 
+            _In_  ULONG iMethod,
+            /* [annotation][out] */ 
+            _Out_  ULONG *cbArgs);
         
         DECLSPEC_XFGVIRT(ICallIndirect, GetIID)
         HRESULT ( STDMETHODCALLTYPE *GetIID )( 
@@ -762,12 +885,14 @@ EXTERN_C const IID IID_ICallInterceptor;
         DECLSPEC_XFGVIRT(ICallInterceptor, RegisterSink)
         HRESULT ( STDMETHODCALLTYPE *RegisterSink )( 
             ICallInterceptor * This,
-            /* [in] */ ICallFrameEvents *psink);
+            /* [annotation][in] */ 
+            _In_  ICallFrameEvents *psink);
         
         DECLSPEC_XFGVIRT(ICallInterceptor, GetRegisteredSink)
         HRESULT ( STDMETHODCALLTYPE *GetRegisteredSink )( 
             ICallInterceptor * This,
-            /* [out] */ ICallFrameEvents **ppsink);
+            /* [annotation][out] */ 
+            _Out_  ICallFrameEvents **ppsink);
         
         END_INTERFACE
     } ICallInterceptorVtbl;
@@ -838,7 +963,8 @@ EXTERN_C const IID IID_ICallFrameEvents;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnCall( 
-            /* [in] */ ICallFrame *pFrame) = 0;
+            /* [annotation][in] */ 
+            _In_  ICallFrame *pFrame) = 0;
         
     };
     
@@ -852,7 +978,8 @@ EXTERN_C const IID IID_ICallFrameEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICallFrameEvents * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -867,7 +994,8 @@ EXTERN_C const IID IID_ICallFrameEvents;
         DECLSPEC_XFGVIRT(ICallFrameEvents, OnCall)
         HRESULT ( STDMETHODCALLTYPE *OnCall )( 
             ICallFrameEvents * This,
-            /* [in] */ ICallFrame *pFrame);
+            /* [annotation][in] */ 
+            _In_  ICallFrame *pFrame);
         
         END_INTERFACE
     } ICallFrameEventsVtbl;
@@ -922,22 +1050,36 @@ EXTERN_C const IID IID_ICallUnmarshal;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Unmarshal( 
-            /* [in] */ ULONG iMethod,
-            /* [size_is][in] */ PVOID pBuffer,
-            /* [in] */ ULONG cbBuffer,
-            /* [in] */ BOOL fForceBufferCopy,
-            /* [in] */ RPCOLEDATAREP dataRep,
-            /* [in] */ CALLFRAME_MARSHALCONTEXT *pcontext,
-            /* [out] */ ULONG *pcbUnmarshalled,
-            /* [out] */ ICallFrame **ppFrame) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG iMethod,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbBuffer)  PVOID pBuffer,
+            /* [annotation][in] */ 
+            _In_  ULONG cbBuffer,
+            /* [annotation][in] */ 
+            _In_  BOOL fForceBufferCopy,
+            /* [annotation][in] */ 
+            _In_  RPCOLEDATAREP dataRep,
+            /* [annotation][in] */ 
+            _In_  CALLFRAME_MARSHALCONTEXT *pcontext,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbUnmarshalled,
+            /* [annotation][out] */ 
+            _Out_  ICallFrame **ppFrame) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReleaseMarshalData( 
-            /* [in] */ ULONG iMethod,
-            /* [size_is][in] */ PVOID pBuffer,
-            /* [in] */ ULONG cbBuffer,
-            /* [in] */ ULONG ibFirstRelease,
-            /* [in] */ RPCOLEDATAREP dataRep,
-            /* [in] */ CALLFRAME_MARSHALCONTEXT *pcontext) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG iMethod,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbBuffer)  PVOID pBuffer,
+            /* [annotation][in] */ 
+            _In_  ULONG cbBuffer,
+            /* [annotation][in] */ 
+            _In_  ULONG ibFirstRelease,
+            /* [annotation][in] */ 
+            _In_  RPCOLEDATAREP dataRep,
+            /* [annotation][in] */ 
+            _In_  CALLFRAME_MARSHALCONTEXT *pcontext) = 0;
         
     };
     
@@ -951,7 +1093,8 @@ EXTERN_C const IID IID_ICallUnmarshal;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICallUnmarshal * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -966,24 +1109,38 @@ EXTERN_C const IID IID_ICallUnmarshal;
         DECLSPEC_XFGVIRT(ICallUnmarshal, Unmarshal)
         HRESULT ( STDMETHODCALLTYPE *Unmarshal )( 
             ICallUnmarshal * This,
-            /* [in] */ ULONG iMethod,
-            /* [size_is][in] */ PVOID pBuffer,
-            /* [in] */ ULONG cbBuffer,
-            /* [in] */ BOOL fForceBufferCopy,
-            /* [in] */ RPCOLEDATAREP dataRep,
-            /* [in] */ CALLFRAME_MARSHALCONTEXT *pcontext,
-            /* [out] */ ULONG *pcbUnmarshalled,
-            /* [out] */ ICallFrame **ppFrame);
+            /* [annotation][in] */ 
+            _In_  ULONG iMethod,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbBuffer)  PVOID pBuffer,
+            /* [annotation][in] */ 
+            _In_  ULONG cbBuffer,
+            /* [annotation][in] */ 
+            _In_  BOOL fForceBufferCopy,
+            /* [annotation][in] */ 
+            _In_  RPCOLEDATAREP dataRep,
+            /* [annotation][in] */ 
+            _In_  CALLFRAME_MARSHALCONTEXT *pcontext,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbUnmarshalled,
+            /* [annotation][out] */ 
+            _Out_  ICallFrame **ppFrame);
         
         DECLSPEC_XFGVIRT(ICallUnmarshal, ReleaseMarshalData)
         HRESULT ( STDMETHODCALLTYPE *ReleaseMarshalData )( 
             ICallUnmarshal * This,
-            /* [in] */ ULONG iMethod,
-            /* [size_is][in] */ PVOID pBuffer,
-            /* [in] */ ULONG cbBuffer,
-            /* [in] */ ULONG ibFirstRelease,
-            /* [in] */ RPCOLEDATAREP dataRep,
-            /* [in] */ CALLFRAME_MARSHALCONTEXT *pcontext);
+            /* [annotation][in] */ 
+            _In_  ULONG iMethod,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbBuffer)  PVOID pBuffer,
+            /* [annotation][in] */ 
+            _In_  ULONG cbBuffer,
+            /* [annotation][in] */ 
+            _In_  ULONG ibFirstRelease,
+            /* [annotation][in] */ 
+            _In_  RPCOLEDATAREP dataRep,
+            /* [annotation][in] */ 
+            _In_  CALLFRAME_MARSHALCONTEXT *pcontext);
         
         END_INTERFACE
     } ICallUnmarshalVtbl;
@@ -1041,10 +1198,14 @@ EXTERN_C const IID IID_ICallFrameWalker;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnWalkInterface( 
-            /* [in] */ REFIID iid,
-            /* [in] */ PVOID *ppvInterface,
-            /* [in] */ BOOL fIn,
-            /* [in] */ BOOL fOut) = 0;
+            /* [annotation][in] */ 
+            _In_  REFIID iid,
+            /* [annotation][in] */ 
+            _In_  PVOID *ppvInterface,
+            /* [annotation][in] */ 
+            _In_  BOOL fIn,
+            /* [annotation][in] */ 
+            _In_  BOOL fOut) = 0;
         
     };
     
@@ -1058,7 +1219,8 @@ EXTERN_C const IID IID_ICallFrameWalker;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICallFrameWalker * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1073,10 +1235,14 @@ EXTERN_C const IID IID_ICallFrameWalker;
         DECLSPEC_XFGVIRT(ICallFrameWalker, OnWalkInterface)
         HRESULT ( STDMETHODCALLTYPE *OnWalkInterface )( 
             ICallFrameWalker * This,
-            /* [in] */ REFIID iid,
-            /* [in] */ PVOID *ppvInterface,
-            /* [in] */ BOOL fIn,
-            /* [in] */ BOOL fOut);
+            /* [annotation][in] */ 
+            _In_  REFIID iid,
+            /* [annotation][in] */ 
+            _In_  PVOID *ppvInterface,
+            /* [annotation][in] */ 
+            _In_  BOOL fIn,
+            /* [annotation][in] */ 
+            _In_  BOOL fOut);
         
         END_INTERFACE
     } ICallFrameWalkerVtbl;
@@ -1131,10 +1297,12 @@ EXTERN_C const IID IID_IInterfaceRelated;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetIID( 
-            /* [in] */ REFIID iid) = 0;
+            /* [annotation][in] */ 
+            _In_  REFIID iid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIID( 
-            /* [out] */ IID *piid) = 0;
+            /* [annotation][out] */ 
+            _Out_  IID *piid) = 0;
         
     };
     
@@ -1148,7 +1316,8 @@ EXTERN_C const IID IID_IInterfaceRelated;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IInterfaceRelated * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1163,12 +1332,14 @@ EXTERN_C const IID IID_IInterfaceRelated;
         DECLSPEC_XFGVIRT(IInterfaceRelated, SetIID)
         HRESULT ( STDMETHODCALLTYPE *SetIID )( 
             IInterfaceRelated * This,
-            /* [in] */ REFIID iid);
+            /* [annotation][in] */ 
+            _In_  REFIID iid);
         
         DECLSPEC_XFGVIRT(IInterfaceRelated, GetIID)
         HRESULT ( STDMETHODCALLTYPE *GetIID )( 
             IInterfaceRelated * This,
-            /* [out] */ IID *piid);
+            /* [annotation][out] */ 
+            _Out_  IID *piid);
         
         END_INTERFACE
     } IInterfaceRelatedVtbl;
@@ -1227,17 +1398,26 @@ extern RPC_IF_HANDLE __MIDL_itf_callobj_0000_0007_v0_0_s_ifspec;
 /* [local][uuid] */ 
 
 HRESULT __stdcall CoGetInterceptor( 
-    /* [in] */ REFIID iidIntercepted,
-    /* [in] */ IUnknown *punkOuter,
-    /* [in] */ REFIID iid,
-    /* [out] */ void **ppv);
+    /* [annotation][in] */ 
+    _In_  REFIID iidIntercepted,
+    /* [annotation][in] */ 
+    _In_  IUnknown *punkOuter,
+    /* [annotation][in] */ 
+    _In_  REFIID iid,
+    /* [annotation][out] */ 
+    _Out_  void **ppv);
 
 HRESULT __stdcall CoGetInterceptorFromTypeInfo( 
-    /* [in] */ REFIID iidIntercepted,
-    /* [in] */ IUnknown *punkOuter,
-    /* [in] */ ITypeInfo *typeInfo,
-    /* [in] */ REFIID iid,
-    /* [out] */ void **ppv);
+    /* [annotation][in] */ 
+    _In_  REFIID iidIntercepted,
+    /* [annotation][in] */ 
+    _In_  IUnknown *punkOuter,
+    /* [annotation][in] */ 
+    _In_  ITypeInfo *typeInfo,
+    /* [annotation][in] */ 
+    _In_  REFIID iid,
+    /* [annotation][out] */ 
+    _Out_  void **ppv);
 
 
 

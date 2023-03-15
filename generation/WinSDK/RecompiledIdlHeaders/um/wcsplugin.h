@@ -6,12 +6,11 @@
  /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
-#pragma warning( disable: 4049 )  /* more than 64k source lines */
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 475
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -178,56 +177,86 @@ EXTERN_C const IID IID_IDeviceModelPlugIn;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [in] */ __RPC__in BSTR bstrXml,
-            /* [in] */ UINT cNumModels,
-            /* [in] */ UINT iModelPosition) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrXml,
+            /* [annotation][in] */ 
+            _In_  UINT cNumModels,
+            /* [annotation][in] */ 
+            _In_  UINT iModelPosition) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNumChannels( 
-            /* [out] */ __RPC__out UINT *pNumChannels) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *pNumChannels) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeviceToColorimetricColors( 
-            /* [in] */ UINT cColors,
-            /* [in] */ UINT cChannels,
-            /* [size_is][in] */ __RPC__in_ecount_full(( cColors * cChannels ) ) const FLOAT *pDeviceValues,
-            /* [size_is][out] */ __RPC__out_ecount_full(cColors) XYZColorF *pXYZColors) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT cColors,
+            /* [annotation][in] */ 
+            _In_  UINT cChannels,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cColors*cChannels)  const FLOAT *pDeviceValues,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cColors)  XYZColorF *pXYZColors) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ColorimetricToDeviceColors( 
-            /* [in] */ UINT cColors,
-            /* [in] */ UINT cChannels,
-            /* [size_is][in] */ __RPC__in_ecount_full(cColors) const XYZColorF *pXYZColors,
-            /* [size_is][out] */ __RPC__out_ecount_full(( cColors * cChannels ) ) FLOAT *pDeviceValues) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT cColors,
+            /* [annotation][in] */ 
+            _In_  UINT cChannels,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cColors)  const XYZColorF *pXYZColors,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cColors*cChannels)  FLOAT *pDeviceValues) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ColorimetricToDeviceColorsWithBlack( 
-            /* [in] */ UINT cColors,
-            /* [in] */ UINT cChannels,
-            /* [size_is][in] */ __RPC__in_ecount_full(cColors) const XYZColorF *pXYZColors,
-            /* [size_is][in] */ __RPC__in_ecount_full(cColors) const BlackInformation *pBlackInformation,
-            /* [size_is][out] */ __RPC__out_ecount_full(( cColors * cChannels ) ) FLOAT *pDeviceValues) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT cColors,
+            /* [annotation][in] */ 
+            _In_  UINT cChannels,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cColors)  const XYZColorF *pXYZColors,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cColors)  const BlackInformation *pBlackInformation,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cColors*cChannels)  FLOAT *pDeviceValues) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTransformDeviceModelInfo( 
-            /* [in] */ UINT iModelPosition,
-            /* [in] */ __RPC__in_opt IDeviceModelPlugIn *pIDeviceModelOther) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT iModelPosition,
+            /* [annotation][in] */ 
+            _In_  IDeviceModelPlugIn *pIDeviceModelOther) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPrimarySamples( 
-            /* [out] */ __RPC__out PrimaryXYZColors *pPrimaryColor) = 0;
+            /* [annotation][out] */ 
+            _Out_  PrimaryXYZColors *pPrimaryColor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGamutBoundaryMeshSize( 
-            /* [out] */ __RPC__out UINT *pNumVertices,
-            /* [out] */ __RPC__out UINT *pNumTriangles) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *pNumVertices,
+            /* [annotation][out] */ 
+            _Out_  UINT *pNumTriangles) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGamutBoundaryMesh( 
-            /* [in] */ UINT cChannels,
-            /* [in] */ UINT cVertices,
-            /* [in] */ UINT cTriangles,
-            /* [size_is][out] */ __RPC__out_ecount_full(( cVertices * cChannels ) ) FLOAT *pVertices,
-            /* [size_is][out] */ __RPC__out_ecount_full(cTriangles) GamutShellTriangle *pTriangles) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT cChannels,
+            /* [annotation][in] */ 
+            _In_  UINT cVertices,
+            /* [annotation][in] */ 
+            _In_  UINT cTriangles,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cVertices*cChannels)  FLOAT *pVertices,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cTriangles)  GamutShellTriangle *pTriangles) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNeutralAxisSize( 
-            /* [out] */ __RPC__out UINT *pcColors) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *pcColors) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNeutralAxis( 
-            /* [in] */ UINT cColors,
-            /* [size_is][out] */ __RPC__out_ecount_full(cColors) XYZColorF *pXYZColors) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT cColors,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cColors)  XYZColorF *pXYZColors) = 0;
         
     };
     
@@ -241,7 +270,8 @@ EXTERN_C const IID IID_IDeviceModelPlugIn;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDeviceModelPlugIn * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -256,76 +286,106 @@ EXTERN_C const IID IID_IDeviceModelPlugIn;
         DECLSPEC_XFGVIRT(IDeviceModelPlugIn, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IDeviceModelPlugIn * This,
-            /* [in] */ __RPC__in BSTR bstrXml,
-            /* [in] */ UINT cNumModels,
-            /* [in] */ UINT iModelPosition);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrXml,
+            /* [annotation][in] */ 
+            _In_  UINT cNumModels,
+            /* [annotation][in] */ 
+            _In_  UINT iModelPosition);
         
         DECLSPEC_XFGVIRT(IDeviceModelPlugIn, GetNumChannels)
         HRESULT ( STDMETHODCALLTYPE *GetNumChannels )( 
             __RPC__in IDeviceModelPlugIn * This,
-            /* [out] */ __RPC__out UINT *pNumChannels);
+            /* [annotation][out] */ 
+            _Out_  UINT *pNumChannels);
         
         DECLSPEC_XFGVIRT(IDeviceModelPlugIn, DeviceToColorimetricColors)
         HRESULT ( STDMETHODCALLTYPE *DeviceToColorimetricColors )( 
             __RPC__in IDeviceModelPlugIn * This,
-            /* [in] */ UINT cColors,
-            /* [in] */ UINT cChannels,
-            /* [size_is][in] */ __RPC__in_ecount_full(( cColors * cChannels ) ) const FLOAT *pDeviceValues,
-            /* [size_is][out] */ __RPC__out_ecount_full(cColors) XYZColorF *pXYZColors);
+            /* [annotation][in] */ 
+            _In_  UINT cColors,
+            /* [annotation][in] */ 
+            _In_  UINT cChannels,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cColors*cChannels)  const FLOAT *pDeviceValues,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cColors)  XYZColorF *pXYZColors);
         
         DECLSPEC_XFGVIRT(IDeviceModelPlugIn, ColorimetricToDeviceColors)
         HRESULT ( STDMETHODCALLTYPE *ColorimetricToDeviceColors )( 
             __RPC__in IDeviceModelPlugIn * This,
-            /* [in] */ UINT cColors,
-            /* [in] */ UINT cChannels,
-            /* [size_is][in] */ __RPC__in_ecount_full(cColors) const XYZColorF *pXYZColors,
-            /* [size_is][out] */ __RPC__out_ecount_full(( cColors * cChannels ) ) FLOAT *pDeviceValues);
+            /* [annotation][in] */ 
+            _In_  UINT cColors,
+            /* [annotation][in] */ 
+            _In_  UINT cChannels,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cColors)  const XYZColorF *pXYZColors,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cColors*cChannels)  FLOAT *pDeviceValues);
         
         DECLSPEC_XFGVIRT(IDeviceModelPlugIn, ColorimetricToDeviceColorsWithBlack)
         HRESULT ( STDMETHODCALLTYPE *ColorimetricToDeviceColorsWithBlack )( 
             __RPC__in IDeviceModelPlugIn * This,
-            /* [in] */ UINT cColors,
-            /* [in] */ UINT cChannels,
-            /* [size_is][in] */ __RPC__in_ecount_full(cColors) const XYZColorF *pXYZColors,
-            /* [size_is][in] */ __RPC__in_ecount_full(cColors) const BlackInformation *pBlackInformation,
-            /* [size_is][out] */ __RPC__out_ecount_full(( cColors * cChannels ) ) FLOAT *pDeviceValues);
+            /* [annotation][in] */ 
+            _In_  UINT cColors,
+            /* [annotation][in] */ 
+            _In_  UINT cChannels,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cColors)  const XYZColorF *pXYZColors,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cColors)  const BlackInformation *pBlackInformation,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cColors*cChannels)  FLOAT *pDeviceValues);
         
         DECLSPEC_XFGVIRT(IDeviceModelPlugIn, SetTransformDeviceModelInfo)
         HRESULT ( STDMETHODCALLTYPE *SetTransformDeviceModelInfo )( 
             __RPC__in IDeviceModelPlugIn * This,
-            /* [in] */ UINT iModelPosition,
-            /* [in] */ __RPC__in_opt IDeviceModelPlugIn *pIDeviceModelOther);
+            /* [annotation][in] */ 
+            _In_  UINT iModelPosition,
+            /* [annotation][in] */ 
+            _In_  IDeviceModelPlugIn *pIDeviceModelOther);
         
         DECLSPEC_XFGVIRT(IDeviceModelPlugIn, GetPrimarySamples)
         HRESULT ( STDMETHODCALLTYPE *GetPrimarySamples )( 
             __RPC__in IDeviceModelPlugIn * This,
-            /* [out] */ __RPC__out PrimaryXYZColors *pPrimaryColor);
+            /* [annotation][out] */ 
+            _Out_  PrimaryXYZColors *pPrimaryColor);
         
         DECLSPEC_XFGVIRT(IDeviceModelPlugIn, GetGamutBoundaryMeshSize)
         HRESULT ( STDMETHODCALLTYPE *GetGamutBoundaryMeshSize )( 
             __RPC__in IDeviceModelPlugIn * This,
-            /* [out] */ __RPC__out UINT *pNumVertices,
-            /* [out] */ __RPC__out UINT *pNumTriangles);
+            /* [annotation][out] */ 
+            _Out_  UINT *pNumVertices,
+            /* [annotation][out] */ 
+            _Out_  UINT *pNumTriangles);
         
         DECLSPEC_XFGVIRT(IDeviceModelPlugIn, GetGamutBoundaryMesh)
         HRESULT ( STDMETHODCALLTYPE *GetGamutBoundaryMesh )( 
             __RPC__in IDeviceModelPlugIn * This,
-            /* [in] */ UINT cChannels,
-            /* [in] */ UINT cVertices,
-            /* [in] */ UINT cTriangles,
-            /* [size_is][out] */ __RPC__out_ecount_full(( cVertices * cChannels ) ) FLOAT *pVertices,
-            /* [size_is][out] */ __RPC__out_ecount_full(cTriangles) GamutShellTriangle *pTriangles);
+            /* [annotation][in] */ 
+            _In_  UINT cChannels,
+            /* [annotation][in] */ 
+            _In_  UINT cVertices,
+            /* [annotation][in] */ 
+            _In_  UINT cTriangles,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cVertices*cChannels)  FLOAT *pVertices,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cTriangles)  GamutShellTriangle *pTriangles);
         
         DECLSPEC_XFGVIRT(IDeviceModelPlugIn, GetNeutralAxisSize)
         HRESULT ( STDMETHODCALLTYPE *GetNeutralAxisSize )( 
             __RPC__in IDeviceModelPlugIn * This,
-            /* [out] */ __RPC__out UINT *pcColors);
+            /* [annotation][out] */ 
+            _Out_  UINT *pcColors);
         
         DECLSPEC_XFGVIRT(IDeviceModelPlugIn, GetNeutralAxis)
         HRESULT ( STDMETHODCALLTYPE *GetNeutralAxis )( 
             __RPC__in IDeviceModelPlugIn * This,
-            /* [in] */ UINT cColors,
-            /* [size_is][out] */ __RPC__out_ecount_full(cColors) XYZColorF *pXYZColors);
+            /* [annotation][in] */ 
+            _In_  UINT cColors,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cColors)  XYZColorF *pXYZColors);
         
         END_INTERFACE
     } IDeviceModelPlugInVtbl;
@@ -410,16 +470,24 @@ EXTERN_C const IID IID_IGamutMapModelPlugIn;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [in] */ __RPC__in BSTR bstrXml,
-            /* [in] */ __RPC__in_opt IDeviceModelPlugIn *pSrcPlugIn,
-            /* [in] */ __RPC__in_opt IDeviceModelPlugIn *pDestPlugIn,
-            /* [in] */ __RPC__in GamutBoundaryDescription *pSrcGBD,
-            /* [in] */ __RPC__in GamutBoundaryDescription *pDestGBD) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrXml,
+            /* [annotation][in] */ 
+            _In_  IDeviceModelPlugIn *pSrcPlugIn,
+            /* [annotation][in] */ 
+            _In_  IDeviceModelPlugIn *pDestPlugIn,
+            /* [annotation][in] */ 
+            _In_  GamutBoundaryDescription *pSrcGBD,
+            /* [annotation][in] */ 
+            _In_  GamutBoundaryDescription *pDestGBD) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SourceToDestinationAppearanceColors( 
-            /* [in] */ UINT cColors,
-            /* [size_is][in] */ __RPC__in_ecount_full(cColors) const JChColorF *pInputColors,
-            /* [size_is][out] */ __RPC__out_ecount_full(cColors) JChColorF *pOutputColors) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT cColors,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cColors)  const JChColorF *pInputColors,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cColors)  JChColorF *pOutputColors) = 0;
         
     };
     
@@ -433,7 +501,8 @@ EXTERN_C const IID IID_IGamutMapModelPlugIn;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGamutMapModelPlugIn * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -448,18 +517,26 @@ EXTERN_C const IID IID_IGamutMapModelPlugIn;
         DECLSPEC_XFGVIRT(IGamutMapModelPlugIn, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IGamutMapModelPlugIn * This,
-            /* [in] */ __RPC__in BSTR bstrXml,
-            /* [in] */ __RPC__in_opt IDeviceModelPlugIn *pSrcPlugIn,
-            /* [in] */ __RPC__in_opt IDeviceModelPlugIn *pDestPlugIn,
-            /* [in] */ __RPC__in GamutBoundaryDescription *pSrcGBD,
-            /* [in] */ __RPC__in GamutBoundaryDescription *pDestGBD);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrXml,
+            /* [annotation][in] */ 
+            _In_  IDeviceModelPlugIn *pSrcPlugIn,
+            /* [annotation][in] */ 
+            _In_  IDeviceModelPlugIn *pDestPlugIn,
+            /* [annotation][in] */ 
+            _In_  GamutBoundaryDescription *pSrcGBD,
+            /* [annotation][in] */ 
+            _In_  GamutBoundaryDescription *pDestGBD);
         
         DECLSPEC_XFGVIRT(IGamutMapModelPlugIn, SourceToDestinationAppearanceColors)
         HRESULT ( STDMETHODCALLTYPE *SourceToDestinationAppearanceColors )( 
             __RPC__in IGamutMapModelPlugIn * This,
-            /* [in] */ UINT cColors,
-            /* [size_is][in] */ __RPC__in_ecount_full(cColors) const JChColorF *pInputColors,
-            /* [size_is][out] */ __RPC__out_ecount_full(cColors) JChColorF *pOutputColors);
+            /* [annotation][in] */ 
+            _In_  UINT cColors,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cColors)  const JChColorF *pInputColors,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cColors)  JChColorF *pOutputColors);
         
         END_INTERFACE
     } IGamutMapModelPlugInVtbl;
@@ -518,6 +595,11 @@ unsigned long             __RPC_USER  BSTR_UserSize(     __RPC__in unsigned long
 unsigned char * __RPC_USER  BSTR_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
 unsigned char * __RPC_USER  BSTR_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
 void                      __RPC_USER  BSTR_UserFree(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+
+unsigned long             __RPC_USER  BSTR_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
+unsigned char * __RPC_USER  BSTR_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
+unsigned char * __RPC_USER  BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
+void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
 
 /* end of Additional Prototypes */
 

@@ -121,12 +121,16 @@ EXTERN_C const IID IID_IDedupChunkLibrary;
         virtual HRESULT STDMETHODCALLTYPE Uninitialize( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetParameter( 
-            /* [in] */ DWORD dwParamType,
-            /* [in] */ VARIANT vParamValue) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwParamType,
+            /* [annotation][in] */ 
+            _In_  VARIANT vParamValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StartChunking( 
-            /* [in] */ IID iidIteratorInterfaceID,
-            /* [out] */ __RPC__deref_out_opt IUnknown **ppChunksEnum) = 0;
+            /* [annotation][in] */ 
+            _In_  IID iidIteratorInterfaceID,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppChunksEnum) = 0;
         
     };
     
@@ -140,7 +144,8 @@ EXTERN_C const IID IID_IDedupChunkLibrary;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDedupChunkLibrary * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -163,14 +168,18 @@ EXTERN_C const IID IID_IDedupChunkLibrary;
         DECLSPEC_XFGVIRT(IDedupChunkLibrary, SetParameter)
         HRESULT ( STDMETHODCALLTYPE *SetParameter )( 
             __RPC__in IDedupChunkLibrary * This,
-            /* [in] */ DWORD dwParamType,
-            /* [in] */ VARIANT vParamValue);
+            /* [annotation][in] */ 
+            _In_  DWORD dwParamType,
+            /* [annotation][in] */ 
+            _In_  VARIANT vParamValue);
         
         DECLSPEC_XFGVIRT(IDedupChunkLibrary, StartChunking)
         HRESULT ( STDMETHODCALLTYPE *StartChunking )( 
             __RPC__in IDedupChunkLibrary * This,
-            /* [in] */ IID iidIteratorInterfaceID,
-            /* [out] */ __RPC__deref_out_opt IUnknown **ppChunksEnum);
+            /* [annotation][in] */ 
+            _In_  IID iidIteratorInterfaceID,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppChunksEnum);
         
         END_INTERFACE
     } IDedupChunkLibraryVtbl;
@@ -234,13 +243,17 @@ EXTERN_C const IID IID_IDedupIterateChunksHash32;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE PushBuffer( 
-            /* [size_is][in] */ __RPC__in_ecount_full(ulBufferLength) BYTE *pBuffer,
-            /* [in] */ ULONG ulBufferLength) = 0;
+            /* [annotation][size_is][in] */ 
+            _In_reads_(ulBufferLength)  BYTE *pBuffer,
+            /* [annotation][in] */ 
+            _In_  ULONG ulBufferLength) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Next( 
             /* [range][in] */ __RPC__in_range(0,DEDUP_CHUNKLIB_MAX_CHUNKS_ENUM) ULONG ulMaxChunks,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ulMaxChunks, *pulFetched) DEDUP_CHUNK_INFO_HASH32 *pArrChunks,
-            /* [out] */ __RPC__out ULONG *pulFetched) = 0;
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(ulMaxChunks,*pulFetched)  DEDUP_CHUNK_INFO_HASH32 *pArrChunks,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pulFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Drain( void) = 0;
         
@@ -258,7 +271,8 @@ EXTERN_C const IID IID_IDedupIterateChunksHash32;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDedupIterateChunksHash32 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -273,15 +287,19 @@ EXTERN_C const IID IID_IDedupIterateChunksHash32;
         DECLSPEC_XFGVIRT(IDedupIterateChunksHash32, PushBuffer)
         HRESULT ( STDMETHODCALLTYPE *PushBuffer )( 
             __RPC__in IDedupIterateChunksHash32 * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(ulBufferLength) BYTE *pBuffer,
-            /* [in] */ ULONG ulBufferLength);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(ulBufferLength)  BYTE *pBuffer,
+            /* [annotation][in] */ 
+            _In_  ULONG ulBufferLength);
         
         DECLSPEC_XFGVIRT(IDedupIterateChunksHash32, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IDedupIterateChunksHash32 * This,
             /* [range][in] */ __RPC__in_range(0,DEDUP_CHUNKLIB_MAX_CHUNKS_ENUM) ULONG ulMaxChunks,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ulMaxChunks, *pulFetched) DEDUP_CHUNK_INFO_HASH32 *pArrChunks,
-            /* [out] */ __RPC__out ULONG *pulFetched);
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(ulMaxChunks,*pulFetched)  DEDUP_CHUNK_INFO_HASH32 *pArrChunks,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pulFetched);
         
         DECLSPEC_XFGVIRT(IDedupIterateChunksHash32, Drain)
         HRESULT ( STDMETHODCALLTYPE *Drain )( 

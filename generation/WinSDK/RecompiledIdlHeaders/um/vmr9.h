@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -246,14 +246,18 @@ EXTERN_C const IID IID_IVMRImagePresenter9;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE StartPresenting( 
-            /* [in] */ DWORD_PTR dwUserID) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwUserID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StopPresenting( 
-            /* [in] */ DWORD_PTR dwUserID) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwUserID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PresentImage( 
-            /* [in] */ DWORD_PTR dwUserID,
-            /* [in] */ VMR9PresentationInfo *lpPresInfo) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwUserID,
+            /* [annotation][in] */ 
+            _In_  VMR9PresentationInfo *lpPresInfo) = 0;
         
     };
     
@@ -267,7 +271,8 @@ EXTERN_C const IID IID_IVMRImagePresenter9;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVMRImagePresenter9 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -282,18 +287,22 @@ EXTERN_C const IID IID_IVMRImagePresenter9;
         DECLSPEC_XFGVIRT(IVMRImagePresenter9, StartPresenting)
         HRESULT ( STDMETHODCALLTYPE *StartPresenting )( 
             IVMRImagePresenter9 * This,
-            /* [in] */ DWORD_PTR dwUserID);
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwUserID);
         
         DECLSPEC_XFGVIRT(IVMRImagePresenter9, StopPresenting)
         HRESULT ( STDMETHODCALLTYPE *StopPresenting )( 
             IVMRImagePresenter9 * This,
-            /* [in] */ DWORD_PTR dwUserID);
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwUserID);
         
         DECLSPEC_XFGVIRT(IVMRImagePresenter9, PresentImage)
         HRESULT ( STDMETHODCALLTYPE *PresentImage )( 
             IVMRImagePresenter9 * This,
-            /* [in] */ DWORD_PTR dwUserID,
-            /* [in] */ VMR9PresentationInfo *lpPresInfo);
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwUserID,
+            /* [annotation][in] */ 
+            _In_  VMR9PresentationInfo *lpPresInfo);
         
         END_INTERFACE
     } IVMRImagePresenter9Vtbl;
@@ -386,21 +395,30 @@ EXTERN_C const IID IID_IVMRSurfaceAllocator9;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE InitializeDevice( 
-            /* [in] */ DWORD_PTR dwUserID,
-            /* [in] */ VMR9AllocationInfo *lpAllocInfo,
-            /* [out][in] */ DWORD *lpNumBuffers) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwUserID,
+            /* [annotation][in] */ 
+            _In_  VMR9AllocationInfo *lpAllocInfo,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *lpNumBuffers) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE TerminateDevice( 
-            /* [in] */ DWORD_PTR dwID) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSurface( 
-            /* [in] */ DWORD_PTR dwUserID,
-            /* [in] */ DWORD SurfaceIndex,
-            /* [in] */ DWORD SurfaceFlags,
-            /* [out] */ IDirect3DSurface9 **lplpSurface) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwUserID,
+            /* [annotation][in] */ 
+            _In_  DWORD SurfaceIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD SurfaceFlags,
+            /* [annotation][out] */ 
+            _Out_  IDirect3DSurface9 **lplpSurface) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AdviseNotify( 
-            /* [in] */ IVMRSurfaceAllocatorNotify9 *lpIVMRSurfAllocNotify) = 0;
+            /* [annotation][in] */ 
+            _In_  IVMRSurfaceAllocatorNotify9 *lpIVMRSurfAllocNotify) = 0;
         
     };
     
@@ -414,7 +432,8 @@ EXTERN_C const IID IID_IVMRSurfaceAllocator9;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVMRSurfaceAllocator9 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -429,27 +448,36 @@ EXTERN_C const IID IID_IVMRSurfaceAllocator9;
         DECLSPEC_XFGVIRT(IVMRSurfaceAllocator9, InitializeDevice)
         HRESULT ( STDMETHODCALLTYPE *InitializeDevice )( 
             IVMRSurfaceAllocator9 * This,
-            /* [in] */ DWORD_PTR dwUserID,
-            /* [in] */ VMR9AllocationInfo *lpAllocInfo,
-            /* [out][in] */ DWORD *lpNumBuffers);
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwUserID,
+            /* [annotation][in] */ 
+            _In_  VMR9AllocationInfo *lpAllocInfo,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *lpNumBuffers);
         
         DECLSPEC_XFGVIRT(IVMRSurfaceAllocator9, TerminateDevice)
         HRESULT ( STDMETHODCALLTYPE *TerminateDevice )( 
             IVMRSurfaceAllocator9 * This,
-            /* [in] */ DWORD_PTR dwID);
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwID);
         
         DECLSPEC_XFGVIRT(IVMRSurfaceAllocator9, GetSurface)
         HRESULT ( STDMETHODCALLTYPE *GetSurface )( 
             IVMRSurfaceAllocator9 * This,
-            /* [in] */ DWORD_PTR dwUserID,
-            /* [in] */ DWORD SurfaceIndex,
-            /* [in] */ DWORD SurfaceFlags,
-            /* [out] */ IDirect3DSurface9 **lplpSurface);
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwUserID,
+            /* [annotation][in] */ 
+            _In_  DWORD SurfaceIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD SurfaceFlags,
+            /* [annotation][out] */ 
+            _Out_  IDirect3DSurface9 **lplpSurface);
         
         DECLSPEC_XFGVIRT(IVMRSurfaceAllocator9, AdviseNotify)
         HRESULT ( STDMETHODCALLTYPE *AdviseNotify )( 
             IVMRSurfaceAllocator9 * This,
-            /* [in] */ IVMRSurfaceAllocatorNotify9 *lpIVMRSurfAllocNotify);
+            /* [annotation][in] */ 
+            _In_  IVMRSurfaceAllocatorNotify9 *lpIVMRSurfAllocNotify);
         
         END_INTERFACE
     } IVMRSurfaceAllocator9Vtbl;
@@ -513,11 +541,16 @@ EXTERN_C const IID IID_IVMRSurfaceAllocatorEx9;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSurfaceEx( 
-            /* [in] */ DWORD_PTR dwUserID,
-            /* [in] */ DWORD SurfaceIndex,
-            /* [in] */ DWORD SurfaceFlags,
-            /* [out] */ IDirect3DSurface9 **lplpSurface,
-            /* [out] */ RECT *lprcDst) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwUserID,
+            /* [annotation][in] */ 
+            _In_  DWORD SurfaceIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD SurfaceFlags,
+            /* [annotation][out] */ 
+            _Out_  IDirect3DSurface9 **lplpSurface,
+            /* [annotation][out] */ 
+            _Out_  RECT *lprcDst) = 0;
         
     };
     
@@ -531,7 +564,8 @@ EXTERN_C const IID IID_IVMRSurfaceAllocatorEx9;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVMRSurfaceAllocatorEx9 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -546,36 +580,50 @@ EXTERN_C const IID IID_IVMRSurfaceAllocatorEx9;
         DECLSPEC_XFGVIRT(IVMRSurfaceAllocator9, InitializeDevice)
         HRESULT ( STDMETHODCALLTYPE *InitializeDevice )( 
             IVMRSurfaceAllocatorEx9 * This,
-            /* [in] */ DWORD_PTR dwUserID,
-            /* [in] */ VMR9AllocationInfo *lpAllocInfo,
-            /* [out][in] */ DWORD *lpNumBuffers);
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwUserID,
+            /* [annotation][in] */ 
+            _In_  VMR9AllocationInfo *lpAllocInfo,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *lpNumBuffers);
         
         DECLSPEC_XFGVIRT(IVMRSurfaceAllocator9, TerminateDevice)
         HRESULT ( STDMETHODCALLTYPE *TerminateDevice )( 
             IVMRSurfaceAllocatorEx9 * This,
-            /* [in] */ DWORD_PTR dwID);
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwID);
         
         DECLSPEC_XFGVIRT(IVMRSurfaceAllocator9, GetSurface)
         HRESULT ( STDMETHODCALLTYPE *GetSurface )( 
             IVMRSurfaceAllocatorEx9 * This,
-            /* [in] */ DWORD_PTR dwUserID,
-            /* [in] */ DWORD SurfaceIndex,
-            /* [in] */ DWORD SurfaceFlags,
-            /* [out] */ IDirect3DSurface9 **lplpSurface);
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwUserID,
+            /* [annotation][in] */ 
+            _In_  DWORD SurfaceIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD SurfaceFlags,
+            /* [annotation][out] */ 
+            _Out_  IDirect3DSurface9 **lplpSurface);
         
         DECLSPEC_XFGVIRT(IVMRSurfaceAllocator9, AdviseNotify)
         HRESULT ( STDMETHODCALLTYPE *AdviseNotify )( 
             IVMRSurfaceAllocatorEx9 * This,
-            /* [in] */ IVMRSurfaceAllocatorNotify9 *lpIVMRSurfAllocNotify);
+            /* [annotation][in] */ 
+            _In_  IVMRSurfaceAllocatorNotify9 *lpIVMRSurfAllocNotify);
         
         DECLSPEC_XFGVIRT(IVMRSurfaceAllocatorEx9, GetSurfaceEx)
         HRESULT ( STDMETHODCALLTYPE *GetSurfaceEx )( 
             IVMRSurfaceAllocatorEx9 * This,
-            /* [in] */ DWORD_PTR dwUserID,
-            /* [in] */ DWORD SurfaceIndex,
-            /* [in] */ DWORD SurfaceFlags,
-            /* [out] */ IDirect3DSurface9 **lplpSurface,
-            /* [out] */ RECT *lprcDst);
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwUserID,
+            /* [annotation][in] */ 
+            _In_  DWORD SurfaceIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD SurfaceFlags,
+            /* [annotation][out] */ 
+            _Out_  IDirect3DSurface9 **lplpSurface,
+            /* [annotation][out] */ 
+            _Out_  RECT *lprcDst);
         
         END_INTERFACE
     } IVMRSurfaceAllocatorEx9Vtbl;
@@ -643,26 +691,38 @@ EXTERN_C const IID IID_IVMRSurfaceAllocatorNotify9;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AdviseSurfaceAllocator( 
-            /* [in] */ DWORD_PTR dwUserID,
-            /* [in] */ IVMRSurfaceAllocator9 *lpIVRMSurfaceAllocator) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwUserID,
+            /* [annotation][in] */ 
+            _In_  IVMRSurfaceAllocator9 *lpIVRMSurfaceAllocator) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetD3DDevice( 
-            /* [in] */ IDirect3DDevice9 *lpD3DDevice,
-            /* [in] */ HMONITOR hMonitor) = 0;
+            /* [annotation][in] */ 
+            _In_  IDirect3DDevice9 *lpD3DDevice,
+            /* [annotation][in] */ 
+            _In_  HMONITOR hMonitor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ChangeD3DDevice( 
-            /* [in] */ IDirect3DDevice9 *lpD3DDevice,
-            /* [in] */ HMONITOR hMonitor) = 0;
+            /* [annotation][in] */ 
+            _In_  IDirect3DDevice9 *lpD3DDevice,
+            /* [annotation][in] */ 
+            _In_  HMONITOR hMonitor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AllocateSurfaceHelper( 
-            /* [in] */ VMR9AllocationInfo *lpAllocInfo,
-            /* [out][in] */ DWORD *lpNumBuffers,
-            /* [out] */ IDirect3DSurface9 **lplpSurface) = 0;
+            /* [annotation][in] */ 
+            _In_  VMR9AllocationInfo *lpAllocInfo,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *lpNumBuffers,
+            /* [annotation][out] */ 
+            _Out_  IDirect3DSurface9 **lplpSurface) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NotifyEvent( 
-            /* [in] */ LONG EventCode,
-            /* [in] */ LONG_PTR Param1,
-            /* [in] */ LONG_PTR Param2) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG EventCode,
+            /* [annotation][in] */ 
+            _In_  LONG_PTR Param1,
+            /* [annotation][in] */ 
+            _In_  LONG_PTR Param2) = 0;
         
     };
     
@@ -676,7 +736,8 @@ EXTERN_C const IID IID_IVMRSurfaceAllocatorNotify9;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVMRSurfaceAllocatorNotify9 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -691,34 +752,46 @@ EXTERN_C const IID IID_IVMRSurfaceAllocatorNotify9;
         DECLSPEC_XFGVIRT(IVMRSurfaceAllocatorNotify9, AdviseSurfaceAllocator)
         HRESULT ( STDMETHODCALLTYPE *AdviseSurfaceAllocator )( 
             IVMRSurfaceAllocatorNotify9 * This,
-            /* [in] */ DWORD_PTR dwUserID,
-            /* [in] */ IVMRSurfaceAllocator9 *lpIVRMSurfaceAllocator);
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwUserID,
+            /* [annotation][in] */ 
+            _In_  IVMRSurfaceAllocator9 *lpIVRMSurfaceAllocator);
         
         DECLSPEC_XFGVIRT(IVMRSurfaceAllocatorNotify9, SetD3DDevice)
         HRESULT ( STDMETHODCALLTYPE *SetD3DDevice )( 
             IVMRSurfaceAllocatorNotify9 * This,
-            /* [in] */ IDirect3DDevice9 *lpD3DDevice,
-            /* [in] */ HMONITOR hMonitor);
+            /* [annotation][in] */ 
+            _In_  IDirect3DDevice9 *lpD3DDevice,
+            /* [annotation][in] */ 
+            _In_  HMONITOR hMonitor);
         
         DECLSPEC_XFGVIRT(IVMRSurfaceAllocatorNotify9, ChangeD3DDevice)
         HRESULT ( STDMETHODCALLTYPE *ChangeD3DDevice )( 
             IVMRSurfaceAllocatorNotify9 * This,
-            /* [in] */ IDirect3DDevice9 *lpD3DDevice,
-            /* [in] */ HMONITOR hMonitor);
+            /* [annotation][in] */ 
+            _In_  IDirect3DDevice9 *lpD3DDevice,
+            /* [annotation][in] */ 
+            _In_  HMONITOR hMonitor);
         
         DECLSPEC_XFGVIRT(IVMRSurfaceAllocatorNotify9, AllocateSurfaceHelper)
         HRESULT ( STDMETHODCALLTYPE *AllocateSurfaceHelper )( 
             IVMRSurfaceAllocatorNotify9 * This,
-            /* [in] */ VMR9AllocationInfo *lpAllocInfo,
-            /* [out][in] */ DWORD *lpNumBuffers,
-            /* [out] */ IDirect3DSurface9 **lplpSurface);
+            /* [annotation][in] */ 
+            _In_  VMR9AllocationInfo *lpAllocInfo,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *lpNumBuffers,
+            /* [annotation][out] */ 
+            _Out_  IDirect3DSurface9 **lplpSurface);
         
         DECLSPEC_XFGVIRT(IVMRSurfaceAllocatorNotify9, NotifyEvent)
         HRESULT ( STDMETHODCALLTYPE *NotifyEvent )( 
             IVMRSurfaceAllocatorNotify9 * This,
-            /* [in] */ LONG EventCode,
-            /* [in] */ LONG_PTR Param1,
-            /* [in] */ LONG_PTR Param2);
+            /* [annotation][in] */ 
+            _In_  LONG EventCode,
+            /* [annotation][in] */ 
+            _In_  LONG_PTR Param1,
+            /* [annotation][in] */ 
+            _In_  LONG_PTR Param2);
         
         END_INTERFACE
     } IVMRSurfaceAllocatorNotify9Vtbl;
@@ -800,50 +873,70 @@ EXTERN_C const IID IID_IVMRWindowlessControl9;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetNativeVideoSize( 
-            /* [out] */ LONG *lpWidth,
-            /* [out] */ LONG *lpHeight,
-            /* [out] */ LONG *lpARWidth,
-            /* [out] */ LONG *lpARHeight) = 0;
+            /* [annotation][out] */ 
+            _Out_  LONG *lpWidth,
+            /* [annotation][out] */ 
+            _Out_  LONG *lpHeight,
+            /* [annotation][out] */ 
+            _Out_  LONG *lpARWidth,
+            /* [annotation][out] */ 
+            _Out_  LONG *lpARHeight) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMinIdealVideoSize( 
-            /* [out] */ LONG *lpWidth,
-            /* [out] */ LONG *lpHeight) = 0;
+            /* [annotation][out] */ 
+            _Out_  LONG *lpWidth,
+            /* [annotation][out] */ 
+            _Out_  LONG *lpHeight) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMaxIdealVideoSize( 
-            /* [out] */ LONG *lpWidth,
-            /* [out] */ LONG *lpHeight) = 0;
+            /* [annotation][out] */ 
+            _Out_  LONG *lpWidth,
+            /* [annotation][out] */ 
+            _Out_  LONG *lpHeight) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetVideoPosition( 
-            /* [in] */ const LPRECT lpSRCRect,
-            /* [in] */ const LPRECT lpDSTRect) = 0;
+            /* [annotation][in] */ 
+            _In_  const LPRECT lpSRCRect,
+            /* [annotation][in] */ 
+            _In_  const LPRECT lpDSTRect) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVideoPosition( 
-            /* [out] */ LPRECT lpSRCRect,
-            /* [out] */ LPRECT lpDSTRect) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPRECT lpSRCRect,
+            /* [annotation][out] */ 
+            _Out_  LPRECT lpDSTRect) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAspectRatioMode( 
-            /* [out] */ DWORD *lpAspectRatioMode) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *lpAspectRatioMode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAspectRatioMode( 
-            /* [in] */ DWORD AspectRatioMode) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD AspectRatioMode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetVideoClippingWindow( 
-            /* [in] */ HWND hwnd) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hwnd) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RepaintVideo( 
-            /* [in] */ HWND hwnd,
-            /* [in] */ HDC hdc) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  HDC hdc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DisplayModeChanged( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentImage( 
-            /* [out] */ BYTE **lpDib) = 0;
+            /* [annotation][out] */ 
+            _Out_  BYTE **lpDib) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetBorderColor( 
-            /* [in] */ COLORREF Clr) = 0;
+            /* [annotation][in] */ 
+            _In_  COLORREF Clr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBorderColor( 
-            /* [out] */ COLORREF *lpClr) = 0;
+            /* [annotation][out] */ 
+            _Out_  COLORREF *lpClr) = 0;
         
     };
     
@@ -857,7 +950,8 @@ EXTERN_C const IID IID_IVMRWindowlessControl9;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVMRWindowlessControl9 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -872,55 +966,72 @@ EXTERN_C const IID IID_IVMRWindowlessControl9;
         DECLSPEC_XFGVIRT(IVMRWindowlessControl9, GetNativeVideoSize)
         HRESULT ( STDMETHODCALLTYPE *GetNativeVideoSize )( 
             IVMRWindowlessControl9 * This,
-            /* [out] */ LONG *lpWidth,
-            /* [out] */ LONG *lpHeight,
-            /* [out] */ LONG *lpARWidth,
-            /* [out] */ LONG *lpARHeight);
+            /* [annotation][out] */ 
+            _Out_  LONG *lpWidth,
+            /* [annotation][out] */ 
+            _Out_  LONG *lpHeight,
+            /* [annotation][out] */ 
+            _Out_  LONG *lpARWidth,
+            /* [annotation][out] */ 
+            _Out_  LONG *lpARHeight);
         
         DECLSPEC_XFGVIRT(IVMRWindowlessControl9, GetMinIdealVideoSize)
         HRESULT ( STDMETHODCALLTYPE *GetMinIdealVideoSize )( 
             IVMRWindowlessControl9 * This,
-            /* [out] */ LONG *lpWidth,
-            /* [out] */ LONG *lpHeight);
+            /* [annotation][out] */ 
+            _Out_  LONG *lpWidth,
+            /* [annotation][out] */ 
+            _Out_  LONG *lpHeight);
         
         DECLSPEC_XFGVIRT(IVMRWindowlessControl9, GetMaxIdealVideoSize)
         HRESULT ( STDMETHODCALLTYPE *GetMaxIdealVideoSize )( 
             IVMRWindowlessControl9 * This,
-            /* [out] */ LONG *lpWidth,
-            /* [out] */ LONG *lpHeight);
+            /* [annotation][out] */ 
+            _Out_  LONG *lpWidth,
+            /* [annotation][out] */ 
+            _Out_  LONG *lpHeight);
         
         DECLSPEC_XFGVIRT(IVMRWindowlessControl9, SetVideoPosition)
         HRESULT ( STDMETHODCALLTYPE *SetVideoPosition )( 
             IVMRWindowlessControl9 * This,
-            /* [in] */ const LPRECT lpSRCRect,
-            /* [in] */ const LPRECT lpDSTRect);
+            /* [annotation][in] */ 
+            _In_  const LPRECT lpSRCRect,
+            /* [annotation][in] */ 
+            _In_  const LPRECT lpDSTRect);
         
         DECLSPEC_XFGVIRT(IVMRWindowlessControl9, GetVideoPosition)
         HRESULT ( STDMETHODCALLTYPE *GetVideoPosition )( 
             IVMRWindowlessControl9 * This,
-            /* [out] */ LPRECT lpSRCRect,
-            /* [out] */ LPRECT lpDSTRect);
+            /* [annotation][out] */ 
+            _Out_  LPRECT lpSRCRect,
+            /* [annotation][out] */ 
+            _Out_  LPRECT lpDSTRect);
         
         DECLSPEC_XFGVIRT(IVMRWindowlessControl9, GetAspectRatioMode)
         HRESULT ( STDMETHODCALLTYPE *GetAspectRatioMode )( 
             IVMRWindowlessControl9 * This,
-            /* [out] */ DWORD *lpAspectRatioMode);
+            /* [annotation][out] */ 
+            _Out_  DWORD *lpAspectRatioMode);
         
         DECLSPEC_XFGVIRT(IVMRWindowlessControl9, SetAspectRatioMode)
         HRESULT ( STDMETHODCALLTYPE *SetAspectRatioMode )( 
             IVMRWindowlessControl9 * This,
-            /* [in] */ DWORD AspectRatioMode);
+            /* [annotation][in] */ 
+            _In_  DWORD AspectRatioMode);
         
         DECLSPEC_XFGVIRT(IVMRWindowlessControl9, SetVideoClippingWindow)
         HRESULT ( STDMETHODCALLTYPE *SetVideoClippingWindow )( 
             IVMRWindowlessControl9 * This,
-            /* [in] */ HWND hwnd);
+            /* [annotation][in] */ 
+            _In_  HWND hwnd);
         
         DECLSPEC_XFGVIRT(IVMRWindowlessControl9, RepaintVideo)
         HRESULT ( STDMETHODCALLTYPE *RepaintVideo )( 
             IVMRWindowlessControl9 * This,
-            /* [in] */ HWND hwnd,
-            /* [in] */ HDC hdc);
+            /* [annotation][in] */ 
+            _In_  HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  HDC hdc);
         
         DECLSPEC_XFGVIRT(IVMRWindowlessControl9, DisplayModeChanged)
         HRESULT ( STDMETHODCALLTYPE *DisplayModeChanged )( 
@@ -929,17 +1040,20 @@ EXTERN_C const IID IID_IVMRWindowlessControl9;
         DECLSPEC_XFGVIRT(IVMRWindowlessControl9, GetCurrentImage)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentImage )( 
             IVMRWindowlessControl9 * This,
-            /* [out] */ BYTE **lpDib);
+            /* [annotation][out] */ 
+            _Out_  BYTE **lpDib);
         
         DECLSPEC_XFGVIRT(IVMRWindowlessControl9, SetBorderColor)
         HRESULT ( STDMETHODCALLTYPE *SetBorderColor )( 
             IVMRWindowlessControl9 * This,
-            /* [in] */ COLORREF Clr);
+            /* [annotation][in] */ 
+            _In_  COLORREF Clr);
         
         DECLSPEC_XFGVIRT(IVMRWindowlessControl9, GetBorderColor)
         HRESULT ( STDMETHODCALLTYPE *GetBorderColor )( 
             IVMRWindowlessControl9 * This,
-            /* [out] */ COLORREF *lpClr);
+            /* [annotation][out] */ 
+            _Out_  COLORREF *lpClr);
         
         END_INTERFACE
     } IVMRWindowlessControl9Vtbl;
@@ -1101,52 +1215,74 @@ EXTERN_C const IID IID_IVMRMixerControl9;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetAlpha( 
-            /* [in] */ DWORD dwStreamID,
-            /* [in] */ float Alpha) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][in] */ 
+            _In_  float Alpha) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAlpha( 
-            /* [in] */ DWORD dwStreamID,
-            /* [out] */ float *pAlpha) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][out] */ 
+            _Out_  float *pAlpha) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetZOrder( 
-            /* [in] */ DWORD dwStreamID,
-            /* [in] */ DWORD dwZ) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZ) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetZOrder( 
-            /* [in] */ DWORD dwStreamID,
-            /* [out] */ DWORD *pZ) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pZ) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetOutputRect( 
-            /* [in] */ DWORD dwStreamID,
-            /* [in] */ const VMR9NormalizedRect *pRect) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][in] */ 
+            _In_  const VMR9NormalizedRect *pRect) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOutputRect( 
-            /* [in] */ DWORD dwStreamID,
-            /* [out] */ VMR9NormalizedRect *pRect) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][out] */ 
+            _Out_  VMR9NormalizedRect *pRect) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetBackgroundClr( 
-            /* [in] */ COLORREF ClrBkg) = 0;
+            /* [annotation][in] */ 
+            _In_  COLORREF ClrBkg) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBackgroundClr( 
-            /* [in] */ COLORREF *lpClrBkg) = 0;
+            /* [annotation][in] */ 
+            _In_  COLORREF *lpClrBkg) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetMixingPrefs( 
-            /* [in] */ DWORD dwMixerPrefs) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwMixerPrefs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMixingPrefs( 
-            /* [out] */ DWORD *pdwMixerPrefs) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMixerPrefs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetProcAmpControl( 
-            /* [in] */ DWORD dwStreamID,
-            /* [in] */ VMR9ProcAmpControl *lpClrControl) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][in] */ 
+            _In_  VMR9ProcAmpControl *lpClrControl) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProcAmpControl( 
-            /* [in] */ DWORD dwStreamID,
-            /* [out][in] */ VMR9ProcAmpControl *lpClrControl) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][out][in] */ 
+            _Inout_  VMR9ProcAmpControl *lpClrControl) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProcAmpControlRange( 
-            /* [in] */ DWORD dwStreamID,
-            /* [out][in] */ VMR9ProcAmpControlRange *lpClrControl) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][out][in] */ 
+            _Inout_  VMR9ProcAmpControlRange *lpClrControl) = 0;
         
     };
     
@@ -1160,7 +1296,8 @@ EXTERN_C const IID IID_IVMRMixerControl9;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVMRMixerControl9 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1175,76 +1312,98 @@ EXTERN_C const IID IID_IVMRMixerControl9;
         DECLSPEC_XFGVIRT(IVMRMixerControl9, SetAlpha)
         HRESULT ( STDMETHODCALLTYPE *SetAlpha )( 
             IVMRMixerControl9 * This,
-            /* [in] */ DWORD dwStreamID,
-            /* [in] */ float Alpha);
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][in] */ 
+            _In_  float Alpha);
         
         DECLSPEC_XFGVIRT(IVMRMixerControl9, GetAlpha)
         HRESULT ( STDMETHODCALLTYPE *GetAlpha )( 
             IVMRMixerControl9 * This,
-            /* [in] */ DWORD dwStreamID,
-            /* [out] */ float *pAlpha);
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][out] */ 
+            _Out_  float *pAlpha);
         
         DECLSPEC_XFGVIRT(IVMRMixerControl9, SetZOrder)
         HRESULT ( STDMETHODCALLTYPE *SetZOrder )( 
             IVMRMixerControl9 * This,
-            /* [in] */ DWORD dwStreamID,
-            /* [in] */ DWORD dwZ);
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZ);
         
         DECLSPEC_XFGVIRT(IVMRMixerControl9, GetZOrder)
         HRESULT ( STDMETHODCALLTYPE *GetZOrder )( 
             IVMRMixerControl9 * This,
-            /* [in] */ DWORD dwStreamID,
-            /* [out] */ DWORD *pZ);
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pZ);
         
         DECLSPEC_XFGVIRT(IVMRMixerControl9, SetOutputRect)
         HRESULT ( STDMETHODCALLTYPE *SetOutputRect )( 
             IVMRMixerControl9 * This,
-            /* [in] */ DWORD dwStreamID,
-            /* [in] */ const VMR9NormalizedRect *pRect);
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][in] */ 
+            _In_  const VMR9NormalizedRect *pRect);
         
         DECLSPEC_XFGVIRT(IVMRMixerControl9, GetOutputRect)
         HRESULT ( STDMETHODCALLTYPE *GetOutputRect )( 
             IVMRMixerControl9 * This,
-            /* [in] */ DWORD dwStreamID,
-            /* [out] */ VMR9NormalizedRect *pRect);
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][out] */ 
+            _Out_  VMR9NormalizedRect *pRect);
         
         DECLSPEC_XFGVIRT(IVMRMixerControl9, SetBackgroundClr)
         HRESULT ( STDMETHODCALLTYPE *SetBackgroundClr )( 
             IVMRMixerControl9 * This,
-            /* [in] */ COLORREF ClrBkg);
+            /* [annotation][in] */ 
+            _In_  COLORREF ClrBkg);
         
         DECLSPEC_XFGVIRT(IVMRMixerControl9, GetBackgroundClr)
         HRESULT ( STDMETHODCALLTYPE *GetBackgroundClr )( 
             IVMRMixerControl9 * This,
-            /* [in] */ COLORREF *lpClrBkg);
+            /* [annotation][in] */ 
+            _In_  COLORREF *lpClrBkg);
         
         DECLSPEC_XFGVIRT(IVMRMixerControl9, SetMixingPrefs)
         HRESULT ( STDMETHODCALLTYPE *SetMixingPrefs )( 
             IVMRMixerControl9 * This,
-            /* [in] */ DWORD dwMixerPrefs);
+            /* [annotation][in] */ 
+            _In_  DWORD dwMixerPrefs);
         
         DECLSPEC_XFGVIRT(IVMRMixerControl9, GetMixingPrefs)
         HRESULT ( STDMETHODCALLTYPE *GetMixingPrefs )( 
             IVMRMixerControl9 * This,
-            /* [out] */ DWORD *pdwMixerPrefs);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMixerPrefs);
         
         DECLSPEC_XFGVIRT(IVMRMixerControl9, SetProcAmpControl)
         HRESULT ( STDMETHODCALLTYPE *SetProcAmpControl )( 
             IVMRMixerControl9 * This,
-            /* [in] */ DWORD dwStreamID,
-            /* [in] */ VMR9ProcAmpControl *lpClrControl);
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][in] */ 
+            _In_  VMR9ProcAmpControl *lpClrControl);
         
         DECLSPEC_XFGVIRT(IVMRMixerControl9, GetProcAmpControl)
         HRESULT ( STDMETHODCALLTYPE *GetProcAmpControl )( 
             IVMRMixerControl9 * This,
-            /* [in] */ DWORD dwStreamID,
-            /* [out][in] */ VMR9ProcAmpControl *lpClrControl);
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][out][in] */ 
+            _Inout_  VMR9ProcAmpControl *lpClrControl);
         
         DECLSPEC_XFGVIRT(IVMRMixerControl9, GetProcAmpControlRange)
         HRESULT ( STDMETHODCALLTYPE *GetProcAmpControlRange )( 
             IVMRMixerControl9 * This,
-            /* [in] */ DWORD dwStreamID,
-            /* [out][in] */ VMR9ProcAmpControlRange *lpClrControl);
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][out][in] */ 
+            _Inout_  VMR9ProcAmpControlRange *lpClrControl);
         
         END_INTERFACE
     } IVMRMixerControl9Vtbl;
@@ -1366,13 +1525,16 @@ EXTERN_C const IID IID_IVMRMixerBitmap9;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetAlphaBitmap( 
-            /* [in] */ const VMR9AlphaBitmap *pBmpParms) = 0;
+            /* [annotation][in] */ 
+            _In_  const VMR9AlphaBitmap *pBmpParms) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UpdateAlphaBitmapParameters( 
-            /* [in] */ const VMR9AlphaBitmap *pBmpParms) = 0;
+            /* [annotation][in] */ 
+            _In_  const VMR9AlphaBitmap *pBmpParms) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAlphaBitmapParameters( 
-            /* [out] */ VMR9AlphaBitmap *pBmpParms) = 0;
+            /* [annotation][out] */ 
+            _Out_  VMR9AlphaBitmap *pBmpParms) = 0;
         
     };
     
@@ -1386,7 +1548,8 @@ EXTERN_C const IID IID_IVMRMixerBitmap9;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVMRMixerBitmap9 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1401,17 +1564,20 @@ EXTERN_C const IID IID_IVMRMixerBitmap9;
         DECLSPEC_XFGVIRT(IVMRMixerBitmap9, SetAlphaBitmap)
         HRESULT ( STDMETHODCALLTYPE *SetAlphaBitmap )( 
             IVMRMixerBitmap9 * This,
-            /* [in] */ const VMR9AlphaBitmap *pBmpParms);
+            /* [annotation][in] */ 
+            _In_  const VMR9AlphaBitmap *pBmpParms);
         
         DECLSPEC_XFGVIRT(IVMRMixerBitmap9, UpdateAlphaBitmapParameters)
         HRESULT ( STDMETHODCALLTYPE *UpdateAlphaBitmapParameters )( 
             IVMRMixerBitmap9 * This,
-            /* [in] */ const VMR9AlphaBitmap *pBmpParms);
+            /* [annotation][in] */ 
+            _In_  const VMR9AlphaBitmap *pBmpParms);
         
         DECLSPEC_XFGVIRT(IVMRMixerBitmap9, GetAlphaBitmapParameters)
         HRESULT ( STDMETHODCALLTYPE *GetAlphaBitmapParameters )( 
             IVMRMixerBitmap9 * This,
-            /* [out] */ VMR9AlphaBitmap *pBmpParms);
+            /* [annotation][out] */ 
+            _Out_  VMR9AlphaBitmap *pBmpParms);
         
         END_INTERFACE
     } IVMRMixerBitmap9Vtbl;
@@ -1474,12 +1640,14 @@ EXTERN_C const IID IID_IVMRSurface9;
         virtual HRESULT STDMETHODCALLTYPE IsSurfaceLocked( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LockSurface( 
-            /* [out] */ BYTE **lpSurface) = 0;
+            /* [annotation][out] */ 
+            _Out_  BYTE **lpSurface) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnlockSurface( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSurface( 
-            /* [out] */ IDirect3DSurface9 **lplpSurface) = 0;
+            /* [annotation][out] */ 
+            _Out_  IDirect3DSurface9 **lplpSurface) = 0;
         
     };
     
@@ -1493,7 +1661,8 @@ EXTERN_C const IID IID_IVMRSurface9;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVMRSurface9 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1512,7 +1681,8 @@ EXTERN_C const IID IID_IVMRSurface9;
         DECLSPEC_XFGVIRT(IVMRSurface9, LockSurface)
         HRESULT ( STDMETHODCALLTYPE *LockSurface )( 
             IVMRSurface9 * This,
-            /* [out] */ BYTE **lpSurface);
+            /* [annotation][out] */ 
+            _Out_  BYTE **lpSurface);
         
         DECLSPEC_XFGVIRT(IVMRSurface9, UnlockSurface)
         HRESULT ( STDMETHODCALLTYPE *UnlockSurface )( 
@@ -1521,7 +1691,8 @@ EXTERN_C const IID IID_IVMRSurface9;
         DECLSPEC_XFGVIRT(IVMRSurface9, GetSurface)
         HRESULT ( STDMETHODCALLTYPE *GetSurface )( 
             IVMRSurface9 * This,
-            /* [out] */ IDirect3DSurface9 **lplpSurface);
+            /* [annotation][out] */ 
+            _Out_  IDirect3DSurface9 **lplpSurface);
         
         END_INTERFACE
     } IVMRSurface9Vtbl;
@@ -1600,10 +1771,12 @@ EXTERN_C const IID IID_IVMRImagePresenterConfig9;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetRenderingPrefs( 
-            /* [in] */ DWORD dwRenderFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwRenderFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRenderingPrefs( 
-            /* [out] */ DWORD *dwRenderFlags) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *dwRenderFlags) = 0;
         
     };
     
@@ -1617,7 +1790,8 @@ EXTERN_C const IID IID_IVMRImagePresenterConfig9;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVMRImagePresenterConfig9 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1632,12 +1806,14 @@ EXTERN_C const IID IID_IVMRImagePresenterConfig9;
         DECLSPEC_XFGVIRT(IVMRImagePresenterConfig9, SetRenderingPrefs)
         HRESULT ( STDMETHODCALLTYPE *SetRenderingPrefs )( 
             IVMRImagePresenterConfig9 * This,
-            /* [in] */ DWORD dwRenderFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwRenderFlags);
         
         DECLSPEC_XFGVIRT(IVMRImagePresenterConfig9, GetRenderingPrefs)
         HRESULT ( STDMETHODCALLTYPE *GetRenderingPrefs )( 
             IVMRImagePresenterConfig9 * This,
-            /* [out] */ DWORD *dwRenderFlags);
+            /* [annotation][out] */ 
+            _Out_  DWORD *dwRenderFlags);
         
         END_INTERFACE
     } IVMRImagePresenterConfig9Vtbl;
@@ -1695,10 +1871,12 @@ EXTERN_C const IID IID_IVMRVideoStreamControl9;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetStreamActiveState( 
-            /* [in] */ BOOL fActive) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL fActive) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStreamActiveState( 
-            /* [out] */ BOOL *lpfActive) = 0;
+            /* [annotation][out] */ 
+            _Out_  BOOL *lpfActive) = 0;
         
     };
     
@@ -1712,7 +1890,8 @@ EXTERN_C const IID IID_IVMRVideoStreamControl9;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVMRVideoStreamControl9 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1727,12 +1906,14 @@ EXTERN_C const IID IID_IVMRVideoStreamControl9;
         DECLSPEC_XFGVIRT(IVMRVideoStreamControl9, SetStreamActiveState)
         HRESULT ( STDMETHODCALLTYPE *SetStreamActiveState )( 
             IVMRVideoStreamControl9 * This,
-            /* [in] */ BOOL fActive);
+            /* [annotation][in] */ 
+            _In_  BOOL fActive);
         
         DECLSPEC_XFGVIRT(IVMRVideoStreamControl9, GetStreamActiveState)
         HRESULT ( STDMETHODCALLTYPE *GetStreamActiveState )( 
             IVMRVideoStreamControl9 * This,
-            /* [out] */ BOOL *lpfActive);
+            /* [annotation][out] */ 
+            _Out_  BOOL *lpfActive);
         
         END_INTERFACE
     } IVMRVideoStreamControl9Vtbl;
@@ -1807,25 +1988,32 @@ EXTERN_C const IID IID_IVMRFilterConfig9;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetImageCompositor( 
-            /* [in] */ IVMRImageCompositor9 *lpVMRImgCompositor) = 0;
+            /* [annotation][in] */ 
+            _In_  IVMRImageCompositor9 *lpVMRImgCompositor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetNumberOfStreams( 
-            /* [in] */ DWORD dwMaxStreams) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwMaxStreams) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNumberOfStreams( 
-            /* [out] */ DWORD *pdwMaxStreams) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMaxStreams) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetRenderingPrefs( 
-            /* [in] */ DWORD dwRenderFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwRenderFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRenderingPrefs( 
-            /* [out] */ DWORD *pdwRenderFlags) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwRenderFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetRenderingMode( 
-            /* [in] */ DWORD Mode) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD Mode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRenderingMode( 
-            /* [out] */ DWORD *pMode) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pMode) = 0;
         
     };
     
@@ -1839,7 +2027,8 @@ EXTERN_C const IID IID_IVMRFilterConfig9;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVMRFilterConfig9 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1854,37 +2043,44 @@ EXTERN_C const IID IID_IVMRFilterConfig9;
         DECLSPEC_XFGVIRT(IVMRFilterConfig9, SetImageCompositor)
         HRESULT ( STDMETHODCALLTYPE *SetImageCompositor )( 
             IVMRFilterConfig9 * This,
-            /* [in] */ IVMRImageCompositor9 *lpVMRImgCompositor);
+            /* [annotation][in] */ 
+            _In_  IVMRImageCompositor9 *lpVMRImgCompositor);
         
         DECLSPEC_XFGVIRT(IVMRFilterConfig9, SetNumberOfStreams)
         HRESULT ( STDMETHODCALLTYPE *SetNumberOfStreams )( 
             IVMRFilterConfig9 * This,
-            /* [in] */ DWORD dwMaxStreams);
+            /* [annotation][in] */ 
+            _In_  DWORD dwMaxStreams);
         
         DECLSPEC_XFGVIRT(IVMRFilterConfig9, GetNumberOfStreams)
         HRESULT ( STDMETHODCALLTYPE *GetNumberOfStreams )( 
             IVMRFilterConfig9 * This,
-            /* [out] */ DWORD *pdwMaxStreams);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMaxStreams);
         
         DECLSPEC_XFGVIRT(IVMRFilterConfig9, SetRenderingPrefs)
         HRESULT ( STDMETHODCALLTYPE *SetRenderingPrefs )( 
             IVMRFilterConfig9 * This,
-            /* [in] */ DWORD dwRenderFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwRenderFlags);
         
         DECLSPEC_XFGVIRT(IVMRFilterConfig9, GetRenderingPrefs)
         HRESULT ( STDMETHODCALLTYPE *GetRenderingPrefs )( 
             IVMRFilterConfig9 * This,
-            /* [out] */ DWORD *pdwRenderFlags);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwRenderFlags);
         
         DECLSPEC_XFGVIRT(IVMRFilterConfig9, SetRenderingMode)
         HRESULT ( STDMETHODCALLTYPE *SetRenderingMode )( 
             IVMRFilterConfig9 * This,
-            /* [in] */ DWORD Mode);
+            /* [annotation][in] */ 
+            _In_  DWORD Mode);
         
         DECLSPEC_XFGVIRT(IVMRFilterConfig9, GetRenderingMode)
         HRESULT ( STDMETHODCALLTYPE *GetRenderingMode )( 
             IVMRFilterConfig9 * This,
-            /* [out] */ DWORD *pMode);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pMode);
         
         END_INTERFACE
     } IVMRFilterConfig9Vtbl;
@@ -1957,10 +2153,12 @@ EXTERN_C const IID IID_IVMRAspectRatioControl9;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetAspectRatioMode( 
-            /* [out] */ LPDWORD lpdwARMode) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPDWORD lpdwARMode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAspectRatioMode( 
-            /* [in] */ DWORD dwARMode) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwARMode) = 0;
         
     };
     
@@ -1974,7 +2172,8 @@ EXTERN_C const IID IID_IVMRAspectRatioControl9;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVMRAspectRatioControl9 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1989,12 +2188,14 @@ EXTERN_C const IID IID_IVMRAspectRatioControl9;
         DECLSPEC_XFGVIRT(IVMRAspectRatioControl9, GetAspectRatioMode)
         HRESULT ( STDMETHODCALLTYPE *GetAspectRatioMode )( 
             IVMRAspectRatioControl9 * This,
-            /* [out] */ LPDWORD lpdwARMode);
+            /* [annotation][out] */ 
+            _Out_  LPDWORD lpdwARMode);
         
         DECLSPEC_XFGVIRT(IVMRAspectRatioControl9, SetAspectRatioMode)
         HRESULT ( STDMETHODCALLTYPE *SetAspectRatioMode )( 
             IVMRAspectRatioControl9 * This,
-            /* [in] */ DWORD dwARMode);
+            /* [annotation][in] */ 
+            _In_  DWORD dwARMode);
         
         END_INTERFACE
     } IVMRAspectRatioControl9Vtbl;
@@ -2075,21 +2276,28 @@ EXTERN_C const IID IID_IVMRMonitorConfig9;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetMonitor( 
-            /* [in] */ UINT uDev) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT uDev) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMonitor( 
-            /* [out] */ UINT *puDev) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *puDev) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDefaultMonitor( 
-            /* [in] */ UINT uDev) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT uDev) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDefaultMonitor( 
-            /* [out] */ UINT *puDev) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *puDev) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAvailableMonitors( 
-            /* [size_is][out] */ VMR9MonitorInfo *pInfo,
-            /* [in] */ DWORD dwMaxInfoArraySize,
-            /* [out] */ DWORD *pdwNumDevices) = 0;
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(dwMaxInfoArraySize)  VMR9MonitorInfo *pInfo,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMaxInfoArraySize,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwNumDevices) = 0;
         
     };
     
@@ -2103,7 +2311,8 @@ EXTERN_C const IID IID_IVMRMonitorConfig9;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVMRMonitorConfig9 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2118,29 +2327,36 @@ EXTERN_C const IID IID_IVMRMonitorConfig9;
         DECLSPEC_XFGVIRT(IVMRMonitorConfig9, SetMonitor)
         HRESULT ( STDMETHODCALLTYPE *SetMonitor )( 
             IVMRMonitorConfig9 * This,
-            /* [in] */ UINT uDev);
+            /* [annotation][in] */ 
+            _In_  UINT uDev);
         
         DECLSPEC_XFGVIRT(IVMRMonitorConfig9, GetMonitor)
         HRESULT ( STDMETHODCALLTYPE *GetMonitor )( 
             IVMRMonitorConfig9 * This,
-            /* [out] */ UINT *puDev);
+            /* [annotation][out] */ 
+            _Out_  UINT *puDev);
         
         DECLSPEC_XFGVIRT(IVMRMonitorConfig9, SetDefaultMonitor)
         HRESULT ( STDMETHODCALLTYPE *SetDefaultMonitor )( 
             IVMRMonitorConfig9 * This,
-            /* [in] */ UINT uDev);
+            /* [annotation][in] */ 
+            _In_  UINT uDev);
         
         DECLSPEC_XFGVIRT(IVMRMonitorConfig9, GetDefaultMonitor)
         HRESULT ( STDMETHODCALLTYPE *GetDefaultMonitor )( 
             IVMRMonitorConfig9 * This,
-            /* [out] */ UINT *puDev);
+            /* [annotation][out] */ 
+            _Out_  UINT *puDev);
         
         DECLSPEC_XFGVIRT(IVMRMonitorConfig9, GetAvailableMonitors)
         HRESULT ( STDMETHODCALLTYPE *GetAvailableMonitors )( 
             IVMRMonitorConfig9 * This,
-            /* [size_is][out] */ VMR9MonitorInfo *pInfo,
-            /* [in] */ DWORD dwMaxInfoArraySize,
-            /* [out] */ DWORD *pdwNumDevices);
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(dwMaxInfoArraySize)  VMR9MonitorInfo *pInfo,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMaxInfoArraySize,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwNumDevices);
         
         END_INTERFACE
     } IVMRMonitorConfig9Vtbl;
@@ -2274,32 +2490,46 @@ EXTERN_C const IID IID_IVMRDeinterlaceControl9;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetNumberOfDeinterlaceModes( 
-            /* [in] */ VMR9VideoDesc *lpVideoDescription,
-            /* [out][in] */ LPDWORD lpdwNumDeinterlaceModes,
-            /* [out] */ LPGUID lpDeinterlaceModes) = 0;
+            /* [annotation][in] */ 
+            _In_  VMR9VideoDesc *lpVideoDescription,
+            /* [annotation][out][annotation][in] */ 
+            _Out_  LPDWORD lpdwNumDeinterlaceModes,
+            /* [annotation][out] */ 
+            _Out_  LPGUID lpDeinterlaceModes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDeinterlaceModeCaps( 
-            /* [in] */ LPGUID lpDeinterlaceMode,
-            /* [in] */ VMR9VideoDesc *lpVideoDescription,
-            /* [out] */ VMR9DeinterlaceCaps *lpDeinterlaceCaps) = 0;
+            /* [annotation][in] */ 
+            _In_  LPGUID lpDeinterlaceMode,
+            /* [annotation][in] */ 
+            _In_  VMR9VideoDesc *lpVideoDescription,
+            /* [annotation][out] */ 
+            _Out_  VMR9DeinterlaceCaps *lpDeinterlaceCaps) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDeinterlaceMode( 
-            /* [in] */ DWORD dwStreamID,
-            /* [out] */ LPGUID lpDeinterlaceMode) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][out] */ 
+            _Out_  LPGUID lpDeinterlaceMode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDeinterlaceMode( 
-            /* [in] */ DWORD dwStreamID,
-            /* [in] */ LPGUID lpDeinterlaceMode) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][in] */ 
+            _In_  LPGUID lpDeinterlaceMode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDeinterlacePrefs( 
-            /* [out] */ LPDWORD lpdwDeinterlacePrefs) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPDWORD lpdwDeinterlacePrefs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDeinterlacePrefs( 
-            /* [in] */ DWORD dwDeinterlacePrefs) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwDeinterlacePrefs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetActualDeinterlaceMode( 
-            /* [in] */ DWORD dwStreamID,
-            /* [out] */ LPGUID lpDeinterlaceMode) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][out] */ 
+            _Out_  LPGUID lpDeinterlaceMode) = 0;
         
     };
     
@@ -2313,7 +2543,8 @@ EXTERN_C const IID IID_IVMRDeinterlaceControl9;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVMRDeinterlaceControl9 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2328,44 +2559,58 @@ EXTERN_C const IID IID_IVMRDeinterlaceControl9;
         DECLSPEC_XFGVIRT(IVMRDeinterlaceControl9, GetNumberOfDeinterlaceModes)
         HRESULT ( STDMETHODCALLTYPE *GetNumberOfDeinterlaceModes )( 
             IVMRDeinterlaceControl9 * This,
-            /* [in] */ VMR9VideoDesc *lpVideoDescription,
-            /* [out][in] */ LPDWORD lpdwNumDeinterlaceModes,
-            /* [out] */ LPGUID lpDeinterlaceModes);
+            /* [annotation][in] */ 
+            _In_  VMR9VideoDesc *lpVideoDescription,
+            /* [annotation][out][annotation][in] */ 
+            _Out_  LPDWORD lpdwNumDeinterlaceModes,
+            /* [annotation][out] */ 
+            _Out_  LPGUID lpDeinterlaceModes);
         
         DECLSPEC_XFGVIRT(IVMRDeinterlaceControl9, GetDeinterlaceModeCaps)
         HRESULT ( STDMETHODCALLTYPE *GetDeinterlaceModeCaps )( 
             IVMRDeinterlaceControl9 * This,
-            /* [in] */ LPGUID lpDeinterlaceMode,
-            /* [in] */ VMR9VideoDesc *lpVideoDescription,
-            /* [out] */ VMR9DeinterlaceCaps *lpDeinterlaceCaps);
+            /* [annotation][in] */ 
+            _In_  LPGUID lpDeinterlaceMode,
+            /* [annotation][in] */ 
+            _In_  VMR9VideoDesc *lpVideoDescription,
+            /* [annotation][out] */ 
+            _Out_  VMR9DeinterlaceCaps *lpDeinterlaceCaps);
         
         DECLSPEC_XFGVIRT(IVMRDeinterlaceControl9, GetDeinterlaceMode)
         HRESULT ( STDMETHODCALLTYPE *GetDeinterlaceMode )( 
             IVMRDeinterlaceControl9 * This,
-            /* [in] */ DWORD dwStreamID,
-            /* [out] */ LPGUID lpDeinterlaceMode);
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][out] */ 
+            _Out_  LPGUID lpDeinterlaceMode);
         
         DECLSPEC_XFGVIRT(IVMRDeinterlaceControl9, SetDeinterlaceMode)
         HRESULT ( STDMETHODCALLTYPE *SetDeinterlaceMode )( 
             IVMRDeinterlaceControl9 * This,
-            /* [in] */ DWORD dwStreamID,
-            /* [in] */ LPGUID lpDeinterlaceMode);
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][in] */ 
+            _In_  LPGUID lpDeinterlaceMode);
         
         DECLSPEC_XFGVIRT(IVMRDeinterlaceControl9, GetDeinterlacePrefs)
         HRESULT ( STDMETHODCALLTYPE *GetDeinterlacePrefs )( 
             IVMRDeinterlaceControl9 * This,
-            /* [out] */ LPDWORD lpdwDeinterlacePrefs);
+            /* [annotation][out] */ 
+            _Out_  LPDWORD lpdwDeinterlacePrefs);
         
         DECLSPEC_XFGVIRT(IVMRDeinterlaceControl9, SetDeinterlacePrefs)
         HRESULT ( STDMETHODCALLTYPE *SetDeinterlacePrefs )( 
             IVMRDeinterlaceControl9 * This,
-            /* [in] */ DWORD dwDeinterlacePrefs);
+            /* [annotation][in] */ 
+            _In_  DWORD dwDeinterlacePrefs);
         
         DECLSPEC_XFGVIRT(IVMRDeinterlaceControl9, GetActualDeinterlaceMode)
         HRESULT ( STDMETHODCALLTYPE *GetActualDeinterlaceMode )( 
             IVMRDeinterlaceControl9 * This,
-            /* [in] */ DWORD dwStreamID,
-            /* [out] */ LPGUID lpDeinterlaceMode);
+            /* [annotation][in] */ 
+            _In_  DWORD dwStreamID,
+            /* [annotation][out] */ 
+            _Out_  LPGUID lpDeinterlaceMode);
         
         END_INTERFACE
     } IVMRDeinterlaceControl9Vtbl;
@@ -2459,25 +2704,38 @@ EXTERN_C const IID IID_IVMRImageCompositor9;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE InitCompositionDevice( 
-            /* [in] */ IUnknown *pD3DDevice) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *pD3DDevice) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE TermCompositionDevice( 
-            /* [in] */ IUnknown *pD3DDevice) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *pD3DDevice) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStreamMediaType( 
-            /* [in] */ DWORD dwStrmID,
-            /* [in] */ AM_MEDIA_TYPE *pmt,
-            /* [in] */ BOOL fTexture) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwStrmID,
+            /* [annotation][in] */ 
+            _In_  AM_MEDIA_TYPE *pmt,
+            /* [annotation][in] */ 
+            _In_  BOOL fTexture) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CompositeImage( 
-            /* [in] */ IUnknown *pD3DDevice,
-            /* [in] */ IDirect3DSurface9 *pddsRenderTarget,
-            /* [in] */ AM_MEDIA_TYPE *pmtRenderTarget,
-            /* [in] */ REFERENCE_TIME rtStart,
-            /* [in] */ REFERENCE_TIME rtEnd,
-            /* [in] */ D3DCOLOR dwClrBkGnd,
-            /* [in] */ VMR9VideoStreamInfo *pVideoStreamInfo,
-            /* [in] */ UINT cStreams) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *pD3DDevice,
+            /* [annotation][in] */ 
+            _In_  IDirect3DSurface9 *pddsRenderTarget,
+            /* [annotation][in] */ 
+            _In_  AM_MEDIA_TYPE *pmtRenderTarget,
+            /* [annotation][in] */ 
+            _In_  REFERENCE_TIME rtStart,
+            /* [annotation][in] */ 
+            _In_  REFERENCE_TIME rtEnd,
+            /* [annotation][in] */ 
+            _In_  D3DCOLOR dwClrBkGnd,
+            /* [annotation][in] */ 
+            _In_  VMR9VideoStreamInfo *pVideoStreamInfo,
+            /* [annotation][in] */ 
+            _In_  UINT cStreams) = 0;
         
     };
     
@@ -2491,7 +2749,8 @@ EXTERN_C const IID IID_IVMRImageCompositor9;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVMRImageCompositor9 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2506,31 +2765,44 @@ EXTERN_C const IID IID_IVMRImageCompositor9;
         DECLSPEC_XFGVIRT(IVMRImageCompositor9, InitCompositionDevice)
         HRESULT ( STDMETHODCALLTYPE *InitCompositionDevice )( 
             IVMRImageCompositor9 * This,
-            /* [in] */ IUnknown *pD3DDevice);
+            /* [annotation][in] */ 
+            _In_  IUnknown *pD3DDevice);
         
         DECLSPEC_XFGVIRT(IVMRImageCompositor9, TermCompositionDevice)
         HRESULT ( STDMETHODCALLTYPE *TermCompositionDevice )( 
             IVMRImageCompositor9 * This,
-            /* [in] */ IUnknown *pD3DDevice);
+            /* [annotation][in] */ 
+            _In_  IUnknown *pD3DDevice);
         
         DECLSPEC_XFGVIRT(IVMRImageCompositor9, SetStreamMediaType)
         HRESULT ( STDMETHODCALLTYPE *SetStreamMediaType )( 
             IVMRImageCompositor9 * This,
-            /* [in] */ DWORD dwStrmID,
-            /* [in] */ AM_MEDIA_TYPE *pmt,
-            /* [in] */ BOOL fTexture);
+            /* [annotation][in] */ 
+            _In_  DWORD dwStrmID,
+            /* [annotation][in] */ 
+            _In_  AM_MEDIA_TYPE *pmt,
+            /* [annotation][in] */ 
+            _In_  BOOL fTexture);
         
         DECLSPEC_XFGVIRT(IVMRImageCompositor9, CompositeImage)
         HRESULT ( STDMETHODCALLTYPE *CompositeImage )( 
             IVMRImageCompositor9 * This,
-            /* [in] */ IUnknown *pD3DDevice,
-            /* [in] */ IDirect3DSurface9 *pddsRenderTarget,
-            /* [in] */ AM_MEDIA_TYPE *pmtRenderTarget,
-            /* [in] */ REFERENCE_TIME rtStart,
-            /* [in] */ REFERENCE_TIME rtEnd,
-            /* [in] */ D3DCOLOR dwClrBkGnd,
-            /* [in] */ VMR9VideoStreamInfo *pVideoStreamInfo,
-            /* [in] */ UINT cStreams);
+            /* [annotation][in] */ 
+            _In_  IUnknown *pD3DDevice,
+            /* [annotation][in] */ 
+            _In_  IDirect3DSurface9 *pddsRenderTarget,
+            /* [annotation][in] */ 
+            _In_  AM_MEDIA_TYPE *pmtRenderTarget,
+            /* [annotation][in] */ 
+            _In_  REFERENCE_TIME rtStart,
+            /* [annotation][in] */ 
+            _In_  REFERENCE_TIME rtEnd,
+            /* [annotation][in] */ 
+            _In_  D3DCOLOR dwClrBkGnd,
+            /* [annotation][in] */ 
+            _In_  VMR9VideoStreamInfo *pVideoStreamInfo,
+            /* [annotation][in] */ 
+            _In_  UINT cStreams);
         
         END_INTERFACE
     } IVMRImageCompositor9Vtbl;

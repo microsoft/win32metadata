@@ -6,12 +6,11 @@
  /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
-#pragma warning( disable: 4049 )  /* more than 64k source lines */
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 475
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -588,89 +587,117 @@ EXTERN_C const IID IID_IAccessible;
     {
     public:
         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accParent( 
-            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppdispParent) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **ppdispParent) = 0;
         
         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accChildCount( 
-            /* [retval][out] */ __RPC__out long *pcountChildren) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pcountChildren) = 0;
         
         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accChild( 
-            /* [in] */ VARIANT varChild,
-            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppdispChild) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT varChild,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **ppdispChild) = 0;
         
         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accName( 
             /* [optional][in] */ VARIANT varChild,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszName) = 0;
         
         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accValue( 
             /* [optional][in] */ VARIANT varChild,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszValue) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszValue) = 0;
         
         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accDescription( 
             /* [optional][in] */ VARIANT varChild,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszDescription) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszDescription) = 0;
         
         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accRole( 
             /* [optional][in] */ VARIANT varChild,
-            /* [retval][out] */ __RPC__out VARIANT *pvarRole) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pvarRole) = 0;
         
         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accState( 
             /* [optional][in] */ VARIANT varChild,
-            /* [retval][out] */ __RPC__out VARIANT *pvarState) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pvarState) = 0;
         
         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accHelp( 
             /* [optional][in] */ VARIANT varChild,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszHelp) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszHelp) = 0;
         
         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accHelpTopic( 
-            /* [out] */ __RPC__deref_out_opt BSTR *pszHelpFile,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pszHelpFile,
             /* [optional][in] */ VARIANT varChild,
-            /* [retval][out] */ __RPC__out long *pidTopic) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pidTopic) = 0;
         
         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accKeyboardShortcut( 
             /* [optional][in] */ VARIANT varChild,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszKeyboardShortcut) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszKeyboardShortcut) = 0;
         
         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accFocus( 
-            /* [retval][out] */ __RPC__out VARIANT *pvarChild) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pvarChild) = 0;
         
         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accSelection( 
-            /* [retval][out] */ __RPC__out VARIANT *pvarChildren) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pvarChildren) = 0;
         
         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_accDefaultAction( 
             /* [optional][in] */ VARIANT varChild,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszDefaultAction) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszDefaultAction) = 0;
         
         virtual /* [id][hidden] */ HRESULT STDMETHODCALLTYPE accSelect( 
-            /* [in] */ long flagsSelect,
+            /* [annotation][in] */ 
+            _In_  long flagsSelect,
             /* [optional][in] */ VARIANT varChild) = 0;
         
         virtual /* [id][hidden] */ HRESULT STDMETHODCALLTYPE accLocation( 
-            /* [out] */ __RPC__out long *pxLeft,
-            /* [out] */ __RPC__out long *pyTop,
-            /* [out] */ __RPC__out long *pcxWidth,
-            /* [out] */ __RPC__out long *pcyHeight,
+            /* [annotation][out] */ 
+            _Out_  long *pxLeft,
+            /* [annotation][out] */ 
+            _Out_  long *pyTop,
+            /* [annotation][out] */ 
+            _Out_  long *pcxWidth,
+            /* [annotation][out] */ 
+            _Out_  long *pcyHeight,
             /* [optional][in] */ VARIANT varChild) = 0;
         
         virtual /* [id][hidden] */ HRESULT STDMETHODCALLTYPE accNavigate( 
-            /* [in] */ long navDir,
+            /* [annotation][in] */ 
+            _In_  long navDir,
             /* [optional][in] */ VARIANT varStart,
-            /* [retval][out] */ __RPC__out VARIANT *pvarEndUpAt) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pvarEndUpAt) = 0;
         
         virtual /* [id][hidden] */ HRESULT STDMETHODCALLTYPE accHitTest( 
-            /* [in] */ long xLeft,
-            /* [in] */ long yTop,
-            /* [retval][out] */ __RPC__out VARIANT *pvarChild) = 0;
+            /* [annotation][in] */ 
+            _In_  long xLeft,
+            /* [annotation][in] */ 
+            _In_  long yTop,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pvarChild) = 0;
         
         virtual /* [id][hidden] */ HRESULT STDMETHODCALLTYPE accDoDefaultAction( 
             /* [optional][in] */ VARIANT varChild) = 0;
         
         virtual /* [id][propput][hidden] */ HRESULT STDMETHODCALLTYPE put_accName( 
             /* [optional][in] */ VARIANT varChild,
-            /* [in] */ __RPC__in BSTR szName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR szName) = 0;
         
         virtual /* [id][propput][hidden] */ HRESULT STDMETHODCALLTYPE put_accValue( 
             /* [optional][in] */ VARIANT varChild,
-            /* [in] */ __RPC__in BSTR szValue) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR szValue) = 0;
         
     };
     
@@ -684,7 +711,8 @@ EXTERN_C const IID IID_IAccessible;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAccessible * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -699,23 +727,31 @@ EXTERN_C const IID IID_IAccessible;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAccessible * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAccessible * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAccessible * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -740,112 +776,138 @@ EXTERN_C const IID IID_IAccessible;
         DECLSPEC_XFGVIRT(IAccessible, get_accParent)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accParent )( 
             __RPC__in IAccessible * This,
-            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppdispParent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **ppdispParent);
         
         DECLSPEC_XFGVIRT(IAccessible, get_accChildCount)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accChildCount )( 
             __RPC__in IAccessible * This,
-            /* [retval][out] */ __RPC__out long *pcountChildren);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pcountChildren);
         
         DECLSPEC_XFGVIRT(IAccessible, get_accChild)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accChild )( 
             __RPC__in IAccessible * This,
-            /* [in] */ VARIANT varChild,
-            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppdispChild);
+            /* [annotation][in] */ 
+            _In_  VARIANT varChild,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **ppdispChild);
         
         DECLSPEC_XFGVIRT(IAccessible, get_accName)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accName )( 
             __RPC__in IAccessible * This,
             /* [optional][in] */ VARIANT varChild,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszName);
         
         DECLSPEC_XFGVIRT(IAccessible, get_accValue)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accValue )( 
             __RPC__in IAccessible * This,
             /* [optional][in] */ VARIANT varChild,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszValue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszValue);
         
         DECLSPEC_XFGVIRT(IAccessible, get_accDescription)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accDescription )( 
             __RPC__in IAccessible * This,
             /* [optional][in] */ VARIANT varChild,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszDescription);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszDescription);
         
         DECLSPEC_XFGVIRT(IAccessible, get_accRole)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accRole )( 
             __RPC__in IAccessible * This,
             /* [optional][in] */ VARIANT varChild,
-            /* [retval][out] */ __RPC__out VARIANT *pvarRole);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pvarRole);
         
         DECLSPEC_XFGVIRT(IAccessible, get_accState)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accState )( 
             __RPC__in IAccessible * This,
             /* [optional][in] */ VARIANT varChild,
-            /* [retval][out] */ __RPC__out VARIANT *pvarState);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pvarState);
         
         DECLSPEC_XFGVIRT(IAccessible, get_accHelp)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accHelp )( 
             __RPC__in IAccessible * This,
             /* [optional][in] */ VARIANT varChild,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszHelp);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszHelp);
         
         DECLSPEC_XFGVIRT(IAccessible, get_accHelpTopic)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accHelpTopic )( 
             __RPC__in IAccessible * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pszHelpFile,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pszHelpFile,
             /* [optional][in] */ VARIANT varChild,
-            /* [retval][out] */ __RPC__out long *pidTopic);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pidTopic);
         
         DECLSPEC_XFGVIRT(IAccessible, get_accKeyboardShortcut)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accKeyboardShortcut )( 
             __RPC__in IAccessible * This,
             /* [optional][in] */ VARIANT varChild,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszKeyboardShortcut);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszKeyboardShortcut);
         
         DECLSPEC_XFGVIRT(IAccessible, get_accFocus)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accFocus )( 
             __RPC__in IAccessible * This,
-            /* [retval][out] */ __RPC__out VARIANT *pvarChild);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pvarChild);
         
         DECLSPEC_XFGVIRT(IAccessible, get_accSelection)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accSelection )( 
             __RPC__in IAccessible * This,
-            /* [retval][out] */ __RPC__out VARIANT *pvarChildren);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pvarChildren);
         
         DECLSPEC_XFGVIRT(IAccessible, get_accDefaultAction)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_accDefaultAction )( 
             __RPC__in IAccessible * This,
             /* [optional][in] */ VARIANT varChild,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszDefaultAction);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszDefaultAction);
         
         DECLSPEC_XFGVIRT(IAccessible, accSelect)
         /* [id][hidden] */ HRESULT ( STDMETHODCALLTYPE *accSelect )( 
             __RPC__in IAccessible * This,
-            /* [in] */ long flagsSelect,
+            /* [annotation][in] */ 
+            _In_  long flagsSelect,
             /* [optional][in] */ VARIANT varChild);
         
         DECLSPEC_XFGVIRT(IAccessible, accLocation)
         /* [id][hidden] */ HRESULT ( STDMETHODCALLTYPE *accLocation )( 
             __RPC__in IAccessible * This,
-            /* [out] */ __RPC__out long *pxLeft,
-            /* [out] */ __RPC__out long *pyTop,
-            /* [out] */ __RPC__out long *pcxWidth,
-            /* [out] */ __RPC__out long *pcyHeight,
+            /* [annotation][out] */ 
+            _Out_  long *pxLeft,
+            /* [annotation][out] */ 
+            _Out_  long *pyTop,
+            /* [annotation][out] */ 
+            _Out_  long *pcxWidth,
+            /* [annotation][out] */ 
+            _Out_  long *pcyHeight,
             /* [optional][in] */ VARIANT varChild);
         
         DECLSPEC_XFGVIRT(IAccessible, accNavigate)
         /* [id][hidden] */ HRESULT ( STDMETHODCALLTYPE *accNavigate )( 
             __RPC__in IAccessible * This,
-            /* [in] */ long navDir,
+            /* [annotation][in] */ 
+            _In_  long navDir,
             /* [optional][in] */ VARIANT varStart,
-            /* [retval][out] */ __RPC__out VARIANT *pvarEndUpAt);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pvarEndUpAt);
         
         DECLSPEC_XFGVIRT(IAccessible, accHitTest)
         /* [id][hidden] */ HRESULT ( STDMETHODCALLTYPE *accHitTest )( 
             __RPC__in IAccessible * This,
-            /* [in] */ long xLeft,
-            /* [in] */ long yTop,
-            /* [retval][out] */ __RPC__out VARIANT *pvarChild);
+            /* [annotation][in] */ 
+            _In_  long xLeft,
+            /* [annotation][in] */ 
+            _In_  long yTop,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pvarChild);
         
         DECLSPEC_XFGVIRT(IAccessible, accDoDefaultAction)
         /* [id][hidden] */ HRESULT ( STDMETHODCALLTYPE *accDoDefaultAction )( 
@@ -856,13 +918,15 @@ EXTERN_C const IID IID_IAccessible;
         /* [id][propput][hidden] */ HRESULT ( STDMETHODCALLTYPE *put_accName )( 
             __RPC__in IAccessible * This,
             /* [optional][in] */ VARIANT varChild,
-            /* [in] */ __RPC__in BSTR szName);
+            /* [annotation][in] */ 
+            _In_  BSTR szName);
         
         DECLSPEC_XFGVIRT(IAccessible, put_accValue)
         /* [id][propput][hidden] */ HRESULT ( STDMETHODCALLTYPE *put_accValue )( 
             __RPC__in IAccessible * This,
             /* [optional][in] */ VARIANT varChild,
-            /* [in] */ __RPC__in BSTR szValue);
+            /* [annotation][in] */ 
+            _In_  BSTR szValue);
         
         END_INTERFACE
     } IAccessibleVtbl;
@@ -992,9 +1056,12 @@ EXTERN_C const IID IID_IAccessibleHandler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AccessibleObjectFromID( 
-            /* [in] */ long hwnd,
-            /* [in] */ long lObjectID,
-            /* [out] */ __RPC__deref_out_opt LPACCESSIBLE *pIAccessible) = 0;
+            /* [annotation][in] */ 
+            _In_  long hwnd,
+            /* [annotation][in] */ 
+            _In_  long lObjectID,
+            /* [annotation][out] */ 
+            _Out_  LPACCESSIBLE *pIAccessible) = 0;
         
     };
     
@@ -1008,7 +1075,8 @@ EXTERN_C const IID IID_IAccessibleHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAccessibleHandler * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1023,9 +1091,12 @@ EXTERN_C const IID IID_IAccessibleHandler;
         DECLSPEC_XFGVIRT(IAccessibleHandler, AccessibleObjectFromID)
         HRESULT ( STDMETHODCALLTYPE *AccessibleObjectFromID )( 
             __RPC__in IAccessibleHandler * This,
-            /* [in] */ long hwnd,
-            /* [in] */ long lObjectID,
-            /* [out] */ __RPC__deref_out_opt LPACCESSIBLE *pIAccessible);
+            /* [annotation][in] */ 
+            _In_  long hwnd,
+            /* [annotation][in] */ 
+            _In_  long lObjectID,
+            /* [annotation][out] */ 
+            _Out_  LPACCESSIBLE *pIAccessible);
         
         END_INTERFACE
     } IAccessibleHandlerVtbl;
@@ -1082,20 +1153,28 @@ EXTERN_C const IID IID_IAccessibleWindowlessSite;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AcquireObjectIdRange( 
-            /* [in] */ long rangeSize,
-            /* [in] */ __RPC__in_opt IAccessibleHandler *pRangeOwner,
-            /* [out] */ __RPC__out long *pRangeBase) = 0;
+            /* [annotation][in] */ 
+            _In_  long rangeSize,
+            /* [annotation][in] */ 
+            _In_  IAccessibleHandler *pRangeOwner,
+            /* [annotation][out] */ 
+            _Out_  long *pRangeBase) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReleaseObjectIdRange( 
-            /* [in] */ long rangeBase,
-            /* [in] */ __RPC__in_opt IAccessibleHandler *pRangeOwner) = 0;
+            /* [annotation][in] */ 
+            _In_  long rangeBase,
+            /* [annotation][in] */ 
+            _In_  IAccessibleHandler *pRangeOwner) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryObjectIdRanges( 
-            /* [in] */ __RPC__in_opt IAccessibleHandler *pRangesOwner,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *psaRanges) = 0;
+            /* [annotation][in] */ 
+            _In_  IAccessibleHandler *pRangesOwner,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *psaRanges) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetParentAccessible( 
-            /* [out] */ __RPC__deref_out_opt IAccessible **ppParent) = 0;
+            /* [annotation][out] */ 
+            _Out_  IAccessible **ppParent) = 0;
         
     };
     
@@ -1109,7 +1188,8 @@ EXTERN_C const IID IID_IAccessibleWindowlessSite;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAccessibleWindowlessSite * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1124,26 +1204,34 @@ EXTERN_C const IID IID_IAccessibleWindowlessSite;
         DECLSPEC_XFGVIRT(IAccessibleWindowlessSite, AcquireObjectIdRange)
         HRESULT ( STDMETHODCALLTYPE *AcquireObjectIdRange )( 
             __RPC__in IAccessibleWindowlessSite * This,
-            /* [in] */ long rangeSize,
-            /* [in] */ __RPC__in_opt IAccessibleHandler *pRangeOwner,
-            /* [out] */ __RPC__out long *pRangeBase);
+            /* [annotation][in] */ 
+            _In_  long rangeSize,
+            /* [annotation][in] */ 
+            _In_  IAccessibleHandler *pRangeOwner,
+            /* [annotation][out] */ 
+            _Out_  long *pRangeBase);
         
         DECLSPEC_XFGVIRT(IAccessibleWindowlessSite, ReleaseObjectIdRange)
         HRESULT ( STDMETHODCALLTYPE *ReleaseObjectIdRange )( 
             __RPC__in IAccessibleWindowlessSite * This,
-            /* [in] */ long rangeBase,
-            /* [in] */ __RPC__in_opt IAccessibleHandler *pRangeOwner);
+            /* [annotation][in] */ 
+            _In_  long rangeBase,
+            /* [annotation][in] */ 
+            _In_  IAccessibleHandler *pRangeOwner);
         
         DECLSPEC_XFGVIRT(IAccessibleWindowlessSite, QueryObjectIdRanges)
         HRESULT ( STDMETHODCALLTYPE *QueryObjectIdRanges )( 
             __RPC__in IAccessibleWindowlessSite * This,
-            /* [in] */ __RPC__in_opt IAccessibleHandler *pRangesOwner,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *psaRanges);
+            /* [annotation][in] */ 
+            _In_  IAccessibleHandler *pRangesOwner,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *psaRanges);
         
         DECLSPEC_XFGVIRT(IAccessibleWindowlessSite, GetParentAccessible)
         HRESULT ( STDMETHODCALLTYPE *GetParentAccessible )( 
             __RPC__in IAccessibleWindowlessSite * This,
-            /* [out] */ __RPC__deref_out_opt IAccessible **ppParent);
+            /* [annotation][out] */ 
+            _Out_  IAccessible **ppParent);
         
         END_INTERFACE
     } IAccessibleWindowlessSiteVtbl;
@@ -1224,9 +1312,12 @@ EXTERN_C const IID IID_IAccIdentity;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetIdentityString( 
-            /* [in] */ DWORD dwIDChild,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwIDStringLen) BYTE **ppIDString,
-            /* [out] */ __RPC__out DWORD *pdwIDStringLen) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwIDChild,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwIDStringLen)  BYTE **ppIDString,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwIDStringLen) = 0;
         
     };
     
@@ -1240,7 +1331,8 @@ EXTERN_C const IID IID_IAccIdentity;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAccIdentity * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1255,9 +1347,12 @@ EXTERN_C const IID IID_IAccIdentity;
         DECLSPEC_XFGVIRT(IAccIdentity, GetIdentityString)
         HRESULT ( STDMETHODCALLTYPE *GetIdentityString )( 
             __RPC__in IAccIdentity * This,
-            /* [in] */ DWORD dwIDChild,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwIDStringLen) BYTE **ppIDString,
-            /* [out] */ __RPC__out DWORD *pdwIDStringLen);
+            /* [annotation][in] */ 
+            _In_  DWORD dwIDChild,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwIDStringLen)  BYTE **ppIDString,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwIDStringLen);
         
         END_INTERFACE
     } IAccIdentityVtbl;
@@ -1312,11 +1407,16 @@ EXTERN_C const IID IID_IAccPropServer;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetPropValue( 
-            /* [size_is][in] */ __RPC__in_ecount_full(dwIDStringLen) const BYTE *pIDString,
-            /* [in] */ DWORD dwIDStringLen,
-            /* [in] */ MSAAPROPID idProp,
-            /* [out] */ __RPC__out VARIANT *pvarValue,
-            /* [out] */ __RPC__out BOOL *pfHasProp) = 0;
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwIDStringLen)  const BYTE *pIDString,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIDStringLen,
+            /* [annotation][in] */ 
+            _In_  MSAAPROPID idProp,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pvarValue,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfHasProp) = 0;
         
     };
     
@@ -1330,7 +1430,8 @@ EXTERN_C const IID IID_IAccPropServer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAccPropServer * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1345,11 +1446,16 @@ EXTERN_C const IID IID_IAccPropServer;
         DECLSPEC_XFGVIRT(IAccPropServer, GetPropValue)
         HRESULT ( STDMETHODCALLTYPE *GetPropValue )( 
             __RPC__in IAccPropServer * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(dwIDStringLen) const BYTE *pIDString,
-            /* [in] */ DWORD dwIDStringLen,
-            /* [in] */ MSAAPROPID idProp,
-            /* [out] */ __RPC__out VARIANT *pvarValue,
-            /* [out] */ __RPC__out BOOL *pfHasProp);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwIDStringLen)  const BYTE *pIDString,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIDStringLen,
+            /* [annotation][in] */ 
+            _In_  MSAAPROPID idProp,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pvarValue,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfHasProp);
         
         END_INTERFACE
     } IAccPropServerVtbl;
@@ -1404,106 +1510,178 @@ EXTERN_C const IID IID_IAccPropServices;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetPropValue( 
-            /* [size_is][in] */ __RPC__in_ecount_full(dwIDStringLen) const BYTE *pIDString,
-            /* [in] */ DWORD dwIDStringLen,
-            /* [in] */ MSAAPROPID idProp,
-            /* [in] */ VARIANT var) = 0;
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwIDStringLen)  const BYTE *pIDString,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIDStringLen,
+            /* [annotation][in] */ 
+            _In_  MSAAPROPID idProp,
+            /* [annotation][in] */ 
+            _In_  VARIANT var) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetPropServer( 
-            /* [size_is][in] */ __RPC__in_ecount_full(dwIDStringLen) const BYTE *pIDString,
-            /* [in] */ DWORD dwIDStringLen,
-            /* [size_is][in] */ __RPC__in_ecount_full(cProps) const MSAAPROPID *paProps,
-            /* [in] */ int cProps,
-            /* [in] */ __RPC__in_opt IAccPropServer *pServer,
-            /* [in] */ AnnoScope annoScope) = 0;
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwIDStringLen)  const BYTE *pIDString,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIDStringLen,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cProps)  const MSAAPROPID *paProps,
+            /* [annotation][in] */ 
+            _In_  int cProps,
+            /* [annotation][in] */ 
+            _In_  IAccPropServer *pServer,
+            /* [annotation][in] */ 
+            _In_  AnnoScope annoScope) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ClearProps( 
-            /* [size_is][in] */ __RPC__in_ecount_full(dwIDStringLen) const BYTE *pIDString,
-            /* [in] */ DWORD dwIDStringLen,
-            /* [size_is][in] */ __RPC__in_ecount_full(cProps) const MSAAPROPID *paProps,
-            /* [in] */ int cProps) = 0;
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwIDStringLen)  const BYTE *pIDString,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIDStringLen,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cProps)  const MSAAPROPID *paProps,
+            /* [annotation][in] */ 
+            _In_  int cProps) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetHwndProp( 
-            /* [in] */ __RPC__in HWND hwnd,
-            /* [in] */ DWORD idObject,
-            /* [in] */ DWORD idChild,
-            /* [in] */ MSAAPROPID idProp,
-            /* [in] */ VARIANT var) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  DWORD idObject,
+            /* [annotation][in] */ 
+            _In_  DWORD idChild,
+            /* [annotation][in] */ 
+            _In_  MSAAPROPID idProp,
+            /* [annotation][in] */ 
+            _In_  VARIANT var) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetHwndPropStr( 
-            /* [in] */ __RPC__in HWND hwnd,
-            /* [in] */ DWORD idObject,
-            /* [in] */ DWORD idChild,
-            /* [in] */ MSAAPROPID idProp,
-            /* [string][in] */ __RPC__in_string LPCWSTR str) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  DWORD idObject,
+            /* [annotation][in] */ 
+            _In_  DWORD idChild,
+            /* [annotation][in] */ 
+            _In_  MSAAPROPID idProp,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR str) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetHwndPropServer( 
-            /* [in] */ __RPC__in HWND hwnd,
-            /* [in] */ DWORD idObject,
-            /* [in] */ DWORD idChild,
-            /* [size_is][in] */ __RPC__in_ecount_full(cProps) const MSAAPROPID *paProps,
-            /* [in] */ int cProps,
-            /* [in] */ __RPC__in_opt IAccPropServer *pServer,
-            /* [in] */ AnnoScope annoScope) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  DWORD idObject,
+            /* [annotation][in] */ 
+            _In_  DWORD idChild,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cProps)  const MSAAPROPID *paProps,
+            /* [annotation][in] */ 
+            _In_  int cProps,
+            /* [annotation][in] */ 
+            _In_  IAccPropServer *pServer,
+            /* [annotation][in] */ 
+            _In_  AnnoScope annoScope) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ClearHwndProps( 
-            /* [in] */ __RPC__in HWND hwnd,
-            /* [in] */ DWORD idObject,
-            /* [in] */ DWORD idChild,
-            /* [size_is][in] */ __RPC__in_ecount_full(cProps) const MSAAPROPID *paProps,
-            /* [in] */ int cProps) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  DWORD idObject,
+            /* [annotation][in] */ 
+            _In_  DWORD idChild,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cProps)  const MSAAPROPID *paProps,
+            /* [annotation][in] */ 
+            _In_  int cProps) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ComposeHwndIdentityString( 
-            /* [in] */ __RPC__in HWND hwnd,
-            /* [in] */ DWORD idObject,
-            /* [in] */ DWORD idChild,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwIDStringLen) BYTE **ppIDString,
-            /* [out] */ __RPC__out DWORD *pdwIDStringLen) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  DWORD idObject,
+            /* [annotation][in] */ 
+            _In_  DWORD idChild,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwIDStringLen)  BYTE **ppIDString,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwIDStringLen) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DecomposeHwndIdentityString( 
-            /* [size_is][in] */ __RPC__in_ecount_full(dwIDStringLen) const BYTE *pIDString,
-            /* [in] */ DWORD dwIDStringLen,
-            /* [out] */ __RPC__deref_out_opt HWND *phwnd,
-            /* [out] */ __RPC__out DWORD *pidObject,
-            /* [out] */ __RPC__out DWORD *pidChild) = 0;
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwIDStringLen)  const BYTE *pIDString,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIDStringLen,
+            /* [annotation][out] */ 
+            _Out_  HWND *phwnd,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pidObject,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pidChild) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetHmenuProp( 
-            /* [in] */ __RPC__in HMENU hmenu,
-            /* [in] */ DWORD idChild,
-            /* [in] */ MSAAPROPID idProp,
-            /* [in] */ VARIANT var) = 0;
+            /* [annotation][in] */ 
+            _In_  HMENU hmenu,
+            /* [annotation][in] */ 
+            _In_  DWORD idChild,
+            /* [annotation][in] */ 
+            _In_  MSAAPROPID idProp,
+            /* [annotation][in] */ 
+            _In_  VARIANT var) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetHmenuPropStr( 
-            /* [in] */ __RPC__in HMENU hmenu,
-            /* [in] */ DWORD idChild,
-            /* [in] */ MSAAPROPID idProp,
-            /* [string][in] */ __RPC__in_string LPCWSTR str) = 0;
+            /* [annotation][in] */ 
+            _In_  HMENU hmenu,
+            /* [annotation][in] */ 
+            _In_  DWORD idChild,
+            /* [annotation][in] */ 
+            _In_  MSAAPROPID idProp,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR str) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetHmenuPropServer( 
-            /* [in] */ __RPC__in HMENU hmenu,
-            /* [in] */ DWORD idChild,
-            /* [size_is][in] */ __RPC__in_ecount_full(cProps) const MSAAPROPID *paProps,
-            /* [in] */ int cProps,
-            /* [in] */ __RPC__in_opt IAccPropServer *pServer,
-            /* [in] */ AnnoScope annoScope) = 0;
+            /* [annotation][in] */ 
+            _In_  HMENU hmenu,
+            /* [annotation][in] */ 
+            _In_  DWORD idChild,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cProps)  const MSAAPROPID *paProps,
+            /* [annotation][in] */ 
+            _In_  int cProps,
+            /* [annotation][in] */ 
+            _In_  IAccPropServer *pServer,
+            /* [annotation][in] */ 
+            _In_  AnnoScope annoScope) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ClearHmenuProps( 
-            /* [in] */ __RPC__in HMENU hmenu,
-            /* [in] */ DWORD idChild,
-            /* [size_is][in] */ __RPC__in_ecount_full(cProps) const MSAAPROPID *paProps,
-            /* [in] */ int cProps) = 0;
+            /* [annotation][in] */ 
+            _In_  HMENU hmenu,
+            /* [annotation][in] */ 
+            _In_  DWORD idChild,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cProps)  const MSAAPROPID *paProps,
+            /* [annotation][in] */ 
+            _In_  int cProps) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ComposeHmenuIdentityString( 
-            /* [in] */ __RPC__in HMENU hmenu,
-            /* [in] */ DWORD idChild,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwIDStringLen) BYTE **ppIDString,
-            /* [out] */ __RPC__out DWORD *pdwIDStringLen) = 0;
+            /* [annotation][in] */ 
+            _In_  HMENU hmenu,
+            /* [annotation][in] */ 
+            _In_  DWORD idChild,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwIDStringLen)  BYTE **ppIDString,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwIDStringLen) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DecomposeHmenuIdentityString( 
-            /* [size_is][in] */ __RPC__in_ecount_full(dwIDStringLen) const BYTE *pIDString,
-            /* [in] */ DWORD dwIDStringLen,
-            /* [out] */ __RPC__deref_out_opt HMENU *phmenu,
-            /* [out] */ __RPC__out DWORD *pidChild) = 0;
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwIDStringLen)  const BYTE *pIDString,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIDStringLen,
+            /* [annotation][out] */ 
+            _Out_  HMENU *phmenu,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pidChild) = 0;
         
     };
     
@@ -1517,7 +1695,8 @@ EXTERN_C const IID IID_IAccPropServices;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAccPropServices * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1532,134 +1711,206 @@ EXTERN_C const IID IID_IAccPropServices;
         DECLSPEC_XFGVIRT(IAccPropServices, SetPropValue)
         HRESULT ( STDMETHODCALLTYPE *SetPropValue )( 
             __RPC__in IAccPropServices * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(dwIDStringLen) const BYTE *pIDString,
-            /* [in] */ DWORD dwIDStringLen,
-            /* [in] */ MSAAPROPID idProp,
-            /* [in] */ VARIANT var);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwIDStringLen)  const BYTE *pIDString,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIDStringLen,
+            /* [annotation][in] */ 
+            _In_  MSAAPROPID idProp,
+            /* [annotation][in] */ 
+            _In_  VARIANT var);
         
         DECLSPEC_XFGVIRT(IAccPropServices, SetPropServer)
         HRESULT ( STDMETHODCALLTYPE *SetPropServer )( 
             __RPC__in IAccPropServices * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(dwIDStringLen) const BYTE *pIDString,
-            /* [in] */ DWORD dwIDStringLen,
-            /* [size_is][in] */ __RPC__in_ecount_full(cProps) const MSAAPROPID *paProps,
-            /* [in] */ int cProps,
-            /* [in] */ __RPC__in_opt IAccPropServer *pServer,
-            /* [in] */ AnnoScope annoScope);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwIDStringLen)  const BYTE *pIDString,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIDStringLen,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cProps)  const MSAAPROPID *paProps,
+            /* [annotation][in] */ 
+            _In_  int cProps,
+            /* [annotation][in] */ 
+            _In_  IAccPropServer *pServer,
+            /* [annotation][in] */ 
+            _In_  AnnoScope annoScope);
         
         DECLSPEC_XFGVIRT(IAccPropServices, ClearProps)
         HRESULT ( STDMETHODCALLTYPE *ClearProps )( 
             __RPC__in IAccPropServices * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(dwIDStringLen) const BYTE *pIDString,
-            /* [in] */ DWORD dwIDStringLen,
-            /* [size_is][in] */ __RPC__in_ecount_full(cProps) const MSAAPROPID *paProps,
-            /* [in] */ int cProps);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwIDStringLen)  const BYTE *pIDString,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIDStringLen,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cProps)  const MSAAPROPID *paProps,
+            /* [annotation][in] */ 
+            _In_  int cProps);
         
         DECLSPEC_XFGVIRT(IAccPropServices, SetHwndProp)
         HRESULT ( STDMETHODCALLTYPE *SetHwndProp )( 
             __RPC__in IAccPropServices * This,
-            /* [in] */ __RPC__in HWND hwnd,
-            /* [in] */ DWORD idObject,
-            /* [in] */ DWORD idChild,
-            /* [in] */ MSAAPROPID idProp,
-            /* [in] */ VARIANT var);
+            /* [annotation][in] */ 
+            _In_  HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  DWORD idObject,
+            /* [annotation][in] */ 
+            _In_  DWORD idChild,
+            /* [annotation][in] */ 
+            _In_  MSAAPROPID idProp,
+            /* [annotation][in] */ 
+            _In_  VARIANT var);
         
         DECLSPEC_XFGVIRT(IAccPropServices, SetHwndPropStr)
         HRESULT ( STDMETHODCALLTYPE *SetHwndPropStr )( 
             __RPC__in IAccPropServices * This,
-            /* [in] */ __RPC__in HWND hwnd,
-            /* [in] */ DWORD idObject,
-            /* [in] */ DWORD idChild,
-            /* [in] */ MSAAPROPID idProp,
-            /* [string][in] */ __RPC__in_string LPCWSTR str);
+            /* [annotation][in] */ 
+            _In_  HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  DWORD idObject,
+            /* [annotation][in] */ 
+            _In_  DWORD idChild,
+            /* [annotation][in] */ 
+            _In_  MSAAPROPID idProp,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR str);
         
         DECLSPEC_XFGVIRT(IAccPropServices, SetHwndPropServer)
         HRESULT ( STDMETHODCALLTYPE *SetHwndPropServer )( 
             __RPC__in IAccPropServices * This,
-            /* [in] */ __RPC__in HWND hwnd,
-            /* [in] */ DWORD idObject,
-            /* [in] */ DWORD idChild,
-            /* [size_is][in] */ __RPC__in_ecount_full(cProps) const MSAAPROPID *paProps,
-            /* [in] */ int cProps,
-            /* [in] */ __RPC__in_opt IAccPropServer *pServer,
-            /* [in] */ AnnoScope annoScope);
+            /* [annotation][in] */ 
+            _In_  HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  DWORD idObject,
+            /* [annotation][in] */ 
+            _In_  DWORD idChild,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cProps)  const MSAAPROPID *paProps,
+            /* [annotation][in] */ 
+            _In_  int cProps,
+            /* [annotation][in] */ 
+            _In_  IAccPropServer *pServer,
+            /* [annotation][in] */ 
+            _In_  AnnoScope annoScope);
         
         DECLSPEC_XFGVIRT(IAccPropServices, ClearHwndProps)
         HRESULT ( STDMETHODCALLTYPE *ClearHwndProps )( 
             __RPC__in IAccPropServices * This,
-            /* [in] */ __RPC__in HWND hwnd,
-            /* [in] */ DWORD idObject,
-            /* [in] */ DWORD idChild,
-            /* [size_is][in] */ __RPC__in_ecount_full(cProps) const MSAAPROPID *paProps,
-            /* [in] */ int cProps);
+            /* [annotation][in] */ 
+            _In_  HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  DWORD idObject,
+            /* [annotation][in] */ 
+            _In_  DWORD idChild,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cProps)  const MSAAPROPID *paProps,
+            /* [annotation][in] */ 
+            _In_  int cProps);
         
         DECLSPEC_XFGVIRT(IAccPropServices, ComposeHwndIdentityString)
         HRESULT ( STDMETHODCALLTYPE *ComposeHwndIdentityString )( 
             __RPC__in IAccPropServices * This,
-            /* [in] */ __RPC__in HWND hwnd,
-            /* [in] */ DWORD idObject,
-            /* [in] */ DWORD idChild,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwIDStringLen) BYTE **ppIDString,
-            /* [out] */ __RPC__out DWORD *pdwIDStringLen);
+            /* [annotation][in] */ 
+            _In_  HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  DWORD idObject,
+            /* [annotation][in] */ 
+            _In_  DWORD idChild,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwIDStringLen)  BYTE **ppIDString,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwIDStringLen);
         
         DECLSPEC_XFGVIRT(IAccPropServices, DecomposeHwndIdentityString)
         HRESULT ( STDMETHODCALLTYPE *DecomposeHwndIdentityString )( 
             __RPC__in IAccPropServices * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(dwIDStringLen) const BYTE *pIDString,
-            /* [in] */ DWORD dwIDStringLen,
-            /* [out] */ __RPC__deref_out_opt HWND *phwnd,
-            /* [out] */ __RPC__out DWORD *pidObject,
-            /* [out] */ __RPC__out DWORD *pidChild);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwIDStringLen)  const BYTE *pIDString,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIDStringLen,
+            /* [annotation][out] */ 
+            _Out_  HWND *phwnd,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pidObject,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pidChild);
         
         DECLSPEC_XFGVIRT(IAccPropServices, SetHmenuProp)
         HRESULT ( STDMETHODCALLTYPE *SetHmenuProp )( 
             __RPC__in IAccPropServices * This,
-            /* [in] */ __RPC__in HMENU hmenu,
-            /* [in] */ DWORD idChild,
-            /* [in] */ MSAAPROPID idProp,
-            /* [in] */ VARIANT var);
+            /* [annotation][in] */ 
+            _In_  HMENU hmenu,
+            /* [annotation][in] */ 
+            _In_  DWORD idChild,
+            /* [annotation][in] */ 
+            _In_  MSAAPROPID idProp,
+            /* [annotation][in] */ 
+            _In_  VARIANT var);
         
         DECLSPEC_XFGVIRT(IAccPropServices, SetHmenuPropStr)
         HRESULT ( STDMETHODCALLTYPE *SetHmenuPropStr )( 
             __RPC__in IAccPropServices * This,
-            /* [in] */ __RPC__in HMENU hmenu,
-            /* [in] */ DWORD idChild,
-            /* [in] */ MSAAPROPID idProp,
-            /* [string][in] */ __RPC__in_string LPCWSTR str);
+            /* [annotation][in] */ 
+            _In_  HMENU hmenu,
+            /* [annotation][in] */ 
+            _In_  DWORD idChild,
+            /* [annotation][in] */ 
+            _In_  MSAAPROPID idProp,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR str);
         
         DECLSPEC_XFGVIRT(IAccPropServices, SetHmenuPropServer)
         HRESULT ( STDMETHODCALLTYPE *SetHmenuPropServer )( 
             __RPC__in IAccPropServices * This,
-            /* [in] */ __RPC__in HMENU hmenu,
-            /* [in] */ DWORD idChild,
-            /* [size_is][in] */ __RPC__in_ecount_full(cProps) const MSAAPROPID *paProps,
-            /* [in] */ int cProps,
-            /* [in] */ __RPC__in_opt IAccPropServer *pServer,
-            /* [in] */ AnnoScope annoScope);
+            /* [annotation][in] */ 
+            _In_  HMENU hmenu,
+            /* [annotation][in] */ 
+            _In_  DWORD idChild,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cProps)  const MSAAPROPID *paProps,
+            /* [annotation][in] */ 
+            _In_  int cProps,
+            /* [annotation][in] */ 
+            _In_  IAccPropServer *pServer,
+            /* [annotation][in] */ 
+            _In_  AnnoScope annoScope);
         
         DECLSPEC_XFGVIRT(IAccPropServices, ClearHmenuProps)
         HRESULT ( STDMETHODCALLTYPE *ClearHmenuProps )( 
             __RPC__in IAccPropServices * This,
-            /* [in] */ __RPC__in HMENU hmenu,
-            /* [in] */ DWORD idChild,
-            /* [size_is][in] */ __RPC__in_ecount_full(cProps) const MSAAPROPID *paProps,
-            /* [in] */ int cProps);
+            /* [annotation][in] */ 
+            _In_  HMENU hmenu,
+            /* [annotation][in] */ 
+            _In_  DWORD idChild,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cProps)  const MSAAPROPID *paProps,
+            /* [annotation][in] */ 
+            _In_  int cProps);
         
         DECLSPEC_XFGVIRT(IAccPropServices, ComposeHmenuIdentityString)
         HRESULT ( STDMETHODCALLTYPE *ComposeHmenuIdentityString )( 
             __RPC__in IAccPropServices * This,
-            /* [in] */ __RPC__in HMENU hmenu,
-            /* [in] */ DWORD idChild,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwIDStringLen) BYTE **ppIDString,
-            /* [out] */ __RPC__out DWORD *pdwIDStringLen);
+            /* [annotation][in] */ 
+            _In_  HMENU hmenu,
+            /* [annotation][in] */ 
+            _In_  DWORD idChild,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwIDStringLen)  BYTE **ppIDString,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwIDStringLen);
         
         DECLSPEC_XFGVIRT(IAccPropServices, DecomposeHmenuIdentityString)
         HRESULT ( STDMETHODCALLTYPE *DecomposeHmenuIdentityString )( 
             __RPC__in IAccPropServices * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(dwIDStringLen) const BYTE *pIDString,
-            /* [in] */ DWORD dwIDStringLen,
-            /* [out] */ __RPC__deref_out_opt HMENU *phmenu,
-            /* [out] */ __RPC__out DWORD *pidChild);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwIDStringLen)  const BYTE *pIDString,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIDStringLen,
+            /* [annotation][out] */ 
+            _Out_  HMENU *phmenu,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pidChild);
         
         END_INTERFACE
     } IAccPropServicesVtbl;
@@ -1813,6 +2064,31 @@ unsigned long             __RPC_USER  VARIANT_UserSize(     __RPC__in unsigned l
 unsigned char * __RPC_USER  VARIANT_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in VARIANT * ); 
 unsigned char * __RPC_USER  VARIANT_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * ); 
 void                      __RPC_USER  VARIANT_UserFree(     __RPC__in unsigned long *, __RPC__in VARIANT * ); 
+
+unsigned long             __RPC_USER  BSTR_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
+unsigned char * __RPC_USER  BSTR_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in BSTR * ); 
+unsigned char * __RPC_USER  BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
+void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+
+unsigned long             __RPC_USER  HMENU_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HMENU * ); 
+unsigned char * __RPC_USER  HMENU_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HMENU * ); 
+unsigned char * __RPC_USER  HMENU_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HMENU * ); 
+void                      __RPC_USER  HMENU_UserFree64(     __RPC__in unsigned long *, __RPC__in HMENU * ); 
+
+unsigned long             __RPC_USER  HWND_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
+unsigned char * __RPC_USER  HWND_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HWND * ); 
+unsigned char * __RPC_USER  HWND_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HWND * ); 
+void                      __RPC_USER  HWND_UserFree64(     __RPC__in unsigned long *, __RPC__in HWND * ); 
+
+unsigned long             __RPC_USER  LPSAFEARRAY_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in LPSAFEARRAY * ); 
+unsigned char * __RPC_USER  LPSAFEARRAY_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in LPSAFEARRAY * ); 
+unsigned char * __RPC_USER  LPSAFEARRAY_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out LPSAFEARRAY * ); 
+void                      __RPC_USER  LPSAFEARRAY_UserFree64(     __RPC__in unsigned long *, __RPC__in LPSAFEARRAY * ); 
+
+unsigned long             __RPC_USER  VARIANT_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in VARIANT * ); 
+unsigned char * __RPC_USER  VARIANT_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in VARIANT * ); 
+unsigned char * __RPC_USER  VARIANT_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * ); 
+void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned long *, __RPC__in VARIANT * ); 
 
 /* end of Additional Prototypes */
 

@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -91,14 +91,20 @@ EXTERN_C const IID IID_IPrintManagerInterop;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetForWindow( 
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **printManager) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **printManager) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ShowPrintUIForWindowAsync( 
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation) = 0;
         
     };
     
@@ -112,7 +118,8 @@ EXTERN_C const IID IID_IPrintManagerInterop;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPrintManagerInterop * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -143,16 +150,22 @@ EXTERN_C const IID IID_IPrintManagerInterop;
         DECLSPEC_XFGVIRT(IPrintManagerInterop, GetForWindow)
         HRESULT ( STDMETHODCALLTYPE *GetForWindow )( 
             __RPC__in IPrintManagerInterop * This,
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **printManager);
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **printManager);
         
         DECLSPEC_XFGVIRT(IPrintManagerInterop, ShowPrintUIForWindowAsync)
         HRESULT ( STDMETHODCALLTYPE *ShowPrintUIForWindowAsync )( 
             __RPC__in IPrintManagerInterop * This,
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation);
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation);
         
         END_INTERFACE
     } IPrintManagerInteropVtbl;

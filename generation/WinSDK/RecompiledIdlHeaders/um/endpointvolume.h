@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -139,7 +139,8 @@ EXTERN_C const IID IID_IAudioEndpointVolumeCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioEndpointVolumeCallback * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -278,10 +279,12 @@ EXTERN_C const IID IID_IAudioEndpointVolume;
             _Out_  UINT *pnStepCount) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE VolumeStepUp( 
-            /* [unique][in] */ LPCGUID pguidEventContext) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  LPCGUID pguidEventContext) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE VolumeStepDown( 
-            /* [unique][in] */ LPCGUID pguidEventContext) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  LPCGUID pguidEventContext) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE QueryHardwareSupport( 
             /* [annotation][out] */ 
@@ -307,7 +310,8 @@ EXTERN_C const IID IID_IAudioEndpointVolume;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioEndpointVolume * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -419,12 +423,14 @@ EXTERN_C const IID IID_IAudioEndpointVolume;
         DECLSPEC_XFGVIRT(IAudioEndpointVolume, VolumeStepUp)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *VolumeStepUp )( 
             IAudioEndpointVolume * This,
-            /* [unique][in] */ LPCGUID pguidEventContext);
+            /* [annotation][unique][in] */ 
+            _In_  LPCGUID pguidEventContext);
         
         DECLSPEC_XFGVIRT(IAudioEndpointVolume, VolumeStepDown)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *VolumeStepDown )( 
             IAudioEndpointVolume * This,
-            /* [unique][in] */ LPCGUID pguidEventContext);
+            /* [annotation][unique][in] */ 
+            _In_  LPCGUID pguidEventContext);
         
         DECLSPEC_XFGVIRT(IAudioEndpointVolume, QueryHardwareSupport)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryHardwareSupport )( 
@@ -578,7 +584,8 @@ EXTERN_C const IID IID_IAudioEndpointVolumeEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioEndpointVolumeEx * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -690,12 +697,14 @@ EXTERN_C const IID IID_IAudioEndpointVolumeEx;
         DECLSPEC_XFGVIRT(IAudioEndpointVolume, VolumeStepUp)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *VolumeStepUp )( 
             IAudioEndpointVolumeEx * This,
-            /* [unique][in] */ LPCGUID pguidEventContext);
+            /* [annotation][unique][in] */ 
+            _In_  LPCGUID pguidEventContext);
         
         DECLSPEC_XFGVIRT(IAudioEndpointVolume, VolumeStepDown)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *VolumeStepDown )( 
             IAudioEndpointVolumeEx * This,
-            /* [unique][in] */ LPCGUID pguidEventContext);
+            /* [annotation][unique][in] */ 
+            _In_  LPCGUID pguidEventContext);
         
         DECLSPEC_XFGVIRT(IAudioEndpointVolume, QueryHardwareSupport)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryHardwareSupport )( 
@@ -844,15 +853,18 @@ EXTERN_C const IID IID_IAudioMeterInformation;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPeakValue( 
-            /* [out] */ float *pfPeak) = 0;
+            /* [annotation][out] */ 
+            _Out_  float *pfPeak) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetMeteringChannelCount( 
             /* [annotation][out] */ 
             _Out_  UINT *pnChannelCount) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetChannelsPeakValues( 
-            /* [in] */ UINT32 u32ChannelCount,
-            /* [size_is][out] */ float *afPeakValues) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT32 u32ChannelCount,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(u32ChannelCount)  float *afPeakValues) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE QueryHardwareSupport( 
             /* [annotation][out] */ 
@@ -870,7 +882,8 @@ EXTERN_C const IID IID_IAudioMeterInformation;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioMeterInformation * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -885,7 +898,8 @@ EXTERN_C const IID IID_IAudioMeterInformation;
         DECLSPEC_XFGVIRT(IAudioMeterInformation, GetPeakValue)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPeakValue )( 
             IAudioMeterInformation * This,
-            /* [out] */ float *pfPeak);
+            /* [annotation][out] */ 
+            _Out_  float *pfPeak);
         
         DECLSPEC_XFGVIRT(IAudioMeterInformation, GetMeteringChannelCount)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetMeteringChannelCount )( 
@@ -896,8 +910,10 @@ EXTERN_C const IID IID_IAudioMeterInformation;
         DECLSPEC_XFGVIRT(IAudioMeterInformation, GetChannelsPeakValues)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetChannelsPeakValues )( 
             IAudioMeterInformation * This,
-            /* [in] */ UINT32 u32ChannelCount,
-            /* [size_is][out] */ float *afPeakValues);
+            /* [annotation][in] */ 
+            _In_  UINT32 u32ChannelCount,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(u32ChannelCount)  float *afPeakValues);
         
         DECLSPEC_XFGVIRT(IAudioMeterInformation, QueryHardwareSupport)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryHardwareSupport )( 

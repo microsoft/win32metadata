@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -132,7 +132,8 @@ EXTERN_C const IID IID_IRandomAccessStreamFileAccessMode;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetMode( 
-            /* [out] */ __RPC__out DWORD *fileAccessMode) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *fileAccessMode) = 0;
         
     };
     
@@ -146,7 +147,8 @@ EXTERN_C const IID IID_IRandomAccessStreamFileAccessMode;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRandomAccessStreamFileAccessMode * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -161,7 +163,8 @@ EXTERN_C const IID IID_IRandomAccessStreamFileAccessMode;
         DECLSPEC_XFGVIRT(IRandomAccessStreamFileAccessMode, GetMode)
         HRESULT ( STDMETHODCALLTYPE *GetMode )( 
             __RPC__in IRandomAccessStreamFileAccessMode * This,
-            /* [out] */ __RPC__out DWORD *fileAccessMode);
+            /* [annotation][out] */ 
+            _Out_  DWORD *fileAccessMode);
         
         END_INTERFACE
     } IRandomAccessStreamFileAccessModeVtbl;
@@ -229,7 +232,8 @@ EXTERN_C const IID IID_IUnbufferedFileHandleOplockCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUnbufferedFileHandleOplockCallback * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -298,8 +302,10 @@ EXTERN_C const IID IID_IUnbufferedFileHandleProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OpenUnbufferedFileHandle( 
-            /* [in] */ __RPC__in_opt IUnbufferedFileHandleOplockCallback *oplockBreakCallback,
-            /* [retval][out] */ __RPC__out DWORD_PTR *fileHandle) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnbufferedFileHandleOplockCallback *oplockBreakCallback,
+            /* [retval][annotation][out] */ 
+            _Out_  DWORD_PTR *fileHandle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CloseUnbufferedFileHandle( void) = 0;
         
@@ -315,7 +321,8 @@ EXTERN_C const IID IID_IUnbufferedFileHandleProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUnbufferedFileHandleProvider * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -330,8 +337,10 @@ EXTERN_C const IID IID_IUnbufferedFileHandleProvider;
         DECLSPEC_XFGVIRT(IUnbufferedFileHandleProvider, OpenUnbufferedFileHandle)
         HRESULT ( STDMETHODCALLTYPE *OpenUnbufferedFileHandle )( 
             __RPC__in IUnbufferedFileHandleProvider * This,
-            /* [in] */ __RPC__in_opt IUnbufferedFileHandleOplockCallback *oplockBreakCallback,
-            /* [retval][out] */ __RPC__out DWORD_PTR *fileHandle);
+            /* [annotation][in] */ 
+            _In_  IUnbufferedFileHandleOplockCallback *oplockBreakCallback,
+            /* [retval][annotation][out] */ 
+            _Out_  DWORD_PTR *fileHandle);
         
         DECLSPEC_XFGVIRT(IUnbufferedFileHandleProvider, CloseUnbufferedFileHandle)
         HRESULT ( STDMETHODCALLTYPE *CloseUnbufferedFileHandle )( 
@@ -463,7 +472,8 @@ EXTERN_C const IID IID_IOplockBreakingHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOplockBreakingHandler * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -532,9 +542,12 @@ EXTERN_C const IID IID_IStorageItemHandleAccess;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Create( 
-            /* [in] */ HANDLE_ACCESS_OPTIONS accessOptions,
-            /* [in] */ HANDLE_SHARING_OPTIONS sharingOptions,
-            /* [in] */ HANDLE_OPTIONS options,
+            /* [annotation][in] */ 
+            _In_  HANDLE_ACCESS_OPTIONS accessOptions,
+            /* [annotation][in] */ 
+            _In_  HANDLE_SHARING_OPTIONS sharingOptions,
+            /* [annotation][in] */ 
+            _In_  HANDLE_OPTIONS options,
             /* [optional][in] */ __RPC__in_opt IOplockBreakingHandler *oplockBreakingHandler,
             /* [system_handle][retval][out] */ __RPC__deref_out_opt HANDLE *interopHandle) = 0;
         
@@ -550,7 +563,8 @@ EXTERN_C const IID IID_IStorageItemHandleAccess;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStorageItemHandleAccess * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -565,9 +579,12 @@ EXTERN_C const IID IID_IStorageItemHandleAccess;
         DECLSPEC_XFGVIRT(IStorageItemHandleAccess, Create)
         HRESULT ( STDMETHODCALLTYPE *Create )( 
             __RPC__in IStorageItemHandleAccess * This,
-            /* [in] */ HANDLE_ACCESS_OPTIONS accessOptions,
-            /* [in] */ HANDLE_SHARING_OPTIONS sharingOptions,
-            /* [in] */ HANDLE_OPTIONS options,
+            /* [annotation][in] */ 
+            _In_  HANDLE_ACCESS_OPTIONS accessOptions,
+            /* [annotation][in] */ 
+            _In_  HANDLE_SHARING_OPTIONS sharingOptions,
+            /* [annotation][in] */ 
+            _In_  HANDLE_OPTIONS options,
             /* [optional][in] */ __RPC__in_opt IOplockBreakingHandler *oplockBreakingHandler,
             /* [system_handle][retval][out] */ __RPC__deref_out_opt HANDLE *interopHandle);
         
@@ -624,11 +641,16 @@ EXTERN_C const IID IID_IStorageFolderHandleAccess;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Create( 
-            /* [string][in] */ __RPC__in_string LPCWSTR fileName,
-            /* [in] */ HANDLE_CREATION_OPTIONS creationOptions,
-            /* [in] */ HANDLE_ACCESS_OPTIONS accessOptions,
-            /* [in] */ HANDLE_SHARING_OPTIONS sharingOptions,
-            /* [in] */ HANDLE_OPTIONS options,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR fileName,
+            /* [annotation][in] */ 
+            _In_  HANDLE_CREATION_OPTIONS creationOptions,
+            /* [annotation][in] */ 
+            _In_  HANDLE_ACCESS_OPTIONS accessOptions,
+            /* [annotation][in] */ 
+            _In_  HANDLE_SHARING_OPTIONS sharingOptions,
+            /* [annotation][in] */ 
+            _In_  HANDLE_OPTIONS options,
             /* [optional][in] */ __RPC__in_opt IOplockBreakingHandler *oplockBreakingHandler,
             /* [system_handle][retval][out] */ __RPC__deref_out_opt HANDLE *interopHandle) = 0;
         
@@ -644,7 +666,8 @@ EXTERN_C const IID IID_IStorageFolderHandleAccess;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStorageFolderHandleAccess * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -659,11 +682,16 @@ EXTERN_C const IID IID_IStorageFolderHandleAccess;
         DECLSPEC_XFGVIRT(IStorageFolderHandleAccess, Create)
         HRESULT ( STDMETHODCALLTYPE *Create )( 
             __RPC__in IStorageFolderHandleAccess * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR fileName,
-            /* [in] */ HANDLE_CREATION_OPTIONS creationOptions,
-            /* [in] */ HANDLE_ACCESS_OPTIONS accessOptions,
-            /* [in] */ HANDLE_SHARING_OPTIONS sharingOptions,
-            /* [in] */ HANDLE_OPTIONS options,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR fileName,
+            /* [annotation][in] */ 
+            _In_  HANDLE_CREATION_OPTIONS creationOptions,
+            /* [annotation][in] */ 
+            _In_  HANDLE_ACCESS_OPTIONS accessOptions,
+            /* [annotation][in] */ 
+            _In_  HANDLE_SHARING_OPTIONS sharingOptions,
+            /* [annotation][in] */ 
+            _In_  HANDLE_OPTIONS options,
             /* [optional][in] */ __RPC__in_opt IOplockBreakingHandler *oplockBreakingHandler,
             /* [system_handle][retval][out] */ __RPC__deref_out_opt HANDLE *interopHandle);
         
@@ -740,15 +768,24 @@ EXTERN_C const IID IID_IDDEInitializer;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [string][in] */ __RPC__in_string LPCWSTR fileExtensionOrProtocol,
-            /* [in] */ CreateProcessMethod method,
-            /* [string][in] */ __RPC__in_string LPCWSTR currentDirectory,
-            /* [in] */ __RPC__in_opt IShellItem *execTarget,
-            /* [in] */ __RPC__in_opt IUnknown *site,
-            /* [string][in] */ __RPC__in_string LPCWSTR application,
-            /* [string][in] */ __RPC__in_string LPCWSTR targetFile,
-            /* [string][in] */ __RPC__in_string LPCWSTR arguments,
-            /* [string][in] */ __RPC__in_string LPCWSTR verb) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR fileExtensionOrProtocol,
+            /* [annotation][in] */ 
+            _In_  CreateProcessMethod method,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR currentDirectory,
+            /* [annotation][in] */ 
+            _In_  IShellItem *execTarget,
+            /* [annotation][in] */ 
+            _In_  IUnknown *site,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR application,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR targetFile,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR arguments,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR verb) = 0;
         
     };
     
@@ -762,7 +799,8 @@ EXTERN_C const IID IID_IDDEInitializer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDDEInitializer * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -777,15 +815,24 @@ EXTERN_C const IID IID_IDDEInitializer;
         DECLSPEC_XFGVIRT(IDDEInitializer, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IDDEInitializer * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR fileExtensionOrProtocol,
-            /* [in] */ CreateProcessMethod method,
-            /* [string][in] */ __RPC__in_string LPCWSTR currentDirectory,
-            /* [in] */ __RPC__in_opt IShellItem *execTarget,
-            /* [in] */ __RPC__in_opt IUnknown *site,
-            /* [string][in] */ __RPC__in_string LPCWSTR application,
-            /* [string][in] */ __RPC__in_string LPCWSTR targetFile,
-            /* [string][in] */ __RPC__in_string LPCWSTR arguments,
-            /* [string][in] */ __RPC__in_string LPCWSTR verb);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR fileExtensionOrProtocol,
+            /* [annotation][in] */ 
+            _In_  CreateProcessMethod method,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR currentDirectory,
+            /* [annotation][in] */ 
+            _In_  IShellItem *execTarget,
+            /* [annotation][in] */ 
+            _In_  IUnknown *site,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR application,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR targetFile,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR arguments,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR verb);
         
         END_INTERFACE
     } IDDEInitializerVtbl;

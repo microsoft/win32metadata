@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -110,18 +110,26 @@ EXTERN_C const IID IID_IVssAdmin;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE RegisterProvider( 
-            /* [in] */ VSS_ID pProviderId,
-            /* [in] */ CLSID ClassId,
-            /* [in] */ __RPC__in VSS_PWSZ pwszProviderName,
-            /* [in] */ VSS_PROVIDER_TYPE eProviderType,
-            /* [in] */ __RPC__in VSS_PWSZ pwszProviderVersion,
-            /* [in] */ VSS_ID ProviderVersionId) = 0;
+            /* [annotation][in] */ 
+            _In_  VSS_ID pProviderId,
+            /* [annotation][in] */ 
+            _In_  CLSID ClassId,
+            /* [annotation][in] */ 
+            _In_  VSS_PWSZ pwszProviderName,
+            /* [annotation][in] */ 
+            _In_  VSS_PROVIDER_TYPE eProviderType,
+            /* [annotation][in] */ 
+            _In_  VSS_PWSZ pwszProviderVersion,
+            /* [annotation][in] */ 
+            _In_  VSS_ID ProviderVersionId) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE UnregisterProvider( 
-            /* [in] */ VSS_ID ProviderId) = 0;
+            /* [annotation][in] */ 
+            _In_  VSS_ID ProviderId) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE QueryProviders( 
-            /* [out] */ __RPC__deref_out_opt IVssEnumObject **ppEnum) = 0;
+            /* [annotation][out] */ 
+            _Out_  IVssEnumObject **ppEnum) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE AbortAllSnapshotsInProgress( void) = 0;
         
@@ -137,7 +145,8 @@ EXTERN_C const IID IID_IVssAdmin;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVssAdmin * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -152,22 +161,30 @@ EXTERN_C const IID IID_IVssAdmin;
         DECLSPEC_XFGVIRT(IVssAdmin, RegisterProvider)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RegisterProvider )( 
             __RPC__in IVssAdmin * This,
-            /* [in] */ VSS_ID pProviderId,
-            /* [in] */ CLSID ClassId,
-            /* [in] */ __RPC__in VSS_PWSZ pwszProviderName,
-            /* [in] */ VSS_PROVIDER_TYPE eProviderType,
-            /* [in] */ __RPC__in VSS_PWSZ pwszProviderVersion,
-            /* [in] */ VSS_ID ProviderVersionId);
+            /* [annotation][in] */ 
+            _In_  VSS_ID pProviderId,
+            /* [annotation][in] */ 
+            _In_  CLSID ClassId,
+            /* [annotation][in] */ 
+            _In_  VSS_PWSZ pwszProviderName,
+            /* [annotation][in] */ 
+            _In_  VSS_PROVIDER_TYPE eProviderType,
+            /* [annotation][in] */ 
+            _In_  VSS_PWSZ pwszProviderVersion,
+            /* [annotation][in] */ 
+            _In_  VSS_ID ProviderVersionId);
         
         DECLSPEC_XFGVIRT(IVssAdmin, UnregisterProvider)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *UnregisterProvider )( 
             __RPC__in IVssAdmin * This,
-            /* [in] */ VSS_ID ProviderId);
+            /* [annotation][in] */ 
+            _In_  VSS_ID ProviderId);
         
         DECLSPEC_XFGVIRT(IVssAdmin, QueryProviders)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryProviders )( 
             __RPC__in IVssAdmin * This,
-            /* [out] */ __RPC__deref_out_opt IVssEnumObject **ppEnum);
+            /* [annotation][out] */ 
+            _Out_  IVssEnumObject **ppEnum);
         
         DECLSPEC_XFGVIRT(IVssAdmin, AbortAllSnapshotsInProgress)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AbortAllSnapshotsInProgress )( 
@@ -235,16 +252,22 @@ EXTERN_C const IID IID_IVssAdminEx;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetProviderCapability( 
-            /* [in] */ VSS_ID pProviderId,
-            /* [out] */ __RPC__out ULONGLONG *pllOriginalCapabilityMask) = 0;
+            /* [annotation][in] */ 
+            _In_  VSS_ID pProviderId,
+            /* [annotation][out] */ 
+            _Out_  ULONGLONG *pllOriginalCapabilityMask) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetProviderContext( 
-            /* [in] */ VSS_ID ProviderId,
-            /* [out] */ __RPC__out LONG *plContext) = 0;
+            /* [annotation][in] */ 
+            _In_  VSS_ID ProviderId,
+            /* [annotation][out] */ 
+            _Out_  LONG *plContext) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetProviderContext( 
-            /* [in] */ VSS_ID ProviderId,
-            /* [in] */ LONG lContext) = 0;
+            /* [annotation][in] */ 
+            _In_  VSS_ID ProviderId,
+            /* [annotation][in] */ 
+            _In_  LONG lContext) = 0;
         
     };
     
@@ -258,7 +281,8 @@ EXTERN_C const IID IID_IVssAdminEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVssAdminEx * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -273,22 +297,30 @@ EXTERN_C const IID IID_IVssAdminEx;
         DECLSPEC_XFGVIRT(IVssAdmin, RegisterProvider)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RegisterProvider )( 
             __RPC__in IVssAdminEx * This,
-            /* [in] */ VSS_ID pProviderId,
-            /* [in] */ CLSID ClassId,
-            /* [in] */ __RPC__in VSS_PWSZ pwszProviderName,
-            /* [in] */ VSS_PROVIDER_TYPE eProviderType,
-            /* [in] */ __RPC__in VSS_PWSZ pwszProviderVersion,
-            /* [in] */ VSS_ID ProviderVersionId);
+            /* [annotation][in] */ 
+            _In_  VSS_ID pProviderId,
+            /* [annotation][in] */ 
+            _In_  CLSID ClassId,
+            /* [annotation][in] */ 
+            _In_  VSS_PWSZ pwszProviderName,
+            /* [annotation][in] */ 
+            _In_  VSS_PROVIDER_TYPE eProviderType,
+            /* [annotation][in] */ 
+            _In_  VSS_PWSZ pwszProviderVersion,
+            /* [annotation][in] */ 
+            _In_  VSS_ID ProviderVersionId);
         
         DECLSPEC_XFGVIRT(IVssAdmin, UnregisterProvider)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *UnregisterProvider )( 
             __RPC__in IVssAdminEx * This,
-            /* [in] */ VSS_ID ProviderId);
+            /* [annotation][in] */ 
+            _In_  VSS_ID ProviderId);
         
         DECLSPEC_XFGVIRT(IVssAdmin, QueryProviders)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryProviders )( 
             __RPC__in IVssAdminEx * This,
-            /* [out] */ __RPC__deref_out_opt IVssEnumObject **ppEnum);
+            /* [annotation][out] */ 
+            _Out_  IVssEnumObject **ppEnum);
         
         DECLSPEC_XFGVIRT(IVssAdmin, AbortAllSnapshotsInProgress)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AbortAllSnapshotsInProgress )( 
@@ -297,20 +329,26 @@ EXTERN_C const IID IID_IVssAdminEx;
         DECLSPEC_XFGVIRT(IVssAdminEx, GetProviderCapability)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProviderCapability )( 
             __RPC__in IVssAdminEx * This,
-            /* [in] */ VSS_ID pProviderId,
-            /* [out] */ __RPC__out ULONGLONG *pllOriginalCapabilityMask);
+            /* [annotation][in] */ 
+            _In_  VSS_ID pProviderId,
+            /* [annotation][out] */ 
+            _Out_  ULONGLONG *pllOriginalCapabilityMask);
         
         DECLSPEC_XFGVIRT(IVssAdminEx, GetProviderContext)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProviderContext )( 
             __RPC__in IVssAdminEx * This,
-            /* [in] */ VSS_ID ProviderId,
-            /* [out] */ __RPC__out LONG *plContext);
+            /* [annotation][in] */ 
+            _In_  VSS_ID ProviderId,
+            /* [annotation][out] */ 
+            _Out_  LONG *plContext);
         
         DECLSPEC_XFGVIRT(IVssAdminEx, SetProviderContext)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetProviderContext )( 
             __RPC__in IVssAdminEx * This,
-            /* [in] */ VSS_ID ProviderId,
-            /* [in] */ LONG lContext);
+            /* [annotation][in] */ 
+            _In_  VSS_ID ProviderId,
+            /* [annotation][in] */ 
+            _In_  LONG lContext);
         
         END_INTERFACE
     } IVssAdminExVtbl;

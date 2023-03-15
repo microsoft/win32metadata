@@ -98,12 +98,17 @@ EXTERN_C const IID IID_ICreatePropBagOnRegKey;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Create( 
-            /* [in] */ HKEY hkey,
-            /* [in] */ LPCOLESTR subkey,
-            /* [in] */ DWORD ulOptions,
-            /* [in] */ DWORD samDesired,
+            /* [annotation][in] */ 
+            _In_  HKEY hkey,
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR subkey,
+            /* [annotation][in] */ 
+            _In_  DWORD ulOptions,
+            /* [annotation][in] */ 
+            _In_  DWORD samDesired,
             REFIID iid,
-            /* [out] */ LPVOID *ppBag) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPVOID *ppBag) = 0;
         
     };
     
@@ -117,7 +122,8 @@ EXTERN_C const IID IID_ICreatePropBagOnRegKey;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICreatePropBagOnRegKey * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -132,12 +138,17 @@ EXTERN_C const IID IID_ICreatePropBagOnRegKey;
         DECLSPEC_XFGVIRT(ICreatePropBagOnRegKey, Create)
         HRESULT ( STDMETHODCALLTYPE *Create )( 
             ICreatePropBagOnRegKey * This,
-            /* [in] */ HKEY hkey,
-            /* [in] */ LPCOLESTR subkey,
-            /* [in] */ DWORD ulOptions,
-            /* [in] */ DWORD samDesired,
+            /* [annotation][in] */ 
+            _In_  HKEY hkey,
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR subkey,
+            /* [annotation][in] */ 
+            _In_  DWORD ulOptions,
+            /* [annotation][in] */ 
+            _In_  DWORD samDesired,
             REFIID iid,
-            /* [out] */ LPVOID *ppBag);
+            /* [annotation][out] */ 
+            _Out_  LPVOID *ppBag);
         
         END_INTERFACE
     } ICreatePropBagOnRegKeyVtbl;

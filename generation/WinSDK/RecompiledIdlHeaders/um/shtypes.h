@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -286,7 +286,7 @@ typedef struct _STRRET
         {
         /* [case()][string] */ LPWSTR pOleStr;
         /* [case()] */ UINT uOffset;
-        /* [case()] */ char cStr[ 260 ];
+        /* [case()] */ unsigned char cStr[ 260 ];
         } 	DUMMYUNIONNAME;
     } 	STRRET;
 

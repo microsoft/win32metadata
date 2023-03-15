@@ -6,12 +6,11 @@
  /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
-#pragma warning( disable: 4049 )  /* more than 64k source lines */
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 475
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -109,9 +108,12 @@ EXTERN_C const IID IID_IIsolatedAppLauncher;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Launch( 
-            /* [string][in] */ __RPC__in_string LPCWSTR appUserModelId,
-            /* [string][in] */ __RPC__in_string LPCWSTR arguments,
-            /* [in] */ __RPC__in const IsolatedAppLauncherTelemetryParameters *telemetryParameters) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR appUserModelId,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR arguments,
+            /* [annotation][in] */ 
+            _In_  const IsolatedAppLauncherTelemetryParameters *telemetryParameters) = 0;
         
     };
     
@@ -125,7 +127,8 @@ EXTERN_C const IID IID_IIsolatedAppLauncher;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IIsolatedAppLauncher * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -140,9 +143,12 @@ EXTERN_C const IID IID_IIsolatedAppLauncher;
         DECLSPEC_XFGVIRT(IIsolatedAppLauncher, Launch)
         HRESULT ( STDMETHODCALLTYPE *Launch )( 
             __RPC__in IIsolatedAppLauncher * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR appUserModelId,
-            /* [string][in] */ __RPC__in_string LPCWSTR arguments,
-            /* [in] */ __RPC__in const IsolatedAppLauncherTelemetryParameters *telemetryParameters);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR appUserModelId,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR arguments,
+            /* [annotation][in] */ 
+            _In_  const IsolatedAppLauncherTelemetryParameters *telemetryParameters);
         
         END_INTERFACE
     } IIsolatedAppLauncherVtbl;

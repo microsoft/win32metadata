@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -140,7 +140,8 @@ EXTERN_C const IID IID_IInkCommitRequestHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkCommitRequestHandler * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -209,19 +210,26 @@ EXTERN_C const IID IID_IInkPresenterDesktop;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetRootVisual( 
-            /* [in] */ __RPC__in_opt IUnknown *rootVisual,
-            /* [unique][in] */ __RPC__in_opt IUnknown *device) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *rootVisual,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *device) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCommitRequestHandler( 
-            /* [in] */ __RPC__in_opt IInkCommitRequestHandler *handler) = 0;
+            /* [annotation][in] */ 
+            _In_  IInkCommitRequestHandler *handler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSize( 
-            /* [out] */ __RPC__out float *width,
-            /* [out] */ __RPC__out float *height) = 0;
+            /* [annotation][out] */ 
+            _Out_  float *width,
+            /* [annotation][out] */ 
+            _Out_  float *height) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSize( 
-            /* [in] */ float width,
-            /* [in] */ float height) = 0;
+            /* [annotation][in] */ 
+            _In_  float width,
+            /* [annotation][in] */ 
+            _In_  float height) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnHighContrastChanged( void) = 0;
         
@@ -237,7 +245,8 @@ EXTERN_C const IID IID_IInkPresenterDesktop;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkPresenterDesktop * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -252,25 +261,32 @@ EXTERN_C const IID IID_IInkPresenterDesktop;
         DECLSPEC_XFGVIRT(IInkPresenterDesktop, SetRootVisual)
         HRESULT ( STDMETHODCALLTYPE *SetRootVisual )( 
             __RPC__in IInkPresenterDesktop * This,
-            /* [in] */ __RPC__in_opt IUnknown *rootVisual,
-            /* [unique][in] */ __RPC__in_opt IUnknown *device);
+            /* [annotation][in] */ 
+            _In_  IUnknown *rootVisual,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *device);
         
         DECLSPEC_XFGVIRT(IInkPresenterDesktop, SetCommitRequestHandler)
         HRESULT ( STDMETHODCALLTYPE *SetCommitRequestHandler )( 
             __RPC__in IInkPresenterDesktop * This,
-            /* [in] */ __RPC__in_opt IInkCommitRequestHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IInkCommitRequestHandler *handler);
         
         DECLSPEC_XFGVIRT(IInkPresenterDesktop, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IInkPresenterDesktop * This,
-            /* [out] */ __RPC__out float *width,
-            /* [out] */ __RPC__out float *height);
+            /* [annotation][out] */ 
+            _Out_  float *width,
+            /* [annotation][out] */ 
+            _Out_  float *height);
         
         DECLSPEC_XFGVIRT(IInkPresenterDesktop, SetSize)
         HRESULT ( STDMETHODCALLTYPE *SetSize )( 
             __RPC__in IInkPresenterDesktop * This,
-            /* [in] */ float width,
-            /* [in] */ float height);
+            /* [annotation][in] */ 
+            _In_  float width,
+            /* [annotation][in] */ 
+            _In_  float height);
         
         DECLSPEC_XFGVIRT(IInkPresenterDesktop, OnHighContrastChanged)
         HRESULT ( STDMETHODCALLTYPE *OnHighContrastChanged )( 
@@ -354,7 +370,8 @@ EXTERN_C const IID IID_IInkHostWorkItem;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkHostWorkItem * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -423,18 +440,26 @@ EXTERN_C const IID IID_IInkDesktopHost;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE QueueWorkItem( 
-            /* [in] */ __RPC__in_opt IInkHostWorkItem *workItem) = 0;
+            /* [annotation][in] */ 
+            _In_  IInkHostWorkItem *workItem) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateInkPresenter( 
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateAndInitializeInkPresenter( 
-            /* [in] */ __RPC__in_opt IUnknown *rootVisual,
-            /* [in] */ float width,
-            /* [in] */ float height,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *rootVisual,
+            /* [annotation][in] */ 
+            _In_  float width,
+            /* [annotation][in] */ 
+            _In_  float height,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
     };
     
@@ -448,7 +473,8 @@ EXTERN_C const IID IID_IInkDesktopHost;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkDesktopHost * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -463,22 +489,30 @@ EXTERN_C const IID IID_IInkDesktopHost;
         DECLSPEC_XFGVIRT(IInkDesktopHost, QueueWorkItem)
         HRESULT ( STDMETHODCALLTYPE *QueueWorkItem )( 
             __RPC__in IInkDesktopHost * This,
-            /* [in] */ __RPC__in_opt IInkHostWorkItem *workItem);
+            /* [annotation][in] */ 
+            _In_  IInkHostWorkItem *workItem);
         
         DECLSPEC_XFGVIRT(IInkDesktopHost, CreateInkPresenter)
         HRESULT ( STDMETHODCALLTYPE *CreateInkPresenter )( 
             __RPC__in IInkDesktopHost * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         DECLSPEC_XFGVIRT(IInkDesktopHost, CreateAndInitializeInkPresenter)
         HRESULT ( STDMETHODCALLTYPE *CreateAndInitializeInkPresenter )( 
             __RPC__in IInkDesktopHost * This,
-            /* [in] */ __RPC__in_opt IUnknown *rootVisual,
-            /* [in] */ float width,
-            /* [in] */ float height,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  IUnknown *rootVisual,
+            /* [annotation][in] */ 
+            _In_  float width,
+            /* [annotation][in] */ 
+            _In_  float height,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         END_INTERFACE
     } IInkDesktopHostVtbl;

@@ -6,12 +6,11 @@
  /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
-#pragma warning( disable: 4049 )  /* more than 64k source lines */
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 475
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -1595,271 +1594,376 @@ EXTERN_C const IID IID_IUIAutomationElement;
         virtual HRESULT STDMETHODCALLTYPE SetFocus( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRuntimeId( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *runtimeId) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *runtimeId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FindFirst( 
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found) = 0;
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FindAll( 
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found) = 0;
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FindFirstBuildCache( 
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found) = 0;
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FindAllBuildCache( 
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found) = 0;
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE BuildUpdatedCache( 
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **updatedElement) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **updatedElement) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentPropertyValue( 
-            /* [in] */ PROPERTYID propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *retVal) = 0;
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentPropertyValueEx( 
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ BOOL ignoreDefaultValue,
-            /* [retval][out] */ __RPC__out VARIANT *retVal) = 0;
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreDefaultValue,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCachedPropertyValue( 
-            /* [in] */ PROPERTYID propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *retVal) = 0;
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCachedPropertyValueEx( 
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ BOOL ignoreDefaultValue,
-            /* [retval][out] */ __RPC__out VARIANT *retVal) = 0;
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreDefaultValue,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentPatternAs( 
-            /* [in] */ PATTERNID patternId,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [retval][iid_is][out] */ __RPC__deref_out_opt void **patternObject) = 0;
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  void **patternObject) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCachedPatternAs( 
-            /* [in] */ PATTERNID patternId,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [retval][iid_is][out] */ __RPC__deref_out_opt void **patternObject) = 0;
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  void **patternObject) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentPattern( 
-            /* [in] */ PATTERNID patternId,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **patternObject) = 0;
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **patternObject) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCachedPattern( 
-            /* [in] */ PATTERNID patternId,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **patternObject) = 0;
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **patternObject) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCachedParent( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **parent) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **parent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCachedChildren( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **children) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **children) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentProcessId( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentControlType( 
-            /* [retval][out] */ __RPC__out CONTROLTYPEID *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CONTROLTYPEID *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentLocalizedControlType( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentAcceleratorKey( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentAccessKey( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentHasKeyboardFocus( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentIsKeyboardFocusable( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentIsEnabled( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentAutomationId( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentClassName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentHelpText( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentCulture( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentIsControlElement( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentIsContentElement( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentIsPassword( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentNativeWindowHandle( 
-            /* [retval][out] */ __RPC__deref_out_opt UIA_HWND *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UIA_HWND *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentItemType( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentIsOffscreen( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentOrientation( 
-            /* [retval][out] */ __RPC__out enum OrientationType *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum OrientationType *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentFrameworkId( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentIsRequiredForForm( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentItemStatus( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentBoundingRectangle( 
-            /* [retval][out] */ __RPC__out RECT *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentLabeledBy( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentAriaRole( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentAriaProperties( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentIsDataValidForForm( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentControllerFor( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentDescribedBy( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentFlowsTo( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentProviderDescription( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedProcessId( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedControlType( 
-            /* [retval][out] */ __RPC__out CONTROLTYPEID *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CONTROLTYPEID *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedLocalizedControlType( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedAcceleratorKey( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedAccessKey( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedHasKeyboardFocus( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedIsKeyboardFocusable( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedIsEnabled( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedAutomationId( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedClassName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedHelpText( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedCulture( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedIsControlElement( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedIsContentElement( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedIsPassword( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedNativeWindowHandle( 
-            /* [retval][out] */ __RPC__deref_out_opt UIA_HWND *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UIA_HWND *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedItemType( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedIsOffscreen( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedOrientation( 
-            /* [retval][out] */ __RPC__out enum OrientationType *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum OrientationType *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedFrameworkId( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedIsRequiredForForm( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedItemStatus( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedBoundingRectangle( 
-            /* [retval][out] */ __RPC__out RECT *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedLabeledBy( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedAriaRole( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedAriaProperties( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedIsDataValidForForm( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedControllerFor( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedDescribedBy( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedFlowsTo( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedProviderDescription( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetClickablePoint( 
-            /* [out] */ __RPC__out POINT *clickable,
-            /* [retval][out] */ __RPC__out BOOL *gotClickable) = 0;
+            /* [annotation][out] */ 
+            _Out_  POINT *clickable,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *gotClickable) = 0;
         
     };
     
@@ -1873,7 +1977,8 @@ EXTERN_C const IID IID_IUIAutomationElement;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationElement * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1892,431 +1997,536 @@ EXTERN_C const IID IID_IUIAutomationElement;
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetRuntimeId)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeId )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *runtimeId);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *runtimeId);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindFirst)
         HRESULT ( STDMETHODCALLTYPE *FindFirst )( 
             __RPC__in IUIAutomationElement * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindAll)
         HRESULT ( STDMETHODCALLTYPE *FindAll )( 
             __RPC__in IUIAutomationElement * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindFirstBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindFirstBuildCache )( 
             __RPC__in IUIAutomationElement * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindAllBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindAllBuildCache )( 
             __RPC__in IUIAutomationElement * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, BuildUpdatedCache)
         HRESULT ( STDMETHODCALLTYPE *BuildUpdatedCache )( 
             __RPC__in IUIAutomationElement * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **updatedElement);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **updatedElement);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPropertyValue)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPropertyValue )( 
             __RPC__in IUIAutomationElement * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPropertyValueEx)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPropertyValueEx )( 
             __RPC__in IUIAutomationElement * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ BOOL ignoreDefaultValue,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreDefaultValue,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPropertyValue)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPropertyValue )( 
             __RPC__in IUIAutomationElement * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPropertyValueEx)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPropertyValueEx )( 
             __RPC__in IUIAutomationElement * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ BOOL ignoreDefaultValue,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreDefaultValue,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPatternAs)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPatternAs )( 
             __RPC__in IUIAutomationElement * This,
-            /* [in] */ PATTERNID patternId,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [retval][iid_is][out] */ __RPC__deref_out_opt void **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  void **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPatternAs)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPatternAs )( 
             __RPC__in IUIAutomationElement * This,
-            /* [in] */ PATTERNID patternId,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [retval][iid_is][out] */ __RPC__deref_out_opt void **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  void **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPattern)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPattern )( 
             __RPC__in IUIAutomationElement * This,
-            /* [in] */ PATTERNID patternId,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPattern)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPattern )( 
             __RPC__in IUIAutomationElement * This,
-            /* [in] */ PATTERNID patternId,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedParent)
         HRESULT ( STDMETHODCALLTYPE *GetCachedParent )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **parent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **parent);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedChildren)
         HRESULT ( STDMETHODCALLTYPE *GetCachedChildren )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **children);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **children);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentProcessId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentProcessId )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentControlType )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out CONTROLTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CONTROLTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentLocalizedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLocalizedControlType )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentName )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAcceleratorKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAcceleratorKey )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAccessKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAccessKey )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentHasKeyboardFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHasKeyboardFocus )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsKeyboardFocusable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsKeyboardFocusable )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsEnabled )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAutomationId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAutomationId )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentClassName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentClassName )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentHelpText)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHelpText )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentCulture)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCulture )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsControlElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsControlElement )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsContentElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsContentElement )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsPassword)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsPassword )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentNativeWindowHandle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentNativeWindowHandle )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt UIA_HWND *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UIA_HWND *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentItemType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentItemType )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsOffscreen)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsOffscreen )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentOrientation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentOrientation )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out enum OrientationType *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum OrientationType *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentFrameworkId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFrameworkId )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsRequiredForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsRequiredForForm )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentItemStatus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentItemStatus )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentBoundingRectangle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentBoundingRectangle )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out RECT *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentLabeledBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLabeledBy )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAriaRole)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAriaRole )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAriaProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAriaProperties )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsDataValidForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsDataValidForForm )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentControllerFor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentControllerFor )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentDescribedBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentDescribedBy )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentFlowsTo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFlowsTo )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentProviderDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentProviderDescription )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedProcessId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedProcessId )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedControlType )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out CONTROLTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CONTROLTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedLocalizedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLocalizedControlType )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedName )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAcceleratorKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAcceleratorKey )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAccessKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAccessKey )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedHasKeyboardFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHasKeyboardFocus )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsKeyboardFocusable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsKeyboardFocusable )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsEnabled )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAutomationId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAutomationId )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedClassName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedClassName )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedHelpText)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHelpText )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedCulture)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedCulture )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsControlElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsControlElement )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsContentElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsContentElement )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsPassword)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsPassword )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedNativeWindowHandle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedNativeWindowHandle )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt UIA_HWND *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UIA_HWND *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedItemType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedItemType )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsOffscreen)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsOffscreen )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedOrientation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedOrientation )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out enum OrientationType *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum OrientationType *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedFrameworkId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFrameworkId )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsRequiredForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsRequiredForForm )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedItemStatus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedItemStatus )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedBoundingRectangle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedBoundingRectangle )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out RECT *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedLabeledBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLabeledBy )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAriaRole)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAriaRole )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAriaProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAriaProperties )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsDataValidForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsDataValidForForm )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedControllerFor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedControllerFor )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedDescribedBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedDescribedBy )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedFlowsTo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFlowsTo )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedProviderDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedProviderDescription )( 
             __RPC__in IUIAutomationElement * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetClickablePoint)
         HRESULT ( STDMETHODCALLTYPE *GetClickablePoint )( 
             __RPC__in IUIAutomationElement * This,
-            /* [out] */ __RPC__out POINT *clickable,
-            /* [retval][out] */ __RPC__out BOOL *gotClickable);
+            /* [annotation][out] */ 
+            _Out_  POINT *clickable,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *gotClickable);
         
         END_INTERFACE
     } IUIAutomationElementVtbl;
@@ -2614,11 +2824,14 @@ EXTERN_C const IID IID_IUIAutomationElementArray;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Length( 
-            /* [retval][out] */ __RPC__out int *length) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *length) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetElement( 
-            /* [in] */ int index,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element) = 0;
+            /* [annotation][in] */ 
+            _In_  int index,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element) = 0;
         
     };
     
@@ -2632,7 +2845,8 @@ EXTERN_C const IID IID_IUIAutomationElementArray;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationElementArray * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2647,13 +2861,16 @@ EXTERN_C const IID IID_IUIAutomationElementArray;
         DECLSPEC_XFGVIRT(IUIAutomationElementArray, get_Length)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Length )( 
             __RPC__in IUIAutomationElementArray * This,
-            /* [retval][out] */ __RPC__out int *length);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *length);
         
         DECLSPEC_XFGVIRT(IUIAutomationElementArray, GetElement)
         HRESULT ( STDMETHODCALLTYPE *GetElement )( 
             __RPC__in IUIAutomationElementArray * This,
-            /* [in] */ int index,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  int index,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         END_INTERFACE
     } IUIAutomationElementArrayVtbl;
@@ -2722,7 +2939,8 @@ EXTERN_C const IID IID_IUIAutomationCondition;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationCondition * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2784,7 +3002,8 @@ EXTERN_C const IID IID_IUIAutomationBoolCondition;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_BooleanValue( 
-            /* [retval][out] */ __RPC__out BOOL *boolVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *boolVal) = 0;
         
     };
     
@@ -2798,7 +3017,8 @@ EXTERN_C const IID IID_IUIAutomationBoolCondition;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationBoolCondition * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2813,7 +3033,8 @@ EXTERN_C const IID IID_IUIAutomationBoolCondition;
         DECLSPEC_XFGVIRT(IUIAutomationBoolCondition, get_BooleanValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BooleanValue )( 
             __RPC__in IUIAutomationBoolCondition * This,
-            /* [retval][out] */ __RPC__out BOOL *boolVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *boolVal);
         
         END_INTERFACE
     } IUIAutomationBoolConditionVtbl;
@@ -2869,13 +3090,16 @@ EXTERN_C const IID IID_IUIAutomationPropertyCondition;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_PropertyId( 
-            /* [retval][out] */ __RPC__out PROPERTYID *propertyId) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PROPERTYID *propertyId) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_PropertyValue( 
-            /* [retval][out] */ __RPC__out VARIANT *propertyValue) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *propertyValue) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_PropertyConditionFlags( 
-            /* [retval][out] */ __RPC__out enum PropertyConditionFlags *flags) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum PropertyConditionFlags *flags) = 0;
         
     };
     
@@ -2889,7 +3113,8 @@ EXTERN_C const IID IID_IUIAutomationPropertyCondition;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationPropertyCondition * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2904,17 +3129,20 @@ EXTERN_C const IID IID_IUIAutomationPropertyCondition;
         DECLSPEC_XFGVIRT(IUIAutomationPropertyCondition, get_PropertyId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PropertyId )( 
             __RPC__in IUIAutomationPropertyCondition * This,
-            /* [retval][out] */ __RPC__out PROPERTYID *propertyId);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PROPERTYID *propertyId);
         
         DECLSPEC_XFGVIRT(IUIAutomationPropertyCondition, get_PropertyValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PropertyValue )( 
             __RPC__in IUIAutomationPropertyCondition * This,
-            /* [retval][out] */ __RPC__out VARIANT *propertyValue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *propertyValue);
         
         DECLSPEC_XFGVIRT(IUIAutomationPropertyCondition, get_PropertyConditionFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PropertyConditionFlags )( 
             __RPC__in IUIAutomationPropertyCondition * This,
-            /* [retval][out] */ __RPC__out enum PropertyConditionFlags *flags);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum PropertyConditionFlags *flags);
         
         END_INTERFACE
     } IUIAutomationPropertyConditionVtbl;
@@ -2976,14 +3204,18 @@ EXTERN_C const IID IID_IUIAutomationAndCondition;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ChildCount( 
-            /* [retval][out] */ __RPC__out int *childCount) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *childCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetChildrenAsNativeArray( 
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*childArrayCount) IUIAutomationCondition ***childArray,
-            /* [out] */ __RPC__out int *childArrayCount) = 0;
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*childArrayCount)  IUIAutomationCondition ***childArray,
+            /* [annotation][out] */ 
+            _Out_  int *childArrayCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetChildren( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *childArray) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *childArray) = 0;
         
     };
     
@@ -2997,7 +3229,8 @@ EXTERN_C const IID IID_IUIAutomationAndCondition;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationAndCondition * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3012,18 +3245,22 @@ EXTERN_C const IID IID_IUIAutomationAndCondition;
         DECLSPEC_XFGVIRT(IUIAutomationAndCondition, get_ChildCount)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ChildCount )( 
             __RPC__in IUIAutomationAndCondition * This,
-            /* [retval][out] */ __RPC__out int *childCount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *childCount);
         
         DECLSPEC_XFGVIRT(IUIAutomationAndCondition, GetChildrenAsNativeArray)
         HRESULT ( STDMETHODCALLTYPE *GetChildrenAsNativeArray )( 
             __RPC__in IUIAutomationAndCondition * This,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*childArrayCount) IUIAutomationCondition ***childArray,
-            /* [out] */ __RPC__out int *childArrayCount);
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*childArrayCount)  IUIAutomationCondition ***childArray,
+            /* [annotation][out] */ 
+            _Out_  int *childArrayCount);
         
         DECLSPEC_XFGVIRT(IUIAutomationAndCondition, GetChildren)
         HRESULT ( STDMETHODCALLTYPE *GetChildren )( 
             __RPC__in IUIAutomationAndCondition * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *childArray);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *childArray);
         
         END_INTERFACE
     } IUIAutomationAndConditionVtbl;
@@ -3085,14 +3322,18 @@ EXTERN_C const IID IID_IUIAutomationOrCondition;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ChildCount( 
-            /* [retval][out] */ __RPC__out int *childCount) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *childCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetChildrenAsNativeArray( 
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*childArrayCount) IUIAutomationCondition ***childArray,
-            /* [out] */ __RPC__out int *childArrayCount) = 0;
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*childArrayCount)  IUIAutomationCondition ***childArray,
+            /* [annotation][out] */ 
+            _Out_  int *childArrayCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetChildren( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *childArray) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *childArray) = 0;
         
     };
     
@@ -3106,7 +3347,8 @@ EXTERN_C const IID IID_IUIAutomationOrCondition;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationOrCondition * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3121,18 +3363,22 @@ EXTERN_C const IID IID_IUIAutomationOrCondition;
         DECLSPEC_XFGVIRT(IUIAutomationOrCondition, get_ChildCount)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ChildCount )( 
             __RPC__in IUIAutomationOrCondition * This,
-            /* [retval][out] */ __RPC__out int *childCount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *childCount);
         
         DECLSPEC_XFGVIRT(IUIAutomationOrCondition, GetChildrenAsNativeArray)
         HRESULT ( STDMETHODCALLTYPE *GetChildrenAsNativeArray )( 
             __RPC__in IUIAutomationOrCondition * This,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*childArrayCount) IUIAutomationCondition ***childArray,
-            /* [out] */ __RPC__out int *childArrayCount);
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*childArrayCount)  IUIAutomationCondition ***childArray,
+            /* [annotation][out] */ 
+            _Out_  int *childArrayCount);
         
         DECLSPEC_XFGVIRT(IUIAutomationOrCondition, GetChildren)
         HRESULT ( STDMETHODCALLTYPE *GetChildren )( 
             __RPC__in IUIAutomationOrCondition * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *childArray);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *childArray);
         
         END_INTERFACE
     } IUIAutomationOrConditionVtbl;
@@ -3194,7 +3440,8 @@ EXTERN_C const IID IID_IUIAutomationNotCondition;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetChild( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition) = 0;
         
     };
     
@@ -3208,7 +3455,8 @@ EXTERN_C const IID IID_IUIAutomationNotCondition;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationNotCondition * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3223,7 +3471,8 @@ EXTERN_C const IID IID_IUIAutomationNotCondition;
         DECLSPEC_XFGVIRT(IUIAutomationNotCondition, GetChild)
         HRESULT ( STDMETHODCALLTYPE *GetChild )( 
             __RPC__in IUIAutomationNotCondition * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition);
         
         END_INTERFACE
     } IUIAutomationNotConditionVtbl;
@@ -3279,31 +3528,40 @@ EXTERN_C const IID IID_IUIAutomationCacheRequest;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddProperty( 
-            /* [in] */ PROPERTYID propertyId) = 0;
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddPattern( 
-            /* [in] */ PATTERNID patternId) = 0;
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCacheRequest **clonedRequest) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCacheRequest **clonedRequest) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_TreeScope( 
-            /* [retval][out] */ __RPC__out enum TreeScope *scope) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum TreeScope *scope) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_TreeScope( 
-            /* [in] */ enum TreeScope scope) = 0;
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_TreeFilter( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **filter) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **filter) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_TreeFilter( 
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *filter) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *filter) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_AutomationElementMode( 
-            /* [retval][out] */ __RPC__out enum AutomationElementMode *mode) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum AutomationElementMode *mode) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_AutomationElementMode( 
-            /* [in] */ enum AutomationElementMode mode) = 0;
+            /* [annotation][in] */ 
+            _In_  enum AutomationElementMode mode) = 0;
         
     };
     
@@ -3317,7 +3575,8 @@ EXTERN_C const IID IID_IUIAutomationCacheRequest;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationCacheRequest * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3332,47 +3591,56 @@ EXTERN_C const IID IID_IUIAutomationCacheRequest;
         DECLSPEC_XFGVIRT(IUIAutomationCacheRequest, AddProperty)
         HRESULT ( STDMETHODCALLTYPE *AddProperty )( 
             __RPC__in IUIAutomationCacheRequest * This,
-            /* [in] */ PROPERTYID propertyId);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId);
         
         DECLSPEC_XFGVIRT(IUIAutomationCacheRequest, AddPattern)
         HRESULT ( STDMETHODCALLTYPE *AddPattern )( 
             __RPC__in IUIAutomationCacheRequest * This,
-            /* [in] */ PATTERNID patternId);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId);
         
         DECLSPEC_XFGVIRT(IUIAutomationCacheRequest, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IUIAutomationCacheRequest * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCacheRequest **clonedRequest);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCacheRequest **clonedRequest);
         
         DECLSPEC_XFGVIRT(IUIAutomationCacheRequest, get_TreeScope)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TreeScope )( 
             __RPC__in IUIAutomationCacheRequest * This,
-            /* [retval][out] */ __RPC__out enum TreeScope *scope);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum TreeScope *scope);
         
         DECLSPEC_XFGVIRT(IUIAutomationCacheRequest, put_TreeScope)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_TreeScope )( 
             __RPC__in IUIAutomationCacheRequest * This,
-            /* [in] */ enum TreeScope scope);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope);
         
         DECLSPEC_XFGVIRT(IUIAutomationCacheRequest, get_TreeFilter)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TreeFilter )( 
             __RPC__in IUIAutomationCacheRequest * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **filter);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **filter);
         
         DECLSPEC_XFGVIRT(IUIAutomationCacheRequest, put_TreeFilter)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_TreeFilter )( 
             __RPC__in IUIAutomationCacheRequest * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *filter);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *filter);
         
         DECLSPEC_XFGVIRT(IUIAutomationCacheRequest, get_AutomationElementMode)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AutomationElementMode )( 
             __RPC__in IUIAutomationCacheRequest * This,
-            /* [retval][out] */ __RPC__out enum AutomationElementMode *mode);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum AutomationElementMode *mode);
         
         DECLSPEC_XFGVIRT(IUIAutomationCacheRequest, put_AutomationElementMode)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AutomationElementMode )( 
             __RPC__in IUIAutomationCacheRequest * This,
-            /* [in] */ enum AutomationElementMode mode);
+            /* [annotation][in] */ 
+            _In_  enum AutomationElementMode mode);
         
         END_INTERFACE
     } IUIAutomationCacheRequestVtbl;
@@ -3451,61 +3719,92 @@ EXTERN_C const IID IID_IUIAutomationTreeWalker;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetParentElement( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **parent) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **parent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFirstChildElement( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **first) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **first) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLastChildElement( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **last) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **last) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNextSiblingElement( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **next) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **next) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPreviousSiblingElement( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **previous) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **previous) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NormalizeElement( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **normalized) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **normalized) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetParentElementBuildCache( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **parent) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **parent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFirstChildElementBuildCache( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **first) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **first) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLastChildElementBuildCache( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **last) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **last) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNextSiblingElementBuildCache( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **next) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **next) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPreviousSiblingElementBuildCache( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **previous) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **previous) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NormalizeElementBuildCache( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **normalized) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **normalized) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Condition( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition) = 0;
         
     };
     
@@ -3519,7 +3818,8 @@ EXTERN_C const IID IID_IUIAutomationTreeWalker;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationTreeWalker * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3534,85 +3834,116 @@ EXTERN_C const IID IID_IUIAutomationTreeWalker;
         DECLSPEC_XFGVIRT(IUIAutomationTreeWalker, GetParentElement)
         HRESULT ( STDMETHODCALLTYPE *GetParentElement )( 
             __RPC__in IUIAutomationTreeWalker * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **parent);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **parent);
         
         DECLSPEC_XFGVIRT(IUIAutomationTreeWalker, GetFirstChildElement)
         HRESULT ( STDMETHODCALLTYPE *GetFirstChildElement )( 
             __RPC__in IUIAutomationTreeWalker * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **first);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **first);
         
         DECLSPEC_XFGVIRT(IUIAutomationTreeWalker, GetLastChildElement)
         HRESULT ( STDMETHODCALLTYPE *GetLastChildElement )( 
             __RPC__in IUIAutomationTreeWalker * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **last);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **last);
         
         DECLSPEC_XFGVIRT(IUIAutomationTreeWalker, GetNextSiblingElement)
         HRESULT ( STDMETHODCALLTYPE *GetNextSiblingElement )( 
             __RPC__in IUIAutomationTreeWalker * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **next);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **next);
         
         DECLSPEC_XFGVIRT(IUIAutomationTreeWalker, GetPreviousSiblingElement)
         HRESULT ( STDMETHODCALLTYPE *GetPreviousSiblingElement )( 
             __RPC__in IUIAutomationTreeWalker * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **previous);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **previous);
         
         DECLSPEC_XFGVIRT(IUIAutomationTreeWalker, NormalizeElement)
         HRESULT ( STDMETHODCALLTYPE *NormalizeElement )( 
             __RPC__in IUIAutomationTreeWalker * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **normalized);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **normalized);
         
         DECLSPEC_XFGVIRT(IUIAutomationTreeWalker, GetParentElementBuildCache)
         HRESULT ( STDMETHODCALLTYPE *GetParentElementBuildCache )( 
             __RPC__in IUIAutomationTreeWalker * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **parent);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **parent);
         
         DECLSPEC_XFGVIRT(IUIAutomationTreeWalker, GetFirstChildElementBuildCache)
         HRESULT ( STDMETHODCALLTYPE *GetFirstChildElementBuildCache )( 
             __RPC__in IUIAutomationTreeWalker * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **first);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **first);
         
         DECLSPEC_XFGVIRT(IUIAutomationTreeWalker, GetLastChildElementBuildCache)
         HRESULT ( STDMETHODCALLTYPE *GetLastChildElementBuildCache )( 
             __RPC__in IUIAutomationTreeWalker * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **last);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **last);
         
         DECLSPEC_XFGVIRT(IUIAutomationTreeWalker, GetNextSiblingElementBuildCache)
         HRESULT ( STDMETHODCALLTYPE *GetNextSiblingElementBuildCache )( 
             __RPC__in IUIAutomationTreeWalker * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **next);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **next);
         
         DECLSPEC_XFGVIRT(IUIAutomationTreeWalker, GetPreviousSiblingElementBuildCache)
         HRESULT ( STDMETHODCALLTYPE *GetPreviousSiblingElementBuildCache )( 
             __RPC__in IUIAutomationTreeWalker * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **previous);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **previous);
         
         DECLSPEC_XFGVIRT(IUIAutomationTreeWalker, NormalizeElementBuildCache)
         HRESULT ( STDMETHODCALLTYPE *NormalizeElementBuildCache )( 
             __RPC__in IUIAutomationTreeWalker * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **normalized);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **normalized);
         
         DECLSPEC_XFGVIRT(IUIAutomationTreeWalker, get_Condition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Condition )( 
             __RPC__in IUIAutomationTreeWalker * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition);
         
         END_INTERFACE
     } IUIAutomationTreeWalkerVtbl;
@@ -3703,8 +4034,10 @@ EXTERN_C const IID IID_IUIAutomationEventHandler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE HandleAutomationEvent( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *sender,
-            /* [in] */ EVENTID eventId) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *sender,
+            /* [annotation][in] */ 
+            _In_  EVENTID eventId) = 0;
         
     };
     
@@ -3718,7 +4051,8 @@ EXTERN_C const IID IID_IUIAutomationEventHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationEventHandler * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3733,8 +4067,10 @@ EXTERN_C const IID IID_IUIAutomationEventHandler;
         DECLSPEC_XFGVIRT(IUIAutomationEventHandler, HandleAutomationEvent)
         HRESULT ( STDMETHODCALLTYPE *HandleAutomationEvent )( 
             __RPC__in IUIAutomationEventHandler * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *sender,
-            /* [in] */ EVENTID eventId);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *sender,
+            /* [annotation][in] */ 
+            _In_  EVENTID eventId);
         
         END_INTERFACE
     } IUIAutomationEventHandlerVtbl;
@@ -3789,9 +4125,12 @@ EXTERN_C const IID IID_IUIAutomationPropertyChangedEventHandler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE HandlePropertyChangedEvent( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *sender,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ VARIANT newValue) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *sender,
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT newValue) = 0;
         
     };
     
@@ -3805,7 +4144,8 @@ EXTERN_C const IID IID_IUIAutomationPropertyChangedEventHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationPropertyChangedEventHandler * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3820,9 +4160,12 @@ EXTERN_C const IID IID_IUIAutomationPropertyChangedEventHandler;
         DECLSPEC_XFGVIRT(IUIAutomationPropertyChangedEventHandler, HandlePropertyChangedEvent)
         HRESULT ( STDMETHODCALLTYPE *HandlePropertyChangedEvent )( 
             __RPC__in IUIAutomationPropertyChangedEventHandler * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *sender,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ VARIANT newValue);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *sender,
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT newValue);
         
         END_INTERFACE
     } IUIAutomationPropertyChangedEventHandlerVtbl;
@@ -3877,9 +4220,12 @@ EXTERN_C const IID IID_IUIAutomationStructureChangedEventHandler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE HandleStructureChangedEvent( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *sender,
-            /* [in] */ enum StructureChangeType changeType,
-            /* [in] */ __RPC__in SAFEARRAY * runtimeId) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *sender,
+            /* [annotation][in] */ 
+            _In_  enum StructureChangeType changeType,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * runtimeId) = 0;
         
     };
     
@@ -3893,7 +4239,8 @@ EXTERN_C const IID IID_IUIAutomationStructureChangedEventHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationStructureChangedEventHandler * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3908,9 +4255,12 @@ EXTERN_C const IID IID_IUIAutomationStructureChangedEventHandler;
         DECLSPEC_XFGVIRT(IUIAutomationStructureChangedEventHandler, HandleStructureChangedEvent)
         HRESULT ( STDMETHODCALLTYPE *HandleStructureChangedEvent )( 
             __RPC__in IUIAutomationStructureChangedEventHandler * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *sender,
-            /* [in] */ enum StructureChangeType changeType,
-            /* [in] */ __RPC__in SAFEARRAY * runtimeId);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *sender,
+            /* [annotation][in] */ 
+            _In_  enum StructureChangeType changeType,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * runtimeId);
         
         END_INTERFACE
     } IUIAutomationStructureChangedEventHandlerVtbl;
@@ -3965,7 +4315,8 @@ EXTERN_C const IID IID_IUIAutomationFocusChangedEventHandler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE HandleFocusChangedEvent( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *sender) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *sender) = 0;
         
     };
     
@@ -3979,7 +4330,8 @@ EXTERN_C const IID IID_IUIAutomationFocusChangedEventHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationFocusChangedEventHandler * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3994,7 +4346,8 @@ EXTERN_C const IID IID_IUIAutomationFocusChangedEventHandler;
         DECLSPEC_XFGVIRT(IUIAutomationFocusChangedEventHandler, HandleFocusChangedEvent)
         HRESULT ( STDMETHODCALLTYPE *HandleFocusChangedEvent )( 
             __RPC__in IUIAutomationFocusChangedEventHandler * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *sender);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *sender);
         
         END_INTERFACE
     } IUIAutomationFocusChangedEventHandlerVtbl;
@@ -4049,9 +4402,12 @@ EXTERN_C const IID IID_IUIAutomationTextEditTextChangedEventHandler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE HandleTextEditTextChangedEvent( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *sender,
-            /* [in] */ enum TextEditChangeType textEditChangeType,
-            /* [in] */ __RPC__in SAFEARRAY * eventStrings) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *sender,
+            /* [annotation][in] */ 
+            _In_  enum TextEditChangeType textEditChangeType,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * eventStrings) = 0;
         
     };
     
@@ -4065,7 +4421,8 @@ EXTERN_C const IID IID_IUIAutomationTextEditTextChangedEventHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationTextEditTextChangedEventHandler * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4080,9 +4437,12 @@ EXTERN_C const IID IID_IUIAutomationTextEditTextChangedEventHandler;
         DECLSPEC_XFGVIRT(IUIAutomationTextEditTextChangedEventHandler, HandleTextEditTextChangedEvent)
         HRESULT ( STDMETHODCALLTYPE *HandleTextEditTextChangedEvent )( 
             __RPC__in IUIAutomationTextEditTextChangedEventHandler * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *sender,
-            /* [in] */ enum TextEditChangeType textEditChangeType,
-            /* [in] */ __RPC__in SAFEARRAY * eventStrings);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *sender,
+            /* [annotation][in] */ 
+            _In_  enum TextEditChangeType textEditChangeType,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * eventStrings);
         
         END_INTERFACE
     } IUIAutomationTextEditTextChangedEventHandlerVtbl;
@@ -4137,9 +4497,12 @@ EXTERN_C const IID IID_IUIAutomationChangesEventHandler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE HandleChangesEvent( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *sender,
-            /* [size_is][in] */ __RPC__in_ecount_full(changesCount) struct UiaChangeInfo *uiaChanges,
-            /* [in] */ int changesCount) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *sender,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(changesCount)  struct UiaChangeInfo *uiaChanges,
+            /* [annotation][in] */ 
+            _In_  int changesCount) = 0;
         
     };
     
@@ -4153,7 +4516,8 @@ EXTERN_C const IID IID_IUIAutomationChangesEventHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationChangesEventHandler * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4168,9 +4532,12 @@ EXTERN_C const IID IID_IUIAutomationChangesEventHandler;
         DECLSPEC_XFGVIRT(IUIAutomationChangesEventHandler, HandleChangesEvent)
         HRESULT ( STDMETHODCALLTYPE *HandleChangesEvent )( 
             __RPC__in IUIAutomationChangesEventHandler * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *sender,
-            /* [size_is][in] */ __RPC__in_ecount_full(changesCount) struct UiaChangeInfo *uiaChanges,
-            /* [in] */ int changesCount);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *sender,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(changesCount)  struct UiaChangeInfo *uiaChanges,
+            /* [annotation][in] */ 
+            _In_  int changesCount);
         
         END_INTERFACE
     } IUIAutomationChangesEventHandlerVtbl;
@@ -4225,11 +4592,14 @@ EXTERN_C const IID IID_IUIAutomationNotificationEventHandler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE HandleNotificationEvent( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *sender,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *sender,
             enum NotificationKind notificationKind,
             enum NotificationProcessing notificationProcessing,
-            /* [in] */ __RPC__in BSTR displayString,
-            /* [in] */ __RPC__in BSTR activityId) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR displayString,
+            /* [annotation][in] */ 
+            _In_  BSTR activityId) = 0;
         
     };
     
@@ -4243,7 +4613,8 @@ EXTERN_C const IID IID_IUIAutomationNotificationEventHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationNotificationEventHandler * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4258,11 +4629,14 @@ EXTERN_C const IID IID_IUIAutomationNotificationEventHandler;
         DECLSPEC_XFGVIRT(IUIAutomationNotificationEventHandler, HandleNotificationEvent)
         HRESULT ( STDMETHODCALLTYPE *HandleNotificationEvent )( 
             __RPC__in IUIAutomationNotificationEventHandler * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *sender,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *sender,
             enum NotificationKind notificationKind,
             enum NotificationProcessing notificationProcessing,
-            /* [in] */ __RPC__in BSTR displayString,
-            /* [in] */ __RPC__in BSTR activityId);
+            /* [annotation][in] */ 
+            _In_  BSTR displayString,
+            /* [annotation][in] */ 
+            _In_  BSTR activityId);
         
         END_INTERFACE
     } IUIAutomationNotificationEventHandlerVtbl;
@@ -4330,7 +4704,8 @@ EXTERN_C const IID IID_IUIAutomationInvokePattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationInvokePattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4399,13 +4774,16 @@ EXTERN_C const IID IID_IUIAutomationDockPattern;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetDockPosition( 
-            /* [in] */ enum DockPosition dockPos) = 0;
+            /* [annotation][in] */ 
+            _In_  enum DockPosition dockPos) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentDockPosition( 
-            /* [retval][out] */ __RPC__out enum DockPosition *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum DockPosition *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedDockPosition( 
-            /* [retval][out] */ __RPC__out enum DockPosition *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum DockPosition *retVal) = 0;
         
     };
     
@@ -4419,7 +4797,8 @@ EXTERN_C const IID IID_IUIAutomationDockPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationDockPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4434,17 +4813,20 @@ EXTERN_C const IID IID_IUIAutomationDockPattern;
         DECLSPEC_XFGVIRT(IUIAutomationDockPattern, SetDockPosition)
         HRESULT ( STDMETHODCALLTYPE *SetDockPosition )( 
             __RPC__in IUIAutomationDockPattern * This,
-            /* [in] */ enum DockPosition dockPos);
+            /* [annotation][in] */ 
+            _In_  enum DockPosition dockPos);
         
         DECLSPEC_XFGVIRT(IUIAutomationDockPattern, get_CurrentDockPosition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentDockPosition )( 
             __RPC__in IUIAutomationDockPattern * This,
-            /* [retval][out] */ __RPC__out enum DockPosition *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum DockPosition *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationDockPattern, get_CachedDockPosition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedDockPosition )( 
             __RPC__in IUIAutomationDockPattern * This,
-            /* [retval][out] */ __RPC__out enum DockPosition *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum DockPosition *retVal);
         
         END_INTERFACE
     } IUIAutomationDockPatternVtbl;
@@ -4509,10 +4891,12 @@ EXTERN_C const IID IID_IUIAutomationExpandCollapsePattern;
         virtual HRESULT STDMETHODCALLTYPE Collapse( void) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentExpandCollapseState( 
-            /* [retval][out] */ __RPC__out enum ExpandCollapseState *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum ExpandCollapseState *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedExpandCollapseState( 
-            /* [retval][out] */ __RPC__out enum ExpandCollapseState *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum ExpandCollapseState *retVal) = 0;
         
     };
     
@@ -4526,7 +4910,8 @@ EXTERN_C const IID IID_IUIAutomationExpandCollapsePattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationExpandCollapsePattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4549,12 +4934,14 @@ EXTERN_C const IID IID_IUIAutomationExpandCollapsePattern;
         DECLSPEC_XFGVIRT(IUIAutomationExpandCollapsePattern, get_CurrentExpandCollapseState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentExpandCollapseState )( 
             __RPC__in IUIAutomationExpandCollapsePattern * This,
-            /* [retval][out] */ __RPC__out enum ExpandCollapseState *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum ExpandCollapseState *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationExpandCollapsePattern, get_CachedExpandCollapseState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedExpandCollapseState )( 
             __RPC__in IUIAutomationExpandCollapsePattern * This,
-            /* [retval][out] */ __RPC__out enum ExpandCollapseState *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum ExpandCollapseState *retVal);
         
         END_INTERFACE
     } IUIAutomationExpandCollapsePatternVtbl;
@@ -4618,21 +5005,28 @@ EXTERN_C const IID IID_IUIAutomationGridPattern;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetItem( 
-            /* [in] */ int row,
-            /* [in] */ int column,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element) = 0;
+            /* [annotation][in] */ 
+            _In_  int row,
+            /* [annotation][in] */ 
+            _In_  int column,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentRowCount( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentColumnCount( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedRowCount( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedColumnCount( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
     };
     
@@ -4646,7 +5040,8 @@ EXTERN_C const IID IID_IUIAutomationGridPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationGridPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4661,29 +5056,36 @@ EXTERN_C const IID IID_IUIAutomationGridPattern;
         DECLSPEC_XFGVIRT(IUIAutomationGridPattern, GetItem)
         HRESULT ( STDMETHODCALLTYPE *GetItem )( 
             __RPC__in IUIAutomationGridPattern * This,
-            /* [in] */ int row,
-            /* [in] */ int column,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  int row,
+            /* [annotation][in] */ 
+            _In_  int column,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomationGridPattern, get_CurrentRowCount)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentRowCount )( 
             __RPC__in IUIAutomationGridPattern * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationGridPattern, get_CurrentColumnCount)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentColumnCount )( 
             __RPC__in IUIAutomationGridPattern * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationGridPattern, get_CachedRowCount)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedRowCount )( 
             __RPC__in IUIAutomationGridPattern * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationGridPattern, get_CachedColumnCount)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedColumnCount )( 
             __RPC__in IUIAutomationGridPattern * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         END_INTERFACE
     } IUIAutomationGridPatternVtbl;
@@ -4750,34 +5152,44 @@ EXTERN_C const IID IID_IUIAutomationGridItemPattern;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentContainingGrid( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentRow( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentColumn( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentRowSpan( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentColumnSpan( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedContainingGrid( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedRow( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedColumn( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedRowSpan( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedColumnSpan( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
     };
     
@@ -4791,7 +5203,8 @@ EXTERN_C const IID IID_IUIAutomationGridItemPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationGridItemPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4806,52 +5219,62 @@ EXTERN_C const IID IID_IUIAutomationGridItemPattern;
         DECLSPEC_XFGVIRT(IUIAutomationGridItemPattern, get_CurrentContainingGrid)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentContainingGrid )( 
             __RPC__in IUIAutomationGridItemPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationGridItemPattern, get_CurrentRow)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentRow )( 
             __RPC__in IUIAutomationGridItemPattern * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationGridItemPattern, get_CurrentColumn)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentColumn )( 
             __RPC__in IUIAutomationGridItemPattern * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationGridItemPattern, get_CurrentRowSpan)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentRowSpan )( 
             __RPC__in IUIAutomationGridItemPattern * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationGridItemPattern, get_CurrentColumnSpan)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentColumnSpan )( 
             __RPC__in IUIAutomationGridItemPattern * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationGridItemPattern, get_CachedContainingGrid)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedContainingGrid )( 
             __RPC__in IUIAutomationGridItemPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationGridItemPattern, get_CachedRow)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedRow )( 
             __RPC__in IUIAutomationGridItemPattern * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationGridItemPattern, get_CachedColumn)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedColumn )( 
             __RPC__in IUIAutomationGridItemPattern * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationGridItemPattern, get_CachedRowSpan)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedRowSpan )( 
             __RPC__in IUIAutomationGridItemPattern * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationGridItemPattern, get_CachedColumnSpan)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedColumnSpan )( 
             __RPC__in IUIAutomationGridItemPattern * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         END_INTERFACE
     } IUIAutomationGridItemPatternVtbl;
@@ -4933,23 +5356,30 @@ EXTERN_C const IID IID_IUIAutomationMultipleViewPattern;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetViewName( 
-            /* [in] */ int view,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name) = 0;
+            /* [annotation][in] */ 
+            _In_  int view,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCurrentView( 
-            /* [in] */ int view) = 0;
+            /* [annotation][in] */ 
+            _In_  int view) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentCurrentView( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentSupportedViews( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedCurrentView( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCachedSupportedViews( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal) = 0;
         
     };
     
@@ -4963,7 +5393,8 @@ EXTERN_C const IID IID_IUIAutomationMultipleViewPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationMultipleViewPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4978,33 +5409,40 @@ EXTERN_C const IID IID_IUIAutomationMultipleViewPattern;
         DECLSPEC_XFGVIRT(IUIAutomationMultipleViewPattern, GetViewName)
         HRESULT ( STDMETHODCALLTYPE *GetViewName )( 
             __RPC__in IUIAutomationMultipleViewPattern * This,
-            /* [in] */ int view,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
+            /* [annotation][in] */ 
+            _In_  int view,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(IUIAutomationMultipleViewPattern, SetCurrentView)
         HRESULT ( STDMETHODCALLTYPE *SetCurrentView )( 
             __RPC__in IUIAutomationMultipleViewPattern * This,
-            /* [in] */ int view);
+            /* [annotation][in] */ 
+            _In_  int view);
         
         DECLSPEC_XFGVIRT(IUIAutomationMultipleViewPattern, get_CurrentCurrentView)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCurrentView )( 
             __RPC__in IUIAutomationMultipleViewPattern * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationMultipleViewPattern, GetCurrentSupportedViews)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentSupportedViews )( 
             __RPC__in IUIAutomationMultipleViewPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationMultipleViewPattern, get_CachedCurrentView)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedCurrentView )( 
             __RPC__in IUIAutomationMultipleViewPattern * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationMultipleViewPattern, GetCachedSupportedViews)
         HRESULT ( STDMETHODCALLTYPE *GetCachedSupportedViews )( 
             __RPC__in IUIAutomationMultipleViewPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal);
         
         END_INTERFACE
     } IUIAutomationMultipleViewPatternVtbl;
@@ -5074,7 +5512,8 @@ EXTERN_C const IID IID_IUIAutomationObjectModelPattern;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetUnderlyingObjectModel( 
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **retVal) = 0;
         
     };
     
@@ -5088,7 +5527,8 @@ EXTERN_C const IID IID_IUIAutomationObjectModelPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationObjectModelPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5103,7 +5543,8 @@ EXTERN_C const IID IID_IUIAutomationObjectModelPattern;
         DECLSPEC_XFGVIRT(IUIAutomationObjectModelPattern, GetUnderlyingObjectModel)
         HRESULT ( STDMETHODCALLTYPE *GetUnderlyingObjectModel )( 
             __RPC__in IUIAutomationObjectModelPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **retVal);
         
         END_INTERFACE
     } IUIAutomationObjectModelPatternVtbl;
@@ -5158,43 +5599,56 @@ EXTERN_C const IID IID_IUIAutomationRangeValuePattern;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetValue( 
-            /* [in] */ double val) = 0;
+            /* [annotation][in] */ 
+            _In_  double val) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentValue( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentIsReadOnly( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentMaximum( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentMinimum( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentLargeChange( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentSmallChange( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedValue( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedIsReadOnly( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedMaximum( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedMinimum( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedLargeChange( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedSmallChange( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
     };
     
@@ -5208,7 +5662,8 @@ EXTERN_C const IID IID_IUIAutomationRangeValuePattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationRangeValuePattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5223,67 +5678,80 @@ EXTERN_C const IID IID_IUIAutomationRangeValuePattern;
         DECLSPEC_XFGVIRT(IUIAutomationRangeValuePattern, SetValue)
         HRESULT ( STDMETHODCALLTYPE *SetValue )( 
             __RPC__in IUIAutomationRangeValuePattern * This,
-            /* [in] */ double val);
+            /* [annotation][in] */ 
+            _In_  double val);
         
         DECLSPEC_XFGVIRT(IUIAutomationRangeValuePattern, get_CurrentValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentValue )( 
             __RPC__in IUIAutomationRangeValuePattern * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationRangeValuePattern, get_CurrentIsReadOnly)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsReadOnly )( 
             __RPC__in IUIAutomationRangeValuePattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationRangeValuePattern, get_CurrentMaximum)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentMaximum )( 
             __RPC__in IUIAutomationRangeValuePattern * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationRangeValuePattern, get_CurrentMinimum)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentMinimum )( 
             __RPC__in IUIAutomationRangeValuePattern * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationRangeValuePattern, get_CurrentLargeChange)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLargeChange )( 
             __RPC__in IUIAutomationRangeValuePattern * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationRangeValuePattern, get_CurrentSmallChange)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentSmallChange )( 
             __RPC__in IUIAutomationRangeValuePattern * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationRangeValuePattern, get_CachedValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedValue )( 
             __RPC__in IUIAutomationRangeValuePattern * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationRangeValuePattern, get_CachedIsReadOnly)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsReadOnly )( 
             __RPC__in IUIAutomationRangeValuePattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationRangeValuePattern, get_CachedMaximum)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedMaximum )( 
             __RPC__in IUIAutomationRangeValuePattern * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationRangeValuePattern, get_CachedMinimum)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedMinimum )( 
             __RPC__in IUIAutomationRangeValuePattern * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationRangeValuePattern, get_CachedLargeChange)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLargeChange )( 
             __RPC__in IUIAutomationRangeValuePattern * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationRangeValuePattern, get_CachedSmallChange)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedSmallChange )( 
             __RPC__in IUIAutomationRangeValuePattern * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         END_INTERFACE
     } IUIAutomationRangeValuePatternVtbl;
@@ -5374,48 +5842,64 @@ EXTERN_C const IID IID_IUIAutomationScrollPattern;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Scroll( 
-            /* [in] */ enum ScrollAmount horizontalAmount,
-            /* [in] */ enum ScrollAmount verticalAmount) = 0;
+            /* [annotation][in] */ 
+            _In_  enum ScrollAmount horizontalAmount,
+            /* [annotation][in] */ 
+            _In_  enum ScrollAmount verticalAmount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetScrollPercent( 
-            /* [in] */ double horizontalPercent,
-            /* [in] */ double verticalPercent) = 0;
+            /* [annotation][in] */ 
+            _In_  double horizontalPercent,
+            /* [annotation][in] */ 
+            _In_  double verticalPercent) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentHorizontalScrollPercent( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentVerticalScrollPercent( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentHorizontalViewSize( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentVerticalViewSize( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentHorizontallyScrollable( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentVerticallyScrollable( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedHorizontalScrollPercent( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedVerticalScrollPercent( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedHorizontalViewSize( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedVerticalViewSize( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedHorizontallyScrollable( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedVerticallyScrollable( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
     };
     
@@ -5429,7 +5913,8 @@ EXTERN_C const IID IID_IUIAutomationScrollPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationScrollPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5444,74 +5929,90 @@ EXTERN_C const IID IID_IUIAutomationScrollPattern;
         DECLSPEC_XFGVIRT(IUIAutomationScrollPattern, Scroll)
         HRESULT ( STDMETHODCALLTYPE *Scroll )( 
             __RPC__in IUIAutomationScrollPattern * This,
-            /* [in] */ enum ScrollAmount horizontalAmount,
-            /* [in] */ enum ScrollAmount verticalAmount);
+            /* [annotation][in] */ 
+            _In_  enum ScrollAmount horizontalAmount,
+            /* [annotation][in] */ 
+            _In_  enum ScrollAmount verticalAmount);
         
         DECLSPEC_XFGVIRT(IUIAutomationScrollPattern, SetScrollPercent)
         HRESULT ( STDMETHODCALLTYPE *SetScrollPercent )( 
             __RPC__in IUIAutomationScrollPattern * This,
-            /* [in] */ double horizontalPercent,
-            /* [in] */ double verticalPercent);
+            /* [annotation][in] */ 
+            _In_  double horizontalPercent,
+            /* [annotation][in] */ 
+            _In_  double verticalPercent);
         
         DECLSPEC_XFGVIRT(IUIAutomationScrollPattern, get_CurrentHorizontalScrollPercent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHorizontalScrollPercent )( 
             __RPC__in IUIAutomationScrollPattern * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationScrollPattern, get_CurrentVerticalScrollPercent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentVerticalScrollPercent )( 
             __RPC__in IUIAutomationScrollPattern * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationScrollPattern, get_CurrentHorizontalViewSize)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHorizontalViewSize )( 
             __RPC__in IUIAutomationScrollPattern * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationScrollPattern, get_CurrentVerticalViewSize)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentVerticalViewSize )( 
             __RPC__in IUIAutomationScrollPattern * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationScrollPattern, get_CurrentHorizontallyScrollable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHorizontallyScrollable )( 
             __RPC__in IUIAutomationScrollPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationScrollPattern, get_CurrentVerticallyScrollable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentVerticallyScrollable )( 
             __RPC__in IUIAutomationScrollPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationScrollPattern, get_CachedHorizontalScrollPercent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHorizontalScrollPercent )( 
             __RPC__in IUIAutomationScrollPattern * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationScrollPattern, get_CachedVerticalScrollPercent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedVerticalScrollPercent )( 
             __RPC__in IUIAutomationScrollPattern * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationScrollPattern, get_CachedHorizontalViewSize)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHorizontalViewSize )( 
             __RPC__in IUIAutomationScrollPattern * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationScrollPattern, get_CachedVerticalViewSize)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedVerticalViewSize )( 
             __RPC__in IUIAutomationScrollPattern * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationScrollPattern, get_CachedHorizontallyScrollable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHorizontallyScrollable )( 
             __RPC__in IUIAutomationScrollPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationScrollPattern, get_CachedVerticallyScrollable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedVerticallyScrollable )( 
             __RPC__in IUIAutomationScrollPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         END_INTERFACE
     } IUIAutomationScrollPatternVtbl;
@@ -5618,7 +6119,8 @@ EXTERN_C const IID IID_IUIAutomationScrollItemPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationScrollItemPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5687,22 +6189,28 @@ EXTERN_C const IID IID_IUIAutomationSelectionPattern;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCurrentSelection( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentCanSelectMultiple( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentIsSelectionRequired( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCachedSelection( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedCanSelectMultiple( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedIsSelectionRequired( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
     };
     
@@ -5716,7 +6224,8 @@ EXTERN_C const IID IID_IUIAutomationSelectionPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationSelectionPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5731,32 +6240,38 @@ EXTERN_C const IID IID_IUIAutomationSelectionPattern;
         DECLSPEC_XFGVIRT(IUIAutomationSelectionPattern, GetCurrentSelection)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentSelection )( 
             __RPC__in IUIAutomationSelectionPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSelectionPattern, get_CurrentCanSelectMultiple)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCanSelectMultiple )( 
             __RPC__in IUIAutomationSelectionPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSelectionPattern, get_CurrentIsSelectionRequired)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsSelectionRequired )( 
             __RPC__in IUIAutomationSelectionPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSelectionPattern, GetCachedSelection)
         HRESULT ( STDMETHODCALLTYPE *GetCachedSelection )( 
             __RPC__in IUIAutomationSelectionPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSelectionPattern, get_CachedCanSelectMultiple)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedCanSelectMultiple )( 
             __RPC__in IUIAutomationSelectionPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSelectionPattern, get_CachedIsSelectionRequired)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsSelectionRequired )( 
             __RPC__in IUIAutomationSelectionPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         END_INTERFACE
     } IUIAutomationSelectionPatternVtbl;
@@ -5826,28 +6341,36 @@ EXTERN_C const IID IID_IUIAutomationSelectionPattern2;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentFirstSelectedItem( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentLastSelectedItem( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentCurrentSelectedItem( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentItemCount( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedFirstSelectedItem( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedLastSelectedItem( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedCurrentSelectedItem( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedItemCount( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
     };
     
@@ -5861,7 +6384,8 @@ EXTERN_C const IID IID_IUIAutomationSelectionPattern2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationSelectionPattern2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5876,72 +6400,86 @@ EXTERN_C const IID IID_IUIAutomationSelectionPattern2;
         DECLSPEC_XFGVIRT(IUIAutomationSelectionPattern, GetCurrentSelection)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentSelection )( 
             __RPC__in IUIAutomationSelectionPattern2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSelectionPattern, get_CurrentCanSelectMultiple)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCanSelectMultiple )( 
             __RPC__in IUIAutomationSelectionPattern2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSelectionPattern, get_CurrentIsSelectionRequired)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsSelectionRequired )( 
             __RPC__in IUIAutomationSelectionPattern2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSelectionPattern, GetCachedSelection)
         HRESULT ( STDMETHODCALLTYPE *GetCachedSelection )( 
             __RPC__in IUIAutomationSelectionPattern2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSelectionPattern, get_CachedCanSelectMultiple)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedCanSelectMultiple )( 
             __RPC__in IUIAutomationSelectionPattern2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSelectionPattern, get_CachedIsSelectionRequired)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsSelectionRequired )( 
             __RPC__in IUIAutomationSelectionPattern2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSelectionPattern2, get_CurrentFirstSelectedItem)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFirstSelectedItem )( 
             __RPC__in IUIAutomationSelectionPattern2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSelectionPattern2, get_CurrentLastSelectedItem)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLastSelectedItem )( 
             __RPC__in IUIAutomationSelectionPattern2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSelectionPattern2, get_CurrentCurrentSelectedItem)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCurrentSelectedItem )( 
             __RPC__in IUIAutomationSelectionPattern2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSelectionPattern2, get_CurrentItemCount)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentItemCount )( 
             __RPC__in IUIAutomationSelectionPattern2 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSelectionPattern2, get_CachedFirstSelectedItem)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFirstSelectedItem )( 
             __RPC__in IUIAutomationSelectionPattern2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSelectionPattern2, get_CachedLastSelectedItem)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLastSelectedItem )( 
             __RPC__in IUIAutomationSelectionPattern2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSelectionPattern2, get_CachedCurrentSelectedItem)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedCurrentSelectedItem )( 
             __RPC__in IUIAutomationSelectionPattern2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSelectionPattern2, get_CachedItemCount)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedItemCount )( 
             __RPC__in IUIAutomationSelectionPattern2 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         END_INTERFACE
     } IUIAutomationSelectionPattern2Vtbl;
@@ -6042,16 +6580,20 @@ EXTERN_C const IID IID_IUIAutomationSelectionItemPattern;
         virtual HRESULT STDMETHODCALLTYPE RemoveFromSelection( void) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentIsSelected( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentSelectionContainer( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedIsSelected( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedSelectionContainer( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal) = 0;
         
     };
     
@@ -6065,7 +6607,8 @@ EXTERN_C const IID IID_IUIAutomationSelectionItemPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationSelectionItemPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6092,22 +6635,26 @@ EXTERN_C const IID IID_IUIAutomationSelectionItemPattern;
         DECLSPEC_XFGVIRT(IUIAutomationSelectionItemPattern, get_CurrentIsSelected)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsSelected )( 
             __RPC__in IUIAutomationSelectionItemPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSelectionItemPattern, get_CurrentSelectionContainer)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentSelectionContainer )( 
             __RPC__in IUIAutomationSelectionItemPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSelectionItemPattern, get_CachedIsSelected)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsSelected )( 
             __RPC__in IUIAutomationSelectionItemPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSelectionItemPattern, get_CachedSelectionContainer)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedSelectionContainer )( 
             __RPC__in IUIAutomationSelectionItemPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         END_INTERFACE
     } IUIAutomationSelectionItemPatternVtbl;
@@ -6180,7 +6727,8 @@ EXTERN_C const IID IID_IUIAutomationSynchronizedInputPattern;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE StartListening( 
-            /* [in] */ enum SynchronizedInputType inputType) = 0;
+            /* [annotation][in] */ 
+            _In_  enum SynchronizedInputType inputType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Cancel( void) = 0;
         
@@ -6196,7 +6744,8 @@ EXTERN_C const IID IID_IUIAutomationSynchronizedInputPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationSynchronizedInputPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6211,7 +6760,8 @@ EXTERN_C const IID IID_IUIAutomationSynchronizedInputPattern;
         DECLSPEC_XFGVIRT(IUIAutomationSynchronizedInputPattern, StartListening)
         HRESULT ( STDMETHODCALLTYPE *StartListening )( 
             __RPC__in IUIAutomationSynchronizedInputPattern * This,
-            /* [in] */ enum SynchronizedInputType inputType);
+            /* [annotation][in] */ 
+            _In_  enum SynchronizedInputType inputType);
         
         DECLSPEC_XFGVIRT(IUIAutomationSynchronizedInputPattern, Cancel)
         HRESULT ( STDMETHODCALLTYPE *Cancel )( 
@@ -6273,22 +6823,28 @@ EXTERN_C const IID IID_IUIAutomationTablePattern;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCurrentRowHeaders( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentColumnHeaders( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentRowOrColumnMajor( 
-            /* [retval][out] */ __RPC__out enum RowOrColumnMajor *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum RowOrColumnMajor *retVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCachedRowHeaders( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCachedColumnHeaders( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedRowOrColumnMajor( 
-            /* [retval][out] */ __RPC__out enum RowOrColumnMajor *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum RowOrColumnMajor *retVal) = 0;
         
     };
     
@@ -6302,7 +6858,8 @@ EXTERN_C const IID IID_IUIAutomationTablePattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationTablePattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6317,32 +6874,38 @@ EXTERN_C const IID IID_IUIAutomationTablePattern;
         DECLSPEC_XFGVIRT(IUIAutomationTablePattern, GetCurrentRowHeaders)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentRowHeaders )( 
             __RPC__in IUIAutomationTablePattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTablePattern, GetCurrentColumnHeaders)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentColumnHeaders )( 
             __RPC__in IUIAutomationTablePattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTablePattern, get_CurrentRowOrColumnMajor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentRowOrColumnMajor )( 
             __RPC__in IUIAutomationTablePattern * This,
-            /* [retval][out] */ __RPC__out enum RowOrColumnMajor *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum RowOrColumnMajor *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTablePattern, GetCachedRowHeaders)
         HRESULT ( STDMETHODCALLTYPE *GetCachedRowHeaders )( 
             __RPC__in IUIAutomationTablePattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTablePattern, GetCachedColumnHeaders)
         HRESULT ( STDMETHODCALLTYPE *GetCachedColumnHeaders )( 
             __RPC__in IUIAutomationTablePattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTablePattern, get_CachedRowOrColumnMajor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedRowOrColumnMajor )( 
             __RPC__in IUIAutomationTablePattern * This,
-            /* [retval][out] */ __RPC__out enum RowOrColumnMajor *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum RowOrColumnMajor *retVal);
         
         END_INTERFACE
     } IUIAutomationTablePatternVtbl;
@@ -6412,16 +6975,20 @@ EXTERN_C const IID IID_IUIAutomationTableItemPattern;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCurrentRowHeaderItems( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentColumnHeaderItems( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCachedRowHeaderItems( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCachedColumnHeaderItems( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
     };
     
@@ -6435,7 +7002,8 @@ EXTERN_C const IID IID_IUIAutomationTableItemPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationTableItemPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6450,22 +7018,26 @@ EXTERN_C const IID IID_IUIAutomationTableItemPattern;
         DECLSPEC_XFGVIRT(IUIAutomationTableItemPattern, GetCurrentRowHeaderItems)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentRowHeaderItems )( 
             __RPC__in IUIAutomationTableItemPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTableItemPattern, GetCurrentColumnHeaderItems)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentColumnHeaderItems )( 
             __RPC__in IUIAutomationTableItemPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTableItemPattern, GetCachedRowHeaderItems)
         HRESULT ( STDMETHODCALLTYPE *GetCachedRowHeaderItems )( 
             __RPC__in IUIAutomationTableItemPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTableItemPattern, GetCachedColumnHeaderItems)
         HRESULT ( STDMETHODCALLTYPE *GetCachedColumnHeaderItems )( 
             __RPC__in IUIAutomationTableItemPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         END_INTERFACE
     } IUIAutomationTableItemPatternVtbl;
@@ -6531,10 +7103,12 @@ EXTERN_C const IID IID_IUIAutomationTogglePattern;
         virtual HRESULT STDMETHODCALLTYPE Toggle( void) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentToggleState( 
-            /* [retval][out] */ __RPC__out enum ToggleState *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum ToggleState *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedToggleState( 
-            /* [retval][out] */ __RPC__out enum ToggleState *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum ToggleState *retVal) = 0;
         
     };
     
@@ -6548,7 +7122,8 @@ EXTERN_C const IID IID_IUIAutomationTogglePattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationTogglePattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6567,12 +7142,14 @@ EXTERN_C const IID IID_IUIAutomationTogglePattern;
         DECLSPEC_XFGVIRT(IUIAutomationTogglePattern, get_CurrentToggleState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentToggleState )( 
             __RPC__in IUIAutomationTogglePattern * This,
-            /* [retval][out] */ __RPC__out enum ToggleState *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum ToggleState *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTogglePattern, get_CachedToggleState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedToggleState )( 
             __RPC__in IUIAutomationTogglePattern * This,
-            /* [retval][out] */ __RPC__out enum ToggleState *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum ToggleState *retVal);
         
         END_INTERFACE
     } IUIAutomationTogglePatternVtbl;
@@ -6633,33 +7210,44 @@ EXTERN_C const IID IID_IUIAutomationTransformPattern;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Move( 
-            /* [in] */ double x,
-            /* [in] */ double y) = 0;
+            /* [annotation][in] */ 
+            _In_  double x,
+            /* [annotation][in] */ 
+            _In_  double y) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Resize( 
-            /* [in] */ double width,
-            /* [in] */ double height) = 0;
+            /* [annotation][in] */ 
+            _In_  double width,
+            /* [annotation][in] */ 
+            _In_  double height) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Rotate( 
-            /* [in] */ double degrees) = 0;
+            /* [annotation][in] */ 
+            _In_  double degrees) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentCanMove( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentCanResize( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentCanRotate( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedCanMove( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedCanResize( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedCanRotate( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
     };
     
@@ -6673,7 +7261,8 @@ EXTERN_C const IID IID_IUIAutomationTransformPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationTransformPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6688,49 +7277,60 @@ EXTERN_C const IID IID_IUIAutomationTransformPattern;
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern, Move)
         HRESULT ( STDMETHODCALLTYPE *Move )( 
             __RPC__in IUIAutomationTransformPattern * This,
-            /* [in] */ double x,
-            /* [in] */ double y);
+            /* [annotation][in] */ 
+            _In_  double x,
+            /* [annotation][in] */ 
+            _In_  double y);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern, Resize)
         HRESULT ( STDMETHODCALLTYPE *Resize )( 
             __RPC__in IUIAutomationTransformPattern * This,
-            /* [in] */ double width,
-            /* [in] */ double height);
+            /* [annotation][in] */ 
+            _In_  double width,
+            /* [annotation][in] */ 
+            _In_  double height);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern, Rotate)
         HRESULT ( STDMETHODCALLTYPE *Rotate )( 
             __RPC__in IUIAutomationTransformPattern * This,
-            /* [in] */ double degrees);
+            /* [annotation][in] */ 
+            _In_  double degrees);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern, get_CurrentCanMove)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCanMove )( 
             __RPC__in IUIAutomationTransformPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern, get_CurrentCanResize)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCanResize )( 
             __RPC__in IUIAutomationTransformPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern, get_CurrentCanRotate)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCanRotate )( 
             __RPC__in IUIAutomationTransformPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern, get_CachedCanMove)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedCanMove )( 
             __RPC__in IUIAutomationTransformPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern, get_CachedCanResize)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedCanResize )( 
             __RPC__in IUIAutomationTransformPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern, get_CachedCanRotate)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedCanRotate )( 
             __RPC__in IUIAutomationTransformPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         END_INTERFACE
     } IUIAutomationTransformPatternVtbl;
@@ -6809,19 +7409,24 @@ EXTERN_C const IID IID_IUIAutomationValuePattern;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetValue( 
-            /* [in] */ __RPC__in BSTR val) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR val) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentValue( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentIsReadOnly( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedValue( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedIsReadOnly( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
     };
     
@@ -6835,7 +7440,8 @@ EXTERN_C const IID IID_IUIAutomationValuePattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationValuePattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6850,27 +7456,32 @@ EXTERN_C const IID IID_IUIAutomationValuePattern;
         DECLSPEC_XFGVIRT(IUIAutomationValuePattern, SetValue)
         HRESULT ( STDMETHODCALLTYPE *SetValue )( 
             __RPC__in IUIAutomationValuePattern * This,
-            /* [in] */ __RPC__in BSTR val);
+            /* [annotation][in] */ 
+            _In_  BSTR val);
         
         DECLSPEC_XFGVIRT(IUIAutomationValuePattern, get_CurrentValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentValue )( 
             __RPC__in IUIAutomationValuePattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationValuePattern, get_CurrentIsReadOnly)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsReadOnly )( 
             __RPC__in IUIAutomationValuePattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationValuePattern, get_CachedValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedValue )( 
             __RPC__in IUIAutomationValuePattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationValuePattern, get_CachedIsReadOnly)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsReadOnly )( 
             __RPC__in IUIAutomationValuePattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         END_INTERFACE
     } IUIAutomationValuePatternVtbl;
@@ -6939,47 +7550,62 @@ EXTERN_C const IID IID_IUIAutomationWindowPattern;
         virtual HRESULT STDMETHODCALLTYPE Close( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WaitForInputIdle( 
-            /* [in] */ int milliseconds,
-            /* [retval][out] */ __RPC__out BOOL *success) = 0;
+            /* [annotation][in] */ 
+            _In_  int milliseconds,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *success) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetWindowVisualState( 
-            /* [in] */ enum WindowVisualState state) = 0;
+            /* [annotation][in] */ 
+            _In_  enum WindowVisualState state) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentCanMaximize( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentCanMinimize( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentIsModal( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentIsTopmost( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentWindowVisualState( 
-            /* [retval][out] */ __RPC__out enum WindowVisualState *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum WindowVisualState *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentWindowInteractionState( 
-            /* [retval][out] */ __RPC__out enum WindowInteractionState *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum WindowInteractionState *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedCanMaximize( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedCanMinimize( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedIsModal( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedIsTopmost( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedWindowVisualState( 
-            /* [retval][out] */ __RPC__out enum WindowVisualState *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum WindowVisualState *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedWindowInteractionState( 
-            /* [retval][out] */ __RPC__out enum WindowInteractionState *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum WindowInteractionState *retVal) = 0;
         
     };
     
@@ -6993,7 +7619,8 @@ EXTERN_C const IID IID_IUIAutomationWindowPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationWindowPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7012,73 +7639,88 @@ EXTERN_C const IID IID_IUIAutomationWindowPattern;
         DECLSPEC_XFGVIRT(IUIAutomationWindowPattern, WaitForInputIdle)
         HRESULT ( STDMETHODCALLTYPE *WaitForInputIdle )( 
             __RPC__in IUIAutomationWindowPattern * This,
-            /* [in] */ int milliseconds,
-            /* [retval][out] */ __RPC__out BOOL *success);
+            /* [annotation][in] */ 
+            _In_  int milliseconds,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *success);
         
         DECLSPEC_XFGVIRT(IUIAutomationWindowPattern, SetWindowVisualState)
         HRESULT ( STDMETHODCALLTYPE *SetWindowVisualState )( 
             __RPC__in IUIAutomationWindowPattern * This,
-            /* [in] */ enum WindowVisualState state);
+            /* [annotation][in] */ 
+            _In_  enum WindowVisualState state);
         
         DECLSPEC_XFGVIRT(IUIAutomationWindowPattern, get_CurrentCanMaximize)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCanMaximize )( 
             __RPC__in IUIAutomationWindowPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationWindowPattern, get_CurrentCanMinimize)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCanMinimize )( 
             __RPC__in IUIAutomationWindowPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationWindowPattern, get_CurrentIsModal)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsModal )( 
             __RPC__in IUIAutomationWindowPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationWindowPattern, get_CurrentIsTopmost)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsTopmost )( 
             __RPC__in IUIAutomationWindowPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationWindowPattern, get_CurrentWindowVisualState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentWindowVisualState )( 
             __RPC__in IUIAutomationWindowPattern * This,
-            /* [retval][out] */ __RPC__out enum WindowVisualState *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum WindowVisualState *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationWindowPattern, get_CurrentWindowInteractionState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentWindowInteractionState )( 
             __RPC__in IUIAutomationWindowPattern * This,
-            /* [retval][out] */ __RPC__out enum WindowInteractionState *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum WindowInteractionState *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationWindowPattern, get_CachedCanMaximize)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedCanMaximize )( 
             __RPC__in IUIAutomationWindowPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationWindowPattern, get_CachedCanMinimize)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedCanMinimize )( 
             __RPC__in IUIAutomationWindowPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationWindowPattern, get_CachedIsModal)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsModal )( 
             __RPC__in IUIAutomationWindowPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationWindowPattern, get_CachedIsTopmost)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsTopmost )( 
             __RPC__in IUIAutomationWindowPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationWindowPattern, get_CachedWindowVisualState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedWindowVisualState )( 
             __RPC__in IUIAutomationWindowPattern * This,
-            /* [retval][out] */ __RPC__out enum WindowVisualState *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum WindowVisualState *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationWindowPattern, get_CachedWindowInteractionState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedWindowInteractionState )( 
             __RPC__in IUIAutomationWindowPattern * This,
-            /* [retval][out] */ __RPC__out enum WindowInteractionState *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum WindowInteractionState *retVal);
         
         END_INTERFACE
     } IUIAutomationWindowPatternVtbl;
@@ -7175,62 +7817,94 @@ EXTERN_C const IID IID_IUIAutomationTextRange;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **clonedRange) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **clonedRange) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Compare( 
-            /* [in] */ __RPC__in_opt IUIAutomationTextRange *range,
-            /* [retval][out] */ __RPC__out BOOL *areSame) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextRange *range,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *areSame) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CompareEndpoints( 
-            /* [in] */ enum TextPatternRangeEndpoint srcEndPoint,
-            /* [in] */ __RPC__in_opt IUIAutomationTextRange *range,
-            /* [in] */ enum TextPatternRangeEndpoint targetEndPoint,
-            /* [retval][out] */ __RPC__out int *compValue) = 0;
+            /* [annotation][in] */ 
+            _In_  enum TextPatternRangeEndpoint srcEndPoint,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextRange *range,
+            /* [annotation][in] */ 
+            _In_  enum TextPatternRangeEndpoint targetEndPoint,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *compValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ExpandToEnclosingUnit( 
-            /* [in] */ enum TextUnit textUnit) = 0;
+            /* [annotation][in] */ 
+            _In_  enum TextUnit textUnit) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FindAttribute( 
-            /* [in] */ TEXTATTRIBUTEID attr,
-            /* [in] */ VARIANT val,
-            /* [in] */ BOOL backward,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **found) = 0;
+            /* [annotation][in] */ 
+            _In_  TEXTATTRIBUTEID attr,
+            /* [annotation][in] */ 
+            _In_  VARIANT val,
+            /* [annotation][in] */ 
+            _In_  BOOL backward,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **found) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FindText( 
-            /* [in] */ __RPC__in BSTR text,
-            /* [in] */ BOOL backward,
-            /* [in] */ BOOL ignoreCase,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **found) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR text,
+            /* [annotation][in] */ 
+            _In_  BOOL backward,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreCase,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **found) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAttributeValue( 
-            /* [in] */ TEXTATTRIBUTEID attr,
-            /* [retval][out] */ __RPC__out VARIANT *value) = 0;
+            /* [annotation][in] */ 
+            _In_  TEXTATTRIBUTEID attr,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *value) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBoundingRectangles( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *boundingRects) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *boundingRects) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEnclosingElement( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **enclosingElement) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **enclosingElement) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetText( 
-            /* [in] */ int maxLength,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *text) = 0;
+            /* [annotation][in] */ 
+            _In_  int maxLength,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *text) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Move( 
-            /* [in] */ enum TextUnit unit,
-            /* [in] */ int count,
-            /* [retval][out] */ __RPC__out int *moved) = 0;
+            /* [annotation][in] */ 
+            _In_  enum TextUnit unit,
+            /* [annotation][in] */ 
+            _In_  int count,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *moved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE MoveEndpointByUnit( 
-            /* [in] */ enum TextPatternRangeEndpoint endpoint,
-            /* [in] */ enum TextUnit unit,
-            /* [in] */ int count,
-            /* [retval][out] */ __RPC__out int *moved) = 0;
+            /* [annotation][in] */ 
+            _In_  enum TextPatternRangeEndpoint endpoint,
+            /* [annotation][in] */ 
+            _In_  enum TextUnit unit,
+            /* [annotation][in] */ 
+            _In_  int count,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *moved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE MoveEndpointByRange( 
-            /* [in] */ enum TextPatternRangeEndpoint srcEndPoint,
-            /* [in] */ __RPC__in_opt IUIAutomationTextRange *range,
-            /* [in] */ enum TextPatternRangeEndpoint targetEndPoint) = 0;
+            /* [annotation][in] */ 
+            _In_  enum TextPatternRangeEndpoint srcEndPoint,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextRange *range,
+            /* [annotation][in] */ 
+            _In_  enum TextPatternRangeEndpoint targetEndPoint) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Select( void) = 0;
         
@@ -7239,10 +7913,12 @@ EXTERN_C const IID IID_IUIAutomationTextRange;
         virtual HRESULT STDMETHODCALLTYPE RemoveFromSelection( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ScrollIntoView( 
-            /* [in] */ BOOL alignToTop) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL alignToTop) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetChildren( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **children) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **children) = 0;
         
     };
     
@@ -7256,7 +7932,8 @@ EXTERN_C const IID IID_IUIAutomationTextRange;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationTextRange * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7271,86 +7948,118 @@ EXTERN_C const IID IID_IUIAutomationTextRange;
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IUIAutomationTextRange * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **clonedRange);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **clonedRange);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, Compare)
         HRESULT ( STDMETHODCALLTYPE *Compare )( 
             __RPC__in IUIAutomationTextRange * This,
-            /* [in] */ __RPC__in_opt IUIAutomationTextRange *range,
-            /* [retval][out] */ __RPC__out BOOL *areSame);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextRange *range,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *areSame);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, CompareEndpoints)
         HRESULT ( STDMETHODCALLTYPE *CompareEndpoints )( 
             __RPC__in IUIAutomationTextRange * This,
-            /* [in] */ enum TextPatternRangeEndpoint srcEndPoint,
-            /* [in] */ __RPC__in_opt IUIAutomationTextRange *range,
-            /* [in] */ enum TextPatternRangeEndpoint targetEndPoint,
-            /* [retval][out] */ __RPC__out int *compValue);
+            /* [annotation][in] */ 
+            _In_  enum TextPatternRangeEndpoint srcEndPoint,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextRange *range,
+            /* [annotation][in] */ 
+            _In_  enum TextPatternRangeEndpoint targetEndPoint,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *compValue);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, ExpandToEnclosingUnit)
         HRESULT ( STDMETHODCALLTYPE *ExpandToEnclosingUnit )( 
             __RPC__in IUIAutomationTextRange * This,
-            /* [in] */ enum TextUnit textUnit);
+            /* [annotation][in] */ 
+            _In_  enum TextUnit textUnit);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, FindAttribute)
         HRESULT ( STDMETHODCALLTYPE *FindAttribute )( 
             __RPC__in IUIAutomationTextRange * This,
-            /* [in] */ TEXTATTRIBUTEID attr,
-            /* [in] */ VARIANT val,
-            /* [in] */ BOOL backward,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **found);
+            /* [annotation][in] */ 
+            _In_  TEXTATTRIBUTEID attr,
+            /* [annotation][in] */ 
+            _In_  VARIANT val,
+            /* [annotation][in] */ 
+            _In_  BOOL backward,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, FindText)
         HRESULT ( STDMETHODCALLTYPE *FindText )( 
             __RPC__in IUIAutomationTextRange * This,
-            /* [in] */ __RPC__in BSTR text,
-            /* [in] */ BOOL backward,
-            /* [in] */ BOOL ignoreCase,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **found);
+            /* [annotation][in] */ 
+            _In_  BSTR text,
+            /* [annotation][in] */ 
+            _In_  BOOL backward,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreCase,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, GetAttributeValue)
         HRESULT ( STDMETHODCALLTYPE *GetAttributeValue )( 
             __RPC__in IUIAutomationTextRange * This,
-            /* [in] */ TEXTATTRIBUTEID attr,
-            /* [retval][out] */ __RPC__out VARIANT *value);
+            /* [annotation][in] */ 
+            _In_  TEXTATTRIBUTEID attr,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *value);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, GetBoundingRectangles)
         HRESULT ( STDMETHODCALLTYPE *GetBoundingRectangles )( 
             __RPC__in IUIAutomationTextRange * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *boundingRects);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *boundingRects);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, GetEnclosingElement)
         HRESULT ( STDMETHODCALLTYPE *GetEnclosingElement )( 
             __RPC__in IUIAutomationTextRange * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **enclosingElement);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **enclosingElement);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             __RPC__in IUIAutomationTextRange * This,
-            /* [in] */ int maxLength,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *text);
+            /* [annotation][in] */ 
+            _In_  int maxLength,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *text);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, Move)
         HRESULT ( STDMETHODCALLTYPE *Move )( 
             __RPC__in IUIAutomationTextRange * This,
-            /* [in] */ enum TextUnit unit,
-            /* [in] */ int count,
-            /* [retval][out] */ __RPC__out int *moved);
+            /* [annotation][in] */ 
+            _In_  enum TextUnit unit,
+            /* [annotation][in] */ 
+            _In_  int count,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *moved);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, MoveEndpointByUnit)
         HRESULT ( STDMETHODCALLTYPE *MoveEndpointByUnit )( 
             __RPC__in IUIAutomationTextRange * This,
-            /* [in] */ enum TextPatternRangeEndpoint endpoint,
-            /* [in] */ enum TextUnit unit,
-            /* [in] */ int count,
-            /* [retval][out] */ __RPC__out int *moved);
+            /* [annotation][in] */ 
+            _In_  enum TextPatternRangeEndpoint endpoint,
+            /* [annotation][in] */ 
+            _In_  enum TextUnit unit,
+            /* [annotation][in] */ 
+            _In_  int count,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *moved);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, MoveEndpointByRange)
         HRESULT ( STDMETHODCALLTYPE *MoveEndpointByRange )( 
             __RPC__in IUIAutomationTextRange * This,
-            /* [in] */ enum TextPatternRangeEndpoint srcEndPoint,
-            /* [in] */ __RPC__in_opt IUIAutomationTextRange *range,
-            /* [in] */ enum TextPatternRangeEndpoint targetEndPoint);
+            /* [annotation][in] */ 
+            _In_  enum TextPatternRangeEndpoint srcEndPoint,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextRange *range,
+            /* [annotation][in] */ 
+            _In_  enum TextPatternRangeEndpoint targetEndPoint);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, Select)
         HRESULT ( STDMETHODCALLTYPE *Select )( 
@@ -7367,12 +8076,14 @@ EXTERN_C const IID IID_IUIAutomationTextRange;
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, ScrollIntoView)
         HRESULT ( STDMETHODCALLTYPE *ScrollIntoView )( 
             __RPC__in IUIAutomationTextRange * This,
-            /* [in] */ BOOL alignToTop);
+            /* [annotation][in] */ 
+            _In_  BOOL alignToTop);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, GetChildren)
         HRESULT ( STDMETHODCALLTYPE *GetChildren )( 
             __RPC__in IUIAutomationTextRange * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **children);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **children);
         
         END_INTERFACE
     } IUIAutomationTextRangeVtbl;
@@ -7491,7 +8202,8 @@ EXTERN_C const IID IID_IUIAutomationTextRange2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationTextRange2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7506,86 +8218,118 @@ EXTERN_C const IID IID_IUIAutomationTextRange2;
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IUIAutomationTextRange2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **clonedRange);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **clonedRange);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, Compare)
         HRESULT ( STDMETHODCALLTYPE *Compare )( 
             __RPC__in IUIAutomationTextRange2 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationTextRange *range,
-            /* [retval][out] */ __RPC__out BOOL *areSame);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextRange *range,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *areSame);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, CompareEndpoints)
         HRESULT ( STDMETHODCALLTYPE *CompareEndpoints )( 
             __RPC__in IUIAutomationTextRange2 * This,
-            /* [in] */ enum TextPatternRangeEndpoint srcEndPoint,
-            /* [in] */ __RPC__in_opt IUIAutomationTextRange *range,
-            /* [in] */ enum TextPatternRangeEndpoint targetEndPoint,
-            /* [retval][out] */ __RPC__out int *compValue);
+            /* [annotation][in] */ 
+            _In_  enum TextPatternRangeEndpoint srcEndPoint,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextRange *range,
+            /* [annotation][in] */ 
+            _In_  enum TextPatternRangeEndpoint targetEndPoint,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *compValue);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, ExpandToEnclosingUnit)
         HRESULT ( STDMETHODCALLTYPE *ExpandToEnclosingUnit )( 
             __RPC__in IUIAutomationTextRange2 * This,
-            /* [in] */ enum TextUnit textUnit);
+            /* [annotation][in] */ 
+            _In_  enum TextUnit textUnit);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, FindAttribute)
         HRESULT ( STDMETHODCALLTYPE *FindAttribute )( 
             __RPC__in IUIAutomationTextRange2 * This,
-            /* [in] */ TEXTATTRIBUTEID attr,
-            /* [in] */ VARIANT val,
-            /* [in] */ BOOL backward,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **found);
+            /* [annotation][in] */ 
+            _In_  TEXTATTRIBUTEID attr,
+            /* [annotation][in] */ 
+            _In_  VARIANT val,
+            /* [annotation][in] */ 
+            _In_  BOOL backward,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, FindText)
         HRESULT ( STDMETHODCALLTYPE *FindText )( 
             __RPC__in IUIAutomationTextRange2 * This,
-            /* [in] */ __RPC__in BSTR text,
-            /* [in] */ BOOL backward,
-            /* [in] */ BOOL ignoreCase,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **found);
+            /* [annotation][in] */ 
+            _In_  BSTR text,
+            /* [annotation][in] */ 
+            _In_  BOOL backward,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreCase,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, GetAttributeValue)
         HRESULT ( STDMETHODCALLTYPE *GetAttributeValue )( 
             __RPC__in IUIAutomationTextRange2 * This,
-            /* [in] */ TEXTATTRIBUTEID attr,
-            /* [retval][out] */ __RPC__out VARIANT *value);
+            /* [annotation][in] */ 
+            _In_  TEXTATTRIBUTEID attr,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *value);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, GetBoundingRectangles)
         HRESULT ( STDMETHODCALLTYPE *GetBoundingRectangles )( 
             __RPC__in IUIAutomationTextRange2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *boundingRects);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *boundingRects);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, GetEnclosingElement)
         HRESULT ( STDMETHODCALLTYPE *GetEnclosingElement )( 
             __RPC__in IUIAutomationTextRange2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **enclosingElement);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **enclosingElement);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             __RPC__in IUIAutomationTextRange2 * This,
-            /* [in] */ int maxLength,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *text);
+            /* [annotation][in] */ 
+            _In_  int maxLength,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *text);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, Move)
         HRESULT ( STDMETHODCALLTYPE *Move )( 
             __RPC__in IUIAutomationTextRange2 * This,
-            /* [in] */ enum TextUnit unit,
-            /* [in] */ int count,
-            /* [retval][out] */ __RPC__out int *moved);
+            /* [annotation][in] */ 
+            _In_  enum TextUnit unit,
+            /* [annotation][in] */ 
+            _In_  int count,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *moved);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, MoveEndpointByUnit)
         HRESULT ( STDMETHODCALLTYPE *MoveEndpointByUnit )( 
             __RPC__in IUIAutomationTextRange2 * This,
-            /* [in] */ enum TextPatternRangeEndpoint endpoint,
-            /* [in] */ enum TextUnit unit,
-            /* [in] */ int count,
-            /* [retval][out] */ __RPC__out int *moved);
+            /* [annotation][in] */ 
+            _In_  enum TextPatternRangeEndpoint endpoint,
+            /* [annotation][in] */ 
+            _In_  enum TextUnit unit,
+            /* [annotation][in] */ 
+            _In_  int count,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *moved);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, MoveEndpointByRange)
         HRESULT ( STDMETHODCALLTYPE *MoveEndpointByRange )( 
             __RPC__in IUIAutomationTextRange2 * This,
-            /* [in] */ enum TextPatternRangeEndpoint srcEndPoint,
-            /* [in] */ __RPC__in_opt IUIAutomationTextRange *range,
-            /* [in] */ enum TextPatternRangeEndpoint targetEndPoint);
+            /* [annotation][in] */ 
+            _In_  enum TextPatternRangeEndpoint srcEndPoint,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextRange *range,
+            /* [annotation][in] */ 
+            _In_  enum TextPatternRangeEndpoint targetEndPoint);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, Select)
         HRESULT ( STDMETHODCALLTYPE *Select )( 
@@ -7602,12 +8346,14 @@ EXTERN_C const IID IID_IUIAutomationTextRange2;
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, ScrollIntoView)
         HRESULT ( STDMETHODCALLTYPE *ScrollIntoView )( 
             __RPC__in IUIAutomationTextRange2 * This,
-            /* [in] */ BOOL alignToTop);
+            /* [annotation][in] */ 
+            _In_  BOOL alignToTop);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, GetChildren)
         HRESULT ( STDMETHODCALLTYPE *GetChildren )( 
             __RPC__in IUIAutomationTextRange2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **children);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **children);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange2, ShowContextMenu)
         HRESULT ( STDMETHODCALLTYPE *ShowContextMenu )( 
@@ -7721,17 +8467,24 @@ EXTERN_C const IID IID_IUIAutomationTextRange3;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetEnclosingElementBuildCache( 
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **enclosingElement) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **enclosingElement) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetChildrenBuildCache( 
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **children) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **children) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAttributeValues( 
-            /* [size_is][in] */ __RPC__in_ecount_full(attributeIdCount) const TEXTATTRIBUTEID *attributeIds,
-            /* [in] */ int attributeIdCount,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *attributeValues) = 0;
+            /* [annotation][size_is][in] */ 
+            _In_reads_(attributeIdCount)  const TEXTATTRIBUTEID *attributeIds,
+            /* [annotation][in] */ 
+            _In_  int attributeIdCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *attributeValues) = 0;
         
     };
     
@@ -7745,7 +8498,8 @@ EXTERN_C const IID IID_IUIAutomationTextRange3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationTextRange3 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7760,86 +8514,118 @@ EXTERN_C const IID IID_IUIAutomationTextRange3;
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IUIAutomationTextRange3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **clonedRange);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **clonedRange);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, Compare)
         HRESULT ( STDMETHODCALLTYPE *Compare )( 
             __RPC__in IUIAutomationTextRange3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationTextRange *range,
-            /* [retval][out] */ __RPC__out BOOL *areSame);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextRange *range,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *areSame);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, CompareEndpoints)
         HRESULT ( STDMETHODCALLTYPE *CompareEndpoints )( 
             __RPC__in IUIAutomationTextRange3 * This,
-            /* [in] */ enum TextPatternRangeEndpoint srcEndPoint,
-            /* [in] */ __RPC__in_opt IUIAutomationTextRange *range,
-            /* [in] */ enum TextPatternRangeEndpoint targetEndPoint,
-            /* [retval][out] */ __RPC__out int *compValue);
+            /* [annotation][in] */ 
+            _In_  enum TextPatternRangeEndpoint srcEndPoint,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextRange *range,
+            /* [annotation][in] */ 
+            _In_  enum TextPatternRangeEndpoint targetEndPoint,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *compValue);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, ExpandToEnclosingUnit)
         HRESULT ( STDMETHODCALLTYPE *ExpandToEnclosingUnit )( 
             __RPC__in IUIAutomationTextRange3 * This,
-            /* [in] */ enum TextUnit textUnit);
+            /* [annotation][in] */ 
+            _In_  enum TextUnit textUnit);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, FindAttribute)
         HRESULT ( STDMETHODCALLTYPE *FindAttribute )( 
             __RPC__in IUIAutomationTextRange3 * This,
-            /* [in] */ TEXTATTRIBUTEID attr,
-            /* [in] */ VARIANT val,
-            /* [in] */ BOOL backward,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **found);
+            /* [annotation][in] */ 
+            _In_  TEXTATTRIBUTEID attr,
+            /* [annotation][in] */ 
+            _In_  VARIANT val,
+            /* [annotation][in] */ 
+            _In_  BOOL backward,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, FindText)
         HRESULT ( STDMETHODCALLTYPE *FindText )( 
             __RPC__in IUIAutomationTextRange3 * This,
-            /* [in] */ __RPC__in BSTR text,
-            /* [in] */ BOOL backward,
-            /* [in] */ BOOL ignoreCase,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **found);
+            /* [annotation][in] */ 
+            _In_  BSTR text,
+            /* [annotation][in] */ 
+            _In_  BOOL backward,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreCase,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, GetAttributeValue)
         HRESULT ( STDMETHODCALLTYPE *GetAttributeValue )( 
             __RPC__in IUIAutomationTextRange3 * This,
-            /* [in] */ TEXTATTRIBUTEID attr,
-            /* [retval][out] */ __RPC__out VARIANT *value);
+            /* [annotation][in] */ 
+            _In_  TEXTATTRIBUTEID attr,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *value);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, GetBoundingRectangles)
         HRESULT ( STDMETHODCALLTYPE *GetBoundingRectangles )( 
             __RPC__in IUIAutomationTextRange3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *boundingRects);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *boundingRects);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, GetEnclosingElement)
         HRESULT ( STDMETHODCALLTYPE *GetEnclosingElement )( 
             __RPC__in IUIAutomationTextRange3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **enclosingElement);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **enclosingElement);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             __RPC__in IUIAutomationTextRange3 * This,
-            /* [in] */ int maxLength,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *text);
+            /* [annotation][in] */ 
+            _In_  int maxLength,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *text);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, Move)
         HRESULT ( STDMETHODCALLTYPE *Move )( 
             __RPC__in IUIAutomationTextRange3 * This,
-            /* [in] */ enum TextUnit unit,
-            /* [in] */ int count,
-            /* [retval][out] */ __RPC__out int *moved);
+            /* [annotation][in] */ 
+            _In_  enum TextUnit unit,
+            /* [annotation][in] */ 
+            _In_  int count,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *moved);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, MoveEndpointByUnit)
         HRESULT ( STDMETHODCALLTYPE *MoveEndpointByUnit )( 
             __RPC__in IUIAutomationTextRange3 * This,
-            /* [in] */ enum TextPatternRangeEndpoint endpoint,
-            /* [in] */ enum TextUnit unit,
-            /* [in] */ int count,
-            /* [retval][out] */ __RPC__out int *moved);
+            /* [annotation][in] */ 
+            _In_  enum TextPatternRangeEndpoint endpoint,
+            /* [annotation][in] */ 
+            _In_  enum TextUnit unit,
+            /* [annotation][in] */ 
+            _In_  int count,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *moved);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, MoveEndpointByRange)
         HRESULT ( STDMETHODCALLTYPE *MoveEndpointByRange )( 
             __RPC__in IUIAutomationTextRange3 * This,
-            /* [in] */ enum TextPatternRangeEndpoint srcEndPoint,
-            /* [in] */ __RPC__in_opt IUIAutomationTextRange *range,
-            /* [in] */ enum TextPatternRangeEndpoint targetEndPoint);
+            /* [annotation][in] */ 
+            _In_  enum TextPatternRangeEndpoint srcEndPoint,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextRange *range,
+            /* [annotation][in] */ 
+            _In_  enum TextPatternRangeEndpoint targetEndPoint);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, Select)
         HRESULT ( STDMETHODCALLTYPE *Select )( 
@@ -7856,12 +8642,14 @@ EXTERN_C const IID IID_IUIAutomationTextRange3;
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, ScrollIntoView)
         HRESULT ( STDMETHODCALLTYPE *ScrollIntoView )( 
             __RPC__in IUIAutomationTextRange3 * This,
-            /* [in] */ BOOL alignToTop);
+            /* [annotation][in] */ 
+            _In_  BOOL alignToTop);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange, GetChildren)
         HRESULT ( STDMETHODCALLTYPE *GetChildren )( 
             __RPC__in IUIAutomationTextRange3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **children);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **children);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange2, ShowContextMenu)
         HRESULT ( STDMETHODCALLTYPE *ShowContextMenu )( 
@@ -7870,21 +8658,28 @@ EXTERN_C const IID IID_IUIAutomationTextRange3;
         DECLSPEC_XFGVIRT(IUIAutomationTextRange3, GetEnclosingElementBuildCache)
         HRESULT ( STDMETHODCALLTYPE *GetEnclosingElementBuildCache )( 
             __RPC__in IUIAutomationTextRange3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **enclosingElement);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **enclosingElement);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange3, GetChildrenBuildCache)
         HRESULT ( STDMETHODCALLTYPE *GetChildrenBuildCache )( 
             __RPC__in IUIAutomationTextRange3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **children);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **children);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRange3, GetAttributeValues)
         HRESULT ( STDMETHODCALLTYPE *GetAttributeValues )( 
             __RPC__in IUIAutomationTextRange3 * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(attributeIdCount) const TEXTATTRIBUTEID *attributeIds,
-            /* [in] */ int attributeIdCount,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *attributeValues);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(attributeIdCount)  const TEXTATTRIBUTEID *attributeIds,
+            /* [annotation][in] */ 
+            _In_  int attributeIdCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *attributeValues);
         
         END_INTERFACE
     } IUIAutomationTextRange3Vtbl;
@@ -8004,11 +8799,14 @@ EXTERN_C const IID IID_IUIAutomationTextRangeArray;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Length( 
-            /* [retval][out] */ __RPC__out int *length) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *length) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetElement( 
-            /* [in] */ int index,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **element) = 0;
+            /* [annotation][in] */ 
+            _In_  int index,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **element) = 0;
         
     };
     
@@ -8022,7 +8820,8 @@ EXTERN_C const IID IID_IUIAutomationTextRangeArray;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationTextRangeArray * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8037,13 +8836,16 @@ EXTERN_C const IID IID_IUIAutomationTextRangeArray;
         DECLSPEC_XFGVIRT(IUIAutomationTextRangeArray, get_Length)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Length )( 
             __RPC__in IUIAutomationTextRangeArray * This,
-            /* [retval][out] */ __RPC__out int *length);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *length);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextRangeArray, GetElement)
         HRESULT ( STDMETHODCALLTYPE *GetElement )( 
             __RPC__in IUIAutomationTextRangeArray * This,
-            /* [in] */ int index,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **element);
+            /* [annotation][in] */ 
+            _In_  int index,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **element);
         
         END_INTERFACE
     } IUIAutomationTextRangeArrayVtbl;
@@ -8101,24 +8903,32 @@ EXTERN_C const IID IID_IUIAutomationTextPattern;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RangeFromPoint( 
-            /* [in] */ POINT pt,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **range) = 0;
+            /* [annotation][in] */ 
+            _In_  POINT pt,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **range) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RangeFromChild( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *child,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **range) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *child,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **range) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSelection( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRangeArray **ranges) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRangeArray **ranges) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVisibleRanges( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRangeArray **ranges) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRangeArray **ranges) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DocumentRange( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **range) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **range) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_SupportedTextSelection( 
-            /* [retval][out] */ __RPC__out enum SupportedTextSelection *supportedTextSelection) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum SupportedTextSelection *supportedTextSelection) = 0;
         
     };
     
@@ -8132,7 +8942,8 @@ EXTERN_C const IID IID_IUIAutomationTextPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationTextPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8147,34 +8958,42 @@ EXTERN_C const IID IID_IUIAutomationTextPattern;
         DECLSPEC_XFGVIRT(IUIAutomationTextPattern, RangeFromPoint)
         HRESULT ( STDMETHODCALLTYPE *RangeFromPoint )( 
             __RPC__in IUIAutomationTextPattern * This,
-            /* [in] */ POINT pt,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **range);
+            /* [annotation][in] */ 
+            _In_  POINT pt,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **range);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextPattern, RangeFromChild)
         HRESULT ( STDMETHODCALLTYPE *RangeFromChild )( 
             __RPC__in IUIAutomationTextPattern * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *child,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **range);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *child,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **range);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextPattern, GetSelection)
         HRESULT ( STDMETHODCALLTYPE *GetSelection )( 
             __RPC__in IUIAutomationTextPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRangeArray **ranges);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRangeArray **ranges);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextPattern, GetVisibleRanges)
         HRESULT ( STDMETHODCALLTYPE *GetVisibleRanges )( 
             __RPC__in IUIAutomationTextPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRangeArray **ranges);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRangeArray **ranges);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextPattern, get_DocumentRange)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DocumentRange )( 
             __RPC__in IUIAutomationTextPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **range);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **range);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextPattern, get_SupportedTextSelection)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedTextSelection )( 
             __RPC__in IUIAutomationTextPattern * This,
-            /* [retval][out] */ __RPC__out enum SupportedTextSelection *supportedTextSelection);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum SupportedTextSelection *supportedTextSelection);
         
         END_INTERFACE
     } IUIAutomationTextPatternVtbl;
@@ -8244,12 +9063,16 @@ EXTERN_C const IID IID_IUIAutomationTextPattern2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RangeFromAnnotation( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *annotation,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **range) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *annotation,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **range) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCaretRange( 
-            /* [out] */ __RPC__out BOOL *isActive,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **range) = 0;
+            /* [annotation][out] */ 
+            _Out_  BOOL *isActive,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **range) = 0;
         
     };
     
@@ -8263,7 +9086,8 @@ EXTERN_C const IID IID_IUIAutomationTextPattern2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationTextPattern2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8278,46 +9102,58 @@ EXTERN_C const IID IID_IUIAutomationTextPattern2;
         DECLSPEC_XFGVIRT(IUIAutomationTextPattern, RangeFromPoint)
         HRESULT ( STDMETHODCALLTYPE *RangeFromPoint )( 
             __RPC__in IUIAutomationTextPattern2 * This,
-            /* [in] */ POINT pt,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **range);
+            /* [annotation][in] */ 
+            _In_  POINT pt,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **range);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextPattern, RangeFromChild)
         HRESULT ( STDMETHODCALLTYPE *RangeFromChild )( 
             __RPC__in IUIAutomationTextPattern2 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *child,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **range);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *child,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **range);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextPattern, GetSelection)
         HRESULT ( STDMETHODCALLTYPE *GetSelection )( 
             __RPC__in IUIAutomationTextPattern2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRangeArray **ranges);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRangeArray **ranges);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextPattern, GetVisibleRanges)
         HRESULT ( STDMETHODCALLTYPE *GetVisibleRanges )( 
             __RPC__in IUIAutomationTextPattern2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRangeArray **ranges);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRangeArray **ranges);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextPattern, get_DocumentRange)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DocumentRange )( 
             __RPC__in IUIAutomationTextPattern2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **range);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **range);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextPattern, get_SupportedTextSelection)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedTextSelection )( 
             __RPC__in IUIAutomationTextPattern2 * This,
-            /* [retval][out] */ __RPC__out enum SupportedTextSelection *supportedTextSelection);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum SupportedTextSelection *supportedTextSelection);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextPattern2, RangeFromAnnotation)
         HRESULT ( STDMETHODCALLTYPE *RangeFromAnnotation )( 
             __RPC__in IUIAutomationTextPattern2 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *annotation,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **range);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *annotation,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **range);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextPattern2, GetCaretRange)
         HRESULT ( STDMETHODCALLTYPE *GetCaretRange )( 
             __RPC__in IUIAutomationTextPattern2 * This,
-            /* [out] */ __RPC__out BOOL *isActive,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **range);
+            /* [annotation][out] */ 
+            _Out_  BOOL *isActive,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **range);
         
         END_INTERFACE
     } IUIAutomationTextPattern2Vtbl;
@@ -8394,10 +9230,12 @@ EXTERN_C const IID IID_IUIAutomationTextEditPattern;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetActiveComposition( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **range) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **range) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetConversionTarget( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **range) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **range) = 0;
         
     };
     
@@ -8411,7 +9249,8 @@ EXTERN_C const IID IID_IUIAutomationTextEditPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationTextEditPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8426,44 +9265,54 @@ EXTERN_C const IID IID_IUIAutomationTextEditPattern;
         DECLSPEC_XFGVIRT(IUIAutomationTextPattern, RangeFromPoint)
         HRESULT ( STDMETHODCALLTYPE *RangeFromPoint )( 
             __RPC__in IUIAutomationTextEditPattern * This,
-            /* [in] */ POINT pt,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **range);
+            /* [annotation][in] */ 
+            _In_  POINT pt,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **range);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextPattern, RangeFromChild)
         HRESULT ( STDMETHODCALLTYPE *RangeFromChild )( 
             __RPC__in IUIAutomationTextEditPattern * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *child,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **range);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *child,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **range);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextPattern, GetSelection)
         HRESULT ( STDMETHODCALLTYPE *GetSelection )( 
             __RPC__in IUIAutomationTextEditPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRangeArray **ranges);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRangeArray **ranges);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextPattern, GetVisibleRanges)
         HRESULT ( STDMETHODCALLTYPE *GetVisibleRanges )( 
             __RPC__in IUIAutomationTextEditPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRangeArray **ranges);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRangeArray **ranges);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextPattern, get_DocumentRange)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DocumentRange )( 
             __RPC__in IUIAutomationTextEditPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **range);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **range);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextPattern, get_SupportedTextSelection)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedTextSelection )( 
             __RPC__in IUIAutomationTextEditPattern * This,
-            /* [retval][out] */ __RPC__out enum SupportedTextSelection *supportedTextSelection);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum SupportedTextSelection *supportedTextSelection);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextEditPattern, GetActiveComposition)
         HRESULT ( STDMETHODCALLTYPE *GetActiveComposition )( 
             __RPC__in IUIAutomationTextEditPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **range);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **range);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextEditPattern, GetConversionTarget)
         HRESULT ( STDMETHODCALLTYPE *GetConversionTarget )( 
             __RPC__in IUIAutomationTextEditPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **range);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **range);
         
         END_INTERFACE
     } IUIAutomationTextEditPatternVtbl;
@@ -8540,8 +9389,10 @@ EXTERN_C const IID IID_IUIAutomationCustomNavigationPattern;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Navigate( 
-            /* [in] */ enum NavigateDirection direction,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **pRetVal) = 0;
+            /* [annotation][in] */ 
+            _In_  enum NavigateDirection direction,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **pRetVal) = 0;
         
     };
     
@@ -8555,7 +9406,8 @@ EXTERN_C const IID IID_IUIAutomationCustomNavigationPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationCustomNavigationPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8570,8 +9422,10 @@ EXTERN_C const IID IID_IUIAutomationCustomNavigationPattern;
         DECLSPEC_XFGVIRT(IUIAutomationCustomNavigationPattern, Navigate)
         HRESULT ( STDMETHODCALLTYPE *Navigate )( 
             __RPC__in IUIAutomationCustomNavigationPattern * This,
-            /* [in] */ enum NavigateDirection direction,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **pRetVal);
+            /* [annotation][in] */ 
+            _In_  enum NavigateDirection direction,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **pRetVal);
         
         END_INTERFACE
     } IUIAutomationCustomNavigationPatternVtbl;
@@ -8626,8 +9480,10 @@ EXTERN_C const IID IID_IUIAutomationActiveTextPositionChangedEventHandler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE HandleActiveTextPositionChangedEvent( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *sender,
-            /* [in] */ __RPC__in_opt IUIAutomationTextRange *range) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *sender,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextRange *range) = 0;
         
     };
     
@@ -8641,7 +9497,8 @@ EXTERN_C const IID IID_IUIAutomationActiveTextPositionChangedEventHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationActiveTextPositionChangedEventHandler * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8656,8 +9513,10 @@ EXTERN_C const IID IID_IUIAutomationActiveTextPositionChangedEventHandler;
         DECLSPEC_XFGVIRT(IUIAutomationActiveTextPositionChangedEventHandler, HandleActiveTextPositionChangedEvent)
         HRESULT ( STDMETHODCALLTYPE *HandleActiveTextPositionChangedEvent )( 
             __RPC__in IUIAutomationActiveTextPositionChangedEventHandler * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *sender,
-            /* [in] */ __RPC__in_opt IUIAutomationTextRange *range);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *sender,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextRange *range);
         
         END_INTERFACE
     } IUIAutomationActiveTextPositionChangedEventHandlerVtbl;
@@ -8720,67 +9579,88 @@ EXTERN_C const IID IID_IUIAutomationLegacyIAccessiblePattern;
             __RPC__in LPCWSTR szValue) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentChildId( 
-            /* [retval][out] */ __RPC__out int *pRetVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszName) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentValue( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszValue) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszValue) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentDescription( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszDescription) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszDescription) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentRole( 
-            /* [retval][out] */ __RPC__out DWORD *pdwRole) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pdwRole) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentState( 
-            /* [retval][out] */ __RPC__out DWORD *pdwState) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pdwState) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentHelp( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszHelp) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszHelp) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentKeyboardShortcut( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszKeyboardShortcut) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszKeyboardShortcut) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentSelection( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **pvarSelectedChildren) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **pvarSelectedChildren) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentDefaultAction( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszDefaultAction) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszDefaultAction) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedChildId( 
-            /* [retval][out] */ __RPC__out int *pRetVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszName) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedValue( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszValue) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszValue) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedDescription( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszDescription) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszDescription) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedRole( 
-            /* [retval][out] */ __RPC__out DWORD *pdwRole) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pdwRole) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedState( 
-            /* [retval][out] */ __RPC__out DWORD *pdwState) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pdwState) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedHelp( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszHelp) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszHelp) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedKeyboardShortcut( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszKeyboardShortcut) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszKeyboardShortcut) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCachedSelection( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **pvarSelectedChildren) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **pvarSelectedChildren) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedDefaultAction( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszDefaultAction) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszDefaultAction) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIAccessible( 
-            /* [retval][out] */ __RPC__deref_out_opt IAccessible **ppAccessible) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IAccessible **ppAccessible) = 0;
         
     };
     
@@ -8794,7 +9674,8 @@ EXTERN_C const IID IID_IUIAutomationLegacyIAccessiblePattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationLegacyIAccessiblePattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8823,107 +9704,128 @@ EXTERN_C const IID IID_IUIAutomationLegacyIAccessiblePattern;
         DECLSPEC_XFGVIRT(IUIAutomationLegacyIAccessiblePattern, get_CurrentChildId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentChildId )( 
             __RPC__in IUIAutomationLegacyIAccessiblePattern * This,
-            /* [retval][out] */ __RPC__out int *pRetVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *pRetVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationLegacyIAccessiblePattern, get_CurrentName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentName )( 
             __RPC__in IUIAutomationLegacyIAccessiblePattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszName);
         
         DECLSPEC_XFGVIRT(IUIAutomationLegacyIAccessiblePattern, get_CurrentValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentValue )( 
             __RPC__in IUIAutomationLegacyIAccessiblePattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszValue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszValue);
         
         DECLSPEC_XFGVIRT(IUIAutomationLegacyIAccessiblePattern, get_CurrentDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentDescription )( 
             __RPC__in IUIAutomationLegacyIAccessiblePattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszDescription);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszDescription);
         
         DECLSPEC_XFGVIRT(IUIAutomationLegacyIAccessiblePattern, get_CurrentRole)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentRole )( 
             __RPC__in IUIAutomationLegacyIAccessiblePattern * This,
-            /* [retval][out] */ __RPC__out DWORD *pdwRole);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pdwRole);
         
         DECLSPEC_XFGVIRT(IUIAutomationLegacyIAccessiblePattern, get_CurrentState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentState )( 
             __RPC__in IUIAutomationLegacyIAccessiblePattern * This,
-            /* [retval][out] */ __RPC__out DWORD *pdwState);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pdwState);
         
         DECLSPEC_XFGVIRT(IUIAutomationLegacyIAccessiblePattern, get_CurrentHelp)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHelp )( 
             __RPC__in IUIAutomationLegacyIAccessiblePattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszHelp);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszHelp);
         
         DECLSPEC_XFGVIRT(IUIAutomationLegacyIAccessiblePattern, get_CurrentKeyboardShortcut)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentKeyboardShortcut )( 
             __RPC__in IUIAutomationLegacyIAccessiblePattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszKeyboardShortcut);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszKeyboardShortcut);
         
         DECLSPEC_XFGVIRT(IUIAutomationLegacyIAccessiblePattern, GetCurrentSelection)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentSelection )( 
             __RPC__in IUIAutomationLegacyIAccessiblePattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **pvarSelectedChildren);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **pvarSelectedChildren);
         
         DECLSPEC_XFGVIRT(IUIAutomationLegacyIAccessiblePattern, get_CurrentDefaultAction)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentDefaultAction )( 
             __RPC__in IUIAutomationLegacyIAccessiblePattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszDefaultAction);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszDefaultAction);
         
         DECLSPEC_XFGVIRT(IUIAutomationLegacyIAccessiblePattern, get_CachedChildId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedChildId )( 
             __RPC__in IUIAutomationLegacyIAccessiblePattern * This,
-            /* [retval][out] */ __RPC__out int *pRetVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *pRetVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationLegacyIAccessiblePattern, get_CachedName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedName )( 
             __RPC__in IUIAutomationLegacyIAccessiblePattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszName);
         
         DECLSPEC_XFGVIRT(IUIAutomationLegacyIAccessiblePattern, get_CachedValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedValue )( 
             __RPC__in IUIAutomationLegacyIAccessiblePattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszValue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszValue);
         
         DECLSPEC_XFGVIRT(IUIAutomationLegacyIAccessiblePattern, get_CachedDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedDescription )( 
             __RPC__in IUIAutomationLegacyIAccessiblePattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszDescription);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszDescription);
         
         DECLSPEC_XFGVIRT(IUIAutomationLegacyIAccessiblePattern, get_CachedRole)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedRole )( 
             __RPC__in IUIAutomationLegacyIAccessiblePattern * This,
-            /* [retval][out] */ __RPC__out DWORD *pdwRole);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pdwRole);
         
         DECLSPEC_XFGVIRT(IUIAutomationLegacyIAccessiblePattern, get_CachedState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedState )( 
             __RPC__in IUIAutomationLegacyIAccessiblePattern * This,
-            /* [retval][out] */ __RPC__out DWORD *pdwState);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pdwState);
         
         DECLSPEC_XFGVIRT(IUIAutomationLegacyIAccessiblePattern, get_CachedHelp)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHelp )( 
             __RPC__in IUIAutomationLegacyIAccessiblePattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszHelp);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszHelp);
         
         DECLSPEC_XFGVIRT(IUIAutomationLegacyIAccessiblePattern, get_CachedKeyboardShortcut)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedKeyboardShortcut )( 
             __RPC__in IUIAutomationLegacyIAccessiblePattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszKeyboardShortcut);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszKeyboardShortcut);
         
         DECLSPEC_XFGVIRT(IUIAutomationLegacyIAccessiblePattern, GetCachedSelection)
         HRESULT ( STDMETHODCALLTYPE *GetCachedSelection )( 
             __RPC__in IUIAutomationLegacyIAccessiblePattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **pvarSelectedChildren);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **pvarSelectedChildren);
         
         DECLSPEC_XFGVIRT(IUIAutomationLegacyIAccessiblePattern, get_CachedDefaultAction)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedDefaultAction )( 
             __RPC__in IUIAutomationLegacyIAccessiblePattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszDefaultAction);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszDefaultAction);
         
         DECLSPEC_XFGVIRT(IUIAutomationLegacyIAccessiblePattern, GetIAccessible)
         HRESULT ( STDMETHODCALLTYPE *GetIAccessible )( 
             __RPC__in IUIAutomationLegacyIAccessiblePattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IAccessible **ppAccessible);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IAccessible **ppAccessible);
         
         END_INTERFACE
     } IUIAutomationLegacyIAccessiblePatternVtbl;
@@ -9047,10 +9949,14 @@ EXTERN_C const IID IID_IUIAutomationItemContainerPattern;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE FindItemByProperty( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *pStartAfter,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ VARIANT value,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **pFound) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *pStartAfter,
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **pFound) = 0;
         
     };
     
@@ -9064,7 +9970,8 @@ EXTERN_C const IID IID_IUIAutomationItemContainerPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationItemContainerPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9079,10 +9986,14 @@ EXTERN_C const IID IID_IUIAutomationItemContainerPattern;
         DECLSPEC_XFGVIRT(IUIAutomationItemContainerPattern, FindItemByProperty)
         HRESULT ( STDMETHODCALLTYPE *FindItemByProperty )( 
             __RPC__in IUIAutomationItemContainerPattern * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *pStartAfter,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ VARIANT value,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **pFound);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *pStartAfter,
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **pFound);
         
         END_INTERFACE
     } IUIAutomationItemContainerPatternVtbl;
@@ -9150,7 +10061,8 @@ EXTERN_C const IID IID_IUIAutomationVirtualizedItemPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationVirtualizedItemPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9219,34 +10131,44 @@ EXTERN_C const IID IID_IUIAutomationAnnotationPattern;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentAnnotationTypeId( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentAnnotationTypeName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentAuthor( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentDateTime( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentTarget( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedAnnotationTypeId( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedAnnotationTypeName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedAuthor( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedDateTime( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedTarget( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal) = 0;
         
     };
     
@@ -9260,7 +10182,8 @@ EXTERN_C const IID IID_IUIAutomationAnnotationPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationAnnotationPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9275,52 +10198,62 @@ EXTERN_C const IID IID_IUIAutomationAnnotationPattern;
         DECLSPEC_XFGVIRT(IUIAutomationAnnotationPattern, get_CurrentAnnotationTypeId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAnnotationTypeId )( 
             __RPC__in IUIAutomationAnnotationPattern * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationAnnotationPattern, get_CurrentAnnotationTypeName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAnnotationTypeName )( 
             __RPC__in IUIAutomationAnnotationPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationAnnotationPattern, get_CurrentAuthor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAuthor )( 
             __RPC__in IUIAutomationAnnotationPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationAnnotationPattern, get_CurrentDateTime)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentDateTime )( 
             __RPC__in IUIAutomationAnnotationPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationAnnotationPattern, get_CurrentTarget)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentTarget )( 
             __RPC__in IUIAutomationAnnotationPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationAnnotationPattern, get_CachedAnnotationTypeId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAnnotationTypeId )( 
             __RPC__in IUIAutomationAnnotationPattern * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationAnnotationPattern, get_CachedAnnotationTypeName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAnnotationTypeName )( 
             __RPC__in IUIAutomationAnnotationPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationAnnotationPattern, get_CachedAuthor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAuthor )( 
             __RPC__in IUIAutomationAnnotationPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationAnnotationPattern, get_CachedDateTime)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedDateTime )( 
             __RPC__in IUIAutomationAnnotationPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationAnnotationPattern, get_CachedTarget)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedTarget )( 
             __RPC__in IUIAutomationAnnotationPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         END_INTERFACE
     } IUIAutomationAnnotationPatternVtbl;
@@ -9402,54 +10335,72 @@ EXTERN_C const IID IID_IUIAutomationStylesPattern;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentStyleId( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentStyleName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentFillColor( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentFillPatternStyle( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentShape( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentFillPatternColor( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentExtendedProperties( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentExtendedPropertiesAsArray( 
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*propertyCount) struct ExtendedProperty **propertyArray,
-            /* [out] */ __RPC__out int *propertyCount) = 0;
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(* propertyCount)  struct ExtendedProperty **propertyArray,
+            /* [annotation][out] */ 
+            _Out_  int *propertyCount) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedStyleId( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedStyleName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedFillColor( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedFillPatternStyle( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedShape( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedFillPatternColor( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedExtendedProperties( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCachedExtendedPropertiesAsArray( 
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*propertyCount) struct ExtendedProperty **propertyArray,
-            /* [out] */ __RPC__out int *propertyCount) = 0;
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(* propertyCount)  struct ExtendedProperty **propertyArray,
+            /* [annotation][out] */ 
+            _Out_  int *propertyCount) = 0;
         
     };
     
@@ -9463,7 +10414,8 @@ EXTERN_C const IID IID_IUIAutomationStylesPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationStylesPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9478,84 +10430,102 @@ EXTERN_C const IID IID_IUIAutomationStylesPattern;
         DECLSPEC_XFGVIRT(IUIAutomationStylesPattern, get_CurrentStyleId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentStyleId )( 
             __RPC__in IUIAutomationStylesPattern * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationStylesPattern, get_CurrentStyleName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentStyleName )( 
             __RPC__in IUIAutomationStylesPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationStylesPattern, get_CurrentFillColor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFillColor )( 
             __RPC__in IUIAutomationStylesPattern * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationStylesPattern, get_CurrentFillPatternStyle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFillPatternStyle )( 
             __RPC__in IUIAutomationStylesPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationStylesPattern, get_CurrentShape)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentShape )( 
             __RPC__in IUIAutomationStylesPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationStylesPattern, get_CurrentFillPatternColor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFillPatternColor )( 
             __RPC__in IUIAutomationStylesPattern * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationStylesPattern, get_CurrentExtendedProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentExtendedProperties )( 
             __RPC__in IUIAutomationStylesPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationStylesPattern, GetCurrentExtendedPropertiesAsArray)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentExtendedPropertiesAsArray )( 
             __RPC__in IUIAutomationStylesPattern * This,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*propertyCount) struct ExtendedProperty **propertyArray,
-            /* [out] */ __RPC__out int *propertyCount);
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(* propertyCount)  struct ExtendedProperty **propertyArray,
+            /* [annotation][out] */ 
+            _Out_  int *propertyCount);
         
         DECLSPEC_XFGVIRT(IUIAutomationStylesPattern, get_CachedStyleId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedStyleId )( 
             __RPC__in IUIAutomationStylesPattern * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationStylesPattern, get_CachedStyleName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedStyleName )( 
             __RPC__in IUIAutomationStylesPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationStylesPattern, get_CachedFillColor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFillColor )( 
             __RPC__in IUIAutomationStylesPattern * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationStylesPattern, get_CachedFillPatternStyle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFillPatternStyle )( 
             __RPC__in IUIAutomationStylesPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationStylesPattern, get_CachedShape)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedShape )( 
             __RPC__in IUIAutomationStylesPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationStylesPattern, get_CachedFillPatternColor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFillPatternColor )( 
             __RPC__in IUIAutomationStylesPattern * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationStylesPattern, get_CachedExtendedProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedExtendedProperties )( 
             __RPC__in IUIAutomationStylesPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationStylesPattern, GetCachedExtendedPropertiesAsArray)
         HRESULT ( STDMETHODCALLTYPE *GetCachedExtendedPropertiesAsArray )( 
             __RPC__in IUIAutomationStylesPattern * This,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*propertyCount) struct ExtendedProperty **propertyArray,
-            /* [out] */ __RPC__out int *propertyCount);
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(* propertyCount)  struct ExtendedProperty **propertyArray,
+            /* [annotation][out] */ 
+            _Out_  int *propertyCount);
         
         END_INTERFACE
     } IUIAutomationStylesPatternVtbl;
@@ -9655,8 +10625,10 @@ EXTERN_C const IID IID_IUIAutomationSpreadsheetPattern;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetItemByName( 
-            /* [in] */ __RPC__in BSTR name,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR name,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element) = 0;
         
     };
     
@@ -9670,7 +10642,8 @@ EXTERN_C const IID IID_IUIAutomationSpreadsheetPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationSpreadsheetPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9685,8 +10658,10 @@ EXTERN_C const IID IID_IUIAutomationSpreadsheetPattern;
         DECLSPEC_XFGVIRT(IUIAutomationSpreadsheetPattern, GetItemByName)
         HRESULT ( STDMETHODCALLTYPE *GetItemByName )( 
             __RPC__in IUIAutomationSpreadsheetPattern * This,
-            /* [in] */ __RPC__in BSTR name,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  BSTR name,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         END_INTERFACE
     } IUIAutomationSpreadsheetPatternVtbl;
@@ -9741,22 +10716,28 @@ EXTERN_C const IID IID_IUIAutomationSpreadsheetItemPattern;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentFormula( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentAnnotationObjects( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentAnnotationTypes( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedFormula( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCachedAnnotationObjects( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCachedAnnotationTypes( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal) = 0;
         
     };
     
@@ -9770,7 +10751,8 @@ EXTERN_C const IID IID_IUIAutomationSpreadsheetItemPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationSpreadsheetItemPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9785,32 +10767,38 @@ EXTERN_C const IID IID_IUIAutomationSpreadsheetItemPattern;
         DECLSPEC_XFGVIRT(IUIAutomationSpreadsheetItemPattern, get_CurrentFormula)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFormula )( 
             __RPC__in IUIAutomationSpreadsheetItemPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSpreadsheetItemPattern, GetCurrentAnnotationObjects)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentAnnotationObjects )( 
             __RPC__in IUIAutomationSpreadsheetItemPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSpreadsheetItemPattern, GetCurrentAnnotationTypes)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentAnnotationTypes )( 
             __RPC__in IUIAutomationSpreadsheetItemPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSpreadsheetItemPattern, get_CachedFormula)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFormula )( 
             __RPC__in IUIAutomationSpreadsheetItemPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSpreadsheetItemPattern, GetCachedAnnotationObjects)
         HRESULT ( STDMETHODCALLTYPE *GetCachedAnnotationObjects )( 
             __RPC__in IUIAutomationSpreadsheetItemPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationSpreadsheetItemPattern, GetCachedAnnotationTypes)
         HRESULT ( STDMETHODCALLTYPE *GetCachedAnnotationTypes )( 
             __RPC__in IUIAutomationSpreadsheetItemPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal);
         
         END_INTERFACE
     } IUIAutomationSpreadsheetItemPatternVtbl;
@@ -9880,34 +10868,44 @@ EXTERN_C const IID IID_IUIAutomationTransformPattern2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Zoom( 
-            /* [in] */ double zoomValue) = 0;
+            /* [annotation][in] */ 
+            _In_  double zoomValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ZoomByUnit( 
-            /* [in] */ enum ZoomUnit zoomUnit) = 0;
+            /* [annotation][in] */ 
+            _In_  enum ZoomUnit zoomUnit) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentCanZoom( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedCanZoom( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentZoomLevel( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedZoomLevel( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentZoomMinimum( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedZoomMinimum( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentZoomMaximum( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedZoomMaximum( 
-            /* [retval][out] */ __RPC__out double *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal) = 0;
         
     };
     
@@ -9921,7 +10919,8 @@ EXTERN_C const IID IID_IUIAutomationTransformPattern2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationTransformPattern2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9936,99 +10935,120 @@ EXTERN_C const IID IID_IUIAutomationTransformPattern2;
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern, Move)
         HRESULT ( STDMETHODCALLTYPE *Move )( 
             __RPC__in IUIAutomationTransformPattern2 * This,
-            /* [in] */ double x,
-            /* [in] */ double y);
+            /* [annotation][in] */ 
+            _In_  double x,
+            /* [annotation][in] */ 
+            _In_  double y);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern, Resize)
         HRESULT ( STDMETHODCALLTYPE *Resize )( 
             __RPC__in IUIAutomationTransformPattern2 * This,
-            /* [in] */ double width,
-            /* [in] */ double height);
+            /* [annotation][in] */ 
+            _In_  double width,
+            /* [annotation][in] */ 
+            _In_  double height);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern, Rotate)
         HRESULT ( STDMETHODCALLTYPE *Rotate )( 
             __RPC__in IUIAutomationTransformPattern2 * This,
-            /* [in] */ double degrees);
+            /* [annotation][in] */ 
+            _In_  double degrees);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern, get_CurrentCanMove)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCanMove )( 
             __RPC__in IUIAutomationTransformPattern2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern, get_CurrentCanResize)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCanResize )( 
             __RPC__in IUIAutomationTransformPattern2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern, get_CurrentCanRotate)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCanRotate )( 
             __RPC__in IUIAutomationTransformPattern2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern, get_CachedCanMove)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedCanMove )( 
             __RPC__in IUIAutomationTransformPattern2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern, get_CachedCanResize)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedCanResize )( 
             __RPC__in IUIAutomationTransformPattern2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern, get_CachedCanRotate)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedCanRotate )( 
             __RPC__in IUIAutomationTransformPattern2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern2, Zoom)
         HRESULT ( STDMETHODCALLTYPE *Zoom )( 
             __RPC__in IUIAutomationTransformPattern2 * This,
-            /* [in] */ double zoomValue);
+            /* [annotation][in] */ 
+            _In_  double zoomValue);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern2, ZoomByUnit)
         HRESULT ( STDMETHODCALLTYPE *ZoomByUnit )( 
             __RPC__in IUIAutomationTransformPattern2 * This,
-            /* [in] */ enum ZoomUnit zoomUnit);
+            /* [annotation][in] */ 
+            _In_  enum ZoomUnit zoomUnit);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern2, get_CurrentCanZoom)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCanZoom )( 
             __RPC__in IUIAutomationTransformPattern2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern2, get_CachedCanZoom)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedCanZoom )( 
             __RPC__in IUIAutomationTransformPattern2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern2, get_CurrentZoomLevel)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentZoomLevel )( 
             __RPC__in IUIAutomationTransformPattern2 * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern2, get_CachedZoomLevel)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedZoomLevel )( 
             __RPC__in IUIAutomationTransformPattern2 * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern2, get_CurrentZoomMinimum)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentZoomMinimum )( 
             __RPC__in IUIAutomationTransformPattern2 * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern2, get_CachedZoomMinimum)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedZoomMinimum )( 
             __RPC__in IUIAutomationTransformPattern2 * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern2, get_CurrentZoomMaximum)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentZoomMaximum )( 
             __RPC__in IUIAutomationTransformPattern2 * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationTransformPattern2, get_CachedZoomMaximum)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedZoomMaximum )( 
             __RPC__in IUIAutomationTransformPattern2 * This,
-            /* [retval][out] */ __RPC__out double *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  double *retVal);
         
         END_INTERFACE
     } IUIAutomationTransformPattern2Vtbl;
@@ -10138,10 +11158,12 @@ EXTERN_C const IID IID_IUIAutomationTextChildPattern;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_TextContainer( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **container) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **container) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_TextRange( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **range) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **range) = 0;
         
     };
     
@@ -10155,7 +11177,8 @@ EXTERN_C const IID IID_IUIAutomationTextChildPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationTextChildPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10170,12 +11193,14 @@ EXTERN_C const IID IID_IUIAutomationTextChildPattern;
         DECLSPEC_XFGVIRT(IUIAutomationTextChildPattern, get_TextContainer)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TextContainer )( 
             __RPC__in IUIAutomationTextChildPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **container);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **container);
         
         DECLSPEC_XFGVIRT(IUIAutomationTextChildPattern, get_TextRange)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TextRange )( 
             __RPC__in IUIAutomationTextChildPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTextRange **range);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTextRange **range);
         
         END_INTERFACE
     } IUIAutomationTextChildPatternVtbl;
@@ -10233,28 +11258,36 @@ EXTERN_C const IID IID_IUIAutomationDragPattern;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentIsGrabbed( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedIsGrabbed( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentDropEffect( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedDropEffect( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentDropEffects( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedDropEffects( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentGrabbedItems( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCachedGrabbedItems( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
     };
     
@@ -10268,7 +11301,8 @@ EXTERN_C const IID IID_IUIAutomationDragPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationDragPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10283,42 +11317,50 @@ EXTERN_C const IID IID_IUIAutomationDragPattern;
         DECLSPEC_XFGVIRT(IUIAutomationDragPattern, get_CurrentIsGrabbed)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsGrabbed )( 
             __RPC__in IUIAutomationDragPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationDragPattern, get_CachedIsGrabbed)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsGrabbed )( 
             __RPC__in IUIAutomationDragPattern * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationDragPattern, get_CurrentDropEffect)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentDropEffect )( 
             __RPC__in IUIAutomationDragPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationDragPattern, get_CachedDropEffect)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedDropEffect )( 
             __RPC__in IUIAutomationDragPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationDragPattern, get_CurrentDropEffects)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentDropEffects )( 
             __RPC__in IUIAutomationDragPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationDragPattern, get_CachedDropEffects)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedDropEffects )( 
             __RPC__in IUIAutomationDragPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationDragPattern, GetCurrentGrabbedItems)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentGrabbedItems )( 
             __RPC__in IUIAutomationDragPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationDragPattern, GetCachedGrabbedItems)
         HRESULT ( STDMETHODCALLTYPE *GetCachedGrabbedItems )( 
             __RPC__in IUIAutomationDragPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         END_INTERFACE
     } IUIAutomationDragPatternVtbl;
@@ -10394,16 +11436,20 @@ EXTERN_C const IID IID_IUIAutomationDropTargetPattern;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentDropTargetEffect( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedDropTargetEffect( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentDropTargetEffects( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedDropTargetEffects( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal) = 0;
         
     };
     
@@ -10417,7 +11463,8 @@ EXTERN_C const IID IID_IUIAutomationDropTargetPattern;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationDropTargetPattern * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10432,22 +11479,26 @@ EXTERN_C const IID IID_IUIAutomationDropTargetPattern;
         DECLSPEC_XFGVIRT(IUIAutomationDropTargetPattern, get_CurrentDropTargetEffect)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentDropTargetEffect )( 
             __RPC__in IUIAutomationDropTargetPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationDropTargetPattern, get_CachedDropTargetEffect)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedDropTargetEffect )( 
             __RPC__in IUIAutomationDropTargetPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationDropTargetPattern, get_CurrentDropTargetEffects)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentDropTargetEffects )( 
             __RPC__in IUIAutomationDropTargetPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationDropTargetPattern, get_CachedDropTargetEffects)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedDropTargetEffects )( 
             __RPC__in IUIAutomationDropTargetPattern * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal);
         
         END_INTERFACE
     } IUIAutomationDropTargetPatternVtbl;
@@ -10511,22 +11562,28 @@ EXTERN_C const IID IID_IUIAutomationElement2;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentOptimizeForVisualContent( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedOptimizeForVisualContent( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentLiveSetting( 
-            /* [retval][out] */ __RPC__out enum LiveSetting *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum LiveSetting *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedLiveSetting( 
-            /* [retval][out] */ __RPC__out enum LiveSetting *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum LiveSetting *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentFlowsFrom( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedFlowsFrom( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
     };
     
@@ -10540,7 +11597,8 @@ EXTERN_C const IID IID_IUIAutomationElement2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10559,461 +11617,572 @@ EXTERN_C const IID IID_IUIAutomationElement2;
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetRuntimeId)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeId )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *runtimeId);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *runtimeId);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindFirst)
         HRESULT ( STDMETHODCALLTYPE *FindFirst )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindAll)
         HRESULT ( STDMETHODCALLTYPE *FindAll )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindFirstBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindFirstBuildCache )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindAllBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindAllBuildCache )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, BuildUpdatedCache)
         HRESULT ( STDMETHODCALLTYPE *BuildUpdatedCache )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **updatedElement);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **updatedElement);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPropertyValue)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPropertyValue )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPropertyValueEx)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPropertyValueEx )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ BOOL ignoreDefaultValue,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreDefaultValue,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPropertyValue)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPropertyValue )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPropertyValueEx)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPropertyValueEx )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ BOOL ignoreDefaultValue,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreDefaultValue,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPatternAs)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPatternAs )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [retval][iid_is][out] */ __RPC__deref_out_opt void **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  void **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPatternAs)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPatternAs )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [retval][iid_is][out] */ __RPC__deref_out_opt void **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  void **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPattern)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPattern )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPattern)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPattern )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedParent)
         HRESULT ( STDMETHODCALLTYPE *GetCachedParent )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **parent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **parent);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedChildren)
         HRESULT ( STDMETHODCALLTYPE *GetCachedChildren )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **children);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **children);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentProcessId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentProcessId )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentControlType )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out CONTROLTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CONTROLTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentLocalizedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLocalizedControlType )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentName )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAcceleratorKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAcceleratorKey )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAccessKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAccessKey )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentHasKeyboardFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHasKeyboardFocus )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsKeyboardFocusable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsKeyboardFocusable )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsEnabled )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAutomationId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAutomationId )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentClassName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentClassName )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentHelpText)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHelpText )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentCulture)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCulture )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsControlElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsControlElement )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsContentElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsContentElement )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsPassword)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsPassword )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentNativeWindowHandle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentNativeWindowHandle )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt UIA_HWND *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UIA_HWND *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentItemType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentItemType )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsOffscreen)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsOffscreen )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentOrientation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentOrientation )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out enum OrientationType *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum OrientationType *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentFrameworkId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFrameworkId )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsRequiredForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsRequiredForForm )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentItemStatus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentItemStatus )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentBoundingRectangle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentBoundingRectangle )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out RECT *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentLabeledBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLabeledBy )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAriaRole)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAriaRole )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAriaProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAriaProperties )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsDataValidForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsDataValidForForm )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentControllerFor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentControllerFor )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentDescribedBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentDescribedBy )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentFlowsTo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFlowsTo )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentProviderDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentProviderDescription )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedProcessId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedProcessId )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedControlType )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out CONTROLTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CONTROLTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedLocalizedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLocalizedControlType )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedName )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAcceleratorKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAcceleratorKey )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAccessKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAccessKey )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedHasKeyboardFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHasKeyboardFocus )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsKeyboardFocusable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsKeyboardFocusable )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsEnabled )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAutomationId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAutomationId )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedClassName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedClassName )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedHelpText)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHelpText )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedCulture)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedCulture )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsControlElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsControlElement )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsContentElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsContentElement )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsPassword)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsPassword )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedNativeWindowHandle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedNativeWindowHandle )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt UIA_HWND *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UIA_HWND *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedItemType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedItemType )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsOffscreen)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsOffscreen )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedOrientation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedOrientation )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out enum OrientationType *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum OrientationType *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedFrameworkId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFrameworkId )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsRequiredForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsRequiredForForm )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedItemStatus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedItemStatus )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedBoundingRectangle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedBoundingRectangle )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out RECT *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedLabeledBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLabeledBy )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAriaRole)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAriaRole )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAriaProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAriaProperties )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsDataValidForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsDataValidForForm )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedControllerFor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedControllerFor )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedDescribedBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedDescribedBy )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedFlowsTo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFlowsTo )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedProviderDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedProviderDescription )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetClickablePoint)
         HRESULT ( STDMETHODCALLTYPE *GetClickablePoint )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [out] */ __RPC__out POINT *clickable,
-            /* [retval][out] */ __RPC__out BOOL *gotClickable);
+            /* [annotation][out] */ 
+            _Out_  POINT *clickable,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *gotClickable);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentOptimizeForVisualContent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentOptimizeForVisualContent )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedOptimizeForVisualContent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedOptimizeForVisualContent )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentLiveSetting)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLiveSetting )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out enum LiveSetting *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum LiveSetting *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedLiveSetting)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLiveSetting )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__out enum LiveSetting *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum LiveSetting *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentFlowsFrom)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFlowsFrom )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedFlowsFrom)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFlowsFrom )( 
             __RPC__in IUIAutomationElement2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         END_INTERFACE
     } IUIAutomationElement2Vtbl;
@@ -11332,10 +12501,12 @@ EXTERN_C const IID IID_IUIAutomationElement3;
         virtual HRESULT STDMETHODCALLTYPE ShowContextMenu( void) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentIsPeripheral( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedIsPeripheral( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
     };
     
@@ -11349,7 +12520,8 @@ EXTERN_C const IID IID_IUIAutomationElement3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11368,461 +12540,572 @@ EXTERN_C const IID IID_IUIAutomationElement3;
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetRuntimeId)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeId )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *runtimeId);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *runtimeId);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindFirst)
         HRESULT ( STDMETHODCALLTYPE *FindFirst )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindAll)
         HRESULT ( STDMETHODCALLTYPE *FindAll )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindFirstBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindFirstBuildCache )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindAllBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindAllBuildCache )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, BuildUpdatedCache)
         HRESULT ( STDMETHODCALLTYPE *BuildUpdatedCache )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **updatedElement);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **updatedElement);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPropertyValue)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPropertyValue )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPropertyValueEx)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPropertyValueEx )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ BOOL ignoreDefaultValue,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreDefaultValue,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPropertyValue)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPropertyValue )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPropertyValueEx)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPropertyValueEx )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ BOOL ignoreDefaultValue,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreDefaultValue,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPatternAs)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPatternAs )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [retval][iid_is][out] */ __RPC__deref_out_opt void **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  void **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPatternAs)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPatternAs )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [retval][iid_is][out] */ __RPC__deref_out_opt void **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  void **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPattern)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPattern )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPattern)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPattern )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedParent)
         HRESULT ( STDMETHODCALLTYPE *GetCachedParent )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **parent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **parent);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedChildren)
         HRESULT ( STDMETHODCALLTYPE *GetCachedChildren )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **children);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **children);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentProcessId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentProcessId )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentControlType )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out CONTROLTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CONTROLTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentLocalizedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLocalizedControlType )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentName )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAcceleratorKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAcceleratorKey )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAccessKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAccessKey )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentHasKeyboardFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHasKeyboardFocus )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsKeyboardFocusable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsKeyboardFocusable )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsEnabled )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAutomationId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAutomationId )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentClassName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentClassName )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentHelpText)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHelpText )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentCulture)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCulture )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsControlElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsControlElement )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsContentElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsContentElement )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsPassword)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsPassword )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentNativeWindowHandle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentNativeWindowHandle )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt UIA_HWND *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UIA_HWND *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentItemType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentItemType )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsOffscreen)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsOffscreen )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentOrientation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentOrientation )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out enum OrientationType *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum OrientationType *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentFrameworkId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFrameworkId )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsRequiredForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsRequiredForForm )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentItemStatus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentItemStatus )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentBoundingRectangle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentBoundingRectangle )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out RECT *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentLabeledBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLabeledBy )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAriaRole)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAriaRole )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAriaProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAriaProperties )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsDataValidForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsDataValidForForm )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentControllerFor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentControllerFor )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentDescribedBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentDescribedBy )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentFlowsTo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFlowsTo )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentProviderDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentProviderDescription )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedProcessId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedProcessId )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedControlType )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out CONTROLTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CONTROLTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedLocalizedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLocalizedControlType )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedName )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAcceleratorKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAcceleratorKey )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAccessKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAccessKey )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedHasKeyboardFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHasKeyboardFocus )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsKeyboardFocusable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsKeyboardFocusable )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsEnabled )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAutomationId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAutomationId )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedClassName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedClassName )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedHelpText)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHelpText )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedCulture)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedCulture )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsControlElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsControlElement )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsContentElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsContentElement )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsPassword)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsPassword )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedNativeWindowHandle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedNativeWindowHandle )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt UIA_HWND *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UIA_HWND *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedItemType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedItemType )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsOffscreen)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsOffscreen )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedOrientation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedOrientation )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out enum OrientationType *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum OrientationType *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedFrameworkId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFrameworkId )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsRequiredForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsRequiredForForm )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedItemStatus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedItemStatus )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedBoundingRectangle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedBoundingRectangle )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out RECT *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedLabeledBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLabeledBy )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAriaRole)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAriaRole )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAriaProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAriaProperties )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsDataValidForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsDataValidForForm )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedControllerFor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedControllerFor )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedDescribedBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedDescribedBy )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedFlowsTo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFlowsTo )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedProviderDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedProviderDescription )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetClickablePoint)
         HRESULT ( STDMETHODCALLTYPE *GetClickablePoint )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [out] */ __RPC__out POINT *clickable,
-            /* [retval][out] */ __RPC__out BOOL *gotClickable);
+            /* [annotation][out] */ 
+            _Out_  POINT *clickable,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *gotClickable);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentOptimizeForVisualContent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentOptimizeForVisualContent )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedOptimizeForVisualContent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedOptimizeForVisualContent )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentLiveSetting)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLiveSetting )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out enum LiveSetting *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum LiveSetting *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedLiveSetting)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLiveSetting )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out enum LiveSetting *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum LiveSetting *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentFlowsFrom)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFlowsFrom )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedFlowsFrom)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFlowsFrom )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement3, ShowContextMenu)
         HRESULT ( STDMETHODCALLTYPE *ShowContextMenu )( 
@@ -11831,12 +13114,14 @@ EXTERN_C const IID IID_IUIAutomationElement3;
         DECLSPEC_XFGVIRT(IUIAutomationElement3, get_CurrentIsPeripheral)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsPeripheral )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement3, get_CachedIsPeripheral)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsPeripheral )( 
             __RPC__in IUIAutomationElement3 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         END_INTERFACE
     } IUIAutomationElement3Vtbl;
@@ -12163,34 +13448,44 @@ EXTERN_C const IID IID_IUIAutomationElement4;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentPositionInSet( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentSizeOfSet( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentLevel( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentAnnotationTypes( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentAnnotationObjects( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedPositionInSet( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedSizeOfSet( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedLevel( 
-            /* [retval][out] */ __RPC__out int *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedAnnotationTypes( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedAnnotationObjects( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal) = 0;
         
     };
     
@@ -12204,7 +13499,8 @@ EXTERN_C const IID IID_IUIAutomationElement4;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12223,461 +13519,572 @@ EXTERN_C const IID IID_IUIAutomationElement4;
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetRuntimeId)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeId )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *runtimeId);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *runtimeId);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindFirst)
         HRESULT ( STDMETHODCALLTYPE *FindFirst )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindAll)
         HRESULT ( STDMETHODCALLTYPE *FindAll )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindFirstBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindFirstBuildCache )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindAllBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindAllBuildCache )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, BuildUpdatedCache)
         HRESULT ( STDMETHODCALLTYPE *BuildUpdatedCache )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **updatedElement);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **updatedElement);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPropertyValue)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPropertyValue )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPropertyValueEx)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPropertyValueEx )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ BOOL ignoreDefaultValue,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreDefaultValue,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPropertyValue)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPropertyValue )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPropertyValueEx)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPropertyValueEx )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ BOOL ignoreDefaultValue,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreDefaultValue,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPatternAs)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPatternAs )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [retval][iid_is][out] */ __RPC__deref_out_opt void **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  void **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPatternAs)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPatternAs )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [retval][iid_is][out] */ __RPC__deref_out_opt void **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  void **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPattern)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPattern )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPattern)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPattern )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedParent)
         HRESULT ( STDMETHODCALLTYPE *GetCachedParent )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **parent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **parent);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedChildren)
         HRESULT ( STDMETHODCALLTYPE *GetCachedChildren )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **children);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **children);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentProcessId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentProcessId )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentControlType )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out CONTROLTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CONTROLTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentLocalizedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLocalizedControlType )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentName )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAcceleratorKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAcceleratorKey )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAccessKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAccessKey )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentHasKeyboardFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHasKeyboardFocus )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsKeyboardFocusable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsKeyboardFocusable )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsEnabled )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAutomationId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAutomationId )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentClassName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentClassName )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentHelpText)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHelpText )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentCulture)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCulture )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsControlElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsControlElement )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsContentElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsContentElement )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsPassword)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsPassword )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentNativeWindowHandle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentNativeWindowHandle )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt UIA_HWND *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UIA_HWND *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentItemType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentItemType )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsOffscreen)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsOffscreen )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentOrientation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentOrientation )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out enum OrientationType *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum OrientationType *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentFrameworkId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFrameworkId )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsRequiredForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsRequiredForForm )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentItemStatus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentItemStatus )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentBoundingRectangle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentBoundingRectangle )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out RECT *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentLabeledBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLabeledBy )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAriaRole)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAriaRole )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAriaProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAriaProperties )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsDataValidForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsDataValidForForm )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentControllerFor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentControllerFor )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentDescribedBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentDescribedBy )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentFlowsTo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFlowsTo )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentProviderDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentProviderDescription )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedProcessId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedProcessId )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedControlType )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out CONTROLTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CONTROLTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedLocalizedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLocalizedControlType )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedName )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAcceleratorKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAcceleratorKey )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAccessKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAccessKey )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedHasKeyboardFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHasKeyboardFocus )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsKeyboardFocusable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsKeyboardFocusable )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsEnabled )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAutomationId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAutomationId )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedClassName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedClassName )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedHelpText)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHelpText )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedCulture)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedCulture )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsControlElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsControlElement )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsContentElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsContentElement )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsPassword)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsPassword )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedNativeWindowHandle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedNativeWindowHandle )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt UIA_HWND *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UIA_HWND *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedItemType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedItemType )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsOffscreen)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsOffscreen )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedOrientation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedOrientation )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out enum OrientationType *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum OrientationType *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedFrameworkId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFrameworkId )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsRequiredForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsRequiredForForm )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedItemStatus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedItemStatus )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedBoundingRectangle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedBoundingRectangle )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out RECT *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedLabeledBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLabeledBy )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAriaRole)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAriaRole )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAriaProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAriaProperties )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsDataValidForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsDataValidForForm )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedControllerFor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedControllerFor )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedDescribedBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedDescribedBy )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedFlowsTo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFlowsTo )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedProviderDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedProviderDescription )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetClickablePoint)
         HRESULT ( STDMETHODCALLTYPE *GetClickablePoint )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [out] */ __RPC__out POINT *clickable,
-            /* [retval][out] */ __RPC__out BOOL *gotClickable);
+            /* [annotation][out] */ 
+            _Out_  POINT *clickable,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *gotClickable);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentOptimizeForVisualContent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentOptimizeForVisualContent )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedOptimizeForVisualContent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedOptimizeForVisualContent )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentLiveSetting)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLiveSetting )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out enum LiveSetting *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum LiveSetting *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedLiveSetting)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLiveSetting )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out enum LiveSetting *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum LiveSetting *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentFlowsFrom)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFlowsFrom )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedFlowsFrom)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFlowsFrom )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement3, ShowContextMenu)
         HRESULT ( STDMETHODCALLTYPE *ShowContextMenu )( 
@@ -12686,62 +14093,74 @@ EXTERN_C const IID IID_IUIAutomationElement4;
         DECLSPEC_XFGVIRT(IUIAutomationElement3, get_CurrentIsPeripheral)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsPeripheral )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement3, get_CachedIsPeripheral)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsPeripheral )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentPositionInSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentPositionInSet )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentSizeOfSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentSizeOfSet )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentLevel)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLevel )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentAnnotationTypes)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAnnotationTypes )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentAnnotationObjects)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAnnotationObjects )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedPositionInSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedPositionInSet )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedSizeOfSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedSizeOfSet )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedLevel)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLevel )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedAnnotationTypes)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAnnotationTypes )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedAnnotationObjects)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAnnotationObjects )( 
             __RPC__in IUIAutomationElement4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         END_INTERFACE
     } IUIAutomationElement4Vtbl;
@@ -13099,16 +14518,20 @@ EXTERN_C const IID IID_IUIAutomationElement5;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentLandmarkType( 
-            /* [retval][out] */ __RPC__out LANDMARKTYPEID *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LANDMARKTYPEID *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentLocalizedLandmarkType( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedLandmarkType( 
-            /* [retval][out] */ __RPC__out LANDMARKTYPEID *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LANDMARKTYPEID *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedLocalizedLandmarkType( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
     };
     
@@ -13122,7 +14545,8 @@ EXTERN_C const IID IID_IUIAutomationElement5;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13141,461 +14565,572 @@ EXTERN_C const IID IID_IUIAutomationElement5;
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetRuntimeId)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeId )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *runtimeId);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *runtimeId);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindFirst)
         HRESULT ( STDMETHODCALLTYPE *FindFirst )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindAll)
         HRESULT ( STDMETHODCALLTYPE *FindAll )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindFirstBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindFirstBuildCache )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindAllBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindAllBuildCache )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, BuildUpdatedCache)
         HRESULT ( STDMETHODCALLTYPE *BuildUpdatedCache )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **updatedElement);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **updatedElement);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPropertyValue)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPropertyValue )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPropertyValueEx)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPropertyValueEx )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ BOOL ignoreDefaultValue,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreDefaultValue,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPropertyValue)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPropertyValue )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPropertyValueEx)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPropertyValueEx )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ BOOL ignoreDefaultValue,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreDefaultValue,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPatternAs)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPatternAs )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [retval][iid_is][out] */ __RPC__deref_out_opt void **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  void **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPatternAs)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPatternAs )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [retval][iid_is][out] */ __RPC__deref_out_opt void **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  void **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPattern)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPattern )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPattern)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPattern )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedParent)
         HRESULT ( STDMETHODCALLTYPE *GetCachedParent )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **parent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **parent);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedChildren)
         HRESULT ( STDMETHODCALLTYPE *GetCachedChildren )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **children);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **children);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentProcessId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentProcessId )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentControlType )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out CONTROLTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CONTROLTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentLocalizedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLocalizedControlType )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentName )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAcceleratorKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAcceleratorKey )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAccessKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAccessKey )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentHasKeyboardFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHasKeyboardFocus )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsKeyboardFocusable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsKeyboardFocusable )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsEnabled )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAutomationId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAutomationId )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentClassName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentClassName )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentHelpText)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHelpText )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentCulture)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCulture )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsControlElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsControlElement )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsContentElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsContentElement )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsPassword)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsPassword )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentNativeWindowHandle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentNativeWindowHandle )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt UIA_HWND *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UIA_HWND *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentItemType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentItemType )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsOffscreen)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsOffscreen )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentOrientation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentOrientation )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out enum OrientationType *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum OrientationType *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentFrameworkId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFrameworkId )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsRequiredForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsRequiredForForm )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentItemStatus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentItemStatus )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentBoundingRectangle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentBoundingRectangle )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out RECT *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentLabeledBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLabeledBy )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAriaRole)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAriaRole )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAriaProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAriaProperties )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsDataValidForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsDataValidForForm )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentControllerFor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentControllerFor )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentDescribedBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentDescribedBy )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentFlowsTo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFlowsTo )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentProviderDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentProviderDescription )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedProcessId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedProcessId )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedControlType )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out CONTROLTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CONTROLTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedLocalizedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLocalizedControlType )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedName )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAcceleratorKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAcceleratorKey )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAccessKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAccessKey )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedHasKeyboardFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHasKeyboardFocus )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsKeyboardFocusable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsKeyboardFocusable )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsEnabled )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAutomationId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAutomationId )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedClassName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedClassName )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedHelpText)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHelpText )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedCulture)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedCulture )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsControlElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsControlElement )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsContentElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsContentElement )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsPassword)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsPassword )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedNativeWindowHandle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedNativeWindowHandle )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt UIA_HWND *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UIA_HWND *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedItemType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedItemType )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsOffscreen)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsOffscreen )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedOrientation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedOrientation )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out enum OrientationType *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum OrientationType *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedFrameworkId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFrameworkId )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsRequiredForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsRequiredForForm )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedItemStatus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedItemStatus )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedBoundingRectangle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedBoundingRectangle )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out RECT *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedLabeledBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLabeledBy )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAriaRole)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAriaRole )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAriaProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAriaProperties )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsDataValidForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsDataValidForForm )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedControllerFor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedControllerFor )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedDescribedBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedDescribedBy )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedFlowsTo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFlowsTo )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedProviderDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedProviderDescription )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetClickablePoint)
         HRESULT ( STDMETHODCALLTYPE *GetClickablePoint )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [out] */ __RPC__out POINT *clickable,
-            /* [retval][out] */ __RPC__out BOOL *gotClickable);
+            /* [annotation][out] */ 
+            _Out_  POINT *clickable,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *gotClickable);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentOptimizeForVisualContent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentOptimizeForVisualContent )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedOptimizeForVisualContent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedOptimizeForVisualContent )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentLiveSetting)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLiveSetting )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out enum LiveSetting *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum LiveSetting *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedLiveSetting)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLiveSetting )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out enum LiveSetting *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum LiveSetting *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentFlowsFrom)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFlowsFrom )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedFlowsFrom)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFlowsFrom )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement3, ShowContextMenu)
         HRESULT ( STDMETHODCALLTYPE *ShowContextMenu )( 
@@ -13604,82 +15139,98 @@ EXTERN_C const IID IID_IUIAutomationElement5;
         DECLSPEC_XFGVIRT(IUIAutomationElement3, get_CurrentIsPeripheral)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsPeripheral )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement3, get_CachedIsPeripheral)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsPeripheral )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentPositionInSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentPositionInSet )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentSizeOfSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentSizeOfSet )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentLevel)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLevel )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentAnnotationTypes)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAnnotationTypes )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentAnnotationObjects)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAnnotationObjects )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedPositionInSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedPositionInSet )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedSizeOfSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedSizeOfSet )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedLevel)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLevel )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedAnnotationTypes)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAnnotationTypes )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedAnnotationObjects)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAnnotationObjects )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement5, get_CurrentLandmarkType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLandmarkType )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out LANDMARKTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LANDMARKTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement5, get_CurrentLocalizedLandmarkType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLocalizedLandmarkType )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement5, get_CachedLandmarkType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLandmarkType )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__out LANDMARKTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LANDMARKTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement5, get_CachedLocalizedLandmarkType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLocalizedLandmarkType )( 
             __RPC__in IUIAutomationElement5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         END_INTERFACE
     } IUIAutomationElement5Vtbl;
@@ -14050,10 +15601,12 @@ EXTERN_C const IID IID_IUIAutomationElement6;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentFullDescription( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedFullDescription( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal) = 0;
         
     };
     
@@ -14067,7 +15620,8 @@ EXTERN_C const IID IID_IUIAutomationElement6;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14086,461 +15640,572 @@ EXTERN_C const IID IID_IUIAutomationElement6;
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetRuntimeId)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeId )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *runtimeId);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *runtimeId);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindFirst)
         HRESULT ( STDMETHODCALLTYPE *FindFirst )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindAll)
         HRESULT ( STDMETHODCALLTYPE *FindAll )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindFirstBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindFirstBuildCache )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindAllBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindAllBuildCache )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, BuildUpdatedCache)
         HRESULT ( STDMETHODCALLTYPE *BuildUpdatedCache )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **updatedElement);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **updatedElement);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPropertyValue)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPropertyValue )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPropertyValueEx)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPropertyValueEx )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ BOOL ignoreDefaultValue,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreDefaultValue,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPropertyValue)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPropertyValue )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPropertyValueEx)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPropertyValueEx )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ BOOL ignoreDefaultValue,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreDefaultValue,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPatternAs)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPatternAs )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [retval][iid_is][out] */ __RPC__deref_out_opt void **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  void **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPatternAs)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPatternAs )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [retval][iid_is][out] */ __RPC__deref_out_opt void **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  void **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPattern)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPattern )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPattern)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPattern )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedParent)
         HRESULT ( STDMETHODCALLTYPE *GetCachedParent )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **parent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **parent);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedChildren)
         HRESULT ( STDMETHODCALLTYPE *GetCachedChildren )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **children);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **children);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentProcessId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentProcessId )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentControlType )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out CONTROLTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CONTROLTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentLocalizedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLocalizedControlType )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentName )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAcceleratorKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAcceleratorKey )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAccessKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAccessKey )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentHasKeyboardFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHasKeyboardFocus )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsKeyboardFocusable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsKeyboardFocusable )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsEnabled )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAutomationId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAutomationId )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentClassName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentClassName )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentHelpText)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHelpText )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentCulture)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCulture )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsControlElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsControlElement )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsContentElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsContentElement )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsPassword)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsPassword )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentNativeWindowHandle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentNativeWindowHandle )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt UIA_HWND *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UIA_HWND *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentItemType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentItemType )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsOffscreen)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsOffscreen )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentOrientation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentOrientation )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out enum OrientationType *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum OrientationType *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentFrameworkId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFrameworkId )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsRequiredForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsRequiredForForm )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentItemStatus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentItemStatus )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentBoundingRectangle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentBoundingRectangle )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out RECT *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentLabeledBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLabeledBy )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAriaRole)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAriaRole )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAriaProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAriaProperties )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsDataValidForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsDataValidForForm )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentControllerFor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentControllerFor )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentDescribedBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentDescribedBy )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentFlowsTo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFlowsTo )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentProviderDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentProviderDescription )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedProcessId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedProcessId )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedControlType )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out CONTROLTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CONTROLTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedLocalizedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLocalizedControlType )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedName )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAcceleratorKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAcceleratorKey )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAccessKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAccessKey )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedHasKeyboardFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHasKeyboardFocus )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsKeyboardFocusable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsKeyboardFocusable )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsEnabled )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAutomationId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAutomationId )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedClassName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedClassName )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedHelpText)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHelpText )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedCulture)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedCulture )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsControlElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsControlElement )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsContentElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsContentElement )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsPassword)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsPassword )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedNativeWindowHandle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedNativeWindowHandle )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt UIA_HWND *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UIA_HWND *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedItemType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedItemType )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsOffscreen)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsOffscreen )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedOrientation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedOrientation )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out enum OrientationType *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum OrientationType *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedFrameworkId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFrameworkId )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsRequiredForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsRequiredForForm )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedItemStatus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedItemStatus )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedBoundingRectangle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedBoundingRectangle )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out RECT *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedLabeledBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLabeledBy )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAriaRole)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAriaRole )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAriaProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAriaProperties )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsDataValidForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsDataValidForForm )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedControllerFor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedControllerFor )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedDescribedBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedDescribedBy )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedFlowsTo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFlowsTo )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedProviderDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedProviderDescription )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetClickablePoint)
         HRESULT ( STDMETHODCALLTYPE *GetClickablePoint )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [out] */ __RPC__out POINT *clickable,
-            /* [retval][out] */ __RPC__out BOOL *gotClickable);
+            /* [annotation][out] */ 
+            _Out_  POINT *clickable,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *gotClickable);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentOptimizeForVisualContent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentOptimizeForVisualContent )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedOptimizeForVisualContent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedOptimizeForVisualContent )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentLiveSetting)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLiveSetting )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out enum LiveSetting *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum LiveSetting *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedLiveSetting)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLiveSetting )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out enum LiveSetting *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum LiveSetting *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentFlowsFrom)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFlowsFrom )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedFlowsFrom)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFlowsFrom )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement3, ShowContextMenu)
         HRESULT ( STDMETHODCALLTYPE *ShowContextMenu )( 
@@ -14549,92 +16214,110 @@ EXTERN_C const IID IID_IUIAutomationElement6;
         DECLSPEC_XFGVIRT(IUIAutomationElement3, get_CurrentIsPeripheral)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsPeripheral )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement3, get_CachedIsPeripheral)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsPeripheral )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentPositionInSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentPositionInSet )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentSizeOfSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentSizeOfSet )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentLevel)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLevel )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentAnnotationTypes)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAnnotationTypes )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentAnnotationObjects)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAnnotationObjects )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedPositionInSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedPositionInSet )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedSizeOfSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedSizeOfSet )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedLevel)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLevel )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedAnnotationTypes)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAnnotationTypes )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedAnnotationObjects)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAnnotationObjects )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement5, get_CurrentLandmarkType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLandmarkType )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out LANDMARKTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LANDMARKTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement5, get_CurrentLocalizedLandmarkType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLocalizedLandmarkType )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement5, get_CachedLandmarkType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLandmarkType )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__out LANDMARKTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LANDMARKTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement5, get_CachedLocalizedLandmarkType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLocalizedLandmarkType )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement6, get_CurrentFullDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFullDescription )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement6, get_CachedFullDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFullDescription )( 
             __RPC__in IUIAutomationElement6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         END_INTERFACE
     } IUIAutomationElement6Vtbl;
@@ -15012,39 +16695,64 @@ EXTERN_C const IID IID_IUIAutomationElement7;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE FindFirstWithOptions( 
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ enum TreeTraversalOptions traversalOptions,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *root,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found) = 0;
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  enum TreeTraversalOptions traversalOptions,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *root,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FindAllWithOptions( 
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ enum TreeTraversalOptions traversalOptions,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *root,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found) = 0;
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  enum TreeTraversalOptions traversalOptions,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *root,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FindFirstWithOptionsBuildCache( 
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ enum TreeTraversalOptions traversalOptions,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *root,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found) = 0;
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  enum TreeTraversalOptions traversalOptions,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *root,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FindAllWithOptionsBuildCache( 
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ enum TreeTraversalOptions traversalOptions,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *root,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found) = 0;
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  enum TreeTraversalOptions traversalOptions,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *root,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentMetadataValue( 
-            /* [in] */ int targetId,
-            /* [in] */ METADATAID metadataId,
-            /* [retval][out] */ __RPC__out VARIANT *returnVal) = 0;
+            /* [annotation][in] */ 
+            _In_  int targetId,
+            /* [annotation][in] */ 
+            _In_  METADATAID metadataId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *returnVal) = 0;
         
     };
     
@@ -15058,7 +16766,8 @@ EXTERN_C const IID IID_IUIAutomationElement7;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15077,461 +16786,572 @@ EXTERN_C const IID IID_IUIAutomationElement7;
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetRuntimeId)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeId )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *runtimeId);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *runtimeId);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindFirst)
         HRESULT ( STDMETHODCALLTYPE *FindFirst )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindAll)
         HRESULT ( STDMETHODCALLTYPE *FindAll )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindFirstBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindFirstBuildCache )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindAllBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindAllBuildCache )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, BuildUpdatedCache)
         HRESULT ( STDMETHODCALLTYPE *BuildUpdatedCache )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **updatedElement);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **updatedElement);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPropertyValue)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPropertyValue )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPropertyValueEx)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPropertyValueEx )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ BOOL ignoreDefaultValue,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreDefaultValue,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPropertyValue)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPropertyValue )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPropertyValueEx)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPropertyValueEx )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ BOOL ignoreDefaultValue,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreDefaultValue,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPatternAs)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPatternAs )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [retval][iid_is][out] */ __RPC__deref_out_opt void **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  void **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPatternAs)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPatternAs )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [retval][iid_is][out] */ __RPC__deref_out_opt void **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  void **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPattern)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPattern )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPattern)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPattern )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedParent)
         HRESULT ( STDMETHODCALLTYPE *GetCachedParent )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **parent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **parent);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedChildren)
         HRESULT ( STDMETHODCALLTYPE *GetCachedChildren )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **children);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **children);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentProcessId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentProcessId )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentControlType )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out CONTROLTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CONTROLTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentLocalizedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLocalizedControlType )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentName )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAcceleratorKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAcceleratorKey )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAccessKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAccessKey )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentHasKeyboardFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHasKeyboardFocus )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsKeyboardFocusable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsKeyboardFocusable )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsEnabled )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAutomationId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAutomationId )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentClassName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentClassName )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentHelpText)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHelpText )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentCulture)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCulture )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsControlElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsControlElement )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsContentElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsContentElement )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsPassword)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsPassword )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentNativeWindowHandle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentNativeWindowHandle )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt UIA_HWND *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UIA_HWND *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentItemType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentItemType )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsOffscreen)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsOffscreen )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentOrientation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentOrientation )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out enum OrientationType *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum OrientationType *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentFrameworkId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFrameworkId )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsRequiredForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsRequiredForForm )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentItemStatus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentItemStatus )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentBoundingRectangle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentBoundingRectangle )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out RECT *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentLabeledBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLabeledBy )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAriaRole)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAriaRole )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAriaProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAriaProperties )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsDataValidForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsDataValidForForm )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentControllerFor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentControllerFor )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentDescribedBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentDescribedBy )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentFlowsTo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFlowsTo )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentProviderDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentProviderDescription )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedProcessId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedProcessId )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedControlType )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out CONTROLTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CONTROLTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedLocalizedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLocalizedControlType )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedName )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAcceleratorKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAcceleratorKey )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAccessKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAccessKey )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedHasKeyboardFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHasKeyboardFocus )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsKeyboardFocusable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsKeyboardFocusable )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsEnabled )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAutomationId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAutomationId )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedClassName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedClassName )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedHelpText)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHelpText )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedCulture)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedCulture )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsControlElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsControlElement )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsContentElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsContentElement )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsPassword)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsPassword )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedNativeWindowHandle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedNativeWindowHandle )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt UIA_HWND *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UIA_HWND *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedItemType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedItemType )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsOffscreen)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsOffscreen )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedOrientation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedOrientation )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out enum OrientationType *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum OrientationType *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedFrameworkId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFrameworkId )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsRequiredForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsRequiredForForm )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedItemStatus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedItemStatus )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedBoundingRectangle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedBoundingRectangle )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out RECT *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedLabeledBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLabeledBy )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAriaRole)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAriaRole )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAriaProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAriaProperties )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsDataValidForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsDataValidForForm )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedControllerFor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedControllerFor )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedDescribedBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedDescribedBy )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedFlowsTo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFlowsTo )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedProviderDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedProviderDescription )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetClickablePoint)
         HRESULT ( STDMETHODCALLTYPE *GetClickablePoint )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [out] */ __RPC__out POINT *clickable,
-            /* [retval][out] */ __RPC__out BOOL *gotClickable);
+            /* [annotation][out] */ 
+            _Out_  POINT *clickable,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *gotClickable);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentOptimizeForVisualContent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentOptimizeForVisualContent )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedOptimizeForVisualContent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedOptimizeForVisualContent )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentLiveSetting)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLiveSetting )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out enum LiveSetting *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum LiveSetting *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedLiveSetting)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLiveSetting )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out enum LiveSetting *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum LiveSetting *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentFlowsFrom)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFlowsFrom )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedFlowsFrom)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFlowsFrom )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement3, ShowContextMenu)
         HRESULT ( STDMETHODCALLTYPE *ShowContextMenu )( 
@@ -15540,137 +17360,180 @@ EXTERN_C const IID IID_IUIAutomationElement7;
         DECLSPEC_XFGVIRT(IUIAutomationElement3, get_CurrentIsPeripheral)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsPeripheral )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement3, get_CachedIsPeripheral)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsPeripheral )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentPositionInSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentPositionInSet )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentSizeOfSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentSizeOfSet )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentLevel)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLevel )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentAnnotationTypes)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAnnotationTypes )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentAnnotationObjects)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAnnotationObjects )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedPositionInSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedPositionInSet )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedSizeOfSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedSizeOfSet )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedLevel)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLevel )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedAnnotationTypes)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAnnotationTypes )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedAnnotationObjects)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAnnotationObjects )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement5, get_CurrentLandmarkType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLandmarkType )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out LANDMARKTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LANDMARKTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement5, get_CurrentLocalizedLandmarkType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLocalizedLandmarkType )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement5, get_CachedLandmarkType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLandmarkType )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__out LANDMARKTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LANDMARKTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement5, get_CachedLocalizedLandmarkType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLocalizedLandmarkType )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement6, get_CurrentFullDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFullDescription )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement6, get_CachedFullDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFullDescription )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement7, FindFirstWithOptions)
         HRESULT ( STDMETHODCALLTYPE *FindFirstWithOptions )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ enum TreeTraversalOptions traversalOptions,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *root,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  enum TreeTraversalOptions traversalOptions,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *root,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement7, FindAllWithOptions)
         HRESULT ( STDMETHODCALLTYPE *FindAllWithOptions )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ enum TreeTraversalOptions traversalOptions,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *root,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  enum TreeTraversalOptions traversalOptions,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *root,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement7, FindFirstWithOptionsBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindFirstWithOptionsBuildCache )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ enum TreeTraversalOptions traversalOptions,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *root,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  enum TreeTraversalOptions traversalOptions,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *root,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement7, FindAllWithOptionsBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindAllWithOptionsBuildCache )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ enum TreeTraversalOptions traversalOptions,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *root,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  enum TreeTraversalOptions traversalOptions,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *root,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement7, GetCurrentMetadataValue)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentMetadataValue )( 
             __RPC__in IUIAutomationElement7 * This,
-            /* [in] */ int targetId,
-            /* [in] */ METADATAID metadataId,
-            /* [retval][out] */ __RPC__out VARIANT *returnVal);
+            /* [annotation][in] */ 
+            _In_  int targetId,
+            /* [annotation][in] */ 
+            _In_  METADATAID metadataId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *returnVal);
         
         END_INTERFACE
     } IUIAutomationElement7Vtbl;
@@ -16064,10 +17927,12 @@ EXTERN_C const IID IID_IUIAutomationElement8;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentHeadingLevel( 
-            /* [retval][out] */ __RPC__out HEADINGLEVELID *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HEADINGLEVELID *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedHeadingLevel( 
-            /* [retval][out] */ __RPC__out HEADINGLEVELID *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HEADINGLEVELID *retVal) = 0;
         
     };
     
@@ -16081,7 +17946,8 @@ EXTERN_C const IID IID_IUIAutomationElement8;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -16100,461 +17966,572 @@ EXTERN_C const IID IID_IUIAutomationElement8;
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetRuntimeId)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeId )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *runtimeId);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *runtimeId);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindFirst)
         HRESULT ( STDMETHODCALLTYPE *FindFirst )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindAll)
         HRESULT ( STDMETHODCALLTYPE *FindAll )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindFirstBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindFirstBuildCache )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindAllBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindAllBuildCache )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, BuildUpdatedCache)
         HRESULT ( STDMETHODCALLTYPE *BuildUpdatedCache )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **updatedElement);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **updatedElement);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPropertyValue)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPropertyValue )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPropertyValueEx)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPropertyValueEx )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ BOOL ignoreDefaultValue,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreDefaultValue,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPropertyValue)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPropertyValue )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPropertyValueEx)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPropertyValueEx )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ BOOL ignoreDefaultValue,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreDefaultValue,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPatternAs)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPatternAs )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [retval][iid_is][out] */ __RPC__deref_out_opt void **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  void **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPatternAs)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPatternAs )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [retval][iid_is][out] */ __RPC__deref_out_opt void **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  void **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPattern)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPattern )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPattern)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPattern )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedParent)
         HRESULT ( STDMETHODCALLTYPE *GetCachedParent )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **parent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **parent);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedChildren)
         HRESULT ( STDMETHODCALLTYPE *GetCachedChildren )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **children);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **children);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentProcessId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentProcessId )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentControlType )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out CONTROLTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CONTROLTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentLocalizedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLocalizedControlType )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentName )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAcceleratorKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAcceleratorKey )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAccessKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAccessKey )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentHasKeyboardFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHasKeyboardFocus )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsKeyboardFocusable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsKeyboardFocusable )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsEnabled )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAutomationId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAutomationId )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentClassName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentClassName )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentHelpText)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHelpText )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentCulture)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCulture )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsControlElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsControlElement )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsContentElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsContentElement )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsPassword)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsPassword )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentNativeWindowHandle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentNativeWindowHandle )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt UIA_HWND *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UIA_HWND *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentItemType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentItemType )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsOffscreen)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsOffscreen )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentOrientation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentOrientation )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out enum OrientationType *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum OrientationType *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentFrameworkId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFrameworkId )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsRequiredForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsRequiredForForm )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentItemStatus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentItemStatus )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentBoundingRectangle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentBoundingRectangle )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out RECT *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentLabeledBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLabeledBy )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAriaRole)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAriaRole )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAriaProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAriaProperties )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsDataValidForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsDataValidForForm )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentControllerFor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentControllerFor )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentDescribedBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentDescribedBy )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentFlowsTo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFlowsTo )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentProviderDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentProviderDescription )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedProcessId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedProcessId )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedControlType )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out CONTROLTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CONTROLTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedLocalizedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLocalizedControlType )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedName )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAcceleratorKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAcceleratorKey )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAccessKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAccessKey )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedHasKeyboardFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHasKeyboardFocus )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsKeyboardFocusable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsKeyboardFocusable )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsEnabled )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAutomationId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAutomationId )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedClassName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedClassName )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedHelpText)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHelpText )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedCulture)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedCulture )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsControlElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsControlElement )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsContentElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsContentElement )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsPassword)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsPassword )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedNativeWindowHandle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedNativeWindowHandle )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt UIA_HWND *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UIA_HWND *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedItemType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedItemType )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsOffscreen)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsOffscreen )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedOrientation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedOrientation )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out enum OrientationType *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum OrientationType *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedFrameworkId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFrameworkId )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsRequiredForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsRequiredForForm )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedItemStatus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedItemStatus )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedBoundingRectangle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedBoundingRectangle )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out RECT *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedLabeledBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLabeledBy )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAriaRole)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAriaRole )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAriaProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAriaProperties )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsDataValidForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsDataValidForForm )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedControllerFor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedControllerFor )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedDescribedBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedDescribedBy )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedFlowsTo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFlowsTo )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedProviderDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedProviderDescription )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetClickablePoint)
         HRESULT ( STDMETHODCALLTYPE *GetClickablePoint )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [out] */ __RPC__out POINT *clickable,
-            /* [retval][out] */ __RPC__out BOOL *gotClickable);
+            /* [annotation][out] */ 
+            _Out_  POINT *clickable,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *gotClickable);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentOptimizeForVisualContent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentOptimizeForVisualContent )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedOptimizeForVisualContent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedOptimizeForVisualContent )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentLiveSetting)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLiveSetting )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out enum LiveSetting *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum LiveSetting *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedLiveSetting)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLiveSetting )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out enum LiveSetting *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum LiveSetting *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentFlowsFrom)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFlowsFrom )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedFlowsFrom)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFlowsFrom )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement3, ShowContextMenu)
         HRESULT ( STDMETHODCALLTYPE *ShowContextMenu )( 
@@ -16563,147 +18540,192 @@ EXTERN_C const IID IID_IUIAutomationElement8;
         DECLSPEC_XFGVIRT(IUIAutomationElement3, get_CurrentIsPeripheral)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsPeripheral )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement3, get_CachedIsPeripheral)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsPeripheral )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentPositionInSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentPositionInSet )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentSizeOfSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentSizeOfSet )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentLevel)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLevel )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentAnnotationTypes)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAnnotationTypes )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentAnnotationObjects)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAnnotationObjects )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedPositionInSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedPositionInSet )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedSizeOfSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedSizeOfSet )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedLevel)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLevel )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedAnnotationTypes)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAnnotationTypes )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedAnnotationObjects)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAnnotationObjects )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement5, get_CurrentLandmarkType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLandmarkType )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out LANDMARKTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LANDMARKTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement5, get_CurrentLocalizedLandmarkType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLocalizedLandmarkType )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement5, get_CachedLandmarkType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLandmarkType )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out LANDMARKTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LANDMARKTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement5, get_CachedLocalizedLandmarkType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLocalizedLandmarkType )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement6, get_CurrentFullDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFullDescription )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement6, get_CachedFullDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFullDescription )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement7, FindFirstWithOptions)
         HRESULT ( STDMETHODCALLTYPE *FindFirstWithOptions )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ enum TreeTraversalOptions traversalOptions,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *root,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  enum TreeTraversalOptions traversalOptions,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *root,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement7, FindAllWithOptions)
         HRESULT ( STDMETHODCALLTYPE *FindAllWithOptions )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ enum TreeTraversalOptions traversalOptions,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *root,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  enum TreeTraversalOptions traversalOptions,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *root,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement7, FindFirstWithOptionsBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindFirstWithOptionsBuildCache )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ enum TreeTraversalOptions traversalOptions,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *root,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  enum TreeTraversalOptions traversalOptions,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *root,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement7, FindAllWithOptionsBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindAllWithOptionsBuildCache )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ enum TreeTraversalOptions traversalOptions,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *root,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  enum TreeTraversalOptions traversalOptions,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *root,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement7, GetCurrentMetadataValue)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentMetadataValue )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [in] */ int targetId,
-            /* [in] */ METADATAID metadataId,
-            /* [retval][out] */ __RPC__out VARIANT *returnVal);
+            /* [annotation][in] */ 
+            _In_  int targetId,
+            /* [annotation][in] */ 
+            _In_  METADATAID metadataId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *returnVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement8, get_CurrentHeadingLevel)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHeadingLevel )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out HEADINGLEVELID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HEADINGLEVELID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement8, get_CachedHeadingLevel)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHeadingLevel )( 
             __RPC__in IUIAutomationElement8 * This,
-            /* [retval][out] */ __RPC__out HEADINGLEVELID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HEADINGLEVELID *retVal);
         
         END_INTERFACE
     } IUIAutomationElement8Vtbl;
@@ -17104,10 +19126,12 @@ EXTERN_C const IID IID_IUIAutomationElement9;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentIsDialog( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CachedIsDialog( 
-            /* [retval][out] */ __RPC__out BOOL *retVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal) = 0;
         
     };
     
@@ -17121,7 +19145,8 @@ EXTERN_C const IID IID_IUIAutomationElement9;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -17140,461 +19165,572 @@ EXTERN_C const IID IID_IUIAutomationElement9;
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetRuntimeId)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeId )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *runtimeId);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *runtimeId);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindFirst)
         HRESULT ( STDMETHODCALLTYPE *FindFirst )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindAll)
         HRESULT ( STDMETHODCALLTYPE *FindAll )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindFirstBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindFirstBuildCache )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, FindAllBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindAllBuildCache )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, BuildUpdatedCache)
         HRESULT ( STDMETHODCALLTYPE *BuildUpdatedCache )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **updatedElement);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **updatedElement);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPropertyValue)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPropertyValue )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPropertyValueEx)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPropertyValueEx )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ BOOL ignoreDefaultValue,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreDefaultValue,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPropertyValue)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPropertyValue )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPropertyValueEx)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPropertyValueEx )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ BOOL ignoreDefaultValue,
-            /* [retval][out] */ __RPC__out VARIANT *retVal);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  BOOL ignoreDefaultValue,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPatternAs)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPatternAs )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [retval][iid_is][out] */ __RPC__deref_out_opt void **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  void **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPatternAs)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPatternAs )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [retval][iid_is][out] */ __RPC__deref_out_opt void **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  void **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCurrentPattern)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPattern )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedPattern)
         HRESULT ( STDMETHODCALLTYPE *GetCachedPattern )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [in] */ PATTERNID patternId,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **patternObject);
+            /* [annotation][in] */ 
+            _In_  PATTERNID patternId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **patternObject);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedParent)
         HRESULT ( STDMETHODCALLTYPE *GetCachedParent )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **parent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **parent);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetCachedChildren)
         HRESULT ( STDMETHODCALLTYPE *GetCachedChildren )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **children);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **children);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentProcessId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentProcessId )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentControlType )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out CONTROLTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CONTROLTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentLocalizedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLocalizedControlType )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentName )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAcceleratorKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAcceleratorKey )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAccessKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAccessKey )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentHasKeyboardFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHasKeyboardFocus )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsKeyboardFocusable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsKeyboardFocusable )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsEnabled )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAutomationId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAutomationId )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentClassName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentClassName )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentHelpText)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHelpText )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentCulture)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCulture )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsControlElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsControlElement )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsContentElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsContentElement )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsPassword)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsPassword )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentNativeWindowHandle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentNativeWindowHandle )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt UIA_HWND *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UIA_HWND *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentItemType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentItemType )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsOffscreen)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsOffscreen )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentOrientation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentOrientation )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out enum OrientationType *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum OrientationType *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentFrameworkId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFrameworkId )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsRequiredForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsRequiredForForm )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentItemStatus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentItemStatus )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentBoundingRectangle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentBoundingRectangle )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out RECT *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentLabeledBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLabeledBy )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAriaRole)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAriaRole )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentAriaProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAriaProperties )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentIsDataValidForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsDataValidForForm )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentControllerFor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentControllerFor )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentDescribedBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentDescribedBy )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentFlowsTo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFlowsTo )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CurrentProviderDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentProviderDescription )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedProcessId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedProcessId )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedControlType )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out CONTROLTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CONTROLTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedLocalizedControlType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLocalizedControlType )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedName )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAcceleratorKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAcceleratorKey )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAccessKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAccessKey )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedHasKeyboardFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHasKeyboardFocus )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsKeyboardFocusable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsKeyboardFocusable )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsEnabled )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAutomationId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAutomationId )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedClassName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedClassName )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedHelpText)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHelpText )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedCulture)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedCulture )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsControlElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsControlElement )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsContentElement)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsContentElement )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsPassword)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsPassword )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedNativeWindowHandle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedNativeWindowHandle )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt UIA_HWND *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UIA_HWND *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedItemType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedItemType )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsOffscreen)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsOffscreen )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedOrientation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedOrientation )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out enum OrientationType *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum OrientationType *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedFrameworkId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFrameworkId )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsRequiredForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsRequiredForForm )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedItemStatus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedItemStatus )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedBoundingRectangle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedBoundingRectangle )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out RECT *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedLabeledBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLabeledBy )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAriaRole)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAriaRole )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedAriaProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAriaProperties )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedIsDataValidForForm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsDataValidForForm )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedControllerFor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedControllerFor )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedDescribedBy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedDescribedBy )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedFlowsTo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFlowsTo )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, get_CachedProviderDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedProviderDescription )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement, GetClickablePoint)
         HRESULT ( STDMETHODCALLTYPE *GetClickablePoint )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [out] */ __RPC__out POINT *clickable,
-            /* [retval][out] */ __RPC__out BOOL *gotClickable);
+            /* [annotation][out] */ 
+            _Out_  POINT *clickable,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *gotClickable);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentOptimizeForVisualContent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentOptimizeForVisualContent )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedOptimizeForVisualContent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedOptimizeForVisualContent )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentLiveSetting)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLiveSetting )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out enum LiveSetting *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum LiveSetting *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedLiveSetting)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLiveSetting )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out enum LiveSetting *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum LiveSetting *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CurrentFlowsFrom)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFlowsFrom )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement2, get_CachedFlowsFrom)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFlowsFrom )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement3, ShowContextMenu)
         HRESULT ( STDMETHODCALLTYPE *ShowContextMenu )( 
@@ -17603,157 +19739,204 @@ EXTERN_C const IID IID_IUIAutomationElement9;
         DECLSPEC_XFGVIRT(IUIAutomationElement3, get_CurrentIsPeripheral)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsPeripheral )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement3, get_CachedIsPeripheral)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsPeripheral )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentPositionInSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentPositionInSet )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentSizeOfSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentSizeOfSet )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentLevel)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLevel )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentAnnotationTypes)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAnnotationTypes )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CurrentAnnotationObjects)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAnnotationObjects )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedPositionInSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedPositionInSet )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedSizeOfSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedSizeOfSet )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedLevel)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLevel )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out int *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedAnnotationTypes)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAnnotationTypes )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement4, get_CachedAnnotationObjects)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedAnnotationObjects )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement5, get_CurrentLandmarkType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLandmarkType )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out LANDMARKTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LANDMARKTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement5, get_CurrentLocalizedLandmarkType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLocalizedLandmarkType )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement5, get_CachedLandmarkType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLandmarkType )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out LANDMARKTYPEID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LANDMARKTYPEID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement5, get_CachedLocalizedLandmarkType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedLocalizedLandmarkType )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement6, get_CurrentFullDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFullDescription )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement6, get_CachedFullDescription)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedFullDescription )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement7, FindFirstWithOptions)
         HRESULT ( STDMETHODCALLTYPE *FindFirstWithOptions )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ enum TreeTraversalOptions traversalOptions,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *root,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  enum TreeTraversalOptions traversalOptions,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *root,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement7, FindAllWithOptions)
         HRESULT ( STDMETHODCALLTYPE *FindAllWithOptions )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ enum TreeTraversalOptions traversalOptions,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *root,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  enum TreeTraversalOptions traversalOptions,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *root,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement7, FindFirstWithOptionsBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindFirstWithOptionsBuildCache )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ enum TreeTraversalOptions traversalOptions,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *root,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  enum TreeTraversalOptions traversalOptions,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *root,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement7, FindAllWithOptionsBuildCache)
         HRESULT ( STDMETHODCALLTYPE *FindAllWithOptionsBuildCache )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ enum TreeTraversalOptions traversalOptions,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *root,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElementArray **found);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  enum TreeTraversalOptions traversalOptions,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *root,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElementArray **found);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement7, GetCurrentMetadataValue)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentMetadataValue )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [in] */ int targetId,
-            /* [in] */ METADATAID metadataId,
-            /* [retval][out] */ __RPC__out VARIANT *returnVal);
+            /* [annotation][in] */ 
+            _In_  int targetId,
+            /* [annotation][in] */ 
+            _In_  METADATAID metadataId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *returnVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement8, get_CurrentHeadingLevel)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentHeadingLevel )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out HEADINGLEVELID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HEADINGLEVELID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement8, get_CachedHeadingLevel)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedHeadingLevel )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out HEADINGLEVELID *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HEADINGLEVELID *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement9, get_CurrentIsDialog)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentIsDialog )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         DECLSPEC_XFGVIRT(IUIAutomationElement9, get_CachedIsDialog)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CachedIsDialog )( 
             __RPC__in IUIAutomationElement9 * This,
-            /* [retval][out] */ __RPC__out BOOL *retVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *retVal);
         
         END_INTERFACE
     } IUIAutomationElement9Vtbl;
@@ -18161,13 +20344,18 @@ EXTERN_C const IID IID_IUIAutomationProxyFactory;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateProvider( 
-            /* [in] */ __RPC__in UIA_HWND hwnd,
-            /* [in] */ LONG idObject,
-            /* [in] */ LONG idChild,
-            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **provider) = 0;
+            /* [annotation][in] */ 
+            _In_  UIA_HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  LONG idObject,
+            /* [annotation][in] */ 
+            _In_  LONG idChild,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRawElementProviderSimple **provider) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProxyFactoryId( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *factoryId) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *factoryId) = 0;
         
     };
     
@@ -18181,7 +20369,8 @@ EXTERN_C const IID IID_IUIAutomationProxyFactory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationProxyFactory * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -18196,15 +20385,20 @@ EXTERN_C const IID IID_IUIAutomationProxyFactory;
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactory, CreateProvider)
         HRESULT ( STDMETHODCALLTYPE *CreateProvider )( 
             __RPC__in IUIAutomationProxyFactory * This,
-            /* [in] */ __RPC__in UIA_HWND hwnd,
-            /* [in] */ LONG idObject,
-            /* [in] */ LONG idChild,
-            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **provider);
+            /* [annotation][in] */ 
+            _In_  UIA_HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  LONG idObject,
+            /* [annotation][in] */ 
+            _In_  LONG idChild,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IRawElementProviderSimple **provider);
         
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactory, get_ProxyFactoryId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProxyFactoryId )( 
             __RPC__in IUIAutomationProxyFactory * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *factoryId);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *factoryId);
         
         END_INTERFACE
     } IUIAutomationProxyFactoryVtbl;
@@ -18262,47 +20456,64 @@ EXTERN_C const IID IID_IUIAutomationProxyFactoryEntry;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProxyFactory( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationProxyFactory **factory) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationProxyFactory **factory) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ClassName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *className) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *className) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ImageName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *imageName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *imageName) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_AllowSubstringMatch( 
-            /* [retval][out] */ __RPC__out BOOL *allowSubstringMatch) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *allowSubstringMatch) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CanCheckBaseClass( 
-            /* [retval][out] */ __RPC__out BOOL *canCheckBaseClass) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *canCheckBaseClass) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_NeedsAdviseEvents( 
-            /* [retval][out] */ __RPC__out BOOL *adviseEvents) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *adviseEvents) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ClassName( 
-            /* [in] */ __RPC__in LPCWSTR className) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR className) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ImageName( 
-            /* [in] */ __RPC__in LPCWSTR imageName) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR imageName) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_AllowSubstringMatch( 
-            /* [in] */ BOOL allowSubstringMatch) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL allowSubstringMatch) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_CanCheckBaseClass( 
-            /* [in] */ BOOL canCheckBaseClass) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL canCheckBaseClass) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_NeedsAdviseEvents( 
-            /* [in] */ BOOL adviseEvents) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL adviseEvents) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetWinEventsForAutomationEvent( 
-            /* [in] */ EVENTID eventId,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ __RPC__in SAFEARRAY * winEvents) = 0;
+            /* [annotation][in] */ 
+            _In_  EVENTID eventId,
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * winEvents) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetWinEventsForAutomationEvent( 
-            /* [in] */ EVENTID eventId,
-            /* [in] */ PROPERTYID propertyId,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *winEvents) = 0;
+            /* [annotation][in] */ 
+            _In_  EVENTID eventId,
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *winEvents) = 0;
         
     };
     
@@ -18316,7 +20527,8 @@ EXTERN_C const IID IID_IUIAutomationProxyFactoryEntry;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationProxyFactoryEntry * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -18331,71 +20543,88 @@ EXTERN_C const IID IID_IUIAutomationProxyFactoryEntry;
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactoryEntry, get_ProxyFactory)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProxyFactory )( 
             __RPC__in IUIAutomationProxyFactoryEntry * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationProxyFactory **factory);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationProxyFactory **factory);
         
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactoryEntry, get_ClassName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ClassName )( 
             __RPC__in IUIAutomationProxyFactoryEntry * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *className);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *className);
         
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactoryEntry, get_ImageName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ImageName )( 
             __RPC__in IUIAutomationProxyFactoryEntry * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *imageName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *imageName);
         
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactoryEntry, get_AllowSubstringMatch)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AllowSubstringMatch )( 
             __RPC__in IUIAutomationProxyFactoryEntry * This,
-            /* [retval][out] */ __RPC__out BOOL *allowSubstringMatch);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *allowSubstringMatch);
         
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactoryEntry, get_CanCheckBaseClass)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CanCheckBaseClass )( 
             __RPC__in IUIAutomationProxyFactoryEntry * This,
-            /* [retval][out] */ __RPC__out BOOL *canCheckBaseClass);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *canCheckBaseClass);
         
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactoryEntry, get_NeedsAdviseEvents)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_NeedsAdviseEvents )( 
             __RPC__in IUIAutomationProxyFactoryEntry * This,
-            /* [retval][out] */ __RPC__out BOOL *adviseEvents);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *adviseEvents);
         
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactoryEntry, put_ClassName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ClassName )( 
             __RPC__in IUIAutomationProxyFactoryEntry * This,
-            /* [in] */ __RPC__in LPCWSTR className);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR className);
         
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactoryEntry, put_ImageName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ImageName )( 
             __RPC__in IUIAutomationProxyFactoryEntry * This,
-            /* [in] */ __RPC__in LPCWSTR imageName);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR imageName);
         
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactoryEntry, put_AllowSubstringMatch)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AllowSubstringMatch )( 
             __RPC__in IUIAutomationProxyFactoryEntry * This,
-            /* [in] */ BOOL allowSubstringMatch);
+            /* [annotation][in] */ 
+            _In_  BOOL allowSubstringMatch);
         
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactoryEntry, put_CanCheckBaseClass)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CanCheckBaseClass )( 
             __RPC__in IUIAutomationProxyFactoryEntry * This,
-            /* [in] */ BOOL canCheckBaseClass);
+            /* [annotation][in] */ 
+            _In_  BOOL canCheckBaseClass);
         
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactoryEntry, put_NeedsAdviseEvents)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_NeedsAdviseEvents )( 
             __RPC__in IUIAutomationProxyFactoryEntry * This,
-            /* [in] */ BOOL adviseEvents);
+            /* [annotation][in] */ 
+            _In_  BOOL adviseEvents);
         
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactoryEntry, SetWinEventsForAutomationEvent)
         HRESULT ( STDMETHODCALLTYPE *SetWinEventsForAutomationEvent )( 
             __RPC__in IUIAutomationProxyFactoryEntry * This,
-            /* [in] */ EVENTID eventId,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ __RPC__in SAFEARRAY * winEvents);
+            /* [annotation][in] */ 
+            _In_  EVENTID eventId,
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * winEvents);
         
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactoryEntry, GetWinEventsForAutomationEvent)
         HRESULT ( STDMETHODCALLTYPE *GetWinEventsForAutomationEvent )( 
             __RPC__in IUIAutomationProxyFactoryEntry * This,
-            /* [in] */ EVENTID eventId,
-            /* [in] */ PROPERTYID propertyId,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *winEvents);
+            /* [annotation][in] */ 
+            _In_  EVENTID eventId,
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *winEvents);
         
         END_INTERFACE
     } IUIAutomationProxyFactoryEntryVtbl;
@@ -18486,28 +20715,38 @@ EXTERN_C const IID IID_IUIAutomationProxyFactoryMapping;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [retval][out] */ __RPC__out UINT *count) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UINT *count) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTable( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *table) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *table) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEntry( 
-            /* [in] */ UINT index,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationProxyFactoryEntry **entry) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationProxyFactoryEntry **entry) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTable( 
-            /* [in] */ __RPC__in_opt SAFEARRAY * factoryList) = 0;
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * factoryList) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertEntries( 
-            /* [in] */ UINT before,
-            /* [in] */ __RPC__in_opt SAFEARRAY * factoryList) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT before,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * factoryList) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertEntry( 
-            /* [in] */ UINT before,
-            /* [in] */ __RPC__in_opt IUIAutomationProxyFactoryEntry *factory) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT before,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationProxyFactoryEntry *factory) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveEntry( 
-            /* [in] */ UINT index) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT index) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ClearTable( void) = 0;
         
@@ -18525,7 +20764,8 @@ EXTERN_C const IID IID_IUIAutomationProxyFactoryMapping;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationProxyFactoryMapping * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -18540,40 +20780,50 @@ EXTERN_C const IID IID_IUIAutomationProxyFactoryMapping;
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactoryMapping, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IUIAutomationProxyFactoryMapping * This,
-            /* [retval][out] */ __RPC__out UINT *count);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UINT *count);
         
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactoryMapping, GetTable)
         HRESULT ( STDMETHODCALLTYPE *GetTable )( 
             __RPC__in IUIAutomationProxyFactoryMapping * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *table);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *table);
         
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactoryMapping, GetEntry)
         HRESULT ( STDMETHODCALLTYPE *GetEntry )( 
             __RPC__in IUIAutomationProxyFactoryMapping * This,
-            /* [in] */ UINT index,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationProxyFactoryEntry **entry);
+            /* [annotation][in] */ 
+            _In_  UINT index,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationProxyFactoryEntry **entry);
         
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactoryMapping, SetTable)
         HRESULT ( STDMETHODCALLTYPE *SetTable )( 
             __RPC__in IUIAutomationProxyFactoryMapping * This,
-            /* [in] */ __RPC__in_opt SAFEARRAY * factoryList);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * factoryList);
         
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactoryMapping, InsertEntries)
         HRESULT ( STDMETHODCALLTYPE *InsertEntries )( 
             __RPC__in IUIAutomationProxyFactoryMapping * This,
-            /* [in] */ UINT before,
-            /* [in] */ __RPC__in_opt SAFEARRAY * factoryList);
+            /* [annotation][in] */ 
+            _In_  UINT before,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * factoryList);
         
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactoryMapping, InsertEntry)
         HRESULT ( STDMETHODCALLTYPE *InsertEntry )( 
             __RPC__in IUIAutomationProxyFactoryMapping * This,
-            /* [in] */ UINT before,
-            /* [in] */ __RPC__in_opt IUIAutomationProxyFactoryEntry *factory);
+            /* [annotation][in] */ 
+            _In_  UINT before,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationProxyFactoryEntry *factory);
         
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactoryMapping, RemoveEntry)
         HRESULT ( STDMETHODCALLTYPE *RemoveEntry )( 
             __RPC__in IUIAutomationProxyFactoryMapping * This,
-            /* [in] */ UINT index);
+            /* [annotation][in] */ 
+            _In_  UINT index);
         
         DECLSPEC_XFGVIRT(IUIAutomationProxyFactoryMapping, ClearTable)
         HRESULT ( STDMETHODCALLTYPE *ClearTable )( 
@@ -18660,45 +20910,72 @@ EXTERN_C const IID IID_IUIAutomationEventHandlerGroup;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddActiveTextPositionChangedEventHandler( 
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationActiveTextPositionChangedEventHandler *handler) = 0;
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationActiveTextPositionChangedEventHandler *handler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddAutomationEventHandler( 
-            /* [in] */ EVENTID eventId,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationEventHandler *handler) = 0;
+            /* [annotation][in] */ 
+            _In_  EVENTID eventId,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationEventHandler *handler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddChangesEventHandler( 
-            /* [in] */ enum TreeScope scope,
-            /* [size_is][in] */ __RPC__in_ecount_full(changesCount) int *changeTypes,
-            /* [in] */ int changesCount,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationChangesEventHandler *handler) = 0;
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(changesCount)  int *changeTypes,
+            /* [annotation][in] */ 
+            _In_  int changesCount,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationChangesEventHandler *handler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddNotificationEventHandler( 
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationNotificationEventHandler *handler) = 0;
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationNotificationEventHandler *handler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddPropertyChangedEventHandler( 
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler,
-            /* [size_is][in] */ __RPC__in_ecount_full(propertyCount) PROPERTYID *propertyArray,
-            /* [in] */ int propertyCount) = 0;
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(propertyCount)  PROPERTYID *propertyArray,
+            /* [annotation][in] */ 
+            _In_  int propertyCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddStructureChangedEventHandler( 
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationStructureChangedEventHandler *handler) = 0;
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationStructureChangedEventHandler *handler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddTextEditTextChangedEventHandler( 
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ enum TextEditChangeType textEditChangeType,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationTextEditTextChangedEventHandler *handler) = 0;
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  enum TextEditChangeType textEditChangeType,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextEditTextChangedEventHandler *handler) = 0;
         
     };
     
@@ -18712,7 +20989,8 @@ EXTERN_C const IID IID_IUIAutomationEventHandlerGroup;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationEventHandlerGroup * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -18727,57 +21005,84 @@ EXTERN_C const IID IID_IUIAutomationEventHandlerGroup;
         DECLSPEC_XFGVIRT(IUIAutomationEventHandlerGroup, AddActiveTextPositionChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddActiveTextPositionChangedEventHandler )( 
             __RPC__in IUIAutomationEventHandlerGroup * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationActiveTextPositionChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationActiveTextPositionChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomationEventHandlerGroup, AddAutomationEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddAutomationEventHandler )( 
             __RPC__in IUIAutomationEventHandlerGroup * This,
-            /* [in] */ EVENTID eventId,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  EVENTID eventId,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomationEventHandlerGroup, AddChangesEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddChangesEventHandler )( 
             __RPC__in IUIAutomationEventHandlerGroup * This,
-            /* [in] */ enum TreeScope scope,
-            /* [size_is][in] */ __RPC__in_ecount_full(changesCount) int *changeTypes,
-            /* [in] */ int changesCount,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationChangesEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(changesCount)  int *changeTypes,
+            /* [annotation][in] */ 
+            _In_  int changesCount,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationChangesEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomationEventHandlerGroup, AddNotificationEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddNotificationEventHandler )( 
             __RPC__in IUIAutomationEventHandlerGroup * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationNotificationEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationNotificationEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomationEventHandlerGroup, AddPropertyChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyChangedEventHandler )( 
             __RPC__in IUIAutomationEventHandlerGroup * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler,
-            /* [size_is][in] */ __RPC__in_ecount_full(propertyCount) PROPERTYID *propertyArray,
-            /* [in] */ int propertyCount);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(propertyCount)  PROPERTYID *propertyArray,
+            /* [annotation][in] */ 
+            _In_  int propertyCount);
         
         DECLSPEC_XFGVIRT(IUIAutomationEventHandlerGroup, AddStructureChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddStructureChangedEventHandler )( 
             __RPC__in IUIAutomationEventHandlerGroup * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationStructureChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationStructureChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomationEventHandlerGroup, AddTextEditTextChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddTextEditTextChangedEventHandler )( 
             __RPC__in IUIAutomationEventHandlerGroup * This,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ enum TextEditChangeType textEditChangeType,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationTextEditTextChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  enum TextEditChangeType textEditChangeType,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextEditTextChangedEventHandler *handler);
         
         END_INTERFACE
     } IUIAutomationEventHandlerGroupVtbl;
@@ -18850,239 +21155,364 @@ EXTERN_C const IID IID_IUIAutomation;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CompareElements( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *el1,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *el2,
-            /* [retval][out] */ __RPC__out BOOL *areSame) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *el1,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *el2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *areSame) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CompareRuntimeIds( 
-            /* [in] */ __RPC__in SAFEARRAY * runtimeId1,
-            /* [in] */ __RPC__in SAFEARRAY * runtimeId2,
-            /* [retval][out] */ __RPC__out BOOL *areSame) = 0;
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * runtimeId1,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * runtimeId2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *areSame) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRootElement( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **root) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **root) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ElementFromHandle( 
-            /* [in] */ __RPC__in UIA_HWND hwnd,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element) = 0;
+            /* [annotation][in] */ 
+            _In_  UIA_HWND hwnd,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ElementFromPoint( 
-            /* [in] */ POINT pt,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element) = 0;
+            /* [annotation][in] */ 
+            _In_  POINT pt,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFocusedElement( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRootElementBuildCache( 
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **root) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **root) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ElementFromHandleBuildCache( 
-            /* [in] */ __RPC__in UIA_HWND hwnd,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element) = 0;
+            /* [annotation][in] */ 
+            _In_  UIA_HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ElementFromPointBuildCache( 
-            /* [in] */ POINT pt,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element) = 0;
+            /* [annotation][in] */ 
+            _In_  POINT pt,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFocusedElementBuildCache( 
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateTreeWalker( 
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *pCondition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *pCondition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ControlViewWalker( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ContentViewWalker( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RawViewWalker( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RawViewCondition( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ControlViewCondition( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ContentViewCondition( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateCacheRequest( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCacheRequest **cacheRequest) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCacheRequest **cacheRequest) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateTrueCondition( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateFalseCondition( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePropertyCondition( 
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ VARIANT value,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition) = 0;
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePropertyConditionEx( 
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ VARIANT value,
-            /* [in] */ enum PropertyConditionFlags flags,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition) = 0;
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][in] */ 
+            _In_  enum PropertyConditionFlags flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateAndCondition( 
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition1,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition2,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition1,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateAndConditionFromArray( 
-            /* [in] */ __RPC__in_opt SAFEARRAY * conditions,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition) = 0;
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * conditions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateAndConditionFromNativeArray( 
-            /* [size_is][in] */ __RPC__in_ecount_full(conditionCount) IUIAutomationCondition **conditions,
-            /* [in] */ int conditionCount,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition) = 0;
+            /* [annotation][size_is][in] */ 
+            _In_reads_(conditionCount)  IUIAutomationCondition **conditions,
+            /* [annotation][in] */ 
+            _In_  int conditionCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateOrCondition( 
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition1,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition2,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition1,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateOrConditionFromArray( 
-            /* [in] */ __RPC__in_opt SAFEARRAY * conditions,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition) = 0;
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * conditions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateOrConditionFromNativeArray( 
-            /* [size_is][in] */ __RPC__in_ecount_full(conditionCount) IUIAutomationCondition **conditions,
-            /* [in] */ int conditionCount,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition) = 0;
+            /* [annotation][size_is][in] */ 
+            _In_reads_(conditionCount)  IUIAutomationCondition **conditions,
+            /* [annotation][in] */ 
+            _In_  int conditionCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateNotCondition( 
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddAutomationEventHandler( 
-            /* [in] */ EVENTID eventId,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationEventHandler *handler) = 0;
+            /* [annotation][in] */ 
+            _In_  EVENTID eventId,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationEventHandler *handler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAutomationEventHandler( 
-            /* [in] */ EVENTID eventId,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationEventHandler *handler) = 0;
+            /* [annotation][in] */ 
+            _In_  EVENTID eventId,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationEventHandler *handler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddPropertyChangedEventHandlerNativeArray( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler,
-            /* [size_is][in] */ __RPC__in_ecount_full(propertyCount) PROPERTYID *propertyArray,
-            /* [in] */ int propertyCount) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(propertyCount)  PROPERTYID *propertyArray,
+            /* [annotation][in] */ 
+            _In_  int propertyCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddPropertyChangedEventHandler( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler,
-            /* [in] */ __RPC__in SAFEARRAY * propertyArray) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * propertyArray) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemovePropertyChangedEventHandler( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddStructureChangedEventHandler( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationStructureChangedEventHandler *handler) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationStructureChangedEventHandler *handler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveStructureChangedEventHandler( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationStructureChangedEventHandler *handler) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationStructureChangedEventHandler *handler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddFocusChangedEventHandler( 
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationFocusChangedEventHandler *handler) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationFocusChangedEventHandler *handler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveFocusChangedEventHandler( 
-            /* [in] */ __RPC__in_opt IUIAutomationFocusChangedEventHandler *handler) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationFocusChangedEventHandler *handler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAllEventHandlers( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IntNativeArrayToSafeArray( 
-            /* [size_is][in] */ __RPC__in_ecount_full(arrayCount) int *array,
-            /* [in] */ int arrayCount,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *safeArray) = 0;
+            /* [annotation][size_is][in] */ 
+            _In_reads_(arrayCount)  int *array,
+            /* [annotation][in] */ 
+            _In_  int arrayCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *safeArray) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IntSafeArrayToNativeArray( 
-            /* [in] */ __RPC__in SAFEARRAY * intArray,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*arrayCount) int **array,
-            /* [retval][out] */ __RPC__out int *arrayCount) = 0;
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * intArray,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*arrayCount)  int **array,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *arrayCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RectToVariant( 
-            /* [in] */ RECT rc,
-            /* [retval][out] */ __RPC__out VARIANT *var) = 0;
+            /* [annotation][in] */ 
+            _In_  RECT rc,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *var) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE VariantToRect( 
-            /* [in] */ VARIANT var,
-            /* [retval][out] */ __RPC__out RECT *rc) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT var,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *rc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SafeArrayToRectNativeArray( 
-            /* [in] */ __RPC__in SAFEARRAY * rects,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*rectArrayCount) RECT **rectArray,
-            /* [retval][out] */ __RPC__out int *rectArrayCount) = 0;
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * rects,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*rectArrayCount)  RECT **rectArray,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *rectArrayCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateProxyFactoryEntry( 
-            /* [in] */ __RPC__in_opt IUIAutomationProxyFactory *factory,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationProxyFactoryEntry **factoryEntry) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationProxyFactory *factory,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationProxyFactoryEntry **factoryEntry) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProxyFactoryMapping( 
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationProxyFactoryMapping **factoryMapping) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationProxyFactoryMapping **factoryMapping) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPropertyProgrammaticName( 
-            /* [in] */ PROPERTYID property,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name) = 0;
+            /* [annotation][in] */ 
+            _In_  PROPERTYID property,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPatternProgrammaticName( 
-            /* [in] */ PATTERNID pattern,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name) = 0;
+            /* [annotation][in] */ 
+            _In_  PATTERNID pattern,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PollForPotentialSupportedPatterns( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *pElement,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *patternIds,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *patternNames) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *pElement,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *patternIds,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *patternNames) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PollForPotentialSupportedProperties( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *pElement,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *propertyIds,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *propertyNames) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *pElement,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *propertyIds,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *propertyNames) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CheckNotSupported( 
-            /* [in] */ VARIANT value,
-            /* [retval][out] */ __RPC__out BOOL *isNotSupported) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *isNotSupported) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ReservedNotSupportedValue( 
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **notSupportedValue) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **notSupportedValue) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ReservedMixedAttributeValue( 
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **mixedAttributeValue) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **mixedAttributeValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ElementFromIAccessible( 
-            /* [in] */ __RPC__in_opt IAccessible *accessible,
-            /* [in] */ int childId,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element) = 0;
+            /* [annotation][in] */ 
+            _In_  IAccessible *accessible,
+            /* [annotation][in] */ 
+            _In_  int childId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ElementFromIAccessibleBuildCache( 
-            /* [in] */ __RPC__in_opt IAccessible *accessible,
-            /* [in] */ int childId,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element) = 0;
+            /* [annotation][in] */ 
+            _In_  IAccessible *accessible,
+            /* [annotation][in] */ 
+            _In_  int childId,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element) = 0;
         
     };
     
@@ -19096,7 +21526,8 @@ EXTERN_C const IID IID_IUIAutomation;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -19111,242 +21542,330 @@ EXTERN_C const IID IID_IUIAutomation;
         DECLSPEC_XFGVIRT(IUIAutomation, CompareElements)
         HRESULT ( STDMETHODCALLTYPE *CompareElements )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *el1,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *el2,
-            /* [retval][out] */ __RPC__out BOOL *areSame);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *el1,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *el2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *areSame);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CompareRuntimeIds)
         HRESULT ( STDMETHODCALLTYPE *CompareRuntimeIds )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in SAFEARRAY * runtimeId1,
-            /* [in] */ __RPC__in SAFEARRAY * runtimeId2,
-            /* [retval][out] */ __RPC__out BOOL *areSame);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * runtimeId1,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * runtimeId2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *areSame);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetRootElement)
         HRESULT ( STDMETHODCALLTYPE *GetRootElement )( 
             __RPC__in IUIAutomation * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **root);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **root);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromHandle)
         HRESULT ( STDMETHODCALLTYPE *ElementFromHandle )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in UIA_HWND hwnd,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  UIA_HWND hwnd,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromPoint)
         HRESULT ( STDMETHODCALLTYPE *ElementFromPoint )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ POINT pt,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  POINT pt,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetFocusedElement)
         HRESULT ( STDMETHODCALLTYPE *GetFocusedElement )( 
             __RPC__in IUIAutomation * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetRootElementBuildCache)
         HRESULT ( STDMETHODCALLTYPE *GetRootElementBuildCache )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **root);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **root);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromHandleBuildCache)
         HRESULT ( STDMETHODCALLTYPE *ElementFromHandleBuildCache )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in UIA_HWND hwnd,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  UIA_HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromPointBuildCache)
         HRESULT ( STDMETHODCALLTYPE *ElementFromPointBuildCache )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ POINT pt,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  POINT pt,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetFocusedElementBuildCache)
         HRESULT ( STDMETHODCALLTYPE *GetFocusedElementBuildCache )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateTreeWalker)
         HRESULT ( STDMETHODCALLTYPE *CreateTreeWalker )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *pCondition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *pCondition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ControlViewWalker)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ControlViewWalker )( 
             __RPC__in IUIAutomation * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ContentViewWalker)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContentViewWalker )( 
             __RPC__in IUIAutomation * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_RawViewWalker)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RawViewWalker )( 
             __RPC__in IUIAutomation * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_RawViewCondition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RawViewCondition )( 
             __RPC__in IUIAutomation * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ControlViewCondition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ControlViewCondition )( 
             __RPC__in IUIAutomation * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ContentViewCondition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContentViewCondition )( 
             __RPC__in IUIAutomation * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateCacheRequest)
         HRESULT ( STDMETHODCALLTYPE *CreateCacheRequest )( 
             __RPC__in IUIAutomation * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCacheRequest **cacheRequest);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCacheRequest **cacheRequest);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateTrueCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateTrueCondition )( 
             __RPC__in IUIAutomation * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateFalseCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateFalseCondition )( 
             __RPC__in IUIAutomation * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreatePropertyCondition)
         HRESULT ( STDMETHODCALLTYPE *CreatePropertyCondition )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ VARIANT value,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreatePropertyConditionEx)
         HRESULT ( STDMETHODCALLTYPE *CreatePropertyConditionEx )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ VARIANT value,
-            /* [in] */ enum PropertyConditionFlags flags,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][in] */ 
+            _In_  enum PropertyConditionFlags flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateAndCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateAndCondition )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition1,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition2,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition1,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateAndConditionFromArray)
         HRESULT ( STDMETHODCALLTYPE *CreateAndConditionFromArray )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in_opt SAFEARRAY * conditions,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * conditions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateAndConditionFromNativeArray)
         HRESULT ( STDMETHODCALLTYPE *CreateAndConditionFromNativeArray )( 
             __RPC__in IUIAutomation * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(conditionCount) IUIAutomationCondition **conditions,
-            /* [in] */ int conditionCount,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(conditionCount)  IUIAutomationCondition **conditions,
+            /* [annotation][in] */ 
+            _In_  int conditionCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateOrCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateOrCondition )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition1,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition2,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition1,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateOrConditionFromArray)
         HRESULT ( STDMETHODCALLTYPE *CreateOrConditionFromArray )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in_opt SAFEARRAY * conditions,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * conditions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateOrConditionFromNativeArray)
         HRESULT ( STDMETHODCALLTYPE *CreateOrConditionFromNativeArray )( 
             __RPC__in IUIAutomation * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(conditionCount) IUIAutomationCondition **conditions,
-            /* [in] */ int conditionCount,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(conditionCount)  IUIAutomationCondition **conditions,
+            /* [annotation][in] */ 
+            _In_  int conditionCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateNotCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateNotCondition )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddAutomationEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddAutomationEventHandler )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ EVENTID eventId,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  EVENTID eventId,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveAutomationEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveAutomationEventHandler )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ EVENTID eventId,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  EVENTID eventId,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddPropertyChangedEventHandlerNativeArray)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyChangedEventHandlerNativeArray )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler,
-            /* [size_is][in] */ __RPC__in_ecount_full(propertyCount) PROPERTYID *propertyArray,
-            /* [in] */ int propertyCount);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(propertyCount)  PROPERTYID *propertyArray,
+            /* [annotation][in] */ 
+            _In_  int propertyCount);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddPropertyChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyChangedEventHandler )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler,
-            /* [in] */ __RPC__in SAFEARRAY * propertyArray);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * propertyArray);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemovePropertyChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemovePropertyChangedEventHandler )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddStructureChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddStructureChangedEventHandler )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationStructureChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationStructureChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveStructureChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveStructureChangedEventHandler )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationStructureChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationStructureChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddFocusChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddFocusChangedEventHandler )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationFocusChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationFocusChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveFocusChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveFocusChangedEventHandler )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in_opt IUIAutomationFocusChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationFocusChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveAllEventHandlers)
         HRESULT ( STDMETHODCALLTYPE *RemoveAllEventHandlers )( 
@@ -19355,103 +21874,140 @@ EXTERN_C const IID IID_IUIAutomation;
         DECLSPEC_XFGVIRT(IUIAutomation, IntNativeArrayToSafeArray)
         HRESULT ( STDMETHODCALLTYPE *IntNativeArrayToSafeArray )( 
             __RPC__in IUIAutomation * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(arrayCount) int *array,
-            /* [in] */ int arrayCount,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *safeArray);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(arrayCount)  int *array,
+            /* [annotation][in] */ 
+            _In_  int arrayCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *safeArray);
         
         DECLSPEC_XFGVIRT(IUIAutomation, IntSafeArrayToNativeArray)
         HRESULT ( STDMETHODCALLTYPE *IntSafeArrayToNativeArray )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in SAFEARRAY * intArray,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*arrayCount) int **array,
-            /* [retval][out] */ __RPC__out int *arrayCount);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * intArray,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*arrayCount)  int **array,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *arrayCount);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RectToVariant)
         HRESULT ( STDMETHODCALLTYPE *RectToVariant )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ RECT rc,
-            /* [retval][out] */ __RPC__out VARIANT *var);
+            /* [annotation][in] */ 
+            _In_  RECT rc,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *var);
         
         DECLSPEC_XFGVIRT(IUIAutomation, VariantToRect)
         HRESULT ( STDMETHODCALLTYPE *VariantToRect )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ VARIANT var,
-            /* [retval][out] */ __RPC__out RECT *rc);
+            /* [annotation][in] */ 
+            _In_  VARIANT var,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *rc);
         
         DECLSPEC_XFGVIRT(IUIAutomation, SafeArrayToRectNativeArray)
         HRESULT ( STDMETHODCALLTYPE *SafeArrayToRectNativeArray )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in SAFEARRAY * rects,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*rectArrayCount) RECT **rectArray,
-            /* [retval][out] */ __RPC__out int *rectArrayCount);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * rects,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*rectArrayCount)  RECT **rectArray,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *rectArrayCount);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateProxyFactoryEntry)
         HRESULT ( STDMETHODCALLTYPE *CreateProxyFactoryEntry )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in_opt IUIAutomationProxyFactory *factory,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationProxyFactoryEntry **factoryEntry);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationProxyFactory *factory,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationProxyFactoryEntry **factoryEntry);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ProxyFactoryMapping)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProxyFactoryMapping )( 
             __RPC__in IUIAutomation * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationProxyFactoryMapping **factoryMapping);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationProxyFactoryMapping **factoryMapping);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetPropertyProgrammaticName)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyProgrammaticName )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ PROPERTYID property,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID property,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetPatternProgrammaticName)
         HRESULT ( STDMETHODCALLTYPE *GetPatternProgrammaticName )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ PATTERNID pattern,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
+            /* [annotation][in] */ 
+            _In_  PATTERNID pattern,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(IUIAutomation, PollForPotentialSupportedPatterns)
         HRESULT ( STDMETHODCALLTYPE *PollForPotentialSupportedPatterns )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *pElement,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *patternIds,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *patternNames);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *pElement,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *patternIds,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *patternNames);
         
         DECLSPEC_XFGVIRT(IUIAutomation, PollForPotentialSupportedProperties)
         HRESULT ( STDMETHODCALLTYPE *PollForPotentialSupportedProperties )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *pElement,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *propertyIds,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *propertyNames);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *pElement,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *propertyIds,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *propertyNames);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CheckNotSupported)
         HRESULT ( STDMETHODCALLTYPE *CheckNotSupported )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ VARIANT value,
-            /* [retval][out] */ __RPC__out BOOL *isNotSupported);
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *isNotSupported);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ReservedNotSupportedValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReservedNotSupportedValue )( 
             __RPC__in IUIAutomation * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **notSupportedValue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **notSupportedValue);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ReservedMixedAttributeValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReservedMixedAttributeValue )( 
             __RPC__in IUIAutomation * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **mixedAttributeValue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **mixedAttributeValue);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromIAccessible)
         HRESULT ( STDMETHODCALLTYPE *ElementFromIAccessible )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in_opt IAccessible *accessible,
-            /* [in] */ int childId,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  IAccessible *accessible,
+            /* [annotation][in] */ 
+            _In_  int childId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromIAccessibleBuildCache)
         HRESULT ( STDMETHODCALLTYPE *ElementFromIAccessibleBuildCache )( 
             __RPC__in IUIAutomation * This,
-            /* [in] */ __RPC__in_opt IAccessible *accessible,
-            /* [in] */ int childId,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  IAccessible *accessible,
+            /* [annotation][in] */ 
+            _In_  int childId,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         END_INTERFACE
     } IUIAutomationVtbl;
@@ -19668,22 +22224,28 @@ EXTERN_C const IID IID_IUIAutomation2;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_AutoSetFocus( 
-            /* [retval][out] */ __RPC__out BOOL *autoSetFocus) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *autoSetFocus) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_AutoSetFocus( 
-            /* [in] */ BOOL autoSetFocus) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL autoSetFocus) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ConnectionTimeout( 
-            /* [retval][out] */ __RPC__out DWORD *timeout) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *timeout) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ConnectionTimeout( 
-            /* [in] */ DWORD timeout) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD timeout) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_TransactionTimeout( 
-            /* [retval][out] */ __RPC__out DWORD *timeout) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *timeout) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_TransactionTimeout( 
-            /* [in] */ DWORD timeout) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD timeout) = 0;
         
     };
     
@@ -19697,7 +22259,8 @@ EXTERN_C const IID IID_IUIAutomation2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -19712,242 +22275,330 @@ EXTERN_C const IID IID_IUIAutomation2;
         DECLSPEC_XFGVIRT(IUIAutomation, CompareElements)
         HRESULT ( STDMETHODCALLTYPE *CompareElements )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *el1,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *el2,
-            /* [retval][out] */ __RPC__out BOOL *areSame);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *el1,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *el2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *areSame);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CompareRuntimeIds)
         HRESULT ( STDMETHODCALLTYPE *CompareRuntimeIds )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in SAFEARRAY * runtimeId1,
-            /* [in] */ __RPC__in SAFEARRAY * runtimeId2,
-            /* [retval][out] */ __RPC__out BOOL *areSame);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * runtimeId1,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * runtimeId2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *areSame);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetRootElement)
         HRESULT ( STDMETHODCALLTYPE *GetRootElement )( 
             __RPC__in IUIAutomation2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **root);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **root);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromHandle)
         HRESULT ( STDMETHODCALLTYPE *ElementFromHandle )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in UIA_HWND hwnd,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  UIA_HWND hwnd,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromPoint)
         HRESULT ( STDMETHODCALLTYPE *ElementFromPoint )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ POINT pt,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  POINT pt,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetFocusedElement)
         HRESULT ( STDMETHODCALLTYPE *GetFocusedElement )( 
             __RPC__in IUIAutomation2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetRootElementBuildCache)
         HRESULT ( STDMETHODCALLTYPE *GetRootElementBuildCache )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **root);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **root);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromHandleBuildCache)
         HRESULT ( STDMETHODCALLTYPE *ElementFromHandleBuildCache )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in UIA_HWND hwnd,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  UIA_HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromPointBuildCache)
         HRESULT ( STDMETHODCALLTYPE *ElementFromPointBuildCache )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ POINT pt,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  POINT pt,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetFocusedElementBuildCache)
         HRESULT ( STDMETHODCALLTYPE *GetFocusedElementBuildCache )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateTreeWalker)
         HRESULT ( STDMETHODCALLTYPE *CreateTreeWalker )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *pCondition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *pCondition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ControlViewWalker)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ControlViewWalker )( 
             __RPC__in IUIAutomation2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ContentViewWalker)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContentViewWalker )( 
             __RPC__in IUIAutomation2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_RawViewWalker)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RawViewWalker )( 
             __RPC__in IUIAutomation2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_RawViewCondition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RawViewCondition )( 
             __RPC__in IUIAutomation2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ControlViewCondition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ControlViewCondition )( 
             __RPC__in IUIAutomation2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ContentViewCondition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContentViewCondition )( 
             __RPC__in IUIAutomation2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateCacheRequest)
         HRESULT ( STDMETHODCALLTYPE *CreateCacheRequest )( 
             __RPC__in IUIAutomation2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCacheRequest **cacheRequest);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCacheRequest **cacheRequest);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateTrueCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateTrueCondition )( 
             __RPC__in IUIAutomation2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateFalseCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateFalseCondition )( 
             __RPC__in IUIAutomation2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreatePropertyCondition)
         HRESULT ( STDMETHODCALLTYPE *CreatePropertyCondition )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ VARIANT value,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreatePropertyConditionEx)
         HRESULT ( STDMETHODCALLTYPE *CreatePropertyConditionEx )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ VARIANT value,
-            /* [in] */ enum PropertyConditionFlags flags,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][in] */ 
+            _In_  enum PropertyConditionFlags flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateAndCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateAndCondition )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition1,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition2,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition1,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateAndConditionFromArray)
         HRESULT ( STDMETHODCALLTYPE *CreateAndConditionFromArray )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in_opt SAFEARRAY * conditions,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * conditions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateAndConditionFromNativeArray)
         HRESULT ( STDMETHODCALLTYPE *CreateAndConditionFromNativeArray )( 
             __RPC__in IUIAutomation2 * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(conditionCount) IUIAutomationCondition **conditions,
-            /* [in] */ int conditionCount,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(conditionCount)  IUIAutomationCondition **conditions,
+            /* [annotation][in] */ 
+            _In_  int conditionCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateOrCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateOrCondition )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition1,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition2,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition1,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateOrConditionFromArray)
         HRESULT ( STDMETHODCALLTYPE *CreateOrConditionFromArray )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in_opt SAFEARRAY * conditions,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * conditions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateOrConditionFromNativeArray)
         HRESULT ( STDMETHODCALLTYPE *CreateOrConditionFromNativeArray )( 
             __RPC__in IUIAutomation2 * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(conditionCount) IUIAutomationCondition **conditions,
-            /* [in] */ int conditionCount,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(conditionCount)  IUIAutomationCondition **conditions,
+            /* [annotation][in] */ 
+            _In_  int conditionCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateNotCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateNotCondition )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddAutomationEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddAutomationEventHandler )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ EVENTID eventId,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  EVENTID eventId,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveAutomationEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveAutomationEventHandler )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ EVENTID eventId,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  EVENTID eventId,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddPropertyChangedEventHandlerNativeArray)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyChangedEventHandlerNativeArray )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler,
-            /* [size_is][in] */ __RPC__in_ecount_full(propertyCount) PROPERTYID *propertyArray,
-            /* [in] */ int propertyCount);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(propertyCount)  PROPERTYID *propertyArray,
+            /* [annotation][in] */ 
+            _In_  int propertyCount);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddPropertyChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyChangedEventHandler )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler,
-            /* [in] */ __RPC__in SAFEARRAY * propertyArray);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * propertyArray);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemovePropertyChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemovePropertyChangedEventHandler )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddStructureChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddStructureChangedEventHandler )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationStructureChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationStructureChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveStructureChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveStructureChangedEventHandler )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationStructureChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationStructureChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddFocusChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddFocusChangedEventHandler )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationFocusChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationFocusChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveFocusChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveFocusChangedEventHandler )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationFocusChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationFocusChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveAllEventHandlers)
         HRESULT ( STDMETHODCALLTYPE *RemoveAllEventHandlers )( 
@@ -19956,133 +22607,176 @@ EXTERN_C const IID IID_IUIAutomation2;
         DECLSPEC_XFGVIRT(IUIAutomation, IntNativeArrayToSafeArray)
         HRESULT ( STDMETHODCALLTYPE *IntNativeArrayToSafeArray )( 
             __RPC__in IUIAutomation2 * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(arrayCount) int *array,
-            /* [in] */ int arrayCount,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *safeArray);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(arrayCount)  int *array,
+            /* [annotation][in] */ 
+            _In_  int arrayCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *safeArray);
         
         DECLSPEC_XFGVIRT(IUIAutomation, IntSafeArrayToNativeArray)
         HRESULT ( STDMETHODCALLTYPE *IntSafeArrayToNativeArray )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in SAFEARRAY * intArray,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*arrayCount) int **array,
-            /* [retval][out] */ __RPC__out int *arrayCount);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * intArray,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*arrayCount)  int **array,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *arrayCount);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RectToVariant)
         HRESULT ( STDMETHODCALLTYPE *RectToVariant )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ RECT rc,
-            /* [retval][out] */ __RPC__out VARIANT *var);
+            /* [annotation][in] */ 
+            _In_  RECT rc,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *var);
         
         DECLSPEC_XFGVIRT(IUIAutomation, VariantToRect)
         HRESULT ( STDMETHODCALLTYPE *VariantToRect )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ VARIANT var,
-            /* [retval][out] */ __RPC__out RECT *rc);
+            /* [annotation][in] */ 
+            _In_  VARIANT var,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *rc);
         
         DECLSPEC_XFGVIRT(IUIAutomation, SafeArrayToRectNativeArray)
         HRESULT ( STDMETHODCALLTYPE *SafeArrayToRectNativeArray )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in SAFEARRAY * rects,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*rectArrayCount) RECT **rectArray,
-            /* [retval][out] */ __RPC__out int *rectArrayCount);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * rects,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*rectArrayCount)  RECT **rectArray,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *rectArrayCount);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateProxyFactoryEntry)
         HRESULT ( STDMETHODCALLTYPE *CreateProxyFactoryEntry )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationProxyFactory *factory,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationProxyFactoryEntry **factoryEntry);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationProxyFactory *factory,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationProxyFactoryEntry **factoryEntry);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ProxyFactoryMapping)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProxyFactoryMapping )( 
             __RPC__in IUIAutomation2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationProxyFactoryMapping **factoryMapping);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationProxyFactoryMapping **factoryMapping);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetPropertyProgrammaticName)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyProgrammaticName )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ PROPERTYID property,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID property,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetPatternProgrammaticName)
         HRESULT ( STDMETHODCALLTYPE *GetPatternProgrammaticName )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ PATTERNID pattern,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
+            /* [annotation][in] */ 
+            _In_  PATTERNID pattern,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(IUIAutomation, PollForPotentialSupportedPatterns)
         HRESULT ( STDMETHODCALLTYPE *PollForPotentialSupportedPatterns )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *pElement,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *patternIds,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *patternNames);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *pElement,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *patternIds,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *patternNames);
         
         DECLSPEC_XFGVIRT(IUIAutomation, PollForPotentialSupportedProperties)
         HRESULT ( STDMETHODCALLTYPE *PollForPotentialSupportedProperties )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *pElement,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *propertyIds,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *propertyNames);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *pElement,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *propertyIds,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *propertyNames);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CheckNotSupported)
         HRESULT ( STDMETHODCALLTYPE *CheckNotSupported )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ VARIANT value,
-            /* [retval][out] */ __RPC__out BOOL *isNotSupported);
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *isNotSupported);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ReservedNotSupportedValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReservedNotSupportedValue )( 
             __RPC__in IUIAutomation2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **notSupportedValue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **notSupportedValue);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ReservedMixedAttributeValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReservedMixedAttributeValue )( 
             __RPC__in IUIAutomation2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **mixedAttributeValue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **mixedAttributeValue);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromIAccessible)
         HRESULT ( STDMETHODCALLTYPE *ElementFromIAccessible )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in_opt IAccessible *accessible,
-            /* [in] */ int childId,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  IAccessible *accessible,
+            /* [annotation][in] */ 
+            _In_  int childId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromIAccessibleBuildCache)
         HRESULT ( STDMETHODCALLTYPE *ElementFromIAccessibleBuildCache )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ __RPC__in_opt IAccessible *accessible,
-            /* [in] */ int childId,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  IAccessible *accessible,
+            /* [annotation][in] */ 
+            _In_  int childId,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, get_AutoSetFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AutoSetFocus )( 
             __RPC__in IUIAutomation2 * This,
-            /* [retval][out] */ __RPC__out BOOL *autoSetFocus);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *autoSetFocus);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, put_AutoSetFocus)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AutoSetFocus )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ BOOL autoSetFocus);
+            /* [annotation][in] */ 
+            _In_  BOOL autoSetFocus);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, get_ConnectionTimeout)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectionTimeout )( 
             __RPC__in IUIAutomation2 * This,
-            /* [retval][out] */ __RPC__out DWORD *timeout);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *timeout);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, put_ConnectionTimeout)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ConnectionTimeout )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ DWORD timeout);
+            /* [annotation][in] */ 
+            _In_  DWORD timeout);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, get_TransactionTimeout)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransactionTimeout )( 
             __RPC__in IUIAutomation2 * This,
-            /* [retval][out] */ __RPC__out DWORD *timeout);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *timeout);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, put_TransactionTimeout)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_TransactionTimeout )( 
             __RPC__in IUIAutomation2 * This,
-            /* [in] */ DWORD timeout);
+            /* [annotation][in] */ 
+            _In_  DWORD timeout);
         
         END_INTERFACE
     } IUIAutomation2Vtbl;
@@ -20318,15 +23012,22 @@ EXTERN_C const IID IID_IUIAutomation3;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddTextEditTextChangedEventHandler( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ enum TextEditChangeType textEditChangeType,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationTextEditTextChangedEventHandler *handler) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  enum TextEditChangeType textEditChangeType,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextEditTextChangedEventHandler *handler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveTextEditTextChangedEventHandler( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationTextEditTextChangedEventHandler *handler) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextEditTextChangedEventHandler *handler) = 0;
         
     };
     
@@ -20340,7 +23041,8 @@ EXTERN_C const IID IID_IUIAutomation3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -20355,242 +23057,330 @@ EXTERN_C const IID IID_IUIAutomation3;
         DECLSPEC_XFGVIRT(IUIAutomation, CompareElements)
         HRESULT ( STDMETHODCALLTYPE *CompareElements )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *el1,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *el2,
-            /* [retval][out] */ __RPC__out BOOL *areSame);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *el1,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *el2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *areSame);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CompareRuntimeIds)
         HRESULT ( STDMETHODCALLTYPE *CompareRuntimeIds )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in SAFEARRAY * runtimeId1,
-            /* [in] */ __RPC__in SAFEARRAY * runtimeId2,
-            /* [retval][out] */ __RPC__out BOOL *areSame);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * runtimeId1,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * runtimeId2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *areSame);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetRootElement)
         HRESULT ( STDMETHODCALLTYPE *GetRootElement )( 
             __RPC__in IUIAutomation3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **root);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **root);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromHandle)
         HRESULT ( STDMETHODCALLTYPE *ElementFromHandle )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in UIA_HWND hwnd,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  UIA_HWND hwnd,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromPoint)
         HRESULT ( STDMETHODCALLTYPE *ElementFromPoint )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ POINT pt,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  POINT pt,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetFocusedElement)
         HRESULT ( STDMETHODCALLTYPE *GetFocusedElement )( 
             __RPC__in IUIAutomation3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetRootElementBuildCache)
         HRESULT ( STDMETHODCALLTYPE *GetRootElementBuildCache )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **root);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **root);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromHandleBuildCache)
         HRESULT ( STDMETHODCALLTYPE *ElementFromHandleBuildCache )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in UIA_HWND hwnd,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  UIA_HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromPointBuildCache)
         HRESULT ( STDMETHODCALLTYPE *ElementFromPointBuildCache )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ POINT pt,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  POINT pt,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetFocusedElementBuildCache)
         HRESULT ( STDMETHODCALLTYPE *GetFocusedElementBuildCache )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateTreeWalker)
         HRESULT ( STDMETHODCALLTYPE *CreateTreeWalker )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *pCondition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *pCondition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ControlViewWalker)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ControlViewWalker )( 
             __RPC__in IUIAutomation3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ContentViewWalker)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContentViewWalker )( 
             __RPC__in IUIAutomation3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_RawViewWalker)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RawViewWalker )( 
             __RPC__in IUIAutomation3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_RawViewCondition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RawViewCondition )( 
             __RPC__in IUIAutomation3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ControlViewCondition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ControlViewCondition )( 
             __RPC__in IUIAutomation3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ContentViewCondition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContentViewCondition )( 
             __RPC__in IUIAutomation3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateCacheRequest)
         HRESULT ( STDMETHODCALLTYPE *CreateCacheRequest )( 
             __RPC__in IUIAutomation3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCacheRequest **cacheRequest);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCacheRequest **cacheRequest);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateTrueCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateTrueCondition )( 
             __RPC__in IUIAutomation3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateFalseCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateFalseCondition )( 
             __RPC__in IUIAutomation3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreatePropertyCondition)
         HRESULT ( STDMETHODCALLTYPE *CreatePropertyCondition )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ VARIANT value,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreatePropertyConditionEx)
         HRESULT ( STDMETHODCALLTYPE *CreatePropertyConditionEx )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ VARIANT value,
-            /* [in] */ enum PropertyConditionFlags flags,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][in] */ 
+            _In_  enum PropertyConditionFlags flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateAndCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateAndCondition )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition1,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition2,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition1,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateAndConditionFromArray)
         HRESULT ( STDMETHODCALLTYPE *CreateAndConditionFromArray )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt SAFEARRAY * conditions,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * conditions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateAndConditionFromNativeArray)
         HRESULT ( STDMETHODCALLTYPE *CreateAndConditionFromNativeArray )( 
             __RPC__in IUIAutomation3 * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(conditionCount) IUIAutomationCondition **conditions,
-            /* [in] */ int conditionCount,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(conditionCount)  IUIAutomationCondition **conditions,
+            /* [annotation][in] */ 
+            _In_  int conditionCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateOrCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateOrCondition )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition1,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition2,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition1,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateOrConditionFromArray)
         HRESULT ( STDMETHODCALLTYPE *CreateOrConditionFromArray )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt SAFEARRAY * conditions,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * conditions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateOrConditionFromNativeArray)
         HRESULT ( STDMETHODCALLTYPE *CreateOrConditionFromNativeArray )( 
             __RPC__in IUIAutomation3 * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(conditionCount) IUIAutomationCondition **conditions,
-            /* [in] */ int conditionCount,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(conditionCount)  IUIAutomationCondition **conditions,
+            /* [annotation][in] */ 
+            _In_  int conditionCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateNotCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateNotCondition )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddAutomationEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddAutomationEventHandler )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ EVENTID eventId,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  EVENTID eventId,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveAutomationEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveAutomationEventHandler )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ EVENTID eventId,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  EVENTID eventId,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddPropertyChangedEventHandlerNativeArray)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyChangedEventHandlerNativeArray )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler,
-            /* [size_is][in] */ __RPC__in_ecount_full(propertyCount) PROPERTYID *propertyArray,
-            /* [in] */ int propertyCount);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(propertyCount)  PROPERTYID *propertyArray,
+            /* [annotation][in] */ 
+            _In_  int propertyCount);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddPropertyChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyChangedEventHandler )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler,
-            /* [in] */ __RPC__in SAFEARRAY * propertyArray);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * propertyArray);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemovePropertyChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemovePropertyChangedEventHandler )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddStructureChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddStructureChangedEventHandler )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationStructureChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationStructureChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveStructureChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveStructureChangedEventHandler )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationStructureChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationStructureChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddFocusChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddFocusChangedEventHandler )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationFocusChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationFocusChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveFocusChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveFocusChangedEventHandler )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationFocusChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationFocusChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveAllEventHandlers)
         HRESULT ( STDMETHODCALLTYPE *RemoveAllEventHandlers )( 
@@ -20599,148 +23389,198 @@ EXTERN_C const IID IID_IUIAutomation3;
         DECLSPEC_XFGVIRT(IUIAutomation, IntNativeArrayToSafeArray)
         HRESULT ( STDMETHODCALLTYPE *IntNativeArrayToSafeArray )( 
             __RPC__in IUIAutomation3 * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(arrayCount) int *array,
-            /* [in] */ int arrayCount,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *safeArray);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(arrayCount)  int *array,
+            /* [annotation][in] */ 
+            _In_  int arrayCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *safeArray);
         
         DECLSPEC_XFGVIRT(IUIAutomation, IntSafeArrayToNativeArray)
         HRESULT ( STDMETHODCALLTYPE *IntSafeArrayToNativeArray )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in SAFEARRAY * intArray,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*arrayCount) int **array,
-            /* [retval][out] */ __RPC__out int *arrayCount);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * intArray,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*arrayCount)  int **array,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *arrayCount);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RectToVariant)
         HRESULT ( STDMETHODCALLTYPE *RectToVariant )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ RECT rc,
-            /* [retval][out] */ __RPC__out VARIANT *var);
+            /* [annotation][in] */ 
+            _In_  RECT rc,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *var);
         
         DECLSPEC_XFGVIRT(IUIAutomation, VariantToRect)
         HRESULT ( STDMETHODCALLTYPE *VariantToRect )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ VARIANT var,
-            /* [retval][out] */ __RPC__out RECT *rc);
+            /* [annotation][in] */ 
+            _In_  VARIANT var,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *rc);
         
         DECLSPEC_XFGVIRT(IUIAutomation, SafeArrayToRectNativeArray)
         HRESULT ( STDMETHODCALLTYPE *SafeArrayToRectNativeArray )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in SAFEARRAY * rects,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*rectArrayCount) RECT **rectArray,
-            /* [retval][out] */ __RPC__out int *rectArrayCount);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * rects,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*rectArrayCount)  RECT **rectArray,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *rectArrayCount);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateProxyFactoryEntry)
         HRESULT ( STDMETHODCALLTYPE *CreateProxyFactoryEntry )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationProxyFactory *factory,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationProxyFactoryEntry **factoryEntry);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationProxyFactory *factory,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationProxyFactoryEntry **factoryEntry);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ProxyFactoryMapping)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProxyFactoryMapping )( 
             __RPC__in IUIAutomation3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationProxyFactoryMapping **factoryMapping);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationProxyFactoryMapping **factoryMapping);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetPropertyProgrammaticName)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyProgrammaticName )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ PROPERTYID property,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID property,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetPatternProgrammaticName)
         HRESULT ( STDMETHODCALLTYPE *GetPatternProgrammaticName )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ PATTERNID pattern,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
+            /* [annotation][in] */ 
+            _In_  PATTERNID pattern,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(IUIAutomation, PollForPotentialSupportedPatterns)
         HRESULT ( STDMETHODCALLTYPE *PollForPotentialSupportedPatterns )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *pElement,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *patternIds,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *patternNames);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *pElement,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *patternIds,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *patternNames);
         
         DECLSPEC_XFGVIRT(IUIAutomation, PollForPotentialSupportedProperties)
         HRESULT ( STDMETHODCALLTYPE *PollForPotentialSupportedProperties )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *pElement,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *propertyIds,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *propertyNames);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *pElement,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *propertyIds,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *propertyNames);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CheckNotSupported)
         HRESULT ( STDMETHODCALLTYPE *CheckNotSupported )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ VARIANT value,
-            /* [retval][out] */ __RPC__out BOOL *isNotSupported);
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *isNotSupported);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ReservedNotSupportedValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReservedNotSupportedValue )( 
             __RPC__in IUIAutomation3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **notSupportedValue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **notSupportedValue);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ReservedMixedAttributeValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReservedMixedAttributeValue )( 
             __RPC__in IUIAutomation3 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **mixedAttributeValue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **mixedAttributeValue);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromIAccessible)
         HRESULT ( STDMETHODCALLTYPE *ElementFromIAccessible )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt IAccessible *accessible,
-            /* [in] */ int childId,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  IAccessible *accessible,
+            /* [annotation][in] */ 
+            _In_  int childId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromIAccessibleBuildCache)
         HRESULT ( STDMETHODCALLTYPE *ElementFromIAccessibleBuildCache )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt IAccessible *accessible,
-            /* [in] */ int childId,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  IAccessible *accessible,
+            /* [annotation][in] */ 
+            _In_  int childId,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, get_AutoSetFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AutoSetFocus )( 
             __RPC__in IUIAutomation3 * This,
-            /* [retval][out] */ __RPC__out BOOL *autoSetFocus);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *autoSetFocus);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, put_AutoSetFocus)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AutoSetFocus )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ BOOL autoSetFocus);
+            /* [annotation][in] */ 
+            _In_  BOOL autoSetFocus);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, get_ConnectionTimeout)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectionTimeout )( 
             __RPC__in IUIAutomation3 * This,
-            /* [retval][out] */ __RPC__out DWORD *timeout);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *timeout);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, put_ConnectionTimeout)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ConnectionTimeout )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ DWORD timeout);
+            /* [annotation][in] */ 
+            _In_  DWORD timeout);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, get_TransactionTimeout)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransactionTimeout )( 
             __RPC__in IUIAutomation3 * This,
-            /* [retval][out] */ __RPC__out DWORD *timeout);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *timeout);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, put_TransactionTimeout)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_TransactionTimeout )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ DWORD timeout);
+            /* [annotation][in] */ 
+            _In_  DWORD timeout);
         
         DECLSPEC_XFGVIRT(IUIAutomation3, AddTextEditTextChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddTextEditTextChangedEventHandler )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ enum TextEditChangeType textEditChangeType,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationTextEditTextChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  enum TextEditChangeType textEditChangeType,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextEditTextChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation3, RemoveTextEditTextChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveTextEditTextChangedEventHandler )( 
             __RPC__in IUIAutomation3 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationTextEditTextChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextEditTextChangedEventHandler *handler);
         
         END_INTERFACE
     } IUIAutomation3Vtbl;
@@ -20983,16 +23823,24 @@ EXTERN_C const IID IID_IUIAutomation4;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddChangesEventHandler( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [size_is][in] */ __RPC__in_ecount_full(changesCount) int *changeTypes,
-            /* [in] */ int changesCount,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *pCacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationChangesEventHandler *handler) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(changesCount)  int *changeTypes,
+            /* [annotation][in] */ 
+            _In_  int changesCount,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *pCacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationChangesEventHandler *handler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveChangesEventHandler( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationChangesEventHandler *handler) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationChangesEventHandler *handler) = 0;
         
     };
     
@@ -21006,7 +23854,8 @@ EXTERN_C const IID IID_IUIAutomation4;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -21021,242 +23870,330 @@ EXTERN_C const IID IID_IUIAutomation4;
         DECLSPEC_XFGVIRT(IUIAutomation, CompareElements)
         HRESULT ( STDMETHODCALLTYPE *CompareElements )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *el1,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *el2,
-            /* [retval][out] */ __RPC__out BOOL *areSame);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *el1,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *el2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *areSame);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CompareRuntimeIds)
         HRESULT ( STDMETHODCALLTYPE *CompareRuntimeIds )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in SAFEARRAY * runtimeId1,
-            /* [in] */ __RPC__in SAFEARRAY * runtimeId2,
-            /* [retval][out] */ __RPC__out BOOL *areSame);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * runtimeId1,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * runtimeId2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *areSame);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetRootElement)
         HRESULT ( STDMETHODCALLTYPE *GetRootElement )( 
             __RPC__in IUIAutomation4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **root);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **root);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromHandle)
         HRESULT ( STDMETHODCALLTYPE *ElementFromHandle )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in UIA_HWND hwnd,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  UIA_HWND hwnd,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromPoint)
         HRESULT ( STDMETHODCALLTYPE *ElementFromPoint )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ POINT pt,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  POINT pt,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetFocusedElement)
         HRESULT ( STDMETHODCALLTYPE *GetFocusedElement )( 
             __RPC__in IUIAutomation4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetRootElementBuildCache)
         HRESULT ( STDMETHODCALLTYPE *GetRootElementBuildCache )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **root);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **root);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromHandleBuildCache)
         HRESULT ( STDMETHODCALLTYPE *ElementFromHandleBuildCache )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in UIA_HWND hwnd,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  UIA_HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromPointBuildCache)
         HRESULT ( STDMETHODCALLTYPE *ElementFromPointBuildCache )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ POINT pt,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  POINT pt,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetFocusedElementBuildCache)
         HRESULT ( STDMETHODCALLTYPE *GetFocusedElementBuildCache )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateTreeWalker)
         HRESULT ( STDMETHODCALLTYPE *CreateTreeWalker )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *pCondition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *pCondition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ControlViewWalker)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ControlViewWalker )( 
             __RPC__in IUIAutomation4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ContentViewWalker)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContentViewWalker )( 
             __RPC__in IUIAutomation4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_RawViewWalker)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RawViewWalker )( 
             __RPC__in IUIAutomation4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_RawViewCondition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RawViewCondition )( 
             __RPC__in IUIAutomation4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ControlViewCondition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ControlViewCondition )( 
             __RPC__in IUIAutomation4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ContentViewCondition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContentViewCondition )( 
             __RPC__in IUIAutomation4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateCacheRequest)
         HRESULT ( STDMETHODCALLTYPE *CreateCacheRequest )( 
             __RPC__in IUIAutomation4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCacheRequest **cacheRequest);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCacheRequest **cacheRequest);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateTrueCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateTrueCondition )( 
             __RPC__in IUIAutomation4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateFalseCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateFalseCondition )( 
             __RPC__in IUIAutomation4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreatePropertyCondition)
         HRESULT ( STDMETHODCALLTYPE *CreatePropertyCondition )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ VARIANT value,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreatePropertyConditionEx)
         HRESULT ( STDMETHODCALLTYPE *CreatePropertyConditionEx )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ VARIANT value,
-            /* [in] */ enum PropertyConditionFlags flags,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][in] */ 
+            _In_  enum PropertyConditionFlags flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateAndCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateAndCondition )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition1,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition2,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition1,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateAndConditionFromArray)
         HRESULT ( STDMETHODCALLTYPE *CreateAndConditionFromArray )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt SAFEARRAY * conditions,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * conditions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateAndConditionFromNativeArray)
         HRESULT ( STDMETHODCALLTYPE *CreateAndConditionFromNativeArray )( 
             __RPC__in IUIAutomation4 * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(conditionCount) IUIAutomationCondition **conditions,
-            /* [in] */ int conditionCount,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(conditionCount)  IUIAutomationCondition **conditions,
+            /* [annotation][in] */ 
+            _In_  int conditionCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateOrCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateOrCondition )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition1,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition2,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition1,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateOrConditionFromArray)
         HRESULT ( STDMETHODCALLTYPE *CreateOrConditionFromArray )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt SAFEARRAY * conditions,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * conditions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateOrConditionFromNativeArray)
         HRESULT ( STDMETHODCALLTYPE *CreateOrConditionFromNativeArray )( 
             __RPC__in IUIAutomation4 * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(conditionCount) IUIAutomationCondition **conditions,
-            /* [in] */ int conditionCount,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(conditionCount)  IUIAutomationCondition **conditions,
+            /* [annotation][in] */ 
+            _In_  int conditionCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateNotCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateNotCondition )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddAutomationEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddAutomationEventHandler )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ EVENTID eventId,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  EVENTID eventId,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveAutomationEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveAutomationEventHandler )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ EVENTID eventId,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  EVENTID eventId,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddPropertyChangedEventHandlerNativeArray)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyChangedEventHandlerNativeArray )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler,
-            /* [size_is][in] */ __RPC__in_ecount_full(propertyCount) PROPERTYID *propertyArray,
-            /* [in] */ int propertyCount);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(propertyCount)  PROPERTYID *propertyArray,
+            /* [annotation][in] */ 
+            _In_  int propertyCount);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddPropertyChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyChangedEventHandler )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler,
-            /* [in] */ __RPC__in SAFEARRAY * propertyArray);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * propertyArray);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemovePropertyChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemovePropertyChangedEventHandler )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddStructureChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddStructureChangedEventHandler )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationStructureChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationStructureChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveStructureChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveStructureChangedEventHandler )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationStructureChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationStructureChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddFocusChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddFocusChangedEventHandler )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationFocusChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationFocusChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveFocusChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveFocusChangedEventHandler )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationFocusChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationFocusChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveAllEventHandlers)
         HRESULT ( STDMETHODCALLTYPE *RemoveAllEventHandlers )( 
@@ -21265,164 +24202,222 @@ EXTERN_C const IID IID_IUIAutomation4;
         DECLSPEC_XFGVIRT(IUIAutomation, IntNativeArrayToSafeArray)
         HRESULT ( STDMETHODCALLTYPE *IntNativeArrayToSafeArray )( 
             __RPC__in IUIAutomation4 * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(arrayCount) int *array,
-            /* [in] */ int arrayCount,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *safeArray);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(arrayCount)  int *array,
+            /* [annotation][in] */ 
+            _In_  int arrayCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *safeArray);
         
         DECLSPEC_XFGVIRT(IUIAutomation, IntSafeArrayToNativeArray)
         HRESULT ( STDMETHODCALLTYPE *IntSafeArrayToNativeArray )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in SAFEARRAY * intArray,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*arrayCount) int **array,
-            /* [retval][out] */ __RPC__out int *arrayCount);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * intArray,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*arrayCount)  int **array,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *arrayCount);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RectToVariant)
         HRESULT ( STDMETHODCALLTYPE *RectToVariant )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ RECT rc,
-            /* [retval][out] */ __RPC__out VARIANT *var);
+            /* [annotation][in] */ 
+            _In_  RECT rc,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *var);
         
         DECLSPEC_XFGVIRT(IUIAutomation, VariantToRect)
         HRESULT ( STDMETHODCALLTYPE *VariantToRect )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ VARIANT var,
-            /* [retval][out] */ __RPC__out RECT *rc);
+            /* [annotation][in] */ 
+            _In_  VARIANT var,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *rc);
         
         DECLSPEC_XFGVIRT(IUIAutomation, SafeArrayToRectNativeArray)
         HRESULT ( STDMETHODCALLTYPE *SafeArrayToRectNativeArray )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in SAFEARRAY * rects,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*rectArrayCount) RECT **rectArray,
-            /* [retval][out] */ __RPC__out int *rectArrayCount);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * rects,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*rectArrayCount)  RECT **rectArray,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *rectArrayCount);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateProxyFactoryEntry)
         HRESULT ( STDMETHODCALLTYPE *CreateProxyFactoryEntry )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationProxyFactory *factory,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationProxyFactoryEntry **factoryEntry);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationProxyFactory *factory,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationProxyFactoryEntry **factoryEntry);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ProxyFactoryMapping)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProxyFactoryMapping )( 
             __RPC__in IUIAutomation4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationProxyFactoryMapping **factoryMapping);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationProxyFactoryMapping **factoryMapping);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetPropertyProgrammaticName)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyProgrammaticName )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ PROPERTYID property,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID property,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetPatternProgrammaticName)
         HRESULT ( STDMETHODCALLTYPE *GetPatternProgrammaticName )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ PATTERNID pattern,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
+            /* [annotation][in] */ 
+            _In_  PATTERNID pattern,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(IUIAutomation, PollForPotentialSupportedPatterns)
         HRESULT ( STDMETHODCALLTYPE *PollForPotentialSupportedPatterns )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *pElement,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *patternIds,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *patternNames);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *pElement,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *patternIds,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *patternNames);
         
         DECLSPEC_XFGVIRT(IUIAutomation, PollForPotentialSupportedProperties)
         HRESULT ( STDMETHODCALLTYPE *PollForPotentialSupportedProperties )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *pElement,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *propertyIds,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *propertyNames);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *pElement,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *propertyIds,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *propertyNames);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CheckNotSupported)
         HRESULT ( STDMETHODCALLTYPE *CheckNotSupported )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ VARIANT value,
-            /* [retval][out] */ __RPC__out BOOL *isNotSupported);
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *isNotSupported);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ReservedNotSupportedValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReservedNotSupportedValue )( 
             __RPC__in IUIAutomation4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **notSupportedValue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **notSupportedValue);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ReservedMixedAttributeValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReservedMixedAttributeValue )( 
             __RPC__in IUIAutomation4 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **mixedAttributeValue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **mixedAttributeValue);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromIAccessible)
         HRESULT ( STDMETHODCALLTYPE *ElementFromIAccessible )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IAccessible *accessible,
-            /* [in] */ int childId,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  IAccessible *accessible,
+            /* [annotation][in] */ 
+            _In_  int childId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromIAccessibleBuildCache)
         HRESULT ( STDMETHODCALLTYPE *ElementFromIAccessibleBuildCache )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IAccessible *accessible,
-            /* [in] */ int childId,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  IAccessible *accessible,
+            /* [annotation][in] */ 
+            _In_  int childId,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, get_AutoSetFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AutoSetFocus )( 
             __RPC__in IUIAutomation4 * This,
-            /* [retval][out] */ __RPC__out BOOL *autoSetFocus);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *autoSetFocus);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, put_AutoSetFocus)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AutoSetFocus )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ BOOL autoSetFocus);
+            /* [annotation][in] */ 
+            _In_  BOOL autoSetFocus);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, get_ConnectionTimeout)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectionTimeout )( 
             __RPC__in IUIAutomation4 * This,
-            /* [retval][out] */ __RPC__out DWORD *timeout);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *timeout);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, put_ConnectionTimeout)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ConnectionTimeout )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ DWORD timeout);
+            /* [annotation][in] */ 
+            _In_  DWORD timeout);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, get_TransactionTimeout)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransactionTimeout )( 
             __RPC__in IUIAutomation4 * This,
-            /* [retval][out] */ __RPC__out DWORD *timeout);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *timeout);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, put_TransactionTimeout)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_TransactionTimeout )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ DWORD timeout);
+            /* [annotation][in] */ 
+            _In_  DWORD timeout);
         
         DECLSPEC_XFGVIRT(IUIAutomation3, AddTextEditTextChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddTextEditTextChangedEventHandler )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ enum TextEditChangeType textEditChangeType,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationTextEditTextChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  enum TextEditChangeType textEditChangeType,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextEditTextChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation3, RemoveTextEditTextChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveTextEditTextChangedEventHandler )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationTextEditTextChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextEditTextChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation4, AddChangesEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddChangesEventHandler )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [size_is][in] */ __RPC__in_ecount_full(changesCount) int *changeTypes,
-            /* [in] */ int changesCount,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *pCacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationChangesEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(changesCount)  int *changeTypes,
+            /* [annotation][in] */ 
+            _In_  int changesCount,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *pCacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationChangesEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation4, RemoveChangesEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveChangesEventHandler )( 
             __RPC__in IUIAutomation4 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationChangesEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationChangesEventHandler *handler);
         
         END_INTERFACE
     } IUIAutomation4Vtbl;
@@ -21672,14 +24667,20 @@ EXTERN_C const IID IID_IUIAutomation5;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddNotificationEventHandler( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationNotificationEventHandler *handler) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationNotificationEventHandler *handler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveNotificationEventHandler( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationNotificationEventHandler *handler) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationNotificationEventHandler *handler) = 0;
         
     };
     
@@ -21693,7 +24694,8 @@ EXTERN_C const IID IID_IUIAutomation5;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -21708,242 +24710,330 @@ EXTERN_C const IID IID_IUIAutomation5;
         DECLSPEC_XFGVIRT(IUIAutomation, CompareElements)
         HRESULT ( STDMETHODCALLTYPE *CompareElements )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *el1,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *el2,
-            /* [retval][out] */ __RPC__out BOOL *areSame);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *el1,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *el2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *areSame);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CompareRuntimeIds)
         HRESULT ( STDMETHODCALLTYPE *CompareRuntimeIds )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in SAFEARRAY * runtimeId1,
-            /* [in] */ __RPC__in SAFEARRAY * runtimeId2,
-            /* [retval][out] */ __RPC__out BOOL *areSame);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * runtimeId1,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * runtimeId2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *areSame);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetRootElement)
         HRESULT ( STDMETHODCALLTYPE *GetRootElement )( 
             __RPC__in IUIAutomation5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **root);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **root);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromHandle)
         HRESULT ( STDMETHODCALLTYPE *ElementFromHandle )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in UIA_HWND hwnd,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  UIA_HWND hwnd,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromPoint)
         HRESULT ( STDMETHODCALLTYPE *ElementFromPoint )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ POINT pt,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  POINT pt,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetFocusedElement)
         HRESULT ( STDMETHODCALLTYPE *GetFocusedElement )( 
             __RPC__in IUIAutomation5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetRootElementBuildCache)
         HRESULT ( STDMETHODCALLTYPE *GetRootElementBuildCache )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **root);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **root);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromHandleBuildCache)
         HRESULT ( STDMETHODCALLTYPE *ElementFromHandleBuildCache )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in UIA_HWND hwnd,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  UIA_HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromPointBuildCache)
         HRESULT ( STDMETHODCALLTYPE *ElementFromPointBuildCache )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ POINT pt,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  POINT pt,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetFocusedElementBuildCache)
         HRESULT ( STDMETHODCALLTYPE *GetFocusedElementBuildCache )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateTreeWalker)
         HRESULT ( STDMETHODCALLTYPE *CreateTreeWalker )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *pCondition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *pCondition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ControlViewWalker)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ControlViewWalker )( 
             __RPC__in IUIAutomation5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ContentViewWalker)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContentViewWalker )( 
             __RPC__in IUIAutomation5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_RawViewWalker)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RawViewWalker )( 
             __RPC__in IUIAutomation5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_RawViewCondition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RawViewCondition )( 
             __RPC__in IUIAutomation5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ControlViewCondition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ControlViewCondition )( 
             __RPC__in IUIAutomation5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ContentViewCondition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContentViewCondition )( 
             __RPC__in IUIAutomation5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateCacheRequest)
         HRESULT ( STDMETHODCALLTYPE *CreateCacheRequest )( 
             __RPC__in IUIAutomation5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCacheRequest **cacheRequest);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCacheRequest **cacheRequest);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateTrueCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateTrueCondition )( 
             __RPC__in IUIAutomation5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateFalseCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateFalseCondition )( 
             __RPC__in IUIAutomation5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreatePropertyCondition)
         HRESULT ( STDMETHODCALLTYPE *CreatePropertyCondition )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ VARIANT value,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreatePropertyConditionEx)
         HRESULT ( STDMETHODCALLTYPE *CreatePropertyConditionEx )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ VARIANT value,
-            /* [in] */ enum PropertyConditionFlags flags,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][in] */ 
+            _In_  enum PropertyConditionFlags flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateAndCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateAndCondition )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition1,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition2,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition1,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateAndConditionFromArray)
         HRESULT ( STDMETHODCALLTYPE *CreateAndConditionFromArray )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt SAFEARRAY * conditions,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * conditions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateAndConditionFromNativeArray)
         HRESULT ( STDMETHODCALLTYPE *CreateAndConditionFromNativeArray )( 
             __RPC__in IUIAutomation5 * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(conditionCount) IUIAutomationCondition **conditions,
-            /* [in] */ int conditionCount,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(conditionCount)  IUIAutomationCondition **conditions,
+            /* [annotation][in] */ 
+            _In_  int conditionCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateOrCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateOrCondition )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition1,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition2,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition1,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateOrConditionFromArray)
         HRESULT ( STDMETHODCALLTYPE *CreateOrConditionFromArray )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt SAFEARRAY * conditions,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * conditions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateOrConditionFromNativeArray)
         HRESULT ( STDMETHODCALLTYPE *CreateOrConditionFromNativeArray )( 
             __RPC__in IUIAutomation5 * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(conditionCount) IUIAutomationCondition **conditions,
-            /* [in] */ int conditionCount,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(conditionCount)  IUIAutomationCondition **conditions,
+            /* [annotation][in] */ 
+            _In_  int conditionCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateNotCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateNotCondition )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddAutomationEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddAutomationEventHandler )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ EVENTID eventId,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  EVENTID eventId,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveAutomationEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveAutomationEventHandler )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ EVENTID eventId,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  EVENTID eventId,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddPropertyChangedEventHandlerNativeArray)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyChangedEventHandlerNativeArray )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler,
-            /* [size_is][in] */ __RPC__in_ecount_full(propertyCount) PROPERTYID *propertyArray,
-            /* [in] */ int propertyCount);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(propertyCount)  PROPERTYID *propertyArray,
+            /* [annotation][in] */ 
+            _In_  int propertyCount);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddPropertyChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyChangedEventHandler )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler,
-            /* [in] */ __RPC__in SAFEARRAY * propertyArray);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * propertyArray);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemovePropertyChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemovePropertyChangedEventHandler )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddStructureChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddStructureChangedEventHandler )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationStructureChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationStructureChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveStructureChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveStructureChangedEventHandler )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationStructureChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationStructureChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddFocusChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddFocusChangedEventHandler )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationFocusChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationFocusChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveFocusChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveFocusChangedEventHandler )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationFocusChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationFocusChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveAllEventHandlers)
         HRESULT ( STDMETHODCALLTYPE *RemoveAllEventHandlers )( 
@@ -21952,178 +25042,242 @@ EXTERN_C const IID IID_IUIAutomation5;
         DECLSPEC_XFGVIRT(IUIAutomation, IntNativeArrayToSafeArray)
         HRESULT ( STDMETHODCALLTYPE *IntNativeArrayToSafeArray )( 
             __RPC__in IUIAutomation5 * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(arrayCount) int *array,
-            /* [in] */ int arrayCount,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *safeArray);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(arrayCount)  int *array,
+            /* [annotation][in] */ 
+            _In_  int arrayCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *safeArray);
         
         DECLSPEC_XFGVIRT(IUIAutomation, IntSafeArrayToNativeArray)
         HRESULT ( STDMETHODCALLTYPE *IntSafeArrayToNativeArray )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in SAFEARRAY * intArray,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*arrayCount) int **array,
-            /* [retval][out] */ __RPC__out int *arrayCount);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * intArray,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*arrayCount)  int **array,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *arrayCount);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RectToVariant)
         HRESULT ( STDMETHODCALLTYPE *RectToVariant )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ RECT rc,
-            /* [retval][out] */ __RPC__out VARIANT *var);
+            /* [annotation][in] */ 
+            _In_  RECT rc,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *var);
         
         DECLSPEC_XFGVIRT(IUIAutomation, VariantToRect)
         HRESULT ( STDMETHODCALLTYPE *VariantToRect )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ VARIANT var,
-            /* [retval][out] */ __RPC__out RECT *rc);
+            /* [annotation][in] */ 
+            _In_  VARIANT var,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *rc);
         
         DECLSPEC_XFGVIRT(IUIAutomation, SafeArrayToRectNativeArray)
         HRESULT ( STDMETHODCALLTYPE *SafeArrayToRectNativeArray )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in SAFEARRAY * rects,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*rectArrayCount) RECT **rectArray,
-            /* [retval][out] */ __RPC__out int *rectArrayCount);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * rects,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*rectArrayCount)  RECT **rectArray,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *rectArrayCount);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateProxyFactoryEntry)
         HRESULT ( STDMETHODCALLTYPE *CreateProxyFactoryEntry )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationProxyFactory *factory,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationProxyFactoryEntry **factoryEntry);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationProxyFactory *factory,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationProxyFactoryEntry **factoryEntry);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ProxyFactoryMapping)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProxyFactoryMapping )( 
             __RPC__in IUIAutomation5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationProxyFactoryMapping **factoryMapping);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationProxyFactoryMapping **factoryMapping);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetPropertyProgrammaticName)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyProgrammaticName )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ PROPERTYID property,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID property,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetPatternProgrammaticName)
         HRESULT ( STDMETHODCALLTYPE *GetPatternProgrammaticName )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ PATTERNID pattern,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
+            /* [annotation][in] */ 
+            _In_  PATTERNID pattern,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(IUIAutomation, PollForPotentialSupportedPatterns)
         HRESULT ( STDMETHODCALLTYPE *PollForPotentialSupportedPatterns )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *pElement,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *patternIds,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *patternNames);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *pElement,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *patternIds,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *patternNames);
         
         DECLSPEC_XFGVIRT(IUIAutomation, PollForPotentialSupportedProperties)
         HRESULT ( STDMETHODCALLTYPE *PollForPotentialSupportedProperties )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *pElement,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *propertyIds,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *propertyNames);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *pElement,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *propertyIds,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *propertyNames);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CheckNotSupported)
         HRESULT ( STDMETHODCALLTYPE *CheckNotSupported )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ VARIANT value,
-            /* [retval][out] */ __RPC__out BOOL *isNotSupported);
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *isNotSupported);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ReservedNotSupportedValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReservedNotSupportedValue )( 
             __RPC__in IUIAutomation5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **notSupportedValue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **notSupportedValue);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ReservedMixedAttributeValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReservedMixedAttributeValue )( 
             __RPC__in IUIAutomation5 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **mixedAttributeValue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **mixedAttributeValue);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromIAccessible)
         HRESULT ( STDMETHODCALLTYPE *ElementFromIAccessible )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IAccessible *accessible,
-            /* [in] */ int childId,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  IAccessible *accessible,
+            /* [annotation][in] */ 
+            _In_  int childId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromIAccessibleBuildCache)
         HRESULT ( STDMETHODCALLTYPE *ElementFromIAccessibleBuildCache )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IAccessible *accessible,
-            /* [in] */ int childId,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  IAccessible *accessible,
+            /* [annotation][in] */ 
+            _In_  int childId,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, get_AutoSetFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AutoSetFocus )( 
             __RPC__in IUIAutomation5 * This,
-            /* [retval][out] */ __RPC__out BOOL *autoSetFocus);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *autoSetFocus);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, put_AutoSetFocus)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AutoSetFocus )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ BOOL autoSetFocus);
+            /* [annotation][in] */ 
+            _In_  BOOL autoSetFocus);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, get_ConnectionTimeout)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectionTimeout )( 
             __RPC__in IUIAutomation5 * This,
-            /* [retval][out] */ __RPC__out DWORD *timeout);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *timeout);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, put_ConnectionTimeout)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ConnectionTimeout )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ DWORD timeout);
+            /* [annotation][in] */ 
+            _In_  DWORD timeout);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, get_TransactionTimeout)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransactionTimeout )( 
             __RPC__in IUIAutomation5 * This,
-            /* [retval][out] */ __RPC__out DWORD *timeout);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *timeout);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, put_TransactionTimeout)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_TransactionTimeout )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ DWORD timeout);
+            /* [annotation][in] */ 
+            _In_  DWORD timeout);
         
         DECLSPEC_XFGVIRT(IUIAutomation3, AddTextEditTextChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddTextEditTextChangedEventHandler )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ enum TextEditChangeType textEditChangeType,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationTextEditTextChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  enum TextEditChangeType textEditChangeType,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextEditTextChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation3, RemoveTextEditTextChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveTextEditTextChangedEventHandler )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationTextEditTextChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextEditTextChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation4, AddChangesEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddChangesEventHandler )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [size_is][in] */ __RPC__in_ecount_full(changesCount) int *changeTypes,
-            /* [in] */ int changesCount,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *pCacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationChangesEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(changesCount)  int *changeTypes,
+            /* [annotation][in] */ 
+            _In_  int changesCount,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *pCacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationChangesEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation4, RemoveChangesEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveChangesEventHandler )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationChangesEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationChangesEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation5, AddNotificationEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddNotificationEventHandler )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationNotificationEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationNotificationEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation5, RemoveNotificationEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveNotificationEventHandler )( 
             __RPC__in IUIAutomation5 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationNotificationEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationNotificationEventHandler *handler);
         
         END_INTERFACE
     } IUIAutomation5Vtbl;
@@ -22380,37 +25534,52 @@ EXTERN_C const IID IID_IUIAutomation6;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateEventHandlerGroup( 
-            /* [out] */ __RPC__deref_out_opt IUIAutomationEventHandlerGroup **handlerGroup) = 0;
+            /* [annotation][out] */ 
+            _Out_  IUIAutomationEventHandlerGroup **handlerGroup) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddEventHandlerGroup( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationEventHandlerGroup *handlerGroup) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationEventHandlerGroup *handlerGroup) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveEventHandlerGroup( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationEventHandlerGroup *handlerGroup) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationEventHandlerGroup *handlerGroup) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ConnectionRecoveryBehavior( 
-            /* [retval][out] */ __RPC__out enum ConnectionRecoveryBehaviorOptions *connectionRecoveryBehaviorOptions) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum ConnectionRecoveryBehaviorOptions *connectionRecoveryBehaviorOptions) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ConnectionRecoveryBehavior( 
-            /* [in] */ enum ConnectionRecoveryBehaviorOptions connectionRecoveryBehaviorOptions) = 0;
+            /* [annotation][in] */ 
+            _In_  enum ConnectionRecoveryBehaviorOptions connectionRecoveryBehaviorOptions) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CoalesceEvents( 
-            /* [retval][out] */ __RPC__out enum CoalesceEventsOptions *coalesceEventsOptions) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum CoalesceEventsOptions *coalesceEventsOptions) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_CoalesceEvents( 
-            /* [in] */ enum CoalesceEventsOptions coalesceEventsOptions) = 0;
+            /* [annotation][in] */ 
+            _In_  enum CoalesceEventsOptions coalesceEventsOptions) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddActiveTextPositionChangedEventHandler( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationActiveTextPositionChangedEventHandler *handler) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationActiveTextPositionChangedEventHandler *handler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveActiveTextPositionChangedEventHandler( 
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationActiveTextPositionChangedEventHandler *handler) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationActiveTextPositionChangedEventHandler *handler) = 0;
         
     };
     
@@ -22424,7 +25593,8 @@ EXTERN_C const IID IID_IUIAutomation6;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -22439,242 +25609,330 @@ EXTERN_C const IID IID_IUIAutomation6;
         DECLSPEC_XFGVIRT(IUIAutomation, CompareElements)
         HRESULT ( STDMETHODCALLTYPE *CompareElements )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *el1,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *el2,
-            /* [retval][out] */ __RPC__out BOOL *areSame);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *el1,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *el2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *areSame);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CompareRuntimeIds)
         HRESULT ( STDMETHODCALLTYPE *CompareRuntimeIds )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in SAFEARRAY * runtimeId1,
-            /* [in] */ __RPC__in SAFEARRAY * runtimeId2,
-            /* [retval][out] */ __RPC__out BOOL *areSame);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * runtimeId1,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * runtimeId2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *areSame);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetRootElement)
         HRESULT ( STDMETHODCALLTYPE *GetRootElement )( 
             __RPC__in IUIAutomation6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **root);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **root);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromHandle)
         HRESULT ( STDMETHODCALLTYPE *ElementFromHandle )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in UIA_HWND hwnd,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  UIA_HWND hwnd,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromPoint)
         HRESULT ( STDMETHODCALLTYPE *ElementFromPoint )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ POINT pt,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  POINT pt,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetFocusedElement)
         HRESULT ( STDMETHODCALLTYPE *GetFocusedElement )( 
             __RPC__in IUIAutomation6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetRootElementBuildCache)
         HRESULT ( STDMETHODCALLTYPE *GetRootElementBuildCache )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **root);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **root);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromHandleBuildCache)
         HRESULT ( STDMETHODCALLTYPE *ElementFromHandleBuildCache )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in UIA_HWND hwnd,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  UIA_HWND hwnd,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromPointBuildCache)
         HRESULT ( STDMETHODCALLTYPE *ElementFromPointBuildCache )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ POINT pt,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  POINT pt,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetFocusedElementBuildCache)
         HRESULT ( STDMETHODCALLTYPE *GetFocusedElementBuildCache )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateTreeWalker)
         HRESULT ( STDMETHODCALLTYPE *CreateTreeWalker )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *pCondition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *pCondition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ControlViewWalker)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ControlViewWalker )( 
             __RPC__in IUIAutomation6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ContentViewWalker)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContentViewWalker )( 
             __RPC__in IUIAutomation6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_RawViewWalker)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RawViewWalker )( 
             __RPC__in IUIAutomation6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationTreeWalker **walker);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationTreeWalker **walker);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_RawViewCondition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RawViewCondition )( 
             __RPC__in IUIAutomation6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ControlViewCondition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ControlViewCondition )( 
             __RPC__in IUIAutomation6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ContentViewCondition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContentViewCondition )( 
             __RPC__in IUIAutomation6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **condition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **condition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateCacheRequest)
         HRESULT ( STDMETHODCALLTYPE *CreateCacheRequest )( 
             __RPC__in IUIAutomation6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCacheRequest **cacheRequest);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCacheRequest **cacheRequest);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateTrueCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateTrueCondition )( 
             __RPC__in IUIAutomation6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateFalseCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateFalseCondition )( 
             __RPC__in IUIAutomation6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreatePropertyCondition)
         HRESULT ( STDMETHODCALLTYPE *CreatePropertyCondition )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ VARIANT value,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreatePropertyConditionEx)
         HRESULT ( STDMETHODCALLTYPE *CreatePropertyConditionEx )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ PROPERTYID propertyId,
-            /* [in] */ VARIANT value,
-            /* [in] */ enum PropertyConditionFlags flags,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID propertyId,
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][in] */ 
+            _In_  enum PropertyConditionFlags flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateAndCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateAndCondition )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition1,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition2,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition1,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateAndConditionFromArray)
         HRESULT ( STDMETHODCALLTYPE *CreateAndConditionFromArray )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt SAFEARRAY * conditions,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * conditions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateAndConditionFromNativeArray)
         HRESULT ( STDMETHODCALLTYPE *CreateAndConditionFromNativeArray )( 
             __RPC__in IUIAutomation6 * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(conditionCount) IUIAutomationCondition **conditions,
-            /* [in] */ int conditionCount,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(conditionCount)  IUIAutomationCondition **conditions,
+            /* [annotation][in] */ 
+            _In_  int conditionCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateOrCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateOrCondition )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition1,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition2,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition1,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateOrConditionFromArray)
         HRESULT ( STDMETHODCALLTYPE *CreateOrConditionFromArray )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt SAFEARRAY * conditions,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * conditions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateOrConditionFromNativeArray)
         HRESULT ( STDMETHODCALLTYPE *CreateOrConditionFromNativeArray )( 
             __RPC__in IUIAutomation6 * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(conditionCount) IUIAutomationCondition **conditions,
-            /* [in] */ int conditionCount,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(conditionCount)  IUIAutomationCondition **conditions,
+            /* [annotation][in] */ 
+            _In_  int conditionCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateNotCondition)
         HRESULT ( STDMETHODCALLTYPE *CreateNotCondition )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCondition *condition,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationCondition **newCondition);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCondition *condition,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationCondition **newCondition);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddAutomationEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddAutomationEventHandler )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ EVENTID eventId,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  EVENTID eventId,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveAutomationEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveAutomationEventHandler )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ EVENTID eventId,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  EVENTID eventId,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddPropertyChangedEventHandlerNativeArray)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyChangedEventHandlerNativeArray )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler,
-            /* [size_is][in] */ __RPC__in_ecount_full(propertyCount) PROPERTYID *propertyArray,
-            /* [in] */ int propertyCount);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(propertyCount)  PROPERTYID *propertyArray,
+            /* [annotation][in] */ 
+            _In_  int propertyCount);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddPropertyChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyChangedEventHandler )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler,
-            /* [in] */ __RPC__in SAFEARRAY * propertyArray);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * propertyArray);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemovePropertyChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemovePropertyChangedEventHandler )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationPropertyChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationPropertyChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddStructureChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddStructureChangedEventHandler )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationStructureChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationStructureChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveStructureChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveStructureChangedEventHandler )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationStructureChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationStructureChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, AddFocusChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddFocusChangedEventHandler )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationFocusChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationFocusChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveFocusChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveFocusChangedEventHandler )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationFocusChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationFocusChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RemoveAllEventHandlers)
         HRESULT ( STDMETHODCALLTYPE *RemoveAllEventHandlers )( 
@@ -22683,229 +25941,308 @@ EXTERN_C const IID IID_IUIAutomation6;
         DECLSPEC_XFGVIRT(IUIAutomation, IntNativeArrayToSafeArray)
         HRESULT ( STDMETHODCALLTYPE *IntNativeArrayToSafeArray )( 
             __RPC__in IUIAutomation6 * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(arrayCount) int *array,
-            /* [in] */ int arrayCount,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *safeArray);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(arrayCount)  int *array,
+            /* [annotation][in] */ 
+            _In_  int arrayCount,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *safeArray);
         
         DECLSPEC_XFGVIRT(IUIAutomation, IntSafeArrayToNativeArray)
         HRESULT ( STDMETHODCALLTYPE *IntSafeArrayToNativeArray )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in SAFEARRAY * intArray,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*arrayCount) int **array,
-            /* [retval][out] */ __RPC__out int *arrayCount);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * intArray,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*arrayCount)  int **array,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *arrayCount);
         
         DECLSPEC_XFGVIRT(IUIAutomation, RectToVariant)
         HRESULT ( STDMETHODCALLTYPE *RectToVariant )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ RECT rc,
-            /* [retval][out] */ __RPC__out VARIANT *var);
+            /* [annotation][in] */ 
+            _In_  RECT rc,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *var);
         
         DECLSPEC_XFGVIRT(IUIAutomation, VariantToRect)
         HRESULT ( STDMETHODCALLTYPE *VariantToRect )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ VARIANT var,
-            /* [retval][out] */ __RPC__out RECT *rc);
+            /* [annotation][in] */ 
+            _In_  VARIANT var,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RECT *rc);
         
         DECLSPEC_XFGVIRT(IUIAutomation, SafeArrayToRectNativeArray)
         HRESULT ( STDMETHODCALLTYPE *SafeArrayToRectNativeArray )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in SAFEARRAY * rects,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*rectArrayCount) RECT **rectArray,
-            /* [retval][out] */ __RPC__out int *rectArrayCount);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * rects,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*rectArrayCount)  RECT **rectArray,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  int *rectArrayCount);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CreateProxyFactoryEntry)
         HRESULT ( STDMETHODCALLTYPE *CreateProxyFactoryEntry )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationProxyFactory *factory,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationProxyFactoryEntry **factoryEntry);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationProxyFactory *factory,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationProxyFactoryEntry **factoryEntry);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ProxyFactoryMapping)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProxyFactoryMapping )( 
             __RPC__in IUIAutomation6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationProxyFactoryMapping **factoryMapping);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationProxyFactoryMapping **factoryMapping);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetPropertyProgrammaticName)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyProgrammaticName )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ PROPERTYID property,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
+            /* [annotation][in] */ 
+            _In_  PROPERTYID property,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(IUIAutomation, GetPatternProgrammaticName)
         HRESULT ( STDMETHODCALLTYPE *GetPatternProgrammaticName )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ PATTERNID pattern,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
+            /* [annotation][in] */ 
+            _In_  PATTERNID pattern,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(IUIAutomation, PollForPotentialSupportedPatterns)
         HRESULT ( STDMETHODCALLTYPE *PollForPotentialSupportedPatterns )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *pElement,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *patternIds,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *patternNames);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *pElement,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *patternIds,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *patternNames);
         
         DECLSPEC_XFGVIRT(IUIAutomation, PollForPotentialSupportedProperties)
         HRESULT ( STDMETHODCALLTYPE *PollForPotentialSupportedProperties )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *pElement,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *propertyIds,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *propertyNames);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *pElement,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *propertyIds,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *propertyNames);
         
         DECLSPEC_XFGVIRT(IUIAutomation, CheckNotSupported)
         HRESULT ( STDMETHODCALLTYPE *CheckNotSupported )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ VARIANT value,
-            /* [retval][out] */ __RPC__out BOOL *isNotSupported);
+            /* [annotation][in] */ 
+            _In_  VARIANT value,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *isNotSupported);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ReservedNotSupportedValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReservedNotSupportedValue )( 
             __RPC__in IUIAutomation6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **notSupportedValue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **notSupportedValue);
         
         DECLSPEC_XFGVIRT(IUIAutomation, get_ReservedMixedAttributeValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReservedMixedAttributeValue )( 
             __RPC__in IUIAutomation6 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **mixedAttributeValue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **mixedAttributeValue);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromIAccessible)
         HRESULT ( STDMETHODCALLTYPE *ElementFromIAccessible )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IAccessible *accessible,
-            /* [in] */ int childId,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  IAccessible *accessible,
+            /* [annotation][in] */ 
+            _In_  int childId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation, ElementFromIAccessibleBuildCache)
         HRESULT ( STDMETHODCALLTYPE *ElementFromIAccessibleBuildCache )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IAccessible *accessible,
-            /* [in] */ int childId,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [retval][out] */ __RPC__deref_out_opt IUIAutomationElement **element);
+            /* [annotation][in] */ 
+            _In_  IAccessible *accessible,
+            /* [annotation][in] */ 
+            _In_  int childId,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUIAutomationElement **element);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, get_AutoSetFocus)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AutoSetFocus )( 
             __RPC__in IUIAutomation6 * This,
-            /* [retval][out] */ __RPC__out BOOL *autoSetFocus);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *autoSetFocus);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, put_AutoSetFocus)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AutoSetFocus )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ BOOL autoSetFocus);
+            /* [annotation][in] */ 
+            _In_  BOOL autoSetFocus);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, get_ConnectionTimeout)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectionTimeout )( 
             __RPC__in IUIAutomation6 * This,
-            /* [retval][out] */ __RPC__out DWORD *timeout);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *timeout);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, put_ConnectionTimeout)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ConnectionTimeout )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ DWORD timeout);
+            /* [annotation][in] */ 
+            _In_  DWORD timeout);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, get_TransactionTimeout)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransactionTimeout )( 
             __RPC__in IUIAutomation6 * This,
-            /* [retval][out] */ __RPC__out DWORD *timeout);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *timeout);
         
         DECLSPEC_XFGVIRT(IUIAutomation2, put_TransactionTimeout)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_TransactionTimeout )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ DWORD timeout);
+            /* [annotation][in] */ 
+            _In_  DWORD timeout);
         
         DECLSPEC_XFGVIRT(IUIAutomation3, AddTextEditTextChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddTextEditTextChangedEventHandler )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ enum TextEditChangeType textEditChangeType,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationTextEditTextChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  enum TextEditChangeType textEditChangeType,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextEditTextChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation3, RemoveTextEditTextChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveTextEditTextChangedEventHandler )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationTextEditTextChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationTextEditTextChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation4, AddChangesEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddChangesEventHandler )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [size_is][in] */ __RPC__in_ecount_full(changesCount) int *changeTypes,
-            /* [in] */ int changesCount,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *pCacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationChangesEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(changesCount)  int *changeTypes,
+            /* [annotation][in] */ 
+            _In_  int changesCount,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *pCacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationChangesEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation4, RemoveChangesEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveChangesEventHandler )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationChangesEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationChangesEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation5, AddNotificationEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddNotificationEventHandler )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationNotificationEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationNotificationEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation5, RemoveNotificationEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveNotificationEventHandler )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationNotificationEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationNotificationEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation6, CreateEventHandlerGroup)
         HRESULT ( STDMETHODCALLTYPE *CreateEventHandlerGroup )( 
             __RPC__in IUIAutomation6 * This,
-            /* [out] */ __RPC__deref_out_opt IUIAutomationEventHandlerGroup **handlerGroup);
+            /* [annotation][out] */ 
+            _Out_  IUIAutomationEventHandlerGroup **handlerGroup);
         
         DECLSPEC_XFGVIRT(IUIAutomation6, AddEventHandlerGroup)
         HRESULT ( STDMETHODCALLTYPE *AddEventHandlerGroup )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationEventHandlerGroup *handlerGroup);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationEventHandlerGroup *handlerGroup);
         
         DECLSPEC_XFGVIRT(IUIAutomation6, RemoveEventHandlerGroup)
         HRESULT ( STDMETHODCALLTYPE *RemoveEventHandlerGroup )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationEventHandlerGroup *handlerGroup);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationEventHandlerGroup *handlerGroup);
         
         DECLSPEC_XFGVIRT(IUIAutomation6, get_ConnectionRecoveryBehavior)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectionRecoveryBehavior )( 
             __RPC__in IUIAutomation6 * This,
-            /* [retval][out] */ __RPC__out enum ConnectionRecoveryBehaviorOptions *connectionRecoveryBehaviorOptions);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum ConnectionRecoveryBehaviorOptions *connectionRecoveryBehaviorOptions);
         
         DECLSPEC_XFGVIRT(IUIAutomation6, put_ConnectionRecoveryBehavior)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ConnectionRecoveryBehavior )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ enum ConnectionRecoveryBehaviorOptions connectionRecoveryBehaviorOptions);
+            /* [annotation][in] */ 
+            _In_  enum ConnectionRecoveryBehaviorOptions connectionRecoveryBehaviorOptions);
         
         DECLSPEC_XFGVIRT(IUIAutomation6, get_CoalesceEvents)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CoalesceEvents )( 
             __RPC__in IUIAutomation6 * This,
-            /* [retval][out] */ __RPC__out enum CoalesceEventsOptions *coalesceEventsOptions);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  enum CoalesceEventsOptions *coalesceEventsOptions);
         
         DECLSPEC_XFGVIRT(IUIAutomation6, put_CoalesceEvents)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CoalesceEvents )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ enum CoalesceEventsOptions coalesceEventsOptions);
+            /* [annotation][in] */ 
+            _In_  enum CoalesceEventsOptions coalesceEventsOptions);
         
         DECLSPEC_XFGVIRT(IUIAutomation6, AddActiveTextPositionChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddActiveTextPositionChangedEventHandler )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ enum TreeScope scope,
-            /* [in] */ __RPC__in_opt IUIAutomationCacheRequest *cacheRequest,
-            /* [in] */ __RPC__in_opt IUIAutomationActiveTextPositionChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  enum TreeScope scope,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationCacheRequest *cacheRequest,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationActiveTextPositionChangedEventHandler *handler);
         
         DECLSPEC_XFGVIRT(IUIAutomation6, RemoveActiveTextPositionChangedEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveActiveTextPositionChangedEventHandler )( 
             __RPC__in IUIAutomation6 * This,
-            /* [in] */ __RPC__in_opt IUIAutomationElement *element,
-            /* [in] */ __RPC__in_opt IUIAutomationActiveTextPositionChangedEventHandler *handler);
+            /* [annotation][in] */ 
+            _In_  IUIAutomationElement *element,
+            /* [annotation][in] */ 
+            _In_  IUIAutomationActiveTextPositionChangedEventHandler *handler);
         
         END_INTERFACE
     } IUIAutomation6Vtbl;

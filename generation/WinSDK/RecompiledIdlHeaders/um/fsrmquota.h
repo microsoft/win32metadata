@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -185,38 +185,52 @@ EXTERN_C const IID IID_IFsrmQuotaBase;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_QuotaLimit( 
-            /* [retval][out] */ __RPC__out VARIANT *quotaLimit) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *quotaLimit) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_QuotaLimit( 
-            /* [in] */ VARIANT quotaLimit) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT quotaLimit) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_QuotaFlags( 
-            /* [retval][out] */ __RPC__out long *quotaFlags) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *quotaFlags) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_QuotaFlags( 
-            /* [in] */ long quotaFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  long quotaFlags) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Thresholds( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *thresholds) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *thresholds) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddThreshold( 
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold) = 0;
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteThreshold( 
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold) = 0;
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ModifyThreshold( 
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold,
-            /* [in] */ FSRM_QUOTA_THRESHOLD newThreshold) = 0;
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD newThreshold) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateThresholdAction( 
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold,
-            /* [in] */ FsrmActionType actionType,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmAction **action) = 0;
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FsrmActionType actionType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAction **action) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumThresholdActions( 
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **actions) = 0;
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **actions) = 0;
         
     };
     
@@ -230,7 +244,8 @@ EXTERN_C const IID IID_IFsrmQuotaBase;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmQuotaBase * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -245,23 +260,31 @@ EXTERN_C const IID IID_IFsrmQuotaBase;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmQuotaBase * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmQuotaBase * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmQuotaBase * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -286,17 +309,20 @@ EXTERN_C const IID IID_IFsrmQuotaBase;
         DECLSPEC_XFGVIRT(IFsrmObject, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFsrmQuotaBase * This,
-            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FSRM_OBJECT_ID *id);
         
         DECLSPEC_XFGVIRT(IFsrmObject, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IFsrmQuotaBase * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *description);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IFsrmQuotaBase * This,
-            /* [in] */ __RPC__in BSTR description);
+            /* [annotation][in] */ 
+            _In_  BSTR description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -309,56 +335,70 @@ EXTERN_C const IID IID_IFsrmQuotaBase;
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, get_QuotaLimit)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaLimit )( 
             __RPC__in IFsrmQuotaBase * This,
-            /* [retval][out] */ __RPC__out VARIANT *quotaLimit);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *quotaLimit);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, put_QuotaLimit)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaLimit )( 
             __RPC__in IFsrmQuotaBase * This,
-            /* [in] */ VARIANT quotaLimit);
+            /* [annotation][in] */ 
+            _In_  VARIANT quotaLimit);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, get_QuotaFlags)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaFlags )( 
             __RPC__in IFsrmQuotaBase * This,
-            /* [retval][out] */ __RPC__out long *quotaFlags);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *quotaFlags);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, put_QuotaFlags)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaFlags )( 
             __RPC__in IFsrmQuotaBase * This,
-            /* [in] */ long quotaFlags);
+            /* [annotation][in] */ 
+            _In_  long quotaFlags);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, get_Thresholds)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Thresholds )( 
             __RPC__in IFsrmQuotaBase * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *thresholds);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *thresholds);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, AddThreshold)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddThreshold )( 
             __RPC__in IFsrmQuotaBase * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, DeleteThreshold)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteThreshold )( 
             __RPC__in IFsrmQuotaBase * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, ModifyThreshold)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ModifyThreshold )( 
             __RPC__in IFsrmQuotaBase * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold,
-            /* [in] */ FSRM_QUOTA_THRESHOLD newThreshold);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD newThreshold);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, CreateThresholdAction)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateThresholdAction )( 
             __RPC__in IFsrmQuotaBase * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold,
-            /* [in] */ FsrmActionType actionType,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmAction **action);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FsrmActionType actionType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAction **action);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, EnumThresholdActions)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumThresholdActions )( 
             __RPC__in IFsrmQuotaBase * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **actions);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **actions);
         
         END_INTERFACE
     } IFsrmQuotaBaseVtbl;
@@ -469,22 +509,28 @@ EXTERN_C const IID IID_IFsrmQuotaObject;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *path) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *path) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UserSid( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *userSid) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *userSid) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UserAccount( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *userAccount) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *userAccount) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SourceTemplateName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *quotaTemplateName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *quotaTemplateName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MatchesSourceTemplate( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *matches) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *matches) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ApplyTemplate( 
-            /* [in] */ __RPC__in BSTR quotaTemplateName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR quotaTemplateName) = 0;
         
     };
     
@@ -498,7 +544,8 @@ EXTERN_C const IID IID_IFsrmQuotaObject;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -513,23 +560,31 @@ EXTERN_C const IID IID_IFsrmQuotaObject;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -554,17 +609,20 @@ EXTERN_C const IID IID_IFsrmQuotaObject;
         DECLSPEC_XFGVIRT(IFsrmObject, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FSRM_OBJECT_ID *id);
         
         DECLSPEC_XFGVIRT(IFsrmObject, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *description);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [in] */ __RPC__in BSTR description);
+            /* [annotation][in] */ 
+            _In_  BSTR description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -577,86 +635,106 @@ EXTERN_C const IID IID_IFsrmQuotaObject;
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, get_QuotaLimit)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaLimit )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [retval][out] */ __RPC__out VARIANT *quotaLimit);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *quotaLimit);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, put_QuotaLimit)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaLimit )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [in] */ VARIANT quotaLimit);
+            /* [annotation][in] */ 
+            _In_  VARIANT quotaLimit);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, get_QuotaFlags)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaFlags )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [retval][out] */ __RPC__out long *quotaFlags);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *quotaFlags);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, put_QuotaFlags)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaFlags )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [in] */ long quotaFlags);
+            /* [annotation][in] */ 
+            _In_  long quotaFlags);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, get_Thresholds)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Thresholds )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *thresholds);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *thresholds);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, AddThreshold)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddThreshold )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, DeleteThreshold)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteThreshold )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, ModifyThreshold)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ModifyThreshold )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold,
-            /* [in] */ FSRM_QUOTA_THRESHOLD newThreshold);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD newThreshold);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, CreateThresholdAction)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateThresholdAction )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold,
-            /* [in] */ FsrmActionType actionType,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmAction **action);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FsrmActionType actionType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAction **action);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, EnumThresholdActions)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumThresholdActions )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **actions);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **actions);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaObject, get_Path)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *path);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *path);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaObject, get_UserSid)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserSid )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *userSid);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *userSid);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaObject, get_UserAccount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserAccount )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *userAccount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *userAccount);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaObject, get_SourceTemplateName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SourceTemplateName )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *quotaTemplateName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *quotaTemplateName);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaObject, get_MatchesSourceTemplate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MatchesSourceTemplate )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *matches);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *matches);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaObject, ApplyTemplate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ApplyTemplate )( 
             __RPC__in IFsrmQuotaObject * This,
-            /* [in] */ __RPC__in BSTR quotaTemplateName);
+            /* [annotation][in] */ 
+            _In_  BSTR quotaTemplateName);
         
         END_INTERFACE
     } IFsrmQuotaObjectVtbl;
@@ -786,13 +864,16 @@ EXTERN_C const IID IID_IFsrmQuota;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_QuotaUsed( 
-            /* [retval][out] */ __RPC__out VARIANT *used) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *used) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_QuotaPeakUsage( 
-            /* [retval][out] */ __RPC__out VARIANT *peakUsage) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *peakUsage) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_QuotaPeakUsageTime( 
-            /* [retval][out] */ __RPC__out DATE *peakUsageDateTime) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DATE *peakUsageDateTime) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ResetPeakUsage( void) = 0;
         
@@ -810,7 +891,8 @@ EXTERN_C const IID IID_IFsrmQuota;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmQuota * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -825,23 +907,31 @@ EXTERN_C const IID IID_IFsrmQuota;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmQuota * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmQuota * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmQuota * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -866,17 +956,20 @@ EXTERN_C const IID IID_IFsrmQuota;
         DECLSPEC_XFGVIRT(IFsrmObject, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFsrmQuota * This,
-            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FSRM_OBJECT_ID *id);
         
         DECLSPEC_XFGVIRT(IFsrmObject, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IFsrmQuota * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *description);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IFsrmQuota * This,
-            /* [in] */ __RPC__in BSTR description);
+            /* [annotation][in] */ 
+            _In_  BSTR description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -889,101 +982,124 @@ EXTERN_C const IID IID_IFsrmQuota;
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, get_QuotaLimit)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaLimit )( 
             __RPC__in IFsrmQuota * This,
-            /* [retval][out] */ __RPC__out VARIANT *quotaLimit);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *quotaLimit);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, put_QuotaLimit)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaLimit )( 
             __RPC__in IFsrmQuota * This,
-            /* [in] */ VARIANT quotaLimit);
+            /* [annotation][in] */ 
+            _In_  VARIANT quotaLimit);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, get_QuotaFlags)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaFlags )( 
             __RPC__in IFsrmQuota * This,
-            /* [retval][out] */ __RPC__out long *quotaFlags);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *quotaFlags);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, put_QuotaFlags)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaFlags )( 
             __RPC__in IFsrmQuota * This,
-            /* [in] */ long quotaFlags);
+            /* [annotation][in] */ 
+            _In_  long quotaFlags);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, get_Thresholds)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Thresholds )( 
             __RPC__in IFsrmQuota * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *thresholds);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *thresholds);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, AddThreshold)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddThreshold )( 
             __RPC__in IFsrmQuota * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, DeleteThreshold)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteThreshold )( 
             __RPC__in IFsrmQuota * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, ModifyThreshold)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ModifyThreshold )( 
             __RPC__in IFsrmQuota * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold,
-            /* [in] */ FSRM_QUOTA_THRESHOLD newThreshold);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD newThreshold);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, CreateThresholdAction)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateThresholdAction )( 
             __RPC__in IFsrmQuota * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold,
-            /* [in] */ FsrmActionType actionType,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmAction **action);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FsrmActionType actionType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAction **action);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, EnumThresholdActions)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumThresholdActions )( 
             __RPC__in IFsrmQuota * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **actions);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **actions);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaObject, get_Path)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             __RPC__in IFsrmQuota * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *path);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *path);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaObject, get_UserSid)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserSid )( 
             __RPC__in IFsrmQuota * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *userSid);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *userSid);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaObject, get_UserAccount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserAccount )( 
             __RPC__in IFsrmQuota * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *userAccount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *userAccount);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaObject, get_SourceTemplateName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SourceTemplateName )( 
             __RPC__in IFsrmQuota * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *quotaTemplateName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *quotaTemplateName);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaObject, get_MatchesSourceTemplate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MatchesSourceTemplate )( 
             __RPC__in IFsrmQuota * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *matches);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *matches);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaObject, ApplyTemplate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ApplyTemplate )( 
             __RPC__in IFsrmQuota * This,
-            /* [in] */ __RPC__in BSTR quotaTemplateName);
+            /* [annotation][in] */ 
+            _In_  BSTR quotaTemplateName);
         
         DECLSPEC_XFGVIRT(IFsrmQuota, get_QuotaUsed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaUsed )( 
             __RPC__in IFsrmQuota * This,
-            /* [retval][out] */ __RPC__out VARIANT *used);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *used);
         
         DECLSPEC_XFGVIRT(IFsrmQuota, get_QuotaPeakUsage)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaPeakUsage )( 
             __RPC__in IFsrmQuota * This,
-            /* [retval][out] */ __RPC__out VARIANT *peakUsage);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *peakUsage);
         
         DECLSPEC_XFGVIRT(IFsrmQuota, get_QuotaPeakUsageTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaPeakUsageTime )( 
             __RPC__in IFsrmQuota * This,
-            /* [retval][out] */ __RPC__out DATE *peakUsageDateTime);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DATE *peakUsageDateTime);
         
         DECLSPEC_XFGVIRT(IFsrmQuota, ResetPeakUsage)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ResetPeakUsage )( 
@@ -1137,15 +1253,20 @@ EXTERN_C const IID IID_IFsrmAutoApplyQuota;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ExcludeFolders( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *folders) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *folders) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ExcludeFolders( 
-            /* [in] */ __RPC__in SAFEARRAY * folders) = 0;
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * folders) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CommitAndUpdateDerived( 
-            /* [in] */ FsrmCommitOptions commitOptions,
-            /* [in] */ FsrmTemplateApplyOptions applyOptions,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmDerivedObjectsResult **derivedObjectsResult) = 0;
+            /* [annotation][in] */ 
+            _In_  FsrmCommitOptions commitOptions,
+            /* [annotation][in] */ 
+            _In_  FsrmTemplateApplyOptions applyOptions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmDerivedObjectsResult **derivedObjectsResult) = 0;
         
     };
     
@@ -1159,7 +1280,8 @@ EXTERN_C const IID IID_IFsrmAutoApplyQuota;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1174,23 +1296,31 @@ EXTERN_C const IID IID_IFsrmAutoApplyQuota;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1215,17 +1345,20 @@ EXTERN_C const IID IID_IFsrmAutoApplyQuota;
         DECLSPEC_XFGVIRT(IFsrmObject, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FSRM_OBJECT_ID *id);
         
         DECLSPEC_XFGVIRT(IFsrmObject, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *description);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [in] */ __RPC__in BSTR description);
+            /* [annotation][in] */ 
+            _In_  BSTR description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -1238,103 +1371,128 @@ EXTERN_C const IID IID_IFsrmAutoApplyQuota;
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, get_QuotaLimit)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaLimit )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [retval][out] */ __RPC__out VARIANT *quotaLimit);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *quotaLimit);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, put_QuotaLimit)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaLimit )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [in] */ VARIANT quotaLimit);
+            /* [annotation][in] */ 
+            _In_  VARIANT quotaLimit);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, get_QuotaFlags)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaFlags )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [retval][out] */ __RPC__out long *quotaFlags);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *quotaFlags);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, put_QuotaFlags)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaFlags )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [in] */ long quotaFlags);
+            /* [annotation][in] */ 
+            _In_  long quotaFlags);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, get_Thresholds)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Thresholds )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *thresholds);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *thresholds);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, AddThreshold)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddThreshold )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, DeleteThreshold)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteThreshold )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, ModifyThreshold)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ModifyThreshold )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold,
-            /* [in] */ FSRM_QUOTA_THRESHOLD newThreshold);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD newThreshold);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, CreateThresholdAction)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateThresholdAction )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold,
-            /* [in] */ FsrmActionType actionType,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmAction **action);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FsrmActionType actionType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAction **action);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, EnumThresholdActions)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumThresholdActions )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **actions);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **actions);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaObject, get_Path)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *path);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *path);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaObject, get_UserSid)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserSid )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *userSid);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *userSid);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaObject, get_UserAccount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserAccount )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *userAccount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *userAccount);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaObject, get_SourceTemplateName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SourceTemplateName )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *quotaTemplateName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *quotaTemplateName);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaObject, get_MatchesSourceTemplate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MatchesSourceTemplate )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *matches);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *matches);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaObject, ApplyTemplate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ApplyTemplate )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [in] */ __RPC__in BSTR quotaTemplateName);
+            /* [annotation][in] */ 
+            _In_  BSTR quotaTemplateName);
         
         DECLSPEC_XFGVIRT(IFsrmAutoApplyQuota, get_ExcludeFolders)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExcludeFolders )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *folders);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *folders);
         
         DECLSPEC_XFGVIRT(IFsrmAutoApplyQuota, put_ExcludeFolders)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ExcludeFolders )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [in] */ __RPC__in SAFEARRAY * folders);
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * folders);
         
         DECLSPEC_XFGVIRT(IFsrmAutoApplyQuota, CommitAndUpdateDerived)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CommitAndUpdateDerived )( 
             __RPC__in IFsrmAutoApplyQuota * This,
-            /* [in] */ FsrmCommitOptions commitOptions,
-            /* [in] */ FsrmTemplateApplyOptions applyOptions,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmDerivedObjectsResult **derivedObjectsResult);
+            /* [annotation][in] */ 
+            _In_  FsrmCommitOptions commitOptions,
+            /* [annotation][in] */ 
+            _In_  FsrmTemplateApplyOptions applyOptions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmDerivedObjectsResult **derivedObjectsResult);
         
         END_INTERFACE
     } IFsrmAutoApplyQuotaVtbl;
@@ -1474,52 +1632,76 @@ EXTERN_C const IID IID_IFsrmQuotaManager;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ActionVariables( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *variables) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *variables) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ActionVariableDescriptions( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *descriptions) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *descriptions) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateQuota( 
-            /* [in] */ __RPC__in BSTR path,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmQuota **quota) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuota **quota) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateAutoApplyQuota( 
-            /* [in] */ __RPC__in BSTR quotaTemplateName,
-            /* [in] */ __RPC__in BSTR path,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmAutoApplyQuota **quota) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR quotaTemplateName,
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAutoApplyQuota **quota) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetQuota( 
-            /* [in] */ __RPC__in BSTR path,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmQuota **quota) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuota **quota) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetAutoApplyQuota( 
-            /* [in] */ __RPC__in BSTR path,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmAutoApplyQuota **quota) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAutoApplyQuota **quota) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetRestrictiveQuota( 
-            /* [in] */ __RPC__in BSTR path,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmQuota **quota) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuota **quota) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumQuotas( 
-            /* [defaultvalue][in] */ __RPC__in BSTR path,
-            /* [defaultvalue][in] */ FsrmEnumOptions options,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **quotas) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR path,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotas) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumAutoApplyQuotas( 
-            /* [defaultvalue][in] */ __RPC__in BSTR path,
-            /* [defaultvalue][in] */ FsrmEnumOptions options,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **quotas) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR path,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotas) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumEffectiveQuotas( 
-            /* [in] */ __RPC__in BSTR path,
-            /* [defaultvalue][in] */ FsrmEnumOptions options,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **quotas) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotas) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Scan( 
-            /* [in] */ __RPC__in BSTR strPath) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strPath) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateQuotaCollection( 
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **collection) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **collection) = 0;
         
     };
     
@@ -1533,7 +1715,8 @@ EXTERN_C const IID IID_IFsrmQuotaManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmQuotaManager * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1548,23 +1731,31 @@ EXTERN_C const IID IID_IFsrmQuotaManager;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmQuotaManager * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmQuotaManager * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmQuotaManager * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1589,74 +1780,98 @@ EXTERN_C const IID IID_IFsrmQuotaManager;
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, get_ActionVariables)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActionVariables )( 
             __RPC__in IFsrmQuotaManager * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *variables);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *variables);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, get_ActionVariableDescriptions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActionVariableDescriptions )( 
             __RPC__in IFsrmQuotaManager * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *descriptions);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *descriptions);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, CreateQuota)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateQuota )( 
             __RPC__in IFsrmQuotaManager * This,
-            /* [in] */ __RPC__in BSTR path,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmQuota **quota);
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuota **quota);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, CreateAutoApplyQuota)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateAutoApplyQuota )( 
             __RPC__in IFsrmQuotaManager * This,
-            /* [in] */ __RPC__in BSTR quotaTemplateName,
-            /* [in] */ __RPC__in BSTR path,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmAutoApplyQuota **quota);
+            /* [annotation][in] */ 
+            _In_  BSTR quotaTemplateName,
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAutoApplyQuota **quota);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, GetQuota)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetQuota )( 
             __RPC__in IFsrmQuotaManager * This,
-            /* [in] */ __RPC__in BSTR path,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmQuota **quota);
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuota **quota);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, GetAutoApplyQuota)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetAutoApplyQuota )( 
             __RPC__in IFsrmQuotaManager * This,
-            /* [in] */ __RPC__in BSTR path,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmAutoApplyQuota **quota);
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAutoApplyQuota **quota);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, GetRestrictiveQuota)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetRestrictiveQuota )( 
             __RPC__in IFsrmQuotaManager * This,
-            /* [in] */ __RPC__in BSTR path,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmQuota **quota);
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuota **quota);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, EnumQuotas)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumQuotas )( 
             __RPC__in IFsrmQuotaManager * This,
-            /* [defaultvalue][in] */ __RPC__in BSTR path,
-            /* [defaultvalue][in] */ FsrmEnumOptions options,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **quotas);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR path,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotas);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, EnumAutoApplyQuotas)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumAutoApplyQuotas )( 
             __RPC__in IFsrmQuotaManager * This,
-            /* [defaultvalue][in] */ __RPC__in BSTR path,
-            /* [defaultvalue][in] */ FsrmEnumOptions options,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **quotas);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR path,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotas);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, EnumEffectiveQuotas)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumEffectiveQuotas )( 
             __RPC__in IFsrmQuotaManager * This,
-            /* [in] */ __RPC__in BSTR path,
-            /* [defaultvalue][in] */ FsrmEnumOptions options,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **quotas);
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotas);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, Scan)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Scan )( 
             __RPC__in IFsrmQuotaManager * This,
-            /* [in] */ __RPC__in BSTR strPath);
+            /* [annotation][in] */ 
+            _In_  BSTR strPath);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, CreateQuotaCollection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateQuotaCollection )( 
             __RPC__in IFsrmQuotaManager * This,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **collection);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **collection);
         
         END_INTERFACE
     } IFsrmQuotaManagerVtbl;
@@ -1757,9 +1972,12 @@ EXTERN_C const IID IID_IFsrmQuotaManagerEx;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IsAffectedByQuota( 
-            /* [in] */ __RPC__in BSTR path,
-            /* [defaultvalue][in] */ FsrmEnumOptions options,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *affected) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *affected) = 0;
         
     };
     
@@ -1773,7 +1991,8 @@ EXTERN_C const IID IID_IFsrmQuotaManagerEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmQuotaManagerEx * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1788,23 +2007,31 @@ EXTERN_C const IID IID_IFsrmQuotaManagerEx;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmQuotaManagerEx * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmQuotaManagerEx * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmQuotaManagerEx * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1829,81 +2056,108 @@ EXTERN_C const IID IID_IFsrmQuotaManagerEx;
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, get_ActionVariables)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActionVariables )( 
             __RPC__in IFsrmQuotaManagerEx * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *variables);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *variables);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, get_ActionVariableDescriptions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActionVariableDescriptions )( 
             __RPC__in IFsrmQuotaManagerEx * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *descriptions);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *descriptions);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, CreateQuota)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateQuota )( 
             __RPC__in IFsrmQuotaManagerEx * This,
-            /* [in] */ __RPC__in BSTR path,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmQuota **quota);
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuota **quota);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, CreateAutoApplyQuota)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateAutoApplyQuota )( 
             __RPC__in IFsrmQuotaManagerEx * This,
-            /* [in] */ __RPC__in BSTR quotaTemplateName,
-            /* [in] */ __RPC__in BSTR path,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmAutoApplyQuota **quota);
+            /* [annotation][in] */ 
+            _In_  BSTR quotaTemplateName,
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAutoApplyQuota **quota);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, GetQuota)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetQuota )( 
             __RPC__in IFsrmQuotaManagerEx * This,
-            /* [in] */ __RPC__in BSTR path,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmQuota **quota);
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuota **quota);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, GetAutoApplyQuota)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetAutoApplyQuota )( 
             __RPC__in IFsrmQuotaManagerEx * This,
-            /* [in] */ __RPC__in BSTR path,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmAutoApplyQuota **quota);
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAutoApplyQuota **quota);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, GetRestrictiveQuota)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetRestrictiveQuota )( 
             __RPC__in IFsrmQuotaManagerEx * This,
-            /* [in] */ __RPC__in BSTR path,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmQuota **quota);
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuota **quota);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, EnumQuotas)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumQuotas )( 
             __RPC__in IFsrmQuotaManagerEx * This,
-            /* [defaultvalue][in] */ __RPC__in BSTR path,
-            /* [defaultvalue][in] */ FsrmEnumOptions options,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **quotas);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR path,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotas);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, EnumAutoApplyQuotas)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumAutoApplyQuotas )( 
             __RPC__in IFsrmQuotaManagerEx * This,
-            /* [defaultvalue][in] */ __RPC__in BSTR path,
-            /* [defaultvalue][in] */ FsrmEnumOptions options,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **quotas);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR path,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotas);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, EnumEffectiveQuotas)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumEffectiveQuotas )( 
             __RPC__in IFsrmQuotaManagerEx * This,
-            /* [in] */ __RPC__in BSTR path,
-            /* [defaultvalue][in] */ FsrmEnumOptions options,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **quotas);
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotas);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, Scan)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Scan )( 
             __RPC__in IFsrmQuotaManagerEx * This,
-            /* [in] */ __RPC__in BSTR strPath);
+            /* [annotation][in] */ 
+            _In_  BSTR strPath);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManager, CreateQuotaCollection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateQuotaCollection )( 
             __RPC__in IFsrmQuotaManagerEx * This,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **collection);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **collection);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaManagerEx, IsAffectedByQuota)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsAffectedByQuota )( 
             __RPC__in IFsrmQuotaManagerEx * This,
-            /* [in] */ __RPC__in BSTR path,
-            /* [defaultvalue][in] */ FsrmEnumOptions options,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *affected);
+            /* [annotation][in] */ 
+            _In_  BSTR path,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *affected);
         
         END_INTERFACE
     } IFsrmQuotaManagerExVtbl;
@@ -2008,18 +2262,24 @@ EXTERN_C const IID IID_IFsrmQuotaTemplate;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
-            /* [in] */ __RPC__in BSTR name) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR name) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CopyTemplate( 
-            /* [in] */ __RPC__in BSTR quotaTemplateName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR quotaTemplateName) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CommitAndUpdateDerived( 
-            /* [in] */ FsrmCommitOptions commitOptions,
-            /* [in] */ FsrmTemplateApplyOptions applyOptions,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmDerivedObjectsResult **derivedObjectsResult) = 0;
+            /* [annotation][in] */ 
+            _In_  FsrmCommitOptions commitOptions,
+            /* [annotation][in] */ 
+            _In_  FsrmTemplateApplyOptions applyOptions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmDerivedObjectsResult **derivedObjectsResult) = 0;
         
     };
     
@@ -2033,7 +2293,8 @@ EXTERN_C const IID IID_IFsrmQuotaTemplate;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmQuotaTemplate * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2048,23 +2309,31 @@ EXTERN_C const IID IID_IFsrmQuotaTemplate;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmQuotaTemplate * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmQuotaTemplate * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmQuotaTemplate * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2089,17 +2358,20 @@ EXTERN_C const IID IID_IFsrmQuotaTemplate;
         DECLSPEC_XFGVIRT(IFsrmObject, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFsrmQuotaTemplate * This,
-            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FSRM_OBJECT_ID *id);
         
         DECLSPEC_XFGVIRT(IFsrmObject, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IFsrmQuotaTemplate * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *description);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IFsrmQuotaTemplate * This,
-            /* [in] */ __RPC__in BSTR description);
+            /* [annotation][in] */ 
+            _In_  BSTR description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -2112,78 +2384,98 @@ EXTERN_C const IID IID_IFsrmQuotaTemplate;
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, get_QuotaLimit)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaLimit )( 
             __RPC__in IFsrmQuotaTemplate * This,
-            /* [retval][out] */ __RPC__out VARIANT *quotaLimit);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *quotaLimit);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, put_QuotaLimit)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaLimit )( 
             __RPC__in IFsrmQuotaTemplate * This,
-            /* [in] */ VARIANT quotaLimit);
+            /* [annotation][in] */ 
+            _In_  VARIANT quotaLimit);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, get_QuotaFlags)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaFlags )( 
             __RPC__in IFsrmQuotaTemplate * This,
-            /* [retval][out] */ __RPC__out long *quotaFlags);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *quotaFlags);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, put_QuotaFlags)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaFlags )( 
             __RPC__in IFsrmQuotaTemplate * This,
-            /* [in] */ long quotaFlags);
+            /* [annotation][in] */ 
+            _In_  long quotaFlags);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, get_Thresholds)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Thresholds )( 
             __RPC__in IFsrmQuotaTemplate * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *thresholds);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *thresholds);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, AddThreshold)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddThreshold )( 
             __RPC__in IFsrmQuotaTemplate * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, DeleteThreshold)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteThreshold )( 
             __RPC__in IFsrmQuotaTemplate * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, ModifyThreshold)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ModifyThreshold )( 
             __RPC__in IFsrmQuotaTemplate * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold,
-            /* [in] */ FSRM_QUOTA_THRESHOLD newThreshold);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD newThreshold);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, CreateThresholdAction)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateThresholdAction )( 
             __RPC__in IFsrmQuotaTemplate * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold,
-            /* [in] */ FsrmActionType actionType,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmAction **action);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FsrmActionType actionType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAction **action);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, EnumThresholdActions)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumThresholdActions )( 
             __RPC__in IFsrmQuotaTemplate * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **actions);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **actions);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaTemplate, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IFsrmQuotaTemplate * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaTemplate, put_Name)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IFsrmQuotaTemplate * This,
-            /* [in] */ __RPC__in BSTR name);
+            /* [annotation][in] */ 
+            _In_  BSTR name);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaTemplate, CopyTemplate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CopyTemplate )( 
             __RPC__in IFsrmQuotaTemplate * This,
-            /* [in] */ __RPC__in BSTR quotaTemplateName);
+            /* [annotation][in] */ 
+            _In_  BSTR quotaTemplateName);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaTemplate, CommitAndUpdateDerived)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CommitAndUpdateDerived )( 
             __RPC__in IFsrmQuotaTemplate * This,
-            /* [in] */ FsrmCommitOptions commitOptions,
-            /* [in] */ FsrmTemplateApplyOptions applyOptions,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmDerivedObjectsResult **derivedObjectsResult);
+            /* [annotation][in] */ 
+            _In_  FsrmCommitOptions commitOptions,
+            /* [annotation][in] */ 
+            _In_  FsrmTemplateApplyOptions applyOptions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmDerivedObjectsResult **derivedObjectsResult);
         
         END_INTERFACE
     } IFsrmQuotaTemplateVtbl;
@@ -2307,10 +2599,12 @@ EXTERN_C const IID IID_IFsrmQuotaTemplateImported;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_OverwriteOnCommit( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *overwrite) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *overwrite) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_OverwriteOnCommit( 
-            /* [in] */ VARIANT_BOOL overwrite) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL overwrite) = 0;
         
     };
     
@@ -2324,7 +2618,8 @@ EXTERN_C const IID IID_IFsrmQuotaTemplateImported;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2339,23 +2634,31 @@ EXTERN_C const IID IID_IFsrmQuotaTemplateImported;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2380,17 +2683,20 @@ EXTERN_C const IID IID_IFsrmQuotaTemplateImported;
         DECLSPEC_XFGVIRT(IFsrmObject, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FSRM_OBJECT_ID *id);
         
         DECLSPEC_XFGVIRT(IFsrmObject, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *description);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [in] */ __RPC__in BSTR description);
+            /* [annotation][in] */ 
+            _In_  BSTR description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -2403,88 +2709,110 @@ EXTERN_C const IID IID_IFsrmQuotaTemplateImported;
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, get_QuotaLimit)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaLimit )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [retval][out] */ __RPC__out VARIANT *quotaLimit);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *quotaLimit);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, put_QuotaLimit)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaLimit )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [in] */ VARIANT quotaLimit);
+            /* [annotation][in] */ 
+            _In_  VARIANT quotaLimit);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, get_QuotaFlags)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuotaFlags )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [retval][out] */ __RPC__out long *quotaFlags);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *quotaFlags);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, put_QuotaFlags)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuotaFlags )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [in] */ long quotaFlags);
+            /* [annotation][in] */ 
+            _In_  long quotaFlags);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, get_Thresholds)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Thresholds )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *thresholds);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *thresholds);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, AddThreshold)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddThreshold )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, DeleteThreshold)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteThreshold )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, ModifyThreshold)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ModifyThreshold )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold,
-            /* [in] */ FSRM_QUOTA_THRESHOLD newThreshold);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD newThreshold);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, CreateThresholdAction)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateThresholdAction )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold,
-            /* [in] */ FsrmActionType actionType,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmAction **action);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][in] */ 
+            _In_  FsrmActionType actionType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmAction **action);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaBase, EnumThresholdActions)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumThresholdActions )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [in] */ FSRM_QUOTA_THRESHOLD threshold,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **actions);
+            /* [annotation][in] */ 
+            _In_  FSRM_QUOTA_THRESHOLD threshold,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCollection **actions);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaTemplate, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaTemplate, put_Name)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [in] */ __RPC__in BSTR name);
+            /* [annotation][in] */ 
+            _In_  BSTR name);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaTemplate, CopyTemplate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CopyTemplate )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [in] */ __RPC__in BSTR quotaTemplateName);
+            /* [annotation][in] */ 
+            _In_  BSTR quotaTemplateName);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaTemplate, CommitAndUpdateDerived)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CommitAndUpdateDerived )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [in] */ FsrmCommitOptions commitOptions,
-            /* [in] */ FsrmTemplateApplyOptions applyOptions,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmDerivedObjectsResult **derivedObjectsResult);
+            /* [annotation][in] */ 
+            _In_  FsrmCommitOptions commitOptions,
+            /* [annotation][in] */ 
+            _In_  FsrmTemplateApplyOptions applyOptions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmDerivedObjectsResult **derivedObjectsResult);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaTemplateImported, get_OverwriteOnCommit)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OverwriteOnCommit )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *overwrite);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *overwrite);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaTemplateImported, put_OverwriteOnCommit)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OverwriteOnCommit )( 
             __RPC__in IFsrmQuotaTemplateImported * This,
-            /* [in] */ VARIANT_BOOL overwrite);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL overwrite);
         
         END_INTERFACE
     } IFsrmQuotaTemplateImportedVtbl;
@@ -2615,24 +2943,34 @@ EXTERN_C const IID IID_IFsrmQuotaTemplateManager;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateTemplate( 
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmQuotaTemplate **quotaTemplate) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuotaTemplate **quotaTemplate) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetTemplate( 
-            /* [defaultvalue][in] */ __RPC__in BSTR name,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmQuotaTemplate **quotaTemplate) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR name,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuotaTemplate **quotaTemplate) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumTemplates( 
-            /* [defaultvalue][in] */ FsrmEnumOptions options,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **quotaTemplates) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotaTemplates) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExportTemplates( 
-            /* [defaultvalue][in] */ __RPC__in VARIANT *quotaTemplateNamesArray,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *serializedQuotaTemplates) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT *quotaTemplateNamesArray,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *serializedQuotaTemplates) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ImportTemplates( 
-            /* [in] */ __RPC__in BSTR serializedQuotaTemplates,
-            /* [defaultvalue][in] */ __RPC__in VARIANT *quotaTemplateNamesArray,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **quotaTemplates) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR serializedQuotaTemplates,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT *quotaTemplateNamesArray,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotaTemplates) = 0;
         
     };
     
@@ -2646,7 +2984,8 @@ EXTERN_C const IID IID_IFsrmQuotaTemplateManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmQuotaTemplateManager * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2661,23 +3000,31 @@ EXTERN_C const IID IID_IFsrmQuotaTemplateManager;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmQuotaTemplateManager * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmQuotaTemplateManager * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmQuotaTemplateManager * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2702,32 +3049,42 @@ EXTERN_C const IID IID_IFsrmQuotaTemplateManager;
         DECLSPEC_XFGVIRT(IFsrmQuotaTemplateManager, CreateTemplate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateTemplate )( 
             __RPC__in IFsrmQuotaTemplateManager * This,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmQuotaTemplate **quotaTemplate);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuotaTemplate **quotaTemplate);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaTemplateManager, GetTemplate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetTemplate )( 
             __RPC__in IFsrmQuotaTemplateManager * This,
-            /* [defaultvalue][in] */ __RPC__in BSTR name,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmQuotaTemplate **quotaTemplate);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR name,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmQuotaTemplate **quotaTemplate);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaTemplateManager, EnumTemplates)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumTemplates )( 
             __RPC__in IFsrmQuotaTemplateManager * This,
-            /* [defaultvalue][in] */ FsrmEnumOptions options,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **quotaTemplates);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  FsrmEnumOptions options,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotaTemplates);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaTemplateManager, ExportTemplates)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExportTemplates )( 
             __RPC__in IFsrmQuotaTemplateManager * This,
-            /* [defaultvalue][in] */ __RPC__in VARIANT *quotaTemplateNamesArray,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *serializedQuotaTemplates);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT *quotaTemplateNamesArray,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *serializedQuotaTemplates);
         
         DECLSPEC_XFGVIRT(IFsrmQuotaTemplateManager, ImportTemplates)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ImportTemplates )( 
             __RPC__in IFsrmQuotaTemplateManager * This,
-            /* [in] */ __RPC__in BSTR serializedQuotaTemplates,
-            /* [defaultvalue][in] */ __RPC__in VARIANT *quotaTemplateNamesArray,
-            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **quotaTemplates);
+            /* [annotation][in] */ 
+            _In_  BSTR serializedQuotaTemplates,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT *quotaTemplateNamesArray,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IFsrmCommittableCollection **quotaTemplates);
         
         END_INTERFACE
     } IFsrmQuotaTemplateManagerVtbl;

@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -501,52 +501,76 @@ EXTERN_C const IID IID_IPropertyStorage;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ReadMultiple( 
-            /* [in] */ ULONG cpspec,
-            /* [size_is][in] */ __RPC__in_ecount_full(cpspec) const PROPSPEC rgpspec[  ],
-            /* [size_is][out] */ __RPC__out_ecount_full(cpspec) PROPVARIANT rgpropvar[  ]) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG cpspec,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cpspec)  const PROPSPEC rgpspec[  ],
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cpspec)  PROPVARIANT rgpropvar[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WriteMultiple( 
-            /* [in] */ ULONG cpspec,
-            /* [size_is][in] */ __RPC__in_ecount_full(cpspec) const PROPSPEC rgpspec[  ],
-            /* [size_is][in] */ __RPC__in_ecount_full(cpspec) const PROPVARIANT rgpropvar[  ],
-            /* [in] */ PROPID propidNameFirst) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG cpspec,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cpspec)  const PROPSPEC rgpspec[  ],
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cpspec)  const PROPVARIANT rgpropvar[  ],
+            /* [annotation][in] */ 
+            _In_  PROPID propidNameFirst) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeleteMultiple( 
-            /* [in] */ ULONG cpspec,
-            /* [size_is][in] */ __RPC__in_ecount_full(cpspec) const PROPSPEC rgpspec[  ]) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG cpspec,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cpspec)  const PROPSPEC rgpspec[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReadPropertyNames( 
-            /* [in] */ ULONG cpropid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cpropid) const PROPID rgpropid[  ],
-            /* [size_is][out] */ __RPC__out_ecount_full(cpropid) LPOLESTR rglpwstrName[  ]) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG cpropid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cpropid)  const PROPID rgpropid[  ],
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cpropid)  LPOLESTR rglpwstrName[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WritePropertyNames( 
-            /* [in] */ ULONG cpropid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cpropid) const PROPID rgpropid[  ],
-            /* [size_is][in] */ __RPC__in_ecount_full(cpropid) const LPOLESTR rglpwstrName[  ]) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG cpropid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cpropid)  const PROPID rgpropid[  ],
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cpropid)  const LPOLESTR rglpwstrName[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeletePropertyNames( 
-            /* [in] */ ULONG cpropid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cpropid) const PROPID rgpropid[  ]) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG cpropid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cpropid)  const PROPID rgpropid[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Commit( 
-            /* [in] */ DWORD grfCommitFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD grfCommitFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Revert( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Enum( 
-            /* [out] */ __RPC__deref_out_opt IEnumSTATPROPSTG **ppenum) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumSTATPROPSTG **ppenum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTimes( 
-            /* [in] */ __RPC__in const FILETIME *pctime,
-            /* [in] */ __RPC__in const FILETIME *patime,
-            /* [in] */ __RPC__in const FILETIME *pmtime) = 0;
+            /* [annotation][in] */ 
+            _In_  const FILETIME *pctime,
+            /* [annotation][in] */ 
+            _In_  const FILETIME *patime,
+            /* [annotation][in] */ 
+            _In_  const FILETIME *pmtime) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetClass( 
-            /* [in] */ __RPC__in REFCLSID clsid) = 0;
+            /* [annotation][in] */ 
+            _In_  REFCLSID clsid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Stat( 
-            /* [out] */ __RPC__out STATPROPSETSTG *pstatpsstg) = 0;
+            /* [annotation][out] */ 
+            _Out_  STATPROPSETSTG *pstatpsstg) = 0;
         
     };
     
@@ -560,7 +584,8 @@ EXTERN_C const IID IID_IPropertyStorage;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPropertyStorage * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -575,48 +600,66 @@ EXTERN_C const IID IID_IPropertyStorage;
         DECLSPEC_XFGVIRT(IPropertyStorage, ReadMultiple)
         HRESULT ( STDMETHODCALLTYPE *ReadMultiple )( 
             __RPC__in IPropertyStorage * This,
-            /* [in] */ ULONG cpspec,
-            /* [size_is][in] */ __RPC__in_ecount_full(cpspec) const PROPSPEC rgpspec[  ],
-            /* [size_is][out] */ __RPC__out_ecount_full(cpspec) PROPVARIANT rgpropvar[  ]);
+            /* [annotation][in] */ 
+            _In_  ULONG cpspec,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cpspec)  const PROPSPEC rgpspec[  ],
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cpspec)  PROPVARIANT rgpropvar[  ]);
         
         DECLSPEC_XFGVIRT(IPropertyStorage, WriteMultiple)
         HRESULT ( STDMETHODCALLTYPE *WriteMultiple )( 
             __RPC__in IPropertyStorage * This,
-            /* [in] */ ULONG cpspec,
-            /* [size_is][in] */ __RPC__in_ecount_full(cpspec) const PROPSPEC rgpspec[  ],
-            /* [size_is][in] */ __RPC__in_ecount_full(cpspec) const PROPVARIANT rgpropvar[  ],
-            /* [in] */ PROPID propidNameFirst);
+            /* [annotation][in] */ 
+            _In_  ULONG cpspec,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cpspec)  const PROPSPEC rgpspec[  ],
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cpspec)  const PROPVARIANT rgpropvar[  ],
+            /* [annotation][in] */ 
+            _In_  PROPID propidNameFirst);
         
         DECLSPEC_XFGVIRT(IPropertyStorage, DeleteMultiple)
         HRESULT ( STDMETHODCALLTYPE *DeleteMultiple )( 
             __RPC__in IPropertyStorage * This,
-            /* [in] */ ULONG cpspec,
-            /* [size_is][in] */ __RPC__in_ecount_full(cpspec) const PROPSPEC rgpspec[  ]);
+            /* [annotation][in] */ 
+            _In_  ULONG cpspec,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cpspec)  const PROPSPEC rgpspec[  ]);
         
         DECLSPEC_XFGVIRT(IPropertyStorage, ReadPropertyNames)
         HRESULT ( STDMETHODCALLTYPE *ReadPropertyNames )( 
             __RPC__in IPropertyStorage * This,
-            /* [in] */ ULONG cpropid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cpropid) const PROPID rgpropid[  ],
-            /* [size_is][out] */ __RPC__out_ecount_full(cpropid) LPOLESTR rglpwstrName[  ]);
+            /* [annotation][in] */ 
+            _In_  ULONG cpropid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cpropid)  const PROPID rgpropid[  ],
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cpropid)  LPOLESTR rglpwstrName[  ]);
         
         DECLSPEC_XFGVIRT(IPropertyStorage, WritePropertyNames)
         HRESULT ( STDMETHODCALLTYPE *WritePropertyNames )( 
             __RPC__in IPropertyStorage * This,
-            /* [in] */ ULONG cpropid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cpropid) const PROPID rgpropid[  ],
-            /* [size_is][in] */ __RPC__in_ecount_full(cpropid) const LPOLESTR rglpwstrName[  ]);
+            /* [annotation][in] */ 
+            _In_  ULONG cpropid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cpropid)  const PROPID rgpropid[  ],
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cpropid)  const LPOLESTR rglpwstrName[  ]);
         
         DECLSPEC_XFGVIRT(IPropertyStorage, DeletePropertyNames)
         HRESULT ( STDMETHODCALLTYPE *DeletePropertyNames )( 
             __RPC__in IPropertyStorage * This,
-            /* [in] */ ULONG cpropid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cpropid) const PROPID rgpropid[  ]);
+            /* [annotation][in] */ 
+            _In_  ULONG cpropid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cpropid)  const PROPID rgpropid[  ]);
         
         DECLSPEC_XFGVIRT(IPropertyStorage, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in IPropertyStorage * This,
-            /* [in] */ DWORD grfCommitFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD grfCommitFlags);
         
         DECLSPEC_XFGVIRT(IPropertyStorage, Revert)
         HRESULT ( STDMETHODCALLTYPE *Revert )( 
@@ -625,24 +668,30 @@ EXTERN_C const IID IID_IPropertyStorage;
         DECLSPEC_XFGVIRT(IPropertyStorage, Enum)
         HRESULT ( STDMETHODCALLTYPE *Enum )( 
             __RPC__in IPropertyStorage * This,
-            /* [out] */ __RPC__deref_out_opt IEnumSTATPROPSTG **ppenum);
+            /* [annotation][out] */ 
+            _Out_  IEnumSTATPROPSTG **ppenum);
         
         DECLSPEC_XFGVIRT(IPropertyStorage, SetTimes)
         HRESULT ( STDMETHODCALLTYPE *SetTimes )( 
             __RPC__in IPropertyStorage * This,
-            /* [in] */ __RPC__in const FILETIME *pctime,
-            /* [in] */ __RPC__in const FILETIME *patime,
-            /* [in] */ __RPC__in const FILETIME *pmtime);
+            /* [annotation][in] */ 
+            _In_  const FILETIME *pctime,
+            /* [annotation][in] */ 
+            _In_  const FILETIME *patime,
+            /* [annotation][in] */ 
+            _In_  const FILETIME *pmtime);
         
         DECLSPEC_XFGVIRT(IPropertyStorage, SetClass)
         HRESULT ( STDMETHODCALLTYPE *SetClass )( 
             __RPC__in IPropertyStorage * This,
-            /* [in] */ __RPC__in REFCLSID clsid);
+            /* [annotation][in] */ 
+            _In_  REFCLSID clsid);
         
         DECLSPEC_XFGVIRT(IPropertyStorage, Stat)
         HRESULT ( STDMETHODCALLTYPE *Stat )( 
             __RPC__in IPropertyStorage * This,
-            /* [out] */ __RPC__out STATPROPSETSTG *pstatpsstg);
+            /* [annotation][out] */ 
+            _Out_  STATPROPSETSTG *pstatpsstg);
         
         END_INTERFACE
     } IPropertyStorageVtbl;
@@ -732,22 +781,32 @@ EXTERN_C const IID IID_IPropertySetStorage;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Create( 
-            /* [in] */ __RPC__in REFFMTID rfmtid,
-            /* [unique][in] */ __RPC__in_opt const CLSID *pclsid,
-            /* [in] */ DWORD grfFlags,
-            /* [in] */ DWORD grfMode,
-            /* [out] */ __RPC__deref_out_opt IPropertyStorage **ppprstg) = 0;
+            /* [annotation][in] */ 
+            _In_  REFFMTID rfmtid,
+            /* [annotation][unique][in] */ 
+            _In_  const CLSID *pclsid,
+            /* [annotation][in] */ 
+            _In_  DWORD grfFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD grfMode,
+            /* [annotation][out] */ 
+            _Out_  IPropertyStorage **ppprstg) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Open( 
-            /* [in] */ __RPC__in REFFMTID rfmtid,
-            /* [in] */ DWORD grfMode,
-            /* [out] */ __RPC__deref_out_opt IPropertyStorage **ppprstg) = 0;
+            /* [annotation][in] */ 
+            _In_  REFFMTID rfmtid,
+            /* [annotation][in] */ 
+            _In_  DWORD grfMode,
+            /* [annotation][out] */ 
+            _Out_  IPropertyStorage **ppprstg) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Delete( 
-            /* [in] */ __RPC__in REFFMTID rfmtid) = 0;
+            /* [annotation][in] */ 
+            _In_  REFFMTID rfmtid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Enum( 
-            /* [out] */ __RPC__deref_out_opt IEnumSTATPROPSETSTG **ppenum) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumSTATPROPSETSTG **ppenum) = 0;
         
     };
     
@@ -761,7 +820,8 @@ EXTERN_C const IID IID_IPropertySetStorage;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPropertySetStorage * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -776,28 +836,38 @@ EXTERN_C const IID IID_IPropertySetStorage;
         DECLSPEC_XFGVIRT(IPropertySetStorage, Create)
         HRESULT ( STDMETHODCALLTYPE *Create )( 
             __RPC__in IPropertySetStorage * This,
-            /* [in] */ __RPC__in REFFMTID rfmtid,
-            /* [unique][in] */ __RPC__in_opt const CLSID *pclsid,
-            /* [in] */ DWORD grfFlags,
-            /* [in] */ DWORD grfMode,
-            /* [out] */ __RPC__deref_out_opt IPropertyStorage **ppprstg);
+            /* [annotation][in] */ 
+            _In_  REFFMTID rfmtid,
+            /* [annotation][unique][in] */ 
+            _In_  const CLSID *pclsid,
+            /* [annotation][in] */ 
+            _In_  DWORD grfFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD grfMode,
+            /* [annotation][out] */ 
+            _Out_  IPropertyStorage **ppprstg);
         
         DECLSPEC_XFGVIRT(IPropertySetStorage, Open)
         HRESULT ( STDMETHODCALLTYPE *Open )( 
             __RPC__in IPropertySetStorage * This,
-            /* [in] */ __RPC__in REFFMTID rfmtid,
-            /* [in] */ DWORD grfMode,
-            /* [out] */ __RPC__deref_out_opt IPropertyStorage **ppprstg);
+            /* [annotation][in] */ 
+            _In_  REFFMTID rfmtid,
+            /* [annotation][in] */ 
+            _In_  DWORD grfMode,
+            /* [annotation][out] */ 
+            _Out_  IPropertyStorage **ppprstg);
         
         DECLSPEC_XFGVIRT(IPropertySetStorage, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IPropertySetStorage * This,
-            /* [in] */ __RPC__in REFFMTID rfmtid);
+            /* [annotation][in] */ 
+            _In_  REFFMTID rfmtid);
         
         DECLSPEC_XFGVIRT(IPropertySetStorage, Enum)
         HRESULT ( STDMETHODCALLTYPE *Enum )( 
             __RPC__in IPropertySetStorage * This,
-            /* [out] */ __RPC__deref_out_opt IEnumSTATPROPSETSTG **ppenum);
+            /* [annotation][out] */ 
+            _Out_  IEnumSTATPROPSETSTG **ppenum);
         
         END_INTERFACE
     } IPropertySetStorageVtbl;
@@ -863,19 +933,22 @@ EXTERN_C const IID IID_IEnumSTATPROPSTG;
     {
     public:
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
             /* [annotation][length_is][size_is][out] */ 
             _Out_writes_to_(celt, *pceltFetched)  STATPROPSTG *rgelt,
             /* [annotation][out] */ 
             _Out_opt_ _Deref_out_range_(0, celt)  ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [out] */ __RPC__deref_out_opt IEnumSTATPROPSTG **ppenum) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumSTATPROPSTG **ppenum) = 0;
         
     };
     
@@ -889,7 +962,8 @@ EXTERN_C const IID IID_IEnumSTATPROPSTG;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumSTATPROPSTG * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -904,7 +978,8 @@ EXTERN_C const IID IID_IEnumSTATPROPSTG;
         DECLSPEC_XFGVIRT(IEnumSTATPROPSTG, Next)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumSTATPROPSTG * This,
-            /* [in] */ ULONG celt,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
             /* [annotation][length_is][size_is][out] */ 
             _Out_writes_to_(celt, *pceltFetched)  STATPROPSTG *rgelt,
             /* [annotation][out] */ 
@@ -913,7 +988,8 @@ EXTERN_C const IID IID_IEnumSTATPROPSTG;
         DECLSPEC_XFGVIRT(IEnumSTATPROPSTG, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumSTATPROPSTG * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumSTATPROPSTG, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -922,7 +998,8 @@ EXTERN_C const IID IID_IEnumSTATPROPSTG;
         DECLSPEC_XFGVIRT(IEnumSTATPROPSTG, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumSTATPROPSTG * This,
-            /* [out] */ __RPC__deref_out_opt IEnumSTATPROPSTG **ppenum);
+            /* [annotation][out] */ 
+            _Out_  IEnumSTATPROPSTG **ppenum);
         
         END_INTERFACE
     } IEnumSTATPROPSTGVtbl;
@@ -968,9 +1045,12 @@ EXTERN_C const IID IID_IEnumSTATPROPSTG;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IEnumSTATPROPSTG_RemoteNext_Proxy( 
     __RPC__in IEnumSTATPROPSTG * This,
-    /* [in] */ ULONG celt,
-    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) STATPROPSTG *rgelt,
-    /* [out] */ __RPC__out ULONG *pceltFetched);
+    /* [annotation][in] */ 
+    _In_  ULONG celt,
+    /* [annotation][length_is][size_is][out] */ 
+    _Out_writes_to_(celt,*pceltFetched)  STATPROPSTG *rgelt,
+    /* [annotation][out] */ 
+    _Out_  ULONG *pceltFetched);
 
 
 void __RPC_STUB IEnumSTATPROPSTG_RemoteNext_Stub(
@@ -1002,19 +1082,22 @@ EXTERN_C const IID IID_IEnumSTATPROPSETSTG;
     {
     public:
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
             /* [annotation][length_is][size_is][out] */ 
             _Out_writes_to_(celt, *pceltFetched)  STATPROPSETSTG *rgelt,
             /* [annotation][out] */ 
             _Out_opt_ _Deref_out_range_(0, celt)  ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [out] */ __RPC__deref_out_opt IEnumSTATPROPSETSTG **ppenum) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumSTATPROPSETSTG **ppenum) = 0;
         
     };
     
@@ -1028,7 +1111,8 @@ EXTERN_C const IID IID_IEnumSTATPROPSETSTG;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumSTATPROPSETSTG * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1043,7 +1127,8 @@ EXTERN_C const IID IID_IEnumSTATPROPSETSTG;
         DECLSPEC_XFGVIRT(IEnumSTATPROPSETSTG, Next)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumSTATPROPSETSTG * This,
-            /* [in] */ ULONG celt,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
             /* [annotation][length_is][size_is][out] */ 
             _Out_writes_to_(celt, *pceltFetched)  STATPROPSETSTG *rgelt,
             /* [annotation][out] */ 
@@ -1052,7 +1137,8 @@ EXTERN_C const IID IID_IEnumSTATPROPSETSTG;
         DECLSPEC_XFGVIRT(IEnumSTATPROPSETSTG, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumSTATPROPSETSTG * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumSTATPROPSETSTG, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -1061,7 +1147,8 @@ EXTERN_C const IID IID_IEnumSTATPROPSETSTG;
         DECLSPEC_XFGVIRT(IEnumSTATPROPSETSTG, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumSTATPROPSETSTG * This,
-            /* [out] */ __RPC__deref_out_opt IEnumSTATPROPSETSTG **ppenum);
+            /* [annotation][out] */ 
+            _Out_  IEnumSTATPROPSETSTG **ppenum);
         
         END_INTERFACE
     } IEnumSTATPROPSETSTGVtbl;
@@ -1107,9 +1194,12 @@ EXTERN_C const IID IID_IEnumSTATPROPSETSTG;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IEnumSTATPROPSETSTG_RemoteNext_Proxy( 
     __RPC__in IEnumSTATPROPSETSTG * This,
-    /* [in] */ ULONG celt,
-    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) STATPROPSETSTG *rgelt,
-    /* [out] */ __RPC__out ULONG *pceltFetched);
+    /* [annotation][in] */ 
+    _In_  ULONG celt,
+    /* [annotation][length_is][size_is][out] */ 
+    _Out_writes_to_(celt,*pceltFetched)  STATPROPSETSTG *rgelt,
+    /* [annotation][out] */ 
+    _Out_  ULONG *pceltFetched);
 
 
 void __RPC_STUB IEnumSTATPROPSETSTG_RemoteNext_Stub(
@@ -1322,7 +1412,8 @@ void                      __RPC_USER  LPSAFEARRAY_UserFree64(     __RPC__in unsi
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IEnumSTATPROPSTG_Next_Proxy( 
     IEnumSTATPROPSTG * This,
-    /* [in] */ ULONG celt,
+    /* [annotation][in] */ 
+    _In_  ULONG celt,
     /* [annotation][length_is][size_is][out] */ 
     _Out_writes_to_(celt, *pceltFetched)  STATPROPSTG *rgelt,
     /* [annotation][out] */ 
@@ -1331,13 +1422,17 @@ void                      __RPC_USER  LPSAFEARRAY_UserFree64(     __RPC__in unsi
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IEnumSTATPROPSTG_Next_Stub( 
     __RPC__in IEnumSTATPROPSTG * This,
-    /* [in] */ ULONG celt,
-    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) STATPROPSTG *rgelt,
-    /* [out] */ __RPC__out ULONG *pceltFetched);
+    /* [annotation][in] */ 
+    _In_  ULONG celt,
+    /* [annotation][length_is][size_is][out] */ 
+    _Out_writes_to_(celt,*pceltFetched)  STATPROPSTG *rgelt,
+    /* [annotation][out] */ 
+    _Out_  ULONG *pceltFetched);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IEnumSTATPROPSETSTG_Next_Proxy( 
     IEnumSTATPROPSETSTG * This,
-    /* [in] */ ULONG celt,
+    /* [annotation][in] */ 
+    _In_  ULONG celt,
     /* [annotation][length_is][size_is][out] */ 
     _Out_writes_to_(celt, *pceltFetched)  STATPROPSETSTG *rgelt,
     /* [annotation][out] */ 
@@ -1346,9 +1441,12 @@ void                      __RPC_USER  LPSAFEARRAY_UserFree64(     __RPC__in unsi
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IEnumSTATPROPSETSTG_Next_Stub( 
     __RPC__in IEnumSTATPROPSETSTG * This,
-    /* [in] */ ULONG celt,
-    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) STATPROPSETSTG *rgelt,
-    /* [out] */ __RPC__out ULONG *pceltFetched);
+    /* [annotation][in] */ 
+    _In_  ULONG celt,
+    /* [annotation][length_is][size_is][out] */ 
+    _Out_writes_to_(celt,*pceltFetched)  STATPROPSETSTG *rgelt,
+    /* [annotation][out] */ 
+    _Out_  ULONG *pceltFetched);
 
 
 

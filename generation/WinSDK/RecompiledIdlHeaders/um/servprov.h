@@ -161,7 +161,8 @@ EXTERN_C const IID IID_IServiceProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IServiceProvider * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -218,9 +219,12 @@ EXTERN_C const IID IID_IServiceProvider;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IServiceProvider_RemoteQueryService_Proxy( 
     __RPC__in IServiceProvider * This,
-    /* [in] */ __RPC__in REFGUID guidService,
-    /* [in] */ __RPC__in REFIID riid,
-    /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
+    /* [annotation][in] */ 
+    _In_  REFGUID guidService,
+    /* [annotation][in] */ 
+    _In_  REFIID riid,
+    /* [annotation][iid_is][out] */ 
+    _COM_Outptr_  IUnknown **ppvObject);
 
 
 void __RPC_STUB IServiceProvider_RemoteQueryService_Stub(
@@ -259,9 +263,12 @@ extern RPC_IF_HANDLE __MIDL_itf_servprov_0000_0001_v0_0_s_ifspec;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IServiceProvider_QueryService_Stub( 
     __RPC__in IServiceProvider * This,
-    /* [in] */ __RPC__in REFGUID guidService,
-    /* [in] */ __RPC__in REFIID riid,
-    /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
+    /* [annotation][in] */ 
+    _In_  REFGUID guidService,
+    /* [annotation][in] */ 
+    _In_  REFIID riid,
+    /* [annotation][iid_is][out] */ 
+    _COM_Outptr_  IUnknown **ppvObject);
 
 
 

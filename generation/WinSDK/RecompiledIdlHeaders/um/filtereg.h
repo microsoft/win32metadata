@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -107,34 +107,58 @@ EXTERN_C const IID IID_ILoadFilter;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE LoadIFilter( 
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwcsPath,
-            /* [unique][in] */ __RPC__in_opt FILTERED_DATA_SOURCES *pFilteredSources,
-            /* [unique][in] */ __RPC__in_opt IUnknown *pUnkOuter,
-            /* [in] */ BOOL fUseDefault,
-            /* [unique][out][in] */ __RPC__inout_opt CLSID *pFilterClsid,
-            /* [unique][out][in] */ __RPC__inout_opt int *SearchDecSize,
-            /* [length_is][length_is][size_is][size_is][unique][out][in] */ __RPC__deref_opt_inout_ecount_part_opt(( *SearchDecSize + 1 ) , ( *SearchDecSize + 1 ) ) WCHAR **pwcsSearchDesc,
-            /* [unique][out][in] */ __RPC__deref_opt_inout_opt IFilter **ppIFilt) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwcsPath,
+            /* [annotation][unique][in] */ 
+            _In_  FILTERED_DATA_SOURCES *pFilteredSources,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][in] */ 
+            _In_  BOOL fUseDefault,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  CLSID *pFilterClsid,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  int *SearchDecSize,
+            /* [annotation][length_is][length_is][size_is][size_is][unique][out][in] */ 
+            _Inout_updates_to_(*SearchDecSize + 1,*SearchDecSize + 1)  WCHAR **pwcsSearchDesc,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  IFilter **ppIFilt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LoadIFilterFromStorage( 
-            /* [in] */ __RPC__in_opt IStorage *pStg,
-            /* [unique][in] */ __RPC__in_opt IUnknown *pUnkOuter,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwcsOverride,
-            /* [in] */ BOOL fUseDefault,
-            /* [unique][out][in] */ __RPC__inout_opt CLSID *pFilterClsid,
-            /* [unique][out][in] */ __RPC__inout_opt int *SearchDecSize,
-            /* [length_is][length_is][size_is][size_is][unique][out][in] */ __RPC__deref_opt_inout_ecount_part_opt(( *SearchDecSize + 1 ) , ( *SearchDecSize + 1 ) ) WCHAR **pwcsSearchDesc,
-            /* [unique][out][in] */ __RPC__deref_opt_inout_opt IFilter **ppIFilt) = 0;
+            /* [annotation][in] */ 
+            _In_  IStorage *pStg,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwcsOverride,
+            /* [annotation][in] */ 
+            _In_  BOOL fUseDefault,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  CLSID *pFilterClsid,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  int *SearchDecSize,
+            /* [annotation][length_is][length_is][size_is][size_is][unique][out][in] */ 
+            _Inout_updates_to_(*SearchDecSize + 1,*SearchDecSize + 1)  WCHAR **pwcsSearchDesc,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  IFilter **ppIFilt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LoadIFilterFromStream( 
-            /* [in] */ __RPC__in_opt IStream *pStm,
-            /* [unique][in] */ __RPC__in_opt FILTERED_DATA_SOURCES *pFilteredSources,
-            /* [unique][in] */ __RPC__in_opt IUnknown *pUnkOuter,
-            /* [in] */ BOOL fUseDefault,
-            /* [unique][out][in] */ __RPC__inout_opt CLSID *pFilterClsid,
-            /* [unique][out][in] */ __RPC__inout_opt int *SearchDecSize,
-            /* [length_is][length_is][size_is][size_is][unique][out][in] */ __RPC__deref_opt_inout_ecount_part_opt(( *SearchDecSize + 1 ) , ( *SearchDecSize + 1 ) ) WCHAR **pwcsSearchDesc,
-            /* [unique][out][in] */ __RPC__deref_opt_inout_opt IFilter **ppIFilt) = 0;
+            /* [annotation][in] */ 
+            _In_  IStream *pStm,
+            /* [annotation][unique][in] */ 
+            _In_  FILTERED_DATA_SOURCES *pFilteredSources,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][in] */ 
+            _In_  BOOL fUseDefault,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  CLSID *pFilterClsid,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  int *SearchDecSize,
+            /* [annotation][length_is][length_is][size_is][size_is][unique][out][in] */ 
+            _Inout_updates_to_(*SearchDecSize + 1,*SearchDecSize + 1)  WCHAR **pwcsSearchDesc,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  IFilter **ppIFilt) = 0;
         
     };
     
@@ -148,7 +172,8 @@ EXTERN_C const IID IID_ILoadFilter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ILoadFilter * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -163,38 +188,62 @@ EXTERN_C const IID IID_ILoadFilter;
         DECLSPEC_XFGVIRT(ILoadFilter, LoadIFilter)
         HRESULT ( STDMETHODCALLTYPE *LoadIFilter )( 
             __RPC__in ILoadFilter * This,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwcsPath,
-            /* [unique][in] */ __RPC__in_opt FILTERED_DATA_SOURCES *pFilteredSources,
-            /* [unique][in] */ __RPC__in_opt IUnknown *pUnkOuter,
-            /* [in] */ BOOL fUseDefault,
-            /* [unique][out][in] */ __RPC__inout_opt CLSID *pFilterClsid,
-            /* [unique][out][in] */ __RPC__inout_opt int *SearchDecSize,
-            /* [length_is][length_is][size_is][size_is][unique][out][in] */ __RPC__deref_opt_inout_ecount_part_opt(( *SearchDecSize + 1 ) , ( *SearchDecSize + 1 ) ) WCHAR **pwcsSearchDesc,
-            /* [unique][out][in] */ __RPC__deref_opt_inout_opt IFilter **ppIFilt);
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwcsPath,
+            /* [annotation][unique][in] */ 
+            _In_  FILTERED_DATA_SOURCES *pFilteredSources,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][in] */ 
+            _In_  BOOL fUseDefault,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  CLSID *pFilterClsid,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  int *SearchDecSize,
+            /* [annotation][length_is][length_is][size_is][size_is][unique][out][in] */ 
+            _Inout_updates_to_(*SearchDecSize + 1,*SearchDecSize + 1)  WCHAR **pwcsSearchDesc,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  IFilter **ppIFilt);
         
         DECLSPEC_XFGVIRT(ILoadFilter, LoadIFilterFromStorage)
         HRESULT ( STDMETHODCALLTYPE *LoadIFilterFromStorage )( 
             __RPC__in ILoadFilter * This,
-            /* [in] */ __RPC__in_opt IStorage *pStg,
-            /* [unique][in] */ __RPC__in_opt IUnknown *pUnkOuter,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwcsOverride,
-            /* [in] */ BOOL fUseDefault,
-            /* [unique][out][in] */ __RPC__inout_opt CLSID *pFilterClsid,
-            /* [unique][out][in] */ __RPC__inout_opt int *SearchDecSize,
-            /* [length_is][length_is][size_is][size_is][unique][out][in] */ __RPC__deref_opt_inout_ecount_part_opt(( *SearchDecSize + 1 ) , ( *SearchDecSize + 1 ) ) WCHAR **pwcsSearchDesc,
-            /* [unique][out][in] */ __RPC__deref_opt_inout_opt IFilter **ppIFilt);
+            /* [annotation][in] */ 
+            _In_  IStorage *pStg,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwcsOverride,
+            /* [annotation][in] */ 
+            _In_  BOOL fUseDefault,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  CLSID *pFilterClsid,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  int *SearchDecSize,
+            /* [annotation][length_is][length_is][size_is][size_is][unique][out][in] */ 
+            _Inout_updates_to_(*SearchDecSize + 1,*SearchDecSize + 1)  WCHAR **pwcsSearchDesc,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  IFilter **ppIFilt);
         
         DECLSPEC_XFGVIRT(ILoadFilter, LoadIFilterFromStream)
         HRESULT ( STDMETHODCALLTYPE *LoadIFilterFromStream )( 
             __RPC__in ILoadFilter * This,
-            /* [in] */ __RPC__in_opt IStream *pStm,
-            /* [unique][in] */ __RPC__in_opt FILTERED_DATA_SOURCES *pFilteredSources,
-            /* [unique][in] */ __RPC__in_opt IUnknown *pUnkOuter,
-            /* [in] */ BOOL fUseDefault,
-            /* [unique][out][in] */ __RPC__inout_opt CLSID *pFilterClsid,
-            /* [unique][out][in] */ __RPC__inout_opt int *SearchDecSize,
-            /* [length_is][length_is][size_is][size_is][unique][out][in] */ __RPC__deref_opt_inout_ecount_part_opt(( *SearchDecSize + 1 ) , ( *SearchDecSize + 1 ) ) WCHAR **pwcsSearchDesc,
-            /* [unique][out][in] */ __RPC__deref_opt_inout_opt IFilter **ppIFilt);
+            /* [annotation][in] */ 
+            _In_  IStream *pStm,
+            /* [annotation][unique][in] */ 
+            _In_  FILTERED_DATA_SOURCES *pFilteredSources,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][in] */ 
+            _In_  BOOL fUseDefault,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  CLSID *pFilterClsid,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  int *SearchDecSize,
+            /* [annotation][length_is][length_is][size_is][size_is][unique][out][in] */ 
+            _Inout_updates_to_(*SearchDecSize + 1,*SearchDecSize + 1)  WCHAR **pwcsSearchDesc,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  IFilter **ppIFilt);
         
         END_INTERFACE
     } ILoadFilterVtbl;
@@ -255,11 +304,16 @@ EXTERN_C const IID IID_ILoadFilterWithPrivateComActivation;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE LoadIFilterWithPrivateComActivation( 
-            /* [unique][in] */ __RPC__in_opt FILTERED_DATA_SOURCES *filteredSources,
-            /* [in] */ BOOL useDefault,
-            /* [out] */ __RPC__out CLSID *filterClsid,
-            /* [out] */ __RPC__out BOOL *isFilterPrivateComActivated,
-            /* [unique][out][in] */ __RPC__deref_opt_inout_opt IFilter **filterObj) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  FILTERED_DATA_SOURCES *filteredSources,
+            /* [annotation][in] */ 
+            _In_  BOOL useDefault,
+            /* [annotation][out] */ 
+            _Out_  CLSID *filterClsid,
+            /* [annotation][out] */ 
+            _Out_  BOOL *isFilterPrivateComActivated,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  IFilter **filterObj) = 0;
         
     };
     
@@ -273,7 +327,8 @@ EXTERN_C const IID IID_ILoadFilterWithPrivateComActivation;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ILoadFilterWithPrivateComActivation * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -288,47 +343,76 @@ EXTERN_C const IID IID_ILoadFilterWithPrivateComActivation;
         DECLSPEC_XFGVIRT(ILoadFilter, LoadIFilter)
         HRESULT ( STDMETHODCALLTYPE *LoadIFilter )( 
             __RPC__in ILoadFilterWithPrivateComActivation * This,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwcsPath,
-            /* [unique][in] */ __RPC__in_opt FILTERED_DATA_SOURCES *pFilteredSources,
-            /* [unique][in] */ __RPC__in_opt IUnknown *pUnkOuter,
-            /* [in] */ BOOL fUseDefault,
-            /* [unique][out][in] */ __RPC__inout_opt CLSID *pFilterClsid,
-            /* [unique][out][in] */ __RPC__inout_opt int *SearchDecSize,
-            /* [length_is][length_is][size_is][size_is][unique][out][in] */ __RPC__deref_opt_inout_ecount_part_opt(( *SearchDecSize + 1 ) , ( *SearchDecSize + 1 ) ) WCHAR **pwcsSearchDesc,
-            /* [unique][out][in] */ __RPC__deref_opt_inout_opt IFilter **ppIFilt);
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwcsPath,
+            /* [annotation][unique][in] */ 
+            _In_  FILTERED_DATA_SOURCES *pFilteredSources,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][in] */ 
+            _In_  BOOL fUseDefault,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  CLSID *pFilterClsid,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  int *SearchDecSize,
+            /* [annotation][length_is][length_is][size_is][size_is][unique][out][in] */ 
+            _Inout_updates_to_(*SearchDecSize + 1,*SearchDecSize + 1)  WCHAR **pwcsSearchDesc,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  IFilter **ppIFilt);
         
         DECLSPEC_XFGVIRT(ILoadFilter, LoadIFilterFromStorage)
         HRESULT ( STDMETHODCALLTYPE *LoadIFilterFromStorage )( 
             __RPC__in ILoadFilterWithPrivateComActivation * This,
-            /* [in] */ __RPC__in_opt IStorage *pStg,
-            /* [unique][in] */ __RPC__in_opt IUnknown *pUnkOuter,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwcsOverride,
-            /* [in] */ BOOL fUseDefault,
-            /* [unique][out][in] */ __RPC__inout_opt CLSID *pFilterClsid,
-            /* [unique][out][in] */ __RPC__inout_opt int *SearchDecSize,
-            /* [length_is][length_is][size_is][size_is][unique][out][in] */ __RPC__deref_opt_inout_ecount_part_opt(( *SearchDecSize + 1 ) , ( *SearchDecSize + 1 ) ) WCHAR **pwcsSearchDesc,
-            /* [unique][out][in] */ __RPC__deref_opt_inout_opt IFilter **ppIFilt);
+            /* [annotation][in] */ 
+            _In_  IStorage *pStg,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwcsOverride,
+            /* [annotation][in] */ 
+            _In_  BOOL fUseDefault,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  CLSID *pFilterClsid,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  int *SearchDecSize,
+            /* [annotation][length_is][length_is][size_is][size_is][unique][out][in] */ 
+            _Inout_updates_to_(*SearchDecSize + 1,*SearchDecSize + 1)  WCHAR **pwcsSearchDesc,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  IFilter **ppIFilt);
         
         DECLSPEC_XFGVIRT(ILoadFilter, LoadIFilterFromStream)
         HRESULT ( STDMETHODCALLTYPE *LoadIFilterFromStream )( 
             __RPC__in ILoadFilterWithPrivateComActivation * This,
-            /* [in] */ __RPC__in_opt IStream *pStm,
-            /* [unique][in] */ __RPC__in_opt FILTERED_DATA_SOURCES *pFilteredSources,
-            /* [unique][in] */ __RPC__in_opt IUnknown *pUnkOuter,
-            /* [in] */ BOOL fUseDefault,
-            /* [unique][out][in] */ __RPC__inout_opt CLSID *pFilterClsid,
-            /* [unique][out][in] */ __RPC__inout_opt int *SearchDecSize,
-            /* [length_is][length_is][size_is][size_is][unique][out][in] */ __RPC__deref_opt_inout_ecount_part_opt(( *SearchDecSize + 1 ) , ( *SearchDecSize + 1 ) ) WCHAR **pwcsSearchDesc,
-            /* [unique][out][in] */ __RPC__deref_opt_inout_opt IFilter **ppIFilt);
+            /* [annotation][in] */ 
+            _In_  IStream *pStm,
+            /* [annotation][unique][in] */ 
+            _In_  FILTERED_DATA_SOURCES *pFilteredSources,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][in] */ 
+            _In_  BOOL fUseDefault,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  CLSID *pFilterClsid,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  int *SearchDecSize,
+            /* [annotation][length_is][length_is][size_is][size_is][unique][out][in] */ 
+            _Inout_updates_to_(*SearchDecSize + 1,*SearchDecSize + 1)  WCHAR **pwcsSearchDesc,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  IFilter **ppIFilt);
         
         DECLSPEC_XFGVIRT(ILoadFilterWithPrivateComActivation, LoadIFilterWithPrivateComActivation)
         HRESULT ( STDMETHODCALLTYPE *LoadIFilterWithPrivateComActivation )( 
             __RPC__in ILoadFilterWithPrivateComActivation * This,
-            /* [unique][in] */ __RPC__in_opt FILTERED_DATA_SOURCES *filteredSources,
-            /* [in] */ BOOL useDefault,
-            /* [out] */ __RPC__out CLSID *filterClsid,
-            /* [out] */ __RPC__out BOOL *isFilterPrivateComActivated,
-            /* [unique][out][in] */ __RPC__deref_opt_inout_opt IFilter **filterObj);
+            /* [annotation][unique][in] */ 
+            _In_  FILTERED_DATA_SOURCES *filteredSources,
+            /* [annotation][in] */ 
+            _In_  BOOL useDefault,
+            /* [annotation][out] */ 
+            _Out_  CLSID *filterClsid,
+            /* [annotation][out] */ 
+            _Out_  BOOL *isFilterPrivateComActivated,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  IFilter **filterObj);
         
         END_INTERFACE
     } ILoadFilterWithPrivateComActivationVtbl;

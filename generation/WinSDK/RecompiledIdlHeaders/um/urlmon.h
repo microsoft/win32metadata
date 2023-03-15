@@ -806,27 +806,38 @@ EXTERN_C const IID IID_IPersistMoniker;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetClassID( 
-            /* [out] */ __RPC__out CLSID *pClassID) = 0;
+            /* [annotation][out] */ 
+            _Out_  CLSID *pClassID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Load( 
-            /* [in] */ BOOL fFullyAvailable,
-            /* [in] */ __RPC__in_opt IMoniker *pimkName,
-            /* [in] */ __RPC__in_opt LPBC pibc,
-            /* [in] */ DWORD grfMode) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL fFullyAvailable,
+            /* [annotation][in] */ 
+            _In_  IMoniker *pimkName,
+            /* [annotation][in] */ 
+            _In_  LPBC pibc,
+            /* [annotation][in] */ 
+            _In_  DWORD grfMode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Save( 
-            /* [in] */ __RPC__in_opt IMoniker *pimkName,
-            /* [in] */ __RPC__in_opt LPBC pbc,
-            /* [in] */ BOOL fRemember) = 0;
+            /* [annotation][in] */ 
+            _In_  IMoniker *pimkName,
+            /* [annotation][in] */ 
+            _In_  LPBC pbc,
+            /* [annotation][in] */ 
+            _In_  BOOL fRemember) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SaveCompleted( 
-            /* [in] */ __RPC__in_opt IMoniker *pimkName,
-            /* [in] */ __RPC__in_opt LPBC pibc) = 0;
+            /* [annotation][in] */ 
+            _In_  IMoniker *pimkName,
+            /* [annotation][in] */ 
+            _In_  LPBC pibc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurMoniker( 
-            /* [out] */ __RPC__deref_out_opt IMoniker **ppimkName) = 0;
+            /* [annotation][out] */ 
+            _Out_  IMoniker **ppimkName) = 0;
         
     };
     
@@ -840,7 +851,8 @@ EXTERN_C const IID IID_IPersistMoniker;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPersistMoniker * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -855,7 +867,8 @@ EXTERN_C const IID IID_IPersistMoniker;
         DECLSPEC_XFGVIRT(IPersistMoniker, GetClassID)
         HRESULT ( STDMETHODCALLTYPE *GetClassID )( 
             __RPC__in IPersistMoniker * This,
-            /* [out] */ __RPC__out CLSID *pClassID);
+            /* [annotation][out] */ 
+            _Out_  CLSID *pClassID);
         
         DECLSPEC_XFGVIRT(IPersistMoniker, IsDirty)
         HRESULT ( STDMETHODCALLTYPE *IsDirty )( 
@@ -864,28 +877,38 @@ EXTERN_C const IID IID_IPersistMoniker;
         DECLSPEC_XFGVIRT(IPersistMoniker, Load)
         HRESULT ( STDMETHODCALLTYPE *Load )( 
             __RPC__in IPersistMoniker * This,
-            /* [in] */ BOOL fFullyAvailable,
-            /* [in] */ __RPC__in_opt IMoniker *pimkName,
-            /* [in] */ __RPC__in_opt LPBC pibc,
-            /* [in] */ DWORD grfMode);
+            /* [annotation][in] */ 
+            _In_  BOOL fFullyAvailable,
+            /* [annotation][in] */ 
+            _In_  IMoniker *pimkName,
+            /* [annotation][in] */ 
+            _In_  LPBC pibc,
+            /* [annotation][in] */ 
+            _In_  DWORD grfMode);
         
         DECLSPEC_XFGVIRT(IPersistMoniker, Save)
         HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IPersistMoniker * This,
-            /* [in] */ __RPC__in_opt IMoniker *pimkName,
-            /* [in] */ __RPC__in_opt LPBC pbc,
-            /* [in] */ BOOL fRemember);
+            /* [annotation][in] */ 
+            _In_  IMoniker *pimkName,
+            /* [annotation][in] */ 
+            _In_  LPBC pbc,
+            /* [annotation][in] */ 
+            _In_  BOOL fRemember);
         
         DECLSPEC_XFGVIRT(IPersistMoniker, SaveCompleted)
         HRESULT ( STDMETHODCALLTYPE *SaveCompleted )( 
             __RPC__in IPersistMoniker * This,
-            /* [in] */ __RPC__in_opt IMoniker *pimkName,
-            /* [in] */ __RPC__in_opt LPBC pibc);
+            /* [annotation][in] */ 
+            _In_  IMoniker *pimkName,
+            /* [annotation][in] */ 
+            _In_  LPBC pibc);
         
         DECLSPEC_XFGVIRT(IPersistMoniker, GetCurMoniker)
         HRESULT ( STDMETHODCALLTYPE *GetCurMoniker )( 
             __RPC__in IPersistMoniker * This,
-            /* [out] */ __RPC__deref_out_opt IMoniker **ppimkName);
+            /* [annotation][out] */ 
+            _Out_  IMoniker **ppimkName);
         
         END_INTERFACE
     } IPersistMonikerVtbl;
@@ -978,8 +1001,10 @@ EXTERN_C const IID IID_IMonikerProp;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE PutProperty( 
-            /* [in] */ MONIKERPROPERTY mkp,
-            /* [in] */ __RPC__in LPCWSTR val) = 0;
+            /* [annotation][in] */ 
+            _In_  MONIKERPROPERTY mkp,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR val) = 0;
         
     };
     
@@ -993,7 +1018,8 @@ EXTERN_C const IID IID_IMonikerProp;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMonikerProp * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1008,8 +1034,10 @@ EXTERN_C const IID IID_IMonikerProp;
         DECLSPEC_XFGVIRT(IMonikerProp, PutProperty)
         HRESULT ( STDMETHODCALLTYPE *PutProperty )( 
             __RPC__in IMonikerProp * This,
-            /* [in] */ MONIKERPROPERTY mkp,
-            /* [in] */ __RPC__in LPCWSTR val);
+            /* [annotation][in] */ 
+            _In_  MONIKERPROPERTY mkp,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR val);
         
         END_INTERFACE
     } IMonikerPropVtbl;
@@ -1077,9 +1105,12 @@ EXTERN_C const IID IID_IBindProtocol;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateBinding( 
-            /* [in] */ LPCWSTR szUrl,
-            /* [in] */ IBindCtx *pbc,
-            /* [out] */ IBinding **ppb) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szUrl,
+            /* [annotation][in] */ 
+            _In_  IBindCtx *pbc,
+            /* [annotation][out] */ 
+            _Out_  IBinding **ppb) = 0;
         
     };
     
@@ -1093,7 +1124,8 @@ EXTERN_C const IID IID_IBindProtocol;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IBindProtocol * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1108,9 +1140,12 @@ EXTERN_C const IID IID_IBindProtocol;
         DECLSPEC_XFGVIRT(IBindProtocol, CreateBinding)
         HRESULT ( STDMETHODCALLTYPE *CreateBinding )( 
             IBindProtocol * This,
-            /* [in] */ LPCWSTR szUrl,
-            /* [in] */ IBindCtx *pbc,
-            /* [out] */ IBinding **ppb);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szUrl,
+            /* [annotation][in] */ 
+            _In_  IBindCtx *pbc,
+            /* [annotation][out] */ 
+            _Out_  IBinding **ppb);
         
         END_INTERFACE
     } IBindProtocolVtbl;
@@ -1184,17 +1219,22 @@ EXTERN_C const IID IID_IBinding;
         virtual HRESULT STDMETHODCALLTYPE Resume( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetPriority( 
-            /* [in] */ LONG nPriority) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG nPriority) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPriority( 
-            /* [out] */ __RPC__out LONG *pnPriority) = 0;
+            /* [annotation][out] */ 
+            _Out_  LONG *pnPriority) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetBindResult( 
-            /* [out] */ CLSID *pclsidProtocol,
-            /* [out] */ DWORD *pdwResult,
+            /* [annotation][out] */ 
+            _Out_  CLSID *pclsidProtocol,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwResult,
             /* [annotation][out] */ 
             __RPC__out  LPOLESTR *pszResult,
-            /* [out][in] */ DWORD *pdwReserved) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwReserved) = 0;
         
     };
     
@@ -1208,7 +1248,8 @@ EXTERN_C const IID IID_IBinding;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBinding * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1235,21 +1276,26 @@ EXTERN_C const IID IID_IBinding;
         DECLSPEC_XFGVIRT(IBinding, SetPriority)
         HRESULT ( STDMETHODCALLTYPE *SetPriority )( 
             __RPC__in IBinding * This,
-            /* [in] */ LONG nPriority);
+            /* [annotation][in] */ 
+            _In_  LONG nPriority);
         
         DECLSPEC_XFGVIRT(IBinding, GetPriority)
         HRESULT ( STDMETHODCALLTYPE *GetPriority )( 
             __RPC__in IBinding * This,
-            /* [out] */ __RPC__out LONG *pnPriority);
+            /* [annotation][out] */ 
+            _Out_  LONG *pnPriority);
         
         DECLSPEC_XFGVIRT(IBinding, GetBindResult)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetBindResult )( 
             IBinding * This,
-            /* [out] */ CLSID *pclsidProtocol,
-            /* [out] */ DWORD *pdwResult,
+            /* [annotation][out] */ 
+            _Out_  CLSID *pclsidProtocol,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwResult,
             /* [annotation][out] */ 
             __RPC__out  LPOLESTR *pszResult,
-            /* [out][in] */ DWORD *pdwReserved);
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwReserved);
         
         END_INTERFACE
     } IBindingVtbl;
@@ -1301,10 +1347,14 @@ EXTERN_C const IID IID_IBinding;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IBinding_RemoteGetBindResult_Proxy( 
     __RPC__in IBinding * This,
-    /* [out] */ __RPC__out CLSID *pclsidProtocol,
-    /* [out] */ __RPC__out DWORD *pdwResult,
-    /* [out] */ __RPC__deref_out_opt LPOLESTR *pszResult,
-    /* [in] */ DWORD dwReserved);
+    /* [annotation][out] */ 
+    _Out_  CLSID *pclsidProtocol,
+    /* [annotation][out] */ 
+    _Out_  DWORD *pdwResult,
+    /* [annotation][out] */ 
+    _Out_  LPOLESTR *pszResult,
+    /* [annotation][in] */ 
+    _In_  DWORD dwReserved);
 
 
 void __RPC_STUB IBinding_RemoteGetBindResult_Stub(
@@ -1585,38 +1635,56 @@ EXTERN_C const IID IID_IBindStatusCallback;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnStartBinding( 
-            /* [in] */ DWORD dwReserved,
-            /* [in] */ __RPC__in_opt IBinding *pib) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved,
+            /* [annotation][in] */ 
+            _In_  IBinding *pib) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPriority( 
-            /* [out] */ __RPC__out LONG *pnPriority) = 0;
+            /* [annotation][out] */ 
+            _Out_  LONG *pnPriority) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnLowResource( 
-            /* [in] */ DWORD reserved) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD reserved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnProgress( 
-            /* [in] */ ULONG ulProgress,
-            /* [in] */ ULONG ulProgressMax,
-            /* [in] */ ULONG ulStatusCode,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR szStatusText) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ulProgress,
+            /* [annotation][in] */ 
+            _In_  ULONG ulProgressMax,
+            /* [annotation][in] */ 
+            _In_  ULONG ulStatusCode,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR szStatusText) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnStopBinding( 
-            /* [in] */ HRESULT hresult,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR szError) = 0;
+            /* [annotation][in] */ 
+            _In_  HRESULT hresult,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR szError) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetBindInfo( 
-            /* [out] */ DWORD *grfBINDF,
-            /* [unique][out][in] */ BINDINFO *pbindinfo) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *grfBINDF,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  BINDINFO *pbindinfo) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE OnDataAvailable( 
-            /* [in] */ DWORD grfBSCF,
-            /* [in] */ DWORD dwSize,
-            /* [in] */ FORMATETC *pformatetc,
-            /* [in] */ STGMEDIUM *pstgmed) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD grfBSCF,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize,
+            /* [annotation][in] */ 
+            _In_  FORMATETC *pformatetc,
+            /* [annotation][in] */ 
+            _In_  STGMEDIUM *pstgmed) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnObjectAvailable( 
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][in] */ __RPC__in_opt IUnknown *punk) = 0;
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][in] */ 
+            _In_  IUnknown *punk) = 0;
         
     };
     
@@ -1630,7 +1698,8 @@ EXTERN_C const IID IID_IBindStatusCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBindStatusCallback * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1645,52 +1714,70 @@ EXTERN_C const IID IID_IBindStatusCallback;
         DECLSPEC_XFGVIRT(IBindStatusCallback, OnStartBinding)
         HRESULT ( STDMETHODCALLTYPE *OnStartBinding )( 
             __RPC__in IBindStatusCallback * This,
-            /* [in] */ DWORD dwReserved,
-            /* [in] */ __RPC__in_opt IBinding *pib);
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved,
+            /* [annotation][in] */ 
+            _In_  IBinding *pib);
         
         DECLSPEC_XFGVIRT(IBindStatusCallback, GetPriority)
         HRESULT ( STDMETHODCALLTYPE *GetPriority )( 
             __RPC__in IBindStatusCallback * This,
-            /* [out] */ __RPC__out LONG *pnPriority);
+            /* [annotation][out] */ 
+            _Out_  LONG *pnPriority);
         
         DECLSPEC_XFGVIRT(IBindStatusCallback, OnLowResource)
         HRESULT ( STDMETHODCALLTYPE *OnLowResource )( 
             __RPC__in IBindStatusCallback * This,
-            /* [in] */ DWORD reserved);
+            /* [annotation][in] */ 
+            _In_  DWORD reserved);
         
         DECLSPEC_XFGVIRT(IBindStatusCallback, OnProgress)
         HRESULT ( STDMETHODCALLTYPE *OnProgress )( 
             __RPC__in IBindStatusCallback * This,
-            /* [in] */ ULONG ulProgress,
-            /* [in] */ ULONG ulProgressMax,
-            /* [in] */ ULONG ulStatusCode,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR szStatusText);
+            /* [annotation][in] */ 
+            _In_  ULONG ulProgress,
+            /* [annotation][in] */ 
+            _In_  ULONG ulProgressMax,
+            /* [annotation][in] */ 
+            _In_  ULONG ulStatusCode,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR szStatusText);
         
         DECLSPEC_XFGVIRT(IBindStatusCallback, OnStopBinding)
         HRESULT ( STDMETHODCALLTYPE *OnStopBinding )( 
             __RPC__in IBindStatusCallback * This,
-            /* [in] */ HRESULT hresult,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR szError);
+            /* [annotation][in] */ 
+            _In_  HRESULT hresult,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR szError);
         
         DECLSPEC_XFGVIRT(IBindStatusCallback, GetBindInfo)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetBindInfo )( 
             IBindStatusCallback * This,
-            /* [out] */ DWORD *grfBINDF,
-            /* [unique][out][in] */ BINDINFO *pbindinfo);
+            /* [annotation][out] */ 
+            _Out_  DWORD *grfBINDF,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  BINDINFO *pbindinfo);
         
         DECLSPEC_XFGVIRT(IBindStatusCallback, OnDataAvailable)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *OnDataAvailable )( 
             IBindStatusCallback * This,
-            /* [in] */ DWORD grfBSCF,
-            /* [in] */ DWORD dwSize,
-            /* [in] */ FORMATETC *pformatetc,
-            /* [in] */ STGMEDIUM *pstgmed);
+            /* [annotation][in] */ 
+            _In_  DWORD grfBSCF,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize,
+            /* [annotation][in] */ 
+            _In_  FORMATETC *pformatetc,
+            /* [annotation][in] */ 
+            _In_  STGMEDIUM *pstgmed);
         
         DECLSPEC_XFGVIRT(IBindStatusCallback, OnObjectAvailable)
         HRESULT ( STDMETHODCALLTYPE *OnObjectAvailable )( 
             __RPC__in IBindStatusCallback * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][in] */ __RPC__in_opt IUnknown *punk);
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][in] */ 
+            _In_  IUnknown *punk);
         
         END_INTERFACE
     } IBindStatusCallbackVtbl;
@@ -1748,9 +1835,12 @@ EXTERN_C const IID IID_IBindStatusCallback;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IBindStatusCallback_RemoteGetBindInfo_Proxy( 
     __RPC__in IBindStatusCallback * This,
-    /* [out] */ __RPC__out DWORD *grfBINDF,
-    /* [unique][out][in] */ __RPC__inout_opt RemBINDINFO *pbindinfo,
-    /* [unique][out][in] */ __RPC__inout_opt RemSTGMEDIUM *pstgmed);
+    /* [annotation][out] */ 
+    _Out_  DWORD *grfBINDF,
+    /* [annotation][unique][out][in] */ 
+    _Inout_  RemBINDINFO *pbindinfo,
+    /* [annotation][unique][out][in] */ 
+    _Inout_  RemSTGMEDIUM *pstgmed);
 
 
 void __RPC_STUB IBindStatusCallback_RemoteGetBindInfo_Stub(
@@ -1762,10 +1852,14 @@ void __RPC_STUB IBindStatusCallback_RemoteGetBindInfo_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IBindStatusCallback_RemoteOnDataAvailable_Proxy( 
     __RPC__in IBindStatusCallback * This,
-    /* [in] */ DWORD grfBSCF,
-    /* [in] */ DWORD dwSize,
-    /* [in] */ __RPC__in RemFORMATETC *pformatetc,
-    /* [in] */ __RPC__in RemSTGMEDIUM *pstgmed);
+    /* [annotation][in] */ 
+    _In_  DWORD grfBSCF,
+    /* [annotation][in] */ 
+    _In_  DWORD dwSize,
+    /* [annotation][in] */ 
+    _In_  RemFORMATETC *pformatetc,
+    /* [annotation][in] */ 
+    _In_  RemSTGMEDIUM *pstgmed);
 
 
 void __RPC_STUB IBindStatusCallback_RemoteOnDataAvailable_Stub(
@@ -1848,10 +1942,14 @@ EXTERN_C const IID IID_IBindStatusCallbackEx;
     {
     public:
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetBindInfoEx( 
-            /* [out] */ DWORD *grfBINDF,
-            /* [unique][out][in] */ BINDINFO *pbindinfo,
-            /* [out] */ DWORD *grfBINDF2,
-            /* [out] */ DWORD *pdwReserved) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *grfBINDF,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  BINDINFO *pbindinfo,
+            /* [annotation][out] */ 
+            _Out_  DWORD *grfBINDF2,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwReserved) = 0;
         
     };
     
@@ -1865,7 +1963,8 @@ EXTERN_C const IID IID_IBindStatusCallbackEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBindStatusCallbackEx * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1880,60 +1979,82 @@ EXTERN_C const IID IID_IBindStatusCallbackEx;
         DECLSPEC_XFGVIRT(IBindStatusCallback, OnStartBinding)
         HRESULT ( STDMETHODCALLTYPE *OnStartBinding )( 
             __RPC__in IBindStatusCallbackEx * This,
-            /* [in] */ DWORD dwReserved,
-            /* [in] */ __RPC__in_opt IBinding *pib);
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved,
+            /* [annotation][in] */ 
+            _In_  IBinding *pib);
         
         DECLSPEC_XFGVIRT(IBindStatusCallback, GetPriority)
         HRESULT ( STDMETHODCALLTYPE *GetPriority )( 
             __RPC__in IBindStatusCallbackEx * This,
-            /* [out] */ __RPC__out LONG *pnPriority);
+            /* [annotation][out] */ 
+            _Out_  LONG *pnPriority);
         
         DECLSPEC_XFGVIRT(IBindStatusCallback, OnLowResource)
         HRESULT ( STDMETHODCALLTYPE *OnLowResource )( 
             __RPC__in IBindStatusCallbackEx * This,
-            /* [in] */ DWORD reserved);
+            /* [annotation][in] */ 
+            _In_  DWORD reserved);
         
         DECLSPEC_XFGVIRT(IBindStatusCallback, OnProgress)
         HRESULT ( STDMETHODCALLTYPE *OnProgress )( 
             __RPC__in IBindStatusCallbackEx * This,
-            /* [in] */ ULONG ulProgress,
-            /* [in] */ ULONG ulProgressMax,
-            /* [in] */ ULONG ulStatusCode,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR szStatusText);
+            /* [annotation][in] */ 
+            _In_  ULONG ulProgress,
+            /* [annotation][in] */ 
+            _In_  ULONG ulProgressMax,
+            /* [annotation][in] */ 
+            _In_  ULONG ulStatusCode,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR szStatusText);
         
         DECLSPEC_XFGVIRT(IBindStatusCallback, OnStopBinding)
         HRESULT ( STDMETHODCALLTYPE *OnStopBinding )( 
             __RPC__in IBindStatusCallbackEx * This,
-            /* [in] */ HRESULT hresult,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR szError);
+            /* [annotation][in] */ 
+            _In_  HRESULT hresult,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR szError);
         
         DECLSPEC_XFGVIRT(IBindStatusCallback, GetBindInfo)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetBindInfo )( 
             IBindStatusCallbackEx * This,
-            /* [out] */ DWORD *grfBINDF,
-            /* [unique][out][in] */ BINDINFO *pbindinfo);
+            /* [annotation][out] */ 
+            _Out_  DWORD *grfBINDF,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  BINDINFO *pbindinfo);
         
         DECLSPEC_XFGVIRT(IBindStatusCallback, OnDataAvailable)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *OnDataAvailable )( 
             IBindStatusCallbackEx * This,
-            /* [in] */ DWORD grfBSCF,
-            /* [in] */ DWORD dwSize,
-            /* [in] */ FORMATETC *pformatetc,
-            /* [in] */ STGMEDIUM *pstgmed);
+            /* [annotation][in] */ 
+            _In_  DWORD grfBSCF,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize,
+            /* [annotation][in] */ 
+            _In_  FORMATETC *pformatetc,
+            /* [annotation][in] */ 
+            _In_  STGMEDIUM *pstgmed);
         
         DECLSPEC_XFGVIRT(IBindStatusCallback, OnObjectAvailable)
         HRESULT ( STDMETHODCALLTYPE *OnObjectAvailable )( 
             __RPC__in IBindStatusCallbackEx * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][in] */ __RPC__in_opt IUnknown *punk);
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][in] */ 
+            _In_  IUnknown *punk);
         
         DECLSPEC_XFGVIRT(IBindStatusCallbackEx, GetBindInfoEx)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetBindInfoEx )( 
             IBindStatusCallbackEx * This,
-            /* [out] */ DWORD *grfBINDF,
-            /* [unique][out][in] */ BINDINFO *pbindinfo,
-            /* [out] */ DWORD *grfBINDF2,
-            /* [out] */ DWORD *pdwReserved);
+            /* [annotation][out] */ 
+            _Out_  DWORD *grfBINDF,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  BINDINFO *pbindinfo,
+            /* [annotation][out] */ 
+            _Out_  DWORD *grfBINDF2,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwReserved);
         
         END_INTERFACE
     } IBindStatusCallbackExVtbl;
@@ -1995,11 +2116,16 @@ EXTERN_C const IID IID_IBindStatusCallbackEx;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IBindStatusCallbackEx_RemoteGetBindInfoEx_Proxy( 
     __RPC__in IBindStatusCallbackEx * This,
-    /* [out] */ __RPC__out DWORD *grfBINDF,
-    /* [unique][out][in] */ __RPC__inout_opt RemBINDINFO *pbindinfo,
-    /* [unique][out][in] */ __RPC__inout_opt RemSTGMEDIUM *pstgmed,
-    /* [out] */ __RPC__out DWORD *grfBINDF2,
-    /* [out] */ __RPC__out DWORD *pdwReserved);
+    /* [annotation][out] */ 
+    _Out_  DWORD *grfBINDF,
+    /* [annotation][unique][out][in] */ 
+    _Inout_  RemBINDINFO *pbindinfo,
+    /* [annotation][unique][out][in] */ 
+    _Inout_  RemSTGMEDIUM *pstgmed,
+    /* [annotation][out] */ 
+    _Out_  DWORD *grfBINDF2,
+    /* [annotation][out] */ 
+    _Out_  DWORD *pdwReserved);
 
 
 void __RPC_STUB IBindStatusCallbackEx_RemoteGetBindInfoEx_Stub(
@@ -2042,9 +2168,12 @@ EXTERN_C const IID IID_IAuthenticate;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Authenticate( 
-            /* [out] */ __RPC__deref_out_opt HWND *phwnd,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pszUsername,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pszPassword) = 0;
+            /* [annotation][out] */ 
+            _Out_  HWND *phwnd,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pszUsername,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pszPassword) = 0;
         
     };
     
@@ -2058,7 +2187,8 @@ EXTERN_C const IID IID_IAuthenticate;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAuthenticate * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2073,9 +2203,12 @@ EXTERN_C const IID IID_IAuthenticate;
         DECLSPEC_XFGVIRT(IAuthenticate, Authenticate)
         HRESULT ( STDMETHODCALLTYPE *Authenticate )( 
             __RPC__in IAuthenticate * This,
-            /* [out] */ __RPC__deref_out_opt HWND *phwnd,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pszUsername,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pszPassword);
+            /* [annotation][out] */ 
+            _Out_  HWND *phwnd,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pszUsername,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pszPassword);
         
         END_INTERFACE
     } IAuthenticateVtbl;
@@ -2157,10 +2290,14 @@ EXTERN_C const IID IID_IAuthenticateEx;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AuthenticateEx( 
-            /* [out] */ __RPC__deref_out_opt HWND *phwnd,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pszUsername,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pszPassword,
-            /* [in] */ __RPC__in AUTHENTICATEINFO *pauthinfo) = 0;
+            /* [annotation][out] */ 
+            _Out_  HWND *phwnd,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pszUsername,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pszPassword,
+            /* [annotation][in] */ 
+            _In_  AUTHENTICATEINFO *pauthinfo) = 0;
         
     };
     
@@ -2174,7 +2311,8 @@ EXTERN_C const IID IID_IAuthenticateEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAuthenticateEx * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2189,17 +2327,24 @@ EXTERN_C const IID IID_IAuthenticateEx;
         DECLSPEC_XFGVIRT(IAuthenticate, Authenticate)
         HRESULT ( STDMETHODCALLTYPE *Authenticate )( 
             __RPC__in IAuthenticateEx * This,
-            /* [out] */ __RPC__deref_out_opt HWND *phwnd,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pszUsername,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pszPassword);
+            /* [annotation][out] */ 
+            _Out_  HWND *phwnd,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pszUsername,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pszPassword);
         
         DECLSPEC_XFGVIRT(IAuthenticateEx, AuthenticateEx)
         HRESULT ( STDMETHODCALLTYPE *AuthenticateEx )( 
             __RPC__in IAuthenticateEx * This,
-            /* [out] */ __RPC__deref_out_opt HWND *phwnd,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pszUsername,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pszPassword,
-            /* [in] */ __RPC__in AUTHENTICATEINFO *pauthinfo);
+            /* [annotation][out] */ 
+            _Out_  HWND *phwnd,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pszUsername,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pszPassword,
+            /* [annotation][in] */ 
+            _In_  AUTHENTICATEINFO *pauthinfo);
         
         END_INTERFACE
     } IAuthenticateExVtbl;
@@ -2271,16 +2416,24 @@ EXTERN_C const IID IID_IHttpNegotiate;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE BeginningTransaction( 
-            /* [in] */ __RPC__in LPCWSTR szURL,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR szHeaders,
-            /* [in] */ DWORD dwReserved,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pszAdditionalHeaders) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szURL,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR szHeaders,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pszAdditionalHeaders) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnResponse( 
-            /* [in] */ DWORD dwResponseCode,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR szResponseHeaders,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR szRequestHeaders,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pszAdditionalRequestHeaders) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwResponseCode,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR szResponseHeaders,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR szRequestHeaders,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pszAdditionalRequestHeaders) = 0;
         
     };
     
@@ -2294,7 +2447,8 @@ EXTERN_C const IID IID_IHttpNegotiate;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IHttpNegotiate * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2309,18 +2463,26 @@ EXTERN_C const IID IID_IHttpNegotiate;
         DECLSPEC_XFGVIRT(IHttpNegotiate, BeginningTransaction)
         HRESULT ( STDMETHODCALLTYPE *BeginningTransaction )( 
             __RPC__in IHttpNegotiate * This,
-            /* [in] */ __RPC__in LPCWSTR szURL,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR szHeaders,
-            /* [in] */ DWORD dwReserved,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pszAdditionalHeaders);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szURL,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR szHeaders,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pszAdditionalHeaders);
         
         DECLSPEC_XFGVIRT(IHttpNegotiate, OnResponse)
         HRESULT ( STDMETHODCALLTYPE *OnResponse )( 
             __RPC__in IHttpNegotiate * This,
-            /* [in] */ DWORD dwResponseCode,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR szResponseHeaders,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR szRequestHeaders,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pszAdditionalRequestHeaders);
+            /* [annotation][in] */ 
+            _In_  DWORD dwResponseCode,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR szResponseHeaders,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR szRequestHeaders,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pszAdditionalRequestHeaders);
         
         END_INTERFACE
     } IHttpNegotiateVtbl;
@@ -2391,9 +2553,12 @@ EXTERN_C const IID IID_IHttpNegotiate2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetRootSecurityId( 
-            /* [size_is][out] */ __RPC__out_ecount_full(*pcbSecurityId) BYTE *pbSecurityId,
-            /* [out][in] */ __RPC__inout DWORD *pcbSecurityId,
-            /* [in] */ DWORD_PTR dwReserved) = 0;
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(*pcbSecurityId)  BYTE *pbSecurityId,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcbSecurityId,
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwReserved) = 0;
         
     };
     
@@ -2407,7 +2572,8 @@ EXTERN_C const IID IID_IHttpNegotiate2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IHttpNegotiate2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2422,25 +2588,36 @@ EXTERN_C const IID IID_IHttpNegotiate2;
         DECLSPEC_XFGVIRT(IHttpNegotiate, BeginningTransaction)
         HRESULT ( STDMETHODCALLTYPE *BeginningTransaction )( 
             __RPC__in IHttpNegotiate2 * This,
-            /* [in] */ __RPC__in LPCWSTR szURL,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR szHeaders,
-            /* [in] */ DWORD dwReserved,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pszAdditionalHeaders);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szURL,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR szHeaders,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pszAdditionalHeaders);
         
         DECLSPEC_XFGVIRT(IHttpNegotiate, OnResponse)
         HRESULT ( STDMETHODCALLTYPE *OnResponse )( 
             __RPC__in IHttpNegotiate2 * This,
-            /* [in] */ DWORD dwResponseCode,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR szResponseHeaders,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR szRequestHeaders,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pszAdditionalRequestHeaders);
+            /* [annotation][in] */ 
+            _In_  DWORD dwResponseCode,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR szResponseHeaders,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR szRequestHeaders,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pszAdditionalRequestHeaders);
         
         DECLSPEC_XFGVIRT(IHttpNegotiate2, GetRootSecurityId)
         HRESULT ( STDMETHODCALLTYPE *GetRootSecurityId )( 
             __RPC__in IHttpNegotiate2 * This,
-            /* [size_is][out] */ __RPC__out_ecount_full(*pcbSecurityId) BYTE *pbSecurityId,
-            /* [out][in] */ __RPC__inout DWORD *pcbSecurityId,
-            /* [in] */ DWORD_PTR dwReserved);
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(*pcbSecurityId)  BYTE *pbSecurityId,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcbSecurityId,
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwReserved);
         
         END_INTERFACE
     } IHttpNegotiate2Vtbl;
@@ -2515,8 +2692,10 @@ EXTERN_C const IID IID_IHttpNegotiate3;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSerializedClientCertContext( 
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcbCert) BYTE **ppbCert,
-            /* [out] */ __RPC__out DWORD *pcbCert) = 0;
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcbCert)  BYTE **ppbCert,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcbCert) = 0;
         
     };
     
@@ -2530,7 +2709,8 @@ EXTERN_C const IID IID_IHttpNegotiate3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IHttpNegotiate3 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2545,31 +2725,44 @@ EXTERN_C const IID IID_IHttpNegotiate3;
         DECLSPEC_XFGVIRT(IHttpNegotiate, BeginningTransaction)
         HRESULT ( STDMETHODCALLTYPE *BeginningTransaction )( 
             __RPC__in IHttpNegotiate3 * This,
-            /* [in] */ __RPC__in LPCWSTR szURL,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR szHeaders,
-            /* [in] */ DWORD dwReserved,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pszAdditionalHeaders);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szURL,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR szHeaders,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pszAdditionalHeaders);
         
         DECLSPEC_XFGVIRT(IHttpNegotiate, OnResponse)
         HRESULT ( STDMETHODCALLTYPE *OnResponse )( 
             __RPC__in IHttpNegotiate3 * This,
-            /* [in] */ DWORD dwResponseCode,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR szResponseHeaders,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR szRequestHeaders,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pszAdditionalRequestHeaders);
+            /* [annotation][in] */ 
+            _In_  DWORD dwResponseCode,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR szResponseHeaders,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR szRequestHeaders,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pszAdditionalRequestHeaders);
         
         DECLSPEC_XFGVIRT(IHttpNegotiate2, GetRootSecurityId)
         HRESULT ( STDMETHODCALLTYPE *GetRootSecurityId )( 
             __RPC__in IHttpNegotiate3 * This,
-            /* [size_is][out] */ __RPC__out_ecount_full(*pcbSecurityId) BYTE *pbSecurityId,
-            /* [out][in] */ __RPC__inout DWORD *pcbSecurityId,
-            /* [in] */ DWORD_PTR dwReserved);
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(*pcbSecurityId)  BYTE *pbSecurityId,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcbSecurityId,
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwReserved);
         
         DECLSPEC_XFGVIRT(IHttpNegotiate3, GetSerializedClientCertContext)
         HRESULT ( STDMETHODCALLTYPE *GetSerializedClientCertContext )( 
             __RPC__in IHttpNegotiate3 * This,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcbCert) BYTE **ppbCert,
-            /* [out] */ __RPC__out DWORD *pcbCert);
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcbCert)  BYTE **ppbCert,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcbCert);
         
         END_INTERFACE
     } IHttpNegotiate3Vtbl;
@@ -2648,11 +2841,14 @@ EXTERN_C const IID IID_IWinInetFileStream;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetHandleForUnlock( 
-            /* [in] */ DWORD_PTR hWinInetLockHandle,
-            /* [in] */ DWORD_PTR dwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR hWinInetLockHandle,
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwReserved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDeleteFile( 
-            /* [in] */ DWORD_PTR dwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwReserved) = 0;
         
     };
     
@@ -2666,7 +2862,8 @@ EXTERN_C const IID IID_IWinInetFileStream;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWinInetFileStream * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2681,13 +2878,16 @@ EXTERN_C const IID IID_IWinInetFileStream;
         DECLSPEC_XFGVIRT(IWinInetFileStream, SetHandleForUnlock)
         HRESULT ( STDMETHODCALLTYPE *SetHandleForUnlock )( 
             __RPC__in IWinInetFileStream * This,
-            /* [in] */ DWORD_PTR hWinInetLockHandle,
-            /* [in] */ DWORD_PTR dwReserved);
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR hWinInetLockHandle,
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwReserved);
         
         DECLSPEC_XFGVIRT(IWinInetFileStream, SetDeleteFile)
         HRESULT ( STDMETHODCALLTYPE *SetDeleteFile )( 
             __RPC__in IWinInetFileStream * This,
-            /* [in] */ DWORD_PTR dwReserved);
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwReserved);
         
         END_INTERFACE
     } IWinInetFileStreamVtbl;
@@ -2758,8 +2958,10 @@ EXTERN_C const IID IID_IWindowForBindingUI;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetWindow( 
-            /* [in] */ REFGUID rguidReason,
-            /* [out] */ HWND *phwnd) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidReason,
+            /* [annotation][out] */ 
+            _Out_  HWND *phwnd) = 0;
         
     };
     
@@ -2773,7 +2975,8 @@ EXTERN_C const IID IID_IWindowForBindingUI;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWindowForBindingUI * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2788,8 +2991,10 @@ EXTERN_C const IID IID_IWindowForBindingUI;
         DECLSPEC_XFGVIRT(IWindowForBindingUI, GetWindow)
         HRESULT ( STDMETHODCALLTYPE *GetWindow )( 
             IWindowForBindingUI * This,
-            /* [in] */ REFGUID rguidReason,
-            /* [out] */ HWND *phwnd);
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidReason,
+            /* [annotation][out] */ 
+            _Out_  HWND *phwnd);
         
         END_INTERFACE
     } IWindowForBindingUIVtbl;
@@ -2872,10 +3077,14 @@ EXTERN_C const IID IID_ICodeInstall;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnCodeInstallProblem( 
-            /* [in] */ ULONG ulStatusCode,
-            /* [unique][in] */ LPCWSTR szDestination,
-            /* [unique][in] */ LPCWSTR szSource,
-            /* [in] */ DWORD dwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ulStatusCode,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR szDestination,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR szSource,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved) = 0;
         
     };
     
@@ -2889,7 +3098,8 @@ EXTERN_C const IID IID_ICodeInstall;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICodeInstall * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2904,16 +3114,22 @@ EXTERN_C const IID IID_ICodeInstall;
         DECLSPEC_XFGVIRT(IWindowForBindingUI, GetWindow)
         HRESULT ( STDMETHODCALLTYPE *GetWindow )( 
             ICodeInstall * This,
-            /* [in] */ REFGUID rguidReason,
-            /* [out] */ HWND *phwnd);
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidReason,
+            /* [annotation][out] */ 
+            _Out_  HWND *phwnd);
         
         DECLSPEC_XFGVIRT(ICodeInstall, OnCodeInstallProblem)
         HRESULT ( STDMETHODCALLTYPE *OnCodeInstallProblem )( 
             ICodeInstall * This,
-            /* [in] */ ULONG ulStatusCode,
-            /* [unique][in] */ LPCWSTR szDestination,
-            /* [unique][in] */ LPCWSTR szSource,
-            /* [in] */ DWORD dwReserved);
+            /* [annotation][in] */ 
+            _In_  ULONG ulStatusCode,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR szDestination,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR szSource,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved);
         
         END_INTERFACE
     } ICodeInstallVtbl;
@@ -3027,86 +3243,115 @@ EXTERN_C const IID IID_IUri;
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPropertyBSTR( 
             /* [range][in] */ Uri_PROPERTY uriProp,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrProperty,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrProperty,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPropertyLength( 
             /* [range][in] */ Uri_PROPERTY uriProp,
-            /* [out] */ __RPC__out DWORD *pcchProperty,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcchProperty,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPropertyDWORD( 
             /* [range][in] */ Uri_PROPERTY uriProp,
-            /* [out] */ __RPC__out DWORD *pdwProperty,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwProperty,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE HasProperty( 
             /* [range][in] */ Uri_PROPERTY uriProp,
-            /* [out] */ __RPC__out BOOL *pfHasProperty) = 0;
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfHasProperty) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetAbsoluteUri( 
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrAbsoluteUri) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrAbsoluteUri) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetAuthority( 
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrAuthority) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrAuthority) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetDisplayUri( 
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrDisplayString) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrDisplayString) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetDomain( 
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrDomain) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrDomain) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetExtension( 
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrExtension) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrExtension) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetFragment( 
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrFragment) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrFragment) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetHost( 
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrHost) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrHost) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPassword( 
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrPassword) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrPassword) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPath( 
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrPath) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrPath) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPathAndQuery( 
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrPathAndQuery) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrPathAndQuery) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetQuery( 
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrQuery) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrQuery) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetRawUri( 
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrRawUri) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrRawUri) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetSchemeName( 
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrSchemeName) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrSchemeName) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetUserInfo( 
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrUserInfo) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrUserInfo) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetUserName( 
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrUserName) = 0;
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrUserName) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetHostType( 
-            /* [out] */ __RPC__out DWORD *pdwHostType) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHostType) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPort( 
-            /* [out] */ __RPC__out DWORD *pdwPort) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwPort) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetScheme( 
-            /* [out] */ __RPC__out DWORD *pdwScheme) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwScheme) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetZone( 
-            /* [out] */ __RPC__out DWORD *pdwZone) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwZone) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetProperties( 
-            /* [out] */ __RPC__out LPDWORD pdwFlags) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPDWORD pdwFlags) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE IsEqual( 
-            /* [in] */ __RPC__in_opt IUri *pUri,
-            /* [out] */ __RPC__out BOOL *pfEqual) = 0;
+            /* [annotation][in] */ 
+            _In_  IUri *pUri,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfEqual) = 0;
         
     };
     
@@ -3120,7 +3365,8 @@ EXTERN_C const IID IID_IUri;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUri * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3136,134 +3382,163 @@ EXTERN_C const IID IID_IUri;
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPropertyBSTR )( 
             __RPC__in IUri * This,
             /* [range][in] */ Uri_PROPERTY uriProp,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrProperty,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrProperty,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IUri, GetPropertyLength)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPropertyLength )( 
             __RPC__in IUri * This,
             /* [range][in] */ Uri_PROPERTY uriProp,
-            /* [out] */ __RPC__out DWORD *pcchProperty,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcchProperty,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IUri, GetPropertyDWORD)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPropertyDWORD )( 
             __RPC__in IUri * This,
             /* [range][in] */ Uri_PROPERTY uriProp,
-            /* [out] */ __RPC__out DWORD *pdwProperty,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwProperty,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IUri, HasProperty)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *HasProperty )( 
             __RPC__in IUri * This,
             /* [range][in] */ Uri_PROPERTY uriProp,
-            /* [out] */ __RPC__out BOOL *pfHasProperty);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfHasProperty);
         
         DECLSPEC_XFGVIRT(IUri, GetAbsoluteUri)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAbsoluteUri )( 
             __RPC__in IUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrAbsoluteUri);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrAbsoluteUri);
         
         DECLSPEC_XFGVIRT(IUri, GetAuthority)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAuthority )( 
             __RPC__in IUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrAuthority);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrAuthority);
         
         DECLSPEC_XFGVIRT(IUri, GetDisplayUri)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDisplayUri )( 
             __RPC__in IUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrDisplayString);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrDisplayString);
         
         DECLSPEC_XFGVIRT(IUri, GetDomain)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDomain )( 
             __RPC__in IUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrDomain);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrDomain);
         
         DECLSPEC_XFGVIRT(IUri, GetExtension)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetExtension )( 
             __RPC__in IUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrExtension);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrExtension);
         
         DECLSPEC_XFGVIRT(IUri, GetFragment)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetFragment )( 
             __RPC__in IUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrFragment);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrFragment);
         
         DECLSPEC_XFGVIRT(IUri, GetHost)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetHost )( 
             __RPC__in IUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrHost);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrHost);
         
         DECLSPEC_XFGVIRT(IUri, GetPassword)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPassword )( 
             __RPC__in IUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrPassword);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrPassword);
         
         DECLSPEC_XFGVIRT(IUri, GetPath)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPath )( 
             __RPC__in IUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrPath);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrPath);
         
         DECLSPEC_XFGVIRT(IUri, GetPathAndQuery)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPathAndQuery )( 
             __RPC__in IUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrPathAndQuery);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrPathAndQuery);
         
         DECLSPEC_XFGVIRT(IUri, GetQuery)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetQuery )( 
             __RPC__in IUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrQuery);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrQuery);
         
         DECLSPEC_XFGVIRT(IUri, GetRawUri)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetRawUri )( 
             __RPC__in IUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrRawUri);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrRawUri);
         
         DECLSPEC_XFGVIRT(IUri, GetSchemeName)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSchemeName )( 
             __RPC__in IUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrSchemeName);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrSchemeName);
         
         DECLSPEC_XFGVIRT(IUri, GetUserInfo)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetUserInfo )( 
             __RPC__in IUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrUserInfo);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrUserInfo);
         
         DECLSPEC_XFGVIRT(IUri, GetUserName)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetUserName )( 
             __RPC__in IUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrUserName);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrUserName);
         
         DECLSPEC_XFGVIRT(IUri, GetHostType)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetHostType )( 
             __RPC__in IUri * This,
-            /* [out] */ __RPC__out DWORD *pdwHostType);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHostType);
         
         DECLSPEC_XFGVIRT(IUri, GetPort)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPort )( 
             __RPC__in IUri * This,
-            /* [out] */ __RPC__out DWORD *pdwPort);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwPort);
         
         DECLSPEC_XFGVIRT(IUri, GetScheme)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetScheme )( 
             __RPC__in IUri * This,
-            /* [out] */ __RPC__out DWORD *pdwScheme);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwScheme);
         
         DECLSPEC_XFGVIRT(IUri, GetZone)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetZone )( 
             __RPC__in IUri * This,
-            /* [out] */ __RPC__out DWORD *pdwZone);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwZone);
         
         DECLSPEC_XFGVIRT(IUri, GetProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperties )( 
             __RPC__in IUri * This,
-            /* [out] */ __RPC__out LPDWORD pdwFlags);
+            /* [annotation][out] */ 
+            _Out_  LPDWORD pdwFlags);
         
         DECLSPEC_XFGVIRT(IUri, IsEqual)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *IsEqual )( 
             __RPC__in IUri * This,
-            /* [in] */ __RPC__in_opt IUri *pUri,
-            /* [out] */ __RPC__out BOOL *pfEqual);
+            /* [annotation][in] */ 
+            _In_  IUri *pUri,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfEqual);
         
         END_INTERFACE
     } IUriVtbl;
@@ -3496,7 +3771,8 @@ EXTERN_C const IID IID_IUriContainer;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetIUri( 
-            /* [out] */ IUri **ppIUri) = 0;
+            /* [annotation][out] */ 
+            _Out_  IUri **ppIUri) = 0;
         
     };
     
@@ -3510,7 +3786,8 @@ EXTERN_C const IID IID_IUriContainer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUriContainer * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3525,7 +3802,8 @@ EXTERN_C const IID IID_IUriContainer;
         DECLSPEC_XFGVIRT(IUriContainer, GetIUri)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetIUri )( 
             IUriContainer * This,
-            /* [out] */ IUri **ppIUri);
+            /* [annotation][out] */ 
+            _Out_  IUri **ppIUri);
         
         END_INTERFACE
     } IUriContainerVtbl;
@@ -3580,23 +3858,32 @@ EXTERN_C const IID IID_IUriBuilder;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE CreateUriSimple( 
-            /* [in] */ DWORD dwAllowEncodingPropertyMask,
-            /* [in] */ DWORD_PTR dwReserved,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAllowEncodingPropertyMask,
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwReserved,
             /* [annotation][out] */ 
             _Outptr_  IUri **ppIUri) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE CreateUri( 
-            /* [in] */ DWORD dwCreateFlags,
-            /* [in] */ DWORD dwAllowEncodingPropertyMask,
-            /* [in] */ DWORD_PTR dwReserved,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCreateFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAllowEncodingPropertyMask,
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwReserved,
             /* [annotation][out] */ 
             _Outptr_  IUri **ppIUri) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE CreateUriWithFlags( 
-            /* [in] */ DWORD dwCreateFlags,
-            /* [in] */ DWORD dwUriBuilderFlags,
-            /* [in] */ DWORD dwAllowEncodingPropertyMask,
-            /* [in] */ DWORD_PTR dwReserved,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCreateFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwUriBuilderFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAllowEncodingPropertyMask,
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwReserved,
             /* [annotation][out] */ 
             _Outptr_  IUri **ppIUri) = 0;
         
@@ -3673,8 +3960,10 @@ EXTERN_C const IID IID_IUriBuilder;
             _In_opt_  LPCWSTR pwzNewValue) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetPort( 
-            /* [in] */ BOOL fHasPort,
-            /* [in] */ DWORD dwNewValue) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL fHasPort,
+            /* [annotation][in] */ 
+            _In_  DWORD dwNewValue) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetQuery( 
             /* [annotation][in] */ 
@@ -3689,7 +3978,8 @@ EXTERN_C const IID IID_IUriBuilder;
             _In_opt_  LPCWSTR pwzNewValue) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE RemoveProperties( 
-            /* [in] */ DWORD dwPropertyMask) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwPropertyMask) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE HasBeenModified( 
             /* [annotation][out] */ 
@@ -3707,7 +3997,8 @@ EXTERN_C const IID IID_IUriBuilder;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUriBuilder * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3722,27 +4013,36 @@ EXTERN_C const IID IID_IUriBuilder;
         DECLSPEC_XFGVIRT(IUriBuilder, CreateUriSimple)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateUriSimple )( 
             IUriBuilder * This,
-            /* [in] */ DWORD dwAllowEncodingPropertyMask,
-            /* [in] */ DWORD_PTR dwReserved,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAllowEncodingPropertyMask,
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwReserved,
             /* [annotation][out] */ 
             _Outptr_  IUri **ppIUri);
         
         DECLSPEC_XFGVIRT(IUriBuilder, CreateUri)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateUri )( 
             IUriBuilder * This,
-            /* [in] */ DWORD dwCreateFlags,
-            /* [in] */ DWORD dwAllowEncodingPropertyMask,
-            /* [in] */ DWORD_PTR dwReserved,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCreateFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAllowEncodingPropertyMask,
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwReserved,
             /* [annotation][out] */ 
             _Outptr_  IUri **ppIUri);
         
         DECLSPEC_XFGVIRT(IUriBuilder, CreateUriWithFlags)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateUriWithFlags )( 
             IUriBuilder * This,
-            /* [in] */ DWORD dwCreateFlags,
-            /* [in] */ DWORD dwUriBuilderFlags,
-            /* [in] */ DWORD dwAllowEncodingPropertyMask,
-            /* [in] */ DWORD_PTR dwReserved,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCreateFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwUriBuilderFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAllowEncodingPropertyMask,
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwReserved,
             /* [annotation][out] */ 
             _Outptr_  IUri **ppIUri);
         
@@ -3849,8 +4149,10 @@ EXTERN_C const IID IID_IUriBuilder;
         DECLSPEC_XFGVIRT(IUriBuilder, SetPort)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetPort )( 
             IUriBuilder * This,
-            /* [in] */ BOOL fHasPort,
-            /* [in] */ DWORD dwNewValue);
+            /* [annotation][in] */ 
+            _In_  BOOL fHasPort,
+            /* [annotation][in] */ 
+            _In_  DWORD dwNewValue);
         
         DECLSPEC_XFGVIRT(IUriBuilder, SetQuery)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetQuery )( 
@@ -3873,7 +4175,8 @@ EXTERN_C const IID IID_IUriBuilder;
         DECLSPEC_XFGVIRT(IUriBuilder, RemoveProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RemoveProperties )( 
             IUriBuilder * This,
-            /* [in] */ DWORD dwPropertyMask);
+            /* [annotation][in] */ 
+            _In_  DWORD dwPropertyMask);
         
         DECLSPEC_XFGVIRT(IUriBuilder, HasBeenModified)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *HasBeenModified )( 
@@ -4027,7 +4330,8 @@ EXTERN_C const IID IID_IUriBuilderFactory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUriBuilderFactory * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4138,9 +4442,12 @@ EXTERN_C const IID IID_IWinInetInfo;
     {
     public:
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE QueryOption( 
-            /* [in] */ DWORD dwOption,
-            /* [size_is][out][in] */ LPVOID pBuffer,
-            /* [out][in] */ DWORD *pcbBuf) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwOption,
+            /* [annotation][size_is][out][in] */ 
+            _Inout_updates_(*pcbBuf)  LPVOID pBuffer,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcbBuf) = 0;
         
     };
     
@@ -4154,7 +4461,8 @@ EXTERN_C const IID IID_IWinInetInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWinInetInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4169,9 +4477,12 @@ EXTERN_C const IID IID_IWinInetInfo;
         DECLSPEC_XFGVIRT(IWinInetInfo, QueryOption)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *QueryOption )( 
             IWinInetInfo * This,
-            /* [in] */ DWORD dwOption,
-            /* [size_is][out][in] */ LPVOID pBuffer,
-            /* [out][in] */ DWORD *pcbBuf);
+            /* [annotation][in] */ 
+            _In_  DWORD dwOption,
+            /* [annotation][size_is][out][in] */ 
+            _Inout_updates_(*pcbBuf)  LPVOID pBuffer,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcbBuf);
         
         END_INTERFACE
     } IWinInetInfoVtbl;
@@ -4208,9 +4519,12 @@ EXTERN_C const IID IID_IWinInetInfo;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IWinInetInfo_RemoteQueryOption_Proxy( 
     __RPC__in IWinInetInfo * This,
-    /* [in] */ DWORD dwOption,
-    /* [size_is][out][in] */ __RPC__inout_ecount_full(*pcbBuf) BYTE *pBuffer,
-    /* [out][in] */ __RPC__inout DWORD *pcbBuf);
+    /* [annotation][in] */ 
+    _In_  DWORD dwOption,
+    /* [annotation][size_is][out][in] */ 
+    _Inout_updates_(*pcbBuf)  BYTE *pBuffer,
+    /* [annotation][out][in] */ 
+    _Inout_  DWORD *pcbBuf);
 
 
 void __RPC_STUB IWinInetInfo_RemoteQueryOption_Stub(
@@ -4254,7 +4568,8 @@ EXTERN_C const IID IID_IHttpSecurity;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnSecurityProblem( 
-            /* [in] */ DWORD dwProblem) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwProblem) = 0;
         
     };
     
@@ -4268,7 +4583,8 @@ EXTERN_C const IID IID_IHttpSecurity;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IHttpSecurity * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4283,13 +4599,16 @@ EXTERN_C const IID IID_IHttpSecurity;
         DECLSPEC_XFGVIRT(IWindowForBindingUI, GetWindow)
         HRESULT ( STDMETHODCALLTYPE *GetWindow )( 
             IHttpSecurity * This,
-            /* [in] */ REFGUID rguidReason,
-            /* [out] */ HWND *phwnd);
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidReason,
+            /* [annotation][out] */ 
+            _Out_  HWND *phwnd);
         
         DECLSPEC_XFGVIRT(IHttpSecurity, OnSecurityProblem)
         HRESULT ( STDMETHODCALLTYPE *OnSecurityProblem )( 
             IHttpSecurity * This,
-            /* [in] */ DWORD dwProblem);
+            /* [annotation][in] */ 
+            _In_  DWORD dwProblem);
         
         END_INTERFACE
     } IHttpSecurityVtbl;
@@ -4361,11 +4680,16 @@ EXTERN_C const IID IID_IWinInetHttpInfo;
     {
     public:
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE QueryInfo( 
-            /* [in] */ DWORD dwOption,
-            /* [size_is][out][in] */ LPVOID pBuffer,
-            /* [out][in] */ DWORD *pcbBuf,
-            /* [out][in] */ DWORD *pdwFlags,
-            /* [out][in] */ DWORD *pdwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwOption,
+            /* [annotation][size_is][out][in] */ 
+            _Inout_updates_(*pcbBuf)  LPVOID pBuffer,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcbBuf,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwFlags,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwReserved) = 0;
         
     };
     
@@ -4379,7 +4703,8 @@ EXTERN_C const IID IID_IWinInetHttpInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWinInetHttpInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4394,18 +4719,26 @@ EXTERN_C const IID IID_IWinInetHttpInfo;
         DECLSPEC_XFGVIRT(IWinInetInfo, QueryOption)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *QueryOption )( 
             IWinInetHttpInfo * This,
-            /* [in] */ DWORD dwOption,
-            /* [size_is][out][in] */ LPVOID pBuffer,
-            /* [out][in] */ DWORD *pcbBuf);
+            /* [annotation][in] */ 
+            _In_  DWORD dwOption,
+            /* [annotation][size_is][out][in] */ 
+            _Inout_updates_(*pcbBuf)  LPVOID pBuffer,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcbBuf);
         
         DECLSPEC_XFGVIRT(IWinInetHttpInfo, QueryInfo)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *QueryInfo )( 
             IWinInetHttpInfo * This,
-            /* [in] */ DWORD dwOption,
-            /* [size_is][out][in] */ LPVOID pBuffer,
-            /* [out][in] */ DWORD *pcbBuf,
-            /* [out][in] */ DWORD *pdwFlags,
-            /* [out][in] */ DWORD *pdwReserved);
+            /* [annotation][in] */ 
+            _In_  DWORD dwOption,
+            /* [annotation][size_is][out][in] */ 
+            _Inout_updates_(*pcbBuf)  LPVOID pBuffer,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcbBuf,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwFlags,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwReserved);
         
         END_INTERFACE
     } IWinInetHttpInfoVtbl;
@@ -4446,11 +4779,16 @@ EXTERN_C const IID IID_IWinInetHttpInfo;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IWinInetHttpInfo_RemoteQueryInfo_Proxy( 
     __RPC__in IWinInetHttpInfo * This,
-    /* [in] */ DWORD dwOption,
-    /* [size_is][out][in] */ __RPC__inout_ecount_full(*pcbBuf) BYTE *pBuffer,
-    /* [out][in] */ __RPC__inout DWORD *pcbBuf,
-    /* [out][in] */ __RPC__inout DWORD *pdwFlags,
-    /* [out][in] */ __RPC__inout DWORD *pdwReserved);
+    /* [annotation][in] */ 
+    _In_  DWORD dwOption,
+    /* [annotation][size_is][out][in] */ 
+    _Inout_updates_(*pcbBuf)  BYTE *pBuffer,
+    /* [annotation][out][in] */ 
+    _Inout_  DWORD *pcbBuf,
+    /* [annotation][out][in] */ 
+    _Inout_  DWORD *pdwFlags,
+    /* [annotation][out][in] */ 
+    _Inout_  DWORD *pdwReserved);
 
 
 void __RPC_STUB IWinInetHttpInfo_RemoteQueryInfo_Stub(
@@ -4510,7 +4848,8 @@ EXTERN_C const IID IID_IWinInetHttpTimeouts;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWinInetHttpTimeouts * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4599,11 +4938,16 @@ EXTERN_C const IID IID_IWinInetCacheHints;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetCacheExtension( 
-            /* [in] */ LPCWSTR pwzExt,
-            /* [size_is][out][in] */ LPVOID pszCacheFile,
-            /* [out][in] */ DWORD *pcbCacheFile,
-            /* [out][in] */ DWORD *pdwWinInetError,
-            /* [out][in] */ DWORD *pdwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzExt,
+            /* [annotation][size_is][out][in] */ 
+            _Inout_updates_(*pcbCacheFile)  LPVOID pszCacheFile,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcbCacheFile,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwWinInetError,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwReserved) = 0;
         
     };
     
@@ -4617,7 +4961,8 @@ EXTERN_C const IID IID_IWinInetCacheHints;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWinInetCacheHints * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4632,11 +4977,16 @@ EXTERN_C const IID IID_IWinInetCacheHints;
         DECLSPEC_XFGVIRT(IWinInetCacheHints, SetCacheExtension)
         HRESULT ( STDMETHODCALLTYPE *SetCacheExtension )( 
             IWinInetCacheHints * This,
-            /* [in] */ LPCWSTR pwzExt,
-            /* [size_is][out][in] */ LPVOID pszCacheFile,
-            /* [out][in] */ DWORD *pcbCacheFile,
-            /* [out][in] */ DWORD *pdwWinInetError,
-            /* [out][in] */ DWORD *pdwReserved);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzExt,
+            /* [annotation][size_is][out][in] */ 
+            _Inout_updates_(*pcbCacheFile)  LPVOID pszCacheFile,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcbCacheFile,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwWinInetError,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwReserved);
         
         END_INTERFACE
     } IWinInetCacheHintsVtbl;
@@ -4706,12 +5056,16 @@ EXTERN_C const IID IID_IWinInetCacheHints2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetCacheExtension2( 
-            /* [in] */ LPCWSTR pwzExt,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzExt,
             /* [annotation][size_is][out] */ 
             __RPC__out_ecount(*pcchCacheFile)  WCHAR *pwzCacheFile,
-            /* [out][in] */ DWORD *pcchCacheFile,
-            /* [out] */ DWORD *pdwWinInetError,
-            /* [out] */ DWORD *pdwReserved) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchCacheFile,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwWinInetError,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwReserved) = 0;
         
     };
     
@@ -4725,7 +5079,8 @@ EXTERN_C const IID IID_IWinInetCacheHints2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWinInetCacheHints2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4740,21 +5095,30 @@ EXTERN_C const IID IID_IWinInetCacheHints2;
         DECLSPEC_XFGVIRT(IWinInetCacheHints, SetCacheExtension)
         HRESULT ( STDMETHODCALLTYPE *SetCacheExtension )( 
             IWinInetCacheHints2 * This,
-            /* [in] */ LPCWSTR pwzExt,
-            /* [size_is][out][in] */ LPVOID pszCacheFile,
-            /* [out][in] */ DWORD *pcbCacheFile,
-            /* [out][in] */ DWORD *pdwWinInetError,
-            /* [out][in] */ DWORD *pdwReserved);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzExt,
+            /* [annotation][size_is][out][in] */ 
+            _Inout_updates_(*pcbCacheFile)  LPVOID pszCacheFile,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcbCacheFile,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwWinInetError,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwReserved);
         
         DECLSPEC_XFGVIRT(IWinInetCacheHints2, SetCacheExtension2)
         HRESULT ( STDMETHODCALLTYPE *SetCacheExtension2 )( 
             IWinInetCacheHints2 * This,
-            /* [in] */ LPCWSTR pwzExt,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzExt,
             /* [annotation][size_is][out] */ 
             __RPC__out_ecount(*pcchCacheFile)  WCHAR *pwzCacheFile,
-            /* [out][in] */ DWORD *pcchCacheFile,
-            /* [out] */ DWORD *pdwWinInetError,
-            /* [out] */ DWORD *pdwReserved);
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchCacheFile,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwWinInetError,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwReserved);
         
         END_INTERFACE
     } IWinInetCacheHints2Vtbl;
@@ -4830,24 +5194,38 @@ EXTERN_C const IID IID_IBindHost;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateMoniker( 
-            /* [in] */ __RPC__in LPOLESTR szName,
-            /* [in] */ __RPC__in_opt IBindCtx *pBC,
-            /* [out] */ __RPC__deref_out_opt IMoniker **ppmk,
-            /* [in] */ DWORD dwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  LPOLESTR szName,
+            /* [annotation][in] */ 
+            _In_  IBindCtx *pBC,
+            /* [annotation][out] */ 
+            _Out_  IMoniker **ppmk,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE MonikerBindToStorage( 
-            /* [in] */ IMoniker *pMk,
-            /* [in] */ IBindCtx *pBC,
-            /* [in] */ IBindStatusCallback *pBSC,
-            /* [in] */ REFIID riid,
-            /* [out] */ void **ppvObj) = 0;
+            /* [annotation][in] */ 
+            _In_  IMoniker *pMk,
+            /* [annotation][in] */ 
+            _In_  IBindCtx *pBC,
+            /* [annotation][in] */ 
+            _In_  IBindStatusCallback *pBSC,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][out] */ 
+            _Out_  void **ppvObj) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE MonikerBindToObject( 
-            /* [in] */ IMoniker *pMk,
-            /* [in] */ IBindCtx *pBC,
-            /* [in] */ IBindStatusCallback *pBSC,
-            /* [in] */ REFIID riid,
-            /* [out] */ void **ppvObj) = 0;
+            /* [annotation][in] */ 
+            _In_  IMoniker *pMk,
+            /* [annotation][in] */ 
+            _In_  IBindCtx *pBC,
+            /* [annotation][in] */ 
+            _In_  IBindStatusCallback *pBSC,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][out] */ 
+            _Out_  void **ppvObj) = 0;
         
     };
     
@@ -4861,7 +5239,8 @@ EXTERN_C const IID IID_IBindHost;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBindHost * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4876,28 +5255,42 @@ EXTERN_C const IID IID_IBindHost;
         DECLSPEC_XFGVIRT(IBindHost, CreateMoniker)
         HRESULT ( STDMETHODCALLTYPE *CreateMoniker )( 
             __RPC__in IBindHost * This,
-            /* [in] */ __RPC__in LPOLESTR szName,
-            /* [in] */ __RPC__in_opt IBindCtx *pBC,
-            /* [out] */ __RPC__deref_out_opt IMoniker **ppmk,
-            /* [in] */ DWORD dwReserved);
+            /* [annotation][in] */ 
+            _In_  LPOLESTR szName,
+            /* [annotation][in] */ 
+            _In_  IBindCtx *pBC,
+            /* [annotation][out] */ 
+            _Out_  IMoniker **ppmk,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved);
         
         DECLSPEC_XFGVIRT(IBindHost, MonikerBindToStorage)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *MonikerBindToStorage )( 
             IBindHost * This,
-            /* [in] */ IMoniker *pMk,
-            /* [in] */ IBindCtx *pBC,
-            /* [in] */ IBindStatusCallback *pBSC,
-            /* [in] */ REFIID riid,
-            /* [out] */ void **ppvObj);
+            /* [annotation][in] */ 
+            _In_  IMoniker *pMk,
+            /* [annotation][in] */ 
+            _In_  IBindCtx *pBC,
+            /* [annotation][in] */ 
+            _In_  IBindStatusCallback *pBSC,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][out] */ 
+            _Out_  void **ppvObj);
         
         DECLSPEC_XFGVIRT(IBindHost, MonikerBindToObject)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *MonikerBindToObject )( 
             IBindHost * This,
-            /* [in] */ IMoniker *pMk,
-            /* [in] */ IBindCtx *pBC,
-            /* [in] */ IBindStatusCallback *pBSC,
-            /* [in] */ REFIID riid,
-            /* [out] */ void **ppvObj);
+            /* [annotation][in] */ 
+            _In_  IMoniker *pMk,
+            /* [annotation][in] */ 
+            _In_  IBindCtx *pBC,
+            /* [annotation][in] */ 
+            _In_  IBindStatusCallback *pBSC,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][out] */ 
+            _Out_  void **ppvObj);
         
         END_INTERFACE
     } IBindHostVtbl;
@@ -4940,11 +5333,16 @@ EXTERN_C const IID IID_IBindHost;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IBindHost_RemoteMonikerBindToStorage_Proxy( 
     __RPC__in IBindHost * This,
-    /* [unique][in] */ __RPC__in_opt IMoniker *pMk,
-    /* [unique][in] */ __RPC__in_opt IBindCtx *pBC,
-    /* [unique][in] */ __RPC__in_opt IBindStatusCallback *pBSC,
-    /* [in] */ __RPC__in REFIID riid,
-    /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppvObj);
+    /* [annotation][unique][in] */ 
+    _In_  IMoniker *pMk,
+    /* [annotation][unique][in] */ 
+    _In_  IBindCtx *pBC,
+    /* [annotation][unique][in] */ 
+    _In_  IBindStatusCallback *pBSC,
+    /* [annotation][in] */ 
+    _In_  REFIID riid,
+    /* [annotation][iid_is][out] */ 
+    _COM_Outptr_  IUnknown **ppvObj);
 
 
 void __RPC_STUB IBindHost_RemoteMonikerBindToStorage_Stub(
@@ -4956,11 +5354,16 @@ void __RPC_STUB IBindHost_RemoteMonikerBindToStorage_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IBindHost_RemoteMonikerBindToObject_Proxy( 
     __RPC__in IBindHost * This,
-    /* [unique][in] */ __RPC__in_opt IMoniker *pMk,
-    /* [unique][in] */ __RPC__in_opt IBindCtx *pBC,
-    /* [unique][in] */ __RPC__in_opt IBindStatusCallback *pBSC,
-    /* [in] */ __RPC__in REFIID riid,
-    /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppvObj);
+    /* [annotation][unique][in] */ 
+    _In_  IMoniker *pMk,
+    /* [annotation][unique][in] */ 
+    _In_  IBindCtx *pBC,
+    /* [annotation][unique][in] */ 
+    _In_  IBindStatusCallback *pBSC,
+    /* [annotation][in] */ 
+    _In_  REFIID riid,
+    /* [annotation][iid_is][out] */ 
+    _COM_Outptr_  IUnknown **ppvObj);
 
 
 void __RPC_STUB IBindHost_RemoteMonikerBindToObject_Stub(
@@ -5087,7 +5490,8 @@ EXTERN_C const IID IID_IInternet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IInternet * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5193,15 +5597,20 @@ EXTERN_C const IID IID_IInternetBindInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetBindInfo( 
-            /* [out] */ DWORD *grfBINDF,
-            /* [unique][out][in] */ BINDINFO *pbindinfo) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *grfBINDF,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  BINDINFO *pbindinfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBindString( 
-            /* [in] */ ULONG ulStringType,
+            /* [annotation][in] */ 
+            _In_  ULONG ulStringType,
             /* [annotation][out][in] */ 
             __RPC__out  LPOLESTR *ppwzStr,
-            /* [in] */ ULONG cEl,
-            /* [out][in] */ ULONG *pcElFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG cEl,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *pcElFetched) = 0;
         
     };
     
@@ -5215,7 +5624,8 @@ EXTERN_C const IID IID_IInternetBindInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IInternetBindInfo * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5230,17 +5640,22 @@ EXTERN_C const IID IID_IInternetBindInfo;
         DECLSPEC_XFGVIRT(IInternetBindInfo, GetBindInfo)
         HRESULT ( STDMETHODCALLTYPE *GetBindInfo )( 
             IInternetBindInfo * This,
-            /* [out] */ DWORD *grfBINDF,
-            /* [unique][out][in] */ BINDINFO *pbindinfo);
+            /* [annotation][out] */ 
+            _Out_  DWORD *grfBINDF,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  BINDINFO *pbindinfo);
         
         DECLSPEC_XFGVIRT(IInternetBindInfo, GetBindString)
         HRESULT ( STDMETHODCALLTYPE *GetBindString )( 
             IInternetBindInfo * This,
-            /* [in] */ ULONG ulStringType,
+            /* [annotation][in] */ 
+            _In_  ULONG ulStringType,
             /* [annotation][out][in] */ 
             __RPC__out  LPOLESTR *ppwzStr,
-            /* [in] */ ULONG cEl,
-            /* [out][in] */ ULONG *pcElFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG cEl,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *pcElFetched);
         
         END_INTERFACE
     } IInternetBindInfoVtbl;
@@ -5311,10 +5726,14 @@ EXTERN_C const IID IID_IInternetBindInfoEx;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetBindInfoEx( 
-            /* [out] */ DWORD *grfBINDF,
-            /* [unique][out][in] */ BINDINFO *pbindinfo,
-            /* [out] */ DWORD *grfBINDF2,
-            /* [out] */ DWORD *pdwReserved) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *grfBINDF,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  BINDINFO *pbindinfo,
+            /* [annotation][out] */ 
+            _Out_  DWORD *grfBINDF2,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwReserved) = 0;
         
     };
     
@@ -5328,7 +5747,8 @@ EXTERN_C const IID IID_IInternetBindInfoEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IInternetBindInfoEx * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5343,25 +5763,34 @@ EXTERN_C const IID IID_IInternetBindInfoEx;
         DECLSPEC_XFGVIRT(IInternetBindInfo, GetBindInfo)
         HRESULT ( STDMETHODCALLTYPE *GetBindInfo )( 
             IInternetBindInfoEx * This,
-            /* [out] */ DWORD *grfBINDF,
-            /* [unique][out][in] */ BINDINFO *pbindinfo);
+            /* [annotation][out] */ 
+            _Out_  DWORD *grfBINDF,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  BINDINFO *pbindinfo);
         
         DECLSPEC_XFGVIRT(IInternetBindInfo, GetBindString)
         HRESULT ( STDMETHODCALLTYPE *GetBindString )( 
             IInternetBindInfoEx * This,
-            /* [in] */ ULONG ulStringType,
+            /* [annotation][in] */ 
+            _In_  ULONG ulStringType,
             /* [annotation][out][in] */ 
             __RPC__out  LPOLESTR *ppwzStr,
-            /* [in] */ ULONG cEl,
-            /* [out][in] */ ULONG *pcElFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG cEl,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *pcElFetched);
         
         DECLSPEC_XFGVIRT(IInternetBindInfoEx, GetBindInfoEx)
         HRESULT ( STDMETHODCALLTYPE *GetBindInfoEx )( 
             IInternetBindInfoEx * This,
-            /* [out] */ DWORD *grfBINDF,
-            /* [unique][out][in] */ BINDINFO *pbindinfo,
-            /* [out] */ DWORD *grfBINDF2,
-            /* [out] */ DWORD *pdwReserved);
+            /* [annotation][out] */ 
+            _Out_  DWORD *grfBINDF,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  BINDINFO *pbindinfo,
+            /* [annotation][out] */ 
+            _Out_  DWORD *grfBINDF2,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwReserved);
         
         END_INTERFACE
     } IInternetBindInfoExVtbl;
@@ -5471,21 +5900,30 @@ EXTERN_C const IID IID_IInternetProtocolRoot;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Start( 
-            /* [in] */ LPCWSTR szUrl,
-            /* [in] */ IInternetProtocolSink *pOIProtSink,
-            /* [in] */ IInternetBindInfo *pOIBindInfo,
-            /* [in] */ DWORD grfPI,
-            /* [in] */ HANDLE_PTR dwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szUrl,
+            /* [annotation][in] */ 
+            _In_  IInternetProtocolSink *pOIProtSink,
+            /* [annotation][in] */ 
+            _In_  IInternetBindInfo *pOIBindInfo,
+            /* [annotation][in] */ 
+            _In_  DWORD grfPI,
+            /* [annotation][in] */ 
+            _In_  HANDLE_PTR dwReserved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Continue( 
-            /* [in] */ PROTOCOLDATA *pProtocolData) = 0;
+            /* [annotation][in] */ 
+            _In_  PROTOCOLDATA *pProtocolData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Abort( 
-            /* [in] */ HRESULT hrReason,
-            /* [in] */ DWORD dwOptions) = 0;
+            /* [annotation][in] */ 
+            _In_  HRESULT hrReason,
+            /* [annotation][in] */ 
+            _In_  DWORD dwOptions) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Terminate( 
-            /* [in] */ DWORD dwOptions) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwOptions) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Suspend( void) = 0;
         
@@ -5503,7 +5941,8 @@ EXTERN_C const IID IID_IInternetProtocolRoot;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IInternetProtocolRoot * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5518,27 +5957,36 @@ EXTERN_C const IID IID_IInternetProtocolRoot;
         DECLSPEC_XFGVIRT(IInternetProtocolRoot, Start)
         HRESULT ( STDMETHODCALLTYPE *Start )( 
             IInternetProtocolRoot * This,
-            /* [in] */ LPCWSTR szUrl,
-            /* [in] */ IInternetProtocolSink *pOIProtSink,
-            /* [in] */ IInternetBindInfo *pOIBindInfo,
-            /* [in] */ DWORD grfPI,
-            /* [in] */ HANDLE_PTR dwReserved);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szUrl,
+            /* [annotation][in] */ 
+            _In_  IInternetProtocolSink *pOIProtSink,
+            /* [annotation][in] */ 
+            _In_  IInternetBindInfo *pOIBindInfo,
+            /* [annotation][in] */ 
+            _In_  DWORD grfPI,
+            /* [annotation][in] */ 
+            _In_  HANDLE_PTR dwReserved);
         
         DECLSPEC_XFGVIRT(IInternetProtocolRoot, Continue)
         HRESULT ( STDMETHODCALLTYPE *Continue )( 
             IInternetProtocolRoot * This,
-            /* [in] */ PROTOCOLDATA *pProtocolData);
+            /* [annotation][in] */ 
+            _In_  PROTOCOLDATA *pProtocolData);
         
         DECLSPEC_XFGVIRT(IInternetProtocolRoot, Abort)
         HRESULT ( STDMETHODCALLTYPE *Abort )( 
             IInternetProtocolRoot * This,
-            /* [in] */ HRESULT hrReason,
-            /* [in] */ DWORD dwOptions);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrReason,
+            /* [annotation][in] */ 
+            _In_  DWORD dwOptions);
         
         DECLSPEC_XFGVIRT(IInternetProtocolRoot, Terminate)
         HRESULT ( STDMETHODCALLTYPE *Terminate )( 
             IInternetProtocolRoot * This,
-            /* [in] */ DWORD dwOptions);
+            /* [annotation][in] */ 
+            _In_  DWORD dwOptions);
         
         DECLSPEC_XFGVIRT(IInternetProtocolRoot, Suspend)
         HRESULT ( STDMETHODCALLTYPE *Suspend )( 
@@ -5629,17 +6077,24 @@ EXTERN_C const IID IID_IInternetProtocol;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Read( 
-            /* [length_is][size_is][out][in] */ void *pv,
-            /* [in] */ ULONG cb,
-            /* [out] */ ULONG *pcbRead) = 0;
+            /* [annotation][length_is][size_is][out][in] */ 
+            _Inout_updates_to_(cb,*pcbRead)  void *pv,
+            /* [annotation][in] */ 
+            _In_  ULONG cb,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbRead) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Seek( 
-            /* [in] */ LARGE_INTEGER dlibMove,
-            /* [in] */ DWORD dwOrigin,
-            /* [out] */ ULARGE_INTEGER *plibNewPosition) = 0;
+            /* [annotation][in] */ 
+            _In_  LARGE_INTEGER dlibMove,
+            /* [annotation][in] */ 
+            _In_  DWORD dwOrigin,
+            /* [annotation][out] */ 
+            _Out_  ULARGE_INTEGER *plibNewPosition) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LockRequest( 
-            /* [in] */ DWORD dwOptions) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwOptions) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnlockRequest( void) = 0;
         
@@ -5655,7 +6110,8 @@ EXTERN_C const IID IID_IInternetProtocol;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IInternetProtocol * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5670,27 +6126,36 @@ EXTERN_C const IID IID_IInternetProtocol;
         DECLSPEC_XFGVIRT(IInternetProtocolRoot, Start)
         HRESULT ( STDMETHODCALLTYPE *Start )( 
             IInternetProtocol * This,
-            /* [in] */ LPCWSTR szUrl,
-            /* [in] */ IInternetProtocolSink *pOIProtSink,
-            /* [in] */ IInternetBindInfo *pOIBindInfo,
-            /* [in] */ DWORD grfPI,
-            /* [in] */ HANDLE_PTR dwReserved);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szUrl,
+            /* [annotation][in] */ 
+            _In_  IInternetProtocolSink *pOIProtSink,
+            /* [annotation][in] */ 
+            _In_  IInternetBindInfo *pOIBindInfo,
+            /* [annotation][in] */ 
+            _In_  DWORD grfPI,
+            /* [annotation][in] */ 
+            _In_  HANDLE_PTR dwReserved);
         
         DECLSPEC_XFGVIRT(IInternetProtocolRoot, Continue)
         HRESULT ( STDMETHODCALLTYPE *Continue )( 
             IInternetProtocol * This,
-            /* [in] */ PROTOCOLDATA *pProtocolData);
+            /* [annotation][in] */ 
+            _In_  PROTOCOLDATA *pProtocolData);
         
         DECLSPEC_XFGVIRT(IInternetProtocolRoot, Abort)
         HRESULT ( STDMETHODCALLTYPE *Abort )( 
             IInternetProtocol * This,
-            /* [in] */ HRESULT hrReason,
-            /* [in] */ DWORD dwOptions);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrReason,
+            /* [annotation][in] */ 
+            _In_  DWORD dwOptions);
         
         DECLSPEC_XFGVIRT(IInternetProtocolRoot, Terminate)
         HRESULT ( STDMETHODCALLTYPE *Terminate )( 
             IInternetProtocol * This,
-            /* [in] */ DWORD dwOptions);
+            /* [annotation][in] */ 
+            _In_  DWORD dwOptions);
         
         DECLSPEC_XFGVIRT(IInternetProtocolRoot, Suspend)
         HRESULT ( STDMETHODCALLTYPE *Suspend )( 
@@ -5703,21 +6168,28 @@ EXTERN_C const IID IID_IInternetProtocol;
         DECLSPEC_XFGVIRT(IInternetProtocol, Read)
         HRESULT ( STDMETHODCALLTYPE *Read )( 
             IInternetProtocol * This,
-            /* [length_is][size_is][out][in] */ void *pv,
-            /* [in] */ ULONG cb,
-            /* [out] */ ULONG *pcbRead);
+            /* [annotation][length_is][size_is][out][in] */ 
+            _Inout_updates_to_(cb,*pcbRead)  void *pv,
+            /* [annotation][in] */ 
+            _In_  ULONG cb,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbRead);
         
         DECLSPEC_XFGVIRT(IInternetProtocol, Seek)
         HRESULT ( STDMETHODCALLTYPE *Seek )( 
             IInternetProtocol * This,
-            /* [in] */ LARGE_INTEGER dlibMove,
-            /* [in] */ DWORD dwOrigin,
-            /* [out] */ ULARGE_INTEGER *plibNewPosition);
+            /* [annotation][in] */ 
+            _In_  LARGE_INTEGER dlibMove,
+            /* [annotation][in] */ 
+            _In_  DWORD dwOrigin,
+            /* [annotation][out] */ 
+            _Out_  ULARGE_INTEGER *plibNewPosition);
         
         DECLSPEC_XFGVIRT(IInternetProtocol, LockRequest)
         HRESULT ( STDMETHODCALLTYPE *LockRequest )( 
             IInternetProtocol * This,
-            /* [in] */ DWORD dwOptions);
+            /* [annotation][in] */ 
+            _In_  DWORD dwOptions);
         
         DECLSPEC_XFGVIRT(IInternetProtocol, UnlockRequest)
         HRESULT ( STDMETHODCALLTYPE *UnlockRequest )( 
@@ -5816,11 +6288,16 @@ EXTERN_C const IID IID_IInternetProtocolEx;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE StartEx( 
-            /* [in] */ IUri *pUri,
-            /* [in] */ IInternetProtocolSink *pOIProtSink,
-            /* [in] */ IInternetBindInfo *pOIBindInfo,
-            /* [in] */ DWORD grfPI,
-            /* [in] */ HANDLE_PTR dwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  IUri *pUri,
+            /* [annotation][in] */ 
+            _In_  IInternetProtocolSink *pOIProtSink,
+            /* [annotation][in] */ 
+            _In_  IInternetBindInfo *pOIBindInfo,
+            /* [annotation][in] */ 
+            _In_  DWORD grfPI,
+            /* [annotation][in] */ 
+            _In_  HANDLE_PTR dwReserved) = 0;
         
     };
     
@@ -5834,7 +6311,8 @@ EXTERN_C const IID IID_IInternetProtocolEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IInternetProtocolEx * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5849,27 +6327,36 @@ EXTERN_C const IID IID_IInternetProtocolEx;
         DECLSPEC_XFGVIRT(IInternetProtocolRoot, Start)
         HRESULT ( STDMETHODCALLTYPE *Start )( 
             IInternetProtocolEx * This,
-            /* [in] */ LPCWSTR szUrl,
-            /* [in] */ IInternetProtocolSink *pOIProtSink,
-            /* [in] */ IInternetBindInfo *pOIBindInfo,
-            /* [in] */ DWORD grfPI,
-            /* [in] */ HANDLE_PTR dwReserved);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szUrl,
+            /* [annotation][in] */ 
+            _In_  IInternetProtocolSink *pOIProtSink,
+            /* [annotation][in] */ 
+            _In_  IInternetBindInfo *pOIBindInfo,
+            /* [annotation][in] */ 
+            _In_  DWORD grfPI,
+            /* [annotation][in] */ 
+            _In_  HANDLE_PTR dwReserved);
         
         DECLSPEC_XFGVIRT(IInternetProtocolRoot, Continue)
         HRESULT ( STDMETHODCALLTYPE *Continue )( 
             IInternetProtocolEx * This,
-            /* [in] */ PROTOCOLDATA *pProtocolData);
+            /* [annotation][in] */ 
+            _In_  PROTOCOLDATA *pProtocolData);
         
         DECLSPEC_XFGVIRT(IInternetProtocolRoot, Abort)
         HRESULT ( STDMETHODCALLTYPE *Abort )( 
             IInternetProtocolEx * This,
-            /* [in] */ HRESULT hrReason,
-            /* [in] */ DWORD dwOptions);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrReason,
+            /* [annotation][in] */ 
+            _In_  DWORD dwOptions);
         
         DECLSPEC_XFGVIRT(IInternetProtocolRoot, Terminate)
         HRESULT ( STDMETHODCALLTYPE *Terminate )( 
             IInternetProtocolEx * This,
-            /* [in] */ DWORD dwOptions);
+            /* [annotation][in] */ 
+            _In_  DWORD dwOptions);
         
         DECLSPEC_XFGVIRT(IInternetProtocolRoot, Suspend)
         HRESULT ( STDMETHODCALLTYPE *Suspend )( 
@@ -5882,21 +6369,28 @@ EXTERN_C const IID IID_IInternetProtocolEx;
         DECLSPEC_XFGVIRT(IInternetProtocol, Read)
         HRESULT ( STDMETHODCALLTYPE *Read )( 
             IInternetProtocolEx * This,
-            /* [length_is][size_is][out][in] */ void *pv,
-            /* [in] */ ULONG cb,
-            /* [out] */ ULONG *pcbRead);
+            /* [annotation][length_is][size_is][out][in] */ 
+            _Inout_updates_to_(cb,*pcbRead)  void *pv,
+            /* [annotation][in] */ 
+            _In_  ULONG cb,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbRead);
         
         DECLSPEC_XFGVIRT(IInternetProtocol, Seek)
         HRESULT ( STDMETHODCALLTYPE *Seek )( 
             IInternetProtocolEx * This,
-            /* [in] */ LARGE_INTEGER dlibMove,
-            /* [in] */ DWORD dwOrigin,
-            /* [out] */ ULARGE_INTEGER *plibNewPosition);
+            /* [annotation][in] */ 
+            _In_  LARGE_INTEGER dlibMove,
+            /* [annotation][in] */ 
+            _In_  DWORD dwOrigin,
+            /* [annotation][out] */ 
+            _Out_  ULARGE_INTEGER *plibNewPosition);
         
         DECLSPEC_XFGVIRT(IInternetProtocol, LockRequest)
         HRESULT ( STDMETHODCALLTYPE *LockRequest )( 
             IInternetProtocolEx * This,
-            /* [in] */ DWORD dwOptions);
+            /* [annotation][in] */ 
+            _In_  DWORD dwOptions);
         
         DECLSPEC_XFGVIRT(IInternetProtocol, UnlockRequest)
         HRESULT ( STDMETHODCALLTYPE *UnlockRequest )( 
@@ -5905,11 +6399,16 @@ EXTERN_C const IID IID_IInternetProtocolEx;
         DECLSPEC_XFGVIRT(IInternetProtocolEx, StartEx)
         HRESULT ( STDMETHODCALLTYPE *StartEx )( 
             IInternetProtocolEx * This,
-            /* [in] */ IUri *pUri,
-            /* [in] */ IInternetProtocolSink *pOIProtSink,
-            /* [in] */ IInternetBindInfo *pOIBindInfo,
-            /* [in] */ DWORD grfPI,
-            /* [in] */ HANDLE_PTR dwReserved);
+            /* [annotation][in] */ 
+            _In_  IUri *pUri,
+            /* [annotation][in] */ 
+            _In_  IInternetProtocolSink *pOIProtSink,
+            /* [annotation][in] */ 
+            _In_  IInternetBindInfo *pOIBindInfo,
+            /* [annotation][in] */ 
+            _In_  DWORD grfPI,
+            /* [annotation][in] */ 
+            _In_  HANDLE_PTR dwReserved);
         
         END_INTERFACE
     } IInternetProtocolExVtbl;
@@ -6010,21 +6509,30 @@ EXTERN_C const IID IID_IInternetProtocolSink;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Switch( 
-            /* [in] */ PROTOCOLDATA *pProtocolData) = 0;
+            /* [annotation][in] */ 
+            _In_  PROTOCOLDATA *pProtocolData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReportProgress( 
-            /* [in] */ ULONG ulStatusCode,
-            /* [in] */ LPCWSTR szStatusText) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ulStatusCode,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szStatusText) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReportData( 
-            /* [in] */ DWORD grfBSCF,
-            /* [in] */ ULONG ulProgress,
-            /* [in] */ ULONG ulProgressMax) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD grfBSCF,
+            /* [annotation][in] */ 
+            _In_  ULONG ulProgress,
+            /* [annotation][in] */ 
+            _In_  ULONG ulProgressMax) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReportResult( 
-            /* [in] */ HRESULT hrResult,
-            /* [in] */ DWORD dwError,
-            /* [in] */ LPCWSTR szResult) = 0;
+            /* [annotation][in] */ 
+            _In_  HRESULT hrResult,
+            /* [annotation][in] */ 
+            _In_  DWORD dwError,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szResult) = 0;
         
     };
     
@@ -6038,7 +6546,8 @@ EXTERN_C const IID IID_IInternetProtocolSink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IInternetProtocolSink * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6053,27 +6562,36 @@ EXTERN_C const IID IID_IInternetProtocolSink;
         DECLSPEC_XFGVIRT(IInternetProtocolSink, Switch)
         HRESULT ( STDMETHODCALLTYPE *Switch )( 
             IInternetProtocolSink * This,
-            /* [in] */ PROTOCOLDATA *pProtocolData);
+            /* [annotation][in] */ 
+            _In_  PROTOCOLDATA *pProtocolData);
         
         DECLSPEC_XFGVIRT(IInternetProtocolSink, ReportProgress)
         HRESULT ( STDMETHODCALLTYPE *ReportProgress )( 
             IInternetProtocolSink * This,
-            /* [in] */ ULONG ulStatusCode,
-            /* [in] */ LPCWSTR szStatusText);
+            /* [annotation][in] */ 
+            _In_  ULONG ulStatusCode,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szStatusText);
         
         DECLSPEC_XFGVIRT(IInternetProtocolSink, ReportData)
         HRESULT ( STDMETHODCALLTYPE *ReportData )( 
             IInternetProtocolSink * This,
-            /* [in] */ DWORD grfBSCF,
-            /* [in] */ ULONG ulProgress,
-            /* [in] */ ULONG ulProgressMax);
+            /* [annotation][in] */ 
+            _In_  DWORD grfBSCF,
+            /* [annotation][in] */ 
+            _In_  ULONG ulProgress,
+            /* [annotation][in] */ 
+            _In_  ULONG ulProgressMax);
         
         DECLSPEC_XFGVIRT(IInternetProtocolSink, ReportResult)
         HRESULT ( STDMETHODCALLTYPE *ReportResult )( 
             IInternetProtocolSink * This,
-            /* [in] */ HRESULT hrResult,
-            /* [in] */ DWORD dwError,
-            /* [in] */ LPCWSTR szResult);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrResult,
+            /* [annotation][in] */ 
+            _In_  DWORD dwError,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szResult);
         
         END_INTERFACE
     } IInternetProtocolSinkVtbl;
@@ -6150,7 +6668,8 @@ EXTERN_C const IID IID_IInternetProtocolSinkStackable;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SwitchSink( 
-            /* [in] */ IInternetProtocolSink *pOIProtSink) = 0;
+            /* [annotation][in] */ 
+            _In_  IInternetProtocolSink *pOIProtSink) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CommitSwitch( void) = 0;
         
@@ -6168,7 +6687,8 @@ EXTERN_C const IID IID_IInternetProtocolSinkStackable;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IInternetProtocolSinkStackable * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6183,7 +6703,8 @@ EXTERN_C const IID IID_IInternetProtocolSinkStackable;
         DECLSPEC_XFGVIRT(IInternetProtocolSinkStackable, SwitchSink)
         HRESULT ( STDMETHODCALLTYPE *SwitchSink )( 
             IInternetProtocolSinkStackable * This,
-            /* [in] */ IInternetProtocolSink *pOIProtSink);
+            /* [annotation][in] */ 
+            _In_  IInternetProtocolSink *pOIProtSink);
         
         DECLSPEC_XFGVIRT(IInternetProtocolSinkStackable, CommitSwitch)
         HRESULT ( STDMETHODCALLTYPE *CommitSwitch )( 
@@ -6272,45 +6793,72 @@ EXTERN_C const IID IID_IInternetSession;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RegisterNameSpace( 
-            /* [in] */ IClassFactory *pCF,
-            /* [in] */ REFCLSID rclsid,
-            /* [in] */ LPCWSTR pwzProtocol,
-            /* [in] */ ULONG cPatterns,
-            /* [in] */ const LPCWSTR *ppwzPatterns,
-            /* [in] */ DWORD dwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  IClassFactory *pCF,
+            /* [annotation][in] */ 
+            _In_  REFCLSID rclsid,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzProtocol,
+            /* [annotation][in] */ 
+            _In_  ULONG cPatterns,
+            /* [annotation][in] */ 
+            _In_  const LPCWSTR *ppwzPatterns,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnregisterNameSpace( 
-            /* [in] */ IClassFactory *pCF,
-            /* [in] */ LPCWSTR pszProtocol) = 0;
+            /* [annotation][in] */ 
+            _In_  IClassFactory *pCF,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszProtocol) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterMimeFilter( 
-            /* [in] */ IClassFactory *pCF,
-            /* [in] */ REFCLSID rclsid,
-            /* [in] */ LPCWSTR pwzType) = 0;
+            /* [annotation][in] */ 
+            _In_  IClassFactory *pCF,
+            /* [annotation][in] */ 
+            _In_  REFCLSID rclsid,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnregisterMimeFilter( 
-            /* [in] */ IClassFactory *pCF,
-            /* [in] */ LPCWSTR pwzType) = 0;
+            /* [annotation][in] */ 
+            _In_  IClassFactory *pCF,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateBinding( 
-            /* [in] */ LPBC pBC,
-            /* [in] */ LPCWSTR szUrl,
-            /* [in] */ IUnknown *pUnkOuter,
-            /* [unique][out] */ IUnknown **ppUnk,
-            /* [unique][out] */ IInternetProtocol **ppOInetProt,
-            /* [in] */ DWORD dwOption) = 0;
+            /* [annotation][in] */ 
+            _In_  LPBC pBC,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szUrl,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][unique][out] */ 
+            _Out_  IUnknown **ppUnk,
+            /* [annotation][unique][out] */ 
+            _Out_  IInternetProtocol **ppOInetProt,
+            /* [annotation][in] */ 
+            _In_  DWORD dwOption) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSessionOption( 
-            /* [in] */ DWORD dwOption,
-            /* [in] */ LPVOID pBuffer,
-            /* [in] */ DWORD dwBufferLength,
-            /* [in] */ DWORD dwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwOption,
+            /* [annotation][in] */ 
+            _In_  LPVOID pBuffer,
+            /* [annotation][in] */ 
+            _In_  DWORD dwBufferLength,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSessionOption( 
-            /* [in] */ DWORD dwOption,
-            /* [out][in] */ LPVOID pBuffer,
-            /* [out][in] */ DWORD *pdwBufferLength,
-            /* [in] */ DWORD dwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwOption,
+            /* [annotation][out][in] */ 
+            _Inout_  LPVOID pBuffer,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwBufferLength,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved) = 0;
         
     };
     
@@ -6324,7 +6872,8 @@ EXTERN_C const IID IID_IInternetSession;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IInternetSession * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6339,57 +6888,84 @@ EXTERN_C const IID IID_IInternetSession;
         DECLSPEC_XFGVIRT(IInternetSession, RegisterNameSpace)
         HRESULT ( STDMETHODCALLTYPE *RegisterNameSpace )( 
             IInternetSession * This,
-            /* [in] */ IClassFactory *pCF,
-            /* [in] */ REFCLSID rclsid,
-            /* [in] */ LPCWSTR pwzProtocol,
-            /* [in] */ ULONG cPatterns,
-            /* [in] */ const LPCWSTR *ppwzPatterns,
-            /* [in] */ DWORD dwReserved);
+            /* [annotation][in] */ 
+            _In_  IClassFactory *pCF,
+            /* [annotation][in] */ 
+            _In_  REFCLSID rclsid,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzProtocol,
+            /* [annotation][in] */ 
+            _In_  ULONG cPatterns,
+            /* [annotation][in] */ 
+            _In_  const LPCWSTR *ppwzPatterns,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved);
         
         DECLSPEC_XFGVIRT(IInternetSession, UnregisterNameSpace)
         HRESULT ( STDMETHODCALLTYPE *UnregisterNameSpace )( 
             IInternetSession * This,
-            /* [in] */ IClassFactory *pCF,
-            /* [in] */ LPCWSTR pszProtocol);
+            /* [annotation][in] */ 
+            _In_  IClassFactory *pCF,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszProtocol);
         
         DECLSPEC_XFGVIRT(IInternetSession, RegisterMimeFilter)
         HRESULT ( STDMETHODCALLTYPE *RegisterMimeFilter )( 
             IInternetSession * This,
-            /* [in] */ IClassFactory *pCF,
-            /* [in] */ REFCLSID rclsid,
-            /* [in] */ LPCWSTR pwzType);
+            /* [annotation][in] */ 
+            _In_  IClassFactory *pCF,
+            /* [annotation][in] */ 
+            _In_  REFCLSID rclsid,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzType);
         
         DECLSPEC_XFGVIRT(IInternetSession, UnregisterMimeFilter)
         HRESULT ( STDMETHODCALLTYPE *UnregisterMimeFilter )( 
             IInternetSession * This,
-            /* [in] */ IClassFactory *pCF,
-            /* [in] */ LPCWSTR pwzType);
+            /* [annotation][in] */ 
+            _In_  IClassFactory *pCF,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzType);
         
         DECLSPEC_XFGVIRT(IInternetSession, CreateBinding)
         HRESULT ( STDMETHODCALLTYPE *CreateBinding )( 
             IInternetSession * This,
-            /* [in] */ LPBC pBC,
-            /* [in] */ LPCWSTR szUrl,
-            /* [in] */ IUnknown *pUnkOuter,
-            /* [unique][out] */ IUnknown **ppUnk,
-            /* [unique][out] */ IInternetProtocol **ppOInetProt,
-            /* [in] */ DWORD dwOption);
+            /* [annotation][in] */ 
+            _In_  LPBC pBC,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szUrl,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][unique][out] */ 
+            _Out_  IUnknown **ppUnk,
+            /* [annotation][unique][out] */ 
+            _Out_  IInternetProtocol **ppOInetProt,
+            /* [annotation][in] */ 
+            _In_  DWORD dwOption);
         
         DECLSPEC_XFGVIRT(IInternetSession, SetSessionOption)
         HRESULT ( STDMETHODCALLTYPE *SetSessionOption )( 
             IInternetSession * This,
-            /* [in] */ DWORD dwOption,
-            /* [in] */ LPVOID pBuffer,
-            /* [in] */ DWORD dwBufferLength,
-            /* [in] */ DWORD dwReserved);
+            /* [annotation][in] */ 
+            _In_  DWORD dwOption,
+            /* [annotation][in] */ 
+            _In_  LPVOID pBuffer,
+            /* [annotation][in] */ 
+            _In_  DWORD dwBufferLength,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved);
         
         DECLSPEC_XFGVIRT(IInternetSession, GetSessionOption)
         HRESULT ( STDMETHODCALLTYPE *GetSessionOption )( 
             IInternetSession * This,
-            /* [in] */ DWORD dwOption,
-            /* [out][in] */ LPVOID pBuffer,
-            /* [out][in] */ DWORD *pdwBufferLength,
-            /* [in] */ DWORD dwReserved);
+            /* [annotation][in] */ 
+            _In_  DWORD dwOption,
+            /* [annotation][out][in] */ 
+            _Inout_  LPVOID pBuffer,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwBufferLength,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved);
         
         END_INTERFACE
     } IInternetSessionVtbl;
@@ -6490,7 +7066,8 @@ EXTERN_C const IID IID_IInternetThreadSwitch;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IInternetThreadSwitch * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6579,10 +7156,12 @@ EXTERN_C const IID IID_IInternetPriority;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetPriority( 
-            /* [in] */ LONG nPriority) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG nPriority) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPriority( 
-            /* [out] */ LONG *pnPriority) = 0;
+            /* [annotation][out] */ 
+            _Out_  LONG *pnPriority) = 0;
         
     };
     
@@ -6596,7 +7175,8 @@ EXTERN_C const IID IID_IInternetPriority;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IInternetPriority * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6611,12 +7191,14 @@ EXTERN_C const IID IID_IInternetPriority;
         DECLSPEC_XFGVIRT(IInternetPriority, SetPriority)
         HRESULT ( STDMETHODCALLTYPE *SetPriority )( 
             IInternetPriority * This,
-            /* [in] */ LONG nPriority);
+            /* [annotation][in] */ 
+            _In_  LONG nPriority);
         
         DECLSPEC_XFGVIRT(IInternetPriority, GetPriority)
         HRESULT ( STDMETHODCALLTYPE *GetPriority )( 
             IInternetPriority * This,
-            /* [out] */ LONG *pnPriority);
+            /* [annotation][out] */ 
+            _Out_  LONG *pnPriority);
         
         END_INTERFACE
     } IInternetPriorityVtbl;
@@ -6739,38 +7321,60 @@ EXTERN_C const IID IID_IInternetProtocolInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ParseUrl( 
-            /* [in] */ LPCWSTR pwzUrl,
-            /* [in] */ PARSEACTION ParseAction,
-            /* [in] */ DWORD dwParseFlags,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzUrl,
+            /* [annotation][in] */ 
+            _In_  PARSEACTION ParseAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwParseFlags,
             /* [annotation][out] */ 
             __RPC__out  LPWSTR pwzResult,
-            /* [in] */ DWORD cchResult,
-            /* [out] */ DWORD *pcchResult,
-            /* [in] */ DWORD dwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD cchResult,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcchResult,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CombineUrl( 
-            /* [in] */ LPCWSTR pwzBaseUrl,
-            /* [in] */ LPCWSTR pwzRelativeUrl,
-            /* [in] */ DWORD dwCombineFlags,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzBaseUrl,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzRelativeUrl,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCombineFlags,
             /* [annotation][out] */ 
             __RPC__in  LPWSTR pwzResult,
-            /* [in] */ DWORD cchResult,
-            /* [out] */ DWORD *pcchResult,
-            /* [in] */ DWORD dwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD cchResult,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcchResult,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CompareUrl( 
-            /* [in] */ LPCWSTR pwzUrl1,
-            /* [in] */ LPCWSTR pwzUrl2,
-            /* [in] */ DWORD dwCompareFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzUrl1,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzUrl2,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCompareFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryInfo( 
-            /* [in] */ LPCWSTR pwzUrl,
-            /* [in] */ QUERYOPTION OueryOption,
-            /* [in] */ DWORD dwQueryFlags,
-            /* [size_is][out][in] */ LPVOID pBuffer,
-            /* [in] */ DWORD cbBuffer,
-            /* [out][in] */ DWORD *pcbBuf,
-            /* [in] */ DWORD dwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzUrl,
+            /* [annotation][in] */ 
+            _In_  QUERYOPTION OueryOption,
+            /* [annotation][in] */ 
+            _In_  DWORD dwQueryFlags,
+            /* [annotation][size_is][out][in] */ 
+            _Inout_updates_(*pcbBuf)  LPVOID pBuffer,
+            /* [annotation][in] */ 
+            _In_  DWORD cbBuffer,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcbBuf,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved) = 0;
         
     };
     
@@ -6784,7 +7388,8 @@ EXTERN_C const IID IID_IInternetProtocolInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IInternetProtocolInfo * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6799,44 +7404,66 @@ EXTERN_C const IID IID_IInternetProtocolInfo;
         DECLSPEC_XFGVIRT(IInternetProtocolInfo, ParseUrl)
         HRESULT ( STDMETHODCALLTYPE *ParseUrl )( 
             IInternetProtocolInfo * This,
-            /* [in] */ LPCWSTR pwzUrl,
-            /* [in] */ PARSEACTION ParseAction,
-            /* [in] */ DWORD dwParseFlags,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzUrl,
+            /* [annotation][in] */ 
+            _In_  PARSEACTION ParseAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwParseFlags,
             /* [annotation][out] */ 
             __RPC__out  LPWSTR pwzResult,
-            /* [in] */ DWORD cchResult,
-            /* [out] */ DWORD *pcchResult,
-            /* [in] */ DWORD dwReserved);
+            /* [annotation][in] */ 
+            _In_  DWORD cchResult,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcchResult,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved);
         
         DECLSPEC_XFGVIRT(IInternetProtocolInfo, CombineUrl)
         HRESULT ( STDMETHODCALLTYPE *CombineUrl )( 
             IInternetProtocolInfo * This,
-            /* [in] */ LPCWSTR pwzBaseUrl,
-            /* [in] */ LPCWSTR pwzRelativeUrl,
-            /* [in] */ DWORD dwCombineFlags,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzBaseUrl,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzRelativeUrl,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCombineFlags,
             /* [annotation][out] */ 
             __RPC__in  LPWSTR pwzResult,
-            /* [in] */ DWORD cchResult,
-            /* [out] */ DWORD *pcchResult,
-            /* [in] */ DWORD dwReserved);
+            /* [annotation][in] */ 
+            _In_  DWORD cchResult,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcchResult,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved);
         
         DECLSPEC_XFGVIRT(IInternetProtocolInfo, CompareUrl)
         HRESULT ( STDMETHODCALLTYPE *CompareUrl )( 
             IInternetProtocolInfo * This,
-            /* [in] */ LPCWSTR pwzUrl1,
-            /* [in] */ LPCWSTR pwzUrl2,
-            /* [in] */ DWORD dwCompareFlags);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzUrl1,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzUrl2,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCompareFlags);
         
         DECLSPEC_XFGVIRT(IInternetProtocolInfo, QueryInfo)
         HRESULT ( STDMETHODCALLTYPE *QueryInfo )( 
             IInternetProtocolInfo * This,
-            /* [in] */ LPCWSTR pwzUrl,
-            /* [in] */ QUERYOPTION OueryOption,
-            /* [in] */ DWORD dwQueryFlags,
-            /* [size_is][out][in] */ LPVOID pBuffer,
-            /* [in] */ DWORD cbBuffer,
-            /* [out][in] */ DWORD *pcbBuf,
-            /* [in] */ DWORD dwReserved);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzUrl,
+            /* [annotation][in] */ 
+            _In_  QUERYOPTION OueryOption,
+            /* [annotation][in] */ 
+            _In_  DWORD dwQueryFlags,
+            /* [annotation][size_is][out][in] */ 
+            _Inout_updates_(*pcbBuf)  LPVOID pBuffer,
+            /* [annotation][in] */ 
+            _In_  DWORD cbBuffer,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcbBuf,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved);
         
         END_INTERFACE
     } IInternetProtocolInfoVtbl;
@@ -7200,10 +7827,12 @@ EXTERN_C const IID IID_IInternetSecurityMgrSite;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetWindow( 
-            /* [out] */ HWND *phwnd) = 0;
+            /* [annotation][out] */ 
+            _Out_  HWND *phwnd) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnableModeless( 
-            /* [in] */ BOOL fEnable) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL fEnable) = 0;
         
     };
     
@@ -7217,7 +7846,8 @@ EXTERN_C const IID IID_IInternetSecurityMgrSite;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IInternetSecurityMgrSite * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7232,12 +7862,14 @@ EXTERN_C const IID IID_IInternetSecurityMgrSite;
         DECLSPEC_XFGVIRT(IInternetSecurityMgrSite, GetWindow)
         HRESULT ( STDMETHODCALLTYPE *GetWindow )( 
             IInternetSecurityMgrSite * This,
-            /* [out] */ HWND *phwnd);
+            /* [annotation][out] */ 
+            _Out_  HWND *phwnd);
         
         DECLSPEC_XFGVIRT(IInternetSecurityMgrSite, EnableModeless)
         HRESULT ( STDMETHODCALLTYPE *EnableModeless )( 
             IInternetSecurityMgrSite * This,
-            /* [in] */ BOOL fEnable);
+            /* [annotation][in] */ 
+            _In_  BOOL fEnable);
         
         END_INTERFACE
     } IInternetSecurityMgrSiteVtbl;
@@ -7392,15 +8024,20 @@ EXTERN_C const IID IID_IInternetSecurityManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetSecuritySite( 
-            /* [unique][in] */ __RPC__in_opt IInternetSecurityMgrSite *pSite) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  IInternetSecurityMgrSite *pSite) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSecuritySite( 
-            /* [out] */ __RPC__deref_out_opt IInternetSecurityMgrSite **ppSite) = 0;
+            /* [annotation][out] */ 
+            _Out_  IInternetSecurityMgrSite **ppSite) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE MapUrlToZone( 
-            /* [in] */ __RPC__in LPCWSTR pwszUrl,
-            /* [out] */ __RPC__out DWORD *pdwZone,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSecurityId( 
             /* [annotation][in] */ 
@@ -7413,33 +8050,54 @@ EXTERN_C const IID IID_IInternetSecurityManager;
             _In_  DWORD_PTR dwReserved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProcessUrlAction( 
-            /* [in] */ __RPC__in LPCWSTR pwszUrl,
-            /* [in] */ DWORD dwAction,
-            /* [size_is][out] */ __RPC__out_ecount_full(cbPolicy) BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [unique][in] */ __RPC__in_opt BYTE *pContext,
-            /* [in] */ DWORD cbContext,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD dwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cbPolicy)  BYTE *pPolicy,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][unique][in] */ 
+            _In_  BYTE *pContext,
+            /* [annotation][in] */ 
+            _In_  DWORD cbContext,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryCustomPolicy( 
-            /* [in] */ __RPC__in LPCWSTR pwszUrl,
-            /* [in] */ __RPC__in REFGUID guidKey,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcbPolicy) BYTE **ppPolicy,
-            /* [out] */ __RPC__out DWORD *pcbPolicy,
-            /* [in] */ __RPC__in BYTE *pContext,
-            /* [in] */ DWORD cbContext,
-            /* [in] */ DWORD dwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][in] */ 
+            _In_  REFGUID guidKey,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcbPolicy)  BYTE **ppPolicy,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcbPolicy,
+            /* [annotation][in] */ 
+            _In_  BYTE *pContext,
+            /* [annotation][in] */ 
+            _In_  DWORD cbContext,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetZoneMapping( 
-            /* [in] */ DWORD dwZone,
-            /* [in] */ __RPC__in LPCWSTR lpszPattern,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR lpszPattern,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetZoneMappings( 
-            /* [in] */ DWORD dwZone,
-            /* [out] */ __RPC__deref_out_opt IEnumString **ppenumString,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][out] */ 
+            _Out_  IEnumString **ppenumString,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
     };
     
@@ -7453,7 +8111,8 @@ EXTERN_C const IID IID_IInternetSecurityManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInternetSecurityManager * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7468,19 +8127,24 @@ EXTERN_C const IID IID_IInternetSecurityManager;
         DECLSPEC_XFGVIRT(IInternetSecurityManager, SetSecuritySite)
         HRESULT ( STDMETHODCALLTYPE *SetSecuritySite )( 
             __RPC__in IInternetSecurityManager * This,
-            /* [unique][in] */ __RPC__in_opt IInternetSecurityMgrSite *pSite);
+            /* [annotation][unique][in] */ 
+            _In_  IInternetSecurityMgrSite *pSite);
         
         DECLSPEC_XFGVIRT(IInternetSecurityManager, GetSecuritySite)
         HRESULT ( STDMETHODCALLTYPE *GetSecuritySite )( 
             __RPC__in IInternetSecurityManager * This,
-            /* [out] */ __RPC__deref_out_opt IInternetSecurityMgrSite **ppSite);
+            /* [annotation][out] */ 
+            _Out_  IInternetSecurityMgrSite **ppSite);
         
         DECLSPEC_XFGVIRT(IInternetSecurityManager, MapUrlToZone)
         HRESULT ( STDMETHODCALLTYPE *MapUrlToZone )( 
             __RPC__in IInternetSecurityManager * This,
-            /* [in] */ __RPC__in LPCWSTR pwszUrl,
-            /* [out] */ __RPC__out DWORD *pdwZone,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IInternetSecurityManager, GetSecurityId)
         HRESULT ( STDMETHODCALLTYPE *GetSecurityId )( 
@@ -7497,39 +8161,60 @@ EXTERN_C const IID IID_IInternetSecurityManager;
         DECLSPEC_XFGVIRT(IInternetSecurityManager, ProcessUrlAction)
         HRESULT ( STDMETHODCALLTYPE *ProcessUrlAction )( 
             __RPC__in IInternetSecurityManager * This,
-            /* [in] */ __RPC__in LPCWSTR pwszUrl,
-            /* [in] */ DWORD dwAction,
-            /* [size_is][out] */ __RPC__out_ecount_full(cbPolicy) BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [unique][in] */ __RPC__in_opt BYTE *pContext,
-            /* [in] */ DWORD cbContext,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD dwReserved);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cbPolicy)  BYTE *pPolicy,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][unique][in] */ 
+            _In_  BYTE *pContext,
+            /* [annotation][in] */ 
+            _In_  DWORD cbContext,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved);
         
         DECLSPEC_XFGVIRT(IInternetSecurityManager, QueryCustomPolicy)
         HRESULT ( STDMETHODCALLTYPE *QueryCustomPolicy )( 
             __RPC__in IInternetSecurityManager * This,
-            /* [in] */ __RPC__in LPCWSTR pwszUrl,
-            /* [in] */ __RPC__in REFGUID guidKey,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcbPolicy) BYTE **ppPolicy,
-            /* [out] */ __RPC__out DWORD *pcbPolicy,
-            /* [in] */ __RPC__in BYTE *pContext,
-            /* [in] */ DWORD cbContext,
-            /* [in] */ DWORD dwReserved);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][in] */ 
+            _In_  REFGUID guidKey,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcbPolicy)  BYTE **ppPolicy,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcbPolicy,
+            /* [annotation][in] */ 
+            _In_  BYTE *pContext,
+            /* [annotation][in] */ 
+            _In_  DWORD cbContext,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved);
         
         DECLSPEC_XFGVIRT(IInternetSecurityManager, SetZoneMapping)
         HRESULT ( STDMETHODCALLTYPE *SetZoneMapping )( 
             __RPC__in IInternetSecurityManager * This,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ __RPC__in LPCWSTR lpszPattern,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR lpszPattern,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IInternetSecurityManager, GetZoneMappings)
         HRESULT ( STDMETHODCALLTYPE *GetZoneMappings )( 
             __RPC__in IInternetSecurityManager * This,
-            /* [in] */ DWORD dwZone,
-            /* [out] */ __RPC__deref_out_opt IEnumString **ppenumString,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][out] */ 
+            _Out_  IEnumString **ppenumString,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         END_INTERFACE
     } IInternetSecurityManagerVtbl;
@@ -7623,15 +8308,24 @@ EXTERN_C const IID IID_IInternetSecurityManagerEx;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ProcessUrlActionEx( 
-            /* [in] */ __RPC__in LPCWSTR pwszUrl,
-            /* [in] */ DWORD dwAction,
-            /* [size_is][out] */ __RPC__out_ecount_full(cbPolicy) BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [in] */ __RPC__in BYTE *pContext,
-            /* [in] */ DWORD cbContext,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD dwReserved,
-            /* [out] */ __RPC__out DWORD *pdwOutFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cbPolicy)  BYTE *pPolicy,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  BYTE *pContext,
+            /* [annotation][in] */ 
+            _In_  DWORD cbContext,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwOutFlags) = 0;
         
     };
     
@@ -7645,7 +8339,8 @@ EXTERN_C const IID IID_IInternetSecurityManagerEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInternetSecurityManagerEx * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7660,19 +8355,24 @@ EXTERN_C const IID IID_IInternetSecurityManagerEx;
         DECLSPEC_XFGVIRT(IInternetSecurityManager, SetSecuritySite)
         HRESULT ( STDMETHODCALLTYPE *SetSecuritySite )( 
             __RPC__in IInternetSecurityManagerEx * This,
-            /* [unique][in] */ __RPC__in_opt IInternetSecurityMgrSite *pSite);
+            /* [annotation][unique][in] */ 
+            _In_  IInternetSecurityMgrSite *pSite);
         
         DECLSPEC_XFGVIRT(IInternetSecurityManager, GetSecuritySite)
         HRESULT ( STDMETHODCALLTYPE *GetSecuritySite )( 
             __RPC__in IInternetSecurityManagerEx * This,
-            /* [out] */ __RPC__deref_out_opt IInternetSecurityMgrSite **ppSite);
+            /* [annotation][out] */ 
+            _Out_  IInternetSecurityMgrSite **ppSite);
         
         DECLSPEC_XFGVIRT(IInternetSecurityManager, MapUrlToZone)
         HRESULT ( STDMETHODCALLTYPE *MapUrlToZone )( 
             __RPC__in IInternetSecurityManagerEx * This,
-            /* [in] */ __RPC__in LPCWSTR pwszUrl,
-            /* [out] */ __RPC__out DWORD *pdwZone,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IInternetSecurityManager, GetSecurityId)
         HRESULT ( STDMETHODCALLTYPE *GetSecurityId )( 
@@ -7689,52 +8389,82 @@ EXTERN_C const IID IID_IInternetSecurityManagerEx;
         DECLSPEC_XFGVIRT(IInternetSecurityManager, ProcessUrlAction)
         HRESULT ( STDMETHODCALLTYPE *ProcessUrlAction )( 
             __RPC__in IInternetSecurityManagerEx * This,
-            /* [in] */ __RPC__in LPCWSTR pwszUrl,
-            /* [in] */ DWORD dwAction,
-            /* [size_is][out] */ __RPC__out_ecount_full(cbPolicy) BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [unique][in] */ __RPC__in_opt BYTE *pContext,
-            /* [in] */ DWORD cbContext,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD dwReserved);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cbPolicy)  BYTE *pPolicy,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][unique][in] */ 
+            _In_  BYTE *pContext,
+            /* [annotation][in] */ 
+            _In_  DWORD cbContext,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved);
         
         DECLSPEC_XFGVIRT(IInternetSecurityManager, QueryCustomPolicy)
         HRESULT ( STDMETHODCALLTYPE *QueryCustomPolicy )( 
             __RPC__in IInternetSecurityManagerEx * This,
-            /* [in] */ __RPC__in LPCWSTR pwszUrl,
-            /* [in] */ __RPC__in REFGUID guidKey,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcbPolicy) BYTE **ppPolicy,
-            /* [out] */ __RPC__out DWORD *pcbPolicy,
-            /* [in] */ __RPC__in BYTE *pContext,
-            /* [in] */ DWORD cbContext,
-            /* [in] */ DWORD dwReserved);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][in] */ 
+            _In_  REFGUID guidKey,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcbPolicy)  BYTE **ppPolicy,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcbPolicy,
+            /* [annotation][in] */ 
+            _In_  BYTE *pContext,
+            /* [annotation][in] */ 
+            _In_  DWORD cbContext,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved);
         
         DECLSPEC_XFGVIRT(IInternetSecurityManager, SetZoneMapping)
         HRESULT ( STDMETHODCALLTYPE *SetZoneMapping )( 
             __RPC__in IInternetSecurityManagerEx * This,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ __RPC__in LPCWSTR lpszPattern,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR lpszPattern,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IInternetSecurityManager, GetZoneMappings)
         HRESULT ( STDMETHODCALLTYPE *GetZoneMappings )( 
             __RPC__in IInternetSecurityManagerEx * This,
-            /* [in] */ DWORD dwZone,
-            /* [out] */ __RPC__deref_out_opt IEnumString **ppenumString,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][out] */ 
+            _Out_  IEnumString **ppenumString,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IInternetSecurityManagerEx, ProcessUrlActionEx)
         HRESULT ( STDMETHODCALLTYPE *ProcessUrlActionEx )( 
             __RPC__in IInternetSecurityManagerEx * This,
-            /* [in] */ __RPC__in LPCWSTR pwszUrl,
-            /* [in] */ DWORD dwAction,
-            /* [size_is][out] */ __RPC__out_ecount_full(cbPolicy) BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [in] */ __RPC__in BYTE *pContext,
-            /* [in] */ DWORD cbContext,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD dwReserved,
-            /* [out] */ __RPC__out DWORD *pdwOutFlags);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cbPolicy)  BYTE *pPolicy,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  BYTE *pContext,
+            /* [annotation][in] */ 
+            _In_  DWORD cbContext,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwOutFlags);
         
         END_INTERFACE
     } IInternetSecurityManagerExVtbl;
@@ -7832,8 +8562,10 @@ EXTERN_C const IID IID_IInternetSecurityManagerEx2;
         virtual HRESULT STDMETHODCALLTYPE MapUrlToZoneEx2( 
             /* [annotation][in] */ 
             _In_  IUri *pUri,
-            /* [out] */ __RPC__out DWORD *pdwZone,
-            /* [in] */ DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
             /* [annotation][out] */ 
             _Outptr_opt_  LPWSTR *ppwszMappedUrl,
             /* [annotation][out] */ 
@@ -7842,14 +8574,22 @@ EXTERN_C const IID IID_IInternetSecurityManagerEx2;
         virtual HRESULT STDMETHODCALLTYPE ProcessUrlActionEx2( 
             /* [annotation][in] */ 
             _In_  IUri *pUri,
-            /* [in] */ DWORD dwAction,
-            /* [size_is][out] */ __RPC__out_ecount_full(cbPolicy) BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [unique][in] */ __RPC__in_opt BYTE *pContext,
-            /* [in] */ DWORD cbContext,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD_PTR dwReserved,
-            /* [out] */ __RPC__out DWORD *pdwOutFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cbPolicy)  BYTE *pPolicy,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][unique][in] */ 
+            _In_  BYTE *pContext,
+            /* [annotation][in] */ 
+            _In_  DWORD cbContext,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwReserved,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwOutFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSecurityIdEx2( 
             /* [annotation][in] */ 
@@ -7864,12 +8604,18 @@ EXTERN_C const IID IID_IInternetSecurityManagerEx2;
         virtual HRESULT STDMETHODCALLTYPE QueryCustomPolicyEx2( 
             /* [annotation][in] */ 
             _In_  IUri *pUri,
-            /* [in] */ __RPC__in REFGUID guidKey,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcbPolicy) BYTE **ppPolicy,
-            /* [out] */ __RPC__out DWORD *pcbPolicy,
-            /* [in] */ __RPC__in BYTE *pContext,
-            /* [in] */ DWORD cbContext,
-            /* [in] */ DWORD_PTR dwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID guidKey,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcbPolicy)  BYTE **ppPolicy,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcbPolicy,
+            /* [annotation][in] */ 
+            _In_  BYTE *pContext,
+            /* [annotation][in] */ 
+            _In_  DWORD cbContext,
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwReserved) = 0;
         
     };
     
@@ -7883,7 +8629,8 @@ EXTERN_C const IID IID_IInternetSecurityManagerEx2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInternetSecurityManagerEx2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7898,19 +8645,24 @@ EXTERN_C const IID IID_IInternetSecurityManagerEx2;
         DECLSPEC_XFGVIRT(IInternetSecurityManager, SetSecuritySite)
         HRESULT ( STDMETHODCALLTYPE *SetSecuritySite )( 
             __RPC__in IInternetSecurityManagerEx2 * This,
-            /* [unique][in] */ __RPC__in_opt IInternetSecurityMgrSite *pSite);
+            /* [annotation][unique][in] */ 
+            _In_  IInternetSecurityMgrSite *pSite);
         
         DECLSPEC_XFGVIRT(IInternetSecurityManager, GetSecuritySite)
         HRESULT ( STDMETHODCALLTYPE *GetSecuritySite )( 
             __RPC__in IInternetSecurityManagerEx2 * This,
-            /* [out] */ __RPC__deref_out_opt IInternetSecurityMgrSite **ppSite);
+            /* [annotation][out] */ 
+            _Out_  IInternetSecurityMgrSite **ppSite);
         
         DECLSPEC_XFGVIRT(IInternetSecurityManager, MapUrlToZone)
         HRESULT ( STDMETHODCALLTYPE *MapUrlToZone )( 
             __RPC__in IInternetSecurityManagerEx2 * This,
-            /* [in] */ __RPC__in LPCWSTR pwszUrl,
-            /* [out] */ __RPC__out DWORD *pdwZone,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IInternetSecurityManager, GetSecurityId)
         HRESULT ( STDMETHODCALLTYPE *GetSecurityId )( 
@@ -7927,60 +8679,92 @@ EXTERN_C const IID IID_IInternetSecurityManagerEx2;
         DECLSPEC_XFGVIRT(IInternetSecurityManager, ProcessUrlAction)
         HRESULT ( STDMETHODCALLTYPE *ProcessUrlAction )( 
             __RPC__in IInternetSecurityManagerEx2 * This,
-            /* [in] */ __RPC__in LPCWSTR pwszUrl,
-            /* [in] */ DWORD dwAction,
-            /* [size_is][out] */ __RPC__out_ecount_full(cbPolicy) BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [unique][in] */ __RPC__in_opt BYTE *pContext,
-            /* [in] */ DWORD cbContext,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD dwReserved);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cbPolicy)  BYTE *pPolicy,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][unique][in] */ 
+            _In_  BYTE *pContext,
+            /* [annotation][in] */ 
+            _In_  DWORD cbContext,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved);
         
         DECLSPEC_XFGVIRT(IInternetSecurityManager, QueryCustomPolicy)
         HRESULT ( STDMETHODCALLTYPE *QueryCustomPolicy )( 
             __RPC__in IInternetSecurityManagerEx2 * This,
-            /* [in] */ __RPC__in LPCWSTR pwszUrl,
-            /* [in] */ __RPC__in REFGUID guidKey,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcbPolicy) BYTE **ppPolicy,
-            /* [out] */ __RPC__out DWORD *pcbPolicy,
-            /* [in] */ __RPC__in BYTE *pContext,
-            /* [in] */ DWORD cbContext,
-            /* [in] */ DWORD dwReserved);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][in] */ 
+            _In_  REFGUID guidKey,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcbPolicy)  BYTE **ppPolicy,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcbPolicy,
+            /* [annotation][in] */ 
+            _In_  BYTE *pContext,
+            /* [annotation][in] */ 
+            _In_  DWORD cbContext,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved);
         
         DECLSPEC_XFGVIRT(IInternetSecurityManager, SetZoneMapping)
         HRESULT ( STDMETHODCALLTYPE *SetZoneMapping )( 
             __RPC__in IInternetSecurityManagerEx2 * This,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ __RPC__in LPCWSTR lpszPattern,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR lpszPattern,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IInternetSecurityManager, GetZoneMappings)
         HRESULT ( STDMETHODCALLTYPE *GetZoneMappings )( 
             __RPC__in IInternetSecurityManagerEx2 * This,
-            /* [in] */ DWORD dwZone,
-            /* [out] */ __RPC__deref_out_opt IEnumString **ppenumString,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][out] */ 
+            _Out_  IEnumString **ppenumString,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IInternetSecurityManagerEx, ProcessUrlActionEx)
         HRESULT ( STDMETHODCALLTYPE *ProcessUrlActionEx )( 
             __RPC__in IInternetSecurityManagerEx2 * This,
-            /* [in] */ __RPC__in LPCWSTR pwszUrl,
-            /* [in] */ DWORD dwAction,
-            /* [size_is][out] */ __RPC__out_ecount_full(cbPolicy) BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [in] */ __RPC__in BYTE *pContext,
-            /* [in] */ DWORD cbContext,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD dwReserved,
-            /* [out] */ __RPC__out DWORD *pdwOutFlags);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cbPolicy)  BYTE *pPolicy,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  BYTE *pContext,
+            /* [annotation][in] */ 
+            _In_  DWORD cbContext,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwOutFlags);
         
         DECLSPEC_XFGVIRT(IInternetSecurityManagerEx2, MapUrlToZoneEx2)
         HRESULT ( STDMETHODCALLTYPE *MapUrlToZoneEx2 )( 
             __RPC__in IInternetSecurityManagerEx2 * This,
             /* [annotation][in] */ 
             _In_  IUri *pUri,
-            /* [out] */ __RPC__out DWORD *pdwZone,
-            /* [in] */ DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
             /* [annotation][out] */ 
             _Outptr_opt_  LPWSTR *ppwszMappedUrl,
             /* [annotation][out] */ 
@@ -7991,14 +8775,22 @@ EXTERN_C const IID IID_IInternetSecurityManagerEx2;
             __RPC__in IInternetSecurityManagerEx2 * This,
             /* [annotation][in] */ 
             _In_  IUri *pUri,
-            /* [in] */ DWORD dwAction,
-            /* [size_is][out] */ __RPC__out_ecount_full(cbPolicy) BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [unique][in] */ __RPC__in_opt BYTE *pContext,
-            /* [in] */ DWORD cbContext,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD_PTR dwReserved,
-            /* [out] */ __RPC__out DWORD *pdwOutFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cbPolicy)  BYTE *pPolicy,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][unique][in] */ 
+            _In_  BYTE *pContext,
+            /* [annotation][in] */ 
+            _In_  DWORD cbContext,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwReserved,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwOutFlags);
         
         DECLSPEC_XFGVIRT(IInternetSecurityManagerEx2, GetSecurityIdEx2)
         HRESULT ( STDMETHODCALLTYPE *GetSecurityIdEx2 )( 
@@ -8017,12 +8809,18 @@ EXTERN_C const IID IID_IInternetSecurityManagerEx2;
             __RPC__in IInternetSecurityManagerEx2 * This,
             /* [annotation][in] */ 
             _In_  IUri *pUri,
-            /* [in] */ __RPC__in REFGUID guidKey,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcbPolicy) BYTE **ppPolicy,
-            /* [out] */ __RPC__out DWORD *pcbPolicy,
-            /* [in] */ __RPC__in BYTE *pContext,
-            /* [in] */ DWORD cbContext,
-            /* [in] */ DWORD_PTR dwReserved);
+            /* [annotation][in] */ 
+            _In_  REFGUID guidKey,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcbPolicy)  BYTE **ppPolicy,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcbPolicy,
+            /* [annotation][in] */ 
+            _In_  BYTE *pContext,
+            /* [annotation][in] */ 
+            _In_  DWORD cbContext,
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwReserved);
         
         END_INTERFACE
     } IInternetSecurityManagerEx2Vtbl;
@@ -8126,10 +8924,12 @@ EXTERN_C const IID IID_IZoneIdentifier;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetId( 
-            /* [out] */ __RPC__out DWORD *pdwZone) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwZone) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetId( 
-            /* [in] */ DWORD dwZone) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Remove( void) = 0;
         
@@ -8145,7 +8945,8 @@ EXTERN_C const IID IID_IZoneIdentifier;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IZoneIdentifier * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8160,12 +8961,14 @@ EXTERN_C const IID IID_IZoneIdentifier;
         DECLSPEC_XFGVIRT(IZoneIdentifier, GetId)
         HRESULT ( STDMETHODCALLTYPE *GetId )( 
             __RPC__in IZoneIdentifier * This,
-            /* [out] */ __RPC__out DWORD *pdwZone);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwZone);
         
         DECLSPEC_XFGVIRT(IZoneIdentifier, SetId)
         HRESULT ( STDMETHODCALLTYPE *SetId )( 
             __RPC__in IZoneIdentifier * This,
-            /* [in] */ DWORD dwZone);
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone);
         
         DECLSPEC_XFGVIRT(IZoneIdentifier, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
@@ -8240,18 +9043,22 @@ EXTERN_C const IID IID_IZoneIdentifier2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetLastWriterPackageFamilyName( 
-            /* [out] */ __RPC__deref_out_opt LPWSTR *packageFamilyName) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *packageFamilyName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetLastWriterPackageFamilyName( 
-            /* [in] */ __RPC__in LPCWSTR packageFamilyName) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR packageFamilyName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveLastWriterPackageFamilyName( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAppZoneId( 
-            /* [out] */ __RPC__out DWORD *zone) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *zone) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAppZoneId( 
-            /* [in] */ DWORD zone) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD zone) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAppZoneId( void) = 0;
         
@@ -8267,7 +9074,8 @@ EXTERN_C const IID IID_IZoneIdentifier2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IZoneIdentifier2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8282,12 +9090,14 @@ EXTERN_C const IID IID_IZoneIdentifier2;
         DECLSPEC_XFGVIRT(IZoneIdentifier, GetId)
         HRESULT ( STDMETHODCALLTYPE *GetId )( 
             __RPC__in IZoneIdentifier2 * This,
-            /* [out] */ __RPC__out DWORD *pdwZone);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwZone);
         
         DECLSPEC_XFGVIRT(IZoneIdentifier, SetId)
         HRESULT ( STDMETHODCALLTYPE *SetId )( 
             __RPC__in IZoneIdentifier2 * This,
-            /* [in] */ DWORD dwZone);
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone);
         
         DECLSPEC_XFGVIRT(IZoneIdentifier, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
@@ -8296,12 +9106,14 @@ EXTERN_C const IID IID_IZoneIdentifier2;
         DECLSPEC_XFGVIRT(IZoneIdentifier2, GetLastWriterPackageFamilyName)
         HRESULT ( STDMETHODCALLTYPE *GetLastWriterPackageFamilyName )( 
             __RPC__in IZoneIdentifier2 * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *packageFamilyName);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *packageFamilyName);
         
         DECLSPEC_XFGVIRT(IZoneIdentifier2, SetLastWriterPackageFamilyName)
         HRESULT ( STDMETHODCALLTYPE *SetLastWriterPackageFamilyName )( 
             __RPC__in IZoneIdentifier2 * This,
-            /* [in] */ __RPC__in LPCWSTR packageFamilyName);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR packageFamilyName);
         
         DECLSPEC_XFGVIRT(IZoneIdentifier2, RemoveLastWriterPackageFamilyName)
         HRESULT ( STDMETHODCALLTYPE *RemoveLastWriterPackageFamilyName )( 
@@ -8310,12 +9122,14 @@ EXTERN_C const IID IID_IZoneIdentifier2;
         DECLSPEC_XFGVIRT(IZoneIdentifier2, GetAppZoneId)
         HRESULT ( STDMETHODCALLTYPE *GetAppZoneId )( 
             __RPC__in IZoneIdentifier2 * This,
-            /* [out] */ __RPC__out DWORD *zone);
+            /* [annotation][out] */ 
+            _Out_  DWORD *zone);
         
         DECLSPEC_XFGVIRT(IZoneIdentifier2, SetAppZoneId)
         HRESULT ( STDMETHODCALLTYPE *SetAppZoneId )( 
             __RPC__in IZoneIdentifier2 * This,
-            /* [in] */ DWORD zone);
+            /* [annotation][in] */ 
+            _In_  DWORD zone);
         
         DECLSPEC_XFGVIRT(IZoneIdentifier2, RemoveAppZoneId)
         HRESULT ( STDMETHODCALLTYPE *RemoveAppZoneId )( 
@@ -8418,29 +9232,38 @@ EXTERN_C const IID IID_IInternetHostSecurityManager;
             _Out_writes_(*pcbSecurityId)  BYTE *pbSecurityId,
             /* [annotation][out][in] */ 
             _Inout_ _Deref_in_range_(MAX_SIZE_SECURITY_ID, UINT_MAX) _Deref_out_range_(0, MAX_SIZE_SECURITY_ID)  DWORD *pcbSecurityId,
-            /* [in] */ DWORD_PTR dwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwReserved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProcessUrlAction( 
-            /* [in] */ DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_(cbPolicy)  BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
             /* [annotation][in] */ 
             _In_reads_opt_(cbContext)  BYTE *pContext,
-            /* [in] */ DWORD cbContext,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD dwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD cbContext,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryCustomPolicy( 
-            /* [in] */ REFGUID guidKey,
+            /* [annotation][in] */ 
+            _In_  REFGUID guidKey,
             /* [annotation][size_is][size_is][out] */ 
             _Outptr_result_buffer_all_maybenull_(*pcbPolicy)  BYTE **ppPolicy,
             /* [annotation][out] */ 
             _Out_  DWORD *pcbPolicy,
             /* [annotation][in] */ 
             _In_reads_(cbContext)  BYTE *pContext,
-            /* [in] */ DWORD cbContext,
-            /* [in] */ DWORD dwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD cbContext,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved) = 0;
         
     };
     
@@ -8454,7 +9277,8 @@ EXTERN_C const IID IID_IInternetHostSecurityManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IInternetHostSecurityManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8473,33 +9297,42 @@ EXTERN_C const IID IID_IInternetHostSecurityManager;
             _Out_writes_(*pcbSecurityId)  BYTE *pbSecurityId,
             /* [annotation][out][in] */ 
             _Inout_ _Deref_in_range_(MAX_SIZE_SECURITY_ID, UINT_MAX) _Deref_out_range_(0, MAX_SIZE_SECURITY_ID)  DWORD *pcbSecurityId,
-            /* [in] */ DWORD_PTR dwReserved);
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwReserved);
         
         DECLSPEC_XFGVIRT(IInternetHostSecurityManager, ProcessUrlAction)
         HRESULT ( STDMETHODCALLTYPE *ProcessUrlAction )( 
             IInternetHostSecurityManager * This,
-            /* [in] */ DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_(cbPolicy)  BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
             /* [annotation][in] */ 
             _In_reads_opt_(cbContext)  BYTE *pContext,
-            /* [in] */ DWORD cbContext,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD dwReserved);
+            /* [annotation][in] */ 
+            _In_  DWORD cbContext,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved);
         
         DECLSPEC_XFGVIRT(IInternetHostSecurityManager, QueryCustomPolicy)
         HRESULT ( STDMETHODCALLTYPE *QueryCustomPolicy )( 
             IInternetHostSecurityManager * This,
-            /* [in] */ REFGUID guidKey,
+            /* [annotation][in] */ 
+            _In_  REFGUID guidKey,
             /* [annotation][size_is][size_is][out] */ 
             _Outptr_result_buffer_all_maybenull_(*pcbPolicy)  BYTE **ppPolicy,
             /* [annotation][out] */ 
             _Out_  DWORD *pcbPolicy,
             /* [annotation][in] */ 
             _In_reads_(cbContext)  BYTE *pContext,
-            /* [in] */ DWORD cbContext,
-            /* [in] */ DWORD dwReserved);
+            /* [annotation][in] */ 
+            _In_  DWORD cbContext,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved);
         
         END_INTERFACE
     } IInternetHostSecurityManagerVtbl;
@@ -8960,78 +9793,114 @@ EXTERN_C const IID IID_IInternetZoneManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetZoneAttributes( 
-            /* [in] */ DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
             /* [annotation][unique][out][in] */ 
             _Inout_  ZONEATTRIBUTES *pZoneAttributes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetZoneAttributes( 
-            /* [in] */ DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
             /* [annotation][in] */ 
             _In_  ZONEATTRIBUTES *pZoneAttributes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetZoneCustomPolicy( 
-            /* [in] */ DWORD dwZone,
-            /* [in] */ REFGUID guidKey,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  REFGUID guidKey,
             /* [annotation][size_is][size_is][out] */ 
             _Outptr_result_buffer_(*pcbPolicy)  BYTE **ppPolicy,
             /* [annotation][out] */ 
             _Out_  DWORD *pcbPolicy,
-            /* [in] */ URLZONEREG urlZoneReg) = 0;
+            /* [annotation][in] */ 
+            _In_  URLZONEREG urlZoneReg) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetZoneCustomPolicy( 
-            /* [in] */ DWORD dwZone,
-            /* [in] */ REFGUID guidKey,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  REFGUID guidKey,
             /* [annotation][size_is][in] */ 
             _In_reads_(cbPolicy)  BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [in] */ URLZONEREG urlZoneReg) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  URLZONEREG urlZoneReg) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetZoneActionPolicy( 
-            /* [in] */ DWORD dwZone,
-            /* [in] */ DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
             /* [annotation][size_is][out] */ 
             _Out_writes_(cbPolicy)  BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [in] */ URLZONEREG urlZoneReg) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  URLZONEREG urlZoneReg) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetZoneActionPolicy( 
-            /* [in] */ DWORD dwZone,
-            /* [in] */ DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
             /* [annotation][size_is][in] */ 
             _In_reads_(cbPolicy)  BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [in] */ URLZONEREG urlZoneReg) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  URLZONEREG urlZoneReg) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PromptAction( 
-            /* [in] */ DWORD dwAction,
-            /* [in] */ HWND hwndParent,
-            /* [in] */ LPCWSTR pwszUrl,
-            /* [in] */ LPCWSTR pwszText,
-            /* [in] */ DWORD dwPromptFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  HWND hwndParent,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszText,
+            /* [annotation][in] */ 
+            _In_  DWORD dwPromptFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LogAction( 
-            /* [in] */ DWORD dwAction,
-            /* [in] */ LPCWSTR pwszUrl,
-            /* [in] */ LPCWSTR pwszText,
-            /* [in] */ DWORD dwLogFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszText,
+            /* [annotation][in] */ 
+            _In_  DWORD dwLogFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateZoneEnumerator( 
-            /* [out] */ DWORD *pdwEnum,
-            /* [out] */ DWORD *pdwCount,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwEnum,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwCount,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetZoneAt( 
-            /* [in] */ DWORD dwEnum,
-            /* [in] */ DWORD dwIndex,
-            /* [out] */ DWORD *pdwZone) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwEnum,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwZone) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DestroyZoneEnumerator( 
-            /* [in] */ DWORD dwEnum) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CopyTemplatePoliciesToZone( 
-            /* [in] */ DWORD dwTemplate,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ DWORD dwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwTemplate,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved) = 0;
         
     };
     
@@ -9045,7 +9914,8 @@ EXTERN_C const IID IID_IInternetZoneManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IInternetZoneManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9060,100 +9930,136 @@ EXTERN_C const IID IID_IInternetZoneManager;
         DECLSPEC_XFGVIRT(IInternetZoneManager, GetZoneAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetZoneAttributes )( 
             IInternetZoneManager * This,
-            /* [in] */ DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
             /* [annotation][unique][out][in] */ 
             _Inout_  ZONEATTRIBUTES *pZoneAttributes);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, SetZoneAttributes)
         HRESULT ( STDMETHODCALLTYPE *SetZoneAttributes )( 
             IInternetZoneManager * This,
-            /* [in] */ DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
             /* [annotation][in] */ 
             _In_  ZONEATTRIBUTES *pZoneAttributes);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, GetZoneCustomPolicy)
         HRESULT ( STDMETHODCALLTYPE *GetZoneCustomPolicy )( 
             IInternetZoneManager * This,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ REFGUID guidKey,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  REFGUID guidKey,
             /* [annotation][size_is][size_is][out] */ 
             _Outptr_result_buffer_(*pcbPolicy)  BYTE **ppPolicy,
             /* [annotation][out] */ 
             _Out_  DWORD *pcbPolicy,
-            /* [in] */ URLZONEREG urlZoneReg);
+            /* [annotation][in] */ 
+            _In_  URLZONEREG urlZoneReg);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, SetZoneCustomPolicy)
         HRESULT ( STDMETHODCALLTYPE *SetZoneCustomPolicy )( 
             IInternetZoneManager * This,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ REFGUID guidKey,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  REFGUID guidKey,
             /* [annotation][size_is][in] */ 
             _In_reads_(cbPolicy)  BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [in] */ URLZONEREG urlZoneReg);
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  URLZONEREG urlZoneReg);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, GetZoneActionPolicy)
         HRESULT ( STDMETHODCALLTYPE *GetZoneActionPolicy )( 
             IInternetZoneManager * This,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
             /* [annotation][size_is][out] */ 
             _Out_writes_(cbPolicy)  BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [in] */ URLZONEREG urlZoneReg);
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  URLZONEREG urlZoneReg);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, SetZoneActionPolicy)
         HRESULT ( STDMETHODCALLTYPE *SetZoneActionPolicy )( 
             IInternetZoneManager * This,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
             /* [annotation][size_is][in] */ 
             _In_reads_(cbPolicy)  BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [in] */ URLZONEREG urlZoneReg);
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  URLZONEREG urlZoneReg);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, PromptAction)
         HRESULT ( STDMETHODCALLTYPE *PromptAction )( 
             IInternetZoneManager * This,
-            /* [in] */ DWORD dwAction,
-            /* [in] */ HWND hwndParent,
-            /* [in] */ LPCWSTR pwszUrl,
-            /* [in] */ LPCWSTR pwszText,
-            /* [in] */ DWORD dwPromptFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  HWND hwndParent,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszText,
+            /* [annotation][in] */ 
+            _In_  DWORD dwPromptFlags);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, LogAction)
         HRESULT ( STDMETHODCALLTYPE *LogAction )( 
             IInternetZoneManager * This,
-            /* [in] */ DWORD dwAction,
-            /* [in] */ LPCWSTR pwszUrl,
-            /* [in] */ LPCWSTR pwszText,
-            /* [in] */ DWORD dwLogFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszText,
+            /* [annotation][in] */ 
+            _In_  DWORD dwLogFlags);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, CreateZoneEnumerator)
         HRESULT ( STDMETHODCALLTYPE *CreateZoneEnumerator )( 
             IInternetZoneManager * This,
-            /* [out] */ DWORD *pdwEnum,
-            /* [out] */ DWORD *pdwCount,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwEnum,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwCount,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, GetZoneAt)
         HRESULT ( STDMETHODCALLTYPE *GetZoneAt )( 
             IInternetZoneManager * This,
-            /* [in] */ DWORD dwEnum,
-            /* [in] */ DWORD dwIndex,
-            /* [out] */ DWORD *pdwZone);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEnum,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwZone);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, DestroyZoneEnumerator)
         HRESULT ( STDMETHODCALLTYPE *DestroyZoneEnumerator )( 
             IInternetZoneManager * This,
-            /* [in] */ DWORD dwEnum);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEnum);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, CopyTemplatePoliciesToZone)
         HRESULT ( STDMETHODCALLTYPE *CopyTemplatePoliciesToZone )( 
             IInternetZoneManager * This,
-            /* [in] */ DWORD dwTemplate,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ DWORD dwReserved);
+            /* [annotation][in] */ 
+            _In_  DWORD dwTemplate,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved);
         
         END_INTERFACE
     } IInternetZoneManagerVtbl;
@@ -9261,22 +10167,32 @@ EXTERN_C const IID IID_IInternetZoneManagerEx;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetZoneActionPolicyEx( 
-            /* [in] */ DWORD dwZone,
-            /* [in] */ DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
             /* [annotation][size_is][out] */ 
             _Out_writes_(cbPolicy)  BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [in] */ URLZONEREG urlZoneReg,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  URLZONEREG urlZoneReg,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetZoneActionPolicyEx( 
-            /* [in] */ DWORD dwZone,
-            /* [in] */ DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
             /* [annotation][size_is][in] */ 
             _In_reads_(cbPolicy)  BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [in] */ URLZONEREG urlZoneReg,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  URLZONEREG urlZoneReg,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
     };
     
@@ -9290,7 +10206,8 @@ EXTERN_C const IID IID_IInternetZoneManagerEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IInternetZoneManagerEx * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9305,122 +10222,168 @@ EXTERN_C const IID IID_IInternetZoneManagerEx;
         DECLSPEC_XFGVIRT(IInternetZoneManager, GetZoneAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetZoneAttributes )( 
             IInternetZoneManagerEx * This,
-            /* [in] */ DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
             /* [annotation][unique][out][in] */ 
             _Inout_  ZONEATTRIBUTES *pZoneAttributes);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, SetZoneAttributes)
         HRESULT ( STDMETHODCALLTYPE *SetZoneAttributes )( 
             IInternetZoneManagerEx * This,
-            /* [in] */ DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
             /* [annotation][in] */ 
             _In_  ZONEATTRIBUTES *pZoneAttributes);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, GetZoneCustomPolicy)
         HRESULT ( STDMETHODCALLTYPE *GetZoneCustomPolicy )( 
             IInternetZoneManagerEx * This,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ REFGUID guidKey,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  REFGUID guidKey,
             /* [annotation][size_is][size_is][out] */ 
             _Outptr_result_buffer_(*pcbPolicy)  BYTE **ppPolicy,
             /* [annotation][out] */ 
             _Out_  DWORD *pcbPolicy,
-            /* [in] */ URLZONEREG urlZoneReg);
+            /* [annotation][in] */ 
+            _In_  URLZONEREG urlZoneReg);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, SetZoneCustomPolicy)
         HRESULT ( STDMETHODCALLTYPE *SetZoneCustomPolicy )( 
             IInternetZoneManagerEx * This,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ REFGUID guidKey,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  REFGUID guidKey,
             /* [annotation][size_is][in] */ 
             _In_reads_(cbPolicy)  BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [in] */ URLZONEREG urlZoneReg);
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  URLZONEREG urlZoneReg);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, GetZoneActionPolicy)
         HRESULT ( STDMETHODCALLTYPE *GetZoneActionPolicy )( 
             IInternetZoneManagerEx * This,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
             /* [annotation][size_is][out] */ 
             _Out_writes_(cbPolicy)  BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [in] */ URLZONEREG urlZoneReg);
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  URLZONEREG urlZoneReg);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, SetZoneActionPolicy)
         HRESULT ( STDMETHODCALLTYPE *SetZoneActionPolicy )( 
             IInternetZoneManagerEx * This,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
             /* [annotation][size_is][in] */ 
             _In_reads_(cbPolicy)  BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [in] */ URLZONEREG urlZoneReg);
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  URLZONEREG urlZoneReg);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, PromptAction)
         HRESULT ( STDMETHODCALLTYPE *PromptAction )( 
             IInternetZoneManagerEx * This,
-            /* [in] */ DWORD dwAction,
-            /* [in] */ HWND hwndParent,
-            /* [in] */ LPCWSTR pwszUrl,
-            /* [in] */ LPCWSTR pwszText,
-            /* [in] */ DWORD dwPromptFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  HWND hwndParent,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszText,
+            /* [annotation][in] */ 
+            _In_  DWORD dwPromptFlags);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, LogAction)
         HRESULT ( STDMETHODCALLTYPE *LogAction )( 
             IInternetZoneManagerEx * This,
-            /* [in] */ DWORD dwAction,
-            /* [in] */ LPCWSTR pwszUrl,
-            /* [in] */ LPCWSTR pwszText,
-            /* [in] */ DWORD dwLogFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszText,
+            /* [annotation][in] */ 
+            _In_  DWORD dwLogFlags);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, CreateZoneEnumerator)
         HRESULT ( STDMETHODCALLTYPE *CreateZoneEnumerator )( 
             IInternetZoneManagerEx * This,
-            /* [out] */ DWORD *pdwEnum,
-            /* [out] */ DWORD *pdwCount,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwEnum,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwCount,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, GetZoneAt)
         HRESULT ( STDMETHODCALLTYPE *GetZoneAt )( 
             IInternetZoneManagerEx * This,
-            /* [in] */ DWORD dwEnum,
-            /* [in] */ DWORD dwIndex,
-            /* [out] */ DWORD *pdwZone);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEnum,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwZone);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, DestroyZoneEnumerator)
         HRESULT ( STDMETHODCALLTYPE *DestroyZoneEnumerator )( 
             IInternetZoneManagerEx * This,
-            /* [in] */ DWORD dwEnum);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEnum);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, CopyTemplatePoliciesToZone)
         HRESULT ( STDMETHODCALLTYPE *CopyTemplatePoliciesToZone )( 
             IInternetZoneManagerEx * This,
-            /* [in] */ DWORD dwTemplate,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ DWORD dwReserved);
+            /* [annotation][in] */ 
+            _In_  DWORD dwTemplate,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved);
         
         DECLSPEC_XFGVIRT(IInternetZoneManagerEx, GetZoneActionPolicyEx)
         HRESULT ( STDMETHODCALLTYPE *GetZoneActionPolicyEx )( 
             IInternetZoneManagerEx * This,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
             /* [annotation][size_is][out] */ 
             _Out_writes_(cbPolicy)  BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [in] */ URLZONEREG urlZoneReg,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  URLZONEREG urlZoneReg,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IInternetZoneManagerEx, SetZoneActionPolicyEx)
         HRESULT ( STDMETHODCALLTYPE *SetZoneActionPolicyEx )( 
             IInternetZoneManagerEx * This,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
             /* [annotation][size_is][in] */ 
             _In_reads_(cbPolicy)  BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [in] */ URLZONEREG urlZoneReg,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  URLZONEREG urlZoneReg,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         END_INTERFACE
     } IInternetZoneManagerExVtbl;
@@ -9533,21 +10496,32 @@ EXTERN_C const IID IID_IInternetZoneManagerEx2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetZoneAttributesEx( 
-            /* [in] */ DWORD dwZone,
-            /* [unique][out][in] */ ZONEATTRIBUTES *pZoneAttributes,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  ZONEATTRIBUTES *pZoneAttributes,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetZoneSecurityState( 
-            /* [in] */ DWORD dwZoneIndex,
-            /* [in] */ BOOL fRespectPolicy,
-            /* [out][in] */ LPDWORD pdwState,
-            /* [out][in] */ BOOL *pfPolicyEncountered) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwZoneIndex,
+            /* [annotation][in] */ 
+            _In_  BOOL fRespectPolicy,
+            /* [annotation][out][in] */ 
+            _Inout_  LPDWORD pdwState,
+            /* [annotation][out][in] */ 
+            _Inout_  BOOL *pfPolicyEncountered) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIESecurityState( 
-            /* [in] */ BOOL fRespectPolicy,
-            /* [out][in] */ LPDWORD pdwState,
-            /* [out][in] */ BOOL *pfPolicyEncountered,
-            /* [in] */ BOOL fNoCache) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL fRespectPolicy,
+            /* [annotation][out][in] */ 
+            _Inout_  LPDWORD pdwState,
+            /* [annotation][out][in] */ 
+            _Inout_  BOOL *pfPolicyEncountered,
+            /* [annotation][in] */ 
+            _In_  BOOL fNoCache) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FixUnsecureSettings( void) = 0;
         
@@ -9563,7 +10537,8 @@ EXTERN_C const IID IID_IInternetZoneManagerEx2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IInternetZoneManagerEx2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9578,145 +10553,202 @@ EXTERN_C const IID IID_IInternetZoneManagerEx2;
         DECLSPEC_XFGVIRT(IInternetZoneManager, GetZoneAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetZoneAttributes )( 
             IInternetZoneManagerEx2 * This,
-            /* [in] */ DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
             /* [annotation][unique][out][in] */ 
             _Inout_  ZONEATTRIBUTES *pZoneAttributes);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, SetZoneAttributes)
         HRESULT ( STDMETHODCALLTYPE *SetZoneAttributes )( 
             IInternetZoneManagerEx2 * This,
-            /* [in] */ DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
             /* [annotation][in] */ 
             _In_  ZONEATTRIBUTES *pZoneAttributes);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, GetZoneCustomPolicy)
         HRESULT ( STDMETHODCALLTYPE *GetZoneCustomPolicy )( 
             IInternetZoneManagerEx2 * This,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ REFGUID guidKey,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  REFGUID guidKey,
             /* [annotation][size_is][size_is][out] */ 
             _Outptr_result_buffer_(*pcbPolicy)  BYTE **ppPolicy,
             /* [annotation][out] */ 
             _Out_  DWORD *pcbPolicy,
-            /* [in] */ URLZONEREG urlZoneReg);
+            /* [annotation][in] */ 
+            _In_  URLZONEREG urlZoneReg);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, SetZoneCustomPolicy)
         HRESULT ( STDMETHODCALLTYPE *SetZoneCustomPolicy )( 
             IInternetZoneManagerEx2 * This,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ REFGUID guidKey,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  REFGUID guidKey,
             /* [annotation][size_is][in] */ 
             _In_reads_(cbPolicy)  BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [in] */ URLZONEREG urlZoneReg);
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  URLZONEREG urlZoneReg);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, GetZoneActionPolicy)
         HRESULT ( STDMETHODCALLTYPE *GetZoneActionPolicy )( 
             IInternetZoneManagerEx2 * This,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
             /* [annotation][size_is][out] */ 
             _Out_writes_(cbPolicy)  BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [in] */ URLZONEREG urlZoneReg);
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  URLZONEREG urlZoneReg);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, SetZoneActionPolicy)
         HRESULT ( STDMETHODCALLTYPE *SetZoneActionPolicy )( 
             IInternetZoneManagerEx2 * This,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
             /* [annotation][size_is][in] */ 
             _In_reads_(cbPolicy)  BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [in] */ URLZONEREG urlZoneReg);
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  URLZONEREG urlZoneReg);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, PromptAction)
         HRESULT ( STDMETHODCALLTYPE *PromptAction )( 
             IInternetZoneManagerEx2 * This,
-            /* [in] */ DWORD dwAction,
-            /* [in] */ HWND hwndParent,
-            /* [in] */ LPCWSTR pwszUrl,
-            /* [in] */ LPCWSTR pwszText,
-            /* [in] */ DWORD dwPromptFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  HWND hwndParent,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszText,
+            /* [annotation][in] */ 
+            _In_  DWORD dwPromptFlags);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, LogAction)
         HRESULT ( STDMETHODCALLTYPE *LogAction )( 
             IInternetZoneManagerEx2 * This,
-            /* [in] */ DWORD dwAction,
-            /* [in] */ LPCWSTR pwszUrl,
-            /* [in] */ LPCWSTR pwszText,
-            /* [in] */ DWORD dwLogFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszUrl,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwszText,
+            /* [annotation][in] */ 
+            _In_  DWORD dwLogFlags);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, CreateZoneEnumerator)
         HRESULT ( STDMETHODCALLTYPE *CreateZoneEnumerator )( 
             IInternetZoneManagerEx2 * This,
-            /* [out] */ DWORD *pdwEnum,
-            /* [out] */ DWORD *pdwCount,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwEnum,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwCount,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, GetZoneAt)
         HRESULT ( STDMETHODCALLTYPE *GetZoneAt )( 
             IInternetZoneManagerEx2 * This,
-            /* [in] */ DWORD dwEnum,
-            /* [in] */ DWORD dwIndex,
-            /* [out] */ DWORD *pdwZone);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEnum,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwZone);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, DestroyZoneEnumerator)
         HRESULT ( STDMETHODCALLTYPE *DestroyZoneEnumerator )( 
             IInternetZoneManagerEx2 * This,
-            /* [in] */ DWORD dwEnum);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEnum);
         
         DECLSPEC_XFGVIRT(IInternetZoneManager, CopyTemplatePoliciesToZone)
         HRESULT ( STDMETHODCALLTYPE *CopyTemplatePoliciesToZone )( 
             IInternetZoneManagerEx2 * This,
-            /* [in] */ DWORD dwTemplate,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ DWORD dwReserved);
+            /* [annotation][in] */ 
+            _In_  DWORD dwTemplate,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved);
         
         DECLSPEC_XFGVIRT(IInternetZoneManagerEx, GetZoneActionPolicyEx)
         HRESULT ( STDMETHODCALLTYPE *GetZoneActionPolicyEx )( 
             IInternetZoneManagerEx2 * This,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
             /* [annotation][size_is][out] */ 
             _Out_writes_(cbPolicy)  BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [in] */ URLZONEREG urlZoneReg,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  URLZONEREG urlZoneReg,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IInternetZoneManagerEx, SetZoneActionPolicyEx)
         HRESULT ( STDMETHODCALLTYPE *SetZoneActionPolicyEx )( 
             IInternetZoneManagerEx2 * This,
-            /* [in] */ DWORD dwZone,
-            /* [in] */ DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
             /* [annotation][size_is][in] */ 
             _In_reads_(cbPolicy)  BYTE *pPolicy,
-            /* [in] */ DWORD cbPolicy,
-            /* [in] */ URLZONEREG urlZoneReg,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD cbPolicy,
+            /* [annotation][in] */ 
+            _In_  URLZONEREG urlZoneReg,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IInternetZoneManagerEx2, GetZoneAttributesEx)
         HRESULT ( STDMETHODCALLTYPE *GetZoneAttributesEx )( 
             IInternetZoneManagerEx2 * This,
-            /* [in] */ DWORD dwZone,
-            /* [unique][out][in] */ ZONEATTRIBUTES *pZoneAttributes,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwZone,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  ZONEATTRIBUTES *pZoneAttributes,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IInternetZoneManagerEx2, GetZoneSecurityState)
         HRESULT ( STDMETHODCALLTYPE *GetZoneSecurityState )( 
             IInternetZoneManagerEx2 * This,
-            /* [in] */ DWORD dwZoneIndex,
-            /* [in] */ BOOL fRespectPolicy,
-            /* [out][in] */ LPDWORD pdwState,
-            /* [out][in] */ BOOL *pfPolicyEncountered);
+            /* [annotation][in] */ 
+            _In_  DWORD dwZoneIndex,
+            /* [annotation][in] */ 
+            _In_  BOOL fRespectPolicy,
+            /* [annotation][out][in] */ 
+            _Inout_  LPDWORD pdwState,
+            /* [annotation][out][in] */ 
+            _Inout_  BOOL *pfPolicyEncountered);
         
         DECLSPEC_XFGVIRT(IInternetZoneManagerEx2, GetIESecurityState)
         HRESULT ( STDMETHODCALLTYPE *GetIESecurityState )( 
             IInternetZoneManagerEx2 * This,
-            /* [in] */ BOOL fRespectPolicy,
-            /* [out][in] */ LPDWORD pdwState,
-            /* [out][in] */ BOOL *pfPolicyEncountered,
-            /* [in] */ BOOL fNoCache);
+            /* [annotation][in] */ 
+            _In_  BOOL fRespectPolicy,
+            /* [annotation][out][in] */ 
+            _Inout_  LPDWORD pdwState,
+            /* [annotation][out][in] */ 
+            _Inout_  BOOL *pfPolicyEncountered,
+            /* [annotation][in] */ 
+            _In_  BOOL fNoCache);
         
         DECLSPEC_XFGVIRT(IInternetZoneManagerEx2, FixUnsecureSettings)
         HRESULT ( STDMETHODCALLTYPE *FixUnsecureSettings )( 
@@ -9884,25 +10916,34 @@ EXTERN_C const IID IID_ISoftDistExt;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ProcessSoftDist( 
-            /* [in] */ LPCWSTR szCDFURL,
-            /* [in] */ IXMLElement *pSoftDistElement,
-            /* [out][in] */ LPSOFTDISTINFO lpsdi) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szCDFURL,
+            /* [annotation][in] */ 
+            _In_  IXMLElement *pSoftDistElement,
+            /* [annotation][out][in] */ 
+            _Inout_  LPSOFTDISTINFO lpsdi) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFirstCodeBase( 
             /* [annotation][in] */ 
             __RPC__in  LPWSTR *szCodeBase,
-            /* [in] */ LPDWORD dwMaxSize) = 0;
+            /* [annotation][in] */ 
+            _In_  LPDWORD dwMaxSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNextCodeBase( 
             /* [annotation][in] */ 
             __RPC__in  LPWSTR *szCodeBase,
-            /* [in] */ LPDWORD dwMaxSize) = 0;
+            /* [annotation][in] */ 
+            _In_  LPDWORD dwMaxSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AsyncInstallDistributionUnit( 
-            /* [in] */ IBindCtx *pbc,
-            /* [in] */ LPVOID pvReserved,
-            /* [in] */ DWORD flags,
-            /* [in] */ LPCODEBASEHOLD lpcbh) = 0;
+            /* [annotation][in] */ 
+            _In_  IBindCtx *pbc,
+            /* [annotation][in] */ 
+            _In_  LPVOID pvReserved,
+            /* [annotation][in] */ 
+            _In_  DWORD flags,
+            /* [annotation][in] */ 
+            _In_  LPCODEBASEHOLD lpcbh) = 0;
         
     };
     
@@ -9916,7 +10957,8 @@ EXTERN_C const IID IID_ISoftDistExt;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISoftDistExt * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9931,31 +10973,40 @@ EXTERN_C const IID IID_ISoftDistExt;
         DECLSPEC_XFGVIRT(ISoftDistExt, ProcessSoftDist)
         HRESULT ( STDMETHODCALLTYPE *ProcessSoftDist )( 
             ISoftDistExt * This,
-            /* [in] */ LPCWSTR szCDFURL,
-            /* [in] */ IXMLElement *pSoftDistElement,
-            /* [out][in] */ LPSOFTDISTINFO lpsdi);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szCDFURL,
+            /* [annotation][in] */ 
+            _In_  IXMLElement *pSoftDistElement,
+            /* [annotation][out][in] */ 
+            _Inout_  LPSOFTDISTINFO lpsdi);
         
         DECLSPEC_XFGVIRT(ISoftDistExt, GetFirstCodeBase)
         HRESULT ( STDMETHODCALLTYPE *GetFirstCodeBase )( 
             ISoftDistExt * This,
             /* [annotation][in] */ 
             __RPC__in  LPWSTR *szCodeBase,
-            /* [in] */ LPDWORD dwMaxSize);
+            /* [annotation][in] */ 
+            _In_  LPDWORD dwMaxSize);
         
         DECLSPEC_XFGVIRT(ISoftDistExt, GetNextCodeBase)
         HRESULT ( STDMETHODCALLTYPE *GetNextCodeBase )( 
             ISoftDistExt * This,
             /* [annotation][in] */ 
             __RPC__in  LPWSTR *szCodeBase,
-            /* [in] */ LPDWORD dwMaxSize);
+            /* [annotation][in] */ 
+            _In_  LPDWORD dwMaxSize);
         
         DECLSPEC_XFGVIRT(ISoftDistExt, AsyncInstallDistributionUnit)
         HRESULT ( STDMETHODCALLTYPE *AsyncInstallDistributionUnit )( 
             ISoftDistExt * This,
-            /* [in] */ IBindCtx *pbc,
-            /* [in] */ LPVOID pvReserved,
-            /* [in] */ DWORD flags,
-            /* [in] */ LPCODEBASEHOLD lpcbh);
+            /* [annotation][in] */ 
+            _In_  IBindCtx *pbc,
+            /* [annotation][in] */ 
+            _In_  LPVOID pvReserved,
+            /* [annotation][in] */ 
+            _In_  DWORD flags,
+            /* [annotation][in] */ 
+            _In_  LPCODEBASEHOLD lpcbh);
         
         END_INTERFACE
     } ISoftDistExtVtbl;
@@ -10038,7 +11089,8 @@ EXTERN_C const IID IID_ICatalogFileInfo;
             __RPC__out  LPSTR *ppszCatalogFile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetJavaTrust( 
-            /* [out] */ void **ppJavaTrust) = 0;
+            /* [annotation][out] */ 
+            _Out_  void **ppJavaTrust) = 0;
         
     };
     
@@ -10052,7 +11104,8 @@ EXTERN_C const IID IID_ICatalogFileInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICatalogFileInfo * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10073,7 +11126,8 @@ EXTERN_C const IID IID_ICatalogFileInfo;
         DECLSPEC_XFGVIRT(ICatalogFileInfo, GetJavaTrust)
         HRESULT ( STDMETHODCALLTYPE *GetJavaTrust )( 
             ICatalogFileInfo * This,
-            /* [out] */ void **ppJavaTrust);
+            /* [annotation][out] */ 
+            _Out_  void **ppJavaTrust);
         
         END_INTERFACE
     } ICatalogFileInfoVtbl;
@@ -10144,29 +11198,48 @@ EXTERN_C const IID IID_IDataFilter;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE DoEncode( 
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ LONG lInBufferSize,
-            /* [size_is][in] */ __RPC__in_ecount_full(lInBufferSize) BYTE *pbInBuffer,
-            /* [in] */ LONG lOutBufferSize,
-            /* [size_is][out] */ __RPC__out_ecount_full(lOutBufferSize) BYTE *pbOutBuffer,
-            /* [in] */ LONG lInBytesAvailable,
-            /* [out] */ __RPC__out LONG *plInBytesRead,
-            /* [out] */ __RPC__out LONG *plOutBytesWritten,
-            /* [in] */ DWORD dwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  LONG lInBufferSize,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(lInBufferSize)  BYTE *pbInBuffer,
+            /* [annotation][in] */ 
+            _In_  LONG lOutBufferSize,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(lOutBufferSize)  BYTE *pbOutBuffer,
+            /* [annotation][in] */ 
+            _In_  LONG lInBytesAvailable,
+            /* [annotation][out] */ 
+            _Out_  LONG *plInBytesRead,
+            /* [annotation][out] */ 
+            _Out_  LONG *plOutBytesWritten,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DoDecode( 
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ LONG lInBufferSize,
-            /* [size_is][in] */ __RPC__in_ecount_full(lInBufferSize) BYTE *pbInBuffer,
-            /* [in] */ LONG lOutBufferSize,
-            /* [size_is][out] */ __RPC__out_ecount_full(lOutBufferSize) BYTE *pbOutBuffer,
-            /* [in] */ LONG lInBytesAvailable,
-            /* [out] */ __RPC__out LONG *plInBytesRead,
-            /* [out] */ __RPC__out LONG *plOutBytesWritten,
-            /* [in] */ DWORD dwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  LONG lInBufferSize,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(lInBufferSize)  BYTE *pbInBuffer,
+            /* [annotation][in] */ 
+            _In_  LONG lOutBufferSize,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(lOutBufferSize)  BYTE *pbOutBuffer,
+            /* [annotation][in] */ 
+            _In_  LONG lInBytesAvailable,
+            /* [annotation][out] */ 
+            _Out_  LONG *plInBytesRead,
+            /* [annotation][out] */ 
+            _Out_  LONG *plOutBytesWritten,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetEncodingLevel( 
-            /* [in] */ DWORD dwEncLevel) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwEncLevel) = 0;
         
     };
     
@@ -10180,7 +11253,8 @@ EXTERN_C const IID IID_IDataFilter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDataFilter * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10195,33 +11269,52 @@ EXTERN_C const IID IID_IDataFilter;
         DECLSPEC_XFGVIRT(IDataFilter, DoEncode)
         HRESULT ( STDMETHODCALLTYPE *DoEncode )( 
             __RPC__in IDataFilter * This,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ LONG lInBufferSize,
-            /* [size_is][in] */ __RPC__in_ecount_full(lInBufferSize) BYTE *pbInBuffer,
-            /* [in] */ LONG lOutBufferSize,
-            /* [size_is][out] */ __RPC__out_ecount_full(lOutBufferSize) BYTE *pbOutBuffer,
-            /* [in] */ LONG lInBytesAvailable,
-            /* [out] */ __RPC__out LONG *plInBytesRead,
-            /* [out] */ __RPC__out LONG *plOutBytesWritten,
-            /* [in] */ DWORD dwReserved);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  LONG lInBufferSize,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(lInBufferSize)  BYTE *pbInBuffer,
+            /* [annotation][in] */ 
+            _In_  LONG lOutBufferSize,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(lOutBufferSize)  BYTE *pbOutBuffer,
+            /* [annotation][in] */ 
+            _In_  LONG lInBytesAvailable,
+            /* [annotation][out] */ 
+            _Out_  LONG *plInBytesRead,
+            /* [annotation][out] */ 
+            _Out_  LONG *plOutBytesWritten,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved);
         
         DECLSPEC_XFGVIRT(IDataFilter, DoDecode)
         HRESULT ( STDMETHODCALLTYPE *DoDecode )( 
             __RPC__in IDataFilter * This,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ LONG lInBufferSize,
-            /* [size_is][in] */ __RPC__in_ecount_full(lInBufferSize) BYTE *pbInBuffer,
-            /* [in] */ LONG lOutBufferSize,
-            /* [size_is][out] */ __RPC__out_ecount_full(lOutBufferSize) BYTE *pbOutBuffer,
-            /* [in] */ LONG lInBytesAvailable,
-            /* [out] */ __RPC__out LONG *plInBytesRead,
-            /* [out] */ __RPC__out LONG *plOutBytesWritten,
-            /* [in] */ DWORD dwReserved);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  LONG lInBufferSize,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(lInBufferSize)  BYTE *pbInBuffer,
+            /* [annotation][in] */ 
+            _In_  LONG lOutBufferSize,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(lOutBufferSize)  BYTE *pbOutBuffer,
+            /* [annotation][in] */ 
+            _In_  LONG lInBytesAvailable,
+            /* [annotation][out] */ 
+            _Out_  LONG *plInBytesRead,
+            /* [annotation][out] */ 
+            _Out_  LONG *plOutBytesWritten,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved);
         
         DECLSPEC_XFGVIRT(IDataFilter, SetEncodingLevel)
         HRESULT ( STDMETHODCALLTYPE *SetEncodingLevel )( 
             __RPC__in IDataFilter * This,
-            /* [in] */ DWORD dwEncLevel);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEncLevel);
         
         END_INTERFACE
     } IDataFilterVtbl;
@@ -10312,15 +11405,22 @@ EXTERN_C const IID IID_IEncodingFilterFactory;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE FindBestFilter( 
-            /* [in] */ LPCWSTR pwzCodeIn,
-            /* [in] */ LPCWSTR pwzCodeOut,
-            /* [in] */ DATAINFO info,
-            /* [out] */ IDataFilter **ppDF) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzCodeIn,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzCodeOut,
+            /* [annotation][in] */ 
+            _In_  DATAINFO info,
+            /* [annotation][out] */ 
+            _Out_  IDataFilter **ppDF) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDefaultFilter( 
-            /* [in] */ LPCWSTR pwzCodeIn,
-            /* [in] */ LPCWSTR pwzCodeOut,
-            /* [out] */ IDataFilter **ppDF) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzCodeIn,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzCodeOut,
+            /* [annotation][out] */ 
+            _Out_  IDataFilter **ppDF) = 0;
         
     };
     
@@ -10334,7 +11434,8 @@ EXTERN_C const IID IID_IEncodingFilterFactory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEncodingFilterFactory * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10349,17 +11450,24 @@ EXTERN_C const IID IID_IEncodingFilterFactory;
         DECLSPEC_XFGVIRT(IEncodingFilterFactory, FindBestFilter)
         HRESULT ( STDMETHODCALLTYPE *FindBestFilter )( 
             IEncodingFilterFactory * This,
-            /* [in] */ LPCWSTR pwzCodeIn,
-            /* [in] */ LPCWSTR pwzCodeOut,
-            /* [in] */ DATAINFO info,
-            /* [out] */ IDataFilter **ppDF);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzCodeIn,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzCodeOut,
+            /* [annotation][in] */ 
+            _In_  DATAINFO info,
+            /* [annotation][out] */ 
+            _Out_  IDataFilter **ppDF);
         
         DECLSPEC_XFGVIRT(IEncodingFilterFactory, GetDefaultFilter)
         HRESULT ( STDMETHODCALLTYPE *GetDefaultFilter )( 
             IEncodingFilterFactory * This,
-            /* [in] */ LPCWSTR pwzCodeIn,
-            /* [in] */ LPCWSTR pwzCodeOut,
-            /* [out] */ IDataFilter **ppDF);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzCodeIn,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzCodeOut,
+            /* [annotation][out] */ 
+            _Out_  IDataFilter **ppDF);
         
         END_INTERFACE
     } IEncodingFilterFactoryVtbl;
@@ -10461,8 +11569,10 @@ EXTERN_C const IID IID_IWrappedProtocol;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetWrapperCode( 
-            /* [out] */ LONG *pnCode,
-            /* [in] */ DWORD_PTR dwReserved) = 0;
+            /* [annotation][out] */ 
+            _Out_  LONG *pnCode,
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwReserved) = 0;
         
     };
     
@@ -10476,7 +11586,8 @@ EXTERN_C const IID IID_IWrappedProtocol;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWrappedProtocol * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10491,8 +11602,10 @@ EXTERN_C const IID IID_IWrappedProtocol;
         DECLSPEC_XFGVIRT(IWrappedProtocol, GetWrapperCode)
         HRESULT ( STDMETHODCALLTYPE *GetWrapperCode )( 
             IWrappedProtocol * This,
-            /* [out] */ LONG *pnCode,
-            /* [in] */ DWORD_PTR dwReserved);
+            /* [annotation][out] */ 
+            _Out_  LONG *pnCode,
+            /* [annotation][in] */ 
+            _In_  DWORD_PTR dwReserved);
         
         END_INTERFACE
     } IWrappedProtocolVtbl;
@@ -10568,8 +11681,10 @@ EXTERN_C const IID IID_IGetBindHandle;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetBindHandle( 
-            /* [in] */ BINDHANDLETYPES enumRequestedHandle,
-            /* [out] */ HANDLE *pRetHandle) = 0;
+            /* [annotation][in] */ 
+            _In_  BINDHANDLETYPES enumRequestedHandle,
+            /* [annotation][out] */ 
+            _Out_  HANDLE *pRetHandle) = 0;
         
     };
     
@@ -10583,7 +11698,8 @@ EXTERN_C const IID IID_IGetBindHandle;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IGetBindHandle * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10598,8 +11714,10 @@ EXTERN_C const IID IID_IGetBindHandle;
         DECLSPEC_XFGVIRT(IGetBindHandle, GetBindHandle)
         HRESULT ( STDMETHODCALLTYPE *GetBindHandle )( 
             IGetBindHandle * This,
-            /* [in] */ BINDHANDLETYPES enumRequestedHandle,
-            /* [out] */ HANDLE *pRetHandle);
+            /* [annotation][in] */ 
+            _In_  BINDHANDLETYPES enumRequestedHandle,
+            /* [annotation][out] */ 
+            _Out_  HANDLE *pRetHandle);
         
         END_INTERFACE
     } IGetBindHandleVtbl;
@@ -10678,8 +11796,10 @@ EXTERN_C const IID IID_IBindCallbackRedirect;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Redirect( 
-            /* [in] */ LPCWSTR lpcUrl,
-            /* [out] */ VARIANT_BOOL *vbCancel) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR lpcUrl,
+            /* [annotation][out] */ 
+            _Out_  VARIANT_BOOL *vbCancel) = 0;
         
     };
     
@@ -10693,7 +11813,8 @@ EXTERN_C const IID IID_IBindCallbackRedirect;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IBindCallbackRedirect * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10708,8 +11829,10 @@ EXTERN_C const IID IID_IBindCallbackRedirect;
         DECLSPEC_XFGVIRT(IBindCallbackRedirect, Redirect)
         HRESULT ( STDMETHODCALLTYPE *Redirect )( 
             IBindCallbackRedirect * This,
-            /* [in] */ LPCWSTR lpcUrl,
-            /* [out] */ VARIANT_BOOL *vbCancel);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR lpcUrl,
+            /* [annotation][out] */ 
+            _Out_  VARIANT_BOOL *vbCancel);
         
         END_INTERFACE
     } IBindCallbackRedirectVtbl;
@@ -10789,7 +11912,8 @@ EXTERN_C const IID IID_IBindHttpSecurity;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBindHttpSecurity * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10881,126 +12005,191 @@ void                      __RPC_USER  HWND_UserFree64(     __RPC__in unsigned lo
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IBinding_GetBindResult_Proxy( 
     IBinding * This,
-    /* [out] */ CLSID *pclsidProtocol,
-    /* [out] */ DWORD *pdwResult,
+    /* [annotation][out] */ 
+    _Out_  CLSID *pclsidProtocol,
+    /* [annotation][out] */ 
+    _Out_  DWORD *pdwResult,
     /* [annotation][out] */ 
     __RPC__out  LPOLESTR *pszResult,
-    /* [out][in] */ DWORD *pdwReserved);
+    /* [annotation][out][in] */ 
+    _Inout_  DWORD *pdwReserved);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IBinding_GetBindResult_Stub( 
     __RPC__in IBinding * This,
-    /* [out] */ __RPC__out CLSID *pclsidProtocol,
-    /* [out] */ __RPC__out DWORD *pdwResult,
-    /* [out] */ __RPC__deref_out_opt LPOLESTR *pszResult,
-    /* [in] */ DWORD dwReserved);
+    /* [annotation][out] */ 
+    _Out_  CLSID *pclsidProtocol,
+    /* [annotation][out] */ 
+    _Out_  DWORD *pdwResult,
+    /* [annotation][out] */ 
+    _Out_  LPOLESTR *pszResult,
+    /* [annotation][in] */ 
+    _In_  DWORD dwReserved);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IBindStatusCallback_GetBindInfo_Proxy( 
     IBindStatusCallback * This,
-    /* [out] */ DWORD *grfBINDF,
-    /* [unique][out][in] */ BINDINFO *pbindinfo);
+    /* [annotation][out] */ 
+    _Out_  DWORD *grfBINDF,
+    /* [annotation][unique][out][in] */ 
+    _Inout_  BINDINFO *pbindinfo);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IBindStatusCallback_GetBindInfo_Stub( 
     __RPC__in IBindStatusCallback * This,
-    /* [out] */ __RPC__out DWORD *grfBINDF,
-    /* [unique][out][in] */ __RPC__inout_opt RemBINDINFO *pbindinfo,
-    /* [unique][out][in] */ __RPC__inout_opt RemSTGMEDIUM *pstgmed);
+    /* [annotation][out] */ 
+    _Out_  DWORD *grfBINDF,
+    /* [annotation][unique][out][in] */ 
+    _Inout_  RemBINDINFO *pbindinfo,
+    /* [annotation][unique][out][in] */ 
+    _Inout_  RemSTGMEDIUM *pstgmed);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IBindStatusCallback_OnDataAvailable_Proxy( 
     IBindStatusCallback * This,
-    /* [in] */ DWORD grfBSCF,
-    /* [in] */ DWORD dwSize,
-    /* [in] */ FORMATETC *pformatetc,
-    /* [in] */ STGMEDIUM *pstgmed);
+    /* [annotation][in] */ 
+    _In_  DWORD grfBSCF,
+    /* [annotation][in] */ 
+    _In_  DWORD dwSize,
+    /* [annotation][in] */ 
+    _In_  FORMATETC *pformatetc,
+    /* [annotation][in] */ 
+    _In_  STGMEDIUM *pstgmed);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IBindStatusCallback_OnDataAvailable_Stub( 
     __RPC__in IBindStatusCallback * This,
-    /* [in] */ DWORD grfBSCF,
-    /* [in] */ DWORD dwSize,
-    /* [in] */ __RPC__in RemFORMATETC *pformatetc,
-    /* [in] */ __RPC__in RemSTGMEDIUM *pstgmed);
+    /* [annotation][in] */ 
+    _In_  DWORD grfBSCF,
+    /* [annotation][in] */ 
+    _In_  DWORD dwSize,
+    /* [annotation][in] */ 
+    _In_  RemFORMATETC *pformatetc,
+    /* [annotation][in] */ 
+    _In_  RemSTGMEDIUM *pstgmed);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IBindStatusCallbackEx_GetBindInfoEx_Proxy( 
     IBindStatusCallbackEx * This,
-    /* [out] */ DWORD *grfBINDF,
-    /* [unique][out][in] */ BINDINFO *pbindinfo,
-    /* [out] */ DWORD *grfBINDF2,
-    /* [out] */ DWORD *pdwReserved);
+    /* [annotation][out] */ 
+    _Out_  DWORD *grfBINDF,
+    /* [annotation][unique][out][in] */ 
+    _Inout_  BINDINFO *pbindinfo,
+    /* [annotation][out] */ 
+    _Out_  DWORD *grfBINDF2,
+    /* [annotation][out] */ 
+    _Out_  DWORD *pdwReserved);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IBindStatusCallbackEx_GetBindInfoEx_Stub( 
     __RPC__in IBindStatusCallbackEx * This,
-    /* [out] */ __RPC__out DWORD *grfBINDF,
-    /* [unique][out][in] */ __RPC__inout_opt RemBINDINFO *pbindinfo,
-    /* [unique][out][in] */ __RPC__inout_opt RemSTGMEDIUM *pstgmed,
-    /* [out] */ __RPC__out DWORD *grfBINDF2,
-    /* [out] */ __RPC__out DWORD *pdwReserved);
+    /* [annotation][out] */ 
+    _Out_  DWORD *grfBINDF,
+    /* [annotation][unique][out][in] */ 
+    _Inout_  RemBINDINFO *pbindinfo,
+    /* [annotation][unique][out][in] */ 
+    _Inout_  RemSTGMEDIUM *pstgmed,
+    /* [annotation][out] */ 
+    _Out_  DWORD *grfBINDF2,
+    /* [annotation][out] */ 
+    _Out_  DWORD *pdwReserved);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IWinInetInfo_QueryOption_Proxy( 
     IWinInetInfo * This,
-    /* [in] */ DWORD dwOption,
-    /* [size_is][out][in] */ LPVOID pBuffer,
-    /* [out][in] */ DWORD *pcbBuf);
+    /* [annotation][in] */ 
+    _In_  DWORD dwOption,
+    /* [annotation][size_is][out][in] */ 
+    _Inout_updates_(*pcbBuf)  LPVOID pBuffer,
+    /* [annotation][out][in] */ 
+    _Inout_  DWORD *pcbBuf);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IWinInetInfo_QueryOption_Stub( 
     __RPC__in IWinInetInfo * This,
-    /* [in] */ DWORD dwOption,
-    /* [size_is][out][in] */ __RPC__inout_ecount_full(*pcbBuf) BYTE *pBuffer,
-    /* [out][in] */ __RPC__inout DWORD *pcbBuf);
+    /* [annotation][in] */ 
+    _In_  DWORD dwOption,
+    /* [annotation][size_is][out][in] */ 
+    _Inout_updates_(*pcbBuf)  BYTE *pBuffer,
+    /* [annotation][out][in] */ 
+    _Inout_  DWORD *pcbBuf);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IWinInetHttpInfo_QueryInfo_Proxy( 
     IWinInetHttpInfo * This,
-    /* [in] */ DWORD dwOption,
-    /* [size_is][out][in] */ LPVOID pBuffer,
-    /* [out][in] */ DWORD *pcbBuf,
-    /* [out][in] */ DWORD *pdwFlags,
-    /* [out][in] */ DWORD *pdwReserved);
+    /* [annotation][in] */ 
+    _In_  DWORD dwOption,
+    /* [annotation][size_is][out][in] */ 
+    _Inout_updates_(*pcbBuf)  LPVOID pBuffer,
+    /* [annotation][out][in] */ 
+    _Inout_  DWORD *pcbBuf,
+    /* [annotation][out][in] */ 
+    _Inout_  DWORD *pdwFlags,
+    /* [annotation][out][in] */ 
+    _Inout_  DWORD *pdwReserved);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IWinInetHttpInfo_QueryInfo_Stub( 
     __RPC__in IWinInetHttpInfo * This,
-    /* [in] */ DWORD dwOption,
-    /* [size_is][out][in] */ __RPC__inout_ecount_full(*pcbBuf) BYTE *pBuffer,
-    /* [out][in] */ __RPC__inout DWORD *pcbBuf,
-    /* [out][in] */ __RPC__inout DWORD *pdwFlags,
-    /* [out][in] */ __RPC__inout DWORD *pdwReserved);
+    /* [annotation][in] */ 
+    _In_  DWORD dwOption,
+    /* [annotation][size_is][out][in] */ 
+    _Inout_updates_(*pcbBuf)  BYTE *pBuffer,
+    /* [annotation][out][in] */ 
+    _Inout_  DWORD *pcbBuf,
+    /* [annotation][out][in] */ 
+    _Inout_  DWORD *pdwFlags,
+    /* [annotation][out][in] */ 
+    _Inout_  DWORD *pdwReserved);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IBindHost_MonikerBindToStorage_Proxy( 
     IBindHost * This,
-    /* [in] */ IMoniker *pMk,
-    /* [in] */ IBindCtx *pBC,
-    /* [in] */ IBindStatusCallback *pBSC,
-    /* [in] */ REFIID riid,
-    /* [out] */ void **ppvObj);
+    /* [annotation][in] */ 
+    _In_  IMoniker *pMk,
+    /* [annotation][in] */ 
+    _In_  IBindCtx *pBC,
+    /* [annotation][in] */ 
+    _In_  IBindStatusCallback *pBSC,
+    /* [annotation][in] */ 
+    _In_  REFIID riid,
+    /* [annotation][out] */ 
+    _Out_  void **ppvObj);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IBindHost_MonikerBindToStorage_Stub( 
     __RPC__in IBindHost * This,
-    /* [unique][in] */ __RPC__in_opt IMoniker *pMk,
-    /* [unique][in] */ __RPC__in_opt IBindCtx *pBC,
-    /* [unique][in] */ __RPC__in_opt IBindStatusCallback *pBSC,
-    /* [in] */ __RPC__in REFIID riid,
-    /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppvObj);
+    /* [annotation][unique][in] */ 
+    _In_  IMoniker *pMk,
+    /* [annotation][unique][in] */ 
+    _In_  IBindCtx *pBC,
+    /* [annotation][unique][in] */ 
+    _In_  IBindStatusCallback *pBSC,
+    /* [annotation][in] */ 
+    _In_  REFIID riid,
+    /* [annotation][iid_is][out] */ 
+    _COM_Outptr_  IUnknown **ppvObj);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IBindHost_MonikerBindToObject_Proxy( 
     IBindHost * This,
-    /* [in] */ IMoniker *pMk,
-    /* [in] */ IBindCtx *pBC,
-    /* [in] */ IBindStatusCallback *pBSC,
-    /* [in] */ REFIID riid,
-    /* [out] */ void **ppvObj);
+    /* [annotation][in] */ 
+    _In_  IMoniker *pMk,
+    /* [annotation][in] */ 
+    _In_  IBindCtx *pBC,
+    /* [annotation][in] */ 
+    _In_  IBindStatusCallback *pBSC,
+    /* [annotation][in] */ 
+    _In_  REFIID riid,
+    /* [annotation][out] */ 
+    _Out_  void **ppvObj);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IBindHost_MonikerBindToObject_Stub( 
     __RPC__in IBindHost * This,
-    /* [unique][in] */ __RPC__in_opt IMoniker *pMk,
-    /* [unique][in] */ __RPC__in_opt IBindCtx *pBC,
-    /* [unique][in] */ __RPC__in_opt IBindStatusCallback *pBSC,
-    /* [in] */ __RPC__in REFIID riid,
-    /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppvObj);
+    /* [annotation][unique][in] */ 
+    _In_  IMoniker *pMk,
+    /* [annotation][unique][in] */ 
+    _In_  IBindCtx *pBC,
+    /* [annotation][unique][in] */ 
+    _In_  IBindStatusCallback *pBSC,
+    /* [annotation][in] */ 
+    _In_  REFIID riid,
+    /* [annotation][iid_is][out] */ 
+    _COM_Outptr_  IUnknown **ppvObj);
 
 
 

@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -362,12 +362,16 @@ EXTERN_C const IID IID_ITsSbPlugin;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [in] */ __RPC__in_opt ITsSbProvider *pProvider,
-            /* [in] */ __RPC__in_opt ITsSbPluginNotifySink *pNotifySink,
-            /* [in] */ __RPC__in_opt ITsSbPluginPropertySet *pPropertySet) = 0;
+            /* [annotation][in] */ 
+            _In_  ITsSbProvider *pProvider,
+            /* [annotation][in] */ 
+            _In_  ITsSbPluginNotifySink *pNotifySink,
+            /* [annotation][in] */ 
+            _In_  ITsSbPluginPropertySet *pPropertySet) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Terminate( 
-            /* [in] */ HRESULT hr) = 0;
+            /* [annotation][in] */ 
+            _In_  HRESULT hr) = 0;
         
     };
     
@@ -381,7 +385,8 @@ EXTERN_C const IID IID_ITsSbPlugin;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbPlugin * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -396,14 +401,18 @@ EXTERN_C const IID IID_ITsSbPlugin;
         DECLSPEC_XFGVIRT(ITsSbPlugin, Initialize)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in ITsSbPlugin * This,
-            /* [in] */ __RPC__in_opt ITsSbProvider *pProvider,
-            /* [in] */ __RPC__in_opt ITsSbPluginNotifySink *pNotifySink,
-            /* [in] */ __RPC__in_opt ITsSbPluginPropertySet *pPropertySet);
+            /* [annotation][in] */ 
+            _In_  ITsSbProvider *pProvider,
+            /* [annotation][in] */ 
+            _In_  ITsSbPluginNotifySink *pNotifySink,
+            /* [annotation][in] */ 
+            _In_  ITsSbPluginPropertySet *pPropertySet);
         
         DECLSPEC_XFGVIRT(ITsSbPlugin, Terminate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Terminate )( 
             __RPC__in ITsSbPlugin * This,
-            /* [in] */ HRESULT hr);
+            /* [annotation][in] */ 
+            _In_  HRESULT hr);
         
         END_INTERFACE
     } ITsSbPluginVtbl;
@@ -472,7 +481,8 @@ EXTERN_C const IID IID_ITsSbResourcePlugin;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbResourcePlugin * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -487,14 +497,18 @@ EXTERN_C const IID IID_ITsSbResourcePlugin;
         DECLSPEC_XFGVIRT(ITsSbPlugin, Initialize)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in ITsSbResourcePlugin * This,
-            /* [in] */ __RPC__in_opt ITsSbProvider *pProvider,
-            /* [in] */ __RPC__in_opt ITsSbPluginNotifySink *pNotifySink,
-            /* [in] */ __RPC__in_opt ITsSbPluginPropertySet *pPropertySet);
+            /* [annotation][in] */ 
+            _In_  ITsSbProvider *pProvider,
+            /* [annotation][in] */ 
+            _In_  ITsSbPluginNotifySink *pNotifySink,
+            /* [annotation][in] */ 
+            _In_  ITsSbPluginPropertySet *pPropertySet);
         
         DECLSPEC_XFGVIRT(ITsSbPlugin, Terminate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Terminate )( 
             __RPC__in ITsSbResourcePlugin * This,
-            /* [in] */ HRESULT hr);
+            /* [annotation][in] */ 
+            _In_  HRESULT hr);
         
         END_INTERFACE
     } ITsSbResourcePluginVtbl;
@@ -568,7 +582,8 @@ EXTERN_C const IID IID_ITsSbServiceNotification;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbServiceNotification * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -644,8 +659,10 @@ EXTERN_C const IID IID_ITsSbLoadBalancing;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetMostSuitableTarget( 
-            /* [in] */ __RPC__in_opt ITsSbClientConnection *pConnection,
-            /* [in] */ __RPC__in_opt ITsSbLoadBalancingNotifySink *pLBSink) = 0;
+            /* [annotation][in] */ 
+            _In_  ITsSbClientConnection *pConnection,
+            /* [annotation][in] */ 
+            _In_  ITsSbLoadBalancingNotifySink *pLBSink) = 0;
         
     };
     
@@ -659,7 +676,8 @@ EXTERN_C const IID IID_ITsSbLoadBalancing;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbLoadBalancing * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -674,20 +692,26 @@ EXTERN_C const IID IID_ITsSbLoadBalancing;
         DECLSPEC_XFGVIRT(ITsSbPlugin, Initialize)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in ITsSbLoadBalancing * This,
-            /* [in] */ __RPC__in_opt ITsSbProvider *pProvider,
-            /* [in] */ __RPC__in_opt ITsSbPluginNotifySink *pNotifySink,
-            /* [in] */ __RPC__in_opt ITsSbPluginPropertySet *pPropertySet);
+            /* [annotation][in] */ 
+            _In_  ITsSbProvider *pProvider,
+            /* [annotation][in] */ 
+            _In_  ITsSbPluginNotifySink *pNotifySink,
+            /* [annotation][in] */ 
+            _In_  ITsSbPluginPropertySet *pPropertySet);
         
         DECLSPEC_XFGVIRT(ITsSbPlugin, Terminate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Terminate )( 
             __RPC__in ITsSbLoadBalancing * This,
-            /* [in] */ HRESULT hr);
+            /* [annotation][in] */ 
+            _In_  HRESULT hr);
         
         DECLSPEC_XFGVIRT(ITsSbLoadBalancing, GetMostSuitableTarget)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetMostSuitableTarget )( 
             __RPC__in ITsSbLoadBalancing * This,
-            /* [in] */ __RPC__in_opt ITsSbClientConnection *pConnection,
-            /* [in] */ __RPC__in_opt ITsSbLoadBalancingNotifySink *pLBSink);
+            /* [annotation][in] */ 
+            _In_  ITsSbClientConnection *pConnection,
+            /* [annotation][in] */ 
+            _In_  ITsSbLoadBalancingNotifySink *pLBSink);
         
         END_INTERFACE
     } ITsSbLoadBalancingVtbl;
@@ -749,8 +773,10 @@ EXTERN_C const IID IID_ITsSbPlacement;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE QueryEnvironmentForTarget( 
-            /* [in] */ __RPC__in_opt ITsSbClientConnection *pConnection,
-            /* [in] */ __RPC__in_opt ITsSbPlacementNotifySink *pPlacementSink) = 0;
+            /* [annotation][in] */ 
+            _In_  ITsSbClientConnection *pConnection,
+            /* [annotation][in] */ 
+            _In_  ITsSbPlacementNotifySink *pPlacementSink) = 0;
         
     };
     
@@ -764,7 +790,8 @@ EXTERN_C const IID IID_ITsSbPlacement;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbPlacement * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -779,20 +806,26 @@ EXTERN_C const IID IID_ITsSbPlacement;
         DECLSPEC_XFGVIRT(ITsSbPlugin, Initialize)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in ITsSbPlacement * This,
-            /* [in] */ __RPC__in_opt ITsSbProvider *pProvider,
-            /* [in] */ __RPC__in_opt ITsSbPluginNotifySink *pNotifySink,
-            /* [in] */ __RPC__in_opt ITsSbPluginPropertySet *pPropertySet);
+            /* [annotation][in] */ 
+            _In_  ITsSbProvider *pProvider,
+            /* [annotation][in] */ 
+            _In_  ITsSbPluginNotifySink *pNotifySink,
+            /* [annotation][in] */ 
+            _In_  ITsSbPluginPropertySet *pPropertySet);
         
         DECLSPEC_XFGVIRT(ITsSbPlugin, Terminate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Terminate )( 
             __RPC__in ITsSbPlacement * This,
-            /* [in] */ HRESULT hr);
+            /* [annotation][in] */ 
+            _In_  HRESULT hr);
         
         DECLSPEC_XFGVIRT(ITsSbPlacement, QueryEnvironmentForTarget)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *QueryEnvironmentForTarget )( 
             __RPC__in ITsSbPlacement * This,
-            /* [in] */ __RPC__in_opt ITsSbClientConnection *pConnection,
-            /* [in] */ __RPC__in_opt ITsSbPlacementNotifySink *pPlacementSink);
+            /* [annotation][in] */ 
+            _In_  ITsSbClientConnection *pConnection,
+            /* [annotation][in] */ 
+            _In_  ITsSbPlacementNotifySink *pPlacementSink);
         
         END_INTERFACE
     } ITsSbPlacementVtbl;
@@ -854,8 +887,10 @@ EXTERN_C const IID IID_ITsSbOrchestration;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE PrepareTargetForConnect( 
-            /* [in] */ __RPC__in_opt ITsSbClientConnection *pConnection,
-            /* [in] */ __RPC__in_opt ITsSbOrchestrationNotifySink *pOrchestrationNotifySink) = 0;
+            /* [annotation][in] */ 
+            _In_  ITsSbClientConnection *pConnection,
+            /* [annotation][in] */ 
+            _In_  ITsSbOrchestrationNotifySink *pOrchestrationNotifySink) = 0;
         
     };
     
@@ -869,7 +904,8 @@ EXTERN_C const IID IID_ITsSbOrchestration;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbOrchestration * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -884,20 +920,26 @@ EXTERN_C const IID IID_ITsSbOrchestration;
         DECLSPEC_XFGVIRT(ITsSbPlugin, Initialize)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in ITsSbOrchestration * This,
-            /* [in] */ __RPC__in_opt ITsSbProvider *pProvider,
-            /* [in] */ __RPC__in_opt ITsSbPluginNotifySink *pNotifySink,
-            /* [in] */ __RPC__in_opt ITsSbPluginPropertySet *pPropertySet);
+            /* [annotation][in] */ 
+            _In_  ITsSbProvider *pProvider,
+            /* [annotation][in] */ 
+            _In_  ITsSbPluginNotifySink *pNotifySink,
+            /* [annotation][in] */ 
+            _In_  ITsSbPluginPropertySet *pPropertySet);
         
         DECLSPEC_XFGVIRT(ITsSbPlugin, Terminate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Terminate )( 
             __RPC__in ITsSbOrchestration * This,
-            /* [in] */ HRESULT hr);
+            /* [annotation][in] */ 
+            _In_  HRESULT hr);
         
         DECLSPEC_XFGVIRT(ITsSbOrchestration, PrepareTargetForConnect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PrepareTargetForConnect )( 
             __RPC__in ITsSbOrchestration * This,
-            /* [in] */ __RPC__in_opt ITsSbClientConnection *pConnection,
-            /* [in] */ __RPC__in_opt ITsSbOrchestrationNotifySink *pOrchestrationNotifySink);
+            /* [annotation][in] */ 
+            _In_  ITsSbClientConnection *pConnection,
+            /* [annotation][in] */ 
+            _In_  ITsSbOrchestrationNotifySink *pOrchestrationNotifySink);
         
         END_INTERFACE
     } ITsSbOrchestrationVtbl;
@@ -959,16 +1001,20 @@ EXTERN_C const IID IID_ITsSbEnvironment;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ServerWeight( 
-            /* [retval][out] */ __RPC__out DWORD *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EnvironmentPropertySet( 
-            /* [retval][out] */ __RPC__deref_out_opt ITsSbEnvironmentPropertySet **ppPropertySet) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITsSbEnvironmentPropertySet **ppPropertySet) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_EnvironmentPropertySet( 
-            /* [in] */ __RPC__in_opt ITsSbEnvironmentPropertySet *pVal) = 0;
+            /* [annotation][in] */ 
+            _In_  ITsSbEnvironmentPropertySet *pVal) = 0;
         
     };
     
@@ -982,7 +1028,8 @@ EXTERN_C const IID IID_ITsSbEnvironment;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbEnvironment * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -997,22 +1044,26 @@ EXTERN_C const IID IID_ITsSbEnvironment;
         DECLSPEC_XFGVIRT(ITsSbEnvironment, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ITsSbEnvironment * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal);
         
         DECLSPEC_XFGVIRT(ITsSbEnvironment, get_ServerWeight)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ServerWeight )( 
             __RPC__in ITsSbEnvironment * This,
-            /* [retval][out] */ __RPC__out DWORD *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pVal);
         
         DECLSPEC_XFGVIRT(ITsSbEnvironment, get_EnvironmentPropertySet)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnvironmentPropertySet )( 
             __RPC__in ITsSbEnvironment * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITsSbEnvironmentPropertySet **ppPropertySet);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITsSbEnvironmentPropertySet **ppPropertySet);
         
         DECLSPEC_XFGVIRT(ITsSbEnvironment, put_EnvironmentPropertySet)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EnvironmentPropertySet )( 
             __RPC__in ITsSbEnvironment * This,
-            /* [in] */ __RPC__in_opt ITsSbEnvironmentPropertySet *pVal);
+            /* [annotation][in] */ 
+            _In_  ITsSbEnvironmentPropertySet *pVal);
         
         END_INTERFACE
     } ITsSbEnvironmentVtbl;
@@ -1076,7 +1127,8 @@ EXTERN_C const IID IID_ITsSbLoadBalanceResult;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal) = 0;
         
     };
     
@@ -1090,7 +1142,8 @@ EXTERN_C const IID IID_ITsSbLoadBalanceResult;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbLoadBalanceResult * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1105,7 +1158,8 @@ EXTERN_C const IID IID_ITsSbLoadBalanceResult;
         DECLSPEC_XFGVIRT(ITsSbLoadBalanceResult, get_TargetName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TargetName )( 
             __RPC__in ITsSbLoadBalanceResult * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal);
         
         END_INTERFACE
     } ITsSbLoadBalanceResultVtbl;
@@ -1160,63 +1214,84 @@ EXTERN_C const IID IID_ITsSbTarget;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_TargetName( 
-            /* [in] */ __RPC__in BSTR Val) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR Val) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FarmName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_FarmName( 
-            /* [in] */ __RPC__in BSTR Val) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR Val) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetFQDN( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *TargetFqdnName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *TargetFqdnName) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_TargetFQDN( 
-            /* [in] */ __RPC__in BSTR Val) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR Val) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetNetbios( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *TargetNetbiosName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *TargetNetbiosName) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_TargetNetbios( 
-            /* [in] */ __RPC__in BSTR Val) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR Val) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_IpAddresses( 
-            /* [size_is][out] */ __RPC__out_ecount_full(*numAddresses) TSSD_ConnectionPoint *sockaddr,
-            /* [out][in] */ __RPC__inout DWORD *numAddresses) = 0;
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(*numAddresses)  TSSD_ConnectionPoint *sockaddr,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *numAddresses) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_IpAddresses( 
-            /* [size_is][in] */ __RPC__in_ecount_full(numAddresses) TSSD_ConnectionPoint *sockaddr,
-            /* [in] */ DWORD numAddresses) = 0;
+            /* [annotation][size_is][in] */ 
+            _In_reads_(numAddresses)  TSSD_ConnectionPoint *sockaddr,
+            /* [annotation][in] */ 
+            _In_  DWORD numAddresses) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetState( 
-            /* [retval][out] */ __RPC__out TARGET_STATE *pState) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TARGET_STATE *pState) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_TargetState( 
-            /* [in] */ TARGET_STATE State) = 0;
+            /* [annotation][in] */ 
+            _In_  TARGET_STATE State) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetPropertySet( 
-            /* [retval][out] */ __RPC__deref_out_opt ITsSbTargetPropertySet **ppPropertySet) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITsSbTargetPropertySet **ppPropertySet) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_TargetPropertySet( 
-            /* [in] */ __RPC__in_opt ITsSbTargetPropertySet *pVal) = 0;
+            /* [annotation][in] */ 
+            _In_  ITsSbTargetPropertySet *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EnvironmentName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_EnvironmentName( 
-            /* [in] */ __RPC__in BSTR Val) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR Val) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NumSessions( 
-            /* [retval][out] */ __RPC__out DWORD *pNumSessions) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pNumSessions) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NumPendingConnections( 
-            /* [retval][out] */ __RPC__out DWORD *pNumPendingConnections) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pNumPendingConnections) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetLoad( 
-            /* [retval][out] */ __RPC__out DWORD *pTargetLoad) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pTargetLoad) = 0;
         
     };
     
@@ -1230,7 +1305,8 @@ EXTERN_C const IID IID_ITsSbTarget;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbTarget * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1245,99 +1321,120 @@ EXTERN_C const IID IID_ITsSbTarget;
         DECLSPEC_XFGVIRT(ITsSbTarget, get_TargetName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TargetName )( 
             __RPC__in ITsSbTarget * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal);
         
         DECLSPEC_XFGVIRT(ITsSbTarget, put_TargetName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TargetName )( 
             __RPC__in ITsSbTarget * This,
-            /* [in] */ __RPC__in BSTR Val);
+            /* [annotation][in] */ 
+            _In_  BSTR Val);
         
         DECLSPEC_XFGVIRT(ITsSbTarget, get_FarmName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FarmName )( 
             __RPC__in ITsSbTarget * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal);
         
         DECLSPEC_XFGVIRT(ITsSbTarget, put_FarmName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FarmName )( 
             __RPC__in ITsSbTarget * This,
-            /* [in] */ __RPC__in BSTR Val);
+            /* [annotation][in] */ 
+            _In_  BSTR Val);
         
         DECLSPEC_XFGVIRT(ITsSbTarget, get_TargetFQDN)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TargetFQDN )( 
             __RPC__in ITsSbTarget * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *TargetFqdnName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *TargetFqdnName);
         
         DECLSPEC_XFGVIRT(ITsSbTarget, put_TargetFQDN)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TargetFQDN )( 
             __RPC__in ITsSbTarget * This,
-            /* [in] */ __RPC__in BSTR Val);
+            /* [annotation][in] */ 
+            _In_  BSTR Val);
         
         DECLSPEC_XFGVIRT(ITsSbTarget, get_TargetNetbios)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TargetNetbios )( 
             __RPC__in ITsSbTarget * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *TargetNetbiosName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *TargetNetbiosName);
         
         DECLSPEC_XFGVIRT(ITsSbTarget, put_TargetNetbios)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TargetNetbios )( 
             __RPC__in ITsSbTarget * This,
-            /* [in] */ __RPC__in BSTR Val);
+            /* [annotation][in] */ 
+            _In_  BSTR Val);
         
         DECLSPEC_XFGVIRT(ITsSbTarget, get_IpAddresses)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IpAddresses )( 
             __RPC__in ITsSbTarget * This,
-            /* [size_is][out] */ __RPC__out_ecount_full(*numAddresses) TSSD_ConnectionPoint *sockaddr,
-            /* [out][in] */ __RPC__inout DWORD *numAddresses);
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(*numAddresses)  TSSD_ConnectionPoint *sockaddr,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *numAddresses);
         
         DECLSPEC_XFGVIRT(ITsSbTarget, put_IpAddresses)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_IpAddresses )( 
             __RPC__in ITsSbTarget * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(numAddresses) TSSD_ConnectionPoint *sockaddr,
-            /* [in] */ DWORD numAddresses);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(numAddresses)  TSSD_ConnectionPoint *sockaddr,
+            /* [annotation][in] */ 
+            _In_  DWORD numAddresses);
         
         DECLSPEC_XFGVIRT(ITsSbTarget, get_TargetState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TargetState )( 
             __RPC__in ITsSbTarget * This,
-            /* [retval][out] */ __RPC__out TARGET_STATE *pState);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TARGET_STATE *pState);
         
         DECLSPEC_XFGVIRT(ITsSbTarget, put_TargetState)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TargetState )( 
             __RPC__in ITsSbTarget * This,
-            /* [in] */ TARGET_STATE State);
+            /* [annotation][in] */ 
+            _In_  TARGET_STATE State);
         
         DECLSPEC_XFGVIRT(ITsSbTarget, get_TargetPropertySet)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TargetPropertySet )( 
             __RPC__in ITsSbTarget * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITsSbTargetPropertySet **ppPropertySet);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITsSbTargetPropertySet **ppPropertySet);
         
         DECLSPEC_XFGVIRT(ITsSbTarget, put_TargetPropertySet)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TargetPropertySet )( 
             __RPC__in ITsSbTarget * This,
-            /* [in] */ __RPC__in_opt ITsSbTargetPropertySet *pVal);
+            /* [annotation][in] */ 
+            _In_  ITsSbTargetPropertySet *pVal);
         
         DECLSPEC_XFGVIRT(ITsSbTarget, get_EnvironmentName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnvironmentName )( 
             __RPC__in ITsSbTarget * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal);
         
         DECLSPEC_XFGVIRT(ITsSbTarget, put_EnvironmentName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EnvironmentName )( 
             __RPC__in ITsSbTarget * This,
-            /* [in] */ __RPC__in BSTR Val);
+            /* [annotation][in] */ 
+            _In_  BSTR Val);
         
         DECLSPEC_XFGVIRT(ITsSbTarget, get_NumSessions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NumSessions )( 
             __RPC__in ITsSbTarget * This,
-            /* [retval][out] */ __RPC__out DWORD *pNumSessions);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pNumSessions);
         
         DECLSPEC_XFGVIRT(ITsSbTarget, get_NumPendingConnections)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NumPendingConnections )( 
             __RPC__in ITsSbTarget * This,
-            /* [retval][out] */ __RPC__out DWORD *pNumPendingConnections);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pNumPendingConnections);
         
         DECLSPEC_XFGVIRT(ITsSbTarget, get_TargetLoad)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TargetLoad )( 
             __RPC__in ITsSbTarget * This,
-            /* [retval][out] */ __RPC__out DWORD *pTargetLoad);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pTargetLoad);
         
         END_INTERFACE
     } ITsSbTargetVtbl;
@@ -1446,55 +1543,72 @@ EXTERN_C const IID IID_ITsSbSession;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SessionId( 
-            /* [retval][out] */ __RPC__out DWORD *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *targetName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *targetName) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_TargetName( 
-            /* [in] */ __RPC__in BSTR targetName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR targetName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Username( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *userName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *userName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Domain( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *domain) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *domain) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_State( 
-            /* [retval][out] */ __RPC__out TSSESSION_STATE *pState) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TSSESSION_STATE *pState) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_State( 
-            /* [in] */ TSSESSION_STATE State) = 0;
+            /* [annotation][in] */ 
+            _In_  TSSESSION_STATE State) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CreateTime( 
-            /* [retval][out] */ __RPC__out FILETIME *pTime) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FILETIME *pTime) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_CreateTime( 
-            /* [in] */ FILETIME Time) = 0;
+            /* [annotation][in] */ 
+            _In_  FILETIME Time) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DisconnectTime( 
-            /* [retval][out] */ __RPC__out FILETIME *pTime) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FILETIME *pTime) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_DisconnectTime( 
-            /* [in] */ FILETIME Time) = 0;
+            /* [annotation][in] */ 
+            _In_  FILETIME Time) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InitialProgram( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *app) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *app) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_InitialProgram( 
-            /* [in] */ __RPC__in BSTR Application) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR Application) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ClientDisplay( 
-            /* [retval][out] */ __RPC__out CLIENT_DISPLAY *pClientDisplay) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CLIENT_DISPLAY *pClientDisplay) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ClientDisplay( 
-            /* [in] */ CLIENT_DISPLAY pClientDisplay) = 0;
+            /* [annotation][in] */ 
+            _In_  CLIENT_DISPLAY pClientDisplay) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ProtocolType( 
-            /* [retval][out] */ __RPC__out DWORD *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ProtocolType( 
-            /* [in] */ DWORD Val) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD Val) = 0;
         
     };
     
@@ -1508,7 +1622,8 @@ EXTERN_C const IID IID_ITsSbSession;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbSession * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1523,87 +1638,104 @@ EXTERN_C const IID IID_ITsSbSession;
         DECLSPEC_XFGVIRT(ITsSbSession, get_SessionId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SessionId )( 
             __RPC__in ITsSbSession * This,
-            /* [retval][out] */ __RPC__out DWORD *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pVal);
         
         DECLSPEC_XFGVIRT(ITsSbSession, get_TargetName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TargetName )( 
             __RPC__in ITsSbSession * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *targetName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *targetName);
         
         DECLSPEC_XFGVIRT(ITsSbSession, put_TargetName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TargetName )( 
             __RPC__in ITsSbSession * This,
-            /* [in] */ __RPC__in BSTR targetName);
+            /* [annotation][in] */ 
+            _In_  BSTR targetName);
         
         DECLSPEC_XFGVIRT(ITsSbSession, get_Username)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Username )( 
             __RPC__in ITsSbSession * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *userName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *userName);
         
         DECLSPEC_XFGVIRT(ITsSbSession, get_Domain)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Domain )( 
             __RPC__in ITsSbSession * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *domain);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *domain);
         
         DECLSPEC_XFGVIRT(ITsSbSession, get_State)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in ITsSbSession * This,
-            /* [retval][out] */ __RPC__out TSSESSION_STATE *pState);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TSSESSION_STATE *pState);
         
         DECLSPEC_XFGVIRT(ITsSbSession, put_State)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_State )( 
             __RPC__in ITsSbSession * This,
-            /* [in] */ TSSESSION_STATE State);
+            /* [annotation][in] */ 
+            _In_  TSSESSION_STATE State);
         
         DECLSPEC_XFGVIRT(ITsSbSession, get_CreateTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CreateTime )( 
             __RPC__in ITsSbSession * This,
-            /* [retval][out] */ __RPC__out FILETIME *pTime);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FILETIME *pTime);
         
         DECLSPEC_XFGVIRT(ITsSbSession, put_CreateTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CreateTime )( 
             __RPC__in ITsSbSession * This,
-            /* [in] */ FILETIME Time);
+            /* [annotation][in] */ 
+            _In_  FILETIME Time);
         
         DECLSPEC_XFGVIRT(ITsSbSession, get_DisconnectTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DisconnectTime )( 
             __RPC__in ITsSbSession * This,
-            /* [retval][out] */ __RPC__out FILETIME *pTime);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FILETIME *pTime);
         
         DECLSPEC_XFGVIRT(ITsSbSession, put_DisconnectTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DisconnectTime )( 
             __RPC__in ITsSbSession * This,
-            /* [in] */ FILETIME Time);
+            /* [annotation][in] */ 
+            _In_  FILETIME Time);
         
         DECLSPEC_XFGVIRT(ITsSbSession, get_InitialProgram)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InitialProgram )( 
             __RPC__in ITsSbSession * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *app);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *app);
         
         DECLSPEC_XFGVIRT(ITsSbSession, put_InitialProgram)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InitialProgram )( 
             __RPC__in ITsSbSession * This,
-            /* [in] */ __RPC__in BSTR Application);
+            /* [annotation][in] */ 
+            _In_  BSTR Application);
         
         DECLSPEC_XFGVIRT(ITsSbSession, get_ClientDisplay)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ClientDisplay )( 
             __RPC__in ITsSbSession * This,
-            /* [retval][out] */ __RPC__out CLIENT_DISPLAY *pClientDisplay);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CLIENT_DISPLAY *pClientDisplay);
         
         DECLSPEC_XFGVIRT(ITsSbSession, put_ClientDisplay)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ClientDisplay )( 
             __RPC__in ITsSbSession * This,
-            /* [in] */ CLIENT_DISPLAY pClientDisplay);
+            /* [annotation][in] */ 
+            _In_  CLIENT_DISPLAY pClientDisplay);
         
         DECLSPEC_XFGVIRT(ITsSbSession, get_ProtocolType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProtocolType )( 
             __RPC__in ITsSbSession * This,
-            /* [retval][out] */ __RPC__out DWORD *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pVal);
         
         DECLSPEC_XFGVIRT(ITsSbSession, put_ProtocolType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProtocolType )( 
             __RPC__in ITsSbSession * This,
-            /* [in] */ DWORD Val);
+            /* [annotation][in] */ 
+            _In_  DWORD Val);
         
         END_INTERFACE
     } ITsSbSessionVtbl;
@@ -1706,16 +1838,22 @@ EXTERN_C const IID IID_ITsSbResourceNotification;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE NotifySessionChange( 
-            /* [in] */ TSSESSION_STATE changeType,
-            /* [in] */ __RPC__in_opt ITsSbSession *pSession) = 0;
+            /* [annotation][in] */ 
+            _In_  TSSESSION_STATE changeType,
+            /* [annotation][in] */ 
+            _In_  ITsSbSession *pSession) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE NotifyTargetChange( 
-            /* [in] */ DWORD TargetChangeType,
-            /* [in] */ __RPC__in_opt ITsSbTarget *pTarget) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD TargetChangeType,
+            /* [annotation][in] */ 
+            _In_  ITsSbTarget *pTarget) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE NotifyClientConnectionStateChange( 
-            /* [in] */ CONNECTION_CHANGE_NOTIFICATION ChangeType,
-            /* [in] */ __RPC__in_opt ITsSbClientConnection *pConnection) = 0;
+            /* [annotation][in] */ 
+            _In_  CONNECTION_CHANGE_NOTIFICATION ChangeType,
+            /* [annotation][in] */ 
+            _In_  ITsSbClientConnection *pConnection) = 0;
         
     };
     
@@ -1729,7 +1867,8 @@ EXTERN_C const IID IID_ITsSbResourceNotification;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbResourceNotification * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1744,20 +1883,26 @@ EXTERN_C const IID IID_ITsSbResourceNotification;
         DECLSPEC_XFGVIRT(ITsSbResourceNotification, NotifySessionChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *NotifySessionChange )( 
             __RPC__in ITsSbResourceNotification * This,
-            /* [in] */ TSSESSION_STATE changeType,
-            /* [in] */ __RPC__in_opt ITsSbSession *pSession);
+            /* [annotation][in] */ 
+            _In_  TSSESSION_STATE changeType,
+            /* [annotation][in] */ 
+            _In_  ITsSbSession *pSession);
         
         DECLSPEC_XFGVIRT(ITsSbResourceNotification, NotifyTargetChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *NotifyTargetChange )( 
             __RPC__in ITsSbResourceNotification * This,
-            /* [in] */ DWORD TargetChangeType,
-            /* [in] */ __RPC__in_opt ITsSbTarget *pTarget);
+            /* [annotation][in] */ 
+            _In_  DWORD TargetChangeType,
+            /* [annotation][in] */ 
+            _In_  ITsSbTarget *pTarget);
         
         DECLSPEC_XFGVIRT(ITsSbResourceNotification, NotifyClientConnectionStateChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *NotifyClientConnectionStateChange )( 
             __RPC__in ITsSbResourceNotification * This,
-            /* [in] */ CONNECTION_CHANGE_NOTIFICATION ChangeType,
-            /* [in] */ __RPC__in_opt ITsSbClientConnection *pConnection);
+            /* [annotation][in] */ 
+            _In_  CONNECTION_CHANGE_NOTIFICATION ChangeType,
+            /* [annotation][in] */ 
+            _In_  ITsSbClientConnection *pConnection);
         
         END_INTERFACE
     } ITsSbResourceNotificationVtbl;
@@ -1818,23 +1963,36 @@ EXTERN_C const IID IID_ITsSbResourceNotificationEx;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE NotifySessionChangeEx( 
-            /* [in] */ __RPC__in BSTR targetName,
-            /* [in] */ __RPC__in BSTR userName,
-            /* [in] */ __RPC__in BSTR domain,
-            /* [in] */ DWORD sessionId,
-            /* [in] */ TSSESSION_STATE sessionState) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR targetName,
+            /* [annotation][in] */ 
+            _In_  BSTR userName,
+            /* [annotation][in] */ 
+            _In_  BSTR domain,
+            /* [annotation][in] */ 
+            _In_  DWORD sessionId,
+            /* [annotation][in] */ 
+            _In_  TSSESSION_STATE sessionState) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE NotifyTargetChangeEx( 
-            /* [in] */ __RPC__in BSTR targetName,
-            /* [in] */ DWORD targetChangeType) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR targetName,
+            /* [annotation][in] */ 
+            _In_  DWORD targetChangeType) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE NotifyClientConnectionStateChangeEx( 
-            /* [in] */ __RPC__in BSTR userName,
-            /* [in] */ __RPC__in BSTR domain,
-            /* [in] */ __RPC__in BSTR initialProgram,
-            /* [in] */ __RPC__in BSTR poolName,
-            /* [in] */ __RPC__in BSTR targetName,
-            /* [in] */ CONNECTION_CHANGE_NOTIFICATION connectionChangeType) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR userName,
+            /* [annotation][in] */ 
+            _In_  BSTR domain,
+            /* [annotation][in] */ 
+            _In_  BSTR initialProgram,
+            /* [annotation][in] */ 
+            _In_  BSTR poolName,
+            /* [annotation][in] */ 
+            _In_  BSTR targetName,
+            /* [annotation][in] */ 
+            _In_  CONNECTION_CHANGE_NOTIFICATION connectionChangeType) = 0;
         
     };
     
@@ -1848,7 +2006,8 @@ EXTERN_C const IID IID_ITsSbResourceNotificationEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbResourceNotificationEx * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1863,27 +2022,40 @@ EXTERN_C const IID IID_ITsSbResourceNotificationEx;
         DECLSPEC_XFGVIRT(ITsSbResourceNotificationEx, NotifySessionChangeEx)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *NotifySessionChangeEx )( 
             __RPC__in ITsSbResourceNotificationEx * This,
-            /* [in] */ __RPC__in BSTR targetName,
-            /* [in] */ __RPC__in BSTR userName,
-            /* [in] */ __RPC__in BSTR domain,
-            /* [in] */ DWORD sessionId,
-            /* [in] */ TSSESSION_STATE sessionState);
+            /* [annotation][in] */ 
+            _In_  BSTR targetName,
+            /* [annotation][in] */ 
+            _In_  BSTR userName,
+            /* [annotation][in] */ 
+            _In_  BSTR domain,
+            /* [annotation][in] */ 
+            _In_  DWORD sessionId,
+            /* [annotation][in] */ 
+            _In_  TSSESSION_STATE sessionState);
         
         DECLSPEC_XFGVIRT(ITsSbResourceNotificationEx, NotifyTargetChangeEx)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *NotifyTargetChangeEx )( 
             __RPC__in ITsSbResourceNotificationEx * This,
-            /* [in] */ __RPC__in BSTR targetName,
-            /* [in] */ DWORD targetChangeType);
+            /* [annotation][in] */ 
+            _In_  BSTR targetName,
+            /* [annotation][in] */ 
+            _In_  DWORD targetChangeType);
         
         DECLSPEC_XFGVIRT(ITsSbResourceNotificationEx, NotifyClientConnectionStateChangeEx)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *NotifyClientConnectionStateChangeEx )( 
             __RPC__in ITsSbResourceNotificationEx * This,
-            /* [in] */ __RPC__in BSTR userName,
-            /* [in] */ __RPC__in BSTR domain,
-            /* [in] */ __RPC__in BSTR initialProgram,
-            /* [in] */ __RPC__in BSTR poolName,
-            /* [in] */ __RPC__in BSTR targetName,
-            /* [in] */ CONNECTION_CHANGE_NOTIFICATION connectionChangeType);
+            /* [annotation][in] */ 
+            _In_  BSTR userName,
+            /* [annotation][in] */ 
+            _In_  BSTR domain,
+            /* [annotation][in] */ 
+            _In_  BSTR initialProgram,
+            /* [annotation][in] */ 
+            _In_  BSTR poolName,
+            /* [annotation][in] */ 
+            _In_  BSTR targetName,
+            /* [annotation][in] */ 
+            _In_  CONNECTION_CHANGE_NOTIFICATION connectionChangeType);
         
         END_INTERFACE
     } ITsSbResourceNotificationExVtbl;
@@ -1944,31 +2116,40 @@ EXTERN_C const IID IID_ITsSbTaskInfo;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetId( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StartTime( 
-            /* [retval][out] */ __RPC__out FILETIME *pStartTime) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FILETIME *pStartTime) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EndTime( 
-            /* [retval][out] */ __RPC__out FILETIME *pEndTime) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FILETIME *pEndTime) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Deadline( 
-            /* [retval][out] */ __RPC__out FILETIME *pDeadline) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FILETIME *pDeadline) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Identifier( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pIdentifier) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pIdentifier) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Label( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pLabel) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pLabel) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Context( 
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pContext) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *pContext) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Plugin( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pPlugin) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pPlugin) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Status( 
-            /* [retval][out] */ __RPC__out RDV_TASK_STATUS *pStatus) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RDV_TASK_STATUS *pStatus) = 0;
         
     };
     
@@ -1982,7 +2163,8 @@ EXTERN_C const IID IID_ITsSbTaskInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbTaskInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1997,47 +2179,56 @@ EXTERN_C const IID IID_ITsSbTaskInfo;
         DECLSPEC_XFGVIRT(ITsSbTaskInfo, get_TargetId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TargetId )( 
             __RPC__in ITsSbTaskInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pName);
         
         DECLSPEC_XFGVIRT(ITsSbTaskInfo, get_StartTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartTime )( 
             __RPC__in ITsSbTaskInfo * This,
-            /* [retval][out] */ __RPC__out FILETIME *pStartTime);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FILETIME *pStartTime);
         
         DECLSPEC_XFGVIRT(ITsSbTaskInfo, get_EndTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EndTime )( 
             __RPC__in ITsSbTaskInfo * This,
-            /* [retval][out] */ __RPC__out FILETIME *pEndTime);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FILETIME *pEndTime);
         
         DECLSPEC_XFGVIRT(ITsSbTaskInfo, get_Deadline)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Deadline )( 
             __RPC__in ITsSbTaskInfo * This,
-            /* [retval][out] */ __RPC__out FILETIME *pDeadline);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FILETIME *pDeadline);
         
         DECLSPEC_XFGVIRT(ITsSbTaskInfo, get_Identifier)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Identifier )( 
             __RPC__in ITsSbTaskInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pIdentifier);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pIdentifier);
         
         DECLSPEC_XFGVIRT(ITsSbTaskInfo, get_Label)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Label )( 
             __RPC__in ITsSbTaskInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pLabel);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pLabel);
         
         DECLSPEC_XFGVIRT(ITsSbTaskInfo, get_Context)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Context )( 
             __RPC__in ITsSbTaskInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pContext);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  SAFEARRAY * *pContext);
         
         DECLSPEC_XFGVIRT(ITsSbTaskInfo, get_Plugin)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Plugin )( 
             __RPC__in ITsSbTaskInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pPlugin);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pPlugin);
         
         DECLSPEC_XFGVIRT(ITsSbTaskInfo, get_Status)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in ITsSbTaskInfo * This,
-            /* [retval][out] */ __RPC__out RDV_TASK_STATUS *pStatus);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RDV_TASK_STATUS *pStatus);
         
         END_INTERFACE
     } ITsSbTaskInfoVtbl;
@@ -2116,12 +2307,16 @@ EXTERN_C const IID IID_ITsSbTaskPlugin;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE InitializeTaskPlugin( 
-            /* [in] */ __RPC__in_opt ITsSbTaskPluginNotifySink *pITsSbTaskPluginNotifySink) = 0;
+            /* [annotation][in] */ 
+            _In_  ITsSbTaskPluginNotifySink *pITsSbTaskPluginNotifySink) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetTaskQueue( 
-            /* [in] */ __RPC__in BSTR pszHostName,
-            /* [in] */ DWORD SbTaskInfoSize,
-            /* [size_is][in] */ __RPC__in_ecount_full(SbTaskInfoSize) ITsSbTaskInfo *pITsSbTaskInfo[  ]) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pszHostName,
+            /* [annotation][in] */ 
+            _In_  DWORD SbTaskInfoSize,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(SbTaskInfoSize)  ITsSbTaskInfo *pITsSbTaskInfo[  ]) = 0;
         
     };
     
@@ -2135,7 +2330,8 @@ EXTERN_C const IID IID_ITsSbTaskPlugin;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbTaskPlugin * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2150,26 +2346,34 @@ EXTERN_C const IID IID_ITsSbTaskPlugin;
         DECLSPEC_XFGVIRT(ITsSbPlugin, Initialize)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in ITsSbTaskPlugin * This,
-            /* [in] */ __RPC__in_opt ITsSbProvider *pProvider,
-            /* [in] */ __RPC__in_opt ITsSbPluginNotifySink *pNotifySink,
-            /* [in] */ __RPC__in_opt ITsSbPluginPropertySet *pPropertySet);
+            /* [annotation][in] */ 
+            _In_  ITsSbProvider *pProvider,
+            /* [annotation][in] */ 
+            _In_  ITsSbPluginNotifySink *pNotifySink,
+            /* [annotation][in] */ 
+            _In_  ITsSbPluginPropertySet *pPropertySet);
         
         DECLSPEC_XFGVIRT(ITsSbPlugin, Terminate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Terminate )( 
             __RPC__in ITsSbTaskPlugin * This,
-            /* [in] */ HRESULT hr);
+            /* [annotation][in] */ 
+            _In_  HRESULT hr);
         
         DECLSPEC_XFGVIRT(ITsSbTaskPlugin, InitializeTaskPlugin)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InitializeTaskPlugin )( 
             __RPC__in ITsSbTaskPlugin * This,
-            /* [in] */ __RPC__in_opt ITsSbTaskPluginNotifySink *pITsSbTaskPluginNotifySink);
+            /* [annotation][in] */ 
+            _In_  ITsSbTaskPluginNotifySink *pITsSbTaskPluginNotifySink);
         
         DECLSPEC_XFGVIRT(ITsSbTaskPlugin, SetTaskQueue)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetTaskQueue )( 
             __RPC__in ITsSbTaskPlugin * This,
-            /* [in] */ __RPC__in BSTR pszHostName,
-            /* [in] */ DWORD SbTaskInfoSize,
-            /* [size_is][in] */ __RPC__in_ecount_full(SbTaskInfoSize) ITsSbTaskInfo *pITsSbTaskInfo[  ]);
+            /* [annotation][in] */ 
+            _In_  BSTR pszHostName,
+            /* [annotation][in] */ 
+            _In_  DWORD SbTaskInfoSize,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(SbTaskInfoSize)  ITsSbTaskInfo *pITsSbTaskInfo[  ]);
         
         END_INTERFACE
     } ITsSbTaskPluginVtbl;
@@ -2245,7 +2449,8 @@ EXTERN_C const IID IID_ITsSbPropertySet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbPropertySet * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2260,15 +2465,20 @@ EXTERN_C const IID IID_ITsSbPropertySet;
         DECLSPEC_XFGVIRT(IPropertyBag, Read)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             ITsSbPropertySet * This,
-            /* [in] */ LPCOLESTR pszPropName,
-            /* [out][in] */ VARIANT *pVar,
-            /* [unique][in] */ IErrorLog *pErrorLog);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pszPropName,
+            /* [annotation][out][in] */ 
+            _Inout_  VARIANT *pVar,
+            /* [annotation][unique][in] */ 
+            _In_  IErrorLog *pErrorLog);
         
         DECLSPEC_XFGVIRT(IPropertyBag, Write)
         HRESULT ( STDMETHODCALLTYPE *Write )( 
             __RPC__in ITsSbPropertySet * This,
-            /* [in] */ __RPC__in LPCOLESTR pszPropName,
-            /* [in] */ __RPC__in VARIANT *pVar);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pszPropName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVar);
         
         END_INTERFACE
     } ITsSbPropertySetVtbl;
@@ -2338,7 +2548,8 @@ EXTERN_C const IID IID_ITsSbPluginPropertySet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbPluginPropertySet * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2353,15 +2564,20 @@ EXTERN_C const IID IID_ITsSbPluginPropertySet;
         DECLSPEC_XFGVIRT(IPropertyBag, Read)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             ITsSbPluginPropertySet * This,
-            /* [in] */ LPCOLESTR pszPropName,
-            /* [out][in] */ VARIANT *pVar,
-            /* [unique][in] */ IErrorLog *pErrorLog);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pszPropName,
+            /* [annotation][out][in] */ 
+            _Inout_  VARIANT *pVar,
+            /* [annotation][unique][in] */ 
+            _In_  IErrorLog *pErrorLog);
         
         DECLSPEC_XFGVIRT(IPropertyBag, Write)
         HRESULT ( STDMETHODCALLTYPE *Write )( 
             __RPC__in ITsSbPluginPropertySet * This,
-            /* [in] */ __RPC__in LPCOLESTR pszPropName,
-            /* [in] */ __RPC__in VARIANT *pVar);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pszPropName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVar);
         
         END_INTERFACE
     } ITsSbPluginPropertySetVtbl;
@@ -2432,7 +2648,8 @@ EXTERN_C const IID IID_ITsSbClientConnectionPropertySet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbClientConnectionPropertySet * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2447,15 +2664,20 @@ EXTERN_C const IID IID_ITsSbClientConnectionPropertySet;
         DECLSPEC_XFGVIRT(IPropertyBag, Read)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             ITsSbClientConnectionPropertySet * This,
-            /* [in] */ LPCOLESTR pszPropName,
-            /* [out][in] */ VARIANT *pVar,
-            /* [unique][in] */ IErrorLog *pErrorLog);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pszPropName,
+            /* [annotation][out][in] */ 
+            _Inout_  VARIANT *pVar,
+            /* [annotation][unique][in] */ 
+            _In_  IErrorLog *pErrorLog);
         
         DECLSPEC_XFGVIRT(IPropertyBag, Write)
         HRESULT ( STDMETHODCALLTYPE *Write )( 
             __RPC__in ITsSbClientConnectionPropertySet * This,
-            /* [in] */ __RPC__in LPCOLESTR pszPropName,
-            /* [in] */ __RPC__in VARIANT *pVar);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pszPropName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVar);
         
         END_INTERFACE
     } ITsSbClientConnectionPropertySetVtbl;
@@ -2526,7 +2748,8 @@ EXTERN_C const IID IID_ITsSbTargetPropertySet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbTargetPropertySet * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2541,15 +2764,20 @@ EXTERN_C const IID IID_ITsSbTargetPropertySet;
         DECLSPEC_XFGVIRT(IPropertyBag, Read)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             ITsSbTargetPropertySet * This,
-            /* [in] */ LPCOLESTR pszPropName,
-            /* [out][in] */ VARIANT *pVar,
-            /* [unique][in] */ IErrorLog *pErrorLog);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pszPropName,
+            /* [annotation][out][in] */ 
+            _Inout_  VARIANT *pVar,
+            /* [annotation][unique][in] */ 
+            _In_  IErrorLog *pErrorLog);
         
         DECLSPEC_XFGVIRT(IPropertyBag, Write)
         HRESULT ( STDMETHODCALLTYPE *Write )( 
             __RPC__in ITsSbTargetPropertySet * This,
-            /* [in] */ __RPC__in LPCOLESTR pszPropName,
-            /* [in] */ __RPC__in VARIANT *pVar);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pszPropName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVar);
         
         END_INTERFACE
     } ITsSbTargetPropertySetVtbl;
@@ -2620,7 +2848,8 @@ EXTERN_C const IID IID_ITsSbEnvironmentPropertySet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbEnvironmentPropertySet * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2635,15 +2864,20 @@ EXTERN_C const IID IID_ITsSbEnvironmentPropertySet;
         DECLSPEC_XFGVIRT(IPropertyBag, Read)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             ITsSbEnvironmentPropertySet * This,
-            /* [in] */ LPCOLESTR pszPropName,
-            /* [out][in] */ VARIANT *pVar,
-            /* [unique][in] */ IErrorLog *pErrorLog);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pszPropName,
+            /* [annotation][out][in] */ 
+            _Inout_  VARIANT *pVar,
+            /* [annotation][unique][in] */ 
+            _In_  IErrorLog *pErrorLog);
         
         DECLSPEC_XFGVIRT(IPropertyBag, Write)
         HRESULT ( STDMETHODCALLTYPE *Write )( 
             __RPC__in ITsSbEnvironmentPropertySet * This,
-            /* [in] */ __RPC__in LPCOLESTR pszPropName,
-            /* [in] */ __RPC__in VARIANT *pVar);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pszPropName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVar);
         
         END_INTERFACE
     } ITsSbEnvironmentPropertySetVtbl;
@@ -2703,11 +2937,14 @@ EXTERN_C const IID IID_ITsSbBaseNotifySink;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnError( 
-            /* [in] */ HRESULT hrError) = 0;
+            /* [annotation][in] */ 
+            _In_  HRESULT hrError) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnReportStatus( 
-            /* [in] */ CLIENT_MESSAGE_TYPE messageType,
-            /* [in] */ DWORD messageID) = 0;
+            /* [annotation][in] */ 
+            _In_  CLIENT_MESSAGE_TYPE messageType,
+            /* [annotation][in] */ 
+            _In_  DWORD messageID) = 0;
         
     };
     
@@ -2721,7 +2958,8 @@ EXTERN_C const IID IID_ITsSbBaseNotifySink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbBaseNotifySink * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2736,13 +2974,16 @@ EXTERN_C const IID IID_ITsSbBaseNotifySink;
         DECLSPEC_XFGVIRT(ITsSbBaseNotifySink, OnError)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnError )( 
             __RPC__in ITsSbBaseNotifySink * This,
-            /* [in] */ HRESULT hrError);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrError);
         
         DECLSPEC_XFGVIRT(ITsSbBaseNotifySink, OnReportStatus)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnReportStatus )( 
             __RPC__in ITsSbBaseNotifySink * This,
-            /* [in] */ CLIENT_MESSAGE_TYPE messageType,
-            /* [in] */ DWORD messageID);
+            /* [annotation][in] */ 
+            _In_  CLIENT_MESSAGE_TYPE messageType,
+            /* [annotation][in] */ 
+            _In_  DWORD messageID);
         
         END_INTERFACE
     } ITsSbBaseNotifySinkVtbl;
@@ -2800,7 +3041,8 @@ EXTERN_C const IID IID_ITsSbPluginNotifySink;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnInitialized( 
-            /* [in] */ HRESULT hr) = 0;
+            /* [annotation][in] */ 
+            _In_  HRESULT hr) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnTerminated( void) = 0;
         
@@ -2816,7 +3058,8 @@ EXTERN_C const IID IID_ITsSbPluginNotifySink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbPluginNotifySink * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2831,18 +3074,22 @@ EXTERN_C const IID IID_ITsSbPluginNotifySink;
         DECLSPEC_XFGVIRT(ITsSbBaseNotifySink, OnError)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnError )( 
             __RPC__in ITsSbPluginNotifySink * This,
-            /* [in] */ HRESULT hrError);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrError);
         
         DECLSPEC_XFGVIRT(ITsSbBaseNotifySink, OnReportStatus)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnReportStatus )( 
             __RPC__in ITsSbPluginNotifySink * This,
-            /* [in] */ CLIENT_MESSAGE_TYPE messageType,
-            /* [in] */ DWORD messageID);
+            /* [annotation][in] */ 
+            _In_  CLIENT_MESSAGE_TYPE messageType,
+            /* [annotation][in] */ 
+            _In_  DWORD messageID);
         
         DECLSPEC_XFGVIRT(ITsSbPluginNotifySink, OnInitialized)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnInitialized )( 
             __RPC__in ITsSbPluginNotifySink * This,
-            /* [in] */ HRESULT hr);
+            /* [annotation][in] */ 
+            _In_  HRESULT hr);
         
         DECLSPEC_XFGVIRT(ITsSbPluginNotifySink, OnTerminated)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnTerminated )( 
@@ -2911,8 +3158,10 @@ EXTERN_C const IID IID_ITsSbLoadBalancingNotifySink;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnGetMostSuitableTarget( 
-            /* [in] */ __RPC__in_opt ITsSbLoadBalanceResult *pLBResult,
-            /* [in] */ BOOL fIsNewConnection) = 0;
+            /* [annotation][in] */ 
+            _In_  ITsSbLoadBalanceResult *pLBResult,
+            /* [annotation][in] */ 
+            _In_  BOOL fIsNewConnection) = 0;
         
     };
     
@@ -2926,7 +3175,8 @@ EXTERN_C const IID IID_ITsSbLoadBalancingNotifySink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbLoadBalancingNotifySink * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2941,19 +3191,24 @@ EXTERN_C const IID IID_ITsSbLoadBalancingNotifySink;
         DECLSPEC_XFGVIRT(ITsSbBaseNotifySink, OnError)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnError )( 
             __RPC__in ITsSbLoadBalancingNotifySink * This,
-            /* [in] */ HRESULT hrError);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrError);
         
         DECLSPEC_XFGVIRT(ITsSbBaseNotifySink, OnReportStatus)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnReportStatus )( 
             __RPC__in ITsSbLoadBalancingNotifySink * This,
-            /* [in] */ CLIENT_MESSAGE_TYPE messageType,
-            /* [in] */ DWORD messageID);
+            /* [annotation][in] */ 
+            _In_  CLIENT_MESSAGE_TYPE messageType,
+            /* [annotation][in] */ 
+            _In_  DWORD messageID);
         
         DECLSPEC_XFGVIRT(ITsSbLoadBalancingNotifySink, OnGetMostSuitableTarget)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnGetMostSuitableTarget )( 
             __RPC__in ITsSbLoadBalancingNotifySink * This,
-            /* [in] */ __RPC__in_opt ITsSbLoadBalanceResult *pLBResult,
-            /* [in] */ BOOL fIsNewConnection);
+            /* [annotation][in] */ 
+            _In_  ITsSbLoadBalanceResult *pLBResult,
+            /* [annotation][in] */ 
+            _In_  BOOL fIsNewConnection);
         
         END_INTERFACE
     } ITsSbLoadBalancingNotifySinkVtbl;
@@ -3015,7 +3270,8 @@ EXTERN_C const IID IID_ITsSbPlacementNotifySink;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnQueryEnvironmentCompleted( 
-            /* [in] */ __RPC__in_opt ITsSbEnvironment *pEnvironment) = 0;
+            /* [annotation][in] */ 
+            _In_  ITsSbEnvironment *pEnvironment) = 0;
         
     };
     
@@ -3029,7 +3285,8 @@ EXTERN_C const IID IID_ITsSbPlacementNotifySink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbPlacementNotifySink * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3044,18 +3301,22 @@ EXTERN_C const IID IID_ITsSbPlacementNotifySink;
         DECLSPEC_XFGVIRT(ITsSbBaseNotifySink, OnError)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnError )( 
             __RPC__in ITsSbPlacementNotifySink * This,
-            /* [in] */ HRESULT hrError);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrError);
         
         DECLSPEC_XFGVIRT(ITsSbBaseNotifySink, OnReportStatus)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnReportStatus )( 
             __RPC__in ITsSbPlacementNotifySink * This,
-            /* [in] */ CLIENT_MESSAGE_TYPE messageType,
-            /* [in] */ DWORD messageID);
+            /* [annotation][in] */ 
+            _In_  CLIENT_MESSAGE_TYPE messageType,
+            /* [annotation][in] */ 
+            _In_  DWORD messageID);
         
         DECLSPEC_XFGVIRT(ITsSbPlacementNotifySink, OnQueryEnvironmentCompleted)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnQueryEnvironmentCompleted )( 
             __RPC__in ITsSbPlacementNotifySink * This,
-            /* [in] */ __RPC__in_opt ITsSbEnvironment *pEnvironment);
+            /* [annotation][in] */ 
+            _In_  ITsSbEnvironment *pEnvironment);
         
         END_INTERFACE
     } ITsSbPlacementNotifySinkVtbl;
@@ -3117,7 +3378,8 @@ EXTERN_C const IID IID_ITsSbOrchestrationNotifySink;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnReadyToConnect( 
-            /* [in] */ __RPC__in_opt ITsSbTarget *pTarget) = 0;
+            /* [annotation][in] */ 
+            _In_  ITsSbTarget *pTarget) = 0;
         
     };
     
@@ -3131,7 +3393,8 @@ EXTERN_C const IID IID_ITsSbOrchestrationNotifySink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbOrchestrationNotifySink * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3146,18 +3409,22 @@ EXTERN_C const IID IID_ITsSbOrchestrationNotifySink;
         DECLSPEC_XFGVIRT(ITsSbBaseNotifySink, OnError)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnError )( 
             __RPC__in ITsSbOrchestrationNotifySink * This,
-            /* [in] */ HRESULT hrError);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrError);
         
         DECLSPEC_XFGVIRT(ITsSbBaseNotifySink, OnReportStatus)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnReportStatus )( 
             __RPC__in ITsSbOrchestrationNotifySink * This,
-            /* [in] */ CLIENT_MESSAGE_TYPE messageType,
-            /* [in] */ DWORD messageID);
+            /* [annotation][in] */ 
+            _In_  CLIENT_MESSAGE_TYPE messageType,
+            /* [annotation][in] */ 
+            _In_  DWORD messageID);
         
         DECLSPEC_XFGVIRT(ITsSbOrchestrationNotifySink, OnReadyToConnect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnReadyToConnect )( 
             __RPC__in ITsSbOrchestrationNotifySink * This,
-            /* [in] */ __RPC__in_opt ITsSbTarget *pTarget);
+            /* [annotation][in] */ 
+            _In_  ITsSbTarget *pTarget);
         
         END_INTERFACE
     } ITsSbOrchestrationNotifySinkVtbl;
@@ -3219,27 +3486,42 @@ EXTERN_C const IID IID_ITsSbTaskPluginNotifySink;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnSetTaskTime( 
-            /* [in] */ __RPC__in BSTR szTargetName,
-            /* [in] */ FILETIME TaskStartTime,
-            /* [in] */ FILETIME TaskEndTime,
-            /* [in] */ FILETIME TaskDeadline,
-            /* [in] */ __RPC__in BSTR szTaskLabel,
-            /* [in] */ __RPC__in BSTR szTaskIdentifier,
-            /* [in] */ __RPC__in BSTR szTaskPlugin,
-            /* [in] */ DWORD dwTaskStatus,
-            /* [in] */ __RPC__in SAFEARRAY * saContext) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR szTargetName,
+            /* [annotation][in] */ 
+            _In_  FILETIME TaskStartTime,
+            /* [annotation][in] */ 
+            _In_  FILETIME TaskEndTime,
+            /* [annotation][in] */ 
+            _In_  FILETIME TaskDeadline,
+            /* [annotation][in] */ 
+            _In_  BSTR szTaskLabel,
+            /* [annotation][in] */ 
+            _In_  BSTR szTaskIdentifier,
+            /* [annotation][in] */ 
+            _In_  BSTR szTaskPlugin,
+            /* [annotation][in] */ 
+            _In_  DWORD dwTaskStatus,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * saContext) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnDeleteTaskTime( 
-            /* [in] */ __RPC__in BSTR szTargetName,
-            /* [in] */ __RPC__in BSTR szTaskIdentifier) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR szTargetName,
+            /* [annotation][in] */ 
+            _In_  BSTR szTaskIdentifier) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnUpdateTaskStatus( 
-            /* [in] */ __RPC__in BSTR szTargetName,
-            /* [in] */ __RPC__in BSTR TaskIdentifier,
-            /* [in] */ RDV_TASK_STATUS TaskStatus) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR szTargetName,
+            /* [annotation][in] */ 
+            _In_  BSTR TaskIdentifier,
+            /* [annotation][in] */ 
+            _In_  RDV_TASK_STATUS TaskStatus) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnReportTasks( 
-            /* [in] */ __RPC__in BSTR szHostName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR szHostName) = 0;
         
     };
     
@@ -3253,7 +3535,8 @@ EXTERN_C const IID IID_ITsSbTaskPluginNotifySink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbTaskPluginNotifySink * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3268,44 +3551,62 @@ EXTERN_C const IID IID_ITsSbTaskPluginNotifySink;
         DECLSPEC_XFGVIRT(ITsSbBaseNotifySink, OnError)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnError )( 
             __RPC__in ITsSbTaskPluginNotifySink * This,
-            /* [in] */ HRESULT hrError);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrError);
         
         DECLSPEC_XFGVIRT(ITsSbBaseNotifySink, OnReportStatus)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnReportStatus )( 
             __RPC__in ITsSbTaskPluginNotifySink * This,
-            /* [in] */ CLIENT_MESSAGE_TYPE messageType,
-            /* [in] */ DWORD messageID);
+            /* [annotation][in] */ 
+            _In_  CLIENT_MESSAGE_TYPE messageType,
+            /* [annotation][in] */ 
+            _In_  DWORD messageID);
         
         DECLSPEC_XFGVIRT(ITsSbTaskPluginNotifySink, OnSetTaskTime)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnSetTaskTime )( 
             __RPC__in ITsSbTaskPluginNotifySink * This,
-            /* [in] */ __RPC__in BSTR szTargetName,
-            /* [in] */ FILETIME TaskStartTime,
-            /* [in] */ FILETIME TaskEndTime,
-            /* [in] */ FILETIME TaskDeadline,
-            /* [in] */ __RPC__in BSTR szTaskLabel,
-            /* [in] */ __RPC__in BSTR szTaskIdentifier,
-            /* [in] */ __RPC__in BSTR szTaskPlugin,
-            /* [in] */ DWORD dwTaskStatus,
-            /* [in] */ __RPC__in SAFEARRAY * saContext);
+            /* [annotation][in] */ 
+            _In_  BSTR szTargetName,
+            /* [annotation][in] */ 
+            _In_  FILETIME TaskStartTime,
+            /* [annotation][in] */ 
+            _In_  FILETIME TaskEndTime,
+            /* [annotation][in] */ 
+            _In_  FILETIME TaskDeadline,
+            /* [annotation][in] */ 
+            _In_  BSTR szTaskLabel,
+            /* [annotation][in] */ 
+            _In_  BSTR szTaskIdentifier,
+            /* [annotation][in] */ 
+            _In_  BSTR szTaskPlugin,
+            /* [annotation][in] */ 
+            _In_  DWORD dwTaskStatus,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * saContext);
         
         DECLSPEC_XFGVIRT(ITsSbTaskPluginNotifySink, OnDeleteTaskTime)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnDeleteTaskTime )( 
             __RPC__in ITsSbTaskPluginNotifySink * This,
-            /* [in] */ __RPC__in BSTR szTargetName,
-            /* [in] */ __RPC__in BSTR szTaskIdentifier);
+            /* [annotation][in] */ 
+            _In_  BSTR szTargetName,
+            /* [annotation][in] */ 
+            _In_  BSTR szTaskIdentifier);
         
         DECLSPEC_XFGVIRT(ITsSbTaskPluginNotifySink, OnUpdateTaskStatus)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnUpdateTaskStatus )( 
             __RPC__in ITsSbTaskPluginNotifySink * This,
-            /* [in] */ __RPC__in BSTR szTargetName,
-            /* [in] */ __RPC__in BSTR TaskIdentifier,
-            /* [in] */ RDV_TASK_STATUS TaskStatus);
+            /* [annotation][in] */ 
+            _In_  BSTR szTargetName,
+            /* [annotation][in] */ 
+            _In_  BSTR TaskIdentifier,
+            /* [annotation][in] */ 
+            _In_  RDV_TASK_STATUS TaskStatus);
         
         DECLSPEC_XFGVIRT(ITsSbTaskPluginNotifySink, OnReportTasks)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnReportTasks )( 
             __RPC__in ITsSbTaskPluginNotifySink * This,
-            /* [in] */ __RPC__in BSTR szHostName);
+            /* [annotation][in] */ 
+            _In_  BSTR szHostName);
         
         END_INTERFACE
     } ITsSbTaskPluginNotifySinkVtbl;
@@ -3376,19 +3677,24 @@ EXTERN_C const IID IID_ITsSbClientConnection;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UserName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Domain( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InitialProgram( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LoadBalanceResult( 
-            /* [retval][out] */ __RPC__deref_out_opt ITsSbLoadBalanceResult **ppVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITsSbLoadBalanceResult **ppVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FarmName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][local] */ HRESULT STDMETHODCALLTYPE PutContext( 
             /* [annotation] */ 
@@ -3399,31 +3705,40 @@ EXTERN_C const IID IID_ITsSbClientConnection;
             _Out_opt_  VARIANT *existingContext) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetContext( 
-            /* [in] */ __RPC__in BSTR contextId,
-            /* [retval][out] */ __RPC__out VARIANT *context) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR contextId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *context) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Environment( 
-            /* [retval][out] */ __RPC__deref_out_opt ITsSbEnvironment **ppEnvironment) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITsSbEnvironment **ppEnvironment) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ConnectionError( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SamUserAccount( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ClientConnectionPropertySet( 
-            /* [retval][out] */ __RPC__deref_out_opt ITsSbClientConnectionPropertySet **ppPropertySet) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITsSbClientConnectionPropertySet **ppPropertySet) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_IsFirstAssignment( 
-            /* [retval][out] */ __RPC__out BOOL *ppVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *ppVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RdFarmType( 
-            /* [retval][out] */ __RPC__out RD_FARM_TYPE *pRdFarmType) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RD_FARM_TYPE *pRdFarmType) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UserSidString( 
-            /* [retval][out] */ __RPC__deref_out_opt LPTSTR *pszUserSidString) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LPTSTR *pszUserSidString) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetDisconnectedSession( 
-            /* [out] */ __RPC__deref_out_opt ITsSbSession **ppSession) = 0;
+            /* [annotation][out] */ 
+            _Out_  ITsSbSession **ppSession) = 0;
         
     };
     
@@ -3437,7 +3752,8 @@ EXTERN_C const IID IID_ITsSbClientConnection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbClientConnection * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3452,27 +3768,32 @@ EXTERN_C const IID IID_ITsSbClientConnection;
         DECLSPEC_XFGVIRT(ITsSbClientConnection, get_UserName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserName )( 
             __RPC__in ITsSbClientConnection * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal);
         
         DECLSPEC_XFGVIRT(ITsSbClientConnection, get_Domain)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Domain )( 
             __RPC__in ITsSbClientConnection * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal);
         
         DECLSPEC_XFGVIRT(ITsSbClientConnection, get_InitialProgram)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InitialProgram )( 
             __RPC__in ITsSbClientConnection * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal);
         
         DECLSPEC_XFGVIRT(ITsSbClientConnection, get_LoadBalanceResult)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LoadBalanceResult )( 
             __RPC__in ITsSbClientConnection * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITsSbLoadBalanceResult **ppVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITsSbLoadBalanceResult **ppVal);
         
         DECLSPEC_XFGVIRT(ITsSbClientConnection, get_FarmName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FarmName )( 
             __RPC__in ITsSbClientConnection * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal);
         
         DECLSPEC_XFGVIRT(ITsSbClientConnection, PutContext)
         /* [helpstring][id][local] */ HRESULT ( STDMETHODCALLTYPE *PutContext )( 
@@ -3487,13 +3808,16 @@ EXTERN_C const IID IID_ITsSbClientConnection;
         DECLSPEC_XFGVIRT(ITsSbClientConnection, GetContext)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetContext )( 
             __RPC__in ITsSbClientConnection * This,
-            /* [in] */ __RPC__in BSTR contextId,
-            /* [retval][out] */ __RPC__out VARIANT *context);
+            /* [annotation][in] */ 
+            _In_  BSTR contextId,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *context);
         
         DECLSPEC_XFGVIRT(ITsSbClientConnection, get_Environment)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Environment )( 
             __RPC__in ITsSbClientConnection * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITsSbEnvironment **ppEnvironment);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITsSbEnvironment **ppEnvironment);
         
         DECLSPEC_XFGVIRT(ITsSbClientConnection, get_ConnectionError)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectionError )( 
@@ -3502,32 +3826,38 @@ EXTERN_C const IID IID_ITsSbClientConnection;
         DECLSPEC_XFGVIRT(ITsSbClientConnection, get_SamUserAccount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SamUserAccount )( 
             __RPC__in ITsSbClientConnection * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVal);
         
         DECLSPEC_XFGVIRT(ITsSbClientConnection, get_ClientConnectionPropertySet)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ClientConnectionPropertySet )( 
             __RPC__in ITsSbClientConnection * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITsSbClientConnectionPropertySet **ppPropertySet);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITsSbClientConnectionPropertySet **ppPropertySet);
         
         DECLSPEC_XFGVIRT(ITsSbClientConnection, get_IsFirstAssignment)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsFirstAssignment )( 
             __RPC__in ITsSbClientConnection * This,
-            /* [retval][out] */ __RPC__out BOOL *ppVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *ppVal);
         
         DECLSPEC_XFGVIRT(ITsSbClientConnection, get_RdFarmType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RdFarmType )( 
             __RPC__in ITsSbClientConnection * This,
-            /* [retval][out] */ __RPC__out RD_FARM_TYPE *pRdFarmType);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RD_FARM_TYPE *pRdFarmType);
         
         DECLSPEC_XFGVIRT(ITsSbClientConnection, get_UserSidString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserSidString )( 
             __RPC__in ITsSbClientConnection * This,
-            /* [retval][out] */ __RPC__deref_out_opt LPTSTR *pszUserSidString);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LPTSTR *pszUserSidString);
         
         DECLSPEC_XFGVIRT(ITsSbClientConnection, GetDisconnectedSession)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDisconnectedSession )( 
             __RPC__in ITsSbClientConnection * This,
-            /* [out] */ __RPC__deref_out_opt ITsSbSession **ppSession);
+            /* [annotation][out] */ 
+            _Out_  ITsSbSession **ppSession);
         
         END_INTERFACE
     } ITsSbClientConnectionVtbl;
@@ -3624,52 +3954,76 @@ EXTERN_C const IID IID_ITsSbProvider;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateTargetObject( 
-            /* [in] */ __RPC__in BSTR TargetName,
-            /* [in] */ __RPC__in BSTR EnvironmentName,
-            /* [out] */ __RPC__deref_out_opt ITsSbTarget **ppTarget) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR TargetName,
+            /* [annotation][in] */ 
+            _In_  BSTR EnvironmentName,
+            /* [annotation][out] */ 
+            _Out_  ITsSbTarget **ppTarget) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateLoadBalanceResultObject( 
-            /* [in] */ __RPC__in BSTR TargetName,
-            /* [out] */ __RPC__deref_out_opt ITsSbLoadBalanceResult **ppLBResult) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR TargetName,
+            /* [annotation][out] */ 
+            _Out_  ITsSbLoadBalanceResult **ppLBResult) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateSessionObject( 
-            /* [in] */ __RPC__in BSTR TargetName,
-            /* [in] */ __RPC__in BSTR UserName,
-            /* [in] */ __RPC__in BSTR Domain,
-            /* [in] */ DWORD SessionId,
-            /* [out] */ __RPC__deref_out_opt ITsSbSession **ppSession) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR TargetName,
+            /* [annotation][in] */ 
+            _In_  BSTR UserName,
+            /* [annotation][in] */ 
+            _In_  BSTR Domain,
+            /* [annotation][in] */ 
+            _In_  DWORD SessionId,
+            /* [annotation][out] */ 
+            _Out_  ITsSbSession **ppSession) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreatePluginPropertySet( 
-            /* [retval][out] */ __RPC__deref_out_opt ITsSbPluginPropertySet **ppPropertySet) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITsSbPluginPropertySet **ppPropertySet) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateTargetPropertySetObject( 
-            /* [out] */ __RPC__deref_out_opt ITsSbTargetPropertySet **ppPropertySet) = 0;
+            /* [annotation][out] */ 
+            _Out_  ITsSbTargetPropertySet **ppPropertySet) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateEnvironmentObject( 
-            /* [in] */ __RPC__in BSTR Name,
-            /* [in] */ DWORD ServerWeight,
-            /* [out] */ __RPC__deref_out_opt ITsSbEnvironment **ppEnvironment) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR Name,
+            /* [annotation][in] */ 
+            _In_  DWORD ServerWeight,
+            /* [annotation][out] */ 
+            _Out_  ITsSbEnvironment **ppEnvironment) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetResourcePluginStore( 
-            /* [out] */ __RPC__deref_out_opt ITsSbResourcePluginStore **ppStore) = 0;
+            /* [annotation][out] */ 
+            _Out_  ITsSbResourcePluginStore **ppStore) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetFilterPluginStore( 
-            /* [out] */ __RPC__deref_out_opt ITsSbFilterPluginStore **ppStore) = 0;
+            /* [annotation][out] */ 
+            _Out_  ITsSbFilterPluginStore **ppStore) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RegisterForNotification( 
-            /* [in] */ DWORD notificationType,
-            /* [in] */ __RPC__in BSTR ResourceToMonitor,
-            /* [in] */ __RPC__in_opt ITsSbResourceNotification *pPluginNotification) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD notificationType,
+            /* [annotation][in] */ 
+            _In_  BSTR ResourceToMonitor,
+            /* [annotation][in] */ 
+            _In_  ITsSbResourceNotification *pPluginNotification) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE UnRegisterForNotification( 
-            /* [in] */ DWORD notificationType,
-            /* [in] */ __RPC__in BSTR ResourceToMonitor) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD notificationType,
+            /* [annotation][in] */ 
+            _In_  BSTR ResourceToMonitor) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetInstanceOfGlobalStore( 
-            /* [out] */ __RPC__deref_out_opt ITsSbGlobalStore **ppGlobalStore) = 0;
+            /* [annotation][out] */ 
+            _Out_  ITsSbGlobalStore **ppGlobalStore) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateEnvironmentPropertySetObject( 
-            /* [out] */ __RPC__deref_out_opt ITsSbEnvironmentPropertySet **ppPropertySet) = 0;
+            /* [annotation][out] */ 
+            _Out_  ITsSbEnvironmentPropertySet **ppPropertySet) = 0;
         
     };
     
@@ -3683,7 +4037,8 @@ EXTERN_C const IID IID_ITsSbProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbProvider * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3698,74 +4053,98 @@ EXTERN_C const IID IID_ITsSbProvider;
         DECLSPEC_XFGVIRT(ITsSbProvider, CreateTargetObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateTargetObject )( 
             __RPC__in ITsSbProvider * This,
-            /* [in] */ __RPC__in BSTR TargetName,
-            /* [in] */ __RPC__in BSTR EnvironmentName,
-            /* [out] */ __RPC__deref_out_opt ITsSbTarget **ppTarget);
+            /* [annotation][in] */ 
+            _In_  BSTR TargetName,
+            /* [annotation][in] */ 
+            _In_  BSTR EnvironmentName,
+            /* [annotation][out] */ 
+            _Out_  ITsSbTarget **ppTarget);
         
         DECLSPEC_XFGVIRT(ITsSbProvider, CreateLoadBalanceResultObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateLoadBalanceResultObject )( 
             __RPC__in ITsSbProvider * This,
-            /* [in] */ __RPC__in BSTR TargetName,
-            /* [out] */ __RPC__deref_out_opt ITsSbLoadBalanceResult **ppLBResult);
+            /* [annotation][in] */ 
+            _In_  BSTR TargetName,
+            /* [annotation][out] */ 
+            _Out_  ITsSbLoadBalanceResult **ppLBResult);
         
         DECLSPEC_XFGVIRT(ITsSbProvider, CreateSessionObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateSessionObject )( 
             __RPC__in ITsSbProvider * This,
-            /* [in] */ __RPC__in BSTR TargetName,
-            /* [in] */ __RPC__in BSTR UserName,
-            /* [in] */ __RPC__in BSTR Domain,
-            /* [in] */ DWORD SessionId,
-            /* [out] */ __RPC__deref_out_opt ITsSbSession **ppSession);
+            /* [annotation][in] */ 
+            _In_  BSTR TargetName,
+            /* [annotation][in] */ 
+            _In_  BSTR UserName,
+            /* [annotation][in] */ 
+            _In_  BSTR Domain,
+            /* [annotation][in] */ 
+            _In_  DWORD SessionId,
+            /* [annotation][out] */ 
+            _Out_  ITsSbSession **ppSession);
         
         DECLSPEC_XFGVIRT(ITsSbProvider, CreatePluginPropertySet)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreatePluginPropertySet )( 
             __RPC__in ITsSbProvider * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITsSbPluginPropertySet **ppPropertySet);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITsSbPluginPropertySet **ppPropertySet);
         
         DECLSPEC_XFGVIRT(ITsSbProvider, CreateTargetPropertySetObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateTargetPropertySetObject )( 
             __RPC__in ITsSbProvider * This,
-            /* [out] */ __RPC__deref_out_opt ITsSbTargetPropertySet **ppPropertySet);
+            /* [annotation][out] */ 
+            _Out_  ITsSbTargetPropertySet **ppPropertySet);
         
         DECLSPEC_XFGVIRT(ITsSbProvider, CreateEnvironmentObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateEnvironmentObject )( 
             __RPC__in ITsSbProvider * This,
-            /* [in] */ __RPC__in BSTR Name,
-            /* [in] */ DWORD ServerWeight,
-            /* [out] */ __RPC__deref_out_opt ITsSbEnvironment **ppEnvironment);
+            /* [annotation][in] */ 
+            _In_  BSTR Name,
+            /* [annotation][in] */ 
+            _In_  DWORD ServerWeight,
+            /* [annotation][out] */ 
+            _Out_  ITsSbEnvironment **ppEnvironment);
         
         DECLSPEC_XFGVIRT(ITsSbProvider, GetResourcePluginStore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetResourcePluginStore )( 
             __RPC__in ITsSbProvider * This,
-            /* [out] */ __RPC__deref_out_opt ITsSbResourcePluginStore **ppStore);
+            /* [annotation][out] */ 
+            _Out_  ITsSbResourcePluginStore **ppStore);
         
         DECLSPEC_XFGVIRT(ITsSbProvider, GetFilterPluginStore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetFilterPluginStore )( 
             __RPC__in ITsSbProvider * This,
-            /* [out] */ __RPC__deref_out_opt ITsSbFilterPluginStore **ppStore);
+            /* [annotation][out] */ 
+            _Out_  ITsSbFilterPluginStore **ppStore);
         
         DECLSPEC_XFGVIRT(ITsSbProvider, RegisterForNotification)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RegisterForNotification )( 
             __RPC__in ITsSbProvider * This,
-            /* [in] */ DWORD notificationType,
-            /* [in] */ __RPC__in BSTR ResourceToMonitor,
-            /* [in] */ __RPC__in_opt ITsSbResourceNotification *pPluginNotification);
+            /* [annotation][in] */ 
+            _In_  DWORD notificationType,
+            /* [annotation][in] */ 
+            _In_  BSTR ResourceToMonitor,
+            /* [annotation][in] */ 
+            _In_  ITsSbResourceNotification *pPluginNotification);
         
         DECLSPEC_XFGVIRT(ITsSbProvider, UnRegisterForNotification)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *UnRegisterForNotification )( 
             __RPC__in ITsSbProvider * This,
-            /* [in] */ DWORD notificationType,
-            /* [in] */ __RPC__in BSTR ResourceToMonitor);
+            /* [annotation][in] */ 
+            _In_  DWORD notificationType,
+            /* [annotation][in] */ 
+            _In_  BSTR ResourceToMonitor);
         
         DECLSPEC_XFGVIRT(ITsSbProvider, GetInstanceOfGlobalStore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetInstanceOfGlobalStore )( 
             __RPC__in ITsSbProvider * This,
-            /* [out] */ __RPC__deref_out_opt ITsSbGlobalStore **ppGlobalStore);
+            /* [annotation][out] */ 
+            _Out_  ITsSbGlobalStore **ppGlobalStore);
         
         DECLSPEC_XFGVIRT(ITsSbProvider, CreateEnvironmentPropertySetObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateEnvironmentPropertySetObject )( 
             __RPC__in ITsSbProvider * This,
-            /* [out] */ __RPC__deref_out_opt ITsSbEnvironmentPropertySet **ppPropertySet);
+            /* [annotation][out] */ 
+            _Out_  ITsSbEnvironmentPropertySet **ppPropertySet);
         
         END_INTERFACE
     } ITsSbProviderVtbl;
@@ -3854,135 +4233,205 @@ EXTERN_C const IID IID_ITsSbResourcePluginStore;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE QueryTarget( 
-            /* [in] */ __RPC__in BSTR TargetName,
-            /* [in] */ __RPC__in BSTR FarmName,
-            /* [out] */ __RPC__deref_out_opt ITsSbTarget **ppTarget) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR TargetName,
+            /* [annotation][in] */ 
+            _In_  BSTR FarmName,
+            /* [annotation][out] */ 
+            _Out_  ITsSbTarget **ppTarget) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE QuerySessionBySessionId( 
-            /* [in] */ DWORD dwSessionId,
-            /* [in] */ __RPC__in BSTR TargetName,
-            /* [out] */ __RPC__deref_out_opt ITsSbSession **ppSession) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwSessionId,
+            /* [annotation][in] */ 
+            _In_  BSTR TargetName,
+            /* [annotation][out] */ 
+            _Out_  ITsSbSession **ppSession) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddTargetToStore( 
-            /* [in] */ __RPC__in_opt ITsSbTarget *pTarget) = 0;
+            /* [annotation][in] */ 
+            _In_  ITsSbTarget *pTarget) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddSessionToStore( 
-            /* [in] */ __RPC__in_opt ITsSbSession *pSession) = 0;
+            /* [annotation][in] */ 
+            _In_  ITsSbSession *pSession) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddEnvironmentToStore( 
-            /* [in] */ __RPC__in_opt ITsSbEnvironment *pEnvironment) = 0;
+            /* [annotation][in] */ 
+            _In_  ITsSbEnvironment *pEnvironment) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RemoveEnvironmentFromStore( 
-            /* [in] */ __RPC__in BSTR EnvironmentName,
+            /* [annotation][in] */ 
+            _In_  BSTR EnvironmentName,
             /* [optional][in] */ BOOL bIgnoreOwner) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumerateFarms( 
-            /* [out] */ __RPC__out DWORD *pdwCount,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *pVal) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwCount,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *pVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE QueryEnvironment( 
-            /* [in] */ __RPC__in BSTR EnvironmentName,
-            /* [out] */ __RPC__deref_out_opt ITsSbEnvironment **ppEnvironment) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR EnvironmentName,
+            /* [annotation][out] */ 
+            _Out_  ITsSbEnvironment **ppEnvironment) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumerateEnvironments( 
-            /* [out][in] */ __RPC__inout DWORD *pdwCount,
-            /* [size_is][out] */ __RPC__out_ecount_full(*pdwCount) ITsSbEnvironment **pVal[  ]) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwCount,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(*pdwCount)  ITsSbEnvironment **pVal[  ]) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SaveTarget( 
-            /* [in] */ __RPC__in_opt ITsSbTarget *pTarget,
-            /* [in] */ BOOL bForceWrite) = 0;
+            /* [annotation][in] */ 
+            _In_  ITsSbTarget *pTarget,
+            /* [annotation][in] */ 
+            _In_  BOOL bForceWrite) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SaveEnvironment( 
-            /* [in] */ __RPC__in_opt ITsSbEnvironment *pEnvironment,
-            /* [in] */ BOOL bForceWrite) = 0;
+            /* [annotation][in] */ 
+            _In_  ITsSbEnvironment *pEnvironment,
+            /* [annotation][in] */ 
+            _In_  BOOL bForceWrite) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SaveSession( 
-            /* [in] */ __RPC__in_opt ITsSbSession *pSession) = 0;
+            /* [annotation][in] */ 
+            _In_  ITsSbSession *pSession) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetTargetProperty( 
-            /* [in] */ __RPC__in BSTR TargetName,
-            /* [in] */ __RPC__in BSTR PropertyName,
-            /* [in] */ __RPC__in VARIANT *pProperty) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR TargetName,
+            /* [annotation][in] */ 
+            _In_  BSTR PropertyName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pProperty) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetEnvironmentProperty( 
-            /* [in] */ __RPC__in BSTR EnvironmentName,
-            /* [in] */ __RPC__in BSTR PropertyName,
-            /* [in] */ __RPC__in VARIANT *pProperty) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR EnvironmentName,
+            /* [annotation][in] */ 
+            _In_  BSTR PropertyName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pProperty) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetTargetState( 
-            /* [in] */ __RPC__in BSTR targetName,
-            /* [in] */ TARGET_STATE newState,
-            /* [out] */ __RPC__out TARGET_STATE *pOldState) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR targetName,
+            /* [annotation][in] */ 
+            _In_  TARGET_STATE newState,
+            /* [annotation][out] */ 
+            _Out_  TARGET_STATE *pOldState) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetSessionState( 
-            /* [in] */ __RPC__in_opt ITsSbSession *sbSession) = 0;
+            /* [annotation][in] */ 
+            _In_  ITsSbSession *sbSession) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumerateTargets( 
-            /* [in] */ __RPC__in BSTR FarmName,
-            /* [in] */ __RPC__in BSTR EnvName,
-            /* [in] */ TS_SB_SORT_BY sortByFieldId,
-            /* [in] */ __RPC__in BSTR sortyByPropName,
-            /* [out][in] */ __RPC__inout DWORD *pdwCount,
+            /* [annotation][in] */ 
+            _In_  BSTR FarmName,
+            /* [annotation][in] */ 
+            _In_  BSTR EnvName,
+            /* [annotation][in] */ 
+            _In_  TS_SB_SORT_BY sortByFieldId,
+            /* [annotation][in] */ 
+            _In_  BSTR sortyByPropName,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwCount,
             /* [annotation][size_is][out] */ 
             __RPC__deref_out_ecount_full(*pdwCount)  ITsSbTarget **pVal[  ]) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumerateSessions( 
-            /* [in] */ __RPC__in BSTR targetName,
-            /* [in] */ __RPC__in BSTR userName,
-            /* [in] */ __RPC__in BSTR userDomain,
-            /* [in] */ __RPC__in BSTR poolName,
-            /* [in] */ __RPC__in BSTR initialProgram,
-            /* [in] */ __RPC__in TSSESSION_STATE *pSessionState,
-            /* [out][in] */ __RPC__inout DWORD *pdwCount,
+            /* [annotation][in] */ 
+            _In_  BSTR targetName,
+            /* [annotation][in] */ 
+            _In_  BSTR userName,
+            /* [annotation][in] */ 
+            _In_  BSTR userDomain,
+            /* [annotation][in] */ 
+            _In_  BSTR poolName,
+            /* [annotation][in] */ 
+            _In_  BSTR initialProgram,
+            /* [annotation][in] */ 
+            _In_  TSSESSION_STATE *pSessionState,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwCount,
             /* [annotation][size_is][out] */ 
             __RPC__deref_out_ecount_full(*pdwCount)  ITsSbSession **ppVal[  ]) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetFarmProperty( 
-            /* [in] */ __RPC__in BSTR farmName,
-            /* [in] */ __RPC__in BSTR propertyName,
-            /* [in] */ __RPC__in VARIANT *pVarValue) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR farmName,
+            /* [annotation][in] */ 
+            _In_  BSTR propertyName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVarValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteTarget( 
-            /* [in] */ __RPC__in BSTR targetName,
-            /* [in] */ __RPC__in BSTR hostName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR targetName,
+            /* [annotation][in] */ 
+            _In_  BSTR hostName) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetTargetPropertyWithVersionCheck( 
-            /* [in] */ __RPC__in_opt ITsSbTarget *pTarget,
-            /* [in] */ __RPC__in BSTR PropertyName,
-            /* [in] */ __RPC__in VARIANT *pProperty) = 0;
+            /* [annotation][in] */ 
+            _In_  ITsSbTarget *pTarget,
+            /* [annotation][in] */ 
+            _In_  BSTR PropertyName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pProperty) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetEnvironmentPropertyWithVersionCheck( 
-            /* [in] */ __RPC__in_opt ITsSbEnvironment *pEnvironment,
-            /* [in] */ __RPC__in BSTR PropertyName,
-            /* [in] */ __RPC__in VARIANT *pProperty) = 0;
+            /* [annotation][in] */ 
+            _In_  ITsSbEnvironment *pEnvironment,
+            /* [annotation][in] */ 
+            _In_  BSTR PropertyName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pProperty) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AcquireTargetLock( 
-            /* [in] */ __RPC__in BSTR targetName,
-            /* [in] */ DWORD dwTimeout,
-            /* [out] */ __RPC__deref_out_opt IUnknown **ppContext) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR targetName,
+            /* [annotation][in] */ 
+            _In_  DWORD dwTimeout,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppContext) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ReleaseTargetLock( 
-            /* [in] */ __RPC__in_opt IUnknown *pContext) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *pContext) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE TestAndSetServerState( 
-            /* [in] */ __RPC__in BSTR PoolName,
-            /* [in] */ __RPC__in BSTR ServerFQDN,
-            /* [in] */ TARGET_STATE NewState,
-            /* [in] */ TARGET_STATE TestState,
-            /* [out] */ __RPC__out TARGET_STATE *pInitState) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR PoolName,
+            /* [annotation][in] */ 
+            _In_  BSTR ServerFQDN,
+            /* [annotation][in] */ 
+            _In_  TARGET_STATE NewState,
+            /* [annotation][in] */ 
+            _In_  TARGET_STATE TestState,
+            /* [annotation][out] */ 
+            _Out_  TARGET_STATE *pInitState) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetServerWaitingToStart( 
-            /* [in] */ __RPC__in BSTR PoolName,
-            /* [in] */ __RPC__in BSTR serverName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR PoolName,
+            /* [annotation][in] */ 
+            _In_  BSTR serverName) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetServerState( 
-            /* [in] */ __RPC__in BSTR PoolName,
-            /* [in] */ __RPC__in BSTR ServerFQDN,
-            /* [out] */ __RPC__out TARGET_STATE *pState) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR PoolName,
+            /* [annotation][in] */ 
+            _In_  BSTR ServerFQDN,
+            /* [annotation][out] */ 
+            _Out_  TARGET_STATE *pState) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetServerDrainMode( 
-            /* [in] */ __RPC__in BSTR ServerFQDN,
-            /* [in] */ DWORD DrainMode) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR ServerFQDN,
+            /* [annotation][in] */ 
+            _In_  DWORD DrainMode) = 0;
         
     };
     
@@ -3996,7 +4445,8 @@ EXTERN_C const IID IID_ITsSbResourcePluginStore;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4011,189 +4461,259 @@ EXTERN_C const IID IID_ITsSbResourcePluginStore;
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, QueryTarget)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *QueryTarget )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in BSTR TargetName,
-            /* [in] */ __RPC__in BSTR FarmName,
-            /* [out] */ __RPC__deref_out_opt ITsSbTarget **ppTarget);
+            /* [annotation][in] */ 
+            _In_  BSTR TargetName,
+            /* [annotation][in] */ 
+            _In_  BSTR FarmName,
+            /* [annotation][out] */ 
+            _Out_  ITsSbTarget **ppTarget);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, QuerySessionBySessionId)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *QuerySessionBySessionId )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ DWORD dwSessionId,
-            /* [in] */ __RPC__in BSTR TargetName,
-            /* [out] */ __RPC__deref_out_opt ITsSbSession **ppSession);
+            /* [annotation][in] */ 
+            _In_  DWORD dwSessionId,
+            /* [annotation][in] */ 
+            _In_  BSTR TargetName,
+            /* [annotation][out] */ 
+            _Out_  ITsSbSession **ppSession);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, AddTargetToStore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddTargetToStore )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in_opt ITsSbTarget *pTarget);
+            /* [annotation][in] */ 
+            _In_  ITsSbTarget *pTarget);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, AddSessionToStore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddSessionToStore )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in_opt ITsSbSession *pSession);
+            /* [annotation][in] */ 
+            _In_  ITsSbSession *pSession);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, AddEnvironmentToStore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddEnvironmentToStore )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in_opt ITsSbEnvironment *pEnvironment);
+            /* [annotation][in] */ 
+            _In_  ITsSbEnvironment *pEnvironment);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, RemoveEnvironmentFromStore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveEnvironmentFromStore )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in BSTR EnvironmentName,
+            /* [annotation][in] */ 
+            _In_  BSTR EnvironmentName,
             /* [optional][in] */ BOOL bIgnoreOwner);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, EnumerateFarms)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateFarms )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [out] */ __RPC__out DWORD *pdwCount,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *pVal);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwCount,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *pVal);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, QueryEnvironment)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *QueryEnvironment )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in BSTR EnvironmentName,
-            /* [out] */ __RPC__deref_out_opt ITsSbEnvironment **ppEnvironment);
+            /* [annotation][in] */ 
+            _In_  BSTR EnvironmentName,
+            /* [annotation][out] */ 
+            _Out_  ITsSbEnvironment **ppEnvironment);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, EnumerateEnvironments)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateEnvironments )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [out][in] */ __RPC__inout DWORD *pdwCount,
-            /* [size_is][out] */ __RPC__out_ecount_full(*pdwCount) ITsSbEnvironment **pVal[  ]);
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwCount,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(*pdwCount)  ITsSbEnvironment **pVal[  ]);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, SaveTarget)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SaveTarget )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in_opt ITsSbTarget *pTarget,
-            /* [in] */ BOOL bForceWrite);
+            /* [annotation][in] */ 
+            _In_  ITsSbTarget *pTarget,
+            /* [annotation][in] */ 
+            _In_  BOOL bForceWrite);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, SaveEnvironment)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SaveEnvironment )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in_opt ITsSbEnvironment *pEnvironment,
-            /* [in] */ BOOL bForceWrite);
+            /* [annotation][in] */ 
+            _In_  ITsSbEnvironment *pEnvironment,
+            /* [annotation][in] */ 
+            _In_  BOOL bForceWrite);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, SaveSession)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SaveSession )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in_opt ITsSbSession *pSession);
+            /* [annotation][in] */ 
+            _In_  ITsSbSession *pSession);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, SetTargetProperty)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetTargetProperty )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in BSTR TargetName,
-            /* [in] */ __RPC__in BSTR PropertyName,
-            /* [in] */ __RPC__in VARIANT *pProperty);
+            /* [annotation][in] */ 
+            _In_  BSTR TargetName,
+            /* [annotation][in] */ 
+            _In_  BSTR PropertyName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pProperty);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, SetEnvironmentProperty)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetEnvironmentProperty )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in BSTR EnvironmentName,
-            /* [in] */ __RPC__in BSTR PropertyName,
-            /* [in] */ __RPC__in VARIANT *pProperty);
+            /* [annotation][in] */ 
+            _In_  BSTR EnvironmentName,
+            /* [annotation][in] */ 
+            _In_  BSTR PropertyName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pProperty);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, SetTargetState)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetTargetState )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in BSTR targetName,
-            /* [in] */ TARGET_STATE newState,
-            /* [out] */ __RPC__out TARGET_STATE *pOldState);
+            /* [annotation][in] */ 
+            _In_  BSTR targetName,
+            /* [annotation][in] */ 
+            _In_  TARGET_STATE newState,
+            /* [annotation][out] */ 
+            _Out_  TARGET_STATE *pOldState);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, SetSessionState)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetSessionState )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in_opt ITsSbSession *sbSession);
+            /* [annotation][in] */ 
+            _In_  ITsSbSession *sbSession);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, EnumerateTargets)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateTargets )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in BSTR FarmName,
-            /* [in] */ __RPC__in BSTR EnvName,
-            /* [in] */ TS_SB_SORT_BY sortByFieldId,
-            /* [in] */ __RPC__in BSTR sortyByPropName,
-            /* [out][in] */ __RPC__inout DWORD *pdwCount,
+            /* [annotation][in] */ 
+            _In_  BSTR FarmName,
+            /* [annotation][in] */ 
+            _In_  BSTR EnvName,
+            /* [annotation][in] */ 
+            _In_  TS_SB_SORT_BY sortByFieldId,
+            /* [annotation][in] */ 
+            _In_  BSTR sortyByPropName,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwCount,
             /* [annotation][size_is][out] */ 
             __RPC__deref_out_ecount_full(*pdwCount)  ITsSbTarget **pVal[  ]);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, EnumerateSessions)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateSessions )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in BSTR targetName,
-            /* [in] */ __RPC__in BSTR userName,
-            /* [in] */ __RPC__in BSTR userDomain,
-            /* [in] */ __RPC__in BSTR poolName,
-            /* [in] */ __RPC__in BSTR initialProgram,
-            /* [in] */ __RPC__in TSSESSION_STATE *pSessionState,
-            /* [out][in] */ __RPC__inout DWORD *pdwCount,
+            /* [annotation][in] */ 
+            _In_  BSTR targetName,
+            /* [annotation][in] */ 
+            _In_  BSTR userName,
+            /* [annotation][in] */ 
+            _In_  BSTR userDomain,
+            /* [annotation][in] */ 
+            _In_  BSTR poolName,
+            /* [annotation][in] */ 
+            _In_  BSTR initialProgram,
+            /* [annotation][in] */ 
+            _In_  TSSESSION_STATE *pSessionState,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwCount,
             /* [annotation][size_is][out] */ 
             __RPC__deref_out_ecount_full(*pdwCount)  ITsSbSession **ppVal[  ]);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, GetFarmProperty)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetFarmProperty )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in BSTR farmName,
-            /* [in] */ __RPC__in BSTR propertyName,
-            /* [in] */ __RPC__in VARIANT *pVarValue);
+            /* [annotation][in] */ 
+            _In_  BSTR farmName,
+            /* [annotation][in] */ 
+            _In_  BSTR propertyName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVarValue);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, DeleteTarget)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteTarget )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in BSTR targetName,
-            /* [in] */ __RPC__in BSTR hostName);
+            /* [annotation][in] */ 
+            _In_  BSTR targetName,
+            /* [annotation][in] */ 
+            _In_  BSTR hostName);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, SetTargetPropertyWithVersionCheck)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetTargetPropertyWithVersionCheck )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in_opt ITsSbTarget *pTarget,
-            /* [in] */ __RPC__in BSTR PropertyName,
-            /* [in] */ __RPC__in VARIANT *pProperty);
+            /* [annotation][in] */ 
+            _In_  ITsSbTarget *pTarget,
+            /* [annotation][in] */ 
+            _In_  BSTR PropertyName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pProperty);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, SetEnvironmentPropertyWithVersionCheck)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetEnvironmentPropertyWithVersionCheck )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in_opt ITsSbEnvironment *pEnvironment,
-            /* [in] */ __RPC__in BSTR PropertyName,
-            /* [in] */ __RPC__in VARIANT *pProperty);
+            /* [annotation][in] */ 
+            _In_  ITsSbEnvironment *pEnvironment,
+            /* [annotation][in] */ 
+            _In_  BSTR PropertyName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pProperty);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, AcquireTargetLock)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AcquireTargetLock )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in BSTR targetName,
-            /* [in] */ DWORD dwTimeout,
-            /* [out] */ __RPC__deref_out_opt IUnknown **ppContext);
+            /* [annotation][in] */ 
+            _In_  BSTR targetName,
+            /* [annotation][in] */ 
+            _In_  DWORD dwTimeout,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppContext);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, ReleaseTargetLock)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ReleaseTargetLock )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in_opt IUnknown *pContext);
+            /* [annotation][in] */ 
+            _In_  IUnknown *pContext);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, TestAndSetServerState)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *TestAndSetServerState )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in BSTR PoolName,
-            /* [in] */ __RPC__in BSTR ServerFQDN,
-            /* [in] */ TARGET_STATE NewState,
-            /* [in] */ TARGET_STATE TestState,
-            /* [out] */ __RPC__out TARGET_STATE *pInitState);
+            /* [annotation][in] */ 
+            _In_  BSTR PoolName,
+            /* [annotation][in] */ 
+            _In_  BSTR ServerFQDN,
+            /* [annotation][in] */ 
+            _In_  TARGET_STATE NewState,
+            /* [annotation][in] */ 
+            _In_  TARGET_STATE TestState,
+            /* [annotation][out] */ 
+            _Out_  TARGET_STATE *pInitState);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, SetServerWaitingToStart)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetServerWaitingToStart )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in BSTR PoolName,
-            /* [in] */ __RPC__in BSTR serverName);
+            /* [annotation][in] */ 
+            _In_  BSTR PoolName,
+            /* [annotation][in] */ 
+            _In_  BSTR serverName);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, GetServerState)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetServerState )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in BSTR PoolName,
-            /* [in] */ __RPC__in BSTR ServerFQDN,
-            /* [out] */ __RPC__out TARGET_STATE *pState);
+            /* [annotation][in] */ 
+            _In_  BSTR PoolName,
+            /* [annotation][in] */ 
+            _In_  BSTR ServerFQDN,
+            /* [annotation][out] */ 
+            _Out_  TARGET_STATE *pState);
         
         DECLSPEC_XFGVIRT(ITsSbResourcePluginStore, SetServerDrainMode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetServerDrainMode )( 
             __RPC__in ITsSbResourcePluginStore * This,
-            /* [in] */ __RPC__in BSTR ServerFQDN,
-            /* [in] */ DWORD DrainMode);
+            /* [annotation][in] */ 
+            _In_  BSTR ServerFQDN,
+            /* [annotation][in] */ 
+            _In_  DWORD DrainMode);
         
         END_INTERFACE
     } ITsSbResourcePluginStoreVtbl;
@@ -4329,13 +4849,16 @@ EXTERN_C const IID IID_ITsSbFilterPluginStore;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SaveProperties( 
-            /* [in] */ __RPC__in_opt ITsSbPropertySet *pPropertySet) = 0;
+            /* [annotation][in] */ 
+            _In_  ITsSbPropertySet *pPropertySet) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumerateProperties( 
-            /* [retval][out] */ __RPC__deref_out_opt ITsSbPropertySet **ppPropertySet) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITsSbPropertySet **ppPropertySet) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteProperties( 
-            /* [in] */ __RPC__in BSTR propertyName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR propertyName) = 0;
         
     };
     
@@ -4349,7 +4872,8 @@ EXTERN_C const IID IID_ITsSbFilterPluginStore;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbFilterPluginStore * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4364,17 +4888,20 @@ EXTERN_C const IID IID_ITsSbFilterPluginStore;
         DECLSPEC_XFGVIRT(ITsSbFilterPluginStore, SaveProperties)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SaveProperties )( 
             __RPC__in ITsSbFilterPluginStore * This,
-            /* [in] */ __RPC__in_opt ITsSbPropertySet *pPropertySet);
+            /* [annotation][in] */ 
+            _In_  ITsSbPropertySet *pPropertySet);
         
         DECLSPEC_XFGVIRT(ITsSbFilterPluginStore, EnumerateProperties)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateProperties )( 
             __RPC__in ITsSbFilterPluginStore * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITsSbPropertySet **ppPropertySet);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITsSbPropertySet **ppPropertySet);
         
         DECLSPEC_XFGVIRT(ITsSbFilterPluginStore, DeleteProperties)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteProperties )( 
             __RPC__in ITsSbFilterPluginStore * This,
-            /* [in] */ __RPC__in BSTR propertyName);
+            /* [annotation][in] */ 
+            _In_  BSTR propertyName);
         
         END_INTERFACE
     } ITsSbFilterPluginStoreVtbl;
@@ -4435,49 +4962,80 @@ EXTERN_C const IID IID_ITsSbGlobalStore;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE QueryTarget( 
-            /* [in] */ __RPC__in BSTR ProviderName,
-            /* [in] */ __RPC__in BSTR TargetName,
-            /* [in] */ __RPC__in BSTR FarmName,
-            /* [out] */ __RPC__deref_out_opt ITsSbTarget **ppTarget) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR ProviderName,
+            /* [annotation][in] */ 
+            _In_  BSTR TargetName,
+            /* [annotation][in] */ 
+            _In_  BSTR FarmName,
+            /* [annotation][out] */ 
+            _Out_  ITsSbTarget **ppTarget) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE QuerySessionBySessionId( 
-            /* [in] */ __RPC__in BSTR ProviderName,
-            /* [in] */ DWORD dwSessionId,
-            /* [in] */ __RPC__in BSTR TargetName,
-            /* [out] */ __RPC__deref_out_opt ITsSbSession **ppSession) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR ProviderName,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSessionId,
+            /* [annotation][in] */ 
+            _In_  BSTR TargetName,
+            /* [annotation][out] */ 
+            _Out_  ITsSbSession **ppSession) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumerateFarms( 
-            /* [in] */ __RPC__in BSTR ProviderName,
-            /* [out] */ __RPC__out DWORD *pdwCount,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *pVal) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR ProviderName,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwCount,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *pVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumerateTargets( 
-            /* [in] */ __RPC__in BSTR ProviderName,
-            /* [in] */ __RPC__in BSTR FarmName,
-            /* [in] */ __RPC__in BSTR EnvName,
-            /* [out][in] */ __RPC__inout DWORD *pdwCount,
-            /* [size_is][out] */ __RPC__out_ecount_full(*pdwCount) ITsSbTarget **pVal[  ]) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR ProviderName,
+            /* [annotation][in] */ 
+            _In_  BSTR FarmName,
+            /* [annotation][in] */ 
+            _In_  BSTR EnvName,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwCount,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(*pdwCount)  ITsSbTarget **pVal[  ]) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumerateEnvironmentsByProvider( 
-            /* [in] */ __RPC__in BSTR ProviderName,
-            /* [out][in] */ __RPC__inout DWORD *pdwCount,
-            /* [size_is][out] */ __RPC__out_ecount_full(*pdwCount) ITsSbEnvironment **ppVal[  ]) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR ProviderName,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwCount,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(*pdwCount)  ITsSbEnvironment **ppVal[  ]) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumerateSessions( 
-            /* [in] */ __RPC__in BSTR ProviderName,
-            /* [in] */ __RPC__in BSTR targetName,
-            /* [in] */ __RPC__in BSTR userName,
-            /* [in] */ __RPC__in BSTR userDomain,
-            /* [in] */ __RPC__in BSTR poolName,
-            /* [in] */ __RPC__in BSTR initialProgram,
-            /* [in] */ __RPC__in TSSESSION_STATE *pSessionState,
-            /* [out][in] */ __RPC__inout DWORD *pdwCount,
-            /* [size_is][out] */ __RPC__out_ecount_full(*pdwCount) ITsSbSession **ppVal[  ]) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR ProviderName,
+            /* [annotation][in] */ 
+            _In_  BSTR targetName,
+            /* [annotation][in] */ 
+            _In_  BSTR userName,
+            /* [annotation][in] */ 
+            _In_  BSTR userDomain,
+            /* [annotation][in] */ 
+            _In_  BSTR poolName,
+            /* [annotation][in] */ 
+            _In_  BSTR initialProgram,
+            /* [annotation][in] */ 
+            _In_  TSSESSION_STATE *pSessionState,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwCount,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(*pdwCount)  ITsSbSession **ppVal[  ]) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetFarmProperty( 
-            /* [in] */ __RPC__in BSTR farmName,
-            /* [in] */ __RPC__in BSTR propertyName,
-            /* [in] */ __RPC__in VARIANT *pVarValue) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR farmName,
+            /* [annotation][in] */ 
+            _In_  BSTR propertyName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVarValue) = 0;
         
     };
     
@@ -4491,7 +5049,8 @@ EXTERN_C const IID IID_ITsSbGlobalStore;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbGlobalStore * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4506,61 +5065,92 @@ EXTERN_C const IID IID_ITsSbGlobalStore;
         DECLSPEC_XFGVIRT(ITsSbGlobalStore, QueryTarget)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *QueryTarget )( 
             __RPC__in ITsSbGlobalStore * This,
-            /* [in] */ __RPC__in BSTR ProviderName,
-            /* [in] */ __RPC__in BSTR TargetName,
-            /* [in] */ __RPC__in BSTR FarmName,
-            /* [out] */ __RPC__deref_out_opt ITsSbTarget **ppTarget);
+            /* [annotation][in] */ 
+            _In_  BSTR ProviderName,
+            /* [annotation][in] */ 
+            _In_  BSTR TargetName,
+            /* [annotation][in] */ 
+            _In_  BSTR FarmName,
+            /* [annotation][out] */ 
+            _Out_  ITsSbTarget **ppTarget);
         
         DECLSPEC_XFGVIRT(ITsSbGlobalStore, QuerySessionBySessionId)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *QuerySessionBySessionId )( 
             __RPC__in ITsSbGlobalStore * This,
-            /* [in] */ __RPC__in BSTR ProviderName,
-            /* [in] */ DWORD dwSessionId,
-            /* [in] */ __RPC__in BSTR TargetName,
-            /* [out] */ __RPC__deref_out_opt ITsSbSession **ppSession);
+            /* [annotation][in] */ 
+            _In_  BSTR ProviderName,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSessionId,
+            /* [annotation][in] */ 
+            _In_  BSTR TargetName,
+            /* [annotation][out] */ 
+            _Out_  ITsSbSession **ppSession);
         
         DECLSPEC_XFGVIRT(ITsSbGlobalStore, EnumerateFarms)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateFarms )( 
             __RPC__in ITsSbGlobalStore * This,
-            /* [in] */ __RPC__in BSTR ProviderName,
-            /* [out] */ __RPC__out DWORD *pdwCount,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *pVal);
+            /* [annotation][in] */ 
+            _In_  BSTR ProviderName,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwCount,
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *pVal);
         
         DECLSPEC_XFGVIRT(ITsSbGlobalStore, EnumerateTargets)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateTargets )( 
             __RPC__in ITsSbGlobalStore * This,
-            /* [in] */ __RPC__in BSTR ProviderName,
-            /* [in] */ __RPC__in BSTR FarmName,
-            /* [in] */ __RPC__in BSTR EnvName,
-            /* [out][in] */ __RPC__inout DWORD *pdwCount,
-            /* [size_is][out] */ __RPC__out_ecount_full(*pdwCount) ITsSbTarget **pVal[  ]);
+            /* [annotation][in] */ 
+            _In_  BSTR ProviderName,
+            /* [annotation][in] */ 
+            _In_  BSTR FarmName,
+            /* [annotation][in] */ 
+            _In_  BSTR EnvName,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwCount,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(*pdwCount)  ITsSbTarget **pVal[  ]);
         
         DECLSPEC_XFGVIRT(ITsSbGlobalStore, EnumerateEnvironmentsByProvider)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateEnvironmentsByProvider )( 
             __RPC__in ITsSbGlobalStore * This,
-            /* [in] */ __RPC__in BSTR ProviderName,
-            /* [out][in] */ __RPC__inout DWORD *pdwCount,
-            /* [size_is][out] */ __RPC__out_ecount_full(*pdwCount) ITsSbEnvironment **ppVal[  ]);
+            /* [annotation][in] */ 
+            _In_  BSTR ProviderName,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwCount,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(*pdwCount)  ITsSbEnvironment **ppVal[  ]);
         
         DECLSPEC_XFGVIRT(ITsSbGlobalStore, EnumerateSessions)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateSessions )( 
             __RPC__in ITsSbGlobalStore * This,
-            /* [in] */ __RPC__in BSTR ProviderName,
-            /* [in] */ __RPC__in BSTR targetName,
-            /* [in] */ __RPC__in BSTR userName,
-            /* [in] */ __RPC__in BSTR userDomain,
-            /* [in] */ __RPC__in BSTR poolName,
-            /* [in] */ __RPC__in BSTR initialProgram,
-            /* [in] */ __RPC__in TSSESSION_STATE *pSessionState,
-            /* [out][in] */ __RPC__inout DWORD *pdwCount,
-            /* [size_is][out] */ __RPC__out_ecount_full(*pdwCount) ITsSbSession **ppVal[  ]);
+            /* [annotation][in] */ 
+            _In_  BSTR ProviderName,
+            /* [annotation][in] */ 
+            _In_  BSTR targetName,
+            /* [annotation][in] */ 
+            _In_  BSTR userName,
+            /* [annotation][in] */ 
+            _In_  BSTR userDomain,
+            /* [annotation][in] */ 
+            _In_  BSTR poolName,
+            /* [annotation][in] */ 
+            _In_  BSTR initialProgram,
+            /* [annotation][in] */ 
+            _In_  TSSESSION_STATE *pSessionState,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwCount,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(*pdwCount)  ITsSbSession **ppVal[  ]);
         
         DECLSPEC_XFGVIRT(ITsSbGlobalStore, GetFarmProperty)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetFarmProperty )( 
             __RPC__in ITsSbGlobalStore * This,
-            /* [in] */ __RPC__in BSTR farmName,
-            /* [in] */ __RPC__in BSTR propertyName,
-            /* [in] */ __RPC__in VARIANT *pVarValue);
+            /* [annotation][in] */ 
+            _In_  BSTR farmName,
+            /* [annotation][in] */ 
+            _In_  BSTR propertyName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVarValue);
         
         END_INTERFACE
     } ITsSbGlobalStoreVtbl;
@@ -4633,28 +5223,40 @@ EXTERN_C const IID IID_ITsSbProvisioningPluginNotifySink;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnJobCreated( 
-            /* [in] */ __RPC__in VM_NOTIFY_INFO *pVmNotifyInfo) = 0;
+            /* [annotation][in] */ 
+            _In_  VM_NOTIFY_INFO *pVmNotifyInfo) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnVirtualMachineStatusChanged( 
-            /* [in] */ __RPC__in VM_NOTIFY_ENTRY *pVmNotifyEntry,
-            /* [in] */ VM_NOTIFY_STATUS VmNotifyStatus,
-            /* [in] */ HRESULT ErrorCode,
-            /* [in] */ __RPC__in BSTR ErrorDescr) = 0;
+            /* [annotation][in] */ 
+            _In_  VM_NOTIFY_ENTRY *pVmNotifyEntry,
+            /* [annotation][in] */ 
+            _In_  VM_NOTIFY_STATUS VmNotifyStatus,
+            /* [annotation][in] */ 
+            _In_  HRESULT ErrorCode,
+            /* [annotation][in] */ 
+            _In_  BSTR ErrorDescr) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnJobCompleted( 
-            /* [in] */ HRESULT ResultCode,
-            /* [in] */ __RPC__in BSTR ResultDescription) = 0;
+            /* [annotation][in] */ 
+            _In_  HRESULT ResultCode,
+            /* [annotation][in] */ 
+            _In_  BSTR ResultDescription) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnJobCancelled( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE LockVirtualMachine( 
-            /* [in] */ __RPC__in VM_NOTIFY_ENTRY *pVmNotifyEntry) = 0;
+            /* [annotation][in] */ 
+            _In_  VM_NOTIFY_ENTRY *pVmNotifyEntry) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnVirtualMachineHostStatusChanged( 
-            /* [in] */ __RPC__in BSTR VmHost,
-            /* [in] */ VM_HOST_NOTIFY_STATUS VmHostNotifyStatus,
-            /* [in] */ HRESULT ErrorCode,
-            /* [in] */ __RPC__in BSTR ErrorDescr) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR VmHost,
+            /* [annotation][in] */ 
+            _In_  VM_HOST_NOTIFY_STATUS VmHostNotifyStatus,
+            /* [annotation][in] */ 
+            _In_  HRESULT ErrorCode,
+            /* [annotation][in] */ 
+            _In_  BSTR ErrorDescr) = 0;
         
     };
     
@@ -4668,7 +5270,8 @@ EXTERN_C const IID IID_ITsSbProvisioningPluginNotifySink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbProvisioningPluginNotifySink * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4683,21 +5286,28 @@ EXTERN_C const IID IID_ITsSbProvisioningPluginNotifySink;
         DECLSPEC_XFGVIRT(ITsSbProvisioningPluginNotifySink, OnJobCreated)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnJobCreated )( 
             __RPC__in ITsSbProvisioningPluginNotifySink * This,
-            /* [in] */ __RPC__in VM_NOTIFY_INFO *pVmNotifyInfo);
+            /* [annotation][in] */ 
+            _In_  VM_NOTIFY_INFO *pVmNotifyInfo);
         
         DECLSPEC_XFGVIRT(ITsSbProvisioningPluginNotifySink, OnVirtualMachineStatusChanged)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnVirtualMachineStatusChanged )( 
             __RPC__in ITsSbProvisioningPluginNotifySink * This,
-            /* [in] */ __RPC__in VM_NOTIFY_ENTRY *pVmNotifyEntry,
-            /* [in] */ VM_NOTIFY_STATUS VmNotifyStatus,
-            /* [in] */ HRESULT ErrorCode,
-            /* [in] */ __RPC__in BSTR ErrorDescr);
+            /* [annotation][in] */ 
+            _In_  VM_NOTIFY_ENTRY *pVmNotifyEntry,
+            /* [annotation][in] */ 
+            _In_  VM_NOTIFY_STATUS VmNotifyStatus,
+            /* [annotation][in] */ 
+            _In_  HRESULT ErrorCode,
+            /* [annotation][in] */ 
+            _In_  BSTR ErrorDescr);
         
         DECLSPEC_XFGVIRT(ITsSbProvisioningPluginNotifySink, OnJobCompleted)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnJobCompleted )( 
             __RPC__in ITsSbProvisioningPluginNotifySink * This,
-            /* [in] */ HRESULT ResultCode,
-            /* [in] */ __RPC__in BSTR ResultDescription);
+            /* [annotation][in] */ 
+            _In_  HRESULT ResultCode,
+            /* [annotation][in] */ 
+            _In_  BSTR ResultDescription);
         
         DECLSPEC_XFGVIRT(ITsSbProvisioningPluginNotifySink, OnJobCancelled)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnJobCancelled )( 
@@ -4706,15 +5316,20 @@ EXTERN_C const IID IID_ITsSbProvisioningPluginNotifySink;
         DECLSPEC_XFGVIRT(ITsSbProvisioningPluginNotifySink, LockVirtualMachine)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *LockVirtualMachine )( 
             __RPC__in ITsSbProvisioningPluginNotifySink * This,
-            /* [in] */ __RPC__in VM_NOTIFY_ENTRY *pVmNotifyEntry);
+            /* [annotation][in] */ 
+            _In_  VM_NOTIFY_ENTRY *pVmNotifyEntry);
         
         DECLSPEC_XFGVIRT(ITsSbProvisioningPluginNotifySink, OnVirtualMachineHostStatusChanged)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnVirtualMachineHostStatusChanged )( 
             __RPC__in ITsSbProvisioningPluginNotifySink * This,
-            /* [in] */ __RPC__in BSTR VmHost,
-            /* [in] */ VM_HOST_NOTIFY_STATUS VmHostNotifyStatus,
-            /* [in] */ HRESULT ErrorCode,
-            /* [in] */ __RPC__in BSTR ErrorDescr);
+            /* [annotation][in] */ 
+            _In_  BSTR VmHost,
+            /* [annotation][in] */ 
+            _In_  VM_HOST_NOTIFY_STATUS VmHostNotifyStatus,
+            /* [annotation][in] */ 
+            _In_  HRESULT ErrorCode,
+            /* [annotation][in] */ 
+            _In_  BSTR ErrorDescr);
         
         END_INTERFACE
     } ITsSbProvisioningPluginNotifySinkVtbl;
@@ -4784,23 +5399,33 @@ EXTERN_C const IID IID_ITsSbProvisioning;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateVirtualMachines( 
-            /* [in] */ __RPC__in BSTR JobXmlString,
-            /* [in] */ __RPC__in BSTR JobGuid,
-            /* [in] */ __RPC__in_opt ITsSbProvisioningPluginNotifySink *pSink) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR JobXmlString,
+            /* [annotation][in] */ 
+            _In_  BSTR JobGuid,
+            /* [annotation][in] */ 
+            _In_  ITsSbProvisioningPluginNotifySink *pSink) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE PatchVirtualMachines( 
-            /* [in] */ __RPC__in BSTR JobXmlString,
-            /* [in] */ __RPC__in BSTR JobGuid,
-            /* [in] */ __RPC__in_opt ITsSbProvisioningPluginNotifySink *pSink,
+            /* [annotation][in] */ 
+            _In_  BSTR JobXmlString,
+            /* [annotation][in] */ 
+            _In_  BSTR JobGuid,
+            /* [annotation][in] */ 
+            _In_  ITsSbProvisioningPluginNotifySink *pSink,
             /* [optional][in] */ __RPC__in VM_PATCH_INFO *pVMPatchInfo) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteVirtualMachines( 
-            /* [in] */ __RPC__in BSTR JobXmlString,
-            /* [in] */ __RPC__in BSTR JobGuid,
-            /* [in] */ __RPC__in_opt ITsSbProvisioningPluginNotifySink *pSink) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR JobXmlString,
+            /* [annotation][in] */ 
+            _In_  BSTR JobGuid,
+            /* [annotation][in] */ 
+            _In_  ITsSbProvisioningPluginNotifySink *pSink) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CancelJob( 
-            /* [in] */ __RPC__in BSTR JobGuid) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR JobGuid) = 0;
         
     };
     
@@ -4814,7 +5439,8 @@ EXTERN_C const IID IID_ITsSbProvisioning;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbProvisioning * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4829,41 +5455,55 @@ EXTERN_C const IID IID_ITsSbProvisioning;
         DECLSPEC_XFGVIRT(ITsSbPlugin, Initialize)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in ITsSbProvisioning * This,
-            /* [in] */ __RPC__in_opt ITsSbProvider *pProvider,
-            /* [in] */ __RPC__in_opt ITsSbPluginNotifySink *pNotifySink,
-            /* [in] */ __RPC__in_opt ITsSbPluginPropertySet *pPropertySet);
+            /* [annotation][in] */ 
+            _In_  ITsSbProvider *pProvider,
+            /* [annotation][in] */ 
+            _In_  ITsSbPluginNotifySink *pNotifySink,
+            /* [annotation][in] */ 
+            _In_  ITsSbPluginPropertySet *pPropertySet);
         
         DECLSPEC_XFGVIRT(ITsSbPlugin, Terminate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Terminate )( 
             __RPC__in ITsSbProvisioning * This,
-            /* [in] */ HRESULT hr);
+            /* [annotation][in] */ 
+            _In_  HRESULT hr);
         
         DECLSPEC_XFGVIRT(ITsSbProvisioning, CreateVirtualMachines)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateVirtualMachines )( 
             __RPC__in ITsSbProvisioning * This,
-            /* [in] */ __RPC__in BSTR JobXmlString,
-            /* [in] */ __RPC__in BSTR JobGuid,
-            /* [in] */ __RPC__in_opt ITsSbProvisioningPluginNotifySink *pSink);
+            /* [annotation][in] */ 
+            _In_  BSTR JobXmlString,
+            /* [annotation][in] */ 
+            _In_  BSTR JobGuid,
+            /* [annotation][in] */ 
+            _In_  ITsSbProvisioningPluginNotifySink *pSink);
         
         DECLSPEC_XFGVIRT(ITsSbProvisioning, PatchVirtualMachines)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PatchVirtualMachines )( 
             __RPC__in ITsSbProvisioning * This,
-            /* [in] */ __RPC__in BSTR JobXmlString,
-            /* [in] */ __RPC__in BSTR JobGuid,
-            /* [in] */ __RPC__in_opt ITsSbProvisioningPluginNotifySink *pSink,
+            /* [annotation][in] */ 
+            _In_  BSTR JobXmlString,
+            /* [annotation][in] */ 
+            _In_  BSTR JobGuid,
+            /* [annotation][in] */ 
+            _In_  ITsSbProvisioningPluginNotifySink *pSink,
             /* [optional][in] */ __RPC__in VM_PATCH_INFO *pVMPatchInfo);
         
         DECLSPEC_XFGVIRT(ITsSbProvisioning, DeleteVirtualMachines)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteVirtualMachines )( 
             __RPC__in ITsSbProvisioning * This,
-            /* [in] */ __RPC__in BSTR JobXmlString,
-            /* [in] */ __RPC__in BSTR JobGuid,
-            /* [in] */ __RPC__in_opt ITsSbProvisioningPluginNotifySink *pSink);
+            /* [annotation][in] */ 
+            _In_  BSTR JobXmlString,
+            /* [annotation][in] */ 
+            _In_  BSTR JobGuid,
+            /* [annotation][in] */ 
+            _In_  ITsSbProvisioningPluginNotifySink *pSink);
         
         DECLSPEC_XFGVIRT(ITsSbProvisioning, CancelJob)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CancelJob )( 
             __RPC__in ITsSbProvisioning * This,
-            /* [in] */ __RPC__in BSTR JobGuid);
+            /* [annotation][in] */ 
+            _In_  BSTR JobGuid);
         
         END_INTERFACE
     } ITsSbProvisioningVtbl;
@@ -4934,10 +5574,12 @@ EXTERN_C const IID IID_ITsSbGenericNotifySink;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnCompleted( 
-            /* [in] */ HRESULT Status) = 0;
+            /* [annotation][in] */ 
+            _In_  HRESULT Status) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetWaitTimeout( 
-            /* [out] */ __RPC__out FILETIME *pftTimeout) = 0;
+            /* [annotation][out] */ 
+            _Out_  FILETIME *pftTimeout) = 0;
         
     };
     
@@ -4951,7 +5593,8 @@ EXTERN_C const IID IID_ITsSbGenericNotifySink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITsSbGenericNotifySink * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4966,12 +5609,14 @@ EXTERN_C const IID IID_ITsSbGenericNotifySink;
         DECLSPEC_XFGVIRT(ITsSbGenericNotifySink, OnCompleted)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnCompleted )( 
             __RPC__in ITsSbGenericNotifySink * This,
-            /* [in] */ HRESULT Status);
+            /* [annotation][in] */ 
+            _In_  HRESULT Status);
         
         DECLSPEC_XFGVIRT(ITsSbGenericNotifySink, GetWaitTimeout)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetWaitTimeout )( 
             __RPC__in ITsSbGenericNotifySink * This,
-            /* [out] */ __RPC__out FILETIME *pftTimeout);
+            /* [annotation][out] */ 
+            _Out_  FILETIME *pftTimeout);
         
         END_INTERFACE
     } ITsSbGenericNotifySinkVtbl;

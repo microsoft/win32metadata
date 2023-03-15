@@ -456,64 +456,88 @@ EXTERN_C const IID IID_IHlink;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetHlinkSite( 
-            /* [unique][in] */ __RPC__in_opt IHlinkSite *pihlSite,
-            /* [in] */ DWORD dwSiteData) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  IHlinkSite *pihlSite,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSiteData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetHlinkSite( 
-            /* [out] */ __RPC__deref_out_opt IHlinkSite **ppihlSite,
-            /* [out] */ __RPC__out DWORD *pdwSiteData) = 0;
+            /* [annotation][out] */ 
+            _Out_  IHlinkSite **ppihlSite,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSiteData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetMonikerReference( 
-            /* [in] */ DWORD grfHLSETF,
-            /* [unique][in] */ __RPC__in_opt IMoniker *pimkTarget,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzLocation) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLSETF,
+            /* [annotation][unique][in] */ 
+            _In_  IMoniker *pimkTarget,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzLocation) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetMonikerReference( 
-            /* [in] */ DWORD dwWhichRef,
+            /* [annotation][in] */ 
+            _In_  DWORD dwWhichRef,
             /* [annotation][out] */ 
             _Outptr_opt_result_maybenull_  IMoniker **ppimkTarget,
             /* [annotation][out] */ 
             _Outptr_opt_result_maybenull_  LPWSTR *ppwzLocation) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStringReference( 
-            /* [in] */ DWORD grfHLSETF,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzTarget,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzLocation) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLSETF,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzTarget,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzLocation) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetStringReference( 
-            /* [in] */ DWORD dwWhichRef,
+            /* [annotation][in] */ 
+            _In_  DWORD dwWhichRef,
             /* [annotation][out] */ 
             _Outptr_opt_  LPWSTR *ppwzTarget,
             /* [annotation][out] */ 
             _Outptr_opt_result_maybenull_  LPWSTR *ppwzLocation) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFriendlyName( 
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzFriendlyName) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzFriendlyName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFriendlyName( 
-            /* [in] */ DWORD grfHLFNAMEF,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppwzFriendlyName) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLFNAMEF,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwzFriendlyName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTargetFrameName( 
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzTargetFrameName) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzTargetFrameName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTargetFrameName( 
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppwzTargetFrameName) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwzTargetFrameName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMiscStatus( 
-            /* [out] */ __RPC__out DWORD *pdwStatus) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwStatus) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Navigate( 
-            /* [in] */ DWORD grfHLNF,
-            /* [unique][in] */ __RPC__in_opt LPBC pibc,
-            /* [unique][in] */ __RPC__in_opt IBindStatusCallback *pibsc,
-            /* [unique][in] */ __RPC__in_opt IHlinkBrowseContext *pihlbc) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLNF,
+            /* [annotation][unique][in] */ 
+            _In_  LPBC pibc,
+            /* [annotation][unique][in] */ 
+            _In_  IBindStatusCallback *pibsc,
+            /* [annotation][unique][in] */ 
+            _In_  IHlinkBrowseContext *pihlbc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAdditionalParams( 
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzAdditionalParams) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzAdditionalParams) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAdditionalParams( 
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppwzAdditionalParams) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwzAdditionalParams) = 0;
         
     };
     
@@ -527,7 +551,8 @@ EXTERN_C const IID IID_IHlink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IHlink * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -542,26 +567,34 @@ EXTERN_C const IID IID_IHlink;
         DECLSPEC_XFGVIRT(IHlink, SetHlinkSite)
         HRESULT ( STDMETHODCALLTYPE *SetHlinkSite )( 
             __RPC__in IHlink * This,
-            /* [unique][in] */ __RPC__in_opt IHlinkSite *pihlSite,
-            /* [in] */ DWORD dwSiteData);
+            /* [annotation][unique][in] */ 
+            _In_  IHlinkSite *pihlSite,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSiteData);
         
         DECLSPEC_XFGVIRT(IHlink, GetHlinkSite)
         HRESULT ( STDMETHODCALLTYPE *GetHlinkSite )( 
             __RPC__in IHlink * This,
-            /* [out] */ __RPC__deref_out_opt IHlinkSite **ppihlSite,
-            /* [out] */ __RPC__out DWORD *pdwSiteData);
+            /* [annotation][out] */ 
+            _Out_  IHlinkSite **ppihlSite,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSiteData);
         
         DECLSPEC_XFGVIRT(IHlink, SetMonikerReference)
         HRESULT ( STDMETHODCALLTYPE *SetMonikerReference )( 
             __RPC__in IHlink * This,
-            /* [in] */ DWORD grfHLSETF,
-            /* [unique][in] */ __RPC__in_opt IMoniker *pimkTarget,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzLocation);
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLSETF,
+            /* [annotation][unique][in] */ 
+            _In_  IMoniker *pimkTarget,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzLocation);
         
         DECLSPEC_XFGVIRT(IHlink, GetMonikerReference)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetMonikerReference )( 
             IHlink * This,
-            /* [in] */ DWORD dwWhichRef,
+            /* [annotation][in] */ 
+            _In_  DWORD dwWhichRef,
             /* [annotation][out] */ 
             _Outptr_opt_result_maybenull_  IMoniker **ppimkTarget,
             /* [annotation][out] */ 
@@ -570,14 +603,18 @@ EXTERN_C const IID IID_IHlink;
         DECLSPEC_XFGVIRT(IHlink, SetStringReference)
         HRESULT ( STDMETHODCALLTYPE *SetStringReference )( 
             __RPC__in IHlink * This,
-            /* [in] */ DWORD grfHLSETF,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzTarget,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzLocation);
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLSETF,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzTarget,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzLocation);
         
         DECLSPEC_XFGVIRT(IHlink, GetStringReference)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetStringReference )( 
             IHlink * This,
-            /* [in] */ DWORD dwWhichRef,
+            /* [annotation][in] */ 
+            _In_  DWORD dwWhichRef,
             /* [annotation][out] */ 
             _Outptr_opt_  LPWSTR *ppwzTarget,
             /* [annotation][out] */ 
@@ -586,46 +623,58 @@ EXTERN_C const IID IID_IHlink;
         DECLSPEC_XFGVIRT(IHlink, SetFriendlyName)
         HRESULT ( STDMETHODCALLTYPE *SetFriendlyName )( 
             __RPC__in IHlink * This,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzFriendlyName);
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzFriendlyName);
         
         DECLSPEC_XFGVIRT(IHlink, GetFriendlyName)
         HRESULT ( STDMETHODCALLTYPE *GetFriendlyName )( 
             __RPC__in IHlink * This,
-            /* [in] */ DWORD grfHLFNAMEF,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppwzFriendlyName);
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLFNAMEF,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwzFriendlyName);
         
         DECLSPEC_XFGVIRT(IHlink, SetTargetFrameName)
         HRESULT ( STDMETHODCALLTYPE *SetTargetFrameName )( 
             __RPC__in IHlink * This,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzTargetFrameName);
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzTargetFrameName);
         
         DECLSPEC_XFGVIRT(IHlink, GetTargetFrameName)
         HRESULT ( STDMETHODCALLTYPE *GetTargetFrameName )( 
             __RPC__in IHlink * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppwzTargetFrameName);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwzTargetFrameName);
         
         DECLSPEC_XFGVIRT(IHlink, GetMiscStatus)
         HRESULT ( STDMETHODCALLTYPE *GetMiscStatus )( 
             __RPC__in IHlink * This,
-            /* [out] */ __RPC__out DWORD *pdwStatus);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwStatus);
         
         DECLSPEC_XFGVIRT(IHlink, Navigate)
         HRESULT ( STDMETHODCALLTYPE *Navigate )( 
             __RPC__in IHlink * This,
-            /* [in] */ DWORD grfHLNF,
-            /* [unique][in] */ __RPC__in_opt LPBC pibc,
-            /* [unique][in] */ __RPC__in_opt IBindStatusCallback *pibsc,
-            /* [unique][in] */ __RPC__in_opt IHlinkBrowseContext *pihlbc);
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLNF,
+            /* [annotation][unique][in] */ 
+            _In_  LPBC pibc,
+            /* [annotation][unique][in] */ 
+            _In_  IBindStatusCallback *pibsc,
+            /* [annotation][unique][in] */ 
+            _In_  IHlinkBrowseContext *pihlbc);
         
         DECLSPEC_XFGVIRT(IHlink, SetAdditionalParams)
         HRESULT ( STDMETHODCALLTYPE *SetAdditionalParams )( 
             __RPC__in IHlink * This,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzAdditionalParams);
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzAdditionalParams);
         
         DECLSPEC_XFGVIRT(IHlink, GetAdditionalParams)
         HRESULT ( STDMETHODCALLTYPE *GetAdditionalParams )( 
             __RPC__in IHlink * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppwzAdditionalParams);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwzAdditionalParams);
         
         END_INTERFACE
     } IHlinkVtbl;
@@ -701,9 +750,12 @@ EXTERN_C const IID IID_IHlink;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IHlink_RemoteGetMonikerReference_Proxy( 
     __RPC__in IHlink * This,
-    /* [in] */ DWORD dwWhichRef,
-    /* [out] */ __RPC__deref_out_opt IMoniker **ppimkTarget,
-    /* [out] */ __RPC__deref_out_opt LPWSTR *ppwzLocation);
+    /* [annotation][in] */ 
+    _In_  DWORD dwWhichRef,
+    /* [annotation][out] */ 
+    _Out_  IMoniker **ppimkTarget,
+    /* [annotation][out] */ 
+    _Out_  LPWSTR *ppwzLocation);
 
 
 void __RPC_STUB IHlink_RemoteGetMonikerReference_Stub(
@@ -715,9 +767,12 @@ void __RPC_STUB IHlink_RemoteGetMonikerReference_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IHlink_RemoteGetStringReference_Proxy( 
     __RPC__in IHlink * This,
-    /* [in] */ DWORD dwWhichRef,
-    /* [out] */ __RPC__deref_out_opt LPWSTR *ppwzTarget,
-    /* [out] */ __RPC__deref_out_opt LPWSTR *ppwzLocation);
+    /* [annotation][in] */ 
+    _In_  DWORD dwWhichRef,
+    /* [annotation][out] */ 
+    _Out_  LPWSTR *ppwzTarget,
+    /* [annotation][out] */ 
+    _Out_  LPWSTR *ppwzLocation);
 
 
 void __RPC_STUB IHlink_RemoteGetStringReference_Stub(
@@ -768,26 +823,40 @@ EXTERN_C const IID IID_IHlinkSite;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE QueryService( 
-            /* [in] */ DWORD dwSiteData,
-            /* [in] */ __RPC__in REFGUID guidService,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppiunk) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwSiteData,
+            /* [annotation][in] */ 
+            _In_  REFGUID guidService,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  IUnknown **ppiunk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMoniker( 
-            /* [in] */ DWORD dwSiteData,
-            /* [in] */ DWORD dwAssign,
-            /* [in] */ DWORD dwWhich,
-            /* [out] */ __RPC__deref_out_opt IMoniker **ppimk) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwSiteData,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAssign,
+            /* [annotation][in] */ 
+            _In_  DWORD dwWhich,
+            /* [annotation][out] */ 
+            _Out_  IMoniker **ppimk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReadyToNavigate( 
-            /* [in] */ DWORD dwSiteData,
-            /* [in] */ DWORD dwReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwSiteData,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnNavigationComplete( 
-            /* [in] */ DWORD dwSiteData,
-            /* [in] */ DWORD dwreserved,
-            /* [in] */ HRESULT hrError,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzError) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwSiteData,
+            /* [annotation][in] */ 
+            _In_  DWORD dwreserved,
+            /* [annotation][in] */ 
+            _In_  HRESULT hrError,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzError) = 0;
         
     };
     
@@ -801,7 +870,8 @@ EXTERN_C const IID IID_IHlinkSite;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IHlinkSite * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -816,32 +886,46 @@ EXTERN_C const IID IID_IHlinkSite;
         DECLSPEC_XFGVIRT(IHlinkSite, QueryService)
         HRESULT ( STDMETHODCALLTYPE *QueryService )( 
             __RPC__in IHlinkSite * This,
-            /* [in] */ DWORD dwSiteData,
-            /* [in] */ __RPC__in REFGUID guidService,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppiunk);
+            /* [annotation][in] */ 
+            _In_  DWORD dwSiteData,
+            /* [annotation][in] */ 
+            _In_  REFGUID guidService,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  IUnknown **ppiunk);
         
         DECLSPEC_XFGVIRT(IHlinkSite, GetMoniker)
         HRESULT ( STDMETHODCALLTYPE *GetMoniker )( 
             __RPC__in IHlinkSite * This,
-            /* [in] */ DWORD dwSiteData,
-            /* [in] */ DWORD dwAssign,
-            /* [in] */ DWORD dwWhich,
-            /* [out] */ __RPC__deref_out_opt IMoniker **ppimk);
+            /* [annotation][in] */ 
+            _In_  DWORD dwSiteData,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAssign,
+            /* [annotation][in] */ 
+            _In_  DWORD dwWhich,
+            /* [annotation][out] */ 
+            _Out_  IMoniker **ppimk);
         
         DECLSPEC_XFGVIRT(IHlinkSite, ReadyToNavigate)
         HRESULT ( STDMETHODCALLTYPE *ReadyToNavigate )( 
             __RPC__in IHlinkSite * This,
-            /* [in] */ DWORD dwSiteData,
-            /* [in] */ DWORD dwReserved);
+            /* [annotation][in] */ 
+            _In_  DWORD dwSiteData,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved);
         
         DECLSPEC_XFGVIRT(IHlinkSite, OnNavigationComplete)
         HRESULT ( STDMETHODCALLTYPE *OnNavigationComplete )( 
             __RPC__in IHlinkSite * This,
-            /* [in] */ DWORD dwSiteData,
-            /* [in] */ DWORD dwreserved,
-            /* [in] */ HRESULT hrError,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzError);
+            /* [annotation][in] */ 
+            _In_  DWORD dwSiteData,
+            /* [annotation][in] */ 
+            _In_  DWORD dwreserved,
+            /* [annotation][in] */ 
+            _In_  HRESULT hrError,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzError);
         
         END_INTERFACE
     } IHlinkSiteVtbl;
@@ -918,23 +1002,32 @@ EXTERN_C const IID IID_IHlinkTarget;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetBrowseContext( 
-            /* [unique][in] */ __RPC__in_opt IHlinkBrowseContext *pihlbc) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  IHlinkBrowseContext *pihlbc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBrowseContext( 
-            /* [out] */ __RPC__deref_out_opt IHlinkBrowseContext **ppihlbc) = 0;
+            /* [annotation][out] */ 
+            _Out_  IHlinkBrowseContext **ppihlbc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Navigate( 
-            /* [in] */ DWORD grfHLNF,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzJumpLocation) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLNF,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzJumpLocation) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMoniker( 
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzLocation,
-            /* [in] */ DWORD dwAssign,
-            /* [out] */ __RPC__deref_out_opt IMoniker **ppimkLocation) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzLocation,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAssign,
+            /* [annotation][out] */ 
+            _Out_  IMoniker **ppimkLocation) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFriendlyName( 
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzLocation,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppwzFriendlyName) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzLocation,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwzFriendlyName) = 0;
         
     };
     
@@ -948,7 +1041,8 @@ EXTERN_C const IID IID_IHlinkTarget;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IHlinkTarget * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -963,31 +1057,40 @@ EXTERN_C const IID IID_IHlinkTarget;
         DECLSPEC_XFGVIRT(IHlinkTarget, SetBrowseContext)
         HRESULT ( STDMETHODCALLTYPE *SetBrowseContext )( 
             __RPC__in IHlinkTarget * This,
-            /* [unique][in] */ __RPC__in_opt IHlinkBrowseContext *pihlbc);
+            /* [annotation][unique][in] */ 
+            _In_  IHlinkBrowseContext *pihlbc);
         
         DECLSPEC_XFGVIRT(IHlinkTarget, GetBrowseContext)
         HRESULT ( STDMETHODCALLTYPE *GetBrowseContext )( 
             __RPC__in IHlinkTarget * This,
-            /* [out] */ __RPC__deref_out_opt IHlinkBrowseContext **ppihlbc);
+            /* [annotation][out] */ 
+            _Out_  IHlinkBrowseContext **ppihlbc);
         
         DECLSPEC_XFGVIRT(IHlinkTarget, Navigate)
         HRESULT ( STDMETHODCALLTYPE *Navigate )( 
             __RPC__in IHlinkTarget * This,
-            /* [in] */ DWORD grfHLNF,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzJumpLocation);
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLNF,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzJumpLocation);
         
         DECLSPEC_XFGVIRT(IHlinkTarget, GetMoniker)
         HRESULT ( STDMETHODCALLTYPE *GetMoniker )( 
             __RPC__in IHlinkTarget * This,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzLocation,
-            /* [in] */ DWORD dwAssign,
-            /* [out] */ __RPC__deref_out_opt IMoniker **ppimkLocation);
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzLocation,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAssign,
+            /* [annotation][out] */ 
+            _Out_  IMoniker **ppimkLocation);
         
         DECLSPEC_XFGVIRT(IHlinkTarget, GetFriendlyName)
         HRESULT ( STDMETHODCALLTYPE *GetFriendlyName )( 
             __RPC__in IHlinkTarget * This,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzLocation,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppwzFriendlyName);
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzLocation,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwzFriendlyName);
         
         END_INTERFACE
     } IHlinkTargetVtbl;
@@ -1068,29 +1171,44 @@ EXTERN_C const IID IID_IHlinkFrame;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetBrowseContext( 
-            /* [unique][in] */ __RPC__in_opt IHlinkBrowseContext *pihlbc) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  IHlinkBrowseContext *pihlbc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBrowseContext( 
-            /* [out] */ __RPC__deref_out_opt IHlinkBrowseContext **ppihlbc) = 0;
+            /* [annotation][out] */ 
+            _Out_  IHlinkBrowseContext **ppihlbc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Navigate( 
-            /* [in] */ DWORD grfHLNF,
-            /* [unique][in] */ __RPC__in_opt LPBC pbc,
-            /* [unique][in] */ __RPC__in_opt IBindStatusCallback *pibsc,
-            /* [unique][in] */ __RPC__in_opt IHlink *pihlNavigate) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLNF,
+            /* [annotation][unique][in] */ 
+            _In_  LPBC pbc,
+            /* [annotation][unique][in] */ 
+            _In_  IBindStatusCallback *pibsc,
+            /* [annotation][unique][in] */ 
+            _In_  IHlink *pihlNavigate) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnNavigate( 
-            /* [in] */ DWORD grfHLNF,
-            /* [unique][in] */ __RPC__in_opt IMoniker *pimkTarget,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzLocation,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzFriendlyName,
-            /* [in] */ DWORD dwreserved) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLNF,
+            /* [annotation][unique][in] */ 
+            _In_  IMoniker *pimkTarget,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzLocation,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzFriendlyName,
+            /* [annotation][in] */ 
+            _In_  DWORD dwreserved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UpdateHlink( 
-            /* [in] */ ULONG uHLID,
-            /* [unique][in] */ __RPC__in_opt IMoniker *pimkTarget,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzLocation,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzFriendlyName) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uHLID,
+            /* [annotation][unique][in] */ 
+            _In_  IMoniker *pimkTarget,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzLocation,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzFriendlyName) = 0;
         
     };
     
@@ -1104,7 +1222,8 @@ EXTERN_C const IID IID_IHlinkFrame;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IHlinkFrame * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1119,37 +1238,52 @@ EXTERN_C const IID IID_IHlinkFrame;
         DECLSPEC_XFGVIRT(IHlinkFrame, SetBrowseContext)
         HRESULT ( STDMETHODCALLTYPE *SetBrowseContext )( 
             __RPC__in IHlinkFrame * This,
-            /* [unique][in] */ __RPC__in_opt IHlinkBrowseContext *pihlbc);
+            /* [annotation][unique][in] */ 
+            _In_  IHlinkBrowseContext *pihlbc);
         
         DECLSPEC_XFGVIRT(IHlinkFrame, GetBrowseContext)
         HRESULT ( STDMETHODCALLTYPE *GetBrowseContext )( 
             __RPC__in IHlinkFrame * This,
-            /* [out] */ __RPC__deref_out_opt IHlinkBrowseContext **ppihlbc);
+            /* [annotation][out] */ 
+            _Out_  IHlinkBrowseContext **ppihlbc);
         
         DECLSPEC_XFGVIRT(IHlinkFrame, Navigate)
         HRESULT ( STDMETHODCALLTYPE *Navigate )( 
             __RPC__in IHlinkFrame * This,
-            /* [in] */ DWORD grfHLNF,
-            /* [unique][in] */ __RPC__in_opt LPBC pbc,
-            /* [unique][in] */ __RPC__in_opt IBindStatusCallback *pibsc,
-            /* [unique][in] */ __RPC__in_opt IHlink *pihlNavigate);
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLNF,
+            /* [annotation][unique][in] */ 
+            _In_  LPBC pbc,
+            /* [annotation][unique][in] */ 
+            _In_  IBindStatusCallback *pibsc,
+            /* [annotation][unique][in] */ 
+            _In_  IHlink *pihlNavigate);
         
         DECLSPEC_XFGVIRT(IHlinkFrame, OnNavigate)
         HRESULT ( STDMETHODCALLTYPE *OnNavigate )( 
             __RPC__in IHlinkFrame * This,
-            /* [in] */ DWORD grfHLNF,
-            /* [unique][in] */ __RPC__in_opt IMoniker *pimkTarget,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzLocation,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzFriendlyName,
-            /* [in] */ DWORD dwreserved);
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLNF,
+            /* [annotation][unique][in] */ 
+            _In_  IMoniker *pimkTarget,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzLocation,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzFriendlyName,
+            /* [annotation][in] */ 
+            _In_  DWORD dwreserved);
         
         DECLSPEC_XFGVIRT(IHlinkFrame, UpdateHlink)
         HRESULT ( STDMETHODCALLTYPE *UpdateHlink )( 
             __RPC__in IHlinkFrame * This,
-            /* [in] */ ULONG uHLID,
-            /* [unique][in] */ __RPC__in_opt IMoniker *pimkTarget,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzLocation,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR pwzFriendlyName);
+            /* [annotation][in] */ 
+            _In_  ULONG uHLID,
+            /* [annotation][unique][in] */ 
+            _In_  IMoniker *pimkTarget,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzLocation,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzFriendlyName);
         
         END_INTERFACE
     } IHlinkFrameVtbl;
@@ -1237,17 +1371,22 @@ EXTERN_C const IID IID_IEnumHLITEM;
     {
     public:
         virtual HRESULT __stdcall Next( 
-            /* [in] */ ULONG celt,
-            /* [out] */ HLITEM *rgelt,
-            /* [out] */ ULONG *pceltFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  HLITEM *rgelt,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [out] */ IEnumHLITEM **ppienumhlitem) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumHLITEM **ppienumhlitem) = 0;
         
     };
     
@@ -1261,7 +1400,8 @@ EXTERN_C const IID IID_IEnumHLITEM;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumHLITEM * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1276,14 +1416,18 @@ EXTERN_C const IID IID_IEnumHLITEM;
         DECLSPEC_XFGVIRT(IEnumHLITEM, Next)
         HRESULT ( __stdcall *Next )( 
             IEnumHLITEM * This,
-            /* [in] */ ULONG celt,
-            /* [out] */ HLITEM *rgelt,
-            /* [out] */ ULONG *pceltFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  HLITEM *rgelt,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumHLITEM, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             IEnumHLITEM * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumHLITEM, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -1292,7 +1436,8 @@ EXTERN_C const IID IID_IEnumHLITEM;
         DECLSPEC_XFGVIRT(IEnumHLITEM, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IEnumHLITEM * This,
-            /* [out] */ IEnumHLITEM **ppienumhlitem);
+            /* [annotation][out] */ 
+            _Out_  IEnumHLITEM **ppienumhlitem);
         
         END_INTERFACE
     } IEnumHLITEMVtbl;
@@ -1421,66 +1566,100 @@ EXTERN_C const IID IID_IHlinkBrowseContext;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Register( 
-            /* [in] */ DWORD reserved,
-            /* [unique][in] */ IUnknown *piunk,
-            /* [unique][in] */ IMoniker *pimk,
-            /* [out] */ DWORD *pdwRegister) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD reserved,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *piunk,
+            /* [annotation][unique][in] */ 
+            _In_  IMoniker *pimk,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwRegister) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetObject( 
-            /* [unique][in] */ IMoniker *pimk,
-            /* [in] */ BOOL fBindIfRootRegistered,
-            /* [out] */ IUnknown **ppiunk) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  IMoniker *pimk,
+            /* [annotation][in] */ 
+            _In_  BOOL fBindIfRootRegistered,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppiunk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Revoke( 
-            /* [in] */ DWORD dwRegister) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwRegister) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetBrowseWindowInfo( 
-            /* [unique][in] */ HLBWINFO *phlbwi) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  HLBWINFO *phlbwi) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBrowseWindowInfo( 
-            /* [out] */ HLBWINFO *phlbwi) = 0;
+            /* [annotation][out] */ 
+            _Out_  HLBWINFO *phlbwi) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetInitialHlink( 
-            /* [unique][in] */ IMoniker *pimkTarget,
-            /* [unique][in] */ LPCWSTR pwzLocation,
-            /* [unique][in] */ LPCWSTR pwzFriendlyName) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  IMoniker *pimkTarget,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzLocation,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzFriendlyName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnNavigateHlink( 
-            /* [in] */ DWORD grfHLNF,
-            /* [unique][in] */ IMoniker *pimkTarget,
-            /* [unique][in] */ LPCWSTR pwzLocation,
-            /* [unique][in] */ LPCWSTR pwzFriendlyName,
-            /* [out] */ ULONG *puHLID) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLNF,
+            /* [annotation][unique][in] */ 
+            _In_  IMoniker *pimkTarget,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzLocation,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzFriendlyName,
+            /* [annotation][out] */ 
+            _Out_  ULONG *puHLID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UpdateHlink( 
-            /* [in] */ ULONG uHLID,
-            /* [unique][in] */ IMoniker *pimkTarget,
-            /* [unique][in] */ LPCWSTR pwzLocation,
-            /* [unique][in] */ LPCWSTR pwzFriendlyName) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uHLID,
+            /* [annotation][unique][in] */ 
+            _In_  IMoniker *pimkTarget,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzLocation,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzFriendlyName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumNavigationStack( 
-            /* [in] */ DWORD dwReserved,
-            /* [in] */ DWORD grfHLFNAMEF,
-            /* [out] */ IEnumHLITEM **ppienumhlitem) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved,
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLFNAMEF,
+            /* [annotation][out] */ 
+            _Out_  IEnumHLITEM **ppienumhlitem) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryHlink( 
-            /* [in] */ DWORD grfHLQF,
-            /* [in] */ ULONG uHLID) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLQF,
+            /* [annotation][in] */ 
+            _In_  ULONG uHLID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetHlink( 
-            /* [in] */ ULONG uHLID,
-            /* [out] */ IHlink **ppihl) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uHLID,
+            /* [annotation][out] */ 
+            _Out_  IHlink **ppihl) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCurrentHlink( 
-            /* [in] */ ULONG uHLID) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uHLID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [unique][in] */ IUnknown *piunkOuter,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ IUnknown **ppiunkObj) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *piunkOuter,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  IUnknown **ppiunkObj) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Close( 
-            /* [in] */ DWORD reserved) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD reserved) = 0;
         
     };
     
@@ -1494,7 +1673,8 @@ EXTERN_C const IID IID_IHlinkBrowseContext;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IHlinkBrowseContext * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1509,92 +1689,126 @@ EXTERN_C const IID IID_IHlinkBrowseContext;
         DECLSPEC_XFGVIRT(IHlinkBrowseContext, Register)
         HRESULT ( STDMETHODCALLTYPE *Register )( 
             IHlinkBrowseContext * This,
-            /* [in] */ DWORD reserved,
-            /* [unique][in] */ IUnknown *piunk,
-            /* [unique][in] */ IMoniker *pimk,
-            /* [out] */ DWORD *pdwRegister);
+            /* [annotation][in] */ 
+            _In_  DWORD reserved,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *piunk,
+            /* [annotation][unique][in] */ 
+            _In_  IMoniker *pimk,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwRegister);
         
         DECLSPEC_XFGVIRT(IHlinkBrowseContext, GetObject)
         HRESULT ( STDMETHODCALLTYPE *GetObject )( 
             IHlinkBrowseContext * This,
-            /* [unique][in] */ IMoniker *pimk,
-            /* [in] */ BOOL fBindIfRootRegistered,
-            /* [out] */ IUnknown **ppiunk);
+            /* [annotation][unique][in] */ 
+            _In_  IMoniker *pimk,
+            /* [annotation][in] */ 
+            _In_  BOOL fBindIfRootRegistered,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppiunk);
         
         DECLSPEC_XFGVIRT(IHlinkBrowseContext, Revoke)
         HRESULT ( STDMETHODCALLTYPE *Revoke )( 
             IHlinkBrowseContext * This,
-            /* [in] */ DWORD dwRegister);
+            /* [annotation][in] */ 
+            _In_  DWORD dwRegister);
         
         DECLSPEC_XFGVIRT(IHlinkBrowseContext, SetBrowseWindowInfo)
         HRESULT ( STDMETHODCALLTYPE *SetBrowseWindowInfo )( 
             IHlinkBrowseContext * This,
-            /* [unique][in] */ HLBWINFO *phlbwi);
+            /* [annotation][unique][in] */ 
+            _In_  HLBWINFO *phlbwi);
         
         DECLSPEC_XFGVIRT(IHlinkBrowseContext, GetBrowseWindowInfo)
         HRESULT ( STDMETHODCALLTYPE *GetBrowseWindowInfo )( 
             IHlinkBrowseContext * This,
-            /* [out] */ HLBWINFO *phlbwi);
+            /* [annotation][out] */ 
+            _Out_  HLBWINFO *phlbwi);
         
         DECLSPEC_XFGVIRT(IHlinkBrowseContext, SetInitialHlink)
         HRESULT ( STDMETHODCALLTYPE *SetInitialHlink )( 
             IHlinkBrowseContext * This,
-            /* [unique][in] */ IMoniker *pimkTarget,
-            /* [unique][in] */ LPCWSTR pwzLocation,
-            /* [unique][in] */ LPCWSTR pwzFriendlyName);
+            /* [annotation][unique][in] */ 
+            _In_  IMoniker *pimkTarget,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzLocation,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzFriendlyName);
         
         DECLSPEC_XFGVIRT(IHlinkBrowseContext, OnNavigateHlink)
         HRESULT ( STDMETHODCALLTYPE *OnNavigateHlink )( 
             IHlinkBrowseContext * This,
-            /* [in] */ DWORD grfHLNF,
-            /* [unique][in] */ IMoniker *pimkTarget,
-            /* [unique][in] */ LPCWSTR pwzLocation,
-            /* [unique][in] */ LPCWSTR pwzFriendlyName,
-            /* [out] */ ULONG *puHLID);
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLNF,
+            /* [annotation][unique][in] */ 
+            _In_  IMoniker *pimkTarget,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzLocation,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzFriendlyName,
+            /* [annotation][out] */ 
+            _Out_  ULONG *puHLID);
         
         DECLSPEC_XFGVIRT(IHlinkBrowseContext, UpdateHlink)
         HRESULT ( STDMETHODCALLTYPE *UpdateHlink )( 
             IHlinkBrowseContext * This,
-            /* [in] */ ULONG uHLID,
-            /* [unique][in] */ IMoniker *pimkTarget,
-            /* [unique][in] */ LPCWSTR pwzLocation,
-            /* [unique][in] */ LPCWSTR pwzFriendlyName);
+            /* [annotation][in] */ 
+            _In_  ULONG uHLID,
+            /* [annotation][unique][in] */ 
+            _In_  IMoniker *pimkTarget,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzLocation,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR pwzFriendlyName);
         
         DECLSPEC_XFGVIRT(IHlinkBrowseContext, EnumNavigationStack)
         HRESULT ( STDMETHODCALLTYPE *EnumNavigationStack )( 
             IHlinkBrowseContext * This,
-            /* [in] */ DWORD dwReserved,
-            /* [in] */ DWORD grfHLFNAMEF,
-            /* [out] */ IEnumHLITEM **ppienumhlitem);
+            /* [annotation][in] */ 
+            _In_  DWORD dwReserved,
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLFNAMEF,
+            /* [annotation][out] */ 
+            _Out_  IEnumHLITEM **ppienumhlitem);
         
         DECLSPEC_XFGVIRT(IHlinkBrowseContext, QueryHlink)
         HRESULT ( STDMETHODCALLTYPE *QueryHlink )( 
             IHlinkBrowseContext * This,
-            /* [in] */ DWORD grfHLQF,
-            /* [in] */ ULONG uHLID);
+            /* [annotation][in] */ 
+            _In_  DWORD grfHLQF,
+            /* [annotation][in] */ 
+            _In_  ULONG uHLID);
         
         DECLSPEC_XFGVIRT(IHlinkBrowseContext, GetHlink)
         HRESULT ( STDMETHODCALLTYPE *GetHlink )( 
             IHlinkBrowseContext * This,
-            /* [in] */ ULONG uHLID,
-            /* [out] */ IHlink **ppihl);
+            /* [annotation][in] */ 
+            _In_  ULONG uHLID,
+            /* [annotation][out] */ 
+            _Out_  IHlink **ppihl);
         
         DECLSPEC_XFGVIRT(IHlinkBrowseContext, SetCurrentHlink)
         HRESULT ( STDMETHODCALLTYPE *SetCurrentHlink )( 
             IHlinkBrowseContext * This,
-            /* [in] */ ULONG uHLID);
+            /* [annotation][in] */ 
+            _In_  ULONG uHLID);
         
         DECLSPEC_XFGVIRT(IHlinkBrowseContext, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IHlinkBrowseContext * This,
-            /* [unique][in] */ IUnknown *piunkOuter,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ IUnknown **ppiunkObj);
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *piunkOuter,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  IUnknown **ppiunkObj);
         
         DECLSPEC_XFGVIRT(IHlinkBrowseContext, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
             IHlinkBrowseContext * This,
-            /* [in] */ DWORD reserved);
+            /* [annotation][in] */ 
+            _In_  DWORD reserved);
         
         END_INTERFACE
     } IHlinkBrowseContextVtbl;
@@ -1701,12 +1915,16 @@ EXTERN_C const IID IID_IExtensionServices;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetAdditionalHeaders( 
-            /* [in] */ LPCWSTR pwzAdditionalHeaders) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzAdditionalHeaders) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAuthenticateData( 
-            /* [in] */ HWND phwnd,
-            /* [in] */ LPCWSTR pwzUsername,
-            /* [in] */ LPCWSTR pwzPassword) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND phwnd,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzUsername,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzPassword) = 0;
         
     };
     
@@ -1720,7 +1938,8 @@ EXTERN_C const IID IID_IExtensionServices;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IExtensionServices * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1735,14 +1954,18 @@ EXTERN_C const IID IID_IExtensionServices;
         DECLSPEC_XFGVIRT(IExtensionServices, SetAdditionalHeaders)
         HRESULT ( STDMETHODCALLTYPE *SetAdditionalHeaders )( 
             IExtensionServices * This,
-            /* [in] */ LPCWSTR pwzAdditionalHeaders);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzAdditionalHeaders);
         
         DECLSPEC_XFGVIRT(IExtensionServices, SetAuthenticateData)
         HRESULT ( STDMETHODCALLTYPE *SetAuthenticateData )( 
             IExtensionServices * This,
-            /* [in] */ HWND phwnd,
-            /* [in] */ LPCWSTR pwzUsername,
-            /* [in] */ LPCWSTR pwzPassword);
+            /* [annotation][in] */ 
+            _In_  HWND phwnd,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzUsername,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzPassword);
         
         END_INTERFACE
     } IExtensionServicesVtbl;
@@ -1801,7 +2024,8 @@ extern RPC_IF_HANDLE __MIDL_itf_hlink_0000_0007_v0_0_s_ifspec;
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IHlink_GetMonikerReference_Proxy( 
     IHlink * This,
-    /* [in] */ DWORD dwWhichRef,
+    /* [annotation][in] */ 
+    _In_  DWORD dwWhichRef,
     /* [annotation][out] */ 
     _Outptr_opt_result_maybenull_  IMoniker **ppimkTarget,
     /* [annotation][out] */ 
@@ -1810,13 +2034,17 @@ extern RPC_IF_HANDLE __MIDL_itf_hlink_0000_0007_v0_0_s_ifspec;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IHlink_GetMonikerReference_Stub( 
     __RPC__in IHlink * This,
-    /* [in] */ DWORD dwWhichRef,
-    /* [out] */ __RPC__deref_out_opt IMoniker **ppimkTarget,
-    /* [out] */ __RPC__deref_out_opt LPWSTR *ppwzLocation);
+    /* [annotation][in] */ 
+    _In_  DWORD dwWhichRef,
+    /* [annotation][out] */ 
+    _Out_  IMoniker **ppimkTarget,
+    /* [annotation][out] */ 
+    _Out_  LPWSTR *ppwzLocation);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IHlink_GetStringReference_Proxy( 
     IHlink * This,
-    /* [in] */ DWORD dwWhichRef,
+    /* [annotation][in] */ 
+    _In_  DWORD dwWhichRef,
     /* [annotation][out] */ 
     _Outptr_opt_  LPWSTR *ppwzTarget,
     /* [annotation][out] */ 
@@ -1825,9 +2053,12 @@ extern RPC_IF_HANDLE __MIDL_itf_hlink_0000_0007_v0_0_s_ifspec;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IHlink_GetStringReference_Stub( 
     __RPC__in IHlink * This,
-    /* [in] */ DWORD dwWhichRef,
-    /* [out] */ __RPC__deref_out_opt LPWSTR *ppwzTarget,
-    /* [out] */ __RPC__deref_out_opt LPWSTR *ppwzLocation);
+    /* [annotation][in] */ 
+    _In_  DWORD dwWhichRef,
+    /* [annotation][out] */ 
+    _Out_  LPWSTR *ppwzTarget,
+    /* [annotation][out] */ 
+    _Out_  LPWSTR *ppwzLocation);
 
 
 

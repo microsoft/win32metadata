@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -658,28 +658,36 @@ EXTERN_C const IID IID_INetFwRemoteAdminSettings;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_IpVersion( 
-            /* [retval][out] */ __RPC__out NET_FW_IP_VERSION *ipVersion) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_IP_VERSION *ipVersion) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_IpVersion( 
-            /* [in] */ NET_FW_IP_VERSION ipVersion) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_IP_VERSION ipVersion) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Scope( 
-            /* [retval][out] */ __RPC__out NET_FW_SCOPE *scope) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_SCOPE *scope) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Scope( 
-            /* [in] */ NET_FW_SCOPE scope) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_SCOPE scope) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_RemoteAddresses( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *remoteAddrs) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *remoteAddrs) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_RemoteAddresses( 
-            /* [in] */ __RPC__in BSTR remoteAddrs) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR remoteAddrs) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Enabled( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *enabled) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Enabled( 
-            /* [in] */ VARIANT_BOOL enabled) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enabled) = 0;
         
     };
     
@@ -693,7 +701,8 @@ EXTERN_C const IID IID_INetFwRemoteAdminSettings;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetFwRemoteAdminSettings * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -708,23 +717,31 @@ EXTERN_C const IID IID_INetFwRemoteAdminSettings;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in INetFwRemoteAdminSettings * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in INetFwRemoteAdminSettings * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in INetFwRemoteAdminSettings * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -749,42 +766,50 @@ EXTERN_C const IID IID_INetFwRemoteAdminSettings;
         DECLSPEC_XFGVIRT(INetFwRemoteAdminSettings, get_IpVersion)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IpVersion )( 
             __RPC__in INetFwRemoteAdminSettings * This,
-            /* [retval][out] */ __RPC__out NET_FW_IP_VERSION *ipVersion);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_IP_VERSION *ipVersion);
         
         DECLSPEC_XFGVIRT(INetFwRemoteAdminSettings, put_IpVersion)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_IpVersion )( 
             __RPC__in INetFwRemoteAdminSettings * This,
-            /* [in] */ NET_FW_IP_VERSION ipVersion);
+            /* [annotation][in] */ 
+            _In_  NET_FW_IP_VERSION ipVersion);
         
         DECLSPEC_XFGVIRT(INetFwRemoteAdminSettings, get_Scope)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Scope )( 
             __RPC__in INetFwRemoteAdminSettings * This,
-            /* [retval][out] */ __RPC__out NET_FW_SCOPE *scope);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_SCOPE *scope);
         
         DECLSPEC_XFGVIRT(INetFwRemoteAdminSettings, put_Scope)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Scope )( 
             __RPC__in INetFwRemoteAdminSettings * This,
-            /* [in] */ NET_FW_SCOPE scope);
+            /* [annotation][in] */ 
+            _In_  NET_FW_SCOPE scope);
         
         DECLSPEC_XFGVIRT(INetFwRemoteAdminSettings, get_RemoteAddresses)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RemoteAddresses )( 
             __RPC__in INetFwRemoteAdminSettings * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *remoteAddrs);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *remoteAddrs);
         
         DECLSPEC_XFGVIRT(INetFwRemoteAdminSettings, put_RemoteAddresses)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RemoteAddresses )( 
             __RPC__in INetFwRemoteAdminSettings * This,
-            /* [in] */ __RPC__in BSTR remoteAddrs);
+            /* [annotation][in] */ 
+            _In_  BSTR remoteAddrs);
         
         DECLSPEC_XFGVIRT(INetFwRemoteAdminSettings, get_Enabled)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             __RPC__in INetFwRemoteAdminSettings * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *enabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled);
         
         DECLSPEC_XFGVIRT(INetFwRemoteAdminSettings, put_Enabled)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             __RPC__in INetFwRemoteAdminSettings * This,
-            /* [in] */ VARIANT_BOOL enabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enabled);
         
         END_INTERFACE
     } INetFwRemoteAdminSettingsVtbl;
@@ -873,64 +898,84 @@ EXTERN_C const IID IID_INetFwIcmpSettings;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_AllowOutboundDestinationUnreachable( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *allow) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *allow) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_AllowOutboundDestinationUnreachable( 
-            /* [in] */ VARIANT_BOOL allow) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL allow) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_AllowRedirect( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *allow) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *allow) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_AllowRedirect( 
-            /* [in] */ VARIANT_BOOL allow) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL allow) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_AllowInboundEchoRequest( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *allow) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *allow) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_AllowInboundEchoRequest( 
-            /* [in] */ VARIANT_BOOL allow) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL allow) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_AllowOutboundTimeExceeded( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *allow) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *allow) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_AllowOutboundTimeExceeded( 
-            /* [in] */ VARIANT_BOOL allow) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL allow) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_AllowOutboundParameterProblem( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *allow) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *allow) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_AllowOutboundParameterProblem( 
-            /* [in] */ VARIANT_BOOL allow) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL allow) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_AllowOutboundSourceQuench( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *allow) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *allow) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_AllowOutboundSourceQuench( 
-            /* [in] */ VARIANT_BOOL allow) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL allow) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_AllowInboundRouterRequest( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *allow) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *allow) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_AllowInboundRouterRequest( 
-            /* [in] */ VARIANT_BOOL allow) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL allow) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_AllowInboundTimestampRequest( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *allow) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *allow) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_AllowInboundTimestampRequest( 
-            /* [in] */ VARIANT_BOOL allow) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL allow) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_AllowInboundMaskRequest( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *allow) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *allow) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_AllowInboundMaskRequest( 
-            /* [in] */ VARIANT_BOOL allow) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL allow) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_AllowOutboundPacketTooBig( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *allow) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *allow) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_AllowOutboundPacketTooBig( 
-            /* [in] */ VARIANT_BOOL allow) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL allow) = 0;
         
     };
     
@@ -944,7 +989,8 @@ EXTERN_C const IID IID_INetFwIcmpSettings;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -959,23 +1005,31 @@ EXTERN_C const IID IID_INetFwIcmpSettings;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1000,102 +1054,122 @@ EXTERN_C const IID IID_INetFwIcmpSettings;
         DECLSPEC_XFGVIRT(INetFwIcmpSettings, get_AllowOutboundDestinationUnreachable)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AllowOutboundDestinationUnreachable )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *allow);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *allow);
         
         DECLSPEC_XFGVIRT(INetFwIcmpSettings, put_AllowOutboundDestinationUnreachable)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AllowOutboundDestinationUnreachable )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [in] */ VARIANT_BOOL allow);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL allow);
         
         DECLSPEC_XFGVIRT(INetFwIcmpSettings, get_AllowRedirect)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AllowRedirect )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *allow);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *allow);
         
         DECLSPEC_XFGVIRT(INetFwIcmpSettings, put_AllowRedirect)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AllowRedirect )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [in] */ VARIANT_BOOL allow);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL allow);
         
         DECLSPEC_XFGVIRT(INetFwIcmpSettings, get_AllowInboundEchoRequest)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AllowInboundEchoRequest )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *allow);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *allow);
         
         DECLSPEC_XFGVIRT(INetFwIcmpSettings, put_AllowInboundEchoRequest)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AllowInboundEchoRequest )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [in] */ VARIANT_BOOL allow);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL allow);
         
         DECLSPEC_XFGVIRT(INetFwIcmpSettings, get_AllowOutboundTimeExceeded)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AllowOutboundTimeExceeded )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *allow);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *allow);
         
         DECLSPEC_XFGVIRT(INetFwIcmpSettings, put_AllowOutboundTimeExceeded)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AllowOutboundTimeExceeded )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [in] */ VARIANT_BOOL allow);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL allow);
         
         DECLSPEC_XFGVIRT(INetFwIcmpSettings, get_AllowOutboundParameterProblem)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AllowOutboundParameterProblem )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *allow);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *allow);
         
         DECLSPEC_XFGVIRT(INetFwIcmpSettings, put_AllowOutboundParameterProblem)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AllowOutboundParameterProblem )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [in] */ VARIANT_BOOL allow);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL allow);
         
         DECLSPEC_XFGVIRT(INetFwIcmpSettings, get_AllowOutboundSourceQuench)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AllowOutboundSourceQuench )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *allow);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *allow);
         
         DECLSPEC_XFGVIRT(INetFwIcmpSettings, put_AllowOutboundSourceQuench)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AllowOutboundSourceQuench )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [in] */ VARIANT_BOOL allow);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL allow);
         
         DECLSPEC_XFGVIRT(INetFwIcmpSettings, get_AllowInboundRouterRequest)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AllowInboundRouterRequest )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *allow);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *allow);
         
         DECLSPEC_XFGVIRT(INetFwIcmpSettings, put_AllowInboundRouterRequest)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AllowInboundRouterRequest )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [in] */ VARIANT_BOOL allow);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL allow);
         
         DECLSPEC_XFGVIRT(INetFwIcmpSettings, get_AllowInboundTimestampRequest)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AllowInboundTimestampRequest )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *allow);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *allow);
         
         DECLSPEC_XFGVIRT(INetFwIcmpSettings, put_AllowInboundTimestampRequest)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AllowInboundTimestampRequest )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [in] */ VARIANT_BOOL allow);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL allow);
         
         DECLSPEC_XFGVIRT(INetFwIcmpSettings, get_AllowInboundMaskRequest)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AllowInboundMaskRequest )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *allow);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *allow);
         
         DECLSPEC_XFGVIRT(INetFwIcmpSettings, put_AllowInboundMaskRequest)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AllowInboundMaskRequest )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [in] */ VARIANT_BOOL allow);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL allow);
         
         DECLSPEC_XFGVIRT(INetFwIcmpSettings, get_AllowOutboundPacketTooBig)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AllowOutboundPacketTooBig )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *allow);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *allow);
         
         DECLSPEC_XFGVIRT(INetFwIcmpSettings, put_AllowOutboundPacketTooBig)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AllowOutboundPacketTooBig )( 
             __RPC__in INetFwIcmpSettings * This,
-            /* [in] */ VARIANT_BOOL allow);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL allow);
         
         END_INTERFACE
     } INetFwIcmpSettingsVtbl;
@@ -1220,49 +1294,64 @@ EXTERN_C const IID IID_INetFwOpenPort;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Name( 
-            /* [in] */ __RPC__in BSTR name) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR name) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_IpVersion( 
-            /* [retval][out] */ __RPC__out NET_FW_IP_VERSION *ipVersion) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_IP_VERSION *ipVersion) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_IpVersion( 
-            /* [in] */ NET_FW_IP_VERSION ipVersion) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_IP_VERSION ipVersion) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Protocol( 
-            /* [retval][out] */ __RPC__out NET_FW_IP_PROTOCOL *ipProtocol) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_IP_PROTOCOL *ipProtocol) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Protocol( 
-            /* [in] */ NET_FW_IP_PROTOCOL ipProtocol) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_IP_PROTOCOL ipProtocol) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Port( 
-            /* [retval][out] */ __RPC__out LONG *portNumber) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LONG *portNumber) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Port( 
-            /* [in] */ LONG portNumber) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG portNumber) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Scope( 
-            /* [retval][out] */ __RPC__out NET_FW_SCOPE *scope) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_SCOPE *scope) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Scope( 
-            /* [in] */ NET_FW_SCOPE scope) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_SCOPE scope) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_RemoteAddresses( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *remoteAddrs) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *remoteAddrs) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_RemoteAddresses( 
-            /* [in] */ __RPC__in BSTR remoteAddrs) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR remoteAddrs) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Enabled( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *enabled) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Enabled( 
-            /* [in] */ VARIANT_BOOL enabled) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enabled) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_BuiltIn( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *builtIn) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *builtIn) = 0;
         
     };
     
@@ -1276,7 +1365,8 @@ EXTERN_C const IID IID_INetFwOpenPort;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetFwOpenPort * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1291,23 +1381,31 @@ EXTERN_C const IID IID_INetFwOpenPort;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in INetFwOpenPort * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in INetFwOpenPort * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in INetFwOpenPort * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1332,77 +1430,92 @@ EXTERN_C const IID IID_INetFwOpenPort;
         DECLSPEC_XFGVIRT(INetFwOpenPort, get_Name)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in INetFwOpenPort * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(INetFwOpenPort, put_Name)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in INetFwOpenPort * This,
-            /* [in] */ __RPC__in BSTR name);
+            /* [annotation][in] */ 
+            _In_  BSTR name);
         
         DECLSPEC_XFGVIRT(INetFwOpenPort, get_IpVersion)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IpVersion )( 
             __RPC__in INetFwOpenPort * This,
-            /* [retval][out] */ __RPC__out NET_FW_IP_VERSION *ipVersion);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_IP_VERSION *ipVersion);
         
         DECLSPEC_XFGVIRT(INetFwOpenPort, put_IpVersion)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_IpVersion )( 
             __RPC__in INetFwOpenPort * This,
-            /* [in] */ NET_FW_IP_VERSION ipVersion);
+            /* [annotation][in] */ 
+            _In_  NET_FW_IP_VERSION ipVersion);
         
         DECLSPEC_XFGVIRT(INetFwOpenPort, get_Protocol)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Protocol )( 
             __RPC__in INetFwOpenPort * This,
-            /* [retval][out] */ __RPC__out NET_FW_IP_PROTOCOL *ipProtocol);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_IP_PROTOCOL *ipProtocol);
         
         DECLSPEC_XFGVIRT(INetFwOpenPort, put_Protocol)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Protocol )( 
             __RPC__in INetFwOpenPort * This,
-            /* [in] */ NET_FW_IP_PROTOCOL ipProtocol);
+            /* [annotation][in] */ 
+            _In_  NET_FW_IP_PROTOCOL ipProtocol);
         
         DECLSPEC_XFGVIRT(INetFwOpenPort, get_Port)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Port )( 
             __RPC__in INetFwOpenPort * This,
-            /* [retval][out] */ __RPC__out LONG *portNumber);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LONG *portNumber);
         
         DECLSPEC_XFGVIRT(INetFwOpenPort, put_Port)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Port )( 
             __RPC__in INetFwOpenPort * This,
-            /* [in] */ LONG portNumber);
+            /* [annotation][in] */ 
+            _In_  LONG portNumber);
         
         DECLSPEC_XFGVIRT(INetFwOpenPort, get_Scope)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Scope )( 
             __RPC__in INetFwOpenPort * This,
-            /* [retval][out] */ __RPC__out NET_FW_SCOPE *scope);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_SCOPE *scope);
         
         DECLSPEC_XFGVIRT(INetFwOpenPort, put_Scope)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Scope )( 
             __RPC__in INetFwOpenPort * This,
-            /* [in] */ NET_FW_SCOPE scope);
+            /* [annotation][in] */ 
+            _In_  NET_FW_SCOPE scope);
         
         DECLSPEC_XFGVIRT(INetFwOpenPort, get_RemoteAddresses)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RemoteAddresses )( 
             __RPC__in INetFwOpenPort * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *remoteAddrs);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *remoteAddrs);
         
         DECLSPEC_XFGVIRT(INetFwOpenPort, put_RemoteAddresses)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RemoteAddresses )( 
             __RPC__in INetFwOpenPort * This,
-            /* [in] */ __RPC__in BSTR remoteAddrs);
+            /* [annotation][in] */ 
+            _In_  BSTR remoteAddrs);
         
         DECLSPEC_XFGVIRT(INetFwOpenPort, get_Enabled)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             __RPC__in INetFwOpenPort * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *enabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled);
         
         DECLSPEC_XFGVIRT(INetFwOpenPort, put_Enabled)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             __RPC__in INetFwOpenPort * This,
-            /* [in] */ VARIANT_BOOL enabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enabled);
         
         DECLSPEC_XFGVIRT(INetFwOpenPort, get_BuiltIn)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_BuiltIn )( 
             __RPC__in INetFwOpenPort * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *builtIn);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *builtIn);
         
         END_INTERFACE
     } INetFwOpenPortVtbl;
@@ -1512,22 +1625,30 @@ EXTERN_C const IID IID_INetFwOpenPorts;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [retval][out] */ __RPC__out long *count) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *count) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Add( 
-            /* [in] */ __RPC__in_opt INetFwOpenPort *port) = 0;
+            /* [annotation][in] */ 
+            _In_  INetFwOpenPort *port) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Remove( 
-            /* [in] */ LONG portNumber,
-            /* [in] */ NET_FW_IP_PROTOCOL ipProtocol) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG portNumber,
+            /* [annotation][in] */ 
+            _In_  NET_FW_IP_PROTOCOL ipProtocol) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Item( 
-            /* [in] */ LONG portNumber,
-            /* [in] */ NET_FW_IP_PROTOCOL ipProtocol,
-            /* [retval][out] */ __RPC__deref_out_opt INetFwOpenPort **openPort) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG portNumber,
+            /* [annotation][in] */ 
+            _In_  NET_FW_IP_PROTOCOL ipProtocol,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwOpenPort **openPort) = 0;
         
         virtual /* [restricted][propget][id] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **newEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **newEnum) = 0;
         
     };
     
@@ -1541,7 +1662,8 @@ EXTERN_C const IID IID_INetFwOpenPorts;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetFwOpenPorts * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1556,23 +1678,31 @@ EXTERN_C const IID IID_INetFwOpenPorts;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in INetFwOpenPorts * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in INetFwOpenPorts * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in INetFwOpenPorts * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1597,30 +1727,38 @@ EXTERN_C const IID IID_INetFwOpenPorts;
         DECLSPEC_XFGVIRT(INetFwOpenPorts, get_Count)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in INetFwOpenPorts * This,
-            /* [retval][out] */ __RPC__out long *count);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *count);
         
         DECLSPEC_XFGVIRT(INetFwOpenPorts, Add)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in INetFwOpenPorts * This,
-            /* [in] */ __RPC__in_opt INetFwOpenPort *port);
+            /* [annotation][in] */ 
+            _In_  INetFwOpenPort *port);
         
         DECLSPEC_XFGVIRT(INetFwOpenPorts, Remove)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in INetFwOpenPorts * This,
-            /* [in] */ LONG portNumber,
-            /* [in] */ NET_FW_IP_PROTOCOL ipProtocol);
+            /* [annotation][in] */ 
+            _In_  LONG portNumber,
+            /* [annotation][in] */ 
+            _In_  NET_FW_IP_PROTOCOL ipProtocol);
         
         DECLSPEC_XFGVIRT(INetFwOpenPorts, Item)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in INetFwOpenPorts * This,
-            /* [in] */ LONG portNumber,
-            /* [in] */ NET_FW_IP_PROTOCOL ipProtocol,
-            /* [retval][out] */ __RPC__deref_out_opt INetFwOpenPort **openPort);
+            /* [annotation][in] */ 
+            _In_  LONG portNumber,
+            /* [annotation][in] */ 
+            _In_  NET_FW_IP_PROTOCOL ipProtocol,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwOpenPort **openPort);
         
         DECLSPEC_XFGVIRT(INetFwOpenPorts, get__NewEnum)
         /* [restricted][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in INetFwOpenPorts * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **newEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **newEnum);
         
         END_INTERFACE
     } INetFwOpenPortsVtbl;
@@ -1700,40 +1838,52 @@ EXTERN_C const IID IID_INetFwService;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Type( 
-            /* [retval][out] */ __RPC__out NET_FW_SERVICE_TYPE *type) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_SERVICE_TYPE *type) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Customized( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *customized) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *customized) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_IpVersion( 
-            /* [retval][out] */ __RPC__out NET_FW_IP_VERSION *ipVersion) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_IP_VERSION *ipVersion) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_IpVersion( 
-            /* [in] */ NET_FW_IP_VERSION ipVersion) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_IP_VERSION ipVersion) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Scope( 
-            /* [retval][out] */ __RPC__out NET_FW_SCOPE *scope) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_SCOPE *scope) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Scope( 
-            /* [in] */ NET_FW_SCOPE scope) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_SCOPE scope) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_RemoteAddresses( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *remoteAddrs) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *remoteAddrs) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_RemoteAddresses( 
-            /* [in] */ __RPC__in BSTR remoteAddrs) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR remoteAddrs) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Enabled( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *enabled) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Enabled( 
-            /* [in] */ VARIANT_BOOL enabled) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enabled) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_GloballyOpenPorts( 
-            /* [retval][out] */ __RPC__deref_out_opt INetFwOpenPorts **openPorts) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwOpenPorts **openPorts) = 0;
         
     };
     
@@ -1747,7 +1897,8 @@ EXTERN_C const IID IID_INetFwService;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetFwService * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1762,23 +1913,31 @@ EXTERN_C const IID IID_INetFwService;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in INetFwService * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in INetFwService * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in INetFwService * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1803,62 +1962,74 @@ EXTERN_C const IID IID_INetFwService;
         DECLSPEC_XFGVIRT(INetFwService, get_Name)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in INetFwService * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(INetFwService, get_Type)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in INetFwService * This,
-            /* [retval][out] */ __RPC__out NET_FW_SERVICE_TYPE *type);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_SERVICE_TYPE *type);
         
         DECLSPEC_XFGVIRT(INetFwService, get_Customized)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Customized )( 
             __RPC__in INetFwService * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *customized);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *customized);
         
         DECLSPEC_XFGVIRT(INetFwService, get_IpVersion)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IpVersion )( 
             __RPC__in INetFwService * This,
-            /* [retval][out] */ __RPC__out NET_FW_IP_VERSION *ipVersion);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_IP_VERSION *ipVersion);
         
         DECLSPEC_XFGVIRT(INetFwService, put_IpVersion)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_IpVersion )( 
             __RPC__in INetFwService * This,
-            /* [in] */ NET_FW_IP_VERSION ipVersion);
+            /* [annotation][in] */ 
+            _In_  NET_FW_IP_VERSION ipVersion);
         
         DECLSPEC_XFGVIRT(INetFwService, get_Scope)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Scope )( 
             __RPC__in INetFwService * This,
-            /* [retval][out] */ __RPC__out NET_FW_SCOPE *scope);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_SCOPE *scope);
         
         DECLSPEC_XFGVIRT(INetFwService, put_Scope)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Scope )( 
             __RPC__in INetFwService * This,
-            /* [in] */ NET_FW_SCOPE scope);
+            /* [annotation][in] */ 
+            _In_  NET_FW_SCOPE scope);
         
         DECLSPEC_XFGVIRT(INetFwService, get_RemoteAddresses)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RemoteAddresses )( 
             __RPC__in INetFwService * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *remoteAddrs);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *remoteAddrs);
         
         DECLSPEC_XFGVIRT(INetFwService, put_RemoteAddresses)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RemoteAddresses )( 
             __RPC__in INetFwService * This,
-            /* [in] */ __RPC__in BSTR remoteAddrs);
+            /* [annotation][in] */ 
+            _In_  BSTR remoteAddrs);
         
         DECLSPEC_XFGVIRT(INetFwService, get_Enabled)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             __RPC__in INetFwService * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *enabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled);
         
         DECLSPEC_XFGVIRT(INetFwService, put_Enabled)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             __RPC__in INetFwService * This,
-            /* [in] */ VARIANT_BOOL enabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enabled);
         
         DECLSPEC_XFGVIRT(INetFwService, get_GloballyOpenPorts)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_GloballyOpenPorts )( 
             __RPC__in INetFwService * This,
-            /* [retval][out] */ __RPC__deref_out_opt INetFwOpenPorts **openPorts);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwOpenPorts **openPorts);
         
         END_INTERFACE
     } INetFwServiceVtbl;
@@ -1959,14 +2130,18 @@ EXTERN_C const IID IID_INetFwServices;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [retval][out] */ __RPC__out long *count) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *count) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Item( 
-            /* [in] */ NET_FW_SERVICE_TYPE svcType,
-            /* [retval][out] */ __RPC__deref_out_opt INetFwService **service) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_SERVICE_TYPE svcType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwService **service) = 0;
         
         virtual /* [restricted][propget][id] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **newEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **newEnum) = 0;
         
     };
     
@@ -1980,7 +2155,8 @@ EXTERN_C const IID IID_INetFwServices;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetFwServices * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1995,23 +2171,31 @@ EXTERN_C const IID IID_INetFwServices;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in INetFwServices * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in INetFwServices * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in INetFwServices * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2036,18 +2220,22 @@ EXTERN_C const IID IID_INetFwServices;
         DECLSPEC_XFGVIRT(INetFwServices, get_Count)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in INetFwServices * This,
-            /* [retval][out] */ __RPC__out long *count);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *count);
         
         DECLSPEC_XFGVIRT(INetFwServices, Item)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in INetFwServices * This,
-            /* [in] */ NET_FW_SERVICE_TYPE svcType,
-            /* [retval][out] */ __RPC__deref_out_opt INetFwService **service);
+            /* [annotation][in] */ 
+            _In_  NET_FW_SERVICE_TYPE svcType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwService **service);
         
         DECLSPEC_XFGVIRT(INetFwServices, get__NewEnum)
         /* [restricted][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in INetFwServices * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **newEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **newEnum);
         
         END_INTERFACE
     } INetFwServicesVtbl;
@@ -2121,40 +2309,52 @@ EXTERN_C const IID IID_INetFwAuthorizedApplication;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Name( 
-            /* [in] */ __RPC__in BSTR name) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR name) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_ProcessImageFileName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *imageFileName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *imageFileName) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_ProcessImageFileName( 
-            /* [in] */ __RPC__in BSTR imageFileName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR imageFileName) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_IpVersion( 
-            /* [retval][out] */ __RPC__out NET_FW_IP_VERSION *ipVersion) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_IP_VERSION *ipVersion) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_IpVersion( 
-            /* [in] */ NET_FW_IP_VERSION ipVersion) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_IP_VERSION ipVersion) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Scope( 
-            /* [retval][out] */ __RPC__out NET_FW_SCOPE *scope) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_SCOPE *scope) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Scope( 
-            /* [in] */ NET_FW_SCOPE scope) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_SCOPE scope) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_RemoteAddresses( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *remoteAddrs) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *remoteAddrs) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_RemoteAddresses( 
-            /* [in] */ __RPC__in BSTR remoteAddrs) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR remoteAddrs) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Enabled( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *enabled) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Enabled( 
-            /* [in] */ VARIANT_BOOL enabled) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enabled) = 0;
         
     };
     
@@ -2168,7 +2368,8 @@ EXTERN_C const IID IID_INetFwAuthorizedApplication;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetFwAuthorizedApplication * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2183,23 +2384,31 @@ EXTERN_C const IID IID_INetFwAuthorizedApplication;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in INetFwAuthorizedApplication * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in INetFwAuthorizedApplication * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in INetFwAuthorizedApplication * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2224,62 +2433,74 @@ EXTERN_C const IID IID_INetFwAuthorizedApplication;
         DECLSPEC_XFGVIRT(INetFwAuthorizedApplication, get_Name)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in INetFwAuthorizedApplication * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(INetFwAuthorizedApplication, put_Name)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in INetFwAuthorizedApplication * This,
-            /* [in] */ __RPC__in BSTR name);
+            /* [annotation][in] */ 
+            _In_  BSTR name);
         
         DECLSPEC_XFGVIRT(INetFwAuthorizedApplication, get_ProcessImageFileName)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ProcessImageFileName )( 
             __RPC__in INetFwAuthorizedApplication * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *imageFileName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *imageFileName);
         
         DECLSPEC_XFGVIRT(INetFwAuthorizedApplication, put_ProcessImageFileName)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ProcessImageFileName )( 
             __RPC__in INetFwAuthorizedApplication * This,
-            /* [in] */ __RPC__in BSTR imageFileName);
+            /* [annotation][in] */ 
+            _In_  BSTR imageFileName);
         
         DECLSPEC_XFGVIRT(INetFwAuthorizedApplication, get_IpVersion)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IpVersion )( 
             __RPC__in INetFwAuthorizedApplication * This,
-            /* [retval][out] */ __RPC__out NET_FW_IP_VERSION *ipVersion);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_IP_VERSION *ipVersion);
         
         DECLSPEC_XFGVIRT(INetFwAuthorizedApplication, put_IpVersion)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_IpVersion )( 
             __RPC__in INetFwAuthorizedApplication * This,
-            /* [in] */ NET_FW_IP_VERSION ipVersion);
+            /* [annotation][in] */ 
+            _In_  NET_FW_IP_VERSION ipVersion);
         
         DECLSPEC_XFGVIRT(INetFwAuthorizedApplication, get_Scope)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Scope )( 
             __RPC__in INetFwAuthorizedApplication * This,
-            /* [retval][out] */ __RPC__out NET_FW_SCOPE *scope);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_SCOPE *scope);
         
         DECLSPEC_XFGVIRT(INetFwAuthorizedApplication, put_Scope)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Scope )( 
             __RPC__in INetFwAuthorizedApplication * This,
-            /* [in] */ NET_FW_SCOPE scope);
+            /* [annotation][in] */ 
+            _In_  NET_FW_SCOPE scope);
         
         DECLSPEC_XFGVIRT(INetFwAuthorizedApplication, get_RemoteAddresses)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RemoteAddresses )( 
             __RPC__in INetFwAuthorizedApplication * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *remoteAddrs);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *remoteAddrs);
         
         DECLSPEC_XFGVIRT(INetFwAuthorizedApplication, put_RemoteAddresses)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RemoteAddresses )( 
             __RPC__in INetFwAuthorizedApplication * This,
-            /* [in] */ __RPC__in BSTR remoteAddrs);
+            /* [annotation][in] */ 
+            _In_  BSTR remoteAddrs);
         
         DECLSPEC_XFGVIRT(INetFwAuthorizedApplication, get_Enabled)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             __RPC__in INetFwAuthorizedApplication * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *enabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled);
         
         DECLSPEC_XFGVIRT(INetFwAuthorizedApplication, put_Enabled)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             __RPC__in INetFwAuthorizedApplication * This,
-            /* [in] */ VARIANT_BOOL enabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enabled);
         
         END_INTERFACE
     } INetFwAuthorizedApplicationVtbl;
@@ -2380,20 +2601,26 @@ EXTERN_C const IID IID_INetFwAuthorizedApplications;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [retval][out] */ __RPC__out long *count) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *count) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Add( 
-            /* [in] */ __RPC__in_opt INetFwAuthorizedApplication *app) = 0;
+            /* [annotation][in] */ 
+            _In_  INetFwAuthorizedApplication *app) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Remove( 
-            /* [in] */ __RPC__in BSTR imageFileName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR imageFileName) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Item( 
-            /* [in] */ __RPC__in BSTR imageFileName,
-            /* [retval][out] */ __RPC__deref_out_opt INetFwAuthorizedApplication **app) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR imageFileName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwAuthorizedApplication **app) = 0;
         
         virtual /* [restricted][propget][id] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **newEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **newEnum) = 0;
         
     };
     
@@ -2407,7 +2634,8 @@ EXTERN_C const IID IID_INetFwAuthorizedApplications;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetFwAuthorizedApplications * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2422,23 +2650,31 @@ EXTERN_C const IID IID_INetFwAuthorizedApplications;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in INetFwAuthorizedApplications * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in INetFwAuthorizedApplications * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in INetFwAuthorizedApplications * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2463,28 +2699,34 @@ EXTERN_C const IID IID_INetFwAuthorizedApplications;
         DECLSPEC_XFGVIRT(INetFwAuthorizedApplications, get_Count)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in INetFwAuthorizedApplications * This,
-            /* [retval][out] */ __RPC__out long *count);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *count);
         
         DECLSPEC_XFGVIRT(INetFwAuthorizedApplications, Add)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in INetFwAuthorizedApplications * This,
-            /* [in] */ __RPC__in_opt INetFwAuthorizedApplication *app);
+            /* [annotation][in] */ 
+            _In_  INetFwAuthorizedApplication *app);
         
         DECLSPEC_XFGVIRT(INetFwAuthorizedApplications, Remove)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in INetFwAuthorizedApplications * This,
-            /* [in] */ __RPC__in BSTR imageFileName);
+            /* [annotation][in] */ 
+            _In_  BSTR imageFileName);
         
         DECLSPEC_XFGVIRT(INetFwAuthorizedApplications, Item)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in INetFwAuthorizedApplications * This,
-            /* [in] */ __RPC__in BSTR imageFileName,
-            /* [retval][out] */ __RPC__deref_out_opt INetFwAuthorizedApplication **app);
+            /* [annotation][in] */ 
+            _In_  BSTR imageFileName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwAuthorizedApplication **app);
         
         DECLSPEC_XFGVIRT(INetFwAuthorizedApplications, get__NewEnum)
         /* [restricted][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in INetFwAuthorizedApplications * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **newEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **newEnum);
         
         END_INTERFACE
     } INetFwAuthorizedApplicationsVtbl;
@@ -2564,112 +2806,148 @@ EXTERN_C const IID IID_INetFwRule;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ BSTR *name) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Name( 
-            /* [in] */ BSTR name) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR name) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Description( 
-            /* [retval][out] */ BSTR *desc) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *desc) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Description( 
-            /* [in] */ BSTR desc) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR desc) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_ApplicationName( 
-            /* [retval][out] */ BSTR *imageFileName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *imageFileName) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_ApplicationName( 
-            /* [in] */ BSTR imageFileName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR imageFileName) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_ServiceName( 
-            /* [retval][out] */ BSTR *serviceName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *serviceName) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_ServiceName( 
-            /* [in] */ BSTR serviceName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR serviceName) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Protocol( 
-            /* [retval][out] */ LONG *protocol) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LONG *protocol) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Protocol( 
-            /* [in] */ LONG protocol) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG protocol) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_LocalPorts( 
-            /* [retval][out] */ BSTR *portNumbers) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *portNumbers) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_LocalPorts( 
-            /* [in] */ BSTR portNumbers) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR portNumbers) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_RemotePorts( 
-            /* [retval][out] */ BSTR *portNumbers) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *portNumbers) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_RemotePorts( 
-            /* [in] */ BSTR portNumbers) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR portNumbers) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_LocalAddresses( 
-            /* [retval][out] */ BSTR *localAddrs) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *localAddrs) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_LocalAddresses( 
-            /* [in] */ BSTR localAddrs) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR localAddrs) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_RemoteAddresses( 
-            /* [retval][out] */ BSTR *remoteAddrs) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *remoteAddrs) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_RemoteAddresses( 
-            /* [in] */ BSTR remoteAddrs) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR remoteAddrs) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_IcmpTypesAndCodes( 
-            /* [retval][out] */ BSTR *icmpTypesAndCodes) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *icmpTypesAndCodes) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_IcmpTypesAndCodes( 
-            /* [in] */ BSTR icmpTypesAndCodes) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR icmpTypesAndCodes) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Direction( 
-            /* [retval][out] */ NET_FW_RULE_DIRECTION *dir) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_RULE_DIRECTION *dir) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Direction( 
-            /* [in] */ NET_FW_RULE_DIRECTION dir) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_RULE_DIRECTION dir) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Interfaces( 
-            /* [retval][out] */ VARIANT *interfaces) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *interfaces) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Interfaces( 
-            /* [in] */ VARIANT interfaces) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT interfaces) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_InterfaceTypes( 
-            /* [retval][out] */ BSTR *interfaceTypes) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *interfaceTypes) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_InterfaceTypes( 
-            /* [in] */ BSTR interfaceTypes) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR interfaceTypes) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Enabled( 
-            /* [retval][out] */ VARIANT_BOOL *enabled) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Enabled( 
-            /* [in] */ VARIANT_BOOL enabled) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enabled) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Grouping( 
-            /* [retval][out] */ BSTR *context) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *context) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Grouping( 
-            /* [in] */ BSTR context) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR context) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Profiles( 
-            /* [retval][out] */ long *profileTypesBitmask) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *profileTypesBitmask) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Profiles( 
-            /* [in] */ long profileTypesBitmask) = 0;
+            /* [annotation][in] */ 
+            _In_  long profileTypesBitmask) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_EdgeTraversal( 
-            /* [retval][out] */ VARIANT_BOOL *enabled) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_EdgeTraversal( 
-            /* [in] */ VARIANT_BOOL enabled) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enabled) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Action( 
-            /* [retval][out] */ NET_FW_ACTION *action) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_ACTION *action) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Action( 
-            /* [in] */ NET_FW_ACTION action) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_ACTION action) = 0;
         
     };
     
@@ -2683,7 +2961,8 @@ EXTERN_C const IID IID_INetFwRule;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INetFwRule * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2698,23 +2977,31 @@ EXTERN_C const IID IID_INetFwRule;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             INetFwRule * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             INetFwRule * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             INetFwRule * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2739,182 +3026,218 @@ EXTERN_C const IID IID_INetFwRule;
         DECLSPEC_XFGVIRT(INetFwRule, get_Name)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             INetFwRule * This,
-            /* [retval][out] */ BSTR *name);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Name)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             INetFwRule * This,
-            /* [in] */ BSTR name);
+            /* [annotation][in] */ 
+            _In_  BSTR name);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Description)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             INetFwRule * This,
-            /* [retval][out] */ BSTR *desc);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *desc);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Description)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             INetFwRule * This,
-            /* [in] */ BSTR desc);
+            /* [annotation][in] */ 
+            _In_  BSTR desc);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_ApplicationName)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationName )( 
             INetFwRule * This,
-            /* [retval][out] */ BSTR *imageFileName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *imageFileName);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_ApplicationName)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ApplicationName )( 
             INetFwRule * This,
-            /* [in] */ BSTR imageFileName);
+            /* [annotation][in] */ 
+            _In_  BSTR imageFileName);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_ServiceName)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ServiceName )( 
             INetFwRule * This,
-            /* [retval][out] */ BSTR *serviceName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *serviceName);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_ServiceName)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ServiceName )( 
             INetFwRule * This,
-            /* [in] */ BSTR serviceName);
+            /* [annotation][in] */ 
+            _In_  BSTR serviceName);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Protocol)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Protocol )( 
             INetFwRule * This,
-            /* [retval][out] */ LONG *protocol);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LONG *protocol);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Protocol)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Protocol )( 
             INetFwRule * This,
-            /* [in] */ LONG protocol);
+            /* [annotation][in] */ 
+            _In_  LONG protocol);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_LocalPorts)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LocalPorts )( 
             INetFwRule * This,
-            /* [retval][out] */ BSTR *portNumbers);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *portNumbers);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_LocalPorts)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LocalPorts )( 
             INetFwRule * This,
-            /* [in] */ BSTR portNumbers);
+            /* [annotation][in] */ 
+            _In_  BSTR portNumbers);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_RemotePorts)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RemotePorts )( 
             INetFwRule * This,
-            /* [retval][out] */ BSTR *portNumbers);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *portNumbers);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_RemotePorts)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RemotePorts )( 
             INetFwRule * This,
-            /* [in] */ BSTR portNumbers);
+            /* [annotation][in] */ 
+            _In_  BSTR portNumbers);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_LocalAddresses)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LocalAddresses )( 
             INetFwRule * This,
-            /* [retval][out] */ BSTR *localAddrs);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *localAddrs);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_LocalAddresses)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LocalAddresses )( 
             INetFwRule * This,
-            /* [in] */ BSTR localAddrs);
+            /* [annotation][in] */ 
+            _In_  BSTR localAddrs);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_RemoteAddresses)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RemoteAddresses )( 
             INetFwRule * This,
-            /* [retval][out] */ BSTR *remoteAddrs);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *remoteAddrs);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_RemoteAddresses)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RemoteAddresses )( 
             INetFwRule * This,
-            /* [in] */ BSTR remoteAddrs);
+            /* [annotation][in] */ 
+            _In_  BSTR remoteAddrs);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_IcmpTypesAndCodes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IcmpTypesAndCodes )( 
             INetFwRule * This,
-            /* [retval][out] */ BSTR *icmpTypesAndCodes);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *icmpTypesAndCodes);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_IcmpTypesAndCodes)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_IcmpTypesAndCodes )( 
             INetFwRule * This,
-            /* [in] */ BSTR icmpTypesAndCodes);
+            /* [annotation][in] */ 
+            _In_  BSTR icmpTypesAndCodes);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Direction)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Direction )( 
             INetFwRule * This,
-            /* [retval][out] */ NET_FW_RULE_DIRECTION *dir);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_RULE_DIRECTION *dir);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Direction)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Direction )( 
             INetFwRule * This,
-            /* [in] */ NET_FW_RULE_DIRECTION dir);
+            /* [annotation][in] */ 
+            _In_  NET_FW_RULE_DIRECTION dir);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Interfaces)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Interfaces )( 
             INetFwRule * This,
-            /* [retval][out] */ VARIANT *interfaces);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *interfaces);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Interfaces)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Interfaces )( 
             INetFwRule * This,
-            /* [in] */ VARIANT interfaces);
+            /* [annotation][in] */ 
+            _In_  VARIANT interfaces);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_InterfaceTypes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_InterfaceTypes )( 
             INetFwRule * This,
-            /* [retval][out] */ BSTR *interfaceTypes);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *interfaceTypes);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_InterfaceTypes)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_InterfaceTypes )( 
             INetFwRule * This,
-            /* [in] */ BSTR interfaceTypes);
+            /* [annotation][in] */ 
+            _In_  BSTR interfaceTypes);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Enabled)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             INetFwRule * This,
-            /* [retval][out] */ VARIANT_BOOL *enabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Enabled)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             INetFwRule * This,
-            /* [in] */ VARIANT_BOOL enabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enabled);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Grouping)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Grouping )( 
             INetFwRule * This,
-            /* [retval][out] */ BSTR *context);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *context);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Grouping)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Grouping )( 
             INetFwRule * This,
-            /* [in] */ BSTR context);
+            /* [annotation][in] */ 
+            _In_  BSTR context);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Profiles)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Profiles )( 
             INetFwRule * This,
-            /* [retval][out] */ long *profileTypesBitmask);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *profileTypesBitmask);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Profiles)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Profiles )( 
             INetFwRule * This,
-            /* [in] */ long profileTypesBitmask);
+            /* [annotation][in] */ 
+            _In_  long profileTypesBitmask);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_EdgeTraversal)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EdgeTraversal )( 
             INetFwRule * This,
-            /* [retval][out] */ VARIANT_BOOL *enabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_EdgeTraversal)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_EdgeTraversal )( 
             INetFwRule * This,
-            /* [in] */ VARIANT_BOOL enabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enabled);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Action)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Action )( 
             INetFwRule * This,
-            /* [retval][out] */ NET_FW_ACTION *action);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_ACTION *action);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Action)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Action )( 
             INetFwRule * This,
-            /* [in] */ NET_FW_ACTION action);
+            /* [annotation][in] */ 
+            _In_  NET_FW_ACTION action);
         
         END_INTERFACE
     } INetFwRuleVtbl;
@@ -3087,10 +3410,12 @@ EXTERN_C const IID IID_INetFwRule2;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_EdgeTraversalOptions( 
-            /* [retval][out] */ long *lOptions) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *lOptions) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_EdgeTraversalOptions( 
-            /* [in] */ long lOptions) = 0;
+            /* [annotation][in] */ 
+            _In_  long lOptions) = 0;
         
     };
     
@@ -3104,7 +3429,8 @@ EXTERN_C const IID IID_INetFwRule2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INetFwRule2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3119,23 +3445,31 @@ EXTERN_C const IID IID_INetFwRule2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             INetFwRule2 * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             INetFwRule2 * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             INetFwRule2 * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3160,192 +3494,230 @@ EXTERN_C const IID IID_INetFwRule2;
         DECLSPEC_XFGVIRT(INetFwRule, get_Name)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             INetFwRule2 * This,
-            /* [retval][out] */ BSTR *name);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Name)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             INetFwRule2 * This,
-            /* [in] */ BSTR name);
+            /* [annotation][in] */ 
+            _In_  BSTR name);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Description)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             INetFwRule2 * This,
-            /* [retval][out] */ BSTR *desc);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *desc);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Description)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             INetFwRule2 * This,
-            /* [in] */ BSTR desc);
+            /* [annotation][in] */ 
+            _In_  BSTR desc);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_ApplicationName)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationName )( 
             INetFwRule2 * This,
-            /* [retval][out] */ BSTR *imageFileName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *imageFileName);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_ApplicationName)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ApplicationName )( 
             INetFwRule2 * This,
-            /* [in] */ BSTR imageFileName);
+            /* [annotation][in] */ 
+            _In_  BSTR imageFileName);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_ServiceName)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ServiceName )( 
             INetFwRule2 * This,
-            /* [retval][out] */ BSTR *serviceName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *serviceName);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_ServiceName)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ServiceName )( 
             INetFwRule2 * This,
-            /* [in] */ BSTR serviceName);
+            /* [annotation][in] */ 
+            _In_  BSTR serviceName);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Protocol)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Protocol )( 
             INetFwRule2 * This,
-            /* [retval][out] */ LONG *protocol);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LONG *protocol);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Protocol)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Protocol )( 
             INetFwRule2 * This,
-            /* [in] */ LONG protocol);
+            /* [annotation][in] */ 
+            _In_  LONG protocol);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_LocalPorts)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LocalPorts )( 
             INetFwRule2 * This,
-            /* [retval][out] */ BSTR *portNumbers);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *portNumbers);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_LocalPorts)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LocalPorts )( 
             INetFwRule2 * This,
-            /* [in] */ BSTR portNumbers);
+            /* [annotation][in] */ 
+            _In_  BSTR portNumbers);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_RemotePorts)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RemotePorts )( 
             INetFwRule2 * This,
-            /* [retval][out] */ BSTR *portNumbers);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *portNumbers);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_RemotePorts)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RemotePorts )( 
             INetFwRule2 * This,
-            /* [in] */ BSTR portNumbers);
+            /* [annotation][in] */ 
+            _In_  BSTR portNumbers);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_LocalAddresses)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LocalAddresses )( 
             INetFwRule2 * This,
-            /* [retval][out] */ BSTR *localAddrs);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *localAddrs);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_LocalAddresses)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LocalAddresses )( 
             INetFwRule2 * This,
-            /* [in] */ BSTR localAddrs);
+            /* [annotation][in] */ 
+            _In_  BSTR localAddrs);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_RemoteAddresses)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RemoteAddresses )( 
             INetFwRule2 * This,
-            /* [retval][out] */ BSTR *remoteAddrs);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *remoteAddrs);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_RemoteAddresses)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RemoteAddresses )( 
             INetFwRule2 * This,
-            /* [in] */ BSTR remoteAddrs);
+            /* [annotation][in] */ 
+            _In_  BSTR remoteAddrs);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_IcmpTypesAndCodes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IcmpTypesAndCodes )( 
             INetFwRule2 * This,
-            /* [retval][out] */ BSTR *icmpTypesAndCodes);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *icmpTypesAndCodes);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_IcmpTypesAndCodes)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_IcmpTypesAndCodes )( 
             INetFwRule2 * This,
-            /* [in] */ BSTR icmpTypesAndCodes);
+            /* [annotation][in] */ 
+            _In_  BSTR icmpTypesAndCodes);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Direction)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Direction )( 
             INetFwRule2 * This,
-            /* [retval][out] */ NET_FW_RULE_DIRECTION *dir);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_RULE_DIRECTION *dir);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Direction)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Direction )( 
             INetFwRule2 * This,
-            /* [in] */ NET_FW_RULE_DIRECTION dir);
+            /* [annotation][in] */ 
+            _In_  NET_FW_RULE_DIRECTION dir);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Interfaces)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Interfaces )( 
             INetFwRule2 * This,
-            /* [retval][out] */ VARIANT *interfaces);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *interfaces);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Interfaces)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Interfaces )( 
             INetFwRule2 * This,
-            /* [in] */ VARIANT interfaces);
+            /* [annotation][in] */ 
+            _In_  VARIANT interfaces);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_InterfaceTypes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_InterfaceTypes )( 
             INetFwRule2 * This,
-            /* [retval][out] */ BSTR *interfaceTypes);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *interfaceTypes);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_InterfaceTypes)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_InterfaceTypes )( 
             INetFwRule2 * This,
-            /* [in] */ BSTR interfaceTypes);
+            /* [annotation][in] */ 
+            _In_  BSTR interfaceTypes);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Enabled)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             INetFwRule2 * This,
-            /* [retval][out] */ VARIANT_BOOL *enabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Enabled)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             INetFwRule2 * This,
-            /* [in] */ VARIANT_BOOL enabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enabled);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Grouping)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Grouping )( 
             INetFwRule2 * This,
-            /* [retval][out] */ BSTR *context);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *context);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Grouping)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Grouping )( 
             INetFwRule2 * This,
-            /* [in] */ BSTR context);
+            /* [annotation][in] */ 
+            _In_  BSTR context);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Profiles)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Profiles )( 
             INetFwRule2 * This,
-            /* [retval][out] */ long *profileTypesBitmask);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *profileTypesBitmask);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Profiles)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Profiles )( 
             INetFwRule2 * This,
-            /* [in] */ long profileTypesBitmask);
+            /* [annotation][in] */ 
+            _In_  long profileTypesBitmask);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_EdgeTraversal)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EdgeTraversal )( 
             INetFwRule2 * This,
-            /* [retval][out] */ VARIANT_BOOL *enabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_EdgeTraversal)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_EdgeTraversal )( 
             INetFwRule2 * This,
-            /* [in] */ VARIANT_BOOL enabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enabled);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Action)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Action )( 
             INetFwRule2 * This,
-            /* [retval][out] */ NET_FW_ACTION *action);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_ACTION *action);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Action)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Action )( 
             INetFwRule2 * This,
-            /* [in] */ NET_FW_ACTION action);
+            /* [annotation][in] */ 
+            _In_  NET_FW_ACTION action);
         
         DECLSPEC_XFGVIRT(INetFwRule2, get_EdgeTraversalOptions)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EdgeTraversalOptions )( 
             INetFwRule2 * This,
-            /* [retval][out] */ long *lOptions);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *lOptions);
         
         DECLSPEC_XFGVIRT(INetFwRule2, put_EdgeTraversalOptions)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_EdgeTraversalOptions )( 
             INetFwRule2 * This,
-            /* [in] */ long lOptions);
+            /* [annotation][in] */ 
+            _In_  long lOptions);
         
         END_INTERFACE
     } INetFwRule2Vtbl;
@@ -3525,40 +3897,52 @@ EXTERN_C const IID IID_INetFwRule3;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_LocalAppPackageId( 
-            /* [retval][out] */ BSTR *wszPackageId) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *wszPackageId) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_LocalAppPackageId( 
-            /* [in] */ BSTR wszPackageId) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR wszPackageId) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_LocalUserOwner( 
-            /* [retval][out] */ BSTR *wszUserOwner) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *wszUserOwner) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_LocalUserOwner( 
-            /* [in] */ BSTR wszUserOwner) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR wszUserOwner) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_LocalUserAuthorizedList( 
-            /* [retval][out] */ BSTR *wszUserAuthList) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *wszUserAuthList) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_LocalUserAuthorizedList( 
-            /* [in] */ BSTR wszUserAuthList) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR wszUserAuthList) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_RemoteUserAuthorizedList( 
-            /* [retval][out] */ BSTR *wszUserAuthList) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *wszUserAuthList) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_RemoteUserAuthorizedList( 
-            /* [in] */ BSTR wszUserAuthList) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR wszUserAuthList) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_RemoteMachineAuthorizedList( 
-            /* [retval][out] */ BSTR *wszUserAuthList) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *wszUserAuthList) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_RemoteMachineAuthorizedList( 
-            /* [in] */ BSTR wszUserAuthList) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR wszUserAuthList) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_SecureFlags( 
-            /* [retval][out] */ long *lOptions) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *lOptions) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_SecureFlags( 
-            /* [in] */ long lOptions) = 0;
+            /* [annotation][in] */ 
+            _In_  long lOptions) = 0;
         
     };
     
@@ -3572,7 +3956,8 @@ EXTERN_C const IID IID_INetFwRule3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INetFwRule3 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3587,23 +3972,31 @@ EXTERN_C const IID IID_INetFwRule3;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             INetFwRule3 * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             INetFwRule3 * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             INetFwRule3 * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3628,252 +4021,302 @@ EXTERN_C const IID IID_INetFwRule3;
         DECLSPEC_XFGVIRT(INetFwRule, get_Name)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             INetFwRule3 * This,
-            /* [retval][out] */ BSTR *name);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *name);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Name)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             INetFwRule3 * This,
-            /* [in] */ BSTR name);
+            /* [annotation][in] */ 
+            _In_  BSTR name);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Description)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             INetFwRule3 * This,
-            /* [retval][out] */ BSTR *desc);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *desc);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Description)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             INetFwRule3 * This,
-            /* [in] */ BSTR desc);
+            /* [annotation][in] */ 
+            _In_  BSTR desc);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_ApplicationName)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ApplicationName )( 
             INetFwRule3 * This,
-            /* [retval][out] */ BSTR *imageFileName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *imageFileName);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_ApplicationName)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ApplicationName )( 
             INetFwRule3 * This,
-            /* [in] */ BSTR imageFileName);
+            /* [annotation][in] */ 
+            _In_  BSTR imageFileName);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_ServiceName)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ServiceName )( 
             INetFwRule3 * This,
-            /* [retval][out] */ BSTR *serviceName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *serviceName);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_ServiceName)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ServiceName )( 
             INetFwRule3 * This,
-            /* [in] */ BSTR serviceName);
+            /* [annotation][in] */ 
+            _In_  BSTR serviceName);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Protocol)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Protocol )( 
             INetFwRule3 * This,
-            /* [retval][out] */ LONG *protocol);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LONG *protocol);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Protocol)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Protocol )( 
             INetFwRule3 * This,
-            /* [in] */ LONG protocol);
+            /* [annotation][in] */ 
+            _In_  LONG protocol);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_LocalPorts)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LocalPorts )( 
             INetFwRule3 * This,
-            /* [retval][out] */ BSTR *portNumbers);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *portNumbers);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_LocalPorts)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LocalPorts )( 
             INetFwRule3 * This,
-            /* [in] */ BSTR portNumbers);
+            /* [annotation][in] */ 
+            _In_  BSTR portNumbers);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_RemotePorts)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RemotePorts )( 
             INetFwRule3 * This,
-            /* [retval][out] */ BSTR *portNumbers);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *portNumbers);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_RemotePorts)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RemotePorts )( 
             INetFwRule3 * This,
-            /* [in] */ BSTR portNumbers);
+            /* [annotation][in] */ 
+            _In_  BSTR portNumbers);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_LocalAddresses)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LocalAddresses )( 
             INetFwRule3 * This,
-            /* [retval][out] */ BSTR *localAddrs);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *localAddrs);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_LocalAddresses)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LocalAddresses )( 
             INetFwRule3 * This,
-            /* [in] */ BSTR localAddrs);
+            /* [annotation][in] */ 
+            _In_  BSTR localAddrs);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_RemoteAddresses)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RemoteAddresses )( 
             INetFwRule3 * This,
-            /* [retval][out] */ BSTR *remoteAddrs);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *remoteAddrs);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_RemoteAddresses)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RemoteAddresses )( 
             INetFwRule3 * This,
-            /* [in] */ BSTR remoteAddrs);
+            /* [annotation][in] */ 
+            _In_  BSTR remoteAddrs);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_IcmpTypesAndCodes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IcmpTypesAndCodes )( 
             INetFwRule3 * This,
-            /* [retval][out] */ BSTR *icmpTypesAndCodes);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *icmpTypesAndCodes);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_IcmpTypesAndCodes)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_IcmpTypesAndCodes )( 
             INetFwRule3 * This,
-            /* [in] */ BSTR icmpTypesAndCodes);
+            /* [annotation][in] */ 
+            _In_  BSTR icmpTypesAndCodes);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Direction)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Direction )( 
             INetFwRule3 * This,
-            /* [retval][out] */ NET_FW_RULE_DIRECTION *dir);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_RULE_DIRECTION *dir);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Direction)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Direction )( 
             INetFwRule3 * This,
-            /* [in] */ NET_FW_RULE_DIRECTION dir);
+            /* [annotation][in] */ 
+            _In_  NET_FW_RULE_DIRECTION dir);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Interfaces)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Interfaces )( 
             INetFwRule3 * This,
-            /* [retval][out] */ VARIANT *interfaces);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *interfaces);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Interfaces)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Interfaces )( 
             INetFwRule3 * This,
-            /* [in] */ VARIANT interfaces);
+            /* [annotation][in] */ 
+            _In_  VARIANT interfaces);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_InterfaceTypes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_InterfaceTypes )( 
             INetFwRule3 * This,
-            /* [retval][out] */ BSTR *interfaceTypes);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *interfaceTypes);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_InterfaceTypes)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_InterfaceTypes )( 
             INetFwRule3 * This,
-            /* [in] */ BSTR interfaceTypes);
+            /* [annotation][in] */ 
+            _In_  BSTR interfaceTypes);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Enabled)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             INetFwRule3 * This,
-            /* [retval][out] */ VARIANT_BOOL *enabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Enabled)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             INetFwRule3 * This,
-            /* [in] */ VARIANT_BOOL enabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enabled);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Grouping)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Grouping )( 
             INetFwRule3 * This,
-            /* [retval][out] */ BSTR *context);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *context);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Grouping)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Grouping )( 
             INetFwRule3 * This,
-            /* [in] */ BSTR context);
+            /* [annotation][in] */ 
+            _In_  BSTR context);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Profiles)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Profiles )( 
             INetFwRule3 * This,
-            /* [retval][out] */ long *profileTypesBitmask);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *profileTypesBitmask);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Profiles)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Profiles )( 
             INetFwRule3 * This,
-            /* [in] */ long profileTypesBitmask);
+            /* [annotation][in] */ 
+            _In_  long profileTypesBitmask);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_EdgeTraversal)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EdgeTraversal )( 
             INetFwRule3 * This,
-            /* [retval][out] */ VARIANT_BOOL *enabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_EdgeTraversal)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_EdgeTraversal )( 
             INetFwRule3 * This,
-            /* [in] */ VARIANT_BOOL enabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enabled);
         
         DECLSPEC_XFGVIRT(INetFwRule, get_Action)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Action )( 
             INetFwRule3 * This,
-            /* [retval][out] */ NET_FW_ACTION *action);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_ACTION *action);
         
         DECLSPEC_XFGVIRT(INetFwRule, put_Action)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Action )( 
             INetFwRule3 * This,
-            /* [in] */ NET_FW_ACTION action);
+            /* [annotation][in] */ 
+            _In_  NET_FW_ACTION action);
         
         DECLSPEC_XFGVIRT(INetFwRule2, get_EdgeTraversalOptions)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_EdgeTraversalOptions )( 
             INetFwRule3 * This,
-            /* [retval][out] */ long *lOptions);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *lOptions);
         
         DECLSPEC_XFGVIRT(INetFwRule2, put_EdgeTraversalOptions)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_EdgeTraversalOptions )( 
             INetFwRule3 * This,
-            /* [in] */ long lOptions);
+            /* [annotation][in] */ 
+            _In_  long lOptions);
         
         DECLSPEC_XFGVIRT(INetFwRule3, get_LocalAppPackageId)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LocalAppPackageId )( 
             INetFwRule3 * This,
-            /* [retval][out] */ BSTR *wszPackageId);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *wszPackageId);
         
         DECLSPEC_XFGVIRT(INetFwRule3, put_LocalAppPackageId)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LocalAppPackageId )( 
             INetFwRule3 * This,
-            /* [in] */ BSTR wszPackageId);
+            /* [annotation][in] */ 
+            _In_  BSTR wszPackageId);
         
         DECLSPEC_XFGVIRT(INetFwRule3, get_LocalUserOwner)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LocalUserOwner )( 
             INetFwRule3 * This,
-            /* [retval][out] */ BSTR *wszUserOwner);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *wszUserOwner);
         
         DECLSPEC_XFGVIRT(INetFwRule3, put_LocalUserOwner)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LocalUserOwner )( 
             INetFwRule3 * This,
-            /* [in] */ BSTR wszUserOwner);
+            /* [annotation][in] */ 
+            _In_  BSTR wszUserOwner);
         
         DECLSPEC_XFGVIRT(INetFwRule3, get_LocalUserAuthorizedList)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LocalUserAuthorizedList )( 
             INetFwRule3 * This,
-            /* [retval][out] */ BSTR *wszUserAuthList);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *wszUserAuthList);
         
         DECLSPEC_XFGVIRT(INetFwRule3, put_LocalUserAuthorizedList)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_LocalUserAuthorizedList )( 
             INetFwRule3 * This,
-            /* [in] */ BSTR wszUserAuthList);
+            /* [annotation][in] */ 
+            _In_  BSTR wszUserAuthList);
         
         DECLSPEC_XFGVIRT(INetFwRule3, get_RemoteUserAuthorizedList)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RemoteUserAuthorizedList )( 
             INetFwRule3 * This,
-            /* [retval][out] */ BSTR *wszUserAuthList);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *wszUserAuthList);
         
         DECLSPEC_XFGVIRT(INetFwRule3, put_RemoteUserAuthorizedList)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RemoteUserAuthorizedList )( 
             INetFwRule3 * This,
-            /* [in] */ BSTR wszUserAuthList);
+            /* [annotation][in] */ 
+            _In_  BSTR wszUserAuthList);
         
         DECLSPEC_XFGVIRT(INetFwRule3, get_RemoteMachineAuthorizedList)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RemoteMachineAuthorizedList )( 
             INetFwRule3 * This,
-            /* [retval][out] */ BSTR *wszUserAuthList);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *wszUserAuthList);
         
         DECLSPEC_XFGVIRT(INetFwRule3, put_RemoteMachineAuthorizedList)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RemoteMachineAuthorizedList )( 
             INetFwRule3 * This,
-            /* [in] */ BSTR wszUserAuthList);
+            /* [annotation][in] */ 
+            _In_  BSTR wszUserAuthList);
         
         DECLSPEC_XFGVIRT(INetFwRule3, get_SecureFlags)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SecureFlags )( 
             INetFwRule3 * This,
-            /* [retval][out] */ long *lOptions);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *lOptions);
         
         DECLSPEC_XFGVIRT(INetFwRule3, put_SecureFlags)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SecureFlags )( 
             INetFwRule3 * This,
-            /* [in] */ long lOptions);
+            /* [annotation][in] */ 
+            _In_  long lOptions);
         
         END_INTERFACE
     } INetFwRule3Vtbl;
@@ -4090,20 +4533,26 @@ EXTERN_C const IID IID_INetFwRules;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [retval][out] */ long *count) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *count) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Add( 
-            /* [in] */ INetFwRule *rule) = 0;
+            /* [annotation][in] */ 
+            _In_  INetFwRule *rule) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Remove( 
-            /* [in] */ BSTR name) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR name) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Item( 
-            /* [in] */ BSTR name,
-            /* [retval][out] */ INetFwRule **rule) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR name,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwRule **rule) = 0;
         
         virtual /* [restricted][propget][id] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [retval][out] */ IUnknown **newEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **newEnum) = 0;
         
     };
     
@@ -4117,7 +4566,8 @@ EXTERN_C const IID IID_INetFwRules;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INetFwRules * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4132,23 +4582,31 @@ EXTERN_C const IID IID_INetFwRules;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             INetFwRules * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             INetFwRules * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             INetFwRules * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4173,28 +4631,34 @@ EXTERN_C const IID IID_INetFwRules;
         DECLSPEC_XFGVIRT(INetFwRules, get_Count)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             INetFwRules * This,
-            /* [retval][out] */ long *count);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *count);
         
         DECLSPEC_XFGVIRT(INetFwRules, Add)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             INetFwRules * This,
-            /* [in] */ INetFwRule *rule);
+            /* [annotation][in] */ 
+            _In_  INetFwRule *rule);
         
         DECLSPEC_XFGVIRT(INetFwRules, Remove)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             INetFwRules * This,
-            /* [in] */ BSTR name);
+            /* [annotation][in] */ 
+            _In_  BSTR name);
         
         DECLSPEC_XFGVIRT(INetFwRules, Item)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             INetFwRules * This,
-            /* [in] */ BSTR name,
-            /* [retval][out] */ INetFwRule **rule);
+            /* [annotation][in] */ 
+            _In_  BSTR name,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwRule **rule);
         
         DECLSPEC_XFGVIRT(INetFwRules, get__NewEnum)
         /* [restricted][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             INetFwRules * This,
-            /* [retval][out] */ IUnknown **newEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **newEnum);
         
         END_INTERFACE
     } INetFwRulesVtbl;
@@ -4274,18 +4738,26 @@ EXTERN_C const IID IID_INetFwServiceRestriction;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE RestrictService( 
-            /* [in] */ BSTR serviceName,
-            /* [in] */ BSTR appName,
-            /* [in] */ VARIANT_BOOL restrictService,
-            /* [in] */ VARIANT_BOOL serviceSidRestricted) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR serviceName,
+            /* [annotation][in] */ 
+            _In_  BSTR appName,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL restrictService,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL serviceSidRestricted) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ServiceRestricted( 
-            /* [in] */ BSTR serviceName,
-            /* [in] */ BSTR appName,
-            /* [retval][out] */ VARIANT_BOOL *serviceRestricted) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR serviceName,
+            /* [annotation][in] */ 
+            _In_  BSTR appName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *serviceRestricted) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Rules( 
-            /* [retval][out] */ INetFwRules **rules) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwRules **rules) = 0;
         
     };
     
@@ -4299,7 +4771,8 @@ EXTERN_C const IID IID_INetFwServiceRestriction;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INetFwServiceRestriction * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4314,23 +4787,31 @@ EXTERN_C const IID IID_INetFwServiceRestriction;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             INetFwServiceRestriction * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             INetFwServiceRestriction * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             INetFwServiceRestriction * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4355,22 +4836,30 @@ EXTERN_C const IID IID_INetFwServiceRestriction;
         DECLSPEC_XFGVIRT(INetFwServiceRestriction, RestrictService)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RestrictService )( 
             INetFwServiceRestriction * This,
-            /* [in] */ BSTR serviceName,
-            /* [in] */ BSTR appName,
-            /* [in] */ VARIANT_BOOL restrictService,
-            /* [in] */ VARIANT_BOOL serviceSidRestricted);
+            /* [annotation][in] */ 
+            _In_  BSTR serviceName,
+            /* [annotation][in] */ 
+            _In_  BSTR appName,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL restrictService,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL serviceSidRestricted);
         
         DECLSPEC_XFGVIRT(INetFwServiceRestriction, ServiceRestricted)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ServiceRestricted )( 
             INetFwServiceRestriction * This,
-            /* [in] */ BSTR serviceName,
-            /* [in] */ BSTR appName,
-            /* [retval][out] */ VARIANT_BOOL *serviceRestricted);
+            /* [annotation][in] */ 
+            _In_  BSTR serviceName,
+            /* [annotation][in] */ 
+            _In_  BSTR appName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *serviceRestricted);
         
         DECLSPEC_XFGVIRT(INetFwServiceRestriction, get_Rules)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Rules )( 
             INetFwServiceRestriction * This,
-            /* [retval][out] */ INetFwRules **rules);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwRules **rules);
         
         END_INTERFACE
     } INetFwServiceRestrictionVtbl;
@@ -4444,46 +4933,60 @@ EXTERN_C const IID IID_INetFwProfile;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Type( 
-            /* [retval][out] */ __RPC__out NET_FW_PROFILE_TYPE *type) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_PROFILE_TYPE *type) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_FirewallEnabled( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *enabled) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_FirewallEnabled( 
-            /* [in] */ VARIANT_BOOL enabled) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enabled) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_ExceptionsNotAllowed( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *notAllowed) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *notAllowed) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_ExceptionsNotAllowed( 
-            /* [in] */ VARIANT_BOOL notAllowed) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL notAllowed) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_NotificationsDisabled( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *disabled) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *disabled) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_NotificationsDisabled( 
-            /* [in] */ VARIANT_BOOL disabled) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL disabled) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_UnicastResponsesToMulticastBroadcastDisabled( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *disabled) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *disabled) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_UnicastResponsesToMulticastBroadcastDisabled( 
-            /* [in] */ VARIANT_BOOL disabled) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL disabled) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_RemoteAdminSettings( 
-            /* [retval][out] */ __RPC__deref_out_opt INetFwRemoteAdminSettings **remoteAdminSettings) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwRemoteAdminSettings **remoteAdminSettings) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_IcmpSettings( 
-            /* [retval][out] */ __RPC__deref_out_opt INetFwIcmpSettings **icmpSettings) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwIcmpSettings **icmpSettings) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_GloballyOpenPorts( 
-            /* [retval][out] */ __RPC__deref_out_opt INetFwOpenPorts **openPorts) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwOpenPorts **openPorts) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Services( 
-            /* [retval][out] */ __RPC__deref_out_opt INetFwServices **services) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwServices **services) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_AuthorizedApplications( 
-            /* [retval][out] */ __RPC__deref_out_opt INetFwAuthorizedApplications **apps) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwAuthorizedApplications **apps) = 0;
         
     };
     
@@ -4497,7 +5000,8 @@ EXTERN_C const IID IID_INetFwProfile;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetFwProfile * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4512,23 +5016,31 @@ EXTERN_C const IID IID_INetFwProfile;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in INetFwProfile * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in INetFwProfile * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in INetFwProfile * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4553,72 +5065,86 @@ EXTERN_C const IID IID_INetFwProfile;
         DECLSPEC_XFGVIRT(INetFwProfile, get_Type)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in INetFwProfile * This,
-            /* [retval][out] */ __RPC__out NET_FW_PROFILE_TYPE *type);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_PROFILE_TYPE *type);
         
         DECLSPEC_XFGVIRT(INetFwProfile, get_FirewallEnabled)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_FirewallEnabled )( 
             __RPC__in INetFwProfile * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *enabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled);
         
         DECLSPEC_XFGVIRT(INetFwProfile, put_FirewallEnabled)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_FirewallEnabled )( 
             __RPC__in INetFwProfile * This,
-            /* [in] */ VARIANT_BOOL enabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enabled);
         
         DECLSPEC_XFGVIRT(INetFwProfile, get_ExceptionsNotAllowed)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ExceptionsNotAllowed )( 
             __RPC__in INetFwProfile * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *notAllowed);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *notAllowed);
         
         DECLSPEC_XFGVIRT(INetFwProfile, put_ExceptionsNotAllowed)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ExceptionsNotAllowed )( 
             __RPC__in INetFwProfile * This,
-            /* [in] */ VARIANT_BOOL notAllowed);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL notAllowed);
         
         DECLSPEC_XFGVIRT(INetFwProfile, get_NotificationsDisabled)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_NotificationsDisabled )( 
             __RPC__in INetFwProfile * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *disabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *disabled);
         
         DECLSPEC_XFGVIRT(INetFwProfile, put_NotificationsDisabled)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_NotificationsDisabled )( 
             __RPC__in INetFwProfile * This,
-            /* [in] */ VARIANT_BOOL disabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL disabled);
         
         DECLSPEC_XFGVIRT(INetFwProfile, get_UnicastResponsesToMulticastBroadcastDisabled)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_UnicastResponsesToMulticastBroadcastDisabled )( 
             __RPC__in INetFwProfile * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *disabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *disabled);
         
         DECLSPEC_XFGVIRT(INetFwProfile, put_UnicastResponsesToMulticastBroadcastDisabled)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_UnicastResponsesToMulticastBroadcastDisabled )( 
             __RPC__in INetFwProfile * This,
-            /* [in] */ VARIANT_BOOL disabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL disabled);
         
         DECLSPEC_XFGVIRT(INetFwProfile, get_RemoteAdminSettings)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RemoteAdminSettings )( 
             __RPC__in INetFwProfile * This,
-            /* [retval][out] */ __RPC__deref_out_opt INetFwRemoteAdminSettings **remoteAdminSettings);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwRemoteAdminSettings **remoteAdminSettings);
         
         DECLSPEC_XFGVIRT(INetFwProfile, get_IcmpSettings)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IcmpSettings )( 
             __RPC__in INetFwProfile * This,
-            /* [retval][out] */ __RPC__deref_out_opt INetFwIcmpSettings **icmpSettings);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwIcmpSettings **icmpSettings);
         
         DECLSPEC_XFGVIRT(INetFwProfile, get_GloballyOpenPorts)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_GloballyOpenPorts )( 
             __RPC__in INetFwProfile * This,
-            /* [retval][out] */ __RPC__deref_out_opt INetFwOpenPorts **openPorts);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwOpenPorts **openPorts);
         
         DECLSPEC_XFGVIRT(INetFwProfile, get_Services)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Services )( 
             __RPC__in INetFwProfile * This,
-            /* [retval][out] */ __RPC__deref_out_opt INetFwServices **services);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwServices **services);
         
         DECLSPEC_XFGVIRT(INetFwProfile, get_AuthorizedApplications)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AuthorizedApplications )( 
             __RPC__in INetFwProfile * This,
-            /* [retval][out] */ __RPC__deref_out_opt INetFwAuthorizedApplications **apps);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwAuthorizedApplications **apps);
         
         END_INTERFACE
     } INetFwProfileVtbl;
@@ -4725,11 +5251,14 @@ EXTERN_C const IID IID_INetFwPolicy;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_CurrentProfile( 
-            /* [retval][out] */ __RPC__deref_out_opt INetFwProfile **profile) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwProfile **profile) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetProfileByType( 
-            /* [in] */ NET_FW_PROFILE_TYPE profileType,
-            /* [retval][out] */ __RPC__deref_out_opt INetFwProfile **profile) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE profileType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwProfile **profile) = 0;
         
     };
     
@@ -4743,7 +5272,8 @@ EXTERN_C const IID IID_INetFwPolicy;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetFwPolicy * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4758,23 +5288,31 @@ EXTERN_C const IID IID_INetFwPolicy;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in INetFwPolicy * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in INetFwPolicy * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in INetFwPolicy * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4799,13 +5337,16 @@ EXTERN_C const IID IID_INetFwPolicy;
         DECLSPEC_XFGVIRT(INetFwPolicy, get_CurrentProfile)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentProfile )( 
             __RPC__in INetFwPolicy * This,
-            /* [retval][out] */ __RPC__deref_out_opt INetFwProfile **profile);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwProfile **profile);
         
         DECLSPEC_XFGVIRT(INetFwPolicy, GetProfileByType)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetProfileByType )( 
             __RPC__in INetFwPolicy * This,
-            /* [in] */ NET_FW_PROFILE_TYPE profileType,
-            /* [retval][out] */ __RPC__deref_out_opt INetFwProfile **profile);
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE profileType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwProfile **profile);
         
         END_INTERFACE
     } INetFwPolicyVtbl;
@@ -4876,88 +5417,128 @@ EXTERN_C const IID IID_INetFwPolicy2;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_CurrentProfileTypes( 
-            /* [retval][out] */ long *profileTypesBitmask) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *profileTypesBitmask) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_FirewallEnabled( 
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [retval][out] */ VARIANT_BOOL *enabled) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_FirewallEnabled( 
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [in] */ VARIANT_BOOL enabled) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enabled) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_ExcludedInterfaces( 
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [retval][out] */ VARIANT *interfaces) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *interfaces) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_ExcludedInterfaces( 
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [in] */ VARIANT interfaces) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][in] */ 
+            _In_  VARIANT interfaces) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_BlockAllInboundTraffic( 
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [retval][out] */ VARIANT_BOOL *Block) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *Block) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_BlockAllInboundTraffic( 
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [in] */ VARIANT_BOOL Block) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL Block) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_NotificationsDisabled( 
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [retval][out] */ VARIANT_BOOL *disabled) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *disabled) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_NotificationsDisabled( 
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [in] */ VARIANT_BOOL disabled) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL disabled) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_UnicastResponsesToMulticastBroadcastDisabled( 
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [retval][out] */ VARIANT_BOOL *disabled) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *disabled) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_UnicastResponsesToMulticastBroadcastDisabled( 
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [in] */ VARIANT_BOOL disabled) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL disabled) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Rules( 
-            /* [retval][out] */ INetFwRules **rules) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwRules **rules) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_ServiceRestriction( 
-            /* [retval][out] */ INetFwServiceRestriction **ServiceRestriction) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwServiceRestriction **ServiceRestriction) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE EnableRuleGroup( 
-            /* [in] */ long profileTypesBitmask,
-            /* [in] */ BSTR group,
-            /* [in] */ VARIANT_BOOL enable) = 0;
+            /* [annotation][in] */ 
+            _In_  long profileTypesBitmask,
+            /* [annotation][in] */ 
+            _In_  BSTR group,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enable) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE IsRuleGroupEnabled( 
-            /* [in] */ long profileTypesBitmask,
-            /* [in] */ BSTR group,
-            /* [retval][out] */ VARIANT_BOOL *enabled) = 0;
+            /* [annotation][in] */ 
+            _In_  long profileTypesBitmask,
+            /* [annotation][in] */ 
+            _In_  BSTR group,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE RestoreLocalFirewallDefaults( void) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_DefaultInboundAction( 
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [retval][out] */ NET_FW_ACTION *action) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_ACTION *action) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_DefaultInboundAction( 
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [in] */ NET_FW_ACTION action) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][in] */ 
+            _In_  NET_FW_ACTION action) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_DefaultOutboundAction( 
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [retval][out] */ NET_FW_ACTION *action) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_ACTION *action) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_DefaultOutboundAction( 
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [in] */ NET_FW_ACTION action) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][in] */ 
+            _In_  NET_FW_ACTION action) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_IsRuleGroupCurrentlyEnabled( 
-            /* [in] */ BSTR group,
-            /* [retval][out] */ VARIANT_BOOL *enabled) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR group,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_LocalPolicyModifyState( 
-            /* [retval][out] */ NET_FW_MODIFY_STATE *modifyState) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_MODIFY_STATE *modifyState) = 0;
         
     };
     
@@ -4971,7 +5552,8 @@ EXTERN_C const IID IID_INetFwPolicy2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INetFwPolicy2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4986,23 +5568,31 @@ EXTERN_C const IID IID_INetFwPolicy2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             INetFwPolicy2 * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             INetFwPolicy2 * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             INetFwPolicy2 * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5027,91 +5617,120 @@ EXTERN_C const IID IID_INetFwPolicy2;
         DECLSPEC_XFGVIRT(INetFwPolicy2, get_CurrentProfileTypes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentProfileTypes )( 
             INetFwPolicy2 * This,
-            /* [retval][out] */ long *profileTypesBitmask);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *profileTypesBitmask);
         
         DECLSPEC_XFGVIRT(INetFwPolicy2, get_FirewallEnabled)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_FirewallEnabled )( 
             INetFwPolicy2 * This,
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [retval][out] */ VARIANT_BOOL *enabled);
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled);
         
         DECLSPEC_XFGVIRT(INetFwPolicy2, put_FirewallEnabled)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_FirewallEnabled )( 
             INetFwPolicy2 * This,
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [in] */ VARIANT_BOOL enabled);
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enabled);
         
         DECLSPEC_XFGVIRT(INetFwPolicy2, get_ExcludedInterfaces)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ExcludedInterfaces )( 
             INetFwPolicy2 * This,
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [retval][out] */ VARIANT *interfaces);
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *interfaces);
         
         DECLSPEC_XFGVIRT(INetFwPolicy2, put_ExcludedInterfaces)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ExcludedInterfaces )( 
             INetFwPolicy2 * This,
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [in] */ VARIANT interfaces);
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][in] */ 
+            _In_  VARIANT interfaces);
         
         DECLSPEC_XFGVIRT(INetFwPolicy2, get_BlockAllInboundTraffic)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_BlockAllInboundTraffic )( 
             INetFwPolicy2 * This,
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [retval][out] */ VARIANT_BOOL *Block);
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *Block);
         
         DECLSPEC_XFGVIRT(INetFwPolicy2, put_BlockAllInboundTraffic)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_BlockAllInboundTraffic )( 
             INetFwPolicy2 * This,
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [in] */ VARIANT_BOOL Block);
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL Block);
         
         DECLSPEC_XFGVIRT(INetFwPolicy2, get_NotificationsDisabled)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_NotificationsDisabled )( 
             INetFwPolicy2 * This,
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [retval][out] */ VARIANT_BOOL *disabled);
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *disabled);
         
         DECLSPEC_XFGVIRT(INetFwPolicy2, put_NotificationsDisabled)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_NotificationsDisabled )( 
             INetFwPolicy2 * This,
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [in] */ VARIANT_BOOL disabled);
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL disabled);
         
         DECLSPEC_XFGVIRT(INetFwPolicy2, get_UnicastResponsesToMulticastBroadcastDisabled)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_UnicastResponsesToMulticastBroadcastDisabled )( 
             INetFwPolicy2 * This,
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [retval][out] */ VARIANT_BOOL *disabled);
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *disabled);
         
         DECLSPEC_XFGVIRT(INetFwPolicy2, put_UnicastResponsesToMulticastBroadcastDisabled)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_UnicastResponsesToMulticastBroadcastDisabled )( 
             INetFwPolicy2 * This,
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [in] */ VARIANT_BOOL disabled);
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL disabled);
         
         DECLSPEC_XFGVIRT(INetFwPolicy2, get_Rules)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Rules )( 
             INetFwPolicy2 * This,
-            /* [retval][out] */ INetFwRules **rules);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwRules **rules);
         
         DECLSPEC_XFGVIRT(INetFwPolicy2, get_ServiceRestriction)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ServiceRestriction )( 
             INetFwPolicy2 * This,
-            /* [retval][out] */ INetFwServiceRestriction **ServiceRestriction);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwServiceRestriction **ServiceRestriction);
         
         DECLSPEC_XFGVIRT(INetFwPolicy2, EnableRuleGroup)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnableRuleGroup )( 
             INetFwPolicy2 * This,
-            /* [in] */ long profileTypesBitmask,
-            /* [in] */ BSTR group,
-            /* [in] */ VARIANT_BOOL enable);
+            /* [annotation][in] */ 
+            _In_  long profileTypesBitmask,
+            /* [annotation][in] */ 
+            _In_  BSTR group,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL enable);
         
         DECLSPEC_XFGVIRT(INetFwPolicy2, IsRuleGroupEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsRuleGroupEnabled )( 
             INetFwPolicy2 * This,
-            /* [in] */ long profileTypesBitmask,
-            /* [in] */ BSTR group,
-            /* [retval][out] */ VARIANT_BOOL *enabled);
+            /* [annotation][in] */ 
+            _In_  long profileTypesBitmask,
+            /* [annotation][in] */ 
+            _In_  BSTR group,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled);
         
         DECLSPEC_XFGVIRT(INetFwPolicy2, RestoreLocalFirewallDefaults)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RestoreLocalFirewallDefaults )( 
@@ -5120,37 +5739,48 @@ EXTERN_C const IID IID_INetFwPolicy2;
         DECLSPEC_XFGVIRT(INetFwPolicy2, get_DefaultInboundAction)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultInboundAction )( 
             INetFwPolicy2 * This,
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [retval][out] */ NET_FW_ACTION *action);
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_ACTION *action);
         
         DECLSPEC_XFGVIRT(INetFwPolicy2, put_DefaultInboundAction)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultInboundAction )( 
             INetFwPolicy2 * This,
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [in] */ NET_FW_ACTION action);
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][in] */ 
+            _In_  NET_FW_ACTION action);
         
         DECLSPEC_XFGVIRT(INetFwPolicy2, get_DefaultOutboundAction)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultOutboundAction )( 
             INetFwPolicy2 * This,
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [retval][out] */ NET_FW_ACTION *action);
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_ACTION *action);
         
         DECLSPEC_XFGVIRT(INetFwPolicy2, put_DefaultOutboundAction)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultOutboundAction )( 
             INetFwPolicy2 * This,
-            /* [in] */ NET_FW_PROFILE_TYPE2 profileType,
-            /* [in] */ NET_FW_ACTION action);
+            /* [annotation][in] */ 
+            _In_  NET_FW_PROFILE_TYPE2 profileType,
+            /* [annotation][in] */ 
+            _In_  NET_FW_ACTION action);
         
         DECLSPEC_XFGVIRT(INetFwPolicy2, get_IsRuleGroupCurrentlyEnabled)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IsRuleGroupCurrentlyEnabled )( 
             INetFwPolicy2 * This,
-            /* [in] */ BSTR group,
-            /* [retval][out] */ VARIANT_BOOL *enabled);
+            /* [annotation][in] */ 
+            _In_  BSTR group,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *enabled);
         
         DECLSPEC_XFGVIRT(INetFwPolicy2, get_LocalPolicyModifyState)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LocalPolicyModifyState )( 
             INetFwPolicy2 * This,
-            /* [retval][out] */ NET_FW_MODIFY_STATE *modifyState);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_MODIFY_STATE *modifyState);
         
         END_INTERFACE
     } INetFwPolicy2Vtbl;
@@ -5281,28 +5911,42 @@ EXTERN_C const IID IID_INetFwMgr;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_LocalPolicy( 
-            /* [retval][out] */ __RPC__deref_out_opt INetFwPolicy **localPolicy) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwPolicy **localPolicy) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_CurrentProfileType( 
-            /* [retval][out] */ __RPC__out NET_FW_PROFILE_TYPE *profileType) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_PROFILE_TYPE *profileType) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE RestoreDefaults( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE IsPortAllowed( 
-            /* [in] */ __RPC__in BSTR imageFileName,
-            /* [in] */ NET_FW_IP_VERSION ipVersion,
-            /* [in] */ LONG portNumber,
-            /* [in] */ __RPC__in BSTR localAddress,
-            /* [in] */ NET_FW_IP_PROTOCOL ipProtocol,
-            /* [out] */ __RPC__out VARIANT *allowed,
-            /* [out] */ __RPC__out VARIANT *restricted) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR imageFileName,
+            /* [annotation][in] */ 
+            _In_  NET_FW_IP_VERSION ipVersion,
+            /* [annotation][in] */ 
+            _In_  LONG portNumber,
+            /* [annotation][in] */ 
+            _In_  BSTR localAddress,
+            /* [annotation][in] */ 
+            _In_  NET_FW_IP_PROTOCOL ipProtocol,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *allowed,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *restricted) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE IsIcmpTypeAllowed( 
-            /* [in] */ NET_FW_IP_VERSION ipVersion,
-            /* [in] */ __RPC__in BSTR localAddress,
-            /* [in] */ BYTE type,
-            /* [out] */ __RPC__out VARIANT *allowed,
-            /* [out] */ __RPC__out VARIANT *restricted) = 0;
+            /* [annotation][in] */ 
+            _In_  NET_FW_IP_VERSION ipVersion,
+            /* [annotation][in] */ 
+            _In_  BSTR localAddress,
+            /* [annotation][in] */ 
+            _In_  BYTE type,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *allowed,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *restricted) = 0;
         
     };
     
@@ -5316,7 +5960,8 @@ EXTERN_C const IID IID_INetFwMgr;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetFwMgr * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5331,23 +5976,31 @@ EXTERN_C const IID IID_INetFwMgr;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in INetFwMgr * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in INetFwMgr * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in INetFwMgr * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5372,12 +6025,14 @@ EXTERN_C const IID IID_INetFwMgr;
         DECLSPEC_XFGVIRT(INetFwMgr, get_LocalPolicy)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LocalPolicy )( 
             __RPC__in INetFwMgr * This,
-            /* [retval][out] */ __RPC__deref_out_opt INetFwPolicy **localPolicy);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwPolicy **localPolicy);
         
         DECLSPEC_XFGVIRT(INetFwMgr, get_CurrentProfileType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentProfileType )( 
             __RPC__in INetFwMgr * This,
-            /* [retval][out] */ __RPC__out NET_FW_PROFILE_TYPE *profileType);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NET_FW_PROFILE_TYPE *profileType);
         
         DECLSPEC_XFGVIRT(INetFwMgr, RestoreDefaults)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RestoreDefaults )( 
@@ -5386,22 +6041,34 @@ EXTERN_C const IID IID_INetFwMgr;
         DECLSPEC_XFGVIRT(INetFwMgr, IsPortAllowed)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsPortAllowed )( 
             __RPC__in INetFwMgr * This,
-            /* [in] */ __RPC__in BSTR imageFileName,
-            /* [in] */ NET_FW_IP_VERSION ipVersion,
-            /* [in] */ LONG portNumber,
-            /* [in] */ __RPC__in BSTR localAddress,
-            /* [in] */ NET_FW_IP_PROTOCOL ipProtocol,
-            /* [out] */ __RPC__out VARIANT *allowed,
-            /* [out] */ __RPC__out VARIANT *restricted);
+            /* [annotation][in] */ 
+            _In_  BSTR imageFileName,
+            /* [annotation][in] */ 
+            _In_  NET_FW_IP_VERSION ipVersion,
+            /* [annotation][in] */ 
+            _In_  LONG portNumber,
+            /* [annotation][in] */ 
+            _In_  BSTR localAddress,
+            /* [annotation][in] */ 
+            _In_  NET_FW_IP_PROTOCOL ipProtocol,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *allowed,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *restricted);
         
         DECLSPEC_XFGVIRT(INetFwMgr, IsIcmpTypeAllowed)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsIcmpTypeAllowed )( 
             __RPC__in INetFwMgr * This,
-            /* [in] */ NET_FW_IP_VERSION ipVersion,
-            /* [in] */ __RPC__in BSTR localAddress,
-            /* [in] */ BYTE type,
-            /* [out] */ __RPC__out VARIANT *allowed,
-            /* [out] */ __RPC__out VARIANT *restricted);
+            /* [annotation][in] */ 
+            _In_  NET_FW_IP_VERSION ipVersion,
+            /* [annotation][in] */ 
+            _In_  BSTR localAddress,
+            /* [annotation][in] */ 
+            _In_  BYTE type,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *allowed,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *restricted);
         
         END_INTERFACE
     } INetFwMgrVtbl;
@@ -5481,19 +6148,24 @@ EXTERN_C const IID IID_INetFwProduct;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_RuleCategories( 
-            /* [retval][out] */ VARIANT *ruleCategories) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *ruleCategories) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_RuleCategories( 
-            /* [in] */ VARIANT ruleCategories) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT ruleCategories) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
-            /* [retval][out] */ BSTR *displayName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *displayName) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_DisplayName( 
-            /* [in] */ BSTR displayName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR displayName) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_PathToSignedProductExe( 
-            /* [retval][out] */ BSTR *path) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *path) = 0;
         
     };
     
@@ -5507,7 +6179,8 @@ EXTERN_C const IID IID_INetFwProduct;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INetFwProduct * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5522,23 +6195,31 @@ EXTERN_C const IID IID_INetFwProduct;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             INetFwProduct * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             INetFwProduct * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             INetFwProduct * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5563,27 +6244,32 @@ EXTERN_C const IID IID_INetFwProduct;
         DECLSPEC_XFGVIRT(INetFwProduct, get_RuleCategories)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RuleCategories )( 
             INetFwProduct * This,
-            /* [retval][out] */ VARIANT *ruleCategories);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *ruleCategories);
         
         DECLSPEC_XFGVIRT(INetFwProduct, put_RuleCategories)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RuleCategories )( 
             INetFwProduct * This,
-            /* [in] */ VARIANT ruleCategories);
+            /* [annotation][in] */ 
+            _In_  VARIANT ruleCategories);
         
         DECLSPEC_XFGVIRT(INetFwProduct, get_DisplayName)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayName )( 
             INetFwProduct * This,
-            /* [retval][out] */ BSTR *displayName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *displayName);
         
         DECLSPEC_XFGVIRT(INetFwProduct, put_DisplayName)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DisplayName )( 
             INetFwProduct * This,
-            /* [in] */ BSTR displayName);
+            /* [annotation][in] */ 
+            _In_  BSTR displayName);
         
         DECLSPEC_XFGVIRT(INetFwProduct, get_PathToSignedProductExe)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_PathToSignedProductExe )( 
             INetFwProduct * This,
-            /* [retval][out] */ BSTR *path);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *path);
         
         END_INTERFACE
     } INetFwProductVtbl;
@@ -5663,18 +6349,24 @@ EXTERN_C const IID IID_INetFwProducts;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [retval][out] */ long *count) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *count) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Register( 
-            /* [in] */ INetFwProduct *product,
-            /* [retval][out] */ IUnknown **registration) = 0;
+            /* [annotation][in] */ 
+            _In_  INetFwProduct *product,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **registration) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Item( 
-            /* [in] */ long index,
-            /* [retval][out] */ INetFwProduct **product) = 0;
+            /* [annotation][in] */ 
+            _In_  long index,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwProduct **product) = 0;
         
         virtual /* [restricted][propget][id] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [retval][out] */ IUnknown **newEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **newEnum) = 0;
         
     };
     
@@ -5688,7 +6380,8 @@ EXTERN_C const IID IID_INetFwProducts;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INetFwProducts * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5703,23 +6396,31 @@ EXTERN_C const IID IID_INetFwProducts;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             INetFwProducts * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             INetFwProducts * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             INetFwProducts * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5744,24 +6445,30 @@ EXTERN_C const IID IID_INetFwProducts;
         DECLSPEC_XFGVIRT(INetFwProducts, get_Count)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             INetFwProducts * This,
-            /* [retval][out] */ long *count);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *count);
         
         DECLSPEC_XFGVIRT(INetFwProducts, Register)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Register )( 
             INetFwProducts * This,
-            /* [in] */ INetFwProduct *product,
-            /* [retval][out] */ IUnknown **registration);
+            /* [annotation][in] */ 
+            _In_  INetFwProduct *product,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **registration);
         
         DECLSPEC_XFGVIRT(INetFwProducts, Item)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             INetFwProducts * This,
-            /* [in] */ long index,
-            /* [retval][out] */ INetFwProduct **product);
+            /* [annotation][in] */ 
+            _In_  long index,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetFwProduct **product);
         
         DECLSPEC_XFGVIRT(INetFwProducts, get__NewEnum)
         /* [restricted][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             INetFwProducts * This,
-            /* [retval][out] */ IUnknown **newEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **newEnum);
         
         END_INTERFACE
     } INetFwProductsVtbl;

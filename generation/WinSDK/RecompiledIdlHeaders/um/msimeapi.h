@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -93,12 +93,16 @@ EXTERN_C const IID IID_IImePlugInDictDictionaryList;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDictionariesInUse( 
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *prgDictionaryGUID,
-            /* [out][in] */ __RPC__deref_inout_opt SAFEARRAY * *prgDateCreated,
-            /* [out][in] */ __RPC__deref_inout_opt SAFEARRAY * *prgfEncrypted) = 0;
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *prgDictionaryGUID,
+            /* [annotation][out][in] */ 
+            _Inout_  SAFEARRAY * *prgDateCreated,
+            /* [annotation][out][in] */ 
+            _Inout_  SAFEARRAY * *prgfEncrypted) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeleteDictionary( 
-            /* [in] */ __RPC__in BSTR bstrDictionaryGUID) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrDictionaryGUID) = 0;
         
     };
     
@@ -112,7 +116,8 @@ EXTERN_C const IID IID_IImePlugInDictDictionaryList;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IImePlugInDictDictionaryList * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -127,14 +132,18 @@ EXTERN_C const IID IID_IImePlugInDictDictionaryList;
         DECLSPEC_XFGVIRT(IImePlugInDictDictionaryList, GetDictionariesInUse)
         HRESULT ( STDMETHODCALLTYPE *GetDictionariesInUse )( 
             __RPC__in IImePlugInDictDictionaryList * This,
-            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *prgDictionaryGUID,
-            /* [out][in] */ __RPC__deref_inout_opt SAFEARRAY * *prgDateCreated,
-            /* [out][in] */ __RPC__deref_inout_opt SAFEARRAY * *prgfEncrypted);
+            /* [annotation][out] */ 
+            _Out_  SAFEARRAY * *prgDictionaryGUID,
+            /* [annotation][out][in] */ 
+            _Inout_  SAFEARRAY * *prgDateCreated,
+            /* [annotation][out][in] */ 
+            _Inout_  SAFEARRAY * *prgfEncrypted);
         
         DECLSPEC_XFGVIRT(IImePlugInDictDictionaryList, DeleteDictionary)
         HRESULT ( STDMETHODCALLTYPE *DeleteDictionary )( 
             __RPC__in IImePlugInDictDictionaryList * This,
-            /* [in] */ __RPC__in BSTR bstrDictionaryGUID);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrDictionaryGUID);
         
         END_INTERFACE
     } IImePlugInDictDictionaryListVtbl;

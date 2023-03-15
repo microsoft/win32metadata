@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -97,21 +97,29 @@ EXTERN_C const IID IID_ITSGAuthenticateUserSink;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE OnUserAuthenticated( 
-            /* [in] */ __RPC__in BSTR userName,
-            /* [in] */ __RPC__in BSTR userDomain,
-            /* [in] */ ULONG_PTR context,
+            /* [annotation][in] */ 
+            _In_  BSTR userName,
+            /* [annotation][in] */ 
+            _In_  BSTR userDomain,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR context,
             /* [optional][in] */ HANDLE_PTR userToken) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE OnUserAuthenticationFailed( 
-            /* [in] */ ULONG_PTR context,
-            /* [in] */ HRESULT genericErrorCode,
-            /* [in] */ HRESULT specificErrorCode) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR context,
+            /* [annotation][in] */ 
+            _In_  HRESULT genericErrorCode,
+            /* [annotation][in] */ 
+            _In_  HRESULT specificErrorCode) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE ReauthenticateUser( 
-            /* [in] */ ULONG_PTR context) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR context) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE DisconnectUser( 
-            /* [in] */ ULONG_PTR context) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR context) = 0;
         
     };
     
@@ -125,7 +133,8 @@ EXTERN_C const IID IID_ITSGAuthenticateUserSink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITSGAuthenticateUserSink * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -140,27 +149,35 @@ EXTERN_C const IID IID_ITSGAuthenticateUserSink;
         DECLSPEC_XFGVIRT(ITSGAuthenticateUserSink, OnUserAuthenticated)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnUserAuthenticated )( 
             __RPC__in ITSGAuthenticateUserSink * This,
-            /* [in] */ __RPC__in BSTR userName,
-            /* [in] */ __RPC__in BSTR userDomain,
-            /* [in] */ ULONG_PTR context,
+            /* [annotation][in] */ 
+            _In_  BSTR userName,
+            /* [annotation][in] */ 
+            _In_  BSTR userDomain,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR context,
             /* [optional][in] */ HANDLE_PTR userToken);
         
         DECLSPEC_XFGVIRT(ITSGAuthenticateUserSink, OnUserAuthenticationFailed)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnUserAuthenticationFailed )( 
             __RPC__in ITSGAuthenticateUserSink * This,
-            /* [in] */ ULONG_PTR context,
-            /* [in] */ HRESULT genericErrorCode,
-            /* [in] */ HRESULT specificErrorCode);
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR context,
+            /* [annotation][in] */ 
+            _In_  HRESULT genericErrorCode,
+            /* [annotation][in] */ 
+            _In_  HRESULT specificErrorCode);
         
         DECLSPEC_XFGVIRT(ITSGAuthenticateUserSink, ReauthenticateUser)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ReauthenticateUser )( 
             __RPC__in ITSGAuthenticateUserSink * This,
-            /* [in] */ ULONG_PTR context);
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR context);
         
         DECLSPEC_XFGVIRT(ITSGAuthenticateUserSink, DisconnectUser)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *DisconnectUser )( 
             __RPC__in ITSGAuthenticateUserSink * This,
-            /* [in] */ ULONG_PTR context);
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR context);
         
         END_INTERFACE
     } ITSGAuthenticateUserSinkVtbl;
@@ -224,15 +241,22 @@ EXTERN_C const IID IID_ITSGAuthenticationEngine;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE AuthenticateUser( 
-            /* [in] */ GUID mainSessionId,
-            /* [in] */ __RPC__in BYTE *cookieData,
-            /* [in] */ ULONG numCookieBytes,
-            /* [in] */ ULONG_PTR context,
-            /* [in] */ __RPC__in_opt ITSGAuthenticateUserSink *pSink) = 0;
+            /* [annotation][in] */ 
+            _In_  GUID mainSessionId,
+            /* [annotation][in] */ 
+            _In_  BYTE *cookieData,
+            /* [annotation][in] */ 
+            _In_  ULONG numCookieBytes,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR context,
+            /* [annotation][in] */ 
+            _In_  ITSGAuthenticateUserSink *pSink) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE CancelAuthentication( 
-            /* [in] */ GUID mainSessionId,
-            /* [in] */ ULONG_PTR context) = 0;
+            /* [annotation][in] */ 
+            _In_  GUID mainSessionId,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR context) = 0;
         
     };
     
@@ -246,7 +270,8 @@ EXTERN_C const IID IID_ITSGAuthenticationEngine;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITSGAuthenticationEngine * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -261,17 +286,24 @@ EXTERN_C const IID IID_ITSGAuthenticationEngine;
         DECLSPEC_XFGVIRT(ITSGAuthenticationEngine, AuthenticateUser)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AuthenticateUser )( 
             __RPC__in ITSGAuthenticationEngine * This,
-            /* [in] */ GUID mainSessionId,
-            /* [in] */ __RPC__in BYTE *cookieData,
-            /* [in] */ ULONG numCookieBytes,
-            /* [in] */ ULONG_PTR context,
-            /* [in] */ __RPC__in_opt ITSGAuthenticateUserSink *pSink);
+            /* [annotation][in] */ 
+            _In_  GUID mainSessionId,
+            /* [annotation][in] */ 
+            _In_  BYTE *cookieData,
+            /* [annotation][in] */ 
+            _In_  ULONG numCookieBytes,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR context,
+            /* [annotation][in] */ 
+            _In_  ITSGAuthenticateUserSink *pSink);
         
         DECLSPEC_XFGVIRT(ITSGAuthenticationEngine, CancelAuthentication)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CancelAuthentication )( 
             __RPC__in ITSGAuthenticationEngine * This,
-            /* [in] */ GUID mainSessionId,
-            /* [in] */ ULONG_PTR context);
+            /* [annotation][in] */ 
+            _In_  GUID mainSessionId,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR context);
         
         END_INTERFACE
     } ITSGAuthenticationEngineVtbl;

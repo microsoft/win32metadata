@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -131,16 +131,24 @@ EXTERN_C const IID IID_IDisplayDeviceInterop;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateSharedHandle( 
-            /* [in] */ IInspectable *pObject,
-            /* [in] */ const SECURITY_ATTRIBUTES *pSecurityAttributes,
-            /* [in] */ DWORD Access,
-            /* [in] */ HSTRING Name,
-            /* [retval][out] */ HANDLE *pHandle) = 0;
+            /* [annotation][in] */ 
+            _In_  IInspectable *pObject,
+            /* [annotation][in] */ 
+            _In_  const SECURITY_ATTRIBUTES *pSecurityAttributes,
+            /* [annotation][in] */ 
+            _In_  DWORD Access,
+            /* [annotation][in] */ 
+            _In_  HSTRING Name,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HANDLE *pHandle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OpenSharedHandle( 
-            /* [in] */ HANDLE NTHandle,
-            /* [in] */ IID riid,
-            /* [retval][out] */ void **ppvObj) = 0;
+            /* [annotation][in] */ 
+            _In_  HANDLE NTHandle,
+            /* [annotation][in] */ 
+            _In_  IID riid,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  void **ppvObj) = 0;
         
     };
     
@@ -154,7 +162,8 @@ EXTERN_C const IID IID_IDisplayDeviceInterop;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDisplayDeviceInterop * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -169,18 +178,26 @@ EXTERN_C const IID IID_IDisplayDeviceInterop;
         DECLSPEC_XFGVIRT(IDisplayDeviceInterop, CreateSharedHandle)
         HRESULT ( STDMETHODCALLTYPE *CreateSharedHandle )( 
             IDisplayDeviceInterop * This,
-            /* [in] */ IInspectable *pObject,
-            /* [in] */ const SECURITY_ATTRIBUTES *pSecurityAttributes,
-            /* [in] */ DWORD Access,
-            /* [in] */ HSTRING Name,
-            /* [retval][out] */ HANDLE *pHandle);
+            /* [annotation][in] */ 
+            _In_  IInspectable *pObject,
+            /* [annotation][in] */ 
+            _In_  const SECURITY_ATTRIBUTES *pSecurityAttributes,
+            /* [annotation][in] */ 
+            _In_  DWORD Access,
+            /* [annotation][in] */ 
+            _In_  HSTRING Name,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HANDLE *pHandle);
         
         DECLSPEC_XFGVIRT(IDisplayDeviceInterop, OpenSharedHandle)
         HRESULT ( STDMETHODCALLTYPE *OpenSharedHandle )( 
             IDisplayDeviceInterop * This,
-            /* [in] */ HANDLE NTHandle,
-            /* [in] */ IID riid,
-            /* [retval][out] */ void **ppvObj);
+            /* [annotation][in] */ 
+            _In_  HANDLE NTHandle,
+            /* [annotation][in] */ 
+            _In_  IID riid,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  void **ppvObj);
         
         END_INTERFACE
     } IDisplayDeviceInteropVtbl;
@@ -238,10 +255,12 @@ EXTERN_C const IID IID_IDisplayPathInterop;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateSourcePresentationHandle( 
-            /* [retval][out] */ HANDLE *pValue) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HANDLE *pValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSourceId( 
-            /* [retval][out] */ UINT *pSourceId) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UINT *pSourceId) = 0;
         
     };
     
@@ -255,7 +274,8 @@ EXTERN_C const IID IID_IDisplayPathInterop;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDisplayPathInterop * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -270,12 +290,14 @@ EXTERN_C const IID IID_IDisplayPathInterop;
         DECLSPEC_XFGVIRT(IDisplayPathInterop, CreateSourcePresentationHandle)
         HRESULT ( STDMETHODCALLTYPE *CreateSourcePresentationHandle )( 
             IDisplayPathInterop * This,
-            /* [retval][out] */ HANDLE *pValue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HANDLE *pValue);
         
         DECLSPEC_XFGVIRT(IDisplayPathInterop, GetSourceId)
         HRESULT ( STDMETHODCALLTYPE *GetSourceId )( 
             IDisplayPathInterop * This,
-            /* [retval][out] */ UINT *pSourceId);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UINT *pSourceId);
         
         END_INTERFACE
     } IDisplayPathInteropVtbl;

@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -113,18 +113,28 @@ EXTERN_C const IID IID_IThumbnailStreamCache;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetThumbnailStream( 
-            /* [in] */ __RPC__in LPCWSTR path,
-            /* [in] */ ULONGLONG cacheId,
-            /* [in] */ ThumbnailStreamCacheOptions options,
-            /* [in] */ UINT requestedThumbnailSize,
-            /* [out] */ __RPC__out SIZE *thumbnailSize,
-            /* [out] */ __RPC__deref_out_opt IStream **thumbnailStream) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR path,
+            /* [annotation][in] */ 
+            _In_  ULONGLONG cacheId,
+            /* [annotation][in] */ 
+            _In_  ThumbnailStreamCacheOptions options,
+            /* [annotation][in] */ 
+            _In_  UINT requestedThumbnailSize,
+            /* [annotation][out] */ 
+            _Out_  SIZE *thumbnailSize,
+            /* [annotation][out] */ 
+            _Out_  IStream **thumbnailStream) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetThumbnailStream( 
-            /* [in] */ __RPC__in LPCWSTR path,
-            /* [in] */ ULONGLONG cacheId,
-            /* [in] */ SIZE thumbnailSize,
-            /* [in] */ __RPC__in_opt IStream *thumbnailStream) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR path,
+            /* [annotation][in] */ 
+            _In_  ULONGLONG cacheId,
+            /* [annotation][in] */ 
+            _In_  SIZE thumbnailSize,
+            /* [annotation][in] */ 
+            _In_  IStream *thumbnailStream) = 0;
         
     };
     
@@ -138,7 +148,8 @@ EXTERN_C const IID IID_IThumbnailStreamCache;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IThumbnailStreamCache * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -153,20 +164,30 @@ EXTERN_C const IID IID_IThumbnailStreamCache;
         DECLSPEC_XFGVIRT(IThumbnailStreamCache, GetThumbnailStream)
         HRESULT ( STDMETHODCALLTYPE *GetThumbnailStream )( 
             __RPC__in IThumbnailStreamCache * This,
-            /* [in] */ __RPC__in LPCWSTR path,
-            /* [in] */ ULONGLONG cacheId,
-            /* [in] */ ThumbnailStreamCacheOptions options,
-            /* [in] */ UINT requestedThumbnailSize,
-            /* [out] */ __RPC__out SIZE *thumbnailSize,
-            /* [out] */ __RPC__deref_out_opt IStream **thumbnailStream);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR path,
+            /* [annotation][in] */ 
+            _In_  ULONGLONG cacheId,
+            /* [annotation][in] */ 
+            _In_  ThumbnailStreamCacheOptions options,
+            /* [annotation][in] */ 
+            _In_  UINT requestedThumbnailSize,
+            /* [annotation][out] */ 
+            _Out_  SIZE *thumbnailSize,
+            /* [annotation][out] */ 
+            _Out_  IStream **thumbnailStream);
         
         DECLSPEC_XFGVIRT(IThumbnailStreamCache, SetThumbnailStream)
         HRESULT ( STDMETHODCALLTYPE *SetThumbnailStream )( 
             __RPC__in IThumbnailStreamCache * This,
-            /* [in] */ __RPC__in LPCWSTR path,
-            /* [in] */ ULONGLONG cacheId,
-            /* [in] */ SIZE thumbnailSize,
-            /* [in] */ __RPC__in_opt IStream *thumbnailStream);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR path,
+            /* [annotation][in] */ 
+            _In_  ULONGLONG cacheId,
+            /* [annotation][in] */ 
+            _In_  SIZE thumbnailSize,
+            /* [annotation][in] */ 
+            _In_  IStream *thumbnailStream);
         
         END_INTERFACE
     } IThumbnailStreamCacheVtbl;

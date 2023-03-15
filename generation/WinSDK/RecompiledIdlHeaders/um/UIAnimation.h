@@ -6,12 +6,11 @@
  /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
-#pragma warning( disable: 4049 )  /* more than 64k source lines */
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 475
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -31,8 +30,8 @@
 #include "ole2.h"
 #endif /*COM_NO_WINDOWS_H*/
 
-#ifndef __UIAnimation_h__
-#define __UIAnimation_h__
+#ifndef __uianimation_h__
+#define __uianimation_h__
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
@@ -359,7 +358,7 @@ extern "C"{
 #endif 
 
 
-/* interface __MIDL_itf_UIAnimation_0000_0000 */
+/* interface __MIDL_itf_uianimation_0000_0000 */
 /* [local] */ 
 
 //--------------------------------------------------------------------------
@@ -411,21 +410,21 @@ typedef DOUBLE UI_ANIMATION_SECONDS;
 #define	UI_ANIMATION_SECONDS_EVENTUALLY	( -1 )
 
 typedef /* [public][public][public][public][v1_enum] */ 
-enum __MIDL___MIDL_itf_UIAnimation_0000_0000_0001
+enum __MIDL___MIDL_itf_uianimation_0000_0000_0001
     {
         UI_ANIMATION_UPDATE_NO_CHANGE	= 0,
         UI_ANIMATION_UPDATE_VARIABLES_CHANGED	= 1
     } 	UI_ANIMATION_UPDATE_RESULT;
 
 typedef /* [public][public][public][public][public][public][public][v1_enum] */ 
-enum __MIDL___MIDL_itf_UIAnimation_0000_0000_0002
+enum __MIDL___MIDL_itf_uianimation_0000_0000_0002
     {
         UI_ANIMATION_MANAGER_IDLE	= 0,
         UI_ANIMATION_MANAGER_BUSY	= 1
     } 	UI_ANIMATION_MANAGER_STATUS;
 
 typedef /* [public][public][public][v1_enum] */ 
-enum __MIDL___MIDL_itf_UIAnimation_0000_0000_0003
+enum __MIDL___MIDL_itf_uianimation_0000_0000_0003
     {
         UI_ANIMATION_MODE_DISABLED	= 0,
         UI_ANIMATION_MODE_SYSTEM_DEFAULT	= 1,
@@ -433,7 +432,7 @@ enum __MIDL___MIDL_itf_UIAnimation_0000_0000_0003
     } 	UI_ANIMATION_MODE;
 
 typedef /* [public][public][v1_enum] */ 
-enum __MIDL___MIDL_itf_UIAnimation_0000_0000_0004
+enum __MIDL___MIDL_itf_uianimation_0000_0000_0004
     {
         UI_ANIMATION_REPEAT_MODE_NORMAL	= 0,
         UI_ANIMATION_REPEAT_MODE_ALTERNATE	= 1
@@ -441,8 +440,8 @@ enum __MIDL___MIDL_itf_UIAnimation_0000_0000_0004
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_UIAnimation_0000_0000_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_UIAnimation_0000_0000_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uianimation_0000_0000_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uianimation_0000_0000_v0_0_s_ifspec;
 
 #ifndef __IUIAnimationManager_INTERFACE_DEFINED__
 #define __IUIAnimationManager_INTERFACE_DEFINED__
@@ -593,7 +592,8 @@ EXTERN_C const IID IID_IUIAnimationManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -856,11 +856,11 @@ EXTERN_C const IID IID_IUIAnimationManager;
 #endif 	/* __IUIAnimationManager_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_UIAnimation_0000_0001 */
+/* interface __MIDL_itf_uianimation_0000_0001 */
 /* [local] */ 
 
 typedef /* [public][public][public][v1_enum] */ 
-enum __MIDL___MIDL_itf_UIAnimation_0000_0001_0001
+enum __MIDL___MIDL_itf_uianimation_0000_0001_0001
     {
         UI_ANIMATION_ROUNDING_NEAREST	= 0,
         UI_ANIMATION_ROUNDING_FLOOR	= 1,
@@ -869,8 +869,8 @@ enum __MIDL___MIDL_itf_UIAnimation_0000_0001_0001
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_UIAnimation_0000_0001_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_UIAnimation_0000_0001_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uianimation_0000_0001_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uianimation_0000_0001_v0_0_s_ifspec;
 
 #ifndef __IUIAnimationVariable_INTERFACE_DEFINED__
 #define __IUIAnimationVariable_INTERFACE_DEFINED__
@@ -987,7 +987,8 @@ EXTERN_C const IID IID_IUIAnimationVariable;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationVariable * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1191,11 +1192,11 @@ EXTERN_C const IID IID_IUIAnimationVariable;
 #endif 	/* __IUIAnimationVariable_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_UIAnimation_0000_0002 */
+/* interface __MIDL_itf_uianimation_0000_0002 */
 /* [local] */ 
 
 typedef /* [public][public][public][public][public][public][public][v1_enum] */ 
-enum __MIDL___MIDL_itf_UIAnimation_0000_0002_0001
+enum __MIDL___MIDL_itf_uianimation_0000_0002_0001
     {
         UI_ANIMATION_STORYBOARD_BUILDING	= 0,
         UI_ANIMATION_STORYBOARD_SCHEDULED	= 1,
@@ -1208,7 +1209,7 @@ enum __MIDL___MIDL_itf_UIAnimation_0000_0002_0001
     } 	UI_ANIMATION_STORYBOARD_STATUS;
 
 typedef /* [public][public][public][v1_enum] */ 
-enum __MIDL___MIDL_itf_UIAnimation_0000_0002_0002
+enum __MIDL___MIDL_itf_uianimation_0000_0002_0002
     {
         UI_ANIMATION_SCHEDULING_UNEXPECTED_FAILURE	= 0,
         UI_ANIMATION_SCHEDULING_INSUFFICIENT_PRIORITY	= 1,
@@ -1217,7 +1218,7 @@ enum __MIDL___MIDL_itf_UIAnimation_0000_0002_0002
         UI_ANIMATION_SCHEDULING_DEFERRED	= 4
     } 	UI_ANIMATION_SCHEDULING_RESULT;
 
-typedef struct __MIDL___MIDL_itf_UIAnimation_0000_0002_0003
+typedef struct __MIDL___MIDL_itf_uianimation_0000_0002_0003
     {
     int _;
     } 	*UI_ANIMATION_KEYFRAME;
@@ -1232,8 +1233,8 @@ typedef struct __MIDL___MIDL_itf_UIAnimation_0000_0002_0003
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_UIAnimation_0000_0002_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_UIAnimation_0000_0002_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uianimation_0000_0002_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uianimation_0000_0002_v0_0_s_ifspec;
 
 #ifndef __IUIAnimationStoryboard_INTERFACE_DEFINED__
 #define __IUIAnimationStoryboard_INTERFACE_DEFINED__
@@ -1388,7 +1389,8 @@ EXTERN_C const IID IID_IUIAnimationStoryboard;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationStoryboard * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1694,7 +1696,8 @@ EXTERN_C const IID IID_IUIAnimationTransition;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationTransition * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1817,7 +1820,8 @@ EXTERN_C const IID IID_IUIAnimationManagerEventHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationManagerEventHandler * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1915,7 +1919,8 @@ EXTERN_C const IID IID_IUIAnimationVariableChangeHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationVariableChangeHandler * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2017,7 +2022,8 @@ EXTERN_C const IID IID_IUIAnimationVariableIntegerChangeHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationVariableIntegerChangeHandler * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2123,7 +2129,8 @@ EXTERN_C const IID IID_IUIAnimationStoryboardEventHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationStoryboardEventHandler * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2195,11 +2202,11 @@ EXTERN_C const IID IID_IUIAnimationStoryboardEventHandler;
 #endif 	/* __IUIAnimationStoryboardEventHandler_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_UIAnimation_0000_0008 */
+/* interface __MIDL_itf_uianimation_0000_0008 */
 /* [local] */ 
 
 typedef /* [public][public][public][v1_enum] */ 
-enum __MIDL___MIDL_itf_UIAnimation_0000_0008_0001
+enum __MIDL___MIDL_itf_uianimation_0000_0008_0001
     {
         UI_ANIMATION_PRIORITY_EFFECT_FAILURE	= 0,
         UI_ANIMATION_PRIORITY_EFFECT_DELAY	= 1
@@ -2207,8 +2214,8 @@ enum __MIDL___MIDL_itf_UIAnimation_0000_0008_0001
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_UIAnimation_0000_0008_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_UIAnimation_0000_0008_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uianimation_0000_0008_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uianimation_0000_0008_v0_0_s_ifspec;
 
 #ifndef __IUIAnimationPriorityComparison_INTERFACE_DEFINED__
 #define __IUIAnimationPriorityComparison_INTERFACE_DEFINED__
@@ -2247,7 +2254,8 @@ EXTERN_C const IID IID_IUIAnimationPriorityComparison;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationPriorityComparison * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2308,11 +2316,11 @@ EXTERN_C const IID IID_IUIAnimationPriorityComparison;
 #endif 	/* __IUIAnimationPriorityComparison_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_UIAnimation_0000_0009 */
+/* interface __MIDL_itf_uianimation_0000_0009 */
 /* [local] */ 
 
 typedef /* [public][public][public][v1_enum] */ 
-enum __MIDL___MIDL_itf_UIAnimation_0000_0009_0001
+enum __MIDL___MIDL_itf_uianimation_0000_0009_0001
     {
         UI_ANIMATION_SLOPE_INCREASING	= 0,
         UI_ANIMATION_SLOPE_DECREASING	= 1
@@ -2320,8 +2328,8 @@ enum __MIDL___MIDL_itf_UIAnimation_0000_0009_0001
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_UIAnimation_0000_0009_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_UIAnimation_0000_0009_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uianimation_0000_0009_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uianimation_0000_0009_v0_0_s_ifspec;
 
 #ifndef __IUIAnimationTransitionLibrary_INTERFACE_DEFINED__
 #define __IUIAnimationTransitionLibrary_INTERFACE_DEFINED__
@@ -2480,7 +2488,8 @@ EXTERN_C const IID IID_IUIAnimationTransitionLibrary;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationTransitionLibrary * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2716,11 +2725,11 @@ EXTERN_C const IID IID_IUIAnimationTransitionLibrary;
 #endif 	/* __IUIAnimationTransitionLibrary_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_UIAnimation_0000_0010 */
+/* interface __MIDL_itf_uianimation_0000_0010 */
 /* [local] */ 
 
 typedef /* [public][public][public][public][public][public][public][v1_enum] */ 
-enum __MIDL___MIDL_itf_UIAnimation_0000_0010_0001
+enum __MIDL___MIDL_itf_uianimation_0000_0010_0001
     {
         UI_ANIMATION_DEPENDENCY_NONE	= 0,
         UI_ANIMATION_DEPENDENCY_INTERMEDIATE_VALUES	= 0x1,
@@ -2732,8 +2741,8 @@ enum __MIDL___MIDL_itf_UIAnimation_0000_0010_0001
 DEFINE_ENUM_FLAG_OPERATORS(UI_ANIMATION_DEPENDENCIES);
 
 
-extern RPC_IF_HANDLE __MIDL_itf_UIAnimation_0000_0010_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_UIAnimation_0000_0010_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uianimation_0000_0010_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uianimation_0000_0010_v0_0_s_ifspec;
 
 #ifndef __IUIAnimationInterpolator_INTERFACE_DEFINED__
 #define __IUIAnimationInterpolator_INTERFACE_DEFINED__
@@ -2814,7 +2823,8 @@ EXTERN_C const IID IID_IUIAnimationInterpolator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationInterpolator * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2982,7 +2992,8 @@ EXTERN_C const IID IID_IUIAnimationTransitionFactory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationTransitionFactory * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3041,11 +3052,11 @@ EXTERN_C const IID IID_IUIAnimationTransitionFactory;
 #endif 	/* __IUIAnimationTransitionFactory_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_UIAnimation_0000_0012 */
+/* interface __MIDL_itf_uianimation_0000_0012 */
 /* [local] */ 
 
 typedef /* [public][public][v1_enum] */ 
-enum __MIDL___MIDL_itf_UIAnimation_0000_0012_0001
+enum __MIDL___MIDL_itf_uianimation_0000_0012_0001
     {
         UI_ANIMATION_IDLE_BEHAVIOR_CONTINUE	= 0,
         UI_ANIMATION_IDLE_BEHAVIOR_DISABLE	= 1
@@ -3053,8 +3064,8 @@ enum __MIDL___MIDL_itf_UIAnimation_0000_0012_0001
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_UIAnimation_0000_0012_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_UIAnimation_0000_0012_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uianimation_0000_0012_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uianimation_0000_0012_v0_0_s_ifspec;
 
 #ifndef __IUIAnimationTimer_INTERFACE_DEFINED__
 #define __IUIAnimationTimer_INTERFACE_DEFINED__
@@ -3121,7 +3132,8 @@ EXTERN_C const IID IID_IUIAnimationTimer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationTimer * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3285,7 +3297,8 @@ EXTERN_C const IID IID_IUIAnimationTimerUpdateHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationTimerUpdateHandler * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3364,11 +3377,11 @@ EXTERN_C const IID IID_IUIAnimationTimerUpdateHandler;
 #endif 	/* __IUIAnimationTimerUpdateHandler_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_UIAnimation_0000_0014 */
+/* interface __MIDL_itf_uianimation_0000_0014 */
 /* [local] */ 
 
 typedef /* [public][public][public][v1_enum] */ 
-enum __MIDL___MIDL_itf_UIAnimation_0000_0014_0001
+enum __MIDL___MIDL_itf_uianimation_0000_0014_0001
     {
         UI_ANIMATION_TIMER_CLIENT_IDLE	= 0,
         UI_ANIMATION_TIMER_CLIENT_BUSY	= 1
@@ -3376,8 +3389,8 @@ enum __MIDL___MIDL_itf_UIAnimation_0000_0014_0001
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_UIAnimation_0000_0014_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_UIAnimation_0000_0014_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uianimation_0000_0014_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uianimation_0000_0014_v0_0_s_ifspec;
 
 #ifndef __IUIAnimationTimerClientEventHandler_INTERFACE_DEFINED__
 #define __IUIAnimationTimerClientEventHandler_INTERFACE_DEFINED__
@@ -3414,7 +3427,8 @@ EXTERN_C const IID IID_IUIAnimationTimerClientEventHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationTimerClientEventHandler * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3514,7 +3528,8 @@ EXTERN_C const IID IID_IUIAnimationTimerEventHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationTimerEventHandler * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3589,15 +3604,15 @@ EXTERN_C const IID IID_IUIAnimationTimerEventHandler;
 #endif 	/* __IUIAnimationTimerEventHandler_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_UIAnimation_0000_0016 */
+/* interface __MIDL_itf_uianimation_0000_0016 */
 /* [local] */ 
 
 #define	UI_ANIMATION_SECONDS_INFINITE	( -1 )
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_UIAnimation_0000_0016_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_UIAnimation_0000_0016_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uianimation_0000_0016_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uianimation_0000_0016_v0_0_s_ifspec;
 
 #ifndef __IUIAnimationManager2_INTERFACE_DEFINED__
 #define __IUIAnimationManager2_INTERFACE_DEFINED__
@@ -3766,7 +3781,8 @@ EXTERN_C const IID IID_IUIAnimationManager2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationManager2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4266,7 +4282,8 @@ EXTERN_C const IID IID_IUIAnimationVariable2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationVariable2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4624,15 +4641,15 @@ EXTERN_C const IID IID_IUIAnimationVariable2;
 #endif 	/* __IUIAnimationVariable2_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_UIAnimation_0000_0018 */
+/* interface __MIDL_itf_uianimation_0000_0018 */
 /* [local] */ 
 
 #define	UI_ANIMATION_DIMENSION_UNKNOWN	( ( UINT  )-1 )
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_UIAnimation_0000_0018_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_UIAnimation_0000_0018_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uianimation_0000_0018_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uianimation_0000_0018_v0_0_s_ifspec;
 
 #ifndef __IUIAnimationTransition2_INTERFACE_DEFINED__
 #define __IUIAnimationTransition2_INTERFACE_DEFINED__
@@ -4705,7 +4722,8 @@ EXTERN_C const IID IID_IUIAnimationTransition2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationTransition2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4865,7 +4883,8 @@ EXTERN_C const IID IID_IUIAnimationManagerEventHandler2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationManagerEventHandler2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4965,7 +4984,8 @@ EXTERN_C const IID IID_IUIAnimationVariableChangeHandler2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationVariableChangeHandler2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5071,7 +5091,8 @@ EXTERN_C const IID IID_IUIAnimationVariableIntegerChangeHandler2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationVariableIntegerChangeHandler2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5169,7 +5190,8 @@ EXTERN_C const IID IID_IUIAnimationVariableCurveChangeHandler2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationVariableCurveChangeHandler2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5269,7 +5291,8 @@ EXTERN_C const IID IID_IUIAnimationStoryboardEventHandler2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationStoryboardEventHandler2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5341,15 +5364,15 @@ EXTERN_C const IID IID_IUIAnimationStoryboardEventHandler2;
 #endif 	/* __IUIAnimationStoryboardEventHandler2_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_UIAnimation_0000_0024 */
+/* interface __MIDL_itf_uianimation_0000_0024 */
 /* [local] */ 
 
 #define	UI_ANIMATION_ITERATION_NONE	( ( UINT32  )-1 )
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_UIAnimation_0000_0024_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_UIAnimation_0000_0024_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uianimation_0000_0024_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uianimation_0000_0024_v0_0_s_ifspec;
 
 #ifndef __IUIAnimationLoopIterationChangeHandler2_INTERFACE_DEFINED__
 #define __IUIAnimationLoopIterationChangeHandler2_INTERFACE_DEFINED__
@@ -5390,7 +5413,8 @@ EXTERN_C const IID IID_IUIAnimationLoopIterationChangeHandler2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationLoopIterationChangeHandler2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5490,7 +5514,8 @@ EXTERN_C const IID IID_IUIAnimationPriorityComparison2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationPriorityComparison2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5808,7 +5833,8 @@ EXTERN_C const IID IID_IUIAnimationTransitionLibrary2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationTransitionLibrary2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6236,7 +6262,8 @@ EXTERN_C const IID IID_IUIAnimationPrimitiveInterpolation;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationPrimitiveInterpolation * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6423,7 +6450,8 @@ EXTERN_C const IID IID_IUIAnimationInterpolator2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationInterpolator2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6623,7 +6651,8 @@ EXTERN_C const IID IID_IUIAnimationTransitionFactory2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationTransitionFactory2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6853,7 +6882,8 @@ EXTERN_C const IID IID_IUIAnimationStoryboard2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIAnimationStoryboard2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         

@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -95,8 +95,10 @@ EXTERN_C const IID IID_IIsolatedEnvironmentInterop;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetHostHwndInterop( 
-            /* [in] */ __RPC__in HWND containerHwnd,
-            /* [retval][out] */ __RPC__deref_out_opt HWND *hostHwnd) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND containerHwnd,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HWND *hostHwnd) = 0;
         
     };
     
@@ -110,7 +112,8 @@ EXTERN_C const IID IID_IIsolatedEnvironmentInterop;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IIsolatedEnvironmentInterop * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -125,8 +128,10 @@ EXTERN_C const IID IID_IIsolatedEnvironmentInterop;
         DECLSPEC_XFGVIRT(IIsolatedEnvironmentInterop, GetHostHwndInterop)
         HRESULT ( STDMETHODCALLTYPE *GetHostHwndInterop )( 
             __RPC__in IIsolatedEnvironmentInterop * This,
-            /* [in] */ __RPC__in HWND containerHwnd,
-            /* [retval][out] */ __RPC__deref_out_opt HWND *hostHwnd);
+            /* [annotation][in] */ 
+            _In_  HWND containerHwnd,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HWND *hostHwnd);
         
         END_INTERFACE
     } IIsolatedEnvironmentInteropVtbl;

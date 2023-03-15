@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -116,17 +116,24 @@ EXTERN_C const IID IID_IWMAuthorizer;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCertCount( 
-            /* [out] */ DWORD *pcCerts) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcCerts) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCert( 
-            /* [in] */ DWORD dwIndex,
-            /* [out] */ BYTE **ppbCertData) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbCertData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSharedData( 
-            /* [in] */ DWORD dwCertIndex,
-            /* [in] */ const BYTE *pbSharedData,
-            /* [in] */ BYTE *pbCert,
-            /* [out] */ BYTE **ppbSharedData) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwCertIndex,
+            /* [annotation][in] */ 
+            _In_  const BYTE *pbSharedData,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbCert,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbSharedData) = 0;
         
     };
     
@@ -140,7 +147,8 @@ EXTERN_C const IID IID_IWMAuthorizer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMAuthorizer * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -155,21 +163,28 @@ EXTERN_C const IID IID_IWMAuthorizer;
         DECLSPEC_XFGVIRT(IWMAuthorizer, GetCertCount)
         HRESULT ( STDMETHODCALLTYPE *GetCertCount )( 
             IWMAuthorizer * This,
-            /* [out] */ DWORD *pcCerts);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcCerts);
         
         DECLSPEC_XFGVIRT(IWMAuthorizer, GetCert)
         HRESULT ( STDMETHODCALLTYPE *GetCert )( 
             IWMAuthorizer * This,
-            /* [in] */ DWORD dwIndex,
-            /* [out] */ BYTE **ppbCertData);
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbCertData);
         
         DECLSPEC_XFGVIRT(IWMAuthorizer, GetSharedData)
         HRESULT ( STDMETHODCALLTYPE *GetSharedData )( 
             IWMAuthorizer * This,
-            /* [in] */ DWORD dwCertIndex,
-            /* [in] */ const BYTE *pbSharedData,
-            /* [in] */ BYTE *pbCert,
-            /* [out] */ BYTE **ppbSharedData);
+            /* [annotation][in] */ 
+            _In_  DWORD dwCertIndex,
+            /* [annotation][in] */ 
+            _In_  const BYTE *pbSharedData,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbCert,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbSharedData);
         
         END_INTERFACE
     } IWMAuthorizerVtbl;
@@ -230,39 +245,52 @@ EXTERN_C const IID IID_IWMSecureChannel;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE WMSC_AddCertificate( 
-            /* [in] */ IWMAuthorizer *pCert) = 0;
+            /* [annotation][in] */ 
+            _In_  IWMAuthorizer *pCert) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WMSC_AddSignature( 
-            /* [in] */ BYTE *pbCertSig,
-            /* [in] */ DWORD cbCertSig) = 0;
+            /* [annotation][in] */ 
+            _In_  BYTE *pbCertSig,
+            /* [annotation][in] */ 
+            _In_  DWORD cbCertSig) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WMSC_Connect( 
-            /* [in] */ IWMSecureChannel *pOtherSide) = 0;
+            /* [annotation][in] */ 
+            _In_  IWMSecureChannel *pOtherSide) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WMSC_IsConnected( 
-            /* [out] */ BOOL *pfIsConnected) = 0;
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfIsConnected) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WMSC_Disconnect( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WMSC_GetValidCertificate( 
-            /* [out] */ BYTE **ppbCertificate,
-            /* [out] */ DWORD *pdwSignature) = 0;
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbCertificate,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSignature) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WMSC_Encrypt( 
-            /* [in] */ BYTE *pbData,
-            /* [in] */ DWORD cbData) = 0;
+            /* [annotation][in] */ 
+            _In_  BYTE *pbData,
+            /* [annotation][in] */ 
+            _In_  DWORD cbData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WMSC_Decrypt( 
-            /* [in] */ BYTE *pbData,
-            /* [in] */ DWORD cbData) = 0;
+            /* [annotation][in] */ 
+            _In_  BYTE *pbData,
+            /* [annotation][in] */ 
+            _In_  DWORD cbData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WMSC_Lock( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WMSC_Unlock( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WMSC_SetSharedData( 
-            /* [in] */ DWORD dwCertIndex,
-            /* [in] */ const BYTE *pbSharedData) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwCertIndex,
+            /* [annotation][in] */ 
+            _In_  const BYTE *pbSharedData) = 0;
         
     };
     
@@ -276,7 +304,8 @@ EXTERN_C const IID IID_IWMSecureChannel;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMSecureChannel * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -291,42 +320,54 @@ EXTERN_C const IID IID_IWMSecureChannel;
         DECLSPEC_XFGVIRT(IWMAuthorizer, GetCertCount)
         HRESULT ( STDMETHODCALLTYPE *GetCertCount )( 
             IWMSecureChannel * This,
-            /* [out] */ DWORD *pcCerts);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcCerts);
         
         DECLSPEC_XFGVIRT(IWMAuthorizer, GetCert)
         HRESULT ( STDMETHODCALLTYPE *GetCert )( 
             IWMSecureChannel * This,
-            /* [in] */ DWORD dwIndex,
-            /* [out] */ BYTE **ppbCertData);
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbCertData);
         
         DECLSPEC_XFGVIRT(IWMAuthorizer, GetSharedData)
         HRESULT ( STDMETHODCALLTYPE *GetSharedData )( 
             IWMSecureChannel * This,
-            /* [in] */ DWORD dwCertIndex,
-            /* [in] */ const BYTE *pbSharedData,
-            /* [in] */ BYTE *pbCert,
-            /* [out] */ BYTE **ppbSharedData);
+            /* [annotation][in] */ 
+            _In_  DWORD dwCertIndex,
+            /* [annotation][in] */ 
+            _In_  const BYTE *pbSharedData,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbCert,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbSharedData);
         
         DECLSPEC_XFGVIRT(IWMSecureChannel, WMSC_AddCertificate)
         HRESULT ( STDMETHODCALLTYPE *WMSC_AddCertificate )( 
             IWMSecureChannel * This,
-            /* [in] */ IWMAuthorizer *pCert);
+            /* [annotation][in] */ 
+            _In_  IWMAuthorizer *pCert);
         
         DECLSPEC_XFGVIRT(IWMSecureChannel, WMSC_AddSignature)
         HRESULT ( STDMETHODCALLTYPE *WMSC_AddSignature )( 
             IWMSecureChannel * This,
-            /* [in] */ BYTE *pbCertSig,
-            /* [in] */ DWORD cbCertSig);
+            /* [annotation][in] */ 
+            _In_  BYTE *pbCertSig,
+            /* [annotation][in] */ 
+            _In_  DWORD cbCertSig);
         
         DECLSPEC_XFGVIRT(IWMSecureChannel, WMSC_Connect)
         HRESULT ( STDMETHODCALLTYPE *WMSC_Connect )( 
             IWMSecureChannel * This,
-            /* [in] */ IWMSecureChannel *pOtherSide);
+            /* [annotation][in] */ 
+            _In_  IWMSecureChannel *pOtherSide);
         
         DECLSPEC_XFGVIRT(IWMSecureChannel, WMSC_IsConnected)
         HRESULT ( STDMETHODCALLTYPE *WMSC_IsConnected )( 
             IWMSecureChannel * This,
-            /* [out] */ BOOL *pfIsConnected);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfIsConnected);
         
         DECLSPEC_XFGVIRT(IWMSecureChannel, WMSC_Disconnect)
         HRESULT ( STDMETHODCALLTYPE *WMSC_Disconnect )( 
@@ -335,20 +376,26 @@ EXTERN_C const IID IID_IWMSecureChannel;
         DECLSPEC_XFGVIRT(IWMSecureChannel, WMSC_GetValidCertificate)
         HRESULT ( STDMETHODCALLTYPE *WMSC_GetValidCertificate )( 
             IWMSecureChannel * This,
-            /* [out] */ BYTE **ppbCertificate,
-            /* [out] */ DWORD *pdwSignature);
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbCertificate,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSignature);
         
         DECLSPEC_XFGVIRT(IWMSecureChannel, WMSC_Encrypt)
         HRESULT ( STDMETHODCALLTYPE *WMSC_Encrypt )( 
             IWMSecureChannel * This,
-            /* [in] */ BYTE *pbData,
-            /* [in] */ DWORD cbData);
+            /* [annotation][in] */ 
+            _In_  BYTE *pbData,
+            /* [annotation][in] */ 
+            _In_  DWORD cbData);
         
         DECLSPEC_XFGVIRT(IWMSecureChannel, WMSC_Decrypt)
         HRESULT ( STDMETHODCALLTYPE *WMSC_Decrypt )( 
             IWMSecureChannel * This,
-            /* [in] */ BYTE *pbData,
-            /* [in] */ DWORD cbData);
+            /* [annotation][in] */ 
+            _In_  BYTE *pbData,
+            /* [annotation][in] */ 
+            _In_  DWORD cbData);
         
         DECLSPEC_XFGVIRT(IWMSecureChannel, WMSC_Lock)
         HRESULT ( STDMETHODCALLTYPE *WMSC_Lock )( 
@@ -361,8 +408,10 @@ EXTERN_C const IID IID_IWMSecureChannel;
         DECLSPEC_XFGVIRT(IWMSecureChannel, WMSC_SetSharedData)
         HRESULT ( STDMETHODCALLTYPE *WMSC_SetSharedData )( 
             IWMSecureChannel * This,
-            /* [in] */ DWORD dwCertIndex,
-            /* [in] */ const BYTE *pbSharedData);
+            /* [annotation][in] */ 
+            _In_  DWORD dwCertIndex,
+            /* [annotation][in] */ 
+            _In_  const BYTE *pbSharedData);
         
         END_INTERFACE
     } IWMSecureChannelVtbl;
@@ -457,7 +506,8 @@ EXTERN_C const IID IID_IWMGetSecureChannel;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetPeerSecureChannelInterface( 
-            /* [out] */ IWMSecureChannel **ppPeer) = 0;
+            /* [annotation][out] */ 
+            _Out_  IWMSecureChannel **ppPeer) = 0;
         
     };
     
@@ -471,7 +521,8 @@ EXTERN_C const IID IID_IWMGetSecureChannel;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMGetSecureChannel * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -486,7 +537,8 @@ EXTERN_C const IID IID_IWMGetSecureChannel;
         DECLSPEC_XFGVIRT(IWMGetSecureChannel, GetPeerSecureChannelInterface)
         HRESULT ( STDMETHODCALLTYPE *GetPeerSecureChannelInterface )( 
             IWMGetSecureChannel * This,
-            /* [out] */ IWMSecureChannel **ppPeer);
+            /* [annotation][out] */ 
+            _Out_  IWMSecureChannel **ppPeer);
         
         END_INTERFACE
     } IWMGetSecureChannelVtbl;

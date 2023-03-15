@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -1047,157 +1047,272 @@ EXTERN_C const IID IID_ISWbemServices;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Get( 
-            /* [defaultvalue][in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObject **objWbemObject) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetAsync( 
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ BSTR strObjectPath = (BSTR)L"",
-            /* [defaultvalue][in] */ long iFlags = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strObjectPath = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Delete( 
-            /* [in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ long iFlags = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteAsync( 
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ long iFlags = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE InstancesOf( 
-            /* [in] */ BSTR strClass,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE InstancesOfAsync( 
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strClass,
-            /* [defaultvalue][in] */ long iFlags = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SubclassesOf( 
-            /* [defaultvalue][in] */ BSTR strSuperclass,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strSuperclass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SubclassesOfAsync( 
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ BSTR strSuperclass = (BSTR)L"",
-            /* [defaultvalue][in] */ long iFlags = wbemQueryFlagDeep,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strSuperclass = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = wbemQueryFlagDeep,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExecQuery( 
-            /* [in] */ BSTR strQuery,
-            /* [defaultvalue][in] */ BSTR strQueryLanguage,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExecQueryAsync( 
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strQuery,
-            /* [defaultvalue][in] */ BSTR strQueryLanguage = (BSTR)L"WQL",
-            /* [defaultvalue][in] */ long lFlags = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage = (BSTR)L"WQL",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long lFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AssociatorsOf( 
-            /* [in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ BSTR strAssocClass,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strResultRole,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredAssocQualifier,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AssociatorsOfAsync( 
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ BSTR strAssocClass = (BSTR)L"",
-            /* [defaultvalue][in] */ BSTR strResultClass = (BSTR)L"",
-            /* [defaultvalue][in] */ BSTR strResultRole = (BSTR)L"",
-            /* [defaultvalue][in] */ BSTR strRole = (BSTR)L"",
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly = FALSE,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly = FALSE,
-            /* [defaultvalue][in] */ BSTR strRequiredAssocQualifier = (BSTR)L"",
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier = (BSTR)L"",
-            /* [defaultvalue][in] */ long iFlags = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly = FALSE,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly = FALSE,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ReferencesTo( 
-            /* [in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ReferencesToAsync( 
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ BSTR strResultClass = (BSTR)L"",
-            /* [defaultvalue][in] */ BSTR strRole = (BSTR)L"",
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly = FALSE,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly = FALSE,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier = (BSTR)L"",
-            /* [defaultvalue][in] */ long iFlags = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly = FALSE,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly = FALSE,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExecNotificationQuery( 
-            /* [in] */ BSTR strQuery,
-            /* [defaultvalue][in] */ BSTR strQueryLanguage,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemEventSource **objWbemEventSource) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemEventSource **objWbemEventSource) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExecNotificationQueryAsync( 
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strQuery,
-            /* [defaultvalue][in] */ BSTR strQueryLanguage = (BSTR)L"WQL",
-            /* [defaultvalue][in] */ long iFlags = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage = (BSTR)L"WQL",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExecMethod( 
-            /* [in] */ BSTR strObjectPath,
-            /* [in] */ BSTR strMethodName,
-            /* [defaultvalue][in] */ IDispatch *objWbemInParameters,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObject **objWbemOutParameters) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemOutParameters) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExecMethodAsync( 
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strObjectPath,
-            /* [in] */ BSTR strMethodName,
-            /* [defaultvalue][in] */ IDispatch *objWbemInParameters = 0,
-            /* [defaultvalue][in] */ long iFlags = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Security_( 
-            /* [retval][out] */ ISWbemSecurity **objWbemSecurity) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity) = 0;
         
     };
     
@@ -1211,7 +1326,8 @@ EXTERN_C const IID IID_ISWbemServices;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemServices * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1226,23 +1342,31 @@ EXTERN_C const IID IID_ISWbemServices;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemServices * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemServices * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemServices * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1267,193 +1391,308 @@ EXTERN_C const IID IID_ISWbemServices;
         DECLSPEC_XFGVIRT(ISWbemServices, Get)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Get )( 
             ISWbemServices * This,
-            /* [defaultvalue][in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObject **objWbemObject);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
         
         DECLSPEC_XFGVIRT(ISWbemServices, GetAsync)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetAsync )( 
             ISWbemServices * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemServices, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             ISWbemServices * This,
-            /* [in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet);
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet);
         
         DECLSPEC_XFGVIRT(ISWbemServices, DeleteAsync)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteAsync )( 
             ISWbemServices * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemServices, InstancesOf)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstancesOf )( 
             ISWbemServices * This,
-            /* [in] */ BSTR strClass,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][in] */ 
+            _In_  BSTR strClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemServices, InstancesOfAsync)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstancesOfAsync )( 
             ISWbemServices * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strClass,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemServices, SubclassesOf)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SubclassesOf )( 
             ISWbemServices * This,
-            /* [defaultvalue][in] */ BSTR strSuperclass,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strSuperclass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemServices, SubclassesOfAsync)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SubclassesOfAsync )( 
             ISWbemServices * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ BSTR strSuperclass,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strSuperclass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemServices, ExecQuery)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecQuery )( 
             ISWbemServices * This,
-            /* [in] */ BSTR strQuery,
-            /* [defaultvalue][in] */ BSTR strQueryLanguage,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemServices, ExecQueryAsync)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecQueryAsync )( 
             ISWbemServices * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strQuery,
-            /* [defaultvalue][in] */ BSTR strQueryLanguage,
-            /* [defaultvalue][in] */ long lFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long lFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemServices, AssociatorsOf)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AssociatorsOf )( 
             ISWbemServices * This,
-            /* [in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ BSTR strAssocClass,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strResultRole,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredAssocQualifier,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemServices, AssociatorsOfAsync)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AssociatorsOfAsync )( 
             ISWbemServices * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ BSTR strAssocClass,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strResultRole,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredAssocQualifier,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemServices, ReferencesTo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ReferencesTo )( 
             ISWbemServices * This,
-            /* [in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemServices, ReferencesToAsync)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ReferencesToAsync )( 
             ISWbemServices * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemServices, ExecNotificationQuery)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecNotificationQuery )( 
             ISWbemServices * This,
-            /* [in] */ BSTR strQuery,
-            /* [defaultvalue][in] */ BSTR strQueryLanguage,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemEventSource **objWbemEventSource);
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemEventSource **objWbemEventSource);
         
         DECLSPEC_XFGVIRT(ISWbemServices, ExecNotificationQueryAsync)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecNotificationQueryAsync )( 
             ISWbemServices * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strQuery,
-            /* [defaultvalue][in] */ BSTR strQueryLanguage,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemServices, ExecMethod)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecMethod )( 
             ISWbemServices * This,
-            /* [in] */ BSTR strObjectPath,
-            /* [in] */ BSTR strMethodName,
-            /* [defaultvalue][in] */ IDispatch *objWbemInParameters,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObject **objWbemOutParameters);
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemOutParameters);
         
         DECLSPEC_XFGVIRT(ISWbemServices, ExecMethodAsync)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecMethodAsync )( 
             ISWbemServices * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strObjectPath,
-            /* [in] */ BSTR strMethodName,
-            /* [defaultvalue][in] */ IDispatch *objWbemInParameters,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemServices, get_Security_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Security_ )( 
             ISWbemServices * This,
-            /* [retval][out] */ ISWbemSecurity **objWbemSecurity);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity);
         
         END_INTERFACE
     } ISWbemServicesVtbl;
@@ -1575,18 +1814,28 @@ EXTERN_C const IID IID_ISWbemLocator;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ConnectServer( 
-            /* [defaultvalue][in] */ BSTR strServer,
-            /* [defaultvalue][in] */ BSTR strNamespace,
-            /* [defaultvalue][in] */ BSTR strUser,
-            /* [defaultvalue][in] */ BSTR strPassword,
-            /* [defaultvalue][in] */ BSTR strLocale,
-            /* [defaultvalue][in] */ BSTR strAuthority,
-            /* [defaultvalue][in] */ long iSecurityFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemServices **objWbemServices) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strServer,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strNamespace,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strUser,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strPassword,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strLocale,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAuthority,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iSecurityFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemServices **objWbemServices) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Security_( 
-            /* [retval][out] */ ISWbemSecurity **objWbemSecurity) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity) = 0;
         
     };
     
@@ -1600,7 +1849,8 @@ EXTERN_C const IID IID_ISWbemLocator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemLocator * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1615,23 +1865,31 @@ EXTERN_C const IID IID_ISWbemLocator;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemLocator * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemLocator * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemLocator * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1656,20 +1914,30 @@ EXTERN_C const IID IID_ISWbemLocator;
         DECLSPEC_XFGVIRT(ISWbemLocator, ConnectServer)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ConnectServer )( 
             ISWbemLocator * This,
-            /* [defaultvalue][in] */ BSTR strServer,
-            /* [defaultvalue][in] */ BSTR strNamespace,
-            /* [defaultvalue][in] */ BSTR strUser,
-            /* [defaultvalue][in] */ BSTR strPassword,
-            /* [defaultvalue][in] */ BSTR strLocale,
-            /* [defaultvalue][in] */ BSTR strAuthority,
-            /* [defaultvalue][in] */ long iSecurityFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemServices **objWbemServices);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strServer,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strNamespace,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strUser,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strPassword,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strLocale,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAuthority,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iSecurityFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemServices **objWbemServices);
         
         DECLSPEC_XFGVIRT(ISWbemLocator, get_Security_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Security_ )( 
             ISWbemLocator * This,
-            /* [retval][out] */ ISWbemSecurity **objWbemSecurity);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity);
         
         END_INTERFACE
     } ISWbemLocatorVtbl;
@@ -1742,148 +2010,242 @@ EXTERN_C const IID IID_ISWbemObject;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Put_( 
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectPath **objWbemObjectPath) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectPath **objWbemObjectPath) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE PutAsync_( 
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ long iFlags = wbemChangeFlagCreateOrUpdate,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = wbemChangeFlagCreateOrUpdate,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Delete_( 
-            /* [defaultvalue][in] */ long iFlags = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet = 0) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteAsync_( 
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ long iFlags = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Instances_( 
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE InstancesAsync_( 
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ long iFlags = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Subclasses_( 
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SubclassesAsync_( 
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ long iFlags = wbemQueryFlagDeep,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = wbemQueryFlagDeep,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Associators_( 
-            /* [defaultvalue][in] */ BSTR strAssocClass,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strResultRole,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredAssocQualifier,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AssociatorsAsync_( 
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ BSTR strAssocClass = (BSTR)L"",
-            /* [defaultvalue][in] */ BSTR strResultClass = (BSTR)L"",
-            /* [defaultvalue][in] */ BSTR strResultRole = (BSTR)L"",
-            /* [defaultvalue][in] */ BSTR strRole = (BSTR)L"",
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly = FALSE,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly = FALSE,
-            /* [defaultvalue][in] */ BSTR strRequiredAssocQualifier = (BSTR)L"",
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier = (BSTR)L"",
-            /* [defaultvalue][in] */ long iFlags = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly = FALSE,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly = FALSE,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE References_( 
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ReferencesAsync_( 
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ BSTR strResultClass = (BSTR)L"",
-            /* [defaultvalue][in] */ BSTR strRole = (BSTR)L"",
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly = FALSE,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly = FALSE,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier = (BSTR)L"",
-            /* [defaultvalue][in] */ long iFlags = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly = FALSE,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly = FALSE,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier = (BSTR)L"",
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExecMethod_( 
-            /* [in] */ BSTR strMethodName,
-            /* [defaultvalue][in] */ IDispatch *objWbemInParameters,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObject **objWbemOutParameters) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemOutParameters) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExecMethodAsync_( 
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strMethodName,
-            /* [defaultvalue][in] */ IDispatch *objWbemInParameters = 0,
-            /* [defaultvalue][in] */ long iFlags = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Clone_( 
-            /* [retval][out] */ ISWbemObject **objWbemObject) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetObjectText_( 
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ BSTR *strObjectText) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strObjectText) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SpawnDerivedClass_( 
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemObject **objWbemObject) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SpawnInstance_( 
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemObject **objWbemObject) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CompareTo_( 
-            /* [in] */ IDispatch *objWbemObject,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ VARIANT_BOOL *bResult) = 0;
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemObject,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bResult) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Qualifiers_( 
-            /* [retval][out] */ ISWbemQualifierSet **objWbemQualifierSet) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifierSet **objWbemQualifierSet) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Properties_( 
-            /* [retval][out] */ ISWbemPropertySet **objWbemPropertySet) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPropertySet **objWbemPropertySet) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Methods_( 
-            /* [retval][out] */ ISWbemMethodSet **objWbemMethodSet) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemMethodSet **objWbemMethodSet) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Derivation_( 
-            /* [retval][out] */ VARIANT *strClassNameArray) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *strClassNameArray) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Path_( 
-            /* [retval][out] */ ISWbemObjectPath **objWbemObjectPath) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectPath **objWbemObjectPath) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Security_( 
-            /* [retval][out] */ ISWbemSecurity **objWbemSecurity) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity) = 0;
         
     };
     
@@ -1897,7 +2259,8 @@ EXTERN_C const IID IID_ISWbemObject;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemObject * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1912,23 +2275,31 @@ EXTERN_C const IID IID_ISWbemObject;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemObject * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemObject * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemObject * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1953,196 +2324,290 @@ EXTERN_C const IID IID_ISWbemObject;
         DECLSPEC_XFGVIRT(ISWbemObject, Put_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Put_ )( 
             ISWbemObject * This,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectPath **objWbemObjectPath);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectPath **objWbemObjectPath);
         
         DECLSPEC_XFGVIRT(ISWbemObject, PutAsync_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PutAsync_ )( 
             ISWbemObject * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemObject, Delete_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete_ )( 
             ISWbemObject * This,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, DeleteAsync_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteAsync_ )( 
             ISWbemObject * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemObject, Instances_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Instances_ )( 
             ISWbemObject * This,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, InstancesAsync_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstancesAsync_ )( 
             ISWbemObject * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemObject, Subclasses_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Subclasses_ )( 
             ISWbemObject * This,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, SubclassesAsync_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SubclassesAsync_ )( 
             ISWbemObject * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemObject, Associators_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Associators_ )( 
             ISWbemObject * This,
-            /* [defaultvalue][in] */ BSTR strAssocClass,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strResultRole,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredAssocQualifier,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, AssociatorsAsync_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AssociatorsAsync_ )( 
             ISWbemObject * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ BSTR strAssocClass,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strResultRole,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredAssocQualifier,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemObject, References_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *References_ )( 
             ISWbemObject * This,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, ReferencesAsync_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ReferencesAsync_ )( 
             ISWbemObject * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemObject, ExecMethod_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecMethod_ )( 
             ISWbemObject * This,
-            /* [in] */ BSTR strMethodName,
-            /* [defaultvalue][in] */ IDispatch *objWbemInParameters,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObject **objWbemOutParameters);
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemOutParameters);
         
         DECLSPEC_XFGVIRT(ISWbemObject, ExecMethodAsync_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecMethodAsync_ )( 
             ISWbemObject * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strMethodName,
-            /* [defaultvalue][in] */ IDispatch *objWbemInParameters,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemObject, Clone_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone_ )( 
             ISWbemObject * This,
-            /* [retval][out] */ ISWbemObject **objWbemObject);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
         
         DECLSPEC_XFGVIRT(ISWbemObject, GetObjectText_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetObjectText_ )( 
             ISWbemObject * This,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ BSTR *strObjectText);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strObjectText);
         
         DECLSPEC_XFGVIRT(ISWbemObject, SpawnDerivedClass_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SpawnDerivedClass_ )( 
             ISWbemObject * This,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemObject **objWbemObject);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
         
         DECLSPEC_XFGVIRT(ISWbemObject, SpawnInstance_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SpawnInstance_ )( 
             ISWbemObject * This,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemObject **objWbemObject);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
         
         DECLSPEC_XFGVIRT(ISWbemObject, CompareTo_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CompareTo_ )( 
             ISWbemObject * This,
-            /* [in] */ IDispatch *objWbemObject,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ VARIANT_BOOL *bResult);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemObject,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bResult);
         
         DECLSPEC_XFGVIRT(ISWbemObject, get_Qualifiers_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Qualifiers_ )( 
             ISWbemObject * This,
-            /* [retval][out] */ ISWbemQualifierSet **objWbemQualifierSet);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifierSet **objWbemQualifierSet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, get_Properties_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Properties_ )( 
             ISWbemObject * This,
-            /* [retval][out] */ ISWbemPropertySet **objWbemPropertySet);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPropertySet **objWbemPropertySet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, get_Methods_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Methods_ )( 
             ISWbemObject * This,
-            /* [retval][out] */ ISWbemMethodSet **objWbemMethodSet);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemMethodSet **objWbemMethodSet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, get_Derivation_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Derivation_ )( 
             ISWbemObject * This,
-            /* [retval][out] */ VARIANT *strClassNameArray);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *strClassNameArray);
         
         DECLSPEC_XFGVIRT(ISWbemObject, get_Path_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Path_ )( 
             ISWbemObject * This,
-            /* [retval][out] */ ISWbemObjectPath **objWbemObjectPath);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectPath **objWbemObjectPath);
         
         DECLSPEC_XFGVIRT(ISWbemObject, get_Security_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Security_ )( 
             ISWbemObject * This,
-            /* [retval][out] */ ISWbemSecurity **objWbemSecurity);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity);
         
         END_INTERFACE
     } ISWbemObjectVtbl;
@@ -2282,22 +2747,30 @@ EXTERN_C const IID IID_ISWbemObjectSet;
     {
     public:
         virtual /* [restricted][propget][id] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [retval][out] */ IUnknown **pUnk) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Item( 
-            /* [in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemObject **objWbemObject) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [retval][out] */ long *iCount) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Security_( 
-            /* [retval][out] */ ISWbemSecurity **objWbemSecurity) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ItemIndex( 
-            /* [in] */ long lIndex,
-            /* [retval][out] */ ISWbemObject **objWbemObject) = 0;
+            /* [annotation][in] */ 
+            _In_  long lIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject) = 0;
         
     };
     
@@ -2311,7 +2784,8 @@ EXTERN_C const IID IID_ISWbemObjectSet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemObjectSet * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2326,23 +2800,31 @@ EXTERN_C const IID IID_ISWbemObjectSet;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemObjectSet * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemObjectSet * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemObjectSet * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2367,30 +2849,38 @@ EXTERN_C const IID IID_ISWbemObjectSet;
         DECLSPEC_XFGVIRT(ISWbemObjectSet, get__NewEnum)
         /* [restricted][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             ISWbemObjectSet * This,
-            /* [retval][out] */ IUnknown **pUnk);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk);
         
         DECLSPEC_XFGVIRT(ISWbemObjectSet, Item)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             ISWbemObjectSet * This,
-            /* [in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemObject **objWbemObject);
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
         
         DECLSPEC_XFGVIRT(ISWbemObjectSet, get_Count)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             ISWbemObjectSet * This,
-            /* [retval][out] */ long *iCount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount);
         
         DECLSPEC_XFGVIRT(ISWbemObjectSet, get_Security_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Security_ )( 
             ISWbemObjectSet * This,
-            /* [retval][out] */ ISWbemSecurity **objWbemSecurity);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity);
         
         DECLSPEC_XFGVIRT(ISWbemObjectSet, ItemIndex)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ItemIndex )( 
             ISWbemObjectSet * This,
-            /* [in] */ long lIndex,
-            /* [retval][out] */ ISWbemObject **objWbemObject);
+            /* [annotation][in] */ 
+            _In_  long lIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
         
         END_INTERFACE
     } ISWbemObjectSetVtbl;
@@ -2470,13 +2960,16 @@ EXTERN_C const IID IID_ISWbemNamedValue;
     {
     public:
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Value( 
-            /* [retval][out] */ VARIANT *varValue) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *varValue) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Value( 
-            /* [in] */ VARIANT *varValue) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT *varValue) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ BSTR *strName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strName) = 0;
         
     };
     
@@ -2490,7 +2983,8 @@ EXTERN_C const IID IID_ISWbemNamedValue;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemNamedValue * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2505,23 +2999,31 @@ EXTERN_C const IID IID_ISWbemNamedValue;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemNamedValue * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemNamedValue * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemNamedValue * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2546,17 +3048,20 @@ EXTERN_C const IID IID_ISWbemNamedValue;
         DECLSPEC_XFGVIRT(ISWbemNamedValue, get_Value)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             ISWbemNamedValue * This,
-            /* [retval][out] */ VARIANT *varValue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *varValue);
         
         DECLSPEC_XFGVIRT(ISWbemNamedValue, put_Value)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Value )( 
             ISWbemNamedValue * This,
-            /* [in] */ VARIANT *varValue);
+            /* [annotation][in] */ 
+            _In_  VARIANT *varValue);
         
         DECLSPEC_XFGVIRT(ISWbemNamedValue, get_Name)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             ISWbemNamedValue * This,
-            /* [retval][out] */ BSTR *strName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strName);
         
         END_INTERFACE
     } ISWbemNamedValueVtbl;
@@ -2630,28 +3135,40 @@ EXTERN_C const IID IID_ISWbemNamedValueSet;
     {
     public:
         virtual /* [restricted][propget][id] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [retval][out] */ IUnknown **pUnk) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Item( 
-            /* [in] */ BSTR strName,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemNamedValue **objWbemNamedValue) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemNamedValue **objWbemNamedValue) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [retval][out] */ long *iCount) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Add( 
-            /* [in] */ BSTR strName,
-            /* [in] */ VARIANT *varValue,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemNamedValue **objWbemNamedValue) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *varValue,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemNamedValue **objWbemNamedValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Remove( 
-            /* [in] */ BSTR strName,
-            /* [defaultvalue][in] */ long iFlags = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ ISWbemNamedValueSet **objWbemNamedValueSet) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemNamedValueSet **objWbemNamedValueSet) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteAll( void) = 0;
         
@@ -2667,7 +3184,8 @@ EXTERN_C const IID IID_ISWbemNamedValueSet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemNamedValueSet * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2682,23 +3200,31 @@ EXTERN_C const IID IID_ISWbemNamedValueSet;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemNamedValueSet * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemNamedValueSet * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemNamedValueSet * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2723,38 +3249,50 @@ EXTERN_C const IID IID_ISWbemNamedValueSet;
         DECLSPEC_XFGVIRT(ISWbemNamedValueSet, get__NewEnum)
         /* [restricted][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             ISWbemNamedValueSet * This,
-            /* [retval][out] */ IUnknown **pUnk);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk);
         
         DECLSPEC_XFGVIRT(ISWbemNamedValueSet, Item)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             ISWbemNamedValueSet * This,
-            /* [in] */ BSTR strName,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemNamedValue **objWbemNamedValue);
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemNamedValue **objWbemNamedValue);
         
         DECLSPEC_XFGVIRT(ISWbemNamedValueSet, get_Count)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             ISWbemNamedValueSet * This,
-            /* [retval][out] */ long *iCount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount);
         
         DECLSPEC_XFGVIRT(ISWbemNamedValueSet, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             ISWbemNamedValueSet * This,
-            /* [in] */ BSTR strName,
-            /* [in] */ VARIANT *varValue,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemNamedValue **objWbemNamedValue);
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *varValue,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemNamedValue **objWbemNamedValue);
         
         DECLSPEC_XFGVIRT(ISWbemNamedValueSet, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             ISWbemNamedValueSet * This,
-            /* [in] */ BSTR strName,
-            /* [defaultvalue][in] */ long iFlags);
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags);
         
         DECLSPEC_XFGVIRT(ISWbemNamedValueSet, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             ISWbemNamedValueSet * This,
-            /* [retval][out] */ ISWbemNamedValueSet **objWbemNamedValueSet);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemNamedValueSet **objWbemNamedValueSet);
         
         DECLSPEC_XFGVIRT(ISWbemNamedValueSet, DeleteAll)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteAll )( 
@@ -2844,37 +3382,48 @@ EXTERN_C const IID IID_ISWbemQualifier;
     {
     public:
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Value( 
-            /* [retval][out] */ VARIANT *varValue) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *varValue) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Value( 
-            /* [in] */ VARIANT *varValue) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT *varValue) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ BSTR *strName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strName) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsLocal( 
-            /* [retval][out] */ VARIANT_BOOL *bIsLocal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsLocal) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_PropagatesToSubclass( 
-            /* [retval][out] */ VARIANT_BOOL *bPropagatesToSubclass) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bPropagatesToSubclass) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_PropagatesToSubclass( 
-            /* [in] */ VARIANT_BOOL bPropagatesToSubclass) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bPropagatesToSubclass) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_PropagatesToInstance( 
-            /* [retval][out] */ VARIANT_BOOL *bPropagatesToInstance) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bPropagatesToInstance) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_PropagatesToInstance( 
-            /* [in] */ VARIANT_BOOL bPropagatesToInstance) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bPropagatesToInstance) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsOverridable( 
-            /* [retval][out] */ VARIANT_BOOL *bIsOverridable) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsOverridable) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_IsOverridable( 
-            /* [in] */ VARIANT_BOOL bIsOverridable) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bIsOverridable) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsAmended( 
-            /* [retval][out] */ VARIANT_BOOL *bIsAmended) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsAmended) = 0;
         
     };
     
@@ -2888,7 +3437,8 @@ EXTERN_C const IID IID_ISWbemQualifier;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemQualifier * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2903,23 +3453,31 @@ EXTERN_C const IID IID_ISWbemQualifier;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemQualifier * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemQualifier * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemQualifier * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2944,57 +3502,68 @@ EXTERN_C const IID IID_ISWbemQualifier;
         DECLSPEC_XFGVIRT(ISWbemQualifier, get_Value)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             ISWbemQualifier * This,
-            /* [retval][out] */ VARIANT *varValue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *varValue);
         
         DECLSPEC_XFGVIRT(ISWbemQualifier, put_Value)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Value )( 
             ISWbemQualifier * This,
-            /* [in] */ VARIANT *varValue);
+            /* [annotation][in] */ 
+            _In_  VARIANT *varValue);
         
         DECLSPEC_XFGVIRT(ISWbemQualifier, get_Name)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             ISWbemQualifier * This,
-            /* [retval][out] */ BSTR *strName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strName);
         
         DECLSPEC_XFGVIRT(ISWbemQualifier, get_IsLocal)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IsLocal )( 
             ISWbemQualifier * This,
-            /* [retval][out] */ VARIANT_BOOL *bIsLocal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsLocal);
         
         DECLSPEC_XFGVIRT(ISWbemQualifier, get_PropagatesToSubclass)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_PropagatesToSubclass )( 
             ISWbemQualifier * This,
-            /* [retval][out] */ VARIANT_BOOL *bPropagatesToSubclass);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bPropagatesToSubclass);
         
         DECLSPEC_XFGVIRT(ISWbemQualifier, put_PropagatesToSubclass)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_PropagatesToSubclass )( 
             ISWbemQualifier * This,
-            /* [in] */ VARIANT_BOOL bPropagatesToSubclass);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bPropagatesToSubclass);
         
         DECLSPEC_XFGVIRT(ISWbemQualifier, get_PropagatesToInstance)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_PropagatesToInstance )( 
             ISWbemQualifier * This,
-            /* [retval][out] */ VARIANT_BOOL *bPropagatesToInstance);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bPropagatesToInstance);
         
         DECLSPEC_XFGVIRT(ISWbemQualifier, put_PropagatesToInstance)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_PropagatesToInstance )( 
             ISWbemQualifier * This,
-            /* [in] */ VARIANT_BOOL bPropagatesToInstance);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bPropagatesToInstance);
         
         DECLSPEC_XFGVIRT(ISWbemQualifier, get_IsOverridable)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IsOverridable )( 
             ISWbemQualifier * This,
-            /* [retval][out] */ VARIANT_BOOL *bIsOverridable);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsOverridable);
         
         DECLSPEC_XFGVIRT(ISWbemQualifier, put_IsOverridable)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_IsOverridable )( 
             ISWbemQualifier * This,
-            /* [in] */ VARIANT_BOOL bIsOverridable);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bIsOverridable);
         
         DECLSPEC_XFGVIRT(ISWbemQualifier, get_IsAmended)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IsAmended )( 
             ISWbemQualifier * This,
-            /* [retval][out] */ VARIANT_BOOL *bIsAmended);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsAmended);
         
         END_INTERFACE
     } ISWbemQualifierVtbl;
@@ -3092,28 +3661,42 @@ EXTERN_C const IID IID_ISWbemQualifierSet;
     {
     public:
         virtual /* [restricted][propget][id] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [retval][out] */ IUnknown **pUnk) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Item( 
-            /* [in] */ BSTR name,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemQualifier **objWbemQualifier) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR name,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifier **objWbemQualifier) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [retval][out] */ long *iCount) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Add( 
-            /* [in] */ BSTR strName,
-            /* [in] */ VARIANT *varVal,
-            /* [defaultvalue][in] */ VARIANT_BOOL bPropagatesToSubclass,
-            /* [defaultvalue][in] */ VARIANT_BOOL bPropagatesToInstance,
-            /* [defaultvalue][in] */ VARIANT_BOOL bIsOverridable,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemQualifier **objWbemQualifier) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *varVal,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bPropagatesToSubclass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bPropagatesToInstance,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsOverridable,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifier **objWbemQualifier) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Remove( 
-            /* [in] */ BSTR strName,
-            /* [defaultvalue][in] */ long iFlags = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0) = 0;
         
     };
     
@@ -3127,7 +3710,8 @@ EXTERN_C const IID IID_ISWbemQualifierSet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemQualifierSet * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3142,23 +3726,31 @@ EXTERN_C const IID IID_ISWbemQualifierSet;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemQualifierSet * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemQualifierSet * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemQualifierSet * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3183,36 +3775,50 @@ EXTERN_C const IID IID_ISWbemQualifierSet;
         DECLSPEC_XFGVIRT(ISWbemQualifierSet, get__NewEnum)
         /* [restricted][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             ISWbemQualifierSet * This,
-            /* [retval][out] */ IUnknown **pUnk);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk);
         
         DECLSPEC_XFGVIRT(ISWbemQualifierSet, Item)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             ISWbemQualifierSet * This,
-            /* [in] */ BSTR name,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemQualifier **objWbemQualifier);
+            /* [annotation][in] */ 
+            _In_  BSTR name,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifier **objWbemQualifier);
         
         DECLSPEC_XFGVIRT(ISWbemQualifierSet, get_Count)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             ISWbemQualifierSet * This,
-            /* [retval][out] */ long *iCount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount);
         
         DECLSPEC_XFGVIRT(ISWbemQualifierSet, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             ISWbemQualifierSet * This,
-            /* [in] */ BSTR strName,
-            /* [in] */ VARIANT *varVal,
-            /* [defaultvalue][in] */ VARIANT_BOOL bPropagatesToSubclass,
-            /* [defaultvalue][in] */ VARIANT_BOOL bPropagatesToInstance,
-            /* [defaultvalue][in] */ VARIANT_BOOL bIsOverridable,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemQualifier **objWbemQualifier);
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][in] */ 
+            _In_  VARIANT *varVal,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bPropagatesToSubclass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bPropagatesToInstance,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsOverridable,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifier **objWbemQualifier);
         
         DECLSPEC_XFGVIRT(ISWbemQualifierSet, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             ISWbemQualifierSet * This,
-            /* [in] */ BSTR strName,
-            /* [defaultvalue][in] */ long iFlags);
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags);
         
         END_INTERFACE
     } ISWbemQualifierSetVtbl;
@@ -3292,28 +3898,36 @@ EXTERN_C const IID IID_ISWbemProperty;
     {
     public:
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Value( 
-            /* [retval][out] */ VARIANT *varValue) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *varValue) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Value( 
-            /* [in] */ VARIANT *varValue) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT *varValue) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ BSTR *strName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strName) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsLocal( 
-            /* [retval][out] */ VARIANT_BOOL *bIsLocal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsLocal) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Origin( 
-            /* [retval][out] */ BSTR *strOrigin) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strOrigin) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_CIMType( 
-            /* [retval][out] */ WbemCimtypeEnum *iCimType) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WbemCimtypeEnum *iCimType) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Qualifiers_( 
-            /* [retval][out] */ ISWbemQualifierSet **objWbemQualifierSet) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifierSet **objWbemQualifierSet) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsArray( 
-            /* [retval][out] */ VARIANT_BOOL *bIsArray) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsArray) = 0;
         
     };
     
@@ -3327,7 +3941,8 @@ EXTERN_C const IID IID_ISWbemProperty;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemProperty * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3342,23 +3957,31 @@ EXTERN_C const IID IID_ISWbemProperty;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemProperty * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemProperty * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemProperty * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3383,42 +4006,50 @@ EXTERN_C const IID IID_ISWbemProperty;
         DECLSPEC_XFGVIRT(ISWbemProperty, get_Value)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             ISWbemProperty * This,
-            /* [retval][out] */ VARIANT *varValue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *varValue);
         
         DECLSPEC_XFGVIRT(ISWbemProperty, put_Value)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Value )( 
             ISWbemProperty * This,
-            /* [in] */ VARIANT *varValue);
+            /* [annotation][in] */ 
+            _In_  VARIANT *varValue);
         
         DECLSPEC_XFGVIRT(ISWbemProperty, get_Name)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             ISWbemProperty * This,
-            /* [retval][out] */ BSTR *strName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strName);
         
         DECLSPEC_XFGVIRT(ISWbemProperty, get_IsLocal)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IsLocal )( 
             ISWbemProperty * This,
-            /* [retval][out] */ VARIANT_BOOL *bIsLocal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsLocal);
         
         DECLSPEC_XFGVIRT(ISWbemProperty, get_Origin)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Origin )( 
             ISWbemProperty * This,
-            /* [retval][out] */ BSTR *strOrigin);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strOrigin);
         
         DECLSPEC_XFGVIRT(ISWbemProperty, get_CIMType)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CIMType )( 
             ISWbemProperty * This,
-            /* [retval][out] */ WbemCimtypeEnum *iCimType);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WbemCimtypeEnum *iCimType);
         
         DECLSPEC_XFGVIRT(ISWbemProperty, get_Qualifiers_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Qualifiers_ )( 
             ISWbemProperty * This,
-            /* [retval][out] */ ISWbemQualifierSet **objWbemQualifierSet);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifierSet **objWbemQualifierSet);
         
         DECLSPEC_XFGVIRT(ISWbemProperty, get_IsArray)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IsArray )( 
             ISWbemProperty * This,
-            /* [retval][out] */ VARIANT_BOOL *bIsArray);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsArray);
         
         END_INTERFACE
     } ISWbemPropertyVtbl;
@@ -3507,26 +4138,38 @@ EXTERN_C const IID IID_ISWbemPropertySet;
     {
     public:
         virtual /* [restricted][propget][id] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [retval][out] */ IUnknown **pUnk) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Item( 
-            /* [in] */ BSTR strName,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemProperty **objWbemProperty) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemProperty **objWbemProperty) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [retval][out] */ long *iCount) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Add( 
-            /* [in] */ BSTR strName,
-            /* [in] */ WbemCimtypeEnum iCIMType,
-            /* [defaultvalue][in] */ VARIANT_BOOL bIsArray,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemProperty **objWbemProperty) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][in] */ 
+            _In_  WbemCimtypeEnum iCIMType,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsArray,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemProperty **objWbemProperty) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Remove( 
-            /* [in] */ BSTR strName,
-            /* [defaultvalue][in] */ long iFlags = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0) = 0;
         
     };
     
@@ -3540,7 +4183,8 @@ EXTERN_C const IID IID_ISWbemPropertySet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemPropertySet * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3555,23 +4199,31 @@ EXTERN_C const IID IID_ISWbemPropertySet;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemPropertySet * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemPropertySet * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemPropertySet * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3596,34 +4248,46 @@ EXTERN_C const IID IID_ISWbemPropertySet;
         DECLSPEC_XFGVIRT(ISWbemPropertySet, get__NewEnum)
         /* [restricted][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             ISWbemPropertySet * This,
-            /* [retval][out] */ IUnknown **pUnk);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk);
         
         DECLSPEC_XFGVIRT(ISWbemPropertySet, Item)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             ISWbemPropertySet * This,
-            /* [in] */ BSTR strName,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemProperty **objWbemProperty);
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemProperty **objWbemProperty);
         
         DECLSPEC_XFGVIRT(ISWbemPropertySet, get_Count)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             ISWbemPropertySet * This,
-            /* [retval][out] */ long *iCount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount);
         
         DECLSPEC_XFGVIRT(ISWbemPropertySet, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             ISWbemPropertySet * This,
-            /* [in] */ BSTR strName,
-            /* [in] */ WbemCimtypeEnum iCIMType,
-            /* [defaultvalue][in] */ VARIANT_BOOL bIsArray,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemProperty **objWbemProperty);
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][in] */ 
+            _In_  WbemCimtypeEnum iCIMType,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsArray,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemProperty **objWbemProperty);
         
         DECLSPEC_XFGVIRT(ISWbemPropertySet, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             ISWbemPropertySet * This,
-            /* [in] */ BSTR strName,
-            /* [defaultvalue][in] */ long iFlags);
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags);
         
         END_INTERFACE
     } ISWbemPropertySetVtbl;
@@ -3703,19 +4367,24 @@ EXTERN_C const IID IID_ISWbemMethod;
     {
     public:
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ BSTR *strName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strName) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Origin( 
-            /* [retval][out] */ BSTR *strOrigin) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strOrigin) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_InParameters( 
-            /* [retval][out] */ ISWbemObject **objWbemInParameters) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemInParameters) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_OutParameters( 
-            /* [retval][out] */ ISWbemObject **objWbemOutParameters) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemOutParameters) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Qualifiers_( 
-            /* [retval][out] */ ISWbemQualifierSet **objWbemQualifierSet) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifierSet **objWbemQualifierSet) = 0;
         
     };
     
@@ -3729,7 +4398,8 @@ EXTERN_C const IID IID_ISWbemMethod;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemMethod * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3744,23 +4414,31 @@ EXTERN_C const IID IID_ISWbemMethod;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemMethod * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemMethod * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemMethod * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3785,27 +4463,32 @@ EXTERN_C const IID IID_ISWbemMethod;
         DECLSPEC_XFGVIRT(ISWbemMethod, get_Name)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             ISWbemMethod * This,
-            /* [retval][out] */ BSTR *strName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strName);
         
         DECLSPEC_XFGVIRT(ISWbemMethod, get_Origin)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Origin )( 
             ISWbemMethod * This,
-            /* [retval][out] */ BSTR *strOrigin);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strOrigin);
         
         DECLSPEC_XFGVIRT(ISWbemMethod, get_InParameters)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_InParameters )( 
             ISWbemMethod * This,
-            /* [retval][out] */ ISWbemObject **objWbemInParameters);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemInParameters);
         
         DECLSPEC_XFGVIRT(ISWbemMethod, get_OutParameters)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_OutParameters )( 
             ISWbemMethod * This,
-            /* [retval][out] */ ISWbemObject **objWbemOutParameters);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemOutParameters);
         
         DECLSPEC_XFGVIRT(ISWbemMethod, get_Qualifiers_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Qualifiers_ )( 
             ISWbemMethod * This,
-            /* [retval][out] */ ISWbemQualifierSet **objWbemQualifierSet);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifierSet **objWbemQualifierSet);
         
         END_INTERFACE
     } ISWbemMethodVtbl;
@@ -3885,15 +4568,20 @@ EXTERN_C const IID IID_ISWbemMethodSet;
     {
     public:
         virtual /* [restricted][propget][id] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [retval][out] */ IUnknown **pUnk) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Item( 
-            /* [in] */ BSTR strName,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemMethod **objWbemMethod) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemMethod **objWbemMethod) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [retval][out] */ long *iCount) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount) = 0;
         
     };
     
@@ -3907,7 +4595,8 @@ EXTERN_C const IID IID_ISWbemMethodSet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemMethodSet * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3922,23 +4611,31 @@ EXTERN_C const IID IID_ISWbemMethodSet;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemMethodSet * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemMethodSet * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemMethodSet * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3963,19 +4660,24 @@ EXTERN_C const IID IID_ISWbemMethodSet;
         DECLSPEC_XFGVIRT(ISWbemMethodSet, get__NewEnum)
         /* [restricted][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             ISWbemMethodSet * This,
-            /* [retval][out] */ IUnknown **pUnk);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk);
         
         DECLSPEC_XFGVIRT(ISWbemMethodSet, Item)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             ISWbemMethodSet * This,
-            /* [in] */ BSTR strName,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemMethod **objWbemMethod);
+            /* [annotation][in] */ 
+            _In_  BSTR strName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemMethod **objWbemMethod);
         
         DECLSPEC_XFGVIRT(ISWbemMethodSet, get_Count)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             ISWbemMethodSet * This,
-            /* [retval][out] */ long *iCount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount);
         
         END_INTERFACE
     } ISWbemMethodSetVtbl;
@@ -4049,11 +4751,14 @@ EXTERN_C const IID IID_ISWbemEventSource;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE NextEvent( 
-            /* [defaultvalue][in] */ long iTimeoutMs,
-            /* [retval][out] */ ISWbemObject **objWbemObject) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iTimeoutMs,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Security_( 
-            /* [retval][out] */ ISWbemSecurity **objWbemSecurity) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity) = 0;
         
     };
     
@@ -4067,7 +4772,8 @@ EXTERN_C const IID IID_ISWbemEventSource;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemEventSource * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4082,23 +4788,31 @@ EXTERN_C const IID IID_ISWbemEventSource;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemEventSource * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemEventSource * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemEventSource * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4123,13 +4837,16 @@ EXTERN_C const IID IID_ISWbemEventSource;
         DECLSPEC_XFGVIRT(ISWbemEventSource, NextEvent)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *NextEvent )( 
             ISWbemEventSource * This,
-            /* [defaultvalue][in] */ long iTimeoutMs,
-            /* [retval][out] */ ISWbemObject **objWbemObject);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iTimeoutMs,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
         
         DECLSPEC_XFGVIRT(ISWbemEventSource, get_Security_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Security_ )( 
             ISWbemEventSource * This,
-            /* [retval][out] */ ISWbemSecurity **objWbemSecurity);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity);
         
         END_INTERFACE
     } ISWbemEventSourceVtbl;
@@ -4200,71 +4917,92 @@ EXTERN_C const IID IID_ISWbemObjectPath;
     {
     public:
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Path( 
-            /* [retval][out] */ BSTR *strPath) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strPath) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Path( 
-            /* [in] */ BSTR strPath) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strPath) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_RelPath( 
-            /* [retval][out] */ BSTR *strRelPath) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strRelPath) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_RelPath( 
-            /* [in] */ BSTR strRelPath) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strRelPath) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Server( 
-            /* [retval][out] */ BSTR *strServer) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strServer) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Server( 
-            /* [in] */ BSTR strServer) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strServer) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Namespace( 
-            /* [retval][out] */ BSTR *strNamespace) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strNamespace) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Namespace( 
-            /* [in] */ BSTR strNamespace) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strNamespace) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ParentNamespace( 
-            /* [retval][out] */ BSTR *strParentNamespace) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strParentNamespace) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
-            /* [retval][out] */ BSTR *strDisplayName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strDisplayName) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_DisplayName( 
-            /* [in] */ BSTR strDisplayName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strDisplayName) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Class( 
-            /* [retval][out] */ BSTR *strClass) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strClass) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Class( 
-            /* [in] */ BSTR strClass) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strClass) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsClass( 
-            /* [retval][out] */ VARIANT_BOOL *bIsClass) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsClass) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetAsClass( void) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsSingleton( 
-            /* [retval][out] */ VARIANT_BOOL *bIsSingleton) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsSingleton) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetAsSingleton( void) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Keys( 
-            /* [retval][out] */ ISWbemNamedValueSet **objWbemNamedValueSet) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemNamedValueSet **objWbemNamedValueSet) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Security_( 
-            /* [retval][out] */ ISWbemSecurity **objWbemSecurity) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Locale( 
-            /* [retval][out] */ BSTR *strLocale) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strLocale) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Locale( 
-            /* [in] */ BSTR strLocale) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strLocale) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Authority( 
-            /* [retval][out] */ BSTR *strAuthority) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strAuthority) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Authority( 
-            /* [in] */ BSTR strAuthority) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strAuthority) = 0;
         
     };
     
@@ -4278,7 +5016,8 @@ EXTERN_C const IID IID_ISWbemObjectPath;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemObjectPath * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4293,23 +5032,31 @@ EXTERN_C const IID IID_ISWbemObjectPath;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemObjectPath * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemObjectPath * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemObjectPath * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4334,72 +5081,86 @@ EXTERN_C const IID IID_ISWbemObjectPath;
         DECLSPEC_XFGVIRT(ISWbemObjectPath, get_Path)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             ISWbemObjectPath * This,
-            /* [retval][out] */ BSTR *strPath);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strPath);
         
         DECLSPEC_XFGVIRT(ISWbemObjectPath, put_Path)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Path )( 
             ISWbemObjectPath * This,
-            /* [in] */ BSTR strPath);
+            /* [annotation][in] */ 
+            _In_  BSTR strPath);
         
         DECLSPEC_XFGVIRT(ISWbemObjectPath, get_RelPath)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RelPath )( 
             ISWbemObjectPath * This,
-            /* [retval][out] */ BSTR *strRelPath);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strRelPath);
         
         DECLSPEC_XFGVIRT(ISWbemObjectPath, put_RelPath)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RelPath )( 
             ISWbemObjectPath * This,
-            /* [in] */ BSTR strRelPath);
+            /* [annotation][in] */ 
+            _In_  BSTR strRelPath);
         
         DECLSPEC_XFGVIRT(ISWbemObjectPath, get_Server)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Server )( 
             ISWbemObjectPath * This,
-            /* [retval][out] */ BSTR *strServer);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strServer);
         
         DECLSPEC_XFGVIRT(ISWbemObjectPath, put_Server)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Server )( 
             ISWbemObjectPath * This,
-            /* [in] */ BSTR strServer);
+            /* [annotation][in] */ 
+            _In_  BSTR strServer);
         
         DECLSPEC_XFGVIRT(ISWbemObjectPath, get_Namespace)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Namespace )( 
             ISWbemObjectPath * This,
-            /* [retval][out] */ BSTR *strNamespace);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strNamespace);
         
         DECLSPEC_XFGVIRT(ISWbemObjectPath, put_Namespace)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Namespace )( 
             ISWbemObjectPath * This,
-            /* [in] */ BSTR strNamespace);
+            /* [annotation][in] */ 
+            _In_  BSTR strNamespace);
         
         DECLSPEC_XFGVIRT(ISWbemObjectPath, get_ParentNamespace)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ParentNamespace )( 
             ISWbemObjectPath * This,
-            /* [retval][out] */ BSTR *strParentNamespace);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strParentNamespace);
         
         DECLSPEC_XFGVIRT(ISWbemObjectPath, get_DisplayName)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayName )( 
             ISWbemObjectPath * This,
-            /* [retval][out] */ BSTR *strDisplayName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strDisplayName);
         
         DECLSPEC_XFGVIRT(ISWbemObjectPath, put_DisplayName)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DisplayName )( 
             ISWbemObjectPath * This,
-            /* [in] */ BSTR strDisplayName);
+            /* [annotation][in] */ 
+            _In_  BSTR strDisplayName);
         
         DECLSPEC_XFGVIRT(ISWbemObjectPath, get_Class)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Class )( 
             ISWbemObjectPath * This,
-            /* [retval][out] */ BSTR *strClass);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strClass);
         
         DECLSPEC_XFGVIRT(ISWbemObjectPath, put_Class)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Class )( 
             ISWbemObjectPath * This,
-            /* [in] */ BSTR strClass);
+            /* [annotation][in] */ 
+            _In_  BSTR strClass);
         
         DECLSPEC_XFGVIRT(ISWbemObjectPath, get_IsClass)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IsClass )( 
             ISWbemObjectPath * This,
-            /* [retval][out] */ VARIANT_BOOL *bIsClass);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsClass);
         
         DECLSPEC_XFGVIRT(ISWbemObjectPath, SetAsClass)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetAsClass )( 
@@ -4408,7 +5169,8 @@ EXTERN_C const IID IID_ISWbemObjectPath;
         DECLSPEC_XFGVIRT(ISWbemObjectPath, get_IsSingleton)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IsSingleton )( 
             ISWbemObjectPath * This,
-            /* [retval][out] */ VARIANT_BOOL *bIsSingleton);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsSingleton);
         
         DECLSPEC_XFGVIRT(ISWbemObjectPath, SetAsSingleton)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetAsSingleton )( 
@@ -4417,32 +5179,38 @@ EXTERN_C const IID IID_ISWbemObjectPath;
         DECLSPEC_XFGVIRT(ISWbemObjectPath, get_Keys)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Keys )( 
             ISWbemObjectPath * This,
-            /* [retval][out] */ ISWbemNamedValueSet **objWbemNamedValueSet);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemNamedValueSet **objWbemNamedValueSet);
         
         DECLSPEC_XFGVIRT(ISWbemObjectPath, get_Security_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Security_ )( 
             ISWbemObjectPath * This,
-            /* [retval][out] */ ISWbemSecurity **objWbemSecurity);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity);
         
         DECLSPEC_XFGVIRT(ISWbemObjectPath, get_Locale)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Locale )( 
             ISWbemObjectPath * This,
-            /* [retval][out] */ BSTR *strLocale);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strLocale);
         
         DECLSPEC_XFGVIRT(ISWbemObjectPath, put_Locale)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Locale )( 
             ISWbemObjectPath * This,
-            /* [in] */ BSTR strLocale);
+            /* [annotation][in] */ 
+            _In_  BSTR strLocale);
         
         DECLSPEC_XFGVIRT(ISWbemObjectPath, get_Authority)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Authority )( 
             ISWbemObjectPath * This,
-            /* [retval][out] */ BSTR *strAuthority);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strAuthority);
         
         DECLSPEC_XFGVIRT(ISWbemObjectPath, put_Authority)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Authority )( 
             ISWbemObjectPath * This,
-            /* [in] */ BSTR strAuthority);
+            /* [annotation][in] */ 
+            _In_  BSTR strAuthority);
         
         END_INTERFACE
     } ISWbemObjectPathVtbl;
@@ -4587,7 +5355,8 @@ EXTERN_C const IID IID_ISWbemLastError;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemLastError * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4602,23 +5371,31 @@ EXTERN_C const IID IID_ISWbemLastError;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemLastError * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemLastError * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemLastError * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4643,196 +5420,290 @@ EXTERN_C const IID IID_ISWbemLastError;
         DECLSPEC_XFGVIRT(ISWbemObject, Put_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Put_ )( 
             ISWbemLastError * This,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectPath **objWbemObjectPath);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectPath **objWbemObjectPath);
         
         DECLSPEC_XFGVIRT(ISWbemObject, PutAsync_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PutAsync_ )( 
             ISWbemLastError * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemObject, Delete_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete_ )( 
             ISWbemLastError * This,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, DeleteAsync_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteAsync_ )( 
             ISWbemLastError * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemObject, Instances_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Instances_ )( 
             ISWbemLastError * This,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, InstancesAsync_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstancesAsync_ )( 
             ISWbemLastError * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemObject, Subclasses_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Subclasses_ )( 
             ISWbemLastError * This,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, SubclassesAsync_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SubclassesAsync_ )( 
             ISWbemLastError * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemObject, Associators_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Associators_ )( 
             ISWbemLastError * This,
-            /* [defaultvalue][in] */ BSTR strAssocClass,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strResultRole,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredAssocQualifier,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, AssociatorsAsync_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AssociatorsAsync_ )( 
             ISWbemLastError * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ BSTR strAssocClass,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strResultRole,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredAssocQualifier,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemObject, References_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *References_ )( 
             ISWbemLastError * This,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, ReferencesAsync_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ReferencesAsync_ )( 
             ISWbemLastError * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemObject, ExecMethod_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecMethod_ )( 
             ISWbemLastError * This,
-            /* [in] */ BSTR strMethodName,
-            /* [defaultvalue][in] */ IDispatch *objWbemInParameters,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObject **objWbemOutParameters);
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemOutParameters);
         
         DECLSPEC_XFGVIRT(ISWbemObject, ExecMethodAsync_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecMethodAsync_ )( 
             ISWbemLastError * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strMethodName,
-            /* [defaultvalue][in] */ IDispatch *objWbemInParameters,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemObject, Clone_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone_ )( 
             ISWbemLastError * This,
-            /* [retval][out] */ ISWbemObject **objWbemObject);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
         
         DECLSPEC_XFGVIRT(ISWbemObject, GetObjectText_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetObjectText_ )( 
             ISWbemLastError * This,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ BSTR *strObjectText);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strObjectText);
         
         DECLSPEC_XFGVIRT(ISWbemObject, SpawnDerivedClass_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SpawnDerivedClass_ )( 
             ISWbemLastError * This,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemObject **objWbemObject);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
         
         DECLSPEC_XFGVIRT(ISWbemObject, SpawnInstance_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SpawnInstance_ )( 
             ISWbemLastError * This,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemObject **objWbemObject);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
         
         DECLSPEC_XFGVIRT(ISWbemObject, CompareTo_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CompareTo_ )( 
             ISWbemLastError * This,
-            /* [in] */ IDispatch *objWbemObject,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ VARIANT_BOOL *bResult);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemObject,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bResult);
         
         DECLSPEC_XFGVIRT(ISWbemObject, get_Qualifiers_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Qualifiers_ )( 
             ISWbemLastError * This,
-            /* [retval][out] */ ISWbemQualifierSet **objWbemQualifierSet);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifierSet **objWbemQualifierSet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, get_Properties_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Properties_ )( 
             ISWbemLastError * This,
-            /* [retval][out] */ ISWbemPropertySet **objWbemPropertySet);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPropertySet **objWbemPropertySet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, get_Methods_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Methods_ )( 
             ISWbemLastError * This,
-            /* [retval][out] */ ISWbemMethodSet **objWbemMethodSet);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemMethodSet **objWbemMethodSet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, get_Derivation_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Derivation_ )( 
             ISWbemLastError * This,
-            /* [retval][out] */ VARIANT *strClassNameArray);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *strClassNameArray);
         
         DECLSPEC_XFGVIRT(ISWbemObject, get_Path_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Path_ )( 
             ISWbemLastError * This,
-            /* [retval][out] */ ISWbemObjectPath **objWbemObjectPath);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectPath **objWbemObjectPath);
         
         DECLSPEC_XFGVIRT(ISWbemObject, get_Security_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Security_ )( 
             ISWbemLastError * This,
-            /* [retval][out] */ ISWbemSecurity **objWbemSecurity);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity);
         
         END_INTERFACE
     } ISWbemLastErrorVtbl;
@@ -4982,7 +5853,8 @@ EXTERN_C const IID DIID_ISWbemSinkEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISWbemSinkEvents * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4997,23 +5869,31 @@ EXTERN_C const IID DIID_ISWbemSinkEvents;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISWbemSinkEvents * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISWbemSinkEvents * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISWbemSinkEvents * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5108,7 +5988,8 @@ EXTERN_C const IID IID_ISWbemSink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISWbemSink * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5123,23 +6004,31 @@ EXTERN_C const IID IID_ISWbemSink;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISWbemSink * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISWbemSink * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISWbemSink * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5231,19 +6120,24 @@ EXTERN_C const IID IID_ISWbemSecurity;
     {
     public:
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ImpersonationLevel( 
-            /* [retval][out] */ WbemImpersonationLevelEnum *iImpersonationLevel) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WbemImpersonationLevelEnum *iImpersonationLevel) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_ImpersonationLevel( 
-            /* [in] */ WbemImpersonationLevelEnum iImpersonationLevel) = 0;
+            /* [annotation][in] */ 
+            _In_  WbemImpersonationLevelEnum iImpersonationLevel) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_AuthenticationLevel( 
-            /* [retval][out] */ WbemAuthenticationLevelEnum *iAuthenticationLevel) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WbemAuthenticationLevelEnum *iAuthenticationLevel) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_AuthenticationLevel( 
-            /* [in] */ WbemAuthenticationLevelEnum iAuthenticationLevel) = 0;
+            /* [annotation][in] */ 
+            _In_  WbemAuthenticationLevelEnum iAuthenticationLevel) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Privileges( 
-            /* [retval][out] */ ISWbemPrivilegeSet **objWbemPrivilegeSet) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPrivilegeSet **objWbemPrivilegeSet) = 0;
         
     };
     
@@ -5257,7 +6151,8 @@ EXTERN_C const IID IID_ISWbemSecurity;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemSecurity * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5272,23 +6167,31 @@ EXTERN_C const IID IID_ISWbemSecurity;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemSecurity * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemSecurity * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemSecurity * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5313,27 +6216,32 @@ EXTERN_C const IID IID_ISWbemSecurity;
         DECLSPEC_XFGVIRT(ISWbemSecurity, get_ImpersonationLevel)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ImpersonationLevel )( 
             ISWbemSecurity * This,
-            /* [retval][out] */ WbemImpersonationLevelEnum *iImpersonationLevel);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WbemImpersonationLevelEnum *iImpersonationLevel);
         
         DECLSPEC_XFGVIRT(ISWbemSecurity, put_ImpersonationLevel)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ImpersonationLevel )( 
             ISWbemSecurity * This,
-            /* [in] */ WbemImpersonationLevelEnum iImpersonationLevel);
+            /* [annotation][in] */ 
+            _In_  WbemImpersonationLevelEnum iImpersonationLevel);
         
         DECLSPEC_XFGVIRT(ISWbemSecurity, get_AuthenticationLevel)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AuthenticationLevel )( 
             ISWbemSecurity * This,
-            /* [retval][out] */ WbemAuthenticationLevelEnum *iAuthenticationLevel);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WbemAuthenticationLevelEnum *iAuthenticationLevel);
         
         DECLSPEC_XFGVIRT(ISWbemSecurity, put_AuthenticationLevel)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AuthenticationLevel )( 
             ISWbemSecurity * This,
-            /* [in] */ WbemAuthenticationLevelEnum iAuthenticationLevel);
+            /* [annotation][in] */ 
+            _In_  WbemAuthenticationLevelEnum iAuthenticationLevel);
         
         DECLSPEC_XFGVIRT(ISWbemSecurity, get_Privileges)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Privileges )( 
             ISWbemSecurity * This,
-            /* [retval][out] */ ISWbemPrivilegeSet **objWbemPrivilegeSet);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPrivilegeSet **objWbemPrivilegeSet);
         
         END_INTERFACE
     } ISWbemSecurityVtbl;
@@ -5413,19 +6321,24 @@ EXTERN_C const IID IID_ISWbemPrivilege;
     {
     public:
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsEnabled( 
-            /* [retval][out] */ VARIANT_BOOL *bIsEnabled) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsEnabled) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_IsEnabled( 
-            /* [in] */ VARIANT_BOOL bIsEnabled) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bIsEnabled) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ BSTR *strDisplayName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strDisplayName) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
-            /* [retval][out] */ BSTR *strDisplayName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strDisplayName) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Identifier( 
-            /* [retval][out] */ WbemPrivilegeEnum *iPrivilege) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WbemPrivilegeEnum *iPrivilege) = 0;
         
     };
     
@@ -5439,7 +6352,8 @@ EXTERN_C const IID IID_ISWbemPrivilege;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemPrivilege * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5454,23 +6368,31 @@ EXTERN_C const IID IID_ISWbemPrivilege;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemPrivilege * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemPrivilege * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemPrivilege * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5495,27 +6417,32 @@ EXTERN_C const IID IID_ISWbemPrivilege;
         DECLSPEC_XFGVIRT(ISWbemPrivilege, get_IsEnabled)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IsEnabled )( 
             ISWbemPrivilege * This,
-            /* [retval][out] */ VARIANT_BOOL *bIsEnabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsEnabled);
         
         DECLSPEC_XFGVIRT(ISWbemPrivilege, put_IsEnabled)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_IsEnabled )( 
             ISWbemPrivilege * This,
-            /* [in] */ VARIANT_BOOL bIsEnabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bIsEnabled);
         
         DECLSPEC_XFGVIRT(ISWbemPrivilege, get_Name)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             ISWbemPrivilege * This,
-            /* [retval][out] */ BSTR *strDisplayName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strDisplayName);
         
         DECLSPEC_XFGVIRT(ISWbemPrivilege, get_DisplayName)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayName )( 
             ISWbemPrivilege * This,
-            /* [retval][out] */ BSTR *strDisplayName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strDisplayName);
         
         DECLSPEC_XFGVIRT(ISWbemPrivilege, get_Identifier)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Identifier )( 
             ISWbemPrivilege * This,
-            /* [retval][out] */ WbemPrivilegeEnum *iPrivilege);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WbemPrivilegeEnum *iPrivilege);
         
         END_INTERFACE
     } ISWbemPrivilegeVtbl;
@@ -5595,29 +6522,40 @@ EXTERN_C const IID IID_ISWbemPrivilegeSet;
     {
     public:
         virtual /* [restricted][propget][id] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [retval][out] */ IUnknown **pUnk) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Item( 
-            /* [in] */ WbemPrivilegeEnum iPrivilege,
-            /* [retval][out] */ ISWbemPrivilege **objWbemPrivilege) = 0;
+            /* [annotation][in] */ 
+            _In_  WbemPrivilegeEnum iPrivilege,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPrivilege **objWbemPrivilege) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [retval][out] */ long *iCount) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Add( 
-            /* [in] */ WbemPrivilegeEnum iPrivilege,
-            /* [defaultvalue][in] */ VARIANT_BOOL bIsEnabled,
-            /* [retval][out] */ ISWbemPrivilege **objWbemPrivilege) = 0;
+            /* [annotation][in] */ 
+            _In_  WbemPrivilegeEnum iPrivilege,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsEnabled,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPrivilege **objWbemPrivilege) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Remove( 
-            /* [in] */ WbemPrivilegeEnum iPrivilege) = 0;
+            /* [annotation][in] */ 
+            _In_  WbemPrivilegeEnum iPrivilege) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteAll( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddAsString( 
-            /* [in] */ BSTR strPrivilege,
-            /* [defaultvalue][in] */ VARIANT_BOOL bIsEnabled,
-            /* [retval][out] */ ISWbemPrivilege **objWbemPrivilege) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strPrivilege,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsEnabled,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPrivilege **objWbemPrivilege) = 0;
         
     };
     
@@ -5631,7 +6569,8 @@ EXTERN_C const IID IID_ISWbemPrivilegeSet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemPrivilegeSet * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5646,23 +6585,31 @@ EXTERN_C const IID IID_ISWbemPrivilegeSet;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemPrivilegeSet * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemPrivilegeSet * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemPrivilegeSet * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5687,30 +6634,38 @@ EXTERN_C const IID IID_ISWbemPrivilegeSet;
         DECLSPEC_XFGVIRT(ISWbemPrivilegeSet, get__NewEnum)
         /* [restricted][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             ISWbemPrivilegeSet * This,
-            /* [retval][out] */ IUnknown **pUnk);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk);
         
         DECLSPEC_XFGVIRT(ISWbemPrivilegeSet, Item)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             ISWbemPrivilegeSet * This,
-            /* [in] */ WbemPrivilegeEnum iPrivilege,
-            /* [retval][out] */ ISWbemPrivilege **objWbemPrivilege);
+            /* [annotation][in] */ 
+            _In_  WbemPrivilegeEnum iPrivilege,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPrivilege **objWbemPrivilege);
         
         DECLSPEC_XFGVIRT(ISWbemPrivilegeSet, get_Count)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             ISWbemPrivilegeSet * This,
-            /* [retval][out] */ long *iCount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount);
         
         DECLSPEC_XFGVIRT(ISWbemPrivilegeSet, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             ISWbemPrivilegeSet * This,
-            /* [in] */ WbemPrivilegeEnum iPrivilege,
-            /* [defaultvalue][in] */ VARIANT_BOOL bIsEnabled,
-            /* [retval][out] */ ISWbemPrivilege **objWbemPrivilege);
+            /* [annotation][in] */ 
+            _In_  WbemPrivilegeEnum iPrivilege,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsEnabled,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPrivilege **objWbemPrivilege);
         
         DECLSPEC_XFGVIRT(ISWbemPrivilegeSet, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             ISWbemPrivilegeSet * This,
-            /* [in] */ WbemPrivilegeEnum iPrivilege);
+            /* [annotation][in] */ 
+            _In_  WbemPrivilegeEnum iPrivilege);
         
         DECLSPEC_XFGVIRT(ISWbemPrivilegeSet, DeleteAll)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteAll )( 
@@ -5719,9 +6674,12 @@ EXTERN_C const IID IID_ISWbemPrivilegeSet;
         DECLSPEC_XFGVIRT(ISWbemPrivilegeSet, AddAsString)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddAsString )( 
             ISWbemPrivilegeSet * This,
-            /* [in] */ BSTR strPrivilege,
-            /* [defaultvalue][in] */ VARIANT_BOOL bIsEnabled,
-            /* [retval][out] */ ISWbemPrivilege **objWbemPrivilege);
+            /* [annotation][in] */ 
+            _In_  BSTR strPrivilege,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsEnabled,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPrivilege **objWbemPrivilege);
         
         END_INTERFACE
     } ISWbemPrivilegeSetVtbl;
@@ -5807,17 +6765,26 @@ EXTERN_C const IID IID_ISWbemServicesEx;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Put( 
-            /* [in] */ ISWbemObjectEx *objWbemObject,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectPath **objWbemObjectPath) = 0;
+            /* [annotation][in] */ 
+            _In_  ISWbemObjectEx *objWbemObject,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectPath **objWbemObjectPath) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE PutAsync( 
-            /* [in] */ ISWbemSink *objWbemSink,
-            /* [in] */ ISWbemObjectEx *objWbemObject,
-            /* [defaultvalue][in] */ long iFlags = wbemChangeFlagCreateOrUpdate,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  ISWbemSink *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  ISWbemObjectEx *objWbemObject,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = wbemChangeFlagCreateOrUpdate,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext = 0) = 0;
         
     };
     
@@ -5831,7 +6798,8 @@ EXTERN_C const IID IID_ISWbemServicesEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemServicesEx * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5846,23 +6814,31 @@ EXTERN_C const IID IID_ISWbemServicesEx;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemServicesEx * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemServicesEx * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemServicesEx * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5887,210 +6863,334 @@ EXTERN_C const IID IID_ISWbemServicesEx;
         DECLSPEC_XFGVIRT(ISWbemServices, Get)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Get )( 
             ISWbemServicesEx * This,
-            /* [defaultvalue][in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObject **objWbemObject);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
         
         DECLSPEC_XFGVIRT(ISWbemServices, GetAsync)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetAsync )( 
             ISWbemServicesEx * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemServices, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             ISWbemServicesEx * This,
-            /* [in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet);
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet);
         
         DECLSPEC_XFGVIRT(ISWbemServices, DeleteAsync)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteAsync )( 
             ISWbemServicesEx * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemServices, InstancesOf)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstancesOf )( 
             ISWbemServicesEx * This,
-            /* [in] */ BSTR strClass,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][in] */ 
+            _In_  BSTR strClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemServices, InstancesOfAsync)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstancesOfAsync )( 
             ISWbemServicesEx * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strClass,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemServices, SubclassesOf)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SubclassesOf )( 
             ISWbemServicesEx * This,
-            /* [defaultvalue][in] */ BSTR strSuperclass,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strSuperclass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemServices, SubclassesOfAsync)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SubclassesOfAsync )( 
             ISWbemServicesEx * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ BSTR strSuperclass,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strSuperclass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemServices, ExecQuery)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecQuery )( 
             ISWbemServicesEx * This,
-            /* [in] */ BSTR strQuery,
-            /* [defaultvalue][in] */ BSTR strQueryLanguage,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemServices, ExecQueryAsync)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecQueryAsync )( 
             ISWbemServicesEx * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strQuery,
-            /* [defaultvalue][in] */ BSTR strQueryLanguage,
-            /* [defaultvalue][in] */ long lFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long lFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemServices, AssociatorsOf)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AssociatorsOf )( 
             ISWbemServicesEx * This,
-            /* [in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ BSTR strAssocClass,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strResultRole,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredAssocQualifier,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemServices, AssociatorsOfAsync)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AssociatorsOfAsync )( 
             ISWbemServicesEx * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ BSTR strAssocClass,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strResultRole,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredAssocQualifier,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemServices, ReferencesTo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ReferencesTo )( 
             ISWbemServicesEx * This,
-            /* [in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemServices, ReferencesToAsync)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ReferencesToAsync )( 
             ISWbemServicesEx * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strObjectPath,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemServices, ExecNotificationQuery)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecNotificationQuery )( 
             ISWbemServicesEx * This,
-            /* [in] */ BSTR strQuery,
-            /* [defaultvalue][in] */ BSTR strQueryLanguage,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemEventSource **objWbemEventSource);
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemEventSource **objWbemEventSource);
         
         DECLSPEC_XFGVIRT(ISWbemServices, ExecNotificationQueryAsync)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecNotificationQueryAsync )( 
             ISWbemServicesEx * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strQuery,
-            /* [defaultvalue][in] */ BSTR strQueryLanguage,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strQuery,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strQueryLanguage,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemServices, ExecMethod)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecMethod )( 
             ISWbemServicesEx * This,
-            /* [in] */ BSTR strObjectPath,
-            /* [in] */ BSTR strMethodName,
-            /* [defaultvalue][in] */ IDispatch *objWbemInParameters,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObject **objWbemOutParameters);
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemOutParameters);
         
         DECLSPEC_XFGVIRT(ISWbemServices, ExecMethodAsync)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecMethodAsync )( 
             ISWbemServicesEx * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strObjectPath,
-            /* [in] */ BSTR strMethodName,
-            /* [defaultvalue][in] */ IDispatch *objWbemInParameters,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strObjectPath,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemServices, get_Security_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Security_ )( 
             ISWbemServicesEx * This,
-            /* [retval][out] */ ISWbemSecurity **objWbemSecurity);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity);
         
         DECLSPEC_XFGVIRT(ISWbemServicesEx, Put)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Put )( 
             ISWbemServicesEx * This,
-            /* [in] */ ISWbemObjectEx *objWbemObject,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectPath **objWbemObjectPath);
+            /* [annotation][in] */ 
+            _In_  ISWbemObjectEx *objWbemObject,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectPath **objWbemObjectPath);
         
         DECLSPEC_XFGVIRT(ISWbemServicesEx, PutAsync)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PutAsync )( 
             ISWbemServicesEx * This,
-            /* [in] */ ISWbemSink *objWbemSink,
-            /* [in] */ ISWbemObjectEx *objWbemObject,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  ISWbemSink *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  ISWbemObjectEx *objWbemObject,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         END_INTERFACE
     } ISWbemServicesExVtbl;
@@ -6219,23 +7319,34 @@ EXTERN_C const IID IID_ISWbemObjectEx;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh_( 
-            /* [defaultvalue][in] */ long iFlags = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet = 0) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_SystemProperties_( 
-            /* [retval][out] */ ISWbemPropertySet **objWbemPropertySet) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPropertySet **objWbemPropertySet) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetText_( 
-            /* [in] */ WbemObjectTextFormatEnum iObjectTextFormat,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ BSTR *bsText) = 0;
+            /* [annotation][in] */ 
+            _In_  WbemObjectTextFormatEnum iObjectTextFormat,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *bsText) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetFromText_( 
-            /* [in] */ BSTR bsText,
-            /* [in] */ WbemObjectTextFormatEnum iObjectTextFormat,
-            /* [defaultvalue][in] */ long iFlags = 0,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bsText,
+            /* [annotation][in] */ 
+            _In_  WbemObjectTextFormatEnum iObjectTextFormat,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet = 0) = 0;
         
     };
     
@@ -6249,7 +7360,8 @@ EXTERN_C const IID IID_ISWbemObjectEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemObjectEx * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6264,23 +7376,31 @@ EXTERN_C const IID IID_ISWbemObjectEx;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemObjectEx * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemObjectEx * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemObjectEx * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6305,223 +7425,328 @@ EXTERN_C const IID IID_ISWbemObjectEx;
         DECLSPEC_XFGVIRT(ISWbemObject, Put_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Put_ )( 
             ISWbemObjectEx * This,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectPath **objWbemObjectPath);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectPath **objWbemObjectPath);
         
         DECLSPEC_XFGVIRT(ISWbemObject, PutAsync_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PutAsync_ )( 
             ISWbemObjectEx * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemObject, Delete_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete_ )( 
             ISWbemObjectEx * This,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, DeleteAsync_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteAsync_ )( 
             ISWbemObjectEx * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemObject, Instances_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Instances_ )( 
             ISWbemObjectEx * This,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, InstancesAsync_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InstancesAsync_ )( 
             ISWbemObjectEx * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemObject, Subclasses_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Subclasses_ )( 
             ISWbemObjectEx * This,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, SubclassesAsync_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SubclassesAsync_ )( 
             ISWbemObjectEx * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemObject, Associators_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Associators_ )( 
             ISWbemObjectEx * This,
-            /* [defaultvalue][in] */ BSTR strAssocClass,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strResultRole,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredAssocQualifier,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, AssociatorsAsync_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AssociatorsAsync_ )( 
             ISWbemObjectEx * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ BSTR strAssocClass,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strResultRole,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredAssocQualifier,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strAssocClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredAssocQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemObject, References_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *References_ )( 
             ISWbemObjectEx * This,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, ReferencesAsync_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ReferencesAsync_ )( 
             ISWbemObjectEx * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [defaultvalue][in] */ BSTR strResultClass,
-            /* [defaultvalue][in] */ BSTR strRole,
-            /* [defaultvalue][in] */ VARIANT_BOOL bClassesOnly,
-            /* [defaultvalue][in] */ VARIANT_BOOL bSchemaOnly,
-            /* [defaultvalue][in] */ BSTR strRequiredQualifier,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strResultClass,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRole,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bClassesOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bSchemaOnly,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  BSTR strRequiredQualifier,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemObject, ExecMethod_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecMethod_ )( 
             ISWbemObjectEx * This,
-            /* [in] */ BSTR strMethodName,
-            /* [defaultvalue][in] */ IDispatch *objWbemInParameters,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemObject **objWbemOutParameters);
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemOutParameters);
         
         DECLSPEC_XFGVIRT(ISWbemObject, ExecMethodAsync_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecMethodAsync_ )( 
             ISWbemObjectEx * This,
-            /* [in] */ IDispatch *objWbemSink,
-            /* [in] */ BSTR strMethodName,
-            /* [defaultvalue][in] */ IDispatch *objWbemInParameters,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [defaultvalue][in] */ IDispatch *objWbemAsyncContext);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemSink,
+            /* [annotation][in] */ 
+            _In_  BSTR strMethodName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemInParameters,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemAsyncContext);
         
         DECLSPEC_XFGVIRT(ISWbemObject, Clone_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone_ )( 
             ISWbemObjectEx * This,
-            /* [retval][out] */ ISWbemObject **objWbemObject);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
         
         DECLSPEC_XFGVIRT(ISWbemObject, GetObjectText_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetObjectText_ )( 
             ISWbemObjectEx * This,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ BSTR *strObjectText);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strObjectText);
         
         DECLSPEC_XFGVIRT(ISWbemObject, SpawnDerivedClass_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SpawnDerivedClass_ )( 
             ISWbemObjectEx * This,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemObject **objWbemObject);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
         
         DECLSPEC_XFGVIRT(ISWbemObject, SpawnInstance_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SpawnInstance_ )( 
             ISWbemObjectEx * This,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ ISWbemObject **objWbemObject);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWbemObject);
         
         DECLSPEC_XFGVIRT(ISWbemObject, CompareTo_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CompareTo_ )( 
             ISWbemObjectEx * This,
-            /* [in] */ IDispatch *objWbemObject,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [retval][out] */ VARIANT_BOOL *bResult);
+            /* [annotation][in] */ 
+            _In_  IDispatch *objWbemObject,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bResult);
         
         DECLSPEC_XFGVIRT(ISWbemObject, get_Qualifiers_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Qualifiers_ )( 
             ISWbemObjectEx * This,
-            /* [retval][out] */ ISWbemQualifierSet **objWbemQualifierSet);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemQualifierSet **objWbemQualifierSet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, get_Properties_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Properties_ )( 
             ISWbemObjectEx * This,
-            /* [retval][out] */ ISWbemPropertySet **objWbemPropertySet);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPropertySet **objWbemPropertySet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, get_Methods_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Methods_ )( 
             ISWbemObjectEx * This,
-            /* [retval][out] */ ISWbemMethodSet **objWbemMethodSet);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemMethodSet **objWbemMethodSet);
         
         DECLSPEC_XFGVIRT(ISWbemObject, get_Derivation_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Derivation_ )( 
             ISWbemObjectEx * This,
-            /* [retval][out] */ VARIANT *strClassNameArray);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *strClassNameArray);
         
         DECLSPEC_XFGVIRT(ISWbemObject, get_Path_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Path_ )( 
             ISWbemObjectEx * This,
-            /* [retval][out] */ ISWbemObjectPath **objWbemObjectPath);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectPath **objWbemObjectPath);
         
         DECLSPEC_XFGVIRT(ISWbemObject, get_Security_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Security_ )( 
             ISWbemObjectEx * This,
-            /* [retval][out] */ ISWbemSecurity **objWbemSecurity);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemSecurity **objWbemSecurity);
         
         DECLSPEC_XFGVIRT(ISWbemObjectEx, Refresh_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh_ )( 
             ISWbemObjectEx * This,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet);
         
         DECLSPEC_XFGVIRT(ISWbemObjectEx, get_SystemProperties_)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SystemProperties_ )( 
             ISWbemObjectEx * This,
-            /* [retval][out] */ ISWbemPropertySet **objWbemPropertySet);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemPropertySet **objWbemPropertySet);
         
         DECLSPEC_XFGVIRT(ISWbemObjectEx, GetText_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetText_ )( 
             ISWbemObjectEx * This,
-            /* [in] */ WbemObjectTextFormatEnum iObjectTextFormat,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ BSTR *bsText);
+            /* [annotation][in] */ 
+            _In_  WbemObjectTextFormatEnum iObjectTextFormat,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *bsText);
         
         DECLSPEC_XFGVIRT(ISWbemObjectEx, SetFromText_)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetFromText_ )( 
             ISWbemObjectEx * This,
-            /* [in] */ BSTR bsText,
-            /* [in] */ WbemObjectTextFormatEnum iObjectTextFormat,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet);
+            /* [annotation][in] */ 
+            _In_  BSTR bsText,
+            /* [annotation][in] */ 
+            _In_  WbemObjectTextFormatEnum iObjectTextFormat,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet);
         
         END_INTERFACE
     } ISWbemObjectExVtbl;
@@ -6674,128 +7899,172 @@ EXTERN_C const IID IID_ISWbemDateTime;
     {
     public:
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Value( 
-            /* [retval][out] */ BSTR *strValue) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strValue) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Value( 
-            /* [in] */ BSTR strValue) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strValue) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Year( 
-            /* [retval][out] */ long *iYear) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iYear) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Year( 
-            /* [in] */ long iYear) = 0;
+            /* [annotation][in] */ 
+            _In_  long iYear) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_YearSpecified( 
-            /* [retval][out] */ VARIANT_BOOL *bYearSpecified) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bYearSpecified) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_YearSpecified( 
-            /* [in] */ VARIANT_BOOL bYearSpecified) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bYearSpecified) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Month( 
-            /* [retval][out] */ long *iMonth) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iMonth) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Month( 
-            /* [in] */ long iMonth) = 0;
+            /* [annotation][in] */ 
+            _In_  long iMonth) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_MonthSpecified( 
-            /* [retval][out] */ VARIANT_BOOL *bMonthSpecified) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bMonthSpecified) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_MonthSpecified( 
-            /* [in] */ VARIANT_BOOL bMonthSpecified) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bMonthSpecified) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Day( 
-            /* [retval][out] */ long *iDay) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iDay) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Day( 
-            /* [in] */ long iDay) = 0;
+            /* [annotation][in] */ 
+            _In_  long iDay) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DaySpecified( 
-            /* [retval][out] */ VARIANT_BOOL *bDaySpecified) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bDaySpecified) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_DaySpecified( 
-            /* [in] */ VARIANT_BOOL bDaySpecified) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bDaySpecified) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Hours( 
-            /* [retval][out] */ long *iHours) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iHours) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Hours( 
-            /* [in] */ long iHours) = 0;
+            /* [annotation][in] */ 
+            _In_  long iHours) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_HoursSpecified( 
-            /* [retval][out] */ VARIANT_BOOL *bHoursSpecified) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bHoursSpecified) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_HoursSpecified( 
-            /* [in] */ VARIANT_BOOL bHoursSpecified) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bHoursSpecified) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Minutes( 
-            /* [retval][out] */ long *iMinutes) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iMinutes) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Minutes( 
-            /* [in] */ long iMinutes) = 0;
+            /* [annotation][in] */ 
+            _In_  long iMinutes) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_MinutesSpecified( 
-            /* [retval][out] */ VARIANT_BOOL *bMinutesSpecified) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bMinutesSpecified) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_MinutesSpecified( 
-            /* [in] */ VARIANT_BOOL bMinutesSpecified) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bMinutesSpecified) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Seconds( 
-            /* [retval][out] */ long *iSeconds) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iSeconds) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Seconds( 
-            /* [in] */ long iSeconds) = 0;
+            /* [annotation][in] */ 
+            _In_  long iSeconds) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_SecondsSpecified( 
-            /* [retval][out] */ VARIANT_BOOL *bSecondsSpecified) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bSecondsSpecified) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_SecondsSpecified( 
-            /* [in] */ VARIANT_BOOL bSecondsSpecified) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bSecondsSpecified) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Microseconds( 
-            /* [retval][out] */ long *iMicroseconds) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iMicroseconds) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Microseconds( 
-            /* [in] */ long iMicroseconds) = 0;
+            /* [annotation][in] */ 
+            _In_  long iMicroseconds) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_MicrosecondsSpecified( 
-            /* [retval][out] */ VARIANT_BOOL *bMicrosecondsSpecified) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bMicrosecondsSpecified) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_MicrosecondsSpecified( 
-            /* [in] */ VARIANT_BOOL bMicrosecondsSpecified) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bMicrosecondsSpecified) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_UTC( 
-            /* [retval][out] */ long *iUTC) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iUTC) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_UTC( 
-            /* [in] */ long iUTC) = 0;
+            /* [annotation][in] */ 
+            _In_  long iUTC) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_UTCSpecified( 
-            /* [retval][out] */ VARIANT_BOOL *bUTCSpecified) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bUTCSpecified) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_UTCSpecified( 
-            /* [in] */ VARIANT_BOOL bUTCSpecified) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bUTCSpecified) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsInterval( 
-            /* [retval][out] */ VARIANT_BOOL *bIsInterval) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsInterval) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_IsInterval( 
-            /* [in] */ VARIANT_BOOL bIsInterval) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bIsInterval) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetVarDate( 
-            /* [defaultvalue][in] */ VARIANT_BOOL bIsLocal,
-            /* [retval][out] */ DATE *dVarDate) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsLocal,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DATE *dVarDate) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetVarDate( 
-            /* [in] */ DATE dVarDate,
-            /* [defaultvalue][in] */ VARIANT_BOOL bIsLocal = TRUE) = 0;
+            /* [annotation][in] */ 
+            _In_  DATE dVarDate,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsLocal = TRUE) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetFileTime( 
-            /* [defaultvalue][in] */ VARIANT_BOOL bIsLocal,
-            /* [retval][out] */ BSTR *strFileTime) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsLocal,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strFileTime) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetFileTime( 
-            /* [in] */ BSTR strFileTime,
-            /* [defaultvalue][in] */ VARIANT_BOOL bIsLocal = TRUE) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR strFileTime,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsLocal = TRUE) = 0;
         
     };
     
@@ -6809,7 +8078,8 @@ EXTERN_C const IID IID_ISWbemDateTime;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemDateTime * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6824,23 +8094,31 @@ EXTERN_C const IID IID_ISWbemDateTime;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemDateTime * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemDateTime * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemDateTime * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6865,206 +8143,250 @@ EXTERN_C const IID IID_ISWbemDateTime;
         DECLSPEC_XFGVIRT(ISWbemDateTime, get_Value)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             ISWbemDateTime * This,
-            /* [retval][out] */ BSTR *strValue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strValue);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, put_Value)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Value )( 
             ISWbemDateTime * This,
-            /* [in] */ BSTR strValue);
+            /* [annotation][in] */ 
+            _In_  BSTR strValue);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, get_Year)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Year )( 
             ISWbemDateTime * This,
-            /* [retval][out] */ long *iYear);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iYear);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, put_Year)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Year )( 
             ISWbemDateTime * This,
-            /* [in] */ long iYear);
+            /* [annotation][in] */ 
+            _In_  long iYear);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, get_YearSpecified)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_YearSpecified )( 
             ISWbemDateTime * This,
-            /* [retval][out] */ VARIANT_BOOL *bYearSpecified);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bYearSpecified);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, put_YearSpecified)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_YearSpecified )( 
             ISWbemDateTime * This,
-            /* [in] */ VARIANT_BOOL bYearSpecified);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bYearSpecified);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, get_Month)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Month )( 
             ISWbemDateTime * This,
-            /* [retval][out] */ long *iMonth);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iMonth);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, put_Month)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Month )( 
             ISWbemDateTime * This,
-            /* [in] */ long iMonth);
+            /* [annotation][in] */ 
+            _In_  long iMonth);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, get_MonthSpecified)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MonthSpecified )( 
             ISWbemDateTime * This,
-            /* [retval][out] */ VARIANT_BOOL *bMonthSpecified);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bMonthSpecified);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, put_MonthSpecified)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MonthSpecified )( 
             ISWbemDateTime * This,
-            /* [in] */ VARIANT_BOOL bMonthSpecified);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bMonthSpecified);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, get_Day)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Day )( 
             ISWbemDateTime * This,
-            /* [retval][out] */ long *iDay);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iDay);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, put_Day)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Day )( 
             ISWbemDateTime * This,
-            /* [in] */ long iDay);
+            /* [annotation][in] */ 
+            _In_  long iDay);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, get_DaySpecified)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_DaySpecified )( 
             ISWbemDateTime * This,
-            /* [retval][out] */ VARIANT_BOOL *bDaySpecified);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bDaySpecified);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, put_DaySpecified)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_DaySpecified )( 
             ISWbemDateTime * This,
-            /* [in] */ VARIANT_BOOL bDaySpecified);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bDaySpecified);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, get_Hours)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Hours )( 
             ISWbemDateTime * This,
-            /* [retval][out] */ long *iHours);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iHours);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, put_Hours)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Hours )( 
             ISWbemDateTime * This,
-            /* [in] */ long iHours);
+            /* [annotation][in] */ 
+            _In_  long iHours);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, get_HoursSpecified)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_HoursSpecified )( 
             ISWbemDateTime * This,
-            /* [retval][out] */ VARIANT_BOOL *bHoursSpecified);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bHoursSpecified);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, put_HoursSpecified)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_HoursSpecified )( 
             ISWbemDateTime * This,
-            /* [in] */ VARIANT_BOOL bHoursSpecified);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bHoursSpecified);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, get_Minutes)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Minutes )( 
             ISWbemDateTime * This,
-            /* [retval][out] */ long *iMinutes);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iMinutes);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, put_Minutes)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Minutes )( 
             ISWbemDateTime * This,
-            /* [in] */ long iMinutes);
+            /* [annotation][in] */ 
+            _In_  long iMinutes);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, get_MinutesSpecified)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MinutesSpecified )( 
             ISWbemDateTime * This,
-            /* [retval][out] */ VARIANT_BOOL *bMinutesSpecified);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bMinutesSpecified);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, put_MinutesSpecified)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MinutesSpecified )( 
             ISWbemDateTime * This,
-            /* [in] */ VARIANT_BOOL bMinutesSpecified);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bMinutesSpecified);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, get_Seconds)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Seconds )( 
             ISWbemDateTime * This,
-            /* [retval][out] */ long *iSeconds);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iSeconds);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, put_Seconds)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Seconds )( 
             ISWbemDateTime * This,
-            /* [in] */ long iSeconds);
+            /* [annotation][in] */ 
+            _In_  long iSeconds);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, get_SecondsSpecified)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_SecondsSpecified )( 
             ISWbemDateTime * This,
-            /* [retval][out] */ VARIANT_BOOL *bSecondsSpecified);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bSecondsSpecified);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, put_SecondsSpecified)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_SecondsSpecified )( 
             ISWbemDateTime * This,
-            /* [in] */ VARIANT_BOOL bSecondsSpecified);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bSecondsSpecified);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, get_Microseconds)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Microseconds )( 
             ISWbemDateTime * This,
-            /* [retval][out] */ long *iMicroseconds);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iMicroseconds);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, put_Microseconds)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Microseconds )( 
             ISWbemDateTime * This,
-            /* [in] */ long iMicroseconds);
+            /* [annotation][in] */ 
+            _In_  long iMicroseconds);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, get_MicrosecondsSpecified)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MicrosecondsSpecified )( 
             ISWbemDateTime * This,
-            /* [retval][out] */ VARIANT_BOOL *bMicrosecondsSpecified);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bMicrosecondsSpecified);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, put_MicrosecondsSpecified)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MicrosecondsSpecified )( 
             ISWbemDateTime * This,
-            /* [in] */ VARIANT_BOOL bMicrosecondsSpecified);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bMicrosecondsSpecified);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, get_UTC)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_UTC )( 
             ISWbemDateTime * This,
-            /* [retval][out] */ long *iUTC);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iUTC);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, put_UTC)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_UTC )( 
             ISWbemDateTime * This,
-            /* [in] */ long iUTC);
+            /* [annotation][in] */ 
+            _In_  long iUTC);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, get_UTCSpecified)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_UTCSpecified )( 
             ISWbemDateTime * This,
-            /* [retval][out] */ VARIANT_BOOL *bUTCSpecified);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bUTCSpecified);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, put_UTCSpecified)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_UTCSpecified )( 
             ISWbemDateTime * This,
-            /* [in] */ VARIANT_BOOL bUTCSpecified);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bUTCSpecified);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, get_IsInterval)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IsInterval )( 
             ISWbemDateTime * This,
-            /* [retval][out] */ VARIANT_BOOL *bIsInterval);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsInterval);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, put_IsInterval)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_IsInterval )( 
             ISWbemDateTime * This,
-            /* [in] */ VARIANT_BOOL bIsInterval);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bIsInterval);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, GetVarDate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetVarDate )( 
             ISWbemDateTime * This,
-            /* [defaultvalue][in] */ VARIANT_BOOL bIsLocal,
-            /* [retval][out] */ DATE *dVarDate);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsLocal,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DATE *dVarDate);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, SetVarDate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetVarDate )( 
             ISWbemDateTime * This,
-            /* [in] */ DATE dVarDate,
-            /* [defaultvalue][in] */ VARIANT_BOOL bIsLocal);
+            /* [annotation][in] */ 
+            _In_  DATE dVarDate,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsLocal);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, GetFileTime)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetFileTime )( 
             ISWbemDateTime * This,
-            /* [defaultvalue][in] */ VARIANT_BOOL bIsLocal,
-            /* [retval][out] */ BSTR *strFileTime);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsLocal,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strFileTime);
         
         DECLSPEC_XFGVIRT(ISWbemDateTime, SetFileTime)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetFileTime )( 
             ISWbemDateTime * This,
-            /* [in] */ BSTR strFileTime,
-            /* [defaultvalue][in] */ VARIANT_BOOL bIsLocal);
+            /* [annotation][in] */ 
+            _In_  BSTR strFileTime,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  VARIANT_BOOL bIsLocal);
         
         END_INTERFACE
     } ISWbemDateTimeVtbl;
@@ -7249,41 +8571,60 @@ EXTERN_C const IID IID_ISWbemRefresher;
     {
     public:
         virtual /* [restricted][propget][id] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [retval][out] */ IUnknown **pUnk) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Item( 
-            /* [in] */ long iIndex,
-            /* [retval][out] */ ISWbemRefreshableItem **objWbemRefreshableItem) = 0;
+            /* [annotation][in] */ 
+            _In_  long iIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemRefreshableItem **objWbemRefreshableItem) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [retval][out] */ long *iCount) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Add( 
-            /* [in] */ ISWbemServicesEx *objWbemServices,
-            /* [in] */ BSTR bsInstancePath,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemRefreshableItem **objWbemRefreshableItem) = 0;
+            /* [annotation][in] */ 
+            _In_  ISWbemServicesEx *objWbemServices,
+            /* [annotation][in] */ 
+            _In_  BSTR bsInstancePath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemRefreshableItem **objWbemRefreshableItem) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddEnum( 
-            /* [in] */ ISWbemServicesEx *objWbemServices,
-            /* [in] */ BSTR bsClassName,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemRefreshableItem **objWbemRefreshableItem) = 0;
+            /* [annotation][in] */ 
+            _In_  ISWbemServicesEx *objWbemServices,
+            /* [annotation][in] */ 
+            _In_  BSTR bsClassName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemRefreshableItem **objWbemRefreshableItem) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Remove( 
-            /* [in] */ long iIndex,
-            /* [defaultvalue][in] */ long iFlags = 0) = 0;
+            /* [annotation][in] */ 
+            _In_  long iIndex,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( 
-            /* [defaultvalue][in] */ long iFlags = 0) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_AutoReconnect( 
-            /* [retval][out] */ VARIANT_BOOL *bCount) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bCount) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_AutoReconnect( 
-            /* [in] */ VARIANT_BOOL bCount) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bCount) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteAll( void) = 0;
         
@@ -7299,7 +8640,8 @@ EXTERN_C const IID IID_ISWbemRefresher;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemRefresher * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7314,23 +8656,31 @@ EXTERN_C const IID IID_ISWbemRefresher;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemRefresher * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemRefresher * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemRefresher * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -7355,57 +8705,76 @@ EXTERN_C const IID IID_ISWbemRefresher;
         DECLSPEC_XFGVIRT(ISWbemRefresher, get__NewEnum)
         /* [restricted][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             ISWbemRefresher * This,
-            /* [retval][out] */ IUnknown **pUnk);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **pUnk);
         
         DECLSPEC_XFGVIRT(ISWbemRefresher, Item)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             ISWbemRefresher * This,
-            /* [in] */ long iIndex,
-            /* [retval][out] */ ISWbemRefreshableItem **objWbemRefreshableItem);
+            /* [annotation][in] */ 
+            _In_  long iIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemRefreshableItem **objWbemRefreshableItem);
         
         DECLSPEC_XFGVIRT(ISWbemRefresher, get_Count)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             ISWbemRefresher * This,
-            /* [retval][out] */ long *iCount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iCount);
         
         DECLSPEC_XFGVIRT(ISWbemRefresher, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             ISWbemRefresher * This,
-            /* [in] */ ISWbemServicesEx *objWbemServices,
-            /* [in] */ BSTR bsInstancePath,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemRefreshableItem **objWbemRefreshableItem);
+            /* [annotation][in] */ 
+            _In_  ISWbemServicesEx *objWbemServices,
+            /* [annotation][in] */ 
+            _In_  BSTR bsInstancePath,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemRefreshableItem **objWbemRefreshableItem);
         
         DECLSPEC_XFGVIRT(ISWbemRefresher, AddEnum)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddEnum )( 
             ISWbemRefresher * This,
-            /* [in] */ ISWbemServicesEx *objWbemServices,
-            /* [in] */ BSTR bsClassName,
-            /* [defaultvalue][in] */ long iFlags,
-            /* [defaultvalue][in] */ IDispatch *objWbemNamedValueSet,
-            /* [retval][out] */ ISWbemRefreshableItem **objWbemRefreshableItem);
+            /* [annotation][in] */ 
+            _In_  ISWbemServicesEx *objWbemServices,
+            /* [annotation][in] */ 
+            _In_  BSTR bsClassName,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  IDispatch *objWbemNamedValueSet,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemRefreshableItem **objWbemRefreshableItem);
         
         DECLSPEC_XFGVIRT(ISWbemRefresher, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             ISWbemRefresher * This,
-            /* [in] */ long iIndex,
-            /* [defaultvalue][in] */ long iFlags);
+            /* [annotation][in] */ 
+            _In_  long iIndex,
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags);
         
         DECLSPEC_XFGVIRT(ISWbemRefresher, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             ISWbemRefresher * This,
-            /* [defaultvalue][in] */ long iFlags);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags);
         
         DECLSPEC_XFGVIRT(ISWbemRefresher, get_AutoReconnect)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AutoReconnect )( 
             ISWbemRefresher * This,
-            /* [retval][out] */ VARIANT_BOOL *bCount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bCount);
         
         DECLSPEC_XFGVIRT(ISWbemRefresher, put_AutoReconnect)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AutoReconnect )( 
             ISWbemRefresher * This,
-            /* [in] */ VARIANT_BOOL bCount);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bCount);
         
         DECLSPEC_XFGVIRT(ISWbemRefresher, DeleteAll)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteAll )( 
@@ -7504,22 +8873,28 @@ EXTERN_C const IID IID_ISWbemRefreshableItem;
     {
     public:
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Index( 
-            /* [retval][out] */ long *iIndex) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iIndex) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Refresher( 
-            /* [retval][out] */ ISWbemRefresher **objWbemRefresher) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemRefresher **objWbemRefresher) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IsSet( 
-            /* [retval][out] */ VARIANT_BOOL *bIsSet) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsSet) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Object( 
-            /* [retval][out] */ ISWbemObjectEx **objWbemObject) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectEx **objWbemObject) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ObjectSet( 
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Remove( 
-            /* [defaultvalue][in] */ long iFlags = 0) = 0;
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags = 0) = 0;
         
     };
     
@@ -7533,7 +8908,8 @@ EXTERN_C const IID IID_ISWbemRefreshableItem;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISWbemRefreshableItem * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7548,23 +8924,31 @@ EXTERN_C const IID IID_ISWbemRefreshableItem;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISWbemRefreshableItem * This,
-            /* [out] */ UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISWbemRefreshableItem * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISWbemRefreshableItem * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -7589,32 +8973,38 @@ EXTERN_C const IID IID_ISWbemRefreshableItem;
         DECLSPEC_XFGVIRT(ISWbemRefreshableItem, get_Index)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Index )( 
             ISWbemRefreshableItem * This,
-            /* [retval][out] */ long *iIndex);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *iIndex);
         
         DECLSPEC_XFGVIRT(ISWbemRefreshableItem, get_Refresher)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Refresher )( 
             ISWbemRefreshableItem * This,
-            /* [retval][out] */ ISWbemRefresher **objWbemRefresher);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemRefresher **objWbemRefresher);
         
         DECLSPEC_XFGVIRT(ISWbemRefreshableItem, get_IsSet)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_IsSet )( 
             ISWbemRefreshableItem * This,
-            /* [retval][out] */ VARIANT_BOOL *bIsSet);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *bIsSet);
         
         DECLSPEC_XFGVIRT(ISWbemRefreshableItem, get_Object)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Object )( 
             ISWbemRefreshableItem * This,
-            /* [retval][out] */ ISWbemObjectEx **objWbemObject);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectEx **objWbemObject);
         
         DECLSPEC_XFGVIRT(ISWbemRefreshableItem, get_ObjectSet)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ObjectSet )( 
             ISWbemRefreshableItem * This,
-            /* [retval][out] */ ISWbemObjectSet **objWbemObjectSet);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObjectSet **objWbemObjectSet);
         
         DECLSPEC_XFGVIRT(ISWbemRefreshableItem, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             ISWbemRefreshableItem * This,
-            /* [defaultvalue][in] */ long iFlags);
+            /* [annotation][defaultvalue][in] */ 
+            _In_  long iFlags);
         
         END_INTERFACE
     } ISWbemRefreshableItemVtbl;

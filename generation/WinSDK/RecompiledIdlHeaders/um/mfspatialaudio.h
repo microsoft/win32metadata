@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -128,7 +128,8 @@ EXTERN_C const IID IID_IMFSpatialAudioObjectBuffer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFSpatialAudioObjectBuffer * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -163,7 +164,8 @@ EXTERN_C const IID IID_IMFSpatialAudioObjectBuffer;
         DECLSPEC_XFGVIRT(IMFMediaBuffer, SetCurrentLength)
         HRESULT ( STDMETHODCALLTYPE *SetCurrentLength )( 
             IMFSpatialAudioObjectBuffer * This,
-            /* [in] */ DWORD cbCurrentLength);
+            /* [annotation][in] */ 
+            _In_  DWORD cbCurrentLength);
         
         DECLSPEC_XFGVIRT(IMFMediaBuffer, GetMaxLength)
         HRESULT ( STDMETHODCALLTYPE *GetMaxLength )( 
@@ -307,7 +309,8 @@ EXTERN_C const IID IID_IMFSpatialAudioSample;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFSpatialAudioSample * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -329,57 +332,66 @@ EXTERN_C const IID IID_IMFSpatialAudioSample;
         HRESULT ( STDMETHODCALLTYPE *GetItemType )( 
             IMFSpatialAudioSample * This,
             REFGUID guidKey,
-            /* [out] */ MF_ATTRIBUTE_TYPE *pType);
+            /* [annotation][out] */ 
+            _Out_  MF_ATTRIBUTE_TYPE *pType);
         
         DECLSPEC_XFGVIRT(IMFAttributes, CompareItem)
         HRESULT ( STDMETHODCALLTYPE *CompareItem )( 
             IMFSpatialAudioSample * This,
             REFGUID guidKey,
             REFPROPVARIANT Value,
-            /* [out] */ BOOL *pbResult);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbResult);
         
         DECLSPEC_XFGVIRT(IMFAttributes, Compare)
         HRESULT ( STDMETHODCALLTYPE *Compare )( 
             IMFSpatialAudioSample * This,
             IMFAttributes *pTheirs,
             MF_ATTRIBUTES_MATCH_TYPE MatchType,
-            /* [out] */ BOOL *pbResult);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbResult);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetUINT32)
         HRESULT ( STDMETHODCALLTYPE *GetUINT32 )( 
             IMFSpatialAudioSample * This,
             REFGUID guidKey,
-            /* [out] */ UINT32 *punValue);
+            /* [annotation][out] */ 
+            _Out_  UINT32 *punValue);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetUINT64)
         HRESULT ( STDMETHODCALLTYPE *GetUINT64 )( 
             IMFSpatialAudioSample * This,
             REFGUID guidKey,
-            /* [out] */ UINT64 *punValue);
+            /* [annotation][out] */ 
+            _Out_  UINT64 *punValue);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetDouble)
         HRESULT ( STDMETHODCALLTYPE *GetDouble )( 
             IMFSpatialAudioSample * This,
             REFGUID guidKey,
-            /* [out] */ double *pfValue);
+            /* [annotation][out] */ 
+            _Out_  double *pfValue);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetGUID)
         HRESULT ( STDMETHODCALLTYPE *GetGUID )( 
             IMFSpatialAudioSample * This,
             REFGUID guidKey,
-            /* [out] */ GUID *pguidValue);
+            /* [annotation][out] */ 
+            _Out_  GUID *pguidValue);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetStringLength)
         HRESULT ( STDMETHODCALLTYPE *GetStringLength )( 
             IMFSpatialAudioSample * This,
             REFGUID guidKey,
-            /* [out] */ UINT32 *pcchLength);
+            /* [annotation][out] */ 
+            _Out_  UINT32 *pcchLength);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetString)
         HRESULT ( STDMETHODCALLTYPE *GetString )( 
             IMFSpatialAudioSample * This,
             REFGUID guidKey,
-            /* [size_is][out] */ LPWSTR pwszValue,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cchBufSize)  LPWSTR pwszValue,
             UINT32 cchBufSize,
             /* [full][out][in] */ UINT32 *pcchLength);
         
@@ -387,20 +399,24 @@ EXTERN_C const IID IID_IMFSpatialAudioSample;
         HRESULT ( STDMETHODCALLTYPE *GetAllocatedString )( 
             IMFSpatialAudioSample * This,
             REFGUID guidKey,
-            /* [size_is][size_is][out] */ LPWSTR *ppwszValue,
-            /* [out] */ UINT32 *pcchLength);
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcchLength + 1)  LPWSTR *ppwszValue,
+            /* [annotation][out] */ 
+            _Out_  UINT32 *pcchLength);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetBlobSize)
         HRESULT ( STDMETHODCALLTYPE *GetBlobSize )( 
             IMFSpatialAudioSample * This,
             REFGUID guidKey,
-            /* [out] */ UINT32 *pcbBlobSize);
+            /* [annotation][out] */ 
+            _Out_  UINT32 *pcbBlobSize);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetBlob)
         HRESULT ( STDMETHODCALLTYPE *GetBlob )( 
             IMFSpatialAudioSample * This,
             REFGUID guidKey,
-            /* [size_is][out] */ UINT8 *pBuf,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cbBufSize)  UINT8 *pBuf,
             UINT32 cbBufSize,
             /* [full][out][in] */ UINT32 *pcbBlobSize);
         
@@ -408,15 +424,18 @@ EXTERN_C const IID IID_IMFSpatialAudioSample;
         HRESULT ( STDMETHODCALLTYPE *GetAllocatedBlob )( 
             IMFSpatialAudioSample * This,
             REFGUID guidKey,
-            /* [size_is][size_is][out] */ UINT8 **ppBuf,
-            /* [out] */ UINT32 *pcbSize);
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcbSize)  UINT8 **ppBuf,
+            /* [annotation][out] */ 
+            _Out_  UINT32 *pcbSize);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetUnknown)
         HRESULT ( STDMETHODCALLTYPE *GetUnknown )( 
             IMFSpatialAudioSample * This,
             REFGUID guidKey,
             REFIID riid,
-            /* [iid_is][out] */ LPVOID *ppv);
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  LPVOID *ppv);
         
         DECLSPEC_XFGVIRT(IMFAttributes, SetItem)
         HRESULT ( STDMETHODCALLTYPE *SetItem )( 
@@ -461,20 +480,23 @@ EXTERN_C const IID IID_IMFSpatialAudioSample;
         HRESULT ( STDMETHODCALLTYPE *SetString )( 
             IMFSpatialAudioSample * This,
             REFGUID guidKey,
-            /* [string][in] */ LPCWSTR wszValue);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR wszValue);
         
         DECLSPEC_XFGVIRT(IMFAttributes, SetBlob)
         HRESULT ( STDMETHODCALLTYPE *SetBlob )( 
             IMFSpatialAudioSample * This,
             REFGUID guidKey,
-            /* [size_is][in] */ const UINT8 *pBuf,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbBufSize)  const UINT8 *pBuf,
             UINT32 cbBufSize);
         
         DECLSPEC_XFGVIRT(IMFAttributes, SetUnknown)
         HRESULT ( STDMETHODCALLTYPE *SetUnknown )( 
             IMFSpatialAudioSample * This,
             REFGUID guidKey,
-            /* [in] */ IUnknown *pUnknown);
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnknown);
         
         DECLSPEC_XFGVIRT(IMFAttributes, LockStore)
         HRESULT ( STDMETHODCALLTYPE *LockStore )( 
@@ -487,19 +509,22 @@ EXTERN_C const IID IID_IMFSpatialAudioSample;
         DECLSPEC_XFGVIRT(IMFAttributes, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             IMFSpatialAudioSample * This,
-            /* [out] */ UINT32 *pcItems);
+            /* [annotation][out] */ 
+            _Out_  UINT32 *pcItems);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetItemByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetItemByIndex )( 
             IMFSpatialAudioSample * This,
             UINT32 unIndex,
-            /* [out] */ GUID *pguidKey,
+            /* [annotation][out] */ 
+            _Out_  GUID *pguidKey,
             /* [full][out][in] */ PROPVARIANT *pValue);
         
         DECLSPEC_XFGVIRT(IMFAttributes, CopyAllItems)
         HRESULT ( STDMETHODCALLTYPE *CopyAllItems )( 
             IMFSpatialAudioSample * This,
-            /* [in] */ IMFAttributes *pDest);
+            /* [annotation][in] */ 
+            _In_  IMFAttributes *pDest);
         
         DECLSPEC_XFGVIRT(IMFSample, GetSampleFlags)
         HRESULT ( STDMETHODCALLTYPE *GetSampleFlags )( 
@@ -510,7 +535,8 @@ EXTERN_C const IID IID_IMFSpatialAudioSample;
         DECLSPEC_XFGVIRT(IMFSample, SetSampleFlags)
         HRESULT ( STDMETHODCALLTYPE *SetSampleFlags )( 
             IMFSpatialAudioSample * This,
-            /* [in] */ DWORD dwSampleFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwSampleFlags);
         
         DECLSPEC_XFGVIRT(IMFSample, GetSampleTime)
         HRESULT ( STDMETHODCALLTYPE *GetSampleTime )( 
@@ -521,7 +547,8 @@ EXTERN_C const IID IID_IMFSpatialAudioSample;
         DECLSPEC_XFGVIRT(IMFSample, SetSampleTime)
         HRESULT ( STDMETHODCALLTYPE *SetSampleTime )( 
             IMFSpatialAudioSample * This,
-            /* [in] */ LONGLONG hnsSampleTime);
+            /* [annotation][in] */ 
+            _In_  LONGLONG hnsSampleTime);
         
         DECLSPEC_XFGVIRT(IMFSample, GetSampleDuration)
         HRESULT ( STDMETHODCALLTYPE *GetSampleDuration )( 
@@ -532,7 +559,8 @@ EXTERN_C const IID IID_IMFSpatialAudioSample;
         DECLSPEC_XFGVIRT(IMFSample, SetSampleDuration)
         HRESULT ( STDMETHODCALLTYPE *SetSampleDuration )( 
             IMFSpatialAudioSample * This,
-            /* [in] */ LONGLONG hnsSampleDuration);
+            /* [annotation][in] */ 
+            _In_  LONGLONG hnsSampleDuration);
         
         DECLSPEC_XFGVIRT(IMFSample, GetBufferCount)
         HRESULT ( STDMETHODCALLTYPE *GetBufferCount )( 
@@ -543,7 +571,8 @@ EXTERN_C const IID IID_IMFSpatialAudioSample;
         DECLSPEC_XFGVIRT(IMFSample, GetBufferByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetBufferByIndex )( 
             IMFSpatialAudioSample * This,
-            /* [in] */ DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
             /* [annotation][out] */ 
             _Out_  IMFMediaBuffer **ppBuffer);
         
@@ -556,12 +585,14 @@ EXTERN_C const IID IID_IMFSpatialAudioSample;
         DECLSPEC_XFGVIRT(IMFSample, AddBuffer)
         HRESULT ( STDMETHODCALLTYPE *AddBuffer )( 
             IMFSpatialAudioSample * This,
-            /* [in] */ IMFMediaBuffer *pBuffer);
+            /* [annotation][in] */ 
+            _In_  IMFMediaBuffer *pBuffer);
         
         DECLSPEC_XFGVIRT(IMFSample, RemoveBufferByIndex)
         HRESULT ( STDMETHODCALLTYPE *RemoveBufferByIndex )( 
             IMFSpatialAudioSample * This,
-            /* [in] */ DWORD dwIndex);
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex);
         
         DECLSPEC_XFGVIRT(IMFSample, RemoveAllBuffers)
         HRESULT ( STDMETHODCALLTYPE *RemoveAllBuffers )( 
@@ -576,7 +607,8 @@ EXTERN_C const IID IID_IMFSpatialAudioSample;
         DECLSPEC_XFGVIRT(IMFSample, CopyToBuffer)
         HRESULT ( STDMETHODCALLTYPE *CopyToBuffer )( 
             IMFSpatialAudioSample * This,
-            /* [in] */ IMFMediaBuffer *pBuffer);
+            /* [annotation][in] */ 
+            _In_  IMFMediaBuffer *pBuffer);
         
         DECLSPEC_XFGVIRT(IMFSpatialAudioSample, GetObjectCount)
         HRESULT ( STDMETHODCALLTYPE *GetObjectCount )( 

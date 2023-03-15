@@ -124,85 +124,141 @@ EXTERN_C const IID IID_IDedupDataPort;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetStatus( 
-            /* [out] */ __RPC__out DedupDataPortVolumeStatus *pStatus,
+            /* [annotation][out] */ 
+            _Out_  DedupDataPortVolumeStatus *pStatus,
             /* [optional][out] */ __RPC__out DWORD *pDataHeadroomMb) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LookupChunks( 
-            /* [in] */ DWORD Count,
-            /* [size_is][in] */ __RPC__in_ecount_full(Count) DedupHash *pHashes,
-            /* [out] */ __RPC__out GUID *pRequestId) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD Count,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(Count)  DedupHash *pHashes,
+            /* [annotation][out] */ 
+            _Out_  GUID *pRequestId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertChunks( 
-            /* [in] */ DWORD ChunkCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(ChunkCount) DedupChunk *pChunkMetadata,
-            /* [in] */ DWORD DataByteCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(DataByteCount) BYTE *pChunkData,
-            /* [out] */ __RPC__out GUID *pRequestId) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD ChunkCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(ChunkCount)  DedupChunk *pChunkMetadata,
+            /* [annotation][in] */ 
+            _In_  DWORD DataByteCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(DataByteCount)  BYTE *pChunkData,
+            /* [annotation][out] */ 
+            _Out_  GUID *pRequestId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertChunksWithStream( 
-            /* [in] */ DWORD ChunkCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(ChunkCount) DedupChunk *pChunkMetadata,
-            /* [in] */ DWORD DataByteCount,
-            /* [in] */ __RPC__in_opt IStream *pChunkDataStream,
-            /* [out] */ __RPC__out GUID *pRequestId) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD ChunkCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(ChunkCount)  DedupChunk *pChunkMetadata,
+            /* [annotation][in] */ 
+            _In_  DWORD DataByteCount,
+            /* [annotation][in] */ 
+            _In_  IStream *pChunkDataStream,
+            /* [annotation][out] */ 
+            _Out_  GUID *pRequestId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CommitStreams( 
-            /* [in] */ DWORD StreamCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(StreamCount) DedupStream *pStreams,
-            /* [in] */ DWORD EntryCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(EntryCount) DedupStreamEntry *pEntries,
-            /* [out] */ __RPC__out GUID *pRequestId) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD StreamCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(StreamCount)  DedupStream *pStreams,
+            /* [annotation][in] */ 
+            _In_  DWORD EntryCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(EntryCount)  DedupStreamEntry *pEntries,
+            /* [annotation][out] */ 
+            _Out_  GUID *pRequestId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CommitStreamsWithStream( 
-            /* [in] */ DWORD StreamCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(StreamCount) DedupStream *pStreams,
-            /* [in] */ DWORD EntryCount,
-            /* [in] */ __RPC__in_opt IStream *pEntriesStream,
-            /* [out] */ __RPC__out GUID *pRequestId) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD StreamCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(StreamCount)  DedupStream *pStreams,
+            /* [annotation][in] */ 
+            _In_  DWORD EntryCount,
+            /* [annotation][in] */ 
+            _In_  IStream *pEntriesStream,
+            /* [annotation][out] */ 
+            _Out_  GUID *pRequestId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStreams( 
-            /* [in] */ DWORD StreamCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(StreamCount) BSTR *pStreamPaths,
-            /* [out] */ __RPC__out GUID *pRequestId) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD StreamCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(StreamCount)  BSTR *pStreamPaths,
+            /* [annotation][out] */ 
+            _Out_  GUID *pRequestId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStreamsResults( 
-            /* [in] */ GUID RequestId,
-            /* [in] */ DWORD MaxWaitMs,
-            /* [in] */ DWORD StreamEntryIndex,
-            /* [out] */ __RPC__out DWORD *pStreamCount,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pStreamCount) DedupStream **ppStreams,
-            /* [out] */ __RPC__out DWORD *pEntryCount,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pEntryCount) DedupStreamEntry **ppEntries,
-            /* [out] */ __RPC__out DedupDataPortRequestStatus *pStatus,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pStreamCount) HRESULT **ppItemResults) = 0;
+            /* [annotation][in] */ 
+            _In_  GUID RequestId,
+            /* [annotation][in] */ 
+            _In_  DWORD MaxWaitMs,
+            /* [annotation][in] */ 
+            _In_  DWORD StreamEntryIndex,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pStreamCount,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pStreamCount)  DedupStream **ppStreams,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pEntryCount,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pEntryCount)  DedupStreamEntry **ppEntries,
+            /* [annotation][out] */ 
+            _Out_  DedupDataPortRequestStatus *pStatus,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pStreamCount)  HRESULT **ppItemResults) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetChunks( 
-            /* [in] */ DWORD Count,
-            /* [size_is][in] */ __RPC__in_ecount_full(Count) DedupHash *pHashes,
-            /* [out] */ __RPC__out GUID *pRequestId) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD Count,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(Count)  DedupHash *pHashes,
+            /* [annotation][out] */ 
+            _Out_  GUID *pRequestId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetChunksResults( 
-            /* [in] */ GUID RequestId,
-            /* [in] */ DWORD MaxWaitMs,
-            /* [in] */ DWORD ChunkIndex,
-            /* [out] */ __RPC__out DWORD *pChunkCount,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pChunkCount) DedupChunk **ppChunkMetadata,
-            /* [out] */ __RPC__out DWORD *pDataByteCount,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pDataByteCount) BYTE **ppChunkData,
-            /* [out] */ __RPC__out DedupDataPortRequestStatus *pStatus,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pChunkCount) HRESULT **ppItemResults) = 0;
+            /* [annotation][in] */ 
+            _In_  GUID RequestId,
+            /* [annotation][in] */ 
+            _In_  DWORD MaxWaitMs,
+            /* [annotation][in] */ 
+            _In_  DWORD ChunkIndex,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pChunkCount,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pChunkCount)  DedupChunk **ppChunkMetadata,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pDataByteCount,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pDataByteCount)  BYTE **ppChunkData,
+            /* [annotation][out] */ 
+            _Out_  DedupDataPortRequestStatus *pStatus,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pChunkCount)  HRESULT **ppItemResults) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRequestStatus( 
-            /* [in] */ GUID RequestId,
-            /* [out] */ __RPC__out DedupDataPortRequestStatus *pStatus) = 0;
+            /* [annotation][in] */ 
+            _In_  GUID RequestId,
+            /* [annotation][out] */ 
+            _Out_  DedupDataPortRequestStatus *pStatus) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRequestResults( 
-            /* [in] */ GUID RequestId,
-            /* [in] */ DWORD MaxWaitMs,
-            /* [out] */ __RPC__out HRESULT *pBatchResult,
-            /* [out] */ __RPC__out DWORD *pBatchCount,
-            /* [out] */ __RPC__out DedupDataPortRequestStatus *pStatus,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pBatchCount) HRESULT **ppItemResults) = 0;
+            /* [annotation][in] */ 
+            _In_  GUID RequestId,
+            /* [annotation][in] */ 
+            _In_  DWORD MaxWaitMs,
+            /* [annotation][out] */ 
+            _Out_  HRESULT *pBatchResult,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pBatchCount,
+            /* [annotation][out] */ 
+            _Out_  DedupDataPortRequestStatus *pStatus,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pBatchCount)  HRESULT **ppItemResults) = 0;
         
     };
     
@@ -216,7 +272,8 @@ EXTERN_C const IID IID_IDedupDataPort;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDedupDataPort * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -231,107 +288,163 @@ EXTERN_C const IID IID_IDedupDataPort;
         DECLSPEC_XFGVIRT(IDedupDataPort, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in IDedupDataPort * This,
-            /* [out] */ __RPC__out DedupDataPortVolumeStatus *pStatus,
+            /* [annotation][out] */ 
+            _Out_  DedupDataPortVolumeStatus *pStatus,
             /* [optional][out] */ __RPC__out DWORD *pDataHeadroomMb);
         
         DECLSPEC_XFGVIRT(IDedupDataPort, LookupChunks)
         HRESULT ( STDMETHODCALLTYPE *LookupChunks )( 
             __RPC__in IDedupDataPort * This,
-            /* [in] */ DWORD Count,
-            /* [size_is][in] */ __RPC__in_ecount_full(Count) DedupHash *pHashes,
-            /* [out] */ __RPC__out GUID *pRequestId);
+            /* [annotation][in] */ 
+            _In_  DWORD Count,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(Count)  DedupHash *pHashes,
+            /* [annotation][out] */ 
+            _Out_  GUID *pRequestId);
         
         DECLSPEC_XFGVIRT(IDedupDataPort, InsertChunks)
         HRESULT ( STDMETHODCALLTYPE *InsertChunks )( 
             __RPC__in IDedupDataPort * This,
-            /* [in] */ DWORD ChunkCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(ChunkCount) DedupChunk *pChunkMetadata,
-            /* [in] */ DWORD DataByteCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(DataByteCount) BYTE *pChunkData,
-            /* [out] */ __RPC__out GUID *pRequestId);
+            /* [annotation][in] */ 
+            _In_  DWORD ChunkCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(ChunkCount)  DedupChunk *pChunkMetadata,
+            /* [annotation][in] */ 
+            _In_  DWORD DataByteCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(DataByteCount)  BYTE *pChunkData,
+            /* [annotation][out] */ 
+            _Out_  GUID *pRequestId);
         
         DECLSPEC_XFGVIRT(IDedupDataPort, InsertChunksWithStream)
         HRESULT ( STDMETHODCALLTYPE *InsertChunksWithStream )( 
             __RPC__in IDedupDataPort * This,
-            /* [in] */ DWORD ChunkCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(ChunkCount) DedupChunk *pChunkMetadata,
-            /* [in] */ DWORD DataByteCount,
-            /* [in] */ __RPC__in_opt IStream *pChunkDataStream,
-            /* [out] */ __RPC__out GUID *pRequestId);
+            /* [annotation][in] */ 
+            _In_  DWORD ChunkCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(ChunkCount)  DedupChunk *pChunkMetadata,
+            /* [annotation][in] */ 
+            _In_  DWORD DataByteCount,
+            /* [annotation][in] */ 
+            _In_  IStream *pChunkDataStream,
+            /* [annotation][out] */ 
+            _Out_  GUID *pRequestId);
         
         DECLSPEC_XFGVIRT(IDedupDataPort, CommitStreams)
         HRESULT ( STDMETHODCALLTYPE *CommitStreams )( 
             __RPC__in IDedupDataPort * This,
-            /* [in] */ DWORD StreamCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(StreamCount) DedupStream *pStreams,
-            /* [in] */ DWORD EntryCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(EntryCount) DedupStreamEntry *pEntries,
-            /* [out] */ __RPC__out GUID *pRequestId);
+            /* [annotation][in] */ 
+            _In_  DWORD StreamCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(StreamCount)  DedupStream *pStreams,
+            /* [annotation][in] */ 
+            _In_  DWORD EntryCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(EntryCount)  DedupStreamEntry *pEntries,
+            /* [annotation][out] */ 
+            _Out_  GUID *pRequestId);
         
         DECLSPEC_XFGVIRT(IDedupDataPort, CommitStreamsWithStream)
         HRESULT ( STDMETHODCALLTYPE *CommitStreamsWithStream )( 
             __RPC__in IDedupDataPort * This,
-            /* [in] */ DWORD StreamCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(StreamCount) DedupStream *pStreams,
-            /* [in] */ DWORD EntryCount,
-            /* [in] */ __RPC__in_opt IStream *pEntriesStream,
-            /* [out] */ __RPC__out GUID *pRequestId);
+            /* [annotation][in] */ 
+            _In_  DWORD StreamCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(StreamCount)  DedupStream *pStreams,
+            /* [annotation][in] */ 
+            _In_  DWORD EntryCount,
+            /* [annotation][in] */ 
+            _In_  IStream *pEntriesStream,
+            /* [annotation][out] */ 
+            _Out_  GUID *pRequestId);
         
         DECLSPEC_XFGVIRT(IDedupDataPort, GetStreams)
         HRESULT ( STDMETHODCALLTYPE *GetStreams )( 
             __RPC__in IDedupDataPort * This,
-            /* [in] */ DWORD StreamCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(StreamCount) BSTR *pStreamPaths,
-            /* [out] */ __RPC__out GUID *pRequestId);
+            /* [annotation][in] */ 
+            _In_  DWORD StreamCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(StreamCount)  BSTR *pStreamPaths,
+            /* [annotation][out] */ 
+            _Out_  GUID *pRequestId);
         
         DECLSPEC_XFGVIRT(IDedupDataPort, GetStreamsResults)
         HRESULT ( STDMETHODCALLTYPE *GetStreamsResults )( 
             __RPC__in IDedupDataPort * This,
-            /* [in] */ GUID RequestId,
-            /* [in] */ DWORD MaxWaitMs,
-            /* [in] */ DWORD StreamEntryIndex,
-            /* [out] */ __RPC__out DWORD *pStreamCount,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pStreamCount) DedupStream **ppStreams,
-            /* [out] */ __RPC__out DWORD *pEntryCount,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pEntryCount) DedupStreamEntry **ppEntries,
-            /* [out] */ __RPC__out DedupDataPortRequestStatus *pStatus,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pStreamCount) HRESULT **ppItemResults);
+            /* [annotation][in] */ 
+            _In_  GUID RequestId,
+            /* [annotation][in] */ 
+            _In_  DWORD MaxWaitMs,
+            /* [annotation][in] */ 
+            _In_  DWORD StreamEntryIndex,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pStreamCount,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pStreamCount)  DedupStream **ppStreams,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pEntryCount,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pEntryCount)  DedupStreamEntry **ppEntries,
+            /* [annotation][out] */ 
+            _Out_  DedupDataPortRequestStatus *pStatus,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pStreamCount)  HRESULT **ppItemResults);
         
         DECLSPEC_XFGVIRT(IDedupDataPort, GetChunks)
         HRESULT ( STDMETHODCALLTYPE *GetChunks )( 
             __RPC__in IDedupDataPort * This,
-            /* [in] */ DWORD Count,
-            /* [size_is][in] */ __RPC__in_ecount_full(Count) DedupHash *pHashes,
-            /* [out] */ __RPC__out GUID *pRequestId);
+            /* [annotation][in] */ 
+            _In_  DWORD Count,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(Count)  DedupHash *pHashes,
+            /* [annotation][out] */ 
+            _Out_  GUID *pRequestId);
         
         DECLSPEC_XFGVIRT(IDedupDataPort, GetChunksResults)
         HRESULT ( STDMETHODCALLTYPE *GetChunksResults )( 
             __RPC__in IDedupDataPort * This,
-            /* [in] */ GUID RequestId,
-            /* [in] */ DWORD MaxWaitMs,
-            /* [in] */ DWORD ChunkIndex,
-            /* [out] */ __RPC__out DWORD *pChunkCount,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pChunkCount) DedupChunk **ppChunkMetadata,
-            /* [out] */ __RPC__out DWORD *pDataByteCount,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pDataByteCount) BYTE **ppChunkData,
-            /* [out] */ __RPC__out DedupDataPortRequestStatus *pStatus,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pChunkCount) HRESULT **ppItemResults);
+            /* [annotation][in] */ 
+            _In_  GUID RequestId,
+            /* [annotation][in] */ 
+            _In_  DWORD MaxWaitMs,
+            /* [annotation][in] */ 
+            _In_  DWORD ChunkIndex,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pChunkCount,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pChunkCount)  DedupChunk **ppChunkMetadata,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pDataByteCount,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pDataByteCount)  BYTE **ppChunkData,
+            /* [annotation][out] */ 
+            _Out_  DedupDataPortRequestStatus *pStatus,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pChunkCount)  HRESULT **ppItemResults);
         
         DECLSPEC_XFGVIRT(IDedupDataPort, GetRequestStatus)
         HRESULT ( STDMETHODCALLTYPE *GetRequestStatus )( 
             __RPC__in IDedupDataPort * This,
-            /* [in] */ GUID RequestId,
-            /* [out] */ __RPC__out DedupDataPortRequestStatus *pStatus);
+            /* [annotation][in] */ 
+            _In_  GUID RequestId,
+            /* [annotation][out] */ 
+            _Out_  DedupDataPortRequestStatus *pStatus);
         
         DECLSPEC_XFGVIRT(IDedupDataPort, GetRequestResults)
         HRESULT ( STDMETHODCALLTYPE *GetRequestResults )( 
             __RPC__in IDedupDataPort * This,
-            /* [in] */ GUID RequestId,
-            /* [in] */ DWORD MaxWaitMs,
-            /* [out] */ __RPC__out HRESULT *pBatchResult,
-            /* [out] */ __RPC__out DWORD *pBatchCount,
-            /* [out] */ __RPC__out DedupDataPortRequestStatus *pStatus,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pBatchCount) HRESULT **ppItemResults);
+            /* [annotation][in] */ 
+            _In_  GUID RequestId,
+            /* [annotation][in] */ 
+            _In_  DWORD MaxWaitMs,
+            /* [annotation][out] */ 
+            _Out_  HRESULT *pBatchResult,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pBatchCount,
+            /* [annotation][out] */ 
+            _Out_  DedupDataPortRequestStatus *pStatus,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pBatchCount)  HRESULT **ppItemResults);
         
         END_INTERFACE
     } IDedupDataPortVtbl;
@@ -419,21 +532,32 @@ EXTERN_C const IID IID_IDedupDataPortManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetConfiguration( 
-            /* [out] */ __RPC__out DWORD *pMinChunkSize,
-            /* [out] */ __RPC__out DWORD *pMaxChunkSize,
-            /* [out] */ __RPC__out DedupChunkingAlgorithm *pChunkingAlgorithm,
-            /* [out] */ __RPC__out DedupHashingAlgorithm *pHashingAlgorithm,
-            /* [out] */ __RPC__out DedupCompressionAlgorithm *pCompressionAlgorithm) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pMinChunkSize,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pMaxChunkSize,
+            /* [annotation][out] */ 
+            _Out_  DedupChunkingAlgorithm *pChunkingAlgorithm,
+            /* [annotation][out] */ 
+            _Out_  DedupHashingAlgorithm *pHashingAlgorithm,
+            /* [annotation][out] */ 
+            _Out_  DedupCompressionAlgorithm *pCompressionAlgorithm) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVolumeStatus( 
-            /* [in] */ DWORD Options,
-            /* [in] */ __RPC__in BSTR Path,
-            /* [out] */ __RPC__out DedupDataPortVolumeStatus *pStatus) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD Options,
+            /* [annotation][in] */ 
+            _In_  BSTR Path,
+            /* [annotation][out] */ 
+            _Out_  DedupDataPortVolumeStatus *pStatus) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVolumeDataPort( 
-            /* [in] */ DWORD Options,
-            /* [in] */ __RPC__in BSTR Path,
-            /* [out] */ __RPC__deref_out_opt IDedupDataPort **ppDataPort) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD Options,
+            /* [annotation][in] */ 
+            _In_  BSTR Path,
+            /* [annotation][out] */ 
+            _Out_  IDedupDataPort **ppDataPort) = 0;
         
     };
     
@@ -447,7 +571,8 @@ EXTERN_C const IID IID_IDedupDataPortManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDedupDataPortManager * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -462,25 +587,36 @@ EXTERN_C const IID IID_IDedupDataPortManager;
         DECLSPEC_XFGVIRT(IDedupDataPortManager, GetConfiguration)
         HRESULT ( STDMETHODCALLTYPE *GetConfiguration )( 
             __RPC__in IDedupDataPortManager * This,
-            /* [out] */ __RPC__out DWORD *pMinChunkSize,
-            /* [out] */ __RPC__out DWORD *pMaxChunkSize,
-            /* [out] */ __RPC__out DedupChunkingAlgorithm *pChunkingAlgorithm,
-            /* [out] */ __RPC__out DedupHashingAlgorithm *pHashingAlgorithm,
-            /* [out] */ __RPC__out DedupCompressionAlgorithm *pCompressionAlgorithm);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pMinChunkSize,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pMaxChunkSize,
+            /* [annotation][out] */ 
+            _Out_  DedupChunkingAlgorithm *pChunkingAlgorithm,
+            /* [annotation][out] */ 
+            _Out_  DedupHashingAlgorithm *pHashingAlgorithm,
+            /* [annotation][out] */ 
+            _Out_  DedupCompressionAlgorithm *pCompressionAlgorithm);
         
         DECLSPEC_XFGVIRT(IDedupDataPortManager, GetVolumeStatus)
         HRESULT ( STDMETHODCALLTYPE *GetVolumeStatus )( 
             __RPC__in IDedupDataPortManager * This,
-            /* [in] */ DWORD Options,
-            /* [in] */ __RPC__in BSTR Path,
-            /* [out] */ __RPC__out DedupDataPortVolumeStatus *pStatus);
+            /* [annotation][in] */ 
+            _In_  DWORD Options,
+            /* [annotation][in] */ 
+            _In_  BSTR Path,
+            /* [annotation][out] */ 
+            _Out_  DedupDataPortVolumeStatus *pStatus);
         
         DECLSPEC_XFGVIRT(IDedupDataPortManager, GetVolumeDataPort)
         HRESULT ( STDMETHODCALLTYPE *GetVolumeDataPort )( 
             __RPC__in IDedupDataPortManager * This,
-            /* [in] */ DWORD Options,
-            /* [in] */ __RPC__in BSTR Path,
-            /* [out] */ __RPC__deref_out_opt IDedupDataPort **ppDataPort);
+            /* [annotation][in] */ 
+            _In_  DWORD Options,
+            /* [annotation][in] */ 
+            _In_  BSTR Path,
+            /* [annotation][out] */ 
+            _Out_  IDedupDataPort **ppDataPort);
         
         END_INTERFACE
     } IDedupDataPortManagerVtbl;

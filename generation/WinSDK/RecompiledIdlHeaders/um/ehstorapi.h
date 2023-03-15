@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -30,8 +30,8 @@
 #include "ole2.h"
 #endif /*COM_NO_WINDOWS_H*/
 
-#ifndef __EhStorAPI_h__
-#define __EhStorAPI_h__
+#ifndef __ehstorapi_h__
+#define __ehstorapi_h__
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
@@ -149,7 +149,7 @@ extern "C"{
 #endif 
 
 
-/* interface __MIDL_itf_EhStorAPI_0000_0000 */
+/* interface __MIDL_itf_ehstorapi_0000_0000 */
 /* [local] */ 
 
 #include <winapifamily.h>
@@ -189,8 +189,8 @@ typedef /* [public][helpstring][v1_enum] */ enum _ACT_AUTHORIZATION_STATE_VALUE 
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_EhStorAPI_0000_0000_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_EhStorAPI_0000_0000_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_ehstorapi_0000_0000_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_ehstorapi_0000_0000_v0_0_s_ifspec;
 
 #ifndef __IEnumEnhancedStorageACT_INTERFACE_DEFINED__
 #define __IEnumEnhancedStorageACT_INTERFACE_DEFINED__
@@ -208,12 +208,16 @@ EXTERN_C const IID IID_IEnumEnhancedStorageACT;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetACTs( 
-            /* [size_is][size_is][out] */ IEnhancedStorageACT ***pppIEnhancedStorageACTs,
-            /* [out] */ ULONG *pcEnhancedStorageACTs) = 0;
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcEnhancedStorageACTs)  IEnhancedStorageACT ***pppIEnhancedStorageACTs,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcEnhancedStorageACTs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMatchingACT( 
-            /* [in] */ LPCWSTR szVolume,
-            /* [out] */ IEnhancedStorageACT **ppIEnhancedStorageACT) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szVolume,
+            /* [annotation][out] */ 
+            _Out_  IEnhancedStorageACT **ppIEnhancedStorageACT) = 0;
         
     };
     
@@ -227,7 +231,8 @@ EXTERN_C const IID IID_IEnumEnhancedStorageACT;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumEnhancedStorageACT * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -242,14 +247,18 @@ EXTERN_C const IID IID_IEnumEnhancedStorageACT;
         DECLSPEC_XFGVIRT(IEnumEnhancedStorageACT, GetACTs)
         HRESULT ( STDMETHODCALLTYPE *GetACTs )( 
             IEnumEnhancedStorageACT * This,
-            /* [size_is][size_is][out] */ IEnhancedStorageACT ***pppIEnhancedStorageACTs,
-            /* [out] */ ULONG *pcEnhancedStorageACTs);
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcEnhancedStorageACTs)  IEnhancedStorageACT ***pppIEnhancedStorageACTs,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcEnhancedStorageACTs);
         
         DECLSPEC_XFGVIRT(IEnumEnhancedStorageACT, GetMatchingACT)
         HRESULT ( STDMETHODCALLTYPE *GetMatchingACT )( 
             IEnumEnhancedStorageACT * This,
-            /* [in] */ LPCWSTR szVolume,
-            /* [out] */ IEnhancedStorageACT **ppIEnhancedStorageACT);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szVolume,
+            /* [annotation][out] */ 
+            _Out_  IEnhancedStorageACT **ppIEnhancedStorageACT);
         
         END_INTERFACE
     } IEnumEnhancedStorageACTVtbl;
@@ -291,15 +300,15 @@ EXTERN_C const IID IID_IEnumEnhancedStorageACT;
 #endif 	/* __IEnumEnhancedStorageACT_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_EhStorAPI_0000_0001 */
+/* interface __MIDL_itf_ehstorapi_0000_0001 */
 /* [local] */ 
 
 #define ACT_AUTHORIZE_ON_RESUME               0x00000001
 #define ACT_AUTHORIZE_ON_SESSION_UNLOCK       0x00000002
 
 
-extern RPC_IF_HANDLE __MIDL_itf_EhStorAPI_0000_0001_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_EhStorAPI_0000_0001_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_ehstorapi_0000_0001_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_ehstorapi_0000_0001_v0_0_s_ifspec;
 
 #ifndef __IEnhancedStorageACT_INTERFACE_DEFINED__
 #define __IEnhancedStorageACT_INTERFACE_DEFINED__
@@ -317,23 +326,30 @@ EXTERN_C const IID IID_IEnhancedStorageACT;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Authorize( 
-            /* [in] */ DWORD hwndParent,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD hwndParent,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Unauthorize( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAuthorizationState( 
-            /* [out] */ ACT_AUTHORIZATION_STATE *pState) = 0;
+            /* [annotation][out] */ 
+            _Out_  ACT_AUTHORIZATION_STATE *pState) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMatchingVolume( 
-            /* [out] */ LPWSTR *ppwszVolume) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwszVolume) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetUniqueIdentity( 
-            /* [out] */ LPWSTR *ppwszIdentity) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwszIdentity) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSilos( 
-            /* [size_is][size_is][size_is][out] */ IEnhancedStorageSilo ***pppIEnhancedStorageSilos,
-            /* [out] */ ULONG *pcEnhancedStorageSilos) = 0;
+            /* [annotation][size_is][size_is][size_is][out] */ 
+            _Out_writes_(*pcEnhancedStorageSilos)  IEnhancedStorageSilo ***pppIEnhancedStorageSilos,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcEnhancedStorageSilos) = 0;
         
     };
     
@@ -347,7 +363,8 @@ EXTERN_C const IID IID_IEnhancedStorageACT;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnhancedStorageACT * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -362,8 +379,10 @@ EXTERN_C const IID IID_IEnhancedStorageACT;
         DECLSPEC_XFGVIRT(IEnhancedStorageACT, Authorize)
         HRESULT ( STDMETHODCALLTYPE *Authorize )( 
             IEnhancedStorageACT * This,
-            /* [in] */ DWORD hwndParent,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD hwndParent,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageACT, Unauthorize)
         HRESULT ( STDMETHODCALLTYPE *Unauthorize )( 
@@ -372,23 +391,28 @@ EXTERN_C const IID IID_IEnhancedStorageACT;
         DECLSPEC_XFGVIRT(IEnhancedStorageACT, GetAuthorizationState)
         HRESULT ( STDMETHODCALLTYPE *GetAuthorizationState )( 
             IEnhancedStorageACT * This,
-            /* [out] */ ACT_AUTHORIZATION_STATE *pState);
+            /* [annotation][out] */ 
+            _Out_  ACT_AUTHORIZATION_STATE *pState);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageACT, GetMatchingVolume)
         HRESULT ( STDMETHODCALLTYPE *GetMatchingVolume )( 
             IEnhancedStorageACT * This,
-            /* [out] */ LPWSTR *ppwszVolume);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwszVolume);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageACT, GetUniqueIdentity)
         HRESULT ( STDMETHODCALLTYPE *GetUniqueIdentity )( 
             IEnhancedStorageACT * This,
-            /* [out] */ LPWSTR *ppwszIdentity);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwszIdentity);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageACT, GetSilos)
         HRESULT ( STDMETHODCALLTYPE *GetSilos )( 
             IEnhancedStorageACT * This,
-            /* [size_is][size_is][size_is][out] */ IEnhancedStorageSilo ***pppIEnhancedStorageSilos,
-            /* [out] */ ULONG *pcEnhancedStorageSilos);
+            /* [annotation][size_is][size_is][size_is][out] */ 
+            _Out_writes_(*pcEnhancedStorageSilos)  IEnhancedStorageSilo ***pppIEnhancedStorageSilos,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcEnhancedStorageSilos);
         
         END_INTERFACE
     } IEnhancedStorageACTVtbl;
@@ -458,10 +482,12 @@ EXTERN_C const IID IID_IEnhancedStorageACT2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDeviceName( 
-            /* [out] */ LPWSTR *ppwszDeviceName) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwszDeviceName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsDeviceRemovable( 
-            /* [out] */ BOOL *pIsDeviceRemovable) = 0;
+            /* [annotation][out] */ 
+            _Out_  BOOL *pIsDeviceRemovable) = 0;
         
     };
     
@@ -475,7 +501,8 @@ EXTERN_C const IID IID_IEnhancedStorageACT2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnhancedStorageACT2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -490,8 +517,10 @@ EXTERN_C const IID IID_IEnhancedStorageACT2;
         DECLSPEC_XFGVIRT(IEnhancedStorageACT, Authorize)
         HRESULT ( STDMETHODCALLTYPE *Authorize )( 
             IEnhancedStorageACT2 * This,
-            /* [in] */ DWORD hwndParent,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD hwndParent,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageACT, Unauthorize)
         HRESULT ( STDMETHODCALLTYPE *Unauthorize )( 
@@ -500,33 +529,40 @@ EXTERN_C const IID IID_IEnhancedStorageACT2;
         DECLSPEC_XFGVIRT(IEnhancedStorageACT, GetAuthorizationState)
         HRESULT ( STDMETHODCALLTYPE *GetAuthorizationState )( 
             IEnhancedStorageACT2 * This,
-            /* [out] */ ACT_AUTHORIZATION_STATE *pState);
+            /* [annotation][out] */ 
+            _Out_  ACT_AUTHORIZATION_STATE *pState);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageACT, GetMatchingVolume)
         HRESULT ( STDMETHODCALLTYPE *GetMatchingVolume )( 
             IEnhancedStorageACT2 * This,
-            /* [out] */ LPWSTR *ppwszVolume);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwszVolume);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageACT, GetUniqueIdentity)
         HRESULT ( STDMETHODCALLTYPE *GetUniqueIdentity )( 
             IEnhancedStorageACT2 * This,
-            /* [out] */ LPWSTR *ppwszIdentity);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwszIdentity);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageACT, GetSilos)
         HRESULT ( STDMETHODCALLTYPE *GetSilos )( 
             IEnhancedStorageACT2 * This,
-            /* [size_is][size_is][size_is][out] */ IEnhancedStorageSilo ***pppIEnhancedStorageSilos,
-            /* [out] */ ULONG *pcEnhancedStorageSilos);
+            /* [annotation][size_is][size_is][size_is][out] */ 
+            _Out_writes_(*pcEnhancedStorageSilos)  IEnhancedStorageSilo ***pppIEnhancedStorageSilos,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcEnhancedStorageSilos);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageACT2, GetDeviceName)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceName )( 
             IEnhancedStorageACT2 * This,
-            /* [out] */ LPWSTR *ppwszDeviceName);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwszDeviceName);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageACT2, IsDeviceRemovable)
         HRESULT ( STDMETHODCALLTYPE *IsDeviceRemovable )( 
             IEnhancedStorageACT2 * This,
-            /* [out] */ BOOL *pIsDeviceRemovable);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pIsDeviceRemovable);
         
         END_INTERFACE
     } IEnhancedStorageACT2Vtbl;
@@ -587,15 +623,15 @@ EXTERN_C const IID IID_IEnhancedStorageACT2;
 #endif 	/* __IEnhancedStorageACT2_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_EhStorAPI_0000_0003 */
+/* interface __MIDL_itf_ehstorapi_0000_0003 */
 /* [local] */ 
 
 #define ACT_UNAUTHORIZE_ON_SUSPEND            0x00000001
 #define ACT_UNAUTHORIZE_ON_SESSION_LOCK       0x00000002
 
 
-extern RPC_IF_HANDLE __MIDL_itf_EhStorAPI_0000_0003_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_EhStorAPI_0000_0003_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_ehstorapi_0000_0003_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_ehstorapi_0000_0003_v0_0_s_ifspec;
 
 #ifndef __IEnhancedStorageACT3_INTERFACE_DEFINED__
 #define __IEnhancedStorageACT3_INTERFACE_DEFINED__
@@ -613,13 +649,16 @@ EXTERN_C const IID IID_IEnhancedStorageACT3;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE UnauthorizeEx( 
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsQueueFrozen( 
-            /* [out] */ BOOL *pIsQueueFrozen) = 0;
+            /* [annotation][out] */ 
+            _Out_  BOOL *pIsQueueFrozen) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetShellExtSupport( 
-            /* [out] */ BOOL *pShellExtSupport) = 0;
+            /* [annotation][out] */ 
+            _Out_  BOOL *pShellExtSupport) = 0;
         
     };
     
@@ -633,7 +672,8 @@ EXTERN_C const IID IID_IEnhancedStorageACT3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnhancedStorageACT3 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -648,8 +688,10 @@ EXTERN_C const IID IID_IEnhancedStorageACT3;
         DECLSPEC_XFGVIRT(IEnhancedStorageACT, Authorize)
         HRESULT ( STDMETHODCALLTYPE *Authorize )( 
             IEnhancedStorageACT3 * This,
-            /* [in] */ DWORD hwndParent,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD hwndParent,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageACT, Unauthorize)
         HRESULT ( STDMETHODCALLTYPE *Unauthorize )( 
@@ -658,48 +700,58 @@ EXTERN_C const IID IID_IEnhancedStorageACT3;
         DECLSPEC_XFGVIRT(IEnhancedStorageACT, GetAuthorizationState)
         HRESULT ( STDMETHODCALLTYPE *GetAuthorizationState )( 
             IEnhancedStorageACT3 * This,
-            /* [out] */ ACT_AUTHORIZATION_STATE *pState);
+            /* [annotation][out] */ 
+            _Out_  ACT_AUTHORIZATION_STATE *pState);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageACT, GetMatchingVolume)
         HRESULT ( STDMETHODCALLTYPE *GetMatchingVolume )( 
             IEnhancedStorageACT3 * This,
-            /* [out] */ LPWSTR *ppwszVolume);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwszVolume);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageACT, GetUniqueIdentity)
         HRESULT ( STDMETHODCALLTYPE *GetUniqueIdentity )( 
             IEnhancedStorageACT3 * This,
-            /* [out] */ LPWSTR *ppwszIdentity);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwszIdentity);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageACT, GetSilos)
         HRESULT ( STDMETHODCALLTYPE *GetSilos )( 
             IEnhancedStorageACT3 * This,
-            /* [size_is][size_is][size_is][out] */ IEnhancedStorageSilo ***pppIEnhancedStorageSilos,
-            /* [out] */ ULONG *pcEnhancedStorageSilos);
+            /* [annotation][size_is][size_is][size_is][out] */ 
+            _Out_writes_(*pcEnhancedStorageSilos)  IEnhancedStorageSilo ***pppIEnhancedStorageSilos,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcEnhancedStorageSilos);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageACT2, GetDeviceName)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceName )( 
             IEnhancedStorageACT3 * This,
-            /* [out] */ LPWSTR *ppwszDeviceName);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwszDeviceName);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageACT2, IsDeviceRemovable)
         HRESULT ( STDMETHODCALLTYPE *IsDeviceRemovable )( 
             IEnhancedStorageACT3 * This,
-            /* [out] */ BOOL *pIsDeviceRemovable);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pIsDeviceRemovable);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageACT3, UnauthorizeEx)
         HRESULT ( STDMETHODCALLTYPE *UnauthorizeEx )( 
             IEnhancedStorageACT3 * This,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageACT3, IsQueueFrozen)
         HRESULT ( STDMETHODCALLTYPE *IsQueueFrozen )( 
             IEnhancedStorageACT3 * This,
-            /* [out] */ BOOL *pIsQueueFrozen);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pIsQueueFrozen);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageACT3, GetShellExtSupport)
         HRESULT ( STDMETHODCALLTYPE *GetShellExtSupport )( 
             IEnhancedStorageACT3 * This,
-            /* [out] */ BOOL *pShellExtSupport);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pShellExtSupport);
         
         END_INTERFACE
     } IEnhancedStorageACT3Vtbl;
@@ -786,24 +838,34 @@ EXTERN_C const IID IID_IEnhancedStorageSilo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetInfo( 
-            /* [out] */ SILO_INFO *pSiloInfo) = 0;
+            /* [annotation][out] */ 
+            _Out_  SILO_INFO *pSiloInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetActions( 
-            /* [size_is][size_is][out] */ IEnhancedStorageSiloAction ***pppIEnhancedStorageSiloActions,
-            /* [out] */ ULONG *pcEnhancedStorageSiloActions) = 0;
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcEnhancedStorageSiloActions)  IEnhancedStorageSiloAction ***pppIEnhancedStorageSiloActions,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcEnhancedStorageSiloActions) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SendCommand( 
-            /* [in] */ UCHAR Command,
-            /* [size_is][in] */ BYTE *pbCommandBuffer,
-            /* [in] */ ULONG cbCommandBuffer,
-            /* [size_is][out] */ BYTE *pbResponseBuffer,
-            /* [out][in] */ ULONG *pcbResponseBuffer) = 0;
+            /* [annotation][in] */ 
+            _In_  UCHAR Command,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbCommandBuffer)  BYTE *pbCommandBuffer,
+            /* [annotation][in] */ 
+            _In_  ULONG cbCommandBuffer,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(*pcbResponseBuffer)  BYTE *pbResponseBuffer,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *pcbResponseBuffer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPortableDevice( 
-            /* [out] */ IPortableDevice **ppIPortableDevice) = 0;
+            /* [annotation][out] */ 
+            _Out_  IPortableDevice **ppIPortableDevice) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDevicePath( 
-            /* [out] */ LPWSTR *ppwszSiloDevicePath) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwszSiloDevicePath) = 0;
         
     };
     
@@ -817,7 +879,8 @@ EXTERN_C const IID IID_IEnhancedStorageSilo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnhancedStorageSilo * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -832,32 +895,42 @@ EXTERN_C const IID IID_IEnhancedStorageSilo;
         DECLSPEC_XFGVIRT(IEnhancedStorageSilo, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             IEnhancedStorageSilo * This,
-            /* [out] */ SILO_INFO *pSiloInfo);
+            /* [annotation][out] */ 
+            _Out_  SILO_INFO *pSiloInfo);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageSilo, GetActions)
         HRESULT ( STDMETHODCALLTYPE *GetActions )( 
             IEnhancedStorageSilo * This,
-            /* [size_is][size_is][out] */ IEnhancedStorageSiloAction ***pppIEnhancedStorageSiloActions,
-            /* [out] */ ULONG *pcEnhancedStorageSiloActions);
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcEnhancedStorageSiloActions)  IEnhancedStorageSiloAction ***pppIEnhancedStorageSiloActions,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcEnhancedStorageSiloActions);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageSilo, SendCommand)
         HRESULT ( STDMETHODCALLTYPE *SendCommand )( 
             IEnhancedStorageSilo * This,
-            /* [in] */ UCHAR Command,
-            /* [size_is][in] */ BYTE *pbCommandBuffer,
-            /* [in] */ ULONG cbCommandBuffer,
-            /* [size_is][out] */ BYTE *pbResponseBuffer,
-            /* [out][in] */ ULONG *pcbResponseBuffer);
+            /* [annotation][in] */ 
+            _In_  UCHAR Command,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbCommandBuffer)  BYTE *pbCommandBuffer,
+            /* [annotation][in] */ 
+            _In_  ULONG cbCommandBuffer,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(*pcbResponseBuffer)  BYTE *pbResponseBuffer,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *pcbResponseBuffer);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageSilo, GetPortableDevice)
         HRESULT ( STDMETHODCALLTYPE *GetPortableDevice )( 
             IEnhancedStorageSilo * This,
-            /* [out] */ IPortableDevice **ppIPortableDevice);
+            /* [annotation][out] */ 
+            _Out_  IPortableDevice **ppIPortableDevice);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageSilo, GetDevicePath)
         HRESULT ( STDMETHODCALLTYPE *GetDevicePath )( 
             IEnhancedStorageSilo * This,
-            /* [out] */ LPWSTR *ppwszSiloDevicePath);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwszSiloDevicePath);
         
         END_INTERFACE
     } IEnhancedStorageSiloVtbl;
@@ -924,10 +997,12 @@ EXTERN_C const IID IID_IEnhancedStorageSiloAction;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetName( 
-            /* [out] */ LPWSTR *ppwszActionName) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwszActionName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDescription( 
-            /* [out] */ LPWSTR *ppwszActionDescription) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwszActionDescription) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Invoke( void) = 0;
         
@@ -943,7 +1018,8 @@ EXTERN_C const IID IID_IEnhancedStorageSiloAction;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnhancedStorageSiloAction * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -958,12 +1034,14 @@ EXTERN_C const IID IID_IEnhancedStorageSiloAction;
         DECLSPEC_XFGVIRT(IEnhancedStorageSiloAction, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             IEnhancedStorageSiloAction * This,
-            /* [out] */ LPWSTR *ppwszActionName);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwszActionName);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageSiloAction, GetDescription)
         HRESULT ( STDMETHODCALLTYPE *GetDescription )( 
             IEnhancedStorageSiloAction * This,
-            /* [out] */ LPWSTR *ppwszActionDescription);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwszActionDescription);
         
         DECLSPEC_XFGVIRT(IEnhancedStorageSiloAction, Invoke)
         HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1055,7 +1133,7 @@ EnhancedStorageSiloAction;
 #endif
 #endif /* __EnhancedStorageAPILib_LIBRARY_DEFINED__ */
 
-/* interface __MIDL_itf_EhStorAPI_0000_0007 */
+/* interface __MIDL_itf_ehstorapi_0000_0007 */
 /* [local] */ 
 
 #endif
@@ -1063,8 +1141,8 @@ EnhancedStorageSiloAction;
 #pragma endregion
 
 
-extern RPC_IF_HANDLE __MIDL_itf_EhStorAPI_0000_0007_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_EhStorAPI_0000_0007_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_ehstorapi_0000_0007_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_ehstorapi_0000_0007_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

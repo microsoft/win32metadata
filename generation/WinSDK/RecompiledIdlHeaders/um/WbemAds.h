@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -128,13 +128,16 @@ EXTERN_C const IID IID_IWMIExtension;
     {
     public:
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_WMIObjectPath( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *strWMIObjectPath) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strWMIObjectPath) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetWMIObject( 
-            /* [retval][out] */ __RPC__deref_out_opt ISWbemObject **objWMIObject) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWMIObject) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetWMIServices( 
-            /* [retval][out] */ __RPC__deref_out_opt ISWbemServices **objWMIServices) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemServices **objWMIServices) = 0;
         
     };
     
@@ -148,7 +151,8 @@ EXTERN_C const IID IID_IWMIExtension;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMIExtension * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -163,23 +167,31 @@ EXTERN_C const IID IID_IWMIExtension;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWMIExtension * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWMIExtension * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWMIExtension * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -204,17 +216,20 @@ EXTERN_C const IID IID_IWMIExtension;
         DECLSPEC_XFGVIRT(IWMIExtension, get_WMIObjectPath)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_WMIObjectPath )( 
             __RPC__in IWMIExtension * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *strWMIObjectPath);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *strWMIObjectPath);
         
         DECLSPEC_XFGVIRT(IWMIExtension, GetWMIObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetWMIObject )( 
             __RPC__in IWMIExtension * This,
-            /* [retval][out] */ __RPC__deref_out_opt ISWbemObject **objWMIObject);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemObject **objWMIObject);
         
         DECLSPEC_XFGVIRT(IWMIExtension, GetWMIServices)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetWMIServices )( 
             __RPC__in IWMIExtension * This,
-            /* [retval][out] */ __RPC__deref_out_opt ISWbemServices **objWMIServices);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ISWbemServices **objWMIServices);
         
         END_INTERFACE
     } IWMIExtensionVtbl;

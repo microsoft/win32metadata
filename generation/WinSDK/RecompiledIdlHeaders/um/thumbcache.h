@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -207,20 +207,26 @@ EXTERN_C const IID IID_ISharedBitmap;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSharedBitmap( 
-            /* [out] */ __RPC__deref_out_opt HBITMAP *phbm) = 0;
+            /* [annotation][out] */ 
+            _Out_  HBITMAP *phbm) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSize( 
-            /* [out] */ __RPC__out SIZE *pSize) = 0;
+            /* [annotation][out] */ 
+            _Out_  SIZE *pSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFormat( 
-            /* [out] */ __RPC__out WTS_ALPHATYPE *pat) = 0;
+            /* [annotation][out] */ 
+            _Out_  WTS_ALPHATYPE *pat) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InitializeBitmap( 
-            /* [in] */ __RPC__in HBITMAP hbm,
-            /* [in] */ WTS_ALPHATYPE wtsAT) = 0;
+            /* [annotation][in] */ 
+            _In_  HBITMAP hbm,
+            /* [annotation][in] */ 
+            _In_  WTS_ALPHATYPE wtsAT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Detach( 
-            /* [out] */ __RPC__deref_out_opt HBITMAP *phbm) = 0;
+            /* [annotation][out] */ 
+            _Out_  HBITMAP *phbm) = 0;
         
     };
     
@@ -234,7 +240,8 @@ EXTERN_C const IID IID_ISharedBitmap;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISharedBitmap * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -249,28 +256,34 @@ EXTERN_C const IID IID_ISharedBitmap;
         DECLSPEC_XFGVIRT(ISharedBitmap, GetSharedBitmap)
         HRESULT ( STDMETHODCALLTYPE *GetSharedBitmap )( 
             __RPC__in ISharedBitmap * This,
-            /* [out] */ __RPC__deref_out_opt HBITMAP *phbm);
+            /* [annotation][out] */ 
+            _Out_  HBITMAP *phbm);
         
         DECLSPEC_XFGVIRT(ISharedBitmap, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in ISharedBitmap * This,
-            /* [out] */ __RPC__out SIZE *pSize);
+            /* [annotation][out] */ 
+            _Out_  SIZE *pSize);
         
         DECLSPEC_XFGVIRT(ISharedBitmap, GetFormat)
         HRESULT ( STDMETHODCALLTYPE *GetFormat )( 
             __RPC__in ISharedBitmap * This,
-            /* [out] */ __RPC__out WTS_ALPHATYPE *pat);
+            /* [annotation][out] */ 
+            _Out_  WTS_ALPHATYPE *pat);
         
         DECLSPEC_XFGVIRT(ISharedBitmap, InitializeBitmap)
         HRESULT ( STDMETHODCALLTYPE *InitializeBitmap )( 
             __RPC__in ISharedBitmap * This,
-            /* [in] */ __RPC__in HBITMAP hbm,
-            /* [in] */ WTS_ALPHATYPE wtsAT);
+            /* [annotation][in] */ 
+            _In_  HBITMAP hbm,
+            /* [annotation][in] */ 
+            _In_  WTS_ALPHATYPE wtsAT);
         
         DECLSPEC_XFGVIRT(ISharedBitmap, Detach)
         HRESULT ( STDMETHODCALLTYPE *Detach )( 
             __RPC__in ISharedBitmap * This,
-            /* [out] */ __RPC__deref_out_opt HBITMAP *phbm);
+            /* [annotation][out] */ 
+            _Out_  HBITMAP *phbm);
         
         END_INTERFACE
     } ISharedBitmapVtbl;
@@ -337,9 +350,12 @@ EXTERN_C const IID IID_IThumbnailCache;
     {
     public:
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetThumbnail( 
-            /* [in] */ IShellItem *pShellItem,
-            /* [in] */ UINT cxyRequestedThumbSize,
-            /* [in] */ WTS_FLAGS flags,
+            /* [annotation][in] */ 
+            _In_  IShellItem *pShellItem,
+            /* [annotation][in] */ 
+            _In_  UINT cxyRequestedThumbSize,
+            /* [annotation][in] */ 
+            _In_  WTS_FLAGS flags,
             /* [annotation][unique][out] */ 
             _Out_opt_  ISharedBitmap **ppvThumb,
             /* [annotation][unique][out] */ 
@@ -348,8 +364,10 @@ EXTERN_C const IID IID_IThumbnailCache;
             _Out_opt_  WTS_THUMBNAILID *pThumbnailID) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetThumbnailByID( 
-            /* [in] */ WTS_THUMBNAILID thumbnailID,
-            /* [in] */ UINT cxyRequestedThumbSize,
+            /* [annotation][in] */ 
+            _In_  WTS_THUMBNAILID thumbnailID,
+            /* [annotation][in] */ 
+            _In_  UINT cxyRequestedThumbSize,
             /* [annotation][unique][out] */ 
             _Out_opt_  ISharedBitmap **ppvThumb,
             /* [annotation][unique][out] */ 
@@ -367,7 +385,8 @@ EXTERN_C const IID IID_IThumbnailCache;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IThumbnailCache * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -382,9 +401,12 @@ EXTERN_C const IID IID_IThumbnailCache;
         DECLSPEC_XFGVIRT(IThumbnailCache, GetThumbnail)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetThumbnail )( 
             IThumbnailCache * This,
-            /* [in] */ IShellItem *pShellItem,
-            /* [in] */ UINT cxyRequestedThumbSize,
-            /* [in] */ WTS_FLAGS flags,
+            /* [annotation][in] */ 
+            _In_  IShellItem *pShellItem,
+            /* [annotation][in] */ 
+            _In_  UINT cxyRequestedThumbSize,
+            /* [annotation][in] */ 
+            _In_  WTS_FLAGS flags,
             /* [annotation][unique][out] */ 
             _Out_opt_  ISharedBitmap **ppvThumb,
             /* [annotation][unique][out] */ 
@@ -395,8 +417,10 @@ EXTERN_C const IID IID_IThumbnailCache;
         DECLSPEC_XFGVIRT(IThumbnailCache, GetThumbnailByID)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetThumbnailByID )( 
             IThumbnailCache * This,
-            /* [in] */ WTS_THUMBNAILID thumbnailID,
-            /* [in] */ UINT cxyRequestedThumbSize,
+            /* [annotation][in] */ 
+            _In_  WTS_THUMBNAILID thumbnailID,
+            /* [annotation][in] */ 
+            _In_  UINT cxyRequestedThumbSize,
             /* [annotation][unique][out] */ 
             _Out_opt_  ISharedBitmap **ppvThumb,
             /* [annotation][unique][out] */ 
@@ -440,12 +464,18 @@ EXTERN_C const IID IID_IThumbnailCache;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IThumbnailCache_RemoteGetThumbnail_Proxy( 
     __RPC__in IThumbnailCache * This,
-    /* [in] */ __RPC__in_opt IShellItem *pShellItem,
-    /* [in] */ UINT cxyRequestedThumbSize,
-    /* [in] */ WTS_FLAGS flags,
-    /* [out] */ __RPC__deref_out_opt ISharedBitmap **ppvThumb,
-    /* [out] */ __RPC__out WTS_CACHEFLAGS *pOutFlags,
-    /* [out] */ __RPC__out WTS_THUMBNAILID *pThumbnailID);
+    /* [annotation][in] */ 
+    _In_  IShellItem *pShellItem,
+    /* [annotation][in] */ 
+    _In_  UINT cxyRequestedThumbSize,
+    /* [annotation][in] */ 
+    _In_  WTS_FLAGS flags,
+    /* [annotation][out] */ 
+    _Out_  ISharedBitmap **ppvThumb,
+    /* [annotation][out] */ 
+    _Out_  WTS_CACHEFLAGS *pOutFlags,
+    /* [annotation][out] */ 
+    _Out_  WTS_THUMBNAILID *pThumbnailID);
 
 
 void __RPC_STUB IThumbnailCache_RemoteGetThumbnail_Stub(
@@ -457,10 +487,14 @@ void __RPC_STUB IThumbnailCache_RemoteGetThumbnail_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IThumbnailCache_RemoteGetThumbnailByID_Proxy( 
     __RPC__in IThumbnailCache * This,
-    /* [in] */ WTS_THUMBNAILID thumbnailID,
-    /* [in] */ UINT cxyRequestedThumbSize,
-    /* [out] */ __RPC__deref_out_opt ISharedBitmap **ppvThumb,
-    /* [out] */ __RPC__out WTS_CACHEFLAGS *pOutFlags);
+    /* [annotation][in] */ 
+    _In_  WTS_THUMBNAILID thumbnailID,
+    /* [annotation][in] */ 
+    _In_  UINT cxyRequestedThumbSize,
+    /* [annotation][out] */ 
+    _Out_  ISharedBitmap **ppvThumb,
+    /* [annotation][out] */ 
+    _Out_  WTS_CACHEFLAGS *pOutFlags);
 
 
 void __RPC_STUB IThumbnailCache_RemoteGetThumbnailByID_Stub(
@@ -490,9 +524,12 @@ EXTERN_C const IID IID_IThumbnailProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetThumbnail( 
-            /* [in] */ UINT cx,
-            /* [out] */ __RPC__deref_out_opt HBITMAP *phbmp,
-            /* [out] */ __RPC__out WTS_ALPHATYPE *pdwAlpha) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT cx,
+            /* [annotation][out] */ 
+            _Out_  HBITMAP *phbmp,
+            /* [annotation][out] */ 
+            _Out_  WTS_ALPHATYPE *pdwAlpha) = 0;
         
     };
     
@@ -506,7 +543,8 @@ EXTERN_C const IID IID_IThumbnailProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IThumbnailProvider * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -521,9 +559,12 @@ EXTERN_C const IID IID_IThumbnailProvider;
         DECLSPEC_XFGVIRT(IThumbnailProvider, GetThumbnail)
         HRESULT ( STDMETHODCALLTYPE *GetThumbnail )( 
             __RPC__in IThumbnailProvider * This,
-            /* [in] */ UINT cx,
-            /* [out] */ __RPC__deref_out_opt HBITMAP *phbmp,
-            /* [out] */ __RPC__out WTS_ALPHATYPE *pdwAlpha);
+            /* [annotation][in] */ 
+            _In_  UINT cx,
+            /* [annotation][out] */ 
+            _Out_  HBITMAP *phbmp,
+            /* [annotation][out] */ 
+            _Out_  WTS_ALPHATYPE *pdwAlpha);
         
         END_INTERFACE
     } IThumbnailProviderVtbl;
@@ -578,7 +619,8 @@ EXTERN_C const IID IID_IThumbnailSettings;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetContext( 
-            /* [in] */ WTS_CONTEXTFLAGS dwContext) = 0;
+            /* [annotation][in] */ 
+            _In_  WTS_CONTEXTFLAGS dwContext) = 0;
         
     };
     
@@ -592,7 +634,8 @@ EXTERN_C const IID IID_IThumbnailSettings;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IThumbnailSettings * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -607,7 +650,8 @@ EXTERN_C const IID IID_IThumbnailSettings;
         DECLSPEC_XFGVIRT(IThumbnailSettings, SetContext)
         HRESULT ( STDMETHODCALLTYPE *SetContext )( 
             __RPC__in IThumbnailSettings * This,
-            /* [in] */ WTS_CONTEXTFLAGS dwContext);
+            /* [annotation][in] */ 
+            _In_  WTS_CONTEXTFLAGS dwContext);
         
         END_INTERFACE
     } IThumbnailSettingsVtbl;
@@ -662,9 +706,12 @@ EXTERN_C const IID IID_IThumbnailCachePrimer;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE PageInThumbnail( 
-            /* [in] */ __RPC__in_opt IShellItem *psi,
-            /* [in] */ WTS_FLAGS wtsFlags,
-            /* [in] */ UINT cxyRequestedThumbSize) = 0;
+            /* [annotation][in] */ 
+            _In_  IShellItem *psi,
+            /* [annotation][in] */ 
+            _In_  WTS_FLAGS wtsFlags,
+            /* [annotation][in] */ 
+            _In_  UINT cxyRequestedThumbSize) = 0;
         
     };
     
@@ -678,7 +725,8 @@ EXTERN_C const IID IID_IThumbnailCachePrimer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IThumbnailCachePrimer * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -693,9 +741,12 @@ EXTERN_C const IID IID_IThumbnailCachePrimer;
         DECLSPEC_XFGVIRT(IThumbnailCachePrimer, PageInThumbnail)
         HRESULT ( STDMETHODCALLTYPE *PageInThumbnail )( 
             __RPC__in IThumbnailCachePrimer * This,
-            /* [in] */ __RPC__in_opt IShellItem *psi,
-            /* [in] */ WTS_FLAGS wtsFlags,
-            /* [in] */ UINT cxyRequestedThumbSize);
+            /* [annotation][in] */ 
+            _In_  IShellItem *psi,
+            /* [annotation][in] */ 
+            _In_  WTS_FLAGS wtsFlags,
+            /* [annotation][in] */ 
+            _In_  UINT cxyRequestedThumbSize);
         
         END_INTERFACE
     } IThumbnailCachePrimerVtbl;
@@ -785,9 +836,12 @@ void                      __RPC_USER  HBITMAP_UserFree64(     __RPC__in unsigned
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IThumbnailCache_GetThumbnail_Proxy( 
     IThumbnailCache * This,
-    /* [in] */ IShellItem *pShellItem,
-    /* [in] */ UINT cxyRequestedThumbSize,
-    /* [in] */ WTS_FLAGS flags,
+    /* [annotation][in] */ 
+    _In_  IShellItem *pShellItem,
+    /* [annotation][in] */ 
+    _In_  UINT cxyRequestedThumbSize,
+    /* [annotation][in] */ 
+    _In_  WTS_FLAGS flags,
     /* [annotation][unique][out] */ 
     _Out_opt_  ISharedBitmap **ppvThumb,
     /* [annotation][unique][out] */ 
@@ -798,17 +852,25 @@ void                      __RPC_USER  HBITMAP_UserFree64(     __RPC__in unsigned
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IThumbnailCache_GetThumbnail_Stub( 
     __RPC__in IThumbnailCache * This,
-    /* [in] */ __RPC__in_opt IShellItem *pShellItem,
-    /* [in] */ UINT cxyRequestedThumbSize,
-    /* [in] */ WTS_FLAGS flags,
-    /* [out] */ __RPC__deref_out_opt ISharedBitmap **ppvThumb,
-    /* [out] */ __RPC__out WTS_CACHEFLAGS *pOutFlags,
-    /* [out] */ __RPC__out WTS_THUMBNAILID *pThumbnailID);
+    /* [annotation][in] */ 
+    _In_  IShellItem *pShellItem,
+    /* [annotation][in] */ 
+    _In_  UINT cxyRequestedThumbSize,
+    /* [annotation][in] */ 
+    _In_  WTS_FLAGS flags,
+    /* [annotation][out] */ 
+    _Out_  ISharedBitmap **ppvThumb,
+    /* [annotation][out] */ 
+    _Out_  WTS_CACHEFLAGS *pOutFlags,
+    /* [annotation][out] */ 
+    _Out_  WTS_THUMBNAILID *pThumbnailID);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IThumbnailCache_GetThumbnailByID_Proxy( 
     IThumbnailCache * This,
-    /* [in] */ WTS_THUMBNAILID thumbnailID,
-    /* [in] */ UINT cxyRequestedThumbSize,
+    /* [annotation][in] */ 
+    _In_  WTS_THUMBNAILID thumbnailID,
+    /* [annotation][in] */ 
+    _In_  UINT cxyRequestedThumbSize,
     /* [annotation][unique][out] */ 
     _Out_opt_  ISharedBitmap **ppvThumb,
     /* [annotation][unique][out] */ 
@@ -817,10 +879,14 @@ void                      __RPC_USER  HBITMAP_UserFree64(     __RPC__in unsigned
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IThumbnailCache_GetThumbnailByID_Stub( 
     __RPC__in IThumbnailCache * This,
-    /* [in] */ WTS_THUMBNAILID thumbnailID,
-    /* [in] */ UINT cxyRequestedThumbSize,
-    /* [out] */ __RPC__deref_out_opt ISharedBitmap **ppvThumb,
-    /* [out] */ __RPC__out WTS_CACHEFLAGS *pOutFlags);
+    /* [annotation][in] */ 
+    _In_  WTS_THUMBNAILID thumbnailID,
+    /* [annotation][in] */ 
+    _In_  UINT cxyRequestedThumbSize,
+    /* [annotation][out] */ 
+    _Out_  ISharedBitmap **ppvThumb,
+    /* [annotation][out] */ 
+    _Out_  WTS_CACHEFLAGS *pOutFlags);
 
 
 

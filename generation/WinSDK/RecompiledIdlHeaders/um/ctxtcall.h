@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -103,11 +103,16 @@ EXTERN_C const IID IID_IContextCallback;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ContextCallback( 
-            /* [in] */ PFNCONTEXTCALL pfnCallback,
-            /* [in] */ ComCallData *pParam,
-            /* [in] */ REFIID riid,
-            /* [in] */ int iMethod,
-            /* [in] */ IUnknown *pUnk) = 0;
+            /* [annotation][in] */ 
+            _In_  PFNCONTEXTCALL pfnCallback,
+            /* [annotation][in] */ 
+            _In_  ComCallData *pParam,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  int iMethod,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnk) = 0;
         
     };
     
@@ -121,7 +126,8 @@ EXTERN_C const IID IID_IContextCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IContextCallback * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -136,11 +142,16 @@ EXTERN_C const IID IID_IContextCallback;
         DECLSPEC_XFGVIRT(IContextCallback, ContextCallback)
         HRESULT ( STDMETHODCALLTYPE *ContextCallback )( 
             IContextCallback * This,
-            /* [in] */ PFNCONTEXTCALL pfnCallback,
-            /* [in] */ ComCallData *pParam,
-            /* [in] */ REFIID riid,
-            /* [in] */ int iMethod,
-            /* [in] */ IUnknown *pUnk);
+            /* [annotation][in] */ 
+            _In_  PFNCONTEXTCALL pfnCallback,
+            /* [annotation][in] */ 
+            _In_  ComCallData *pParam,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  int iMethod,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnk);
         
         END_INTERFACE
     } IContextCallbackVtbl;

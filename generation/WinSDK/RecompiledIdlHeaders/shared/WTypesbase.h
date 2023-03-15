@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -100,7 +100,7 @@ typedef WORD *LPWORD;
 
 typedef DWORD *LPDWORD;
 
-typedef char CHAR;
+typedef unsigned char CHAR;
 
 typedef /* [string] */  __RPC_string CHAR *LPSTR;
 

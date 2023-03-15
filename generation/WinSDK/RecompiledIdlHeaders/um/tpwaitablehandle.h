@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -100,19 +100,30 @@ EXTERN_C const IID IID_ISignalableNotifier;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AttachToWaitHandle( 
-            /* [in] */ HANDLE_PTR waitableHandle,
-            /* [in] */ __RPC__in_opt IUnknown *handler,
-            /* [in] */ __RPC__in_opt IUnknown *pUnkOuter,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **SignalNotifier) = 0;
+            /* [annotation][in] */ 
+            _In_  HANDLE_PTR waitableHandle,
+            /* [annotation][in] */ 
+            _In_  IUnknown *handler,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **SignalNotifier) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AttachToWaitHandleWithTimeout( 
-            /* [in] */ HANDLE_PTR waitableHandle,
-            /* [in] */ __RPC__in_opt IUnknown *handler,
-            /* [in] */ LARGE_INTEGER timeout,
-            /* [in] */ __RPC__in_opt IUnknown *pUnkOuter,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **SignalNotifier) = 0;
+            /* [annotation][in] */ 
+            _In_  HANDLE_PTR waitableHandle,
+            /* [annotation][in] */ 
+            _In_  IUnknown *handler,
+            /* [annotation][in] */ 
+            _In_  LARGE_INTEGER timeout,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **SignalNotifier) = 0;
         
     };
     
@@ -126,7 +137,8 @@ EXTERN_C const IID IID_ISignalableNotifier;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISignalableNotifier * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -141,21 +153,32 @@ EXTERN_C const IID IID_ISignalableNotifier;
         DECLSPEC_XFGVIRT(ISignalableNotifier, AttachToWaitHandle)
         HRESULT ( STDMETHODCALLTYPE *AttachToWaitHandle )( 
             __RPC__in ISignalableNotifier * This,
-            /* [in] */ HANDLE_PTR waitableHandle,
-            /* [in] */ __RPC__in_opt IUnknown *handler,
-            /* [in] */ __RPC__in_opt IUnknown *pUnkOuter,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **SignalNotifier);
+            /* [annotation][in] */ 
+            _In_  HANDLE_PTR waitableHandle,
+            /* [annotation][in] */ 
+            _In_  IUnknown *handler,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **SignalNotifier);
         
         DECLSPEC_XFGVIRT(ISignalableNotifier, AttachToWaitHandleWithTimeout)
         HRESULT ( STDMETHODCALLTYPE *AttachToWaitHandleWithTimeout )( 
             __RPC__in ISignalableNotifier * This,
-            /* [in] */ HANDLE_PTR waitableHandle,
-            /* [in] */ __RPC__in_opt IUnknown *handler,
-            /* [in] */ LARGE_INTEGER timeout,
-            /* [in] */ __RPC__in_opt IUnknown *pUnkOuter,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **SignalNotifier);
+            /* [annotation][in] */ 
+            _In_  HANDLE_PTR waitableHandle,
+            /* [annotation][in] */ 
+            _In_  IUnknown *handler,
+            /* [annotation][in] */ 
+            _In_  LARGE_INTEGER timeout,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **SignalNotifier);
         
         END_INTERFACE
     } ISignalableNotifierVtbl;

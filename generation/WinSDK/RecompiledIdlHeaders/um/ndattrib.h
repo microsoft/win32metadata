@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -165,7 +165,7 @@ typedef struct tagHELPER_ATTRIBUTE
     /* [switch_is][switch_type] */ union 
         {
         /* [case()] */ BOOL Boolean;
-        /* [case()] */ char Char;
+        /* [case()] */ unsigned char Char;
         /* [case()] */ byte Byte;
         /* [case()] */ short Short;
         /* [case()] */ WORD Word;

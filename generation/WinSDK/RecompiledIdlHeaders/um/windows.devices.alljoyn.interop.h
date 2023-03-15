@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -121,7 +121,8 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusAttachmentInterop;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Win32Handle( 
-            /* [retval][out] */ UINT64 *value) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UINT64 *value) = 0;
         
     };
     
@@ -135,7 +136,8 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusAttachmentInterop;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWindowsDevicesAllJoynBusAttachmentInterop * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -166,7 +168,8 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusAttachmentInterop;
         DECLSPEC_XFGVIRT(IWindowsDevicesAllJoynBusAttachmentInterop, get_Win32Handle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Win32Handle )( 
             IWindowsDevicesAllJoynBusAttachmentInterop * This,
-            /* [retval][out] */ UINT64 *value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UINT64 *value);
         
         END_INTERFACE
     } IWindowsDevicesAllJoynBusAttachmentInteropVtbl;
@@ -231,10 +234,14 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusAttachmentFactoryInterop;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateFromWin32Handle( 
-            /* [in] */ UINT64 win32handle,
-            /* [in] */ boolean enableAboutData,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT64 win32handle,
+            /* [annotation][in] */ 
+            _In_  boolean enableAboutData,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
     };
     
@@ -248,7 +255,8 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusAttachmentFactoryInterop;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWindowsDevicesAllJoynBusAttachmentFactoryInterop * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -279,10 +287,14 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusAttachmentFactoryInterop;
         DECLSPEC_XFGVIRT(IWindowsDevicesAllJoynBusAttachmentFactoryInterop, CreateFromWin32Handle)
         HRESULT ( STDMETHODCALLTYPE *CreateFromWin32Handle )( 
             IWindowsDevicesAllJoynBusAttachmentFactoryInterop * This,
-            /* [in] */ UINT64 win32handle,
-            /* [in] */ boolean enableAboutData,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppv);
+            /* [annotation][in] */ 
+            _In_  UINT64 win32handle,
+            /* [annotation][in] */ 
+            _In_  boolean enableAboutData,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         END_INTERFACE
     } IWindowsDevicesAllJoynBusAttachmentFactoryInteropVtbl;
@@ -347,25 +359,32 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusObjectInterop;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddPropertyGetHandler( 
-            /* [in] */ PVOID context,
-            /* [in] */ HSTRING interfaceName,
-            /* [in] */ INT32 ( STDMETHODCALLTYPE *callback )( 
+            /* [annotation][in] */ 
+            _In_  PVOID context,
+            /* [annotation][in] */ 
+            _In_  HSTRING interfaceName,
+            /* [annotation][in] */ 
+            _In_  INT32 ( STDMETHODCALLTYPE *callback )( 
                 PVOID context,
                 HSTRING interfaceName,
                 HSTRING propertyName,
                 alljoyn_msgarg value)) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddPropertySetHandler( 
-            /* [in] */ PVOID context,
-            /* [in] */ HSTRING interfaceName,
-            /* [in] */ INT32 ( STDMETHODCALLTYPE *callback )( 
+            /* [annotation][in] */ 
+            _In_  PVOID context,
+            /* [annotation][in] */ 
+            _In_  HSTRING interfaceName,
+            /* [annotation][in] */ 
+            _In_  INT32 ( STDMETHODCALLTYPE *callback )( 
                 PVOID context,
                 HSTRING interfaceName,
                 HSTRING propertyName,
                 alljoyn_msgarg value)) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Win32Handle( 
-            /* [retval][out] */ UINT64 *value) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UINT64 *value) = 0;
         
     };
     
@@ -379,7 +398,8 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusObjectInterop;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWindowsDevicesAllJoynBusObjectInterop * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -410,9 +430,12 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusObjectInterop;
         DECLSPEC_XFGVIRT(IWindowsDevicesAllJoynBusObjectInterop, AddPropertyGetHandler)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyGetHandler )( 
             IWindowsDevicesAllJoynBusObjectInterop * This,
-            /* [in] */ PVOID context,
-            /* [in] */ HSTRING interfaceName,
-            /* [in] */ INT32 ( STDMETHODCALLTYPE *callback )( 
+            /* [annotation][in] */ 
+            _In_  PVOID context,
+            /* [annotation][in] */ 
+            _In_  HSTRING interfaceName,
+            /* [annotation][in] */ 
+            _In_  INT32 ( STDMETHODCALLTYPE *callback )( 
                 PVOID context,
                 HSTRING interfaceName,
                 HSTRING propertyName,
@@ -421,9 +444,12 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusObjectInterop;
         DECLSPEC_XFGVIRT(IWindowsDevicesAllJoynBusObjectInterop, AddPropertySetHandler)
         HRESULT ( STDMETHODCALLTYPE *AddPropertySetHandler )( 
             IWindowsDevicesAllJoynBusObjectInterop * This,
-            /* [in] */ PVOID context,
-            /* [in] */ HSTRING interfaceName,
-            /* [in] */ INT32 ( STDMETHODCALLTYPE *callback )( 
+            /* [annotation][in] */ 
+            _In_  PVOID context,
+            /* [annotation][in] */ 
+            _In_  HSTRING interfaceName,
+            /* [annotation][in] */ 
+            _In_  INT32 ( STDMETHODCALLTYPE *callback )( 
                 PVOID context,
                 HSTRING interfaceName,
                 HSTRING propertyName,
@@ -432,7 +458,8 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusObjectInterop;
         DECLSPEC_XFGVIRT(IWindowsDevicesAllJoynBusObjectInterop, get_Win32Handle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Win32Handle )( 
             IWindowsDevicesAllJoynBusObjectInterop * This,
-            /* [retval][out] */ UINT64 *value);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  UINT64 *value);
         
         END_INTERFACE
     } IWindowsDevicesAllJoynBusObjectInteropVtbl;
@@ -503,9 +530,12 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusObjectFactoryInterop;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateFromWin32Handle( 
-            /* [in] */ UINT64 win32handle,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT64 win32handle,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
     };
     
@@ -519,7 +549,8 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusObjectFactoryInterop;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWindowsDevicesAllJoynBusObjectFactoryInterop * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -550,9 +581,12 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusObjectFactoryInterop;
         DECLSPEC_XFGVIRT(IWindowsDevicesAllJoynBusObjectFactoryInterop, CreateFromWin32Handle)
         HRESULT ( STDMETHODCALLTYPE *CreateFromWin32Handle )( 
             IWindowsDevicesAllJoynBusObjectFactoryInterop * This,
-            /* [in] */ UINT64 win32handle,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppv);
+            /* [annotation][in] */ 
+            _In_  UINT64 win32handle,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         END_INTERFACE
     } IWindowsDevicesAllJoynBusObjectFactoryInteropVtbl;

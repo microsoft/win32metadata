@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -179,10 +179,12 @@ EXTERN_C const IID IID_ITpmVirtualSmartCardManagerStatusCallback;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ReportProgress( 
-            /* [in] */ TPMVSCMGR_STATUS Status) = 0;
+            /* [annotation][in] */ 
+            _In_  TPMVSCMGR_STATUS Status) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReportError( 
-            /* [in] */ TPMVSCMGR_ERROR Error) = 0;
+            /* [annotation][in] */ 
+            _In_  TPMVSCMGR_ERROR Error) = 0;
         
     };
     
@@ -196,7 +198,8 @@ EXTERN_C const IID IID_ITpmVirtualSmartCardManagerStatusCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITpmVirtualSmartCardManagerStatusCallback * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -211,12 +214,14 @@ EXTERN_C const IID IID_ITpmVirtualSmartCardManagerStatusCallback;
         DECLSPEC_XFGVIRT(ITpmVirtualSmartCardManagerStatusCallback, ReportProgress)
         HRESULT ( STDMETHODCALLTYPE *ReportProgress )( 
             __RPC__in ITpmVirtualSmartCardManagerStatusCallback * This,
-            /* [in] */ TPMVSCMGR_STATUS Status);
+            /* [annotation][in] */ 
+            _In_  TPMVSCMGR_STATUS Status);
         
         DECLSPEC_XFGVIRT(ITpmVirtualSmartCardManagerStatusCallback, ReportError)
         HRESULT ( STDMETHODCALLTYPE *ReportError )( 
             __RPC__in ITpmVirtualSmartCardManagerStatusCallback * This,
-            /* [in] */ TPMVSCMGR_ERROR Error);
+            /* [annotation][in] */ 
+            _In_  TPMVSCMGR_ERROR Error);
         
         END_INTERFACE
     } ITpmVirtualSmartCardManagerStatusCallbackVtbl;
@@ -290,25 +295,42 @@ EXTERN_C const IID IID_ITpmVirtualSmartCardManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateVirtualSmartCard( 
-            /* [string][in] */ __RPC__in_string LPCWSTR pszFriendlyName,
-            /* [in] */ BYTE bAdminAlgId,
-            /* [size_is][in] */ __RPC__in_ecount_full(cbAdminKey) const BYTE *pbAdminKey,
-            /* [in] */ DWORD cbAdminKey,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbAdminKcv) const BYTE *pbAdminKcv,
-            /* [in] */ DWORD cbAdminKcv,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbPuk) const BYTE *pbPuk,
-            /* [in] */ DWORD cbPuk,
-            /* [size_is][in] */ __RPC__in_ecount_full(cbPin) const BYTE *pbPin,
-            /* [in] */ DWORD cbPin,
-            /* [in] */ BOOL fGenerate,
-            /* [unique][in] */ __RPC__in_opt ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszInstanceId,
-            /* [out] */ __RPC__out BOOL *pfNeedReboot) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszFriendlyName,
+            /* [annotation][in] */ 
+            _In_  BYTE bAdminAlgId,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbAdminKey)  const BYTE *pbAdminKey,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAdminKey,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbAdminKcv)  const BYTE *pbAdminKcv,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAdminKcv,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbPuk)  const BYTE *pbPuk,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPuk,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbPin)  const BYTE *pbPin,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPin,
+            /* [annotation][in] */ 
+            _In_  BOOL fGenerate,
+            /* [annotation][unique][in] */ 
+            _In_  ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszInstanceId,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfNeedReboot) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DestroyVirtualSmartCard( 
-            /* [string][in] */ __RPC__in_string LPCWSTR pszInstanceId,
-            /* [unique][in] */ __RPC__in_opt ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
-            /* [out] */ __RPC__out BOOL *pfNeedReboot) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszInstanceId,
+            /* [annotation][unique][in] */ 
+            _In_  ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfNeedReboot) = 0;
         
     };
     
@@ -322,7 +344,8 @@ EXTERN_C const IID IID_ITpmVirtualSmartCardManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITpmVirtualSmartCardManager * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -337,27 +360,44 @@ EXTERN_C const IID IID_ITpmVirtualSmartCardManager;
         DECLSPEC_XFGVIRT(ITpmVirtualSmartCardManager, CreateVirtualSmartCard)
         HRESULT ( STDMETHODCALLTYPE *CreateVirtualSmartCard )( 
             __RPC__in ITpmVirtualSmartCardManager * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR pszFriendlyName,
-            /* [in] */ BYTE bAdminAlgId,
-            /* [size_is][in] */ __RPC__in_ecount_full(cbAdminKey) const BYTE *pbAdminKey,
-            /* [in] */ DWORD cbAdminKey,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbAdminKcv) const BYTE *pbAdminKcv,
-            /* [in] */ DWORD cbAdminKcv,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbPuk) const BYTE *pbPuk,
-            /* [in] */ DWORD cbPuk,
-            /* [size_is][in] */ __RPC__in_ecount_full(cbPin) const BYTE *pbPin,
-            /* [in] */ DWORD cbPin,
-            /* [in] */ BOOL fGenerate,
-            /* [unique][in] */ __RPC__in_opt ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszInstanceId,
-            /* [out] */ __RPC__out BOOL *pfNeedReboot);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszFriendlyName,
+            /* [annotation][in] */ 
+            _In_  BYTE bAdminAlgId,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbAdminKey)  const BYTE *pbAdminKey,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAdminKey,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbAdminKcv)  const BYTE *pbAdminKcv,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAdminKcv,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbPuk)  const BYTE *pbPuk,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPuk,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbPin)  const BYTE *pbPin,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPin,
+            /* [annotation][in] */ 
+            _In_  BOOL fGenerate,
+            /* [annotation][unique][in] */ 
+            _In_  ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszInstanceId,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfNeedReboot);
         
         DECLSPEC_XFGVIRT(ITpmVirtualSmartCardManager, DestroyVirtualSmartCard)
         HRESULT ( STDMETHODCALLTYPE *DestroyVirtualSmartCard )( 
             __RPC__in ITpmVirtualSmartCardManager * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR pszInstanceId,
-            /* [unique][in] */ __RPC__in_opt ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
-            /* [out] */ __RPC__out BOOL *pfNeedReboot);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszInstanceId,
+            /* [annotation][unique][in] */ 
+            _In_  ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfNeedReboot);
         
         END_INTERFACE
     } ITpmVirtualSmartCardManagerVtbl;
@@ -425,22 +465,38 @@ EXTERN_C const IID IID_ITpmVirtualSmartCardManager2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateVirtualSmartCardWithPinPolicy( 
-            /* [string][in] */ __RPC__in_string LPCWSTR pszFriendlyName,
-            /* [in] */ BYTE bAdminAlgId,
-            /* [size_is][in] */ __RPC__in_ecount_full(cbAdminKey) const BYTE *pbAdminKey,
-            /* [in] */ DWORD cbAdminKey,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbAdminKcv) const BYTE *pbAdminKcv,
-            /* [in] */ DWORD cbAdminKcv,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbPuk) const BYTE *pbPuk,
-            /* [in] */ DWORD cbPuk,
-            /* [size_is][in] */ __RPC__in_ecount_full(cbPin) const BYTE *pbPin,
-            /* [in] */ DWORD cbPin,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbPinPolicy) const BYTE *pbPinPolicy,
-            /* [in] */ DWORD cbPinPolicy,
-            /* [in] */ BOOL fGenerate,
-            /* [unique][in] */ __RPC__in_opt ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszInstanceId,
-            /* [out] */ __RPC__out BOOL *pfNeedReboot) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszFriendlyName,
+            /* [annotation][in] */ 
+            _In_  BYTE bAdminAlgId,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbAdminKey)  const BYTE *pbAdminKey,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAdminKey,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbAdminKcv)  const BYTE *pbAdminKcv,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAdminKcv,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbPuk)  const BYTE *pbPuk,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPuk,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbPin)  const BYTE *pbPin,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPin,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbPinPolicy)  const BYTE *pbPinPolicy,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPinPolicy,
+            /* [annotation][in] */ 
+            _In_  BOOL fGenerate,
+            /* [annotation][unique][in] */ 
+            _In_  ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszInstanceId,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfNeedReboot) = 0;
         
     };
     
@@ -454,7 +510,8 @@ EXTERN_C const IID IID_ITpmVirtualSmartCardManager2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITpmVirtualSmartCardManager2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -469,47 +526,80 @@ EXTERN_C const IID IID_ITpmVirtualSmartCardManager2;
         DECLSPEC_XFGVIRT(ITpmVirtualSmartCardManager, CreateVirtualSmartCard)
         HRESULT ( STDMETHODCALLTYPE *CreateVirtualSmartCard )( 
             __RPC__in ITpmVirtualSmartCardManager2 * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR pszFriendlyName,
-            /* [in] */ BYTE bAdminAlgId,
-            /* [size_is][in] */ __RPC__in_ecount_full(cbAdminKey) const BYTE *pbAdminKey,
-            /* [in] */ DWORD cbAdminKey,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbAdminKcv) const BYTE *pbAdminKcv,
-            /* [in] */ DWORD cbAdminKcv,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbPuk) const BYTE *pbPuk,
-            /* [in] */ DWORD cbPuk,
-            /* [size_is][in] */ __RPC__in_ecount_full(cbPin) const BYTE *pbPin,
-            /* [in] */ DWORD cbPin,
-            /* [in] */ BOOL fGenerate,
-            /* [unique][in] */ __RPC__in_opt ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszInstanceId,
-            /* [out] */ __RPC__out BOOL *pfNeedReboot);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszFriendlyName,
+            /* [annotation][in] */ 
+            _In_  BYTE bAdminAlgId,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbAdminKey)  const BYTE *pbAdminKey,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAdminKey,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbAdminKcv)  const BYTE *pbAdminKcv,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAdminKcv,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbPuk)  const BYTE *pbPuk,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPuk,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbPin)  const BYTE *pbPin,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPin,
+            /* [annotation][in] */ 
+            _In_  BOOL fGenerate,
+            /* [annotation][unique][in] */ 
+            _In_  ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszInstanceId,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfNeedReboot);
         
         DECLSPEC_XFGVIRT(ITpmVirtualSmartCardManager, DestroyVirtualSmartCard)
         HRESULT ( STDMETHODCALLTYPE *DestroyVirtualSmartCard )( 
             __RPC__in ITpmVirtualSmartCardManager2 * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR pszInstanceId,
-            /* [unique][in] */ __RPC__in_opt ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
-            /* [out] */ __RPC__out BOOL *pfNeedReboot);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszInstanceId,
+            /* [annotation][unique][in] */ 
+            _In_  ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfNeedReboot);
         
         DECLSPEC_XFGVIRT(ITpmVirtualSmartCardManager2, CreateVirtualSmartCardWithPinPolicy)
         HRESULT ( STDMETHODCALLTYPE *CreateVirtualSmartCardWithPinPolicy )( 
             __RPC__in ITpmVirtualSmartCardManager2 * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR pszFriendlyName,
-            /* [in] */ BYTE bAdminAlgId,
-            /* [size_is][in] */ __RPC__in_ecount_full(cbAdminKey) const BYTE *pbAdminKey,
-            /* [in] */ DWORD cbAdminKey,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbAdminKcv) const BYTE *pbAdminKcv,
-            /* [in] */ DWORD cbAdminKcv,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbPuk) const BYTE *pbPuk,
-            /* [in] */ DWORD cbPuk,
-            /* [size_is][in] */ __RPC__in_ecount_full(cbPin) const BYTE *pbPin,
-            /* [in] */ DWORD cbPin,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbPinPolicy) const BYTE *pbPinPolicy,
-            /* [in] */ DWORD cbPinPolicy,
-            /* [in] */ BOOL fGenerate,
-            /* [unique][in] */ __RPC__in_opt ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszInstanceId,
-            /* [out] */ __RPC__out BOOL *pfNeedReboot);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszFriendlyName,
+            /* [annotation][in] */ 
+            _In_  BYTE bAdminAlgId,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbAdminKey)  const BYTE *pbAdminKey,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAdminKey,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbAdminKcv)  const BYTE *pbAdminKcv,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAdminKcv,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbPuk)  const BYTE *pbPuk,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPuk,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbPin)  const BYTE *pbPin,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPin,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbPinPolicy)  const BYTE *pbPinPolicy,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPinPolicy,
+            /* [annotation][in] */ 
+            _In_  BOOL fGenerate,
+            /* [annotation][unique][in] */ 
+            _In_  ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszInstanceId,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfNeedReboot);
         
         END_INTERFACE
     } ITpmVirtualSmartCardManager2Vtbl;
@@ -581,22 +671,38 @@ EXTERN_C const IID IID_ITpmVirtualSmartCardManager3;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateVirtualSmartCardWithAttestation( 
-            /* [string][in] */ __RPC__in_string LPCWSTR pszFriendlyName,
-            /* [in] */ BYTE bAdminAlgId,
-            /* [size_is][in] */ __RPC__in_ecount_full(cbAdminKey) const BYTE *pbAdminKey,
-            /* [in] */ DWORD cbAdminKey,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbAdminKcv) const BYTE *pbAdminKcv,
-            /* [in] */ DWORD cbAdminKcv,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbPuk) const BYTE *pbPuk,
-            /* [in] */ DWORD cbPuk,
-            /* [size_is][in] */ __RPC__in_ecount_full(cbPin) const BYTE *pbPin,
-            /* [in] */ DWORD cbPin,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbPinPolicy) const BYTE *pbPinPolicy,
-            /* [in] */ DWORD cbPinPolicy,
-            /* [in] */ TPMVSC_ATTESTATION_TYPE attestationType,
-            /* [in] */ BOOL fGenerate,
-            /* [unique][in] */ __RPC__in_opt ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszInstanceId) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszFriendlyName,
+            /* [annotation][in] */ 
+            _In_  BYTE bAdminAlgId,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbAdminKey)  const BYTE *pbAdminKey,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAdminKey,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbAdminKcv)  const BYTE *pbAdminKcv,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAdminKcv,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbPuk)  const BYTE *pbPuk,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPuk,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbPin)  const BYTE *pbPin,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPin,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbPinPolicy)  const BYTE *pbPinPolicy,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPinPolicy,
+            /* [annotation][in] */ 
+            _In_  TPMVSC_ATTESTATION_TYPE attestationType,
+            /* [annotation][in] */ 
+            _In_  BOOL fGenerate,
+            /* [annotation][unique][in] */ 
+            _In_  ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszInstanceId) = 0;
         
     };
     
@@ -610,7 +716,8 @@ EXTERN_C const IID IID_ITpmVirtualSmartCardManager3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITpmVirtualSmartCardManager3 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -625,67 +732,116 @@ EXTERN_C const IID IID_ITpmVirtualSmartCardManager3;
         DECLSPEC_XFGVIRT(ITpmVirtualSmartCardManager, CreateVirtualSmartCard)
         HRESULT ( STDMETHODCALLTYPE *CreateVirtualSmartCard )( 
             __RPC__in ITpmVirtualSmartCardManager3 * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR pszFriendlyName,
-            /* [in] */ BYTE bAdminAlgId,
-            /* [size_is][in] */ __RPC__in_ecount_full(cbAdminKey) const BYTE *pbAdminKey,
-            /* [in] */ DWORD cbAdminKey,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbAdminKcv) const BYTE *pbAdminKcv,
-            /* [in] */ DWORD cbAdminKcv,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbPuk) const BYTE *pbPuk,
-            /* [in] */ DWORD cbPuk,
-            /* [size_is][in] */ __RPC__in_ecount_full(cbPin) const BYTE *pbPin,
-            /* [in] */ DWORD cbPin,
-            /* [in] */ BOOL fGenerate,
-            /* [unique][in] */ __RPC__in_opt ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszInstanceId,
-            /* [out] */ __RPC__out BOOL *pfNeedReboot);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszFriendlyName,
+            /* [annotation][in] */ 
+            _In_  BYTE bAdminAlgId,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbAdminKey)  const BYTE *pbAdminKey,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAdminKey,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbAdminKcv)  const BYTE *pbAdminKcv,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAdminKcv,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbPuk)  const BYTE *pbPuk,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPuk,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbPin)  const BYTE *pbPin,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPin,
+            /* [annotation][in] */ 
+            _In_  BOOL fGenerate,
+            /* [annotation][unique][in] */ 
+            _In_  ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszInstanceId,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfNeedReboot);
         
         DECLSPEC_XFGVIRT(ITpmVirtualSmartCardManager, DestroyVirtualSmartCard)
         HRESULT ( STDMETHODCALLTYPE *DestroyVirtualSmartCard )( 
             __RPC__in ITpmVirtualSmartCardManager3 * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR pszInstanceId,
-            /* [unique][in] */ __RPC__in_opt ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
-            /* [out] */ __RPC__out BOOL *pfNeedReboot);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszInstanceId,
+            /* [annotation][unique][in] */ 
+            _In_  ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfNeedReboot);
         
         DECLSPEC_XFGVIRT(ITpmVirtualSmartCardManager2, CreateVirtualSmartCardWithPinPolicy)
         HRESULT ( STDMETHODCALLTYPE *CreateVirtualSmartCardWithPinPolicy )( 
             __RPC__in ITpmVirtualSmartCardManager3 * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR pszFriendlyName,
-            /* [in] */ BYTE bAdminAlgId,
-            /* [size_is][in] */ __RPC__in_ecount_full(cbAdminKey) const BYTE *pbAdminKey,
-            /* [in] */ DWORD cbAdminKey,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbAdminKcv) const BYTE *pbAdminKcv,
-            /* [in] */ DWORD cbAdminKcv,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbPuk) const BYTE *pbPuk,
-            /* [in] */ DWORD cbPuk,
-            /* [size_is][in] */ __RPC__in_ecount_full(cbPin) const BYTE *pbPin,
-            /* [in] */ DWORD cbPin,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbPinPolicy) const BYTE *pbPinPolicy,
-            /* [in] */ DWORD cbPinPolicy,
-            /* [in] */ BOOL fGenerate,
-            /* [unique][in] */ __RPC__in_opt ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszInstanceId,
-            /* [out] */ __RPC__out BOOL *pfNeedReboot);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszFriendlyName,
+            /* [annotation][in] */ 
+            _In_  BYTE bAdminAlgId,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbAdminKey)  const BYTE *pbAdminKey,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAdminKey,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbAdminKcv)  const BYTE *pbAdminKcv,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAdminKcv,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbPuk)  const BYTE *pbPuk,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPuk,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbPin)  const BYTE *pbPin,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPin,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbPinPolicy)  const BYTE *pbPinPolicy,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPinPolicy,
+            /* [annotation][in] */ 
+            _In_  BOOL fGenerate,
+            /* [annotation][unique][in] */ 
+            _In_  ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszInstanceId,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfNeedReboot);
         
         DECLSPEC_XFGVIRT(ITpmVirtualSmartCardManager3, CreateVirtualSmartCardWithAttestation)
         HRESULT ( STDMETHODCALLTYPE *CreateVirtualSmartCardWithAttestation )( 
             __RPC__in ITpmVirtualSmartCardManager3 * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR pszFriendlyName,
-            /* [in] */ BYTE bAdminAlgId,
-            /* [size_is][in] */ __RPC__in_ecount_full(cbAdminKey) const BYTE *pbAdminKey,
-            /* [in] */ DWORD cbAdminKey,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbAdminKcv) const BYTE *pbAdminKcv,
-            /* [in] */ DWORD cbAdminKcv,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbPuk) const BYTE *pbPuk,
-            /* [in] */ DWORD cbPuk,
-            /* [size_is][in] */ __RPC__in_ecount_full(cbPin) const BYTE *pbPin,
-            /* [in] */ DWORD cbPin,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbPinPolicy) const BYTE *pbPinPolicy,
-            /* [in] */ DWORD cbPinPolicy,
-            /* [in] */ TPMVSC_ATTESTATION_TYPE attestationType,
-            /* [in] */ BOOL fGenerate,
-            /* [unique][in] */ __RPC__in_opt ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszInstanceId);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszFriendlyName,
+            /* [annotation][in] */ 
+            _In_  BYTE bAdminAlgId,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbAdminKey)  const BYTE *pbAdminKey,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAdminKey,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbAdminKcv)  const BYTE *pbAdminKcv,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAdminKcv,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbPuk)  const BYTE *pbPuk,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPuk,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbPin)  const BYTE *pbPin,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPin,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cbPinPolicy)  const BYTE *pbPinPolicy,
+            /* [annotation][in] */ 
+            _In_  DWORD cbPinPolicy,
+            /* [annotation][in] */ 
+            _In_  TPMVSC_ATTESTATION_TYPE attestationType,
+            /* [annotation][in] */ 
+            _In_  BOOL fGenerate,
+            /* [annotation][unique][in] */ 
+            _In_  ITpmVirtualSmartCardManagerStatusCallback *pStatusCallback,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszInstanceId);
         
         END_INTERFACE
     } ITpmVirtualSmartCardManager3Vtbl;

@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -192,7 +192,8 @@ EXTERN_C const IID IID_INetCfgPnpReconfigCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INetCfgPnpReconfigCallback * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -298,7 +299,8 @@ EXTERN_C const IID IID_INetCfgComponentControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INetCfgComponentControl * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -443,7 +445,8 @@ EXTERN_C const IID IID_INetCfgComponentSetup;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INetCfgComponentSetup * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -588,7 +591,8 @@ EXTERN_C const IID IID_INetCfgComponentPropertyUi;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INetCfgComponentPropertyUi * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -747,7 +751,8 @@ EXTERN_C const IID IID_INetCfgComponentNotifyBinding;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INetCfgComponentNotifyBinding * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -864,7 +869,8 @@ EXTERN_C const IID IID_INetCfgComponentNotifyGlobal;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INetCfgComponentNotifyGlobal * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1001,7 +1007,8 @@ EXTERN_C const IID IID_INetCfgComponentUpperEdge;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INetCfgComponentUpperEdge * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1100,7 +1107,8 @@ EXTERN_C const IID IID_INetLanConnectionUiInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDeviceGuid( 
-            /* [out] */ __RPC__out GUID *pguid) = 0;
+            /* [annotation][out] */ 
+            _Out_  GUID *pguid) = 0;
         
     };
     
@@ -1114,7 +1122,8 @@ EXTERN_C const IID IID_INetLanConnectionUiInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetLanConnectionUiInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1129,7 +1138,8 @@ EXTERN_C const IID IID_INetLanConnectionUiInfo;
         DECLSPEC_XFGVIRT(INetLanConnectionUiInfo, GetDeviceGuid)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceGuid )( 
             __RPC__in INetLanConnectionUiInfo * This,
-            /* [out] */ __RPC__out GUID *pguid);
+            /* [annotation][out] */ 
+            _Out_  GUID *pguid);
         
         END_INTERFACE
     } INetLanConnectionUiInfoVtbl;
@@ -1224,7 +1234,8 @@ EXTERN_C const IID IID_INetRasConnectionIpUiInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetUiInfo( 
-            /* [out] */ __RPC__out RASCON_IPUI *pInfo) = 0;
+            /* [annotation][out] */ 
+            _Out_  RASCON_IPUI *pInfo) = 0;
         
     };
     
@@ -1238,7 +1249,8 @@ EXTERN_C const IID IID_INetRasConnectionIpUiInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetRasConnectionIpUiInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1253,7 +1265,8 @@ EXTERN_C const IID IID_INetRasConnectionIpUiInfo;
         DECLSPEC_XFGVIRT(INetRasConnectionIpUiInfo, GetUiInfo)
         HRESULT ( STDMETHODCALLTYPE *GetUiInfo )( 
             __RPC__in INetRasConnectionIpUiInfo * This,
-            /* [out] */ __RPC__out RASCON_IPUI *pInfo);
+            /* [annotation][out] */ 
+            _Out_  RASCON_IPUI *pInfo);
         
         END_INTERFACE
     } INetRasConnectionIpUiInfoVtbl;
@@ -1335,7 +1348,8 @@ EXTERN_C const IID IID_INetCfgComponentSysPrep;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INetCfgComponentSysPrep * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         

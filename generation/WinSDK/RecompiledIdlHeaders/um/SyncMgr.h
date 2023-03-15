@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -392,12 +392,15 @@ EXTERN_C const IID IID_ISyncMgrHandlerCollection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetHandlerEnumerator( 
-            /* [out] */ __RPC__deref_out_opt IEnumString **ppenum) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumString **ppenum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE BindToHandler( 
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
     };
     
@@ -411,7 +414,8 @@ EXTERN_C const IID IID_ISyncMgrHandlerCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncMgrHandlerCollection * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -426,14 +430,17 @@ EXTERN_C const IID IID_ISyncMgrHandlerCollection;
         DECLSPEC_XFGVIRT(ISyncMgrHandlerCollection, GetHandlerEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetHandlerEnumerator )( 
             __RPC__in ISyncMgrHandlerCollection * This,
-            /* [out] */ __RPC__deref_out_opt IEnumString **ppenum);
+            /* [annotation][out] */ 
+            _Out_  IEnumString **ppenum);
         
         DECLSPEC_XFGVIRT(ISyncMgrHandlerCollection, BindToHandler)
         HRESULT ( STDMETHODCALLTYPE *BindToHandler )( 
             __RPC__in ISyncMgrHandlerCollection * This,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         END_INTERFACE
     } ISyncMgrHandlerCollectionVtbl;
@@ -537,34 +544,47 @@ EXTERN_C const IID IID_ISyncMgrHandler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetName( 
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszName) = 0;
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetHandlerInfo( 
-            /* [out] */ __RPC__deref_out_opt ISyncMgrHandlerInfo **ppHandlerInfo) = 0;
+            /* [annotation][out] */ 
+            _Out_  ISyncMgrHandlerInfo **ppHandlerInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetObject( 
-            /* [in] */ __RPC__in REFGUID rguidObjectID,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidObjectID,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCapabilities( 
-            /* [out] */ __RPC__out SYNCMGR_HANDLER_CAPABILITIES *pmCapabilities) = 0;
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_HANDLER_CAPABILITIES *pmCapabilities) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPolicies( 
-            /* [out] */ __RPC__out SYNCMGR_HANDLER_POLICIES *pmPolicies) = 0;
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_HANDLER_POLICIES *pmPolicies) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Activate( 
-            /* [in] */ BOOL fActivate) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL fActivate) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Enable( 
-            /* [in] */ BOOL fEnable) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL fEnable) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Synchronize( 
             /* [size_is][string][ref][in] */ __RPC__in_ecount_full(cItems) LPCWSTR *ppszItemIDs,
-            /* [in] */ ULONG cItems,
-            /* [unique][in] */ __RPC__in_opt HWND hwndOwner,
-            /* [in] */ __RPC__in_opt ISyncMgrSessionCreator *pSessionCreator,
-            /* [unique][in] */ __RPC__in_opt IUnknown *punk) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG cItems,
+            /* [annotation][unique][in] */ 
+            _In_  HWND hwndOwner,
+            /* [annotation][in] */ 
+            _In_  ISyncMgrSessionCreator *pSessionCreator,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *punk) = 0;
         
     };
     
@@ -578,7 +598,8 @@ EXTERN_C const IID IID_ISyncMgrHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncMgrHandler * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -593,48 +614,61 @@ EXTERN_C const IID IID_ISyncMgrHandler;
         DECLSPEC_XFGVIRT(ISyncMgrHandler, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in ISyncMgrHandler * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszName);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszName);
         
         DECLSPEC_XFGVIRT(ISyncMgrHandler, GetHandlerInfo)
         HRESULT ( STDMETHODCALLTYPE *GetHandlerInfo )( 
             __RPC__in ISyncMgrHandler * This,
-            /* [out] */ __RPC__deref_out_opt ISyncMgrHandlerInfo **ppHandlerInfo);
+            /* [annotation][out] */ 
+            _Out_  ISyncMgrHandlerInfo **ppHandlerInfo);
         
         DECLSPEC_XFGVIRT(ISyncMgrHandler, GetObject)
         HRESULT ( STDMETHODCALLTYPE *GetObject )( 
             __RPC__in ISyncMgrHandler * This,
-            /* [in] */ __RPC__in REFGUID rguidObjectID,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidObjectID,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         DECLSPEC_XFGVIRT(ISyncMgrHandler, GetCapabilities)
         HRESULT ( STDMETHODCALLTYPE *GetCapabilities )( 
             __RPC__in ISyncMgrHandler * This,
-            /* [out] */ __RPC__out SYNCMGR_HANDLER_CAPABILITIES *pmCapabilities);
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_HANDLER_CAPABILITIES *pmCapabilities);
         
         DECLSPEC_XFGVIRT(ISyncMgrHandler, GetPolicies)
         HRESULT ( STDMETHODCALLTYPE *GetPolicies )( 
             __RPC__in ISyncMgrHandler * This,
-            /* [out] */ __RPC__out SYNCMGR_HANDLER_POLICIES *pmPolicies);
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_HANDLER_POLICIES *pmPolicies);
         
         DECLSPEC_XFGVIRT(ISyncMgrHandler, Activate)
         HRESULT ( STDMETHODCALLTYPE *Activate )( 
             __RPC__in ISyncMgrHandler * This,
-            /* [in] */ BOOL fActivate);
+            /* [annotation][in] */ 
+            _In_  BOOL fActivate);
         
         DECLSPEC_XFGVIRT(ISyncMgrHandler, Enable)
         HRESULT ( STDMETHODCALLTYPE *Enable )( 
             __RPC__in ISyncMgrHandler * This,
-            /* [in] */ BOOL fEnable);
+            /* [annotation][in] */ 
+            _In_  BOOL fEnable);
         
         DECLSPEC_XFGVIRT(ISyncMgrHandler, Synchronize)
         HRESULT ( STDMETHODCALLTYPE *Synchronize )( 
             __RPC__in ISyncMgrHandler * This,
             /* [size_is][string][ref][in] */ __RPC__in_ecount_full(cItems) LPCWSTR *ppszItemIDs,
-            /* [in] */ ULONG cItems,
-            /* [unique][in] */ __RPC__in_opt HWND hwndOwner,
-            /* [in] */ __RPC__in_opt ISyncMgrSessionCreator *pSessionCreator,
-            /* [unique][in] */ __RPC__in_opt IUnknown *punk);
+            /* [annotation][in] */ 
+            _In_  ULONG cItems,
+            /* [annotation][unique][in] */ 
+            _In_  HWND hwndOwner,
+            /* [annotation][in] */ 
+            _In_  ISyncMgrSessionCreator *pSessionCreator,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *punk);
         
         END_INTERFACE
     } ISyncMgrHandlerVtbl;
@@ -731,16 +765,20 @@ EXTERN_C const IID IID_ISyncMgrHandlerInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetType( 
-            /* [out] */ __RPC__out SYNCMGR_HANDLER_TYPE *pnType) = 0;
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_HANDLER_TYPE *pnType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTypeLabel( 
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszTypeLabel) = 0;
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszTypeLabel) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetComment( 
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszComment) = 0;
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszComment) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLastSyncTime( 
-            /* [out] */ __RPC__out FILETIME *pftLastSync) = 0;
+            /* [annotation][out] */ 
+            _Out_  FILETIME *pftLastSync) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsActive( void) = 0;
         
@@ -760,7 +798,8 @@ EXTERN_C const IID IID_ISyncMgrHandlerInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncMgrHandlerInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -775,22 +814,26 @@ EXTERN_C const IID IID_ISyncMgrHandlerInfo;
         DECLSPEC_XFGVIRT(ISyncMgrHandlerInfo, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in ISyncMgrHandlerInfo * This,
-            /* [out] */ __RPC__out SYNCMGR_HANDLER_TYPE *pnType);
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_HANDLER_TYPE *pnType);
         
         DECLSPEC_XFGVIRT(ISyncMgrHandlerInfo, GetTypeLabel)
         HRESULT ( STDMETHODCALLTYPE *GetTypeLabel )( 
             __RPC__in ISyncMgrHandlerInfo * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszTypeLabel);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszTypeLabel);
         
         DECLSPEC_XFGVIRT(ISyncMgrHandlerInfo, GetComment)
         HRESULT ( STDMETHODCALLTYPE *GetComment )( 
             __RPC__in ISyncMgrHandlerInfo * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszComment);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszComment);
         
         DECLSPEC_XFGVIRT(ISyncMgrHandlerInfo, GetLastSyncTime)
         HRESULT ( STDMETHODCALLTYPE *GetLastSyncTime )( 
             __RPC__in ISyncMgrHandlerInfo * This,
-            /* [out] */ __RPC__out FILETIME *pftLastSync);
+            /* [annotation][out] */ 
+            _Out_  FILETIME *pftLastSync);
         
         DECLSPEC_XFGVIRT(ISyncMgrHandlerInfo, IsActive)
         HRESULT ( STDMETHODCALLTYPE *IsActive )( 
@@ -876,13 +919,16 @@ EXTERN_C const IID IID_ISyncMgrSyncItemContainer;
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSyncItem( 
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszItemID,
-            /* [out] */ __RPC__deref_out_opt ISyncMgrSyncItem **ppItem) = 0;
+            /* [annotation][out] */ 
+            _Out_  ISyncMgrSyncItem **ppItem) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSyncItemEnumerator( 
-            /* [out] */ __RPC__deref_out_opt IEnumSyncMgrSyncItems **ppenum) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumSyncMgrSyncItems **ppenum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSyncItemCount( 
-            /* [out] */ __RPC__out ULONG *pcItems) = 0;
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcItems) = 0;
         
     };
     
@@ -896,7 +942,8 @@ EXTERN_C const IID IID_ISyncMgrSyncItemContainer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncMgrSyncItemContainer * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -912,17 +959,20 @@ EXTERN_C const IID IID_ISyncMgrSyncItemContainer;
         HRESULT ( STDMETHODCALLTYPE *GetSyncItem )( 
             __RPC__in ISyncMgrSyncItemContainer * This,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszItemID,
-            /* [out] */ __RPC__deref_out_opt ISyncMgrSyncItem **ppItem);
+            /* [annotation][out] */ 
+            _Out_  ISyncMgrSyncItem **ppItem);
         
         DECLSPEC_XFGVIRT(ISyncMgrSyncItemContainer, GetSyncItemEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetSyncItemEnumerator )( 
             __RPC__in ISyncMgrSyncItemContainer * This,
-            /* [out] */ __RPC__deref_out_opt IEnumSyncMgrSyncItems **ppenum);
+            /* [annotation][out] */ 
+            _Out_  IEnumSyncMgrSyncItems **ppenum);
         
         DECLSPEC_XFGVIRT(ISyncMgrSyncItemContainer, GetSyncItemCount)
         HRESULT ( STDMETHODCALLTYPE *GetSyncItemCount )( 
             __RPC__in ISyncMgrSyncItemContainer * This,
-            /* [out] */ __RPC__out ULONG *pcItems);
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcItems);
         
         END_INTERFACE
     } ISyncMgrSyncItemContainerVtbl;
@@ -1024,27 +1074,36 @@ EXTERN_C const IID IID_ISyncMgrSyncItem;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetItemID( 
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszItemID) = 0;
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszItemID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetName( 
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszName) = 0;
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetItemInfo( 
-            /* [out] */ __RPC__deref_out_opt ISyncMgrSyncItemInfo **ppItemInfo) = 0;
+            /* [annotation][out] */ 
+            _Out_  ISyncMgrSyncItemInfo **ppItemInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetObject( 
-            /* [in] */ __RPC__in REFGUID rguidObjectID,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidObjectID,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCapabilities( 
-            /* [out] */ __RPC__out SYNCMGR_ITEM_CAPABILITIES *pmCapabilities) = 0;
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_ITEM_CAPABILITIES *pmCapabilities) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPolicies( 
-            /* [out] */ __RPC__out SYNCMGR_ITEM_POLICIES *pmPolicies) = 0;
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_ITEM_POLICIES *pmPolicies) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Enable( 
-            /* [in] */ BOOL fEnable) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL fEnable) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Delete( void) = 0;
         
@@ -1060,7 +1119,8 @@ EXTERN_C const IID IID_ISyncMgrSyncItem;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncMgrSyncItem * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1075,39 +1135,48 @@ EXTERN_C const IID IID_ISyncMgrSyncItem;
         DECLSPEC_XFGVIRT(ISyncMgrSyncItem, GetItemID)
         HRESULT ( STDMETHODCALLTYPE *GetItemID )( 
             __RPC__in ISyncMgrSyncItem * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszItemID);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszItemID);
         
         DECLSPEC_XFGVIRT(ISyncMgrSyncItem, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in ISyncMgrSyncItem * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszName);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszName);
         
         DECLSPEC_XFGVIRT(ISyncMgrSyncItem, GetItemInfo)
         HRESULT ( STDMETHODCALLTYPE *GetItemInfo )( 
             __RPC__in ISyncMgrSyncItem * This,
-            /* [out] */ __RPC__deref_out_opt ISyncMgrSyncItemInfo **ppItemInfo);
+            /* [annotation][out] */ 
+            _Out_  ISyncMgrSyncItemInfo **ppItemInfo);
         
         DECLSPEC_XFGVIRT(ISyncMgrSyncItem, GetObject)
         HRESULT ( STDMETHODCALLTYPE *GetObject )( 
             __RPC__in ISyncMgrSyncItem * This,
-            /* [in] */ __RPC__in REFGUID rguidObjectID,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidObjectID,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         DECLSPEC_XFGVIRT(ISyncMgrSyncItem, GetCapabilities)
         HRESULT ( STDMETHODCALLTYPE *GetCapabilities )( 
             __RPC__in ISyncMgrSyncItem * This,
-            /* [out] */ __RPC__out SYNCMGR_ITEM_CAPABILITIES *pmCapabilities);
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_ITEM_CAPABILITIES *pmCapabilities);
         
         DECLSPEC_XFGVIRT(ISyncMgrSyncItem, GetPolicies)
         HRESULT ( STDMETHODCALLTYPE *GetPolicies )( 
             __RPC__in ISyncMgrSyncItem * This,
-            /* [out] */ __RPC__out SYNCMGR_ITEM_POLICIES *pmPolicies);
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_ITEM_POLICIES *pmPolicies);
         
         DECLSPEC_XFGVIRT(ISyncMgrSyncItem, Enable)
         HRESULT ( STDMETHODCALLTYPE *Enable )( 
             __RPC__in ISyncMgrSyncItem * This,
-            /* [in] */ BOOL fEnable);
+            /* [annotation][in] */ 
+            _In_  BOOL fEnable);
         
         DECLSPEC_XFGVIRT(ISyncMgrSyncItem, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -1187,13 +1256,16 @@ EXTERN_C const IID IID_ISyncMgrSyncItemInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTypeLabel( 
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszTypeLabel) = 0;
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszTypeLabel) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetComment( 
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszComment) = 0;
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszComment) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLastSyncTime( 
-            /* [out] */ __RPC__out FILETIME *pftLastSync) = 0;
+            /* [annotation][out] */ 
+            _Out_  FILETIME *pftLastSync) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsEnabled( void) = 0;
         
@@ -1211,7 +1283,8 @@ EXTERN_C const IID IID_ISyncMgrSyncItemInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncMgrSyncItemInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1226,17 +1299,20 @@ EXTERN_C const IID IID_ISyncMgrSyncItemInfo;
         DECLSPEC_XFGVIRT(ISyncMgrSyncItemInfo, GetTypeLabel)
         HRESULT ( STDMETHODCALLTYPE *GetTypeLabel )( 
             __RPC__in ISyncMgrSyncItemInfo * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszTypeLabel);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszTypeLabel);
         
         DECLSPEC_XFGVIRT(ISyncMgrSyncItemInfo, GetComment)
         HRESULT ( STDMETHODCALLTYPE *GetComment )( 
             __RPC__in ISyncMgrSyncItemInfo * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszComment);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszComment);
         
         DECLSPEC_XFGVIRT(ISyncMgrSyncItemInfo, GetLastSyncTime)
         HRESULT ( STDMETHODCALLTYPE *GetLastSyncTime )( 
             __RPC__in ISyncMgrSyncItemInfo * This,
-            /* [out] */ __RPC__out FILETIME *pftLastSync);
+            /* [annotation][out] */ 
+            _Out_  FILETIME *pftLastSync);
         
         DECLSPEC_XFGVIRT(ISyncMgrSyncItemInfo, IsEnabled)
         HRESULT ( STDMETHODCALLTYPE *IsEnabled )( 
@@ -1311,17 +1387,22 @@ EXTERN_C const IID IID_IEnumSyncMgrSyncItems;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) ISyncMgrSyncItem **rgelt,
-            /* [out] */ __RPC__out ULONG *pceltFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(celt,*pceltFetched)  ISyncMgrSyncItem **rgelt,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [out] */ __RPC__deref_out_opt IEnumSyncMgrSyncItems **ppenum) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumSyncMgrSyncItems **ppenum) = 0;
         
     };
     
@@ -1335,7 +1416,8 @@ EXTERN_C const IID IID_IEnumSyncMgrSyncItems;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumSyncMgrSyncItems * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1350,14 +1432,18 @@ EXTERN_C const IID IID_IEnumSyncMgrSyncItems;
         DECLSPEC_XFGVIRT(IEnumSyncMgrSyncItems, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumSyncMgrSyncItems * This,
-            /* [in] */ ULONG celt,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) ISyncMgrSyncItem **rgelt,
-            /* [out] */ __RPC__out ULONG *pceltFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(celt,*pceltFetched)  ISyncMgrSyncItem **rgelt,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumSyncMgrSyncItems, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumSyncMgrSyncItems * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumSyncMgrSyncItems, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -1366,7 +1452,8 @@ EXTERN_C const IID IID_IEnumSyncMgrSyncItems;
         DECLSPEC_XFGVIRT(IEnumSyncMgrSyncItems, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumSyncMgrSyncItems * This,
-            /* [out] */ __RPC__deref_out_opt IEnumSyncMgrSyncItems **ppenum);
+            /* [annotation][out] */ 
+            _Out_  IEnumSyncMgrSyncItems **ppenum);
         
         END_INTERFACE
     } IEnumSyncMgrSyncItemsVtbl;
@@ -1476,9 +1563,12 @@ EXTERN_C const IID IID_ISyncMgrSessionCreator;
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateSession( 
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
-            /* [size_is][string][unique][in] */ __RPC__in_ecount_full_opt(cItems) LPCWSTR *ppszItemIDs,
-            /* [in] */ ULONG cItems,
-            /* [out] */ __RPC__deref_out_opt ISyncMgrSyncCallback **ppCallback) = 0;
+            /* [annotation][size_is][string][unique][in] */ 
+            _In_reads_(cItems)  LPCWSTR *ppszItemIDs,
+            /* [annotation][in] */ 
+            _In_  ULONG cItems,
+            /* [annotation][out] */ 
+            _Out_  ISyncMgrSyncCallback **ppCallback) = 0;
         
     };
     
@@ -1492,7 +1582,8 @@ EXTERN_C const IID IID_ISyncMgrSessionCreator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncMgrSessionCreator * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1508,9 +1599,12 @@ EXTERN_C const IID IID_ISyncMgrSessionCreator;
         HRESULT ( STDMETHODCALLTYPE *CreateSession )( 
             __RPC__in ISyncMgrSessionCreator * This,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
-            /* [size_is][string][unique][in] */ __RPC__in_ecount_full_opt(cItems) LPCWSTR *ppszItemIDs,
-            /* [in] */ ULONG cItems,
-            /* [out] */ __RPC__deref_out_opt ISyncMgrSyncCallback **ppCallback);
+            /* [annotation][size_is][string][unique][in] */ 
+            _In_reads_(cItems)  LPCWSTR *ppszItemIDs,
+            /* [annotation][in] */ 
+            _In_  ULONG cItems,
+            /* [annotation][out] */ 
+            _Out_  ISyncMgrSyncCallback **ppCallback);
         
         END_INTERFACE
     } ISyncMgrSessionCreatorVtbl;
@@ -1566,42 +1660,59 @@ EXTERN_C const IID IID_ISyncMgrSyncCallback;
     public:
         virtual HRESULT STDMETHODCALLTYPE ReportProgress( 
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszItemID,
-            /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pszProgressText,
-            /* [in] */ SYNCMGR_PROGRESS_STATUS nStatus,
-            /* [in] */ ULONG uCurrentStep,
-            /* [in] */ ULONG uMaxStep,
-            /* [unique][out][in] */ __RPC__inout_opt SYNCMGR_CANCEL_REQUEST *pnCancelRequest) = 0;
+            /* [annotation][string][unique][in] */ 
+            _In_  LPCWSTR pszProgressText,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_PROGRESS_STATUS nStatus,
+            /* [annotation][in] */ 
+            _In_  ULONG uCurrentStep,
+            /* [annotation][in] */ 
+            _In_  ULONG uMaxStep,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  SYNCMGR_CANCEL_REQUEST *pnCancelRequest) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetHandlerProgressText( 
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszProgressText,
-            /* [unique][out][in] */ __RPC__inout_opt SYNCMGR_CANCEL_REQUEST *pnCancelRequest) = 0;
+            /* [annotation][unique][out][in] */ 
+            _Inout_  SYNCMGR_CANCEL_REQUEST *pnCancelRequest) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReportEvent( 
-            /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pszItemID,
-            /* [in] */ SYNCMGR_EVENT_LEVEL nLevel,
-            /* [in] */ SYNCMGR_EVENT_FLAGS nFlags,
+            /* [annotation][string][unique][in] */ 
+            _In_  LPCWSTR pszItemID,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_EVENT_LEVEL nLevel,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_EVENT_FLAGS nFlags,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszName,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszDescription,
-            /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pszLinkText,
-            /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pszLinkReference,
-            /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pszContext,
-            /* [out] */ __RPC__out GUID *pguidEventID) = 0;
+            /* [annotation][string][unique][in] */ 
+            _In_  LPCWSTR pszLinkText,
+            /* [annotation][string][unique][in] */ 
+            _In_  LPCWSTR pszLinkReference,
+            /* [annotation][string][unique][in] */ 
+            _In_  LPCWSTR pszContext,
+            /* [annotation][out] */ 
+            _Out_  GUID *pguidEventID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CanContinue( 
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszItemID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryForAdditionalItems( 
-            /* [out] */ __RPC__deref_out_opt IEnumString **ppenumItemIDs,
-            /* [out] */ __RPC__deref_out_opt IEnumUnknown **ppenumPunks) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumString **ppenumItemIDs,
+            /* [annotation][out] */ 
+            _Out_  IEnumUnknown **ppenumPunks) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddItemToSession( 
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszItemID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddIUnknownToSession( 
-            /* [in] */ __RPC__in_opt IUnknown *punk) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *punk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProposeItem( 
-            /* [in] */ __RPC__in_opt ISyncMgrSyncItem *pNewItem) = 0;
+            /* [annotation][in] */ 
+            _In_  ISyncMgrSyncItem *pNewItem) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CommitItem( 
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszItemID) = 0;
@@ -1620,7 +1731,8 @@ EXTERN_C const IID IID_ISyncMgrSyncCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncMgrSyncCallback * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1636,30 +1748,43 @@ EXTERN_C const IID IID_ISyncMgrSyncCallback;
         HRESULT ( STDMETHODCALLTYPE *ReportProgress )( 
             __RPC__in ISyncMgrSyncCallback * This,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszItemID,
-            /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pszProgressText,
-            /* [in] */ SYNCMGR_PROGRESS_STATUS nStatus,
-            /* [in] */ ULONG uCurrentStep,
-            /* [in] */ ULONG uMaxStep,
-            /* [unique][out][in] */ __RPC__inout_opt SYNCMGR_CANCEL_REQUEST *pnCancelRequest);
+            /* [annotation][string][unique][in] */ 
+            _In_  LPCWSTR pszProgressText,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_PROGRESS_STATUS nStatus,
+            /* [annotation][in] */ 
+            _In_  ULONG uCurrentStep,
+            /* [annotation][in] */ 
+            _In_  ULONG uMaxStep,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  SYNCMGR_CANCEL_REQUEST *pnCancelRequest);
         
         DECLSPEC_XFGVIRT(ISyncMgrSyncCallback, SetHandlerProgressText)
         HRESULT ( STDMETHODCALLTYPE *SetHandlerProgressText )( 
             __RPC__in ISyncMgrSyncCallback * This,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszProgressText,
-            /* [unique][out][in] */ __RPC__inout_opt SYNCMGR_CANCEL_REQUEST *pnCancelRequest);
+            /* [annotation][unique][out][in] */ 
+            _Inout_  SYNCMGR_CANCEL_REQUEST *pnCancelRequest);
         
         DECLSPEC_XFGVIRT(ISyncMgrSyncCallback, ReportEvent)
         HRESULT ( STDMETHODCALLTYPE *ReportEvent )( 
             __RPC__in ISyncMgrSyncCallback * This,
-            /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pszItemID,
-            /* [in] */ SYNCMGR_EVENT_LEVEL nLevel,
-            /* [in] */ SYNCMGR_EVENT_FLAGS nFlags,
+            /* [annotation][string][unique][in] */ 
+            _In_  LPCWSTR pszItemID,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_EVENT_LEVEL nLevel,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_EVENT_FLAGS nFlags,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszName,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszDescription,
-            /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pszLinkText,
-            /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pszLinkReference,
-            /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pszContext,
-            /* [out] */ __RPC__out GUID *pguidEventID);
+            /* [annotation][string][unique][in] */ 
+            _In_  LPCWSTR pszLinkText,
+            /* [annotation][string][unique][in] */ 
+            _In_  LPCWSTR pszLinkReference,
+            /* [annotation][string][unique][in] */ 
+            _In_  LPCWSTR pszContext,
+            /* [annotation][out] */ 
+            _Out_  GUID *pguidEventID);
         
         DECLSPEC_XFGVIRT(ISyncMgrSyncCallback, CanContinue)
         HRESULT ( STDMETHODCALLTYPE *CanContinue )( 
@@ -1669,8 +1794,10 @@ EXTERN_C const IID IID_ISyncMgrSyncCallback;
         DECLSPEC_XFGVIRT(ISyncMgrSyncCallback, QueryForAdditionalItems)
         HRESULT ( STDMETHODCALLTYPE *QueryForAdditionalItems )( 
             __RPC__in ISyncMgrSyncCallback * This,
-            /* [out] */ __RPC__deref_out_opt IEnumString **ppenumItemIDs,
-            /* [out] */ __RPC__deref_out_opt IEnumUnknown **ppenumPunks);
+            /* [annotation][out] */ 
+            _Out_  IEnumString **ppenumItemIDs,
+            /* [annotation][out] */ 
+            _Out_  IEnumUnknown **ppenumPunks);
         
         DECLSPEC_XFGVIRT(ISyncMgrSyncCallback, AddItemToSession)
         HRESULT ( STDMETHODCALLTYPE *AddItemToSession )( 
@@ -1680,12 +1807,14 @@ EXTERN_C const IID IID_ISyncMgrSyncCallback;
         DECLSPEC_XFGVIRT(ISyncMgrSyncCallback, AddIUnknownToSession)
         HRESULT ( STDMETHODCALLTYPE *AddIUnknownToSession )( 
             __RPC__in ISyncMgrSyncCallback * This,
-            /* [in] */ __RPC__in_opt IUnknown *punk);
+            /* [annotation][in] */ 
+            _In_  IUnknown *punk);
         
         DECLSPEC_XFGVIRT(ISyncMgrSyncCallback, ProposeItem)
         HRESULT ( STDMETHODCALLTYPE *ProposeItem )( 
             __RPC__in ISyncMgrSyncCallback * This,
-            /* [in] */ __RPC__in_opt ISyncMgrSyncItem *pNewItem);
+            /* [annotation][in] */ 
+            _In_  ISyncMgrSyncItem *pNewItem);
         
         DECLSPEC_XFGVIRT(ISyncMgrSyncCallback, CommitItem)
         HRESULT ( STDMETHODCALLTYPE *CommitItem )( 
@@ -1776,7 +1905,8 @@ EXTERN_C const IID IID_ISyncMgrUIOperation;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Run( 
-            /* [unique][in] */ __RPC__in_opt HWND hwndOwner) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  HWND hwndOwner) = 0;
         
     };
     
@@ -1790,7 +1920,8 @@ EXTERN_C const IID IID_ISyncMgrUIOperation;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncMgrUIOperation * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1805,7 +1936,8 @@ EXTERN_C const IID IID_ISyncMgrUIOperation;
         DECLSPEC_XFGVIRT(ISyncMgrUIOperation, Run)
         HRESULT ( STDMETHODCALLTYPE *Run )( 
             __RPC__in ISyncMgrUIOperation * This,
-            /* [unique][in] */ __RPC__in_opt HWND hwndOwner);
+            /* [annotation][unique][in] */ 
+            _In_  HWND hwndOwner);
         
         END_INTERFACE
     } ISyncMgrUIOperationVtbl;
@@ -1860,8 +1992,10 @@ EXTERN_C const IID IID_ISyncMgrEventLinkUIOperation;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Init( 
-            /* [in] */ __RPC__in REFGUID rguidEventID,
-            /* [in] */ __RPC__in_opt ISyncMgrEvent *pEvent) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidEventID,
+            /* [annotation][in] */ 
+            _In_  ISyncMgrEvent *pEvent) = 0;
         
     };
     
@@ -1875,7 +2009,8 @@ EXTERN_C const IID IID_ISyncMgrEventLinkUIOperation;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncMgrEventLinkUIOperation * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1890,13 +2025,16 @@ EXTERN_C const IID IID_ISyncMgrEventLinkUIOperation;
         DECLSPEC_XFGVIRT(ISyncMgrUIOperation, Run)
         HRESULT ( STDMETHODCALLTYPE *Run )( 
             __RPC__in ISyncMgrEventLinkUIOperation * This,
-            /* [unique][in] */ __RPC__in_opt HWND hwndOwner);
+            /* [annotation][unique][in] */ 
+            _In_  HWND hwndOwner);
         
         DECLSPEC_XFGVIRT(ISyncMgrEventLinkUIOperation, Init)
         HRESULT ( STDMETHODCALLTYPE *Init )( 
             __RPC__in ISyncMgrEventLinkUIOperation * This,
-            /* [in] */ __RPC__in REFGUID rguidEventID,
-            /* [in] */ __RPC__in_opt ISyncMgrEvent *pEvent);
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidEventID,
+            /* [annotation][in] */ 
+            _In_  ISyncMgrEvent *pEvent);
         
         END_INTERFACE
     } ISyncMgrEventLinkUIOperationVtbl;
@@ -1969,7 +2107,8 @@ EXTERN_C const IID IID_ISyncMgrScheduleWizardUIOperation;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncMgrScheduleWizardUIOperation * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1984,7 +2123,8 @@ EXTERN_C const IID IID_ISyncMgrScheduleWizardUIOperation;
         DECLSPEC_XFGVIRT(ISyncMgrUIOperation, Run)
         HRESULT ( STDMETHODCALLTYPE *Run )( 
             __RPC__in ISyncMgrScheduleWizardUIOperation * This,
-            /* [unique][in] */ __RPC__in_opt HWND hwndOwner);
+            /* [annotation][unique][in] */ 
+            _In_  HWND hwndOwner);
         
         DECLSPEC_XFGVIRT(ISyncMgrScheduleWizardUIOperation, InitWizard)
         HRESULT ( STDMETHODCALLTYPE *InitWizard )( 
@@ -2048,9 +2188,12 @@ EXTERN_C const IID IID_ISyncMgrSyncResult;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Result( 
-            /* [in] */ SYNCMGR_PROGRESS_STATUS nStatus,
-            /* [in] */ UINT cError,
-            /* [in] */ UINT cConflicts) = 0;
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_PROGRESS_STATUS nStatus,
+            /* [annotation][in] */ 
+            _In_  UINT cError,
+            /* [annotation][in] */ 
+            _In_  UINT cConflicts) = 0;
         
     };
     
@@ -2064,7 +2207,8 @@ EXTERN_C const IID IID_ISyncMgrSyncResult;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncMgrSyncResult * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2079,9 +2223,12 @@ EXTERN_C const IID IID_ISyncMgrSyncResult;
         DECLSPEC_XFGVIRT(ISyncMgrSyncResult, Result)
         HRESULT ( STDMETHODCALLTYPE *Result )( 
             __RPC__in ISyncMgrSyncResult * This,
-            /* [in] */ SYNCMGR_PROGRESS_STATUS nStatus,
-            /* [in] */ UINT cError,
-            /* [in] */ UINT cConflicts);
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_PROGRESS_STATUS nStatus,
+            /* [annotation][in] */ 
+            _In_  UINT cError,
+            /* [annotation][in] */ 
+            _In_  UINT cConflicts);
         
         END_INTERFACE
     } ISyncMgrSyncResultVtbl;
@@ -2172,22 +2319,32 @@ EXTERN_C const IID IID_ISyncMgrControl;
     public:
         virtual HRESULT STDMETHODCALLTYPE StartHandlerSync( 
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
-            /* [unique][in] */ __RPC__in_opt HWND hwndOwner,
-            /* [unique][in] */ __RPC__in_opt IUnknown *punk,
-            /* [in] */ SYNCMGR_SYNC_CONTROL_FLAGS nSyncControlFlags,
-            /* [unique][in] */ __RPC__in_opt ISyncMgrSyncResult *pResult) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  HWND hwndOwner,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *punk,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_SYNC_CONTROL_FLAGS nSyncControlFlags,
+            /* [annotation][unique][in] */ 
+            _In_  ISyncMgrSyncResult *pResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StartItemSync( 
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
             /* [size_is][string][ref][in] */ __RPC__in_ecount_full(cItems) LPCWSTR *ppszItemIDs,
-            /* [in] */ ULONG cItems,
-            /* [unique][in] */ __RPC__in_opt HWND hwndOwner,
-            /* [unique][in] */ __RPC__in_opt IUnknown *punk,
-            /* [in] */ SYNCMGR_SYNC_CONTROL_FLAGS nSyncControlFlags,
-            /* [unique][in] */ __RPC__in_opt ISyncMgrSyncResult *pResult) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG cItems,
+            /* [annotation][unique][in] */ 
+            _In_  HWND hwndOwner,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *punk,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_SYNC_CONTROL_FLAGS nSyncControlFlags,
+            /* [annotation][unique][in] */ 
+            _In_  ISyncMgrSyncResult *pResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StartSyncAll( 
-            /* [unique][in] */ __RPC__in_opt HWND hwndOwner) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  HWND hwndOwner) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StopHandlerSync( 
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID) = 0;
@@ -2195,57 +2352,78 @@ EXTERN_C const IID IID_ISyncMgrControl;
         virtual HRESULT STDMETHODCALLTYPE StopItemSync( 
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
             /* [size_is][string][ref][in] */ __RPC__in_ecount_full(cItems) LPCWSTR *ppszItemIDs,
-            /* [in] */ ULONG cItems) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG cItems) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StopSyncAll( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UpdateHandlerCollection( 
-            /* [in] */ __RPC__in REFCLSID rclsidCollectionID,
-            /* [in] */ SYNCMGR_CONTROL_FLAGS nControlFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  REFCLSID rclsidCollectionID,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_CONTROL_FLAGS nControlFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UpdateHandler( 
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
-            /* [in] */ SYNCMGR_CONTROL_FLAGS nControlFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_CONTROL_FLAGS nControlFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UpdateItem( 
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszItemID,
-            /* [in] */ SYNCMGR_CONTROL_FLAGS nControlFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_CONTROL_FLAGS nControlFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UpdateEvents( 
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
-            /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pszItemID,
-            /* [in] */ SYNCMGR_CONTROL_FLAGS nControlFlags) = 0;
+            /* [annotation][string][unique][in] */ 
+            _In_  LPCWSTR pszItemID,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_CONTROL_FLAGS nControlFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UpdateConflict( 
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
-            /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pszItemID,
-            /* [in] */ __RPC__in_opt ISyncMgrConflict *pConflict,
-            /* [in] */ SYNCMGR_UPDATE_REASON nReason) = 0;
+            /* [annotation][string][unique][in] */ 
+            _In_  LPCWSTR pszItemID,
+            /* [annotation][in] */ 
+            _In_  ISyncMgrConflict *pConflict,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_UPDATE_REASON nReason) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UpdateConflicts( 
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
-            /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pszItemID,
-            /* [in] */ SYNCMGR_CONTROL_FLAGS nControlFlags) = 0;
+            /* [annotation][string][unique][in] */ 
+            _In_  LPCWSTR pszItemID,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_CONTROL_FLAGS nControlFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ActivateHandler( 
-            /* [in] */ BOOL fActivate,
+            /* [annotation][in] */ 
+            _In_  BOOL fActivate,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
-            /* [unique][in] */ __RPC__in_opt HWND hwndOwner,
-            /* [in] */ SYNCMGR_CONTROL_FLAGS nControlFlags) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  HWND hwndOwner,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_CONTROL_FLAGS nControlFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnableHandler( 
-            /* [in] */ BOOL fEnable,
+            /* [annotation][in] */ 
+            _In_  BOOL fEnable,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
-            /* [unique][in] */ __RPC__in_opt HWND hwndOwner,
-            /* [in] */ SYNCMGR_CONTROL_FLAGS nControlFlags) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  HWND hwndOwner,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_CONTROL_FLAGS nControlFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnableItem( 
-            /* [in] */ BOOL fEnable,
+            /* [annotation][in] */ 
+            _In_  BOOL fEnable,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszItemID,
-            /* [unique][in] */ __RPC__in_opt HWND hwndOwner,
-            /* [in] */ SYNCMGR_CONTROL_FLAGS nControlFlags) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  HWND hwndOwner,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_CONTROL_FLAGS nControlFlags) = 0;
         
     };
     
@@ -2259,7 +2437,8 @@ EXTERN_C const IID IID_ISyncMgrControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncMgrControl * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2275,26 +2454,36 @@ EXTERN_C const IID IID_ISyncMgrControl;
         HRESULT ( STDMETHODCALLTYPE *StartHandlerSync )( 
             __RPC__in ISyncMgrControl * This,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
-            /* [unique][in] */ __RPC__in_opt HWND hwndOwner,
-            /* [unique][in] */ __RPC__in_opt IUnknown *punk,
-            /* [in] */ SYNCMGR_SYNC_CONTROL_FLAGS nSyncControlFlags,
-            /* [unique][in] */ __RPC__in_opt ISyncMgrSyncResult *pResult);
+            /* [annotation][unique][in] */ 
+            _In_  HWND hwndOwner,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *punk,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_SYNC_CONTROL_FLAGS nSyncControlFlags,
+            /* [annotation][unique][in] */ 
+            _In_  ISyncMgrSyncResult *pResult);
         
         DECLSPEC_XFGVIRT(ISyncMgrControl, StartItemSync)
         HRESULT ( STDMETHODCALLTYPE *StartItemSync )( 
             __RPC__in ISyncMgrControl * This,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
             /* [size_is][string][ref][in] */ __RPC__in_ecount_full(cItems) LPCWSTR *ppszItemIDs,
-            /* [in] */ ULONG cItems,
-            /* [unique][in] */ __RPC__in_opt HWND hwndOwner,
-            /* [unique][in] */ __RPC__in_opt IUnknown *punk,
-            /* [in] */ SYNCMGR_SYNC_CONTROL_FLAGS nSyncControlFlags,
-            /* [unique][in] */ __RPC__in_opt ISyncMgrSyncResult *pResult);
+            /* [annotation][in] */ 
+            _In_  ULONG cItems,
+            /* [annotation][unique][in] */ 
+            _In_  HWND hwndOwner,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *punk,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_SYNC_CONTROL_FLAGS nSyncControlFlags,
+            /* [annotation][unique][in] */ 
+            _In_  ISyncMgrSyncResult *pResult);
         
         DECLSPEC_XFGVIRT(ISyncMgrControl, StartSyncAll)
         HRESULT ( STDMETHODCALLTYPE *StartSyncAll )( 
             __RPC__in ISyncMgrControl * This,
-            /* [unique][in] */ __RPC__in_opt HWND hwndOwner);
+            /* [annotation][unique][in] */ 
+            _In_  HWND hwndOwner);
         
         DECLSPEC_XFGVIRT(ISyncMgrControl, StopHandlerSync)
         HRESULT ( STDMETHODCALLTYPE *StopHandlerSync )( 
@@ -2306,7 +2495,8 @@ EXTERN_C const IID IID_ISyncMgrControl;
             __RPC__in ISyncMgrControl * This,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
             /* [size_is][string][ref][in] */ __RPC__in_ecount_full(cItems) LPCWSTR *ppszItemIDs,
-            /* [in] */ ULONG cItems);
+            /* [annotation][in] */ 
+            _In_  ULONG cItems);
         
         DECLSPEC_XFGVIRT(ISyncMgrControl, StopSyncAll)
         HRESULT ( STDMETHODCALLTYPE *StopSyncAll )( 
@@ -2315,68 +2505,88 @@ EXTERN_C const IID IID_ISyncMgrControl;
         DECLSPEC_XFGVIRT(ISyncMgrControl, UpdateHandlerCollection)
         HRESULT ( STDMETHODCALLTYPE *UpdateHandlerCollection )( 
             __RPC__in ISyncMgrControl * This,
-            /* [in] */ __RPC__in REFCLSID rclsidCollectionID,
-            /* [in] */ SYNCMGR_CONTROL_FLAGS nControlFlags);
+            /* [annotation][in] */ 
+            _In_  REFCLSID rclsidCollectionID,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_CONTROL_FLAGS nControlFlags);
         
         DECLSPEC_XFGVIRT(ISyncMgrControl, UpdateHandler)
         HRESULT ( STDMETHODCALLTYPE *UpdateHandler )( 
             __RPC__in ISyncMgrControl * This,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
-            /* [in] */ SYNCMGR_CONTROL_FLAGS nControlFlags);
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_CONTROL_FLAGS nControlFlags);
         
         DECLSPEC_XFGVIRT(ISyncMgrControl, UpdateItem)
         HRESULT ( STDMETHODCALLTYPE *UpdateItem )( 
             __RPC__in ISyncMgrControl * This,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszItemID,
-            /* [in] */ SYNCMGR_CONTROL_FLAGS nControlFlags);
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_CONTROL_FLAGS nControlFlags);
         
         DECLSPEC_XFGVIRT(ISyncMgrControl, UpdateEvents)
         HRESULT ( STDMETHODCALLTYPE *UpdateEvents )( 
             __RPC__in ISyncMgrControl * This,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
-            /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pszItemID,
-            /* [in] */ SYNCMGR_CONTROL_FLAGS nControlFlags);
+            /* [annotation][string][unique][in] */ 
+            _In_  LPCWSTR pszItemID,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_CONTROL_FLAGS nControlFlags);
         
         DECLSPEC_XFGVIRT(ISyncMgrControl, UpdateConflict)
         HRESULT ( STDMETHODCALLTYPE *UpdateConflict )( 
             __RPC__in ISyncMgrControl * This,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
-            /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pszItemID,
-            /* [in] */ __RPC__in_opt ISyncMgrConflict *pConflict,
-            /* [in] */ SYNCMGR_UPDATE_REASON nReason);
+            /* [annotation][string][unique][in] */ 
+            _In_  LPCWSTR pszItemID,
+            /* [annotation][in] */ 
+            _In_  ISyncMgrConflict *pConflict,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_UPDATE_REASON nReason);
         
         DECLSPEC_XFGVIRT(ISyncMgrControl, UpdateConflicts)
         HRESULT ( STDMETHODCALLTYPE *UpdateConflicts )( 
             __RPC__in ISyncMgrControl * This,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
-            /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pszItemID,
-            /* [in] */ SYNCMGR_CONTROL_FLAGS nControlFlags);
+            /* [annotation][string][unique][in] */ 
+            _In_  LPCWSTR pszItemID,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_CONTROL_FLAGS nControlFlags);
         
         DECLSPEC_XFGVIRT(ISyncMgrControl, ActivateHandler)
         HRESULT ( STDMETHODCALLTYPE *ActivateHandler )( 
             __RPC__in ISyncMgrControl * This,
-            /* [in] */ BOOL fActivate,
+            /* [annotation][in] */ 
+            _In_  BOOL fActivate,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
-            /* [unique][in] */ __RPC__in_opt HWND hwndOwner,
-            /* [in] */ SYNCMGR_CONTROL_FLAGS nControlFlags);
+            /* [annotation][unique][in] */ 
+            _In_  HWND hwndOwner,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_CONTROL_FLAGS nControlFlags);
         
         DECLSPEC_XFGVIRT(ISyncMgrControl, EnableHandler)
         HRESULT ( STDMETHODCALLTYPE *EnableHandler )( 
             __RPC__in ISyncMgrControl * This,
-            /* [in] */ BOOL fEnable,
+            /* [annotation][in] */ 
+            _In_  BOOL fEnable,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
-            /* [unique][in] */ __RPC__in_opt HWND hwndOwner,
-            /* [in] */ SYNCMGR_CONTROL_FLAGS nControlFlags);
+            /* [annotation][unique][in] */ 
+            _In_  HWND hwndOwner,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_CONTROL_FLAGS nControlFlags);
         
         DECLSPEC_XFGVIRT(ISyncMgrControl, EnableItem)
         HRESULT ( STDMETHODCALLTYPE *EnableItem )( 
             __RPC__in ISyncMgrControl * This,
-            /* [in] */ BOOL fEnable,
+            /* [annotation][in] */ 
+            _In_  BOOL fEnable,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszItemID,
-            /* [unique][in] */ __RPC__in_opt HWND hwndOwner,
-            /* [in] */ SYNCMGR_CONTROL_FLAGS nControlFlags);
+            /* [annotation][unique][in] */ 
+            _In_  HWND hwndOwner,
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_CONTROL_FLAGS nControlFlags);
         
         END_INTERFACE
     } ISyncMgrControlVtbl;
@@ -2473,18 +2683,23 @@ EXTERN_C const IID IID_ISyncMgrEventStore;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetEventEnumerator( 
-            /* [out] */ __RPC__deref_out_opt IEnumSyncMgrEvents **ppenum) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumSyncMgrEvents **ppenum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEventCount( 
-            /* [out] */ __RPC__out ULONG *pcEvents) = 0;
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcEvents) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEvent( 
-            /* [in] */ __RPC__in REFGUID rguidEventID,
-            /* [out] */ __RPC__deref_out_opt ISyncMgrEvent **ppEvent) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidEventID,
+            /* [annotation][out] */ 
+            _Out_  ISyncMgrEvent **ppEvent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveEvent( 
             /* [size_is][ref][in] */ __RPC__in_ecount_full(cEvents) GUID *pguidEventIDs,
-            /* [in] */ ULONG cEvents) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG cEvents) = 0;
         
     };
     
@@ -2498,7 +2713,8 @@ EXTERN_C const IID IID_ISyncMgrEventStore;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncMgrEventStore * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2513,24 +2729,29 @@ EXTERN_C const IID IID_ISyncMgrEventStore;
         DECLSPEC_XFGVIRT(ISyncMgrEventStore, GetEventEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetEventEnumerator )( 
             __RPC__in ISyncMgrEventStore * This,
-            /* [out] */ __RPC__deref_out_opt IEnumSyncMgrEvents **ppenum);
+            /* [annotation][out] */ 
+            _Out_  IEnumSyncMgrEvents **ppenum);
         
         DECLSPEC_XFGVIRT(ISyncMgrEventStore, GetEventCount)
         HRESULT ( STDMETHODCALLTYPE *GetEventCount )( 
             __RPC__in ISyncMgrEventStore * This,
-            /* [out] */ __RPC__out ULONG *pcEvents);
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcEvents);
         
         DECLSPEC_XFGVIRT(ISyncMgrEventStore, GetEvent)
         HRESULT ( STDMETHODCALLTYPE *GetEvent )( 
             __RPC__in ISyncMgrEventStore * This,
-            /* [in] */ __RPC__in REFGUID rguidEventID,
-            /* [out] */ __RPC__deref_out_opt ISyncMgrEvent **ppEvent);
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidEventID,
+            /* [annotation][out] */ 
+            _Out_  ISyncMgrEvent **ppEvent);
         
         DECLSPEC_XFGVIRT(ISyncMgrEventStore, RemoveEvent)
         HRESULT ( STDMETHODCALLTYPE *RemoveEvent )( 
             __RPC__in ISyncMgrEventStore * This,
             /* [size_is][ref][in] */ __RPC__in_ecount_full(cEvents) GUID *pguidEventIDs,
-            /* [in] */ ULONG cEvents);
+            /* [annotation][in] */ 
+            _In_  ULONG cEvents);
         
         END_INTERFACE
     } ISyncMgrEventStoreVtbl;
@@ -2638,7 +2859,8 @@ EXTERN_C const IID IID_ISyncMgrEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncMgrEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2788,17 +3010,22 @@ EXTERN_C const IID IID_IEnumSyncMgrEvents;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) ISyncMgrEvent **rgelt,
-            /* [out] */ __RPC__out ULONG *pceltFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(celt,*pceltFetched)  ISyncMgrEvent **rgelt,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [out] */ __RPC__deref_out_opt IEnumSyncMgrEvents **ppenum) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumSyncMgrEvents **ppenum) = 0;
         
     };
     
@@ -2812,7 +3039,8 @@ EXTERN_C const IID IID_IEnumSyncMgrEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumSyncMgrEvents * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2827,14 +3055,18 @@ EXTERN_C const IID IID_IEnumSyncMgrEvents;
         DECLSPEC_XFGVIRT(IEnumSyncMgrEvents, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumSyncMgrEvents * This,
-            /* [in] */ ULONG celt,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) ISyncMgrEvent **rgelt,
-            /* [out] */ __RPC__out ULONG *pceltFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(celt,*pceltFetched)  ISyncMgrEvent **rgelt,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumSyncMgrEvents, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumSyncMgrEvents * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumSyncMgrEvents, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -2843,7 +3075,8 @@ EXTERN_C const IID IID_IEnumSyncMgrEvents;
         DECLSPEC_XFGVIRT(IEnumSyncMgrEvents, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumSyncMgrEvents * This,
-            /* [out] */ __RPC__deref_out_opt IEnumSyncMgrEvents **ppenum);
+            /* [annotation][out] */ 
+            _Out_  IEnumSyncMgrEvents **ppenum);
         
         END_INTERFACE
     } IEnumSyncMgrEventsVtbl;
@@ -2924,22 +3157,31 @@ EXTERN_C const IID IID_ISyncMgrConflictStore;
     public:
         virtual HRESULT STDMETHODCALLTYPE EnumConflicts( 
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
-            /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pszItemID,
-            /* [out] */ __RPC__deref_out_opt IEnumSyncMgrConflict **ppEnum) = 0;
+            /* [annotation][string][unique][in] */ 
+            _In_  LPCWSTR pszItemID,
+            /* [annotation][out] */ 
+            _Out_  IEnumSyncMgrConflict **ppEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE BindToConflict( 
-            /* [in] */ __RPC__in const SYNCMGR_CONFLICT_ID_INFO *pConflictIdInfo,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  const SYNCMGR_CONFLICT_ID_INFO *pConflictIdInfo,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveConflicts( 
-            /* [size_is][in] */ __RPC__in_ecount_full(cConflicts) const SYNCMGR_CONFLICT_ID_INFO *rgConflictIdInfo,
-            /* [in] */ DWORD cConflicts) = 0;
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cConflicts)  const SYNCMGR_CONFLICT_ID_INFO *rgConflictIdInfo,
+            /* [annotation][in] */ 
+            _In_  DWORD cConflicts) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
-            /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pszItemID,
-            /* [out] */ __RPC__out DWORD *pnConflicts) = 0;
+            /* [annotation][string][unique][in] */ 
+            _In_  LPCWSTR pszItemID,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pnConflicts) = 0;
         
     };
     
@@ -2953,7 +3195,8 @@ EXTERN_C const IID IID_ISyncMgrConflictStore;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncMgrConflictStore * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2969,28 +3212,37 @@ EXTERN_C const IID IID_ISyncMgrConflictStore;
         HRESULT ( STDMETHODCALLTYPE *EnumConflicts )( 
             __RPC__in ISyncMgrConflictStore * This,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
-            /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pszItemID,
-            /* [out] */ __RPC__deref_out_opt IEnumSyncMgrConflict **ppEnum);
+            /* [annotation][string][unique][in] */ 
+            _In_  LPCWSTR pszItemID,
+            /* [annotation][out] */ 
+            _Out_  IEnumSyncMgrConflict **ppEnum);
         
         DECLSPEC_XFGVIRT(ISyncMgrConflictStore, BindToConflict)
         HRESULT ( STDMETHODCALLTYPE *BindToConflict )( 
             __RPC__in ISyncMgrConflictStore * This,
-            /* [in] */ __RPC__in const SYNCMGR_CONFLICT_ID_INFO *pConflictIdInfo,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  const SYNCMGR_CONFLICT_ID_INFO *pConflictIdInfo,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         DECLSPEC_XFGVIRT(ISyncMgrConflictStore, RemoveConflicts)
         HRESULT ( STDMETHODCALLTYPE *RemoveConflicts )( 
             __RPC__in ISyncMgrConflictStore * This,
-            /* [size_is][in] */ __RPC__in_ecount_full(cConflicts) const SYNCMGR_CONFLICT_ID_INFO *rgConflictIdInfo,
-            /* [in] */ DWORD cConflicts);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cConflicts)  const SYNCMGR_CONFLICT_ID_INFO *rgConflictIdInfo,
+            /* [annotation][in] */ 
+            _In_  DWORD cConflicts);
         
         DECLSPEC_XFGVIRT(ISyncMgrConflictStore, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in ISyncMgrConflictStore * This,
             /* [string][ref][in] */ __RPC__in_string LPCWSTR pszHandlerID,
-            /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pszItemID,
-            /* [out] */ __RPC__out DWORD *pnConflicts);
+            /* [annotation][string][unique][in] */ 
+            _In_  LPCWSTR pszItemID,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pnConflicts);
         
         END_INTERFACE
     } ISyncMgrConflictStoreVtbl;
@@ -3054,17 +3306,22 @@ EXTERN_C const IID IID_IEnumSyncMgrConflict;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) ISyncMgrConflict **rgelt,
-            /* [out] */ __RPC__out ULONG *pceltFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(celt,*pceltFetched)  ISyncMgrConflict **rgelt,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [out] */ __RPC__deref_out_opt IEnumSyncMgrConflict **ppenum) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumSyncMgrConflict **ppenum) = 0;
         
     };
     
@@ -3078,7 +3335,8 @@ EXTERN_C const IID IID_IEnumSyncMgrConflict;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumSyncMgrConflict * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3093,14 +3351,18 @@ EXTERN_C const IID IID_IEnumSyncMgrConflict;
         DECLSPEC_XFGVIRT(IEnumSyncMgrConflict, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumSyncMgrConflict * This,
-            /* [in] */ ULONG celt,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) ISyncMgrConflict **rgelt,
-            /* [out] */ __RPC__out ULONG *pceltFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(celt,*pceltFetched)  ISyncMgrConflict **rgelt,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumSyncMgrConflict, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumSyncMgrConflict * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumSyncMgrConflict, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -3109,7 +3371,8 @@ EXTERN_C const IID IID_IEnumSyncMgrConflict;
         DECLSPEC_XFGVIRT(IEnumSyncMgrConflict, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumSyncMgrConflict * This,
-            /* [out] */ __RPC__deref_out_opt IEnumSyncMgrConflict **ppenum);
+            /* [annotation][out] */ 
+            _Out_  IEnumSyncMgrConflict **ppenum);
         
         END_INTERFACE
     } IEnumSyncMgrConflictVtbl;
@@ -3192,21 +3455,28 @@ EXTERN_C const IID IID_ISyncMgrConflict;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetProperty( 
-            /* [in] */ __RPC__in REFPROPERTYKEY propkey,
-            /* [out] */ __RPC__out PROPVARIANT *ppropvar) = 0;
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY propkey,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *ppropvar) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetConflictIdInfo( 
-            /* [out] */ __RPC__out SYNCMGR_CONFLICT_ID_INFO *pConflictIdInfo) = 0;
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_CONFLICT_ID_INFO *pConflictIdInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetItemsArray( 
-            /* [out] */ __RPC__deref_out_opt ISyncMgrConflictItems **ppArray) = 0;
+            /* [annotation][out] */ 
+            _Out_  ISyncMgrConflictItems **ppArray) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Resolve( 
-            /* [in] */ __RPC__in_opt ISyncMgrConflictResolveInfo *pResolveInfo) = 0;
+            /* [annotation][in] */ 
+            _In_  ISyncMgrConflictResolveInfo *pResolveInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetResolutionHandler( 
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppvResolutionHandler) = 0;
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvResolutionHandler) = 0;
         
     };
     
@@ -3220,7 +3490,8 @@ EXTERN_C const IID IID_ISyncMgrConflict;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncMgrConflict * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3235,29 +3506,36 @@ EXTERN_C const IID IID_ISyncMgrConflict;
         DECLSPEC_XFGVIRT(ISyncMgrConflict, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in ISyncMgrConflict * This,
-            /* [in] */ __RPC__in REFPROPERTYKEY propkey,
-            /* [out] */ __RPC__out PROPVARIANT *ppropvar);
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY propkey,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *ppropvar);
         
         DECLSPEC_XFGVIRT(ISyncMgrConflict, GetConflictIdInfo)
         HRESULT ( STDMETHODCALLTYPE *GetConflictIdInfo )( 
             __RPC__in ISyncMgrConflict * This,
-            /* [out] */ __RPC__out SYNCMGR_CONFLICT_ID_INFO *pConflictIdInfo);
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_CONFLICT_ID_INFO *pConflictIdInfo);
         
         DECLSPEC_XFGVIRT(ISyncMgrConflict, GetItemsArray)
         HRESULT ( STDMETHODCALLTYPE *GetItemsArray )( 
             __RPC__in ISyncMgrConflict * This,
-            /* [out] */ __RPC__deref_out_opt ISyncMgrConflictItems **ppArray);
+            /* [annotation][out] */ 
+            _Out_  ISyncMgrConflictItems **ppArray);
         
         DECLSPEC_XFGVIRT(ISyncMgrConflict, Resolve)
         HRESULT ( STDMETHODCALLTYPE *Resolve )( 
             __RPC__in ISyncMgrConflict * This,
-            /* [in] */ __RPC__in_opt ISyncMgrConflictResolveInfo *pResolveInfo);
+            /* [annotation][in] */ 
+            _In_  ISyncMgrConflictResolveInfo *pResolveInfo);
         
         DECLSPEC_XFGVIRT(ISyncMgrConflict, GetResolutionHandler)
         HRESULT ( STDMETHODCALLTYPE *GetResolutionHandler )( 
             __RPC__in ISyncMgrConflict * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppvResolutionHandler);
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvResolutionHandler);
         
         END_INTERFACE
     } ISyncMgrConflictVtbl;
@@ -3353,21 +3631,28 @@ EXTERN_C const IID IID_ISyncMgrResolutionHandler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE QueryAbilities( 
-            /* [out] */ __RPC__out SYNCMGR_RESOLUTION_ABILITIES_FLAGS *pdwAbilities) = 0;
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_RESOLUTION_ABILITIES_FLAGS *pdwAbilities) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE KeepOther( 
-            /* [in] */ __RPC__in_opt IShellItem *psiOther,
-            /* [out] */ __RPC__out SYNCMGR_RESOLUTION_FEEDBACK *pFeedback) = 0;
+            /* [annotation][in] */ 
+            _In_  IShellItem *psiOther,
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_RESOLUTION_FEEDBACK *pFeedback) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE KeepRecent( 
-            /* [out] */ __RPC__out SYNCMGR_RESOLUTION_FEEDBACK *pFeedback) = 0;
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_RESOLUTION_FEEDBACK *pFeedback) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveFromSyncSet( 
-            /* [out] */ __RPC__out SYNCMGR_RESOLUTION_FEEDBACK *pFeedback) = 0;
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_RESOLUTION_FEEDBACK *pFeedback) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE KeepItems( 
-            /* [in] */ __RPC__in_opt ISyncMgrConflictResolutionItems *pArray,
-            /* [out] */ __RPC__out SYNCMGR_RESOLUTION_FEEDBACK *pFeedback) = 0;
+            /* [annotation][in] */ 
+            _In_  ISyncMgrConflictResolutionItems *pArray,
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_RESOLUTION_FEEDBACK *pFeedback) = 0;
         
     };
     
@@ -3381,7 +3666,8 @@ EXTERN_C const IID IID_ISyncMgrResolutionHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncMgrResolutionHandler * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3396,29 +3682,36 @@ EXTERN_C const IID IID_ISyncMgrResolutionHandler;
         DECLSPEC_XFGVIRT(ISyncMgrResolutionHandler, QueryAbilities)
         HRESULT ( STDMETHODCALLTYPE *QueryAbilities )( 
             __RPC__in ISyncMgrResolutionHandler * This,
-            /* [out] */ __RPC__out SYNCMGR_RESOLUTION_ABILITIES_FLAGS *pdwAbilities);
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_RESOLUTION_ABILITIES_FLAGS *pdwAbilities);
         
         DECLSPEC_XFGVIRT(ISyncMgrResolutionHandler, KeepOther)
         HRESULT ( STDMETHODCALLTYPE *KeepOther )( 
             __RPC__in ISyncMgrResolutionHandler * This,
-            /* [in] */ __RPC__in_opt IShellItem *psiOther,
-            /* [out] */ __RPC__out SYNCMGR_RESOLUTION_FEEDBACK *pFeedback);
+            /* [annotation][in] */ 
+            _In_  IShellItem *psiOther,
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_RESOLUTION_FEEDBACK *pFeedback);
         
         DECLSPEC_XFGVIRT(ISyncMgrResolutionHandler, KeepRecent)
         HRESULT ( STDMETHODCALLTYPE *KeepRecent )( 
             __RPC__in ISyncMgrResolutionHandler * This,
-            /* [out] */ __RPC__out SYNCMGR_RESOLUTION_FEEDBACK *pFeedback);
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_RESOLUTION_FEEDBACK *pFeedback);
         
         DECLSPEC_XFGVIRT(ISyncMgrResolutionHandler, RemoveFromSyncSet)
         HRESULT ( STDMETHODCALLTYPE *RemoveFromSyncSet )( 
             __RPC__in ISyncMgrResolutionHandler * This,
-            /* [out] */ __RPC__out SYNCMGR_RESOLUTION_FEEDBACK *pFeedback);
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_RESOLUTION_FEEDBACK *pFeedback);
         
         DECLSPEC_XFGVIRT(ISyncMgrResolutionHandler, KeepItems)
         HRESULT ( STDMETHODCALLTYPE *KeepItems )( 
             __RPC__in ISyncMgrResolutionHandler * This,
-            /* [in] */ __RPC__in_opt ISyncMgrConflictResolutionItems *pArray,
-            /* [out] */ __RPC__out SYNCMGR_RESOLUTION_FEEDBACK *pFeedback);
+            /* [annotation][in] */ 
+            _In_  ISyncMgrConflictResolutionItems *pArray,
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_RESOLUTION_FEEDBACK *pFeedback);
         
         END_INTERFACE
     } ISyncMgrResolutionHandlerVtbl;
@@ -3485,8 +3778,10 @@ EXTERN_C const IID IID_ISyncMgrConflictPresenter;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE PresentConflict( 
-            /* [in] */ __RPC__in_opt ISyncMgrConflict *pConflict,
-            /* [in] */ __RPC__in_opt ISyncMgrConflictResolveInfo *pResolveInfo) = 0;
+            /* [annotation][in] */ 
+            _In_  ISyncMgrConflict *pConflict,
+            /* [annotation][in] */ 
+            _In_  ISyncMgrConflictResolveInfo *pResolveInfo) = 0;
         
     };
     
@@ -3500,7 +3795,8 @@ EXTERN_C const IID IID_ISyncMgrConflictPresenter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncMgrConflictPresenter * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3515,8 +3811,10 @@ EXTERN_C const IID IID_ISyncMgrConflictPresenter;
         DECLSPEC_XFGVIRT(ISyncMgrConflictPresenter, PresentConflict)
         HRESULT ( STDMETHODCALLTYPE *PresentConflict )( 
             __RPC__in ISyncMgrConflictPresenter * This,
-            /* [in] */ __RPC__in_opt ISyncMgrConflict *pConflict,
-            /* [in] */ __RPC__in_opt ISyncMgrConflictResolveInfo *pResolveInfo);
+            /* [annotation][in] */ 
+            _In_  ISyncMgrConflict *pConflict,
+            /* [annotation][in] */ 
+            _In_  ISyncMgrConflictResolveInfo *pResolveInfo);
         
         END_INTERFACE
     } ISyncMgrConflictPresenterVtbl;
@@ -3598,34 +3896,47 @@ EXTERN_C const IID IID_ISyncMgrConflictResolveInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetIterationInfo( 
-            /* [out] */ UINT *pnCurrentConflict,
-            /* [out] */ UINT *pcConflicts,
-            /* [out] */ UINT *pcRemainingForApplyToAll) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *pnCurrentConflict,
+            /* [annotation][out] */ 
+            _Out_  UINT *pcConflicts,
+            /* [annotation][out] */ 
+            _Out_  UINT *pcRemainingForApplyToAll) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPresenterNextStep( 
-            /* [out] */ SYNCMGR_PRESENTER_NEXT_STEP *pnPresenterNextStep) = 0;
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_PRESENTER_NEXT_STEP *pnPresenterNextStep) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPresenterChoice( 
-            /* [out] */ SYNCMGR_PRESENTER_CHOICE *pnPresenterChoice,
-            /* [out] */ BOOL *pfApplyToAll) = 0;
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_PRESENTER_CHOICE *pnPresenterChoice,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfApplyToAll) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetItemChoiceCount( 
-            /* [out] */ UINT *pcChoices) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *pcChoices) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetItemChoice( 
-            /* [in] */ UINT iChoice,
-            /* [out] */ UINT *piChoiceIndex) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT iChoice,
+            /* [annotation][out] */ 
+            _Out_  UINT *piChoiceIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetPresenterNextStep( 
-            /* [in] */ SYNCMGR_PRESENTER_NEXT_STEP nPresenterNextStep) = 0;
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_PRESENTER_NEXT_STEP nPresenterNextStep) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetPresenterChoice( 
-            /* [in] */ SYNCMGR_PRESENTER_CHOICE nPresenterChoice,
-            /* [in] */ BOOL fApplyToAll) = 0;
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_PRESENTER_CHOICE nPresenterChoice,
+            /* [annotation][in] */ 
+            _In_  BOOL fApplyToAll) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetItemChoices( 
             /* [size_is][ref][in] */ UINT *prgiConflictItemIndexes,
-            /* [in] */ UINT cChoices) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT cChoices) = 0;
         
     };
     
@@ -3639,7 +3950,8 @@ EXTERN_C const IID IID_ISyncMgrConflictResolveInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncMgrConflictResolveInfo * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3654,48 +3966,61 @@ EXTERN_C const IID IID_ISyncMgrConflictResolveInfo;
         DECLSPEC_XFGVIRT(ISyncMgrConflictResolveInfo, GetIterationInfo)
         HRESULT ( STDMETHODCALLTYPE *GetIterationInfo )( 
             ISyncMgrConflictResolveInfo * This,
-            /* [out] */ UINT *pnCurrentConflict,
-            /* [out] */ UINT *pcConflicts,
-            /* [out] */ UINT *pcRemainingForApplyToAll);
+            /* [annotation][out] */ 
+            _Out_  UINT *pnCurrentConflict,
+            /* [annotation][out] */ 
+            _Out_  UINT *pcConflicts,
+            /* [annotation][out] */ 
+            _Out_  UINT *pcRemainingForApplyToAll);
         
         DECLSPEC_XFGVIRT(ISyncMgrConflictResolveInfo, GetPresenterNextStep)
         HRESULT ( STDMETHODCALLTYPE *GetPresenterNextStep )( 
             ISyncMgrConflictResolveInfo * This,
-            /* [out] */ SYNCMGR_PRESENTER_NEXT_STEP *pnPresenterNextStep);
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_PRESENTER_NEXT_STEP *pnPresenterNextStep);
         
         DECLSPEC_XFGVIRT(ISyncMgrConflictResolveInfo, GetPresenterChoice)
         HRESULT ( STDMETHODCALLTYPE *GetPresenterChoice )( 
             ISyncMgrConflictResolveInfo * This,
-            /* [out] */ SYNCMGR_PRESENTER_CHOICE *pnPresenterChoice,
-            /* [out] */ BOOL *pfApplyToAll);
+            /* [annotation][out] */ 
+            _Out_  SYNCMGR_PRESENTER_CHOICE *pnPresenterChoice,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfApplyToAll);
         
         DECLSPEC_XFGVIRT(ISyncMgrConflictResolveInfo, GetItemChoiceCount)
         HRESULT ( STDMETHODCALLTYPE *GetItemChoiceCount )( 
             ISyncMgrConflictResolveInfo * This,
-            /* [out] */ UINT *pcChoices);
+            /* [annotation][out] */ 
+            _Out_  UINT *pcChoices);
         
         DECLSPEC_XFGVIRT(ISyncMgrConflictResolveInfo, GetItemChoice)
         HRESULT ( STDMETHODCALLTYPE *GetItemChoice )( 
             ISyncMgrConflictResolveInfo * This,
-            /* [in] */ UINT iChoice,
-            /* [out] */ UINT *piChoiceIndex);
+            /* [annotation][in] */ 
+            _In_  UINT iChoice,
+            /* [annotation][out] */ 
+            _Out_  UINT *piChoiceIndex);
         
         DECLSPEC_XFGVIRT(ISyncMgrConflictResolveInfo, SetPresenterNextStep)
         HRESULT ( STDMETHODCALLTYPE *SetPresenterNextStep )( 
             ISyncMgrConflictResolveInfo * This,
-            /* [in] */ SYNCMGR_PRESENTER_NEXT_STEP nPresenterNextStep);
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_PRESENTER_NEXT_STEP nPresenterNextStep);
         
         DECLSPEC_XFGVIRT(ISyncMgrConflictResolveInfo, SetPresenterChoice)
         HRESULT ( STDMETHODCALLTYPE *SetPresenterChoice )( 
             ISyncMgrConflictResolveInfo * This,
-            /* [in] */ SYNCMGR_PRESENTER_CHOICE nPresenterChoice,
-            /* [in] */ BOOL fApplyToAll);
+            /* [annotation][in] */ 
+            _In_  SYNCMGR_PRESENTER_CHOICE nPresenterChoice,
+            /* [annotation][in] */ 
+            _In_  BOOL fApplyToAll);
         
         DECLSPEC_XFGVIRT(ISyncMgrConflictResolveInfo, SetItemChoices)
         HRESULT ( STDMETHODCALLTYPE *SetItemChoices )( 
             ISyncMgrConflictResolveInfo * This,
             /* [size_is][ref][in] */ UINT *prgiConflictItemIndexes,
-            /* [in] */ UINT cChoices);
+            /* [annotation][in] */ 
+            _In_  UINT cChoices);
         
         END_INTERFACE
     } ISyncMgrConflictResolveInfoVtbl;
@@ -3771,8 +4096,10 @@ EXTERN_C const IID IID_ISyncMgrConflictFolder;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetConflictIDList( 
-            /* [in] */ ISyncMgrConflict *pConflict,
-            /* [out] */ PIDLIST_RELATIVE *ppidlConflict) = 0;
+            /* [annotation][in] */ 
+            _In_  ISyncMgrConflict *pConflict,
+            /* [annotation][out] */ 
+            _Out_  PIDLIST_RELATIVE *ppidlConflict) = 0;
         
     };
     
@@ -3786,7 +4113,8 @@ EXTERN_C const IID IID_ISyncMgrConflictFolder;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncMgrConflictFolder * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3801,8 +4129,10 @@ EXTERN_C const IID IID_ISyncMgrConflictFolder;
         DECLSPEC_XFGVIRT(ISyncMgrConflictFolder, GetConflictIDList)
         HRESULT ( STDMETHODCALLTYPE *GetConflictIDList )( 
             ISyncMgrConflictFolder * This,
-            /* [in] */ ISyncMgrConflict *pConflict,
-            /* [out] */ PIDLIST_RELATIVE *ppidlConflict);
+            /* [annotation][in] */ 
+            _In_  ISyncMgrConflict *pConflict,
+            /* [annotation][out] */ 
+            _Out_  PIDLIST_RELATIVE *ppidlConflict);
         
         END_INTERFACE
     } ISyncMgrConflictFolderVtbl;
@@ -3895,11 +4225,14 @@ EXTERN_C const IID IID_ISyncMgrConflictItems;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [out] */ __RPC__out UINT *pCount) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *pCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetItem( 
-            /* [in] */ UINT iIndex,
-            /* [out] */ __RPC__out CONFIRM_CONFLICT_ITEM *pItemInfo) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT iIndex,
+            /* [annotation][out] */ 
+            _Out_  CONFIRM_CONFLICT_ITEM *pItemInfo) = 0;
         
     };
     
@@ -3913,7 +4246,8 @@ EXTERN_C const IID IID_ISyncMgrConflictItems;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncMgrConflictItems * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3928,13 +4262,16 @@ EXTERN_C const IID IID_ISyncMgrConflictItems;
         DECLSPEC_XFGVIRT(ISyncMgrConflictItems, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in ISyncMgrConflictItems * This,
-            /* [out] */ __RPC__out UINT *pCount);
+            /* [annotation][out] */ 
+            _Out_  UINT *pCount);
         
         DECLSPEC_XFGVIRT(ISyncMgrConflictItems, GetItem)
         HRESULT ( STDMETHODCALLTYPE *GetItem )( 
             __RPC__in ISyncMgrConflictItems * This,
-            /* [in] */ UINT iIndex,
-            /* [out] */ __RPC__out CONFIRM_CONFLICT_ITEM *pItemInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iIndex,
+            /* [annotation][out] */ 
+            _Out_  CONFIRM_CONFLICT_ITEM *pItemInfo);
         
         END_INTERFACE
     } ISyncMgrConflictItemsVtbl;
@@ -3992,11 +4329,14 @@ EXTERN_C const IID IID_ISyncMgrConflictResolutionItems;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [out] */ __RPC__out UINT *pCount) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *pCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetItem( 
-            /* [in] */ UINT iIndex,
-            /* [out] */ __RPC__out CONFIRM_CONFLICT_RESULT_INFO *pItemInfo) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT iIndex,
+            /* [annotation][out] */ 
+            _Out_  CONFIRM_CONFLICT_RESULT_INFO *pItemInfo) = 0;
         
     };
     
@@ -4010,7 +4350,8 @@ EXTERN_C const IID IID_ISyncMgrConflictResolutionItems;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncMgrConflictResolutionItems * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4025,13 +4366,16 @@ EXTERN_C const IID IID_ISyncMgrConflictResolutionItems;
         DECLSPEC_XFGVIRT(ISyncMgrConflictResolutionItems, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in ISyncMgrConflictResolutionItems * This,
-            /* [out] */ __RPC__out UINT *pCount);
+            /* [annotation][out] */ 
+            _Out_  UINT *pCount);
         
         DECLSPEC_XFGVIRT(ISyncMgrConflictResolutionItems, GetItem)
         HRESULT ( STDMETHODCALLTYPE *GetItem )( 
             __RPC__in ISyncMgrConflictResolutionItems * This,
-            /* [in] */ UINT iIndex,
-            /* [out] */ __RPC__out CONFIRM_CONFLICT_RESULT_INFO *pItemInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iIndex,
+            /* [annotation][out] */ 
+            _Out_  CONFIRM_CONFLICT_RESULT_INFO *pItemInfo);
         
         END_INTERFACE
     } ISyncMgrConflictResolutionItemsVtbl;

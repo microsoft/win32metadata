@@ -166,21 +166,28 @@ EXTERN_C const IID IID_IEnumSTATURL;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [out][in] */ __RPC__inout LPSTATURL rgelt,
-            /* [out][in] */ __RPC__inout ULONG *pceltFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out][in] */ 
+            _Inout_  LPSTATURL rgelt,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [out] */ __RPC__deref_out_opt IEnumSTATURL **ppenum) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumSTATURL **ppenum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFilter( 
-            /* [unique][in] */ __RPC__in_opt LPCOLESTR poszFilter,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  LPCOLESTR poszFilter,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
     };
     
@@ -194,7 +201,8 @@ EXTERN_C const IID IID_IEnumSTATURL;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumSTATURL * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -209,14 +217,18 @@ EXTERN_C const IID IID_IEnumSTATURL;
         DECLSPEC_XFGVIRT(IEnumSTATURL, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumSTATURL * This,
-            /* [in] */ ULONG celt,
-            /* [out][in] */ __RPC__inout LPSTATURL rgelt,
-            /* [out][in] */ __RPC__inout ULONG *pceltFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out][in] */ 
+            _Inout_  LPSTATURL rgelt,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumSTATURL, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumSTATURL * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumSTATURL, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -225,13 +237,16 @@ EXTERN_C const IID IID_IEnumSTATURL;
         DECLSPEC_XFGVIRT(IEnumSTATURL, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumSTATURL * This,
-            /* [out] */ __RPC__deref_out_opt IEnumSTATURL **ppenum);
+            /* [annotation][out] */ 
+            _Out_  IEnumSTATURL **ppenum);
         
         DECLSPEC_XFGVIRT(IEnumSTATURL, SetFilter)
         HRESULT ( STDMETHODCALLTYPE *SetFilter )( 
             __RPC__in IEnumSTATURL * This,
-            /* [unique][in] */ __RPC__in_opt LPCOLESTR poszFilter,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][unique][in] */ 
+            _In_  LPCOLESTR poszFilter,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         END_INTERFACE
     } IEnumSTATURLVtbl;
@@ -311,26 +326,38 @@ EXTERN_C const IID IID_IUrlHistoryStg;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddUrl( 
-            /* [in] */ __RPC__in LPCOLESTR pocsUrl,
-            /* [unique][in] */ __RPC__in_opt LPCOLESTR pocsTitle,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pocsUrl,
+            /* [annotation][unique][in] */ 
+            _In_  LPCOLESTR pocsTitle,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeleteUrl( 
-            /* [in] */ __RPC__in LPCOLESTR pocsUrl,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pocsUrl,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryUrl( 
-            /* [in] */ __RPC__in LPCOLESTR pocsUrl,
-            /* [in] */ DWORD dwFlags,
-            /* [unique][out][in] */ __RPC__inout_opt LPSTATURL lpSTATURL) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pocsUrl,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  LPSTATURL lpSTATURL) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE BindToObject( 
-            /* [in] */ __RPC__in LPCOLESTR pocsUrl,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppvOut) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pocsUrl,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvOut) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumUrls( 
-            /* [out] */ __RPC__deref_out_opt IEnumSTATURL **ppEnum) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumSTATURL **ppEnum) = 0;
         
     };
     
@@ -344,7 +371,8 @@ EXTERN_C const IID IID_IUrlHistoryStg;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUrlHistoryStg * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -359,34 +387,46 @@ EXTERN_C const IID IID_IUrlHistoryStg;
         DECLSPEC_XFGVIRT(IUrlHistoryStg, AddUrl)
         HRESULT ( STDMETHODCALLTYPE *AddUrl )( 
             __RPC__in IUrlHistoryStg * This,
-            /* [in] */ __RPC__in LPCOLESTR pocsUrl,
-            /* [unique][in] */ __RPC__in_opt LPCOLESTR pocsTitle,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pocsUrl,
+            /* [annotation][unique][in] */ 
+            _In_  LPCOLESTR pocsTitle,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IUrlHistoryStg, DeleteUrl)
         HRESULT ( STDMETHODCALLTYPE *DeleteUrl )( 
             __RPC__in IUrlHistoryStg * This,
-            /* [in] */ __RPC__in LPCOLESTR pocsUrl,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pocsUrl,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IUrlHistoryStg, QueryUrl)
         HRESULT ( STDMETHODCALLTYPE *QueryUrl )( 
             __RPC__in IUrlHistoryStg * This,
-            /* [in] */ __RPC__in LPCOLESTR pocsUrl,
-            /* [in] */ DWORD dwFlags,
-            /* [unique][out][in] */ __RPC__inout_opt LPSTATURL lpSTATURL);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pocsUrl,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  LPSTATURL lpSTATURL);
         
         DECLSPEC_XFGVIRT(IUrlHistoryStg, BindToObject)
         HRESULT ( STDMETHODCALLTYPE *BindToObject )( 
             __RPC__in IUrlHistoryStg * This,
-            /* [in] */ __RPC__in LPCOLESTR pocsUrl,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppvOut);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pocsUrl,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvOut);
         
         DECLSPEC_XFGVIRT(IUrlHistoryStg, EnumUrls)
         HRESULT ( STDMETHODCALLTYPE *EnumUrls )( 
             __RPC__in IUrlHistoryStg * This,
-            /* [out] */ __RPC__deref_out_opt IEnumSTATURL **ppEnum);
+            /* [annotation][out] */ 
+            _Out_  IEnumSTATURL **ppEnum);
         
         END_INTERFACE
     } IUrlHistoryStgVtbl;
@@ -466,12 +506,18 @@ EXTERN_C const IID IID_IUrlHistoryStg2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddUrlAndNotify( 
-            /* [in] */ __RPC__in LPCOLESTR pocsUrl,
-            /* [unique][in] */ __RPC__in_opt LPCOLESTR pocsTitle,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ BOOL fWriteHistory,
-            /* [in] */ __RPC__in_opt IOleCommandTarget *poctNotify,
-            /* [unique][in] */ __RPC__in_opt IUnknown *punkISFolder) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pocsUrl,
+            /* [annotation][unique][in] */ 
+            _In_  LPCOLESTR pocsTitle,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  BOOL fWriteHistory,
+            /* [annotation][in] */ 
+            _In_  IOleCommandTarget *poctNotify,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *punkISFolder) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ClearHistory( void) = 0;
         
@@ -487,7 +533,8 @@ EXTERN_C const IID IID_IUrlHistoryStg2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUrlHistoryStg2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -502,44 +549,62 @@ EXTERN_C const IID IID_IUrlHistoryStg2;
         DECLSPEC_XFGVIRT(IUrlHistoryStg, AddUrl)
         HRESULT ( STDMETHODCALLTYPE *AddUrl )( 
             __RPC__in IUrlHistoryStg2 * This,
-            /* [in] */ __RPC__in LPCOLESTR pocsUrl,
-            /* [unique][in] */ __RPC__in_opt LPCOLESTR pocsTitle,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pocsUrl,
+            /* [annotation][unique][in] */ 
+            _In_  LPCOLESTR pocsTitle,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IUrlHistoryStg, DeleteUrl)
         HRESULT ( STDMETHODCALLTYPE *DeleteUrl )( 
             __RPC__in IUrlHistoryStg2 * This,
-            /* [in] */ __RPC__in LPCOLESTR pocsUrl,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pocsUrl,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IUrlHistoryStg, QueryUrl)
         HRESULT ( STDMETHODCALLTYPE *QueryUrl )( 
             __RPC__in IUrlHistoryStg2 * This,
-            /* [in] */ __RPC__in LPCOLESTR pocsUrl,
-            /* [in] */ DWORD dwFlags,
-            /* [unique][out][in] */ __RPC__inout_opt LPSTATURL lpSTATURL);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pocsUrl,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  LPSTATURL lpSTATURL);
         
         DECLSPEC_XFGVIRT(IUrlHistoryStg, BindToObject)
         HRESULT ( STDMETHODCALLTYPE *BindToObject )( 
             __RPC__in IUrlHistoryStg2 * This,
-            /* [in] */ __RPC__in LPCOLESTR pocsUrl,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppvOut);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pocsUrl,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvOut);
         
         DECLSPEC_XFGVIRT(IUrlHistoryStg, EnumUrls)
         HRESULT ( STDMETHODCALLTYPE *EnumUrls )( 
             __RPC__in IUrlHistoryStg2 * This,
-            /* [out] */ __RPC__deref_out_opt IEnumSTATURL **ppEnum);
+            /* [annotation][out] */ 
+            _Out_  IEnumSTATURL **ppEnum);
         
         DECLSPEC_XFGVIRT(IUrlHistoryStg2, AddUrlAndNotify)
         HRESULT ( STDMETHODCALLTYPE *AddUrlAndNotify )( 
             __RPC__in IUrlHistoryStg2 * This,
-            /* [in] */ __RPC__in LPCOLESTR pocsUrl,
-            /* [unique][in] */ __RPC__in_opt LPCOLESTR pocsTitle,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ BOOL fWriteHistory,
-            /* [in] */ __RPC__in_opt IOleCommandTarget *poctNotify,
-            /* [unique][in] */ __RPC__in_opt IUnknown *punkISFolder);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pocsUrl,
+            /* [annotation][unique][in] */ 
+            _In_  LPCOLESTR pocsTitle,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  BOOL fWriteHistory,
+            /* [annotation][in] */ 
+            _In_  IOleCommandTarget *poctNotify,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *punkISFolder);
         
         DECLSPEC_XFGVIRT(IUrlHistoryStg2, ClearHistory)
         HRESULT ( STDMETHODCALLTYPE *ClearHistory )( 
@@ -641,7 +706,8 @@ EXTERN_C const IID IID_IUrlHistoryNotify;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUrlHistoryNotify * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -656,19 +722,28 @@ EXTERN_C const IID IID_IUrlHistoryNotify;
         DECLSPEC_XFGVIRT(IOleCommandTarget, QueryStatus)
         /* [input_sync] */ HRESULT ( STDMETHODCALLTYPE *QueryStatus )( 
             __RPC__in IUrlHistoryNotify * This,
-            /* [unique][in] */ __RPC__in_opt const GUID *pguidCmdGroup,
-            /* [in] */ ULONG cCmds,
-            /* [out][in][size_is] */ __RPC__inout_ecount_full(cCmds) OLECMD prgCmds[  ],
-            /* [unique][out][in] */ __RPC__inout_opt OLECMDTEXT *pCmdText);
+            /* [annotation][unique][in] */ 
+            _In_  const GUID *pguidCmdGroup,
+            /* [annotation][in] */ 
+            _In_  ULONG cCmds,
+            /* [annotation][out][in][size_is] */ 
+            _Inout_  OLECMD prgCmds[  ],
+            /* [annotation][unique][out][in] */ 
+            _Inout_  OLECMDTEXT *pCmdText);
         
         DECLSPEC_XFGVIRT(IOleCommandTarget, Exec)
         HRESULT ( STDMETHODCALLTYPE *Exec )( 
             __RPC__in IUrlHistoryNotify * This,
-            /* [unique][in] */ __RPC__in_opt const GUID *pguidCmdGroup,
-            /* [in] */ DWORD nCmdID,
-            /* [in] */ DWORD nCmdexecopt,
-            /* [unique][in] */ __RPC__in_opt VARIANT *pvaIn,
-            /* [unique][out][in] */ __RPC__inout_opt VARIANT *pvaOut);
+            /* [annotation][unique][in] */ 
+            _In_  const GUID *pguidCmdGroup,
+            /* [annotation][in] */ 
+            _In_  DWORD nCmdID,
+            /* [annotation][in] */ 
+            _In_  DWORD nCmdexecopt,
+            /* [annotation][unique][in] */ 
+            _In_  VARIANT *pvaIn,
+            /* [annotation][unique][out][in] */ 
+            _Inout_  VARIANT *pvaOut);
         
         END_INTERFACE
     } IUrlHistoryNotifyVtbl;

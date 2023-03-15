@@ -6,12 +6,11 @@
  /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
-#pragma warning( disable: 4049 )  /* more than 64k source lines */
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 475
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -31,8 +30,8 @@
 #include "ole2.h"
 #endif /*COM_NO_WINDOWS_H*/
 
-#ifndef __UIRibbon_h__
-#define __UIRibbon_h__
+#ifndef __uiribbon_h__
+#define __uiribbon_h__
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
@@ -164,7 +163,7 @@ extern "C"{
 #endif 
 
 
-/* interface __MIDL_itf_UIRibbon_0000_0000 */
+/* interface __MIDL_itf_uiribbon_0000_0000 */
 /* [local] */ 
 
 //****************************************************************************
@@ -338,8 +337,8 @@ enum UI_EVENTLOCATION
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_UIRibbon_0000_0000_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_UIRibbon_0000_0000_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uiribbon_0000_0000_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uiribbon_0000_0000_v0_0_s_ifspec;
 
 #ifndef __IUISimplePropertySet_INTERFACE_DEFINED__
 #define __IUISimplePropertySet_INTERFACE_DEFINED__
@@ -359,8 +358,10 @@ EXTERN_C const IID IID_IUISimplePropertySet;
         virtual /* [annotation] */ 
         _Check_return_
         HRESULT STDMETHODCALLTYPE GetValue( 
-            /* [in] */ REFPROPERTYKEY key,
-            /* [out] */ PROPVARIANT *value) = 0;
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *value) = 0;
         
     };
     
@@ -374,7 +375,8 @@ EXTERN_C const IID IID_IUISimplePropertySet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUISimplePropertySet * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -391,8 +393,10 @@ EXTERN_C const IID IID_IUISimplePropertySet;
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             IUISimplePropertySet * This,
-            /* [in] */ REFPROPERTYKEY key,
-            /* [out] */ PROPVARIANT *value);
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *value);
         
         END_INTERFACE
     } IUISimplePropertySetVtbl;
@@ -449,17 +453,20 @@ EXTERN_C const IID IID_IUIRibbon;
         virtual /* [annotation] */ 
         _Check_return_
         HRESULT STDMETHODCALLTYPE GetHeight( 
-            /* [out] */ UINT32 *cy) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT32 *cy) = 0;
         
         virtual /* [annotation] */ 
         _Check_return_
         HRESULT STDMETHODCALLTYPE LoadSettingsFromStream( 
-            /* [in] */ IStream *pStream) = 0;
+            /* [annotation][in] */ 
+            _In_  IStream *pStream) = 0;
         
         virtual /* [annotation] */ 
         _Check_return_
         HRESULT STDMETHODCALLTYPE SaveSettingsToStream( 
-            /* [in] */ IStream *pStream) = 0;
+            /* [annotation][in] */ 
+            _In_  IStream *pStream) = 0;
         
     };
     
@@ -473,7 +480,8 @@ EXTERN_C const IID IID_IUIRibbon;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIRibbon * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -490,21 +498,24 @@ EXTERN_C const IID IID_IUIRibbon;
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *GetHeight )( 
             IUIRibbon * This,
-            /* [out] */ UINT32 *cy);
+            /* [annotation][out] */ 
+            _Out_  UINT32 *cy);
         
         DECLSPEC_XFGVIRT(IUIRibbon, LoadSettingsFromStream)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *LoadSettingsFromStream )( 
             IUIRibbon * This,
-            /* [in] */ IStream *pStream);
+            /* [annotation][in] */ 
+            _In_  IStream *pStream);
         
         DECLSPEC_XFGVIRT(IUIRibbon, SaveSettingsToStream)
         /* [annotation] */ 
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *SaveSettingsToStream )( 
             IUIRibbon * This,
-            /* [in] */ IStream *pStream);
+            /* [annotation][in] */ 
+            _In_  IStream *pStream);
         
         END_INTERFACE
     } IUIRibbonVtbl;
@@ -549,14 +560,14 @@ EXTERN_C const IID IID_IUIRibbon;
 #endif 	/* __IUIRibbon_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_UIRibbon_0000_0002 */
+/* interface __MIDL_itf_uiribbon_0000_0002 */
 /* [local] */ 
 
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_UIRibbon_0000_0002_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_UIRibbon_0000_0002_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uiribbon_0000_0002_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uiribbon_0000_0002_v0_0_s_ifspec;
 
 #ifndef __IUIFramework_INTERFACE_DEFINED__
 #define __IUIFramework_INTERFACE_DEFINED__
@@ -588,16 +599,20 @@ EXTERN_C const IID IID_IUIFramework;
         virtual /* [annotation] */ 
         _Check_return_
         HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [in] */ HWND frameWnd,
-            /* [in] */ IUIApplication *application) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND frameWnd,
+            /* [annotation][in] */ 
+            _In_  IUIApplication *application) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Destroy( void) = 0;
         
         virtual /* [annotation] */ 
         _Check_return_
         HRESULT STDMETHODCALLTYPE LoadUI( 
-            /* [in] */ HINSTANCE instance,
-            /* [in] */ LPCWSTR resourceName) = 0;
+            /* [annotation][in] */ 
+            _In_  HINSTANCE instance,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR resourceName) = 0;
         
         virtual /* [annotation] */ 
         _Check_return_
@@ -611,15 +626,19 @@ EXTERN_C const IID IID_IUIFramework;
         _Check_return_
         HRESULT STDMETHODCALLTYPE GetUICommandProperty( 
             UINT32 commandId,
-            /* [in] */ REFPROPERTYKEY key,
-            /* [out] */ PROPVARIANT *value) = 0;
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *value) = 0;
         
         virtual /* [annotation] */ 
         _Check_return_
         HRESULT STDMETHODCALLTYPE SetUICommandProperty( 
             UINT32 commandId,
-            /* [in] */ REFPROPERTYKEY key,
-            /* [in] */ REFPROPVARIANT value) = 0;
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT value) = 0;
         
         virtual /* [annotation] */ 
         _Check_return_
@@ -648,7 +667,8 @@ EXTERN_C const IID IID_IUIFramework;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIFramework * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -665,8 +685,10 @@ EXTERN_C const IID IID_IUIFramework;
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IUIFramework * This,
-            /* [in] */ HWND frameWnd,
-            /* [in] */ IUIApplication *application);
+            /* [annotation][in] */ 
+            _In_  HWND frameWnd,
+            /* [annotation][in] */ 
+            _In_  IUIApplication *application);
         
         DECLSPEC_XFGVIRT(IUIFramework, Destroy)
         HRESULT ( STDMETHODCALLTYPE *Destroy )( 
@@ -677,8 +699,10 @@ EXTERN_C const IID IID_IUIFramework;
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *LoadUI )( 
             IUIFramework * This,
-            /* [in] */ HINSTANCE instance,
-            /* [in] */ LPCWSTR resourceName);
+            /* [annotation][in] */ 
+            _In_  HINSTANCE instance,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR resourceName);
         
         DECLSPEC_XFGVIRT(IUIFramework, GetView)
         /* [annotation] */ 
@@ -696,8 +720,10 @@ EXTERN_C const IID IID_IUIFramework;
         HRESULT ( STDMETHODCALLTYPE *GetUICommandProperty )( 
             IUIFramework * This,
             UINT32 commandId,
-            /* [in] */ REFPROPERTYKEY key,
-            /* [out] */ PROPVARIANT *value);
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *value);
         
         DECLSPEC_XFGVIRT(IUIFramework, SetUICommandProperty)
         /* [annotation] */ 
@@ -705,8 +731,10 @@ EXTERN_C const IID IID_IUIFramework;
         HRESULT ( STDMETHODCALLTYPE *SetUICommandProperty )( 
             IUIFramework * This,
             UINT32 commandId,
-            /* [in] */ REFPROPERTYKEY key,
-            /* [in] */ REFPROPVARIANT value);
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT value);
         
         DECLSPEC_XFGVIRT(IUIFramework, InvalidateUICommand)
         /* [annotation] */ 
@@ -790,7 +818,7 @@ EXTERN_C const IID IID_IUIFramework;
 #endif 	/* __IUIFramework_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_UIRibbon_0000_0003 */
+/* interface __MIDL_itf_uiribbon_0000_0003 */
 /* [local] */ 
 
 #ifdef __midl
@@ -816,8 +844,8 @@ typedef struct _UI_EVENTPARAMS {
 #endif //__midl
 
 
-extern RPC_IF_HANDLE __MIDL_itf_UIRibbon_0000_0003_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_UIRibbon_0000_0003_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uiribbon_0000_0003_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uiribbon_0000_0003_v0_0_s_ifspec;
 
 #ifndef __IUIEventLogger_INTERFACE_DEFINED__
 #define __IUIEventLogger_INTERFACE_DEFINED__
@@ -835,7 +863,8 @@ EXTERN_C const IID IID_IUIEventLogger;
     {
     public:
         virtual void STDMETHODCALLTYPE OnUIEvent( 
-            /* [in] */ UI_EVENTPARAMS *pEventParams) = 0;
+            /* [annotation][in] */ 
+            _In_  UI_EVENTPARAMS *pEventParams) = 0;
         
     };
     
@@ -849,7 +878,8 @@ EXTERN_C const IID IID_IUIEventLogger;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIEventLogger * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -864,7 +894,8 @@ EXTERN_C const IID IID_IUIEventLogger;
         DECLSPEC_XFGVIRT(IUIEventLogger, OnUIEvent)
         void ( STDMETHODCALLTYPE *OnUIEvent )( 
             IUIEventLogger * This,
-            /* [in] */ UI_EVENTPARAMS *pEventParams);
+            /* [annotation][in] */ 
+            _In_  UI_EVENTPARAMS *pEventParams);
         
         END_INTERFACE
     } IUIEventLoggerVtbl;
@@ -921,7 +952,8 @@ EXTERN_C const IID IID_IUIEventingManager;
         virtual /* [annotation] */ 
         _Check_return_
         HRESULT STDMETHODCALLTYPE SetEventLogger( 
-            /* [in] */ IUIEventLogger *eventLogger) = 0;
+            /* [annotation][in] */ 
+            _In_  IUIEventLogger *eventLogger) = 0;
         
     };
     
@@ -935,7 +967,8 @@ EXTERN_C const IID IID_IUIEventingManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIEventingManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -952,7 +985,8 @@ EXTERN_C const IID IID_IUIEventingManager;
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *SetEventLogger )( 
             IUIEventingManager * This,
-            /* [in] */ IUIEventLogger *eventLogger);
+            /* [annotation][in] */ 
+            _In_  IUIEventLogger *eventLogger);
         
         END_INTERFACE
     } IUIEventingManagerVtbl;
@@ -1024,7 +1058,8 @@ EXTERN_C const IID IID_IUIContextualUI;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIContextualUI * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1099,7 +1134,8 @@ EXTERN_C const IID IID_IUICollection;
         virtual /* [annotation] */ 
         _Check_return_
         HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [out] */ UINT32 *count) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT32 *count) = 0;
         
         virtual /* [annotation] */ 
         _Check_return_
@@ -1111,13 +1147,15 @@ EXTERN_C const IID IID_IUICollection;
         virtual /* [annotation] */ 
         _Check_return_
         HRESULT STDMETHODCALLTYPE Add( 
-            /* [in] */ IUnknown *item) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *item) = 0;
         
         virtual /* [annotation] */ 
         _Check_return_
         HRESULT STDMETHODCALLTYPE Insert( 
             UINT32 index,
-            /* [in] */ IUnknown *item) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *item) = 0;
         
         virtual /* [annotation] */ 
         _Check_return_
@@ -1128,7 +1166,8 @@ EXTERN_C const IID IID_IUICollection;
         _Check_return_
         HRESULT STDMETHODCALLTYPE Replace( 
             UINT32 indexReplaced,
-            /* [in] */ IUnknown *itemReplaceWith) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *itemReplaceWith) = 0;
         
         virtual /* [annotation] */ 
         _Check_return_
@@ -1146,7 +1185,8 @@ EXTERN_C const IID IID_IUICollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUICollection * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1163,7 +1203,8 @@ EXTERN_C const IID IID_IUICollection;
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             IUICollection * This,
-            /* [out] */ UINT32 *count);
+            /* [annotation][out] */ 
+            _Out_  UINT32 *count);
         
         DECLSPEC_XFGVIRT(IUICollection, GetItem)
         /* [annotation] */ 
@@ -1179,7 +1220,8 @@ EXTERN_C const IID IID_IUICollection;
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *Add )( 
             IUICollection * This,
-            /* [in] */ IUnknown *item);
+            /* [annotation][in] */ 
+            _In_  IUnknown *item);
         
         DECLSPEC_XFGVIRT(IUICollection, Insert)
         /* [annotation] */ 
@@ -1187,7 +1229,8 @@ EXTERN_C const IID IID_IUICollection;
         HRESULT ( STDMETHODCALLTYPE *Insert )( 
             IUICollection * This,
             UINT32 index,
-            /* [in] */ IUnknown *item);
+            /* [annotation][in] */ 
+            _In_  IUnknown *item);
         
         DECLSPEC_XFGVIRT(IUICollection, RemoveAt)
         /* [annotation] */ 
@@ -1202,7 +1245,8 @@ EXTERN_C const IID IID_IUICollection;
         HRESULT ( STDMETHODCALLTYPE *Replace )( 
             IUICollection * This,
             UINT32 indexReplaced,
-            /* [in] */ IUnknown *itemReplaceWith);
+            /* [annotation][in] */ 
+            _In_  IUnknown *itemReplaceWith);
         
         DECLSPEC_XFGVIRT(IUICollection, Clear)
         /* [annotation] */ 
@@ -1265,7 +1309,7 @@ EXTERN_C const IID IID_IUICollection;
 #endif 	/* __IUICollection_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_UIRibbon_0000_0007 */
+/* interface __MIDL_itf_uiribbon_0000_0007 */
 /* [local] */ 
 
 typedef /* [v1_enum] */ 
@@ -1281,8 +1325,8 @@ enum UI_COLLECTIONCHANGE
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_UIRibbon_0000_0007_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_UIRibbon_0000_0007_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uiribbon_0000_0007_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uiribbon_0000_0007_v0_0_s_ifspec;
 
 #ifndef __IUICollectionChangedEvent_INTERFACE_DEFINED__
 #define __IUICollectionChangedEvent_INTERFACE_DEFINED__
@@ -1322,7 +1366,8 @@ EXTERN_C const IID IID_IUICollectionChangedEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUICollectionChangedEvent * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1423,10 +1468,12 @@ EXTERN_C const IID IID_IUICommandHandler;
         _Check_return_
         HRESULT STDMETHODCALLTYPE UpdateProperty( 
             UINT32 commandId,
-            /* [in] */ REFPROPERTYKEY key,
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
             /* [annotation][in] */ 
             _In_opt_  const PROPVARIANT *currentValue,
-            /* [out] */ PROPVARIANT *newValue) = 0;
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *newValue) = 0;
         
     };
     
@@ -1440,7 +1487,8 @@ EXTERN_C const IID IID_IUICommandHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUICommandHandler * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1472,10 +1520,12 @@ EXTERN_C const IID IID_IUICommandHandler;
         HRESULT ( STDMETHODCALLTYPE *UpdateProperty )( 
             IUICommandHandler * This,
             UINT32 commandId,
-            /* [in] */ REFPROPERTYKEY key,
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
             /* [annotation][in] */ 
             _In_opt_  const PROPVARIANT *currentValue,
-            /* [out] */ PROPVARIANT *newValue);
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *newValue);
         
         END_INTERFACE
     } IUICommandHandlerVtbl;
@@ -1517,7 +1567,7 @@ EXTERN_C const IID IID_IUICommandHandler;
 #endif 	/* __IUICommandHandler_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_UIRibbon_0000_0009 */
+/* interface __MIDL_itf_uiribbon_0000_0009 */
 /* [local] */ 
 
 typedef /* [v1_enum] */ 
@@ -1546,8 +1596,8 @@ enum UI_VIEWTYPE
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_UIRibbon_0000_0009_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_UIRibbon_0000_0009_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uiribbon_0000_0009_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uiribbon_0000_0009_v0_0_s_ifspec;
 
 #ifndef __IUIApplication_INTERFACE_DEFINED__
 #define __IUIApplication_INTERFACE_DEFINED__
@@ -1578,7 +1628,8 @@ EXTERN_C const IID IID_IUIApplication;
         HRESULT STDMETHODCALLTYPE OnViewChanged( 
             UINT32 viewId,
             UI_VIEWTYPE typeID,
-            /* [in] */ IUnknown *view,
+            /* [annotation][in] */ 
+            _In_  IUnknown *view,
             UI_VIEWVERB verb,
             INT32 uReasonCode) = 0;
         
@@ -1587,7 +1638,8 @@ EXTERN_C const IID IID_IUIApplication;
         HRESULT STDMETHODCALLTYPE OnCreateUICommand( 
             UINT32 commandId,
             UI_COMMANDTYPE typeID,
-            /* [out] */ IUICommandHandler **commandHandler) = 0;
+            /* [annotation][out] */ 
+            _Out_  IUICommandHandler **commandHandler) = 0;
         
         virtual /* [annotation] */ 
         _Check_return_
@@ -1609,7 +1661,8 @@ EXTERN_C const IID IID_IUIApplication;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIApplication * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1628,7 +1681,8 @@ EXTERN_C const IID IID_IUIApplication;
             IUIApplication * This,
             UINT32 viewId,
             UI_VIEWTYPE typeID,
-            /* [in] */ IUnknown *view,
+            /* [annotation][in] */ 
+            _In_  IUnknown *view,
             UI_VIEWVERB verb,
             INT32 uReasonCode);
         
@@ -1639,7 +1693,8 @@ EXTERN_C const IID IID_IUIApplication;
             IUIApplication * This,
             UINT32 commandId,
             UI_COMMANDTYPE typeID,
-            /* [out] */ IUICommandHandler **commandHandler);
+            /* [annotation][out] */ 
+            _Out_  IUICommandHandler **commandHandler);
         
         DECLSPEC_XFGVIRT(IUIApplication, OnDestroyUICommand)
         /* [annotation] */ 
@@ -1712,7 +1767,8 @@ EXTERN_C const IID IID_IUIImage;
         virtual /* [annotation] */ 
         _Check_return_
         HRESULT STDMETHODCALLTYPE GetBitmap( 
-            /* [out] */ HBITMAP *bitmap) = 0;
+            /* [annotation][out] */ 
+            _Out_  HBITMAP *bitmap) = 0;
         
     };
     
@@ -1726,7 +1782,8 @@ EXTERN_C const IID IID_IUIImage;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIImage * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1743,7 +1800,8 @@ EXTERN_C const IID IID_IUIImage;
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *GetBitmap )( 
             IUIImage * This,
-            /* [out] */ HBITMAP *bitmap);
+            /* [annotation][out] */ 
+            _Out_  HBITMAP *bitmap);
         
         END_INTERFACE
     } IUIImageVtbl;
@@ -1807,9 +1865,11 @@ EXTERN_C const IID IID_IUIImageFromBitmap;
         virtual /* [annotation] */ 
         _Check_return_
         HRESULT STDMETHODCALLTYPE CreateImage( 
-            /* [in] */ HBITMAP bitmap,
+            /* [annotation][in] */ 
+            _In_  HBITMAP bitmap,
             UI_OWNERSHIP options,
-            /* [out] */ IUIImage **image) = 0;
+            /* [annotation][out] */ 
+            _Out_  IUIImage **image) = 0;
         
     };
     
@@ -1823,7 +1883,8 @@ EXTERN_C const IID IID_IUIImageFromBitmap;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUIImageFromBitmap * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1840,9 +1901,11 @@ EXTERN_C const IID IID_IUIImageFromBitmap;
         _Check_return_
         HRESULT ( STDMETHODCALLTYPE *CreateImage )( 
             IUIImageFromBitmap * This,
-            /* [in] */ HBITMAP bitmap,
+            /* [annotation][in] */ 
+            _In_  HBITMAP bitmap,
             UI_OWNERSHIP options,
-            /* [out] */ IUIImage **image);
+            /* [annotation][out] */ 
+            _Out_  IUIImage **image);
         
         END_INTERFACE
     } IUIImageFromBitmapVtbl;
@@ -1881,7 +1944,7 @@ EXTERN_C const IID IID_IUIImageFromBitmap;
 #endif 	/* __IUIImageFromBitmap_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_UIRibbon_0000_0012 */
+/* interface __MIDL_itf_uiribbon_0000_0012 */
 /* [local] */ 
 
 #define UI_MAKEAPPMODE(x) (1 << (x))
@@ -1891,8 +1954,8 @@ DEFINE_GUID(CLSID_UIRibbonImageFromBitmapFactory,
 DEFINE_GUID(LIBID_UIRibbon,         0x942f35c2, 0xe83b, 0x45ef, 0xb0, 0x85, 0xac, 0x29, 0x5d, 0xd6, 0x3d, 0x5b);
 
 
-extern RPC_IF_HANDLE __MIDL_itf_UIRibbon_0000_0012_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_UIRibbon_0000_0012_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uiribbon_0000_0012_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uiribbon_0000_0012_v0_0_s_ifspec;
 
 
 #ifndef __UIRibbon_LIBRARY_DEFINED__
@@ -1921,15 +1984,15 @@ UIRibbonImageFromBitmapFactory;
 #endif
 #endif /* __UIRibbon_LIBRARY_DEFINED__ */
 
-/* interface __MIDL_itf_UIRibbon_0000_0013 */
+/* interface __MIDL_itf_uiribbon_0000_0013 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 
 
-extern RPC_IF_HANDLE __MIDL_itf_UIRibbon_0000_0013_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_UIRibbon_0000_0013_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uiribbon_0000_0013_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_uiribbon_0000_0013_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

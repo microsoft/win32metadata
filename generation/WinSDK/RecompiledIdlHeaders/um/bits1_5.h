@@ -6,12 +6,11 @@
  /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
-#pragma warning( disable: 4049 )  /* more than 64k source lines */
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 475
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -155,25 +154,33 @@ EXTERN_C const IID IID_IBackgroundCopyJob2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetNotifyCmdLine( 
-            /* [unique][in] */ __RPC__in_opt LPCWSTR Program,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR Parameters) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR Program,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR Parameters) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNotifyCmdLine( 
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pProgram,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pParameters) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pProgram,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pParameters) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetReplyProgress( 
-            /* [out][in] */ __RPC__inout BG_JOB_REPLY_PROGRESS *pProgress) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  BG_JOB_REPLY_PROGRESS *pProgress) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetReplyData( 
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( unsigned long  )*pLength) byte **ppBuffer,
-            /* [unique][out][in] */ __RPC__inout_opt UINT64 *pLength) = 0;
+            /* [annotation][unique][out][in] */ 
+            _Inout_  UINT64 *pLength) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetReplyFileName( 
-            /* [unique][in] */ __RPC__in_opt LPCWSTR ReplyFileName) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR ReplyFileName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetReplyFileName( 
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pReplyFileName) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pReplyFileName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCredentials( 
             __RPC__in BG_AUTH_CREDENTIALS *credentials) = 0;
@@ -194,7 +201,8 @@ EXTERN_C const IID IID_IBackgroundCopyJob2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -209,19 +217,24 @@ EXTERN_C const IID IID_IBackgroundCopyJob2;
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, AddFileSet)
         HRESULT ( STDMETHODCALLTYPE *AddFileSet )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [in] */ ULONG cFileCount,
-            /* [size_is][in] */ __RPC__in_ecount_full(cFileCount) BG_FILE_INFO *pFileSet);
+            /* [annotation][in] */ 
+            _In_  ULONG cFileCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cFileCount)  BG_FILE_INFO *pFileSet);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, AddFile)
         HRESULT ( STDMETHODCALLTYPE *AddFile )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [in] */ __RPC__in LPCWSTR RemoteUrl,
-            /* [in] */ __RPC__in LPCWSTR LocalName);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR RemoteUrl,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR LocalName);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, EnumFiles)
         HRESULT ( STDMETHODCALLTYPE *EnumFiles )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [out] */ __RPC__deref_out_opt IEnumBackgroundCopyFiles **pEnum);
+            /* [annotation][out] */ 
+            _Out_  IEnumBackgroundCopyFiles **pEnum);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, Suspend)
         HRESULT ( STDMETHODCALLTYPE *Suspend )( 
@@ -242,126 +255,154 @@ EXTERN_C const IID IID_IBackgroundCopyJob2;
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, GetId)
         HRESULT ( STDMETHODCALLTYPE *GetId )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [out] */ __RPC__out GUID *pVal);
+            /* [annotation][out] */ 
+            _Out_  GUID *pVal);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [out] */ __RPC__out BG_JOB_TYPE *pVal);
+            /* [annotation][out] */ 
+            _Out_  BG_JOB_TYPE *pVal);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, GetProgress)
         HRESULT ( STDMETHODCALLTYPE *GetProgress )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [out] */ __RPC__out BG_JOB_PROGRESS *pVal);
+            /* [annotation][out] */ 
+            _Out_  BG_JOB_PROGRESS *pVal);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, GetTimes)
         HRESULT ( STDMETHODCALLTYPE *GetTimes )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [out] */ __RPC__out BG_JOB_TIMES *pVal);
+            /* [annotation][out] */ 
+            _Out_  BG_JOB_TIMES *pVal);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, GetState)
         HRESULT ( STDMETHODCALLTYPE *GetState )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [out] */ __RPC__out BG_JOB_STATE *pVal);
+            /* [annotation][out] */ 
+            _Out_  BG_JOB_STATE *pVal);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, GetError)
         HRESULT ( STDMETHODCALLTYPE *GetError )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [out] */ __RPC__deref_out_opt IBackgroundCopyError **ppError);
+            /* [annotation][out] */ 
+            _Out_  IBackgroundCopyError **ppError);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pVal);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pVal);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, SetDisplayName)
         HRESULT ( STDMETHODCALLTYPE *SetDisplayName )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [in] */ __RPC__in LPCWSTR Val);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR Val);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, GetDisplayName)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayName )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pVal);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pVal);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, SetDescription)
         HRESULT ( STDMETHODCALLTYPE *SetDescription )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [in] */ __RPC__in LPCWSTR Val);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR Val);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, GetDescription)
         HRESULT ( STDMETHODCALLTYPE *GetDescription )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pVal);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pVal);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, SetPriority)
         HRESULT ( STDMETHODCALLTYPE *SetPriority )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [in] */ BG_JOB_PRIORITY Val);
+            /* [annotation][in] */ 
+            _In_  BG_JOB_PRIORITY Val);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, GetPriority)
         HRESULT ( STDMETHODCALLTYPE *GetPriority )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [out] */ __RPC__out BG_JOB_PRIORITY *pVal);
+            /* [annotation][out] */ 
+            _Out_  BG_JOB_PRIORITY *pVal);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, SetNotifyFlags)
         HRESULT ( STDMETHODCALLTYPE *SetNotifyFlags )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [in] */ ULONG Val);
+            /* [annotation][in] */ 
+            _In_  ULONG Val);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, GetNotifyFlags)
         HRESULT ( STDMETHODCALLTYPE *GetNotifyFlags )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [out] */ __RPC__out ULONG *pVal);
+            /* [annotation][out] */ 
+            _Out_  ULONG *pVal);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, SetNotifyInterface)
         HRESULT ( STDMETHODCALLTYPE *SetNotifyInterface )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [in] */ __RPC__in_opt IUnknown *Val);
+            /* [annotation][in] */ 
+            _In_  IUnknown *Val);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, GetNotifyInterface)
         HRESULT ( STDMETHODCALLTYPE *GetNotifyInterface )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [out] */ __RPC__deref_out_opt IUnknown **pVal);
+            /* [annotation][out] */ 
+            _Out_  IUnknown **pVal);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, SetMinimumRetryDelay)
         HRESULT ( STDMETHODCALLTYPE *SetMinimumRetryDelay )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [in] */ ULONG Seconds);
+            /* [annotation][in] */ 
+            _In_  ULONG Seconds);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, GetMinimumRetryDelay)
         HRESULT ( STDMETHODCALLTYPE *GetMinimumRetryDelay )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [out] */ __RPC__out ULONG *Seconds);
+            /* [annotation][out] */ 
+            _Out_  ULONG *Seconds);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, SetNoProgressTimeout)
         HRESULT ( STDMETHODCALLTYPE *SetNoProgressTimeout )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [in] */ ULONG Seconds);
+            /* [annotation][in] */ 
+            _In_  ULONG Seconds);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, GetNoProgressTimeout)
         HRESULT ( STDMETHODCALLTYPE *GetNoProgressTimeout )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [out] */ __RPC__out ULONG *Seconds);
+            /* [annotation][out] */ 
+            _Out_  ULONG *Seconds);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, GetErrorCount)
         HRESULT ( STDMETHODCALLTYPE *GetErrorCount )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [out] */ __RPC__out ULONG *Errors);
+            /* [annotation][out] */ 
+            _Out_  ULONG *Errors);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, SetProxySettings)
         HRESULT ( STDMETHODCALLTYPE *SetProxySettings )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [in] */ BG_JOB_PROXY_USAGE ProxyUsage,
-            /* [unique][string][in] */ __RPC__in_opt_string const WCHAR *ProxyList,
-            /* [unique][string][in] */ __RPC__in_opt_string const WCHAR *ProxyBypassList);
+            /* [annotation][in] */ 
+            _In_  BG_JOB_PROXY_USAGE ProxyUsage,
+            /* [annotation][unique][string][in] */ 
+            _In_  const WCHAR *ProxyList,
+            /* [annotation][unique][string][in] */ 
+            _In_  const WCHAR *ProxyBypassList);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, GetProxySettings)
         HRESULT ( STDMETHODCALLTYPE *GetProxySettings )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [out] */ __RPC__out BG_JOB_PROXY_USAGE *pProxyUsage,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pProxyList,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pProxyBypassList);
+            /* [annotation][out] */ 
+            _Out_  BG_JOB_PROXY_USAGE *pProxyUsage,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pProxyList,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pProxyBypassList);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob, TakeOwnership)
         HRESULT ( STDMETHODCALLTYPE *TakeOwnership )( 
@@ -370,35 +411,43 @@ EXTERN_C const IID IID_IBackgroundCopyJob2;
         DECLSPEC_XFGVIRT(IBackgroundCopyJob2, SetNotifyCmdLine)
         HRESULT ( STDMETHODCALLTYPE *SetNotifyCmdLine )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR Program,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR Parameters);
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR Program,
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR Parameters);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob2, GetNotifyCmdLine)
         HRESULT ( STDMETHODCALLTYPE *GetNotifyCmdLine )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pProgram,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pParameters);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pProgram,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pParameters);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob2, GetReplyProgress)
         HRESULT ( STDMETHODCALLTYPE *GetReplyProgress )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [out][in] */ __RPC__inout BG_JOB_REPLY_PROGRESS *pProgress);
+            /* [annotation][out][in] */ 
+            _Inout_  BG_JOB_REPLY_PROGRESS *pProgress);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob2, GetReplyData)
         HRESULT ( STDMETHODCALLTYPE *GetReplyData )( 
             __RPC__in IBackgroundCopyJob2 * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(( unsigned long  )*pLength) byte **ppBuffer,
-            /* [unique][out][in] */ __RPC__inout_opt UINT64 *pLength);
+            /* [annotation][unique][out][in] */ 
+            _Inout_  UINT64 *pLength);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob2, SetReplyFileName)
         HRESULT ( STDMETHODCALLTYPE *SetReplyFileName )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [unique][in] */ __RPC__in_opt LPCWSTR ReplyFileName);
+            /* [annotation][unique][in] */ 
+            _In_  LPCWSTR ReplyFileName);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob2, GetReplyFileName)
         HRESULT ( STDMETHODCALLTYPE *GetReplyFileName )( 
             __RPC__in IBackgroundCopyJob2 * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *pReplyFileName);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *pReplyFileName);
         
         DECLSPEC_XFGVIRT(IBackgroundCopyJob2, SetCredentials)
         HRESULT ( STDMETHODCALLTYPE *SetCredentials )( 

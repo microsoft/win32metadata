@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -139,22 +139,36 @@ EXTERN_C const IID IID_IRouterProtocolConfig;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddProtocol( 
-            /* [string][in] */ LPCOLESTR pszMachineName,
-            /* [in] */ DWORD dwTransportId,
-            /* [in] */ DWORD dwProtocolId,
-            /* [in] */ HWND hWnd,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ IUnknown *pRouter,
-            /* [in] */ ULONG_PTR uReserved1) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCOLESTR pszMachineName,
+            /* [annotation][in] */ 
+            _In_  DWORD dwTransportId,
+            /* [annotation][in] */ 
+            _In_  DWORD dwProtocolId,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pRouter,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved1) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveProtocol( 
-            /* [string][in] */ LPCOLESTR pszMachineName,
-            /* [in] */ DWORD dwTransportId,
-            /* [in] */ DWORD dwProtocolId,
-            /* [in] */ HWND hWnd,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ IUnknown *pRouter,
-            /* [in] */ ULONG_PTR uReserved1) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCOLESTR pszMachineName,
+            /* [annotation][in] */ 
+            _In_  DWORD dwTransportId,
+            /* [annotation][in] */ 
+            _In_  DWORD dwProtocolId,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pRouter,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved1) = 0;
         
     };
     
@@ -168,7 +182,8 @@ EXTERN_C const IID IID_IRouterProtocolConfig;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRouterProtocolConfig * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -183,24 +198,38 @@ EXTERN_C const IID IID_IRouterProtocolConfig;
         DECLSPEC_XFGVIRT(IRouterProtocolConfig, AddProtocol)
         HRESULT ( STDMETHODCALLTYPE *AddProtocol )( 
             IRouterProtocolConfig * This,
-            /* [string][in] */ LPCOLESTR pszMachineName,
-            /* [in] */ DWORD dwTransportId,
-            /* [in] */ DWORD dwProtocolId,
-            /* [in] */ HWND hWnd,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ IUnknown *pRouter,
-            /* [in] */ ULONG_PTR uReserved1);
+            /* [annotation][string][in] */ 
+            _In_  LPCOLESTR pszMachineName,
+            /* [annotation][in] */ 
+            _In_  DWORD dwTransportId,
+            /* [annotation][in] */ 
+            _In_  DWORD dwProtocolId,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pRouter,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved1);
         
         DECLSPEC_XFGVIRT(IRouterProtocolConfig, RemoveProtocol)
         HRESULT ( STDMETHODCALLTYPE *RemoveProtocol )( 
             IRouterProtocolConfig * This,
-            /* [string][in] */ LPCOLESTR pszMachineName,
-            /* [in] */ DWORD dwTransportId,
-            /* [in] */ DWORD dwProtocolId,
-            /* [in] */ HWND hWnd,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ IUnknown *pRouter,
-            /* [in] */ ULONG_PTR uReserved1);
+            /* [annotation][string][in] */ 
+            _In_  LPCOLESTR pszMachineName,
+            /* [annotation][in] */ 
+            _In_  DWORD dwTransportId,
+            /* [annotation][in] */ 
+            _In_  DWORD dwProtocolId,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pRouter,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved1);
         
         END_INTERFACE
     } IRouterProtocolConfigVtbl;
@@ -282,28 +311,42 @@ EXTERN_C const IID IID_IAuthenticationProviderConfig;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [string][in] */ LPCOLESTR pszMachineName,
-            /* [out] */ ULONG_PTR *puConnectionParam) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCOLESTR pszMachineName,
+            /* [annotation][out] */ 
+            _Out_  ULONG_PTR *puConnectionParam) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Uninitialize( 
-            /* [in] */ ULONG_PTR uConnectionParam) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Configure( 
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ HWND hWnd,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ ULONG_PTR uReserved1,
-            /* [in] */ ULONG_PTR uReserved2) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved1,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved2) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Activate( 
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ ULONG_PTR uReserved1,
-            /* [in] */ ULONG_PTR uReserved2) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved1,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved2) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Deactivate( 
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ ULONG_PTR uReserved1,
-            /* [in] */ ULONG_PTR uReserved2) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved1,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved2) = 0;
         
     };
     
@@ -317,7 +360,8 @@ EXTERN_C const IID IID_IAuthenticationProviderConfig;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAuthenticationProviderConfig * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -332,36 +376,50 @@ EXTERN_C const IID IID_IAuthenticationProviderConfig;
         DECLSPEC_XFGVIRT(IAuthenticationProviderConfig, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IAuthenticationProviderConfig * This,
-            /* [string][in] */ LPCOLESTR pszMachineName,
-            /* [out] */ ULONG_PTR *puConnectionParam);
+            /* [annotation][string][in] */ 
+            _In_  LPCOLESTR pszMachineName,
+            /* [annotation][out] */ 
+            _Out_  ULONG_PTR *puConnectionParam);
         
         DECLSPEC_XFGVIRT(IAuthenticationProviderConfig, Uninitialize)
         HRESULT ( STDMETHODCALLTYPE *Uninitialize )( 
             IAuthenticationProviderConfig * This,
-            /* [in] */ ULONG_PTR uConnectionParam);
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam);
         
         DECLSPEC_XFGVIRT(IAuthenticationProviderConfig, Configure)
         HRESULT ( STDMETHODCALLTYPE *Configure )( 
             IAuthenticationProviderConfig * This,
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ HWND hWnd,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ ULONG_PTR uReserved1,
-            /* [in] */ ULONG_PTR uReserved2);
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved1,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved2);
         
         DECLSPEC_XFGVIRT(IAuthenticationProviderConfig, Activate)
         HRESULT ( STDMETHODCALLTYPE *Activate )( 
             IAuthenticationProviderConfig * This,
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ ULONG_PTR uReserved1,
-            /* [in] */ ULONG_PTR uReserved2);
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved1,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved2);
         
         DECLSPEC_XFGVIRT(IAuthenticationProviderConfig, Deactivate)
         HRESULT ( STDMETHODCALLTYPE *Deactivate )( 
             IAuthenticationProviderConfig * This,
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ ULONG_PTR uReserved1,
-            /* [in] */ ULONG_PTR uReserved2);
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved1,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved2);
         
         END_INTERFACE
     } IAuthenticationProviderConfigVtbl;
@@ -460,28 +518,42 @@ EXTERN_C const IID IID_IAccountingProviderConfig;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [string][in] */ LPCOLESTR pszMachineName,
-            /* [out] */ ULONG_PTR *puConnectionParam) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCOLESTR pszMachineName,
+            /* [annotation][out] */ 
+            _Out_  ULONG_PTR *puConnectionParam) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Uninitialize( 
-            /* [in] */ ULONG_PTR uConnectionParam) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Configure( 
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ HWND hWnd,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ ULONG_PTR uReserved1,
-            /* [in] */ ULONG_PTR uReserved2) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved1,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved2) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Activate( 
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ ULONG_PTR uReserved1,
-            /* [in] */ ULONG_PTR uReserved2) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved1,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved2) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Deactivate( 
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ ULONG_PTR uReserved1,
-            /* [in] */ ULONG_PTR uReserved2) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved1,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved2) = 0;
         
     };
     
@@ -495,7 +567,8 @@ EXTERN_C const IID IID_IAccountingProviderConfig;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAccountingProviderConfig * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -510,36 +583,50 @@ EXTERN_C const IID IID_IAccountingProviderConfig;
         DECLSPEC_XFGVIRT(IAccountingProviderConfig, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IAccountingProviderConfig * This,
-            /* [string][in] */ LPCOLESTR pszMachineName,
-            /* [out] */ ULONG_PTR *puConnectionParam);
+            /* [annotation][string][in] */ 
+            _In_  LPCOLESTR pszMachineName,
+            /* [annotation][out] */ 
+            _Out_  ULONG_PTR *puConnectionParam);
         
         DECLSPEC_XFGVIRT(IAccountingProviderConfig, Uninitialize)
         HRESULT ( STDMETHODCALLTYPE *Uninitialize )( 
             IAccountingProviderConfig * This,
-            /* [in] */ ULONG_PTR uConnectionParam);
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam);
         
         DECLSPEC_XFGVIRT(IAccountingProviderConfig, Configure)
         HRESULT ( STDMETHODCALLTYPE *Configure )( 
             IAccountingProviderConfig * This,
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ HWND hWnd,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ ULONG_PTR uReserved1,
-            /* [in] */ ULONG_PTR uReserved2);
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved1,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved2);
         
         DECLSPEC_XFGVIRT(IAccountingProviderConfig, Activate)
         HRESULT ( STDMETHODCALLTYPE *Activate )( 
             IAccountingProviderConfig * This,
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ ULONG_PTR uReserved1,
-            /* [in] */ ULONG_PTR uReserved2);
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved1,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved2);
         
         DECLSPEC_XFGVIRT(IAccountingProviderConfig, Deactivate)
         HRESULT ( STDMETHODCALLTYPE *Deactivate )( 
             IAccountingProviderConfig * This,
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ ULONG_PTR uReserved1,
-            /* [in] */ ULONG_PTR uReserved2);
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved1,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved2);
         
         END_INTERFACE
     } IAccountingProviderConfigVtbl;
@@ -637,42 +724,70 @@ EXTERN_C const IID IID_IEAPProviderConfig;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [string][in] */ LPCOLESTR pszMachineName,
-            /* [in] */ DWORD dwEapTypeId,
-            /* [out] */ ULONG_PTR *puConnectionParam) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCOLESTR pszMachineName,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEapTypeId,
+            /* [annotation][out] */ 
+            _Out_  ULONG_PTR *puConnectionParam) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Uninitialize( 
-            /* [in] */ DWORD dwEapTypeId,
-            /* [in] */ ULONG_PTR uConnectionParam) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwEapTypeId,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ServerInvokeConfigUI( 
-            /* [in] */ DWORD dwEapTypeId,
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ HWND hWnd,
-            /* [in] */ ULONG_PTR uReserved1,
-            /* [in] */ ULONG_PTR uReserved2) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwEapTypeId,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved1,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved2) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RouterInvokeConfigUI( 
-            /* [in] */ DWORD dwEapTypeId,
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ HWND hwndParent,
-            /* [in] */ DWORD dwFlags,
-            /* [size_is][in] */ BYTE *pConnectionDataIn,
-            /* [in] */ DWORD dwSizeOfConnectionDataIn,
-            /* [size_is][size_is][out] */ BYTE **ppConnectionDataOut,
-            /* [out] */ DWORD *pdwSizeOfConnectionDataOut) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwEapTypeId,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  HWND hwndParent,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwSizeOfConnectionDataIn)  BYTE *pConnectionDataIn,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSizeOfConnectionDataIn,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwSizeOfConnectionDataOut)  BYTE **ppConnectionDataOut,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSizeOfConnectionDataOut) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RouterInvokeCredentialsUI( 
-            /* [in] */ DWORD dwEapTypeId,
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ HWND hwndParent,
-            /* [in] */ DWORD dwFlags,
-            /* [size_is][in] */ BYTE *pConnectionDataIn,
-            /* [in] */ DWORD dwSizeOfConnectionDataIn,
-            /* [size_is][in] */ BYTE *pUserDataIn,
-            /* [in] */ DWORD dwSizeOfUserDataIn,
-            /* [size_is][size_is][out] */ BYTE **ppUserDataOut,
-            /* [out] */ DWORD *pdwSizeOfUserDataOut) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwEapTypeId,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  HWND hwndParent,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwSizeOfConnectionDataIn)  BYTE *pConnectionDataIn,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSizeOfConnectionDataIn,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwSizeOfUserDataIn)  BYTE *pUserDataIn,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSizeOfUserDataIn,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwSizeOfUserDataOut)  BYTE **ppUserDataOut,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSizeOfUserDataOut) = 0;
         
     };
     
@@ -686,7 +801,8 @@ EXTERN_C const IID IID_IEAPProviderConfig;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEAPProviderConfig * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -701,50 +817,78 @@ EXTERN_C const IID IID_IEAPProviderConfig;
         DECLSPEC_XFGVIRT(IEAPProviderConfig, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IEAPProviderConfig * This,
-            /* [string][in] */ LPCOLESTR pszMachineName,
-            /* [in] */ DWORD dwEapTypeId,
-            /* [out] */ ULONG_PTR *puConnectionParam);
+            /* [annotation][string][in] */ 
+            _In_  LPCOLESTR pszMachineName,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEapTypeId,
+            /* [annotation][out] */ 
+            _Out_  ULONG_PTR *puConnectionParam);
         
         DECLSPEC_XFGVIRT(IEAPProviderConfig, Uninitialize)
         HRESULT ( STDMETHODCALLTYPE *Uninitialize )( 
             IEAPProviderConfig * This,
-            /* [in] */ DWORD dwEapTypeId,
-            /* [in] */ ULONG_PTR uConnectionParam);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEapTypeId,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam);
         
         DECLSPEC_XFGVIRT(IEAPProviderConfig, ServerInvokeConfigUI)
         HRESULT ( STDMETHODCALLTYPE *ServerInvokeConfigUI )( 
             IEAPProviderConfig * This,
-            /* [in] */ DWORD dwEapTypeId,
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ HWND hWnd,
-            /* [in] */ ULONG_PTR uReserved1,
-            /* [in] */ ULONG_PTR uReserved2);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEapTypeId,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved1,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved2);
         
         DECLSPEC_XFGVIRT(IEAPProviderConfig, RouterInvokeConfigUI)
         HRESULT ( STDMETHODCALLTYPE *RouterInvokeConfigUI )( 
             IEAPProviderConfig * This,
-            /* [in] */ DWORD dwEapTypeId,
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ HWND hwndParent,
-            /* [in] */ DWORD dwFlags,
-            /* [size_is][in] */ BYTE *pConnectionDataIn,
-            /* [in] */ DWORD dwSizeOfConnectionDataIn,
-            /* [size_is][size_is][out] */ BYTE **ppConnectionDataOut,
-            /* [out] */ DWORD *pdwSizeOfConnectionDataOut);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEapTypeId,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  HWND hwndParent,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwSizeOfConnectionDataIn)  BYTE *pConnectionDataIn,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSizeOfConnectionDataIn,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwSizeOfConnectionDataOut)  BYTE **ppConnectionDataOut,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSizeOfConnectionDataOut);
         
         DECLSPEC_XFGVIRT(IEAPProviderConfig, RouterInvokeCredentialsUI)
         HRESULT ( STDMETHODCALLTYPE *RouterInvokeCredentialsUI )( 
             IEAPProviderConfig * This,
-            /* [in] */ DWORD dwEapTypeId,
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ HWND hwndParent,
-            /* [in] */ DWORD dwFlags,
-            /* [size_is][in] */ BYTE *pConnectionDataIn,
-            /* [in] */ DWORD dwSizeOfConnectionDataIn,
-            /* [size_is][in] */ BYTE *pUserDataIn,
-            /* [in] */ DWORD dwSizeOfUserDataIn,
-            /* [size_is][size_is][out] */ BYTE **ppUserDataOut,
-            /* [out] */ DWORD *pdwSizeOfUserDataOut);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEapTypeId,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  HWND hwndParent,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwSizeOfConnectionDataIn)  BYTE *pConnectionDataIn,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSizeOfConnectionDataIn,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwSizeOfUserDataIn)  BYTE *pUserDataIn,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSizeOfUserDataIn,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwSizeOfUserDataOut)  BYTE **ppUserDataOut,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSizeOfUserDataOut);
         
         END_INTERFACE
     } IEAPProviderConfigVtbl;
@@ -836,7 +980,8 @@ EXTERN_C const IID IID_IEAPProviderConfig2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEAPProviderConfig2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -851,50 +996,78 @@ EXTERN_C const IID IID_IEAPProviderConfig2;
         DECLSPEC_XFGVIRT(IEAPProviderConfig, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IEAPProviderConfig2 * This,
-            /* [string][in] */ LPCOLESTR pszMachineName,
-            /* [in] */ DWORD dwEapTypeId,
-            /* [out] */ ULONG_PTR *puConnectionParam);
+            /* [annotation][string][in] */ 
+            _In_  LPCOLESTR pszMachineName,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEapTypeId,
+            /* [annotation][out] */ 
+            _Out_  ULONG_PTR *puConnectionParam);
         
         DECLSPEC_XFGVIRT(IEAPProviderConfig, Uninitialize)
         HRESULT ( STDMETHODCALLTYPE *Uninitialize )( 
             IEAPProviderConfig2 * This,
-            /* [in] */ DWORD dwEapTypeId,
-            /* [in] */ ULONG_PTR uConnectionParam);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEapTypeId,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam);
         
         DECLSPEC_XFGVIRT(IEAPProviderConfig, ServerInvokeConfigUI)
         HRESULT ( STDMETHODCALLTYPE *ServerInvokeConfigUI )( 
             IEAPProviderConfig2 * This,
-            /* [in] */ DWORD dwEapTypeId,
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ HWND hWnd,
-            /* [in] */ ULONG_PTR uReserved1,
-            /* [in] */ ULONG_PTR uReserved2);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEapTypeId,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved1,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved2);
         
         DECLSPEC_XFGVIRT(IEAPProviderConfig, RouterInvokeConfigUI)
         HRESULT ( STDMETHODCALLTYPE *RouterInvokeConfigUI )( 
             IEAPProviderConfig2 * This,
-            /* [in] */ DWORD dwEapTypeId,
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ HWND hwndParent,
-            /* [in] */ DWORD dwFlags,
-            /* [size_is][in] */ BYTE *pConnectionDataIn,
-            /* [in] */ DWORD dwSizeOfConnectionDataIn,
-            /* [size_is][size_is][out] */ BYTE **ppConnectionDataOut,
-            /* [out] */ DWORD *pdwSizeOfConnectionDataOut);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEapTypeId,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  HWND hwndParent,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwSizeOfConnectionDataIn)  BYTE *pConnectionDataIn,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSizeOfConnectionDataIn,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwSizeOfConnectionDataOut)  BYTE **ppConnectionDataOut,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSizeOfConnectionDataOut);
         
         DECLSPEC_XFGVIRT(IEAPProviderConfig, RouterInvokeCredentialsUI)
         HRESULT ( STDMETHODCALLTYPE *RouterInvokeCredentialsUI )( 
             IEAPProviderConfig2 * This,
-            /* [in] */ DWORD dwEapTypeId,
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ HWND hwndParent,
-            /* [in] */ DWORD dwFlags,
-            /* [size_is][in] */ BYTE *pConnectionDataIn,
-            /* [in] */ DWORD dwSizeOfConnectionDataIn,
-            /* [size_is][in] */ BYTE *pUserDataIn,
-            /* [in] */ DWORD dwSizeOfUserDataIn,
-            /* [size_is][size_is][out] */ BYTE **ppUserDataOut,
-            /* [out] */ DWORD *pdwSizeOfUserDataOut);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEapTypeId,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  HWND hwndParent,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwSizeOfConnectionDataIn)  BYTE *pConnectionDataIn,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSizeOfConnectionDataIn,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwSizeOfUserDataIn)  BYTE *pUserDataIn,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSizeOfUserDataIn,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwSizeOfUserDataOut)  BYTE **ppUserDataOut,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSizeOfUserDataOut);
         
         DECLSPEC_XFGVIRT(IEAPProviderConfig2, ServerInvokeConfigUI2)
         HRESULT ( STDMETHODCALLTYPE *ServerInvokeConfigUI2 )( 
@@ -1007,7 +1180,8 @@ EXTERN_C const IID IID_IEAPProviderConfig3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEAPProviderConfig3 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1022,50 +1196,78 @@ EXTERN_C const IID IID_IEAPProviderConfig3;
         DECLSPEC_XFGVIRT(IEAPProviderConfig, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IEAPProviderConfig3 * This,
-            /* [string][in] */ LPCOLESTR pszMachineName,
-            /* [in] */ DWORD dwEapTypeId,
-            /* [out] */ ULONG_PTR *puConnectionParam);
+            /* [annotation][string][in] */ 
+            _In_  LPCOLESTR pszMachineName,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEapTypeId,
+            /* [annotation][out] */ 
+            _Out_  ULONG_PTR *puConnectionParam);
         
         DECLSPEC_XFGVIRT(IEAPProviderConfig, Uninitialize)
         HRESULT ( STDMETHODCALLTYPE *Uninitialize )( 
             IEAPProviderConfig3 * This,
-            /* [in] */ DWORD dwEapTypeId,
-            /* [in] */ ULONG_PTR uConnectionParam);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEapTypeId,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam);
         
         DECLSPEC_XFGVIRT(IEAPProviderConfig, ServerInvokeConfigUI)
         HRESULT ( STDMETHODCALLTYPE *ServerInvokeConfigUI )( 
             IEAPProviderConfig3 * This,
-            /* [in] */ DWORD dwEapTypeId,
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ HWND hWnd,
-            /* [in] */ ULONG_PTR uReserved1,
-            /* [in] */ ULONG_PTR uReserved2);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEapTypeId,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved1,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uReserved2);
         
         DECLSPEC_XFGVIRT(IEAPProviderConfig, RouterInvokeConfigUI)
         HRESULT ( STDMETHODCALLTYPE *RouterInvokeConfigUI )( 
             IEAPProviderConfig3 * This,
-            /* [in] */ DWORD dwEapTypeId,
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ HWND hwndParent,
-            /* [in] */ DWORD dwFlags,
-            /* [size_is][in] */ BYTE *pConnectionDataIn,
-            /* [in] */ DWORD dwSizeOfConnectionDataIn,
-            /* [size_is][size_is][out] */ BYTE **ppConnectionDataOut,
-            /* [out] */ DWORD *pdwSizeOfConnectionDataOut);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEapTypeId,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  HWND hwndParent,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwSizeOfConnectionDataIn)  BYTE *pConnectionDataIn,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSizeOfConnectionDataIn,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwSizeOfConnectionDataOut)  BYTE **ppConnectionDataOut,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSizeOfConnectionDataOut);
         
         DECLSPEC_XFGVIRT(IEAPProviderConfig, RouterInvokeCredentialsUI)
         HRESULT ( STDMETHODCALLTYPE *RouterInvokeCredentialsUI )( 
             IEAPProviderConfig3 * This,
-            /* [in] */ DWORD dwEapTypeId,
-            /* [in] */ ULONG_PTR uConnectionParam,
-            /* [in] */ HWND hwndParent,
-            /* [in] */ DWORD dwFlags,
-            /* [size_is][in] */ BYTE *pConnectionDataIn,
-            /* [in] */ DWORD dwSizeOfConnectionDataIn,
-            /* [size_is][in] */ BYTE *pUserDataIn,
-            /* [in] */ DWORD dwSizeOfUserDataIn,
-            /* [size_is][size_is][out] */ BYTE **ppUserDataOut,
-            /* [out] */ DWORD *pdwSizeOfUserDataOut);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEapTypeId,
+            /* [annotation][in] */ 
+            _In_  ULONG_PTR uConnectionParam,
+            /* [annotation][in] */ 
+            _In_  HWND hwndParent,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwSizeOfConnectionDataIn)  BYTE *pConnectionDataIn,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSizeOfConnectionDataIn,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwSizeOfUserDataIn)  BYTE *pUserDataIn,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSizeOfUserDataIn,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwSizeOfUserDataOut)  BYTE **ppUserDataOut,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSizeOfUserDataOut);
         
         DECLSPEC_XFGVIRT(IEAPProviderConfig2, ServerInvokeConfigUI2)
         HRESULT ( STDMETHODCALLTYPE *ServerInvokeConfigUI2 )( 

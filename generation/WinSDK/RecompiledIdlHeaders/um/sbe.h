@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -260,10 +260,12 @@ EXTERN_C const IID IID_IStreamBufferInitialize;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetHKEY( 
-            /* [in] */ HKEY hkeyRoot) = 0;
+            /* [annotation][in] */ 
+            _In_  HKEY hkeyRoot) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSIDs( 
-            /* [in] */ DWORD cSIDs,
+            /* [annotation][in] */ 
+            _In_  DWORD cSIDs,
             /* [size_is][in] */ PSID *ppSID) = 0;
         
     };
@@ -278,7 +280,8 @@ EXTERN_C const IID IID_IStreamBufferInitialize;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IStreamBufferInitialize * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -293,12 +296,14 @@ EXTERN_C const IID IID_IStreamBufferInitialize;
         DECLSPEC_XFGVIRT(IStreamBufferInitialize, SetHKEY)
         HRESULT ( STDMETHODCALLTYPE *SetHKEY )( 
             IStreamBufferInitialize * This,
-            /* [in] */ HKEY hkeyRoot);
+            /* [annotation][in] */ 
+            _In_  HKEY hkeyRoot);
         
         DECLSPEC_XFGVIRT(IStreamBufferInitialize, SetSIDs)
         HRESULT ( STDMETHODCALLTYPE *SetSIDs )( 
             IStreamBufferInitialize * This,
-            /* [in] */ DWORD cSIDs,
+            /* [annotation][in] */ 
+            _In_  DWORD cSIDs,
             /* [size_is][in] */ PSID *ppSID);
         
         END_INTERFACE
@@ -371,12 +376,16 @@ EXTERN_C const IID IID_IStreamBufferSink;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE LockProfile( 
-            /* [in] */ __RPC__in LPCWSTR pszStreamBufferFilename) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszStreamBufferFilename) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateRecorder( 
-            /* [in] */ __RPC__in LPCWSTR pszFilename,
-            /* [in] */ DWORD dwRecordType,
-            /* [out] */ __RPC__deref_out_opt IUnknown **pRecordingIUnknown) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszFilename,
+            /* [annotation][in] */ 
+            _In_  DWORD dwRecordType,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **pRecordingIUnknown) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsProfileLocked( void) = 0;
         
@@ -392,7 +401,8 @@ EXTERN_C const IID IID_IStreamBufferSink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStreamBufferSink * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -407,14 +417,18 @@ EXTERN_C const IID IID_IStreamBufferSink;
         DECLSPEC_XFGVIRT(IStreamBufferSink, LockProfile)
         HRESULT ( STDMETHODCALLTYPE *LockProfile )( 
             __RPC__in IStreamBufferSink * This,
-            /* [in] */ __RPC__in LPCWSTR pszStreamBufferFilename);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszStreamBufferFilename);
         
         DECLSPEC_XFGVIRT(IStreamBufferSink, CreateRecorder)
         HRESULT ( STDMETHODCALLTYPE *CreateRecorder )( 
             __RPC__in IStreamBufferSink * This,
-            /* [in] */ __RPC__in LPCWSTR pszFilename,
-            /* [in] */ DWORD dwRecordType,
-            /* [out] */ __RPC__deref_out_opt IUnknown **pRecordingIUnknown);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszFilename,
+            /* [annotation][in] */ 
+            _In_  DWORD dwRecordType,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **pRecordingIUnknown);
         
         DECLSPEC_XFGVIRT(IStreamBufferSink, IsProfileLocked)
         HRESULT ( STDMETHODCALLTYPE *IsProfileLocked )( 
@@ -492,7 +506,8 @@ EXTERN_C const IID IID_IStreamBufferSink2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStreamBufferSink2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -507,14 +522,18 @@ EXTERN_C const IID IID_IStreamBufferSink2;
         DECLSPEC_XFGVIRT(IStreamBufferSink, LockProfile)
         HRESULT ( STDMETHODCALLTYPE *LockProfile )( 
             __RPC__in IStreamBufferSink2 * This,
-            /* [in] */ __RPC__in LPCWSTR pszStreamBufferFilename);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszStreamBufferFilename);
         
         DECLSPEC_XFGVIRT(IStreamBufferSink, CreateRecorder)
         HRESULT ( STDMETHODCALLTYPE *CreateRecorder )( 
             __RPC__in IStreamBufferSink2 * This,
-            /* [in] */ __RPC__in LPCWSTR pszFilename,
-            /* [in] */ DWORD dwRecordType,
-            /* [out] */ __RPC__deref_out_opt IUnknown **pRecordingIUnknown);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszFilename,
+            /* [annotation][in] */ 
+            _In_  DWORD dwRecordType,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **pRecordingIUnknown);
         
         DECLSPEC_XFGVIRT(IStreamBufferSink, IsProfileLocked)
         HRESULT ( STDMETHODCALLTYPE *IsProfileLocked )( 
@@ -587,7 +606,8 @@ EXTERN_C const IID IID_IStreamBufferSink3;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetAvailableFilter( 
-            /* [out][in] */ __RPC__inout REFERENCE_TIME *prtMin) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  REFERENCE_TIME *prtMin) = 0;
         
     };
     
@@ -601,7 +621,8 @@ EXTERN_C const IID IID_IStreamBufferSink3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStreamBufferSink3 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -616,14 +637,18 @@ EXTERN_C const IID IID_IStreamBufferSink3;
         DECLSPEC_XFGVIRT(IStreamBufferSink, LockProfile)
         HRESULT ( STDMETHODCALLTYPE *LockProfile )( 
             __RPC__in IStreamBufferSink3 * This,
-            /* [in] */ __RPC__in LPCWSTR pszStreamBufferFilename);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszStreamBufferFilename);
         
         DECLSPEC_XFGVIRT(IStreamBufferSink, CreateRecorder)
         HRESULT ( STDMETHODCALLTYPE *CreateRecorder )( 
             __RPC__in IStreamBufferSink3 * This,
-            /* [in] */ __RPC__in LPCWSTR pszFilename,
-            /* [in] */ DWORD dwRecordType,
-            /* [out] */ __RPC__deref_out_opt IUnknown **pRecordingIUnknown);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszFilename,
+            /* [annotation][in] */ 
+            _In_  DWORD dwRecordType,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **pRecordingIUnknown);
         
         DECLSPEC_XFGVIRT(IStreamBufferSink, IsProfileLocked)
         HRESULT ( STDMETHODCALLTYPE *IsProfileLocked )( 
@@ -636,7 +661,8 @@ EXTERN_C const IID IID_IStreamBufferSink3;
         DECLSPEC_XFGVIRT(IStreamBufferSink3, SetAvailableFilter)
         HRESULT ( STDMETHODCALLTYPE *SetAvailableFilter )( 
             __RPC__in IStreamBufferSink3 * This,
-            /* [out][in] */ __RPC__inout REFERENCE_TIME *prtMin);
+            /* [annotation][out][in] */ 
+            _Inout_  REFERENCE_TIME *prtMin);
         
         END_INTERFACE
     } IStreamBufferSink3Vtbl;
@@ -705,7 +731,8 @@ EXTERN_C const IID IID_IStreamBufferSource;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetStreamSink( 
-            /* [in] */ __RPC__in_opt IStreamBufferSink *pIStreamBufferSink) = 0;
+            /* [annotation][in] */ 
+            _In_  IStreamBufferSink *pIStreamBufferSink) = 0;
         
     };
     
@@ -719,7 +746,8 @@ EXTERN_C const IID IID_IStreamBufferSource;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStreamBufferSource * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -734,7 +762,8 @@ EXTERN_C const IID IID_IStreamBufferSource;
         DECLSPEC_XFGVIRT(IStreamBufferSource, SetStreamSink)
         HRESULT ( STDMETHODCALLTYPE *SetStreamSink )( 
             __RPC__in IStreamBufferSource * This,
-            /* [in] */ __RPC__in_opt IStreamBufferSink *pIStreamBufferSink);
+            /* [annotation][in] */ 
+            _In_  IStreamBufferSink *pIStreamBufferSink);
         
         END_INTERFACE
     } IStreamBufferSourceVtbl;
@@ -789,15 +818,20 @@ EXTERN_C const IID IID_IStreamBufferRecordControl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Start( 
-            /* [out][in] */ __RPC__inout REFERENCE_TIME *prtStart) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  REFERENCE_TIME *prtStart) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Stop( 
-            /* [in] */ REFERENCE_TIME rtStop) = 0;
+            /* [annotation][in] */ 
+            _In_  REFERENCE_TIME rtStop) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordingStatus( 
-            /* [out] */ __RPC__out HRESULT *phResult,
-            /* [out] */ __RPC__out BOOL *pbStarted,
-            /* [out] */ __RPC__out BOOL *pbStopped) = 0;
+            /* [annotation][out] */ 
+            _Out_  HRESULT *phResult,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbStarted,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbStopped) = 0;
         
     };
     
@@ -811,7 +845,8 @@ EXTERN_C const IID IID_IStreamBufferRecordControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStreamBufferRecordControl * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -826,19 +861,24 @@ EXTERN_C const IID IID_IStreamBufferRecordControl;
         DECLSPEC_XFGVIRT(IStreamBufferRecordControl, Start)
         HRESULT ( STDMETHODCALLTYPE *Start )( 
             __RPC__in IStreamBufferRecordControl * This,
-            /* [out][in] */ __RPC__inout REFERENCE_TIME *prtStart);
+            /* [annotation][out][in] */ 
+            _Inout_  REFERENCE_TIME *prtStart);
         
         DECLSPEC_XFGVIRT(IStreamBufferRecordControl, Stop)
         HRESULT ( STDMETHODCALLTYPE *Stop )( 
             __RPC__in IStreamBufferRecordControl * This,
-            /* [in] */ REFERENCE_TIME rtStop);
+            /* [annotation][in] */ 
+            _In_  REFERENCE_TIME rtStop);
         
         DECLSPEC_XFGVIRT(IStreamBufferRecordControl, GetRecordingStatus)
         HRESULT ( STDMETHODCALLTYPE *GetRecordingStatus )( 
             __RPC__in IStreamBufferRecordControl * This,
-            /* [out] */ __RPC__out HRESULT *phResult,
-            /* [out] */ __RPC__out BOOL *pbStarted,
-            /* [out] */ __RPC__out BOOL *pbStopped);
+            /* [annotation][out] */ 
+            _Out_  HRESULT *phResult,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbStarted,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbStopped);
         
         END_INTERFACE
     } IStreamBufferRecordControlVtbl;
@@ -899,19 +939,26 @@ EXTERN_C const IID IID_IStreamBufferRecComp;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [in] */ __RPC__in LPCWSTR pszTargetFilename,
-            /* [in] */ __RPC__in LPCWSTR pszSBRecProfileRef) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszTargetFilename,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszSBRecProfileRef) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Append( 
-            /* [in] */ __RPC__in LPCWSTR pszSBRecording) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszSBRecording) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AppendEx( 
-            /* [in] */ __RPC__in LPCWSTR pszSBRecording,
-            /* [in] */ REFERENCE_TIME rtStart,
-            /* [in] */ REFERENCE_TIME rtStop) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszSBRecording,
+            /* [annotation][in] */ 
+            _In_  REFERENCE_TIME rtStart,
+            /* [annotation][in] */ 
+            _In_  REFERENCE_TIME rtStop) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentLength( 
-            /* [out] */ __RPC__out DWORD *pcSeconds) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcSeconds) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Close( void) = 0;
         
@@ -929,7 +976,8 @@ EXTERN_C const IID IID_IStreamBufferRecComp;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStreamBufferRecComp * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -944,25 +992,32 @@ EXTERN_C const IID IID_IStreamBufferRecComp;
         DECLSPEC_XFGVIRT(IStreamBufferRecComp, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IStreamBufferRecComp * This,
-            /* [in] */ __RPC__in LPCWSTR pszTargetFilename,
-            /* [in] */ __RPC__in LPCWSTR pszSBRecProfileRef);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszTargetFilename,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszSBRecProfileRef);
         
         DECLSPEC_XFGVIRT(IStreamBufferRecComp, Append)
         HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in IStreamBufferRecComp * This,
-            /* [in] */ __RPC__in LPCWSTR pszSBRecording);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszSBRecording);
         
         DECLSPEC_XFGVIRT(IStreamBufferRecComp, AppendEx)
         HRESULT ( STDMETHODCALLTYPE *AppendEx )( 
             __RPC__in IStreamBufferRecComp * This,
-            /* [in] */ __RPC__in LPCWSTR pszSBRecording,
-            /* [in] */ REFERENCE_TIME rtStart,
-            /* [in] */ REFERENCE_TIME rtStop);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszSBRecording,
+            /* [annotation][in] */ 
+            _In_  REFERENCE_TIME rtStart,
+            /* [annotation][in] */ 
+            _In_  REFERENCE_TIME rtStop);
         
         DECLSPEC_XFGVIRT(IStreamBufferRecComp, GetCurrentLength)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentLength )( 
             __RPC__in IStreamBufferRecComp * This,
-            /* [out] */ __RPC__out DWORD *pcSeconds);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcSeconds);
         
         DECLSPEC_XFGVIRT(IStreamBufferRecComp, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
@@ -1151,34 +1206,51 @@ EXTERN_C const IID IID_IStreamBufferRecordingAttribute;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetAttribute( 
-            /* [in] */ ULONG ulReserved,
-            /* [in] */ __RPC__in LPCWSTR pszAttributeName,
-            /* [in] */ STREAMBUFFER_ATTR_DATATYPE StreamBufferAttributeType,
+            /* [annotation][in] */ 
+            _In_  ULONG ulReserved,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszAttributeName,
+            /* [annotation][in] */ 
+            _In_  STREAMBUFFER_ATTR_DATATYPE StreamBufferAttributeType,
             /* [size_is][in] */ __RPC__in_ecount_full(cbAttributeLength) BYTE *pbAttribute,
-            /* [in] */ WORD cbAttributeLength) = 0;
+            /* [annotation][in] */ 
+            _In_  WORD cbAttributeLength) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAttributeCount( 
-            /* [in] */ ULONG ulReserved,
-            /* [out] */ __RPC__out WORD *pcAttributes) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ulReserved,
+            /* [annotation][out] */ 
+            _Out_  WORD *pcAttributes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAttributeByName( 
-            /* [in] */ __RPC__in LPCWSTR pszAttributeName,
-            /* [in] */ __RPC__in ULONG *pulReserved,
-            /* [out] */ __RPC__out STREAMBUFFER_ATTR_DATATYPE *pStreamBufferAttributeType,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszAttributeName,
+            /* [annotation][in] */ 
+            _In_  ULONG *pulReserved,
+            /* [annotation][out] */ 
+            _Out_  STREAMBUFFER_ATTR_DATATYPE *pStreamBufferAttributeType,
             /* [size_is][out] */ __RPC__out_ecount_full(*pcbLength) BYTE *pbAttribute,
-            /* [out][in] */ __RPC__inout WORD *pcbLength) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  WORD *pcbLength) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAttributeByIndex( 
-            /* [in] */ WORD wIndex,
-            /* [in] */ __RPC__in ULONG *pulReserved,
-            /* [out] */ __RPC__out WCHAR *pszAttributeName,
-            /* [out][in] */ __RPC__inout WORD *pcchNameLength,
-            /* [out] */ __RPC__out STREAMBUFFER_ATTR_DATATYPE *pStreamBufferAttributeType,
+            /* [annotation][in] */ 
+            _In_  WORD wIndex,
+            /* [annotation][in] */ 
+            _In_  ULONG *pulReserved,
+            /* [annotation][out] */ 
+            _Out_  WCHAR *pszAttributeName,
+            /* [annotation][out][in] */ 
+            _Inout_  WORD *pcchNameLength,
+            /* [annotation][out] */ 
+            _Out_  STREAMBUFFER_ATTR_DATATYPE *pStreamBufferAttributeType,
             /* [size_is][out] */ __RPC__out_ecount_full(*pcbLength) BYTE *pbAttribute,
-            /* [out][in] */ __RPC__inout WORD *pcbLength) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  WORD *pcbLength) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumAttributes( 
-            /* [out] */ __RPC__deref_out_opt IEnumStreamBufferRecordingAttrib **ppIEnumStreamBufferAttrib) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumStreamBufferRecordingAttrib **ppIEnumStreamBufferAttrib) = 0;
         
     };
     
@@ -1192,7 +1264,8 @@ EXTERN_C const IID IID_IStreamBufferRecordingAttribute;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStreamBufferRecordingAttribute * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1207,42 +1280,59 @@ EXTERN_C const IID IID_IStreamBufferRecordingAttribute;
         DECLSPEC_XFGVIRT(IStreamBufferRecordingAttribute, SetAttribute)
         HRESULT ( STDMETHODCALLTYPE *SetAttribute )( 
             __RPC__in IStreamBufferRecordingAttribute * This,
-            /* [in] */ ULONG ulReserved,
-            /* [in] */ __RPC__in LPCWSTR pszAttributeName,
-            /* [in] */ STREAMBUFFER_ATTR_DATATYPE StreamBufferAttributeType,
+            /* [annotation][in] */ 
+            _In_  ULONG ulReserved,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszAttributeName,
+            /* [annotation][in] */ 
+            _In_  STREAMBUFFER_ATTR_DATATYPE StreamBufferAttributeType,
             /* [size_is][in] */ __RPC__in_ecount_full(cbAttributeLength) BYTE *pbAttribute,
-            /* [in] */ WORD cbAttributeLength);
+            /* [annotation][in] */ 
+            _In_  WORD cbAttributeLength);
         
         DECLSPEC_XFGVIRT(IStreamBufferRecordingAttribute, GetAttributeCount)
         HRESULT ( STDMETHODCALLTYPE *GetAttributeCount )( 
             __RPC__in IStreamBufferRecordingAttribute * This,
-            /* [in] */ ULONG ulReserved,
-            /* [out] */ __RPC__out WORD *pcAttributes);
+            /* [annotation][in] */ 
+            _In_  ULONG ulReserved,
+            /* [annotation][out] */ 
+            _Out_  WORD *pcAttributes);
         
         DECLSPEC_XFGVIRT(IStreamBufferRecordingAttribute, GetAttributeByName)
         HRESULT ( STDMETHODCALLTYPE *GetAttributeByName )( 
             __RPC__in IStreamBufferRecordingAttribute * This,
-            /* [in] */ __RPC__in LPCWSTR pszAttributeName,
-            /* [in] */ __RPC__in ULONG *pulReserved,
-            /* [out] */ __RPC__out STREAMBUFFER_ATTR_DATATYPE *pStreamBufferAttributeType,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszAttributeName,
+            /* [annotation][in] */ 
+            _In_  ULONG *pulReserved,
+            /* [annotation][out] */ 
+            _Out_  STREAMBUFFER_ATTR_DATATYPE *pStreamBufferAttributeType,
             /* [size_is][out] */ __RPC__out_ecount_full(*pcbLength) BYTE *pbAttribute,
-            /* [out][in] */ __RPC__inout WORD *pcbLength);
+            /* [annotation][out][in] */ 
+            _Inout_  WORD *pcbLength);
         
         DECLSPEC_XFGVIRT(IStreamBufferRecordingAttribute, GetAttributeByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetAttributeByIndex )( 
             __RPC__in IStreamBufferRecordingAttribute * This,
-            /* [in] */ WORD wIndex,
-            /* [in] */ __RPC__in ULONG *pulReserved,
-            /* [out] */ __RPC__out WCHAR *pszAttributeName,
-            /* [out][in] */ __RPC__inout WORD *pcchNameLength,
-            /* [out] */ __RPC__out STREAMBUFFER_ATTR_DATATYPE *pStreamBufferAttributeType,
+            /* [annotation][in] */ 
+            _In_  WORD wIndex,
+            /* [annotation][in] */ 
+            _In_  ULONG *pulReserved,
+            /* [annotation][out] */ 
+            _Out_  WCHAR *pszAttributeName,
+            /* [annotation][out][in] */ 
+            _Inout_  WORD *pcchNameLength,
+            /* [annotation][out] */ 
+            _Out_  STREAMBUFFER_ATTR_DATATYPE *pStreamBufferAttributeType,
             /* [size_is][out] */ __RPC__out_ecount_full(*pcbLength) BYTE *pbAttribute,
-            /* [out][in] */ __RPC__inout WORD *pcbLength);
+            /* [annotation][out][in] */ 
+            _Inout_  WORD *pcbLength);
         
         DECLSPEC_XFGVIRT(IStreamBufferRecordingAttribute, EnumAttributes)
         HRESULT ( STDMETHODCALLTYPE *EnumAttributes )( 
             __RPC__in IStreamBufferRecordingAttribute * This,
-            /* [out] */ __RPC__deref_out_opt IEnumStreamBufferRecordingAttrib **ppIEnumStreamBufferAttrib);
+            /* [annotation][out] */ 
+            _Out_  IEnumStreamBufferRecordingAttrib **ppIEnumStreamBufferAttrib);
         
         END_INTERFACE
     } IStreamBufferRecordingAttributeVtbl;
@@ -1325,17 +1415,21 @@ EXTERN_C const IID IID_IEnumStreamBufferRecordingAttrib;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG cRequest,
+            /* [annotation][in] */ 
+            _In_  ULONG cRequest,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(cRequest) STREAMBUFFER_ATTRIBUTE *pStreamBufferAttribute,
-            /* [out] */ __RPC__out ULONG *pcReceived) = 0;
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcReceived) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG cRecords) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG cRecords) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [out] */ __RPC__deref_out_opt IEnumStreamBufferRecordingAttrib **ppIEnumStreamBufferAttrib) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumStreamBufferRecordingAttrib **ppIEnumStreamBufferAttrib) = 0;
         
     };
     
@@ -1349,7 +1443,8 @@ EXTERN_C const IID IID_IEnumStreamBufferRecordingAttrib;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumStreamBufferRecordingAttrib * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1364,14 +1459,17 @@ EXTERN_C const IID IID_IEnumStreamBufferRecordingAttrib;
         DECLSPEC_XFGVIRT(IEnumStreamBufferRecordingAttrib, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumStreamBufferRecordingAttrib * This,
-            /* [in] */ ULONG cRequest,
+            /* [annotation][in] */ 
+            _In_  ULONG cRequest,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(cRequest) STREAMBUFFER_ATTRIBUTE *pStreamBufferAttribute,
-            /* [out] */ __RPC__out ULONG *pcReceived);
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcReceived);
         
         DECLSPEC_XFGVIRT(IEnumStreamBufferRecordingAttrib, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumStreamBufferRecordingAttrib * This,
-            /* [in] */ ULONG cRecords);
+            /* [annotation][in] */ 
+            _In_  ULONG cRecords);
         
         DECLSPEC_XFGVIRT(IEnumStreamBufferRecordingAttrib, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -1380,7 +1478,8 @@ EXTERN_C const IID IID_IEnumStreamBufferRecordingAttrib;
         DECLSPEC_XFGVIRT(IEnumStreamBufferRecordingAttrib, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumStreamBufferRecordingAttrib * This,
-            /* [out] */ __RPC__deref_out_opt IEnumStreamBufferRecordingAttrib **ppIEnumStreamBufferAttrib);
+            /* [annotation][out] */ 
+            _Out_  IEnumStreamBufferRecordingAttrib **ppIEnumStreamBufferAttrib);
         
         END_INTERFACE
     } IEnumStreamBufferRecordingAttribVtbl;
@@ -1444,24 +1543,32 @@ EXTERN_C const IID IID_IStreamBufferConfigure;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetDirectory( 
-            /* [in] */ __RPC__in LPCWSTR pszDirectoryName) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszDirectoryName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDirectory( 
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszDirectoryName) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppszDirectoryName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetBackingFileCount( 
-            /* [in] */ DWORD dwMin,
-            /* [in] */ DWORD dwMax) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwMin,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMax) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBackingFileCount( 
-            /* [out] */ __RPC__out DWORD *pdwMin,
-            /* [out] */ __RPC__out DWORD *pdwMax) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMin,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMax) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetBackingFileDuration( 
-            /* [in] */ DWORD dwSeconds) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwSeconds) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBackingFileDuration( 
-            /* [out] */ __RPC__out DWORD *pdwSeconds) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSeconds) = 0;
         
     };
     
@@ -1475,7 +1582,8 @@ EXTERN_C const IID IID_IStreamBufferConfigure;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStreamBufferConfigure * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1490,34 +1598,42 @@ EXTERN_C const IID IID_IStreamBufferConfigure;
         DECLSPEC_XFGVIRT(IStreamBufferConfigure, SetDirectory)
         HRESULT ( STDMETHODCALLTYPE *SetDirectory )( 
             __RPC__in IStreamBufferConfigure * This,
-            /* [in] */ __RPC__in LPCWSTR pszDirectoryName);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszDirectoryName);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure, GetDirectory)
         HRESULT ( STDMETHODCALLTYPE *GetDirectory )( 
             __RPC__in IStreamBufferConfigure * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszDirectoryName);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppszDirectoryName);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure, SetBackingFileCount)
         HRESULT ( STDMETHODCALLTYPE *SetBackingFileCount )( 
             __RPC__in IStreamBufferConfigure * This,
-            /* [in] */ DWORD dwMin,
-            /* [in] */ DWORD dwMax);
+            /* [annotation][in] */ 
+            _In_  DWORD dwMin,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMax);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure, GetBackingFileCount)
         HRESULT ( STDMETHODCALLTYPE *GetBackingFileCount )( 
             __RPC__in IStreamBufferConfigure * This,
-            /* [out] */ __RPC__out DWORD *pdwMin,
-            /* [out] */ __RPC__out DWORD *pdwMax);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMin,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMax);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure, SetBackingFileDuration)
         HRESULT ( STDMETHODCALLTYPE *SetBackingFileDuration )( 
             __RPC__in IStreamBufferConfigure * This,
-            /* [in] */ DWORD dwSeconds);
+            /* [annotation][in] */ 
+            _In_  DWORD dwSeconds);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure, GetBackingFileDuration)
         HRESULT ( STDMETHODCALLTYPE *GetBackingFileDuration )( 
             __RPC__in IStreamBufferConfigure * This,
-            /* [out] */ __RPC__out DWORD *pdwSeconds);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSeconds);
         
         END_INTERFACE
     } IStreamBufferConfigureVtbl;
@@ -1587,18 +1703,24 @@ EXTERN_C const IID IID_IStreamBufferConfigure2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetMultiplexedPacketSize( 
-            /* [in] */ DWORD cbBytesPerPacket) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD cbBytesPerPacket) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMultiplexedPacketSize( 
-            /* [out] */ __RPC__out DWORD *pcbBytesPerPacket) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcbBytesPerPacket) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFFTransitionRates( 
-            /* [in] */ DWORD dwMaxFullFrameRate,
-            /* [in] */ DWORD dwMaxNonSkippingRate) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwMaxFullFrameRate,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMaxNonSkippingRate) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFFTransitionRates( 
-            /* [out] */ __RPC__out DWORD *pdwMaxFullFrameRate,
-            /* [out] */ __RPC__out DWORD *pdwMaxNonSkippingRate) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMaxFullFrameRate,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMaxNonSkippingRate) = 0;
         
     };
     
@@ -1612,7 +1734,8 @@ EXTERN_C const IID IID_IStreamBufferConfigure2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStreamBufferConfigure2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1627,56 +1750,70 @@ EXTERN_C const IID IID_IStreamBufferConfigure2;
         DECLSPEC_XFGVIRT(IStreamBufferConfigure, SetDirectory)
         HRESULT ( STDMETHODCALLTYPE *SetDirectory )( 
             __RPC__in IStreamBufferConfigure2 * This,
-            /* [in] */ __RPC__in LPCWSTR pszDirectoryName);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszDirectoryName);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure, GetDirectory)
         HRESULT ( STDMETHODCALLTYPE *GetDirectory )( 
             __RPC__in IStreamBufferConfigure2 * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszDirectoryName);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppszDirectoryName);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure, SetBackingFileCount)
         HRESULT ( STDMETHODCALLTYPE *SetBackingFileCount )( 
             __RPC__in IStreamBufferConfigure2 * This,
-            /* [in] */ DWORD dwMin,
-            /* [in] */ DWORD dwMax);
+            /* [annotation][in] */ 
+            _In_  DWORD dwMin,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMax);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure, GetBackingFileCount)
         HRESULT ( STDMETHODCALLTYPE *GetBackingFileCount )( 
             __RPC__in IStreamBufferConfigure2 * This,
-            /* [out] */ __RPC__out DWORD *pdwMin,
-            /* [out] */ __RPC__out DWORD *pdwMax);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMin,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMax);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure, SetBackingFileDuration)
         HRESULT ( STDMETHODCALLTYPE *SetBackingFileDuration )( 
             __RPC__in IStreamBufferConfigure2 * This,
-            /* [in] */ DWORD dwSeconds);
+            /* [annotation][in] */ 
+            _In_  DWORD dwSeconds);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure, GetBackingFileDuration)
         HRESULT ( STDMETHODCALLTYPE *GetBackingFileDuration )( 
             __RPC__in IStreamBufferConfigure2 * This,
-            /* [out] */ __RPC__out DWORD *pdwSeconds);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSeconds);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure2, SetMultiplexedPacketSize)
         HRESULT ( STDMETHODCALLTYPE *SetMultiplexedPacketSize )( 
             __RPC__in IStreamBufferConfigure2 * This,
-            /* [in] */ DWORD cbBytesPerPacket);
+            /* [annotation][in] */ 
+            _In_  DWORD cbBytesPerPacket);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure2, GetMultiplexedPacketSize)
         HRESULT ( STDMETHODCALLTYPE *GetMultiplexedPacketSize )( 
             __RPC__in IStreamBufferConfigure2 * This,
-            /* [out] */ __RPC__out DWORD *pcbBytesPerPacket);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcbBytesPerPacket);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure2, SetFFTransitionRates)
         HRESULT ( STDMETHODCALLTYPE *SetFFTransitionRates )( 
             __RPC__in IStreamBufferConfigure2 * This,
-            /* [in] */ DWORD dwMaxFullFrameRate,
-            /* [in] */ DWORD dwMaxNonSkippingRate);
+            /* [annotation][in] */ 
+            _In_  DWORD dwMaxFullFrameRate,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMaxNonSkippingRate);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure2, GetFFTransitionRates)
         HRESULT ( STDMETHODCALLTYPE *GetFFTransitionRates )( 
             __RPC__in IStreamBufferConfigure2 * This,
-            /* [out] */ __RPC__out DWORD *pdwMaxFullFrameRate,
-            /* [out] */ __RPC__out DWORD *pdwMaxNonSkippingRate);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMaxFullFrameRate,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMaxNonSkippingRate);
         
         END_INTERFACE
     } IStreamBufferConfigure2Vtbl;
@@ -1759,16 +1896,20 @@ EXTERN_C const IID IID_IStreamBufferConfigure3;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetStartRecConfig( 
-            /* [in] */ BOOL fStartStopsCur) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL fStartStopsCur) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStartRecConfig( 
-            /* [out] */ __RPC__out BOOL *pfStartStopsCur) = 0;
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfStartStopsCur) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetNamespace( 
-            /* [in] */ __RPC__in LPWSTR pszNamespace) = 0;
+            /* [annotation][in] */ 
+            _In_  LPWSTR pszNamespace) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNamespace( 
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszNamespace) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppszNamespace) = 0;
         
     };
     
@@ -1782,7 +1923,8 @@ EXTERN_C const IID IID_IStreamBufferConfigure3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStreamBufferConfigure3 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1797,76 +1939,94 @@ EXTERN_C const IID IID_IStreamBufferConfigure3;
         DECLSPEC_XFGVIRT(IStreamBufferConfigure, SetDirectory)
         HRESULT ( STDMETHODCALLTYPE *SetDirectory )( 
             __RPC__in IStreamBufferConfigure3 * This,
-            /* [in] */ __RPC__in LPCWSTR pszDirectoryName);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszDirectoryName);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure, GetDirectory)
         HRESULT ( STDMETHODCALLTYPE *GetDirectory )( 
             __RPC__in IStreamBufferConfigure3 * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszDirectoryName);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppszDirectoryName);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure, SetBackingFileCount)
         HRESULT ( STDMETHODCALLTYPE *SetBackingFileCount )( 
             __RPC__in IStreamBufferConfigure3 * This,
-            /* [in] */ DWORD dwMin,
-            /* [in] */ DWORD dwMax);
+            /* [annotation][in] */ 
+            _In_  DWORD dwMin,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMax);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure, GetBackingFileCount)
         HRESULT ( STDMETHODCALLTYPE *GetBackingFileCount )( 
             __RPC__in IStreamBufferConfigure3 * This,
-            /* [out] */ __RPC__out DWORD *pdwMin,
-            /* [out] */ __RPC__out DWORD *pdwMax);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMin,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMax);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure, SetBackingFileDuration)
         HRESULT ( STDMETHODCALLTYPE *SetBackingFileDuration )( 
             __RPC__in IStreamBufferConfigure3 * This,
-            /* [in] */ DWORD dwSeconds);
+            /* [annotation][in] */ 
+            _In_  DWORD dwSeconds);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure, GetBackingFileDuration)
         HRESULT ( STDMETHODCALLTYPE *GetBackingFileDuration )( 
             __RPC__in IStreamBufferConfigure3 * This,
-            /* [out] */ __RPC__out DWORD *pdwSeconds);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSeconds);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure2, SetMultiplexedPacketSize)
         HRESULT ( STDMETHODCALLTYPE *SetMultiplexedPacketSize )( 
             __RPC__in IStreamBufferConfigure3 * This,
-            /* [in] */ DWORD cbBytesPerPacket);
+            /* [annotation][in] */ 
+            _In_  DWORD cbBytesPerPacket);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure2, GetMultiplexedPacketSize)
         HRESULT ( STDMETHODCALLTYPE *GetMultiplexedPacketSize )( 
             __RPC__in IStreamBufferConfigure3 * This,
-            /* [out] */ __RPC__out DWORD *pcbBytesPerPacket);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcbBytesPerPacket);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure2, SetFFTransitionRates)
         HRESULT ( STDMETHODCALLTYPE *SetFFTransitionRates )( 
             __RPC__in IStreamBufferConfigure3 * This,
-            /* [in] */ DWORD dwMaxFullFrameRate,
-            /* [in] */ DWORD dwMaxNonSkippingRate);
+            /* [annotation][in] */ 
+            _In_  DWORD dwMaxFullFrameRate,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMaxNonSkippingRate);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure2, GetFFTransitionRates)
         HRESULT ( STDMETHODCALLTYPE *GetFFTransitionRates )( 
             __RPC__in IStreamBufferConfigure3 * This,
-            /* [out] */ __RPC__out DWORD *pdwMaxFullFrameRate,
-            /* [out] */ __RPC__out DWORD *pdwMaxNonSkippingRate);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMaxFullFrameRate,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMaxNonSkippingRate);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure3, SetStartRecConfig)
         HRESULT ( STDMETHODCALLTYPE *SetStartRecConfig )( 
             __RPC__in IStreamBufferConfigure3 * This,
-            /* [in] */ BOOL fStartStopsCur);
+            /* [annotation][in] */ 
+            _In_  BOOL fStartStopsCur);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure3, GetStartRecConfig)
         HRESULT ( STDMETHODCALLTYPE *GetStartRecConfig )( 
             __RPC__in IStreamBufferConfigure3 * This,
-            /* [out] */ __RPC__out BOOL *pfStartStopsCur);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfStartStopsCur);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure3, SetNamespace)
         HRESULT ( STDMETHODCALLTYPE *SetNamespace )( 
             __RPC__in IStreamBufferConfigure3 * This,
-            /* [in] */ __RPC__in LPWSTR pszNamespace);
+            /* [annotation][in] */ 
+            _In_  LPWSTR pszNamespace);
         
         DECLSPEC_XFGVIRT(IStreamBufferConfigure3, GetNamespace)
         HRESULT ( STDMETHODCALLTYPE *GetNamespace )( 
             __RPC__in IStreamBufferConfigure3 * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszNamespace);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppszNamespace);
         
         END_INTERFACE
     } IStreamBufferConfigure3Vtbl;
@@ -1973,7 +2133,8 @@ EXTERN_C const IID IID_IStreamBufferMediaSeeking;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStreamBufferMediaSeeking * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2197,8 +2358,10 @@ EXTERN_C const IID IID_IStreamBufferMediaSeeking2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetRateEx( 
-            /* [in] */ double dRate,
-            /* [in] */ DWORD dwFramesPerSec) = 0;
+            /* [annotation][in] */ 
+            _In_  double dRate,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFramesPerSec) = 0;
         
     };
     
@@ -2212,7 +2375,8 @@ EXTERN_C const IID IID_IStreamBufferMediaSeeking2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStreamBufferMediaSeeking2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2337,8 +2501,10 @@ EXTERN_C const IID IID_IStreamBufferMediaSeeking2;
         DECLSPEC_XFGVIRT(IStreamBufferMediaSeeking2, SetRateEx)
         HRESULT ( STDMETHODCALLTYPE *SetRateEx )( 
             __RPC__in IStreamBufferMediaSeeking2 * This,
-            /* [in] */ double dRate,
-            /* [in] */ DWORD dwFramesPerSec);
+            /* [annotation][in] */ 
+            _In_  double dRate,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFramesPerSec);
         
         END_INTERFACE
     } IStreamBufferMediaSeeking2Vtbl;
@@ -2463,7 +2629,8 @@ EXTERN_C const IID IID_IStreamBufferDataCounters;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetData( 
-            /* [out] */ __RPC__out SBE_PIN_DATA *pPinData) = 0;
+            /* [annotation][out] */ 
+            _Out_  SBE_PIN_DATA *pPinData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ResetData( void) = 0;
         
@@ -2479,7 +2646,8 @@ EXTERN_C const IID IID_IStreamBufferDataCounters;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStreamBufferDataCounters * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2494,7 +2662,8 @@ EXTERN_C const IID IID_IStreamBufferDataCounters;
         DECLSPEC_XFGVIRT(IStreamBufferDataCounters, GetData)
         HRESULT ( STDMETHODCALLTYPE *GetData )( 
             __RPC__in IStreamBufferDataCounters * This,
-            /* [out] */ __RPC__out SBE_PIN_DATA *pPinData);
+            /* [annotation][out] */ 
+            _Out_  SBE_PIN_DATA *pPinData);
         
         DECLSPEC_XFGVIRT(IStreamBufferDataCounters, ResetData)
         HRESULT ( STDMETHODCALLTYPE *ResetData )( 
@@ -2650,14 +2819,22 @@ EXTERN_C const IID IID_ISBE2GlobalEvent;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetEvent( 
-            /* [in] */ __RPC__in REFGUID idEvt,
-            /* [in] */ ULONG param1,
-            /* [in] */ ULONG param2,
-            /* [in] */ ULONG param3,
-            /* [in] */ ULONG param4,
-            /* [out] */ __RPC__out BOOL *pSpanning,
-            /* [out][in] */ __RPC__inout DWORD *pcb,
-            /* [size_is][out] */ __RPC__out_ecount_full(*pcb) BYTE *pb) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID idEvt,
+            /* [annotation][in] */ 
+            _In_  ULONG param1,
+            /* [annotation][in] */ 
+            _In_  ULONG param2,
+            /* [annotation][in] */ 
+            _In_  ULONG param3,
+            /* [annotation][in] */ 
+            _In_  ULONG param4,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pSpanning,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcb,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(* pcb)  BYTE *pb) = 0;
         
     };
     
@@ -2671,7 +2848,8 @@ EXTERN_C const IID IID_ISBE2GlobalEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISBE2GlobalEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2686,14 +2864,22 @@ EXTERN_C const IID IID_ISBE2GlobalEvent;
         DECLSPEC_XFGVIRT(ISBE2GlobalEvent, GetEvent)
         HRESULT ( STDMETHODCALLTYPE *GetEvent )( 
             __RPC__in ISBE2GlobalEvent * This,
-            /* [in] */ __RPC__in REFGUID idEvt,
-            /* [in] */ ULONG param1,
-            /* [in] */ ULONG param2,
-            /* [in] */ ULONG param3,
-            /* [in] */ ULONG param4,
-            /* [out] */ __RPC__out BOOL *pSpanning,
-            /* [out][in] */ __RPC__inout DWORD *pcb,
-            /* [size_is][out] */ __RPC__out_ecount_full(*pcb) BYTE *pb);
+            /* [annotation][in] */ 
+            _In_  REFGUID idEvt,
+            /* [annotation][in] */ 
+            _In_  ULONG param1,
+            /* [annotation][in] */ 
+            _In_  ULONG param2,
+            /* [annotation][in] */ 
+            _In_  ULONG param3,
+            /* [annotation][in] */ 
+            _In_  ULONG param4,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pSpanning,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcb,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(* pcb)  BYTE *pb);
         
         END_INTERFACE
     } ISBE2GlobalEventVtbl;
@@ -2748,15 +2934,24 @@ EXTERN_C const IID IID_ISBE2GlobalEvent2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetEventEx( 
-            /* [in] */ __RPC__in REFGUID idEvt,
-            /* [in] */ ULONG param1,
-            /* [in] */ ULONG param2,
-            /* [in] */ ULONG param3,
-            /* [in] */ ULONG param4,
-            /* [out] */ __RPC__out BOOL *pSpanning,
-            /* [out][in] */ __RPC__inout DWORD *pcb,
-            /* [size_is][out] */ __RPC__out_ecount_full(*pcb) BYTE *pb,
-            /* [out] */ __RPC__out REFERENCE_TIME *pStreamTime) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID idEvt,
+            /* [annotation][in] */ 
+            _In_  ULONG param1,
+            /* [annotation][in] */ 
+            _In_  ULONG param2,
+            /* [annotation][in] */ 
+            _In_  ULONG param3,
+            /* [annotation][in] */ 
+            _In_  ULONG param4,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pSpanning,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcb,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(* pcb)  BYTE *pb,
+            /* [annotation][out] */ 
+            _Out_  REFERENCE_TIME *pStreamTime) = 0;
         
     };
     
@@ -2770,7 +2965,8 @@ EXTERN_C const IID IID_ISBE2GlobalEvent2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISBE2GlobalEvent2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2785,27 +2981,44 @@ EXTERN_C const IID IID_ISBE2GlobalEvent2;
         DECLSPEC_XFGVIRT(ISBE2GlobalEvent, GetEvent)
         HRESULT ( STDMETHODCALLTYPE *GetEvent )( 
             __RPC__in ISBE2GlobalEvent2 * This,
-            /* [in] */ __RPC__in REFGUID idEvt,
-            /* [in] */ ULONG param1,
-            /* [in] */ ULONG param2,
-            /* [in] */ ULONG param3,
-            /* [in] */ ULONG param4,
-            /* [out] */ __RPC__out BOOL *pSpanning,
-            /* [out][in] */ __RPC__inout DWORD *pcb,
-            /* [size_is][out] */ __RPC__out_ecount_full(*pcb) BYTE *pb);
+            /* [annotation][in] */ 
+            _In_  REFGUID idEvt,
+            /* [annotation][in] */ 
+            _In_  ULONG param1,
+            /* [annotation][in] */ 
+            _In_  ULONG param2,
+            /* [annotation][in] */ 
+            _In_  ULONG param3,
+            /* [annotation][in] */ 
+            _In_  ULONG param4,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pSpanning,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcb,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(* pcb)  BYTE *pb);
         
         DECLSPEC_XFGVIRT(ISBE2GlobalEvent2, GetEventEx)
         HRESULT ( STDMETHODCALLTYPE *GetEventEx )( 
             __RPC__in ISBE2GlobalEvent2 * This,
-            /* [in] */ __RPC__in REFGUID idEvt,
-            /* [in] */ ULONG param1,
-            /* [in] */ ULONG param2,
-            /* [in] */ ULONG param3,
-            /* [in] */ ULONG param4,
-            /* [out] */ __RPC__out BOOL *pSpanning,
-            /* [out][in] */ __RPC__inout DWORD *pcb,
-            /* [size_is][out] */ __RPC__out_ecount_full(*pcb) BYTE *pb,
-            /* [out] */ __RPC__out REFERENCE_TIME *pStreamTime);
+            /* [annotation][in] */ 
+            _In_  REFGUID idEvt,
+            /* [annotation][in] */ 
+            _In_  ULONG param1,
+            /* [annotation][in] */ 
+            _In_  ULONG param2,
+            /* [annotation][in] */ 
+            _In_  ULONG param3,
+            /* [annotation][in] */ 
+            _In_  ULONG param4,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pSpanning,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcb,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(* pcb)  BYTE *pb,
+            /* [annotation][out] */ 
+            _Out_  REFERENCE_TIME *pStreamTime);
         
         END_INTERFACE
     } ISBE2GlobalEvent2Vtbl;
@@ -2864,10 +3077,14 @@ EXTERN_C const IID IID_ISBE2SpanningEvent;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetEvent( 
-            /* [in] */ __RPC__in REFGUID idEvt,
-            /* [in] */ SBE2_STREAM_ID streamId,
-            /* [out][in] */ __RPC__inout DWORD *pcb,
-            /* [size_is][out] */ __RPC__out_ecount_full(*pcb) BYTE *pb) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID idEvt,
+            /* [annotation][in] */ 
+            _In_  SBE2_STREAM_ID streamId,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcb,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(* pcb)  BYTE *pb) = 0;
         
     };
     
@@ -2881,7 +3098,8 @@ EXTERN_C const IID IID_ISBE2SpanningEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISBE2SpanningEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2896,10 +3114,14 @@ EXTERN_C const IID IID_ISBE2SpanningEvent;
         DECLSPEC_XFGVIRT(ISBE2SpanningEvent, GetEvent)
         HRESULT ( STDMETHODCALLTYPE *GetEvent )( 
             __RPC__in ISBE2SpanningEvent * This,
-            /* [in] */ __RPC__in REFGUID idEvt,
-            /* [in] */ SBE2_STREAM_ID streamId,
-            /* [out][in] */ __RPC__inout DWORD *pcb,
-            /* [size_is][out] */ __RPC__out_ecount_full(*pcb) BYTE *pb);
+            /* [annotation][in] */ 
+            _In_  REFGUID idEvt,
+            /* [annotation][in] */ 
+            _In_  SBE2_STREAM_ID streamId,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcb,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(* pcb)  BYTE *pb);
         
         END_INTERFACE
     } ISBE2SpanningEventVtbl;
@@ -2954,18 +3176,24 @@ EXTERN_C const IID IID_ISBE2Crossbar;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE EnableDefaultMode( 
-            /* [in] */ DWORD DefaultFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD DefaultFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetInitialProfile( 
-            /* [out] */ __RPC__deref_out_opt ISBE2MediaTypeProfile **ppProfile) = 0;
+            /* [annotation][out] */ 
+            _Out_  ISBE2MediaTypeProfile **ppProfile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetOutputProfile( 
-            /* [in] */ __RPC__in_opt ISBE2MediaTypeProfile *pProfile,
-            /* [out] */ __RPC__out DWORD *pcOutputPins,
-            /* [out] */ __RPC__deref_out_opt IPin **ppOutputPins) = 0;
+            /* [annotation][in] */ 
+            _In_  ISBE2MediaTypeProfile *pProfile,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcOutputPins,
+            /* [annotation][out] */ 
+            _Out_  IPin **ppOutputPins) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumStreams( 
-            /* [out] */ __RPC__deref_out_opt ISBE2EnumStream **ppStreams) = 0;
+            /* [annotation][out] */ 
+            _Out_  ISBE2EnumStream **ppStreams) = 0;
         
     };
     
@@ -2979,7 +3207,8 @@ EXTERN_C const IID IID_ISBE2Crossbar;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISBE2Crossbar * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2994,24 +3223,30 @@ EXTERN_C const IID IID_ISBE2Crossbar;
         DECLSPEC_XFGVIRT(ISBE2Crossbar, EnableDefaultMode)
         HRESULT ( STDMETHODCALLTYPE *EnableDefaultMode )( 
             __RPC__in ISBE2Crossbar * This,
-            /* [in] */ DWORD DefaultFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD DefaultFlags);
         
         DECLSPEC_XFGVIRT(ISBE2Crossbar, GetInitialProfile)
         HRESULT ( STDMETHODCALLTYPE *GetInitialProfile )( 
             __RPC__in ISBE2Crossbar * This,
-            /* [out] */ __RPC__deref_out_opt ISBE2MediaTypeProfile **ppProfile);
+            /* [annotation][out] */ 
+            _Out_  ISBE2MediaTypeProfile **ppProfile);
         
         DECLSPEC_XFGVIRT(ISBE2Crossbar, SetOutputProfile)
         HRESULT ( STDMETHODCALLTYPE *SetOutputProfile )( 
             __RPC__in ISBE2Crossbar * This,
-            /* [in] */ __RPC__in_opt ISBE2MediaTypeProfile *pProfile,
-            /* [out] */ __RPC__out DWORD *pcOutputPins,
-            /* [out] */ __RPC__deref_out_opt IPin **ppOutputPins);
+            /* [annotation][in] */ 
+            _In_  ISBE2MediaTypeProfile *pProfile,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcOutputPins,
+            /* [annotation][out] */ 
+            _Out_  IPin **ppOutputPins);
         
         DECLSPEC_XFGVIRT(ISBE2Crossbar, EnumStreams)
         HRESULT ( STDMETHODCALLTYPE *EnumStreams )( 
             __RPC__in ISBE2Crossbar * This,
-            /* [out] */ __RPC__deref_out_opt ISBE2EnumStream **ppStreams);
+            /* [annotation][out] */ 
+            _Out_  ISBE2EnumStream **ppStreams);
         
         END_INTERFACE
     } ISBE2CrossbarVtbl;
@@ -3075,13 +3310,16 @@ EXTERN_C const IID IID_ISBE2StreamMap;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE MapStream( 
-            /* [in] */ SBE2_STREAM_ID Stream) = 0;
+            /* [annotation][in] */ 
+            _In_  SBE2_STREAM_ID Stream) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnmapStream( 
-            /* [in] */ SBE2_STREAM_ID Stream) = 0;
+            /* [annotation][in] */ 
+            _In_  SBE2_STREAM_ID Stream) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumMappedStreams( 
-            /* [out] */ __RPC__deref_out_opt ISBE2EnumStream **ppStreams) = 0;
+            /* [annotation][out] */ 
+            _Out_  ISBE2EnumStream **ppStreams) = 0;
         
     };
     
@@ -3095,7 +3333,8 @@ EXTERN_C const IID IID_ISBE2StreamMap;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISBE2StreamMap * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3110,17 +3349,20 @@ EXTERN_C const IID IID_ISBE2StreamMap;
         DECLSPEC_XFGVIRT(ISBE2StreamMap, MapStream)
         HRESULT ( STDMETHODCALLTYPE *MapStream )( 
             __RPC__in ISBE2StreamMap * This,
-            /* [in] */ SBE2_STREAM_ID Stream);
+            /* [annotation][in] */ 
+            _In_  SBE2_STREAM_ID Stream);
         
         DECLSPEC_XFGVIRT(ISBE2StreamMap, UnmapStream)
         HRESULT ( STDMETHODCALLTYPE *UnmapStream )( 
             __RPC__in ISBE2StreamMap * This,
-            /* [in] */ SBE2_STREAM_ID Stream);
+            /* [annotation][in] */ 
+            _In_  SBE2_STREAM_ID Stream);
         
         DECLSPEC_XFGVIRT(ISBE2StreamMap, EnumMappedStreams)
         HRESULT ( STDMETHODCALLTYPE *EnumMappedStreams )( 
             __RPC__in ISBE2StreamMap * This,
-            /* [out] */ __RPC__deref_out_opt ISBE2EnumStream **ppStreams);
+            /* [annotation][out] */ 
+            _Out_  ISBE2EnumStream **ppStreams);
         
         END_INTERFACE
     } ISBE2StreamMapVtbl;
@@ -3181,17 +3423,21 @@ EXTERN_C const IID IID_ISBE2EnumStream;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG cRequest,
+            /* [annotation][in] */ 
+            _In_  ULONG cRequest,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(cRequest) SBE2_STREAM_DESC *pStreamDesc,
-            /* [out] */ __RPC__out ULONG *pcReceived) = 0;
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcReceived) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG cRecords) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG cRecords) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [out] */ __RPC__deref_out_opt ISBE2EnumStream **ppIEnumStream) = 0;
+            /* [annotation][out] */ 
+            _Out_  ISBE2EnumStream **ppIEnumStream) = 0;
         
     };
     
@@ -3205,7 +3451,8 @@ EXTERN_C const IID IID_ISBE2EnumStream;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISBE2EnumStream * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3220,14 +3467,17 @@ EXTERN_C const IID IID_ISBE2EnumStream;
         DECLSPEC_XFGVIRT(ISBE2EnumStream, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in ISBE2EnumStream * This,
-            /* [in] */ ULONG cRequest,
+            /* [annotation][in] */ 
+            _In_  ULONG cRequest,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(cRequest) SBE2_STREAM_DESC *pStreamDesc,
-            /* [out] */ __RPC__out ULONG *pcReceived);
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcReceived);
         
         DECLSPEC_XFGVIRT(ISBE2EnumStream, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in ISBE2EnumStream * This,
-            /* [in] */ ULONG cRecords);
+            /* [annotation][in] */ 
+            _In_  ULONG cRecords);
         
         DECLSPEC_XFGVIRT(ISBE2EnumStream, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -3236,7 +3486,8 @@ EXTERN_C const IID IID_ISBE2EnumStream;
         DECLSPEC_XFGVIRT(ISBE2EnumStream, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in ISBE2EnumStream * This,
-            /* [out] */ __RPC__deref_out_opt ISBE2EnumStream **ppIEnumStream);
+            /* [annotation][out] */ 
+            _Out_  ISBE2EnumStream **ppIEnumStream);
         
         END_INTERFACE
     } ISBE2EnumStreamVtbl;
@@ -3300,17 +3551,22 @@ EXTERN_C const IID IID_ISBE2MediaTypeProfile;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetStreamCount( 
-            /* [out] */ __RPC__out DWORD *pCount) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStream( 
-            /* [in] */ DWORD Index,
-            /* [out] */ __RPC__deref_out_opt AM_MEDIA_TYPE **ppMediaType) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD Index,
+            /* [annotation][out] */ 
+            _Out_  AM_MEDIA_TYPE **ppMediaType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddStream( 
-            /* [in] */ __RPC__in AM_MEDIA_TYPE *pMediaType) = 0;
+            /* [annotation][in] */ 
+            _In_  AM_MEDIA_TYPE *pMediaType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeleteStream( 
-            /* [in] */ DWORD Index) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD Index) = 0;
         
     };
     
@@ -3324,7 +3580,8 @@ EXTERN_C const IID IID_ISBE2MediaTypeProfile;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISBE2MediaTypeProfile * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3339,23 +3596,28 @@ EXTERN_C const IID IID_ISBE2MediaTypeProfile;
         DECLSPEC_XFGVIRT(ISBE2MediaTypeProfile, GetStreamCount)
         HRESULT ( STDMETHODCALLTYPE *GetStreamCount )( 
             __RPC__in ISBE2MediaTypeProfile * This,
-            /* [out] */ __RPC__out DWORD *pCount);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pCount);
         
         DECLSPEC_XFGVIRT(ISBE2MediaTypeProfile, GetStream)
         HRESULT ( STDMETHODCALLTYPE *GetStream )( 
             __RPC__in ISBE2MediaTypeProfile * This,
-            /* [in] */ DWORD Index,
-            /* [out] */ __RPC__deref_out_opt AM_MEDIA_TYPE **ppMediaType);
+            /* [annotation][in] */ 
+            _In_  DWORD Index,
+            /* [annotation][out] */ 
+            _Out_  AM_MEDIA_TYPE **ppMediaType);
         
         DECLSPEC_XFGVIRT(ISBE2MediaTypeProfile, AddStream)
         HRESULT ( STDMETHODCALLTYPE *AddStream )( 
             __RPC__in ISBE2MediaTypeProfile * This,
-            /* [in] */ __RPC__in AM_MEDIA_TYPE *pMediaType);
+            /* [annotation][in] */ 
+            _In_  AM_MEDIA_TYPE *pMediaType);
         
         DECLSPEC_XFGVIRT(ISBE2MediaTypeProfile, DeleteStream)
         HRESULT ( STDMETHODCALLTYPE *DeleteStream )( 
             __RPC__in ISBE2MediaTypeProfile * This,
-            /* [in] */ DWORD Index);
+            /* [annotation][in] */ 
+            _In_  DWORD Index);
         
         END_INTERFACE
     } ISBE2MediaTypeProfileVtbl;
@@ -3419,7 +3681,8 @@ EXTERN_C const IID IID_ISBE2FileScan;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RepairFile( 
-            /* [in] */ __RPC__in LPCWSTR filename) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR filename) = 0;
         
     };
     
@@ -3433,7 +3696,8 @@ EXTERN_C const IID IID_ISBE2FileScan;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISBE2FileScan * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3448,7 +3712,8 @@ EXTERN_C const IID IID_ISBE2FileScan;
         DECLSPEC_XFGVIRT(ISBE2FileScan, RepairFile)
         HRESULT ( STDMETHODCALLTYPE *RepairFile )( 
             __RPC__in ISBE2FileScan * This,
-            /* [in] */ __RPC__in LPCWSTR filename);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR filename);
         
         END_INTERFACE
     } ISBE2FileScanVtbl;

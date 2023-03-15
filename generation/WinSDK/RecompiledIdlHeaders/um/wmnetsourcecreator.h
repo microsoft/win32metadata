@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -106,31 +106,46 @@ EXTERN_C const IID IID_INSNetSourceCreator;
         virtual HRESULT STDMETHODCALLTYPE Initialize( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateNetSource( 
-            /* [in] */ __RPC__in LPCWSTR pszStreamName,
-            /* [in] */ __RPC__in_opt IUnknown *pMonitor,
-            /* [in] */ __RPC__in BYTE *pData,
-            /* [in] */ __RPC__in_opt IUnknown *pUserContext,
-            /* [in] */ __RPC__in_opt IUnknown *pCallback,
-            /* [in] */ QWORD qwContext) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszStreamName,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pMonitor,
+            /* [annotation][in] */ 
+            _In_  BYTE *pData,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUserContext,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pCallback,
+            /* [annotation][in] */ 
+            _In_  QWORD qwContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNetSourceProperties( 
-            /* [in] */ __RPC__in LPCWSTR pszStreamName,
-            /* [out] */ __RPC__deref_out_opt IUnknown **ppPropertiesNode) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszStreamName,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppPropertiesNode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNetSourceSharedNamespace( 
-            /* [out] */ __RPC__deref_out_opt IUnknown **ppSharedNamespace) = 0;
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppSharedNamespace) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNetSourceAdminInterface( 
-            /* [in] */ __RPC__in LPCWSTR pszStreamName,
-            /* [out] */ __RPC__out VARIANT *pVal) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszStreamName,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNumProtocolsSupported( 
-            /* [out] */ __RPC__out DWORD *pcProtocols) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcProtocols) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProtocolName( 
-            /* [in] */ DWORD dwProtocolNum,
-            /* [out] */ __RPC__out WCHAR *pwszProtocolName,
-            /* [out][in] */ __RPC__inout WORD *pcchProtocolName) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwProtocolNum,
+            /* [annotation][out] */ 
+            _Out_  WCHAR *pwszProtocolName,
+            /* [annotation][out][in] */ 
+            _Inout_  WORD *pcchProtocolName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Shutdown( void) = 0;
         
@@ -146,7 +161,8 @@ EXTERN_C const IID IID_INSNetSourceCreator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INSNetSourceCreator * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -165,41 +181,56 @@ EXTERN_C const IID IID_INSNetSourceCreator;
         DECLSPEC_XFGVIRT(INSNetSourceCreator, CreateNetSource)
         HRESULT ( STDMETHODCALLTYPE *CreateNetSource )( 
             __RPC__in INSNetSourceCreator * This,
-            /* [in] */ __RPC__in LPCWSTR pszStreamName,
-            /* [in] */ __RPC__in_opt IUnknown *pMonitor,
-            /* [in] */ __RPC__in BYTE *pData,
-            /* [in] */ __RPC__in_opt IUnknown *pUserContext,
-            /* [in] */ __RPC__in_opt IUnknown *pCallback,
-            /* [in] */ QWORD qwContext);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszStreamName,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pMonitor,
+            /* [annotation][in] */ 
+            _In_  BYTE *pData,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUserContext,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pCallback,
+            /* [annotation][in] */ 
+            _In_  QWORD qwContext);
         
         DECLSPEC_XFGVIRT(INSNetSourceCreator, GetNetSourceProperties)
         HRESULT ( STDMETHODCALLTYPE *GetNetSourceProperties )( 
             __RPC__in INSNetSourceCreator * This,
-            /* [in] */ __RPC__in LPCWSTR pszStreamName,
-            /* [out] */ __RPC__deref_out_opt IUnknown **ppPropertiesNode);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszStreamName,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppPropertiesNode);
         
         DECLSPEC_XFGVIRT(INSNetSourceCreator, GetNetSourceSharedNamespace)
         HRESULT ( STDMETHODCALLTYPE *GetNetSourceSharedNamespace )( 
             __RPC__in INSNetSourceCreator * This,
-            /* [out] */ __RPC__deref_out_opt IUnknown **ppSharedNamespace);
+            /* [annotation][out] */ 
+            _Out_  IUnknown **ppSharedNamespace);
         
         DECLSPEC_XFGVIRT(INSNetSourceCreator, GetNetSourceAdminInterface)
         HRESULT ( STDMETHODCALLTYPE *GetNetSourceAdminInterface )( 
             __RPC__in INSNetSourceCreator * This,
-            /* [in] */ __RPC__in LPCWSTR pszStreamName,
-            /* [out] */ __RPC__out VARIANT *pVal);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszStreamName,
+            /* [annotation][out] */ 
+            _Out_  VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(INSNetSourceCreator, GetNumProtocolsSupported)
         HRESULT ( STDMETHODCALLTYPE *GetNumProtocolsSupported )( 
             __RPC__in INSNetSourceCreator * This,
-            /* [out] */ __RPC__out DWORD *pcProtocols);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcProtocols);
         
         DECLSPEC_XFGVIRT(INSNetSourceCreator, GetProtocolName)
         HRESULT ( STDMETHODCALLTYPE *GetProtocolName )( 
             __RPC__in INSNetSourceCreator * This,
-            /* [in] */ DWORD dwProtocolNum,
-            /* [out] */ __RPC__out WCHAR *pwszProtocolName,
-            /* [out][in] */ __RPC__inout WORD *pcchProtocolName);
+            /* [annotation][in] */ 
+            _In_  DWORD dwProtocolNum,
+            /* [annotation][out] */ 
+            _Out_  WCHAR *pwszProtocolName,
+            /* [annotation][out][in] */ 
+            _Inout_  WORD *pcchProtocolName);
         
         DECLSPEC_XFGVIRT(INSNetSourceCreator, Shutdown)
         HRESULT ( STDMETHODCALLTYPE *Shutdown )( 

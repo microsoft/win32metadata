@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -105,16 +105,24 @@ EXTERN_C const IID IID_IProtectionPolicyManagerInterop;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RequestAccessForWindowAsync( 
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in HSTRING sourceIdentity,
-            /* [in] */ __RPC__in HSTRING targetIdentity,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  HSTRING sourceIdentity,
+            /* [annotation][in] */ 
+            _In_  HSTRING targetIdentity,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetForWindow( 
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **result) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **result) = 0;
         
     };
     
@@ -128,7 +136,8 @@ EXTERN_C const IID IID_IProtectionPolicyManagerInterop;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProtectionPolicyManagerInterop * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -159,18 +168,26 @@ EXTERN_C const IID IID_IProtectionPolicyManagerInterop;
         DECLSPEC_XFGVIRT(IProtectionPolicyManagerInterop, RequestAccessForWindowAsync)
         HRESULT ( STDMETHODCALLTYPE *RequestAccessForWindowAsync )( 
             __RPC__in IProtectionPolicyManagerInterop * This,
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in HSTRING sourceIdentity,
-            /* [in] */ __RPC__in HSTRING targetIdentity,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation);
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  HSTRING sourceIdentity,
+            /* [annotation][in] */ 
+            _In_  HSTRING targetIdentity,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation);
         
         DECLSPEC_XFGVIRT(IProtectionPolicyManagerInterop, GetForWindow)
         HRESULT ( STDMETHODCALLTYPE *GetForWindow )( 
             __RPC__in IProtectionPolicyManagerInterop * This,
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **result);
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **result);
         
         END_INTERFACE
     } IProtectionPolicyManagerInteropVtbl;
@@ -238,45 +255,76 @@ EXTERN_C const IID IID_IProtectionPolicyManagerInterop2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RequestAccessForAppWithWindowAsync( 
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in HSTRING sourceIdentity,
-            /* [in] */ __RPC__in HSTRING appPackageFamilyName,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  HSTRING sourceIdentity,
+            /* [annotation][in] */ 
+            _In_  HSTRING appPackageFamilyName,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestAccessWithAuditingInfoForWindowAsync( 
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in HSTRING sourceIdentity,
-            /* [in] */ __RPC__in HSTRING targetIdentity,
-            /* [in] */ __RPC__in_opt IUnknown *auditInfoUnk,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  HSTRING sourceIdentity,
+            /* [annotation][in] */ 
+            _In_  HSTRING targetIdentity,
+            /* [annotation][in] */ 
+            _In_  IUnknown *auditInfoUnk,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestAccessWithMessageForWindowAsync( 
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in HSTRING sourceIdentity,
-            /* [in] */ __RPC__in HSTRING targetIdentity,
-            /* [in] */ __RPC__in_opt IUnknown *auditInfoUnk,
-            /* [in] */ __RPC__in HSTRING messageFromApp,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  HSTRING sourceIdentity,
+            /* [annotation][in] */ 
+            _In_  HSTRING targetIdentity,
+            /* [annotation][in] */ 
+            _In_  IUnknown *auditInfoUnk,
+            /* [annotation][in] */ 
+            _In_  HSTRING messageFromApp,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestAccessForAppWithAuditingInfoForWindowAsync( 
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in HSTRING sourceIdentity,
-            /* [in] */ __RPC__in HSTRING appPackageFamilyName,
-            /* [in] */ __RPC__in_opt IUnknown *auditInfoUnk,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  HSTRING sourceIdentity,
+            /* [annotation][in] */ 
+            _In_  HSTRING appPackageFamilyName,
+            /* [annotation][in] */ 
+            _In_  IUnknown *auditInfoUnk,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestAccessForAppWithMessageForWindowAsync( 
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in HSTRING sourceIdentity,
-            /* [in] */ __RPC__in HSTRING appPackageFamilyName,
-            /* [in] */ __RPC__in_opt IUnknown *auditInfoUnk,
-            /* [in] */ __RPC__in HSTRING messageFromApp,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  HSTRING sourceIdentity,
+            /* [annotation][in] */ 
+            _In_  HSTRING appPackageFamilyName,
+            /* [annotation][in] */ 
+            _In_  IUnknown *auditInfoUnk,
+            /* [annotation][in] */ 
+            _In_  HSTRING messageFromApp,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation) = 0;
         
     };
     
@@ -290,7 +338,8 @@ EXTERN_C const IID IID_IProtectionPolicyManagerInterop2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProtectionPolicyManagerInterop2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -321,53 +370,84 @@ EXTERN_C const IID IID_IProtectionPolicyManagerInterop2;
         DECLSPEC_XFGVIRT(IProtectionPolicyManagerInterop2, RequestAccessForAppWithWindowAsync)
         HRESULT ( STDMETHODCALLTYPE *RequestAccessForAppWithWindowAsync )( 
             __RPC__in IProtectionPolicyManagerInterop2 * This,
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in HSTRING sourceIdentity,
-            /* [in] */ __RPC__in HSTRING appPackageFamilyName,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation);
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  HSTRING sourceIdentity,
+            /* [annotation][in] */ 
+            _In_  HSTRING appPackageFamilyName,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation);
         
         DECLSPEC_XFGVIRT(IProtectionPolicyManagerInterop2, RequestAccessWithAuditingInfoForWindowAsync)
         HRESULT ( STDMETHODCALLTYPE *RequestAccessWithAuditingInfoForWindowAsync )( 
             __RPC__in IProtectionPolicyManagerInterop2 * This,
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in HSTRING sourceIdentity,
-            /* [in] */ __RPC__in HSTRING targetIdentity,
-            /* [in] */ __RPC__in_opt IUnknown *auditInfoUnk,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation);
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  HSTRING sourceIdentity,
+            /* [annotation][in] */ 
+            _In_  HSTRING targetIdentity,
+            /* [annotation][in] */ 
+            _In_  IUnknown *auditInfoUnk,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation);
         
         DECLSPEC_XFGVIRT(IProtectionPolicyManagerInterop2, RequestAccessWithMessageForWindowAsync)
         HRESULT ( STDMETHODCALLTYPE *RequestAccessWithMessageForWindowAsync )( 
             __RPC__in IProtectionPolicyManagerInterop2 * This,
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in HSTRING sourceIdentity,
-            /* [in] */ __RPC__in HSTRING targetIdentity,
-            /* [in] */ __RPC__in_opt IUnknown *auditInfoUnk,
-            /* [in] */ __RPC__in HSTRING messageFromApp,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation);
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  HSTRING sourceIdentity,
+            /* [annotation][in] */ 
+            _In_  HSTRING targetIdentity,
+            /* [annotation][in] */ 
+            _In_  IUnknown *auditInfoUnk,
+            /* [annotation][in] */ 
+            _In_  HSTRING messageFromApp,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation);
         
         DECLSPEC_XFGVIRT(IProtectionPolicyManagerInterop2, RequestAccessForAppWithAuditingInfoForWindowAsync)
         HRESULT ( STDMETHODCALLTYPE *RequestAccessForAppWithAuditingInfoForWindowAsync )( 
             __RPC__in IProtectionPolicyManagerInterop2 * This,
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in HSTRING sourceIdentity,
-            /* [in] */ __RPC__in HSTRING appPackageFamilyName,
-            /* [in] */ __RPC__in_opt IUnknown *auditInfoUnk,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation);
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  HSTRING sourceIdentity,
+            /* [annotation][in] */ 
+            _In_  HSTRING appPackageFamilyName,
+            /* [annotation][in] */ 
+            _In_  IUnknown *auditInfoUnk,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation);
         
         DECLSPEC_XFGVIRT(IProtectionPolicyManagerInterop2, RequestAccessForAppWithMessageForWindowAsync)
         HRESULT ( STDMETHODCALLTYPE *RequestAccessForAppWithMessageForWindowAsync )( 
             __RPC__in IProtectionPolicyManagerInterop2 * This,
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in HSTRING sourceIdentity,
-            /* [in] */ __RPC__in HSTRING appPackageFamilyName,
-            /* [in] */ __RPC__in_opt IUnknown *auditInfoUnk,
-            /* [in] */ __RPC__in HSTRING messageFromApp,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation);
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  HSTRING sourceIdentity,
+            /* [annotation][in] */ 
+            _In_  HSTRING appPackageFamilyName,
+            /* [annotation][in] */ 
+            _In_  IUnknown *auditInfoUnk,
+            /* [annotation][in] */ 
+            _In_  HSTRING messageFromApp,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation);
         
         END_INTERFACE
     } IProtectionPolicyManagerInterop2Vtbl;
@@ -444,60 +524,104 @@ EXTERN_C const IID IID_IProtectionPolicyManagerInterop3;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RequestAccessWithBehaviorForWindowAsync( 
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in HSTRING sourceIdentity,
-            /* [in] */ __RPC__in HSTRING targetIdentity,
-            /* [in] */ __RPC__in_opt IUnknown *auditInfoUnk,
-            /* [in] */ __RPC__in HSTRING messageFromApp,
-            /* [in] */ UINT32 behavior,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  HSTRING sourceIdentity,
+            /* [annotation][in] */ 
+            _In_  HSTRING targetIdentity,
+            /* [annotation][in] */ 
+            _In_  IUnknown *auditInfoUnk,
+            /* [annotation][in] */ 
+            _In_  HSTRING messageFromApp,
+            /* [annotation][in] */ 
+            _In_  UINT32 behavior,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestAccessForAppWithBehaviorForWindowAsync( 
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in HSTRING sourceIdentity,
-            /* [in] */ __RPC__in HSTRING appPackageFamilyName,
-            /* [in] */ __RPC__in_opt IUnknown *auditInfoUnk,
-            /* [in] */ __RPC__in HSTRING messageFromApp,
-            /* [in] */ UINT32 behavior,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  HSTRING sourceIdentity,
+            /* [annotation][in] */ 
+            _In_  HSTRING appPackageFamilyName,
+            /* [annotation][in] */ 
+            _In_  IUnknown *auditInfoUnk,
+            /* [annotation][in] */ 
+            _In_  HSTRING messageFromApp,
+            /* [annotation][in] */ 
+            _In_  UINT32 behavior,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestAccessToFilesForAppForWindowAsync( 
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in_opt IUnknown *sourceItemListUnk,
-            /* [in] */ __RPC__in HSTRING appPackageFamilyName,
-            /* [in] */ __RPC__in_opt IUnknown *auditInfoUnk,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  IUnknown *sourceItemListUnk,
+            /* [annotation][in] */ 
+            _In_  HSTRING appPackageFamilyName,
+            /* [annotation][in] */ 
+            _In_  IUnknown *auditInfoUnk,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestAccessToFilesForAppWithMessageAndBehaviorForWindowAsync( 
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in_opt IUnknown *sourceItemListUnk,
-            /* [in] */ __RPC__in HSTRING appPackageFamilyName,
-            /* [in] */ __RPC__in_opt IUnknown *auditInfoUnk,
-            /* [in] */ __RPC__in HSTRING messageFromApp,
-            /* [in] */ UINT32 behavior,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  IUnknown *sourceItemListUnk,
+            /* [annotation][in] */ 
+            _In_  HSTRING appPackageFamilyName,
+            /* [annotation][in] */ 
+            _In_  IUnknown *auditInfoUnk,
+            /* [annotation][in] */ 
+            _In_  HSTRING messageFromApp,
+            /* [annotation][in] */ 
+            _In_  UINT32 behavior,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestAccessToFilesForProcessForWindowAsync( 
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in_opt IUnknown *sourceItemListUnk,
-            /* [in] */ UINT32 processId,
-            /* [in] */ __RPC__in_opt IUnknown *auditInfoUnk,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  IUnknown *sourceItemListUnk,
+            /* [annotation][in] */ 
+            _In_  UINT32 processId,
+            /* [annotation][in] */ 
+            _In_  IUnknown *auditInfoUnk,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestAccessToFilesForProcessWithMessageAndBehaviorForWindowAsync( 
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in_opt IUnknown *sourceItemListUnk,
-            /* [in] */ UINT32 processId,
-            /* [in] */ __RPC__in_opt IUnknown *auditInfoUnk,
-            /* [in] */ __RPC__in HSTRING messageFromApp,
-            /* [in] */ UINT32 behavior,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  IUnknown *sourceItemListUnk,
+            /* [annotation][in] */ 
+            _In_  UINT32 processId,
+            /* [annotation][in] */ 
+            _In_  IUnknown *auditInfoUnk,
+            /* [annotation][in] */ 
+            _In_  HSTRING messageFromApp,
+            /* [annotation][in] */ 
+            _In_  UINT32 behavior,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation) = 0;
         
     };
     
@@ -511,7 +635,8 @@ EXTERN_C const IID IID_IProtectionPolicyManagerInterop3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProtectionPolicyManagerInterop3 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -542,70 +667,114 @@ EXTERN_C const IID IID_IProtectionPolicyManagerInterop3;
         DECLSPEC_XFGVIRT(IProtectionPolicyManagerInterop3, RequestAccessWithBehaviorForWindowAsync)
         HRESULT ( STDMETHODCALLTYPE *RequestAccessWithBehaviorForWindowAsync )( 
             __RPC__in IProtectionPolicyManagerInterop3 * This,
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in HSTRING sourceIdentity,
-            /* [in] */ __RPC__in HSTRING targetIdentity,
-            /* [in] */ __RPC__in_opt IUnknown *auditInfoUnk,
-            /* [in] */ __RPC__in HSTRING messageFromApp,
-            /* [in] */ UINT32 behavior,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation);
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  HSTRING sourceIdentity,
+            /* [annotation][in] */ 
+            _In_  HSTRING targetIdentity,
+            /* [annotation][in] */ 
+            _In_  IUnknown *auditInfoUnk,
+            /* [annotation][in] */ 
+            _In_  HSTRING messageFromApp,
+            /* [annotation][in] */ 
+            _In_  UINT32 behavior,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation);
         
         DECLSPEC_XFGVIRT(IProtectionPolicyManagerInterop3, RequestAccessForAppWithBehaviorForWindowAsync)
         HRESULT ( STDMETHODCALLTYPE *RequestAccessForAppWithBehaviorForWindowAsync )( 
             __RPC__in IProtectionPolicyManagerInterop3 * This,
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in HSTRING sourceIdentity,
-            /* [in] */ __RPC__in HSTRING appPackageFamilyName,
-            /* [in] */ __RPC__in_opt IUnknown *auditInfoUnk,
-            /* [in] */ __RPC__in HSTRING messageFromApp,
-            /* [in] */ UINT32 behavior,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation);
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  HSTRING sourceIdentity,
+            /* [annotation][in] */ 
+            _In_  HSTRING appPackageFamilyName,
+            /* [annotation][in] */ 
+            _In_  IUnknown *auditInfoUnk,
+            /* [annotation][in] */ 
+            _In_  HSTRING messageFromApp,
+            /* [annotation][in] */ 
+            _In_  UINT32 behavior,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation);
         
         DECLSPEC_XFGVIRT(IProtectionPolicyManagerInterop3, RequestAccessToFilesForAppForWindowAsync)
         HRESULT ( STDMETHODCALLTYPE *RequestAccessToFilesForAppForWindowAsync )( 
             __RPC__in IProtectionPolicyManagerInterop3 * This,
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in_opt IUnknown *sourceItemListUnk,
-            /* [in] */ __RPC__in HSTRING appPackageFamilyName,
-            /* [in] */ __RPC__in_opt IUnknown *auditInfoUnk,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation);
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  IUnknown *sourceItemListUnk,
+            /* [annotation][in] */ 
+            _In_  HSTRING appPackageFamilyName,
+            /* [annotation][in] */ 
+            _In_  IUnknown *auditInfoUnk,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation);
         
         DECLSPEC_XFGVIRT(IProtectionPolicyManagerInterop3, RequestAccessToFilesForAppWithMessageAndBehaviorForWindowAsync)
         HRESULT ( STDMETHODCALLTYPE *RequestAccessToFilesForAppWithMessageAndBehaviorForWindowAsync )( 
             __RPC__in IProtectionPolicyManagerInterop3 * This,
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in_opt IUnknown *sourceItemListUnk,
-            /* [in] */ __RPC__in HSTRING appPackageFamilyName,
-            /* [in] */ __RPC__in_opt IUnknown *auditInfoUnk,
-            /* [in] */ __RPC__in HSTRING messageFromApp,
-            /* [in] */ UINT32 behavior,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation);
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  IUnknown *sourceItemListUnk,
+            /* [annotation][in] */ 
+            _In_  HSTRING appPackageFamilyName,
+            /* [annotation][in] */ 
+            _In_  IUnknown *auditInfoUnk,
+            /* [annotation][in] */ 
+            _In_  HSTRING messageFromApp,
+            /* [annotation][in] */ 
+            _In_  UINT32 behavior,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation);
         
         DECLSPEC_XFGVIRT(IProtectionPolicyManagerInterop3, RequestAccessToFilesForProcessForWindowAsync)
         HRESULT ( STDMETHODCALLTYPE *RequestAccessToFilesForProcessForWindowAsync )( 
             __RPC__in IProtectionPolicyManagerInterop3 * This,
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in_opt IUnknown *sourceItemListUnk,
-            /* [in] */ UINT32 processId,
-            /* [in] */ __RPC__in_opt IUnknown *auditInfoUnk,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation);
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  IUnknown *sourceItemListUnk,
+            /* [annotation][in] */ 
+            _In_  UINT32 processId,
+            /* [annotation][in] */ 
+            _In_  IUnknown *auditInfoUnk,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation);
         
         DECLSPEC_XFGVIRT(IProtectionPolicyManagerInterop3, RequestAccessToFilesForProcessWithMessageAndBehaviorForWindowAsync)
         HRESULT ( STDMETHODCALLTYPE *RequestAccessToFilesForProcessWithMessageAndBehaviorForWindowAsync )( 
             __RPC__in IProtectionPolicyManagerInterop3 * This,
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in_opt IUnknown *sourceItemListUnk,
-            /* [in] */ UINT32 processId,
-            /* [in] */ __RPC__in_opt IUnknown *auditInfoUnk,
-            /* [in] */ __RPC__in HSTRING messageFromApp,
-            /* [in] */ UINT32 behavior,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **asyncOperation);
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  IUnknown *sourceItemListUnk,
+            /* [annotation][in] */ 
+            _In_  UINT32 processId,
+            /* [annotation][in] */ 
+            _In_  IUnknown *auditInfoUnk,
+            /* [annotation][in] */ 
+            _In_  HSTRING messageFromApp,
+            /* [annotation][in] */ 
+            _In_  UINT32 behavior,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation);
         
         END_INTERFACE
     } IProtectionPolicyManagerInterop3Vtbl;

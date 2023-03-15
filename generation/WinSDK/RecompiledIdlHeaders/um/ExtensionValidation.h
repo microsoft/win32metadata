@@ -118,18 +118,28 @@ EXTERN_C const IID IID_IExtensionValidation;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Validate( 
-            /* [in] */ REFGUID extensionGuid,
-            /* [string][in] */ LPWSTR extensionModulePath,
-            /* [in] */ DWORD extensionFileVersionMS,
-            /* [in] */ DWORD extensionFileVersionLS,
-            /* [in] */ IHTMLDocument2 *htmlDocumentTop,
-            /* [in] */ IHTMLDocument2 *htmlDocumentSubframe,
-            /* [in] */ IHTMLElement *htmlElement,
-            /* [in] */ ExtensionValidationContexts contexts,
-            /* [out] */ ExtensionValidationResults *results) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID extensionGuid,
+            /* [annotation][string][in] */ 
+            _In_  LPWSTR extensionModulePath,
+            /* [annotation][in] */ 
+            _In_  DWORD extensionFileVersionMS,
+            /* [annotation][in] */ 
+            _In_  DWORD extensionFileVersionLS,
+            /* [annotation][in] */ 
+            _In_  IHTMLDocument2 *htmlDocumentTop,
+            /* [annotation][in] */ 
+            _In_  IHTMLDocument2 *htmlDocumentSubframe,
+            /* [annotation][in] */ 
+            _In_  IHTMLElement *htmlElement,
+            /* [annotation][in] */ 
+            _In_  ExtensionValidationContexts contexts,
+            /* [annotation][out] */ 
+            _Out_  ExtensionValidationResults *results) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DisplayName( 
-            /* [string][out] */ LPWSTR *displayName) = 0;
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *displayName) = 0;
         
     };
     
@@ -143,7 +153,8 @@ EXTERN_C const IID IID_IExtensionValidation;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IExtensionValidation * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -158,20 +169,30 @@ EXTERN_C const IID IID_IExtensionValidation;
         DECLSPEC_XFGVIRT(IExtensionValidation, Validate)
         HRESULT ( STDMETHODCALLTYPE *Validate )( 
             IExtensionValidation * This,
-            /* [in] */ REFGUID extensionGuid,
-            /* [string][in] */ LPWSTR extensionModulePath,
-            /* [in] */ DWORD extensionFileVersionMS,
-            /* [in] */ DWORD extensionFileVersionLS,
-            /* [in] */ IHTMLDocument2 *htmlDocumentTop,
-            /* [in] */ IHTMLDocument2 *htmlDocumentSubframe,
-            /* [in] */ IHTMLElement *htmlElement,
-            /* [in] */ ExtensionValidationContexts contexts,
-            /* [out] */ ExtensionValidationResults *results);
+            /* [annotation][in] */ 
+            _In_  REFGUID extensionGuid,
+            /* [annotation][string][in] */ 
+            _In_  LPWSTR extensionModulePath,
+            /* [annotation][in] */ 
+            _In_  DWORD extensionFileVersionMS,
+            /* [annotation][in] */ 
+            _In_  DWORD extensionFileVersionLS,
+            /* [annotation][in] */ 
+            _In_  IHTMLDocument2 *htmlDocumentTop,
+            /* [annotation][in] */ 
+            _In_  IHTMLDocument2 *htmlDocumentSubframe,
+            /* [annotation][in] */ 
+            _In_  IHTMLElement *htmlElement,
+            /* [annotation][in] */ 
+            _In_  ExtensionValidationContexts contexts,
+            /* [annotation][out] */ 
+            _Out_  ExtensionValidationResults *results);
         
         DECLSPEC_XFGVIRT(IExtensionValidation, DisplayName)
         HRESULT ( STDMETHODCALLTYPE *DisplayName )( 
             IExtensionValidation * This,
-            /* [string][out] */ LPWSTR *displayName);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *displayName);
         
         END_INTERFACE
     } IExtensionValidationVtbl;

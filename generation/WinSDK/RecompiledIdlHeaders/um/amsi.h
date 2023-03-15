@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -259,16 +259,22 @@ EXTERN_C const IID IID_IAmsiStream;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetAttribute( 
-            /* [in] */ AMSI_ATTRIBUTE attribute,
+            /* [annotation][in] */ 
+            _In_  AMSI_ATTRIBUTE attribute,
             /* [range][in] */ ULONG dataSize,
-            /* [length_is][size_is][out] */ unsigned char *data,
-            /* [out] */ ULONG *retData) = 0;
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(dataSize,*retData)  unsigned char *data,
+            /* [annotation][out] */ 
+            _Out_  ULONG *retData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Read( 
-            /* [in] */ ULONGLONG position,
+            /* [annotation][in] */ 
+            _In_  ULONGLONG position,
             /* [range][in] */ ULONG size,
-            /* [length_is][size_is][out] */ unsigned char *buffer,
-            /* [out] */ ULONG *readSize) = 0;
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(size,*readSize)  unsigned char *buffer,
+            /* [annotation][out] */ 
+            _Out_  ULONG *readSize) = 0;
         
     };
     
@@ -282,7 +288,8 @@ EXTERN_C const IID IID_IAmsiStream;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAmsiStream * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -297,18 +304,24 @@ EXTERN_C const IID IID_IAmsiStream;
         DECLSPEC_XFGVIRT(IAmsiStream, GetAttribute)
         HRESULT ( STDMETHODCALLTYPE *GetAttribute )( 
             IAmsiStream * This,
-            /* [in] */ AMSI_ATTRIBUTE attribute,
+            /* [annotation][in] */ 
+            _In_  AMSI_ATTRIBUTE attribute,
             /* [range][in] */ ULONG dataSize,
-            /* [length_is][size_is][out] */ unsigned char *data,
-            /* [out] */ ULONG *retData);
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(dataSize,*retData)  unsigned char *data,
+            /* [annotation][out] */ 
+            _Out_  ULONG *retData);
         
         DECLSPEC_XFGVIRT(IAmsiStream, Read)
         HRESULT ( STDMETHODCALLTYPE *Read )( 
             IAmsiStream * This,
-            /* [in] */ ULONGLONG position,
+            /* [annotation][in] */ 
+            _In_  ULONGLONG position,
             /* [range][in] */ ULONG size,
-            /* [length_is][size_is][out] */ unsigned char *buffer,
-            /* [out] */ ULONG *readSize);
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(size,*readSize)  unsigned char *buffer,
+            /* [annotation][out] */ 
+            _Out_  ULONG *readSize);
         
         END_INTERFACE
     } IAmsiStreamVtbl;
@@ -366,11 +379,14 @@ EXTERN_C const IID IID_IAntimalwareProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Scan( 
-            /* [in] */ IAmsiStream *stream,
-            /* [out] */ AMSI_RESULT *result) = 0;
+            /* [annotation][in] */ 
+            _In_  IAmsiStream *stream,
+            /* [annotation][out] */ 
+            _Out_  AMSI_RESULT *result) = 0;
         
         virtual void STDMETHODCALLTYPE CloseSession( 
-            /* [in] */ ULONGLONG session) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONGLONG session) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DisplayName( 
             /* [annotation][string][out] */ 
@@ -388,7 +404,8 @@ EXTERN_C const IID IID_IAntimalwareProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAntimalwareProvider * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -403,13 +420,16 @@ EXTERN_C const IID IID_IAntimalwareProvider;
         DECLSPEC_XFGVIRT(IAntimalwareProvider, Scan)
         HRESULT ( STDMETHODCALLTYPE *Scan )( 
             IAntimalwareProvider * This,
-            /* [in] */ IAmsiStream *stream,
-            /* [out] */ AMSI_RESULT *result);
+            /* [annotation][in] */ 
+            _In_  IAmsiStream *stream,
+            /* [annotation][out] */ 
+            _Out_  AMSI_RESULT *result);
         
         DECLSPEC_XFGVIRT(IAntimalwareProvider, CloseSession)
         void ( STDMETHODCALLTYPE *CloseSession )( 
             IAntimalwareProvider * This,
-            /* [in] */ ULONGLONG session);
+            /* [annotation][in] */ 
+            _In_  ULONGLONG session);
         
         DECLSPEC_XFGVIRT(IAntimalwareProvider, DisplayName)
         HRESULT ( STDMETHODCALLTYPE *DisplayName )( 
@@ -476,11 +496,14 @@ EXTERN_C const IID IID_IAntimalwareUacProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE UacScan( 
-            /* [in] */ __RPC__in LPAMSI_UAC_REQUEST_CONTEXT context,
-            /* [out] */ __RPC__out AMSI_RESULT *result) = 0;
+            /* [annotation][in] */ 
+            _In_  LPAMSI_UAC_REQUEST_CONTEXT context,
+            /* [annotation][out] */ 
+            _Out_  AMSI_RESULT *result) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DisplayName( 
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *displayName) = 0;
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *displayName) = 0;
         
     };
     
@@ -494,7 +517,8 @@ EXTERN_C const IID IID_IAntimalwareUacProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAntimalwareUacProvider * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -509,13 +533,16 @@ EXTERN_C const IID IID_IAntimalwareUacProvider;
         DECLSPEC_XFGVIRT(IAntimalwareUacProvider, UacScan)
         HRESULT ( STDMETHODCALLTYPE *UacScan )( 
             __RPC__in IAntimalwareUacProvider * This,
-            /* [in] */ __RPC__in LPAMSI_UAC_REQUEST_CONTEXT context,
-            /* [out] */ __RPC__out AMSI_RESULT *result);
+            /* [annotation][in] */ 
+            _In_  LPAMSI_UAC_REQUEST_CONTEXT context,
+            /* [annotation][out] */ 
+            _Out_  AMSI_RESULT *result);
         
         DECLSPEC_XFGVIRT(IAntimalwareUacProvider, DisplayName)
         HRESULT ( STDMETHODCALLTYPE *DisplayName )( 
             __RPC__in IAntimalwareUacProvider * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *displayName);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *displayName);
         
         END_INTERFACE
     } IAntimalwareUacProviderVtbl;
@@ -573,11 +600,16 @@ EXTERN_C const IID IID_IAntimalwareProvider2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Notify( 
-            /* [in] */ PVOID buffer,
-            /* [in] */ ULONG length,
-            /* [in] */ LPCWSTR contentName,
-            /* [in] */ LPCWSTR appName,
-            /* [out] */ AMSI_RESULT *pResult) = 0;
+            /* [annotation][in] */ 
+            _In_  PVOID buffer,
+            /* [annotation][in] */ 
+            _In_  ULONG length,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR contentName,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR appName,
+            /* [annotation][out] */ 
+            _Out_  AMSI_RESULT *pResult) = 0;
         
     };
     
@@ -591,7 +623,8 @@ EXTERN_C const IID IID_IAntimalwareProvider2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAntimalwareProvider2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -606,13 +639,16 @@ EXTERN_C const IID IID_IAntimalwareProvider2;
         DECLSPEC_XFGVIRT(IAntimalwareProvider, Scan)
         HRESULT ( STDMETHODCALLTYPE *Scan )( 
             IAntimalwareProvider2 * This,
-            /* [in] */ IAmsiStream *stream,
-            /* [out] */ AMSI_RESULT *result);
+            /* [annotation][in] */ 
+            _In_  IAmsiStream *stream,
+            /* [annotation][out] */ 
+            _Out_  AMSI_RESULT *result);
         
         DECLSPEC_XFGVIRT(IAntimalwareProvider, CloseSession)
         void ( STDMETHODCALLTYPE *CloseSession )( 
             IAntimalwareProvider2 * This,
-            /* [in] */ ULONGLONG session);
+            /* [annotation][in] */ 
+            _In_  ULONGLONG session);
         
         DECLSPEC_XFGVIRT(IAntimalwareProvider, DisplayName)
         HRESULT ( STDMETHODCALLTYPE *DisplayName )( 
@@ -623,11 +659,16 @@ EXTERN_C const IID IID_IAntimalwareProvider2;
         DECLSPEC_XFGVIRT(IAntimalwareProvider2, Notify)
         HRESULT ( STDMETHODCALLTYPE *Notify )( 
             IAntimalwareProvider2 * This,
-            /* [in] */ PVOID buffer,
-            /* [in] */ ULONG length,
-            /* [in] */ LPCWSTR contentName,
-            /* [in] */ LPCWSTR appName,
-            /* [out] */ AMSI_RESULT *pResult);
+            /* [annotation][in] */ 
+            _In_  PVOID buffer,
+            /* [annotation][in] */ 
+            _In_  ULONG length,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR contentName,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR appName,
+            /* [annotation][out] */ 
+            _Out_  AMSI_RESULT *pResult);
         
         END_INTERFACE
     } IAntimalwareProvider2Vtbl;
@@ -692,12 +733,16 @@ EXTERN_C const IID IID_IAntimalware;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Scan( 
-            /* [in] */ IAmsiStream *stream,
-            /* [out] */ AMSI_RESULT *result,
-            /* [out] */ IAntimalwareProvider **provider) = 0;
+            /* [annotation][in] */ 
+            _In_  IAmsiStream *stream,
+            /* [annotation][out] */ 
+            _Out_  AMSI_RESULT *result,
+            /* [annotation][out] */ 
+            _Out_  IAntimalwareProvider **provider) = 0;
         
         virtual void STDMETHODCALLTYPE CloseSession( 
-            /* [in] */ ULONGLONG session) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONGLONG session) = 0;
         
     };
     
@@ -711,7 +756,8 @@ EXTERN_C const IID IID_IAntimalware;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAntimalware * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -726,14 +772,18 @@ EXTERN_C const IID IID_IAntimalware;
         DECLSPEC_XFGVIRT(IAntimalware, Scan)
         HRESULT ( STDMETHODCALLTYPE *Scan )( 
             IAntimalware * This,
-            /* [in] */ IAmsiStream *stream,
-            /* [out] */ AMSI_RESULT *result,
-            /* [out] */ IAntimalwareProvider **provider);
+            /* [annotation][in] */ 
+            _In_  IAmsiStream *stream,
+            /* [annotation][out] */ 
+            _Out_  AMSI_RESULT *result,
+            /* [annotation][out] */ 
+            _Out_  IAntimalwareProvider **provider);
         
         DECLSPEC_XFGVIRT(IAntimalware, CloseSession)
         void ( STDMETHODCALLTYPE *CloseSession )( 
             IAntimalware * This,
-            /* [in] */ ULONGLONG session);
+            /* [annotation][in] */ 
+            _In_  ULONGLONG session);
         
         END_INTERFACE
     } IAntimalwareVtbl;
@@ -791,11 +841,16 @@ EXTERN_C const IID IID_IAntimalware2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Notify( 
-            /* [in] */ PVOID buffer,
-            /* [in] */ ULONG length,
-            /* [in] */ LPCWSTR contentName,
-            /* [in] */ LPCWSTR appName,
-            /* [out] */ AMSI_RESULT *pResult) = 0;
+            /* [annotation][in] */ 
+            _In_  PVOID buffer,
+            /* [annotation][in] */ 
+            _In_  ULONG length,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR contentName,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR appName,
+            /* [annotation][out] */ 
+            _Out_  AMSI_RESULT *pResult) = 0;
         
     };
     
@@ -809,7 +864,8 @@ EXTERN_C const IID IID_IAntimalware2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAntimalware2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -824,23 +880,32 @@ EXTERN_C const IID IID_IAntimalware2;
         DECLSPEC_XFGVIRT(IAntimalware, Scan)
         HRESULT ( STDMETHODCALLTYPE *Scan )( 
             IAntimalware2 * This,
-            /* [in] */ IAmsiStream *stream,
-            /* [out] */ AMSI_RESULT *result,
-            /* [out] */ IAntimalwareProvider **provider);
+            /* [annotation][in] */ 
+            _In_  IAmsiStream *stream,
+            /* [annotation][out] */ 
+            _Out_  AMSI_RESULT *result,
+            /* [annotation][out] */ 
+            _Out_  IAntimalwareProvider **provider);
         
         DECLSPEC_XFGVIRT(IAntimalware, CloseSession)
         void ( STDMETHODCALLTYPE *CloseSession )( 
             IAntimalware2 * This,
-            /* [in] */ ULONGLONG session);
+            /* [annotation][in] */ 
+            _In_  ULONGLONG session);
         
         DECLSPEC_XFGVIRT(IAntimalware2, Notify)
         HRESULT ( STDMETHODCALLTYPE *Notify )( 
             IAntimalware2 * This,
-            /* [in] */ PVOID buffer,
-            /* [in] */ ULONG length,
-            /* [in] */ LPCWSTR contentName,
-            /* [in] */ LPCWSTR appName,
-            /* [out] */ AMSI_RESULT *pResult);
+            /* [annotation][in] */ 
+            _In_  PVOID buffer,
+            /* [annotation][in] */ 
+            _In_  ULONG length,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR contentName,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR appName,
+            /* [annotation][out] */ 
+            _Out_  AMSI_RESULT *pResult);
         
         END_INTERFACE
     } IAntimalware2Vtbl;

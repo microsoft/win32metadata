@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -370,7 +370,8 @@ EXTERN_C const IID IID_IOpcUri;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcUri * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -386,134 +387,163 @@ EXTERN_C const IID IID_IOpcUri;
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPropertyBSTR )( 
             __RPC__in IOpcUri * This,
             /* [range][in] */ Uri_PROPERTY uriProp,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrProperty,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrProperty,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IUri, GetPropertyLength)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPropertyLength )( 
             __RPC__in IOpcUri * This,
             /* [range][in] */ Uri_PROPERTY uriProp,
-            /* [out] */ __RPC__out DWORD *pcchProperty,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcchProperty,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IUri, GetPropertyDWORD)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPropertyDWORD )( 
             __RPC__in IOpcUri * This,
             /* [range][in] */ Uri_PROPERTY uriProp,
-            /* [out] */ __RPC__out DWORD *pdwProperty,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwProperty,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IUri, HasProperty)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *HasProperty )( 
             __RPC__in IOpcUri * This,
             /* [range][in] */ Uri_PROPERTY uriProp,
-            /* [out] */ __RPC__out BOOL *pfHasProperty);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfHasProperty);
         
         DECLSPEC_XFGVIRT(IUri, GetAbsoluteUri)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAbsoluteUri )( 
             __RPC__in IOpcUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrAbsoluteUri);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrAbsoluteUri);
         
         DECLSPEC_XFGVIRT(IUri, GetAuthority)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAuthority )( 
             __RPC__in IOpcUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrAuthority);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrAuthority);
         
         DECLSPEC_XFGVIRT(IUri, GetDisplayUri)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDisplayUri )( 
             __RPC__in IOpcUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrDisplayString);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrDisplayString);
         
         DECLSPEC_XFGVIRT(IUri, GetDomain)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDomain )( 
             __RPC__in IOpcUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrDomain);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrDomain);
         
         DECLSPEC_XFGVIRT(IUri, GetExtension)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetExtension )( 
             __RPC__in IOpcUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrExtension);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrExtension);
         
         DECLSPEC_XFGVIRT(IUri, GetFragment)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetFragment )( 
             __RPC__in IOpcUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrFragment);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrFragment);
         
         DECLSPEC_XFGVIRT(IUri, GetHost)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetHost )( 
             __RPC__in IOpcUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrHost);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrHost);
         
         DECLSPEC_XFGVIRT(IUri, GetPassword)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPassword )( 
             __RPC__in IOpcUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrPassword);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrPassword);
         
         DECLSPEC_XFGVIRT(IUri, GetPath)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPath )( 
             __RPC__in IOpcUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrPath);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrPath);
         
         DECLSPEC_XFGVIRT(IUri, GetPathAndQuery)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPathAndQuery )( 
             __RPC__in IOpcUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrPathAndQuery);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrPathAndQuery);
         
         DECLSPEC_XFGVIRT(IUri, GetQuery)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetQuery )( 
             __RPC__in IOpcUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrQuery);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrQuery);
         
         DECLSPEC_XFGVIRT(IUri, GetRawUri)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetRawUri )( 
             __RPC__in IOpcUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrRawUri);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrRawUri);
         
         DECLSPEC_XFGVIRT(IUri, GetSchemeName)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSchemeName )( 
             __RPC__in IOpcUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrSchemeName);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrSchemeName);
         
         DECLSPEC_XFGVIRT(IUri, GetUserInfo)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetUserInfo )( 
             __RPC__in IOpcUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrUserInfo);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrUserInfo);
         
         DECLSPEC_XFGVIRT(IUri, GetUserName)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetUserName )( 
             __RPC__in IOpcUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrUserName);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrUserName);
         
         DECLSPEC_XFGVIRT(IUri, GetHostType)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetHostType )( 
             __RPC__in IOpcUri * This,
-            /* [out] */ __RPC__out DWORD *pdwHostType);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHostType);
         
         DECLSPEC_XFGVIRT(IUri, GetPort)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPort )( 
             __RPC__in IOpcUri * This,
-            /* [out] */ __RPC__out DWORD *pdwPort);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwPort);
         
         DECLSPEC_XFGVIRT(IUri, GetScheme)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetScheme )( 
             __RPC__in IOpcUri * This,
-            /* [out] */ __RPC__out DWORD *pdwScheme);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwScheme);
         
         DECLSPEC_XFGVIRT(IUri, GetZone)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetZone )( 
             __RPC__in IOpcUri * This,
-            /* [out] */ __RPC__out DWORD *pdwZone);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwZone);
         
         DECLSPEC_XFGVIRT(IUri, GetProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperties )( 
             __RPC__in IOpcUri * This,
-            /* [out] */ __RPC__out LPDWORD pdwFlags);
+            /* [annotation][out] */ 
+            _Out_  LPDWORD pdwFlags);
         
         DECLSPEC_XFGVIRT(IUri, IsEqual)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *IsEqual )( 
             __RPC__in IOpcUri * This,
-            /* [in] */ __RPC__in_opt IUri *pUri,
-            /* [out] */ __RPC__out BOOL *pfEqual);
+            /* [annotation][in] */ 
+            _In_  IUri *pUri,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfEqual);
         
         DECLSPEC_XFGVIRT(IOpcUri, GetRelationshipsPartUri)
         HRESULT ( STDMETHODCALLTYPE *GetRelationshipsPartUri )( 
@@ -688,7 +718,8 @@ EXTERN_C const IID IID_IOpcPartUri;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcPartUri * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -704,134 +735,163 @@ EXTERN_C const IID IID_IOpcPartUri;
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPropertyBSTR )( 
             __RPC__in IOpcPartUri * This,
             /* [range][in] */ Uri_PROPERTY uriProp,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrProperty,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrProperty,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IUri, GetPropertyLength)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPropertyLength )( 
             __RPC__in IOpcPartUri * This,
             /* [range][in] */ Uri_PROPERTY uriProp,
-            /* [out] */ __RPC__out DWORD *pcchProperty,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcchProperty,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IUri, GetPropertyDWORD)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPropertyDWORD )( 
             __RPC__in IOpcPartUri * This,
             /* [range][in] */ Uri_PROPERTY uriProp,
-            /* [out] */ __RPC__out DWORD *pdwProperty,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwProperty,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IUri, HasProperty)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *HasProperty )( 
             __RPC__in IOpcPartUri * This,
             /* [range][in] */ Uri_PROPERTY uriProp,
-            /* [out] */ __RPC__out BOOL *pfHasProperty);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfHasProperty);
         
         DECLSPEC_XFGVIRT(IUri, GetAbsoluteUri)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAbsoluteUri )( 
             __RPC__in IOpcPartUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrAbsoluteUri);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrAbsoluteUri);
         
         DECLSPEC_XFGVIRT(IUri, GetAuthority)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAuthority )( 
             __RPC__in IOpcPartUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrAuthority);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrAuthority);
         
         DECLSPEC_XFGVIRT(IUri, GetDisplayUri)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDisplayUri )( 
             __RPC__in IOpcPartUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrDisplayString);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrDisplayString);
         
         DECLSPEC_XFGVIRT(IUri, GetDomain)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDomain )( 
             __RPC__in IOpcPartUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrDomain);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrDomain);
         
         DECLSPEC_XFGVIRT(IUri, GetExtension)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetExtension )( 
             __RPC__in IOpcPartUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrExtension);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrExtension);
         
         DECLSPEC_XFGVIRT(IUri, GetFragment)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetFragment )( 
             __RPC__in IOpcPartUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrFragment);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrFragment);
         
         DECLSPEC_XFGVIRT(IUri, GetHost)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetHost )( 
             __RPC__in IOpcPartUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrHost);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrHost);
         
         DECLSPEC_XFGVIRT(IUri, GetPassword)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPassword )( 
             __RPC__in IOpcPartUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrPassword);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrPassword);
         
         DECLSPEC_XFGVIRT(IUri, GetPath)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPath )( 
             __RPC__in IOpcPartUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrPath);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrPath);
         
         DECLSPEC_XFGVIRT(IUri, GetPathAndQuery)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPathAndQuery )( 
             __RPC__in IOpcPartUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrPathAndQuery);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrPathAndQuery);
         
         DECLSPEC_XFGVIRT(IUri, GetQuery)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetQuery )( 
             __RPC__in IOpcPartUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrQuery);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrQuery);
         
         DECLSPEC_XFGVIRT(IUri, GetRawUri)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetRawUri )( 
             __RPC__in IOpcPartUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrRawUri);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrRawUri);
         
         DECLSPEC_XFGVIRT(IUri, GetSchemeName)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSchemeName )( 
             __RPC__in IOpcPartUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrSchemeName);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrSchemeName);
         
         DECLSPEC_XFGVIRT(IUri, GetUserInfo)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetUserInfo )( 
             __RPC__in IOpcPartUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrUserInfo);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrUserInfo);
         
         DECLSPEC_XFGVIRT(IUri, GetUserName)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetUserName )( 
             __RPC__in IOpcPartUri * This,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrUserName);
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrUserName);
         
         DECLSPEC_XFGVIRT(IUri, GetHostType)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetHostType )( 
             __RPC__in IOpcPartUri * This,
-            /* [out] */ __RPC__out DWORD *pdwHostType);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHostType);
         
         DECLSPEC_XFGVIRT(IUri, GetPort)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPort )( 
             __RPC__in IOpcPartUri * This,
-            /* [out] */ __RPC__out DWORD *pdwPort);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwPort);
         
         DECLSPEC_XFGVIRT(IUri, GetScheme)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetScheme )( 
             __RPC__in IOpcPartUri * This,
-            /* [out] */ __RPC__out DWORD *pdwScheme);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwScheme);
         
         DECLSPEC_XFGVIRT(IUri, GetZone)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetZone )( 
             __RPC__in IOpcPartUri * This,
-            /* [out] */ __RPC__out DWORD *pdwZone);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwZone);
         
         DECLSPEC_XFGVIRT(IUri, GetProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperties )( 
             __RPC__in IOpcPartUri * This,
-            /* [out] */ __RPC__out LPDWORD pdwFlags);
+            /* [annotation][out] */ 
+            _Out_  LPDWORD pdwFlags);
         
         DECLSPEC_XFGVIRT(IUri, IsEqual)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *IsEqual )( 
             __RPC__in IOpcPartUri * This,
-            /* [in] */ __RPC__in_opt IUri *pUri,
-            /* [out] */ __RPC__out BOOL *pfEqual);
+            /* [annotation][in] */ 
+            _In_  IUri *pUri,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfEqual);
         
         DECLSPEC_XFGVIRT(IOpcUri, GetRelationshipsPartUri)
         HRESULT ( STDMETHODCALLTYPE *GetRelationshipsPartUri )( 
@@ -1321,7 +1381,8 @@ EXTERN_C const IID IID_IOpcPackage;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcPackage * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1425,7 +1486,8 @@ EXTERN_C const IID IID_IOpcPart;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcPart * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1553,7 +1615,8 @@ EXTERN_C const IID IID_IOpcRelationship;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcRelationship * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1686,7 +1749,8 @@ EXTERN_C const IID IID_IOpcPartSet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcPartSet * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1832,7 +1896,8 @@ EXTERN_C const IID IID_IOpcRelationshipSet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcRelationshipSet * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1980,7 +2045,8 @@ EXTERN_C const IID IID_IOpcPartEnumerator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcPartEnumerator * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2097,7 +2163,8 @@ EXTERN_C const IID IID_IOpcRelationshipEnumerator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcRelationshipEnumerator * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2218,7 +2285,8 @@ EXTERN_C const IID IID_IOpcSignaturePartReference;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcSignaturePartReference * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2351,7 +2419,8 @@ EXTERN_C const IID IID_IOpcSignatureRelationshipReference;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcSignatureRelationshipReference * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2479,7 +2548,8 @@ EXTERN_C const IID IID_IOpcRelationshipSelector;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcRelationshipSelector * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2587,7 +2657,8 @@ EXTERN_C const IID IID_IOpcSignatureReference;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcSignatureReference * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2713,7 +2784,8 @@ EXTERN_C const IID IID_IOpcSignatureCustomObject;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcSignatureCustomObject * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2850,7 +2922,8 @@ EXTERN_C const IID IID_IOpcDigitalSignature;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IOpcDigitalSignature * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3104,7 +3177,8 @@ EXTERN_C const IID IID_IOpcSigningOptions;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcSigningOptions * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3344,7 +3418,8 @@ EXTERN_C const IID IID_IOpcDigitalSignatureManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IOpcDigitalSignatureManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3500,7 +3575,8 @@ EXTERN_C const IID IID_IOpcSignaturePartReferenceEnumerator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcSignaturePartReferenceEnumerator * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3617,7 +3693,8 @@ EXTERN_C const IID IID_IOpcSignatureRelationshipReferenceEnumerator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcSignatureRelationshipReferenceEnumerator * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3734,7 +3811,8 @@ EXTERN_C const IID IID_IOpcRelationshipSelectorEnumerator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcRelationshipSelectorEnumerator * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3851,7 +3929,8 @@ EXTERN_C const IID IID_IOpcSignatureReferenceEnumerator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcSignatureReferenceEnumerator * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3968,7 +4047,8 @@ EXTERN_C const IID IID_IOpcSignatureCustomObjectEnumerator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcSignatureCustomObjectEnumerator * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4085,7 +4165,8 @@ EXTERN_C const IID IID_IOpcCertificateEnumerator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IOpcCertificateEnumerator * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4202,7 +4283,8 @@ EXTERN_C const IID IID_IOpcDigitalSignatureEnumerator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcDigitalSignatureEnumerator * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4319,7 +4401,8 @@ EXTERN_C const IID IID_IOpcSignaturePartReferenceSet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcSignaturePartReferenceSet * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4436,7 +4519,8 @@ EXTERN_C const IID IID_IOpcSignatureRelationshipReferenceSet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcSignatureRelationshipReferenceSet * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4557,7 +4641,8 @@ EXTERN_C const IID IID_IOpcRelationshipSelectorSet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcRelationshipSelectorSet * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4670,7 +4755,8 @@ EXTERN_C const IID IID_IOpcSignatureReferenceSet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcSignatureReferenceSet * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4783,7 +4869,8 @@ EXTERN_C const IID IID_IOpcSignatureCustomObjectSet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcSignatureCustomObjectSet * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4891,7 +4978,8 @@ EXTERN_C const IID IID_IOpcCertificateSet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IOpcCertificateSet * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4977,35 +5065,52 @@ EXTERN_C const IID IID_IOpcFactory;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreatePackageRootUri( 
-            /* [retval][out] */ __RPC__deref_out_opt IOpcUri **rootUri) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IOpcUri **rootUri) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePartUri( 
-            /* [string][in] */ __RPC__in_string LPCWSTR pwzUri,
-            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **partUri) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pwzUri,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IOpcPartUri **partUri) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE CreateStreamOnFile( 
-            /* [string][in] */ LPCWSTR filename,
-            /* [in] */ OPC_STREAM_IO_MODE ioMode,
-            /* [unique][in] */ LPSECURITY_ATTRIBUTES securityAttributes,
-            /* [in] */ DWORD dwFlagsAndAttributes,
-            /* [retval][out] */ IStream **stream) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR filename,
+            /* [annotation][in] */ 
+            _In_  OPC_STREAM_IO_MODE ioMode,
+            /* [annotation][unique][in] */ 
+            _In_  LPSECURITY_ATTRIBUTES securityAttributes,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlagsAndAttributes,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IStream **stream) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePackage( 
-            /* [retval][out] */ __RPC__deref_out_opt IOpcPackage **package) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IOpcPackage **package) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReadPackageFromStream( 
-            /* [in] */ __RPC__in_opt IStream *stream,
-            /* [in] */ OPC_READ_FLAGS flags,
-            /* [retval][out] */ __RPC__deref_out_opt IOpcPackage **package) = 0;
+            /* [annotation][in] */ 
+            _In_  IStream *stream,
+            /* [annotation][in] */ 
+            _In_  OPC_READ_FLAGS flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IOpcPackage **package) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WritePackageToStream( 
-            /* [in] */ __RPC__in_opt IOpcPackage *package,
-            /* [in] */ OPC_WRITE_FLAGS flags,
-            /* [in] */ __RPC__in_opt IStream *stream) = 0;
+            /* [annotation][in] */ 
+            _In_  IOpcPackage *package,
+            /* [annotation][in] */ 
+            _In_  OPC_WRITE_FLAGS flags,
+            /* [annotation][in] */ 
+            _In_  IStream *stream) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateDigitalSignatureManager( 
-            /* [in] */ __RPC__in_opt IOpcPackage *package,
-            /* [retval][out] */ __RPC__deref_out_opt IOpcDigitalSignatureManager **signatureManager) = 0;
+            /* [annotation][in] */ 
+            _In_  IOpcPackage *package,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IOpcDigitalSignatureManager **signatureManager) = 0;
         
     };
     
@@ -5019,7 +5124,8 @@ EXTERN_C const IID IID_IOpcFactory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpcFactory * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5034,47 +5140,64 @@ EXTERN_C const IID IID_IOpcFactory;
         DECLSPEC_XFGVIRT(IOpcFactory, CreatePackageRootUri)
         HRESULT ( STDMETHODCALLTYPE *CreatePackageRootUri )( 
             __RPC__in IOpcFactory * This,
-            /* [retval][out] */ __RPC__deref_out_opt IOpcUri **rootUri);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IOpcUri **rootUri);
         
         DECLSPEC_XFGVIRT(IOpcFactory, CreatePartUri)
         HRESULT ( STDMETHODCALLTYPE *CreatePartUri )( 
             __RPC__in IOpcFactory * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR pwzUri,
-            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **partUri);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pwzUri,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IOpcPartUri **partUri);
         
         DECLSPEC_XFGVIRT(IOpcFactory, CreateStreamOnFile)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CreateStreamOnFile )( 
             IOpcFactory * This,
-            /* [string][in] */ LPCWSTR filename,
-            /* [in] */ OPC_STREAM_IO_MODE ioMode,
-            /* [unique][in] */ LPSECURITY_ATTRIBUTES securityAttributes,
-            /* [in] */ DWORD dwFlagsAndAttributes,
-            /* [retval][out] */ IStream **stream);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR filename,
+            /* [annotation][in] */ 
+            _In_  OPC_STREAM_IO_MODE ioMode,
+            /* [annotation][unique][in] */ 
+            _In_  LPSECURITY_ATTRIBUTES securityAttributes,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlagsAndAttributes,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IStream **stream);
         
         DECLSPEC_XFGVIRT(IOpcFactory, CreatePackage)
         HRESULT ( STDMETHODCALLTYPE *CreatePackage )( 
             __RPC__in IOpcFactory * This,
-            /* [retval][out] */ __RPC__deref_out_opt IOpcPackage **package);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IOpcPackage **package);
         
         DECLSPEC_XFGVIRT(IOpcFactory, ReadPackageFromStream)
         HRESULT ( STDMETHODCALLTYPE *ReadPackageFromStream )( 
             __RPC__in IOpcFactory * This,
-            /* [in] */ __RPC__in_opt IStream *stream,
-            /* [in] */ OPC_READ_FLAGS flags,
-            /* [retval][out] */ __RPC__deref_out_opt IOpcPackage **package);
+            /* [annotation][in] */ 
+            _In_  IStream *stream,
+            /* [annotation][in] */ 
+            _In_  OPC_READ_FLAGS flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IOpcPackage **package);
         
         DECLSPEC_XFGVIRT(IOpcFactory, WritePackageToStream)
         HRESULT ( STDMETHODCALLTYPE *WritePackageToStream )( 
             __RPC__in IOpcFactory * This,
-            /* [in] */ __RPC__in_opt IOpcPackage *package,
-            /* [in] */ OPC_WRITE_FLAGS flags,
-            /* [in] */ __RPC__in_opt IStream *stream);
+            /* [annotation][in] */ 
+            _In_  IOpcPackage *package,
+            /* [annotation][in] */ 
+            _In_  OPC_WRITE_FLAGS flags,
+            /* [annotation][in] */ 
+            _In_  IStream *stream);
         
         DECLSPEC_XFGVIRT(IOpcFactory, CreateDigitalSignatureManager)
         HRESULT ( STDMETHODCALLTYPE *CreateDigitalSignatureManager )( 
             __RPC__in IOpcFactory * This,
-            /* [in] */ __RPC__in_opt IOpcPackage *package,
-            /* [retval][out] */ __RPC__deref_out_opt IOpcDigitalSignatureManager **signatureManager);
+            /* [annotation][in] */ 
+            _In_  IOpcPackage *package,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IOpcDigitalSignatureManager **signatureManager);
         
         END_INTERFACE
     } IOpcFactoryVtbl;

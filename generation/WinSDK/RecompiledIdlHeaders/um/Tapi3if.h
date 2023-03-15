@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -1377,57 +1377,82 @@ EXTERN_C const IID IID_ITTAPI;
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Shutdown( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Addresses( 
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateAddresses( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumAddress **ppEnumAddress) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumAddress **ppEnumAddress) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RegisterCallNotifications( 
-            /* [in] */ __RPC__in_opt ITAddress *pAddress,
-            /* [in] */ VARIANT_BOOL fMonitor,
-            /* [in] */ VARIANT_BOOL fOwner,
-            /* [in] */ long lMediaTypes,
-            /* [in] */ long lCallbackInstance,
-            /* [retval][out] */ __RPC__out long *plRegister) = 0;
+            /* [annotation][in] */ 
+            _In_  ITAddress *pAddress,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fMonitor,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fOwner,
+            /* [annotation][in] */ 
+            _In_  long lMediaTypes,
+            /* [annotation][in] */ 
+            _In_  long lCallbackInstance,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plRegister) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE UnregisterNotifications( 
-            /* [in] */ long lRegister) = 0;
+            /* [annotation][in] */ 
+            _In_  long lRegister) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CallHubs( 
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateCallHubs( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumCallHub **ppEnumCallHub) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumCallHub **ppEnumCallHub) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetCallHubTracking( 
-            /* [in] */ VARIANT pAddresses,
-            /* [in] */ VARIANT_BOOL bTracking) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT pAddresses,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bTracking) = 0;
         
         virtual /* [hidden][id] */ HRESULT STDMETHODCALLTYPE EnumeratePrivateTAPIObjects( 
-            /* [out] */ __RPC__deref_out_opt IEnumUnknown **ppEnumUnknown) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumUnknown **ppEnumUnknown) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PrivateTAPIObjects( 
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RegisterRequestRecipient( 
-            /* [in] */ long lRegistrationInstance,
-            /* [in] */ long lRequestMode,
-            /* [in] */ VARIANT_BOOL fEnable) = 0;
+            /* [annotation][in] */ 
+            _In_  long lRegistrationInstance,
+            /* [annotation][in] */ 
+            _In_  long lRequestMode,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fEnable) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetAssistedTelephonyPriority( 
-            /* [in] */ __RPC__in BSTR pAppFilename,
-            /* [in] */ VARIANT_BOOL fPriority) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pAppFilename,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fPriority) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetApplicationPriority( 
-            /* [in] */ __RPC__in BSTR pAppFilename,
-            /* [in] */ long lMediaType,
-            /* [in] */ VARIANT_BOOL fPriority) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pAppFilename,
+            /* [annotation][in] */ 
+            _In_  long lMediaType,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fPriority) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_EventFilter( 
-            /* [in] */ long lFilterMask) = 0;
+            /* [annotation][in] */ 
+            _In_  long lFilterMask) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EventFilter( 
-            /* [retval][out] */ __RPC__out long *plFilterMask) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plFilterMask) = 0;
         
     };
     
@@ -1441,7 +1466,8 @@ EXTERN_C const IID IID_ITTAPI;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITTAPI * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1456,23 +1482,31 @@ EXTERN_C const IID IID_ITTAPI;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITTAPI * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITTAPI * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITTAPI * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1505,83 +1539,108 @@ EXTERN_C const IID IID_ITTAPI;
         DECLSPEC_XFGVIRT(ITTAPI, get_Addresses)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Addresses )( 
             __RPC__in ITTAPI * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITTAPI, EnumerateAddresses)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateAddresses )( 
             __RPC__in ITTAPI * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumAddress **ppEnumAddress);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumAddress **ppEnumAddress);
         
         DECLSPEC_XFGVIRT(ITTAPI, RegisterCallNotifications)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RegisterCallNotifications )( 
             __RPC__in ITTAPI * This,
-            /* [in] */ __RPC__in_opt ITAddress *pAddress,
-            /* [in] */ VARIANT_BOOL fMonitor,
-            /* [in] */ VARIANT_BOOL fOwner,
-            /* [in] */ long lMediaTypes,
-            /* [in] */ long lCallbackInstance,
-            /* [retval][out] */ __RPC__out long *plRegister);
+            /* [annotation][in] */ 
+            _In_  ITAddress *pAddress,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fMonitor,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fOwner,
+            /* [annotation][in] */ 
+            _In_  long lMediaTypes,
+            /* [annotation][in] */ 
+            _In_  long lCallbackInstance,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plRegister);
         
         DECLSPEC_XFGVIRT(ITTAPI, UnregisterNotifications)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *UnregisterNotifications )( 
             __RPC__in ITTAPI * This,
-            /* [in] */ long lRegister);
+            /* [annotation][in] */ 
+            _In_  long lRegister);
         
         DECLSPEC_XFGVIRT(ITTAPI, get_CallHubs)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallHubs )( 
             __RPC__in ITTAPI * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITTAPI, EnumerateCallHubs)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateCallHubs )( 
             __RPC__in ITTAPI * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumCallHub **ppEnumCallHub);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumCallHub **ppEnumCallHub);
         
         DECLSPEC_XFGVIRT(ITTAPI, SetCallHubTracking)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetCallHubTracking )( 
             __RPC__in ITTAPI * This,
-            /* [in] */ VARIANT pAddresses,
-            /* [in] */ VARIANT_BOOL bTracking);
+            /* [annotation][in] */ 
+            _In_  VARIANT pAddresses,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bTracking);
         
         DECLSPEC_XFGVIRT(ITTAPI, EnumeratePrivateTAPIObjects)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumeratePrivateTAPIObjects )( 
             __RPC__in ITTAPI * This,
-            /* [out] */ __RPC__deref_out_opt IEnumUnknown **ppEnumUnknown);
+            /* [annotation][out] */ 
+            _Out_  IEnumUnknown **ppEnumUnknown);
         
         DECLSPEC_XFGVIRT(ITTAPI, get_PrivateTAPIObjects)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrivateTAPIObjects )( 
             __RPC__in ITTAPI * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITTAPI, RegisterRequestRecipient)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RegisterRequestRecipient )( 
             __RPC__in ITTAPI * This,
-            /* [in] */ long lRegistrationInstance,
-            /* [in] */ long lRequestMode,
-            /* [in] */ VARIANT_BOOL fEnable);
+            /* [annotation][in] */ 
+            _In_  long lRegistrationInstance,
+            /* [annotation][in] */ 
+            _In_  long lRequestMode,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fEnable);
         
         DECLSPEC_XFGVIRT(ITTAPI, SetAssistedTelephonyPriority)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetAssistedTelephonyPriority )( 
             __RPC__in ITTAPI * This,
-            /* [in] */ __RPC__in BSTR pAppFilename,
-            /* [in] */ VARIANT_BOOL fPriority);
+            /* [annotation][in] */ 
+            _In_  BSTR pAppFilename,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fPriority);
         
         DECLSPEC_XFGVIRT(ITTAPI, SetApplicationPriority)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetApplicationPriority )( 
             __RPC__in ITTAPI * This,
-            /* [in] */ __RPC__in BSTR pAppFilename,
-            /* [in] */ long lMediaType,
-            /* [in] */ VARIANT_BOOL fPriority);
+            /* [annotation][in] */ 
+            _In_  BSTR pAppFilename,
+            /* [annotation][in] */ 
+            _In_  long lMediaType,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fPriority);
         
         DECLSPEC_XFGVIRT(ITTAPI, put_EventFilter)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EventFilter )( 
             __RPC__in ITTAPI * This,
-            /* [in] */ long lFilterMask);
+            /* [annotation][in] */ 
+            _In_  long lFilterMask);
         
         DECLSPEC_XFGVIRT(ITTAPI, get_EventFilter)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EventFilter )( 
             __RPC__in ITTAPI * This,
-            /* [retval][out] */ __RPC__out long *plFilterMask);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plFilterMask);
         
         END_INTERFACE
     } ITTAPIVtbl;
@@ -1694,13 +1753,16 @@ EXTERN_C const IID IID_ITTAPI2;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Phones( 
-            /* [retval][out] */ __RPC__out VARIANT *pPhones) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pPhones) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumeratePhones( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumPhone **ppEnumPhone) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumPhone **ppEnumPhone) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateEmptyCollectionObject( 
-            /* [retval][out] */ __RPC__deref_out_opt ITCollection2 **ppCollection) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCollection2 **ppCollection) = 0;
         
     };
     
@@ -1714,7 +1776,8 @@ EXTERN_C const IID IID_ITTAPI2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITTAPI2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1729,23 +1792,31 @@ EXTERN_C const IID IID_ITTAPI2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITTAPI2 * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITTAPI2 * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITTAPI2 * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1778,98 +1849,126 @@ EXTERN_C const IID IID_ITTAPI2;
         DECLSPEC_XFGVIRT(ITTAPI, get_Addresses)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Addresses )( 
             __RPC__in ITTAPI2 * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITTAPI, EnumerateAddresses)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateAddresses )( 
             __RPC__in ITTAPI2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumAddress **ppEnumAddress);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumAddress **ppEnumAddress);
         
         DECLSPEC_XFGVIRT(ITTAPI, RegisterCallNotifications)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RegisterCallNotifications )( 
             __RPC__in ITTAPI2 * This,
-            /* [in] */ __RPC__in_opt ITAddress *pAddress,
-            /* [in] */ VARIANT_BOOL fMonitor,
-            /* [in] */ VARIANT_BOOL fOwner,
-            /* [in] */ long lMediaTypes,
-            /* [in] */ long lCallbackInstance,
-            /* [retval][out] */ __RPC__out long *plRegister);
+            /* [annotation][in] */ 
+            _In_  ITAddress *pAddress,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fMonitor,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fOwner,
+            /* [annotation][in] */ 
+            _In_  long lMediaTypes,
+            /* [annotation][in] */ 
+            _In_  long lCallbackInstance,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plRegister);
         
         DECLSPEC_XFGVIRT(ITTAPI, UnregisterNotifications)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *UnregisterNotifications )( 
             __RPC__in ITTAPI2 * This,
-            /* [in] */ long lRegister);
+            /* [annotation][in] */ 
+            _In_  long lRegister);
         
         DECLSPEC_XFGVIRT(ITTAPI, get_CallHubs)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallHubs )( 
             __RPC__in ITTAPI2 * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITTAPI, EnumerateCallHubs)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateCallHubs )( 
             __RPC__in ITTAPI2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumCallHub **ppEnumCallHub);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumCallHub **ppEnumCallHub);
         
         DECLSPEC_XFGVIRT(ITTAPI, SetCallHubTracking)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetCallHubTracking )( 
             __RPC__in ITTAPI2 * This,
-            /* [in] */ VARIANT pAddresses,
-            /* [in] */ VARIANT_BOOL bTracking);
+            /* [annotation][in] */ 
+            _In_  VARIANT pAddresses,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bTracking);
         
         DECLSPEC_XFGVIRT(ITTAPI, EnumeratePrivateTAPIObjects)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumeratePrivateTAPIObjects )( 
             __RPC__in ITTAPI2 * This,
-            /* [out] */ __RPC__deref_out_opt IEnumUnknown **ppEnumUnknown);
+            /* [annotation][out] */ 
+            _Out_  IEnumUnknown **ppEnumUnknown);
         
         DECLSPEC_XFGVIRT(ITTAPI, get_PrivateTAPIObjects)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrivateTAPIObjects )( 
             __RPC__in ITTAPI2 * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITTAPI, RegisterRequestRecipient)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RegisterRequestRecipient )( 
             __RPC__in ITTAPI2 * This,
-            /* [in] */ long lRegistrationInstance,
-            /* [in] */ long lRequestMode,
-            /* [in] */ VARIANT_BOOL fEnable);
+            /* [annotation][in] */ 
+            _In_  long lRegistrationInstance,
+            /* [annotation][in] */ 
+            _In_  long lRequestMode,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fEnable);
         
         DECLSPEC_XFGVIRT(ITTAPI, SetAssistedTelephonyPriority)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetAssistedTelephonyPriority )( 
             __RPC__in ITTAPI2 * This,
-            /* [in] */ __RPC__in BSTR pAppFilename,
-            /* [in] */ VARIANT_BOOL fPriority);
+            /* [annotation][in] */ 
+            _In_  BSTR pAppFilename,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fPriority);
         
         DECLSPEC_XFGVIRT(ITTAPI, SetApplicationPriority)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetApplicationPriority )( 
             __RPC__in ITTAPI2 * This,
-            /* [in] */ __RPC__in BSTR pAppFilename,
-            /* [in] */ long lMediaType,
-            /* [in] */ VARIANT_BOOL fPriority);
+            /* [annotation][in] */ 
+            _In_  BSTR pAppFilename,
+            /* [annotation][in] */ 
+            _In_  long lMediaType,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fPriority);
         
         DECLSPEC_XFGVIRT(ITTAPI, put_EventFilter)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EventFilter )( 
             __RPC__in ITTAPI2 * This,
-            /* [in] */ long lFilterMask);
+            /* [annotation][in] */ 
+            _In_  long lFilterMask);
         
         DECLSPEC_XFGVIRT(ITTAPI, get_EventFilter)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EventFilter )( 
             __RPC__in ITTAPI2 * This,
-            /* [retval][out] */ __RPC__out long *plFilterMask);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plFilterMask);
         
         DECLSPEC_XFGVIRT(ITTAPI2, get_Phones)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Phones )( 
             __RPC__in ITTAPI2 * This,
-            /* [retval][out] */ __RPC__out VARIANT *pPhones);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pPhones);
         
         DECLSPEC_XFGVIRT(ITTAPI2, EnumeratePhones)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumeratePhones )( 
             __RPC__in ITTAPI2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumPhone **ppEnumPhone);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumPhone **ppEnumPhone);
         
         DECLSPEC_XFGVIRT(ITTAPI2, CreateEmptyCollectionObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateEmptyCollectionObject )( 
             __RPC__in ITTAPI2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCollection2 **ppCollection);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCollection2 **ppCollection);
         
         END_INTERFACE
     } ITTAPI2Vtbl;
@@ -1992,11 +2091,14 @@ EXTERN_C const IID IID_ITMediaSupport;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MediaTypes( 
-            /* [retval][out] */ __RPC__out long *plMediaTypes) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plMediaTypes) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE QueryMediaType( 
-            /* [in] */ long lMediaType,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfSupport) = 0;
+            /* [annotation][in] */ 
+            _In_  long lMediaType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfSupport) = 0;
         
     };
     
@@ -2010,7 +2112,8 @@ EXTERN_C const IID IID_ITMediaSupport;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITMediaSupport * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2025,23 +2128,31 @@ EXTERN_C const IID IID_ITMediaSupport;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITMediaSupport * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITMediaSupport * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITMediaSupport * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2066,13 +2177,16 @@ EXTERN_C const IID IID_ITMediaSupport;
         DECLSPEC_XFGVIRT(ITMediaSupport, get_MediaTypes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaTypes )( 
             __RPC__in ITMediaSupport * This,
-            /* [retval][out] */ __RPC__out long *plMediaTypes);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plMediaTypes);
         
         DECLSPEC_XFGVIRT(ITMediaSupport, QueryMediaType)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *QueryMediaType )( 
             __RPC__in ITMediaSupport * This,
-            /* [in] */ long lMediaType,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfSupport);
+            /* [annotation][in] */ 
+            _In_  long lMediaType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfSupport);
         
         END_INTERFACE
     } ITMediaSupportVtbl;
@@ -2143,25 +2257,32 @@ EXTERN_C const IID IID_ITPluggableTerminalClassInfo;
     {
     public:
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pName) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Company( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pCompany) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pCompany) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Version( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVersion) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVersion) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_TerminalClass( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pTerminalClass) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pTerminalClass) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_CLSID( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pCLSID) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pCLSID) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Direction( 
-            /* [retval][out] */ __RPC__out TERMINAL_DIRECTION *pDirection) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TERMINAL_DIRECTION *pDirection) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_MediaTypes( 
-            /* [retval][out] */ __RPC__out long *pMediaTypes) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pMediaTypes) = 0;
         
     };
     
@@ -2175,7 +2296,8 @@ EXTERN_C const IID IID_ITPluggableTerminalClassInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITPluggableTerminalClassInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2190,23 +2312,31 @@ EXTERN_C const IID IID_ITPluggableTerminalClassInfo;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITPluggableTerminalClassInfo * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITPluggableTerminalClassInfo * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITPluggableTerminalClassInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2231,37 +2361,44 @@ EXTERN_C const IID IID_ITPluggableTerminalClassInfo;
         DECLSPEC_XFGVIRT(ITPluggableTerminalClassInfo, get_Name)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ITPluggableTerminalClassInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pName);
         
         DECLSPEC_XFGVIRT(ITPluggableTerminalClassInfo, get_Company)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Company )( 
             __RPC__in ITPluggableTerminalClassInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pCompany);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pCompany);
         
         DECLSPEC_XFGVIRT(ITPluggableTerminalClassInfo, get_Version)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Version )( 
             __RPC__in ITPluggableTerminalClassInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVersion);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pVersion);
         
         DECLSPEC_XFGVIRT(ITPluggableTerminalClassInfo, get_TerminalClass)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_TerminalClass )( 
             __RPC__in ITPluggableTerminalClassInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pTerminalClass);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pTerminalClass);
         
         DECLSPEC_XFGVIRT(ITPluggableTerminalClassInfo, get_CLSID)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CLSID )( 
             __RPC__in ITPluggableTerminalClassInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pCLSID);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pCLSID);
         
         DECLSPEC_XFGVIRT(ITPluggableTerminalClassInfo, get_Direction)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Direction )( 
             __RPC__in ITPluggableTerminalClassInfo * This,
-            /* [retval][out] */ __RPC__out TERMINAL_DIRECTION *pDirection);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TERMINAL_DIRECTION *pDirection);
         
         DECLSPEC_XFGVIRT(ITPluggableTerminalClassInfo, get_MediaTypes)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MediaTypes )( 
             __RPC__in ITPluggableTerminalClassInfo * This,
-            /* [retval][out] */ __RPC__out long *pMediaTypes);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pMediaTypes);
         
         END_INTERFACE
     } ITPluggableTerminalClassInfoVtbl;
@@ -2347,10 +2484,12 @@ EXTERN_C const IID IID_ITPluggableTerminalSuperclassInfo;
     {
     public:
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pName) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_CLSID( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pCLSID) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pCLSID) = 0;
         
     };
     
@@ -2364,7 +2503,8 @@ EXTERN_C const IID IID_ITPluggableTerminalSuperclassInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITPluggableTerminalSuperclassInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2379,23 +2519,31 @@ EXTERN_C const IID IID_ITPluggableTerminalSuperclassInfo;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITPluggableTerminalSuperclassInfo * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITPluggableTerminalSuperclassInfo * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITPluggableTerminalSuperclassInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2420,12 +2568,14 @@ EXTERN_C const IID IID_ITPluggableTerminalSuperclassInfo;
         DECLSPEC_XFGVIRT(ITPluggableTerminalSuperclassInfo, get_Name)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ITPluggableTerminalSuperclassInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pName);
         
         DECLSPEC_XFGVIRT(ITPluggableTerminalSuperclassInfo, get_CLSID)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CLSID )( 
             __RPC__in ITPluggableTerminalSuperclassInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pCLSID);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pCLSID);
         
         END_INTERFACE
     } ITPluggableTerminalSuperclassInfoVtbl;
@@ -2496,27 +2646,38 @@ EXTERN_C const IID IID_ITTerminalSupport;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StaticTerminals( 
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateStaticTerminals( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumTerminal **ppTerminalEnumerator) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumTerminal **ppTerminalEnumerator) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DynamicTerminalClasses( 
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateDynamicTerminalClasses( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumTerminalClass **ppTerminalClassEnumerator) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumTerminalClass **ppTerminalClassEnumerator) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateTerminal( 
-            /* [in] */ __RPC__in BSTR pTerminalClass,
-            /* [in] */ long lMediaType,
-            /* [in] */ TERMINAL_DIRECTION Direction,
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppTerminal) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pTerminalClass,
+            /* [annotation][in] */ 
+            _In_  long lMediaType,
+            /* [annotation][in] */ 
+            _In_  TERMINAL_DIRECTION Direction,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppTerminal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetDefaultStaticTerminal( 
-            /* [in] */ long lMediaType,
-            /* [in] */ TERMINAL_DIRECTION Direction,
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppTerminal) = 0;
+            /* [annotation][in] */ 
+            _In_  long lMediaType,
+            /* [annotation][in] */ 
+            _In_  TERMINAL_DIRECTION Direction,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppTerminal) = 0;
         
     };
     
@@ -2530,7 +2691,8 @@ EXTERN_C const IID IID_ITTerminalSupport;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITTerminalSupport * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2545,23 +2707,31 @@ EXTERN_C const IID IID_ITTerminalSupport;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITTerminalSupport * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITTerminalSupport * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITTerminalSupport * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2586,37 +2756,48 @@ EXTERN_C const IID IID_ITTerminalSupport;
         DECLSPEC_XFGVIRT(ITTerminalSupport, get_StaticTerminals)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StaticTerminals )( 
             __RPC__in ITTerminalSupport * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITTerminalSupport, EnumerateStaticTerminals)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateStaticTerminals )( 
             __RPC__in ITTerminalSupport * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumTerminal **ppTerminalEnumerator);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumTerminal **ppTerminalEnumerator);
         
         DECLSPEC_XFGVIRT(ITTerminalSupport, get_DynamicTerminalClasses)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DynamicTerminalClasses )( 
             __RPC__in ITTerminalSupport * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITTerminalSupport, EnumerateDynamicTerminalClasses)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateDynamicTerminalClasses )( 
             __RPC__in ITTerminalSupport * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumTerminalClass **ppTerminalClassEnumerator);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumTerminalClass **ppTerminalClassEnumerator);
         
         DECLSPEC_XFGVIRT(ITTerminalSupport, CreateTerminal)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateTerminal )( 
             __RPC__in ITTerminalSupport * This,
-            /* [in] */ __RPC__in BSTR pTerminalClass,
-            /* [in] */ long lMediaType,
-            /* [in] */ TERMINAL_DIRECTION Direction,
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppTerminal);
+            /* [annotation][in] */ 
+            _In_  BSTR pTerminalClass,
+            /* [annotation][in] */ 
+            _In_  long lMediaType,
+            /* [annotation][in] */ 
+            _In_  TERMINAL_DIRECTION Direction,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppTerminal);
         
         DECLSPEC_XFGVIRT(ITTerminalSupport, GetDefaultStaticTerminal)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDefaultStaticTerminal )( 
             __RPC__in ITTerminalSupport * This,
-            /* [in] */ long lMediaType,
-            /* [in] */ TERMINAL_DIRECTION Direction,
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppTerminal);
+            /* [annotation][in] */ 
+            _In_  long lMediaType,
+            /* [annotation][in] */ 
+            _In_  TERMINAL_DIRECTION Direction,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppTerminal);
         
         END_INTERFACE
     } ITTerminalSupportVtbl;
@@ -2699,20 +2880,28 @@ EXTERN_C const IID IID_ITTerminalSupport2;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PluggableSuperclasses( 
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumeratePluggableSuperclasses( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumPluggableSuperclassInfo **ppSuperclassEnumerator) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumPluggableSuperclassInfo **ppSuperclassEnumerator) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PluggableTerminalClasses( 
-            /* [in] */ __RPC__in BSTR bstrTerminalSuperclass,
-            /* [in] */ long lMediaType,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrTerminalSuperclass,
+            /* [annotation][in] */ 
+            _In_  long lMediaType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumeratePluggableTerminalClasses( 
-            /* [in] */ CLSID iidTerminalSuperclass,
-            /* [in] */ long lMediaType,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumPluggableTerminalClassInfo **ppClassEnumerator) = 0;
+            /* [annotation][in] */ 
+            _In_  CLSID iidTerminalSuperclass,
+            /* [annotation][in] */ 
+            _In_  long lMediaType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumPluggableTerminalClassInfo **ppClassEnumerator) = 0;
         
     };
     
@@ -2726,7 +2915,8 @@ EXTERN_C const IID IID_ITTerminalSupport2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITTerminalSupport2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2741,23 +2931,31 @@ EXTERN_C const IID IID_ITTerminalSupport2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITTerminalSupport2 * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITTerminalSupport2 * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITTerminalSupport2 * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2782,61 +2980,80 @@ EXTERN_C const IID IID_ITTerminalSupport2;
         DECLSPEC_XFGVIRT(ITTerminalSupport, get_StaticTerminals)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StaticTerminals )( 
             __RPC__in ITTerminalSupport2 * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITTerminalSupport, EnumerateStaticTerminals)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateStaticTerminals )( 
             __RPC__in ITTerminalSupport2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumTerminal **ppTerminalEnumerator);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumTerminal **ppTerminalEnumerator);
         
         DECLSPEC_XFGVIRT(ITTerminalSupport, get_DynamicTerminalClasses)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DynamicTerminalClasses )( 
             __RPC__in ITTerminalSupport2 * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITTerminalSupport, EnumerateDynamicTerminalClasses)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateDynamicTerminalClasses )( 
             __RPC__in ITTerminalSupport2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumTerminalClass **ppTerminalClassEnumerator);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumTerminalClass **ppTerminalClassEnumerator);
         
         DECLSPEC_XFGVIRT(ITTerminalSupport, CreateTerminal)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateTerminal )( 
             __RPC__in ITTerminalSupport2 * This,
-            /* [in] */ __RPC__in BSTR pTerminalClass,
-            /* [in] */ long lMediaType,
-            /* [in] */ TERMINAL_DIRECTION Direction,
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppTerminal);
+            /* [annotation][in] */ 
+            _In_  BSTR pTerminalClass,
+            /* [annotation][in] */ 
+            _In_  long lMediaType,
+            /* [annotation][in] */ 
+            _In_  TERMINAL_DIRECTION Direction,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppTerminal);
         
         DECLSPEC_XFGVIRT(ITTerminalSupport, GetDefaultStaticTerminal)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDefaultStaticTerminal )( 
             __RPC__in ITTerminalSupport2 * This,
-            /* [in] */ long lMediaType,
-            /* [in] */ TERMINAL_DIRECTION Direction,
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppTerminal);
+            /* [annotation][in] */ 
+            _In_  long lMediaType,
+            /* [annotation][in] */ 
+            _In_  TERMINAL_DIRECTION Direction,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppTerminal);
         
         DECLSPEC_XFGVIRT(ITTerminalSupport2, get_PluggableSuperclasses)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PluggableSuperclasses )( 
             __RPC__in ITTerminalSupport2 * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITTerminalSupport2, EnumeratePluggableSuperclasses)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumeratePluggableSuperclasses )( 
             __RPC__in ITTerminalSupport2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumPluggableSuperclassInfo **ppSuperclassEnumerator);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumPluggableSuperclassInfo **ppSuperclassEnumerator);
         
         DECLSPEC_XFGVIRT(ITTerminalSupport2, get_PluggableTerminalClasses)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PluggableTerminalClasses )( 
             __RPC__in ITTerminalSupport2 * This,
-            /* [in] */ __RPC__in BSTR bstrTerminalSuperclass,
-            /* [in] */ long lMediaType,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrTerminalSuperclass,
+            /* [annotation][in] */ 
+            _In_  long lMediaType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITTerminalSupport2, EnumeratePluggableTerminalClasses)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumeratePluggableTerminalClasses )( 
             __RPC__in ITTerminalSupport2 * This,
-            /* [in] */ CLSID iidTerminalSuperclass,
-            /* [in] */ long lMediaType,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumPluggableTerminalClassInfo **ppClassEnumerator);
+            /* [annotation][in] */ 
+            _In_  CLSID iidTerminalSuperclass,
+            /* [annotation][in] */ 
+            _In_  long lMediaType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumPluggableTerminalClassInfo **ppClassEnumerator);
         
         END_INTERFACE
     } ITTerminalSupport2Vtbl;
@@ -2932,53 +3149,72 @@ EXTERN_C const IID IID_ITAddress;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_State( 
-            /* [retval][out] */ __RPC__out ADDRESS_STATE *pAddressState) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ADDRESS_STATE *pAddressState) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AddressName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ServiceProviderName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TAPIObject( 
-            /* [retval][out] */ __RPC__deref_out_opt ITTAPI **ppTapiObject) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTAPI **ppTapiObject) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateCall( 
-            /* [in] */ __RPC__in BSTR pDestAddress,
-            /* [in] */ long lAddressType,
-            /* [in] */ long lMediaTypes,
-            /* [retval][out] */ __RPC__deref_out_opt ITBasicCallControl **ppCall) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pDestAddress,
+            /* [annotation][in] */ 
+            _In_  long lAddressType,
+            /* [annotation][in] */ 
+            _In_  long lMediaTypes,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITBasicCallControl **ppCall) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Calls( 
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateCalls( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumCall **ppCallEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumCall **ppCallEnum) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DialableAddress( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pDialableAddress) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pDialableAddress) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateForwardInfoObject( 
-            /* [retval][out] */ __RPC__deref_out_opt ITForwardInformation **ppForwardInfo) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITForwardInformation **ppForwardInfo) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Forward( 
-            /* [in] */ __RPC__in_opt ITForwardInformation *pForwardInfo,
-            /* [in] */ __RPC__in_opt ITBasicCallControl *pCall) = 0;
+            /* [annotation][in] */ 
+            _In_  ITForwardInformation *pForwardInfo,
+            /* [annotation][in] */ 
+            _In_  ITBasicCallControl *pCall) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CurrentForwardInfo( 
-            /* [retval][out] */ __RPC__deref_out_opt ITForwardInformation **ppForwardInfo) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITForwardInformation **ppForwardInfo) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MessageWaiting( 
-            /* [in] */ VARIANT_BOOL fMessageWaiting) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fMessageWaiting) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MessageWaiting( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfMessageWaiting) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfMessageWaiting) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_DoNotDisturb( 
-            /* [in] */ VARIANT_BOOL fDoNotDisturb) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fDoNotDisturb) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DoNotDisturb( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfDoNotDisturb) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfDoNotDisturb) = 0;
         
     };
     
@@ -2992,7 +3228,8 @@ EXTERN_C const IID IID_ITAddress;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITAddress * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3007,23 +3244,31 @@ EXTERN_C const IID IID_ITAddress;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITAddress * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITAddress * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITAddress * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3048,81 +3293,100 @@ EXTERN_C const IID IID_ITAddress;
         DECLSPEC_XFGVIRT(ITAddress, get_State)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in ITAddress * This,
-            /* [retval][out] */ __RPC__out ADDRESS_STATE *pAddressState);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ADDRESS_STATE *pAddressState);
         
         DECLSPEC_XFGVIRT(ITAddress, get_AddressName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AddressName )( 
             __RPC__in ITAddress * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppName);
         
         DECLSPEC_XFGVIRT(ITAddress, get_ServiceProviderName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ServiceProviderName )( 
             __RPC__in ITAddress * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppName);
         
         DECLSPEC_XFGVIRT(ITAddress, get_TAPIObject)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TAPIObject )( 
             __RPC__in ITAddress * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITTAPI **ppTapiObject);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTAPI **ppTapiObject);
         
         DECLSPEC_XFGVIRT(ITAddress, CreateCall)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateCall )( 
             __RPC__in ITAddress * This,
-            /* [in] */ __RPC__in BSTR pDestAddress,
-            /* [in] */ long lAddressType,
-            /* [in] */ long lMediaTypes,
-            /* [retval][out] */ __RPC__deref_out_opt ITBasicCallControl **ppCall);
+            /* [annotation][in] */ 
+            _In_  BSTR pDestAddress,
+            /* [annotation][in] */ 
+            _In_  long lAddressType,
+            /* [annotation][in] */ 
+            _In_  long lMediaTypes,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITBasicCallControl **ppCall);
         
         DECLSPEC_XFGVIRT(ITAddress, get_Calls)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Calls )( 
             __RPC__in ITAddress * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITAddress, EnumerateCalls)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateCalls )( 
             __RPC__in ITAddress * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumCall **ppCallEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumCall **ppCallEnum);
         
         DECLSPEC_XFGVIRT(ITAddress, get_DialableAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DialableAddress )( 
             __RPC__in ITAddress * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pDialableAddress);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pDialableAddress);
         
         DECLSPEC_XFGVIRT(ITAddress, CreateForwardInfoObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateForwardInfoObject )( 
             __RPC__in ITAddress * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITForwardInformation **ppForwardInfo);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITForwardInformation **ppForwardInfo);
         
         DECLSPEC_XFGVIRT(ITAddress, Forward)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Forward )( 
             __RPC__in ITAddress * This,
-            /* [in] */ __RPC__in_opt ITForwardInformation *pForwardInfo,
-            /* [in] */ __RPC__in_opt ITBasicCallControl *pCall);
+            /* [annotation][in] */ 
+            _In_  ITForwardInformation *pForwardInfo,
+            /* [annotation][in] */ 
+            _In_  ITBasicCallControl *pCall);
         
         DECLSPEC_XFGVIRT(ITAddress, get_CurrentForwardInfo)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentForwardInfo )( 
             __RPC__in ITAddress * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITForwardInformation **ppForwardInfo);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITForwardInformation **ppForwardInfo);
         
         DECLSPEC_XFGVIRT(ITAddress, put_MessageWaiting)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MessageWaiting )( 
             __RPC__in ITAddress * This,
-            /* [in] */ VARIANT_BOOL fMessageWaiting);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fMessageWaiting);
         
         DECLSPEC_XFGVIRT(ITAddress, get_MessageWaiting)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MessageWaiting )( 
             __RPC__in ITAddress * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfMessageWaiting);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfMessageWaiting);
         
         DECLSPEC_XFGVIRT(ITAddress, put_DoNotDisturb)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DoNotDisturb )( 
             __RPC__in ITAddress * This,
-            /* [in] */ VARIANT_BOOL fDoNotDisturb);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fDoNotDisturb);
         
         DECLSPEC_XFGVIRT(ITAddress, get_DoNotDisturb)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DoNotDisturb )( 
             __RPC__in ITAddress * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfDoNotDisturb);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfDoNotDisturb);
         
         END_INTERFACE
     } ITAddressVtbl;
@@ -3232,44 +3496,64 @@ EXTERN_C const IID IID_ITAddress2;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Phones( 
-            /* [retval][out] */ __RPC__out VARIANT *pPhones) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pPhones) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumeratePhones( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumPhone **ppEnumPhone) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumPhone **ppEnumPhone) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetPhoneFromTerminal( 
-            /* [in] */ __RPC__in_opt ITTerminal *pTerminal,
-            /* [retval][out] */ __RPC__deref_out_opt ITPhone **ppPhone) = 0;
+            /* [annotation][in] */ 
+            _In_  ITTerminal *pTerminal,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITPhone **ppPhone) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PreferredPhones( 
-            /* [retval][out] */ __RPC__out VARIANT *pPhones) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pPhones) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumeratePreferredPhones( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumPhone **ppEnumPhone) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumPhone **ppEnumPhone) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EventFilter( 
-            /* [in] */ TAPI_EVENT TapiEvent,
-            /* [in] */ long lSubEvent,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pEnable) = 0;
+            /* [annotation][in] */ 
+            _In_  TAPI_EVENT TapiEvent,
+            /* [annotation][in] */ 
+            _In_  long lSubEvent,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pEnable) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_EventFilter( 
-            /* [in] */ TAPI_EVENT TapiEvent,
-            /* [in] */ long lSubEvent,
-            /* [in] */ VARIANT_BOOL bEnable) = 0;
+            /* [annotation][in] */ 
+            _In_  TAPI_EVENT TapiEvent,
+            /* [annotation][in] */ 
+            _In_  long lSubEvent,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bEnable) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE DeviceSpecific( 
-            /* [in] */ __RPC__in_opt ITCallInfo *pCall,
-            /* [in] */ __RPC__in BYTE *pParams,
-            /* [in] */ DWORD dwSize) = 0;
+            /* [annotation][in] */ 
+            _In_  ITCallInfo *pCall,
+            /* [annotation][in] */ 
+            _In_  BYTE *pParams,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeviceSpecificVariant( 
-            /* [in] */ __RPC__in_opt ITCallInfo *pCall,
-            /* [in] */ VARIANT varDevSpecificByteArray) = 0;
+            /* [annotation][in] */ 
+            _In_  ITCallInfo *pCall,
+            /* [annotation][in] */ 
+            _In_  VARIANT varDevSpecificByteArray) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE NegotiateExtVersion( 
-            /* [in] */ long lLowVersion,
-            /* [in] */ long lHighVersion,
-            /* [retval][out] */ __RPC__out long *plExtVersion) = 0;
+            /* [annotation][in] */ 
+            _In_  long lLowVersion,
+            /* [annotation][in] */ 
+            _In_  long lHighVersion,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plExtVersion) = 0;
         
     };
     
@@ -3283,7 +3567,8 @@ EXTERN_C const IID IID_ITAddress2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITAddress2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3298,23 +3583,31 @@ EXTERN_C const IID IID_ITAddress2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITAddress2 * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITAddress2 * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITAddress2 * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3339,141 +3632,180 @@ EXTERN_C const IID IID_ITAddress2;
         DECLSPEC_XFGVIRT(ITAddress, get_State)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in ITAddress2 * This,
-            /* [retval][out] */ __RPC__out ADDRESS_STATE *pAddressState);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ADDRESS_STATE *pAddressState);
         
         DECLSPEC_XFGVIRT(ITAddress, get_AddressName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AddressName )( 
             __RPC__in ITAddress2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppName);
         
         DECLSPEC_XFGVIRT(ITAddress, get_ServiceProviderName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ServiceProviderName )( 
             __RPC__in ITAddress2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppName);
         
         DECLSPEC_XFGVIRT(ITAddress, get_TAPIObject)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TAPIObject )( 
             __RPC__in ITAddress2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITTAPI **ppTapiObject);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTAPI **ppTapiObject);
         
         DECLSPEC_XFGVIRT(ITAddress, CreateCall)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateCall )( 
             __RPC__in ITAddress2 * This,
-            /* [in] */ __RPC__in BSTR pDestAddress,
-            /* [in] */ long lAddressType,
-            /* [in] */ long lMediaTypes,
-            /* [retval][out] */ __RPC__deref_out_opt ITBasicCallControl **ppCall);
+            /* [annotation][in] */ 
+            _In_  BSTR pDestAddress,
+            /* [annotation][in] */ 
+            _In_  long lAddressType,
+            /* [annotation][in] */ 
+            _In_  long lMediaTypes,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITBasicCallControl **ppCall);
         
         DECLSPEC_XFGVIRT(ITAddress, get_Calls)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Calls )( 
             __RPC__in ITAddress2 * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITAddress, EnumerateCalls)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateCalls )( 
             __RPC__in ITAddress2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumCall **ppCallEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumCall **ppCallEnum);
         
         DECLSPEC_XFGVIRT(ITAddress, get_DialableAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DialableAddress )( 
             __RPC__in ITAddress2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pDialableAddress);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pDialableAddress);
         
         DECLSPEC_XFGVIRT(ITAddress, CreateForwardInfoObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateForwardInfoObject )( 
             __RPC__in ITAddress2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITForwardInformation **ppForwardInfo);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITForwardInformation **ppForwardInfo);
         
         DECLSPEC_XFGVIRT(ITAddress, Forward)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Forward )( 
             __RPC__in ITAddress2 * This,
-            /* [in] */ __RPC__in_opt ITForwardInformation *pForwardInfo,
-            /* [in] */ __RPC__in_opt ITBasicCallControl *pCall);
+            /* [annotation][in] */ 
+            _In_  ITForwardInformation *pForwardInfo,
+            /* [annotation][in] */ 
+            _In_  ITBasicCallControl *pCall);
         
         DECLSPEC_XFGVIRT(ITAddress, get_CurrentForwardInfo)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentForwardInfo )( 
             __RPC__in ITAddress2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITForwardInformation **ppForwardInfo);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITForwardInformation **ppForwardInfo);
         
         DECLSPEC_XFGVIRT(ITAddress, put_MessageWaiting)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MessageWaiting )( 
             __RPC__in ITAddress2 * This,
-            /* [in] */ VARIANT_BOOL fMessageWaiting);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fMessageWaiting);
         
         DECLSPEC_XFGVIRT(ITAddress, get_MessageWaiting)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MessageWaiting )( 
             __RPC__in ITAddress2 * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfMessageWaiting);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfMessageWaiting);
         
         DECLSPEC_XFGVIRT(ITAddress, put_DoNotDisturb)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DoNotDisturb )( 
             __RPC__in ITAddress2 * This,
-            /* [in] */ VARIANT_BOOL fDoNotDisturb);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fDoNotDisturb);
         
         DECLSPEC_XFGVIRT(ITAddress, get_DoNotDisturb)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DoNotDisturb )( 
             __RPC__in ITAddress2 * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfDoNotDisturb);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfDoNotDisturb);
         
         DECLSPEC_XFGVIRT(ITAddress2, get_Phones)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Phones )( 
             __RPC__in ITAddress2 * This,
-            /* [retval][out] */ __RPC__out VARIANT *pPhones);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pPhones);
         
         DECLSPEC_XFGVIRT(ITAddress2, EnumeratePhones)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumeratePhones )( 
             __RPC__in ITAddress2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumPhone **ppEnumPhone);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumPhone **ppEnumPhone);
         
         DECLSPEC_XFGVIRT(ITAddress2, GetPhoneFromTerminal)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetPhoneFromTerminal )( 
             __RPC__in ITAddress2 * This,
-            /* [in] */ __RPC__in_opt ITTerminal *pTerminal,
-            /* [retval][out] */ __RPC__deref_out_opt ITPhone **ppPhone);
+            /* [annotation][in] */ 
+            _In_  ITTerminal *pTerminal,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITPhone **ppPhone);
         
         DECLSPEC_XFGVIRT(ITAddress2, get_PreferredPhones)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PreferredPhones )( 
             __RPC__in ITAddress2 * This,
-            /* [retval][out] */ __RPC__out VARIANT *pPhones);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pPhones);
         
         DECLSPEC_XFGVIRT(ITAddress2, EnumeratePreferredPhones)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumeratePreferredPhones )( 
             __RPC__in ITAddress2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumPhone **ppEnumPhone);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumPhone **ppEnumPhone);
         
         DECLSPEC_XFGVIRT(ITAddress2, get_EventFilter)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EventFilter )( 
             __RPC__in ITAddress2 * This,
-            /* [in] */ TAPI_EVENT TapiEvent,
-            /* [in] */ long lSubEvent,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pEnable);
+            /* [annotation][in] */ 
+            _In_  TAPI_EVENT TapiEvent,
+            /* [annotation][in] */ 
+            _In_  long lSubEvent,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pEnable);
         
         DECLSPEC_XFGVIRT(ITAddress2, put_EventFilter)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EventFilter )( 
             __RPC__in ITAddress2 * This,
-            /* [in] */ TAPI_EVENT TapiEvent,
-            /* [in] */ long lSubEvent,
-            /* [in] */ VARIANT_BOOL bEnable);
+            /* [annotation][in] */ 
+            _In_  TAPI_EVENT TapiEvent,
+            /* [annotation][in] */ 
+            _In_  long lSubEvent,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bEnable);
         
         DECLSPEC_XFGVIRT(ITAddress2, DeviceSpecific)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *DeviceSpecific )( 
             __RPC__in ITAddress2 * This,
-            /* [in] */ __RPC__in_opt ITCallInfo *pCall,
-            /* [in] */ __RPC__in BYTE *pParams,
-            /* [in] */ DWORD dwSize);
+            /* [annotation][in] */ 
+            _In_  ITCallInfo *pCall,
+            /* [annotation][in] */ 
+            _In_  BYTE *pParams,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize);
         
         DECLSPEC_XFGVIRT(ITAddress2, DeviceSpecificVariant)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeviceSpecificVariant )( 
             __RPC__in ITAddress2 * This,
-            /* [in] */ __RPC__in_opt ITCallInfo *pCall,
-            /* [in] */ VARIANT varDevSpecificByteArray);
+            /* [annotation][in] */ 
+            _In_  ITCallInfo *pCall,
+            /* [annotation][in] */ 
+            _In_  VARIANT varDevSpecificByteArray);
         
         DECLSPEC_XFGVIRT(ITAddress2, NegotiateExtVersion)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *NegotiateExtVersion )( 
             __RPC__in ITAddress2 * This,
-            /* [in] */ long lLowVersion,
-            /* [in] */ long lHighVersion,
-            /* [retval][out] */ __RPC__out long *plExtVersion);
+            /* [annotation][in] */ 
+            _In_  long lLowVersion,
+            /* [annotation][in] */ 
+            _In_  long lHighVersion,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plExtVersion);
         
         END_INTERFACE
     } ITAddress2Vtbl;
@@ -3614,30 +3946,40 @@ EXTERN_C const IID IID_ITAddressCapabilities;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AddressCapability( 
-            /* [in] */ ADDRESS_CAPABILITY AddressCap,
-            /* [retval][out] */ __RPC__out long *plCapability) = 0;
+            /* [annotation][in] */ 
+            _In_  ADDRESS_CAPABILITY AddressCap,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCapability) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AddressCapabilityString( 
-            /* [in] */ ADDRESS_CAPABILITY_STRING AddressCapString,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppCapabilityString) = 0;
+            /* [annotation][in] */ 
+            _In_  ADDRESS_CAPABILITY_STRING AddressCapString,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppCapabilityString) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CallTreatments( 
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
         virtual /* [hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateCallTreatments( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumBstr **ppEnumCallTreatment) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumBstr **ppEnumCallTreatment) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CompletionMessages( 
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
         virtual /* [hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateCompletionMessages( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumBstr **ppEnumCompletionMessage) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumBstr **ppEnumCompletionMessage) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DeviceClasses( 
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
         virtual /* [hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateDeviceClasses( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumBstr **ppEnumDeviceClass) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumBstr **ppEnumDeviceClass) = 0;
         
     };
     
@@ -3651,7 +3993,8 @@ EXTERN_C const IID IID_ITAddressCapabilities;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITAddressCapabilities * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3666,23 +4009,31 @@ EXTERN_C const IID IID_ITAddressCapabilities;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITAddressCapabilities * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITAddressCapabilities * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITAddressCapabilities * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3707,44 +4058,54 @@ EXTERN_C const IID IID_ITAddressCapabilities;
         DECLSPEC_XFGVIRT(ITAddressCapabilities, get_AddressCapability)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AddressCapability )( 
             __RPC__in ITAddressCapabilities * This,
-            /* [in] */ ADDRESS_CAPABILITY AddressCap,
-            /* [retval][out] */ __RPC__out long *plCapability);
+            /* [annotation][in] */ 
+            _In_  ADDRESS_CAPABILITY AddressCap,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCapability);
         
         DECLSPEC_XFGVIRT(ITAddressCapabilities, get_AddressCapabilityString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AddressCapabilityString )( 
             __RPC__in ITAddressCapabilities * This,
-            /* [in] */ ADDRESS_CAPABILITY_STRING AddressCapString,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppCapabilityString);
+            /* [annotation][in] */ 
+            _In_  ADDRESS_CAPABILITY_STRING AddressCapString,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppCapabilityString);
         
         DECLSPEC_XFGVIRT(ITAddressCapabilities, get_CallTreatments)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallTreatments )( 
             __RPC__in ITAddressCapabilities * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITAddressCapabilities, EnumerateCallTreatments)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateCallTreatments )( 
             __RPC__in ITAddressCapabilities * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumBstr **ppEnumCallTreatment);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumBstr **ppEnumCallTreatment);
         
         DECLSPEC_XFGVIRT(ITAddressCapabilities, get_CompletionMessages)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CompletionMessages )( 
             __RPC__in ITAddressCapabilities * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITAddressCapabilities, EnumerateCompletionMessages)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateCompletionMessages )( 
             __RPC__in ITAddressCapabilities * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumBstr **ppEnumCompletionMessage);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumBstr **ppEnumCompletionMessage);
         
         DECLSPEC_XFGVIRT(ITAddressCapabilities, get_DeviceClasses)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeviceClasses )( 
             __RPC__in ITAddressCapabilities * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITAddressCapabilities, EnumerateDeviceClasses)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateDeviceClasses )( 
             __RPC__in ITAddressCapabilities * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumBstr **ppEnumDeviceClass);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumBstr **ppEnumDeviceClass);
         
         END_INTERFACE
     } ITAddressCapabilitiesVtbl;
@@ -3833,125 +4194,180 @@ EXTERN_C const IID IID_ITPhone;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Open( 
-            /* [in] */ PHONE_PRIVILEGE Privilege) = 0;
+            /* [annotation][in] */ 
+            _In_  PHONE_PRIVILEGE Privilege) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Close( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Addresses( 
-            /* [retval][out] */ __RPC__out VARIANT *pAddresses) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pAddresses) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateAddresses( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumAddress **ppEnumAddress) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumAddress **ppEnumAddress) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PhoneCapsLong( 
-            /* [in] */ PHONECAPS_LONG pclCap,
-            /* [retval][out] */ __RPC__out long *plCapability) = 0;
+            /* [annotation][in] */ 
+            _In_  PHONECAPS_LONG pclCap,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCapability) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PhoneCapsString( 
-            /* [in] */ PHONECAPS_STRING pcsCap,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppCapability) = 0;
+            /* [annotation][in] */ 
+            _In_  PHONECAPS_STRING pcsCap,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppCapability) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Terminals( 
-            /* [in] */ __RPC__in_opt ITAddress *pAddress,
-            /* [retval][out] */ __RPC__out VARIANT *pTerminals) = 0;
+            /* [annotation][in] */ 
+            _In_  ITAddress *pAddress,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pTerminals) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateTerminals( 
-            /* [in] */ __RPC__in_opt ITAddress *pAddress,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumTerminal **ppEnumTerminal) = 0;
+            /* [annotation][in] */ 
+            _In_  ITAddress *pAddress,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumTerminal **ppEnumTerminal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ButtonMode( 
-            /* [in] */ long lButtonID,
-            /* [retval][out] */ __RPC__out PHONE_BUTTON_MODE *pButtonMode) = 0;
+            /* [annotation][in] */ 
+            _In_  long lButtonID,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PHONE_BUTTON_MODE *pButtonMode) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ButtonMode( 
-            /* [in] */ long lButtonID,
-            /* [in] */ PHONE_BUTTON_MODE ButtonMode) = 0;
+            /* [annotation][in] */ 
+            _In_  long lButtonID,
+            /* [annotation][in] */ 
+            _In_  PHONE_BUTTON_MODE ButtonMode) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ButtonFunction( 
-            /* [in] */ long lButtonID,
-            /* [retval][out] */ __RPC__out PHONE_BUTTON_FUNCTION *pButtonFunction) = 0;
+            /* [annotation][in] */ 
+            _In_  long lButtonID,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PHONE_BUTTON_FUNCTION *pButtonFunction) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ButtonFunction( 
-            /* [in] */ long lButtonID,
-            /* [in] */ PHONE_BUTTON_FUNCTION ButtonFunction) = 0;
+            /* [annotation][in] */ 
+            _In_  long lButtonID,
+            /* [annotation][in] */ 
+            _In_  PHONE_BUTTON_FUNCTION ButtonFunction) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ButtonText( 
-            /* [in] */ long lButtonID,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppButtonText) = 0;
+            /* [annotation][in] */ 
+            _In_  long lButtonID,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppButtonText) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ButtonText( 
-            /* [in] */ long lButtonID,
-            /* [in] */ __RPC__in BSTR bstrButtonText) = 0;
+            /* [annotation][in] */ 
+            _In_  long lButtonID,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrButtonText) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ButtonState( 
-            /* [in] */ long lButtonID,
-            /* [retval][out] */ __RPC__out PHONE_BUTTON_STATE *pButtonState) = 0;
+            /* [annotation][in] */ 
+            _In_  long lButtonID,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PHONE_BUTTON_STATE *pButtonState) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_HookSwitchState( 
-            /* [in] */ PHONE_HOOK_SWITCH_DEVICE HookSwitchDevice,
-            /* [retval][out] */ __RPC__out PHONE_HOOK_SWITCH_STATE *pHookSwitchState) = 0;
+            /* [annotation][in] */ 
+            _In_  PHONE_HOOK_SWITCH_DEVICE HookSwitchDevice,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PHONE_HOOK_SWITCH_STATE *pHookSwitchState) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_HookSwitchState( 
-            /* [in] */ PHONE_HOOK_SWITCH_DEVICE HookSwitchDevice,
-            /* [in] */ PHONE_HOOK_SWITCH_STATE HookSwitchState) = 0;
+            /* [annotation][in] */ 
+            _In_  PHONE_HOOK_SWITCH_DEVICE HookSwitchDevice,
+            /* [annotation][in] */ 
+            _In_  PHONE_HOOK_SWITCH_STATE HookSwitchState) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_RingMode( 
-            /* [in] */ long lRingMode) = 0;
+            /* [annotation][in] */ 
+            _In_  long lRingMode) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RingMode( 
-            /* [retval][out] */ __RPC__out long *plRingMode) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plRingMode) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_RingVolume( 
-            /* [in] */ long lRingVolume) = 0;
+            /* [annotation][in] */ 
+            _In_  long lRingVolume) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RingVolume( 
-            /* [retval][out] */ __RPC__out long *plRingVolume) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plRingVolume) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Privilege( 
-            /* [retval][out] */ __RPC__out PHONE_PRIVILEGE *pPrivilege) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PHONE_PRIVILEGE *pPrivilege) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE GetPhoneCapsBuffer( 
-            /* [in] */ PHONECAPS_BUFFER pcbCaps,
-            /* [out] */ __RPC__out DWORD *pdwSize,
-            /* [out] */ __RPC__deref_out_opt BYTE **ppPhoneCapsBuffer) = 0;
+            /* [annotation][in] */ 
+            _In_  PHONECAPS_BUFFER pcbCaps,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSize,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppPhoneCapsBuffer) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PhoneCapsBuffer( 
-            /* [in] */ PHONECAPS_BUFFER pcbCaps,
-            /* [retval][out] */ __RPC__out VARIANT *pVarBuffer) = 0;
+            /* [annotation][in] */ 
+            _In_  PHONECAPS_BUFFER pcbCaps,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVarBuffer) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LampMode( 
-            /* [in] */ long lLampID,
-            /* [retval][out] */ __RPC__out PHONE_LAMP_MODE *pLampMode) = 0;
+            /* [annotation][in] */ 
+            _In_  long lLampID,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PHONE_LAMP_MODE *pLampMode) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_LampMode( 
-            /* [in] */ long lLampID,
-            /* [in] */ PHONE_LAMP_MODE LampMode) = 0;
+            /* [annotation][in] */ 
+            _In_  long lLampID,
+            /* [annotation][in] */ 
+            _In_  PHONE_LAMP_MODE LampMode) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Display( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDisplay) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pbstrDisplay) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetDisplay( 
-            /* [in] */ long lRow,
-            /* [in] */ long lColumn,
-            /* [in] */ __RPC__in BSTR bstrDisplay) = 0;
+            /* [annotation][in] */ 
+            _In_  long lRow,
+            /* [annotation][in] */ 
+            _In_  long lColumn,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrDisplay) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PreferredAddresses( 
-            /* [retval][out] */ __RPC__out VARIANT *pAddresses) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pAddresses) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumeratePreferredAddresses( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumAddress **ppEnumAddress) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumAddress **ppEnumAddress) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE DeviceSpecific( 
-            /* [in] */ __RPC__in BYTE *pParams,
-            /* [in] */ DWORD dwSize) = 0;
+            /* [annotation][in] */ 
+            _In_  BYTE *pParams,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeviceSpecificVariant( 
-            /* [in] */ VARIANT varDevSpecificByteArray) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT varDevSpecificByteArray) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE NegotiateExtVersion( 
-            /* [in] */ long lLowVersion,
-            /* [in] */ long lHighVersion,
-            /* [retval][out] */ __RPC__out long *plExtVersion) = 0;
+            /* [annotation][in] */ 
+            _In_  long lLowVersion,
+            /* [annotation][in] */ 
+            _In_  long lHighVersion,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plExtVersion) = 0;
         
     };
     
@@ -3965,7 +4381,8 @@ EXTERN_C const IID IID_ITPhone;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITPhone * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3980,23 +4397,31 @@ EXTERN_C const IID IID_ITPhone;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITPhone * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITPhone * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITPhone * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4021,7 +4446,8 @@ EXTERN_C const IID IID_ITPhone;
         DECLSPEC_XFGVIRT(ITPhone, Open)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Open )( 
             __RPC__in ITPhone * This,
-            /* [in] */ PHONE_PRIVILEGE Privilege);
+            /* [annotation][in] */ 
+            _In_  PHONE_PRIVILEGE Privilege);
         
         DECLSPEC_XFGVIRT(ITPhone, Close)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Close )( 
@@ -4030,180 +4456,234 @@ EXTERN_C const IID IID_ITPhone;
         DECLSPEC_XFGVIRT(ITPhone, get_Addresses)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Addresses )( 
             __RPC__in ITPhone * This,
-            /* [retval][out] */ __RPC__out VARIANT *pAddresses);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pAddresses);
         
         DECLSPEC_XFGVIRT(ITPhone, EnumerateAddresses)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateAddresses )( 
             __RPC__in ITPhone * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumAddress **ppEnumAddress);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumAddress **ppEnumAddress);
         
         DECLSPEC_XFGVIRT(ITPhone, get_PhoneCapsLong)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PhoneCapsLong )( 
             __RPC__in ITPhone * This,
-            /* [in] */ PHONECAPS_LONG pclCap,
-            /* [retval][out] */ __RPC__out long *plCapability);
+            /* [annotation][in] */ 
+            _In_  PHONECAPS_LONG pclCap,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCapability);
         
         DECLSPEC_XFGVIRT(ITPhone, get_PhoneCapsString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PhoneCapsString )( 
             __RPC__in ITPhone * This,
-            /* [in] */ PHONECAPS_STRING pcsCap,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppCapability);
+            /* [annotation][in] */ 
+            _In_  PHONECAPS_STRING pcsCap,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppCapability);
         
         DECLSPEC_XFGVIRT(ITPhone, get_Terminals)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Terminals )( 
             __RPC__in ITPhone * This,
-            /* [in] */ __RPC__in_opt ITAddress *pAddress,
-            /* [retval][out] */ __RPC__out VARIANT *pTerminals);
+            /* [annotation][in] */ 
+            _In_  ITAddress *pAddress,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pTerminals);
         
         DECLSPEC_XFGVIRT(ITPhone, EnumerateTerminals)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateTerminals )( 
             __RPC__in ITPhone * This,
-            /* [in] */ __RPC__in_opt ITAddress *pAddress,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumTerminal **ppEnumTerminal);
+            /* [annotation][in] */ 
+            _In_  ITAddress *pAddress,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumTerminal **ppEnumTerminal);
         
         DECLSPEC_XFGVIRT(ITPhone, get_ButtonMode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ButtonMode )( 
             __RPC__in ITPhone * This,
-            /* [in] */ long lButtonID,
-            /* [retval][out] */ __RPC__out PHONE_BUTTON_MODE *pButtonMode);
+            /* [annotation][in] */ 
+            _In_  long lButtonID,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PHONE_BUTTON_MODE *pButtonMode);
         
         DECLSPEC_XFGVIRT(ITPhone, put_ButtonMode)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ButtonMode )( 
             __RPC__in ITPhone * This,
-            /* [in] */ long lButtonID,
-            /* [in] */ PHONE_BUTTON_MODE ButtonMode);
+            /* [annotation][in] */ 
+            _In_  long lButtonID,
+            /* [annotation][in] */ 
+            _In_  PHONE_BUTTON_MODE ButtonMode);
         
         DECLSPEC_XFGVIRT(ITPhone, get_ButtonFunction)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ButtonFunction )( 
             __RPC__in ITPhone * This,
-            /* [in] */ long lButtonID,
-            /* [retval][out] */ __RPC__out PHONE_BUTTON_FUNCTION *pButtonFunction);
+            /* [annotation][in] */ 
+            _In_  long lButtonID,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PHONE_BUTTON_FUNCTION *pButtonFunction);
         
         DECLSPEC_XFGVIRT(ITPhone, put_ButtonFunction)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ButtonFunction )( 
             __RPC__in ITPhone * This,
-            /* [in] */ long lButtonID,
-            /* [in] */ PHONE_BUTTON_FUNCTION ButtonFunction);
+            /* [annotation][in] */ 
+            _In_  long lButtonID,
+            /* [annotation][in] */ 
+            _In_  PHONE_BUTTON_FUNCTION ButtonFunction);
         
         DECLSPEC_XFGVIRT(ITPhone, get_ButtonText)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ButtonText )( 
             __RPC__in ITPhone * This,
-            /* [in] */ long lButtonID,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppButtonText);
+            /* [annotation][in] */ 
+            _In_  long lButtonID,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppButtonText);
         
         DECLSPEC_XFGVIRT(ITPhone, put_ButtonText)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ButtonText )( 
             __RPC__in ITPhone * This,
-            /* [in] */ long lButtonID,
-            /* [in] */ __RPC__in BSTR bstrButtonText);
+            /* [annotation][in] */ 
+            _In_  long lButtonID,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrButtonText);
         
         DECLSPEC_XFGVIRT(ITPhone, get_ButtonState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ButtonState )( 
             __RPC__in ITPhone * This,
-            /* [in] */ long lButtonID,
-            /* [retval][out] */ __RPC__out PHONE_BUTTON_STATE *pButtonState);
+            /* [annotation][in] */ 
+            _In_  long lButtonID,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PHONE_BUTTON_STATE *pButtonState);
         
         DECLSPEC_XFGVIRT(ITPhone, get_HookSwitchState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_HookSwitchState )( 
             __RPC__in ITPhone * This,
-            /* [in] */ PHONE_HOOK_SWITCH_DEVICE HookSwitchDevice,
-            /* [retval][out] */ __RPC__out PHONE_HOOK_SWITCH_STATE *pHookSwitchState);
+            /* [annotation][in] */ 
+            _In_  PHONE_HOOK_SWITCH_DEVICE HookSwitchDevice,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PHONE_HOOK_SWITCH_STATE *pHookSwitchState);
         
         DECLSPEC_XFGVIRT(ITPhone, put_HookSwitchState)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_HookSwitchState )( 
             __RPC__in ITPhone * This,
-            /* [in] */ PHONE_HOOK_SWITCH_DEVICE HookSwitchDevice,
-            /* [in] */ PHONE_HOOK_SWITCH_STATE HookSwitchState);
+            /* [annotation][in] */ 
+            _In_  PHONE_HOOK_SWITCH_DEVICE HookSwitchDevice,
+            /* [annotation][in] */ 
+            _In_  PHONE_HOOK_SWITCH_STATE HookSwitchState);
         
         DECLSPEC_XFGVIRT(ITPhone, put_RingMode)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_RingMode )( 
             __RPC__in ITPhone * This,
-            /* [in] */ long lRingMode);
+            /* [annotation][in] */ 
+            _In_  long lRingMode);
         
         DECLSPEC_XFGVIRT(ITPhone, get_RingMode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RingMode )( 
             __RPC__in ITPhone * This,
-            /* [retval][out] */ __RPC__out long *plRingMode);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plRingMode);
         
         DECLSPEC_XFGVIRT(ITPhone, put_RingVolume)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_RingVolume )( 
             __RPC__in ITPhone * This,
-            /* [in] */ long lRingVolume);
+            /* [annotation][in] */ 
+            _In_  long lRingVolume);
         
         DECLSPEC_XFGVIRT(ITPhone, get_RingVolume)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RingVolume )( 
             __RPC__in ITPhone * This,
-            /* [retval][out] */ __RPC__out long *plRingVolume);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plRingVolume);
         
         DECLSPEC_XFGVIRT(ITPhone, get_Privilege)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Privilege )( 
             __RPC__in ITPhone * This,
-            /* [retval][out] */ __RPC__out PHONE_PRIVILEGE *pPrivilege);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PHONE_PRIVILEGE *pPrivilege);
         
         DECLSPEC_XFGVIRT(ITPhone, GetPhoneCapsBuffer)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *GetPhoneCapsBuffer )( 
             __RPC__in ITPhone * This,
-            /* [in] */ PHONECAPS_BUFFER pcbCaps,
-            /* [out] */ __RPC__out DWORD *pdwSize,
-            /* [out] */ __RPC__deref_out_opt BYTE **ppPhoneCapsBuffer);
+            /* [annotation][in] */ 
+            _In_  PHONECAPS_BUFFER pcbCaps,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSize,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppPhoneCapsBuffer);
         
         DECLSPEC_XFGVIRT(ITPhone, get_PhoneCapsBuffer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PhoneCapsBuffer )( 
             __RPC__in ITPhone * This,
-            /* [in] */ PHONECAPS_BUFFER pcbCaps,
-            /* [retval][out] */ __RPC__out VARIANT *pVarBuffer);
+            /* [annotation][in] */ 
+            _In_  PHONECAPS_BUFFER pcbCaps,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVarBuffer);
         
         DECLSPEC_XFGVIRT(ITPhone, get_LampMode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LampMode )( 
             __RPC__in ITPhone * This,
-            /* [in] */ long lLampID,
-            /* [retval][out] */ __RPC__out PHONE_LAMP_MODE *pLampMode);
+            /* [annotation][in] */ 
+            _In_  long lLampID,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PHONE_LAMP_MODE *pLampMode);
         
         DECLSPEC_XFGVIRT(ITPhone, put_LampMode)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LampMode )( 
             __RPC__in ITPhone * This,
-            /* [in] */ long lLampID,
-            /* [in] */ PHONE_LAMP_MODE LampMode);
+            /* [annotation][in] */ 
+            _In_  long lLampID,
+            /* [annotation][in] */ 
+            _In_  PHONE_LAMP_MODE LampMode);
         
         DECLSPEC_XFGVIRT(ITPhone, get_Display)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Display )( 
             __RPC__in ITPhone * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDisplay);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pbstrDisplay);
         
         DECLSPEC_XFGVIRT(ITPhone, SetDisplay)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetDisplay )( 
             __RPC__in ITPhone * This,
-            /* [in] */ long lRow,
-            /* [in] */ long lColumn,
-            /* [in] */ __RPC__in BSTR bstrDisplay);
+            /* [annotation][in] */ 
+            _In_  long lRow,
+            /* [annotation][in] */ 
+            _In_  long lColumn,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrDisplay);
         
         DECLSPEC_XFGVIRT(ITPhone, get_PreferredAddresses)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PreferredAddresses )( 
             __RPC__in ITPhone * This,
-            /* [retval][out] */ __RPC__out VARIANT *pAddresses);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pAddresses);
         
         DECLSPEC_XFGVIRT(ITPhone, EnumeratePreferredAddresses)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumeratePreferredAddresses )( 
             __RPC__in ITPhone * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumAddress **ppEnumAddress);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumAddress **ppEnumAddress);
         
         DECLSPEC_XFGVIRT(ITPhone, DeviceSpecific)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *DeviceSpecific )( 
             __RPC__in ITPhone * This,
-            /* [in] */ __RPC__in BYTE *pParams,
-            /* [in] */ DWORD dwSize);
+            /* [annotation][in] */ 
+            _In_  BYTE *pParams,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize);
         
         DECLSPEC_XFGVIRT(ITPhone, DeviceSpecificVariant)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeviceSpecificVariant )( 
             __RPC__in ITPhone * This,
-            /* [in] */ VARIANT varDevSpecificByteArray);
+            /* [annotation][in] */ 
+            _In_  VARIANT varDevSpecificByteArray);
         
         DECLSPEC_XFGVIRT(ITPhone, NegotiateExtVersion)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *NegotiateExtVersion )( 
             __RPC__in ITPhone * This,
-            /* [in] */ long lLowVersion,
-            /* [in] */ long lHighVersion,
-            /* [retval][out] */ __RPC__out long *plExtVersion);
+            /* [annotation][in] */ 
+            _In_  long lLowVersion,
+            /* [annotation][in] */ 
+            _In_  long lHighVersion,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plExtVersion);
         
         END_INTERFACE
     } ITPhoneVtbl;
@@ -4367,101 +4847,134 @@ EXTERN_C const IID IID_ITAutomatedPhoneControl;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE StartTone( 
-            /* [in] */ PHONE_TONE Tone,
-            /* [in] */ long lDuration) = 0;
+            /* [annotation][in] */ 
+            _In_  PHONE_TONE Tone,
+            /* [annotation][in] */ 
+            _In_  long lDuration) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE StopTone( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Tone( 
-            /* [retval][out] */ __RPC__out PHONE_TONE *pTone) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PHONE_TONE *pTone) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE StartRinger( 
-            /* [in] */ long lRingMode,
-            /* [in] */ long lDuration) = 0;
+            /* [annotation][in] */ 
+            _In_  long lRingMode,
+            /* [annotation][in] */ 
+            _In_  long lDuration) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE StopRinger( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Ringer( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfRinging) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfRinging) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PhoneHandlingEnabled( 
-            /* [in] */ VARIANT_BOOL fEnabled) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fEnabled) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PhoneHandlingEnabled( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfEnabled) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_AutoEndOfNumberTimeout( 
-            /* [in] */ long lTimeout) = 0;
+            /* [annotation][in] */ 
+            _In_  long lTimeout) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AutoEndOfNumberTimeout( 
-            /* [retval][out] */ __RPC__out long *plTimeout) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plTimeout) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_AutoDialtone( 
-            /* [in] */ VARIANT_BOOL fEnabled) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fEnabled) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AutoDialtone( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfEnabled) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_AutoStopTonesOnOnHook( 
-            /* [in] */ VARIANT_BOOL fEnabled) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fEnabled) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AutoStopTonesOnOnHook( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfEnabled) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_AutoStopRingOnOffHook( 
-            /* [in] */ VARIANT_BOOL fEnabled) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fEnabled) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AutoStopRingOnOffHook( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfEnabled) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_AutoKeypadTones( 
-            /* [in] */ VARIANT_BOOL fEnabled) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fEnabled) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AutoKeypadTones( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfEnabled) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_AutoKeypadTonesMinimumDuration( 
-            /* [in] */ long lDuration) = 0;
+            /* [annotation][in] */ 
+            _In_  long lDuration) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AutoKeypadTonesMinimumDuration( 
-            /* [retval][out] */ __RPC__out long *plDuration) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plDuration) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_AutoVolumeControl( 
-            /* [in] */ VARIANT_BOOL fEnabled) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fEnabled) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AutoVolumeControl( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *fEnabled) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *fEnabled) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_AutoVolumeControlStep( 
-            /* [in] */ long lStepSize) = 0;
+            /* [annotation][in] */ 
+            _In_  long lStepSize) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AutoVolumeControlStep( 
-            /* [retval][out] */ __RPC__out long *plStepSize) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plStepSize) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_AutoVolumeControlRepeatDelay( 
-            /* [in] */ long lDelay) = 0;
+            /* [annotation][in] */ 
+            _In_  long lDelay) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AutoVolumeControlRepeatDelay( 
-            /* [retval][out] */ __RPC__out long *plDelay) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plDelay) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_AutoVolumeControlRepeatPeriod( 
-            /* [in] */ long lPeriod) = 0;
+            /* [annotation][in] */ 
+            _In_  long lPeriod) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AutoVolumeControlRepeatPeriod( 
-            /* [retval][out] */ __RPC__out long *plPeriod) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plPeriod) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SelectCall( 
-            /* [in] */ __RPC__in_opt ITCallInfo *pCall,
-            /* [in] */ VARIANT_BOOL fSelectDefaultTerminals) = 0;
+            /* [annotation][in] */ 
+            _In_  ITCallInfo *pCall,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fSelectDefaultTerminals) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE UnselectCall( 
-            /* [in] */ __RPC__in_opt ITCallInfo *pCall) = 0;
+            /* [annotation][in] */ 
+            _In_  ITCallInfo *pCall) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateSelectedCalls( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumCall **ppCallEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumCall **ppCallEnum) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SelectedCalls( 
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
     };
     
@@ -4475,7 +4988,8 @@ EXTERN_C const IID IID_ITAutomatedPhoneControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4490,23 +5004,31 @@ EXTERN_C const IID IID_ITAutomatedPhoneControl;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4531,8 +5053,10 @@ EXTERN_C const IID IID_ITAutomatedPhoneControl;
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, StartTone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StartTone )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [in] */ PHONE_TONE Tone,
-            /* [in] */ long lDuration);
+            /* [annotation][in] */ 
+            _In_  PHONE_TONE Tone,
+            /* [annotation][in] */ 
+            _In_  long lDuration);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, StopTone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StopTone )( 
@@ -4541,13 +5065,16 @@ EXTERN_C const IID IID_ITAutomatedPhoneControl;
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, get_Tone)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Tone )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [retval][out] */ __RPC__out PHONE_TONE *pTone);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PHONE_TONE *pTone);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, StartRinger)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StartRinger )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [in] */ long lRingMode,
-            /* [in] */ long lDuration);
+            /* [annotation][in] */ 
+            _In_  long lRingMode,
+            /* [annotation][in] */ 
+            _In_  long lDuration);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, StopRinger)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StopRinger )( 
@@ -4556,138 +5083,166 @@ EXTERN_C const IID IID_ITAutomatedPhoneControl;
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, get_Ringer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Ringer )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfRinging);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfRinging);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, put_PhoneHandlingEnabled)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PhoneHandlingEnabled )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [in] */ VARIANT_BOOL fEnabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fEnabled);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, get_PhoneHandlingEnabled)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PhoneHandlingEnabled )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, put_AutoEndOfNumberTimeout)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AutoEndOfNumberTimeout )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [in] */ long lTimeout);
+            /* [annotation][in] */ 
+            _In_  long lTimeout);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, get_AutoEndOfNumberTimeout)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AutoEndOfNumberTimeout )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [retval][out] */ __RPC__out long *plTimeout);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plTimeout);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, put_AutoDialtone)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AutoDialtone )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [in] */ VARIANT_BOOL fEnabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fEnabled);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, get_AutoDialtone)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AutoDialtone )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, put_AutoStopTonesOnOnHook)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AutoStopTonesOnOnHook )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [in] */ VARIANT_BOOL fEnabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fEnabled);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, get_AutoStopTonesOnOnHook)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AutoStopTonesOnOnHook )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, put_AutoStopRingOnOffHook)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AutoStopRingOnOffHook )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [in] */ VARIANT_BOOL fEnabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fEnabled);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, get_AutoStopRingOnOffHook)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AutoStopRingOnOffHook )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, put_AutoKeypadTones)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AutoKeypadTones )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [in] */ VARIANT_BOOL fEnabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fEnabled);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, get_AutoKeypadTones)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AutoKeypadTones )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, put_AutoKeypadTonesMinimumDuration)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AutoKeypadTonesMinimumDuration )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [in] */ long lDuration);
+            /* [annotation][in] */ 
+            _In_  long lDuration);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, get_AutoKeypadTonesMinimumDuration)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AutoKeypadTonesMinimumDuration )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [retval][out] */ __RPC__out long *plDuration);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plDuration);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, put_AutoVolumeControl)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AutoVolumeControl )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [in] */ VARIANT_BOOL fEnabled);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fEnabled);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, get_AutoVolumeControl)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AutoVolumeControl )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *fEnabled);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *fEnabled);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, put_AutoVolumeControlStep)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AutoVolumeControlStep )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [in] */ long lStepSize);
+            /* [annotation][in] */ 
+            _In_  long lStepSize);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, get_AutoVolumeControlStep)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AutoVolumeControlStep )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [retval][out] */ __RPC__out long *plStepSize);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plStepSize);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, put_AutoVolumeControlRepeatDelay)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AutoVolumeControlRepeatDelay )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [in] */ long lDelay);
+            /* [annotation][in] */ 
+            _In_  long lDelay);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, get_AutoVolumeControlRepeatDelay)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AutoVolumeControlRepeatDelay )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [retval][out] */ __RPC__out long *plDelay);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plDelay);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, put_AutoVolumeControlRepeatPeriod)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AutoVolumeControlRepeatPeriod )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [in] */ long lPeriod);
+            /* [annotation][in] */ 
+            _In_  long lPeriod);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, get_AutoVolumeControlRepeatPeriod)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AutoVolumeControlRepeatPeriod )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [retval][out] */ __RPC__out long *plPeriod);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plPeriod);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, SelectCall)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SelectCall )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [in] */ __RPC__in_opt ITCallInfo *pCall,
-            /* [in] */ VARIANT_BOOL fSelectDefaultTerminals);
+            /* [annotation][in] */ 
+            _In_  ITCallInfo *pCall,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fSelectDefaultTerminals);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, UnselectCall)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *UnselectCall )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [in] */ __RPC__in_opt ITCallInfo *pCall);
+            /* [annotation][in] */ 
+            _In_  ITCallInfo *pCall);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, EnumerateSelectedCalls)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateSelectedCalls )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumCall **ppCallEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumCall **ppCallEnum);
         
         DECLSPEC_XFGVIRT(ITAutomatedPhoneControl, get_SelectedCalls)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SelectedCalls )( 
             __RPC__in ITAutomatedPhoneControl * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         END_INTERFACE
     } ITAutomatedPhoneControlVtbl;
@@ -4848,56 +5403,74 @@ EXTERN_C const IID IID_ITBasicCallControl;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Connect( 
-            /* [in] */ VARIANT_BOOL fSync) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fSync) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Answer( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Disconnect( 
-            /* [in] */ DISCONNECT_CODE code) = 0;
+            /* [annotation][in] */ 
+            _In_  DISCONNECT_CODE code) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Hold( 
-            /* [in] */ VARIANT_BOOL fHold) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fHold) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE HandoffDirect( 
-            /* [in] */ __RPC__in BSTR pApplicationName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pApplicationName) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE HandoffIndirect( 
-            /* [in] */ long lMediaType) = 0;
+            /* [annotation][in] */ 
+            _In_  long lMediaType) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Conference( 
-            /* [in] */ __RPC__in_opt ITBasicCallControl *pCall,
-            /* [in] */ VARIANT_BOOL fSync) = 0;
+            /* [annotation][in] */ 
+            _In_  ITBasicCallControl *pCall,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fSync) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Transfer( 
-            /* [in] */ __RPC__in_opt ITBasicCallControl *pCall,
-            /* [in] */ VARIANT_BOOL fSync) = 0;
+            /* [annotation][in] */ 
+            _In_  ITBasicCallControl *pCall,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fSync) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE BlindTransfer( 
-            /* [in] */ __RPC__in BSTR pDestAddress) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pDestAddress) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SwapHold( 
-            /* [in] */ __RPC__in_opt ITBasicCallControl *pCall) = 0;
+            /* [annotation][in] */ 
+            _In_  ITBasicCallControl *pCall) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ParkDirect( 
-            /* [in] */ __RPC__in BSTR pParkAddress) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pParkAddress) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ParkIndirect( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppNonDirAddress) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppNonDirAddress) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Unpark( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetQOS( 
-            /* [in] */ long lMediaType,
-            /* [in] */ QOS_SERVICE_LEVEL ServiceLevel) = 0;
+            /* [annotation][in] */ 
+            _In_  long lMediaType,
+            /* [annotation][in] */ 
+            _In_  QOS_SERVICE_LEVEL ServiceLevel) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Pickup( 
-            /* [in] */ __RPC__in BSTR pGroupID) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pGroupID) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Dial( 
-            /* [in] */ __RPC__in BSTR pDestAddress) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pDestAddress) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Finish( 
-            /* [in] */ FINISH_MODE finishMode) = 0;
+            /* [annotation][in] */ 
+            _In_  FINISH_MODE finishMode) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RemoveFromConference( void) = 0;
         
@@ -4913,7 +5486,8 @@ EXTERN_C const IID IID_ITBasicCallControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITBasicCallControl * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4928,23 +5502,31 @@ EXTERN_C const IID IID_ITBasicCallControl;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITBasicCallControl * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITBasicCallControl * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITBasicCallControl * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4969,7 +5551,8 @@ EXTERN_C const IID IID_ITBasicCallControl;
         DECLSPEC_XFGVIRT(ITBasicCallControl, Connect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in ITBasicCallControl * This,
-            /* [in] */ VARIANT_BOOL fSync);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fSync);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, Answer)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Answer )( 
@@ -4978,54 +5561,66 @@ EXTERN_C const IID IID_ITBasicCallControl;
         DECLSPEC_XFGVIRT(ITBasicCallControl, Disconnect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
             __RPC__in ITBasicCallControl * This,
-            /* [in] */ DISCONNECT_CODE code);
+            /* [annotation][in] */ 
+            _In_  DISCONNECT_CODE code);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, Hold)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Hold )( 
             __RPC__in ITBasicCallControl * This,
-            /* [in] */ VARIANT_BOOL fHold);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fHold);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, HandoffDirect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *HandoffDirect )( 
             __RPC__in ITBasicCallControl * This,
-            /* [in] */ __RPC__in BSTR pApplicationName);
+            /* [annotation][in] */ 
+            _In_  BSTR pApplicationName);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, HandoffIndirect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *HandoffIndirect )( 
             __RPC__in ITBasicCallControl * This,
-            /* [in] */ long lMediaType);
+            /* [annotation][in] */ 
+            _In_  long lMediaType);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, Conference)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Conference )( 
             __RPC__in ITBasicCallControl * This,
-            /* [in] */ __RPC__in_opt ITBasicCallControl *pCall,
-            /* [in] */ VARIANT_BOOL fSync);
+            /* [annotation][in] */ 
+            _In_  ITBasicCallControl *pCall,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fSync);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, Transfer)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Transfer )( 
             __RPC__in ITBasicCallControl * This,
-            /* [in] */ __RPC__in_opt ITBasicCallControl *pCall,
-            /* [in] */ VARIANT_BOOL fSync);
+            /* [annotation][in] */ 
+            _In_  ITBasicCallControl *pCall,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fSync);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, BlindTransfer)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *BlindTransfer )( 
             __RPC__in ITBasicCallControl * This,
-            /* [in] */ __RPC__in BSTR pDestAddress);
+            /* [annotation][in] */ 
+            _In_  BSTR pDestAddress);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, SwapHold)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SwapHold )( 
             __RPC__in ITBasicCallControl * This,
-            /* [in] */ __RPC__in_opt ITBasicCallControl *pCall);
+            /* [annotation][in] */ 
+            _In_  ITBasicCallControl *pCall);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, ParkDirect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ParkDirect )( 
             __RPC__in ITBasicCallControl * This,
-            /* [in] */ __RPC__in BSTR pParkAddress);
+            /* [annotation][in] */ 
+            _In_  BSTR pParkAddress);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, ParkIndirect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ParkIndirect )( 
             __RPC__in ITBasicCallControl * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppNonDirAddress);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppNonDirAddress);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, Unpark)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Unpark )( 
@@ -5034,23 +5629,28 @@ EXTERN_C const IID IID_ITBasicCallControl;
         DECLSPEC_XFGVIRT(ITBasicCallControl, SetQOS)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetQOS )( 
             __RPC__in ITBasicCallControl * This,
-            /* [in] */ long lMediaType,
-            /* [in] */ QOS_SERVICE_LEVEL ServiceLevel);
+            /* [annotation][in] */ 
+            _In_  long lMediaType,
+            /* [annotation][in] */ 
+            _In_  QOS_SERVICE_LEVEL ServiceLevel);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, Pickup)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Pickup )( 
             __RPC__in ITBasicCallControl * This,
-            /* [in] */ __RPC__in BSTR pGroupID);
+            /* [annotation][in] */ 
+            _In_  BSTR pGroupID);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, Dial)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Dial )( 
             __RPC__in ITBasicCallControl * This,
-            /* [in] */ __RPC__in BSTR pDestAddress);
+            /* [annotation][in] */ 
+            _In_  BSTR pDestAddress);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, Finish)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Finish )( 
             __RPC__in ITBasicCallControl * This,
-            /* [in] */ FINISH_MODE finishMode);
+            /* [annotation][in] */ 
+            _In_  FINISH_MODE finishMode);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, RemoveFromConference)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveFromConference )( 
@@ -5173,50 +5773,72 @@ EXTERN_C const IID IID_ITCallInfo;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Address( 
-            /* [retval][out] */ __RPC__deref_out_opt ITAddress **ppAddress) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAddress **ppAddress) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CallState( 
-            /* [retval][out] */ __RPC__out CALL_STATE *pCallState) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CALL_STATE *pCallState) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Privilege( 
-            /* [retval][out] */ __RPC__out CALL_PRIVILEGE *pPrivilege) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CALL_PRIVILEGE *pPrivilege) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CallHub( 
-            /* [retval][out] */ __RPC__deref_out_opt ITCallHub **ppCallHub) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallHub **ppCallHub) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CallInfoLong( 
-            /* [in] */ CALLINFO_LONG CallInfoLong,
-            /* [retval][out] */ __RPC__out long *plCallInfoLongVal) = 0;
+            /* [annotation][in] */ 
+            _In_  CALLINFO_LONG CallInfoLong,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallInfoLongVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_CallInfoLong( 
-            /* [in] */ CALLINFO_LONG CallInfoLong,
-            /* [in] */ long lCallInfoLongVal) = 0;
+            /* [annotation][in] */ 
+            _In_  CALLINFO_LONG CallInfoLong,
+            /* [annotation][in] */ 
+            _In_  long lCallInfoLongVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CallInfoString( 
-            /* [in] */ CALLINFO_STRING CallInfoString,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppCallInfoString) = 0;
+            /* [annotation][in] */ 
+            _In_  CALLINFO_STRING CallInfoString,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppCallInfoString) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_CallInfoString( 
-            /* [in] */ CALLINFO_STRING CallInfoString,
-            /* [in] */ __RPC__in BSTR pCallInfoString) = 0;
+            /* [annotation][in] */ 
+            _In_  CALLINFO_STRING CallInfoString,
+            /* [annotation][in] */ 
+            _In_  BSTR pCallInfoString) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CallInfoBuffer( 
-            /* [in] */ CALLINFO_BUFFER CallInfoBuffer,
-            /* [retval][out] */ __RPC__out VARIANT *ppCallInfoBuffer) = 0;
+            /* [annotation][in] */ 
+            _In_  CALLINFO_BUFFER CallInfoBuffer,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *ppCallInfoBuffer) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_CallInfoBuffer( 
-            /* [in] */ CALLINFO_BUFFER CallInfoBuffer,
-            /* [in] */ VARIANT pCallInfoBuffer) = 0;
+            /* [annotation][in] */ 
+            _In_  CALLINFO_BUFFER CallInfoBuffer,
+            /* [annotation][in] */ 
+            _In_  VARIANT pCallInfoBuffer) = 0;
         
         virtual /* [hidden][id] */ HRESULT STDMETHODCALLTYPE GetCallInfoBuffer( 
-            /* [in] */ CALLINFO_BUFFER CallInfoBuffer,
-            /* [out] */ __RPC__out DWORD *pdwSize,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwSize) BYTE **ppCallInfoBuffer) = 0;
+            /* [annotation][in] */ 
+            _In_  CALLINFO_BUFFER CallInfoBuffer,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSize,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwSize)  BYTE **ppCallInfoBuffer) = 0;
         
         virtual /* [hidden][id] */ HRESULT STDMETHODCALLTYPE SetCallInfoBuffer( 
-            /* [in] */ CALLINFO_BUFFER CallInfoBuffer,
-            /* [in] */ DWORD dwSize,
-            /* [size_is][in] */ __RPC__in_ecount_full(dwSize) BYTE *pCallInfoBuffer) = 0;
+            /* [annotation][in] */ 
+            _In_  CALLINFO_BUFFER CallInfoBuffer,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwSize)  BYTE *pCallInfoBuffer) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ReleaseUserUserInfo( void) = 0;
         
@@ -5232,7 +5854,8 @@ EXTERN_C const IID IID_ITCallInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITCallInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5247,23 +5870,31 @@ EXTERN_C const IID IID_ITCallInfo;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITCallInfo * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITCallInfo * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITCallInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5288,72 +5919,94 @@ EXTERN_C const IID IID_ITCallInfo;
         DECLSPEC_XFGVIRT(ITCallInfo, get_Address)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Address )( 
             __RPC__in ITCallInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITAddress **ppAddress);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAddress **ppAddress);
         
         DECLSPEC_XFGVIRT(ITCallInfo, get_CallState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallState )( 
             __RPC__in ITCallInfo * This,
-            /* [retval][out] */ __RPC__out CALL_STATE *pCallState);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CALL_STATE *pCallState);
         
         DECLSPEC_XFGVIRT(ITCallInfo, get_Privilege)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Privilege )( 
             __RPC__in ITCallInfo * This,
-            /* [retval][out] */ __RPC__out CALL_PRIVILEGE *pPrivilege);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CALL_PRIVILEGE *pPrivilege);
         
         DECLSPEC_XFGVIRT(ITCallInfo, get_CallHub)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallHub )( 
             __RPC__in ITCallInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCallHub **ppCallHub);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallHub **ppCallHub);
         
         DECLSPEC_XFGVIRT(ITCallInfo, get_CallInfoLong)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallInfoLong )( 
             __RPC__in ITCallInfo * This,
-            /* [in] */ CALLINFO_LONG CallInfoLong,
-            /* [retval][out] */ __RPC__out long *plCallInfoLongVal);
+            /* [annotation][in] */ 
+            _In_  CALLINFO_LONG CallInfoLong,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallInfoLongVal);
         
         DECLSPEC_XFGVIRT(ITCallInfo, put_CallInfoLong)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CallInfoLong )( 
             __RPC__in ITCallInfo * This,
-            /* [in] */ CALLINFO_LONG CallInfoLong,
-            /* [in] */ long lCallInfoLongVal);
+            /* [annotation][in] */ 
+            _In_  CALLINFO_LONG CallInfoLong,
+            /* [annotation][in] */ 
+            _In_  long lCallInfoLongVal);
         
         DECLSPEC_XFGVIRT(ITCallInfo, get_CallInfoString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallInfoString )( 
             __RPC__in ITCallInfo * This,
-            /* [in] */ CALLINFO_STRING CallInfoString,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppCallInfoString);
+            /* [annotation][in] */ 
+            _In_  CALLINFO_STRING CallInfoString,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppCallInfoString);
         
         DECLSPEC_XFGVIRT(ITCallInfo, put_CallInfoString)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CallInfoString )( 
             __RPC__in ITCallInfo * This,
-            /* [in] */ CALLINFO_STRING CallInfoString,
-            /* [in] */ __RPC__in BSTR pCallInfoString);
+            /* [annotation][in] */ 
+            _In_  CALLINFO_STRING CallInfoString,
+            /* [annotation][in] */ 
+            _In_  BSTR pCallInfoString);
         
         DECLSPEC_XFGVIRT(ITCallInfo, get_CallInfoBuffer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallInfoBuffer )( 
             __RPC__in ITCallInfo * This,
-            /* [in] */ CALLINFO_BUFFER CallInfoBuffer,
-            /* [retval][out] */ __RPC__out VARIANT *ppCallInfoBuffer);
+            /* [annotation][in] */ 
+            _In_  CALLINFO_BUFFER CallInfoBuffer,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *ppCallInfoBuffer);
         
         DECLSPEC_XFGVIRT(ITCallInfo, put_CallInfoBuffer)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CallInfoBuffer )( 
             __RPC__in ITCallInfo * This,
-            /* [in] */ CALLINFO_BUFFER CallInfoBuffer,
-            /* [in] */ VARIANT pCallInfoBuffer);
+            /* [annotation][in] */ 
+            _In_  CALLINFO_BUFFER CallInfoBuffer,
+            /* [annotation][in] */ 
+            _In_  VARIANT pCallInfoBuffer);
         
         DECLSPEC_XFGVIRT(ITCallInfo, GetCallInfoBuffer)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *GetCallInfoBuffer )( 
             __RPC__in ITCallInfo * This,
-            /* [in] */ CALLINFO_BUFFER CallInfoBuffer,
-            /* [out] */ __RPC__out DWORD *pdwSize,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwSize) BYTE **ppCallInfoBuffer);
+            /* [annotation][in] */ 
+            _In_  CALLINFO_BUFFER CallInfoBuffer,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSize,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwSize)  BYTE **ppCallInfoBuffer);
         
         DECLSPEC_XFGVIRT(ITCallInfo, SetCallInfoBuffer)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *SetCallInfoBuffer )( 
             __RPC__in ITCallInfo * This,
-            /* [in] */ CALLINFO_BUFFER CallInfoBuffer,
-            /* [in] */ DWORD dwSize,
-            /* [size_is][in] */ __RPC__in_ecount_full(dwSize) BYTE *pCallInfoBuffer);
+            /* [annotation][in] */ 
+            _In_  CALLINFO_BUFFER CallInfoBuffer,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwSize)  BYTE *pCallInfoBuffer);
         
         DECLSPEC_XFGVIRT(ITCallInfo, ReleaseUserUserInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ReleaseUserUserInfo )( 
@@ -5461,14 +6114,20 @@ EXTERN_C const IID IID_ITCallInfo2;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EventFilter( 
-            /* [in] */ TAPI_EVENT TapiEvent,
-            /* [in] */ long lSubEvent,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pEnable) = 0;
+            /* [annotation][in] */ 
+            _In_  TAPI_EVENT TapiEvent,
+            /* [annotation][in] */ 
+            _In_  long lSubEvent,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pEnable) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_EventFilter( 
-            /* [in] */ TAPI_EVENT TapiEvent,
-            /* [in] */ long lSubEvent,
-            /* [in] */ VARIANT_BOOL bEnable) = 0;
+            /* [annotation][in] */ 
+            _In_  TAPI_EVENT TapiEvent,
+            /* [annotation][in] */ 
+            _In_  long lSubEvent,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bEnable) = 0;
         
     };
     
@@ -5482,7 +6141,8 @@ EXTERN_C const IID IID_ITCallInfo2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITCallInfo2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5497,23 +6157,31 @@ EXTERN_C const IID IID_ITCallInfo2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITCallInfo2 * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITCallInfo2 * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITCallInfo2 * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5538,72 +6206,94 @@ EXTERN_C const IID IID_ITCallInfo2;
         DECLSPEC_XFGVIRT(ITCallInfo, get_Address)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Address )( 
             __RPC__in ITCallInfo2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITAddress **ppAddress);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAddress **ppAddress);
         
         DECLSPEC_XFGVIRT(ITCallInfo, get_CallState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallState )( 
             __RPC__in ITCallInfo2 * This,
-            /* [retval][out] */ __RPC__out CALL_STATE *pCallState);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CALL_STATE *pCallState);
         
         DECLSPEC_XFGVIRT(ITCallInfo, get_Privilege)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Privilege )( 
             __RPC__in ITCallInfo2 * This,
-            /* [retval][out] */ __RPC__out CALL_PRIVILEGE *pPrivilege);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CALL_PRIVILEGE *pPrivilege);
         
         DECLSPEC_XFGVIRT(ITCallInfo, get_CallHub)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallHub )( 
             __RPC__in ITCallInfo2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCallHub **ppCallHub);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallHub **ppCallHub);
         
         DECLSPEC_XFGVIRT(ITCallInfo, get_CallInfoLong)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallInfoLong )( 
             __RPC__in ITCallInfo2 * This,
-            /* [in] */ CALLINFO_LONG CallInfoLong,
-            /* [retval][out] */ __RPC__out long *plCallInfoLongVal);
+            /* [annotation][in] */ 
+            _In_  CALLINFO_LONG CallInfoLong,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallInfoLongVal);
         
         DECLSPEC_XFGVIRT(ITCallInfo, put_CallInfoLong)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CallInfoLong )( 
             __RPC__in ITCallInfo2 * This,
-            /* [in] */ CALLINFO_LONG CallInfoLong,
-            /* [in] */ long lCallInfoLongVal);
+            /* [annotation][in] */ 
+            _In_  CALLINFO_LONG CallInfoLong,
+            /* [annotation][in] */ 
+            _In_  long lCallInfoLongVal);
         
         DECLSPEC_XFGVIRT(ITCallInfo, get_CallInfoString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallInfoString )( 
             __RPC__in ITCallInfo2 * This,
-            /* [in] */ CALLINFO_STRING CallInfoString,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppCallInfoString);
+            /* [annotation][in] */ 
+            _In_  CALLINFO_STRING CallInfoString,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppCallInfoString);
         
         DECLSPEC_XFGVIRT(ITCallInfo, put_CallInfoString)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CallInfoString )( 
             __RPC__in ITCallInfo2 * This,
-            /* [in] */ CALLINFO_STRING CallInfoString,
-            /* [in] */ __RPC__in BSTR pCallInfoString);
+            /* [annotation][in] */ 
+            _In_  CALLINFO_STRING CallInfoString,
+            /* [annotation][in] */ 
+            _In_  BSTR pCallInfoString);
         
         DECLSPEC_XFGVIRT(ITCallInfo, get_CallInfoBuffer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallInfoBuffer )( 
             __RPC__in ITCallInfo2 * This,
-            /* [in] */ CALLINFO_BUFFER CallInfoBuffer,
-            /* [retval][out] */ __RPC__out VARIANT *ppCallInfoBuffer);
+            /* [annotation][in] */ 
+            _In_  CALLINFO_BUFFER CallInfoBuffer,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *ppCallInfoBuffer);
         
         DECLSPEC_XFGVIRT(ITCallInfo, put_CallInfoBuffer)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CallInfoBuffer )( 
             __RPC__in ITCallInfo2 * This,
-            /* [in] */ CALLINFO_BUFFER CallInfoBuffer,
-            /* [in] */ VARIANT pCallInfoBuffer);
+            /* [annotation][in] */ 
+            _In_  CALLINFO_BUFFER CallInfoBuffer,
+            /* [annotation][in] */ 
+            _In_  VARIANT pCallInfoBuffer);
         
         DECLSPEC_XFGVIRT(ITCallInfo, GetCallInfoBuffer)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *GetCallInfoBuffer )( 
             __RPC__in ITCallInfo2 * This,
-            /* [in] */ CALLINFO_BUFFER CallInfoBuffer,
-            /* [out] */ __RPC__out DWORD *pdwSize,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwSize) BYTE **ppCallInfoBuffer);
+            /* [annotation][in] */ 
+            _In_  CALLINFO_BUFFER CallInfoBuffer,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSize,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwSize)  BYTE **ppCallInfoBuffer);
         
         DECLSPEC_XFGVIRT(ITCallInfo, SetCallInfoBuffer)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *SetCallInfoBuffer )( 
             __RPC__in ITCallInfo2 * This,
-            /* [in] */ CALLINFO_BUFFER CallInfoBuffer,
-            /* [in] */ DWORD dwSize,
-            /* [size_is][in] */ __RPC__in_ecount_full(dwSize) BYTE *pCallInfoBuffer);
+            /* [annotation][in] */ 
+            _In_  CALLINFO_BUFFER CallInfoBuffer,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwSize)  BYTE *pCallInfoBuffer);
         
         DECLSPEC_XFGVIRT(ITCallInfo, ReleaseUserUserInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ReleaseUserUserInfo )( 
@@ -5612,16 +6302,22 @@ EXTERN_C const IID IID_ITCallInfo2;
         DECLSPEC_XFGVIRT(ITCallInfo2, get_EventFilter)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EventFilter )( 
             __RPC__in ITCallInfo2 * This,
-            /* [in] */ TAPI_EVENT TapiEvent,
-            /* [in] */ long lSubEvent,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pEnable);
+            /* [annotation][in] */ 
+            _In_  TAPI_EVENT TapiEvent,
+            /* [annotation][in] */ 
+            _In_  long lSubEvent,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pEnable);
         
         DECLSPEC_XFGVIRT(ITCallInfo2, put_EventFilter)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EventFilter )( 
             __RPC__in ITCallInfo2 * This,
-            /* [in] */ TAPI_EVENT TapiEvent,
-            /* [in] */ long lSubEvent,
-            /* [in] */ VARIANT_BOOL bEnable);
+            /* [annotation][in] */ 
+            _In_  TAPI_EVENT TapiEvent,
+            /* [annotation][in] */ 
+            _In_  long lSubEvent,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL bEnable);
         
         END_INTERFACE
     } ITCallInfo2Vtbl;
@@ -5732,22 +6428,28 @@ EXTERN_C const IID IID_ITTerminal;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_State( 
-            /* [retval][out] */ __RPC__out TERMINAL_STATE *pTerminalState) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TERMINAL_STATE *pTerminalState) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TerminalType( 
-            /* [retval][out] */ __RPC__out TERMINAL_TYPE *pType) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TERMINAL_TYPE *pType) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TerminalClass( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppTerminalClass) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppTerminalClass) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MediaType( 
-            /* [retval][out] */ __RPC__out long *plMediaType) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plMediaType) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Direction( 
-            /* [retval][out] */ __RPC__out TERMINAL_DIRECTION *pDirection) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TERMINAL_DIRECTION *pDirection) = 0;
         
     };
     
@@ -5761,7 +6463,8 @@ EXTERN_C const IID IID_ITTerminal;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITTerminal * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5776,23 +6479,31 @@ EXTERN_C const IID IID_ITTerminal;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITTerminal * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITTerminal * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITTerminal * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5817,32 +6528,38 @@ EXTERN_C const IID IID_ITTerminal;
         DECLSPEC_XFGVIRT(ITTerminal, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ITTerminal * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppName);
         
         DECLSPEC_XFGVIRT(ITTerminal, get_State)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in ITTerminal * This,
-            /* [retval][out] */ __RPC__out TERMINAL_STATE *pTerminalState);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TERMINAL_STATE *pTerminalState);
         
         DECLSPEC_XFGVIRT(ITTerminal, get_TerminalType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TerminalType )( 
             __RPC__in ITTerminal * This,
-            /* [retval][out] */ __RPC__out TERMINAL_TYPE *pType);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TERMINAL_TYPE *pType);
         
         DECLSPEC_XFGVIRT(ITTerminal, get_TerminalClass)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TerminalClass )( 
             __RPC__in ITTerminal * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppTerminalClass);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppTerminalClass);
         
         DECLSPEC_XFGVIRT(ITTerminal, get_MediaType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaType )( 
             __RPC__in ITTerminal * This,
-            /* [retval][out] */ __RPC__out long *plMediaType);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plMediaType);
         
         DECLSPEC_XFGVIRT(ITTerminal, get_Direction)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Direction )( 
             __RPC__in ITTerminal * This,
-            /* [retval][out] */ __RPC__out TERMINAL_DIRECTION *pDirection);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TERMINAL_DIRECTION *pDirection);
         
         END_INTERFACE
     } ITTerminalVtbl;
@@ -5925,24 +6642,32 @@ EXTERN_C const IID IID_ITMultiTrackTerminal;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TrackTerminals( 
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateTrackTerminals( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumTerminal **ppEnumTerminal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumTerminal **ppEnumTerminal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateTrackTerminal( 
-            /* [in] */ long MediaType,
-            /* [in] */ TERMINAL_DIRECTION TerminalDirection,
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppTerminal) = 0;
+            /* [annotation][in] */ 
+            _In_  long MediaType,
+            /* [annotation][in] */ 
+            _In_  TERMINAL_DIRECTION TerminalDirection,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppTerminal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MediaTypesInUse( 
-            /* [retval][out] */ __RPC__out long *plMediaTypesInUse) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plMediaTypesInUse) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DirectionsInUse( 
-            /* [retval][out] */ __RPC__out TERMINAL_DIRECTION *plDirectionsInUsed) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TERMINAL_DIRECTION *plDirectionsInUsed) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RemoveTrackTerminal( 
-            /* [in] */ __RPC__in_opt ITTerminal *pTrackTerminalToRemove) = 0;
+            /* [annotation][in] */ 
+            _In_  ITTerminal *pTrackTerminalToRemove) = 0;
         
     };
     
@@ -5956,7 +6681,8 @@ EXTERN_C const IID IID_ITMultiTrackTerminal;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITMultiTrackTerminal * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5971,23 +6697,31 @@ EXTERN_C const IID IID_ITMultiTrackTerminal;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITMultiTrackTerminal * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITMultiTrackTerminal * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITMultiTrackTerminal * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6012,34 +6746,42 @@ EXTERN_C const IID IID_ITMultiTrackTerminal;
         DECLSPEC_XFGVIRT(ITMultiTrackTerminal, get_TrackTerminals)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TrackTerminals )( 
             __RPC__in ITMultiTrackTerminal * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITMultiTrackTerminal, EnumerateTrackTerminals)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateTrackTerminals )( 
             __RPC__in ITMultiTrackTerminal * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumTerminal **ppEnumTerminal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumTerminal **ppEnumTerminal);
         
         DECLSPEC_XFGVIRT(ITMultiTrackTerminal, CreateTrackTerminal)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateTrackTerminal )( 
             __RPC__in ITMultiTrackTerminal * This,
-            /* [in] */ long MediaType,
-            /* [in] */ TERMINAL_DIRECTION TerminalDirection,
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppTerminal);
+            /* [annotation][in] */ 
+            _In_  long MediaType,
+            /* [annotation][in] */ 
+            _In_  TERMINAL_DIRECTION TerminalDirection,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppTerminal);
         
         DECLSPEC_XFGVIRT(ITMultiTrackTerminal, get_MediaTypesInUse)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaTypesInUse )( 
             __RPC__in ITMultiTrackTerminal * This,
-            /* [retval][out] */ __RPC__out long *plMediaTypesInUse);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plMediaTypesInUse);
         
         DECLSPEC_XFGVIRT(ITMultiTrackTerminal, get_DirectionsInUse)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DirectionsInUse )( 
             __RPC__in ITMultiTrackTerminal * This,
-            /* [retval][out] */ __RPC__out TERMINAL_DIRECTION *plDirectionsInUsed);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TERMINAL_DIRECTION *plDirectionsInUsed);
         
         DECLSPEC_XFGVIRT(ITMultiTrackTerminal, RemoveTrackTerminal)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveTrackTerminal )( 
             __RPC__in ITMultiTrackTerminal * This,
-            /* [in] */ __RPC__in_opt ITTerminal *pTrackTerminalToRemove);
+            /* [annotation][in] */ 
+            _In_  ITTerminal *pTrackTerminalToRemove);
         
         END_INTERFACE
     } ITMultiTrackTerminalVtbl;
@@ -6148,22 +6890,28 @@ EXTERN_C const IID IID_ITFileTrack;
     {
     public:
         virtual /* [helpstring][hidden][id][propget] */ HRESULT STDMETHODCALLTYPE get_Format( 
-            /* [retval][out] */ __RPC__deref_out_opt AM_MEDIA_TYPE **ppmt) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  AM_MEDIA_TYPE **ppmt) = 0;
         
         virtual /* [helpstring][hidden][id][propput] */ HRESULT STDMETHODCALLTYPE put_Format( 
-            /* [in] */ __RPC__in const AM_MEDIA_TYPE *pmt) = 0;
+            /* [annotation][in] */ 
+            _In_  const AM_MEDIA_TYPE *pmt) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ControllingTerminal( 
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppControllingTerminal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppControllingTerminal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AudioFormatForScripting( 
-            /* [retval][out] */ __RPC__deref_out_opt ITScriptableAudioFormat **ppAudioFormat) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITScriptableAudioFormat **ppAudioFormat) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_AudioFormatForScripting( 
-            /* [in] */ __RPC__in_opt ITScriptableAudioFormat *pAudioFormat) = 0;
+            /* [annotation][in] */ 
+            _In_  ITScriptableAudioFormat *pAudioFormat) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EmptyAudioFormatForScripting( 
-            /* [retval][out] */ __RPC__deref_out_opt ITScriptableAudioFormat **ppAudioFormat) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITScriptableAudioFormat **ppAudioFormat) = 0;
         
     };
     
@@ -6177,7 +6925,8 @@ EXTERN_C const IID IID_ITFileTrack;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITFileTrack * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6192,23 +6941,31 @@ EXTERN_C const IID IID_ITFileTrack;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITFileTrack * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITFileTrack * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITFileTrack * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6233,32 +6990,38 @@ EXTERN_C const IID IID_ITFileTrack;
         DECLSPEC_XFGVIRT(ITFileTrack, get_Format)
         /* [helpstring][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Format )( 
             __RPC__in ITFileTrack * This,
-            /* [retval][out] */ __RPC__deref_out_opt AM_MEDIA_TYPE **ppmt);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  AM_MEDIA_TYPE **ppmt);
         
         DECLSPEC_XFGVIRT(ITFileTrack, put_Format)
         /* [helpstring][hidden][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Format )( 
             __RPC__in ITFileTrack * This,
-            /* [in] */ __RPC__in const AM_MEDIA_TYPE *pmt);
+            /* [annotation][in] */ 
+            _In_  const AM_MEDIA_TYPE *pmt);
         
         DECLSPEC_XFGVIRT(ITFileTrack, get_ControllingTerminal)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ControllingTerminal )( 
             __RPC__in ITFileTrack * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppControllingTerminal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppControllingTerminal);
         
         DECLSPEC_XFGVIRT(ITFileTrack, get_AudioFormatForScripting)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AudioFormatForScripting )( 
             __RPC__in ITFileTrack * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITScriptableAudioFormat **ppAudioFormat);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITScriptableAudioFormat **ppAudioFormat);
         
         DECLSPEC_XFGVIRT(ITFileTrack, put_AudioFormatForScripting)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AudioFormatForScripting )( 
             __RPC__in ITFileTrack * This,
-            /* [in] */ __RPC__in_opt ITScriptableAudioFormat *pAudioFormat);
+            /* [annotation][in] */ 
+            _In_  ITScriptableAudioFormat *pAudioFormat);
         
         DECLSPEC_XFGVIRT(ITFileTrack, get_EmptyAudioFormatForScripting)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EmptyAudioFormatForScripting )( 
             __RPC__in ITFileTrack * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITScriptableAudioFormat **ppAudioFormat);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITScriptableAudioFormat **ppAudioFormat);
         
         END_INTERFACE
     } ITFileTrackVtbl;
@@ -6341,10 +7104,12 @@ EXTERN_C const IID IID_ITMediaPlayback;
     {
     public:
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PlayList( 
-            /* [in] */ VARIANTARG PlayListVariant) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANTARG PlayListVariant) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PlayList( 
-            /* [retval][out] */ __RPC__out VARIANTARG *pPlayListVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANTARG *pPlayListVariant) = 0;
         
     };
     
@@ -6358,7 +7123,8 @@ EXTERN_C const IID IID_ITMediaPlayback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITMediaPlayback * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6373,23 +7139,31 @@ EXTERN_C const IID IID_ITMediaPlayback;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITMediaPlayback * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITMediaPlayback * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITMediaPlayback * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6414,12 +7188,14 @@ EXTERN_C const IID IID_ITMediaPlayback;
         DECLSPEC_XFGVIRT(ITMediaPlayback, put_PlayList)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PlayList )( 
             __RPC__in ITMediaPlayback * This,
-            /* [in] */ VARIANTARG PlayListVariant);
+            /* [annotation][in] */ 
+            _In_  VARIANTARG PlayListVariant);
         
         DECLSPEC_XFGVIRT(ITMediaPlayback, get_PlayList)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PlayList )( 
             __RPC__in ITMediaPlayback * This,
-            /* [retval][out] */ __RPC__out VARIANTARG *pPlayListVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANTARG *pPlayListVariant);
         
         END_INTERFACE
     } ITMediaPlaybackVtbl;
@@ -6490,10 +7266,12 @@ EXTERN_C const IID IID_ITMediaRecord;
     {
     public:
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_FileName( 
-            /* [in] */ __RPC__in BSTR bstrFileName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrFileName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FileName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFileName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pbstrFileName) = 0;
         
     };
     
@@ -6507,7 +7285,8 @@ EXTERN_C const IID IID_ITMediaRecord;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITMediaRecord * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6522,23 +7301,31 @@ EXTERN_C const IID IID_ITMediaRecord;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITMediaRecord * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITMediaRecord * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITMediaRecord * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6563,12 +7350,14 @@ EXTERN_C const IID IID_ITMediaRecord;
         DECLSPEC_XFGVIRT(ITMediaRecord, put_FileName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileName )( 
             __RPC__in ITMediaRecord * This,
-            /* [in] */ __RPC__in BSTR bstrFileName);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrFileName);
         
         DECLSPEC_XFGVIRT(ITMediaRecord, get_FileName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileName )( 
             __RPC__in ITMediaRecord * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFileName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pbstrFileName);
         
         END_INTERFACE
     } ITMediaRecordVtbl;
@@ -6645,7 +7434,8 @@ EXTERN_C const IID IID_ITMediaControl;
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Pause( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MediaState( 
-            /* [retval][out] */ __RPC__out TERMINAL_MEDIA_STATE *pTerminalMediaState) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TERMINAL_MEDIA_STATE *pTerminalMediaState) = 0;
         
     };
     
@@ -6659,7 +7449,8 @@ EXTERN_C const IID IID_ITMediaControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITMediaControl * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6674,23 +7465,31 @@ EXTERN_C const IID IID_ITMediaControl;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITMediaControl * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITMediaControl * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITMediaControl * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6727,7 +7526,8 @@ EXTERN_C const IID IID_ITMediaControl;
         DECLSPEC_XFGVIRT(ITMediaControl, get_MediaState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaState )( 
             __RPC__in ITMediaControl * This,
-            /* [retval][out] */ __RPC__out TERMINAL_MEDIA_STATE *pTerminalMediaState);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TERMINAL_MEDIA_STATE *pTerminalMediaState);
         
         END_INTERFACE
     } ITMediaControlVtbl;
@@ -6804,16 +7604,20 @@ EXTERN_C const IID IID_ITBasicAudioTerminal;
     {
     public:
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Volume( 
-            /* [in] */ long lVolume) = 0;
+            /* [annotation][in] */ 
+            _In_  long lVolume) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Volume( 
-            /* [retval][out] */ __RPC__out long *plVolume) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plVolume) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Balance( 
-            /* [in] */ long lBalance) = 0;
+            /* [annotation][in] */ 
+            _In_  long lBalance) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Balance( 
-            /* [retval][out] */ __RPC__out long *plBalance) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plBalance) = 0;
         
     };
     
@@ -6827,7 +7631,8 @@ EXTERN_C const IID IID_ITBasicAudioTerminal;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITBasicAudioTerminal * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6842,23 +7647,31 @@ EXTERN_C const IID IID_ITBasicAudioTerminal;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITBasicAudioTerminal * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITBasicAudioTerminal * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITBasicAudioTerminal * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6883,22 +7696,26 @@ EXTERN_C const IID IID_ITBasicAudioTerminal;
         DECLSPEC_XFGVIRT(ITBasicAudioTerminal, put_Volume)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Volume )( 
             __RPC__in ITBasicAudioTerminal * This,
-            /* [in] */ long lVolume);
+            /* [annotation][in] */ 
+            _In_  long lVolume);
         
         DECLSPEC_XFGVIRT(ITBasicAudioTerminal, get_Volume)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Volume )( 
             __RPC__in ITBasicAudioTerminal * This,
-            /* [retval][out] */ __RPC__out long *plVolume);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plVolume);
         
         DECLSPEC_XFGVIRT(ITBasicAudioTerminal, put_Balance)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Balance )( 
             __RPC__in ITBasicAudioTerminal * This,
-            /* [in] */ long lBalance);
+            /* [annotation][in] */ 
+            _In_  long lBalance);
         
         DECLSPEC_XFGVIRT(ITBasicAudioTerminal, get_Balance)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Balance )( 
             __RPC__in ITBasicAudioTerminal * This,
-            /* [retval][out] */ __RPC__out long *plBalance);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plBalance);
         
         END_INTERFACE
     } ITBasicAudioTerminalVtbl;
@@ -6975,7 +7792,8 @@ EXTERN_C const IID IID_ITStaticAudioTerminal;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_WaveId( 
-            /* [retval][out] */ __RPC__out long *plWaveId) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plWaveId) = 0;
         
     };
     
@@ -6989,7 +7807,8 @@ EXTERN_C const IID IID_ITStaticAudioTerminal;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITStaticAudioTerminal * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7004,23 +7823,31 @@ EXTERN_C const IID IID_ITStaticAudioTerminal;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITStaticAudioTerminal * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITStaticAudioTerminal * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITStaticAudioTerminal * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -7045,7 +7872,8 @@ EXTERN_C const IID IID_ITStaticAudioTerminal;
         DECLSPEC_XFGVIRT(ITStaticAudioTerminal, get_WaveId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WaveId )( 
             __RPC__in ITStaticAudioTerminal * This,
-            /* [retval][out] */ __RPC__out long *plWaveId);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plWaveId);
         
         END_INTERFACE
     } ITStaticAudioTerminalVtbl;
@@ -7115,16 +7943,20 @@ EXTERN_C const IID IID_ITCallHub;
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Clear( void) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateCalls( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumCall **ppEnumCall) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumCall **ppEnumCall) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Calls( 
-            /* [retval][out] */ __RPC__out VARIANT *pCalls) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pCalls) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NumCalls( 
-            /* [retval][out] */ __RPC__out long *plCalls) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCalls) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_State( 
-            /* [retval][out] */ __RPC__out CALLHUB_STATE *pState) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CALLHUB_STATE *pState) = 0;
         
     };
     
@@ -7138,7 +7970,8 @@ EXTERN_C const IID IID_ITCallHub;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITCallHub * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7153,23 +7986,31 @@ EXTERN_C const IID IID_ITCallHub;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITCallHub * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITCallHub * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITCallHub * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -7198,22 +8039,26 @@ EXTERN_C const IID IID_ITCallHub;
         DECLSPEC_XFGVIRT(ITCallHub, EnumerateCalls)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateCalls )( 
             __RPC__in ITCallHub * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumCall **ppEnumCall);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumCall **ppEnumCall);
         
         DECLSPEC_XFGVIRT(ITCallHub, get_Calls)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Calls )( 
             __RPC__in ITCallHub * This,
-            /* [retval][out] */ __RPC__out VARIANT *pCalls);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pCalls);
         
         DECLSPEC_XFGVIRT(ITCallHub, get_NumCalls)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NumCalls )( 
             __RPC__in ITCallHub * This,
-            /* [retval][out] */ __RPC__out long *plCalls);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCalls);
         
         DECLSPEC_XFGVIRT(ITCallHub, get_State)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in ITCallHub * This,
-            /* [retval][out] */ __RPC__out CALLHUB_STATE *pState);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CALLHUB_STATE *pState);
         
         END_INTERFACE
     } ITCallHubVtbl;
@@ -7293,19 +8138,28 @@ EXTERN_C const IID IID_ITLegacyAddressMediaControl;
     {
     public:
         virtual /* [hidden][id] */ HRESULT STDMETHODCALLTYPE GetID( 
-            /* [in] */ __RPC__in BSTR pDeviceClass,
-            /* [out] */ __RPC__out DWORD *pdwSize,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwSize) BYTE **ppDeviceID) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pDeviceClass,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSize,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwSize)  BYTE **ppDeviceID) = 0;
         
         virtual /* [hidden][id] */ HRESULT STDMETHODCALLTYPE GetDevConfig( 
-            /* [in] */ __RPC__in BSTR pDeviceClass,
-            /* [out] */ __RPC__out DWORD *pdwSize,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwSize) BYTE **ppDeviceConfig) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pDeviceClass,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSize,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwSize)  BYTE **ppDeviceConfig) = 0;
         
         virtual /* [hidden][id] */ HRESULT STDMETHODCALLTYPE SetDevConfig( 
-            /* [in] */ __RPC__in BSTR pDeviceClass,
-            /* [in] */ DWORD dwSize,
-            /* [size_is][in] */ __RPC__in_ecount_full(dwSize) BYTE *pDeviceConfig) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pDeviceClass,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwSize)  BYTE *pDeviceConfig) = 0;
         
     };
     
@@ -7319,7 +8173,8 @@ EXTERN_C const IID IID_ITLegacyAddressMediaControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITLegacyAddressMediaControl * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7334,23 +8189,32 @@ EXTERN_C const IID IID_ITLegacyAddressMediaControl;
         DECLSPEC_XFGVIRT(ITLegacyAddressMediaControl, GetID)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *GetID )( 
             __RPC__in ITLegacyAddressMediaControl * This,
-            /* [in] */ __RPC__in BSTR pDeviceClass,
-            /* [out] */ __RPC__out DWORD *pdwSize,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwSize) BYTE **ppDeviceID);
+            /* [annotation][in] */ 
+            _In_  BSTR pDeviceClass,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSize,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwSize)  BYTE **ppDeviceID);
         
         DECLSPEC_XFGVIRT(ITLegacyAddressMediaControl, GetDevConfig)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *GetDevConfig )( 
             __RPC__in ITLegacyAddressMediaControl * This,
-            /* [in] */ __RPC__in BSTR pDeviceClass,
-            /* [out] */ __RPC__out DWORD *pdwSize,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwSize) BYTE **ppDeviceConfig);
+            /* [annotation][in] */ 
+            _In_  BSTR pDeviceClass,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSize,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwSize)  BYTE **ppDeviceConfig);
         
         DECLSPEC_XFGVIRT(ITLegacyAddressMediaControl, SetDevConfig)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *SetDevConfig )( 
             __RPC__in ITLegacyAddressMediaControl * This,
-            /* [in] */ __RPC__in BSTR pDeviceClass,
-            /* [in] */ DWORD dwSize,
-            /* [size_is][in] */ __RPC__in_ecount_full(dwSize) BYTE *pDeviceConfig);
+            /* [annotation][in] */ 
+            _In_  BSTR pDeviceClass,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwSize)  BYTE *pDeviceConfig);
         
         END_INTERFACE
     } ITLegacyAddressMediaControlVtbl;
@@ -7411,19 +8275,24 @@ EXTERN_C const IID IID_ITPrivateEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Address( 
-            /* [retval][out] */ __RPC__deref_out_opt ITAddress **ppAddress) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAddress **ppAddress) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Call( 
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCallInfo) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCallInfo) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CallHub( 
-            /* [retval][out] */ __RPC__deref_out_opt ITCallHub **ppCallHub) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallHub **ppCallHub) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EventCode( 
-            /* [retval][out] */ __RPC__out long *plEventCode) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plEventCode) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EventInterface( 
-            /* [retval][out] */ __RPC__deref_out_opt IDispatch **pEventInterface) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **pEventInterface) = 0;
         
     };
     
@@ -7437,7 +8306,8 @@ EXTERN_C const IID IID_ITPrivateEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITPrivateEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7452,23 +8322,31 @@ EXTERN_C const IID IID_ITPrivateEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITPrivateEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITPrivateEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITPrivateEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -7493,27 +8371,32 @@ EXTERN_C const IID IID_ITPrivateEvent;
         DECLSPEC_XFGVIRT(ITPrivateEvent, get_Address)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Address )( 
             __RPC__in ITPrivateEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITAddress **ppAddress);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAddress **ppAddress);
         
         DECLSPEC_XFGVIRT(ITPrivateEvent, get_Call)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Call )( 
             __RPC__in ITPrivateEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCallInfo);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCallInfo);
         
         DECLSPEC_XFGVIRT(ITPrivateEvent, get_CallHub)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallHub )( 
             __RPC__in ITPrivateEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCallHub **ppCallHub);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallHub **ppCallHub);
         
         DECLSPEC_XFGVIRT(ITPrivateEvent, get_EventCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EventCode )( 
             __RPC__in ITPrivateEvent * This,
-            /* [retval][out] */ __RPC__out long *plEventCode);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plEventCode);
         
         DECLSPEC_XFGVIRT(ITPrivateEvent, get_EventInterface)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EventInterface )( 
             __RPC__in ITPrivateEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt IDispatch **pEventInterface);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **pEventInterface);
         
         END_INTERFACE
     } ITPrivateEventVtbl;
@@ -7593,16 +8476,24 @@ EXTERN_C const IID IID_ITLegacyAddressMediaControl2;
     {
     public:
         virtual /* [hidden][id] */ HRESULT STDMETHODCALLTYPE ConfigDialog( 
-            /* [in] */ __RPC__in HWND hwndOwner,
-            /* [in] */ __RPC__in BSTR pDeviceClass) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hwndOwner,
+            /* [annotation][in] */ 
+            _In_  BSTR pDeviceClass) = 0;
         
         virtual /* [hidden][id] */ HRESULT STDMETHODCALLTYPE ConfigDialogEdit( 
-            /* [in] */ __RPC__in HWND hwndOwner,
-            /* [in] */ __RPC__in BSTR pDeviceClass,
-            /* [in] */ DWORD dwSizeIn,
-            /* [size_is][in] */ __RPC__in_ecount_full(dwSizeIn) BYTE *pDeviceConfigIn,
-            /* [out] */ __RPC__out DWORD *pdwSizeOut,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwSizeOut) BYTE **ppDeviceConfigOut) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hwndOwner,
+            /* [annotation][in] */ 
+            _In_  BSTR pDeviceClass,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSizeIn,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwSizeIn)  BYTE *pDeviceConfigIn,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSizeOut,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwSizeOut)  BYTE **ppDeviceConfigOut) = 0;
         
     };
     
@@ -7616,7 +8507,8 @@ EXTERN_C const IID IID_ITLegacyAddressMediaControl2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITLegacyAddressMediaControl2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7631,39 +8523,56 @@ EXTERN_C const IID IID_ITLegacyAddressMediaControl2;
         DECLSPEC_XFGVIRT(ITLegacyAddressMediaControl, GetID)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *GetID )( 
             __RPC__in ITLegacyAddressMediaControl2 * This,
-            /* [in] */ __RPC__in BSTR pDeviceClass,
-            /* [out] */ __RPC__out DWORD *pdwSize,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwSize) BYTE **ppDeviceID);
+            /* [annotation][in] */ 
+            _In_  BSTR pDeviceClass,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSize,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwSize)  BYTE **ppDeviceID);
         
         DECLSPEC_XFGVIRT(ITLegacyAddressMediaControl, GetDevConfig)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *GetDevConfig )( 
             __RPC__in ITLegacyAddressMediaControl2 * This,
-            /* [in] */ __RPC__in BSTR pDeviceClass,
-            /* [out] */ __RPC__out DWORD *pdwSize,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwSize) BYTE **ppDeviceConfig);
+            /* [annotation][in] */ 
+            _In_  BSTR pDeviceClass,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSize,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwSize)  BYTE **ppDeviceConfig);
         
         DECLSPEC_XFGVIRT(ITLegacyAddressMediaControl, SetDevConfig)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *SetDevConfig )( 
             __RPC__in ITLegacyAddressMediaControl2 * This,
-            /* [in] */ __RPC__in BSTR pDeviceClass,
-            /* [in] */ DWORD dwSize,
-            /* [size_is][in] */ __RPC__in_ecount_full(dwSize) BYTE *pDeviceConfig);
+            /* [annotation][in] */ 
+            _In_  BSTR pDeviceClass,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwSize)  BYTE *pDeviceConfig);
         
         DECLSPEC_XFGVIRT(ITLegacyAddressMediaControl2, ConfigDialog)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *ConfigDialog )( 
             __RPC__in ITLegacyAddressMediaControl2 * This,
-            /* [in] */ __RPC__in HWND hwndOwner,
-            /* [in] */ __RPC__in BSTR pDeviceClass);
+            /* [annotation][in] */ 
+            _In_  HWND hwndOwner,
+            /* [annotation][in] */ 
+            _In_  BSTR pDeviceClass);
         
         DECLSPEC_XFGVIRT(ITLegacyAddressMediaControl2, ConfigDialogEdit)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *ConfigDialogEdit )( 
             __RPC__in ITLegacyAddressMediaControl2 * This,
-            /* [in] */ __RPC__in HWND hwndOwner,
-            /* [in] */ __RPC__in BSTR pDeviceClass,
-            /* [in] */ DWORD dwSizeIn,
-            /* [size_is][in] */ __RPC__in_ecount_full(dwSizeIn) BYTE *pDeviceConfigIn,
-            /* [out] */ __RPC__out DWORD *pdwSizeOut,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwSizeOut) BYTE **ppDeviceConfigOut);
+            /* [annotation][in] */ 
+            _In_  HWND hwndOwner,
+            /* [annotation][in] */ 
+            _In_  BSTR pDeviceClass,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSizeIn,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwSizeIn)  BYTE *pDeviceConfigIn,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSizeOut,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwSizeOut)  BYTE **ppDeviceConfigOut);
         
         END_INTERFACE
     } ITLegacyAddressMediaControl2Vtbl;
@@ -7731,22 +8640,30 @@ EXTERN_C const IID IID_ITLegacyCallMediaControl;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DetectDigits( 
-            /* [in] */ TAPI_DIGITMODE DigitMode) = 0;
+            /* [annotation][in] */ 
+            _In_  TAPI_DIGITMODE DigitMode) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GenerateDigits( 
-            /* [in] */ __RPC__in BSTR pDigits,
-            /* [in] */ TAPI_DIGITMODE DigitMode) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pDigits,
+            /* [annotation][in] */ 
+            _In_  TAPI_DIGITMODE DigitMode) = 0;
         
         virtual /* [hidden][id] */ HRESULT STDMETHODCALLTYPE GetID( 
-            /* [in] */ __RPC__in BSTR pDeviceClass,
-            /* [out] */ __RPC__out DWORD *pdwSize,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwSize) BYTE **ppDeviceID) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pDeviceClass,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSize,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwSize)  BYTE **ppDeviceID) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetMediaType( 
-            /* [in] */ long lMediaType) = 0;
+            /* [annotation][in] */ 
+            _In_  long lMediaType) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE MonitorMedia( 
-            /* [in] */ long lMediaType) = 0;
+            /* [annotation][in] */ 
+            _In_  long lMediaType) = 0;
         
     };
     
@@ -7760,7 +8677,8 @@ EXTERN_C const IID IID_ITLegacyCallMediaControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITLegacyCallMediaControl * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7775,23 +8693,31 @@ EXTERN_C const IID IID_ITLegacyCallMediaControl;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITLegacyCallMediaControl * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITLegacyCallMediaControl * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITLegacyCallMediaControl * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -7816,30 +8742,38 @@ EXTERN_C const IID IID_ITLegacyCallMediaControl;
         DECLSPEC_XFGVIRT(ITLegacyCallMediaControl, DetectDigits)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DetectDigits )( 
             __RPC__in ITLegacyCallMediaControl * This,
-            /* [in] */ TAPI_DIGITMODE DigitMode);
+            /* [annotation][in] */ 
+            _In_  TAPI_DIGITMODE DigitMode);
         
         DECLSPEC_XFGVIRT(ITLegacyCallMediaControl, GenerateDigits)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GenerateDigits )( 
             __RPC__in ITLegacyCallMediaControl * This,
-            /* [in] */ __RPC__in BSTR pDigits,
-            /* [in] */ TAPI_DIGITMODE DigitMode);
+            /* [annotation][in] */ 
+            _In_  BSTR pDigits,
+            /* [annotation][in] */ 
+            _In_  TAPI_DIGITMODE DigitMode);
         
         DECLSPEC_XFGVIRT(ITLegacyCallMediaControl, GetID)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *GetID )( 
             __RPC__in ITLegacyCallMediaControl * This,
-            /* [in] */ __RPC__in BSTR pDeviceClass,
-            /* [out] */ __RPC__out DWORD *pdwSize,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwSize) BYTE **ppDeviceID);
+            /* [annotation][in] */ 
+            _In_  BSTR pDeviceClass,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSize,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwSize)  BYTE **ppDeviceID);
         
         DECLSPEC_XFGVIRT(ITLegacyCallMediaControl, SetMediaType)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetMediaType )( 
             __RPC__in ITLegacyCallMediaControl * This,
-            /* [in] */ long lMediaType);
+            /* [annotation][in] */ 
+            _In_  long lMediaType);
         
         DECLSPEC_XFGVIRT(ITLegacyCallMediaControl, MonitorMedia)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *MonitorMedia )( 
             __RPC__in ITLegacyCallMediaControl * This,
-            /* [in] */ long lMediaType);
+            /* [annotation][in] */ 
+            _In_  long lMediaType);
         
         END_INTERFACE
     } ITLegacyCallMediaControlVtbl;
@@ -7919,46 +8853,68 @@ EXTERN_C const IID IID_ITLegacyCallMediaControl2;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GenerateDigits2( 
-            /* [in] */ __RPC__in BSTR pDigits,
-            /* [in] */ TAPI_DIGITMODE DigitMode,
-            /* [in] */ long lDuration) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pDigits,
+            /* [annotation][in] */ 
+            _In_  TAPI_DIGITMODE DigitMode,
+            /* [annotation][in] */ 
+            _In_  long lDuration) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GatherDigits( 
-            /* [in] */ TAPI_DIGITMODE DigitMode,
-            /* [in] */ long lNumDigits,
-            /* [in] */ __RPC__in BSTR pTerminationDigits,
-            /* [in] */ long lFirstDigitTimeout,
-            /* [in] */ long lInterDigitTimeout) = 0;
+            /* [annotation][in] */ 
+            _In_  TAPI_DIGITMODE DigitMode,
+            /* [annotation][in] */ 
+            _In_  long lNumDigits,
+            /* [annotation][in] */ 
+            _In_  BSTR pTerminationDigits,
+            /* [annotation][in] */ 
+            _In_  long lFirstDigitTimeout,
+            /* [annotation][in] */ 
+            _In_  long lInterDigitTimeout) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE DetectTones( 
-            /* [in] */ __RPC__in TAPI_DETECTTONE *pToneList,
-            /* [in] */ long lNumTones) = 0;
+            /* [annotation][in] */ 
+            _In_  TAPI_DETECTTONE *pToneList,
+            /* [annotation][in] */ 
+            _In_  long lNumTones) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DetectTonesByCollection( 
-            /* [in] */ __RPC__in_opt ITCollection2 *pDetectToneCollection) = 0;
+            /* [annotation][in] */ 
+            _In_  ITCollection2 *pDetectToneCollection) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GenerateTone( 
-            /* [in] */ TAPI_TONEMODE ToneMode,
-            /* [in] */ long lDuration) = 0;
+            /* [annotation][in] */ 
+            _In_  TAPI_TONEMODE ToneMode,
+            /* [annotation][in] */ 
+            _In_  long lDuration) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE GenerateCustomTones( 
-            /* [in] */ __RPC__in TAPI_CUSTOMTONE *pToneList,
-            /* [in] */ long lNumTones,
-            /* [in] */ long lDuration) = 0;
+            /* [annotation][in] */ 
+            _In_  TAPI_CUSTOMTONE *pToneList,
+            /* [annotation][in] */ 
+            _In_  long lNumTones,
+            /* [annotation][in] */ 
+            _In_  long lDuration) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GenerateCustomTonesByCollection( 
-            /* [in] */ __RPC__in_opt ITCollection2 *pCustomToneCollection,
-            /* [in] */ long lDuration) = 0;
+            /* [annotation][in] */ 
+            _In_  ITCollection2 *pCustomToneCollection,
+            /* [annotation][in] */ 
+            _In_  long lDuration) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateDetectToneObject( 
-            /* [retval][out] */ __RPC__deref_out_opt ITDetectTone **ppDetectTone) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITDetectTone **ppDetectTone) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateCustomToneObject( 
-            /* [retval][out] */ __RPC__deref_out_opt ITCustomTone **ppCustomTone) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCustomTone **ppCustomTone) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetIDAsVariant( 
-            /* [in] */ __RPC__in BSTR bstrDeviceClass,
-            /* [retval][out] */ __RPC__out VARIANT *pVarDeviceID) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrDeviceClass,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVarDeviceID) = 0;
         
     };
     
@@ -7972,7 +8928,8 @@ EXTERN_C const IID IID_ITLegacyCallMediaControl2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITLegacyCallMediaControl2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7987,23 +8944,31 @@ EXTERN_C const IID IID_ITLegacyCallMediaControl2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITLegacyCallMediaControl2 * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITLegacyCallMediaControl2 * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITLegacyCallMediaControl2 * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -8028,92 +8993,122 @@ EXTERN_C const IID IID_ITLegacyCallMediaControl2;
         DECLSPEC_XFGVIRT(ITLegacyCallMediaControl, DetectDigits)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DetectDigits )( 
             __RPC__in ITLegacyCallMediaControl2 * This,
-            /* [in] */ TAPI_DIGITMODE DigitMode);
+            /* [annotation][in] */ 
+            _In_  TAPI_DIGITMODE DigitMode);
         
         DECLSPEC_XFGVIRT(ITLegacyCallMediaControl, GenerateDigits)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GenerateDigits )( 
             __RPC__in ITLegacyCallMediaControl2 * This,
-            /* [in] */ __RPC__in BSTR pDigits,
-            /* [in] */ TAPI_DIGITMODE DigitMode);
+            /* [annotation][in] */ 
+            _In_  BSTR pDigits,
+            /* [annotation][in] */ 
+            _In_  TAPI_DIGITMODE DigitMode);
         
         DECLSPEC_XFGVIRT(ITLegacyCallMediaControl, GetID)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *GetID )( 
             __RPC__in ITLegacyCallMediaControl2 * This,
-            /* [in] */ __RPC__in BSTR pDeviceClass,
-            /* [out] */ __RPC__out DWORD *pdwSize,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pdwSize) BYTE **ppDeviceID);
+            /* [annotation][in] */ 
+            _In_  BSTR pDeviceClass,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSize,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pdwSize)  BYTE **ppDeviceID);
         
         DECLSPEC_XFGVIRT(ITLegacyCallMediaControl, SetMediaType)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetMediaType )( 
             __RPC__in ITLegacyCallMediaControl2 * This,
-            /* [in] */ long lMediaType);
+            /* [annotation][in] */ 
+            _In_  long lMediaType);
         
         DECLSPEC_XFGVIRT(ITLegacyCallMediaControl, MonitorMedia)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *MonitorMedia )( 
             __RPC__in ITLegacyCallMediaControl2 * This,
-            /* [in] */ long lMediaType);
+            /* [annotation][in] */ 
+            _In_  long lMediaType);
         
         DECLSPEC_XFGVIRT(ITLegacyCallMediaControl2, GenerateDigits2)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GenerateDigits2 )( 
             __RPC__in ITLegacyCallMediaControl2 * This,
-            /* [in] */ __RPC__in BSTR pDigits,
-            /* [in] */ TAPI_DIGITMODE DigitMode,
-            /* [in] */ long lDuration);
+            /* [annotation][in] */ 
+            _In_  BSTR pDigits,
+            /* [annotation][in] */ 
+            _In_  TAPI_DIGITMODE DigitMode,
+            /* [annotation][in] */ 
+            _In_  long lDuration);
         
         DECLSPEC_XFGVIRT(ITLegacyCallMediaControl2, GatherDigits)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GatherDigits )( 
             __RPC__in ITLegacyCallMediaControl2 * This,
-            /* [in] */ TAPI_DIGITMODE DigitMode,
-            /* [in] */ long lNumDigits,
-            /* [in] */ __RPC__in BSTR pTerminationDigits,
-            /* [in] */ long lFirstDigitTimeout,
-            /* [in] */ long lInterDigitTimeout);
+            /* [annotation][in] */ 
+            _In_  TAPI_DIGITMODE DigitMode,
+            /* [annotation][in] */ 
+            _In_  long lNumDigits,
+            /* [annotation][in] */ 
+            _In_  BSTR pTerminationDigits,
+            /* [annotation][in] */ 
+            _In_  long lFirstDigitTimeout,
+            /* [annotation][in] */ 
+            _In_  long lInterDigitTimeout);
         
         DECLSPEC_XFGVIRT(ITLegacyCallMediaControl2, DetectTones)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *DetectTones )( 
             __RPC__in ITLegacyCallMediaControl2 * This,
-            /* [in] */ __RPC__in TAPI_DETECTTONE *pToneList,
-            /* [in] */ long lNumTones);
+            /* [annotation][in] */ 
+            _In_  TAPI_DETECTTONE *pToneList,
+            /* [annotation][in] */ 
+            _In_  long lNumTones);
         
         DECLSPEC_XFGVIRT(ITLegacyCallMediaControl2, DetectTonesByCollection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DetectTonesByCollection )( 
             __RPC__in ITLegacyCallMediaControl2 * This,
-            /* [in] */ __RPC__in_opt ITCollection2 *pDetectToneCollection);
+            /* [annotation][in] */ 
+            _In_  ITCollection2 *pDetectToneCollection);
         
         DECLSPEC_XFGVIRT(ITLegacyCallMediaControl2, GenerateTone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GenerateTone )( 
             __RPC__in ITLegacyCallMediaControl2 * This,
-            /* [in] */ TAPI_TONEMODE ToneMode,
-            /* [in] */ long lDuration);
+            /* [annotation][in] */ 
+            _In_  TAPI_TONEMODE ToneMode,
+            /* [annotation][in] */ 
+            _In_  long lDuration);
         
         DECLSPEC_XFGVIRT(ITLegacyCallMediaControl2, GenerateCustomTones)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *GenerateCustomTones )( 
             __RPC__in ITLegacyCallMediaControl2 * This,
-            /* [in] */ __RPC__in TAPI_CUSTOMTONE *pToneList,
-            /* [in] */ long lNumTones,
-            /* [in] */ long lDuration);
+            /* [annotation][in] */ 
+            _In_  TAPI_CUSTOMTONE *pToneList,
+            /* [annotation][in] */ 
+            _In_  long lNumTones,
+            /* [annotation][in] */ 
+            _In_  long lDuration);
         
         DECLSPEC_XFGVIRT(ITLegacyCallMediaControl2, GenerateCustomTonesByCollection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GenerateCustomTonesByCollection )( 
             __RPC__in ITLegacyCallMediaControl2 * This,
-            /* [in] */ __RPC__in_opt ITCollection2 *pCustomToneCollection,
-            /* [in] */ long lDuration);
+            /* [annotation][in] */ 
+            _In_  ITCollection2 *pCustomToneCollection,
+            /* [annotation][in] */ 
+            _In_  long lDuration);
         
         DECLSPEC_XFGVIRT(ITLegacyCallMediaControl2, CreateDetectToneObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateDetectToneObject )( 
             __RPC__in ITLegacyCallMediaControl2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITDetectTone **ppDetectTone);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITDetectTone **ppDetectTone);
         
         DECLSPEC_XFGVIRT(ITLegacyCallMediaControl2, CreateCustomToneObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateCustomToneObject )( 
             __RPC__in ITLegacyCallMediaControl2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCustomTone **ppCustomTone);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCustomTone **ppCustomTone);
         
         DECLSPEC_XFGVIRT(ITLegacyCallMediaControl2, GetIDAsVariant)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetIDAsVariant )( 
             __RPC__in ITLegacyCallMediaControl2 * This,
-            /* [in] */ __RPC__in BSTR bstrDeviceClass,
-            /* [retval][out] */ __RPC__out VARIANT *pVarDeviceID);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrDeviceClass,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVarDeviceID);
         
         END_INTERFACE
     } ITLegacyCallMediaControl2Vtbl;
@@ -8224,24 +9219,32 @@ EXTERN_C const IID IID_ITDetectTone;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AppSpecific( 
-            /* [retval][out] */ __RPC__out long *plAppSpecific) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plAppSpecific) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_AppSpecific( 
-            /* [in] */ long lAppSpecific) = 0;
+            /* [annotation][in] */ 
+            _In_  long lAppSpecific) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Duration( 
-            /* [retval][out] */ __RPC__out long *plDuration) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plDuration) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Duration( 
-            /* [in] */ long lDuration) = 0;
+            /* [annotation][in] */ 
+            _In_  long lDuration) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Frequency( 
-            /* [in] */ long Index,
-            /* [retval][out] */ __RPC__out long *plFrequency) = 0;
+            /* [annotation][in] */ 
+            _In_  long Index,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plFrequency) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Frequency( 
-            /* [in] */ long Index,
-            /* [in] */ long lFrequency) = 0;
+            /* [annotation][in] */ 
+            _In_  long Index,
+            /* [annotation][in] */ 
+            _In_  long lFrequency) = 0;
         
     };
     
@@ -8255,7 +9258,8 @@ EXTERN_C const IID IID_ITDetectTone;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITDetectTone * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8270,23 +9274,31 @@ EXTERN_C const IID IID_ITDetectTone;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITDetectTone * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITDetectTone * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITDetectTone * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -8311,34 +9323,42 @@ EXTERN_C const IID IID_ITDetectTone;
         DECLSPEC_XFGVIRT(ITDetectTone, get_AppSpecific)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AppSpecific )( 
             __RPC__in ITDetectTone * This,
-            /* [retval][out] */ __RPC__out long *plAppSpecific);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plAppSpecific);
         
         DECLSPEC_XFGVIRT(ITDetectTone, put_AppSpecific)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AppSpecific )( 
             __RPC__in ITDetectTone * This,
-            /* [in] */ long lAppSpecific);
+            /* [annotation][in] */ 
+            _In_  long lAppSpecific);
         
         DECLSPEC_XFGVIRT(ITDetectTone, get_Duration)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Duration )( 
             __RPC__in ITDetectTone * This,
-            /* [retval][out] */ __RPC__out long *plDuration);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plDuration);
         
         DECLSPEC_XFGVIRT(ITDetectTone, put_Duration)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Duration )( 
             __RPC__in ITDetectTone * This,
-            /* [in] */ long lDuration);
+            /* [annotation][in] */ 
+            _In_  long lDuration);
         
         DECLSPEC_XFGVIRT(ITDetectTone, get_Frequency)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Frequency )( 
             __RPC__in ITDetectTone * This,
-            /* [in] */ long Index,
-            /* [retval][out] */ __RPC__out long *plFrequency);
+            /* [annotation][in] */ 
+            _In_  long Index,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plFrequency);
         
         DECLSPEC_XFGVIRT(ITDetectTone, put_Frequency)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Frequency )( 
             __RPC__in ITDetectTone * This,
-            /* [in] */ long Index,
-            /* [in] */ long lFrequency);
+            /* [annotation][in] */ 
+            _In_  long Index,
+            /* [annotation][in] */ 
+            _In_  long lFrequency);
         
         END_INTERFACE
     } ITDetectToneVtbl;
@@ -8421,28 +9441,36 @@ EXTERN_C const IID IID_ITCustomTone;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Frequency( 
-            /* [retval][out] */ __RPC__out long *plFrequency) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plFrequency) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Frequency( 
-            /* [in] */ long lFrequency) = 0;
+            /* [annotation][in] */ 
+            _In_  long lFrequency) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CadenceOn( 
-            /* [retval][out] */ __RPC__out long *plCadenceOn) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCadenceOn) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_CadenceOn( 
-            /* [in] */ long CadenceOn) = 0;
+            /* [annotation][in] */ 
+            _In_  long CadenceOn) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CadenceOff( 
-            /* [retval][out] */ __RPC__out long *plCadenceOff) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCadenceOff) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_CadenceOff( 
-            /* [in] */ long lCadenceOff) = 0;
+            /* [annotation][in] */ 
+            _In_  long lCadenceOff) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Volume( 
-            /* [retval][out] */ __RPC__out long *plVolume) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plVolume) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Volume( 
-            /* [in] */ long lVolume) = 0;
+            /* [annotation][in] */ 
+            _In_  long lVolume) = 0;
         
     };
     
@@ -8456,7 +9484,8 @@ EXTERN_C const IID IID_ITCustomTone;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITCustomTone * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8471,23 +9500,31 @@ EXTERN_C const IID IID_ITCustomTone;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITCustomTone * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITCustomTone * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITCustomTone * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -8512,42 +9549,50 @@ EXTERN_C const IID IID_ITCustomTone;
         DECLSPEC_XFGVIRT(ITCustomTone, get_Frequency)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Frequency )( 
             __RPC__in ITCustomTone * This,
-            /* [retval][out] */ __RPC__out long *plFrequency);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plFrequency);
         
         DECLSPEC_XFGVIRT(ITCustomTone, put_Frequency)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Frequency )( 
             __RPC__in ITCustomTone * This,
-            /* [in] */ long lFrequency);
+            /* [annotation][in] */ 
+            _In_  long lFrequency);
         
         DECLSPEC_XFGVIRT(ITCustomTone, get_CadenceOn)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CadenceOn )( 
             __RPC__in ITCustomTone * This,
-            /* [retval][out] */ __RPC__out long *plCadenceOn);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCadenceOn);
         
         DECLSPEC_XFGVIRT(ITCustomTone, put_CadenceOn)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CadenceOn )( 
             __RPC__in ITCustomTone * This,
-            /* [in] */ long CadenceOn);
+            /* [annotation][in] */ 
+            _In_  long CadenceOn);
         
         DECLSPEC_XFGVIRT(ITCustomTone, get_CadenceOff)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CadenceOff )( 
             __RPC__in ITCustomTone * This,
-            /* [retval][out] */ __RPC__out long *plCadenceOff);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCadenceOff);
         
         DECLSPEC_XFGVIRT(ITCustomTone, put_CadenceOff)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CadenceOff )( 
             __RPC__in ITCustomTone * This,
-            /* [in] */ long lCadenceOff);
+            /* [annotation][in] */ 
+            _In_  long lCadenceOff);
         
         DECLSPEC_XFGVIRT(ITCustomTone, get_Volume)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Volume )( 
             __RPC__in ITCustomTone * This,
-            /* [retval][out] */ __RPC__out long *plVolume);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plVolume);
         
         DECLSPEC_XFGVIRT(ITCustomTone, put_Volume)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Volume )( 
             __RPC__in ITCustomTone * This,
-            /* [in] */ long lVolume);
+            /* [annotation][in] */ 
+            _In_  long lVolume);
         
         END_INTERFACE
     } ITCustomToneVtbl;
@@ -8636,17 +9681,21 @@ EXTERN_C const IID IID_IEnumPhone;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [size_is][out] */ __RPC__out_ecount_full(celt) ITPhone **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(celt)  ITPhone **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumPhone **ppEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumPhone **ppEnum) = 0;
         
     };
     
@@ -8660,7 +9709,8 @@ EXTERN_C const IID IID_IEnumPhone;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumPhone * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8675,8 +9725,10 @@ EXTERN_C const IID IID_IEnumPhone;
         DECLSPEC_XFGVIRT(IEnumPhone, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumPhone * This,
-            /* [in] */ ULONG celt,
-            /* [size_is][out] */ __RPC__out_ecount_full(celt) ITPhone **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(celt)  ITPhone **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumPhone, Reset)
@@ -8686,12 +9738,14 @@ EXTERN_C const IID IID_IEnumPhone;
         DECLSPEC_XFGVIRT(IEnumPhone, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumPhone * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumPhone, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumPhone * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumPhone **ppEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumPhone **ppEnum);
         
         END_INTERFACE
     } IEnumPhoneVtbl;
@@ -8755,17 +9809,21 @@ EXTERN_C const IID IID_IEnumTerminal;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [out] */ __RPC__deref_out_opt ITTerminal **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  ITTerminal **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumTerminal **ppEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumTerminal **ppEnum) = 0;
         
     };
     
@@ -8779,7 +9837,8 @@ EXTERN_C const IID IID_IEnumTerminal;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumTerminal * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8794,8 +9853,10 @@ EXTERN_C const IID IID_IEnumTerminal;
         DECLSPEC_XFGVIRT(IEnumTerminal, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumTerminal * This,
-            /* [in] */ ULONG celt,
-            /* [out] */ __RPC__deref_out_opt ITTerminal **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  ITTerminal **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumTerminal, Reset)
@@ -8805,12 +9866,14 @@ EXTERN_C const IID IID_IEnumTerminal;
         DECLSPEC_XFGVIRT(IEnumTerminal, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumTerminal * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumTerminal, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumTerminal * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumTerminal **ppEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumTerminal **ppEnum);
         
         END_INTERFACE
     } IEnumTerminalVtbl;
@@ -8874,17 +9937,21 @@ EXTERN_C const IID IID_IEnumTerminalClass;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [size_is][out] */ __RPC__out_ecount_full(celt) GUID *pElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(celt)  GUID *pElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumTerminalClass **ppEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumTerminalClass **ppEnum) = 0;
         
     };
     
@@ -8898,7 +9965,8 @@ EXTERN_C const IID IID_IEnumTerminalClass;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumTerminalClass * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8913,8 +9981,10 @@ EXTERN_C const IID IID_IEnumTerminalClass;
         DECLSPEC_XFGVIRT(IEnumTerminalClass, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumTerminalClass * This,
-            /* [in] */ ULONG celt,
-            /* [size_is][out] */ __RPC__out_ecount_full(celt) GUID *pElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(celt)  GUID *pElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumTerminalClass, Reset)
@@ -8924,12 +9994,14 @@ EXTERN_C const IID IID_IEnumTerminalClass;
         DECLSPEC_XFGVIRT(IEnumTerminalClass, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumTerminalClass * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumTerminalClass, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumTerminalClass * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumTerminalClass **ppEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumTerminalClass **ppEnum);
         
         END_INTERFACE
     } IEnumTerminalClassVtbl;
@@ -8993,17 +10065,21 @@ EXTERN_C const IID IID_IEnumCall;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [out] */ __RPC__deref_out_opt ITCallInfo **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  ITCallInfo **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumCall **ppEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumCall **ppEnum) = 0;
         
     };
     
@@ -9017,7 +10093,8 @@ EXTERN_C const IID IID_IEnumCall;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumCall * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9032,8 +10109,10 @@ EXTERN_C const IID IID_IEnumCall;
         DECLSPEC_XFGVIRT(IEnumCall, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumCall * This,
-            /* [in] */ ULONG celt,
-            /* [out] */ __RPC__deref_out_opt ITCallInfo **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  ITCallInfo **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumCall, Reset)
@@ -9043,12 +10122,14 @@ EXTERN_C const IID IID_IEnumCall;
         DECLSPEC_XFGVIRT(IEnumCall, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumCall * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumCall, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumCall * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumCall **ppEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumCall **ppEnum);
         
         END_INTERFACE
     } IEnumCallVtbl;
@@ -9112,17 +10193,21 @@ EXTERN_C const IID IID_IEnumAddress;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [size_is][out] */ __RPC__out_ecount_full(celt) ITAddress **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(celt)  ITAddress **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumAddress **ppEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumAddress **ppEnum) = 0;
         
     };
     
@@ -9136,7 +10221,8 @@ EXTERN_C const IID IID_IEnumAddress;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumAddress * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9151,8 +10237,10 @@ EXTERN_C const IID IID_IEnumAddress;
         DECLSPEC_XFGVIRT(IEnumAddress, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumAddress * This,
-            /* [in] */ ULONG celt,
-            /* [size_is][out] */ __RPC__out_ecount_full(celt) ITAddress **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(celt)  ITAddress **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumAddress, Reset)
@@ -9162,12 +10250,14 @@ EXTERN_C const IID IID_IEnumAddress;
         DECLSPEC_XFGVIRT(IEnumAddress, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumAddress * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumAddress, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumAddress * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumAddress **ppEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumAddress **ppEnum);
         
         END_INTERFACE
     } IEnumAddressVtbl;
@@ -9231,17 +10321,21 @@ EXTERN_C const IID IID_IEnumCallHub;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [size_is][out] */ __RPC__out_ecount_full(celt) ITCallHub **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(celt)  ITCallHub **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumCallHub **ppEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumCallHub **ppEnum) = 0;
         
     };
     
@@ -9255,7 +10349,8 @@ EXTERN_C const IID IID_IEnumCallHub;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumCallHub * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9270,8 +10365,10 @@ EXTERN_C const IID IID_IEnumCallHub;
         DECLSPEC_XFGVIRT(IEnumCallHub, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumCallHub * This,
-            /* [in] */ ULONG celt,
-            /* [size_is][out] */ __RPC__out_ecount_full(celt) ITCallHub **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(celt)  ITCallHub **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumCallHub, Reset)
@@ -9281,12 +10378,14 @@ EXTERN_C const IID IID_IEnumCallHub;
         DECLSPEC_XFGVIRT(IEnumCallHub, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumCallHub * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumCallHub, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumCallHub * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumCallHub **ppEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumCallHub **ppEnum);
         
         END_INTERFACE
     } IEnumCallHubVtbl;
@@ -9350,17 +10449,21 @@ EXTERN_C const IID IID_IEnumBstr;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [size_is][out] */ __RPC__out_ecount_full(celt) BSTR *ppStrings,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(celt)  BSTR *ppStrings,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumBstr **ppEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumBstr **ppEnum) = 0;
         
     };
     
@@ -9374,7 +10477,8 @@ EXTERN_C const IID IID_IEnumBstr;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumBstr * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9389,8 +10493,10 @@ EXTERN_C const IID IID_IEnumBstr;
         DECLSPEC_XFGVIRT(IEnumBstr, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumBstr * This,
-            /* [in] */ ULONG celt,
-            /* [size_is][out] */ __RPC__out_ecount_full(celt) BSTR *ppStrings,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(celt)  BSTR *ppStrings,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumBstr, Reset)
@@ -9400,12 +10506,14 @@ EXTERN_C const IID IID_IEnumBstr;
         DECLSPEC_XFGVIRT(IEnumBstr, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumBstr * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumBstr, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumBstr * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumBstr **ppEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumBstr **ppEnum);
         
         END_INTERFACE
     } IEnumBstrVtbl;
@@ -9469,17 +10577,21 @@ EXTERN_C const IID IID_IEnumPluggableTerminalClassInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [size_is][out] */ __RPC__out_ecount_full(celt) ITPluggableTerminalClassInfo **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(celt)  ITPluggableTerminalClassInfo **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumPluggableTerminalClassInfo **ppEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumPluggableTerminalClassInfo **ppEnum) = 0;
         
     };
     
@@ -9493,7 +10605,8 @@ EXTERN_C const IID IID_IEnumPluggableTerminalClassInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumPluggableTerminalClassInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9508,8 +10621,10 @@ EXTERN_C const IID IID_IEnumPluggableTerminalClassInfo;
         DECLSPEC_XFGVIRT(IEnumPluggableTerminalClassInfo, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumPluggableTerminalClassInfo * This,
-            /* [in] */ ULONG celt,
-            /* [size_is][out] */ __RPC__out_ecount_full(celt) ITPluggableTerminalClassInfo **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(celt)  ITPluggableTerminalClassInfo **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumPluggableTerminalClassInfo, Reset)
@@ -9519,12 +10634,14 @@ EXTERN_C const IID IID_IEnumPluggableTerminalClassInfo;
         DECLSPEC_XFGVIRT(IEnumPluggableTerminalClassInfo, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumPluggableTerminalClassInfo * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumPluggableTerminalClassInfo, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumPluggableTerminalClassInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumPluggableTerminalClassInfo **ppEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumPluggableTerminalClassInfo **ppEnum);
         
         END_INTERFACE
     } IEnumPluggableTerminalClassInfoVtbl;
@@ -9588,17 +10705,21 @@ EXTERN_C const IID IID_IEnumPluggableSuperclassInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [size_is][out] */ __RPC__out_ecount_full(celt) ITPluggableTerminalSuperclassInfo **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(celt)  ITPluggableTerminalSuperclassInfo **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumPluggableSuperclassInfo **ppEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumPluggableSuperclassInfo **ppEnum) = 0;
         
     };
     
@@ -9612,7 +10733,8 @@ EXTERN_C const IID IID_IEnumPluggableSuperclassInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumPluggableSuperclassInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9627,8 +10749,10 @@ EXTERN_C const IID IID_IEnumPluggableSuperclassInfo;
         DECLSPEC_XFGVIRT(IEnumPluggableSuperclassInfo, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumPluggableSuperclassInfo * This,
-            /* [in] */ ULONG celt,
-            /* [size_is][out] */ __RPC__out_ecount_full(celt) ITPluggableTerminalSuperclassInfo **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(celt)  ITPluggableTerminalSuperclassInfo **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumPluggableSuperclassInfo, Reset)
@@ -9638,12 +10762,14 @@ EXTERN_C const IID IID_IEnumPluggableSuperclassInfo;
         DECLSPEC_XFGVIRT(IEnumPluggableSuperclassInfo, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumPluggableSuperclassInfo * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumPluggableSuperclassInfo, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumPluggableSuperclassInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumPluggableSuperclassInfo **ppEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumPluggableSuperclassInfo **ppEnum);
         
         END_INTERFACE
     } IEnumPluggableSuperclassInfoVtbl;
@@ -9707,31 +10833,40 @@ EXTERN_C const IID IID_ITPhoneEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Phone( 
-            /* [retval][out] */ __RPC__deref_out_opt ITPhone **ppPhone) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITPhone **ppPhone) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Event( 
-            /* [retval][out] */ __RPC__out PHONE_EVENT *pEvent) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PHONE_EVENT *pEvent) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ButtonState( 
-            /* [retval][out] */ __RPC__out PHONE_BUTTON_STATE *pState) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PHONE_BUTTON_STATE *pState) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_HookSwitchState( 
-            /* [retval][out] */ __RPC__out PHONE_HOOK_SWITCH_STATE *pState) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PHONE_HOOK_SWITCH_STATE *pState) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_HookSwitchDevice( 
-            /* [retval][out] */ __RPC__out PHONE_HOOK_SWITCH_DEVICE *pDevice) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PHONE_HOOK_SWITCH_DEVICE *pDevice) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RingMode( 
-            /* [retval][out] */ __RPC__out long *plRingMode) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plRingMode) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ButtonLampId( 
-            /* [retval][out] */ __RPC__out long *plButtonLampId) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plButtonLampId) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NumberGathered( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppNumber) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppNumber) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Call( 
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCallInfo) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCallInfo) = 0;
         
     };
     
@@ -9745,7 +10880,8 @@ EXTERN_C const IID IID_ITPhoneEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITPhoneEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9760,23 +10896,31 @@ EXTERN_C const IID IID_ITPhoneEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITPhoneEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITPhoneEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITPhoneEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -9801,47 +10945,56 @@ EXTERN_C const IID IID_ITPhoneEvent;
         DECLSPEC_XFGVIRT(ITPhoneEvent, get_Phone)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Phone )( 
             __RPC__in ITPhoneEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITPhone **ppPhone);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITPhone **ppPhone);
         
         DECLSPEC_XFGVIRT(ITPhoneEvent, get_Event)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Event )( 
             __RPC__in ITPhoneEvent * This,
-            /* [retval][out] */ __RPC__out PHONE_EVENT *pEvent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PHONE_EVENT *pEvent);
         
         DECLSPEC_XFGVIRT(ITPhoneEvent, get_ButtonState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ButtonState )( 
             __RPC__in ITPhoneEvent * This,
-            /* [retval][out] */ __RPC__out PHONE_BUTTON_STATE *pState);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PHONE_BUTTON_STATE *pState);
         
         DECLSPEC_XFGVIRT(ITPhoneEvent, get_HookSwitchState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_HookSwitchState )( 
             __RPC__in ITPhoneEvent * This,
-            /* [retval][out] */ __RPC__out PHONE_HOOK_SWITCH_STATE *pState);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PHONE_HOOK_SWITCH_STATE *pState);
         
         DECLSPEC_XFGVIRT(ITPhoneEvent, get_HookSwitchDevice)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_HookSwitchDevice )( 
             __RPC__in ITPhoneEvent * This,
-            /* [retval][out] */ __RPC__out PHONE_HOOK_SWITCH_DEVICE *pDevice);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PHONE_HOOK_SWITCH_DEVICE *pDevice);
         
         DECLSPEC_XFGVIRT(ITPhoneEvent, get_RingMode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RingMode )( 
             __RPC__in ITPhoneEvent * This,
-            /* [retval][out] */ __RPC__out long *plRingMode);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plRingMode);
         
         DECLSPEC_XFGVIRT(ITPhoneEvent, get_ButtonLampId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ButtonLampId )( 
             __RPC__in ITPhoneEvent * This,
-            /* [retval][out] */ __RPC__out long *plButtonLampId);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plButtonLampId);
         
         DECLSPEC_XFGVIRT(ITPhoneEvent, get_NumberGathered)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NumberGathered )( 
             __RPC__in ITPhoneEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppNumber);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppNumber);
         
         DECLSPEC_XFGVIRT(ITPhoneEvent, get_Call)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Call )( 
             __RPC__in ITPhoneEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCallInfo);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCallInfo);
         
         END_INTERFACE
     } ITPhoneEventVtbl;
@@ -9933,16 +11086,20 @@ EXTERN_C const IID IID_ITCallStateEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Call( 
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCallInfo) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCallInfo) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_State( 
-            /* [retval][out] */ __RPC__out CALL_STATE *pCallState) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CALL_STATE *pCallState) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Cause( 
-            /* [retval][out] */ __RPC__out CALL_STATE_EVENT_CAUSE *pCEC) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CALL_STATE_EVENT_CAUSE *pCEC) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CallbackInstance( 
-            /* [retval][out] */ __RPC__out long *plCallbackInstance) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallbackInstance) = 0;
         
     };
     
@@ -9956,7 +11113,8 @@ EXTERN_C const IID IID_ITCallStateEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITCallStateEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9971,23 +11129,31 @@ EXTERN_C const IID IID_ITCallStateEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITCallStateEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITCallStateEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITCallStateEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -10012,22 +11178,26 @@ EXTERN_C const IID IID_ITCallStateEvent;
         DECLSPEC_XFGVIRT(ITCallStateEvent, get_Call)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Call )( 
             __RPC__in ITCallStateEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCallInfo);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCallInfo);
         
         DECLSPEC_XFGVIRT(ITCallStateEvent, get_State)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in ITCallStateEvent * This,
-            /* [retval][out] */ __RPC__out CALL_STATE *pCallState);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CALL_STATE *pCallState);
         
         DECLSPEC_XFGVIRT(ITCallStateEvent, get_Cause)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Cause )( 
             __RPC__in ITCallStateEvent * This,
-            /* [retval][out] */ __RPC__out CALL_STATE_EVENT_CAUSE *pCEC);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CALL_STATE_EVENT_CAUSE *pCEC);
         
         DECLSPEC_XFGVIRT(ITCallStateEvent, get_CallbackInstance)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallbackInstance )( 
             __RPC__in ITCallStateEvent * This,
-            /* [retval][out] */ __RPC__out long *plCallbackInstance);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallbackInstance);
         
         END_INTERFACE
     } ITCallStateEventVtbl;
@@ -10104,16 +11274,20 @@ EXTERN_C const IID IID_ITPhoneDeviceSpecificEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Phone( 
-            /* [retval][out] */ __RPC__deref_out_opt ITPhone **ppPhone) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITPhone **ppPhone) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_lParam1( 
-            /* [retval][out] */ __RPC__out long *pParam1) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pParam1) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_lParam2( 
-            /* [retval][out] */ __RPC__out long *pParam2) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pParam2) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_lParam3( 
-            /* [retval][out] */ __RPC__out long *pParam3) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pParam3) = 0;
         
     };
     
@@ -10127,7 +11301,8 @@ EXTERN_C const IID IID_ITPhoneDeviceSpecificEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITPhoneDeviceSpecificEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10142,23 +11317,31 @@ EXTERN_C const IID IID_ITPhoneDeviceSpecificEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITPhoneDeviceSpecificEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITPhoneDeviceSpecificEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITPhoneDeviceSpecificEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -10183,22 +11366,26 @@ EXTERN_C const IID IID_ITPhoneDeviceSpecificEvent;
         DECLSPEC_XFGVIRT(ITPhoneDeviceSpecificEvent, get_Phone)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Phone )( 
             __RPC__in ITPhoneDeviceSpecificEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITPhone **ppPhone);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITPhone **ppPhone);
         
         DECLSPEC_XFGVIRT(ITPhoneDeviceSpecificEvent, get_lParam1)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lParam1 )( 
             __RPC__in ITPhoneDeviceSpecificEvent * This,
-            /* [retval][out] */ __RPC__out long *pParam1);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pParam1);
         
         DECLSPEC_XFGVIRT(ITPhoneDeviceSpecificEvent, get_lParam2)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lParam2 )( 
             __RPC__in ITPhoneDeviceSpecificEvent * This,
-            /* [retval][out] */ __RPC__out long *pParam2);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pParam2);
         
         DECLSPEC_XFGVIRT(ITPhoneDeviceSpecificEvent, get_lParam3)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lParam3 )( 
             __RPC__in ITPhoneDeviceSpecificEvent * This,
-            /* [retval][out] */ __RPC__out long *pParam3);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pParam3);
         
         END_INTERFACE
     } ITPhoneDeviceSpecificEventVtbl;
@@ -10275,22 +11462,28 @@ EXTERN_C const IID IID_ITCallMediaEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Call( 
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCallInfo) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCallInfo) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Event( 
-            /* [retval][out] */ __RPC__out CALL_MEDIA_EVENT *pCallMediaEvent) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CALL_MEDIA_EVENT *pCallMediaEvent) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Error( 
-            /* [retval][out] */ __RPC__out HRESULT *phrError) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HRESULT *phrError) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Terminal( 
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppTerminal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppTerminal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Stream( 
-            /* [retval][out] */ __RPC__deref_out_opt ITStream **ppStream) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITStream **ppStream) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Cause( 
-            /* [retval][out] */ __RPC__out CALL_MEDIA_EVENT_CAUSE *pCause) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CALL_MEDIA_EVENT_CAUSE *pCause) = 0;
         
     };
     
@@ -10304,7 +11497,8 @@ EXTERN_C const IID IID_ITCallMediaEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITCallMediaEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10319,23 +11513,31 @@ EXTERN_C const IID IID_ITCallMediaEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITCallMediaEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITCallMediaEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITCallMediaEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -10360,32 +11562,38 @@ EXTERN_C const IID IID_ITCallMediaEvent;
         DECLSPEC_XFGVIRT(ITCallMediaEvent, get_Call)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Call )( 
             __RPC__in ITCallMediaEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCallInfo);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCallInfo);
         
         DECLSPEC_XFGVIRT(ITCallMediaEvent, get_Event)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Event )( 
             __RPC__in ITCallMediaEvent * This,
-            /* [retval][out] */ __RPC__out CALL_MEDIA_EVENT *pCallMediaEvent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CALL_MEDIA_EVENT *pCallMediaEvent);
         
         DECLSPEC_XFGVIRT(ITCallMediaEvent, get_Error)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Error )( 
             __RPC__in ITCallMediaEvent * This,
-            /* [retval][out] */ __RPC__out HRESULT *phrError);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HRESULT *phrError);
         
         DECLSPEC_XFGVIRT(ITCallMediaEvent, get_Terminal)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Terminal )( 
             __RPC__in ITCallMediaEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppTerminal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppTerminal);
         
         DECLSPEC_XFGVIRT(ITCallMediaEvent, get_Stream)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Stream )( 
             __RPC__in ITCallMediaEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITStream **ppStream);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITStream **ppStream);
         
         DECLSPEC_XFGVIRT(ITCallMediaEvent, get_Cause)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Cause )( 
             __RPC__in ITCallMediaEvent * This,
-            /* [retval][out] */ __RPC__out CALL_MEDIA_EVENT_CAUSE *pCause);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CALL_MEDIA_EVENT_CAUSE *pCause);
         
         END_INTERFACE
     } ITCallMediaEventVtbl;
@@ -10468,19 +11676,24 @@ EXTERN_C const IID IID_ITDigitDetectionEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Call( 
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCallInfo) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCallInfo) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Digit( 
-            /* [retval][out] */ __RPC__out unsigned char *pucDigit) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  unsigned char *pucDigit) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DigitMode( 
-            /* [retval][out] */ __RPC__out TAPI_DIGITMODE *pDigitMode) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TAPI_DIGITMODE *pDigitMode) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TickCount( 
-            /* [retval][out] */ __RPC__out long *plTickCount) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plTickCount) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CallbackInstance( 
-            /* [retval][out] */ __RPC__out long *plCallbackInstance) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallbackInstance) = 0;
         
     };
     
@@ -10494,7 +11707,8 @@ EXTERN_C const IID IID_ITDigitDetectionEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITDigitDetectionEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10509,23 +11723,31 @@ EXTERN_C const IID IID_ITDigitDetectionEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITDigitDetectionEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITDigitDetectionEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITDigitDetectionEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -10550,27 +11772,32 @@ EXTERN_C const IID IID_ITDigitDetectionEvent;
         DECLSPEC_XFGVIRT(ITDigitDetectionEvent, get_Call)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Call )( 
             __RPC__in ITDigitDetectionEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCallInfo);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCallInfo);
         
         DECLSPEC_XFGVIRT(ITDigitDetectionEvent, get_Digit)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Digit )( 
             __RPC__in ITDigitDetectionEvent * This,
-            /* [retval][out] */ __RPC__out unsigned char *pucDigit);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  unsigned char *pucDigit);
         
         DECLSPEC_XFGVIRT(ITDigitDetectionEvent, get_DigitMode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DigitMode )( 
             __RPC__in ITDigitDetectionEvent * This,
-            /* [retval][out] */ __RPC__out TAPI_DIGITMODE *pDigitMode);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TAPI_DIGITMODE *pDigitMode);
         
         DECLSPEC_XFGVIRT(ITDigitDetectionEvent, get_TickCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TickCount )( 
             __RPC__in ITDigitDetectionEvent * This,
-            /* [retval][out] */ __RPC__out long *plTickCount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plTickCount);
         
         DECLSPEC_XFGVIRT(ITDigitDetectionEvent, get_CallbackInstance)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallbackInstance )( 
             __RPC__in ITDigitDetectionEvent * This,
-            /* [retval][out] */ __RPC__out long *plCallbackInstance);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallbackInstance);
         
         END_INTERFACE
     } ITDigitDetectionEventVtbl;
@@ -10650,16 +11877,20 @@ EXTERN_C const IID IID_ITDigitGenerationEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Call( 
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCallInfo) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCallInfo) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_GenerationTermination( 
-            /* [retval][out] */ __RPC__out long *plGenerationTermination) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plGenerationTermination) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TickCount( 
-            /* [retval][out] */ __RPC__out long *plTickCount) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plTickCount) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CallbackInstance( 
-            /* [retval][out] */ __RPC__out long *plCallbackInstance) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallbackInstance) = 0;
         
     };
     
@@ -10673,7 +11904,8 @@ EXTERN_C const IID IID_ITDigitGenerationEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITDigitGenerationEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10688,23 +11920,31 @@ EXTERN_C const IID IID_ITDigitGenerationEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITDigitGenerationEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITDigitGenerationEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITDigitGenerationEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -10729,22 +11969,26 @@ EXTERN_C const IID IID_ITDigitGenerationEvent;
         DECLSPEC_XFGVIRT(ITDigitGenerationEvent, get_Call)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Call )( 
             __RPC__in ITDigitGenerationEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCallInfo);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCallInfo);
         
         DECLSPEC_XFGVIRT(ITDigitGenerationEvent, get_GenerationTermination)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_GenerationTermination )( 
             __RPC__in ITDigitGenerationEvent * This,
-            /* [retval][out] */ __RPC__out long *plGenerationTermination);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plGenerationTermination);
         
         DECLSPEC_XFGVIRT(ITDigitGenerationEvent, get_TickCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TickCount )( 
             __RPC__in ITDigitGenerationEvent * This,
-            /* [retval][out] */ __RPC__out long *plTickCount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plTickCount);
         
         DECLSPEC_XFGVIRT(ITDigitGenerationEvent, get_CallbackInstance)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallbackInstance )( 
             __RPC__in ITDigitGenerationEvent * This,
-            /* [retval][out] */ __RPC__out long *plCallbackInstance);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallbackInstance);
         
         END_INTERFACE
     } ITDigitGenerationEventVtbl;
@@ -10821,19 +12065,24 @@ EXTERN_C const IID IID_ITDigitsGatheredEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Call( 
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCallInfo) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCallInfo) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Digits( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppDigits) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppDigits) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_GatherTermination( 
-            /* [retval][out] */ __RPC__out TAPI_GATHERTERM *pGatherTermination) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TAPI_GATHERTERM *pGatherTermination) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TickCount( 
-            /* [retval][out] */ __RPC__out long *plTickCount) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plTickCount) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CallbackInstance( 
-            /* [retval][out] */ __RPC__out long *plCallbackInstance) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallbackInstance) = 0;
         
     };
     
@@ -10847,7 +12096,8 @@ EXTERN_C const IID IID_ITDigitsGatheredEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITDigitsGatheredEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10862,23 +12112,31 @@ EXTERN_C const IID IID_ITDigitsGatheredEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITDigitsGatheredEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITDigitsGatheredEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITDigitsGatheredEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -10903,27 +12161,32 @@ EXTERN_C const IID IID_ITDigitsGatheredEvent;
         DECLSPEC_XFGVIRT(ITDigitsGatheredEvent, get_Call)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Call )( 
             __RPC__in ITDigitsGatheredEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCallInfo);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCallInfo);
         
         DECLSPEC_XFGVIRT(ITDigitsGatheredEvent, get_Digits)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Digits )( 
             __RPC__in ITDigitsGatheredEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppDigits);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppDigits);
         
         DECLSPEC_XFGVIRT(ITDigitsGatheredEvent, get_GatherTermination)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_GatherTermination )( 
             __RPC__in ITDigitsGatheredEvent * This,
-            /* [retval][out] */ __RPC__out TAPI_GATHERTERM *pGatherTermination);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TAPI_GATHERTERM *pGatherTermination);
         
         DECLSPEC_XFGVIRT(ITDigitsGatheredEvent, get_TickCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TickCount )( 
             __RPC__in ITDigitsGatheredEvent * This,
-            /* [retval][out] */ __RPC__out long *plTickCount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plTickCount);
         
         DECLSPEC_XFGVIRT(ITDigitsGatheredEvent, get_CallbackInstance)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallbackInstance )( 
             __RPC__in ITDigitsGatheredEvent * This,
-            /* [retval][out] */ __RPC__out long *plCallbackInstance);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallbackInstance);
         
         END_INTERFACE
     } ITDigitsGatheredEventVtbl;
@@ -11003,16 +12266,20 @@ EXTERN_C const IID IID_ITToneDetectionEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Call( 
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCallInfo) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCallInfo) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AppSpecific( 
-            /* [retval][out] */ __RPC__out long *plAppSpecific) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plAppSpecific) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TickCount( 
-            /* [retval][out] */ __RPC__out long *plTickCount) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plTickCount) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CallbackInstance( 
-            /* [retval][out] */ __RPC__out long *plCallbackInstance) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallbackInstance) = 0;
         
     };
     
@@ -11026,7 +12293,8 @@ EXTERN_C const IID IID_ITToneDetectionEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITToneDetectionEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11041,23 +12309,31 @@ EXTERN_C const IID IID_ITToneDetectionEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITToneDetectionEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITToneDetectionEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITToneDetectionEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -11082,22 +12358,26 @@ EXTERN_C const IID IID_ITToneDetectionEvent;
         DECLSPEC_XFGVIRT(ITToneDetectionEvent, get_Call)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Call )( 
             __RPC__in ITToneDetectionEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCallInfo);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCallInfo);
         
         DECLSPEC_XFGVIRT(ITToneDetectionEvent, get_AppSpecific)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AppSpecific )( 
             __RPC__in ITToneDetectionEvent * This,
-            /* [retval][out] */ __RPC__out long *plAppSpecific);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plAppSpecific);
         
         DECLSPEC_XFGVIRT(ITToneDetectionEvent, get_TickCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TickCount )( 
             __RPC__in ITToneDetectionEvent * This,
-            /* [retval][out] */ __RPC__out long *plTickCount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plTickCount);
         
         DECLSPEC_XFGVIRT(ITToneDetectionEvent, get_CallbackInstance)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallbackInstance )( 
             __RPC__in ITToneDetectionEvent * This,
-            /* [retval][out] */ __RPC__out long *plCallbackInstance);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallbackInstance);
         
         END_INTERFACE
     } ITToneDetectionEventVtbl;
@@ -11174,16 +12454,20 @@ EXTERN_C const IID IID_ITTAPIObjectEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TAPIObject( 
-            /* [retval][out] */ __RPC__deref_out_opt ITTAPI **ppTAPIObject) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTAPI **ppTAPIObject) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Event( 
-            /* [retval][out] */ __RPC__out TAPIOBJECT_EVENT *pEvent) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TAPIOBJECT_EVENT *pEvent) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Address( 
-            /* [retval][out] */ __RPC__deref_out_opt ITAddress **ppAddress) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAddress **ppAddress) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CallbackInstance( 
-            /* [retval][out] */ __RPC__out long *plCallbackInstance) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallbackInstance) = 0;
         
     };
     
@@ -11197,7 +12481,8 @@ EXTERN_C const IID IID_ITTAPIObjectEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITTAPIObjectEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11212,23 +12497,31 @@ EXTERN_C const IID IID_ITTAPIObjectEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITTAPIObjectEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITTAPIObjectEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITTAPIObjectEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -11253,22 +12546,26 @@ EXTERN_C const IID IID_ITTAPIObjectEvent;
         DECLSPEC_XFGVIRT(ITTAPIObjectEvent, get_TAPIObject)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TAPIObject )( 
             __RPC__in ITTAPIObjectEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITTAPI **ppTAPIObject);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTAPI **ppTAPIObject);
         
         DECLSPEC_XFGVIRT(ITTAPIObjectEvent, get_Event)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Event )( 
             __RPC__in ITTAPIObjectEvent * This,
-            /* [retval][out] */ __RPC__out TAPIOBJECT_EVENT *pEvent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TAPIOBJECT_EVENT *pEvent);
         
         DECLSPEC_XFGVIRT(ITTAPIObjectEvent, get_Address)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Address )( 
             __RPC__in ITTAPIObjectEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITAddress **ppAddress);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAddress **ppAddress);
         
         DECLSPEC_XFGVIRT(ITTAPIObjectEvent, get_CallbackInstance)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallbackInstance )( 
             __RPC__in ITTAPIObjectEvent * This,
-            /* [retval][out] */ __RPC__out long *plCallbackInstance);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallbackInstance);
         
         END_INTERFACE
     } ITTAPIObjectEventVtbl;
@@ -11345,7 +12642,8 @@ EXTERN_C const IID IID_ITTAPIObjectEvent2;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Phone( 
-            /* [retval][out] */ __RPC__deref_out_opt ITPhone **ppPhone) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITPhone **ppPhone) = 0;
         
     };
     
@@ -11359,7 +12657,8 @@ EXTERN_C const IID IID_ITTAPIObjectEvent2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITTAPIObjectEvent2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11374,23 +12673,31 @@ EXTERN_C const IID IID_ITTAPIObjectEvent2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITTAPIObjectEvent2 * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITTAPIObjectEvent2 * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITTAPIObjectEvent2 * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -11415,27 +12722,32 @@ EXTERN_C const IID IID_ITTAPIObjectEvent2;
         DECLSPEC_XFGVIRT(ITTAPIObjectEvent, get_TAPIObject)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TAPIObject )( 
             __RPC__in ITTAPIObjectEvent2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITTAPI **ppTAPIObject);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTAPI **ppTAPIObject);
         
         DECLSPEC_XFGVIRT(ITTAPIObjectEvent, get_Event)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Event )( 
             __RPC__in ITTAPIObjectEvent2 * This,
-            /* [retval][out] */ __RPC__out TAPIOBJECT_EVENT *pEvent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TAPIOBJECT_EVENT *pEvent);
         
         DECLSPEC_XFGVIRT(ITTAPIObjectEvent, get_Address)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Address )( 
             __RPC__in ITTAPIObjectEvent2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITAddress **ppAddress);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAddress **ppAddress);
         
         DECLSPEC_XFGVIRT(ITTAPIObjectEvent, get_CallbackInstance)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallbackInstance )( 
             __RPC__in ITTAPIObjectEvent2 * This,
-            /* [retval][out] */ __RPC__out long *plCallbackInstance);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallbackInstance);
         
         DECLSPEC_XFGVIRT(ITTAPIObjectEvent2, get_Phone)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Phone )( 
             __RPC__in ITTAPIObjectEvent2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITPhone **ppPhone);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITPhone **ppPhone);
         
         END_INTERFACE
     } ITTAPIObjectEvent2Vtbl;
@@ -11516,8 +12828,10 @@ EXTERN_C const IID IID_ITTAPIEventNotification;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Event( 
-            /* [in] */ TAPI_EVENT TapiEvent,
-            /* [in] */ __RPC__in_opt IDispatch *pEvent) = 0;
+            /* [annotation][in] */ 
+            _In_  TAPI_EVENT TapiEvent,
+            /* [annotation][in] */ 
+            _In_  IDispatch *pEvent) = 0;
         
     };
     
@@ -11531,7 +12845,8 @@ EXTERN_C const IID IID_ITTAPIEventNotification;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITTAPIEventNotification * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11546,8 +12861,10 @@ EXTERN_C const IID IID_ITTAPIEventNotification;
         DECLSPEC_XFGVIRT(ITTAPIEventNotification, Event)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Event )( 
             __RPC__in ITTAPIEventNotification * This,
-            /* [in] */ TAPI_EVENT TapiEvent,
-            /* [in] */ __RPC__in_opt IDispatch *pEvent);
+            /* [annotation][in] */ 
+            _In_  TAPI_EVENT TapiEvent,
+            /* [annotation][in] */ 
+            _In_  IDispatch *pEvent);
         
         END_INTERFACE
     } ITTAPIEventNotificationVtbl;
@@ -11602,13 +12919,16 @@ EXTERN_C const IID IID_ITCallHubEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Event( 
-            /* [retval][out] */ __RPC__out CALLHUB_EVENT *pEvent) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CALLHUB_EVENT *pEvent) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CallHub( 
-            /* [retval][out] */ __RPC__deref_out_opt ITCallHub **ppCallHub) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallHub **ppCallHub) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Call( 
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCall) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCall) = 0;
         
     };
     
@@ -11622,7 +12942,8 @@ EXTERN_C const IID IID_ITCallHubEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITCallHubEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11637,23 +12958,31 @@ EXTERN_C const IID IID_ITCallHubEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITCallHubEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITCallHubEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITCallHubEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -11678,17 +13007,20 @@ EXTERN_C const IID IID_ITCallHubEvent;
         DECLSPEC_XFGVIRT(ITCallHubEvent, get_Event)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Event )( 
             __RPC__in ITCallHubEvent * This,
-            /* [retval][out] */ __RPC__out CALLHUB_EVENT *pEvent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CALLHUB_EVENT *pEvent);
         
         DECLSPEC_XFGVIRT(ITCallHubEvent, get_CallHub)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallHub )( 
             __RPC__in ITCallHubEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCallHub **ppCallHub);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallHub **ppCallHub);
         
         DECLSPEC_XFGVIRT(ITCallHubEvent, get_Call)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Call )( 
             __RPC__in ITCallHubEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCall);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCall);
         
         END_INTERFACE
     } ITCallHubEventVtbl;
@@ -11762,13 +13094,16 @@ EXTERN_C const IID IID_ITAddressEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Address( 
-            /* [retval][out] */ __RPC__deref_out_opt ITAddress **ppAddress) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAddress **ppAddress) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Event( 
-            /* [retval][out] */ __RPC__out ADDRESS_EVENT *pEvent) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ADDRESS_EVENT *pEvent) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Terminal( 
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppTerminal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppTerminal) = 0;
         
     };
     
@@ -11782,7 +13117,8 @@ EXTERN_C const IID IID_ITAddressEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITAddressEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11797,23 +13133,31 @@ EXTERN_C const IID IID_ITAddressEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITAddressEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITAddressEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITAddressEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -11838,17 +13182,20 @@ EXTERN_C const IID IID_ITAddressEvent;
         DECLSPEC_XFGVIRT(ITAddressEvent, get_Address)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Address )( 
             __RPC__in ITAddressEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITAddress **ppAddress);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAddress **ppAddress);
         
         DECLSPEC_XFGVIRT(ITAddressEvent, get_Event)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Event )( 
             __RPC__in ITAddressEvent * This,
-            /* [retval][out] */ __RPC__out ADDRESS_EVENT *pEvent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ADDRESS_EVENT *pEvent);
         
         DECLSPEC_XFGVIRT(ITAddressEvent, get_Terminal)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Terminal )( 
             __RPC__in ITAddressEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppTerminal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppTerminal);
         
         END_INTERFACE
     } ITAddressEventVtbl;
@@ -11922,19 +13269,24 @@ EXTERN_C const IID IID_ITAddressDeviceSpecificEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Address( 
-            /* [retval][out] */ __RPC__deref_out_opt ITAddress **ppAddress) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAddress **ppAddress) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Call( 
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCall) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCall) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_lParam1( 
-            /* [retval][out] */ __RPC__out long *pParam1) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pParam1) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_lParam2( 
-            /* [retval][out] */ __RPC__out long *pParam2) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pParam2) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_lParam3( 
-            /* [retval][out] */ __RPC__out long *pParam3) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pParam3) = 0;
         
     };
     
@@ -11948,7 +13300,8 @@ EXTERN_C const IID IID_ITAddressDeviceSpecificEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITAddressDeviceSpecificEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11963,23 +13316,31 @@ EXTERN_C const IID IID_ITAddressDeviceSpecificEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITAddressDeviceSpecificEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITAddressDeviceSpecificEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITAddressDeviceSpecificEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -12004,27 +13365,32 @@ EXTERN_C const IID IID_ITAddressDeviceSpecificEvent;
         DECLSPEC_XFGVIRT(ITAddressDeviceSpecificEvent, get_Address)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Address )( 
             __RPC__in ITAddressDeviceSpecificEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITAddress **ppAddress);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAddress **ppAddress);
         
         DECLSPEC_XFGVIRT(ITAddressDeviceSpecificEvent, get_Call)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Call )( 
             __RPC__in ITAddressDeviceSpecificEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCall);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCall);
         
         DECLSPEC_XFGVIRT(ITAddressDeviceSpecificEvent, get_lParam1)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lParam1 )( 
             __RPC__in ITAddressDeviceSpecificEvent * This,
-            /* [retval][out] */ __RPC__out long *pParam1);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pParam1);
         
         DECLSPEC_XFGVIRT(ITAddressDeviceSpecificEvent, get_lParam2)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lParam2 )( 
             __RPC__in ITAddressDeviceSpecificEvent * This,
-            /* [retval][out] */ __RPC__out long *pParam2);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pParam2);
         
         DECLSPEC_XFGVIRT(ITAddressDeviceSpecificEvent, get_lParam3)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lParam3 )( 
             __RPC__in ITAddressDeviceSpecificEvent * This,
-            /* [retval][out] */ __RPC__out long *pParam3);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pParam3);
         
         END_INTERFACE
     } ITAddressDeviceSpecificEventVtbl;
@@ -12104,22 +13470,28 @@ EXTERN_C const IID IID_ITFileTerminalEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Terminal( 
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppTerminal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppTerminal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Track( 
-            /* [retval][out] */ __RPC__deref_out_opt ITFileTrack **ppTrackTerminal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITFileTrack **ppTrackTerminal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Call( 
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCall) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCall) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_State( 
-            /* [retval][out] */ __RPC__out TERMINAL_MEDIA_STATE *pState) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TERMINAL_MEDIA_STATE *pState) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Cause( 
-            /* [retval][out] */ __RPC__out FT_STATE_EVENT_CAUSE *pCause) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FT_STATE_EVENT_CAUSE *pCause) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Error( 
-            /* [retval][out] */ __RPC__out HRESULT *phrErrorCode) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HRESULT *phrErrorCode) = 0;
         
     };
     
@@ -12133,7 +13505,8 @@ EXTERN_C const IID IID_ITFileTerminalEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITFileTerminalEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12148,23 +13521,31 @@ EXTERN_C const IID IID_ITFileTerminalEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITFileTerminalEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITFileTerminalEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITFileTerminalEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -12189,32 +13570,38 @@ EXTERN_C const IID IID_ITFileTerminalEvent;
         DECLSPEC_XFGVIRT(ITFileTerminalEvent, get_Terminal)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Terminal )( 
             __RPC__in ITFileTerminalEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppTerminal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppTerminal);
         
         DECLSPEC_XFGVIRT(ITFileTerminalEvent, get_Track)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Track )( 
             __RPC__in ITFileTerminalEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITFileTrack **ppTrackTerminal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITFileTrack **ppTrackTerminal);
         
         DECLSPEC_XFGVIRT(ITFileTerminalEvent, get_Call)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Call )( 
             __RPC__in ITFileTerminalEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCall);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCall);
         
         DECLSPEC_XFGVIRT(ITFileTerminalEvent, get_State)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in ITFileTerminalEvent * This,
-            /* [retval][out] */ __RPC__out TERMINAL_MEDIA_STATE *pState);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TERMINAL_MEDIA_STATE *pState);
         
         DECLSPEC_XFGVIRT(ITFileTerminalEvent, get_Cause)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Cause )( 
             __RPC__in ITFileTerminalEvent * This,
-            /* [retval][out] */ __RPC__out FT_STATE_EVENT_CAUSE *pCause);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FT_STATE_EVENT_CAUSE *pCause);
         
         DECLSPEC_XFGVIRT(ITFileTerminalEvent, get_Error)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Error )( 
             __RPC__in ITFileTerminalEvent * This,
-            /* [retval][out] */ __RPC__out HRESULT *phrErrorCode);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HRESULT *phrErrorCode);
         
         END_INTERFACE
     } ITFileTerminalEventVtbl;
@@ -12297,13 +13684,16 @@ EXTERN_C const IID IID_ITTTSTerminalEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Terminal( 
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppTerminal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppTerminal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Call( 
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCall) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCall) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Error( 
-            /* [retval][out] */ __RPC__out HRESULT *phrErrorCode) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HRESULT *phrErrorCode) = 0;
         
     };
     
@@ -12317,7 +13707,8 @@ EXTERN_C const IID IID_ITTTSTerminalEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITTTSTerminalEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12332,23 +13723,31 @@ EXTERN_C const IID IID_ITTTSTerminalEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITTTSTerminalEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITTTSTerminalEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITTTSTerminalEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -12373,17 +13772,20 @@ EXTERN_C const IID IID_ITTTSTerminalEvent;
         DECLSPEC_XFGVIRT(ITTTSTerminalEvent, get_Terminal)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Terminal )( 
             __RPC__in ITTTSTerminalEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppTerminal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppTerminal);
         
         DECLSPEC_XFGVIRT(ITTTSTerminalEvent, get_Call)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Call )( 
             __RPC__in ITTTSTerminalEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCall);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCall);
         
         DECLSPEC_XFGVIRT(ITTTSTerminalEvent, get_Error)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Error )( 
             __RPC__in ITTTSTerminalEvent * This,
-            /* [retval][out] */ __RPC__out HRESULT *phrErrorCode);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HRESULT *phrErrorCode);
         
         END_INTERFACE
     } ITTTSTerminalEventVtbl;
@@ -12457,13 +13859,16 @@ EXTERN_C const IID IID_ITASRTerminalEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Terminal( 
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppTerminal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppTerminal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Call( 
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCall) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCall) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Error( 
-            /* [retval][out] */ __RPC__out HRESULT *phrErrorCode) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HRESULT *phrErrorCode) = 0;
         
     };
     
@@ -12477,7 +13882,8 @@ EXTERN_C const IID IID_ITASRTerminalEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITASRTerminalEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12492,23 +13898,31 @@ EXTERN_C const IID IID_ITASRTerminalEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITASRTerminalEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITASRTerminalEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITASRTerminalEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -12533,17 +13947,20 @@ EXTERN_C const IID IID_ITASRTerminalEvent;
         DECLSPEC_XFGVIRT(ITASRTerminalEvent, get_Terminal)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Terminal )( 
             __RPC__in ITASRTerminalEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppTerminal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppTerminal);
         
         DECLSPEC_XFGVIRT(ITASRTerminalEvent, get_Call)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Call )( 
             __RPC__in ITASRTerminalEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCall);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCall);
         
         DECLSPEC_XFGVIRT(ITASRTerminalEvent, get_Error)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Error )( 
             __RPC__in ITASRTerminalEvent * This,
-            /* [retval][out] */ __RPC__out HRESULT *phrErrorCode);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HRESULT *phrErrorCode);
         
         END_INTERFACE
     } ITASRTerminalEventVtbl;
@@ -12617,13 +14034,16 @@ EXTERN_C const IID IID_ITToneTerminalEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Terminal( 
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppTerminal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppTerminal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Call( 
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCall) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCall) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Error( 
-            /* [retval][out] */ __RPC__out HRESULT *phrErrorCode) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HRESULT *phrErrorCode) = 0;
         
     };
     
@@ -12637,7 +14057,8 @@ EXTERN_C const IID IID_ITToneTerminalEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITToneTerminalEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12652,23 +14073,31 @@ EXTERN_C const IID IID_ITToneTerminalEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITToneTerminalEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITToneTerminalEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITToneTerminalEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -12693,17 +14122,20 @@ EXTERN_C const IID IID_ITToneTerminalEvent;
         DECLSPEC_XFGVIRT(ITToneTerminalEvent, get_Terminal)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Terminal )( 
             __RPC__in ITToneTerminalEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppTerminal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppTerminal);
         
         DECLSPEC_XFGVIRT(ITToneTerminalEvent, get_Call)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Call )( 
             __RPC__in ITToneTerminalEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCall);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCall);
         
         DECLSPEC_XFGVIRT(ITToneTerminalEvent, get_Error)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Error )( 
             __RPC__in ITToneTerminalEvent * This,
-            /* [retval][out] */ __RPC__out HRESULT *phrErrorCode);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HRESULT *phrErrorCode);
         
         END_INTERFACE
     } ITToneTerminalEventVtbl;
@@ -12777,13 +14209,16 @@ EXTERN_C const IID IID_ITQOSEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Call( 
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCall) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCall) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Event( 
-            /* [retval][out] */ __RPC__out QOS_EVENT *pQosEvent) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  QOS_EVENT *pQosEvent) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MediaType( 
-            /* [retval][out] */ __RPC__out long *plMediaType) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plMediaType) = 0;
         
     };
     
@@ -12797,7 +14232,8 @@ EXTERN_C const IID IID_ITQOSEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITQOSEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12812,23 +14248,31 @@ EXTERN_C const IID IID_ITQOSEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITQOSEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITQOSEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITQOSEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -12853,17 +14297,20 @@ EXTERN_C const IID IID_ITQOSEvent;
         DECLSPEC_XFGVIRT(ITQOSEvent, get_Call)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Call )( 
             __RPC__in ITQOSEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCall);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCall);
         
         DECLSPEC_XFGVIRT(ITQOSEvent, get_Event)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Event )( 
             __RPC__in ITQOSEvent * This,
-            /* [retval][out] */ __RPC__out QOS_EVENT *pQosEvent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  QOS_EVENT *pQosEvent);
         
         DECLSPEC_XFGVIRT(ITQOSEvent, get_MediaType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaType )( 
             __RPC__in ITQOSEvent * This,
-            /* [retval][out] */ __RPC__out long *plMediaType);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plMediaType);
         
         END_INTERFACE
     } ITQOSEventVtbl;
@@ -12937,13 +14384,16 @@ EXTERN_C const IID IID_ITCallInfoChangeEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Call( 
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCall) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCall) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Cause( 
-            /* [retval][out] */ __RPC__out CALLINFOCHANGE_CAUSE *pCIC) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CALLINFOCHANGE_CAUSE *pCIC) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CallbackInstance( 
-            /* [retval][out] */ __RPC__out long *plCallbackInstance) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallbackInstance) = 0;
         
     };
     
@@ -12957,7 +14407,8 @@ EXTERN_C const IID IID_ITCallInfoChangeEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITCallInfoChangeEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12972,23 +14423,31 @@ EXTERN_C const IID IID_ITCallInfoChangeEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITCallInfoChangeEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITCallInfoChangeEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITCallInfoChangeEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -13013,17 +14472,20 @@ EXTERN_C const IID IID_ITCallInfoChangeEvent;
         DECLSPEC_XFGVIRT(ITCallInfoChangeEvent, get_Call)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Call )( 
             __RPC__in ITCallInfoChangeEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCall);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCall);
         
         DECLSPEC_XFGVIRT(ITCallInfoChangeEvent, get_Cause)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Cause )( 
             __RPC__in ITCallInfoChangeEvent * This,
-            /* [retval][out] */ __RPC__out CALLINFOCHANGE_CAUSE *pCIC);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CALLINFOCHANGE_CAUSE *pCIC);
         
         DECLSPEC_XFGVIRT(ITCallInfoChangeEvent, get_CallbackInstance)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallbackInstance )( 
             __RPC__in ITCallInfoChangeEvent * This,
-            /* [retval][out] */ __RPC__out long *plCallbackInstance);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallbackInstance);
         
         END_INTERFACE
     } ITCallInfoChangeEventVtbl;
@@ -13097,10 +14559,14 @@ EXTERN_C const IID IID_ITRequest;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE MakeCall( 
-            /* [in] */ __RPC__in BSTR pDestAddress,
-            /* [in] */ __RPC__in BSTR pAppName,
-            /* [in] */ __RPC__in BSTR pCalledParty,
-            /* [in] */ __RPC__in BSTR pComment) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pDestAddress,
+            /* [annotation][in] */ 
+            _In_  BSTR pAppName,
+            /* [annotation][in] */ 
+            _In_  BSTR pCalledParty,
+            /* [annotation][in] */ 
+            _In_  BSTR pComment) = 0;
         
     };
     
@@ -13114,7 +14580,8 @@ EXTERN_C const IID IID_ITRequest;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITRequest * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13129,23 +14596,31 @@ EXTERN_C const IID IID_ITRequest;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITRequest * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITRequest * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITRequest * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -13170,10 +14645,14 @@ EXTERN_C const IID IID_ITRequest;
         DECLSPEC_XFGVIRT(ITRequest, MakeCall)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *MakeCall )( 
             __RPC__in ITRequest * This,
-            /* [in] */ __RPC__in BSTR pDestAddress,
-            /* [in] */ __RPC__in BSTR pAppName,
-            /* [in] */ __RPC__in BSTR pCalledParty,
-            /* [in] */ __RPC__in BSTR pComment);
+            /* [annotation][in] */ 
+            _In_  BSTR pDestAddress,
+            /* [annotation][in] */ 
+            _In_  BSTR pAppName,
+            /* [annotation][in] */ 
+            _In_  BSTR pCalledParty,
+            /* [annotation][in] */ 
+            _In_  BSTR pComment);
         
         END_INTERFACE
     } ITRequestVtbl;
@@ -13241,22 +14720,28 @@ EXTERN_C const IID IID_ITRequestEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RegistrationInstance( 
-            /* [retval][out] */ __RPC__out long *plRegistrationInstance) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plRegistrationInstance) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RequestMode( 
-            /* [retval][out] */ __RPC__out long *plRequestMode) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plRequestMode) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DestAddress( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppDestAddress) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppDestAddress) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AppName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppAppName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppAppName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CalledParty( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppCalledParty) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppCalledParty) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Comment( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppComment) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppComment) = 0;
         
     };
     
@@ -13270,7 +14755,8 @@ EXTERN_C const IID IID_ITRequestEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITRequestEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13285,23 +14771,31 @@ EXTERN_C const IID IID_ITRequestEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITRequestEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITRequestEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITRequestEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -13326,32 +14820,38 @@ EXTERN_C const IID IID_ITRequestEvent;
         DECLSPEC_XFGVIRT(ITRequestEvent, get_RegistrationInstance)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RegistrationInstance )( 
             __RPC__in ITRequestEvent * This,
-            /* [retval][out] */ __RPC__out long *plRegistrationInstance);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plRegistrationInstance);
         
         DECLSPEC_XFGVIRT(ITRequestEvent, get_RequestMode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestMode )( 
             __RPC__in ITRequestEvent * This,
-            /* [retval][out] */ __RPC__out long *plRequestMode);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plRequestMode);
         
         DECLSPEC_XFGVIRT(ITRequestEvent, get_DestAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DestAddress )( 
             __RPC__in ITRequestEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppDestAddress);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppDestAddress);
         
         DECLSPEC_XFGVIRT(ITRequestEvent, get_AppName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AppName )( 
             __RPC__in ITRequestEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppAppName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppAppName);
         
         DECLSPEC_XFGVIRT(ITRequestEvent, get_CalledParty)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CalledParty )( 
             __RPC__in ITRequestEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppCalledParty);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppCalledParty);
         
         DECLSPEC_XFGVIRT(ITRequestEvent, get_Comment)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Comment )( 
             __RPC__in ITRequestEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppComment);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppComment);
         
         END_INTERFACE
     } ITRequestEventVtbl;
@@ -13434,14 +14934,18 @@ EXTERN_C const IID IID_ITCollection;
     {
     public:
         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [retval][out] */ __RPC__out long *lCount) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *lCount) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [in] */ long Index,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][in] */ 
+            _In_  long Index,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppNewEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **ppNewEnum) = 0;
         
     };
     
@@ -13455,7 +14959,8 @@ EXTERN_C const IID IID_ITCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITCollection * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13470,23 +14975,31 @@ EXTERN_C const IID IID_ITCollection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITCollection * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITCollection * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITCollection * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -13511,18 +15024,22 @@ EXTERN_C const IID IID_ITCollection;
         DECLSPEC_XFGVIRT(ITCollection, get_Count)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ITCollection * This,
-            /* [retval][out] */ __RPC__out long *lCount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *lCount);
         
         DECLSPEC_XFGVIRT(ITCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ITCollection * This,
-            /* [in] */ long Index,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][in] */ 
+            _In_  long Index,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITCollection, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ITCollection * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppNewEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **ppNewEnum);
         
         END_INTERFACE
     } ITCollectionVtbl;
@@ -13596,11 +15113,14 @@ EXTERN_C const IID IID_ITCollection2;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Add( 
-            /* [in] */ long Index,
-            /* [in] */ __RPC__in VARIANT *pVariant) = 0;
+            /* [annotation][in] */ 
+            _In_  long Index,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVariant) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Remove( 
-            /* [in] */ long Index) = 0;
+            /* [annotation][in] */ 
+            _In_  long Index) = 0;
         
     };
     
@@ -13614,7 +15134,8 @@ EXTERN_C const IID IID_ITCollection2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITCollection2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13629,23 +15150,31 @@ EXTERN_C const IID IID_ITCollection2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITCollection2 * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITCollection2 * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITCollection2 * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -13670,29 +15199,36 @@ EXTERN_C const IID IID_ITCollection2;
         DECLSPEC_XFGVIRT(ITCollection, get_Count)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ITCollection2 * This,
-            /* [retval][out] */ __RPC__out long *lCount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *lCount);
         
         DECLSPEC_XFGVIRT(ITCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ITCollection2 * This,
-            /* [in] */ long Index,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][in] */ 
+            _In_  long Index,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITCollection, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ITCollection2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppNewEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **ppNewEnum);
         
         DECLSPEC_XFGVIRT(ITCollection2, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in ITCollection2 * This,
-            /* [in] */ long Index,
-            /* [in] */ __RPC__in VARIANT *pVariant);
+            /* [annotation][in] */ 
+            _In_  long Index,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITCollection2, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in ITCollection2 * This,
-            /* [in] */ long Index);
+            /* [annotation][in] */ 
+            _In_  long Index);
         
         END_INTERFACE
     } ITCollection2Vtbl;
@@ -13773,28 +15309,40 @@ EXTERN_C const IID IID_ITForwardInformation;
     {
     public:
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_NumRingsNoAnswer( 
-            /* [in] */ long lNumRings) = 0;
+            /* [annotation][in] */ 
+            _In_  long lNumRings) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NumRingsNoAnswer( 
-            /* [retval][out] */ __RPC__out long *plNumRings) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plNumRings) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetForwardType( 
-            /* [in] */ long ForwardType,
-            /* [in] */ __RPC__in BSTR pDestAddress,
-            /* [in] */ __RPC__in BSTR pCallerAddress) = 0;
+            /* [annotation][in] */ 
+            _In_  long ForwardType,
+            /* [annotation][in] */ 
+            _In_  BSTR pDestAddress,
+            /* [annotation][in] */ 
+            _In_  BSTR pCallerAddress) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ForwardTypeDestination( 
-            /* [in] */ long ForwardType,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppDestAddress) = 0;
+            /* [annotation][in] */ 
+            _In_  long ForwardType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppDestAddress) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ForwardTypeCaller( 
-            /* [in] */ long Forwardtype,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppCallerAddress) = 0;
+            /* [annotation][in] */ 
+            _In_  long Forwardtype,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppCallerAddress) = 0;
         
         virtual /* [hidden][id] */ HRESULT STDMETHODCALLTYPE GetForwardType( 
-            /* [in] */ long ForwardType,
-            /* [out] */ __RPC__deref_out_opt BSTR *ppDestinationAddress,
-            /* [out] */ __RPC__deref_out_opt BSTR *ppCallerAddress) = 0;
+            /* [annotation][in] */ 
+            _In_  long ForwardType,
+            /* [annotation][out] */ 
+            _Out_  BSTR *ppDestinationAddress,
+            /* [annotation][out] */ 
+            _Out_  BSTR *ppCallerAddress) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Clear( void) = 0;
         
@@ -13810,7 +15358,8 @@ EXTERN_C const IID IID_ITForwardInformation;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITForwardInformation * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13825,23 +15374,31 @@ EXTERN_C const IID IID_ITForwardInformation;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITForwardInformation * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITForwardInformation * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITForwardInformation * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -13866,38 +15423,50 @@ EXTERN_C const IID IID_ITForwardInformation;
         DECLSPEC_XFGVIRT(ITForwardInformation, put_NumRingsNoAnswer)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_NumRingsNoAnswer )( 
             __RPC__in ITForwardInformation * This,
-            /* [in] */ long lNumRings);
+            /* [annotation][in] */ 
+            _In_  long lNumRings);
         
         DECLSPEC_XFGVIRT(ITForwardInformation, get_NumRingsNoAnswer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NumRingsNoAnswer )( 
             __RPC__in ITForwardInformation * This,
-            /* [retval][out] */ __RPC__out long *plNumRings);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plNumRings);
         
         DECLSPEC_XFGVIRT(ITForwardInformation, SetForwardType)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetForwardType )( 
             __RPC__in ITForwardInformation * This,
-            /* [in] */ long ForwardType,
-            /* [in] */ __RPC__in BSTR pDestAddress,
-            /* [in] */ __RPC__in BSTR pCallerAddress);
+            /* [annotation][in] */ 
+            _In_  long ForwardType,
+            /* [annotation][in] */ 
+            _In_  BSTR pDestAddress,
+            /* [annotation][in] */ 
+            _In_  BSTR pCallerAddress);
         
         DECLSPEC_XFGVIRT(ITForwardInformation, get_ForwardTypeDestination)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ForwardTypeDestination )( 
             __RPC__in ITForwardInformation * This,
-            /* [in] */ long ForwardType,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppDestAddress);
+            /* [annotation][in] */ 
+            _In_  long ForwardType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppDestAddress);
         
         DECLSPEC_XFGVIRT(ITForwardInformation, get_ForwardTypeCaller)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ForwardTypeCaller )( 
             __RPC__in ITForwardInformation * This,
-            /* [in] */ long Forwardtype,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppCallerAddress);
+            /* [annotation][in] */ 
+            _In_  long Forwardtype,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppCallerAddress);
         
         DECLSPEC_XFGVIRT(ITForwardInformation, GetForwardType)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *GetForwardType )( 
             __RPC__in ITForwardInformation * This,
-            /* [in] */ long ForwardType,
-            /* [out] */ __RPC__deref_out_opt BSTR *ppDestinationAddress,
-            /* [out] */ __RPC__deref_out_opt BSTR *ppCallerAddress);
+            /* [annotation][in] */ 
+            _In_  long ForwardType,
+            /* [annotation][out] */ 
+            _Out_  BSTR *ppDestinationAddress,
+            /* [annotation][out] */ 
+            _Out_  BSTR *ppCallerAddress);
         
         DECLSPEC_XFGVIRT(ITForwardInformation, Clear)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clear )( 
@@ -13987,26 +15556,40 @@ EXTERN_C const IID IID_ITForwardInformation2;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetForwardType2( 
-            /* [in] */ long ForwardType,
-            /* [in] */ __RPC__in BSTR pDestAddress,
-            /* [in] */ long DestAddressType,
-            /* [in] */ __RPC__in BSTR pCallerAddress,
-            /* [in] */ long CallerAddressType) = 0;
+            /* [annotation][in] */ 
+            _In_  long ForwardType,
+            /* [annotation][in] */ 
+            _In_  BSTR pDestAddress,
+            /* [annotation][in] */ 
+            _In_  long DestAddressType,
+            /* [annotation][in] */ 
+            _In_  BSTR pCallerAddress,
+            /* [annotation][in] */ 
+            _In_  long CallerAddressType) = 0;
         
         virtual /* [hidden][id] */ HRESULT STDMETHODCALLTYPE GetForwardType2( 
-            /* [in] */ long ForwardType,
-            /* [out] */ __RPC__deref_out_opt BSTR *ppDestinationAddress,
-            /* [out] */ __RPC__out long *pDestAddressType,
-            /* [out] */ __RPC__deref_out_opt BSTR *ppCallerAddress,
-            /* [out] */ __RPC__out long *pCallerAddressType) = 0;
+            /* [annotation][in] */ 
+            _In_  long ForwardType,
+            /* [annotation][out] */ 
+            _Out_  BSTR *ppDestinationAddress,
+            /* [annotation][out] */ 
+            _Out_  long *pDestAddressType,
+            /* [annotation][out] */ 
+            _Out_  BSTR *ppCallerAddress,
+            /* [annotation][out] */ 
+            _Out_  long *pCallerAddressType) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ForwardTypeDestinationAddressType( 
-            /* [in] */ long ForwardType,
-            /* [retval][out] */ __RPC__out long *pDestAddressType) = 0;
+            /* [annotation][in] */ 
+            _In_  long ForwardType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pDestAddressType) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ForwardTypeCallerAddressType( 
-            /* [in] */ long Forwardtype,
-            /* [retval][out] */ __RPC__out long *pCallerAddressType) = 0;
+            /* [annotation][in] */ 
+            _In_  long Forwardtype,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pCallerAddressType) = 0;
         
     };
     
@@ -14020,7 +15603,8 @@ EXTERN_C const IID IID_ITForwardInformation2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITForwardInformation2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14035,23 +15619,31 @@ EXTERN_C const IID IID_ITForwardInformation2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITForwardInformation2 * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITForwardInformation2 * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITForwardInformation2 * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -14076,38 +15668,50 @@ EXTERN_C const IID IID_ITForwardInformation2;
         DECLSPEC_XFGVIRT(ITForwardInformation, put_NumRingsNoAnswer)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_NumRingsNoAnswer )( 
             __RPC__in ITForwardInformation2 * This,
-            /* [in] */ long lNumRings);
+            /* [annotation][in] */ 
+            _In_  long lNumRings);
         
         DECLSPEC_XFGVIRT(ITForwardInformation, get_NumRingsNoAnswer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NumRingsNoAnswer )( 
             __RPC__in ITForwardInformation2 * This,
-            /* [retval][out] */ __RPC__out long *plNumRings);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plNumRings);
         
         DECLSPEC_XFGVIRT(ITForwardInformation, SetForwardType)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetForwardType )( 
             __RPC__in ITForwardInformation2 * This,
-            /* [in] */ long ForwardType,
-            /* [in] */ __RPC__in BSTR pDestAddress,
-            /* [in] */ __RPC__in BSTR pCallerAddress);
+            /* [annotation][in] */ 
+            _In_  long ForwardType,
+            /* [annotation][in] */ 
+            _In_  BSTR pDestAddress,
+            /* [annotation][in] */ 
+            _In_  BSTR pCallerAddress);
         
         DECLSPEC_XFGVIRT(ITForwardInformation, get_ForwardTypeDestination)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ForwardTypeDestination )( 
             __RPC__in ITForwardInformation2 * This,
-            /* [in] */ long ForwardType,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppDestAddress);
+            /* [annotation][in] */ 
+            _In_  long ForwardType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppDestAddress);
         
         DECLSPEC_XFGVIRT(ITForwardInformation, get_ForwardTypeCaller)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ForwardTypeCaller )( 
             __RPC__in ITForwardInformation2 * This,
-            /* [in] */ long Forwardtype,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppCallerAddress);
+            /* [annotation][in] */ 
+            _In_  long Forwardtype,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppCallerAddress);
         
         DECLSPEC_XFGVIRT(ITForwardInformation, GetForwardType)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *GetForwardType )( 
             __RPC__in ITForwardInformation2 * This,
-            /* [in] */ long ForwardType,
-            /* [out] */ __RPC__deref_out_opt BSTR *ppDestinationAddress,
-            /* [out] */ __RPC__deref_out_opt BSTR *ppCallerAddress);
+            /* [annotation][in] */ 
+            _In_  long ForwardType,
+            /* [annotation][out] */ 
+            _Out_  BSTR *ppDestinationAddress,
+            /* [annotation][out] */ 
+            _Out_  BSTR *ppCallerAddress);
         
         DECLSPEC_XFGVIRT(ITForwardInformation, Clear)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clear )( 
@@ -14116,32 +15720,46 @@ EXTERN_C const IID IID_ITForwardInformation2;
         DECLSPEC_XFGVIRT(ITForwardInformation2, SetForwardType2)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetForwardType2 )( 
             __RPC__in ITForwardInformation2 * This,
-            /* [in] */ long ForwardType,
-            /* [in] */ __RPC__in BSTR pDestAddress,
-            /* [in] */ long DestAddressType,
-            /* [in] */ __RPC__in BSTR pCallerAddress,
-            /* [in] */ long CallerAddressType);
+            /* [annotation][in] */ 
+            _In_  long ForwardType,
+            /* [annotation][in] */ 
+            _In_  BSTR pDestAddress,
+            /* [annotation][in] */ 
+            _In_  long DestAddressType,
+            /* [annotation][in] */ 
+            _In_  BSTR pCallerAddress,
+            /* [annotation][in] */ 
+            _In_  long CallerAddressType);
         
         DECLSPEC_XFGVIRT(ITForwardInformation2, GetForwardType2)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *GetForwardType2 )( 
             __RPC__in ITForwardInformation2 * This,
-            /* [in] */ long ForwardType,
-            /* [out] */ __RPC__deref_out_opt BSTR *ppDestinationAddress,
-            /* [out] */ __RPC__out long *pDestAddressType,
-            /* [out] */ __RPC__deref_out_opt BSTR *ppCallerAddress,
-            /* [out] */ __RPC__out long *pCallerAddressType);
+            /* [annotation][in] */ 
+            _In_  long ForwardType,
+            /* [annotation][out] */ 
+            _Out_  BSTR *ppDestinationAddress,
+            /* [annotation][out] */ 
+            _Out_  long *pDestAddressType,
+            /* [annotation][out] */ 
+            _Out_  BSTR *ppCallerAddress,
+            /* [annotation][out] */ 
+            _Out_  long *pCallerAddressType);
         
         DECLSPEC_XFGVIRT(ITForwardInformation2, get_ForwardTypeDestinationAddressType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ForwardTypeDestinationAddressType )( 
             __RPC__in ITForwardInformation2 * This,
-            /* [in] */ long ForwardType,
-            /* [retval][out] */ __RPC__out long *pDestAddressType);
+            /* [annotation][in] */ 
+            _In_  long ForwardType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pDestAddressType);
         
         DECLSPEC_XFGVIRT(ITForwardInformation2, get_ForwardTypeCallerAddressType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ForwardTypeCallerAddressType )( 
             __RPC__in ITForwardInformation2 * This,
-            /* [in] */ long Forwardtype,
-            /* [retval][out] */ __RPC__out long *pCallerAddressType);
+            /* [annotation][in] */ 
+            _In_  long Forwardtype,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pCallerAddressType);
         
         END_INTERFACE
     } ITForwardInformation2Vtbl;
@@ -14240,26 +15858,36 @@ EXTERN_C const IID IID_ITAddressTranslation;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE TranslateAddress( 
-            /* [in] */ __RPC__in BSTR pAddressToTranslate,
-            /* [in] */ long lCard,
-            /* [in] */ long lTranslateOptions,
-            /* [retval][out] */ __RPC__deref_out_opt ITAddressTranslationInfo **ppTranslated) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pAddressToTranslate,
+            /* [annotation][in] */ 
+            _In_  long lCard,
+            /* [annotation][in] */ 
+            _In_  long lTranslateOptions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAddressTranslationInfo **ppTranslated) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE TranslateDialog( 
-            /* [in] */ TAPIHWND hwndOwner,
-            /* [in] */ __RPC__in BSTR pAddressIn) = 0;
+            /* [annotation][in] */ 
+            _In_  TAPIHWND hwndOwner,
+            /* [annotation][in] */ 
+            _In_  BSTR pAddressIn) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateLocations( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumLocation **ppEnumLocation) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumLocation **ppEnumLocation) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Locations( 
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateCallingCards( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumCallingCard **ppEnumCallingCard) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumCallingCard **ppEnumCallingCard) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CallingCards( 
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
     };
     
@@ -14273,7 +15901,8 @@ EXTERN_C const IID IID_ITAddressTranslation;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITAddressTranslation * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14288,23 +15917,31 @@ EXTERN_C const IID IID_ITAddressTranslation;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITAddressTranslation * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITAddressTranslation * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITAddressTranslation * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -14329,36 +15966,46 @@ EXTERN_C const IID IID_ITAddressTranslation;
         DECLSPEC_XFGVIRT(ITAddressTranslation, TranslateAddress)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *TranslateAddress )( 
             __RPC__in ITAddressTranslation * This,
-            /* [in] */ __RPC__in BSTR pAddressToTranslate,
-            /* [in] */ long lCard,
-            /* [in] */ long lTranslateOptions,
-            /* [retval][out] */ __RPC__deref_out_opt ITAddressTranslationInfo **ppTranslated);
+            /* [annotation][in] */ 
+            _In_  BSTR pAddressToTranslate,
+            /* [annotation][in] */ 
+            _In_  long lCard,
+            /* [annotation][in] */ 
+            _In_  long lTranslateOptions,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAddressTranslationInfo **ppTranslated);
         
         DECLSPEC_XFGVIRT(ITAddressTranslation, TranslateDialog)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *TranslateDialog )( 
             __RPC__in ITAddressTranslation * This,
-            /* [in] */ TAPIHWND hwndOwner,
-            /* [in] */ __RPC__in BSTR pAddressIn);
+            /* [annotation][in] */ 
+            _In_  TAPIHWND hwndOwner,
+            /* [annotation][in] */ 
+            _In_  BSTR pAddressIn);
         
         DECLSPEC_XFGVIRT(ITAddressTranslation, EnumerateLocations)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateLocations )( 
             __RPC__in ITAddressTranslation * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumLocation **ppEnumLocation);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumLocation **ppEnumLocation);
         
         DECLSPEC_XFGVIRT(ITAddressTranslation, get_Locations)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Locations )( 
             __RPC__in ITAddressTranslation * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITAddressTranslation, EnumerateCallingCards)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateCallingCards )( 
             __RPC__in ITAddressTranslation * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumCallingCard **ppEnumCallingCard);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumCallingCard **ppEnumCallingCard);
         
         DECLSPEC_XFGVIRT(ITAddressTranslation, get_CallingCards)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallingCards )( 
             __RPC__in ITAddressTranslation * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         END_INTERFACE
     } ITAddressTranslationVtbl;
@@ -14441,19 +16088,24 @@ EXTERN_C const IID IID_ITAddressTranslationInfo;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DialableString( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppDialableString) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppDialableString) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DisplayableString( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppDisplayableString) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppDisplayableString) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CurrentCountryCode( 
-            /* [retval][out] */ __RPC__out long *CountryCode) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *CountryCode) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DestinationCountryCode( 
-            /* [retval][out] */ __RPC__out long *CountryCode) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *CountryCode) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TranslationResults( 
-            /* [retval][out] */ __RPC__out long *plResults) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plResults) = 0;
         
     };
     
@@ -14467,7 +16119,8 @@ EXTERN_C const IID IID_ITAddressTranslationInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITAddressTranslationInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14482,23 +16135,31 @@ EXTERN_C const IID IID_ITAddressTranslationInfo;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITAddressTranslationInfo * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITAddressTranslationInfo * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITAddressTranslationInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -14523,27 +16184,32 @@ EXTERN_C const IID IID_ITAddressTranslationInfo;
         DECLSPEC_XFGVIRT(ITAddressTranslationInfo, get_DialableString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DialableString )( 
             __RPC__in ITAddressTranslationInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppDialableString);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppDialableString);
         
         DECLSPEC_XFGVIRT(ITAddressTranslationInfo, get_DisplayableString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayableString )( 
             __RPC__in ITAddressTranslationInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppDisplayableString);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppDisplayableString);
         
         DECLSPEC_XFGVIRT(ITAddressTranslationInfo, get_CurrentCountryCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCountryCode )( 
             __RPC__in ITAddressTranslationInfo * This,
-            /* [retval][out] */ __RPC__out long *CountryCode);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *CountryCode);
         
         DECLSPEC_XFGVIRT(ITAddressTranslationInfo, get_DestinationCountryCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationCountryCode )( 
             __RPC__in ITAddressTranslationInfo * This,
-            /* [retval][out] */ __RPC__out long *CountryCode);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *CountryCode);
         
         DECLSPEC_XFGVIRT(ITAddressTranslationInfo, get_TranslationResults)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TranslationResults )( 
             __RPC__in ITAddressTranslationInfo * This,
-            /* [retval][out] */ __RPC__out long *plResults);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plResults);
         
         END_INTERFACE
     } ITAddressTranslationInfoVtbl;
@@ -14623,37 +16289,48 @@ EXTERN_C const IID IID_ITLocationInfo;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PermanentLocationID( 
-            /* [retval][out] */ __RPC__out long *plLocationID) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plLocationID) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CountryCode( 
-            /* [retval][out] */ __RPC__out long *plCountryCode) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCountryCode) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CountryID( 
-            /* [retval][out] */ __RPC__out long *plCountryID) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCountryID) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Options( 
-            /* [retval][out] */ __RPC__out long *plOptions) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plOptions) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PreferredCardID( 
-            /* [retval][out] */ __RPC__out long *plCardID) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCardID) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LocationName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppLocationName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppLocationName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CityCode( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppCode) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppCode) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LocalAccessCode( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppCode) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppCode) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LongDistanceAccessCode( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppCode) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppCode) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TollPrefixList( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppTollList) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppTollList) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CancelCallWaitingCode( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppCode) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppCode) = 0;
         
     };
     
@@ -14667,7 +16344,8 @@ EXTERN_C const IID IID_ITLocationInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITLocationInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14682,23 +16360,31 @@ EXTERN_C const IID IID_ITLocationInfo;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITLocationInfo * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITLocationInfo * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITLocationInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -14723,57 +16409,68 @@ EXTERN_C const IID IID_ITLocationInfo;
         DECLSPEC_XFGVIRT(ITLocationInfo, get_PermanentLocationID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermanentLocationID )( 
             __RPC__in ITLocationInfo * This,
-            /* [retval][out] */ __RPC__out long *plLocationID);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plLocationID);
         
         DECLSPEC_XFGVIRT(ITLocationInfo, get_CountryCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CountryCode )( 
             __RPC__in ITLocationInfo * This,
-            /* [retval][out] */ __RPC__out long *plCountryCode);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCountryCode);
         
         DECLSPEC_XFGVIRT(ITLocationInfo, get_CountryID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CountryID )( 
             __RPC__in ITLocationInfo * This,
-            /* [retval][out] */ __RPC__out long *plCountryID);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCountryID);
         
         DECLSPEC_XFGVIRT(ITLocationInfo, get_Options)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Options )( 
             __RPC__in ITLocationInfo * This,
-            /* [retval][out] */ __RPC__out long *plOptions);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plOptions);
         
         DECLSPEC_XFGVIRT(ITLocationInfo, get_PreferredCardID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PreferredCardID )( 
             __RPC__in ITLocationInfo * This,
-            /* [retval][out] */ __RPC__out long *plCardID);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCardID);
         
         DECLSPEC_XFGVIRT(ITLocationInfo, get_LocationName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LocationName )( 
             __RPC__in ITLocationInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppLocationName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppLocationName);
         
         DECLSPEC_XFGVIRT(ITLocationInfo, get_CityCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CityCode )( 
             __RPC__in ITLocationInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppCode);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppCode);
         
         DECLSPEC_XFGVIRT(ITLocationInfo, get_LocalAccessCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LocalAccessCode )( 
             __RPC__in ITLocationInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppCode);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppCode);
         
         DECLSPEC_XFGVIRT(ITLocationInfo, get_LongDistanceAccessCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LongDistanceAccessCode )( 
             __RPC__in ITLocationInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppCode);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppCode);
         
         DECLSPEC_XFGVIRT(ITLocationInfo, get_TollPrefixList)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TollPrefixList )( 
             __RPC__in ITLocationInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppTollList);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppTollList);
         
         DECLSPEC_XFGVIRT(ITLocationInfo, get_CancelCallWaitingCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CancelCallWaitingCode )( 
             __RPC__in ITLocationInfo * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppCode);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppCode);
         
         END_INTERFACE
     } ITLocationInfoVtbl;
@@ -14871,17 +16568,21 @@ EXTERN_C const IID IID_IEnumLocation;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [out] */ __RPC__deref_out_opt ITLocationInfo **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  ITLocationInfo **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumLocation **ppEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumLocation **ppEnum) = 0;
         
     };
     
@@ -14895,7 +16596,8 @@ EXTERN_C const IID IID_IEnumLocation;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumLocation * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14910,8 +16612,10 @@ EXTERN_C const IID IID_IEnumLocation;
         DECLSPEC_XFGVIRT(IEnumLocation, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumLocation * This,
-            /* [in] */ ULONG celt,
-            /* [out] */ __RPC__deref_out_opt ITLocationInfo **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  ITLocationInfo **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumLocation, Reset)
@@ -14921,12 +16625,14 @@ EXTERN_C const IID IID_IEnumLocation;
         DECLSPEC_XFGVIRT(IEnumLocation, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumLocation * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumLocation, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumLocation * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumLocation **ppEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumLocation **ppEnum);
         
         END_INTERFACE
     } IEnumLocationVtbl;
@@ -14990,25 +16696,32 @@ EXTERN_C const IID IID_ITCallingCard;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PermanentCardID( 
-            /* [retval][out] */ __RPC__out long *plCardID) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCardID) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NumberOfDigits( 
-            /* [retval][out] */ __RPC__out long *plDigits) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plDigits) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Options( 
-            /* [retval][out] */ __RPC__out long *plOptions) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plOptions) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CardName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppCardName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppCardName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SameAreaDialingRule( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppRule) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppRule) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LongDistanceDialingRule( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppRule) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppRule) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InternationalDialingRule( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppRule) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppRule) = 0;
         
     };
     
@@ -15022,7 +16735,8 @@ EXTERN_C const IID IID_ITCallingCard;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITCallingCard * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15037,23 +16751,31 @@ EXTERN_C const IID IID_ITCallingCard;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITCallingCard * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITCallingCard * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITCallingCard * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -15078,37 +16800,44 @@ EXTERN_C const IID IID_ITCallingCard;
         DECLSPEC_XFGVIRT(ITCallingCard, get_PermanentCardID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermanentCardID )( 
             __RPC__in ITCallingCard * This,
-            /* [retval][out] */ __RPC__out long *plCardID);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCardID);
         
         DECLSPEC_XFGVIRT(ITCallingCard, get_NumberOfDigits)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NumberOfDigits )( 
             __RPC__in ITCallingCard * This,
-            /* [retval][out] */ __RPC__out long *plDigits);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plDigits);
         
         DECLSPEC_XFGVIRT(ITCallingCard, get_Options)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Options )( 
             __RPC__in ITCallingCard * This,
-            /* [retval][out] */ __RPC__out long *plOptions);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plOptions);
         
         DECLSPEC_XFGVIRT(ITCallingCard, get_CardName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CardName )( 
             __RPC__in ITCallingCard * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppCardName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppCardName);
         
         DECLSPEC_XFGVIRT(ITCallingCard, get_SameAreaDialingRule)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SameAreaDialingRule )( 
             __RPC__in ITCallingCard * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppRule);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppRule);
         
         DECLSPEC_XFGVIRT(ITCallingCard, get_LongDistanceDialingRule)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LongDistanceDialingRule )( 
             __RPC__in ITCallingCard * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppRule);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppRule);
         
         DECLSPEC_XFGVIRT(ITCallingCard, get_InternationalDialingRule)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternationalDialingRule )( 
             __RPC__in ITCallingCard * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppRule);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppRule);
         
         END_INTERFACE
     } ITCallingCardVtbl;
@@ -15194,17 +16923,21 @@ EXTERN_C const IID IID_IEnumCallingCard;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [out] */ __RPC__deref_out_opt ITCallingCard **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  ITCallingCard **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumCallingCard **ppEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumCallingCard **ppEnum) = 0;
         
     };
     
@@ -15218,7 +16951,8 @@ EXTERN_C const IID IID_IEnumCallingCard;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumCallingCard * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15233,8 +16967,10 @@ EXTERN_C const IID IID_IEnumCallingCard;
         DECLSPEC_XFGVIRT(IEnumCallingCard, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumCallingCard * This,
-            /* [in] */ ULONG celt,
-            /* [out] */ __RPC__deref_out_opt ITCallingCard **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  ITCallingCard **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumCallingCard, Reset)
@@ -15244,12 +16980,14 @@ EXTERN_C const IID IID_IEnumCallingCard;
         DECLSPEC_XFGVIRT(IEnumCallingCard, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumCallingCard * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumCallingCard, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumCallingCard * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumCallingCard **ppEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumCallingCard **ppEnum);
         
         END_INTERFACE
     } IEnumCallingCardVtbl;
@@ -15313,13 +17051,16 @@ EXTERN_C const IID IID_ITCallNotificationEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Call( 
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCall) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCall) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Event( 
-            /* [retval][out] */ __RPC__out CALL_NOTIFICATION_EVENT *pCallNotificationEvent) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CALL_NOTIFICATION_EVENT *pCallNotificationEvent) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CallbackInstance( 
-            /* [retval][out] */ __RPC__out long *plCallbackInstance) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallbackInstance) = 0;
         
     };
     
@@ -15333,7 +17074,8 @@ EXTERN_C const IID IID_ITCallNotificationEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITCallNotificationEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15348,23 +17090,31 @@ EXTERN_C const IID IID_ITCallNotificationEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITCallNotificationEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITCallNotificationEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITCallNotificationEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -15389,17 +17139,20 @@ EXTERN_C const IID IID_ITCallNotificationEvent;
         DECLSPEC_XFGVIRT(ITCallNotificationEvent, get_Call)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Call )( 
             __RPC__in ITCallNotificationEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITCallInfo **ppCall);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITCallInfo **ppCall);
         
         DECLSPEC_XFGVIRT(ITCallNotificationEvent, get_Event)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Event )( 
             __RPC__in ITCallNotificationEvent * This,
-            /* [retval][out] */ __RPC__out CALL_NOTIFICATION_EVENT *pCallNotificationEvent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CALL_NOTIFICATION_EVENT *pCallNotificationEvent);
         
         DECLSPEC_XFGVIRT(ITCallNotificationEvent, get_CallbackInstance)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallbackInstance )( 
             __RPC__in ITCallNotificationEvent * This,
-            /* [retval][out] */ __RPC__out long *plCallbackInstance);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallbackInstance);
         
         END_INTERFACE
     } ITCallNotificationEventVtbl;
@@ -15473,9 +17226,12 @@ EXTERN_C const IID IID_ITDispatchMapper;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE QueryDispatchInterface( 
-            /* [in] */ __RPC__in BSTR pIID,
-            /* [in] */ __RPC__in_opt IDispatch *pInterfaceToMap,
-            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppReturnedInterface) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pIID,
+            /* [annotation][in] */ 
+            _In_  IDispatch *pInterfaceToMap,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **ppReturnedInterface) = 0;
         
     };
     
@@ -15489,7 +17245,8 @@ EXTERN_C const IID IID_ITDispatchMapper;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITDispatchMapper * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15504,23 +17261,31 @@ EXTERN_C const IID IID_ITDispatchMapper;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITDispatchMapper * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITDispatchMapper * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITDispatchMapper * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -15545,9 +17310,12 @@ EXTERN_C const IID IID_ITDispatchMapper;
         DECLSPEC_XFGVIRT(ITDispatchMapper, QueryDispatchInterface)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *QueryDispatchInterface )( 
             __RPC__in ITDispatchMapper * This,
-            /* [in] */ __RPC__in BSTR pIID,
-            /* [in] */ __RPC__in_opt IDispatch *pInterfaceToMap,
-            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppReturnedInterface);
+            /* [annotation][in] */ 
+            _In_  BSTR pIID,
+            /* [annotation][in] */ 
+            _In_  IDispatch *pInterfaceToMap,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **ppReturnedInterface);
         
         END_INTERFACE
     } ITDispatchMapperVtbl;
@@ -15615,18 +17383,24 @@ EXTERN_C const IID IID_ITStreamControl;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateStream( 
-            /* [in] */ long lMediaType,
-            /* [in] */ TERMINAL_DIRECTION td,
-            /* [retval][out] */ __RPC__deref_out_opt ITStream **ppStream) = 0;
+            /* [annotation][in] */ 
+            _In_  long lMediaType,
+            /* [annotation][in] */ 
+            _In_  TERMINAL_DIRECTION td,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITStream **ppStream) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RemoveStream( 
-            /* [in] */ __RPC__in_opt ITStream *pStream) = 0;
+            /* [annotation][in] */ 
+            _In_  ITStream *pStream) = 0;
         
         virtual /* [hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateStreams( 
-            /* [out] */ __RPC__deref_out_opt IEnumStream **ppEnumStream) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumStream **ppEnumStream) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Streams( 
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
     };
     
@@ -15640,7 +17414,8 @@ EXTERN_C const IID IID_ITStreamControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITStreamControl * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15655,23 +17430,31 @@ EXTERN_C const IID IID_ITStreamControl;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITStreamControl * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITStreamControl * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITStreamControl * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -15696,24 +17479,30 @@ EXTERN_C const IID IID_ITStreamControl;
         DECLSPEC_XFGVIRT(ITStreamControl, CreateStream)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateStream )( 
             __RPC__in ITStreamControl * This,
-            /* [in] */ long lMediaType,
-            /* [in] */ TERMINAL_DIRECTION td,
-            /* [retval][out] */ __RPC__deref_out_opt ITStream **ppStream);
+            /* [annotation][in] */ 
+            _In_  long lMediaType,
+            /* [annotation][in] */ 
+            _In_  TERMINAL_DIRECTION td,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITStream **ppStream);
         
         DECLSPEC_XFGVIRT(ITStreamControl, RemoveStream)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveStream )( 
             __RPC__in ITStreamControl * This,
-            /* [in] */ __RPC__in_opt ITStream *pStream);
+            /* [annotation][in] */ 
+            _In_  ITStream *pStream);
         
         DECLSPEC_XFGVIRT(ITStreamControl, EnumerateStreams)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateStreams )( 
             __RPC__in ITStreamControl * This,
-            /* [out] */ __RPC__deref_out_opt IEnumStream **ppEnumStream);
+            /* [annotation][out] */ 
+            _Out_  IEnumStream **ppEnumStream);
         
         DECLSPEC_XFGVIRT(ITStreamControl, get_Streams)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Streams )( 
             __RPC__in ITStreamControl * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         END_INTERFACE
     } ITStreamControlVtbl;
@@ -15790,13 +17579,16 @@ EXTERN_C const IID IID_ITStream;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MediaType( 
-            /* [retval][out] */ __RPC__out long *plMediaType) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plMediaType) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Direction( 
-            /* [retval][out] */ __RPC__out TERMINAL_DIRECTION *pTD) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TERMINAL_DIRECTION *pTD) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppName) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE StartStream( void) = 0;
         
@@ -15805,16 +17597,20 @@ EXTERN_C const IID IID_ITStream;
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE StopStream( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SelectTerminal( 
-            /* [in] */ __RPC__in_opt ITTerminal *pTerminal) = 0;
+            /* [annotation][in] */ 
+            _In_  ITTerminal *pTerminal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE UnselectTerminal( 
-            /* [in] */ __RPC__in_opt ITTerminal *pTerminal) = 0;
+            /* [annotation][in] */ 
+            _In_  ITTerminal *pTerminal) = 0;
         
         virtual /* [hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateTerminals( 
-            /* [out] */ __RPC__deref_out_opt IEnumTerminal **ppEnumTerminal) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumTerminal **ppEnumTerminal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Terminals( 
-            /* [retval][out] */ __RPC__out VARIANT *pTerminals) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pTerminals) = 0;
         
     };
     
@@ -15828,7 +17624,8 @@ EXTERN_C const IID IID_ITStream;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITStream * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15843,23 +17640,31 @@ EXTERN_C const IID IID_ITStream;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITStream * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITStream * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITStream * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -15884,17 +17689,20 @@ EXTERN_C const IID IID_ITStream;
         DECLSPEC_XFGVIRT(ITStream, get_MediaType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaType )( 
             __RPC__in ITStream * This,
-            /* [retval][out] */ __RPC__out long *plMediaType);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plMediaType);
         
         DECLSPEC_XFGVIRT(ITStream, get_Direction)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Direction )( 
             __RPC__in ITStream * This,
-            /* [retval][out] */ __RPC__out TERMINAL_DIRECTION *pTD);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TERMINAL_DIRECTION *pTD);
         
         DECLSPEC_XFGVIRT(ITStream, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ITStream * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppName);
         
         DECLSPEC_XFGVIRT(ITStream, StartStream)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StartStream )( 
@@ -15911,22 +17719,26 @@ EXTERN_C const IID IID_ITStream;
         DECLSPEC_XFGVIRT(ITStream, SelectTerminal)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SelectTerminal )( 
             __RPC__in ITStream * This,
-            /* [in] */ __RPC__in_opt ITTerminal *pTerminal);
+            /* [annotation][in] */ 
+            _In_  ITTerminal *pTerminal);
         
         DECLSPEC_XFGVIRT(ITStream, UnselectTerminal)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *UnselectTerminal )( 
             __RPC__in ITStream * This,
-            /* [in] */ __RPC__in_opt ITTerminal *pTerminal);
+            /* [annotation][in] */ 
+            _In_  ITTerminal *pTerminal);
         
         DECLSPEC_XFGVIRT(ITStream, EnumerateTerminals)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateTerminals )( 
             __RPC__in ITStream * This,
-            /* [out] */ __RPC__deref_out_opt IEnumTerminal **ppEnumTerminal);
+            /* [annotation][out] */ 
+            _Out_  IEnumTerminal **ppEnumTerminal);
         
         DECLSPEC_XFGVIRT(ITStream, get_Terminals)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Terminals )( 
             __RPC__in ITStream * This,
-            /* [retval][out] */ __RPC__out VARIANT *pTerminals);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pTerminals);
         
         END_INTERFACE
     } ITStreamVtbl;
@@ -16021,17 +17833,21 @@ EXTERN_C const IID IID_IEnumStream;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [out] */ __RPC__deref_out_opt ITStream **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  ITStream **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumStream **ppEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumStream **ppEnum) = 0;
         
     };
     
@@ -16045,7 +17861,8 @@ EXTERN_C const IID IID_IEnumStream;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumStream * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -16060,8 +17877,10 @@ EXTERN_C const IID IID_IEnumStream;
         DECLSPEC_XFGVIRT(IEnumStream, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumStream * This,
-            /* [in] */ ULONG celt,
-            /* [out] */ __RPC__deref_out_opt ITStream **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  ITStream **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumStream, Reset)
@@ -16071,12 +17890,14 @@ EXTERN_C const IID IID_IEnumStream;
         DECLSPEC_XFGVIRT(IEnumStream, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumStream * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumStream, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumStream * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumStream **ppEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumStream **ppEnum);
         
         END_INTERFACE
     } IEnumStreamVtbl;
@@ -16140,16 +17961,20 @@ EXTERN_C const IID IID_ITSubStreamControl;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateSubStream( 
-            /* [retval][out] */ __RPC__deref_out_opt ITSubStream **ppSubStream) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITSubStream **ppSubStream) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RemoveSubStream( 
-            /* [in] */ __RPC__in_opt ITSubStream *pSubStream) = 0;
+            /* [annotation][in] */ 
+            _In_  ITSubStream *pSubStream) = 0;
         
         virtual /* [hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateSubStreams( 
-            /* [out] */ __RPC__deref_out_opt IEnumSubStream **ppEnumSubStream) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumSubStream **ppEnumSubStream) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SubStreams( 
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
     };
     
@@ -16163,7 +17988,8 @@ EXTERN_C const IID IID_ITSubStreamControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITSubStreamControl * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -16178,23 +18004,31 @@ EXTERN_C const IID IID_ITSubStreamControl;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITSubStreamControl * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITSubStreamControl * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITSubStreamControl * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -16219,22 +18053,26 @@ EXTERN_C const IID IID_ITSubStreamControl;
         DECLSPEC_XFGVIRT(ITSubStreamControl, CreateSubStream)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateSubStream )( 
             __RPC__in ITSubStreamControl * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITSubStream **ppSubStream);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITSubStream **ppSubStream);
         
         DECLSPEC_XFGVIRT(ITSubStreamControl, RemoveSubStream)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveSubStream )( 
             __RPC__in ITSubStreamControl * This,
-            /* [in] */ __RPC__in_opt ITSubStream *pSubStream);
+            /* [annotation][in] */ 
+            _In_  ITSubStream *pSubStream);
         
         DECLSPEC_XFGVIRT(ITSubStreamControl, EnumerateSubStreams)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateSubStreams )( 
             __RPC__in ITSubStreamControl * This,
-            /* [out] */ __RPC__deref_out_opt IEnumSubStream **ppEnumSubStream);
+            /* [annotation][out] */ 
+            _Out_  IEnumSubStream **ppEnumSubStream);
         
         DECLSPEC_XFGVIRT(ITSubStreamControl, get_SubStreams)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SubStreams )( 
             __RPC__in ITSubStreamControl * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         END_INTERFACE
     } ITSubStreamControlVtbl;
@@ -16317,19 +18155,24 @@ EXTERN_C const IID IID_ITSubStream;
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE StopSubStream( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SelectTerminal( 
-            /* [in] */ __RPC__in_opt ITTerminal *pTerminal) = 0;
+            /* [annotation][in] */ 
+            _In_  ITTerminal *pTerminal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE UnselectTerminal( 
-            /* [in] */ __RPC__in_opt ITTerminal *pTerminal) = 0;
+            /* [annotation][in] */ 
+            _In_  ITTerminal *pTerminal) = 0;
         
         virtual /* [hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateTerminals( 
-            /* [out] */ __RPC__deref_out_opt IEnumTerminal **ppEnumTerminal) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumTerminal **ppEnumTerminal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Terminals( 
-            /* [retval][out] */ __RPC__out VARIANT *pTerminals) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pTerminals) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Stream( 
-            /* [retval][out] */ __RPC__deref_out_opt ITStream **ppITStream) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITStream **ppITStream) = 0;
         
     };
     
@@ -16343,7 +18186,8 @@ EXTERN_C const IID IID_ITSubStream;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITSubStream * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -16358,23 +18202,31 @@ EXTERN_C const IID IID_ITSubStream;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITSubStream * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITSubStream * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITSubStream * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -16411,27 +18263,32 @@ EXTERN_C const IID IID_ITSubStream;
         DECLSPEC_XFGVIRT(ITSubStream, SelectTerminal)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SelectTerminal )( 
             __RPC__in ITSubStream * This,
-            /* [in] */ __RPC__in_opt ITTerminal *pTerminal);
+            /* [annotation][in] */ 
+            _In_  ITTerminal *pTerminal);
         
         DECLSPEC_XFGVIRT(ITSubStream, UnselectTerminal)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *UnselectTerminal )( 
             __RPC__in ITSubStream * This,
-            /* [in] */ __RPC__in_opt ITTerminal *pTerminal);
+            /* [annotation][in] */ 
+            _In_  ITTerminal *pTerminal);
         
         DECLSPEC_XFGVIRT(ITSubStream, EnumerateTerminals)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateTerminals )( 
             __RPC__in ITSubStream * This,
-            /* [out] */ __RPC__deref_out_opt IEnumTerminal **ppEnumTerminal);
+            /* [annotation][out] */ 
+            _Out_  IEnumTerminal **ppEnumTerminal);
         
         DECLSPEC_XFGVIRT(ITSubStream, get_Terminals)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Terminals )( 
             __RPC__in ITSubStream * This,
-            /* [retval][out] */ __RPC__out VARIANT *pTerminals);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pTerminals);
         
         DECLSPEC_XFGVIRT(ITSubStream, get_Stream)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Stream )( 
             __RPC__in ITSubStream * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITStream **ppITStream);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITStream **ppITStream);
         
         END_INTERFACE
     } ITSubStreamVtbl;
@@ -16520,17 +18377,21 @@ EXTERN_C const IID IID_IEnumSubStream;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [out] */ __RPC__deref_out_opt ITSubStream **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  ITSubStream **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumSubStream **ppEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumSubStream **ppEnum) = 0;
         
     };
     
@@ -16544,7 +18405,8 @@ EXTERN_C const IID IID_IEnumSubStream;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumSubStream * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -16559,8 +18421,10 @@ EXTERN_C const IID IID_IEnumSubStream;
         DECLSPEC_XFGVIRT(IEnumSubStream, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumSubStream * This,
-            /* [in] */ ULONG celt,
-            /* [out] */ __RPC__deref_out_opt ITSubStream **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  ITSubStream **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumSubStream, Reset)
@@ -16570,12 +18434,14 @@ EXTERN_C const IID IID_IEnumSubStream;
         DECLSPEC_XFGVIRT(IEnumSubStream, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumSubStream * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumSubStream, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumSubStream * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumSubStream **ppEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumSubStream **ppEnum);
         
         END_INTERFACE
     } IEnumSubStreamVtbl;
@@ -16639,7 +18505,8 @@ EXTERN_C const IID IID_ITLegacyWaveSupport;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE IsFullDuplex( 
-            /* [out] */ __RPC__out FULLDUPLEX_SUPPORT *pSupport) = 0;
+            /* [annotation][out] */ 
+            _Out_  FULLDUPLEX_SUPPORT *pSupport) = 0;
         
     };
     
@@ -16653,7 +18520,8 @@ EXTERN_C const IID IID_ITLegacyWaveSupport;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITLegacyWaveSupport * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -16668,23 +18536,31 @@ EXTERN_C const IID IID_ITLegacyWaveSupport;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITLegacyWaveSupport * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITLegacyWaveSupport * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITLegacyWaveSupport * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -16709,7 +18585,8 @@ EXTERN_C const IID IID_ITLegacyWaveSupport;
         DECLSPEC_XFGVIRT(ITLegacyWaveSupport, IsFullDuplex)
         HRESULT ( STDMETHODCALLTYPE *IsFullDuplex )( 
             __RPC__in ITLegacyWaveSupport * This,
-            /* [out] */ __RPC__out FULLDUPLEX_SUPPORT *pSupport);
+            /* [annotation][out] */ 
+            _Out_  FULLDUPLEX_SUPPORT *pSupport);
         
         END_INTERFACE
     } ITLegacyWaveSupportVtbl;
@@ -16777,16 +18654,22 @@ EXTERN_C const IID IID_ITBasicCallControl2;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RequestTerminal( 
-            /* [in] */ __RPC__in BSTR bstrTerminalClassGUID,
-            /* [in] */ long lMediaType,
-            /* [in] */ TERMINAL_DIRECTION Direction,
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppTerminal) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR bstrTerminalClassGUID,
+            /* [annotation][in] */ 
+            _In_  long lMediaType,
+            /* [annotation][in] */ 
+            _In_  TERMINAL_DIRECTION Direction,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppTerminal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SelectTerminalOnCall( 
-            /* [in] */ __RPC__in_opt ITTerminal *pTerminal) = 0;
+            /* [annotation][in] */ 
+            _In_  ITTerminal *pTerminal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE UnselectTerminalOnCall( 
-            /* [in] */ __RPC__in_opt ITTerminal *pTerminal) = 0;
+            /* [annotation][in] */ 
+            _In_  ITTerminal *pTerminal) = 0;
         
     };
     
@@ -16800,7 +18683,8 @@ EXTERN_C const IID IID_ITBasicCallControl2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITBasicCallControl2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -16815,23 +18699,31 @@ EXTERN_C const IID IID_ITBasicCallControl2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITBasicCallControl2 * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITBasicCallControl2 * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITBasicCallControl2 * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -16856,7 +18748,8 @@ EXTERN_C const IID IID_ITBasicCallControl2;
         DECLSPEC_XFGVIRT(ITBasicCallControl, Connect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in ITBasicCallControl2 * This,
-            /* [in] */ VARIANT_BOOL fSync);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fSync);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, Answer)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Answer )( 
@@ -16865,54 +18758,66 @@ EXTERN_C const IID IID_ITBasicCallControl2;
         DECLSPEC_XFGVIRT(ITBasicCallControl, Disconnect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
             __RPC__in ITBasicCallControl2 * This,
-            /* [in] */ DISCONNECT_CODE code);
+            /* [annotation][in] */ 
+            _In_  DISCONNECT_CODE code);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, Hold)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Hold )( 
             __RPC__in ITBasicCallControl2 * This,
-            /* [in] */ VARIANT_BOOL fHold);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fHold);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, HandoffDirect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *HandoffDirect )( 
             __RPC__in ITBasicCallControl2 * This,
-            /* [in] */ __RPC__in BSTR pApplicationName);
+            /* [annotation][in] */ 
+            _In_  BSTR pApplicationName);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, HandoffIndirect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *HandoffIndirect )( 
             __RPC__in ITBasicCallControl2 * This,
-            /* [in] */ long lMediaType);
+            /* [annotation][in] */ 
+            _In_  long lMediaType);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, Conference)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Conference )( 
             __RPC__in ITBasicCallControl2 * This,
-            /* [in] */ __RPC__in_opt ITBasicCallControl *pCall,
-            /* [in] */ VARIANT_BOOL fSync);
+            /* [annotation][in] */ 
+            _In_  ITBasicCallControl *pCall,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fSync);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, Transfer)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Transfer )( 
             __RPC__in ITBasicCallControl2 * This,
-            /* [in] */ __RPC__in_opt ITBasicCallControl *pCall,
-            /* [in] */ VARIANT_BOOL fSync);
+            /* [annotation][in] */ 
+            _In_  ITBasicCallControl *pCall,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fSync);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, BlindTransfer)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *BlindTransfer )( 
             __RPC__in ITBasicCallControl2 * This,
-            /* [in] */ __RPC__in BSTR pDestAddress);
+            /* [annotation][in] */ 
+            _In_  BSTR pDestAddress);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, SwapHold)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SwapHold )( 
             __RPC__in ITBasicCallControl2 * This,
-            /* [in] */ __RPC__in_opt ITBasicCallControl *pCall);
+            /* [annotation][in] */ 
+            _In_  ITBasicCallControl *pCall);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, ParkDirect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ParkDirect )( 
             __RPC__in ITBasicCallControl2 * This,
-            /* [in] */ __RPC__in BSTR pParkAddress);
+            /* [annotation][in] */ 
+            _In_  BSTR pParkAddress);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, ParkIndirect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ParkIndirect )( 
             __RPC__in ITBasicCallControl2 * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppNonDirAddress);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppNonDirAddress);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, Unpark)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Unpark )( 
@@ -16921,23 +18826,28 @@ EXTERN_C const IID IID_ITBasicCallControl2;
         DECLSPEC_XFGVIRT(ITBasicCallControl, SetQOS)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetQOS )( 
             __RPC__in ITBasicCallControl2 * This,
-            /* [in] */ long lMediaType,
-            /* [in] */ QOS_SERVICE_LEVEL ServiceLevel);
+            /* [annotation][in] */ 
+            _In_  long lMediaType,
+            /* [annotation][in] */ 
+            _In_  QOS_SERVICE_LEVEL ServiceLevel);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, Pickup)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Pickup )( 
             __RPC__in ITBasicCallControl2 * This,
-            /* [in] */ __RPC__in BSTR pGroupID);
+            /* [annotation][in] */ 
+            _In_  BSTR pGroupID);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, Dial)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Dial )( 
             __RPC__in ITBasicCallControl2 * This,
-            /* [in] */ __RPC__in BSTR pDestAddress);
+            /* [annotation][in] */ 
+            _In_  BSTR pDestAddress);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, Finish)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Finish )( 
             __RPC__in ITBasicCallControl2 * This,
-            /* [in] */ FINISH_MODE finishMode);
+            /* [annotation][in] */ 
+            _In_  FINISH_MODE finishMode);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl, RemoveFromConference)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveFromConference )( 
@@ -16946,20 +18856,26 @@ EXTERN_C const IID IID_ITBasicCallControl2;
         DECLSPEC_XFGVIRT(ITBasicCallControl2, RequestTerminal)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RequestTerminal )( 
             __RPC__in ITBasicCallControl2 * This,
-            /* [in] */ __RPC__in BSTR bstrTerminalClassGUID,
-            /* [in] */ long lMediaType,
-            /* [in] */ TERMINAL_DIRECTION Direction,
-            /* [retval][out] */ __RPC__deref_out_opt ITTerminal **ppTerminal);
+            /* [annotation][in] */ 
+            _In_  BSTR bstrTerminalClassGUID,
+            /* [annotation][in] */ 
+            _In_  long lMediaType,
+            /* [annotation][in] */ 
+            _In_  TERMINAL_DIRECTION Direction,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITTerminal **ppTerminal);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl2, SelectTerminalOnCall)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SelectTerminalOnCall )( 
             __RPC__in ITBasicCallControl2 * This,
-            /* [in] */ __RPC__in_opt ITTerminal *pTerminal);
+            /* [annotation][in] */ 
+            _In_  ITTerminal *pTerminal);
         
         DECLSPEC_XFGVIRT(ITBasicCallControl2, UnselectTerminalOnCall)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *UnselectTerminalOnCall )( 
             __RPC__in ITBasicCallControl2 * This,
-            /* [in] */ __RPC__in_opt ITTerminal *pTerminal);
+            /* [annotation][in] */ 
+            _In_  ITTerminal *pTerminal);
         
         END_INTERFACE
     } ITBasicCallControl2Vtbl;
@@ -17088,40 +19004,52 @@ EXTERN_C const IID IID_ITScriptableAudioFormat;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Channels( 
-            /* [retval][out] */ __RPC__out long *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Channels( 
-            /* [in] */ const long nNewVal) = 0;
+            /* [annotation][in] */ 
+            _In_  const long nNewVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SamplesPerSec( 
-            /* [retval][out] */ __RPC__out long *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SamplesPerSec( 
-            /* [in] */ const long nNewVal) = 0;
+            /* [annotation][in] */ 
+            _In_  const long nNewVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AvgBytesPerSec( 
-            /* [retval][out] */ __RPC__out long *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_AvgBytesPerSec( 
-            /* [in] */ const long nNewVal) = 0;
+            /* [annotation][in] */ 
+            _In_  const long nNewVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BlockAlign( 
-            /* [retval][out] */ __RPC__out long *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_BlockAlign( 
-            /* [in] */ const long nNewVal) = 0;
+            /* [annotation][in] */ 
+            _In_  const long nNewVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BitsPerSample( 
-            /* [retval][out] */ __RPC__out long *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_BitsPerSample( 
-            /* [in] */ const long nNewVal) = 0;
+            /* [annotation][in] */ 
+            _In_  const long nNewVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FormatTag( 
-            /* [retval][out] */ __RPC__out long *pVal) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_FormatTag( 
-            /* [in] */ const long nNewVal) = 0;
+            /* [annotation][in] */ 
+            _In_  const long nNewVal) = 0;
         
     };
     
@@ -17135,7 +19063,8 @@ EXTERN_C const IID IID_ITScriptableAudioFormat;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITScriptableAudioFormat * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -17150,23 +19079,31 @@ EXTERN_C const IID IID_ITScriptableAudioFormat;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITScriptableAudioFormat * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITScriptableAudioFormat * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITScriptableAudioFormat * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -17191,62 +19128,74 @@ EXTERN_C const IID IID_ITScriptableAudioFormat;
         DECLSPEC_XFGVIRT(ITScriptableAudioFormat, get_Channels)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Channels )( 
             __RPC__in ITScriptableAudioFormat * This,
-            /* [retval][out] */ __RPC__out long *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pVal);
         
         DECLSPEC_XFGVIRT(ITScriptableAudioFormat, put_Channels)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Channels )( 
             __RPC__in ITScriptableAudioFormat * This,
-            /* [in] */ const long nNewVal);
+            /* [annotation][in] */ 
+            _In_  const long nNewVal);
         
         DECLSPEC_XFGVIRT(ITScriptableAudioFormat, get_SamplesPerSec)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SamplesPerSec )( 
             __RPC__in ITScriptableAudioFormat * This,
-            /* [retval][out] */ __RPC__out long *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pVal);
         
         DECLSPEC_XFGVIRT(ITScriptableAudioFormat, put_SamplesPerSec)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SamplesPerSec )( 
             __RPC__in ITScriptableAudioFormat * This,
-            /* [in] */ const long nNewVal);
+            /* [annotation][in] */ 
+            _In_  const long nNewVal);
         
         DECLSPEC_XFGVIRT(ITScriptableAudioFormat, get_AvgBytesPerSec)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AvgBytesPerSec )( 
             __RPC__in ITScriptableAudioFormat * This,
-            /* [retval][out] */ __RPC__out long *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pVal);
         
         DECLSPEC_XFGVIRT(ITScriptableAudioFormat, put_AvgBytesPerSec)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AvgBytesPerSec )( 
             __RPC__in ITScriptableAudioFormat * This,
-            /* [in] */ const long nNewVal);
+            /* [annotation][in] */ 
+            _In_  const long nNewVal);
         
         DECLSPEC_XFGVIRT(ITScriptableAudioFormat, get_BlockAlign)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BlockAlign )( 
             __RPC__in ITScriptableAudioFormat * This,
-            /* [retval][out] */ __RPC__out long *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pVal);
         
         DECLSPEC_XFGVIRT(ITScriptableAudioFormat, put_BlockAlign)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BlockAlign )( 
             __RPC__in ITScriptableAudioFormat * This,
-            /* [in] */ const long nNewVal);
+            /* [annotation][in] */ 
+            _In_  const long nNewVal);
         
         DECLSPEC_XFGVIRT(ITScriptableAudioFormat, get_BitsPerSample)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BitsPerSample )( 
             __RPC__in ITScriptableAudioFormat * This,
-            /* [retval][out] */ __RPC__out long *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pVal);
         
         DECLSPEC_XFGVIRT(ITScriptableAudioFormat, put_BitsPerSample)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BitsPerSample )( 
             __RPC__in ITScriptableAudioFormat * This,
-            /* [in] */ const long nNewVal);
+            /* [annotation][in] */ 
+            _In_  const long nNewVal);
         
         DECLSPEC_XFGVIRT(ITScriptableAudioFormat, get_FormatTag)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FormatTag )( 
             __RPC__in ITScriptableAudioFormat * This,
-            /* [retval][out] */ __RPC__out long *pVal);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pVal);
         
         DECLSPEC_XFGVIRT(ITScriptableAudioFormat, put_FormatTag)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FormatTag )( 
             __RPC__in ITScriptableAudioFormat * This,
-            /* [in] */ const long nNewVal);
+            /* [annotation][in] */ 
+            _In_  const long nNewVal);
         
         END_INTERFACE
     } ITScriptableAudioFormatVtbl;

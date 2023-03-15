@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -248,42 +248,56 @@ EXTERN_C const IID IID_ITraceEvent;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ ITraceEvent **NewEvent) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITraceEvent **NewEvent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetUserContext( 
-            /* [retval][out] */ void **UserContext) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  void **UserContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEventRecord( 
-            /* [retval][out] */ PEVENT_RECORD *EventRecord) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PEVENT_RECORD *EventRecord) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetPayload( 
-            /* [size_is][in] */ BYTE *Payload,
-            /* [in] */ ULONG PayloadSize) = 0;
+            /* [annotation][size_is][in] */ 
+            _In_reads_(PayloadSize)  BYTE *Payload,
+            /* [annotation][in] */ 
+            _In_  ULONG PayloadSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetEventDescriptor( 
-            /* [in] */ PCEVENT_DESCRIPTOR EventDescriptor) = 0;
+            /* [annotation][in] */ 
+            _In_  PCEVENT_DESCRIPTOR EventDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetProcessId( 
-            /* [in] */ ULONG ProcessId) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ProcessId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetProcessorIndex( 
-            /* [in] */ ULONG ProcessorIndex) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ProcessorIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetThreadId( 
-            /* [in] */ ULONG ThreadId) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ThreadId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetThreadTimes( 
-            /* [in] */ ULONG KernelTime,
-            /* [in] */ ULONG UserTime) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG KernelTime,
+            /* [annotation][in] */ 
+            _In_  ULONG UserTime) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetActivityId( 
-            /* [in] */ LPCGUID ActivityId) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCGUID ActivityId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTimeStamp( 
-            /* [in] */ LARGE_INTEGER *TimeStamp) = 0;
+            /* [annotation][in] */ 
+            _In_  LARGE_INTEGER *TimeStamp) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetProviderId( 
-            /* [in] */ LPCGUID ProviderId) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCGUID ProviderId) = 0;
         
     };
     
@@ -297,7 +311,8 @@ EXTERN_C const IID IID_ITraceEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITraceEvent * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -312,64 +327,78 @@ EXTERN_C const IID IID_ITraceEvent;
         DECLSPEC_XFGVIRT(ITraceEvent, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             ITraceEvent * This,
-            /* [retval][out] */ ITraceEvent **NewEvent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITraceEvent **NewEvent);
         
         DECLSPEC_XFGVIRT(ITraceEvent, GetUserContext)
         HRESULT ( STDMETHODCALLTYPE *GetUserContext )( 
             ITraceEvent * This,
-            /* [retval][out] */ void **UserContext);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  void **UserContext);
         
         DECLSPEC_XFGVIRT(ITraceEvent, GetEventRecord)
         HRESULT ( STDMETHODCALLTYPE *GetEventRecord )( 
             ITraceEvent * This,
-            /* [retval][out] */ PEVENT_RECORD *EventRecord);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  PEVENT_RECORD *EventRecord);
         
         DECLSPEC_XFGVIRT(ITraceEvent, SetPayload)
         HRESULT ( STDMETHODCALLTYPE *SetPayload )( 
             ITraceEvent * This,
-            /* [size_is][in] */ BYTE *Payload,
-            /* [in] */ ULONG PayloadSize);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(PayloadSize)  BYTE *Payload,
+            /* [annotation][in] */ 
+            _In_  ULONG PayloadSize);
         
         DECLSPEC_XFGVIRT(ITraceEvent, SetEventDescriptor)
         HRESULT ( STDMETHODCALLTYPE *SetEventDescriptor )( 
             ITraceEvent * This,
-            /* [in] */ PCEVENT_DESCRIPTOR EventDescriptor);
+            /* [annotation][in] */ 
+            _In_  PCEVENT_DESCRIPTOR EventDescriptor);
         
         DECLSPEC_XFGVIRT(ITraceEvent, SetProcessId)
         HRESULT ( STDMETHODCALLTYPE *SetProcessId )( 
             ITraceEvent * This,
-            /* [in] */ ULONG ProcessId);
+            /* [annotation][in] */ 
+            _In_  ULONG ProcessId);
         
         DECLSPEC_XFGVIRT(ITraceEvent, SetProcessorIndex)
         HRESULT ( STDMETHODCALLTYPE *SetProcessorIndex )( 
             ITraceEvent * This,
-            /* [in] */ ULONG ProcessorIndex);
+            /* [annotation][in] */ 
+            _In_  ULONG ProcessorIndex);
         
         DECLSPEC_XFGVIRT(ITraceEvent, SetThreadId)
         HRESULT ( STDMETHODCALLTYPE *SetThreadId )( 
             ITraceEvent * This,
-            /* [in] */ ULONG ThreadId);
+            /* [annotation][in] */ 
+            _In_  ULONG ThreadId);
         
         DECLSPEC_XFGVIRT(ITraceEvent, SetThreadTimes)
         HRESULT ( STDMETHODCALLTYPE *SetThreadTimes )( 
             ITraceEvent * This,
-            /* [in] */ ULONG KernelTime,
-            /* [in] */ ULONG UserTime);
+            /* [annotation][in] */ 
+            _In_  ULONG KernelTime,
+            /* [annotation][in] */ 
+            _In_  ULONG UserTime);
         
         DECLSPEC_XFGVIRT(ITraceEvent, SetActivityId)
         HRESULT ( STDMETHODCALLTYPE *SetActivityId )( 
             ITraceEvent * This,
-            /* [in] */ LPCGUID ActivityId);
+            /* [annotation][in] */ 
+            _In_  LPCGUID ActivityId);
         
         DECLSPEC_XFGVIRT(ITraceEvent, SetTimeStamp)
         HRESULT ( STDMETHODCALLTYPE *SetTimeStamp )( 
             ITraceEvent * This,
-            /* [in] */ LARGE_INTEGER *TimeStamp);
+            /* [annotation][in] */ 
+            _In_  LARGE_INTEGER *TimeStamp);
         
         DECLSPEC_XFGVIRT(ITraceEvent, SetProviderId)
         HRESULT ( STDMETHODCALLTYPE *SetProviderId )( 
             ITraceEvent * This,
-            /* [in] */ LPCGUID ProviderId);
+            /* [annotation][in] */ 
+            _In_  LPCGUID ProviderId);
         
         END_INTERFACE
     } ITraceEventVtbl;
@@ -457,15 +486,20 @@ EXTERN_C const IID IID_ITraceEventCallback;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnBeginProcessTrace( 
-            /* [in] */ __RPC__in_opt ITraceEvent *HeaderEvent,
-            /* [in] */ __RPC__in_opt ITraceRelogger *Relogger) = 0;
+            /* [annotation][in] */ 
+            _In_  ITraceEvent *HeaderEvent,
+            /* [annotation][in] */ 
+            _In_  ITraceRelogger *Relogger) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnFinalizeProcessTrace( 
-            /* [in] */ __RPC__in_opt ITraceRelogger *Relogger) = 0;
+            /* [annotation][in] */ 
+            _In_  ITraceRelogger *Relogger) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnEvent( 
-            /* [in] */ __RPC__in_opt ITraceEvent *Event,
-            /* [in] */ __RPC__in_opt ITraceRelogger *Relogger) = 0;
+            /* [annotation][in] */ 
+            _In_  ITraceEvent *Event,
+            /* [annotation][in] */ 
+            _In_  ITraceRelogger *Relogger) = 0;
         
     };
     
@@ -479,7 +513,8 @@ EXTERN_C const IID IID_ITraceEventCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITraceEventCallback * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -494,19 +529,24 @@ EXTERN_C const IID IID_ITraceEventCallback;
         DECLSPEC_XFGVIRT(ITraceEventCallback, OnBeginProcessTrace)
         HRESULT ( STDMETHODCALLTYPE *OnBeginProcessTrace )( 
             __RPC__in ITraceEventCallback * This,
-            /* [in] */ __RPC__in_opt ITraceEvent *HeaderEvent,
-            /* [in] */ __RPC__in_opt ITraceRelogger *Relogger);
+            /* [annotation][in] */ 
+            _In_  ITraceEvent *HeaderEvent,
+            /* [annotation][in] */ 
+            _In_  ITraceRelogger *Relogger);
         
         DECLSPEC_XFGVIRT(ITraceEventCallback, OnFinalizeProcessTrace)
         HRESULT ( STDMETHODCALLTYPE *OnFinalizeProcessTrace )( 
             __RPC__in ITraceEventCallback * This,
-            /* [in] */ __RPC__in_opt ITraceRelogger *Relogger);
+            /* [annotation][in] */ 
+            _In_  ITraceRelogger *Relogger);
         
         DECLSPEC_XFGVIRT(ITraceEventCallback, OnEvent)
         HRESULT ( STDMETHODCALLTYPE *OnEvent )( 
             __RPC__in ITraceEventCallback * This,
-            /* [in] */ __RPC__in_opt ITraceEvent *Event,
-            /* [in] */ __RPC__in_opt ITraceRelogger *Relogger);
+            /* [annotation][in] */ 
+            _In_  ITraceEvent *Event,
+            /* [annotation][in] */ 
+            _In_  ITraceRelogger *Relogger);
         
         END_INTERFACE
     } ITraceEventCallbackVtbl;
@@ -567,33 +607,46 @@ EXTERN_C const IID IID_ITraceRelogger;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddLogfileTraceStream( 
-            /* [in] */ BSTR LogfileName,
-            /* [in] */ void *UserContext,
-            /* [retval][out] */ TRACEHANDLE *TraceHandle) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR LogfileName,
+            /* [annotation][in] */ 
+            _In_  void *UserContext,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TRACEHANDLE *TraceHandle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddRealtimeTraceStream( 
-            /* [in] */ BSTR LoggerName,
-            /* [in] */ void *UserContext,
-            /* [retval][out] */ TRACEHANDLE *TraceHandle) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR LoggerName,
+            /* [annotation][in] */ 
+            _In_  void *UserContext,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TRACEHANDLE *TraceHandle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterCallback( 
-            /* [in] */ ITraceEventCallback *Callback) = 0;
+            /* [annotation][in] */ 
+            _In_  ITraceEventCallback *Callback) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Inject( 
-            /* [in] */ ITraceEvent *Event) = 0;
+            /* [annotation][in] */ 
+            _In_  ITraceEvent *Event) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateEventInstance( 
-            /* [in] */ TRACEHANDLE TraceHandle,
-            /* [in] */ ULONG Flags,
-            /* [retval][out] */ ITraceEvent **Event) = 0;
+            /* [annotation][in] */ 
+            _In_  TRACEHANDLE TraceHandle,
+            /* [annotation][in] */ 
+            _In_  ULONG Flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITraceEvent **Event) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProcessTrace( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetOutputFilename( 
-            /* [in] */ BSTR LogfileName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR LogfileName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCompressionMode( 
-            /* [in] */ BOOLEAN CompressionMode) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOLEAN CompressionMode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Cancel( void) = 0;
         
@@ -609,7 +662,8 @@ EXTERN_C const IID IID_ITraceRelogger;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITraceRelogger * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -624,33 +678,44 @@ EXTERN_C const IID IID_ITraceRelogger;
         DECLSPEC_XFGVIRT(ITraceRelogger, AddLogfileTraceStream)
         HRESULT ( STDMETHODCALLTYPE *AddLogfileTraceStream )( 
             ITraceRelogger * This,
-            /* [in] */ BSTR LogfileName,
-            /* [in] */ void *UserContext,
-            /* [retval][out] */ TRACEHANDLE *TraceHandle);
+            /* [annotation][in] */ 
+            _In_  BSTR LogfileName,
+            /* [annotation][in] */ 
+            _In_  void *UserContext,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TRACEHANDLE *TraceHandle);
         
         DECLSPEC_XFGVIRT(ITraceRelogger, AddRealtimeTraceStream)
         HRESULT ( STDMETHODCALLTYPE *AddRealtimeTraceStream )( 
             ITraceRelogger * This,
-            /* [in] */ BSTR LoggerName,
-            /* [in] */ void *UserContext,
-            /* [retval][out] */ TRACEHANDLE *TraceHandle);
+            /* [annotation][in] */ 
+            _In_  BSTR LoggerName,
+            /* [annotation][in] */ 
+            _In_  void *UserContext,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  TRACEHANDLE *TraceHandle);
         
         DECLSPEC_XFGVIRT(ITraceRelogger, RegisterCallback)
         HRESULT ( STDMETHODCALLTYPE *RegisterCallback )( 
             ITraceRelogger * This,
-            /* [in] */ ITraceEventCallback *Callback);
+            /* [annotation][in] */ 
+            _In_  ITraceEventCallback *Callback);
         
         DECLSPEC_XFGVIRT(ITraceRelogger, Inject)
         HRESULT ( STDMETHODCALLTYPE *Inject )( 
             ITraceRelogger * This,
-            /* [in] */ ITraceEvent *Event);
+            /* [annotation][in] */ 
+            _In_  ITraceEvent *Event);
         
         DECLSPEC_XFGVIRT(ITraceRelogger, CreateEventInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateEventInstance )( 
             ITraceRelogger * This,
-            /* [in] */ TRACEHANDLE TraceHandle,
-            /* [in] */ ULONG Flags,
-            /* [retval][out] */ ITraceEvent **Event);
+            /* [annotation][in] */ 
+            _In_  TRACEHANDLE TraceHandle,
+            /* [annotation][in] */ 
+            _In_  ULONG Flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITraceEvent **Event);
         
         DECLSPEC_XFGVIRT(ITraceRelogger, ProcessTrace)
         HRESULT ( STDMETHODCALLTYPE *ProcessTrace )( 
@@ -659,12 +724,14 @@ EXTERN_C const IID IID_ITraceRelogger;
         DECLSPEC_XFGVIRT(ITraceRelogger, SetOutputFilename)
         HRESULT ( STDMETHODCALLTYPE *SetOutputFilename )( 
             ITraceRelogger * This,
-            /* [in] */ BSTR LogfileName);
+            /* [annotation][in] */ 
+            _In_  BSTR LogfileName);
         
         DECLSPEC_XFGVIRT(ITraceRelogger, SetCompressionMode)
         HRESULT ( STDMETHODCALLTYPE *SetCompressionMode )( 
             ITraceRelogger * This,
-            /* [in] */ BOOLEAN CompressionMode);
+            /* [annotation][in] */ 
+            _In_  BOOLEAN CompressionMode);
         
         DECLSPEC_XFGVIRT(ITraceRelogger, Cancel)
         HRESULT ( STDMETHODCALLTYPE *Cancel )( 

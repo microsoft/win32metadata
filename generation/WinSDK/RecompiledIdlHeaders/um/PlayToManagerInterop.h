@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -90,12 +90,16 @@ EXTERN_C const IID IID_IPlayToManagerInterop;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetForWindow( 
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **playToManager) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **playToManager) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ShowPlayToUIForWindow( 
-            /* [in] */ __RPC__in HWND appWindow) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND appWindow) = 0;
         
     };
     
@@ -109,7 +113,8 @@ EXTERN_C const IID IID_IPlayToManagerInterop;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPlayToManagerInterop * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -140,14 +145,18 @@ EXTERN_C const IID IID_IPlayToManagerInterop;
         DECLSPEC_XFGVIRT(IPlayToManagerInterop, GetForWindow)
         HRESULT ( STDMETHODCALLTYPE *GetForWindow )( 
             __RPC__in IPlayToManagerInterop * This,
-            /* [in] */ __RPC__in HWND appWindow,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][retval][out] */ __RPC__deref_out_opt void **playToManager);
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **playToManager);
         
         DECLSPEC_XFGVIRT(IPlayToManagerInterop, ShowPlayToUIForWindow)
         HRESULT ( STDMETHODCALLTYPE *ShowPlayToUIForWindow )( 
             __RPC__in IPlayToManagerInterop * This,
-            /* [in] */ __RPC__in HWND appWindow);
+            /* [annotation][in] */ 
+            _In_  HWND appWindow);
         
         END_INTERFACE
     } IPlayToManagerInteropVtbl;

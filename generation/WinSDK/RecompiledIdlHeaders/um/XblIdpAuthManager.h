@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -149,35 +149,54 @@ EXTERN_C const IID IID_IXblIdpAuthManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetGamerAccount( 
-            /* [unique][string][in] */ __RPC__in_opt_string LPCWSTR msaAccountId,
-            /* [unique][string][in] */ __RPC__in_opt_string LPCWSTR xuid) = 0;
+            /* [annotation][unique][string][in] */ 
+            _In_  LPCWSTR msaAccountId,
+            /* [annotation][unique][string][in] */ 
+            _In_  LPCWSTR xuid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGamerAccount( 
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *msaAccountId,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *xuid) = 0;
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *msaAccountId,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *xuid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAppViewInitialized( 
-            /* [string][in] */ __RPC__in_string LPCWSTR appSid,
-            /* [string][in] */ __RPC__in_string LPCWSTR msaAccountId) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR appSid,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR msaAccountId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEnvironment( 
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *environment) = 0;
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *environment) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSandbox( 
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *sandbox) = 0;
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *sandbox) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTokenAndSignatureWithTokenResult( 
-            /* [unique][string][in] */ __RPC__in_opt_string LPCWSTR msaAccountId,
-            /* [string][in] */ __RPC__in_string LPCWSTR appSid,
-            /* [string][in] */ __RPC__in_string LPCWSTR msaTarget,
-            /* [string][in] */ __RPC__in_string LPCWSTR msaPolicy,
-            /* [string][in] */ __RPC__in_string LPCWSTR httpMethod,
-            /* [string][in] */ __RPC__in_string LPCWSTR uri,
-            /* [unique][string][in] */ __RPC__in_opt_string LPCWSTR headers,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(bodySize) BYTE *body,
-            /* [in] */ DWORD bodySize,
-            /* [in] */ BOOL forceRefresh,
-            /* [out] */ __RPC__deref_out_opt IXblIdpAuthTokenResult **result) = 0;
+            /* [annotation][unique][string][in] */ 
+            _In_  LPCWSTR msaAccountId,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR appSid,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR msaTarget,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR msaPolicy,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR httpMethod,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR uri,
+            /* [annotation][unique][string][in] */ 
+            _In_  LPCWSTR headers,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(bodySize)  BYTE *body,
+            /* [annotation][in] */ 
+            _In_  DWORD bodySize,
+            /* [annotation][in] */ 
+            _In_  BOOL forceRefresh,
+            /* [annotation][out] */ 
+            _Out_  IXblIdpAuthTokenResult **result) = 0;
         
     };
     
@@ -191,7 +210,8 @@ EXTERN_C const IID IID_IXblIdpAuthManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXblIdpAuthManager * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -206,45 +226,64 @@ EXTERN_C const IID IID_IXblIdpAuthManager;
         DECLSPEC_XFGVIRT(IXblIdpAuthManager, SetGamerAccount)
         HRESULT ( STDMETHODCALLTYPE *SetGamerAccount )( 
             __RPC__in IXblIdpAuthManager * This,
-            /* [unique][string][in] */ __RPC__in_opt_string LPCWSTR msaAccountId,
-            /* [unique][string][in] */ __RPC__in_opt_string LPCWSTR xuid);
+            /* [annotation][unique][string][in] */ 
+            _In_  LPCWSTR msaAccountId,
+            /* [annotation][unique][string][in] */ 
+            _In_  LPCWSTR xuid);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthManager, GetGamerAccount)
         HRESULT ( STDMETHODCALLTYPE *GetGamerAccount )( 
             __RPC__in IXblIdpAuthManager * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *msaAccountId,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *xuid);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *msaAccountId,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *xuid);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthManager, SetAppViewInitialized)
         HRESULT ( STDMETHODCALLTYPE *SetAppViewInitialized )( 
             __RPC__in IXblIdpAuthManager * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR appSid,
-            /* [string][in] */ __RPC__in_string LPCWSTR msaAccountId);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR appSid,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR msaAccountId);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthManager, GetEnvironment)
         HRESULT ( STDMETHODCALLTYPE *GetEnvironment )( 
             __RPC__in IXblIdpAuthManager * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *environment);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *environment);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthManager, GetSandbox)
         HRESULT ( STDMETHODCALLTYPE *GetSandbox )( 
             __RPC__in IXblIdpAuthManager * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *sandbox);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *sandbox);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthManager, GetTokenAndSignatureWithTokenResult)
         HRESULT ( STDMETHODCALLTYPE *GetTokenAndSignatureWithTokenResult )( 
             __RPC__in IXblIdpAuthManager * This,
-            /* [unique][string][in] */ __RPC__in_opt_string LPCWSTR msaAccountId,
-            /* [string][in] */ __RPC__in_string LPCWSTR appSid,
-            /* [string][in] */ __RPC__in_string LPCWSTR msaTarget,
-            /* [string][in] */ __RPC__in_string LPCWSTR msaPolicy,
-            /* [string][in] */ __RPC__in_string LPCWSTR httpMethod,
-            /* [string][in] */ __RPC__in_string LPCWSTR uri,
-            /* [unique][string][in] */ __RPC__in_opt_string LPCWSTR headers,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(bodySize) BYTE *body,
-            /* [in] */ DWORD bodySize,
-            /* [in] */ BOOL forceRefresh,
-            /* [out] */ __RPC__deref_out_opt IXblIdpAuthTokenResult **result);
+            /* [annotation][unique][string][in] */ 
+            _In_  LPCWSTR msaAccountId,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR appSid,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR msaTarget,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR msaPolicy,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR httpMethod,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR uri,
+            /* [annotation][unique][string][in] */ 
+            _In_  LPCWSTR headers,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(bodySize)  BYTE *body,
+            /* [annotation][in] */ 
+            _In_  DWORD bodySize,
+            /* [annotation][in] */ 
+            _In_  BOOL forceRefresh,
+            /* [annotation][out] */ 
+            _Out_  IXblIdpAuthTokenResult **result);
         
         END_INTERFACE
     } IXblIdpAuthManagerVtbl;
@@ -314,16 +353,26 @@ EXTERN_C const IID IID_IXblIdpAuthManager2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetUserlessTokenAndSignatureWithTokenResult( 
-            /* [string][in] */ __RPC__in_string LPCWSTR appSid,
-            /* [string][in] */ __RPC__in_string LPCWSTR msaTarget,
-            /* [string][in] */ __RPC__in_string LPCWSTR msaPolicy,
-            /* [string][in] */ __RPC__in_string LPCWSTR httpMethod,
-            /* [string][in] */ __RPC__in_string LPCWSTR uri,
-            /* [unique][string][in] */ __RPC__in_opt_string LPCWSTR headers,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(bodySize) BYTE *body,
-            /* [in] */ DWORD bodySize,
-            /* [in] */ BOOL forceRefresh,
-            /* [out] */ __RPC__deref_out_opt IXblIdpAuthTokenResult **result) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR appSid,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR msaTarget,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR msaPolicy,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR httpMethod,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR uri,
+            /* [annotation][unique][string][in] */ 
+            _In_  LPCWSTR headers,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(bodySize)  BYTE *body,
+            /* [annotation][in] */ 
+            _In_  DWORD bodySize,
+            /* [annotation][in] */ 
+            _In_  BOOL forceRefresh,
+            /* [annotation][out] */ 
+            _Out_  IXblIdpAuthTokenResult **result) = 0;
         
     };
     
@@ -337,7 +386,8 @@ EXTERN_C const IID IID_IXblIdpAuthManager2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXblIdpAuthManager2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -352,16 +402,26 @@ EXTERN_C const IID IID_IXblIdpAuthManager2;
         DECLSPEC_XFGVIRT(IXblIdpAuthManager2, GetUserlessTokenAndSignatureWithTokenResult)
         HRESULT ( STDMETHODCALLTYPE *GetUserlessTokenAndSignatureWithTokenResult )( 
             __RPC__in IXblIdpAuthManager2 * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR appSid,
-            /* [string][in] */ __RPC__in_string LPCWSTR msaTarget,
-            /* [string][in] */ __RPC__in_string LPCWSTR msaPolicy,
-            /* [string][in] */ __RPC__in_string LPCWSTR httpMethod,
-            /* [string][in] */ __RPC__in_string LPCWSTR uri,
-            /* [unique][string][in] */ __RPC__in_opt_string LPCWSTR headers,
-            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(bodySize) BYTE *body,
-            /* [in] */ DWORD bodySize,
-            /* [in] */ BOOL forceRefresh,
-            /* [out] */ __RPC__deref_out_opt IXblIdpAuthTokenResult **result);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR appSid,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR msaTarget,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR msaPolicy,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR httpMethod,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR uri,
+            /* [annotation][unique][string][in] */ 
+            _In_  LPCWSTR headers,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(bodySize)  BYTE *body,
+            /* [annotation][in] */ 
+            _In_  DWORD bodySize,
+            /* [annotation][in] */ 
+            _In_  BOOL forceRefresh,
+            /* [annotation][out] */ 
+            _Out_  IXblIdpAuthTokenResult **result);
         
         END_INTERFACE
     } IXblIdpAuthManager2Vtbl;
@@ -416,64 +476,84 @@ EXTERN_C const IID IID_IXblIdpAuthTokenResult;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetStatus( 
-            /* [out] */ __RPC__out XBL_IDP_AUTH_TOKEN_STATUS *status) = 0;
+            /* [annotation][out] */ 
+            _Out_  XBL_IDP_AUTH_TOKEN_STATUS *status) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetErrorCode( 
-            /* [out] */ __RPC__out HRESULT *errorCode) = 0;
+            /* [annotation][out] */ 
+            _Out_  HRESULT *errorCode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetToken( 
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *token) = 0;
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *token) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSignature( 
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *signature) = 0;
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *signature) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSandbox( 
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *sandbox) = 0;
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *sandbox) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEnvironment( 
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *environment) = 0;
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *environment) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMsaAccountId( 
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *msaAccountId) = 0;
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *msaAccountId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetXuid( 
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *xuid) = 0;
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *xuid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGamertag( 
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *gamertag) = 0;
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *gamertag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAgeGroup( 
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *ageGroup) = 0;
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *ageGroup) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPrivileges( 
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *privileges) = 0;
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *privileges) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMsaTarget( 
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *msaTarget) = 0;
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *msaTarget) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMsaPolicy( 
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *msaPolicy) = 0;
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *msaPolicy) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMsaAppId( 
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *msaAppId) = 0;
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *msaAppId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRedirect( 
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *redirect) = 0;
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *redirect) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMessage( 
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *message) = 0;
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *message) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetHelpId( 
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *helpId) = 0;
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *helpId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEnforcementBans( 
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *enforcementBans) = 0;
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *enforcementBans) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRestrictions( 
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *restrictions) = 0;
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *restrictions) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTitleRestrictions( 
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *titleRestrictions) = 0;
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *titleRestrictions) = 0;
         
     };
     
@@ -487,7 +567,8 @@ EXTERN_C const IID IID_IXblIdpAuthTokenResult;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXblIdpAuthTokenResult * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -502,102 +583,122 @@ EXTERN_C const IID IID_IXblIdpAuthTokenResult;
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in IXblIdpAuthTokenResult * This,
-            /* [out] */ __RPC__out XBL_IDP_AUTH_TOKEN_STATUS *status);
+            /* [annotation][out] */ 
+            _Out_  XBL_IDP_AUTH_TOKEN_STATUS *status);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult, GetErrorCode)
         HRESULT ( STDMETHODCALLTYPE *GetErrorCode )( 
             __RPC__in IXblIdpAuthTokenResult * This,
-            /* [out] */ __RPC__out HRESULT *errorCode);
+            /* [annotation][out] */ 
+            _Out_  HRESULT *errorCode);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult, GetToken)
         HRESULT ( STDMETHODCALLTYPE *GetToken )( 
             __RPC__in IXblIdpAuthTokenResult * This,
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *token);
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *token);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult, GetSignature)
         HRESULT ( STDMETHODCALLTYPE *GetSignature )( 
             __RPC__in IXblIdpAuthTokenResult * This,
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *signature);
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *signature);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult, GetSandbox)
         HRESULT ( STDMETHODCALLTYPE *GetSandbox )( 
             __RPC__in IXblIdpAuthTokenResult * This,
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *sandbox);
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *sandbox);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult, GetEnvironment)
         HRESULT ( STDMETHODCALLTYPE *GetEnvironment )( 
             __RPC__in IXblIdpAuthTokenResult * This,
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *environment);
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *environment);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult, GetMsaAccountId)
         HRESULT ( STDMETHODCALLTYPE *GetMsaAccountId )( 
             __RPC__in IXblIdpAuthTokenResult * This,
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *msaAccountId);
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *msaAccountId);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult, GetXuid)
         HRESULT ( STDMETHODCALLTYPE *GetXuid )( 
             __RPC__in IXblIdpAuthTokenResult * This,
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *xuid);
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *xuid);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult, GetGamertag)
         HRESULT ( STDMETHODCALLTYPE *GetGamertag )( 
             __RPC__in IXblIdpAuthTokenResult * This,
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *gamertag);
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *gamertag);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult, GetAgeGroup)
         HRESULT ( STDMETHODCALLTYPE *GetAgeGroup )( 
             __RPC__in IXblIdpAuthTokenResult * This,
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *ageGroup);
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *ageGroup);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult, GetPrivileges)
         HRESULT ( STDMETHODCALLTYPE *GetPrivileges )( 
             __RPC__in IXblIdpAuthTokenResult * This,
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *privileges);
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *privileges);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult, GetMsaTarget)
         HRESULT ( STDMETHODCALLTYPE *GetMsaTarget )( 
             __RPC__in IXblIdpAuthTokenResult * This,
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *msaTarget);
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *msaTarget);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult, GetMsaPolicy)
         HRESULT ( STDMETHODCALLTYPE *GetMsaPolicy )( 
             __RPC__in IXblIdpAuthTokenResult * This,
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *msaPolicy);
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *msaPolicy);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult, GetMsaAppId)
         HRESULT ( STDMETHODCALLTYPE *GetMsaAppId )( 
             __RPC__in IXblIdpAuthTokenResult * This,
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *msaAppId);
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *msaAppId);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult, GetRedirect)
         HRESULT ( STDMETHODCALLTYPE *GetRedirect )( 
             __RPC__in IXblIdpAuthTokenResult * This,
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *redirect);
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *redirect);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult, GetMessage)
         HRESULT ( STDMETHODCALLTYPE *GetMessage )( 
             __RPC__in IXblIdpAuthTokenResult * This,
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *message);
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *message);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult, GetHelpId)
         HRESULT ( STDMETHODCALLTYPE *GetHelpId )( 
             __RPC__in IXblIdpAuthTokenResult * This,
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *helpId);
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *helpId);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult, GetEnforcementBans)
         HRESULT ( STDMETHODCALLTYPE *GetEnforcementBans )( 
             __RPC__in IXblIdpAuthTokenResult * This,
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *enforcementBans);
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *enforcementBans);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult, GetRestrictions)
         HRESULT ( STDMETHODCALLTYPE *GetRestrictions )( 
             __RPC__in IXblIdpAuthTokenResult * This,
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *restrictions);
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *restrictions);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult, GetTitleRestrictions)
         HRESULT ( STDMETHODCALLTYPE *GetTitleRestrictions )( 
             __RPC__in IXblIdpAuthTokenResult * This,
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *titleRestrictions);
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *titleRestrictions);
         
         END_INTERFACE
     } IXblIdpAuthTokenResultVtbl;
@@ -709,13 +810,16 @@ EXTERN_C const IID IID_IXblIdpAuthTokenResult2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetModernGamertag( 
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetModernGamertagSuffix( 
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetUniqueModernGamertag( 
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *value) = 0;
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *value) = 0;
         
     };
     
@@ -729,7 +833,8 @@ EXTERN_C const IID IID_IXblIdpAuthTokenResult2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXblIdpAuthTokenResult2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -744,17 +849,20 @@ EXTERN_C const IID IID_IXblIdpAuthTokenResult2;
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult2, GetModernGamertag)
         HRESULT ( STDMETHODCALLTYPE *GetModernGamertag )( 
             __RPC__in IXblIdpAuthTokenResult2 * This,
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult2, GetModernGamertagSuffix)
         HRESULT ( STDMETHODCALLTYPE *GetModernGamertagSuffix )( 
             __RPC__in IXblIdpAuthTokenResult2 * This,
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         DECLSPEC_XFGVIRT(IXblIdpAuthTokenResult2, GetUniqueModernGamertag)
         HRESULT ( STDMETHODCALLTYPE *GetUniqueModernGamertag )( 
             __RPC__in IXblIdpAuthTokenResult2 * This,
-            /* [string][retval][out] */ __RPC__deref_out_opt_string LPWSTR *value);
+            /* [annotation][string][retval][out] */ 
+            _Out_retval_  LPWSTR *value);
         
         END_INTERFACE
     } IXblIdpAuthTokenResult2Vtbl;

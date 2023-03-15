@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -162,13 +162,18 @@ EXTERN_C const IID IID_IPrintDocumentPackageTarget;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPackageTargetTypes( 
-            /* [out] */ __RPC__out UINT32 *targetCount,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*targetCount) GUID **targetTypes) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT32 *targetCount,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*targetCount)  GUID **targetTypes) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPackageTarget( 
-            /* [in] */ __RPC__in REFGUID guidTargetType,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppvTarget) = 0;
+            /* [annotation][in] */ 
+            _In_  REFGUID guidTargetType,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvTarget) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Cancel( void) = 0;
         
@@ -184,7 +189,8 @@ EXTERN_C const IID IID_IPrintDocumentPackageTarget;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPrintDocumentPackageTarget * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -199,15 +205,20 @@ EXTERN_C const IID IID_IPrintDocumentPackageTarget;
         DECLSPEC_XFGVIRT(IPrintDocumentPackageTarget, GetPackageTargetTypes)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPackageTargetTypes )( 
             __RPC__in IPrintDocumentPackageTarget * This,
-            /* [out] */ __RPC__out UINT32 *targetCount,
-            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*targetCount) GUID **targetTypes);
+            /* [annotation][out] */ 
+            _Out_  UINT32 *targetCount,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*targetCount)  GUID **targetTypes);
         
         DECLSPEC_XFGVIRT(IPrintDocumentPackageTarget, GetPackageTarget)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPackageTarget )( 
             __RPC__in IPrintDocumentPackageTarget * This,
-            /* [in] */ __RPC__in REFGUID guidTargetType,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppvTarget);
+            /* [annotation][in] */ 
+            _In_  REFGUID guidTargetType,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvTarget);
         
         DECLSPEC_XFGVIRT(IPrintDocumentPackageTarget, Cancel)
         HRESULT ( STDMETHODCALLTYPE *Cancel )( 
@@ -272,11 +283,14 @@ EXTERN_C const IID IID_IPrintDocumentPackageTarget2;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetIsTargetIppPrinter( 
-            /* [out] */ __RPC__out BOOL *isIppPrinter) = 0;
+            /* [annotation][out] */ 
+            _Out_  BOOL *isIppPrinter) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetTargetIppPrintDevice( 
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppvTarget) = 0;
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvTarget) = 0;
         
     };
     
@@ -290,7 +304,8 @@ EXTERN_C const IID IID_IPrintDocumentPackageTarget2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPrintDocumentPackageTarget2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -305,13 +320,16 @@ EXTERN_C const IID IID_IPrintDocumentPackageTarget2;
         DECLSPEC_XFGVIRT(IPrintDocumentPackageTarget2, GetIsTargetIppPrinter)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetIsTargetIppPrinter )( 
             __RPC__in IPrintDocumentPackageTarget2 * This,
-            /* [out] */ __RPC__out BOOL *isIppPrinter);
+            /* [annotation][out] */ 
+            _Out_  BOOL *isIppPrinter);
         
         DECLSPEC_XFGVIRT(IPrintDocumentPackageTarget2, GetTargetIppPrintDevice)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTargetIppPrintDevice )( 
             __RPC__in IPrintDocumentPackageTarget2 * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppvTarget);
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvTarget);
         
         END_INTERFACE
     } IPrintDocumentPackageTarget2Vtbl;
@@ -400,7 +418,8 @@ EXTERN_C const IID IID_IPrintDocumentPackageStatusEvent;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE PackageStatusUpdated( 
-            /* [in] */ __RPC__in PrintDocumentPackageStatus *packageStatus) = 0;
+            /* [annotation][in] */ 
+            _In_  PrintDocumentPackageStatus *packageStatus) = 0;
         
     };
     
@@ -414,7 +433,8 @@ EXTERN_C const IID IID_IPrintDocumentPackageStatusEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPrintDocumentPackageStatusEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -429,23 +449,31 @@ EXTERN_C const IID IID_IPrintDocumentPackageStatusEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IPrintDocumentPackageStatusEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IPrintDocumentPackageStatusEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IPrintDocumentPackageStatusEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -470,7 +498,8 @@ EXTERN_C const IID IID_IPrintDocumentPackageStatusEvent;
         DECLSPEC_XFGVIRT(IPrintDocumentPackageStatusEvent, PackageStatusUpdated)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PackageStatusUpdated )( 
             __RPC__in IPrintDocumentPackageStatusEvent * This,
-            /* [in] */ __RPC__in PrintDocumentPackageStatus *packageStatus);
+            /* [annotation][in] */ 
+            _In_  PrintDocumentPackageStatus *packageStatus);
         
         END_INTERFACE
     } IPrintDocumentPackageStatusEventVtbl;
@@ -538,11 +567,16 @@ EXTERN_C const IID IID_IPrintDocumentPackageTargetFactory;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE CreateDocumentPackageTargetForPrintJob( 
-            /* [string][in] */ __RPC__in_string LPCWSTR printerName,
-            /* [string][in] */ __RPC__in_string LPCWSTR jobName,
-            /* [in] */ __RPC__in_opt IStream *jobOutputStream,
-            /* [in] */ __RPC__in_opt IStream *jobPrintTicketStream,
-            /* [out] */ __RPC__deref_out_opt IPrintDocumentPackageTarget **docPackageTarget) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR printerName,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR jobName,
+            /* [annotation][in] */ 
+            _In_  IStream *jobOutputStream,
+            /* [annotation][in] */ 
+            _In_  IStream *jobPrintTicketStream,
+            /* [annotation][out] */ 
+            _Out_  IPrintDocumentPackageTarget **docPackageTarget) = 0;
         
     };
     
@@ -556,7 +590,8 @@ EXTERN_C const IID IID_IPrintDocumentPackageTargetFactory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPrintDocumentPackageTargetFactory * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -571,11 +606,16 @@ EXTERN_C const IID IID_IPrintDocumentPackageTargetFactory;
         DECLSPEC_XFGVIRT(IPrintDocumentPackageTargetFactory, CreateDocumentPackageTargetForPrintJob)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateDocumentPackageTargetForPrintJob )( 
             __RPC__in IPrintDocumentPackageTargetFactory * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR printerName,
-            /* [string][in] */ __RPC__in_string LPCWSTR jobName,
-            /* [in] */ __RPC__in_opt IStream *jobOutputStream,
-            /* [in] */ __RPC__in_opt IStream *jobPrintTicketStream,
-            /* [out] */ __RPC__deref_out_opt IPrintDocumentPackageTarget **docPackageTarget);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR printerName,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR jobName,
+            /* [annotation][in] */ 
+            _In_  IStream *jobOutputStream,
+            /* [annotation][in] */ 
+            _In_  IStream *jobPrintTicketStream,
+            /* [annotation][out] */ 
+            _Out_  IPrintDocumentPackageTarget **docPackageTarget);
         
         END_INTERFACE
     } IPrintDocumentPackageTargetFactoryVtbl;

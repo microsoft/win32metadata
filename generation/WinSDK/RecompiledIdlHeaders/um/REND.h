@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -234,49 +234,64 @@ EXTERN_C const IID IID_ITDirectoryObjectConference;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Protocol( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppProtocol) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppProtocol) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Originator( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppOriginator) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppOriginator) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Originator( 
-            /* [in] */ __RPC__in BSTR pOriginator) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pOriginator) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AdvertisingScope( 
-            /* [retval][out] */ __RPC__out RND_ADVERTISING_SCOPE *pAdvertisingScope) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RND_ADVERTISING_SCOPE *pAdvertisingScope) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_AdvertisingScope( 
-            /* [in] */ RND_ADVERTISING_SCOPE AdvertisingScope) = 0;
+            /* [annotation][in] */ 
+            _In_  RND_ADVERTISING_SCOPE AdvertisingScope) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Url( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppUrl) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppUrl) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Url( 
-            /* [in] */ __RPC__in BSTR pUrl) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pUrl) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppDescription) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppDescription) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
-            /* [in] */ __RPC__in BSTR pDescription) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pDescription) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_IsEncrypted( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEncrypted) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfEncrypted) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_IsEncrypted( 
-            /* [in] */ VARIANT_BOOL fEncrypted) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fEncrypted) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StartTime( 
-            /* [retval][out] */ __RPC__out DATE *pDate) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DATE *pDate) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_StartTime( 
-            /* [in] */ DATE Date) = 0;
+            /* [annotation][in] */ 
+            _In_  DATE Date) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StopTime( 
-            /* [retval][out] */ __RPC__out DATE *pDate) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DATE *pDate) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_StopTime( 
-            /* [in] */ DATE Date) = 0;
+            /* [annotation][in] */ 
+            _In_  DATE Date) = 0;
         
     };
     
@@ -290,7 +305,8 @@ EXTERN_C const IID IID_ITDirectoryObjectConference;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITDirectoryObjectConference * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -305,23 +321,31 @@ EXTERN_C const IID IID_ITDirectoryObjectConference;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITDirectoryObjectConference * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITDirectoryObjectConference * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITDirectoryObjectConference * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -346,77 +370,92 @@ EXTERN_C const IID IID_ITDirectoryObjectConference;
         DECLSPEC_XFGVIRT(ITDirectoryObjectConference, get_Protocol)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Protocol )( 
             __RPC__in ITDirectoryObjectConference * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppProtocol);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppProtocol);
         
         DECLSPEC_XFGVIRT(ITDirectoryObjectConference, get_Originator)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Originator )( 
             __RPC__in ITDirectoryObjectConference * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppOriginator);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppOriginator);
         
         DECLSPEC_XFGVIRT(ITDirectoryObjectConference, put_Originator)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Originator )( 
             __RPC__in ITDirectoryObjectConference * This,
-            /* [in] */ __RPC__in BSTR pOriginator);
+            /* [annotation][in] */ 
+            _In_  BSTR pOriginator);
         
         DECLSPEC_XFGVIRT(ITDirectoryObjectConference, get_AdvertisingScope)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AdvertisingScope )( 
             __RPC__in ITDirectoryObjectConference * This,
-            /* [retval][out] */ __RPC__out RND_ADVERTISING_SCOPE *pAdvertisingScope);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  RND_ADVERTISING_SCOPE *pAdvertisingScope);
         
         DECLSPEC_XFGVIRT(ITDirectoryObjectConference, put_AdvertisingScope)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AdvertisingScope )( 
             __RPC__in ITDirectoryObjectConference * This,
-            /* [in] */ RND_ADVERTISING_SCOPE AdvertisingScope);
+            /* [annotation][in] */ 
+            _In_  RND_ADVERTISING_SCOPE AdvertisingScope);
         
         DECLSPEC_XFGVIRT(ITDirectoryObjectConference, get_Url)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Url )( 
             __RPC__in ITDirectoryObjectConference * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppUrl);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppUrl);
         
         DECLSPEC_XFGVIRT(ITDirectoryObjectConference, put_Url)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Url )( 
             __RPC__in ITDirectoryObjectConference * This,
-            /* [in] */ __RPC__in BSTR pUrl);
+            /* [annotation][in] */ 
+            _In_  BSTR pUrl);
         
         DECLSPEC_XFGVIRT(ITDirectoryObjectConference, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in ITDirectoryObjectConference * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppDescription);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppDescription);
         
         DECLSPEC_XFGVIRT(ITDirectoryObjectConference, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in ITDirectoryObjectConference * This,
-            /* [in] */ __RPC__in BSTR pDescription);
+            /* [annotation][in] */ 
+            _In_  BSTR pDescription);
         
         DECLSPEC_XFGVIRT(ITDirectoryObjectConference, get_IsEncrypted)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsEncrypted )( 
             __RPC__in ITDirectoryObjectConference * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEncrypted);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfEncrypted);
         
         DECLSPEC_XFGVIRT(ITDirectoryObjectConference, put_IsEncrypted)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_IsEncrypted )( 
             __RPC__in ITDirectoryObjectConference * This,
-            /* [in] */ VARIANT_BOOL fEncrypted);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fEncrypted);
         
         DECLSPEC_XFGVIRT(ITDirectoryObjectConference, get_StartTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartTime )( 
             __RPC__in ITDirectoryObjectConference * This,
-            /* [retval][out] */ __RPC__out DATE *pDate);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DATE *pDate);
         
         DECLSPEC_XFGVIRT(ITDirectoryObjectConference, put_StartTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_StartTime )( 
             __RPC__in ITDirectoryObjectConference * This,
-            /* [in] */ DATE Date);
+            /* [annotation][in] */ 
+            _In_  DATE Date);
         
         DECLSPEC_XFGVIRT(ITDirectoryObjectConference, get_StopTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StopTime )( 
             __RPC__in ITDirectoryObjectConference * This,
-            /* [retval][out] */ __RPC__out DATE *pDate);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DATE *pDate);
         
         DECLSPEC_XFGVIRT(ITDirectoryObjectConference, put_StopTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_StopTime )( 
             __RPC__in ITDirectoryObjectConference * This,
-            /* [in] */ DATE Date);
+            /* [annotation][in] */ 
+            _In_  DATE Date);
         
         END_INTERFACE
     } ITDirectoryObjectConferenceVtbl;
@@ -526,10 +565,12 @@ EXTERN_C const IID IID_ITDirectoryObjectUser;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_IPPhonePrimary( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppName) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_IPPhonePrimary( 
-            /* [in] */ __RPC__in BSTR pName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pName) = 0;
         
     };
     
@@ -543,7 +584,8 @@ EXTERN_C const IID IID_ITDirectoryObjectUser;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITDirectoryObjectUser * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -558,23 +600,31 @@ EXTERN_C const IID IID_ITDirectoryObjectUser;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITDirectoryObjectUser * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITDirectoryObjectUser * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITDirectoryObjectUser * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -599,12 +649,14 @@ EXTERN_C const IID IID_ITDirectoryObjectUser;
         DECLSPEC_XFGVIRT(ITDirectoryObjectUser, get_IPPhonePrimary)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IPPhonePrimary )( 
             __RPC__in ITDirectoryObjectUser * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppName);
         
         DECLSPEC_XFGVIRT(ITDirectoryObjectUser, put_IPPhonePrimary)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_IPPhonePrimary )( 
             __RPC__in ITDirectoryObjectUser * This,
-            /* [in] */ __RPC__in BSTR pName);
+            /* [annotation][in] */ 
+            _In_  BSTR pName);
         
         END_INTERFACE
     } ITDirectoryObjectUserVtbl;
@@ -675,17 +727,21 @@ EXTERN_C const IID IID_IEnumDialableAddrs;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [size_is][out] */ __RPC__out_ecount_full(celt) BSTR *ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(celt)  BSTR *ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pcFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumDialableAddrs **ppEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumDialableAddrs **ppEnum) = 0;
         
     };
     
@@ -699,7 +755,8 @@ EXTERN_C const IID IID_IEnumDialableAddrs;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumDialableAddrs * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -714,8 +771,10 @@ EXTERN_C const IID IID_IEnumDialableAddrs;
         DECLSPEC_XFGVIRT(IEnumDialableAddrs, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumDialableAddrs * This,
-            /* [in] */ ULONG celt,
-            /* [size_is][out] */ __RPC__out_ecount_full(celt) BSTR *ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(celt)  BSTR *ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pcFetched);
         
         DECLSPEC_XFGVIRT(IEnumDialableAddrs, Reset)
@@ -725,12 +784,14 @@ EXTERN_C const IID IID_IEnumDialableAddrs;
         DECLSPEC_XFGVIRT(IEnumDialableAddrs, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumDialableAddrs * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumDialableAddrs, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumDialableAddrs * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumDialableAddrs **ppEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumDialableAddrs **ppEnum);
         
         END_INTERFACE
     } IEnumDialableAddrsVtbl;
@@ -794,27 +855,36 @@ EXTERN_C const IID IID_ITDirectoryObject;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ObjectType( 
-            /* [retval][out] */ __RPC__out DIRECTORY_OBJECT_TYPE *pObjectType) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DIRECTORY_OBJECT_TYPE *pObjectType) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppName) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
-            /* [in] */ __RPC__in BSTR pName) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DialableAddrs( 
-            /* [in] */ long dwAddressType,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][in] */ 
+            _In_  long dwAddressType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
         virtual /* [helpstring][restricted][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateDialableAddrs( 
-            /* [in] */ DWORD dwAddressType,
-            /* [out] */ __RPC__deref_out_opt IEnumDialableAddrs **ppEnumDialableAddrs) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwAddressType,
+            /* [annotation][out] */ 
+            _Out_  IEnumDialableAddrs **ppEnumDialableAddrs) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SecurityDescriptor( 
-            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppSecDes) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **ppSecDes) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SecurityDescriptor( 
-            /* [in] */ __RPC__in_opt IDispatch *pSecDes) = 0;
+            /* [annotation][in] */ 
+            _In_  IDispatch *pSecDes) = 0;
         
     };
     
@@ -828,7 +898,8 @@ EXTERN_C const IID IID_ITDirectoryObject;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITDirectoryObject * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -843,23 +914,31 @@ EXTERN_C const IID IID_ITDirectoryObject;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITDirectoryObject * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITDirectoryObject * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITDirectoryObject * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -884,39 +963,48 @@ EXTERN_C const IID IID_ITDirectoryObject;
         DECLSPEC_XFGVIRT(ITDirectoryObject, get_ObjectType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ObjectType )( 
             __RPC__in ITDirectoryObject * This,
-            /* [retval][out] */ __RPC__out DIRECTORY_OBJECT_TYPE *pObjectType);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DIRECTORY_OBJECT_TYPE *pObjectType);
         
         DECLSPEC_XFGVIRT(ITDirectoryObject, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ITDirectoryObject * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppName);
         
         DECLSPEC_XFGVIRT(ITDirectoryObject, put_Name)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in ITDirectoryObject * This,
-            /* [in] */ __RPC__in BSTR pName);
+            /* [annotation][in] */ 
+            _In_  BSTR pName);
         
         DECLSPEC_XFGVIRT(ITDirectoryObject, get_DialableAddrs)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DialableAddrs )( 
             __RPC__in ITDirectoryObject * This,
-            /* [in] */ long dwAddressType,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][in] */ 
+            _In_  long dwAddressType,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITDirectoryObject, EnumerateDialableAddrs)
         /* [helpstring][restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateDialableAddrs )( 
             __RPC__in ITDirectoryObject * This,
-            /* [in] */ DWORD dwAddressType,
-            /* [out] */ __RPC__deref_out_opt IEnumDialableAddrs **ppEnumDialableAddrs);
+            /* [annotation][in] */ 
+            _In_  DWORD dwAddressType,
+            /* [annotation][out] */ 
+            _Out_  IEnumDialableAddrs **ppEnumDialableAddrs);
         
         DECLSPEC_XFGVIRT(ITDirectoryObject, get_SecurityDescriptor)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SecurityDescriptor )( 
             __RPC__in ITDirectoryObject * This,
-            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppSecDes);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IDispatch **ppSecDes);
         
         DECLSPEC_XFGVIRT(ITDirectoryObject, put_SecurityDescriptor)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SecurityDescriptor )( 
             __RPC__in ITDirectoryObject * This,
-            /* [in] */ __RPC__in_opt IDispatch *pSecDes);
+            /* [annotation][in] */ 
+            _In_  IDispatch *pSecDes);
         
         END_INTERFACE
     } ITDirectoryObjectVtbl;
@@ -1002,17 +1090,21 @@ EXTERN_C const IID IID_IEnumDirectoryObject;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [size_is][out] */ __RPC__out_ecount_full(celt) ITDirectoryObject **pVal,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(celt)  ITDirectoryObject **pVal,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pcFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumDirectoryObject **ppEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumDirectoryObject **ppEnum) = 0;
         
     };
     
@@ -1026,7 +1118,8 @@ EXTERN_C const IID IID_IEnumDirectoryObject;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumDirectoryObject * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1041,8 +1134,10 @@ EXTERN_C const IID IID_IEnumDirectoryObject;
         DECLSPEC_XFGVIRT(IEnumDirectoryObject, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumDirectoryObject * This,
-            /* [in] */ ULONG celt,
-            /* [size_is][out] */ __RPC__out_ecount_full(celt) ITDirectoryObject **pVal,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(celt)  ITDirectoryObject **pVal,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pcFetched);
         
         DECLSPEC_XFGVIRT(IEnumDirectoryObject, Reset)
@@ -1052,12 +1147,14 @@ EXTERN_C const IID IID_IEnumDirectoryObject;
         DECLSPEC_XFGVIRT(IEnumDirectoryObject, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumDirectoryObject * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumDirectoryObject, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumDirectoryObject * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumDirectoryObject **ppEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumDirectoryObject **ppEnum);
         
         END_INTERFACE
     } IEnumDirectoryObjectVtbl;
@@ -1121,10 +1218,12 @@ EXTERN_C const IID IID_ITILSConfig;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Port( 
-            /* [retval][out] */ __RPC__out long *pPort) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pPort) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Port( 
-            /* [in] */ long Port) = 0;
+            /* [annotation][in] */ 
+            _In_  long Port) = 0;
         
     };
     
@@ -1138,7 +1237,8 @@ EXTERN_C const IID IID_ITILSConfig;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITILSConfig * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1153,23 +1253,31 @@ EXTERN_C const IID IID_ITILSConfig;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITILSConfig * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITILSConfig * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITILSConfig * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1194,12 +1302,14 @@ EXTERN_C const IID IID_ITILSConfig;
         DECLSPEC_XFGVIRT(ITILSConfig, get_Port)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Port )( 
             __RPC__in ITILSConfig * This,
-            /* [retval][out] */ __RPC__out long *pPort);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pPort);
         
         DECLSPEC_XFGVIRT(ITILSConfig, put_Port)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Port )( 
             __RPC__in ITILSConfig * This,
-            /* [in] */ long Port);
+            /* [annotation][in] */ 
+            _In_  long Port);
         
         END_INTERFACE
     } ITILSConfigVtbl;
@@ -1270,53 +1380,74 @@ EXTERN_C const IID IID_ITDirectory;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DirectoryType( 
-            /* [retval][out] */ __RPC__out DIRECTORY_TYPE *pDirectoryType) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DIRECTORY_TYPE *pDirectoryType) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_IsDynamic( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfDynamic) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfDynamic) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DefaultObjectTTL( 
-            /* [retval][out] */ __RPC__out long *pTTL) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pTTL) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_DefaultObjectTTL( 
-            /* [in] */ long TTL) = 0;
+            /* [annotation][in] */ 
+            _In_  long TTL) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnableAutoRefresh( 
-            /* [in] */ VARIANT_BOOL fEnable) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fEnable) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Connect( 
-            /* [in] */ VARIANT_BOOL fSecure) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fSecure) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Bind( 
-            /* [in] */ __RPC__in BSTR pDomainName,
-            /* [in] */ __RPC__in BSTR pUserName,
-            /* [in] */ __RPC__in BSTR pPassword,
-            /* [in] */ long lFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pDomainName,
+            /* [annotation][in] */ 
+            _In_  BSTR pUserName,
+            /* [annotation][in] */ 
+            _In_  BSTR pPassword,
+            /* [annotation][in] */ 
+            _In_  long lFlags) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddDirectoryObject( 
-            /* [in] */ __RPC__in_opt ITDirectoryObject *pDirectoryObject) = 0;
+            /* [annotation][in] */ 
+            _In_  ITDirectoryObject *pDirectoryObject) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ModifyDirectoryObject( 
-            /* [in] */ __RPC__in_opt ITDirectoryObject *pDirectoryObject) = 0;
+            /* [annotation][in] */ 
+            _In_  ITDirectoryObject *pDirectoryObject) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RefreshDirectoryObject( 
-            /* [in] */ __RPC__in_opt ITDirectoryObject *pDirectoryObject) = 0;
+            /* [annotation][in] */ 
+            _In_  ITDirectoryObject *pDirectoryObject) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteDirectoryObject( 
-            /* [in] */ __RPC__in_opt ITDirectoryObject *pDirectoryObject) = 0;
+            /* [annotation][in] */ 
+            _In_  ITDirectoryObject *pDirectoryObject) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DirectoryObjects( 
-            /* [in] */ DIRECTORY_OBJECT_TYPE DirectoryObjectType,
-            /* [in] */ __RPC__in BSTR pName,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][in] */ 
+            _In_  DIRECTORY_OBJECT_TYPE DirectoryObjectType,
+            /* [annotation][in] */ 
+            _In_  BSTR pName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
         virtual /* [helpstring][restricted][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateDirectoryObjects( 
-            /* [in] */ DIRECTORY_OBJECT_TYPE DirectoryObjectType,
-            /* [in] */ __RPC__in BSTR pName,
-            /* [out] */ __RPC__deref_out_opt IEnumDirectoryObject **ppEnumObject) = 0;
+            /* [annotation][in] */ 
+            _In_  DIRECTORY_OBJECT_TYPE DirectoryObjectType,
+            /* [annotation][in] */ 
+            _In_  BSTR pName,
+            /* [annotation][out] */ 
+            _Out_  IEnumDirectoryObject **ppEnumObject) = 0;
         
     };
     
@@ -1330,7 +1461,8 @@ EXTERN_C const IID IID_ITDirectory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITDirectory * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1345,23 +1477,31 @@ EXTERN_C const IID IID_ITDirectory;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITDirectory * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITDirectory * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITDirectory * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1386,79 +1526,100 @@ EXTERN_C const IID IID_ITDirectory;
         DECLSPEC_XFGVIRT(ITDirectory, get_DirectoryType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DirectoryType )( 
             __RPC__in ITDirectory * This,
-            /* [retval][out] */ __RPC__out DIRECTORY_TYPE *pDirectoryType);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DIRECTORY_TYPE *pDirectoryType);
         
         DECLSPEC_XFGVIRT(ITDirectory, get_DisplayName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayName )( 
             __RPC__in ITDirectory * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pName);
         
         DECLSPEC_XFGVIRT(ITDirectory, get_IsDynamic)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsDynamic )( 
             __RPC__in ITDirectory * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfDynamic);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfDynamic);
         
         DECLSPEC_XFGVIRT(ITDirectory, get_DefaultObjectTTL)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultObjectTTL )( 
             __RPC__in ITDirectory * This,
-            /* [retval][out] */ __RPC__out long *pTTL);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *pTTL);
         
         DECLSPEC_XFGVIRT(ITDirectory, put_DefaultObjectTTL)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultObjectTTL )( 
             __RPC__in ITDirectory * This,
-            /* [in] */ long TTL);
+            /* [annotation][in] */ 
+            _In_  long TTL);
         
         DECLSPEC_XFGVIRT(ITDirectory, EnableAutoRefresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnableAutoRefresh )( 
             __RPC__in ITDirectory * This,
-            /* [in] */ VARIANT_BOOL fEnable);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fEnable);
         
         DECLSPEC_XFGVIRT(ITDirectory, Connect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in ITDirectory * This,
-            /* [in] */ VARIANT_BOOL fSecure);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fSecure);
         
         DECLSPEC_XFGVIRT(ITDirectory, Bind)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Bind )( 
             __RPC__in ITDirectory * This,
-            /* [in] */ __RPC__in BSTR pDomainName,
-            /* [in] */ __RPC__in BSTR pUserName,
-            /* [in] */ __RPC__in BSTR pPassword,
-            /* [in] */ long lFlags);
+            /* [annotation][in] */ 
+            _In_  BSTR pDomainName,
+            /* [annotation][in] */ 
+            _In_  BSTR pUserName,
+            /* [annotation][in] */ 
+            _In_  BSTR pPassword,
+            /* [annotation][in] */ 
+            _In_  long lFlags);
         
         DECLSPEC_XFGVIRT(ITDirectory, AddDirectoryObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddDirectoryObject )( 
             __RPC__in ITDirectory * This,
-            /* [in] */ __RPC__in_opt ITDirectoryObject *pDirectoryObject);
+            /* [annotation][in] */ 
+            _In_  ITDirectoryObject *pDirectoryObject);
         
         DECLSPEC_XFGVIRT(ITDirectory, ModifyDirectoryObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ModifyDirectoryObject )( 
             __RPC__in ITDirectory * This,
-            /* [in] */ __RPC__in_opt ITDirectoryObject *pDirectoryObject);
+            /* [annotation][in] */ 
+            _In_  ITDirectoryObject *pDirectoryObject);
         
         DECLSPEC_XFGVIRT(ITDirectory, RefreshDirectoryObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RefreshDirectoryObject )( 
             __RPC__in ITDirectory * This,
-            /* [in] */ __RPC__in_opt ITDirectoryObject *pDirectoryObject);
+            /* [annotation][in] */ 
+            _In_  ITDirectoryObject *pDirectoryObject);
         
         DECLSPEC_XFGVIRT(ITDirectory, DeleteDirectoryObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteDirectoryObject )( 
             __RPC__in ITDirectory * This,
-            /* [in] */ __RPC__in_opt ITDirectoryObject *pDirectoryObject);
+            /* [annotation][in] */ 
+            _In_  ITDirectoryObject *pDirectoryObject);
         
         DECLSPEC_XFGVIRT(ITDirectory, get_DirectoryObjects)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DirectoryObjects )( 
             __RPC__in ITDirectory * This,
-            /* [in] */ DIRECTORY_OBJECT_TYPE DirectoryObjectType,
-            /* [in] */ __RPC__in BSTR pName,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][in] */ 
+            _In_  DIRECTORY_OBJECT_TYPE DirectoryObjectType,
+            /* [annotation][in] */ 
+            _In_  BSTR pName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITDirectory, EnumerateDirectoryObjects)
         /* [helpstring][restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateDirectoryObjects )( 
             __RPC__in ITDirectory * This,
-            /* [in] */ DIRECTORY_OBJECT_TYPE DirectoryObjectType,
-            /* [in] */ __RPC__in BSTR pName,
-            /* [out] */ __RPC__deref_out_opt IEnumDirectoryObject **ppEnumObject);
+            /* [annotation][in] */ 
+            _In_  DIRECTORY_OBJECT_TYPE DirectoryObjectType,
+            /* [annotation][in] */ 
+            _In_  BSTR pName,
+            /* [annotation][out] */ 
+            _Out_  IEnumDirectoryObject **ppEnumObject);
         
         END_INTERFACE
     } ITDirectoryVtbl;
@@ -1565,17 +1726,21 @@ EXTERN_C const IID IID_IEnumDirectory;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pcFetched) ITDirectory **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(celt,*pcFetched)  ITDirectory **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pcFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumDirectory **ppEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumDirectory **ppEnum) = 0;
         
     };
     
@@ -1589,7 +1754,8 @@ EXTERN_C const IID IID_IEnumDirectory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumDirectory * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1604,8 +1770,10 @@ EXTERN_C const IID IID_IEnumDirectory;
         DECLSPEC_XFGVIRT(IEnumDirectory, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumDirectory * This,
-            /* [in] */ ULONG celt,
-            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pcFetched) ITDirectory **ppElements,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(celt,*pcFetched)  ITDirectory **ppElements,
             /* [full][out][in] */ __RPC__inout_opt ULONG *pcFetched);
         
         DECLSPEC_XFGVIRT(IEnumDirectory, Reset)
@@ -1615,12 +1783,14 @@ EXTERN_C const IID IID_IEnumDirectory;
         DECLSPEC_XFGVIRT(IEnumDirectory, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumDirectory * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumDirectory, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumDirectory * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumDirectory **ppEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumDirectory **ppEnum);
         
         END_INTERFACE
     } IEnumDirectoryVtbl;
@@ -1684,20 +1854,28 @@ EXTERN_C const IID IID_ITRendezvous;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DefaultDirectories( 
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
         virtual /* [helpstring][restricted][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateDefaultDirectories( 
-            /* [out] */ __RPC__deref_out_opt IEnumDirectory **ppEnumDirectory) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumDirectory **ppEnumDirectory) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateDirectory( 
-            /* [in] */ DIRECTORY_TYPE DirectoryType,
-            /* [in] */ __RPC__in BSTR pName,
-            /* [retval][out] */ __RPC__deref_out_opt ITDirectory **ppDir) = 0;
+            /* [annotation][in] */ 
+            _In_  DIRECTORY_TYPE DirectoryType,
+            /* [annotation][in] */ 
+            _In_  BSTR pName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITDirectory **ppDir) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateDirectoryObject( 
-            /* [in] */ DIRECTORY_OBJECT_TYPE DirectoryObjectType,
-            /* [in] */ __RPC__in BSTR pName,
-            /* [retval][out] */ __RPC__deref_out_opt ITDirectoryObject **ppDirectoryObject) = 0;
+            /* [annotation][in] */ 
+            _In_  DIRECTORY_OBJECT_TYPE DirectoryObjectType,
+            /* [annotation][in] */ 
+            _In_  BSTR pName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITDirectoryObject **ppDirectoryObject) = 0;
         
     };
     
@@ -1711,7 +1889,8 @@ EXTERN_C const IID IID_ITRendezvous;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITRendezvous * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1726,23 +1905,31 @@ EXTERN_C const IID IID_ITRendezvous;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITRendezvous * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITRendezvous * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITRendezvous * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1767,26 +1954,34 @@ EXTERN_C const IID IID_ITRendezvous;
         DECLSPEC_XFGVIRT(ITRendezvous, get_DefaultDirectories)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultDirectories )( 
             __RPC__in ITRendezvous * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITRendezvous, EnumerateDefaultDirectories)
         /* [helpstring][restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateDefaultDirectories )( 
             __RPC__in ITRendezvous * This,
-            /* [out] */ __RPC__deref_out_opt IEnumDirectory **ppEnumDirectory);
+            /* [annotation][out] */ 
+            _Out_  IEnumDirectory **ppEnumDirectory);
         
         DECLSPEC_XFGVIRT(ITRendezvous, CreateDirectory)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateDirectory )( 
             __RPC__in ITRendezvous * This,
-            /* [in] */ DIRECTORY_TYPE DirectoryType,
-            /* [in] */ __RPC__in BSTR pName,
-            /* [retval][out] */ __RPC__deref_out_opt ITDirectory **ppDir);
+            /* [annotation][in] */ 
+            _In_  DIRECTORY_TYPE DirectoryType,
+            /* [annotation][in] */ 
+            _In_  BSTR pName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITDirectory **ppDir);
         
         DECLSPEC_XFGVIRT(ITRendezvous, CreateDirectoryObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateDirectoryObject )( 
             __RPC__in ITRendezvous * This,
-            /* [in] */ DIRECTORY_OBJECT_TYPE DirectoryObjectType,
-            /* [in] */ __RPC__in BSTR pName,
-            /* [retval][out] */ __RPC__deref_out_opt ITDirectoryObject **ppDirectoryObject);
+            /* [annotation][in] */ 
+            _In_  DIRECTORY_OBJECT_TYPE DirectoryObjectType,
+            /* [annotation][in] */ 
+            _In_  BSTR pName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITDirectoryObject **ppDirectoryObject);
         
         END_INTERFACE
     } ITRendezvousVtbl;

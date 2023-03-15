@@ -204,15 +204,20 @@ EXTERN_C const IID IID_IActiveScriptProfilerControl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE StartProfiling( 
-            /* [in] */ __RPC__in REFCLSID clsidProfilerObject,
-            /* [in] */ DWORD dwEventMask,
-            /* [in] */ DWORD dwContext) = 0;
+            /* [annotation][in] */ 
+            _In_  REFCLSID clsidProfilerObject,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEventMask,
+            /* [annotation][in] */ 
+            _In_  DWORD dwContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetProfilerEventMask( 
-            /* [in] */ DWORD dwEventMask) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwEventMask) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StopProfiling( 
-            /* [in] */ HRESULT hrShutdownReason) = 0;
+            /* [annotation][in] */ 
+            _In_  HRESULT hrShutdownReason) = 0;
         
     };
     
@@ -226,7 +231,8 @@ EXTERN_C const IID IID_IActiveScriptProfilerControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptProfilerControl * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -241,19 +247,24 @@ EXTERN_C const IID IID_IActiveScriptProfilerControl;
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl, StartProfiling)
         HRESULT ( STDMETHODCALLTYPE *StartProfiling )( 
             __RPC__in IActiveScriptProfilerControl * This,
-            /* [in] */ __RPC__in REFCLSID clsidProfilerObject,
-            /* [in] */ DWORD dwEventMask,
-            /* [in] */ DWORD dwContext);
+            /* [annotation][in] */ 
+            _In_  REFCLSID clsidProfilerObject,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEventMask,
+            /* [annotation][in] */ 
+            _In_  DWORD dwContext);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl, SetProfilerEventMask)
         HRESULT ( STDMETHODCALLTYPE *SetProfilerEventMask )( 
             __RPC__in IActiveScriptProfilerControl * This,
-            /* [in] */ DWORD dwEventMask);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEventMask);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl, StopProfiling)
         HRESULT ( STDMETHODCALLTYPE *StopProfiling )( 
             __RPC__in IActiveScriptProfilerControl * This,
-            /* [in] */ HRESULT hrShutdownReason);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrShutdownReason);
         
         END_INTERFACE
     } IActiveScriptProfilerControlVtbl;
@@ -329,7 +340,8 @@ EXTERN_C const IID IID_IActiveScriptProfilerControl2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptProfilerControl2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -344,19 +356,24 @@ EXTERN_C const IID IID_IActiveScriptProfilerControl2;
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl, StartProfiling)
         HRESULT ( STDMETHODCALLTYPE *StartProfiling )( 
             __RPC__in IActiveScriptProfilerControl2 * This,
-            /* [in] */ __RPC__in REFCLSID clsidProfilerObject,
-            /* [in] */ DWORD dwEventMask,
-            /* [in] */ DWORD dwContext);
+            /* [annotation][in] */ 
+            _In_  REFCLSID clsidProfilerObject,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEventMask,
+            /* [annotation][in] */ 
+            _In_  DWORD dwContext);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl, SetProfilerEventMask)
         HRESULT ( STDMETHODCALLTYPE *SetProfilerEventMask )( 
             __RPC__in IActiveScriptProfilerControl2 * This,
-            /* [in] */ DWORD dwEventMask);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEventMask);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl, StopProfiling)
         HRESULT ( STDMETHODCALLTYPE *StopProfiling )( 
             __RPC__in IActiveScriptProfilerControl2 * This,
-            /* [in] */ HRESULT hrShutdownReason);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrShutdownReason);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl2, CompleteProfilerStart)
         HRESULT ( STDMETHODCALLTYPE *CompleteProfilerStart )( 
@@ -581,22 +598,32 @@ EXTERN_C const IID IID_IActiveScriptProfilerHeapEnum;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [length_is][size_is][out] */ PROFILER_HEAP_OBJECT **heapObjects,
-            /* [out] */ ULONG *pceltFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(celt,*pceltFetched)  PROFILER_HEAP_OBJECT **heapObjects,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOptionalInfo( 
-            /* [in] */ PROFILER_HEAP_OBJECT *heapObject,
-            /* [in] */ ULONG celt,
-            /* [size_is][out] */ PROFILER_HEAP_OBJECT_OPTIONAL_INFO *optionalInfo) = 0;
+            /* [annotation][in] */ 
+            _In_  PROFILER_HEAP_OBJECT *heapObject,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(celt)  PROFILER_HEAP_OBJECT_OPTIONAL_INFO *optionalInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FreeObjectAndOptionalInfo( 
-            /* [in] */ ULONG celt,
-            /* [size_is][in] */ PROFILER_HEAP_OBJECT **heapObjects) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(celt)  PROFILER_HEAP_OBJECT **heapObjects) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNameIdMap( 
-            /* [size_is][size_is][out] */ LPCWSTR *pNameList[  ],
-            /* [out] */ UINT *pcelt) = 0;
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcelt)  LPCWSTR *pNameList[  ],
+            /* [annotation][out] */ 
+            _Out_  UINT *pcelt) = 0;
         
     };
     
@@ -610,7 +637,8 @@ EXTERN_C const IID IID_IActiveScriptProfilerHeapEnum;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IActiveScriptProfilerHeapEnum * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -625,28 +653,38 @@ EXTERN_C const IID IID_IActiveScriptProfilerHeapEnum;
         DECLSPEC_XFGVIRT(IActiveScriptProfilerHeapEnum, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IActiveScriptProfilerHeapEnum * This,
-            /* [in] */ ULONG celt,
-            /* [length_is][size_is][out] */ PROFILER_HEAP_OBJECT **heapObjects,
-            /* [out] */ ULONG *pceltFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(celt,*pceltFetched)  PROFILER_HEAP_OBJECT **heapObjects,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerHeapEnum, GetOptionalInfo)
         HRESULT ( STDMETHODCALLTYPE *GetOptionalInfo )( 
             IActiveScriptProfilerHeapEnum * This,
-            /* [in] */ PROFILER_HEAP_OBJECT *heapObject,
-            /* [in] */ ULONG celt,
-            /* [size_is][out] */ PROFILER_HEAP_OBJECT_OPTIONAL_INFO *optionalInfo);
+            /* [annotation][in] */ 
+            _In_  PROFILER_HEAP_OBJECT *heapObject,
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(celt)  PROFILER_HEAP_OBJECT_OPTIONAL_INFO *optionalInfo);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerHeapEnum, FreeObjectAndOptionalInfo)
         HRESULT ( STDMETHODCALLTYPE *FreeObjectAndOptionalInfo )( 
             IActiveScriptProfilerHeapEnum * This,
-            /* [in] */ ULONG celt,
-            /* [size_is][in] */ PROFILER_HEAP_OBJECT **heapObjects);
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(celt)  PROFILER_HEAP_OBJECT **heapObjects);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerHeapEnum, GetNameIdMap)
         HRESULT ( STDMETHODCALLTYPE *GetNameIdMap )( 
             IActiveScriptProfilerHeapEnum * This,
-            /* [size_is][size_is][out] */ LPCWSTR *pNameList[  ],
-            /* [out] */ UINT *pcelt);
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcelt)  LPCWSTR *pNameList[  ],
+            /* [annotation][out] */ 
+            _Out_  UINT *pcelt);
         
         END_INTERFACE
     } IActiveScriptProfilerHeapEnumVtbl;
@@ -710,7 +748,8 @@ EXTERN_C const IID IID_IActiveScriptProfilerControl3;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE EnumHeap( 
-            /* [out] */ __RPC__deref_out_opt IActiveScriptProfilerHeapEnum **ppEnum) = 0;
+            /* [annotation][out] */ 
+            _Out_  IActiveScriptProfilerHeapEnum **ppEnum) = 0;
         
     };
     
@@ -724,7 +763,8 @@ EXTERN_C const IID IID_IActiveScriptProfilerControl3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptProfilerControl3 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -739,19 +779,24 @@ EXTERN_C const IID IID_IActiveScriptProfilerControl3;
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl, StartProfiling)
         HRESULT ( STDMETHODCALLTYPE *StartProfiling )( 
             __RPC__in IActiveScriptProfilerControl3 * This,
-            /* [in] */ __RPC__in REFCLSID clsidProfilerObject,
-            /* [in] */ DWORD dwEventMask,
-            /* [in] */ DWORD dwContext);
+            /* [annotation][in] */ 
+            _In_  REFCLSID clsidProfilerObject,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEventMask,
+            /* [annotation][in] */ 
+            _In_  DWORD dwContext);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl, SetProfilerEventMask)
         HRESULT ( STDMETHODCALLTYPE *SetProfilerEventMask )( 
             __RPC__in IActiveScriptProfilerControl3 * This,
-            /* [in] */ DWORD dwEventMask);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEventMask);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl, StopProfiling)
         HRESULT ( STDMETHODCALLTYPE *StopProfiling )( 
             __RPC__in IActiveScriptProfilerControl3 * This,
-            /* [in] */ HRESULT hrShutdownReason);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrShutdownReason);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl2, CompleteProfilerStart)
         HRESULT ( STDMETHODCALLTYPE *CompleteProfilerStart )( 
@@ -764,7 +809,8 @@ EXTERN_C const IID IID_IActiveScriptProfilerControl3;
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl3, EnumHeap)
         HRESULT ( STDMETHODCALLTYPE *EnumHeap )( 
             __RPC__in IActiveScriptProfilerControl3 * This,
-            /* [out] */ __RPC__deref_out_opt IActiveScriptProfilerHeapEnum **ppEnum);
+            /* [annotation][out] */ 
+            _Out_  IActiveScriptProfilerHeapEnum **ppEnum);
         
         END_INTERFACE
     } IActiveScriptProfilerControl3Vtbl;
@@ -856,7 +902,8 @@ EXTERN_C const IID IID_IActiveScriptProfilerControl4;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SummarizeHeap( 
-            /* [out][in] */ __RPC__inout PROFILER_HEAP_SUMMARY *heapSummary) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  PROFILER_HEAP_SUMMARY *heapSummary) = 0;
         
     };
     
@@ -870,7 +917,8 @@ EXTERN_C const IID IID_IActiveScriptProfilerControl4;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptProfilerControl4 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -885,19 +933,24 @@ EXTERN_C const IID IID_IActiveScriptProfilerControl4;
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl, StartProfiling)
         HRESULT ( STDMETHODCALLTYPE *StartProfiling )( 
             __RPC__in IActiveScriptProfilerControl4 * This,
-            /* [in] */ __RPC__in REFCLSID clsidProfilerObject,
-            /* [in] */ DWORD dwEventMask,
-            /* [in] */ DWORD dwContext);
+            /* [annotation][in] */ 
+            _In_  REFCLSID clsidProfilerObject,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEventMask,
+            /* [annotation][in] */ 
+            _In_  DWORD dwContext);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl, SetProfilerEventMask)
         HRESULT ( STDMETHODCALLTYPE *SetProfilerEventMask )( 
             __RPC__in IActiveScriptProfilerControl4 * This,
-            /* [in] */ DWORD dwEventMask);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEventMask);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl, StopProfiling)
         HRESULT ( STDMETHODCALLTYPE *StopProfiling )( 
             __RPC__in IActiveScriptProfilerControl4 * This,
-            /* [in] */ HRESULT hrShutdownReason);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrShutdownReason);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl2, CompleteProfilerStart)
         HRESULT ( STDMETHODCALLTYPE *CompleteProfilerStart )( 
@@ -910,12 +963,14 @@ EXTERN_C const IID IID_IActiveScriptProfilerControl4;
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl3, EnumHeap)
         HRESULT ( STDMETHODCALLTYPE *EnumHeap )( 
             __RPC__in IActiveScriptProfilerControl4 * This,
-            /* [out] */ __RPC__deref_out_opt IActiveScriptProfilerHeapEnum **ppEnum);
+            /* [annotation][out] */ 
+            _Out_  IActiveScriptProfilerHeapEnum **ppEnum);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl4, SummarizeHeap)
         HRESULT ( STDMETHODCALLTYPE *SummarizeHeap )( 
             __RPC__in IActiveScriptProfilerControl4 * This,
-            /* [out][in] */ __RPC__inout PROFILER_HEAP_SUMMARY *heapSummary);
+            /* [annotation][out][in] */ 
+            _Inout_  PROFILER_HEAP_SUMMARY *heapSummary);
         
         END_INTERFACE
     } IActiveScriptProfilerControl4Vtbl;
@@ -991,8 +1046,10 @@ EXTERN_C const IID IID_IActiveScriptProfilerControl5;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE EnumHeap2( 
-            /* [in] */ PROFILER_HEAP_ENUM_FLAGS enumFlags,
-            /* [out] */ __RPC__deref_out_opt IActiveScriptProfilerHeapEnum **ppEnum) = 0;
+            /* [annotation][in] */ 
+            _In_  PROFILER_HEAP_ENUM_FLAGS enumFlags,
+            /* [annotation][out] */ 
+            _Out_  IActiveScriptProfilerHeapEnum **ppEnum) = 0;
         
     };
     
@@ -1006,7 +1063,8 @@ EXTERN_C const IID IID_IActiveScriptProfilerControl5;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptProfilerControl5 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1021,19 +1079,24 @@ EXTERN_C const IID IID_IActiveScriptProfilerControl5;
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl, StartProfiling)
         HRESULT ( STDMETHODCALLTYPE *StartProfiling )( 
             __RPC__in IActiveScriptProfilerControl5 * This,
-            /* [in] */ __RPC__in REFCLSID clsidProfilerObject,
-            /* [in] */ DWORD dwEventMask,
-            /* [in] */ DWORD dwContext);
+            /* [annotation][in] */ 
+            _In_  REFCLSID clsidProfilerObject,
+            /* [annotation][in] */ 
+            _In_  DWORD dwEventMask,
+            /* [annotation][in] */ 
+            _In_  DWORD dwContext);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl, SetProfilerEventMask)
         HRESULT ( STDMETHODCALLTYPE *SetProfilerEventMask )( 
             __RPC__in IActiveScriptProfilerControl5 * This,
-            /* [in] */ DWORD dwEventMask);
+            /* [annotation][in] */ 
+            _In_  DWORD dwEventMask);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl, StopProfiling)
         HRESULT ( STDMETHODCALLTYPE *StopProfiling )( 
             __RPC__in IActiveScriptProfilerControl5 * This,
-            /* [in] */ HRESULT hrShutdownReason);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrShutdownReason);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl2, CompleteProfilerStart)
         HRESULT ( STDMETHODCALLTYPE *CompleteProfilerStart )( 
@@ -1046,18 +1109,22 @@ EXTERN_C const IID IID_IActiveScriptProfilerControl5;
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl3, EnumHeap)
         HRESULT ( STDMETHODCALLTYPE *EnumHeap )( 
             __RPC__in IActiveScriptProfilerControl5 * This,
-            /* [out] */ __RPC__deref_out_opt IActiveScriptProfilerHeapEnum **ppEnum);
+            /* [annotation][out] */ 
+            _Out_  IActiveScriptProfilerHeapEnum **ppEnum);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl4, SummarizeHeap)
         HRESULT ( STDMETHODCALLTYPE *SummarizeHeap )( 
             __RPC__in IActiveScriptProfilerControl5 * This,
-            /* [out][in] */ __RPC__inout PROFILER_HEAP_SUMMARY *heapSummary);
+            /* [annotation][out][in] */ 
+            _Inout_  PROFILER_HEAP_SUMMARY *heapSummary);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerControl5, EnumHeap2)
         HRESULT ( STDMETHODCALLTYPE *EnumHeap2 )( 
             __RPC__in IActiveScriptProfilerControl5 * This,
-            /* [in] */ PROFILER_HEAP_ENUM_FLAGS enumFlags,
-            /* [out] */ __RPC__deref_out_opt IActiveScriptProfilerHeapEnum **ppEnum);
+            /* [annotation][in] */ 
+            _In_  PROFILER_HEAP_ENUM_FLAGS enumFlags,
+            /* [annotation][out] */ 
+            _Out_  IActiveScriptProfilerHeapEnum **ppEnum);
         
         END_INTERFACE
     } IActiveScriptProfilerControl5Vtbl;
@@ -1137,30 +1204,44 @@ EXTERN_C const IID IID_IActiveScriptProfilerCallback;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [in] */ DWORD dwContext) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Shutdown( 
-            /* [in] */ HRESULT hrReason) = 0;
+            /* [annotation][in] */ 
+            _In_  HRESULT hrReason) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ScriptCompiled( 
-            /* [in] */ PROFILER_TOKEN scriptId,
-            /* [in] */ PROFILER_SCRIPT_TYPE type,
-            /* [in] */ __RPC__in_opt IUnknown *pIDebugDocumentContext) = 0;
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN scriptId,
+            /* [annotation][in] */ 
+            _In_  PROFILER_SCRIPT_TYPE type,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pIDebugDocumentContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FunctionCompiled( 
-            /* [in] */ PROFILER_TOKEN functionId,
-            /* [in] */ PROFILER_TOKEN scriptId,
-            /* [string][in] */ __RPC__in_string const WCHAR *pwszFunctionName,
-            /* [string][in] */ __RPC__in_string const WCHAR *pwszFunctionNameHint,
-            /* [in] */ __RPC__in_opt IUnknown *pIDebugDocumentContext) = 0;
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN functionId,
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN scriptId,
+            /* [string][annotation][in] */ 
+            _In_  const WCHAR *pwszFunctionName,
+            /* [string][annotation][in] */ 
+            _In_  const WCHAR *pwszFunctionNameHint,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pIDebugDocumentContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnFunctionEnter( 
-            /* [in] */ PROFILER_TOKEN scriptId,
-            /* [in] */ PROFILER_TOKEN functionId) = 0;
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN scriptId,
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN functionId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnFunctionExit( 
-            /* [in] */ PROFILER_TOKEN scriptId,
-            /* [in] */ PROFILER_TOKEN functionId) = 0;
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN scriptId,
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN functionId) = 0;
         
     };
     
@@ -1174,7 +1255,8 @@ EXTERN_C const IID IID_IActiveScriptProfilerCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptProfilerCallback * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1189,40 +1271,54 @@ EXTERN_C const IID IID_IActiveScriptProfilerCallback;
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IActiveScriptProfilerCallback * This,
-            /* [in] */ DWORD dwContext);
+            /* [annotation][in] */ 
+            _In_  DWORD dwContext);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback, Shutdown)
         HRESULT ( STDMETHODCALLTYPE *Shutdown )( 
             __RPC__in IActiveScriptProfilerCallback * This,
-            /* [in] */ HRESULT hrReason);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrReason);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback, ScriptCompiled)
         HRESULT ( STDMETHODCALLTYPE *ScriptCompiled )( 
             __RPC__in IActiveScriptProfilerCallback * This,
-            /* [in] */ PROFILER_TOKEN scriptId,
-            /* [in] */ PROFILER_SCRIPT_TYPE type,
-            /* [in] */ __RPC__in_opt IUnknown *pIDebugDocumentContext);
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN scriptId,
+            /* [annotation][in] */ 
+            _In_  PROFILER_SCRIPT_TYPE type,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pIDebugDocumentContext);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback, FunctionCompiled)
         HRESULT ( STDMETHODCALLTYPE *FunctionCompiled )( 
             __RPC__in IActiveScriptProfilerCallback * This,
-            /* [in] */ PROFILER_TOKEN functionId,
-            /* [in] */ PROFILER_TOKEN scriptId,
-            /* [string][in] */ __RPC__in_string const WCHAR *pwszFunctionName,
-            /* [string][in] */ __RPC__in_string const WCHAR *pwszFunctionNameHint,
-            /* [in] */ __RPC__in_opt IUnknown *pIDebugDocumentContext);
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN functionId,
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN scriptId,
+            /* [string][annotation][in] */ 
+            _In_  const WCHAR *pwszFunctionName,
+            /* [string][annotation][in] */ 
+            _In_  const WCHAR *pwszFunctionNameHint,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pIDebugDocumentContext);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback, OnFunctionEnter)
         HRESULT ( STDMETHODCALLTYPE *OnFunctionEnter )( 
             __RPC__in IActiveScriptProfilerCallback * This,
-            /* [in] */ PROFILER_TOKEN scriptId,
-            /* [in] */ PROFILER_TOKEN functionId);
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN scriptId,
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN functionId);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback, OnFunctionExit)
         HRESULT ( STDMETHODCALLTYPE *OnFunctionExit )( 
             __RPC__in IActiveScriptProfilerCallback * This,
-            /* [in] */ PROFILER_TOKEN scriptId,
-            /* [in] */ PROFILER_TOKEN functionId);
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN scriptId,
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN functionId);
         
         END_INTERFACE
     } IActiveScriptProfilerCallbackVtbl;
@@ -1292,12 +1388,16 @@ EXTERN_C const IID IID_IActiveScriptProfilerCallback2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnFunctionEnterByName( 
-            /* [string][in] */ __RPC__in_string const WCHAR *pwszFunctionName,
-            /* [in] */ PROFILER_SCRIPT_TYPE type) = 0;
+            /* [string][annotation][in] */ 
+            _In_  const WCHAR *pwszFunctionName,
+            /* [annotation][in] */ 
+            _In_  PROFILER_SCRIPT_TYPE type) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnFunctionExitByName( 
-            /* [string][in] */ __RPC__in_string const WCHAR *pwszFunctionName,
-            /* [in] */ PROFILER_SCRIPT_TYPE type) = 0;
+            /* [string][annotation][in] */ 
+            _In_  const WCHAR *pwszFunctionName,
+            /* [annotation][in] */ 
+            _In_  PROFILER_SCRIPT_TYPE type) = 0;
         
     };
     
@@ -1311,7 +1411,8 @@ EXTERN_C const IID IID_IActiveScriptProfilerCallback2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptProfilerCallback2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1326,52 +1427,70 @@ EXTERN_C const IID IID_IActiveScriptProfilerCallback2;
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IActiveScriptProfilerCallback2 * This,
-            /* [in] */ DWORD dwContext);
+            /* [annotation][in] */ 
+            _In_  DWORD dwContext);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback, Shutdown)
         HRESULT ( STDMETHODCALLTYPE *Shutdown )( 
             __RPC__in IActiveScriptProfilerCallback2 * This,
-            /* [in] */ HRESULT hrReason);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrReason);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback, ScriptCompiled)
         HRESULT ( STDMETHODCALLTYPE *ScriptCompiled )( 
             __RPC__in IActiveScriptProfilerCallback2 * This,
-            /* [in] */ PROFILER_TOKEN scriptId,
-            /* [in] */ PROFILER_SCRIPT_TYPE type,
-            /* [in] */ __RPC__in_opt IUnknown *pIDebugDocumentContext);
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN scriptId,
+            /* [annotation][in] */ 
+            _In_  PROFILER_SCRIPT_TYPE type,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pIDebugDocumentContext);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback, FunctionCompiled)
         HRESULT ( STDMETHODCALLTYPE *FunctionCompiled )( 
             __RPC__in IActiveScriptProfilerCallback2 * This,
-            /* [in] */ PROFILER_TOKEN functionId,
-            /* [in] */ PROFILER_TOKEN scriptId,
-            /* [string][in] */ __RPC__in_string const WCHAR *pwszFunctionName,
-            /* [string][in] */ __RPC__in_string const WCHAR *pwszFunctionNameHint,
-            /* [in] */ __RPC__in_opt IUnknown *pIDebugDocumentContext);
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN functionId,
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN scriptId,
+            /* [string][annotation][in] */ 
+            _In_  const WCHAR *pwszFunctionName,
+            /* [string][annotation][in] */ 
+            _In_  const WCHAR *pwszFunctionNameHint,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pIDebugDocumentContext);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback, OnFunctionEnter)
         HRESULT ( STDMETHODCALLTYPE *OnFunctionEnter )( 
             __RPC__in IActiveScriptProfilerCallback2 * This,
-            /* [in] */ PROFILER_TOKEN scriptId,
-            /* [in] */ PROFILER_TOKEN functionId);
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN scriptId,
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN functionId);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback, OnFunctionExit)
         HRESULT ( STDMETHODCALLTYPE *OnFunctionExit )( 
             __RPC__in IActiveScriptProfilerCallback2 * This,
-            /* [in] */ PROFILER_TOKEN scriptId,
-            /* [in] */ PROFILER_TOKEN functionId);
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN scriptId,
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN functionId);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback2, OnFunctionEnterByName)
         HRESULT ( STDMETHODCALLTYPE *OnFunctionEnterByName )( 
             __RPC__in IActiveScriptProfilerCallback2 * This,
-            /* [string][in] */ __RPC__in_string const WCHAR *pwszFunctionName,
-            /* [in] */ PROFILER_SCRIPT_TYPE type);
+            /* [string][annotation][in] */ 
+            _In_  const WCHAR *pwszFunctionName,
+            /* [annotation][in] */ 
+            _In_  PROFILER_SCRIPT_TYPE type);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback2, OnFunctionExitByName)
         HRESULT ( STDMETHODCALLTYPE *OnFunctionExitByName )( 
             __RPC__in IActiveScriptProfilerCallback2 * This,
-            /* [string][in] */ __RPC__in_string const WCHAR *pwszFunctionName,
-            /* [in] */ PROFILER_SCRIPT_TYPE type);
+            /* [string][annotation][in] */ 
+            _In_  const WCHAR *pwszFunctionName,
+            /* [annotation][in] */ 
+            _In_  PROFILER_SCRIPT_TYPE type);
         
         END_INTERFACE
     } IActiveScriptProfilerCallback2Vtbl;
@@ -1448,7 +1567,8 @@ EXTERN_C const IID IID_IActiveScriptProfilerCallback3;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetWebWorkerId( 
-            /* [in] */ DWORD webWorkerId) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD webWorkerId) = 0;
         
     };
     
@@ -1462,7 +1582,8 @@ EXTERN_C const IID IID_IActiveScriptProfilerCallback3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptProfilerCallback3 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1477,57 +1598,76 @@ EXTERN_C const IID IID_IActiveScriptProfilerCallback3;
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IActiveScriptProfilerCallback3 * This,
-            /* [in] */ DWORD dwContext);
+            /* [annotation][in] */ 
+            _In_  DWORD dwContext);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback, Shutdown)
         HRESULT ( STDMETHODCALLTYPE *Shutdown )( 
             __RPC__in IActiveScriptProfilerCallback3 * This,
-            /* [in] */ HRESULT hrReason);
+            /* [annotation][in] */ 
+            _In_  HRESULT hrReason);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback, ScriptCompiled)
         HRESULT ( STDMETHODCALLTYPE *ScriptCompiled )( 
             __RPC__in IActiveScriptProfilerCallback3 * This,
-            /* [in] */ PROFILER_TOKEN scriptId,
-            /* [in] */ PROFILER_SCRIPT_TYPE type,
-            /* [in] */ __RPC__in_opt IUnknown *pIDebugDocumentContext);
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN scriptId,
+            /* [annotation][in] */ 
+            _In_  PROFILER_SCRIPT_TYPE type,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pIDebugDocumentContext);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback, FunctionCompiled)
         HRESULT ( STDMETHODCALLTYPE *FunctionCompiled )( 
             __RPC__in IActiveScriptProfilerCallback3 * This,
-            /* [in] */ PROFILER_TOKEN functionId,
-            /* [in] */ PROFILER_TOKEN scriptId,
-            /* [string][in] */ __RPC__in_string const WCHAR *pwszFunctionName,
-            /* [string][in] */ __RPC__in_string const WCHAR *pwszFunctionNameHint,
-            /* [in] */ __RPC__in_opt IUnknown *pIDebugDocumentContext);
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN functionId,
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN scriptId,
+            /* [string][annotation][in] */ 
+            _In_  const WCHAR *pwszFunctionName,
+            /* [string][annotation][in] */ 
+            _In_  const WCHAR *pwszFunctionNameHint,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pIDebugDocumentContext);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback, OnFunctionEnter)
         HRESULT ( STDMETHODCALLTYPE *OnFunctionEnter )( 
             __RPC__in IActiveScriptProfilerCallback3 * This,
-            /* [in] */ PROFILER_TOKEN scriptId,
-            /* [in] */ PROFILER_TOKEN functionId);
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN scriptId,
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN functionId);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback, OnFunctionExit)
         HRESULT ( STDMETHODCALLTYPE *OnFunctionExit )( 
             __RPC__in IActiveScriptProfilerCallback3 * This,
-            /* [in] */ PROFILER_TOKEN scriptId,
-            /* [in] */ PROFILER_TOKEN functionId);
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN scriptId,
+            /* [annotation][in] */ 
+            _In_  PROFILER_TOKEN functionId);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback2, OnFunctionEnterByName)
         HRESULT ( STDMETHODCALLTYPE *OnFunctionEnterByName )( 
             __RPC__in IActiveScriptProfilerCallback3 * This,
-            /* [string][in] */ __RPC__in_string const WCHAR *pwszFunctionName,
-            /* [in] */ PROFILER_SCRIPT_TYPE type);
+            /* [string][annotation][in] */ 
+            _In_  const WCHAR *pwszFunctionName,
+            /* [annotation][in] */ 
+            _In_  PROFILER_SCRIPT_TYPE type);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback2, OnFunctionExitByName)
         HRESULT ( STDMETHODCALLTYPE *OnFunctionExitByName )( 
             __RPC__in IActiveScriptProfilerCallback3 * This,
-            /* [string][in] */ __RPC__in_string const WCHAR *pwszFunctionName,
-            /* [in] */ PROFILER_SCRIPT_TYPE type);
+            /* [string][annotation][in] */ 
+            _In_  const WCHAR *pwszFunctionName,
+            /* [annotation][in] */ 
+            _In_  PROFILER_SCRIPT_TYPE type);
         
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback3, SetWebWorkerId)
         HRESULT ( STDMETHODCALLTYPE *SetWebWorkerId )( 
             __RPC__in IActiveScriptProfilerCallback3 * This,
-            /* [in] */ DWORD webWorkerId);
+            /* [annotation][in] */ 
+            _In_  DWORD webWorkerId);
         
         END_INTERFACE
     } IActiveScriptProfilerCallback3Vtbl;

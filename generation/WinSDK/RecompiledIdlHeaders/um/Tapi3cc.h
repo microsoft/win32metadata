@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -275,60 +275,82 @@ EXTERN_C const IID IID_ITAgent;
     {
     public:
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateAgentSessions( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumAgentSession **ppEnumAgentSession) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumAgentSession **ppEnumAgentSession) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateSession( 
-            /* [in] */ __RPC__in_opt ITACDGroup *pACDGroup,
-            /* [in] */ __RPC__in_opt ITAddress *pAddress,
-            /* [retval][out] */ __RPC__deref_out_opt ITAgentSession **ppAgentSession) = 0;
+            /* [annotation][in] */ 
+            _In_  ITACDGroup *pACDGroup,
+            /* [annotation][in] */ 
+            _In_  ITAddress *pAddress,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAgentSession **ppAgentSession) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateSessionWithPIN( 
-            /* [in] */ __RPC__in_opt ITACDGroup *pACDGroup,
-            /* [in] */ __RPC__in_opt ITAddress *pAddress,
-            /* [in] */ __RPC__in BSTR pPIN,
-            /* [retval][out] */ __RPC__deref_out_opt ITAgentSession **ppAgentSession) = 0;
+            /* [annotation][in] */ 
+            _In_  ITACDGroup *pACDGroup,
+            /* [annotation][in] */ 
+            _In_  ITAddress *pAddress,
+            /* [annotation][in] */ 
+            _In_  BSTR pPIN,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAgentSession **ppAgentSession) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ID( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppID) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppID) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_User( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppUser) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppUser) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_State( 
-            /* [in] */ AGENT_STATE AgentState) = 0;
+            /* [annotation][in] */ 
+            _In_  AGENT_STATE AgentState) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_State( 
-            /* [retval][out] */ __RPC__out AGENT_STATE *pAgentState) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  AGENT_STATE *pAgentState) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MeasurementPeriod( 
-            /* [in] */ long lPeriod) = 0;
+            /* [annotation][in] */ 
+            _In_  long lPeriod) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MeasurementPeriod( 
-            /* [retval][out] */ __RPC__out long *plPeriod) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plPeriod) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_OverallCallRate( 
-            /* [retval][out] */ __RPC__out CURRENCY *pcyCallrate) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CURRENCY *pcyCallrate) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NumberOfACDCalls( 
-            /* [retval][out] */ __RPC__out long *plCalls) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCalls) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NumberOfIncomingCalls( 
-            /* [retval][out] */ __RPC__out long *plCalls) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCalls) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NumberOfOutgoingCalls( 
-            /* [retval][out] */ __RPC__out long *plCalls) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCalls) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TotalACDTalkTime( 
-            /* [retval][out] */ __RPC__out long *plTalkTime) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plTalkTime) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TotalACDCallTime( 
-            /* [retval][out] */ __RPC__out long *plCallTime) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallTime) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TotalWrapUpTime( 
-            /* [retval][out] */ __RPC__out long *plWrapUpTime) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plWrapUpTime) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AgentSessions( 
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
     };
     
@@ -342,7 +364,8 @@ EXTERN_C const IID IID_ITAgent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITAgent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -357,23 +380,31 @@ EXTERN_C const IID IID_ITAgent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITAgent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITAgent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITAgent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -398,92 +429,114 @@ EXTERN_C const IID IID_ITAgent;
         DECLSPEC_XFGVIRT(ITAgent, EnumerateAgentSessions)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateAgentSessions )( 
             __RPC__in ITAgent * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumAgentSession **ppEnumAgentSession);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumAgentSession **ppEnumAgentSession);
         
         DECLSPEC_XFGVIRT(ITAgent, CreateSession)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateSession )( 
             __RPC__in ITAgent * This,
-            /* [in] */ __RPC__in_opt ITACDGroup *pACDGroup,
-            /* [in] */ __RPC__in_opt ITAddress *pAddress,
-            /* [retval][out] */ __RPC__deref_out_opt ITAgentSession **ppAgentSession);
+            /* [annotation][in] */ 
+            _In_  ITACDGroup *pACDGroup,
+            /* [annotation][in] */ 
+            _In_  ITAddress *pAddress,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAgentSession **ppAgentSession);
         
         DECLSPEC_XFGVIRT(ITAgent, CreateSessionWithPIN)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateSessionWithPIN )( 
             __RPC__in ITAgent * This,
-            /* [in] */ __RPC__in_opt ITACDGroup *pACDGroup,
-            /* [in] */ __RPC__in_opt ITAddress *pAddress,
-            /* [in] */ __RPC__in BSTR pPIN,
-            /* [retval][out] */ __RPC__deref_out_opt ITAgentSession **ppAgentSession);
+            /* [annotation][in] */ 
+            _In_  ITACDGroup *pACDGroup,
+            /* [annotation][in] */ 
+            _In_  ITAddress *pAddress,
+            /* [annotation][in] */ 
+            _In_  BSTR pPIN,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAgentSession **ppAgentSession);
         
         DECLSPEC_XFGVIRT(ITAgent, get_ID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ID )( 
             __RPC__in ITAgent * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppID);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppID);
         
         DECLSPEC_XFGVIRT(ITAgent, get_User)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_User )( 
             __RPC__in ITAgent * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppUser);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppUser);
         
         DECLSPEC_XFGVIRT(ITAgent, put_State)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_State )( 
             __RPC__in ITAgent * This,
-            /* [in] */ AGENT_STATE AgentState);
+            /* [annotation][in] */ 
+            _In_  AGENT_STATE AgentState);
         
         DECLSPEC_XFGVIRT(ITAgent, get_State)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in ITAgent * This,
-            /* [retval][out] */ __RPC__out AGENT_STATE *pAgentState);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  AGENT_STATE *pAgentState);
         
         DECLSPEC_XFGVIRT(ITAgent, put_MeasurementPeriod)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MeasurementPeriod )( 
             __RPC__in ITAgent * This,
-            /* [in] */ long lPeriod);
+            /* [annotation][in] */ 
+            _In_  long lPeriod);
         
         DECLSPEC_XFGVIRT(ITAgent, get_MeasurementPeriod)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MeasurementPeriod )( 
             __RPC__in ITAgent * This,
-            /* [retval][out] */ __RPC__out long *plPeriod);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plPeriod);
         
         DECLSPEC_XFGVIRT(ITAgent, get_OverallCallRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OverallCallRate )( 
             __RPC__in ITAgent * This,
-            /* [retval][out] */ __RPC__out CURRENCY *pcyCallrate);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CURRENCY *pcyCallrate);
         
         DECLSPEC_XFGVIRT(ITAgent, get_NumberOfACDCalls)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NumberOfACDCalls )( 
             __RPC__in ITAgent * This,
-            /* [retval][out] */ __RPC__out long *plCalls);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCalls);
         
         DECLSPEC_XFGVIRT(ITAgent, get_NumberOfIncomingCalls)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NumberOfIncomingCalls )( 
             __RPC__in ITAgent * This,
-            /* [retval][out] */ __RPC__out long *plCalls);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCalls);
         
         DECLSPEC_XFGVIRT(ITAgent, get_NumberOfOutgoingCalls)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NumberOfOutgoingCalls )( 
             __RPC__in ITAgent * This,
-            /* [retval][out] */ __RPC__out long *plCalls);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCalls);
         
         DECLSPEC_XFGVIRT(ITAgent, get_TotalACDTalkTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TotalACDTalkTime )( 
             __RPC__in ITAgent * This,
-            /* [retval][out] */ __RPC__out long *plTalkTime);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plTalkTime);
         
         DECLSPEC_XFGVIRT(ITAgent, get_TotalACDCallTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TotalACDCallTime )( 
             __RPC__in ITAgent * This,
-            /* [retval][out] */ __RPC__out long *plCallTime);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallTime);
         
         DECLSPEC_XFGVIRT(ITAgent, get_TotalWrapUpTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TotalWrapUpTime )( 
             __RPC__in ITAgent * This,
-            /* [retval][out] */ __RPC__out long *plWrapUpTime);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plWrapUpTime);
         
         DECLSPEC_XFGVIRT(ITAgent, get_AgentSessions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AgentSessions )( 
             __RPC__in ITAgent * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         END_INTERFACE
     } ITAgentVtbl;
@@ -599,55 +652,72 @@ EXTERN_C const IID IID_ITAgentSession;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Agent( 
-            /* [retval][out] */ __RPC__deref_out_opt ITAgent **ppAgent) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAgent **ppAgent) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Address( 
-            /* [retval][out] */ __RPC__deref_out_opt ITAddress **ppAddress) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAddress **ppAddress) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ACDGroup( 
-            /* [retval][out] */ __RPC__deref_out_opt ITACDGroup **ppACDGroup) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITACDGroup **ppACDGroup) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_State( 
-            /* [in] */ AGENT_SESSION_STATE SessionState) = 0;
+            /* [annotation][in] */ 
+            _In_  AGENT_SESSION_STATE SessionState) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_State( 
-            /* [retval][out] */ __RPC__out AGENT_SESSION_STATE *pSessionState) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  AGENT_SESSION_STATE *pSessionState) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SessionStartTime( 
-            /* [retval][out] */ __RPC__out DATE *pdateSessionStart) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DATE *pdateSessionStart) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SessionDuration( 
-            /* [retval][out] */ __RPC__out long *plDuration) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plDuration) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NumberOfCalls( 
-            /* [retval][out] */ __RPC__out long *plCalls) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCalls) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TotalTalkTime( 
-            /* [retval][out] */ __RPC__out long *plTalkTime) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plTalkTime) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AverageTalkTime( 
-            /* [retval][out] */ __RPC__out long *plTalkTime) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plTalkTime) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TotalCallTime( 
-            /* [retval][out] */ __RPC__out long *plCallTime) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallTime) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AverageCallTime( 
-            /* [retval][out] */ __RPC__out long *plCallTime) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallTime) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TotalWrapUpTime( 
-            /* [retval][out] */ __RPC__out long *plWrapUpTime) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plWrapUpTime) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AverageWrapUpTime( 
-            /* [retval][out] */ __RPC__out long *plWrapUpTime) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plWrapUpTime) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ACDCallRate( 
-            /* [retval][out] */ __RPC__out CURRENCY *pcyCallrate) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CURRENCY *pcyCallrate) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LongestTimeToAnswer( 
-            /* [retval][out] */ __RPC__out long *plAnswerTime) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plAnswerTime) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AverageTimeToAnswer( 
-            /* [retval][out] */ __RPC__out long *plAnswerTime) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plAnswerTime) = 0;
         
     };
     
@@ -661,7 +731,8 @@ EXTERN_C const IID IID_ITAgentSession;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITAgentSession * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -676,23 +747,31 @@ EXTERN_C const IID IID_ITAgentSession;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITAgentSession * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITAgentSession * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITAgentSession * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -717,87 +796,104 @@ EXTERN_C const IID IID_ITAgentSession;
         DECLSPEC_XFGVIRT(ITAgentSession, get_Agent)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Agent )( 
             __RPC__in ITAgentSession * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITAgent **ppAgent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAgent **ppAgent);
         
         DECLSPEC_XFGVIRT(ITAgentSession, get_Address)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Address )( 
             __RPC__in ITAgentSession * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITAddress **ppAddress);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAddress **ppAddress);
         
         DECLSPEC_XFGVIRT(ITAgentSession, get_ACDGroup)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ACDGroup )( 
             __RPC__in ITAgentSession * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITACDGroup **ppACDGroup);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITACDGroup **ppACDGroup);
         
         DECLSPEC_XFGVIRT(ITAgentSession, put_State)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_State )( 
             __RPC__in ITAgentSession * This,
-            /* [in] */ AGENT_SESSION_STATE SessionState);
+            /* [annotation][in] */ 
+            _In_  AGENT_SESSION_STATE SessionState);
         
         DECLSPEC_XFGVIRT(ITAgentSession, get_State)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in ITAgentSession * This,
-            /* [retval][out] */ __RPC__out AGENT_SESSION_STATE *pSessionState);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  AGENT_SESSION_STATE *pSessionState);
         
         DECLSPEC_XFGVIRT(ITAgentSession, get_SessionStartTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SessionStartTime )( 
             __RPC__in ITAgentSession * This,
-            /* [retval][out] */ __RPC__out DATE *pdateSessionStart);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DATE *pdateSessionStart);
         
         DECLSPEC_XFGVIRT(ITAgentSession, get_SessionDuration)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SessionDuration )( 
             __RPC__in ITAgentSession * This,
-            /* [retval][out] */ __RPC__out long *plDuration);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plDuration);
         
         DECLSPEC_XFGVIRT(ITAgentSession, get_NumberOfCalls)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NumberOfCalls )( 
             __RPC__in ITAgentSession * This,
-            /* [retval][out] */ __RPC__out long *plCalls);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCalls);
         
         DECLSPEC_XFGVIRT(ITAgentSession, get_TotalTalkTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TotalTalkTime )( 
             __RPC__in ITAgentSession * This,
-            /* [retval][out] */ __RPC__out long *plTalkTime);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plTalkTime);
         
         DECLSPEC_XFGVIRT(ITAgentSession, get_AverageTalkTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AverageTalkTime )( 
             __RPC__in ITAgentSession * This,
-            /* [retval][out] */ __RPC__out long *plTalkTime);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plTalkTime);
         
         DECLSPEC_XFGVIRT(ITAgentSession, get_TotalCallTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TotalCallTime )( 
             __RPC__in ITAgentSession * This,
-            /* [retval][out] */ __RPC__out long *plCallTime);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallTime);
         
         DECLSPEC_XFGVIRT(ITAgentSession, get_AverageCallTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AverageCallTime )( 
             __RPC__in ITAgentSession * This,
-            /* [retval][out] */ __RPC__out long *plCallTime);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCallTime);
         
         DECLSPEC_XFGVIRT(ITAgentSession, get_TotalWrapUpTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TotalWrapUpTime )( 
             __RPC__in ITAgentSession * This,
-            /* [retval][out] */ __RPC__out long *plWrapUpTime);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plWrapUpTime);
         
         DECLSPEC_XFGVIRT(ITAgentSession, get_AverageWrapUpTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AverageWrapUpTime )( 
             __RPC__in ITAgentSession * This,
-            /* [retval][out] */ __RPC__out long *plWrapUpTime);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plWrapUpTime);
         
         DECLSPEC_XFGVIRT(ITAgentSession, get_ACDCallRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ACDCallRate )( 
             __RPC__in ITAgentSession * This,
-            /* [retval][out] */ __RPC__out CURRENCY *pcyCallrate);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  CURRENCY *pcyCallrate);
         
         DECLSPEC_XFGVIRT(ITAgentSession, get_LongestTimeToAnswer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LongestTimeToAnswer )( 
             __RPC__in ITAgentSession * This,
-            /* [retval][out] */ __RPC__out long *plAnswerTime);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plAnswerTime);
         
         DECLSPEC_XFGVIRT(ITAgentSession, get_AverageTimeToAnswer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AverageTimeToAnswer )( 
             __RPC__in ITAgentSession * This,
-            /* [retval][out] */ __RPC__out long *plAnswerTime);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plAnswerTime);
         
         END_INTERFACE
     } ITAgentSessionVtbl;
@@ -913,13 +1009,16 @@ EXTERN_C const IID IID_ITACDGroup;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppName) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateQueues( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumQueue **ppEnumQueue) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumQueue **ppEnumQueue) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Queues( 
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
     };
     
@@ -933,7 +1032,8 @@ EXTERN_C const IID IID_ITACDGroup;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITACDGroup * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -948,23 +1048,31 @@ EXTERN_C const IID IID_ITACDGroup;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITACDGroup * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITACDGroup * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITACDGroup * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -989,17 +1097,20 @@ EXTERN_C const IID IID_ITACDGroup;
         DECLSPEC_XFGVIRT(ITACDGroup, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ITACDGroup * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppName);
         
         DECLSPEC_XFGVIRT(ITACDGroup, EnumerateQueues)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateQueues )( 
             __RPC__in ITACDGroup * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumQueue **ppEnumQueue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumQueue **ppEnumQueue);
         
         DECLSPEC_XFGVIRT(ITACDGroup, get_Queues)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Queues )( 
             __RPC__in ITACDGroup * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         END_INTERFACE
     } ITACDGroupVtbl;
@@ -1073,40 +1184,52 @@ EXTERN_C const IID IID_ITQueue;
     {
     public:
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MeasurementPeriod( 
-            /* [in] */ long lPeriod) = 0;
+            /* [annotation][in] */ 
+            _In_  long lPeriod) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MeasurementPeriod( 
-            /* [retval][out] */ __RPC__out long *plPeriod) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plPeriod) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TotalCallsQueued( 
-            /* [retval][out] */ __RPC__out long *plCalls) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCalls) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CurrentCallsQueued( 
-            /* [retval][out] */ __RPC__out long *plCalls) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCalls) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TotalCallsAbandoned( 
-            /* [retval][out] */ __RPC__out long *plCalls) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCalls) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TotalCallsFlowedIn( 
-            /* [retval][out] */ __RPC__out long *plCalls) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCalls) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TotalCallsFlowedOut( 
-            /* [retval][out] */ __RPC__out long *plCalls) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCalls) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LongestEverWaitTime( 
-            /* [retval][out] */ __RPC__out long *plWaitTime) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plWaitTime) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CurrentLongestWaitTime( 
-            /* [retval][out] */ __RPC__out long *plWaitTime) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plWaitTime) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AverageWaitTime( 
-            /* [retval][out] */ __RPC__out long *plWaitTime) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plWaitTime) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FinalDisposition( 
-            /* [retval][out] */ __RPC__out long *plCalls) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCalls) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppName) = 0;
         
     };
     
@@ -1120,7 +1243,8 @@ EXTERN_C const IID IID_ITQueue;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITQueue * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1135,23 +1259,31 @@ EXTERN_C const IID IID_ITQueue;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITQueue * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITQueue * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITQueue * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1176,62 +1308,74 @@ EXTERN_C const IID IID_ITQueue;
         DECLSPEC_XFGVIRT(ITQueue, put_MeasurementPeriod)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MeasurementPeriod )( 
             __RPC__in ITQueue * This,
-            /* [in] */ long lPeriod);
+            /* [annotation][in] */ 
+            _In_  long lPeriod);
         
         DECLSPEC_XFGVIRT(ITQueue, get_MeasurementPeriod)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MeasurementPeriod )( 
             __RPC__in ITQueue * This,
-            /* [retval][out] */ __RPC__out long *plPeriod);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plPeriod);
         
         DECLSPEC_XFGVIRT(ITQueue, get_TotalCallsQueued)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TotalCallsQueued )( 
             __RPC__in ITQueue * This,
-            /* [retval][out] */ __RPC__out long *plCalls);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCalls);
         
         DECLSPEC_XFGVIRT(ITQueue, get_CurrentCallsQueued)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentCallsQueued )( 
             __RPC__in ITQueue * This,
-            /* [retval][out] */ __RPC__out long *plCalls);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCalls);
         
         DECLSPEC_XFGVIRT(ITQueue, get_TotalCallsAbandoned)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TotalCallsAbandoned )( 
             __RPC__in ITQueue * This,
-            /* [retval][out] */ __RPC__out long *plCalls);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCalls);
         
         DECLSPEC_XFGVIRT(ITQueue, get_TotalCallsFlowedIn)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TotalCallsFlowedIn )( 
             __RPC__in ITQueue * This,
-            /* [retval][out] */ __RPC__out long *plCalls);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCalls);
         
         DECLSPEC_XFGVIRT(ITQueue, get_TotalCallsFlowedOut)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TotalCallsFlowedOut )( 
             __RPC__in ITQueue * This,
-            /* [retval][out] */ __RPC__out long *plCalls);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCalls);
         
         DECLSPEC_XFGVIRT(ITQueue, get_LongestEverWaitTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LongestEverWaitTime )( 
             __RPC__in ITQueue * This,
-            /* [retval][out] */ __RPC__out long *plWaitTime);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plWaitTime);
         
         DECLSPEC_XFGVIRT(ITQueue, get_CurrentLongestWaitTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentLongestWaitTime )( 
             __RPC__in ITQueue * This,
-            /* [retval][out] */ __RPC__out long *plWaitTime);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plWaitTime);
         
         DECLSPEC_XFGVIRT(ITQueue, get_AverageWaitTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AverageWaitTime )( 
             __RPC__in ITQueue * This,
-            /* [retval][out] */ __RPC__out long *plWaitTime);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plWaitTime);
         
         DECLSPEC_XFGVIRT(ITQueue, get_FinalDisposition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FinalDisposition )( 
             __RPC__in ITQueue * This,
-            /* [retval][out] */ __RPC__out long *plCalls);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  long *plCalls);
         
         DECLSPEC_XFGVIRT(ITQueue, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ITQueue * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppName);
         
         END_INTERFACE
     } ITQueueVtbl;
@@ -1332,10 +1476,12 @@ EXTERN_C const IID IID_ITAgentEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Agent( 
-            /* [retval][out] */ __RPC__deref_out_opt ITAgent **ppAgent) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAgent **ppAgent) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Event( 
-            /* [retval][out] */ __RPC__out AGENT_EVENT *pEvent) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  AGENT_EVENT *pEvent) = 0;
         
     };
     
@@ -1349,7 +1495,8 @@ EXTERN_C const IID IID_ITAgentEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITAgentEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1364,23 +1511,31 @@ EXTERN_C const IID IID_ITAgentEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITAgentEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITAgentEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITAgentEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1405,12 +1560,14 @@ EXTERN_C const IID IID_ITAgentEvent;
         DECLSPEC_XFGVIRT(ITAgentEvent, get_Agent)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Agent )( 
             __RPC__in ITAgentEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITAgent **ppAgent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAgent **ppAgent);
         
         DECLSPEC_XFGVIRT(ITAgentEvent, get_Event)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Event )( 
             __RPC__in ITAgentEvent * This,
-            /* [retval][out] */ __RPC__out AGENT_EVENT *pEvent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  AGENT_EVENT *pEvent);
         
         END_INTERFACE
     } ITAgentEventVtbl;
@@ -1481,10 +1638,12 @@ EXTERN_C const IID IID_ITAgentSessionEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Session( 
-            /* [retval][out] */ __RPC__deref_out_opt ITAgentSession **ppSession) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAgentSession **ppSession) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Event( 
-            /* [retval][out] */ __RPC__out AGENT_SESSION_EVENT *pEvent) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  AGENT_SESSION_EVENT *pEvent) = 0;
         
     };
     
@@ -1498,7 +1657,8 @@ EXTERN_C const IID IID_ITAgentSessionEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITAgentSessionEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1513,23 +1673,31 @@ EXTERN_C const IID IID_ITAgentSessionEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITAgentSessionEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITAgentSessionEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITAgentSessionEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1554,12 +1722,14 @@ EXTERN_C const IID IID_ITAgentSessionEvent;
         DECLSPEC_XFGVIRT(ITAgentSessionEvent, get_Session)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Session )( 
             __RPC__in ITAgentSessionEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITAgentSession **ppSession);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAgentSession **ppSession);
         
         DECLSPEC_XFGVIRT(ITAgentSessionEvent, get_Event)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Event )( 
             __RPC__in ITAgentSessionEvent * This,
-            /* [retval][out] */ __RPC__out AGENT_SESSION_EVENT *pEvent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  AGENT_SESSION_EVENT *pEvent);
         
         END_INTERFACE
     } ITAgentSessionEventVtbl;
@@ -1630,10 +1800,12 @@ EXTERN_C const IID IID_ITACDGroupEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Group( 
-            /* [retval][out] */ __RPC__deref_out_opt ITACDGroup **ppGroup) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITACDGroup **ppGroup) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Event( 
-            /* [retval][out] */ __RPC__out ACDGROUP_EVENT *pEvent) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ACDGROUP_EVENT *pEvent) = 0;
         
     };
     
@@ -1647,7 +1819,8 @@ EXTERN_C const IID IID_ITACDGroupEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITACDGroupEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1662,23 +1835,31 @@ EXTERN_C const IID IID_ITACDGroupEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITACDGroupEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITACDGroupEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITACDGroupEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1703,12 +1884,14 @@ EXTERN_C const IID IID_ITACDGroupEvent;
         DECLSPEC_XFGVIRT(ITACDGroupEvent, get_Group)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Group )( 
             __RPC__in ITACDGroupEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITACDGroup **ppGroup);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITACDGroup **ppGroup);
         
         DECLSPEC_XFGVIRT(ITACDGroupEvent, get_Event)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Event )( 
             __RPC__in ITACDGroupEvent * This,
-            /* [retval][out] */ __RPC__out ACDGROUP_EVENT *pEvent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ACDGROUP_EVENT *pEvent);
         
         END_INTERFACE
     } ITACDGroupEventVtbl;
@@ -1779,10 +1962,12 @@ EXTERN_C const IID IID_ITQueueEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Queue( 
-            /* [retval][out] */ __RPC__deref_out_opt ITQueue **ppQueue) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITQueue **ppQueue) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Event( 
-            /* [retval][out] */ __RPC__out ACDQUEUE_EVENT *pEvent) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ACDQUEUE_EVENT *pEvent) = 0;
         
     };
     
@@ -1796,7 +1981,8 @@ EXTERN_C const IID IID_ITQueueEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITQueueEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1811,23 +1997,31 @@ EXTERN_C const IID IID_ITQueueEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITQueueEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITQueueEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITQueueEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1852,12 +2046,14 @@ EXTERN_C const IID IID_ITQueueEvent;
         DECLSPEC_XFGVIRT(ITQueueEvent, get_Queue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Queue )( 
             __RPC__in ITQueueEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITQueue **ppQueue);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITQueue **ppQueue);
         
         DECLSPEC_XFGVIRT(ITQueueEvent, get_Event)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Event )( 
             __RPC__in ITQueueEvent * This,
-            /* [retval][out] */ __RPC__out ACDQUEUE_EVENT *pEvent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ACDQUEUE_EVENT *pEvent);
         
         END_INTERFACE
     } ITQueueEventVtbl;
@@ -1928,10 +2124,12 @@ EXTERN_C const IID IID_ITAgentHandlerEvent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AgentHandler( 
-            /* [retval][out] */ __RPC__deref_out_opt ITAgentHandler **ppAgentHandler) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAgentHandler **ppAgentHandler) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Event( 
-            /* [retval][out] */ __RPC__out AGENTHANDLER_EVENT *pEvent) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  AGENTHANDLER_EVENT *pEvent) = 0;
         
     };
     
@@ -1945,7 +2143,8 @@ EXTERN_C const IID IID_ITAgentHandlerEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITAgentHandlerEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1960,23 +2159,31 @@ EXTERN_C const IID IID_ITAgentHandlerEvent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITAgentHandlerEvent * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITAgentHandlerEvent * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITAgentHandlerEvent * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2001,12 +2208,14 @@ EXTERN_C const IID IID_ITAgentHandlerEvent;
         DECLSPEC_XFGVIRT(ITAgentHandlerEvent, get_AgentHandler)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AgentHandler )( 
             __RPC__in ITAgentHandlerEvent * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITAgentHandler **ppAgentHandler);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAgentHandler **ppAgentHandler);
         
         DECLSPEC_XFGVIRT(ITAgentHandlerEvent, get_Event)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Event )( 
             __RPC__in ITAgentHandlerEvent * This,
-            /* [retval][out] */ __RPC__out AGENTHANDLER_EVENT *pEvent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  AGENTHANDLER_EVENT *pEvent);
         
         END_INTERFACE
     } ITAgentHandlerEventVtbl;
@@ -2077,10 +2286,12 @@ EXTERN_C const IID IID_ITTAPICallCenter;
     {
     public:
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateAgentHandlers( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumAgentHandler **ppEnumHandler) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumAgentHandler **ppEnumHandler) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AgentHandlers( 
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
     };
     
@@ -2094,7 +2305,8 @@ EXTERN_C const IID IID_ITTAPICallCenter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITTAPICallCenter * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2109,23 +2321,31 @@ EXTERN_C const IID IID_ITTAPICallCenter;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITTAPICallCenter * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITTAPICallCenter * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITTAPICallCenter * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2150,12 +2370,14 @@ EXTERN_C const IID IID_ITTAPICallCenter;
         DECLSPEC_XFGVIRT(ITTAPICallCenter, EnumerateAgentHandlers)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateAgentHandlers )( 
             __RPC__in ITTAPICallCenter * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumAgentHandler **ppEnumHandler);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumAgentHandler **ppEnumHandler);
         
         DECLSPEC_XFGVIRT(ITTAPICallCenter, get_AgentHandlers)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AgentHandlers )( 
             __RPC__in ITTAPICallCenter * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         END_INTERFACE
     } ITTAPICallCenterVtbl;
@@ -2226,27 +2448,36 @@ EXTERN_C const IID IID_ITAgentHandler;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppName) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppName) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateAgent( 
-            /* [retval][out] */ __RPC__deref_out_opt ITAgent **ppAgent) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAgent **ppAgent) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateAgentWithID( 
-            /* [in] */ __RPC__in BSTR pID,
-            /* [in] */ __RPC__in BSTR pPIN,
-            /* [retval][out] */ __RPC__deref_out_opt ITAgent **ppAgent) = 0;
+            /* [annotation][in] */ 
+            _In_  BSTR pID,
+            /* [annotation][in] */ 
+            _In_  BSTR pPIN,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAgent **ppAgent) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateACDGroups( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumACDGroup **ppEnumACDGroup) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumACDGroup **ppEnumACDGroup) = 0;
         
         virtual /* [helpstring][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumerateUsableAddresses( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumAddress **ppEnumAddress) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumAddress **ppEnumAddress) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ACDGroups( 
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UsableAddresses( 
-            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant) = 0;
         
     };
     
@@ -2260,7 +2491,8 @@ EXTERN_C const IID IID_ITAgentHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITAgentHandler * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2275,23 +2507,31 @@ EXTERN_C const IID IID_ITAgentHandler;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITAgentHandler * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITAgentHandler * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITAgentHandler * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2316,39 +2556,48 @@ EXTERN_C const IID IID_ITAgentHandler;
         DECLSPEC_XFGVIRT(ITAgentHandler, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ITAgentHandler * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppName);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *ppName);
         
         DECLSPEC_XFGVIRT(ITAgentHandler, CreateAgent)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateAgent )( 
             __RPC__in ITAgentHandler * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITAgent **ppAgent);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAgent **ppAgent);
         
         DECLSPEC_XFGVIRT(ITAgentHandler, CreateAgentWithID)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateAgentWithID )( 
             __RPC__in ITAgentHandler * This,
-            /* [in] */ __RPC__in BSTR pID,
-            /* [in] */ __RPC__in BSTR pPIN,
-            /* [retval][out] */ __RPC__deref_out_opt ITAgent **ppAgent);
+            /* [annotation][in] */ 
+            _In_  BSTR pID,
+            /* [annotation][in] */ 
+            _In_  BSTR pPIN,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITAgent **ppAgent);
         
         DECLSPEC_XFGVIRT(ITAgentHandler, EnumerateACDGroups)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateACDGroups )( 
             __RPC__in ITAgentHandler * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumACDGroup **ppEnumACDGroup);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumACDGroup **ppEnumACDGroup);
         
         DECLSPEC_XFGVIRT(ITAgentHandler, EnumerateUsableAddresses)
         /* [helpstring][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumerateUsableAddresses )( 
             __RPC__in ITAgentHandler * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumAddress **ppEnumAddress);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumAddress **ppEnumAddress);
         
         DECLSPEC_XFGVIRT(ITAgentHandler, get_ACDGroups)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ACDGroups )( 
             __RPC__in ITAgentHandler * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(ITAgentHandler, get_UsableAddresses)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UsableAddresses )( 
             __RPC__in ITAgentHandler * This,
-            /* [retval][out] */ __RPC__out VARIANT *pVariant);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pVariant);
         
         END_INTERFACE
     } ITAgentHandlerVtbl;
@@ -2434,17 +2683,22 @@ EXTERN_C const IID IID_IEnumAgent;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [out] */ __RPC__deref_out_opt ITAgent **ppElements,
-            /* [out] */ __RPC__out ULONG *pceltFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  ITAgent **ppElements,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumAgent **ppEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumAgent **ppEnum) = 0;
         
     };
     
@@ -2458,7 +2712,8 @@ EXTERN_C const IID IID_IEnumAgent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumAgent * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2473,9 +2728,12 @@ EXTERN_C const IID IID_IEnumAgent;
         DECLSPEC_XFGVIRT(IEnumAgent, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumAgent * This,
-            /* [in] */ ULONG celt,
-            /* [out] */ __RPC__deref_out_opt ITAgent **ppElements,
-            /* [out] */ __RPC__out ULONG *pceltFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  ITAgent **ppElements,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumAgent, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -2484,12 +2742,14 @@ EXTERN_C const IID IID_IEnumAgent;
         DECLSPEC_XFGVIRT(IEnumAgent, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumAgent * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumAgent, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumAgent * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumAgent **ppEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumAgent **ppEnum);
         
         END_INTERFACE
     } IEnumAgentVtbl;
@@ -2553,17 +2813,22 @@ EXTERN_C const IID IID_IEnumAgentSession;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [out] */ __RPC__deref_out_opt ITAgentSession **ppElements,
-            /* [out] */ __RPC__out ULONG *pceltFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  ITAgentSession **ppElements,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumAgentSession **ppEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumAgentSession **ppEnum) = 0;
         
     };
     
@@ -2577,7 +2842,8 @@ EXTERN_C const IID IID_IEnumAgentSession;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumAgentSession * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2592,9 +2858,12 @@ EXTERN_C const IID IID_IEnumAgentSession;
         DECLSPEC_XFGVIRT(IEnumAgentSession, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumAgentSession * This,
-            /* [in] */ ULONG celt,
-            /* [out] */ __RPC__deref_out_opt ITAgentSession **ppElements,
-            /* [out] */ __RPC__out ULONG *pceltFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  ITAgentSession **ppElements,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumAgentSession, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -2603,12 +2872,14 @@ EXTERN_C const IID IID_IEnumAgentSession;
         DECLSPEC_XFGVIRT(IEnumAgentSession, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumAgentSession * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumAgentSession, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumAgentSession * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumAgentSession **ppEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumAgentSession **ppEnum);
         
         END_INTERFACE
     } IEnumAgentSessionVtbl;
@@ -2672,17 +2943,22 @@ EXTERN_C const IID IID_IEnumQueue;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [out] */ __RPC__deref_out_opt ITQueue **ppElements,
-            /* [out] */ __RPC__out ULONG *pceltFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  ITQueue **ppElements,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumQueue **ppEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumQueue **ppEnum) = 0;
         
     };
     
@@ -2696,7 +2972,8 @@ EXTERN_C const IID IID_IEnumQueue;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumQueue * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2711,9 +2988,12 @@ EXTERN_C const IID IID_IEnumQueue;
         DECLSPEC_XFGVIRT(IEnumQueue, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumQueue * This,
-            /* [in] */ ULONG celt,
-            /* [out] */ __RPC__deref_out_opt ITQueue **ppElements,
-            /* [out] */ __RPC__out ULONG *pceltFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  ITQueue **ppElements,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumQueue, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -2722,12 +3002,14 @@ EXTERN_C const IID IID_IEnumQueue;
         DECLSPEC_XFGVIRT(IEnumQueue, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumQueue * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumQueue, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumQueue * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumQueue **ppEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumQueue **ppEnum);
         
         END_INTERFACE
     } IEnumQueueVtbl;
@@ -2791,17 +3073,22 @@ EXTERN_C const IID IID_IEnumACDGroup;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [out] */ __RPC__deref_out_opt ITACDGroup **ppElements,
-            /* [out] */ __RPC__out ULONG *pceltFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  ITACDGroup **ppElements,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumACDGroup **ppEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumACDGroup **ppEnum) = 0;
         
     };
     
@@ -2815,7 +3102,8 @@ EXTERN_C const IID IID_IEnumACDGroup;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumACDGroup * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2830,9 +3118,12 @@ EXTERN_C const IID IID_IEnumACDGroup;
         DECLSPEC_XFGVIRT(IEnumACDGroup, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumACDGroup * This,
-            /* [in] */ ULONG celt,
-            /* [out] */ __RPC__deref_out_opt ITACDGroup **ppElements,
-            /* [out] */ __RPC__out ULONG *pceltFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  ITACDGroup **ppElements,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumACDGroup, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -2841,12 +3132,14 @@ EXTERN_C const IID IID_IEnumACDGroup;
         DECLSPEC_XFGVIRT(IEnumACDGroup, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumACDGroup * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumACDGroup, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumACDGroup * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumACDGroup **ppEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumACDGroup **ppEnum);
         
         END_INTERFACE
     } IEnumACDGroupVtbl;
@@ -2910,17 +3203,22 @@ EXTERN_C const IID IID_IEnumAgentHandler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG celt,
-            /* [out] */ __RPC__deref_out_opt ITAgentHandler **ppElements,
-            /* [out] */ __RPC__out ULONG *pceltFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  ITAgentHandler **ppElements,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG celt) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [retval][out] */ __RPC__deref_out_opt IEnumAgentHandler **ppEnum) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumAgentHandler **ppEnum) = 0;
         
     };
     
@@ -2934,7 +3232,8 @@ EXTERN_C const IID IID_IEnumAgentHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumAgentHandler * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2949,9 +3248,12 @@ EXTERN_C const IID IID_IEnumAgentHandler;
         DECLSPEC_XFGVIRT(IEnumAgentHandler, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumAgentHandler * This,
-            /* [in] */ ULONG celt,
-            /* [out] */ __RPC__deref_out_opt ITAgentHandler **ppElements,
-            /* [out] */ __RPC__out ULONG *pceltFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG celt,
+            /* [annotation][out] */ 
+            _Out_  ITAgentHandler **ppElements,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumAgentHandler, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -2960,12 +3262,14 @@ EXTERN_C const IID IID_IEnumAgentHandler;
         DECLSPEC_XFGVIRT(IEnumAgentHandler, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumAgentHandler * This,
-            /* [in] */ ULONG celt);
+            /* [annotation][in] */ 
+            _In_  ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumAgentHandler, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumAgentHandler * This,
-            /* [retval][out] */ __RPC__deref_out_opt IEnumAgentHandler **ppEnum);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumAgentHandler **ppEnum);
         
         END_INTERFACE
     } IEnumAgentHandlerVtbl;

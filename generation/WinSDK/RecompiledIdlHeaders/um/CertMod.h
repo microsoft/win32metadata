@@ -108,23 +108,36 @@ EXTERN_C const IID IID_ICertManageModule;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetProperty( 
-            /* [in] */ __RPC__in const BSTR strConfig,
-            /* [in] */ __RPC__in BSTR strStorageLocation,
-            /* [in] */ __RPC__in BSTR strPropertyName,
-            /* [in] */ LONG Flags,
-            /* [retval][out] */ __RPC__out VARIANT *pvarProperty) = 0;
+            /* [annotation][in] */ 
+            _In_  const BSTR strConfig,
+            /* [annotation][in] */ 
+            _In_  BSTR strStorageLocation,
+            /* [annotation][in] */ 
+            _In_  BSTR strPropertyName,
+            /* [annotation][in] */ 
+            _In_  LONG Flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pvarProperty) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetProperty( 
-            /* [in] */ __RPC__in const BSTR strConfig,
-            /* [in] */ __RPC__in BSTR strStorageLocation,
-            /* [in] */ __RPC__in BSTR strPropertyName,
-            /* [in] */ LONG Flags,
-            /* [in] */ __RPC__in const VARIANT *pvarProperty) = 0;
+            /* [annotation][in] */ 
+            _In_  const BSTR strConfig,
+            /* [annotation][in] */ 
+            _In_  BSTR strStorageLocation,
+            /* [annotation][in] */ 
+            _In_  BSTR strPropertyName,
+            /* [annotation][in] */ 
+            _In_  LONG Flags,
+            /* [annotation][in] */ 
+            _In_  const VARIANT *pvarProperty) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Configure( 
-            /* [in] */ __RPC__in const BSTR strConfig,
-            /* [in] */ __RPC__in BSTR strStorageLocation,
-            /* [in] */ LONG Flags) = 0;
+            /* [annotation][in] */ 
+            _In_  const BSTR strConfig,
+            /* [annotation][in] */ 
+            _In_  BSTR strStorageLocation,
+            /* [annotation][in] */ 
+            _In_  LONG Flags) = 0;
         
     };
     
@@ -138,7 +151,8 @@ EXTERN_C const IID IID_ICertManageModule;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertManageModule * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -153,23 +167,31 @@ EXTERN_C const IID IID_ICertManageModule;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertManageModule * This,
-            /* [out] */ __RPC__out UINT *pctinfo);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertManageModule * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertManageModule * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -194,27 +216,40 @@ EXTERN_C const IID IID_ICertManageModule;
         DECLSPEC_XFGVIRT(ICertManageModule, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in ICertManageModule * This,
-            /* [in] */ __RPC__in const BSTR strConfig,
-            /* [in] */ __RPC__in BSTR strStorageLocation,
-            /* [in] */ __RPC__in BSTR strPropertyName,
-            /* [in] */ LONG Flags,
-            /* [retval][out] */ __RPC__out VARIANT *pvarProperty);
+            /* [annotation][in] */ 
+            _In_  const BSTR strConfig,
+            /* [annotation][in] */ 
+            _In_  BSTR strStorageLocation,
+            /* [annotation][in] */ 
+            _In_  BSTR strPropertyName,
+            /* [annotation][in] */ 
+            _In_  LONG Flags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *pvarProperty);
         
         DECLSPEC_XFGVIRT(ICertManageModule, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in ICertManageModule * This,
-            /* [in] */ __RPC__in const BSTR strConfig,
-            /* [in] */ __RPC__in BSTR strStorageLocation,
-            /* [in] */ __RPC__in BSTR strPropertyName,
-            /* [in] */ LONG Flags,
-            /* [in] */ __RPC__in const VARIANT *pvarProperty);
+            /* [annotation][in] */ 
+            _In_  const BSTR strConfig,
+            /* [annotation][in] */ 
+            _In_  BSTR strStorageLocation,
+            /* [annotation][in] */ 
+            _In_  BSTR strPropertyName,
+            /* [annotation][in] */ 
+            _In_  LONG Flags,
+            /* [annotation][in] */ 
+            _In_  const VARIANT *pvarProperty);
         
         DECLSPEC_XFGVIRT(ICertManageModule, Configure)
         HRESULT ( STDMETHODCALLTYPE *Configure )( 
             __RPC__in ICertManageModule * This,
-            /* [in] */ __RPC__in const BSTR strConfig,
-            /* [in] */ __RPC__in BSTR strStorageLocation,
-            /* [in] */ LONG Flags);
+            /* [annotation][in] */ 
+            _In_  const BSTR strConfig,
+            /* [annotation][in] */ 
+            _In_  BSTR strStorageLocation,
+            /* [annotation][in] */ 
+            _In_  LONG Flags);
         
         END_INTERFACE
     } ICertManageModuleVtbl;

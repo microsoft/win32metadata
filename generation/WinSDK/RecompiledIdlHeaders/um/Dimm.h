@@ -343,17 +343,22 @@ EXTERN_C const IID IID_IEnumRegisterWordA;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [out] */ __RPC__deref_out_opt IEnumRegisterWordA **ppEnum) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumRegisterWordA **ppEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG ulCount,
-            /* [out] */ __RPC__out REGISTERWORDA *rgRegisterWord,
-            /* [out] */ __RPC__out ULONG *pcFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][out] */ 
+            _Out_  REGISTERWORDA *rgRegisterWord,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG ulCount) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount) = 0;
         
     };
     
@@ -367,7 +372,8 @@ EXTERN_C const IID IID_IEnumRegisterWordA;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumRegisterWordA * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -382,14 +388,18 @@ EXTERN_C const IID IID_IEnumRegisterWordA;
         DECLSPEC_XFGVIRT(IEnumRegisterWordA, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumRegisterWordA * This,
-            /* [out] */ __RPC__deref_out_opt IEnumRegisterWordA **ppEnum);
+            /* [annotation][out] */ 
+            _Out_  IEnumRegisterWordA **ppEnum);
         
         DECLSPEC_XFGVIRT(IEnumRegisterWordA, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumRegisterWordA * This,
-            /* [in] */ ULONG ulCount,
-            /* [out] */ __RPC__out REGISTERWORDA *rgRegisterWord,
-            /* [out] */ __RPC__out ULONG *pcFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][out] */ 
+            _Out_  REGISTERWORDA *rgRegisterWord,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcFetched);
         
         DECLSPEC_XFGVIRT(IEnumRegisterWordA, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -398,7 +408,8 @@ EXTERN_C const IID IID_IEnumRegisterWordA;
         DECLSPEC_XFGVIRT(IEnumRegisterWordA, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumRegisterWordA * This,
-            /* [in] */ ULONG ulCount);
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount);
         
         END_INTERFACE
     } IEnumRegisterWordAVtbl;
@@ -462,17 +473,22 @@ EXTERN_C const IID IID_IEnumRegisterWordW;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [out] */ __RPC__deref_out_opt IEnumRegisterWordW **ppEnum) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumRegisterWordW **ppEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG ulCount,
-            /* [out] */ __RPC__out REGISTERWORDW *rgRegisterWord,
-            /* [out] */ __RPC__out ULONG *pcFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][out] */ 
+            _Out_  REGISTERWORDW *rgRegisterWord,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG ulCount) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount) = 0;
         
     };
     
@@ -486,7 +502,8 @@ EXTERN_C const IID IID_IEnumRegisterWordW;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumRegisterWordW * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -501,14 +518,18 @@ EXTERN_C const IID IID_IEnumRegisterWordW;
         DECLSPEC_XFGVIRT(IEnumRegisterWordW, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumRegisterWordW * This,
-            /* [out] */ __RPC__deref_out_opt IEnumRegisterWordW **ppEnum);
+            /* [annotation][out] */ 
+            _Out_  IEnumRegisterWordW **ppEnum);
         
         DECLSPEC_XFGVIRT(IEnumRegisterWordW, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumRegisterWordW * This,
-            /* [in] */ ULONG ulCount,
-            /* [out] */ __RPC__out REGISTERWORDW *rgRegisterWord,
-            /* [out] */ __RPC__out ULONG *pcFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][out] */ 
+            _Out_  REGISTERWORDW *rgRegisterWord,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcFetched);
         
         DECLSPEC_XFGVIRT(IEnumRegisterWordW, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -517,7 +538,8 @@ EXTERN_C const IID IID_IEnumRegisterWordW;
         DECLSPEC_XFGVIRT(IEnumRegisterWordW, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumRegisterWordW * This,
-            /* [in] */ ULONG ulCount);
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount);
         
         END_INTERFACE
     } IEnumRegisterWordWVtbl;
@@ -581,17 +603,22 @@ EXTERN_C const IID IID_IEnumInputContext;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [out] */ __RPC__deref_out_opt IEnumInputContext **ppEnum) = 0;
+            /* [annotation][out] */ 
+            _Out_  IEnumInputContext **ppEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [in] */ ULONG ulCount,
-            /* [out] */ __RPC__out HIMC *rgInputContext,
-            /* [out] */ __RPC__out ULONG *pcFetched) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][out] */ 
+            _Out_  HIMC *rgInputContext,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [in] */ ULONG ulCount) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount) = 0;
         
     };
     
@@ -605,7 +632,8 @@ EXTERN_C const IID IID_IEnumInputContext;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumInputContext * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -620,14 +648,18 @@ EXTERN_C const IID IID_IEnumInputContext;
         DECLSPEC_XFGVIRT(IEnumInputContext, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumInputContext * This,
-            /* [out] */ __RPC__deref_out_opt IEnumInputContext **ppEnum);
+            /* [annotation][out] */ 
+            _Out_  IEnumInputContext **ppEnum);
         
         DECLSPEC_XFGVIRT(IEnumInputContext, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumInputContext * This,
-            /* [in] */ ULONG ulCount,
-            /* [out] */ __RPC__out HIMC *rgInputContext,
-            /* [out] */ __RPC__out ULONG *pcFetched);
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount,
+            /* [annotation][out] */ 
+            _Out_  HIMC *rgInputContext,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcFetched);
         
         DECLSPEC_XFGVIRT(IEnumInputContext, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -636,7 +668,8 @@ EXTERN_C const IID IID_IEnumInputContext;
         DECLSPEC_XFGVIRT(IEnumInputContext, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumInputContext * This,
-            /* [in] */ ULONG ulCount);
+            /* [annotation][in] */ 
+            _In_  ULONG ulCount);
         
         END_INTERFACE
     } IEnumInputContextVtbl;
@@ -700,13 +733,18 @@ EXTERN_C const IID IID_IActiveIMMRegistrar;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RegisterIME( 
-            /* [in] */ __RPC__in REFCLSID rclsid,
-            /* [in] */ LANGID lgid,
-            /* [in] */ __RPC__in LPCWSTR pszIconFile,
-            /* [in] */ __RPC__in LPCWSTR pszDesc) = 0;
+            /* [annotation][in] */ 
+            _In_  REFCLSID rclsid,
+            /* [annotation][in] */ 
+            _In_  LANGID lgid,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszIconFile,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszDesc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnregisterIME( 
-            /* [in] */ __RPC__in REFCLSID rclsid) = 0;
+            /* [annotation][in] */ 
+            _In_  REFCLSID rclsid) = 0;
         
     };
     
@@ -720,7 +758,8 @@ EXTERN_C const IID IID_IActiveIMMRegistrar;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveIMMRegistrar * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -735,15 +774,20 @@ EXTERN_C const IID IID_IActiveIMMRegistrar;
         DECLSPEC_XFGVIRT(IActiveIMMRegistrar, RegisterIME)
         HRESULT ( STDMETHODCALLTYPE *RegisterIME )( 
             __RPC__in IActiveIMMRegistrar * This,
-            /* [in] */ __RPC__in REFCLSID rclsid,
-            /* [in] */ LANGID lgid,
-            /* [in] */ __RPC__in LPCWSTR pszIconFile,
-            /* [in] */ __RPC__in LPCWSTR pszDesc);
+            /* [annotation][in] */ 
+            _In_  REFCLSID rclsid,
+            /* [annotation][in] */ 
+            _In_  LANGID lgid,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszIconFile,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszDesc);
         
         DECLSPEC_XFGVIRT(IActiveIMMRegistrar, UnregisterIME)
         HRESULT ( STDMETHODCALLTYPE *UnregisterIME )( 
             __RPC__in IActiveIMMRegistrar * This,
-            /* [in] */ __RPC__in REFCLSID rclsid);
+            /* [annotation][in] */ 
+            _In_  REFCLSID rclsid);
         
         END_INTERFACE
     } IActiveIMMRegistrarVtbl;
@@ -805,13 +849,16 @@ EXTERN_C const IID IID_IActiveIMMMessagePumpOwner;
         virtual HRESULT STDMETHODCALLTYPE End( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnTranslateMessage( 
-            /* [in] */ __RPC__in const MSG *pMsg) = 0;
+            /* [annotation][in] */ 
+            _In_  const MSG *pMsg) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Pause( 
-            /* [out] */ __RPC__out DWORD *pdwCookie) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Resume( 
-            /* [in] */ DWORD dwCookie) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwCookie) = 0;
         
     };
     
@@ -825,7 +872,8 @@ EXTERN_C const IID IID_IActiveIMMMessagePumpOwner;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveIMMMessagePumpOwner * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -848,17 +896,20 @@ EXTERN_C const IID IID_IActiveIMMMessagePumpOwner;
         DECLSPEC_XFGVIRT(IActiveIMMMessagePumpOwner, OnTranslateMessage)
         HRESULT ( STDMETHODCALLTYPE *OnTranslateMessage )( 
             __RPC__in IActiveIMMMessagePumpOwner * This,
-            /* [in] */ __RPC__in const MSG *pMsg);
+            /* [annotation][in] */ 
+            _In_  const MSG *pMsg);
         
         DECLSPEC_XFGVIRT(IActiveIMMMessagePumpOwner, Pause)
         HRESULT ( STDMETHODCALLTYPE *Pause )( 
             __RPC__in IActiveIMMMessagePumpOwner * This,
-            /* [out] */ __RPC__out DWORD *pdwCookie);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwCookie);
         
         DECLSPEC_XFGVIRT(IActiveIMMMessagePumpOwner, Resume)
         HRESULT ( STDMETHODCALLTYPE *Resume )( 
             __RPC__in IActiveIMMMessagePumpOwner * This,
-            /* [in] */ DWORD dwCookie);
+            /* [annotation][in] */ 
+            _In_  DWORD dwCookie);
         
         END_INTERFACE
     } IActiveIMMMessagePumpOwnerVtbl;
@@ -925,371 +976,602 @@ EXTERN_C const IID IID_IActiveIMMApp;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AssociateContext( 
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ HIMC hIME,
-            /* [out] */ __RPC__out HIMC *phPrev) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  HIMC hIME,
+            /* [annotation][out] */ 
+            _Out_  HIMC *phPrev) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ConfigureIMEA( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ DWORD dwMode,
-            /* [in] */ __RPC__in REGISTERWORDA *pData) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMode,
+            /* [annotation][in] */ 
+            _In_  REGISTERWORDA *pData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ConfigureIMEW( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ DWORD dwMode,
-            /* [in] */ __RPC__in REGISTERWORDW *pData) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMode,
+            /* [annotation][in] */ 
+            _In_  REGISTERWORDW *pData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateContext( 
-            /* [out] */ __RPC__out HIMC *phIMC) = 0;
+            /* [annotation][out] */ 
+            _Out_  HIMC *phIMC) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DestroyContext( 
-            /* [in] */ HIMC hIME) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIME) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumRegisterWordA( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPSTR szRegister,
-            /* [in] */ __RPC__in LPVOID pData,
-            /* [out] */ __RPC__deref_out_opt IEnumRegisterWordA **pEnum) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPSTR szRegister,
+            /* [annotation][in] */ 
+            _In_  LPVOID pData,
+            /* [annotation][out] */ 
+            _Out_  IEnumRegisterWordA **pEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumRegisterWordW( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPWSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPWSTR szRegister,
-            /* [in] */ __RPC__in LPVOID pData,
-            /* [out] */ __RPC__deref_out_opt IEnumRegisterWordW **pEnum) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szRegister,
+            /* [annotation][in] */ 
+            _In_  LPVOID pData,
+            /* [annotation][out] */ 
+            _Out_  IEnumRegisterWordW **pEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EscapeA( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ UINT uEscape,
-            /* [out][in] */ __RPC__inout LPVOID pData,
-            /* [out] */ __RPC__out LRESULT *plResult) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  UINT uEscape,
+            /* [annotation][out][in] */ 
+            _Inout_  LPVOID pData,
+            /* [annotation][out] */ 
+            _Out_  LRESULT *plResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EscapeW( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ UINT uEscape,
-            /* [out][in] */ __RPC__inout LPVOID pData,
-            /* [out] */ __RPC__out LRESULT *plResult) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  UINT uEscape,
+            /* [annotation][out][in] */ 
+            _Inout_  LPVOID pData,
+            /* [annotation][out] */ 
+            _Out_  LRESULT *plResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCandidateListA( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out CANDIDATELIST *pCandList,
-            /* [out] */ __RPC__out UINT *puCopied) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATELIST *pCandList,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCandidateListW( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out CANDIDATELIST *pCandList,
-            /* [out] */ __RPC__out UINT *puCopied) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATELIST *pCandList,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCandidateListCountA( 
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out DWORD *pdwListSize,
-            /* [out] */ __RPC__out DWORD *pdwBufLen) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwListSize,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwBufLen) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCandidateListCountW( 
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out DWORD *pdwListSize,
-            /* [out] */ __RPC__out DWORD *pdwBufLen) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwListSize,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwBufLen) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCandidateWindow( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [out] */ __RPC__out CANDIDATEFORM *pCandidate) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATEFORM *pCandidate) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCompositionFontA( 
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out LOGFONTA *plf) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  LOGFONTA *plf) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCompositionFontW( 
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out LOGFONTW *plf) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  LOGFONTW *plf) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCompositionStringA( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwBufLen,
-            /* [out] */ __RPC__out LONG *plCopied,
-            /* [out] */ __RPC__out LPVOID pBuf) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwBufLen,
+            /* [annotation][out] */ 
+            _Out_  LONG *plCopied,
+            /* [annotation][out] */ 
+            _Out_  LPVOID pBuf) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCompositionStringW( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwBufLen,
-            /* [out] */ __RPC__out LONG *plCopied,
-            /* [out] */ __RPC__out LPVOID pBuf) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwBufLen,
+            /* [annotation][out] */ 
+            _Out_  LONG *plCopied,
+            /* [annotation][out] */ 
+            _Out_  LPVOID pBuf) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCompositionWindow( 
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out COMPOSITIONFORM *pCompForm) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  COMPOSITIONFORM *pCompForm) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetContext( 
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [out] */ __RPC__out HIMC *phIMC) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][out] */ 
+            _Out_  HIMC *phIMC) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetConversionListA( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in LPSTR pSrc,
-            /* [in] */ UINT uBufLen,
-            /* [in] */ UINT uFlag,
-            /* [out] */ __RPC__out CANDIDATELIST *pDst,
-            /* [out] */ __RPC__out UINT *puCopied) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  LPSTR pSrc,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][in] */ 
+            _In_  UINT uFlag,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATELIST *pDst,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetConversionListW( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in LPWSTR pSrc,
-            /* [in] */ UINT uBufLen,
-            /* [in] */ UINT uFlag,
-            /* [out] */ __RPC__out CANDIDATELIST *pDst,
-            /* [out] */ __RPC__out UINT *puCopied) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  LPWSTR pSrc,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][in] */ 
+            _In_  UINT uFlag,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATELIST *pDst,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetConversionStatus( 
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out DWORD *pfdwConversion,
-            /* [out] */ __RPC__out DWORD *pfdwSentence) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pfdwConversion,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pfdwSentence) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDefaultIMEWnd( 
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [out] */ __RPC__deref_out_opt HWND *phDefWnd) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][out] */ 
+            _Out_  HWND *phDefWnd) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDescriptionA( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out LPSTR szDescription,
-            /* [out] */ __RPC__out UINT *puCopied) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPSTR szDescription,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDescriptionW( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out LPWSTR szDescription,
-            /* [out] */ __RPC__out UINT *puCopied) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR szDescription,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGuideLineA( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwBufLen,
-            /* [out] */ __RPC__out LPSTR pBuf,
-            /* [out] */ __RPC__out DWORD *pdwResult) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPSTR pBuf,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGuideLineW( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwBufLen,
-            /* [out] */ __RPC__out LPWSTR pBuf,
-            /* [out] */ __RPC__out DWORD *pdwResult) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR pBuf,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIMEFileNameA( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out LPSTR szFileName,
-            /* [out] */ __RPC__out UINT *puCopied) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPSTR szFileName,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIMEFileNameW( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out LPWSTR szFileName,
-            /* [out] */ __RPC__out UINT *puCopied) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR szFileName,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOpenStatus( 
-            /* [in] */ HIMC hIMC) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProperty( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ DWORD fdwIndex,
-            /* [out] */ __RPC__out DWORD *pdwProperty) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  DWORD fdwIndex,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwProperty) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRegisterWordStyleA( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT nItem,
-            /* [out] */ __RPC__out STYLEBUFA *pStyleBuf,
-            /* [out] */ __RPC__out UINT *puCopied) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT nItem,
+            /* [annotation][out] */ 
+            _Out_  STYLEBUFA *pStyleBuf,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRegisterWordStyleW( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT nItem,
-            /* [out] */ __RPC__out STYLEBUFW *pStyleBuf,
-            /* [out] */ __RPC__out UINT *puCopied) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT nItem,
+            /* [annotation][out] */ 
+            _Out_  STYLEBUFW *pStyleBuf,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStatusWindowPos( 
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out POINT *pptPos) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  POINT *pptPos) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVirtualKey( 
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [out] */ __RPC__out UINT *puVirtualKey) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][out] */ 
+            _Out_  UINT *puVirtualKey) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InstallIMEA( 
-            /* [in] */ __RPC__in LPSTR szIMEFileName,
-            /* [in] */ __RPC__in LPSTR szLayoutText,
-            /* [out] */ __RPC__deref_out_opt HKL *phKL) = 0;
+            /* [annotation][in] */ 
+            _In_  LPSTR szIMEFileName,
+            /* [annotation][in] */ 
+            _In_  LPSTR szLayoutText,
+            /* [annotation][out] */ 
+            _Out_  HKL *phKL) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InstallIMEW( 
-            /* [in] */ __RPC__in LPWSTR szIMEFileName,
-            /* [in] */ __RPC__in LPWSTR szLayoutText,
-            /* [out] */ __RPC__deref_out_opt HKL *phKL) = 0;
+            /* [annotation][in] */ 
+            _In_  LPWSTR szIMEFileName,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szLayoutText,
+            /* [annotation][out] */ 
+            _Out_  HKL *phKL) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsIME( 
-            /* [in] */ __RPC__in HKL hKL) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsUIMessageA( 
-            /* [in] */ __RPC__in HWND hWndIME,
-            /* [in] */ UINT msg,
-            /* [in] */ WPARAM wParam,
-            /* [in] */ LPARAM lParam) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hWndIME,
+            /* [annotation][in] */ 
+            _In_  UINT msg,
+            /* [annotation][in] */ 
+            _In_  WPARAM wParam,
+            /* [annotation][in] */ 
+            _In_  LPARAM lParam) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsUIMessageW( 
-            /* [in] */ __RPC__in HWND hWndIME,
-            /* [in] */ UINT msg,
-            /* [in] */ WPARAM wParam,
-            /* [in] */ LPARAM lParam) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hWndIME,
+            /* [annotation][in] */ 
+            _In_  UINT msg,
+            /* [annotation][in] */ 
+            _In_  WPARAM wParam,
+            /* [annotation][in] */ 
+            _In_  LPARAM lParam) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NotifyIME( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwAction,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwValue) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterWordA( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPSTR szRegister) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPSTR szRegister) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterWordW( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPWSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPWSTR szRegister) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szRegister) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReleaseContext( 
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ HIMC hIMC) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCandidateWindow( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in CANDIDATEFORM *pCandidate) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  CANDIDATEFORM *pCandidate) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCompositionFontA( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in LOGFONTA *plf) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  LOGFONTA *plf) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCompositionFontW( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in LOGFONTW *plf) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  LOGFONTW *plf) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCompositionStringA( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ __RPC__in LPVOID pComp,
-            /* [in] */ DWORD dwCompLen,
-            /* [in] */ __RPC__in LPVOID pRead,
-            /* [in] */ DWORD dwReadLen) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  LPVOID pComp,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCompLen,
+            /* [annotation][in] */ 
+            _In_  LPVOID pRead,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReadLen) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCompositionStringW( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ __RPC__in LPVOID pComp,
-            /* [in] */ DWORD dwCompLen,
-            /* [in] */ __RPC__in LPVOID pRead,
-            /* [in] */ DWORD dwReadLen) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  LPVOID pComp,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCompLen,
+            /* [annotation][in] */ 
+            _In_  LPVOID pRead,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReadLen) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCompositionWindow( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in COMPOSITIONFORM *pCompForm) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  COMPOSITIONFORM *pCompForm) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetConversionStatus( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD fdwConversion,
-            /* [in] */ DWORD fdwSentence) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD fdwConversion,
+            /* [annotation][in] */ 
+            _In_  DWORD fdwSentence) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetOpenStatus( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ BOOL fOpen) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  BOOL fOpen) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStatusWindowPos( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in POINT *pptPos) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  POINT *pptPos) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SimulateHotKey( 
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ DWORD dwHotKeyID) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwHotKeyID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnregisterWordA( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPSTR szUnregister) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPSTR szUnregister) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnregisterWordW( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPWSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPWSTR szUnregister) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szUnregister) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Activate( 
-            /* [in] */ BOOL fRestoreLayout) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL fRestoreLayout) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Deactivate( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnDefWindowProc( 
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ UINT Msg,
-            /* [in] */ WPARAM wParam,
-            /* [in] */ LPARAM lParam,
-            /* [out] */ __RPC__out LRESULT *plResult) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  UINT Msg,
+            /* [annotation][in] */ 
+            _In_  WPARAM wParam,
+            /* [annotation][in] */ 
+            _In_  LPARAM lParam,
+            /* [annotation][out] */ 
+            _Out_  LRESULT *plResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FilterClientWindows( 
-            /* [in] */ __RPC__in ATOM *aaClassList,
-            /* [in] */ UINT uSize) = 0;
+            /* [annotation][in] */ 
+            _In_  ATOM *aaClassList,
+            /* [annotation][in] */ 
+            _In_  UINT uSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCodePageA( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [out] */ __RPC__out UINT *uCodePage) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][out] */ 
+            _Out_  UINT *uCodePage) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLangId( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [out] */ __RPC__out LANGID *plid) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][out] */ 
+            _Out_  LANGID *plid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AssociateContextEx( 
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DisableIME( 
-            /* [in] */ DWORD idThread) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD idThread) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetImeMenuItemsA( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD dwType,
-            /* [in] */ __RPC__in IMEMENUITEMINFOA *pImeParentMenu,
-            /* [out] */ __RPC__out IMEMENUITEMINFOA *pImeMenu,
-            /* [in] */ DWORD dwSize,
-            /* [out] */ __RPC__out DWORD *pdwResult) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwType,
+            /* [annotation][in] */ 
+            _In_  IMEMENUITEMINFOA *pImeParentMenu,
+            /* [annotation][out] */ 
+            _Out_  IMEMENUITEMINFOA *pImeMenu,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetImeMenuItemsW( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD dwType,
-            /* [in] */ __RPC__in IMEMENUITEMINFOW *pImeParentMenu,
-            /* [out] */ __RPC__out IMEMENUITEMINFOW *pImeMenu,
-            /* [in] */ DWORD dwSize,
-            /* [out] */ __RPC__out DWORD *pdwResult) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwType,
+            /* [annotation][in] */ 
+            _In_  IMEMENUITEMINFOW *pImeParentMenu,
+            /* [annotation][out] */ 
+            _Out_  IMEMENUITEMINFOW *pImeMenu,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumInputContext( 
-            /* [in] */ DWORD idThread,
-            /* [out] */ __RPC__deref_out_opt IEnumInputContext **ppEnum) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD idThread,
+            /* [annotation][out] */ 
+            _Out_  IEnumInputContext **ppEnum) = 0;
         
     };
     
@@ -1303,7 +1585,8 @@ EXTERN_C const IID IID_IActiveIMMApp;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1318,434 +1601,634 @@ EXTERN_C const IID IID_IActiveIMMApp;
         DECLSPEC_XFGVIRT(IActiveIMMApp, AssociateContext)
         HRESULT ( STDMETHODCALLTYPE *AssociateContext )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ HIMC hIME,
-            /* [out] */ __RPC__out HIMC *phPrev);
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  HIMC hIME,
+            /* [annotation][out] */ 
+            _Out_  HIMC *phPrev);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, ConfigureIMEA)
         HRESULT ( STDMETHODCALLTYPE *ConfigureIMEA )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ DWORD dwMode,
-            /* [in] */ __RPC__in REGISTERWORDA *pData);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMode,
+            /* [annotation][in] */ 
+            _In_  REGISTERWORDA *pData);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, ConfigureIMEW)
         HRESULT ( STDMETHODCALLTYPE *ConfigureIMEW )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ DWORD dwMode,
-            /* [in] */ __RPC__in REGISTERWORDW *pData);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMode,
+            /* [annotation][in] */ 
+            _In_  REGISTERWORDW *pData);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, CreateContext)
         HRESULT ( STDMETHODCALLTYPE *CreateContext )( 
             __RPC__in IActiveIMMApp * This,
-            /* [out] */ __RPC__out HIMC *phIMC);
+            /* [annotation][out] */ 
+            _Out_  HIMC *phIMC);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, DestroyContext)
         HRESULT ( STDMETHODCALLTYPE *DestroyContext )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIME);
+            /* [annotation][in] */ 
+            _In_  HIMC hIME);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, EnumRegisterWordA)
         HRESULT ( STDMETHODCALLTYPE *EnumRegisterWordA )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPSTR szRegister,
-            /* [in] */ __RPC__in LPVOID pData,
-            /* [out] */ __RPC__deref_out_opt IEnumRegisterWordA **pEnum);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPSTR szRegister,
+            /* [annotation][in] */ 
+            _In_  LPVOID pData,
+            /* [annotation][out] */ 
+            _Out_  IEnumRegisterWordA **pEnum);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, EnumRegisterWordW)
         HRESULT ( STDMETHODCALLTYPE *EnumRegisterWordW )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPWSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPWSTR szRegister,
-            /* [in] */ __RPC__in LPVOID pData,
-            /* [out] */ __RPC__deref_out_opt IEnumRegisterWordW **pEnum);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szRegister,
+            /* [annotation][in] */ 
+            _In_  LPVOID pData,
+            /* [annotation][out] */ 
+            _Out_  IEnumRegisterWordW **pEnum);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, EscapeA)
         HRESULT ( STDMETHODCALLTYPE *EscapeA )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ UINT uEscape,
-            /* [out][in] */ __RPC__inout LPVOID pData,
-            /* [out] */ __RPC__out LRESULT *plResult);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  UINT uEscape,
+            /* [annotation][out][in] */ 
+            _Inout_  LPVOID pData,
+            /* [annotation][out] */ 
+            _Out_  LRESULT *plResult);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, EscapeW)
         HRESULT ( STDMETHODCALLTYPE *EscapeW )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ UINT uEscape,
-            /* [out][in] */ __RPC__inout LPVOID pData,
-            /* [out] */ __RPC__out LRESULT *plResult);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  UINT uEscape,
+            /* [annotation][out][in] */ 
+            _Inout_  LPVOID pData,
+            /* [annotation][out] */ 
+            _Out_  LRESULT *plResult);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetCandidateListA)
         HRESULT ( STDMETHODCALLTYPE *GetCandidateListA )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out CANDIDATELIST *pCandList,
-            /* [out] */ __RPC__out UINT *puCopied);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATELIST *pCandList,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetCandidateListW)
         HRESULT ( STDMETHODCALLTYPE *GetCandidateListW )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out CANDIDATELIST *pCandList,
-            /* [out] */ __RPC__out UINT *puCopied);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATELIST *pCandList,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetCandidateListCountA)
         HRESULT ( STDMETHODCALLTYPE *GetCandidateListCountA )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out DWORD *pdwListSize,
-            /* [out] */ __RPC__out DWORD *pdwBufLen);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwListSize,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwBufLen);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetCandidateListCountW)
         HRESULT ( STDMETHODCALLTYPE *GetCandidateListCountW )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out DWORD *pdwListSize,
-            /* [out] */ __RPC__out DWORD *pdwBufLen);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwListSize,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwBufLen);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetCandidateWindow)
         HRESULT ( STDMETHODCALLTYPE *GetCandidateWindow )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [out] */ __RPC__out CANDIDATEFORM *pCandidate);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATEFORM *pCandidate);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetCompositionFontA)
         HRESULT ( STDMETHODCALLTYPE *GetCompositionFontA )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out LOGFONTA *plf);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  LOGFONTA *plf);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetCompositionFontW)
         HRESULT ( STDMETHODCALLTYPE *GetCompositionFontW )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out LOGFONTW *plf);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  LOGFONTW *plf);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetCompositionStringA)
         HRESULT ( STDMETHODCALLTYPE *GetCompositionStringA )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwBufLen,
-            /* [out] */ __RPC__out LONG *plCopied,
-            /* [out] */ __RPC__out LPVOID pBuf);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwBufLen,
+            /* [annotation][out] */ 
+            _Out_  LONG *plCopied,
+            /* [annotation][out] */ 
+            _Out_  LPVOID pBuf);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetCompositionStringW)
         HRESULT ( STDMETHODCALLTYPE *GetCompositionStringW )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwBufLen,
-            /* [out] */ __RPC__out LONG *plCopied,
-            /* [out] */ __RPC__out LPVOID pBuf);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwBufLen,
+            /* [annotation][out] */ 
+            _Out_  LONG *plCopied,
+            /* [annotation][out] */ 
+            _Out_  LPVOID pBuf);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetCompositionWindow)
         HRESULT ( STDMETHODCALLTYPE *GetCompositionWindow )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out COMPOSITIONFORM *pCompForm);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  COMPOSITIONFORM *pCompForm);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetContext)
         HRESULT ( STDMETHODCALLTYPE *GetContext )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [out] */ __RPC__out HIMC *phIMC);
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][out] */ 
+            _Out_  HIMC *phIMC);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetConversionListA)
         HRESULT ( STDMETHODCALLTYPE *GetConversionListA )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in LPSTR pSrc,
-            /* [in] */ UINT uBufLen,
-            /* [in] */ UINT uFlag,
-            /* [out] */ __RPC__out CANDIDATELIST *pDst,
-            /* [out] */ __RPC__out UINT *puCopied);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  LPSTR pSrc,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][in] */ 
+            _In_  UINT uFlag,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATELIST *pDst,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetConversionListW)
         HRESULT ( STDMETHODCALLTYPE *GetConversionListW )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in LPWSTR pSrc,
-            /* [in] */ UINT uBufLen,
-            /* [in] */ UINT uFlag,
-            /* [out] */ __RPC__out CANDIDATELIST *pDst,
-            /* [out] */ __RPC__out UINT *puCopied);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  LPWSTR pSrc,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][in] */ 
+            _In_  UINT uFlag,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATELIST *pDst,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetConversionStatus)
         HRESULT ( STDMETHODCALLTYPE *GetConversionStatus )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out DWORD *pfdwConversion,
-            /* [out] */ __RPC__out DWORD *pfdwSentence);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pfdwConversion,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pfdwSentence);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetDefaultIMEWnd)
         HRESULT ( STDMETHODCALLTYPE *GetDefaultIMEWnd )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [out] */ __RPC__deref_out_opt HWND *phDefWnd);
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][out] */ 
+            _Out_  HWND *phDefWnd);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetDescriptionA)
         HRESULT ( STDMETHODCALLTYPE *GetDescriptionA )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out LPSTR szDescription,
-            /* [out] */ __RPC__out UINT *puCopied);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPSTR szDescription,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetDescriptionW)
         HRESULT ( STDMETHODCALLTYPE *GetDescriptionW )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out LPWSTR szDescription,
-            /* [out] */ __RPC__out UINT *puCopied);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR szDescription,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetGuideLineA)
         HRESULT ( STDMETHODCALLTYPE *GetGuideLineA )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwBufLen,
-            /* [out] */ __RPC__out LPSTR pBuf,
-            /* [out] */ __RPC__out DWORD *pdwResult);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPSTR pBuf,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetGuideLineW)
         HRESULT ( STDMETHODCALLTYPE *GetGuideLineW )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwBufLen,
-            /* [out] */ __RPC__out LPWSTR pBuf,
-            /* [out] */ __RPC__out DWORD *pdwResult);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR pBuf,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetIMEFileNameA)
         HRESULT ( STDMETHODCALLTYPE *GetIMEFileNameA )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out LPSTR szFileName,
-            /* [out] */ __RPC__out UINT *puCopied);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPSTR szFileName,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetIMEFileNameW)
         HRESULT ( STDMETHODCALLTYPE *GetIMEFileNameW )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out LPWSTR szFileName,
-            /* [out] */ __RPC__out UINT *puCopied);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR szFileName,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetOpenStatus)
         HRESULT ( STDMETHODCALLTYPE *GetOpenStatus )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ DWORD fdwIndex,
-            /* [out] */ __RPC__out DWORD *pdwProperty);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  DWORD fdwIndex,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwProperty);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetRegisterWordStyleA)
         HRESULT ( STDMETHODCALLTYPE *GetRegisterWordStyleA )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT nItem,
-            /* [out] */ __RPC__out STYLEBUFA *pStyleBuf,
-            /* [out] */ __RPC__out UINT *puCopied);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT nItem,
+            /* [annotation][out] */ 
+            _Out_  STYLEBUFA *pStyleBuf,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetRegisterWordStyleW)
         HRESULT ( STDMETHODCALLTYPE *GetRegisterWordStyleW )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT nItem,
-            /* [out] */ __RPC__out STYLEBUFW *pStyleBuf,
-            /* [out] */ __RPC__out UINT *puCopied);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT nItem,
+            /* [annotation][out] */ 
+            _Out_  STYLEBUFW *pStyleBuf,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetStatusWindowPos)
         HRESULT ( STDMETHODCALLTYPE *GetStatusWindowPos )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out POINT *pptPos);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  POINT *pptPos);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetVirtualKey)
         HRESULT ( STDMETHODCALLTYPE *GetVirtualKey )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [out] */ __RPC__out UINT *puVirtualKey);
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][out] */ 
+            _Out_  UINT *puVirtualKey);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, InstallIMEA)
         HRESULT ( STDMETHODCALLTYPE *InstallIMEA )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in LPSTR szIMEFileName,
-            /* [in] */ __RPC__in LPSTR szLayoutText,
-            /* [out] */ __RPC__deref_out_opt HKL *phKL);
+            /* [annotation][in] */ 
+            _In_  LPSTR szIMEFileName,
+            /* [annotation][in] */ 
+            _In_  LPSTR szLayoutText,
+            /* [annotation][out] */ 
+            _Out_  HKL *phKL);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, InstallIMEW)
         HRESULT ( STDMETHODCALLTYPE *InstallIMEW )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in LPWSTR szIMEFileName,
-            /* [in] */ __RPC__in LPWSTR szLayoutText,
-            /* [out] */ __RPC__deref_out_opt HKL *phKL);
+            /* [annotation][in] */ 
+            _In_  LPWSTR szIMEFileName,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szLayoutText,
+            /* [annotation][out] */ 
+            _Out_  HKL *phKL);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, IsIME)
         HRESULT ( STDMETHODCALLTYPE *IsIME )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HKL hKL);
+            /* [annotation][in] */ 
+            _In_  HKL hKL);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, IsUIMessageA)
         HRESULT ( STDMETHODCALLTYPE *IsUIMessageA )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HWND hWndIME,
-            /* [in] */ UINT msg,
-            /* [in] */ WPARAM wParam,
-            /* [in] */ LPARAM lParam);
+            /* [annotation][in] */ 
+            _In_  HWND hWndIME,
+            /* [annotation][in] */ 
+            _In_  UINT msg,
+            /* [annotation][in] */ 
+            _In_  WPARAM wParam,
+            /* [annotation][in] */ 
+            _In_  LPARAM lParam);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, IsUIMessageW)
         HRESULT ( STDMETHODCALLTYPE *IsUIMessageW )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HWND hWndIME,
-            /* [in] */ UINT msg,
-            /* [in] */ WPARAM wParam,
-            /* [in] */ LPARAM lParam);
+            /* [annotation][in] */ 
+            _In_  HWND hWndIME,
+            /* [annotation][in] */ 
+            _In_  UINT msg,
+            /* [annotation][in] */ 
+            _In_  WPARAM wParam,
+            /* [annotation][in] */ 
+            _In_  LPARAM lParam);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, NotifyIME)
         HRESULT ( STDMETHODCALLTYPE *NotifyIME )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwAction,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwValue);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwValue);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, RegisterWordA)
         HRESULT ( STDMETHODCALLTYPE *RegisterWordA )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPSTR szRegister);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPSTR szRegister);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, RegisterWordW)
         HRESULT ( STDMETHODCALLTYPE *RegisterWordW )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPWSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPWSTR szRegister);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szRegister);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, ReleaseContext)
         HRESULT ( STDMETHODCALLTYPE *ReleaseContext )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ HIMC hIMC);
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, SetCandidateWindow)
         HRESULT ( STDMETHODCALLTYPE *SetCandidateWindow )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in CANDIDATEFORM *pCandidate);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  CANDIDATEFORM *pCandidate);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, SetCompositionFontA)
         HRESULT ( STDMETHODCALLTYPE *SetCompositionFontA )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in LOGFONTA *plf);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  LOGFONTA *plf);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, SetCompositionFontW)
         HRESULT ( STDMETHODCALLTYPE *SetCompositionFontW )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in LOGFONTW *plf);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  LOGFONTW *plf);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, SetCompositionStringA)
         HRESULT ( STDMETHODCALLTYPE *SetCompositionStringA )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ __RPC__in LPVOID pComp,
-            /* [in] */ DWORD dwCompLen,
-            /* [in] */ __RPC__in LPVOID pRead,
-            /* [in] */ DWORD dwReadLen);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  LPVOID pComp,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCompLen,
+            /* [annotation][in] */ 
+            _In_  LPVOID pRead,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReadLen);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, SetCompositionStringW)
         HRESULT ( STDMETHODCALLTYPE *SetCompositionStringW )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ __RPC__in LPVOID pComp,
-            /* [in] */ DWORD dwCompLen,
-            /* [in] */ __RPC__in LPVOID pRead,
-            /* [in] */ DWORD dwReadLen);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  LPVOID pComp,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCompLen,
+            /* [annotation][in] */ 
+            _In_  LPVOID pRead,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReadLen);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, SetCompositionWindow)
         HRESULT ( STDMETHODCALLTYPE *SetCompositionWindow )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in COMPOSITIONFORM *pCompForm);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  COMPOSITIONFORM *pCompForm);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, SetConversionStatus)
         HRESULT ( STDMETHODCALLTYPE *SetConversionStatus )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD fdwConversion,
-            /* [in] */ DWORD fdwSentence);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD fdwConversion,
+            /* [annotation][in] */ 
+            _In_  DWORD fdwSentence);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, SetOpenStatus)
         HRESULT ( STDMETHODCALLTYPE *SetOpenStatus )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ BOOL fOpen);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  BOOL fOpen);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, SetStatusWindowPos)
         HRESULT ( STDMETHODCALLTYPE *SetStatusWindowPos )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in POINT *pptPos);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  POINT *pptPos);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, SimulateHotKey)
         HRESULT ( STDMETHODCALLTYPE *SimulateHotKey )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ DWORD dwHotKeyID);
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwHotKeyID);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, UnregisterWordA)
         HRESULT ( STDMETHODCALLTYPE *UnregisterWordA )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPSTR szUnregister);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPSTR szUnregister);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, UnregisterWordW)
         HRESULT ( STDMETHODCALLTYPE *UnregisterWordW )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPWSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPWSTR szUnregister);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szUnregister);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, Activate)
         HRESULT ( STDMETHODCALLTYPE *Activate )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ BOOL fRestoreLayout);
+            /* [annotation][in] */ 
+            _In_  BOOL fRestoreLayout);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, Deactivate)
         HRESULT ( STDMETHODCALLTYPE *Deactivate )( 
@@ -1754,69 +2237,100 @@ EXTERN_C const IID IID_IActiveIMMApp;
         DECLSPEC_XFGVIRT(IActiveIMMApp, OnDefWindowProc)
         HRESULT ( STDMETHODCALLTYPE *OnDefWindowProc )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ UINT Msg,
-            /* [in] */ WPARAM wParam,
-            /* [in] */ LPARAM lParam,
-            /* [out] */ __RPC__out LRESULT *plResult);
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  UINT Msg,
+            /* [annotation][in] */ 
+            _In_  WPARAM wParam,
+            /* [annotation][in] */ 
+            _In_  LPARAM lParam,
+            /* [annotation][out] */ 
+            _Out_  LRESULT *plResult);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, FilterClientWindows)
         HRESULT ( STDMETHODCALLTYPE *FilterClientWindows )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in ATOM *aaClassList,
-            /* [in] */ UINT uSize);
+            /* [annotation][in] */ 
+            _In_  ATOM *aaClassList,
+            /* [annotation][in] */ 
+            _In_  UINT uSize);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetCodePageA)
         HRESULT ( STDMETHODCALLTYPE *GetCodePageA )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [out] */ __RPC__out UINT *uCodePage);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][out] */ 
+            _Out_  UINT *uCodePage);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetLangId)
         HRESULT ( STDMETHODCALLTYPE *GetLangId )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [out] */ __RPC__out LANGID *plid);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][out] */ 
+            _Out_  LANGID *plid);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, AssociateContextEx)
         HRESULT ( STDMETHODCALLTYPE *AssociateContextEx )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, DisableIME)
         HRESULT ( STDMETHODCALLTYPE *DisableIME )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ DWORD idThread);
+            /* [annotation][in] */ 
+            _In_  DWORD idThread);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetImeMenuItemsA)
         HRESULT ( STDMETHODCALLTYPE *GetImeMenuItemsA )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD dwType,
-            /* [in] */ __RPC__in IMEMENUITEMINFOA *pImeParentMenu,
-            /* [out] */ __RPC__out IMEMENUITEMINFOA *pImeMenu,
-            /* [in] */ DWORD dwSize,
-            /* [out] */ __RPC__out DWORD *pdwResult);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwType,
+            /* [annotation][in] */ 
+            _In_  IMEMENUITEMINFOA *pImeParentMenu,
+            /* [annotation][out] */ 
+            _Out_  IMEMENUITEMINFOA *pImeMenu,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, GetImeMenuItemsW)
         HRESULT ( STDMETHODCALLTYPE *GetImeMenuItemsW )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD dwType,
-            /* [in] */ __RPC__in IMEMENUITEMINFOW *pImeParentMenu,
-            /* [out] */ __RPC__out IMEMENUITEMINFOW *pImeMenu,
-            /* [in] */ DWORD dwSize,
-            /* [out] */ __RPC__out DWORD *pdwResult);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwType,
+            /* [annotation][in] */ 
+            _In_  IMEMENUITEMINFOW *pImeParentMenu,
+            /* [annotation][out] */ 
+            _Out_  IMEMENUITEMINFOW *pImeMenu,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IActiveIMMApp, EnumInputContext)
         HRESULT ( STDMETHODCALLTYPE *EnumInputContext )( 
             __RPC__in IActiveIMMApp * This,
-            /* [in] */ DWORD idThread,
-            /* [out] */ __RPC__deref_out_opt IEnumInputContext **ppEnum);
+            /* [annotation][in] */ 
+            _In_  DWORD idThread,
+            /* [annotation][out] */ 
+            _Out_  IEnumInputContext **ppEnum);
         
         END_INTERFACE
     } IActiveIMMAppVtbl;
@@ -2072,459 +2586,740 @@ EXTERN_C const IID IID_IActiveIMMIME;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AssociateContext( 
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ HIMC hIME,
-            /* [out] */ __RPC__out HIMC *phPrev) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  HIMC hIME,
+            /* [annotation][out] */ 
+            _Out_  HIMC *phPrev) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ConfigureIMEA( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ DWORD dwMode,
-            /* [in] */ __RPC__in REGISTERWORDA *pData) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMode,
+            /* [annotation][in] */ 
+            _In_  REGISTERWORDA *pData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ConfigureIMEW( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ DWORD dwMode,
-            /* [in] */ __RPC__in REGISTERWORDW *pData) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMode,
+            /* [annotation][in] */ 
+            _In_  REGISTERWORDW *pData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateContext( 
-            /* [out] */ __RPC__out HIMC *phIMC) = 0;
+            /* [annotation][out] */ 
+            _Out_  HIMC *phIMC) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DestroyContext( 
-            /* [in] */ HIMC hIME) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIME) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumRegisterWordA( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPSTR szRegister,
-            /* [in] */ __RPC__in LPVOID pData,
-            /* [out] */ __RPC__deref_out_opt IEnumRegisterWordA **pEnum) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPSTR szRegister,
+            /* [annotation][in] */ 
+            _In_  LPVOID pData,
+            /* [annotation][out] */ 
+            _Out_  IEnumRegisterWordA **pEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumRegisterWordW( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPWSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPWSTR szRegister,
-            /* [in] */ __RPC__in LPVOID pData,
-            /* [out] */ __RPC__deref_out_opt IEnumRegisterWordW **pEnum) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szRegister,
+            /* [annotation][in] */ 
+            _In_  LPVOID pData,
+            /* [annotation][out] */ 
+            _Out_  IEnumRegisterWordW **pEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EscapeA( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ UINT uEscape,
-            /* [out][in] */ __RPC__inout LPVOID pData,
-            /* [out] */ __RPC__out LRESULT *plResult) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  UINT uEscape,
+            /* [annotation][out][in] */ 
+            _Inout_  LPVOID pData,
+            /* [annotation][out] */ 
+            _Out_  LRESULT *plResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EscapeW( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ UINT uEscape,
-            /* [out][in] */ __RPC__inout LPVOID pData,
-            /* [out] */ __RPC__out LRESULT *plResult) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  UINT uEscape,
+            /* [annotation][out][in] */ 
+            _Inout_  LPVOID pData,
+            /* [annotation][out] */ 
+            _Out_  LRESULT *plResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCandidateListA( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out CANDIDATELIST *pCandList,
-            /* [out] */ __RPC__out UINT *puCopied) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATELIST *pCandList,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCandidateListW( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out CANDIDATELIST *pCandList,
-            /* [out] */ __RPC__out UINT *puCopied) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATELIST *pCandList,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCandidateListCountA( 
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out DWORD *pdwListSize,
-            /* [out] */ __RPC__out DWORD *pdwBufLen) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwListSize,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwBufLen) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCandidateListCountW( 
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out DWORD *pdwListSize,
-            /* [out] */ __RPC__out DWORD *pdwBufLen) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwListSize,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwBufLen) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCandidateWindow( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [out] */ __RPC__out CANDIDATEFORM *pCandidate) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATEFORM *pCandidate) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCompositionFontA( 
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out LOGFONTA *plf) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  LOGFONTA *plf) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCompositionFontW( 
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out LOGFONTW *plf) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  LOGFONTW *plf) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCompositionStringA( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwBufLen,
-            /* [out] */ __RPC__out LONG *plCopied,
-            /* [out] */ __RPC__out LPVOID pBuf) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwBufLen,
+            /* [annotation][out] */ 
+            _Out_  LONG *plCopied,
+            /* [annotation][out] */ 
+            _Out_  LPVOID pBuf) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCompositionStringW( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwBufLen,
-            /* [out] */ __RPC__out LONG *plCopied,
-            /* [out] */ __RPC__out LPVOID pBuf) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwBufLen,
+            /* [annotation][out] */ 
+            _Out_  LONG *plCopied,
+            /* [annotation][out] */ 
+            _Out_  LPVOID pBuf) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCompositionWindow( 
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out COMPOSITIONFORM *pCompForm) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  COMPOSITIONFORM *pCompForm) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetContext( 
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [out] */ __RPC__out HIMC *phIMC) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][out] */ 
+            _Out_  HIMC *phIMC) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetConversionListA( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in LPSTR pSrc,
-            /* [in] */ UINT uBufLen,
-            /* [in] */ UINT uFlag,
-            /* [out] */ __RPC__out CANDIDATELIST *pDst,
-            /* [out] */ __RPC__out UINT *puCopied) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  LPSTR pSrc,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][in] */ 
+            _In_  UINT uFlag,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATELIST *pDst,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetConversionListW( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in LPWSTR pSrc,
-            /* [in] */ UINT uBufLen,
-            /* [in] */ UINT uFlag,
-            /* [out] */ __RPC__out CANDIDATELIST *pDst,
-            /* [out] */ __RPC__out UINT *puCopied) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  LPWSTR pSrc,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][in] */ 
+            _In_  UINT uFlag,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATELIST *pDst,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetConversionStatus( 
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out DWORD *pfdwConversion,
-            /* [out] */ __RPC__out DWORD *pfdwSentence) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pfdwConversion,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pfdwSentence) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDefaultIMEWnd( 
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [out] */ __RPC__deref_out_opt HWND *phDefWnd) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][out] */ 
+            _Out_  HWND *phDefWnd) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDescriptionA( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out LPSTR szDescription,
-            /* [out] */ __RPC__out UINT *puCopied) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPSTR szDescription,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDescriptionW( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out LPWSTR szDescription,
-            /* [out] */ __RPC__out UINT *puCopied) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR szDescription,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGuideLineA( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwBufLen,
-            /* [out] */ __RPC__out LPSTR pBuf,
-            /* [out] */ __RPC__out DWORD *pdwResult) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPSTR pBuf,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGuideLineW( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwBufLen,
-            /* [out] */ __RPC__out LPWSTR pBuf,
-            /* [out] */ __RPC__out DWORD *pdwResult) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR pBuf,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIMEFileNameA( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out LPSTR szFileName,
-            /* [out] */ __RPC__out UINT *puCopied) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPSTR szFileName,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIMEFileNameW( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out LPWSTR szFileName,
-            /* [out] */ __RPC__out UINT *puCopied) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR szFileName,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOpenStatus( 
-            /* [in] */ HIMC hIMC) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProperty( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ DWORD fdwIndex,
-            /* [out] */ __RPC__out DWORD *pdwProperty) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  DWORD fdwIndex,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwProperty) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRegisterWordStyleA( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT nItem,
-            /* [out] */ __RPC__out STYLEBUFA *pStyleBuf,
-            /* [out] */ __RPC__out UINT *puCopied) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT nItem,
+            /* [annotation][out] */ 
+            _Out_  STYLEBUFA *pStyleBuf,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRegisterWordStyleW( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT nItem,
-            /* [out] */ __RPC__out STYLEBUFW *pStyleBuf,
-            /* [out] */ __RPC__out UINT *puCopied) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT nItem,
+            /* [annotation][out] */ 
+            _Out_  STYLEBUFW *pStyleBuf,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStatusWindowPos( 
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out POINT *pptPos) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  POINT *pptPos) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVirtualKey( 
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [out] */ __RPC__out UINT *puVirtualKey) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][out] */ 
+            _Out_  UINT *puVirtualKey) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InstallIMEA( 
-            /* [in] */ __RPC__in LPSTR szIMEFileName,
-            /* [in] */ __RPC__in LPSTR szLayoutText,
-            /* [out] */ __RPC__deref_out_opt HKL *phKL) = 0;
+            /* [annotation][in] */ 
+            _In_  LPSTR szIMEFileName,
+            /* [annotation][in] */ 
+            _In_  LPSTR szLayoutText,
+            /* [annotation][out] */ 
+            _Out_  HKL *phKL) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InstallIMEW( 
-            /* [in] */ __RPC__in LPWSTR szIMEFileName,
-            /* [in] */ __RPC__in LPWSTR szLayoutText,
-            /* [out] */ __RPC__deref_out_opt HKL *phKL) = 0;
+            /* [annotation][in] */ 
+            _In_  LPWSTR szIMEFileName,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szLayoutText,
+            /* [annotation][out] */ 
+            _Out_  HKL *phKL) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsIME( 
-            /* [in] */ __RPC__in HKL hKL) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsUIMessageA( 
-            /* [in] */ __RPC__in HWND hWndIME,
-            /* [in] */ UINT msg,
-            /* [in] */ WPARAM wParam,
-            /* [in] */ LPARAM lParam) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hWndIME,
+            /* [annotation][in] */ 
+            _In_  UINT msg,
+            /* [annotation][in] */ 
+            _In_  WPARAM wParam,
+            /* [annotation][in] */ 
+            _In_  LPARAM lParam) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsUIMessageW( 
-            /* [in] */ __RPC__in HWND hWndIME,
-            /* [in] */ UINT msg,
-            /* [in] */ WPARAM wParam,
-            /* [in] */ LPARAM lParam) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hWndIME,
+            /* [annotation][in] */ 
+            _In_  UINT msg,
+            /* [annotation][in] */ 
+            _In_  WPARAM wParam,
+            /* [annotation][in] */ 
+            _In_  LPARAM lParam) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NotifyIME( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwAction,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwValue) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterWordA( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPSTR szRegister) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPSTR szRegister) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterWordW( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPWSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPWSTR szRegister) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szRegister) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReleaseContext( 
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ HIMC hIMC) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCandidateWindow( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in CANDIDATEFORM *pCandidate) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  CANDIDATEFORM *pCandidate) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCompositionFontA( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in LOGFONTA *plf) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  LOGFONTA *plf) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCompositionFontW( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in LOGFONTW *plf) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  LOGFONTW *plf) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCompositionStringA( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ __RPC__in LPVOID pComp,
-            /* [in] */ DWORD dwCompLen,
-            /* [in] */ __RPC__in LPVOID pRead,
-            /* [in] */ DWORD dwReadLen) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  LPVOID pComp,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCompLen,
+            /* [annotation][in] */ 
+            _In_  LPVOID pRead,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReadLen) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCompositionStringW( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ __RPC__in LPVOID pComp,
-            /* [in] */ DWORD dwCompLen,
-            /* [in] */ __RPC__in LPVOID pRead,
-            /* [in] */ DWORD dwReadLen) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  LPVOID pComp,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCompLen,
+            /* [annotation][in] */ 
+            _In_  LPVOID pRead,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReadLen) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCompositionWindow( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in COMPOSITIONFORM *pCompForm) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  COMPOSITIONFORM *pCompForm) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetConversionStatus( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD fdwConversion,
-            /* [in] */ DWORD fdwSentence) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD fdwConversion,
+            /* [annotation][in] */ 
+            _In_  DWORD fdwSentence) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetOpenStatus( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ BOOL fOpen) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  BOOL fOpen) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStatusWindowPos( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in POINT *pptPos) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  POINT *pptPos) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SimulateHotKey( 
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ DWORD dwHotKeyID) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwHotKeyID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnregisterWordA( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPSTR szUnregister) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPSTR szUnregister) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnregisterWordW( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPWSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPWSTR szUnregister) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szUnregister) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GenerateMessage( 
-            /* [in] */ HIMC hIMC) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LockIMC( 
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__deref_out_opt INPUTCONTEXT **ppIMC) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  INPUTCONTEXT **ppIMC) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnlockIMC( 
-            /* [in] */ HIMC hIMC) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIMCLockCount( 
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out DWORD *pdwLockCount) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwLockCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateIMCC( 
-            /* [in] */ DWORD dwSize,
-            /* [out] */ __RPC__out HIMCC *phIMCC) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize,
+            /* [annotation][out] */ 
+            _Out_  HIMCC *phIMCC) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DestroyIMCC( 
-            /* [in] */ HIMCC hIMCC) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMCC hIMCC) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LockIMCC( 
-            /* [in] */ HIMCC hIMCC,
-            /* [out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMCC hIMCC,
+            /* [annotation][out] */ 
+            _Out_  void **ppv) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnlockIMCC( 
-            /* [in] */ HIMCC hIMCC) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMCC hIMCC) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReSizeIMCC( 
-            /* [in] */ HIMCC hIMCC,
-            /* [in] */ DWORD dwSize,
-            /* [out] */ __RPC__out HIMCC *phIMCC) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMCC hIMCC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize,
+            /* [annotation][out] */ 
+            _Out_  HIMCC *phIMCC) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIMCCSize( 
-            /* [in] */ HIMCC hIMCC,
-            /* [out] */ __RPC__out DWORD *pdwSize) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMCC hIMCC,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIMCCLockCount( 
-            /* [in] */ HIMCC hIMCC,
-            /* [out] */ __RPC__out DWORD *pdwLockCount) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMCC hIMCC,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwLockCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetHotKey( 
-            /* [in] */ DWORD dwHotKeyID,
-            /* [out] */ __RPC__out UINT *puModifiers,
-            /* [out] */ __RPC__out UINT *puVKey,
-            /* [out] */ __RPC__deref_out_opt HKL *phKL) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwHotKeyID,
+            /* [annotation][out] */ 
+            _Out_  UINT *puModifiers,
+            /* [annotation][out] */ 
+            _Out_  UINT *puVKey,
+            /* [annotation][out] */ 
+            _Out_  HKL *phKL) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetHotKey( 
-            /* [in] */ DWORD dwHotKeyID,
-            /* [in] */ UINT uModifiers,
-            /* [in] */ UINT uVKey,
-            /* [in] */ __RPC__in HKL hKL) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwHotKeyID,
+            /* [annotation][in] */ 
+            _In_  UINT uModifiers,
+            /* [annotation][in] */ 
+            _In_  UINT uVKey,
+            /* [annotation][in] */ 
+            _In_  HKL hKL) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateSoftKeyboard( 
-            /* [in] */ UINT uType,
-            /* [in] */ __RPC__in HWND hOwner,
-            /* [in] */ int x,
-            /* [in] */ int y,
-            /* [out] */ __RPC__deref_out_opt HWND *phSoftKbdWnd) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT uType,
+            /* [annotation][in] */ 
+            _In_  HWND hOwner,
+            /* [annotation][in] */ 
+            _In_  int x,
+            /* [annotation][in] */ 
+            _In_  int y,
+            /* [annotation][out] */ 
+            _Out_  HWND *phSoftKbdWnd) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DestroySoftKeyboard( 
-            /* [in] */ __RPC__in HWND hSoftKbdWnd) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hSoftKbdWnd) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ShowSoftKeyboard( 
-            /* [in] */ __RPC__in HWND hSoftKbdWnd,
-            /* [in] */ int nCmdShow) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hSoftKbdWnd,
+            /* [annotation][in] */ 
+            _In_  int nCmdShow) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCodePageA( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [out] */ __RPC__out UINT *uCodePage) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][out] */ 
+            _Out_  UINT *uCodePage) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLangId( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [out] */ __RPC__out LANGID *plid) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][out] */ 
+            _Out_  LANGID *plid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE KeybdEvent( 
-            /* [in] */ LANGID lgidIME,
-            /* [in] */ BYTE bVk,
-            /* [in] */ BYTE bScan,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD dwExtraInfo) = 0;
+            /* [annotation][in] */ 
+            _In_  LANGID lgidIME,
+            /* [annotation][in] */ 
+            _In_  BYTE bVk,
+            /* [annotation][in] */ 
+            _In_  BYTE bScan,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwExtraInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LockModal( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnlockModal( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AssociateContextEx( 
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DisableIME( 
-            /* [in] */ DWORD idThread) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD idThread) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetImeMenuItemsA( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD dwType,
-            /* [in] */ __RPC__in IMEMENUITEMINFOA *pImeParentMenu,
-            /* [out] */ __RPC__out IMEMENUITEMINFOA *pImeMenu,
-            /* [in] */ DWORD dwSize,
-            /* [out] */ __RPC__out DWORD *pdwResult) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwType,
+            /* [annotation][in] */ 
+            _In_  IMEMENUITEMINFOA *pImeParentMenu,
+            /* [annotation][out] */ 
+            _Out_  IMEMENUITEMINFOA *pImeMenu,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetImeMenuItemsW( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD dwType,
-            /* [in] */ __RPC__in IMEMENUITEMINFOW *pImeParentMenu,
-            /* [out] */ __RPC__out IMEMENUITEMINFOW *pImeMenu,
-            /* [in] */ DWORD dwSize,
-            /* [out] */ __RPC__out DWORD *pdwResult) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwType,
+            /* [annotation][in] */ 
+            _In_  IMEMENUITEMINFOW *pImeParentMenu,
+            /* [annotation][out] */ 
+            _Out_  IMEMENUITEMINFOW *pImeMenu,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumInputContext( 
-            /* [in] */ DWORD idThread,
-            /* [out] */ __RPC__deref_out_opt IEnumInputContext **ppEnum) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD idThread,
+            /* [annotation][out] */ 
+            _Out_  IEnumInputContext **ppEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestMessageA( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ WPARAM wParam,
-            /* [in] */ LPARAM lParam,
-            /* [out] */ __RPC__out LRESULT *plResult) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  WPARAM wParam,
+            /* [annotation][in] */ 
+            _In_  LPARAM lParam,
+            /* [annotation][out] */ 
+            _Out_  LRESULT *plResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestMessageW( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ WPARAM wParam,
-            /* [in] */ LPARAM lParam,
-            /* [out] */ __RPC__out LRESULT *plResult) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  WPARAM wParam,
+            /* [annotation][in] */ 
+            _In_  LPARAM lParam,
+            /* [annotation][out] */ 
+            _Out_  LRESULT *plResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SendIMCA( 
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ UINT uMsg,
-            /* [in] */ WPARAM wParam,
-            /* [in] */ LPARAM lParam,
-            /* [out] */ __RPC__out LRESULT *plResult) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  UINT uMsg,
+            /* [annotation][in] */ 
+            _In_  WPARAM wParam,
+            /* [annotation][in] */ 
+            _In_  LPARAM lParam,
+            /* [annotation][out] */ 
+            _Out_  LRESULT *plResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SendIMCW( 
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ UINT uMsg,
-            /* [in] */ WPARAM wParam,
-            /* [in] */ LPARAM lParam,
-            /* [out] */ __RPC__out LRESULT *plResult) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  UINT uMsg,
+            /* [annotation][in] */ 
+            _In_  WPARAM wParam,
+            /* [annotation][in] */ 
+            _In_  LPARAM lParam,
+            /* [annotation][out] */ 
+            _Out_  LRESULT *plResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsSleeping( void) = 0;
         
@@ -2540,7 +3335,8 @@ EXTERN_C const IID IID_IActiveIMMIME;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2555,549 +3351,792 @@ EXTERN_C const IID IID_IActiveIMMIME;
         DECLSPEC_XFGVIRT(IActiveIMMIME, AssociateContext)
         HRESULT ( STDMETHODCALLTYPE *AssociateContext )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ HIMC hIME,
-            /* [out] */ __RPC__out HIMC *phPrev);
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  HIMC hIME,
+            /* [annotation][out] */ 
+            _Out_  HIMC *phPrev);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, ConfigureIMEA)
         HRESULT ( STDMETHODCALLTYPE *ConfigureIMEA )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ DWORD dwMode,
-            /* [in] */ __RPC__in REGISTERWORDA *pData);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMode,
+            /* [annotation][in] */ 
+            _In_  REGISTERWORDA *pData);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, ConfigureIMEW)
         HRESULT ( STDMETHODCALLTYPE *ConfigureIMEW )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ DWORD dwMode,
-            /* [in] */ __RPC__in REGISTERWORDW *pData);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMode,
+            /* [annotation][in] */ 
+            _In_  REGISTERWORDW *pData);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, CreateContext)
         HRESULT ( STDMETHODCALLTYPE *CreateContext )( 
             __RPC__in IActiveIMMIME * This,
-            /* [out] */ __RPC__out HIMC *phIMC);
+            /* [annotation][out] */ 
+            _Out_  HIMC *phIMC);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, DestroyContext)
         HRESULT ( STDMETHODCALLTYPE *DestroyContext )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIME);
+            /* [annotation][in] */ 
+            _In_  HIMC hIME);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, EnumRegisterWordA)
         HRESULT ( STDMETHODCALLTYPE *EnumRegisterWordA )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPSTR szRegister,
-            /* [in] */ __RPC__in LPVOID pData,
-            /* [out] */ __RPC__deref_out_opt IEnumRegisterWordA **pEnum);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPSTR szRegister,
+            /* [annotation][in] */ 
+            _In_  LPVOID pData,
+            /* [annotation][out] */ 
+            _Out_  IEnumRegisterWordA **pEnum);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, EnumRegisterWordW)
         HRESULT ( STDMETHODCALLTYPE *EnumRegisterWordW )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPWSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPWSTR szRegister,
-            /* [in] */ __RPC__in LPVOID pData,
-            /* [out] */ __RPC__deref_out_opt IEnumRegisterWordW **pEnum);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szRegister,
+            /* [annotation][in] */ 
+            _In_  LPVOID pData,
+            /* [annotation][out] */ 
+            _Out_  IEnumRegisterWordW **pEnum);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, EscapeA)
         HRESULT ( STDMETHODCALLTYPE *EscapeA )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ UINT uEscape,
-            /* [out][in] */ __RPC__inout LPVOID pData,
-            /* [out] */ __RPC__out LRESULT *plResult);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  UINT uEscape,
+            /* [annotation][out][in] */ 
+            _Inout_  LPVOID pData,
+            /* [annotation][out] */ 
+            _Out_  LRESULT *plResult);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, EscapeW)
         HRESULT ( STDMETHODCALLTYPE *EscapeW )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ UINT uEscape,
-            /* [out][in] */ __RPC__inout LPVOID pData,
-            /* [out] */ __RPC__out LRESULT *plResult);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  UINT uEscape,
+            /* [annotation][out][in] */ 
+            _Inout_  LPVOID pData,
+            /* [annotation][out] */ 
+            _Out_  LRESULT *plResult);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetCandidateListA)
         HRESULT ( STDMETHODCALLTYPE *GetCandidateListA )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out CANDIDATELIST *pCandList,
-            /* [out] */ __RPC__out UINT *puCopied);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATELIST *pCandList,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetCandidateListW)
         HRESULT ( STDMETHODCALLTYPE *GetCandidateListW )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out CANDIDATELIST *pCandList,
-            /* [out] */ __RPC__out UINT *puCopied);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATELIST *pCandList,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetCandidateListCountA)
         HRESULT ( STDMETHODCALLTYPE *GetCandidateListCountA )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out DWORD *pdwListSize,
-            /* [out] */ __RPC__out DWORD *pdwBufLen);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwListSize,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwBufLen);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetCandidateListCountW)
         HRESULT ( STDMETHODCALLTYPE *GetCandidateListCountW )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out DWORD *pdwListSize,
-            /* [out] */ __RPC__out DWORD *pdwBufLen);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwListSize,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwBufLen);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetCandidateWindow)
         HRESULT ( STDMETHODCALLTYPE *GetCandidateWindow )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [out] */ __RPC__out CANDIDATEFORM *pCandidate);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATEFORM *pCandidate);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetCompositionFontA)
         HRESULT ( STDMETHODCALLTYPE *GetCompositionFontA )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out LOGFONTA *plf);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  LOGFONTA *plf);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetCompositionFontW)
         HRESULT ( STDMETHODCALLTYPE *GetCompositionFontW )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out LOGFONTW *plf);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  LOGFONTW *plf);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetCompositionStringA)
         HRESULT ( STDMETHODCALLTYPE *GetCompositionStringA )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwBufLen,
-            /* [out] */ __RPC__out LONG *plCopied,
-            /* [out] */ __RPC__out LPVOID pBuf);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwBufLen,
+            /* [annotation][out] */ 
+            _Out_  LONG *plCopied,
+            /* [annotation][out] */ 
+            _Out_  LPVOID pBuf);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetCompositionStringW)
         HRESULT ( STDMETHODCALLTYPE *GetCompositionStringW )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwBufLen,
-            /* [out] */ __RPC__out LONG *plCopied,
-            /* [out] */ __RPC__out LPVOID pBuf);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwBufLen,
+            /* [annotation][out] */ 
+            _Out_  LONG *plCopied,
+            /* [annotation][out] */ 
+            _Out_  LPVOID pBuf);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetCompositionWindow)
         HRESULT ( STDMETHODCALLTYPE *GetCompositionWindow )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out COMPOSITIONFORM *pCompForm);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  COMPOSITIONFORM *pCompForm);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetContext)
         HRESULT ( STDMETHODCALLTYPE *GetContext )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [out] */ __RPC__out HIMC *phIMC);
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][out] */ 
+            _Out_  HIMC *phIMC);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetConversionListA)
         HRESULT ( STDMETHODCALLTYPE *GetConversionListA )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in LPSTR pSrc,
-            /* [in] */ UINT uBufLen,
-            /* [in] */ UINT uFlag,
-            /* [out] */ __RPC__out CANDIDATELIST *pDst,
-            /* [out] */ __RPC__out UINT *puCopied);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  LPSTR pSrc,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][in] */ 
+            _In_  UINT uFlag,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATELIST *pDst,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetConversionListW)
         HRESULT ( STDMETHODCALLTYPE *GetConversionListW )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in LPWSTR pSrc,
-            /* [in] */ UINT uBufLen,
-            /* [in] */ UINT uFlag,
-            /* [out] */ __RPC__out CANDIDATELIST *pDst,
-            /* [out] */ __RPC__out UINT *puCopied);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  LPWSTR pSrc,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][in] */ 
+            _In_  UINT uFlag,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATELIST *pDst,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetConversionStatus)
         HRESULT ( STDMETHODCALLTYPE *GetConversionStatus )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out DWORD *pfdwConversion,
-            /* [out] */ __RPC__out DWORD *pfdwSentence);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pfdwConversion,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pfdwSentence);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetDefaultIMEWnd)
         HRESULT ( STDMETHODCALLTYPE *GetDefaultIMEWnd )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [out] */ __RPC__deref_out_opt HWND *phDefWnd);
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][out] */ 
+            _Out_  HWND *phDefWnd);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetDescriptionA)
         HRESULT ( STDMETHODCALLTYPE *GetDescriptionA )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out LPSTR szDescription,
-            /* [out] */ __RPC__out UINT *puCopied);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPSTR szDescription,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetDescriptionW)
         HRESULT ( STDMETHODCALLTYPE *GetDescriptionW )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out LPWSTR szDescription,
-            /* [out] */ __RPC__out UINT *puCopied);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR szDescription,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetGuideLineA)
         HRESULT ( STDMETHODCALLTYPE *GetGuideLineA )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwBufLen,
-            /* [out] */ __RPC__out LPSTR pBuf,
-            /* [out] */ __RPC__out DWORD *pdwResult);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPSTR pBuf,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetGuideLineW)
         HRESULT ( STDMETHODCALLTYPE *GetGuideLineW )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwBufLen,
-            /* [out] */ __RPC__out LPWSTR pBuf,
-            /* [out] */ __RPC__out DWORD *pdwResult);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR pBuf,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetIMEFileNameA)
         HRESULT ( STDMETHODCALLTYPE *GetIMEFileNameA )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out LPSTR szFileName,
-            /* [out] */ __RPC__out UINT *puCopied);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPSTR szFileName,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetIMEFileNameW)
         HRESULT ( STDMETHODCALLTYPE *GetIMEFileNameW )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out LPWSTR szFileName,
-            /* [out] */ __RPC__out UINT *puCopied);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR szFileName,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetOpenStatus)
         HRESULT ( STDMETHODCALLTYPE *GetOpenStatus )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ DWORD fdwIndex,
-            /* [out] */ __RPC__out DWORD *pdwProperty);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  DWORD fdwIndex,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwProperty);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetRegisterWordStyleA)
         HRESULT ( STDMETHODCALLTYPE *GetRegisterWordStyleA )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT nItem,
-            /* [out] */ __RPC__out STYLEBUFA *pStyleBuf,
-            /* [out] */ __RPC__out UINT *puCopied);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT nItem,
+            /* [annotation][out] */ 
+            _Out_  STYLEBUFA *pStyleBuf,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetRegisterWordStyleW)
         HRESULT ( STDMETHODCALLTYPE *GetRegisterWordStyleW )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ UINT nItem,
-            /* [out] */ __RPC__out STYLEBUFW *pStyleBuf,
-            /* [out] */ __RPC__out UINT *puCopied);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  UINT nItem,
+            /* [annotation][out] */ 
+            _Out_  STYLEBUFW *pStyleBuf,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetStatusWindowPos)
         HRESULT ( STDMETHODCALLTYPE *GetStatusWindowPos )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out POINT *pptPos);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  POINT *pptPos);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetVirtualKey)
         HRESULT ( STDMETHODCALLTYPE *GetVirtualKey )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [out] */ __RPC__out UINT *puVirtualKey);
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][out] */ 
+            _Out_  UINT *puVirtualKey);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, InstallIMEA)
         HRESULT ( STDMETHODCALLTYPE *InstallIMEA )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in LPSTR szIMEFileName,
-            /* [in] */ __RPC__in LPSTR szLayoutText,
-            /* [out] */ __RPC__deref_out_opt HKL *phKL);
+            /* [annotation][in] */ 
+            _In_  LPSTR szIMEFileName,
+            /* [annotation][in] */ 
+            _In_  LPSTR szLayoutText,
+            /* [annotation][out] */ 
+            _Out_  HKL *phKL);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, InstallIMEW)
         HRESULT ( STDMETHODCALLTYPE *InstallIMEW )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in LPWSTR szIMEFileName,
-            /* [in] */ __RPC__in LPWSTR szLayoutText,
-            /* [out] */ __RPC__deref_out_opt HKL *phKL);
+            /* [annotation][in] */ 
+            _In_  LPWSTR szIMEFileName,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szLayoutText,
+            /* [annotation][out] */ 
+            _Out_  HKL *phKL);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, IsIME)
         HRESULT ( STDMETHODCALLTYPE *IsIME )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HKL hKL);
+            /* [annotation][in] */ 
+            _In_  HKL hKL);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, IsUIMessageA)
         HRESULT ( STDMETHODCALLTYPE *IsUIMessageA )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HWND hWndIME,
-            /* [in] */ UINT msg,
-            /* [in] */ WPARAM wParam,
-            /* [in] */ LPARAM lParam);
+            /* [annotation][in] */ 
+            _In_  HWND hWndIME,
+            /* [annotation][in] */ 
+            _In_  UINT msg,
+            /* [annotation][in] */ 
+            _In_  WPARAM wParam,
+            /* [annotation][in] */ 
+            _In_  LPARAM lParam);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, IsUIMessageW)
         HRESULT ( STDMETHODCALLTYPE *IsUIMessageW )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HWND hWndIME,
-            /* [in] */ UINT msg,
-            /* [in] */ WPARAM wParam,
-            /* [in] */ LPARAM lParam);
+            /* [annotation][in] */ 
+            _In_  HWND hWndIME,
+            /* [annotation][in] */ 
+            _In_  UINT msg,
+            /* [annotation][in] */ 
+            _In_  WPARAM wParam,
+            /* [annotation][in] */ 
+            _In_  LPARAM lParam);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, NotifyIME)
         HRESULT ( STDMETHODCALLTYPE *NotifyIME )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwAction,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwValue);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwValue);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, RegisterWordA)
         HRESULT ( STDMETHODCALLTYPE *RegisterWordA )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPSTR szRegister);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPSTR szRegister);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, RegisterWordW)
         HRESULT ( STDMETHODCALLTYPE *RegisterWordW )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPWSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPWSTR szRegister);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szRegister);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, ReleaseContext)
         HRESULT ( STDMETHODCALLTYPE *ReleaseContext )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ HIMC hIMC);
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, SetCandidateWindow)
         HRESULT ( STDMETHODCALLTYPE *SetCandidateWindow )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in CANDIDATEFORM *pCandidate);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  CANDIDATEFORM *pCandidate);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, SetCompositionFontA)
         HRESULT ( STDMETHODCALLTYPE *SetCompositionFontA )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in LOGFONTA *plf);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  LOGFONTA *plf);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, SetCompositionFontW)
         HRESULT ( STDMETHODCALLTYPE *SetCompositionFontW )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in LOGFONTW *plf);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  LOGFONTW *plf);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, SetCompositionStringA)
         HRESULT ( STDMETHODCALLTYPE *SetCompositionStringA )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ __RPC__in LPVOID pComp,
-            /* [in] */ DWORD dwCompLen,
-            /* [in] */ __RPC__in LPVOID pRead,
-            /* [in] */ DWORD dwReadLen);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  LPVOID pComp,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCompLen,
+            /* [annotation][in] */ 
+            _In_  LPVOID pRead,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReadLen);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, SetCompositionStringW)
         HRESULT ( STDMETHODCALLTYPE *SetCompositionStringW )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ __RPC__in LPVOID pComp,
-            /* [in] */ DWORD dwCompLen,
-            /* [in] */ __RPC__in LPVOID pRead,
-            /* [in] */ DWORD dwReadLen);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  LPVOID pComp,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCompLen,
+            /* [annotation][in] */ 
+            _In_  LPVOID pRead,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReadLen);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, SetCompositionWindow)
         HRESULT ( STDMETHODCALLTYPE *SetCompositionWindow )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in COMPOSITIONFORM *pCompForm);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  COMPOSITIONFORM *pCompForm);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, SetConversionStatus)
         HRESULT ( STDMETHODCALLTYPE *SetConversionStatus )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD fdwConversion,
-            /* [in] */ DWORD fdwSentence);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD fdwConversion,
+            /* [annotation][in] */ 
+            _In_  DWORD fdwSentence);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, SetOpenStatus)
         HRESULT ( STDMETHODCALLTYPE *SetOpenStatus )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ BOOL fOpen);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  BOOL fOpen);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, SetStatusWindowPos)
         HRESULT ( STDMETHODCALLTYPE *SetStatusWindowPos )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in POINT *pptPos);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  POINT *pptPos);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, SimulateHotKey)
         HRESULT ( STDMETHODCALLTYPE *SimulateHotKey )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ DWORD dwHotKeyID);
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwHotKeyID);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, UnregisterWordA)
         HRESULT ( STDMETHODCALLTYPE *UnregisterWordA )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPSTR szUnregister);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPSTR szUnregister);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, UnregisterWordW)
         HRESULT ( STDMETHODCALLTYPE *UnregisterWordW )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in LPWSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPWSTR szUnregister);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szUnregister);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GenerateMessage)
         HRESULT ( STDMETHODCALLTYPE *GenerateMessage )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, LockIMC)
         HRESULT ( STDMETHODCALLTYPE *LockIMC )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__deref_out_opt INPUTCONTEXT **ppIMC);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  INPUTCONTEXT **ppIMC);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, UnlockIMC)
         HRESULT ( STDMETHODCALLTYPE *UnlockIMC )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetIMCLockCount)
         HRESULT ( STDMETHODCALLTYPE *GetIMCLockCount )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out DWORD *pdwLockCount);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwLockCount);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, CreateIMCC)
         HRESULT ( STDMETHODCALLTYPE *CreateIMCC )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ DWORD dwSize,
-            /* [out] */ __RPC__out HIMCC *phIMCC);
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize,
+            /* [annotation][out] */ 
+            _Out_  HIMCC *phIMCC);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, DestroyIMCC)
         HRESULT ( STDMETHODCALLTYPE *DestroyIMCC )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMCC hIMCC);
+            /* [annotation][in] */ 
+            _In_  HIMCC hIMCC);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, LockIMCC)
         HRESULT ( STDMETHODCALLTYPE *LockIMCC )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMCC hIMCC,
-            /* [out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  HIMCC hIMCC,
+            /* [annotation][out] */ 
+            _Out_  void **ppv);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, UnlockIMCC)
         HRESULT ( STDMETHODCALLTYPE *UnlockIMCC )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMCC hIMCC);
+            /* [annotation][in] */ 
+            _In_  HIMCC hIMCC);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, ReSizeIMCC)
         HRESULT ( STDMETHODCALLTYPE *ReSizeIMCC )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMCC hIMCC,
-            /* [in] */ DWORD dwSize,
-            /* [out] */ __RPC__out HIMCC *phIMCC);
+            /* [annotation][in] */ 
+            _In_  HIMCC hIMCC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize,
+            /* [annotation][out] */ 
+            _Out_  HIMCC *phIMCC);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetIMCCSize)
         HRESULT ( STDMETHODCALLTYPE *GetIMCCSize )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMCC hIMCC,
-            /* [out] */ __RPC__out DWORD *pdwSize);
+            /* [annotation][in] */ 
+            _In_  HIMCC hIMCC,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwSize);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetIMCCLockCount)
         HRESULT ( STDMETHODCALLTYPE *GetIMCCLockCount )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMCC hIMCC,
-            /* [out] */ __RPC__out DWORD *pdwLockCount);
+            /* [annotation][in] */ 
+            _In_  HIMCC hIMCC,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwLockCount);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetHotKey)
         HRESULT ( STDMETHODCALLTYPE *GetHotKey )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ DWORD dwHotKeyID,
-            /* [out] */ __RPC__out UINT *puModifiers,
-            /* [out] */ __RPC__out UINT *puVKey,
-            /* [out] */ __RPC__deref_out_opt HKL *phKL);
+            /* [annotation][in] */ 
+            _In_  DWORD dwHotKeyID,
+            /* [annotation][out] */ 
+            _Out_  UINT *puModifiers,
+            /* [annotation][out] */ 
+            _Out_  UINT *puVKey,
+            /* [annotation][out] */ 
+            _Out_  HKL *phKL);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, SetHotKey)
         HRESULT ( STDMETHODCALLTYPE *SetHotKey )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ DWORD dwHotKeyID,
-            /* [in] */ UINT uModifiers,
-            /* [in] */ UINT uVKey,
-            /* [in] */ __RPC__in HKL hKL);
+            /* [annotation][in] */ 
+            _In_  DWORD dwHotKeyID,
+            /* [annotation][in] */ 
+            _In_  UINT uModifiers,
+            /* [annotation][in] */ 
+            _In_  UINT uVKey,
+            /* [annotation][in] */ 
+            _In_  HKL hKL);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, CreateSoftKeyboard)
         HRESULT ( STDMETHODCALLTYPE *CreateSoftKeyboard )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ UINT uType,
-            /* [in] */ __RPC__in HWND hOwner,
-            /* [in] */ int x,
-            /* [in] */ int y,
-            /* [out] */ __RPC__deref_out_opt HWND *phSoftKbdWnd);
+            /* [annotation][in] */ 
+            _In_  UINT uType,
+            /* [annotation][in] */ 
+            _In_  HWND hOwner,
+            /* [annotation][in] */ 
+            _In_  int x,
+            /* [annotation][in] */ 
+            _In_  int y,
+            /* [annotation][out] */ 
+            _Out_  HWND *phSoftKbdWnd);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, DestroySoftKeyboard)
         HRESULT ( STDMETHODCALLTYPE *DestroySoftKeyboard )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HWND hSoftKbdWnd);
+            /* [annotation][in] */ 
+            _In_  HWND hSoftKbdWnd);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, ShowSoftKeyboard)
         HRESULT ( STDMETHODCALLTYPE *ShowSoftKeyboard )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HWND hSoftKbdWnd,
-            /* [in] */ int nCmdShow);
+            /* [annotation][in] */ 
+            _In_  HWND hSoftKbdWnd,
+            /* [annotation][in] */ 
+            _In_  int nCmdShow);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetCodePageA)
         HRESULT ( STDMETHODCALLTYPE *GetCodePageA )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [out] */ __RPC__out UINT *uCodePage);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][out] */ 
+            _Out_  UINT *uCodePage);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetLangId)
         HRESULT ( STDMETHODCALLTYPE *GetLangId )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [out] */ __RPC__out LANGID *plid);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][out] */ 
+            _Out_  LANGID *plid);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, KeybdEvent)
         HRESULT ( STDMETHODCALLTYPE *KeybdEvent )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ LANGID lgidIME,
-            /* [in] */ BYTE bVk,
-            /* [in] */ BYTE bScan,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD dwExtraInfo);
+            /* [annotation][in] */ 
+            _In_  LANGID lgidIME,
+            /* [annotation][in] */ 
+            _In_  BYTE bVk,
+            /* [annotation][in] */ 
+            _In_  BYTE bScan,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwExtraInfo);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, LockModal)
         HRESULT ( STDMETHODCALLTYPE *LockModal )( 
@@ -3110,76 +4149,114 @@ EXTERN_C const IID IID_IActiveIMMIME;
         DECLSPEC_XFGVIRT(IActiveIMMIME, AssociateContextEx)
         HRESULT ( STDMETHODCALLTYPE *AssociateContextEx )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, DisableIME)
         HRESULT ( STDMETHODCALLTYPE *DisableIME )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ DWORD idThread);
+            /* [annotation][in] */ 
+            _In_  DWORD idThread);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetImeMenuItemsA)
         HRESULT ( STDMETHODCALLTYPE *GetImeMenuItemsA )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD dwType,
-            /* [in] */ __RPC__in IMEMENUITEMINFOA *pImeParentMenu,
-            /* [out] */ __RPC__out IMEMENUITEMINFOA *pImeMenu,
-            /* [in] */ DWORD dwSize,
-            /* [out] */ __RPC__out DWORD *pdwResult);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwType,
+            /* [annotation][in] */ 
+            _In_  IMEMENUITEMINFOA *pImeParentMenu,
+            /* [annotation][out] */ 
+            _Out_  IMEMENUITEMINFOA *pImeMenu,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, GetImeMenuItemsW)
         HRESULT ( STDMETHODCALLTYPE *GetImeMenuItemsW )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD dwType,
-            /* [in] */ __RPC__in IMEMENUITEMINFOW *pImeParentMenu,
-            /* [out] */ __RPC__out IMEMENUITEMINFOW *pImeMenu,
-            /* [in] */ DWORD dwSize,
-            /* [out] */ __RPC__out DWORD *pdwResult);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwType,
+            /* [annotation][in] */ 
+            _In_  IMEMENUITEMINFOW *pImeParentMenu,
+            /* [annotation][out] */ 
+            _Out_  IMEMENUITEMINFOW *pImeMenu,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSize,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, EnumInputContext)
         HRESULT ( STDMETHODCALLTYPE *EnumInputContext )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ DWORD idThread,
-            /* [out] */ __RPC__deref_out_opt IEnumInputContext **ppEnum);
+            /* [annotation][in] */ 
+            _In_  DWORD idThread,
+            /* [annotation][out] */ 
+            _Out_  IEnumInputContext **ppEnum);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, RequestMessageA)
         HRESULT ( STDMETHODCALLTYPE *RequestMessageA )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ WPARAM wParam,
-            /* [in] */ LPARAM lParam,
-            /* [out] */ __RPC__out LRESULT *plResult);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  WPARAM wParam,
+            /* [annotation][in] */ 
+            _In_  LPARAM lParam,
+            /* [annotation][out] */ 
+            _Out_  LRESULT *plResult);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, RequestMessageW)
         HRESULT ( STDMETHODCALLTYPE *RequestMessageW )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ WPARAM wParam,
-            /* [in] */ LPARAM lParam,
-            /* [out] */ __RPC__out LRESULT *plResult);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  WPARAM wParam,
+            /* [annotation][in] */ 
+            _In_  LPARAM lParam,
+            /* [annotation][out] */ 
+            _Out_  LRESULT *plResult);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, SendIMCA)
         HRESULT ( STDMETHODCALLTYPE *SendIMCA )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ UINT uMsg,
-            /* [in] */ WPARAM wParam,
-            /* [in] */ LPARAM lParam,
-            /* [out] */ __RPC__out LRESULT *plResult);
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  UINT uMsg,
+            /* [annotation][in] */ 
+            _In_  WPARAM wParam,
+            /* [annotation][in] */ 
+            _In_  LPARAM lParam,
+            /* [annotation][out] */ 
+            _Out_  LRESULT *plResult);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, SendIMCW)
         HRESULT ( STDMETHODCALLTYPE *SendIMCW )( 
             __RPC__in IActiveIMMIME * This,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ UINT uMsg,
-            /* [in] */ WPARAM wParam,
-            /* [in] */ LPARAM lParam,
-            /* [out] */ __RPC__out LRESULT *plResult);
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  UINT uMsg,
+            /* [annotation][in] */ 
+            _In_  WPARAM wParam,
+            /* [annotation][in] */ 
+            _In_  LPARAM lParam,
+            /* [annotation][out] */ 
+            _Out_  LRESULT *plResult);
         
         DECLSPEC_XFGVIRT(IActiveIMMIME, IsSleeping)
         HRESULT ( STDMETHODCALLTYPE *IsSleeping )( 
@@ -3499,98 +4576,158 @@ EXTERN_C const IID IID_IActiveIME;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Inquire( 
-            /* [in] */ DWORD dwSystemInfoFlags,
-            /* [out] */ __RPC__out IMEINFO *pIMEInfo,
-            /* [out] */ __RPC__out LPWSTR szWndClass,
-            /* [out] */ __RPC__out DWORD *pdwPrivate) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwSystemInfoFlags,
+            /* [annotation][out] */ 
+            _Out_  IMEINFO *pIMEInfo,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR szWndClass,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwPrivate) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ConversionList( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in LPWSTR szSource,
-            /* [in] */ UINT uFlag,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out CANDIDATELIST *pDest,
-            /* [out] */ __RPC__out UINT *puCopied) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szSource,
+            /* [annotation][in] */ 
+            _In_  UINT uFlag,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATELIST *pDest,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Configure( 
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ DWORD dwMode,
-            /* [in] */ __RPC__in REGISTERWORDW *pRegisterWord) = 0;
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMode,
+            /* [annotation][in] */ 
+            _In_  REGISTERWORDW *pRegisterWord) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Destroy( 
-            /* [in] */ UINT uReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT uReserved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Escape( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ UINT uEscape,
-            /* [out][in] */ __RPC__inout void *pData,
-            /* [out] */ __RPC__out LRESULT *plResult) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  UINT uEscape,
+            /* [annotation][out][in] */ 
+            _Inout_  void *pData,
+            /* [annotation][out] */ 
+            _Out_  LRESULT *plResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetActiveContext( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ BOOL fFlag) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  BOOL fFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProcessKey( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ UINT uVirKey,
-            /* [in] */ DWORD lParam,
-            /* [in] */ __RPC__in BYTE *pbKeyState) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  UINT uVirKey,
+            /* [annotation][in] */ 
+            _In_  DWORD lParam,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbKeyState) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Notify( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwAction,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwValue) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Select( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ BOOL fSelect) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  BOOL fSelect) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCompositionString( 
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ __RPC__in void *pComp,
-            /* [in] */ DWORD dwCompLen,
-            /* [in] */ __RPC__in void *pRead,
-            /* [in] */ DWORD dwReadLen) = 0;
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  void *pComp,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCompLen,
+            /* [annotation][in] */ 
+            _In_  void *pRead,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReadLen) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ToAsciiEx( 
-            /* [in] */ UINT uVirKey,
-            /* [in] */ UINT uScanCode,
-            /* [in] */ __RPC__in BYTE *pbKeyState,
-            /* [in] */ UINT fuState,
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out DWORD *pdwTransBuf,
-            /* [out] */ __RPC__out UINT *puSize) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT uVirKey,
+            /* [annotation][in] */ 
+            _In_  UINT uScanCode,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbKeyState,
+            /* [annotation][in] */ 
+            _In_  UINT fuState,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwTransBuf,
+            /* [annotation][out] */ 
+            _Out_  UINT *puSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterWord( 
-            /* [in] */ __RPC__in LPWSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPWSTR szString) = 0;
+            /* [annotation][in] */ 
+            _In_  LPWSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szString) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnregisterWord( 
-            /* [in] */ __RPC__in LPWSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPWSTR szString) = 0;
+            /* [annotation][in] */ 
+            _In_  LPWSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szString) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRegisterWordStyle( 
-            /* [in] */ UINT nItem,
-            /* [out] */ __RPC__out STYLEBUFW *pStyleBuf,
-            /* [out] */ __RPC__out UINT *puBufSize) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT nItem,
+            /* [annotation][out] */ 
+            _Out_  STYLEBUFW *pStyleBuf,
+            /* [annotation][out] */ 
+            _Out_  UINT *puBufSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumRegisterWord( 
-            /* [in] */ __RPC__in LPWSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPWSTR szRegister,
-            /* [in] */ __RPC__in LPVOID pData,
-            /* [out] */ __RPC__deref_out_opt IEnumRegisterWordW **ppEnum) = 0;
+            /* [annotation][in] */ 
+            _In_  LPWSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szRegister,
+            /* [annotation][in] */ 
+            _In_  LPVOID pData,
+            /* [annotation][out] */ 
+            _Out_  IEnumRegisterWordW **ppEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCodePageA( 
-            /* [out] */ __RPC__out UINT *uCodePage) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *uCodePage) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLangId( 
-            /* [out] */ __RPC__out LANGID *plid) = 0;
+            /* [annotation][out] */ 
+            _Out_  LANGID *plid) = 0;
         
     };
     
@@ -3604,7 +4741,8 @@ EXTERN_C const IID IID_IActiveIME;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveIME * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3619,130 +4757,190 @@ EXTERN_C const IID IID_IActiveIME;
         DECLSPEC_XFGVIRT(IActiveIME, Inquire)
         HRESULT ( STDMETHODCALLTYPE *Inquire )( 
             __RPC__in IActiveIME * This,
-            /* [in] */ DWORD dwSystemInfoFlags,
-            /* [out] */ __RPC__out IMEINFO *pIMEInfo,
-            /* [out] */ __RPC__out LPWSTR szWndClass,
-            /* [out] */ __RPC__out DWORD *pdwPrivate);
+            /* [annotation][in] */ 
+            _In_  DWORD dwSystemInfoFlags,
+            /* [annotation][out] */ 
+            _Out_  IMEINFO *pIMEInfo,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR szWndClass,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwPrivate);
         
         DECLSPEC_XFGVIRT(IActiveIME, ConversionList)
         HRESULT ( STDMETHODCALLTYPE *ConversionList )( 
             __RPC__in IActiveIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in LPWSTR szSource,
-            /* [in] */ UINT uFlag,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out CANDIDATELIST *pDest,
-            /* [out] */ __RPC__out UINT *puCopied);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szSource,
+            /* [annotation][in] */ 
+            _In_  UINT uFlag,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATELIST *pDest,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied);
         
         DECLSPEC_XFGVIRT(IActiveIME, Configure)
         HRESULT ( STDMETHODCALLTYPE *Configure )( 
             __RPC__in IActiveIME * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ DWORD dwMode,
-            /* [in] */ __RPC__in REGISTERWORDW *pRegisterWord);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMode,
+            /* [annotation][in] */ 
+            _In_  REGISTERWORDW *pRegisterWord);
         
         DECLSPEC_XFGVIRT(IActiveIME, Destroy)
         HRESULT ( STDMETHODCALLTYPE *Destroy )( 
             __RPC__in IActiveIME * This,
-            /* [in] */ UINT uReserved);
+            /* [annotation][in] */ 
+            _In_  UINT uReserved);
         
         DECLSPEC_XFGVIRT(IActiveIME, Escape)
         HRESULT ( STDMETHODCALLTYPE *Escape )( 
             __RPC__in IActiveIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ UINT uEscape,
-            /* [out][in] */ __RPC__inout void *pData,
-            /* [out] */ __RPC__out LRESULT *plResult);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  UINT uEscape,
+            /* [annotation][out][in] */ 
+            _Inout_  void *pData,
+            /* [annotation][out] */ 
+            _Out_  LRESULT *plResult);
         
         DECLSPEC_XFGVIRT(IActiveIME, SetActiveContext)
         HRESULT ( STDMETHODCALLTYPE *SetActiveContext )( 
             __RPC__in IActiveIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ BOOL fFlag);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  BOOL fFlag);
         
         DECLSPEC_XFGVIRT(IActiveIME, ProcessKey)
         HRESULT ( STDMETHODCALLTYPE *ProcessKey )( 
             __RPC__in IActiveIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ UINT uVirKey,
-            /* [in] */ DWORD lParam,
-            /* [in] */ __RPC__in BYTE *pbKeyState);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  UINT uVirKey,
+            /* [annotation][in] */ 
+            _In_  DWORD lParam,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbKeyState);
         
         DECLSPEC_XFGVIRT(IActiveIME, Notify)
         HRESULT ( STDMETHODCALLTYPE *Notify )( 
             __RPC__in IActiveIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwAction,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwValue);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwValue);
         
         DECLSPEC_XFGVIRT(IActiveIME, Select)
         HRESULT ( STDMETHODCALLTYPE *Select )( 
             __RPC__in IActiveIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ BOOL fSelect);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  BOOL fSelect);
         
         DECLSPEC_XFGVIRT(IActiveIME, SetCompositionString)
         HRESULT ( STDMETHODCALLTYPE *SetCompositionString )( 
             __RPC__in IActiveIME * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ __RPC__in void *pComp,
-            /* [in] */ DWORD dwCompLen,
-            /* [in] */ __RPC__in void *pRead,
-            /* [in] */ DWORD dwReadLen);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  void *pComp,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCompLen,
+            /* [annotation][in] */ 
+            _In_  void *pRead,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReadLen);
         
         DECLSPEC_XFGVIRT(IActiveIME, ToAsciiEx)
         HRESULT ( STDMETHODCALLTYPE *ToAsciiEx )( 
             __RPC__in IActiveIME * This,
-            /* [in] */ UINT uVirKey,
-            /* [in] */ UINT uScanCode,
-            /* [in] */ __RPC__in BYTE *pbKeyState,
-            /* [in] */ UINT fuState,
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out DWORD *pdwTransBuf,
-            /* [out] */ __RPC__out UINT *puSize);
+            /* [annotation][in] */ 
+            _In_  UINT uVirKey,
+            /* [annotation][in] */ 
+            _In_  UINT uScanCode,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbKeyState,
+            /* [annotation][in] */ 
+            _In_  UINT fuState,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwTransBuf,
+            /* [annotation][out] */ 
+            _Out_  UINT *puSize);
         
         DECLSPEC_XFGVIRT(IActiveIME, RegisterWord)
         HRESULT ( STDMETHODCALLTYPE *RegisterWord )( 
             __RPC__in IActiveIME * This,
-            /* [in] */ __RPC__in LPWSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPWSTR szString);
+            /* [annotation][in] */ 
+            _In_  LPWSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szString);
         
         DECLSPEC_XFGVIRT(IActiveIME, UnregisterWord)
         HRESULT ( STDMETHODCALLTYPE *UnregisterWord )( 
             __RPC__in IActiveIME * This,
-            /* [in] */ __RPC__in LPWSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPWSTR szString);
+            /* [annotation][in] */ 
+            _In_  LPWSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szString);
         
         DECLSPEC_XFGVIRT(IActiveIME, GetRegisterWordStyle)
         HRESULT ( STDMETHODCALLTYPE *GetRegisterWordStyle )( 
             __RPC__in IActiveIME * This,
-            /* [in] */ UINT nItem,
-            /* [out] */ __RPC__out STYLEBUFW *pStyleBuf,
-            /* [out] */ __RPC__out UINT *puBufSize);
+            /* [annotation][in] */ 
+            _In_  UINT nItem,
+            /* [annotation][out] */ 
+            _Out_  STYLEBUFW *pStyleBuf,
+            /* [annotation][out] */ 
+            _Out_  UINT *puBufSize);
         
         DECLSPEC_XFGVIRT(IActiveIME, EnumRegisterWord)
         HRESULT ( STDMETHODCALLTYPE *EnumRegisterWord )( 
             __RPC__in IActiveIME * This,
-            /* [in] */ __RPC__in LPWSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPWSTR szRegister,
-            /* [in] */ __RPC__in LPVOID pData,
-            /* [out] */ __RPC__deref_out_opt IEnumRegisterWordW **ppEnum);
+            /* [annotation][in] */ 
+            _In_  LPWSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szRegister,
+            /* [annotation][in] */ 
+            _In_  LPVOID pData,
+            /* [annotation][out] */ 
+            _Out_  IEnumRegisterWordW **ppEnum);
         
         DECLSPEC_XFGVIRT(IActiveIME, GetCodePageA)
         HRESULT ( STDMETHODCALLTYPE *GetCodePageA )( 
             __RPC__in IActiveIME * This,
-            /* [out] */ __RPC__out UINT *uCodePage);
+            /* [annotation][out] */ 
+            _Out_  UINT *uCodePage);
         
         DECLSPEC_XFGVIRT(IActiveIME, GetLangId)
         HRESULT ( STDMETHODCALLTYPE *GetLangId )( 
             __RPC__in IActiveIME * This,
-            /* [out] */ __RPC__out LANGID *plid);
+            /* [annotation][out] */ 
+            _Out_  LANGID *plid);
         
         END_INTERFACE
     } IActiveIMEVtbl;
@@ -3847,7 +5045,8 @@ EXTERN_C const IID IID_IActiveIME2;
         virtual HRESULT STDMETHODCALLTYPE Sleep( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Unsleep( 
-            /* [in] */ BOOL fDead) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL fDead) = 0;
         
     };
     
@@ -3861,7 +5060,8 @@ EXTERN_C const IID IID_IActiveIME2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveIME2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3876,130 +5076,190 @@ EXTERN_C const IID IID_IActiveIME2;
         DECLSPEC_XFGVIRT(IActiveIME, Inquire)
         HRESULT ( STDMETHODCALLTYPE *Inquire )( 
             __RPC__in IActiveIME2 * This,
-            /* [in] */ DWORD dwSystemInfoFlags,
-            /* [out] */ __RPC__out IMEINFO *pIMEInfo,
-            /* [out] */ __RPC__out LPWSTR szWndClass,
-            /* [out] */ __RPC__out DWORD *pdwPrivate);
+            /* [annotation][in] */ 
+            _In_  DWORD dwSystemInfoFlags,
+            /* [annotation][out] */ 
+            _Out_  IMEINFO *pIMEInfo,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR szWndClass,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwPrivate);
         
         DECLSPEC_XFGVIRT(IActiveIME, ConversionList)
         HRESULT ( STDMETHODCALLTYPE *ConversionList )( 
             __RPC__in IActiveIME2 * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ __RPC__in LPWSTR szSource,
-            /* [in] */ UINT uFlag,
-            /* [in] */ UINT uBufLen,
-            /* [out] */ __RPC__out CANDIDATELIST *pDest,
-            /* [out] */ __RPC__out UINT *puCopied);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szSource,
+            /* [annotation][in] */ 
+            _In_  UINT uFlag,
+            /* [annotation][in] */ 
+            _In_  UINT uBufLen,
+            /* [annotation][out] */ 
+            _Out_  CANDIDATELIST *pDest,
+            /* [annotation][out] */ 
+            _Out_  UINT *puCopied);
         
         DECLSPEC_XFGVIRT(IActiveIME, Configure)
         HRESULT ( STDMETHODCALLTYPE *Configure )( 
             __RPC__in IActiveIME2 * This,
-            /* [in] */ __RPC__in HKL hKL,
-            /* [in] */ __RPC__in HWND hWnd,
-            /* [in] */ DWORD dwMode,
-            /* [in] */ __RPC__in REGISTERWORDW *pRegisterWord);
+            /* [annotation][in] */ 
+            _In_  HKL hKL,
+            /* [annotation][in] */ 
+            _In_  HWND hWnd,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMode,
+            /* [annotation][in] */ 
+            _In_  REGISTERWORDW *pRegisterWord);
         
         DECLSPEC_XFGVIRT(IActiveIME, Destroy)
         HRESULT ( STDMETHODCALLTYPE *Destroy )( 
             __RPC__in IActiveIME2 * This,
-            /* [in] */ UINT uReserved);
+            /* [annotation][in] */ 
+            _In_  UINT uReserved);
         
         DECLSPEC_XFGVIRT(IActiveIME, Escape)
         HRESULT ( STDMETHODCALLTYPE *Escape )( 
             __RPC__in IActiveIME2 * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ UINT uEscape,
-            /* [out][in] */ __RPC__inout void *pData,
-            /* [out] */ __RPC__out LRESULT *plResult);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  UINT uEscape,
+            /* [annotation][out][in] */ 
+            _Inout_  void *pData,
+            /* [annotation][out] */ 
+            _Out_  LRESULT *plResult);
         
         DECLSPEC_XFGVIRT(IActiveIME, SetActiveContext)
         HRESULT ( STDMETHODCALLTYPE *SetActiveContext )( 
             __RPC__in IActiveIME2 * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ BOOL fFlag);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  BOOL fFlag);
         
         DECLSPEC_XFGVIRT(IActiveIME, ProcessKey)
         HRESULT ( STDMETHODCALLTYPE *ProcessKey )( 
             __RPC__in IActiveIME2 * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ UINT uVirKey,
-            /* [in] */ DWORD lParam,
-            /* [in] */ __RPC__in BYTE *pbKeyState);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  UINT uVirKey,
+            /* [annotation][in] */ 
+            _In_  DWORD lParam,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbKeyState);
         
         DECLSPEC_XFGVIRT(IActiveIME, Notify)
         HRESULT ( STDMETHODCALLTYPE *Notify )( 
             __RPC__in IActiveIME2 * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwAction,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ DWORD dwValue);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAction,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwValue);
         
         DECLSPEC_XFGVIRT(IActiveIME, Select)
         HRESULT ( STDMETHODCALLTYPE *Select )( 
             __RPC__in IActiveIME2 * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ BOOL fSelect);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  BOOL fSelect);
         
         DECLSPEC_XFGVIRT(IActiveIME, SetCompositionString)
         HRESULT ( STDMETHODCALLTYPE *SetCompositionString )( 
             __RPC__in IActiveIME2 * This,
-            /* [in] */ HIMC hIMC,
-            /* [in] */ DWORD dwIndex,
-            /* [in] */ __RPC__in void *pComp,
-            /* [in] */ DWORD dwCompLen,
-            /* [in] */ __RPC__in void *pRead,
-            /* [in] */ DWORD dwReadLen);
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  void *pComp,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCompLen,
+            /* [annotation][in] */ 
+            _In_  void *pRead,
+            /* [annotation][in] */ 
+            _In_  DWORD dwReadLen);
         
         DECLSPEC_XFGVIRT(IActiveIME, ToAsciiEx)
         HRESULT ( STDMETHODCALLTYPE *ToAsciiEx )( 
             __RPC__in IActiveIME2 * This,
-            /* [in] */ UINT uVirKey,
-            /* [in] */ UINT uScanCode,
-            /* [in] */ __RPC__in BYTE *pbKeyState,
-            /* [in] */ UINT fuState,
-            /* [in] */ HIMC hIMC,
-            /* [out] */ __RPC__out DWORD *pdwTransBuf,
-            /* [out] */ __RPC__out UINT *puSize);
+            /* [annotation][in] */ 
+            _In_  UINT uVirKey,
+            /* [annotation][in] */ 
+            _In_  UINT uScanCode,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbKeyState,
+            /* [annotation][in] */ 
+            _In_  UINT fuState,
+            /* [annotation][in] */ 
+            _In_  HIMC hIMC,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwTransBuf,
+            /* [annotation][out] */ 
+            _Out_  UINT *puSize);
         
         DECLSPEC_XFGVIRT(IActiveIME, RegisterWord)
         HRESULT ( STDMETHODCALLTYPE *RegisterWord )( 
             __RPC__in IActiveIME2 * This,
-            /* [in] */ __RPC__in LPWSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPWSTR szString);
+            /* [annotation][in] */ 
+            _In_  LPWSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szString);
         
         DECLSPEC_XFGVIRT(IActiveIME, UnregisterWord)
         HRESULT ( STDMETHODCALLTYPE *UnregisterWord )( 
             __RPC__in IActiveIME2 * This,
-            /* [in] */ __RPC__in LPWSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPWSTR szString);
+            /* [annotation][in] */ 
+            _In_  LPWSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szString);
         
         DECLSPEC_XFGVIRT(IActiveIME, GetRegisterWordStyle)
         HRESULT ( STDMETHODCALLTYPE *GetRegisterWordStyle )( 
             __RPC__in IActiveIME2 * This,
-            /* [in] */ UINT nItem,
-            /* [out] */ __RPC__out STYLEBUFW *pStyleBuf,
-            /* [out] */ __RPC__out UINT *puBufSize);
+            /* [annotation][in] */ 
+            _In_  UINT nItem,
+            /* [annotation][out] */ 
+            _Out_  STYLEBUFW *pStyleBuf,
+            /* [annotation][out] */ 
+            _Out_  UINT *puBufSize);
         
         DECLSPEC_XFGVIRT(IActiveIME, EnumRegisterWord)
         HRESULT ( STDMETHODCALLTYPE *EnumRegisterWord )( 
             __RPC__in IActiveIME2 * This,
-            /* [in] */ __RPC__in LPWSTR szReading,
-            /* [in] */ DWORD dwStyle,
-            /* [in] */ __RPC__in LPWSTR szRegister,
-            /* [in] */ __RPC__in LPVOID pData,
-            /* [out] */ __RPC__deref_out_opt IEnumRegisterWordW **ppEnum);
+            /* [annotation][in] */ 
+            _In_  LPWSTR szReading,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStyle,
+            /* [annotation][in] */ 
+            _In_  LPWSTR szRegister,
+            /* [annotation][in] */ 
+            _In_  LPVOID pData,
+            /* [annotation][out] */ 
+            _Out_  IEnumRegisterWordW **ppEnum);
         
         DECLSPEC_XFGVIRT(IActiveIME, GetCodePageA)
         HRESULT ( STDMETHODCALLTYPE *GetCodePageA )( 
             __RPC__in IActiveIME2 * This,
-            /* [out] */ __RPC__out UINT *uCodePage);
+            /* [annotation][out] */ 
+            _Out_  UINT *uCodePage);
         
         DECLSPEC_XFGVIRT(IActiveIME, GetLangId)
         HRESULT ( STDMETHODCALLTYPE *GetLangId )( 
             __RPC__in IActiveIME2 * This,
-            /* [out] */ __RPC__out LANGID *plid);
+            /* [annotation][out] */ 
+            _Out_  LANGID *plid);
         
         DECLSPEC_XFGVIRT(IActiveIME2, Sleep)
         HRESULT ( STDMETHODCALLTYPE *Sleep )( 
@@ -4008,7 +5268,8 @@ EXTERN_C const IID IID_IActiveIME2;
         DECLSPEC_XFGVIRT(IActiveIME2, Unsleep)
         HRESULT ( STDMETHODCALLTYPE *Unsleep )( 
             __RPC__in IActiveIME2 * This,
-            /* [in] */ BOOL fDead);
+            /* [annotation][in] */ 
+            _In_  BOOL fDead);
         
         END_INTERFACE
     } IActiveIME2Vtbl;

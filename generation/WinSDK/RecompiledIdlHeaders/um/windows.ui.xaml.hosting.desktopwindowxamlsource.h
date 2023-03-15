@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -98,7 +98,8 @@ EXTERN_C const IID IID_IDesktopWindowXamlSourceNative;
             _In_  HWND parentWnd) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_WindowHandle( 
-            /* [retval][out] */ HWND *hWnd) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HWND *hWnd) = 0;
         
     };
     
@@ -112,7 +113,8 @@ EXTERN_C const IID IID_IDesktopWindowXamlSourceNative;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDesktopWindowXamlSourceNative * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -133,7 +135,8 @@ EXTERN_C const IID IID_IDesktopWindowXamlSourceNative;
         DECLSPEC_XFGVIRT(IDesktopWindowXamlSourceNative, get_WindowHandle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WindowHandle )( 
             IDesktopWindowXamlSourceNative * This,
-            /* [retval][out] */ HWND *hWnd);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HWND *hWnd);
         
         END_INTERFACE
     } IDesktopWindowXamlSourceNativeVtbl;
@@ -217,7 +220,8 @@ EXTERN_C const IID IID_IDesktopWindowXamlSourceNative2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDesktopWindowXamlSourceNative2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -238,7 +242,8 @@ EXTERN_C const IID IID_IDesktopWindowXamlSourceNative2;
         DECLSPEC_XFGVIRT(IDesktopWindowXamlSourceNative, get_WindowHandle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WindowHandle )( 
             IDesktopWindowXamlSourceNative2 * This,
-            /* [retval][out] */ HWND *hWnd);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HWND *hWnd);
         
         DECLSPEC_XFGVIRT(IDesktopWindowXamlSourceNative2, PreTranslateMessage)
         HRESULT ( STDMETHODCALLTYPE *PreTranslateMessage )( 

@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -317,8 +317,10 @@ EXTERN_C const IID IID_IInitializeWithFile;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [string][in] */ __RPC__in_string LPCWSTR pszFilePath,
-            /* [in] */ DWORD grfMode) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszFilePath,
+            /* [annotation][in] */ 
+            _In_  DWORD grfMode) = 0;
         
     };
     
@@ -332,7 +334,8 @@ EXTERN_C const IID IID_IInitializeWithFile;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInitializeWithFile * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -347,8 +350,10 @@ EXTERN_C const IID IID_IInitializeWithFile;
         DECLSPEC_XFGVIRT(IInitializeWithFile, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IInitializeWithFile * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR pszFilePath,
-            /* [in] */ DWORD grfMode);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszFilePath,
+            /* [annotation][in] */ 
+            _In_  DWORD grfMode);
         
         END_INTERFACE
     } IInitializeWithFileVtbl;
@@ -420,7 +425,8 @@ EXTERN_C const IID IID_IInitializeWithStream;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInitializeWithStream * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -475,8 +481,10 @@ EXTERN_C const IID IID_IInitializeWithStream;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IInitializeWithStream_RemoteInitialize_Proxy( 
     __RPC__in IInitializeWithStream * This,
-    /* [in] */ __RPC__in_opt IStream *pstream,
-    /* [in] */ DWORD grfMode);
+    /* [annotation][in] */ 
+    _In_  IStream *pstream,
+    /* [annotation][in] */ 
+    _In_  DWORD grfMode);
 
 
 void __RPC_STUB IInitializeWithStream_RemoteInitialize_Stub(
@@ -518,19 +526,26 @@ EXTERN_C const IID IID_IPropertyStore;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [out] */ __RPC__out DWORD *cProps) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *cProps) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [in] */ DWORD iProp,
-            /* [out] */ __RPC__out PROPERTYKEY *pkey) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD iProp,
+            /* [annotation][out] */ 
+            _Out_  PROPERTYKEY *pkey) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetValue( 
-            /* [in] */ __RPC__in REFPROPERTYKEY key,
-            /* [out] */ __RPC__out PROPVARIANT *pv) = 0;
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *pv) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetValue( 
-            /* [in] */ __RPC__in REFPROPERTYKEY key,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar) = 0;
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Commit( void) = 0;
         
@@ -546,7 +561,8 @@ EXTERN_C const IID IID_IPropertyStore;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPropertyStore * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -561,25 +577,32 @@ EXTERN_C const IID IID_IPropertyStore;
         DECLSPEC_XFGVIRT(IPropertyStore, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IPropertyStore * This,
-            /* [out] */ __RPC__out DWORD *cProps);
+            /* [annotation][out] */ 
+            _Out_  DWORD *cProps);
         
         DECLSPEC_XFGVIRT(IPropertyStore, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IPropertyStore * This,
-            /* [in] */ DWORD iProp,
-            /* [out] */ __RPC__out PROPERTYKEY *pkey);
+            /* [annotation][in] */ 
+            _In_  DWORD iProp,
+            /* [annotation][out] */ 
+            _Out_  PROPERTYKEY *pkey);
         
         DECLSPEC_XFGVIRT(IPropertyStore, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in IPropertyStore * This,
-            /* [in] */ __RPC__in REFPROPERTYKEY key,
-            /* [out] */ __RPC__out PROPVARIANT *pv);
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *pv);
         
         DECLSPEC_XFGVIRT(IPropertyStore, SetValue)
         HRESULT ( STDMETHODCALLTYPE *SetValue )( 
             __RPC__in IPropertyStore * This,
-            /* [in] */ __RPC__in REFPROPERTYKEY key,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar);
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar);
         
         DECLSPEC_XFGVIRT(IPropertyStore, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
@@ -670,19 +693,26 @@ EXTERN_C const IID IID_INamedPropertyStore;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetNamedValue( 
-            /* [string][in] */ __RPC__in_string LPCWSTR pszName,
-            /* [out] */ __RPC__out PROPVARIANT *ppropvar) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszName,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *ppropvar) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetNamedValue( 
-            /* [string][in] */ __RPC__in_string LPCWSTR pszName,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszName,
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNameCount( 
-            /* [out] */ __RPC__out DWORD *pdwCount) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNameAt( 
-            /* [in] */ DWORD iProp,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD iProp,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrName) = 0;
         
     };
     
@@ -696,7 +726,8 @@ EXTERN_C const IID IID_INamedPropertyStore;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INamedPropertyStore * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -711,25 +742,32 @@ EXTERN_C const IID IID_INamedPropertyStore;
         DECLSPEC_XFGVIRT(INamedPropertyStore, GetNamedValue)
         HRESULT ( STDMETHODCALLTYPE *GetNamedValue )( 
             __RPC__in INamedPropertyStore * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR pszName,
-            /* [out] */ __RPC__out PROPVARIANT *ppropvar);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszName,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *ppropvar);
         
         DECLSPEC_XFGVIRT(INamedPropertyStore, SetNamedValue)
         HRESULT ( STDMETHODCALLTYPE *SetNamedValue )( 
             __RPC__in INamedPropertyStore * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR pszName,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszName,
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar);
         
         DECLSPEC_XFGVIRT(INamedPropertyStore, GetNameCount)
         HRESULT ( STDMETHODCALLTYPE *GetNameCount )( 
             __RPC__in INamedPropertyStore * This,
-            /* [out] */ __RPC__out DWORD *pdwCount);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwCount);
         
         DECLSPEC_XFGVIRT(INamedPropertyStore, GetNameAt)
         HRESULT ( STDMETHODCALLTYPE *GetNameAt )( 
             __RPC__in INamedPropertyStore * This,
-            /* [in] */ DWORD iProp,
-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrName);
+            /* [annotation][in] */ 
+            _In_  DWORD iProp,
+            /* [annotation][out] */ 
+            _Out_  BSTR *pbstrName);
         
         END_INTERFACE
     } INamedPropertyStoreVtbl;
@@ -822,10 +860,12 @@ EXTERN_C const IID IID_IObjectWithPropertyKey;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetPropertyKey( 
-            /* [in] */ __RPC__in REFPROPERTYKEY key) = 0;
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPropertyKey( 
-            /* [out] */ __RPC__out PROPERTYKEY *pkey) = 0;
+            /* [annotation][out] */ 
+            _Out_  PROPERTYKEY *pkey) = 0;
         
     };
     
@@ -839,7 +879,8 @@ EXTERN_C const IID IID_IObjectWithPropertyKey;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IObjectWithPropertyKey * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -854,12 +895,14 @@ EXTERN_C const IID IID_IObjectWithPropertyKey;
         DECLSPEC_XFGVIRT(IObjectWithPropertyKey, SetPropertyKey)
         HRESULT ( STDMETHODCALLTYPE *SetPropertyKey )( 
             __RPC__in IObjectWithPropertyKey * This,
-            /* [in] */ __RPC__in REFPROPERTYKEY key);
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key);
         
         DECLSPEC_XFGVIRT(IObjectWithPropertyKey, GetPropertyKey)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyKey )( 
             __RPC__in IObjectWithPropertyKey * This,
-            /* [out] */ __RPC__out PROPERTYKEY *pkey);
+            /* [annotation][out] */ 
+            _Out_  PROPERTYKEY *pkey);
         
         END_INTERFACE
     } IObjectWithPropertyKeyVtbl;
@@ -933,8 +976,10 @@ EXTERN_C const IID IID_IPropertyChange;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ApplyToPropVariant( 
-            /* [in] */ __RPC__in REFPROPVARIANT propvarIn,
-            /* [out] */ __RPC__out PROPVARIANT *ppropvarOut) = 0;
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvarIn,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *ppropvarOut) = 0;
         
     };
     
@@ -948,7 +993,8 @@ EXTERN_C const IID IID_IPropertyChange;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPropertyChange * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -963,18 +1009,22 @@ EXTERN_C const IID IID_IPropertyChange;
         DECLSPEC_XFGVIRT(IObjectWithPropertyKey, SetPropertyKey)
         HRESULT ( STDMETHODCALLTYPE *SetPropertyKey )( 
             __RPC__in IPropertyChange * This,
-            /* [in] */ __RPC__in REFPROPERTYKEY key);
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key);
         
         DECLSPEC_XFGVIRT(IObjectWithPropertyKey, GetPropertyKey)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyKey )( 
             __RPC__in IPropertyChange * This,
-            /* [out] */ __RPC__out PROPERTYKEY *pkey);
+            /* [annotation][out] */ 
+            _Out_  PROPERTYKEY *pkey);
         
         DECLSPEC_XFGVIRT(IPropertyChange, ApplyToPropVariant)
         HRESULT ( STDMETHODCALLTYPE *ApplyToPropVariant )( 
             __RPC__in IPropertyChange * This,
-            /* [in] */ __RPC__in REFPROPVARIANT propvarIn,
-            /* [out] */ __RPC__out PROPVARIANT *ppropvarOut);
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvarIn,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *ppropvarOut);
         
         END_INTERFACE
     } IPropertyChangeVtbl;
@@ -1036,28 +1086,38 @@ EXTERN_C const IID IID_IPropertyChangeArray;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [out] */ __RPC__out UINT *pcOperations) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *pcOperations) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [in] */ UINT iIndex,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT iIndex,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertAt( 
-            /* [in] */ UINT iIndex,
-            /* [in] */ __RPC__in_opt IPropertyChange *ppropChange) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT iIndex,
+            /* [annotation][in] */ 
+            _In_  IPropertyChange *ppropChange) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Append( 
-            /* [in] */ __RPC__in_opt IPropertyChange *ppropChange) = 0;
+            /* [annotation][in] */ 
+            _In_  IPropertyChange *ppropChange) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AppendOrReplace( 
-            /* [in] */ __RPC__in_opt IPropertyChange *ppropChange) = 0;
+            /* [annotation][in] */ 
+            _In_  IPropertyChange *ppropChange) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAt( 
-            /* [in] */ UINT iIndex) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT iIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsKeyInArray( 
-            /* [in] */ __RPC__in REFPROPERTYKEY key) = 0;
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key) = 0;
         
     };
     
@@ -1071,7 +1131,8 @@ EXTERN_C const IID IID_IPropertyChangeArray;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPropertyChangeArray * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1086,40 +1147,50 @@ EXTERN_C const IID IID_IPropertyChangeArray;
         DECLSPEC_XFGVIRT(IPropertyChangeArray, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IPropertyChangeArray * This,
-            /* [out] */ __RPC__out UINT *pcOperations);
+            /* [annotation][out] */ 
+            _Out_  UINT *pcOperations);
         
         DECLSPEC_XFGVIRT(IPropertyChangeArray, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IPropertyChangeArray * This,
-            /* [in] */ UINT iIndex,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  UINT iIndex,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         DECLSPEC_XFGVIRT(IPropertyChangeArray, InsertAt)
         HRESULT ( STDMETHODCALLTYPE *InsertAt )( 
             __RPC__in IPropertyChangeArray * This,
-            /* [in] */ UINT iIndex,
-            /* [in] */ __RPC__in_opt IPropertyChange *ppropChange);
+            /* [annotation][in] */ 
+            _In_  UINT iIndex,
+            /* [annotation][in] */ 
+            _In_  IPropertyChange *ppropChange);
         
         DECLSPEC_XFGVIRT(IPropertyChangeArray, Append)
         HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in IPropertyChangeArray * This,
-            /* [in] */ __RPC__in_opt IPropertyChange *ppropChange);
+            /* [annotation][in] */ 
+            _In_  IPropertyChange *ppropChange);
         
         DECLSPEC_XFGVIRT(IPropertyChangeArray, AppendOrReplace)
         HRESULT ( STDMETHODCALLTYPE *AppendOrReplace )( 
             __RPC__in IPropertyChangeArray * This,
-            /* [in] */ __RPC__in_opt IPropertyChange *ppropChange);
+            /* [annotation][in] */ 
+            _In_  IPropertyChange *ppropChange);
         
         DECLSPEC_XFGVIRT(IPropertyChangeArray, RemoveAt)
         HRESULT ( STDMETHODCALLTYPE *RemoveAt )( 
             __RPC__in IPropertyChangeArray * This,
-            /* [in] */ UINT iIndex);
+            /* [annotation][in] */ 
+            _In_  UINT iIndex);
         
         DECLSPEC_XFGVIRT(IPropertyChangeArray, IsKeyInArray)
         HRESULT ( STDMETHODCALLTYPE *IsKeyInArray )( 
             __RPC__in IPropertyChangeArray * This,
-            /* [in] */ __RPC__in REFPROPERTYKEY key);
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key);
         
         END_INTERFACE
     } IPropertyChangeArrayVtbl;
@@ -1192,7 +1263,8 @@ EXTERN_C const IID IID_IPropertyStoreCapabilities;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE IsPropertyWritable( 
-            /* [in] */ __RPC__in REFPROPERTYKEY key) = 0;
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key) = 0;
         
     };
     
@@ -1206,7 +1278,8 @@ EXTERN_C const IID IID_IPropertyStoreCapabilities;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPropertyStoreCapabilities * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1221,7 +1294,8 @@ EXTERN_C const IID IID_IPropertyStoreCapabilities;
         DECLSPEC_XFGVIRT(IPropertyStoreCapabilities, IsPropertyWritable)
         HRESULT ( STDMETHODCALLTYPE *IsPropertyWritable )( 
             __RPC__in IPropertyStoreCapabilities * This,
-            /* [in] */ __RPC__in REFPROPERTYKEY key);
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key);
         
         END_INTERFACE
     } IPropertyStoreCapabilitiesVtbl;
@@ -1285,22 +1359,32 @@ EXTERN_C const IID IID_IPropertyStoreCache;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetState( 
-            /* [in] */ __RPC__in REFPROPERTYKEY key,
-            /* [out] */ __RPC__out PSC_STATE *pstate) = 0;
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][out] */ 
+            _Out_  PSC_STATE *pstate) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetValueAndState( 
-            /* [in] */ __RPC__in REFPROPERTYKEY key,
-            /* [out] */ __RPC__out PROPVARIANT *ppropvar,
-            /* [out] */ __RPC__out PSC_STATE *pstate) = 0;
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *ppropvar,
+            /* [annotation][out] */ 
+            _Out_  PSC_STATE *pstate) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetState( 
-            /* [in] */ __RPC__in REFPROPERTYKEY key,
-            /* [in] */ PSC_STATE state) = 0;
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][in] */ 
+            _In_  PSC_STATE state) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetValueAndState( 
-            /* [in] */ __RPC__in REFPROPERTYKEY key,
-            /* [unique][in] */ __RPC__in_opt const PROPVARIANT *ppropvar,
-            /* [in] */ PSC_STATE state) = 0;
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][unique][in] */ 
+            _In_  const PROPVARIANT *ppropvar,
+            /* [annotation][in] */ 
+            _In_  PSC_STATE state) = 0;
         
     };
     
@@ -1314,7 +1398,8 @@ EXTERN_C const IID IID_IPropertyStoreCache;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPropertyStoreCache * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1329,25 +1414,32 @@ EXTERN_C const IID IID_IPropertyStoreCache;
         DECLSPEC_XFGVIRT(IPropertyStore, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IPropertyStoreCache * This,
-            /* [out] */ __RPC__out DWORD *cProps);
+            /* [annotation][out] */ 
+            _Out_  DWORD *cProps);
         
         DECLSPEC_XFGVIRT(IPropertyStore, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IPropertyStoreCache * This,
-            /* [in] */ DWORD iProp,
-            /* [out] */ __RPC__out PROPERTYKEY *pkey);
+            /* [annotation][in] */ 
+            _In_  DWORD iProp,
+            /* [annotation][out] */ 
+            _Out_  PROPERTYKEY *pkey);
         
         DECLSPEC_XFGVIRT(IPropertyStore, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in IPropertyStoreCache * This,
-            /* [in] */ __RPC__in REFPROPERTYKEY key,
-            /* [out] */ __RPC__out PROPVARIANT *pv);
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *pv);
         
         DECLSPEC_XFGVIRT(IPropertyStore, SetValue)
         HRESULT ( STDMETHODCALLTYPE *SetValue )( 
             __RPC__in IPropertyStoreCache * This,
-            /* [in] */ __RPC__in REFPROPERTYKEY key,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar);
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar);
         
         DECLSPEC_XFGVIRT(IPropertyStore, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
@@ -1356,28 +1448,38 @@ EXTERN_C const IID IID_IPropertyStoreCache;
         DECLSPEC_XFGVIRT(IPropertyStoreCache, GetState)
         HRESULT ( STDMETHODCALLTYPE *GetState )( 
             __RPC__in IPropertyStoreCache * This,
-            /* [in] */ __RPC__in REFPROPERTYKEY key,
-            /* [out] */ __RPC__out PSC_STATE *pstate);
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][out] */ 
+            _Out_  PSC_STATE *pstate);
         
         DECLSPEC_XFGVIRT(IPropertyStoreCache, GetValueAndState)
         HRESULT ( STDMETHODCALLTYPE *GetValueAndState )( 
             __RPC__in IPropertyStoreCache * This,
-            /* [in] */ __RPC__in REFPROPERTYKEY key,
-            /* [out] */ __RPC__out PROPVARIANT *ppropvar,
-            /* [out] */ __RPC__out PSC_STATE *pstate);
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *ppropvar,
+            /* [annotation][out] */ 
+            _Out_  PSC_STATE *pstate);
         
         DECLSPEC_XFGVIRT(IPropertyStoreCache, SetState)
         HRESULT ( STDMETHODCALLTYPE *SetState )( 
             __RPC__in IPropertyStoreCache * This,
-            /* [in] */ __RPC__in REFPROPERTYKEY key,
-            /* [in] */ PSC_STATE state);
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][in] */ 
+            _In_  PSC_STATE state);
         
         DECLSPEC_XFGVIRT(IPropertyStoreCache, SetValueAndState)
         HRESULT ( STDMETHODCALLTYPE *SetValueAndState )( 
             __RPC__in IPropertyStoreCache * This,
-            /* [in] */ __RPC__in REFPROPERTYKEY key,
-            /* [unique][in] */ __RPC__in_opt const PROPVARIANT *ppropvar,
-            /* [in] */ PSC_STATE state);
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][unique][in] */ 
+            _In_  const PROPVARIANT *ppropvar,
+            /* [annotation][in] */ 
+            _In_  PSC_STATE state);
         
         END_INTERFACE
     } IPropertyStoreCacheVtbl;
@@ -1466,19 +1568,24 @@ EXTERN_C const IID IID_IPropertyEnumType;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetEnumType( 
-            /* [out] */ __RPC__out PROPENUMTYPE *penumtype) = 0;
+            /* [annotation][out] */ 
+            _Out_  PROPENUMTYPE *penumtype) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetValue( 
-            /* [out] */ __RPC__out PROPVARIANT *ppropvar) = 0;
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *ppropvar) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRangeMinValue( 
-            /* [out] */ __RPC__out PROPVARIANT *ppropvarMin) = 0;
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *ppropvarMin) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRangeSetValue( 
-            /* [out] */ __RPC__out PROPVARIANT *ppropvarSet) = 0;
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *ppropvarSet) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDisplayText( 
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszDisplay) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppszDisplay) = 0;
         
     };
     
@@ -1492,7 +1599,8 @@ EXTERN_C const IID IID_IPropertyEnumType;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPropertyEnumType * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1507,27 +1615,32 @@ EXTERN_C const IID IID_IPropertyEnumType;
         DECLSPEC_XFGVIRT(IPropertyEnumType, GetEnumType)
         HRESULT ( STDMETHODCALLTYPE *GetEnumType )( 
             __RPC__in IPropertyEnumType * This,
-            /* [out] */ __RPC__out PROPENUMTYPE *penumtype);
+            /* [annotation][out] */ 
+            _Out_  PROPENUMTYPE *penumtype);
         
         DECLSPEC_XFGVIRT(IPropertyEnumType, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in IPropertyEnumType * This,
-            /* [out] */ __RPC__out PROPVARIANT *ppropvar);
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *ppropvar);
         
         DECLSPEC_XFGVIRT(IPropertyEnumType, GetRangeMinValue)
         HRESULT ( STDMETHODCALLTYPE *GetRangeMinValue )( 
             __RPC__in IPropertyEnumType * This,
-            /* [out] */ __RPC__out PROPVARIANT *ppropvarMin);
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *ppropvarMin);
         
         DECLSPEC_XFGVIRT(IPropertyEnumType, GetRangeSetValue)
         HRESULT ( STDMETHODCALLTYPE *GetRangeSetValue )( 
             __RPC__in IPropertyEnumType * This,
-            /* [out] */ __RPC__out PROPVARIANT *ppropvarSet);
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *ppropvarSet);
         
         DECLSPEC_XFGVIRT(IPropertyEnumType, GetDisplayText)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayText )( 
             __RPC__in IPropertyEnumType * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszDisplay);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppszDisplay);
         
         END_INTERFACE
     } IPropertyEnumTypeVtbl;
@@ -1594,7 +1707,8 @@ EXTERN_C const IID IID_IPropertyEnumType2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetImageReference( 
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszImageRes) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppszImageRes) = 0;
         
     };
     
@@ -1608,7 +1722,8 @@ EXTERN_C const IID IID_IPropertyEnumType2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPropertyEnumType2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1623,32 +1738,38 @@ EXTERN_C const IID IID_IPropertyEnumType2;
         DECLSPEC_XFGVIRT(IPropertyEnumType, GetEnumType)
         HRESULT ( STDMETHODCALLTYPE *GetEnumType )( 
             __RPC__in IPropertyEnumType2 * This,
-            /* [out] */ __RPC__out PROPENUMTYPE *penumtype);
+            /* [annotation][out] */ 
+            _Out_  PROPENUMTYPE *penumtype);
         
         DECLSPEC_XFGVIRT(IPropertyEnumType, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in IPropertyEnumType2 * This,
-            /* [out] */ __RPC__out PROPVARIANT *ppropvar);
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *ppropvar);
         
         DECLSPEC_XFGVIRT(IPropertyEnumType, GetRangeMinValue)
         HRESULT ( STDMETHODCALLTYPE *GetRangeMinValue )( 
             __RPC__in IPropertyEnumType2 * This,
-            /* [out] */ __RPC__out PROPVARIANT *ppropvarMin);
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *ppropvarMin);
         
         DECLSPEC_XFGVIRT(IPropertyEnumType, GetRangeSetValue)
         HRESULT ( STDMETHODCALLTYPE *GetRangeSetValue )( 
             __RPC__in IPropertyEnumType2 * This,
-            /* [out] */ __RPC__out PROPVARIANT *ppropvarSet);
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *ppropvarSet);
         
         DECLSPEC_XFGVIRT(IPropertyEnumType, GetDisplayText)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayText )( 
             __RPC__in IPropertyEnumType2 * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszDisplay);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppszDisplay);
         
         DECLSPEC_XFGVIRT(IPropertyEnumType2, GetImageReference)
         HRESULT ( STDMETHODCALLTYPE *GetImageReference )( 
             __RPC__in IPropertyEnumType2 * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszImageRes);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppszImageRes);
         
         END_INTERFACE
     } IPropertyEnumType2Vtbl;
@@ -1719,21 +1840,30 @@ EXTERN_C const IID IID_IPropertyEnumTypeList;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [out] */ __RPC__out UINT *pctypes) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *pctypes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [in] */ UINT itype,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT itype,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetConditionAt( 
-            /* [in] */ UINT nIndex,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT nIndex,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FindMatchingIndex( 
-            /* [in] */ __RPC__in REFPROPVARIANT propvarCmp,
-            /* [out] */ __RPC__out UINT *pnIndex) = 0;
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvarCmp,
+            /* [annotation][out] */ 
+            _Out_  UINT *pnIndex) = 0;
         
     };
     
@@ -1747,7 +1877,8 @@ EXTERN_C const IID IID_IPropertyEnumTypeList;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPropertyEnumTypeList * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1762,27 +1893,36 @@ EXTERN_C const IID IID_IPropertyEnumTypeList;
         DECLSPEC_XFGVIRT(IPropertyEnumTypeList, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IPropertyEnumTypeList * This,
-            /* [out] */ __RPC__out UINT *pctypes);
+            /* [annotation][out] */ 
+            _Out_  UINT *pctypes);
         
         DECLSPEC_XFGVIRT(IPropertyEnumTypeList, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IPropertyEnumTypeList * This,
-            /* [in] */ UINT itype,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  UINT itype,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         DECLSPEC_XFGVIRT(IPropertyEnumTypeList, GetConditionAt)
         HRESULT ( STDMETHODCALLTYPE *GetConditionAt )( 
             __RPC__in IPropertyEnumTypeList * This,
-            /* [in] */ UINT nIndex,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  UINT nIndex,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         DECLSPEC_XFGVIRT(IPropertyEnumTypeList, FindMatchingIndex)
         HRESULT ( STDMETHODCALLTYPE *FindMatchingIndex )( 
             __RPC__in IPropertyEnumTypeList * This,
-            /* [in] */ __RPC__in REFPROPVARIANT propvarCmp,
-            /* [out] */ __RPC__out UINT *pnIndex);
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvarCmp,
+            /* [annotation][out] */ 
+            _Out_  UINT *pnIndex);
         
         END_INTERFACE
     } IPropertyEnumTypeListVtbl;
@@ -1982,77 +2122,106 @@ EXTERN_C const IID IID_IPropertyDescription;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetPropertyKey( 
-            /* [out] */ __RPC__out PROPERTYKEY *pkey) = 0;
+            /* [annotation][out] */ 
+            _Out_  PROPERTYKEY *pkey) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCanonicalName( 
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszName) = 0;
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPropertyType( 
-            /* [out] */ __RPC__out VARTYPE *pvartype) = 0;
+            /* [annotation][out] */ 
+            _Out_  VARTYPE *pvartype) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDisplayName( 
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszName) = 0;
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEditInvitation( 
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszInvite) = 0;
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszInvite) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTypeFlags( 
-            /* [in] */ PROPDESC_TYPE_FLAGS mask,
-            /* [out] */ __RPC__out PROPDESC_TYPE_FLAGS *ppdtFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  PROPDESC_TYPE_FLAGS mask,
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_TYPE_FLAGS *ppdtFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetViewFlags( 
-            /* [out] */ __RPC__out PROPDESC_VIEW_FLAGS *ppdvFlags) = 0;
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_VIEW_FLAGS *ppdvFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDefaultColumnWidth( 
-            /* [out] */ __RPC__out UINT *pcxChars) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *pcxChars) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDisplayType( 
-            /* [out] */ __RPC__out PROPDESC_DISPLAYTYPE *pdisplaytype) = 0;
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_DISPLAYTYPE *pdisplaytype) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetColumnState( 
-            /* [out] */ __RPC__out SHCOLSTATEF *pcsFlags) = 0;
+            /* [annotation][out] */ 
+            _Out_  SHCOLSTATEF *pcsFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGroupingRange( 
-            /* [out] */ __RPC__out PROPDESC_GROUPING_RANGE *pgr) = 0;
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_GROUPING_RANGE *pgr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRelativeDescriptionType( 
-            /* [out] */ __RPC__out PROPDESC_RELATIVEDESCRIPTION_TYPE *prdt) = 0;
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_RELATIVEDESCRIPTION_TYPE *prdt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRelativeDescription( 
-            /* [in] */ __RPC__in REFPROPVARIANT propvar1,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar2,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDesc1,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDesc2) = 0;
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar1,
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar2,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDesc1,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDesc2) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSortDescription( 
-            /* [out] */ __RPC__out PROPDESC_SORTDESCRIPTION *psd) = 0;
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_SORTDESCRIPTION *psd) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSortDescriptionLabel( 
-            /* [in] */ BOOL fDescending,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDescription) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL fDescending,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDescription) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAggregationType( 
-            /* [out] */ __RPC__out PROPDESC_AGGREGATION_TYPE *paggtype) = 0;
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_AGGREGATION_TYPE *paggtype) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetConditionType( 
-            /* [out] */ __RPC__out PROPDESC_CONDITION_TYPE *pcontype,
-            /* [out] */ __RPC__out CONDITION_OPERATION *popDefault) = 0;
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_CONDITION_TYPE *pcontype,
+            /* [annotation][out] */ 
+            _Out_  CONDITION_OPERATION *popDefault) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEnumTypeList( 
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE CoerceToCanonicalValue( 
             /* [annotation][out][in] */ 
             _Inout_  PROPVARIANT *ppropvar) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FormatForDisplay( 
-            /* [in] */ __RPC__in REFPROPVARIANT propvar,
-            /* [in] */ PROPDESC_FORMAT_FLAGS pdfFlags,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDisplay) = 0;
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar,
+            /* [annotation][in] */ 
+            _In_  PROPDESC_FORMAT_FLAGS pdfFlags,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDisplay) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsValueCanonical( 
-            /* [in] */ __RPC__in REFPROPVARIANT propvar) = 0;
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar) = 0;
         
     };
     
@@ -2066,7 +2235,8 @@ EXTERN_C const IID IID_IPropertyDescription;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPropertyDescription * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2081,99 +2251,124 @@ EXTERN_C const IID IID_IPropertyDescription;
         DECLSPEC_XFGVIRT(IPropertyDescription, GetPropertyKey)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyKey )( 
             __RPC__in IPropertyDescription * This,
-            /* [out] */ __RPC__out PROPERTYKEY *pkey);
+            /* [annotation][out] */ 
+            _Out_  PROPERTYKEY *pkey);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetCanonicalName)
         HRESULT ( STDMETHODCALLTYPE *GetCanonicalName )( 
             __RPC__in IPropertyDescription * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszName);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszName);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetPropertyType)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyType )( 
             __RPC__in IPropertyDescription * This,
-            /* [out] */ __RPC__out VARTYPE *pvartype);
+            /* [annotation][out] */ 
+            _Out_  VARTYPE *pvartype);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetDisplayName)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayName )( 
             __RPC__in IPropertyDescription * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszName);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszName);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetEditInvitation)
         HRESULT ( STDMETHODCALLTYPE *GetEditInvitation )( 
             __RPC__in IPropertyDescription * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszInvite);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszInvite);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetTypeFlags)
         HRESULT ( STDMETHODCALLTYPE *GetTypeFlags )( 
             __RPC__in IPropertyDescription * This,
-            /* [in] */ PROPDESC_TYPE_FLAGS mask,
-            /* [out] */ __RPC__out PROPDESC_TYPE_FLAGS *ppdtFlags);
+            /* [annotation][in] */ 
+            _In_  PROPDESC_TYPE_FLAGS mask,
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_TYPE_FLAGS *ppdtFlags);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetViewFlags)
         HRESULT ( STDMETHODCALLTYPE *GetViewFlags )( 
             __RPC__in IPropertyDescription * This,
-            /* [out] */ __RPC__out PROPDESC_VIEW_FLAGS *ppdvFlags);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_VIEW_FLAGS *ppdvFlags);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetDefaultColumnWidth)
         HRESULT ( STDMETHODCALLTYPE *GetDefaultColumnWidth )( 
             __RPC__in IPropertyDescription * This,
-            /* [out] */ __RPC__out UINT *pcxChars);
+            /* [annotation][out] */ 
+            _Out_  UINT *pcxChars);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetDisplayType)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayType )( 
             __RPC__in IPropertyDescription * This,
-            /* [out] */ __RPC__out PROPDESC_DISPLAYTYPE *pdisplaytype);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_DISPLAYTYPE *pdisplaytype);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetColumnState)
         HRESULT ( STDMETHODCALLTYPE *GetColumnState )( 
             __RPC__in IPropertyDescription * This,
-            /* [out] */ __RPC__out SHCOLSTATEF *pcsFlags);
+            /* [annotation][out] */ 
+            _Out_  SHCOLSTATEF *pcsFlags);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetGroupingRange)
         HRESULT ( STDMETHODCALLTYPE *GetGroupingRange )( 
             __RPC__in IPropertyDescription * This,
-            /* [out] */ __RPC__out PROPDESC_GROUPING_RANGE *pgr);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_GROUPING_RANGE *pgr);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetRelativeDescriptionType)
         HRESULT ( STDMETHODCALLTYPE *GetRelativeDescriptionType )( 
             __RPC__in IPropertyDescription * This,
-            /* [out] */ __RPC__out PROPDESC_RELATIVEDESCRIPTION_TYPE *prdt);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_RELATIVEDESCRIPTION_TYPE *prdt);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetRelativeDescription)
         HRESULT ( STDMETHODCALLTYPE *GetRelativeDescription )( 
             __RPC__in IPropertyDescription * This,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar1,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar2,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDesc1,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDesc2);
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar1,
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar2,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDesc1,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDesc2);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetSortDescription)
         HRESULT ( STDMETHODCALLTYPE *GetSortDescription )( 
             __RPC__in IPropertyDescription * This,
-            /* [out] */ __RPC__out PROPDESC_SORTDESCRIPTION *psd);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_SORTDESCRIPTION *psd);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetSortDescriptionLabel)
         HRESULT ( STDMETHODCALLTYPE *GetSortDescriptionLabel )( 
             __RPC__in IPropertyDescription * This,
-            /* [in] */ BOOL fDescending,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDescription);
+            /* [annotation][in] */ 
+            _In_  BOOL fDescending,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDescription);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetAggregationType)
         HRESULT ( STDMETHODCALLTYPE *GetAggregationType )( 
             __RPC__in IPropertyDescription * This,
-            /* [out] */ __RPC__out PROPDESC_AGGREGATION_TYPE *paggtype);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_AGGREGATION_TYPE *paggtype);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetConditionType)
         HRESULT ( STDMETHODCALLTYPE *GetConditionType )( 
             __RPC__in IPropertyDescription * This,
-            /* [out] */ __RPC__out PROPDESC_CONDITION_TYPE *pcontype,
-            /* [out] */ __RPC__out CONDITION_OPERATION *popDefault);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_CONDITION_TYPE *pcontype,
+            /* [annotation][out] */ 
+            _Out_  CONDITION_OPERATION *popDefault);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetEnumTypeList)
         HRESULT ( STDMETHODCALLTYPE *GetEnumTypeList )( 
             __RPC__in IPropertyDescription * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, CoerceToCanonicalValue)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CoerceToCanonicalValue )( 
@@ -2184,14 +2379,18 @@ EXTERN_C const IID IID_IPropertyDescription;
         DECLSPEC_XFGVIRT(IPropertyDescription, FormatForDisplay)
         HRESULT ( STDMETHODCALLTYPE *FormatForDisplay )( 
             __RPC__in IPropertyDescription * This,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar,
-            /* [in] */ PROPDESC_FORMAT_FLAGS pdfFlags,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDisplay);
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar,
+            /* [annotation][in] */ 
+            _In_  PROPDESC_FORMAT_FLAGS pdfFlags,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDisplay);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, IsValueCanonical)
         HRESULT ( STDMETHODCALLTYPE *IsValueCanonical )( 
             __RPC__in IPropertyDescription * This,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar);
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar);
         
         END_INTERFACE
     } IPropertyDescriptionVtbl;
@@ -2288,8 +2487,10 @@ EXTERN_C const IID IID_IPropertyDescription;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IPropertyDescription_RemoteCoerceToCanonicalValue_Proxy( 
     __RPC__in IPropertyDescription * This,
-    /* [in] */ __RPC__in REFPROPVARIANT propvar,
-    /* [out] */ __RPC__out PROPVARIANT *ppropvar);
+    /* [annotation][in] */ 
+    _In_  REFPROPVARIANT propvar,
+    /* [annotation][out] */ 
+    _Out_  PROPVARIANT *ppropvar);
 
 
 void __RPC_STUB IPropertyDescription_RemoteCoerceToCanonicalValue_Stub(
@@ -2319,8 +2520,10 @@ EXTERN_C const IID IID_IPropertyDescription2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetImageReferenceForValue( 
-            /* [in] */ __RPC__in REFPROPVARIANT propvar,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszImageRes) = 0;
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszImageRes) = 0;
         
     };
     
@@ -2334,7 +2537,8 @@ EXTERN_C const IID IID_IPropertyDescription2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPropertyDescription2 * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2349,99 +2553,124 @@ EXTERN_C const IID IID_IPropertyDescription2;
         DECLSPEC_XFGVIRT(IPropertyDescription, GetPropertyKey)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyKey )( 
             __RPC__in IPropertyDescription2 * This,
-            /* [out] */ __RPC__out PROPERTYKEY *pkey);
+            /* [annotation][out] */ 
+            _Out_  PROPERTYKEY *pkey);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetCanonicalName)
         HRESULT ( STDMETHODCALLTYPE *GetCanonicalName )( 
             __RPC__in IPropertyDescription2 * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszName);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszName);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetPropertyType)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyType )( 
             __RPC__in IPropertyDescription2 * This,
-            /* [out] */ __RPC__out VARTYPE *pvartype);
+            /* [annotation][out] */ 
+            _Out_  VARTYPE *pvartype);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetDisplayName)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayName )( 
             __RPC__in IPropertyDescription2 * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszName);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszName);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetEditInvitation)
         HRESULT ( STDMETHODCALLTYPE *GetEditInvitation )( 
             __RPC__in IPropertyDescription2 * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszInvite);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszInvite);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetTypeFlags)
         HRESULT ( STDMETHODCALLTYPE *GetTypeFlags )( 
             __RPC__in IPropertyDescription2 * This,
-            /* [in] */ PROPDESC_TYPE_FLAGS mask,
-            /* [out] */ __RPC__out PROPDESC_TYPE_FLAGS *ppdtFlags);
+            /* [annotation][in] */ 
+            _In_  PROPDESC_TYPE_FLAGS mask,
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_TYPE_FLAGS *ppdtFlags);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetViewFlags)
         HRESULT ( STDMETHODCALLTYPE *GetViewFlags )( 
             __RPC__in IPropertyDescription2 * This,
-            /* [out] */ __RPC__out PROPDESC_VIEW_FLAGS *ppdvFlags);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_VIEW_FLAGS *ppdvFlags);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetDefaultColumnWidth)
         HRESULT ( STDMETHODCALLTYPE *GetDefaultColumnWidth )( 
             __RPC__in IPropertyDescription2 * This,
-            /* [out] */ __RPC__out UINT *pcxChars);
+            /* [annotation][out] */ 
+            _Out_  UINT *pcxChars);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetDisplayType)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayType )( 
             __RPC__in IPropertyDescription2 * This,
-            /* [out] */ __RPC__out PROPDESC_DISPLAYTYPE *pdisplaytype);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_DISPLAYTYPE *pdisplaytype);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetColumnState)
         HRESULT ( STDMETHODCALLTYPE *GetColumnState )( 
             __RPC__in IPropertyDescription2 * This,
-            /* [out] */ __RPC__out SHCOLSTATEF *pcsFlags);
+            /* [annotation][out] */ 
+            _Out_  SHCOLSTATEF *pcsFlags);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetGroupingRange)
         HRESULT ( STDMETHODCALLTYPE *GetGroupingRange )( 
             __RPC__in IPropertyDescription2 * This,
-            /* [out] */ __RPC__out PROPDESC_GROUPING_RANGE *pgr);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_GROUPING_RANGE *pgr);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetRelativeDescriptionType)
         HRESULT ( STDMETHODCALLTYPE *GetRelativeDescriptionType )( 
             __RPC__in IPropertyDescription2 * This,
-            /* [out] */ __RPC__out PROPDESC_RELATIVEDESCRIPTION_TYPE *prdt);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_RELATIVEDESCRIPTION_TYPE *prdt);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetRelativeDescription)
         HRESULT ( STDMETHODCALLTYPE *GetRelativeDescription )( 
             __RPC__in IPropertyDescription2 * This,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar1,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar2,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDesc1,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDesc2);
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar1,
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar2,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDesc1,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDesc2);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetSortDescription)
         HRESULT ( STDMETHODCALLTYPE *GetSortDescription )( 
             __RPC__in IPropertyDescription2 * This,
-            /* [out] */ __RPC__out PROPDESC_SORTDESCRIPTION *psd);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_SORTDESCRIPTION *psd);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetSortDescriptionLabel)
         HRESULT ( STDMETHODCALLTYPE *GetSortDescriptionLabel )( 
             __RPC__in IPropertyDescription2 * This,
-            /* [in] */ BOOL fDescending,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDescription);
+            /* [annotation][in] */ 
+            _In_  BOOL fDescending,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDescription);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetAggregationType)
         HRESULT ( STDMETHODCALLTYPE *GetAggregationType )( 
             __RPC__in IPropertyDescription2 * This,
-            /* [out] */ __RPC__out PROPDESC_AGGREGATION_TYPE *paggtype);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_AGGREGATION_TYPE *paggtype);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetConditionType)
         HRESULT ( STDMETHODCALLTYPE *GetConditionType )( 
             __RPC__in IPropertyDescription2 * This,
-            /* [out] */ __RPC__out PROPDESC_CONDITION_TYPE *pcontype,
-            /* [out] */ __RPC__out CONDITION_OPERATION *popDefault);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_CONDITION_TYPE *pcontype,
+            /* [annotation][out] */ 
+            _Out_  CONDITION_OPERATION *popDefault);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetEnumTypeList)
         HRESULT ( STDMETHODCALLTYPE *GetEnumTypeList )( 
             __RPC__in IPropertyDescription2 * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, CoerceToCanonicalValue)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CoerceToCanonicalValue )( 
@@ -2452,20 +2681,26 @@ EXTERN_C const IID IID_IPropertyDescription2;
         DECLSPEC_XFGVIRT(IPropertyDescription, FormatForDisplay)
         HRESULT ( STDMETHODCALLTYPE *FormatForDisplay )( 
             __RPC__in IPropertyDescription2 * This,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar,
-            /* [in] */ PROPDESC_FORMAT_FLAGS pdfFlags,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDisplay);
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar,
+            /* [annotation][in] */ 
+            _In_  PROPDESC_FORMAT_FLAGS pdfFlags,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDisplay);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, IsValueCanonical)
         HRESULT ( STDMETHODCALLTYPE *IsValueCanonical )( 
             __RPC__in IPropertyDescription2 * This,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar);
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar);
         
         DECLSPEC_XFGVIRT(IPropertyDescription2, GetImageReferenceForValue)
         HRESULT ( STDMETHODCALLTYPE *GetImageReferenceForValue )( 
             __RPC__in IPropertyDescription2 * This,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszImageRes);
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszImageRes);
         
         END_INTERFACE
     } IPropertyDescription2Vtbl;
@@ -2584,12 +2819,16 @@ EXTERN_C const IID IID_IPropertyDescriptionAliasInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSortByAlias( 
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAdditionalSortByAliases( 
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
     };
     
@@ -2603,7 +2842,8 @@ EXTERN_C const IID IID_IPropertyDescriptionAliasInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2618,99 +2858,124 @@ EXTERN_C const IID IID_IPropertyDescriptionAliasInfo;
         DECLSPEC_XFGVIRT(IPropertyDescription, GetPropertyKey)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyKey )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [out] */ __RPC__out PROPERTYKEY *pkey);
+            /* [annotation][out] */ 
+            _Out_  PROPERTYKEY *pkey);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetCanonicalName)
         HRESULT ( STDMETHODCALLTYPE *GetCanonicalName )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszName);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszName);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetPropertyType)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyType )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [out] */ __RPC__out VARTYPE *pvartype);
+            /* [annotation][out] */ 
+            _Out_  VARTYPE *pvartype);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetDisplayName)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayName )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszName);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszName);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetEditInvitation)
         HRESULT ( STDMETHODCALLTYPE *GetEditInvitation )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszInvite);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszInvite);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetTypeFlags)
         HRESULT ( STDMETHODCALLTYPE *GetTypeFlags )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [in] */ PROPDESC_TYPE_FLAGS mask,
-            /* [out] */ __RPC__out PROPDESC_TYPE_FLAGS *ppdtFlags);
+            /* [annotation][in] */ 
+            _In_  PROPDESC_TYPE_FLAGS mask,
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_TYPE_FLAGS *ppdtFlags);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetViewFlags)
         HRESULT ( STDMETHODCALLTYPE *GetViewFlags )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [out] */ __RPC__out PROPDESC_VIEW_FLAGS *ppdvFlags);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_VIEW_FLAGS *ppdvFlags);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetDefaultColumnWidth)
         HRESULT ( STDMETHODCALLTYPE *GetDefaultColumnWidth )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [out] */ __RPC__out UINT *pcxChars);
+            /* [annotation][out] */ 
+            _Out_  UINT *pcxChars);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetDisplayType)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayType )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [out] */ __RPC__out PROPDESC_DISPLAYTYPE *pdisplaytype);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_DISPLAYTYPE *pdisplaytype);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetColumnState)
         HRESULT ( STDMETHODCALLTYPE *GetColumnState )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [out] */ __RPC__out SHCOLSTATEF *pcsFlags);
+            /* [annotation][out] */ 
+            _Out_  SHCOLSTATEF *pcsFlags);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetGroupingRange)
         HRESULT ( STDMETHODCALLTYPE *GetGroupingRange )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [out] */ __RPC__out PROPDESC_GROUPING_RANGE *pgr);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_GROUPING_RANGE *pgr);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetRelativeDescriptionType)
         HRESULT ( STDMETHODCALLTYPE *GetRelativeDescriptionType )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [out] */ __RPC__out PROPDESC_RELATIVEDESCRIPTION_TYPE *prdt);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_RELATIVEDESCRIPTION_TYPE *prdt);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetRelativeDescription)
         HRESULT ( STDMETHODCALLTYPE *GetRelativeDescription )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar1,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar2,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDesc1,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDesc2);
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar1,
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar2,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDesc1,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDesc2);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetSortDescription)
         HRESULT ( STDMETHODCALLTYPE *GetSortDescription )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [out] */ __RPC__out PROPDESC_SORTDESCRIPTION *psd);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_SORTDESCRIPTION *psd);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetSortDescriptionLabel)
         HRESULT ( STDMETHODCALLTYPE *GetSortDescriptionLabel )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [in] */ BOOL fDescending,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDescription);
+            /* [annotation][in] */ 
+            _In_  BOOL fDescending,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDescription);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetAggregationType)
         HRESULT ( STDMETHODCALLTYPE *GetAggregationType )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [out] */ __RPC__out PROPDESC_AGGREGATION_TYPE *paggtype);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_AGGREGATION_TYPE *paggtype);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetConditionType)
         HRESULT ( STDMETHODCALLTYPE *GetConditionType )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [out] */ __RPC__out PROPDESC_CONDITION_TYPE *pcontype,
-            /* [out] */ __RPC__out CONDITION_OPERATION *popDefault);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_CONDITION_TYPE *pcontype,
+            /* [annotation][out] */ 
+            _Out_  CONDITION_OPERATION *popDefault);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetEnumTypeList)
         HRESULT ( STDMETHODCALLTYPE *GetEnumTypeList )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, CoerceToCanonicalValue)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CoerceToCanonicalValue )( 
@@ -2721,26 +2986,34 @@ EXTERN_C const IID IID_IPropertyDescriptionAliasInfo;
         DECLSPEC_XFGVIRT(IPropertyDescription, FormatForDisplay)
         HRESULT ( STDMETHODCALLTYPE *FormatForDisplay )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar,
-            /* [in] */ PROPDESC_FORMAT_FLAGS pdfFlags,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDisplay);
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar,
+            /* [annotation][in] */ 
+            _In_  PROPDESC_FORMAT_FLAGS pdfFlags,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDisplay);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, IsValueCanonical)
         HRESULT ( STDMETHODCALLTYPE *IsValueCanonical )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar);
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar);
         
         DECLSPEC_XFGVIRT(IPropertyDescriptionAliasInfo, GetSortByAlias)
         HRESULT ( STDMETHODCALLTYPE *GetSortByAlias )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         DECLSPEC_XFGVIRT(IPropertyDescriptionAliasInfo, GetAdditionalSortByAliases)
         HRESULT ( STDMETHODCALLTYPE *GetAdditionalSortByAliases )( 
             __RPC__in IPropertyDescriptionAliasInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         END_INTERFACE
     } IPropertyDescriptionAliasInfoVtbl;
@@ -2885,16 +3158,20 @@ EXTERN_C const IID IID_IPropertyDescriptionSearchInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSearchInfoFlags( 
-            /* [out] */ __RPC__out PROPDESC_SEARCHINFO_FLAGS *ppdsiFlags) = 0;
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_SEARCHINFO_FLAGS *ppdsiFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetColumnIndexType( 
-            /* [out] */ __RPC__out PROPDESC_COLUMNINDEX_TYPE *ppdciType) = 0;
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_COLUMNINDEX_TYPE *ppdciType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProjectionString( 
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszProjection) = 0;
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppszProjection) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMaxSize( 
-            /* [out] */ __RPC__out UINT *pcbMaxSize) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *pcbMaxSize) = 0;
         
     };
     
@@ -2908,7 +3185,8 @@ EXTERN_C const IID IID_IPropertyDescriptionSearchInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2923,99 +3201,124 @@ EXTERN_C const IID IID_IPropertyDescriptionSearchInfo;
         DECLSPEC_XFGVIRT(IPropertyDescription, GetPropertyKey)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyKey )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [out] */ __RPC__out PROPERTYKEY *pkey);
+            /* [annotation][out] */ 
+            _Out_  PROPERTYKEY *pkey);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetCanonicalName)
         HRESULT ( STDMETHODCALLTYPE *GetCanonicalName )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszName);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszName);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetPropertyType)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyType )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [out] */ __RPC__out VARTYPE *pvartype);
+            /* [annotation][out] */ 
+            _Out_  VARTYPE *pvartype);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetDisplayName)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayName )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszName);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszName);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetEditInvitation)
         HRESULT ( STDMETHODCALLTYPE *GetEditInvitation )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszInvite);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszInvite);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetTypeFlags)
         HRESULT ( STDMETHODCALLTYPE *GetTypeFlags )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [in] */ PROPDESC_TYPE_FLAGS mask,
-            /* [out] */ __RPC__out PROPDESC_TYPE_FLAGS *ppdtFlags);
+            /* [annotation][in] */ 
+            _In_  PROPDESC_TYPE_FLAGS mask,
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_TYPE_FLAGS *ppdtFlags);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetViewFlags)
         HRESULT ( STDMETHODCALLTYPE *GetViewFlags )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [out] */ __RPC__out PROPDESC_VIEW_FLAGS *ppdvFlags);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_VIEW_FLAGS *ppdvFlags);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetDefaultColumnWidth)
         HRESULT ( STDMETHODCALLTYPE *GetDefaultColumnWidth )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [out] */ __RPC__out UINT *pcxChars);
+            /* [annotation][out] */ 
+            _Out_  UINT *pcxChars);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetDisplayType)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayType )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [out] */ __RPC__out PROPDESC_DISPLAYTYPE *pdisplaytype);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_DISPLAYTYPE *pdisplaytype);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetColumnState)
         HRESULT ( STDMETHODCALLTYPE *GetColumnState )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [out] */ __RPC__out SHCOLSTATEF *pcsFlags);
+            /* [annotation][out] */ 
+            _Out_  SHCOLSTATEF *pcsFlags);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetGroupingRange)
         HRESULT ( STDMETHODCALLTYPE *GetGroupingRange )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [out] */ __RPC__out PROPDESC_GROUPING_RANGE *pgr);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_GROUPING_RANGE *pgr);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetRelativeDescriptionType)
         HRESULT ( STDMETHODCALLTYPE *GetRelativeDescriptionType )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [out] */ __RPC__out PROPDESC_RELATIVEDESCRIPTION_TYPE *prdt);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_RELATIVEDESCRIPTION_TYPE *prdt);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetRelativeDescription)
         HRESULT ( STDMETHODCALLTYPE *GetRelativeDescription )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar1,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar2,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDesc1,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDesc2);
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar1,
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar2,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDesc1,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDesc2);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetSortDescription)
         HRESULT ( STDMETHODCALLTYPE *GetSortDescription )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [out] */ __RPC__out PROPDESC_SORTDESCRIPTION *psd);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_SORTDESCRIPTION *psd);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetSortDescriptionLabel)
         HRESULT ( STDMETHODCALLTYPE *GetSortDescriptionLabel )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [in] */ BOOL fDescending,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDescription);
+            /* [annotation][in] */ 
+            _In_  BOOL fDescending,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDescription);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetAggregationType)
         HRESULT ( STDMETHODCALLTYPE *GetAggregationType )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [out] */ __RPC__out PROPDESC_AGGREGATION_TYPE *paggtype);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_AGGREGATION_TYPE *paggtype);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetConditionType)
         HRESULT ( STDMETHODCALLTYPE *GetConditionType )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [out] */ __RPC__out PROPDESC_CONDITION_TYPE *pcontype,
-            /* [out] */ __RPC__out CONDITION_OPERATION *popDefault);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_CONDITION_TYPE *pcontype,
+            /* [annotation][out] */ 
+            _Out_  CONDITION_OPERATION *popDefault);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetEnumTypeList)
         HRESULT ( STDMETHODCALLTYPE *GetEnumTypeList )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, CoerceToCanonicalValue)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CoerceToCanonicalValue )( 
@@ -3026,34 +3329,42 @@ EXTERN_C const IID IID_IPropertyDescriptionSearchInfo;
         DECLSPEC_XFGVIRT(IPropertyDescription, FormatForDisplay)
         HRESULT ( STDMETHODCALLTYPE *FormatForDisplay )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar,
-            /* [in] */ PROPDESC_FORMAT_FLAGS pdfFlags,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDisplay);
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar,
+            /* [annotation][in] */ 
+            _In_  PROPDESC_FORMAT_FLAGS pdfFlags,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDisplay);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, IsValueCanonical)
         HRESULT ( STDMETHODCALLTYPE *IsValueCanonical )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar);
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar);
         
         DECLSPEC_XFGVIRT(IPropertyDescriptionSearchInfo, GetSearchInfoFlags)
         HRESULT ( STDMETHODCALLTYPE *GetSearchInfoFlags )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [out] */ __RPC__out PROPDESC_SEARCHINFO_FLAGS *ppdsiFlags);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_SEARCHINFO_FLAGS *ppdsiFlags);
         
         DECLSPEC_XFGVIRT(IPropertyDescriptionSearchInfo, GetColumnIndexType)
         HRESULT ( STDMETHODCALLTYPE *GetColumnIndexType )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [out] */ __RPC__out PROPDESC_COLUMNINDEX_TYPE *ppdciType);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_COLUMNINDEX_TYPE *ppdciType);
         
         DECLSPEC_XFGVIRT(IPropertyDescriptionSearchInfo, GetProjectionString)
         HRESULT ( STDMETHODCALLTYPE *GetProjectionString )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszProjection);
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppszProjection);
         
         DECLSPEC_XFGVIRT(IPropertyDescriptionSearchInfo, GetMaxSize)
         HRESULT ( STDMETHODCALLTYPE *GetMaxSize )( 
             __RPC__in IPropertyDescriptionSearchInfo * This,
-            /* [out] */ __RPC__out UINT *pcbMaxSize);
+            /* [annotation][out] */ 
+            _Out_  UINT *pcbMaxSize);
         
         END_INTERFACE
     } IPropertyDescriptionSearchInfoVtbl;
@@ -3181,9 +3492,12 @@ EXTERN_C const IID IID_IPropertyDescriptionRelatedPropertyInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetRelatedProperty( 
-            /* [in] */ __RPC__in LPCWSTR pszRelationshipName,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszRelationshipName,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
     };
     
@@ -3197,7 +3511,8 @@ EXTERN_C const IID IID_IPropertyDescriptionRelatedPropertyInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPropertyDescriptionRelatedPropertyInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3212,99 +3527,124 @@ EXTERN_C const IID IID_IPropertyDescriptionRelatedPropertyInfo;
         DECLSPEC_XFGVIRT(IPropertyDescription, GetPropertyKey)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyKey )( 
             __RPC__in IPropertyDescriptionRelatedPropertyInfo * This,
-            /* [out] */ __RPC__out PROPERTYKEY *pkey);
+            /* [annotation][out] */ 
+            _Out_  PROPERTYKEY *pkey);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetCanonicalName)
         HRESULT ( STDMETHODCALLTYPE *GetCanonicalName )( 
             __RPC__in IPropertyDescriptionRelatedPropertyInfo * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszName);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszName);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetPropertyType)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyType )( 
             __RPC__in IPropertyDescriptionRelatedPropertyInfo * This,
-            /* [out] */ __RPC__out VARTYPE *pvartype);
+            /* [annotation][out] */ 
+            _Out_  VARTYPE *pvartype);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetDisplayName)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayName )( 
             __RPC__in IPropertyDescriptionRelatedPropertyInfo * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszName);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszName);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetEditInvitation)
         HRESULT ( STDMETHODCALLTYPE *GetEditInvitation )( 
             __RPC__in IPropertyDescriptionRelatedPropertyInfo * This,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszInvite);
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszInvite);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetTypeFlags)
         HRESULT ( STDMETHODCALLTYPE *GetTypeFlags )( 
             __RPC__in IPropertyDescriptionRelatedPropertyInfo * This,
-            /* [in] */ PROPDESC_TYPE_FLAGS mask,
-            /* [out] */ __RPC__out PROPDESC_TYPE_FLAGS *ppdtFlags);
+            /* [annotation][in] */ 
+            _In_  PROPDESC_TYPE_FLAGS mask,
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_TYPE_FLAGS *ppdtFlags);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetViewFlags)
         HRESULT ( STDMETHODCALLTYPE *GetViewFlags )( 
             __RPC__in IPropertyDescriptionRelatedPropertyInfo * This,
-            /* [out] */ __RPC__out PROPDESC_VIEW_FLAGS *ppdvFlags);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_VIEW_FLAGS *ppdvFlags);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetDefaultColumnWidth)
         HRESULT ( STDMETHODCALLTYPE *GetDefaultColumnWidth )( 
             __RPC__in IPropertyDescriptionRelatedPropertyInfo * This,
-            /* [out] */ __RPC__out UINT *pcxChars);
+            /* [annotation][out] */ 
+            _Out_  UINT *pcxChars);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetDisplayType)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayType )( 
             __RPC__in IPropertyDescriptionRelatedPropertyInfo * This,
-            /* [out] */ __RPC__out PROPDESC_DISPLAYTYPE *pdisplaytype);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_DISPLAYTYPE *pdisplaytype);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetColumnState)
         HRESULT ( STDMETHODCALLTYPE *GetColumnState )( 
             __RPC__in IPropertyDescriptionRelatedPropertyInfo * This,
-            /* [out] */ __RPC__out SHCOLSTATEF *pcsFlags);
+            /* [annotation][out] */ 
+            _Out_  SHCOLSTATEF *pcsFlags);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetGroupingRange)
         HRESULT ( STDMETHODCALLTYPE *GetGroupingRange )( 
             __RPC__in IPropertyDescriptionRelatedPropertyInfo * This,
-            /* [out] */ __RPC__out PROPDESC_GROUPING_RANGE *pgr);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_GROUPING_RANGE *pgr);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetRelativeDescriptionType)
         HRESULT ( STDMETHODCALLTYPE *GetRelativeDescriptionType )( 
             __RPC__in IPropertyDescriptionRelatedPropertyInfo * This,
-            /* [out] */ __RPC__out PROPDESC_RELATIVEDESCRIPTION_TYPE *prdt);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_RELATIVEDESCRIPTION_TYPE *prdt);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetRelativeDescription)
         HRESULT ( STDMETHODCALLTYPE *GetRelativeDescription )( 
             __RPC__in IPropertyDescriptionRelatedPropertyInfo * This,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar1,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar2,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDesc1,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDesc2);
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar1,
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar2,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDesc1,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDesc2);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetSortDescription)
         HRESULT ( STDMETHODCALLTYPE *GetSortDescription )( 
             __RPC__in IPropertyDescriptionRelatedPropertyInfo * This,
-            /* [out] */ __RPC__out PROPDESC_SORTDESCRIPTION *psd);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_SORTDESCRIPTION *psd);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetSortDescriptionLabel)
         HRESULT ( STDMETHODCALLTYPE *GetSortDescriptionLabel )( 
             __RPC__in IPropertyDescriptionRelatedPropertyInfo * This,
-            /* [in] */ BOOL fDescending,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDescription);
+            /* [annotation][in] */ 
+            _In_  BOOL fDescending,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDescription);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetAggregationType)
         HRESULT ( STDMETHODCALLTYPE *GetAggregationType )( 
             __RPC__in IPropertyDescriptionRelatedPropertyInfo * This,
-            /* [out] */ __RPC__out PROPDESC_AGGREGATION_TYPE *paggtype);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_AGGREGATION_TYPE *paggtype);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetConditionType)
         HRESULT ( STDMETHODCALLTYPE *GetConditionType )( 
             __RPC__in IPropertyDescriptionRelatedPropertyInfo * This,
-            /* [out] */ __RPC__out PROPDESC_CONDITION_TYPE *pcontype,
-            /* [out] */ __RPC__out CONDITION_OPERATION *popDefault);
+            /* [annotation][out] */ 
+            _Out_  PROPDESC_CONDITION_TYPE *pcontype,
+            /* [annotation][out] */ 
+            _Out_  CONDITION_OPERATION *popDefault);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, GetEnumTypeList)
         HRESULT ( STDMETHODCALLTYPE *GetEnumTypeList )( 
             __RPC__in IPropertyDescriptionRelatedPropertyInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, CoerceToCanonicalValue)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CoerceToCanonicalValue )( 
@@ -3315,21 +3655,28 @@ EXTERN_C const IID IID_IPropertyDescriptionRelatedPropertyInfo;
         DECLSPEC_XFGVIRT(IPropertyDescription, FormatForDisplay)
         HRESULT ( STDMETHODCALLTYPE *FormatForDisplay )( 
             __RPC__in IPropertyDescriptionRelatedPropertyInfo * This,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar,
-            /* [in] */ PROPDESC_FORMAT_FLAGS pdfFlags,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDisplay);
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar,
+            /* [annotation][in] */ 
+            _In_  PROPDESC_FORMAT_FLAGS pdfFlags,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDisplay);
         
         DECLSPEC_XFGVIRT(IPropertyDescription, IsValueCanonical)
         HRESULT ( STDMETHODCALLTYPE *IsValueCanonical )( 
             __RPC__in IPropertyDescriptionRelatedPropertyInfo * This,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar);
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar);
         
         DECLSPEC_XFGVIRT(IPropertyDescriptionRelatedPropertyInfo, GetRelatedProperty)
         HRESULT ( STDMETHODCALLTYPE *GetRelatedProperty )( 
             __RPC__in IPropertyDescriptionRelatedPropertyInfo * This,
-            /* [in] */ __RPC__in LPCWSTR pszRelationshipName,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszRelationshipName,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         END_INTERFACE
     } IPropertyDescriptionRelatedPropertyInfoVtbl;
@@ -3468,43 +3815,65 @@ EXTERN_C const IID IID_IPropertySystem;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetPropertyDescription( 
-            /* [in] */ __RPC__in REFPROPERTYKEY propkey,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY propkey,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPropertyDescriptionByName( 
-            /* [string][in] */ __RPC__in_string LPCWSTR pszCanonicalName,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszCanonicalName,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPropertyDescriptionListFromString( 
-            /* [string][in] */ __RPC__in_string LPCWSTR pszPropList,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszPropList,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumeratePropertyDescriptions( 
-            /* [in] */ PROPDESC_ENUMFILTER filterOn,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  PROPDESC_ENUMFILTER filterOn,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FormatForDisplay( 
-            /* [in] */ __RPC__in REFPROPERTYKEY key,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar,
-            /* [in] */ PROPDESC_FORMAT_FLAGS pdff,
-            /* [size_is][string][out] */ __RPC__out_ecount_full_string(cchText) LPWSTR pszText,
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar,
+            /* [annotation][in] */ 
+            _In_  PROPDESC_FORMAT_FLAGS pdff,
+            /* [annotation][size_is][string][out] */ 
+            _Out_writes_(cchText)  LPWSTR pszText,
             /* [range][in] */ __RPC__in_range(0,0x8000) DWORD cchText) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FormatForDisplayAlloc( 
-            /* [in] */ __RPC__in REFPROPERTYKEY key,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar,
-            /* [in] */ PROPDESC_FORMAT_FLAGS pdff,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDisplay) = 0;
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar,
+            /* [annotation][in] */ 
+            _In_  PROPDESC_FORMAT_FLAGS pdff,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDisplay) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterPropertySchema( 
-            /* [string][in] */ __RPC__in_string LPCWSTR pszPath) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszPath) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnregisterPropertySchema( 
-            /* [string][in] */ __RPC__in_string LPCWSTR pszPath) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszPath) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RefreshPropertySchema( void) = 0;
         
@@ -3520,7 +3889,8 @@ EXTERN_C const IID IID_IPropertySystem;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPropertySystem * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3535,57 +3905,79 @@ EXTERN_C const IID IID_IPropertySystem;
         DECLSPEC_XFGVIRT(IPropertySystem, GetPropertyDescription)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyDescription )( 
             __RPC__in IPropertySystem * This,
-            /* [in] */ __RPC__in REFPROPERTYKEY propkey,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY propkey,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         DECLSPEC_XFGVIRT(IPropertySystem, GetPropertyDescriptionByName)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyDescriptionByName )( 
             __RPC__in IPropertySystem * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR pszCanonicalName,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszCanonicalName,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         DECLSPEC_XFGVIRT(IPropertySystem, GetPropertyDescriptionListFromString)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyDescriptionListFromString )( 
             __RPC__in IPropertySystem * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR pszPropList,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszPropList,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         DECLSPEC_XFGVIRT(IPropertySystem, EnumeratePropertyDescriptions)
         HRESULT ( STDMETHODCALLTYPE *EnumeratePropertyDescriptions )( 
             __RPC__in IPropertySystem * This,
-            /* [in] */ PROPDESC_ENUMFILTER filterOn,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  PROPDESC_ENUMFILTER filterOn,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         DECLSPEC_XFGVIRT(IPropertySystem, FormatForDisplay)
         HRESULT ( STDMETHODCALLTYPE *FormatForDisplay )( 
             __RPC__in IPropertySystem * This,
-            /* [in] */ __RPC__in REFPROPERTYKEY key,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar,
-            /* [in] */ PROPDESC_FORMAT_FLAGS pdff,
-            /* [size_is][string][out] */ __RPC__out_ecount_full_string(cchText) LPWSTR pszText,
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar,
+            /* [annotation][in] */ 
+            _In_  PROPDESC_FORMAT_FLAGS pdff,
+            /* [annotation][size_is][string][out] */ 
+            _Out_writes_(cchText)  LPWSTR pszText,
             /* [range][in] */ __RPC__in_range(0,0x8000) DWORD cchText);
         
         DECLSPEC_XFGVIRT(IPropertySystem, FormatForDisplayAlloc)
         HRESULT ( STDMETHODCALLTYPE *FormatForDisplayAlloc )( 
             __RPC__in IPropertySystem * This,
-            /* [in] */ __RPC__in REFPROPERTYKEY key,
-            /* [in] */ __RPC__in REFPROPVARIANT propvar,
-            /* [in] */ PROPDESC_FORMAT_FLAGS pdff,
-            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszDisplay);
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY key,
+            /* [annotation][in] */ 
+            _In_  REFPROPVARIANT propvar,
+            /* [annotation][in] */ 
+            _In_  PROPDESC_FORMAT_FLAGS pdff,
+            /* [annotation][string][out] */ 
+            _Out_  LPWSTR *ppszDisplay);
         
         DECLSPEC_XFGVIRT(IPropertySystem, RegisterPropertySchema)
         HRESULT ( STDMETHODCALLTYPE *RegisterPropertySchema )( 
             __RPC__in IPropertySystem * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR pszPath);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszPath);
         
         DECLSPEC_XFGVIRT(IPropertySystem, UnregisterPropertySchema)
         HRESULT ( STDMETHODCALLTYPE *UnregisterPropertySchema )( 
             __RPC__in IPropertySystem * This,
-            /* [string][in] */ __RPC__in_string LPCWSTR pszPath);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszPath);
         
         DECLSPEC_XFGVIRT(IPropertySystem, RefreshPropertySchema)
         HRESULT ( STDMETHODCALLTYPE *RefreshPropertySchema )( 
@@ -3668,12 +4060,16 @@ EXTERN_C const IID IID_IPropertyDescriptionList;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [out] */ __RPC__out UINT *pcElem) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *pcElem) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [in] */ UINT iElem,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT iElem,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
     };
     
@@ -3687,7 +4083,8 @@ EXTERN_C const IID IID_IPropertyDescriptionList;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPropertyDescriptionList * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3702,14 +4099,18 @@ EXTERN_C const IID IID_IPropertyDescriptionList;
         DECLSPEC_XFGVIRT(IPropertyDescriptionList, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IPropertyDescriptionList * This,
-            /* [out] */ __RPC__out UINT *pcElem);
+            /* [annotation][out] */ 
+            _Out_  UINT *pcElem);
         
         DECLSPEC_XFGVIRT(IPropertyDescriptionList, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IPropertyDescriptionList * This,
-            /* [in] */ UINT iElem,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  UINT iElem,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         END_INTERFACE
     } IPropertyDescriptionListVtbl;
@@ -3767,17 +4168,26 @@ EXTERN_C const IID IID_IPropertyStoreFactory;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetPropertyStore( 
-            /* [in] */ GETPROPERTYSTOREFLAGS flags,
-            /* [unique][in] */ __RPC__in_opt IUnknown *pUnkFactory,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  GETPROPERTYSTOREFLAGS flags,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *pUnkFactory,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPropertyStoreForKeys( 
-            /* [unique][in] */ __RPC__in_opt const PROPERTYKEY *rgKeys,
-            /* [in] */ UINT cKeys,
-            /* [in] */ GETPROPERTYSTOREFLAGS flags,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  const PROPERTYKEY *rgKeys,
+            /* [annotation][in] */ 
+            _In_  UINT cKeys,
+            /* [annotation][in] */ 
+            _In_  GETPROPERTYSTOREFLAGS flags,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
     };
     
@@ -3791,7 +4201,8 @@ EXTERN_C const IID IID_IPropertyStoreFactory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPropertyStoreFactory * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3806,19 +4217,28 @@ EXTERN_C const IID IID_IPropertyStoreFactory;
         DECLSPEC_XFGVIRT(IPropertyStoreFactory, GetPropertyStore)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyStore )( 
             __RPC__in IPropertyStoreFactory * This,
-            /* [in] */ GETPROPERTYSTOREFLAGS flags,
-            /* [unique][in] */ __RPC__in_opt IUnknown *pUnkFactory,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  GETPROPERTYSTOREFLAGS flags,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *pUnkFactory,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         DECLSPEC_XFGVIRT(IPropertyStoreFactory, GetPropertyStoreForKeys)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyStoreForKeys )( 
             __RPC__in IPropertyStoreFactory * This,
-            /* [unique][in] */ __RPC__in_opt const PROPERTYKEY *rgKeys,
-            /* [in] */ UINT cKeys,
-            /* [in] */ GETPROPERTYSTOREFLAGS flags,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][unique][in] */ 
+            _In_  const PROPERTYKEY *rgKeys,
+            /* [annotation][in] */ 
+            _In_  UINT cKeys,
+            /* [annotation][in] */ 
+            _In_  GETPROPERTYSTOREFLAGS flags,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         END_INTERFACE
     } IPropertyStoreFactoryVtbl;
@@ -3876,10 +4296,14 @@ EXTERN_C const IID IID_IDelayedPropertyStoreFactory;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDelayedPropertyStore( 
-            /* [in] */ GETPROPERTYSTOREFLAGS flags,
-            /* [in] */ DWORD dwStoreId,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  GETPROPERTYSTOREFLAGS flags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStoreId,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
     };
     
@@ -3893,7 +4317,8 @@ EXTERN_C const IID IID_IDelayedPropertyStoreFactory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDelayedPropertyStoreFactory * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3908,27 +4333,40 @@ EXTERN_C const IID IID_IDelayedPropertyStoreFactory;
         DECLSPEC_XFGVIRT(IPropertyStoreFactory, GetPropertyStore)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyStore )( 
             __RPC__in IDelayedPropertyStoreFactory * This,
-            /* [in] */ GETPROPERTYSTOREFLAGS flags,
-            /* [unique][in] */ __RPC__in_opt IUnknown *pUnkFactory,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  GETPROPERTYSTOREFLAGS flags,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *pUnkFactory,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         DECLSPEC_XFGVIRT(IPropertyStoreFactory, GetPropertyStoreForKeys)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyStoreForKeys )( 
             __RPC__in IDelayedPropertyStoreFactory * This,
-            /* [unique][in] */ __RPC__in_opt const PROPERTYKEY *rgKeys,
-            /* [in] */ UINT cKeys,
-            /* [in] */ GETPROPERTYSTOREFLAGS flags,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][unique][in] */ 
+            _In_  const PROPERTYKEY *rgKeys,
+            /* [annotation][in] */ 
+            _In_  UINT cKeys,
+            /* [annotation][in] */ 
+            _In_  GETPROPERTYSTOREFLAGS flags,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         DECLSPEC_XFGVIRT(IDelayedPropertyStoreFactory, GetDelayedPropertyStore)
         HRESULT ( STDMETHODCALLTYPE *GetDelayedPropertyStore )( 
             __RPC__in IDelayedPropertyStoreFactory * This,
-            /* [in] */ GETPROPERTYSTOREFLAGS flags,
-            /* [in] */ DWORD dwStoreId,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  GETPROPERTYSTOREFLAGS flags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwStoreId,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         END_INTERFACE
     } IDelayedPropertyStoreFactoryVtbl;
@@ -4013,7 +4451,8 @@ EXTERN_C const IID IID_IPersistSerializedPropStorage;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetFlags( 
-            /* [in] */ PERSIST_SPROPSTORE_FLAGS flags) = 0;
+            /* [annotation][in] */ 
+            _In_  PERSIST_SPROPSTORE_FLAGS flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetPropertyStorage( 
             /* [annotation][in] */ 
@@ -4039,7 +4478,8 @@ EXTERN_C const IID IID_IPersistSerializedPropStorage;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPersistSerializedPropStorage * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4054,7 +4494,8 @@ EXTERN_C const IID IID_IPersistSerializedPropStorage;
         DECLSPEC_XFGVIRT(IPersistSerializedPropStorage, SetFlags)
         HRESULT ( STDMETHODCALLTYPE *SetFlags )( 
             IPersistSerializedPropStorage * This,
-            /* [in] */ PERSIST_SPROPSTORE_FLAGS flags);
+            /* [annotation][in] */ 
+            _In_  PERSIST_SPROPSTORE_FLAGS flags);
         
         DECLSPEC_XFGVIRT(IPersistSerializedPropStorage, SetPropertyStorage)
         HRESULT ( STDMETHODCALLTYPE *SetPropertyStorage )( 
@@ -4137,7 +4578,8 @@ EXTERN_C const IID IID_IPersistSerializedPropStorage2;
         virtual HRESULT STDMETHODCALLTYPE GetPropertyStorageBuffer( 
             /* [annotation][out] */ 
             _Out_writes_bytes_to_(cb, *pcbWritten)  SERIALIZEDPROPSTORAGE *psps,
-            /* [in] */ DWORD cb,
+            /* [annotation][in] */ 
+            _In_  DWORD cb,
             /* [annotation][out] */ 
             _Out_  DWORD *pcbWritten) = 0;
         
@@ -4153,7 +4595,8 @@ EXTERN_C const IID IID_IPersistSerializedPropStorage2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPersistSerializedPropStorage2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4168,7 +4611,8 @@ EXTERN_C const IID IID_IPersistSerializedPropStorage2;
         DECLSPEC_XFGVIRT(IPersistSerializedPropStorage, SetFlags)
         HRESULT ( STDMETHODCALLTYPE *SetFlags )( 
             IPersistSerializedPropStorage2 * This,
-            /* [in] */ PERSIST_SPROPSTORE_FLAGS flags);
+            /* [annotation][in] */ 
+            _In_  PERSIST_SPROPSTORE_FLAGS flags);
         
         DECLSPEC_XFGVIRT(IPersistSerializedPropStorage, SetPropertyStorage)
         HRESULT ( STDMETHODCALLTYPE *SetPropertyStorage )( 
@@ -4197,7 +4641,8 @@ EXTERN_C const IID IID_IPersistSerializedPropStorage2;
             IPersistSerializedPropStorage2 * This,
             /* [annotation][out] */ 
             _Out_writes_bytes_to_(cb, *pcbWritten)  SERIALIZEDPROPSTORAGE *psps,
-            /* [in] */ DWORD cb,
+            /* [annotation][in] */ 
+            _In_  DWORD cb,
             /* [annotation][out] */ 
             _Out_  DWORD *pcbWritten);
         
@@ -4280,7 +4725,8 @@ EXTERN_C const IID IID_IPropertySystemChangeNotify;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPropertySystemChangeNotify * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4349,10 +4795,14 @@ EXTERN_C const IID IID_ICreateObject;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateObject( 
-            /* [in] */ __RPC__in REFCLSID clsid,
-            /* [unique][in] */ __RPC__in_opt IUnknown *pUnkOuter,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  REFCLSID clsid,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv) = 0;
         
     };
     
@@ -4366,7 +4816,8 @@ EXTERN_C const IID IID_ICreateObject;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICreateObject * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4381,10 +4832,14 @@ EXTERN_C const IID IID_ICreateObject;
         DECLSPEC_XFGVIRT(ICreateObject, CreateObject)
         HRESULT ( STDMETHODCALLTYPE *CreateObject )( 
             __RPC__in ICreateObject * This,
-            /* [in] */ __RPC__in REFCLSID clsid,
-            /* [unique][in] */ __RPC__in_opt IUnknown *pUnkOuter,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  REFCLSID clsid,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppv);
         
         END_INTERFACE
     } ICreateObjectVtbl;
@@ -4893,8 +5348,10 @@ void                      __RPC_USER  LPSAFEARRAY_UserFree64(     __RPC__in unsi
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IInitializeWithStream_Initialize_Stub( 
     __RPC__in IInitializeWithStream * This,
-    /* [in] */ __RPC__in_opt IStream *pstream,
-    /* [in] */ DWORD grfMode);
+    /* [annotation][in] */ 
+    _In_  IStream *pstream,
+    /* [annotation][in] */ 
+    _In_  DWORD grfMode);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IPropertyDescription_CoerceToCanonicalValue_Proxy( 
     IPropertyDescription * This,
@@ -4904,8 +5361,10 @@ void                      __RPC_USER  LPSAFEARRAY_UserFree64(     __RPC__in unsi
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IPropertyDescription_CoerceToCanonicalValue_Stub( 
     __RPC__in IPropertyDescription * This,
-    /* [in] */ __RPC__in REFPROPVARIANT propvar,
-    /* [out] */ __RPC__out PROPVARIANT *ppropvar);
+    /* [annotation][in] */ 
+    _In_  REFPROPVARIANT propvar,
+    /* [annotation][out] */ 
+    _Out_  PROPVARIANT *ppropvar);
 
 
 

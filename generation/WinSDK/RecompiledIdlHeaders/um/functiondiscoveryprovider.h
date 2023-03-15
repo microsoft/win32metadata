@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -145,42 +145,64 @@ EXTERN_C const IID IID_IFunctionDiscoveryProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [in] */ __RPC__in_opt IFunctionDiscoveryProviderFactory *pIFunctionDiscoveryProviderFactory,
-            /* [in] */ __RPC__in_opt IFunctionDiscoveryNotification *pIFunctionDiscoveryNotification,
-            /* [in] */ LCID lcidUserDefault,
-            /* [out] */ __RPC__out DWORD *pdwStgAccessCapabilities) = 0;
+            /* [annotation][in] */ 
+            _In_  IFunctionDiscoveryProviderFactory *pIFunctionDiscoveryProviderFactory,
+            /* [annotation][in] */ 
+            _In_  IFunctionDiscoveryNotification *pIFunctionDiscoveryNotification,
+            /* [annotation][in] */ 
+            _In_  LCID lcidUserDefault,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwStgAccessCapabilities) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Query( 
-            /* [in] */ __RPC__in_opt IFunctionDiscoveryProviderQuery *pIFunctionDiscoveryProviderQuery,
-            /* [out] */ __RPC__deref_out_opt IFunctionInstanceCollection **ppIFunctionInstanceCollection) = 0;
+            /* [annotation][in] */ 
+            _In_  IFunctionDiscoveryProviderQuery *pIFunctionDiscoveryProviderQuery,
+            /* [annotation][out] */ 
+            _Out_  IFunctionInstanceCollection **ppIFunctionInstanceCollection) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EndQuery( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InstancePropertyStoreValidateAccess( 
-            /* [in] */ __RPC__in_opt IFunctionInstance *pIFunctionInstance,
-            /* [in] */ INT_PTR iProviderInstanceContext,
-            /* [in] */ const DWORD dwStgAccess) = 0;
+            /* [annotation][in] */ 
+            _In_  IFunctionInstance *pIFunctionInstance,
+            /* [annotation][in] */ 
+            _In_  INT_PTR iProviderInstanceContext,
+            /* [annotation][in] */ 
+            _In_  const DWORD dwStgAccess) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InstancePropertyStoreOpen( 
-            /* [in] */ __RPC__in_opt IFunctionInstance *pIFunctionInstance,
-            /* [in] */ INT_PTR iProviderInstanceContext,
-            /* [in] */ const DWORD dwStgAccess,
-            /* [out] */ __RPC__deref_out_opt IPropertyStore **ppIPropertyStore) = 0;
+            /* [annotation][in] */ 
+            _In_  IFunctionInstance *pIFunctionInstance,
+            /* [annotation][in] */ 
+            _In_  INT_PTR iProviderInstanceContext,
+            /* [annotation][in] */ 
+            _In_  const DWORD dwStgAccess,
+            /* [annotation][out] */ 
+            _Out_  IPropertyStore **ppIPropertyStore) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InstancePropertyStoreFlush( 
-            /* [in] */ __RPC__in_opt IFunctionInstance *pIFunctionInstance,
-            /* [in] */ INT_PTR iProviderInstanceContext) = 0;
+            /* [annotation][in] */ 
+            _In_  IFunctionInstance *pIFunctionInstance,
+            /* [annotation][in] */ 
+            _In_  INT_PTR iProviderInstanceContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InstanceQueryService( 
-            /* [in] */ __RPC__in_opt IFunctionInstance *pIFunctionInstance,
-            /* [in] */ INT_PTR iProviderInstanceContext,
-            /* [in] */ __RPC__in REFGUID guidService,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppIUnknown) = 0;
+            /* [annotation][in] */ 
+            _In_  IFunctionInstance *pIFunctionInstance,
+            /* [annotation][in] */ 
+            _In_  INT_PTR iProviderInstanceContext,
+            /* [annotation][in] */ 
+            _In_  REFGUID guidService,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  IUnknown **ppIUnknown) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InstanceReleased( 
-            /* [in] */ __RPC__in_opt IFunctionInstance *pIFunctionInstance,
-            /* [in] */ INT_PTR iProviderInstanceContext) = 0;
+            /* [annotation][in] */ 
+            _In_  IFunctionInstance *pIFunctionInstance,
+            /* [annotation][in] */ 
+            _In_  INT_PTR iProviderInstanceContext) = 0;
         
     };
     
@@ -194,7 +216,8 @@ EXTERN_C const IID IID_IFunctionDiscoveryProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFunctionDiscoveryProvider * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -209,16 +232,22 @@ EXTERN_C const IID IID_IFunctionDiscoveryProvider;
         DECLSPEC_XFGVIRT(IFunctionDiscoveryProvider, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IFunctionDiscoveryProvider * This,
-            /* [in] */ __RPC__in_opt IFunctionDiscoveryProviderFactory *pIFunctionDiscoveryProviderFactory,
-            /* [in] */ __RPC__in_opt IFunctionDiscoveryNotification *pIFunctionDiscoveryNotification,
-            /* [in] */ LCID lcidUserDefault,
-            /* [out] */ __RPC__out DWORD *pdwStgAccessCapabilities);
+            /* [annotation][in] */ 
+            _In_  IFunctionDiscoveryProviderFactory *pIFunctionDiscoveryProviderFactory,
+            /* [annotation][in] */ 
+            _In_  IFunctionDiscoveryNotification *pIFunctionDiscoveryNotification,
+            /* [annotation][in] */ 
+            _In_  LCID lcidUserDefault,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwStgAccessCapabilities);
         
         DECLSPEC_XFGVIRT(IFunctionDiscoveryProvider, Query)
         HRESULT ( STDMETHODCALLTYPE *Query )( 
             __RPC__in IFunctionDiscoveryProvider * This,
-            /* [in] */ __RPC__in_opt IFunctionDiscoveryProviderQuery *pIFunctionDiscoveryProviderQuery,
-            /* [out] */ __RPC__deref_out_opt IFunctionInstanceCollection **ppIFunctionInstanceCollection);
+            /* [annotation][in] */ 
+            _In_  IFunctionDiscoveryProviderQuery *pIFunctionDiscoveryProviderQuery,
+            /* [annotation][out] */ 
+            _Out_  IFunctionInstanceCollection **ppIFunctionInstanceCollection);
         
         DECLSPEC_XFGVIRT(IFunctionDiscoveryProvider, EndQuery)
         HRESULT ( STDMETHODCALLTYPE *EndQuery )( 
@@ -227,38 +256,54 @@ EXTERN_C const IID IID_IFunctionDiscoveryProvider;
         DECLSPEC_XFGVIRT(IFunctionDiscoveryProvider, InstancePropertyStoreValidateAccess)
         HRESULT ( STDMETHODCALLTYPE *InstancePropertyStoreValidateAccess )( 
             __RPC__in IFunctionDiscoveryProvider * This,
-            /* [in] */ __RPC__in_opt IFunctionInstance *pIFunctionInstance,
-            /* [in] */ INT_PTR iProviderInstanceContext,
-            /* [in] */ const DWORD dwStgAccess);
+            /* [annotation][in] */ 
+            _In_  IFunctionInstance *pIFunctionInstance,
+            /* [annotation][in] */ 
+            _In_  INT_PTR iProviderInstanceContext,
+            /* [annotation][in] */ 
+            _In_  const DWORD dwStgAccess);
         
         DECLSPEC_XFGVIRT(IFunctionDiscoveryProvider, InstancePropertyStoreOpen)
         HRESULT ( STDMETHODCALLTYPE *InstancePropertyStoreOpen )( 
             __RPC__in IFunctionDiscoveryProvider * This,
-            /* [in] */ __RPC__in_opt IFunctionInstance *pIFunctionInstance,
-            /* [in] */ INT_PTR iProviderInstanceContext,
-            /* [in] */ const DWORD dwStgAccess,
-            /* [out] */ __RPC__deref_out_opt IPropertyStore **ppIPropertyStore);
+            /* [annotation][in] */ 
+            _In_  IFunctionInstance *pIFunctionInstance,
+            /* [annotation][in] */ 
+            _In_  INT_PTR iProviderInstanceContext,
+            /* [annotation][in] */ 
+            _In_  const DWORD dwStgAccess,
+            /* [annotation][out] */ 
+            _Out_  IPropertyStore **ppIPropertyStore);
         
         DECLSPEC_XFGVIRT(IFunctionDiscoveryProvider, InstancePropertyStoreFlush)
         HRESULT ( STDMETHODCALLTYPE *InstancePropertyStoreFlush )( 
             __RPC__in IFunctionDiscoveryProvider * This,
-            /* [in] */ __RPC__in_opt IFunctionInstance *pIFunctionInstance,
-            /* [in] */ INT_PTR iProviderInstanceContext);
+            /* [annotation][in] */ 
+            _In_  IFunctionInstance *pIFunctionInstance,
+            /* [annotation][in] */ 
+            _In_  INT_PTR iProviderInstanceContext);
         
         DECLSPEC_XFGVIRT(IFunctionDiscoveryProvider, InstanceQueryService)
         HRESULT ( STDMETHODCALLTYPE *InstanceQueryService )( 
             __RPC__in IFunctionDiscoveryProvider * This,
-            /* [in] */ __RPC__in_opt IFunctionInstance *pIFunctionInstance,
-            /* [in] */ INT_PTR iProviderInstanceContext,
-            /* [in] */ __RPC__in REFGUID guidService,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppIUnknown);
+            /* [annotation][in] */ 
+            _In_  IFunctionInstance *pIFunctionInstance,
+            /* [annotation][in] */ 
+            _In_  INT_PTR iProviderInstanceContext,
+            /* [annotation][in] */ 
+            _In_  REFGUID guidService,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  IUnknown **ppIUnknown);
         
         DECLSPEC_XFGVIRT(IFunctionDiscoveryProvider, InstanceReleased)
         HRESULT ( STDMETHODCALLTYPE *InstanceReleased )( 
             __RPC__in IFunctionDiscoveryProvider * This,
-            /* [in] */ __RPC__in_opt IFunctionInstance *pIFunctionInstance,
-            /* [in] */ INT_PTR iProviderInstanceContext);
+            /* [annotation][in] */ 
+            _In_  IFunctionInstance *pIFunctionInstance,
+            /* [annotation][in] */ 
+            _In_  INT_PTR iProviderInstanceContext);
         
         END_INTERFACE
     } IFunctionDiscoveryProviderVtbl;
@@ -334,27 +379,42 @@ EXTERN_C const IID IID_IProviderProperties;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [in] */ __RPC__in_opt IFunctionInstance *pIFunctionInstance,
-            /* [in] */ INT_PTR iProviderInstanceContext,
-            /* [out] */ __RPC__out DWORD *pdwCount) = 0;
+            /* [annotation][in] */ 
+            _In_  IFunctionInstance *pIFunctionInstance,
+            /* [annotation][in] */ 
+            _In_  INT_PTR iProviderInstanceContext,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [in] */ __RPC__in_opt IFunctionInstance *pIFunctionInstance,
-            /* [in] */ INT_PTR iProviderInstanceContext,
-            /* [in] */ DWORD dwIndex,
-            /* [out] */ __RPC__out PROPERTYKEY *pKey) = 0;
+            /* [annotation][in] */ 
+            _In_  IFunctionInstance *pIFunctionInstance,
+            /* [annotation][in] */ 
+            _In_  INT_PTR iProviderInstanceContext,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][out] */ 
+            _Out_  PROPERTYKEY *pKey) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetValue( 
-            /* [in] */ __RPC__in_opt IFunctionInstance *pIFunctionInstance,
-            /* [in] */ INT_PTR iProviderInstanceContext,
-            /* [in] */ __RPC__in REFPROPERTYKEY Key,
-            /* [out] */ __RPC__out PROPVARIANT *ppropVar) = 0;
+            /* [annotation][in] */ 
+            _In_  IFunctionInstance *pIFunctionInstance,
+            /* [annotation][in] */ 
+            _In_  INT_PTR iProviderInstanceContext,
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY Key,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *ppropVar) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetValue( 
-            /* [in] */ __RPC__in_opt IFunctionInstance *pIFunctionInstance,
-            /* [in] */ INT_PTR iProviderInstanceContext,
-            /* [in] */ __RPC__in REFPROPERTYKEY Key,
-            /* [in] */ __RPC__in const PROPVARIANT *ppropVar) = 0;
+            /* [annotation][in] */ 
+            _In_  IFunctionInstance *pIFunctionInstance,
+            /* [annotation][in] */ 
+            _In_  INT_PTR iProviderInstanceContext,
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY Key,
+            /* [annotation][in] */ 
+            _In_  const PROPVARIANT *ppropVar) = 0;
         
     };
     
@@ -368,7 +428,8 @@ EXTERN_C const IID IID_IProviderProperties;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProviderProperties * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -383,33 +444,48 @@ EXTERN_C const IID IID_IProviderProperties;
         DECLSPEC_XFGVIRT(IProviderProperties, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IProviderProperties * This,
-            /* [in] */ __RPC__in_opt IFunctionInstance *pIFunctionInstance,
-            /* [in] */ INT_PTR iProviderInstanceContext,
-            /* [out] */ __RPC__out DWORD *pdwCount);
+            /* [annotation][in] */ 
+            _In_  IFunctionInstance *pIFunctionInstance,
+            /* [annotation][in] */ 
+            _In_  INT_PTR iProviderInstanceContext,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwCount);
         
         DECLSPEC_XFGVIRT(IProviderProperties, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IProviderProperties * This,
-            /* [in] */ __RPC__in_opt IFunctionInstance *pIFunctionInstance,
-            /* [in] */ INT_PTR iProviderInstanceContext,
-            /* [in] */ DWORD dwIndex,
-            /* [out] */ __RPC__out PROPERTYKEY *pKey);
+            /* [annotation][in] */ 
+            _In_  IFunctionInstance *pIFunctionInstance,
+            /* [annotation][in] */ 
+            _In_  INT_PTR iProviderInstanceContext,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][out] */ 
+            _Out_  PROPERTYKEY *pKey);
         
         DECLSPEC_XFGVIRT(IProviderProperties, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in IProviderProperties * This,
-            /* [in] */ __RPC__in_opt IFunctionInstance *pIFunctionInstance,
-            /* [in] */ INT_PTR iProviderInstanceContext,
-            /* [in] */ __RPC__in REFPROPERTYKEY Key,
-            /* [out] */ __RPC__out PROPVARIANT *ppropVar);
+            /* [annotation][in] */ 
+            _In_  IFunctionInstance *pIFunctionInstance,
+            /* [annotation][in] */ 
+            _In_  INT_PTR iProviderInstanceContext,
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY Key,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *ppropVar);
         
         DECLSPEC_XFGVIRT(IProviderProperties, SetValue)
         HRESULT ( STDMETHODCALLTYPE *SetValue )( 
             __RPC__in IProviderProperties * This,
-            /* [in] */ __RPC__in_opt IFunctionInstance *pIFunctionInstance,
-            /* [in] */ INT_PTR iProviderInstanceContext,
-            /* [in] */ __RPC__in REFPROPERTYKEY Key,
-            /* [in] */ __RPC__in const PROPVARIANT *ppropVar);
+            /* [annotation][in] */ 
+            _In_  IFunctionInstance *pIFunctionInstance,
+            /* [annotation][in] */ 
+            _In_  INT_PTR iProviderInstanceContext,
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY Key,
+            /* [annotation][in] */ 
+            _In_  const PROPVARIANT *ppropVar);
         
         END_INTERFACE
     } IProviderPropertiesVtbl;
@@ -473,15 +549,22 @@ EXTERN_C const IID IID_IProviderPublishing;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateInstance( 
-            /* [in] */ SystemVisibilityFlags enumVisibilityFlags,
-            /* [unique][string][in] */ __RPC__in_opt_string const WCHAR *pszSubCategory,
-            /* [string][in] */ __RPC__in_string const WCHAR *pszProviderInstanceIdentity,
-            /* [out] */ __RPC__deref_out_opt IFunctionInstance **ppIFunctionInstance) = 0;
+            /* [annotation][in] */ 
+            _In_  SystemVisibilityFlags enumVisibilityFlags,
+            /* [annotation][unique][string][in] */ 
+            _In_  const WCHAR *pszSubCategory,
+            /* [annotation][string][in] */ 
+            _In_  const WCHAR *pszProviderInstanceIdentity,
+            /* [annotation][out] */ 
+            _Out_  IFunctionInstance **ppIFunctionInstance) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveInstance( 
-            /* [in] */ SystemVisibilityFlags enumVisibilityFlags,
-            /* [unique][string][in] */ __RPC__in_opt_string const WCHAR *pszSubCategory,
-            /* [string][in] */ __RPC__in_string const WCHAR *pszProviderInstanceIdentity) = 0;
+            /* [annotation][in] */ 
+            _In_  SystemVisibilityFlags enumVisibilityFlags,
+            /* [annotation][unique][string][in] */ 
+            _In_  const WCHAR *pszSubCategory,
+            /* [annotation][string][in] */ 
+            _In_  const WCHAR *pszProviderInstanceIdentity) = 0;
         
     };
     
@@ -495,7 +578,8 @@ EXTERN_C const IID IID_IProviderPublishing;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProviderPublishing * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -510,17 +594,24 @@ EXTERN_C const IID IID_IProviderPublishing;
         DECLSPEC_XFGVIRT(IProviderPublishing, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             __RPC__in IProviderPublishing * This,
-            /* [in] */ SystemVisibilityFlags enumVisibilityFlags,
-            /* [unique][string][in] */ __RPC__in_opt_string const WCHAR *pszSubCategory,
-            /* [string][in] */ __RPC__in_string const WCHAR *pszProviderInstanceIdentity,
-            /* [out] */ __RPC__deref_out_opt IFunctionInstance **ppIFunctionInstance);
+            /* [annotation][in] */ 
+            _In_  SystemVisibilityFlags enumVisibilityFlags,
+            /* [annotation][unique][string][in] */ 
+            _In_  const WCHAR *pszSubCategory,
+            /* [annotation][string][in] */ 
+            _In_  const WCHAR *pszProviderInstanceIdentity,
+            /* [annotation][out] */ 
+            _Out_  IFunctionInstance **ppIFunctionInstance);
         
         DECLSPEC_XFGVIRT(IProviderPublishing, RemoveInstance)
         HRESULT ( STDMETHODCALLTYPE *RemoveInstance )( 
             __RPC__in IProviderPublishing * This,
-            /* [in] */ SystemVisibilityFlags enumVisibilityFlags,
-            /* [unique][string][in] */ __RPC__in_opt_string const WCHAR *pszSubCategory,
-            /* [string][in] */ __RPC__in_string const WCHAR *pszProviderInstanceIdentity);
+            /* [annotation][in] */ 
+            _In_  SystemVisibilityFlags enumVisibilityFlags,
+            /* [annotation][unique][string][in] */ 
+            _In_  const WCHAR *pszSubCategory,
+            /* [annotation][string][in] */ 
+            _In_  const WCHAR *pszProviderInstanceIdentity);
         
         END_INTERFACE
     } IProviderPublishingVtbl;
@@ -578,18 +669,26 @@ EXTERN_C const IID IID_IFunctionDiscoveryProviderFactory;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreatePropertyStore( 
-            /* [out] */ __RPC__deref_out_opt IPropertyStore **ppIPropertyStore) = 0;
+            /* [annotation][out] */ 
+            _Out_  IPropertyStore **ppIPropertyStore) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateInstance( 
-            /* [unique][string][in] */ __RPC__in_opt_string const WCHAR *pszSubCategory,
-            /* [string][in] */ __RPC__in_string const WCHAR *pszProviderInstanceIdentity,
-            /* [in] */ INT_PTR iProviderInstanceContext,
-            /* [in] */ __RPC__in_opt IPropertyStore *pIPropertyStore,
-            /* [in] */ __RPC__in_opt IFunctionDiscoveryProvider *pIFunctionDiscoveryProvider,
-            /* [out] */ __RPC__deref_out_opt IFunctionInstance **ppIFunctionInstance) = 0;
+            /* [annotation][unique][string][in] */ 
+            _In_  const WCHAR *pszSubCategory,
+            /* [annotation][string][in] */ 
+            _In_  const WCHAR *pszProviderInstanceIdentity,
+            /* [annotation][in] */ 
+            _In_  INT_PTR iProviderInstanceContext,
+            /* [annotation][in] */ 
+            _In_  IPropertyStore *pIPropertyStore,
+            /* [annotation][in] */ 
+            _In_  IFunctionDiscoveryProvider *pIFunctionDiscoveryProvider,
+            /* [annotation][out] */ 
+            _Out_  IFunctionInstance **ppIFunctionInstance) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateFunctionInstanceCollection( 
-            /* [out] */ __RPC__deref_out_opt IFunctionInstanceCollection **ppIFunctionInstanceCollection) = 0;
+            /* [annotation][out] */ 
+            _Out_  IFunctionInstanceCollection **ppIFunctionInstanceCollection) = 0;
         
     };
     
@@ -603,7 +702,8 @@ EXTERN_C const IID IID_IFunctionDiscoveryProviderFactory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFunctionDiscoveryProviderFactory * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -618,22 +718,30 @@ EXTERN_C const IID IID_IFunctionDiscoveryProviderFactory;
         DECLSPEC_XFGVIRT(IFunctionDiscoveryProviderFactory, CreatePropertyStore)
         HRESULT ( STDMETHODCALLTYPE *CreatePropertyStore )( 
             __RPC__in IFunctionDiscoveryProviderFactory * This,
-            /* [out] */ __RPC__deref_out_opt IPropertyStore **ppIPropertyStore);
+            /* [annotation][out] */ 
+            _Out_  IPropertyStore **ppIPropertyStore);
         
         DECLSPEC_XFGVIRT(IFunctionDiscoveryProviderFactory, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             __RPC__in IFunctionDiscoveryProviderFactory * This,
-            /* [unique][string][in] */ __RPC__in_opt_string const WCHAR *pszSubCategory,
-            /* [string][in] */ __RPC__in_string const WCHAR *pszProviderInstanceIdentity,
-            /* [in] */ INT_PTR iProviderInstanceContext,
-            /* [in] */ __RPC__in_opt IPropertyStore *pIPropertyStore,
-            /* [in] */ __RPC__in_opt IFunctionDiscoveryProvider *pIFunctionDiscoveryProvider,
-            /* [out] */ __RPC__deref_out_opt IFunctionInstance **ppIFunctionInstance);
+            /* [annotation][unique][string][in] */ 
+            _In_  const WCHAR *pszSubCategory,
+            /* [annotation][string][in] */ 
+            _In_  const WCHAR *pszProviderInstanceIdentity,
+            /* [annotation][in] */ 
+            _In_  INT_PTR iProviderInstanceContext,
+            /* [annotation][in] */ 
+            _In_  IPropertyStore *pIPropertyStore,
+            /* [annotation][in] */ 
+            _In_  IFunctionDiscoveryProvider *pIFunctionDiscoveryProvider,
+            /* [annotation][out] */ 
+            _Out_  IFunctionInstance **ppIFunctionInstance);
         
         DECLSPEC_XFGVIRT(IFunctionDiscoveryProviderFactory, CreateFunctionInstanceCollection)
         HRESULT ( STDMETHODCALLTYPE *CreateFunctionInstanceCollection )( 
             __RPC__in IFunctionDiscoveryProviderFactory * This,
-            /* [out] */ __RPC__deref_out_opt IFunctionInstanceCollection **ppIFunctionInstanceCollection);
+            /* [annotation][out] */ 
+            _Out_  IFunctionInstanceCollection **ppIFunctionInstanceCollection);
         
         END_INTERFACE
     } IFunctionDiscoveryProviderFactoryVtbl;
@@ -694,18 +802,24 @@ EXTERN_C const IID IID_IFunctionDiscoveryProviderQuery;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE IsInstanceQuery( 
-            /* [out] */ __RPC__out BOOL *pisInstanceQuery,
-            /* [string][out] */ __RPC__deref_out_opt_string WCHAR **ppszConstraintValue) = 0;
+            /* [annotation][out] */ 
+            _Out_  BOOL *pisInstanceQuery,
+            /* [annotation][string][out] */ 
+            _Out_  WCHAR **ppszConstraintValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsSubcategoryQuery( 
-            /* [out] */ __RPC__out BOOL *pisSubcategoryQuery,
-            /* [string][out] */ __RPC__deref_out_opt_string WCHAR **ppszConstraintValue) = 0;
+            /* [annotation][out] */ 
+            _Out_  BOOL *pisSubcategoryQuery,
+            /* [annotation][string][out] */ 
+            _Out_  WCHAR **ppszConstraintValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetQueryConstraints( 
-            /* [out] */ __RPC__deref_out_opt IProviderQueryConstraintCollection **ppIProviderQueryConstraints) = 0;
+            /* [annotation][out] */ 
+            _Out_  IProviderQueryConstraintCollection **ppIProviderQueryConstraints) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPropertyConstraints( 
-            /* [out] */ __RPC__deref_out_opt IProviderPropertyConstraintCollection **ppIProviderPropertyConstraints) = 0;
+            /* [annotation][out] */ 
+            _Out_  IProviderPropertyConstraintCollection **ppIProviderPropertyConstraints) = 0;
         
     };
     
@@ -719,7 +833,8 @@ EXTERN_C const IID IID_IFunctionDiscoveryProviderQuery;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFunctionDiscoveryProviderQuery * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -734,24 +849,30 @@ EXTERN_C const IID IID_IFunctionDiscoveryProviderQuery;
         DECLSPEC_XFGVIRT(IFunctionDiscoveryProviderQuery, IsInstanceQuery)
         HRESULT ( STDMETHODCALLTYPE *IsInstanceQuery )( 
             __RPC__in IFunctionDiscoveryProviderQuery * This,
-            /* [out] */ __RPC__out BOOL *pisInstanceQuery,
-            /* [string][out] */ __RPC__deref_out_opt_string WCHAR **ppszConstraintValue);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pisInstanceQuery,
+            /* [annotation][string][out] */ 
+            _Out_  WCHAR **ppszConstraintValue);
         
         DECLSPEC_XFGVIRT(IFunctionDiscoveryProviderQuery, IsSubcategoryQuery)
         HRESULT ( STDMETHODCALLTYPE *IsSubcategoryQuery )( 
             __RPC__in IFunctionDiscoveryProviderQuery * This,
-            /* [out] */ __RPC__out BOOL *pisSubcategoryQuery,
-            /* [string][out] */ __RPC__deref_out_opt_string WCHAR **ppszConstraintValue);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pisSubcategoryQuery,
+            /* [annotation][string][out] */ 
+            _Out_  WCHAR **ppszConstraintValue);
         
         DECLSPEC_XFGVIRT(IFunctionDiscoveryProviderQuery, GetQueryConstraints)
         HRESULT ( STDMETHODCALLTYPE *GetQueryConstraints )( 
             __RPC__in IFunctionDiscoveryProviderQuery * This,
-            /* [out] */ __RPC__deref_out_opt IProviderQueryConstraintCollection **ppIProviderQueryConstraints);
+            /* [annotation][out] */ 
+            _Out_  IProviderQueryConstraintCollection **ppIProviderQueryConstraints);
         
         DECLSPEC_XFGVIRT(IFunctionDiscoveryProviderQuery, GetPropertyConstraints)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyConstraints )( 
             __RPC__in IFunctionDiscoveryProviderQuery * This,
-            /* [out] */ __RPC__deref_out_opt IProviderPropertyConstraintCollection **ppIProviderPropertyConstraints);
+            /* [annotation][out] */ 
+            _Out_  IProviderPropertyConstraintCollection **ppIProviderPropertyConstraints);
         
         END_INTERFACE
     } IFunctionDiscoveryProviderQueryVtbl;
@@ -815,20 +936,28 @@ EXTERN_C const IID IID_IProviderQueryConstraintCollection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [out] */ __RPC__out DWORD *pdwCount) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Get( 
-            /* [string][in] */ __RPC__in_string const WCHAR *pszConstraintName,
-            /* [string][out] */ __RPC__deref_out_opt_string WCHAR **ppszConstraintValue) = 0;
+            /* [annotation][string][in] */ 
+            _In_  const WCHAR *pszConstraintName,
+            /* [annotation][string][out] */ 
+            _Out_  WCHAR **ppszConstraintValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Item( 
-            /* [in] */ DWORD dwIndex,
-            /* [string][out] */ __RPC__deref_out_opt_string WCHAR **ppszConstraintName,
-            /* [string][out] */ __RPC__deref_out_opt_string WCHAR **ppszConstraintValue) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][string][out] */ 
+            _Out_  WCHAR **ppszConstraintName,
+            /* [annotation][string][out] */ 
+            _Out_  WCHAR **ppszConstraintValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [string][out] */ __RPC__deref_out_opt_string WCHAR **ppszConstraintName,
-            /* [string][out] */ __RPC__deref_out_opt_string WCHAR **ppszConstraintValue) = 0;
+            /* [annotation][string][out] */ 
+            _Out_  WCHAR **ppszConstraintName,
+            /* [annotation][string][out] */ 
+            _Out_  WCHAR **ppszConstraintValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( void) = 0;
         
@@ -846,7 +975,8 @@ EXTERN_C const IID IID_IProviderQueryConstraintCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProviderQueryConstraintCollection * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -861,26 +991,34 @@ EXTERN_C const IID IID_IProviderQueryConstraintCollection;
         DECLSPEC_XFGVIRT(IProviderQueryConstraintCollection, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IProviderQueryConstraintCollection * This,
-            /* [out] */ __RPC__out DWORD *pdwCount);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwCount);
         
         DECLSPEC_XFGVIRT(IProviderQueryConstraintCollection, Get)
         HRESULT ( STDMETHODCALLTYPE *Get )( 
             __RPC__in IProviderQueryConstraintCollection * This,
-            /* [string][in] */ __RPC__in_string const WCHAR *pszConstraintName,
-            /* [string][out] */ __RPC__deref_out_opt_string WCHAR **ppszConstraintValue);
+            /* [annotation][string][in] */ 
+            _In_  const WCHAR *pszConstraintName,
+            /* [annotation][string][out] */ 
+            _Out_  WCHAR **ppszConstraintValue);
         
         DECLSPEC_XFGVIRT(IProviderQueryConstraintCollection, Item)
         HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in IProviderQueryConstraintCollection * This,
-            /* [in] */ DWORD dwIndex,
-            /* [string][out] */ __RPC__deref_out_opt_string WCHAR **ppszConstraintName,
-            /* [string][out] */ __RPC__deref_out_opt_string WCHAR **ppszConstraintValue);
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][string][out] */ 
+            _Out_  WCHAR **ppszConstraintName,
+            /* [annotation][string][out] */ 
+            _Out_  WCHAR **ppszConstraintValue);
         
         DECLSPEC_XFGVIRT(IProviderQueryConstraintCollection, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IProviderQueryConstraintCollection * This,
-            /* [string][out] */ __RPC__deref_out_opt_string WCHAR **ppszConstraintName,
-            /* [string][out] */ __RPC__deref_out_opt_string WCHAR **ppszConstraintValue);
+            /* [annotation][string][out] */ 
+            _Out_  WCHAR **ppszConstraintName,
+            /* [annotation][string][out] */ 
+            _Out_  WCHAR **ppszConstraintValue);
         
         DECLSPEC_XFGVIRT(IProviderQueryConstraintCollection, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
@@ -958,23 +1096,34 @@ EXTERN_C const IID IID_IProviderPropertyConstraintCollection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [out] */ __RPC__out DWORD *pdwCount) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Get( 
-            /* [in] */ __RPC__in REFPROPERTYKEY Key,
-            /* [out] */ __RPC__out PROPVARIANT *pPropVar,
-            /* [out] */ __RPC__out DWORD *pdwPropertyConstraint) = 0;
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY Key,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *pPropVar,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwPropertyConstraint) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Item( 
-            /* [in] */ DWORD dwIndex,
-            /* [out] */ __RPC__out PROPERTYKEY *pKey,
-            /* [out] */ __RPC__out PROPVARIANT *pPropVar,
-            /* [out] */ __RPC__out DWORD *pdwPropertyConstraint) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][out] */ 
+            _Out_  PROPERTYKEY *pKey,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *pPropVar,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwPropertyConstraint) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [out] */ __RPC__out PROPERTYKEY *pKey,
-            /* [out] */ __RPC__out PROPVARIANT *pPropVar,
-            /* [out] */ __RPC__out DWORD *pdwPropertyConstraint) = 0;
+            /* [annotation][out] */ 
+            _Out_  PROPERTYKEY *pKey,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *pPropVar,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwPropertyConstraint) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( void) = 0;
         
@@ -992,7 +1141,8 @@ EXTERN_C const IID IID_IProviderPropertyConstraintCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProviderPropertyConstraintCollection * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1007,29 +1157,40 @@ EXTERN_C const IID IID_IProviderPropertyConstraintCollection;
         DECLSPEC_XFGVIRT(IProviderPropertyConstraintCollection, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IProviderPropertyConstraintCollection * This,
-            /* [out] */ __RPC__out DWORD *pdwCount);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwCount);
         
         DECLSPEC_XFGVIRT(IProviderPropertyConstraintCollection, Get)
         HRESULT ( STDMETHODCALLTYPE *Get )( 
             __RPC__in IProviderPropertyConstraintCollection * This,
-            /* [in] */ __RPC__in REFPROPERTYKEY Key,
-            /* [out] */ __RPC__out PROPVARIANT *pPropVar,
-            /* [out] */ __RPC__out DWORD *pdwPropertyConstraint);
+            /* [annotation][in] */ 
+            _In_  REFPROPERTYKEY Key,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *pPropVar,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwPropertyConstraint);
         
         DECLSPEC_XFGVIRT(IProviderPropertyConstraintCollection, Item)
         HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in IProviderPropertyConstraintCollection * This,
-            /* [in] */ DWORD dwIndex,
-            /* [out] */ __RPC__out PROPERTYKEY *pKey,
-            /* [out] */ __RPC__out PROPVARIANT *pPropVar,
-            /* [out] */ __RPC__out DWORD *pdwPropertyConstraint);
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
+            /* [annotation][out] */ 
+            _Out_  PROPERTYKEY *pKey,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *pPropVar,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwPropertyConstraint);
         
         DECLSPEC_XFGVIRT(IProviderPropertyConstraintCollection, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IProviderPropertyConstraintCollection * This,
-            /* [out] */ __RPC__out PROPERTYKEY *pKey,
-            /* [out] */ __RPC__out PROPVARIANT *pPropVar,
-            /* [out] */ __RPC__out DWORD *pdwPropertyConstraint);
+            /* [annotation][out] */ 
+            _Out_  PROPERTYKEY *pKey,
+            /* [annotation][out] */ 
+            _Out_  PROPVARIANT *pPropVar,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwPropertyConstraint);
         
         DECLSPEC_XFGVIRT(IProviderPropertyConstraintCollection, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
@@ -1107,9 +1268,12 @@ EXTERN_C const IID IID_IFunctionDiscoveryServiceProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [in] */ __RPC__in_opt IFunctionInstance *pIFunctionInstance,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [retval][iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
+            /* [annotation][in] */ 
+            _In_  IFunctionInstance *pIFunctionInstance,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  void **ppv) = 0;
         
     };
     
@@ -1123,7 +1287,8 @@ EXTERN_C const IID IID_IFunctionDiscoveryServiceProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFunctionDiscoveryServiceProvider * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1138,9 +1303,12 @@ EXTERN_C const IID IID_IFunctionDiscoveryServiceProvider;
         DECLSPEC_XFGVIRT(IFunctionDiscoveryServiceProvider, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IFunctionDiscoveryServiceProvider * This,
-            /* [in] */ __RPC__in_opt IFunctionInstance *pIFunctionInstance,
-            /* [in] */ __RPC__in REFIID riid,
-            /* [retval][iid_is][out] */ __RPC__deref_out_opt void **ppv);
+            /* [annotation][in] */ 
+            _In_  IFunctionInstance *pIFunctionInstance,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  void **ppv);
         
         END_INTERFACE
     } IFunctionDiscoveryServiceProviderVtbl;

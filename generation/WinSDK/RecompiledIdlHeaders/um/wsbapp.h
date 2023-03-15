@@ -6,12 +6,11 @@
  /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
-#pragma warning( disable: 4049 )  /* more than 64k source lines */
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 475
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -106,13 +105,20 @@ EXTERN_C const IID IID_IWsbApplicationBackupSupport;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CheckConsistency( 
-            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszWriterMetadata,
-            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszComponentName,
-            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszComponentLogicalPath,
-            /* [in][range] */ __RPC__in_range(0,1000) DWORD cVolumes,
-            /* [size_is][string][unique][in] */ __RPC__in_ecount_full_opt(cVolumes) LPWSTR *rgwszSourceVolumePath,
-            /* [size_is][string][unique][in] */ __RPC__in_ecount_full_opt(cVolumes) LPWSTR *rgwszSnapshotVolumePath,
-            /* [out] */ __RPC__deref_out_opt IWsbApplicationAsync **ppAsync) = 0;
+            /* [annotation][string][unique][in] */ 
+            _In_  LPWSTR wszWriterMetadata,
+            /* [annotation][string][unique][in] */ 
+            _In_  LPWSTR wszComponentName,
+            /* [annotation][string][unique][in] */ 
+            _In_  LPWSTR wszComponentLogicalPath,
+            /* [annotation][in][range] */ 
+            _In_  DWORD cVolumes,
+            /* [annotation][size_is][string][unique][in] */ 
+            _In_reads_(cVolumes)  LPWSTR *rgwszSourceVolumePath,
+            /* [annotation][size_is][string][unique][in] */ 
+            _In_reads_(cVolumes)  LPWSTR *rgwszSnapshotVolumePath,
+            /* [annotation][out] */ 
+            _Out_  IWsbApplicationAsync **ppAsync) = 0;
         
     };
     
@@ -126,7 +132,8 @@ EXTERN_C const IID IID_IWsbApplicationBackupSupport;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWsbApplicationBackupSupport * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -141,13 +148,20 @@ EXTERN_C const IID IID_IWsbApplicationBackupSupport;
         DECLSPEC_XFGVIRT(IWsbApplicationBackupSupport, CheckConsistency)
         HRESULT ( STDMETHODCALLTYPE *CheckConsistency )( 
             __RPC__in IWsbApplicationBackupSupport * This,
-            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszWriterMetadata,
-            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszComponentName,
-            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszComponentLogicalPath,
-            /* [in][range] */ __RPC__in_range(0,1000) DWORD cVolumes,
-            /* [size_is][string][unique][in] */ __RPC__in_ecount_full_opt(cVolumes) LPWSTR *rgwszSourceVolumePath,
-            /* [size_is][string][unique][in] */ __RPC__in_ecount_full_opt(cVolumes) LPWSTR *rgwszSnapshotVolumePath,
-            /* [out] */ __RPC__deref_out_opt IWsbApplicationAsync **ppAsync);
+            /* [annotation][string][unique][in] */ 
+            _In_  LPWSTR wszWriterMetadata,
+            /* [annotation][string][unique][in] */ 
+            _In_  LPWSTR wszComponentName,
+            /* [annotation][string][unique][in] */ 
+            _In_  LPWSTR wszComponentLogicalPath,
+            /* [annotation][in][range] */ 
+            _In_  DWORD cVolumes,
+            /* [annotation][size_is][string][unique][in] */ 
+            _In_reads_(cVolumes)  LPWSTR *rgwszSourceVolumePath,
+            /* [annotation][size_is][string][unique][in] */ 
+            _In_reads_(cVolumes)  LPWSTR *rgwszSnapshotVolumePath,
+            /* [annotation][out] */ 
+            _Out_  IWsbApplicationAsync **ppAsync);
         
         END_INTERFACE
     } IWsbApplicationBackupSupportVtbl;
@@ -202,26 +216,40 @@ EXTERN_C const IID IID_IWsbApplicationRestoreSupport;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE PreRestore( 
-            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszWriterMetadata,
-            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszComponentName,
-            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszComponentLogicalPath,
-            /* [in] */ BOOLEAN bNoRollForward) = 0;
+            /* [annotation][string][unique][in] */ 
+            _In_  LPWSTR wszWriterMetadata,
+            /* [annotation][string][unique][in] */ 
+            _In_  LPWSTR wszComponentName,
+            /* [annotation][string][unique][in] */ 
+            _In_  LPWSTR wszComponentLogicalPath,
+            /* [annotation][in] */ 
+            _In_  BOOLEAN bNoRollForward) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PostRestore( 
-            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszWriterMetadata,
-            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszComponentName,
-            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszComponentLogicalPath,
-            /* [in] */ BOOLEAN bNoRollForward) = 0;
+            /* [annotation][string][unique][in] */ 
+            _In_  LPWSTR wszWriterMetadata,
+            /* [annotation][string][unique][in] */ 
+            _In_  LPWSTR wszComponentName,
+            /* [annotation][string][unique][in] */ 
+            _In_  LPWSTR wszComponentLogicalPath,
+            /* [annotation][in] */ 
+            _In_  BOOLEAN bNoRollForward) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OrderComponents( 
-            /* [in][range] */ __RPC__in_range(0,10000) DWORD cComponents,
-            /* [size_is][string][in] */ __RPC__in_ecount_full(cComponents) LPWSTR *rgComponentName,
-            /* [size_is][string][in] */ __RPC__in_ecount_full(cComponents) LPWSTR *rgComponentLogicalPaths,
-            /* [size_is][size_is][string][out] */ __RPC__deref_out_ecount_full_opt_string(cComponents) LPWSTR **prgComponentName,
-            /* [size_is][size_is][string][out] */ __RPC__deref_out_ecount_full_opt_string(cComponents) LPWSTR **prgComponentLogicalPath) = 0;
+            /* [annotation][in][range] */ 
+            _In_  DWORD cComponents,
+            /* [annotation][size_is][string][in] */ 
+            _In_reads_(cComponents)  LPWSTR *rgComponentName,
+            /* [annotation][size_is][string][in] */ 
+            _In_reads_(cComponents)  LPWSTR *rgComponentLogicalPaths,
+            /* [annotation][size_is][size_is][string][out] */ 
+            _Out_writes_(cComponents)  LPWSTR **prgComponentName,
+            /* [annotation][size_is][size_is][string][out] */ 
+            _Out_writes_(cComponents)  LPWSTR **prgComponentLogicalPath) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsRollForwardSupported( 
-            /* [out] */ __RPC__out BOOLEAN *pbRollForwardSupported) = 0;
+            /* [annotation][out] */ 
+            _Out_  BOOLEAN *pbRollForwardSupported) = 0;
         
     };
     
@@ -235,7 +263,8 @@ EXTERN_C const IID IID_IWsbApplicationRestoreSupport;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWsbApplicationRestoreSupport * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -250,32 +279,46 @@ EXTERN_C const IID IID_IWsbApplicationRestoreSupport;
         DECLSPEC_XFGVIRT(IWsbApplicationRestoreSupport, PreRestore)
         HRESULT ( STDMETHODCALLTYPE *PreRestore )( 
             __RPC__in IWsbApplicationRestoreSupport * This,
-            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszWriterMetadata,
-            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszComponentName,
-            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszComponentLogicalPath,
-            /* [in] */ BOOLEAN bNoRollForward);
+            /* [annotation][string][unique][in] */ 
+            _In_  LPWSTR wszWriterMetadata,
+            /* [annotation][string][unique][in] */ 
+            _In_  LPWSTR wszComponentName,
+            /* [annotation][string][unique][in] */ 
+            _In_  LPWSTR wszComponentLogicalPath,
+            /* [annotation][in] */ 
+            _In_  BOOLEAN bNoRollForward);
         
         DECLSPEC_XFGVIRT(IWsbApplicationRestoreSupport, PostRestore)
         HRESULT ( STDMETHODCALLTYPE *PostRestore )( 
             __RPC__in IWsbApplicationRestoreSupport * This,
-            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszWriterMetadata,
-            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszComponentName,
-            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszComponentLogicalPath,
-            /* [in] */ BOOLEAN bNoRollForward);
+            /* [annotation][string][unique][in] */ 
+            _In_  LPWSTR wszWriterMetadata,
+            /* [annotation][string][unique][in] */ 
+            _In_  LPWSTR wszComponentName,
+            /* [annotation][string][unique][in] */ 
+            _In_  LPWSTR wszComponentLogicalPath,
+            /* [annotation][in] */ 
+            _In_  BOOLEAN bNoRollForward);
         
         DECLSPEC_XFGVIRT(IWsbApplicationRestoreSupport, OrderComponents)
         HRESULT ( STDMETHODCALLTYPE *OrderComponents )( 
             __RPC__in IWsbApplicationRestoreSupport * This,
-            /* [in][range] */ __RPC__in_range(0,10000) DWORD cComponents,
-            /* [size_is][string][in] */ __RPC__in_ecount_full(cComponents) LPWSTR *rgComponentName,
-            /* [size_is][string][in] */ __RPC__in_ecount_full(cComponents) LPWSTR *rgComponentLogicalPaths,
-            /* [size_is][size_is][string][out] */ __RPC__deref_out_ecount_full_opt_string(cComponents) LPWSTR **prgComponentName,
-            /* [size_is][size_is][string][out] */ __RPC__deref_out_ecount_full_opt_string(cComponents) LPWSTR **prgComponentLogicalPath);
+            /* [annotation][in][range] */ 
+            _In_  DWORD cComponents,
+            /* [annotation][size_is][string][in] */ 
+            _In_reads_(cComponents)  LPWSTR *rgComponentName,
+            /* [annotation][size_is][string][in] */ 
+            _In_reads_(cComponents)  LPWSTR *rgComponentLogicalPaths,
+            /* [annotation][size_is][size_is][string][out] */ 
+            _Out_writes_(cComponents)  LPWSTR **prgComponentName,
+            /* [annotation][size_is][size_is][string][out] */ 
+            _Out_writes_(cComponents)  LPWSTR **prgComponentLogicalPath);
         
         DECLSPEC_XFGVIRT(IWsbApplicationRestoreSupport, IsRollForwardSupported)
         HRESULT ( STDMETHODCALLTYPE *IsRollForwardSupported )( 
             __RPC__in IWsbApplicationRestoreSupport * This,
-            /* [out] */ __RPC__out BOOLEAN *pbRollForwardSupported);
+            /* [annotation][out] */ 
+            _Out_  BOOLEAN *pbRollForwardSupported);
         
         END_INTERFACE
     } IWsbApplicationRestoreSupportVtbl;
@@ -339,7 +382,8 @@ EXTERN_C const IID IID_IWsbApplicationAsync;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE QueryStatus( 
-            /* [out] */ __RPC__out HRESULT *phrResult) = 0;
+            /* [annotation][out] */ 
+            _Out_  HRESULT *phrResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Abort( void) = 0;
         
@@ -355,7 +399,8 @@ EXTERN_C const IID IID_IWsbApplicationAsync;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWsbApplicationAsync * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -370,7 +415,8 @@ EXTERN_C const IID IID_IWsbApplicationAsync;
         DECLSPEC_XFGVIRT(IWsbApplicationAsync, QueryStatus)
         HRESULT ( STDMETHODCALLTYPE *QueryStatus )( 
             __RPC__in IWsbApplicationAsync * This,
-            /* [out] */ __RPC__out HRESULT *phrResult);
+            /* [annotation][out] */ 
+            _Out_  HRESULT *phrResult);
         
         DECLSPEC_XFGVIRT(IWsbApplicationAsync, Abort)
         HRESULT ( STDMETHODCALLTYPE *Abort )( 

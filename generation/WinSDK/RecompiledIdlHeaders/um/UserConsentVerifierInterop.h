@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -91,10 +91,14 @@ EXTERN_C const IID IID_IUserConsentVerifierInterop;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RequestVerificationForWindowAsync( 
-            /* [in] */ HWND appWindow,
-            /* [in] */ HSTRING message,
-            /* [in] */ REFIID riid,
-            /* [iid_is][retval][out] */ void **asyncOperation) = 0;
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  HSTRING message,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation) = 0;
         
     };
     
@@ -108,7 +112,8 @@ EXTERN_C const IID IID_IUserConsentVerifierInterop;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUserConsentVerifierInterop * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -139,10 +144,14 @@ EXTERN_C const IID IID_IUserConsentVerifierInterop;
         DECLSPEC_XFGVIRT(IUserConsentVerifierInterop, RequestVerificationForWindowAsync)
         HRESULT ( STDMETHODCALLTYPE *RequestVerificationForWindowAsync )( 
             IUserConsentVerifierInterop * This,
-            /* [in] */ HWND appWindow,
-            /* [in] */ HSTRING message,
-            /* [in] */ REFIID riid,
-            /* [iid_is][retval][out] */ void **asyncOperation);
+            /* [annotation][in] */ 
+            _In_  HWND appWindow,
+            /* [annotation][in] */ 
+            _In_  HSTRING message,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][retval][out] */ 
+            _COM_Outptr_retval_  void **asyncOperation);
         
         END_INTERFACE
     } IUserConsentVerifierInteropVtbl;

@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -632,7 +632,7 @@ typedef struct tagDBCOMMANDTREE
         /* [case()] */ VARIANT *pvarValue;
         /* [case()] */ GUID *pGuid;
         /* [case()] */ BYTE *pbValue;
-        /* [case()] */ char *pzValue;
+        /* [case()] */ unsigned char *pzValue;
         /* [case()] */ DB_NUMERIC *pdbnValue;
         /* [case()] */ DBTIMESTAMP *pdbtsValue;
         /* [case()] */ void *pvValue;
@@ -679,7 +679,8 @@ EXTERN_C const IID IID_ICommandTree;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICommandTree * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -808,7 +809,8 @@ EXTERN_C const IID IID_IQuery;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IQuery * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         

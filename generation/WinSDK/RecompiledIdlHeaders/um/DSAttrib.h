@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -100,9 +100,12 @@ EXTERN_C const IID IID_IAttributeSet;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetAttrib( 
-            /* [in] */ GUID guidAttribute,
-            /* [in] */ __RPC__in BYTE *pbAttribute,
-            /* [in] */ DWORD dwAttributeLength) = 0;
+            /* [annotation][in] */ 
+            _In_  GUID guidAttribute,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbAttribute,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAttributeLength) = 0;
         
     };
     
@@ -116,7 +119,8 @@ EXTERN_C const IID IID_IAttributeSet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAttributeSet * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -131,9 +135,12 @@ EXTERN_C const IID IID_IAttributeSet;
         DECLSPEC_XFGVIRT(IAttributeSet, SetAttrib)
         HRESULT ( STDMETHODCALLTYPE *SetAttrib )( 
             __RPC__in IAttributeSet * This,
-            /* [in] */ GUID guidAttribute,
-            /* [in] */ __RPC__in BYTE *pbAttribute,
-            /* [in] */ DWORD dwAttributeLength);
+            /* [annotation][in] */ 
+            _In_  GUID guidAttribute,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbAttribute,
+            /* [annotation][in] */ 
+            _In_  DWORD dwAttributeLength);
         
         END_INTERFACE
     } IAttributeSetVtbl;
@@ -188,18 +195,26 @@ EXTERN_C const IID IID_IAttributeGet;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [out] */ __RPC__out LONG *plCount) = 0;
+            /* [annotation][out] */ 
+            _Out_  LONG *plCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAttribIndexed( 
-            /* [in] */ LONG lIndex,
-            /* [out] */ __RPC__out GUID *pguidAttribute,
-            /* [out][in] */ __RPC__inout BYTE *pbAttribute,
-            /* [out][in] */ __RPC__inout DWORD *pdwAttributeLength) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG lIndex,
+            /* [annotation][out] */ 
+            _Out_  GUID *pguidAttribute,
+            /* [annotation][out][in] */ 
+            _Inout_  BYTE *pbAttribute,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwAttributeLength) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAttrib( 
-            /* [in] */ GUID guidAttribute,
-            /* [out][in] */ __RPC__inout BYTE *pbAttribute,
-            /* [out][in] */ __RPC__inout DWORD *pdwAttributeLength) = 0;
+            /* [annotation][in] */ 
+            _In_  GUID guidAttribute,
+            /* [annotation][out][in] */ 
+            _Inout_  BYTE *pbAttribute,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwAttributeLength) = 0;
         
     };
     
@@ -213,7 +228,8 @@ EXTERN_C const IID IID_IAttributeGet;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAttributeGet * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -228,22 +244,30 @@ EXTERN_C const IID IID_IAttributeGet;
         DECLSPEC_XFGVIRT(IAttributeGet, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IAttributeGet * This,
-            /* [out] */ __RPC__out LONG *plCount);
+            /* [annotation][out] */ 
+            _Out_  LONG *plCount);
         
         DECLSPEC_XFGVIRT(IAttributeGet, GetAttribIndexed)
         HRESULT ( STDMETHODCALLTYPE *GetAttribIndexed )( 
             __RPC__in IAttributeGet * This,
-            /* [in] */ LONG lIndex,
-            /* [out] */ __RPC__out GUID *pguidAttribute,
-            /* [out][in] */ __RPC__inout BYTE *pbAttribute,
-            /* [out][in] */ __RPC__inout DWORD *pdwAttributeLength);
+            /* [annotation][in] */ 
+            _In_  LONG lIndex,
+            /* [annotation][out] */ 
+            _Out_  GUID *pguidAttribute,
+            /* [annotation][out][in] */ 
+            _Inout_  BYTE *pbAttribute,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwAttributeLength);
         
         DECLSPEC_XFGVIRT(IAttributeGet, GetAttrib)
         HRESULT ( STDMETHODCALLTYPE *GetAttrib )( 
             __RPC__in IAttributeGet * This,
-            /* [in] */ GUID guidAttribute,
-            /* [out][in] */ __RPC__inout BYTE *pbAttribute,
-            /* [out][in] */ __RPC__inout DWORD *pdwAttributeLength);
+            /* [annotation][in] */ 
+            _In_  GUID guidAttribute,
+            /* [annotation][out][in] */ 
+            _Inout_  BYTE *pbAttribute,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pdwAttributeLength);
         
         END_INTERFACE
     } IAttributeGetVtbl;

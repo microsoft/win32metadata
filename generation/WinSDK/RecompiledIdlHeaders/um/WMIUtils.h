@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -197,56 +197,84 @@ EXTERN_C const IID IID_IWbemPathKeyList;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [out] */ ULONG *puKeyCount) = 0;
+            /* [annotation][out] */ 
+            _Out_  ULONG *puKeyCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetKey( 
-            /* [string][in] */ LPCWSTR wszName,
-            /* [in] */ ULONG uFlags,
-            /* [in] */ ULONG uCimType,
-            /* [in] */ LPVOID pKeyVal) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR wszName,
+            /* [annotation][in] */ 
+            _In_  ULONG uFlags,
+            /* [annotation][in] */ 
+            _In_  ULONG uCimType,
+            /* [annotation][in] */ 
+            _In_  LPVOID pKeyVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetKey2( 
-            /* [string][in] */ LPCWSTR wszName,
-            /* [in] */ ULONG uFlags,
-            /* [in] */ ULONG uCimType,
-            /* [in] */ VARIANT *pKeyVal) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR wszName,
+            /* [annotation][in] */ 
+            _In_  ULONG uFlags,
+            /* [annotation][in] */ 
+            _In_  ULONG uCimType,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pKeyVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetKey( 
-            /* [in] */ ULONG uKeyIx,
-            /* [in] */ ULONG uFlags,
-            /* [out][in] */ ULONG *puNameBufSize,
+            /* [annotation][in] */ 
+            _In_  ULONG uKeyIx,
+            /* [annotation][in] */ 
+            _In_  ULONG uFlags,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *puNameBufSize,
             /* [annotation][out][in] */ 
             _Out_writes_opt_(*puNameBufSize)  LPWSTR pszKeyName,
-            /* [out][in] */ ULONG *puKeyValBufSize,
-            /* [out][in] */ LPVOID pKeyVal,
-            /* [out] */ ULONG *puApparentCimType) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *puKeyValBufSize,
+            /* [annotation][out][in] */ 
+            _Inout_  LPVOID pKeyVal,
+            /* [annotation][out] */ 
+            _Out_  ULONG *puApparentCimType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetKey2( 
-            /* [in] */ ULONG uKeyIx,
-            /* [in] */ ULONG uFlags,
-            /* [out][in] */ ULONG *puNameBufSize,
+            /* [annotation][in] */ 
+            _In_  ULONG uKeyIx,
+            /* [annotation][in] */ 
+            _In_  ULONG uFlags,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *puNameBufSize,
             /* [annotation][out][in] */ 
             _Out_writes_opt_(*puNameBufSize)  LPWSTR pszKeyName,
-            /* [out][in] */ VARIANT *pKeyValue,
-            /* [out] */ ULONG *puApparentCimType) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  VARIANT *pKeyValue,
+            /* [annotation][out] */ 
+            _Out_  ULONG *puApparentCimType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveKey( 
-            /* [string][in] */ LPCWSTR wszName,
-            /* [in] */ ULONG uFlags) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR wszName,
+            /* [annotation][in] */ 
+            _In_  ULONG uFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAllKeys( 
-            /* [in] */ ULONG uFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE MakeSingleton( 
-            /* [in] */ boolean bSet) = 0;
+            /* [annotation][in] */ 
+            _In_  boolean bSet) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetInfo( 
-            /* [in] */ ULONG uRequestedInfo,
-            /* [out] */ ULONGLONG *puResponse) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uRequestedInfo,
+            /* [annotation][out] */ 
+            _Out_  ULONGLONG *puResponse) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetText( 
-            /* [in] */ long lFlags,
-            /* [out][in] */ ULONG *puBuffLength,
+            /* [annotation][in] */ 
+            _In_  long lFlags,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *puBuffLength,
             /* [annotation][string][out][in] */ 
             _Out_writes_(*puBuffLength)  LPWSTR pszText) = 0;
         
@@ -262,7 +290,8 @@ EXTERN_C const IID IID_IWbemPathKeyList;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWbemPathKeyList * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -277,74 +306,102 @@ EXTERN_C const IID IID_IWbemPathKeyList;
         DECLSPEC_XFGVIRT(IWbemPathKeyList, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             IWbemPathKeyList * This,
-            /* [out] */ ULONG *puKeyCount);
+            /* [annotation][out] */ 
+            _Out_  ULONG *puKeyCount);
         
         DECLSPEC_XFGVIRT(IWbemPathKeyList, SetKey)
         HRESULT ( STDMETHODCALLTYPE *SetKey )( 
             IWbemPathKeyList * This,
-            /* [string][in] */ LPCWSTR wszName,
-            /* [in] */ ULONG uFlags,
-            /* [in] */ ULONG uCimType,
-            /* [in] */ LPVOID pKeyVal);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR wszName,
+            /* [annotation][in] */ 
+            _In_  ULONG uFlags,
+            /* [annotation][in] */ 
+            _In_  ULONG uCimType,
+            /* [annotation][in] */ 
+            _In_  LPVOID pKeyVal);
         
         DECLSPEC_XFGVIRT(IWbemPathKeyList, SetKey2)
         HRESULT ( STDMETHODCALLTYPE *SetKey2 )( 
             IWbemPathKeyList * This,
-            /* [string][in] */ LPCWSTR wszName,
-            /* [in] */ ULONG uFlags,
-            /* [in] */ ULONG uCimType,
-            /* [in] */ VARIANT *pKeyVal);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR wszName,
+            /* [annotation][in] */ 
+            _In_  ULONG uFlags,
+            /* [annotation][in] */ 
+            _In_  ULONG uCimType,
+            /* [annotation][in] */ 
+            _In_  VARIANT *pKeyVal);
         
         DECLSPEC_XFGVIRT(IWbemPathKeyList, GetKey)
         HRESULT ( STDMETHODCALLTYPE *GetKey )( 
             IWbemPathKeyList * This,
-            /* [in] */ ULONG uKeyIx,
-            /* [in] */ ULONG uFlags,
-            /* [out][in] */ ULONG *puNameBufSize,
+            /* [annotation][in] */ 
+            _In_  ULONG uKeyIx,
+            /* [annotation][in] */ 
+            _In_  ULONG uFlags,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *puNameBufSize,
             /* [annotation][out][in] */ 
             _Out_writes_opt_(*puNameBufSize)  LPWSTR pszKeyName,
-            /* [out][in] */ ULONG *puKeyValBufSize,
-            /* [out][in] */ LPVOID pKeyVal,
-            /* [out] */ ULONG *puApparentCimType);
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *puKeyValBufSize,
+            /* [annotation][out][in] */ 
+            _Inout_  LPVOID pKeyVal,
+            /* [annotation][out] */ 
+            _Out_  ULONG *puApparentCimType);
         
         DECLSPEC_XFGVIRT(IWbemPathKeyList, GetKey2)
         HRESULT ( STDMETHODCALLTYPE *GetKey2 )( 
             IWbemPathKeyList * This,
-            /* [in] */ ULONG uKeyIx,
-            /* [in] */ ULONG uFlags,
-            /* [out][in] */ ULONG *puNameBufSize,
+            /* [annotation][in] */ 
+            _In_  ULONG uKeyIx,
+            /* [annotation][in] */ 
+            _In_  ULONG uFlags,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *puNameBufSize,
             /* [annotation][out][in] */ 
             _Out_writes_opt_(*puNameBufSize)  LPWSTR pszKeyName,
-            /* [out][in] */ VARIANT *pKeyValue,
-            /* [out] */ ULONG *puApparentCimType);
+            /* [annotation][out][in] */ 
+            _Inout_  VARIANT *pKeyValue,
+            /* [annotation][out] */ 
+            _Out_  ULONG *puApparentCimType);
         
         DECLSPEC_XFGVIRT(IWbemPathKeyList, RemoveKey)
         HRESULT ( STDMETHODCALLTYPE *RemoveKey )( 
             IWbemPathKeyList * This,
-            /* [string][in] */ LPCWSTR wszName,
-            /* [in] */ ULONG uFlags);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR wszName,
+            /* [annotation][in] */ 
+            _In_  ULONG uFlags);
         
         DECLSPEC_XFGVIRT(IWbemPathKeyList, RemoveAllKeys)
         HRESULT ( STDMETHODCALLTYPE *RemoveAllKeys )( 
             IWbemPathKeyList * This,
-            /* [in] */ ULONG uFlags);
+            /* [annotation][in] */ 
+            _In_  ULONG uFlags);
         
         DECLSPEC_XFGVIRT(IWbemPathKeyList, MakeSingleton)
         HRESULT ( STDMETHODCALLTYPE *MakeSingleton )( 
             IWbemPathKeyList * This,
-            /* [in] */ boolean bSet);
+            /* [annotation][in] */ 
+            _In_  boolean bSet);
         
         DECLSPEC_XFGVIRT(IWbemPathKeyList, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             IWbemPathKeyList * This,
-            /* [in] */ ULONG uRequestedInfo,
-            /* [out] */ ULONGLONG *puResponse);
+            /* [annotation][in] */ 
+            _In_  ULONG uRequestedInfo,
+            /* [annotation][out] */ 
+            _Out_  ULONGLONG *puResponse);
         
         DECLSPEC_XFGVIRT(IWbemPathKeyList, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             IWbemPathKeyList * This,
-            /* [in] */ long lFlags,
-            /* [out][in] */ ULONG *puBuffLength,
+            /* [annotation][in] */ 
+            _In_  long lFlags,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *puBuffLength,
             /* [annotation][string][out][in] */ 
             _Out_writes_(*puBuffLength)  LPWSTR pszText);
         
@@ -428,93 +485,122 @@ EXTERN_C const IID IID_IWbemPath;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetText( 
-            /* [in] */ ULONG uMode,
-            /* [in] */ LPCWSTR pszPath) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uMode,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszPath) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetText( 
-            /* [in] */ long lFlags,
-            /* [out][in] */ ULONG *puBuffLength,
+            /* [annotation][in] */ 
+            _In_  long lFlags,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *puBuffLength,
             /* [annotation][string][out][in] */ 
             _Out_writes_(*puBuffLength)  LPWSTR pszText) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetInfo( 
-            /* [in] */ ULONG uRequestedInfo,
-            /* [out] */ ULONGLONG *puResponse) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uRequestedInfo,
+            /* [annotation][out] */ 
+            _Out_  ULONGLONG *puResponse) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetServer( 
-            /* [string][in] */ LPCWSTR Name) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR Name) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetServer( 
-            /* [out][in] */ ULONG *puNameBufLength,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *puNameBufLength,
             /* [annotation][string][out][in] */ 
             _Out_writes_(*puNameBufLength)  LPWSTR pName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNamespaceCount( 
-            /* [out] */ ULONG *puCount) = 0;
+            /* [annotation][out] */ 
+            _Out_  ULONG *puCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetNamespaceAt( 
-            /* [in] */ ULONG uIndex,
-            /* [string][in] */ LPCWSTR pszName) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uIndex,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNamespaceAt( 
-            /* [in] */ ULONG uIndex,
-            /* [out][in] */ ULONG *puNameBufLength,
+            /* [annotation][in] */ 
+            _In_  ULONG uIndex,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *puNameBufLength,
             /* [annotation][string][out][in] */ 
             _Out_writes_(*puNameBufLength)  LPWSTR pName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveNamespaceAt( 
-            /* [in] */ ULONG uIndex) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAllNamespaces( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetScopeCount( 
-            /* [out] */ ULONG *puCount) = 0;
+            /* [annotation][out] */ 
+            _Out_  ULONG *puCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetScope( 
-            /* [in] */ ULONG uIndex,
+            /* [annotation][in] */ 
+            _In_  ULONG uIndex,
             /* [annotation][in] */ 
             _In_  LPWSTR pszClass) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetScopeFromText( 
-            /* [in] */ ULONG uIndex,
+            /* [annotation][in] */ 
+            _In_  ULONG uIndex,
             /* [annotation][in] */ 
             _In_  LPWSTR pszText) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetScope( 
-            /* [in] */ ULONG uIndex,
-            /* [out][in] */ ULONG *puClassNameBufSize,
+            /* [annotation][in] */ 
+            _In_  ULONG uIndex,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *puClassNameBufSize,
             /* [annotation][out][in] */ 
             _Out_writes_(*puClassNameBufSize)  LPWSTR pszClass,
-            /* [out] */ IWbemPathKeyList **pKeyList) = 0;
+            /* [annotation][out] */ 
+            _Out_  IWbemPathKeyList **pKeyList) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetScopeAsText( 
-            /* [in] */ ULONG uIndex,
-            /* [out][in] */ ULONG *puTextBufSize,
+            /* [annotation][in] */ 
+            _In_  ULONG uIndex,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *puTextBufSize,
             /* [annotation][out][in] */ 
             _Out_writes_(*puTextBufSize)  LPWSTR pszText) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveScope( 
-            /* [in] */ ULONG uIndex) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAllScopes( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetClassName( 
-            /* [string][in] */ LPCWSTR Name) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR Name) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetClassName( 
-            /* [out][in] */ ULONG *puBuffLength,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *puBuffLength,
             /* [annotation][string][out][in] */ 
             _Out_writes_opt_(*puBuffLength)  LPWSTR pszName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetKeyList( 
-            /* [out] */ IWbemPathKeyList **pOut) = 0;
+            /* [annotation][out] */ 
+            _Out_  IWbemPathKeyList **pOut) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateClassPart( 
-            /* [in] */ long lFlags,
-            /* [string][in] */ LPCWSTR Name) = 0;
+            /* [annotation][in] */ 
+            _In_  long lFlags,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR Name) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeleteClassPart( 
-            /* [in] */ long lFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  long lFlags) = 0;
         
         virtual BOOL STDMETHODCALLTYPE IsRelative( 
             /* [annotation][string][in] */ 
@@ -527,13 +613,16 @@ EXTERN_C const IID IID_IWbemPath;
             _In_  LPWSTR wszMachine,
             /* [annotation][string][in] */ 
             _In_  LPWSTR wszNamespace,
-            /* [in] */ long lFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  long lFlags) = 0;
         
         virtual BOOL STDMETHODCALLTYPE IsLocal( 
-            /* [string][in] */ LPCWSTR wszMachine) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR wszMachine) = 0;
         
         virtual BOOL STDMETHODCALLTYPE IsSameClassName( 
-            /* [string][in] */ LPCWSTR wszClass) = 0;
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR wszClass) = 0;
         
     };
     
@@ -547,7 +636,8 @@ EXTERN_C const IID IID_IWbemPath;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWbemPath * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -562,58 +652,72 @@ EXTERN_C const IID IID_IWbemPath;
         DECLSPEC_XFGVIRT(IWbemPath, SetText)
         HRESULT ( STDMETHODCALLTYPE *SetText )( 
             IWbemPath * This,
-            /* [in] */ ULONG uMode,
-            /* [in] */ LPCWSTR pszPath);
+            /* [annotation][in] */ 
+            _In_  ULONG uMode,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszPath);
         
         DECLSPEC_XFGVIRT(IWbemPath, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             IWbemPath * This,
-            /* [in] */ long lFlags,
-            /* [out][in] */ ULONG *puBuffLength,
+            /* [annotation][in] */ 
+            _In_  long lFlags,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *puBuffLength,
             /* [annotation][string][out][in] */ 
             _Out_writes_(*puBuffLength)  LPWSTR pszText);
         
         DECLSPEC_XFGVIRT(IWbemPath, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             IWbemPath * This,
-            /* [in] */ ULONG uRequestedInfo,
-            /* [out] */ ULONGLONG *puResponse);
+            /* [annotation][in] */ 
+            _In_  ULONG uRequestedInfo,
+            /* [annotation][out] */ 
+            _Out_  ULONGLONG *puResponse);
         
         DECLSPEC_XFGVIRT(IWbemPath, SetServer)
         HRESULT ( STDMETHODCALLTYPE *SetServer )( 
             IWbemPath * This,
-            /* [string][in] */ LPCWSTR Name);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(IWbemPath, GetServer)
         HRESULT ( STDMETHODCALLTYPE *GetServer )( 
             IWbemPath * This,
-            /* [out][in] */ ULONG *puNameBufLength,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *puNameBufLength,
             /* [annotation][string][out][in] */ 
             _Out_writes_(*puNameBufLength)  LPWSTR pName);
         
         DECLSPEC_XFGVIRT(IWbemPath, GetNamespaceCount)
         HRESULT ( STDMETHODCALLTYPE *GetNamespaceCount )( 
             IWbemPath * This,
-            /* [out] */ ULONG *puCount);
+            /* [annotation][out] */ 
+            _Out_  ULONG *puCount);
         
         DECLSPEC_XFGVIRT(IWbemPath, SetNamespaceAt)
         HRESULT ( STDMETHODCALLTYPE *SetNamespaceAt )( 
             IWbemPath * This,
-            /* [in] */ ULONG uIndex,
-            /* [string][in] */ LPCWSTR pszName);
+            /* [annotation][in] */ 
+            _In_  ULONG uIndex,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR pszName);
         
         DECLSPEC_XFGVIRT(IWbemPath, GetNamespaceAt)
         HRESULT ( STDMETHODCALLTYPE *GetNamespaceAt )( 
             IWbemPath * This,
-            /* [in] */ ULONG uIndex,
-            /* [out][in] */ ULONG *puNameBufLength,
+            /* [annotation][in] */ 
+            _In_  ULONG uIndex,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *puNameBufLength,
             /* [annotation][string][out][in] */ 
             _Out_writes_(*puNameBufLength)  LPWSTR pName);
         
         DECLSPEC_XFGVIRT(IWbemPath, RemoveNamespaceAt)
         HRESULT ( STDMETHODCALLTYPE *RemoveNamespaceAt )( 
             IWbemPath * This,
-            /* [in] */ ULONG uIndex);
+            /* [annotation][in] */ 
+            _In_  ULONG uIndex);
         
         DECLSPEC_XFGVIRT(IWbemPath, RemoveAllNamespaces)
         HRESULT ( STDMETHODCALLTYPE *RemoveAllNamespaces )( 
@@ -622,43 +726,52 @@ EXTERN_C const IID IID_IWbemPath;
         DECLSPEC_XFGVIRT(IWbemPath, GetScopeCount)
         HRESULT ( STDMETHODCALLTYPE *GetScopeCount )( 
             IWbemPath * This,
-            /* [out] */ ULONG *puCount);
+            /* [annotation][out] */ 
+            _Out_  ULONG *puCount);
         
         DECLSPEC_XFGVIRT(IWbemPath, SetScope)
         HRESULT ( STDMETHODCALLTYPE *SetScope )( 
             IWbemPath * This,
-            /* [in] */ ULONG uIndex,
+            /* [annotation][in] */ 
+            _In_  ULONG uIndex,
             /* [annotation][in] */ 
             _In_  LPWSTR pszClass);
         
         DECLSPEC_XFGVIRT(IWbemPath, SetScopeFromText)
         HRESULT ( STDMETHODCALLTYPE *SetScopeFromText )( 
             IWbemPath * This,
-            /* [in] */ ULONG uIndex,
+            /* [annotation][in] */ 
+            _In_  ULONG uIndex,
             /* [annotation][in] */ 
             _In_  LPWSTR pszText);
         
         DECLSPEC_XFGVIRT(IWbemPath, GetScope)
         HRESULT ( STDMETHODCALLTYPE *GetScope )( 
             IWbemPath * This,
-            /* [in] */ ULONG uIndex,
-            /* [out][in] */ ULONG *puClassNameBufSize,
+            /* [annotation][in] */ 
+            _In_  ULONG uIndex,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *puClassNameBufSize,
             /* [annotation][out][in] */ 
             _Out_writes_(*puClassNameBufSize)  LPWSTR pszClass,
-            /* [out] */ IWbemPathKeyList **pKeyList);
+            /* [annotation][out] */ 
+            _Out_  IWbemPathKeyList **pKeyList);
         
         DECLSPEC_XFGVIRT(IWbemPath, GetScopeAsText)
         HRESULT ( STDMETHODCALLTYPE *GetScopeAsText )( 
             IWbemPath * This,
-            /* [in] */ ULONG uIndex,
-            /* [out][in] */ ULONG *puTextBufSize,
+            /* [annotation][in] */ 
+            _In_  ULONG uIndex,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *puTextBufSize,
             /* [annotation][out][in] */ 
             _Out_writes_(*puTextBufSize)  LPWSTR pszText);
         
         DECLSPEC_XFGVIRT(IWbemPath, RemoveScope)
         HRESULT ( STDMETHODCALLTYPE *RemoveScope )( 
             IWbemPath * This,
-            /* [in] */ ULONG uIndex);
+            /* [annotation][in] */ 
+            _In_  ULONG uIndex);
         
         DECLSPEC_XFGVIRT(IWbemPath, RemoveAllScopes)
         HRESULT ( STDMETHODCALLTYPE *RemoveAllScopes )( 
@@ -667,30 +780,36 @@ EXTERN_C const IID IID_IWbemPath;
         DECLSPEC_XFGVIRT(IWbemPath, SetClassName)
         HRESULT ( STDMETHODCALLTYPE *SetClassName )( 
             IWbemPath * This,
-            /* [string][in] */ LPCWSTR Name);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(IWbemPath, GetClassName)
         HRESULT ( STDMETHODCALLTYPE *GetClassName )( 
             IWbemPath * This,
-            /* [out][in] */ ULONG *puBuffLength,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *puBuffLength,
             /* [annotation][string][out][in] */ 
             _Out_writes_opt_(*puBuffLength)  LPWSTR pszName);
         
         DECLSPEC_XFGVIRT(IWbemPath, GetKeyList)
         HRESULT ( STDMETHODCALLTYPE *GetKeyList )( 
             IWbemPath * This,
-            /* [out] */ IWbemPathKeyList **pOut);
+            /* [annotation][out] */ 
+            _Out_  IWbemPathKeyList **pOut);
         
         DECLSPEC_XFGVIRT(IWbemPath, CreateClassPart)
         HRESULT ( STDMETHODCALLTYPE *CreateClassPart )( 
             IWbemPath * This,
-            /* [in] */ long lFlags,
-            /* [string][in] */ LPCWSTR Name);
+            /* [annotation][in] */ 
+            _In_  long lFlags,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(IWbemPath, DeleteClassPart)
         HRESULT ( STDMETHODCALLTYPE *DeleteClassPart )( 
             IWbemPath * This,
-            /* [in] */ long lFlags);
+            /* [annotation][in] */ 
+            _In_  long lFlags);
         
         DECLSPEC_XFGVIRT(IWbemPath, IsRelative)
         BOOL ( STDMETHODCALLTYPE *IsRelative )( 
@@ -707,17 +826,20 @@ EXTERN_C const IID IID_IWbemPath;
             _In_  LPWSTR wszMachine,
             /* [annotation][string][in] */ 
             _In_  LPWSTR wszNamespace,
-            /* [in] */ long lFlags);
+            /* [annotation][in] */ 
+            _In_  long lFlags);
         
         DECLSPEC_XFGVIRT(IWbemPath, IsLocal)
         BOOL ( STDMETHODCALLTYPE *IsLocal )( 
             IWbemPath * This,
-            /* [string][in] */ LPCWSTR wszMachine);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR wszMachine);
         
         DECLSPEC_XFGVIRT(IWbemPath, IsSameClassName)
         BOOL ( STDMETHODCALLTYPE *IsSameClassName )( 
             IWbemPath * This,
-            /* [string][in] */ LPCWSTR wszClass);
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR wszClass);
         
         END_INTERFACE
     } IWbemPathVtbl;
@@ -857,33 +979,50 @@ EXTERN_C const IID IID_IWbemQuery;
         virtual HRESULT STDMETHODCALLTYPE Empty( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetLanguageFeatures( 
-            /* [in] */ ULONG uFlags,
-            /* [in] */ ULONG uArraySize,
-            /* [in] */ ULONG *puFeatures) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uFlags,
+            /* [annotation][in] */ 
+            _In_  ULONG uArraySize,
+            /* [annotation][in] */ 
+            _In_  ULONG *puFeatures) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE TestLanguageFeatures( 
-            /* [in] */ ULONG uFlags,
-            /* [out][in] */ ULONG *uArraySize,
-            /* [out] */ ULONG *puFeatures) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uFlags,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *uArraySize,
+            /* [annotation][out] */ 
+            _Out_  ULONG *puFeatures) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Parse( 
-            /* [in] */ LPCWSTR pszLang,
-            /* [in] */ LPCWSTR pszQuery,
-            /* [in] */ ULONG uFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszLang,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszQuery,
+            /* [annotation][in] */ 
+            _In_  ULONG uFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAnalysis( 
-            /* [in] */ ULONG uAnalysisType,
-            /* [in] */ ULONG uFlags,
-            /* [out] */ LPVOID *pAnalysis) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uAnalysisType,
+            /* [annotation][in] */ 
+            _In_  ULONG uFlags,
+            /* [annotation][out] */ 
+            _Out_  LPVOID *pAnalysis) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FreeMemory( 
-            /* [in] */ LPVOID pMem) = 0;
+            /* [annotation][in] */ 
+            _In_  LPVOID pMem) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetQueryInfo( 
-            /* [in] */ ULONG uAnalysisType,
-            /* [in] */ ULONG uInfoId,
-            /* [in] */ ULONG uBufSize,
-            /* [out] */ LPVOID pDestBuf) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uAnalysisType,
+            /* [annotation][in] */ 
+            _In_  ULONG uInfoId,
+            /* [annotation][in] */ 
+            _In_  ULONG uBufSize,
+            /* [annotation][out] */ 
+            _Out_  LPVOID pDestBuf) = 0;
         
     };
     
@@ -897,7 +1036,8 @@ EXTERN_C const IID IID_IWbemQuery;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWbemQuery * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -916,43 +1056,60 @@ EXTERN_C const IID IID_IWbemQuery;
         DECLSPEC_XFGVIRT(IWbemQuery, SetLanguageFeatures)
         HRESULT ( STDMETHODCALLTYPE *SetLanguageFeatures )( 
             IWbemQuery * This,
-            /* [in] */ ULONG uFlags,
-            /* [in] */ ULONG uArraySize,
-            /* [in] */ ULONG *puFeatures);
+            /* [annotation][in] */ 
+            _In_  ULONG uFlags,
+            /* [annotation][in] */ 
+            _In_  ULONG uArraySize,
+            /* [annotation][in] */ 
+            _In_  ULONG *puFeatures);
         
         DECLSPEC_XFGVIRT(IWbemQuery, TestLanguageFeatures)
         HRESULT ( STDMETHODCALLTYPE *TestLanguageFeatures )( 
             IWbemQuery * This,
-            /* [in] */ ULONG uFlags,
-            /* [out][in] */ ULONG *uArraySize,
-            /* [out] */ ULONG *puFeatures);
+            /* [annotation][in] */ 
+            _In_  ULONG uFlags,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *uArraySize,
+            /* [annotation][out] */ 
+            _Out_  ULONG *puFeatures);
         
         DECLSPEC_XFGVIRT(IWbemQuery, Parse)
         HRESULT ( STDMETHODCALLTYPE *Parse )( 
             IWbemQuery * This,
-            /* [in] */ LPCWSTR pszLang,
-            /* [in] */ LPCWSTR pszQuery,
-            /* [in] */ ULONG uFlags);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszLang,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pszQuery,
+            /* [annotation][in] */ 
+            _In_  ULONG uFlags);
         
         DECLSPEC_XFGVIRT(IWbemQuery, GetAnalysis)
         HRESULT ( STDMETHODCALLTYPE *GetAnalysis )( 
             IWbemQuery * This,
-            /* [in] */ ULONG uAnalysisType,
-            /* [in] */ ULONG uFlags,
-            /* [out] */ LPVOID *pAnalysis);
+            /* [annotation][in] */ 
+            _In_  ULONG uAnalysisType,
+            /* [annotation][in] */ 
+            _In_  ULONG uFlags,
+            /* [annotation][out] */ 
+            _Out_  LPVOID *pAnalysis);
         
         DECLSPEC_XFGVIRT(IWbemQuery, FreeMemory)
         HRESULT ( STDMETHODCALLTYPE *FreeMemory )( 
             IWbemQuery * This,
-            /* [in] */ LPVOID pMem);
+            /* [annotation][in] */ 
+            _In_  LPVOID pMem);
         
         DECLSPEC_XFGVIRT(IWbemQuery, GetQueryInfo)
         HRESULT ( STDMETHODCALLTYPE *GetQueryInfo )( 
             IWbemQuery * This,
-            /* [in] */ ULONG uAnalysisType,
-            /* [in] */ ULONG uInfoId,
-            /* [in] */ ULONG uBufSize,
-            /* [out] */ LPVOID pDestBuf);
+            /* [annotation][in] */ 
+            _In_  ULONG uAnalysisType,
+            /* [annotation][in] */ 
+            _In_  ULONG uInfoId,
+            /* [annotation][in] */ 
+            _In_  ULONG uBufSize,
+            /* [annotation][out] */ 
+            _Out_  LPVOID pDestBuf);
         
         END_INTERFACE
     } IWbemQueryVtbl;

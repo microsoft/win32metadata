@@ -10,7 +10,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 501
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -293,7 +293,8 @@ EXTERN_C const IID IID_IAudioProcessingObjectRT;
             _Inout_  APO_CONNECTION_PROPERTY **ppOutputConnections) = 0;
         
         virtual UINT32 STDMETHODCALLTYPE CalcInputFrames( 
-            /* [in] */ UINT32 u32OutputFrameCount) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT32 u32OutputFrameCount) = 0;
         
         virtual UINT32 STDMETHODCALLTYPE CalcOutputFrames( 
             /* [annotation][in] */ 
@@ -311,7 +312,8 @@ EXTERN_C const IID IID_IAudioProcessingObjectRT;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioProcessingObjectRT * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -338,7 +340,8 @@ EXTERN_C const IID IID_IAudioProcessingObjectRT;
         DECLSPEC_XFGVIRT(IAudioProcessingObjectRT, CalcInputFrames)
         UINT32 ( STDMETHODCALLTYPE *CalcInputFrames )( 
             IAudioProcessingObjectRT * This,
-            /* [in] */ UINT32 u32OutputFrameCount);
+            /* [annotation][in] */ 
+            _In_  UINT32 u32OutputFrameCount);
         
         DECLSPEC_XFGVIRT(IAudioProcessingObjectRT, CalcOutputFrames)
         UINT32 ( STDMETHODCALLTYPE *CalcOutputFrames )( 
@@ -405,12 +408,16 @@ EXTERN_C const IID IID_IAudioProcessingObjectVBR;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CalcMaxInputFrames( 
-            /* [in] */ UINT32 u32MaxOutputFrameCount,
-            /* [out] */ __RPC__out UINT32 *pu32InputFrameCount) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT32 u32MaxOutputFrameCount,
+            /* [annotation][out] */ 
+            _Out_  UINT32 *pu32InputFrameCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CalcMaxOutputFrames( 
-            /* [in] */ UINT32 u32MaxInputFrameCount,
-            /* [out] */ __RPC__out UINT32 *pu32OutputFrameCount) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT32 u32MaxInputFrameCount,
+            /* [annotation][out] */ 
+            _Out_  UINT32 *pu32OutputFrameCount) = 0;
         
     };
     
@@ -424,7 +431,8 @@ EXTERN_C const IID IID_IAudioProcessingObjectVBR;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAudioProcessingObjectVBR * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -439,14 +447,18 @@ EXTERN_C const IID IID_IAudioProcessingObjectVBR;
         DECLSPEC_XFGVIRT(IAudioProcessingObjectVBR, CalcMaxInputFrames)
         HRESULT ( STDMETHODCALLTYPE *CalcMaxInputFrames )( 
             __RPC__in IAudioProcessingObjectVBR * This,
-            /* [in] */ UINT32 u32MaxOutputFrameCount,
-            /* [out] */ __RPC__out UINT32 *pu32InputFrameCount);
+            /* [annotation][in] */ 
+            _In_  UINT32 u32MaxOutputFrameCount,
+            /* [annotation][out] */ 
+            _Out_  UINT32 *pu32InputFrameCount);
         
         DECLSPEC_XFGVIRT(IAudioProcessingObjectVBR, CalcMaxOutputFrames)
         HRESULT ( STDMETHODCALLTYPE *CalcMaxOutputFrames )( 
             __RPC__in IAudioProcessingObjectVBR * This,
-            /* [in] */ UINT32 u32MaxInputFrameCount,
-            /* [out] */ __RPC__out UINT32 *pu32OutputFrameCount);
+            /* [annotation][in] */ 
+            _In_  UINT32 u32MaxInputFrameCount,
+            /* [annotation][out] */ 
+            _Out_  UINT32 *pu32OutputFrameCount);
         
         END_INTERFACE
     } IAudioProcessingObjectVBRVtbl;
@@ -527,7 +539,8 @@ EXTERN_C const IID IID_IAudioProcessingObjectConfiguration;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioProcessingObjectConfiguration * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -613,27 +626,38 @@ EXTERN_C const IID IID_IAudioProcessingObject;
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLatency( 
-            /* [out] */ __RPC__out HNSTIME *pTime) = 0;
+            /* [annotation][out] */ 
+            _Out_  HNSTIME *pTime) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRegistrationProperties( 
-            /* [out] */ __RPC__deref_out_opt APO_REG_PROPERTIES **ppRegProps) = 0;
+            /* [annotation][out] */ 
+            _Out_  APO_REG_PROPERTIES **ppRegProps) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [in] */ UINT32 cbDataSize,
-            /* [size_is][in] */ __RPC__in_ecount_full(cbDataSize) BYTE *pbyData) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT32 cbDataSize,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbDataSize)  BYTE *pbyData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsInputFormatSupported( 
-            /* [unique][in] */ __RPC__in_opt IAudioMediaType *pOppositeFormat,
-            /* [in] */ __RPC__in_opt IAudioMediaType *pRequestedInputFormat,
-            /* [out] */ __RPC__deref_out_opt IAudioMediaType **ppSupportedInputFormat) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  IAudioMediaType *pOppositeFormat,
+            /* [annotation][in] */ 
+            _In_  IAudioMediaType *pRequestedInputFormat,
+            /* [annotation][out] */ 
+            _Out_  IAudioMediaType **ppSupportedInputFormat) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsOutputFormatSupported( 
-            /* [unique][in] */ __RPC__in_opt IAudioMediaType *pOppositeFormat,
-            /* [in] */ __RPC__in_opt IAudioMediaType *pRequestedOutputFormat,
-            /* [out] */ __RPC__deref_out_opt IAudioMediaType **ppSupportedOutputFormat) = 0;
+            /* [annotation][unique][in] */ 
+            _In_  IAudioMediaType *pOppositeFormat,
+            /* [annotation][in] */ 
+            _In_  IAudioMediaType *pRequestedOutputFormat,
+            /* [annotation][out] */ 
+            _Out_  IAudioMediaType **ppSupportedOutputFormat) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetInputChannelCount( 
-            /* [out] */ __RPC__out UINT32 *pu32ChannelCount) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT32 *pu32ChannelCount) = 0;
         
     };
     
@@ -647,7 +671,8 @@ EXTERN_C const IID IID_IAudioProcessingObject;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAudioProcessingObject * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -666,37 +691,48 @@ EXTERN_C const IID IID_IAudioProcessingObject;
         DECLSPEC_XFGVIRT(IAudioProcessingObject, GetLatency)
         HRESULT ( STDMETHODCALLTYPE *GetLatency )( 
             __RPC__in IAudioProcessingObject * This,
-            /* [out] */ __RPC__out HNSTIME *pTime);
+            /* [annotation][out] */ 
+            _Out_  HNSTIME *pTime);
         
         DECLSPEC_XFGVIRT(IAudioProcessingObject, GetRegistrationProperties)
         HRESULT ( STDMETHODCALLTYPE *GetRegistrationProperties )( 
             __RPC__in IAudioProcessingObject * This,
-            /* [out] */ __RPC__deref_out_opt APO_REG_PROPERTIES **ppRegProps);
+            /* [annotation][out] */ 
+            _Out_  APO_REG_PROPERTIES **ppRegProps);
         
         DECLSPEC_XFGVIRT(IAudioProcessingObject, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IAudioProcessingObject * This,
-            /* [in] */ UINT32 cbDataSize,
-            /* [size_is][in] */ __RPC__in_ecount_full(cbDataSize) BYTE *pbyData);
+            /* [annotation][in] */ 
+            _In_  UINT32 cbDataSize,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbDataSize)  BYTE *pbyData);
         
         DECLSPEC_XFGVIRT(IAudioProcessingObject, IsInputFormatSupported)
         HRESULT ( STDMETHODCALLTYPE *IsInputFormatSupported )( 
             __RPC__in IAudioProcessingObject * This,
-            /* [unique][in] */ __RPC__in_opt IAudioMediaType *pOppositeFormat,
-            /* [in] */ __RPC__in_opt IAudioMediaType *pRequestedInputFormat,
-            /* [out] */ __RPC__deref_out_opt IAudioMediaType **ppSupportedInputFormat);
+            /* [annotation][unique][in] */ 
+            _In_  IAudioMediaType *pOppositeFormat,
+            /* [annotation][in] */ 
+            _In_  IAudioMediaType *pRequestedInputFormat,
+            /* [annotation][out] */ 
+            _Out_  IAudioMediaType **ppSupportedInputFormat);
         
         DECLSPEC_XFGVIRT(IAudioProcessingObject, IsOutputFormatSupported)
         HRESULT ( STDMETHODCALLTYPE *IsOutputFormatSupported )( 
             __RPC__in IAudioProcessingObject * This,
-            /* [unique][in] */ __RPC__in_opt IAudioMediaType *pOppositeFormat,
-            /* [in] */ __RPC__in_opt IAudioMediaType *pRequestedOutputFormat,
-            /* [out] */ __RPC__deref_out_opt IAudioMediaType **ppSupportedOutputFormat);
+            /* [annotation][unique][in] */ 
+            _In_  IAudioMediaType *pOppositeFormat,
+            /* [annotation][in] */ 
+            _In_  IAudioMediaType *pRequestedOutputFormat,
+            /* [annotation][out] */ 
+            _Out_  IAudioMediaType **ppSupportedOutputFormat);
         
         DECLSPEC_XFGVIRT(IAudioProcessingObject, GetInputChannelCount)
         HRESULT ( STDMETHODCALLTYPE *GetInputChannelCount )( 
             __RPC__in IAudioProcessingObject * This,
-            /* [out] */ __RPC__out UINT32 *pu32ChannelCount);
+            /* [annotation][out] */ 
+            _Out_  UINT32 *pu32ChannelCount);
         
         END_INTERFACE
     } IAudioProcessingObjectVtbl;
@@ -784,7 +820,8 @@ EXTERN_C const IID IID_IAudioDeviceModulesClient;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioDeviceModulesClient * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -884,7 +921,8 @@ EXTERN_C const IID IID_IAudioSystemEffects;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAudioSystemEffects * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -965,7 +1003,8 @@ EXTERN_C const IID IID_IAudioSystemEffects2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioSystemEffects2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1041,15 +1080,20 @@ EXTERN_C const IID IID_IAudioSystemEffectsCustomFormats;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetFormatCount( 
-            /* [out] */ __RPC__out UINT *pcFormats) = 0;
+            /* [annotation][out] */ 
+            _Out_  UINT *pcFormats) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFormat( 
-            /* [in] */ UINT nFormat,
-            /* [out] */ __RPC__deref_out_opt IAudioMediaType **ppFormat) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT nFormat,
+            /* [annotation][out] */ 
+            _Out_  IAudioMediaType **ppFormat) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFormatRepresentation( 
-            /* [in] */ UINT nFormat,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppwstrFormatRep) = 0;
+            /* [annotation][in] */ 
+            _In_  UINT nFormat,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwstrFormatRep) = 0;
         
     };
     
@@ -1063,7 +1107,8 @@ EXTERN_C const IID IID_IAudioSystemEffectsCustomFormats;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAudioSystemEffectsCustomFormats * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1078,19 +1123,24 @@ EXTERN_C const IID IID_IAudioSystemEffectsCustomFormats;
         DECLSPEC_XFGVIRT(IAudioSystemEffectsCustomFormats, GetFormatCount)
         HRESULT ( STDMETHODCALLTYPE *GetFormatCount )( 
             __RPC__in IAudioSystemEffectsCustomFormats * This,
-            /* [out] */ __RPC__out UINT *pcFormats);
+            /* [annotation][out] */ 
+            _Out_  UINT *pcFormats);
         
         DECLSPEC_XFGVIRT(IAudioSystemEffectsCustomFormats, GetFormat)
         HRESULT ( STDMETHODCALLTYPE *GetFormat )( 
             __RPC__in IAudioSystemEffectsCustomFormats * This,
-            /* [in] */ UINT nFormat,
-            /* [out] */ __RPC__deref_out_opt IAudioMediaType **ppFormat);
+            /* [annotation][in] */ 
+            _In_  UINT nFormat,
+            /* [annotation][out] */ 
+            _Out_  IAudioMediaType **ppFormat);
         
         DECLSPEC_XFGVIRT(IAudioSystemEffectsCustomFormats, GetFormatRepresentation)
         HRESULT ( STDMETHODCALLTYPE *GetFormatRepresentation )( 
             __RPC__in IAudioSystemEffectsCustomFormats * This,
-            /* [in] */ UINT nFormat,
-            /* [out] */ __RPC__deref_out_opt LPWSTR *ppwstrFormatRep);
+            /* [annotation][in] */ 
+            _In_  UINT nFormat,
+            /* [annotation][out] */ 
+            _Out_  LPWSTR *ppwstrFormatRep);
         
         END_INTERFACE
     } IAudioSystemEffectsCustomFormatsVtbl;
@@ -1151,18 +1201,24 @@ EXTERN_C const IID IID_IApoAuxiliaryInputConfiguration;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddAuxiliaryInput( 
-            /* [in] */ DWORD dwInputId,
-            /* [in] */ UINT32 cbDataSize,
-            /* [size_is][in] */ BYTE *pbyData,
+            /* [annotation][in] */ 
+            _In_  DWORD dwInputId,
+            /* [annotation][in] */ 
+            _In_  UINT32 cbDataSize,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbDataSize)  BYTE *pbyData,
             /* [annotation][in] */ 
             _In_  APO_CONNECTION_DESCRIPTOR *pInputConnection) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAuxiliaryInput( 
-            /* [in] */ DWORD dwInputId) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwInputId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsInputFormatSupported( 
-            /* [in] */ IAudioMediaType *pRequestedInputFormat,
-            /* [out] */ IAudioMediaType **ppSupportedInputFormat) = 0;
+            /* [annotation][in] */ 
+            _In_  IAudioMediaType *pRequestedInputFormat,
+            /* [annotation][out] */ 
+            _Out_  IAudioMediaType **ppSupportedInputFormat) = 0;
         
     };
     
@@ -1176,7 +1232,8 @@ EXTERN_C const IID IID_IApoAuxiliaryInputConfiguration;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IApoAuxiliaryInputConfiguration * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1191,22 +1248,28 @@ EXTERN_C const IID IID_IApoAuxiliaryInputConfiguration;
         DECLSPEC_XFGVIRT(IApoAuxiliaryInputConfiguration, AddAuxiliaryInput)
         HRESULT ( STDMETHODCALLTYPE *AddAuxiliaryInput )( 
             IApoAuxiliaryInputConfiguration * This,
-            /* [in] */ DWORD dwInputId,
-            /* [in] */ UINT32 cbDataSize,
-            /* [size_is][in] */ BYTE *pbyData,
+            /* [annotation][in] */ 
+            _In_  DWORD dwInputId,
+            /* [annotation][in] */ 
+            _In_  UINT32 cbDataSize,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbDataSize)  BYTE *pbyData,
             /* [annotation][in] */ 
             _In_  APO_CONNECTION_DESCRIPTOR *pInputConnection);
         
         DECLSPEC_XFGVIRT(IApoAuxiliaryInputConfiguration, RemoveAuxiliaryInput)
         HRESULT ( STDMETHODCALLTYPE *RemoveAuxiliaryInput )( 
             IApoAuxiliaryInputConfiguration * This,
-            /* [in] */ DWORD dwInputId);
+            /* [annotation][in] */ 
+            _In_  DWORD dwInputId);
         
         DECLSPEC_XFGVIRT(IApoAuxiliaryInputConfiguration, IsInputFormatSupported)
         HRESULT ( STDMETHODCALLTYPE *IsInputFormatSupported )( 
             IApoAuxiliaryInputConfiguration * This,
-            /* [in] */ IAudioMediaType *pRequestedInputFormat,
-            /* [out] */ IAudioMediaType **ppSupportedInputFormat);
+            /* [annotation][in] */ 
+            _In_  IAudioMediaType *pRequestedInputFormat,
+            /* [annotation][out] */ 
+            _Out_  IAudioMediaType **ppSupportedInputFormat);
         
         END_INTERFACE
     } IApoAuxiliaryInputConfigurationVtbl;
@@ -1284,7 +1347,8 @@ EXTERN_C const IID IID_IApoAuxiliaryInputRT;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IApoAuxiliaryInputRT * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1368,7 +1432,8 @@ EXTERN_C const IID IID_IApoAcousticEchoCancellation;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IApoAcousticEchoCancellation * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         

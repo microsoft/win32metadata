@@ -6,12 +6,11 @@
  /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
-#pragma warning( disable: 4049 )  /* more than 64k source lines */
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 475
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -326,17 +325,22 @@ EXTERN_C const IID IID_IMILBitmapEffectConnectorInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetIndex( 
-            /* [retval][out] */ __RPC__out ULONG *puiIndex) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *puiIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOptimalFormat( 
-            /* [retval][out] */ __RPC__out WICPixelFormatGUID *pFormat) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WICPixelFormatGUID *pFormat) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNumberFormats( 
-            /* [retval][out] */ __RPC__out ULONG *pulNumberFormats) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *pulNumberFormats) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFormat( 
-            /* [in] */ ULONG ulIndex,
-            /* [retval][out] */ __RPC__out WICPixelFormatGUID *pFormat) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ulIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WICPixelFormatGUID *pFormat) = 0;
         
     };
     
@@ -350,7 +354,8 @@ EXTERN_C const IID IID_IMILBitmapEffectConnectorInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMILBitmapEffectConnectorInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -365,23 +370,28 @@ EXTERN_C const IID IID_IMILBitmapEffectConnectorInfo;
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnectorInfo, GetIndex)
         HRESULT ( STDMETHODCALLTYPE *GetIndex )( 
             __RPC__in IMILBitmapEffectConnectorInfo * This,
-            /* [retval][out] */ __RPC__out ULONG *puiIndex);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *puiIndex);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnectorInfo, GetOptimalFormat)
         HRESULT ( STDMETHODCALLTYPE *GetOptimalFormat )( 
             __RPC__in IMILBitmapEffectConnectorInfo * This,
-            /* [retval][out] */ __RPC__out WICPixelFormatGUID *pFormat);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WICPixelFormatGUID *pFormat);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnectorInfo, GetNumberFormats)
         HRESULT ( STDMETHODCALLTYPE *GetNumberFormats )( 
             __RPC__in IMILBitmapEffectConnectorInfo * This,
-            /* [retval][out] */ __RPC__out ULONG *pulNumberFormats);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *pulNumberFormats);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnectorInfo, GetFormat)
         HRESULT ( STDMETHODCALLTYPE *GetFormat )( 
             __RPC__in IMILBitmapEffectConnectorInfo * This,
-            /* [in] */ ULONG ulIndex,
-            /* [retval][out] */ __RPC__out WICPixelFormatGUID *pFormat);
+            /* [annotation][in] */ 
+            _In_  ULONG ulIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WICPixelFormatGUID *pFormat);
         
         END_INTERFACE
     } IMILBitmapEffectConnectorInfoVtbl;
@@ -445,18 +455,24 @@ EXTERN_C const IID IID_IMILBitmapEffectConnectionsInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetNumberInputs( 
-            /* [retval][out] */ __RPC__out ULONG *puiNumInputs) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *puiNumInputs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNumberOutputs( 
-            /* [retval][out] */ __RPC__out ULONG *puiNumOutputs) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *puiNumOutputs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetInputConnectorInfo( 
-            /* [in] */ ULONG uiIndex,
-            /* [out] */ __RPC__deref_out_opt IMILBitmapEffectConnectorInfo **ppConnectorInfo) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][out] */ 
+            _Out_  IMILBitmapEffectConnectorInfo **ppConnectorInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOutputConnectorInfo( 
-            /* [in] */ ULONG uiIndex,
-            /* [out] */ __RPC__deref_out_opt IMILBitmapEffectConnectorInfo **ppConnectorInfo) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][out] */ 
+            _Out_  IMILBitmapEffectConnectorInfo **ppConnectorInfo) = 0;
         
     };
     
@@ -470,7 +486,8 @@ EXTERN_C const IID IID_IMILBitmapEffectConnectionsInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMILBitmapEffectConnectionsInfo * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -485,24 +502,30 @@ EXTERN_C const IID IID_IMILBitmapEffectConnectionsInfo;
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnectionsInfo, GetNumberInputs)
         HRESULT ( STDMETHODCALLTYPE *GetNumberInputs )( 
             __RPC__in IMILBitmapEffectConnectionsInfo * This,
-            /* [retval][out] */ __RPC__out ULONG *puiNumInputs);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *puiNumInputs);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnectionsInfo, GetNumberOutputs)
         HRESULT ( STDMETHODCALLTYPE *GetNumberOutputs )( 
             __RPC__in IMILBitmapEffectConnectionsInfo * This,
-            /* [retval][out] */ __RPC__out ULONG *puiNumOutputs);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *puiNumOutputs);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnectionsInfo, GetInputConnectorInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInputConnectorInfo )( 
             __RPC__in IMILBitmapEffectConnectionsInfo * This,
-            /* [in] */ ULONG uiIndex,
-            /* [out] */ __RPC__deref_out_opt IMILBitmapEffectConnectorInfo **ppConnectorInfo);
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][out] */ 
+            _Out_  IMILBitmapEffectConnectorInfo **ppConnectorInfo);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnectionsInfo, GetOutputConnectorInfo)
         HRESULT ( STDMETHODCALLTYPE *GetOutputConnectorInfo )( 
             __RPC__in IMILBitmapEffectConnectionsInfo * This,
-            /* [in] */ ULONG uiIndex,
-            /* [out] */ __RPC__deref_out_opt IMILBitmapEffectConnectorInfo **ppConnectorInfo);
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][out] */ 
+            _Out_  IMILBitmapEffectConnectorInfo **ppConnectorInfo);
         
         END_INTERFACE
     } IMILBitmapEffectConnectionsInfoVtbl;
@@ -566,12 +589,16 @@ EXTERN_C const IID IID_IMILBitmapEffectConnections;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetInputConnector( 
-            /* [in] */ ULONG uiIndex,
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffectInputConnector **ppConnector) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffectInputConnector **ppConnector) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOutputConnector( 
-            /* [in] */ ULONG uiIndex,
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffectOutputConnector **ppConnector) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffectOutputConnector **ppConnector) = 0;
         
     };
     
@@ -585,7 +612,8 @@ EXTERN_C const IID IID_IMILBitmapEffectConnections;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMILBitmapEffectConnections * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -600,14 +628,18 @@ EXTERN_C const IID IID_IMILBitmapEffectConnections;
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnections, GetInputConnector)
         HRESULT ( STDMETHODCALLTYPE *GetInputConnector )( 
             __RPC__in IMILBitmapEffectConnections * This,
-            /* [in] */ ULONG uiIndex,
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffectInputConnector **ppConnector);
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffectInputConnector **ppConnector);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnections, GetOutputConnector)
         HRESULT ( STDMETHODCALLTYPE *GetOutputConnector )( 
             __RPC__in IMILBitmapEffectConnections * This,
-            /* [in] */ ULONG uiIndex,
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffectOutputConnector **ppConnector);
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffectOutputConnector **ppConnector);
         
         END_INTERFACE
     } IMILBitmapEffectConnectionsVtbl;
@@ -665,16 +697,22 @@ EXTERN_C const IID IID_IMILBitmapEffect;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetOutput( 
-            /* [in] */ ULONG uiIndex,
-            /* [in] */ __RPC__in_opt IMILBitmapEffectRenderContext *pContext,
-            /* [retval][out] */ __RPC__deref_out_opt IWICBitmapSource **ppBitmapSource) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectRenderContext *pContext,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IWICBitmapSource **ppBitmapSource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetParentEffect( 
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffectGroup **ppParentEffect) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffectGroup **ppParentEffect) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetInputSource( 
-            /* [in] */ ULONG uiIndex,
-            /* [in] */ __RPC__in_opt IWICBitmapSource *pBitmapSource) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][in] */ 
+            _In_  IWICBitmapSource *pBitmapSource) = 0;
         
     };
     
@@ -688,7 +726,8 @@ EXTERN_C const IID IID_IMILBitmapEffect;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMILBitmapEffect * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -703,20 +742,26 @@ EXTERN_C const IID IID_IMILBitmapEffect;
         DECLSPEC_XFGVIRT(IMILBitmapEffect, GetOutput)
         HRESULT ( STDMETHODCALLTYPE *GetOutput )( 
             __RPC__in IMILBitmapEffect * This,
-            /* [in] */ ULONG uiIndex,
-            /* [in] */ __RPC__in_opt IMILBitmapEffectRenderContext *pContext,
-            /* [retval][out] */ __RPC__deref_out_opt IWICBitmapSource **ppBitmapSource);
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectRenderContext *pContext,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IWICBitmapSource **ppBitmapSource);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffect, GetParentEffect)
         HRESULT ( STDMETHODCALLTYPE *GetParentEffect )( 
             __RPC__in IMILBitmapEffect * This,
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffectGroup **ppParentEffect);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffectGroup **ppParentEffect);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffect, SetInputSource)
         HRESULT ( STDMETHODCALLTYPE *SetInputSource )( 
             __RPC__in IMILBitmapEffect * This,
-            /* [in] */ ULONG uiIndex,
-            /* [in] */ __RPC__in_opt IWICBitmapSource *pBitmapSource);
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][in] */ 
+            _In_  IWICBitmapSource *pBitmapSource);
         
         END_INTERFACE
     } IMILBitmapEffectVtbl;
@@ -777,34 +822,50 @@ EXTERN_C const IID IID_IMILBitmapEffectImpl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE IsInPlaceModificationAllowed( 
-            /* [in] */ __RPC__in_opt IMILBitmapEffectOutputConnector *pOutputConnector,
-            /* [out] */ __RPC__out VARIANT_BOOL *pfModifyInPlace) = 0;
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectOutputConnector *pOutputConnector,
+            /* [annotation][out] */ 
+            _Out_  VARIANT_BOOL *pfModifyInPlace) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetParentEffect( 
-            /* [in] */ __RPC__in_opt IMILBitmapEffectGroup *pParentEffect) = 0;
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectGroup *pParentEffect) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetInputSource( 
-            /* [in] */ ULONG uiIndex,
-            /* [retval][out] */ __RPC__deref_out_opt IWICBitmapSource **ppBitmapSource) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IWICBitmapSource **ppBitmapSource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetInputSourceBounds( 
-            /* [in] */ ULONG uiIndex,
-            /* [out] */ __RPC__out MilRectD *pRect) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][out] */ 
+            _Out_  MilRectD *pRect) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetInputBitmapSource( 
-            /* [in] */ ULONG uiIndex,
-            /* [in] */ __RPC__in_opt IMILBitmapEffectRenderContext *pRenderContext,
-            /* [out][in] */ __RPC__inout VARIANT_BOOL *pfModifyInPlace,
-            /* [retval][out] */ __RPC__deref_out_opt IWICBitmapSource **ppBitmapSource) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectRenderContext *pRenderContext,
+            /* [annotation][out][in] */ 
+            _Inout_  VARIANT_BOOL *pfModifyInPlace,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IWICBitmapSource **ppBitmapSource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOutputBitmapSource( 
-            /* [in] */ ULONG uiIndex,
-            /* [in] */ __RPC__in_opt IMILBitmapEffectRenderContext *pRenderContext,
-            /* [out][in] */ __RPC__inout VARIANT_BOOL *pfModifyInPlace,
-            /* [retval][out] */ __RPC__deref_out_opt IWICBitmapSource **ppBitmapSource) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectRenderContext *pRenderContext,
+            /* [annotation][out][in] */ 
+            _Inout_  VARIANT_BOOL *pfModifyInPlace,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IWICBitmapSource **ppBitmapSource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [in] */ __RPC__in_opt IUnknown *pInner) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *pInner) = 0;
         
     };
     
@@ -818,7 +879,8 @@ EXTERN_C const IID IID_IMILBitmapEffectImpl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMILBitmapEffectImpl * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -833,46 +895,62 @@ EXTERN_C const IID IID_IMILBitmapEffectImpl;
         DECLSPEC_XFGVIRT(IMILBitmapEffectImpl, IsInPlaceModificationAllowed)
         HRESULT ( STDMETHODCALLTYPE *IsInPlaceModificationAllowed )( 
             __RPC__in IMILBitmapEffectImpl * This,
-            /* [in] */ __RPC__in_opt IMILBitmapEffectOutputConnector *pOutputConnector,
-            /* [out] */ __RPC__out VARIANT_BOOL *pfModifyInPlace);
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectOutputConnector *pOutputConnector,
+            /* [annotation][out] */ 
+            _Out_  VARIANT_BOOL *pfModifyInPlace);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectImpl, SetParentEffect)
         HRESULT ( STDMETHODCALLTYPE *SetParentEffect )( 
             __RPC__in IMILBitmapEffectImpl * This,
-            /* [in] */ __RPC__in_opt IMILBitmapEffectGroup *pParentEffect);
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectGroup *pParentEffect);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectImpl, GetInputSource)
         HRESULT ( STDMETHODCALLTYPE *GetInputSource )( 
             __RPC__in IMILBitmapEffectImpl * This,
-            /* [in] */ ULONG uiIndex,
-            /* [retval][out] */ __RPC__deref_out_opt IWICBitmapSource **ppBitmapSource);
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IWICBitmapSource **ppBitmapSource);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectImpl, GetInputSourceBounds)
         HRESULT ( STDMETHODCALLTYPE *GetInputSourceBounds )( 
             __RPC__in IMILBitmapEffectImpl * This,
-            /* [in] */ ULONG uiIndex,
-            /* [out] */ __RPC__out MilRectD *pRect);
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][out] */ 
+            _Out_  MilRectD *pRect);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectImpl, GetInputBitmapSource)
         HRESULT ( STDMETHODCALLTYPE *GetInputBitmapSource )( 
             __RPC__in IMILBitmapEffectImpl * This,
-            /* [in] */ ULONG uiIndex,
-            /* [in] */ __RPC__in_opt IMILBitmapEffectRenderContext *pRenderContext,
-            /* [out][in] */ __RPC__inout VARIANT_BOOL *pfModifyInPlace,
-            /* [retval][out] */ __RPC__deref_out_opt IWICBitmapSource **ppBitmapSource);
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectRenderContext *pRenderContext,
+            /* [annotation][out][in] */ 
+            _Inout_  VARIANT_BOOL *pfModifyInPlace,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IWICBitmapSource **ppBitmapSource);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectImpl, GetOutputBitmapSource)
         HRESULT ( STDMETHODCALLTYPE *GetOutputBitmapSource )( 
             __RPC__in IMILBitmapEffectImpl * This,
-            /* [in] */ ULONG uiIndex,
-            /* [in] */ __RPC__in_opt IMILBitmapEffectRenderContext *pRenderContext,
-            /* [out][in] */ __RPC__inout VARIANT_BOOL *pfModifyInPlace,
-            /* [retval][out] */ __RPC__deref_out_opt IWICBitmapSource **ppBitmapSource);
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectRenderContext *pRenderContext,
+            /* [annotation][out][in] */ 
+            _Inout_  VARIANT_BOOL *pfModifyInPlace,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IWICBitmapSource **ppBitmapSource);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectImpl, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IMILBitmapEffectImpl * This,
-            /* [in] */ __RPC__in_opt IUnknown *pInner);
+            /* [annotation][in] */ 
+            _In_  IUnknown *pInner);
         
         END_INTERFACE
     } IMILBitmapEffectImplVtbl;
@@ -945,15 +1023,20 @@ EXTERN_C const IID IID_IMILBitmapEffectGroup;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetInteriorInputConnector( 
-            /* [in] */ ULONG uiIndex,
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffectOutputConnector **ppConnector) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffectOutputConnector **ppConnector) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetInteriorOutputConnector( 
-            /* [in] */ ULONG uiIndex,
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffectInputConnector **ppConnector) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffectInputConnector **ppConnector) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Add( 
-            /* [in] */ __RPC__in_opt IMILBitmapEffect *pEffect) = 0;
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffect *pEffect) = 0;
         
     };
     
@@ -967,7 +1050,8 @@ EXTERN_C const IID IID_IMILBitmapEffectGroup;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMILBitmapEffectGroup * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -982,19 +1066,24 @@ EXTERN_C const IID IID_IMILBitmapEffectGroup;
         DECLSPEC_XFGVIRT(IMILBitmapEffectGroup, GetInteriorInputConnector)
         HRESULT ( STDMETHODCALLTYPE *GetInteriorInputConnector )( 
             __RPC__in IMILBitmapEffectGroup * This,
-            /* [in] */ ULONG uiIndex,
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffectOutputConnector **ppConnector);
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffectOutputConnector **ppConnector);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectGroup, GetInteriorOutputConnector)
         HRESULT ( STDMETHODCALLTYPE *GetInteriorOutputConnector )( 
             __RPC__in IMILBitmapEffectGroup * This,
-            /* [in] */ ULONG uiIndex,
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffectInputConnector **ppConnector);
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffectInputConnector **ppConnector);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectGroup, Add)
         HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IMILBitmapEffectGroup * This,
-            /* [in] */ __RPC__in_opt IMILBitmapEffect *pEffect);
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffect *pEffect);
         
         END_INTERFACE
     } IMILBitmapEffectGroupVtbl;
@@ -1055,13 +1144,16 @@ EXTERN_C const IID IID_IMILBitmapEffectGroupImpl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Preprocess( 
-            /* [in] */ __RPC__in_opt IMILBitmapEffectRenderContext *pContext) = 0;
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectRenderContext *pContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNumberChildren( 
-            /* [retval][out] */ __RPC__out ULONG *puiNumberChildren) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *puiNumberChildren) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetChildren( 
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffects **pChildren) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffects **pChildren) = 0;
         
     };
     
@@ -1075,7 +1167,8 @@ EXTERN_C const IID IID_IMILBitmapEffectGroupImpl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMILBitmapEffectGroupImpl * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1090,17 +1183,20 @@ EXTERN_C const IID IID_IMILBitmapEffectGroupImpl;
         DECLSPEC_XFGVIRT(IMILBitmapEffectGroupImpl, Preprocess)
         HRESULT ( STDMETHODCALLTYPE *Preprocess )( 
             __RPC__in IMILBitmapEffectGroupImpl * This,
-            /* [in] */ __RPC__in_opt IMILBitmapEffectRenderContext *pContext);
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectRenderContext *pContext);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectGroupImpl, GetNumberChildren)
         HRESULT ( STDMETHODCALLTYPE *GetNumberChildren )( 
             __RPC__in IMILBitmapEffectGroupImpl * This,
-            /* [retval][out] */ __RPC__out ULONG *puiNumberChildren);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *puiNumberChildren);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectGroupImpl, GetChildren)
         HRESULT ( STDMETHODCALLTYPE *GetChildren )( 
             __RPC__in IMILBitmapEffectGroupImpl * This,
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffects **pChildren);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffects **pChildren);
         
         END_INTERFACE
     } IMILBitmapEffectGroupImplVtbl;
@@ -1161,30 +1257,40 @@ EXTERN_C const IID IID_IMILBitmapEffectRenderContext;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetOutputPixelFormat( 
-            /* [in] */ __RPC__in REFWICPixelFormatGUID format) = 0;
+            /* [annotation][in] */ 
+            _In_  REFWICPixelFormatGUID format) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOutputPixelFormat( 
-            /* [retval][out] */ __RPC__out WICPixelFormatGUID *pFormat) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WICPixelFormatGUID *pFormat) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetUseSoftwareRenderer( 
-            /* [in] */ VARIANT_BOOL fSoftware) = 0;
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fSoftware) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetInitialTransform( 
-            /* [in] */ __RPC__in MILMatrixF *pMatrix) = 0;
+            /* [annotation][in] */ 
+            _In_  MILMatrixF *pMatrix) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFinalTransform( 
-            /* [out] */ __RPC__out MILMatrixF *pMatrix) = 0;
+            /* [annotation][out] */ 
+            _Out_  MILMatrixF *pMatrix) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetOutputDPI( 
-            /* [in] */ double dblDpiX,
-            /* [in] */ double dblDpiY) = 0;
+            /* [annotation][in] */ 
+            _In_  double dblDpiX,
+            /* [annotation][in] */ 
+            _In_  double dblDpiY) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOutputDPI( 
-            /* [out] */ __RPC__out double *pdblDpiX,
-            /* [out] */ __RPC__out double *pdblDpiY) = 0;
+            /* [annotation][out] */ 
+            _Out_  double *pdblDpiX,
+            /* [annotation][out] */ 
+            _Out_  double *pdblDpiY) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetRegionOfInterest( 
-            /* [in] */ __RPC__in MilRectD *pRect) = 0;
+            /* [annotation][in] */ 
+            _In_  MilRectD *pRect) = 0;
         
     };
     
@@ -1198,7 +1304,8 @@ EXTERN_C const IID IID_IMILBitmapEffectRenderContext;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMILBitmapEffectRenderContext * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1213,44 +1320,54 @@ EXTERN_C const IID IID_IMILBitmapEffectRenderContext;
         DECLSPEC_XFGVIRT(IMILBitmapEffectRenderContext, SetOutputPixelFormat)
         HRESULT ( STDMETHODCALLTYPE *SetOutputPixelFormat )( 
             __RPC__in IMILBitmapEffectRenderContext * This,
-            /* [in] */ __RPC__in REFWICPixelFormatGUID format);
+            /* [annotation][in] */ 
+            _In_  REFWICPixelFormatGUID format);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectRenderContext, GetOutputPixelFormat)
         HRESULT ( STDMETHODCALLTYPE *GetOutputPixelFormat )( 
             __RPC__in IMILBitmapEffectRenderContext * This,
-            /* [retval][out] */ __RPC__out WICPixelFormatGUID *pFormat);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WICPixelFormatGUID *pFormat);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectRenderContext, SetUseSoftwareRenderer)
         HRESULT ( STDMETHODCALLTYPE *SetUseSoftwareRenderer )( 
             __RPC__in IMILBitmapEffectRenderContext * This,
-            /* [in] */ VARIANT_BOOL fSoftware);
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fSoftware);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectRenderContext, SetInitialTransform)
         HRESULT ( STDMETHODCALLTYPE *SetInitialTransform )( 
             __RPC__in IMILBitmapEffectRenderContext * This,
-            /* [in] */ __RPC__in MILMatrixF *pMatrix);
+            /* [annotation][in] */ 
+            _In_  MILMatrixF *pMatrix);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectRenderContext, GetFinalTransform)
         HRESULT ( STDMETHODCALLTYPE *GetFinalTransform )( 
             __RPC__in IMILBitmapEffectRenderContext * This,
-            /* [out] */ __RPC__out MILMatrixF *pMatrix);
+            /* [annotation][out] */ 
+            _Out_  MILMatrixF *pMatrix);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectRenderContext, SetOutputDPI)
         HRESULT ( STDMETHODCALLTYPE *SetOutputDPI )( 
             __RPC__in IMILBitmapEffectRenderContext * This,
-            /* [in] */ double dblDpiX,
-            /* [in] */ double dblDpiY);
+            /* [annotation][in] */ 
+            _In_  double dblDpiX,
+            /* [annotation][in] */ 
+            _In_  double dblDpiY);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectRenderContext, GetOutputDPI)
         HRESULT ( STDMETHODCALLTYPE *GetOutputDPI )( 
             __RPC__in IMILBitmapEffectRenderContext * This,
-            /* [out] */ __RPC__out double *pdblDpiX,
-            /* [out] */ __RPC__out double *pdblDpiY);
+            /* [annotation][out] */ 
+            _Out_  double *pdblDpiX,
+            /* [annotation][out] */ 
+            _Out_  double *pdblDpiY);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectRenderContext, SetRegionOfInterest)
         HRESULT ( STDMETHODCALLTYPE *SetRegionOfInterest )( 
             __RPC__in IMILBitmapEffectRenderContext * This,
-            /* [in] */ __RPC__in MilRectD *pRect);
+            /* [annotation][in] */ 
+            _In_  MilRectD *pRect);
         
         END_INTERFACE
     } IMILBitmapEffectRenderContextVtbl;
@@ -1326,19 +1443,24 @@ EXTERN_C const IID IID_IMILBitmapEffectRenderContextImpl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetUseSoftwareRenderer( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfSoftware) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfSoftware) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTransform( 
-            /* [out][in] */ __RPC__inout MILMatrixF *pMatrix) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  MILMatrixF *pMatrix) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UpdateTransform( 
-            /* [in] */ __RPC__in MILMatrixF *pMatrix) = 0;
+            /* [annotation][in] */ 
+            _In_  MILMatrixF *pMatrix) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOutputBounds( 
-            /* [out][in] */ __RPC__inout MilRectD *pRect) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  MilRectD *pRect) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UpdateOutputBounds( 
-            /* [in] */ __RPC__in MilRectD *pRect) = 0;
+            /* [annotation][in] */ 
+            _In_  MilRectD *pRect) = 0;
         
     };
     
@@ -1352,7 +1474,8 @@ EXTERN_C const IID IID_IMILBitmapEffectRenderContextImpl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMILBitmapEffectRenderContextImpl * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1367,27 +1490,32 @@ EXTERN_C const IID IID_IMILBitmapEffectRenderContextImpl;
         DECLSPEC_XFGVIRT(IMILBitmapEffectRenderContextImpl, GetUseSoftwareRenderer)
         HRESULT ( STDMETHODCALLTYPE *GetUseSoftwareRenderer )( 
             __RPC__in IMILBitmapEffectRenderContextImpl * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfSoftware);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfSoftware);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectRenderContextImpl, GetTransform)
         HRESULT ( STDMETHODCALLTYPE *GetTransform )( 
             __RPC__in IMILBitmapEffectRenderContextImpl * This,
-            /* [out][in] */ __RPC__inout MILMatrixF *pMatrix);
+            /* [annotation][out][in] */ 
+            _Inout_  MILMatrixF *pMatrix);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectRenderContextImpl, UpdateTransform)
         HRESULT ( STDMETHODCALLTYPE *UpdateTransform )( 
             __RPC__in IMILBitmapEffectRenderContextImpl * This,
-            /* [in] */ __RPC__in MILMatrixF *pMatrix);
+            /* [annotation][in] */ 
+            _In_  MILMatrixF *pMatrix);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectRenderContextImpl, GetOutputBounds)
         HRESULT ( STDMETHODCALLTYPE *GetOutputBounds )( 
             __RPC__in IMILBitmapEffectRenderContextImpl * This,
-            /* [out][in] */ __RPC__inout MilRectD *pRect);
+            /* [annotation][out][in] */ 
+            _Inout_  MilRectD *pRect);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectRenderContextImpl, UpdateOutputBounds)
         HRESULT ( STDMETHODCALLTYPE *UpdateOutputBounds )( 
             __RPC__in IMILBitmapEffectRenderContextImpl * This,
-            /* [in] */ __RPC__in MilRectD *pRect);
+            /* [annotation][in] */ 
+            _In_  MilRectD *pRect);
         
         END_INTERFACE
     } IMILBitmapEffectRenderContextImplVtbl;
@@ -1454,14 +1582,18 @@ EXTERN_C const IID IID_IMILBitmapEffectFactory;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateEffect( 
-            /* [in] */ __RPC__in const GUID *pguidEffect,
-            /* [out] */ __RPC__deref_out_opt IMILBitmapEffect **ppEffect) = 0;
+            /* [annotation][in] */ 
+            _In_  const GUID *pguidEffect,
+            /* [annotation][out] */ 
+            _Out_  IMILBitmapEffect **ppEffect) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateContext( 
-            /* [out] */ __RPC__deref_out_opt IMILBitmapEffectRenderContext **ppContext) = 0;
+            /* [annotation][out] */ 
+            _Out_  IMILBitmapEffectRenderContext **ppContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateEffectOuter( 
-            /* [out] */ __RPC__deref_out_opt IMILBitmapEffect **ppEffect) = 0;
+            /* [annotation][out] */ 
+            _Out_  IMILBitmapEffect **ppEffect) = 0;
         
     };
     
@@ -1475,7 +1607,8 @@ EXTERN_C const IID IID_IMILBitmapEffectFactory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMILBitmapEffectFactory * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1490,18 +1623,22 @@ EXTERN_C const IID IID_IMILBitmapEffectFactory;
         DECLSPEC_XFGVIRT(IMILBitmapEffectFactory, CreateEffect)
         HRESULT ( STDMETHODCALLTYPE *CreateEffect )( 
             __RPC__in IMILBitmapEffectFactory * This,
-            /* [in] */ __RPC__in const GUID *pguidEffect,
-            /* [out] */ __RPC__deref_out_opt IMILBitmapEffect **ppEffect);
+            /* [annotation][in] */ 
+            _In_  const GUID *pguidEffect,
+            /* [annotation][out] */ 
+            _Out_  IMILBitmapEffect **ppEffect);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectFactory, CreateContext)
         HRESULT ( STDMETHODCALLTYPE *CreateContext )( 
             __RPC__in IMILBitmapEffectFactory * This,
-            /* [out] */ __RPC__deref_out_opt IMILBitmapEffectRenderContext **ppContext);
+            /* [annotation][out] */ 
+            _Out_  IMILBitmapEffectRenderContext **ppContext);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectFactory, CreateEffectOuter)
         HRESULT ( STDMETHODCALLTYPE *CreateEffectOuter )( 
             __RPC__in IMILBitmapEffectFactory * This,
-            /* [out] */ __RPC__deref_out_opt IMILBitmapEffect **ppEffect);
+            /* [annotation][out] */ 
+            _Out_  IMILBitmapEffect **ppEffect);
         
         END_INTERFACE
     } IMILBitmapEffectFactoryVtbl;
@@ -1562,35 +1699,54 @@ EXTERN_C const IID IID_IMILBitmapEffectPrimitive;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetOutput( 
-            /* [in] */ ULONG uiIndex,
-            /* [in] */ __RPC__in_opt IMILBitmapEffectRenderContext *pContext,
-            /* [out][in] */ __RPC__inout VARIANT_BOOL *pfModifyInPlace,
-            /* [retval][out] */ __RPC__deref_out_opt IWICBitmapSource **ppBitmapSource) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectRenderContext *pContext,
+            /* [annotation][out][in] */ 
+            _Inout_  VARIANT_BOOL *pfModifyInPlace,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IWICBitmapSource **ppBitmapSource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE TransformPoint( 
-            /* [in] */ ULONG uiIndex,
-            /* [out][in] */ __RPC__inout MilPoint2D *p,
-            /* [in] */ VARIANT_BOOL fForwardTransform,
-            /* [in] */ __RPC__in_opt IMILBitmapEffectRenderContext *pContext,
-            /* [out] */ __RPC__out VARIANT_BOOL *pfPointTransformed) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][out][in] */ 
+            _Inout_  MilPoint2D *p,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fForwardTransform,
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectRenderContext *pContext,
+            /* [annotation][out] */ 
+            _Out_  VARIANT_BOOL *pfPointTransformed) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE TransformRect( 
-            /* [in] */ ULONG uiIndex,
-            /* [out][in] */ __RPC__inout MilRectD *p,
-            /* [in] */ VARIANT_BOOL fForwardTransform,
-            /* [in] */ __RPC__in_opt IMILBitmapEffectRenderContext *pContext) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][out][in] */ 
+            _Inout_  MilRectD *p,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fForwardTransform,
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectRenderContext *pContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE HasAffineTransform( 
-            /* [in] */ ULONG uiIndex,
-            /* [out] */ __RPC__out VARIANT_BOOL *pfAffine) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][out] */ 
+            _Out_  VARIANT_BOOL *pfAffine) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE HasInverseTransform( 
-            /* [in] */ ULONG uiIndex,
-            /* [out] */ __RPC__out VARIANT_BOOL *pfHasInverse) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][out] */ 
+            _Out_  VARIANT_BOOL *pfHasInverse) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAffineMatrix( 
-            /* [in] */ ULONG uiIndex,
-            /* [out][in] */ __RPC__inout MilMatrix3x2D *pMatrix) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][out][in] */ 
+            _Inout_  MilMatrix3x2D *pMatrix) = 0;
         
     };
     
@@ -1604,7 +1760,8 @@ EXTERN_C const IID IID_IMILBitmapEffectPrimitive;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMILBitmapEffectPrimitive * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1619,45 +1776,64 @@ EXTERN_C const IID IID_IMILBitmapEffectPrimitive;
         DECLSPEC_XFGVIRT(IMILBitmapEffectPrimitive, GetOutput)
         HRESULT ( STDMETHODCALLTYPE *GetOutput )( 
             __RPC__in IMILBitmapEffectPrimitive * This,
-            /* [in] */ ULONG uiIndex,
-            /* [in] */ __RPC__in_opt IMILBitmapEffectRenderContext *pContext,
-            /* [out][in] */ __RPC__inout VARIANT_BOOL *pfModifyInPlace,
-            /* [retval][out] */ __RPC__deref_out_opt IWICBitmapSource **ppBitmapSource);
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectRenderContext *pContext,
+            /* [annotation][out][in] */ 
+            _Inout_  VARIANT_BOOL *pfModifyInPlace,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IWICBitmapSource **ppBitmapSource);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectPrimitive, TransformPoint)
         HRESULT ( STDMETHODCALLTYPE *TransformPoint )( 
             __RPC__in IMILBitmapEffectPrimitive * This,
-            /* [in] */ ULONG uiIndex,
-            /* [out][in] */ __RPC__inout MilPoint2D *p,
-            /* [in] */ VARIANT_BOOL fForwardTransform,
-            /* [in] */ __RPC__in_opt IMILBitmapEffectRenderContext *pContext,
-            /* [out] */ __RPC__out VARIANT_BOOL *pfPointTransformed);
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][out][in] */ 
+            _Inout_  MilPoint2D *p,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fForwardTransform,
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectRenderContext *pContext,
+            /* [annotation][out] */ 
+            _Out_  VARIANT_BOOL *pfPointTransformed);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectPrimitive, TransformRect)
         HRESULT ( STDMETHODCALLTYPE *TransformRect )( 
             __RPC__in IMILBitmapEffectPrimitive * This,
-            /* [in] */ ULONG uiIndex,
-            /* [out][in] */ __RPC__inout MilRectD *p,
-            /* [in] */ VARIANT_BOOL fForwardTransform,
-            /* [in] */ __RPC__in_opt IMILBitmapEffectRenderContext *pContext);
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][out][in] */ 
+            _Inout_  MilRectD *p,
+            /* [annotation][in] */ 
+            _In_  VARIANT_BOOL fForwardTransform,
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectRenderContext *pContext);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectPrimitive, HasAffineTransform)
         HRESULT ( STDMETHODCALLTYPE *HasAffineTransform )( 
             __RPC__in IMILBitmapEffectPrimitive * This,
-            /* [in] */ ULONG uiIndex,
-            /* [out] */ __RPC__out VARIANT_BOOL *pfAffine);
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][out] */ 
+            _Out_  VARIANT_BOOL *pfAffine);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectPrimitive, HasInverseTransform)
         HRESULT ( STDMETHODCALLTYPE *HasInverseTransform )( 
             __RPC__in IMILBitmapEffectPrimitive * This,
-            /* [in] */ ULONG uiIndex,
-            /* [out] */ __RPC__out VARIANT_BOOL *pfHasInverse);
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][out] */ 
+            _Out_  VARIANT_BOOL *pfHasInverse);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectPrimitive, GetAffineMatrix)
         HRESULT ( STDMETHODCALLTYPE *GetAffineMatrix )( 
             __RPC__in IMILBitmapEffectPrimitive * This,
-            /* [in] */ ULONG uiIndex,
-            /* [out][in] */ __RPC__inout MilMatrix3x2D *pMatrix);
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][out][in] */ 
+            _Inout_  MilMatrix3x2D *pMatrix);
         
         END_INTERFACE
     } IMILBitmapEffectPrimitiveVtbl;
@@ -1727,12 +1903,16 @@ EXTERN_C const IID IID_IMILBitmapEffectPrimitiveImpl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE IsDirty( 
-            /* [in] */ ULONG uiOutputIndex,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfDirty) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uiOutputIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfDirty) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsVolatile( 
-            /* [in] */ ULONG uiOutputIndex,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfVolatile) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uiOutputIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfVolatile) = 0;
         
     };
     
@@ -1746,7 +1926,8 @@ EXTERN_C const IID IID_IMILBitmapEffectPrimitiveImpl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMILBitmapEffectPrimitiveImpl * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1761,14 +1942,18 @@ EXTERN_C const IID IID_IMILBitmapEffectPrimitiveImpl;
         DECLSPEC_XFGVIRT(IMILBitmapEffectPrimitiveImpl, IsDirty)
         HRESULT ( STDMETHODCALLTYPE *IsDirty )( 
             __RPC__in IMILBitmapEffectPrimitiveImpl * This,
-            /* [in] */ ULONG uiOutputIndex,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfDirty);
+            /* [annotation][in] */ 
+            _In_  ULONG uiOutputIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfDirty);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectPrimitiveImpl, IsVolatile)
         HRESULT ( STDMETHODCALLTYPE *IsVolatile )( 
             __RPC__in IMILBitmapEffectPrimitiveImpl * This,
-            /* [in] */ ULONG uiOutputIndex,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfVolatile);
+            /* [annotation][in] */ 
+            _In_  ULONG uiOutputIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfVolatile);
         
         END_INTERFACE
     } IMILBitmapEffectPrimitiveImplVtbl;
@@ -1826,17 +2011,21 @@ EXTERN_C const IID IID_IMILBitmapEffects;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE _NewEnum( 
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppiuReturn) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **ppiuReturn) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Parent( 
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffectGroup **ppEffect) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffectGroup **ppEffect) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Item( 
             ULONG uindex,
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffect **ppEffect) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffect **ppEffect) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [retval][out] */ __RPC__out ULONG *puiCount) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *puiCount) = 0;
         
     };
     
@@ -1850,7 +2039,8 @@ EXTERN_C const IID IID_IMILBitmapEffects;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMILBitmapEffects * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1865,23 +2055,27 @@ EXTERN_C const IID IID_IMILBitmapEffects;
         DECLSPEC_XFGVIRT(IMILBitmapEffects, _NewEnum)
         HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in IMILBitmapEffects * This,
-            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppiuReturn);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IUnknown **ppiuReturn);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffects, get_Parent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Parent )( 
             __RPC__in IMILBitmapEffects * This,
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffectGroup **ppEffect);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffectGroup **ppEffect);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffects, Item)
         HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in IMILBitmapEffects * This,
             ULONG uindex,
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffect **ppEffect);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffect **ppEffect);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffects, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IMILBitmapEffects * This,
-            /* [retval][out] */ __RPC__out ULONG *puiCount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *puiCount);
         
         END_INTERFACE
     } IMILBitmapEffectsVtbl;
@@ -1945,10 +2139,12 @@ EXTERN_C const IID IID_IMILBitmapEffectConnector;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE IsConnected( 
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfConnected) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfConnected) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBitmapEffect( 
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffect **ppEffect) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffect **ppEffect) = 0;
         
     };
     
@@ -1962,7 +2158,8 @@ EXTERN_C const IID IID_IMILBitmapEffectConnector;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMILBitmapEffectConnector * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1977,33 +2174,40 @@ EXTERN_C const IID IID_IMILBitmapEffectConnector;
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnectorInfo, GetIndex)
         HRESULT ( STDMETHODCALLTYPE *GetIndex )( 
             __RPC__in IMILBitmapEffectConnector * This,
-            /* [retval][out] */ __RPC__out ULONG *puiIndex);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *puiIndex);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnectorInfo, GetOptimalFormat)
         HRESULT ( STDMETHODCALLTYPE *GetOptimalFormat )( 
             __RPC__in IMILBitmapEffectConnector * This,
-            /* [retval][out] */ __RPC__out WICPixelFormatGUID *pFormat);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WICPixelFormatGUID *pFormat);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnectorInfo, GetNumberFormats)
         HRESULT ( STDMETHODCALLTYPE *GetNumberFormats )( 
             __RPC__in IMILBitmapEffectConnector * This,
-            /* [retval][out] */ __RPC__out ULONG *pulNumberFormats);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *pulNumberFormats);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnectorInfo, GetFormat)
         HRESULT ( STDMETHODCALLTYPE *GetFormat )( 
             __RPC__in IMILBitmapEffectConnector * This,
-            /* [in] */ ULONG ulIndex,
-            /* [retval][out] */ __RPC__out WICPixelFormatGUID *pFormat);
+            /* [annotation][in] */ 
+            _In_  ULONG ulIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WICPixelFormatGUID *pFormat);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnector, IsConnected)
         HRESULT ( STDMETHODCALLTYPE *IsConnected )( 
             __RPC__in IMILBitmapEffectConnector * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfConnected);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfConnected);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnector, GetBitmapEffect)
         HRESULT ( STDMETHODCALLTYPE *GetBitmapEffect )( 
             __RPC__in IMILBitmapEffectConnector * This,
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffect **ppEffect);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffect **ppEffect);
         
         END_INTERFACE
     } IMILBitmapEffectConnectorVtbl;
@@ -2074,10 +2278,12 @@ EXTERN_C const IID IID_IMILBitmapEffectInputConnector;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ConnectTo( 
-            /* [in] */ __RPC__in_opt IMILBitmapEffectOutputConnector *pConnector) = 0;
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectOutputConnector *pConnector) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetConnection( 
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffectOutputConnector **ppConnector) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffectOutputConnector **ppConnector) = 0;
         
     };
     
@@ -2091,7 +2297,8 @@ EXTERN_C const IID IID_IMILBitmapEffectInputConnector;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMILBitmapEffectInputConnector * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2106,43 +2313,52 @@ EXTERN_C const IID IID_IMILBitmapEffectInputConnector;
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnectorInfo, GetIndex)
         HRESULT ( STDMETHODCALLTYPE *GetIndex )( 
             __RPC__in IMILBitmapEffectInputConnector * This,
-            /* [retval][out] */ __RPC__out ULONG *puiIndex);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *puiIndex);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnectorInfo, GetOptimalFormat)
         HRESULT ( STDMETHODCALLTYPE *GetOptimalFormat )( 
             __RPC__in IMILBitmapEffectInputConnector * This,
-            /* [retval][out] */ __RPC__out WICPixelFormatGUID *pFormat);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WICPixelFormatGUID *pFormat);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnectorInfo, GetNumberFormats)
         HRESULT ( STDMETHODCALLTYPE *GetNumberFormats )( 
             __RPC__in IMILBitmapEffectInputConnector * This,
-            /* [retval][out] */ __RPC__out ULONG *pulNumberFormats);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *pulNumberFormats);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnectorInfo, GetFormat)
         HRESULT ( STDMETHODCALLTYPE *GetFormat )( 
             __RPC__in IMILBitmapEffectInputConnector * This,
-            /* [in] */ ULONG ulIndex,
-            /* [retval][out] */ __RPC__out WICPixelFormatGUID *pFormat);
+            /* [annotation][in] */ 
+            _In_  ULONG ulIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WICPixelFormatGUID *pFormat);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnector, IsConnected)
         HRESULT ( STDMETHODCALLTYPE *IsConnected )( 
             __RPC__in IMILBitmapEffectInputConnector * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfConnected);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfConnected);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnector, GetBitmapEffect)
         HRESULT ( STDMETHODCALLTYPE *GetBitmapEffect )( 
             __RPC__in IMILBitmapEffectInputConnector * This,
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffect **ppEffect);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffect **ppEffect);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectInputConnector, ConnectTo)
         HRESULT ( STDMETHODCALLTYPE *ConnectTo )( 
             __RPC__in IMILBitmapEffectInputConnector * This,
-            /* [in] */ __RPC__in_opt IMILBitmapEffectOutputConnector *pConnector);
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectOutputConnector *pConnector);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectInputConnector, GetConnection)
         HRESULT ( STDMETHODCALLTYPE *GetConnection )( 
             __RPC__in IMILBitmapEffectInputConnector * This,
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffectOutputConnector **ppConnector);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffectOutputConnector **ppConnector);
         
         END_INTERFACE
     } IMILBitmapEffectInputConnectorVtbl;
@@ -2220,11 +2436,14 @@ EXTERN_C const IID IID_IMILBitmapEffectOutputConnector;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetNumberConnections( 
-            /* [retval][out] */ __RPC__out ULONG *puiNumberConnections) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *puiNumberConnections) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetConnection( 
-            /* [in] */ ULONG uiIndex,
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffectInputConnector **ppConnection) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffectInputConnector **ppConnection) = 0;
         
     };
     
@@ -2238,7 +2457,8 @@ EXTERN_C const IID IID_IMILBitmapEffectOutputConnector;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMILBitmapEffectOutputConnector * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2253,44 +2473,54 @@ EXTERN_C const IID IID_IMILBitmapEffectOutputConnector;
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnectorInfo, GetIndex)
         HRESULT ( STDMETHODCALLTYPE *GetIndex )( 
             __RPC__in IMILBitmapEffectOutputConnector * This,
-            /* [retval][out] */ __RPC__out ULONG *puiIndex);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *puiIndex);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnectorInfo, GetOptimalFormat)
         HRESULT ( STDMETHODCALLTYPE *GetOptimalFormat )( 
             __RPC__in IMILBitmapEffectOutputConnector * This,
-            /* [retval][out] */ __RPC__out WICPixelFormatGUID *pFormat);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WICPixelFormatGUID *pFormat);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnectorInfo, GetNumberFormats)
         HRESULT ( STDMETHODCALLTYPE *GetNumberFormats )( 
             __RPC__in IMILBitmapEffectOutputConnector * This,
-            /* [retval][out] */ __RPC__out ULONG *pulNumberFormats);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *pulNumberFormats);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnectorInfo, GetFormat)
         HRESULT ( STDMETHODCALLTYPE *GetFormat )( 
             __RPC__in IMILBitmapEffectOutputConnector * This,
-            /* [in] */ ULONG ulIndex,
-            /* [retval][out] */ __RPC__out WICPixelFormatGUID *pFormat);
+            /* [annotation][in] */ 
+            _In_  ULONG ulIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  WICPixelFormatGUID *pFormat);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnector, IsConnected)
         HRESULT ( STDMETHODCALLTYPE *IsConnected )( 
             __RPC__in IMILBitmapEffectOutputConnector * This,
-            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfConnected);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pfConnected);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectConnector, GetBitmapEffect)
         HRESULT ( STDMETHODCALLTYPE *GetBitmapEffect )( 
             __RPC__in IMILBitmapEffectOutputConnector * This,
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffect **ppEffect);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffect **ppEffect);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectOutputConnector, GetNumberConnections)
         HRESULT ( STDMETHODCALLTYPE *GetNumberConnections )( 
             __RPC__in IMILBitmapEffectOutputConnector * This,
-            /* [retval][out] */ __RPC__out ULONG *puiNumberConnections);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ULONG *puiNumberConnections);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectOutputConnector, GetConnection)
         HRESULT ( STDMETHODCALLTYPE *GetConnection )( 
             __RPC__in IMILBitmapEffectOutputConnector * This,
-            /* [in] */ ULONG uiIndex,
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffectInputConnector **ppConnection);
+            /* [annotation][in] */ 
+            _In_  ULONG uiIndex,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffectInputConnector **ppConnection);
         
         END_INTERFACE
     } IMILBitmapEffectOutputConnectorVtbl;
@@ -2368,10 +2598,12 @@ EXTERN_C const IID IID_IMILBitmapEffectOutputConnectorImpl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddBackLink( 
-            /* [in] */ __RPC__in_opt IMILBitmapEffectInputConnector *pConnection) = 0;
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectInputConnector *pConnection) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveBackLink( 
-            /* [in] */ __RPC__in_opt IMILBitmapEffectInputConnector *pConnection) = 0;
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectInputConnector *pConnection) = 0;
         
     };
     
@@ -2385,7 +2617,8 @@ EXTERN_C const IID IID_IMILBitmapEffectOutputConnectorImpl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMILBitmapEffectOutputConnectorImpl * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2400,12 +2633,14 @@ EXTERN_C const IID IID_IMILBitmapEffectOutputConnectorImpl;
         DECLSPEC_XFGVIRT(IMILBitmapEffectOutputConnectorImpl, AddBackLink)
         HRESULT ( STDMETHODCALLTYPE *AddBackLink )( 
             __RPC__in IMILBitmapEffectOutputConnectorImpl * This,
-            /* [in] */ __RPC__in_opt IMILBitmapEffectInputConnector *pConnection);
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectInputConnector *pConnection);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectOutputConnectorImpl, RemoveBackLink)
         HRESULT ( STDMETHODCALLTYPE *RemoveBackLink )( 
             __RPC__in IMILBitmapEffectOutputConnectorImpl * This,
-            /* [in] */ __RPC__in_opt IMILBitmapEffectInputConnector *pConnection);
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffectInputConnector *pConnection);
         
         END_INTERFACE
     } IMILBitmapEffectOutputConnectorImplVtbl;
@@ -2463,7 +2698,8 @@ EXTERN_C const IID IID_IMILBitmapEffectInteriorInputConnector;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetInputConnector( 
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffectInputConnector **pInputConnector) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffectInputConnector **pInputConnector) = 0;
         
     };
     
@@ -2477,7 +2713,8 @@ EXTERN_C const IID IID_IMILBitmapEffectInteriorInputConnector;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMILBitmapEffectInteriorInputConnector * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2492,7 +2729,8 @@ EXTERN_C const IID IID_IMILBitmapEffectInteriorInputConnector;
         DECLSPEC_XFGVIRT(IMILBitmapEffectInteriorInputConnector, GetInputConnector)
         HRESULT ( STDMETHODCALLTYPE *GetInputConnector )( 
             __RPC__in IMILBitmapEffectInteriorInputConnector * This,
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffectInputConnector **pInputConnector);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffectInputConnector **pInputConnector);
         
         END_INTERFACE
     } IMILBitmapEffectInteriorInputConnectorVtbl;
@@ -2547,7 +2785,8 @@ EXTERN_C const IID IID_IMILBitmapEffectInteriorOutputConnector;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetOutputConnector( 
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffectOutputConnector **pOutputConnector) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffectOutputConnector **pOutputConnector) = 0;
         
     };
     
@@ -2561,7 +2800,8 @@ EXTERN_C const IID IID_IMILBitmapEffectInteriorOutputConnector;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMILBitmapEffectInteriorOutputConnector * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2576,7 +2816,8 @@ EXTERN_C const IID IID_IMILBitmapEffectInteriorOutputConnector;
         DECLSPEC_XFGVIRT(IMILBitmapEffectInteriorOutputConnector, GetOutputConnector)
         HRESULT ( STDMETHODCALLTYPE *GetOutputConnector )( 
             __RPC__in IMILBitmapEffectInteriorOutputConnector * This,
-            /* [retval][out] */ __RPC__deref_out_opt IMILBitmapEffectOutputConnector **pOutputConnector);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IMILBitmapEffectOutputConnector **pOutputConnector);
         
         END_INTERFACE
     } IMILBitmapEffectInteriorOutputConnectorVtbl;
@@ -2631,12 +2872,16 @@ EXTERN_C const IID IID_IMILBitmapEffectEvents;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE PropertyChange( 
-            /* [in] */ __RPC__in_opt IMILBitmapEffect *pEffect,
-            /* [in] */ __RPC__in BSTR bstrPropertyName) = 0;
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffect *pEffect,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrPropertyName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DirtyRegion( 
-            /* [in] */ __RPC__in_opt IMILBitmapEffect *pEffect,
-            /* [in] */ __RPC__in MilRectD *pRect) = 0;
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffect *pEffect,
+            /* [annotation][in] */ 
+            _In_  MilRectD *pRect) = 0;
         
     };
     
@@ -2650,7 +2895,8 @@ EXTERN_C const IID IID_IMILBitmapEffectEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMILBitmapEffectEvents * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2665,14 +2911,18 @@ EXTERN_C const IID IID_IMILBitmapEffectEvents;
         DECLSPEC_XFGVIRT(IMILBitmapEffectEvents, PropertyChange)
         HRESULT ( STDMETHODCALLTYPE *PropertyChange )( 
             __RPC__in IMILBitmapEffectEvents * This,
-            /* [in] */ __RPC__in_opt IMILBitmapEffect *pEffect,
-            /* [in] */ __RPC__in BSTR bstrPropertyName);
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffect *pEffect,
+            /* [annotation][in] */ 
+            _In_  BSTR bstrPropertyName);
         
         DECLSPEC_XFGVIRT(IMILBitmapEffectEvents, DirtyRegion)
         HRESULT ( STDMETHODCALLTYPE *DirtyRegion )( 
             __RPC__in IMILBitmapEffectEvents * This,
-            /* [in] */ __RPC__in_opt IMILBitmapEffect *pEffect,
-            /* [in] */ __RPC__in MilRectD *pRect);
+            /* [annotation][in] */ 
+            _In_  IMILBitmapEffect *pEffect,
+            /* [annotation][in] */ 
+            _In_  MilRectD *pRect);
         
         END_INTERFACE
     } IMILBitmapEffectEventsVtbl;
