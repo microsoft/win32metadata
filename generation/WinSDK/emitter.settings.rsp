@@ -1,5 +1,7 @@
 --typeImport
 IPropertyValue(interface)=<Windows.Foundation.FoundationContract, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.Foundation.IPropertyValue
+IPropertySet(interface)=<Windows.Foundation.FoundationContract, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.Foundation.Collections.IPropertySet
+IPropertySetSerializer(interface)=<Windows.Foundation.UniversalApiContract, Version=14.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.Storage.Streams.IPropertySetSerializer
 ICompositionSurface(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.ICompositionSurface
 ICompositionCapabilities(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.CompositionCapabilities
 ICompositionGraphicsDevice(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.CompositionGraphicsDevice

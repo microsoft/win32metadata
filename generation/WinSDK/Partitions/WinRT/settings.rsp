@@ -14,12 +14,17 @@ ID2D1Factory
 <IncludeRoot>/um/accountssettingspaneinterop.h
 <IncludeRoot>/um/appserviceinterop.h
 <IncludeRoot>/um/CastingInterop.h
+<IncludeRoot>/um/cor.h
+<IncludeRoot>/um/CorError.h
+<IncludeRoot>/um/CorHdr.h
 <IncludeRoot>/um/dispatcherqueue.h
 <IncludeRoot>/um/dragdropinterop.h
+<IncludeRoot>/um/IMessageDispatcher.h
 <IncludeRoot>/um/inputpaneinterop.h
 <IncludeRoot>/um/PlayToManagerInterop.h
 <IncludeRoot>/um/RemoteSystemsInterop.h
 <IncludeRoot>/um/restrictederrorinfo.h
+<IncludeRoot>/um/sharewindowcommandsourceinterop.h
 <IncludeRoot>/um/SystemMediaTransportControlsInterop.h
 <IncludeRoot>/um/UIViewSettingsInterop.h
 <IncludeRoot>/um/useractivityinterop.h
@@ -41,7 +46,5 @@ ID2D1Factory
 <IncludeRoot>/winrt/shcore.h
 <IncludeRoot>/winrt/weakreference.h
 <IncludeRoot>/winrt/winstring.h
-<IncludeRoot>/um/sharewindowcommandsourceinterop.h
-<IncludeRoot>/um/IMessageDispatcher.h
 --namespace
 Windows.Win32.System.WinRT

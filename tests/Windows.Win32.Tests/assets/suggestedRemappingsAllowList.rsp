@@ -209,3 +209,7 @@ WTS_RCM_SERVICE_STATE=WRDS_RCM_SERVICE_STATE
 _LARGE_INTEGER=LARGE_INTEGER
 _ULARGE_INTEGER=ULARGE_INTEGER
 _OLD_LARGE_INTEGER=OLD_LARGE_INTEGER
+CorTypeAttr=CorRegTypeAttr
+CompilationRelaxationsEnum=CompilationRelaxationEnum
+IPropertySet=__PropertySet__
+IPropertySetSerializer=__IPropertySetSerializer__

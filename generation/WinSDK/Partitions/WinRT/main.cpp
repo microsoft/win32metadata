@@ -28,8 +28,8 @@
 #include <robuffer.h>
 #include <roerrorapi.h>
 #include <rometadata.h>
-//#include <rometadataapi.h>
-//#include <rometadataresolution.h>
+#include <rometadataapi.h>
+#include <rometadataresolution.h>
 #include <roparameterizediid.h>
 #include <roregistrationapi.h>
 #include <shcore.h>
