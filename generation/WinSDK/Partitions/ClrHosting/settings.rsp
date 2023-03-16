@@ -1,0 +1,5 @@
+--traverse
+<IncludeRoot>/um/metahost.h
+<IncludeRoot>/um/mscoree.h
+--namespace
+Windows.Win32.System.ClrHosting
