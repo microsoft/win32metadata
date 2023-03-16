@@ -29,7 +29,7 @@
   },
   {
     "Namespace": "Windows.Win32.Foundation",
-    "Name": "HINSTANCE",
+    "Name": "HMODULE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "FreeLibrary",
     "InvalidHandleValues": [ 0 ]
