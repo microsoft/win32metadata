@@ -1,10 +1,11 @@
 --traverse
 <IncludeRoot>/shared/minwindef.h
+<IncludeRoot>/shared/ntiologc.h
 <IncludeRoot>/shared/ntstatus.h
 <IncludeRoot>/shared/windef.h
 <IncludeRoot>/shared/winerror.h
-<IncludeRoot>/um/handleapi.h
 <IncludeRoot>/um/cierror.h
+<IncludeRoot>/um/handleapi.h
 <IncludeRoot>/um/mprerror.h
 <IncludeRoot>/um/winsdkver.h
 --namespace

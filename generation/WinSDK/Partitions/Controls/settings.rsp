@@ -1,5 +1,6 @@
 --exclude
 UiaRect
+MENU_POPUPSUBMENU_HCHOT
 --traverse
 <IncludeRoot>/shared/windowsx.h
 <IncludeRoot>/um/CommCtrl.h

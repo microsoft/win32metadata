@@ -63,6 +63,12 @@ namespace Windows
 
             typedef enum WiFiNetworkKind WiFiNetworkKind;
 
+            typedef enum WiFiOnDemandHotspotAvailability WiFiOnDemandHotspotAvailability;
+
+            typedef enum WiFiOnDemandHotspotCellularBars WiFiOnDemandHotspotCellularBars;
+
+            typedef enum WiFiOnDemandHotspotConnectStatus WiFiOnDemandHotspotConnectStatus;
+
             typedef enum WiFiPhyKind WiFiPhyKind;
 
             typedef enum WiFiReconnectionKind WiFiReconnectionKind;
@@ -83,6 +89,16 @@ namespace Windows
 
             interface IWiFiNetworkReport;
 
+            interface IWiFiOnDemandHotspotConnectTriggerDetails;
+
+            interface IWiFiOnDemandHotspotConnectionResult;
+
+            interface IWiFiOnDemandHotspotNetwork;
+
+            interface IWiFiOnDemandHotspotNetworkProperties;
+
+            interface IWiFiOnDemandHotspotNetworkStatics;
+
             interface IWiFiWpsConfigurationResult;
 
             runtimeclass WiFiAdapter;
@@ -92,6 +108,14 @@ namespace Windows
             runtimeclass WiFiConnectionResult;
 
             runtimeclass WiFiNetworkReport;
+
+            runtimeclass WiFiOnDemandHotspotConnectTriggerDetails;
+
+            runtimeclass WiFiOnDemandHotspotConnectionResult;
+
+            runtimeclass WiFiOnDemandHotspotNetwork;
+
+            runtimeclass WiFiOnDemandHotspotNetworkProperties;
 
             runtimeclass WiFiWpsConfigurationResult;
         }
@@ -131,9 +155,13 @@ namespace Windows
 
                 interface Windows.Foundation.IAsyncOperation<Windows.Devices.WiFi.WiFiConnectionResult*>;
 
+                interface Windows.Foundation.IAsyncOperation<Windows.Devices.WiFi.WiFiOnDemandHotspotConnectionResult*>;
+
                 interface Windows.Foundation.IAsyncOperation<Windows.Devices.WiFi.WiFiWpsConfigurationResult*>;
 
                 interface Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVectorView<Windows.Devices.WiFi.WiFiAdapter*>*>;
+
+                interface Windows.Foundation.IReference<Windows.Devices.WiFi.WiFiOnDemandHotspotCellularBars>;
 
                 interface Windows.Foundation.TypedEventHandler<Windows.Devices.WiFi.WiFiAdapter*, IInspectable*>;
             }
@@ -185,6 +213,48 @@ namespace Windows
                 Adhoc          = 2
             };
 
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            enum WiFiOnDemandHotspotAvailability
+            {
+                Available   = 0,
+                Unavailable = 1
+            };
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            enum WiFiOnDemandHotspotCellularBars
+            {
+                ZeroBars  = 0,
+                OneBar    = 1,
+                TwoBars   = 2,
+                ThreeBars = 3,
+                FourBars  = 4,
+                FiveBars  = 5
+            };
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            enum WiFiOnDemandHotspotConnectStatus
+            {
+                UnspecifiedFailure                = 0,
+                Success                           = 1,
+                AppTimedOut                       = 2,
+                InvalidCredential                 = 3,
+                NetworkNotAvailable               = 4,
+                UnsupportedAuthenticationProtocol = 5,
+                BluetoothConnectFailed            = 6,
+                BluetoothTransmissionError        = 7,
+                OperationCanceledByUser           = 8,
+                EntitlementCheckFailed            = 9,
+                NoCellularSignal                  = 10,
+                CellularDataTurnedOff             = 11,
+                WlanConnectFailed                 = 12,
+                WlanNotVisible                    = 13,
+                AccessPointCannotConnect          = 14,
+                CellularConnectTimedOut           = 15,
+                RoamingNotAllowed                 = 16,
+                PairingRequired                   = 17,
+                DataLimitReached                  = 18
+            };
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             enum WiFiPhyKind
             {
@@ -200,7 +270,9 @@ namespace Windows
                 [contract(Windows.Foundation.UniversalApiContract, 3.0)]
                 Dmg        = 9,
                 [contract(Windows.Foundation.UniversalApiContract, 7.0)]
-                HE         = 10
+                HE         = 10,
+                [contract(Windows.Foundation.UniversalApiContract, 7.0)]
+                Eht        = 11
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -300,6 +372,64 @@ namespace Windows
                 [propget] HRESULT AvailableNetworks([out] [retval] Windows.Foundation.Collections.IVectorView<Windows.Devices.WiFi.WiFiAvailableNetwork*>** value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Devices.WiFi.WiFiOnDemandHotspotConnectTriggerDetails)]
+            [uuid(A268EB58-68F5-59CF-8D38-35BF44B097EF)]
+            interface IWiFiOnDemandHotspotConnectTriggerDetails : IInspectable
+            {
+                [propget] HRESULT RequestedNetwork([out] [retval] Windows.Devices.WiFi.WiFiOnDemandHotspotNetwork** value);
+                HRESULT ReportError([in] Windows.Devices.WiFi.WiFiOnDemandHotspotConnectStatus status);
+                HRESULT ConnectAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.Devices.WiFi.WiFiOnDemandHotspotConnectionResult*>** operation);
+                HRESULT Connect([out] [retval] Windows.Devices.WiFi.WiFiOnDemandHotspotConnectionResult** result);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Devices.WiFi.WiFiOnDemandHotspotConnectionResult)]
+            [uuid(911794A1-6C82-5DE3-8A4A-F9FF22A4957A)]
+            interface IWiFiOnDemandHotspotConnectionResult : IInspectable
+            {
+                [propget] HRESULT Status([out] [retval] Windows.Devices.WiFi.WiFiOnDemandHotspotConnectStatus* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Devices.WiFi.WiFiOnDemandHotspotNetwork)]
+            [uuid(18DC7115-A04E-507C-BBAF-B78369D29FA7)]
+            interface IWiFiOnDemandHotspotNetwork : IInspectable
+            {
+                HRESULT GetProperties([out] [retval] Windows.Devices.WiFi.WiFiOnDemandHotspotNetworkProperties** result);
+                HRESULT UpdateProperties([in] Windows.Devices.WiFi.WiFiOnDemandHotspotNetworkProperties* newProperties);
+                [propget] HRESULT Id([out] [retval] GUID* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Devices.WiFi.WiFiOnDemandHotspotNetworkProperties)]
+            [uuid(C810A1F2-C81D-5852-BE50-E4BD4D81E98D)]
+            interface IWiFiOnDemandHotspotNetworkProperties : IInspectable
+            {
+                [propget] HRESULT DisplayName([out] [retval] HSTRING* value);
+                [propput] HRESULT DisplayName([in] HSTRING value);
+                [propget] HRESULT Availability([out] [retval] Windows.Devices.WiFi.WiFiOnDemandHotspotAvailability* value);
+                [propput] HRESULT Availability([in] Windows.Devices.WiFi.WiFiOnDemandHotspotAvailability value);
+                [propget] HRESULT RemainingBatteryPercent([out] [retval] Windows.Foundation.IReference<UINT32>** value);
+                [propput] HRESULT RemainingBatteryPercent([in] Windows.Foundation.IReference<UINT32>* value);
+                [propget] HRESULT CellularBars([out] [retval] Windows.Foundation.IReference<Windows.Devices.WiFi.WiFiOnDemandHotspotCellularBars>** value);
+                [propput] HRESULT CellularBars([in] Windows.Foundation.IReference<Windows.Devices.WiFi.WiFiOnDemandHotspotCellularBars>* value);
+                [propget] HRESULT IsMetered([out] [retval] boolean* value);
+                [propput] HRESULT IsMetered([in] boolean value);
+                [propget] HRESULT Ssid([out] [retval] HSTRING* value);
+                [propput] HRESULT Ssid([in] HSTRING value);
+                [propget] HRESULT Password([out] [retval] Windows.Security.Credentials.PasswordCredential** value);
+                [propput] HRESULT Password([in] Windows.Security.Credentials.PasswordCredential* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Devices.WiFi.WiFiOnDemandHotspotNetwork)]
+            [uuid(00F5B8AC-80E7-5054-871C-8739F374E3C9)]
+            interface IWiFiOnDemandHotspotNetworkStatics : IInspectable
+            {
+                HRESULT GetOrCreateById([in] GUID networkId, [out] [retval] Windows.Devices.WiFi.WiFiOnDemandHotspotNetwork** result);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 5.0)]
             [exclusiveto(Windows.Devices.WiFi.WiFiWpsConfigurationResult)]
             [uuid(67B49871-17EE-42D1-B14F-5A11F1226FB5)]
@@ -337,6 +467,36 @@ namespace Windows
             runtimeclass WiFiNetworkReport
             {
                 [default] interface Windows.Devices.WiFi.IWiFiNetworkReport;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass WiFiOnDemandHotspotConnectTriggerDetails
+            {
+                [default] interface Windows.Devices.WiFi.IWiFiOnDemandHotspotConnectTriggerDetails;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass WiFiOnDemandHotspotConnectionResult
+            {
+                [default] interface Windows.Devices.WiFi.IWiFiOnDemandHotspotConnectionResult;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [marshaling_behavior(agile)]
+            [static(Windows.Devices.WiFi.IWiFiOnDemandHotspotNetworkStatics, Windows.Foundation.UniversalApiContract, 15.0)]
+            [threading(both)]
+            runtimeclass WiFiOnDemandHotspotNetwork
+            {
+                [default] interface Windows.Devices.WiFi.IWiFiOnDemandHotspotNetwork;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass WiFiOnDemandHotspotNetworkProperties
+            {
+                [default] interface Windows.Devices.WiFi.IWiFiOnDemandHotspotNetworkProperties;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 5.0)]

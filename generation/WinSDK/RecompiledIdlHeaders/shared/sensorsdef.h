@@ -198,6 +198,8 @@ DEFINE_PROPERTYKEY(DEVPKEY_Sensor_ProximityType,
     0xd4247382, 0x969d, 0x4f24, 0xbb, 0x14, 0xfb, 0x96, 0x71, 0x87, 0xb, 0xbf, 80); //[VT_UI4]
 DEFINE_PROPERTYKEY(DEVPKEY_Sensor_HumanPresenceDetectionType,
     0xd4247382, 0x969d, 0x4f24, 0xbb, 0x14, 0xfb, 0x96, 0x71, 0x87, 0xb, 0xbf, 81); //[VT_UI4]
+DEFINE_PROPERTYKEY(PKEY_Sensor_Proximity_SensorCapabilities,
+    0xd4247382, 0x969d, 0x4f24, 0xbb, 0x14, 0xfb, 0x96, 0x71, 0x87, 0xb, 0xbf, 82); //[VT_UI4]
 
 //////////////////////////////////////////////////////////////
 // Data-Fields
@@ -287,6 +289,8 @@ DEFINE_PROPERTYKEY(PKEY_SensorData_ProximityDistanceMillimeters,
     0xc458f8a7, 0x4ae8, 0x4777, 0x96, 0x7, 0x2e, 0x9b, 0xdd, 0x65, 0x11, 0xa, 91); //[VT_UI4]
 DEFINE_PROPERTYKEY(PKEY_SensorData_HumanPresence_DetectionDistance_Threshold,
     0xc458f8a7, 0x4ae8, 0x4777, 0x96, 0x7, 0x2e, 0x9b, 0xdd, 0x65, 0x11, 0xa, 92); //[VT_R4]
+DEFINE_PROPERTYKEY(PKEY_SensorData_HumanPresence_AttentionDetection,
+    0xc458f8a7, 0x4ae8, 0x4777, 0x96, 0x7, 0x2e, 0x9b, 0xdd, 0x65, 0x11, 0xa, 93); //[VT_BOOL]
 
 // Environmental Sensor Data-Fields (100-109)
 DEFINE_PROPERTYKEY(PKEY_SensorData_AtmosphericPressure_Bars,
@@ -479,6 +483,15 @@ typedef enum HUMAN_PRESENCE_DETECTION_TYPE
     HumanPresenceDetectionType_AudioBiometric               = 0x00000008,
     HumanPresenceDetectionType_Force_Dword                  = 0xFFFFFFFF // Make sure the enum is 32bit
 } HUMAN_PRESENCE_DETECTION_TYPE;
+
+// This enum needs to be updated as new Sensor Capabilities are added 
+// and Proximity_Sensor_Supported_Capabilities must advertise this accordingly.
+typedef enum PROXIMITY_SENSOR_CAPABILITIES
+{
+    Proximity_Sensor_Human_Presence_Capable     = 0x01,
+    Proximity_Sensor_Human_Engagement_Capable   = 0x02,
+    Proximity_Sensor_Supported_Capabilities     = 0x03
+} PROXIMITY_SENSOR_CAPABILITIES;
 
 typedef enum SIMPLE_DEVICE_ORIENTATION
 {

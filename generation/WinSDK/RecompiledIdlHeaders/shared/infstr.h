@@ -54,6 +54,7 @@
 #define SZ_KEY_ADDSERVICE            TEXT("AddService")
 #define SZ_KEY_DELSERVICE            TEXT("DelService")
 #define SZ_KEY_ADDTRIGGER            TEXT("AddTrigger")
+#define SZ_KEY_FAILUREACTIONS        TEXT("FailureActions")
 #define SZ_KEY_ADDINTERFACE          TEXT("AddInterface")
 #define SZ_KEY_ADDIME                TEXT("AddIme")
 #define SZ_KEY_DELIME                TEXT("DelIme")
@@ -220,6 +221,13 @@
 #define INFSTR_KEY_ACTION               TEXT("Action")
 #define INFSTR_KEY_SUB_TYPE             TEXT("SubType")
 #define INFSTR_KEY_DATA_ITEM            TEXT("DataItem")
+
+//
+// Used for FailureActions within a Service section
+//
+#define INFSTR_KEY_RESET_PERIOD         TEXT("ResetPeriod")
+#define INFSTR_KEY_NON_CRASH_FAILURES   TEXT("NonCrashFailures")
+#define INFSTR_KEY_FAILURE_ACTION       TEXT("Action")
 
 //
 // Used in event provider section

@@ -172,6 +172,8 @@ namespace Windows
 
             interface IESim2;
 
+            interface IESim3;
+
             interface IESimAddedEventArgs;
 
             interface IESimDiscoverEvent;
@@ -278,11 +280,15 @@ namespace Windows
 
             interface IMobileBroadbandDeviceServiceTriggerDetails;
 
+            interface IMobileBroadbandDeviceServiceTriggerDetails2;
+
             interface IMobileBroadbandModem;
 
             interface IMobileBroadbandModem2;
 
             interface IMobileBroadbandModem3;
+
+            interface IMobileBroadbandModem4;
 
             interface IMobileBroadbandModemConfiguration;
 
@@ -325,6 +331,8 @@ namespace Windows
             interface IMobileBroadbandSarManager;
 
             interface IMobileBroadbandSlotInfo;
+
+            interface IMobileBroadbandSlotInfo2;
 
             interface IMobileBroadbandSlotInfoChangedEventArgs;
 
@@ -1187,6 +1195,14 @@ namespace Windows
                 [overload("DiscoverAsync")] HRESULT DiscoverWithServerAddressAndMatchingIdAsync([in] HSTRING serverAddress, [in] HSTRING matchingId, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Networking.NetworkOperators.ESimDiscoverResult*>** operation);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Networking.NetworkOperators.ESim)]
+            [uuid(FE1EDF45-01B8-5D31-B8D3-D9CBEBB2B831)]
+            interface IESim3 : IInspectable
+            {
+                [propget] HRESULT SlotIndex([out] [retval] Windows.Foundation.IReference<INT32>** value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 6.0)]
             [exclusiveto(Windows.Networking.NetworkOperators.ESimAddedEventArgs)]
             [uuid(38BD0A58-4D5A-4D08-8DA7-E73EFF369DDD)]
@@ -1780,6 +1796,14 @@ namespace Windows
                 [propget] HRESULT ReceivedData([out] [retval] Windows.Storage.Streams.IBuffer** value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 14.0)]
+            [exclusiveto(Windows.Networking.NetworkOperators.MobileBroadbandDeviceServiceTriggerDetails)]
+            [uuid(D83D5F16-336A-553F-94BB-0CD1A2FF0C81)]
+            interface IMobileBroadbandDeviceServiceTriggerDetails2 : IInspectable
+            {
+                [propget] HRESULT EventId([out] [retval] UINT32* value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [exclusiveto(Windows.Networking.NetworkOperators.MobileBroadbandModem)]
             [uuid(D0356912-E9F9-4F67-A03D-43189A316BF1)]
@@ -1815,6 +1839,17 @@ namespace Windows
                 [propget] HRESULT IsInEmergencyCallMode([out] [retval] boolean* value);
                 [eventadd] HRESULT IsInEmergencyCallModeChanged([in] Windows.Foundation.TypedEventHandler<Windows.Networking.NetworkOperators.MobileBroadbandModem*, IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
                 [eventremove] HRESULT IsInEmergencyCallModeChanged([in] EventRegistrationToken token);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Networking.NetworkOperators.MobileBroadbandModem)]
+            [uuid(4A0398C2-91BE-412B-B569-586E9F0030D1)]
+            interface IMobileBroadbandModem4 : IInspectable
+            {
+                [overload("SetIsPassthroughEnabledAsync")] HRESULT SetIsPassthroughEnabledWithSlotIndexAsync([in] boolean value, [in] INT32 slotindex, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Networking.NetworkOperators.MobileBroadbandModemStatus>** operation);
+                [overload("GetIsPassthroughEnabledAsync")] HRESULT GetIsPassthroughEnabledWithSlotIndexAsync([in] INT32 slotindex, [out] [retval] Windows.Foundation.IAsyncOperation<boolean>** operation);
+                [overload("SetIsPassthroughEnabled")] HRESULT SetIsPassthroughEnabledWithSlotIndex([in] boolean value, [in] INT32 slotindex, [out] [retval] Windows.Networking.NetworkOperators.MobileBroadbandModemStatus* result);
+                [overload("GetIsPassthroughEnabled")] HRESULT GetIsPassthroughEnabledWithSlotIndex([in] INT32 slotindex, [out] [retval] boolean* result);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -2034,6 +2069,14 @@ namespace Windows
             {
                 [propget] HRESULT Index([out] [retval] INT32* value);
                 [propget] HRESULT State([out] [retval] Windows.Networking.NetworkOperators.MobileBroadbandSlotState* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Networking.NetworkOperators.MobileBroadbandSlotInfo)]
+            [uuid(393CB039-CA44-524C-822D-83A3620F0EFC)]
+            interface IMobileBroadbandSlotInfo2 : IInspectable
+            {
+                [propget] HRESULT IccId([out] [retval] HSTRING* value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 12.0)]
@@ -2346,6 +2389,7 @@ namespace Windows
             {
                 [default] interface Windows.Networking.NetworkOperators.IESim;
                 [contract(Windows.Foundation.UniversalApiContract, 8.0)] interface Windows.Networking.NetworkOperators.IESim2;
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Networking.NetworkOperators.IESim3;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 6.0)]
@@ -2657,6 +2701,7 @@ namespace Windows
             runtimeclass MobileBroadbandDeviceServiceTriggerDetails
             {
                 [default] interface Windows.Networking.NetworkOperators.IMobileBroadbandDeviceServiceTriggerDetails;
+                [contract(Windows.Foundation.UniversalApiContract, 14.0)] interface Windows.Networking.NetworkOperators.IMobileBroadbandDeviceServiceTriggerDetails2;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -2668,6 +2713,7 @@ namespace Windows
                 [default] interface Windows.Networking.NetworkOperators.IMobileBroadbandModem;
                 [contract(Windows.Foundation.UniversalApiContract, 5.0)] interface Windows.Networking.NetworkOperators.IMobileBroadbandModem2;
                 [contract(Windows.Foundation.UniversalApiContract, 6.0)] interface Windows.Networking.NetworkOperators.IMobileBroadbandModem3;
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Networking.NetworkOperators.IMobileBroadbandModem4;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -2782,6 +2828,7 @@ namespace Windows
             runtimeclass MobileBroadbandSlotInfo
             {
                 [default] interface Windows.Networking.NetworkOperators.IMobileBroadbandSlotInfo;
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Networking.NetworkOperators.IMobileBroadbandSlotInfo2;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 12.0)]

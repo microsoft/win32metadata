@@ -3509,6 +3509,15 @@
 #define ERROR_INDEX_OUT_OF_BOUNDS        474L
 
 //
+// MessageId: ERROR_CLOUD_FILE_US_MESSAGE_TIMEOUT
+//
+// MessageText:
+//
+// The cloud provider failed to acknowledge a message before the time-out expired.
+//
+#define ERROR_CLOUD_FILE_US_MESSAGE_TIMEOUT 475L
+
+//
 // **** Available SYSTEM error codes ****
 //
 //
@@ -3744,6 +3753,60 @@
 // The volume is opened for exclusive write access, preventing files from being opened for write access.
 //
 #define ERROR_VOLUME_WRITE_ACCESS_DENIED 508L
+
+//
+// MessageId: ERROR_NOT_SUPPORTED_WITH_CACHED_HANDLE
+//
+// MessageText:
+//
+// The specified operation is not supported on a file opened for cached IO.
+//
+#define ERROR_NOT_SUPPORTED_WITH_CACHED_HANDLE 509L
+
+//
+// MessageId: ERROR_FS_METADATA_INCONSISTENT
+//
+// MessageText:
+//
+// The file system encountered a metadata file with inconsistent data.
+//
+#define ERROR_FS_METADATA_INCONSISTENT   510L
+
+//
+// MessageId: ERROR_BLOCK_WEAK_REFERENCE_INVALID
+//
+// MessageText:
+//
+// A file system block being referenced has been modified after containing a weak reference.
+//
+#define ERROR_BLOCK_WEAK_REFERENCE_INVALID 511L
+
+//
+// MessageId: ERROR_BLOCK_SOURCE_WEAK_REFERENCE_INVALID
+//
+// MessageText:
+//
+// The source file system block being referenced has been modified after containing a weak reference.
+//
+#define ERROR_BLOCK_SOURCE_WEAK_REFERENCE_INVALID 512L
+
+//
+// MessageId: ERROR_BLOCK_TARGET_WEAK_REFERENCE_INVALID
+//
+// MessageText:
+//
+// The target file system block being referenced has been modified after containing a weak reference.
+//
+#define ERROR_BLOCK_TARGET_WEAK_REFERENCE_INVALID 513L
+
+//
+// MessageId: ERROR_BLOCK_SHARED
+//
+// MessageText:
+//
+// The target file system block is shared between multiple extents.
+//
+#define ERROR_BLOCK_SHARED               514L
 
 //
 // **** Available SYSTEM error codes ****
@@ -12658,6 +12721,24 @@
 //
 #define ERROR_PRINTER_NOT_SHAREABLE      3022L
 
+//
+// MessageId: ERROR_SERVER_SERVICE_CALL_REQUIRES_SMB1
+//
+// MessageText:
+//
+// The requested function requires SMB1 to be present and enabled.
+//
+#define ERROR_SERVER_SERVICE_CALL_REQUIRES_SMB1 3023L
+
+//
+// MessageId: ERROR_NETWORK_AUTHENTICATION_PROMPT_CANCELED
+//
+// MessageText:
+//
+// The user canceled the authentication prompt to a remote server. 
+//
+#define ERROR_NETWORK_AUTHENTICATION_PROMPT_CANCELED 3024L
+
 
 ///////////////////////////////////////////////////
 //                                               //
@@ -13253,7 +13334,10 @@
 
 ///////////////////////////////////////////////////
 //                                               //
-//                  Available                    //
+//    SMB error codes, in the Win32 code space   //
+//                                               //
+// Not to be confused with Facility=SMB codes in //
+// the HRESULT code space.                       //
 //                                               //
 //                 4150 to 4199                  //
 ///////////////////////////////////////////////////
@@ -14443,9 +14527,34 @@
 
 ///////////////////////////////////////////////////
 //                                               //
+//   System Integrity Error codes (continued)    //
+//                                               //
+//                 4580 to 4589                  //
+///////////////////////////////////////////////////
+
+//
+// MessageId: ERROR_SYSTEM_INTEGRITY_REPUTATION_UNFRIENDLY_FILE
+//
+// MessageText:
+//
+// System Integrity policy has been violated.  Unfriendly file.
+//
+#define ERROR_SYSTEM_INTEGRITY_REPUTATION_UNFRIENDLY_FILE 4580L
+
+//
+// MessageId: ERROR_SYSTEM_INTEGRITY_REPUTATION_UNATTAINABLE
+//
+// MessageText:
+//
+// System Integrity policy has been violated.  Failed to obtain file reputation because an infrastructure issue occurred. Try again later.
+//
+#define ERROR_SYSTEM_INTEGRITY_REPUTATION_UNATTAINABLE 4581L
+
+///////////////////////////////////////////////////
+//                                               //
 //                  Available                    //
 //                                               //
-//                 4580 to 4599                  //
+//                 4590 to 4599                  //
 ///////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////
@@ -22214,6 +22323,24 @@
 //
 #define ERROR_WEAK_WHFBKEY_BLOCKED       8651L
 
+//
+// MessageId: ERROR_DS_PER_ATTRIBUTE_AUTHZ_FAILED_DURING_ADD
+//
+// MessageText:
+//
+// The add object operation failed because the caller was not authorized to add one or more attributes included in the request.
+//
+#define ERROR_DS_PER_ATTRIBUTE_AUTHZ_FAILED_DURING_ADD 8652L
+
+//
+// MessageId: ERROR_LOCAL_POLICY_MODIFICATION_NOT_SUPPORTED
+//
+// MessageText:
+//
+// The local account policy modification request was rejected because the policy is controlled by a regional authority.
+//
+#define ERROR_LOCAL_POLICY_MODIFICATION_NOT_SUPPORTED 8653L
+
 
 ///////////////////////////////////////////////////
 //                                                /
@@ -28300,6 +28427,15 @@
 //
 #define ERROR_MRM_MISSING_DEFAULT_LANGUAGE 15160L
 
+//
+// MessageId: ERROR_MRM_SCOPE_ITEM_CONFLICT
+//
+// MessageText:
+//
+// An entity was defined as both resource and scope, which is not allowed.
+//
+#define ERROR_MRM_SCOPE_ITEM_CONFLICT    15161L
+
 
 ///////////////////////////////////////////////////
 //                                               //
@@ -29222,6 +29358,33 @@
 // The application cannot be started for the target user.  Please have the user explicitly install this package.
 //
 #define ERROR_PACKAGE_NOT_REGISTERED_FOR_USER 15669L
+
+//
+// MessageId: ERROR_PACKAGE_NAME_MISMATCH
+//
+// MessageText:
+//
+// The provided package name does not match the expected package name. Check the AppXDeployment-Server event log for details.
+//
+#define ERROR_PACKAGE_NAME_MISMATCH      15670L
+
+//
+// MessageId: ERROR_APPINSTALLER_URI_IN_USE
+//
+// MessageText:
+//
+// The provided .appinstaller URI is already being used by another package family. Check the AppXDeployment-Server event log for details.
+//
+#define ERROR_APPINSTALLER_URI_IN_USE    15671L
+
+//
+// MessageId: ERROR_APPINSTALLER_IS_MANAGED_BY_SYSTEM
+//
+// MessageText:
+//
+// The package family's auto update settings are being managed at system priority and cannot be changed at default priority. Please contact your system administrator for help with the error.
+//
+#define ERROR_APPINSTALLER_IS_MANAGED_BY_SYSTEM 15672L
 
 //////////////////////////
 //                      //
@@ -33847,6 +34010,15 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 // The publisher bridging artifact is invalid.
 //
 #define APPX_E_INVALID_PUBLISHER_BRIDGING _HRESULT_TYPEDEF_(0x80080218L)
+
+//
+// MessageId: APPX_E_DIGEST_MISMATCH
+//
+// MessageText:
+//
+// The expected digest value did not match the actual digest value of the content.
+//
+#define APPX_E_DIGEST_MISMATCH           _HRESULT_TYPEDEF_(0x80080219L)
 
 //
 // Codes 0x0300-0x030f are reserved for background task error codes.
@@ -38521,6 +38693,15 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 #define CERTSRV_E_PENDING_CLIENT_RESPONSE _HRESULT_TYPEDEF_(0x80094820L)
 
 //
+// MessageId: CERTSRV_E_SEC_EXT_DIRECTORY_SID_REQUIRED
+//
+// MessageText:
+//
+// The Active Directory SID is unavailable and cannot be added to the custom security extension.
+//
+#define CERTSRV_E_SEC_EXT_DIRECTORY_SID_REQUIRED _HRESULT_TYPEDEF_(0x80094821L)
+
+//
 // The range 0x5000-0x51ff is reserved for XENROLL errors.
 //
 //
@@ -39182,9 +39363,28 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 // Since these error codes aren't in the standard Win32 range (i.e., 0-64K), define a
 // macro to map either Win32 or SetupAPI error codes into an HRESULT.
 //
-#define HRESULT_FROM_SETUPAPI(x) ((((x) & (APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR)) == (APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR)) \
-                                 ? ((HRESULT) (((x) & 0x0000FFFF) | (FACILITY_SETUPAPI << 16) | 0x80000000))                               \
-                                 : HRESULT_FROM_WIN32(x))
+// HRESULT_FROM_SETUPAPI(x) used to be a macro, however we now run it as an inline function
+// to prevent double evaluation of 'x'. If you still need the macro, you can use __HRESULT_FROM_SETUPAPI(x)
+//
+#define __HRESULT_FROM_SETUPAPI(x) ((((x) & (APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR)) == (APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR)) \
+                                   ? ((HRESULT) (((x) & 0x0000FFFF) | (FACILITY_SETUPAPI << 16) | 0x80000000))                               \
+                                   : HRESULT_FROM_WIN32(x))
+
+#if !defined(_HRESULT_DEFINED) && !defined(__midl)
+#define _HRESULT_DEFINED
+typedef _Return_type_success_(return >= 0) long HRESULT;
+#endif
+
+#ifndef __midl
+#if defined(__cplusplus) && _MSC_VER >= 1900 && !defined(SORTPP_PASS)
+constexpr
+#endif
+FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x20000000|0xC0000000)) == (0x20000000|0xC0000000))                \
+                                                                    ? ((HRESULT) (((x) & 0x0000FFFF) | (FACILITY_SETUPAPI << 16) | 0x80000000)) \
+                                                                    : HRESULT_FROM_WIN32(x);}
+#else
+#define HRESULT_FROM_SETUPAPI(x) __HRESULT_FROM_SETUPAPI(x)
+#endif
 //
 // MessageId: SPAPI_E_EXPECTED_SECTION_NAME
 //
@@ -41626,7 +41826,7 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 //
 // MessageText:
 //
-// Invalid Schema, Message Format Error from server.
+// Invalid message from the Mobile Device Management (MDM) server.
 //
 #define MENROLL_E_DEVICE_MESSAGE_FORMAT_ERROR _HRESULT_TYPEDEF_(0x80180001L)
 
@@ -41635,7 +41835,7 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 //
 // MessageText:
 //
-// Server failed to authenticate the user.
+// The Mobile Device Management (MDM) server failed to authenticate the user. Try again or contact your system administrator.
 //
 #define MENROLL_E_DEVICE_AUTHENTICATION_ERROR _HRESULT_TYPEDEF_(0x80180002L)
 
@@ -41644,7 +41844,7 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 //
 // MessageText:
 //
-// The user is not authorized to enroll.
+// The user is not authorized to enroll to Mobile Device Management (MDM). Try again or contact your system administrator.
 //
 #define MENROLL_E_DEVICE_AUTHORIZATION_ERROR _HRESULT_TYPEDEF_(0x80180003L)
 
@@ -41653,7 +41853,7 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 //
 // MessageText:
 //
-// The user has no permission for the certificate template or the certificate authority is unreachable.
+// The user has no permission for the certificate template or the certificate authority is unreachable. Try again or contact your system administrator.
 //
 #define MENROLL_E_DEVICE_CERTIFICATEREQUEST_ERROR _HRESULT_TYPEDEF_(0x80180004L)
 
@@ -41662,7 +41862,7 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 //
 // MessageText:
 //
-// The MDM server encountered an error.
+// The Mobile Device Management (MDM) server encountered an error. Try again or contact your system administrator.
 //
 #define MENROLL_E_DEVICE_CONFIGMGRSERVER_ERROR _HRESULT_TYPEDEF_(0x80180005L)
 
@@ -41671,7 +41871,7 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 //
 // MessageText:
 //
-// There was an unhandled exception on the server.
+// There was an unhandled exception on the Mobile Device Management (MDM) server. Try again or contact your system administrator.
 //
 #define MENROLL_E_DEVICE_INTERNALSERVICE_ERROR _HRESULT_TYPEDEF_(0x80180006L)
 
@@ -41680,7 +41880,7 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 //
 // MessageText:
 //
-// The server was not able to validate the user credentials.
+// The Mobile Device Management (MDM) server was not able to validate your account. Try again or contact your system administrator.
 //
 #define MENROLL_E_DEVICE_INVALIDSECURITY_ERROR _HRESULT_TYPEDEF_(0x80180007L)
 
@@ -41689,7 +41889,7 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 //
 // MessageText:
 //
-// Unknown server error.
+// Unknown Mobile Device Management (MDM) server error. Try again or contact your system administrator.
 //
 #define MENROLL_E_DEVICE_UNKNOWN_ERROR   _HRESULT_TYPEDEF_(0x80180008L)
 
@@ -41698,7 +41898,7 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 //
 // MessageText:
 //
-// Another enrollment operation is currently underway.
+// Another enrollment operation is currently in progress.
 //
 #define MENROLL_E_ENROLLMENT_IN_PROGRESS _HRESULT_TYPEDEF_(0x80180009L)
 
@@ -41716,7 +41916,7 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 //
 // MessageText:
 //
-// During discovery the security certificate date was invalid.
+// There was a Mobile Device Management (MDM) certificate error. The security certificate date is invalid. Try again or contact your system administrator.
 //
 #define MENROLL_E_DISCOVERY_SEC_CERT_DATE_INVALID _HRESULT_TYPEDEF_(0x8018000DL)
 
@@ -41725,7 +41925,7 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 //
 // MessageText:
 //
-// A password is needed, but was not supplied.
+// A password is required to authenticate your account or device, but was not supplied. Please try again.
 //
 #define MENROLL_E_PASSWORD_NEEDED        _HRESULT_TYPEDEF_(0x8018000EL)
 
@@ -41734,7 +41934,7 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 //
 // MessageText:
 //
-// An error occurred during WAB enrollment.
+// There was a problem authenticating your account or device. Try again or contact your system administrator.
 //
 #define MENROLL_E_WAB_ERROR              _HRESULT_TYPEDEF_(0x8018000FL)
 
@@ -41743,7 +41943,7 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 //
 // MessageText:
 //
-// A network error occurred, such as DNS or a network timeout.
+// There was a network error communicating with the Mobile Device Management (MDM) server. Please try again.
 //
 #define MENROLL_E_CONNECTIVITY           _HRESULT_TYPEDEF_(0x80180010L)
 
@@ -41761,25 +41961,25 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 //
 // MessageText:
 //
-// The SSL cert was not valid.
+// There was a Mobile Device Management (MDM) certificate error. Try again or contact your system administrator.
 //
 #define MENROLL_E_INVALIDSSLCERT         _HRESULT_TYPEDEF_(0x80180012L)
 
 //
-// MessageId: MENROLL_E_DEVICEAPREACHED
+// MessageId: MENROLL_E_DEVICECAPREACHED
 //
 // MessageText:
 //
-// The account has too many devices enrolled. Delete or unenroll old ones to fix this error.
+// The account has too many devices enrolled to Mobile Device Management (MDM). Delete or unenroll old devices to fix this error.
 //
-#define MENROLL_E_DEVICEAPREACHED        _HRESULT_TYPEDEF_(0x80180013L)
+#define MENROLL_E_DEVICECAPREACHED       _HRESULT_TYPEDEF_(0x80180013L)
 
 //
 // MessageId: MENROLL_E_DEVICENOTSUPPORTED
 //
 // MessageText:
 //
-// A specific platform or version is not supported.
+// The Mobile Device Management (MDM) server doesn't support this platform or version, consider upgrading your device.
 //
 #define MENROLL_E_DEVICENOTSUPPORTED     _HRESULT_TYPEDEF_(0x80180014L)
 
@@ -41788,7 +41988,7 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 //
 // MessageText:
 //
-// Mobile device management is generally not supported for this device.
+// Mobile Device Management (MDM) is generally not supported for this device.
 //
 #define MENROLL_E_NOT_SUPPORTED          _HRESULT_TYPEDEF_(0x80180015L)
 
@@ -41797,7 +41997,7 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 //
 // MessageText:
 //
-// The device is attempting to renew, but the server rejected the request. Check renew schedule on the device.
+// The device is attempting to renew the Mobile Device Management (MDM) certificate, but the server rejected the request. Check renew schedule on the device.
 //
 #define MENROLL_E_NOTELIGIBLETORENEW     _HRESULT_TYPEDEF_(0x80180016L)
 
@@ -41806,7 +42006,7 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 //
 // MessageText:
 //
-// Account is in maintenance; retry later.
+// The Mobile Device Management (MDM) server states your account is in maintenance, try again later.
 //
 #define MENROLL_E_INMAINTENANCE          _HRESULT_TYPEDEF_(0x80180017L)
 
@@ -41815,7 +42015,7 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 //
 // MessageText:
 //
-// The license of the user is in bad state blocking enrollment.
+// There was an error with your Mobile Device Management (MDM) user license. Contact your system administrator.
 //
 #define MENROLL_E_USER_LICENSE           _HRESULT_TYPEDEF_(0x80180018L)
 
@@ -41824,7 +42024,7 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 //
 // MessageText:
 //
-// The server rejected the Enrollment Data.
+// The Mobile Device Management (MDM) server rejected the enrollment data. The server may not be configured correctly.
 //
 #define MENROLL_E_ENROLLMENTDATAINVALID  _HRESULT_TYPEDEF_(0x80180019L)
 
@@ -41941,7 +42141,7 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 //
 // MessageText:
 //
-// Mobile Device Management (MDM) was blocked, possibly by Group Policy or the SetManagedExternally function.
+// Mobile Device Management (MDM) was blocked, possibly by Group Policy or the local management agent.
 //
 #define MENROLL_E_DEVICE_MANAGEMENT_BLOCKED _HRESULT_TYPEDEF_(0x80180026L)
 
@@ -42897,6 +43097,24 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 // Failed to send Window Dpi message.
 //
 #define ERROR_GRAPHICS_VAIL_FAILED_TO_SEND_COMPOSITION_WINDOW_DPI_MESSAGE _HRESULT_TYPEDEF_(0xC0262016L)
+
+//
+// MessageId: ERROR_GRAPHICS_LINK_CONFIGURATION_IN_PROGRESS
+//
+// MessageText:
+//
+// Link configuration for the display timing is still in progress.
+//
+#define ERROR_GRAPHICS_LINK_CONFIGURATION_IN_PROGRESS _HRESULT_TYPEDEF_(0xC0262017L)
+
+//
+// MessageId: ERROR_GRAPHICS_MPO_ALLOCATION_UNPINNED
+//
+// MessageText:
+//
+// The allocation for the MPO has been unpinned.
+//
+#define ERROR_GRAPHICS_MPO_ALLOCATION_UNPINNED _HRESULT_TYPEDEF_(0xC0262018L)
 
 //
 // Video Memory Manager (VidMM) subsystem errors {0x2100..0x21ff}
@@ -47796,6 +48014,15 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 #define TPM_E_TOO_MUCH_DATA              _HRESULT_TYPEDEF_(0x80290602L)
 
 //
+// MessageId: TPM_E_TPM_GENERATED_EPS
+//
+// MessageText:
+//
+// Unable to fetch EK Certificate if TPM-generated EPS (after a TPM2_ChangeEPS).
+//
+#define TPM_E_TPM_GENERATED_EPS          _HRESULT_TYPEDEF_(0x80290603L)
+
+//
 // If the application is designed to use TCG defined TPM return codes
 // then undefine the Windows defined codes for the same symbols. The application
 // declares usage of TCG return codes by defining WIN_OMIT_TSS_TPM_RETURN_CODES
@@ -50113,6 +50340,51 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 #define FVE_E_TPM_CONTEXT_SETUP_NOT_SUPPORTED _HRESULT_TYPEDEF_(0x803100E7L)
 
 //
+// MessageId: FVE_E_UPDATE_INVALID_CONFIG
+//
+// MessageText:
+//
+// The Secure Boot update was not applied due to a known incompatibility with the current BitLocker configuration.
+//
+#define FVE_E_UPDATE_INVALID_CONFIG      _HRESULT_TYPEDEF_(0x803100E8L)
+
+//
+// MessageId: FVE_E_AAD_SERVER_FAIL_RETRY_AFTER
+//
+// MessageText:
+//
+// The AAD request has failed and it has been advised to backoff to prevent throttling. Device will retry soon.
+//
+#define FVE_E_AAD_SERVER_FAIL_RETRY_AFTER _HRESULT_TYPEDEF_(0x803100E9L)
+
+//
+// MessageId: FVE_E_AAD_SERVER_FAIL_BACKOFF
+//
+// MessageText:
+//
+// The AAD request has failed due to server issues and it has been advised to backoff to prevent throttling. Device will retry soon.
+//
+#define FVE_E_AAD_SERVER_FAIL_BACKOFF    _HRESULT_TYPEDEF_(0x803100EAL)
+
+//
+// MessageId: FVE_E_DATASET_FULL
+//
+// MessageText:
+//
+// This operation cannot be completed because dataset is full.
+//
+#define FVE_E_DATASET_FULL               _HRESULT_TYPEDEF_(0x803100EBL)
+
+//
+// MessageId: FVE_E_METADATA_FULL
+//
+// MessageText:
+//
+// This operation cannot be completed because BitLocker Drive Encryption metadata area is full. Consider removing unnecessary key protectors for this drive.
+//
+#define FVE_E_METADATA_FULL              _HRESULT_TYPEDEF_(0x803100ECL)
+
+//
 // =======================================================
 // Windows Filtering Platform Error Messages
 // =======================================================
@@ -52017,6 +52289,51 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 #define ERROR_HV_MSR_ACCESS_FAILED       _NDIS_ERROR_TYPEDEF_(0xC0350080L)
 
 //
+// MessageId: ERROR_HV_INSUFFICIENT_MEMORY_MIRRORING
+//
+// MessageText:
+//
+// There is not enough memory in the hypervisor pool to complete the mirroring operation.
+//
+#define ERROR_HV_INSUFFICIENT_MEMORY_MIRRORING _NDIS_ERROR_TYPEDEF_(0xC0350081L)
+
+//
+// MessageId: ERROR_HV_INSUFFICIENT_CONTIGUOUS_MEMORY_MIRRORING
+//
+// MessageText:
+//
+// There is not enough contiguous memory in the hypervisor pool to complete the mirroring operation.
+//
+#define ERROR_HV_INSUFFICIENT_CONTIGUOUS_MEMORY_MIRRORING _NDIS_ERROR_TYPEDEF_(0xC0350082L)
+
+//
+// MessageId: ERROR_HV_INSUFFICIENT_CONTIGUOUS_ROOT_MEMORY
+//
+// MessageText:
+//
+// There is not enough contiguous memory in the root partition's pool to complete the operation.
+//
+#define ERROR_HV_INSUFFICIENT_CONTIGUOUS_ROOT_MEMORY _NDIS_ERROR_TYPEDEF_(0xC0350083L)
+
+//
+// MessageId: ERROR_HV_INSUFFICIENT_ROOT_MEMORY_MIRRORING
+//
+// MessageText:
+//
+// There is not enough memory in the root partition's pool to complete the mirroring operation.
+//
+#define ERROR_HV_INSUFFICIENT_ROOT_MEMORY_MIRRORING _NDIS_ERROR_TYPEDEF_(0xC0350084L)
+
+//
+// MessageId: ERROR_HV_INSUFFICIENT_CONTIGUOUS_ROOT_MEMORY_MIRRORING
+//
+// MessageText:
+//
+// There is not enough contiguous memory in the root partition's pool to complete the mirroring operation.
+//
+#define ERROR_HV_INSUFFICIENT_CONTIGUOUS_ROOT_MEMORY_MIRRORING _NDIS_ERROR_TYPEDEF_(0xC0350085L)
+
+//
 // MessageId: ERROR_HV_NOT_PRESENT
 //
 // MessageText:
@@ -52409,6 +52726,60 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 // The specified VTL does not have the permission to access the resource.
 //
 #define ERROR_VID_VTL_ACCESS_DENIED      _NDIS_ERROR_TYPEDEF_(0xC037002AL)
+
+//
+// MessageId: ERROR_VID_INSUFFICIENT_RESOURCES_RESERVE
+//
+// MessageText:
+//
+// Failed to allocate backing memory due to insufficient memory resources.
+//
+#define ERROR_VID_INSUFFICIENT_RESOURCES_RESERVE _NDIS_ERROR_TYPEDEF_(0xC037002BL)
+
+//
+// MessageId: ERROR_VID_INSUFFICIENT_RESOURCES_PHYSICAL_BUFFER
+//
+// MessageText:
+//
+// Failed to allocate memory for the physical buffer used to back certain internal structures.
+//
+#define ERROR_VID_INSUFFICIENT_RESOURCES_PHYSICAL_BUFFER _NDIS_ERROR_TYPEDEF_(0xC037002CL)
+
+//
+// MessageId: ERROR_VID_INSUFFICIENT_RESOURCES_HV_DEPOSIT
+//
+// MessageText:
+//
+// Failed to allocate memory to be deposited in the hypervisor.
+//
+#define ERROR_VID_INSUFFICIENT_RESOURCES_HV_DEPOSIT _NDIS_ERROR_TYPEDEF_(0xC037002DL)
+
+//
+// MessageId: ERROR_VID_MEMORY_TYPE_NOT_SUPPORTED
+//
+// MessageText:
+//
+// Memory type not supported for requested operation.
+//
+#define ERROR_VID_MEMORY_TYPE_NOT_SUPPORTED _NDIS_ERROR_TYPEDEF_(0xC037002EL)
+
+//
+// MessageId: ERROR_VID_INSUFFICIENT_RESOURCES_WITHDRAW
+//
+// MessageText:
+//
+// Failed to withdraw memory.
+//
+#define ERROR_VID_INSUFFICIENT_RESOURCES_WITHDRAW _NDIS_ERROR_TYPEDEF_(0xC037002FL)
+
+//
+// MessageId: ERROR_VID_PROCESS_ALREADY_SET
+//
+// MessageText:
+//
+// The process has already been set.
+//
+#define ERROR_VID_PROCESS_ALREADY_SET    _NDIS_ERROR_TYPEDEF_(0xC0370030L)
 
 //
 // Host compute service errors (0x0100-0x01ff)
@@ -52876,6 +53247,15 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 #define HCS_E_SYSTEM_NOT_CONFIGURED_FOR_OPERATION _HRESULT_TYPEDEF_(0x80370120L)
 
 //
+// MessageId: HCS_E_OPERATION_ALREADY_CANCELLED
+//
+// MessageText:
+//
+// The operation has already been cancelled.
+//
+#define HCS_E_OPERATION_ALREADY_CANCELLED _HRESULT_TYPEDEF_(0x80370121L)
+
+//
 // Virtual networking errors (0x0200-0x02ff)
 //
 //
@@ -53098,6 +53478,20 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 // The active virtual trust level is not enabled on the specified virtual processor.
 //
 #define VM_SAVED_STATE_DUMP_E_VP_VTL_NOT_ENABLED _HRESULT_TYPEDEF_(0xC0370509L)
+
+
+//
+// DM / Resize related error codes (0x0600-0x06ff)
+//
+
+//
+// MessageId: ERROR_DM_OPERATION_LIMIT_EXCEEDED
+//
+// MessageText:
+//
+// The attempted DM / resize operation exceeds the supported size.
+//
+#define ERROR_DM_OPERATION_LIMIT_EXCEEDED _HRESULT_TYPEDEF_(0xC0370600L)
 
 
 //
@@ -57363,6 +57757,15 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 #define ERROR_SPACES_CACHE_FULL          _HRESULT_TYPEDEF_(0x80E70026L)
 
 //
+// MessageId: ERROR_SPACES_REPAIR_IN_PROGRESS
+//
+// MessageText:
+//
+// Repair is in progress.
+//
+#define ERROR_SPACES_REPAIR_IN_PROGRESS  _HRESULT_TYPEDEF_(0x80E70027L)
+
+//
 // Volsnap errors
 //
 // Success
@@ -58034,6 +58437,20 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 // The desired element already exists.
 //
 #define DXGI_ERROR_ALREADY_EXISTS        _HRESULT_TYPEDEF_(0x887A0036L)
+
+
+//
+// DXGI errors that are produced by the DDisplay
+//
+
+//
+// MessageId: DXGI_ERROR_MPO_UNPINNED
+//
+// MessageText:
+//
+// The allocation of the MPO plane has been unpinned
+//
+#define DXGI_ERROR_MPO_UNPINNED          _HRESULT_TYPEDEF_(0x887A0064L)
 
 
 //
@@ -64481,5 +64898,14 @@ FORCEINLINE _Translates_Win32_to_HRESULT_(x) HRESULT HRESULT_FROM_WIN32(unsigned
 // The shared ring buffers of the IoRing are corrupt.
 //
 #define IORING_E_CORRUPT                 _HRESULT_TYPEDEF_(0x80460007L)
+
+//
+// MessageId: IORING_E_COMPLETION_QUEUE_TOO_FULL
+//
+// MessageText:
+//
+// The completion queue does not have enough free space, to post completions, for all entries being submitted.
+//
+#define IORING_E_COMPLETION_QUEUE_TOO_FULL _HRESULT_TYPEDEF_(0x80460008L)
 
 #endif//_WINERROR_

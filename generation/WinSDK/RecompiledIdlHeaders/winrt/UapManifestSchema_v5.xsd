@@ -13,6 +13,7 @@
            xmlns:uap11="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"
            xmlns:wincap3="http://schemas.microsoft.com/appx/manifest/foundation/windows10/windowscapabilities/3"
            xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
+           xmlns:desktop10="http://schemas.microsoft.com/appx/manifest/desktop/windows10/10"
            xmlns:iot2="http://schemas.microsoft.com/appx/manifest/iot/windows10/2"
            >
 
@@ -26,6 +27,7 @@
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/foundation/windows10/windowscapabilities/3"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/iot/windows10/2"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/10"/>
 
   <xs:element name="Extension" substitutionGroup="f:ApplicationExtensionChoice">
     <xs:complexType>
@@ -171,8 +173,15 @@
     <xs:sequence minOccurs="0" maxOccurs="1000">
       <xs:element name="ExecutionAlias" minOccurs="0">
         <xs:complexType>
+          <xs:choice minOccurs="0">
+            <xs:element ref="desktop10:SupportedProtocols" />
+          </xs:choice> 
           <xs:attribute name="Alias" type="t:ST_ExecutableNoPath" use="required"/>
           <xs:attribute ref="uap8:AllowOverride" use="optional"/>
+          <xs:attribute ref="desktop10:UseDesktopChangeRouter" use="optional"/>
+          <xs:attribute ref="desktop10:DropTarget" use="optional"/>
+          <xs:attribute ref="desktop10:UseUrl" use="optional"/>
+          <xs:attribute ref="desktop10:EnvironmentPath" use="optional"/>
         </xs:complexType>
       </xs:element>
       <xs:element ref="uap8:ExecutionAlias" minOccurs="0"/>

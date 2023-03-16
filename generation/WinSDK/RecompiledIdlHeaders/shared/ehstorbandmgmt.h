@@ -334,6 +334,9 @@ typedef struct _SET_SID_PARAMETERS
 #define IOCTL_EHSTOR_BANDMGMT_SET_SID           \
             CTL_CODE(IOCTL_STORAGE_BASE, 0x52b, METHOD_BUFFERED, \
                      FILE_READ_ACCESS | FILE_WRITE_ACCESS)
+#define IOCTL_EHSTOR_BANDMGMT_ERASE_ALL_BANDS   \
+            CTL_CODE(IOCTL_STORAGE_BASE, 0x52c, METHOD_BUFFERED, \
+                     FILE_READ_ACCESS | FILE_WRITE_ACCESS)
 
 //
 // TCG Storage Silo Driver specific IOCTLs

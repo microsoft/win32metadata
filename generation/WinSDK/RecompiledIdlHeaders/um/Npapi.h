@@ -315,7 +315,9 @@ NPGetPersistentUseOptionsForConnection (
     _In_    LPWSTR  lpRemotePath,
     _In_reads_bytes_opt_(cbReadUseOptions) LPBYTE lpReadUseOptions,
     _In_ DWORD cbReadUseOptions,
-    _Out_writes_bytes_(*lpSizeWriteUseOptions) LPBYTE lpWriteUseOptions,
+    _When_(return == 0, _Out_writes_bytes_to_( *lpSizeWriteUseOptions, *lpSizeWriteUseOptions ) )
+    _When_(return != 0, _Out_writes_bytes_to_( *lpSizeWriteUseOptions,  0) )
+        LPBYTE lpWriteUseOptions,
     _Inout_ LPDWORD lpSizeWriteUseOptions
     );
 
@@ -323,7 +325,9 @@ typedef DWORD (APIENTRY *PF_NPGetPersistentUseOptionsForConnection) (
     _In_    LPWSTR  lpRemotePath,
     _In_reads_bytes_(cbReadUseOptions) LPBYTE lpReadUseOptions,
     _In_ DWORD cbReadUseOptions,
-    _Out_writes_bytes_(*lpSizeWriteUseOptions) LPBYTE lpWriteUseOptions,
+    _When_(return == 0, _Out_writes_bytes_to_( *lpSizeWriteUseOptions, *lpSizeWriteUseOptions ) )
+    _When_(return != 0, _Out_writes_bytes_to_( *lpSizeWriteUseOptions,  0) )
+        LPBYTE lpWriteUseOptions,
     _Inout_ LPDWORD lpSizeWriteUseOptions
     );
 

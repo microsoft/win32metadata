@@ -1653,7 +1653,7 @@ Revision History:
  */
 #define DS_ABSALIGN         0x01L
 #define DS_SYSMODAL         0x02L
-#define DS_LOCALEDIT        0x20L   /* Edit items get Local storage. */
+#define DS_LOCALEDIT        0x20L   /* 16-bit: Edit items get Local storage. 32-bit and up: meaningless. */
 #define DS_SETFONT          0x40L   /* User specified font for Dlg controls */
 #define DS_MODALFRAME       0x80L   /* Can be combined with WS_CAPTION  */
 #define DS_NOIDLEMSG        0x100L  /* WM_ENTERIDLE message will not be sent */

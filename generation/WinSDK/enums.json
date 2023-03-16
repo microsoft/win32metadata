@@ -1816,6 +1816,7 @@
     ]
   },
   {
+    "namespace": "Windows.Win32.System.Memory",
     "name": "SECTION_FLAGS",
     "flags": true,
     "autoPopulate": {
@@ -1825,7 +1826,7 @@
     "members": [
       {
         "name": "SECTION_ALL_ACCESS",
-        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.STANDARD_RIGHTS_REQUIRED|SECTION_QUERY|SECTION_MAP_WRITE|SECTION_MAP_READ|SECTION_MAP_EXECUTE|SECTION_EXTEND_SIZE)"
+        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.STANDARD_RIGHTS_REQUIRED|SECTION_QUERY|SECTION_MAP_WRITE|SECTION_MAP_READ|SECTION_MAP_EXECUTE|SECTION_EXTEND_SIZE)"
       }
     ],
     "uses": []
@@ -4227,6 +4228,21 @@
     "name": "NTSTATUS_FACILITY_CODE",
     "autoPopulate": {
       "filter": "FACILITY_",
+      "header": "ntstatus.h"
+    },
+    "members": [
+      {
+        "name": "FACILITY_MCA_ERROR_CODE"
+      }
+    ],
+    "uses": []
+  },
+  {
+    "namespace": "Windows.Win32.Foundation",
+    "type": "uint",
+    "name": "NTSTATUS_SEVERITY_CODE",
+    "autoPopulate": {
+      "filter": "STATUS_SEVERITY_",
       "header": "ntstatus.h"
     },
     "members": [],
@@ -11758,7 +11774,7 @@
     ]
   },
   {
-    "name": "POWER_SETTING_REGISTER_NOTIFICATION_FLAGS",
+    "name": "REGISTER_NOTIFICATION_FLAGS",
     "members": [
       {
         "name": "DEVICE_NOTIFY_SERVICE_HANDLE",
@@ -11770,11 +11786,14 @@
       {
         "name": "DEVICE_NOTIFY_WINDOW_HANDLE",
         "value": "0"
+      },
+      {
+        "name": "DEVICE_NOTIFY_ALL_INTERFACE_CLASSES"
       }
     ],
     "uses": [
       {
-        "method": "PowerSettingRegisterNotification",
+        "method": "RegisterDeviceNotificationA",
         "parameter": "Flags"
       },
       {
@@ -11782,7 +11801,15 @@
         "parameter": "Flags"
       },
       {
-        "method": "RegisterDeviceNotificationA",
+        "method": "RegisterSuspendResumeNotification",
+        "parameter": "Flags"
+      },
+      {
+        "method": "PowerSettingRegisterNotification",
+        "parameter": "Flags"
+      },
+      {
+        "method": "PowerRegisterSuspendResumeNotification",
         "parameter": "Flags"
       }
     ]
@@ -29485,7 +29512,7 @@
     ],
     "uses": [
       {
-        "method": "K32EnumProcessModulesEx",
+        "method": "EnumProcessModulesEx",
         "parameter": "dwFilterFlag"
       }
     ]
@@ -30386,6 +30413,10 @@
       {
         "name": "ISC_REQ_DEFERRED_CRED_VALIDATION",
         "value": "0x0000000200000000"
+      },
+      {
+        "name": "ISC_REQ_NO_POST_HANDSHAKE_AUTH",
+        "value": "0x0000000400000000"
       }
     ]
   },
@@ -30393,7 +30424,7 @@
     "name": "ISC_REQ_FLAGS",
     "flags": true,
     "autoPopulate": {
-      "filter": "ISC_REQ_(?!MESSAGES|DEFERRED_CRED_VALIDATION)",
+      "filter": "ISC_REQ_(?!MESSAGES|DEFERRED_CRED_VALIDATION|NO_POST_HANDSHAKE_AUTH)",
       "header": "sspi.h"
     },
     "members": [],
@@ -31067,10 +31098,6 @@
       {
         "struct": "BITMAPV5HEADER",
         "field": "bV5Compression"
-      },
-      {
-        "struct": "BITMAPINFOHEADER",
-        "field": "biCompression"
       },
       {
         "struct": "BITMAPV4HEADER",
@@ -35505,53 +35532,6 @@
     ]
   },
   {
-    "namespace": "Windows.Win32.UI.Controls.Dialogs",
-    "name": "COMMON_DIALOG_NOTIFICATION",
-    "type": "int",
-    "members": [
-      {
-        "name": "CDN_FIRST",
-        "value": "-601"
-      },
-      {
-        "name": "CDN_LAST",
-        "value": "-699"
-      },
-      {
-        "name": "CDN_INITDONE",
-        "value": "-601"
-      },
-      {
-        "name": "CDN_SELCHANGE",
-        "value": "-602"
-      },
-      {
-        "name": "CDN_FOLDERCHANGE",
-        "value": "-603"
-      },
-      {
-        "name": "CDN_SHAREVIOLATION",
-        "value": "-604"
-      },
-      {
-        "name": "CDN_HELP",
-        "value": "-605"
-      },
-      {
-        "name": "CDN_FILEOK",
-        "value": "-606"
-      },
-      {
-        "name": "CDN_TYPECHANGE",
-        "value": "-607"
-      },
-      {
-        "name": "CDN_INCLUDEITEM",
-        "value": "-608"
-      }
-    ]
-  },
-  {
     "type": "uint",
     "name": "DXGI_USAGE",
     "flags": true,
@@ -35955,6 +35935,131 @@
       {
         "struct": "CF_POPULATION_POLICY",
         "field": "Modifier"
+      }
+    ]
+  },
+  {
+    "name": "WSAPOLL_EVENT_FLAGS",
+    "type": "short",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "POLL",
+      "header": "winsock2.h"
+    },
+    "uses": [
+      {
+        "struct": "WSAPOLLFD",
+        "field": "events"
+      },
+      {
+        "struct": "WSAPOLLFD",
+        "field": "revents"
+      }
+    ]
+  },
+  {
+    "name": "WINSOCK_SHUTDOWN_HOW",
+    "type": "int",
+    "autoPopulate": {
+      "filter": "SD_",
+      "header": "winsock2.h"
+    },
+    "uses": [
+      {
+        "method": "shutdown",
+        "parameter": "how"
+      }
+    ]
+  },
+  {
+    "name": "WINSOCK_SOCKET_TYPE",
+    "type": "int",
+    "members": [
+      {
+        "name": "SOCK_STREAM"
+      },
+      {
+        "name": "SOCK_DGRAM"
+      },
+      {
+        "name": "SOCK_RAW"
+      },
+      {
+        "name": "SOCK_RDM"
+      },
+      {
+        "name": "SOCK_SEQPACKET"
+      }
+    ],
+    "uses": [
+      {
+        "method": "socket",
+        "parameter": "type"
+      }
+    ]
+  },
+  {
+    "namespace": "Windows.Win32.System.MessageQueuing",
+    "name": "MQQUEUEACCESSMASK",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "MQSEC_",
+      "header": "mq.h"
+    },
+    "members": [
+      {
+        "name": "MQSEC_DELETE_QUEUE",
+        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.DELETE)"
+      },
+      {
+        "name": "MQSEC_GET_QUEUE_PERMISSIONS",
+        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.READ_CONTROL)"
+      },
+      {
+        "name": "MQSEC_CHANGE_QUEUE_PERMISSIONS",
+        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.WRITE_DAC)"
+      },
+      {
+        "name": "MQSEC_TAKE_QUEUE_OWNERSHIP",
+        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.WRITE_OWNER)"
+      },
+      {
+        "name": "MQSEC_RECEIVE_MESSAGE",
+        "value": "(MQSEC_DELETE_MESSAGE | MQSEC_PEEK_MESSAGE)"
+      },
+      {
+        "name": "MQSEC_RECEIVE_JOURNAL_MESSAGE",
+        "value": "(MQSEC_DELETE_JOURNAL_MESSAGE | MQSEC_PEEK_MESSAGE)"
+      },
+      {
+        "name": "MQSEC_QUEUE_GENERIC_READ",
+        "value": "(MQSEC_GET_QUEUE_PROPERTIES | MQSEC_GET_QUEUE_PERMISSIONS | MQSEC_RECEIVE_MESSAGE | MQSEC_RECEIVE_JOURNAL_MESSAGE)"
+      },
+      {
+        "name": "MQSEC_QUEUE_GENERIC_WRITE",
+        "value": "(MQSEC_GET_QUEUE_PROPERTIES | MQSEC_GET_QUEUE_PERMISSIONS | MQSEC_WRITE_MESSAGE)"
+      },
+      {
+        "name": "MQSEC_QUEUE_GENERIC_ALL",
+        "value": "(MQSEC_RECEIVE_MESSAGE | MQSEC_RECEIVE_JOURNAL_MESSAGE | MQSEC_WRITE_MESSAGE | MQSEC_SET_QUEUE_PROPERTIES | MQSEC_GET_QUEUE_PROPERTIES | MQSEC_DELETE_QUEUE | MQSEC_GET_QUEUE_PERMISSIONS | MQSEC_CHANGE_QUEUE_PERMISSIONS | MQSEC_TAKE_QUEUE_OWNERSHIP)"
+      }
+    ],
+    "uses": []
+  },
+  {
+    "namespace": "Windows.Win32.Foundation",
+    "name": "GENERIC_ACCESS_RIGHTS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "GENERIC_",
+      "header": "winnt.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "interface": "IWICImagingFactory",
+        "method": "CreateDecoderFromFilename",
+        "parameter": "dwDesiredAccess"
       }
     ]
   }

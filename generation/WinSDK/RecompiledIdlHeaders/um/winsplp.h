@@ -293,6 +293,18 @@ typedef struct _SPLCLIENT_INFO_2_V3{
     typedef SPLCLIENT_INFO_2_LONGHORN SPLCLIENT_INFO_2, *PSPLCLIENT_INFO_2, *LPSPLCLIENT_INFO_2;
 #endif
 
+// This structure is similar to that of DOC_INFO_1 defined in winspool.w. The DocName, OutputFile and Datatype need
+// to be at the beginning of the structure to align with DOC_INFO_1. 
+//
+typedef struct _DOC_INFO_INTERNAL{
+    LPTSTR   pDocName;
+    LPTSTR   pOutputFile;
+    LPTSTR   pDatatype;
+    BOOL     bLowILJob;
+    HANDLE   hTokenLowIL;
+} DOC_INFO_INTERNAL, *PDOC_INFO_INTERNAL, *LPDOC_INFO_INTERNAL;
+
+#define DOC_INFO_INTERNAL_LEVEL 100
 
 #if (NTDDI_VERSION >= NTDDI_VISTA)
 
@@ -974,6 +986,10 @@ typedef struct _PRINTPROVIDOR
         _Out_ LPDWORD     pcchRequiredModelNameSize,
         _Out_ LPDWORD     pdwRank0Matches
         );
+
+    HRESULT (*fpInstallPrinterDriverPackageFromConnection)(
+        _In_  LPCWSTR     pcszConnectionName
+        );
 #endif // (NTDDI_VERSION >= NTDDI_VISTA)
 
 #if (NTDDI_VERSION >= NTDDI_WIN8)
@@ -1097,6 +1113,19 @@ typedef struct _PRINTPROVIDOR
         _In_reads_bytes_(jobAttributeGroupBufferSize) BYTE* jobAttributeGroupBuffer,
         _Out_ DWORD* ippResponseBufferSize,
         _Outptr_result_bytebuffer_(*ippResponseBufferSize) BYTE** ippResponseBuffer
+        );
+
+    HRESULT (*fpIppCreateJobOnPrinterWithAttributes)
+    (
+        _In_ HANDLE hPrinter,
+        _In_ DWORD jobId,
+        _In_ PCWSTR pdlFormat,
+        _In_ DWORD jobAttributesBufferSize,
+        _In_reads_bytes_(jobAttributesBufferSize) PBYTE jobAttributeGroupBuffer,
+        _In_ DWORD operationAttributesBufferSize,
+        _In_reads_bytes_opt_(operationAttributesBufferSize) PBYTE operationAttributeGroupBuffer,
+        _Out_ PDWORD ippResponseBufferSize,
+        _Outptr_result_bytebuffer_(*ippResponseBufferSize) PBYTE* ippResponseBuffer
         );
 
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_19H1)

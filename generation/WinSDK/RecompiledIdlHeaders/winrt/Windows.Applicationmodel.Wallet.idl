@@ -190,12 +190,13 @@ namespace Windows
     {
         namespace Wallet
         {
-            [contractversion(1.0)]
+            [contractversion(2.0)]
             apicontract WalletContract
             {
             }
 
             [contract(Windows.ApplicationModel.Wallet.WalletContract, 1.0)]
+            [deprecated("WalletActionKind is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Wallet.WalletContract, 2.0)]
             enum WalletActionKind
             {
                 OpenItem         = 0,
@@ -206,6 +207,7 @@ namespace Windows
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("WalletBarcodeSymbology is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             enum WalletBarcodeSymbology
             {
                 Invalid = 0,
@@ -223,6 +225,7 @@ namespace Windows
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("WalletDetailViewPosition is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             enum WalletDetailViewPosition
             {
                 Hidden          = 0,
@@ -243,6 +246,7 @@ namespace Windows
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("WalletItemKind is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             enum WalletItemKind
             {
                 Invalid           = 0,
@@ -255,6 +259,7 @@ namespace Windows
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("WalletSummaryViewPosition is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             enum WalletSummaryViewPosition
             {
                 Hidden = 0,
@@ -263,199 +268,213 @@ namespace Windows
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("IWalletBarcode is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             [exclusiveto(Windows.ApplicationModel.Wallet.WalletBarcode)]
             [uuid(4F857B29-DE80-4EA4-A1CD-81CD084DAC27)]
             interface IWalletBarcode : IInspectable
             {
-                [propget] HRESULT Symbology([out] [retval] Windows.ApplicationModel.Wallet.WalletBarcodeSymbology* value);
-                [propget] HRESULT Value([out] [retval] HSTRING* value);
-                HRESULT GetImageAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.Storage.Streams.IRandomAccessStreamReference*>** operation);
+                [deprecated("IWalletBarcode is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT Symbology([out] [retval] Windows.ApplicationModel.Wallet.WalletBarcodeSymbology* value);
+                [deprecated("IWalletBarcode is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT Value([out] [retval] HSTRING* value);
+                [deprecated("IWalletBarcode is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] HRESULT GetImageAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.Storage.Streams.IRandomAccessStreamReference*>** operation);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("IWalletBarcodeFactory is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             [exclusiveto(Windows.ApplicationModel.Wallet.WalletBarcode)]
             [uuid(30117161-ED9C-469E-BBFD-306C95EA7108)]
             interface IWalletBarcodeFactory : IInspectable
             {
-                HRESULT CreateWalletBarcode([in] Windows.ApplicationModel.Wallet.WalletBarcodeSymbology symbology, [in] HSTRING value, [out] [retval] Windows.ApplicationModel.Wallet.WalletBarcode** barcode);
-                HRESULT CreateCustomWalletBarcode([in] Windows.Storage.Streams.IRandomAccessStreamReference* streamToBarcodeImage, [out] [retval] Windows.ApplicationModel.Wallet.WalletBarcode** barcode);
+                [deprecated("IWalletBarcodeFactory is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] HRESULT CreateWalletBarcode([in] Windows.ApplicationModel.Wallet.WalletBarcodeSymbology symbology, [in] HSTRING value, [out] [retval] Windows.ApplicationModel.Wallet.WalletBarcode** barcode);
+                [deprecated("IWalletBarcodeFactory is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] HRESULT CreateCustomWalletBarcode([in] Windows.Storage.Streams.IRandomAccessStreamReference* streamToBarcodeImage, [out] [retval] Windows.ApplicationModel.Wallet.WalletBarcode** barcode);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             [exclusiveto(Windows.ApplicationModel.Wallet.WalletItem)]
             [uuid(20B54BE8-118D-4EC4-996C-B963E7BD3E74)]
             interface IWalletItem : IInspectable
             {
-                [propget] HRESULT DisplayName([out] [retval] HSTRING* value);
-                [propput] HRESULT DisplayName([in] HSTRING value);
-                [propget] HRESULT Id([out] [retval] HSTRING* value);
-                [propget] HRESULT IsAcknowledged([out] [retval] boolean* value);
-                [propput] HRESULT IsAcknowledged([in] boolean value);
-                [propget] HRESULT IssuerDisplayName([out] [retval] HSTRING* value);
-                [propput] HRESULT IssuerDisplayName([in] HSTRING value);
-                [propget] HRESULT LastUpdated([out] [retval] Windows.Foundation.IReference<Windows.Foundation.DateTime>** value);
-                [propput] HRESULT LastUpdated([in] Windows.Foundation.IReference<Windows.Foundation.DateTime>* value);
-                [propget] HRESULT Kind([out] [retval] Windows.ApplicationModel.Wallet.WalletItemKind* value);
-                [propget] HRESULT Barcode([out] [retval] Windows.ApplicationModel.Wallet.WalletBarcode** value);
-                [propput] HRESULT Barcode([in] Windows.ApplicationModel.Wallet.WalletBarcode* value);
-                [propget] HRESULT ExpirationDate([out] [retval] Windows.Foundation.IReference<Windows.Foundation.DateTime>** value);
-                [propput] HRESULT ExpirationDate([in] Windows.Foundation.IReference<Windows.Foundation.DateTime>* value);
-                [propget] HRESULT Logo159x159([out] [retval] Windows.Storage.Streams.IRandomAccessStreamReference** value);
-                [propput] HRESULT Logo159x159([in] Windows.Storage.Streams.IRandomAccessStreamReference* value);
-                [propget] HRESULT Logo336x336([out] [retval] Windows.Storage.Streams.IRandomAccessStreamReference** value);
-                [propput] HRESULT Logo336x336([in] Windows.Storage.Streams.IRandomAccessStreamReference* value);
-                [propget] HRESULT Logo99x99([out] [retval] Windows.Storage.Streams.IRandomAccessStreamReference** value);
-                [propput] HRESULT Logo99x99([in] Windows.Storage.Streams.IRandomAccessStreamReference* value);
-                [propget] HRESULT DisplayMessage([out] [retval] HSTRING* value);
-                [propput] HRESULT DisplayMessage([in] HSTRING value);
-                [propget] HRESULT IsDisplayMessageLaunchable([out] [retval] boolean* value);
-                [propput] HRESULT IsDisplayMessageLaunchable([in] boolean value);
-                [propget] HRESULT LogoText([out] [retval] HSTRING* value);
-                [propput] HRESULT LogoText([in] HSTRING value);
-                [propget] HRESULT HeaderColor([out] [retval] Windows.UI.Color* value);
-                [propput] HRESULT HeaderColor([in] Windows.UI.Color value);
-                [propget] HRESULT BodyColor([out] [retval] Windows.UI.Color* value);
-                [propput] HRESULT BodyColor([in] Windows.UI.Color value);
-                [propget] HRESULT HeaderFontColor([out] [retval] Windows.UI.Color* value);
-                [propput] HRESULT HeaderFontColor([in] Windows.UI.Color value);
-                [propget] HRESULT BodyFontColor([out] [retval] Windows.UI.Color* value);
-                [propput] HRESULT BodyFontColor([in] Windows.UI.Color value);
-                [propget] HRESULT HeaderBackgroundImage([out] [retval] Windows.Storage.Streams.IRandomAccessStreamReference** value);
-                [propput] HRESULT HeaderBackgroundImage([in] Windows.Storage.Streams.IRandomAccessStreamReference* value);
-                [propget] HRESULT BodyBackgroundImage([out] [retval] Windows.Storage.Streams.IRandomAccessStreamReference** value);
-                [propput] HRESULT BodyBackgroundImage([in] Windows.Storage.Streams.IRandomAccessStreamReference* value);
-                [propget] HRESULT LogoImage([out] [retval] Windows.Storage.Streams.IRandomAccessStreamReference** value);
-                [propput] HRESULT LogoImage([in] Windows.Storage.Streams.IRandomAccessStreamReference* value);
-                [propget] HRESULT PromotionalImage([out] [retval] Windows.Storage.Streams.IRandomAccessStreamReference** value);
-                [propput] HRESULT PromotionalImage([in] Windows.Storage.Streams.IRandomAccessStreamReference* value);
-                [propget] HRESULT RelevantDate([out] [retval] Windows.Foundation.IReference<Windows.Foundation.DateTime>** value);
-                [propput] HRESULT RelevantDate([in] Windows.Foundation.IReference<Windows.Foundation.DateTime>* value);
-                [propget] HRESULT RelevantDateDisplayMessage([out] [retval] HSTRING* value);
-                [propput] HRESULT RelevantDateDisplayMessage([in] HSTRING value);
-                [propget] HRESULT TransactionHistory([out] [retval] Windows.Foundation.Collections.IMap<HSTRING, Windows.ApplicationModel.Wallet.WalletTransaction*>** value);
-                [propget] HRESULT RelevantLocations([out] [retval] Windows.Foundation.Collections.IMap<HSTRING, Windows.ApplicationModel.Wallet.WalletRelevantLocation*>** value);
-                [propget] HRESULT IsMoreTransactionHistoryLaunchable([out] [retval] boolean* value);
-                [propput] HRESULT IsMoreTransactionHistoryLaunchable([in] boolean value);
-                [propget] HRESULT DisplayProperties([out] [retval] Windows.Foundation.Collections.IMap<HSTRING, Windows.ApplicationModel.Wallet.WalletItemCustomProperty*>** value);
-                [propget] HRESULT Verbs([out] [retval] Windows.Foundation.Collections.IMap<HSTRING, Windows.ApplicationModel.Wallet.WalletVerb*>** value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT DisplayName([out] [retval] HSTRING* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT DisplayName([in] HSTRING value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT Id([out] [retval] HSTRING* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT IsAcknowledged([out] [retval] boolean* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT IsAcknowledged([in] boolean value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT IssuerDisplayName([out] [retval] HSTRING* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT IssuerDisplayName([in] HSTRING value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT LastUpdated([out] [retval] Windows.Foundation.IReference<Windows.Foundation.DateTime>** value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT LastUpdated([in] Windows.Foundation.IReference<Windows.Foundation.DateTime>* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT Kind([out] [retval] Windows.ApplicationModel.Wallet.WalletItemKind* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT Barcode([out] [retval] Windows.ApplicationModel.Wallet.WalletBarcode** value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT Barcode([in] Windows.ApplicationModel.Wallet.WalletBarcode* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT ExpirationDate([out] [retval] Windows.Foundation.IReference<Windows.Foundation.DateTime>** value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT ExpirationDate([in] Windows.Foundation.IReference<Windows.Foundation.DateTime>* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT Logo159x159([out] [retval] Windows.Storage.Streams.IRandomAccessStreamReference** value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT Logo159x159([in] Windows.Storage.Streams.IRandomAccessStreamReference* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT Logo336x336([out] [retval] Windows.Storage.Streams.IRandomAccessStreamReference** value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT Logo336x336([in] Windows.Storage.Streams.IRandomAccessStreamReference* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT Logo99x99([out] [retval] Windows.Storage.Streams.IRandomAccessStreamReference** value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT Logo99x99([in] Windows.Storage.Streams.IRandomAccessStreamReference* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT DisplayMessage([out] [retval] HSTRING* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT DisplayMessage([in] HSTRING value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT IsDisplayMessageLaunchable([out] [retval] boolean* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT IsDisplayMessageLaunchable([in] boolean value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT LogoText([out] [retval] HSTRING* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT LogoText([in] HSTRING value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT HeaderColor([out] [retval] Windows.UI.Color* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT HeaderColor([in] Windows.UI.Color value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT BodyColor([out] [retval] Windows.UI.Color* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT BodyColor([in] Windows.UI.Color value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT HeaderFontColor([out] [retval] Windows.UI.Color* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT HeaderFontColor([in] Windows.UI.Color value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT BodyFontColor([out] [retval] Windows.UI.Color* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT BodyFontColor([in] Windows.UI.Color value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT HeaderBackgroundImage([out] [retval] Windows.Storage.Streams.IRandomAccessStreamReference** value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT HeaderBackgroundImage([in] Windows.Storage.Streams.IRandomAccessStreamReference* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT BodyBackgroundImage([out] [retval] Windows.Storage.Streams.IRandomAccessStreamReference** value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT BodyBackgroundImage([in] Windows.Storage.Streams.IRandomAccessStreamReference* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT LogoImage([out] [retval] Windows.Storage.Streams.IRandomAccessStreamReference** value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT LogoImage([in] Windows.Storage.Streams.IRandomAccessStreamReference* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT PromotionalImage([out] [retval] Windows.Storage.Streams.IRandomAccessStreamReference** value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT PromotionalImage([in] Windows.Storage.Streams.IRandomAccessStreamReference* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT RelevantDate([out] [retval] Windows.Foundation.IReference<Windows.Foundation.DateTime>** value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT RelevantDate([in] Windows.Foundation.IReference<Windows.Foundation.DateTime>* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT RelevantDateDisplayMessage([out] [retval] HSTRING* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT RelevantDateDisplayMessage([in] HSTRING value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT TransactionHistory([out] [retval] Windows.Foundation.Collections.IMap<HSTRING, Windows.ApplicationModel.Wallet.WalletTransaction*>** value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT RelevantLocations([out] [retval] Windows.Foundation.Collections.IMap<HSTRING, Windows.ApplicationModel.Wallet.WalletRelevantLocation*>** value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT IsMoreTransactionHistoryLaunchable([out] [retval] boolean* value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT IsMoreTransactionHistoryLaunchable([in] boolean value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT DisplayProperties([out] [retval] Windows.Foundation.Collections.IMap<HSTRING, Windows.ApplicationModel.Wallet.WalletItemCustomProperty*>** value);
+                [deprecated("IWalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT Verbs([out] [retval] Windows.Foundation.Collections.IMap<HSTRING, Windows.ApplicationModel.Wallet.WalletVerb*>** value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("IWalletItemCustomProperty is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             [exclusiveto(Windows.ApplicationModel.Wallet.WalletItemCustomProperty)]
             [uuid(B94B40F3-FA00-40FD-98DC-9DE46697F1E7)]
             interface IWalletItemCustomProperty : IInspectable
             {
-                [propget] HRESULT Name([out] [retval] HSTRING* value);
-                [propput] HRESULT Name([in] HSTRING value);
-                [propget] HRESULT Value([out] [retval] HSTRING* value);
-                [propput] HRESULT Value([in] HSTRING value);
-                [propget] HRESULT AutoDetectLinks([out] [retval] boolean* value);
-                [propput] HRESULT AutoDetectLinks([in] boolean value);
-                [propget] HRESULT DetailViewPosition([out] [retval] Windows.ApplicationModel.Wallet.WalletDetailViewPosition* value);
-                [propput] HRESULT DetailViewPosition([in] Windows.ApplicationModel.Wallet.WalletDetailViewPosition value);
-                [propget] HRESULT SummaryViewPosition([out] [retval] Windows.ApplicationModel.Wallet.WalletSummaryViewPosition* value);
-                [propput] HRESULT SummaryViewPosition([in] Windows.ApplicationModel.Wallet.WalletSummaryViewPosition value);
+                [deprecated("IWalletItemCustomProperty is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT Name([out] [retval] HSTRING* value);
+                [deprecated("IWalletItemCustomProperty is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT Name([in] HSTRING value);
+                [deprecated("IWalletItemCustomProperty is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT Value([out] [retval] HSTRING* value);
+                [deprecated("IWalletItemCustomProperty is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT Value([in] HSTRING value);
+                [deprecated("IWalletItemCustomProperty is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT AutoDetectLinks([out] [retval] boolean* value);
+                [deprecated("IWalletItemCustomProperty is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT AutoDetectLinks([in] boolean value);
+                [deprecated("IWalletItemCustomProperty is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT DetailViewPosition([out] [retval] Windows.ApplicationModel.Wallet.WalletDetailViewPosition* value);
+                [deprecated("IWalletItemCustomProperty is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT DetailViewPosition([in] Windows.ApplicationModel.Wallet.WalletDetailViewPosition value);
+                [deprecated("IWalletItemCustomProperty is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT SummaryViewPosition([out] [retval] Windows.ApplicationModel.Wallet.WalletSummaryViewPosition* value);
+                [deprecated("IWalletItemCustomProperty is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT SummaryViewPosition([in] Windows.ApplicationModel.Wallet.WalletSummaryViewPosition value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("IWalletItemCustomProperty is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             [exclusiveto(Windows.ApplicationModel.Wallet.WalletItemCustomProperty)]
             [uuid(D0046A44-61A1-41AA-B259-A5610AB5D575)]
             interface IWalletItemCustomPropertyFactory : IInspectable
             {
-                HRESULT CreateWalletItemCustomProperty([in] HSTRING name, [in] HSTRING value, [out] [retval] Windows.ApplicationModel.Wallet.WalletItemCustomProperty** walletItemCustomProperty);
+                [deprecated("IWalletItemCustomProperty is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] HRESULT CreateWalletItemCustomProperty([in] HSTRING name, [in] HSTRING value, [out] [retval] Windows.ApplicationModel.Wallet.WalletItemCustomProperty** walletItemCustomProperty);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("IWalletItemFactory is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             [exclusiveto(Windows.ApplicationModel.Wallet.WalletItem)]
             [uuid(53E27470-4F0B-4A3E-99E5-0BBB1EAB38D4)]
             interface IWalletItemFactory : IInspectable
             {
-                HRESULT CreateWalletItem([in] Windows.ApplicationModel.Wallet.WalletItemKind kind, [in] HSTRING displayName, [out] [retval] Windows.ApplicationModel.Wallet.WalletItem** walletItem);
+                [deprecated("IWalletItemFactory is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] HRESULT CreateWalletItem([in] Windows.ApplicationModel.Wallet.WalletItemKind kind, [in] HSTRING displayName, [out] [retval] Windows.ApplicationModel.Wallet.WalletItem** walletItem);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("IWalletItemStore is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             [exclusiveto(Windows.ApplicationModel.Wallet.WalletItemStore)]
             [uuid(7160484B-6D49-48F8-91A9-40A1D0F13EF4)]
             interface IWalletItemStore : IInspectable
             {
-                HRESULT AddAsync([in] HSTRING id, [in] Windows.ApplicationModel.Wallet.WalletItem* item, [out] [retval] Windows.Foundation.IAsyncAction** operation);
-                HRESULT ClearAsync([out] [retval] Windows.Foundation.IAsyncAction** operation);
-                HRESULT GetWalletItemAsync([in] HSTRING id, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Wallet.WalletItem*>** operation);
-                [overload("GetItemsAsync")] HRESULT GetItemsAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVectorView<Windows.ApplicationModel.Wallet.WalletItem*>*>** operation);
-                [overload("GetItemsAsync")] HRESULT GetItemsWithKindAsync([in] Windows.ApplicationModel.Wallet.WalletItemKind kind, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVectorView<Windows.ApplicationModel.Wallet.WalletItem*>*>** operation);
-                HRESULT ImportItemAsync([in] Windows.Storage.Streams.IRandomAccessStreamReference* stream, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Wallet.WalletItem*>** operation);
-                HRESULT DeleteAsync([in] HSTRING id, [out] [retval] Windows.Foundation.IAsyncAction** operation);
-                [overload("ShowAsync")] HRESULT ShowAsync([out] [retval] Windows.Foundation.IAsyncAction** operation);
-                [overload("ShowAsync")] HRESULT ShowItemAsync([in] HSTRING id, [out] [retval] Windows.Foundation.IAsyncAction** operation);
-                HRESULT UpdateAsync([in] Windows.ApplicationModel.Wallet.WalletItem* item, [out] [retval] Windows.Foundation.IAsyncAction** operation);
+                [deprecated("IWalletItemStore is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] HRESULT AddAsync([in] HSTRING id, [in] Windows.ApplicationModel.Wallet.WalletItem* item, [out] [retval] Windows.Foundation.IAsyncAction** operation);
+                [deprecated("IWalletItemStore is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] HRESULT ClearAsync([out] [retval] Windows.Foundation.IAsyncAction** operation);
+                [deprecated("IWalletItemStore is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] HRESULT GetWalletItemAsync([in] HSTRING id, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Wallet.WalletItem*>** operation);
+                [deprecated("IWalletItemStore is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [overload("GetItemsAsync")] HRESULT GetItemsAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVectorView<Windows.ApplicationModel.Wallet.WalletItem*>*>** operation);
+                [deprecated("IWalletItemStore is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [overload("GetItemsAsync")] HRESULT GetItemsWithKindAsync([in] Windows.ApplicationModel.Wallet.WalletItemKind kind, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVectorView<Windows.ApplicationModel.Wallet.WalletItem*>*>** operation);
+                [deprecated("IWalletItemStore is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] HRESULT ImportItemAsync([in] Windows.Storage.Streams.IRandomAccessStreamReference* stream, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Wallet.WalletItem*>** operation);
+                [deprecated("IWalletItemStore is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] HRESULT DeleteAsync([in] HSTRING id, [out] [retval] Windows.Foundation.IAsyncAction** operation);
+                [deprecated("IWalletItemStore is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [overload("ShowAsync")] HRESULT ShowAsync([out] [retval] Windows.Foundation.IAsyncAction** operation);
+                [deprecated("IWalletItemStore is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [overload("ShowAsync")] HRESULT ShowItemAsync([in] HSTRING id, [out] [retval] Windows.Foundation.IAsyncAction** operation);
+                [deprecated("IWalletItemStore is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] HRESULT UpdateAsync([in] Windows.ApplicationModel.Wallet.WalletItem* item, [out] [retval] Windows.Foundation.IAsyncAction** operation);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("IWalletItemStore2 is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             [exclusiveto(Windows.ApplicationModel.Wallet.WalletItemStore)]
             [uuid(65E682F0-7009-4A15-BD54-4FFF379BFFE2)]
             interface IWalletItemStore2 : IInspectable
             {
-                [eventadd] HRESULT ItemsChanged([in] Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.Wallet.WalletItemStore*, IInspectable*>* handler, [out] [retval] EventRegistrationToken* cookie);
-                [eventremove] HRESULT ItemsChanged([in] EventRegistrationToken cookie);
+                [deprecated("IWalletItemStore2 is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [eventadd] HRESULT ItemsChanged([in] Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.Wallet.WalletItemStore*, IInspectable*>* handler, [out] [retval] EventRegistrationToken* cookie);
+                [deprecated("IWalletItemStore2 is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [eventremove] HRESULT ItemsChanged([in] EventRegistrationToken cookie);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("IWalletManagerStatics is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             [exclusiveto(Windows.ApplicationModel.Wallet.WalletManager)]
             [uuid(5111D6B8-C9A4-4C64-B4DD-E1E548001C0D)]
             interface IWalletManagerStatics : IInspectable
             {
-                HRESULT RequestStoreAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Wallet.WalletItemStore*>** operation);
+                [deprecated("IWalletManagerStatics is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] HRESULT RequestStoreAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Wallet.WalletItemStore*>** operation);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("IWalletRelevantLocation is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             [exclusiveto(Windows.ApplicationModel.Wallet.WalletRelevantLocation)]
             [uuid(9FD8782A-E3F9-4DE1-BAB3-BB192E46B3F3)]
             interface IWalletRelevantLocation : IInspectable
             {
-                [propget] HRESULT Position([out] [retval] Windows.Devices.Geolocation.BasicGeoposition* value);
-                [propput] HRESULT Position([in] Windows.Devices.Geolocation.BasicGeoposition value);
-                [propget] HRESULT DisplayMessage([out] [retval] HSTRING* value);
-                [propput] HRESULT DisplayMessage([in] HSTRING value);
+                [deprecated("IWalletRelevantLocation is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT Position([out] [retval] Windows.Devices.Geolocation.BasicGeoposition* value);
+                [deprecated("IWalletRelevantLocation is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT Position([in] Windows.Devices.Geolocation.BasicGeoposition value);
+                [deprecated("IWalletRelevantLocation is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT DisplayMessage([out] [retval] HSTRING* value);
+                [deprecated("IWalletRelevantLocation is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT DisplayMessage([in] HSTRING value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("IWalletTransaction is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             [exclusiveto(Windows.ApplicationModel.Wallet.WalletTransaction)]
             [uuid(40E1E940-2606-4519-81CB-BFF1C60D1F79)]
             interface IWalletTransaction : IInspectable
             {
-                [propget] HRESULT Description([out] [retval] HSTRING* value);
-                [propput] HRESULT Description([in] HSTRING value);
-                [propget] HRESULT DisplayAmount([out] [retval] HSTRING* value);
-                [propput] HRESULT DisplayAmount([in] HSTRING value);
-                [propget] HRESULT IgnoreTimeOfDay([out] [retval] boolean* value);
-                [propput] HRESULT IgnoreTimeOfDay([in] boolean value);
-                [propget] HRESULT DisplayLocation([out] [retval] HSTRING* value);
-                [propput] HRESULT DisplayLocation([in] HSTRING value);
-                [propget] HRESULT TransactionDate([out] [retval] Windows.Foundation.IReference<Windows.Foundation.DateTime>** value);
-                [propput] HRESULT TransactionDate([in] Windows.Foundation.IReference<Windows.Foundation.DateTime>* value);
-                [propget] HRESULT IsLaunchable([out] [retval] boolean* value);
-                [propput] HRESULT IsLaunchable([in] boolean value);
+                [deprecated("IWalletTransaction is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT Description([out] [retval] HSTRING* value);
+                [deprecated("IWalletTransaction is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT Description([in] HSTRING value);
+                [deprecated("IWalletTransaction is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT DisplayAmount([out] [retval] HSTRING* value);
+                [deprecated("IWalletTransaction is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT DisplayAmount([in] HSTRING value);
+                [deprecated("IWalletTransaction is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT IgnoreTimeOfDay([out] [retval] boolean* value);
+                [deprecated("IWalletTransaction is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT IgnoreTimeOfDay([in] boolean value);
+                [deprecated("IWalletTransaction is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT DisplayLocation([out] [retval] HSTRING* value);
+                [deprecated("IWalletTransaction is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT DisplayLocation([in] HSTRING value);
+                [deprecated("IWalletTransaction is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT TransactionDate([out] [retval] Windows.Foundation.IReference<Windows.Foundation.DateTime>** value);
+                [deprecated("IWalletTransaction is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT TransactionDate([in] Windows.Foundation.IReference<Windows.Foundation.DateTime>* value);
+                [deprecated("IWalletTransaction is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT IsLaunchable([out] [retval] boolean* value);
+                [deprecated("IWalletTransaction is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT IsLaunchable([in] boolean value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("IWalletVerb is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             [exclusiveto(Windows.ApplicationModel.Wallet.WalletVerb)]
             [uuid(17B826D6-E3C1-4C74-8A94-217AADBC4884)]
             interface IWalletVerb : IInspectable
             {
-                [propget] HRESULT Name([out] [retval] HSTRING* value);
-                [propput] HRESULT Name([in] HSTRING value);
+                [deprecated("IWalletVerb is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propget] HRESULT Name([out] [retval] HSTRING* value);
+                [deprecated("IWalletVerb is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [propput] HRESULT Name([in] HSTRING value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("IWalletVerbFactory is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             [exclusiveto(Windows.ApplicationModel.Wallet.WalletVerb)]
             [uuid(76012771-BE58-4D5E-83ED-58B1669C7AD9)]
             interface IWalletVerbFactory : IInspectable
             {
-                HRESULT CreateWalletVerb([in] HSTRING name, [out] [retval] Windows.ApplicationModel.Wallet.WalletVerb** WalletVerb);
+                [deprecated("IWalletVerbFactory is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] HRESULT CreateWalletVerb([in] HSTRING name, [out] [retval] Windows.ApplicationModel.Wallet.WalletVerb** WalletVerb);
             }
 
             [activatable(Windows.ApplicationModel.Wallet.IWalletBarcodeFactory, Windows.Foundation.UniversalApiContract, 1.0)]
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("WalletBarcode is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             [marshaling_behavior(agile)]
             runtimeclass WalletBarcode
             {
@@ -464,6 +483,7 @@ namespace Windows
 
             [activatable(Windows.ApplicationModel.Wallet.IWalletItemFactory, Windows.Foundation.UniversalApiContract, 1.0)]
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("WalletItem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             [marshaling_behavior(agile)]
             runtimeclass WalletItem
             {
@@ -472,6 +492,7 @@ namespace Windows
 
             [activatable(Windows.ApplicationModel.Wallet.IWalletItemCustomPropertyFactory, Windows.Foundation.UniversalApiContract, 1.0)]
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("WalletItemCustomProperty is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             [marshaling_behavior(agile)]
             runtimeclass WalletItemCustomProperty
             {
@@ -479,6 +500,7 @@ namespace Windows
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("WalletItemStore is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             [marshaling_behavior(agile)]
             runtimeclass WalletItemStore
             {
@@ -486,6 +508,7 @@ namespace Windows
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("WalletManager is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             [marshaling_behavior(agile)]
             [static(Windows.ApplicationModel.Wallet.IWalletManagerStatics, Windows.Foundation.UniversalApiContract, 1.0)]
             runtimeclass WalletManager
@@ -494,6 +517,7 @@ namespace Windows
 
             [activatable(Windows.Foundation.UniversalApiContract, 1.0)]
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("WalletRelevantLocation is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             [marshaling_behavior(agile)]
             runtimeclass WalletRelevantLocation
             {
@@ -502,6 +526,7 @@ namespace Windows
 
             [activatable(Windows.Foundation.UniversalApiContract, 1.0)]
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("WalletTransaction is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             [marshaling_behavior(agile)]
             runtimeclass WalletTransaction
             {
@@ -510,6 +535,7 @@ namespace Windows
 
             [activatable(Windows.ApplicationModel.Wallet.IWalletVerbFactory, Windows.Foundation.UniversalApiContract, 1.0)]
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+            [deprecated("WalletVerb is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
             [marshaling_behavior(agile)]
             runtimeclass WalletVerb
             {

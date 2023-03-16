@@ -4,7 +4,3 @@
 <IncludeRoot>/um/d3d12shader.h
 --namespace
 Windows.Win32.Graphics.Direct3D12
---with-type 
-D3D12_BARRIER_SYNC=uint
---with-type
-D3D12_BARRIER_ACCESS=uint

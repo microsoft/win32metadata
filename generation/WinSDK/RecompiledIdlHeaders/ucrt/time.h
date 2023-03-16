@@ -18,7 +18,9 @@ _UCRT_DISABLE_CLANG_WARNINGS
 
 _CRT_BEGIN_C_HEADER
 
-
+#ifndef _CRT_USE_CONFORMING_ANNEX_K_TIME
+#define _CRT_USE_CONFORMING_ANNEX_K_TIME 0
+#endif
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 //
@@ -446,23 +448,51 @@ _ACRTIMP int __cdecl _timespec64_get(
                 return _ctime32_s(_Buffer, _SizeInBytes, _Time);
             }
 
+        #if _CRT_USE_CONFORMING_ANNEX_K_TIME
+            _Check_return_wat_
+            static __inline struct tm* __CRTDECL gmtime_s(
+                _In_  time_t const* const _Time,
+                _Out_ struct tm*    const _Tm
+                )
+            {
+                if (_gmtime32_s(_Tm, _Time) == 0)
+                {
+                    return _Tm;
+                }
+                return NULL;
+            }
+
+            _Check_return_wat_
+            static __inline struct tm* __CRTDECL localtime_s(
+                _In_  time_t const* const _Time,
+                _Out_ struct tm*    const _Tm
+                )
+            {
+                if (_localtime32_s(_Tm, _Time) == 0)
+                {
+                    return _Tm;
+                }
+                return NULL;
+            }
+        #else // _CRT_USE_CONFORMING_ANNEX_K_TIME
             _Check_return_wat_
             static __inline errno_t __CRTDECL gmtime_s(
-                _Out_ struct tm*    const _Tm,
-                _In_  time_t const* const _Time
+                    _Out_ struct tm*    const _Tm,
+                    _In_  time_t const* const _Time
                 )
             {
                 return _gmtime32_s(_Tm, _Time);
             }
 
             _Check_return_wat_
-            static __inline errno_t __CRTDECL localtime_s(
-                _Out_ struct tm*    const _Tm,
-                _In_  time_t const* const _Time
+                static __inline errno_t __CRTDECL localtime_s(
+                    _Out_ struct tm*    const _Tm,
+                    _In_  time_t const* const _Time
                 )
             {
                 return _localtime32_s(_Tm, _Time);
             }
+        #endif // _CRT_USE_CONFORMING_ANNEX_K_TIME
         #endif
 
     #else // ^^^ _USE_32BIT_TIME_T ^^^ // vvv !_USE_32BIT_TIME_T vvv
@@ -542,23 +572,51 @@ _ACRTIMP int __cdecl _timespec64_get(
                 return _ctime64_s(_Buffer, _SizeInBytes, _Time);
             }
 
+        #if _CRT_USE_CONFORMING_ANNEX_K_TIME
+            _Check_return_wat_
+            static __inline struct tm* __CRTDECL gmtime_s(
+                _In_  time_t const* const _Time,
+                _Out_ struct tm*    const _Tm
+                )
+            {
+                if (_gmtime64_s(_Tm, _Time) == 0)
+                {
+                    return _Tm;
+                }
+                return NULL;
+            }
+
+            _Check_return_wat_
+            static __inline struct tm* __CRTDECL localtime_s(
+                _In_  time_t const* const _Time,
+                _Out_ struct tm*    const _Tm
+                )
+            {
+                if (_localtime64_s(_Tm, _Time) == 0)
+                {
+                    return _Tm;
+                }
+                return NULL;
+            }
+        #else // _CRT_USE_CONFORMING_ANNEX_K_TIME
             _Check_return_wat_
             static __inline errno_t __CRTDECL gmtime_s(
-                _Out_ struct tm*    const _Tm,
-                _In_  time_t const* const _Time
+                    _Out_ struct tm*    const _Tm,
+                    _In_  time_t const* const _Time
                 )
             {
                 return _gmtime64_s(_Tm, _Time);
             }
 
             _Check_return_wat_
-            static __inline errno_t __CRTDECL localtime_s(
-                _Out_ struct tm*    const _Tm,
-                _In_  time_t const* const _Time
+                static __inline errno_t __CRTDECL localtime_s(
+                    _Out_ struct tm*    const _Tm,
+                    _In_  time_t const* const _Time
                 )
             {
                 return _localtime64_s(_Tm, _Time);
             }
+        #endif // _CRT_USE_CONFORMING_ANNEX_K_TIME
         #endif
 
     #endif // !_USE_32BIT_TIME_T

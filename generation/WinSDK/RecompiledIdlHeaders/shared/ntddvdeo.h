@@ -328,6 +328,9 @@ extern "C" {
 #define IOCTL_PANEL_GET_BACKLIGHT_REDUCTION \
     CTL_CODE(FILE_DEVICE_VIDEO, 0x306, METHOD_BUFFERED, FILE_ANY_ACCESS)
 
+#define IOCTL_PANEL_GET_MANUFACTURING_MODE \
+    CTL_CODE(FILE_DEVICE_VIDEO, 0x307, METHOD_BUFFERED, FILE_ANY_ACCESS)
+
 //
 // Colorspace Transform control IOCLTs must/can be handled by the monitor, oem-panel, port/miniport
 // driver

@@ -1,7 +1,7 @@
 //-------------------------------------------------------------------------------------
 // DirectXMathMisc.inl -- SIMD C++ Math library
 //
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //
 // http://go.microsoft.com/fwlink/?LinkID=615560
@@ -228,8 +228,6 @@ inline XMVECTOR XM_CALLCONV XMQuaternionConjugate(FXMVECTOR Q) noexcept
 
 inline XMVECTOR XM_CALLCONV XMQuaternionInverse(FXMVECTOR Q) noexcept
 {
-    const XMVECTOR  Zero = XMVectorZero();
-
     XMVECTOR L = XMVector4LengthSq(Q);
     XMVECTOR Conjugate = XMQuaternionConjugate(Q);
 
@@ -237,7 +235,7 @@ inline XMVECTOR XM_CALLCONV XMQuaternionInverse(FXMVECTOR Q) noexcept
 
     XMVECTOR Result = XMVectorDivide(Conjugate, L);
 
-    Result = XMVectorSelect(Result, Zero, Control);
+    Result = XMVectorSelect(Result, g_XMZero, Control);
 
     return Result;
 }
@@ -582,9 +580,30 @@ inline XMVECTOR XM_CALLCONV XMQuaternionRotationRollPitchYaw
     float Roll
 ) noexcept
 {
+#if defined(_XM_NO_INTRINSICS_)
+    const float halfpitch = Pitch * 0.5f;
+    float cp = cosf(halfpitch);
+    float sp = sinf(halfpitch);
+
+    const float halfyaw = Yaw * 0.5f;
+    float cy = cosf(halfyaw);
+    float sy = sinf(halfyaw);
+
+    const float halfroll = Roll * 0.5f;
+    float cr = cosf(halfroll);
+    float sr = sinf(halfroll);
+
+    XMVECTORF32 vResult = { { {
+            cr * sp * cy + sr * cp * sy,
+            cr * cp * sy - sr * sp * cy,
+            sr * cp * cy - cr * sp * sy,
+            cr * cp * cy + sr * sp * sy
+        } } };
+    return vResult;
+#else
     XMVECTOR Angles = XMVectorSet(Pitch, Yaw, Roll, 0.0f);
-    XMVECTOR Q = XMQuaternionRotationRollPitchYawFromVector(Angles);
-    return Q;
+    return XMQuaternionRotationRollPitchYawFromVector(Angles);
+#endif
 }
 
 //------------------------------------------------------------------------------
@@ -594,6 +613,27 @@ inline XMVECTOR XM_CALLCONV XMQuaternionRotationRollPitchYawFromVector
     FXMVECTOR Angles // <Pitch, Yaw, Roll, 0>
 ) noexcept
 {
+#if defined(_XM_NO_INTRINSICS_)
+    const float halfpitch = Angles.vector4_f32[0] * 0.5f;
+    float cp = cosf(halfpitch);
+    float sp = sinf(halfpitch);
+
+    const float halfyaw = Angles.vector4_f32[1] * 0.5f;
+    float cy = cosf(halfyaw);
+    float sy = sinf(halfyaw);
+
+    const float halfroll = Angles.vector4_f32[2] * 0.5f;
+    float cr = cosf(halfroll);
+    float sr = sinf(halfroll);
+
+    XMVECTORF32 vResult = { { {
+            cr * sp * cy + sr * cp * sy,
+            cr * cp * sy - sr * sp * cy,
+            sr * cp * cy - cr * sp * sy,
+            cr * cp * cy + sr * sp * sy
+        } } };
+    return vResult;
+#else
     static const XMVECTORF32  Sign = { { { 1.0f, -1.0f, -1.0f, 1.0f } } };
 
     XMVECTOR HalfAngles = XMVectorMultiply(Angles, g_XMOneHalf.v);
@@ -615,6 +655,7 @@ inline XMVECTOR XM_CALLCONV XMQuaternionRotationRollPitchYawFromVector
     XMVECTOR Q = XMVectorMultiplyAdd(Q1, R1, Q0);
 
     return Q;
+#endif
 }
 
 //------------------------------------------------------------------------------
@@ -1176,7 +1217,7 @@ inline void XM_CALLCONV XMPlaneIntersectPlane
 inline XMVECTOR XM_CALLCONV XMPlaneTransform
 (
     FXMVECTOR P,
-    FXMMATRIX M
+    FXMMATRIX ITM
 ) noexcept
 {
     XMVECTOR W = XMVectorSplatW(P);
@@ -1184,10 +1225,10 @@ inline XMVECTOR XM_CALLCONV XMPlaneTransform
     XMVECTOR Y = XMVectorSplatY(P);
     XMVECTOR X = XMVectorSplatX(P);
 
-    XMVECTOR Result = XMVectorMultiply(W, M.r[3]);
-    Result = XMVectorMultiplyAdd(Z, M.r[2], Result);
-    Result = XMVectorMultiplyAdd(Y, M.r[1], Result);
-    Result = XMVectorMultiplyAdd(X, M.r[0], Result);
+    XMVECTOR Result = XMVectorMultiply(W, ITM.r[3]);
+    Result = XMVectorMultiplyAdd(Z, ITM.r[2], Result);
+    Result = XMVectorMultiplyAdd(Y, ITM.r[1], Result);
+    Result = XMVectorMultiplyAdd(X, ITM.r[0], Result);
     return Result;
 }
 
@@ -1195,12 +1236,12 @@ inline XMVECTOR XM_CALLCONV XMPlaneTransform
 _Use_decl_annotations_
 inline XMFLOAT4* XM_CALLCONV XMPlaneTransformStream
 (
-    XMFLOAT4* pOutputStream,
+    XMFLOAT4*       pOutputStream,
     size_t          OutputStride,
     const XMFLOAT4* pInputStream,
     size_t          InputStride,
     size_t          PlaneCount,
-    FXMMATRIX       M
+    FXMMATRIX       ITM
 ) noexcept
 {
     return XMVector4TransformStream(pOutputStream,
@@ -1208,7 +1249,7 @@ inline XMFLOAT4* XM_CALLCONV XMPlaneTransformStream
         pInputStream,
         InputStride,
         PlaneCount,
-        M);
+        ITM);
 }
 
 //------------------------------------------------------------------------------

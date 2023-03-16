@@ -29,7 +29,7 @@
   },
   {
     "Namespace": "Windows.Win32.Foundation",
-    "Name": "HINSTANCE",
+    "Name": "HMODULE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "FreeLibrary",
     "InvalidHandleValues": [ 0 ]
@@ -427,7 +427,7 @@
     "InvalidHandleValues": [ -1, 0 ]
   },
   {
-    "Name": "FindVolumeMointPointHandle",
+    "Name": "FindVolumeMountPointHandle",
     "ValueType": "IntPtr",
     "CloseApi": "FindVolumeMountPointClose",
     "InvalidHandleValues": [ -1, 0 ]
@@ -496,6 +496,20 @@
     "Name": "HeapHandle",
     "ValueType": "IntPtr",
     "CloseApi": "HeapDestroy",
+    "InvalidHandleValues": [ -1, 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "HLOCAL",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "LocalFree",
+    "InvalidHandleValues": [ -1, 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "HGLOBAL",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "GlobalFree",
     "InvalidHandleValues": [ -1, 0 ]
   },
   {
@@ -1532,5 +1546,37 @@
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "EndUpdateResourceW",
     "InvalidHandleValues": [ 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.UI.WindowsAndMessaging",
+    "Name": "LOADIMAGE_HANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WinSock",
+    "Name": "socklen_t",
+    "ValueType": "int"
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WinSock",
+    "Name": "sa_family_t",
+    "ValueType": "ushort"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Usb",
+    "Name": "USB_CHANGE_REGISTRATION_HANDLE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.Memory",
+    "Name": "MEMORYMAPPEDVIEW_HANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ -1, 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.System.Iis",
+    "Name": "HCONN",
+    "ValueType": "void*"
   }
 ]

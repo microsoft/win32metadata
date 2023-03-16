@@ -151,6 +151,13 @@ typedef struct _tagKSJACK_DESCRIPTION2
                                        // or dynamic format changing capability         
 } KSJACK_DESCRIPTION2, *PKSJACK_DESCRIPTION2;
 
+cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_NI) ")
+typedef struct _tagKSJACK_DESCRIPTION3
+{
+  ULONG              ConfigId; // Driver defined bitmask or enum describing the current configuration, changing this value causes
+                               // audioendpointbuilder to refresh the cache to ensure that the published endpoint matches the current config.
+} KSJACK_DESCRIPTION3, *PKSJACK_DESCRIPTION3;
+cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN10_NI) ")
 cpp_quote("#endif")
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -980,6 +987,62 @@ interface IKsJackDescription2 : IUnknown
     [id(2), helpstring("method GetJackDescription2")]
     HRESULT GetJackDescription2([in] UINT nJack, [out, annotation("_Out_")] KSJACK_DESCRIPTION2* pDescription2);
 };
+
+cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_NI) ")
+// ----------------------------------------------------------------------
+// IID_IKSJackDescription3
+//
+// Abstract:
+//      Provides access to jack KSJACK_DESCRIPTION3 supported by hardware
+//
+// Activatable on:
+//      IPart interface (bridge pin connector) on an KS Filter devicetopology object
+//
+// ----------------------------------------------------------------------
+[
+    object,
+    local,
+    uuid(E3F6778B-6660-4CC8-A291-ECC4192D9967),
+    nonextensible,
+    helpstring("IKsJackDescription3 Interface"),
+    pointer_default(unique)
+]
+interface IKsJackDescription3 : IUnknown
+{
+    //-------------------------------------------------------------------------
+    // Description:
+    //
+    //  Retrieves the number of Jacks on this connector.
+    //
+    // Parameters:
+    //
+    //      pcJacks - [out] Number of Jacks on this connector
+    //
+    // Return values:
+    //      S_OK if successful
+    //
+    [id(1), helpstring("method GetJackCount")]
+    HRESULT GetJackCount([out, annotation("_Out_")] UINT* pcJacks);
+    //-------------------------------------------------------------------------
+    // Description:
+    //
+    //  Retrieves the description of the specified Jack
+    //
+    // Parameters:
+    //
+    //      nJack        - [in]  The index of the jack for which to get information.  
+    //                           nJack must be less than the count returned from GetJackCount
+    //      pDescription - [out] Pointer to a caller-allocated buffer into which the method writes 
+    //                           a structure of type KSJACK_DESCRIPTION3 that contains information about the jack.
+    //
+    // Return values:
+    //      S_OK if successful
+    //
+    [id(2), helpstring("method GetJackDescription3")]
+    HRESULT GetJackDescription3([in] UINT nJack, [out, annotation("_Out_")] KSJACK_DESCRIPTION3* pDescription3);
+};
+cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN10_NI) ")
+
 // ----------------------------------------------------------------------
 // IKsJackSinkInformation
 //

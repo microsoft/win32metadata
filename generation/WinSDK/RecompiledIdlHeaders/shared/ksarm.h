@@ -66,6 +66,13 @@
 
 
 //
+// Apc Callback Data Structure Offset Definitions
+//
+
+#define AcdContextRecord 0x4
+#define KAPC_CALLBACK_DATA_LENGTH 0x10
+
+//
 // Bug Check Code Definitions
 //
 
@@ -475,9 +482,9 @@
 #define PfBuffer 0x1c
 #define PfSegment 0x20
 #define PfAffinity 0x24
-#define PfSource 0x34
-#define PfStarted 0x36
-#define ProfileObjectLength 0x38
+#define PfSource 0x40
+#define PfStarted 0x42
+#define ProfileObjectLength 0x44
 
 //
 // Queue Object Structure Offset Definitions
@@ -563,7 +570,7 @@
 #define ThStackBase 0x28
 #define ThLegoData 0x1b8
 #define KernelThreadObjectLength 0x2a0
-#define ExecutiveThreadObjectLength 0x530
+#define ExecutiveThreadObjectLength 0x540
 
 #define KF_VFP_32REG 0x10
 
@@ -871,7 +878,7 @@
 #define PcStartCycles 0xec8
 #define PcSpBase 0xc4c
 #define PcCycleCounterHigh 0xef0
-#define ProcessorControlRegisterLength 0x70e0
+#define ProcessorControlRegisterLength 0x6fe0
 
 //
 // Defines for user shared data
@@ -913,8 +920,8 @@
 #define PbMinorVersion 0x40c
 #define PbMajorVersion 0x40e
 #define PbBuildType 0x410
-#define PbCoresPerPhysicalProcessor 0x412
-#define PbLogicalProcessorsPerCore 0x413
+#define PbCoresPerPhysicalProcessor 0x420
+#define PbLogicalProcessorsPerCore 0x424
 #define PbPriorityState 0x1c
 #define PbLockQueue 0x480
 #define PbPPLookasideList 0x580
@@ -923,7 +930,7 @@
 #define PbPacketBarrier 0x600
 #define PbDeferredReadyListHead 0x604
 #define PbLookasideIrpFloat 0x650
-#define PbRequestMailbox 0x6700
+#define PbRequestMailbox 0x6600
 #define PbMailbox 0x680
 #define PbDpcGate 0x700
 #define PbWaitListHead 0x780
@@ -972,7 +979,7 @@
 #define PbCopyReadNoWait 0x644
 #define PbCopyReadWait 0x648
 #define PbCopyReadNoWaitMiss 0x64c
-#define PbAlignmentFixupCount 0xd08
+#define PbAlignmentFixupCount 0xd10
 #define PbExceptionDispatchCount 0x934
 #define PbProcessorVendorString 0x508
 #define PbFeatureBits 0x50c

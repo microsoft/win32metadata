@@ -2432,6 +2432,7 @@ enum DWRITE_FONT_AXIS_TAG : UINT32
     DWRITE_FONT_AXIS_TAG_ITALIC         = DWRITE_MAKE_FONT_AXIS_TAG('i','t','a','l'),
 };
 
+#define DWRITE_STANDARD_FONT_AXIS_COUNT 5
 
 /// <summary>
 /// Value for a font axis, used when querying and creating font instances.
@@ -3665,5 +3666,70 @@ interface DWRITE_DECLARE_INTERFACE("C4B1FE1B-6E84-47D5-B54C-A597981B06AD") IDWri
 };
 
 #endif // NTDDI_VERSION >= NTDDI_WIN10_MN
+
+#if NTDDI_VERSION >= NTDDI_WIN10_NI
+
+interface DWRITE_DECLARE_INTERFACE("EEC175FC-BEA9-4C86-8B53-CCBDD7DF0C82") IDWriteFontSet4 : public IDWriteFontSet3
+{
+    /// <summary>
+    /// Computes derived font axis values from the specified font weight, stretch, style, and size.
+    /// </summary>
+    /// <param name="inputAxisValues">Pointer to an optional array of input axis values. Axes present
+    /// in this array are excluded from the output. This is so explicit axis values take precedence over 
+    /// derived axis values.</param>
+    /// <param name="inputAxisCount">Size of the array of input axis values.</param>
+    /// <param name="fontWeight">Font weight, used to compute "wght" axis value.</param>
+    /// <param name="fontStretch">Font stretch, used to compute "wdth" axis value.</param>
+    /// <param name="fontStyle">Font style, used to compute "slnt" and "ital" axis values.</param>
+    /// <param name="fontSize">Font size in DIPs, used to compute "opsz" axis value. If this parameter is zero,
+    /// no "opsz" axis value is added to the output array.</param>
+    /// <param name="outputAxisValues">Pointer to an output array to which derived axis values are written.
+    /// The size of this array must be at least DWRITE_STANDARD_FONT_AXIS_COUNT (5). The return value is 
+    /// the actual number of axis values written to this array.</param>
+    /// <returns>Returns the actual number of derived axis values written to the output array.</returns>
+    /// <remarks>The caller should concatenate the output axis values to the input axis values (if any),
+    /// and pass the combined axis values to the GetMatchingFonts method. This does not result in duplicates
+    /// because the output does not include any axes present in the inputAxisValues array.
+    /// </remarks>
+    STDMETHOD_(UINT32, ConvertWeightStretchStyleToFontAxisValues)(
+        _In_reads_opt_(inputAxisCount) DWRITE_FONT_AXIS_VALUE const* inputAxisValues,
+        UINT32 inputAxisCount,
+        DWRITE_FONT_WEIGHT fontWeight,
+        DWRITE_FONT_STRETCH fontStretch,
+        DWRITE_FONT_STYLE fontStyle,
+        float fontSize,
+        _Out_writes_to_(DWRITE_STANDARD_FONT_AXIS_COUNT, return) DWRITE_FONT_AXIS_VALUE* outputAxisValues
+        ) PURE;
+
+    /// <summary>
+    /// Generates a matching font set based on the requested inputs, ordered so that nearer matches are earlier.
+    /// </summary>
+    /// <param name="familyName">Font family name. This can be a typographic family name, weight/stretch/style
+    /// family name, GDI (RBIZ) family name, or full name.</param>
+    /// <param name="fontAxisValues">Array of font axis values.</param>
+    /// <param name="fontAxisValueCount">Number of font axis values.</param>
+    /// <param name="allowedSimulations">Specifies which simulations (i.e., algorithmic emboldening and/or slant)
+    /// may be applied to matching fonts to better match the specified axis values. No simulations are applied if
+    /// this parameter is DWRITE_FONT_SIMULATIONS_NONE (0).</param>
+    /// <param name="matchingFonts">Receives a pointer to a newly-created font set, which contains a prioritized 
+    /// list of fonts that match the specified inputs.</param>
+    /// <returns>
+    /// Standard HRESULT error code.
+    /// </returns>
+    /// <remarks>
+    /// This can yield distinct items that were not in the original font set, including items with simulation flags
+    /// (if they would be a closer match to the request) and instances that were not named by the font author.
+    /// Items from the same font resources are collapsed into one, the closest possible match.
+    /// </remarks>
+    STDMETHOD(GetMatchingFonts)(
+        _In_z_ WCHAR const* familyName,
+        _In_reads_(fontAxisValueCount) DWRITE_FONT_AXIS_VALUE const* fontAxisValues,
+        UINT32 fontAxisValueCount,
+        DWRITE_FONT_SIMULATIONS allowedSimulations,
+        _COM_Outptr_ IDWriteFontSet4** matchingFonts
+        ) PURE;
+};
+
+#endif // NTDDI_VERSION >= NTDDI_WIN10_NI
 
 #endif // DWRITE_3_H_INCLUDED

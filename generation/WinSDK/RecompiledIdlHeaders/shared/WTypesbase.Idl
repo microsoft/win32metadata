@@ -366,6 +366,7 @@ typedef enum tagCLSCTX
     CLSCTX_ACTIVATE_AAA_AS_IU = 0x800000, // Interactive User activation behavior for As-Activator servers.
     CLSCTX_RESERVED6 = 0x1000000, // reserved
     CLSCTX_ACTIVATE_ARM32_SERVER  = 0x2000000, // Pick ARM32 server only
+    CLSCTX_ALLOW_LOWER_TRUST_REGISTRATION = 0x4000000, // allow activations of servers configured in insufficiently trusted locations.
     CLSCTX_PS_DLL = 0x80000000, // Internal CLSCTX used for loading Proxy/Stub DLLs
  } CLSCTX;
 
@@ -389,6 +390,7 @@ cpp_quote("    CLSCTX_APPCONTAINER | \\")
 cpp_quote("    CLSCTX_ACTIVATE_AAA_AS_IU | \\")
 cpp_quote("    CLSCTX_RESERVED6 | \\")
 cpp_quote("    CLSCTX_ACTIVATE_ARM32_SERVER | \\")
+cpp_quote("    CLSCTX_ALLOW_LOWER_TRUST_REGISTRATION | \\")
 cpp_quote("    CLSCTX_PS_DLL)")
 
 // marshaling flags; passed to CoMarshalInterface

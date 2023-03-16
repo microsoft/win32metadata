@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -73,6 +73,13 @@ typedef interface ILearningModelDeviceFactoryNative ILearningModelDeviceFactoryN
 typedef interface ILearningModelSessionOptionsNative ILearningModelSessionOptionsNative;
 
 #endif 	/* __ILearningModelSessionOptionsNative_FWD_DEFINED__ */
+
+
+#ifndef __ILearningModelSessionOptionsNative1_FWD_DEFINED__
+#define __ILearningModelSessionOptionsNative1_FWD_DEFINED__
+typedef interface ILearningModelSessionOptionsNative1 ILearningModelSessionOptionsNative1;
+
+#endif 	/* __ILearningModelSessionOptionsNative1_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -470,14 +477,99 @@ EXTERN_C const IID IID_ILearningModelSessionOptionsNative;
 #endif 	/* __ILearningModelSessionOptionsNative_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_windows2Eai2Emachinelearning2Enative_0000_0004 */
+#ifndef __ILearningModelSessionOptionsNative1_INTERFACE_DEFINED__
+#define __ILearningModelSessionOptionsNative1_INTERFACE_DEFINED__
+
+/* interface ILearningModelSessionOptionsNative1 */
+/* [local][object][uuid] */ 
+
+
+EXTERN_C const IID IID_ILearningModelSessionOptionsNative1;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("5da37a26-0526-414b-91e4-2a0fa3ddba40")
+    ILearningModelSessionOptionsNative1 : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE SetIntraOpThreadSpinning( 
+            boolean allowSpinning) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ILearningModelSessionOptionsNative1Vtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ILearningModelSessionOptionsNative1 * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ILearningModelSessionOptionsNative1 * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ILearningModelSessionOptionsNative1 * This);
+        
+        DECLSPEC_XFGVIRT(ILearningModelSessionOptionsNative1, SetIntraOpThreadSpinning)
+        HRESULT ( STDMETHODCALLTYPE *SetIntraOpThreadSpinning )( 
+            ILearningModelSessionOptionsNative1 * This,
+            boolean allowSpinning);
+        
+        END_INTERFACE
+    } ILearningModelSessionOptionsNative1Vtbl;
+
+    interface ILearningModelSessionOptionsNative1
+    {
+        CONST_VTBL struct ILearningModelSessionOptionsNative1Vtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ILearningModelSessionOptionsNative1_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ILearningModelSessionOptionsNative1_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ILearningModelSessionOptionsNative1_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ILearningModelSessionOptionsNative1_SetIntraOpThreadSpinning(This,allowSpinning)	\
+    ( (This)->lpVtbl -> SetIntraOpThreadSpinning(This,allowSpinning) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ILearningModelSessionOptionsNative1_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_windows2Eai2Emachinelearning2Enative_0000_0005 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
 
 
-extern RPC_IF_HANDLE __MIDL_itf_windows2Eai2Emachinelearning2Enative_0000_0004_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_windows2Eai2Emachinelearning2Enative_0000_0004_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_windows2Eai2Emachinelearning2Enative_0000_0005_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_windows2Eai2Emachinelearning2Enative_0000_0005_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

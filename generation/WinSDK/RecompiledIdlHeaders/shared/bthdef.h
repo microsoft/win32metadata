@@ -489,6 +489,7 @@ typedef ULONG BTH_LAP, *PBTH_LAP;
 #define COD_VERSION                            (0x0)
 
 #define COD_SERVICE_LIMITED                 (0x0001)
+#define COD_SERVICE_LE_AUDIO                (0x0002)
 #define COD_SERVICE_POSITIONING             (0x0008)
 #define COD_SERVICE_NETWORKING              (0x0010)
 #define COD_SERVICE_RENDERING               (0x0020)
@@ -499,6 +500,7 @@ typedef ULONG BTH_LAP, *PBTH_LAP;
 #define COD_SERVICE_INFORMATION             (0x0400)
 
 #define COD_SERVICE_VALID_MASK              (COD_SERVICE_LIMITED        | \
+                                             COD_SERVICE_LE_AUDIO       | \
                                              COD_SERVICE_POSITIONING    | \
                                              COD_SERVICE_NETWORKING     | \
                                              COD_SERVICE_RENDERING      | \
@@ -508,7 +510,7 @@ typedef ULONG BTH_LAP, *PBTH_LAP;
                                              COD_SERVICE_TELEPHONY      |\
                                              COD_SERVICE_INFORMATION)
 
-#define COD_SERVICE_MAX_COUNT               (9)
+#define COD_SERVICE_MAX_COUNT               (10)
 
 //
 // Major class codes

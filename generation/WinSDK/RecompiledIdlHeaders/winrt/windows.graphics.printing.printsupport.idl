@@ -15,6 +15,7 @@ import "Windows.ApplicationModel.Activation.idl";
 import "Windows.Data.Xml.Dom.idl";
 import "Windows.Devices.Printers.idl";
 import "Windows.Graphics.Printing.PrintTicket.idl";
+import "Windows.UI.Shell.idl";
 
 // Forward Declare
 namespace Windows
@@ -65,6 +66,8 @@ namespace Windows
     {
         runtimeclass Deferral;
 
+        typedef struct TimeSpan TimeSpan;
+
         apicontract UniversalApiContract;
     }
 }
@@ -83,6 +86,16 @@ namespace Windows
 }
 namespace Windows
 {
+    namespace UI
+    {
+        namespace Shell
+        {
+            interface IAdaptiveCard;
+        }
+    }
+}
+namespace Windows
+{
     namespace Graphics
     {
         namespace Printing
@@ -95,11 +108,23 @@ namespace Windows
 
                 interface IPrintSupportExtensionSession;
 
+                interface IPrintSupportExtensionSession2;
+
                 interface IPrintSupportExtensionTriggerDetails;
 
                 interface IPrintSupportPrintDeviceCapabilitiesChangedEventArgs;
 
+                interface IPrintSupportPrintDeviceCapabilitiesChangedEventArgs2;
+
+                interface IPrintSupportPrintDeviceCapabilitiesUpdatePolicy;
+
+                interface IPrintSupportPrintDeviceCapabilitiesUpdatePolicyStatics;
+
+                interface IPrintSupportPrintTicketElement;
+
                 interface IPrintSupportPrintTicketValidationRequestedEventArgs;
+
+                interface IPrintSupportPrinterSelectedEventArgs;
 
                 interface IPrintSupportSessionInfo;
 
@@ -113,7 +138,13 @@ namespace Windows
 
                 runtimeclass PrintSupportPrintDeviceCapabilitiesChangedEventArgs;
 
+                runtimeclass PrintSupportPrintDeviceCapabilitiesUpdatePolicy;
+
+                runtimeclass PrintSupportPrintTicketElement;
+
                 runtimeclass PrintSupportPrintTicketValidationRequestedEventArgs;
+
+                runtimeclass PrintSupportPrinterSelectedEventArgs;
 
                 runtimeclass PrintSupportSessionInfo;
 
@@ -136,9 +167,15 @@ namespace Windows
             {
                 declare
                 {
+                    interface Windows.Foundation.Collections.IIterable<Windows.Graphics.Printing.PrintSupport.PrintSupportPrintTicketElement*>;
+
+                    interface Windows.Foundation.Collections.IIterator<Windows.Graphics.Printing.PrintSupport.PrintSupportPrintTicketElement*>;
+
                     interface Windows.Foundation.TypedEventHandler<Windows.Graphics.Printing.PrintSupport.PrintSupportExtensionSession*, Windows.Graphics.Printing.PrintSupport.PrintSupportPrintDeviceCapabilitiesChangedEventArgs*>;
 
                     interface Windows.Foundation.TypedEventHandler<Windows.Graphics.Printing.PrintSupport.PrintSupportExtensionSession*, Windows.Graphics.Printing.PrintSupport.PrintSupportPrintTicketValidationRequestedEventArgs*>;
+
+                    interface Windows.Foundation.TypedEventHandler<Windows.Graphics.Printing.PrintSupport.PrintSupportExtensionSession*, Windows.Graphics.Printing.PrintSupport.PrintSupportPrinterSelectedEventArgs*>;
                 }
             }
         }
@@ -182,6 +219,15 @@ namespace Windows
                     HRESULT Start();
                 }
 
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+                [exclusiveto(Windows.Graphics.Printing.PrintSupport.PrintSupportExtensionSession)]
+                [uuid(10FA8C11-6DE8-5765-8FCF-E716E0F27ED1)]
+                interface IPrintSupportExtensionSession2 : IInspectable
+                {
+                    [eventadd] HRESULT PrinterSelected([in] Windows.Foundation.TypedEventHandler<Windows.Graphics.Printing.PrintSupport.PrintSupportExtensionSession*, Windows.Graphics.Printing.PrintSupport.PrintSupportPrinterSelectedEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                    [eventremove] HRESULT PrinterSelected([in] EventRegistrationToken token);
+                }
+
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)]
                 [exclusiveto(Windows.Graphics.Printing.PrintSupport.PrintSupportExtensionTriggerDetails)]
                 [uuid(AE083711-9B09-55D1-A0AE-2A14C5F83D6A)]
@@ -200,6 +246,45 @@ namespace Windows
                     HRESULT GetDeferral([out] [retval] Windows.Foundation.Deferral** result);
                 }
 
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+                [exclusiveto(Windows.Graphics.Printing.PrintSupport.PrintSupportPrintDeviceCapabilitiesChangedEventArgs)]
+                [uuid(469DF9E7-FD07-5EEB-A07D-9FCC67F089BA)]
+                interface IPrintSupportPrintDeviceCapabilitiesChangedEventArgs2 : IInspectable
+                {
+                    HRESULT SetSupportedPdlPassthroughContentTypes([in] Windows.Foundation.Collections.IIterable<HSTRING>* supportedPdlContentTypes);
+                    [propget] HRESULT ResourceLanguage([out] [retval] HSTRING* value);
+                    HRESULT GetCurrentPrintDeviceResources([out] [retval] Windows.Data.Xml.Dom.XmlDocument** result);
+                    HRESULT UpdatePrintDeviceResources([in] Windows.Data.Xml.Dom.XmlDocument* updatedPdr);
+                    HRESULT SetPrintDeviceCapabilitiesUpdatePolicy([in] Windows.Graphics.Printing.PrintSupport.PrintSupportPrintDeviceCapabilitiesUpdatePolicy* updatePolicy);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+                [exclusiveto(Windows.Graphics.Printing.PrintSupport.PrintSupportPrintDeviceCapabilitiesUpdatePolicy)]
+                [uuid(5F5FC025-8C35-5529-8038-8CDC3634BBCD)]
+                interface IPrintSupportPrintDeviceCapabilitiesUpdatePolicy : IInspectable
+                {
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+                [exclusiveto(Windows.Graphics.Printing.PrintSupport.PrintSupportPrintDeviceCapabilitiesUpdatePolicy)]
+                [uuid(3D9E1A70-7C39-551F-AA1F-F8CA35B3119E)]
+                interface IPrintSupportPrintDeviceCapabilitiesUpdatePolicyStatics : IInspectable
+                {
+                    HRESULT CreatePeriodicRefresh([in] Windows.Foundation.TimeSpan updatePeriod, [out] [retval] Windows.Graphics.Printing.PrintSupport.PrintSupportPrintDeviceCapabilitiesUpdatePolicy** result);
+                    HRESULT CreatePrintJobRefresh([in] UINT32 numberOfJobs, [out] [retval] Windows.Graphics.Printing.PrintSupport.PrintSupportPrintDeviceCapabilitiesUpdatePolicy** result);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+                [exclusiveto(Windows.Graphics.Printing.PrintSupport.PrintSupportPrintTicketElement)]
+                [uuid(4B2A4489-730D-5BE7-80E6-8332941ABF13)]
+                interface IPrintSupportPrintTicketElement : IInspectable
+                {
+                    [propget] HRESULT LocalName([out] [retval] HSTRING* value);
+                    [propput] HRESULT LocalName([in] HSTRING value);
+                    [propget] HRESULT NamespaceUri([out] [retval] HSTRING* value);
+                    [propput] HRESULT NamespaceUri([in] HSTRING value);
+                }
+
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)]
                 [exclusiveto(Windows.Graphics.Printing.PrintSupport.PrintSupportPrintTicketValidationRequestedEventArgs)]
                 [uuid(338E4E69-DB55-55C7-8338-EF64680A8F90)]
@@ -207,6 +292,21 @@ namespace Windows
                 {
                     [propget] HRESULT PrintTicket([out] [retval] Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicket** value);
                     HRESULT SetPrintTicketValidationStatus([in] Windows.Graphics.Printing.PrintSupport.WorkflowPrintTicketValidationStatus status);
+                    HRESULT GetDeferral([out] [retval] Windows.Foundation.Deferral** result);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+                [exclusiveto(Windows.Graphics.Printing.PrintSupport.PrintSupportPrinterSelectedEventArgs)]
+                [uuid(7B1CB7D9-A8A4-5C09-ADB2-66165F817977)]
+                interface IPrintSupportPrinterSelectedEventArgs : IInspectable
+                {
+                    [propget] HRESULT SourceAppInfo([out] [retval] Windows.ApplicationModel.AppInfo** value);
+                    [propget] HRESULT PrintTicket([out] [retval] Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicket** value);
+                    [propput] HRESULT PrintTicket([in] Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicket* value);
+                    HRESULT SetAdditionalFeatures([in] Windows.Foundation.Collections.IIterable<Windows.Graphics.Printing.PrintSupport.PrintSupportPrintTicketElement*>* features);
+                    HRESULT SetAdditionalParameters([in] Windows.Foundation.Collections.IIterable<Windows.Graphics.Printing.PrintSupport.PrintSupportPrintTicketElement*>* parameters);
+                    [propget] HRESULT AllowedAdditionalFeaturesAndParametersCount([out] [retval] UINT32* value);
+                    HRESULT SetAdaptiveCard([in] Windows.UI.Shell.IAdaptiveCard* adaptiveCard);
                     HRESULT GetDeferral([out] [retval] Windows.Foundation.Deferral** result);
                 }
 
@@ -245,6 +345,7 @@ namespace Windows
                 runtimeclass PrintSupportExtensionSession
                 {
                     [default] interface Windows.Graphics.Printing.PrintSupport.IPrintSupportExtensionSession;
+                    [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Graphics.Printing.PrintSupport.IPrintSupportExtensionSession2;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)]
@@ -259,6 +360,25 @@ namespace Windows
                 runtimeclass PrintSupportPrintDeviceCapabilitiesChangedEventArgs
                 {
                     [default] interface Windows.Graphics.Printing.PrintSupport.IPrintSupportPrintDeviceCapabilitiesChangedEventArgs;
+                    [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Graphics.Printing.PrintSupport.IPrintSupportPrintDeviceCapabilitiesChangedEventArgs2;
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+                [marshaling_behavior(agile)]
+                [static(Windows.Graphics.Printing.PrintSupport.IPrintSupportPrintDeviceCapabilitiesUpdatePolicyStatics, Windows.Foundation.UniversalApiContract, 15.0)]
+                [threading(both)]
+                runtimeclass PrintSupportPrintDeviceCapabilitiesUpdatePolicy
+                {
+                    [default] interface Windows.Graphics.Printing.PrintSupport.IPrintSupportPrintDeviceCapabilitiesUpdatePolicy;
+                }
+
+                [activatable(Windows.Foundation.UniversalApiContract, 15.0)]
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+                [marshaling_behavior(agile)]
+                [threading(both)]
+                runtimeclass PrintSupportPrintTicketElement
+                {
+                    [default] interface Windows.Graphics.Printing.PrintSupport.IPrintSupportPrintTicketElement;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)]
@@ -266,6 +386,13 @@ namespace Windows
                 runtimeclass PrintSupportPrintTicketValidationRequestedEventArgs
                 {
                     [default] interface Windows.Graphics.Printing.PrintSupport.IPrintSupportPrintTicketValidationRequestedEventArgs;
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+                [marshaling_behavior(agile)]
+                runtimeclass PrintSupportPrinterSelectedEventArgs
+                {
+                    [default] interface Windows.Graphics.Printing.PrintSupport.IPrintSupportPrinterSelectedEventArgs;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)]

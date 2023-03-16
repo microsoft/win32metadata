@@ -48,6 +48,16 @@ HcsCreateOperation(
     _In_opt_ HCS_OPERATION_COMPLETION callback
     );
 
+// Creates a new operation that allows registration for event notifications
+
+HCS_OPERATION
+WINAPI
+HcsCreateOperationWithNotifications(
+    _In_ HCS_OPERATION_OPTIONS eventTypes,
+    _In_opt_ const void* context,
+    _In_ HCS_EVENT_CALLBACK callback
+    );
+
 // Closes an operation.
 
 void
@@ -123,6 +133,17 @@ HcsGetOperationResultAndProcessInfo(
     _In_ HCS_OPERATION operation,
     _Out_opt_ HCS_PROCESS_INFORMATION* processInformation,
     _Outptr_opt_ PWSTR* resultDocument
+    );
+
+// Adds a resource to an HCS_OPERATION.
+
+HRESULT
+WINAPI
+HcsAddResourceToOperation(
+    _In_ HCS_OPERATION operation,
+    HCS_RESOURCE_TYPE type,
+    _In_ PCWSTR uri,
+    HANDLE handle
     );
 
 // Returns processor compatibility fields in JSON string format
@@ -526,8 +547,8 @@ HcsRevokeVmGroupAccess(
 
 #endif // _HYPERV_COMPUTECORE_H_
 
-#ifndef ext_ms_win_hyperv_compute_l1_2_2_query_routines
-#define ext_ms_win_hyperv_compute_l1_2_2_query_routines
+#ifndef ext_ms_win_hyperv_compute_l1_2_3_query_routines
+#define ext_ms_win_hyperv_compute_l1_2_3_query_routines
 
 //
 //Private Extension API Query Routines
@@ -552,6 +573,12 @@ IsHcsEnumerateComputeSystemsInNamespacePresent(
 BOOLEAN
 __stdcall
 IsHcsCreateOperationPresent(
+    VOID
+    );
+
+BOOLEAN
+__stdcall
+IsHcsCreateOperationWithNotificationsPresent(
     VOID
     );
 
@@ -606,6 +633,12 @@ IsHcsGetOperationResultPresent(
 BOOLEAN
 __stdcall
 IsHcsGetOperationResultAndProcessInfoPresent(
+    VOID
+    );
+
+BOOLEAN
+__stdcall
+IsHcsAddResourceToOperationPresent(
     VOID
     );
 

@@ -1760,6 +1760,22 @@ interface IMachineGlobalObjectTable : IUnknown
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */")
 #pragma endregion
 
+#pragma region Application Family or OneCore Family
+cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
+
+// ISupportAllowLowerTrustActivation - implemented by CLSID_ActivationCapabilities to indicate OS support for CLSCTX_ALLOW_LOWER_TRUST_REGISTRATION.
+[
+    local,
+    object,
+    uuid(e9956ef2-3828-4b4b-8fa9-7db61dee4954)
+]
+interface ISupportAllowLowerTrustActivation : IUnknown
+{
+}
+
+cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */")
+#pragma endregion
+
 cpp_quote("#define _OBJIDLBASE_")
 cpp_quote("#endif") //_OBJIDLBASE_
 

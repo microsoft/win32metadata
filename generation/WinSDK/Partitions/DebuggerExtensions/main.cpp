@@ -8,3 +8,4 @@
 #include <DbgEng.h>
 #include <DbgModel.h>
 #include <WDBGEXTS.H>
+#include <extsfns.h>

@@ -139,6 +139,9 @@ Revision History:
 
 #define USB_GET_DEVICE_CHARACTERISTICS                      288
 
+// IOCTL codes starting here and beyond are for windows' internal use
+#define USB_RESERVED_USER_BASE                              1024
+
 /*
 USB specific GUIDs
 */

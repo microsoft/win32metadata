@@ -64,7 +64,7 @@ struct FactoryCache
 };
 
 // Map contains information how to initialize, register and unregister objects
-// 
+//
 // How to compare activation data depending on classic COM or WinRT factory
 // Keeps information about factory cache, server name for interface
 struct CreatorMap
@@ -97,15 +97,15 @@ inline bool IsServerNameEqual(_In_ const CreatorMap* entry, const wchar_t* serve
     else if (entry->serverName == nullptr)
     {
         return false;
-    }    
-    
+    }
+
     return ::wcscmp(entry->serverName, serverName) == 0;
 }
 
 #pragma warning(push)
 // Disable unheld lock warning in the case of static SRWLock methods being called with pre-existing SRWLOCK
 #pragma warning(disable: 26165)
-            
+
 // Terminate class factories stored in the cache
 inline bool TerminateMap(_In_ ModuleBase *modulePtr, _In_opt_z_ const wchar_t *serverName, bool forceTerminate) throw()
 {
@@ -131,10 +131,10 @@ inline bool TerminateMap(_In_ ModuleBase *modulePtr, _In_opt_z_ const wchar_t *s
             }
 
             // Make sure that nobody is taking object from cache when we terminate factories
-            void* factoryPointer = nullptr;            
+            void* factoryPointer = nullptr;
             { //Open scope for lock
                 auto lock = ::Microsoft::WRL::Wrappers::SRWLock::LockExclusive(modulePtr->GetLock());
-                
+
                 // Don't need read memory barrier because lock adds one
                 if ((*entry)->factoryCache->factory == nullptr)
                 {
@@ -144,7 +144,7 @@ inline bool TerminateMap(_In_ ModuleBase *modulePtr, _In_opt_z_ const wchar_t *s
                 factoryPointer = (*entry)->factoryCache->factory;
                 (*entry)->factoryCache->factory = nullptr;
             } // End of lock scope
-                
+
             __WRL_ASSERT__(factoryPointer != nullptr);
             IUnknown *factory = reinterpret_cast<IUnknown*>(::DecodePointer(factoryPointer));
             _Analysis_assume_(factory != nullptr);
@@ -223,12 +223,12 @@ inline HRESULT GetCacheEntry(_In_ ModuleBase* modulePtr, _In_ unsigned int *flag
 }
 
 #pragma warning(pop)
-    
+
 template<unsigned int flags>
 inline HRESULT GetClassObject(_In_ ModuleBase *modulePtr, _In_opt_z_ const wchar_t* serverName, REFCLSID clsid, REFIID riid, _Outptr_result_nullonfailure_ void **ppv) throw()
 {
     *ppv = nullptr;
-    
+
     auto entry = modulePtr->GetFirstEntryPointer() + 1;
     auto last = modulePtr->GetMidEntryPointer();
 
@@ -272,7 +272,7 @@ inline HRESULT GetActivationFactory(_In_ ModuleBase* modulePtr, _In_opt_z_ const
     *ppFactory = nullptr;
 
     BOOL hasEmbedNull;
-    if (::WindowsIsStringEmpty(activatibleClassId) || 
+    if (::WindowsIsStringEmpty(activatibleClassId) ||
         (FAILED(::WindowsStringHasEmbeddedNull(activatibleClassId, &hasEmbedNull)) || hasEmbedNull == TRUE))
     {
 #if (NTDDI_VERSION >= NTDDI_WINBLUE)
@@ -286,7 +286,7 @@ inline HRESULT GetActivationFactory(_In_ ModuleBase* modulePtr, _In_opt_z_ const
 
     auto entry = modulePtr->GetMidEntryPointer() + 1;
     auto last = modulePtr->GetLastEntryPointer();
-    
+
     // Walk the linker generated list of pointers to CreatorMap for WinRT objects
     for (; entry < last; entry++)
     {
@@ -332,17 +332,17 @@ inline HRESULT STDAPICALLTYPE ActivationFactoryCallback(_In_opt_ HSTRING activat
 {
     auto modulePtr = ::Microsoft::WRL::GetModuleBase();
     __WRL_ASSERT__(modulePtr != nullptr);
-    
+
     return GetActivationFactory<flags>(modulePtr, nullptr, activationId, ppFactory);
 }
 
 template<unsigned int flags>
 inline HRESULT RegisterWinRTObject(_In_opt_z_ const wchar_t*, _In_reads_(count) _Deref_pre_z_ const wchar_t** activatableClassIds, _Inout_ RO_REGISTRATION_COOKIE* cookie, unsigned int count) throw()
 {
-    PFNGETACTIVATIONFACTORY* activationFactoryCallbacks = new (std::nothrow) PFNGETACTIVATIONFACTORY[count];        
+    PFNGETACTIVATIONFACTORY* activationFactoryCallbacks = new (std::nothrow) PFNGETACTIVATIONFACTORY[count];
     HSTRING* activatableClassIdsHstring = new (std::nothrow) HSTRING[count];
     HRESULT hr = S_OK;
-    
+
     if (activationFactoryCallbacks == nullptr || activatableClassIdsHstring == nullptr)
     {
         hr = E_OUTOFMEMORY;
@@ -426,7 +426,7 @@ template<unsigned int flags>
 inline HRESULT RegisterObjects(_In_ ModuleBase* modulePtr, _In_opt_z_ const wchar_t* serverName) throw()
 {
     HRESULT hr = S_OK;
-    
+
     auto firstEntry = modulePtr->GetFirstEntryPointer();
     auto midEntry = modulePtr->GetMidEntryPointer();
 
@@ -438,9 +438,9 @@ inline HRESULT RegisterObjects(_In_ ModuleBase* modulePtr, _In_opt_z_ const wcha
     {
         // Allocate memory for temporary cookie, factory and clsid's arrays
         DWORD* cookies = new(std::nothrow) DWORD[objectCount];
-        IClassFactory** factories = new (std::nothrow) IClassFactory*[objectCount];        
+        IClassFactory** factories = new (std::nothrow) IClassFactory*[objectCount];
         IID* clsids = new (std::nothrow) IID[objectCount];
-        
+
         if (cookies == nullptr || factories == nullptr || clsids == nullptr)
         {
             hr = E_OUTOFMEMORY;
@@ -568,10 +568,10 @@ inline HRESULT RegisterObjects(_In_ ModuleBase* modulePtr, _In_opt_z_ const wcha
 inline HRESULT UnregisterObjects(_In_ ModuleBase* modulePtr, _In_opt_z_ const wchar_t* serverName) throw()
 {
     HRESULT hr = S_OK;
-    
+
     auto firstEntry = modulePtr->GetFirstEntryPointer();
     auto midEntry = modulePtr->GetMidEntryPointer();
-    
+
     // Count how many COM objects are in the map
     unsigned int objectCount = CountObjectEntries(firstEntry, midEntry, serverName);
 
@@ -614,7 +614,7 @@ inline HRESULT UnregisterObjects(_In_ ModuleBase* modulePtr, _In_opt_z_ const wc
                     (*entry)->factoryCache->cookie.com = cookies[index];
                     index++;
                 }
-            }            
+            }
         }
 
         delete [] cookies;
@@ -622,7 +622,7 @@ inline HRESULT UnregisterObjects(_In_ ModuleBase* modulePtr, _In_opt_z_ const wc
 
     // WinRT entries
     if (SUCCEEDED(hr))
-    {        
+    {
         RO_REGISTRATION_COOKIE cookie = { 0 };
         bool foundCookie = false;
         auto lastEntry = modulePtr->GetLastEntryPointer();
@@ -643,7 +643,7 @@ inline HRESULT UnregisterObjects(_In_ ModuleBase* modulePtr, _In_opt_z_ const wc
         {
             // Unregister WinRt objects
             hr = modulePtr->UnregisterWinRTObject(serverName, cookie);
-            
+
             if (SUCCEEDED(hr))
             {
                 // Reset cookies if unregister succeeded
@@ -673,7 +673,7 @@ inline HRESULT UnregisterObjects(_In_ ModuleBase* modulePtr, _In_opt_z_ const wc
 //       - no object counting on Module<> is enabled if user want to lock server it's required to call LockServer method on factory
 //       - caching disabled
 // 2) OutOfProc server
-//       - no object counting on Module<> is enabled 
+//       - no object counting on Module<> is enabled
 //       - caching disabled
 //       - DisableCaching flag doesn't change behavior
 // 3) InProc server
@@ -761,12 +761,12 @@ inline HRESULT STDMETHODCALLTYPE CreateClassFactory(_In_ unsigned int *flags, _I
 //       - object count is decremented in Release when ref count on factory is equal 0 if Module<> was instantiated
 //       - no caching
 // 2) OutOfProc server
-//       - object counting on Module<> is enabled 
+//       - object counting on Module<> is enabled
 //       - caching enabled
 //       - when ref count in factory AddRef reaches 2 WRL increments object count
 //       - when ref count in factory Release reaches 1 WRL decrements object count
 // 3) OutOfProc | DisabledCaching server
-//       - object counting on Module<> is enabled 
+//       - object counting on Module<> is enabled
 //       - caching disabled
 //       - object count is incremented in constructor of ActivationFactory
 //       - object count is decremented in Release when ref count on factory is equal 0
@@ -876,7 +876,7 @@ inline void CheckForDuplicateEntries(const CreatorMap** firstEntry, const Creato
 } // namespace Details
 
 #pragma warning(push)
-// PREFast cannot see through template instantiation for AsIID() 
+// PREFast cannot see through template instantiation for AsIID()
 #pragma warning(disable: 6388)
 
 
@@ -926,10 +926,10 @@ public:
         return refcount;
     }
 
-    STDMETHOD_(ULONG, Release)()    
+    STDMETHOD_(ULONG, Release)()
     {
         auto refcount = Super::InternalRelease();
-        
+
         if (refcount == 0)
         {
             bool isInProcWithoutCaching = (flags_ & (InProc | DisableCaching)) == (InProc | DisableCaching);
@@ -1048,7 +1048,7 @@ public:
 #pragma warning(pop) // C6387
 
 #pragma warning(push)
-// PREFast cannot see through template instantiation for AsIID() 
+// PREFast cannot see through template instantiation for AsIID()
 #pragma warning(disable: 6388)
 
 // Deprecated, use AgileActivationFactory instead.
@@ -1190,7 +1190,7 @@ private:
 //     }
 // };
 // ActivatableClassWithFactory(MyClass, MyClassFactory)
-// or if default factory is used 
+// or if default factory is used
 // ActivatableClassWithFactory(MyClass, SimpleActivationFactory<MyClass>)
 //
 // When more than 3 interfaces are required to be implemented on factory then:
@@ -1319,7 +1319,7 @@ class SimpleSealedAgileActivationFactory WrlFinal : public SimpleAgileActivation
 #ifndef __WRL_CLASSIC_COM_STRICT__
 #define ActivatableClassWithFactoryEx(className, factory, serverName) \
     InternalWrlCreateCreatorMapEx(className, serverName, reinterpret_cast<const IID*>(&className::InternalGetRuntimeClassName), &className::InternalGetTrustLevel, ::Microsoft::WRL::Details::CreateActivationFactory<factory>, "minATL$__r")
-    
+
 #define ActivatableClassWithFactory(className, factory) \
     InternalWrlCreateCreatorMap(className, reinterpret_cast<const IID*>(&className::InternalGetRuntimeClassName), &className::InternalGetTrustLevel, ::Microsoft::WRL::Details::CreateActivationFactory<factory>, "minATL$__r")
 
@@ -1331,10 +1331,10 @@ class SimpleSealedAgileActivationFactory WrlFinal : public SimpleAgileActivation
 
 #define ActivatableStaticOnlyFactoryEx(factory, serverName) \
     InternalWrlCreateCreatorMapEx(factory, serverName, reinterpret_cast<const IID*>(&factory::InternalGetRuntimeClassNameStatic), &factory::InternalGetTrustLevelStatic, ::Microsoft::WRL::Details::CreateActivationFactory<factory>, "minATL$__r")
-    
+
 #define ActivatableStaticOnlyFactory(factory) \
     InternalWrlCreateCreatorMap(factory, reinterpret_cast<const IID*>(&factory::InternalGetRuntimeClassNameStatic), &factory::InternalGetTrustLevelStatic, ::Microsoft::WRL::Details::CreateActivationFactory<factory>, "minATL$__r")
-        
+
 #define InspectableClassStatic(runtimeClassName, trustLevel) \
     public: \
         static const wchar_t* STDMETHODCALLTYPE InternalGetRuntimeClassNameStatic() throw() \
@@ -1447,7 +1447,7 @@ public:
     StaticStorage()
         // we can't force static construction ordering, and it's zero - init'd in the binary, so don't explicitly zero - out.
         // : initialized_{},
-        // data_{} - 
+        // data_{} -
     {
     }
 
@@ -1569,7 +1569,7 @@ public:
         return *InprocInstanceStorage::Data();
 #endif
     }
-    
+
     static ModuleT& GetModule() throw()
     {
         return Create();
@@ -1677,7 +1677,7 @@ public:
 
 #pragma warning(pop) // C6388
 
-namespace Details 
+namespace Details
 {
 
 template<typename ModuleT>
@@ -1698,7 +1698,7 @@ private:
 protected:
     // Generic notification handler interface required to fire
     // when the last object on the module was released
-    class ReleaseNotifier 
+    class ReleaseNotifier
     {
     public:
         ReleaseNotifier(bool release) throw() : release_(release)
@@ -1750,7 +1750,7 @@ protected:
         T* object_;
         void (T::* method_)();
     };
-    
+
    ReleaseNotifier *releaseNotifier_;
 
     OutOfProcModuleBase() throw() : releaseNotifier_(nullptr)
@@ -1881,7 +1881,7 @@ namespace Details
 class __declspec(uuid("4EDB8EE2-96DD-49A7-94F7-4607DDAB8E3C")) __declspec(novtable) IGetActivationFactoryAbiType : public IInspectable
 {
 public:
-    virtual HRESULT STDMETHODCALLTYPE GetActivationFactory( 
+    virtual HRESULT STDMETHODCALLTYPE GetActivationFactory(
         /* [in] */ __RPC__in HSTRING activatableClassId,
         /* [out][retval] */ __RPC__deref_out_opt IInspectable **factory) = 0;
 };
@@ -1891,26 +1891,26 @@ class __declspec(uuid("518DC408-C077-475B-809E-0BC0C57E4B74")) __declspec(novtab
 public:
     virtual HRESULT STDMETHODCALLTYPE IncrementApplicationUseCount(void) = 0;
     virtual HRESULT STDMETHODCALLTYPE DecrementApplicationUseCount(void) = 0;
-                        
+
 };
 
 class __declspec(uuid("0AACF7A4-5E1D-49DF-8034-FB6A68BC5ED1")) __declspec(novtable) ICoreApplicationAbiType : public IInspectable
 {
 public:
-    virtual HRESULT STDMETHODCALLTYPE Reserved1() = 0; 
-    virtual HRESULT STDMETHODCALLTYPE Reserved2() = 0; 
-    virtual HRESULT STDMETHODCALLTYPE Reserved3() = 0; 
-    virtual HRESULT STDMETHODCALLTYPE Reserved4() = 0; 
-    virtual HRESULT STDMETHODCALLTYPE Reserved5() = 0; 
-    virtual HRESULT STDMETHODCALLTYPE Reserved6() = 0; 
+    virtual HRESULT STDMETHODCALLTYPE Reserved1() = 0;
+    virtual HRESULT STDMETHODCALLTYPE Reserved2() = 0;
+    virtual HRESULT STDMETHODCALLTYPE Reserved3() = 0;
+    virtual HRESULT STDMETHODCALLTYPE Reserved4() = 0;
+    virtual HRESULT STDMETHODCALLTYPE Reserved5() = 0;
+    virtual HRESULT STDMETHODCALLTYPE Reserved6() = 0;
     virtual HRESULT STDMETHODCALLTYPE Reserved7() = 0;
     virtual HRESULT STDMETHODCALLTYPE Reserved8() = 0;
-    virtual HRESULT STDMETHODCALLTYPE RunWithActivationFactories( 
+    virtual HRESULT STDMETHODCALLTYPE RunWithActivationFactories(
         /* [in] */ __RPC__in_opt IGetActivationFactoryAbiType *activationFactoryCallback) = 0;
 };
 
 class ActivationHelper :
-    public ::Microsoft::WRL::RuntimeClass< 
+    public ::Microsoft::WRL::RuntimeClass<
               ::Microsoft::WRL::RuntimeClassFlags< ::Microsoft::WRL::InhibitWeakReference | ::Microsoft::WRL::WinRt>,
               IGetActivationFactoryAbiType, FtmBase>
 {
@@ -1921,7 +1921,7 @@ public:
     {
         auto modulePtr = ::Microsoft::WRL::GetModuleBase();
         __WRL_ASSERT__(modulePtr != nullptr);
-        
+
         // App version of out of proc server doesn't use caching at all
         return ::Microsoft::WRL::Details::GetActivationFactory<InProcDisableCaching>(modulePtr, nullptr, activationId, reinterpret_cast< ::IActivationFactory**>(factory));
     }
@@ -1937,7 +1937,7 @@ private:
     // defining type 'Super' for other compilers since '__super' is a VC++-specific language extension
     using Super = Details::OutOfProcModuleBase<ModuleT>;
     ::Microsoft::WRL::ComPtr< Details::ICoreApplicationUseCountAbiType> count_;
-  
+
 protected:
     Module() throw()
     {
@@ -1987,7 +1987,7 @@ public:
         }
 
         hr = ::Windows::Foundation::GetActivationFactory(
-            Wrappers::HStringReference(L"Windows.ApplicationModel.Core.CoreApplication").Get(), 
+            Wrappers::HStringReference(L"Windows.ApplicationModel.Core.CoreApplication").Get(),
                 coreApplication.GetAddressOf());
 
         if (FAILED(hr))
@@ -2018,7 +2018,9 @@ template<typename ModuleT>
 class Module<OutOfProc, ModuleT> :
     public Details::OutOfProcModuleBase<ModuleT>
 {
-public: 
+    // defining type 'Super' for other compilers since '__super' is a VC++-specific language extension
+    using Super = Details::OutOfProcModuleBase<ModuleT>;
+public:
 #ifndef __WRL_WINRT_STRICT__
     STDMETHOD(RegisterCOMObject)(_In_opt_z_ const wchar_t* serverName, _In_reads_(count)  IID* clsids, _In_reads_(count)  IClassFactory** factories, _Inout_updates_(count) DWORD* cookies, unsigned int count)
     {
@@ -2028,7 +2030,7 @@ public:
     STDMETHOD(UnregisterCOMObject)(_In_opt_z_ const wchar_t*, _Inout_updates_(count) DWORD* cookies, unsigned int count)
     {
         HRESULT hr = S_OK;
-        
+
         for (unsigned int i = 0 ; i < count && SUCCEEDED(hr); i++)
         {
             if (cookies[i] != 0)
@@ -2043,7 +2045,7 @@ public:
 
         return hr;
     }
-#else    
+#else
     STDMETHOD(RegisterCOMObject)(_In_opt_z_ const wchar_t*, _In_ IID*, _In_ IClassFactory**, _Inout_ DWORD*, unsigned int)
     {
         __WRL_ASSERT__(false && "COM components found. Please make sure that that you either undefine __WRL_WINRT_STRICT__ or remove COM components");
@@ -2064,7 +2066,7 @@ public:
     }
 
 
-    STDMETHOD(UnregisterWinRTObject)(_In_opt_z_ const wchar_t*, _In_ RO_REGISTRATION_COOKIE cookie)    
+    STDMETHOD(UnregisterWinRTObject)(_In_opt_z_ const wchar_t*, _In_ RO_REGISTRATION_COOKIE cookie)
     {
         ::Windows::Foundation::RevokeActivationFactories(cookie);
         return S_OK;
@@ -2101,9 +2103,9 @@ public:
     STDMETHOD_(unsigned long, DecrementObjectCount)()
     {
         auto ref = ::CoReleaseServerProcess();
-        if (ref == 0 && __super::releaseNotifier_)
+        if (ref == 0 && Super::releaseNotifier_)
         {
-            __super::releaseNotifier_->Invoke();
+            Super::releaseNotifier_->Invoke();
         }
 
         return ref;

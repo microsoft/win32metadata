@@ -88,7 +88,7 @@
 //  API Contract Inclusion Definitions
 #if !defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
 #if !defined(WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION)
-#define WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION 0x60000
+#define WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION 0x70000
 #endif // defined(WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION)
 
 #if !defined(WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION)
@@ -104,7 +104,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -328,24 +328,45 @@ namespace ABI {
             namespace Calls {
                 namespace Provider {
                     MIDL_INTERFACE("20613479-0ef9-4454-871c-afb66a14b6a5")
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+                    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
                     IPhoneCallOrigin : public IInspectable
                     {
                     public:
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+                        DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
                         virtual HRESULT STDMETHODCALLTYPE get_Category(
                             HSTRING* value
                             ) = 0;
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+                        DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
                         virtual HRESULT STDMETHODCALLTYPE put_Category(
                             HSTRING value
                             ) = 0;
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+                        DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
                         virtual HRESULT STDMETHODCALLTYPE get_CategoryDescription(
                             HSTRING* value
                             ) = 0;
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+                        DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
                         virtual HRESULT STDMETHODCALLTYPE put_CategoryDescription(
                             HSTRING value
                             ) = 0;
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+                        DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
                         virtual HRESULT STDMETHODCALLTYPE get_Location(
                             HSTRING* value
                             ) = 0;
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+                        DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
                         virtual HRESULT STDMETHODCALLTYPE put_Location(
                             HSTRING value
                             ) = 0;
@@ -384,12 +405,21 @@ namespace ABI {
             namespace Calls {
                 namespace Provider {
                     MIDL_INTERFACE("04c7e980-9ac2-4768-b536-b68da4957d02")
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+                    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
                     IPhoneCallOrigin2 : public IInspectable
                     {
                     public:
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+                        DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
                         virtual HRESULT STDMETHODCALLTYPE get_DisplayName(
                             HSTRING* value
                             ) = 0;
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+                        DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
                         virtual HRESULT STDMETHODCALLTYPE put_DisplayName(
                             HSTRING value
                             ) = 0;
@@ -429,12 +459,21 @@ namespace ABI {
             namespace Calls {
                 namespace Provider {
                     MIDL_INTERFACE("49330fb4-d1a7-43a2-aeee-c07b6dbaf068")
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+                    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
                     IPhoneCallOrigin3 : public IInspectable
                     {
                     public:
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+                        DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
                         virtual HRESULT STDMETHODCALLTYPE get_DisplayPicture(
                             ABI::Windows::Storage::IStorageFile** value
                             ) = 0;
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+                        DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
                         virtual HRESULT STDMETHODCALLTYPE put_DisplayPicture(
                             ABI::Windows::Storage::IStorageFile* value
                             ) = 0;
@@ -470,13 +509,25 @@ namespace ABI {
             namespace Calls {
                 namespace Provider {
                     MIDL_INTERFACE("ccfc5a0a-9af7-6149-39d0-e076fcce1395")
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+                    DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
                     IPhoneCallOriginManagerStatics : public IInspectable
                     {
                     public:
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+                        DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
                         virtual HRESULT STDMETHODCALLTYPE get_IsCurrentAppActiveCallOriginApp(
                             boolean* value
                             ) = 0;
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+                        DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
                         virtual HRESULT STDMETHODCALLTYPE ShowPhoneCallOriginSettingsUI(void) = 0;
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+                        DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
                         virtual HRESULT STDMETHODCALLTYPE SetCallOrigin(
                             GUID requestId,
                             ABI::Windows::ApplicationModel::Calls::Provider::IPhoneCallOrigin* callOrigin
@@ -516,9 +567,15 @@ namespace ABI {
             namespace Calls {
                 namespace Provider {
                     MIDL_INTERFACE("8bf3ee3f-40f4-4380-8c7c-aea2c9b8dd7a")
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+                    DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
                     IPhoneCallOriginManagerStatics2 : public IInspectable
                     {
                     public:
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+                        DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
                         virtual HRESULT STDMETHODCALLTYPE RequestSetAsActiveCallOriginAppAsync(
                             __FIAsyncOperation_1_boolean** result
                             ) = 0;
@@ -554,9 +611,15 @@ namespace ABI {
             namespace Calls {
                 namespace Provider {
                     MIDL_INTERFACE("2ed69764-a6e3-50f0-b76a-d67cb39bdfde")
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+                    DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
                     IPhoneCallOriginManagerStatics3 : public IInspectable
                     {
                     public:
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+                        DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
                         virtual HRESULT STDMETHODCALLTYPE get_IsSupported(
                             boolean* value
                             ) = 0;
@@ -595,6 +658,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPho
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_ApplicationModel_Calls_Provider_PhoneCallOrigin_DEFINED
 #define RUNTIMECLASS_Windows_ApplicationModel_Calls_Provider_PhoneCallOrigin_DEFINED
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Calls_Provider_PhoneCallOrigin[] = L"Windows.ApplicationModel.Calls.Provider.PhoneCallOrigin";
 #endif
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x10000
@@ -606,9 +672,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.ApplicationModel.Calls.CallsPhoneContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics2 interface starting with version 3.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics interface starting with version 1.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics3 interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics interface starting with version 1.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics2 interface starting with version 3.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -618,6 +684,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_ApplicationModel_Calls_Provider_PhoneCallOriginManager_DEFINED
 #define RUNTIMECLASS_Windows_ApplicationModel_Calls_Provider_PhoneCallOriginManager_DEFINED
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Calls_Provider_PhoneCallOriginManager[] = L"Windows.ApplicationModel.Calls.Provider.PhoneCallOriginManager";
 #endif
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x10000
@@ -804,7 +873,11 @@ typedef interface __x_ABI_CWindows_CStorage_CIStorageFile __x_ABI_CWindows_CStor
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_Provider_IPhoneCallOrigin[] = L"Windows.ApplicationModel.Calls.Provider.IPhoneCallOrigin";
-typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginVtbl
+typedef struct
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginVtbl
 {
     BEGIN_INTERFACE
 
@@ -820,16 +893,34 @@ typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOr
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin* This,
         TrustLevel* trustLevel);
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
     HRESULT (STDMETHODCALLTYPE* get_Category)(__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin* This,
         HSTRING* value);
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
     HRESULT (STDMETHODCALLTYPE* put_Category)(__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin* This,
         HSTRING value);
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
     HRESULT (STDMETHODCALLTYPE* get_CategoryDescription)(__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin* This,
         HSTRING* value);
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
     HRESULT (STDMETHODCALLTYPE* put_CategoryDescription)(__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin* This,
         HSTRING value);
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
     HRESULT (STDMETHODCALLTYPE* get_Location)(__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin* This,
         HSTRING* value);
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
     HRESULT (STDMETHODCALLTYPE* put_Location)(__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin* This,
         HSTRING value);
 
@@ -861,21 +952,39 @@ interface __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin_get_Category(This, value) \
     ((This)->lpVtbl->get_Category(This, value))
 
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin_put_Category(This, value) \
     ((This)->lpVtbl->put_Category(This, value))
 
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin_get_CategoryDescription(This, value) \
     ((This)->lpVtbl->get_CategoryDescription(This, value))
 
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin_put_CategoryDescription(This, value) \
     ((This)->lpVtbl->put_CategoryDescription(This, value))
 
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin_get_Location(This, value) \
     ((This)->lpVtbl->get_Location(This, value))
 
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin_put_Location(This, value) \
     ((This)->lpVtbl->put_Location(This, value))
 
@@ -901,7 +1010,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPho
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin2_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin2_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_Provider_IPhoneCallOrigin2[] = L"Windows.ApplicationModel.Calls.Provider.IPhoneCallOrigin2";
-typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin2Vtbl
+typedef struct
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin2Vtbl
 {
     BEGIN_INTERFACE
 
@@ -917,8 +1030,14 @@ typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOr
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin2* This,
         TrustLevel* trustLevel);
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
     HRESULT (STDMETHODCALLTYPE* get_DisplayName)(__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin2* This,
         HSTRING* value);
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
     HRESULT (STDMETHODCALLTYPE* put_DisplayName)(__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin2* This,
         HSTRING value);
 
@@ -950,9 +1069,15 @@ interface __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin2
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin2_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin2_get_DisplayName(This, value) \
     ((This)->lpVtbl->get_DisplayName(This, value))
 
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin2_put_DisplayName(This, value) \
     ((This)->lpVtbl->put_DisplayName(This, value))
 
@@ -979,7 +1104,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPho
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin3_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin3_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_Provider_IPhoneCallOrigin3[] = L"Windows.ApplicationModel.Calls.Provider.IPhoneCallOrigin3";
-typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin3Vtbl
+typedef struct
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin3Vtbl
 {
     BEGIN_INTERFACE
 
@@ -995,8 +1124,14 @@ typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOr
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin3* This,
         TrustLevel* trustLevel);
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
     HRESULT (STDMETHODCALLTYPE* get_DisplayPicture)(__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin3* This,
         __x_ABI_CWindows_CStorage_CIStorageFile** value);
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
     HRESULT (STDMETHODCALLTYPE* put_DisplayPicture)(__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin3* This,
         __x_ABI_CWindows_CStorage_CIStorageFile* value);
 
@@ -1028,9 +1163,15 @@ interface __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin3
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin3_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin3_get_DisplayPicture(This, value) \
     ((This)->lpVtbl->get_DisplayPicture(This, value))
 
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin3_put_DisplayPicture(This, value) \
     ((This)->lpVtbl->put_DisplayPicture(This, value))
 
@@ -1053,7 +1194,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPho
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_Provider_IPhoneCallOriginManagerStatics[] = L"Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics";
-typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStaticsVtbl
+typedef struct
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStaticsVtbl
 {
     BEGIN_INTERFACE
 
@@ -1069,9 +1214,18 @@ typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOr
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics* This,
         TrustLevel* trustLevel);
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
     HRESULT (STDMETHODCALLTYPE* get_IsCurrentAppActiveCallOriginApp)(__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics* This,
         boolean* value);
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
     HRESULT (STDMETHODCALLTYPE* ShowPhoneCallOriginSettingsUI)(__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics* This);
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
     HRESULT (STDMETHODCALLTYPE* SetCallOrigin)(__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics* This,
         GUID requestId,
         __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOrigin* callOrigin);
@@ -1104,12 +1258,21 @@ interface __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginM
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics_get_IsCurrentAppActiveCallOriginApp(This, value) \
     ((This)->lpVtbl->get_IsCurrentAppActiveCallOriginApp(This, value))
 
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics_ShowPhoneCallOriginSettingsUI(This) \
     ((This)->lpVtbl->ShowPhoneCallOriginSettingsUI(This))
 
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics_SetCallOrigin(This, requestId, callOrigin) \
     ((This)->lpVtbl->SetCallOrigin(This, requestId, callOrigin))
 
@@ -1135,7 +1298,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPho
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics2_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics2_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_Provider_IPhoneCallOriginManagerStatics2[] = L"Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics2";
-typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics2Vtbl
+typedef struct
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics2Vtbl
 {
     BEGIN_INTERFACE
 
@@ -1151,6 +1318,9 @@ typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOr
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics2* This,
         TrustLevel* trustLevel);
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
     HRESULT (STDMETHODCALLTYPE* RequestSetAsActiveCallOriginAppAsync)(__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics2* This,
         __FIAsyncOperation_1_boolean** result);
 
@@ -1182,6 +1352,9 @@ interface __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginM
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics2_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics2_RequestSetAsActiveCallOriginAppAsync(This, result) \
     ((This)->lpVtbl->RequestSetAsActiveCallOriginAppAsync(This, result))
 
@@ -1204,7 +1377,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPho
 #if !defined(____x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics3_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics3_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Calls_Provider_IPhoneCallOriginManagerStatics3[] = L"Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics3";
-typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics3Vtbl
+typedef struct
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics3Vtbl
 {
     BEGIN_INTERFACE
 
@@ -1220,6 +1397,9 @@ typedef struct __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOr
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics3* This,
         TrustLevel* trustLevel);
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
     HRESULT (STDMETHODCALLTYPE* get_IsSupported)(__x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics3* This,
         boolean* value);
 
@@ -1251,6 +1431,9 @@ interface __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginM
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics3_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+    DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
 #define __x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPhoneCallOriginManagerStatics3_get_IsSupported(This, value) \
     ((This)->lpVtbl->get_IsSupported(This, value))
 
@@ -1282,6 +1465,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCalls_CProvider_CIPho
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_ApplicationModel_Calls_Provider_PhoneCallOrigin_DEFINED
 #define RUNTIMECLASS_Windows_ApplicationModel_Calls_Provider_PhoneCallOrigin_DEFINED
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+DEPRECATED("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Calls_Provider_PhoneCallOrigin[] = L"Windows.ApplicationModel.Calls.Provider.PhoneCallOrigin";
 #endif
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x10000
@@ -1293,9 +1479,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.ApplicationModel.Calls.CallsPhoneContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics2 interface starting with version 3.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics interface starting with version 1.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics3 interface starting with version 5.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics interface starting with version 1.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics2 interface starting with version 3.0 of the Windows.ApplicationModel.Calls.CallsPhoneContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -1305,6 +1491,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_ApplicationModel_Calls_Provider_PhoneCallOriginManager_DEFINED
 #define RUNTIMECLASS_Windows_ApplicationModel_Calls_Provider_PhoneCallOriginManager_DEFINED
+#if WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
+DEPRECATED("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x70000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Calls_Provider_PhoneCallOriginManager[] = L"Windows.ApplicationModel.Calls.Provider.PhoneCallOriginManager";
 #endif
 #endif // WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION >= 0x10000

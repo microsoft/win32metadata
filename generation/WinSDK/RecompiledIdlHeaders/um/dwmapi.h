@@ -62,6 +62,7 @@ enum DWMWINDOWATTRIBUTE
     DWMWA_CAPTION_COLOR,                        // [set] COLORREF, The color of the caption
     DWMWA_TEXT_COLOR,                           // [set] COLORREF, The color of the caption text
     DWMWA_VISIBLE_FRAME_BORDER_THICKNESS,       // [get] UINT, width of the visible border around a thick frame window
+    DWMWA_SYSTEMBACKDROP_TYPE,                  // [get, set] SYSTEMBACKDROP_TYPE, Controls the system-drawn backdrop material of a window, including behind the non-client area.
     DWMWA_LAST
 };
 
@@ -93,6 +94,16 @@ typedef enum {
 
 // Use this constant to specify that a window part should not be rendered
 #define DWMWA_COLOR_NONE    0xFFFFFFFE
+
+// Types used with DWMWA_SYSTEMBACKDROP_TYPE
+enum DWM_SYSTEMBACKDROP_TYPE
+{
+    DWMSBT_AUTO,             // [Default] Let DWM automatically decide the system-drawn backdrop for this window.
+    DWMSBT_NONE,             // Do not draw any system backdrop.
+    DWMSBT_MAINWINDOW,       // Draw the backdrop material effect corresponding to a long-lived window.
+    DWMSBT_TRANSIENTWINDOW,  // Draw the backdrop material effect corresponding to a transient window.
+    DWMSBT_TABBEDWINDOW,     // Draw the backdrop material effect corresponding to a window with a tabbed title bar.
+};
 
 
 // Non-client rendering policy attribute values

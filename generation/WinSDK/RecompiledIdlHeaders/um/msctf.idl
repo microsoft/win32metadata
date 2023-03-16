@@ -102,6 +102,7 @@ cpp_quote("EXTERN_C const GUID GUID_PROP_LANGID;")
 cpp_quote("EXTERN_C const GUID GUID_PROP_READING;")
 cpp_quote("EXTERN_C const GUID GUID_PROP_COMPOSING;")
 cpp_quote("EXTERN_C const GUID GUID_PROP_TKB_ALTERNATES;")
+cpp_quote("EXTERN_C const GUID GUID_PROP_URL;")
 cpp_quote("")
 
 //  Values for the GUID_PROP_TKB_ALTERNATES property

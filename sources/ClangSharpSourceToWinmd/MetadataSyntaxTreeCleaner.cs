@@ -208,6 +208,26 @@ namespace ClangSharpSourceToWinmd
                     node = (StructDeclarationSyntax)base.VisitStructDeclaration(node);
                 }
 
+                foreach (var member in node.Members)
+                {
+                    if (!(member is FieldDeclarationSyntax))
+                    {
+                        continue;
+                    }
+
+                    var fieldName = ((FieldDeclarationSyntax)member).Declaration.Variables[0].Identifier.Value.ToString();
+                    if (fieldName == "cbSize")
+                    {
+                        var attributeList = SyntaxFactory.AttributeList(
+                                SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
+                                    SyntaxFactory.Attribute(
+                                        SyntaxFactory.ParseName("StructSizeField"),
+                                        SyntaxFactory.ParseAttributeArgumentList($"(\"{fieldName}\")"))));
+
+                        node = node.AddAttributeLists(attributeList);
+                    }
+                }
+
                 return node;
             }
 
@@ -446,17 +466,6 @@ namespace ClangSharpSourceToWinmd
                                 SyntaxFactory.AttributeList(
                                     SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
                                         SyntaxFactory.Attribute(SyntaxFactory.ParseName("global::System.Flags")))).WithLeadingTrivia(node.GetLeadingTrivia()));
-                    }
-
-                    if (node.BaseList == null)
-                    {
-                        var baseList =
-                            SyntaxFactory.BaseList(
-                                SyntaxFactory.SingletonSeparatedList<BaseTypeSyntax>(
-                                    SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName("uint").WithLeadingTrivia(SyntaxFactory.Space))))
-                                    .WithTrailingTrivia(SyntaxFactory.Whitespace("\r\n"));
-                        node = node.WithIdentifier(node.Identifier.WithTrailingTrivia(SyntaxFactory.Space));
-                        node = node.WithBaseList(baseList);
                     }
                 }
 
@@ -704,7 +713,7 @@ namespace ClangSharpSourceToWinmd
                         break;
 
                     default:
-                        if (nativeTypeName.StartsWith("const "))
+                        if (nativeTypeName.StartsWith("const ") || Regex.IsMatch(nativeTypeName, "^L?PCW?STR"))
                         {
                             isConst = true;
                         }
@@ -845,12 +854,12 @@ namespace ClangSharpSourceToWinmd
 
                             break;
                         }
-                        else if (salAttr.P1 == "_Maybenull_" || salAttr.P1 == "_Pre_maybenull_")
+                        else if (salAttr.P1 == "_Maybenull_" || salAttr.P1 == "_Pre_maybenull_" || salAttr.P1 == "_Pre_null_")
                         {
                             isIn = true;
                             isOpt = true;
 
-                            break;
+                            continue;
                         }
 
                         if (salAttr.P1.Contains("_opt"))

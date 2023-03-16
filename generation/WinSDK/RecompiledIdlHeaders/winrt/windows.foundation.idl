@@ -163,6 +163,8 @@ namespace Windows
 
             interface Windows.Foundation.Collections.IIterable<Windows.Foundation.Collections.IKeyValuePair<IInspectable*, IInspectable*>*>;
 
+            interface Windows.Foundation.Collections.IIterable<Windows.Foundation.Collections.IKeyValuePair<Windows.Foundation.Uri*, HSTRING>*>;
+
             interface Windows.Foundation.Collections.IIterable<Windows.Foundation.Collections.IMapView<HSTRING, IInspectable*>*>;
 
             interface Windows.Foundation.Collections.IIterable<Windows.Foundation.DateTime>;
@@ -217,6 +219,8 @@ namespace Windows
 
             interface Windows.Foundation.Collections.IIterator<Windows.Foundation.Collections.IKeyValuePair<IInspectable*, IInspectable*>*>;
 
+            interface Windows.Foundation.Collections.IIterator<Windows.Foundation.Collections.IKeyValuePair<Windows.Foundation.Uri*, HSTRING>*>;
+
             interface Windows.Foundation.Collections.IIterator<Windows.Foundation.Collections.IMapView<HSTRING, IInspectable*>*>;
 
             interface Windows.Foundation.Collections.IIterator<Windows.Foundation.DateTime>;
@@ -245,6 +249,8 @@ namespace Windows
 
             interface Windows.Foundation.Collections.IKeyValuePair<IInspectable*, IInspectable*>;
 
+            interface Windows.Foundation.Collections.IKeyValuePair<Windows.Foundation.Uri*, HSTRING>;
+
             interface Windows.Foundation.Collections.IMapChangedEventArgs<HSTRING>;
 
             interface Windows.Foundation.Collections.IMapView<GUID, IInspectable*>;
@@ -259,6 +265,8 @@ namespace Windows
 
             interface Windows.Foundation.Collections.IMapView<IInspectable*, IInspectable*>;
 
+            interface Windows.Foundation.Collections.IMapView<Windows.Foundation.Uri*, HSTRING>;
+
             interface Windows.Foundation.Collections.IMap<GUID, IInspectable*>;
 
             interface Windows.Foundation.Collections.IMap<HSTRING, HSTRING>;
@@ -268,6 +276,8 @@ namespace Windows
             interface Windows.Foundation.Collections.IMap<HSTRING, Windows.Foundation.Collections.IVector<HSTRING>*>;
 
             interface Windows.Foundation.Collections.IMap<IInspectable*, IInspectable*>;
+
+            interface Windows.Foundation.Collections.IMap<Windows.Foundation.Uri*, HSTRING>;
 
             interface Windows.Foundation.Collections.IObservableMap<HSTRING, HSTRING>;
 
@@ -308,6 +318,8 @@ namespace Windows
             interface Windows.Foundation.Collections.IVectorView<Windows.Foundation.Point>;
 
             interface Windows.Foundation.Collections.IVectorView<Windows.Foundation.Size>;
+
+            interface Windows.Foundation.Collections.IVectorView<Windows.Foundation.TimeSpan>;
 
             interface Windows.Foundation.Collections.IVectorView<Windows.Foundation.Uri*>;
 

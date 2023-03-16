@@ -61,6 +61,8 @@ Partitions are defined as [folders](generation/WinSDK/Partitions) with [main.cpp
 
 You can test localized changes to partitions by running `./scripts/ScrapeHeaders.ps1` from the repo root. If it compiles, the changes are likely correct. A common reason for failure is main.cpp either doesn't include all the necessary dependent headers needed to use the target headers or doesn't include them in the proper order.
 
+For an API to be emitted in the metadata, it also needs a proper import library mapping in [libMappings.rsp](generation/WinSDK/libMappings.rsp). This file was prepopulated by scanning the `.lib` files in the SDK with [CreateProcLibMappingForAllLibs.ps1](scripts/CreateProcLibMappingForAllLibs.ps1), so most of the time no changes are required here. However there are cases where APIs may not have proper entries in that file. If APIs do not appear in the metadata despite the Partition definition looking correct, make sure [libMappings.rsp](generation/WinSDK/libMappings.rsp) contains the correct entries.
+
 ### Split a header file among multiple namespaces
 
 If a header file doesn't cleanly map to one namespace, it should be associated with a partition and namespace that makes sense for the majority of its APIs (using the steps above for a single namespace), and then the rest of the APIs should be manually remapped using [requiredNamespacesForNames.rsp](generation/WinSDK/requiredNamespacesForNames.rsp). This file contains one line per API and follows the format `<API>=<NAMESPACE>`. It is a single file that is shared across all partitions.

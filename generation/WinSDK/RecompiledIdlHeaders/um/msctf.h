@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -770,6 +770,7 @@ EXTERN_C const GUID GUID_PROP_LANGID;
 EXTERN_C const GUID GUID_PROP_READING;
 EXTERN_C const GUID GUID_PROP_COMPOSING;
 EXTERN_C const GUID GUID_PROP_TKB_ALTERNATES;
+EXTERN_C const GUID GUID_PROP_URL;
 
 #define TKB_ALTERNATES_STANDARD               0x00000001
 #define TKB_ALTERNATES_FOR_AUTOCORRECTION     0x00000002

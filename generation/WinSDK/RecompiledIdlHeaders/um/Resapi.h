@@ -861,6 +861,25 @@ DWORD
     _In_ DWORD DumpDelayInMs
 );
 
+#define CLUSRES_DISABLE_WPR_WATCHDOG_FOR_ONLINE_CALLS  0x00000001
+#define CLUSRES_DISABLE_WPR_WATCHDOG_FOR_OFFLINE_CALLS 0x00000002
+
+typedef
+DWORD
+(_stdcall *PSET_RESOURCE_WPR_POLICY_ROUTINE)(
+    _In_ RESOURCE_HANDLE ResourceHandle,
+    _In_ DWORD WprPolicyFlags
+);
+
+#define ARM_WPR_WATCHDOG_USING_CURRENT_START_AFTER 0xffffffffffffffffULL
+
+typedef
+DWORD
+(_stdcall *PARM_WPR_WATCHDOG_FOR_CURRENT_RESOURCE_CALL_ROUTINE)(
+    _In_ RESOURCE_HANDLE ResourceHandle,
+    _In_ ULONGLONG TimeoutInMs
+);
+
 typedef struct CLRES_CALLBACK_FUNCTION_TABLE {
     PLOG_EVENT_ROUTINE                                                         LogEvent;
     PSET_RESOURCE_STATUS_ROUTINE_EX                                            SetResourceStatusEx;
@@ -877,6 +896,8 @@ typedef struct CLRES_CALLBACK_FUNCTION_TABLE {
     PSET_INTERNAL_STATE                                                        SetInternalState;
     PSET_RESOURCE_LOCKED_MODE_EX_ROUTINE                                       SetResourceLockedModeEx;
     PREQUEST_DUMP_ROUTINE                                                      RequestDump;
+    PSET_RESOURCE_WPR_POLICY_ROUTINE                                           SetResourceWprPolicy;
+    PARM_WPR_WATCHDOG_FOR_CURRENT_RESOURCE_CALL_ROUTINE                        ArmWprWatchdogForCurrentResourceCall;
 }CLRES_CALLBACK_FUNCTION_TABLE, *PCLRES_CALLBACK_FUNCTION_TABLE;
 
 typedef

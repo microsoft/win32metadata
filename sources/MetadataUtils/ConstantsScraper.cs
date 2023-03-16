@@ -34,7 +34,7 @@ namespace MetadataUtils
 
             private static readonly Regex DefineConstantRegex =
                 new Regex(
-                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE[AW]{0,1}\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+))|([a-z0-9_]+\s*\+\s*(\d+|0x[0-de-f]+))|(\(NTSTATUS\)((?:0x)?[\da-f]+L?))|(\s*\(DWORD\)\s*\(?\s*-1(L|\b)\s*\)?)|(\(DWORD\)((?:0x)?[\da-f]+L?))|(\(BCRYPT_ALG_HANDLE\)\s*((?:0x)?[\da-f]+L?))|(\{(?:(?:0x)?[\da-f]{4,8}L?,?\s*){3}\{(?:(?:0x)?[\da-f]{2}L?,?\s*){8}\}\})|(HIDP_ERROR_CODES\((.*),(.*)\))|([a-z0-9_]+))$", RegexOptions.IgnoreCase);
+                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE[AW]{0,1}\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+))|([a-z0-9_]+U?\s*[\+\-]\s*(\d+|0x[0-de-f]+)U?)|(\(NTSTATUS\)((?:0x)?[\da-f]+L?))|(\s*\(DWORD\)\s*\(?\s*-1(L|\b)\s*\)?)|(\(DWORD\)((?:0x)?[\da-f]+L?))|(\(BCRYPT_ALG_HANDLE\)\s*((?:0x)?[\da-f]+L?))|(\{\s*(?:(?:0x)?[\da-f]{4,8}L?,?\s*){3}\s*\{\s*(?:(?:0x)?[\da-f]{1,2}L?,?\s*){8}\s*\}\s*\})|(HIDP_ERROR_CODES\((.*),(.*)\))|([a-z0-9_]+))$", RegexOptions.IgnoreCase);
 
             private static readonly Regex DefineGuidConstRegex =
                 new Regex(
@@ -54,7 +54,7 @@ namespace MetadataUtils
 
             private static readonly Regex DefineEnumFlagsRegex =
                 new Regex(
-                    @"^\s*DEFINE_ENUM_FLAG_OPERATORS\(\s*(\S+)\s*\)\s*\;\s*$");
+                    @"^\s*DEFINE_ENUM_FLAG_OPERATORS\(\s*(\S+)\s*\)\s*\;?\s*$");
 
             private static readonly Regex CtlCodeRegex =
                 new Regex(
@@ -278,6 +278,21 @@ namespace MetadataUtils
 
                 this.withTypes.TryGetValue(name, out string forceType);
 
+                if (string.IsNullOrEmpty(forceType))
+                {
+                    var wildCards = this.withTypes.Where(p => p.Key.EndsWith("*"));
+
+                    foreach (var wildCard in wildCards)
+                    {
+                        if (name.StartsWith(wildCard.Key.Replace("*", "")))
+                        {
+                            forceType = wildCard.Value;
+
+                            break;
+                        }
+                    }
+                }
+
                 return forceType;
             }
 
@@ -342,7 +357,18 @@ namespace MetadataUtils
                 if (defineGuidKeyword == "DEFINE_DEVPROPKEY" || defineGuidKeyword == "DEFINE_PROPERTYKEY")
                 {
                     string structType = defineGuidKeyword == "DEFINE_DEVPROPKEY" ? "DEVPROPKEY" : "PROPERTYKEY";
-                    writer.AddPropKey(structType, name, args);
+
+                    var guidParts = args[..args.LastIndexOf(',')].Split(", ");
+                    for (int i = 0; i < guidParts.Length; i++)
+                    {
+                        guidParts[i] = Convert.ToUInt32(guidParts[i].Trim(), 16).ToString();
+                    }
+
+                    var fmtid = $"{{{string.Join(", ", guidParts)}}}";
+                    var pid = args[(args.LastIndexOf(',') + 1)..].Trim();
+                    pid = pid.StartsWith("0x", StringComparison.InvariantCultureIgnoreCase) ? Convert.ToUInt32(pid, 16).ToString() : pid;
+
+                    writer.AddPropKey(structType, name, $"\"{fmtid}, {pid}\"");
                 }
                 else
                 {
@@ -729,7 +755,7 @@ namespace MetadataUtils
                                 this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
                                 continue;
                             }
-                            // (IDENT_FOO + 4)
+                            // (IDENT_FOO +/- 4)
                             else if (match.Groups[15].Success)
                             {
                                 valueText = match.Groups[15].Value;
@@ -761,7 +787,7 @@ namespace MetadataUtils
                             // {0xb5367df0,0xcbac,0x11cf,{0x95,0xca,0x00,0x80,0x5f,0x48,0xa1,0x92}}
                             else if (match.Groups[25].Success)
                             {
-                                valueText = match.Groups[25].Value.Replace("{", "").Replace("}", "");
+                                valueText = match.Groups[25].Value.Replace("{", "").Replace("}", "").Replace(" ", "");
 
                                 var defineGuidLine = $"{name}, {valueText})";
                                 this.AddConstantGuid("", currentNamespace, defineGuidLine);

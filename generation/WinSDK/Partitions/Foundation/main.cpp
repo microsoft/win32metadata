@@ -13,3 +13,4 @@
 #include <cierror.h>
 #include <mprerror.h>
 #include <winsdkver.h>
+#include <ntiologc.h>

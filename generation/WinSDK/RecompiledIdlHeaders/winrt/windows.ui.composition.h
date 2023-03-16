@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -1174,6 +1174,21 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CUI_CComposition_CICompositionObject4_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CUI_CComposition_CICompositionObject5_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CComposition_CICompositionObject5_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Composition {
+                interface ICompositionObject5;
+            } /* Composition */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CUI_CComposition_CICompositionObject5 ABI::Windows::UI::Composition::ICompositionObject5
+
+#endif // ____x_ABI_CWindows_CUI_CComposition_CICompositionObject5_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CUI_CComposition_CICompositionObjectFactory_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CComposition_CICompositionObjectFactory_FWD_DEFINED__
 namespace ABI {
@@ -1818,6 +1833,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CUI_CComposition_CICompositor7 ABI::Windows::UI::Composition::ICompositor7
 
 #endif // ____x_ABI_CWindows_CUI_CComposition_CICompositor7_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CComposition_CICompositor8_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CComposition_CICompositor8_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Composition {
+                interface ICompositor8;
+            } /* Composition */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CUI_CComposition_CICompositor8 ABI::Windows::UI::Composition::ICompositor8
+
+#endif // ____x_ABI_CWindows_CUI_CComposition_CICompositor8_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CUI_CComposition_CICompositorStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CComposition_CICompositorStatics_FWD_DEFINED__
@@ -8945,6 +8975,44 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CComposition_CICompositionObject4;
 
 /*
  *
+ * Interface Windows.UI.Composition.ICompositionObject5
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.Composition.CompositionObject
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CUI_CComposition_CICompositionObject5_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CComposition_CICompositionObject5_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Composition_ICompositionObject5[] = L"Windows.UI.Composition.ICompositionObject5";
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Composition {
+                MIDL_INTERFACE("1d7f391b-a130-5265-a62b-60b8e668965a")
+                ICompositionObject5 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE StartAnimationWithController(
+                        HSTRING propertyName,
+                        ABI::Windows::UI::Composition::ICompositionAnimation* animation,
+                        ABI::Windows::UI::Composition::IAnimationController* animationController
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_ICompositionObject5 = _uuidof(ICompositionObject5);
+            } /* Composition */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CComposition_CICompositionObject5;
+#endif /* !defined(____x_ABI_CWindows_CUI_CComposition_CICompositionObject5_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Interface Windows.UI.Composition.ICompositionObjectFactory
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 2.0
@@ -11106,6 +11174,42 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CUI_CComposition_CICompositor7;
 #endif /* !defined(____x_ABI_CWindows_CUI_CComposition_CICompositor7_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+
+/*
+ *
+ * Interface Windows.UI.Composition.ICompositor8
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.Composition.Compositor
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CUI_CComposition_CICompositor8_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CComposition_CICompositor8_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Composition_ICompositor8[] = L"Windows.UI.Composition.ICompositor8";
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Composition {
+                MIDL_INTERFACE("9a0bdee2-fe7b-5f62-a366-9cf8effe2112")
+                ICompositor8 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE CreateAnimationController(
+                        ABI::Windows::UI::Composition::IAnimationController** result
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_ICompositor8 = _uuidof(ICompositor8);
+            } /* Composition */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CComposition_CICompositor8;
+#endif /* !defined(____x_ABI_CWindows_CUI_CComposition_CICompositor8_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -15001,6 +15105,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.UI.Composition.ICompositionObject2
  *    Windows.UI.Composition.ICompositionObject3
  *    Windows.UI.Composition.ICompositionObject4
+ *    Windows.UI.Composition.ICompositionObject5
  *    Windows.Foundation.IClosable
  *    Windows.UI.Composition.IAnimationObject
  *
@@ -15538,6 +15643,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.UI.Composition.ICompositorWithVisualSurface
  *    Windows.UI.Composition.ICompositor7
  *    Windows.UI.Composition.ICompositorWithBlurredWallpaperBackdropBrush
+ *    Windows.UI.Composition.ICompositor8
  *    Windows.Foundation.IClosable
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
@@ -16835,6 +16941,12 @@ typedef interface __x_ABI_CWindows_CUI_CComposition_CICompositionObject4 __x_ABI
 
 #endif // ____x_ABI_CWindows_CUI_CComposition_CICompositionObject4_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CUI_CComposition_CICompositionObject5_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CComposition_CICompositionObject5_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CUI_CComposition_CICompositionObject5 __x_ABI_CWindows_CUI_CComposition_CICompositionObject5;
+
+#endif // ____x_ABI_CWindows_CUI_CComposition_CICompositionObject5_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CUI_CComposition_CICompositionObjectFactory_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CComposition_CICompositionObjectFactory_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CUI_CComposition_CICompositionObjectFactory __x_ABI_CWindows_CUI_CComposition_CICompositionObjectFactory;
@@ -17092,6 +17204,12 @@ typedef interface __x_ABI_CWindows_CUI_CComposition_CICompositor6 __x_ABI_CWindo
 typedef interface __x_ABI_CWindows_CUI_CComposition_CICompositor7 __x_ABI_CWindows_CUI_CComposition_CICompositor7;
 
 #endif // ____x_ABI_CWindows_CUI_CComposition_CICompositor7_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CComposition_CICompositor8_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CComposition_CICompositor8_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CUI_CComposition_CICompositor8 __x_ABI_CWindows_CUI_CComposition_CICompositor8;
+
+#endif // ____x_ABI_CWindows_CUI_CComposition_CICompositor8_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CUI_CComposition_CICompositorStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CComposition_CICompositorStatics_FWD_DEFINED__
@@ -26689,6 +26807,77 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CComposition_CICompositionObject4;
 
 /*
  *
+ * Interface Windows.UI.Composition.ICompositionObject5
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.Composition.CompositionObject
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CUI_CComposition_CICompositionObject5_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CComposition_CICompositionObject5_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Composition_ICompositionObject5[] = L"Windows.UI.Composition.ICompositionObject5";
+typedef struct __x_ABI_CWindows_CUI_CComposition_CICompositionObject5Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CUI_CComposition_CICompositionObject5* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CUI_CComposition_CICompositionObject5* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CUI_CComposition_CICompositionObject5* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CUI_CComposition_CICompositionObject5* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CUI_CComposition_CICompositionObject5* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CUI_CComposition_CICompositionObject5* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* StartAnimationWithController)(__x_ABI_CWindows_CUI_CComposition_CICompositionObject5* This,
+        HSTRING propertyName,
+        __x_ABI_CWindows_CUI_CComposition_CICompositionAnimation* animation,
+        __x_ABI_CWindows_CUI_CComposition_CIAnimationController* animationController);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CUI_CComposition_CICompositionObject5Vtbl;
+
+interface __x_ABI_CWindows_CUI_CComposition_CICompositionObject5
+{
+    CONST_VTBL struct __x_ABI_CWindows_CUI_CComposition_CICompositionObject5Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CUI_CComposition_CICompositionObject5_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CUI_CComposition_CICompositionObject5_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CUI_CComposition_CICompositionObject5_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CUI_CComposition_CICompositionObject5_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CUI_CComposition_CICompositionObject5_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CUI_CComposition_CICompositionObject5_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CUI_CComposition_CICompositionObject5_StartAnimationWithController(This, propertyName, animation, animationController) \
+    ((This)->lpVtbl->StartAnimationWithController(This, propertyName, animation, animationController))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CComposition_CICompositionObject5;
+#endif /* !defined(____x_ABI_CWindows_CUI_CComposition_CICompositionObject5_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Interface Windows.UI.Composition.ICompositionObjectFactory
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 2.0
@@ -30650,6 +30839,75 @@ interface __x_ABI_CWindows_CUI_CComposition_CICompositor7
 EXTERN_C const IID IID___x_ABI_CWindows_CUI_CComposition_CICompositor7;
 #endif /* !defined(____x_ABI_CWindows_CUI_CComposition_CICompositor7_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+
+/*
+ *
+ * Interface Windows.UI.Composition.ICompositor8
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.Composition.Compositor
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CUI_CComposition_CICompositor8_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CComposition_CICompositor8_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Composition_ICompositor8[] = L"Windows.UI.Composition.ICompositor8";
+typedef struct __x_ABI_CWindows_CUI_CComposition_CICompositor8Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CUI_CComposition_CICompositor8* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CUI_CComposition_CICompositor8* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CUI_CComposition_CICompositor8* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CUI_CComposition_CICompositor8* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CUI_CComposition_CICompositor8* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CUI_CComposition_CICompositor8* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* CreateAnimationController)(__x_ABI_CWindows_CUI_CComposition_CICompositor8* This,
+        __x_ABI_CWindows_CUI_CComposition_CIAnimationController** result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CUI_CComposition_CICompositor8Vtbl;
+
+interface __x_ABI_CWindows_CUI_CComposition_CICompositor8
+{
+    CONST_VTBL struct __x_ABI_CWindows_CUI_CComposition_CICompositor8Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CUI_CComposition_CICompositor8_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CUI_CComposition_CICompositor8_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CUI_CComposition_CICompositor8_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CUI_CComposition_CICompositor8_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CUI_CComposition_CICompositor8_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CUI_CComposition_CICompositor8_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CUI_CComposition_CICompositor8_CreateAnimationController(This, result) \
+    ((This)->lpVtbl->CreateAnimationController(This, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CComposition_CICompositor8;
+#endif /* !defined(____x_ABI_CWindows_CUI_CComposition_CICompositor8_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -37154,6 +37412,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.UI.Composition.ICompositionObject2
  *    Windows.UI.Composition.ICompositionObject3
  *    Windows.UI.Composition.ICompositionObject4
+ *    Windows.UI.Composition.ICompositionObject5
  *    Windows.Foundation.IClosable
  *    Windows.UI.Composition.IAnimationObject
  *
@@ -37691,6 +37950,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.UI.Composition.ICompositorWithVisualSurface
  *    Windows.UI.Composition.ICompositor7
  *    Windows.UI.Composition.ICompositorWithBlurredWallpaperBackdropBrush
+ *    Windows.UI.Composition.ICompositor8
  *    Windows.Foundation.IClosable
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment

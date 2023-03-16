@@ -892,6 +892,29 @@ DEFINE_GUID(
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS3)
 
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
+
+//037f317a-d696-494a-bba5-bffc265e6052
+DEFINE_GUID(
+   FWPM_LAYER_OUTBOUND_NETWORK_CONNECTION_POLICY_V4,
+   0x037f317a,
+   0xd696,
+   0x494a,
+   0xbb, 0xa5, 0xbf, 0xfc, 0x26, 0x5e, 0x60, 0x52
+);
+
+//22a4fdb1-6d7e-48ae-ae77-3742525c3119
+DEFINE_GUID(
+   FWPM_LAYER_OUTBOUND_NETWORK_CONNECTION_POLICY_V6,
+   0x22a4fdb1,
+   0x6d7e,
+   0x48ae,
+   0xae, 0x77, 0x37, 0x42, 0x52, 0x5c, 0x31, 0x19
+);
+
+#endif //  (NTDDI_VERSION >= NTDDI_WIN10_NI)
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // GUIDs for built-in sublayers.
@@ -1065,6 +1088,15 @@ DEFINE_GUID(
    0xfdd9,
    0x478a,
    0xb5, 0x5f, 0xff, 0x8b, 0xa1, 0xd2, 0xc1, 0x7d
+);
+
+// FFE221C3-92A8-4564-A59F-DAFB70756020
+DEFINE_GUID(
+   FWPM_SUBLAYER_MPSSVC_APP_ISOLATION,
+   0xffe221c3,
+   0x92a8,
+   0x4564,
+   0xa5, 0x9f, 0xda, 0xfb, 0x70, 0x75, 0x60, 0x20
 );
 
 #endif // (NTDDI_VERSION >= NTDDI_WIN8)
@@ -2465,6 +2497,15 @@ DEFINE_GUID(
    0x4f50,
    0x9d, 0xc2, 0xc9, 0x63, 0xa4, 0x24, 0x76, 0x13
 );
+
+// 3cc2631f-2d5d-43a0-b174-614837d863a1
+DEFINE_GUID(
+   FWPM_PROVIDER_MPSSVC_APP_ISOLATION,
+   0x3cc2631f,
+   0x2d5d,
+   0x43a0,
+   0xb1, 0x74, 0x61, 0x48, 0x37, 0xd8, 0x63, 0xa1
+);
 #endif // (NTDDI_VERSION >= NTDDI_WIN8)
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -2903,6 +2944,28 @@ DEFINE_GUID(
     );
 
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS3)
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
+
+//103090d4-8e28-4fd6-9894-d1d67d6b10c9
+DEFINE_GUID(
+    FWPM_CALLOUT_OUTBOUND_NETWORK_CONNECTION_POLICY_LAYER_V4,
+    0x103090d4,
+    0x8e28,
+    0x4fd6,
+    0x98, 0x94, 0xd1, 0xd6, 0x7d, 0x6b, 0x10, 0xc9
+    );
+
+//4ed3446d-8dc7-459b-b09f-c1cb7a8f8689
+DEFINE_GUID(
+    FWPM_CALLOUT_OUTBOUND_NETWORK_CONNECTION_POLICY_LAYER_V6,
+    0x4ed3446d,
+    0x8dc7,
+    0x459b,
+    0xb0, 0x9f, 0xc1, 0xcb, 0x7a, 0x8f, 0x86, 0x89
+    );
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_NI)
 
 ///////////////////////////////////////////////////////////////////////////////
 //

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -444,6 +444,13 @@ typedef interface IAgileReference IAgileReference;
 typedef interface IMachineGlobalObjectTable IMachineGlobalObjectTable;
 
 #endif 	/* __IMachineGlobalObjectTable_FWD_DEFINED__ */
+
+
+#ifndef __ISupportAllowLowerTrustActivation_FWD_DEFINED__
+#define __ISupportAllowLowerTrustActivation_FWD_DEFINED__
+typedef interface ISupportAllowLowerTrustActivation ISupportAllowLowerTrustActivation;
+
+#endif 	/* __ISupportAllowLowerTrustActivation_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -8370,6 +8377,92 @@ EXTERN_C const IID IID_IMachineGlobalObjectTable;
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
+#pragma region Application Family or OneCore Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+
+
+extern RPC_IF_HANDLE __MIDL_itf_objidlbase_0000_0053_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidlbase_0000_0053_v0_0_s_ifspec;
+
+#ifndef __ISupportAllowLowerTrustActivation_INTERFACE_DEFINED__
+#define __ISupportAllowLowerTrustActivation_INTERFACE_DEFINED__
+
+/* interface ISupportAllowLowerTrustActivation */
+/* [uuid][object][local] */ 
+
+
+EXTERN_C const IID IID_ISupportAllowLowerTrustActivation;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("e9956ef2-3828-4b4b-8fa9-7db61dee4954")
+    ISupportAllowLowerTrustActivation : public IUnknown
+    {
+    public:
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISupportAllowLowerTrustActivationVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISupportAllowLowerTrustActivation * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISupportAllowLowerTrustActivation * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISupportAllowLowerTrustActivation * This);
+        
+        END_INTERFACE
+    } ISupportAllowLowerTrustActivationVtbl;
+
+    interface ISupportAllowLowerTrustActivation
+    {
+        CONST_VTBL struct ISupportAllowLowerTrustActivationVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISupportAllowLowerTrustActivation_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISupportAllowLowerTrustActivation_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISupportAllowLowerTrustActivation_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISupportAllowLowerTrustActivation_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_objidlbase_0000_0054 */
+/* [local] */ 
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+#pragma endregion
 #define _OBJIDLBASE_
 #endif
 #if ( _MSC_VER >= 800 )
@@ -8381,8 +8474,8 @@ EXTERN_C const IID IID_IMachineGlobalObjectTable;
 #endif
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidlbase_0000_0053_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidlbase_0000_0053_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidlbase_0000_0054_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidlbase_0000_0054_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

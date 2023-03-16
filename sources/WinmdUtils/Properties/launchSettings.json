@@ -22,15 +22,19 @@
     },
     "showDuplicateConstants": {
       "commandName": "Project",
-      "commandLineArgs": "showDuplicateConstants --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
+      "commandLineArgs": "showDuplicateConstants --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd @$(ProjectDir)..\\..\\tests\\Windows.Win32.Tests\\assets\\duplicateConstantsAllowList.rsp"
     },
     "showEmptyDelegates": {
       "commandName": "Project",
-      "commandLineArgs": "showEmptyDelegates --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd @$(ProjectDir)..\\..\\tests\\emptyDelegatesAllowList.rsp"
+      "commandLineArgs": "showEmptyDelegates --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd @$(ProjectDir)..\\..\\tests\\Windows.Win32.Tests\\assets\\emptyDelegatesAllowList.rsp"
     },
     "showPointersToDelegates": {
       "commandName": "Project",
-      "commandLineArgs": "showPointersToDelegates --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd @$(ProjectDir)..\\..\\tests\\pointersToDelegatesAllowList.rsp"
+      "commandLineArgs": "showPointersToDelegates --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd @$(ProjectDir)..\\..\\tests\\Windows.Win32.Tests\\assets\\pointersToDelegatesAllowList.rsp"
+    },
+    "showSuggestedRemappings": {
+      "commandName": "Project",
+      "commandLineArgs": "showSuggestedRemappings --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd @$(ProjectDir)..\\..\\tests\\Windows.Win32.Tests\\assets\\suggestedRemappingsAllowList.rsp --projectRoot $(ProjectDir)..\\..\\generation\\WinSDK"
     },
     "dumpImports": {
       "commandName": "Project",
@@ -42,11 +46,11 @@
     },
     "showNamespaceDependencies": {
       "commandName": "Project",
-      "commandLineArgs": "showNamespaceDependencies --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd --maxBroughtInBy 1 --maxDependTypes 1 --namespaceFilter Windows.Win32.System.Com"
+      "commandLineArgs": "showNamespaceDependencies --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd --maxBroughtInBy 3 --maxDependTypes 3 --namespaceFilter Windows.Win32.System.Diagnostics.Debug --namespaceFilter Windows.Win32.System.Threading"
     },
     "Show depends for a few ns": {
       "commandName": "Project",
-      "commandLineArgs": "showNamespaceDependencies --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd --ignoreDependNamespace Windows.Win32.Foundation --namespaceFilter Windows.Win32.System.Com"
+      "commandLineArgs": "showNamespaceDependencies --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd --ignoreDependNamespace Windows.Win32.Foundation --namespaceFilter Windows.Win32.Storage.FileSystem"
     },
     "showNamespaceCycles": {
       "commandName": "Project",

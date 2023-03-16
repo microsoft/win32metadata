@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -34,7 +34,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -188,6 +188,18 @@ typedef struct FWPM_CLASSIFY_OPTIONS0_
     /* [ref][size_is] */ FWPM_CLASSIFY_OPTION0 *options;
     } 	FWPM_CLASSIFY_OPTIONS0;
 
+typedef struct FWPM_NETWORK_CONNECTION_POLICY_SETTING0_
+    {
+    FWP_NETWORK_CONNECTION_POLICY_SETTING_TYPE type;
+    FWP_VALUE0 value;
+    } 	FWPM_NETWORK_CONNECTION_POLICY_SETTING0;
+
+typedef struct FWPM_NETWORK_CONNECTION_POLICY_SETTINGS0_
+    {
+    UINT32 numSettings;
+    /* [ref][size_is] */ FWPM_NETWORK_CONNECTION_POLICY_SETTING0 *settings;
+    } 	FWPM_NETWORK_CONNECTION_POLICY_SETTINGS0;
+
 typedef /* [v1_enum] */ 
 enum FWPM_PROVIDER_CONTEXT_TYPE_
     {
@@ -204,7 +216,8 @@ enum FWPM_PROVIDER_CONTEXT_TYPE_
         FWPM_IPSEC_IKEV2_MM_CONTEXT	= ( FWPM_IPSEC_IKEV2_QM_TUNNEL_CONTEXT + 1 ) ,
         FWPM_IPSEC_DOSP_CONTEXT	= ( FWPM_IPSEC_IKEV2_MM_CONTEXT + 1 ) ,
         FWPM_IPSEC_IKEV2_QM_TRANSPORT_CONTEXT	= ( FWPM_IPSEC_DOSP_CONTEXT + 1 ) ,
-        FWPM_PROVIDER_CONTEXT_TYPE_MAX	= ( FWPM_IPSEC_IKEV2_QM_TRANSPORT_CONTEXT + 1 ) 
+        FWPM_NETWORK_CONNECTION_POLICY_CONTEXT	= ( FWPM_IPSEC_IKEV2_QM_TRANSPORT_CONTEXT + 1 ) ,
+        FWPM_PROVIDER_CONTEXT_TYPE_MAX	= ( FWPM_NETWORK_CONNECTION_POLICY_CONTEXT + 1 ) 
     } 	FWPM_PROVIDER_CONTEXT_TYPE;
 
 typedef struct FWPM_PROVIDER_CONTEXT0_
@@ -312,6 +325,7 @@ typedef struct FWPM_PROVIDER_CONTEXT3_
         /* [case()][unique] */ IPSEC_TRANSPORT_POLICY2 *ikeV2QmTransportPolicy;
         /* [case()][unique] */ IKEEXT_POLICY2 *ikeV2MmPolicy;
         /* [case()][unique] */ IPSEC_DOSP_OPTIONS0 *idpOptions;
+        /* [case()][unique] */ FWPM_NETWORK_CONNECTION_POLICY_SETTINGS0 *networkConnectionPolicy;
         } 	;
     UINT64 providerContextId;
     } 	FWPM_PROVIDER_CONTEXT3;

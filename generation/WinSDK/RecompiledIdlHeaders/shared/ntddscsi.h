@@ -1127,6 +1127,11 @@ typedef struct _FIRMWARE_REQUEST_BLOCK {
 #define FIRMWARE_REQUEST_FLAG_FIRST_SEGMENT                 0x00000004
 
 //
+// Indicate that any existing firmware in slot should be replaced with the downloaded image.
+//
+#define FIRMWARE_REQUEST_FLAG_REPLACE_EXISTING_IMAGE        0x40000000
+
+//
 // Indicate that the existing firmware in slot should be activated. 
 // This flag is only valid for fimrware_activate request. It's ignored for other requests.
 //

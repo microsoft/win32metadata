@@ -242,6 +242,7 @@
       ScraperOutputDir="$(GeneratedDir)"
       ResponseFiles="@(ConstantsScraperRsp)"
       Partitions="@(Partition)"
+      ManualCs="@(ManualCs)"
       EnumsJson="$(EnumsJson)"
       ToolsBinDir="$(ToolsBinDir)"
       HeaderTextFile="$(FinalConstantsScraperHeaderFile)"

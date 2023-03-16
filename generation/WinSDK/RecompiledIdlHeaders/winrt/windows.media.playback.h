@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_MEDIA_MEDIACONTROLCONTRACT_VERSION)
@@ -8036,8 +8036,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Media.Playback.IMediaPlaybackItemFactory2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Media.Playback.IMediaPlaybackItemFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Media.Playback.IMediaPlaybackItemFactory2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.Media.Playback.IMediaPlaybackItemStatics interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
@@ -19425,8 +19425,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Media.Playback.IMediaPlaybackItemFactory2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Media.Playback.IMediaPlaybackItemFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Media.Playback.IMediaPlaybackItemFactory2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.Media.Playback.IMediaPlaybackItemStatics interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract

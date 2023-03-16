@@ -75,6 +75,8 @@ namespace Windows
 
             interface IAddPackageOptions;
 
+            interface IAddPackageOptions2;
+
             interface IAppInstallerManager;
 
             interface IAppInstallerManagerStatics;
@@ -129,6 +131,8 @@ namespace Windows
 
             interface IRegisterPackageOptions;
 
+            interface IRegisterPackageOptions2;
+
             interface ISharedPackageContainer;
 
             interface ISharedPackageContainerManager;
@@ -140,6 +144,8 @@ namespace Windows
             interface ISharedPackageContainerMemberFactory;
 
             interface IStagePackageOptions;
+
+            interface IStagePackageOptions2;
 
             interface IUpdateSharedPackageContainerOptions;
 
@@ -423,6 +429,16 @@ namespace Windows
                 [propput] HRESULT AllowUnsigned([in] boolean value);
                 [propget] HRESULT DeferRegistrationWhenPackagesAreInUse([out] [retval] boolean* value);
                 [propput] HRESULT DeferRegistrationWhenPackagesAreInUse([in] boolean value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Management.Deployment.AddPackageOptions)]
+            [uuid(EE515828-BF33-40F7-84AF-1B6FAD2919D7)]
+            interface IAddPackageOptions2 : IInspectable
+            {
+                [propget] HRESULT ExpectedDigests([out] [retval] Windows.Foundation.Collections.IMap<Windows.Foundation.Uri*, HSTRING>** value);
+                [propget] HRESULT LimitToExistingPackages([out] [retval] boolean* value);
+                [propput] HRESULT LimitToExistingPackages([in] boolean value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 13.0)]
@@ -777,6 +793,14 @@ namespace Windows
                 [propput] HRESULT DeferRegistrationWhenPackagesAreInUse([in] boolean value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Management.Deployment.RegisterPackageOptions)]
+            [uuid(3DFA9743-86FF-4A11-BC93-434EB6BE3A0B)]
+            interface IRegisterPackageOptions2 : IInspectable
+            {
+                [propget] HRESULT ExpectedDigests([out] [retval] Windows.Foundation.Collections.IMap<Windows.Foundation.Uri*, HSTRING>** value);
+            }
+
             [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
             [exclusiveto(Windows.Management.Deployment.SharedPackageContainer)]
             [uuid(177F1AA9-151E-5EF7-B1D9-2FBA0B4B0D17)]
@@ -856,6 +880,14 @@ namespace Windows
                 [propput] HRESULT AllowUnsigned([in] boolean value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Management.Deployment.StagePackageOptions)]
+            [uuid(990C4CCC-6226-4192-BA92-79875FCE0D9C)]
+            interface IStagePackageOptions2 : IInspectable
+            {
+                [propget] HRESULT ExpectedDigests([out] [retval] Windows.Foundation.Collections.IMap<Windows.Foundation.Uri*, HSTRING>** value);
+            }
+
             [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
             [exclusiveto(Windows.Management.Deployment.UpdateSharedPackageContainerOptions)]
             [uuid(80672E83-7194-59F9-B5B9-DAA5375F130A)]
@@ -882,6 +914,7 @@ namespace Windows
             runtimeclass AddPackageOptions
             {
                 [default] interface Windows.Management.Deployment.IAddPackageOptions;
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Management.Deployment.IAddPackageOptions2;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 13.0)]
@@ -1009,6 +1042,7 @@ namespace Windows
             runtimeclass RegisterPackageOptions
             {
                 [default] interface Windows.Management.Deployment.IRegisterPackageOptions;
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Management.Deployment.IRegisterPackageOptions2;
             }
 
             [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
@@ -1042,6 +1076,7 @@ namespace Windows
             runtimeclass StagePackageOptions
             {
                 [default] interface Windows.Management.Deployment.IStagePackageOptions;
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Management.Deployment.IStagePackageOptions2;
             }
 
             [activatable(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]

@@ -46,6 +46,8 @@ namespace Windows
     {
         namespace Capture
         {
+            typedef enum MediaCaptureDeviceExclusiveControlReleaseMode MediaCaptureDeviceExclusiveControlReleaseMode;
+
             typedef enum MediaStreamType MediaStreamType;
 
             typedef enum PowerlineFrequency PowerlineFrequency;
@@ -166,6 +168,8 @@ namespace Windows
             interface IAdvancedVideoCaptureDeviceController;
 
             interface IAdvancedVideoCaptureDeviceController10;
+
+            interface IAdvancedVideoCaptureDeviceController11;
 
             interface IAdvancedVideoCaptureDeviceController2;
 
@@ -825,6 +829,14 @@ namespace Windows
             interface IAdvancedVideoCaptureDeviceController10 : IInspectable
             {
                 [propget] HRESULT CameraOcclusionInfo([out] [retval] Windows.Media.Devices.CameraOcclusionInfo** value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Media.Devices.VideoDeviceController)]
+            [uuid(D5B65AE2-3772-580C-A630-E75DE9106904)]
+            interface IAdvancedVideoCaptureDeviceController11 : IInspectable
+            {
+                HRESULT TryAcquireExclusiveControl([in] HSTRING deviceId, [in] Windows.Media.Capture.MediaCaptureDeviceExclusiveControlReleaseMode mode, [out] [retval] boolean* result);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -1896,6 +1908,7 @@ namespace Windows
                 [contract(Windows.Foundation.UniversalApiContract, 10.0)] interface Windows.Media.Devices.IAdvancedVideoCaptureDeviceController8;
                 [contract(Windows.Foundation.UniversalApiContract, 12.0)] interface Windows.Media.Devices.IAdvancedVideoCaptureDeviceController9;
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)] interface Windows.Media.Devices.IAdvancedVideoCaptureDeviceController10;
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Media.Devices.IAdvancedVideoCaptureDeviceController11;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]

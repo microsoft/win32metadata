@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_NETWORKING_CONNECTIVITY_WWANCONTRACT_VERSION)
@@ -204,6 +204,81 @@ namespace ABI {
 #define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiNetworkReport ABI::Windows::Devices::WiFi::IWiFiNetworkReport
 
 #endif // ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiNetworkReport_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace WiFi {
+                interface IWiFiOnDemandHotspotConnectTriggerDetails;
+            } /* WiFi */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails ABI::Windows::Devices::WiFi::IWiFiOnDemandHotspotConnectTriggerDetails
+
+#endif // ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace WiFi {
+                interface IWiFiOnDemandHotspotConnectionResult;
+            } /* WiFi */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult ABI::Windows::Devices::WiFi::IWiFiOnDemandHotspotConnectionResult
+
+#endif // ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace WiFi {
+                interface IWiFiOnDemandHotspotNetwork;
+            } /* WiFi */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork ABI::Windows::Devices::WiFi::IWiFiOnDemandHotspotNetwork
+
+#endif // ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace WiFi {
+                interface IWiFiOnDemandHotspotNetworkProperties;
+            } /* WiFi */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties ABI::Windows::Devices::WiFi::IWiFiOnDemandHotspotNetworkProperties
+
+#endif // ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace WiFi {
+                interface IWiFiOnDemandHotspotNetworkStatics;
+            } /* WiFi */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics ABI::Windows::Devices::WiFi::IWiFiOnDemandHotspotNetworkStatics
+
+#endif // ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiWpsConfigurationResult_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiWpsConfigurationResult_FWD_DEFINED__
@@ -414,6 +489,70 @@ typedef IAsyncOperationCompletedHandler<ABI::Windows::Devices::WiFi::WiFiConnect
 #endif /* DEF___FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiConnectionResult_USE */
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace WiFi {
+                class WiFiOnDemandHotspotConnectionResult;
+            } /* WiFi */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+#ifndef DEF___FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_USE
+#define DEF___FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("81ec4b01-3e45-5a39-baec-0bda4ab1e3ae"))
+IAsyncOperation<ABI::Windows::Devices::WiFi::WiFiOnDemandHotspotConnectionResult*> : IAsyncOperation_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::Devices::WiFi::WiFiOnDemandHotspotConnectionResult*, ABI::Windows::Devices::WiFi::IWiFiOnDemandHotspotConnectionResult*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.IAsyncOperation`1<Windows.Devices.WiFi.WiFiOnDemandHotspotConnectionResult>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperation<ABI::Windows::Devices::WiFi::WiFiOnDemandHotspotConnectionResult*> __FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_t;
+#define __FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult ABI::Windows::Foundation::__FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+#ifndef DEF___FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_USE
+#define DEF___FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("60e43845-d589-5456-bdba-f0cd24a5237e"))
+IAsyncOperationCompletedHandler<ABI::Windows::Devices::WiFi::WiFiOnDemandHotspotConnectionResult*> : IAsyncOperationCompletedHandler_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::Devices::WiFi::WiFiOnDemandHotspotConnectionResult*, ABI::Windows::Devices::WiFi::IWiFiOnDemandHotspotConnectionResult*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.AsyncOperationCompletedHandler`1<Windows.Devices.WiFi.WiFiOnDemandHotspotConnectionResult>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperationCompletedHandler<ABI::Windows::Devices::WiFi::WiFiOnDemandHotspotConnectionResult*> __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_t;
+#define __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult ABI::Windows::Foundation::__FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 namespace ABI {
     namespace Windows {
@@ -796,6 +935,68 @@ typedef IVectorView<enum ABI::Windows::Devices::WiFi::WiFiWpsKind> __FIVectorVie
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x50000
 
+
+#ifndef DEF___FIReference_1_UINT32_USE
+#define DEF___FIReference_1_UINT32_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("513ef3af-e784-5325-a91e-97c2b8111cf3"))
+IReference<UINT32> : IReference_impl<UINT32>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.IReference`1<UInt32>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IReference<UINT32> __FIReference_1_UINT32_t;
+#define __FIReference_1_UINT32 ABI::Windows::Foundation::__FIReference_1_UINT32_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIReference_1_UINT32_USE */
+
+
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace WiFi {
+                typedef enum WiFiOnDemandHotspotCellularBars : int WiFiOnDemandHotspotCellularBars;
+            } /* WiFi */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+#ifndef DEF___FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars_USE
+#define DEF___FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("d5cc7e52-2520-5460-84e6-8258c83d0c68"))
+IReference<enum ABI::Windows::Devices::WiFi::WiFiOnDemandHotspotCellularBars> : IReference_impl<enum ABI::Windows::Devices::WiFi::WiFiOnDemandHotspotCellularBars>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.IReference`1<Windows.Devices.WiFi.WiFiOnDemandHotspotCellularBars>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IReference<enum ABI::Windows::Devices::WiFi::WiFiOnDemandHotspotCellularBars> __FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars_t;
+#define __FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars ABI::Windows::Foundation::__FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 #ifndef DEF___FITypedEventHandler_2_Windows__CDevices__CWiFi__CWiFiAdapter_IInspectable_USE
@@ -843,6 +1044,19 @@ namespace ABI {
 #define __x_ABI_CWindows_CFoundation_CIAsyncAction ABI::Windows::Foundation::IAsyncAction
 
 #endif // ____x_ABI_CWindows_CFoundation_CIAsyncAction_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CFoundation_CIPropertyValue_FWD_DEFINED__
+#define ____x_ABI_CWindows_CFoundation_CIPropertyValue_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Foundation {
+            interface IPropertyValue;
+        } /* Foundation */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CFoundation_CIPropertyValue ABI::Windows::Foundation::IPropertyValue
+
+#endif // ____x_ABI_CWindows_CFoundation_CIPropertyValue_FWD_DEFINED__
 
 namespace ABI {
     namespace Windows {
@@ -961,6 +1175,26 @@ namespace ABI {
     namespace Windows {
         namespace Devices {
             namespace WiFi {
+                typedef enum WiFiOnDemandHotspotAvailability : int WiFiOnDemandHotspotAvailability;
+            } /* WiFi */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace WiFi {
+                typedef enum WiFiOnDemandHotspotConnectStatus : int WiFiOnDemandHotspotConnectStatus;
+            } /* WiFi */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace WiFi {
                 typedef enum WiFiPhyKind : int WiFiPhyKind;
             } /* WiFi */
         } /* Devices */
@@ -992,6 +1226,26 @@ namespace ABI {
         namespace Devices {
             namespace WiFi {
                 class WiFiNetworkReport;
+            } /* WiFi */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace WiFi {
+                class WiFiOnDemandHotspotNetwork;
+            } /* WiFi */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace WiFi {
+                class WiFiOnDemandHotspotNetworkProperties;
             } /* WiFi */
         } /* Devices */
     } /* Windows */
@@ -1100,6 +1354,96 @@ namespace ABI {
 
 /*
  *
+ * Struct Windows.Devices.WiFi.WiFiOnDemandHotspotAvailability
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace WiFi {
+                enum WiFiOnDemandHotspotAvailability : int
+                {
+                    WiFiOnDemandHotspotAvailability_Available = 0,
+                    WiFiOnDemandHotspotAvailability_Unavailable = 1,
+                };
+            } /* WiFi */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Struct Windows.Devices.WiFi.WiFiOnDemandHotspotCellularBars
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace WiFi {
+                enum WiFiOnDemandHotspotCellularBars : int
+                {
+                    WiFiOnDemandHotspotCellularBars_ZeroBars = 0,
+                    WiFiOnDemandHotspotCellularBars_OneBar = 1,
+                    WiFiOnDemandHotspotCellularBars_TwoBars = 2,
+                    WiFiOnDemandHotspotCellularBars_ThreeBars = 3,
+                    WiFiOnDemandHotspotCellularBars_FourBars = 4,
+                    WiFiOnDemandHotspotCellularBars_FiveBars = 5,
+                };
+            } /* WiFi */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Struct Windows.Devices.WiFi.WiFiOnDemandHotspotConnectStatus
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace WiFi {
+                enum WiFiOnDemandHotspotConnectStatus : int
+                {
+                    WiFiOnDemandHotspotConnectStatus_UnspecifiedFailure = 0,
+                    WiFiOnDemandHotspotConnectStatus_Success = 1,
+                    WiFiOnDemandHotspotConnectStatus_AppTimedOut = 2,
+                    WiFiOnDemandHotspotConnectStatus_InvalidCredential = 3,
+                    WiFiOnDemandHotspotConnectStatus_NetworkNotAvailable = 4,
+                    WiFiOnDemandHotspotConnectStatus_UnsupportedAuthenticationProtocol = 5,
+                    WiFiOnDemandHotspotConnectStatus_BluetoothConnectFailed = 6,
+                    WiFiOnDemandHotspotConnectStatus_BluetoothTransmissionError = 7,
+                    WiFiOnDemandHotspotConnectStatus_OperationCanceledByUser = 8,
+                    WiFiOnDemandHotspotConnectStatus_EntitlementCheckFailed = 9,
+                    WiFiOnDemandHotspotConnectStatus_NoCellularSignal = 10,
+                    WiFiOnDemandHotspotConnectStatus_CellularDataTurnedOff = 11,
+                    WiFiOnDemandHotspotConnectStatus_WlanConnectFailed = 12,
+                    WiFiOnDemandHotspotConnectStatus_WlanNotVisible = 13,
+                    WiFiOnDemandHotspotConnectStatus_AccessPointCannotConnect = 14,
+                    WiFiOnDemandHotspotConnectStatus_CellularConnectTimedOut = 15,
+                    WiFiOnDemandHotspotConnectStatus_RoamingNotAllowed = 16,
+                    WiFiOnDemandHotspotConnectStatus_PairingRequired = 17,
+                    WiFiOnDemandHotspotConnectStatus_DataLimitReached = 18,
+                };
+            } /* WiFi */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Struct Windows.Devices.WiFi.WiFiPhyKind
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -1126,6 +1470,9 @@ namespace ABI {
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x30000
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
                     WiFiPhyKind_HE = 10,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
+                    WiFiPhyKind_Eht = 11,
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
                 };
             } /* WiFi */
@@ -1510,6 +1857,241 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CWiFi_CIWiFiNetworkReport;
 
 /*
  *
+ * Interface Windows.Devices.WiFi.IWiFiOnDemandHotspotConnectTriggerDetails
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.WiFi.WiFiOnDemandHotspotConnectTriggerDetails
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_WiFi_IWiFiOnDemandHotspotConnectTriggerDetails[] = L"Windows.Devices.WiFi.IWiFiOnDemandHotspotConnectTriggerDetails";
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace WiFi {
+                MIDL_INTERFACE("a268eb58-68f5-59cf-8d38-35bf44b097ef")
+                IWiFiOnDemandHotspotConnectTriggerDetails : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_RequestedNetwork(
+                        ABI::Windows::Devices::WiFi::IWiFiOnDemandHotspotNetwork** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE ReportError(
+                        ABI::Windows::Devices::WiFi::WiFiOnDemandHotspotConnectStatus status
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE ConnectAsync(
+                        __FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult** operation
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE Connect(
+                        ABI::Windows::Devices::WiFi::IWiFiOnDemandHotspotConnectionResult** result
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IWiFiOnDemandHotspotConnectTriggerDetails = _uuidof(IWiFiOnDemandHotspotConnectTriggerDetails);
+            } /* WiFi */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Interface Windows.Devices.WiFi.IWiFiOnDemandHotspotConnectionResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.WiFi.WiFiOnDemandHotspotConnectionResult
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_WiFi_IWiFiOnDemandHotspotConnectionResult[] = L"Windows.Devices.WiFi.IWiFiOnDemandHotspotConnectionResult";
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace WiFi {
+                MIDL_INTERFACE("911794a1-6c82-5de3-8a4a-f9ff22a4957a")
+                IWiFiOnDemandHotspotConnectionResult : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_Status(
+                        ABI::Windows::Devices::WiFi::WiFiOnDemandHotspotConnectStatus* value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IWiFiOnDemandHotspotConnectionResult = _uuidof(IWiFiOnDemandHotspotConnectionResult);
+            } /* WiFi */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Interface Windows.Devices.WiFi.IWiFiOnDemandHotspotNetwork
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.WiFi.WiFiOnDemandHotspotNetwork
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_WiFi_IWiFiOnDemandHotspotNetwork[] = L"Windows.Devices.WiFi.IWiFiOnDemandHotspotNetwork";
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace WiFi {
+                MIDL_INTERFACE("18dc7115-a04e-507c-bbaf-b78369d29fa7")
+                IWiFiOnDemandHotspotNetwork : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE GetProperties(
+                        ABI::Windows::Devices::WiFi::IWiFiOnDemandHotspotNetworkProperties** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE UpdateProperties(
+                        ABI::Windows::Devices::WiFi::IWiFiOnDemandHotspotNetworkProperties* newProperties
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Id(
+                        GUID* value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IWiFiOnDemandHotspotNetwork = _uuidof(IWiFiOnDemandHotspotNetwork);
+            } /* WiFi */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Interface Windows.Devices.WiFi.IWiFiOnDemandHotspotNetworkProperties
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.WiFi.WiFiOnDemandHotspotNetworkProperties
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_WiFi_IWiFiOnDemandHotspotNetworkProperties[] = L"Windows.Devices.WiFi.IWiFiOnDemandHotspotNetworkProperties";
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace WiFi {
+                MIDL_INTERFACE("c810a1f2-c81d-5852-be50-e4bd4d81e98d")
+                IWiFiOnDemandHotspotNetworkProperties : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_DisplayName(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_DisplayName(
+                        HSTRING value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Availability(
+                        ABI::Windows::Devices::WiFi::WiFiOnDemandHotspotAvailability* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_Availability(
+                        ABI::Windows::Devices::WiFi::WiFiOnDemandHotspotAvailability value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_RemainingBatteryPercent(
+                        __FIReference_1_UINT32** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_RemainingBatteryPercent(
+                        __FIReference_1_UINT32* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_CellularBars(
+                        __FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_CellularBars(
+                        __FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_IsMetered(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_IsMetered(
+                        boolean value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Ssid(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_Ssid(
+                        HSTRING value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Password(
+                        ABI::Windows::Security::Credentials::IPasswordCredential** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_Password(
+                        ABI::Windows::Security::Credentials::IPasswordCredential* value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IWiFiOnDemandHotspotNetworkProperties = _uuidof(IWiFiOnDemandHotspotNetworkProperties);
+            } /* WiFi */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Interface Windows.Devices.WiFi.IWiFiOnDemandHotspotNetworkStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.WiFi.WiFiOnDemandHotspotNetwork
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_WiFi_IWiFiOnDemandHotspotNetworkStatics[] = L"Windows.Devices.WiFi.IWiFiOnDemandHotspotNetworkStatics";
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace WiFi {
+                MIDL_INTERFACE("00f5b8ac-80e7-5054-871c-8739f374e3c9")
+                IWiFiOnDemandHotspotNetworkStatics : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE GetOrCreateById(
+                        GUID networkId,
+                        ABI::Windows::Devices::WiFi::IWiFiOnDemandHotspotNetwork** result
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IWiFiOnDemandHotspotNetworkStatics = _uuidof(IWiFiOnDemandHotspotNetworkStatics);
+            } /* WiFi */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Interface Windows.Devices.WiFi.IWiFiWpsConfigurationResult
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 5.0
@@ -1629,6 +2211,87 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 /*
  *
+ * Class Windows.Devices.WiFi.WiFiOnDemandHotspotConnectTriggerDetails
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.Devices.WiFi.IWiFiOnDemandHotspotConnectTriggerDetails ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#ifndef RUNTIMECLASS_Windows_Devices_WiFi_WiFiOnDemandHotspotConnectTriggerDetails_DEFINED
+#define RUNTIMECLASS_Windows_Devices_WiFi_WiFiOnDemandHotspotConnectTriggerDetails_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_WiFi_WiFiOnDemandHotspotConnectTriggerDetails[] = L"Windows.Devices.WiFi.WiFiOnDemandHotspotConnectTriggerDetails";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Class Windows.Devices.WiFi.WiFiOnDemandHotspotConnectionResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.Devices.WiFi.IWiFiOnDemandHotspotConnectionResult ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#ifndef RUNTIMECLASS_Windows_Devices_WiFi_WiFiOnDemandHotspotConnectionResult_DEFINED
+#define RUNTIMECLASS_Windows_Devices_WiFi_WiFiOnDemandHotspotConnectionResult_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_WiFi_WiFiOnDemandHotspotConnectionResult[] = L"Windows.Devices.WiFi.WiFiOnDemandHotspotConnectionResult";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Class Windows.Devices.WiFi.WiFiOnDemandHotspotNetwork
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Devices.WiFi.IWiFiOnDemandHotspotNetworkStatics interface starting with version 15.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Devices.WiFi.IWiFiOnDemandHotspotNetwork ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#ifndef RUNTIMECLASS_Windows_Devices_WiFi_WiFiOnDemandHotspotNetwork_DEFINED
+#define RUNTIMECLASS_Windows_Devices_WiFi_WiFiOnDemandHotspotNetwork_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_WiFi_WiFiOnDemandHotspotNetwork[] = L"Windows.Devices.WiFi.WiFiOnDemandHotspotNetwork";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Class Windows.Devices.WiFi.WiFiOnDemandHotspotNetworkProperties
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.Devices.WiFi.IWiFiOnDemandHotspotNetworkProperties ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#ifndef RUNTIMECLASS_Windows_Devices_WiFi_WiFiOnDemandHotspotNetworkProperties_DEFINED
+#define RUNTIMECLASS_Windows_Devices_WiFi_WiFiOnDemandHotspotNetworkProperties_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_WiFi_WiFiOnDemandHotspotNetworkProperties[] = L"Windows.Devices.WiFi.WiFiOnDemandHotspotNetworkProperties";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Class Windows.Devices.WiFi.WiFiWpsConfigurationResult
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 5.0
@@ -1683,6 +2346,36 @@ typedef interface __x_ABI_CWindows_CDevices_CWiFi_CIWiFiConnectionResult __x_ABI
 typedef interface __x_ABI_CWindows_CDevices_CWiFi_CIWiFiNetworkReport __x_ABI_CWindows_CDevices_CWiFi_CIWiFiNetworkReport;
 
 #endif // ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiNetworkReport_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails;
+
+#endif // ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult;
+
+#endif // ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork;
+
+#endif // ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties;
+
+#endif // ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics;
+
+#endif // ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiWpsConfigurationResult_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiWpsConfigurationResult_FWD_DEFINED__
@@ -2070,6 +2763,131 @@ interface __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiCo
 
 #endif // ____FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiConnectionResult_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult;
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_INTERFACE_DEFINED__)
+#define ____FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult __FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult;
+
+typedef struct __FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* put_Completed)(__FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult* handler);
+    HRESULT (STDMETHODCALLTYPE* get_Completed)(__FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult** result);
+    HRESULT (STDMETHODCALLTYPE* GetResults)(__FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult* This,
+        __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult** result);
+
+    END_INTERFACE
+} __FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResultVtbl;
+
+interface __FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult
+{
+    CONST_VTBL struct __FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_put_Completed(This, handler) \
+    ((This)->lpVtbl->put_Completed(This, handler))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_get_Completed(This, result) \
+    ((This)->lpVtbl->get_Completed(This, result))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_GetResults(This, result) \
+    ((This)->lpVtbl->GetResults(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_INTERFACE_DEFINED__)
+#define ____FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult;
+
+typedef struct __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult* This,
+        __FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult* asyncInfo,
+        AsyncStatus asyncStatus);
+
+    END_INTERFACE
+} __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResultVtbl;
+
+interface __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult
+{
+    CONST_VTBL struct __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_Invoke(This, asyncInfo, asyncStatus) \
+    ((This)->lpVtbl->Invoke(This, asyncInfo, asyncStatus))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiWpsConfigurationResult __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CWiFi__CWiFiWpsConfigurationResult;
 
@@ -3013,6 +3831,134 @@ interface __FIVectorView_1_Windows__CDevices__CWiFi__CWiFiWpsKind
 #endif // ____FIVectorView_1_Windows__CDevices__CWiFi__CWiFiWpsKind_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x50000
 
+#if !defined(____FIReference_1_UINT32_INTERFACE_DEFINED__)
+#define ____FIReference_1_UINT32_INTERFACE_DEFINED__
+
+typedef interface __FIReference_1_UINT32 __FIReference_1_UINT32;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIReference_1_UINT32;
+
+typedef struct __FIReference_1_UINT32Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIReference_1_UINT32* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIReference_1_UINT32* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIReference_1_UINT32* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIReference_1_UINT32* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIReference_1_UINT32* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIReference_1_UINT32* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Value)(__FIReference_1_UINT32* This,
+        UINT32* result);
+
+    END_INTERFACE
+} __FIReference_1_UINT32Vtbl;
+
+interface __FIReference_1_UINT32
+{
+    CONST_VTBL struct __FIReference_1_UINT32Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIReference_1_UINT32_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIReference_1_UINT32_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIReference_1_UINT32_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIReference_1_UINT32_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIReference_1_UINT32_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIReference_1_UINT32_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIReference_1_UINT32_get_Value(This, result) \
+    ((This)->lpVtbl->get_Value(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIReference_1_UINT32_INTERFACE_DEFINED__
+
+typedef enum __x_ABI_CWindows_CDevices_CWiFi_CWiFiOnDemandHotspotCellularBars __x_ABI_CWindows_CDevices_CWiFi_CWiFiOnDemandHotspotCellularBars;
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars_INTERFACE_DEFINED__)
+#define ____FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars_INTERFACE_DEFINED__
+
+typedef interface __FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars __FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars;
+
+typedef struct __FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBarsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Value)(__FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars* This,
+        enum __x_ABI_CWindows_CDevices_CWiFi_CWiFiOnDemandHotspotCellularBars* result);
+
+    END_INTERFACE
+} __FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBarsVtbl;
+
+interface __FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars
+{
+    CONST_VTBL struct __FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBarsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars_get_Value(This, result) \
+    ((This)->lpVtbl->get_Value(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #if !defined(____FITypedEventHandler_2_Windows__CDevices__CWiFi__CWiFiAdapter_IInspectable_INTERFACE_DEFINED__)
 #define ____FITypedEventHandler_2_Windows__CDevices__CWiFi__CWiFiAdapter_IInspectable_INTERFACE_DEFINED__
@@ -3070,6 +4016,12 @@ typedef interface __x_ABI_CWindows_CFoundation_CIAsyncAction __x_ABI_CWindows_CF
 
 #endif // ____x_ABI_CWindows_CFoundation_CIAsyncAction_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CFoundation_CIPropertyValue_FWD_DEFINED__
+#define ____x_ABI_CWindows_CFoundation_CIPropertyValue_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CFoundation_CIPropertyValue __x_ABI_CWindows_CFoundation_CIPropertyValue;
+
+#endif // ____x_ABI_CWindows_CFoundation_CIPropertyValue_FWD_DEFINED__
+
 typedef struct __x_ABI_CWindows_CFoundation_CTimeSpan __x_ABI_CWindows_CFoundation_CTimeSpan;
 
 #ifndef ____x_ABI_CWindows_CNetworking_CConnectivity_CINetworkAdapter_FWD_DEFINED__
@@ -3095,6 +4047,10 @@ typedef enum __x_ABI_CWindows_CDevices_CWiFi_CWiFiConnectionMethod __x_ABI_CWind
 typedef enum __x_ABI_CWindows_CDevices_CWiFi_CWiFiConnectionStatus __x_ABI_CWindows_CDevices_CWiFi_CWiFiConnectionStatus;
 
 typedef enum __x_ABI_CWindows_CDevices_CWiFi_CWiFiNetworkKind __x_ABI_CWindows_CDevices_CWiFi_CWiFiNetworkKind;
+
+typedef enum __x_ABI_CWindows_CDevices_CWiFi_CWiFiOnDemandHotspotAvailability __x_ABI_CWindows_CDevices_CWiFi_CWiFiOnDemandHotspotAvailability;
+
+typedef enum __x_ABI_CWindows_CDevices_CWiFi_CWiFiOnDemandHotspotConnectStatus __x_ABI_CWindows_CDevices_CWiFi_CWiFiOnDemandHotspotConnectStatus;
 
 typedef enum __x_ABI_CWindows_CDevices_CWiFi_CWiFiPhyKind __x_ABI_CWindows_CDevices_CWiFi_CWiFiPhyKind;
 
@@ -3173,6 +4129,72 @@ enum __x_ABI_CWindows_CDevices_CWiFi_CWiFiNetworkKind
 
 /*
  *
+ * Struct Windows.Devices.WiFi.WiFiOnDemandHotspotAvailability
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+enum __x_ABI_CWindows_CDevices_CWiFi_CWiFiOnDemandHotspotAvailability
+{
+    WiFiOnDemandHotspotAvailability_Available = 0,
+    WiFiOnDemandHotspotAvailability_Unavailable = 1,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Struct Windows.Devices.WiFi.WiFiOnDemandHotspotCellularBars
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+enum __x_ABI_CWindows_CDevices_CWiFi_CWiFiOnDemandHotspotCellularBars
+{
+    WiFiOnDemandHotspotCellularBars_ZeroBars = 0,
+    WiFiOnDemandHotspotCellularBars_OneBar = 1,
+    WiFiOnDemandHotspotCellularBars_TwoBars = 2,
+    WiFiOnDemandHotspotCellularBars_ThreeBars = 3,
+    WiFiOnDemandHotspotCellularBars_FourBars = 4,
+    WiFiOnDemandHotspotCellularBars_FiveBars = 5,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Struct Windows.Devices.WiFi.WiFiOnDemandHotspotConnectStatus
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+enum __x_ABI_CWindows_CDevices_CWiFi_CWiFiOnDemandHotspotConnectStatus
+{
+    WiFiOnDemandHotspotConnectStatus_UnspecifiedFailure = 0,
+    WiFiOnDemandHotspotConnectStatus_Success = 1,
+    WiFiOnDemandHotspotConnectStatus_AppTimedOut = 2,
+    WiFiOnDemandHotspotConnectStatus_InvalidCredential = 3,
+    WiFiOnDemandHotspotConnectStatus_NetworkNotAvailable = 4,
+    WiFiOnDemandHotspotConnectStatus_UnsupportedAuthenticationProtocol = 5,
+    WiFiOnDemandHotspotConnectStatus_BluetoothConnectFailed = 6,
+    WiFiOnDemandHotspotConnectStatus_BluetoothTransmissionError = 7,
+    WiFiOnDemandHotspotConnectStatus_OperationCanceledByUser = 8,
+    WiFiOnDemandHotspotConnectStatus_EntitlementCheckFailed = 9,
+    WiFiOnDemandHotspotConnectStatus_NoCellularSignal = 10,
+    WiFiOnDemandHotspotConnectStatus_CellularDataTurnedOff = 11,
+    WiFiOnDemandHotspotConnectStatus_WlanConnectFailed = 12,
+    WiFiOnDemandHotspotConnectStatus_WlanNotVisible = 13,
+    WiFiOnDemandHotspotConnectStatus_AccessPointCannotConnect = 14,
+    WiFiOnDemandHotspotConnectStatus_CellularConnectTimedOut = 15,
+    WiFiOnDemandHotspotConnectStatus_RoamingNotAllowed = 16,
+    WiFiOnDemandHotspotConnectStatus_PairingRequired = 17,
+    WiFiOnDemandHotspotConnectStatus_DataLimitReached = 18,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Struct Windows.Devices.WiFi.WiFiPhyKind
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -3195,6 +4217,9 @@ enum __x_ABI_CWindows_CDevices_CWiFi_CWiFiPhyKind
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x30000
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
     WiFiPhyKind_HE = 10,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
+    WiFiPhyKind_Eht = 11,
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -3796,6 +4821,442 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CWiFi_CIWiFiNetworkReport;
 
 /*
  *
+ * Interface Windows.Devices.WiFi.IWiFiOnDemandHotspotConnectTriggerDetails
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.WiFi.WiFiOnDemandHotspotConnectTriggerDetails
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_WiFi_IWiFiOnDemandHotspotConnectTriggerDetails[] = L"Windows.Devices.WiFi.IWiFiOnDemandHotspotConnectTriggerDetails";
+typedef struct __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetailsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_RequestedNetwork)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails* This,
+        __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork** value);
+    HRESULT (STDMETHODCALLTYPE* ReportError)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails* This,
+        enum __x_ABI_CWindows_CDevices_CWiFi_CWiFiOnDemandHotspotConnectStatus status);
+    HRESULT (STDMETHODCALLTYPE* ConnectAsync)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails* This,
+        __FIAsyncOperation_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotConnectionResult** operation);
+    HRESULT (STDMETHODCALLTYPE* Connect)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails* This,
+        __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult** result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetailsVtbl;
+
+interface __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails
+{
+    CONST_VTBL struct __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetailsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails_get_RequestedNetwork(This, value) \
+    ((This)->lpVtbl->get_RequestedNetwork(This, value))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails_ReportError(This, status) \
+    ((This)->lpVtbl->ReportError(This, status))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails_ConnectAsync(This, operation) \
+    ((This)->lpVtbl->ConnectAsync(This, operation))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails_Connect(This, result) \
+    ((This)->lpVtbl->Connect(This, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectTriggerDetails_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Interface Windows.Devices.WiFi.IWiFiOnDemandHotspotConnectionResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.WiFi.WiFiOnDemandHotspotConnectionResult
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_WiFi_IWiFiOnDemandHotspotConnectionResult[] = L"Windows.Devices.WiFi.IWiFiOnDemandHotspotConnectionResult";
+typedef struct __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Status)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult* This,
+        enum __x_ABI_CWindows_CDevices_CWiFi_CWiFiOnDemandHotspotConnectStatus* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResultVtbl;
+
+interface __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult
+{
+    CONST_VTBL struct __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult_get_Status(This, value) \
+    ((This)->lpVtbl->get_Status(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotConnectionResult_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Interface Windows.Devices.WiFi.IWiFiOnDemandHotspotNetwork
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.WiFi.WiFiOnDemandHotspotNetwork
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_WiFi_IWiFiOnDemandHotspotNetwork[] = L"Windows.Devices.WiFi.IWiFiOnDemandHotspotNetwork";
+typedef struct __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetProperties)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork* This,
+        __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties** result);
+    HRESULT (STDMETHODCALLTYPE* UpdateProperties)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork* This,
+        __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties* newProperties);
+    HRESULT (STDMETHODCALLTYPE* get_Id)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork* This,
+        GUID* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkVtbl;
+
+interface __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork
+{
+    CONST_VTBL struct __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork_GetProperties(This, result) \
+    ((This)->lpVtbl->GetProperties(This, result))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork_UpdateProperties(This, newProperties) \
+    ((This)->lpVtbl->UpdateProperties(This, newProperties))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork_get_Id(This, value) \
+    ((This)->lpVtbl->get_Id(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Interface Windows.Devices.WiFi.IWiFiOnDemandHotspotNetworkProperties
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.WiFi.WiFiOnDemandHotspotNetworkProperties
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_WiFi_IWiFiOnDemandHotspotNetworkProperties[] = L"Windows.Devices.WiFi.IWiFiOnDemandHotspotNetworkProperties";
+typedef struct __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkPropertiesVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_DisplayName)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_DisplayName)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* get_Availability)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties* This,
+        enum __x_ABI_CWindows_CDevices_CWiFi_CWiFiOnDemandHotspotAvailability* value);
+    HRESULT (STDMETHODCALLTYPE* put_Availability)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties* This,
+        enum __x_ABI_CWindows_CDevices_CWiFi_CWiFiOnDemandHotspotAvailability value);
+    HRESULT (STDMETHODCALLTYPE* get_RemainingBatteryPercent)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties* This,
+        __FIReference_1_UINT32** value);
+    HRESULT (STDMETHODCALLTYPE* put_RemainingBatteryPercent)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties* This,
+        __FIReference_1_UINT32* value);
+    HRESULT (STDMETHODCALLTYPE* get_CellularBars)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties* This,
+        __FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars** value);
+    HRESULT (STDMETHODCALLTYPE* put_CellularBars)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties* This,
+        __FIReference_1_Windows__CDevices__CWiFi__CWiFiOnDemandHotspotCellularBars* value);
+    HRESULT (STDMETHODCALLTYPE* get_IsMetered)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* put_IsMetered)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties* This,
+        boolean value);
+    HRESULT (STDMETHODCALLTYPE* get_Ssid)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_Ssid)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* get_Password)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties* This,
+        __x_ABI_CWindows_CSecurity_CCredentials_CIPasswordCredential** value);
+    HRESULT (STDMETHODCALLTYPE* put_Password)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties* This,
+        __x_ABI_CWindows_CSecurity_CCredentials_CIPasswordCredential* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkPropertiesVtbl;
+
+interface __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties
+{
+    CONST_VTBL struct __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkPropertiesVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_get_DisplayName(This, value) \
+    ((This)->lpVtbl->get_DisplayName(This, value))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_put_DisplayName(This, value) \
+    ((This)->lpVtbl->put_DisplayName(This, value))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_get_Availability(This, value) \
+    ((This)->lpVtbl->get_Availability(This, value))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_put_Availability(This, value) \
+    ((This)->lpVtbl->put_Availability(This, value))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_get_RemainingBatteryPercent(This, value) \
+    ((This)->lpVtbl->get_RemainingBatteryPercent(This, value))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_put_RemainingBatteryPercent(This, value) \
+    ((This)->lpVtbl->put_RemainingBatteryPercent(This, value))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_get_CellularBars(This, value) \
+    ((This)->lpVtbl->get_CellularBars(This, value))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_put_CellularBars(This, value) \
+    ((This)->lpVtbl->put_CellularBars(This, value))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_get_IsMetered(This, value) \
+    ((This)->lpVtbl->get_IsMetered(This, value))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_put_IsMetered(This, value) \
+    ((This)->lpVtbl->put_IsMetered(This, value))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_get_Ssid(This, value) \
+    ((This)->lpVtbl->get_Ssid(This, value))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_put_Ssid(This, value) \
+    ((This)->lpVtbl->put_Ssid(This, value))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_get_Password(This, value) \
+    ((This)->lpVtbl->get_Password(This, value))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_put_Password(This, value) \
+    ((This)->lpVtbl->put_Password(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkProperties_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Interface Windows.Devices.WiFi.IWiFiOnDemandHotspotNetworkStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.WiFi.WiFiOnDemandHotspotNetwork
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_WiFi_IWiFiOnDemandHotspotNetworkStatics[] = L"Windows.Devices.WiFi.IWiFiOnDemandHotspotNetworkStatics";
+typedef struct __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStaticsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetOrCreateById)(__x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics* This,
+        GUID networkId,
+        __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetwork** result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStaticsVtbl;
+
+interface __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics
+{
+    CONST_VTBL struct __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStaticsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics_GetOrCreateById(This, networkId, result) \
+    ((This)->lpVtbl->GetOrCreateById(This, networkId, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CWiFi_CIWiFiOnDemandHotspotNetworkStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Interface Windows.Devices.WiFi.IWiFiWpsConfigurationResult
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 5.0
@@ -3947,6 +5408,87 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_WiFi_WiFiNetworkReport[] = L"Windows.Devices.WiFi.WiFiNetworkReport";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.Devices.WiFi.WiFiOnDemandHotspotConnectTriggerDetails
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.Devices.WiFi.IWiFiOnDemandHotspotConnectTriggerDetails ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#ifndef RUNTIMECLASS_Windows_Devices_WiFi_WiFiOnDemandHotspotConnectTriggerDetails_DEFINED
+#define RUNTIMECLASS_Windows_Devices_WiFi_WiFiOnDemandHotspotConnectTriggerDetails_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_WiFi_WiFiOnDemandHotspotConnectTriggerDetails[] = L"Windows.Devices.WiFi.WiFiOnDemandHotspotConnectTriggerDetails";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Class Windows.Devices.WiFi.WiFiOnDemandHotspotConnectionResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.Devices.WiFi.IWiFiOnDemandHotspotConnectionResult ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#ifndef RUNTIMECLASS_Windows_Devices_WiFi_WiFiOnDemandHotspotConnectionResult_DEFINED
+#define RUNTIMECLASS_Windows_Devices_WiFi_WiFiOnDemandHotspotConnectionResult_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_WiFi_WiFiOnDemandHotspotConnectionResult[] = L"Windows.Devices.WiFi.WiFiOnDemandHotspotConnectionResult";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Class Windows.Devices.WiFi.WiFiOnDemandHotspotNetwork
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Devices.WiFi.IWiFiOnDemandHotspotNetworkStatics interface starting with version 15.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Devices.WiFi.IWiFiOnDemandHotspotNetwork ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#ifndef RUNTIMECLASS_Windows_Devices_WiFi_WiFiOnDemandHotspotNetwork_DEFINED
+#define RUNTIMECLASS_Windows_Devices_WiFi_WiFiOnDemandHotspotNetwork_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_WiFi_WiFiOnDemandHotspotNetwork[] = L"Windows.Devices.WiFi.WiFiOnDemandHotspotNetwork";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Class Windows.Devices.WiFi.WiFiOnDemandHotspotNetworkProperties
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.Devices.WiFi.IWiFiOnDemandHotspotNetworkProperties ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#ifndef RUNTIMECLASS_Windows_Devices_WiFi_WiFiOnDemandHotspotNetworkProperties_DEFINED
+#define RUNTIMECLASS_Windows_Devices_WiFi_WiFiOnDemandHotspotNetworkProperties_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_WiFi_WiFiOnDemandHotspotNetworkProperties[] = L"Windows.Devices.WiFi.WiFiOnDemandHotspotNetworkProperties";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *

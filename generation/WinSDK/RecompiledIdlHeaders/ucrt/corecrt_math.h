@@ -669,6 +669,10 @@ extern "C++"
 
         _Check_return_ _CRT_JIT_INTRINSIC _ACRTIMP float __cdecl fabsf(_In_ float  _X);
 
+    #if defined _M_ARM64EC
+    #pragma intrinsic(fabsf)
+    #endif
+
     #else
 
         _Check_return_ __inline float __CRTDECL fabsf(_In_ float _X)

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -34,7 +34,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -258,6 +258,15 @@ typedef struct FWP_CONDITION_VALUE0_
         /* [case()][unique] */ FWP_RANGE0 *rangeValue;
         } 	;
     } 	FWP_CONDITION_VALUE0;
+
+typedef /* [v1_enum] */ 
+enum FWP_NETWORK_CONNECTION_POLICY_SETTING_TYPE_
+    {
+        FWP_NETWORK_CONNECTION_POLICY_SOURCE_ADDRESS	= 0,
+        FWP_NETWORK_CONNECTION_POLICY_NEXT_HOP_INTERFACE	= ( FWP_NETWORK_CONNECTION_POLICY_SOURCE_ADDRESS + 1 ) ,
+        FWP_NETWORK_CONNECTION_POLICY_NEXT_HOP	= ( FWP_NETWORK_CONNECTION_POLICY_NEXT_HOP_INTERFACE + 1 ) ,
+        FWP_NETWORK_CONNECTION_POLICY_MAX	= ( FWP_NETWORK_CONNECTION_POLICY_NEXT_HOP + 1 ) 
+    } 	FWP_NETWORK_CONNECTION_POLICY_SETTING_TYPE;
 
 typedef /* [v1_enum] */ 
 enum FWP_CLASSIFY_OPTION_TYPE_

@@ -357,9 +357,7 @@ typedef struct _KEYBOARD_INDICATOR_TRANSLATION {
 
 #define KEYBOARD_LED_INJECTED     0x8000 //Used by Terminal Server
 #define KEYBOARD_SHADOW           0x4000 //Used by Terminal Server
-//#if defined(FE_SB) || defined(WINDOWS_FE) || defined(DBCS)
 #define KEYBOARD_KANA_LOCK_ON     8 // Japanese keyboard
-//#endif // defined(FE_SB) || defined(WINDOWS_FE) || defined(DBCS)
 #define KEYBOARD_CAPS_LOCK_ON     4
 #define KEYBOARD_NUM_LOCK_ON      2
 #define KEYBOARD_SCROLL_LOCK_ON   1

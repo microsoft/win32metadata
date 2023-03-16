@@ -6,4 +6,5 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
+#define PSAPI_VERSION 1
 #include <psapi.h>

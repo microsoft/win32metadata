@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace MetadataUtils
 {
@@ -52,7 +53,7 @@ namespace MetadataUtils
             this.namesToValues[name] = args;
 
             this.Writer.WriteLine(
-$@"        [PropertyKey({args})]
+$@"        [Constant({args})]
         public static readonly {structType} {name};");
 
             this.Writer.WriteLine();
@@ -189,6 +190,12 @@ $"        public const {type} {name} = {valueText};");
                 {
                     valueText = $"unchecked((int){valueText})";
                 }
+            }
+
+            var unsignedOverflowRegex = new Regex(@"^\d+U\s*[\+\-]");
+            if (unsignedOverflowRegex.IsMatch(valueText))
+            {
+                valueText = $"unchecked((uint){valueText})";
             }
 
             if (!is64Bit)

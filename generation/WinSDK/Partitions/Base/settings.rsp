@@ -32,8 +32,6 @@ _D3DTEXTURETRANSFORMFLAGS
 PENCLAVE_ROUTINE
 LPENCLAVE_ROUTINE
 --traverse
-<IncludeRoot>/um/dbt.h
-<IncludeRoot>/shared/ioevent.h
 <IncludeRoot>/um/d3dnthal.h
 <IncludeRoot>/um/d3dcaps.h
 <IncludeRoot>/um/d3dtypes.h
@@ -41,7 +39,6 @@ LPENCLAVE_ROUTINE
 <IncludeRoot>/um/minwinbase.h
 <IncludeRoot>/um/storprop.h
 <IncludeRoot>/um/atlthunk.h
-<IncludeRoot>/shared/ntiologc.h
 <IncludeRoot>/um/dlnadeviceinterfaceids.h
 <IncludeRoot>/um/dlnametadataproviderproperties.h
 --namespace

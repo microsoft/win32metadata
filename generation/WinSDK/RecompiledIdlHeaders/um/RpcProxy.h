@@ -37,7 +37,7 @@ Compiler switches:
 // used with NT5 beta1+ env from build #1700 on.
 
 #ifndef __RPCPROXY_H_VERSION__
-#define __RPCPROXY_H_VERSION__      ( 475 )
+#define __RPCPROXY_H_VERSION__      ( 477 )
 #endif // __RPCPROXY_H_VERSION__
 
 #include <winapifamily.h>
@@ -69,6 +69,32 @@ Compiler switches:
 #define INC_OLE2
 #endif
 
+#ifndef DECLSPEC_SELECTANY
+#if (_MSC_VER >= 1200)
+#define DECLSPEC_SELECTANY __declspec(selectany)
+#else
+#define DECLSPEC_SELECTANY
+#endif
+#endif
+
+#ifndef DECLSPEC_NOINLINE
+#if (_MSC_VER >= 1200)
+#define DECLSPEC_NOINLINE __declspec(noinline)
+#else
+#define DECLSPEC_NOINLINE
+#endif
+#endif
+
+#ifndef RPCPROXY_IID_DECLSPEC_SECTION
+#if (_MSC_VER >= 1100)
+#pragma section("rpcproxy$_iid", read)
+#define RPCPROXY_IID_DECLSPEC_SECTION __declspec(allocate("rpcproxy$_iid"))
+#else
+#define RPCPROXY_IID_DECLSPEC_SECTION
+#endif
+#endif
+
+
 #if defined(WIN32) || defined(_M_AMD64)
 
 //We need to define REFIID, REFCLSID, REFGUID, & REFFMTID here so that the
@@ -86,14 +112,29 @@ extern "C"
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 // forward declarations
-struct tagCInterfaceStubVtbl;
-struct tagCInterfaceProxyVtbl;
+
+// By default, this header cannot be compiled as C++ without defining CINTERFACE (which uses a
+// C-style view of COM interfaces for C++ in MIDL-generated headers), because type definitions here
+// depend on *Vtbl types not present in this configuration. Define RPCPROXY_ENABLE_CPP_NO_CINTERFACE
+// to enable this when needed.
+#if defined(RPCPROXY_ENABLE_CPP_NO_CINTERFACE) && defined(__cplusplus) && !defined(CINTERFACE)
+typedef struct IRpcStubBufferVtbl IRpcStubBufferVtbl;
+typedef struct ICallFactoryVtbl ICallFactoryVtbl;
+typedef struct IReleaseMarshalBuffersVtbl IReleaseMarshalBuffersVtbl;
+typedef struct IPSFactoryBufferVtbl IPSFactoryBufferVtbl;
+#endif
+
+typedef struct tagCInterfaceStubVtbl CInterfaceStubVtbl;
+typedef struct tagCInterfaceProxyVtbl CInterfaceProxyVtbl;
 
 typedef struct tagCInterfaceStubVtbl *  PCInterfaceStubVtblList;
 typedef struct tagCInterfaceProxyVtbl *  PCInterfaceProxyVtblList;
 typedef const char *                    PCInterfaceName;
 typedef int __stdcall IIDLookupRtn( const IID * pIID, int * pIndex );
 typedef IIDLookupRtn * PIIDLookup;
+
+// Uses a default lookup mechanism
+#define NdrDefaultIIDLookup ((PIIDLookup)-1)
 
 #if _MSC_VER >= 1200
 #pragma warning(push)
@@ -150,6 +191,9 @@ struct \
     void *Vtbl[ n ];                  \
 }
 
+#define IInspectableInterfaceProxyTag ((void *)-1)
+#define IUnknownInterfaceProxyTag ((void *)-2)
+
 #if _MSC_VER >= 1200
 #pragma warning(push)
 #endif
@@ -186,11 +230,31 @@ typedef struct tagCInterfaceStubHeader
     const PRPC_STUB_FUNCTION *  pDispatchTable;
 } CInterfaceStubHeader;
 
+#define IInspectableNdrStubCall2CommonStubListTag ((const PRPC_STUB_FUNCTION*)-1)
+#define IInspectableNdrStubCall3CommonStubListTag ((const PRPC_STUB_FUNCTION*)-2)
+
+#if !defined(RPCPROXY_ENABLE_CPP_NO_CINTERFACE) || !defined(__cplusplus) || defined(CINTERFACE)
 typedef struct tagCInterfaceStubVtbl
 {
     CInterfaceStubHeader        header;
     IRpcStubBufferVtbl          Vtbl;
 } CInterfaceStubVtbl;
+
+#define RPCPROXY_GET_STUB_HEADER(StubVtblListEntry) (&(StubVtblListEntry)->header)
+#else
+
+// No definition of CInterfaceStubVtbl is provided in this configuration, but
+// RPCPROXY_GET_STUB_HEADER can be used to get the stub header from an entry in
+// a stub vtable list.
+#define RPCPROXY_GET_STUB_HEADER(StubVtblListEntry) (reinterpret_cast<const CInterfaceStubHeader*>(StubVtblListEntry))
+
+#endif
+
+typedef struct tagCInterfaceStubVtblTag
+{
+    CInterfaceStubHeader        header;
+    void *                      tag;
+} CInterfaceStubVtblTag;
 
 typedef struct tagCStdStubBuffer
 {
@@ -662,6 +726,11 @@ NdrProxyForwardingFunction32(void);
     CStdStubBuffer2_CountRefs,                      \
     CStdStubBuffer_DebugServerQueryInterface,       \
     CStdStubBuffer_DebugServerRelease
+
+#define CStdStubBuffer_METHODS_TAG ((void *)-1)
+#define CStdStubBuffer_DELEGATING_METHODS_TAG ((void *)-2)
+#define CStdAsyncStubBuffer_METHODS_TAG ((void *)-3)
+#define CStdAsyncStubBuffer_DELEGATING_METHODS_TAG ((void *)-4)
 
 //+-------------------------------------------------------------------------
 //
