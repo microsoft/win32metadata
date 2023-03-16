@@ -301,3 +301,48 @@ Windows.Win32.System.Iis.PFN_IIS_GETSERVERVARIABLE added
 Windows.Win32.System.Iis.PFN_IIS_READCLIENT added
 Windows.Win32.System.Iis.PFN_IIS_SERVERSUPPORTFUNCTION added
 Windows.Win32.System.Iis.PFN_IIS_WRITECLIENT added
+# Fixed #796.
+Windows.Win32.Graphics.Printing.MONITOR2.pfnAddPort...System.IntPtr => Windows.Win32.Graphics.Printing.PFN_PRINTING_ADDPORT
+Windows.Win32.Graphics.Printing.MONITOR2.pfnAddPortEx...System.IntPtr => Windows.Win32.Graphics.Printing.PFN_PRINTING_ADDPORTEX
+Windows.Win32.Graphics.Printing.MONITOR2.pfnClosePort...System.IntPtr => Windows.Win32.Graphics.Printing.PFN_PRINTING_CLOSEPORT
+Windows.Win32.Graphics.Printing.MONITOR2.pfnConfigurePort...System.IntPtr => Windows.Win32.Graphics.Printing.PFN_PRINTING_CONFIGUREPORT
+Windows.Win32.Graphics.Printing.MONITOR2.pfnDeletePort...System.IntPtr => Windows.Win32.Graphics.Printing.PFN_PRINTING_DELETEPORT
+Windows.Win32.Graphics.Printing.MONITOR2.pfnEndDocPort...System.IntPtr => Windows.Win32.Graphics.Printing.PFN_PRINTING_ENDDOCPORT
+Windows.Win32.Graphics.Printing.MONITOR2.pfnEnumPorts...System.IntPtr => Windows.Win32.Graphics.Printing.PFN_PRINTING_ENUMPORTS
+Windows.Win32.Graphics.Printing.MONITOR2.pfnGetPrinterDataFromPort...System.IntPtr => Windows.Win32.Graphics.Printing.PFN_PRINTING_GETPRINTERDATAFROMPORT
+Windows.Win32.Graphics.Printing.MONITOR2.pfnNotifyUnusedPorts...System.IntPtr => Windows.Win32.Graphics.Printing.PFN_PRINTING_NOTIFYUNUSEDPORTS
+Windows.Win32.Graphics.Printing.MONITOR2.pfnNotifyUsedPorts...System.IntPtr => Windows.Win32.Graphics.Printing.PFN_PRINTING_NOTIFYUSEDPORTS
+Windows.Win32.Graphics.Printing.MONITOR2.pfnOpenPort...System.IntPtr => Windows.Win32.Graphics.Printing.PFN_PRINTING_OPENPORT
+Windows.Win32.Graphics.Printing.MONITOR2.pfnOpenPortEx...System.IntPtr => Windows.Win32.Graphics.Printing.PFN_PRINTING_OPENPORTEX
+Windows.Win32.Graphics.Printing.MONITOR2.pfnPowerEvent...System.IntPtr => Windows.Win32.Graphics.Printing.PFN_PRINTING_POWEREVENT
+Windows.Win32.Graphics.Printing.MONITOR2.pfnReadPort...System.IntPtr => Windows.Win32.Graphics.Printing.PFN_PRINTING_READPORT
+Windows.Win32.Graphics.Printing.MONITOR2.pfnSendRecvBidiDataFromPort...System.IntPtr => Windows.Win32.Graphics.Printing.PFN_PRINTING_SENDRECVBIDIDATAFROMPORT
+Windows.Win32.Graphics.Printing.MONITOR2.pfnSetPortTimeOuts...System.IntPtr => Windows.Win32.Graphics.Printing.PFN_PRINTING_SETPORTTIMEOUTS
+Windows.Win32.Graphics.Printing.MONITOR2.pfnShutdown...System.IntPtr => Windows.Win32.Graphics.Printing.PFN_PRINTING_SHUTDOWN
+Windows.Win32.Graphics.Printing.MONITOR2.pfnStartDocPort...System.IntPtr => Windows.Win32.Graphics.Printing.PFN_PRINTING_STARTDOCPORT
+Windows.Win32.Graphics.Printing.MONITOR2.pfnWritePort...System.IntPtr => Windows.Win32.Graphics.Printing.PFN_PRINTING_WRITEPORT
+Windows.Win32.Graphics.Printing.MONITOR2.pfnXcvClosePort...System.IntPtr => Windows.Win32.Graphics.Printing.PFN_PRINTING_XCVCLOSEPORT
+Windows.Win32.Graphics.Printing.MONITOR2.pfnXcvDataPort...System.IntPtr => Windows.Win32.Graphics.Printing.PFN_PRINTING_XCVDATAPORT
+Windows.Win32.Graphics.Printing.MONITOR2.pfnXcvOpenPort...System.IntPtr => Windows.Win32.Graphics.Printing.PFN_PRINTING_XCVOPENPORT
+Windows.Win32.Graphics.Printing.PFN_PRINTING_ADDPORT added
+Windows.Win32.Graphics.Printing.PFN_PRINTING_ADDPORTEX added
+Windows.Win32.Graphics.Printing.PFN_PRINTING_CLOSEPORT added
+Windows.Win32.Graphics.Printing.PFN_PRINTING_CONFIGUREPORT added
+Windows.Win32.Graphics.Printing.PFN_PRINTING_DELETEPORT added
+Windows.Win32.Graphics.Printing.PFN_PRINTING_ENDDOCPORT added
+Windows.Win32.Graphics.Printing.PFN_PRINTING_ENUMPORTS added
+Windows.Win32.Graphics.Printing.PFN_PRINTING_GETPRINTERDATAFROMPORT added
+Windows.Win32.Graphics.Printing.PFN_PRINTING_NOTIFYUNUSEDPORTS added
+Windows.Win32.Graphics.Printing.PFN_PRINTING_NOTIFYUSEDPORTS added
+Windows.Win32.Graphics.Printing.PFN_PRINTING_OPENPORT added
+Windows.Win32.Graphics.Printing.PFN_PRINTING_OPENPORTEX added
+Windows.Win32.Graphics.Printing.PFN_PRINTING_POWEREVENT added
+Windows.Win32.Graphics.Printing.PFN_PRINTING_READPORT added
+Windows.Win32.Graphics.Printing.PFN_PRINTING_SENDRECVBIDIDATAFROMPORT added
+Windows.Win32.Graphics.Printing.PFN_PRINTING_SETPORTTIMEOUTS added
+Windows.Win32.Graphics.Printing.PFN_PRINTING_SHUTDOWN added
+Windows.Win32.Graphics.Printing.PFN_PRINTING_STARTDOCPORT added
+Windows.Win32.Graphics.Printing.PFN_PRINTING_WRITEPORT added
+Windows.Win32.Graphics.Printing.PFN_PRINTING_XCVCLOSEPORT added
+Windows.Win32.Graphics.Printing.PFN_PRINTING_XCVDATAPORT added
+Windows.Win32.Graphics.Printing.PFN_PRINTING_XCVOPENPORT added
