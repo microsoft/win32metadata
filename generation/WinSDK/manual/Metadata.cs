@@ -193,6 +193,10 @@ namespace Windows.Win32.Foundation.Metadata
     public class ReservedAttribute : Attribute
     {
     }
+
+    public class ReturnsUnownedHandle : Attribute
+    {
+    }
     
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = true)]
     public sealed class RetValAttribute : Attribute
@@ -229,6 +233,14 @@ namespace Windows.Win32.Foundation.Metadata
         /// The name of the LIB file that contains the definition of this entry point.
         /// </value>
         public string Value { get; }
+    }
+
+    public class StructSizeFieldAttribute : Attribute
+    {
+        public StructSizeFieldAttribute(string field)
+        {
+
+        }
     }
     
     [Flags]
