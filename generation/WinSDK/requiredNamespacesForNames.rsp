@@ -926,6 +926,7 @@ GlobalMemoryStatus=Windows.Win32.System.SystemInformation
 GlobalReAlloc=Windows.Win32.System.Memory
 GlobalSize=Windows.Win32.System.Memory
 GlobalUnlock=Windows.Win32.System.Memory
+INFINITE=Windows.Win32.System.Threading
 InitAtomTable=Windows.Win32.System.DataExchange
 InitializeContext=Windows.Win32.System.Diagnostics.Debug
 InitializeContext2=Windows.Win32.System.Diagnostics.Debug

@@ -35532,53 +35532,6 @@
     ]
   },
   {
-    "namespace": "Windows.Win32.UI.Controls.Dialogs",
-    "name": "COMMON_DIALOG_NOTIFICATION",
-    "type": "int",
-    "members": [
-      {
-        "name": "CDN_FIRST",
-        "value": "-601"
-      },
-      {
-        "name": "CDN_LAST",
-        "value": "-699"
-      },
-      {
-        "name": "CDN_INITDONE",
-        "value": "-601"
-      },
-      {
-        "name": "CDN_SELCHANGE",
-        "value": "-602"
-      },
-      {
-        "name": "CDN_FOLDERCHANGE",
-        "value": "-603"
-      },
-      {
-        "name": "CDN_SHAREVIOLATION",
-        "value": "-604"
-      },
-      {
-        "name": "CDN_HELP",
-        "value": "-605"
-      },
-      {
-        "name": "CDN_FILEOK",
-        "value": "-606"
-      },
-      {
-        "name": "CDN_TYPECHANGE",
-        "value": "-607"
-      },
-      {
-        "name": "CDN_INCLUDEITEM",
-        "value": "-608"
-      }
-    ]
-  },
-  {
     "type": "uint",
     "name": "DXGI_USAGE",
     "flags": true,
