@@ -1573,5 +1573,10 @@
     "Name": "MEMORYMAPPEDVIEW_HANDLE",
     "ValueType": "DECLARE_HANDLE",
     "InvalidHandleValues": [ -1, 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.System.Iis",
+    "Name": "HCONN",
+    "ValueType": "void*"
   }
 ]

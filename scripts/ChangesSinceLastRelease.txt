@@ -290,3 +290,14 @@ Windows.Win32.UI.WindowsAndMessaging.WNDCLASSEXW.hInstance...Windows.Win32.Found
 Windows.Win32.UI.WindowsAndMessaging.WNDCLASSW.hInstance...Windows.Win32.Foundation.HINSTANCE => Windows.Win32.Foundation.HMODULE
 Windows.Win32.Web.InternetExplorer.Apis.RatingClickedOnPRFInternal : param1...HINSTANCE => HMODULE
 Windows.Win32.Web.InternetExplorer.Apis.RatingClickedOnRATInternal : param1...HINSTANCE => HMODULE
+# Fixed #983.
+Windows.Win32.System.Iis.EXTENSION_CONTROL_BLOCK.ConnID...System.Void* => Windows.Win32.System.Iis.HCONN
+Windows.Win32.System.Iis.EXTENSION_CONTROL_BLOCK.GetServerVariable...System.IntPtr => Windows.Win32.System.Iis.PFN_IIS_GETSERVERVARIABLE
+Windows.Win32.System.Iis.EXTENSION_CONTROL_BLOCK.ReadClient...System.IntPtr => Windows.Win32.System.Iis.PFN_IIS_READCLIENT
+Windows.Win32.System.Iis.EXTENSION_CONTROL_BLOCK.ServerSupportFunction...System.IntPtr => Windows.Win32.System.Iis.PFN_IIS_SERVERSUPPORTFUNCTION
+Windows.Win32.System.Iis.EXTENSION_CONTROL_BLOCK.WriteClient...System.IntPtr => Windows.Win32.System.Iis.PFN_IIS_WRITECLIENT
+Windows.Win32.System.Iis.HCONN added
+Windows.Win32.System.Iis.PFN_IIS_GETSERVERVARIABLE added
+Windows.Win32.System.Iis.PFN_IIS_READCLIENT added
+Windows.Win32.System.Iis.PFN_IIS_SERVERSUPPORTFUNCTION added
+Windows.Win32.System.Iis.PFN_IIS_WRITECLIENT added
