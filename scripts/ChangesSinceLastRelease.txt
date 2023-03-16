@@ -5,3 +5,7 @@ Windows.Win32.UI.Controls.MENU_POPUPSUBMENU_HCHOT removed
 Windows.Win32.UI.Controls.MENU_POPUPSUBMENU_HCHOT.MSMHC_HOT removed
 Windows.Win32.UI.Controls.POPUPSUBMENUHCHOTSTATES added
 Windows.Win32.UI.Controls.POPUPSUBMENUHCHOTSTATES.MSMHC_HOT added
+# Fixed #436.
+Windows.Win32.System.Threading.Apis.GetCurrentProcessToken added
+Windows.Win32.System.Threading.Apis.GetCurrentThreadEffectiveToken added
+Windows.Win32.System.Threading.Apis.GetCurrentThreadToken added

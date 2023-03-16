@@ -11,6 +11,21 @@ namespace Windows.Win32.System.Threading
         public const uint WAIT_ABANDONED = 0x00000080;
         public const uint WAIT_ABANDONED_0 = 0x00000080;
         public const uint WAIT_IO_COMPLETION = 0x000000C0;
+
+        [DllImport("FORCEINLINE")]
+        [Constant("-4")]
+        [return: DoNotRelease]
+        public static extern HANDLE GetCurrentProcessToken();
+
+        [DllImport("FORCEINLINE")]
+        [Constant("-5")]
+        [return: DoNotRelease]
+        public static extern HANDLE GetCurrentThreadToken();
+
+        [DllImport("FORCEINLINE")]
+        [Constant("-6")]
+        [return: DoNotRelease]
+        public static extern HANDLE GetCurrentThreadEffectiveToken();
     }
 
     public unsafe partial struct PROCESS_BASIC_INFORMATION
