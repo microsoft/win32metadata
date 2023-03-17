@@ -36062,6 +36062,18 @@
         "parameter": "dwDesiredAccess"
       }
     ]
+  },
+  {
+    "namespace": "Windows.Win32.System.ClrHosting",
+    "name": "EApiCategories",
+    "flags": true,
+    "uses": [
+      {
+        "interface": "ICLRHostProtectionManager",
+        "method": "SetProtectedCategories",
+        "parameter": "categories"
+      }
+    ]
   }
 ]
 }
