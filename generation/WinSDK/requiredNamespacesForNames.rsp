@@ -277,6 +277,9 @@ HEAACWAVEINFO=Windows.Win32.Media.DirectShow
 MPEG1WAVEFORMAT=Windows.Win32.Media.DirectShow
 MPEGLAYER3WAVEFORMAT=Windows.Win32.Media.DirectShow
 # endregion mmreg.h
+# region mscoree.h
+DEPRECATED_CLR_API_MESG=Windows.Win32.System.ClrHosting
+# endregion mscoree.h
 # region mssip.h
 MS_ADDINFO_CATALOGMEMBER=Windows.Win32.Security.Cryptography.Catalog
 # endregion mssip.h
