@@ -5,23 +5,20 @@ using System.Text.RegularExpressions;
 
 namespace MetadataUtils
 {
-    public class ConstantWriter : IDisposable
+    public class ConstantWriter : IDisposable, IConstantWriter
     {
-        private string path;
+        private Stream outputStream;
         private string @namespace;
         private string headerText;
         private StreamWriter writer;
         private Dictionary<string, string> namesToValues = new Dictionary<string, string>();
         private Dictionary<string, string> withAttributes;
 
-        public ConstantWriter(string path, string @namespace, string sourceHeaderText, Dictionary<string, string> withAttributes)
+        public ConstantWriter(Stream outputStream, string @namespace, string sourceHeaderText, Dictionary<string, string> withAttributes)
         {
-            if (sourceHeaderText == null)
-            {
-                sourceHeaderText = string.Empty;
-            }
+            sourceHeaderText ??= string.Empty;
 
-            this.path = path;
+            this.outputStream = outputStream;
             this.@namespace = @namespace;
             this.headerText = sourceHeaderText;
             this.withAttributes = withAttributes;
@@ -247,7 +244,7 @@ $"        [NativeTypeName(\"{nativeTypeName}\")]");
         {
             if (this.writer == null)
             {
-                this.writer = new StreamWriter(this.path);
+                this.writer = new StreamWriter(this.outputStream);
                 this.writer.WriteLine(
 @$"{this.headerText}
 
