@@ -7,7 +7,7 @@ using Windows.Win32.System.Power;
 
 namespace Windows.Win32.Graphics.Printing
 {
-        [UnmanagedFunctionPointer(CallingConvention.Winapi))]
+    [UnmanagedFunctionPointer(CallingConvention.Winapi))]
     [return: NativeTypeName("BOOL")]
     public unsafe delegate int PFN_PRINTING_ENUMPORTS([NativeTypeName("LPWSTR"), In, Optional] ushort* param0, [In] uint param1, [Out, Optional] byte* param2, [In] uint param3, [Out] uint* param4, [Out] uint* param5);
 
