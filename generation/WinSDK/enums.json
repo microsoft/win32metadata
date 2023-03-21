@@ -5509,10 +5509,6 @@
         "parameter": "dwNewMode"
       },
       {
-        "method": "SetThreadErrorMode",
-        "parameter": "lpOldMode"
-      },
-      {
         "method": "SetErrorMode",
         "parameter": "uMode"
       }

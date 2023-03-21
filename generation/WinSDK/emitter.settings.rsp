@@ -1532,3 +1532,4 @@ SetJobCompartmentId::return=WIN32_ERROR
 SetNetworkInformation::return=WIN32_ERROR
 SetSessionCompartmentId::return=WIN32_ERROR
 SetUnicastIpAddressEntry::return=WIN32_ERROR
+SetThreadErrorMode::lpOldMode=[-In][Out][Optional]THREAD_ERROR_MODE*
