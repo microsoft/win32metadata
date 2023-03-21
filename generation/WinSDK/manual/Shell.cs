@@ -20,7 +20,7 @@ namespace Windows.Win32.UI.Shell
     }
 
     [Flags]
-    public enum SHGFI_FLAGS
+    public enum SHGFI_FLAGS : uint
     {
         SHGFI_ADDOVERLAYS = 0x000000020,
         SHGFI_ATTR_SPECIFIED = 0x000020000,
