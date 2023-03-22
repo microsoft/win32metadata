@@ -4358,3 +4358,10 @@ Windows.Win32.Media.DirectShow.VA_VIDEO_FORMAT.VA_VIDEO_UNSPECIFIED removed
 Windows.Win32.Media.DirectShow.WMDRMProtectionInfo => Windows.Win32.Media.DirectShow.Tv.WMDRMProtectionInfo
 Windows.Win32.Media.DirectShow.XDSCodec => Windows.Win32.Media.DirectShow.Tv.XDSCodec
 Windows.Win32.Media.DirectShow.XDSToRat => Windows.Win32.Media.DirectShow.Tv.XDSToRat
+# Fixed #618.
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MSIDBOPEN_CREATE added
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MSIDBOPEN_CREATEDIRECT added
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MSIDBOPEN_DIRECT added
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MSIDBOPEN_PATCHFILE added
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MSIDBOPEN_READONLY added
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MSIDBOPEN_TRANSACT added
