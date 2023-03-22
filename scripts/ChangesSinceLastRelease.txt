@@ -4365,3 +4365,12 @@ Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MSIDBOPEN_DIRECT a
 Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MSIDBOPEN_PATCHFILE added
 Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MSIDBOPEN_READONLY added
 Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MSIDBOPEN_TRANSACT added
+# Fixed #1507.
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothFindDeviceClose : hFind...IntPtr => HBLUETOOTH_DEVICE_FIND
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothFindFirstDevice : return...IntPtr => HBLUETOOTH_DEVICE_FIND
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothFindFirstRadio : return...IntPtr => HBLUETOOTH_RADIO_FIND
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothFindNextDevice : hFind...IntPtr => HBLUETOOTH_DEVICE_FIND
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothFindNextRadio : hFind...IntPtr => HBLUETOOTH_RADIO_FIND
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothFindRadioClose : hFind...IntPtr => HBLUETOOTH_RADIO_FIND
+Windows.Win32.Devices.Bluetooth.HBLUETOOTH_DEVICE_FIND added
+Windows.Win32.Devices.Bluetooth.HBLUETOOTH_RADIO_FIND added
