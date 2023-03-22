@@ -1139,6 +1139,13 @@ namespace WinmdUtilsProgram
                             writer.WriteDifference($"winmd2: {fullField1Name} is a constant with a null value");
                         }
 
+                        var fieldInitType1 = fieldVal1.GetType().Name;
+                        var fieldInitType2 = fieldVal2.GetType().Name;
+                        if (fieldInitType1 != fieldInitType2)
+                        {
+                            writer.WriteDifference($"{fullField1Name} value init changed {fieldInitType1}->{fieldInitType2}");
+                        }
+
                         string val1 = fieldVal1?.ToString();
                         string val2 = fieldVal2?.ToString();
 

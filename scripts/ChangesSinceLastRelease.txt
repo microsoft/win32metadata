@@ -969,6 +969,47 @@ Windows.Win32.NetworkManagement.IpHelper.Apis.SetSessionCompartmentId : return..
 Windows.Win32.NetworkManagement.IpHelper.Apis.SetUnicastIpAddressEntry : return...NTSTATUS => WIN32_ERROR
 # Fixed #1474.
 Windows.Win32.System.ApplicationInstallationAndServicing.ACTIVATION_CONTEXT_COMPATIBILITY_INFORMATION.Elements...Windows.Win32.System.ApplicationInstallationAndServicing.COMPATIBILITY_CONTEXT_ELEMENT* => Windows.Win32.System.ApplicationInstallationAndServicing.COMPATIBILITY_CONTEXT_ELEMENT[]
+# Added support for short PSTR/PWSTR constant values
+Windows.Win32.Media.KernelStreaming.Apis.RT_RCDATA value init changed Int32->Int16
+Windows.Win32.Media.KernelStreaming.Apis.RT_STRING value init changed Int32->Int16
+Windows.Win32.UI.Controls.Apis.TD_ERROR_ICON value init changed Int32->Int16
+Windows.Win32.UI.Controls.Apis.TD_INFORMATION_ICON value init changed Int32->Int16
+Windows.Win32.UI.Controls.Apis.TD_SHIELD_ICON value init changed Int32->Int16
+Windows.Win32.UI.Controls.Apis.TD_WARNING_ICON value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_APPSTARTING value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_ARROW value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_CROSS value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_HAND value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_HELP value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_IBEAM value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_ICON value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_NO value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_PERSON value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_PIN value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_SIZE value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_SIZEALL value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_SIZENESW value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_SIZENS value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_SIZENWSE value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_SIZEWE value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_UPARROW value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_WAIT value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.RT_ACCELERATOR value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.RT_ANICURSOR value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.RT_ANIICON value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.RT_BITMAP value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.RT_CURSOR value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.RT_DIALOG value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.RT_DLGINCLUDE value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.RT_FONT value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.RT_FONTDIR value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.RT_HTML value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.RT_ICON value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.RT_MENU value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.RT_MESSAGETABLE value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.RT_PLUGPLAY value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.RT_VERSION value init changed Int32->Int16
+Windows.Win32.UI.WindowsAndMessaging.Apis.RT_VXD value init changed Int32->Int16
 # Fixed #1495.
 Windows.Win32.System.ClrHosting.Apis.BucketParamLength added
 Windows.Win32.System.ClrHosting.Apis.BucketParamsCount added
