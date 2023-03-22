@@ -4374,3 +4374,29 @@ Windows.Win32.Devices.Bluetooth.Apis.BluetoothFindNextRadio : hFind...IntPtr => 
 Windows.Win32.Devices.Bluetooth.Apis.BluetoothFindRadioClose : hFind...IntPtr => HBLUETOOTH_RADIO_FIND
 Windows.Win32.Devices.Bluetooth.HBLUETOOTH_DEVICE_FIND added
 Windows.Win32.Devices.Bluetooth.HBLUETOOTH_RADIO_FIND added
+# Fixed #1411.
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_APPDATA added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_AUTOCENTER added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_AXISMODE added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_BUFFERSIZE added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_CALIBRATION added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_CALIBRATIONMODE added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_CPOINTS added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_DEADZONE added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_FFGAIN added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_FFLOAD added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_GETPORTDISPLAYNAME added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_GRANULARITY added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_GUIDANDPATH added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_INSTANCENAME added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_JOYSTICKID added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_KEYNAME added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_LOGICALRANGE added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_PHYSICALRANGE added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_PRODUCTNAME added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_RANGE added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_SATURATION added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_SCANCODE added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_TYPENAME added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_USERNAME added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.DIPROP_VIDPID added
