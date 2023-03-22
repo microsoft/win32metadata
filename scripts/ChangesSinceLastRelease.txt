@@ -1394,3 +1394,6 @@ Windows.Win32.Graphics.Printing.PFN_PRINTING_XCVDATAPORT2 added
 Windows.Win32.Graphics.Printing.PFN_PRINTING_XCVOPENPORT2 added
 # Fixed #1505.
 Windows.Win32.System.Diagnostics.Debug.Apis.SetThreadErrorMode : lpOldMode : [In,Optional] => [Optional,Out]
+# Fixed #1506.
+Windows.Win32.System.Wmi.IWbemClassObject.Get : plFlavor : [Optional] => [Optional,Out]
+Windows.Win32.System.Wmi.IWbemClassObject.Get : pType : [Optional] => [Optional,Out]
