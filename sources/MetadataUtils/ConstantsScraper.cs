@@ -816,7 +816,8 @@ namespace MetadataUtils
                             // MAKEDIPROP(1)
                             else if (match.Groups[29].Success)
                             {
-                                var defineGuidLine = $"{name}, 0x00000000L, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x{Convert.ToUInt32(match.Groups[30].Value).ToString("X2")})";
+                                var value = Convert.ToUInt32(match.Groups[30].Value).ToString("X2");
+                                var defineGuidLine = $"{name}, 0x00000000L, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x{value})";
                                 this.AddConstantGuid("MAKEDIPROP", currentNamespace, defineGuidLine);
 
                                 continue;
