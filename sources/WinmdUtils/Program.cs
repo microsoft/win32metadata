@@ -47,9 +47,10 @@ namespace WinmdUtilsProgram
             var showDuplicateImports = new Command("showDuplicateImports", "Show duplicate imports in a single winmd files.")
             {
                 new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
+                new Option<string>("--allowItem", "Item to allow and not flag as an error.", ArgumentArity.OneOrMore)
             };
 
-            showDuplicateImports.Handler = CommandHandler.Create<FileInfo, IConsole>(ShowDuplicateImports);
+            showDuplicateImports.Handler = CommandHandler.Create<FileInfo, string[], IConsole>(ShowDuplicateImports);
 
             var showDuplicateTypes = new Command("showDuplicateTypes", "Show duplicate types in a single winmd files.")
             {
@@ -1012,12 +1013,13 @@ namespace WinmdUtilsProgram
             return 0;
         }
 
-        public static int ShowDuplicateImports(FileInfo winmd, IConsole console)
+        public static int ShowDuplicateImports(FileInfo winmd, string[] allowItem, IConsole console)
         {
             DecompilerSettings settings = new DecompilerSettings() { ThrowOnAssemblyResolveErrors = false };
             DecompilerTypeSystem winmd1 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(winmd.FullName);
 
             Dictionary<string, List<string>> dllImportsToClassNames = new Dictionary<string, List<string>>();
+            HashSet<string> allowTable = new HashSet<string>(allowItem);
 
             foreach (var type1 in winmd1.GetTopLevelTypeDefinitions())
             {
@@ -1075,6 +1077,11 @@ namespace WinmdUtilsProgram
             bool dupsFound = false;
             foreach (var pair in dllImportsToClassNames)
             {
+                if (allowTable.Contains(pair.Key))
+                {
+                    continue;
+                }
+
                 if (pair.Value.Count > 1)
                 {
                     if (dupsFound == false)

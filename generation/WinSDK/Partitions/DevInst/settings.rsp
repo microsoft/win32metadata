@@ -1,3 +1,5 @@
+--exclude
+DiInstallDevice
 --traverse
 <IncludeRoot>/shared/cfg.h
 <IncludeRoot>/shared/devguid.h

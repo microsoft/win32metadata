@@ -43,3 +43,7 @@ winmd1: Windows.Win32.UI.Controls.Apis.TD_ERROR_ICON = -2, winmd2 = 65534
 winmd1: Windows.Win32.UI.Controls.Apis.TD_INFORMATION_ICON = -3, winmd2 = 65533
 winmd1: Windows.Win32.UI.Controls.Apis.TD_SHIELD_ICON = -4, winmd2 = 65532
 winmd1: Windows.Win32.UI.Controls.Apis.TD_WARNING_ICON = -1, winmd2 = 65535
+# Fixed #903.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DiInstallDevice removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DiInstallDeviceA added
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DiInstallDeviceW added
