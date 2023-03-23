@@ -175,6 +175,17 @@ namespace ClangSharpSourceToWinmd
                     node = (ParameterSyntax)base.VisitParameter(node);
                 }
 
+                var reservedParameterRegEx = new Regex(@"[p|pv|sz|ll|cb|dw]Reserved[0-9]{0,2}");
+                if (SyntaxUtils.GetAttribute(node.AttributeLists, "Reserved") == null && reservedParameterRegEx.IsMatch(node.Identifier.ValueText))
+                {
+                    var attributeList = SyntaxFactory.AttributeList(
+                            SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
+                                SyntaxFactory.Attribute(
+                                    SyntaxFactory.ParseName("Reserved"))));
+
+                    node = node.AddAttributeLists(attributeList);
+                }
+
                 // Get rid of default parameter values
                 if (node.Default != null)
                 {
