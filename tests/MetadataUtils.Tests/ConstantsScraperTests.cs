@@ -54,11 +54,11 @@ namespace MetadataUtils.Tests
         }
 
         [Theory]
-        [InlineData("MAKEINTRESOURCE(19)", "[NativeTypeName(\"LPCWSTR\")]", "public const short TEST_RESOURCE = 19;")]
-        [InlineData("MAKEINTRESOURCE(0)", "[NativeTypeName(\"LPCWSTR\")]", "public const short TEST_RESOURCE = 0;")]
-        [InlineData("MAKEINTRESOURCE(-42)", "[NativeTypeName(\"LPCWSTR\")]", "public const short TEST_RESOURCE = -42;")]
-        [InlineData("MAKEINTRESOURCEA(1)", "[NativeTypeName(\"LPCSTR\")]", "public const short TEST_RESOURCE = 1;")]
-        public void ScrapeConstantsFromTraversedFiles_MakeIntResourceConstantsPresent_ShortIntegersWritten(string actual, string expectedAttribute, string expectedConst)
+        [InlineData("MAKEINTRESOURCE(19)", "[NativeTypeName(\"LPCWSTR\")]", "public const ushort TEST_RESOURCE = 19;")]
+        [InlineData("MAKEINTRESOURCE(0)", "[NativeTypeName(\"LPCWSTR\")]", "public const ushort TEST_RESOURCE = 0;")]
+        [InlineData("MAKEINTRESOURCE(-42)", "[NativeTypeName(\"LPCWSTR\")]", "public const ushort TEST_RESOURCE = unchecked((ushort) -42);")]
+        [InlineData("MAKEINTRESOURCEA(1)", "[NativeTypeName(\"LPCSTR\")]", "public const ushort TEST_RESOURCE = 1;")]
+        public void ScrapeConstantsFromTraversedFiles_MakeIntResourceConstantsPresent_UnsignedShortIntegersWritten(string actual, string expectedAttribute, string expectedConst)
         {
             // Arrange
             var mockFileSystem = new MockFileSystem(new Dictionary<string, MockFileData>

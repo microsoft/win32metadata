@@ -387,21 +387,30 @@ namespace MetadataUtils
                     $"0x{Convert.ToHexString(Encoding.ASCII.GetBytes(m.Groups[1].Value))}", RegexOptions.IgnoreCase);
             }
 
-            private void AddConstantInteger(string originalNamespace, string nativeTypeName, string name, string valueText, string forcedType = "")
+            private void AddConstantInteger(string originalNamespace, string nativeTypeName, string name, string valueText)
             {
                 if (this.writtenConstants.ContainsKey(name))
                 {
                     return;
                 }
 
-                if (string.IsNullOrWhiteSpace(forcedType))
-                {
-                    forcedType = nativeTypeName != null ? null : this.GetForcedTypeForName(name);
-                }
+                string forcedType = nativeTypeName != null ? null : this.GetForcedTypeForName(name);
 
                 var writer = this.GetConstantWriter(originalNamespace, name);
                 writer.AddInt(forcedType, nativeTypeName, name, valueText, out var finalType);
 
+                this.writtenConstants.Add(name, finalType);
+            }
+
+            private void AddConstantShort(string originalNamespace, string nativeTypeName, string name, string valueText)
+            {
+                if (this.writtenConstants.ContainsKey(name))
+                {
+                    return;
+                }
+
+                var writer = this.GetConstantWriter(originalNamespace, name);
+                writer.AddShort(nativeTypeName, name, valueText, out var finalType);
                 this.writtenConstants.Add(name, finalType);
             }
 
@@ -751,7 +760,7 @@ namespace MetadataUtils
                                     nativeTypeName = "LPCWSTR";
                                 }
                                 valueText = match.Groups[12].Value;
-                                this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText, "short");
+                                this.AddConstantShort(currentNamespace, nativeTypeName, name, valueText);
                                 continue;
                             }
                             // (HWND)-4
