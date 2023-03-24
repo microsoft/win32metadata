@@ -44,6 +44,9 @@ winmd1: Windows.Win32.UI.Controls.Apis.TD_INFORMATION_ICON = -3, winmd2 = 65533
 winmd1: Windows.Win32.UI.Controls.Apis.TD_SHIELD_ICON = -4, winmd2 = 65532
 winmd1: Windows.Win32.UI.Controls.Apis.TD_WARNING_ICON = -1, winmd2 = 65535
 # Fixed #903.
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DiInstallDevice removed
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DiInstallDeviceA added
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DiInstallDeviceW added
+# Fixed #903.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DiInstallDevice : DriverInfoData...SP_DRVINFO_DATA_V2_A* => SP_DRVINFO_DATA_V2_W*
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVINSTALL_PARAMS_A.InstallMsgHandler(X64, Arm64)...Windows.Win32.Devices.DeviceAndDriverInstallation.PSP_FILE_CALLBACK_A => Windows.Win32.Devices.DeviceAndDriverInstallation.PSP_FILE_CALLBACK_W
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVINSTALL_PARAMS_A.InstallMsgHandler(X86)...Windows.Win32.Devices.DeviceAndDriverInstallation.PSP_FILE_CALLBACK_A => Windows.Win32.Devices.DeviceAndDriverInstallation.PSP_FILE_CALLBACK_W
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVINSTALL_PARAMS_W.InstallMsgHandler(X64, Arm64)...Windows.Win32.Devices.DeviceAndDriverInstallation.PSP_FILE_CALLBACK_A => Windows.Win32.Devices.DeviceAndDriverInstallation.PSP_FILE_CALLBACK_W
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVINSTALL_PARAMS_W.InstallMsgHandler(X86)...Windows.Win32.Devices.DeviceAndDriverInstallation.PSP_FILE_CALLBACK_A => Windows.Win32.Devices.DeviceAndDriverInstallation.PSP_FILE_CALLBACK_W

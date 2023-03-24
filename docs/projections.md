@@ -44,7 +44,6 @@ DISCLAIMER: This list is a work in progress and is not yet comprehensive.
 
 * Namespaces allow users to import only the APIs they require and/or to control any code generation that is producing language bindings
 * Entry points are assumed to be the same as function names unless the [EntryPoint](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute.entrypoint) property of the `DllImport` attribute is specified
-  * NOTE: `DiInstallDeviceA/W` demonstrate explicit EntryPoints ([#903](https://github.com/microsoft/win32metadata/issues/903))
 * Calling convention is captured in the [CallingConvention](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute.callingconvention) property of the `DllImport` attribute
 * typedefs (e.g. `BCRYPT_KEY_HANDLE`) are represented as CLR structs with a single field where the `NativeTypedef` attribute is applied to the struct. The type being defined is given by the name of the struct, and the type it is being defined as is the type of the struct field. typedefs can include the attributes `AlsoUsableFor`, `RAIIFree` and `InvalidHandleValue`:
   * `AlsoUsableFor` indicates that the type is implicitly convertible to another type (e.g. `BCRYPT_HANDLE`)
