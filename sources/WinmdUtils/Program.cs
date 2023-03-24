@@ -456,29 +456,27 @@ namespace WinmdUtilsProgram
         {
             HashSet<string> allowTable = new HashSet<string>(allowItem);
             using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName);
+            var suggestedRemappings = new HashSet<string>();
+            var suggestedRemappingRegEx = new Regex(@"Recommended remapping: '([^\']*)'");
             bool suggestedRemappingsFound = false;
 
-            var scriptPath = $"{Path.GetTempFileName()}.ps1";
-            var scratchPath = Path.Combine(projectRoot, "obj/scratch");
-            File.WriteAllText(scriptPath, string.Format(
-            @"Get-ChildItem {0} -Recurse -Filter '*.txt' |
-            Select-String -Pattern ""Recommended remapping: \'([^\']*)\'"" |
-            ForEach-Object {{ $_.Matches.Groups[1].Value }} |
-            Select-Object -Unique", scratchPath));
-
-            var process = new Process();
-            process.StartInfo.FileName = @"pwsh.exe";
-            process.StartInfo.Arguments = string.Format("-NoProfile -File \"{0}\"", scriptPath);
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.Start();
-
-            StreamReader reader = process.StandardOutput;
-            var suggestedRemappings = reader.ReadToEnd().Split("\r\n");
-
-            foreach (var remapping in suggestedRemappings)
+            var files = Directory.GetFiles(Path.Combine(projectRoot, "obj/scratch"), "*.txt", SearchOption.AllDirectories);
+            foreach (var file in files)
             {
-                if (string.IsNullOrEmpty(remapping) || allowTable.Contains(remapping))
+                var lines = File.ReadLines(file);
+                foreach (var line in lines)
+                {
+                    var match = suggestedRemappingRegEx.Match(line);
+                    if (match.Success)
+                    {
+                        suggestedRemappings.Add(match.Groups[1].Value);
+                    }
+                }
+            }
+
+            foreach (var suggestedRemapping in suggestedRemappings)
+            {
+                if (string.IsNullOrEmpty(suggestedRemapping) || allowTable.Contains(suggestedRemapping))
                 {
                     continue;
                 }
@@ -489,7 +487,7 @@ namespace WinmdUtilsProgram
                     suggestedRemappingsFound = true;
                 }
 
-                console?.Out.Write($"{remapping}\r\n");
+                console?.Out.Write($"{suggestedRemapping}\r\n");
             }
 
             if (!suggestedRemappingsFound)
