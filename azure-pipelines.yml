@@ -44,7 +44,7 @@ jobs:
       errorActionPreference: 'continue'
       pwsh: true
 
-  - publish: 'generation\WinSDK\obj\generated\x64'
+  - publish: 'generation\WinSDK\obj'
     displayName: Publish x64 generated assets
     artifact: 'generated_x64'
 
@@ -72,7 +72,7 @@ jobs:
       errorActionPreference: 'continue'
       pwsh: true
 
-  - publish: 'generation\WinSDK\obj\generated'
+  - publish: 'generation\WinSDK\obj'
     displayName: Publish x86 generated assets
     artifact: 'generated_x86'
 
@@ -100,7 +100,7 @@ jobs:
       errorActionPreference: 'continue'
       pwsh: true
 
-  - publish: 'generation\WinSDK\obj\generated\arm64'
+  - publish: 'generation\WinSDK\obj'
     displayName: Publish arm64 generated assets
     artifact: 'generated_arm64'
 
