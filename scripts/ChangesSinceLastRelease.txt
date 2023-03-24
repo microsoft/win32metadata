@@ -46,7 +46,10 @@ winmd1: Windows.Win32.UI.Controls.Apis.TD_WARNING_ICON = -1, winmd2 = 65535
 # Fixed #903.
 # Fixed #903.
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DiInstallDevice : DriverInfoData...SP_DRVINFO_DATA_V2_A* => SP_DRVINFO_DATA_V2_W*
-Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVINSTALL_PARAMS_A.InstallMsgHandler(X64, Arm64)...Windows.Win32.Devices.DeviceAndDriverInstallation.PSP_FILE_CALLBACK_A => Windows.Win32.Devices.DeviceAndDriverInstallation.PSP_FILE_CALLBACK_W
-Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVINSTALL_PARAMS_A.InstallMsgHandler(X86)...Windows.Win32.Devices.DeviceAndDriverInstallation.PSP_FILE_CALLBACK_A => Windows.Win32.Devices.DeviceAndDriverInstallation.PSP_FILE_CALLBACK_W
 Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVINSTALL_PARAMS_W.InstallMsgHandler(X64, Arm64)...Windows.Win32.Devices.DeviceAndDriverInstallation.PSP_FILE_CALLBACK_A => Windows.Win32.Devices.DeviceAndDriverInstallation.PSP_FILE_CALLBACK_W
 Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVINSTALL_PARAMS_W.InstallMsgHandler(X86)...Windows.Win32.Devices.DeviceAndDriverInstallation.PSP_FILE_CALLBACK_A => Windows.Win32.Devices.DeviceAndDriverInstallation.PSP_FILE_CALLBACK_W
+# Fixed bugs for #903.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Hardware_Profile_Info_ExA : pHWProfileInfo...HWProfileInfo_sA* => HWPROFILEINFO_A*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Hardware_Profile_InfoA : pHWProfileInfo...HWProfileInfo_sA* => HWPROFILEINFO_A*
+Windows.Win32.Devices.DeviceAndDriverInstallation.HWPROFILEINFO_A added
+Windows.Win32.Devices.DeviceAndDriverInstallation.HWProfileInfo_sA removed
