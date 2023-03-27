@@ -46,9 +46,10 @@ namespace WinmdUtilsProgram
             var showDuplicateImports = new Command("showDuplicateImports", "Show duplicate imports in a single winmd files.")
             {
                 new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
+                new Option<string>("--allowItem", "Item to allow and not flag as an error.", ArgumentArity.OneOrMore)
             };
 
-            showDuplicateImports.Handler = CommandHandler.Create<FileInfo, IConsole>(ShowDuplicateImports);
+            showDuplicateImports.Handler = CommandHandler.Create<FileInfo, string[], IConsole>(ShowDuplicateImports);
 
             var showDuplicateTypes = new Command("showDuplicateTypes", "Show duplicate types in a single winmd files.")
             {
@@ -454,29 +455,27 @@ namespace WinmdUtilsProgram
         {
             HashSet<string> allowTable = new HashSet<string>(allowItem);
             using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName);
+            var suggestedRemappings = new HashSet<string>();
+            var suggestedRemappingRegEx = new Regex(@"Recommended remapping: '([^\']*)'");
             bool suggestedRemappingsFound = false;
 
-            var scriptPath = $"{Path.GetTempFileName()}.ps1";
-            var scratchPath = Path.Combine(projectRoot, "obj/scratch");
-            File.WriteAllText(scriptPath, string.Format(
-            @"Get-ChildItem {0} -Recurse -Filter '*.txt' |
-            Select-String -Pattern ""Recommended remapping: \'([^\']*)\'"" |
-            ForEach-Object {{ $_.Matches.Groups[1].Value }} |
-            Select-Object -Unique", scratchPath));
-
-            var process = new Process();
-            process.StartInfo.FileName = @"pwsh.exe";
-            process.StartInfo.Arguments = string.Format("-NoProfile -File \"{0}\"", scriptPath);
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.Start();
-
-            StreamReader reader = process.StandardOutput;
-            var suggestedRemappings = reader.ReadToEnd().Split("\r\n");
-
-            foreach (var remapping in suggestedRemappings)
+            var files = Directory.GetFiles(Path.Combine(projectRoot, "obj/scratch"), "*.txt", SearchOption.AllDirectories);
+            foreach (var file in files)
             {
-                if (string.IsNullOrEmpty(remapping) || allowTable.Contains(remapping))
+                var lines = File.ReadLines(file);
+                foreach (var line in lines)
+                {
+                    var match = suggestedRemappingRegEx.Match(line);
+                    if (match.Success)
+                    {
+                        suggestedRemappings.Add(match.Groups[1].Value);
+                    }
+                }
+            }
+
+            foreach (var suggestedRemapping in suggestedRemappings)
+            {
+                if (string.IsNullOrEmpty(suggestedRemapping) || allowTable.Contains(suggestedRemapping))
                 {
                     continue;
                 }
@@ -487,7 +486,7 @@ namespace WinmdUtilsProgram
                     suggestedRemappingsFound = true;
                 }
 
-                console?.Out.Write($"{remapping}\r\n");
+                console?.Out.Write($"{suggestedRemapping}\r\n");
             }
 
             if (!suggestedRemappingsFound)
@@ -1011,12 +1010,13 @@ namespace WinmdUtilsProgram
             return 0;
         }
 
-        public static int ShowDuplicateImports(FileInfo winmd, IConsole console)
+        public static int ShowDuplicateImports(FileInfo winmd, string[] allowItem, IConsole console)
         {
             DecompilerSettings settings = new DecompilerSettings() { ThrowOnAssemblyResolveErrors = false };
             DecompilerTypeSystem winmd1 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(winmd.FullName);
 
             Dictionary<string, List<string>> dllImportsToClassNames = new Dictionary<string, List<string>>();
+            HashSet<string> allowTable = new HashSet<string>(allowItem);
 
             foreach (var type1 in winmd1.GetTopLevelTypeDefinitions())
             {
@@ -1074,6 +1074,11 @@ namespace WinmdUtilsProgram
             bool dupsFound = false;
             foreach (var pair in dllImportsToClassNames)
             {
+                if (allowTable.Contains(pair.Key))
+                {
+                    continue;
+                }
+
                 if (pair.Value.Count > 1)
                 {
                     if (dupsFound == false)
@@ -1136,6 +1141,13 @@ namespace WinmdUtilsProgram
                         if (fieldVal2 == null)
                         {
                             writer.WriteDifference($"winmd2: {fullField1Name} is a constant with a null value");
+                        }
+
+                        var fieldInitType1 = fieldVal1.GetType().Name;
+                        var fieldInitType2 = fieldVal2.GetType().Name;
+                        if (fieldInitType1 != fieldInitType2)
+                        {
+                            writer.WriteDifference($"{fullField1Name} value init changed {fieldInitType1}->{fieldInitType2}");
                         }
 
                         string val1 = fieldVal1?.ToString();

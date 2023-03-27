@@ -31,7 +31,7 @@ stages:
           - task: GitHubRelease@1
             displayName: GitHub release (create)
             inputs:
-              gitHubConnection: github.com_chenss3
+              gitHubConnection: github.com_mikebattista
               repositoryName: $(Build.Repository.Name)
               target: $(resources.pipeline.win32metadata.sourceCommit)
               tagSource: userSpecifiedTag

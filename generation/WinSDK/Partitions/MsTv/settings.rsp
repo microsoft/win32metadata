@@ -22,4 +22,4 @@ _SetAllocator=_SetAllocator2
 <IncludeRoot>/um/tune.h
 <IncludeRoot>/um/tvratings_enum.h
 --namespace
-Windows.Win32.Media.DirectShow
+Windows.Win32.Media.DirectShow.Tv

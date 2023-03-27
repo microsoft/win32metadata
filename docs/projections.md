@@ -17,8 +17,9 @@ Below are some principles that all language projections should follow:
 To call Win32 APIs from the language of your choice based off of this metadata, use the following language projections:
 
 * C# - https://github.com/microsoft/cswin32 (Microsoft)
-* C++ - https://github.com/microsoft/cppwin32 (Microsoft)
 * Rust - https://github.com/microsoft/windows-rs (Microsoft)
+---
+* Beef - https://github.com/jayrulez/Win32-Beef (Community)
 * D - https://github.com/rumbu13/windows-d (Community)
 * Dart - https://github.com/timsneath/win32 (Community)
 * Zig - https://github.com/marlersoft/zigwin32 (Community)
@@ -42,6 +43,8 @@ Below are scenarios that are represented in the metadata and that language proje
 DISCLAIMER: This list is a work in progress and is not yet comprehensive.
 
 * Namespaces allow users to import only the APIs they require and/or to control any code generation that is producing language bindings
+* Entry points are assumed to be the same as function names unless the [EntryPoint](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute.entrypoint) property of the `DllImport` attribute is specified
+* Calling convention is captured in the [CallingConvention](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute.callingconvention) property of the `DllImport` attribute
 * typedefs (e.g. `BCRYPT_KEY_HANDLE`) are represented as CLR structs with a single field where the `NativeTypedef` attribute is applied to the struct. The type being defined is given by the name of the struct, and the type it is being defined as is the type of the struct field. typedefs can include the attributes `AlsoUsableFor`, `RAIIFree` and `InvalidHandleValue`:
   * `AlsoUsableFor` indicates that the type is implicitly convertible to another type (e.g. `BCRYPT_HANDLE`)
   * `RAIIFree` indicates what function should be used to close the handle (e.g. `BCryptDestroyKey`)
@@ -52,8 +55,8 @@ DISCLAIMER: This list is a work in progress and is not yet comprehensive.
 * String constants are considered UTF-16 unless decorated with the `[NativeEncoding("ansi")]` attribute ([#1008](https://github.com/microsoft/win32metadata/issues/1008))
 * Struct initializers are defined as constants where the type of the constant is the struct and the initializer string is contained in the `[Constant]` attribute ([#1337](https://github.com/microsoft/win32metadata/issues/1337))
   * NOTE: `SECURITY_NT_AUTHORITY` and all `DEVPROPKEY` and `PROPERTYKEY` constants demonstrate struct initializers.
-* Calling convention is captured in the [CallingConvention](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute.callingconvention) property of the `DllImport` attribute
-* `[StructSizeField("<FIELDNAME>")]` on a struct indicates which field of the struct indicates the struct size ([#433](https://github.com/microsoft/win32metadata/issues/433)) so that language projections can automatically initialize the field
+* Inline functions that return constants are decorated with the `[Constant]` attribute. Projections need to implement these functions themselves to return the constant value. The constant value should be cast to the appropriate type based on the return value of the function. ([#436](https://github.com/microsoft/win32metadata/issues/436))
+* `[StructSizeField("<FIELDNAME>")]` on a struct indicates which field of the struct indicates the struct size so that language projections can automatically initialize the field ([#433](https://github.com/microsoft/win32metadata/issues/433))
   * NOTE: Examples of `"<FIELDNAME>"` include `"cbSize"` for a field on the struct or `"StartupInfo.cb"` for a nested field like `StartupInfo.cb` on the `STARTUPINFOEXW` struct
 * `[CanReturnAlternateSuccessCodes]` and `[CanReturnErrorsAsSuccess]` attributes add semantic information about the possible return values of a function ([#1315](https://github.com/microsoft/win32metadata/issues/1315))
 * `[ReturnsUnownedHandle]` on a return value or out parameter indicates the returned handle is unowned ([#792](https://github.com/microsoft/win32metadata/issues/792))

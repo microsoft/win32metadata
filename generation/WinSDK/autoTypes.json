@@ -1578,5 +1578,17 @@
     "Namespace": "Windows.Win32.System.Iis",
     "Name": "HCONN",
     "ValueType": "void*"
+  },
+  {
+    "Name": "HBLUETOOTH_DEVICE_FIND",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "BluetoothFindDeviceClose",
+    "InvalidHandleValues": [ -1, 0 ]
+  },
+  {
+    "Name": "HBLUETOOTH_RADIO_FIND",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "BluetoothFindRadioClose",
+    "InvalidHandleValues": [ -1, 0 ]
   }
 ]

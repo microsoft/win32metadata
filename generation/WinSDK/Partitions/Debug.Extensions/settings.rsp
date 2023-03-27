@@ -9,4 +9,4 @@ PDEBUG_ENTENSION_KNOWNSTRUCT
 <IncludeRoot>/um/extsfns.h
 <IncludeRoot>/um/WDBGEXTS.H
 --namespace
-Windows.Win32.System.Diagnostics.Debug
+Windows.Win32.System.Diagnostics.Debug.Extensions
