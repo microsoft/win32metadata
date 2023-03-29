@@ -53,3 +53,5 @@ Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Hardware_Profile_I
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Hardware_Profile_InfoA : pHWProfileInfo...HWProfileInfo_sA* => HWPROFILEINFO_A*
 Windows.Win32.Devices.DeviceAndDriverInstallation.HWPROFILEINFO_A added
 Windows.Win32.Devices.DeviceAndDriverInstallation.HWProfileInfo_sA removed
+# Fixed #1512.
+Windows.Win32.Globalization.IEnumSpellingError.Next :  => [CanReturnMultipleSuccessValues]
