@@ -2516,10 +2516,6 @@
       {
         "method": "ReOpenFile",
         "parameter": "dwShareMode"
-      },
-      {
-        "method": "NtCreateFile",
-        "parameter": "ShareAccess"
       }
     ]
   },
@@ -16231,35 +16227,6 @@
       {
         "method": "CertSrvBackupPrepareW",
         "parameter": "dwBackupFlags"
-      }
-    ]
-  },
-  {
-    "name": "NT_CREATE_FILE_DISPOSITION",
-    "members": [
-      {
-        "name": "FILE_SUPERSEDE"
-      },
-      {
-        "name": "FILE_CREATE"
-      },
-      {
-        "name": "FILE_OPEN"
-      },
-      {
-        "name": "FILE_OPEN_IF"
-      },
-      {
-        "name": "FILE_OVERWRITE"
-      },
-      {
-        "name": "FILE_OVERWRITE_IF"
-      }
-    ],
-    "uses": [
-      {
-        "method": "NtCreateFile",
-        "parameter": "CreateDisposition"
       }
     ]
   },

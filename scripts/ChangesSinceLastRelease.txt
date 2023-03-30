@@ -154,3 +154,30 @@ Windows.Win32.UI.WindowsAndMessaging.Apis.RegisterDeviceNotificationW : return..
 Windows.Win32.UI.WindowsAndMessaging.Apis.UnregisterDeviceNotification : Handle...Void* => HDEVNOTIFY
 Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_HANDLE.dbch_hdevnotify...System.Void* => Windows.Win32.UI.WindowsAndMessaging.HDEVNOTIFY
 Windows.Win32.UI.WindowsAndMessaging.HDEVNOTIFY added
+# Moved NtCreateFile to the WDK.
+Windows.Win32.Storage.FileSystem.Apis.NtCreateFile removed
+Windows.Win32.Storage.FileSystem.NT_CREATE_FILE_DISPOSITION removed
+Windows.Win32.Storage.FileSystem.NT_CREATE_FILE_DISPOSITION.FILE_CREATE removed
+Windows.Win32.Storage.FileSystem.NT_CREATE_FILE_DISPOSITION.FILE_OPEN removed
+Windows.Win32.Storage.FileSystem.NT_CREATE_FILE_DISPOSITION.FILE_OPEN_IF removed
+Windows.Win32.Storage.FileSystem.NT_CREATE_FILE_DISPOSITION.FILE_OVERWRITE removed
+Windows.Win32.Storage.FileSystem.NT_CREATE_FILE_DISPOSITION.FILE_OVERWRITE_IF removed
+Windows.Win32.Storage.FileSystem.NT_CREATE_FILE_DISPOSITION.FILE_SUPERSEDE removed
+Windows.Win32.System.WindowsProgramming.Apis.FILE_COMPLETE_IF_OPLOCKED removed
+Windows.Win32.System.WindowsProgramming.Apis.FILE_CREATE_TREE_CONNECTION removed
+Windows.Win32.System.WindowsProgramming.Apis.FILE_DELETE_ON_CLOSE removed
+Windows.Win32.System.WindowsProgramming.Apis.FILE_DIRECTORY_FILE removed
+Windows.Win32.System.WindowsProgramming.Apis.FILE_NO_EA_KNOWLEDGE removed
+Windows.Win32.System.WindowsProgramming.Apis.FILE_NO_INTERMEDIATE_BUFFERING removed
+Windows.Win32.System.WindowsProgramming.Apis.FILE_NON_DIRECTORY_FILE removed
+Windows.Win32.System.WindowsProgramming.Apis.FILE_OPEN_BY_FILE_ID removed
+Windows.Win32.System.WindowsProgramming.Apis.FILE_OPEN_FOR_BACKUP_INTENT removed
+Windows.Win32.System.WindowsProgramming.Apis.FILE_OPEN_FOR_FREE_SPACE_QUERY removed
+Windows.Win32.System.WindowsProgramming.Apis.FILE_OPEN_REPARSE_POINT removed
+Windows.Win32.System.WindowsProgramming.Apis.FILE_OPEN_REQUIRING_OPLOCK removed
+Windows.Win32.System.WindowsProgramming.Apis.FILE_RANDOM_ACCESS removed
+Windows.Win32.System.WindowsProgramming.Apis.FILE_RESERVE_OPFILTER removed
+Windows.Win32.System.WindowsProgramming.Apis.FILE_SEQUENTIAL_ONLY removed
+Windows.Win32.System.WindowsProgramming.Apis.FILE_SYNCHRONOUS_IO_ALERT removed
+Windows.Win32.System.WindowsProgramming.Apis.FILE_SYNCHRONOUS_IO_NONALERT removed
+Windows.Win32.System.WindowsProgramming.Apis.FILE_WRITE_THROUGH removed
