@@ -19471,7 +19471,7 @@
     ]
   },
   {
-    "name": "DEVICE_CAPABILITIES",
+    "name": "PRINTER_DEVICE_CAPABILITIES",
     "type": "ushort",
     "members": [
       {
