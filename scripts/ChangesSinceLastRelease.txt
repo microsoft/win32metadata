@@ -55,3 +55,31 @@ Windows.Win32.Devices.DeviceAndDriverInstallation.HWPROFILEINFO_A added
 Windows.Win32.Devices.DeviceAndDriverInstallation.HWProfileInfo_sA removed
 # Fixed #1512.
 Windows.Win32.Globalization.IEnumSpellingError.Next :  => [CanReturnMultipleSuccessValues]
+# Add PSAPI v2 APIs
+Windows.Win32.System.ProcessStatus.Apis.K32EmptyWorkingSet added
+Windows.Win32.System.ProcessStatus.Apis.K32EnumDeviceDrivers added
+Windows.Win32.System.ProcessStatus.Apis.K32EnumPageFilesA added
+Windows.Win32.System.ProcessStatus.Apis.K32EnumPageFilesW added
+Windows.Win32.System.ProcessStatus.Apis.K32EnumProcesses added
+Windows.Win32.System.ProcessStatus.Apis.K32EnumProcessModules added
+Windows.Win32.System.ProcessStatus.Apis.K32EnumProcessModulesEx added
+Windows.Win32.System.ProcessStatus.Apis.K32GetDeviceDriverBaseNameA added
+Windows.Win32.System.ProcessStatus.Apis.K32GetDeviceDriverBaseNameW added
+Windows.Win32.System.ProcessStatus.Apis.K32GetDeviceDriverFileNameA added
+Windows.Win32.System.ProcessStatus.Apis.K32GetDeviceDriverFileNameW added
+Windows.Win32.System.ProcessStatus.Apis.K32GetMappedFileNameA added
+Windows.Win32.System.ProcessStatus.Apis.K32GetMappedFileNameW added
+Windows.Win32.System.ProcessStatus.Apis.K32GetModuleBaseNameA added
+Windows.Win32.System.ProcessStatus.Apis.K32GetModuleBaseNameW added
+Windows.Win32.System.ProcessStatus.Apis.K32GetModuleFileNameExA added
+Windows.Win32.System.ProcessStatus.Apis.K32GetModuleFileNameExW added
+Windows.Win32.System.ProcessStatus.Apis.K32GetModuleInformation added
+Windows.Win32.System.ProcessStatus.Apis.K32GetPerformanceInfo added
+Windows.Win32.System.ProcessStatus.Apis.K32GetProcessImageFileNameA added
+Windows.Win32.System.ProcessStatus.Apis.K32GetProcessImageFileNameW added
+Windows.Win32.System.ProcessStatus.Apis.K32GetProcessMemoryInfo added
+Windows.Win32.System.ProcessStatus.Apis.K32GetWsChanges added
+Windows.Win32.System.ProcessStatus.Apis.K32GetWsChangesEx added
+Windows.Win32.System.ProcessStatus.Apis.K32InitializeProcessForWsWatch added
+Windows.Win32.System.ProcessStatus.Apis.K32QueryWorkingSet added
+Windows.Win32.System.ProcessStatus.Apis.K32QueryWorkingSetEx added
