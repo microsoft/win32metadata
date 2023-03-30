@@ -1590,5 +1590,11 @@
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "BluetoothFindRadioClose",
     "InvalidHandleValues": [ -1, 0 ]
+  },
+  {
+    "Name": "HDEVNOTIFY",
+    "ValueType": "void*",
+    "CloseApi": "UnregisterDeviceNotification",
+    "InvalidHandleValues": [ -1, 0 ]
   }
 ]

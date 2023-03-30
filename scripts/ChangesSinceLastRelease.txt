@@ -148,3 +148,9 @@ Windows.Win32.Storage.Xps.PRINTER_DEVICE_CAPABILITIES.DC_SIZE added
 Windows.Win32.Storage.Xps.PRINTER_DEVICE_CAPABILITIES.DC_STAPLE added
 Windows.Win32.Storage.Xps.PRINTER_DEVICE_CAPABILITIES.DC_TRUETYPE added
 Windows.Win32.Storage.Xps.PRINTER_DEVICE_CAPABILITIES.DC_VERSION added
+# Fixed #1514.
+Windows.Win32.UI.WindowsAndMessaging.Apis.RegisterDeviceNotificationA : return...Void* => HDEVNOTIFY
+Windows.Win32.UI.WindowsAndMessaging.Apis.RegisterDeviceNotificationW : return...Void* => HDEVNOTIFY
+Windows.Win32.UI.WindowsAndMessaging.Apis.UnregisterDeviceNotification : Handle...Void* => HDEVNOTIFY
+Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_HANDLE.dbch_hdevnotify...System.Void* => Windows.Win32.UI.WindowsAndMessaging.HDEVNOTIFY
+Windows.Win32.UI.WindowsAndMessaging.HDEVNOTIFY added
