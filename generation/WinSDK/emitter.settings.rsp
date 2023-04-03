@@ -1535,3 +1535,7 @@ SetSessionCompartmentId::return=WIN32_ERROR
 SetUnicastIpAddressEntry::return=WIN32_ERROR
 SetThreadErrorMode::lpOldMode=[-In][Out][Optional]THREAD_ERROR_MODE*
 SP_DEVINSTALL_PARAMS_A::InstallMsgHandler=PSP_FILE_CALLBACK_A
+MIDL_STUB_DESC::pfnAllocate=PFN_RPC_ALLOCATE
+MIDL_STUB_DESC::pfnFree=PFN_RPC_FREE
+MIDL_STUB_MESSAGE::pfnAllocate=PFN_RPC_ALLOCATE
+MIDL_STUB_MESSAGE::pfnFree=PFN_RPC_FREE

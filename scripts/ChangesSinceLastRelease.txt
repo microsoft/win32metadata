@@ -1,0 +1,7 @@
+# Fixed #1518.
+Windows.Win32.System.Rpc.MIDL_STUB_DESC.pfnAllocate...System.IntPtr => Windows.Win32.System.Rpc.PFN_RPC_ALLOCATE
+Windows.Win32.System.Rpc.MIDL_STUB_DESC.pfnFree...System.IntPtr => Windows.Win32.System.Rpc.PFN_RPC_FREE
+Windows.Win32.System.Rpc.MIDL_STUB_MESSAGE.pfnAllocate...System.IntPtr => Windows.Win32.System.Rpc.PFN_RPC_ALLOCATE
+Windows.Win32.System.Rpc.MIDL_STUB_MESSAGE.pfnFree...System.IntPtr => Windows.Win32.System.Rpc.PFN_RPC_FREE
+Windows.Win32.System.Rpc.PFN_RPC_ALLOCATE added
+Windows.Win32.System.Rpc.PFN_RPC_FREE added
