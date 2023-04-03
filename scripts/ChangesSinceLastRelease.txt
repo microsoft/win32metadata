@@ -5,3 +5,9 @@ Windows.Win32.System.Rpc.MIDL_STUB_MESSAGE.pfnAllocate...System.IntPtr => Window
 Windows.Win32.System.Rpc.MIDL_STUB_MESSAGE.pfnFree...System.IntPtr => Windows.Win32.System.Rpc.PFN_RPC_FREE
 Windows.Win32.System.Rpc.PFN_RPC_ALLOCATE added
 Windows.Win32.System.Rpc.PFN_RPC_FREE added
+# Fixed #469.
+Windows.Win32.System.Com.STGMEDIUM._Anonymous_e__Union removed
+Windows.Win32.System.Com.STGMEDIUM._u_e__Union added
+Windows.Win32.System.Com.STGMEDIUM.Anonymous removed
+Windows.Win32.System.Com.STGMEDIUM.u added
+Windows.Win32.System.Com.userSTGMEDIUM.u added
