@@ -15,6 +15,10 @@ namespace Windows.Win32.Interop
         //     Indicates the zero-based parameter that contains the count of array elements,
         //     similar to size_is in COM.
         public short CountParamIndex;
+        //
+        // Summary:
+        //     Indicates the struct field name that contains the count of array elements.
+        public string CountFieldName;
 
         public NativeArrayInfoAttribute()
         {

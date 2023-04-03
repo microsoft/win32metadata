@@ -32,6 +32,13 @@ typedef enum HDV_DEVICE_TYPE
 
 } HDV_DEVICE_TYPE;
 
+typedef enum HDV_DEVICE_HOST_FLAGS
+{
+    HdvDeviceHostFlagNone = 0,
+    HdvDeviceHostFlagInitializeComSecurity = 1,
+} HDV_DEVICE_HOST_FLAGS;
+DEFINE_ENUM_FLAG_OPERATORS(HDV_DEVICE_HOST_FLAGS);
+
 #ifndef _HDV_COMMON_DEFINITIONS_
 #define _HDV_COMMON_DEFINITIONS_
 
@@ -87,6 +94,14 @@ HRESULT
 WINAPI
 HdvInitializeDeviceHost(
     _In_ HCS_SYSTEM computeSystem,
+    _Out_ HDV_HOST* deviceHostHandle
+    );
+
+HRESULT
+WINAPI
+HdvInitializeDeviceHostEx(
+    _In_ HCS_SYSTEM computeSystem,
+    _In_ HDV_DEVICE_HOST_FLAGS flags,
     _Out_ HDV_HOST* deviceHostHandle
     );
 
@@ -285,8 +300,8 @@ typedef struct HDV_PCI_DEVICE_INTERFACE
 
 #endif // _HYPERV_DEVICE_VIRTUALIZATION_H_
 
-#ifndef ext_ms_win_hyperv_devicevirtualization_l1_2_1_query_routines
-#define ext_ms_win_hyperv_devicevirtualization_l1_2_1_query_routines
+#ifndef ext_ms_win_hyperv_devicevirtualization_l1_2_2_query_routines
+#define ext_ms_win_hyperv_devicevirtualization_l1_2_2_query_routines
 
 //
 //Private Extension API Query Routines
@@ -299,6 +314,12 @@ extern "C" {
 BOOLEAN
 __stdcall
 IsHdvInitializeDeviceHostPresent(
+    VOID
+    );
+
+BOOLEAN
+__stdcall
+IsHdvInitializeDeviceHostExPresent(
     VOID
     );
 

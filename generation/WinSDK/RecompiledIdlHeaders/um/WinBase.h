@@ -154,6 +154,23 @@ extern "C" {
 
 #endif
 
+#if defined(NTDDI_WIN10_NI) && (NTDDI_VERSION >= NTDDI_WIN10_NI)
+
+typedef enum FILE_WRITE_FLAGS
+{
+    FILE_WRITE_FLAGS_NONE = 0,
+    FILE_WRITE_FLAGS_WRITE_THROUGH = 0x000000001,
+} FILE_WRITE_FLAGS;
+DEFINE_ENUM_FLAG_OPERATORS(FILE_WRITE_FLAGS)
+
+typedef enum FILE_FLUSH_MODE
+{
+    FILE_FLUSH_DEFAULT = 0, // same as WIN32 FlushFileBuffers(); Flushes data, metadata, AND sends a SYNC command to the hardware
+    FILE_FLUSH_DATA,        // Flush data only
+    FILE_FLUSH_MIN_METADATA,// Flush data + SYNC (minimal metadata)
+    FILE_FLUSH_NO_SYNC,     // Flush data + metadata
+} FILE_FLUSH_MODE;
+#endif // NTDDI_WIN10_NI
 
 
 #if(_WIN32_WINNT >= 0x0400)
@@ -238,6 +255,16 @@ extern "C" {
 #define COPY_FILE_ENABLE_LOW_FREE_SPACE_MODE     0x08000000
 
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_VB)
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
+
+//
+//  CopyFile flag to retain sparse state during copying.
+//
+
+#define COPY_FILE_ENABLE_SPARSE_COPY             0x20000000
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_NI)
 
 #endif /* _WIN32_WINNT >= 0x0400 */
 
@@ -3495,6 +3522,9 @@ typedef enum _PROC_THREAD_ATTRIBUTE_NUM {
 #if (NTDDI_VERSION >= NTDDI_WIN10_FE)
     ProcThreadAttributeEnableOptionalXStateFeatures = 27,
 #endif
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
+    ProcThreadAttributeTrustedApp                   = 29,
+#endif
 } PROC_THREAD_ATTRIBUTE_NUM;
 #endif
 
@@ -3834,6 +3864,17 @@ typedef enum _PROC_THREAD_ATTRIBUTE_NUM {
 #define PROCESS_CREATION_MITIGATION_POLICY2_XTENDED_CONTROL_FLOW_GUARD_RESERVED            (0x00000003ui64 << 40)
 
 //
+// Define the ARM64 user-mode per-process instruction pointer authentication
+// mitigation policy options.
+//
+
+#define PROCESS_CREATION_MITIGATION_POLICY2_POINTER_AUTH_USER_IP_MASK                      (0x00000003ui64 << 44)
+#define PROCESS_CREATION_MITIGATION_POLICY2_POINTER_AUTH_USER_IP_DEFER                     (0x00000000ui64 << 44)
+#define PROCESS_CREATION_MITIGATION_POLICY2_POINTER_AUTH_USER_IP_ALWAYS_ON                 (0x00000001ui64 << 44)
+#define PROCESS_CREATION_MITIGATION_POLICY2_POINTER_AUTH_USER_IP_ALWAYS_OFF                (0x00000002ui64 << 44)
+#define PROCESS_CREATION_MITIGATION_POLICY2_POINTER_AUTH_USER_IP_RESERVED                  (0x00000003ui64 << 44)
+
+//
 // Define the CET-related dynamic code validation data APIs out-of-proc mitigation policy options.
 //
 
@@ -3842,6 +3883,16 @@ typedef enum _PROC_THREAD_ATTRIBUTE_NUM {
 #define PROCESS_CREATION_MITIGATION_POLICY2_CET_DYNAMIC_APIS_OUT_OF_PROC_ONLY_ALWAYS_ON    (0x00000001ui64 << 48)
 #define PROCESS_CREATION_MITIGATION_POLICY2_CET_DYNAMIC_APIS_OUT_OF_PROC_ONLY_ALWAYS_OFF   (0x00000002ui64 << 48)
 #define PROCESS_CREATION_MITIGATION_POLICY2_CET_DYNAMIC_APIS_OUT_OF_PROC_ONLY_RESERVED     (0x00000003ui64 << 48)
+
+//
+// Define the restrict core sharing policy options.
+//
+
+#define PROCESS_CREATION_MITIGATION_POLICY2_RESTRICT_CORE_SHARING_MASK                     (0x00000003ui64 << 52)
+#define PROCESS_CREATION_MITIGATION_POLICY2_RESTRICT_CORE_SHARING_DEFER                    (0x00000000ui64 << 52)
+#define PROCESS_CREATION_MITIGATION_POLICY2_RESTRICT_CORE_SHARING_ALWAYS_ON                (0x00000001ui64 << 52)
+#define PROCESS_CREATION_MITIGATION_POLICY2_RESTRICT_CORE_SHARING_ALWAYS_OFF               (0x00000002ui64 << 52)
+#define PROCESS_CREATION_MITIGATION_POLICY2_RESTRICT_CORE_SHARING_RESERVED                 (0x00000003ui64 << 52)
 
 #endif // _WIN32_WINNT_WINTHRESHOLD
 #endif // _WIN32_WINNT_WINBLUE
@@ -3958,6 +4009,13 @@ typedef enum _PROC_THREAD_ATTRIBUTE_NUM {
 
 #endif // NTDDI_WIN10_MN
 
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
+
+#define PROC_THREAD_ATTRIBUTE_TRUSTED_APP \
+    ProcThreadAttributeValue (ProcThreadAttributeTrustedApp, FALSE, TRUE, FALSE)
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_NI)
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
@@ -5855,6 +5913,19 @@ typedef struct COPYFILE2_EXTENDED_PARAMETERS_V2 {
   PVOID                         reserved[8];
 
 } COPYFILE2_EXTENDED_PARAMETERS_V2;
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
+
+//
+//  Disable copying junctions (dwCopyFlagsV2 field of COPYFILE2_EXTENDED_PARAMETERS_V2).
+//
+
+#define COPY_FILE2_V2_DONT_COPY_JUNCTIONS        0x00000001
+
+#define COPY_FILE2_V2_VALID_FLAGS               \
+    (COPY_FILE2_V2_DONT_COPY_JUNCTIONS)         \
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_NI)
 
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_FE)
 
@@ -9089,6 +9160,11 @@ typedef struct _FILE_ID_EXTD_DIR_INFO {
 #define RPI_FLAG_SMB2_SHARECAP_CLUSTER                 0x00000040
 #endif
 
+// Protocol specific SMB2 share flags
+
+#define RPI_SMB2_SHAREFLAG_ENCRYPT_DATA           0x00000001
+#define RPI_SMB2_SHAREFLAG_COMPRESS_DATA          0x00000002
+
 // Protocol specific SMB2 server capability flags.
 
 #if (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
@@ -9141,7 +9217,11 @@ typedef struct _FILE_REMOTE_PROTOCOL_INFO
 
             struct {
                 ULONG Capabilities;
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
+                ULONG ShareFlags;
+#else
                 ULONG CachingFlags;
+#endif
             } Share;
 
         } Smb2;

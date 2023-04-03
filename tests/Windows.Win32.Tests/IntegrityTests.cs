@@ -17,7 +17,8 @@ namespace Windows.Win32.Tests
         [Fact]
         public void NoDuplicateImports()
         {
-            string args = $"showDuplicateImports --winmd \"{TestUtils.Win32WinmdPath}\"";
+            string allowedDuplicateImportsFileName = TestUtils.GetAssetFile("duplicateImportsAllowList.rsp");
+            string args = $"showDuplicateImports --winmd \"{TestUtils.Win32WinmdPath}\" \"@{allowedDuplicateImportsFileName}\"";
             this.ExecWinmdUtils(args);
         }
 
@@ -31,7 +32,8 @@ namespace Windows.Win32.Tests
         [Fact]
         public void NoDuplicateConstants()
         {
-            string args = $"showDuplicateConstants --winmd \"{TestUtils.Win32WinmdPath}\"";
+            string allowedDuplicateConstantsFileName = TestUtils.GetAssetFile("duplicateConstantsAllowList.rsp");
+            string args = $"showDuplicateConstants --winmd \"{TestUtils.Win32WinmdPath}\" \"@{allowedDuplicateConstantsFileName}\"";
             this.ExecWinmdUtils(args);
         }
 
@@ -48,6 +50,15 @@ namespace Windows.Win32.Tests
         {
             string pointersToDelegatesFileName = TestUtils.GetAssetFile("pointersToDelegatesAllowList.rsp");
             string args = $"showPointersToDelegates --winmd \"{TestUtils.Win32WinmdPath}\" \"@{pointersToDelegatesFileName}\"";
+            this.ExecWinmdUtils(args);
+        }
+
+        [Fact]
+        public void NoSuggestedRemappings()
+        {
+            string suggestedRemappingsFileName = TestUtils.GetAssetFile("suggestedRemappingsAllowList.rsp");
+            string projectRoot = Path.GetFullPath(Path.Combine(TestUtils.Win32WinmdPath, "../../generation/WinSDK"));
+            string args = $"showSuggestedRemappings --winmd \"{TestUtils.Win32WinmdPath}\" \"@{suggestedRemappingsFileName}\" --projectRoot {projectRoot}";
             this.ExecWinmdUtils(args);
         }
 

@@ -48,12 +48,12 @@ namespace ClangSharpSourceToWinmd
         private Dictionary<string, TypeDefinitionHandle> namesToTypeDefHandles = new Dictionary<string, TypeDefinitionHandle>();
         private Dictionary<string, MethodDefinitionHandle> namesToMethodDefHandles = new Dictionary<string, MethodDefinitionHandle>();
         private HashSet<TypeDeclarationSyntax> visitedPartialDefs = new HashSet<TypeDeclarationSyntax>();
-        private HashSet<ISymbol> interfaceSymbols = new HashSet<ISymbol>();
+        private HashSet<ISymbol> interfaceSymbols = new HashSet<ISymbol>(SymbolEqualityComparer.Default);
         private Dictionary<string, List<ISymbol>> namesToInterfaceSymbols = new Dictionary<string, List<ISymbol>>();
-        private Dictionary<ITypeSymbol, FixedBufferInfo> fixedBufferTypeToInfo = new Dictionary<ITypeSymbol, FixedBufferInfo>();
+        private Dictionary<ITypeSymbol, FixedBufferInfo> fixedBufferTypeToInfo = new Dictionary<ITypeSymbol, FixedBufferInfo>(SymbolEqualityComparer.Default);
         private Dictionary<SyntaxTree, SemanticModel> treeToModels = new Dictionary<SyntaxTree, SemanticModel>();
         private HashSet<StructDeclarationSyntax> interfaceStructs = new HashSet<StructDeclarationSyntax>();
-        private Dictionary<ISymbol, int> interfaceMethodCount = new Dictionary<ISymbol, int>();
+        private Dictionary<ISymbol, int> interfaceMethodCount = new Dictionary<ISymbol, int>(SymbolEqualityComparer.Default);
         private Dictionary<string, EntityHandle> ctorNamesToRefs = new Dictionary<string, EntityHandle>();
         private Dictionary<string, ModuleReferenceHandle> moduleRefHandles = new Dictionary<string, ModuleReferenceHandle>();
         private List<GeneratorDiagnostic> diagnostics = new List<GeneratorDiagnostic>();
@@ -261,10 +261,9 @@ namespace ClangSharpSourceToWinmd
             return ret;
         }
 
-        private static bool HasPropertyKeyAttribute(SyntaxList<AttributeListSyntax> attributeLists)
+        private static bool HasConstantAttribute(SyntaxList<AttributeListSyntax> attributeLists)
         {
-            bool ret = attributeLists.Any(list => list.Attributes.Any(attr => attr.Name.ToString() == "PropertyKey"));
-            return ret;
+            return attributeLists.Any(list => list.Attributes.Any(attr => attr.Name.ToString() == "Constant"));
         }
 
         private static string FixArchSpecificName(string name)
@@ -355,6 +354,7 @@ namespace ClangSharpSourceToWinmd
                         case "CHAR":
                         case "INT8":
                         case "UINT8":
+                        case "BYTE":
                             nativeSize = 1;
                             break;
 
@@ -385,7 +385,7 @@ namespace ClangSharpSourceToWinmd
                         case "ULONG64":
                         case "INT64":
                         case "UINT64":
-                        case "__int64":
+                        case "__INT64":
                             nativeSize = 8;
                             break;
 
@@ -429,7 +429,7 @@ namespace ClangSharpSourceToWinmd
             if (symbol != null)
             {
                 this.interfaceSymbols.Add(symbol);
-                this.interfaceMethodCount[symbol] = interfaceInfo.Methods.Count();
+                this.interfaceMethodCount[symbol] = interfaceInfo.ImplementedMethodCount;
                 if (!this.namesToInterfaceSymbols.TryGetValue(symbol.Name, out var symbols))
                 {
                     symbols = new List<ISymbol>();
@@ -1044,7 +1044,9 @@ namespace ClangSharpSourceToWinmd
             // See if we can map from some generic types to a more specific type
             if (typeSymbol.SpecialType == SpecialType.System_IntPtr ||
                 typeSymbol.SpecialType == SpecialType.System_UIntPtr ||
+                typeSymbol.SpecialType == SpecialType.System_Int16 ||
                 typeSymbol.SpecialType == SpecialType.System_Int32 ||
+                typeSymbol.SpecialType == SpecialType.System_UInt16 ||
                 typeSymbol.SpecialType == SpecialType.System_UInt32 ||
                 typeSymbol.SpecialType == SpecialType.System_Int64 ||
                 typeSymbol.SpecialType == SpecialType.System_UInt64 ||
@@ -1145,7 +1147,7 @@ namespace ClangSharpSourceToWinmd
                 {
                     methodAttrs |= MethodAttributes.SpecialName;
                 }
-                else if (methodName.StartsWith("put_") &&
+                else if ((methodName.StartsWith("set_") || methodName.StartsWith("put_")) &&
                     parameters.Count() == 1 &&
                     (parameters.First().Attrs & ParameterAttributes.In) == ParameterAttributes.In)
                 {
@@ -1263,7 +1265,7 @@ namespace ClangSharpSourceToWinmd
                 {
                     fieldAttributes = FieldAttributes.Public | FieldAttributes.Static;
 
-                    if (!HasGuidAttribute(field.AttributeLists) && !HasPropertyKeyAttribute(field.AttributeLists))
+                    if (!HasGuidAttribute(field.AttributeLists) && !HasConstantAttribute(field.AttributeLists))
                     {
                         continue;
                     }
@@ -1816,7 +1818,7 @@ namespace ClangSharpSourceToWinmd
                     interfaceTypeAttr
                         .Constructors
                         .First(c => c.Parameters.Length == argTypes.Length && c.Parameters.Select(param => param.Type)
-                        .SequenceEqual(typeSymbols));
+                        .SequenceEqual(typeSymbols, SymbolEqualityComparer.Default));
 
                 var @namespace = interfaceTypeAttr.ContainingNamespace.ToString();
                 var name = interfaceTypeAttr.Name;

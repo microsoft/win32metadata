@@ -1020,12 +1020,12 @@ NetErrorLogWrite (
      * %nIf this is the first occurrence of this event for the specified computer
      * and account, this may be a transient issue that doesn't require any action
      * at this time.
-     *      
+     *
      * If this is a Read-Only Domain Controller and '%2' is a legitimate machine
      * account for the computer '%1' then '%1' should be marked cacheable for this
-     * location if appropriate or otherwise ensure connectivity to a domain controller 
+     * location if appropriate or otherwise ensure connectivity to a domain controller
      * capable of servicing the request (for example a writable domain controller).
-     *      
+     *
      * Otherwise, the following steps may be taken to resolve this problem:
      *
      * %n%nIf '%2' is a legitimate machine account for the computer '%1', then '%1'
@@ -1358,7 +1358,7 @@ NetErrorLogWrite (
       * %nDetermine what might have caused this failure, resolve the problem, and initiate
       * registration of the DNS records by the domain controller. To determine what might
       * have caused this failure, run DCDiag.exe. To learn more about DCDiag.exe, see Help
-      * and Support Center. To initiate registration of the DNS records by this domain 
+      * and Support Center. To initiate registration of the DNS records by this domain
       * controller, run 'nltest.exe /dsregdns' from the command prompt on the domain controller
       * or restart Net Logon service. %n  Or, you can manually add this record to DNS, but it
       * is not recommended.
@@ -1811,8 +1811,8 @@ NetErrorLogWrite (
 
 #define NELOG_NetlogonUserValidationReqInitialTimeOut (ERRLOG2_BASE + 116)
      /*
-      * Netlogon has failed an authentication request of account %1 in domain %2. The request timed out before it 
-      * could be sent to domain controller %3 in domain %4. This is the first failure. If the problem continues, 
+      * Netlogon has failed an authentication request of account %1 in domain %2. The request timed out before it
+      * could be sent to domain controller %3 in domain %4. This is the first failure. If the problem continues,
       * consolidated events will be logged about every %5 minutes.
       * Please see http://support.microsoft.com/kb/2654097 for more information.
       */
@@ -1826,8 +1826,8 @@ NetErrorLogWrite (
 
 #define NELOG_NetlogonUserValidationReqWaitInitialWarning  (ERRLOG2_BASE + 118)
      /*
-      * Netlogon took more than %1 seconds for an authentication request of account %2 in domain %3, through 
-      * domain controller %4 in domain %5. This is the first warning. If the problem persists, a recurring event will be logged 
+      * Netlogon took more than %1 seconds for an authentication request of account %2 in domain %3, through
+      * domain controller %4 in domain %5. This is the first warning. If the problem persists, a recurring event will be logged
       * every %6 minutes.
       * Please see http://support.microsoft.com/kb/2654097 for more information on this error.
       */
@@ -1852,13 +1852,13 @@ NetErrorLogWrite (
 
 #define NELOG_NetLogonFailedToInitializeRPCSD      (ERRLOG2_BASE + 122)
     /*
-     * The Netlogon service failed to initialize the security descriptor 
-     * for the Netlogon RPC interface.   The service was terminated. The 
+     * The Netlogon service failed to initialize the security descriptor
+     * for the Netlogon RPC interface.   The service was terminated. The
      * following error occurred: '%1'.
      */
 
 #define NELOG_NetlogonMachinePasswdSetSucceeded       (ERRLOG2_BASE + 123)
-    /* 
+    /*
      * The system successfully changed its password on the domain controller %1.
      *
      * This event is logged when the password for the computer account is
@@ -1867,15 +1867,15 @@ NetErrorLogWrite (
      */
 
 #define NELOG_NetlogonMsaPasswdSetSucceeded       (ERRLOG2_BASE + 124)
-    /* 
-     * The system successfully changed the password for managed service account %1  
+    /*
+     * The system successfully changed the password for managed service account %1
      * on the domain controller %2.
      *
      * This event is logged when the password for a standalone managed service
      * account is changed by the system. It is logged on the computer that
      * changed the password.
      */
-     
+
 #define NELOG_NetlogonDnsHostNameLowerCasingFailed       (ERRLOG2_BASE + 125)
     /*
      * The system failed to lowercase the currently configured host name. This
@@ -1930,7 +1930,7 @@ NetErrorLogWrite (
     /*
      * The Netlogon service allowed a vulnerable Netlogon secure channel connection.
      *
-     * %n%nWarning: This connection will be denied once the enforcement phase is released. To better understand the enforcement phase, 
+     * %n%nWarning: This connection will be denied once the enforcement phase is released. To better understand the enforcement phase,
      * please visit  https://go.microsoft.com/fwlink/?linkid=2133485.
      *
      * %n%n Machine SamAccountName: %1
@@ -1939,19 +1939,19 @@ NetErrorLogWrite (
      * %n Machine Operating System: %4
      * %n Machine Operating System Build: %5
      * %n Machine Operating System Service Pack: %6
-     * 
+     *
      */
 
 #define NETLOG_NetlogonUnsecureRpcMachineAllowedBySsdl (ERRLOG2_BASE + 130)
     /*
-     * The Netlogon service allowed a vulnerable Netlogon secure channel connection because the machine account is allowed in the 
+     * The Netlogon service allowed a vulnerable Netlogon secure channel connection because the machine account is allowed in the
      * "Domain controller: Allow vulnerable Netlogon secure channel connections" group policy.
-     * 
-     * %n%nWarning: Using vulnerable Netlogon secure channels will expose the domain-joined devices to attack. To protect your device from attack, 
-     * remove a machine account from "Domain controller: Allow vulnerable Netlogon secure channel connections" group policy after the third-party 
-     * Netlogon client has been updated. To better understand the risk of configuring machine accounts to be allowed to use vulnerable Netlogon 
+     *
+     * %n%nWarning: Using vulnerable Netlogon secure channels will expose the domain-joined devices to attack. To protect your device from attack,
+     * remove a machine account from "Domain controller: Allow vulnerable Netlogon secure channel connections" group policy after the third-party
+     * Netlogon client has been updated. To better understand the risk of configuring machine accounts to be allowed to use vulnerable Netlogon
      * secure channel connections, please visit  https://go.microsoft.com/fwlink/?linkid=2133485.
-     * 
+     *
      * %n%n Machine SamAccountName: %1
      * %n Domain: %2
      * %n Account Type: %3
@@ -1962,19 +1962,102 @@ NetErrorLogWrite (
 
 #define NETLOG_NetlogonUnsecureRpcTrustAllowedBySsdl (ERRLOG2_BASE + 131)
     /*
-     * The Netlogon service allowed a vulnerable Netlogon secure channel connection because the trust account is allowed in the 
+     * The Netlogon service allowed a vulnerable Netlogon secure channel connection because the trust account is allowed in the
      * "Domain controller: Allow vulnerable Netlogon secure channel connections" group policy.
-     * 
-     * %n%nWarning: Using vulnerable Netlogon secure channels will expose Active Directory forests to attack. To protect your 
-     * Active Directory forests from attack, all trusts must use secure RPC with Netlogon secure channel. Remove a trust account from 
-     * "Domain controller: Allow vulnerable Netlogon secure channel connections" group policy after the third-party Netlogon client on the domain controllers 
-     * have been updated. To better understand the risk of configuring trust accounts to be allowed to use vulnerable Netlogon secure channel connections, 
+     *
+     * %n%nWarning: Using vulnerable Netlogon secure channels will expose Active Directory forests to attack. To protect your
+     * Active Directory forests from attack, all trusts must use secure RPC with Netlogon secure channel. Remove a trust account from
+     * "Domain controller: Allow vulnerable Netlogon secure channel connections" group policy after the third-party Netlogon client on the domain controllers
+     * have been updated. To better understand the risk of configuring trust accounts to be allowed to use vulnerable Netlogon secure channel connections,
      * please visit  https://go.microsoft.com/fwlink/?linkid=2133485.
-     * 
+     *
      * %n%n Account Type: %1
      * %n Trust Name: %2
      * %n Trust Target: %3
      * %n Client IP Address: %4
+     */
+
+#define NETLOG_PassThruFilterError_Summary_AdminOverride (ERRLOG2_BASE + 132)
+    /*
+     * The Netlogon service allowed one or more unsecure pass-through NTLM authentication requests from trusted domains and/or forests
+     * during the most recent event throttling window. These unsecure requests would normally be blocked but were allowed to proceed
+     * due to the current trust configuration.%n
+     *
+     * %n
+     *
+     * Warning: Allowing unsecure pass-through authentication requests will expose your Active Directory forest to attack.
+     * For more information about this issue please visit https://go.microsoft.com/fwlink/?linkid=276811&.%n
+     *
+     * %n
+     *
+     * Count of unsecure requests allowed due to administrative override: %1%n
+     */
+
+#define NETLOG_PassThruFilterError_Summary_Blocked (ERRLOG2_BASE + 133)
+    /*
+     * The Netlogon service blocked one or more unsecure pass-through NTLM authentication requests from trusted clients, domains,
+     * and/or forests during the most recent event throttling window. For more information about this issue, including how to enable
+     * more verbose logging, please visit https://go.microsoft.com/fwlink/?linkid=276811&.%n
+     *
+     * %n
+     *
+     * Count of unsecure requests blocked: %1%n
+     */
+
+#define NETLOG_PassThruFilterError_Request_AdminOverride (ERRLOG2_BASE + 134)
+    /*
+     * The Netlogon service allowed an unsecure pass-through NTLM authentication request from a trusted client, domain,
+     * or forest. This unsecure request would normally be blocked but was allowed to proceed due to the current trust
+     * configuration.%n
+     *
+     * %n
+     *
+     * Warning: Allowing unsecure pass-through authentication requests will expose your Active Directory forest to attack.
+     * For more information about this issue please visit https://go.microsoft.com/fwlink/?linkid=276811&.%n
+     *
+     * %n
+     *
+     * Account name: %1%n
+     * Trust name: %2%n
+     * Trust type: %3%n
+     * Client IP Address: %4%n
+     * Block reason: %5%n
+     * Resource server Netbios name: %6%n
+     * Resource server DNS name: %7%n
+     * Resource domain Netbios name: %8%n
+     * Resource domain DNS name: %9%n
+     */
+
+#define NETLOG_PassThruFilterError_Request_Blocked (ERRLOG2_BASE + 135)
+    /*
+     * The Netlogon service blocked an unsecure pass-through NTLM authentication requests from a trusted client, domain,
+     * or forest. For more information, please visit https://go.microsoft.com/fwlink/?linkid=276811&.
+     *
+     * %n%n
+     *
+     * Account name: %1%n
+     * Trust name: %2%n
+     * Trust type: %3%n
+     * Client IP Address: %4%n
+     * Block reason: %5%n
+     * Resource server Netbios name: %6%n
+     * Resource server DNS name: %7%n
+     * Resource domain Netbios name: %8%n
+     * Resource domain DNS name: %9%n
+     */
+
+#define NETLOG_NetlogonRpcBacklogLimitSet (ERRLOG2_BASE + 136)
+    /*
+     * The Netlogon service was able to bind to a TCP/IP port with the configured backlog size of %1.
+     */
+
+#define NETLOG_NetlogonRpcBacklogLimitFailure (ERRLOG2_BASE + 137)
+    /*
+     * The Netlogon service tried to bind to a TCP/IP port with the configured backlog size of %1 but failed. %n%n
+     *
+     * More information can be found in the following log file '%SystemRoot%\debug\netlogon.log' and, potentially, in the log file
+     * '%SystemRoot%\debug\netlogon.bak' created if the former log becomes full. For steps in enabling the log, please visit
+     *  https://go.microsoft.com/fwlink/?linkid=2163327
      */
 
 #ifdef __cplusplus

@@ -56,6 +56,7 @@ Revision History:
 
 // NT13 upgrade versions
 #define CA_UPGRADE_VERSION           1
+#define NI_UPGRADE_VERSION           2
 
 #define HCI_UPGRADE_BIT 0x8000
 
@@ -84,10 +85,13 @@ Revision History:
 #define CLUSAPI_VERSION_WINDOWSBLUE  0x00000702
 #define CLUSAPI_VERSION_WINTHRESHOLD 0x00000703
 #define CLUSAPI_VERSION_RS3          0x00000A00
+#define CLUSAPI_VERSION_NI           0x00000A0C
 
 
 #if (!defined(CLUSAPI_VERSION))
-#if (!defined(NTDDI_VERSION) || (NTDDI_VERSION >= NTDDI_WIN10_RS3))
+#if (!defined(NTDDI_VERSION) || (NTDDI_VERSION >= NTDDI_WIN10_NI))
+#define CLUSAPI_VERSION CLUSAPI_VERSION_NI
+#elif (!defined(NTDDI_VERSION) || (NTDDI_VERSION >= NTDDI_WIN10_RS3))
 #define CLUSAPI_VERSION CLUSAPI_VERSION_RS3
 #elif (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
 #define CLUSAPI_VERSION CLUSAPI_VERSION_WINTHRESHOLD
@@ -566,6 +570,33 @@ typedef struct _CREATE_CLUSTER_NAME_ACCOUNT
 
 #endif // _CLUSTER_API_TYPES_
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+typedef BOOL(WINAPI* PCLUSAPI_PFN_REASON_HANDLER)(
+    _In_ LPVOID lpParameter,
+    _In_ HCLUSTER hCluster,
+    _Out_ LPWSTR szReason,
+    _Inout_ LPDWORD lpSize
+    );
+
+typedef struct _CLUSAPI_REASON_HANDLER {
+    LPVOID lpParameter;
+    PCLUSAPI_PFN_REASON_HANDLER pfnHandler;
+} CLUSAPI_REASON_HANDLER, *PCLUSAPI_REASON_HANDLER;
+
+PCLUSAPI_REASON_HANDLER
+WINAPI
+ClusapiSetReasonHandler(
+    _In_ PCLUSAPI_REASON_HANDLER lpHandler
+    );
+
+typedef PCLUSAPI_REASON_HANDLER
+(WINAPI* PCLUSAPI_SET_REASON_HANDLER)(
+    _In_ PCLUSAPI_REASON_HANDLER lpHandler
+    );
+
+#endif
+
 DWORD
 WINAPI
 GetNodeClusterState(
@@ -631,6 +662,26 @@ typedef DWORD
     _In_ LPCWSTR lpszNewClusterName
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+__success(return == ERROR_SUCCESS)
+DWORD
+WINAPI
+SetClusterNameEx(
+    _In_     HCLUSTER hCluster,
+    _In_     LPCWSTR  lpszNewClusterName,
+    _In_opt_ LPCWSTR  lpszReason
+);
+
+typedef DWORD
+(WINAPI * PCLUSAPI_SET_CLUSTER_NAME_EX)(
+    _In_     HCLUSTER hCluster,
+    _In_     LPCWSTR  lpszNewClusterName,
+    _In_opt_ LPCWSTR  lpszReason
+);
+
+#endif
+
 _Success_(return == ERROR_SUCCESS)
 DWORD
 WINAPI
@@ -685,6 +736,28 @@ typedef DWORD
     _In_opt_ LPCWSTR   lpszDeviceName,
     _In_     DWORD     dwMaxQuoLogSize
     );
+
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+__success(return == ERROR_SUCCESS)
+DWORD
+WINAPI
+SetClusterQuorumResourceEx(
+    _In_ HRESOURCE hResource,
+    _In_opt_ LPCWSTR lpszDeviceName,
+    _In_ DWORD dwMaxQuorumLogSize,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_SET_CLUSTER_QUORUM_RESOURCE_EX)(
+    _In_ HRESOURCE hResource,
+    _In_opt_ LPCWSTR lpszDeviceName,
+    _In_ DWORD dwMaxQuorumLogSize,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
 
 DWORD
 WINAPI
@@ -772,6 +845,37 @@ typedef DWORD
     _In_ DWORD nOutBufferSize,
     _Out_opt_ LPDWORD lpBytesReturned
     );
+
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+ClusterControlEx(
+    _In_ HCLUSTER hCluster,
+    _In_opt_ HNODE hHostNode,
+    _In_ DWORD dwControlCode,
+    _In_reads_bytes_opt_(nInBufferSize) LPVOID lpInBuffer,
+    _In_ DWORD nInBufferSize,
+    _Out_writes_bytes_to_opt_(nOutBufferSize, *lpBytesReturned) LPVOID lpOutBuffer,
+    _In_ DWORD nOutBufferSize,
+    _Out_opt_ LPDWORD lpBytesReturned,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_CLUSTER_CONTROL_EX)(
+    _In_ HCLUSTER hCluster,
+    _In_opt_ HNODE hHostNode,
+    _In_ DWORD dwControlCode,
+    _In_reads_bytes_opt_(nInBufferSize) LPVOID lpInBuffer,
+    _In_ DWORD nInBufferSize,
+    _Out_writes_bytes_to_opt_(nOutBufferSize, *lpBytesReturned) LPVOID lpOutBuffer,
+    _In_ DWORD nOutBufferSize,
+    _Out_opt_ LPDWORD lpBytesReturned,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
 
 typedef enum _CLUSTER_UPGRADE_PHASE {
     ClusterUpgradePhaseInitialize              = 1,
@@ -1114,7 +1218,9 @@ typedef enum CLUSTER_OBJECT_TYPE {
     CLUSTER_OBJECT_TYPE_QUORUM              =    0x00000009,
     CLUSTER_OBJECT_TYPE_SHARED_VOLUME       =    0x0000000a,
     CLUSTER_OBJECT_TYPE_GROUPSET            =    0x0000000d,
-    CLUSTER_OBJECT_TYPE_AFFINITYRULE        =    0x00000010
+    CLUSTER_OBJECT_TYPE_AFFINITYRULE        =    0x00000010,
+    CLUSTER_OBJECT_TYPE_FAULTDOMAIN         =    0x00000011,
+
 } CLUSTER_OBJECT_TYPE;
 
 
@@ -1513,6 +1619,23 @@ typedef DWORD
     _In_ HGROUPSET hGroupSet
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+DeleteClusterGroupSetEx(
+    _In_ HGROUPSET hGroupSet,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_DELETE_CLUSTER_GROUP_GROUPSET_EX)(
+    _In_ HGROUPSET hGroupSet,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
+
 DWORD
 WINAPI
 ClusterAddGroupToGroupSet(
@@ -1535,6 +1658,30 @@ typedef DWORD
     _In_ HGROUP hGroup
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+ClusterAddGroupToGroupSetWithDomainsEx(
+    _In_ HGROUPSET hGroupSet,
+    _In_ HGROUP hGroup,
+    _In_ DWORD faultDomain,
+    _In_ DWORD updateDomain,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+
+typedef DWORD
+(WINAPI * PCLUSAPI_CLUSTER_ADD_GROUP_TO_GROUPSET_WITH_DOMAINS_EX)(
+    _In_ HGROUPSET hGroupSet,
+    _In_ HGROUP hGroup,
+    _In_ DWORD faultDomain,
+    _In_ DWORD updateDomain,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
+
 DWORD
 WINAPI
 ClusterRemoveGroupFromGroupSet(
@@ -1542,10 +1689,26 @@ ClusterRemoveGroupFromGroupSet(
     );
 
 typedef DWORD
-(WINAPI * PCLUSAPI_CLUSTER_REMOVE_GROUP_FROM_GROUP_GROUPSET)(
-    _In_ HGROUPSET hGroupSet,
-    _In_ HGROUP hGroupName
+(WINAPI * PCLUSAPI_CLUSTER_REMOVE_GROUP_FROM_GROUPSET)(
+    _In_ HGROUPSET hGroupSet
     );
+
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+ClusterRemoveGroupFromGroupSetEx(
+    _In_ HGROUP hGroup,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_CLUSTER_REMOVE_GROUP_FROM_GROUPSET_EX)(
+    _In_ HGROUPSET hGroupSet,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
 
 DWORD
 WINAPI
@@ -1572,6 +1735,38 @@ typedef DWORD
     _Out_opt_ LPDWORD lpBytesReturned
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+__success( return == ERROR_SUCCESS )
+DWORD
+WINAPI
+ClusterGroupSetControlEx(
+    _In_ HGROUPSET hGroupSet,
+    _In_opt_ HNODE hHostNode,
+    _In_ DWORD dwControlCode,
+    _In_reads_bytes_opt_(cbInBufferSize) LPVOID lpInBuffer,
+    _In_ DWORD cbInBufferSize,
+    _Out_writes_bytes_to_opt_(cbOutBufferSize, *lpBytesReturned) LPVOID lpOutBuffer,
+    _In_ DWORD cbOutBufferSize,
+    _Out_opt_ LPDWORD lpBytesReturned,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_CLUSTER_GROUP_GROUPSET_CONTROL_EX)(
+    _In_ HGROUPSET hGroupSet,
+    _In_opt_ HNODE hHostNode,
+    _In_ DWORD dwControlCode,
+    _In_reads_bytes_opt_(cbInBufferSize) LPVOID lpInBuffer,
+    _In_ DWORD cbInBufferSize,
+    _Out_writes_bytes_to_opt_(cbOutBufferSize, *lpBytesReturned) LPVOID lpOutBuffer,
+    _In_ DWORD cbOutBufferSize,
+    _Out_opt_ LPDWORD lpBytesReturned,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
+
 DWORD
 WINAPI
 AddClusterGroupDependency(
@@ -1584,6 +1779,25 @@ typedef DWORD
     _In_ HGROUP hDependentGroup,
     _In_ HGROUP hProviderGroup
     );
+
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+AddClusterGroupDependencyEx(
+    _In_ HGROUP hDependentGroup,
+    _In_ HGROUP hProviderGroup,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_ADD_CLUSTER_GROUP_DEPENDENCY_EX)(
+    _In_ HGROUP hDependentGroup,
+    _In_ HGROUP hProviderGroup,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
 
 DWORD
 WINAPI
@@ -1598,6 +1812,25 @@ typedef DWORD
     _In_ LPCWSTR lpszDependencyExpression
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+SetGroupDependencyExpressionEx(
+    _In_ HGROUP hGroup,
+    _In_ LPCWSTR lpszDependencyExpression,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_SET_GROUP_DEPENDENCY_EXPRESSION_EX)(
+    _In_ HGROUP hGroup,
+    _In_ LPCWSTR lpszDependencyExpression,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
+
 DWORD
 WINAPI
 RemoveClusterGroupDependency(
@@ -1610,6 +1843,25 @@ typedef DWORD
     _In_ HGROUP hGroup,
     _In_ HGROUP hDependsOn
     );
+
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+RemoveClusterGroupDependencyEx(
+    _In_ HGROUP hGroup,
+    _In_ HGROUP hDependsOn,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_REMOVE_CLUSTER_GROUP_DEPENDENCY_EX)(
+    _In_ HGROUP hGroup,
+    _In_ HGROUP hDependsOn,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
 
 DWORD
 WINAPI
@@ -1624,6 +1876,25 @@ typedef DWORD
     _In_ HGROUPSET hProviderGroupSet
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+AddClusterGroupSetDependencyEx(
+    _In_ HGROUPSET hDependentGroupSet,
+    _In_ HGROUPSET hProviderGroupSet,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_ADD_CLUSTER_GROUP_GROUPSET_DEPENDENCY_EX)(
+    _In_ HGROUPSET hDependentGroupSet,
+    _In_ HGROUPSET hProviderGroupSet,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
+
 DWORD
 WINAPI
 SetClusterGroupSetDependencyExpression(
@@ -1636,6 +1907,25 @@ typedef DWORD
     _In_ HGROUPSET hGroupSet,
     _In_ LPCWSTR lpszDependencyExpression
     );
+
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+SetClusterGroupSetDependencyExpressionEx(
+    _In_ HGROUPSET hGroupSet,
+    _In_ LPCWSTR lpszDependencyExpression,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_SET_CLUSTER_GROUP_GROUPSET_DEPENDENCY_EXPRESSION_EX)(
+    _In_ HGROUPSET hGroupSet,
+    _In_ LPCWSTR lpszDependencyExpression,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
 
 DWORD
 WINAPI
@@ -1650,6 +1940,25 @@ typedef DWORD
     _In_ HGROUPSET hDependsOn
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+RemoveClusterGroupSetDependencyEx(
+    _In_ HGROUPSET hGroupSet,
+    _In_ HGROUPSET hDependsOn,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_REMOVE_CLUSTER_GROUP_GROUPSET_DEPENDENCY_EX)(
+    _In_ HGROUPSET hGroupSet,
+    _In_ HGROUPSET hDependsOn,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
+
 DWORD
 WINAPI
 AddClusterGroupToGroupSetDependency(
@@ -1662,6 +1971,25 @@ typedef DWORD
     _In_ HGROUP hDependentGroup,
     _In_ HGROUPSET hProviderGroupSet
     );
+
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+AddClusterGroupToGroupSetDependencyEx(
+    _In_ HGROUP hDependentGroup,
+    _In_ HGROUPSET hProviderGroupSet,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_ADD_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY_EX)(
+    _In_ HGROUP hDependentGroup,
+    _In_ HGROUPSET hProviderGroupSet,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
 
 DWORD
 WINAPI
@@ -1677,21 +2005,40 @@ typedef DWORD
     );
 
 
-    HGROUPSETENUM
-    WINAPI
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+RemoveClusterGroupToGroupSetDependencyEx(
+    _In_ HGROUP hGroup,
+    _In_ HGROUPSET hDependsOn,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_REMOVE_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY_EX)(
+    _In_ HGROUP hGroup,
+    _In_ HGROUPSET hDependsOn,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
+
+HGROUPSETENUM
+WINAPI
     ClusterGroupSetOpenEnum(
     IN HCLUSTER hCluster
     );
 
-    DWORD
-    WINAPI
+DWORD
+WINAPI
     ClusterGroupSetGetEnumCount(
     IN HGROUPSETENUM hGroupSetEnum
     );
 
-    __success(return == ERROR_SUCCESS)
-    DWORD
-    WINAPI
+__success(return == ERROR_SUCCESS)
+DWORD
+WINAPI
     ClusterGroupSetEnum(
     _In_ HGROUPSETENUM hGroupSetEnum,
     _In_ DWORD dwIndex,
@@ -1699,9 +2046,9 @@ typedef DWORD
     _Inout_ LPDWORD lpcchName
     );
 
-    DWORD
-    WINAPI
-    ClusterGroupSetCloseEnum(
+DWORD
+WINAPI
+ClusterGroupSetCloseEnum(
     IN HGROUPSETENUM hGroupSetEnum
     );
 
@@ -2245,6 +2592,27 @@ typedef DWORD
     _Out_ HRESULT * phrCleanupStatus
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+EvictClusterNodeEx2(
+    _In_ HNODE hNode,
+    _In_ DWORD dwTimeout,
+    _Out_ HRESULT* phrCleanupStatus,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_EVICT_CLUSTER_NODE_EX2)(
+    _In_ HNODE hNode,
+    _In_ DWORD dwTimeout,
+    _Out_ HRESULT* phrCleanupStatus,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
+
 #endif // MIDL_PASS
 
 
@@ -2426,6 +2794,29 @@ typedef DWORD
     _In_opt_ HNODE hNodeDrainTarget
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+PauseClusterNodeEx2(
+    _In_ HNODE hNode,
+    _In_ BOOL bDrainNode,
+    _In_ DWORD dwPauseFlags,
+    _In_opt_ HNODE hNodeDrainTarget,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_PAUSE_CLUSTER_NODE_EX2)(
+    _In_ HNODE hNode,
+    _In_ BOOL bDrainNode,
+    _In_ DWORD dwPauseFlags,
+    _In_opt_ HNODE hNodeDrainTarget,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
+
 typedef enum CLUSTER_NODE_RESUME_FAILBACK_TYPE
 {
     DoNotFailbackGroups = 0,
@@ -2433,6 +2824,12 @@ typedef enum CLUSTER_NODE_RESUME_FAILBACK_TYPE
     FailbackGroupsPerPolicy,
     ClusterNodeResumeFailbackTypeCount
 } CLUSTER_NODE_RESUME_FAILBACK_TYPE;
+
+// flags for ResumeClusterNodeEx
+#define CLUSAPI_NODE_RESUME_FAILBACK_STORAGE                   0x00000001
+#define CLUSAPI_NODE_RESUME_FAILBACK_VMS                       0x00000002
+#define CLUSAPI_NODE_RESUME_FAILBACK_PINNED_VMS_ONLY           0x00000004
+
 
 DWORD
 WINAPI
@@ -2449,6 +2846,26 @@ typedef DWORD
     _In_ DWORD dwResumeFlagsReserved
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+ResumeClusterNodeEx2(
+    _In_ HNODE hNode,
+    _In_ CLUSTER_NODE_RESUME_FAILBACK_TYPE eResumeFailbackType,
+    _In_ DWORD dwResumeFlagsReserved,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_RESUME_CLUSTER_NODE_EX2)(
+    _In_ HNODE hNode,
+    _In_ CLUSTER_NODE_RESUME_FAILBACK_TYPE eResumeFailbackType,
+    _In_ DWORD dwResumeFlagsReserved,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
 
 // Group StatusInformation Flags; These flags are set only by Cluster Service Only;
 #define CLUSGRP_STATUS_LOCKED_MODE                                             0x0000000000000001
@@ -2618,21 +3035,21 @@ typedef DWORD
 #define CLUSAPI_GROUP_ONLINE_IGNORE_AFFINITY_RULE   0x00000008
 
 DWORD WINAPI OnlineClusterGroupEx(
-  _In_       HGROUP hGroup,
-  _In_opt_   HNODE  hDestinationNode,
-  _In_       DWORD  dwOnlineFlags,
-  _In_reads_bytes_opt_(cbInBufferSize) PBYTE  lpInBuffer,
-  _In_       DWORD  cbInBufferSize
+    _In_       HGROUP hGroup,
+    _In_opt_   HNODE  hDestinationNode,
+    _In_       DWORD  dwOnlineFlags,
+    _In_reads_bytes_opt_(cbInBufferSize) PBYTE  lpInBuffer,
+    _In_       DWORD  cbInBufferSize
     );
 
 
 #define CLUSAPI_GROUP_OFFLINE_IGNORE_RESOURCE_STATUS 0x00000001
 
 DWORD WINAPI OfflineClusterGroupEx(
-  _In_       HGROUP hGroup,
-  _In_       DWORD  dwOfflineFlags,
-  _In_reads_bytes_opt_(cbInBufferSize) PBYTE  lpInBuffer,
-  _In_       DWORD  cbInBufferSize
+    _In_       HGROUP hGroup,
+    _In_       DWORD  dwOfflineFlags,
+    _In_reads_bytes_opt_(cbInBufferSize) PBYTE  lpInBuffer,
+    _In_       DWORD  cbInBufferSize
     );
 
 
@@ -2640,6 +3057,31 @@ DWORD WINAPI OfflineClusterGroupEx(
 #define CLUSAPI_RESOURCE_ONLINE_DO_NOT_UPDATE_PERSISTENT_STATE  0x00000002
 #define CLUSAPI_RESOURCE_ONLINE_NECESSARY_FOR_QUORUM            0x00000004
 #define CLUSAPI_RESOURCE_ONLINE_BEST_POSSIBLE_NODE              0x00000008
+
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+OnlineClusterGroupEx2(
+    _In_       HGROUP hGroup,
+    _In_opt_   HNODE  hDestinationNode,
+    _In_       DWORD  dwOnlineFlags,
+    _In_reads_bytes_opt_(cbInBufferSize) PBYTE  lpInBuffer,
+    _In_       DWORD  cbInBufferSize,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+DWORD
+WINAPI
+OfflineClusterGroupEx2(
+    __in       HGROUP hGroup,
+    __in       DWORD  dwOfflineFlags,
+    __in_opt   PBYTE  lpInBuffer,
+    __in       DWORD  cbInBufferSize,
+    _In_opt_   LPCWSTR lpszReason
+    );
+
+#endif
 
 
 #define CLUSAPI_RESOURCE_ONLINE_IGNORE_AFFINITY_RULE            0x00000020
@@ -2652,6 +3094,19 @@ DWORD WINAPI OnlineClusterResourceEx(
   _In_       DWORD     cbInBufferSize
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+OnlineClusterResourceEx2(
+    _In_ HRESOURCE hResource,
+    _In_ DWORD dwOnlineFlags,
+    _In_reads_bytes_opt_(cbInBufferSize) PBYTE lpInBuffer,
+    _In_ DWORD cbInBufferSize,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
 
 #define CLUSAPI_RESOURCE_OFFLINE_IGNORE_RESOURCE_STATUS             0x00000001
 #define CLUSAPI_RESOURCE_OFFLINE_FORCE_WITH_TERMINATION             0x00000002
@@ -2674,6 +3129,20 @@ DWORD WINAPI OfflineClusterResourceEx(
   _In_       DWORD     cbInBufferSize
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+OfflineClusterResourceEx2(
+    _In_       HRESOURCE hResource,
+    _In_       DWORD     dwOfflineFlags,
+    _In_reads_bytes_opt_(cbInBufferSize) PBYTE  lpInBuffer,
+    _In_       DWORD     cbInBufferSize,
+    _In_opt_   LPCWSTR   lpszReason
+    );
+
+#endif
+
 #define CLUSAPI_GROUP_MOVE_IGNORE_RESOURCE_STATUS           0x00000001
 #define CLUSAPI_GROUP_MOVE_RETURN_TO_SOURCE_NODE_ON_ERROR   0x00000002
 #define CLUSAPI_GROUP_MOVE_QUEUE_ENABLED                    0x00000004
@@ -2695,6 +3164,21 @@ MoveClusterGroupEx(
   _In_       DWORD  cbInBufferSize
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+MoveClusterGroupEx2(
+    _In_ HGROUP hGroup,
+    _In_opt_ HNODE hDestinationNode,
+    _In_ DWORD dwMoveFlags,
+    _In_reads_bytes_opt_(cbInBufferSize) PBYTE lpInBuffer,
+    _In_ DWORD cbInBufferSize,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
+
 
 DWORD WINAPI CancelClusterGroupOperation(
   _In_       HGROUP hGroup,
@@ -2711,6 +3195,24 @@ typedef DWORD
     HRESOURCE hResource,
     DWORD dwFlags
     );
+
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+RestartClusterResourceEx(
+    _In_ HRESOURCE hResource,
+    _In_ DWORD dwFlags,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_RESTART_CLUSTER_RESOURCE_EX)(
+    HRESOURCE hResource,
+    DWORD dwFlags
+    );
+
+#endif
 
 #endif // (CLUSAPI_VERSION >= CLUSAPI_VERSION_WINDOWS8)
 
@@ -2780,6 +3282,42 @@ typedef DWORD
     _In_reads_opt_( NodeCount ) HNODE NodeList[]
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+SetClusterGroupNameEx(
+    _In_ HGROUP hGroup,
+    _In_ LPCWSTR lpszGroupName,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_SET_CLUSTER_GROUP_NAME_EX)(
+    _In_ HGROUP hGroup,
+    _In_ LPCWSTR lpszGroupName,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+DWORD
+WINAPI
+SetClusterGroupNodeListEx(
+    __in HGROUP hGroup,
+    __in DWORD NodeCount,
+    __in_ecount( NodeCount ) HNODE NodeList[],
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_SET_CLUSTER_GROUP_NODE_LIST_EX)(
+    _In_ HGROUP hGroup,
+    _In_ DWORD NodeCount,
+    _In_reads_opt_( NodeCount ) HNODE NodeList[],
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
+
 DWORD
 WINAPI
 OnlineClusterGroup(
@@ -2838,6 +3376,36 @@ typedef DWORD
 (WINAPI * PCLUSAPI_DESTROY_CLUSTER_GROUP)(
     HGROUP hGroup
     );
+
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+DeleteClusterGroupEx(
+    _In_ HGROUP hGroup,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_DELETE_CLUSTER_GROUP_EX)(
+    _In_ HGROUP hGroup,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+DWORD
+WINAPI
+DestroyClusterGroupEx(
+    _In_ HGROUP hGroup,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_DESTROY_CLUSTER_GROUP_EX)(
+    _In_ HGROUP hGroup,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
 
 HGROUPENUM
 WINAPI
@@ -2970,6 +3538,29 @@ typedef HRESOURCE
     DWORD dwFlags
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+HRESOURCE
+WINAPI
+CreateClusterResourceEx(
+    _In_ HGROUP hGroup,
+    _In_ LPCWSTR lpszResourceName,
+    _In_ LPCWSTR lpszResourceType,
+    _In_ DWORD dwFlags,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef HRESOURCE
+(WINAPI * PCLUSAPI_CREATE_CLUSTER_RESOURCE_EX)(
+    _In_ HGROUP hGroup,
+    _In_ LPCWSTR lpszResourceName,
+    _In_ LPCWSTR lpszResourceType,
+    _In_ DWORD dwFlags,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
+
 HRESOURCE
 WINAPI
 OpenClusterResource(
@@ -3035,6 +3626,23 @@ typedef DWORD
     HRESOURCE hResource
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+DeleteClusterResourceEx(
+    _In_ HRESOURCE hResource,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_DELETE_CLUSTER_RESOURCE_EX)(
+    _In_ HRESOURCE hResource,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
+
 _Success_(return >= 0) // != ClusterResourceStateUnknown
 CLUSTER_RESOURCE_STATE
 WINAPI
@@ -3068,6 +3676,25 @@ typedef DWORD
     LPCWSTR lpszResourceName
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+SetClusterResourceNameEx(
+    _In_ HRESOURCE hResource,
+    _In_ LPCWSTR lpszResourceName,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_SET_CLUSTER_RESOURCE_NAME_EX)(
+    _In_ HRESOURCE hResource,
+    _In_ LPCWSTR lpszResourceName,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
+
 DWORD
 WINAPI
 FailClusterResource(
@@ -3078,6 +3705,23 @@ typedef DWORD
 (WINAPI * PCLUSAPI_FAIL_CLUSTER_RESOURCE)(
     HRESOURCE hResource
     );
+
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+FailClusterResourceEx(
+    _In_ HRESOURCE hResource,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_FAIL_CLUSTER_RESOURCE_EX)(
+    _In_ HRESOURCE hResource,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
 
 DWORD
 WINAPI
@@ -3129,6 +3773,27 @@ typedef DWORD
     _In_ ULONGLONG Flags
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+ChangeClusterResourceGroupEx2(
+    _In_ HRESOURCE hResource,
+    _In_ HGROUP hGroup,
+    _In_ ULONGLONG Flags,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_CHANGE_CLUSTER_RESOURCE_GROUP_EX2)(
+    _In_ HRESOURCE hResource,
+    _In_ HGROUP hGroup,
+    _In_ ULONGLONG Flags,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
+
 DWORD
 WINAPI
 AddClusterResourceNode(
@@ -3155,6 +3820,40 @@ typedef DWORD
     HNODE hNode
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+AddClusterResourceNodeEx(
+    _In_     HRESOURCE hResource,
+    _In_     HNODE hNode,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_ADD_CLUSTER_RESOURCE_NODE_EX)(
+    _In_     HRESOURCE hResource,
+    _In_     HNODE hNode,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+DWORD
+WINAPI
+RemoveClusterResourceNodeEx(
+    _In_ HRESOURCE hResource,
+    _In_ HNODE hNode,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_REMOVE_CLUSTER_RESOURCE_NODE_EX)(
+    _In_ HRESOURCE hResource,
+    _In_ HNODE hNode,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
+
 DWORD
 WINAPI
 AddClusterResourceDependency(
@@ -3180,6 +3879,40 @@ typedef DWORD
     HRESOURCE hResource,
     HRESOURCE hDependsOn
     );
+
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+AddClusterResourceDependencyEx(
+    _In_ HRESOURCE hResource,
+    _In_ HRESOURCE hDependsOn,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_ADD_CLUSTER_RESOURCE_DEPENDENCY_EX)(
+    _In_ HRESOURCE hResource,
+    _In_ HRESOURCE hDependsOn,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+DWORD
+WINAPI
+RemoveClusterResourceDependencyEx(
+    _In_ HRESOURCE hResource,
+    _In_ HRESOURCE hDependsOn,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_REMOVE_CLUSTER_RESOURCE_DEPENDENCY_EX)(
+    _In_ HRESOURCE hResource,
+    _In_ HRESOURCE hDependsOn,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
 
 DWORD
 WINAPI
@@ -3393,6 +4126,154 @@ typedef DWORD
     _Out_opt_ LPDWORD lpBytesReturned
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+__success(return == ERROR_SUCCESS)
+DWORD
+WINAPI
+ClusterResourceControlEx(
+    _In_ HRESOURCE hResource,
+    _In_opt_ HNODE hHostNode,
+    _In_ DWORD dwControlCode,
+    _In_reads_bytes_opt_(cbInBufferSize) LPVOID lpInBuffer,
+    _In_ DWORD cbInBufferSize,
+    _Out_writes_bytes_to_opt_(cbOutBufferSize, *lpBytesReturned) LPVOID lpOutBuffer,
+    _In_ DWORD cbOutBufferSize,
+    _Out_opt_ LPDWORD lpBytesReturned,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_CLUSTER_RESOURCE_CONTROL_EX)(
+    _In_ HRESOURCE hResource,
+    _In_opt_ HNODE hHostNode,
+    _In_ DWORD dwControlCode,
+    _In_reads_bytes_opt_(cbInBufferSize) LPVOID lpInBuffer,
+    _In_ DWORD cbInBufferSize,
+    _Out_writes_bytes_to_opt_(cbOutBufferSize, *lpBytesReturned) LPVOID lpOutBuffer,
+    _In_ DWORD cbOutBufferSize,
+    _Out_opt_ LPDWORD lpBytesReturned,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+__success(return == ERROR_SUCCESS)
+DWORD
+WINAPI
+ClusterResourceControlAsUserEx(
+    _In_ HRESOURCE hResource,
+    _In_opt_ HNODE hHostNode,
+    _In_ DWORD dwControlCode,
+    _In_reads_bytes_opt_(cbInBufferSize) LPVOID lpInBuffer,
+    _In_ DWORD cbInBufferSize,
+    _Out_writes_bytes_to_opt_(cbOutBufferSize, *lpBytesReturned) LPVOID lpOutBuffer,
+    _In_ DWORD cbOutBufferSize,
+    _Out_opt_ LPDWORD lpBytesReturned,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_CLUSTER_RESOURCE_CONTROL_AS_USER_EX)(
+    _In_ HRESOURCE hResource,
+    _In_opt_ HNODE hHostNode,
+    _In_ DWORD dwControlCode,
+    _In_reads_bytes_opt_(cbInBufferSize) LPVOID lpInBuffer,
+    _In_ DWORD cbInBufferSize,
+    _Out_writes_bytes_to_opt_(cbOutBufferSize, *lpBytesReturned) LPVOID lpOutBuffer,
+    _In_ DWORD cbOutBufferSize,
+    _Out_opt_ LPDWORD lpBytesReturned,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+__success(return == ERROR_SUCCESS)
+DWORD
+WINAPI
+ClusterResourceTypeControlEx(
+    _In_ HCLUSTER hCluster,
+    _In_ LPCWSTR lpszResourceTypeName,
+    _In_opt_ HNODE hHostNode,
+    _In_ DWORD dwControlCode,
+    _In_reads_bytes_opt_(nInBufferSize) LPVOID lpInBuffer,
+    _In_ DWORD nInBufferSize,
+    _Out_writes_bytes_to_opt_(nOutBufferSize, *lpBytesReturned) LPVOID lpOutBuffer,
+    _In_ DWORD nOutBufferSize,
+    _Out_opt_ LPDWORD lpBytesReturned,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_CLUSTER_RESOURCE_TYPE_CONTROL_EX)(
+    _In_ HCLUSTER hCluster,
+    _In_ LPCWSTR lpszResourceTypeName,
+    _In_opt_ HNODE hHostNode,
+    _In_ DWORD dwControlCode,
+    _In_reads_bytes_opt_(nInBufferSize) LPVOID lpInBuffer,
+    _In_ DWORD nInBufferSize,
+    _Out_writes_bytes_to_opt_(nOutBufferSize, *lpBytesReturned) LPVOID lpOutBuffer,
+    _In_ DWORD nOutBufferSize,
+    _Out_opt_ LPDWORD lpBytesReturned,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+__success(return == ERROR_SUCCESS)
+DWORD
+WINAPI
+ClusterResourceTypeControlAsUserEx(
+    _In_ HCLUSTER hCluster,
+    _In_ LPCWSTR lpszResourceTypeName,
+    _In_opt_ HNODE hHostNode,
+    _In_ DWORD dwControlCode,
+    _In_reads_bytes_opt_(nInBufferSize) LPVOID lpInBuffer,
+    _In_ DWORD nInBufferSize,
+    _Out_writes_bytes_to_opt_(nOutBufferSize, *lpBytesReturned) LPVOID lpOutBuffer,
+    _In_ DWORD nOutBufferSize,
+    _Out_opt_ LPDWORD lpBytesReturned,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_CLUSTER_RESOURCE_TYPE_CONTROL_AS_USER_EX)(
+    _In_ HCLUSTER hCluster,
+    _In_ LPCWSTR lpszResourceTypeName,
+    _In_opt_ HNODE hHostNode,
+    _In_ DWORD dwControlCode,
+    _In_reads_bytes_opt_(nInBufferSize) LPVOID lpInBuffer,
+    _In_ DWORD nInBufferSize,
+    _Out_writes_bytes_to_opt_(nOutBufferSize, *lpBytesReturned) LPVOID lpOutBuffer,
+    _In_ DWORD nOutBufferSize,
+    _Out_opt_ LPDWORD lpBytesReturned,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+__success(return == ERROR_SUCCESS)
+DWORD
+WINAPI
+ClusterGroupControlEx(
+    _In_ HGROUP hGroup,
+    _In_opt_ HNODE hHostNode,
+    _In_ DWORD dwControlCode,
+    _In_reads_bytes_opt_(nInBufferSize) LPVOID lpInBuffer,
+    _In_ DWORD nInBufferSize,
+    _Out_writes_bytes_to_opt_(nOutBufferSize, *lpBytesReturned) LPVOID lpOutBuffer,
+    _In_ DWORD nOutBufferSize,
+    _Out_opt_ LPDWORD lpBytesReturned,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_CLUSTER_GROUP_CONTROL_EX)(
+    _In_ HGROUP hGroup,
+    _In_opt_ HNODE hHostNode,
+    _In_ DWORD dwControlCode,
+    _In_reads_bytes_opt_(nInBufferSize) LPVOID lpInBuffer,
+    _In_ DWORD nInBufferSize,
+    _Out_writes_bytes_to_opt_(nOutBufferSize, *lpBytesReturned) LPVOID lpOutBuffer,
+    _In_ DWORD nOutBufferSize,
+    _Out_opt_ LPDWORD lpBytesReturned,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
+
 _Success_(return == ERROR_SUCCESS)
 DWORD
 WINAPI
@@ -3418,6 +4299,38 @@ typedef DWORD
     _In_ DWORD nOutBufferSize,
     _Out_opt_ LPDWORD lpBytesReturned
     );
+
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+__success(return == ERROR_SUCCESS)
+DWORD
+WINAPI
+ClusterNodeControlEx(
+    _In_ HNODE hNode,
+    _In_opt_ HNODE hHostNode,
+    _In_ DWORD dwControlCode,
+    _In_reads_bytes_opt_(nInBufferSize) LPVOID lpInBuffer,
+    _In_ DWORD nInBufferSize,
+    _Out_writes_bytes_to_opt_(nOutBufferSize, *lpBytesReturned) LPVOID lpOutBuffer,
+    _In_ DWORD nOutBufferSize,
+    _Out_opt_ LPDWORD lpBytesReturned,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_CLUSTER_NODE_CONTROL_EX)(
+    _In_ HNODE hNode,
+    _In_opt_ HNODE hHostNode,
+    _In_ DWORD dwControlCode,
+    _In_reads_bytes_opt_(nInBufferSize) LPVOID lpInBuffer,
+    _In_ DWORD nInBufferSize,
+    _Out_writes_bytes_to_opt_(nOutBufferSize, *lpBytesReturned) LPVOID lpOutBuffer,
+    _In_ DWORD nOutBufferSize,
+    _Out_opt_ LPDWORD lpBytesReturned,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
 
 _Success_(return != FALSE)
 BOOL
@@ -3709,6 +4622,9 @@ typedef enum CLCTL_CODES {
     CLCTL_VALIDATE_COMMON_PROPERTIES        = CLCTL_EXTERNAL_CODE( 24, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
     CLCTL_GET_COMMON_PROPERTY_FMTS          = CLCTL_EXTERNAL_CODE( 25, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
     CLCTL_GET_COMMON_RESOURCE_PROPERTY_FMTS = CLCTL_EXTERNAL_CODE( 26, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
+
+    CLCTL_CHECK_VOTER_EVICT_WITNESS         = CLCTL_EXTERNAL_CODE( 27, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
+    CLCTL_CHECK_VOTER_DOWN_WITNESS          = CLCTL_EXTERNAL_CODE( 28, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
 
     CLCTL_ENUM_PRIVATE_PROPERTIES           = CLCTL_EXTERNAL_CODE( 30, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
     CLCTL_GET_RO_PRIVATE_PROPERTIES         = CLCTL_EXTERNAL_CODE( 31, CLUS_ACCESS_READ, CLUS_NO_MODIFY ),
@@ -4364,13 +5280,13 @@ typedef enum CLUSCTL_RESOURCE_CODES {
 
     CLUSCTL_RESOURCE_CHECK_DRAIN_VETO =
         CLUSCTL_RESOURCE_CODE( CLCTL_CHECK_DRAIN_VETO ),
-    
+
     CLUSCTL_RESOURCE_NOTIFY_DRAIN_COMPLETE =
         CLUSCTL_RESOURCE_CODE( CLCTL_NOTIFY_DRAIN_COMPLETE ),
-    
+
     CLUSCTL_RESOURCE_GET_NODES_IN_FD =
         CLUSCTL_RESOURCE_CODE( CLCTL_GET_NODES_IN_FD ),
-                
+
 } CLUSCTL_RESOURCE_CODES;
 
 //
@@ -4976,13 +5892,20 @@ typedef enum CLUSCTL_CLUSTER_CODES {
         CLUSCTL_CLUSTER_CODE( CLCTL_ENUM_AFFINITY_RULE_NAMES ),
 
     CLUSCTL_CLUSTER_GET_NODES_IN_FD =
-            CLUSCTL_CLUSTER_CODE( CLCTL_GET_NODES_IN_FD ), 
+            CLUSCTL_CLUSTER_CODE( CLCTL_GET_NODES_IN_FD ),
 
-        CLUSCTL_CLUSTER_FORCE_FLUSH_DB = 
+        CLUSCTL_CLUSTER_FORCE_FLUSH_DB =
             CLUSCTL_CLUSTER_CODE( CLCTL_FORCE_DB_FLUSH ),
 
        CLUSCTL_CLUSTER_GET_CLMUSR_TOKEN =
                CLUSCTL_CLUSTER_CODE( CLCTL_NETNAME_GET_VIRTUAL_SERVER_TOKEN ),
+
+
+    CLUSCTL_CLUSTER_CHECK_VOTER_EVICT_WITNESS=
+        CLUSCTL_CLUSTER_CODE( CLCTL_CHECK_VOTER_EVICT_WITNESS ),
+
+    CLUSCTL_CLUSTER_CHECK_VOTER_DOWN_WITNESS=
+        CLUSCTL_CLUSTER_CODE( CLCTL_CHECK_VOTER_DOWN_WITNESS ),
 
 } CLUSCTL_CLUSTER_CODES;
 
@@ -5954,6 +6877,48 @@ typedef DWORD
     LPCWSTR lpszResourceTypeName
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+CreateClusterResourceTypeEx(
+    _In_     HCLUSTER hCluster,
+    _In_     LPCWSTR lpszResourceTypeName,
+    _In_     LPCWSTR lpszDisplayName,
+    _In_     LPCWSTR lpszResourceTypeDll,
+    _In_     DWORD dwLooksAlivePollInterval,
+    _In_     DWORD dwIsAlivePollInterval,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_CREATE_CLUSTER_RESOURCE_TYPE_EX)(
+    _In_     HCLUSTER hCluster,
+    _In_     LPCWSTR lpszResourceTypeName,
+    _In_     LPCWSTR lpszDisplayName,
+    _In_     LPCWSTR lpszResourceTypeDll,
+    _In_     DWORD dwLooksAlivePollInterval,
+    _In_     DWORD dwIsAlivePollInterval,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+DWORD
+WINAPI
+DeleteClusterResourceTypeEx(
+    _In_ HCLUSTER hCluster,
+    _In_ LPCWSTR lpszTypeName,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_DELETE_CLUSTER_RESOURCE_TYPE_EX)(
+    _In_ HCLUSTER hCluster,
+    _In_ LPCWSTR lpszTypeName,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
+
 HRESTYPEENUM
 WINAPI
 ClusterResourceTypeOpenEnum(
@@ -6185,6 +7150,25 @@ typedef DWORD
     _In_ LPCWSTR lpszName
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+SetClusterNetworkNameEx(
+    _In_ HNETWORK hNetwork,
+    _In_ LPCWSTR lpszName,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_SET_CLUSTER_NETWORK_NAME_EX)(
+    _In_ HNETWORK hNetwork,
+    _In_ LPCWSTR lpszName,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
+
 _Success_(return == ERROR_SUCCESS)
 DWORD
 WINAPI
@@ -6225,6 +7209,37 @@ typedef DWORD
     _In_ DWORD nOutBufferSize,
     _Out_opt_ LPDWORD lpBytesReturned
     );
+
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+ClusterNetworkControlEx(
+    _In_ HNETWORK hNetwork,
+    _In_opt_ HNODE hHostNode,
+    _In_ DWORD dwControlCode,
+    _In_reads_bytes_opt_(nInBufferSize) LPVOID lpInBuffer,
+    _In_ DWORD nInBufferSize,
+    _Out_writes_bytes_to_opt_(nOutBufferSize, *lpBytesReturned) LPVOID lpOutBuffer,
+    _In_ DWORD nOutBufferSize,
+    _Out_opt_ LPDWORD lpBytesReturned,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_CLUSTER_NETWORK_CONTROL_EX)(
+    _In_ HNETWORK hNetwork,
+    _In_opt_ HNODE hHostNode,
+    _In_ DWORD dwControlCode,
+    _In_reads_bytes_opt_(nInBufferSize) LPVOID lpInBuffer,
+    _In_ DWORD nInBufferSize,
+    _Out_writes_bytes_to_opt_(nOutBufferSize, *lpBytesReturned) LPVOID lpOutBuffer,
+    _In_ DWORD nOutBufferSize,
+    _Out_opt_ LPDWORD lpBytesReturned,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
 
 #endif // MIDL_PASS
 
@@ -6357,6 +7372,38 @@ typedef DWORD
     _In_ DWORD nOutBufferSize,
     _Out_opt_ LPDWORD lpBytesReturned
     );
+
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+ClusterNetInterfaceControlEx(
+    _In_ HNETINTERFACE hNetInterface,
+    _In_opt_ HNODE hHostNode,
+    _In_ DWORD dwControlCode,
+    _In_reads_bytes_opt_(nInBufferSize) LPVOID lpInBuffer,
+    _In_ DWORD nInBufferSize,
+    _Out_writes_bytes_to_opt_(nOutBufferSize, *lpBytesReturned) LPVOID lpOutBuffer,
+    _In_ DWORD nOutBufferSize,
+    _Out_opt_ LPDWORD lpBytesReturned,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_CLUSTER_NET_INTERFACE_CONTROL_EX)(
+    _In_ HNETINTERFACE hNetInterface,
+    _In_opt_ HNODE hHostNode,
+    _In_ DWORD dwControlCode,
+    _In_reads_bytes_opt_(nInBufferSize) LPVOID lpInBuffer,
+    _In_ DWORD nInBufferSize,
+    _Out_writes_bytes_to_opt_(nOutBufferSize, *lpBytesReturned) LPVOID lpOutBuffer,
+    _In_ DWORD nOutBufferSize,
+    _Out_opt_ LPDWORD lpBytesReturned,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
+
 #endif // MIDL_PASS
 
 
@@ -6466,6 +7513,35 @@ typedef LONG
     _Out_opt_ LPDWORD lpdwDisposition
     );
 
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+LONG
+WINAPI
+ClusterRegCreateKeyEx(
+    __in HKEY hKey,
+    __in LPCWSTR lpSubKey,
+    __in DWORD dwOptions,
+    __in REGSAM samDesired,
+    __in_opt LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+    __out PHKEY phkResult,
+    __out_opt LPDWORD lpdwDisposition,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef LONG
+(WINAPI * PCLUSAPI_CLUSTER_REG_CREATE_KEY_EX)(
+    _In_ HKEY hKey,
+    _In_ LPCWSTR lpszSubKey,
+    _In_ DWORD dwOptions,
+    _In_ REGSAM samDesired,
+    _In_opt_ LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+    _Out_ PHKEY phkResult,
+    _Out_opt_ LPDWORD lpdwDisposition,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
+
 LONG
 WINAPI
 ClusterRegOpenKey(
@@ -6495,6 +7571,25 @@ typedef LONG
     HKEY hKey,
     LPCWSTR lpszSubKey
     );
+
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+LONG
+WINAPI
+ClusterRegDeleteKeyEx(
+    _In_ HKEY hKey,
+    _In_ LPCWSTR lpSubKey,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef LONG
+(WINAPI * PCLUSAPI_CLUSTER_REG_DELETE_KEY_EX)(
+    _In_ HKEY hKey,
+    _In_ LPCWSTR lpSubKey,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
 
 LONG
 WINAPI
@@ -6558,6 +7653,46 @@ typedef DWORD
     HKEY hKey,
     LPCWSTR lpszValueName
     );
+
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+DWORD
+WINAPI
+ClusterRegSetValueEx(
+    _In_ HKEY hKey,
+    _In_ LPCWSTR lpszValueName,
+    _In_ DWORD dwType,
+    _In_ CONST BYTE* lpData,
+    _In_ DWORD cbData,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_CLUSTER_REG_SET_VALUE_EX)(
+    _In_ HKEY hKey,
+    _In_ LPCWSTR lpszValueName,
+    _In_ DWORD dwType,
+    _In_ CONST BYTE* lpData,
+    _In_ DWORD cbData,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+DWORD
+WINAPI
+ClusterRegDeleteValueEx(
+    _In_ HKEY hKey,
+    _In_ LPCWSTR lpszValueName,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef DWORD
+(WINAPI * PCLUSAPI_CLUSTER_REG_DELETE_VALUE_EX)(
+    _In_ HKEY hKey,
+    _In_ LPCWSTR lpszValueName,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
 
 LONG
 WINAPI
@@ -6658,6 +7793,27 @@ typedef LONG
     SECURITY_INFORMATION SecurityInformation,
     PSECURITY_DESCRIPTOR pSecurityDescriptor
     );
+
+#if (CLUSAPI_VERSION >= CLUSAPI_VERSION_NI)
+
+LONG
+WINAPI
+ClusterRegSetKeySecurityEx(
+    _In_ HKEY hKey,
+    _In_ SECURITY_INFORMATION SecurityInformation,
+    _In_ PSECURITY_DESCRIPTOR pSecurityDescriptor,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+typedef LONG
+(WINAPI * PCLUSAPI_CLUSTER_REG_SET_KEY_SECURITY_EX)(
+    HKEY hKey,
+    SECURITY_INFORMATION SecurityInformation,
+    PSECURITY_DESCRIPTOR pSecurityDescriptor,
+    _In_opt_ LPCWSTR lpszReason
+    );
+
+#endif
 
 LONG
 WINAPI
@@ -7257,6 +8413,7 @@ typedef DWORD
 #define CLUSREG_NAME_NODE_MODEL             L"Model"
 #define CLUSREG_NAME_NODE_SERIALNUMBER      L"SerialNumber"
 #define CLUSREG_NAME_NODE_MANUFACTURER      L"Manufacturer"
+#define CLUSREG_NAME_NODE_UNIQUEID          L"UniqueID"
 
 
 //
@@ -7550,6 +8707,8 @@ typedef DWORD
 #define CLUSREG_NAME_FILESHR_IS_DFS_ROOT            L"IsDfsRoot"
 #define CLUSREG_NAME_FILESHR_SHARE_FLAGS            L"ShareFlags"
 #define CLUSREG_NAME_FILESHR_CA_TIMEOUT             L"CATimeout"
+#define CLUSREG_NAME_FILESHR_QOS_FLOWSCOPE          L"QosFlowScope"
+#define CLUSREG_NAME_FILESHR_QOS_POLICYID           L"QosPolicyId"
 
 //
 // DHCP Service
@@ -7765,7 +8924,7 @@ typedef struct _SR_RESOURCE_TYPE_REPLICATED_DISKS_RESULT
 } SR_RESOURCE_TYPE_REPLICATED_DISKS_RESULT, *PSR_RESOURCE_TYPE_REPLICATED_DISKS_RESULT;
 
 typedef struct _SR_RESOURCE_TYPE_ADD_REPLICATION_GROUP
-{   
+{
     WCHAR       ReplicationGroupName[MAX_PATH];          /**< The name of the replication group to create*/
     WCHAR       Description[MAX_PATH];                   /**< A text description of the group*/
     WCHAR       LogPath[MAX_PATH];                       /**< Full path of the log container*/
@@ -7775,6 +8934,7 @@ typedef struct _SR_RESOURCE_TYPE_ADD_REPLICATION_GROUP
     DWORD       MinimumPartnersInSync;                   /**< Minimum number of synchronous Replication Partners to be actively in sync before allowing data access by applications on the primary Replica*/
     BOOLEAN     EnableWriteConsistency;                  /**< Set true to enable write consistency*/
     BOOLEAN     EnableEncryption;                        /**< true to enable encryption; otherwise, false*/
+    BOOLEAN     EnableCompression;                       /**< true to enable compression; otherwise, false*/
     WCHAR       CertificateThumbprint[MAX_PATH];         /**< The certificate thumbprint*/
     ULONG       VolumeNameCount;                         /**< Count of number of volumes in \ref VolumeNames field*/
     WCHAR       VolumeNames[ANYSIZE_ARRAY][MAX_PATH];    /**< A collection of volume names*/

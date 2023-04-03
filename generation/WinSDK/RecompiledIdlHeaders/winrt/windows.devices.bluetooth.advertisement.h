@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1730,7 +1730,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE get_TxPowerLevel(
                             BYTE* value
                             ) = 0;
-                        virtual HRESULT STDMETHODCALLTYPE get_SlaveConnectionIntervalRange(
+                        virtual HRESULT STDMETHODCALLTYPE get_PeripheralConnectionIntervalRange(
                             BYTE* value
                             ) = 0;
                         virtual HRESULT STDMETHODCALLTYPE get_ServiceSolicitation16BitUuids(
@@ -2476,8 +2476,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementBytePatternFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementBytePattern ** Default Interface **
@@ -2688,8 +2688,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEManufacturerDataFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEManufacturerDataFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEManufacturerData ** Default Interface **
@@ -5139,7 +5139,7 @@ typedef struct __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLE
         BYTE* value);
     HRESULT (STDMETHODCALLTYPE* get_TxPowerLevel)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementDataTypesStatics* This,
         BYTE* value);
-    HRESULT (STDMETHODCALLTYPE* get_SlaveConnectionIntervalRange)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementDataTypesStatics* This,
+    HRESULT (STDMETHODCALLTYPE* get_PeripheralConnectionIntervalRange)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementDataTypesStatics* This,
         BYTE* value);
     HRESULT (STDMETHODCALLTYPE* get_ServiceSolicitation16BitUuids)(__x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementDataTypesStatics* This,
         BYTE* value);
@@ -5222,8 +5222,8 @@ interface __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdver
 #define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementDataTypesStatics_get_TxPowerLevel(This, value) \
     ((This)->lpVtbl->get_TxPowerLevel(This, value))
 
-#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementDataTypesStatics_get_SlaveConnectionIntervalRange(This, value) \
-    ((This)->lpVtbl->get_SlaveConnectionIntervalRange(This, value))
+#define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementDataTypesStatics_get_PeripheralConnectionIntervalRange(This, value) \
+    ((This)->lpVtbl->get_PeripheralConnectionIntervalRange(This, value))
 
 #define __x_ABI_CWindows_CDevices_CBluetooth_CAdvertisement_CIBluetoothLEAdvertisementDataTypesStatics_get_ServiceSolicitation16BitUuids(This, value) \
     ((This)->lpVtbl->get_ServiceSolicitation16BitUuids(This, value))
@@ -6489,8 +6489,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementBytePatternFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEAdvertisementBytePattern ** Default Interface **
@@ -6701,8 +6701,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEManufacturerDataFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.Devices.Bluetooth.Advertisement.IBluetoothLEManufacturerDataFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.Advertisement.IBluetoothLEManufacturerData ** Default Interface **

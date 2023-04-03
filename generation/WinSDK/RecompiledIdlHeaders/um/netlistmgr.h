@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -68,6 +68,13 @@ typedef interface INetwork INetwork;
 #endif 	/* __INetwork_FWD_DEFINED__ */
 
 
+#ifndef __INetwork2_FWD_DEFINED__
+#define __INetwork2_FWD_DEFINED__
+typedef interface INetwork2 INetwork2;
+
+#endif 	/* __INetwork2_FWD_DEFINED__ */
+
+
 #ifndef __IEnumNetworks_FWD_DEFINED__
 #define __IEnumNetworks_FWD_DEFINED__
 typedef interface IEnumNetworks IEnumNetworks;
@@ -87,6 +94,13 @@ typedef interface INetworkEvents INetworkEvents;
 typedef interface INetworkConnection INetworkConnection;
 
 #endif 	/* __INetworkConnection_FWD_DEFINED__ */
+
+
+#ifndef __INetworkConnection2_FWD_DEFINED__
+#define __INetworkConnection2_FWD_DEFINED__
+typedef interface INetworkConnection2 INetworkConnection2;
+
+#endif 	/* __INetworkConnection2_FWD_DEFINED__ */
 
 
 #ifndef __IEnumNetworkConnections_FWD_DEFINED__
@@ -167,6 +181,8 @@ extern "C"{
 #include <winapifamily.h>
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+
+
 
 
 
@@ -277,6 +293,14 @@ enum NLM_DOMAIN_TYPE
         NLM_DOMAIN_TYPE_DOMAIN_NETWORK	= 0x1,
         NLM_DOMAIN_TYPE_DOMAIN_AUTHENTICATED	= 0x2
     } 	NLM_DOMAIN_TYPE;
+
+typedef 
+enum NLM_DOMAIN_AUTHENTICATION_KIND
+    {
+        NLM_DOMAIN_AUTHENTICATION_KIND_NONE	= 0,
+        NLM_DOMAIN_AUTHENTICATION_KIND_LDAP	= 0x1,
+        NLM_DOMAIN_AUTHENTICATION_KIND_TLS	= 0x2
+    } 	NLM_DOMAIN_AUTHENTICATION_KIND;
 
 
 
@@ -964,6 +988,283 @@ EXTERN_C const IID IID_INetwork;
 #endif 	/* __INetwork_INTERFACE_DEFINED__ */
 
 
+#ifndef __INetwork2_INTERFACE_DEFINED__
+#define __INetwork2_INTERFACE_DEFINED__
+
+/* interface INetwork2 */
+/* [dual][unique][oleautomation][object][helpstring][uuid] */ 
+
+
+EXTERN_C const IID IID_INetwork2;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("B5550ABB-3391-4310-804F-25DCC325ED81")
+    INetwork2 : public INetwork
+    {
+    public:
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IsDomainAuthenticatedBy( 
+            /* [annotation][in] */ 
+            _In_  NLM_DOMAIN_AUTHENTICATION_KIND domainAuthenticationKind,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *pValue) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct INetwork2Vtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in INetwork2 * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in INetwork2 * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in INetwork2 * This);
+        
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            __RPC__in INetwork2 * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            __RPC__in INetwork2 * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            __RPC__in INetwork2 * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            INetwork2 * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        DECLSPEC_XFGVIRT(INetwork, GetName)
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetName )( 
+            __RPC__in INetwork2 * This,
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  BSTR *pszNetworkName);
+        
+        DECLSPEC_XFGVIRT(INetwork, SetName)
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetName )( 
+            __RPC__in INetwork2 * This,
+            /* [annotation][string][in] */ 
+            _In_  BSTR szNetworkNewName);
+        
+        DECLSPEC_XFGVIRT(INetwork, GetDescription)
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDescription )( 
+            __RPC__in INetwork2 * This,
+            /* [annotation][retval][string][out] */ 
+            _Out_retval_  BSTR *pszDescription);
+        
+        DECLSPEC_XFGVIRT(INetwork, SetDescription)
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetDescription )( 
+            __RPC__in INetwork2 * This,
+            /* [annotation][string][in] */ 
+            _In_  BSTR szDescription);
+        
+        DECLSPEC_XFGVIRT(INetwork, GetNetworkId)
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetNetworkId )( 
+            __RPC__in INetwork2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  GUID *pgdGuidNetworkId);
+        
+        DECLSPEC_XFGVIRT(INetwork, GetDomainType)
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDomainType )( 
+            __RPC__in INetwork2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NLM_DOMAIN_TYPE *pNetworkType);
+        
+        DECLSPEC_XFGVIRT(INetwork, GetNetworkConnections)
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetNetworkConnections )( 
+            __RPC__in INetwork2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumNetworkConnections **ppEnumNetworkConnection);
+        
+        DECLSPEC_XFGVIRT(INetwork, GetTimeCreatedAndConnected)
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetTimeCreatedAndConnected )( 
+            __RPC__in INetwork2 * This,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwLowDateTimeCreated,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHighDateTimeCreated,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwLowDateTimeConnected,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwHighDateTimeConnected);
+        
+        DECLSPEC_XFGVIRT(INetwork, get_IsConnectedToInternet)
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsConnectedToInternet )( 
+            __RPC__in INetwork2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pbIsConnected);
+        
+        DECLSPEC_XFGVIRT(INetwork, get_IsConnected)
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsConnected )( 
+            __RPC__in INetwork2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pbIsConnected);
+        
+        DECLSPEC_XFGVIRT(INetwork, GetConnectivity)
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetConnectivity )( 
+            __RPC__in INetwork2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NLM_CONNECTIVITY *pConnectivity);
+        
+        DECLSPEC_XFGVIRT(INetwork, GetCategory)
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetCategory )( 
+            __RPC__in INetwork2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NLM_NETWORK_CATEGORY *pCategory);
+        
+        DECLSPEC_XFGVIRT(INetwork, SetCategory)
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetCategory )( 
+            __RPC__in INetwork2 * This,
+            /* [annotation][in] */ 
+            _In_  NLM_NETWORK_CATEGORY NewCategory);
+        
+        DECLSPEC_XFGVIRT(INetwork2, IsDomainAuthenticatedBy)
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsDomainAuthenticatedBy )( 
+            __RPC__in INetwork2 * This,
+            /* [annotation][in] */ 
+            _In_  NLM_DOMAIN_AUTHENTICATION_KIND domainAuthenticationKind,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *pValue);
+        
+        END_INTERFACE
+    } INetwork2Vtbl;
+
+    interface INetwork2
+    {
+        CONST_VTBL struct INetwork2Vtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define INetwork2_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define INetwork2_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define INetwork2_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define INetwork2_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define INetwork2_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define INetwork2_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define INetwork2_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define INetwork2_GetName(This,pszNetworkName)	\
+    ( (This)->lpVtbl -> GetName(This,pszNetworkName) ) 
+
+#define INetwork2_SetName(This,szNetworkNewName)	\
+    ( (This)->lpVtbl -> SetName(This,szNetworkNewName) ) 
+
+#define INetwork2_GetDescription(This,pszDescription)	\
+    ( (This)->lpVtbl -> GetDescription(This,pszDescription) ) 
+
+#define INetwork2_SetDescription(This,szDescription)	\
+    ( (This)->lpVtbl -> SetDescription(This,szDescription) ) 
+
+#define INetwork2_GetNetworkId(This,pgdGuidNetworkId)	\
+    ( (This)->lpVtbl -> GetNetworkId(This,pgdGuidNetworkId) ) 
+
+#define INetwork2_GetDomainType(This,pNetworkType)	\
+    ( (This)->lpVtbl -> GetDomainType(This,pNetworkType) ) 
+
+#define INetwork2_GetNetworkConnections(This,ppEnumNetworkConnection)	\
+    ( (This)->lpVtbl -> GetNetworkConnections(This,ppEnumNetworkConnection) ) 
+
+#define INetwork2_GetTimeCreatedAndConnected(This,pdwLowDateTimeCreated,pdwHighDateTimeCreated,pdwLowDateTimeConnected,pdwHighDateTimeConnected)	\
+    ( (This)->lpVtbl -> GetTimeCreatedAndConnected(This,pdwLowDateTimeCreated,pdwHighDateTimeCreated,pdwLowDateTimeConnected,pdwHighDateTimeConnected) ) 
+
+#define INetwork2_get_IsConnectedToInternet(This,pbIsConnected)	\
+    ( (This)->lpVtbl -> get_IsConnectedToInternet(This,pbIsConnected) ) 
+
+#define INetwork2_get_IsConnected(This,pbIsConnected)	\
+    ( (This)->lpVtbl -> get_IsConnected(This,pbIsConnected) ) 
+
+#define INetwork2_GetConnectivity(This,pConnectivity)	\
+    ( (This)->lpVtbl -> GetConnectivity(This,pConnectivity) ) 
+
+#define INetwork2_GetCategory(This,pCategory)	\
+    ( (This)->lpVtbl -> GetCategory(This,pCategory) ) 
+
+#define INetwork2_SetCategory(This,NewCategory)	\
+    ( (This)->lpVtbl -> SetCategory(This,NewCategory) ) 
+
+
+#define INetwork2_IsDomainAuthenticatedBy(This,domainAuthenticationKind,pValue)	\
+    ( (This)->lpVtbl -> IsDomainAuthenticatedBy(This,domainAuthenticationKind,pValue) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __INetwork2_INTERFACE_DEFINED__ */
+
+
 #ifndef __IEnumNetworks_INTERFACE_DEFINED__
 #define __IEnumNetworks_INTERFACE_DEFINED__
 
@@ -1536,6 +1837,221 @@ EXTERN_C const IID IID_INetworkConnection;
 
 
 #endif 	/* __INetworkConnection_INTERFACE_DEFINED__ */
+
+
+#ifndef __INetworkConnection2_INTERFACE_DEFINED__
+#define __INetworkConnection2_INTERFACE_DEFINED__
+
+/* interface INetworkConnection2 */
+/* [dual][unique][oleautomation][object][helpstring][uuid] */ 
+
+
+EXTERN_C const IID IID_INetworkConnection2;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("00E676ED-5A35-4738-92EB-8581738D0F0A")
+    INetworkConnection2 : public INetworkConnection
+    {
+    public:
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IsDomainAuthenticatedBy( 
+            /* [annotation][in] */ 
+            _In_  NLM_DOMAIN_AUTHENTICATION_KIND domainAuthenticationKind,
+            /* [retval][out] */ __RPC__out BOOL *pValue) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct INetworkConnection2Vtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in INetworkConnection2 * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in INetworkConnection2 * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in INetworkConnection2 * This);
+        
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            __RPC__in INetworkConnection2 * This,
+            /* [annotation][out] */ 
+            _Out_  UINT *pctinfo);
+        
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            __RPC__in INetworkConnection2 * This,
+            /* [annotation][in] */ 
+            _In_  UINT iTInfo,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][out] */ 
+            _Out_  ITypeInfo **ppTInfo);
+        
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            __RPC__in INetworkConnection2 * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cNames)  DISPID *rgDispId);
+        
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            INetworkConnection2 * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        DECLSPEC_XFGVIRT(INetworkConnection, GetNetwork)
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetNetwork )( 
+            __RPC__in INetworkConnection2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  INetwork **ppNetwork);
+        
+        DECLSPEC_XFGVIRT(INetworkConnection, get_IsConnectedToInternet)
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsConnectedToInternet )( 
+            __RPC__in INetworkConnection2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pbIsConnected);
+        
+        DECLSPEC_XFGVIRT(INetworkConnection, get_IsConnected)
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsConnected )( 
+            __RPC__in INetworkConnection2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT_BOOL *pbIsConnected);
+        
+        DECLSPEC_XFGVIRT(INetworkConnection, GetConnectivity)
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetConnectivity )( 
+            __RPC__in INetworkConnection2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NLM_CONNECTIVITY *pConnectivity);
+        
+        DECLSPEC_XFGVIRT(INetworkConnection, GetConnectionId)
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetConnectionId )( 
+            __RPC__in INetworkConnection2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  GUID *pgdConnectionId);
+        
+        DECLSPEC_XFGVIRT(INetworkConnection, GetAdapterId)
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetAdapterId )( 
+            __RPC__in INetworkConnection2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  GUID *pgdAdapterId);
+        
+        DECLSPEC_XFGVIRT(INetworkConnection, GetDomainType)
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDomainType )( 
+            __RPC__in INetworkConnection2 * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  NLM_DOMAIN_TYPE *pDomainType);
+        
+        DECLSPEC_XFGVIRT(INetworkConnection2, IsDomainAuthenticatedBy)
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsDomainAuthenticatedBy )( 
+            __RPC__in INetworkConnection2 * This,
+            /* [annotation][in] */ 
+            _In_  NLM_DOMAIN_AUTHENTICATION_KIND domainAuthenticationKind,
+            /* [retval][out] */ __RPC__out BOOL *pValue);
+        
+        END_INTERFACE
+    } INetworkConnection2Vtbl;
+
+    interface INetworkConnection2
+    {
+        CONST_VTBL struct INetworkConnection2Vtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define INetworkConnection2_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define INetworkConnection2_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define INetworkConnection2_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define INetworkConnection2_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define INetworkConnection2_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define INetworkConnection2_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define INetworkConnection2_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define INetworkConnection2_GetNetwork(This,ppNetwork)	\
+    ( (This)->lpVtbl -> GetNetwork(This,ppNetwork) ) 
+
+#define INetworkConnection2_get_IsConnectedToInternet(This,pbIsConnected)	\
+    ( (This)->lpVtbl -> get_IsConnectedToInternet(This,pbIsConnected) ) 
+
+#define INetworkConnection2_get_IsConnected(This,pbIsConnected)	\
+    ( (This)->lpVtbl -> get_IsConnected(This,pbIsConnected) ) 
+
+#define INetworkConnection2_GetConnectivity(This,pConnectivity)	\
+    ( (This)->lpVtbl -> GetConnectivity(This,pConnectivity) ) 
+
+#define INetworkConnection2_GetConnectionId(This,pgdConnectionId)	\
+    ( (This)->lpVtbl -> GetConnectionId(This,pgdConnectionId) ) 
+
+#define INetworkConnection2_GetAdapterId(This,pgdAdapterId)	\
+    ( (This)->lpVtbl -> GetAdapterId(This,pgdAdapterId) ) 
+
+#define INetworkConnection2_GetDomainType(This,pDomainType)	\
+    ( (This)->lpVtbl -> GetDomainType(This,pDomainType) ) 
+
+
+#define INetworkConnection2_IsDomainAuthenticatedBy(This,domainAuthenticationKind,pValue)	\
+    ( (This)->lpVtbl -> IsDomainAuthenticatedBy(This,domainAuthenticationKind,pValue) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __INetworkConnection2_INTERFACE_DEFINED__ */
 
 
 #ifndef __IEnumNetworkConnections_INTERFACE_DEFINED__
@@ -2311,15 +2827,15 @@ NetworkListManager;
 #endif
 #endif /* __NETWORKLIST_LIBRARY_DEFINED__ */
 
-/* interface __MIDL_itf_netlistmgr_0000_0013 */
+/* interface __MIDL_itf_netlistmgr_0000_0015 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 
 
-extern RPC_IF_HANDLE __MIDL_itf_netlistmgr_0000_0013_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_netlistmgr_0000_0013_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_netlistmgr_0000_0015_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_netlistmgr_0000_0015_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

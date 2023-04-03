@@ -71,30 +71,33 @@ namespace Windows
             namespace Provider
             {
                 [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
+                [deprecated("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)]
                 [exclusiveto(Windows.ApplicationModel.Calls.Provider.PhoneCallOrigin)]
                 [uuid(20613479-0EF9-4454-871C-AFB66A14B6A5)]
                 interface IPhoneCallOrigin : IInspectable
                 {
-                    [propget] HRESULT Category([out] [retval] HSTRING* value);
-                    [propput] HRESULT Category([in] HSTRING value);
-                    [propget] HRESULT CategoryDescription([out] [retval] HSTRING* value);
-                    [propput] HRESULT CategoryDescription([in] HSTRING value);
-                    [propget] HRESULT Location([out] [retval] HSTRING* value);
-                    [propput] HRESULT Location([in] HSTRING value);
+                    [deprecated("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)] [propget] HRESULT Category([out] [retval] HSTRING* value);
+                    [deprecated("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)] [propput] HRESULT Category([in] HSTRING value);
+                    [deprecated("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)] [propget] HRESULT CategoryDescription([out] [retval] HSTRING* value);
+                    [deprecated("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)] [propput] HRESULT CategoryDescription([in] HSTRING value);
+                    [deprecated("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)] [propget] HRESULT Location([out] [retval] HSTRING* value);
+                    [deprecated("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)] [propput] HRESULT Location([in] HSTRING value);
                 }
 
                 [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 2.0)]
+                [deprecated("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)]
                 [exclusiveto(Windows.ApplicationModel.Calls.Provider.PhoneCallOrigin)]
                 [uuid(04C7E980-9AC2-4768-B536-B68DA4957D02)]
                 interface IPhoneCallOrigin2 : IInspectable
                     requires
                         Windows.ApplicationModel.Calls.Provider.IPhoneCallOrigin
                 {
-                    [propget] HRESULT DisplayName([out] [retval] HSTRING* value);
-                    [propput] HRESULT DisplayName([in] HSTRING value);
+                    [deprecated("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)] [propget] HRESULT DisplayName([out] [retval] HSTRING* value);
+                    [deprecated("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)] [propput] HRESULT DisplayName([in] HSTRING value);
                 }
 
                 [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 3.0)]
+                [deprecated("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)]
                 [exclusiveto(Windows.ApplicationModel.Calls.Provider.PhoneCallOrigin)]
                 [uuid(49330FB4-D1A7-43A2-AEEE-C07B6DBAF068)]
                 interface IPhoneCallOrigin3 : IInspectable
@@ -102,40 +105,44 @@ namespace Windows
                         Windows.ApplicationModel.Calls.Provider.IPhoneCallOrigin2,
                         Windows.ApplicationModel.Calls.Provider.IPhoneCallOrigin
                 {
-                    [propget] HRESULT DisplayPicture([out] [retval] Windows.Storage.StorageFile** value);
-                    [propput] HRESULT DisplayPicture([in] Windows.Storage.StorageFile* value);
+                    [deprecated("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)] [propget] HRESULT DisplayPicture([out] [retval] Windows.Storage.StorageFile** value);
+                    [deprecated("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)] [propput] HRESULT DisplayPicture([in] Windows.Storage.StorageFile* value);
                 }
 
                 [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
+                [deprecated("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)]
                 [exclusiveto(Windows.ApplicationModel.Calls.Provider.PhoneCallOriginManager)]
                 [uuid(CCFC5A0A-9AF7-6149-39D0-E076FCCE1395)]
                 interface IPhoneCallOriginManagerStatics : IInspectable
                 {
-                    [propget] HRESULT IsCurrentAppActiveCallOriginApp([out] [retval] boolean* value);
-                    HRESULT ShowPhoneCallOriginSettingsUI();
-                    HRESULT SetCallOrigin([in] GUID requestId, [in] Windows.ApplicationModel.Calls.Provider.PhoneCallOrigin* callOrigin);
+                    [deprecated("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)] [propget] HRESULT IsCurrentAppActiveCallOriginApp([out] [retval] boolean* value);
+                    [deprecated("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)] HRESULT ShowPhoneCallOriginSettingsUI();
+                    [deprecated("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)] HRESULT SetCallOrigin([in] GUID requestId, [in] Windows.ApplicationModel.Calls.Provider.PhoneCallOrigin* callOrigin);
                 }
 
                 [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 3.0)]
+                [deprecated("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)]
                 [exclusiveto(Windows.ApplicationModel.Calls.Provider.PhoneCallOriginManager)]
                 [uuid(8BF3EE3F-40F4-4380-8C7C-AEA2C9B8DD7A)]
                 interface IPhoneCallOriginManagerStatics2 : IInspectable
                     requires
                         Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics
                 {
-                    HRESULT RequestSetAsActiveCallOriginAppAsync([out] [retval] Windows.Foundation.IAsyncOperation<boolean>** result);
+                    [deprecated("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)] HRESULT RequestSetAsActiveCallOriginAppAsync([out] [retval] Windows.Foundation.IAsyncOperation<boolean>** result);
                 }
 
                 [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 5.0)]
+                [deprecated("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)]
                 [exclusiveto(Windows.ApplicationModel.Calls.Provider.PhoneCallOriginManager)]
                 [uuid(2ED69764-A6E3-50F0-B76A-D67CB39BDFDE)]
                 interface IPhoneCallOriginManagerStatics3 : IInspectable
                 {
-                    [propget] HRESULT IsSupported([out] [retval] boolean* value);
+                    [deprecated("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)] [propget] HRESULT IsSupported([out] [retval] boolean* value);
                 }
 
                 [activatable(Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
                 [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
+                [deprecated("PhoneCallOrigin is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)]
                 [marshaling_behavior(agile)]
                 [threading(both)]
                 runtimeclass PhoneCallOrigin
@@ -146,6 +153,7 @@ namespace Windows
                 }
 
                 [contract(Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
+                [deprecated("PhoneCallOriginManager is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)]
                 [marshaling_behavior(agile)]
                 [static(Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics, Windows.ApplicationModel.Calls.CallsPhoneContract, 1.0)]
                 [static(Windows.ApplicationModel.Calls.Provider.IPhoneCallOriginManagerStatics2, Windows.ApplicationModel.Calls.CallsPhoneContract, 3.0)]

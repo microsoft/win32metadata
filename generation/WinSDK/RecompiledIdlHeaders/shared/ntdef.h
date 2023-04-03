@@ -284,7 +284,7 @@ Abstract:
 #define SYSTEM_CACHE_ALIGNMENT_SIZE X86_CACHE_ALIGNMENT_SIZE
 #elif defined(_ARM64_) || defined(_ARM_)
 #define SYSTEM_CACHE_ALIGNMENT_SIZE ARM_CACHE_ALIGNMENT_SIZE
-#else
+#elif !defined(RC_INVOKED)
 #error Must define a target architecture.
 #endif
 #endif // SYSTEM_CACHE_ALIGNMENT_SIZE
@@ -2482,11 +2482,11 @@ typedef _Enum_is_bitflag_ enum _SUITE_TYPE {
 #define PRODUCT_LITE                                0x000000BD
 #define PRODUCT_IOTENTERPRISES                      0x000000BF
 #define PRODUCT_XBOX_SYSTEMOS                       0x000000C0
-#define PRODUCT_XBOX_NATIVEOS                       0x000000C1
 #define PRODUCT_XBOX_GAMEOS                         0x000000C2
 #define PRODUCT_XBOX_ERAOS                          0x000000C3
 #define PRODUCT_XBOX_DURANGOHOSTOS                  0x000000C4
 #define PRODUCT_XBOX_SCARLETTHOSTOS                 0x000000C5
+#define PRODUCT_XBOX_KEYSTONE                       0x000000C6
 #define PRODUCT_AZURE_SERVER_CLOUDHOST              0x000000C7
 #define PRODUCT_AZURE_SERVER_CLOUDMOS               0x000000C8
 #define PRODUCT_CLOUDEDITIONN                       0x000000CA

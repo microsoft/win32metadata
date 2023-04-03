@@ -24,16 +24,6 @@ Revision History:
 #include <winapifamily.h>
 
 
-////////////////////////////////////////////////////////////////////////////////
-//
-// Code generator definitions
-//
-
-#ifndef __WRAPPED__
-#define __WRAPPED__
-#endif
-
-
 #pragma region Desktop Family or OneCore Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 
@@ -458,7 +448,7 @@ typedef struct _DISK_COPY_DATA_PARAMETERS {
 // Define the media types supported by the driver.
 //
 
-typedef enum __WRAPPED__ _MEDIA_TYPE {
+typedef enum _MEDIA_TYPE {
     Unknown,                // Format is unknown
     F5_1Pt2_512,            // 5.25", 1.2MB,  512 bytes/sector
     F3_1Pt44_512,           // 3.5",  1.44MB, 512 bytes/sector
@@ -532,21 +522,16 @@ typedef struct _FORMAT_EX_PARAMETERS {
 // request.
 //
 
-typedef struct __WRAPPED__ _DISK_GEOMETRY {
+typedef struct _DISK_GEOMETRY {
 
-    __WRAPPED__
     LARGE_INTEGER Cylinders;
 
-    __WRAPPED__
     MEDIA_TYPE MediaType;
 
-    __WRAPPED__
     ULONG TracksPerCylinder;
 
-    __WRAPPED__
     ULONG SectorsPerTrack;
 
-    __WRAPPED__
     ULONG BytesPerSector;
 
 } DISK_GEOMETRY, *PDISK_GEOMETRY;
@@ -647,7 +632,7 @@ typedef struct _REASSIGN_BLOCKS_EX {
 // do with a RAW partititon.
 //
 
-typedef enum __WRAPPED__ _PARTITION_STYLE {
+typedef enum _PARTITION_STYLE {
     PARTITION_STYLE_MBR,
     PARTITION_STYLE_GPT,
     PARTITION_STYLE_RAW
@@ -659,18 +644,14 @@ typedef enum __WRAPPED__ _PARTITION_STYLE {
 // not common to both GPT and MBR partitions.
 //
 
-typedef struct __WRAPPED__ _PARTITION_INFORMATION_GPT {
+typedef struct _PARTITION_INFORMATION_GPT {
 
-    __WRAPPED__
     GUID PartitionType;                 // Partition type. See table 16-3.
 
-    __WRAPPED__
     GUID PartitionId;                   // Unique GUID for this partition.
 
-    __WRAPPED__
     ULONG64 Attributes;                 // See table 16-4.
 
-    __WRAPPED__
     WCHAR Name [36];                    // Partition Name in Unicode.
 
 } PARTITION_INFORMATION_GPT, *PPARTITION_INFORMATION_GPT;
@@ -709,22 +690,17 @@ typedef struct __WRAPPED__ _PARTITION_INFORMATION_GPT {
 // common to both GPT and MBR partitions.
 //
 
-typedef struct __WRAPPED__ _PARTITION_INFORMATION_MBR {
+typedef struct _PARTITION_INFORMATION_MBR {
 
-    __WRAPPED__
     UCHAR PartitionType;
 
-    __WRAPPED__
     BOOLEAN BootIndicator;
 
-    __WRAPPED__
     BOOLEAN RecognizedPartition;
 
-    __WRAPPED__
     ULONG HiddenSectors;
 
 #if (NTDDI_VERSION >= NTDDI_WINBLUE)    /* ABRACADABRA_THRESHOLD */
-    __WRAPPED__
     GUID PartitionId;
 #endif
 
@@ -797,34 +773,26 @@ typedef struct _GET_LENGTH_INFORMATION {
 // IOCTL_DISK_GET_PARTITION_INFO_EX and IOCTL_DISK_SET_PARTITION_INFO_EX calls.
 //
 
-typedef struct __WRAPPED__ _PARTITION_INFORMATION_EX {
+typedef struct _PARTITION_INFORMATION_EX {
 
-    __WRAPPED__
     PARTITION_STYLE PartitionStyle;
 
-    __WRAPPED__
     LARGE_INTEGER StartingOffset;
 
-    __WRAPPED__
     LARGE_INTEGER PartitionLength;
 
-    __WRAPPED__
     ULONG PartitionNumber;
 
-    __WRAPPED__
     BOOLEAN RewritePartition;
 
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)  /* ABRACADABRA_WIN10_RS3 */
-    __WRAPPED__
     BOOLEAN IsServicePartition;
 #endif
 
     union {
 
-        __WRAPPED__
         PARTITION_INFORMATION_MBR Mbr;
 
-        __WRAPPED__
         PARTITION_INFORMATION_GPT Gpt;
 
     } DUMMYUNIONNAME;
@@ -836,18 +804,14 @@ typedef struct __WRAPPED__ _PARTITION_INFORMATION_EX {
 // GPT specific drive layout information.
 //
 
-typedef struct __WRAPPED__ _DRIVE_LAYOUT_INFORMATION_GPT {
+typedef struct _DRIVE_LAYOUT_INFORMATION_GPT {
 
-    __WRAPPED__
     GUID DiskId;
 
-    __WRAPPED__
     LARGE_INTEGER StartingUsableOffset;
 
-    __WRAPPED__
     LARGE_INTEGER UsableLength;
 
-    __WRAPPED__
     ULONG MaxPartitionCount;
 
 } DRIVE_LAYOUT_INFORMATION_GPT, *PDRIVE_LAYOUT_INFORMATION_GPT;
@@ -857,9 +821,8 @@ typedef struct __WRAPPED__ _DRIVE_LAYOUT_INFORMATION_GPT {
 // MBR specific drive layout information.
 //
 
-typedef struct __WRAPPED__ _DRIVE_LAYOUT_INFORMATION_MBR {
+typedef struct _DRIVE_LAYOUT_INFORMATION_MBR {
 
-    __WRAPPED__
     ULONG Signature;
 
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS1)  /* ABRACADABRA_WIN10_RS1 */
@@ -873,25 +836,20 @@ typedef struct __WRAPPED__ _DRIVE_LAYOUT_INFORMATION_MBR {
 // IOCTL_SET_DRIVE_LAYOUT_EX and IOCTL_GET_DRIVE_LAYOUT_EX calls.
 //
 
-typedef struct __WRAPPED__ _DRIVE_LAYOUT_INFORMATION_EX {
+typedef struct _DRIVE_LAYOUT_INFORMATION_EX {
 
-    __WRAPPED__
     ULONG PartitionStyle;
 
-    __WRAPPED__
     ULONG PartitionCount;
 
     union {
 
-        __WRAPPED__
         DRIVE_LAYOUT_INFORMATION_MBR Mbr;
 
-        __WRAPPED__
         DRIVE_LAYOUT_INFORMATION_GPT Gpt;
 
     } DUMMYUNIONNAME;
 
-    __WRAPPED__
     PARTITION_INFORMATION_EX PartitionEntry[1];
 
 } DRIVE_LAYOUT_INFORMATION_EX, *PDRIVE_LAYOUT_INFORMATION_EX;

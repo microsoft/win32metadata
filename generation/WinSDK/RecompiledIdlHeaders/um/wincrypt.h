@@ -667,6 +667,7 @@ typedef ULONG_PTR HCRYPTHASH;
 #endif //(NTDDI_VERSION >= NTDDI_VISTA)
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
 #define PP_DISMISS_PIN_UI_SEC   49
+#define PP_IS_PFX_EPHEMERAL     50
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS5)
 
 // certenrolld_begin -- PROV_RSA_*
@@ -1667,6 +1668,8 @@ typedef struct _CRYPT_ALGORITHM_IDENTIFIER {
 
 #define szOID_TIMESTAMP_TOKEN           "1.2.840.113549.1.9.16.1.4"
 #define szOID_RFC3161_counterSign "1.3.6.1.4.1.311.3.3.1"
+#define szOID_RFC3161v21_counterSign "1.3.6.1.4.1.311.3.3.2"
+#define szOID_RFC3161v21_thumbprints "1.3.6.1.4.1.311.3.3.3"
 
 #define szOID_RSA_SMIMEalg              "1.2.840.113549.1.9.16.3"
 #define szOID_RSA_SMIMEalgESDH          "1.2.840.113549.1.9.16.3.5"
@@ -3286,6 +3289,8 @@ CryptDecodeObject(
 //  Object Identifiers for use with the MS Directory Service
 //--------------------------------------------------------------------------
 #define szOID_NTDS_REPLICATION      "1.3.6.1.4.1.311.25.1"
+#define szOID_NTDS_CA_SECURITY_EXT  "1.3.6.1.4.1.311.25.2"    // OID arc for Microsoft CA custom security extension
+#define szOID_NTDS_OBJECTSID        "1.3.6.1.4.1.311.25.2.1"  // OID for objectSid info
 
 
 //+-------------------------------------------------------------------------
@@ -3588,10 +3593,14 @@ CryptDecodeObject(
 //  AMD                     "AMD"   0x41 0x4D 0x44 0x00
 //  Atmel                   "ATML"  0x41 0x54 0x4D 0x4C
 //  Broadcom                "BRCM"  0x42 0x52 0x43 0x4D
+//  Cisco                   "CSCO"  0x43 0x53 0x43 0x4F
+//  Flyslice Technologies   "FLYS"  0x46 0x4C 0x59 0x53
+//  HPE                     "HPE"   0x48 0x50 0x45 0x00
 //  IBM                     "IBM"   0x49 0x42 0x4d 0x00
 //  Infineon                "IFX"   0x49 0x46 0x58 0x00
 //  Intel                   "INTC"  0x49 0x4E 0x54 0x43
 //  Lenovo                  "LEN"   0x4C 0x45 0x4E 0x00
+//  Microsoft               "MSFT"  0x4D 0x53 0x46 0x54
 //  National Semiconductor  "NSM "  0x4E 0x53 0x4D 0x20
 //  Nationz                 "NTZ"   0x4E 0x54 0x5A 0x00
 //  Nuvoton Technology      "NTC"   0x4E 0x54 0x43 0x00
@@ -3603,8 +3612,10 @@ CryptDecodeObject(
 //  Texas Instruments       "TXN"   0x54 0x58 0x4E 0x00
 //  Winbond                 "WEC"   0x57 0x45 0x43 0x00
 //  Fuzhou Rockchip         "ROCC"  0x52 0x4F 0x43 0x43
+//  Google                  "GOOG"  0x47 0x4F 0x4F 0x47
+//  VMWare                  "VMW"   0x56 0x4D 0x57 0x00
 //
-// Obtained from: https://trustedcomputinggroup.org/wp-content/uploads/Vendor_ID_Registry_0-8_clean.pdf
+// Obtained from: https://trustedcomputinggroup.org/wp-content/uploads/TCG-TPM-Vendor-ID-Registry-Version-1.02-Revision-1.00.pdf
 
 #define szOID_CT_CERT_SCTLIST               "1.3.6.1.4.1.11129.2.4.2" // OCTET string
 
@@ -9175,8 +9186,9 @@ typedef const CTL_CONTEXT *PCCTL_CONTEXT;
 #define CERT_CLR_DELETE_KEY_PROP_ID            125
 #define CERT_NOT_BEFORE_FILETIME_PROP_ID       126
 #define CERT_NOT_BEFORE_ENHKEY_USAGE_PROP_ID   127
+#define CERT_DISALLOWED_CA_FILETIME_PROP_ID    128
 
-#define CERT_FIRST_RESERVED_PROP_ID            128
+#define CERT_FIRST_RESERVED_PROP_ID            129
 
 #define CERT_LAST_RESERVED_PROP_ID          0x00007FFF
 #define CERT_FIRST_USER_PROP_ID             0x00008000
@@ -9267,6 +9279,9 @@ typedef enum CertKeyType WINCRYPT_DWORD_CPP_ONLY
 // Use szOID_CERT_PROP_ID(CERT_DISALLOWED_FILETIME_PROP_ID) instead:
 #define szOID_CERT_DISALLOWED_FILETIME_PROP_ID \
                                             "1.3.6.1.4.1.311.10.11.104"
+// Use szOID_CERT_PROP_ID(CERT_DISALLOWED_CA_FILETIME_PROP_ID) instead:
+#define szOID_CERT_DISALLOWED_CA_FILETIME_PROP_ID \
+                                            "1.3.6.1.4.1.311.10.11.128"
 
 //+-------------------------------------------------------------------------
 //  Access State flags returned by CERT_ACCESS_STATE_PROP_ID. Note,
@@ -19411,6 +19426,10 @@ typedef struct _CERT_TRUST_STATUS {
 #define CERT_TRUST_IS_CA_TRUSTED                        0x00004000
 #define CERT_TRUST_HAS_AUTO_UPDATE_WEAK_SIGNATURE       0x00008000
 #define CERT_TRUST_HAS_ALLOW_WEAK_SIGNATURE             0x00020000
+
+// Following is set if the input time is before the
+// DISALLOWED_CA_FILETIME.
+#define CERT_TRUST_BEFORE_DISALLOWED_CA_FILETIME        0x00200000
 #endif
 
 // These can be applied to chains only
@@ -19734,6 +19753,12 @@ typedef struct _CERT_CHAIN_PARA {
 // option to click through. First for SHA1. In the future
 // for RSA < 2048 bits.
 #define CERT_CHAIN_OPT_IN_WEAK_SIGNATURE            0x00010000
+
+// The following flag should be set when the caller is prepared
+// to match the returned chain context elements when
+// CERT_TRUST_BEFORE_DISALLOWED_CA_FILETIME is set in the
+// dwInfoStatus.
+#define CERT_CHAIN_ENABLE_DISALLOWED_CA             0x00020000
 
 WINCRYPT32API
 _Success_(return != FALSE)

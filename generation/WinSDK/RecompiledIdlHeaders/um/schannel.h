@@ -1127,6 +1127,26 @@ SslGetExtensions(
     _Out_ DWORD* bytesToRead,
     _In_ SchGetExtensionsOptions flags
 );
+
+typedef SECURITY_STATUS
+(WINAPI * SslDeserializeCertificateStoreFn)
+(
+    _In_ CERT_BLOB SerializedCertificateStore,
+    _Outptr_result_maybenull_ PCCERT_CONTEXT *ppCertContext
+);
+
+// Deserializes the certificate store provided by QueryContextAttributes for
+// SECPKG_ATTR_SERIALIZED_REMOTE_CERT_CONTEXT[_INPROC]. The certificate context of the remote peer's
+// leaf certificate is returned. The caller must free *ppCertContext when done by calling
+// CertFreeCertificateContext.
+EXTERN_C
+SECURITY_STATUS
+WINAPI
+SslDeserializeCertificateStore(
+    _In_ CERT_BLOB SerializedCertificateStore,
+    _Outptr_result_maybenull_ PCCERT_CONTEXT *ppCertContext
+);
+
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_19H1)
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */

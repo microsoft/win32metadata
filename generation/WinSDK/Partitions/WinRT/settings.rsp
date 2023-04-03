@@ -3,7 +3,6 @@ HANDLE_OPTIONS=uint
 --with-attribute
 HANDLE_OPTIONS=Flags
 --exclude
-PFNGETACTIVATIONFACTORY
 RO_REGISTRATION_COOKIE
 RoGetActivatableClassRegistration
 RoErrorReportingFlags
@@ -17,10 +16,12 @@ ID2D1Factory
 <IncludeRoot>/um/CastingInterop.h
 <IncludeRoot>/um/dispatcherqueue.h
 <IncludeRoot>/um/dragdropinterop.h
+<IncludeRoot>/um/IMessageDispatcher.h
 <IncludeRoot>/um/inputpaneinterop.h
 <IncludeRoot>/um/PlayToManagerInterop.h
 <IncludeRoot>/um/RemoteSystemsInterop.h
 <IncludeRoot>/um/restrictederrorinfo.h
+<IncludeRoot>/um/sharewindowcommandsourceinterop.h
 <IncludeRoot>/um/SystemMediaTransportControlsInterop.h
 <IncludeRoot>/um/UIViewSettingsInterop.h
 <IncludeRoot>/um/useractivityinterop.h
@@ -34,15 +35,9 @@ ID2D1Factory
 <IncludeRoot>/winrt/roapi.h
 <IncludeRoot>/winrt/robuffer.h
 <IncludeRoot>/winrt/roerrorapi.h
-<IncludeRoot>/winrt/rometadata.h
-<IncludeRoot>/winrt/RoMetadataApi.h
-<IncludeRoot>/winrt/rometadataresolution.h
-<IncludeRoot>/winrt/roparameterizediid.h
 <IncludeRoot>/winrt/roregistrationapi.h
 <IncludeRoot>/winrt/shcore.h
 <IncludeRoot>/winrt/weakreference.h
 <IncludeRoot>/winrt/winstring.h
-<IncludeRoot>/um/sharewindowcommandsourceinterop.h
-<IncludeRoot>/um/IMessageDispatcher.h
 --namespace
 Windows.Win32.System.WinRT

@@ -4,20 +4,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>Windows.Win32.Interop</RootNamespace>
     <AssemblyName>Windows.Win32.Interop</AssemblyName>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <NoWarn>1701;1702;0649</NoWarn>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <NoWarn>1701;1702;0649</NoWarn>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Update="Nerdbank.GitVersioning" Version="3.5.113" />
-  </ItemGroup>
-
 </Project>

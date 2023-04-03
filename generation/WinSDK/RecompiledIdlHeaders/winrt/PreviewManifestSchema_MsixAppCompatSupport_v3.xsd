@@ -106,18 +106,18 @@
     <xs:complexType name="CT_Logging">
       <xs:attribute name="AutoBackup" type="xs:boolean" use="optional" />
       <xs:attribute name="Retention" type="xs:boolean" use="optional" />
-      <xs:attribute name="MaxSize" type="ST_UInt64" use="optional" />
+      <xs:attribute name="MaxSize" type="t:ST_UInt64" use="optional" />
     </xs:complexType>
 
     <xs:complexType name="CT_Publishing">
-      <xs:attribute name="Level" type="ST_UInt8" use="optional" />
-      <xs:attribute name="Keywords" type="ST_UInt64" use="optional" />
+      <xs:attribute name="Level" type="t:ST_UInt8" use="optional" />
+      <xs:attribute name="Keywords" type="t:ST_UInt64" use="optional" />
       <xs:attribute name="ControlGuid" type="t:ST_GUID" use="optional" />
-      <xs:attribute name="BufferSize" type="ST_UInt32" use="optional" />
-      <xs:attribute name="FileMax" type="ST_UInt32" use="optional" />
-      <xs:attribute name="MinBuffers" type="ST_UInt32" use="optional" />
-      <xs:attribute name="MaxBuffers" type="ST_UInt32" use="optional" />
-      <xs:attribute name="Latency" type="ST_UInt32" use="optional" />
+      <xs:attribute name="BufferSize" type="t:ST_UInt32" use="optional" />
+      <xs:attribute name="FileMax" type="t:ST_UInt32" use="optional" />
+      <xs:attribute name="MinBuffers" type="t:ST_UInt32" use="optional" />
+      <xs:attribute name="MaxBuffers" type="t:ST_UInt32" use="optional" />
+      <xs:attribute name="Latency" type="t:ST_UInt32" use="optional" />
       <xs:attribute name="ClockType" type="ST_ClockType" default="systemTime" use="optional" />
       <xs:attribute name="SidType" type="ST_SidType" use="optional" />
     </xs:complexType>
@@ -163,35 +163,5 @@
       </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="ST_HexInt8">
-        <xs:restriction base="xs:string">
-            <xs:pattern value="0[xX][0-9A-Fa-f]{1,2}"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="ST_HexInt32">
-      <xs:restriction base="xs:string">
-        <xs:pattern value="0[xX][0-9A-Fa-f]{1,8}"/>
-      </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="ST_HexInt64">
-      <xs:restriction base="xs:string">
-        <xs:pattern value="0[xX][0-9A-Fa-f]{1,16}"/>
-      </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="ST_UInt8">
-      <xs:union memberTypes="xs:unsignedByte ST_HexInt8"/>
-    </xs:simpleType>
-
-    <xs:simpleType name="ST_UInt32">
-      <xs:union memberTypes="xs:unsignedInt ST_HexInt32"/>
-    </xs:simpleType>
-
-    <xs:simpleType name="ST_UInt64">
-      <xs:union memberTypes="xs:unsignedLong ST_HexInt64"/>
-    </xs:simpleType>
-    
 </xs:schema>
 

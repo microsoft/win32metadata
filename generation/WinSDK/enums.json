@@ -717,47 +717,42 @@
   },
   {
     "name": "SHOW_WINDOW_CMD",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "SW_",
-      "header": "WinUser.h"
-    },
     "members": [
-      {
-        "name": "SW_FORCEMINIMIZE",
-        "value": "11"
-      },
       {
         "name": "SW_HIDE",
         "value": "0"
       },
       {
-        "name": "SW_MAXIMIZE",
-        "value": "3"
+        "name": "SW_SHOWNORMAL",
+        "value": "1"
       },
       {
-        "name": "SW_MINIMIZE",
-        "value": "6"
+        "name": "SW_NORMAL",
+        "value": "1"
       },
       {
-        "name": "SW_RESTORE",
-        "value": "9"
-      },
-      {
-        "name": "SW_SHOW",
-        "value": "5"
-      },
-      {
-        "name": "SW_SHOWDEFAULT",
-        "value": "10"
+        "name": "SW_SHOWMINIMIZED",
+        "value": "2"
       },
       {
         "name": "SW_SHOWMAXIMIZED",
         "value": "3"
       },
       {
-        "name": "SW_SHOWMINIMIZED",
-        "value": "2"
+        "name": "SW_MAXIMIZE",
+        "value": "3"
+      },
+      {
+        "name": "SW_SHOWNOACTIVATE",
+        "value": "4"
+      },
+      {
+        "name": "SW_SHOW",
+        "value": "5"
+      },
+      {
+        "name": "SW_MINIMIZE",
+        "value": "6"
       },
       {
         "name": "SW_SHOWMINNOACTIVE",
@@ -768,12 +763,20 @@
         "value": "8"
       },
       {
-        "name": "SW_SHOWNOACTIVATE",
-        "value": "4"
+        "name": "SW_RESTORE",
+        "value": "9"
       },
       {
-        "name": "SW_SHOWNORMAL",
-        "value": "1"
+        "name": "SW_SHOWDEFAULT",
+        "value": "10"
+      },
+      {
+        "name": "SW_FORCEMINIMIZE",
+        "value": "11"
+      },
+      {
+        "name": "SW_MAX",
+        "value": "11"
       }
     ],
     "uses": [
@@ -786,17 +789,102 @@
         "parameter": "nCmdShow"
       },
       {
+        "method": "ShellExecuteW",
+        "parameter": "nShowCmd"
+      },
+      {
         "struct": "WINDOWPLACEMENT",
         "field": "showCmd"
+      },
+      {
+        "interface": "IShellLinkW",
+        "method": "SetShowCmd",
+        "parameter": "iShowCmd"
+      },
+      {
+        "interface": "IShellLinkW",
+        "method": "GetShowCmd",
+        "parameter": "piShowCmd"
+      },
+      {
+        "interface": "IShellLinkA",
+        "method": "SetShowCmd",
+        "parameter": "iShowCmd"
+      },
+      {
+        "interface": "IShellLinkA",
+        "method": "GetShowCmd",
+        "parameter": "piShowCmd"
+      },
+      {
+        "interface": "IPropertyPage",
+        "method": "Show",
+        "parameter": "nCmdShow"
+      },
+      {
+        "interface": "ITfFnConfigure",
+        "method": "Show",
+        "parameter": "nCmdShow"
+      },
+      {
+        "interface": "IVideoWindow",
+        "method": "get_WindowState",
+        "parameter": "WindowState"
+      }
+    ]
+  },
+  {
+    "name": "SHOW_WINDOW_STATUS",
+    "namespace": "Windows.Win32.UI.WindowsAndMessaging",
+    "members": [
+      {
+        "name": "SW_PARENTCLOSING",
+        "value": "1"
+      },
+      {
+        "name": "SW_OTHERZOOM",
+        "value": "2"
+      },
+      {
+        "name": "SW_PARENTOPENING",
+        "value": "3"
+      },
+      {
+        "name": "SW_OTHERUNZOOM",
+        "value": "4"
+      }
+    ]
+  },
+  {
+    "name": "SCROLL_WINDOW_FLAGS",
+    "flags": true,
+    "members": [
+      {
+        "name": "SW_SCROLLCHILDREN",
+        "value": "1"
+      },
+      {
+        "name": "SW_INVALIDATE",
+        "value": "2"
+      },
+      {
+        "name": "SW_ERASE",
+        "value": "4"
+      },
+      {
+        "name": "SW_SMOOTHSCROLL",
+        "value": "16"
+      }
+    ],
+    "uses": [
+      {
+        "method": "ScrollWindowEx",
+        "parameter": "flags"
       },
       {
         "interface": "ITextHost",
         "method": "TxScrollWindowEx",
         "parameter": "fuScroll"
-      },
-      {
-        "method": "ScrollWindowEx",
-        "parameter": "flags"
       }
     ]
   },
@@ -922,6 +1010,10 @@
     "members": [],
     "uses": [
       {
+        "struct": "WINDOWINFO",
+        "field": "dwExStyle"
+      },
+      {
         "method": "CreateWindowExA",
         "parameter": "dwExStyle"
       },
@@ -967,6 +1059,10 @@
       {
         "struct": "MDICREATESTRUCTW",
         "field": "style"
+      },
+      {
+        "struct": "WINDOWINFO",
+        "field": "dwStyle"
       },
       {
         "struct": "MDICREATESTRUCTA",
@@ -1720,6 +1816,7 @@
     ]
   },
   {
+    "namespace": "Windows.Win32.System.Memory",
     "name": "SECTION_FLAGS",
     "flags": true,
     "autoPopulate": {
@@ -1729,7 +1826,7 @@
     "members": [
       {
         "name": "SECTION_ALL_ACCESS",
-        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.STANDARD_RIGHTS_REQUIRED|SECTION_QUERY|SECTION_MAP_WRITE|SECTION_MAP_READ|SECTION_MAP_EXECUTE|SECTION_EXTEND_SIZE)"
+        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.STANDARD_RIGHTS_REQUIRED|SECTION_QUERY|SECTION_MAP_WRITE|SECTION_MAP_READ|SECTION_MAP_EXECUTE|SECTION_EXTEND_SIZE)"
       }
     ],
     "uses": []
@@ -2419,10 +2516,6 @@
       {
         "method": "ReOpenFile",
         "parameter": "dwShareMode"
-      },
-      {
-        "method": "NtCreateFile",
-        "parameter": "ShareAccess"
       }
     ]
   },
@@ -4022,7 +4115,7 @@
     "type": "uint",
     "name": "WIN32_ERROR",
     "autoPopulate": {
-      "filter": "ERROR_|DNS_ERROR_",
+      "filter": "ERROR_|DNS_ERROR_|APPMODEL_ERROR_",
       "header": "winerror.h"
     },
     "members": [
@@ -4131,6 +4224,21 @@
     "name": "NTSTATUS_FACILITY_CODE",
     "autoPopulate": {
       "filter": "FACILITY_",
+      "header": "ntstatus.h"
+    },
+    "members": [
+      {
+        "name": "FACILITY_MCA_ERROR_CODE"
+      }
+    ],
+    "uses": []
+  },
+  {
+    "namespace": "Windows.Win32.Foundation",
+    "type": "uint",
+    "name": "NTSTATUS_SEVERITY_CODE",
+    "autoPopulate": {
+      "filter": "STATUS_SEVERITY_",
       "header": "ntstatus.h"
     },
     "members": [],
@@ -5287,8 +5395,9 @@
     ]
   },
   {
-    "name": "ADDRESS_FAMILY",
     "namespace": "Windows.Win32.Networking.WinSock",
+    "name": "ADDRESS_FAMILY",
+    "type": "ushort",
     "members": [
       {
         "name": "AF_INET",
@@ -5303,32 +5412,7 @@
         "value": "0"
       }
     ],
-    "uses": [
-      {
-        "method": "GetUdpStatisticsEx2",
-        "parameter": "Family"
-      },
-      {
-        "method": "GetIpStatisticsEx",
-        "parameter": "Family"
-      },
-      {
-        "method": "GetTcpStatisticsEx2",
-        "parameter": "Family"
-      },
-      {
-        "method": "GetTcpStatisticsEx",
-        "parameter": "Family"
-      },
-      {
-        "method": "GetUdpStatisticsEx",
-        "parameter": "Family"
-      },
-      {
-        "method": "GetAdaptersAddresses",
-        "parameter": "Family"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "WORD_BREAK_ACTION",
@@ -5419,10 +5503,6 @@
       {
         "method": "SetThreadErrorMode",
         "parameter": "dwNewMode"
-      },
-      {
-        "method": "SetThreadErrorMode",
-        "parameter": "lpOldMode"
       },
       {
         "method": "SetErrorMode",
@@ -5870,6 +5950,7 @@
   },
   {
     "name": "EMBED_FONT_CHARSET",
+    "type": "uint",
     "members": [
       {
         "name": "CHARSET_UNICODE"
@@ -5890,14 +5971,6 @@
       {
         "method": "TTEmbedFontFromFileA",
         "parameter": "ulCharSet"
-      },
-      {
-        "struct": "CHARFORMATA",
-        "field": "bCharSet"
-      },
-      {
-        "struct": "CHARFORMATW",
-        "field": "bCharSet"
       }
     ]
   },
@@ -5990,26 +6063,6 @@
       {
         "method": "CreateNamedPipeW",
         "parameter": "dwPipeMode"
-      }
-    ]
-  },
-  {
-    "name": "INTERNET_PORT",
-    "members": [
-      {
-        "name": "INTERNET_DEFAULT_HTTP_PORT"
-      },
-      {
-        "name": "INTERNET_DEFAULT_HTTPS_PORT"
-      },
-      {
-        "name": "INTERNET_DEFAULT_PORT"
-      }
-    ],
-    "uses": [
-      {
-        "method": "WinHttpConnect",
-        "parameter": "nServerPort"
       }
     ]
   },
@@ -9306,9 +9359,12 @@
     ]
   },
   {
-    "name": "NCRYPT_FLAGS",
+    "name": "BCRYPT_FLAGS",
     "flags": true,
     "members": [
+      {
+        "name": "BCRYPT_BLOCK_PADDING"
+      },
       {
         "name": "BCRYPT_PAD_NONE"
       },
@@ -9320,7 +9376,31 @@
       },
       {
         "name": "BCRYPT_PAD_PSS"
+      }
+    ],
+    "uses": [
+      {
+        "method": "BCryptDecrypt",
+        "parameter": "dwFlags"
       },
+      {
+        "method": "BCryptEncrypt",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "BCryptVerifySignature",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "BCryptSignHash",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "NCRYPT_FLAGS",
+    "flags": true,
+    "members": [
       {
         "name": "NCRYPT_SILENT_FLAG"
       },
@@ -9368,22 +9448,6 @@
       }
     ],
     "uses": [
-      {
-        "method": "BCryptDecrypt",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "BCryptEncrypt",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "BCryptVerifySignature",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "BCryptSignHash",
-        "parameter": "dwFlags"
-      },
       {
         "method": "NCryptDecrypt",
         "parameter": "dwFlags"
@@ -11702,7 +11766,7 @@
     ]
   },
   {
-    "name": "POWER_SETTING_REGISTER_NOTIFICATION_FLAGS",
+    "name": "REGISTER_NOTIFICATION_FLAGS",
     "members": [
       {
         "name": "DEVICE_NOTIFY_SERVICE_HANDLE",
@@ -11714,11 +11778,14 @@
       {
         "name": "DEVICE_NOTIFY_WINDOW_HANDLE",
         "value": "0"
+      },
+      {
+        "name": "DEVICE_NOTIFY_ALL_INTERFACE_CLASSES"
       }
     ],
     "uses": [
       {
-        "method": "PowerSettingRegisterNotification",
+        "method": "RegisterDeviceNotificationA",
         "parameter": "Flags"
       },
       {
@@ -11726,7 +11793,15 @@
         "parameter": "Flags"
       },
       {
-        "method": "RegisterDeviceNotificationA",
+        "method": "RegisterSuspendResumeNotification",
+        "parameter": "Flags"
+      },
+      {
+        "method": "PowerSettingRegisterNotification",
+        "parameter": "Flags"
+      },
+      {
+        "method": "PowerRegisterSuspendResumeNotification",
         "parameter": "Flags"
       }
     ]
@@ -13208,6 +13283,7 @@
   },
   {
     "name": "IMAGE_DIRECTORY_ENTRY",
+    "type": "ushort",
     "members": [
       {
         "name": "IMAGE_DIRECTORY_ENTRY_ARCHITECTURE",
@@ -13738,6 +13814,14 @@
       {
         "struct": "DLGTEMPLATEEX",
         "field": "charset"
+      },
+      {
+        "struct": "CHARFORMATA",
+        "field": "bCharSet"
+      },
+      {
+        "struct": "CHARFORMATW",
+        "field": "bCharSet"
       }
     ]
   },
@@ -16143,35 +16227,6 @@
       {
         "method": "CertSrvBackupPrepareW",
         "parameter": "dwBackupFlags"
-      }
-    ]
-  },
-  {
-    "name": "NT_CREATE_FILE_DISPOSITION",
-    "members": [
-      {
-        "name": "FILE_SUPERSEDE"
-      },
-      {
-        "name": "FILE_CREATE"
-      },
-      {
-        "name": "FILE_OPEN"
-      },
-      {
-        "name": "FILE_OPEN_IF"
-      },
-      {
-        "name": "FILE_OVERWRITE"
-      },
-      {
-        "name": "FILE_OVERWRITE_IF"
-      }
-    ],
-    "uses": [
-      {
-        "method": "NtCreateFile",
-        "parameter": "CreateDisposition"
       }
     ]
   },
@@ -19383,7 +19438,7 @@
     ]
   },
   {
-    "name": "DEVICE_CAPABILITIES",
+    "name": "PRINTER_DEVICE_CAPABILITIES",
     "type": "ushort",
     "members": [
       {
@@ -22895,30 +22950,6 @@
       {
         "struct": "IKEEXT_PRESHARED_KEY_AUTHENTICATION1",
         "field": "flags"
-      }
-    ]
-  },
-  {
-    "name": "MOUSEHOOKSTRUCTEX_MOUSE_DATA",
-    "flags": true,
-    "members": [
-      {
-        "name": "XBUTTON1",
-        "value": "1"
-      },
-      {
-        "name": "XBUTTON2",
-        "value": "2"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "MOUSEHOOKSTRUCTEX",
-        "field": "mouseData"
-      },
-      {
-        "struct": "MSLLHOOKSTRUCT",
-        "field": "mouseData"
       }
     ]
   },
@@ -29444,7 +29475,7 @@
     ],
     "uses": [
       {
-        "method": "K32EnumProcessModulesEx",
+        "method": "EnumProcessModulesEx",
         "parameter": "dwFilterFlag"
       }
     ]
@@ -29721,6 +29752,57 @@
       {
         "name": "VK_Z",
         "value": "0x5A"
+      },
+      {
+        "name": "VK_ABNT_C1"
+      },
+      {
+        "name": "VK_ABNT_C2"
+      },
+      {
+        "name": "VK_DBE_ALPHANUMERIC"
+      },
+      {
+        "name": "VK_DBE_CODEINPUT"
+      },
+      {
+        "name": "VK_DBE_DBCSCHAR"
+      },
+      {
+        "name": "VK_DBE_DETERMINESTRING"
+      },
+      {
+        "name": "VK_DBE_ENTERDLGCONVERSIONMODE"
+      },
+      {
+        "name": "VK_DBE_ENTERIMECONFIGMODE"
+      },
+      {
+        "name": "VK_DBE_ENTERWORDREGISTERMODE"
+      },
+      {
+        "name": "VK_DBE_FLUSHSTRING"
+      },
+      {
+        "name": "VK_DBE_HIRAGANA"
+      },
+      {
+        "name": "VK_DBE_KATAKANA"
+      },
+      {
+        "name": "VK_DBE_NOCODEINPUT"
+      },
+      {
+        "name": "VK_DBE_NOROMAN"
+      },
+      {
+        "name": "VK_DBE_ROMAN"
+      },
+      {
+        "name": "VK_DBE_SBCSCHAR"
+      },
+      {
+        "name": "VK__none_"
       }
     ],
     "uses": [
@@ -30149,10 +30231,6 @@
       {
         "struct": "PIXELFORMATDESCRIPTOR",
         "field": "iPixelType"
-      },
-      {
-        "method": "DescribePixelFormat",
-        "parameter": "iPixelFormat"
       }
     ]
   },
@@ -30298,6 +30376,10 @@
       {
         "name": "ISC_REQ_DEFERRED_CRED_VALIDATION",
         "value": "0x0000000200000000"
+      },
+      {
+        "name": "ISC_REQ_NO_POST_HANDSHAKE_AUTH",
+        "value": "0x0000000400000000"
       }
     ]
   },
@@ -30305,7 +30387,7 @@
     "name": "ISC_REQ_FLAGS",
     "flags": true,
     "autoPopulate": {
-      "filter": "ISC_REQ_(?!MESSAGES|DEFERRED_CRED_VALIDATION)",
+      "filter": "ISC_REQ_(?!MESSAGES|DEFERRED_CRED_VALIDATION|NO_POST_HANDSHAKE_AUTH)",
       "header": "sspi.h"
     },
     "members": [],
@@ -30979,10 +31061,6 @@
       {
         "struct": "BITMAPV5HEADER",
         "field": "bV5Compression"
-      },
-      {
-        "struct": "BITMAPINFOHEADER",
-        "field": "biCompression"
       },
       {
         "struct": "BITMAPV4HEADER",
@@ -32173,8 +32251,34 @@
       "filter": "DESKTOP_",
       "header": "WinUser.h"
     },
-    "members": [],
-    "uses": []
+    "members": [
+      {
+        "name": "DESKTOP_DELETE",
+        "value": "(0x00010000)"
+      },
+      {
+        "name": "DESKTOP_READ_CONTROL",
+        "value": "(0x00020000)"
+      },
+      {
+        "name": "DESKTOP_WRITE_DAC",
+        "value": "(0x00040000)"
+      },
+      {
+        "name": "DESKTOP_WRITE_OWNER",
+        "value": "(0x00080000)"
+      },
+      {
+        "name": "DESKTOP_SYNCHRONIZE",
+        "value": "(0x00100000)"
+      }
+    ],
+    "uses": [
+      {
+        "method": "OpenInputDesktop",
+        "parameter": "dwDesiredAccess"
+      }
+    ]
   },
   {
     "name": "ACTIVEOBJECT_FLAGS",
@@ -32202,11 +32306,11 @@
     "uses": [
       {
         "struct": "OLEUIBUSYA",
-        "parameter": "dwFlags"
+        "field": "dwFlags"
       },
       {
         "struct": "OLEUIBUSYW",
-        "parameter": "dwFlags"
+        "field": "dwFlags"
       }
     ]
   },
@@ -32373,7 +32477,7 @@
       {
         "interface": "ITypeInfo",
         "method": "Invoke",
-        "field": "wFlags"
+        "parameter": "wFlags"
       }
     ]
   },
@@ -32390,12 +32494,12 @@
       {
         "interface": "ITypeInfo",
         "method": "GetImplTypeFlags",
-        "field": "pImplTypeFlags"
+        "parameter": "pImplTypeFlags"
       },
       {
-        "interface": "ITypeInfo",
+        "interface": "ICreateTypeInfo",
         "method": "SetImplTypeFlags",
-        "field": "ImplTypeFlags"
+        "parameter": "implTypeFlags"
       }
     ]
   },
@@ -34712,6 +34816,7 @@
   },
   {
     "name": "PAN_FAMILY_TYPE",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_FAMILY_",
       "header": "wingdi.h"
@@ -34735,6 +34840,7 @@
   },
   {
     "name": "PAN_SERIF_STYLE",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_SERIF_",
       "header": "wingdi.h"
@@ -34758,6 +34864,7 @@
   },
   {
     "name": "PAN_WEIGHT",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_WEIGHT_",
       "header": "wingdi.h"
@@ -34781,6 +34888,7 @@
   },
   {
     "name": "PAN_STROKE_VARIATION",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_STROKE_",
       "header": "wingdi.h"
@@ -34804,6 +34912,7 @@
   },
   {
     "name": "PAN_PROPORTION",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_PROP_",
       "header": "wingdi.h"
@@ -34827,6 +34936,7 @@
   },
   {
     "name": "PAN_CONTRAST",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_CONTRAST_",
       "header": "wingdi.h"
@@ -34850,6 +34960,7 @@
   },
   {
     "name": "PAN_ARM_STYLE",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_STRAIGHT_|PAN_BENT_",
       "header": "wingdi.h"
@@ -34873,6 +34984,7 @@
   },
   {
     "name": "PAN_LETT_FORM",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_LETT_",
       "header": "wingdi.h"
@@ -34896,6 +35008,7 @@
   },
   {
     "name": "PAN_MIDLINE",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_MIDLINE_",
       "header": "wingdi.h"
@@ -34919,6 +35032,7 @@
   },
   {
     "name": "PAN_XHEIGHT",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_XHEIGHT_",
       "header": "wingdi.h"
@@ -35381,53 +35495,6 @@
     ]
   },
   {
-    "namespace": "Windows.Win32.UI.Controls.Dialogs",
-    "name": "COMMON_DIALOG_NOTIFICATION",
-    "type": "int",
-    "members": [
-      {
-        "name": "CDN_FIRST",
-        "value": "-601"
-      },
-      {
-        "name": "CDN_LAST",
-        "value": "-699"
-      },
-      {
-        "name": "CDN_INITDONE",
-        "value": "-601"
-      },
-      {
-        "name": "CDN_SELCHANGE",
-        "value": "-602"
-      },
-      {
-        "name": "CDN_FOLDERCHANGE",
-        "value": "-603"
-      },
-      {
-        "name": "CDN_SHAREVIOLATION",
-        "value": "-604"
-      },
-      {
-        "name": "CDN_HELP",
-        "value": "-605"
-      },
-      {
-        "name": "CDN_FILEOK",
-        "value": "-606"
-      },
-      {
-        "name": "CDN_TYPECHANGE",
-        "value": "-607"
-      },
-      {
-        "name": "CDN_INCLUDEITEM",
-        "value": "-608"
-      }
-    ]
-  },
-  {
     "type": "uint",
     "name": "DXGI_USAGE",
     "flags": true,
@@ -35454,22 +35521,6 @@
     ]
   },
   {
-    "namespace": "Windows.Win32.Foundation",
-    "name": "VARIANT_BOOL",
-    "type": "short",
-    "members": [
-      {
-        "name": "VARIANT_TRUE",
-        "value": "-1"
-      },
-      {
-        "name": "VARIANT_FALSE",
-        "value": "0"
-      }
-    ],
-    "uses": []
-  },
-  {
     "name": "HTML_HELP_COMMAND",
     "autoPopulate": {
       "filter": "HH_",
@@ -35483,6 +35534,507 @@
       {
         "method": "HtmlHelpA",
         "parameter": "uCommand"
+      }
+    ]
+  },
+  {
+    "name": "COMPRESSION_FORMAT",
+    "type": "ushort",
+    "autoPopulate": {
+      "filter": "COMPRESSION_FORMAT_",
+      "header": "winnt.h"
+    },
+    "uses": [
+      {
+        "struct": "FILE_COMPRESSION_INFO",
+        "field": "CompressionFormat"
+      }
+    ]
+  },
+  {
+    "name": "SECURITY_DESCRIPTOR_CONTROL",
+    "type": "ushort",
+    "flags": true,
+    "members": [
+      {
+        "name": "SE_OWNER_DEFAULTED"
+      },
+      {
+        "name": "SE_GROUP_DEFAULTED"
+      },
+      {
+        "name": "SE_DACL_PRESENT"
+      },
+      {
+        "name": "SE_DACL_DEFAULTED"
+      },
+      {
+        "name": "SE_SACL_PRESENT"
+      },
+      {
+        "name": "SE_SACL_DEFAULTED"
+      },
+      {
+        "name": "SE_DACL_AUTO_INHERIT_REQ"
+      },
+      {
+        "name": "SE_SACL_AUTO_INHERIT_REQ"
+      },
+      {
+        "name": "SE_DACL_AUTO_INHERITED"
+      },
+      {
+        "name": "SE_SACL_AUTO_INHERITED"
+      },
+      {
+        "name": "SE_DACL_PROTECTED"
+      },
+      {
+        "name": "SE_SACL_PROTECTED"
+      },
+      {
+        "name": "SE_RM_CONTROL_VALID"
+      },
+      {
+        "name": "SE_SELF_RELATIVE"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "SECURITY_DESCRIPTOR",
+        "field": "Control"
+      },
+      {
+        "struct": "SECURITY_DESCRIPTOR_RELATIVE",
+        "field": "Control"
+      }
+    ]
+  },
+  {
+    "name": "MAP_VIRTUAL_KEY_TYPE",
+    "autoPopulate": {
+      "filter": "MAPVK_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "method": "MapVirtualKeyA",
+        "parameter": "uMapType"
+      },
+      {
+        "method": "MapVirtualKeyExA",
+        "parameter": "uMapType"
+      },
+      {
+        "method": "MapVirtualKeyW",
+        "parameter": "uMapType"
+      },
+      {
+        "method": "MapVirtualKeyExW",
+        "parameter": "uMapType"
+      }
+    ]
+  },
+  {
+    "name": "FILE_TYPE",
+    "autoPopulate": {
+      "filter": "FILE_TYPE_",
+      "header": "WinBase.h"
+    },
+    "uses": [
+      {
+        "method": "GetFileType",
+        "parameter": "return"
+      }
+    ]
+  },
+  {
+    "namespace": "Windows.Win32.System.RemoteDesktop",
+    "name": "WTS_SECURITY_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "WTS_SECURITY_",
+      "header": "wtsapi32.h"
+    },
+    "members": [
+      {
+        "name": "WTS_SECURITY_CURRENT_GUEST_ACCESS",
+        "value": "(WTS_SECURITY_VIRTUAL_CHANNELS | WTS_SECURITY_LOGOFF)"
+      },
+      {
+        "name": "WTS_SECURITY_USER_ACCESS",
+        "value": "(WTS_SECURITY_CURRENT_GUEST_ACCESS | WTS_SECURITY_QUERY_INFORMATION | WTS_SECURITY_CONNECT)"
+      },
+      {
+        "name": "WTS_SECURITY_CURRENT_USER_ACCESS",
+        "value": "(WTS_SECURITY_SET_INFORMATION | WTS_SECURITY_RESET | WTS_SECURITY_VIRTUAL_CHANNELS | WTS_SECURITY_LOGOFF | WTS_SECURITY_DISCONNECT)"
+      },
+      {
+        "name": "WTS_SECURITY_ALL_ACCESS",
+        "value": "(0x000F0000 | WTS_SECURITY_QUERY_INFORMATION | WTS_SECURITY_SET_INFORMATION | WTS_SECURITY_RESET | WTS_SECURITY_VIRTUAL_CHANNELS | WTS_SECURITY_REMOTE_CONTROL | WTS_SECURITY_LOGON | WTS_SECURITY_MESSAGE | WTS_SECURITY_CONNECT | WTS_SECURITY_DISCONNECT)"
+      }
+    ]
+  },
+  {
+    "name": "SET_DISPLAY_CONFIG_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "SDC_",
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "SDC_USE_DATABASE_CURRENT",
+        "value": "(SDC_TOPOLOGY_INTERNAL | SDC_TOPOLOGY_CLONE | SDC_TOPOLOGY_EXTEND | SDC_TOPOLOGY_EXTERNAL)"
+      }
+    ],
+    "uses": [
+      {
+        "method": "SetDisplayConfig",
+        "parameter": "flags"
+      }
+    ]
+  },
+  {
+    "name": "QUERY_DISPLAY_CONFIG_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "QDC_",
+      "header": "wingdi.h"
+    },
+    "uses": [
+      {
+        "method": "QueryDisplayConfig",
+        "parameter": "flags"
+      },
+      {
+        "method": "GetDisplayConfigBufferSizes",
+        "parameter": "flags"
+      }
+    ]
+  },
+  {
+    "name": "ENUM_DISPLAY_SETTINGS_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "EDS_",
+      "header": "winuser.h"
+    },
+    "uses": [
+      {
+        "method": "EnumDisplaySettingsExA",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "EnumDisplaySettingsExW",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "WINUSB_PIPE_POLICY",
+    "members": [
+      {
+        "name": "SHORT_PACKET_TERMINATE"
+      },
+      {
+        "name": "AUTO_CLEAR_STALL"
+      },
+      {
+        "name": "PIPE_TRANSFER_TIMEOUT"
+      },
+      {
+        "name": "IGNORE_SHORT_PACKETS"
+      },
+      {
+        "name": "ALLOW_PARTIAL_READS"
+      },
+      {
+        "name": "AUTO_FLUSH"
+      },
+      {
+        "name": "RAW_IO"
+      },
+      {
+        "name": "MAXIMUM_TRANSFER_SIZE"
+      },
+      {
+        "name": "RESET_PIPE_ON_RESUME"
+      }
+    ],
+    "uses": [
+      {
+        "method": "WinUsb_GetPipePolicy",
+        "parameter": "PolicyType"
+      },
+      {
+        "method": "WinUsb_SetPipePolicy",
+        "parameter": "PolicyType"
+      }
+    ]
+  },
+  {
+    "name": "WINUSB_POWER_POLICY",
+    "members": [
+      {
+        "name": "AUTO_SUSPEND"
+      },
+      {
+        "name": "SUSPEND_DELAY"
+      }
+    ],
+    "uses": [
+      {
+        "method": "WinUsb_GetPowerPolicy",
+        "parameter": "PolicyType"
+      },
+      {
+        "method": "WinUsb_SetPowerPolicy",
+        "parameter": "PolicyType"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "_SVGIO",
+    "members": [],
+    "uses": [
+      {
+        "interface": "IFolderView",
+        "method": "Items",
+        "parameter": "uFlags"
+      },
+      {
+        "interface": "IFolderView",
+        "method": "ItemCount",
+        "parameter": "uFlags"
+      },
+      {
+        "interface": "IShellView",
+        "method": "GetItemObject",
+        "parameter": "uItem"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "ShellWindowTypeConstants",
+    "members": [],
+    "uses": [
+      {
+        "interface": "IShellWindows",
+        "method": "FindWindowSW",
+        "parameter": "swClass"
+      },
+      {
+        "interface": "IShellWindows",
+        "method": "Register",
+        "parameter": "swClass"
+      },
+      {
+        "interface": "IShellWindows",
+        "method": "RegisterPending",
+        "parameter": "swClass"
+      },
+      {
+        "interface": "IBrowserService",
+        "method": "RegisterWindow",
+        "parameter": "swc"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "ShellWindowFindWindowOptions",
+    "members": [],
+    "uses": [
+      {
+        "interface": "IShellWindows",
+        "method": "FindWindowSW",
+        "parameter": "swfwOptions"
+      }
+    ]
+  },
+  {
+    "namespace": "Windows.Win32.Devices.Properties",
+    "name": "DEVPROPTYPE",
+    "autoPopulate": {
+      "filter": "DEVPROP_TYPE_",
+      "header": "devpropdef.h"
+    },
+    "uses": []
+  },
+  {
+    "addUsesTo": "CF_HYDRATION_POLICY_PRIMARY",
+    "members": [],
+    "uses": [
+      {
+        "struct": "CF_HYDRATION_POLICY",
+        "field": "Primary"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "CF_HYDRATION_POLICY_MODIFIER",
+    "members": [],
+    "uses": [
+      {
+        "struct": "CF_HYDRATION_POLICY",
+        "field": "Modifier"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "CF_POPULATION_POLICY_PRIMARY",
+    "members": [],
+    "uses": [
+      {
+        "struct": "CF_POPULATION_POLICY",
+        "field": "Primary"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "CF_POPULATION_POLICY_MODIFIER",
+    "members": [],
+    "uses": [
+      {
+        "struct": "CF_POPULATION_POLICY",
+        "field": "Modifier"
+      }
+    ]
+  },
+  {
+    "name": "WSAPOLL_EVENT_FLAGS",
+    "type": "short",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "POLL",
+      "header": "winsock2.h"
+    },
+    "uses": [
+      {
+        "struct": "WSAPOLLFD",
+        "field": "events"
+      },
+      {
+        "struct": "WSAPOLLFD",
+        "field": "revents"
+      }
+    ]
+  },
+  {
+    "name": "WINSOCK_SHUTDOWN_HOW",
+    "type": "int",
+    "autoPopulate": {
+      "filter": "SD_",
+      "header": "winsock2.h"
+    },
+    "uses": [
+      {
+        "method": "shutdown",
+        "parameter": "how"
+      }
+    ]
+  },
+  {
+    "name": "WINSOCK_SOCKET_TYPE",
+    "type": "int",
+    "members": [
+      {
+        "name": "SOCK_STREAM"
+      },
+      {
+        "name": "SOCK_DGRAM"
+      },
+      {
+        "name": "SOCK_RAW"
+      },
+      {
+        "name": "SOCK_RDM"
+      },
+      {
+        "name": "SOCK_SEQPACKET"
+      }
+    ],
+    "uses": [
+      {
+        "method": "socket",
+        "parameter": "type"
+      }
+    ]
+  },
+  {
+    "namespace": "Windows.Win32.System.MessageQueuing",
+    "name": "MQQUEUEACCESSMASK",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "MQSEC_",
+      "header": "mq.h"
+    },
+    "members": [
+      {
+        "name": "MQSEC_DELETE_QUEUE",
+        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.DELETE)"
+      },
+      {
+        "name": "MQSEC_GET_QUEUE_PERMISSIONS",
+        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.READ_CONTROL)"
+      },
+      {
+        "name": "MQSEC_CHANGE_QUEUE_PERMISSIONS",
+        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.WRITE_DAC)"
+      },
+      {
+        "name": "MQSEC_TAKE_QUEUE_OWNERSHIP",
+        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.WRITE_OWNER)"
+      },
+      {
+        "name": "MQSEC_RECEIVE_MESSAGE",
+        "value": "(MQSEC_DELETE_MESSAGE | MQSEC_PEEK_MESSAGE)"
+      },
+      {
+        "name": "MQSEC_RECEIVE_JOURNAL_MESSAGE",
+        "value": "(MQSEC_DELETE_JOURNAL_MESSAGE | MQSEC_PEEK_MESSAGE)"
+      },
+      {
+        "name": "MQSEC_QUEUE_GENERIC_READ",
+        "value": "(MQSEC_GET_QUEUE_PROPERTIES | MQSEC_GET_QUEUE_PERMISSIONS | MQSEC_RECEIVE_MESSAGE | MQSEC_RECEIVE_JOURNAL_MESSAGE)"
+      },
+      {
+        "name": "MQSEC_QUEUE_GENERIC_WRITE",
+        "value": "(MQSEC_GET_QUEUE_PROPERTIES | MQSEC_GET_QUEUE_PERMISSIONS | MQSEC_WRITE_MESSAGE)"
+      },
+      {
+        "name": "MQSEC_QUEUE_GENERIC_ALL",
+        "value": "(MQSEC_RECEIVE_MESSAGE | MQSEC_RECEIVE_JOURNAL_MESSAGE | MQSEC_WRITE_MESSAGE | MQSEC_SET_QUEUE_PROPERTIES | MQSEC_GET_QUEUE_PROPERTIES | MQSEC_DELETE_QUEUE | MQSEC_GET_QUEUE_PERMISSIONS | MQSEC_CHANGE_QUEUE_PERMISSIONS | MQSEC_TAKE_QUEUE_OWNERSHIP)"
+      }
+    ],
+    "uses": []
+  },
+  {
+    "namespace": "Windows.Win32.Foundation",
+    "name": "GENERIC_ACCESS_RIGHTS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "GENERIC_",
+      "header": "winnt.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "interface": "IWICImagingFactory",
+        "method": "CreateDecoderFromFilename",
+        "parameter": "dwDesiredAccess"
+      }
+    ]
+  },
+  {
+    "namespace": "Windows.Win32.System.ClrHosting",
+    "name": "EApiCategories",
+    "flags": true,
+    "uses": [
+      {
+        "interface": "ICLRHostProtectionManager",
+        "method": "SetProtectedCategories",
+        "parameter": "categories"
       }
     ]
   }

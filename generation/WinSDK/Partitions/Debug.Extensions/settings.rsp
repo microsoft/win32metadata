@@ -6,6 +6,7 @@ PDEBUG_ENTENSION_KNOWNSTRUCT
 --traverse
 <IncludeRoot>/um/DbgEng.h
 <IncludeRoot>/um/DbgModel.h
+<IncludeRoot>/um/extsfns.h
 <IncludeRoot>/um/WDBGEXTS.H
 --namespace
-Windows.Win32.System.Diagnostics.Debug
+Windows.Win32.System.Diagnostics.Debug.Extensions

@@ -56,7 +56,9 @@ extern "C" {
 #define URLCACHEAPI_(type) EXTERN_C type STDAPICALLTYPE
 #endif
 
+#ifndef BOOLAPI
 #define BOOLAPI INTERNETAPIX(BOOL, _Success_(return != FALSE))
+#endif
 
 //
 // internet types
@@ -284,6 +286,9 @@ typedef INTERNET_PORT * LPINTERNET_PORT;
 // INTERNET_SCHEME - enumerated URL scheme type
 //
 
+#ifndef _INTERNET_SCHEME_
+#define _INTERNET_SCHEME_
+
 typedef enum {
     INTERNET_SCHEME_PARTIAL = -2,
     INTERNET_SCHEME_UNKNOWN = -1,
@@ -302,6 +307,8 @@ typedef enum {
     INTERNET_SCHEME_FIRST = INTERNET_SCHEME_FTP,
     INTERNET_SCHEME_LAST = INTERNET_SCHEME_RES
 } INTERNET_SCHEME, * LPINTERNET_SCHEME;
+
+#endif
 
 //
 // INTERNET_ASYNC_RESULT - this structure is returned to the application via
@@ -479,10 +486,15 @@ typedef struct {
 // HTTP_VERSION_INFO - query or set global HTTP version (1.0 or 1.1)
 //
 
+#ifndef _HTTP_VERSION_INFO_
+#define _HTTP_VERSION_INFO_
+
 typedef struct {
     DWORD dwMajorVersion;
     DWORD dwMinorVersion;
-} HTTP_VERSION_INFO, * LPHTTP_VERSION_INFO;
+} HTTP_VERSION_INFO, * LPHTTP_VERSION_INFO, * PHTTP_VERSION_INFO;
+
+#endif
 
 //
 // INTERNET_CONNECTED_INFO - information used to set the global connected state
@@ -540,6 +552,9 @@ typedef struct {
 #endif
 #pragma warning( disable : 4121 )   // disable alignment warning
 
+#ifndef _URL_COMPONENTS_
+#define _URL_COMPONENTS_
+
 typedef struct {
     DWORD   dwStructSize;       // size of this structure. Used in version check
     LPSTR   lpszScheme;         // pointer to scheme name
@@ -581,6 +596,28 @@ typedef LPURL_COMPONENTSW LPURL_COMPONENTS;
 typedef URL_COMPONENTSA URL_COMPONENTS;
 typedef LPURL_COMPONENTSA LPURL_COMPONENTS;
 #endif // UNICODE
+
+#else
+
+typedef struct {
+    DWORD   dwStructSize;       // size of this structure. Used in version check
+    LPSTR   lpszScheme;         // pointer to scheme name
+    DWORD   dwSchemeLength;     // length of scheme name
+    INTERNET_SCHEME nScheme;    // enumerated scheme type (if known)
+    LPSTR   lpszHostName;       // pointer to host name
+    DWORD   dwHostNameLength;   // length of host name
+    INTERNET_PORT nPort;        // converted port number
+    LPSTR   lpszUserName;       // pointer to user name
+    DWORD   dwUserNameLength;   // length of user name
+    LPSTR   lpszPassword;       // pointer to password
+    DWORD   dwPasswordLength;   // length of password
+    LPSTR   lpszUrlPath;        // pointer to URL-path
+    DWORD   dwUrlPathLength;    // length of URL-path
+    LPSTR   lpszExtraInfo;      // pointer to extra information (e.g. ?foo or #foo)
+    DWORD   dwExtraInfoLength;  // length of extra information
+} URL_COMPONENTSA, * LPURL_COMPONENTSA;
+
+#endif
 
 #if _MSC_VER >= 1200
 #pragma warning(pop)
@@ -1237,8 +1274,10 @@ BOOLAPI InternetUnlockRequestFile(
 #define INTERNET_OPTION_COOKIES_SAME_SITE_LEVEL      187
 
 
+#define INTERNET_OPTION_REQUEST_ANNOTATION           193
+
 #define INTERNET_FIRST_OPTION                   INTERNET_OPTION_CALLBACK
-#define INTERNET_LAST_OPTION                    INTERNET_OPTION_COOKIES_SAME_SITE_LEVEL
+#define INTERNET_LAST_OPTION                    INTERNET_OPTION_REQUEST_ANNOTATION
 
 
 //
@@ -1264,6 +1303,8 @@ BOOLAPI InternetUnlockRequestFile(
 
 #define HTTP_PROTOCOL_FLAG_HTTP2 0x2
 #define HTTP_PROTOCOL_MASK (HTTP_PROTOCOL_FLAG_HTTP2)
+
+#define INTERNET_OPTION_REQUEST_ANNOTATION_MAX_LENGTH 0xFA00
 
 
 //
@@ -1322,24 +1363,21 @@ BOOLAPI InternetUnlockRequestFile(
 #define SECURITY_FLAG_128BIT                    SECURITY_FLAG_STRENGTH_STRONG
 #define SECURITY_FLAG_56BIT                     SECURITY_FLAG_STRENGTH_MEDIUM
 
-// setable flags
+// settable flags
 #define SECURITY_FLAG_IGNORE_REVOCATION         0x00000080
 #define SECURITY_FLAG_IGNORE_UNKNOWN_CA         0x00000100
 #define SECURITY_FLAG_IGNORE_WRONG_USAGE        0x00000200
+#define SECURITY_FLAG_IGNORE_CERT_CN_INVALID    0x00001000 //INTERNET_FLAG_IGNORE_CERT_CN_INVALID
+#define SECURITY_FLAG_IGNORE_CERT_DATE_INVALID  0x00002000 //INTERNET_FLAG_IGNORE_CERT_DATE_INVALID
+#define SECURITY_FLAG_IGNORE_REDIRECT_TO_HTTPS  0x00004000 //INTERNET_FLAG_IGNORE_REDIRECT_TO_HTTPS
+#define SECURITY_FLAG_IGNORE_REDIRECT_TO_HTTP   0x00008000 //INTERNET_FLAG_IGNORE_REDIRECT_TO_HTTP
 #define SECURITY_FLAG_IGNORE_WEAK_SIGNATURE     0x00010000
 
-#define SECURITY_FLAG_IGNORE_CERT_CN_INVALID    INTERNET_FLAG_IGNORE_CERT_CN_INVALID
-#define SECURITY_FLAG_IGNORE_CERT_DATE_INVALID  INTERNET_FLAG_IGNORE_CERT_DATE_INVALID
-
-
-#define SECURITY_FLAG_IGNORE_REDIRECT_TO_HTTPS  INTERNET_FLAG_IGNORE_REDIRECT_TO_HTTPS
-#define SECURITY_FLAG_IGNORE_REDIRECT_TO_HTTP   INTERNET_FLAG_IGNORE_REDIRECT_TO_HTTP
-
-#define SECURITY_SET_MASK       (SECURITY_FLAG_IGNORE_REVOCATION |\
-                                 SECURITY_FLAG_IGNORE_UNKNOWN_CA |\
-                                 SECURITY_FLAG_IGNORE_CERT_CN_INVALID |\
-                                 SECURITY_FLAG_IGNORE_CERT_DATE_INVALID |\
-                                 SECURITY_FLAG_IGNORE_WRONG_USAGE |\
+#define SECURITY_SET_MASK       (SECURITY_FLAG_IGNORE_REVOCATION | \
+                                 SECURITY_FLAG_IGNORE_UNKNOWN_CA | \
+                                 SECURITY_FLAG_IGNORE_WRONG_USAGE | \
+                                 SECURITY_FLAG_IGNORE_CERT_CN_INVALID | \
+                                 SECURITY_FLAG_IGNORE_CERT_DATE_INVALID | \
                                  SECURITY_FLAG_IGNORE_WEAK_SIGNATURE)
 
 #define SECURITY_FLAG_OPT_IN_WEAK_SIGNATURE     0x00020000

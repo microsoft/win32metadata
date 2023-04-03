@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -34,7 +34,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -371,6 +371,7 @@ enum _ATTRIBUTEID
         IAS_ATTRIBUTE_SERVER_IPv6_ADDRESS	= ( IAS_ATTRIBUTE_SERVER_IP_ADDRESS + 1 ) ,
         IAS_ATTRIBUTE_RADIUS_USERNAME_ENCODING_ASCII	= ( IAS_ATTRIBUTE_SERVER_IPv6_ADDRESS + 1 ) ,
         MS_ATTRIBUTE_RAS_ROUTING_DOMAIN_ID	= 8172,
+        MS_ATTRIBUTE_AZURE_POLICY_ID	= 8173,
         IAS_ATTRIBUTE_CERTIFICATE_THUMBPRINT	= 8250,
         RAS_ATTRIBUTE_ENCRYPTION_TYPE	= ( 0xffffffff - 89 ) ,
         RAS_ATTRIBUTE_ENCRYPTION_POLICY	= ( RAS_ATTRIBUTE_ENCRYPTION_TYPE + 1 ) ,

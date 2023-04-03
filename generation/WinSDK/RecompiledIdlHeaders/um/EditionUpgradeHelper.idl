@@ -120,10 +120,25 @@ interface IClipServiceNotificationHelper: IUnknown
     );
 };
 
+[
+object,
+dual,
+oleautomation,
+nonextensible,
+uuid(3D5E3D21-BD41-4C2A-A669-B17CE87FB50B)
+]
+interface IFClipNotificationHelper: IUnknown
+{
+    HRESULT
+    ShowSystemDialog(
+        [in, string]                    BSTR                                titleText,
+        [in, string]                    BSTR                                bodyText
+    );
+};
 
 [
 uuid(09C6A793-92DC-4D27-A11D-3921C9314DED),
-version(1.0),
+version(2.0),
 ]
 library EditionUpgradeHelperLib
 {
@@ -138,12 +153,14 @@ library EditionUpgradeHelperLib
 
     [
         uuid(C4270827-4F39-45DF-9288-12FF6B85A921),
+        version(2.0),
     ]
     coclass EditionUpgradeBroker
     {
         [default] interface IEditionUpgradeBroker;
         interface IContainerActivationHelper;
         interface IClipServiceNotificationHelper;
+        interface IFClipNotificationHelper;
     }
 
 };

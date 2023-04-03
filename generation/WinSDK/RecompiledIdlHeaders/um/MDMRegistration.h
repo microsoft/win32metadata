@@ -101,7 +101,9 @@ extern "C" {
 #define MREGISTER_E_DISCOVERY_FAILED                      MAKE_HRESULT(SEVERITY_ERROR, MDM_REGISTRATION_FACILITY_CODE, 14)
 
 // User already enrolled too many devices. Delete or unenroll old ones to fix this error (user can fix it without admin)
+#ifndef MENROLL_E_DEVICECAPREACHED
 #define MENROLL_E_DEVICECAPREACHED                        MAKE_HRESULT(SEVERITY_ERROR, DEVICE_ENROLLER_FACILITY_CODE, 19)
+#endif
 
 // Mobile device management generally not supported (would save an admin call)
 #define MENROLL_E_NOTSUPPORTED                            MAKE_HRESULT(SEVERITY_ERROR, DEVICE_ENROLLER_FACILITY_CODE, 21)
@@ -330,6 +332,27 @@ HRESULT indicating success or failure.
 HRESULT WINAPI
 RegisterDeviceWithManagementUsingAADDeviceCredentials2(_In_opt_ PCWSTR MDMApplicationID);
 
+/*++
+
+Routine Description:
+
+This function is used to register a MDM enrolled device to Mmpc synchronously.
+It will get MMPC information, including authentication device token from AAD
+
+Arguments:
+
+None
+
+Return Value:
+
+HRESULT indicating success or failure.
+
+--*/
+HRESULT WINAPI
+RegisterDeviceDualEnrollMmpcUsingAADDeviceCredentials(
+    _In_ DWORD cchEnrollmentId,
+    _Out_writes_(cchEnrollmentId) LPWSTR pszEnrollmentId
+    );
 
 /*++
 

@@ -536,6 +536,31 @@ HcnFreeGuestNetworkPortReservations(
     _Inout_opt_ HCN_PORT_RANGE_ENTRY* PortEntries
     );
 
+/////////////////////////////////////////////////////////////////////////
+/// Hcn Endpoint (added in NI)
+
+/// Query Endpoint stats
+
+HRESULT
+WINAPI
+HcnQueryEndpointStats(
+    _In_ HCN_ENDPOINT Endpoint,
+    _In_ PCWSTR Query,
+    _Outptr_ PWSTR* Stats,
+    _Outptr_opt_ PWSTR* ErrorRecord
+    );
+
+/// Query Endpoint addresses
+
+HRESULT
+WINAPI
+HcnQueryEndpointAddresses(
+    _In_ HCN_ENDPOINT Endpoint,
+    _In_ PCWSTR Query,
+    _Outptr_ PWSTR* Addresses,
+    _Outptr_opt_ PWSTR* ErrorRecord
+    );
+
 #ifdef __cplusplus
 }
 #endif
@@ -799,6 +824,18 @@ IsHcnEnumerateGuestNetworkPortReservationsPresent(
 BOOLEAN
 __stdcall
 IsHcnFreeGuestNetworkPortReservationsPresent(
+    VOID
+    );
+
+BOOLEAN
+__stdcall
+IsHcnQueryEndpointStatsPresent(
+    VOID
+    );
+
+BOOLEAN
+__stdcall
+IsHcnQueryEndpointAddressesPresent(
     VOID
     );
 

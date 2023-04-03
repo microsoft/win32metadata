@@ -376,6 +376,8 @@ namespace Windows
 
             typedef enum KnownVideoProfile KnownVideoProfile;
 
+            typedef enum MediaCaptureDeviceExclusiveControlReleaseMode MediaCaptureDeviceExclusiveControlReleaseMode;
+
             typedef enum MediaCaptureDeviceExclusiveControlStatus MediaCaptureDeviceExclusiveControlStatus;
 
             typedef enum MediaCaptureMemoryPreference MediaCaptureMemoryPreference;
@@ -1214,6 +1216,13 @@ namespace Windows
                 VideoHdr8             = 9,
                 [contract(Windows.Foundation.UniversalApiContract, 11.0)]
                 CompressedCamera      = 10
+            };
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            enum MediaCaptureDeviceExclusiveControlReleaseMode
+            {
+                OnDispose           = 0,
+                OnAllStreamsStopped = 1
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]

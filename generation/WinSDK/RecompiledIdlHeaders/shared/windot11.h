@@ -88,6 +88,7 @@ typedef enum _DOT11_PHY_TYPE {
     dot11_phy_type_vht = 8,                     // 11ac
     dot11_phy_type_dmg = 9,                     // 11ad
     dot11_phy_type_he = 10,                     // 11ax
+    dot11_phy_type_eht = 11,                    // 11be
     dot11_phy_type_IHV_start = 0x80000000,
     dot11_phy_type_IHV_end = 0xffffffff
 } DOT11_PHY_TYPE, * PDOT11_PHY_TYPE;

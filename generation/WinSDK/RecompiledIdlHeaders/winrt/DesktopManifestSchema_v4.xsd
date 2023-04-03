@@ -7,6 +7,7 @@
            xmlns:f="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
            xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
            xmlns:desktop5="http://schemas.microsoft.com/appx/manifest/desktop/windows10/5"
+           xmlns:desktop10="http://schemas.microsoft.com/appx/manifest/desktop/windows10/10"
            xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
            xmlns:uap11="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"
            >
@@ -14,6 +15,7 @@
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/types"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/foundation/windows10"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/5"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/10"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"/>
 
@@ -33,6 +35,7 @@
     <xs:sequence minOccurs="0" maxOccurs="10000">
       <xs:element name="ItemType" type="CT_ItemType" minOccurs="0"/>
       <xs:element ref="desktop5:ItemType" minOccurs="0"/>
+      <xs:element ref="desktop10:ItemType" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 

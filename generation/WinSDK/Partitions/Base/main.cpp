@@ -25,10 +25,8 @@
 #include <wct.h>
 #include <minidumpapiset.h>
 #include <winioctl.h>
-#include <ioevent.h>
 #include <storprop.h>
 #include <ioapiset.h>
-#include <dbt.h>
 #include <atlthunk.h>
 #include <lmserver.h>
 #include <windowsceip.h>
@@ -36,6 +34,5 @@
 
 #include <devpkey.h>
 #include <apdevpkey.h>
-#include <ntiologc.h>
 #include <dlnadeviceinterfaceids.h>
 #include <dlnametadataproviderproperties.h>

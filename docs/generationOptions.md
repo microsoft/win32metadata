@@ -117,7 +117,7 @@ This tells the emitter to add a member named CLSCTX_ALL to the enum CLSCTX with 
 DXGI_DEBUG_RLO_FLAGS
 ````
 
-This tells the emitter to add the [Flags] attribute and also to make the enum unsigned.
+This tells the emitter to add the [Flags] attribute.
 
 ## Creating enums from scraped constants
 

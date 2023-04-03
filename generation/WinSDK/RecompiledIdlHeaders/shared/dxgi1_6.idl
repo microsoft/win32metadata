@@ -180,6 +180,10 @@ interface IDXGIFactory7 :
 
 //--------------------------------------------------------------------------------------------------------
 
+cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_NI)" )
+cpp_quote( "HRESULT WINAPI DXGIDisableVBlankVirtualization();" )
+cpp_quote("#endif" )
+
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */")
 #pragma endregion
 

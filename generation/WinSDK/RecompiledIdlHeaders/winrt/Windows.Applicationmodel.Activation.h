@@ -108,7 +108,7 @@
 #endif // defined(WINDOWS_APPLICATIONMODEL_BACKGROUND_BACKGROUNDALARMAPPLICATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION)
-#define WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION 0x60000
+#define WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION 0x70000
 #endif // defined(WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION)
 
 #if !defined(WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION)
@@ -124,7 +124,7 @@
 #endif // defined(WINDOWS_APPLICATIONMODEL_SEARCH_SEARCHCONTRACT_VERSION)
 
 #if !defined(WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION)
-#define WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION 0x10000
+#define WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION 0x20000
 #endif // defined(WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION)
 
 #if !defined(WINDOWS_DEVICES_PRINTERS_EXTENSIONS_EXTENSIONSCONTRACT_VERSION)
@@ -136,11 +136,11 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION)
-#define WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION 0x60000
+#define WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION 0x70000
 #endif // defined(WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -4856,15 +4856,27 @@ namespace ABI {
         namespace ApplicationModel {
             namespace Activation {
                 MIDL_INTERFACE("fcfc027b-1a1a-4d22-923f-ae6f45fa52d9")
+#if WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
+                DEPRECATED("IWalletActionActivatedEventArgs is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
                 IWalletActionActivatedEventArgs : public IInspectable
                 {
                 public:
+#if WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
+                    DEPRECATED("IWalletActionActivatedEventArgs is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
                     virtual HRESULT STDMETHODCALLTYPE get_ItemId(
                         HSTRING* value
                         ) = 0;
+#if WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
+                    DEPRECATED("IWalletActionActivatedEventArgs is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
                     virtual HRESULT STDMETHODCALLTYPE get_ActionKind(
                         ABI::Windows::ApplicationModel::Wallet::WalletActionKind* value
                         ) = 0;
+#if WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
+                    DEPRECATED("IWalletActionActivatedEventArgs is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
                     virtual HRESULT STDMETHODCALLTYPE get_ActionId(
                         HSTRING* value
                         ) = 0;
@@ -5966,6 +5978,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_ApplicationModel_Activation_WalletActionActivatedEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_ApplicationModel_Activation_WalletActionActivatedEventArgs_DEFINED
+#if WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
+DEPRECATED("WalletActionActivatedEventArgs is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Activation_WalletActionActivatedEventArgs[] = L"Windows.ApplicationModel.Activation.WalletActionActivatedEventArgs";
 #endif
 #endif // WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x10000
@@ -12010,7 +12025,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CActivation_CIVoiceCom
 #if !defined(____x_ABI_CWindows_CApplicationModel_CActivation_CIWalletActionActivatedEventArgs_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CActivation_CIWalletActionActivatedEventArgs_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Activation_IWalletActionActivatedEventArgs[] = L"Windows.ApplicationModel.Activation.IWalletActionActivatedEventArgs";
-typedef struct __x_ABI_CWindows_CApplicationModel_CActivation_CIWalletActionActivatedEventArgsVtbl
+typedef struct
+#if WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
+DEPRECATED("IWalletActionActivatedEventArgs is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
+__x_ABI_CWindows_CApplicationModel_CActivation_CIWalletActionActivatedEventArgsVtbl
 {
     BEGIN_INTERFACE
 
@@ -12026,10 +12045,19 @@ typedef struct __x_ABI_CWindows_CApplicationModel_CActivation_CIWalletActionActi
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CActivation_CIWalletActionActivatedEventArgs* This,
         TrustLevel* trustLevel);
+#if WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
+    DEPRECATED("IWalletActionActivatedEventArgs is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
     HRESULT (STDMETHODCALLTYPE* get_ItemId)(__x_ABI_CWindows_CApplicationModel_CActivation_CIWalletActionActivatedEventArgs* This,
         HSTRING* value);
+#if WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
+    DEPRECATED("IWalletActionActivatedEventArgs is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
     HRESULT (STDMETHODCALLTYPE* get_ActionKind)(__x_ABI_CWindows_CApplicationModel_CActivation_CIWalletActionActivatedEventArgs* This,
         enum __x_ABI_CWindows_CApplicationModel_CWallet_CWalletActionKind* value);
+#if WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
+    DEPRECATED("IWalletActionActivatedEventArgs is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
     HRESULT (STDMETHODCALLTYPE* get_ActionId)(__x_ABI_CWindows_CApplicationModel_CActivation_CIWalletActionActivatedEventArgs* This,
         HSTRING* value);
 
@@ -12061,12 +12089,21 @@ interface __x_ABI_CWindows_CApplicationModel_CActivation_CIWalletActionActivated
 #define __x_ABI_CWindows_CApplicationModel_CActivation_CIWalletActionActivatedEventArgs_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
+    DEPRECATED("IWalletActionActivatedEventArgs is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
 #define __x_ABI_CWindows_CApplicationModel_CActivation_CIWalletActionActivatedEventArgs_get_ItemId(This, value) \
     ((This)->lpVtbl->get_ItemId(This, value))
 
+#if WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
+    DEPRECATED("IWalletActionActivatedEventArgs is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
 #define __x_ABI_CWindows_CApplicationModel_CActivation_CIWalletActionActivatedEventArgs_get_ActionKind(This, value) \
     ((This)->lpVtbl->get_ActionKind(This, value))
 
+#if WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
+    DEPRECATED("IWalletActionActivatedEventArgs is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
 #define __x_ABI_CWindows_CApplicationModel_CActivation_CIWalletActionActivatedEventArgs_get_ActionId(This, value) \
     ((This)->lpVtbl->get_ActionId(This, value))
 
@@ -13228,6 +13265,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_ApplicationModel_Activation_WalletActionActivatedEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_ApplicationModel_Activation_WalletActionActivatedEventArgs_DEFINED
+#if WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
+DEPRECATED("WalletActionActivatedEventArgs is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x20000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Activation_WalletActionActivatedEventArgs[] = L"Windows.ApplicationModel.Activation.WalletActionActivatedEventArgs";
 #endif
 #endif // WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION >= 0x10000

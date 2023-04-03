@@ -13,26 +13,26 @@ namespace Windows.Win32.System.Power
 
     public partial struct PROCESSOR_POWER_INFORMATION
     {
-        public ulong Number;
+        public uint Number;
         
-        public ulong MaxMhz;
+        public uint MaxMhz;
         
-        public ulong CurrentMhz;
+        public uint CurrentMhz;
         
-        public ulong MhzLimit;
+        public uint MhzLimit;
         
-        public ulong MaxIdleState;
+        public uint MaxIdleState;
         
-        public ulong CurrentIdleState;
+        public uint CurrentIdleState;
     }
 
     public partial struct SYSTEM_POWER_INFORMATION
     {
-        public ulong MaxIdlenessAllowed;
+        public uint MaxIdlenessAllowed;
         
-        public ulong Idleness;
+        public uint Idleness;
         
-        public ulong TimeRemaining;
+        public uint TimeRemaining;
         
         public POWER_COOLING_MODE CoolingMode;
     }

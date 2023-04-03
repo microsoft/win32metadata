@@ -240,6 +240,8 @@ namespace Windows
 
                 interface IMediaFrameSourceInfo3;
 
+                interface IMediaFrameSourceInfo4;
+
                 interface IMultiSourceMediaFrameArrivedEventArgs;
 
                 interface IMultiSourceMediaFrameReader;
@@ -673,6 +675,14 @@ namespace Windows
                     HRESULT GetRelativePanel([in] Windows.UI.WindowManagement.DisplayRegion* displayRegion, [out] [retval] Windows.Devices.Enumeration.Panel* result);
                 }
 
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+                [exclusiveto(Windows.Media.Capture.Frames.MediaFrameSourceInfo)]
+                [uuid(4817D721-85EB-470C-8F37-43CA5498E41D)]
+                interface IMediaFrameSourceInfo4 : IInspectable
+                {
+                    [propget] HRESULT IsShareable([out] [retval] boolean* value);
+                }
+
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]
                 [exclusiveto(Windows.Media.Capture.Frames.MultiSourceMediaFrameArrivedEventArgs)]
                 [uuid(63115E01-CF51-48FD-AAB0-6D693EB48127)]
@@ -860,6 +870,7 @@ namespace Windows
                     [default] interface Windows.Media.Capture.Frames.IMediaFrameSourceInfo;
                     [contract(Windows.Foundation.UniversalApiContract, 6.0)] interface Windows.Media.Capture.Frames.IMediaFrameSourceInfo2;
                     [contract(Windows.Foundation.UniversalApiContract, 10.0)] interface Windows.Media.Capture.Frames.IMediaFrameSourceInfo3;
+                    [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Media.Capture.Frames.IMediaFrameSourceInfo4;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]

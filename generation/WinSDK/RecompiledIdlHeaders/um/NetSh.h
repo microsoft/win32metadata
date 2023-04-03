@@ -54,7 +54,7 @@ extern "C" {
 #define ERROR_SUPPRESS_OUTPUT                   (NETSH_ERROR_BASE + 17)
 #define ERROR_HELPER_ALREADY_REGISTERED         (NETSH_ERROR_BASE + 18)
 #define ERROR_CONTEXT_ALREADY_REGISTERED        (NETSH_ERROR_BASE + 19)
-#define ERROR_PARSING_FAILURE                   (NETSH_ERROR_BASE + 20) 
+#define ERROR_PARSING_FAILURE                   (NETSH_ERROR_BASE + 20)
 #define NETSH_ERROR_END                ERROR_CONTEXT_ALREADY_REGISTERED
 
 // Flags
@@ -120,9 +120,9 @@ typedef struct _TOKEN_VALUE
 } TOKEN_VALUE, *PTOKEN_VALUE;
 
 // Macros
-#define CREATE_CMD_ENTRY(t,f)            {CMD_##t, f, HLP_##t, HLP_##t##_EX, CMD_FLAG_PRIVATE, NULL}
-#define CREATE_CMD_ENTRY_EX(t,f,i)       {CMD_##t, f, HLP_##t, HLP_##t##_EX, i, NULL}
-#define CREATE_CMD_ENTRY_EX_VER(t,f,i,v) {CMD_##t, f, HLP_##t, HLP_##t##_EX, i, v}
+#define CREATE_CMD_ENTRY(t,f)            {CMD_##t, f, HLP_##t, HLP_##t##_EX, CMD_FLAG_PRIVATE, NULL, NULL}
+#define CREATE_CMD_ENTRY_EX(t,f,i)       {CMD_##t, f, HLP_##t, HLP_##t##_EX, i, NULL, NULL}
+#define CREATE_CMD_ENTRY_EX_VER(t,f,i,v) {CMD_##t, f, HLP_##t, HLP_##t##_EX, i, v, NULL}
 
 #define CREATE_CMD_GROUP_ENTRY(t,s)            {CMD_##t, HLP_##t, sizeof(s)/sizeof(CMD_ENTRY), 0, s, NULL }
 #define CREATE_CMD_GROUP_ENTRY_EX(t,s,i)       {CMD_##t, HLP_##t, sizeof(s)/sizeof(CMD_ENTRY), i, s, NULL }
@@ -211,6 +211,13 @@ typedef DWORD (FN_HANDLE_CMD)(
 
 typedef FN_HANDLE_CMD *PFN_HANDLE_CMD;
 
+typedef VOID(FN_CUSTOM_HELP)(
+    _In_ HANDLE     hModule,
+    _In_ LPCWSTR    pwszCmdToken
+    );
+
+typedef FN_CUSTOM_HELP *PFN_CUSTOM_HELP;
+
 typedef
 BOOL
 (WINAPI NS_OSVERSIONCHECK)(
@@ -245,12 +252,13 @@ typedef struct _NS_HELPER_ATTRIBUTES
 
 typedef struct _CMD_ENTRY
 {
-    LPCWSTR             pwszCmdToken;        // The token for the command
-    PFN_HANDLE_CMD      pfnCmdHandler;       // The function which handles this command
-    DWORD               dwShortCmdHelpToken; // The short help message
-    DWORD               dwCmdHlpToken;       // The message to display if the only thing after the command is a help token (HELP, /?, -?, ?)
-    DWORD               dwFlags;             // Flags (see CMD_FLAGS_xxx above)
-    PNS_OSVERSIONCHECK  pOsVersionCheck;     // Check for the version of the OS this command can run against
+    LPCWSTR             pwszCmdToken;           // The token for the command
+    PFN_HANDLE_CMD      pfnCmdHandler;          // The function which handles this command
+    DWORD               dwShortCmdHelpToken;    // The short help message
+    DWORD               dwCmdHlpToken;          // The message to display if the only thing after the command is a help token (HELP, /?, -?, ?)
+    DWORD               dwFlags;                // Flags (see CMD_FLAGS_xxx above)
+    PNS_OSVERSIONCHECK  pOsVersionCheck;        // Check for the version of the OS this command can run against
+    PFN_CUSTOM_HELP     pfnCustomHelpFn;        // An optional function to print out a custom help message, useful for extra long help messages
 } CMD_ENTRY, *PCMD_ENTRY;
 
 typedef struct _CMD_GROUP_ENTRY

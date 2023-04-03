@@ -88,7 +88,7 @@
 //  API Contract Inclusion Definitions
 #if !defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
 #if !defined(WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION)
-#define WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION 0x10000
+#define WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION 0x20000
 #endif // defined(WINDOWS_APPLICATIONMODEL_WALLET_WALLETCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -579,7 +579,11 @@ namespace ABI {
         namespace ApplicationModel {
             namespace Wallet {
                 namespace System {
-                    enum WalletItemAppAssociation : int
+                    enum
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+                    DEPRECATED("WalletItemAppAssociation is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+                    WalletItemAppAssociation : int
                     {
                         WalletItemAppAssociation_None = 0,
                         WalletItemAppAssociation_AppInstalled = 1,
@@ -611,24 +615,42 @@ namespace ABI {
             namespace Wallet {
                 namespace System {
                     MIDL_INTERFACE("522e2bff-96a2-4a17-8d19-fe1d9f837561")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+                    DEPRECATED("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
                     IWalletItemSystemStore : public IInspectable
                     {
                     public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+                        DEPRECATED("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
                         virtual HRESULT STDMETHODCALLTYPE GetItemsAsync(
                             __FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CWallet__CWalletItem** operation
                             ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+                        DEPRECATED("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
                         virtual HRESULT STDMETHODCALLTYPE DeleteAsync(
                             ABI::Windows::ApplicationModel::Wallet::IWalletItem* item,
                             ABI::Windows::Foundation::IAsyncAction** operation
                             ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+                        DEPRECATED("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
                         virtual HRESULT STDMETHODCALLTYPE ImportItemAsync(
                             ABI::Windows::Storage::Streams::IRandomAccessStreamReference* stream,
                             __FIAsyncOperation_1_Windows__CApplicationModel__CWallet__CWalletItem** operation
                             ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+                        DEPRECATED("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
                         virtual HRESULT STDMETHODCALLTYPE GetAppStatusForItem(
                             ABI::Windows::ApplicationModel::Wallet::IWalletItem* item,
                             ABI::Windows::ApplicationModel::Wallet::System::WalletItemAppAssociation* result
                             ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+                        DEPRECATED("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
                         virtual HRESULT STDMETHODCALLTYPE LaunchAppForItemAsync(
                             ABI::Windows::ApplicationModel::Wallet::IWalletItem* item,
                             __FIAsyncOperation_1_boolean** operation
@@ -665,13 +687,22 @@ namespace ABI {
             namespace Wallet {
                 namespace System {
                     MIDL_INTERFACE("f98d3a4e-be00-4fdd-9734-6c113c1ac1cb")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+                    DEPRECATED("IWalletItemSystemStore2 is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
                     IWalletItemSystemStore2 : public IInspectable
                     {
                     public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+                        DEPRECATED("IWalletItemSystemStore2 is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
                         virtual HRESULT STDMETHODCALLTYPE add_ItemsChanged(
                             __FITypedEventHandler_2_Windows__CApplicationModel__CWallet__CSystem__CWalletItemSystemStore_IInspectable* handler,
                             EventRegistrationToken* cookie
                             ) = 0;
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+                        DEPRECATED("IWalletItemSystemStore2 is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
                         virtual HRESULT STDMETHODCALLTYPE remove_ItemsChanged(
                             EventRegistrationToken cookie
                             ) = 0;
@@ -707,9 +738,15 @@ namespace ABI {
             namespace Wallet {
                 namespace System {
                     MIDL_INTERFACE("bee8eb89-2634-4b9a-8b23-ee8903c91fe0")
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+                    DEPRECATED("IWalletManagerSystemStatics is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
                     IWalletManagerSystemStatics : public IInspectable
                     {
                     public:
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+                        DEPRECATED("IWalletManagerSystemStatics is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
                         virtual HRESULT STDMETHODCALLTYPE RequestStoreAsync(
                             __FIAsyncOperation_1_Windows__CApplicationModel__CWallet__CSystem__CWalletItemSystemStore** operation
                             ) = 0;
@@ -742,6 +779,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWall
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_ApplicationModel_Wallet_System_WalletItemSystemStore_DEFINED
 #define RUNTIMECLASS_Windows_ApplicationModel_Wallet_System_WalletItemSystemStore_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+DEPRECATED("WalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Wallet_System_WalletItemSystemStore[] = L"Windows.ApplicationModel.Wallet.System.WalletItemSystemStore";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -761,6 +801,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_ApplicationModel_Wallet_System_WalletManagerSystem_DEFINED
 #define RUNTIMECLASS_Windows_ApplicationModel_Wallet_System_WalletManagerSystem_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+DEPRECATED("WalletManagerSystem is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Wallet_System_WalletManagerSystem[] = L"Windows.ApplicationModel.Wallet.System.WalletManagerSystem";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -1592,7 +1635,11 @@ typedef enum __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CWalletItemAppAs
  *
  */
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
-enum __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CWalletItemAppAssociation
+enum
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+DEPRECATED("WalletItemAppAssociation is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+__x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CWalletItemAppAssociation
 {
     WalletItemAppAssociation_None = 0,
     WalletItemAppAssociation_AppInstalled = 1,
@@ -1613,7 +1660,11 @@ enum __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CWalletItemAppAssociatio
 #if !defined(____x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Wallet_System_IWalletItemSystemStore[] = L"Windows.ApplicationModel.Wallet.System.IWalletItemSystemStore";
-typedef struct __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStoreVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+DEPRECATED("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+__x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStoreVtbl
 {
     BEGIN_INTERFACE
 
@@ -1629,17 +1680,32 @@ typedef struct __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSy
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+    DEPRECATED("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
     HRESULT (STDMETHODCALLTYPE* GetItemsAsync)(__x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore* This,
         __FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CWallet__CWalletItem** operation);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+    DEPRECATED("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
     HRESULT (STDMETHODCALLTYPE* DeleteAsync)(__x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore* This,
         __x_ABI_CWindows_CApplicationModel_CWallet_CIWalletItem* item,
         __x_ABI_CWindows_CFoundation_CIAsyncAction** operation);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+    DEPRECATED("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
     HRESULT (STDMETHODCALLTYPE* ImportItemAsync)(__x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore* This,
         __x_ABI_CWindows_CStorage_CStreams_CIRandomAccessStreamReference* stream,
         __FIAsyncOperation_1_Windows__CApplicationModel__CWallet__CWalletItem** operation);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+    DEPRECATED("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
     HRESULT (STDMETHODCALLTYPE* GetAppStatusForItem)(__x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore* This,
         __x_ABI_CWindows_CApplicationModel_CWallet_CIWalletItem* item,
         enum __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CWalletItemAppAssociation* result);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+    DEPRECATED("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
     HRESULT (STDMETHODCALLTYPE* LaunchAppForItemAsync)(__x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore* This,
         __x_ABI_CWindows_CApplicationModel_CWallet_CIWalletItem* item,
         __FIAsyncOperation_1_boolean** operation);
@@ -1672,18 +1738,33 @@ interface __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemS
 #define __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+    DEPRECATED("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
 #define __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore_GetItemsAsync(This, operation) \
     ((This)->lpVtbl->GetItemsAsync(This, operation))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+    DEPRECATED("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
 #define __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore_DeleteAsync(This, item, operation) \
     ((This)->lpVtbl->DeleteAsync(This, item, operation))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+    DEPRECATED("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
 #define __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore_ImportItemAsync(This, stream, operation) \
     ((This)->lpVtbl->ImportItemAsync(This, stream, operation))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+    DEPRECATED("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
 #define __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore_GetAppStatusForItem(This, item, result) \
     ((This)->lpVtbl->GetAppStatusForItem(This, item, result))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+    DEPRECATED("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
 #define __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore_LaunchAppForItemAsync(This, item, operation) \
     ((This)->lpVtbl->LaunchAppForItemAsync(This, item, operation))
 
@@ -1706,7 +1787,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWall
 #if !defined(____x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore2_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore2_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Wallet_System_IWalletItemSystemStore2[] = L"Windows.ApplicationModel.Wallet.System.IWalletItemSystemStore2";
-typedef struct __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore2Vtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+DEPRECATED("IWalletItemSystemStore2 is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+__x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore2Vtbl
 {
     BEGIN_INTERFACE
 
@@ -1722,9 +1807,15 @@ typedef struct __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSy
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore2* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+    DEPRECATED("IWalletItemSystemStore2 is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
     HRESULT (STDMETHODCALLTYPE* add_ItemsChanged)(__x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore2* This,
         __FITypedEventHandler_2_Windows__CApplicationModel__CWallet__CSystem__CWalletItemSystemStore_IInspectable* handler,
         EventRegistrationToken* cookie);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+    DEPRECATED("IWalletItemSystemStore2 is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
     HRESULT (STDMETHODCALLTYPE* remove_ItemsChanged)(__x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore2* This,
         EventRegistrationToken cookie);
 
@@ -1756,9 +1847,15 @@ interface __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemS
 #define __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore2_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+    DEPRECATED("IWalletItemSystemStore2 is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
 #define __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore2_add_ItemsChanged(This, handler, cookie) \
     ((This)->lpVtbl->add_ItemsChanged(This, handler, cookie))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+    DEPRECATED("IWalletItemSystemStore2 is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
 #define __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletItemSystemStore2_remove_ItemsChanged(This, cookie) \
     ((This)->lpVtbl->remove_ItemsChanged(This, cookie))
 
@@ -1781,7 +1878,11 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWall
 #if !defined(____x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletManagerSystemStatics_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletManagerSystemStatics_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Wallet_System_IWalletManagerSystemStatics[] = L"Windows.ApplicationModel.Wallet.System.IWalletManagerSystemStatics";
-typedef struct __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletManagerSystemStaticsVtbl
+typedef struct
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+DEPRECATED("IWalletManagerSystemStatics is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+__x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletManagerSystemStaticsVtbl
 {
     BEGIN_INTERFACE
 
@@ -1797,6 +1898,9 @@ typedef struct __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletManage
         HSTRING* className);
     HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletManagerSystemStatics* This,
         TrustLevel* trustLevel);
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+    DEPRECATED("IWalletManagerSystemStatics is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
     HRESULT (STDMETHODCALLTYPE* RequestStoreAsync)(__x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletManagerSystemStatics* This,
         __FIAsyncOperation_1_Windows__CApplicationModel__CWallet__CSystem__CWalletItemSystemStore** operation);
 
@@ -1828,6 +1932,9 @@ interface __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletManagerSyst
 #define __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletManagerSystemStatics_GetTrustLevel(This, trustLevel) \
     ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+    DEPRECATED("IWalletManagerSystemStatics is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
 #define __x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWalletManagerSystemStatics_RequestStoreAsync(This, operation) \
     ((This)->lpVtbl->RequestStoreAsync(This, operation))
 
@@ -1853,6 +1960,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CWallet_CSystem_CIWall
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_ApplicationModel_Wallet_System_WalletItemSystemStore_DEFINED
 #define RUNTIMECLASS_Windows_ApplicationModel_Wallet_System_WalletItemSystemStore_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+DEPRECATED("WalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Wallet_System_WalletItemSystemStore[] = L"Windows.ApplicationModel.Wallet.System.WalletItemSystemStore";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
@@ -1872,6 +1982,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #ifndef RUNTIMECLASS_Windows_ApplicationModel_Wallet_System_WalletManagerSystem_DEFINED
 #define RUNTIMECLASS_Windows_ApplicationModel_Wallet_System_WalletManagerSystem_DEFINED
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+DEPRECATED("WalletManagerSystem is deprecated and might not work on all platforms. For more info, see MSDN.")
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_Wallet_System_WalletManagerSystem[] = L"Windows.ApplicationModel.Wallet.System.WalletManagerSystem";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000

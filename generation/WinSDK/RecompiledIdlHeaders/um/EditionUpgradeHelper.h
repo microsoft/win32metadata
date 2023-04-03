@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -80,6 +80,13 @@ typedef interface IContainerActivationHelper IContainerActivationHelper;
 typedef interface IClipServiceNotificationHelper IClipServiceNotificationHelper;
 
 #endif 	/* __IClipServiceNotificationHelper_FWD_DEFINED__ */
+
+
+#ifndef __IFClipNotificationHelper_FWD_DEFINED__
+#define __IFClipNotificationHelper_FWD_DEFINED__
+typedef interface IFClipNotificationHelper IFClipNotificationHelper;
+
+#endif 	/* __IFClipNotificationHelper_FWD_DEFINED__ */
 
 
 #ifndef __EditionUpgradeHelper_FWD_DEFINED__
@@ -654,6 +661,97 @@ EXTERN_C const IID IID_IClipServiceNotificationHelper;
 #endif 	/* __IClipServiceNotificationHelper_INTERFACE_DEFINED__ */
 
 
+#ifndef __IFClipNotificationHelper_INTERFACE_DEFINED__
+#define __IFClipNotificationHelper_INTERFACE_DEFINED__
+
+/* interface IFClipNotificationHelper */
+/* [uuid][nonextensible][oleautomation][dual][object] */ 
+
+
+EXTERN_C const IID IID_IFClipNotificationHelper;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("3D5E3D21-BD41-4C2A-A669-B17CE87FB50B")
+    IFClipNotificationHelper : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE ShowSystemDialog( 
+            /* [annotation][string][in] */ 
+            _In_  BSTR titleText,
+            /* [annotation][string][in] */ 
+            _In_  BSTR bodyText) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IFClipNotificationHelperVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IFClipNotificationHelper * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IFClipNotificationHelper * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IFClipNotificationHelper * This);
+        
+        DECLSPEC_XFGVIRT(IFClipNotificationHelper, ShowSystemDialog)
+        HRESULT ( STDMETHODCALLTYPE *ShowSystemDialog )( 
+            __RPC__in IFClipNotificationHelper * This,
+            /* [annotation][string][in] */ 
+            _In_  BSTR titleText,
+            /* [annotation][string][in] */ 
+            _In_  BSTR bodyText);
+        
+        END_INTERFACE
+    } IFClipNotificationHelperVtbl;
+
+    interface IFClipNotificationHelper
+    {
+        CONST_VTBL struct IFClipNotificationHelperVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IFClipNotificationHelper_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IFClipNotificationHelper_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IFClipNotificationHelper_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IFClipNotificationHelper_ShowSystemDialog(This,titleText,bodyText)	\
+    ( (This)->lpVtbl -> ShowSystemDialog(This,titleText,bodyText) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IFClipNotificationHelper_INTERFACE_DEFINED__ */
+
+
 
 #ifndef __EditionUpgradeHelperLib_LIBRARY_DEFINED__
 #define __EditionUpgradeHelperLib_LIBRARY_DEFINED__
@@ -681,15 +779,15 @@ EditionUpgradeBroker;
 #endif
 #endif /* __EditionUpgradeHelperLib_LIBRARY_DEFINED__ */
 
-/* interface __MIDL_itf_editionupgradehelper_0000_0006 */
+/* interface __MIDL_itf_editionupgradehelper_0000_0007 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
 #pragma endregion
 
 
-extern RPC_IF_HANDLE __MIDL_itf_editionupgradehelper_0000_0006_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_editionupgradehelper_0000_0006_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_editionupgradehelper_0000_0007_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_editionupgradehelper_0000_0007_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

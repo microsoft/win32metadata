@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_MEDIA_MEDIACONTROLCONTRACT_VERSION)
@@ -538,6 +538,23 @@ namespace ABI {
 #define __x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo3 ABI::Windows::Media::Capture::Frames::IMediaFrameSourceInfo3
 
 #endif // ____x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo3_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Capture {
+                namespace Frames {
+                    interface IMediaFrameSourceInfo4;
+                } /* Frames */
+            } /* Capture */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4 ABI::Windows::Media::Capture::Frames::IMediaFrameSourceInfo4
+
+#endif // ____x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CMedia_CCapture_CFrames_CIMultiSourceMediaFrameArrivedEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CMedia_CCapture_CFrames_CIMultiSourceMediaFrameArrivedEventArgs_FWD_DEFINED__
@@ -3475,6 +3492,44 @@ EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSour
 
 /*
  *
+ * Interface Windows.Media.Capture.Frames.IMediaFrameSourceInfo4
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.Capture.Frames.MediaFrameSourceInfo
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_Capture_Frames_IMediaFrameSourceInfo4[] = L"Windows.Media.Capture.Frames.IMediaFrameSourceInfo4";
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Capture {
+                namespace Frames {
+                    MIDL_INTERFACE("4817d721-85eb-470c-8f37-43ca5498e41d")
+                    IMediaFrameSourceInfo4 : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE get_IsShareable(
+                            boolean* value
+                            ) = 0;
+                    };
+
+                    extern MIDL_CONST_ID IID& IID_IMediaFrameSourceInfo4 = _uuidof(IMediaFrameSourceInfo4);
+                } /* Frames */
+            } /* Capture */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Interface Windows.Media.Capture.Frames.IMultiSourceMediaFrameArrivedEventArgs
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
@@ -4045,6 +4100,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.Media.Capture.Frames.IMediaFrameSourceInfo ** Default Interface **
  *    Windows.Media.Capture.Frames.IMediaFrameSourceInfo2
  *    Windows.Media.Capture.Frames.IMediaFrameSourceInfo3
+ *    Windows.Media.Capture.Frames.IMediaFrameSourceInfo4
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -4305,6 +4361,12 @@ typedef interface __x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInf
 typedef interface __x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo3 __x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo3;
 
 #endif // ____x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo3_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4 __x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4;
+
+#endif // ____x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CMedia_CCapture_CFrames_CIMultiSourceMediaFrameArrivedEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CMedia_CCapture_CFrames_CIMultiSourceMediaFrameArrivedEventArgs_FWD_DEFINED__
@@ -8678,6 +8740,75 @@ EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSour
 
 /*
  *
+ * Interface Windows.Media.Capture.Frames.IMediaFrameSourceInfo4
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.Capture.Frames.MediaFrameSourceInfo
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_Capture_Frames_IMediaFrameSourceInfo4[] = L"Windows.Media.Capture.Frames.IMediaFrameSourceInfo4";
+typedef struct __x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_IsShareable)(__x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4* This,
+        boolean* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4Vtbl;
+
+interface __x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4
+{
+    CONST_VTBL struct __x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4_get_IsShareable(This, value) \
+    ((This)->lpVtbl->get_IsShareable(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CCapture_CFrames_CIMediaFrameSourceInfo4_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Interface Windows.Media.Capture.Frames.IMultiSourceMediaFrameArrivedEventArgs
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
@@ -9462,6 +9593,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.Media.Capture.Frames.IMediaFrameSourceInfo ** Default Interface **
  *    Windows.Media.Capture.Frames.IMediaFrameSourceInfo2
  *    Windows.Media.Capture.Frames.IMediaFrameSourceInfo3
+ *    Windows.Media.Capture.Frames.IMediaFrameSourceInfo4
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

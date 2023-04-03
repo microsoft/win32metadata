@@ -1351,11 +1351,13 @@ WINOLEAUTAPI_(void) OaEnablePerUserTLibRegistration(void);
 #define V_VT(X)         ((X)->n1.n2.vt)
 #define V_RECORDINFO(X) ((X)->n1.n2.n3.brecVal.pRecInfo)
 #define V_RECORD(X)     ((X)->n1.n2.n3.brecVal.pvRecord)
+#define V_DECIMAL(X)    ((X)->n1.decVal)
 #else
 #define V_UNION(X, Y)   ((X)->Y)
 #define V_VT(X)         ((X)->vt)
 #define V_RECORDINFO(X) ((X)->pRecInfo)
 #define V_RECORD(X)     ((X)->pvRecord)
+#define V_DECIMAL(X)    ((X)->decVal)
 #endif
 
 /* Variant access macros
@@ -1421,7 +1423,6 @@ WINOLEAUTAPI_(void) OaEnablePerUserTLibRegistration(void);
 #define V_ARRAYREF(X)    V_UNION(X, pparray)
 #define V_BYREF(X)       V_UNION(X, byref)
 
-#define V_DECIMAL(X)     V_UNION(X, decVal)
 #define V_DECIMALREF(X)  V_UNION(X, pdecVal)
 
 #ifndef RC_INVOKED

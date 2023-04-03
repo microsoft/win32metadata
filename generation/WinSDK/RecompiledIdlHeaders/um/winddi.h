@@ -1684,12 +1684,29 @@ typedef struct _PATHOBJ
     ULONG   cCurves;
 } PATHOBJ;
 
+#ifdef PRIVATE_HDEV
+#define SURFOBJ_GET_HDEV(pso)               ((pso)->private_hdev)
+#define SURFOBJ_SET_HDEV(pso, hdevNew)      ((pso)->private_hdev = (hdevNew))
+#define SURFOBJ_GET_DHPDEV(pso)              ((pso)->private_dhpdev)
+#define SURFOBJ_SET_DHPDEV(pso, dhpdevNew)   ((pso)->private_dhpdev = (dhpdevNew))
+#else
+#define SURFOBJ_GET_HDEV(pso)               ((pso)->hdev)
+#define SURFOBJ_SET_HDEV(pso, hdevNew)      ((pso)->hdev = (hdevNew))
+#define SURFOBJ_GET_DHPDEV(pso)              ((pso)->dhpdev)
+#define SURFOBJ_SET_DHPDEV(pso, dhpdevNew)   ((pso)->dhpdev = (dhpdevNew))
+#endif
+
 typedef struct _SURFOBJ
 {
     DHSURF  dhsurf;
     HSURF   hsurf;
+#ifdef PRIVATE_HDEV
+    DHPDEV  private_dhpdev;
+    HDEV    private_hdev;
+#else
     DHPDEV  dhpdev;
     HDEV    hdev;
+#endif
     SIZEL   sizlBitmap;
     ULONG   cjBits;
     _Field_size_bytes_(cjBits) PVOID   pvBits;

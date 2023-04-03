@@ -19,28 +19,32 @@ Abstract:
 #pragma once
 #endif
 #include <winapifamily.h>
+#include <objidl.h>
 
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
-#define WLDP_DLL                           L"WLDP.DLL"
-#define WLDP_GETLOCKDOWNPOLICY_FN           "WldpGetLockdownPolicy"
-#define WLDP_ISCLASSINAPPROVEDLIST_FN       "WldpIsClassInApprovedList"
-#define WLDP_SETDYNAMICCODETRUST_FN         "WldpSetDynamicCodeTrust"
-#define WLDP_ISDYNAMICCODEPOLICYENABLED_FN  "WldpIsDynamicCodePolicyEnabled"
-#define WLDP_QUERYDANAMICCODETRUST_FN       "WldpQueryDynamicCodeTrust"
-#define WLDP_QUERYDYNAMICCODETRUST_FN       "WldpQueryDynamicCodeTrust"
-#define WLDP_QUERYWINDOWSLOCKDOWNMODE_FN    "WldpQueryWindowsLockdownMode"
-#define WLDP_SETWINDOWSLOCKDOWNRESTRICTION_FN "WldpSetWindowsLockdownRestriction"
-#define WLDP_QUERYDEVICESECURITYINFORMATION_FN "WldpQueryDeviceSecurityInformation"
-#define WLDP_QUERYWINDOWSLOCKDOWNRESTRICTION_FN "WldpQueryWindowsLockdownRestriction"
-#define WLDP_ISAPPAPPROVEDBYPOLICY_FN       "WldpIsAppApprovedByPolicy"
-#define WLDP_QUERYPOLICYSETTINGENABLED_FN   "WldpQueryPolicySettingEnabled"
-#define WLDP_QUERYPOLICYSETTINGENABLED2_FN   "WldpQueryPolicySettingEnabled2"
-#define WLDP_ISWCOSPRODUCTIONCONFIGURATION_FN     "WldpIsWcosProductionConfiguration"
-#define WLDP_RESETWCOSPRODUCTIONCONFIGURATION_FN     "WldpResetWcosProductionConfiguration"
-#define WLDP_ISPRODUCTIONCONFIGURATION_FN   "WldpIsProductionConfiguration"
-#define WLDP_RESETPRODUCTIONCONFIGURATION_FN   "WldpResetProductionConfiguration"
+#define WLDP_DLL                                   L"WLDP.DLL"
+#define WLDP_GETLOCKDOWNPOLICY_FN                   "WldpGetLockdownPolicy"
+#define WLDP_ISCLASSINAPPROVEDLIST_FN               "WldpIsClassInApprovedList"
+#define WLDP_SETDYNAMICCODETRUST_FN                 "WldpSetDynamicCodeTrust"
+#define WLDP_ISDYNAMICCODEPOLICYENABLED_FN          "WldpIsDynamicCodePolicyEnabled"
+#define WLDP_QUERYDANAMICCODETRUST_FN               "WldpQueryDynamicCodeTrust"
+#define WLDP_QUERYDYNAMICCODETRUST_FN               "WldpQueryDynamicCodeTrust"
+#define WLDP_QUERYWINDOWSLOCKDOWNMODE_FN            "WldpQueryWindowsLockdownMode"
+#define WLDP_SETWINDOWSLOCKDOWNRESTRICTION_FN       "WldpSetWindowsLockdownRestriction"
+#define WLDP_QUERYDEVICESECURITYINFORMATION_FN      "WldpQueryDeviceSecurityInformation"
+#define WLDP_QUERYWINDOWSLOCKDOWNRESTRICTION_FN     "WldpQueryWindowsLockdownRestriction"
+#define WLDP_ISAPPAPPROVEDBYPOLICY_FN               "WldpIsAppApprovedByPolicy"
+#define WLDP_QUERYPOLICYSETTINGENABLED_FN           "WldpQueryPolicySettingEnabled"
+#define WLDP_QUERYPOLICYSETTINGENABLED2_FN          "WldpQueryPolicySettingEnabled2"
+#define WLDP_ISWCOSPRODUCTIONCONFIGURATION_FN       "WldpIsWcosProductionConfiguration"
+#define WLDP_RESETWCOSPRODUCTIONCONFIGURATION_FN    "WldpResetWcosProductionConfiguration"
+#define WLDP_ISPRODUCTIONCONFIGURATION_FN           "WldpIsProductionConfiguration"
+#define WLDP_RESETPRODUCTIONCONFIGURATION_FN        "WldpResetProductionConfiguration"
+#define WLDP_CANEXECUTEBUFFER_FN                    "WldpCanExecuteBuffer"
+#define WLDP_CANEXECUTEFILE_FN                      "WldpCanExecuteFile"
+#define WLDP_CANEXECUTEBUFFER_FN                    "WldpCanExecuteBuffer"
 
 //
 //  Policy state bits.
@@ -131,7 +135,6 @@ Abstract:
 #define WLDP_LOCKDOWN_IS_CONFIG_CI(_PolicyState)    ((_PolicyState & WLDP_LOCKDOWN_CONFIG_CI_MASK) == WLDP_LOCKDOWN_CONFIG_CI)
 #define WLDP_LOCKDOWN_IS_CONFIG_CI_AUDIT(_PolicyState) ((_PolicyState & WLDP_LOCKDOWN_CONFIG_CI_AUDIT_MASK) == WLDP_LOCKDOWN_CONFIG_CI_AUDIT)
 #define WLDP_LOCKDOWN_IS_UMCIENFORCE(_PolicyState)  ((_PolicyState & WLDP_LOCKDOWN_UMCIENFORCE_FLAG) == WLDP_LOCKDOWN_UMCIENFORCE_FLAG)
-
 
 //
 //  Host types.
@@ -274,6 +277,67 @@ typedef struct WLDP_DEVICE_SECURITY_INFORMATION
 //
 
 #define WLDP_FLAGS_SKIPSIGNATUREVALIDATION          (0x00000100)
+
+//
+// Enumeration types for WldpCanExecute{File,Stream,Buffer}
+//
+typedef enum WLDP_EXECUTION_POLICY {
+    WLDP_EXECUTION_POLICY_BLOCKED,
+    WLDP_EXECUTION_POLICY_ALLOWED,
+    WLDP_EXECUTION_POLICY_REQUIRE_SANDBOX,
+} WLDP_EXECUTION_POLICY;
+
+typedef enum WLDP_EXECUTION_EVALUATION_OPTIONS {
+    WLDP_EXECUTION_EVALUATION_OPTION_NONE = 0x0,
+    WLDP_EXECUTION_EVALUATION_OPTION_EXECUTE_IN_INTERACTIVE_SESSION = 0x1,
+} WLDP_EXECUTION_EVALUATION_OPTIONS;
+
+DEFINE_ENUM_FLAG_OPERATORS(WLDP_EXECUTION_EVALUATION_OPTIONS);
+
+// Batch Script Host, for example, cmd
+// {5BAEA1D6-6F1C-488E-8490-347FA5C5067F}
+EXTERN_GUID(WLDP_HOST_CMD,
+0x5baea1d6, 0x6f1c, 0x488e, 0x84, 0x90, 0x34, 0x7f, 0xa5, 0xc5, 0x6, 0x7f);
+
+// Powershell Script Host
+// {8E9AAA7C-198B-4879-AE41-A50D47AD6458}
+EXTERN_GUID(WLDP_HOST_POWERSHELL,
+    0x8e9aaa7c, 0x198b, 0x4879, 0xae, 0x41, 0xa5, 0xd, 0x47, 0xad, 0x64, 0x58);
+
+// Python Script Host
+// {BFD557EF-2448-42EC-810B-0D9F09352D4A}
+EXTERN_GUID(WLDP_HOST_PYTHON,
+    0xbfd557ef, 0x2448, 0x42ec, 0x81, 0xb, 0xd, 0x9f, 0x9, 0x35, 0x2d, 0x4a);
+
+// Windows Script Host, for example, cscript, wscript.
+// {D30B84C5-29CE-4FF3-86EC-A30007A82E49}
+EXTERN_GUID(WLDP_HOST_WINDOWS_SCRIPT_HOST,
+    0xd30b84c5, 0x29ce, 0x4ff3, 0x86, 0xec, 0xa3, 0x0, 0x7, 0xa8, 0x2e, 0x49);
+
+// Standalone Javascript Host, for example, nodejs
+// {5629F0D5-1CCA-4FED-A1A3-36A8C18D74C0}
+EXTERN_GUID(WLDP_HOST_JAVASCRIPT,
+    0x5629f0d5, 0x1cca, 0x4fed, 0xa1, 0xa3, 0x36, 0xa8, 0xc1, 0x8d, 0x74, 0xc0);
+
+// HTML Engine, for example, mshtml
+// {B35A71B6-FE56-48D6-9543-2DFF0ECDED66}
+EXTERN_GUID(WLDP_HOST_HTML,
+    0xb35a71b6, 0xfe56, 0x48d6, 0x95, 0x43, 0x2d, 0xff, 0xe, 0xcd, 0xed, 0x66);
+
+// XML Engine, for example, msxml
+// {5594BE58-C6BF-4295-82F4-D494D20E3A36}
+EXTERN_GUID(WLDP_HOST_XML,
+    0x5594be58, 0xc6bf, 0x4295, 0x82, 0xf4, 0xd4, 0x94, 0xd2, 0xe, 0x3a, 0x36);
+
+// Microsoft Standard Installer
+// {624EB611-6E7E-4EEC-9BFE-F0ECDBFCF390}
+EXTERN_GUID(WLDP_HOST_MSI,
+    0x624eb611, 0x6e7e, 0x4eec, 0x9b, 0xfe, 0xf0, 0xec, 0xdb, 0xfc, 0xf3, 0x90);
+
+// Catch-all for custom objects without a subject interface package
+// {626CBEC3-E1FA-4227-9800-ED210274CF7C}
+EXTERN_GUID(WLDP_HOST_OTHER,
+    0x626cbec3, 0xe1fa, 0x4227, 0x98, 0x0, 0xed, 0x21, 0x2, 0x74, 0xcf, 0x7c);
 
 #if NTDDI_VERSION >= NTDDI_WIN8
 
@@ -486,6 +550,63 @@ WldpResetProductionConfiguration(VOID);
 typedef HRESULT(WINAPI *PWLDP_RESETPRODUCTIONCONFIGURATION_API)(VOID);
 
 #endif /* NTDDI_VERSION >= NTDDI_WIN10_MN */
+
+#if NTDDI_VERSION >= NTDDI_WIN10_NI
+
+STDAPI
+WldpCanExecuteFile(
+    _In_ REFGUID host,
+    _In_ WLDP_EXECUTION_EVALUATION_OPTIONS options,
+    _In_ HANDLE fileHandle,
+    _In_opt_ PCWSTR auditInfo,
+    _Out_ WLDP_EXECUTION_POLICY *result
+);
+
+typedef HRESULT(WINAPI *PWLDP_CANEXECUTEFILE_API)(
+    _In_ REFGUID host,
+    _In_ WLDP_EXECUTION_EVALUATION_OPTIONS options,
+    _In_ HANDLE fileHandle,
+    _In_opt_ PCWSTR auditInfo,
+    _Out_ WLDP_EXECUTION_POLICY *result
+);
+
+STDAPI
+WldpCanExecuteBuffer(
+    _In_ REFGUID host,
+    _In_ WLDP_EXECUTION_EVALUATION_OPTIONS options,
+    _In_reads_(bufferSize) const BYTE *buffer,
+    _In_ ULONG bufferSize,
+    _In_opt_ PCWSTR auditInfo,
+    _Out_ WLDP_EXECUTION_POLICY *result
+);
+
+typedef HRESULT(WINAPI *PWLDP_CANEXECUTEBUFFER_API)(
+    _In_ REFGUID host,
+    _In_ WLDP_EXECUTION_EVALUATION_OPTIONS options,
+    _In_reads_(bufferSize) const BYTE *buffer,
+    _In_ ULONG bufferSize,
+    _In_opt_ PCWSTR auditInfo,
+    _Out_ WLDP_EXECUTION_POLICY *result
+);
+
+STDAPI
+WldpCanExecuteStream(
+    _In_ REFGUID host,
+    _In_ WLDP_EXECUTION_EVALUATION_OPTIONS options,
+    _In_ IStream *stream,
+    _In_opt_ PCWSTR auditInfo,
+    _Out_ WLDP_EXECUTION_POLICY *result
+);
+
+typedef HRESULT(WINAPI *PWLDP_CANEXECUTESTREAM_API)(
+    _In_ REFGUID host,
+    _In_ WLDP_EXECUTION_EVALUATION_OPTIONS options,
+    _In_ IStream *stream,
+    _In_opt_ PCWSTR auditInfo,
+    _Out_ WLDP_EXECUTION_POLICY *result
+);
+
+#endif /* NTDDI_VERSION >= NTDDI_WIN10_NI */
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion

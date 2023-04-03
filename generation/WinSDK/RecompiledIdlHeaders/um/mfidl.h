@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -950,6 +950,20 @@ typedef interface IMFRelativePanelWatcher IMFRelativePanelWatcher;
 #endif 	/* __IMFRelativePanelWatcher_FWD_DEFINED__ */
 
 
+#ifndef __IMFVideoCaptureSampleAllocator_FWD_DEFINED__
+#define __IMFVideoCaptureSampleAllocator_FWD_DEFINED__
+typedef interface IMFVideoCaptureSampleAllocator IMFVideoCaptureSampleAllocator;
+
+#endif 	/* __IMFVideoCaptureSampleAllocator_FWD_DEFINED__ */
+
+
+#ifndef __IMFSampleAllocatorControl_FWD_DEFINED__
+#define __IMFSampleAllocatorControl_FWD_DEFINED__
+typedef interface IMFSampleAllocatorControl IMFSampleAllocatorControl;
+
+#endif 	/* __IMFSampleAllocatorControl_FWD_DEFINED__ */
+
+
 #ifndef __IMFCameraOcclusionStateReport_FWD_DEFINED__
 #define __IMFCameraOcclusionStateReport_FWD_DEFINED__
 typedef interface IMFCameraOcclusionStateReport IMFCameraOcclusionStateReport;
@@ -971,18 +985,39 @@ typedef interface IMFCameraOcclusionStateMonitor IMFCameraOcclusionStateMonitor;
 #endif 	/* __IMFCameraOcclusionStateMonitor_FWD_DEFINED__ */
 
 
-#ifndef __IMFVideoCaptureSampleAllocator_FWD_DEFINED__
-#define __IMFVideoCaptureSampleAllocator_FWD_DEFINED__
-typedef interface IMFVideoCaptureSampleAllocator IMFVideoCaptureSampleAllocator;
+#ifndef __IMFCameraControlNotify_FWD_DEFINED__
+#define __IMFCameraControlNotify_FWD_DEFINED__
+typedef interface IMFCameraControlNotify IMFCameraControlNotify;
 
-#endif 	/* __IMFVideoCaptureSampleAllocator_FWD_DEFINED__ */
+#endif 	/* __IMFCameraControlNotify_FWD_DEFINED__ */
 
 
-#ifndef __IMFSampleAllocatorControl_FWD_DEFINED__
-#define __IMFSampleAllocatorControl_FWD_DEFINED__
-typedef interface IMFSampleAllocatorControl IMFSampleAllocatorControl;
+#ifndef __IMFCameraControlMonitor_FWD_DEFINED__
+#define __IMFCameraControlMonitor_FWD_DEFINED__
+typedef interface IMFCameraControlMonitor IMFCameraControlMonitor;
 
-#endif 	/* __IMFSampleAllocatorControl_FWD_DEFINED__ */
+#endif 	/* __IMFCameraControlMonitor_FWD_DEFINED__ */
+
+
+#ifndef __IMFCameraControlDefaults_FWD_DEFINED__
+#define __IMFCameraControlDefaults_FWD_DEFINED__
+typedef interface IMFCameraControlDefaults IMFCameraControlDefaults;
+
+#endif 	/* __IMFCameraControlDefaults_FWD_DEFINED__ */
+
+
+#ifndef __IMFCameraControlDefaultsCollection_FWD_DEFINED__
+#define __IMFCameraControlDefaultsCollection_FWD_DEFINED__
+typedef interface IMFCameraControlDefaultsCollection IMFCameraControlDefaultsCollection;
+
+#endif 	/* __IMFCameraControlDefaultsCollection_FWD_DEFINED__ */
+
+
+#ifndef __IMFCameraConfigurationManager_FWD_DEFINED__
+#define __IMFCameraConfigurationManager_FWD_DEFINED__
+typedef interface IMFCameraConfigurationManager IMFCameraConfigurationManager;
+
+#endif 	/* __IMFCameraConfigurationManager_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -19158,7 +19193,15 @@ EXTERN_GUID( MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_HW_SOURCE, 0xde7046ba, 0x
 EXTERN_GUID( MF_DEVSOURCE_ATTRIBUTE_FRIENDLY_NAME, 0x60d0e559, 0x52f8, 0x4fa2, 0xbb, 0xce, 0xac, 0xdb, 0x34, 0xa8, 0xec, 0x1);
 EXTERN_GUID( MF_DEVSOURCE_ATTRIBUTE_MEDIA_TYPE, 0x56a819ca, 0xc78, 0x4de4, 0xa0, 0xa7, 0x3d, 0xda, 0xba, 0xf, 0x24, 0xd4);
 EXTERN_GUID( MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_CATEGORY, 0x77f0ae69, 0xc3bd, 0x4509, 0x94, 0x1d, 0x46, 0x7e, 0x4d, 0x24, 0x89, 0x9e);
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+#pragma endregion
+#pragma region Application Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
 EXTERN_GUID( MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_SYMBOLIC_LINK, 0x58f0aad8, 0x22bf, 0x4f8a, 0xbb, 0x3d, 0xd2, 0xc4, 0x97, 0x8c, 0x6e, 0x2f);
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+#pragma endregion
+#pragma region Desktop Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 EXTERN_GUID( MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_AUDCAP_SYMBOLIC_LINK, 0x98d24b5e, 0x5930, 0x4614, 0xb5, 0xa1, 0xf6, 0x0, 0xf9, 0x35, 0x5a, 0x78);
 EXTERN_GUID( MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_MAX_BUFFERS, 0x7dd9b730, 0x4f2d, 0x41d5, 0x8f, 0x95, 0xc, 0xc9, 0xa9, 0x12, 0xba, 0x26);
 EXTERN_GUID( MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_AUDCAP_ENDPOINT_ID, 0x30da9258, 0xfeb9, 0x47a7, 0xa4, 0x53, 0x76, 0x3a, 0x7a, 0x8e, 0x1c, 0x5f);
@@ -23984,6 +24027,286 @@ MFCreateRelativePanelWatcher(
     _In_ PCWSTR displayMonitorDeviceId,
     _COM_Outptr_ IMFRelativePanelWatcher** ppRelativePanelWatcher
     );
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0129_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0129_v0_0_s_ifspec;
+
+#ifndef __IMFVideoCaptureSampleAllocator_INTERFACE_DEFINED__
+#define __IMFVideoCaptureSampleAllocator_INTERFACE_DEFINED__
+
+/* interface IMFVideoCaptureSampleAllocator */
+/* [unique][helpstring][uuid][local][object] */ 
+
+
+EXTERN_C const IID IID_IMFVideoCaptureSampleAllocator;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("725B77C7-CA9F-4FE5-9D72-9946BF9B3C70")
+    IMFVideoCaptureSampleAllocator : public IMFVideoSampleAllocator
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE InitializeCaptureSampleAllocator( 
+            /* [annotation][in] */ 
+            _In_  DWORD cbSampleSize,
+            /* [annotation][in] */ 
+            _In_  DWORD cbCaptureMetadataSize,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAlignment,
+            /* [annotation][in] */ 
+            _In_  DWORD cMinimumSamples,
+            /* [annotation][in] */ 
+            _In_opt_  IMFAttributes *pAttributes,
+            /* [annotation][in] */ 
+            _In_  IMFMediaType *pMediaType) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IMFVideoCaptureSampleAllocatorVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMFVideoCaptureSampleAllocator * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMFVideoCaptureSampleAllocator * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMFVideoCaptureSampleAllocator * This);
+        
+        DECLSPEC_XFGVIRT(IMFVideoSampleAllocator, SetDirectXManager)
+        HRESULT ( STDMETHODCALLTYPE *SetDirectXManager )( 
+            IMFVideoCaptureSampleAllocator * This,
+            /* [annotation][unique][in] */ 
+            _In_  IUnknown *pManager);
+        
+        DECLSPEC_XFGVIRT(IMFVideoSampleAllocator, UninitializeSampleAllocator)
+        HRESULT ( STDMETHODCALLTYPE *UninitializeSampleAllocator )( 
+            IMFVideoCaptureSampleAllocator * This);
+        
+        DECLSPEC_XFGVIRT(IMFVideoSampleAllocator, InitializeSampleAllocator)
+        HRESULT ( STDMETHODCALLTYPE *InitializeSampleAllocator )( 
+            IMFVideoCaptureSampleAllocator * This,
+            /* [annotation][in] */ 
+            _In_  DWORD cRequestedFrames,
+            /* [annotation][in] */ 
+            _In_  IMFMediaType *pMediaType);
+        
+        DECLSPEC_XFGVIRT(IMFVideoSampleAllocator, AllocateSample)
+        HRESULT ( STDMETHODCALLTYPE *AllocateSample )( 
+            IMFVideoCaptureSampleAllocator * This,
+            /* [annotation][out] */ 
+            _Out_  IMFSample **ppSample);
+        
+        DECLSPEC_XFGVIRT(IMFVideoCaptureSampleAllocator, InitializeCaptureSampleAllocator)
+        HRESULT ( STDMETHODCALLTYPE *InitializeCaptureSampleAllocator )( 
+            IMFVideoCaptureSampleAllocator * This,
+            /* [annotation][in] */ 
+            _In_  DWORD cbSampleSize,
+            /* [annotation][in] */ 
+            _In_  DWORD cbCaptureMetadataSize,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAlignment,
+            /* [annotation][in] */ 
+            _In_  DWORD cMinimumSamples,
+            /* [annotation][in] */ 
+            _In_opt_  IMFAttributes *pAttributes,
+            /* [annotation][in] */ 
+            _In_  IMFMediaType *pMediaType);
+        
+        END_INTERFACE
+    } IMFVideoCaptureSampleAllocatorVtbl;
+
+    interface IMFVideoCaptureSampleAllocator
+    {
+        CONST_VTBL struct IMFVideoCaptureSampleAllocatorVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMFVideoCaptureSampleAllocator_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IMFVideoCaptureSampleAllocator_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IMFVideoCaptureSampleAllocator_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IMFVideoCaptureSampleAllocator_SetDirectXManager(This,pManager)	\
+    ( (This)->lpVtbl -> SetDirectXManager(This,pManager) ) 
+
+#define IMFVideoCaptureSampleAllocator_UninitializeSampleAllocator(This)	\
+    ( (This)->lpVtbl -> UninitializeSampleAllocator(This) ) 
+
+#define IMFVideoCaptureSampleAllocator_InitializeSampleAllocator(This,cRequestedFrames,pMediaType)	\
+    ( (This)->lpVtbl -> InitializeSampleAllocator(This,cRequestedFrames,pMediaType) ) 
+
+#define IMFVideoCaptureSampleAllocator_AllocateSample(This,ppSample)	\
+    ( (This)->lpVtbl -> AllocateSample(This,ppSample) ) 
+
+
+#define IMFVideoCaptureSampleAllocator_InitializeCaptureSampleAllocator(This,cbSampleSize,cbCaptureMetadataSize,cbAlignment,cMinimumSamples,pAttributes,pMediaType)	\
+    ( (This)->lpVtbl -> InitializeCaptureSampleAllocator(This,cbSampleSize,cbCaptureMetadataSize,cbAlignment,cMinimumSamples,pAttributes,pMediaType) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMFVideoCaptureSampleAllocator_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_mfidl_0000_0130 */
+/* [local] */ 
+
+typedef 
+enum MFSampleAllocatorUsage
+    {
+        MFSampleAllocatorUsage_UsesProvidedAllocator	= 0,
+        MFSampleAllocatorUsage_UsesCustomAllocator	= ( MFSampleAllocatorUsage_UsesProvidedAllocator + 1 ) ,
+        MFSampleAllocatorUsage_DoesNotAllocate	= ( MFSampleAllocatorUsage_UsesCustomAllocator + 1 ) 
+    } 	MFSampleAllocatorUsage;
+
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0130_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0130_v0_0_s_ifspec;
+
+#ifndef __IMFSampleAllocatorControl_INTERFACE_DEFINED__
+#define __IMFSampleAllocatorControl_INTERFACE_DEFINED__
+
+/* interface IMFSampleAllocatorControl */
+/* [local][helpstring][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMFSampleAllocatorControl;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("DA62B958-3A38-4A97-BD27-149C640C0771")
+    IMFSampleAllocatorControl : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE SetDefaultAllocator( 
+            /* [annotation][in] */ 
+            _In_  DWORD dwOutputStreamID,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pAllocator) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetAllocatorUsage( 
+            /* [annotation][in] */ 
+            _In_  DWORD dwOutputStreamID,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwInputStreamID,
+            /* [annotation][out] */ 
+            _Out_  MFSampleAllocatorUsage *peUsage) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IMFSampleAllocatorControlVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMFSampleAllocatorControl * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMFSampleAllocatorControl * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMFSampleAllocatorControl * This);
+        
+        DECLSPEC_XFGVIRT(IMFSampleAllocatorControl, SetDefaultAllocator)
+        HRESULT ( STDMETHODCALLTYPE *SetDefaultAllocator )( 
+            IMFSampleAllocatorControl * This,
+            /* [annotation][in] */ 
+            _In_  DWORD dwOutputStreamID,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pAllocator);
+        
+        DECLSPEC_XFGVIRT(IMFSampleAllocatorControl, GetAllocatorUsage)
+        HRESULT ( STDMETHODCALLTYPE *GetAllocatorUsage )( 
+            IMFSampleAllocatorControl * This,
+            /* [annotation][in] */ 
+            _In_  DWORD dwOutputStreamID,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwInputStreamID,
+            /* [annotation][out] */ 
+            _Out_  MFSampleAllocatorUsage *peUsage);
+        
+        END_INTERFACE
+    } IMFSampleAllocatorControlVtbl;
+
+    interface IMFSampleAllocatorControl
+    {
+        CONST_VTBL struct IMFSampleAllocatorControlVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMFSampleAllocatorControl_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IMFSampleAllocatorControl_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IMFSampleAllocatorControl_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IMFSampleAllocatorControl_SetDefaultAllocator(This,dwOutputStreamID,pAllocator)	\
+    ( (This)->lpVtbl -> SetDefaultAllocator(This,dwOutputStreamID,pAllocator) ) 
+
+#define IMFSampleAllocatorControl_GetAllocatorUsage(This,dwOutputStreamID,pdwInputStreamID,peUsage)	\
+    ( (This)->lpVtbl -> GetAllocatorUsage(This,dwOutputStreamID,pdwInputStreamID,peUsage) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMFSampleAllocatorControl_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_mfidl_0000_0131 */
+/* [local] */ 
+
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_VB) 
 #if (NTDDI_VERSION >= NTDDI_WIN10_CO) 
 typedef /* [v1_enum] */ 
@@ -23997,8 +24320,8 @@ enum MFCameraOcclusionState
 DEFINE_ENUM_FLAG_OPERATORS(MFCameraOcclusionState)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0129_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0129_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0131_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0131_v0_0_s_ifspec;
 
 #ifndef __IMFCameraOcclusionStateReport_INTERFACE_DEFINED__
 #define __IMFCameraOcclusionStateReport_INTERFACE_DEFINED__
@@ -24275,7 +24598,7 @@ EXTERN_C const IID IID_IMFCameraOcclusionStateMonitor;
 #endif 	/* __IMFCameraOcclusionStateMonitor_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_mfidl_0000_0132 */
+/* interface __MIDL_itf_mfidl_0000_0134 */
 /* [local] */ 
 
 
@@ -24286,292 +24609,1027 @@ MFCreateCameraOcclusionStateMonitor(
     _COM_Outptr_ IMFCameraOcclusionStateMonitor** occlusionStateMonitor
     );
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_CO) 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
-
-
-extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0132_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0132_v0_0_s_ifspec;
-
-#ifndef __IMFVideoCaptureSampleAllocator_INTERFACE_DEFINED__
-#define __IMFVideoCaptureSampleAllocator_INTERFACE_DEFINED__
-
-/* interface IMFVideoCaptureSampleAllocator */
-/* [unique][helpstring][uuid][local][object] */ 
-
-
-EXTERN_C const IID IID_IMFVideoCaptureSampleAllocator;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("725B77C7-CA9F-4FE5-9D72-9946BF9B3C70")
-    IMFVideoCaptureSampleAllocator : public IMFVideoSampleAllocator
-    {
-    public:
-        virtual HRESULT STDMETHODCALLTYPE InitializeCaptureSampleAllocator( 
-            /* [annotation][in] */ 
-            _In_  DWORD cbSampleSize,
-            /* [annotation][in] */ 
-            _In_  DWORD cbCaptureMetadataSize,
-            /* [annotation][in] */ 
-            _In_  DWORD cbAlignment,
-            /* [annotation][in] */ 
-            _In_  DWORD cMinimumSamples,
-            /* [annotation][in] */ 
-            _In_opt_  IMFAttributes *pAttributes,
-            /* [annotation][in] */ 
-            _In_  IMFMediaType *pMediaType) = 0;
-        
-    };
-    
-    
-#else 	/* C style interface */
-
-    typedef struct IMFVideoCaptureSampleAllocatorVtbl
-    {
-        BEGIN_INTERFACE
-        
-        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IMFVideoCaptureSampleAllocator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppvObject);
-        
-        DECLSPEC_XFGVIRT(IUnknown, AddRef)
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IMFVideoCaptureSampleAllocator * This);
-        
-        DECLSPEC_XFGVIRT(IUnknown, Release)
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IMFVideoCaptureSampleAllocator * This);
-        
-        DECLSPEC_XFGVIRT(IMFVideoSampleAllocator, SetDirectXManager)
-        HRESULT ( STDMETHODCALLTYPE *SetDirectXManager )( 
-            IMFVideoCaptureSampleAllocator * This,
-            /* [annotation][unique][in] */ 
-            _In_  IUnknown *pManager);
-        
-        DECLSPEC_XFGVIRT(IMFVideoSampleAllocator, UninitializeSampleAllocator)
-        HRESULT ( STDMETHODCALLTYPE *UninitializeSampleAllocator )( 
-            IMFVideoCaptureSampleAllocator * This);
-        
-        DECLSPEC_XFGVIRT(IMFVideoSampleAllocator, InitializeSampleAllocator)
-        HRESULT ( STDMETHODCALLTYPE *InitializeSampleAllocator )( 
-            IMFVideoCaptureSampleAllocator * This,
-            /* [annotation][in] */ 
-            _In_  DWORD cRequestedFrames,
-            /* [annotation][in] */ 
-            _In_  IMFMediaType *pMediaType);
-        
-        DECLSPEC_XFGVIRT(IMFVideoSampleAllocator, AllocateSample)
-        HRESULT ( STDMETHODCALLTYPE *AllocateSample )( 
-            IMFVideoCaptureSampleAllocator * This,
-            /* [annotation][out] */ 
-            _Out_  IMFSample **ppSample);
-        
-        DECLSPEC_XFGVIRT(IMFVideoCaptureSampleAllocator, InitializeCaptureSampleAllocator)
-        HRESULT ( STDMETHODCALLTYPE *InitializeCaptureSampleAllocator )( 
-            IMFVideoCaptureSampleAllocator * This,
-            /* [annotation][in] */ 
-            _In_  DWORD cbSampleSize,
-            /* [annotation][in] */ 
-            _In_  DWORD cbCaptureMetadataSize,
-            /* [annotation][in] */ 
-            _In_  DWORD cbAlignment,
-            /* [annotation][in] */ 
-            _In_  DWORD cMinimumSamples,
-            /* [annotation][in] */ 
-            _In_opt_  IMFAttributes *pAttributes,
-            /* [annotation][in] */ 
-            _In_  IMFMediaType *pMediaType);
-        
-        END_INTERFACE
-    } IMFVideoCaptureSampleAllocatorVtbl;
-
-    interface IMFVideoCaptureSampleAllocator
-    {
-        CONST_VTBL struct IMFVideoCaptureSampleAllocatorVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IMFVideoCaptureSampleAllocator_QueryInterface(This,riid,ppvObject)	\
-    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
-
-#define IMFVideoCaptureSampleAllocator_AddRef(This)	\
-    ( (This)->lpVtbl -> AddRef(This) ) 
-
-#define IMFVideoCaptureSampleAllocator_Release(This)	\
-    ( (This)->lpVtbl -> Release(This) ) 
-
-
-#define IMFVideoCaptureSampleAllocator_SetDirectXManager(This,pManager)	\
-    ( (This)->lpVtbl -> SetDirectXManager(This,pManager) ) 
-
-#define IMFVideoCaptureSampleAllocator_UninitializeSampleAllocator(This)	\
-    ( (This)->lpVtbl -> UninitializeSampleAllocator(This) ) 
-
-#define IMFVideoCaptureSampleAllocator_InitializeSampleAllocator(This,cRequestedFrames,pMediaType)	\
-    ( (This)->lpVtbl -> InitializeSampleAllocator(This,cRequestedFrames,pMediaType) ) 
-
-#define IMFVideoCaptureSampleAllocator_AllocateSample(This,ppSample)	\
-    ( (This)->lpVtbl -> AllocateSample(This,ppSample) ) 
-
-
-#define IMFVideoCaptureSampleAllocator_InitializeCaptureSampleAllocator(This,cbSampleSize,cbCaptureMetadataSize,cbAlignment,cMinimumSamples,pAttributes,pMediaType)	\
-    ( (This)->lpVtbl -> InitializeCaptureSampleAllocator(This,cbSampleSize,cbCaptureMetadataSize,cbAlignment,cMinimumSamples,pAttributes,pMediaType) ) 
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __IMFVideoCaptureSampleAllocator_INTERFACE_DEFINED__ */
-
-
-/* interface __MIDL_itf_mfidl_0000_0133 */
-/* [local] */ 
-
-typedef 
-enum MFSampleAllocatorUsage
-    {
-        MFSampleAllocatorUsage_UsesProvidedAllocator	= 0,
-        MFSampleAllocatorUsage_UsesCustomAllocator	= ( MFSampleAllocatorUsage_UsesProvidedAllocator + 1 ) ,
-        MFSampleAllocatorUsage_DoesNotAllocate	= ( MFSampleAllocatorUsage_UsesCustomAllocator + 1 ) 
-    } 	MFSampleAllocatorUsage;
-
-
-
-extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0133_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0133_v0_0_s_ifspec;
-
-#ifndef __IMFSampleAllocatorControl_INTERFACE_DEFINED__
-#define __IMFSampleAllocatorControl_INTERFACE_DEFINED__
-
-/* interface IMFSampleAllocatorControl */
-/* [local][helpstring][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IMFSampleAllocatorControl;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("DA62B958-3A38-4A97-BD27-149C640C0771")
-    IMFSampleAllocatorControl : public IUnknown
-    {
-    public:
-        virtual HRESULT STDMETHODCALLTYPE SetDefaultAllocator( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwOutputStreamID,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pAllocator) = 0;
-        
-        virtual HRESULT STDMETHODCALLTYPE GetAllocatorUsage( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwOutputStreamID,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwInputStreamID,
-            /* [annotation][out] */ 
-            _Out_  MFSampleAllocatorUsage *peUsage) = 0;
-        
-    };
-    
-    
-#else 	/* C style interface */
-
-    typedef struct IMFSampleAllocatorControlVtbl
-    {
-        BEGIN_INTERFACE
-        
-        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IMFSampleAllocatorControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppvObject);
-        
-        DECLSPEC_XFGVIRT(IUnknown, AddRef)
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IMFSampleAllocatorControl * This);
-        
-        DECLSPEC_XFGVIRT(IUnknown, Release)
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IMFSampleAllocatorControl * This);
-        
-        DECLSPEC_XFGVIRT(IMFSampleAllocatorControl, SetDefaultAllocator)
-        HRESULT ( STDMETHODCALLTYPE *SetDefaultAllocator )( 
-            IMFSampleAllocatorControl * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwOutputStreamID,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pAllocator);
-        
-        DECLSPEC_XFGVIRT(IMFSampleAllocatorControl, GetAllocatorUsage)
-        HRESULT ( STDMETHODCALLTYPE *GetAllocatorUsage )( 
-            IMFSampleAllocatorControl * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwOutputStreamID,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwInputStreamID,
-            /* [annotation][out] */ 
-            _Out_  MFSampleAllocatorUsage *peUsage);
-        
-        END_INTERFACE
-    } IMFSampleAllocatorControlVtbl;
-
-    interface IMFSampleAllocatorControl
-    {
-        CONST_VTBL struct IMFSampleAllocatorControlVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IMFSampleAllocatorControl_QueryInterface(This,riid,ppvObject)	\
-    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
-
-#define IMFSampleAllocatorControl_AddRef(This)	\
-    ( (This)->lpVtbl -> AddRef(This) ) 
-
-#define IMFSampleAllocatorControl_Release(This)	\
-    ( (This)->lpVtbl -> Release(This) ) 
-
-
-#define IMFSampleAllocatorControl_SetDefaultAllocator(This,dwOutputStreamID,pAllocator)	\
-    ( (This)->lpVtbl -> SetDefaultAllocator(This,dwOutputStreamID,pAllocator) ) 
-
-#define IMFSampleAllocatorControl_GetAllocatorUsage(This,dwOutputStreamID,pdwInputStreamID,peUsage)	\
-    ( (This)->lpVtbl -> GetAllocatorUsage(This,dwOutputStreamID,pdwInputStreamID,peUsage) ) 
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __IMFSampleAllocatorControl_INTERFACE_DEFINED__ */
-
-
-/* interface __MIDL_itf_mfidl_0000_0134 */
-/* [local] */ 
-
-#pragma endregion 
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI) 
+EXTERN_GUID(KSPROPERTYSETID_ANYCAMERACONTROL, 0x94dd0c30, 0x28c7, 0x4efb, 0x9d, 0x6b, 0x81, 0x23, 0x0, 0xfb, 0xc, 0x7f);
 
 
 extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0134_v0_0_c_ifspec;
 extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0134_v0_0_s_ifspec;
+
+#ifndef __IMFCameraControlNotify_INTERFACE_DEFINED__
+#define __IMFCameraControlNotify_INTERFACE_DEFINED__
+
+/* interface IMFCameraControlNotify */
+/* [local][helpstring][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMFCameraControlNotify;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("E8F2540D-558A-4449-8B64-4863467A9FE8")
+    IMFCameraControlNotify : public IUnknown
+    {
+    public:
+        virtual void STDMETHODCALLTYPE OnChange( 
+            /* [annotation][in] */ 
+            _In_  REFGUID controlSet,
+            /* [annotation][in] */ 
+            _In_  UINT32 id) = 0;
+        
+        virtual void STDMETHODCALLTYPE OnError( 
+            /* [annotation][in] */ 
+            _In_  HRESULT hrStatus) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IMFCameraControlNotifyVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMFCameraControlNotify * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMFCameraControlNotify * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMFCameraControlNotify * This);
+        
+        DECLSPEC_XFGVIRT(IMFCameraControlNotify, OnChange)
+        void ( STDMETHODCALLTYPE *OnChange )( 
+            IMFCameraControlNotify * This,
+            /* [annotation][in] */ 
+            _In_  REFGUID controlSet,
+            /* [annotation][in] */ 
+            _In_  UINT32 id);
+        
+        DECLSPEC_XFGVIRT(IMFCameraControlNotify, OnError)
+        void ( STDMETHODCALLTYPE *OnError )( 
+            IMFCameraControlNotify * This,
+            /* [annotation][in] */ 
+            _In_  HRESULT hrStatus);
+        
+        END_INTERFACE
+    } IMFCameraControlNotifyVtbl;
+
+    interface IMFCameraControlNotify
+    {
+        CONST_VTBL struct IMFCameraControlNotifyVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMFCameraControlNotify_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IMFCameraControlNotify_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IMFCameraControlNotify_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IMFCameraControlNotify_OnChange(This,controlSet,id)	\
+    ( (This)->lpVtbl -> OnChange(This,controlSet,id) ) 
+
+#define IMFCameraControlNotify_OnError(This,hrStatus)	\
+    ( (This)->lpVtbl -> OnError(This,hrStatus) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMFCameraControlNotify_INTERFACE_DEFINED__ */
+
+
+#ifndef __IMFCameraControlMonitor_INTERFACE_DEFINED__
+#define __IMFCameraControlMonitor_INTERFACE_DEFINED__
+
+/* interface IMFCameraControlMonitor */
+/* [local][helpstring][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMFCameraControlMonitor;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("4D46F2C9-28BA-4970-8C7B-1F0C9D80AF69")
+    IMFCameraControlMonitor : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE Start( void) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE Stop( void) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE AddControlSubscription( 
+            /* [annotation][in] */ 
+            _In_  GUID controlSet,
+            /* [annotation][in] */ 
+            _In_  UINT32 id) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE RemoveControlSubscription( 
+            /* [annotation][in] */ 
+            _In_  GUID controlSet,
+            /* [annotation][in] */ 
+            _In_  UINT32 id) = 0;
+        
+        virtual void STDMETHODCALLTYPE Shutdown( void) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IMFCameraControlMonitorVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMFCameraControlMonitor * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMFCameraControlMonitor * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMFCameraControlMonitor * This);
+        
+        DECLSPEC_XFGVIRT(IMFCameraControlMonitor, Start)
+        HRESULT ( STDMETHODCALLTYPE *Start )( 
+            IMFCameraControlMonitor * This);
+        
+        DECLSPEC_XFGVIRT(IMFCameraControlMonitor, Stop)
+        HRESULT ( STDMETHODCALLTYPE *Stop )( 
+            IMFCameraControlMonitor * This);
+        
+        DECLSPEC_XFGVIRT(IMFCameraControlMonitor, AddControlSubscription)
+        HRESULT ( STDMETHODCALLTYPE *AddControlSubscription )( 
+            IMFCameraControlMonitor * This,
+            /* [annotation][in] */ 
+            _In_  GUID controlSet,
+            /* [annotation][in] */ 
+            _In_  UINT32 id);
+        
+        DECLSPEC_XFGVIRT(IMFCameraControlMonitor, RemoveControlSubscription)
+        HRESULT ( STDMETHODCALLTYPE *RemoveControlSubscription )( 
+            IMFCameraControlMonitor * This,
+            /* [annotation][in] */ 
+            _In_  GUID controlSet,
+            /* [annotation][in] */ 
+            _In_  UINT32 id);
+        
+        DECLSPEC_XFGVIRT(IMFCameraControlMonitor, Shutdown)
+        void ( STDMETHODCALLTYPE *Shutdown )( 
+            IMFCameraControlMonitor * This);
+        
+        END_INTERFACE
+    } IMFCameraControlMonitorVtbl;
+
+    interface IMFCameraControlMonitor
+    {
+        CONST_VTBL struct IMFCameraControlMonitorVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMFCameraControlMonitor_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IMFCameraControlMonitor_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IMFCameraControlMonitor_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IMFCameraControlMonitor_Start(This)	\
+    ( (This)->lpVtbl -> Start(This) ) 
+
+#define IMFCameraControlMonitor_Stop(This)	\
+    ( (This)->lpVtbl -> Stop(This) ) 
+
+#define IMFCameraControlMonitor_AddControlSubscription(This,controlSet,id)	\
+    ( (This)->lpVtbl -> AddControlSubscription(This,controlSet,id) ) 
+
+#define IMFCameraControlMonitor_RemoveControlSubscription(This,controlSet,id)	\
+    ( (This)->lpVtbl -> RemoveControlSubscription(This,controlSet,id) ) 
+
+#define IMFCameraControlMonitor_Shutdown(This)	\
+    ( (This)->lpVtbl -> Shutdown(This) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMFCameraControlMonitor_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_mfidl_0000_0136 */
+/* [local] */ 
+
+
+STDAPI
+MFCreateCameraControlMonitor(
+    _In_z_ LPCWSTR symbolicLink,
+    _In_ IMFCameraControlNotify* callback,
+    _COM_Outptr_ IMFCameraControlMonitor ** ppCameraControlMonitor
+    );
+typedef /* [public][public][public][public] */ 
+enum __MIDL___MIDL_itf_mfidl_0000_0136_0001
+    {
+        MF_CAMERA_CONTROL_CONFIGURATION_TYPE_PRESTART	= 0,
+        MF_CAMERA_CONTROL_CONFIGURATION_TYPE_POSTSTART	= ( MF_CAMERA_CONTROL_CONFIGURATION_TYPE_PRESTART + 1 ) 
+    } 	MF_CAMERA_CONTROL_CONFIGURATION_TYPE;
+
+typedef /* [public][public] */ struct __MIDL___MIDL_itf_mfidl_0000_0136_0002
+    {
+    LONG minValue;
+    LONG maxValue;
+    LONG stepValue;
+    LONG defaultValue;
+    } 	MF_CAMERA_CONTROL_RANGE_INFO;
+
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0136_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0136_v0_0_s_ifspec;
+
+#ifndef __IMFCameraControlDefaults_INTERFACE_DEFINED__
+#define __IMFCameraControlDefaults_INTERFACE_DEFINED__
+
+/* interface IMFCameraControlDefaults */
+/* [local][helpstring][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMFCameraControlDefaults;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("75510662-B034-48F4-88A7-8DE61DAA4AF9")
+    IMFCameraControlDefaults : public IUnknown
+    {
+    public:
+        virtual MF_CAMERA_CONTROL_CONFIGURATION_TYPE STDMETHODCALLTYPE GetType( void) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetRangeInfo( 
+            /* [annotation][out] */ 
+            _Out_  MF_CAMERA_CONTROL_RANGE_INFO *rangeInfo) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE LockControlData( 
+            /* [annotation][out] */ 
+            _Outptr_result_bytebuffer_(*controlSize)  void **control,
+            /* [annotation][out] */ 
+            _Out_  ULONG *controlSize,
+            /* [annotation][out] */ 
+            _Outptr_opt_result_bytebuffer_(*dataSize)  void **data,
+            /* [annotation][out] */ 
+            _Out_opt_  ULONG *dataSize) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE UnlockControlData( void) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IMFCameraControlDefaultsVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMFCameraControlDefaults * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMFCameraControlDefaults * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMFCameraControlDefaults * This);
+        
+        DECLSPEC_XFGVIRT(IMFCameraControlDefaults, GetType)
+        MF_CAMERA_CONTROL_CONFIGURATION_TYPE ( STDMETHODCALLTYPE *GetType )( 
+            IMFCameraControlDefaults * This);
+        
+        DECLSPEC_XFGVIRT(IMFCameraControlDefaults, GetRangeInfo)
+        HRESULT ( STDMETHODCALLTYPE *GetRangeInfo )( 
+            IMFCameraControlDefaults * This,
+            /* [annotation][out] */ 
+            _Out_  MF_CAMERA_CONTROL_RANGE_INFO *rangeInfo);
+        
+        DECLSPEC_XFGVIRT(IMFCameraControlDefaults, LockControlData)
+        HRESULT ( STDMETHODCALLTYPE *LockControlData )( 
+            IMFCameraControlDefaults * This,
+            /* [annotation][out] */ 
+            _Outptr_result_bytebuffer_(*controlSize)  void **control,
+            /* [annotation][out] */ 
+            _Out_  ULONG *controlSize,
+            /* [annotation][out] */ 
+            _Outptr_opt_result_bytebuffer_(*dataSize)  void **data,
+            /* [annotation][out] */ 
+            _Out_opt_  ULONG *dataSize);
+        
+        DECLSPEC_XFGVIRT(IMFCameraControlDefaults, UnlockControlData)
+        HRESULT ( STDMETHODCALLTYPE *UnlockControlData )( 
+            IMFCameraControlDefaults * This);
+        
+        END_INTERFACE
+    } IMFCameraControlDefaultsVtbl;
+
+    interface IMFCameraControlDefaults
+    {
+        CONST_VTBL struct IMFCameraControlDefaultsVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMFCameraControlDefaults_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IMFCameraControlDefaults_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IMFCameraControlDefaults_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IMFCameraControlDefaults_GetType(This)	\
+    ( (This)->lpVtbl -> GetType(This) ) 
+
+#define IMFCameraControlDefaults_GetRangeInfo(This,rangeInfo)	\
+    ( (This)->lpVtbl -> GetRangeInfo(This,rangeInfo) ) 
+
+#define IMFCameraControlDefaults_LockControlData(This,control,controlSize,data,dataSize)	\
+    ( (This)->lpVtbl -> LockControlData(This,control,controlSize,data,dataSize) ) 
+
+#define IMFCameraControlDefaults_UnlockControlData(This)	\
+    ( (This)->lpVtbl -> UnlockControlData(This) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMFCameraControlDefaults_INTERFACE_DEFINED__ */
+
+
+#ifndef __IMFCameraControlDefaultsCollection_INTERFACE_DEFINED__
+#define __IMFCameraControlDefaultsCollection_INTERFACE_DEFINED__
+
+/* interface IMFCameraControlDefaultsCollection */
+/* [local][helpstring][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMFCameraControlDefaultsCollection;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("92D43D0F-54A8-4BAE-96DA-356D259A5C26")
+    IMFCameraControlDefaultsCollection : public IMFAttributes
+    {
+    public:
+        virtual ULONG STDMETHODCALLTYPE GetControlCount( void) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetControl( 
+            /* [annotation][in] */ 
+            _In_  ULONG index,
+            /* [annotation][out] */ 
+            _COM_Outptr_  IMFCameraControlDefaults **configuration) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetOrAddExtendedControl( 
+            /* [annotation][in] */ 
+            _In_  MF_CAMERA_CONTROL_CONFIGURATION_TYPE configType,
+            /* [annotation][in] */ 
+            _In_  ULONG constrolId,
+            /* [annotation][in] */ 
+            _In_  DWORD streamId,
+            /* [annotation][in] */ 
+            _In_  ULONG dataSize,
+            /* [annotation][out] */ 
+            _COM_Outptr_  IMFCameraControlDefaults **defaults) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetOrAddControl( 
+            /* [annotation][in] */ 
+            _In_  MF_CAMERA_CONTROL_CONFIGURATION_TYPE configType,
+            /* [annotation][in] */ 
+            _In_  REFGUID controlSet,
+            /* [annotation][in] */ 
+            _In_  ULONG constrolId,
+            /* [annotation][in] */ 
+            _In_  ULONG controlSize,
+            /* [annotation][in] */ 
+            _In_  ULONG dataSize,
+            /* [annotation][out] */ 
+            _COM_Outptr_  IMFCameraControlDefaults **defaults) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE RemoveControl( 
+            /* [annotation][in] */ 
+            _In_  REFGUID controlSet,
+            /* [annotation][in] */ 
+            _In_  ULONG constrolId) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE RemoveAllControls( void) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IMFCameraControlDefaultsCollectionVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMFCameraControlDefaultsCollection * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMFCameraControlDefaultsCollection * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMFCameraControlDefaultsCollection * This);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, GetItem)
+        HRESULT ( STDMETHODCALLTYPE *GetItem )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey,
+            /* [full][out][in] */ PROPVARIANT *pValue);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, GetItemType)
+        HRESULT ( STDMETHODCALLTYPE *GetItemType )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey,
+            /* [annotation][out] */ 
+            _Out_  MF_ATTRIBUTE_TYPE *pType);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, CompareItem)
+        HRESULT ( STDMETHODCALLTYPE *CompareItem )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey,
+            REFPROPVARIANT Value,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbResult);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, Compare)
+        HRESULT ( STDMETHODCALLTYPE *Compare )( 
+            IMFCameraControlDefaultsCollection * This,
+            IMFAttributes *pTheirs,
+            MF_ATTRIBUTES_MATCH_TYPE MatchType,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbResult);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, GetUINT32)
+        HRESULT ( STDMETHODCALLTYPE *GetUINT32 )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey,
+            /* [annotation][out] */ 
+            _Out_  UINT32 *punValue);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, GetUINT64)
+        HRESULT ( STDMETHODCALLTYPE *GetUINT64 )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey,
+            /* [annotation][out] */ 
+            _Out_  UINT64 *punValue);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, GetDouble)
+        HRESULT ( STDMETHODCALLTYPE *GetDouble )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey,
+            /* [annotation][out] */ 
+            _Out_  double *pfValue);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, GetGUID)
+        HRESULT ( STDMETHODCALLTYPE *GetGUID )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey,
+            /* [annotation][out] */ 
+            _Out_  GUID *pguidValue);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, GetStringLength)
+        HRESULT ( STDMETHODCALLTYPE *GetStringLength )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey,
+            /* [annotation][out] */ 
+            _Out_  UINT32 *pcchLength);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, GetString)
+        HRESULT ( STDMETHODCALLTYPE *GetString )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cchBufSize)  LPWSTR pwszValue,
+            UINT32 cchBufSize,
+            /* [full][out][in] */ UINT32 *pcchLength);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, GetAllocatedString)
+        HRESULT ( STDMETHODCALLTYPE *GetAllocatedString )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcchLength + 1)  LPWSTR *ppwszValue,
+            /* [annotation][out] */ 
+            _Out_  UINT32 *pcchLength);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, GetBlobSize)
+        HRESULT ( STDMETHODCALLTYPE *GetBlobSize )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey,
+            /* [annotation][out] */ 
+            _Out_  UINT32 *pcbBlobSize);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, GetBlob)
+        HRESULT ( STDMETHODCALLTYPE *GetBlob )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cbBufSize)  UINT8 *pBuf,
+            UINT32 cbBufSize,
+            /* [full][out][in] */ UINT32 *pcbBlobSize);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, GetAllocatedBlob)
+        HRESULT ( STDMETHODCALLTYPE *GetAllocatedBlob )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcbSize)  UINT8 **ppBuf,
+            /* [annotation][out] */ 
+            _Out_  UINT32 *pcbSize);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, GetUnknown)
+        HRESULT ( STDMETHODCALLTYPE *GetUnknown )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey,
+            REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  LPVOID *ppv);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, SetItem)
+        HRESULT ( STDMETHODCALLTYPE *SetItem )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey,
+            REFPROPVARIANT Value);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, DeleteItem)
+        HRESULT ( STDMETHODCALLTYPE *DeleteItem )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, DeleteAllItems)
+        HRESULT ( STDMETHODCALLTYPE *DeleteAllItems )( 
+            IMFCameraControlDefaultsCollection * This);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, SetUINT32)
+        HRESULT ( STDMETHODCALLTYPE *SetUINT32 )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey,
+            UINT32 unValue);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, SetUINT64)
+        HRESULT ( STDMETHODCALLTYPE *SetUINT64 )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey,
+            UINT64 unValue);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, SetDouble)
+        HRESULT ( STDMETHODCALLTYPE *SetDouble )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey,
+            double fValue);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, SetGUID)
+        HRESULT ( STDMETHODCALLTYPE *SetGUID )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey,
+            REFGUID guidValue);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, SetString)
+        HRESULT ( STDMETHODCALLTYPE *SetString )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR wszValue);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, SetBlob)
+        HRESULT ( STDMETHODCALLTYPE *SetBlob )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbBufSize)  const UINT8 *pBuf,
+            UINT32 cbBufSize);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, SetUnknown)
+        HRESULT ( STDMETHODCALLTYPE *SetUnknown )( 
+            IMFCameraControlDefaultsCollection * This,
+            REFGUID guidKey,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnknown);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, LockStore)
+        HRESULT ( STDMETHODCALLTYPE *LockStore )( 
+            IMFCameraControlDefaultsCollection * This);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, UnlockStore)
+        HRESULT ( STDMETHODCALLTYPE *UnlockStore )( 
+            IMFCameraControlDefaultsCollection * This);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, GetCount)
+        HRESULT ( STDMETHODCALLTYPE *GetCount )( 
+            IMFCameraControlDefaultsCollection * This,
+            /* [annotation][out] */ 
+            _Out_  UINT32 *pcItems);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, GetItemByIndex)
+        HRESULT ( STDMETHODCALLTYPE *GetItemByIndex )( 
+            IMFCameraControlDefaultsCollection * This,
+            UINT32 unIndex,
+            /* [annotation][out] */ 
+            _Out_  GUID *pguidKey,
+            /* [full][out][in] */ PROPVARIANT *pValue);
+        
+        DECLSPEC_XFGVIRT(IMFAttributes, CopyAllItems)
+        HRESULT ( STDMETHODCALLTYPE *CopyAllItems )( 
+            IMFCameraControlDefaultsCollection * This,
+            /* [annotation][in] */ 
+            _In_  IMFAttributes *pDest);
+        
+        DECLSPEC_XFGVIRT(IMFCameraControlDefaultsCollection, GetControlCount)
+        ULONG ( STDMETHODCALLTYPE *GetControlCount )( 
+            IMFCameraControlDefaultsCollection * This);
+        
+        DECLSPEC_XFGVIRT(IMFCameraControlDefaultsCollection, GetControl)
+        HRESULT ( STDMETHODCALLTYPE *GetControl )( 
+            IMFCameraControlDefaultsCollection * This,
+            /* [annotation][in] */ 
+            _In_  ULONG index,
+            /* [annotation][out] */ 
+            _COM_Outptr_  IMFCameraControlDefaults **configuration);
+        
+        DECLSPEC_XFGVIRT(IMFCameraControlDefaultsCollection, GetOrAddExtendedControl)
+        HRESULT ( STDMETHODCALLTYPE *GetOrAddExtendedControl )( 
+            IMFCameraControlDefaultsCollection * This,
+            /* [annotation][in] */ 
+            _In_  MF_CAMERA_CONTROL_CONFIGURATION_TYPE configType,
+            /* [annotation][in] */ 
+            _In_  ULONG constrolId,
+            /* [annotation][in] */ 
+            _In_  DWORD streamId,
+            /* [annotation][in] */ 
+            _In_  ULONG dataSize,
+            /* [annotation][out] */ 
+            _COM_Outptr_  IMFCameraControlDefaults **defaults);
+        
+        DECLSPEC_XFGVIRT(IMFCameraControlDefaultsCollection, GetOrAddControl)
+        HRESULT ( STDMETHODCALLTYPE *GetOrAddControl )( 
+            IMFCameraControlDefaultsCollection * This,
+            /* [annotation][in] */ 
+            _In_  MF_CAMERA_CONTROL_CONFIGURATION_TYPE configType,
+            /* [annotation][in] */ 
+            _In_  REFGUID controlSet,
+            /* [annotation][in] */ 
+            _In_  ULONG constrolId,
+            /* [annotation][in] */ 
+            _In_  ULONG controlSize,
+            /* [annotation][in] */ 
+            _In_  ULONG dataSize,
+            /* [annotation][out] */ 
+            _COM_Outptr_  IMFCameraControlDefaults **defaults);
+        
+        DECLSPEC_XFGVIRT(IMFCameraControlDefaultsCollection, RemoveControl)
+        HRESULT ( STDMETHODCALLTYPE *RemoveControl )( 
+            IMFCameraControlDefaultsCollection * This,
+            /* [annotation][in] */ 
+            _In_  REFGUID controlSet,
+            /* [annotation][in] */ 
+            _In_  ULONG constrolId);
+        
+        DECLSPEC_XFGVIRT(IMFCameraControlDefaultsCollection, RemoveAllControls)
+        HRESULT ( STDMETHODCALLTYPE *RemoveAllControls )( 
+            IMFCameraControlDefaultsCollection * This);
+        
+        END_INTERFACE
+    } IMFCameraControlDefaultsCollectionVtbl;
+
+    interface IMFCameraControlDefaultsCollection
+    {
+        CONST_VTBL struct IMFCameraControlDefaultsCollectionVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMFCameraControlDefaultsCollection_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IMFCameraControlDefaultsCollection_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IMFCameraControlDefaultsCollection_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IMFCameraControlDefaultsCollection_GetItem(This,guidKey,pValue)	\
+    ( (This)->lpVtbl -> GetItem(This,guidKey,pValue) ) 
+
+#define IMFCameraControlDefaultsCollection_GetItemType(This,guidKey,pType)	\
+    ( (This)->lpVtbl -> GetItemType(This,guidKey,pType) ) 
+
+#define IMFCameraControlDefaultsCollection_CompareItem(This,guidKey,Value,pbResult)	\
+    ( (This)->lpVtbl -> CompareItem(This,guidKey,Value,pbResult) ) 
+
+#define IMFCameraControlDefaultsCollection_Compare(This,pTheirs,MatchType,pbResult)	\
+    ( (This)->lpVtbl -> Compare(This,pTheirs,MatchType,pbResult) ) 
+
+#define IMFCameraControlDefaultsCollection_GetUINT32(This,guidKey,punValue)	\
+    ( (This)->lpVtbl -> GetUINT32(This,guidKey,punValue) ) 
+
+#define IMFCameraControlDefaultsCollection_GetUINT64(This,guidKey,punValue)	\
+    ( (This)->lpVtbl -> GetUINT64(This,guidKey,punValue) ) 
+
+#define IMFCameraControlDefaultsCollection_GetDouble(This,guidKey,pfValue)	\
+    ( (This)->lpVtbl -> GetDouble(This,guidKey,pfValue) ) 
+
+#define IMFCameraControlDefaultsCollection_GetGUID(This,guidKey,pguidValue)	\
+    ( (This)->lpVtbl -> GetGUID(This,guidKey,pguidValue) ) 
+
+#define IMFCameraControlDefaultsCollection_GetStringLength(This,guidKey,pcchLength)	\
+    ( (This)->lpVtbl -> GetStringLength(This,guidKey,pcchLength) ) 
+
+#define IMFCameraControlDefaultsCollection_GetString(This,guidKey,pwszValue,cchBufSize,pcchLength)	\
+    ( (This)->lpVtbl -> GetString(This,guidKey,pwszValue,cchBufSize,pcchLength) ) 
+
+#define IMFCameraControlDefaultsCollection_GetAllocatedString(This,guidKey,ppwszValue,pcchLength)	\
+    ( (This)->lpVtbl -> GetAllocatedString(This,guidKey,ppwszValue,pcchLength) ) 
+
+#define IMFCameraControlDefaultsCollection_GetBlobSize(This,guidKey,pcbBlobSize)	\
+    ( (This)->lpVtbl -> GetBlobSize(This,guidKey,pcbBlobSize) ) 
+
+#define IMFCameraControlDefaultsCollection_GetBlob(This,guidKey,pBuf,cbBufSize,pcbBlobSize)	\
+    ( (This)->lpVtbl -> GetBlob(This,guidKey,pBuf,cbBufSize,pcbBlobSize) ) 
+
+#define IMFCameraControlDefaultsCollection_GetAllocatedBlob(This,guidKey,ppBuf,pcbSize)	\
+    ( (This)->lpVtbl -> GetAllocatedBlob(This,guidKey,ppBuf,pcbSize) ) 
+
+#define IMFCameraControlDefaultsCollection_GetUnknown(This,guidKey,riid,ppv)	\
+    ( (This)->lpVtbl -> GetUnknown(This,guidKey,riid,ppv) ) 
+
+#define IMFCameraControlDefaultsCollection_SetItem(This,guidKey,Value)	\
+    ( (This)->lpVtbl -> SetItem(This,guidKey,Value) ) 
+
+#define IMFCameraControlDefaultsCollection_DeleteItem(This,guidKey)	\
+    ( (This)->lpVtbl -> DeleteItem(This,guidKey) ) 
+
+#define IMFCameraControlDefaultsCollection_DeleteAllItems(This)	\
+    ( (This)->lpVtbl -> DeleteAllItems(This) ) 
+
+#define IMFCameraControlDefaultsCollection_SetUINT32(This,guidKey,unValue)	\
+    ( (This)->lpVtbl -> SetUINT32(This,guidKey,unValue) ) 
+
+#define IMFCameraControlDefaultsCollection_SetUINT64(This,guidKey,unValue)	\
+    ( (This)->lpVtbl -> SetUINT64(This,guidKey,unValue) ) 
+
+#define IMFCameraControlDefaultsCollection_SetDouble(This,guidKey,fValue)	\
+    ( (This)->lpVtbl -> SetDouble(This,guidKey,fValue) ) 
+
+#define IMFCameraControlDefaultsCollection_SetGUID(This,guidKey,guidValue)	\
+    ( (This)->lpVtbl -> SetGUID(This,guidKey,guidValue) ) 
+
+#define IMFCameraControlDefaultsCollection_SetString(This,guidKey,wszValue)	\
+    ( (This)->lpVtbl -> SetString(This,guidKey,wszValue) ) 
+
+#define IMFCameraControlDefaultsCollection_SetBlob(This,guidKey,pBuf,cbBufSize)	\
+    ( (This)->lpVtbl -> SetBlob(This,guidKey,pBuf,cbBufSize) ) 
+
+#define IMFCameraControlDefaultsCollection_SetUnknown(This,guidKey,pUnknown)	\
+    ( (This)->lpVtbl -> SetUnknown(This,guidKey,pUnknown) ) 
+
+#define IMFCameraControlDefaultsCollection_LockStore(This)	\
+    ( (This)->lpVtbl -> LockStore(This) ) 
+
+#define IMFCameraControlDefaultsCollection_UnlockStore(This)	\
+    ( (This)->lpVtbl -> UnlockStore(This) ) 
+
+#define IMFCameraControlDefaultsCollection_GetCount(This,pcItems)	\
+    ( (This)->lpVtbl -> GetCount(This,pcItems) ) 
+
+#define IMFCameraControlDefaultsCollection_GetItemByIndex(This,unIndex,pguidKey,pValue)	\
+    ( (This)->lpVtbl -> GetItemByIndex(This,unIndex,pguidKey,pValue) ) 
+
+#define IMFCameraControlDefaultsCollection_CopyAllItems(This,pDest)	\
+    ( (This)->lpVtbl -> CopyAllItems(This,pDest) ) 
+
+
+#define IMFCameraControlDefaultsCollection_GetControlCount(This)	\
+    ( (This)->lpVtbl -> GetControlCount(This) ) 
+
+#define IMFCameraControlDefaultsCollection_GetControl(This,index,configuration)	\
+    ( (This)->lpVtbl -> GetControl(This,index,configuration) ) 
+
+#define IMFCameraControlDefaultsCollection_GetOrAddExtendedControl(This,configType,constrolId,streamId,dataSize,defaults)	\
+    ( (This)->lpVtbl -> GetOrAddExtendedControl(This,configType,constrolId,streamId,dataSize,defaults) ) 
+
+#define IMFCameraControlDefaultsCollection_GetOrAddControl(This,configType,controlSet,constrolId,controlSize,dataSize,defaults)	\
+    ( (This)->lpVtbl -> GetOrAddControl(This,configType,controlSet,constrolId,controlSize,dataSize,defaults) ) 
+
+#define IMFCameraControlDefaultsCollection_RemoveControl(This,controlSet,constrolId)	\
+    ( (This)->lpVtbl -> RemoveControl(This,controlSet,constrolId) ) 
+
+#define IMFCameraControlDefaultsCollection_RemoveAllControls(This)	\
+    ( (This)->lpVtbl -> RemoveAllControls(This) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMFCameraControlDefaultsCollection_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_mfidl_0000_0138 */
+/* [local] */ 
+
+EXTERN_GUID(CLSID_CameraConfigurationManager, 0x6C92B540, 0x5854, 0x4A17,0x92, 0xB6, 0xAC, 0x89, 0xC9, 0x6E, 0x96, 0x83);
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0138_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0138_v0_0_s_ifspec;
+
+#ifndef __IMFCameraConfigurationManager_INTERFACE_DEFINED__
+#define __IMFCameraConfigurationManager_INTERFACE_DEFINED__
+
+/* interface IMFCameraConfigurationManager */
+/* [local][helpstring][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMFCameraConfigurationManager;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("A624F617-4704-4206-8A6D-EBDA4A093985")
+    IMFCameraConfigurationManager : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE LoadDefaults( 
+            /* [annotation][in] */ 
+            _In_  IMFAttributes *cameraAttributes,
+            /* [annotation][out] */ 
+            _COM_Outptr_  IMFCameraControlDefaultsCollection **configurations) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE SaveDefaults( 
+            /* [annotation][in] */ 
+            _In_  IMFCameraControlDefaultsCollection *configurations) = 0;
+        
+        virtual void STDMETHODCALLTYPE Shutdown( void) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IMFCameraConfigurationManagerVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMFCameraConfigurationManager * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMFCameraConfigurationManager * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMFCameraConfigurationManager * This);
+        
+        DECLSPEC_XFGVIRT(IMFCameraConfigurationManager, LoadDefaults)
+        HRESULT ( STDMETHODCALLTYPE *LoadDefaults )( 
+            IMFCameraConfigurationManager * This,
+            /* [annotation][in] */ 
+            _In_  IMFAttributes *cameraAttributes,
+            /* [annotation][out] */ 
+            _COM_Outptr_  IMFCameraControlDefaultsCollection **configurations);
+        
+        DECLSPEC_XFGVIRT(IMFCameraConfigurationManager, SaveDefaults)
+        HRESULT ( STDMETHODCALLTYPE *SaveDefaults )( 
+            IMFCameraConfigurationManager * This,
+            /* [annotation][in] */ 
+            _In_  IMFCameraControlDefaultsCollection *configurations);
+        
+        DECLSPEC_XFGVIRT(IMFCameraConfigurationManager, Shutdown)
+        void ( STDMETHODCALLTYPE *Shutdown )( 
+            IMFCameraConfigurationManager * This);
+        
+        END_INTERFACE
+    } IMFCameraConfigurationManagerVtbl;
+
+    interface IMFCameraConfigurationManager
+    {
+        CONST_VTBL struct IMFCameraConfigurationManagerVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMFCameraConfigurationManager_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IMFCameraConfigurationManager_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IMFCameraConfigurationManager_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IMFCameraConfigurationManager_LoadDefaults(This,cameraAttributes,configurations)	\
+    ( (This)->lpVtbl -> LoadDefaults(This,cameraAttributes,configurations) ) 
+
+#define IMFCameraConfigurationManager_SaveDefaults(This,configurations)	\
+    ( (This)->lpVtbl -> SaveDefaults(This,configurations) ) 
+
+#define IMFCameraConfigurationManager_Shutdown(This)	\
+    ( (This)->lpVtbl -> Shutdown(This) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMFCameraConfigurationManager_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_mfidl_0000_0139 */
+/* [local] */ 
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_NI) 
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+#pragma endregion 
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0139_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mfidl_0000_0139_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

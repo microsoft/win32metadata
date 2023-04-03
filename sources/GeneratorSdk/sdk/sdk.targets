@@ -129,6 +129,7 @@
       SdkIncRoot="$(SdkIncRoot)"
       SdkBinDir="$(WindowsSDKVersionedBinRoot)"
       AdditionalIncludes="$(AdditionalIncludes)"
+      MidlSwitches="$(MidlSwitches)"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
   </Target>
 
@@ -241,6 +242,7 @@
       ScraperOutputDir="$(GeneratedDir)"
       ResponseFiles="@(ConstantsScraperRsp)"
       Partitions="@(Partition)"
+      ManualCs="@(ManualCs)"
       EnumsJson="$(EnumsJson)"
       ToolsBinDir="$(ToolsBinDir)"
       HeaderTextFile="$(FinalConstantsScraperHeaderFile)"

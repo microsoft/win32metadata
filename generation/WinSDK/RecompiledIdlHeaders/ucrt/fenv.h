@@ -111,6 +111,7 @@ _ACRTIMP int __cdecl fesetround(_In_ int _Round);
             };
 
             double _Ans = 0.0;
+            (void) _Ans; // Suppress set-but-not-used warnings. _Ans is not "used" in the traditional static-analysis sense, but it is needed to trigger a floating point exception below.
             size_t _Index;
 
             if ((_Except &= FE_ALL_EXCEPT) == 0)

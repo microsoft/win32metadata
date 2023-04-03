@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -1276,7 +1276,8 @@ enum CLUSTER_OBJECT_TYPE
         CLUSTER_OBJECT_TYPE_QUORUM	= 0x9,
         CLUSTER_OBJECT_TYPE_SHARED_VOLUME	= 0xa,
         CLUSTER_OBJECT_TYPE_GROUPSET	= 0xd,
-        CLUSTER_OBJECT_TYPE_AFFINITYRULE	= 0x10
+        CLUSTER_OBJECT_TYPE_AFFINITYRULE	= 0x10,
+        CLUSTER_OBJECT_TYPE_FAULTDOMAIN	= 0x11
     } 	CLUSTER_OBJECT_TYPE;
 
 typedef 
@@ -1658,6 +1659,8 @@ enum CLCTL_CODES
         CLCTL_VALIDATE_COMMON_PROPERTIES	= ( ( ( 0x1 << 0 )  | ( ( 0 + 24 )  << 2 )  )  | ( 0 << 22 )  ) ,
         CLCTL_GET_COMMON_PROPERTY_FMTS	= ( ( ( 0x1 << 0 )  | ( ( 0 + 25 )  << 2 )  )  | ( 0 << 22 )  ) ,
         CLCTL_GET_COMMON_RESOURCE_PROPERTY_FMTS	= ( ( ( 0x1 << 0 )  | ( ( 0 + 26 )  << 2 )  )  | ( 0 << 22 )  ) ,
+        CLCTL_CHECK_VOTER_EVICT_WITNESS	= ( ( ( 0x1 << 0 )  | ( ( 0 + 27 )  << 2 )  )  | ( 0 << 22 )  ) ,
+        CLCTL_CHECK_VOTER_DOWN_WITNESS	= ( ( ( 0x1 << 0 )  | ( ( 0 + 28 )  << 2 )  )  | ( 0 << 22 )  ) ,
         CLCTL_ENUM_PRIVATE_PROPERTIES	= ( ( ( 0x1 << 0 )  | ( ( 0 + 30 )  << 2 )  )  | ( 0 << 22 )  ) ,
         CLCTL_GET_RO_PRIVATE_PROPERTIES	= ( ( ( 0x1 << 0 )  | ( ( 0 + 31 )  << 2 )  )  | ( 0 << 22 )  ) ,
         CLCTL_GET_PRIVATE_PROPERTIES	= ( ( ( 0x1 << 0 )  | ( ( 0 + 32 )  << 2 )  )  | ( 0 << 22 )  ) ,
@@ -2155,7 +2158,9 @@ enum CLUSCTL_CLUSTER_CODES
         CLUSCTL_CLUSTER_ENUM_AFFINITY_RULE_NAMES	= ( ( CLUS_OBJECT_CLUSTER << 24 )  | CLCTL_ENUM_AFFINITY_RULE_NAMES ) ,
         CLUSCTL_CLUSTER_GET_NODES_IN_FD	= ( ( CLUS_OBJECT_CLUSTER << 24 )  | CLCTL_GET_NODES_IN_FD ) ,
         CLUSCTL_CLUSTER_FORCE_FLUSH_DB	= ( ( CLUS_OBJECT_CLUSTER << 24 )  | CLCTL_FORCE_DB_FLUSH ) ,
-        CLUSCTL_CLUSTER_GET_CLMUSR_TOKEN	= ( ( CLUS_OBJECT_CLUSTER << 24 )  | CLCTL_NETNAME_GET_VIRTUAL_SERVER_TOKEN ) 
+        CLUSCTL_CLUSTER_GET_CLMUSR_TOKEN	= ( ( CLUS_OBJECT_CLUSTER << 24 )  | CLCTL_NETNAME_GET_VIRTUAL_SERVER_TOKEN ) ,
+        CLUSCTL_CLUSTER_CHECK_VOTER_EVICT_WITNESS	= ( ( CLUS_OBJECT_CLUSTER << 24 )  | CLCTL_CHECK_VOTER_EVICT_WITNESS ) ,
+        CLUSCTL_CLUSTER_CHECK_VOTER_DOWN_WITNESS	= ( ( CLUS_OBJECT_CLUSTER << 24 )  | CLCTL_CHECK_VOTER_DOWN_WITNESS ) 
     } 	CLUSCTL_CLUSTER_CODES;
 
 typedef 

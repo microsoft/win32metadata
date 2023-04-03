@@ -25,7 +25,7 @@
     <PackageProjectUrl>https://github.com/microsoft/win32metadata</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageIcon>images/windows.png</PackageIcon>
-    <LastWin32MetadataReleaseVersion>37.0.34-preview</LastWin32MetadataReleaseVersion>
+    <LastWin32MetadataReleaseVersion>48.0.19-preview</LastWin32MetadataReleaseVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,6 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.231" PrivateAssets="all" />
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.5.119" PrivateAssets="all" />
   </ItemGroup>
 </Project>

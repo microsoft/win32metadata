@@ -153,7 +153,13 @@
       <xs:pattern value=".+\.([Dd][Ll][Ll])"/>
     </xs:restriction>
   </xs:simpleType>
-  
+
+  <xs:simpleType name="ST_Dll_EXE_File">
+    <xs:restriction base="ST_FileName">
+      <xs:pattern value=".+\.(([Dd][Ll][Ll])|([Ee][Xx][Ee]))"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="ST_ImageFile">
     <xs:restriction base="ST_FileName">
       <xs:pattern value=".+\.((jpg)|(png)|(jpeg))"/>
@@ -175,6 +181,12 @@
   <xs:simpleType name="ST_AlphaNumericString">
     <xs:restriction base="ST_NonEmptyString">
       <xs:pattern value="[A-Za-z0-9]+"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ST_AlphaNumericString_WhitespaceAllowedWithin">
+    <xs:restriction base="ST_NonEmptyString">
+      <xs:pattern value="([A-Za-z0-9][A-Za-z0-9\s]*[A-Za-z0-9])|[A-Za-z0-9]+"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -926,6 +938,15 @@
       <xs:enumeration value="windows.fileExplorerClassicDragDropContextMenuHandler"/>
     </xs:restriction>
   </xs:simpleType>
+
+  <xs:simpleType name="ST_ExtensionCategory_Desktop10">
+    <xs:restriction base="xs:string">
+      <!-- Package Extensions -->
+      <xs:enumeration value="windows.folder"/>
+      <xs:enumeration value="windows.dataShortcuts"/>
+      <xs:enumeration value="windows.customDesktopEventLog"/>
+    </xs:restriction>
+  </xs:simpleType>
   
   <xs:simpleType name="ST_ExtensionCategory_PreviewAppCompat2">
     <xs:restriction base="xs:string">
@@ -1509,6 +1530,31 @@
       </xs:restriction>
   </xs:simpleType>
 
+  <!-- CLASSIC APP COMPAT KEYS SCHEMA TYPES -->
+  <xs:simpleType name="ST_RegistryPath">
+    <xs:restriction base="ST_NonEmptyString">
+      <xs:pattern value="[hH][kK][eE][yY]_[cC][uU][rR][rR][eE][nN][tT]_[uU][sS][eE][rR]\\.+"/>
+      <xs:pattern value="[hH][kK][eE][yY]_[lL][oO][cC][aA][lL]_[mM][aA][cC][hH][iI][nN][eE]\\[sS][oO][fF][tT][wW][aA][rR][eE]\\.+"/>
+      <xs:pattern value="[hH][kK][eE][yY]_[uU][sS][eE][rR][sS]\\[sS][oO][fF][tT][wW][aA][rR][eE]\\.+"/>
+      <xs:pattern value="[hH][kK][eE][yY]_[cC][uU][rR][rR][eE][nN][tT]_[cC][oO][nN][fF][iI][gG]\\[sS][oO][fF][tT][wW][aA][rR][eE]\\.+"/>
+      <xs:pattern value="[hH][kK][cC][uU]\\.+"/>
+      <xs:pattern value="[hH][kK][lL][mM]\\[sS][oO][fF][tT][wW][aA][rR][eE]\\.+"/>
+      <xs:pattern value="[hH][kK][uU]\\[sS][oO][fF][tT][wW][aA][rR][eE]\\.+"/>
+      <xs:pattern value="[hH][kK][cC][cC]\\[sS][oO][fF][tT][wW][aA][rR][eE]\\.+"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ST_ValueType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="REG_SZ"/>
+      <xs:enumeration value="REG_BINARY"/>
+      <xs:enumeration value="REG_DWORD"/>
+      <xs:enumeration value="REG_QWORD"/>
+      <xs:enumeration value="REG_MULTI_SZ"/>
+      <xs:enumeration value="REG_EXPAND_SZ"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
   <!-- CERTIFICATES EXTENSION SCHEMA TYPES -->
   <xs:simpleType name="ST_CertificateStoreName">
     <xs:restriction base="ST_FileNameCharSet">
@@ -1609,6 +1655,36 @@
       <xs:pattern value="\$\(([\.\w])*\)(/[^/\\]*[^./\\]+)+(/?)"/>
     </xs:restriction>
   </xs:simpleType>
-  
+
+  <xs:simpleType name="ST_HexInt8">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="0[xX][0-9A-Fa-f]{1,2}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ST_HexInt32">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="0[xX][0-9A-Fa-f]{1,8}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ST_HexInt64">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="0[xX][0-9A-Fa-f]{1,16}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ST_UInt8">
+    <xs:union memberTypes="xs:unsignedByte ST_HexInt8"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="ST_UInt32">
+    <xs:union memberTypes="xs:unsignedInt ST_HexInt32"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="ST_UInt64">
+    <xs:union memberTypes="xs:unsignedLong ST_HexInt64"/>
+  </xs:simpleType>
+
 </xs:schema>
 

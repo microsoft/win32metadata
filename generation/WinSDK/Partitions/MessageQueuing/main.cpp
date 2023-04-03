@@ -6,5 +6,5 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
-//#include <mq.h> -- Can't use both mq.h and mqoai.h
 #include <mqoai.h>
+#include <mq.h>

@@ -1364,7 +1364,7 @@ Examples:
 #define TraceLoggingUnicodeString(pValue, ...)  _tlgArgBuffer(struct _UNICODE_STRING, pValue, TlgInCOUNTEDSTRING,     (), __VA_ARGS__)
 
 /*
-Wrapper macro for raw binary data.
+Wrapper macros for raw binary data.
 Usage: TraceLoggingBinary(pValue, cbValue, "name", "description", tags).
 Usage: TraceLoggingBinaryEx(pValue, cbValue, TlgOutTYPE, "name", "description", tags).
 
@@ -1402,7 +1402,7 @@ Examples:
 #define TraceLoggingBinaryEx(pValue, cbValue, outType, ...)  _tlgArgBinary(void, pValue, cbValue, TlgInBINARY, (outType), __VA_ARGS__)
 
 /*
-Wrapper macros for event fields with PSOCKADDR, PSOCKADDR_IN, etc. values.
+Wrapper macro for event fields with PSOCKADDR, PSOCKADDR_IN, etc. values.
 Usage: TraceLoggingSocketAddress(pValue, cbValue, "name", "description", tags).
 
 Note that the amount of data needed for a SOCKADDR field varies depending on
@@ -1434,6 +1434,66 @@ Examples:
 - TraceLoggingSocketAddress(pSock, sizeof(*pSock), "name", "desc", 0x4) // field name = "name", description = "desc", tags = 0x4.
 */
 #define TraceLoggingSocketAddress(pValue, cbValue, ...) _tlgArgBinary(void, pValue, cbValue, TlgInBINARY, (TlgOutSOCKETADDRESS), __VA_ARGS__)
+
+/*
+Wrapper macro for event fields with IPv4 address values.
+Usage: TraceLoggingIPv4Address(value, "name", "description", tags).
+
+The name, description, and tags parameters are optional.
+
+The value parameter must be a UINT32-encoded IPv4 address
+(e.g. pSock->sin_addr.s_addr).
+
+If provided, the name parameter must be a string literal (not a variable) and
+must not contain any '\0' characters. If the name is not provided, the value
+parameter is used to automatically generate a name.
+
+If provided, the description parameter must be a string literal, and will be
+included in the debug symbols (PDB file). The description will not be
+available at runtime.
+
+If provided, the tags parameter must be an integer value. The low 28 bits of
+the value will be included in the field's metadata. The semantics of the tags
+are defined by the event consumer. During event processing, this tag can be
+retrieved from the EVENT_PROPERTY_INFO Tags field.
+
+Examples:
+- TraceLoggingIPv4Address(sin_addr.s_addr)                      // field name = "sin_addr.s_addr", description = unset,  tags = 0.
+- TraceLoggingIPv4Address(sin_addr.s_addr, "name")              // field name = "name", description = unset,  tags = 0.
+- TraceLoggingIPv4Address(sin_addr.s_addr, "name", "desc")      // field name = "name", description = "desc", tags = 0.
+- TraceLoggingIPv4Address(sin_addr.s_addr, "name", "desc", 0x4) // field name = "name", description = "desc", tags = 0x4.
+*/
+#define TraceLoggingIPv4Address(value, ...) _tlgArgScalarVal(UINT32, value, TlgInUINT32, (TlgOutIPV4),  __VA_ARGS__)
+
+/*
+Wrapper macro for event fields with IPv6 address values.
+Usage: TraceLoggingIPv6Address(pValue, "name", "description", tags).
+
+The name, description, and tags parameters are optional.
+
+The pValue parameter must not be NULL and must point at a 16-byte buffer
+(e.g. &pSock->sin6_addr).
+
+If provided, the name parameter must be a string literal (not a variable) and
+must not contain any '\0' characters. If the name is not provided, the pValue
+parameter is used to automatically generate a name.
+
+If provided, the description parameter must be a string literal, and will be
+included in the debug symbols (PDB file). The description will not be
+available at runtime.
+
+If provided, the tags parameter must be an integer value. The low 28 bits of
+the value will be included in the field's metadata. The semantics of the tags
+are defined by the event consumer. During event processing, this tag can be
+retrieved from the EVENT_PROPERTY_INFO Tags field.
+
+Examples:
+- TraceLoggingIPv6Address(&pSock->sin6_addr)                      // field name = "&pSock->sin6_addr", description = unset,  tags = 0.
+- TraceLoggingIPv6Address(&pSock->sin6_addr, "name")              // field name = "name", description = unset,  tags = 0.
+- TraceLoggingIPv6Address(&pSock->sin6_addr, "name", "desc")      // field name = "name", description = "desc", tags = 0.
+- TraceLoggingIPv6Address(&pSock->sin6_addr, "name", "desc", 0x4) // field name = "name", description = "desc", tags = 0x4.
+*/
+#define TraceLoggingIPv6Address(pValue, ...) _tlgArgBinary(void, pValue, 16u, TlgInBINARY, (TlgOutIPV6), __VA_ARGS__)
 
 #ifdef SID_DEFINED
 /*

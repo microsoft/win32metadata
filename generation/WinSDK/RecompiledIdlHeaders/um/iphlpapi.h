@@ -1042,6 +1042,134 @@ UnregisterInterfaceTimestampConfigChange(
     _In_ HIFTIMESTAMPCHANGE NotificationHandle
     );
 
+IPHLPAPI_DLL_LINKAGE
+DWORD
+WINAPI
+GetInterfaceCurrentTimestampCapabilities(
+    _In_ CONST NET_LUID *InterfaceLuid,
+    _Inout_ PINTERFACE_TIMESTAMP_CAPABILITIES TimestampCapabilites
+    );
+
+IPHLPAPI_DLL_LINKAGE
+DWORD
+WINAPI
+GetInterfaceHardwareTimestampCapabilities(
+    _In_ CONST NET_LUID *InterfaceLuid,
+    _Inout_ PINTERFACE_TIMESTAMP_CAPABILITIES TimestampCapabilites
+    );
+
+IPHLPAPI_DLL_LINKAGE
+DWORD
+WINAPI
+NotifyIfTimestampConfigChange(
+    _In_opt_ PVOID CallerContext,
+    _In_ PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK Callback,
+    _Out_ HIFTIMESTAMPCHANGE *NotificationHandle
+    );
+
+IPHLPAPI_DLL_LINKAGE
+VOID
+WINAPI
+CancelIfTimestampConfigChange(
+    _In_ HIFTIMESTAMPCHANGE NotificationHandle
+    );
+
+#elif (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+
+#define INTERFACE_TIMESTAMP_CAPABILITIES_VERSION_1 0x01
+#define INTERFACE_HARDWARE_CROSSTIMESTAMP_VERSION_1 0x01
+
+typedef struct _INTERFACE_TIMESTAMP_CAPABILITY_FLAGS
+{
+    BOOLEAN PtpV2OverUdpIPv4EventMsgReceiveHw;
+    BOOLEAN PtpV2OverUdpIPv4AllMsgReceiveHw;
+    BOOLEAN PtpV2OverUdpIPv4EventMsgTransmitHw;
+    BOOLEAN PtpV2OverUdpIPv4AllMsgTransmitHw;
+    BOOLEAN PtpV2OverUdpIPv6EventMsgReceiveHw;
+    BOOLEAN PtpV2OverUdpIPv6AllMsgReceiveHw;
+    BOOLEAN PtpV2OverUdpIPv6EventMsgTransmitHw;
+    BOOLEAN PtpV2OverUdpIPv6AllMsgTransmitHw;
+    BOOLEAN AllReceiveHw;
+    BOOLEAN AllTransmitHw;
+    BOOLEAN TaggedTransmitHw;
+    BOOLEAN AllReceiveSw;
+    BOOLEAN AllTransmitSw;
+    BOOLEAN TaggedTransmitSw;
+
+} INTERFACE_TIMESTAMP_CAPABILITY_FLAGS, *PINTERFACE_TIMESTAMP_CAPABILITY_FLAGS;
+
+typedef struct _INTERFACE_TIMESTAMP_CAPABILITIES
+{
+    ULONG Version;
+    ULONG64 HardwareClockFrequencyHz;
+    BOOLEAN CrossTimestamp;
+    ULONG64 Reserved1;
+    ULONG64 Reserved2;
+    INTERFACE_TIMESTAMP_CAPABILITY_FLAGS TimestampFlags;
+} INTERFACE_TIMESTAMP_CAPABILITIES, *PINTERFACE_TIMESTAMP_CAPABILITIES;
+
+typedef struct _INTERFACE_HARDWARE_CROSSTIMESTAMP
+{
+    ULONG Version;
+    ULONG Flags;
+    ULONG64 SystemTimestamp1;
+    ULONG64 HardwareClockTimestamp;
+    ULONG64 SystemTimestamp2;
+
+} INTERFACE_HARDWARE_CROSSTIMESTAMP, *PINTERFACE_HARDWARE_CROSSTIMESTAMP;
+
+DECLARE_HANDLE(HIFTIMESTAMPCHANGE);
+
+IPHLPAPI_DLL_LINKAGE
+DWORD
+WINAPI
+GetInterfaceCurrentTimestampCapabilities(
+    _In_ CONST NET_LUID *InterfaceLuid,
+    _Inout_ PINTERFACE_TIMESTAMP_CAPABILITIES TimestampCapabilites
+    );
+
+IPHLPAPI_DLL_LINKAGE
+DWORD
+WINAPI
+GetInterfaceHardwareTimestampCapabilities(
+    _In_ CONST NET_LUID *InterfaceLuid,
+    _Inout_ PINTERFACE_TIMESTAMP_CAPABILITIES TimestampCapabilites
+    );
+
+IPHLPAPI_DLL_LINKAGE
+DWORD
+WINAPI
+CaptureInterfaceHardwareCrossTimestamp(
+    _In_ CONST NET_LUID *InterfaceLuid,
+    _Inout_ PINTERFACE_HARDWARE_CROSSTIMESTAMP CrossTimestamp
+    );
+
+typedef
+VOID
+CALLBACK
+INTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK(
+    _In_ PVOID CallerContext
+    );
+
+typedef
+INTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK *PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK;
+
+IPHLPAPI_DLL_LINKAGE
+DWORD
+WINAPI
+NotifyIfTimestampConfigChange(
+    _In_opt_ PVOID CallerContext,
+    _In_ PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK Callback,
+    _Out_ HIFTIMESTAMPCHANGE *NotificationHandle
+    );
+
+IPHLPAPI_DLL_LINKAGE
+VOID
+WINAPI
+CancelIfTimestampConfigChange(
+    _In_ HIFTIMESTAMPCHANGE NotificationHandle
+    );
+
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_FE)
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */

@@ -39,6 +39,8 @@ namespace Windows
 
                 interface IAppCapability;
 
+                interface IAppCapability2;
+
                 interface IAppCapabilityAccessChangedEventArgs;
 
                 interface IAppCapabilityStatics;
@@ -113,6 +115,15 @@ namespace Windows
                     [eventremove] HRESULT AccessChanged([in] EventRegistrationToken token);
                 }
 
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+                [exclusiveto(Windows.Security.Authorization.AppCapabilityAccess.AppCapability)]
+                [uuid(11C7CCB6-C74F-50A3-B960-88008767D939)]
+                interface IAppCapability2 : IInspectable
+                {
+                    [propget] HRESULT DisplayMessage([out] [retval] HSTRING* value);
+                    [propput] HRESULT DisplayMessage([in] HSTRING value);
+                }
+
                 [contract(Windows.Foundation.UniversalApiContract, 8.0)]
                 [exclusiveto(Windows.Security.Authorization.AppCapabilityAccess.AppCapabilityAccessChangedEventArgs)]
                 [uuid(0A578D15-BDD7-457E-8CCA-6F53BD2E5944)]
@@ -138,6 +149,7 @@ namespace Windows
                 runtimeclass AppCapability
                 {
                     [default] interface Windows.Security.Authorization.AppCapabilityAccess.IAppCapability;
+                    [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Security.Authorization.AppCapabilityAccess.IAppCapability2;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 8.0)]

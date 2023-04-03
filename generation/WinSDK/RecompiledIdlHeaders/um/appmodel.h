@@ -857,6 +857,18 @@ GetIdForPackageDependencyContext(
 
 #endif // NTDDI_VERSION >= NTDDI_WIN10_CO
 
+#if NTDDI_VERSION >= NTDDI_WIN10_NI
+
+/// Returns the package graph's current revision ID.
+
+WINBASEAPI
+UINT32
+WINAPI
+GetPackageGraphRevisionId(
+    );
+
+#endif // NTDDI_VERSION >= NTDDI_WIN10_NI
+
 /* ---------------------------------------------------------------- */
 
 // Appmodel Policy

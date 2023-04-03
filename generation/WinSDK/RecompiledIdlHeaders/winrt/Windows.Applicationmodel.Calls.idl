@@ -994,7 +994,7 @@ namespace Windows
             [uuid(0167F56A-5344-5D64-8AF3-A31A950E916A)]
             interface IPhoneLine2 : IInspectable
             {
-                HRESULT EnableTextReply([in] boolean value);
+                [deprecated("EnableTextReply is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.CallsPhoneContract, 7.0)] HRESULT EnableTextReply([in] boolean value);
                 [propget] HRESULT TransportDeviceId([out] [retval] HSTRING* value);
             }
 

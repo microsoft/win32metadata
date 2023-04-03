@@ -168,8 +168,13 @@ typedef enum _FINDEX_SEARCH_OPS {
 #if(_WIN32_WINNT >= 0x0400)
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
 typedef enum _READ_DIRECTORY_NOTIFY_INFORMATION_CLASS {
-    ReadDirectoryNotifyInformation         = 1,
-    ReadDirectoryNotifyExtendedInformation // 2
+    ReadDirectoryNotifyInformation           = 1,
+    ReadDirectoryNotifyExtendedInformation, // 2
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
+    ReadDirectoryNotifyFullInformation,     // 3
+#endif
+                                            // add new classes above
+    ReadDirectoryNotifyMaximumInformation
 } READ_DIRECTORY_NOTIFY_INFORMATION_CLASS, *PREAD_DIRECTORY_NOTIFY_INFORMATION_CLASS;
 #endif
 #endif /* _WIN32_WINNT >= 0x0400 */

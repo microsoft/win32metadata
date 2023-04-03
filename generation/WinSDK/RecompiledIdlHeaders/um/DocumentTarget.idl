@@ -52,6 +52,26 @@ interface IPrintDocumentPackageTarget : IUnknown
     HRESULT Cancel();
 }
 
+[
+    object,
+    uuid(c560298a-535c-48f9-866a-632540660cb4),
+    helpstring("Document Target IPrintDocumentPackageTarget2 interface: allows users to see if the target printer is an Ipp Printer,
+     and returns IppPrinterDevice if the target is an Ipp Printer.")
+]
+interface IPrintDocumentPackageTarget2 : IUnknown
+{
+    [helpstring("This method returns true if the printer is an IppPrinter")]
+    HRESULT GetIsTargetIppPrinter(
+        [out]              BOOL*   isIppPrinter
+        );
+
+    [helpstring("This method returns IppPrinterDevice for the target printer.")]
+    HRESULT GetTargetIppPrintDevice(
+        [in]                REFIID  riid,
+        [out, iid_is(riid)] void**  ppvTarget
+        );
+}
+
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
 #pragma endregion
 

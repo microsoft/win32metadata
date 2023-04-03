@@ -8,6 +8,7 @@
            xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
            xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
            xmlns:uap11="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"
+           xmlns:desktop10="http://schemas.microsoft.com/appx/manifest/desktop/windows10/10"
            >
 
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/types"/>
@@ -15,6 +16,7 @@
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/10"/>
 
   <xs:element name="Extension" substitutionGroup="f:ExtensionChoice">
     <xs:complexType>
@@ -93,8 +95,15 @@
   
   <xs:element name="ExecutionAlias" substitutionGroup="uap3:ExecutionAliasChoice">
     <xs:complexType>
+      <xs:choice minOccurs="0">
+        <xs:element ref="desktop10:SupportedProtocols" />
+      </xs:choice>
       <xs:attribute name="Alias" type="t:ST_ExecutableNoPath" use="required"/>
       <xs:attribute ref="AllowOverride" use="optional"/>
+      <xs:attribute ref="desktop10:UseDesktopChangeRouter" use="optional"/>
+      <xs:attribute ref="desktop10:DropTarget" use="optional"/>
+      <xs:attribute ref="desktop10:UseUrl" use="optional"/>
+      <xs:attribute ref="desktop10:EnvironmentPath" use="optional"/>
     </xs:complexType>
   </xs:element>
 

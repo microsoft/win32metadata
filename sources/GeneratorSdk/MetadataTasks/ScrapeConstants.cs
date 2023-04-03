@@ -24,6 +24,9 @@ namespace MetadataTasks
         [Required]
         public ITaskItem[] Partitions { get; set; }
 
+        [Required]
+        public ITaskItem[] ManualCs {get; set;}
+
         public string EnumsJson { get; set; }
 
         [Required]
@@ -114,6 +117,8 @@ namespace MetadataTasks
         {
             IEnumerable<string> files = TaskUtils.GetFullPaths(this.ResponseFiles, this.MSBuildProjectDirectory);
 
+            files = files.Concat(TaskUtils.GetFullPaths(this.ManualCs, this.MSBuildProjectDirectory));
+
             if (this.EnumsJson != null)
             {
                 files = files.Concat(new string[] { TaskUtils.GetFullPath(this.EnumsJson, this.MSBuildProjectDirectory) });
@@ -137,6 +142,8 @@ namespace MetadataTasks
             {
                 rsp.Insert(0, "--traversedFileToNamespace\n");
             }
+
+            File.WriteAllText(Path.Combine(this.ScraperOutputDir, "traversedFileToNamespace.rsp"), rsp.ToString());
         }
     }
 }

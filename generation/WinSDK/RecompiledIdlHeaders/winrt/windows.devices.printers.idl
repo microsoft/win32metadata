@@ -10,6 +10,7 @@ import "AsyncInfo.idl";
 import "EventToken.idl";
 import "windowscontracts.idl";
 import "Windows.Foundation.idl";
+import "Windows.Graphics.Printing.idl";
 import "Windows.Storage.Streams.idl";
 
 // Forward Declare
@@ -19,9 +20,21 @@ namespace Windows
     {
         typedef struct DateTime DateTime;
 
+        interface IClosable;
+
         apicontract UniversalApiContract;
 
         runtimeclass Uri;
+    }
+}
+namespace Windows
+{
+    namespace Graphics
+    {
+        namespace Printing
+        {
+            runtimeclass PrintTaskOptions;
+        }
     }
 }
 namespace Windows
@@ -31,6 +44,10 @@ namespace Windows
         namespace Streams
         {
             interface IBuffer;
+
+            interface IInputStream;
+
+            interface IOutputStream;
 
             interface IRandomAccessStreamWithContentType;
         }
@@ -50,6 +67,8 @@ namespace Windows
 
             typedef enum IppResolutionUnit IppResolutionUnit;
 
+            typedef enum PageConfigurationSource PageConfigurationSource;
+
             interface IIppAttributeError;
 
             interface IIppAttributeValue;
@@ -62,6 +81,10 @@ namespace Windows
 
             interface IIppPrintDevice;
 
+            interface IIppPrintDevice2;
+
+            interface IIppPrintDeviceStatics;
+
             interface IIppResolution;
 
             interface IIppResolutionFactory;
@@ -71,6 +94,12 @@ namespace Windows
             interface IIppTextWithLanguage;
 
             interface IIppTextWithLanguageFactory;
+
+            interface IPageConfigurationSettings;
+
+            interface IPdlPassthroughProvider;
+
+            interface IPdlPassthroughTarget;
 
             interface IPrint3DDevice;
 
@@ -91,6 +120,12 @@ namespace Windows
             runtimeclass IppSetAttributesResult;
 
             runtimeclass IppTextWithLanguage;
+
+            runtimeclass PageConfigurationSettings;
+
+            runtimeclass PdlPassthroughProvider;
+
+            runtimeclass PdlPassthroughTarget;
 
             runtimeclass Print3DDevice;
 
@@ -229,6 +264,13 @@ namespace Windows
                 DotsPerCentimeter = 1
             };
 
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            enum PageConfigurationSource
+            {
+                PrintJobConfiguration = 0,
+                PdlContent            = 1
+            };
+
             [contract(Windows.Foundation.UniversalApiContract, 13.0)]
             [exclusiveto(Windows.Devices.Printers.IppAttributeError)]
             [uuid(750FEDA1-9EEF-5C39-93E4-46149BBCEF27)]
@@ -341,6 +383,28 @@ namespace Windows
                 HRESULT SetPrinterAttributes([in] Windows.Foundation.Collections.IIterable<Windows.Foundation.Collections.IKeyValuePair<HSTRING, Windows.Devices.Printers.IppAttributeValue*>*>* printerAttributes, [out] [retval] Windows.Devices.Printers.IppSetAttributesResult** result);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Devices.Printers.IppPrintDevice)]
+            [uuid(F7C844C9-9D21-5C63-AC20-3676915BE2D7)]
+            interface IIppPrintDevice2 : IInspectable
+            {
+                HRESULT GetMaxSupportedPdfSize([out] [retval] UINT64* result);
+                HRESULT GetMaxSupportedPdfVersion([out] [retval] HSTRING* result);
+                HRESULT IsPdlPassthroughSupported([in] HSTRING pdlContentType, [out] [retval] boolean* result);
+                HRESULT GetPdlPassthroughProvider([out] [retval] Windows.Devices.Printers.PdlPassthroughProvider** result);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Devices.Printers.IppPrintDevice)]
+            [uuid(7DC19F08-7F20-52AB-94A7-894B83B2A17E)]
+            interface IIppPrintDeviceStatics : IInspectable
+            {
+                HRESULT GetDeviceSelector([out] [retval] HSTRING* result);
+                HRESULT FromId([in] HSTRING deviceId, [out] [retval] Windows.Devices.Printers.IppPrintDevice** result);
+                HRESULT FromPrinterName([in] HSTRING printerName, [out] [retval] Windows.Devices.Printers.IppPrintDevice** result);
+                HRESULT IsIppPrinter([in] HSTRING printerName, [out] [retval] boolean* result);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 13.0)]
             [exclusiveto(Windows.Devices.Printers.IppResolution)]
             [uuid(CB493F86-6BF3-56F5-86CE-263D08AEAD63)]
@@ -383,6 +447,37 @@ namespace Windows
             interface IIppTextWithLanguageFactory : IInspectable
             {
                 HRESULT CreateInstance([in] HSTRING language, [in] HSTRING text, [out] [retval] Windows.Devices.Printers.IppTextWithLanguage** value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Devices.Printers.PageConfigurationSettings)]
+            [uuid(B6FC1E02-5331-54FF-95A0-1FCB76BB97A9)]
+            interface IPageConfigurationSettings : IInspectable
+            {
+                [propget] HRESULT OrientationSource([out] [retval] Windows.Devices.Printers.PageConfigurationSource* value);
+                [propput] HRESULT OrientationSource([in] Windows.Devices.Printers.PageConfigurationSource value);
+                [propget] HRESULT SizeSource([out] [retval] Windows.Devices.Printers.PageConfigurationSource* value);
+                [propput] HRESULT SizeSource([in] Windows.Devices.Printers.PageConfigurationSource value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Devices.Printers.PdlPassthroughProvider)]
+            [uuid(23C71DD2-6117-553F-9378-180AF5849A49)]
+            interface IPdlPassthroughProvider : IInspectable
+            {
+                [propget] HRESULT SupportedPdlContentTypes([out] [retval] Windows.Foundation.Collections.IVectorView<HSTRING>** value);
+                HRESULT StartPrintJobWithTaskOptions([in] HSTRING jobName, [in] HSTRING pdlContentType, [in] Windows.Graphics.Printing.PrintTaskOptions* taskOptions, [in] Windows.Devices.Printers.PageConfigurationSettings* pageConfigurationSettings, [out] [retval] Windows.Devices.Printers.PdlPassthroughTarget** result);
+                HRESULT StartPrintJobWithPrintTicket([in] HSTRING jobName, [in] HSTRING pdlContentType, [in] Windows.Storage.Streams.IInputStream* printTicket, [in] Windows.Devices.Printers.PageConfigurationSettings* pageConfigurationSettings, [out] [retval] Windows.Devices.Printers.PdlPassthroughTarget** result);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Devices.Printers.PdlPassthroughTarget)]
+            [uuid(9840BE79-67F8-5385-A5B9-E8C96E0FCA76)]
+            interface IPdlPassthroughTarget : IInspectable
+            {
+                [propget] HRESULT PrintJobId([out] [retval] INT32* value);
+                HRESULT GetOutputStream([out] [retval] Windows.Storage.Streams.IOutputStream** result);
+                HRESULT Submit();
             }
 
             [contract(Windows.Devices.Printers.PrintersContract, 1.0)]
@@ -439,9 +534,12 @@ namespace Windows
 
             [contract(Windows.Foundation.UniversalApiContract, 13.0)]
             [marshaling_behavior(agile)]
+            [static(Windows.Devices.Printers.IIppPrintDeviceStatics, Windows.Foundation.UniversalApiContract, 15.0)]
+            [threading(both)]
             runtimeclass IppPrintDevice
             {
                 [default] interface Windows.Devices.Printers.IIppPrintDevice;
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Devices.Printers.IIppPrintDevice2;
             }
 
             [activatable(Windows.Devices.Printers.IIppResolutionFactory, Windows.Foundation.UniversalApiContract, 13.0)]
@@ -467,6 +565,30 @@ namespace Windows
             runtimeclass IppTextWithLanguage
             {
                 [default] interface Windows.Devices.Printers.IIppTextWithLanguage;
+            }
+
+            [activatable(Windows.Foundation.UniversalApiContract, 15.0)]
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass PageConfigurationSettings
+            {
+                [default] interface Windows.Devices.Printers.IPageConfigurationSettings;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass PdlPassthroughProvider
+            {
+                [default] interface Windows.Devices.Printers.IPdlPassthroughProvider;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass PdlPassthroughTarget
+            {
+                [default] interface Windows.Devices.Printers.IPdlPassthroughTarget;
+                interface Windows.Foundation.IClosable;
             }
 
             [contract(Windows.Devices.Printers.PrintersContract, 1.0)]

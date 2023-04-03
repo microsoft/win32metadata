@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using Windows.Win32.Interop;
 using static Windows.Win32.Foundation.Apis;
 using static Windows.Win32.System.SystemServices.Apis;
@@ -13,6 +14,9 @@ namespace Windows.Win32.UI.Shell
 
         [NativeTypeName("HRESULT")]
         public const int HLINK_S_FIRST = OLE_S_LAST + 1;
+
+        [DllImport("SHELL32.dll", EntryPoint = "#660", CallingConvention = CallingConvention.StdCall, ExactSpelling = true)]
+        public static extern BOOL FileIconInit([In]BOOL fRestoreCache)
     }
 
     [Flags]

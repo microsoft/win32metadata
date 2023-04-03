@@ -112,7 +112,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -406,6 +406,23 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Printing {
+                namespace Workflow {
+                    interface IPrintWorkflowPdlConverter2;
+                } /* Workflow */
+            } /* Printing */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2 ABI::Windows::Graphics::Printing::Workflow::IPrintWorkflowPdlConverter2
+
+#endif // ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlDataAvailableEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlDataAvailableEventArgs_FWD_DEFINED__
 namespace ABI {
@@ -439,6 +456,23 @@ namespace ABI {
 #define __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs ABI::Windows::Graphics::Printing::Workflow::IPrintWorkflowPdlModificationRequestedEventArgs
 
 #endif // ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Printing {
+                namespace Workflow {
+                    interface IPrintWorkflowPdlModificationRequestedEventArgs2;
+                } /* Workflow */
+            } /* Printing */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2 ABI::Windows::Graphics::Printing::Workflow::IPrintWorkflowPdlModificationRequestedEventArgs2
+
+#endif // ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlSourceContent_FWD_DEFINED__
 #define ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlSourceContent_FWD_DEFINED__
@@ -1638,6 +1672,30 @@ namespace ABI {
         namespace Graphics {
             namespace Printing {
                 namespace Workflow {
+                    typedef enum PdlConversionHostBasedProcessingOperations : unsigned int PdlConversionHostBasedProcessingOperations;
+                } /* Workflow */
+            } /* Printing */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Printing {
+                namespace Workflow {
+                    typedef enum PrintWorkflowAttributesMergePolicy : int PrintWorkflowAttributesMergePolicy;
+                } /* Workflow */
+            } /* Printing */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Printing {
+                namespace Workflow {
                     typedef enum PrintWorkflowJobAbortReason : int PrintWorkflowJobAbortReason;
                 } /* Workflow */
             } /* Printing */
@@ -1848,6 +1906,63 @@ namespace ABI {
         } /* Graphics */
     } /* Windows */
 } /* ABI */
+
+/*
+ *
+ * Struct Windows.Graphics.Printing.Workflow.PdlConversionHostBasedProcessingOperations
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Printing {
+                namespace Workflow {
+                    enum PdlConversionHostBasedProcessingOperations : unsigned int
+                    {
+                        PdlConversionHostBasedProcessingOperations_None = 0,
+                        PdlConversionHostBasedProcessingOperations_PageRotation = 0x1,
+                        PdlConversionHostBasedProcessingOperations_PageOrdering = 0x2,
+                        PdlConversionHostBasedProcessingOperations_Copies = 0x4,
+                        PdlConversionHostBasedProcessingOperations_BlankPageInsertion = 0x8,
+                        PdlConversionHostBasedProcessingOperations_All = 0xffffffff,
+                    };
+
+                    DEFINE_ENUM_FLAG_OPERATORS(PdlConversionHostBasedProcessingOperations)
+                } /* Workflow */
+            } /* Printing */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Struct Windows.Graphics.Printing.Workflow.PrintWorkflowAttributesMergePolicy
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Printing {
+                namespace Workflow {
+                    enum PrintWorkflowAttributesMergePolicy : int
+                    {
+                        PrintWorkflowAttributesMergePolicy_MergePreferPrintTicketOnConflict = 0,
+                        PrintWorkflowAttributesMergePolicy_MergePreferPsaOnConflict = 1,
+                        PrintWorkflowAttributesMergePolicy_DoNotMergeWithPrintTicket = 2,
+                    };
+                } /* Workflow */
+            } /* Printing */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -2710,6 +2825,48 @@ EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWor
 
 /*
  *
+ * Interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlConverter2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Graphics.Printing.Workflow.PrintWorkflowPdlConverter
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Graphics_Printing_Workflow_IPrintWorkflowPdlConverter2[] = L"Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlConverter2";
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Printing {
+                namespace Workflow {
+                    MIDL_INTERFACE("854ceec1-7837-5b93-b7af-57a6998c2f71")
+                    IPrintWorkflowPdlConverter2 : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE ConvertPdlAsync(
+                            ABI::Windows::Graphics::Printing::PrintTicket::IWorkflowPrintTicket* printTicket,
+                            ABI::Windows::Storage::Streams::IInputStream* inputStream,
+                            ABI::Windows::Storage::Streams::IOutputStream* outputStream,
+                            ABI::Windows::Graphics::Printing::Workflow::PdlConversionHostBasedProcessingOperations hostBasedProcessingOperations,
+                            ABI::Windows::Foundation::IAsyncAction** operation
+                            ) = 0;
+                    };
+
+                    extern MIDL_CONST_ID IID& IID_IPrintWorkflowPdlConverter2 = _uuidof(IPrintWorkflowPdlConverter2);
+                } /* Workflow */
+            } /* Printing */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2;
+#endif /* !defined(____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlDataAvailableEventArgs
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
@@ -2822,6 +2979,57 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs;
 #endif /* !defined(____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlModificationRequestedEventArgs2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Graphics.Printing.Workflow.PrintWorkflowPdlModificationRequestedEventArgs
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Graphics_Printing_Workflow_IPrintWorkflowPdlModificationRequestedEventArgs2[] = L"Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlModificationRequestedEventArgs2";
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Printing {
+                namespace Workflow {
+                    MIDL_INTERFACE("8d692147-6c62-5e31-a0e7-d49f92c111c0")
+                    IPrintWorkflowPdlModificationRequestedEventArgs2 : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE CreateJobOnPrinterWithAttributes(
+                            __FIIterable_1___FIKeyValuePair_2_HSTRING_Windows__CDevices__CPrinters__CIppAttributeValue* jobAttributes,
+                            HSTRING targetContentType,
+                            __FIIterable_1___FIKeyValuePair_2_HSTRING_Windows__CDevices__CPrinters__CIppAttributeValue* operationAttributes,
+                            ABI::Windows::Graphics::Printing::Workflow::PrintWorkflowAttributesMergePolicy jobAttributesMergePolicy,
+                            ABI::Windows::Graphics::Printing::Workflow::PrintWorkflowAttributesMergePolicy operationAttributesMergePolicy,
+                            ABI::Windows::Graphics::Printing::Workflow::IPrintWorkflowPdlTargetStream** result
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE CreateJobOnPrinterWithAttributesBuffer(
+                            ABI::Windows::Storage::Streams::IBuffer* jobAttributesBuffer,
+                            HSTRING targetContentType,
+                            ABI::Windows::Storage::Streams::IBuffer* operationAttributesBuffer,
+                            ABI::Windows::Graphics::Printing::Workflow::PrintWorkflowAttributesMergePolicy jobAttributesMergePolicy,
+                            ABI::Windows::Graphics::Printing::Workflow::PrintWorkflowAttributesMergePolicy operationAttributesMergePolicy,
+                            ABI::Windows::Graphics::Printing::Workflow::IPrintWorkflowPdlTargetStream** result
+                            ) = 0;
+                    };
+
+                    extern MIDL_CONST_ID IID& IID_IPrintWorkflowPdlModificationRequestedEventArgs2 = _uuidof(IPrintWorkflowPdlModificationRequestedEventArgs2);
+                } /* Workflow */
+            } /* Printing */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2;
+#endif /* !defined(____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -3656,6 +3864,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlConverter ** Default Interface **
+ *    Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlConverter2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -3694,6 +3903,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlModificationRequestedEventArgs ** Default Interface **
+ *    Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlModificationRequestedEventArgs2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -4070,6 +4280,12 @@ typedef interface __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflow
 
 #endif // ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2 __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2;
+
+#endif // ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlDataAvailableEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlDataAvailableEventArgs_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlDataAvailableEventArgs __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlDataAvailableEventArgs;
@@ -4081,6 +4297,12 @@ typedef interface __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflow
 typedef interface __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs;
 
 #endif // ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2 __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2;
+
+#endif // ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlSourceContent_FWD_DEFINED__
 #define ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlSourceContent_FWD_DEFINED__
@@ -5557,6 +5779,10 @@ typedef interface __x_ABI_CWindows_CStorage_CStreams_CIOutputStream __x_ABI_CWin
 
 #endif // ____x_ABI_CWindows_CStorage_CStreams_CIOutputStream_FWD_DEFINED__
 
+typedef enum __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CPdlConversionHostBasedProcessingOperations __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CPdlConversionHostBasedProcessingOperations;
+
+typedef enum __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CPrintWorkflowAttributesMergePolicy __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CPrintWorkflowAttributesMergePolicy;
+
 typedef enum __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CPrintWorkflowJobAbortReason __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CPrintWorkflowJobAbortReason;
 
 typedef enum __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CPrintWorkflowPdlConversionType __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CPrintWorkflowPdlConversionType;
@@ -5566,6 +5792,41 @@ typedef enum __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CPrintWorkflowPrinte
 typedef enum __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CPrintWorkflowSessionStatus __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CPrintWorkflowSessionStatus;
 
 typedef enum __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CPrintWorkflowSubmittedStatus __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CPrintWorkflowSubmittedStatus;
+
+/*
+ *
+ * Struct Windows.Graphics.Printing.Workflow.PdlConversionHostBasedProcessingOperations
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+enum __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CPdlConversionHostBasedProcessingOperations
+{
+    PdlConversionHostBasedProcessingOperations_None = 0,
+    PdlConversionHostBasedProcessingOperations_PageRotation = 0x1,
+    PdlConversionHostBasedProcessingOperations_PageOrdering = 0x2,
+    PdlConversionHostBasedProcessingOperations_Copies = 0x4,
+    PdlConversionHostBasedProcessingOperations_BlankPageInsertion = 0x8,
+    PdlConversionHostBasedProcessingOperations_All = 0xffffffff,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Struct Windows.Graphics.Printing.Workflow.PrintWorkflowAttributesMergePolicy
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+enum __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CPrintWorkflowAttributesMergePolicy
+{
+    PrintWorkflowAttributesMergePolicy_MergePreferPrintTicketOnConflict = 0,
+    PrintWorkflowAttributesMergePolicy_MergePreferPsaOnConflict = 1,
+    PrintWorkflowAttributesMergePolicy_DoNotMergeWithPrintTicket = 2,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -6930,6 +7191,79 @@ EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWor
 
 /*
  *
+ * Interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlConverter2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Graphics.Printing.Workflow.PrintWorkflowPdlConverter
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Graphics_Printing_Workflow_IPrintWorkflowPdlConverter2[] = L"Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlConverter2";
+typedef struct __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* ConvertPdlAsync)(__x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2* This,
+        __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicket* printTicket,
+        __x_ABI_CWindows_CStorage_CStreams_CIInputStream* inputStream,
+        __x_ABI_CWindows_CStorage_CStreams_CIOutputStream* outputStream,
+        enum __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CPdlConversionHostBasedProcessingOperations hostBasedProcessingOperations,
+        __x_ABI_CWindows_CFoundation_CIAsyncAction** operation);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2Vtbl;
+
+interface __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2_ConvertPdlAsync(This, printTicket, inputStream, outputStream, hostBasedProcessingOperations, operation) \
+    ((This)->lpVtbl->ConvertPdlAsync(This, printTicket, inputStream, outputStream, hostBasedProcessingOperations, operation))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2;
+#endif /* !defined(____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlConverter2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlDataAvailableEventArgs
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
@@ -7126,6 +7460,90 @@ interface __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModif
 EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs;
 #endif /* !defined(____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlModificationRequestedEventArgs2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Graphics.Printing.Workflow.PrintWorkflowPdlModificationRequestedEventArgs
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Graphics_Printing_Workflow_IPrintWorkflowPdlModificationRequestedEventArgs2[] = L"Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlModificationRequestedEventArgs2";
+typedef struct __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* CreateJobOnPrinterWithAttributes)(__x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2* This,
+        __FIIterable_1___FIKeyValuePair_2_HSTRING_Windows__CDevices__CPrinters__CIppAttributeValue* jobAttributes,
+        HSTRING targetContentType,
+        __FIIterable_1___FIKeyValuePair_2_HSTRING_Windows__CDevices__CPrinters__CIppAttributeValue* operationAttributes,
+        enum __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CPrintWorkflowAttributesMergePolicy jobAttributesMergePolicy,
+        enum __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CPrintWorkflowAttributesMergePolicy operationAttributesMergePolicy,
+        __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlTargetStream** result);
+    HRESULT (STDMETHODCALLTYPE* CreateJobOnPrinterWithAttributesBuffer)(__x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2* This,
+        __x_ABI_CWindows_CStorage_CStreams_CIBuffer* jobAttributesBuffer,
+        HSTRING targetContentType,
+        __x_ABI_CWindows_CStorage_CStreams_CIBuffer* operationAttributesBuffer,
+        enum __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CPrintWorkflowAttributesMergePolicy jobAttributesMergePolicy,
+        enum __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CPrintWorkflowAttributesMergePolicy operationAttributesMergePolicy,
+        __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlTargetStream** result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2Vtbl;
+
+interface __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2_CreateJobOnPrinterWithAttributes(This, jobAttributes, targetContentType, operationAttributes, jobAttributesMergePolicy, operationAttributesMergePolicy, result) \
+    ((This)->lpVtbl->CreateJobOnPrinterWithAttributes(This, jobAttributes, targetContentType, operationAttributes, jobAttributesMergePolicy, operationAttributesMergePolicy, result))
+
+#define __x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2_CreateJobOnPrinterWithAttributesBuffer(This, jobAttributesBuffer, targetContentType, operationAttributesBuffer, jobAttributesMergePolicy, operationAttributesMergePolicy, result) \
+    ((This)->lpVtbl->CreateJobOnPrinterWithAttributesBuffer(This, jobAttributesBuffer, targetContentType, operationAttributesBuffer, jobAttributesMergePolicy, operationAttributesMergePolicy, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2;
+#endif /* !defined(____x_ABI_CWindows_CGraphics_CPrinting_CWorkflow_CIPrintWorkflowPdlModificationRequestedEventArgs2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -8401,6 +8819,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlConverter ** Default Interface **
+ *    Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlConverter2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -8439,6 +8858,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlModificationRequestedEventArgs ** Default Interface **
+ *    Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlModificationRequestedEventArgs2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

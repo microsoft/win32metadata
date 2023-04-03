@@ -699,6 +699,7 @@ typedef struct _CRYPT_PROVIDER_DATA
 #       define CPD_REVOCATION_CHECK_CHAIN               0x00040000
 #       define CPD_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT  0x00080000
 #       define CPD_RETURN_LOWER_QUALITY_CHAINS          0x00100000
+#       define CPD_RFC3161v21                           0x00200000
 
     DWORD                               dwFinalError;
 
@@ -864,6 +865,7 @@ typedef struct _CRYPT_PROVIDER_SGNR
     struct _CRYPT_PROVIDER_SGNR         *pasCounterSigners; // use Add2 and Get functions!
 
     PCCERT_CHAIN_CONTEXT                pChainContext;
+
 
 } CRYPT_PROVIDER_SGNR, *PCRYPT_PROVIDER_SGNR;
 
