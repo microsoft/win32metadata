@@ -11,3 +11,10 @@ Windows.Win32.System.Com.STGMEDIUM._u_e__Union added
 Windows.Win32.System.Com.STGMEDIUM.Anonymous removed
 Windows.Win32.System.Com.STGMEDIUM.u added
 Windows.Win32.System.Com.userSTGMEDIUM.u added
+# Fixed #1519.
+Windows.Win32.Security.Authentication.Identity.Apis.RtlDecryptMemory added
+Windows.Win32.Security.Authentication.Identity.Apis.RtlEncryptMemory added
+Windows.Win32.Security.Authentication.Identity.Apis.RtlGenRandom added
+Windows.Win32.Security.Authentication.Identity.Apis.SystemFunction036 removed
+Windows.Win32.Security.Authentication.Identity.Apis.SystemFunction040 removed
+Windows.Win32.Security.Authentication.Identity.Apis.SystemFunction041 removed
