@@ -47,3 +47,10 @@ Windows.Win32.Globalization.COMPARESTRING_RESULT added
 Windows.Win32.Globalization.COMPARESTRING_RESULT.CSTR_EQUAL added
 Windows.Win32.Globalization.COMPARESTRING_RESULT.CSTR_GREATER_THAN added
 Windows.Win32.Globalization.COMPARESTRING_RESULT.CSTR_LESS_THAN added
+# Fixed #1523.
+Windows.Win32.Security.Cryptography.Apis.BCRYPT_RNG_USE_ENTROPY_IN_BUFFER removed
+Windows.Win32.Security.Cryptography.Apis.BCRYPT_USE_SYSTEM_PREFERRED_RNG removed
+Windows.Win32.Security.Cryptography.Apis.BCryptGenRandom : dwFlags...UInt32 => BCRYPTGENRANDOM_FLAGS
+Windows.Win32.Security.Cryptography.BCRYPTGENRANDOM_FLAGS added
+Windows.Win32.Security.Cryptography.BCRYPTGENRANDOM_FLAGS.BCRYPT_RNG_USE_ENTROPY_IN_BUFFER added
+Windows.Win32.Security.Cryptography.BCRYPTGENRANDOM_FLAGS.BCRYPT_USE_SYSTEM_PREFERRED_RNG added
