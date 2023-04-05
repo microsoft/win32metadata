@@ -186,7 +186,7 @@ If CI builds pass but local builds of the same commit fail with cryptic error me
 
 ### Incremental builds
 
-Run `./DoAll.ps1` in [PowerShell 7](https://aka.ms/powershell-release?tag=stable) to run an incremental build, then inspect the reported winmd diff to ensure all changes were intentional. `./DoAll.ps1` without `-Clean` will recognize what files have changed and build only the necessary components required for those changes.
+Run `./DoAll.ps1 -ExcludePackages -ExcludeSamples` in [PowerShell 7](https://aka.ms/powershell-release?tag=stable) to run an incremental build, then inspect the reported winmd diff to ensure all changes were intentional. `./DoAll.ps1` without `-Clean` will recognize what files have changed and build only the necessary components required for those changes. Building NuGet packages and WinmdGenerator samples isn't usually necessary for local builds, so excluding them with `ExcludePackages` and `ExcludeSamples` will provide the fastest build times.
 
 Note that stale artifacts on your system may sometimes result in cryptic errors when attempting incremental builds. If you do encounter cryptic errors during incremental builds that you suspect are the result of previously built changes, reset your system state by running a clean build with `./DoAll.ps1 -Clean`.
 
