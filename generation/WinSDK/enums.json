@@ -7279,17 +7279,11 @@
     ]
   },
   {
-    "name": "FILE_NAME",
-    "members": [
-      {
-        "name": "FILE_NAME_NORMALIZED",
-        "value": "0"
-      },
-      {
-        "name": "FILE_NAME_OPENED",
-        "value": "8"
-      }
-    ],
+    "name": "GETFINALPATHNAMEBYHANDLE_FLAGS",
+    "autoPopulate": {
+      "header": "winbase.h",
+      "filter": "FILE_NAME|VOLUME_NAME"
+    },
     "uses": [
       {
         "method": "GetFinalPathNameByHandleA",

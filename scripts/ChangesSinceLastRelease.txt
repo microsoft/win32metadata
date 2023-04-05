@@ -18,3 +18,20 @@ Windows.Win32.Security.Authentication.Identity.Apis.RtlGenRandom added
 Windows.Win32.Security.Authentication.Identity.Apis.SystemFunction036 removed
 Windows.Win32.Security.Authentication.Identity.Apis.SystemFunction040 removed
 Windows.Win32.Security.Authentication.Identity.Apis.SystemFunction041 removed
+# Fixed #1520.
+Windows.Win32.Storage.FileSystem.Apis.GetFinalPathNameByHandleA : dwFlags...FILE_NAME => GETFINALPATHNAMEBYHANDLE_FLAGS
+Windows.Win32.Storage.FileSystem.Apis.GetFinalPathNameByHandleW : dwFlags...FILE_NAME => GETFINALPATHNAMEBYHANDLE_FLAGS
+Windows.Win32.Storage.FileSystem.FILE_NAME removed
+Windows.Win32.Storage.FileSystem.FILE_NAME.FILE_NAME_NORMALIZED removed
+Windows.Win32.Storage.FileSystem.FILE_NAME.FILE_NAME_OPENED removed
+Windows.Win32.Storage.FileSystem.GETFINALPATHNAMEBYHANDLE_FLAGS added
+Windows.Win32.Storage.FileSystem.GETFINALPATHNAMEBYHANDLE_FLAGS.FILE_NAME_NORMALIZED added
+Windows.Win32.Storage.FileSystem.GETFINALPATHNAMEBYHANDLE_FLAGS.FILE_NAME_OPENED added
+Windows.Win32.Storage.FileSystem.GETFINALPATHNAMEBYHANDLE_FLAGS.VOLUME_NAME_DOS added
+Windows.Win32.Storage.FileSystem.GETFINALPATHNAMEBYHANDLE_FLAGS.VOLUME_NAME_GUID added
+Windows.Win32.Storage.FileSystem.GETFINALPATHNAMEBYHANDLE_FLAGS.VOLUME_NAME_NONE added
+Windows.Win32.Storage.FileSystem.GETFINALPATHNAMEBYHANDLE_FLAGS.VOLUME_NAME_NT added
+Windows.Win32.System.WindowsProgramming.Apis.VOLUME_NAME_DOS removed
+Windows.Win32.System.WindowsProgramming.Apis.VOLUME_NAME_GUID removed
+Windows.Win32.System.WindowsProgramming.Apis.VOLUME_NAME_NONE removed
+Windows.Win32.System.WindowsProgramming.Apis.VOLUME_NAME_NT removed
