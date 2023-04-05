@@ -36031,6 +36031,31 @@
         "parameter": "categories"
       }
     ]
+  },
+  {
+    "name": "COMPARESTRING_RESULT",
+    "autoPopulate": {
+      "header": "winnls.h",
+      "filter": "CSTR_"
+    },
+    "uses": [
+      {
+        "method": "CompareStringA",
+        "parameter": "return"
+      },
+      {
+        "method": "CompareStringW",
+        "parameter": "return"
+      },
+      {
+        "method": "CompareStringEx",
+        "parameter": "return"
+      },
+      {
+        "method": "CompareStringOrdinal",
+        "parameter": "return"
+      }
+    ]
   }
 ]
 }

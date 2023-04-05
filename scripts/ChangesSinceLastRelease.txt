@@ -35,3 +35,15 @@ Windows.Win32.System.WindowsProgramming.Apis.VOLUME_NAME_DOS removed
 Windows.Win32.System.WindowsProgramming.Apis.VOLUME_NAME_GUID removed
 Windows.Win32.System.WindowsProgramming.Apis.VOLUME_NAME_NONE removed
 Windows.Win32.System.WindowsProgramming.Apis.VOLUME_NAME_NT removed
+# Fixed #1521.
+Windows.Win32.Globalization.Apis.CompareStringA : return...Int32 => COMPARESTRING_RESULT
+Windows.Win32.Globalization.Apis.CompareStringEx : return...Int32 => COMPARESTRING_RESULT
+Windows.Win32.Globalization.Apis.CompareStringOrdinal : return...Int32 => COMPARESTRING_RESULT
+Windows.Win32.Globalization.Apis.CompareStringW : return...Int32 => COMPARESTRING_RESULT
+Windows.Win32.Globalization.Apis.CSTR_EQUAL removed
+Windows.Win32.Globalization.Apis.CSTR_GREATER_THAN removed
+Windows.Win32.Globalization.Apis.CSTR_LESS_THAN removed
+Windows.Win32.Globalization.COMPARESTRING_RESULT added
+Windows.Win32.Globalization.COMPARESTRING_RESULT.CSTR_EQUAL added
+Windows.Win32.Globalization.COMPARESTRING_RESULT.CSTR_GREATER_THAN added
+Windows.Win32.Globalization.COMPARESTRING_RESULT.CSTR_LESS_THAN added
