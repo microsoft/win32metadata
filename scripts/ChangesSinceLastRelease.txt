@@ -54,3 +54,7 @@ Windows.Win32.Security.Cryptography.Apis.BCryptGenRandom : dwFlags...UInt32 => B
 Windows.Win32.Security.Cryptography.BCRYPTGENRANDOM_FLAGS added
 Windows.Win32.Security.Cryptography.BCRYPTGENRANDOM_FLAGS.BCRYPT_RNG_USE_ENTROPY_IN_BUFFER added
 Windows.Win32.Security.Cryptography.BCRYPTGENRANDOM_FLAGS.BCRYPT_USE_SYSTEM_PREFERRED_RNG added
+# Fixed #1526.
+Windows.Win32.Foundation.Metadata.ATestAttribute added
+Windows.Win32.UI.TextServices.Apis.TF_DEFAULT_SELECTION...System.UInt64 => System.UInt32
+Windows.Win32.UI.TextServices.Apis.TS_DEFAULT_SELECTION...System.UInt64 => System.UInt32
