@@ -2,7 +2,7 @@
   "profiles": {
     "ClangSharpSourceToWinmd": {
       "commandName": "Project",
-      "commandLineArgs": "--sourceDir $(ProjectDir)..\\..\\generation\\WinSDK\\obj\\generated --arch crossarch --interopFileName $(ProjectDir)..\\..\\bin\\Windows.Win32.Interop.dll --version 1.0.0.0 --outputFileName $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd --autoTypes $(ProjectDir)..\\..\\generation\\WinSDK\\autoTypes.json @$(ProjectDir)..\\..\\generation\\WinSDK\\emitter.settings.rsp @$(ProjectDir)..\\..\\generation\\WinSDK\\requiredNamespacesForNames.rsp @$(ProjectDir)..\\..\\generation\\WinSDK\\obj\\generated\\emitter.functionPointerFixups.generated.rsp @$(ProjectDir)..\\..\\generation\\WinSDK\\obj\\generated\\enumsMakeFlags.generated.rsp @$(ProjectDir)..\\..\\generation\\WinSDK\\obj\\generated\\enumsRemap.rsp"
+      "commandLineArgs": "--sourceDir $(ProjectDir)..\\..\\generation\\WinSDK\\obj\\generated --arch crossarch --version 1.0.0.0 --outputFileName $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd --autoTypes $(ProjectDir)..\\..\\generation\\WinSDK\\autoTypes.json @$(ProjectDir)..\\..\\generation\\WinSDK\\emitter.settings.rsp @$(ProjectDir)..\\..\\generation\\WinSDK\\requiredNamespacesForNames.rsp @$(ProjectDir)..\\..\\generation\\WinSDK\\obj\\generated\\emitter.functionPointerFixups.generated.rsp @$(ProjectDir)..\\..\\generation\\WinSDK\\obj\\generated\\enumsMakeFlags.generated.rsp @$(ProjectDir)..\\..\\generation\\WinSDK\\obj\\generated\\enumsRemap.rsp"
     },
     "TestSource": {
       "commandName": "Project",
