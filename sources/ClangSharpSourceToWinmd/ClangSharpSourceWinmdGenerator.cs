@@ -9,15 +9,15 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Reflection.Metadata.Ecma335;
 using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using MetadataUtils;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using MetadataUtils;
 
 namespace ClangSharpSourceToWinmd
 {
@@ -1335,6 +1335,25 @@ namespace ClangSharpSourceToWinmd
             MethodDefinitionHandle firstMethod = default;
             string classFullName = this.GetFullNameForSymbol(classSymbol);
 
+            foreach (ConstructorDeclarationSyntax constructor in node.Members.Where(m => m is ConstructorDeclarationSyntax))
+            {
+                var symbol = model.GetDeclaredSymbol(constructor);
+
+                MethodImplAttributes methodImplAttributes = MethodImplAttributes.Managed;
+                var methodDef =
+                    this.AddMethodViaSymbol(
+                        symbol,
+                        MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName,
+                        methodImplAttributes,
+                        false,
+                        false);
+
+                if (firstMethod.IsNil)
+                {
+                    firstMethod = methodDef;
+                }
+            }
+
             foreach (MethodDeclarationSyntax method in node.Members.Where(m => m is MethodDeclarationSyntax))
             {
                 var symbol = model.GetDeclaredSymbol(method);
@@ -1476,7 +1495,7 @@ namespace ClangSharpSourceToWinmd
                     typeAttributes,
                     nsHandle,
                     this.metadataBuilder.GetOrAddString(name),
-                    this.GetTypeReference("System", "Object"),
+                    this.GetTypeReference("System", node.BaseList is null ? "Object" : node.BaseList.Types[0].ToString()),
                     fieldList: fieldDefinition,
                     methodList: methodDefinition);
 

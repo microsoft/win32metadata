@@ -31,12 +31,9 @@ namespace Windows.Win32.Foundation.Metadata
     
     public class ConstantAttribute : Attribute
     {
-        public ConstantAttribute(String value)
+        public ConstantAttribute(String Value)
         {
-            this.Value = value;
         }
-
-        public string Value { get; }
     }
 
     public class ConstAttribute : Attribute
@@ -47,12 +44,9 @@ namespace Windows.Win32.Foundation.Metadata
     [ComVisible(true)]
     public sealed class CppAttributeList : Attribute
     {
-        public CppAttributeList(String attributeList)
+        public CppAttributeList(String AttributeList)
         {
-            this.AttributeList = attributeList;
         }
-
-        public string AttributeList { get; }
     }
     
     public class DoNotReleaseAttribute : Attribute
@@ -63,12 +57,9 @@ namespace Windows.Win32.Foundation.Metadata
     [ComVisible(true)]
     public sealed class FreeWithAttribute : Attribute
     {
-        public FreeWithAttribute(String name)
+        public FreeWithAttribute(String Name)
         {
-            this.Name = name;
         }
-
-        public string Name { get; }
     }
     
     public class GuidAttribute : Attribute
@@ -81,38 +72,52 @@ namespace Windows.Win32.Foundation.Metadata
     [AttributeUsage(AttributeTargets.Struct, AllowMultiple = true, Inherited = true)]
     public class InvalidHandleValueAttribute : Attribute
     {
-        public InvalidHandleValueAttribute(long value) => this.Value = value;
-        public long Value { get; }
+        public InvalidHandleValueAttribute(long Value)
+        {
+
+        }
     }
     
     public class MemorySizeAttribute : Attribute
     {
-        public short BytesParamIndex; 
+        private short _bytesParamIndex;
+
         public MemorySizeAttribute()
         {
         }
+
+        public short BytesParamIndex;
+        public short get_BytesParamIndex() => return _bytesParamIndex;
+        public void set_BytesParamIndex(short value) => _bytesParamIndex = value;
     }
     
     public class NativeArrayInfoAttribute : Attribute
     {
+        private int _countConst;
+        private short _countParamIndex;
+        private string _countFieldName;
+
         //
         // Summary:
         //     Indicates the number of elements in the fixed-length array or the number of characters
         //     (not bytes) in a string to import.
         public int CountConst;
+        public int get_CountConst() => return _countConst;
+        public void set_CountConst(int value) => _countConst = value;
+
         //
         // Summary:
         //     Indicates the zero-based parameter that contains the count of array elements,
         //     similar to size_is in COM.
         public short CountParamIndex;
+        public short get_CountParamIndex() => return _countParamIndex;
+        public void set_CountParamIndex(short value) => _countParamIndex = value;
         //
         // Summary:
         //     Indicates the struct field name that contains the count of array elements.
         public string CountFieldName;
-
-        public NativeArrayInfoAttribute()
-        {
-        }
+        public string get_CountFieldName() => return _countFieldName;
+        public void set_CountFieldName(string value) => _countFieldName = value;
     }
 
     /// <summary>Defines the encoding of a string as it was defined in the native signature.</summary>
@@ -123,24 +128,17 @@ namespace Windows.Win32.Foundation.Metadata
     {
         /// <summary>Initializes a new instance of the <see cref="NativeEncodingAttribute" /> class.</summary>
         /// <param name="name">The encoding of a string as it was defined in the native signature.</param>
-        public NativeEncodingAttribute(String name)
+        public NativeEncodingAttribute(String Name)
         {
-            this.Name = name;
         }
-
-        /// <summary>Gets the encoding of a string as it was defined in the native signature.</summary>
-        public string Name { get; }
     }
     
     [AttributeUsage(AttributeTargets.Struct, AllowMultiple = false, Inherited = true)]
     public sealed class NativeInheritanceAttribute : Attribute
     {
-        public NativeInheritanceAttribute(string baseName)
+        public NativeInheritanceAttribute(string BaseName)
         {
-            this.BaseName = BaseName;
         }
-
-        public string BaseName { get; }
     }
     
     public class NativeTypedefAttribute : Attribute
@@ -155,13 +153,9 @@ namespace Windows.Win32.Foundation.Metadata
     {
         /// <summary>Initializes a new instance of the <see cref="NativeTypeNameAttribute" /> class.</summary>
         /// <param name="name">The name of the type that was used in the native signature.</param>
-        public NativeTypeNameAttribute(String name)
+        public NativeTypeNameAttribute(String Name)
         {
-            this.Name = name;
         }
-
-        /// <summary>Gets the name of the type that was used in the native signature.</summary>
-        public string Name { get; }
     }
     
     public class NotNullTerminatedAttribute : Attribute
@@ -181,13 +175,9 @@ namespace Windows.Win32.Foundation.Metadata
     
     public class RAIIFreeAttribute : Attribute
     {
-        public RAIIFreeAttribute(string name)
+        public RAIIFreeAttribute(string Name)
         {
-            this.Name = name;
         }
-
-        /// <summary>Gets the name of the type that was used in the native signature.</summary>
-        public string Name { get; }
     }
     
     public class ReservedAttribute : Attribute
@@ -220,19 +210,9 @@ namespace Windows.Win32.Foundation.Metadata
         /// <param name="libName">
         /// The name of the LIB file that contains the definition of this method.
         /// </param>
-        public StaticLibraryAttribute(string libName)
+        public StaticLibraryAttribute(string LibName)
         {
-            this.Value = libName;
         }
-
-        /// <summary>
-        /// Gets the name of a static library which may be substituted for the
-        /// <see cref="System.Runtime.InteropServices.DllImportAttribute"/> DLL.
-        /// </summary>
-        /// <value>
-        /// The name of the LIB file that contains the definition of this entry point.
-        /// </value>
-        public string Value { get; }
     }
 
     public class StructSizeFieldAttribute : Attribute
