@@ -88,7 +88,7 @@ namespace Windows.Win32.UI.TextServices
         public static readonly Guid CLSID_TF_TransitoryExtensionUIEntry = new Guid("ae6be008-07fb-400d-8beb-337a64f7051f");
         public static readonly Guid CLSID_TsfServices = new Guid("39aedc00-6b60-46db-8d31-3642be0e4373");
 
-        public const ulong TF_DEFAULT_SELECTION = unchecked((ulong)-1);
-        public const ulong TS_DEFAULT_SELECTION = unchecked((ulong)-1);
+        public const uint TF_DEFAULT_SELECTION = unchecked((uint)-1);
+        public const uint TS_DEFAULT_SELECTION = unchecked((uint)-1);
     }
 }

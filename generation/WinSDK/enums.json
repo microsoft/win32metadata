@@ -2516,10 +2516,6 @@
       {
         "method": "ReOpenFile",
         "parameter": "dwShareMode"
-      },
-      {
-        "method": "NtCreateFile",
-        "parameter": "ShareAccess"
       }
     ]
   },
@@ -7283,17 +7279,11 @@
     ]
   },
   {
-    "name": "FILE_NAME",
-    "members": [
-      {
-        "name": "FILE_NAME_NORMALIZED",
-        "value": "0"
-      },
-      {
-        "name": "FILE_NAME_OPENED",
-        "value": "8"
-      }
-    ],
+    "name": "GETFINALPATHNAMEBYHANDLE_FLAGS",
+    "autoPopulate": {
+      "header": "winbase.h",
+      "filter": "FILE_NAME|VOLUME_NAME"
+    },
     "uses": [
       {
         "method": "GetFinalPathNameByHandleA",
@@ -16235,35 +16225,6 @@
     ]
   },
   {
-    "name": "NT_CREATE_FILE_DISPOSITION",
-    "members": [
-      {
-        "name": "FILE_SUPERSEDE"
-      },
-      {
-        "name": "FILE_CREATE"
-      },
-      {
-        "name": "FILE_OPEN"
-      },
-      {
-        "name": "FILE_OPEN_IF"
-      },
-      {
-        "name": "FILE_OVERWRITE"
-      },
-      {
-        "name": "FILE_OVERWRITE_IF"
-      }
-    ],
-    "uses": [
-      {
-        "method": "NtCreateFile",
-        "parameter": "CreateDisposition"
-      }
-    ]
-  },
-  {
     "name": "CREATE_FONT_PACKAGE_SUBSET_ENCODING",
     "type": "ushort",
     "members": [
@@ -19471,7 +19432,7 @@
     ]
   },
   {
-    "name": "DEVICE_CAPABILITIES",
+    "name": "PRINTER_DEVICE_CAPABILITIES",
     "type": "ushort",
     "members": [
       {
@@ -36068,6 +36029,48 @@
         "interface": "ICLRHostProtectionManager",
         "method": "SetProtectedCategories",
         "parameter": "categories"
+      }
+    ]
+  },
+  {
+    "name": "COMPARESTRING_RESULT",
+    "autoPopulate": {
+      "header": "winnls.h",
+      "filter": "CSTR_"
+    },
+    "uses": [
+      {
+        "method": "CompareStringA",
+        "parameter": "return"
+      },
+      {
+        "method": "CompareStringW",
+        "parameter": "return"
+      },
+      {
+        "method": "CompareStringEx",
+        "parameter": "return"
+      },
+      {
+        "method": "CompareStringOrdinal",
+        "parameter": "return"
+      }
+    ]
+  },
+  {
+    "name": "BCRYPTGENRANDOM_FLAGS",
+    "members": [
+      {
+        "name": "BCRYPT_RNG_USE_ENTROPY_IN_BUFFER"
+      },
+      {
+        "name": "BCRYPT_USE_SYSTEM_PREFERRED_RNG"
+      }
+    ],
+    "uses": [
+      {
+        "method": "BCryptGenRandom",
+        "parameter": "dwFlags"
       }
     ]
   }

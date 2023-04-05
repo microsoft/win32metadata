@@ -1,55 +1,59 @@
-# Correct ushort PSTR/PWSTR constant values
-Windows.Win32.Media.KernelStreaming.Apis.RT_RCDATA value init changed Int16->UInt16
-Windows.Win32.Media.KernelStreaming.Apis.RT_STRING value init changed Int16->UInt16
-Windows.Win32.UI.Controls.Apis.TD_ERROR_ICON value init changed Int16->UInt16
-Windows.Win32.UI.Controls.Apis.TD_INFORMATION_ICON value init changed Int16->UInt16
-Windows.Win32.UI.Controls.Apis.TD_SHIELD_ICON value init changed Int16->UInt16
-Windows.Win32.UI.Controls.Apis.TD_WARNING_ICON value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_APPSTARTING value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_ARROW value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_CROSS value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_HAND value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_HELP value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_IBEAM value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_ICON value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_NO value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_PERSON value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_PIN value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_SIZE value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_SIZEALL value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_SIZENESW value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_SIZENS value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_SIZENWSE value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_SIZEWE value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_UPARROW value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_WAIT value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.RT_ACCELERATOR value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.RT_ANICURSOR value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.RT_ANIICON value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.RT_BITMAP value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.RT_CURSOR value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.RT_DIALOG value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.RT_DLGINCLUDE value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.RT_FONT value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.RT_FONTDIR value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.RT_HTML value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.RT_ICON value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.RT_MENU value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.RT_MESSAGETABLE value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.RT_PLUGPLAY value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.RT_VERSION value init changed Int16->UInt16
-Windows.Win32.UI.WindowsAndMessaging.Apis.RT_VXD value init changed Int16->UInt16
-winmd1: Windows.Win32.UI.Controls.Apis.TD_ERROR_ICON = -2, winmd2 = 65534
-winmd1: Windows.Win32.UI.Controls.Apis.TD_INFORMATION_ICON = -3, winmd2 = 65533
-winmd1: Windows.Win32.UI.Controls.Apis.TD_SHIELD_ICON = -4, winmd2 = 65532
-winmd1: Windows.Win32.UI.Controls.Apis.TD_WARNING_ICON = -1, winmd2 = 65535
-# Fixed #903.
-# Fixed #903.
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DiInstallDevice : DriverInfoData...SP_DRVINFO_DATA_V2_A* => SP_DRVINFO_DATA_V2_W*
-Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVINSTALL_PARAMS_W.InstallMsgHandler(X64, Arm64)...Windows.Win32.Devices.DeviceAndDriverInstallation.PSP_FILE_CALLBACK_A => Windows.Win32.Devices.DeviceAndDriverInstallation.PSP_FILE_CALLBACK_W
-Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVINSTALL_PARAMS_W.InstallMsgHandler(X86)...Windows.Win32.Devices.DeviceAndDriverInstallation.PSP_FILE_CALLBACK_A => Windows.Win32.Devices.DeviceAndDriverInstallation.PSP_FILE_CALLBACK_W
-# Fixed bugs for #903.
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Hardware_Profile_Info_ExA : pHWProfileInfo...HWProfileInfo_sA* => HWPROFILEINFO_A*
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Hardware_Profile_InfoA : pHWProfileInfo...HWProfileInfo_sA* => HWPROFILEINFO_A*
-Windows.Win32.Devices.DeviceAndDriverInstallation.HWPROFILEINFO_A added
-Windows.Win32.Devices.DeviceAndDriverInstallation.HWProfileInfo_sA removed
+# Fixed #1518.
+Windows.Win32.System.Rpc.MIDL_STUB_DESC.pfnAllocate...System.IntPtr => Windows.Win32.System.Rpc.PFN_RPC_ALLOCATE
+Windows.Win32.System.Rpc.MIDL_STUB_DESC.pfnFree...System.IntPtr => Windows.Win32.System.Rpc.PFN_RPC_FREE
+Windows.Win32.System.Rpc.MIDL_STUB_MESSAGE.pfnAllocate...System.IntPtr => Windows.Win32.System.Rpc.PFN_RPC_ALLOCATE
+Windows.Win32.System.Rpc.MIDL_STUB_MESSAGE.pfnFree...System.IntPtr => Windows.Win32.System.Rpc.PFN_RPC_FREE
+Windows.Win32.System.Rpc.PFN_RPC_ALLOCATE added
+Windows.Win32.System.Rpc.PFN_RPC_FREE added
+# Fixed #469.
+Windows.Win32.System.Com.STGMEDIUM._Anonymous_e__Union removed
+Windows.Win32.System.Com.STGMEDIUM._u_e__Union added
+Windows.Win32.System.Com.STGMEDIUM.Anonymous removed
+Windows.Win32.System.Com.STGMEDIUM.u added
+Windows.Win32.System.Com.userSTGMEDIUM.u added
+# Fixed #1519.
+Windows.Win32.Security.Authentication.Identity.Apis.RtlDecryptMemory added
+Windows.Win32.Security.Authentication.Identity.Apis.RtlEncryptMemory added
+Windows.Win32.Security.Authentication.Identity.Apis.RtlGenRandom added
+Windows.Win32.Security.Authentication.Identity.Apis.SystemFunction036 removed
+Windows.Win32.Security.Authentication.Identity.Apis.SystemFunction040 removed
+Windows.Win32.Security.Authentication.Identity.Apis.SystemFunction041 removed
+# Fixed #1520.
+Windows.Win32.Storage.FileSystem.Apis.GetFinalPathNameByHandleA : dwFlags...FILE_NAME => GETFINALPATHNAMEBYHANDLE_FLAGS
+Windows.Win32.Storage.FileSystem.Apis.GetFinalPathNameByHandleW : dwFlags...FILE_NAME => GETFINALPATHNAMEBYHANDLE_FLAGS
+Windows.Win32.Storage.FileSystem.FILE_NAME removed
+Windows.Win32.Storage.FileSystem.FILE_NAME.FILE_NAME_NORMALIZED removed
+Windows.Win32.Storage.FileSystem.FILE_NAME.FILE_NAME_OPENED removed
+Windows.Win32.Storage.FileSystem.GETFINALPATHNAMEBYHANDLE_FLAGS added
+Windows.Win32.Storage.FileSystem.GETFINALPATHNAMEBYHANDLE_FLAGS.FILE_NAME_NORMALIZED added
+Windows.Win32.Storage.FileSystem.GETFINALPATHNAMEBYHANDLE_FLAGS.FILE_NAME_OPENED added
+Windows.Win32.Storage.FileSystem.GETFINALPATHNAMEBYHANDLE_FLAGS.VOLUME_NAME_DOS added
+Windows.Win32.Storage.FileSystem.GETFINALPATHNAMEBYHANDLE_FLAGS.VOLUME_NAME_GUID added
+Windows.Win32.Storage.FileSystem.GETFINALPATHNAMEBYHANDLE_FLAGS.VOLUME_NAME_NONE added
+Windows.Win32.Storage.FileSystem.GETFINALPATHNAMEBYHANDLE_FLAGS.VOLUME_NAME_NT added
+Windows.Win32.System.WindowsProgramming.Apis.VOLUME_NAME_DOS removed
+Windows.Win32.System.WindowsProgramming.Apis.VOLUME_NAME_GUID removed
+Windows.Win32.System.WindowsProgramming.Apis.VOLUME_NAME_NONE removed
+Windows.Win32.System.WindowsProgramming.Apis.VOLUME_NAME_NT removed
+# Fixed #1521.
+Windows.Win32.Globalization.Apis.CompareStringA : return...Int32 => COMPARESTRING_RESULT
+Windows.Win32.Globalization.Apis.CompareStringEx : return...Int32 => COMPARESTRING_RESULT
+Windows.Win32.Globalization.Apis.CompareStringOrdinal : return...Int32 => COMPARESTRING_RESULT
+Windows.Win32.Globalization.Apis.CompareStringW : return...Int32 => COMPARESTRING_RESULT
+Windows.Win32.Globalization.Apis.CSTR_EQUAL removed
+Windows.Win32.Globalization.Apis.CSTR_GREATER_THAN removed
+Windows.Win32.Globalization.Apis.CSTR_LESS_THAN removed
+Windows.Win32.Globalization.COMPARESTRING_RESULT added
+Windows.Win32.Globalization.COMPARESTRING_RESULT.CSTR_EQUAL added
+Windows.Win32.Globalization.COMPARESTRING_RESULT.CSTR_GREATER_THAN added
+Windows.Win32.Globalization.COMPARESTRING_RESULT.CSTR_LESS_THAN added
+# Fixed #1523.
+Windows.Win32.Security.Cryptography.Apis.BCRYPT_RNG_USE_ENTROPY_IN_BUFFER removed
+Windows.Win32.Security.Cryptography.Apis.BCRYPT_USE_SYSTEM_PREFERRED_RNG removed
+Windows.Win32.Security.Cryptography.Apis.BCryptGenRandom : dwFlags...UInt32 => BCRYPTGENRANDOM_FLAGS
+Windows.Win32.Security.Cryptography.BCRYPTGENRANDOM_FLAGS added
+Windows.Win32.Security.Cryptography.BCRYPTGENRANDOM_FLAGS.BCRYPT_RNG_USE_ENTROPY_IN_BUFFER added
+Windows.Win32.Security.Cryptography.BCRYPTGENRANDOM_FLAGS.BCRYPT_USE_SYSTEM_PREFERRED_RNG added
+# Fixed #1526.
+Windows.Win32.UI.TextServices.Apis.TF_DEFAULT_SELECTION...System.UInt64 => System.UInt32
+Windows.Win32.UI.TextServices.Apis.TS_DEFAULT_SELECTION...System.UInt64 => System.UInt32

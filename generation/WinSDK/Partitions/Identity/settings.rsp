@@ -5,6 +5,9 @@ SLDATATYPE=uint
 _CYPHER_BLOCK
 _LM_OWF_PASSWORD
 _SecHandle
+SystemFunction036
+SystemFunction040
+SystemFunction041
 --traverse
 <IncludeRoot>/shared/secext.h
 <IncludeRoot>/shared/security.h
