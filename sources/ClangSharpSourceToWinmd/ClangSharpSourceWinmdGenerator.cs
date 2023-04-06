@@ -1484,7 +1484,8 @@ namespace ClangSharpSourceToWinmd
             var name = node.Identifier.ValueText;
             string fullName = symbol.ConstructedFrom.ToString();
 
-            TypeAttributes typeAttributes = TypeAttributes.Public | TypeAttributes.AutoClass | TypeAttributes.Abstract | TypeAttributes.Sealed | TypeAttributes.BeforeFieldInit;
+            TypeAttributes typeAttributes = TypeAttributes.Public | TypeAttributes.Sealed | TypeAttributes.AutoClass | TypeAttributes.BeforeFieldInit;
+            typeAttributes |= node.BaseList is null ? TypeAttributes.Abstract : TypeAttributes.Class;
 
             if (methodDefinition.IsNil)
             {
