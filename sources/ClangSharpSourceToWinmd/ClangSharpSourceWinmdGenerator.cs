@@ -18,6 +18,7 @@ using MetadataUtils;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Newtonsoft.Json.Linq;
 
 namespace ClangSharpSourceToWinmd
 {
@@ -1246,11 +1247,16 @@ namespace ClangSharpSourceToWinmd
 
                 if (!fieldSymbol.IsConst)
                 {
-                    fieldAttributes = FieldAttributes.Public | FieldAttributes.Static;
+                    fieldAttributes = FieldAttributes.Public;
 
-                    if (!HasGuidAttribute(field.AttributeLists) && !HasConstantAttribute(field.AttributeLists))
+                    if (node.BaseList?.Types[0]?.ToString() != "Attribute")
                     {
-                        continue;
+                        fieldAttributes |= FieldAttributes.Static;
+
+                        if (!HasGuidAttribute(field.AttributeLists) && !HasConstantAttribute(field.AttributeLists))
+                        {
+                            continue;
+                        }
                     }
 
                     if (fieldSymbol.Name.StartsWith("IID_"))
@@ -1498,6 +1504,8 @@ namespace ClangSharpSourceToWinmd
                     this.GetTypeReference("System", node.BaseList is null ? "Object" : node.BaseList.Types[0].ToString()),
                     fieldList: fieldDefinition,
                     methodList: methodDefinition);
+
+            this.AddCustomAttributes(symbol.GetAttributes(), destTypeDefHandle);
 
             this.namesToTypeDefHandles[fullName] = destTypeDefHandle;
         }

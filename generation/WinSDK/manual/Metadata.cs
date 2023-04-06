@@ -80,44 +80,27 @@ namespace Windows.Win32.Foundation.Metadata
     
     public class MemorySizeAttribute : Attribute
     {
-        private short _bytesParamIndex;
-
-        public MemorySizeAttribute()
-        {
-        }
-
         public short BytesParamIndex;
-        public short get_BytesParamIndex() => return _bytesParamIndex;
-        public void set_BytesParamIndex(short value) => _bytesParamIndex = value;
     }
     
     public class NativeArrayInfoAttribute : Attribute
     {
-        private int _countConst;
-        private short _countParamIndex;
-        private string _countFieldName;
-
         //
         // Summary:
         //     Indicates the number of elements in the fixed-length array or the number of characters
         //     (not bytes) in a string to import.
         public int CountConst;
-        public int get_CountConst() => return _countConst;
-        public void set_CountConst(int value) => _countConst = value;
 
         //
         // Summary:
         //     Indicates the zero-based parameter that contains the count of array elements,
         //     similar to size_is in COM.
         public short CountParamIndex;
-        public short get_CountParamIndex() => return _countParamIndex;
-        public void set_CountParamIndex(short value) => _countParamIndex = value;
+
         //
         // Summary:
         //     Indicates the struct field name that contains the count of array elements.
         public string CountFieldName;
-        public string get_CountFieldName() => return _countFieldName;
-        public void set_CountFieldName(string value) => _countFieldName = value;
     }
 
     /// <summary>Defines the encoding of a string as it was defined in the native signature.</summary>
