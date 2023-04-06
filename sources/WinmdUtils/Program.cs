@@ -723,7 +723,7 @@ namespace WinmdUtilsProgram
 
         private static string GetArchInfo(IEnumerable<IAttribute> attributes)
         {
-            var archAttr = attributes.FirstOrDefault(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute");
+            var archAttr = attributes.FirstOrDefault(a => a.AttributeType.Name == "SupportedArchitectureAttribute");
             if (archAttr != null)
             {
                 Architecture arch = (Architecture)archAttr.FixedArguments[0].Value;
