@@ -36073,6 +36073,19 @@
         "parameter": "dwFlags"
       }
     ]
+  },
+  {
+    "name": "FILE_DISPOSITION_INFO_EX_FLAGS",
+    "autoPopulate": {
+      "header": "winbase.h",
+      "filter": "FILE_DISPOSITION_FLAG_"
+    },
+    "uses": [
+      {
+        "struct": "FILE_DISPOSITION_INFO_EX",
+        "field": "Flags"
+      }
+    ]
   }
 ]
 }

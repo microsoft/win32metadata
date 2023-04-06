@@ -801,6 +801,7 @@ FILE_ATTRIBUTE_TAG_INFO=Windows.Win32.Storage.FileSystem
 FILE_BASIC_INFO=Windows.Win32.Storage.FileSystem
 FILE_COMPRESSION_INFO=Windows.Win32.Storage.FileSystem
 FILE_DISPOSITION_INFO=Windows.Win32.Storage.FileSystem
+FILE_DISPOSITION_INFO_EX=Windows.Win32.Storage.FileSystem
 FILE_END_OF_FILE_INFO=Windows.Win32.Storage.FileSystem
 FILE_FULL_DIR_INFO=Windows.Win32.Storage.FileSystem
 FILE_ID_BOTH_DIR_INFO=Windows.Win32.Storage.FileSystem
