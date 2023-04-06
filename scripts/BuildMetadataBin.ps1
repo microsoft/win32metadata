@@ -27,10 +27,6 @@ if (!$skipInstallTools.IsPresent)
 
 $assemblyVersion = nbgv get-version -v AssemblyVersion
 
-$metadataInteropBin = "$PSScriptRoot\..\bin\Release\netstandard2.1\Windows.Win32.Interop.dll"
-
-Copy-Item $metadataInteropBin $binDir
-
 $arch = "crossarch"
 
 $outputWinmdFileName = Get-OutputWinmdFileName -Arch $arch

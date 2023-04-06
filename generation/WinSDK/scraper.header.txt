@@ -29,6 +29,7 @@ using Windows.Win32.Devices.Tapi;
 using Windows.Win32.Devices.Usb;
 using Windows.Win32.Devices.WebServicesOnDevices;
 using Windows.Win32.Foundation;
+using Windows.Win32.Foundation.Metadata;
 using Windows.Win32.Gaming;
 using Windows.Win32.Globalization;
 using Windows.Win32.Graphics.Direct2D;

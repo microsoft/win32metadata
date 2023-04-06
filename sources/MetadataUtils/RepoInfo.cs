@@ -34,7 +34,7 @@ namespace MetadataUtils
             using (StreamWriter streamWriter = new StreamWriter(headerPath))
             {
                 streamWriter.WriteLine("// Copyright © Microsoft");
-                streamWriter.WriteLine("using Windows.Win32.Interop");
+                streamWriter.WriteLine("using Windows.Win32.Foundation.Metadata");
                 streamWriter.WriteLine();
 
                 foreach (var partInfo in this.GetPartitionInfos())

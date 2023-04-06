@@ -292,7 +292,7 @@ namespace ClangSharpSourceToWinmd
                                     SyntaxFactory.AttributeList(
                                         SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
                                             SyntaxFactory.Attribute(
-                                                SyntaxFactory.ParseName("Windows.Win32.Interop.Guid"),
+                                                SyntaxFactory.ParseName("Windows.Win32.Foundation.Metadata.Guid"),
                                                 SyntaxFactory.ParseAttributeArgumentList(argsFormatted))));
 
                                 node = node.AddAttributeLists(attrsList).WithLeadingTrivia(node.GetLeadingTrivia());

@@ -57,3 +57,40 @@ Windows.Win32.Security.Cryptography.BCRYPTGENRANDOM_FLAGS.BCRYPT_USE_SYSTEM_PREF
 # Fixed #1526.
 Windows.Win32.UI.TextServices.Apis.TF_DEFAULT_SELECTION...System.UInt64 => System.UInt32
 Windows.Win32.UI.TextServices.Apis.TS_DEFAULT_SELECTION...System.UInt64 => System.UInt32
+# Fixed #1467.
+Windows.Win32.Foundation.Metadata.AgileAttribute added
+Windows.Win32.Foundation.Metadata.AlsoUsableForAttribute added
+Windows.Win32.Foundation.Metadata.Architecture added
+Windows.Win32.Foundation.Metadata.Architecture.All added
+Windows.Win32.Foundation.Metadata.Architecture.Arm64 added
+Windows.Win32.Foundation.Metadata.Architecture.None added
+Windows.Win32.Foundation.Metadata.Architecture.X64 added
+Windows.Win32.Foundation.Metadata.Architecture.X86 added
+Windows.Win32.Foundation.Metadata.CanReturnErrorsAsSuccessAttribute added
+Windows.Win32.Foundation.Metadata.CanReturnMultipleSuccessValuesAttribute added
+Windows.Win32.Foundation.Metadata.ComOutPtrAttribute added
+Windows.Win32.Foundation.Metadata.ConstantAttribute added
+Windows.Win32.Foundation.Metadata.ConstAttribute added
+Windows.Win32.Foundation.Metadata.CppAttributeList added
+Windows.Win32.Foundation.Metadata.DoNotReleaseAttribute added
+Windows.Win32.Foundation.Metadata.FreeWithAttribute added
+Windows.Win32.Foundation.Metadata.GuidAttribute added
+Windows.Win32.Foundation.Metadata.InvalidHandleValueAttribute added
+Windows.Win32.Foundation.Metadata.MemorySizeAttribute added
+Windows.Win32.Foundation.Metadata.NativeArrayInfoAttribute added
+Windows.Win32.Foundation.Metadata.NativeEncodingAttribute added
+Windows.Win32.Foundation.Metadata.NativeInheritanceAttribute added
+Windows.Win32.Foundation.Metadata.NativeTypedefAttribute added
+Windows.Win32.Foundation.Metadata.NativeTypeNameAttribute added
+Windows.Win32.Foundation.Metadata.NotNullTerminatedAttribute added
+Windows.Win32.Foundation.Metadata.NullNullTerminatedAttribute added
+Windows.Win32.Foundation.Metadata.PropertyKeyAttribute added
+Windows.Win32.Foundation.Metadata.RAIIFreeAttribute added
+Windows.Win32.Foundation.Metadata.ReservedAttribute added
+Windows.Win32.Foundation.Metadata.ReturnsUnownedHandle added
+Windows.Win32.Foundation.Metadata.RetValAttribute added
+Windows.Win32.Foundation.Metadata.ScopedEnumAttribute added
+Windows.Win32.Foundation.Metadata.StaticLibraryAttribute added
+Windows.Win32.Foundation.Metadata.StructSizeFieldAttribute added
+Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute added
+Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute added

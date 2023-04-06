@@ -15,7 +15,6 @@ using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.Metadata;
 using ICSharpCode.Decompiler.TypeSystem;
 using MetadataUtils;
-using Windows.Win32.Interop;
 
 namespace WinmdUtilsProgram
 {
@@ -724,7 +723,7 @@ namespace WinmdUtilsProgram
 
         private static string GetArchInfo(IEnumerable<IAttribute> attributes)
         {
-            var archAttr = attributes.FirstOrDefault(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute");
+            var archAttr = attributes.FirstOrDefault(a => a.AttributeType.Name == "SupportedArchitectureAttribute");
             if (archAttr != null)
             {
                 Architecture arch = (Architecture)archAttr.FixedArguments[0].Value;
@@ -769,7 +768,7 @@ namespace WinmdUtilsProgram
                 foreach (var archType in foundArchTypes)
                 {
                     var typeArchAttr =
-                        archType.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute");
+                        archType.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute");
 
                     var typeArch = (Architecture)typeArchAttr.FixedArguments[0].Value;
                     typeArches |= typeArch;
@@ -821,7 +820,7 @@ namespace WinmdUtilsProgram
 
             foreach (var type in winmd1.GetTopLevelTypeDefinitions()
                 .Where(t => t.GetAttributes()
-                    .Any(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute")))
+                    .Any(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute")))
             {
                 if (!namesToArchDefs.TryGetValue(type.FullName, out var list))
                 {
@@ -834,7 +833,7 @@ namespace WinmdUtilsProgram
 
             foreach (var type in namesToArchDefs.SelectMany(map => map.Value))
             {
-                var archAttr = type.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute");
+                var archAttr = type.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute");
                 Architecture arch = (Architecture)archAttr.FixedArguments[0].Value;
 
                 if (!VerifyTypeHasRightArch(namesToArchDefs, type, type, arch, console))
@@ -847,9 +846,9 @@ namespace WinmdUtilsProgram
             {
                 foreach (var method in apisClass.Methods.Where(
                     m => m.IsStatic && m.DeclaringType == apisClass && m.GetAttributes()
-                        .Any(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute")))
+                        .Any(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute")))
                 {
-                    var archAttr = method.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute");
+                    var archAttr = method.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute");
                     Architecture arch = (Architecture)archAttr.FixedArguments[0].Value;
 
                     foreach (var param in method.Parameters)

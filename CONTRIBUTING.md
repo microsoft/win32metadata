@@ -156,7 +156,7 @@ Constants are removed from the metadata when they are detected as members of an 
 
 ## Attributes
 
-Our tooling defines several [attributes](sources/Win32MetadataInterop) that can be applied to APIs to provide useful context to language projections.
+Our tooling defines several [attributes](generation/WinSDK/manual/Metadata.cs) that can be applied to APIs to provide useful context to language projections.
 
 To apply an attribute to an API, update the `--memberRemap` section of [emitter.settings.rsp](generation/WinSDK/emitter.settings.rsp) in one of the following ways:
 

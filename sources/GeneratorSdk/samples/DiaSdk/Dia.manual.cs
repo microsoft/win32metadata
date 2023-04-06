@@ -1,5 +1,5 @@
 using Windows.Win32.Foundation;
-using Windows.Win32.Interop;
+using Windows.Win32.Foundation.Metadata;
 
 namespace Microsoft.Dia
 {

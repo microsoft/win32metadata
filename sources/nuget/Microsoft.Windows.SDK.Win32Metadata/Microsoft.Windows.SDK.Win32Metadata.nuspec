@@ -23,7 +23,6 @@
       <file src="images\windows.png" target="images"/>
 
       <file src="bin\Windows.Win32.winmd" target=""/>
-      <file src="bin\Windows.Win32.Interop.dll" target=""/>
       <file src="buildTransitive\**" target="buildTransitive\"/>
       <file src="buildTransitive\**" target="build\"/>
   </files>

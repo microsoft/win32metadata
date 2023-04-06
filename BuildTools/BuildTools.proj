@@ -4,7 +4,6 @@
     <ProjectReference Include="..\sources\ConstantsScraper\ConstantsScraper.csproj"/>
     <ProjectReference Include="..\sources\ClangSharpSourceToWinmd\ClangSharpSourceToWinmd.csproj"/>
     <ProjectReference Include="..\sources\WinmdUtils\WinmdUtils.csproj"/>
-    <ProjectReference Include="..\sources\Win32MetadataInterop\Win32MetadataInterop.csproj"/>
   </ItemGroup>
 
   <ItemGroup>

@@ -207,23 +207,47 @@ namespace MetadataUtils
         {
             var fieldMembers = attributeType.GetMembers(field);
             var fieldSymbol = fieldMembers.First() as IFieldSymbol;
+            var propertySymbol = fieldMembers.First() as IPropertySymbol;
 
-            if (fieldSymbol.Type.SpecialType == SpecialType.System_Object)
+            if (fieldSymbol != null)
             {
-                encoder.Object();
+                if (fieldSymbol.Type.SpecialType == SpecialType.System_Object)
+                {
+                    encoder.Object();
+                }
+                else if (fieldSymbol.Type.SpecialType == SpecialType.System_Array)
+                {
+                    // TODO array type encoder
+                    encoder.SZArray();
+                }
+                else if (fieldSymbol.Type.TypeKind == TypeKind.Enum)
+                {
+                    encoder.ScalarType().Enum(fieldSymbol.Type.ToString());
+                }
+                else
+                {
+                    encoder.ScalarType().CustomElementType(fieldSymbol);
+                }
             }
-            else if (fieldSymbol.Type.SpecialType == SpecialType.System_Array)
+            else if (propertySymbol != null)
             {
-                // TODO array type encoder
-                encoder.SZArray();
-            }
-            else if (fieldSymbol.Type.TypeKind == TypeKind.Enum)
-            {
-                encoder.ScalarType().Enum(fieldSymbol.Type.ToString());
-            }
-            else
-            {
-                encoder.ScalarType().CustomElementType(fieldSymbol);
+                if (propertySymbol.Type.SpecialType == SpecialType.System_Object)
+                {
+                    encoder.Object();
+                }
+                else if (propertySymbol.Type.SpecialType == SpecialType.System_Array)
+                {
+                    // TODO array type encoder
+                    encoder.SZArray();
+                }
+                else if (propertySymbol.Type.TypeKind == TypeKind.Enum)
+                {
+                    encoder.ScalarType().Enum(propertySymbol.Type.ToString());
+                }
+                else
+                {
+                    encoder.ScalarType().CustomElementType(propertySymbol);
+                }
             }
         }
 
@@ -269,6 +293,57 @@ namespace MetadataUtils
                     break;
                 case SpecialType.System_Enum:
                     typeEncoder.Enum(field.Type.ToString());
+                    break;
+                case SpecialType.System_SByte:
+                    typeEncoder.SByte();
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
+        public static void CustomElementType(this CustomAttributeElementTypeEncoder typeEncoder, IPropertySymbol property)
+        {
+            switch (property.Type.SpecialType)
+            {
+                case SpecialType.System_Boolean:
+                    typeEncoder.Boolean();
+                    break;
+                case SpecialType.System_Byte:
+                    typeEncoder.Byte();
+                    break;
+                case SpecialType.System_Int16:
+                    typeEncoder.Int16();
+                    break;
+                case SpecialType.System_Int32:
+                    typeEncoder.Int32();
+                    break;
+                case SpecialType.System_Int64:
+                    typeEncoder.Int64();
+                    break;
+                case SpecialType.System_UInt16:
+                    typeEncoder.UInt16();
+                    break;
+                case SpecialType.System_UInt32:
+                    typeEncoder.UInt32();
+                    break;
+                case SpecialType.System_UInt64:
+                    typeEncoder.UInt64();
+                    break;
+                case SpecialType.System_Single:
+                    typeEncoder.Single();
+                    break;
+                case SpecialType.System_Double:
+                    typeEncoder.Double();
+                    break;
+                case SpecialType.System_Char:
+                    typeEncoder.Char();
+                    break;
+                case SpecialType.System_String:
+                    typeEncoder.String();
+                    break;
+                case SpecialType.System_Enum:
+                    typeEncoder.Enum(property.Type.ToString());
                     break;
                 case SpecialType.System_SByte:
                     typeEncoder.SByte();
@@ -325,7 +400,7 @@ namespace MetadataUtils
                 SyntaxFactory.AttributeList(
                     SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
                         SyntaxFactory.Attribute(
-                            SyntaxFactory.ParseName("Windows.Win32.Interop.Guid"),
+                            SyntaxFactory.ParseName("Windows.Win32.Foundation.Metadata.Guid"),
                             SyntaxFactory.ParseAttributeArgumentList(args))));
         }
     }
