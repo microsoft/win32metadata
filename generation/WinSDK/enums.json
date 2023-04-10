@@ -11904,20 +11904,64 @@
     "type": "ushort",
     "members": [
       {
-        "name": "PROCESSOR_ARCHITECTURE_AMD64",
-        "value": "9"
+        "name": "PROCESSOR_ARCHITECTURE_INTEL",
+        "value": "0"
+      },
+      {
+        "name": "PROCESSOR_ARCHITECTURE_MIPS",
+        "value": "1"
+      },
+      {
+        "name": "PROCESSOR_ARCHITECTURE_ALPHA",
+        "value": "2"
+      },
+      {
+        "name": "PROCESSOR_ARCHITECTURE_PPC",
+        "value": "3"
+      },
+      {
+        "name": "PROCESSOR_ARCHITECTURE_SHX",
+        "value": "4"
+      },
+      {
+        "name": "PROCESSOR_ARCHITECTURE_ARM",
+        "value": "5"
       },
       {
         "name": "PROCESSOR_ARCHITECTURE_IA64",
         "value": "6"
       },
       {
-        "name": "PROCESSOR_ARCHITECTURE_INTEL",
-        "value": "0"
+        "name": "PROCESSOR_ARCHITECTURE_ALPHA64",
+        "value": "7"
       },
       {
-        "name": "PROCESSOR_ARCHITECTURE_ARM",
-        "value": "5"
+        "name": "PROCESSOR_ARCHITECTURE_MSIL",
+        "value": "8"
+      },
+      {
+        "name": "PROCESSOR_ARCHITECTURE_AMD64",
+        "value": "9"
+      },
+      {
+        "name": "PROCESSOR_ARCHITECTURE_IA32_ON_WIN64",
+        "value": "10"
+      },
+      {
+        "name": "PROCESSOR_ARCHITECTURE_NEUTRAL",
+        "value": "11"
+      },
+      {
+        "name": "PROCESSOR_ARCHITECTURE_ARM64",
+        "value": "12"
+      },
+      {
+        "name": "PROCESSOR_ARCHITECTURE_ARM32_ON_WIN64",
+        "value": "13"
+      },
+      {
+        "name": "PROCESSOR_ARCHITECTURE_IA32_ON_ARM64",
+        "value": "14"
       },
       {
         "name": "PROCESSOR_ARCHITECTURE_UNKNOWN",
@@ -11926,12 +11970,12 @@
     ],
     "uses": [
       {
-        "struct": "MINIDUMP_SYSTEM_INFO",
-        "field": "ProcessorArchitecture"
-      },
-      {
         "struct": "SYSTEM_INFO::_Anonymous_e__Union::_Anonymous_e__Struct",
         "field": "wProcessorArchitecture"
+      },
+      {
+        "struct": "MINIDUMP_SYSTEM_INFO",
+        "field": "ProcessorArchitecture"
       }
     ]
   },
