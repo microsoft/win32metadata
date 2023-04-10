@@ -110,3 +110,25 @@ Windows.Win32.System.WindowsProgramming.Apis.FILE_DISPOSITION_FLAG_IGNORE_READON
 Windows.Win32.System.WindowsProgramming.Apis.FILE_DISPOSITION_FLAG_ON_CLOSE removed
 Windows.Win32.System.WindowsProgramming.Apis.FILE_DISPOSITION_FLAG_POSIX_SEMANTICS removed
 Windows.Win32.System.WindowsProgramming.FILE_DISPOSITION_INFO_EX removed
+# Fixed #1288.
+Windows.Win32.Globalization.Apis.EnumCalendarInfoExEx : lpReserved : [Const,In,Optional] => [Const,In,Optional,Reserved]
+Windows.Win32.Globalization.Apis.EnumSystemLocalesEx : lpReserved : [In,Optional] => [In,Optional,Reserved]
+Windows.Win32.Globalization.Apis.FindNLSStringEx : lpReserved : [In,Optional] => [In,Optional,Reserved]
+Windows.Win32.Globalization.Apis.GetCalendarInfoEx : lpReserved : [Const,In,Optional] => [Const,In,Optional,Reserved]
+Windows.Win32.Globalization.Apis.LCMapStringEx : lpReserved : [In,Optional] => [In,Optional,Reserved]
+Windows.Win32.Globalization.Apis.NotifyUILanguageChange : dwReserved : [In] => [In,Reserved]
+Windows.Win32.System.Com.Apis.CoAllowSetForegroundWindow : lpvReserved : [In,Optional] => [In,Optional,Reserved]
+Windows.Win32.System.Com.Apis.CoDisableCallCancellation : pReserved : [In,Optional] => [In,Optional,Reserved]
+Windows.Win32.System.Com.Apis.CoDisconnectObject : dwReserved : [In] => [In,Reserved]
+Windows.Win32.System.Com.Apis.CoEnableCallCancellation : pReserved : [In,Optional] => [In,Optional,Reserved]
+Windows.Win32.System.Com.Apis.CoFreeUnusedLibrariesEx : dwReserved : [In] => [In,Reserved]
+Windows.Win32.System.Com.Apis.CoInitialize : pvReserved : [In,Optional] => [In,Optional,Reserved]
+Windows.Win32.System.Com.Apis.CoInitializeEx : pvReserved : [In,Optional] => [In,Optional,Reserved]
+Windows.Win32.System.Com.Apis.CoInitializeSecurity : pReserved1 : [In,Optional] => [In,Optional,Reserved]
+Windows.Win32.System.Com.Apis.CoInitializeSecurity : pReserved3 : [In,Optional] => [In,Optional,Reserved]
+Windows.Win32.System.Ole.Apis.GetActiveObject : pvReserved : [In,Out] => [In,Out,Reserved]
+Windows.Win32.System.Ole.Apis.OleCreatePropertyFrame : dwReserved : [In] => [In,Reserved]
+Windows.Win32.System.Ole.Apis.OleCreatePropertyFrame : pvReserved : [In] => [In,Out,Reserved]
+Windows.Win32.System.Ole.Apis.OleInitialize : pvReserved : [In] => [In,Reserved]
+Windows.Win32.System.Ole.Apis.OleLoadPicturePath : dwReserved : [In] => [In,Reserved]
+Windows.Win32.System.Ole.Apis.RevokeActiveObject : pvReserved : [In,Out] => [In,Out,Reserved]
