@@ -11900,7 +11900,6 @@
     ]
   },
   {
-    "namespace": "Windows.Win32.System.SystemInformation",
     "name": "PROCESSOR_ARCHITECTURE",
     "type": "ushort",
     "members": [
@@ -11971,12 +11970,12 @@
     ],
     "uses": [
       {
-        "struct": "MINIDUMP_SYSTEM_INFO",
-        "field": "ProcessorArchitecture"
-      },
-      {
         "struct": "SYSTEM_INFO::_Anonymous_e__Union::_Anonymous_e__Struct",
         "field": "wProcessorArchitecture"
+      },
+      {
+        "struct": "MINIDUMP_SYSTEM_INFO",
+        "field": "ProcessorArchitecture"
       }
     ]
   },
