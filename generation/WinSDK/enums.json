@@ -11900,6 +11900,7 @@
     ]
   },
   {
+    "namespace": "Windows.Win32.System.SystemInformation",
     "name": "PROCESSOR_ARCHITECTURE",
     "type": "ushort",
     "members": [

@@ -135,7 +135,7 @@ Windows.Win32.System.Ole.Apis.RevokeActiveObject : pvReserved : [In,Out] => [In,
 # Fixed #1531.
 Windows.Win32.System.Wmi.IWbemClassObject.CompareTo : lFlags...Int32 => WBEM_COMPARISON_FLAG
 Windows.Win32.System.Wmi.IWbemClassObject.GetNames : lFlags...Int32 => WBEM_CONDITION_FLAG_TYPE
-# Consolidate PROCESSOR_ARCHITECTURE values
+# Fixed bug with #1530.
 Windows.Win32.System.Diagnostics.Debug.MINIDUMP_SYSTEM_INFO.ProcessorArchitecture...Windows.Win32.System.Diagnostics.Debug.PROCESSOR_ARCHITECTURE => Windows.Win32.System.SystemInformation.PROCESSOR_ARCHITECTURE
 Windows.Win32.System.Diagnostics.Debug.PROCESSOR_ARCHITECTURE removed
 Windows.Win32.System.Diagnostics.Debug.PROCESSOR_ARCHITECTURE.PROCESSOR_ARCHITECTURE_AMD64 removed
