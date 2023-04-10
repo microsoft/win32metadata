@@ -132,3 +132,6 @@ Windows.Win32.System.Ole.Apis.OleCreatePropertyFrame : pvReserved : [In] => [In,
 Windows.Win32.System.Ole.Apis.OleInitialize : pvReserved : [In] => [In,Reserved]
 Windows.Win32.System.Ole.Apis.OleLoadPicturePath : dwReserved : [In] => [In,Reserved]
 Windows.Win32.System.Ole.Apis.RevokeActiveObject : pvReserved : [In,Out] => [In,Out,Reserved]
+# Fixed #1531.
+Windows.Win32.System.Wmi.IWbemClassObject.CompareTo : lFlags...Int32 => WBEM_COMPARISON_FLAG
+Windows.Win32.System.Wmi.IWbemClassObject.GetNames : lFlags...Int32 => WBEM_CONDITION_FLAG_TYPE

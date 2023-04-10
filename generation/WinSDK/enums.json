@@ -36086,6 +36086,28 @@
         "field": "Flags"
       }
     ]
+  },
+  {
+    "addUsesTo": "WBEM_CONDITION_FLAG_TYPE",
+    "members": [],
+    "uses": [
+      {
+        "interface": "IWbemClassObject",
+        "method": "GetNames",
+        "parameter": "lFlags"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "WBEM_COMPARISON_FLAG",
+    "members": [],
+    "uses": [
+      {
+        "interface": "IWbemClassObject",
+        "method": "CompareTo",
+        "parameter": "lFlags"
+      }
+    ]
   }
 ]
 }
