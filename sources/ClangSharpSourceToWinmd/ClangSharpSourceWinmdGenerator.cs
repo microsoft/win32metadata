@@ -1802,6 +1802,8 @@ namespace ClangSharpSourceToWinmd
                     this.metadataBuilder.GetOrAddString(memberName),
                     this.metadataBuilder.GetOrAddBlob(fieldSignature));
 
+                this.AddCustomAttributes(symbol, fieldDefinitionHandle);
+
                 if (symbol.HasConstantValue)
                 {
                     this.metadataBuilder.AddConstant(fieldDefinitionHandle, symbol.ConstantValue);

@@ -472,6 +472,18 @@ namespace ClangSharpSourceToWinmd
                 return node;
             }
 
+            public override SyntaxNode VisitEnumMemberDeclaration(EnumMemberDeclarationSyntax node)
+            {
+                string fullName = GetFullNameWithoutArchSuffix(node);
+
+                this.GetRemapInfo(fullName, node.AttributeLists, out var listAttributes, string.Empty, out string newType, out string newName);
+
+                node = (EnumMemberDeclarationSyntax)base.VisitEnumMemberDeclaration(node);
+                node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes));
+
+                return node;
+            }
+
             public override SyntaxNode VisitDelegateDeclaration(DelegateDeclarationSyntax node)
             {
                 string fullName = SyntaxUtils.GetFullName(node);

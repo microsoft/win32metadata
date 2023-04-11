@@ -172,3 +172,6 @@ Windows.Win32.System.SystemServices.Apis.PROCESSOR_ARCHITECTURE_MSIL removed
 Windows.Win32.System.SystemServices.Apis.PROCESSOR_ARCHITECTURE_NEUTRAL removed
 Windows.Win32.System.SystemServices.Apis.PROCESSOR_ARCHITECTURE_PPC removed
 Windows.Win32.System.SystemServices.Apis.PROCESSOR_ARCHITECTURE_SHX removed
+# Fixed #729.
+REG_NOTIFY_THREAD_AGNOSTIC :  => [SupportedOSPlatform(windows8.0)]
+Windows.Win32.System.ComponentServices.ObjectContext : [Guid(1958774342,52955,4559,139,73,0,170,0,184,167,144),SupportedOSPlatform(windows5.0)] => [Guid(1958774342,52955,4559,139,73,0,170,0,184,167,144)]

@@ -144,6 +144,11 @@ namespace MetadataUtils
                 parentName = GetFullName(enumNode.Parent, includeNamespace);
                 ret = enumNode.Identifier.Text;
             }
+            else if (node is EnumMemberDeclarationSyntax enumMemberNode)
+            {
+                parentName = GetFullName(enumMemberNode.Parent, includeNamespace);
+                ret = enumMemberNode.Identifier.Text;
+            }
             else if (node is MethodDeclarationSyntax methodNode)
             {
                 if (methodNode.Parent.Parent is NamespaceDeclarationSyntax && includeNamespace)
