@@ -176,3 +176,5 @@ Windows.Win32.System.SystemServices.Apis.PROCESSOR_ARCHITECTURE_SHX removed
 REG_NOTIFY_THREAD_AGNOSTIC :  => [SupportedOSPlatform(windows8.0)]
 Windows.Win32.System.ComponentServices.ObjectContext : [Guid(1958774342,52955,4559,139,73,0,170,0,184,167,144),SupportedOSPlatform(windows5.0)] => [Guid(1958774342,52955,4559,139,73,0,170,0,184,167,144)]
 Windows.Win32.UI.TabletPC.Apis.Process : [DllImport(inkobjcore.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(inkobjcore.dll,ExactSpelling=True,PreserveSig=False)]
+# Fixed #561.
+Windows.Win32.System.Memory.MEMORYMAPPEDVIEW_HANDLE.Value...System.IntPtr => System.Void*

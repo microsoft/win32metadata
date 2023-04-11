@@ -1571,7 +1571,7 @@
   {
     "Namespace": "Windows.Win32.System.Memory",
     "Name": "MEMORYMAPPEDVIEW_HANDLE",
-    "ValueType": "DECLARE_HANDLE",
+    "ValueType": "void*",
     "InvalidHandleValues": [ -1, 0 ]
   },
   {
