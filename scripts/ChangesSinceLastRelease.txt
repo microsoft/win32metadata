@@ -152,3 +152,6 @@ Windows.Win32.UI.Shell.IEnumTravelLogEntry.Next : rgElt : [NativeArrayInfo(Count
 Windows.Win32.UI.TabletPC.IRealTimeStylus.GetAllTabletContextIds : ppTcids : [NativeArrayInfo(CountParamIndex=0),Out] => [Out]
 Windows.Win32.UI.TabletPC.IRealTimeStylus.GetDesiredPacketDescription : ppPropertyGuids : [NativeArrayInfo(CountParamIndex=0),Out] => [Out]
 Windows.Win32.UI.TabletPC.IRealTimeStylus.GetPacketDescriptionData : ppPacketProperties : [NativeArrayInfo(CountParamIndex=3),Out] => [Out]
+# Fixed #1534.
+Windows.Win32.Storage.FileSystem.Apis.ReadFile : lpBuffer...Void* => Byte*
+Windows.Win32.Storage.FileSystem.Apis.ReadFileEx : lpBuffer...Void* => Byte*
