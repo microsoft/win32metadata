@@ -816,6 +816,7 @@ namespace ClangSharpSourceToWinmd
                 bool isComOutPtr = false;
                 bool isRetVal = false;
                 bool isNullNullTerminated;
+                bool isByteBuffer = false;
                 bool? pre = null;
                 bool? post = null;
 
@@ -887,6 +888,7 @@ namespace ClangSharpSourceToWinmd
                         else if (salAttr.P1.StartsWith("_Outptr_") && !isComOutPtr)
                         {
                             isOut = true;
+                            isByteBuffer = salAttr.P1.Contains("bytebuffer");
                             continue;
                         }
                         else if (salAttr.P1 == "_Reserved_")
@@ -951,9 +953,9 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 // If we didn't add marshal as yet, try again without using pre
-                if (!marshalAsAdded)
+                if (!marshalAsAdded && !isByteBuffer)
                 {
-                    var salAttr = salAttrs.FirstOrDefault(attr => attr.Name == "SAL_readableTo" || attr.Name == "SAL_writeableTo");
+                    var salAttr = salAttrs.FirstOrDefault(attr => attr.Name == "SAL_writableTo" || attr.Name == "SAL_readableTo");
                     if (salAttr != null)
                     {
                         nativeArrayInfoParams = GetArrayMarshalAsFromP1(paramNode, salAttr.P1);

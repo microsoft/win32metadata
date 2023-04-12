@@ -59,6 +59,7 @@ DISCLAIMER: This list is a work in progress and is not yet comprehensive.
 * Inline functions that return constants are decorated with the `[Constant]` attribute. Projections need to implement these functions themselves to return the constant value. The constant value should be cast to the appropriate type based on the return value of the function. ([#436](https://github.com/microsoft/win32metadata/issues/436))
 * `[StructSizeField("<FIELDNAME>")]` on a struct indicates which field of the struct indicates the struct size so that language projections can automatically initialize the field ([#433](https://github.com/microsoft/win32metadata/issues/433))
   * NOTE: Examples of `"<FIELDNAME>"` include `"cbSize"` for a field on the struct or `"StartupInfo.cb"` for a nested field like `StartupInfo.cb` on the `STARTUPINFOEXW` struct
+* `[MemorySize]` and its `BytesParamIndex` property on a parameter indicates the 0-based index of another parameter that can be prepopulated with the size of the parameter ([#284](https://github.com/microsoft/win32metadata/issues/284))
 * `[CanReturnAlternateSuccessCodes]` and `[CanReturnErrorsAsSuccess]` attributes add semantic information about the possible return values of a function ([#1315](https://github.com/microsoft/win32metadata/issues/1315))
 * `[ReturnsUnownedHandle]` on a return value or out parameter indicates the returned handle is unowned ([#792](https://github.com/microsoft/win32metadata/issues/792))
 
