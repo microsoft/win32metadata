@@ -34,13 +34,15 @@ This class orchestrates the manipulation and compilation of the generated C# fil
 
 Project-specific settings are included within [emitter.settings.rsp](../generation/WinSDK/emitter.settings.rsp).
 
+ClangSharp was designed to create C#-compilable code from Win32 headers. Because its goal is to create C#-compilable code while also preserving pointers, it can't always express things in the way we would like for metadata, which is meant to be language-agnostic. For example, the CLR will not allow managed types such as "interface" or "delegate" to be on an unsafe struct (a struct that gets pointed to or includes pointers). This means ClangSharp emits COM objects as structs instead of interfaces, so that a COM object can exist on an unsafe struct. A .winmd does not have such restrictions, so ClangSharpSourceCompilation handles manipulating the generated CLR-compliant C# files into the language-agnostic metadata representation.
+
 #### NamesToCorrectNamespacesMover
 
 This class moves APIs to namespaces based on [requiredNamespacesForNames.rsp](../generation/WinSDK/requiredNamespacesForNames.rsp).
 
 #### MetadataSyntaxTreeCleaner
 
-This class visits each node in the C# abstract syntax trees (AST) and applies modifications.
+This class visits each node in the C# abstract syntax trees (AST) and applies modifications such as remaps and custom attributes.
 
 #### CrossArchTreeMerger
 
