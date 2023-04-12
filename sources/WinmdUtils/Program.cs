@@ -314,7 +314,7 @@ namespace WinmdUtilsProgram
                 foreach (var importInfo in LibScraper.GetImportInfos(libFile))
                 {
                     List<string> dlls;
-                    string fixedDll = Path.GetFileNameWithoutExtension(importInfo.Dll);
+                    string dll = importInfo.Dll;
 
                     // Skip mangled names
                     if (importInfo.ProcName.StartsWith('?'))
@@ -332,19 +332,19 @@ namespace WinmdUtilsProgram
                     {
                         dlls = new List<string>();
                         procNameToDll[importInfo.ProcName] = dlls;
-                        dlls.Add(fixedDll);
+                        dlls.Add(dll);
                     }
                     else
                     {
                         dlls = (List<string>)procNameToDll[importInfo.ProcName];
 
                         // Don't overwrite an existing value with an API set
-                        if (fixedDll.StartsWith("api-ms") || fixedDll.StartsWith("ext-ms"))
+                        if (dll.StartsWith("api-ms") || dll.StartsWith("ext-ms"))
                         {
                             continue;
                         }
 
-                        if (dlls.Contains(fixedDll))
+                        if (dlls.Contains(dll))
                         {
                             continue;
                         }
@@ -354,11 +354,11 @@ namespace WinmdUtilsProgram
                         string oldValue = dlls[0];
                         if (!oldValue.StartsWith("api-ms") && !oldValue.StartsWith("ext-ms"))
                         {
-                            dlls.Add(fixedDll);
+                            dlls.Add(dll);
                         }
                         else
                         {
-                            dlls[0] = fixedDll;
+                            dlls[0] = dll;
                         }
                     }
                 }
