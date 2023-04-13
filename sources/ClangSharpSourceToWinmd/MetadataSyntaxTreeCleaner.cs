@@ -25,6 +25,7 @@ namespace ClangSharpSourceToWinmd
 
         private class TreeRewriter : CSharpSyntaxRewriter
         {
+            private static readonly Regex NativeTypeNameArrayRegex = new Regex(@"\[\s*(\d+)\s*\]$");
             private static readonly Regex ElementCountRegex = new Regex(@"(?:elementCount|byteCount)\((?:_Old_\()?([^\)]+)\)+");
             private static readonly Regex IsRegex = new Regex(@"[^\w::]");
 
@@ -966,12 +967,29 @@ namespace ClangSharpSourceToWinmd
                     }
                 }
 
+                var nativeTypeName = SyntaxUtils.GetNativeTypeNameFromAttributesLists((cppAttrList.Parent as ParameterSyntax).AttributeLists);
                 if (!string.IsNullOrEmpty(nativeArrayInfoParams))
                 {
                     var attrName = SyntaxFactory.ParseName(nativeArrayInfoParams.Contains("BytesParamIndex") ? "MemorySize" : "NativeArrayInfo");
                     var args = SyntaxFactory.ParseAttributeArgumentList(nativeArrayInfoParams.ToString());
                     var finalAttr = SyntaxFactory.Attribute(attrName, args);
                     attributesList.Add(finalAttr);
+                }
+                else if (nativeTypeName != null)
+                {
+                    var match = NativeTypeNameArrayRegex.Match(nativeTypeName);
+                    if (match.Success)
+                    {
+                        var size = Convert.ToUInt32(match.Groups[1].Value);
+
+                        // Don't bother marking this as an array if it has 1 or less
+                        if (size > 1)
+                        {
+                            var attrName = SyntaxFactory.ParseName("NativeArrayInfo");
+                            var args = SyntaxFactory.ParseAttributeArgumentList($"(CountConst = {size})");
+                            attributesList.Add(SyntaxFactory.Attribute(attrName, args));
+                        }
+                    }
                 }
 
                 if (isIn)
