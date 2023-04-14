@@ -44,9 +44,11 @@ Below are scenarios that are represented in the metadata and that language proje
 DISCLAIMER: This list is a work in progress and is not yet comprehensive.
 
 * Namespaces allow users to import only the APIs they require and/or to control any code generation that is producing language bindings
-* Entry points are assumed to be the same as function names unless the [EntryPoint](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute.entrypoint) property of the `DllImport` attribute is specified
-* Calling convention is captured in the [CallingConvention](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute.callingconvention) property of the `DllImport` attribute
-* typedefs (e.g. `BCRYPT_KEY_HANDLE`) are represented as CLR structs with a single field where either the `NativeTypedef` or `NoNativeTypedef` attribute is applied to the struct. The type being defined is given by the name of the struct, and the type it is being defined as is the type of the struct field. `NativeTypedef` is used for typedefs that exist in the Win32 headers, while `NoNativeTypedef` is used to differentiate typedefs that exist in the metadata to improve usability but deviate from the Win32 headers. Projections that prefer to align with the Win32 headers can unwrap structs with the `NoNativeTypedef` attribute. typedefs can include the attributes `AlsoUsableFor`, `RAIIFree` and `InvalidHandleValue`.
+* The [DllImport](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute) attribute is used to define several properties of a function:
+  * Entry points are assumed to be the same as function names unless the   [EntryPoint](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute.entrypoint) property is specified
+  * Calling convention is captured in the [CallingConvention](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute.callingconvention) property
+  * Whether a function calls `SetLastError` before returning is captured in the [SetLastError](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute.setlasterror) property
+* typedefs (e.g. `BCRYPT_KEY_HANDLE`) are represented as CLR structs with a single field where the `NativeTypedef` attribute is applied to the struct. The type being defined is given by the name of the struct, and the type it is being defined as is the type of the struct field. typedefs can include the attributes `AlsoUsableFor`, `RAIIFree` and `InvalidHandleValue`:
   * `AlsoUsableFor` indicates that the type is implicitly convertible to another type (e.g. `BCRYPT_HANDLE`)
   * `RAIIFree` indicates what function should be used to close the handle (e.g. `BCryptDestroyKey`)
   * `InvalidHandleValue` attributes indicate invalid handle values (e.g. `0L`)
@@ -62,5 +64,6 @@ DISCLAIMER: This list is a work in progress and is not yet comprehensive.
 * `[MemorySize]` and its `BytesParamIndex` property on a parameter indicates the 0-based index of another parameter that can be prepopulated with the size of the parameter ([#284](https://github.com/microsoft/win32metadata/issues/284))
 * `[CanReturnAlternateSuccessCodes]` and `[CanReturnErrorsAsSuccess]` attributes add semantic information about the possible return values of a function ([#1315](https://github.com/microsoft/win32metadata/issues/1315))
 * `[ReturnsUnownedHandle]` on a return value or out parameter indicates the returned handle is unowned ([#792](https://github.com/microsoft/win32metadata/issues/792))
+* `[IgnoreIfReturn]` on a `HANDLE` parameter indicates that the parameter is undefined in failure scenarios and should be ignored if the value specified by the attribute is returned. Multiple return values are represented by multiple attributes. ([#1312](https://github.com/microsoft/win32metadata/issues/1312))
 
 DISCLAIMER: This list is a work in progress and is not yet comprehensive.
