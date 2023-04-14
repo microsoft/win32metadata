@@ -168,6 +168,13 @@ public class NativeTypeNameAttribute : Attribute
     }
 }
 
+public class NoNativeTypedefAttribute : Attribute
+{
+    public NoNativeTypedefAttribute()
+    {
+    }
+}
+
 public class NotNullTerminatedAttribute : Attribute
 {
     public NotNullTerminatedAttribute()

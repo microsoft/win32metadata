@@ -85,7 +85,7 @@ $@"namespace {currentNamespace}
                 }
 
                 writer.WriteLine(
-$@"    [NativeTypedef]    
+$@"    [{(item.NativeTypeDef ? "NativeTypedef" : "NoNativeTypedef")}]    
     public {safety}struct {item.Name}
     {{
         public {valueType} Value;

@@ -299,3 +299,45 @@ Windows.Win32.System.Environment.VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_REPORT.In
 Windows.Win32.System.RemoteDesktop.ItsPubPlugin.ResolveResource : endPointName : [Out] => [NativeArrayInfo(CountConst=256),Out]
 Windows.Win32.System.RemoteDesktop.ItsPubPlugin.ResolveResource : resourceLocation : [Out] => [NativeArrayInfo(CountConst=256),Out]
 Windows.Win32.System.RemoteDesktop.ItsPubPlugin2.ResolvePersonalDesktop : endPointName : [Out] => [NativeArrayInfo(CountConst=256),Out]
+# Fixed #1533.
+Windows.Win32.Foundation.Metadata.NoNativeTypedefAttribute added
+Windows.Win32.Graphics.Gdi.CreatedHDC : [AlsoUsableFor(HDC),InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DeleteDC)] => [AlsoUsableFor(HDC),InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(DeleteDC)]
+Windows.Win32.Graphics.Gdi.HdcMetdataEnhFileHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DeleteEnhMetaFile)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(DeleteEnhMetaFile)]
+Windows.Win32.Graphics.Gdi.HdcMetdataFileHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DeleteMetaFile)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(DeleteMetaFile)]
+Windows.Win32.Networking.ActiveDirectory.GetDcContextHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DsGetDcCloseW)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(DsGetDcCloseW)]
+Windows.Win32.Networking.WinSock.HWSAEVENT removed
+Windows.Win32.Networking.WinSock.sa_family_t : [NativeTypedef] => [NoNativeTypedef]
+Windows.Win32.Networking.WinSock.WSAEVENT added
+Windows.Win32.NetworkManagement.Dns.DnsContextHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DnsReleaseContextHandle)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(DnsReleaseContextHandle)]
+Windows.Win32.NetworkManagement.IpHelper.IcmpHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(IcmpCloseHandle)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(IcmpCloseHandle)]
+Windows.Win32.NetworkManagement.WNet.NetEnumHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(WNetCloseEnum)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(WNetCloseEnum)]
+Windows.Win32.Storage.FileSystem.FindChangeNotificationHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(FindCloseChangeNotification)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(FindCloseChangeNotification)]
+Windows.Win32.Storage.FileSystem.FindFileHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(FindClose)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(FindClose)]
+Windows.Win32.Storage.FileSystem.FindFileNameHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(FindClose)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(FindClose)]
+Windows.Win32.Storage.FileSystem.FindStreamHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(FindClose)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(FindClose)]
+Windows.Win32.Storage.FileSystem.FindVolumeHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(FindVolumeClose)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(FindVolumeClose)]
+Windows.Win32.Storage.FileSystem.FindVolumeMountPointHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(FindVolumeMountPointClose)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(FindVolumeMountPointClose)]
+Windows.Win32.Storage.InstallableFileSystems.FilterFindHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(FilterFindClose)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(FilterFindClose)]
+Windows.Win32.Storage.InstallableFileSystems.FilterInstanceFindHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(FilterInstanceFindClose)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(FilterInstanceFindClose)]
+Windows.Win32.Storage.InstallableFileSystems.FilterVolumeFindHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(FilterVolumeFindClose)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(FilterVolumeFindClose)]
+Windows.Win32.Storage.InstallableFileSystems.FilterVolumeInstanceFindHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(FilterVolumeInstanceFindClose)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(FilterVolumeInstanceFindClose)]
+Windows.Win32.System.Diagnostics.Etw.CONTROLTRACE_HANDLE : [InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(0),NoNativeTypedef]
+Windows.Win32.System.Diagnostics.Etw.PROCESSTRACE_HANDLE : [NativeTypedef,RAIIFree(CloseTrace)] => [NoNativeTypedef,RAIIFree(CloseTrace)]
+Windows.Win32.System.Diagnostics.Etw.RELOGSTREAM_HANDLE : [InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(0),NoNativeTypedef]
+Windows.Win32.System.EventLog.EventLogHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(CloseEventLog)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(CloseEventLog)]
+Windows.Win32.System.EventLog.EventSourceHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DeregisterEventSource)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(DeregisterEventSource)]
+Windows.Win32.System.GroupPolicy.CriticalPolicySectionHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(LeaveCriticalPolicySection)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(LeaveCriticalPolicySection)]
+Windows.Win32.System.LibraryLoader.UPDATERESOURCE_HANDLE : [InvalidHandleValue(0),NativeTypedef,RAIIFree(EndUpdateResourceW)] => [InvalidHandleValue(0),NoNativeTypedef,RAIIFree(EndUpdateResourceW)]
+Windows.Win32.System.Memory.HeapHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(HeapDestroy)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(HeapDestroy)]
+Windows.Win32.System.Performance.PerfProviderHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(PerfStopProvider)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(PerfStopProvider)]
+Windows.Win32.System.Performance.PerfQueryHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(PerfCloseQueryHandle)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(PerfCloseQueryHandle)]
+Windows.Win32.System.RemoteDesktop.HwtsVirtualChannelHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(WTSVirtualChannelClose)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(WTSVirtualChannelClose)]
+Windows.Win32.System.SystemInformation.Apis.EnumSystemFirmwareTables : pFirmwareTableEnumBuffer...FIRMWARE_TABLE_ID* => Byte*
+Windows.Win32.System.SystemInformation.Apis.GetSystemFirmwareTable : FirmwareTableID...FIRMWARE_TABLE_ID => UInt32
+Windows.Win32.System.SystemInformation.Apis.GetSystemFirmwareTable : pFirmwareTableBuffer...Void* => Byte*
+Windows.Win32.System.SystemInformation.FIRMWARE_TABLE_ID removed
+Windows.Win32.System.Threading.BoundaryDescriptorHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DeleteBoundaryDescriptor)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(DeleteBoundaryDescriptor)]
+Windows.Win32.System.Threading.NamespaceHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(ClosePrivateNamespace)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(ClosePrivateNamespace)]
+Windows.Win32.System.Threading.TimerQueueHandle : [InvalidHandleValue(0),NativeTypedef,RAIIFree(DeleteTimerQueueEx)] => [InvalidHandleValue(0),NoNativeTypedef,RAIIFree(DeleteTimerQueueEx)]
+Windows.Win32.UI.Shell.ShFindChangeNotificationHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(SHChangeNotification_Unlock)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NoNativeTypedef,RAIIFree(SHChangeNotification_Unlock)]
+Windows.Win32.UI.WindowsAndMessaging.LOADIMAGE_HANDLE : [InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(0),NoNativeTypedef]
