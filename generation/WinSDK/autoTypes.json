@@ -1855,5 +1855,75 @@
     "CloseApi": "UnregisterDeviceNotification",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Speech",
+    "Name": "SPSTATEHANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Speech",
+    "Name": "SPWORDHANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Speech",
+    "Name": "SPRULEHANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Speech",
+    "Name": "SPGRAMMARHANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Speech",
+    "Name": "SPRECOCONTEXTHANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Speech",
+    "Name": "SPPHRASERULEHANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Speech",
+    "Name": "SPPHRASEPROPERTYHANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Speech",
+    "Name": "SPTRANSITIONID",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Speech",
+    "Name": "SPRECOCONTEXTHANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Speech",
+    "Name": "SPRECOCONTEXTHANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypeDef": true
   }
 ]
