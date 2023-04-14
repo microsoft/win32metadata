@@ -312,3 +312,6 @@ pStaticSamplers : [Const] => [Const,NativeArrayInfo(CountFieldName=NumStaticSamp
 pStaticSamplers : [Const] => [Const,NativeArrayInfo(CountFieldName=NumStaticSamplers)]
 pSubresourceParameters : [Const] => [Const,NativeArrayInfo(CountFieldName=SubresourceCount)]
 pViewInstanceLocations : [Const] => [Const,NativeArrayInfo(CountFieldName=ViewInstanceCount)]
+# Fixed #1540.
+Windows.Win32.Foundation.HGLOBAL.Value...System.IntPtr => System.Void*
+Windows.Win32.Foundation.HLOCAL.Value...System.IntPtr => System.Void*
