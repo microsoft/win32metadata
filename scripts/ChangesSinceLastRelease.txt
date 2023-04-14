@@ -587,6 +587,29 @@ Windows.Win32.Media.Speech.SPRULEHANDLE added
 Windows.Win32.Media.Speech.SPSTATEHANDLE added
 Windows.Win32.Media.Speech.SPTRANSITIONID added
 Windows.Win32.Media.Speech.SPWORDHANDLE added
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddResource : hRuleState : [In,Out] => [In]
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddResource : hRuleState...SPSTATEHANDLE__* => SPSTATEHANDLE
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddRuleTransition : hFromState : [In,Out] => [In]
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddRuleTransition : hFromState...SPSTATEHANDLE__* => SPSTATEHANDLE
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddRuleTransition : hRule : [In,Out] => [In]
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddRuleTransition : hRule...SPSTATEHANDLE__* => SPSTATEHANDLE
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddRuleTransition : hToState : [In,Out] => [In]
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddRuleTransition : hToState...SPSTATEHANDLE__* => SPSTATEHANDLE
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddWordTransition : hFromState : [In,Out] => [In]
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddWordTransition : hFromState...SPSTATEHANDLE__* => SPSTATEHANDLE
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddWordTransition : hToState : [In,Out] => [In]
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddWordTransition : hToState...SPSTATEHANDLE__* => SPSTATEHANDLE
+Windows.Win32.Media.Speech.ISpGrammarBuilder.ClearRule : hState : [In,Out] => [In]
+Windows.Win32.Media.Speech.ISpGrammarBuilder.ClearRule : hState...SPSTATEHANDLE__* => SPSTATEHANDLE
+Windows.Win32.Media.Speech.ISpGrammarBuilder.CreateNewState : hState : [In,Out] => [In]
+Windows.Win32.Media.Speech.ISpGrammarBuilder.CreateNewState : hState...SPSTATEHANDLE__* => SPSTATEHANDLE
+Windows.Win32.Media.Speech.ISpGrammarBuilder.CreateNewState : phState...SPSTATEHANDLE__** => SPSTATEHANDLE*
+Windows.Win32.Media.Speech.ISpGrammarBuilder.GetRule : phInitialState...SPSTATEHANDLE__** => SPSTATEHANDLE*
+Windows.Win32.Media.Speech.ISpGrammarBuilder2.AddTextSubset : hFromState : [In,Out] => [In]
+Windows.Win32.Media.Speech.ISpGrammarBuilder2.AddTextSubset : hFromState...SPSTATEHANDLE__* => SPSTATEHANDLE
+Windows.Win32.Media.Speech.ISpGrammarBuilder2.AddTextSubset : hToState : [In,Out] => [In]
+Windows.Win32.Media.Speech.ISpGrammarBuilder2.AddTextSubset : hToState...SPSTATEHANDLE__* => SPSTATEHANDLE
+Windows.Win32.Media.Speech.SPSTATEHANDLE__ removed
 # Fixed #547.
 pArgumentDescs : [Const] => [Const,NativeArrayInfo(CountFieldName=NumArgumentDescs)]
 pBufferStrides : [Const] => [Const,NativeArrayInfo(CountFieldName=NumStrides)]
