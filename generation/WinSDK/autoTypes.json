@@ -585,7 +585,7 @@
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "HLOCAL",
-    "ValueType": "DECLARE_HANDLE",
+    "ValueType": "void*",
     "CloseApi": "LocalFree",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypeDef": true
@@ -593,7 +593,7 @@
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "HGLOBAL",
-    "ValueType": "DECLARE_HANDLE",
+    "ValueType": "void*",
     "CloseApi": "GlobalFree",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypeDef": true

@@ -587,3 +587,19 @@ Windows.Win32.Media.Speech.SPRULEHANDLE added
 Windows.Win32.Media.Speech.SPSTATEHANDLE added
 Windows.Win32.Media.Speech.SPTRANSITIONID added
 Windows.Win32.Media.Speech.SPWORDHANDLE added
+# Fixed #547.
+pArgumentDescs : [Const] => [Const,NativeArrayInfo(CountFieldName=NumArgumentDescs)]
+pBufferStrides : [Const] => [Const,NativeArrayInfo(CountFieldName=NumStrides)]
+pDescriptorRanges : [Const] => [Const,NativeArrayInfo(CountFieldName=NumDescriptorRanges)]
+pDescriptorRanges : [Const] => [Const,NativeArrayInfo(CountFieldName=NumDescriptorRanges)]
+pInputElementDescs : [Const] => [Const,NativeArrayInfo(CountFieldName=NumElements)]
+pParameters : [Const] => [Const,NativeArrayInfo(CountFieldName=NumParameters)]
+pParameters : [Const] => [Const,NativeArrayInfo(CountFieldName=NumParameters)]
+pSODeclaration : [Const] => [Const,NativeArrayInfo(CountFieldName=NumEntries)]
+pStaticSamplers : [Const] => [Const,NativeArrayInfo(CountFieldName=NumStaticSamplers)]
+pStaticSamplers : [Const] => [Const,NativeArrayInfo(CountFieldName=NumStaticSamplers)]
+pSubresourceParameters : [Const] => [Const,NativeArrayInfo(CountFieldName=SubresourceCount)]
+pViewInstanceLocations : [Const] => [Const,NativeArrayInfo(CountFieldName=ViewInstanceCount)]
+# Fixed #1540.
+Windows.Win32.Foundation.HGLOBAL.Value...System.IntPtr => System.Void*
+Windows.Win32.Foundation.HLOCAL.Value...System.IntPtr => System.Void*
