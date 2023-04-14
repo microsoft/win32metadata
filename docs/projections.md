@@ -62,5 +62,6 @@ DISCLAIMER: This list is a work in progress and is not yet comprehensive.
 * `[MemorySize]` and its `BytesParamIndex` property on a parameter indicates the 0-based index of another parameter that can be prepopulated with the size of the parameter ([#284](https://github.com/microsoft/win32metadata/issues/284))
 * `[CanReturnAlternateSuccessCodes]` and `[CanReturnErrorsAsSuccess]` attributes add semantic information about the possible return values of a function ([#1315](https://github.com/microsoft/win32metadata/issues/1315))
 * `[ReturnsUnownedHandle]` on a return value or out parameter indicates the returned handle is unowned ([#792](https://github.com/microsoft/win32metadata/issues/792))
+* `[IgnoreIfReturn]` on a `HANDLE` parameter indicates that the parameter is undefined in failure scenarios and should be ignored if the value specified by the attribute is returned. Multiple return values are represented by multiple attributes. ([#1312](https://github.com/microsoft/win32metadata/issues/1312))
 
 DISCLAIMER: This list is a work in progress and is not yet comprehensive.

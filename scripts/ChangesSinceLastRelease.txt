@@ -315,3 +315,7 @@ pViewInstanceLocations : [Const] => [Const,NativeArrayInfo(CountFieldName=ViewIn
 # Fixed #1540.
 Windows.Win32.Foundation.HGLOBAL.Value...System.IntPtr => System.Void*
 Windows.Win32.Foundation.HLOCAL.Value...System.IntPtr => System.Void*
+# Fixed #1312.
+Windows.Win32.Foundation.Metadata.IgnoreIfReturnAttribute added
+Windows.Win32.System.Pipes.Apis.CreatePipe : hReadPipe : [Out] => [IgnoreIfReturn(0),Out]
+Windows.Win32.System.Pipes.Apis.CreatePipe : hWritePipe : [Out] => [IgnoreIfReturn(0),Out]

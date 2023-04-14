@@ -86,6 +86,14 @@ public class GuidAttribute : Attribute
     }
 }
 
+[AttributeUsage(AttributeTargets.Parameter, AllowMultiple = true)]
+public class IgnoreIfReturnAttribute : Attribute
+{
+    public IgnoreIfReturnAttribute(String Value)
+    {
+    }
+}
+
 [AttributeUsage(AttributeTargets.Struct, AllowMultiple = true, Inherited = true)]
 public class InvalidHandleValueAttribute : Attribute
 {
