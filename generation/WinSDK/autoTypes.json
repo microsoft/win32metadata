@@ -1911,19 +1911,5 @@
     "ValueType": "DECLARE_HANDLE",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypeDef": true
-  },
-  {
-    "Namespace": "Windows.Win32.Media.Speech",
-    "Name": "SPRECOCONTEXTHANDLE",
-    "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ],
-    "NativeTypeDef": true
-  },
-  {
-    "Namespace": "Windows.Win32.Media.Speech",
-    "Name": "SPRECOCONTEXTHANDLE",
-    "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ],
-    "NativeTypeDef": true
   }
 ]
