@@ -45,25 +45,35 @@ DISCLAIMER: This list is a work in progress and is not yet comprehensive.
 
 * Namespaces allow users to import only the APIs they require and/or to control any code generation that is producing language bindings
 * The [DllImport](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute) attribute is used to define several properties of a function:
-  * Entry points are assumed to be the same as function names unless the   [EntryPoint](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute.entrypoint) property is specified
+  * Entry points are assumed to be the same as function names unless the [EntryPoint](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute.entrypoint) property is specified
   * Calling convention is captured in the [CallingConvention](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute.callingconvention) property
   * Whether a function calls `SetLastError` before returning is captured in the [SetLastError](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute.setlasterror) property
+* Architecture-specific types are represented as types with the same name where each type is decorated with the `[SupportedArchitecture]` attribute indicating the architecture(s) where that type is supported
+* Input and output parameters are decorated with `[In]` and `[Out]` attributes. Parameters that are both input and output will contain both attributes. COM output pointer parameters are also decorated with the `[ComOutPtr]` attribute.
+* Optional parameters are decorated with the `[Optional]` attribute. Optional parameters may be `NULL`.
+* Reserved parameters are decorated with the `[Reserved]` attribute. Since reserved parameters always expect a `NULL` value, projections can choose to abstract away these parameters to improve the developer experience.
+* Pointer parameters that represent arrays are decorated with the `[NativeArrayInfo]` attribute that can contain the size of a fixed-length array (`CountConst`), the 0-based index of the parameter that defines the size of the array (`CountParamIndex`), or the struct field name (`CountFieldName`) that defines the size of the array
+* Pointer parameters whose byte size must be specified in another parameter are decorated with the `[MemorySize]` attribute that will contain the 0-based index of the parameter that can be automatically populated with the size of the provided pointer parameter (`BytesParamIndex`) ([#284](https://github.com/microsoft/win32metadata/issues/284))
+* Output parameters that must be closed with a specific function are decorated with the `[FreeWith]` attribute
+* Handle parameters that should not be closed are decorated with the `[DoNotRelease]` attribute
+* Handle parameters or return values decorated with `[ReturnsUnownedHandle]` are unowned ([#792](https://github.com/microsoft/win32metadata/issues/792))
+* Handle parameters decorated with `[IgnoreIfReturn]` are undefined in failure scenarios and should be ignored if the value specified by the attribute is returned. Multiple return values are represented by multiple attributes. ([#1312](https://github.com/microsoft/win32metadata/issues/1312))
+* Return value parameters marked with the `_retval_` SAL annotation are decorated with the `[RetVal]` attribute
+* Functions that return alternate success codes or return errors as success are decorated with `[CanReturnAlternateSuccessCodes]` and `[CanReturnErrorsAsSuccess]` ([#1315](https://github.com/microsoft/win32metadata/issues/1315))
+* Agile interfaces are decorated with the `[Agile]` attribute
+* Structs decorated with `[StructSizeField("<FIELDNAME>")]` indicate that `<FIELDNAME>` should be automatically populated with the size of the struct ([#433](https://github.com/microsoft/win32metadata/issues/433))
+  * NOTE: Examples of `"<FIELDNAME>"` include `"cbSize"` for a field on the struct or `"StartupInfo.cb"` for a nested field like `StartupInfo.cb` on the `STARTUPINFOEXW` struct
+* Native unions are represented as CLR structs whose names follow the pattern `_<NAME>_e__Union` and are decorated with `[StructLayout(LayoutKind.Explicit)]` where all fields are decorated with `[FieldOffset(0)]`. Anonymous unions will use `AnonymousN` in place of `<NAME>` where `N` is an optional number added to differentiate multiple anonymous unions within the same scope. Named unions will preserve the name in place of `<NAME>`. Struct fields that refer to these unions use `<NAME>` for the field names. ([#99](https://github.com/microsoft/win32metadata/issues/99))
+* Scoped enums are decorated with the `[ScopedEnum]` attribute
 * typedefs (e.g. `BCRYPT_KEY_HANDLE`) are represented as CLR structs with a single field where the `NativeTypedef` attribute is applied to the struct. The type being defined is given by the name of the struct, and the type it is being defined as is the type of the struct field. typedefs can include the attributes `AlsoUsableFor`, `RAIIFree` and `InvalidHandleValue`:
   * `AlsoUsableFor` indicates that the type is implicitly convertible to another type (e.g. `BCRYPT_HANDLE`)
   * `RAIIFree` indicates what function should be used to close the handle (e.g. `BCryptDestroyKey`)
   * `InvalidHandleValue` attributes indicate invalid handle values (e.g. `0L`)
   * NOTE: `BCRYPT_KEY_HANDLE` demonstrates all of these attributes.
-* Native unions are represented as CLR structs with an explicit layout where all fields contain an offset of 0
-* Array parameters are qualified with the `[NativeArrayInfo]` attribute that can contain the size of a fixed-length array (`CountConst`), the 0-based index of the parameter that defines the size of the array (`CountParamIndex`), or the struct field name (`CountFieldName`) that defines the size of the array
-* String constants are considered UTF-16 unless decorated with the `[NativeEncoding("ansi")]` attribute ([#1008](https://github.com/microsoft/win32metadata/issues/1008))
+* Constant variables marked with the `const` keyword are decorated with the `[Const]` attribute
 * Struct initializers are defined as constants where the type of the constant is the struct and the initializer string is contained in the `[Constant]` attribute ([#1337](https://github.com/microsoft/win32metadata/issues/1337))
   * NOTE: `SECURITY_NT_AUTHORITY` and all `DEVPROPKEY` and `PROPERTYKEY` constants demonstrate struct initializers.
+* String constants are considered UTF-16 unless decorated with the `[NativeEncoding("ansi")]` attribute ([#1008](https://github.com/microsoft/win32metadata/issues/1008))
 * Inline functions that return constants are decorated with the `[Constant]` attribute. Projections need to implement these functions themselves to return the constant value. The constant value should be cast to the appropriate type based on the return value of the function. ([#436](https://github.com/microsoft/win32metadata/issues/436))
-* `[StructSizeField("<FIELDNAME>")]` on a struct indicates which field of the struct indicates the struct size so that language projections can automatically initialize the field ([#433](https://github.com/microsoft/win32metadata/issues/433))
-  * NOTE: Examples of `"<FIELDNAME>"` include `"cbSize"` for a field on the struct or `"StartupInfo.cb"` for a nested field like `StartupInfo.cb` on the `STARTUPINFOEXW` struct
-* `[MemorySize]` and its `BytesParamIndex` property on a parameter indicates the 0-based index of another parameter that can be prepopulated with the size of the parameter ([#284](https://github.com/microsoft/win32metadata/issues/284))
-* `[CanReturnAlternateSuccessCodes]` and `[CanReturnErrorsAsSuccess]` attributes add semantic information about the possible return values of a function ([#1315](https://github.com/microsoft/win32metadata/issues/1315))
-* `[ReturnsUnownedHandle]` on a return value or out parameter indicates the returned handle is unowned ([#792](https://github.com/microsoft/win32metadata/issues/792))
-* `[IgnoreIfReturn]` on a `HANDLE` parameter indicates that the parameter is undefined in failure scenarios and should be ignored if the value specified by the attribute is returned. Multiple return values are represented by multiple attributes. ([#1312](https://github.com/microsoft/win32metadata/issues/1312))
 
 DISCLAIMER: This list is a work in progress and is not yet comprehensive.
