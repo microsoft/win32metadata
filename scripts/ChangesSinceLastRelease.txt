@@ -299,6 +299,45 @@ Windows.Win32.System.Environment.VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_REPORT.In
 Windows.Win32.System.RemoteDesktop.ItsPubPlugin.ResolveResource : endPointName : [Out] => [NativeArrayInfo(CountConst=256),Out]
 Windows.Win32.System.RemoteDesktop.ItsPubPlugin.ResolveResource : resourceLocation : [Out] => [NativeArrayInfo(CountConst=256),Out]
 Windows.Win32.System.RemoteDesktop.ItsPubPlugin2.ResolvePersonalDesktop : endPointName : [Out] => [NativeArrayInfo(CountConst=256),Out]
+# Fixed #1533.
+Windows.Win32.Networking.WinSock.HWSAEVENT removed
+Windows.Win32.Networking.WinSock.WSAEVENT added
+Windows.Win32.System.SystemInformation.Apis.EnumSystemFirmwareTables : pFirmwareTableEnumBuffer...FIRMWARE_TABLE_ID* => Byte*
+Windows.Win32.System.SystemInformation.Apis.GetSystemFirmwareTable : FirmwareTableID...FIRMWARE_TABLE_ID => UInt32
+Windows.Win32.System.SystemInformation.Apis.GetSystemFirmwareTable : pFirmwareTableBuffer...Void* => Byte*
+Windows.Win32.System.SystemInformation.FIRMWARE_TABLE_ID removed
+# Added missing native typedefs.
+Windows.Win32.Media.Speech.SPGRAMMARHANDLE added
+Windows.Win32.Media.Speech.SPPHRASEPROPERTYHANDLE added
+Windows.Win32.Media.Speech.SPPHRASERULEHANDLE added
+Windows.Win32.Media.Speech.SPRECOCONTEXTHANDLE added
+Windows.Win32.Media.Speech.SPRULEHANDLE added
+Windows.Win32.Media.Speech.SPSTATEHANDLE added
+Windows.Win32.Media.Speech.SPTRANSITIONID added
+Windows.Win32.Media.Speech.SPWORDHANDLE added
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddResource : hRuleState : [In,Out] => [In]
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddResource : hRuleState...SPSTATEHANDLE__* => SPSTATEHANDLE
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddRuleTransition : hFromState : [In,Out] => [In]
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddRuleTransition : hFromState...SPSTATEHANDLE__* => SPSTATEHANDLE
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddRuleTransition : hRule : [In,Out] => [In]
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddRuleTransition : hRule...SPSTATEHANDLE__* => SPSTATEHANDLE
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddRuleTransition : hToState : [In,Out] => [In]
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddRuleTransition : hToState...SPSTATEHANDLE__* => SPSTATEHANDLE
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddWordTransition : hFromState : [In,Out] => [In]
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddWordTransition : hFromState...SPSTATEHANDLE__* => SPSTATEHANDLE
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddWordTransition : hToState : [In,Out] => [In]
+Windows.Win32.Media.Speech.ISpGrammarBuilder.AddWordTransition : hToState...SPSTATEHANDLE__* => SPSTATEHANDLE
+Windows.Win32.Media.Speech.ISpGrammarBuilder.ClearRule : hState : [In,Out] => [In]
+Windows.Win32.Media.Speech.ISpGrammarBuilder.ClearRule : hState...SPSTATEHANDLE__* => SPSTATEHANDLE
+Windows.Win32.Media.Speech.ISpGrammarBuilder.CreateNewState : hState : [In,Out] => [In]
+Windows.Win32.Media.Speech.ISpGrammarBuilder.CreateNewState : hState...SPSTATEHANDLE__* => SPSTATEHANDLE
+Windows.Win32.Media.Speech.ISpGrammarBuilder.CreateNewState : phState...SPSTATEHANDLE__** => SPSTATEHANDLE*
+Windows.Win32.Media.Speech.ISpGrammarBuilder.GetRule : phInitialState...SPSTATEHANDLE__** => SPSTATEHANDLE*
+Windows.Win32.Media.Speech.ISpGrammarBuilder2.AddTextSubset : hFromState : [In,Out] => [In]
+Windows.Win32.Media.Speech.ISpGrammarBuilder2.AddTextSubset : hFromState...SPSTATEHANDLE__* => SPSTATEHANDLE
+Windows.Win32.Media.Speech.ISpGrammarBuilder2.AddTextSubset : hToState : [In,Out] => [In]
+Windows.Win32.Media.Speech.ISpGrammarBuilder2.AddTextSubset : hToState...SPSTATEHANDLE__* => SPSTATEHANDLE
+Windows.Win32.Media.Speech.SPSTATEHANDLE__ removed
 # Fixed #547.
 pArgumentDescs : [Const] => [Const,NativeArrayInfo(CountFieldName=NumArgumentDescs)]
 pBufferStrides : [Const] => [Const,NativeArrayInfo(CountFieldName=NumStrides)]
@@ -426,6 +465,43 @@ Windows.Win32.System.Threading.RTWQ_WORKQUEUE_TYPE.RTWQ_STANDARD_WORKQUEUE added
 Windows.Win32.System.Threading.RTWQ_WORKQUEUE_TYPE.RTWQ_WINDOW_WORKQUEUE added
 Windows.Win32.System.Threading.RTWQASYNCRESULT added
 Windows.Win32.System.Threading.RTWQPERIODICCALLBACK added
+# Refactored to MetadataTypedef.
+Windows.Win32.Foundation.Metadata.MetadataTypedefAttribute added
+Windows.Win32.Foundation.Metadata.NativeTypedefAttribute : [StructLayout(3,CharSet=4)] => [AttributeUsage(8,AllowMultiple=False),StructLayout(3,CharSet=4)]
+Windows.Win32.Graphics.Gdi.CreatedHDC : [AlsoUsableFor(HDC),InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DeleteDC)] => [AlsoUsableFor(HDC),InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(DeleteDC)]
+Windows.Win32.Graphics.Gdi.HdcMetdataEnhFileHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DeleteEnhMetaFile)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(DeleteEnhMetaFile)]
+Windows.Win32.Graphics.Gdi.HdcMetdataFileHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DeleteMetaFile)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(DeleteMetaFile)]
+Windows.Win32.Networking.ActiveDirectory.GetDcContextHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DsGetDcCloseW)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(DsGetDcCloseW)]
+Windows.Win32.Networking.WinSock.sa_family_t : [NativeTypedef] => [MetadataTypedef]
+Windows.Win32.NetworkManagement.Dns.DnsContextHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DnsReleaseContextHandle)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(DnsReleaseContextHandle)]
+Windows.Win32.NetworkManagement.IpHelper.IcmpHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(IcmpCloseHandle)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(IcmpCloseHandle)]
+Windows.Win32.NetworkManagement.WNet.NetEnumHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(WNetCloseEnum)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(WNetCloseEnum)]
+Windows.Win32.Storage.FileSystem.FindChangeNotificationHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(FindCloseChangeNotification)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(FindCloseChangeNotification)]
+Windows.Win32.Storage.FileSystem.FindFileHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(FindClose)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(FindClose)]
+Windows.Win32.Storage.FileSystem.FindFileNameHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(FindClose)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(FindClose)]
+Windows.Win32.Storage.FileSystem.FindStreamHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(FindClose)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(FindClose)]
+Windows.Win32.Storage.FileSystem.FindVolumeHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(FindVolumeClose)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(FindVolumeClose)]
+Windows.Win32.Storage.FileSystem.FindVolumeMountPointHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(FindVolumeMountPointClose)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(FindVolumeMountPointClose)]
+Windows.Win32.Storage.InstallableFileSystems.FilterFindHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(FilterFindClose)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(FilterFindClose)]
+Windows.Win32.Storage.InstallableFileSystems.FilterInstanceFindHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(FilterInstanceFindClose)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(FilterInstanceFindClose)]
+Windows.Win32.Storage.InstallableFileSystems.FilterVolumeFindHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(FilterVolumeFindClose)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(FilterVolumeFindClose)]
+Windows.Win32.Storage.InstallableFileSystems.FilterVolumeInstanceFindHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(FilterVolumeInstanceFindClose)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(FilterVolumeInstanceFindClose)]
+Windows.Win32.System.Diagnostics.Etw.CONTROLTRACE_HANDLE : [InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(0),MetadataTypedef]
+Windows.Win32.System.Diagnostics.Etw.PROCESSTRACE_HANDLE : [NativeTypedef,RAIIFree(CloseTrace)] => [MetadataTypedef,RAIIFree(CloseTrace)]
+Windows.Win32.System.Diagnostics.Etw.RELOGSTREAM_HANDLE : [InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(0),MetadataTypedef]
+Windows.Win32.System.EventLog.EventLogHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(CloseEventLog)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(CloseEventLog)]
+Windows.Win32.System.EventLog.EventSourceHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DeregisterEventSource)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(DeregisterEventSource)]
+Windows.Win32.System.GroupPolicy.CriticalPolicySectionHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(LeaveCriticalPolicySection)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(LeaveCriticalPolicySection)]
+Windows.Win32.System.LibraryLoader.UPDATERESOURCE_HANDLE : [InvalidHandleValue(0),NativeTypedef,RAIIFree(EndUpdateResourceW)] => [InvalidHandleValue(0),MetadataTypedef,RAIIFree(EndUpdateResourceW)]
+Windows.Win32.System.Memory.HeapHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(HeapDestroy)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(HeapDestroy)]
+Windows.Win32.System.Performance.PerfProviderHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(PerfStopProvider)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(PerfStopProvider)]
+Windows.Win32.System.Performance.PerfQueryHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(PerfCloseQueryHandle)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(PerfCloseQueryHandle)]
+Windows.Win32.System.RemoteDesktop.HwtsVirtualChannelHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(WTSVirtualChannelClose)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(WTSVirtualChannelClose)]
+Windows.Win32.System.Threading.BoundaryDescriptorHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DeleteBoundaryDescriptor)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(DeleteBoundaryDescriptor)]
+Windows.Win32.System.Threading.NamespaceHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(ClosePrivateNamespace)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(ClosePrivateNamespace)]
+Windows.Win32.System.Threading.TimerQueueHandle : [InvalidHandleValue(0),NativeTypedef,RAIIFree(DeleteTimerQueueEx)] => [InvalidHandleValue(0),MetadataTypedef,RAIIFree(DeleteTimerQueueEx)]
+Windows.Win32.UI.Shell.ShFindChangeNotificationHandle : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(SHChangeNotification_Unlock)] => [InvalidHandleValue(-1),InvalidHandleValue(0),MetadataTypedef,RAIIFree(SHChangeNotification_Unlock)]
+Windows.Win32.UI.WindowsAndMessaging.LOADIMAGE_HANDLE : [InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(0),MetadataTypedef]
 # Added CONTEXT_FLAGS and WOW64_CONTEXT_FLAGS.
 Windows.Win32.System.Diagnostics.Debug.Apis.CopyContext : ContextFlags...UInt32 => CONTEXT_FLAGS
 Windows.Win32.System.Diagnostics.Debug.Apis.InitializeContext : ContextFlags...UInt32 => CONTEXT_FLAGS

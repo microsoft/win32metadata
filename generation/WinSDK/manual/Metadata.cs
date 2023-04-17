@@ -111,6 +111,14 @@ public class MemorySizeAttribute : Attribute
     }
 }
 
+[AttributeUsage(AttributeTargets.Struct, AllowMultiple = false)]
+public class MetadataTypedefAttribute : Attribute
+{
+    public MetadataTypedefAttribute()
+    {
+    }
+}
+
 public class NativeArrayInfoAttribute : Attribute
 {
     //
@@ -156,6 +164,7 @@ public class NativeInheritanceAttribute : Attribute
     }
 }
 
+[AttributeUsage(AttributeTargets.Struct, AllowMultiple = false)]
 public class NativeTypedefAttribute : Attribute
 {
     public NativeTypedefAttribute()
