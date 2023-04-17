@@ -36153,6 +36153,321 @@
         "parameter": "lFlags"
       }
     ]
+  },
+  {
+    "name": "CONTEXT_FLAGS",
+    "type": "uint",
+    "flags": true,
+    "members": [
+      {
+        "name": "CONTEXT_AMD64"
+      },
+      {
+        "name": "CONTEXT_CONTROL_AMD64",
+        "value": "(CONTEXT_AMD64 | 0x00000001)"
+      },
+      {
+        "name": "CONTEXT_INTEGER_AMD64",
+        "value": "(CONTEXT_AMD64 | 0x00000002)"
+      },
+      {
+        "name": "CONTEXT_SEGMENTS_AMD64",
+        "value": "(CONTEXT_AMD64 | 0x00000004)"
+      },
+      {
+        "name": "CONTEXT_FLOATING_POINT_AMD64",
+        "value": "(CONTEXT_AMD64 | 0x00000008)"
+      },
+      {
+        "name": "CONTEXT_DEBUG_REGISTERS_AMD64",
+        "value": "(CONTEXT_AMD64 | 0x00000010)"
+      },
+      {
+        "name": "CONTEXT_FULL_AMD64",
+        "value": "(CONTEXT_CONTROL_AMD64 | CONTEXT_INTEGER_AMD64 | CONTEXT_FLOATING_POINT_AMD64)"
+      },
+      {
+        "name": "CONTEXT_ALL_AMD64",
+        "value": "(CONTEXT_CONTROL_AMD64 | CONTEXT_INTEGER_AMD64 | CONTEXT_SEGMENTS_AMD64 | CONTEXT_FLOATING_POINT_AMD64 | CONTEXT_DEBUG_REGISTERS_AMD64)"
+      },
+      {
+        "name": "CONTEXT_XSTATE_AMD64",
+        "value": "(CONTEXT_AMD64 | 0x00000040)"
+      },
+      {
+        "name": "CONTEXT_KERNEL_CET_AMD64",
+        "value": "(CONTEXT_AMD64 | 0x00000080)"
+      },
+      {
+        "name": "CONTEXT_KERNEL_DEBUGGER_AMD64",
+        "value": "0x04000000L"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_ACTIVE_AMD64",
+        "value": "0x08000000"
+      },
+      {
+        "name": "CONTEXT_SERVICE_ACTIVE_AMD64",
+        "value": "0x10000000"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_REQUEST_AMD64",
+        "value": "0x40000000"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_REPORTING_AMD64",
+        "value": "0x80000000"
+      },
+      {
+        "name": "CONTEXT_UNWOUND_TO_CALL_AMD64",
+        "value": "0x20000000"
+      },
+      {
+        "name": "CONTEXT_X86",
+        "value": "0x00010000L"
+      },
+      {
+        "name": "CONTEXT_CONTROL_X86",
+        "value": "(CONTEXT_X86 | 0x00000001)"
+      },
+      {
+        "name": "CONTEXT_INTEGER_X86",
+        "value": "(CONTEXT_X86 | 0x00000002)"
+      },
+      {
+        "name": "CONTEXT_SEGMENTS_X86",
+        "value": "(CONTEXT_X86 | 0x00000004)"
+      },
+      {
+        "name": "CONTEXT_FLOATING_POINT_X86",
+        "value": "(CONTEXT_X86 | 0x00000008)"
+      },
+      {
+        "name": "CONTEXT_DEBUG_REGISTERS_X86",
+        "value": "(CONTEXT_X86 | 0x00000010)"
+      },
+      {
+        "name": "CONTEXT_EXTENDED_REGISTERS_X86",
+        "value": "(CONTEXT_X86 | 0x00000020)"
+      },
+      {
+        "name": "CONTEXT_FULL_X86",
+        "value": "(CONTEXT_CONTROL_X86 | CONTEXT_INTEGER_X86 | CONTEXT_SEGMENTS_X86)"
+      },
+      {
+        "name": "CONTEXT_ALL_X86",
+        "value": "(CONTEXT_CONTROL_X86 | CONTEXT_INTEGER_X86 | CONTEXT_SEGMENTS_X86 | CONTEXT_FLOATING_POINT_X86 | CONTEXT_DEBUG_REGISTERS_X86 | CONTEXT_EXTENDED_REGISTERS_X86)"
+      },
+      {
+        "name": "CONTEXT_XSTATE_X86",
+        "value": "(CONTEXT_X86 | 0x00000040)"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_ACTIVE_X86",
+        "value": "0x08000000"
+      },
+      {
+        "name": "CONTEXT_SERVICE_ACTIVE_X86",
+        "value": "0x10000000"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_REQUEST_X86",
+        "value": "0x40000000"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_REPORTING_X86",
+        "value": "0x80000000"
+      },
+      {
+        "name": "CONTEXT_ARM64"
+      },
+      {
+        "name": "CONTEXT_CONTROL_ARM64",
+        "value": "(CONTEXT_ARM64 | 0x00000001)"
+      },
+      {
+        "name": "CONTEXT_INTEGER_ARM64",
+        "value": "(CONTEXT_ARM64 | 0x00000002)"
+      },
+      {
+        "name": "CONTEXT_FLOATING_POINT_ARM64",
+        "value": "(CONTEXT_ARM64 | 0x00000004)"
+      },
+      {
+        "name": "CONTEXT_DEBUG_REGISTERS_ARM64",
+        "value": "(CONTEXT_ARM64 | 0x00000008)"
+      },
+      {
+        "name": "CONTEXT_X18_ARM64",
+        "value": "(CONTEXT_ARM64 | 0x00000010)"
+      },
+      {
+        "name": "CONTEXT_FULL_ARM64",
+        "value": "(CONTEXT_CONTROL_ARM64 | CONTEXT_INTEGER_ARM64 | CONTEXT_FLOATING_POINT_ARM64)"
+      },
+      {
+        "name": "CONTEXT_ALL_ARM64",
+        "value": "(CONTEXT_CONTROL_ARM64 | CONTEXT_INTEGER_ARM64 | CONTEXT_FLOATING_POINT_ARM64 | CONTEXT_DEBUG_REGISTERS_ARM64 | CONTEXT_X18_ARM64)"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_ACTIVE_ARM64",
+        "value": "0x08000000"
+      },
+      {
+        "name": "CONTEXT_SERVICE_ACTIVE_ARM64",
+        "value": "0x10000000"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_REQUEST_ARM64",
+        "value": "0x40000000"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_REPORTING_ARM64",
+        "value": "0x80000000"
+      },
+      {
+        "name": "CONTEXT_UNWOUND_TO_CALL_ARM64",
+        "value": "0x20000000"
+      },
+      {
+        "name": "CONTEXT_RET_TO_GUEST_ARM64",
+        "value": "0x40000000"
+      },
+      {
+        "name": "CONTEXT_ARM"
+      },
+      {
+        "name": "CONTEXT_CONTROL_ARM",
+        "value": "(CONTEXT_ARM | 0x00000001)"
+      },
+      {
+        "name": "CONTEXT_INTEGER_ARM",
+        "value": "(CONTEXT_ARM | 0x00000002)"
+      },
+      {
+        "name": "CONTEXT_FLOATING_POINT_ARM",
+        "value": "(CONTEXT_ARM | 0x00000004)"
+      },
+      {
+        "name": "CONTEXT_DEBUG_REGISTERS_ARM",
+        "value": "(CONTEXT_ARM | 0x00000008)"
+      },
+      {
+        "name": "CONTEXT_FULL_ARM",
+        "value": "(CONTEXT_CONTROL_ARM | CONTEXT_INTEGER_ARM | CONTEXT_FLOATING_POINT_ARM)"
+      },
+      {
+        "name": "CONTEXT_ALL_ARM",
+        "value": "(CONTEXT_CONTROL_ARM | CONTEXT_INTEGER_ARM | CONTEXT_FLOATING_POINT_ARM | CONTEXT_DEBUG_REGISTERS_ARM)"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_ACTIVE_ARM",
+        "value": "0x08000000"
+      },
+      {
+        "name": "CONTEXT_SERVICE_ACTIVE_ARM",
+        "value": "0x10000000"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_REQUEST_ARM",
+        "value": "0x40000000"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_REPORTING_ARM",
+        "value": "0x80000000"
+      },
+      {
+        "name": "CONTEXT_UNWOUND_TO_CALL_ARM",
+        "value": "0x20000000"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "CONTEXT",
+        "field": "ContextFlags"
+      },
+      {
+        "method": "InitializeContext",
+        "parameter": "ContextFlags"
+      },
+      {
+        "method": "InitializeContext2",
+        "parameter": "ContextFlags"
+      },
+      {
+        "method": "CopyContext",
+        "parameter": "ContextFlags"
+      }
+    ]
+  },
+  {
+    "name": "WOW64_CONTEXT_FLAGS",
+    "type": "uint",
+    "flags": true,
+    "members": [
+      {
+        "name": "WOW64_CONTEXT_X86",
+        "value": "0x00010000L"
+      },
+      {
+        "name": "WOW64_CONTEXT_CONTROL",
+        "value": "(WOW64_CONTEXT_X86 | 0x00000001)"
+      },
+      {
+        "name": "WOW64_CONTEXT_INTEGER",
+        "value": "(WOW64_CONTEXT_X86 | 0x00000002)"
+      },
+      {
+        "name": "WOW64_CONTEXT_SEGMENTS",
+        "value": "(WOW64_CONTEXT_X86 | 0x00000004)"
+      },
+      {
+        "name": "WOW64_CONTEXT_FLOATING_POINT",
+        "value": "(WOW64_CONTEXT_X86 | 0x00000008)"
+      },
+      {
+        "name": "WOW64_CONTEXT_DEBUG_REGISTERS",
+        "value": "(WOW64_CONTEXT_X86 | 0x00000010)"
+      },
+      {
+        "name": "WOW64_CONTEXT_EXTENDED_REGISTERS",
+        "value": "(WOW64_CONTEXT_X86 | 0x00000020)"
+      },
+      {
+        "name": "WOW64_CONTEXT_FULL",
+        "value": "(WOW64_CONTEXT_CONTROL | WOW64_CONTEXT_INTEGER | WOW64_CONTEXT_SEGMENTS)"
+      },
+      {
+        "name": "WOW64_CONTEXT_ALL",
+        "value": "(WOW64_CONTEXT_CONTROL | WOW64_CONTEXT_INTEGER | WOW64_CONTEXT_SEGMENTS | WOW64_CONTEXT_FLOATING_POINT | WOW64_CONTEXT_DEBUG_REGISTERS | WOW64_CONTEXT_EXTENDED_REGISTERS)"
+      },
+      {
+        "name": "WOW64_CONTEXT_XSTATE",
+        "value": "(WOW64_CONTEXT_X86 | 0x00000040)"
+      },
+      {
+        "name": "WOW64_CONTEXT_EXCEPTION_ACTIVE",
+        "value": "0x08000000"
+      },
+      {
+        "name": "WOW64_CONTEXT_SERVICE_ACTIVE",
+        "value": "0x10000000"
+      },
+      {
+        "name": "WOW64_CONTEXT_EXCEPTION_REQUEST",
+        "value": "0x40000000"
+      },
+      {
+        "name": "WOW64_CONTEXT_EXCEPTION_REPORTING",
+        "value": "0x80000000"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "WOW64_CONTEXT",
+        "field": "ContextFlags"
+      }
+    ]
   }
 ]
 }
