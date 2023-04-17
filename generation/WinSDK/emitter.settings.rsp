@@ -1567,3 +1567,13 @@ D3D12_STREAM_OUTPUT_DESC::pSODeclaration=[NativeArrayInfo(CountFieldName = "NumE
 D3D12_VIEW_INSTANCING_DESC::pViewInstanceLocations=[NativeArrayInfo(CountFieldName = "ViewInstanceCount")]
 CreatePipe::hReadPipe=[IgnoreIfReturn("0")]
 CreatePipe::hWritePipe=[IgnoreIfReturn("0")]
+MapViewOfFile::return=MEMORY_MAPPED_VIEW_ADDRESS
+MapViewOfFile3::return=MEMORY_MAPPED_VIEW_ADDRESS
+MapViewOfFile3FromApp::return=MEMORY_MAPPED_VIEW_ADDRESS
+MapViewOfFileEx::return=MEMORY_MAPPED_VIEW_ADDRESS
+MapViewOfFileExNuma::return=MEMORY_MAPPED_VIEW_ADDRESS
+MapViewOfFileFromApp::return=MEMORY_MAPPED_VIEW_ADDRESS
+MapViewOfFileNuma2::return=MEMORY_MAPPED_VIEW_ADDRESS
+UnmapViewOfFile::lpBaseAddress=MEMORY_MAPPED_VIEW_ADDRESS
+UnmapViewOfFile2::BaseAddress=MEMORY_MAPPED_VIEW_ADDRESS
+UnmapViewOfFileEx::BaseAddress=MEMORY_MAPPED_VIEW_ADDRESS

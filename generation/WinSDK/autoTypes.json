@@ -1911,5 +1911,12 @@
     "ValueType": "DECLARE_HANDLE",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Memory",
+    "Name": "MEMORY_MAPPED_VIEW_ADDRESS",
+    "ValueType": "void*",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypeDef": false
   }
 ]

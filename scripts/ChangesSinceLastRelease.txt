@@ -602,3 +602,15 @@ Windows.Win32.System.SystemServices.Apis.CONTEXT_KERNEL_DEBUGGER removed
 Windows.Win32.System.SystemServices.Apis.CONTEXT_RET_TO_GUEST removed
 Windows.Win32.System.SystemServices.Apis.CONTEXT_SERVICE_ACTIVE removed
 Windows.Win32.System.SystemServices.Apis.CONTEXT_UNWOUND_TO_CALL removed
+# Fixed #561.
+Windows.Win32.System.Memory.Apis.MapViewOfFile : return...Void* => MEMORY_MAPPED_VIEW_ADDRESS
+Windows.Win32.System.Memory.Apis.MapViewOfFile3 : return...Void* => MEMORY_MAPPED_VIEW_ADDRESS
+Windows.Win32.System.Memory.Apis.MapViewOfFile3FromApp : return...Void* => MEMORY_MAPPED_VIEW_ADDRESS
+Windows.Win32.System.Memory.Apis.MapViewOfFileEx : return...Void* => MEMORY_MAPPED_VIEW_ADDRESS
+Windows.Win32.System.Memory.Apis.MapViewOfFileExNuma : return...Void* => MEMORY_MAPPED_VIEW_ADDRESS
+Windows.Win32.System.Memory.Apis.MapViewOfFileFromApp : return...Void* => MEMORY_MAPPED_VIEW_ADDRESS
+Windows.Win32.System.Memory.Apis.MapViewOfFileNuma2 : return...Void* => MEMORY_MAPPED_VIEW_ADDRESS
+Windows.Win32.System.Memory.Apis.UnmapViewOfFile : lpBaseAddress...Void* => MEMORY_MAPPED_VIEW_ADDRESS
+Windows.Win32.System.Memory.Apis.UnmapViewOfFile2 : BaseAddress...Void* => MEMORY_MAPPED_VIEW_ADDRESS
+Windows.Win32.System.Memory.Apis.UnmapViewOfFileEx : BaseAddress...Void* => MEMORY_MAPPED_VIEW_ADDRESS
+Windows.Win32.System.Memory.MEMORY_MAPPED_VIEW_ADDRESS added
