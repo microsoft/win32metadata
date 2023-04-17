@@ -2449,7 +2449,7 @@ namespace ClangSharpSourceToWinmd
                 {
                     if (paramType is INamedTypeSymbol namedType)
                     {
-                        if (namedType.GetAttributes().Any(a => a.AttributeClass.Name == "TypedefAttribute"))
+                        if (namedType.GetAttributes().Any(a => a.AttributeClass.Name == "NativeTypedefAttribute" || a.AttributeClass.Name == "MetadataTypedefAttribute"))
                         {
                             isPointer = (paramType.GetMembers("Value").First() as IFieldSymbol).Type is IPointerTypeSymbol;
 

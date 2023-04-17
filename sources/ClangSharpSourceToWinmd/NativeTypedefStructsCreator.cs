@@ -85,7 +85,7 @@ $@"namespace {currentNamespace}
                 }
 
                 writer.WriteLine(
-$@"    [Typedef(Native = {item.NativeTypeDef.ToString().ToLower()})]    
+$@"    [{(item.NativeTypeDef ? "NativeTypedef" : "MetadataTypedef")})]
     public {safety}struct {item.Name}
     {{
         public {valueType} Value;

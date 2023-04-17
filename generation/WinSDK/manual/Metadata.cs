@@ -111,6 +111,14 @@ public class MemorySizeAttribute : Attribute
     }
 }
 
+[AttributeUsage(AttributeTargets.Struct, AllowMultiple = false)]
+public class MetadataTypedefAttribute : Attribute
+{
+    public MetadataTypedefAttribute()
+    {
+    }
+}
+
 public class NativeArrayInfoAttribute : Attribute
 {
     //
@@ -152,6 +160,14 @@ public class NativeEncodingAttribute : Attribute
 public class NativeInheritanceAttribute : Attribute
 {
     public NativeInheritanceAttribute(string BaseName)
+    {
+    }
+}
+
+[AttributeUsage(AttributeTargets.Struct, AllowMultiple = false)]
+public class NativeTypedefAttribute : Attribute
+{
+    public NativeTypedefAttribute()
     {
     }
 }
@@ -268,20 +284,3 @@ public class SupportedOSPlatformAttribute : Attribute
     {
     }
 }
-
-/// <summary>
-/// Indicates that the attributed struct represents a typedef.
-/// </summary>
-[AttributeUsage(AttributeTargets.Struct, AllowMultiple = false)]
-public class TypedefAttribute : Attribute
-{
-    /// <summary>
-    /// Indicates whether the typedef exists in the native Win32 headers.
-    /// </summary>
-    public bool Native;
-
-    public TypedefAttribute()
-    {
-    }
-}
-
