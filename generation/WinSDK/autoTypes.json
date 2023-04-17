@@ -1297,6 +1297,24 @@
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_abouticon",
+    "ValueType": "AllJoynHandle",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_abouticonobj",
+    "ValueType": "AllJoynHandle",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_abouticonproxy",
+    "ValueType": "AllJoynHandle",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_aboutlistener",
     "ValueType": "AllJoynHandle",
     "NativeTypeDef": true

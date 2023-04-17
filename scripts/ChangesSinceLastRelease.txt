@@ -614,3 +614,39 @@ Windows.Win32.System.Memory.Apis.UnmapViewOfFile : lpBaseAddress...Void* => MEMO
 Windows.Win32.System.Memory.Apis.UnmapViewOfFile2 : BaseAddress...Void* => MEMORY_MAPPED_VIEW_ADDRESS
 Windows.Win32.System.Memory.Apis.UnmapViewOfFileEx : BaseAddress...Void* => MEMORY_MAPPED_VIEW_ADDRESS
 Windows.Win32.System.Memory.MEMORY_MAPPED_VIEW_ADDRESS added
+# Added missing AllJoyn handles.
+Windows.Win32.Devices.AllJoyn._alljoyn_abouticon_handle removed
+Windows.Win32.Devices.AllJoyn._alljoyn_abouticonobj_handle removed
+Windows.Win32.Devices.AllJoyn._alljoyn_abouticonproxy_handle removed
+Windows.Win32.Devices.AllJoyn.alljoyn_abouticon added
+Windows.Win32.Devices.AllJoyn.alljoyn_abouticonobj added
+Windows.Win32.Devices.AllJoyn.alljoyn_abouticonproxy added
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticon_clear : icon : [In,Out] => [In]
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticon_clear : icon..._alljoyn_abouticon_handle* => alljoyn_abouticon
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticon_create : return..._alljoyn_abouticon_handle* => alljoyn_abouticon
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticon_destroy : icon : [In,Out] => [In]
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticon_destroy : icon..._alljoyn_abouticon_handle* => alljoyn_abouticon
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticon_getcontent : icon : [In,Out] => [In]
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticon_getcontent : icon..._alljoyn_abouticon_handle* => alljoyn_abouticon
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticon_geturl : icon : [In,Out] => [In]
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticon_geturl : icon..._alljoyn_abouticon_handle* => alljoyn_abouticon
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticon_setcontent : icon : [In,Out] => [In]
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticon_setcontent : icon..._alljoyn_abouticon_handle* => alljoyn_abouticon
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticon_setcontent_frommsgarg : icon : [In,Out] => [In]
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticon_setcontent_frommsgarg : icon..._alljoyn_abouticon_handle* => alljoyn_abouticon
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticon_seturl : icon : [In,Out] => [In]
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticon_seturl : icon..._alljoyn_abouticon_handle* => alljoyn_abouticon
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticonobj_create : icon : [In,Out] => [In]
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticonobj_create : icon..._alljoyn_abouticon_handle* => alljoyn_abouticon
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticonobj_create : return..._alljoyn_abouticonobj_handle* => alljoyn_abouticonobj
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticonobj_destroy : icon : [In,Out] => [In]
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticonobj_destroy : icon..._alljoyn_abouticonobj_handle* => alljoyn_abouticonobj
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticonproxy_create : return..._alljoyn_abouticonproxy_handle* => alljoyn_abouticonproxy
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticonproxy_destroy : proxy : [In,Out] => [In]
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticonproxy_destroy : proxy..._alljoyn_abouticonproxy_handle* => alljoyn_abouticonproxy
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticonproxy_geticon : icon : [In,Out] => [In]
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticonproxy_geticon : icon..._alljoyn_abouticon_handle* => alljoyn_abouticon
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticonproxy_geticon : proxy : [In,Out] => [In]
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticonproxy_geticon : proxy..._alljoyn_abouticonproxy_handle* => alljoyn_abouticonproxy
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticonproxy_getversion : proxy : [In,Out] => [In]
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_abouticonproxy_getversion : proxy..._alljoyn_abouticonproxy_handle* => alljoyn_abouticonproxy
