@@ -5,4 +5,5 @@ Windows.Win32.System.Rpc.MIDL_STUB_DESC.apfnExprEval
 Windows.Win32.System.Rpc.MIDL_STUB_DESC.NotifyRoutineTable
 Windows.Win32.System.Rpc.MIDL_SERVER_INFO.DispatchTable
 Windows.Win32.System.Rpc.MIDL_SERVER_INFO.ThunkTable
+Windows.Win32.System.WinRT.Apis.RoRegisterActivationFactories
 Windows.Win32.Globalization.Apis.utrace_getFunctions

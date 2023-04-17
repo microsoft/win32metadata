@@ -10,6 +10,10 @@ RtlCompareMemory
 UiaRect
 _FILE_DISPOSITION_INFO
 _TEB
+_PROCESS_BASIC_INFORMATION
+_PROCESSINFOCLASS
+_THREADINFOCLASS
+NtCreateFile
 --traverse
 <IncludeRoot>/um/wldp.h
 <IncludeRoot>/shared/tdiinfo.h

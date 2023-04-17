@@ -4,8 +4,8 @@
  * Licensed under the MIT license
  *
  *-------------------------------------------------------------------------------------*/
-import "OAIdl.idl";
-import "OCIdl.idl";
+import "oaidl.idl";
+import "ocidl.idl";
 
 //----------------------------------------------------------------------------
 //
@@ -62,7 +62,7 @@ typedef enum D3D_PRIMITIVE_TOPOLOGY
     D3D_PRIMITIVE_TOPOLOGY_LINESTRIP = 3,
     D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST = 4,
     D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP = 5,
-    // 6 is reserved for legacy triangle fans
+    D3D_PRIMITIVE_TOPOLOGY_TRIANGLEFAN = 6,
     // Adjacency values should be equal to (0x8 & non-adjacency):
     D3D_PRIMITIVE_TOPOLOGY_LINELIST_ADJ = 10,
     D3D_PRIMITIVE_TOPOLOGY_LINESTRIP_ADJ = 11,
@@ -153,7 +153,7 @@ typedef enum D3D_PRIMITIVE_TOPOLOGY
     D3D11_PRIMITIVE_TOPOLOGY_29_CONTROL_POINT_PATCHLIST = D3D_PRIMITIVE_TOPOLOGY_29_CONTROL_POINT_PATCHLIST,
     D3D11_PRIMITIVE_TOPOLOGY_30_CONTROL_POINT_PATCHLIST = D3D_PRIMITIVE_TOPOLOGY_30_CONTROL_POINT_PATCHLIST,
     D3D11_PRIMITIVE_TOPOLOGY_31_CONTROL_POINT_PATCHLIST = D3D_PRIMITIVE_TOPOLOGY_31_CONTROL_POINT_PATCHLIST,
-    D3D11_PRIMITIVE_TOPOLOGY_32_CONTROL_POINT_PATCHLIST = D3D_PRIMITIVE_TOPOLOGY_32_CONTROL_POINT_PATCHLIST,
+    D3D11_PRIMITIVE_TOPOLOGY_32_CONTROL_POINT_PATCHLIST = D3D_PRIMITIVE_TOPOLOGY_32_CONTROL_POINT_PATCHLIST
 } D3D_PRIMITIVE_TOPOLOGY;
 
 typedef enum D3D_PRIMITIVE
@@ -327,6 +327,8 @@ cpp_quote("#define D3D_SHADER_FEATURE_RESOURCE_DESCRIPTOR_HEAP_INDEXING         
 cpp_quote("#define D3D_SHADER_FEATURE_SAMPLER_DESCRIPTOR_HEAP_INDEXING                               0x4000000")
 cpp_quote("#define D3D_SHADER_FEATURE_WAVE_MMA                                                       0x8000000")
 cpp_quote("#define D3D_SHADER_FEATURE_ATOMIC_INT64_ON_DESCRIPTOR_HEAP_RESOURCE                       0x10000000")
+cpp_quote("#define D3D_SHADER_FEATURE_ADVANCED_TEXTURE_OPS                                           0x20000000")
+cpp_quote("#define D3D_SHADER_FEATURE_WRITEABLE_MSAA_TEXTURES                                        0x40000000")
 
 // Additional internal shader feature flags are listed in dxbcutils.h (not relevant/useful for public to see)
 // When adding entries here, make sure they don't conflict with what's there.
@@ -890,6 +892,51 @@ typedef enum _D3D_PARAMETER_FLAGS
     D3D_PF_OUT                = 0x00000002,
     D3D_PF_FORCE_DWORD        = 0x7fffffff
 } D3D_PARAMETER_FLAGS;
+
+// Format Layout Properties
+typedef enum D3D_FORMAT_LAYOUT
+{
+    D3DFL_STANDARD = 0, // standard layout
+    D3DFL_CUSTOM = -1  // custom layout
+    // Note, 1 bit allocated for this in FORMAT_DETAIL below. If you add fields here, add bits...
+    // NOTE SIGNED VALUES ARE USED SINCE COMPILER MAKES ENUMS SIGNED, AND BITFIELDS ARE SIGN EXTENDED ON READ
+} D3D_FORMAT_LAYOUT;
+
+typedef enum D3D_FORMAT_TYPE_LEVEL
+{
+    D3DFTL_NO_TYPE = 0,
+    D3DFTL_PARTIAL_TYPE = -2,
+    D3DFTL_FULL_TYPE = -1,
+    // Note, 2 bits allocated for this in FORMAT_DETAIL below. If you add fields here, add bits...
+    // NOTE SIGNED VALUES ARE USED SINCE COMPILER MAKES ENUMS SIGNED, AND BITFIELDS ARE SIGN EXTENDED ON READ
+} D3D_FORMAT_TYPE_LEVEL;
+
+typedef enum D3D_FORMAT_COMPONENT_NAME
+{
+    D3DFCN_R = -4,
+    D3DFCN_G = -3,
+    D3DFCN_B = -2,
+    D3DFCN_A = -1,
+    D3DFCN_D = 0,
+    D3DFCN_S = 1,
+    D3DFCN_X = 2,
+    // Note, 3 bits allocated for this in FORMAT_DETAIL below. If you add fields here, add bits...
+    // NOTE SIGNED VALUES ARE USED SINCE COMPILER MAKES ENUMS SIGNED, AND BITFIELDS ARE SIGN EXTENDED ON READ
+} D3D_FORMAT_COMPONENT_NAME;
+
+typedef enum D3D_FORMAT_COMPONENT_INTERPRETATION
+{
+    D3DFCI_TYPELESS = 0,
+    D3DFCI_FLOAT = -4,
+    D3DFCI_SNORM = -3,
+    D3DFCI_UNORM = -2,
+    D3DFCI_SINT = -1,
+    D3DFCI_UINT = 1,
+    D3DFCI_UNORM_SRGB = 2,
+    D3DFCI_BIASED_FIXED_2_8 = 3,
+    // Note, 3 bits allocated for this in FORMAT_DETAIL below. If you add fields here, add bits...
+    // NOTE SIGNED VALUES ARE USED SINCE COMPILER MAKES ENUMS SIGNED, AND BITFIELDS ARE SIGN EXTENDED ON READ
+} D3D_FORMAT_COMPONENT_INTERPRETATION;
 
 // Well-Known Private Data IDs (WKPDID_*):
 

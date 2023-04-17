@@ -287,6 +287,7 @@ library SDOIASLib
       IAS_ATTRIBUTE_SERVER_IPv6_ADDRESS, // the IP address of the NPS server which accepted the incoming request
       IAS_ATTRIBUTE_RADIUS_USERNAME_ENCODING_ASCII,
       MS_ATTRIBUTE_RAS_ROUTING_DOMAIN_ID=8172,
+      MS_ATTRIBUTE_AZURE_POLICY_ID=8173,
       IAS_ATTRIBUTE_CERTIFICATE_THUMBPRINT = 8250,
       // IAS_ATTRIBUTE_
       // New IAS Attributes Here      

@@ -1,0 +1,9 @@
+--traverse
+<IncludeRoot>/um/mshtmcid.h
+<IncludeRoot>/um/mshtmdid.h
+<IncludeRoot>/um/mshtmhst.h
+<IncludeRoot>/um/Mshtml.h
+<IncludeRoot>/um/mshtmlc.h
+<IncludeRoot>/um/mshtmldiagnostics.h
+--namespace
+Windows.Win32.Web.MsHtml

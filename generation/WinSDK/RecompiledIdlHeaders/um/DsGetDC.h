@@ -112,6 +112,12 @@ extern "C" {
             DS_RETURN_FLAT_NAME  | \
             DS_RETURN_DNS_NAME )
 
+#define DS_DIRECTORY_SERVICE_ALL_VERSIONS ( \
+            DS_DIRECTORY_SERVICE_REQUIRED | \
+            DS_DIRECTORY_SERVICE_6_REQUIRED | \
+            DS_DIRECTORY_SERVICE_8_REQUIRED | \
+            DS_DIRECTORY_SERVICE_9_REQUIRED | \
+            DS_DIRECTORY_SERVICE_10_REQUIRED )
 
 //
 // Structure returned from DsGetDcName

@@ -1321,7 +1321,6 @@ namespace Windows
 
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]
                 [marshaling_behavior(agile)]
-                [threading(both)]
                 runtimeclass GattClientNotificationResult
                 {
                     [default] interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattClientNotificationResult;
@@ -1377,7 +1376,6 @@ namespace Windows
 
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]
                 [marshaling_behavior(agile)]
-                [threading(both)]
                 runtimeclass GattLocalCharacteristic
                 {
                     [default] interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattLocalCharacteristic;
@@ -1394,7 +1392,6 @@ namespace Windows
 
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]
                 [marshaling_behavior(agile)]
-                [threading(both)]
                 runtimeclass GattLocalCharacteristicResult
                 {
                     [default] interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattLocalCharacteristicResult;
@@ -1402,7 +1399,6 @@ namespace Windows
 
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]
                 [marshaling_behavior(agile)]
-                [threading(both)]
                 runtimeclass GattLocalDescriptor
                 {
                     [default] interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattLocalDescriptor;
@@ -1419,7 +1415,6 @@ namespace Windows
 
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]
                 [marshaling_behavior(agile)]
-                [threading(both)]
                 runtimeclass GattLocalDescriptorResult
                 {
                     [default] interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattLocalDescriptorResult;
@@ -1427,7 +1422,6 @@ namespace Windows
 
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]
                 [marshaling_behavior(agile)]
-                [threading(both)]
                 runtimeclass GattLocalService
                 {
                     [default] interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattLocalService;
@@ -1470,7 +1464,6 @@ namespace Windows
 
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]
                 [marshaling_behavior(agile)]
-                [threading(both)]
                 runtimeclass GattReadRequest
                 {
                     [default] interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattReadRequest;
@@ -1478,7 +1471,6 @@ namespace Windows
 
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]
                 [marshaling_behavior(agile)]
-                [threading(both)]
                 runtimeclass GattReadRequestedEventArgs
                 {
                     [default] interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattReadRequestedEventArgs;
@@ -1505,7 +1497,6 @@ namespace Windows
 
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]
                 [marshaling_behavior(agile)]
-                [threading(both)]
                 runtimeclass GattRequestStateChangedEventArgs
                 {
                     [default] interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattRequestStateChangedEventArgs;
@@ -1522,7 +1513,6 @@ namespace Windows
 
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]
                 [marshaling_behavior(agile)]
-                [threading(both)]
                 runtimeclass GattServiceProviderAdvertisementStatusChangedEventArgs
                 {
                     [default] interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProviderAdvertisementStatusChangedEventArgs;
@@ -1540,7 +1530,6 @@ namespace Windows
 
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]
                 [marshaling_behavior(agile)]
-                [threading(both)]
                 runtimeclass GattServiceProviderResult
                 {
                     [default] interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattServiceProviderResult;
@@ -1575,7 +1564,6 @@ namespace Windows
 
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]
                 [marshaling_behavior(agile)]
-                [threading(both)]
                 runtimeclass GattSubscribedClient
                 {
                     [default] interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattSubscribedClient;
@@ -1591,7 +1579,6 @@ namespace Windows
 
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]
                 [marshaling_behavior(agile)]
-                [threading(both)]
                 runtimeclass GattWriteRequest
                 {
                     [default] interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattWriteRequest;
@@ -1599,7 +1586,6 @@ namespace Windows
 
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)]
                 [marshaling_behavior(agile)]
-                [threading(both)]
                 runtimeclass GattWriteRequestedEventArgs
                 {
                     [default] interface Windows.Devices.Bluetooth.GenericAttributeProfile.IGattWriteRequestedEventArgs;

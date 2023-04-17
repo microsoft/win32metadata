@@ -514,6 +514,7 @@ DNS_WIRE_RECORD, *PDNS_WIRE_RECORD;
 #define DNS_RCLASS_ALL      0xff00      //  255
 #define DNS_RCLASS_ANY      0xff00      //  255
 #define DNS_RCLASS_UNICAST_RESPONSE   0x0080  // Set the top-bit of the field to one, in net order!
+#define DNS_RCLASS_MDNS_CACHE_FLUSH   0x0080  // mDNS cache flush bit set on record announcement in net order!
 
 
 //
@@ -630,8 +631,14 @@ DNS_WIRE_RECORD, *PDNS_WIRE_RECORD;
 //  RFC 5155    (DNSSEC NSEC3PARAM)
 #define DNS_TYPE_NSEC3PARAM 0x0033      //  51
 
-//RFC 6698	(TLSA)
-#define DNS_TYPE_TLSA	    0x0034      //  52
+//  RFC 6698    (TLSA)
+#define DNS_TYPE_TLSA       0x0034      //  52
+
+//  draft-ietf-dnsop-svcb-https
+#define DNS_TYPE_SVCB       0x0040      //  64
+
+//  draft-ietf-dnsop-svcb-https
+#define DNS_TYPE_HTTPS      0x0041      //  65
 
 //
 //  IANA Reserved
@@ -722,7 +729,7 @@ DNS_WIRE_RECORD, *PDNS_WIRE_RECORD;
 #define DNS_RTYPE_DHCID          0x3100  //  49
 #define DNS_RTYPE_NSEC3          0x3200  //  50
 #define DNS_RTYPE_NSEC3PARAM     0x3300  //  51
-#define DNS_RTYPE_TLSA	    	 0x3400	 //  52
+#define DNS_RTYPE_TLSA           0x3400  //  52
 
 //
 //  IANA Reserved
@@ -789,10 +796,10 @@ DNS_WIRE_RECORD, *PDNS_WIRE_RECORD;
 #define DNSSEC_ALGORITHM_RSASHA1_NSEC3          7
 #define DNSSEC_ALGORITHM_RSASHA256              8
 #define DNSSEC_ALGORITHM_RSASHA512              10
-#define DNSSEC_ALGORITHM_ECDSAP256_SHA256    	13
-#define DNSSEC_ALGORITHM_ECDSAP384_SHA384    	14
-#define DNSSEC_ALGORITHM_NULL					253
-#define DNSSEC_ALGORITHM_PRIVATE				254
+#define DNSSEC_ALGORITHM_ECDSAP256_SHA256       13
+#define DNSSEC_ALGORITHM_ECDSAP384_SHA384       14
+#define DNSSEC_ALGORITHM_NULL                   253
+#define DNSSEC_ALGORITHM_PRIVATE                254
 
 //  DNSSEC DS record digest algorithms
 
@@ -1344,9 +1351,22 @@ DNS_ATMA_DATA, *PDNS_ATMA_DATA;
 typedef struct
 {
     PWSTR           pNameAlgorithm;
+
+#ifdef MIDL_PASS
+    [size_is(cAlgNameLength)]
+#endif
     PBYTE           pAlgorithmPacket;
+
+#ifdef MIDL_PASS
+    [size_is(wKeyLength)]
+#endif
     PBYTE           pKey;
+
+#ifdef MIDL_PASS
+    [size_is(wOtherLength)]
+#endif
     PBYTE           pOtherData;
+
     DWORD           dwCreateTime;
     DWORD           dwExpireTime;
     WORD            wMode;
@@ -1361,9 +1381,22 @@ DNS_TKEY_DATAW, *PDNS_TKEY_DATAW;
 typedef struct
 {
     PSTR            pNameAlgorithm;
+
+#ifdef MIDL_PASS
+    [size_is(cAlgNameLength)]
+#endif
     PBYTE           pAlgorithmPacket;
+
+#ifdef MIDL_PASS
+    [size_is(wKeyLength)]
+#endif
     PBYTE           pKey;
+
+#ifdef MIDL_PASS
+    [size_is(wOtherLength)]
+#endif
     PBYTE           pOtherData;
+
     DWORD           dwCreateTime;
     DWORD           dwExpireTime;
     WORD            wMode;
@@ -1378,9 +1411,22 @@ DNS_TKEY_DATAA, *PDNS_TKEY_DATAA;
 typedef struct
 {
     PWSTR           pNameAlgorithm;
+
+#ifdef MIDL_PASS
+    [size_is(cAlgNameLength)]
+#endif
     PBYTE           pAlgorithmPacket;
+
+#ifdef MIDL_PASS
+    [size_is(wSigLength)]
+#endif
     PBYTE           pSignature;
+
+#ifdef MIDL_PASS
+    [size_is(wOtherLength)]
+#endif
     PBYTE           pOtherData;
+
     LONGLONG        i64CreateTime;
     WORD            wFudgeTime;
     WORD            wOriginalXid;
@@ -1395,9 +1441,22 @@ DNS_TSIG_DATAW, *PDNS_TSIG_DATAW;
 typedef struct
 {
     PSTR            pNameAlgorithm;
+
+#ifdef MIDL_PASS
+    [size_is(cAlgNameLength)]
+#endif
     PBYTE           pAlgorithmPacket;
+
+#ifdef MIDL_PASS
+    [size_is(wSigLength)]
+#endif
     PBYTE           pSignature;
+
+#ifdef MIDL_PASS
+        [size_is(wOtherLength)]
+#endif
     PBYTE           pOtherData;
+
     LONGLONG        i64CreateTime;
     WORD            wFudgeTime;
     WORD            wOriginalXid;
@@ -1430,7 +1489,12 @@ typedef struct
     DWORD           dwLookupTimeout;
     DWORD           dwCacheTimeout;
     DWORD           cWinsServerCount;
+#ifdef MIDL_PASS
+    [size_is(cWinsServerCount)]
+    IP4_ADDRESS     WinsServers[];
+#else
     IP4_ADDRESS     WinsServers[1];
+#endif
 }
 DNS_WINS_DATA, *PDNS_WINS_DATA;
 
@@ -1451,6 +1515,82 @@ typedef struct
     PSTR            pNameResultDomain;
 }
 DNS_WINSR_DATAA, *PDNS_WINSR_DATAA;
+
+#define DDR_MAX_IP_HINTS 4
+
+typedef enum _DNS_SVCB_PARAM_TYPE
+{
+    DnsSvcbParamMandatory      = 0,
+    DnsSvcbParamAlpn           = 1,
+    DnsSvcbParamNoDefaultAlpn  = 2,
+    DnsSvcbParamPort           = 3,
+    DnsSvcbParamIpv4Hint       = 4,
+    DnsSvcbParamEch            = 5,
+    DnsSvcbParamIpv6Hint       = 6,
+    DnsSvcbParamDohPath        = 7,
+    DnsSvcbParamDohPathQuad9   = 65380,
+    DnsSvcbParamDohPathOpenDns = 65432,
+} DNS_SVCB_PARAM_TYPE;
+
+typedef struct _DNS_SVCB_PARAM_MANDATORY
+{
+    WORD cMandatoryKeys;
+    WORD rgwMandatoryKeys[1];
+} DNS_SVCB_PARAM_MANDATORY;
+
+typedef struct _DNS_SVCB_PARAM_ALPN_ID
+{
+    BYTE cBytes;
+    BYTE *pbId;
+} DNS_SVCB_PARAM_ALPN_ID;
+
+typedef struct _DNS_SVCB_PARAM_ALPN
+{
+    WORD                   cIds;
+    DNS_SVCB_PARAM_ALPN_ID rgIds[1];
+} DNS_SVCB_PARAM_ALPN;
+
+typedef struct _DNS_SVCB_PARAM_IPV4
+{
+    WORD        cIps;
+    IP4_ADDRESS rgIps[1];
+} DNS_SVCB_PARAM_IPV4;
+
+typedef struct _DNS_SVCB_PARAM_IPV6
+{
+    WORD        cIps;
+    IP6_ADDRESS rgIps[1];
+} DNS_SVCB_PARAM_IPV6;
+
+typedef struct _DNS_SVCB_PARAM_UNKNOWN
+{
+    WORD cBytes;
+    BYTE pbSvcParamValue[1];
+} DNS_SVCB_PARAM_UNKNOWN;
+
+typedef struct _DNS_SVCB_PARAM
+{
+    WORD wSvcParamKey;
+    union
+    {
+        DNS_SVCB_PARAM_IPV4      *pIpv4Hints;
+        DNS_SVCB_PARAM_IPV6      *pIpv6Hints;
+        DNS_SVCB_PARAM_MANDATORY *pMandatory;
+        DNS_SVCB_PARAM_ALPN      *pAlpn;
+        WORD                     wPort;
+        DNS_SVCB_PARAM_UNKNOWN   *pUnknown;
+        PSTR                     pszDohPath;
+        VOID                     *pReserved;
+    };
+} DNS_SVCB_PARAM;
+
+typedef struct _DNS_SVCB_DATA
+{
+    WORD           wSvcPriority;
+    PSTR           pszTargetName;
+    WORD           cSvcParams;
+    DNS_SVCB_PARAM *pSvcParams;
+} DNS_SVCB_DATA;
 
 //
 //  Unicode/ANSI record types
@@ -1526,10 +1666,10 @@ typedef DNS_WINSR_DATAA DNS_WINSR_DATA, *PDNS_WINSR_DATA;
             (FIELD_OFFSET(DNS_NSEC3_DATA, chData) + (ByteCount))
 
 #define DNS_NSEC3PARAM_RECORD_LENGTH(ByteCount) \
-			(FIELD_OFFSET(DNS_NSEC3PARAM_DATA, pbSalt) + (ByteCount))
+            (FIELD_OFFSET(DNS_NSEC3PARAM_DATA, pbSalt) + (ByteCount))
 
 #define DNS_TLSA_RECORD_LENGTH(ByteCount) \
-			(FIELD_OFFSET(DNS_TLSA_DATA, bCertificateAssociationData) + (ByteCount))
+            (FIELD_OFFSET(DNS_TLSA_DATA, bCertificateAssociationData) + (ByteCount))
 
 #define DNS_UNKNOWN_RECORD_LENGTH(ByteCount) \
             (FIELD_OFFSET(DNS_UNKNOWN_DATA, bData) + (ByteCount))
@@ -1677,8 +1817,9 @@ typedef _Struct_size_bytes_(FIELD_OFFSET(struct _DnsRecordW, Data) + wDataLength
         DNS_WINSR_DATAW     WINSR, WinsR, NBSTAT, Nbstat;
         DNS_DHCID_DATA      DHCID;
         DNS_NSEC3_DATA      NSEC3, Nsec3;
-        DNS_NSEC3PARAM_DATA	NSEC3PARAM, Nsec3Param;
-        DNS_TLSA_DATA	    TLSA, Tlsa;
+        DNS_NSEC3PARAM_DATA NSEC3PARAM, Nsec3Param;
+        DNS_TLSA_DATA       TLSA, Tlsa;
+        DNS_SVCB_DATA       SVCB, Svcb;
         DNS_UNKNOWN_DATA    UNKNOWN, Unknown;
         PBYTE               pDataPtr;
 
@@ -1776,7 +1917,8 @@ typedef _Struct_size_bytes_(FIELD_OFFSET(struct _DnsRecordA, Data) + wDataLength
         DNS_DHCID_DATA      DHCID;
         DNS_NSEC3_DATA      NSEC3, Nsec3;
         DNS_NSEC3PARAM_DATA NSEC3PARAM, Nsec3Param;
-        DNS_TLSA_DATA	    TLSA, Tlsa;
+        DNS_TLSA_DATA       TLSA, Tlsa;
+        DNS_SVCB_DATA       SVCB, Svcb;
         DNS_UNKNOWN_DATA    UNKNOWN, Unknown;
         PBYTE               pDataPtr;
 
@@ -2764,6 +2906,16 @@ DnsConnectionGetProxyInfoForHostUrl(
     _In_reads_opt_(dwSelectionContextLength) BYTE *pSelectionContext,
     _In_ DWORD dwSelectionContextLength,
     _In_ DWORD dwExplicitInterfaceIndex,
+    _Out_ DNS_CONNECTION_PROXY_INFO_EX *pProxyInfoEx
+);
+
+DWORD
+DnsConnectionGetProxyInfoForHostUrlEx(
+    _In_z_ PCWSTR pwszHostUrl,
+    _In_reads_opt_(dwSelectionContextLength) BYTE *pSelectionContext,
+    _In_ DWORD dwSelectionContextLength,
+    _In_ DWORD dwExplicitInterfaceIndex,
+    _In_opt_z_ PCWSTR pwszConnectionName,
     _Out_ DNS_CONNECTION_PROXY_INFO_EX *pProxyInfoEx
 );
 

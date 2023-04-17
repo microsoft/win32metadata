@@ -149,6 +149,10 @@ typedef _Return_type_success_(return >= 0) LONG NTSTATUS, *PNTSTATUS;
 #define NERR_PasswordExpired    (NERR_BASE+142) /* The password of this user has expired. */
 
 #define CREDUIP_IS_USER_PASSWORD_ERROR( _Status ) ( \
+        (_Status) == STATUS_SMB_GUEST_LOGON_BLOCKED || \
+        (_Status) == HRESULT_FROM_NT( STATUS_SMB_GUEST_LOGON_BLOCKED ) || \
+        (_Status) == ERROR_SMB_GUEST_LOGON_BLOCKED || \
+        (_Status) == __HRESULT_FROM_WIN32( ERROR_SMB_GUEST_LOGON_BLOCKED ) || \
         (_Status) == ERROR_LOGON_FAILURE || \
         (_Status) == __HRESULT_FROM_WIN32( ERROR_LOGON_FAILURE ) || \
         (_Status) == STATUS_LOGON_FAILURE || \

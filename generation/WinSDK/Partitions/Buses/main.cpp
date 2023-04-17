@@ -8,9 +8,11 @@
 #include <usb.h>
 #include <genericusbfnioctl.h>
 #include <usbuser.h>
-#include <winusb.h>
-#include <winusbio.h>
 
 #include <usbfnbase.h>
-//#include <usbioctl.h> -- doesn't compile
+#include <usbiodef.h>
+#include <usbioctl.h>
 #include <usbscan.h>
+
+#include <winusb.h>
+#include <winusbio.h>

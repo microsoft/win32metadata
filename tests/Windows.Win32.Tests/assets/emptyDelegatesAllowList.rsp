@@ -47,3 +47,6 @@ PWLDP_RESETPRODUCTIONCONFIGURATION_API
 DOT11EXTIHV_DEINIT_SERVICE
 GLUtessEndProc
 sqlite3_syscall_ptr
+FLockClrVersionCallback
+CallbackThreadSetFnPtr
+CallbackThreadUnsetFnPtr

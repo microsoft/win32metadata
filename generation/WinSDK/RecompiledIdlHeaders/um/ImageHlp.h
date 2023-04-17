@@ -1226,6 +1226,31 @@ DWORD64
     _In_ LPADDRESS64 lpaddr
     );
 
+// Target Attributes:
+//
+
+// Asks the caller to return a 64-bit mask which indicates which bits in a code address are PAC
+// bits.  This attribute is only relevant for ARM64 debug targets.  The attribute data must be the address
+// for which the PAC mask is being fetched.  This allows the caller to deal with differences in PAC masks for
+// ARM64 EL0/1/2.  If PAC is disabled or the attribute does not apply, FALSE should be returned from the attribute 
+// getter.  If the special value TARGET_ATTRIBUTE_PACMASK_LIVETARGET is returned, the PAC mask for the call 
+// is assumed to be the same as the PAC mask for the currently running process.
+//
+#define TARGET_ATTRIBUTE_PACMASK 0x00000001
+
+// Target Attribute Special Values:
+//
+#define TARGET_ATTRIBUTE_PACMASK_LIVETARGET 0xFFFFFFFFFFFFFFFFull
+
+typedef
+BOOL
+(__stdcall *PGET_TARGET_ATTRIBUTE_VALUE64)(
+    _In_ HANDLE hProcess,
+    _In_ DWORD Attribute,
+    _In_ DWORD64 AttributeData,
+    _Out_ DWORD64 *AttributeValue
+    );
+
 BOOL
 IMAGEAPI
 StackWalk64(
@@ -1264,12 +1289,29 @@ StackWalkEx(
     _In_ DWORD Flags
     );
 
+BOOL
+IMAGEAPI
+StackWalk2(
+    _In_ DWORD MachineType,
+    _In_ HANDLE hProcess,
+    _In_ HANDLE hThread,
+    _Inout_ LPSTACKFRAME_EX StackFrame,
+    _Inout_ PVOID ContextRecord,
+    _In_opt_ PREAD_PROCESS_MEMORY_ROUTINE64 ReadMemoryRoutine,
+    _In_opt_ PFUNCTION_TABLE_ACCESS_ROUTINE64 FunctionTableAccessRoutine,
+    _In_opt_ PGET_MODULE_BASE_ROUTINE64 GetModuleBaseRoutine,
+    _In_opt_ PTRANSLATE_ADDRESS_ROUTINE64 TranslateAddress,
+    _In_opt_ PGET_TARGET_ATTRIBUTE_VALUE64 GetTargetAttributeValue,
+    _In_ DWORD Flags
+    );
+
 #if !defined(_IMAGEHLP_SOURCE_) && defined(_IMAGEHLP64)
 
 #define PREAD_PROCESS_MEMORY_ROUTINE PREAD_PROCESS_MEMORY_ROUTINE64
 #define PFUNCTION_TABLE_ACCESS_ROUTINE PFUNCTION_TABLE_ACCESS_ROUTINE64
 #define PGET_MODULE_BASE_ROUTINE PGET_MODULE_BASE_ROUTINE64
 #define PTRANSLATE_ADDRESS_ROUTINE PTRANSLATE_ADDRESS_ROUTINE64
+#define PGET_TARGET_ATTRIBUTE_VALUE PGET_TARGET_ATTRIBUTE_VALUE64
 
 #define StackWalk StackWalk64
 

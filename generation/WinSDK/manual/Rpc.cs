@@ -1,33 +1,13 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
-using Windows.Win32.Interop;
+using Windows.Win32.Foundation;
+using Windows.Win32.Foundation.Metadata;
 
 namespace Windows.Win32.System.Rpc
 {
-    // Because this emits with an anonymous name
-    public unsafe partial struct NDR_SCONTEXT_1
-    {
-        [NativeTypeName("void *[2]")]
-        public _pad_e__FixedBuffer pad;
+    [UnmanagedFunctionPointer(CallingConvention.Winapi))]
+    public unsafe delegate void* PFN_RPC_ALLOCATE([NativeTypeName("size_t")] UIntPtr param0);
 
-        [NativeTypeName("void *")]
-        public void* userContext;
-
-        public unsafe partial struct _pad_e__FixedBuffer
-        {
-            public void* e0;
-            public void* e1;
-
-            public ref void* this[int index]
-            {
-                get
-                {
-                    fixed (void** pThis = &e0)
-                    {
-                        return ref pThis[index];
-                    }
-                }
-            }
-        }
-    }
+    [UnmanagedFunctionPointer(CallingConvention.Winapi))]
+    public unsafe delegate void PFN_RPC_FREE(void* param0);
 }

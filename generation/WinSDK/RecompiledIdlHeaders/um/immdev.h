@@ -1009,7 +1009,6 @@ DWORD  WINAPI ImmGetIMCCSize(IN HIMCC);
 #define NI_CONTEXTUPDATED               0x0003
 // dwSystemInfoFlags bits
 #define IME_SYSINFO_WINLOGON            0x0001
-#define IME_SYSINFO_WOW16               0x0002
 
 #define GCS_COMP                        (GCS_COMPSTR|GCS_COMPATTR|GCS_COMPCLAUSE)
 #define GCS_COMPREAD                    (GCS_COMPREADSTR|GCS_COMPREADATTR |GCS_COMPREADCLAUSE)

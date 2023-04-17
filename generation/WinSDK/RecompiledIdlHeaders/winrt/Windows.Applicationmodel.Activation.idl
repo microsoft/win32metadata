@@ -1312,14 +1312,15 @@ namespace Windows
             }
 
             [contract(Windows.ApplicationModel.Wallet.WalletContract, 1.0)]
+            [deprecated("IWalletActionActivatedEventArgs is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Wallet.WalletContract, 2.0)]
             [uuid(FCFC027B-1A1A-4D22-923F-AE6F45FA52D9)]
             interface IWalletActionActivatedEventArgs : IInspectable
                 requires
                     Windows.ApplicationModel.Activation.IActivatedEventArgs
             {
-                [propget] HRESULT ItemId([out] [retval] HSTRING* value);
-                [propget] HRESULT ActionKind([out] [retval] Windows.ApplicationModel.Wallet.WalletActionKind* value);
-                [propget] HRESULT ActionId([out] [retval] HSTRING* value);
+                [deprecated("IWalletActionActivatedEventArgs is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Wallet.WalletContract, 2.0)] [propget] HRESULT ItemId([out] [retval] HSTRING* value);
+                [deprecated("IWalletActionActivatedEventArgs is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Wallet.WalletContract, 2.0)] [propget] HRESULT ActionKind([out] [retval] Windows.ApplicationModel.Wallet.WalletActionKind* value);
+                [deprecated("IWalletActionActivatedEventArgs is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Wallet.WalletContract, 2.0)] [propget] HRESULT ActionId([out] [retval] HSTRING* value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -1779,6 +1780,7 @@ namespace Windows
             }
 
             [contract(Windows.ApplicationModel.Wallet.WalletContract, 1.0)]
+            [deprecated("WalletActionActivatedEventArgs is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Wallet.WalletContract, 2.0)]
             [marshaling_behavior(agile)]
             runtimeclass WalletActionActivatedEventArgs
             {

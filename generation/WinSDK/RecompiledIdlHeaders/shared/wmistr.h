@@ -145,6 +145,7 @@ typedef struct
     ULONG LengthInstanceData;   // Length of data block for instance
 } OFFSETINSTANCEDATAANDLENGTH, *POFFSETINSTANCEDATAANDLENGTH;
 
+#if defined(_MSC_EXTENSIONS)
 typedef struct tagWNODE_ALL_DATA
 {
     struct _WNODE_HEADER WnodeHeader;
@@ -175,8 +176,10 @@ typedef struct tagWNODE_ALL_DATA
     // data blocks and instance names for all instances
 
 } WNODE_ALL_DATA, *PWNODE_ALL_DATA;
+#endif
 
 
+#if defined(_MSC_EXTENSIONS)
 typedef struct tagWNODE_SINGLE_INSTANCE
 {
     struct _WNODE_HEADER WnodeHeader;
@@ -199,8 +202,10 @@ typedef struct tagWNODE_SINGLE_INSTANCE
 
     // data block
 } WNODE_SINGLE_INSTANCE, *PWNODE_SINGLE_INSTANCE;
+#endif
 
 
+#if defined(_MSC_EXTENSIONS)
 typedef struct tagWNODE_SINGLE_ITEM
 {
     struct _WNODE_HEADER WnodeHeader;
@@ -225,7 +230,9 @@ typedef struct tagWNODE_SINGLE_ITEM
 
     // data item value
 } WNODE_SINGLE_ITEM, *PWNODE_SINGLE_ITEM;
+#endif
 
+#if defined(_MSC_EXTENSIONS)
 typedef struct tagWNODE_METHOD_ITEM
 {
     struct _WNODE_HEADER WnodeHeader;
@@ -255,6 +262,7 @@ typedef struct tagWNODE_METHOD_ITEM
 
     // data item value
 } WNODE_METHOD_ITEM, *PWNODE_METHOD_ITEM;
+#endif
 
 typedef struct tagWNODE_EVENT_ITEM
 {
@@ -274,6 +282,7 @@ typedef struct tagWNODE_EVENT_ITEM
 // maximum size that WMI allows then it should fire a WNODE_EVENT_REFERENCE
 // that specifies which guid and instance name to query for the actual data
 // that should be part of the event.
+#if defined(_MSC_EXTENSIONS)
 typedef struct tagWNODE_EVENT_REFERENCE
 {
     struct _WNODE_HEADER WnodeHeader;
@@ -285,6 +294,7 @@ typedef struct tagWNODE_EVENT_REFERENCE
         WCHAR TargetInstanceName[];
     } DUMMYUNIONNAME;
 } WNODE_EVENT_REFERENCE, *PWNODE_EVENT_REFERENCE;
+#endif
 
 
 typedef struct tagWNODE_TOO_SMALL
@@ -307,21 +317,21 @@ typedef struct
                      // to a list of InstanceCount counted UNICODE
                      // strings placed end to end.
         ULONG InstanceNameList;
-                        
+
                      // If WMIREG_FLAG_INSTANCE_BASENAME then this has the
                      // offset to a single counted UNICODE string that
                      // has the basename for the instance names.
-                        
+
         ULONG BaseNameOffset;
-                        
+
                      // If WMIREG_FLAG_INSTANCE_PDO is set then InstanceInfo
                      // has the PDO whose device instance path will
                      // become the instance name
         ULONG_PTR Pdo;
-                        
+
                      // If WMIREG_FLAG_INSTANCE_REFERENCE then this points to
                      // a WMIREGINSTANCEREF structure.
-                        
+
         ULONG_PTR InstanceInfo;// Offset from beginning of the WMIREGINFO structure to
     } DUMMYUNIONNAME;
 
@@ -373,9 +383,10 @@ typedef PWMIREGGUIDW PWMIREGGUID;
 // and that fire events should not have this bit set.
 #define WMIREG_FLAG_EVENT_ONLY_GUID    0x00000040
 
+#if defined(_MSC_EXTENSIONS)
 typedef struct
 {
-// Size of entire WMIREGINFO structure including this ULONG     
+// Size of entire WMIREGINFO structure including this ULONG
 // and any static instance names that follow
     ULONG BufferSize;
 
@@ -386,7 +397,7 @@ typedef struct
                         // the driver registry path (under HKLM\CCS\Services)
                         // This must be filled only by kernel mode data
                                                 // providers
-                                                        
+
 // Offset from beginning of WMIREGINFO structure to a
 // counted Unicode string containing
 // the name of resource in driver file containing MOF info
@@ -401,6 +412,7 @@ typedef struct
 
 typedef WMIREGINFOW WMIREGINFO;
 typedef PWMIREGINFOW PWMIREGINFO;
+#endif
 
 //
 // WMI request codes
@@ -439,7 +451,7 @@ typedef enum
 // TRACELOG_JOIN_GROUP
 
 //
-// GuidTypes 
+// GuidTypes
 //
 //#ifndef _WMIKM_
 #define WMI_GUIDTYPE_TRACECONTROL 0
@@ -479,14 +491,14 @@ typedef enum
                                   TRACELOG_ACCESS_KERNEL_LOGGER | \
                                   TRACELOG_CREATE_INPROC | \
                                   TRACELOG_ACCESS_REALTIME)
-                                  
+
 #define WMIGUID_ALL_ACCESS_WINXP (WMIGUID_ALL_ACCESS_WIN2K | \
                                   SYNCHRONIZE | \
                                   TRACELOG_REGISTER_GUIDS)
 
 #define WMIGUID_ALL_ACCESS_RS1 (WMIGUID_ALL_ACCESS_WINXP | \
                                 TRACELOG_JOIN_GROUP)
-                                  
+
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS1)
 
 #define WMIGUID_ALL_ACCESS WMIGUID_ALL_ACCESS_RS1

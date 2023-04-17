@@ -1,4 +1,4 @@
-using Windows.Win32.Interop;
+using Windows.Win32.Foundation.Metadata;
 namespace Windows.Win32.Networking.Clustering
 {
     // Here becauase of: https://github.com/dotnet/ClangSharp/issues/367

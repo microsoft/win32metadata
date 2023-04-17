@@ -56,14 +56,14 @@ public:
         /* in */ const MSP_EVENT_INFO *pMspEventInfo
         );
 
-    
+
 public:
 
     //
     // set the stream which will be processing our events
     //
     // this method is called by the stream when it creates and initializes
-    // the sink object, and also when the stream is going away and want to 
+    // the sink object, and also when the stream is going away and want to
     // tell us that it is no longer available to process our events.
     //
 
@@ -86,7 +86,7 @@ private:
 
         CMSPStream *pMSPStream;
 
-        
+
         //
         // pointer to the event item to be processed
         //
@@ -95,7 +95,7 @@ private:
 
 
         //
-        // as a public service, initialize structure's data members 
+        // as a public service, initialize structure's data members
         //
 
         AsyncEventStruct()
@@ -107,11 +107,11 @@ private:
 
 
         //
-        // as a safety measure, set data members to NULL's in destructor 
-        // to make sure no one attemopts to use them after the strcuture is 
-        // gone. 
+        // as a safety measure, set data members to NULL's in destructor
+        // to make sure no one attemopts to use them after the strcuture is
+        // gone.
         //
-        // note: we don't free any data members here -- that's responsibility 
+        // note: we don't free any data members here -- that's responsibility
         // of the structure's client
         //
 
@@ -119,7 +119,7 @@ private:
         {
             pMSPStream = NULL;
             pEventItem = NULL;
-            
+
             LOG((MSP_TRACE, "AsyncEventStruct::~AsyncEventStruct[%p]", this));
         }
 
@@ -127,11 +127,11 @@ private:
 
 
     //
-    // the callback function that is submitted to thread pool api for async 
+    // the callback function that is submitted to thread pool api for async
     // event processing. The argument is the event structure containing stream
     // and the actual event
     //
-    
+
     static DWORD WINAPI FireEventCallBack(LPVOID pEventStructure);
 
 
@@ -140,7 +140,7 @@ private:
      CMSPStream*    m_pMSPStream;
 };
 
-class ATL_NO_VTABLE CMSPStream : 
+class ATL_NO_VTABLE CMSPStream :
     public CComObjectRootEx<CComMultiThreadModelNoCS>,
     public IDispatchImpl<ITStream, &IID_ITStream, &LIBID_TAPI3Lib>
 {
@@ -154,7 +154,7 @@ END_COM_MAP()
 
 DECLARE_GET_CONTROLLING_UNKNOWN()
 
-    CMSPStream(); 
+    CMSPStream();
     ~CMSPStream();
 
 // methods of the CComObject
@@ -208,7 +208,7 @@ DECLARE_GET_CONTROLLING_UNKNOWN()
 
     virtual HRESULT GetState(
         OUT     DWORD *                  pdwStatus
-        ) { return E_NOTIMPL; }
+        ) { UNREFERENCED_PARAMETER(pdwStatus); return E_NOTIMPL; }
 
     virtual HRESULT HandleTSPData(
         IN     BYTE *                   pData,
@@ -231,7 +231,7 @@ protected:
         /*[in]*/ ITTerminal*     pTerminal
         );
 
-    
+
     HRESULT ReleaseSink();
 
 
@@ -248,9 +248,9 @@ protected:
 
 public:
 
-    
+
     //
-    // this method is called by CPTEventSink when it has an event for us to 
+    // this method is called by CPTEventSink when it has an event for us to
     // process
     //
 
@@ -283,13 +283,13 @@ protected:
     // The list of stream objects in the call.
     CMSPArray <ITTerminal *>    m_Terminals;
 
-    // The lock that protects the stream object. The stream object 
-    // should never acquire the lock and then call a MSPCall method 
+    // The lock that protects the stream object. The stream object
+    // should never acquire the lock and then call a MSPCall method
     // that might lock.
     CMSPCritSection             m_lock;
 
-    // The lock that protects refcounting on the stream object. this is a 
-    // workaround needed to sync against event sink attempting to access the 
+    // The lock that protects refcounting on the stream object. this is a
+    // workaround needed to sync against event sink attempting to access the
     // stream object while it is being deleted.
 
     CMSPCritSection             m_lockRefCount;
@@ -299,15 +299,15 @@ protected:
 
 
     //
-    // we have to implement our own reference counting to work around the 
+    // we have to implement our own reference counting to work around the
     // problem of event sink addreffing us after we saw our last release
     //
 
     long                        m_lMyPersonalRefcount;
 
-    
+
     //
-    // this is a flag that we use to distingush between first addref and the 
+    // this is a flag that we use to distingush between first addref and the
     // addref on the object whose refcount has gone down to 0.
     //
 

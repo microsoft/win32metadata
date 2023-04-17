@@ -99,6 +99,43 @@ interface IXblIdpAuthManager : IUnknown
 
 [
     object,
+    uuid(bf8c0950-8389-43dd-9a76-a19728ec5dc5),
+    pointer_default(unique)
+]
+interface IXblIdpAuthManager2 : IUnknown
+{
+    // Retrieve an X Token from XSTS and generate a signature. The XBL target and signing policy are determined based on the
+    // URI. Since there is no user for this token, the MSA target/policy/app must not require consent.
+    HRESULT GetUserlessTokenAndSignatureWithTokenResult(
+        // app SID to use instead of the calling app. When provided, the caller must be trusted.
+        [in, string] LPCWSTR appSid,
+        // the MSA target used when requesting the RPS ticket that the returned X token is based on. For first
+        // party apps, this will be "user.auth.xboxlive.com". For third party apps, this will be a list of
+        // offers like "xboxlive.signin"
+        [in, string] LPCWSTR msaTarget,
+        // the MSA policy used when requesting the RPS ticket that the returned X token is based on. For first
+        // party apps, this will be "MBI_SSL". For third party apps, this will be "DELEGATION".
+        [in, string] LPCWSTR msaPolicy,
+        // HTTP method that will be used for this request
+        [in, string] LPCWSTR httpMethod,
+        // URI the X token will be used against. This URI is used to lookup token information and the path portion
+        // is used for signature generation.
+        [in, string] LPCWSTR uri,
+        // headers as a single string with CR/LF separating them, consistent with e.g. WinHttpAddRequestHeaders
+        [in, string, unique] LPCWSTR headers,
+        // optional body
+        [in, unique, size_is(bodySize)] BYTE* body,
+        [in] DWORD bodySize,
+        // if TRUE, ignore any cached token and force a new one to be retreived from XSTS
+        [in] BOOL forceRefresh,
+        // Complete result object. Except in exceptional cases, this method will succeed with error details
+        // embedded in the result object.
+        [out] IXblIdpAuthTokenResult** result
+        );
+};
+
+[
+    object,
     uuid (46ce0225-f267-4d68-b299-b2762552dec1),
     pointer_default(unique)
 ]
@@ -200,6 +237,7 @@ cpp_quote("#endif")
 coclass XblIdpAuthManager
 {
     [default] interface IXblIdpAuthManager;
+    interface IXblIdpAuthManager2;
 }
 
 cpp_quote("#ifdef __cplusplus")

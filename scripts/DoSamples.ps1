@@ -12,7 +12,7 @@ if (!$skipInstallTools)
 
 Write-Host "*** Building samples..." -ForegroundColor Blue
 
-& "$PSScriptRoot\UpdateGlobalJsonWinmdGeneratorVersion.ps1"
+& "$PSScriptRoot\UpdateSampleDependencies.ps1"
 
 $cppSampleProj = "$rootDir\sources\GeneratorSdk\samples\CppProjectForScraping\CppProjectForScraping.vcxproj"
 

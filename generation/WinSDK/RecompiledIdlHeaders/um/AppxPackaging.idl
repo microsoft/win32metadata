@@ -153,6 +153,7 @@ interface IAppxManifestPackageDependenciesEnumerator;
 interface IAppxManifestProperties;
 interface IAppxManifestReader;
 interface IAppxBundleFactory;
+interface IAppxBundleFactory2;
 interface IAppxBundleWriter;
 interface IAppxBundleWriter2;
 interface IAppxBundleWriter3;
@@ -193,6 +194,8 @@ interface IAppxManifestOSPackageDependency;
 interface IAppxManifestOSPackageDependenciesEnumerator;
 interface IAppxManifestHostRuntimeDependency;
 interface IAppxManifestHostRuntimeDependenciesEnumerator;
+interface IAppxAppInstallerReader;
+interface IAppxDigestProvider;
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
 #pragma endregion
 #pragma region Desktop Family
@@ -269,6 +272,35 @@ interface IAppxFactory2 : IUnknown
     CreateContentGroupMapWriter(
         [in]            IStream *                     stream,
         [out, retval]   IAppxContentGroupMapWriter**  contentGroupMapWriter
+    );
+}
+
+[
+    object,
+    uuid(776b2c05-e21d-4e24-ba1a-cd529a8bfdbb),
+    pointer_default(ref)
+]
+interface IAppxFactory3 : IUnknown
+{
+    HRESULT
+    CreatePackageReader2(
+        [in]            IStream*                    inputStream,
+        [in, optional]  LPCWSTR                     expectedDigest,
+        [out, retval]   IAppxPackageReader**        packageReader
+    );
+
+    HRESULT
+    CreateManifestReader2(
+        [in]            IStream*                    inputStream,
+        [in, optional]  LPCWSTR                     expectedDigest,
+        [out, retval]   IAppxManifestReader**       manifestReader
+    );
+
+    HRESULT
+    CreateAppInstallerReader(
+        [in]            IStream*                    inputStream,
+        [in, optional]  LPCWSTR                     expectedDigest,
+        [out, retval]   IAppxAppInstallerReader**   appInstallerReader
     );
 }
 
@@ -1318,6 +1350,20 @@ interface IAppxBundleFactory : IUnknown
 
 [
     object,
+    uuid(7325b83d-0185-42c4-82ac-be34ab1a2a8a),
+    pointer_default(ref)
+]
+interface IAppxBundleFactory2 : IUnknown
+{
+    HRESULT CreateBundleReader2(
+        [in]           IStream*             inputStream,
+        [in, optional] LPCWSTR              expectedDigest,
+        [out, retval]  IAppxBundleReader**  bundleReader
+    );
+}
+
+[
+    object,
     uuid(EC446FE8-BFEC-4C64-AB4F-49F038F0C6D2),
     pointer_default(ref)
 ]
@@ -1735,6 +1781,32 @@ interface IAppxPackagingDiagnosticEventSinkManager : IUnknown
         [in] IAppxPackagingDiagnosticEventSink* sink);
 }
 
+[
+    object,
+    uuid(f35bc38c-1d2f-43db-a1f4-586430d1fed2),
+    pointer_default(ref)
+]
+interface IAppxAppInstallerReader : IUnknown
+{
+    HRESULT
+    GetXmlDom(
+        [out, retval] IXMLDOMDocument** dom
+    );
+}
+
+[
+    object,
+    uuid(9fe2702b-7640-4659-8e6c-349e43c4cdbd),
+    pointer_default(ref)
+]
+interface IAppxDigestProvider : IUnknown
+{
+    HRESULT
+    GetDigest(
+        [out, retval] LPWSTR* digest
+    );
+}
+
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
 #pragma endregion
 #pragma region Desktop Family
@@ -1923,6 +1995,28 @@ interface IAppxEncryptionFactory4 : IUnknown
 
 [
     object,
+    uuid(68d6e77a-f446-480f-b0f0-d91a24c60746),
+    pointer_default(ref)
+]
+interface IAppxEncryptionFactory5 : IUnknown
+{
+    HRESULT CreateEncryptedPackageReader2(
+        [in]  IStream *                                 inputStream,
+        [in, optional] const APPX_KEY_INFO *            keyInfo,
+        [in, optional] LPCWSTR                          expectedDigest,
+        [out, retval]  IAppxPackageReader **            packageReader
+    );
+
+    HRESULT CreateEncryptedBundleReader2(
+        [in]  IStream *                                 inputStream,
+        [in, optional] const APPX_KEY_INFO *            keyInfo,
+        [in, optional] LPCWSTR                          expectedDigest,
+        [out, retval]  IAppxBundleReader**              bundleReader
+    );
+}
+
+[
+    object,
     uuid(F43D0B0B-1379-40E2-9B29-682EA2BF42AF),
     pointer_default(ref)
 ]
@@ -2076,6 +2170,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
 ]
 coclass AppxFactory
 {
+    interface IAppxFactory3;
     interface IAppxFactory2;
     [default] interface IAppxFactory;
 };
@@ -2085,7 +2180,8 @@ coclass AppxFactory
 ]
 coclass AppxBundleFactory
 {
-    interface IAppxBundleFactory;
+    interface IAppxBundleFactory2;
+    [default] interface IAppxBundleFactory;
 };
 
 [
@@ -2105,6 +2201,8 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
 ]
 coclass AppxEncryptionFactory
 {
+    interface IAppxEncryptionFactory5;
+    interface IAppxEncryptionFactory4;
     interface IAppxEncryptionFactory3;
     interface IAppxEncryptionFactory2;
     [default] interface IAppxEncryptionFactory;

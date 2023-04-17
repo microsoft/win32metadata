@@ -1,7 +1,7 @@
 //-------------------------------------------------------------------------------------
 // DirectXPackedVector.inl -- SIMD C++ Math library
 //
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //
 // http://go.microsoft.com/fwlink/?LinkID=615560
@@ -985,7 +985,8 @@ inline XMVECTOR XM_CALLCONV XMLoadByteN2(const XMBYTEN2* pSource) noexcept
     static const XMVECTORF32 Scale = { { { 1.0f / 127.0f, 1.0f / (127.0f * 256.0f), 0, 0 } } };
     static const XMVECTORU32 Mask = { { { 0xFF, 0xFF00, 0, 0 } } };
     // Splat the color in all four entries (x,z,y,w)
-    XMVECTOR vTemp = _mm_load1_ps(reinterpret_cast<const float*>(&pSource->x));
+    __m128i vInt = XM_LOADU_SI16(&pSource->v);
+    XMVECTOR vTemp = XM_PERMUTE_PS(_mm_castsi128_ps(vInt), _MM_SHUFFLE(0, 0, 0, 0));
     // Mask
     vTemp = _mm_and_ps(vTemp, Mask);
     // x,y and z are unsigned! Flip the bits to convert the order to signed
@@ -1024,7 +1025,8 @@ inline XMVECTOR XM_CALLCONV XMLoadByte2(const XMBYTE2* pSource) noexcept
     static const XMVECTORF32 Scale = { { { 1.0f, 1.0f / 256.0f, 1.0f / 65536.0f, 1.0f / (65536.0f * 256.0f) } } };
     static const XMVECTORU32 Mask = { { { 0xFF, 0xFF00, 0, 0 } } };
     // Splat the color in all four entries (x,z,y,w)
-    XMVECTOR vTemp = _mm_load1_ps(reinterpret_cast<const float*>(&pSource->x));
+    __m128i vInt = XM_LOADU_SI16(&pSource->v);
+    XMVECTOR vTemp = XM_PERMUTE_PS(_mm_castsi128_ps(vInt), _MM_SHUFFLE(0, 0, 0, 0));
     // Mask
     vTemp = _mm_and_ps(vTemp, Mask);
     // x,y and z are unsigned! Flip the bits to convert the order to signed
@@ -1062,7 +1064,8 @@ inline XMVECTOR XM_CALLCONV XMLoadUByteN2(const XMUBYTEN2* pSource) noexcept
     static const XMVECTORF32 Scale = { { { 1.0f / 255.0f, 1.0f / (255.0f * 256.0f), 0, 0 } } };
     static const XMVECTORU32 Mask = { { { 0xFF, 0xFF00, 0, 0 } } };
     // Splat the color in all four entries (x,z,y,w)
-    XMVECTOR vTemp = _mm_load1_ps(reinterpret_cast<const float*>(&pSource->x));
+    __m128i vInt = XM_LOADU_SI16(&pSource->v);
+    XMVECTOR vTemp = XM_PERMUTE_PS(_mm_castsi128_ps(vInt), _MM_SHUFFLE(0, 0, 0, 0));
     // Mask
     vTemp = _mm_and_ps(vTemp, Mask);
     // w is signed! Flip the bits to convert the order to unsigned
@@ -1099,7 +1102,8 @@ inline XMVECTOR XM_CALLCONV XMLoadUByte2(const XMUBYTE2* pSource) noexcept
     static const XMVECTORF32 Scale = { { { 1.0f, 1.0f / 256.0f, 0, 0 } } };
     static const XMVECTORU32 Mask = { { { 0xFF, 0xFF00, 0, 0 } } };
     // Splat the color in all four entries (x,z,y,w)
-    XMVECTOR vTemp = _mm_load1_ps(reinterpret_cast<const float*>(&pSource->x));
+    __m128i vInt = XM_LOADU_SI16(&pSource->v);
+    XMVECTOR vTemp = XM_PERMUTE_PS(_mm_castsi128_ps(vInt), _MM_SHUFFLE(0, 0, 0, 0));
     // Mask
     vTemp = _mm_and_ps(vTemp, Mask);
     // w is signed! Flip the bits to convert the order to unsigned
@@ -1137,8 +1141,9 @@ inline XMVECTOR XM_CALLCONV XMLoadU565(const XMU565* pSource) noexcept
 #elif defined(_XM_SSE_INTRINSICS_)
     static const XMVECTORI32 U565And = { { { 0x1F, 0x3F << 5, 0x1F << 11, 0 } } };
     static const XMVECTORF32 U565Mul = { { { 1.0f, 1.0f / 32.0f, 1.0f / 2048.f, 0 } } };
-    // Get the 32 bit value and splat it
-    XMVECTOR vResult = _mm_load_ps1(reinterpret_cast<const float*>(&pSource->v));
+    // Get the 16 bit value and splat it
+    __m128i vInt = XM_LOADU_SI16(&pSource->v);
+    XMVECTOR vResult = XM_PERMUTE_PS(_mm_castsi128_ps(vInt), _MM_SHUFFLE(0, 0, 0, 0));
     // Mask off x, y and z
     vResult = _mm_and_ps(vResult, U565And);
     // Convert to float
@@ -1495,9 +1500,11 @@ inline XMVECTOR XM_CALLCONV XMLoadXDecN4(const XMXDECN4* pSource) noexcept
 }
 
 //------------------------------------------------------------------------------
+#ifdef _MSC_VER
 #pragma warning(push)
 #pragma warning(disable : 4996)
 // C4996: ignore deprecation warning
+#endif
 
 #ifdef __GNUC__
 #pragma GCC diagnostic push
@@ -1553,8 +1560,9 @@ inline XMVECTOR XM_CALLCONV XMLoadXDec4(const XMXDEC4* pSource) noexcept
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
 #endif
-
+#ifdef _MSC_VER
 #pragma warning(pop)
+#endif
 
 //------------------------------------------------------------------------------
 _Use_decl_annotations_
@@ -1691,9 +1699,11 @@ inline XMVECTOR XM_CALLCONV XMLoadUDec4(const XMUDEC4* pSource) noexcept
 }
 
 //------------------------------------------------------------------------------
+#ifdef _MSC_VER
 #pragma warning(push)
 #pragma warning(disable : 4996)
 // C4996: ignore deprecation warning
+#endif
 
 #ifdef __GNUC__
 #pragma GCC diagnostic push
@@ -1796,8 +1806,9 @@ inline XMVECTOR XM_CALLCONV XMLoadDec4(const XMDEC4* pSource) noexcept
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
 #endif
-
+#ifdef _MSC_VER
 #pragma warning(pop)
+#endif
 
 //------------------------------------------------------------------------------
 _Use_decl_annotations_
@@ -1971,8 +1982,9 @@ inline XMVECTOR XM_CALLCONV XMLoadUNibble4(const XMUNIBBLE4* pSource) noexcept
 #elif defined(_XM_SSE_INTRINSICS_)
     static const XMVECTORI32 UNibble4And = { { { 0xF, 0xF0, 0xF00, 0xF000 } } };
     static const XMVECTORF32 UNibble4Mul = { { { 1.0f, 1.0f / 16.f, 1.0f / 256.f, 1.0f / 4096.f } } };
-    // Get the 32 bit value and splat it
-    XMVECTOR vResult = _mm_load_ps1(reinterpret_cast<const float*>(&pSource->v));
+    // Get the 16 bit value and splat it
+    __m128i vInt = XM_LOADU_SI16(&pSource->v);
+    XMVECTOR vResult = XM_PERMUTE_PS(_mm_castsi128_ps(vInt), _MM_SHUFFLE(0,0,0,0));
     // Mask off x, y and z
     vResult = _mm_and_ps(vResult, UNibble4And);
     // Convert to float
@@ -2007,8 +2019,9 @@ inline XMVECTOR XM_CALLCONV XMLoadU555(const XMU555* pSource) noexcept
 #elif defined(_XM_SSE_INTRINSICS_)
     static const XMVECTORI32 U555And = { { { 0x1F, 0x1F << 5, 0x1F << 10, 0x8000 } } };
     static const XMVECTORF32 U555Mul = { { { 1.0f, 1.0f / 32.f, 1.0f / 1024.f, 1.0f / 32768.f } } };
-    // Get the 32 bit value and splat it
-    XMVECTOR vResult = _mm_load_ps1(reinterpret_cast<const float*>(&pSource->v));
+    // Get the 16bit value and splat it
+    __m128i vInt = XM_LOADU_SI16(&pSource->v);
+    XMVECTOR vResult = XM_PERMUTE_PS(_mm_castsi128_ps(vInt), _MM_SHUFFLE(0, 0, 0, 0));
     // Mask off x, y and z
     vResult = _mm_and_ps(vResult, U555And);
     // Convert to float
@@ -2896,9 +2909,11 @@ inline void XM_CALLCONV XMStoreXDecN4
 }
 
 //------------------------------------------------------------------------------
+#ifdef _MSC_VER
 #pragma warning(push)
 #pragma warning(disable : 4996)
 // C4996: ignore deprecation warning
+#endif
 
 #ifdef __GNUC__
 #pragma GCC diagnostic push
@@ -2975,8 +2990,9 @@ inline void XM_CALLCONV XMStoreXDec4
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
 #endif
-
+#ifdef _MSC_VER
 #pragma warning(pop)
+#endif
 
 //------------------------------------------------------------------------------
 _Use_decl_annotations_
@@ -3187,9 +3203,11 @@ inline void XM_CALLCONV XMStoreUDec4
 }
 
 //------------------------------------------------------------------------------
+#ifdef _MSC_VER
 #pragma warning(push)
 #pragma warning(disable : 4996)
 // C4996: ignore deprecation warning
+#endif
 
 #ifdef __GNUC__
 #pragma GCC diagnostic push
@@ -3320,8 +3338,9 @@ inline void XM_CALLCONV XMStoreDec4
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
 #endif
-
+#ifdef _MSC_VER
 #pragma warning(pop)
+#endif
 
 //------------------------------------------------------------------------------
 _Use_decl_annotations_
@@ -4135,10 +4154,11 @@ inline XMXDECN4::XMXDECN4(const float* pArray) noexcept
  * XMXDEC4 operators
  *
  ****************************************************************************/
-
+#ifdef _MSC_VER
 #pragma warning(push)
 #pragma warning(disable : 4996)
  // C4996: ignore deprecation warning
+#endif
 
 #ifdef __GNUC__
 #pragma GCC diagnostic push
@@ -4220,8 +4240,9 @@ inline XMDEC4::XMDEC4(const float* pArray) noexcept
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
 #endif
-
+#ifdef _MSC_VER
 #pragma warning(pop)
+#endif
 
 /****************************************************************************
  *

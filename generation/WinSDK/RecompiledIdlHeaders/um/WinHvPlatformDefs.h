@@ -226,7 +226,8 @@ typedef union WHV_PROCESSOR_FEATURES1
         UINT64 FZLRepMovsb : 1;
         UINT64 FSRepStosb : 1;
         UINT64 FSRepCmpsb : 1;
-        UINT64 Reserved5 : 42;
+        UINT64 TsxLdTrkSupport : 1;
+        UINT64 Reserved5 : 41;
     };
 
     UINT64 AsUINT64;

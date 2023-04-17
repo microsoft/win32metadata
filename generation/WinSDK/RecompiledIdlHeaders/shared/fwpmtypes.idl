@@ -254,7 +254,21 @@ typedef struct FWPM_CLASSIFY_OPTIONS0_
    [size_is(numOptions), ref] FWPM_CLASSIFY_OPTION0* options;
 } FWPM_CLASSIFY_OPTIONS0;
 
+typedef struct FWPM_NETWORK_CONNECTION_POLICY_SETTING0_
+{
+    FWP_NETWORK_CONNECTION_POLICY_SETTING_TYPE type;
+    FWP_VALUE0 value;
+} FWPM_NETWORK_CONNECTION_POLICY_SETTING0;
+
+typedef struct FWPM_NETWORK_CONNECTION_POLICY_SETTINGS0_
+{
+    UINT32 numSettings;
+    [size_is(numSettings), ref] FWPM_NETWORK_CONNECTION_POLICY_SETTING0* settings;
+} FWPM_NETWORK_CONNECTION_POLICY_SETTINGS0;
+
 // Types of provider contexts that may be stored in BFE.
+// FWPM_NETWORK_CONNECTION_POLICY_CONTEXT was added in NTDDI_WIN10_NI, but cpp_quote doesn't
+// work in the middle of structs.   
 typedef [v1_enum] enum FWPM_PROVIDER_CONTEXT_TYPE_
 {
    FWPM_IPSEC_KEYING_CONTEXT,
@@ -270,6 +284,7 @@ typedef [v1_enum] enum FWPM_PROVIDER_CONTEXT_TYPE_
    FWPM_IPSEC_IKEV2_MM_CONTEXT,
    FWPM_IPSEC_DOSP_CONTEXT,
    FWPM_IPSEC_IKEV2_QM_TRANSPORT_CONTEXT,
+   FWPM_NETWORK_CONNECTION_POLICY_CONTEXT,
    FWPM_PROVIDER_CONTEXT_TYPE_MAX
 } FWPM_PROVIDER_CONTEXT_TYPE;
 
@@ -457,6 +472,7 @@ typedef struct FWPM_PROVIDER_CONTEXT3_
    FWP_BYTE_BLOB providerData;
    // Tagged union containing the provider-specific data.
    FWPM_PROVIDER_CONTEXT_TYPE type;
+
    [switch_type(FWPM_PROVIDER_CONTEXT_TYPE), switch_is(type)]
    union
    {
@@ -486,6 +502,8 @@ typedef struct FWPM_PROVIDER_CONTEXT3_
          [unique] IKEEXT_POLICY2* ikeV2MmPolicy;
       [case(FWPM_IPSEC_DOSP_CONTEXT)]
          [unique] IPSEC_DOSP_OPTIONS0* idpOptions;
+      [case(FWPM_NETWORK_CONNECTION_POLICY_CONTEXT)]
+         [unique] FWPM_NETWORK_CONNECTION_POLICY_SETTINGS0* networkConnectionPolicy;
    };
    // Additional information returned when getting/enumerating objects.
 

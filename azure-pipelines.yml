@@ -1,4 +1,5 @@
 trigger:
+  batch: true
   branches:
     include:
     - main
@@ -43,7 +44,7 @@ jobs:
       errorActionPreference: 'continue'
       pwsh: true
 
-  - publish: 'generation\WinSDK\obj\generated\x64'
+  - publish: 'generation\WinSDK\obj'
     displayName: Publish x64 generated assets
     artifact: 'generated_x64'
 
@@ -71,7 +72,7 @@ jobs:
       errorActionPreference: 'continue'
       pwsh: true
 
-  - publish: 'generation\WinSDK\obj\generated'
+  - publish: 'generation\WinSDK\obj'
     displayName: Publish x86 generated assets
     artifact: 'generated_x86'
 
@@ -99,7 +100,7 @@ jobs:
       errorActionPreference: 'continue'
       pwsh: true
 
-  - publish: 'generation\WinSDK\obj\generated\arm64'
+  - publish: 'generation\WinSDK\obj'
     displayName: Publish arm64 generated assets
     artifact: 'generated_arm64'
 
@@ -142,19 +143,19 @@ jobs:
     displayName: Download x64 generated assets
     inputs:
       artifact: 'generated_x64'
-      path: 'generation\WinSDK\obj\generated\x64'
+      path: 'generation\WinSDK\obj'
 
   - task: DownloadPipelineArtifact@2
     displayName: Download x86 generated assets
     inputs:
       artifact: 'generated_x86'
-      path: 'generation\WinSDK\obj\generated'
+      path: 'generation\WinSDK\obj'
 
   - task: DownloadPipelineArtifact@2
     displayName: Download arm64 generated assets
     inputs:
       artifact: 'generated_arm64'
-      path: 'generation\WinSDK\obj\generated\arm64'
+      path: 'generation\WinSDK\obj'
 
   - task: PowerShell@2
     displayName: Build metadata binary
@@ -168,7 +169,7 @@ jobs:
     inputs:
       ConnectedServiceName: 'Xlang Code Signing'
       FolderPath: '$(Build.SourcesDirectory)\bin'
-      Pattern: 'Windows.Win32.Interop.dll,Windows.Win32.winmd'
+      Pattern: 'Windows.Win32.winmd'
       signConfigType: 'inlineSignParams'
       inlineOperation: |
         [

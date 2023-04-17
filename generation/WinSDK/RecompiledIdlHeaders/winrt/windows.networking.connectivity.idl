@@ -68,6 +68,8 @@ namespace Windows
 
             typedef enum DataUsageGranularity DataUsageGranularity;
 
+            typedef enum DomainAuthenticationKind DomainAuthenticationKind;
+
             typedef enum DomainConnectivityLevel DomainConnectivityLevel;
 
             typedef enum NetworkAuthenticationType NetworkAuthenticationType;
@@ -113,6 +115,8 @@ namespace Windows
             interface IConnectionProfile4;
 
             interface IConnectionProfile5;
+
+            interface IConnectionProfile6;
 
             interface IConnectionProfileFilter;
 
@@ -325,6 +329,14 @@ namespace Windows
                 PerHour   = 1,
                 PerDay    = 2,
                 Total     = 3
+            };
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            enum DomainAuthenticationKind
+            {
+                None = 0,
+                Ldap = 1,
+                Tls  = 2
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -592,6 +604,14 @@ namespace Windows
             {
                 [propget] HRESULT CanDelete([out] [retval] boolean* value);
                 HRESULT TryDeleteAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.Networking.Connectivity.ConnectionProfileDeleteStatus>** operation);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.Networking.Connectivity.ConnectionProfile)]
+            [uuid(DC27DFE2-7A6F-5D0E-9589-2FE2E5B6F9AA)]
+            interface IConnectionProfile6 : IInspectable
+            {
+                HRESULT IsDomainAuthenticatedBy([in] Windows.Networking.Connectivity.DomainAuthenticationKind kind, [out] [retval] boolean* result);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -907,6 +927,7 @@ namespace Windows
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)] interface Windows.Networking.Connectivity.IConnectionProfile3;
                 [contract(Windows.Foundation.UniversalApiContract, 5.0)] interface Windows.Networking.Connectivity.IConnectionProfile4;
                 [contract(Windows.Foundation.UniversalApiContract, 7.0)] interface Windows.Networking.Connectivity.IConnectionProfile5;
+                [contract(Windows.Foundation.UniversalApiContract, 13.0)] interface Windows.Networking.Connectivity.IConnectionProfile6;
             }
 
             [activatable(Windows.Foundation.UniversalApiContract, 1.0)]

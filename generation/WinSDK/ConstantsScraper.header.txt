@@ -17,7 +17,7 @@ using static Windows.Win32.NetworkManagement.Dns.Apis; // Various constants
 using static Windows.Win32.NetworkManagement.IpHelper.Apis; // Various constants
 using static Windows.Win32.NetworkManagement.Ndis.Apis; // Various constants
 using static Windows.Win32.Security.Cryptography.Apis; // Various constants
-using static Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS; // For FILE_* constants
+using static Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS; // For FILE_* constants
 using static Windows.Win32.System.Com.Apis; // Various constants
 using static Windows.Win32.System.Diagnostics.Debug.FACILITY_CODE; // For MAKE_HRESULT constants
 using static Windows.Win32.System.Ioctl.Apis; // Various constants

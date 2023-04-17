@@ -97,6 +97,7 @@ namespace Windows
             namespace System
             {
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+                [deprecated("WalletItemAppAssociation is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
                 enum WalletItemAppAssociation
                 {
                     None            = 0,
@@ -105,35 +106,39 @@ namespace Windows
                 };
 
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+                [deprecated("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
                 [exclusiveto(Windows.ApplicationModel.Wallet.System.WalletItemSystemStore)]
                 [uuid(522E2BFF-96A2-4A17-8D19-FE1D9F837561)]
                 interface IWalletItemSystemStore : IInspectable
                 {
-                    HRESULT GetItemsAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVectorView<Windows.ApplicationModel.Wallet.WalletItem*>*>** operation);
-                    HRESULT DeleteAsync([in] Windows.ApplicationModel.Wallet.WalletItem* item, [out] [retval] Windows.Foundation.IAsyncAction** operation);
-                    HRESULT ImportItemAsync([in] Windows.Storage.Streams.IRandomAccessStreamReference* stream, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Wallet.WalletItem*>** operation);
-                    HRESULT GetAppStatusForItem([in] Windows.ApplicationModel.Wallet.WalletItem* item, [out] [retval] Windows.ApplicationModel.Wallet.System.WalletItemAppAssociation* result);
-                    HRESULT LaunchAppForItemAsync([in] Windows.ApplicationModel.Wallet.WalletItem* item, [out] [retval] Windows.Foundation.IAsyncOperation<boolean>** operation);
+                    [deprecated("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] HRESULT GetItemsAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVectorView<Windows.ApplicationModel.Wallet.WalletItem*>*>** operation);
+                    [deprecated("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] HRESULT DeleteAsync([in] Windows.ApplicationModel.Wallet.WalletItem* item, [out] [retval] Windows.Foundation.IAsyncAction** operation);
+                    [deprecated("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] HRESULT ImportItemAsync([in] Windows.Storage.Streams.IRandomAccessStreamReference* stream, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Wallet.WalletItem*>** operation);
+                    [deprecated("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] HRESULT GetAppStatusForItem([in] Windows.ApplicationModel.Wallet.WalletItem* item, [out] [retval] Windows.ApplicationModel.Wallet.System.WalletItemAppAssociation* result);
+                    [deprecated("IWalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] HRESULT LaunchAppForItemAsync([in] Windows.ApplicationModel.Wallet.WalletItem* item, [out] [retval] Windows.Foundation.IAsyncOperation<boolean>** operation);
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+                [deprecated("IWalletItemSystemStore2 is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
                 [exclusiveto(Windows.ApplicationModel.Wallet.System.WalletItemSystemStore)]
                 [uuid(F98D3A4E-BE00-4FDD-9734-6C113C1AC1CB)]
                 interface IWalletItemSystemStore2 : IInspectable
                 {
-                    [eventadd] HRESULT ItemsChanged([in] Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.Wallet.System.WalletItemSystemStore*, IInspectable*>* handler, [out] [retval] EventRegistrationToken* cookie);
-                    [eventremove] HRESULT ItemsChanged([in] EventRegistrationToken cookie);
+                    [deprecated("IWalletItemSystemStore2 is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [eventadd] HRESULT ItemsChanged([in] Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.Wallet.System.WalletItemSystemStore*, IInspectable*>* handler, [out] [retval] EventRegistrationToken* cookie);
+                    [deprecated("IWalletItemSystemStore2 is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] [eventremove] HRESULT ItemsChanged([in] EventRegistrationToken cookie);
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+                [deprecated("IWalletManagerSystemStatics is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
                 [exclusiveto(Windows.ApplicationModel.Wallet.System.WalletManagerSystem)]
                 [uuid(BEE8EB89-2634-4B9A-8B23-EE8903C91FE0)]
                 interface IWalletManagerSystemStatics : IInspectable
                 {
-                    HRESULT RequestStoreAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Wallet.System.WalletItemSystemStore*>** operation);
+                    [deprecated("IWalletManagerSystemStatics is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)] HRESULT RequestStoreAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Wallet.System.WalletItemSystemStore*>** operation);
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+                [deprecated("WalletItemSystemStore is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
                 [marshaling_behavior(agile)]
                 runtimeclass WalletItemSystemStore
                 {
@@ -142,6 +147,7 @@ namespace Windows
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)]
+                [deprecated("WalletManagerSystem is deprecated and might not work on all platforms. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 14.0)]
                 [marshaling_behavior(agile)]
                 [static(Windows.ApplicationModel.Wallet.System.IWalletManagerSystemStatics, Windows.Foundation.UniversalApiContract, 1.0)]
                 runtimeclass WalletManagerSystem

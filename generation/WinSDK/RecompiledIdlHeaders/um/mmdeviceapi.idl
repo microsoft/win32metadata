@@ -276,7 +276,7 @@ interface IMMNotificationClient : IUnknown
     //      ignored
     //
     [id(4), helpstring("method OnDefaultDeviceChanged")] 
-    HRESULT OnDefaultDeviceChanged([in, annotation("_In_")] EDataFlow flow, [in, annotation("_In_")] ERole role, [in, annotation("_In_")] LPCWSTR pwstrDefaultDeviceId);
+    HRESULT OnDefaultDeviceChanged([in, annotation("_In_")] EDataFlow flow, [in, annotation("_In_")] ERole role, [in, annotation("_In_opt_")] LPCWSTR pwstrDefaultDeviceId);
 
     //-------------------------------------------------------------------------
     // Description:

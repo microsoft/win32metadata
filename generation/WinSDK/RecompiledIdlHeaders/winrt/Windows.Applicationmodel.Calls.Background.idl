@@ -89,7 +89,7 @@ namespace Windows
         {
             namespace Background
             {
-                [contractversion(3.0)]
+                [contractversion(4.0)]
                 apicontract CallsBackgroundContract
                 {
                 }
@@ -104,6 +104,7 @@ namespace Windows
                 };
 
                 [contract(Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 2.0)]
+                [deprecated("PhoneIncomingCallDismissedReason is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 4.0)]
                 enum PhoneIncomingCallDismissedReason
                 {
                     Unknown        = 0,
@@ -146,9 +147,11 @@ namespace Windows
                     CallHistoryChanged                   = 1,
                     LineChanged                          = 2,
                     AirplaneModeDisabledForEmergencyCall = 3,
+                    [deprecated("CallOriginDataRequest is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 4.0)]
                     CallOriginDataRequest                = 4,
                     CallBlocked                          = 5,
                     [contract(Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 2.0)]
+                    [deprecated("IncomingCallDismissed is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 4.0)]
                     IncomingCallDismissed                = 6,
                     [contract(Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 3.0)]
                     IncomingCallNotification             = 7
@@ -166,26 +169,28 @@ namespace Windows
                 }
 
                 [contract(Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 1.0)]
+                [deprecated("PhoneCallOriginDataRequestTriggerDetails is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 4.0)]
                 [exclusiveto(Windows.ApplicationModel.Calls.Background.PhoneCallOriginDataRequestTriggerDetails)]
                 [from_contract(Windows.ApplicationModel.Calls.CallsPhoneContract, range(1.0, 3.0))]
                 [uuid(6E9B5B3F-C54B-4E82-4CC9-E329A4184592)]
                 interface IPhoneCallOriginDataRequestTriggerDetails : IInspectable
                 {
-                    [propget] HRESULT RequestId([out] [retval] GUID* result);
-                    [propget] HRESULT PhoneNumber([out] [retval] HSTRING* result);
+                    [deprecated("PhoneCallOriginDataRequestTriggerDetails is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 4.0)] [propget] HRESULT RequestId([out] [retval] GUID* result);
+                    [deprecated("PhoneCallOriginDataRequestTriggerDetails is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 4.0)] [propget] HRESULT PhoneNumber([out] [retval] HSTRING* result);
                 }
 
                 [contract(Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 2.0)]
+                [deprecated("PhoneIncomingCallDismissedTriggerDetails is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 4.0)]
                 [exclusiveto(Windows.ApplicationModel.Calls.Background.PhoneIncomingCallDismissedTriggerDetails)]
                 [uuid(BAD30276-83B6-5732-9C38-0C206546196A)]
                 interface IPhoneIncomingCallDismissedTriggerDetails : IInspectable
                 {
-                    [propget] HRESULT LineId([out] [retval] GUID* value);
-                    [propget] HRESULT PhoneNumber([out] [retval] HSTRING* value);
-                    [propget] HRESULT DisplayName([out] [retval] HSTRING* value);
-                    [propget] HRESULT DismissalTime([out] [retval] Windows.Foundation.DateTime* value);
-                    [propget] HRESULT TextReplyMessage([out] [retval] HSTRING* value);
-                    [propget] HRESULT Reason([out] [retval] Windows.ApplicationModel.Calls.Background.PhoneIncomingCallDismissedReason* value);
+                    [deprecated("PhoneIncomingCallDismissedTriggerDetails is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 4.0)] [propget] HRESULT LineId([out] [retval] GUID* value);
+                    [deprecated("PhoneIncomingCallDismissedTriggerDetails is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 4.0)] [propget] HRESULT PhoneNumber([out] [retval] HSTRING* value);
+                    [deprecated("PhoneIncomingCallDismissedTriggerDetails is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 4.0)] [propget] HRESULT DisplayName([out] [retval] HSTRING* value);
+                    [deprecated("PhoneIncomingCallDismissedTriggerDetails is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 4.0)] [propget] HRESULT DismissalTime([out] [retval] Windows.Foundation.DateTime* value);
+                    [deprecated("PhoneIncomingCallDismissedTriggerDetails is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 4.0)] [propget] HRESULT TextReplyMessage([out] [retval] HSTRING* value);
+                    [deprecated("PhoneIncomingCallDismissedTriggerDetails is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 4.0)] [propget] HRESULT Reason([out] [retval] Windows.ApplicationModel.Calls.Background.PhoneIncomingCallDismissedReason* value);
                 }
 
                 [contract(Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 3.0)]
@@ -229,6 +234,7 @@ namespace Windows
                 }
 
                 [contract(Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 1.0)]
+                [deprecated("PhoneCallOriginDataRequestTriggerDetails is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 4.0)]
                 [from_contract(Windows.ApplicationModel.Calls.CallsPhoneContract, range(1.0, 3.0))]
                 [marshaling_behavior(agile)]
                 [threading(both)]
@@ -238,6 +244,7 @@ namespace Windows
                 }
 
                 [contract(Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 2.0)]
+                [deprecated("PhoneIncomingCallDismissedTriggerDetails is deprecated and might not work for all platforms. For more info, see MSDN.", deprecate, Windows.ApplicationModel.Calls.Background.CallsBackgroundContract, 4.0)]
                 [marshaling_behavior(agile)]
                 runtimeclass PhoneIncomingCallDismissedTriggerDetails
                 {

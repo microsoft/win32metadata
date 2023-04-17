@@ -430,6 +430,7 @@ typedef ULONG64 TRACEHANDLE, *PTRACEHANDLE;
 #define EVENT_TRACE_TYPE_CONFIG_POWER           0x10     // ACPI Configuration
 #define EVENT_TRACE_TYPE_CONFIG_NETINFO         0x11     // Networking Configuration
 #define EVENT_TRACE_TYPE_CONFIG_OPTICALMEDIA    0x12     // Optical Media Configuration
+#define EVENT_TRACE_TYPE_CONFIG_PHYSICALDISK_EX 0x13     // Physical Disk Extended Configuration
 
 #define EVENT_TRACE_TYPE_CONFIG_IRQ             0x15     // IRQ assigned to devices
 #define EVENT_TRACE_TYPE_CONFIG_PNP             0x16     // PnP device info
@@ -617,7 +618,7 @@ typedef ULONG64 TRACEHANDLE, *PTRACEHANDLE;
 //
 
 #define EVENT_TRACE_CONTROL_INCREMENT_FILE  4       // Causes a session with EVENT_TRACE_FILE_MODE_NEWFILE
-                                                    // to switch to the next file before the automatic 
+                                                    // to switch to the next file before the automatic
                                                     // switching criteria is met
 
 //
@@ -1389,6 +1390,18 @@ typedef struct _ETW_PMC_COUNTER_OWNERSHIP_STATUS {
     ETW_PMC_COUNTER_OWNER CounterOwners[ANYSIZE_ARRAY];
 } ETW_PMC_COUNTER_OWNERSHIP_STATUS, *PETW_PMC_COUNTER_OWNERSHIP_STATUS;
 
+typedef struct {
+    ULONG NextEntryOffset;
+    USHORT LoggerId;
+    USHORT Reserved;
+    ULONG ProfileSourceCount;
+    ULONG HookIdCount;
+
+    // These two fields follow as a ULONG blob after the initial header.
+    // ULONG ProfileSources[]; // Count indicated by ProfileSourceCount
+    // USHORT HookIds[]; // Count indicated by HookIdCount
+} ETW_PMC_SESSION_INFO;
+
 //
 // An EVENT_TRACE consists of a fixed header (EVENT_TRACE_HEADER) and
 // optionally a variable portion pointed to by MofData. The datablock
@@ -1446,6 +1459,53 @@ typedef ULONG (WINAPI * PEVENT_TRACE_BUFFER_CALLBACKA)
 typedef VOID (WINAPI *PEVENT_CALLBACK)( PEVENT_TRACE pEvent );
 
 typedef VOID (WINAPI *PEVENT_RECORD_CALLBACK) (PEVENT_RECORD EventRecord);
+
+typedef struct ETW_BUFFER_HEADER {
+    ULONG Reserved1[4];
+    LARGE_INTEGER TimeStamp; // Time of flush
+    ULONG Reserved2[4];
+    ETW_BUFFER_CONTEXT ClientContext;
+    ULONG Reserved3;
+    ULONG FilledBytes; // Number of bytes written to the buffer.  Essentially the filled length of the buffer.
+    ULONG Reserved4[5];
+} ETW_BUFFER_HEADER;
+
+// Structure passed to the BufferCallback containing information on the
+// current state of the processing session.
+typedef struct ETW_BUFFER_CALLBACK_INFORMATION {
+    TRACEHANDLE TraceHandle;
+    const TRACE_LOGFILE_HEADER* LogfileHeader;
+    ULONG BuffersRead;
+} ETW_BUFFER_CALLBACK_INFORMATION;
+
+typedef BOOL (WINAPI *PETW_BUFFER_CALLBACK) (
+    _In_reads_bytes_(BufferSize) const ETW_BUFFER_HEADER* Buffer,
+    _In_ ULONG BufferSize,
+    _In_ const ETW_BUFFER_CALLBACK_INFORMATION* ConsumerInfo,
+    _In_opt_ void* CallbackContext);
+
+typedef enum ETW_PROCESS_TRACE_MODES {
+    ETW_PROCESS_TRACE_MODE_NONE = 0,
+    ETW_PROCESS_TRACE_MODE_RAW_TIMESTAMP = 0x00000001
+} ETW_PROCESS_TRACE_MODES;
+
+// Configuration options to pass into OpenTrace style functions.
+typedef struct ETW_OPEN_TRACE_OPTIONS {
+    ETW_PROCESS_TRACE_MODES ProcessTraceModes;
+
+    // This callback will be called for each event in time order.
+    // If left NULL, all event playback code will be bypassed.
+    PEVENT_RECORD_CALLBACK  EventCallback;
+    void* EventCallbackContext;
+
+    // This callback will get called once buffer processing is complete.
+    PETW_BUFFER_CALLBACK BufferCallback;
+    void* BufferCallbackContext;
+} ETW_OPEN_TRACE_OPTIONS;
+
+typedef VOID (WINAPI *PETW_BUFFER_COMPLETION_CALLBACK) (
+    _In_ const ETW_BUFFER_HEADER* Buffer,
+    _In_opt_ void* CallbackContext);
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
@@ -1552,7 +1612,6 @@ struct _EVENT_TRACE_LOGFILEA {
 #if _MSC_VER >= 1200
 #pragma warning(pop)
 #endif
-
 
 //
 // Define generic structures
@@ -2238,8 +2297,8 @@ typedef enum _TRACE_QUERY_INFO_CLASS {
     //
     // TraceStreamCount:
     // - TraceQueryInformation
-    //      Queries the number of streams that a given session can be expected 
-    //      to emit. This is usually proportional to CPU count, or 1 if no 
+    //      Queries the number of streams that a given session can be expected
+    //      to emit. This is usually proportional to CPU count, or 1 if no
     //      per-processor buffering is enabled.
     //
     //      Output Format: ULONG
@@ -2261,17 +2320,17 @@ typedef enum _TRACE_QUERY_INFO_CLASS {
     //      Queries ownership information for active PMC counters.
     //      Expects NULL SessionHandle.
     //
-    //      Input Format: ETW_PMC_COUNTER_OWNERSHIP_STATUS with ProcessorNumber set to an 
+    //      Input Format: ETW_PMC_COUNTER_OWNERSHIP_STATUS with ProcessorNumber set to an
     //                    appropriate processor index. The input buffer must be of size at least
-    //                    RTL_SIZEOF_THROUGH_FIELD(ETW_PMC_COUNTER_OWNERSHIP_STATUS, NumberOfCounters) + 
-    //                    (sizeof(ETW_PMC_COUNTER_OWNER) * EtwMaxPmcCounters), where EtwMaxPmcCounters 
+    //                    RTL_SIZEOF_THROUGH_FIELD(ETW_PMC_COUNTER_OWNERSHIP_STATUS, NumberOfCounters) +
+    //                    (sizeof(ETW_PMC_COUNTER_OWNER) * EtwMaxPmcCounters), where EtwMaxPmcCounters
     //                    is the result of a TraceQueryInformation(TraceMaxPmcCounterQuery, ...) operation.
     //
     //      Output Format: ETW_PMC_COUNTER_OWNERSHIP_STATUS with CounterOwners filled out. NumberOfCounters is
     //                     set to the number of items in the CounterOwners array.
     //                     If a counter owner's OwnershipType is EtwPmcOwnerTagged, then OwnerTag contains
     //                     a tag provided by the counter owner.
-    //               
+    //
     TracePmcCounterOwners = 25,
 
     //
@@ -2282,6 +2341,19 @@ typedef enum _TRACE_QUERY_INFO_CLASS {
     //      Input Format: TRACE_STACK_CACHING_INFO
     //
     TraceUnifiedStackCachingInfo = 26,
+
+    //
+    // TracePmcSessionInformation:
+    //    TraceQueryInformation
+    //      Queries information about enabled PMC counters for all sessions.
+    //
+    //      Output Format: The supplied output buffer will be set to a blob of filled out ETW_PMC_SESSION_INFO.
+    //                     The NextEntryOffset member of each item will be set to the offset from the start of
+    //                     the current item to the next item, or 0 if there are no more items.
+    //                     The ProfileSourceCount and HookId count members will be set to the number of items that
+    //                     exist in the ProfileSources array and HookIds arrays, respectively.
+    //
+    TracePmcSessionInformation = 27,
 
     MaxTraceSetInfoClass
 } TRACE_QUERY_INFO_CLASS, TRACE_INFO_CLASS;
@@ -2567,6 +2639,82 @@ CloseTrace (
     _In_ TRACEHANDLE TraceHandle
     );
 
+EXTERN_C
+ETW_APP_DECLSPEC_DEPRECATED
+_Success_(return != INVALID_PROCESSTRACE_HANDLE)
+TRACEHANDLE
+WMIAPI
+OpenTraceFromBufferStream(
+    _In_ const ETW_OPEN_TRACE_OPTIONS* Options,
+    _In_ PETW_BUFFER_COMPLETION_CALLBACK BufferCompletionCallback,
+    _In_opt_ void* BufferCompletionContext
+    );
+
+EXTERN_C
+ETW_APP_DECLSPEC_DEPRECATED
+_Success_(return != INVALID_PROCESSTRACE_HANDLE)
+TRACEHANDLE
+WMIAPI
+OpenTraceFromRealTimeLogger(
+    _In_ PCWSTR LoggerName,
+    _In_ const ETW_OPEN_TRACE_OPTIONS* Options,
+    _Out_opt_ TRACE_LOGFILE_HEADER* LogFileHeader
+    );
+
+EXTERN_C
+ETW_APP_DECLSPEC_DEPRECATED
+_Success_(return != INVALID_PROCESSTRACE_HANDLE)
+TRACEHANDLE
+WMIAPI
+OpenTraceFromRealTimeLoggerWithAllocationOptions(
+    _In_ PCWSTR LoggerName,
+    _In_ const ETW_OPEN_TRACE_OPTIONS* Options,
+    _In_ ULONG_PTR AllocationSize,
+    _In_opt_ HANDLE MemoryPartitionHandle,
+    _Out_opt_ TRACE_LOGFILE_HEADER* LogFileHeader
+    );
+
+EXTERN_C
+ETW_APP_DECLSPEC_DEPRECATED
+_Success_(return != INVALID_PROCESSTRACE_HANDLE)
+TRACEHANDLE
+WMIAPI
+OpenTraceFromFile(
+    _In_ PCWSTR LogFileName,
+    _In_ const ETW_OPEN_TRACE_OPTIONS* Options,
+    _Out_opt_ TRACE_LOGFILE_HEADER* LogFileHeader
+    );
+
+EXTERN_C
+ETW_APP_DECLSPEC_DEPRECATED
+_Success_(return == ERROR_SUCCESS)
+ULONG
+WMIAPI
+ProcessTraceBufferIncrementReference(
+    _In_ TRACEHANDLE TraceHandle,
+    _In_ const ETW_BUFFER_HEADER* Buffer
+    );
+
+EXTERN_C
+ETW_APP_DECLSPEC_DEPRECATED
+_Success_(return == ERROR_SUCCESS)
+ULONG
+WMIAPI
+ProcessTraceBufferDecrementReference(
+    _In_ const ETW_BUFFER_HEADER* Buffer
+    );
+
+EXTERN_C
+ETW_APP_DECLSPEC_DEPRECATED
+_Success_(return == ERROR_SUCCESS)
+ULONG
+WMIAPI
+ProcessTraceAddBufferToBufferStream(
+    _In_ TRACEHANDLE TraceHandle,
+    _In_reads_bytes_(BufferSize) const ETW_BUFFER_HEADER* Buffer,
+    _In_ ULONG BufferSize
+    );
+
 //
 // Structures and enums for QueryTraceProcessingHandle
 //
@@ -2575,6 +2723,7 @@ typedef enum _ETW_PROCESS_HANDLE_INFO_TYPE {
     EtwQueryPartitionInformation = 1,
     EtwQueryPartitionInformationV2 = 2,
     EtwQueryLastDroppedTimes = 3,
+    EtwQueryLogFileHeader = 4,
     EtwQueryProcessHandleInfoMax
 } ETW_PROCESS_HANDLE_INFO_TYPE;
 

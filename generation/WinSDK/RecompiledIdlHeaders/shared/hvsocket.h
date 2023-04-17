@@ -47,15 +47,6 @@ Abstract:
 #define HVSOCKET_CONNECT_TIMEOUT_MAX   300000
 
 //
-// HVSOCKET_CONTAINER_PASSTHRU:
-// Input:
-// Type: ULONG.
-// Description:
-// Set container passthru flag, non-zero value indicates pass thru.
-//
-#define HVSOCKET_CONTAINER_PASSTHRU     0x02
-
-//
 // HVSOCKET_CONNECTED_SUSPEND:
 // Input:
 // Type: ULONG.
@@ -65,6 +56,15 @@ Abstract:
 //
 #define HVSOCKET_CONNECTED_SUSPEND     0x04
 
+//
+// HVSOCKET_HIGH_VTL:
+// Input:
+// Type: ULONG.
+// Description:
+// Set socket high VTL flag. Non-zero value set on a host socket indicates that the socket will
+// connect to guest VTL 2.
+//
+#define HVSOCKET_HIGH_VTL     0x08
 
 //
 // Well-known GUIDs.

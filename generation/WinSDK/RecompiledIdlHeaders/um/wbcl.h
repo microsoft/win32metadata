@@ -59,6 +59,7 @@ extern "C" {
 #define SIPAEV_EFI_HANDOFF_TABLES (0x80000009)
 #define SIPAEV_EFI_PLATFORM_FIRMWARE_BLOB2 (0x8000000A)
 #define SIPAEV_EFI_HANDOFF_TABLES2 (0x8000000B)
+#define SIPAEV_EFI_VARIABLE_BOOT2 (0x8000000C)
 #define SIPAEV_EFI_HCRTM_EVENT (0x80000010)
 #define SIPAEV_EFI_VARIABLE_AUTHORITY (0x800000E0)
 #define SIPAEV_EFI_SPDM_FIRMWARE_BLOB (0x800000E1)
@@ -396,6 +397,13 @@ extern "C" {
 #define SIPAEVENT_MODULE_SVN               (SIPAEVENTTYPE_LOADEDMODULE + \
                                             0x000b)
 
+#if NTDDI_VERSION >= NTDDI_WIN10_NI
+
+#define SIPAEVENT_MODULE_HSP               (SIPAEVENTTYPE_LOADEDMODULE + \
+                                            0x000c)
+
+#endif //NTDDI_VERSION >= NTDDI_WIN10_NI
+
 //SIPAEVENTTYPE_TRUSTPOINT
 #define SIPAEVENT_QUOTE                    (SIPAEVENTTYPE_NONMEASURED + \
                                             SIPAEVENTTYPE_TRUSTPOINT + \
@@ -553,6 +561,7 @@ extern "C" {
 #define OSDEVICE_TYPE_UDP                           (0x00030000)
 #define OSDEVICE_TYPE_VMBUS                         (0x00040000)
 #define OSDEVICE_TYPE_COMPOSITE                     (0x00050000)
+#define OSDEVICE_TYPE_CIMFS                         (0x00060000)
 
 
 //--------------------------------------------------WBCL header
@@ -632,6 +641,26 @@ typedef struct _WBCL_Iterator
   // Hash algorithm ID used for the log. The value corresponds to one of the TPM 2.0 ALG_ID values.
   WBCL_DIGEST_ALG_ID    hashAlgorithm;
 } WBCL_Iterator, *PWBCL_Iterator;
+
+//
+// The maximum allowed length of the binary name.
+//
+
+#define MAX_HSP_UPGRADE_FILENAME_LENGTH (64)
+
+#if NTDDI_VERSION >= NTDDI_WIN10_NI
+
+#define WBCL_MAX_HSP_UPGRADE_HASH_LEN   (64)
+
+typedef struct _HSP_UPGRADE_IMAGEDATA
+{
+  UINT16    hashAlgID;
+  UINT16    digestSize;
+  BYTE      digest[WBCL_MAX_HSP_UPGRADE_HASH_LEN];
+  WCHAR     fileName[MAX_HSP_UPGRADE_FILENAME_LENGTH];
+} HSP_UPGRADE_IMAGEDATA, *PHSP_UPGRADE_IMAGEDATA;
+
+#endif //NTDDI_VERSION >= NTDDI_WIN10_NI
 
 #if NTDDI_VERSION >= NTDDI_WIN10
 

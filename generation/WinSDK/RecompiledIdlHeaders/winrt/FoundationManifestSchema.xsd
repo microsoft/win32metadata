@@ -6,6 +6,7 @@
            xmlns:t="http://schemas.microsoft.com/appx/manifest/types"
            xmlns:f="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
            xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+           xmlns:uap2="http://schemas.microsoft.com/appx/manifest/uap/windows10/2"
            xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
            xmlns:uap4="http://schemas.microsoft.com/appx/manifest/uap/windows10/4"
            xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5"
@@ -15,6 +16,7 @@
            xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
            xmlns:uap11="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"
            xmlns:uap13="http://schemas.microsoft.com/appx/manifest/uap/windows10/13"
+           xmlns:uap15="http://schemas.microsoft.com/appx/manifest/uap/windows10/15"
            xmlns:wincap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/windowscapabilities"
            xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
            xmlns:rescap6="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities/6"
@@ -28,11 +30,13 @@
            xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
            xmlns:desktop6="http://schemas.microsoft.com/appx/manifest/desktop/windows10/6"
            xmlns:virtualization="http://schemas.microsoft.com/appx/manifest/virtualization/windows10"
+           xmlns:previewsecurity="http://schemas.microsoft.com/appx/manifest/preview/windows10/security"
            >
 
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/types"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/2014/phone/manifest"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/2"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/4"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/5"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/6"/>
@@ -41,11 +45,13 @@
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/13"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/15"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/iot/windows10/2"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/6"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities/6"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/virtualization/windows10"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/preview/windows10/security"/>
   
   <xs:element name="Package">
     <xs:complexType>
@@ -56,6 +62,7 @@
         <xs:element name="Resources" type="CT_Resources" minOccurs="0"/>
         <xs:element name="Dependencies" type="CT_Dependencies"/>
         <xs:element name="Capabilities" type="CT_Capabilities" minOccurs="0"/>
+        <xs:element ref="uap15:Capabilities" minOccurs="0"/>
         <xs:element name="Extensions" type="CT_PackageExtensions" minOccurs="0"/>
         <xs:element name="Applications" type="CT_Applications" minOccurs="0"/>
         <xs:element ref="ComExtensions" minOccurs="0"/>
@@ -79,7 +86,7 @@
       <xs:field xpath="@Id"/>
     </xs:unique>
     <xs:unique name="Capability_Name">
-      <xs:selector xpath="f:Capabilities/f:Capability | f:Capabilities/uap:Capability | f:Capabilities/wincap:Capability | f:Capabilities/rescap:Capability"/>
+      <xs:selector xpath="f:Capabilities/f:Capability | f:Capabilities/uap:Capability | f:Capabilities/uap2:Capability | f:Capabilities/uap3:Capability | f:Capabilities/uap4:Capability | f:Capabilities/uap7:Capability | f:Capabilities/uap11:Capability | f:Capabilities/wincap:Capability | f:Capabilities/rescap:Capability"/>
       <xs:field xpath="@Name"/>
     </xs:unique>
     <xs:unique name="DeviceCapability_Name">
@@ -87,7 +94,19 @@
       <xs:field xpath="@Name"/>
     </xs:unique>
     <xs:unique name="CustomCapability_Name">
-      <xs:selector xpath="f:Capabilities/uap4:CustomCapability"/>
+      <xs:selector xpath="f:Capabilities/uap4:CustomCapability" />
+      <xs:field xpath="@Name"/>
+    </xs:unique>
+    <xs:unique name="Capability_Name_2021">
+      <xs:selector xpath="uap15:Capabilities/f:Capability | uap15:Capabilities/uap:Capability | uap15:Capabilities/uap2:Capability | uap15:Capabilities/uap3:Capability | uap15:Capabilities/uap4:Capability | uap15:Capabilities/uap7:Capability | uap15:Capabilities/uap11:Capability | uap15:Capabilities/wincap:Capability | uap15:Capabilities/rescap:Capability"/>
+      <xs:field xpath="@Name"/>
+    </xs:unique>
+    <xs:unique name="DeviceCapability_Name_2021">
+      <xs:selector xpath="uap15:Capabilities/f:DeviceCapability"/>
+      <xs:field xpath="@Name"/>
+    </xs:unique>
+    <xs:unique name="CustomCapability_Name_2021">
+      <xs:selector xpath="uap15:Capabilities/uap4:CustomCapability"/>
       <xs:field xpath="@Name"/>
     </xs:unique>
     <xs:unique name="Extension_FileType_Name">
@@ -169,6 +188,7 @@
       <xs:element ref="uap10:AllowExternalContent" minOccurs="0"/>
       <xs:element ref="uap10:PackageIntegrity" minOccurs="0"/>
       <xs:element ref="uap13:AutoUpdate" minOccurs="0"/>
+      <xs:element ref="uap15:DependencyTarget" minOccurs="0"/>  
     </xs:all>
   </xs:complexType>
 
@@ -358,6 +378,7 @@
           <xs:attribute ref="uap10:SupportsMultipleInstances" use="optional"/>
           <xs:attribute ref="uap11:CurrentDirectoryPath" use="optional"/>
           <xs:attribute ref="uap11:Parameters" use="optional"/>
+          <xs:attribute ref="previewsecurity:TrustLevel" use="optional"/>
           <xs:attributeGroup ref="uap10:TrustLevelGroup"/>
         </xs:complexType>
         <xs:unique name="ApplicationContentUrisRule_Match">

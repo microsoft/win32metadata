@@ -41,33 +41,33 @@ static __forceinline uint64_t __U64(const __m64 V) { uint64_t *T = (uint64_t *)&
 
 static __forceinline __m64 __MI64(const uint64_t U) { __m64 *T = (__m64 *)&U; return *T; }
 
-static __forceinline __declspec(safebuffers) uint128_t __S128(const __m128  V) { uint128_t *T = (uint128_t *)&V; return *T; }
-static __forceinline __declspec(safebuffers) uint128_t __U128(const __m128i V) { uint128_t *T = (uint128_t *)&V; return *T; }
-static __forceinline __declspec(safebuffers) uint128_t __D128(const __m128d V) { uint128_t *T = (uint128_t *)&V; return *T; }
+static __forceinline uint128_t __S128(const __m128  V) { uint128_t *T = (uint128_t *)&V; return *T; }
+static __forceinline uint128_t __U128(const __m128i V) { uint128_t *T = (uint128_t *)&V; return *T; }
+static __forceinline uint128_t __D128(const __m128d V) { uint128_t *T = (uint128_t *)&V; return *T; }
 
-static __forceinline __declspec(safebuffers) uint32_t  __S128D0(const __m128  V) { uint128_t *T = (uint128_t *)&V; return T->D[0]; }
-static __forceinline __declspec(safebuffers) uint32_t  __S128D1(const __m128  V) { uint128_t *T = (uint128_t *)&V; return T->D[1]; }
-static __forceinline __declspec(safebuffers) uint32_t  __S128D2(const __m128  V) { uint128_t *T = (uint128_t *)&V; return T->D[2]; }
-static __forceinline __declspec(safebuffers) uint32_t  __S128D3(const __m128  V) { uint128_t *T = (uint128_t *)&V; return T->D[3]; }
+static __forceinline uint32_t  __S128D0(const __m128  V) { uint128_t *T = (uint128_t *)&V; return T->D[0]; }
+static __forceinline uint32_t  __S128D1(const __m128  V) { uint128_t *T = (uint128_t *)&V; return T->D[1]; }
+static __forceinline uint32_t  __S128D2(const __m128  V) { uint128_t *T = (uint128_t *)&V; return T->D[2]; }
+static __forceinline uint32_t  __S128D3(const __m128  V) { uint128_t *T = (uint128_t *)&V; return T->D[3]; }
 
-static __forceinline __declspec(safebuffers) uint32_t  __U128W0(const __m128i V) { uint128_t *T = (uint128_t *)&V; return T->W[0]; }
-static __forceinline __declspec(safebuffers) uint32_t  __U128D0(const __m128i V) { uint128_t *T = (uint128_t *)&V; return T->D[0]; }
-static __forceinline __declspec(safebuffers) uint64_t __U128Q0(const __m128i V) { uint128_t *T = (uint128_t *)&V; return T->Q[0]; }
-static __forceinline __declspec(safebuffers) uint64_t __U128Q1(const __m128i V) { uint128_t *T = (uint128_t *)&V; return T->Q[1]; }
+static __forceinline uint32_t  __U128W0(const __m128i V) { uint128_t *T = (uint128_t *)&V; return T->W[0]; }
+static __forceinline uint32_t  __U128D0(const __m128i V) { uint128_t *T = (uint128_t *)&V; return T->D[0]; }
+static __forceinline uint64_t __U128Q0(const __m128i V) { uint128_t *T = (uint128_t *)&V; return T->Q[0]; }
+static __forceinline uint64_t __U128Q1(const __m128i V) { uint128_t *T = (uint128_t *)&V; return T->Q[1]; }
 
-static __forceinline __declspec(safebuffers) uint64_t __D128Q0(const __m128d V) { uint128_t *T = (uint128_t *)&V; return T->Q[0]; }
-static __forceinline __declspec(safebuffers) uint64_t __D128Q1(const __m128d V) { uint128_t *T = (uint128_t *)&V; return T->Q[1]; }
-static __forceinline __declspec(safebuffers) uint64_t __S128Q0(const __m128 V) { uint128_t *T = (uint128_t *)&V; return T->Q[0]; }
-static __forceinline __declspec(safebuffers) uint64_t __S128Q1(const __m128 V) { uint128_t *T = (uint128_t *)&V; return T->Q[1]; }
+static __forceinline uint64_t __D128Q0(const __m128d V) { uint128_t *T = (uint128_t *)&V; return T->Q[0]; }
+static __forceinline uint64_t __D128Q1(const __m128d V) { uint128_t *T = (uint128_t *)&V; return T->Q[1]; }
+static __forceinline uint64_t __S128Q0(const __m128 V) { uint128_t *T = (uint128_t *)&V; return T->Q[0]; }
+static __forceinline uint64_t __S128Q1(const __m128 V) { uint128_t *T = (uint128_t *)&V; return T->Q[1]; }
 
-static __forceinline __declspec(safebuffers) double __D128F0(const __m128d V) { uint128_t *T = (uint128_t *)&V; return *(double *)&T->Q[0]; }
-static __forceinline __declspec(safebuffers) float  __S128F0(const __m128  V) { uint128_t *T = (uint128_t *)&V; return *(float *)&T->D[0]; }
+static __forceinline double __D128F0(const __m128d V) { uint128_t *T = (uint128_t *)&V; return *(double *)&T->Q[0]; }
+static __forceinline float  __S128F0(const __m128  V) { uint128_t *T = (uint128_t *)&V; return *(float *)&T->D[0]; }
 
-static __forceinline __declspec(safebuffers) uint128_t __IMM8_128(const uint64_t C) { uint128_t T; T.Q[0] = C & 0xff; T.Q[1] = 0; return T; }
+static __forceinline uint128_t __IMM8_128(const uint64_t C) { uint128_t T; T.Q[0] = C & 0xff; T.Q[1] = 0; return T; }
 
-static __forceinline __declspec(safebuffers) __m128  __MM128(const uint128_t U) { __m128  *T = (__m128  *)&U; return *T; }
-static __forceinline __declspec(safebuffers) __m128i __MI128(const uint128_t U) { __m128i *T = (__m128i *)&U; return *T; }
-static __forceinline __declspec(safebuffers) __m128d __MD128(const uint128_t U) { __m128d *T = (__m128d *)&U; return *T; }
+static __forceinline __m128  __MM128(const uint128_t U) { __m128  *T = (__m128  *)&U; return *T; }
+static __forceinline __m128i __MI128(const uint128_t U) { __m128i *T = (__m128i *)&U; return *T; }
+static __forceinline __m128d __MD128(const uint128_t U) { __m128d *T = (__m128d *)&U; return *T; }
 
 static __forceinline uint128_t __MAKEU8_U128(const uint8_t A, const uint8_t B, const uint8_t C, const uint8_t D, const uint8_t E, const uint8_t F, const uint8_t G, const uint8_t H, const uint8_t I, const uint8_t J, const uint8_t K, const uint8_t L, const uint8_t M, const uint8_t N, const uint8_t O, const uint8_t P)
 { uint128_t T; T.B[0] = A; T.B[1] = B; T.B[2] = C; T.B[3] = D; T.B[4] = E; T.B[5] = F; T.B[6] = G; T.B[7] = H; T.B[8] = I; T.B[9] = J; T.B[10] = K; T.B[11] = L; T.B[12] = M; T.B[13] = N; T.B[14] = O; T.B[15] = P; return T; }
@@ -82,12 +82,12 @@ static __forceinline uint128_t __MAKEF32_U128(const float A, const float B, cons
 static __forceinline uint128_t __MAKEF64_U128(const double A, const double B)
 { uint128_t T; T.Q[0] = *(uint64_t *)&A; T.Q[1] = *(uint64_t *)&B; return T; }
 
-static __forceinline __declspec(safebuffers) uint128_t __INSERT8_U128(const uint128_t A, const uint8_t B, const int C) { uint128_t T = A; T.B[C & 0b1111] = B; return T; }
-static __forceinline __declspec(safebuffers) uint128_t __INSERT16_U128(const uint128_t A, const uint16_t B, const int C) { uint128_t T = A; T.W[C & 0b111] = B; return T; }
-static __forceinline __declspec(safebuffers) uint128_t __INSERT32_U128(const uint128_t A, const uint32_t B, const int C) { uint128_t T = A; T.D[C & 0b011] = B; return T; }
-static __forceinline __declspec(safebuffers) uint128_t __INSERT64_U128(const uint128_t A, const uint64_t B, const int C) { uint128_t T = A; T.Q[C & 0b001] = B; return T; }
+static __forceinline uint128_t __INSERT8_U128(const uint128_t A, const uint8_t B, const int C) { uint128_t T = A; T.B[C & 0b1111] = B; return T; }
+static __forceinline uint128_t __INSERT16_U128(const uint128_t A, const uint16_t B, const int C) { uint128_t T = A; T.W[C & 0b111] = B; return T; }
+static __forceinline uint128_t __INSERT32_U128(const uint128_t A, const uint32_t B, const int C) { uint128_t T = A; T.D[C & 0b011] = B; return T; }
+static __forceinline uint128_t __INSERT64_U128(const uint128_t A, const uint64_t B, const int C) { uint128_t T = A; T.Q[C & 0b001] = B; return T; }
 
-static __forceinline __declspec(safebuffers) void __MASKMOVEU128(const  uint128_t A, const uint128_t M, char *Mem)
+static __forceinline void __MASKMOVEU128(const  uint128_t A, const uint128_t M, char *Mem)
 {
     for (unsigned i = 0; i < 16; i++)
     {
@@ -210,6 +210,8 @@ static __forceinline int HasOneBit(const unsigned x) { return (x && !(x & (x - 1
 
 #define _mm_cmp_sd(a,b,i)               __MD128(__MAKEU64_U128(CMPSD64(__D128Q0(a),__D128Q0(b),(i)),__D128Q1(a)))
 #define _mm_cmp_ss(a,b,i)               __MM128(__MAKEU32_U128(CMPSS64(__S128D0(a),__S128D0(b),(i)),__S128D1(a),__S128D2(a),__S128D3(a)))
+#define _mm_cmpr_sd(a,b,i)              __MD128(__MAKEU64_U128(CMPSD64(__D128Q0(a),__D128Q0(b),(i)),__D128Q1(b)))
+#define _mm_cmpr_ss(a,b,i)              __MM128(__MAKEU32_U128(CMPSS64(__S128D0(a),__S128D0(b),(i)),__S128D1(b),__S128D2(b),__S128D3(b)))
 
 #define _mm_cmpeq_pd(a,b)               _mm_cmp_pd((a),(b),_CMP_EQ_OQ)
 #define _mm_cmple_pd(a,b)               _mm_cmp_pd((a),(b),_CMP_LE_OS)
@@ -245,10 +247,10 @@ static __forceinline int HasOneBit(const unsigned x) { return (x && !(x & (x - 1
 #define _mm_cmpnle_sd(a,b)              _mm_cmp_sd((a),(b),_CMP_NLE_US)
 #define _mm_cmpnlt_sd(a,b)              _mm_cmp_sd((a),(b),_CMP_NLT_US)
 #define _mm_cmpord_sd(a,b)              _mm_cmp_sd((a),(b),_CMP_ORD_Q)
-#define _mm_cmpge_sd(a,b)               _mm_cmp_sd((b),(a),_CMP_LE_OS)
-#define _mm_cmpgt_sd(a,b)               _mm_cmp_sd((b),(a),_CMP_LT_OS)
-#define _mm_cmpnge_sd(a,b)              _mm_cmp_sd((b),(a),_CMP_NLE_US)
-#define _mm_cmpngt_sd(a,b)              _mm_cmp_sd((b),(a),_CMP_NLT_US)
+#define _mm_cmpge_sd(a,b)               _mm_cmpr_sd((b),(a),_CMP_LE_OS)
+#define _mm_cmpgt_sd(a,b)               _mm_cmpr_sd((b),(a),_CMP_LT_OS)
+#define _mm_cmpnge_sd(a,b)              _mm_cmpr_sd((b),(a),_CMP_NLE_US)
+#define _mm_cmpngt_sd(a,b)              _mm_cmpr_sd((b),(a),_CMP_NLT_US)
 
 #define _mm_cmpeq_ss(a,b)               _mm_cmp_ss((a),(b),_CMP_EQ_OQ)
 #define _mm_cmple_ss(a,b)               _mm_cmp_ss((a),(b),_CMP_LE_OS)
@@ -258,10 +260,10 @@ static __forceinline int HasOneBit(const unsigned x) { return (x && !(x & (x - 1
 #define _mm_cmpnle_ss(a,b)              _mm_cmp_ss((a),(b),_CMP_NLE_US)
 #define _mm_cmpnlt_ss(a,b)              _mm_cmp_ss((a),(b),_CMP_NLT_US)
 #define _mm_cmpord_ss(a,b)              _mm_cmp_ss((a),(b),_CMP_ORD_Q)
-#define _mm_cmpge_ss(a,b)               _mm_cmp_ss((b),(a),_CMP_LE_OS)
-#define _mm_cmpgt_ss(a,b)               _mm_cmp_ss((b),(a),_CMP_LT_OS)
-#define _mm_cmpnge_ss(a,b)              _mm_cmp_ss((b),(a),_CMP_NLE_US)
-#define _mm_cmpngt_ss(a,b)              _mm_cmp_ss((b),(a),_CMP_NLT_US)
+#define _mm_cmpge_ss(a,b)               _mm_cmpr_ss((b),(a),_CMP_LE_OS)
+#define _mm_cmpgt_ss(a,b)               _mm_cmpr_ss((b),(a),_CMP_LT_OS)
+#define _mm_cmpnge_ss(a,b)              _mm_cmpr_ss((b),(a),_CMP_NLE_US)
+#define _mm_cmpngt_ss(a,b)              _mm_cmpr_ss((b),(a),_CMP_NLT_US)
 
 #define _mm_cmpestra(a,m,b,n,i)         (0 == (0x041 & PCMPESTRF128(__U128(a), (m), __U128(b), (n), (i))))
 #define _mm_cmpestrc(a,m,b,n,i)         (0 != (0x001 & PCMPESTRF128(__U128(a), (m), __U128(b), (n), (i))))
@@ -418,14 +420,14 @@ static __forceinline int HasOneBit(const unsigned x) { return (x && !(x & (x - 1
 
 // MOVDQU MOVUPD MOVUPS
 
-#define _mm_loadu_si128(a)              __MI128(__MAKEU64_U128(*(uint64_t *)(a), ((uint64_t *)a)[1]))
-#define _mm_storeu_si128(a,b)           (void)(*(uint64_t *)(a) = __U128Q0(b), ((uint64_t *)a)[1] = __U128Q1(b))
+#define _mm_loadu_si128(a)              __MI128(__MAKEU64_U128(*(uint64_t *)(a), ((uint64_t *)(a))[1]))
+#define _mm_storeu_si128(a,b)           (void)(*(uint64_t *)(a) = __U128Q0(b), ((uint64_t *)(a))[1] = __U128Q1(b))
 
-#define _mm_loadu_pd(a)                 __MD128(__MAKEU64_U128(*(uint64_t *)(a), ((uint64_t *)a)[1]))
-#define _mm_storeu_pd(a,b)              (void)(*(uint64_t *)(a) = __D128Q0(b), ((uint64_t *)a)[1] = __D128Q1(b))
+#define _mm_loadu_pd(a)                 __MD128(__MAKEU64_U128(*(uint64_t *)(a), ((uint64_t *)(a))[1]))
+#define _mm_storeu_pd(a,b)              (void)(*(uint64_t *)(a) = __D128Q0(b), ((uint64_t *)(a))[1] = __D128Q1(b))
 
-#define _mm_loadu_ps(a)                 __MM128(__MAKEU64_U128(*(uint64_t *)(a), ((uint64_t *)a)[1]))
-#define _mm_storeu_ps(a,b)              (void)(*(uint64_t *)(a) = __S128Q0(b), ((uint64_t *)a)[1] = __S128Q1(b))
+#define _mm_loadu_ps(a)                 __MM128(__MAKEU64_U128(*(uint64_t *)(a), ((uint64_t *)(a))[1]))
+#define _mm_storeu_ps(a,b)              (void)(*(uint64_t *)(a) = __S128Q0(b), ((uint64_t *)(a))[1] = __S128Q1(b))
 
 // MOVHLPS MOVLHPS
 
@@ -655,14 +657,14 @@ static __forceinline int HasOneBit(const unsigned x) { return (x && !(x & (x - 1
 #define _mm_cmpeq_epi8(a,b)             __MI128(PCMPEQ128(__U128(a),__U128(b),_WIDEMASK_BYTE,_BITS_PER_BYTE))
 #define _mm_cmpeq_epi16(a,b)            __MI128(PCMPEQ128(__U128(a),__U128(b),_WIDEMASK_WORD,_BITS_PER_WORD))
 #define _mm_cmpeq_epi32(a,b)            __MI128(PCMPEQ128(__U128(a),__U128(b),_WIDEMASK_LONG,_BITS_PER_LONG))
-#define _mm_cmpeq_epi64(a,b)            __MI128(PCMPEQ128(__U128(a),__U128(b),_WIDEMASK_LONG,_BITS_PER_QUAD))
+#define _mm_cmpeq_epi64(a,b)            __MI128(PCMPEQ128(__U128(a),__U128(b),_WIDEMASK_QUAD,_BITS_PER_QUAD))
 
 // PCMPGT[B/W/D]
 
 #define _mm_cmpgt_epi8(a,b)             __MI128(PCMPGT128(__U128(a),__U128(b),_WIDEMASK_BYTE,_BITS_PER_BYTE))
 #define _mm_cmpgt_epi16(a,b)            __MI128(PCMPGT128(__U128(a),__U128(b),_WIDEMASK_WORD,_BITS_PER_WORD))
 #define _mm_cmpgt_epi32(a,b)            __MI128(PCMPGT128(__U128(a),__U128(b),_WIDEMASK_LONG,_BITS_PER_LONG))
-#define _mm_cmpgt_epi64(a,b)            __MI128(PCMPGT128(__U128(a),__U128(b),_WIDEMASK_LONG,_BITS_PER_QUAD))
+#define _mm_cmpgt_epi64(a,b)            __MI128(PCMPGT128(__U128(a),__U128(b),_WIDEMASK_QUAD,_BITS_PER_QUAD))
 
 #define _mm_cmplt_epi8(a,b)             __MI128(PCMPGT128(__U128(b),__U128(a),_WIDEMASK_BYTE,_BITS_PER_BYTE))
 #define _mm_cmplt_epi16(a,b)            __MI128(PCMPGT128(__U128(b),__U128(a),_WIDEMASK_WORD,_BITS_PER_WORD))
@@ -918,8 +920,8 @@ static __forceinline int HasOneBit(const unsigned x) { return (x && !(x & (x - 1
 #define _mm_setr_epi64(b,a)             __MI128(__MAKEU64_U128(__U64(b),__U64(a)))
 #define _mm_setr_epi64x(b,a)            __MI128(__MAKEU64_U128((uint64_t)(b),(uint64_t)(a)))
 
-#define _mm_setr_pd(b,a)                __MD128(__MAKEF64_U128((a),(b)))
-#define _mm_setr_ps(d,c,b,a)            __MM128(__MAKEF32_U128((a),(b),(c),(d)))
+#define _mm_setr_pd(a,b)                __MD128(__MAKEF64_U128((a),(b)))
+#define _mm_setr_ps(a,b,c,d)            __MM128(__MAKEF32_U128((a),(b),(c),(d)))
 
 // None
 
@@ -949,6 +951,7 @@ void __aa64_pause(void)
 #define _mm_lfence()                    __dmb(_ARM64_BARRIER_ISHLD);
 #define _mm_mfence()                    __dmb(_ARM64_BARRIER_ISH);
 #define _mm_sfence()                    __dmb(_ARM64_BARRIER_ISHST);
+#define __faststorefence()              __dmb(_ARM64_BARRIER_ISH);
 
 #define __addgsbyte(a,b)                __addx18byte(a, b)
 #define __addgsword(a,b)                __addx18word(a, b)
@@ -1034,7 +1037,7 @@ unsigned char _subborrow_u8(
    unsigned char* Destination
 )
 {
-    unsigned char Diff = (unsigned char)((Borrow != 0) + Source1 + Source2);
+    unsigned char Diff = (unsigned char)(Source1 - Source2 - (Borrow != 0));
     unsigned char CarryVector = (unsigned char)((Diff & Source2) ^ ((Diff ^ Source2) & ~Source1));
     *Destination = Diff;
     return (unsigned char)(CarryVector >> 7);
@@ -1048,7 +1051,7 @@ unsigned char _subborrow_u16(
    unsigned short* Destination
 )
 {
-    unsigned short Diff = (unsigned short)((Borrow != 0) + Source1 + Source2);
+    unsigned short Diff = (unsigned short)(Source1 - Source2 - (Borrow != 0));
     unsigned short CarryVector = (unsigned short)((Diff & Source2) ^ ((Diff ^ Source2) & ~Source1));
     *Destination = Diff;
     return (unsigned char)(CarryVector >> 15);
@@ -1062,7 +1065,7 @@ unsigned char _subborrow_u32(
    unsigned int* Destination
 )
 {
-    unsigned int Diff = (Borrow != 0) + Source1 + Source2;
+    unsigned int Diff = Source1 - Source2 - (Borrow != 0);
     unsigned int CarryVector = (Diff & Source2) ^ ((Diff ^ Source2) & ~Source1);
     *Destination = Diff;
     return CarryVector >> 31;
@@ -1076,7 +1079,7 @@ unsigned char _subborrow_u64(
    unsigned __int64* Destination
 )
 {
-    unsigned __int64 Diff = (Borrow != 0) + Source1 + Source2;
+    unsigned __int64 Diff = Source1 - Source2 - (Borrow != 0);
     unsigned __int64 CarryVector = (Diff & Source2) ^ ((Diff ^ Source2) & ~Source1);
     *Destination = Diff;
     return CarryVector >> 63;
@@ -1191,6 +1194,84 @@ void __stosq(
         *Destination++ = Data;
     }
 }
+
+#define _udiv64(n,d,r)                  _UDIV64((n),(d),(r))
+#define _div64(n,d,r)                   _SDIV64((n),(d),(r))
+
+#define __emulu(x,y)                    ((uint64_t)(uint32_t)(x) * (uint64_t)(uint32_t)(y))
+#define __emul(x,y)                     ((int64_t)(int32_t)(x) * (int64_t)(int32_t)(y))
+
+//
+// Map X64 atomic intrinsics to equivalent ARM64 ones
+// Reference starting from here: https://docs.microsoft.com/en-us/cpp/intrinsics/interlockedand-intrinsic-functions
+//
+
+#define _InterlockedAnd_np _InterlockedAnd
+#define _InterlockedAnd8_np _InterlockedAnd8
+#define _InterlockedAnd16_np _InterlockedAnd16
+#define _InterlockedAnd64_np _InterlockedAnd64
+
+#define _InterlockedAnd_HLEAcquire _InterlockedAnd_acq
+#define _InterlockedAnd_HLERelease _InterlockedAnd_rel
+#define _InterlockedAnd64_HLEAcquire _InterlockedAnd64_acq
+#define _InterlockedAnd64_HLERelease _InterlockedAnd64_rel
+
+#define _InterlockedOr_np _InterlockedOr
+#define _InterlockedOr8_np _InterlockedOr8
+#define _InterlockedOr16_np _InterlockedOr16
+#define _InterlockedOr64_np _InterlockedOr64
+
+#define _InterlockedOr_HLEAcquire _InterlockedOr_acq
+#define _InterlockedOr_HLERelease _InterlockedOr_rel
+#define _InterlockedOr64_HLEAcquire _InterlockedOr64_acq
+#define _InterlockedOr64_HLERelease _InterlockedOr64_rel
+
+#define _InterlockedXor_np _InterlockedXor
+#define _InterlockedXor8_np _InterlockedXor8
+#define _InterlockedXor16_np _InterlockedXor16
+#define _InterlockedXor64_np _InterlockedXor64
+
+#define _InterlockedXor_HLEAcquire _InterlockedXor_acq
+#define _InterlockedXor_HLERelease _InterlockedXor_rel
+#define _InterlockedXor64_HLEAcquire _InterlockedXor64_acq
+#define _InterlockedXor64_HLERelease _InterlockedXor64_rel
+
+#define _InterlockedCompareExchange_np _InterlockedCompareExchange
+#define _InterlockedCompareExchangePointer_np _InterlockedCompareExchangePointer
+#define _InterlockedCompareExchange16_np _InterlockedCompareExchange16
+#define _InterlockedCompareExchange64_np _InterlockedCompareExchange64
+#define _InterlockedCompareExchange128_np _InterlockedCompareExchange128
+
+#define _InterlockedCompareExchange_HLEAcquire _InterlockedCompareExchange_acq
+#define _InterlockedCompareExchange_HLERelease _InterlockedCompareExchange_rel
+#define _InterlockedCompareExchange64_HLEAcquire _InterlockedCompareExchange64_acq
+#define _InterlockedCompareExchange64_HLERelease _InterlockedCompareExchange64_rel
+
+#define _interlockedbittestandreset_HLEAcquire _interlockedbittestandreset_acq
+#define _interlockedbittestandreset_HLERelease _interlockedbittestandreset_rel
+#define _interlockedbittestandreset64_HLEAcquire _interlockedbittestandreset64_acq
+#define _interlockedbittestandreset64_HLERelease _interlockedbittestandreset64_rel
+
+#define _interlockedbittestandset_HLEAcquire _interlockedbittestandset_acq
+#define _interlockedbittestandset_HLERelease _interlockedbittestandset_rel
+#define _interlockedbittestandset64_HLEAcquire _interlockedbittestandset64_acq
+#define _interlockedbittestandset64_HLERelease _interlockedbittestandset64_rel
+
+#define _InterlockedCompareExchangePointer_HLEAcquire _InterlockedCompareExchangePointer_acq
+#define _InterlockedCompareExchangePointer_HLERelease _InterlockedCompareExchangePointer_rel
+
+#define _InterlockedExchange_HLEAcquire _InterlockedExchange_acq
+#define _InterlockedExchange_HLERelease _InterlockedExchange_rel
+#define _InterlockedExchange64_HLEAcquire _InterlockedExchange64_acq
+#define _InterlockedExchange64_HLERelease _InterlockedExchange64_rel
+
+#define _InterlockedExchangeAdd_HLEAcquire _InterlockedExchangeAdd_acq
+#define _InterlockedExchangeAdd_HLERelease _InterlockedExchangeAdd_rel
+#define _InterlockedExchangeAdd64_HLEAcquire _InterlockedExchangeAdd64_acq
+#define _InterlockedExchangeAdd64_HLERelease _InterlockedExchangeAdd64_rel
+
+#define _InterlockedExchangePointer_HLEAcquire _InterlockedExchangePointer_acq
+#define _InterlockedExchangePointer_HLERelease _InterlockedExchangePointer_rel
 
 #endif
 

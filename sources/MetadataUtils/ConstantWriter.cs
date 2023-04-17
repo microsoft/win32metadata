@@ -1,26 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace MetadataUtils
 {
-    public class ConstantWriter : IDisposable
+    public class ConstantWriter : IDisposable, IConstantWriter
     {
-        private string path;
+        private Stream outputStream;
         private string @namespace;
         private string headerText;
         private StreamWriter writer;
         private Dictionary<string, string> namesToValues = new Dictionary<string, string>();
         private Dictionary<string, string> withAttributes;
 
-        public ConstantWriter(string path, string @namespace, string sourceHeaderText, Dictionary<string, string> withAttributes)
+        public ConstantWriter(Stream outputStream, string @namespace, string sourceHeaderText, Dictionary<string, string> withAttributes)
         {
-            if (sourceHeaderText == null)
-            {
-                sourceHeaderText = string.Empty;
-            }
+            sourceHeaderText ??= string.Empty;
 
-            this.path = path;
+            this.outputStream = outputStream;
             this.@namespace = @namespace;
             this.headerText = sourceHeaderText;
             this.withAttributes = withAttributes;
@@ -52,7 +50,7 @@ namespace MetadataUtils
             this.namesToValues[name] = args;
 
             this.Writer.WriteLine(
-$@"        [PropertyKey({args})]
+$@"        [Constant({args})]
         public static readonly {structType} {name};");
 
             this.Writer.WriteLine();
@@ -191,6 +189,12 @@ $"        public const {type} {name} = {valueText};");
                 }
             }
 
+            var unsignedOverflowRegex = new Regex(@"^\d+U\s*[\+\-]");
+            if (unsignedOverflowRegex.IsMatch(valueText))
+            {
+                valueText = $"unchecked((uint){valueText})";
+            }
+
             if (!is64Bit)
             {
                 type = signed ? "int" : "uint";
@@ -203,6 +207,29 @@ $"        public const {type} {name} = {valueText};");
             return valueText;
         }
 
+        public void AddShort(string nativeTypeName, string name, string valueText, out string finalType)
+        {
+            if (nativeTypeName == "LPCWSTR" || nativeTypeName == "LPCSTR")
+            {
+                finalType = "ushort";
+                if (valueText.StartsWith("-"))
+                {
+                    valueText = $"unchecked((ushort) {valueText})";
+                }
+            }
+            else
+            {
+                finalType = "short";
+            }
+
+            if (!string.IsNullOrWhiteSpace(nativeTypeName))
+            {
+                this.Writer.WriteLine($"[NativeTypeName(\"{nativeTypeName}\")]");
+            }
+
+            this.AddValue(finalType, name, valueText);
+        }
+
         public void AddInt(string forceType, string nativeTypeName, string name, string valueText, out string finalType)
         {
             finalType = null;
@@ -213,7 +240,7 @@ $"        public const {type} {name} = {valueText};");
             }
 
             string type = null;
-            if (nativeTypeName == "HRESULT" || nativeTypeName == "LPCWSTR" || nativeTypeName == "LPCSTR" || nativeTypeName == "HWND")
+            if (nativeTypeName == "HRESULT" || nativeTypeName == "NTSTATUS" || nativeTypeName == "LPCWSTR" || nativeTypeName == "LPCSTR" || nativeTypeName == "HWND")
             {
                 type = "int";
             }
@@ -240,7 +267,7 @@ $"        [NativeTypeName(\"{nativeTypeName}\")]");
         {
             if (this.writer == null)
             {
-                this.writer = new StreamWriter(this.path);
+                this.writer = new StreamWriter(this.outputStream);
                 this.writer.WriteLine(
 @$"{this.headerText}
 

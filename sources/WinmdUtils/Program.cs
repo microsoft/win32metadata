@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.CommandLine.IO;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -14,7 +15,6 @@ using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.Metadata;
 using ICSharpCode.Decompiler.TypeSystem;
 using MetadataUtils;
-using Windows.Win32.Interop;
 
 namespace WinmdUtilsProgram
 {
@@ -46,9 +46,10 @@ namespace WinmdUtilsProgram
             var showDuplicateImports = new Command("showDuplicateImports", "Show duplicate imports in a single winmd files.")
             {
                 new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
+                new Option<string>("--allowItem", "Item to allow and not flag as an error.", ArgumentArity.OneOrMore)
             };
 
-            showDuplicateImports.Handler = CommandHandler.Create<FileInfo, IConsole>(ShowDuplicateImports);
+            showDuplicateImports.Handler = CommandHandler.Create<FileInfo, string[], IConsole>(ShowDuplicateImports);
 
             var showDuplicateTypes = new Command("showDuplicateTypes", "Show duplicate types in a single winmd files.")
             {
@@ -60,9 +61,10 @@ namespace WinmdUtilsProgram
             var showDuplicateConstants = new Command("showDuplicateConstants", "Show duplicate constants in a single winmd files.")
             {
                 new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
+                new Option<string>("--allowItem", "Item to allow and not flag as an error.", ArgumentArity.OneOrMore)
             };
 
-            showDuplicateConstants.Handler = CommandHandler.Create<FileInfo, IConsole>(ShowDuplicateConstants);
+            showDuplicateConstants.Handler = CommandHandler.Create<FileInfo, string[], IConsole>(ShowDuplicateConstants);
 
             var showEmptyDelegates = new Command("showEmptyDelegates", "Show delegates that have no parameters.")
             {
@@ -79,6 +81,15 @@ namespace WinmdUtilsProgram
             };
 
             showPointersToDelegates.Handler = CommandHandler.Create<FileInfo, string[], IConsole>(ShowPointersToDelegates);
+
+            var showSuggestedRemappings = new Command("showSuggestedRemappings", "Show suggested remappings.")
+            {
+                new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
+                new Option<string>("--allowItem", "Item to allow and not flag as an error.", ArgumentArity.OneOrMore),
+                new Option<string>("--projectRoot", "The path to the root of the project.", ArgumentArity.ExactlyOne)
+            };
+
+            showSuggestedRemappings.Handler = CommandHandler.Create<FileInfo, string[], string, IConsole>(ShowSuggestedRemappings);
 
             var showLibImports = new Command("dumpImports", "Show lib imports.")
             {
@@ -131,6 +142,7 @@ namespace WinmdUtilsProgram
                 showDuplicateConstants,
                 showEmptyDelegates,
                 showPointersToDelegates,
+                showSuggestedRemappings,
                 compareCommand,
                 showLibImports,
                 createLibRsp,
@@ -302,7 +314,7 @@ namespace WinmdUtilsProgram
                 foreach (var importInfo in LibScraper.GetImportInfos(libFile))
                 {
                     List<string> dlls;
-                    string fixedDll = Path.GetFileNameWithoutExtension(importInfo.Dll);
+                    string dll = importInfo.Dll;
 
                     // Skip mangled names
                     if (importInfo.ProcName.StartsWith('?'))
@@ -320,19 +332,19 @@ namespace WinmdUtilsProgram
                     {
                         dlls = new List<string>();
                         procNameToDll[importInfo.ProcName] = dlls;
-                        dlls.Add(fixedDll);
+                        dlls.Add(dll);
                     }
                     else
                     {
                         dlls = (List<string>)procNameToDll[importInfo.ProcName];
 
                         // Don't overwrite an existing value with an API set
-                        if (fixedDll.StartsWith("api-ms") || fixedDll.StartsWith("ext-ms"))
+                        if (dll.StartsWith("api-ms") || dll.StartsWith("ext-ms"))
                         {
                             continue;
                         }
 
-                        if (dlls.Contains(fixedDll))
+                        if (dlls.Contains(dll))
                         {
                             continue;
                         }
@@ -342,11 +354,11 @@ namespace WinmdUtilsProgram
                         string oldValue = dlls[0];
                         if (!oldValue.StartsWith("api-ms") && !oldValue.StartsWith("ext-ms"))
                         {
-                            dlls.Add(fixedDll);
+                            dlls.Add(dll);
                         }
                         else
                         {
-                            dlls[0] = fixedDll;
+                            dlls[0] = dll;
                         }
                     }
                 }
@@ -437,10 +449,58 @@ namespace WinmdUtilsProgram
 
             return pointersFound ? -1 : 0;
         }
+        
 
-        public static int ShowDuplicateConstants(FileInfo winmd, IConsole console)
+        public static int ShowSuggestedRemappings(FileInfo winmd, string[] allowItem, string projectRoot, IConsole console)
+        {
+            HashSet<string> allowTable = new HashSet<string>(allowItem);
+            using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName);
+            var suggestedRemappings = new HashSet<string>();
+            var suggestedRemappingRegEx = new Regex(@"Recommended remapping: '([^\']*)'");
+            bool suggestedRemappingsFound = false;
+
+            var files = Directory.GetFiles(Path.Combine(projectRoot, "obj/scratch"), "*.txt", SearchOption.AllDirectories);
+            foreach (var file in files)
+            {
+                var lines = File.ReadLines(file);
+                foreach (var line in lines)
+                {
+                    var match = suggestedRemappingRegEx.Match(line);
+                    if (match.Success)
+                    {
+                        suggestedRemappings.Add(match.Groups[1].Value);
+                    }
+                }
+            }
+
+            foreach (var suggestedRemapping in suggestedRemappings)
+            {
+                if (string.IsNullOrEmpty(suggestedRemapping) || allowTable.Contains(suggestedRemapping))
+                {
+                    continue;
+                }
+
+                if (!suggestedRemappingsFound)
+                {
+                    console.Out.Write("Suggested remappings detected:\r\n");
+                    suggestedRemappingsFound = true;
+                }
+
+                console?.Out.Write($"{suggestedRemapping}\r\n");
+            }
+
+            if (!suggestedRemappingsFound)
+            {
+                console.Out.Write("No suggested remappings found.\r\n");
+            }
+
+            return suggestedRemappingsFound ? -1 : 0;
+        }
+
+        public static int ShowDuplicateConstants(FileInfo winmd, string[] allowItem, IConsole console)
         {
             DecompilerTypeSystem winmd1 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(winmd.FullName);
+            HashSet<string> allowTable = new HashSet<string>(allowItem);
             Dictionary<string, List<string>> nameToOwner = new Dictionary<string, List<string>>();
 
             foreach (var type in winmd1.GetTopLevelTypeDefinitions())
@@ -471,10 +531,10 @@ namespace WinmdUtilsProgram
                     type.GetAttributes().Any(a => a.AttributeType.Name == "GuidAttribute") &&
                     !type.GetFields().Any())
                 {
-                    if (!nameToOwner.TryGetValue(type.Name, out var owners))
+                    if (!nameToOwner.TryGetValue(type.Name.ToUpper(), out var owners))
                     {
                         owners = new List<string>();
-                        nameToOwner[type.Name] = owners;
+                        nameToOwner[type.Name.ToUpper()] = owners;
                     }
 
                     owners.Add(type.FullName);
@@ -489,10 +549,10 @@ namespace WinmdUtilsProgram
                             continue;
                         }
 
-                        if (!nameToOwner.TryGetValue(field.Name, out var owners))
+                        if (!nameToOwner.TryGetValue(field.Name.ToUpper(), out var owners))
                         {
                             owners = new List<string>();
-                            nameToOwner[field.Name] = owners;
+                            nameToOwner[field.Name.ToUpper()] = owners;
                         }
 
                         owners.Add(type.FullName);
@@ -503,6 +563,11 @@ namespace WinmdUtilsProgram
             bool dupsFound = false;
             foreach (var pair in nameToOwner)
             {
+                if (allowTable.Contains(pair.Key))
+                {
+                    continue;
+                }
+
                 if (pair.Value.Count > 1)
                 {
                     if (dupsFound == false)
@@ -585,10 +650,10 @@ namespace WinmdUtilsProgram
                     typeName += $"({archInfo})";
                 }
 
-                if (!nameToNamespaces.TryGetValue(typeName, out var namespaces))
+                if (!nameToNamespaces.TryGetValue(typeName.ToUpper(), out var namespaces))
                 {
                     namespaces = new List<string>();
-                    nameToNamespaces[typeName] = namespaces;
+                    nameToNamespaces[typeName.ToUpper()] = namespaces;
                 }
 
                 namespaces.Add(type1.Namespace);
@@ -658,7 +723,7 @@ namespace WinmdUtilsProgram
 
         private static string GetArchInfo(IEnumerable<IAttribute> attributes)
         {
-            var archAttr = attributes.FirstOrDefault(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute");
+            var archAttr = attributes.FirstOrDefault(a => a.AttributeType.Name == "SupportedArchitectureAttribute");
             if (archAttr != null)
             {
                 Architecture arch = (Architecture)archAttr.FixedArguments[0].Value;
@@ -703,7 +768,7 @@ namespace WinmdUtilsProgram
                 foreach (var archType in foundArchTypes)
                 {
                     var typeArchAttr =
-                        archType.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute");
+                        archType.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute");
 
                     var typeArch = (Architecture)typeArchAttr.FixedArguments[0].Value;
                     typeArches |= typeArch;
@@ -755,7 +820,7 @@ namespace WinmdUtilsProgram
 
             foreach (var type in winmd1.GetTopLevelTypeDefinitions()
                 .Where(t => t.GetAttributes()
-                    .Any(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute")))
+                    .Any(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute")))
             {
                 if (!namesToArchDefs.TryGetValue(type.FullName, out var list))
                 {
@@ -768,7 +833,7 @@ namespace WinmdUtilsProgram
 
             foreach (var type in namesToArchDefs.SelectMany(map => map.Value))
             {
-                var archAttr = type.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute");
+                var archAttr = type.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute");
                 Architecture arch = (Architecture)archAttr.FixedArguments[0].Value;
 
                 if (!VerifyTypeHasRightArch(namesToArchDefs, type, type, arch, console))
@@ -781,9 +846,9 @@ namespace WinmdUtilsProgram
             {
                 foreach (var method in apisClass.Methods.Where(
                     m => m.IsStatic && m.DeclaringType == apisClass && m.GetAttributes()
-                        .Any(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute")))
+                        .Any(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute")))
                 {
-                    var archAttr = method.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute");
+                    var archAttr = method.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute");
                     Architecture arch = (Architecture)archAttr.FixedArguments[0].Value;
 
                     foreach (var param in method.Parameters)
@@ -945,12 +1010,13 @@ namespace WinmdUtilsProgram
             return 0;
         }
 
-        public static int ShowDuplicateImports(FileInfo winmd, IConsole console)
+        public static int ShowDuplicateImports(FileInfo winmd, string[] allowItem, IConsole console)
         {
             DecompilerSettings settings = new DecompilerSettings() { ThrowOnAssemblyResolveErrors = false };
             DecompilerTypeSystem winmd1 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(winmd.FullName);
 
             Dictionary<string, List<string>> dllImportsToClassNames = new Dictionary<string, List<string>>();
+            HashSet<string> allowTable = new HashSet<string>(allowItem);
 
             foreach (var type1 in winmd1.GetTopLevelTypeDefinitions())
             {
@@ -994,10 +1060,10 @@ namespace WinmdUtilsProgram
                             fullImport += $"({archInfo})";
                         }
 
-                        if (!dllImportsToClassNames.TryGetValue(fullImport, out var classNames))
+                        if (!dllImportsToClassNames.TryGetValue(fullImport.ToUpper(), out var classNames))
                         {
                             classNames = new List<string>();
-                            dllImportsToClassNames[fullImport] = classNames;
+                            dllImportsToClassNames[fullImport.ToUpper()] = classNames;
                         }
 
                         classNames.Add(type1.FullName);
@@ -1008,6 +1074,11 @@ namespace WinmdUtilsProgram
             bool dupsFound = false;
             foreach (var pair in dllImportsToClassNames)
             {
+                if (allowTable.Contains(pair.Key))
+                {
+                    continue;
+                }
+
                 if (pair.Value.Count > 1)
                 {
                     if (dupsFound == false)
@@ -1070,6 +1141,13 @@ namespace WinmdUtilsProgram
                         if (fieldVal2 == null)
                         {
                             writer.WriteDifference($"winmd2: {fullField1Name} is a constant with a null value");
+                        }
+
+                        var fieldInitType1 = fieldVal1.GetType().Name;
+                        var fieldInitType2 = fieldVal2.GetType().Name;
+                        if (fieldInitType1 != fieldInitType2)
+                        {
+                            writer.WriteDifference($"{fullField1Name} value init changed {fieldInitType1}->{fieldInitType2}");
                         }
 
                         string val1 = fieldVal1?.ToString();

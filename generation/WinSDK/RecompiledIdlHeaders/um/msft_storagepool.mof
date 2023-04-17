@@ -696,6 +696,9 @@ class MSFT_StoragePool : MSFT_StorageObject {
         UInt16 ColumnIsolation,
 
         [In]
+        UInt16 MinimumLogicalDataCopies,
+
+        [In]
         MSFT_StorageFaultDomain REF StorageFaultDomainsToUse[],
 
         [In, EmbeddedInstance("MSFT_StorageTier")]
@@ -711,7 +714,13 @@ class MSFT_StoragePool : MSFT_StorageObject {
         Boolean AutoWriteCacheSize,
 
         [In]
+        UInt64 WriteCacheReserveSize,
+
+        [In]
         UInt64 ReadCacheSize,
+
+        [In]
+        Boolean TrackValidData,
 
         [In]
         Boolean IsManualAttach,

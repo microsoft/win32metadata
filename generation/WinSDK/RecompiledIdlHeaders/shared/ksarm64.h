@@ -66,6 +66,13 @@
 
 
 //
+// Apc Callback Data Structure Offset Definitions
+//
+
+#define AcdContextRecord 0x8
+#define KAPC_CALLBACK_DATA_LENGTH 0x20
+
+//
 // Bug Check Code Definitions
 //
 
@@ -432,7 +439,7 @@
 #define InServiceCount 0x74
 #define InDispatchCount 0x78
 #define InTrapFrame 0x88
-#define InterruptObjectLength 0x120
+#define InterruptObjectLength 0x118
 
 //
 // Process Object Structure Offset Definitions
@@ -474,9 +481,9 @@
 #define PfBuffer 0x38
 #define PfSegment 0x40
 #define PfAffinity 0x48
-#define PfSource 0x158
-#define PfStarted 0x15a
-#define ProfileObjectLength 0x160
+#define PfSource 0x260
+#define PfStarted 0x262
+#define ProfileObjectLength 0x268
 
 //
 // Queue Object Structure Offset Definitions
@@ -562,7 +569,7 @@
 #define ThStackBase 0x38
 #define ThLegoData 0x2f0
 #define KernelThreadObjectLength 0x4a0
-#define ExecutiveThreadObjectLength 0x910
+#define ExecutiveThreadObjectLength 0x920
 
 
 //
@@ -664,15 +671,16 @@
 
 #define Cv2ciInSimulation 0x0
 #define Cv2ciInSyscallCallback 0x1
-#define Cv2ciEmulatorData 0x28
-#define Cv2ciEmulatorData2 0x30
-#define Cv2ciEmulatorData3 0x38
-#define Cv2ciEmulatorData4 0x40
+#define Cv2ciEmulatorData 0x30
+#define Cv2ciEmulatorData2 0x38
+#define Cv2ciEmulatorData3 0x40
+#define Cv2ciEmulatorData4 0x48
 #define Cv2ciEmulatorDataInline 0x50
 #define Cv2ciEmulatorStackBase 0x8
 #define Cv2ciEmulatorStackLimit 0x10
 #define Cv2ciContextAmd64 0x18
 #define Cv2ciSuspendDoorbell 0x20
+#define Cv2ciLoadingModuleModflag 0x28
 
 //
 // Thread Environment Block Structure Offset Definitions
@@ -845,15 +853,11 @@
 // Processor Control Region Structure Offset Definitions
 //
 
-#define PCR_BTI_MITIGATION_NONE 0x0
-#define PCR_BTI_MITIGATION_TRAP_HVC 0x1
-#define PCR_BTI_MITIGATION_TRAP_SMC 0x2
-#define PCR_BTI_MITIGATION_CSWAP_HVC 0x4
-#define PCR_BTI_MITIGATION_CSWAP_SMC 0x8
-#define PCR_BTI_MITIGATION_TRAP_HVC_BIT 0x0
-#define PCR_BTI_MITIGATION_TRAP_SMC_BIT 0x1
-#define PCR_BTI_MITIGATION_CSWAP_HVC_BIT 0x2
-#define PCR_BTI_MITIGATION_CSWAP_SMC_BIT 0x3
+#define PCR_BTI_MITIGATION_VBAR_MASK 0xf
+#define PCR_BTI_MITIGATION_CSWAP_HVC 0x10
+#define PCR_BTI_MITIGATION_CSWAP_SMC 0x20
+#define PCR_BTI_MITIGATION_CSWAP_HVC_BIT 0x4
+#define PCR_BTI_MITIGATION_CSWAP_SMC_BIT 0x5
 #define ARM64_ASID_KVA_SHADOW 0x8000
 #define PSCI_FUNCTION_CODE_SMCCC_ARCH_WORKAROUND_1 0x80008000
 #define PcSelf 0x18
@@ -863,6 +867,7 @@
 #define PcStallScaleFactor 0x40
 #define PcBtiMitigation 0x4c
 #define PcSsbMitigationFlags 0x4d
+#define PcBhbMitigation 0x4e
 #define PcPanicStorage 0x50
 #define PcHalReserved 0x88
 #define PcPrcb 0x980
@@ -915,7 +920,7 @@
 #define PcSkipTick 0x1898
 #define PcStartCycles 0x18c8
 #define PcSpBase 0x1480
-#define ProcessorControlRegisterLength 0x29fc0
+#define ProcessorControlRegisterLength 0x29dc0
 
 //
 // Defines for user shared data
@@ -956,8 +961,8 @@
 #define PbMinorVersion 0x750
 #define PbMajorVersion 0x752
 #define PbBuildType 0x754
-#define PbCoresPerPhysicalProcessor 0x756
-#define PbLogicalProcessorsPerCore 0x757
+#define PbCoresPerPhysicalProcessor 0x770
+#define PbLogicalProcessorsPerCore 0x774
 #define PbPriorityState 0x30
 #define PbLockQueue 0x780
 #define PbPPLookasideList 0x900
@@ -966,7 +971,7 @@
 #define PbPacketBarrier 0xa00
 #define PbDeferredReadyListHead 0xa08
 #define PbLookasideIrpFloat 0xa58
-#define PbRequestMailbox 0x9600
+#define PbRequestMailbox 0x9400
 #define PbMailbox 0xa80
 #define PbDpcGate 0xb80
 #define PbWaitListHead 0xc00
@@ -1035,7 +1040,6 @@
 #define DeferredReady 0x7
 #define GateWaitObsolete 0x8
 #define THREAD_FLAGS_CYCLE_PROFILING_BIT 0x0
-#define DEBUG_ACTIVE_EMULATION_THREAD_BIT 0x6
 
 //
 // Immediate Interprocessor Command Definitions
@@ -1252,6 +1256,7 @@
 #define ARM64_TCR_IPASize_MASK 0x0000000700000000
 #define ARM64_TCR_PASize_MASK 0x0000000000070000
 #define ARM64_TCR_TBI0 0x0000002000000000
+#define ARM64_TCR_TBI1 0x0000004000000000
 #define ARM64_ESR_EL1 0x4290
 #define ARM64_ESR_EL2 0x6290
 #define ARM64_FAR_EL1 0x4300
@@ -1735,6 +1740,8 @@
 #define DEBUG_ACTIVE_INSTRUMENTED 0x2
 #define DEBUG_ACTIVE_MINIMAL_THREAD 0x4
 #define DEBUG_ACTIVE_MINIMAL_THREAD_BIT 0x2
+#define DEBUG_ACTIVE_EMULATION_THREAD 0x40
+#define DEBUG_ACTIVE_EMULATION_THREAD_BIT 0x6
 
 //
 // ARM64EC Context Frame Offsets
@@ -1911,5 +1918,6 @@
 //
 
 #define AffinityExLength 0x108
+#define KAPC_RECORD_FLAGS_CALLBACK_DATA_CONTEXT_BIT 0x2
 #include "kxarm64.h"
 ;

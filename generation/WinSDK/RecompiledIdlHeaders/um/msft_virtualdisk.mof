@@ -247,6 +247,11 @@ class MSFT_VirtualDisk : MSFT_StorageObject {
     UInt64 Interleave;
 
     [Read, Description(
+        "This field indicates the minimum number of logical data copies to enforce."
+        )]
+    UInt16 MinimumLogicalDataCopies;
+
+    [Read, Description(
         "This field indicates what type of parity layout is being used for parity "
         "resiliency settings. This field should be NULL if the virtual disk does not use a "
         "parity resiliency setting."
@@ -269,6 +274,11 @@ class MSFT_VirtualDisk : MSFT_StorageObject {
         "Indicates whether this virtual disk is a snapshot of another virtual disk"
         )]
     Boolean IsSnapshot;
+
+    [Read, Description(
+        "Indicates whether valid data tracking is enforced for this virtual disk."
+        )]
+    Boolean TrackValidData;
 
     [Read, Description(
         "If TRUE, this virtual disk will only be attached to the system if an explicit call "
@@ -303,6 +313,9 @@ class MSFT_VirtualDisk : MSFT_StorageObject {
 
     [Description( "Size of the write cache for the virtual disk" ), Units("Bytes")]
     UInt64 WriteCacheSize;
+
+    [Read, Description( "Size of the write cache reserve region." ), Units("Bytes")]
+    UInt64 WriteCacheReserveSize;
 
     [Description( "Size of the read cache for the virtual disk" ), Units("Bytes")]
     UInt64 ReadCacheSize;

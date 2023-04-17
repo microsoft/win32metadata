@@ -11,7 +11,7 @@ namespace ClangSharpSourceToWinmd
             using var writer = new StreamWriter(output, leaveOpen: true);
             writer.Write(
 @"using System;
-using Windows.Win32.Interop;
+using Windows.Win32.Foundation.Metadata;
 
 ");
             string currentNamespace = null;

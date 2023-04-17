@@ -28,7 +28,25 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
 cpp_quote("// {6EDC630D-C2E3-43B7-B2D1-20525A1AF120}, 3")
 cpp_quote("DEFINE_DEVPROPKEY(DEVPKEY_DeviceInterface_IsVirtualCamera,                       0x6EDC630D, 0xC2E3, 0x43B7, 0xB2, 0xD1, 0x20, 0x52, 0x5A, 0x1A, 0xF1, 0x20, 3);    // DEVPROP_TYPE_BOOLEAN")
 
+/// DEVPROPKEY set on a camera interface property store 
+/// indicating the camera can enable MS Camera Effects. 
+/// 
+/// Type:  DEVPROP_BOOLEAN
+cpp_quote("/// {6EDC630D-C2E3-43B7-B2D1-20525A1AF120}, 4")
+cpp_quote("DEFINE_DEVPROPKEY(DEVPKEY_DeviceInterface_IsWindowsCameraEffectAvailable,        0x6EDC630D, 0xC2E3, 0x43B7, 0xB2, 0xD1, 0x20, 0x52, 0x5A, 0x1A, 0xF1, 0x20, 4);    // DEVPROP_TYPE_BOOLEAN")
 
+/// DEVPROPKEY set on virtual cameras created through the
+/// MFCreateVirtualCamera that configures physical cameras
+/// through IMFVirtualCamera::AddSourceDeviceInfo() method.
+/// 
+/// Type:  DEVPROP_TYPE_STRING_LIST
+/// 
+/// Remarks:  Returns a MULTI_SZ string containing the
+/// symbolic link name of each physical camera associated
+/// with the virtual camera.
+cpp_quote("/// {6EDC630D-C2E3-43B7-B2D1-20525A1AF120}, 5")
+cpp_quote("DEFINE_DEVPROPKEY(DEVPKEY_DeviceInterface_VirtualCameraAssociatedCameras,        0x6EDC630D, 0xC2E3, 0x43B7, 0xB2, 0xD1, 0x20, 0x52, 0x5A, 0x1A, 0xF1, 0x20, 5);    // DEVPROP_TYPE_STRING_LIST")
+  
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
 #pragma endregion
 
@@ -41,6 +59,41 @@ cpp_quote("#ifndef _DEVPROPDEF_H_")
 typedef void *DEVPROPKEY;
 typedef ULONG DEVPROPTYPE;
 cpp_quote("#endif")
+
+/// 28A5531A-57DD-4FD5-AAA7-385ABF57D785 
+///  
+/// Type:  UINT32 
+///  
+/// Attribute set during camera creation.  If set to non-zero 
+/// value camera effects will be enabled.  If the camera being 
+/// created does not have 
+/// DEVPKEY_DeviceInterface_IsWindowsCameraEffectAvailable 
+/// property set to true, setting this attribute during camera 
+/// initialization will result in an MF_E_INVALIDREQUEST 
+/// failure. 
+cpp_quote("EXTERN_GUID(MF_DEVSOURCE_ATTRIBUTE_ENABLE_MS_CAMERA_EFFECTS,                     0x28A5531A, 0x57DD, 0x4FD5, 0xAA, 0xA7, 0x38, 0x5A, 0xBF, 0x57, 0xD7, 0x85);")
+
+/// {1BB79E7C-5D83-438C-94D8-E5F0DF6D3279} 
+///  
+/// Type:  IUnknown 
+///  
+/// IMFCollection object containing the IMFMediaSourceEx of the 
+/// various associated physical cameras for the virtual camera. 
+/// This attribute will be set on the IMFActivate's attribute 
+/// prior to calling IMFActivate::ActivateObject() method. 
+cpp_quote("EXTERN_GUID(MF_VIRTUALCAMERA_ASSOCIATED_CAMERA_SOURCES,                          0x1BB79E7C, 0x5D83, 0x438C, 0x94, 0xD8, 0xE5, 0xF0, 0xDF, 0x6D, 0x32, 0x79);")
+
+/// {F0273718-4A4D-4AC5-A15D-305EB5E90667} 
+///  
+/// Type:  UINT32 
+///  
+/// If present and non-zero, the virtual camera custom media 
+/// source is requesting the pipeline to provide the associated 
+/// physical camera sources.  If this attribute is not present 
+/// or set to 0, associated physical cameras will not be 
+/// provided through the 
+/// MF_VIRTUALCAMERA_ASSOCIATED_CAMERA_SOURCES attribute.
+cpp_quote("EXTERN_GUID(MF_VIRTUALCAMERA_PROVIDE_ASSOCIATED_CAMERA_SOURCES,                  0xF0273718, 0x4A4D, 0x4AC5, 0xA1, 0x5D, 0x30, 0x5E, 0xB5, 0xE9, 0x06, 0x67);")
 
 /// 658ABE51-8044-462E-97EA-E676FD72055F 
 /// MF_VIRTUALCAMERA_CONFIGURATION_APP_PACKAGE_FAMILY_NAME

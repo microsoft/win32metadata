@@ -29,7 +29,7 @@
   },
   {
     "Namespace": "Windows.Win32.Foundation",
-    "Name": "HINSTANCE",
+    "Name": "HMODULE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "FreeLibrary",
     "InvalidHandleValues": [ 0 ]
@@ -350,6 +350,36 @@
     "InvalidHandleValues": [ 0 ]
   },
   {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "PTP_IO",
+    "ValueType": "IntPtr",
+    "InvalidHandleValues": [ 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "PTP_TIMER",
+    "ValueType": "IntPtr",
+    "InvalidHandleValues": [ 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "PTP_WAIT",
+    "ValueType": "IntPtr",
+    "InvalidHandleValues": [ 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "PTP_WORK",
+    "ValueType": "IntPtr",
+    "InvalidHandleValues": [ 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "PTP_CALLBACK_INSTANCE",
+    "ValueType": "IntPtr",
+    "InvalidHandleValues": [ 0 ]
+  },
+  {
     "Name": "PTP_POOL",
     "ValueType": "IntPtr",
     "CloseApi": "CloseThreadpool"
@@ -397,7 +427,7 @@
     "InvalidHandleValues": [ -1, 0 ]
   },
   {
-    "Name": "FindVolumeMointPointHandle",
+    "Name": "FindVolumeMountPointHandle",
     "ValueType": "IntPtr",
     "CloseApi": "FindVolumeMountPointClose",
     "InvalidHandleValues": [ -1, 0 ]
@@ -466,6 +496,20 @@
     "Name": "HeapHandle",
     "ValueType": "IntPtr",
     "CloseApi": "HeapDestroy",
+    "InvalidHandleValues": [ -1, 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "HLOCAL",
+    "ValueType": "void*",
+    "CloseApi": "LocalFree",
+    "InvalidHandleValues": [ -1, 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "HGLOBAL",
+    "ValueType": "void*",
+    "CloseApi": "GlobalFree",
     "InvalidHandleValues": [ -1, 0 ]
   },
   {
@@ -1490,5 +1534,61 @@
     "Name": "OLE_HANDLE",
     "ValueType": "uint",
     "InvalidHandleValues": [ 0 ]
+  },
+  {
+    "Name": "WINUSB_INTERFACE_HANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "WinUsb_Free",
+    "InvalidHandleValues": [ 0 ]
+  },
+  {
+    "Name": "UPDATERESOURCE_HANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "EndUpdateResourceW",
+    "InvalidHandleValues": [ 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.UI.WindowsAndMessaging",
+    "Name": "LOADIMAGE_HANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WinSock",
+    "Name": "socklen_t",
+    "ValueType": "int"
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WinSock",
+    "Name": "sa_family_t",
+    "ValueType": "ushort"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Usb",
+    "Name": "USB_CHANGE_REGISTRATION_HANDLE",
+    "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.Iis",
+    "Name": "HCONN",
+    "ValueType": "void*"
+  },
+  {
+    "Name": "HBLUETOOTH_DEVICE_FIND",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "BluetoothFindDeviceClose",
+    "InvalidHandleValues": [ -1, 0 ]
+  },
+  {
+    "Name": "HBLUETOOTH_RADIO_FIND",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "BluetoothFindRadioClose",
+    "InvalidHandleValues": [ -1, 0 ]
+  },
+  {
+    "Name": "HDEVNOTIFY",
+    "ValueType": "void*",
+    "CloseApi": "UnregisterDeviceNotification",
+    "InvalidHandleValues": [ -1, 0 ]
   }
 ]

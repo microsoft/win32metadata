@@ -321,6 +321,7 @@ typedef enum tagREGCLS
                                 // one instance can be generated.
 #endif
 } REGCLS;
+DEFINE_ENUM_FLAG_OPERATORS(REGCLS);
 
 /* here is where we pull in the MIDL generated headers for the interfaces */
 typedef interface    IRpcStubBuffer     IRpcStubBuffer;
@@ -1277,6 +1278,7 @@ typedef enum tagCOWAIT_FLAGS
   COWAIT_DISPATCH_CALLS = 8,
   COWAIT_DISPATCH_WINDOW_MESSAGES = 0x10,
 }COWAIT_FLAGS;
+DEFINE_ENUM_FLAG_OPERATORS(COWAIT_FLAGS);
 
 #if (NTDDI_VERSION >= NTDDI_WIN8)
 
@@ -1286,6 +1288,7 @@ typedef enum CWMO_FLAGS
   CWMO_DISPATCH_CALLS = 1,
   CWMO_DISPATCH_WINDOW_MESSAGES = 2,
 } CWMO_FLAGS;
+DEFINE_ENUM_FLAG_OPERATORS(CWMO_FLAGS);
 
 WINOLEAPI
 CoWaitForMultipleObjects(

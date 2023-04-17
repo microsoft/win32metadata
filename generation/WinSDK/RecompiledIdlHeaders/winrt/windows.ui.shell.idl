@@ -29,6 +29,8 @@ namespace Windows
 {
     namespace Foundation
     {
+        typedef struct DateTime DateTime;
+
         apicontract UniversalApiContract;
 
         runtimeclass Uri;
@@ -71,6 +73,12 @@ namespace Windows
 
             interface IAdaptiveCardBuilderStatics;
 
+            interface IFocusSession;
+
+            interface IFocusSessionManager;
+
+            interface IFocusSessionManagerStatics;
+
             interface ISecurityAppManager;
 
             interface IShareWindowCommandEventArgs;
@@ -86,6 +94,10 @@ namespace Windows
             interface ITaskbarManagerStatics;
 
             runtimeclass AdaptiveCardBuilder;
+
+            runtimeclass FocusSession;
+
+            runtimeclass FocusSessionManager;
 
             runtimeclass SecurityAppManager;
 
@@ -107,6 +119,8 @@ namespace Windows
         {
             declare
             {
+                interface Windows.Foundation.TypedEventHandler<Windows.UI.Shell.FocusSessionManager*, IInspectable*>;
+
                 interface Windows.Foundation.TypedEventHandler<Windows.UI.Shell.ShareWindowCommandSource*, Windows.UI.Shell.ShareWindowCommandEventArgs*>;
             }
         }
@@ -167,6 +181,38 @@ namespace Windows
             interface IAdaptiveCardBuilderStatics : IInspectable
             {
                 HRESULT CreateAdaptiveCardFromJson([in] HSTRING value, [out] [retval] Windows.UI.Shell.IAdaptiveCard** result);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.UI.Shell.FocusSession)]
+            [uuid(069FBAB8-0E84-5F2F-8614-9B6544326277)]
+            interface IFocusSession : IInspectable
+            {
+                [propget] HRESULT Id([out] [retval] HSTRING* value);
+                HRESULT End();
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.UI.Shell.FocusSessionManager)]
+            [uuid(E7FFBAA9-D8BE-5DBF-BAC6-49364842E37E)]
+            interface IFocusSessionManager : IInspectable
+            {
+                [propget] HRESULT IsFocusActive([out] [retval] boolean* value);
+                HRESULT GetSession([in] HSTRING id, [out] [retval] Windows.UI.Shell.FocusSession** result);
+                [overload("TryStartFocusSession")] HRESULT TryStartFocusSession([out] [retval] Windows.UI.Shell.FocusSession** result);
+                [overload("TryStartFocusSession")] HRESULT TryStartFocusSession2([in] Windows.Foundation.DateTime endTime, [out] [retval] Windows.UI.Shell.FocusSession** result);
+                HRESULT DeactivateFocus();
+                [eventadd] HRESULT IsFocusActiveChanged([in] Windows.Foundation.TypedEventHandler<Windows.UI.Shell.FocusSessionManager*, IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT IsFocusActiveChanged([in] EventRegistrationToken token);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.UI.Shell.FocusSessionManager)]
+            [uuid(834DF764-CB9A-5D0A-AA9F-73DF4F249395)]
+            interface IFocusSessionManagerStatics : IInspectable
+            {
+                HRESULT GetDefault([out] [retval] Windows.UI.Shell.FocusSessionManager** result);
+                [propget] HRESULT IsSupported([out] [retval] boolean* value);
             }
 
             [contract(Windows.UI.Shell.SecurityAppManagerContract, 1.0)]
@@ -250,6 +296,22 @@ namespace Windows
             [threading(both)]
             runtimeclass AdaptiveCardBuilder
             {
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass FocusSession
+            {
+                [default] interface Windows.UI.Shell.IFocusSession;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [marshaling_behavior(agile)]
+            [static(Windows.UI.Shell.IFocusSessionManagerStatics, Windows.Foundation.UniversalApiContract, 15.0)]
+            [threading(both)]
+            runtimeclass FocusSessionManager
+            {
+                [default] interface Windows.UI.Shell.IFocusSessionManager;
             }
 
             [activatable(Windows.UI.Shell.SecurityAppManagerContract, 1.0)]

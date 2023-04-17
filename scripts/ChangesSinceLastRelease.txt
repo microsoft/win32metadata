@@ -1,95 +1,428 @@
-# Fixed #1391.
-Windows.Win32.Graphics.Direct3D.Dxc.IDxcCompiler3.Compile : ppResult : [Out] => [ComOutPtr,Out]
-Windows.Win32.Graphics.Direct3D.Dxc.IDxcCompiler3.Disassemble : ppResult : [Out] => [ComOutPtr,Out]
-# Fixed #1407.
-Windows.Win32.Networking.WinSock.Apis.NLA_SERVICE_CLASS_GUID added
-Windows.Win32.Networking.WinSock.Apis.WSAID_ACCEPTEX added
-Windows.Win32.Networking.WinSock.Apis.WSAID_CONNECTEX added
-Windows.Win32.Networking.WinSock.Apis.WSAID_DISCONNECTEX added
-Windows.Win32.Networking.WinSock.Apis.WSAID_GETACCEPTEXSOCKADDRS added
-Windows.Win32.Networking.WinSock.Apis.WSAID_TRANSMITFILE added
-Windows.Win32.Networking.WinSock.Apis.WSAID_TRANSMITPACKETS added
-Windows.Win32.Networking.WinSock.Apis.WSAID_WSAPOLL added
-Windows.Win32.Networking.WinSock.Apis.WSAID_WSARECVMSG added
-Windows.Win32.System.Search.Apis.DB_NULLGUID added
-Windows.Win32.System.Search.Apis.DBCIDGUID added
-Windows.Win32.System.Search.Apis.DBGUID_ROWDEFAULTSTREAM added
-Windows.Win32.System.Search.Apis.DBGUID_ROWURL added
-Windows.Win32.System.Search.Apis.DBSELFGUID added
-# Added WTS_SECURITY_FLAGS for #1403.
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_CONNECT removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_DISCONNECT removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_GUEST_ACCESS removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_LOGOFF removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_LOGON removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_MESSAGE removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_QUERY_INFORMATION removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_REMOTE_CONTROL removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_RESET removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_SET_INFORMATION removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_VIRTUAL_CHANNELS removed
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_ALL_ACCESS added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_CONNECT added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_CURRENT_GUEST_ACCESS added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_CURRENT_USER_ACCESS added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_DISCONNECT added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_GUEST_ACCESS added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_LOGOFF added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_LOGON added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_MESSAGE added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_QUERY_INFORMATION added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_REMOTE_CONTROL added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_RESET added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_SET_INFORMATION added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_USER_ACCESS added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_VIRTUAL_CHANNELS added
-# Fixed #1410.
-winmd1: Windows.Win32.Security.TOKEN_ACCESS_MASK.TOKEN_ALL_ACCESS = 983295, winmd2 = 983551
-# Added CONTEXT_* flags
-Windows.Win32.System.Diagnostics.Debug.Apis.CopyContext : ContextFlags...UInt32 => CONTEXT_FLAGS
-Windows.Win32.System.Diagnostics.Debug.Apis.InitializeContext : ContextFlags...UInt32 => CONTEXT_FLAGS
-Windows.Win32.System.Diagnostics.Debug.Apis.InitializeContext2 : ContextFlags...UInt32 => CONTEXT_FLAGS
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ALL added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_AMD64 added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ARM added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ARM64 added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ARM64_ALL added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ARM64_CONTROL added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ARM64_DEBUG_REGISTERS added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ARM64_FLOATING_POINT added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ARM64_FULL added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ARM64_INTEGER added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ARM64_RET_TO_GUEST added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ARM64_UNWOUND_TO_CALL added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ARM64_X18 added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_CONTROL added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_DEBUG_REGISTERS added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_EXCEPTION_ACTIVE added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_EXCEPTION_REPORTING added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_EXCEPTION_REQUEST added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_FLOATING_POINT added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_FULL added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_INTEGER added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_KERNEL_CET added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_KERNEL_DEBUGGER added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_SEGMENTS added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_SERVICE_ACTIVE added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_UNWOUND_TO_CALL added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_XSTATE added
-Windows.Win32.System.Diagnostics.Debug.CONTEXT.ContextFlags(Arm64)...System.UInt32 => Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS
-Windows.Win32.System.Diagnostics.Debug.CONTEXT.ContextFlags(X64)...System.UInt32 => Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS
-Windows.Win32.System.Diagnostics.Debug.CONTEXT.ContextFlags(X86)...System.UInt32 => Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS
-Windows.Win32.System.SystemServices.Apis.CONTEXT_AMD64 removed
-Windows.Win32.System.SystemServices.Apis.CONTEXT_ARM removed
-Windows.Win32.System.SystemServices.Apis.CONTEXT_ARM64 removed
-Windows.Win32.System.SystemServices.Apis.CONTEXT_ARM64_RET_TO_GUEST removed
-Windows.Win32.System.SystemServices.Apis.CONTEXT_ARM64_UNWOUND_TO_CALL removed
-Windows.Win32.System.SystemServices.Apis.CONTEXT_EXCEPTION_ACTIVE removed
-Windows.Win32.System.SystemServices.Apis.CONTEXT_EXCEPTION_REPORTING removed
-Windows.Win32.System.SystemServices.Apis.CONTEXT_EXCEPTION_REQUEST removed
-Windows.Win32.System.SystemServices.Apis.CONTEXT_KERNEL_DEBUGGER removed
-Windows.Win32.System.SystemServices.Apis.CONTEXT_RET_TO_GUEST removed
-Windows.Win32.System.SystemServices.Apis.CONTEXT_SERVICE_ACTIVE removed
-Windows.Win32.System.SystemServices.Apis.CONTEXT_UNWOUND_TO_CALL removed
+# Fixed #1484.
+Windows.Win32.Devices.BiometricFramework.PIBIO_ENGINE_EXPORT_ENGINE_DATA_FN.Invoke : SampleBuffer : [MemorySize(BytesParamIndex=3),Out] => [Out]
+Windows.Win32.Devices.BiometricFramework.PIBIO_ENGINE_GET_ENROLLMENT_HASH_FN.Invoke : HashValue : [MemorySize(BytesParamIndex=2),Out] => [Out]
+Windows.Win32.Devices.BiometricFramework.PIBIO_ENGINE_IDENTIFY_FEATURE_SET_FN.Invoke : HashValue : [MemorySize(BytesParamIndex=6),Out] => [Out]
+Windows.Win32.Devices.BiometricFramework.PIBIO_ENGINE_IDENTIFY_FEATURE_SET_FN.Invoke : PayloadBlob : [MemorySize(BytesParamIndex=4),Out] => [Out]
+Windows.Win32.Devices.BiometricFramework.PIBIO_ENGINE_QUERY_HASH_ALGORITHMS_FN.Invoke : AlgorithmBuffer : [MemorySize(BytesParamIndex=2),NullNullTerminated,Out] => [NullNullTerminated,Out]
+Windows.Win32.Devices.BiometricFramework.PIBIO_ENGINE_VERIFY_FEATURE_SET_FN.Invoke : HashValue : [MemorySize(BytesParamIndex=7),Out] => [Out]
+Windows.Win32.Devices.BiometricFramework.PIBIO_ENGINE_VERIFY_FEATURE_SET_FN.Invoke : PayloadBlob : [MemorySize(BytesParamIndex=5),Out] => [Out]
+Windows.Win32.Devices.ImageAcquisition.IWiaItemExtras.Escape : pOutData : [Out] => [NativeArrayInfo(CountParamIndex=4),Out]
+Windows.Win32.Devices.Sensors.ISensor.GetEventInterest : ppValues : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Media.DeviceManager.IComponentAuthenticate.SACAuth : ppbDataOut : [NativeArrayInfo(CountParamIndex=5),Out] => [Out]
+Windows.Win32.Media.DeviceManager.IComponentAuthenticate.SACGetProtocols : ppdwProtocols : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Media.DeviceManager.IMDServiceProvider2.CreateDevice : pppDeviceArray : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Media.DeviceManager.IMDSPDevice.GetFormatSupport : pFormatEx : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Media.DeviceManager.IMDSPDevice.GetFormatSupport : pppwszMimeType : [NativeArrayInfo(CountParamIndex=3),Out] => [Out]
+Windows.Win32.Media.DeviceManager.IMDSPDevice2.GetFormatSupport2 : ppAudioFormatEx : [NativeArrayInfo(CountParamIndex=2),Out] => [Out]
+Windows.Win32.Media.DeviceManager.IMDSPDevice2.GetFormatSupport2 : ppFileType : [NativeArrayInfo(CountParamIndex=6),Out] => [Out]
+Windows.Win32.Media.DeviceManager.IMDSPDevice2.GetFormatSupport2 : ppVideoFormatEx : [NativeArrayInfo(CountParamIndex=4),Out] => [Out]
+Windows.Win32.Media.DeviceManager.IMDSPDevice2.GetSpecifyPropertyPages : pppUnknowns : [NativeArrayInfo(CountParamIndex=2),Out] => [Out]
+Windows.Win32.Media.DeviceManager.IMDSPEnumDevice.Next : ppDevice : [NativeArrayInfo(CountParamIndex=2),Out] => [NativeArrayInfo(CountParamIndex=0),Out]
+Windows.Win32.Media.DeviceManager.IMDSPEnumStorage.Next : ppStorage : [NativeArrayInfo(CountParamIndex=2),Out] => [NativeArrayInfo(CountParamIndex=0),Out]
+Windows.Win32.Media.DeviceManager.IMDSPStorage.GetRights : ppRights : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Media.DeviceManager.IMDSPStorage4.GetReferences : pppISPStorage : [NativeArrayInfo(CountParamIndex=0),Out] => [Out]
+Windows.Win32.Media.DeviceManager.ISCPSecureQuery.GetRights : ppRights : [NativeArrayInfo(CountParamIndex=6),Out] => [Out]
+Windows.Win32.Media.DeviceManager.ISCPSecureQuery3.GetRightsOnClearChannel : ppRights : [NativeArrayInfo(CountParamIndex=7),Out] => [Out]
+Windows.Win32.Media.DeviceManager.IWMDMDevice.GetFormatSupport : ppFormatEx : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Media.DeviceManager.IWMDMDevice.GetFormatSupport : pppwszMimeType : [NativeArrayInfo(CountParamIndex=3),Out] => [Out]
+Windows.Win32.Media.DeviceManager.IWMDMDevice2.GetFormatSupport2 : ppAudioFormatEx : [NativeArrayInfo(CountParamIndex=2),Out] => [Out]
+Windows.Win32.Media.DeviceManager.IWMDMDevice2.GetFormatSupport2 : ppFileType : [NativeArrayInfo(CountParamIndex=6),Out] => [Out]
+Windows.Win32.Media.DeviceManager.IWMDMDevice2.GetFormatSupport2 : ppVideoFormatEx : [NativeArrayInfo(CountParamIndex=4),Out] => [Out]
+Windows.Win32.Media.DeviceManager.IWMDMDevice2.GetSpecifyPropertyPages : pppUnknowns : [NativeArrayInfo(CountParamIndex=2),Out] => [Out]
+Windows.Win32.Media.DeviceManager.IWMDMEnumDevice.Next : ppDevice : [NativeArrayInfo(CountParamIndex=2),Out] => [NativeArrayInfo(CountParamIndex=0),Out]
+Windows.Win32.Media.DeviceManager.IWMDMEnumStorage.Next : ppStorage : [NativeArrayInfo(CountParamIndex=2),Out] => [NativeArrayInfo(CountParamIndex=0),Out]
+Windows.Win32.Media.DeviceManager.IWMDMMetaData.QueryByIndex : ppValue : [NativeArrayInfo(CountParamIndex=4),Out] => [Out]
+Windows.Win32.Media.DeviceManager.IWMDMMetaData.QueryByName : pValue : [NativeArrayInfo(CountParamIndex=3),Out] => [Out]
+Windows.Win32.Media.DeviceManager.IWMDMStorage.GetRights : ppRights : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Media.DeviceManager.IWMDMStorage4.GetReferences : pppIWMDMStorage : [NativeArrayInfo(CountParamIndex=0),Out] => [Out]
+Windows.Win32.Media.DeviceManager.IWMDMStorage4.GetRightsWithProgress : ppRights : [NativeArrayInfo(CountParamIndex=2),Out] => [Out]
+Windows.Win32.Media.DirectShow.IEncoderAPI.GetParameterValues : Values : [NativeArrayInfo(CountParamIndex=2),Out] => [Out]
+Windows.Win32.Media.DirectShow.IOverlay.GetPalette : ppPalette : [NativeArrayInfo(CountParamIndex=0),Out] => [Out]
+Windows.Win32.Media.MediaFoundation.Apis.MFSerializePresentationDescriptor : ppbData : [MemorySize(BytesParamIndex=1),Out] => [Out]
+Windows.Win32.Media.MediaFoundation.ICodecAPI.GetParameterValues : Values : [NativeArrayInfo(CountParamIndex=2),Out] => [Out]
+Windows.Win32.Media.MediaFoundation.ICodecAPI.SetAllDefaultsWithNotify : ChangedParam : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Media.MediaFoundation.ICodecAPI.SetAllSettingsWithNotify : ChangedParam : [NativeArrayInfo(CountParamIndex=2),Out] => [Out]
+Windows.Win32.Media.MediaFoundation.ICodecAPI.SetValueWithNotify : ChangedParam : [NativeArrayInfo(CountParamIndex=3),Out] => [Out]
+Windows.Win32.Media.MediaFoundation.IMFMediaBuffer.Lock : ppbBuffer : [MemorySize(BytesParamIndex=2),Out] => [Out]
+Windows.Win32.Media.MediaFoundation.IMFTopologyServiceLookup.LookupService : ppvObjects : [NativeArrayInfo(CountParamIndex=5),Out] => [Out]
+Windows.Win32.Media.MediaFoundation.IMFVideoProcessor.GetAvailableVideoProcessorModes : ppVideoProcessingModes : [NativeArrayInfo(CountParamIndex=0),Out] => [Out]
+Windows.Win32.Media.MediaFoundation.IValidateBinding.GetIdentifier : ppbBlobValidationID : [NativeArrayInfo(CountParamIndex=4),Out] => [Out]
+Windows.Win32.Media.MediaPlayer.IWMPContentPartner.GetCommands : pprgItems : [NativeArrayInfo(CountParamIndex=5),Out] => [Out]
+Windows.Win32.Media.MediaPlayer.IWMPContentPartnerCallback.GetContentIDsInLibrary : pprgIDs : [NativeArrayInfo(CountParamIndex=0),Out] => [Out]
+Windows.Win32.Networking.BackgroundIntelligentTransferService.IEnumBackgroundCopyFiles.Next : rgelt : [Out] => [NativeArrayInfo(CountParamIndex=0),Out]
+Windows.Win32.Networking.BackgroundIntelligentTransferService.IEnumBackgroundCopyJobs.Next : rgelt : [Out] => [NativeArrayInfo(CountParamIndex=0),Out]
+Windows.Win32.Networking.BackgroundIntelligentTransferService.IEnumBitsPeerCacheRecords.Next : rgelt : [Out] => [NativeArrayInfo(CountParamIndex=0),Out]
+Windows.Win32.Networking.BackgroundIntelligentTransferService.IEnumBitsPeers.Next : rgelt : [Out] => [NativeArrayInfo(CountParamIndex=0),Out]
+Windows.Win32.Networking.Clustering.Apis.ResUtilFindBinaryProperty : pbPropertyValue : [MemorySize(BytesParamIndex=4),Optional,Out] => [Optional,Out]
+Windows.Win32.Networking.Clustering.Apis.ResUtilFindMultiSzProperty : pszPropertyValue : [MemorySize(BytesParamIndex=4),Out] => [Out]
+Windows.Win32.Networking.Clustering.Apis.ResUtilGetBinaryValue : ppbOutValue : [MemorySize(BytesParamIndex=3),Out] => [Out]
+Windows.Win32.Networking.Clustering.Apis.ResUtilSetMultiSzValue : ppszOutValue : [MemorySize(BytesParamIndex=5),Optional,Out] => [Optional,Out]
+Windows.Win32.Networking.Clustering.PRESUTIL_FIND_BINARY_PROPERTY.Invoke : pbPropertyValue : [MemorySize(BytesParamIndex=4),Optional,Out] => [Optional,Out]
+Windows.Win32.Networking.Clustering.PRESUTIL_FIND_MULTI_SZ_PROPERTY.Invoke : pszPropertyValue : [MemorySize(BytesParamIndex=4),Out] => [Out]
+Windows.Win32.Networking.Clustering.PRESUTIL_GET_BINARY_VALUE.Invoke : ppbOutValue : [MemorySize(BytesParamIndex=3),Out] => [Out]
+Windows.Win32.Networking.Clustering.PRESUTIL_SET_MULTI_SZ_VALUE.Invoke : ppszOutValue : [MemorySize(BytesParamIndex=5),Optional,Out] => [Optional,Out]
+Windows.Win32.Networking.WinInet.Apis.GetUrlCacheEntryBinaryBlob : ppbBlob : [NativeArrayInfo(CountParamIndex=6),Out] => [Out]
+Windows.Win32.NetworkManagement.NetManagement.INetCfgComponentUpperEdge.GetInterfaceIdsForAdapter : ppguidInterfaceIds : [NativeArrayInfo(CountParamIndex=1),Optional,Out] => [Optional,Out]
+Windows.Win32.NetworkManagement.WindowsConnectNow.IWCNDevice.GetAttribute : pbBuffer : [NativeArrayInfo(CountParamIndex=3),Out] => [NativeArrayInfo(CountParamIndex=1),Out]
+Windows.Win32.NetworkManagement.WindowsConnectNow.IWCNDevice.GetVendorExtension : pbBuffer : [NativeArrayInfo(CountParamIndex=3),Out] => [NativeArrayInfo(CountParamIndex=1),Out]
+Windows.Win32.Security.Apis.LogonUserExA : ppProfileBuffer : [MemorySize(BytesParamIndex=8),Optional,Out] => [Optional,Out]
+Windows.Win32.Security.Apis.LogonUserExW : ppProfileBuffer : [MemorySize(BytesParamIndex=8),Optional,Out] => [Optional,Out]
+Windows.Win32.Security.Credentials.Apis.CredUIPromptForWindowsCredentialsA : ppvOutAuthBuffer : [MemorySize(BytesParamIndex=6),Out] => [Out]
+Windows.Win32.Security.Credentials.Apis.CredUIPromptForWindowsCredentialsW : ppvOutAuthBuffer : [MemorySize(BytesParamIndex=6),Out] => [Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptEnumContextFunctionProviders : ppBuffer : [MemorySize(BytesParamIndex=4),Optional,Out] => [Optional,Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptEnumContextFunctions : ppBuffer : [MemorySize(BytesParamIndex=3),Optional,Out] => [Optional,Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptEnumContexts : ppBuffer : [MemorySize(BytesParamIndex=1),Optional,Out] => [Optional,Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptEnumRegisteredProviders : ppBuffer : [MemorySize(BytesParamIndex=0),Optional,Out] => [Optional,Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptQueryContextConfiguration : ppBuffer : [MemorySize(BytesParamIndex=2),Optional,Out] => [Optional,Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptQueryContextFunctionConfiguration : ppBuffer : [MemorySize(BytesParamIndex=4),Optional,Out] => [Optional,Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptQueryProviderRegistration : ppBuffer : [MemorySize(BytesParamIndex=3),Optional,Out] => [Optional,Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptResolveProviders : ppBuffer : [MemorySize(BytesParamIndex=6),Optional,Out] => [Optional,Out]
+Windows.Win32.Security.DiagnosticDataQuery.Apis.DdqGetDiagnosticRecordBinaryDistribution : binaryStats : [NativeArrayInfo(CountParamIndex=5),Out] => [Out]
+Windows.Win32.Security.DiagnosticDataQuery.Apis.DdqGetDiagnosticRecordTagDistribution : tagStats : [NativeArrayInfo(CountParamIndex=4),Out] => [Out]
+Windows.Win32.Storage.Imapi.IDiscRecorder2Ex.GetAdapterDescriptor : data : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Storage.Imapi.IDiscRecorder2Ex.GetDeviceDescriptor : data : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Storage.Imapi.IDiscRecorder2Ex.GetDiscInformation : discInformation : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Storage.Imapi.IDiscRecorder2Ex.GetFeaturePage : featureData : [NativeArrayInfo(CountParamIndex=3),Out] => [Out]
+Windows.Win32.Storage.Imapi.IDiscRecorder2Ex.GetModePage : modePageData : [NativeArrayInfo(CountParamIndex=3),Out] => [Out]
+Windows.Win32.Storage.Imapi.IDiscRecorder2Ex.GetSupportedFeaturePages : featureData : [NativeArrayInfo(CountParamIndex=2),Out] => [Out]
+Windows.Win32.Storage.Imapi.IDiscRecorder2Ex.GetSupportedModePages : modePageTypes : [NativeArrayInfo(CountParamIndex=2),Out] => [Out]
+Windows.Win32.Storage.Imapi.IDiscRecorder2Ex.GetSupportedProfiles : profileTypes : [NativeArrayInfo(CountParamIndex=2),Out] => [Out]
+Windows.Win32.Storage.Imapi.IDiscRecorder2Ex.GetTrackInformation : trackInformation : [NativeArrayInfo(CountParamIndex=3),Out] => [Out]
+Windows.Win32.Storage.Imapi.IDiscRecorder2Ex.ReadDvdStructure : data : [NativeArrayInfo(CountParamIndex=5),Out] => [Out]
+Windows.Win32.Storage.Imapi.IDiscRecorder2Ex.SendCommandGetDataFromDevice : Buffer : [NativeArrayInfo(CountParamIndex=6),Out] => [NativeArrayInfo(CountParamIndex=5),Out]
+Windows.Win32.Storage.Imapi.IEnumDiscMasterFormats.Next : lpiidFormatID : [NativeArrayInfo(CountParamIndex=2),Out] => [NativeArrayInfo(CountParamIndex=0),Out]
+Windows.Win32.Storage.Imapi.IEnumDiscRecorders.Next : ppRecorder : [NativeArrayInfo(CountParamIndex=2),Out] => [NativeArrayInfo(CountParamIndex=0),Out]
+Windows.Win32.Storage.OfflineFiles.IEnumOfflineFilesItems.Next : rgelt : [NativeArrayInfo(CountParamIndex=2),Out] => [NativeArrayInfo(CountParamIndex=0),Out]
+Windows.Win32.Storage.OfflineFiles.IEnumOfflineFilesSettings.Next : rgelt : [NativeArrayInfo(CountParamIndex=2),Out] => [NativeArrayInfo(CountParamIndex=0),Out]
+Windows.Win32.Storage.OfflineFiles.IOfflineFilesEventsFilter.GetExcludedEvents : prgEvents : [NativeArrayInfo(CountParamIndex=2),Out] => [NativeArrayInfo(CountParamIndex=0),Out]
+Windows.Win32.Storage.OfflineFiles.IOfflineFilesEventsFilter.GetIncludedEvents : prgEvents : [NativeArrayInfo(CountParamIndex=2),Out] => [NativeArrayInfo(CountParamIndex=0),Out]
+Windows.Win32.Storage.Packaging.Opc.IOpcDigitalSignature.GetNamespaces : namespaces : [NativeArrayInfo(CountParamIndex=2),Out] => [Out]
+Windows.Win32.Storage.Packaging.Opc.IOpcDigitalSignature.GetNamespaces : prefixes : [NativeArrayInfo(CountParamIndex=2),Out] => [Out]
+Windows.Win32.Storage.Packaging.Opc.IOpcDigitalSignature.GetSignatureValue : signatureValue : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Storage.Packaging.Opc.IOpcSignatureCustomObject.GetXml : xmlMarkup : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Storage.Packaging.Opc.IOpcSignaturePartReference.GetDigestValue : digestValue : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Storage.Packaging.Opc.IOpcSignatureReference.GetDigestValue : digestValue : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Storage.Packaging.Opc.IOpcSignatureRelationshipReference.GetDigestValue : digestValue : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Storage.VirtualDiskService.IEnumVdsObject.Next : ppObjectArray : [NativeArrayInfo(CountParamIndex=2),Out] => [NativeArrayInfo(CountParamIndex=0),Out]
+Windows.Win32.Storage.VirtualDiskService.IVdsAdvancedDisk.QueryPartitions : ppPartitionPropArray : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Storage.VirtualDiskService.IVdsDisk.QueryExtents : ppExtentArray : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Storage.VirtualDiskService.IVdsDisk3.QueryFreeExtents : ppFreeExtentArray : [NativeArrayInfo(CountParamIndex=2),Out] => [Out]
+Windows.Win32.Storage.VirtualDiskService.IVdsDrive.QueryExtents : ppExtentArray : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Storage.VirtualDiskService.IVdsIscsiTarget.GetConnectedInitiators : pppwszInitiatorList : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Storage.VirtualDiskService.IVdsLunMpio.GetLoadBalancePolicy : ppPaths : [NativeArrayInfo(CountParamIndex=2),Out] => [Out]
+Windows.Win32.Storage.VirtualDiskService.IVdsLunMpio.GetPathInfo : ppPaths : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Storage.VirtualDiskService.IVdsLunPlex.QueryExtents : ppExtentArray : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Storage.VirtualDiskService.IVdsStoragePool.QueryDriveExtents : ppExtentArray : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.Storage.VirtualDiskService.IVdsVolumePlex.QueryExtents : ppExtentArray : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.IPMDeploymentManager.GetLicenseChallenge : ppbChallenge : [NativeArrayInfo(CountParamIndex=2),Out] => [Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.IPMDeploymentManager.GetLicenseChallengeByProductID : ppbChallenge : [NativeArrayInfo(CountParamIndex=2),Out] => [Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.IPMDeploymentManager.GetLicenseChallengeByProductID2 : ppbChallenge : [NativeArrayInfo(CountParamIndex=2),Out] => [Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.IPMEnumerationManager.get_StartAppEnumeratorBlob : ppAppBlobs : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.IPMEnumerationManager.get_StartTileEnumeratorBlob : ppTileBlobs : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.IPMExtensionFileExtensionInfo.get_AllFileTypes : ppTypes : [NativeArrayInfo(CountParamIndex=0),Out] => [Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.IPMExtensionFileOpenPickerInfo.get_AllFileTypes : ppTypes : [NativeArrayInfo(CountParamIndex=0),Out] => [Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.IPMExtensionFileSavePickerInfo.get_AllFileTypes : ppTypes : [NativeArrayInfo(CountParamIndex=0),Out] => [Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.IPMExtensionShareTargetInfo.get_AllDataFormats : ppDataFormats : [NativeArrayInfo(CountParamIndex=0),Out] => [Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.IPMExtensionShareTargetInfo.get_AllFileTypes : ppTypes : [NativeArrayInfo(CountParamIndex=0),Out] => [Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.IPMLiveTileJobInfo.get_TileXML : pTileXml : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.IPMLiveTileJobInfo.get_UrlXML : pUrlXML : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.System.Com.AsyncIPipeByte.Finish_Pull : buf : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.System.Com.AsyncIPipeDouble.Finish_Pull : buf : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.System.Com.AsyncIPipeLong.Finish_Pull : buf : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.System.Com.ITypeInfo.GetNames : rgBstrNames : [NativeArrayInfo(CountParamIndex=3),Out] => [NativeArrayInfo(CountParamIndex=2),Out]
+Windows.Win32.System.Com.Urlmon.IInternetHostSecurityManager.QueryCustomPolicy : ppPolicy : [NativeArrayInfo(CountParamIndex=2),Out] => [Out]
+Windows.Win32.System.Com.Urlmon.IWinInetCacheHints2.SetCacheExtension2 : pwzCacheFile : [Out] => [NativeArrayInfo(CountParamIndex=2),Out]
+Windows.Win32.System.ComponentServices.IGetAppTrackerData.GetApplicationProcesses : ApplicationProcesses : [NativeArrayInfo(CountParamIndex=3),Out] => [Out]
+Windows.Win32.System.ComponentServices.IGetAppTrackerData.GetApplicationsInProcess : Applications : [NativeArrayInfo(CountParamIndex=4),Out] => [Out]
+Windows.Win32.System.ComponentServices.IGetAppTrackerData.GetComponentsInProcess : Components : [NativeArrayInfo(CountParamIndex=5),Out] => [Out]
+Windows.Win32.System.Diagnostics.Debug.ActiveScript.IDebugDocumentText.GetText : pstaTextAttr : [In,NativeArrayInfo(CountParamIndex=3),Optional,Out] => [In,NativeArrayInfo(CountParamIndex=4),Optional,Out]
+Windows.Win32.System.RemoteDesktop.ITsSbResourcePluginStore.EnumerateSessions : ppVal : [NativeArrayInfo(CountParamIndex=6),Out] => [Out]
+Windows.Win32.System.RemoteDesktop.ITsSbResourcePluginStore.EnumerateTargets : pVal : [NativeArrayInfo(CountParamIndex=4),Out] => [Out]
+Windows.Win32.System.Search.IUrlAccessor.GetDocFormat : wszDocFormat : [NativeArrayInfo(CountParamIndex=2),Out] => [NativeArrayInfo(CountParamIndex=1),Out]
+Windows.Win32.System.Search.IUrlAccessor.GetFileName : wszFileName : [NativeArrayInfo(CountParamIndex=2),Out] => [NativeArrayInfo(CountParamIndex=1),Out]
+Windows.Win32.System.Search.IUrlAccessor.GetHost : wszHost : [NativeArrayInfo(CountParamIndex=2),Out] => [NativeArrayInfo(CountParamIndex=1),Out]
+Windows.Win32.System.Search.IUrlAccessor.GetRedirectedURL : wszRedirectedURL : [NativeArrayInfo(CountParamIndex=2),Out] => [NativeArrayInfo(CountParamIndex=1),Out]
+Windows.Win32.System.Search.IUrlAccessor2.GetCodePage : wszCodePage : [NativeArrayInfo(CountParamIndex=2),Out] => [NativeArrayInfo(CountParamIndex=1),Out]
+Windows.Win32.System.Search.IUrlAccessor2.GetDisplayUrl : wszDocUrl : [NativeArrayInfo(CountParamIndex=2),Out] => [NativeArrayInfo(CountParamIndex=1),Out]
+Windows.Win32.System.SideShow.ISideShowContent.GetContent : out_ppbData : [NativeArrayInfo(CountParamIndex=1),Out] => [Out]
+Windows.Win32.System.WindowsSync.IEnumSyncProviderConfigUIInfos.Next : ppSyncProviderConfigUIInfo : [NativeArrayInfo(CountParamIndex=2),Out] => [NativeArrayInfo(CountParamIndex=0),Out]
+Windows.Win32.System.WindowsSync.IEnumSyncProviderInfos.Next : ppSyncProviderInfo : [NativeArrayInfo(CountParamIndex=2),Out] => [NativeArrayInfo(CountParamIndex=0),Out]
+Windows.Win32.System.WinRT.IInspectable.GetIids : iids : [NativeArrayInfo(CountParamIndex=0),Out] => [Out]
+Windows.Win32.UI.Shell.IEnumTravelLogEntry.Next : rgElt : [NativeArrayInfo(CountParamIndex=2),Out] => [NativeArrayInfo(CountParamIndex=0),Out]
+Windows.Win32.UI.TabletPC.IRealTimeStylus.GetAllTabletContextIds : ppTcids : [NativeArrayInfo(CountParamIndex=0),Out] => [Out]
+Windows.Win32.UI.TabletPC.IRealTimeStylus.GetDesiredPacketDescription : ppPropertyGuids : [NativeArrayInfo(CountParamIndex=0),Out] => [Out]
+Windows.Win32.UI.TabletPC.IRealTimeStylus.GetPacketDescriptionData : ppPacketProperties : [NativeArrayInfo(CountParamIndex=3),Out] => [Out]
+# Fixed #1534.
+Windows.Win32.Storage.FileSystem.Apis.ReadFile : lpBuffer...Void* => Byte*
+Windows.Win32.Storage.FileSystem.Apis.ReadFileEx : lpBuffer...Void* => Byte*
+# Fixed #1535.
+Windows.Win32.Graphics.Dxgi.Apis.DXGIDisableVBlankVirtualization added
+Windows.Win32.Management.MobileDeviceManagementRegistration.Apis.RegisterDeviceDualEnrollMmpcUsingAADDeviceCredentials added
+Windows.Win32.Media.MediaFoundation.Apis.MFCreateCameraControlMonitor added
+Windows.Win32.Networking.Clustering.Apis.AddClusterGroupDependencyEx added
+Windows.Win32.Networking.Clustering.Apis.AddClusterGroupSetDependencyEx added
+Windows.Win32.Networking.Clustering.Apis.AddClusterGroupToGroupSetDependencyEx added
+Windows.Win32.Networking.Clustering.Apis.AddClusterResourceDependencyEx added
+Windows.Win32.Networking.Clustering.Apis.AddClusterResourceNodeEx added
+Windows.Win32.Networking.Clustering.Apis.ChangeClusterResourceGroupEx2 added
+Windows.Win32.Networking.Clustering.Apis.ClusapiSetReasonHandler added
+Windows.Win32.Networking.Clustering.Apis.ClusterAddGroupToGroupSetWithDomainsEx added
+Windows.Win32.Networking.Clustering.Apis.ClusterControlEx added
+Windows.Win32.Networking.Clustering.Apis.ClusterGroupControlEx added
+Windows.Win32.Networking.Clustering.Apis.ClusterGroupSetControlEx added
+Windows.Win32.Networking.Clustering.Apis.ClusterNetInterfaceControlEx added
+Windows.Win32.Networking.Clustering.Apis.ClusterNetworkControlEx added
+Windows.Win32.Networking.Clustering.Apis.ClusterNodeControlEx added
+Windows.Win32.Networking.Clustering.Apis.ClusterRegCreateKeyEx added
+Windows.Win32.Networking.Clustering.Apis.ClusterRegDeleteKeyEx added
+Windows.Win32.Networking.Clustering.Apis.ClusterRegDeleteValueEx added
+Windows.Win32.Networking.Clustering.Apis.ClusterRegSetKeySecurityEx added
+Windows.Win32.Networking.Clustering.Apis.ClusterRegSetValueEx added
+Windows.Win32.Networking.Clustering.Apis.ClusterRemoveGroupFromGroupSetEx added
+Windows.Win32.Networking.Clustering.Apis.ClusterResourceControlAsUserEx added
+Windows.Win32.Networking.Clustering.Apis.ClusterResourceControlEx added
+Windows.Win32.Networking.Clustering.Apis.ClusterResourceTypeControlAsUserEx added
+Windows.Win32.Networking.Clustering.Apis.ClusterResourceTypeControlEx added
+Windows.Win32.Networking.Clustering.Apis.CreateClusterResourceEx added
+Windows.Win32.Networking.Clustering.Apis.CreateClusterResourceTypeEx added
+Windows.Win32.Networking.Clustering.Apis.DeleteClusterGroupEx added
+Windows.Win32.Networking.Clustering.Apis.DeleteClusterGroupSetEx added
+Windows.Win32.Networking.Clustering.Apis.DeleteClusterResourceEx added
+Windows.Win32.Networking.Clustering.Apis.DeleteClusterResourceTypeEx added
+Windows.Win32.Networking.Clustering.Apis.DestroyClusterGroupEx added
+Windows.Win32.Networking.Clustering.Apis.EvictClusterNodeEx2 added
+Windows.Win32.Networking.Clustering.Apis.FailClusterResourceEx added
+Windows.Win32.Networking.Clustering.Apis.MoveClusterGroupEx2 added
+Windows.Win32.Networking.Clustering.Apis.OfflineClusterGroupEx2 added
+Windows.Win32.Networking.Clustering.Apis.OfflineClusterResourceEx2 added
+Windows.Win32.Networking.Clustering.Apis.OnlineClusterGroupEx2 added
+Windows.Win32.Networking.Clustering.Apis.OnlineClusterResourceEx2 added
+Windows.Win32.Networking.Clustering.Apis.PauseClusterNodeEx2 added
+Windows.Win32.Networking.Clustering.Apis.RemoveClusterGroupDependencyEx added
+Windows.Win32.Networking.Clustering.Apis.RemoveClusterGroupSetDependencyEx added
+Windows.Win32.Networking.Clustering.Apis.RemoveClusterGroupToGroupSetDependencyEx added
+Windows.Win32.Networking.Clustering.Apis.RemoveClusterResourceDependencyEx added
+Windows.Win32.Networking.Clustering.Apis.RemoveClusterResourceNodeEx added
+Windows.Win32.Networking.Clustering.Apis.RestartClusterResourceEx added
+Windows.Win32.Networking.Clustering.Apis.ResumeClusterNodeEx2 added
+Windows.Win32.Networking.Clustering.Apis.SetClusterGroupNameEx added
+Windows.Win32.Networking.Clustering.Apis.SetClusterGroupNodeListEx added
+Windows.Win32.Networking.Clustering.Apis.SetClusterGroupSetDependencyExpressionEx added
+Windows.Win32.Networking.Clustering.Apis.SetClusterNameEx added
+Windows.Win32.Networking.Clustering.Apis.SetClusterNetworkNameEx added
+Windows.Win32.Networking.Clustering.Apis.SetClusterQuorumResourceEx added
+Windows.Win32.Networking.Clustering.Apis.SetClusterResourceNameEx added
+Windows.Win32.Networking.Clustering.Apis.SetGroupDependencyExpressionEx added
+Windows.Win32.Networking.WindowsWebServices.Apis.WebAuthNDeletePlatformCredential added
+Windows.Win32.Networking.WindowsWebServices.Apis.WebAuthNFreePlatformCredentialList added
+Windows.Win32.Networking.WindowsWebServices.Apis.WebAuthNGetPlatformCredentialList added
+Windows.Win32.Networking.WinHttp.Apis.WinHttpFreeProxySettingsEx added
+Windows.Win32.Networking.WinHttp.Apis.WinHttpGetProxySettingsEx added
+Windows.Win32.Networking.WinHttp.Apis.WinHttpGetProxySettingsResultEx added
+Windows.Win32.Networking.WinHttp.Apis.WinHttpRegisterProxyChangeNotification added
+Windows.Win32.Networking.WinHttp.Apis.WinHttpUnregisterProxyChangeNotification added
+Windows.Win32.NetworkManagement.Dns.Apis.DnsConnectionGetProxyInfoForHostUrlEx added
+Windows.Win32.NetworkManagement.IpHelper.Apis.CancelIfTimestampConfigChange added
+Windows.Win32.NetworkManagement.IpHelper.Apis.GetInterfaceCurrentTimestampCapabilities added
+Windows.Win32.NetworkManagement.IpHelper.Apis.GetInterfaceHardwareTimestampCapabilities added
+Windows.Win32.NetworkManagement.IpHelper.Apis.NotifyIfTimestampConfigChange added
+Windows.Win32.Security.Authentication.Identity.Apis.LsaQueryForestTrustInformation2 added
+Windows.Win32.Security.Authentication.Identity.Apis.LsaSetForestTrustInformation2 added
+Windows.Win32.Security.Authentication.Identity.Apis.SslDeserializeCertificateStore added
+Windows.Win32.Security.Isolation.Apis.IsCrossIsolatedEnvironmentClipboardContent added
+Windows.Win32.Storage.CloudFilters.Apis.CfGetPlaceholderRangeInfoForHydration added
+Windows.Win32.Storage.FileSystem.Apis.BuildIoRingFlushFile added
+Windows.Win32.Storage.FileSystem.Apis.BuildIoRingWriteFile added
+Windows.Win32.Storage.Packaging.Appx.Apis.GetPackageGraphRevisionId added
+Windows.Win32.System.Diagnostics.Debug.Apis.StackWalk2 added
+Windows.Win32.System.Diagnostics.Etw.Apis.OpenTraceFromBufferStream added
+Windows.Win32.System.Diagnostics.Etw.Apis.OpenTraceFromFile added
+Windows.Win32.System.Diagnostics.Etw.Apis.OpenTraceFromRealTimeLogger added
+Windows.Win32.System.Diagnostics.Etw.Apis.OpenTraceFromRealTimeLoggerWithAllocationOptions added
+Windows.Win32.System.Diagnostics.Etw.Apis.ProcessTraceAddBufferToBufferStream added
+Windows.Win32.System.Diagnostics.Etw.Apis.ProcessTraceBufferDecrementReference added
+Windows.Win32.System.Diagnostics.Etw.Apis.ProcessTraceBufferIncrementReference added
+Windows.Win32.System.HostComputeNetwork.Apis.HcnQueryEndpointAddresses added
+Windows.Win32.System.HostComputeNetwork.Apis.HcnQueryEndpointStats added
+Windows.Win32.System.HostComputeSystem.Apis.HcsAddResourceToOperation added
+Windows.Win32.System.HostComputeSystem.Apis.HcsCreateOperationWithNotifications added
+Windows.Win32.System.Hypervisor.Apis.HdvInitializeDeviceHostEx added
+Windows.Win32.System.TpmBaseServices.Apis.Tbsi_Is_Tpm_Present added
+Windows.Win32.System.WindowsProgramming.Apis.WldpCanExecuteBuffer added
+Windows.Win32.System.WindowsProgramming.Apis.WldpCanExecuteFile added
+Windows.Win32.System.WindowsProgramming.Apis.WldpCanExecuteStream added
+Windows.Win32.UI.WindowsAndMessaging.Apis.RegisterForTooltipDismissNotification added
+Windows.Win32.UI.WindowsAndMessaging.Apis.SetAdditionalForegroundBoostProcesses added
+# Fixed #1006.
+Windows.Win32.Graphics.Direct3D10.ID3D10Device.ClearRenderTargetView : ColorRGBA : [Const,In] => [Const,In,NativeArrayInfo(CountConst=4)]
+Windows.Win32.Graphics.Direct3D10.ID3D10Device.OMGetBlendState : BlendFactor : [Optional,Out] => [NativeArrayInfo(CountConst=4),Optional,Out]
+Windows.Win32.Graphics.Direct3D10.ID3D10Device.OMSetBlendState : BlendFactor : [Const,In] => [Const,In,NativeArrayInfo(CountConst=4)]
+Windows.Win32.Graphics.Direct3D11.ID3D11DeviceContext.ClearRenderTargetView : ColorRGBA : [Const,In] => [Const,In,NativeArrayInfo(CountConst=4)]
+Windows.Win32.Graphics.Direct3D11.ID3D11DeviceContext.ClearUnorderedAccessViewFloat : Values : [Const,In] => [Const,In,NativeArrayInfo(CountConst=4)]
+Windows.Win32.Graphics.Direct3D11.ID3D11DeviceContext.ClearUnorderedAccessViewUint : Values : [Const,In] => [Const,In,NativeArrayInfo(CountConst=4)]
+Windows.Win32.Graphics.Direct3D11.ID3D11DeviceContext.OMGetBlendState : BlendFactor : [Optional,Out] => [NativeArrayInfo(CountConst=4),Optional,Out]
+Windows.Win32.Graphics.Direct3D11.ID3D11DeviceContext.OMSetBlendState : BlendFactor : [Const,In,Optional] => [Const,In,NativeArrayInfo(CountConst=4),Optional]
+Windows.Win32.Graphics.Direct3D11.ID3D11DeviceContext1.ClearView : Color : [Const,In] => [Const,In,NativeArrayInfo(CountConst=4)]
+Windows.Win32.Graphics.Direct3D12.ID3D12GraphicsCommandList.ClearRenderTargetView : ColorRGBA : [Const,In] => [Const,In,NativeArrayInfo(CountConst=4)]
+Windows.Win32.Graphics.Direct3D12.ID3D12GraphicsCommandList.ClearUnorderedAccessViewFloat : Values : [Const,In] => [Const,In,NativeArrayInfo(CountConst=4)]
+Windows.Win32.Graphics.Direct3D12.ID3D12GraphicsCommandList.ClearUnorderedAccessViewUint : Values : [Const,In] => [Const,In,NativeArrayInfo(CountConst=4)]
+Windows.Win32.Media.DeviceManager.IMDSPDevice.GetSerialNumber : abMac : [In,Out] => [In,NativeArrayInfo(CountConst=8),Out]
+Windows.Win32.Media.DeviceManager.IMDSPObject.Read : abMac : [In,Out] => [In,NativeArrayInfo(CountConst=8),Out]
+Windows.Win32.Media.DeviceManager.IMDSPObject.Write : abMac : [In,Out] => [In,NativeArrayInfo(CountConst=8),Out]
+Windows.Win32.Media.DeviceManager.IMDSPStorage.GetRights : abMac : [In,Out] => [In,NativeArrayInfo(CountConst=8),Out]
+Windows.Win32.Media.DeviceManager.IMDSPStorageGlobals.GetSerialNumber : abMac : [In,Out] => [In,NativeArrayInfo(CountConst=8),Out]
+Windows.Win32.Media.DeviceManager.ISCPSecureExchange.ObjectData : abMac : [In,Out] => [In,NativeArrayInfo(CountConst=8),Out]
+Windows.Win32.Media.DeviceManager.ISCPSecureExchange.TransferContainerData : abMac : [In,Out] => [In,NativeArrayInfo(CountConst=8),Out]
+Windows.Win32.Media.DeviceManager.ISCPSecureExchange2.TransferContainerData2 : abMac : [In,Out] => [In,NativeArrayInfo(CountConst=8),Out]
+Windows.Win32.Media.DeviceManager.ISCPSecureQuery.ExamineData : abMac : [In,Out] => [In,NativeArrayInfo(CountConst=8),Out]
+Windows.Win32.Media.DeviceManager.ISCPSecureQuery.GetDataDemands : abMac : [In,Out] => [In,NativeArrayInfo(CountConst=8),Out]
+Windows.Win32.Media.DeviceManager.ISCPSecureQuery.GetRights : abMac : [In,Out] => [In,NativeArrayInfo(CountConst=8),Out]
+Windows.Win32.Media.DeviceManager.ISCPSecureQuery.MakeDecision : abMac : [In,Out] => [In,NativeArrayInfo(CountConst=8),Out]
+Windows.Win32.Media.DeviceManager.ISCPSecureQuery2.MakeDecision2 : abMac : [In,Out] => [In,NativeArrayInfo(CountConst=8),Out]
+Windows.Win32.Media.DeviceManager.IWMDMDevice.GetSerialNumber : abMac : [In,Out] => [In,NativeArrayInfo(CountConst=8),Out]
+Windows.Win32.Media.DeviceManager.IWMDMOperation.TransferObjectData : abMac : [In,Out] => [In,NativeArrayInfo(CountConst=8),Out]
+Windows.Win32.Media.DeviceManager.IWMDMStorage.GetRights : abMac : [In,Out] => [In,NativeArrayInfo(CountConst=8),Out]
+Windows.Win32.Media.DeviceManager.IWMDMStorageGlobals.GetSerialNumber : abMac : [In,Out] => [In,NativeArrayInfo(CountConst=8),Out]
+Windows.Win32.Media.DirectShow.IDvdInfo2.GetPlayerParentalLevel : pbCountryCode : [Out] => [NativeArrayInfo(CountConst=2),Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiEnumClientsExA : szProductBuf : [Optional,Out] => [NativeArrayInfo(CountConst=39),Optional,Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiEnumClientsExW : szProductBuf : [Optional,Out] => [NativeArrayInfo(CountConst=39),Optional,Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiEnumComponentsExA : szInstalledComponentCode : [Optional,Out] => [NativeArrayInfo(CountConst=39),Optional,Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiEnumComponentsExW : szInstalledComponentCode : [Optional,Out] => [NativeArrayInfo(CountConst=39),Optional,Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiEnumPatchesExA : szPatchCode : [Optional,Out] => [NativeArrayInfo(CountConst=39),Optional,Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiEnumPatchesExA : szTargetProductCode : [Optional,Out] => [NativeArrayInfo(CountConst=39),Optional,Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiEnumPatchesExW : szPatchCode : [Optional,Out] => [NativeArrayInfo(CountConst=39),Optional,Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiEnumPatchesExW : szTargetProductCode : [Optional,Out] => [NativeArrayInfo(CountConst=39),Optional,Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiEnumProductsExA : szInstalledProductCode : [Optional,Out] => [NativeArrayInfo(CountConst=39),Optional,Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiEnumProductsExW : szInstalledProductCode : [Optional,Out] => [NativeArrayInfo(CountConst=39),Optional,Out]
+Windows.Win32.System.Environment.Apis.EnclaveGetAttestationReport : EnclaveData : [Const,In,Optional] => [Const,In,NativeArrayInfo(CountConst=64),Optional]
+Windows.Win32.System.Environment.VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_REPORT.Invoke : EnclaveData : [Const,In,Optional] => [Const,In,NativeArrayInfo(CountConst=64),Optional]
+Windows.Win32.System.RemoteDesktop.ItsPubPlugin.ResolveResource : endPointName : [Out] => [NativeArrayInfo(CountConst=256),Out]
+Windows.Win32.System.RemoteDesktop.ItsPubPlugin.ResolveResource : resourceLocation : [Out] => [NativeArrayInfo(CountConst=256),Out]
+Windows.Win32.System.RemoteDesktop.ItsPubPlugin2.ResolvePersonalDesktop : endPointName : [Out] => [NativeArrayInfo(CountConst=256),Out]
+# Fixed #547.
+pArgumentDescs : [Const] => [Const,NativeArrayInfo(CountFieldName=NumArgumentDescs)]
+pBufferStrides : [Const] => [Const,NativeArrayInfo(CountFieldName=NumStrides)]
+pDescriptorRanges : [Const] => [Const,NativeArrayInfo(CountFieldName=NumDescriptorRanges)]
+pDescriptorRanges : [Const] => [Const,NativeArrayInfo(CountFieldName=NumDescriptorRanges)]
+pInputElementDescs : [Const] => [Const,NativeArrayInfo(CountFieldName=NumElements)]
+pParameters : [Const] => [Const,NativeArrayInfo(CountFieldName=NumParameters)]
+pParameters : [Const] => [Const,NativeArrayInfo(CountFieldName=NumParameters)]
+pSODeclaration : [Const] => [Const,NativeArrayInfo(CountFieldName=NumEntries)]
+pStaticSamplers : [Const] => [Const,NativeArrayInfo(CountFieldName=NumStaticSamplers)]
+pStaticSamplers : [Const] => [Const,NativeArrayInfo(CountFieldName=NumStaticSamplers)]
+pSubresourceParameters : [Const] => [Const,NativeArrayInfo(CountFieldName=SubresourceCount)]
+pViewInstanceLocations : [Const] => [Const,NativeArrayInfo(CountFieldName=ViewInstanceCount)]
+# Fixed #1540.
+Windows.Win32.Foundation.HGLOBAL.Value...System.IntPtr => System.Void*
+Windows.Win32.Foundation.HLOCAL.Value...System.IntPtr => System.Void*
+# Fixed #1312.
+Windows.Win32.Foundation.Metadata.IgnoreIfReturnAttribute added
+Windows.Win32.System.Pipes.Apis.CreatePipe : hReadPipe : [Out] => [IgnoreIfReturn(0),Out]
+Windows.Win32.System.Pipes.Apis.CreatePipe : hWritePipe : [Out] => [IgnoreIfReturn(0),Out]
+# Fixed #1537.
+Windows.Win32.Graphics.Direct3D12.Apis.CLSID_D3D12DSRDeviceFactory added
+Windows.Win32.Graphics.Direct3D12.D3D_ROOT_SIGNATURE_VERSION.D3D_ROOT_SIGNATURE_VERSION_1_2 added
+Windows.Win32.Graphics.Direct3D12.D3D12_AUTO_BREADCRUMB_OP.D3D12_AUTO_BREADCRUMB_OP_BARRIER added
+Windows.Win32.Graphics.Direct3D12.D3D12_FEATURE_DATA_D3D12_OPTIONS16.GPUUploadHeapSupported added
+Windows.Win32.Graphics.Direct3D12.D3D12_FEATURE_DATA_D3D12_OPTIONS16.Reserved removed
+Windows.Win32.Graphics.Direct3D12.D3D12_FEATURE_DATA_D3D12_OPTIONS17 added
+Windows.Win32.Graphics.Direct3D12.D3D12_FEATURE_DATA_D3D12_OPTIONS18 added
+Windows.Win32.Graphics.Direct3D12.D3D12_FEATURE_DATA_D3D12_OPTIONS19 added
+Windows.Win32.Graphics.Direct3D12.D3D12_FEATURE.D3D12_FEATURE_D3D12_OPTIONS17 added
+Windows.Win32.Graphics.Direct3D12.D3D12_FEATURE.D3D12_FEATURE_D3D12_OPTIONS18 added
+Windows.Win32.Graphics.Direct3D12.D3D12_FEATURE.D3D12_FEATURE_D3D12_OPTIONS19 added
+Windows.Win32.Graphics.Direct3D12.D3D12_FILTER.D3D12_FILTER_COMPARISON_MIN_MAG_ANISOTROPIC_MIP_POINT added
+Windows.Win32.Graphics.Direct3D12.D3D12_FILTER.D3D12_FILTER_MAXIMUM_MIN_MAG_ANISOTROPIC_MIP_POINT added
+Windows.Win32.Graphics.Direct3D12.D3D12_FILTER.D3D12_FILTER_MIN_MAG_ANISOTROPIC_MIP_POINT added
+Windows.Win32.Graphics.Direct3D12.D3D12_FILTER.D3D12_FILTER_MINIMUM_MIN_MAG_ANISOTROPIC_MIP_POINT added
+Windows.Win32.Graphics.Direct3D12.D3D12_HEAP_FLAGS.D3D12_HEAP_FLAG_TOOLS_USE_MANUAL_WRITE_TRACKING added
+Windows.Win32.Graphics.Direct3D12.D3D12_HEAP_TYPE.D3D12_HEAP_TYPE_GPU_UPLOAD added
+Windows.Win32.Graphics.Direct3D12.D3D12_LINE_RASTERIZATION_MODE added
+Windows.Win32.Graphics.Direct3D12.D3D12_LINE_RASTERIZATION_MODE.D3D12_LINE_RASTERIZATION_MODE_ALIASED added
+Windows.Win32.Graphics.Direct3D12.D3D12_LINE_RASTERIZATION_MODE.D3D12_LINE_RASTERIZATION_MODE_ALPHA_ANTIALIASED added
+Windows.Win32.Graphics.Direct3D12.D3D12_LINE_RASTERIZATION_MODE.D3D12_LINE_RASTERIZATION_MODE_QUADRILATERAL_NARROW added
+Windows.Win32.Graphics.Direct3D12.D3D12_LINE_RASTERIZATION_MODE.D3D12_LINE_RASTERIZATION_MODE_QUADRILATERAL_WIDE added
+Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_CREATERASTERIZERSTATE_INVALID_LINERASTERIZATIONMODE added
+Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_CREATERESOURCE_INVALIDALIGNMENT_SMALLRESOURCE added
+Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_DRAW_POTENTIALLY_OUTSIDE_OF_VALID_RENDER_AREA added
+Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_NONNORMALIZED_COORDINATE_SAMPLING_NOT_SUPPORTED added
+Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_RENDER_PASS_COMMANDLIST_INVALID_END_STATE added
+Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_RENDER_PASS_COMMANDLIST_INVALID_START_STATE added
+Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_RENDER_PASS_LOCAL_DEPTH_STENCIL_ERROR added
+Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_RENDER_PASS_LOCAL_PRESERVE_RENDER_PARAMETERS_ERROR added
+Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_RENDER_PASS_MISMATCHING_ACCESS added
+Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_RENDER_PASS_MISMATCHING_LOCAL_PRESERVE_PARAMETERS added
+Windows.Win32.Graphics.Direct3D12.D3D12_PIPELINE_STATE_SUBOBJECT_TYPE.D3D12_PIPELINE_STATE_SUBOBJECT_TYPE_RASTERIZER2 added
+Windows.Win32.Graphics.Direct3D12.D3D12_RASTERIZER_DESC2 added
+Windows.Win32.Graphics.Direct3D12.D3D12_RENDER_PASS_BEGINNING_ACCESS_PRESERVE_LOCAL_PARAMETERS added
+Windows.Win32.Graphics.Direct3D12.D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE.D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE_PRESERVE_LOCAL_RENDER added
+Windows.Win32.Graphics.Direct3D12.D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE.D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE_PRESERVE_LOCAL_SRV added
+Windows.Win32.Graphics.Direct3D12.D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE.D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE_PRESERVE_LOCAL_UAV added
+Windows.Win32.Graphics.Direct3D12.D3D12_RENDER_PASS_BEGINNING_ACCESS._Anonymous_e__Union.PreserveLocal added
+Windows.Win32.Graphics.Direct3D12.D3D12_RENDER_PASS_ENDING_ACCESS_PRESERVE_LOCAL_PARAMETERS added
+Windows.Win32.Graphics.Direct3D12.D3D12_RENDER_PASS_ENDING_ACCESS_TYPE.D3D12_RENDER_PASS_ENDING_ACCESS_TYPE_PRESERVE_LOCAL_RENDER added
+Windows.Win32.Graphics.Direct3D12.D3D12_RENDER_PASS_ENDING_ACCESS_TYPE.D3D12_RENDER_PASS_ENDING_ACCESS_TYPE_PRESERVE_LOCAL_SRV added
+Windows.Win32.Graphics.Direct3D12.D3D12_RENDER_PASS_ENDING_ACCESS_TYPE.D3D12_RENDER_PASS_ENDING_ACCESS_TYPE_PRESERVE_LOCAL_UAV added
+Windows.Win32.Graphics.Direct3D12.D3D12_RENDER_PASS_ENDING_ACCESS._Anonymous_e__Union.PreserveLocal added
+Windows.Win32.Graphics.Direct3D12.D3D12_RENDER_PASS_FLAGS.D3D12_RENDER_PASS_FLAG_BIND_READ_ONLY_DEPTH added
+Windows.Win32.Graphics.Direct3D12.D3D12_RENDER_PASS_FLAGS.D3D12_RENDER_PASS_FLAG_BIND_READ_ONLY_STENCIL added
+Windows.Win32.Graphics.Direct3D12.D3D12_ROOT_SIGNATURE_DESC2 added
+Windows.Win32.Graphics.Direct3D12.D3D12_SAMPLER_FLAGS.D3D12_SAMPLER_FLAG_NON_NORMALIZED_COORDINATES added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATIC_SAMPLER_DESC1 added
+Windows.Win32.Graphics.Direct3D12.D3D12_VERSIONED_ROOT_SIGNATURE_DESC._Anonymous_e__Union.Desc_1_2 added
+Windows.Win32.Graphics.Direct3D12.ID3D12Device10.CreateCommittedResource3 : pCastableFormats : [In,NativeArrayInfo(CountParamIndex=6),Optional] => [Const,In,NativeArrayInfo(CountParamIndex=6),Optional]
+Windows.Win32.Graphics.Direct3D12.ID3D12Device10.CreatePlacedResource2 : pCastableFormats : [In,NativeArrayInfo(CountParamIndex=5),Optional] => [Const,In,NativeArrayInfo(CountParamIndex=5),Optional]
+Windows.Win32.Graphics.Direct3D12.ID3D12Device10.CreateReservedResource2 : pCastableFormats : [In,NativeArrayInfo(CountParamIndex=4),Optional] => [Const,In,NativeArrayInfo(CountParamIndex=4),Optional]
+Windows.Win32.Graphics.Direct3D12.ID3D12Device12 added
+Windows.Win32.Graphics.Direct3D12.ID3D12DSRDeviceFactory added
+Windows.Win32.Graphics.Direct3D12.ID3D12ManualWriteTrackingResource added
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_A4B4G4R4_UNORM added
+winmd1: Windows.Win32.Graphics.Direct3D12.Apis.D3D12_PREVIEW_SDK_VERSION = 707, winmd2 = 710
+winmd1: Windows.Win32.Graphics.Direct3D12.Apis.D3D12_SDK_VERSION = 608, winmd2 = 610
+winmd1: Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_D3D12_MESSAGES_END = 1372, winmd2 = 1381
+winmd1: Windows.Win32.Graphics.Direct3D12.D3D12_PIPELINE_STATE_SUBOBJECT_TYPE.D3D12_PIPELINE_STATE_SUBOBJECT_TYPE_MAX_VALID = 28, winmd2 = 29
+# Removed obsolete PropertyKeyAttribute.
+Windows.Win32.Foundation.Metadata.PropertyKeyAttribute removed
+# Fixed #1542.
+Windows.Win32.System.Threading.Apis.RtwqAddPeriodicCallback added
+Windows.Win32.System.Threading.Apis.RtwqAllocateSerialWorkQueue added
+Windows.Win32.System.Threading.Apis.RtwqAllocateWorkQueue added
+Windows.Win32.System.Threading.Apis.RtwqBeginRegisterWorkQueueWithMMCSS added
+Windows.Win32.System.Threading.Apis.RtwqBeginUnregisterWorkQueueWithMMCSS added
+Windows.Win32.System.Threading.Apis.RtwqCancelDeadline added
+Windows.Win32.System.Threading.Apis.RtwqCancelWorkItem added
+Windows.Win32.System.Threading.Apis.RtwqCreateAsyncResult added
+Windows.Win32.System.Threading.Apis.RtwqEndRegisterWorkQueueWithMMCSS added
+Windows.Win32.System.Threading.Apis.RtwqGetWorkQueueMMCSSClass added
+Windows.Win32.System.Threading.Apis.RtwqGetWorkQueueMMCSSPriority added
+Windows.Win32.System.Threading.Apis.RtwqGetWorkQueueMMCSSTaskId added
+Windows.Win32.System.Threading.Apis.RtwqInvokeCallback added
+Windows.Win32.System.Threading.Apis.RtwqJoinWorkQueue added
+Windows.Win32.System.Threading.Apis.RtwqLockPlatform added
+Windows.Win32.System.Threading.Apis.RtwqLockSharedWorkQueue added
+Windows.Win32.System.Threading.Apis.RtwqLockWorkQueue added
+Windows.Win32.System.Threading.Apis.RtwqPutWaitingWorkItem added
+Windows.Win32.System.Threading.Apis.RtwqPutWorkItem added
+Windows.Win32.System.Threading.Apis.RtwqRegisterPlatformEvents added
+Windows.Win32.System.Threading.Apis.RtwqRegisterPlatformWithMMCSS added
+Windows.Win32.System.Threading.Apis.RtwqRemovePeriodicCallback added
+Windows.Win32.System.Threading.Apis.RtwqScheduleWorkItem added
+Windows.Win32.System.Threading.Apis.RtwqSetDeadline added
+Windows.Win32.System.Threading.Apis.RtwqSetDeadline2 added
+Windows.Win32.System.Threading.Apis.RtwqSetLongRunning added
+Windows.Win32.System.Threading.Apis.RtwqShutdown added
+Windows.Win32.System.Threading.Apis.RtwqStartup added
+Windows.Win32.System.Threading.Apis.RtwqUnjoinWorkQueue added
+Windows.Win32.System.Threading.Apis.RtwqUnlockPlatform added
+Windows.Win32.System.Threading.Apis.RtwqUnlockWorkQueue added
+Windows.Win32.System.Threading.Apis.RtwqUnregisterPlatformEvents added
+Windows.Win32.System.Threading.Apis.RtwqUnregisterPlatformFromMMCSS added
+Windows.Win32.System.Threading.IRtwqAsyncCallback added
+Windows.Win32.System.Threading.IRtwqAsyncResult added
+Windows.Win32.System.Threading.IRtwqPlatformEvents added
+Windows.Win32.System.Threading.RTWQ_WORKQUEUE_TYPE added
+Windows.Win32.System.Threading.RTWQ_WORKQUEUE_TYPE.RTWQ_MULTITHREADED_WORKQUEUE added
+Windows.Win32.System.Threading.RTWQ_WORKQUEUE_TYPE.RTWQ_STANDARD_WORKQUEUE added
+Windows.Win32.System.Threading.RTWQ_WORKQUEUE_TYPE.RTWQ_WINDOW_WORKQUEUE added
+Windows.Win32.System.Threading.RTWQASYNCRESULT added
+Windows.Win32.System.Threading.RTWQPERIODICCALLBACK added

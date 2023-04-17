@@ -183,10 +183,11 @@ namespace MetadataUtils
                         yield return new EnumInfo(ns, name, type, finalFields);
                     }
                 }
-                else if (typeDef.Attributes.HasFlag(System.Reflection.TypeAttributes.Interface))
+                else if (typeDef.Attributes.HasFlag(TypeAttributes.Interface))
                 {
+                    var implementedMethodCount = this.InternalGetImplementedMethodCount(typeDef);
                     var methodInfos = this.GetMethodInfos(typeDef.GetMethods());
-                    yield return new InterfaceInfo(ns, name, methodInfos);
+                    yield return new InterfaceInfo(ns, name, methodInfos, implementedMethodCount);
                 }
                 else if (baseTypeName == "ValueType")
                 {
@@ -204,6 +205,43 @@ namespace MetadataUtils
                     // Skipping all others
                 }
             }
+        }
+
+        private int InternalGetImplementedMethodCount(TypeDefinition typeDef)
+        {
+            int methodCount = typeDef.GetMethods().Count;
+            var interfaceImplHandles = typeDef.GetInterfaceImplementations();
+            foreach (var interfaceImplHandle in interfaceImplHandles)
+            {
+                var interfaceImpl = this.metadataReader.GetInterfaceImplementation(interfaceImplHandle);
+
+                TypeDefinition interfaceTypeDef;
+                switch (interfaceImpl.Interface.Kind)
+                {
+                    case HandleKind.TypeReference:
+                        {
+                            var interfaceTypeRefHandle = this.metadataReader.GetTypeReference((TypeReferenceHandle)interfaceImpl.Interface);
+                            interfaceTypeDef = this.metadataReader.TypeDefinitions
+                                .Select(h => this.metadataReader.GetTypeDefinition(h))
+                                .First(iterType =>
+                                    this.metadataReader.GetString(iterType.Name) == this.metadataReader.GetString(interfaceTypeRefHandle.Name) &&
+                                    this.metadataReader.GetString(iterType.Namespace) == this.metadataReader.GetString(interfaceTypeRefHandle.Namespace));
+                            break;
+                        }
+
+                    case HandleKind.TypeDefinition:
+                        {
+                            interfaceTypeDef = this.metadataReader.GetTypeDefinition((TypeDefinitionHandle)interfaceImpl.Interface);
+                            break;
+                        }
+                    default:
+                        throw new NotImplementedException();
+                }
+
+                methodCount += interfaceTypeDef.GetMethods().Count;
+            }
+
+            return methodCount;
         }
     }
 
@@ -262,13 +300,15 @@ namespace MetadataUtils
 
     public class InterfaceInfo : TypeInfo
     {
-        public InterfaceInfo(string @namespace, string name, IEnumerable<MethodInfo> methodInfos) :
+        public InterfaceInfo(string @namespace, string name, IEnumerable<MethodInfo> methodInfos, int implementedMethodCount) :
             base(@namespace, name)
         {
             this.Methods = methodInfos;
+            this.ImplementedMethodCount = implementedMethodCount;
         }
 
         public IEnumerable<MethodInfo> Methods { get; }
+        public int ImplementedMethodCount { get; }
 
         public override string ToString()
         {

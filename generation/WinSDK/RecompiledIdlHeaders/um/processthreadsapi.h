@@ -102,9 +102,22 @@ QueueUserAPC(
 #if (NTDDI_VERSION >= NTDDI_WIN10_MN)
 
 typedef enum _QUEUE_USER_APC_FLAGS {
-    QUEUE_USER_APC_FLAGS_NONE             = 0x0,
-    QUEUE_USER_APC_FLAGS_SPECIAL_USER_APC = 0x1,
+    QUEUE_USER_APC_FLAGS_NONE               = 0x00000000,
+    QUEUE_USER_APC_FLAGS_SPECIAL_USER_APC   = 0x00000001,
+
+    //
+    // Used for requesting additional callback data.
+    //
+
+    QUEUE_USER_APC_CALLBACK_DATA_CONTEXT    = 0x00010000,
 } QUEUE_USER_APC_FLAGS;
+
+typedef struct _APC_CALLBACK_DATA {
+    ULONG_PTR Parameter;
+    PCONTEXT ContextRecord;
+    ULONG_PTR Reserved0;
+    ULONG_PTR Reserved1;
+} APC_CALLBACK_DATA, *PAPC_CALLBACK_DATA;
 
 WINBASEAPI
 BOOL

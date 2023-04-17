@@ -1,7 +1,7 @@
 //-------------------------------------------------------------------------------------
 // DirectXMathConvert.inl -- SIMD C++ Math library
 //
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 //
 // http://go.microsoft.com/fwlink/?LinkID=615560
@@ -17,9 +17,11 @@
 
  //------------------------------------------------------------------------------
 
+#ifdef _MSC_VER
 #pragma warning(push)
 #pragma warning(disable:4701)
 // C4701: false positives
+#endif
 
 inline XMVECTOR XM_CALLCONV XMConvertVectorIntToFloat
 (
@@ -218,7 +220,9 @@ inline XMVECTOR XM_CALLCONV XMConvertVectorFloatToUInt
 #endif
 }
 
+#ifdef _MSC_VER
 #pragma warning(pop)
+#endif
 
 /****************************************************************************
  *

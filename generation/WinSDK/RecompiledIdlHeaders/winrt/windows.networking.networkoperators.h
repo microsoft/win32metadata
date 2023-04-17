@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_NETWORKING_CONNECTIVITY_WWANCONTRACT_VERSION)
@@ -159,6 +159,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim2 ABI::Windows::Networking::NetworkOperators::IESim2
 
 #endif // ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim2_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3_FWD_DEFINED__
+#define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Networking {
+            namespace NetworkOperators {
+                interface IESim3;
+            } /* NetworkOperators */
+        } /* Networking */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3 ABI::Windows::Networking::NetworkOperators::IESim3
+
+#endif // ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIESimAddedEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIESimAddedEventArgs_FWD_DEFINED__
@@ -955,6 +970,21 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Networking {
+            namespace NetworkOperators {
+                interface IMobileBroadbandDeviceServiceTriggerDetails2;
+            } /* NetworkOperators */
+        } /* Networking */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2 ABI::Windows::Networking::NetworkOperators::IMobileBroadbandDeviceServiceTriggerDetails2
+
+#endif // ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem_FWD_DEFINED__
 #define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem_FWD_DEFINED__
 namespace ABI {
@@ -999,6 +1029,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem3 ABI::Windows::Networking::NetworkOperators::IMobileBroadbandModem3
 
 #endif // ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem3_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4_FWD_DEFINED__
+#define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Networking {
+            namespace NetworkOperators {
+                interface IMobileBroadbandModem4;
+            } /* NetworkOperators */
+        } /* Networking */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4 ABI::Windows::Networking::NetworkOperators::IMobileBroadbandModem4
+
+#endif // ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModemConfiguration_FWD_DEFINED__
 #define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModemConfiguration_FWD_DEFINED__
@@ -1314,6 +1359,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo ABI::Windows::Networking::NetworkOperators::IMobileBroadbandSlotInfo
 
 #endif // ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Networking {
+            namespace NetworkOperators {
+                interface IMobileBroadbandSlotInfo2;
+            } /* NetworkOperators */
+        } /* Networking */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2 ABI::Windows::Networking::NetworkOperators::IMobileBroadbandSlotInfo2
+
+#endif // ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfoChangedEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfoChangedEventArgs_FWD_DEFINED__
@@ -7334,6 +7394,42 @@ EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim2;
 
 /*
  *
+ * Interface Windows.Networking.NetworkOperators.IESim3
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Networking.NetworkOperators.ESim
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Networking_NetworkOperators_IESim3[] = L"Windows.Networking.NetworkOperators.IESim3";
+namespace ABI {
+    namespace Windows {
+        namespace Networking {
+            namespace NetworkOperators {
+                MIDL_INTERFACE("fe1edf45-01b8-5d31-b8d3-d9cbebb2b831")
+                IESim3 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_SlotIndex(
+                        __FIReference_1_int** value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IESim3 = _uuidof(IESim3);
+            } /* NetworkOperators */
+        } /* Networking */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3;
+#endif /* !defined(____x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Interface Windows.Networking.NetworkOperators.IESimAddedEventArgs
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 6.0
@@ -9770,6 +9866,42 @@ EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBr
 
 /*
  *
+ * Interface Windows.Networking.NetworkOperators.IMobileBroadbandDeviceServiceTriggerDetails2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 14.0
+ *
+ * Interface is a part of the implementation of type Windows.Networking.NetworkOperators.MobileBroadbandDeviceServiceTriggerDetails
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+#if !defined(____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Networking_NetworkOperators_IMobileBroadbandDeviceServiceTriggerDetails2[] = L"Windows.Networking.NetworkOperators.IMobileBroadbandDeviceServiceTriggerDetails2";
+namespace ABI {
+    namespace Windows {
+        namespace Networking {
+            namespace NetworkOperators {
+                MIDL_INTERFACE("d83d5f16-336a-553f-94bb-0cd1a2ff0c81")
+                IMobileBroadbandDeviceServiceTriggerDetails2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_EventId(
+                        UINT32* value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IMobileBroadbandDeviceServiceTriggerDetails2 = _uuidof(IMobileBroadbandDeviceServiceTriggerDetails2);
+            } /* NetworkOperators */
+        } /* Networking */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2;
+#endif /* !defined(____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+
+/*
+ *
  * Interface Windows.Networking.NetworkOperators.IMobileBroadbandModem
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -9917,6 +10049,57 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem3;
 #endif /* !defined(____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem3_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x60000
+
+/*
+ *
+ * Interface Windows.Networking.NetworkOperators.IMobileBroadbandModem4
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Networking.NetworkOperators.MobileBroadbandModem
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Networking_NetworkOperators_IMobileBroadbandModem4[] = L"Windows.Networking.NetworkOperators.IMobileBroadbandModem4";
+namespace ABI {
+    namespace Windows {
+        namespace Networking {
+            namespace NetworkOperators {
+                MIDL_INTERFACE("4a0398c2-91be-412b-b569-586e9f0030d1")
+                IMobileBroadbandModem4 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE SetIsPassthroughEnabledWithSlotIndexAsync(
+                        boolean value,
+                        INT32 slotindex,
+                        __FIAsyncOperation_1_Windows__CNetworking__CNetworkOperators__CMobileBroadbandModemStatus** operation
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE GetIsPassthroughEnabledWithSlotIndexAsync(
+                        INT32 slotindex,
+                        __FIAsyncOperation_1_boolean** operation
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE SetIsPassthroughEnabledWithSlotIndex(
+                        boolean value,
+                        INT32 slotindex,
+                        ABI::Windows::Networking::NetworkOperators::MobileBroadbandModemStatus* result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE GetIsPassthroughEnabledWithSlotIndex(
+                        INT32 slotindex,
+                        boolean* result
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IMobileBroadbandModem4 = _uuidof(IMobileBroadbandModem4);
+            } /* NetworkOperators */
+        } /* Networking */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4;
+#endif /* !defined(____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -10835,6 +11018,42 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo;
 #endif /* !defined(____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+
+/*
+ *
+ * Interface Windows.Networking.NetworkOperators.IMobileBroadbandSlotInfo2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Networking.NetworkOperators.MobileBroadbandSlotInfo
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Networking_NetworkOperators_IMobileBroadbandSlotInfo2[] = L"Windows.Networking.NetworkOperators.IMobileBroadbandSlotInfo2";
+namespace ABI {
+    namespace Windows {
+        namespace Networking {
+            namespace NetworkOperators {
+                MIDL_INTERFACE("393cb039-ca44-524c-822d-83a3620f0efc")
+                IMobileBroadbandSlotInfo2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_IccId(
+                        HSTRING* value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IMobileBroadbandSlotInfo2 = _uuidof(IMobileBroadbandSlotInfo2);
+            } /* NetworkOperators */
+        } /* Networking */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2;
+#endif /* !defined(____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -12148,6 +12367,7 @@ EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CNetworkOperators_CIUssdSess
  * Class implements the following interfaces:
  *    Windows.Networking.NetworkOperators.IESim ** Default Interface **
  *    Windows.Networking.NetworkOperators.IESim2
+ *    Windows.Networking.NetworkOperators.IESim3
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -12982,6 +13202,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Networking.NetworkOperators.IMobileBroadbandDeviceServiceTriggerDetails ** Default Interface **
+ *    Windows.Networking.NetworkOperators.IMobileBroadbandDeviceServiceTriggerDetails2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -13006,6 +13227,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.Networking.NetworkOperators.IMobileBroadbandModem ** Default Interface **
  *    Windows.Networking.NetworkOperators.IMobileBroadbandModem2
  *    Windows.Networking.NetworkOperators.IMobileBroadbandModem3
+ *    Windows.Networking.NetworkOperators.IMobileBroadbandModem4
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -13314,6 +13536,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Networking.NetworkOperators.IMobileBroadbandSlotInfo ** Default Interface **
+ *    Windows.Networking.NetworkOperators.IMobileBroadbandSlotInfo2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -13567,10 +13790,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics4 interface starting with version 10.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics3 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics3 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics4 interface starting with version 10.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Networking.NetworkOperators.INetworkOperatorTetheringManager ** Default Interface **
@@ -13759,6 +13982,12 @@ typedef interface __x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim __x_ABI_
 typedef interface __x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim2 __x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim2;
 
 #endif // ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim2_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3_FWD_DEFINED__
+#define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3 __x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3;
+
+#endif // ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIESimAddedEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIESimAddedEventArgs_FWD_DEFINED__
@@ -14078,6 +14307,12 @@ typedef interface __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadba
 
 #endif // ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2 __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2;
+
+#endif // ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem_FWD_DEFINED__
 #define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem;
@@ -14095,6 +14330,12 @@ typedef interface __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadba
 typedef interface __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem3 __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem3;
 
 #endif // ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem3_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4_FWD_DEFINED__
+#define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4 __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4;
+
+#endif // ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModemConfiguration_FWD_DEFINED__
 #define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModemConfiguration_FWD_DEFINED__
@@ -14221,6 +14462,12 @@ typedef interface __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadba
 typedef interface __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo;
 
 #endif // ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2 __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2;
+
+#endif // ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfoChangedEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfoChangedEventArgs_FWD_DEFINED__
@@ -23600,6 +23847,75 @@ EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim2;
 
 /*
  *
+ * Interface Windows.Networking.NetworkOperators.IESim3
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Networking.NetworkOperators.ESim
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Networking_NetworkOperators_IESim3[] = L"Windows.Networking.NetworkOperators.IESim3";
+typedef struct __x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_SlotIndex)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3* This,
+        __FIReference_1_int** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3Vtbl;
+
+interface __x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3
+{
+    CONST_VTBL struct __x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3_get_SlotIndex(This, value) \
+    ((This)->lpVtbl->get_SlotIndex(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3;
+#endif /* !defined(____x_ABI_CWindows_CNetworking_CNetworkOperators_CIESim3_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Interface Windows.Networking.NetworkOperators.IESimAddedEventArgs
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 6.0
@@ -28130,6 +28446,75 @@ EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBr
 
 /*
  *
+ * Interface Windows.Networking.NetworkOperators.IMobileBroadbandDeviceServiceTriggerDetails2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 14.0
+ *
+ * Interface is a part of the implementation of type Windows.Networking.NetworkOperators.MobileBroadbandDeviceServiceTriggerDetails
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+#if !defined(____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Networking_NetworkOperators_IMobileBroadbandDeviceServiceTriggerDetails2[] = L"Windows.Networking.NetworkOperators.IMobileBroadbandDeviceServiceTriggerDetails2";
+typedef struct __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_EventId)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2* This,
+        UINT32* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2Vtbl;
+
+interface __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2_get_EventId(This, value) \
+    ((This)->lpVtbl->get_EventId(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2;
+#endif /* !defined(____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandDeviceServiceTriggerDetails2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+
+/*
+ *
  * Interface Windows.Networking.NetworkOperators.IMobileBroadbandModem
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -28402,6 +28787,96 @@ interface __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem3
 EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem3;
 #endif /* !defined(____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem3_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x60000
+
+/*
+ *
+ * Interface Windows.Networking.NetworkOperators.IMobileBroadbandModem4
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Networking.NetworkOperators.MobileBroadbandModem
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Networking_NetworkOperators_IMobileBroadbandModem4[] = L"Windows.Networking.NetworkOperators.IMobileBroadbandModem4";
+typedef struct __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* SetIsPassthroughEnabledWithSlotIndexAsync)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4* This,
+        boolean value,
+        INT32 slotindex,
+        __FIAsyncOperation_1_Windows__CNetworking__CNetworkOperators__CMobileBroadbandModemStatus** operation);
+    HRESULT (STDMETHODCALLTYPE* GetIsPassthroughEnabledWithSlotIndexAsync)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4* This,
+        INT32 slotindex,
+        __FIAsyncOperation_1_boolean** operation);
+    HRESULT (STDMETHODCALLTYPE* SetIsPassthroughEnabledWithSlotIndex)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4* This,
+        boolean value,
+        INT32 slotindex,
+        enum __x_ABI_CWindows_CNetworking_CNetworkOperators_CMobileBroadbandModemStatus* result);
+    HRESULT (STDMETHODCALLTYPE* GetIsPassthroughEnabledWithSlotIndex)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4* This,
+        INT32 slotindex,
+        boolean* result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4Vtbl;
+
+interface __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4
+{
+    CONST_VTBL struct __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4_SetIsPassthroughEnabledWithSlotIndexAsync(This, value, slotindex, operation) \
+    ((This)->lpVtbl->SetIsPassthroughEnabledWithSlotIndexAsync(This, value, slotindex, operation))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4_GetIsPassthroughEnabledWithSlotIndexAsync(This, slotindex, operation) \
+    ((This)->lpVtbl->GetIsPassthroughEnabledWithSlotIndexAsync(This, slotindex, operation))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4_SetIsPassthroughEnabledWithSlotIndex(This, value, slotindex, result) \
+    ((This)->lpVtbl->SetIsPassthroughEnabledWithSlotIndex(This, value, slotindex, result))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4_GetIsPassthroughEnabledWithSlotIndex(This, slotindex, result) \
+    ((This)->lpVtbl->GetIsPassthroughEnabledWithSlotIndex(This, slotindex, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4;
+#endif /* !defined(____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandModem4_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -30118,6 +30593,75 @@ interface __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotIn
 EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo;
 #endif /* !defined(____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+
+/*
+ *
+ * Interface Windows.Networking.NetworkOperators.IMobileBroadbandSlotInfo2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Networking.NetworkOperators.MobileBroadbandSlotInfo
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Networking_NetworkOperators_IMobileBroadbandSlotInfo2[] = L"Windows.Networking.NetworkOperators.IMobileBroadbandSlotInfo2";
+typedef struct __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_IccId)(__x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2* This,
+        HSTRING* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2Vtbl;
+
+interface __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2_get_IccId(This, value) \
+    ((This)->lpVtbl->get_IccId(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2;
+#endif /* !defined(____x_ABI_CWindows_CNetworking_CNetworkOperators_CIMobileBroadbandSlotInfo2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -32570,6 +33114,7 @@ EXTERN_C const IID IID___x_ABI_CWindows_CNetworking_CNetworkOperators_CIUssdSess
  * Class implements the following interfaces:
  *    Windows.Networking.NetworkOperators.IESim ** Default Interface **
  *    Windows.Networking.NetworkOperators.IESim2
+ *    Windows.Networking.NetworkOperators.IESim3
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -33404,6 +33949,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Networking.NetworkOperators.IMobileBroadbandDeviceServiceTriggerDetails ** Default Interface **
+ *    Windows.Networking.NetworkOperators.IMobileBroadbandDeviceServiceTriggerDetails2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -33428,6 +33974,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.Networking.NetworkOperators.IMobileBroadbandModem ** Default Interface **
  *    Windows.Networking.NetworkOperators.IMobileBroadbandModem2
  *    Windows.Networking.NetworkOperators.IMobileBroadbandModem3
+ *    Windows.Networking.NetworkOperators.IMobileBroadbandModem4
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -33736,6 +34283,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Networking.NetworkOperators.IMobileBroadbandSlotInfo ** Default Interface **
+ *    Windows.Networking.NetworkOperators.IMobileBroadbandSlotInfo2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -33989,10 +34537,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics4 interface starting with version 10.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics3 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics3 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics4 interface starting with version 10.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Networking.NetworkOperators.INetworkOperatorTetheringManager ** Default Interface **

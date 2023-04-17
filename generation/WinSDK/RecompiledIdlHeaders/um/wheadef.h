@@ -51,6 +51,8 @@ typedef enum _WHEA_ERROR_SOURCE_TYPE {
     WheaErrSrcTypeBMC          = 0x0e,    // BMC error info
     WheaErrSrcTypePMEM         = 0x0f,    // ARS PMEM Error Source
     WheaErrSrcTypeDeviceDriver = 0x10,    // Device Driver Error Source
+    WheaErrSrcTypeSea          = 0x11,    // Arm Sync External Abort
+    WheaErrSrcTypeSei          = 0x12,    // Arm Sync External Abort
     WheaErrSrcTypeMax
 } WHEA_ERROR_SOURCE_TYPE, *PWHEA_ERROR_SOURCE_TYPE;
 
@@ -735,6 +737,9 @@ Return Value:
 #define    WHEA_BAD_PAGE_LIST_MAX_SIZE     14
 #define    WHEA_BAD_PAGE_LIST_LOCATION     15
 #define    WHEA_NOTIFY_ALL_OFFLINES        16
+#define    WHEA_ROW_FAIL_CHECK_EXTENT      17
+#define    WHEA_ROW_FAIL_CHECK_ENABLE      18
+#define    WHEA_ROW_FAIL_CHECK_THRESHOLD   19
 
 #define IPMI_OS_SEL_RECORD_SIGNATURE 'RSSO'
 #define IPMI_OS_SEL_RECORD_VERSION_1 1

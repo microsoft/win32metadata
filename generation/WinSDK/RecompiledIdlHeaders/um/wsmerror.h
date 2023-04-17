@@ -5093,3 +5093,12 @@
 //
 #define ERROR_WSMAN_CERTMAPPING_CREDENTIAL_MANAGEMENT_FAILIED 0x803381FEL
 
+//
+// MessageId: ERROR_WSMAN_EVENTING_PUSH_SUBSCRIPTION_NOACTIVATE_EVENTSOURCE
+//
+// MessageText:
+//
+// The event source of the push subscription is in disable or inactive on the Event controller server.
+//
+#define ERROR_WSMAN_EVENTING_PUSH_SUBSCRIPTION_NOACTIVATE_EVENTSOURCE 0x803381FFL
+

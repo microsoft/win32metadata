@@ -8,12 +8,14 @@
            xmlns:desktop2="http://schemas.microsoft.com/appx/manifest/desktop/windows10/2"
            xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
            xmlns:uap11="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"
+           xmlns:desktop10="http://schemas.microsoft.com/appx/manifest/desktop/windows10/10"
            >
 
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/types"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/foundation/windows10"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/10"/>
 
   <xs:element name="Extension" substitutionGroup="f:ExtensionChoice">
     <xs:complexType>
@@ -65,6 +67,7 @@
   <xs:element name="DesktopPreviewHandler">
     <xs:complexType>
       <xs:attribute name="Clsid" type="t:ST_GUID" use="required"/>
+      <xs:attribute ref="desktop10:DisplayName" use="optional"/>
       <xs:attributeGroup ref="DesktopFtaHandlerAttributes"/>
     </xs:complexType>
   </xs:element>

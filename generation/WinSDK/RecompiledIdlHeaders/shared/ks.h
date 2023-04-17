@@ -103,6 +103,14 @@ typedef struct {
     ULONG   PrioritySubClass;
 } KSPRIORITY, *PKSPRIORITY;
 
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+#pragma endregion
+
+#pragma region Application Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+
+#pragma warning(disable:4201) // nameless struct/union
+
 typedef struct {
     union {
 #if defined( _KS_NO_ANONYMOUS_STRUCTURES_ )
@@ -156,6 +164,12 @@ typedef struct {
     ULONG           NodeId;
     ULONG           Reserved;
 } KSP_NODE, *PKSP_NODE;
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+#pragma endregion
+
+#pragma region Desktop Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
 typedef struct {
     KSMETHOD        Method;

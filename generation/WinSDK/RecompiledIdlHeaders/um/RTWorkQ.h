@@ -46,18 +46,18 @@ typedef enum
 interface DECLSPEC_UUID("ac6b7889-0740-4d51-8619-905994a55cc6") DECLSPEC_NOVTABLE
     IRtwqAsyncResult : public IUnknown
 {
-    STDMETHOD(GetState)( _Out_ IUnknown** ppunkState);
-    STDMETHOD(GetStatus)();
-    STDMETHOD(SetStatus)( HRESULT hrStatus);
-    STDMETHOD(GetObject)( _Out_ IUnknown ** ppObject);
-    STDMETHOD_(IUnknown *, GetStateNoAddRef)();
+    STDMETHOD(GetState)( _Out_ IUnknown** ppunkState)=0;
+    STDMETHOD(GetStatus)()=0;
+    STDMETHOD(SetStatus)( HRESULT hrStatus)=0;
+    STDMETHOD(GetObject)( _Out_ IUnknown ** ppObject)=0;
+    STDMETHOD_(IUnknown *, GetStateNoAddRef)()=0;
 };
 
 interface DECLSPEC_UUID("a27003cf-2354-4f2a-8d6a-ab7cff15437e") DECLSPEC_NOVTABLE
     IRtwqAsyncCallback : public IUnknown
 {
-    STDMETHOD(GetParameters)( _Out_ DWORD* pdwFlags, _Out_ DWORD* pdwQueue );
-    STDMETHOD(Invoke)( _In_ IRtwqAsyncResult* pAsyncResult );
+    STDMETHOD(GetParameters)( _Out_ DWORD* pdwFlags, _Out_ DWORD* pdwQueue )=0;
+    STDMETHOD(Invoke)( _In_ IRtwqAsyncResult* pAsyncResult )=0;
 };
 
 typedef struct tagRTWQASYNCRESULT : public IRtwqAsyncResult
