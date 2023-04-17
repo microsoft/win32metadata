@@ -183,13 +183,6 @@ public class NullNullTerminatedAttribute : Attribute
     }
 }
 
-public class PropertyKeyAttribute : Attribute
-{
-    public PropertyKeyAttribute(uint a, ushort b, ushort c, byte d, byte e, byte f, byte g, byte h, byte i, byte j, byte k, uint pid)
-    {
-    }
-}
-
 public class RAIIFreeAttribute : Attribute
 {
     public RAIIFreeAttribute(string Name)
