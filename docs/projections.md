@@ -103,3 +103,5 @@ DISCLAIMER: This list is a work in progress and is not yet comprehensive.
   * AlsoUsableFor attribute
   * RAIIFree attribute
   * InvalidHandleValue attribute
+* [Windows.Win32.UI.Shell.wnsprintfW](https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-wnsprintfw)
+  * VarArgs for variadic function
