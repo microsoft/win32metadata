@@ -60,6 +60,7 @@ DISCLAIMER: This list is a work in progress and is not yet comprehensive.
 * Handle parameters decorated with `[IgnoreIfReturn]` are undefined in failure scenarios and should be ignored if the value specified by the attribute is returned. Multiple return values are represented by multiple attributes. ([#1312](https://github.com/microsoft/win32metadata/issues/1312))
 * Return value parameters marked with the `_retval_` SAL annotation are decorated with the `[RetVal]` attribute
 * Functions that return alternate success codes or return errors as success are decorated with `[CanReturnAlternateSuccessCodes]` and `[CanReturnErrorsAsSuccess]` ([#1315](https://github.com/microsoft/win32metadata/issues/1315))
+* Variadic functions contain `__arglist` as the final parameter
 * Agile interfaces are decorated with the `[Agile]` attribute
 * Structs decorated with `[StructSizeField("<FIELDNAME>")]` indicate that `<FIELDNAME>` should be automatically populated with the size of the struct ([#433](https://github.com/microsoft/win32metadata/issues/433))
   * NOTE: Examples of `"<FIELDNAME>"` include `"cbSize"` for a field on the struct or `"StartupInfo.cb"` for a nested field like `StartupInfo.cb` on the `STARTUPINFOEXW` struct
@@ -90,6 +91,8 @@ DISCLAIMER: This list is a work in progress and is not yet comprehensive.
   * Out attribute
   * Optional attribute
   * MemorySize attribute
+* [Windows.Win32.Devices.DeviceAndDriverInstallation.SetupWriteTextLog](https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupwritetextlog)
+  * Variadic functions
 * [Windows.Win32.System.Diagnostics.Debug.CONTEXT](https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-context)
   * SupportedArchitecture attribute
 * [Windows.Win32.Devices.Display.DISPLAYCONFIG_VIDEO_SIGNAL_INFO](https://docs.microsoft.com/windows/win32/api/wingdi/ns-wingdi-displayconfig_video_signal_info)
@@ -103,5 +106,3 @@ DISCLAIMER: This list is a work in progress and is not yet comprehensive.
   * AlsoUsableFor attribute
   * RAIIFree attribute
   * InvalidHandleValue attribute
-* [Windows.Win32.UI.Shell.wnsprintfW](https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-wnsprintfw)
-  * VarArgs for variadic function
