@@ -77,3 +77,29 @@ DISCLAIMER: This list is a work in progress and is not yet comprehensive.
 * Inline functions that return constants are decorated with the `[Constant]` attribute. Projections need to implement these functions themselves to return the constant value. The constant value should be cast to the appropriate type based on the return value of the function. ([#436](https://github.com/microsoft/win32metadata/issues/436))
 
 DISCLAIMER: This list is a work in progress and is not yet comprehensive.
+
+### Examples
+
+* [Windows.Win32.UI.WindowsAndMessaging.SetWindowLongPtrW](https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setwindowlongptrw)
+  * DllImport attribute
+  * SupportedArchitecture attribute
+  * NativeTypedef parameter (HWND)
+  * Enum parameter (WINDOW_LONG_PTR_INDEX)
+* [Windows.Win32.Security.Cryptography.BcryptEncrypt](https://learn.microsoft.com/windows/win32/api/bcrypt/nf-bcrypt-bcryptencrypt)
+  * In attribute
+  * Out attribute
+  * Optional attribute
+  * MemorySize attribute
+* [Windows.Win32.System.Diagnostics.Debug.CONTEXT](https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-context)
+  * SupportedArchitecture attribute
+* [Windows.Win32.Devices.Display.DISPLAYCONFIG_VIDEO_SIGNAL_INFO](https://docs.microsoft.com/windows/win32/api/wingdi/ns-wingdi-displayconfig_video_signal_info)
+  * Struct and union fields
+  * Bitfields
+* [Windows.Win32.UI.WindowsAndMessaging.WNDCLASSEXW](https://learn.microsoft.com/windows/win32/api/winuser/ns-winuser-wndclassexw)
+  * StructSizeField attribute
+  * Delegate fields (WNDPROC)
+* [Windows.Win32.Security.Cryptography.BCRYPT_KEY_HANDLE](https://learn.microsoft.com/windows/win32/api/bcrypt/nf-bcrypt-bcryptimportkey)
+  * NativeTypedef
+  * AlsoUsableFor attribute
+  * RAIIFree attribute
+  * InvalidHandleValue attribute
