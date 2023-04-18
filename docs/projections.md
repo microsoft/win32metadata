@@ -33,7 +33,7 @@ Note: Community projects are listed here to help with discovery but are not offi
 
 The winmd file produced by this project can be parsed with any ECMA-335 compliant parser like .NET [System.Reflection](https://docs.microsoft.com/dotnet/api/system.reflection?view=net-5.0) and [System.Reflection.Metadata](https://docs.microsoft.com/dotnet/api/system.reflection.metadata?view=net-5.0) APIs.
 
-Alternatively, a JSON translation of the winmd file can be found at https://github.com/marlersoft/win32json.
+Alternatively, a JSON translation of the winmd files from community can be found at https://github.com/ynkdir/winmd-printer.
 
 ### Scenarios
 
