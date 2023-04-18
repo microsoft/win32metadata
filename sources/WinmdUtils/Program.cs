@@ -1109,7 +1109,7 @@ namespace WinmdUtilsProgram
         {
             int before = writer.DifferencesCount;
 
-            CompareAttributes(field1.Name, field1.GetAttributes(), field2.GetAttributes(), writer);
+            CompareAttributes(field1.FullName, field1.GetAttributes(), field2.GetAttributes(), writer);
 
             string fullField1Name = GetFullMemberName(field1);
 

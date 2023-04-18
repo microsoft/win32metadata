@@ -333,6 +333,26 @@ namespace ClangSharpSourceToWinmd
                     }
                 }
 
+                // Assume [0] or [1] (ANYSIZE_ARRAY) at the end of a struct indicates flexible arrays and add the FlexibleArray attribute.
+                // Parse NativeTypeName instead of the field declaration to support scenarios like arrays of structs which aren't scraped as arrays.
+                var nativeTypeName = SyntaxUtils.GetNativeTypeNameFromAttributesLists(node.AttributeLists);
+                if (nativeTypeName != null)
+                {
+                    var match = NativeTypeNameArrayRegex.Match(nativeTypeName);
+                    if (match.Success && match.Groups[1].Value == "0" || match.Groups[1].Value == "1")
+                    {
+                        if (node.ToString() == (node.Parent as StructDeclarationSyntax).Members.Where(m => m is FieldDeclarationSyntax).Last().ToString())
+                        {
+                            var attributeList = SyntaxFactory.AttributeList(
+                                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
+                                        SyntaxFactory.Attribute(
+                                            SyntaxFactory.ParseName("FlexibleArray"))));
+
+                            node = node.AddAttributeLists(attributeList);
+                        }
+                    }
+                }
+
                 node = (FieldDeclarationSyntax)base.VisitFieldDeclaration(node);
                 node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes));
 
