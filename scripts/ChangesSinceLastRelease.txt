@@ -339,6 +339,18 @@ Windows.Win32.Media.Speech.ISpGrammarBuilder2.AddTextSubset : hToState : [In,Out
 Windows.Win32.Media.Speech.ISpGrammarBuilder2.AddTextSubset : hToState...SPSTATEHANDLE__* => SPSTATEHANDLE
 Windows.Win32.Media.Speech.SPSTATEHANDLE__ removed
 # Fixed #547.
+Windows.Win32.Graphics.Direct3D12.D3D12_COMMAND_SIGNATURE_DESC.pArgumentDescs : [Const] => [Const,NativeArrayInfo(CountFieldName=NumArgumentDescs)]
+Windows.Win32.Graphics.Direct3D12.D3D12_INPUT_LAYOUT_DESC.pInputElementDescs : [Const] => [Const,NativeArrayInfo(CountFieldName=NumElements)]
+Windows.Win32.Graphics.Direct3D12.D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_PARAMETERS.pSubresourceParameters : [Const] => [Const,NativeArrayInfo(CountFieldName=SubresourceCount)]
+Windows.Win32.Graphics.Direct3D12.D3D12_ROOT_DESCRIPTOR_TABLE.pDescriptorRanges : [Const] => [Const,NativeArrayInfo(CountFieldName=NumDescriptorRanges)]
+Windows.Win32.Graphics.Direct3D12.D3D12_ROOT_DESCRIPTOR_TABLE1.pDescriptorRanges : [Const] => [Const,NativeArrayInfo(CountFieldName=NumDescriptorRanges)]
+Windows.Win32.Graphics.Direct3D12.D3D12_ROOT_SIGNATURE_DESC.pParameters : [Const] => [Const,NativeArrayInfo(CountFieldName=NumParameters)]
+Windows.Win32.Graphics.Direct3D12.D3D12_ROOT_SIGNATURE_DESC.pStaticSamplers : [Const] => [Const,NativeArrayInfo(CountFieldName=NumStaticSamplers)]
+Windows.Win32.Graphics.Direct3D12.D3D12_ROOT_SIGNATURE_DESC1.pParameters : [Const] => [Const,NativeArrayInfo(CountFieldName=NumParameters)]
+Windows.Win32.Graphics.Direct3D12.D3D12_ROOT_SIGNATURE_DESC1.pStaticSamplers : [Const] => [Const,NativeArrayInfo(CountFieldName=NumStaticSamplers)]
+Windows.Win32.Graphics.Direct3D12.D3D12_STREAM_OUTPUT_DESC.pBufferStrides : [Const] => [Const,NativeArrayInfo(CountFieldName=NumStrides)]
+Windows.Win32.Graphics.Direct3D12.D3D12_STREAM_OUTPUT_DESC.pSODeclaration : [Const] => [Const,NativeArrayInfo(CountFieldName=NumEntries)]
+Windows.Win32.Graphics.Direct3D12.D3D12_VIEW_INSTANCING_DESC.pViewInstanceLocations : [Const] => [Const,NativeArrayInfo(CountFieldName=ViewInstanceCount)]
 # Fixed #1540.
 Windows.Win32.Foundation.HGLOBAL.Value...System.IntPtr => System.Void*
 Windows.Win32.Foundation.HLOCAL.Value...System.IntPtr => System.Void*
@@ -700,18 +712,6 @@ Windows.Win32.Devices.Usb.USB_STRING_DESCRIPTOR.bString :  => [FlexibleArray]
 Windows.Win32.Devices.Usb.USB_UNICODE_NAME.String :  => [FlexibleArray]
 Windows.Win32.Devices.Usb.USBFN_INTERFACE_INFO.InterfaceDescriptorSet :  => [FlexibleArray]
 Windows.Win32.Foundation.Metadata.FlexibleArrayAttribute added
-Windows.Win32.Graphics.Direct3D12.D3D12_COMMAND_SIGNATURE_DESC.pArgumentDescs : [Const] => [Const,NativeArrayInfo(CountFieldName=NumArgumentDescs)]
-Windows.Win32.Graphics.Direct3D12.D3D12_INPUT_LAYOUT_DESC.pInputElementDescs : [Const] => [Const,NativeArrayInfo(CountFieldName=NumElements)]
-Windows.Win32.Graphics.Direct3D12.D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_PARAMETERS.pSubresourceParameters : [Const] => [Const,NativeArrayInfo(CountFieldName=SubresourceCount)]
-Windows.Win32.Graphics.Direct3D12.D3D12_ROOT_DESCRIPTOR_TABLE.pDescriptorRanges : [Const] => [Const,NativeArrayInfo(CountFieldName=NumDescriptorRanges)]
-Windows.Win32.Graphics.Direct3D12.D3D12_ROOT_DESCRIPTOR_TABLE1.pDescriptorRanges : [Const] => [Const,NativeArrayInfo(CountFieldName=NumDescriptorRanges)]
-Windows.Win32.Graphics.Direct3D12.D3D12_ROOT_SIGNATURE_DESC.pParameters : [Const] => [Const,NativeArrayInfo(CountFieldName=NumParameters)]
-Windows.Win32.Graphics.Direct3D12.D3D12_ROOT_SIGNATURE_DESC.pStaticSamplers : [Const] => [Const,NativeArrayInfo(CountFieldName=NumStaticSamplers)]
-Windows.Win32.Graphics.Direct3D12.D3D12_ROOT_SIGNATURE_DESC1.pParameters : [Const] => [Const,NativeArrayInfo(CountFieldName=NumParameters)]
-Windows.Win32.Graphics.Direct3D12.D3D12_ROOT_SIGNATURE_DESC1.pStaticSamplers : [Const] => [Const,NativeArrayInfo(CountFieldName=NumStaticSamplers)]
-Windows.Win32.Graphics.Direct3D12.D3D12_STREAM_OUTPUT_DESC.pBufferStrides : [Const] => [Const,NativeArrayInfo(CountFieldName=NumStrides)]
-Windows.Win32.Graphics.Direct3D12.D3D12_STREAM_OUTPUT_DESC.pSODeclaration : [Const] => [Const,NativeArrayInfo(CountFieldName=NumEntries)]
-Windows.Win32.Graphics.Direct3D12.D3D12_VIEW_INSTANCING_DESC.pViewInstanceLocations : [Const] => [Const,NativeArrayInfo(CountFieldName=ViewInstanceCount)]
 Windows.Win32.Graphics.Gdi.EMRCOLORMATCHTOTARGET.Data :  => [FlexibleArray]
 Windows.Win32.Graphics.Gdi.EMREXTESCAPE.EscData :  => [FlexibleArray]
 Windows.Win32.Graphics.Gdi.EMREXTSELECTCLIPRGN.RgnData :  => [FlexibleArray]
