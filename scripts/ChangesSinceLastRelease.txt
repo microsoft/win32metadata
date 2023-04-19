@@ -1909,3 +1909,67 @@ Windows.Win32.NetworkManagement.Dhcp.DHCP_OPTION_SCOPE_UNION6 removed
 Windows.Win32.NetworkManagement.Dhcp.DHCP_SUBNET_ELEMENT_UNION removed
 Windows.Win32.NetworkManagement.Dhcp.DHCP_SUBNET_ELEMENT_UNION_V4 removed
 Windows.Win32.NetworkManagement.Dhcp.DHCP_SUBNET_ELEMENT_UNION_V6 removed
+# Fixed #1522.
+Windows.Win32.System.Threading.Apis.AcquireSRWLockExclusive : SRWLock...RTL_SRWLOCK* => SRWLOCK*
+Windows.Win32.System.Threading.Apis.AcquireSRWLockShared : SRWLock...RTL_SRWLOCK* => SRWLOCK*
+Windows.Win32.System.Threading.Apis.DeleteCriticalSection : lpCriticalSection...RTL_CRITICAL_SECTION* => CRITICAL_SECTION*
+Windows.Win32.System.Threading.Apis.DeleteSynchronizationBarrier : lpBarrier...RTL_BARRIER* => SYNCHRONIZATION_BARRIER*
+Windows.Win32.System.Threading.Apis.EnterCriticalSection : lpCriticalSection...RTL_CRITICAL_SECTION* => CRITICAL_SECTION*
+Windows.Win32.System.Threading.Apis.EnterSynchronizationBarrier : lpBarrier...RTL_BARRIER* => SYNCHRONIZATION_BARRIER*
+Windows.Win32.System.Threading.Apis.InitializeConditionVariable : ConditionVariable...RTL_CONDITION_VARIABLE* => CONDITION_VARIABLE*
+Windows.Win32.System.Threading.Apis.InitializeCriticalSection : lpCriticalSection...RTL_CRITICAL_SECTION* => CRITICAL_SECTION*
+Windows.Win32.System.Threading.Apis.InitializeCriticalSectionAndSpinCount : lpCriticalSection...RTL_CRITICAL_SECTION* => CRITICAL_SECTION*
+Windows.Win32.System.Threading.Apis.InitializeCriticalSectionEx : lpCriticalSection...RTL_CRITICAL_SECTION* => CRITICAL_SECTION*
+Windows.Win32.System.Threading.Apis.InitializeSRWLock : SRWLock...RTL_SRWLOCK* => SRWLOCK*
+Windows.Win32.System.Threading.Apis.InitializeSynchronizationBarrier : lpBarrier...RTL_BARRIER* => SYNCHRONIZATION_BARRIER*
+Windows.Win32.System.Threading.Apis.InitOnceBeginInitialize : lpInitOnce...RTL_RUN_ONCE* => INIT_ONCE*
+Windows.Win32.System.Threading.Apis.InitOnceComplete : lpInitOnce...RTL_RUN_ONCE* => INIT_ONCE*
+Windows.Win32.System.Threading.Apis.InitOnceExecuteOnce : InitOnce...RTL_RUN_ONCE* => INIT_ONCE*
+Windows.Win32.System.Threading.Apis.InitOnceInitialize : InitOnce...RTL_RUN_ONCE* => INIT_ONCE*
+Windows.Win32.System.Threading.Apis.LeaveCriticalSection : lpCriticalSection...RTL_CRITICAL_SECTION* => CRITICAL_SECTION*
+Windows.Win32.System.Threading.Apis.LeaveCriticalSectionWhenCallbackReturns : pcs...RTL_CRITICAL_SECTION* => CRITICAL_SECTION*
+Windows.Win32.System.Threading.Apis.QueryUmsThreadInformation : UmsThreadInfoClass...RTL_UMS_THREAD_INFO_CLASS => UMS_THREAD_INFO_CLASS
+Windows.Win32.System.Threading.Apis.ReleaseSRWLockExclusive : SRWLock...RTL_SRWLOCK* => SRWLOCK*
+Windows.Win32.System.Threading.Apis.ReleaseSRWLockShared : SRWLock...RTL_SRWLOCK* => SRWLOCK*
+Windows.Win32.System.Threading.Apis.SetCriticalSectionSpinCount : lpCriticalSection...RTL_CRITICAL_SECTION* => CRITICAL_SECTION*
+Windows.Win32.System.Threading.Apis.SetUmsThreadInformation : UmsThreadInfoClass...RTL_UMS_THREAD_INFO_CLASS => UMS_THREAD_INFO_CLASS
+Windows.Win32.System.Threading.Apis.SleepConditionVariableCS : ConditionVariable...RTL_CONDITION_VARIABLE* => CONDITION_VARIABLE*
+Windows.Win32.System.Threading.Apis.SleepConditionVariableCS : CriticalSection...RTL_CRITICAL_SECTION* => CRITICAL_SECTION*
+Windows.Win32.System.Threading.Apis.SleepConditionVariableSRW : ConditionVariable...RTL_CONDITION_VARIABLE* => CONDITION_VARIABLE*
+Windows.Win32.System.Threading.Apis.SleepConditionVariableSRW : SRWLock...RTL_SRWLOCK* => SRWLOCK*
+Windows.Win32.System.Threading.Apis.TryAcquireSRWLockExclusive : SRWLock...RTL_SRWLOCK* => SRWLOCK*
+Windows.Win32.System.Threading.Apis.TryAcquireSRWLockShared : SRWLock...RTL_SRWLOCK* => SRWLOCK*
+Windows.Win32.System.Threading.Apis.TryEnterCriticalSection : lpCriticalSection...RTL_CRITICAL_SECTION* => CRITICAL_SECTION*
+Windows.Win32.System.Threading.Apis.WakeAllConditionVariable : ConditionVariable...RTL_CONDITION_VARIABLE* => CONDITION_VARIABLE*
+Windows.Win32.System.Threading.Apis.WakeConditionVariable : ConditionVariable...RTL_CONDITION_VARIABLE* => CONDITION_VARIABLE*
+Windows.Win32.System.Threading.CONDITION_VARIABLE added
+Windows.Win32.System.Threading.CRITICAL_SECTION added
+Windows.Win32.System.Threading.CRITICAL_SECTION_DEBUG added
+Windows.Win32.System.Threading.INIT_ONCE added
+Windows.Win32.System.Threading.PINIT_ONCE_FN.Invoke : InitOnce...RTL_RUN_ONCE* => INIT_ONCE*
+Windows.Win32.System.Threading.RTL_BARRIER removed
+Windows.Win32.System.Threading.RTL_CONDITION_VARIABLE removed
+Windows.Win32.System.Threading.RTL_CRITICAL_SECTION removed
+Windows.Win32.System.Threading.RTL_CRITICAL_SECTION_DEBUG removed
+Windows.Win32.System.Threading.RTL_RUN_ONCE removed
+Windows.Win32.System.Threading.RTL_SRWLOCK removed
+Windows.Win32.System.Threading.RTL_UMS_THREAD_INFO_CLASS removed
+Windows.Win32.System.Threading.RTL_UMS_THREAD_INFO_CLASS.UmsThreadAffinity removed
+Windows.Win32.System.Threading.RTL_UMS_THREAD_INFO_CLASS.UmsThreadInvalidInfoClass removed
+Windows.Win32.System.Threading.RTL_UMS_THREAD_INFO_CLASS.UmsThreadIsSuspended removed
+Windows.Win32.System.Threading.RTL_UMS_THREAD_INFO_CLASS.UmsThreadIsTerminated removed
+Windows.Win32.System.Threading.RTL_UMS_THREAD_INFO_CLASS.UmsThreadMaxInfoClass removed
+Windows.Win32.System.Threading.RTL_UMS_THREAD_INFO_CLASS.UmsThreadPriority removed
+Windows.Win32.System.Threading.RTL_UMS_THREAD_INFO_CLASS.UmsThreadTeb removed
+Windows.Win32.System.Threading.RTL_UMS_THREAD_INFO_CLASS.UmsThreadUserContext removed
+Windows.Win32.System.Threading.SRWLOCK added
+Windows.Win32.System.Threading.SYNCHRONIZATION_BARRIER added
+Windows.Win32.System.Threading.UMS_THREAD_INFO_CLASS added
+Windows.Win32.System.Threading.UMS_THREAD_INFO_CLASS.UmsThreadAffinity added
+Windows.Win32.System.Threading.UMS_THREAD_INFO_CLASS.UmsThreadInvalidInfoClass added
+Windows.Win32.System.Threading.UMS_THREAD_INFO_CLASS.UmsThreadIsSuspended added
+Windows.Win32.System.Threading.UMS_THREAD_INFO_CLASS.UmsThreadIsTerminated added
+Windows.Win32.System.Threading.UMS_THREAD_INFO_CLASS.UmsThreadMaxInfoClass added
+Windows.Win32.System.Threading.UMS_THREAD_INFO_CLASS.UmsThreadPriority added
+Windows.Win32.System.Threading.UMS_THREAD_INFO_CLASS.UmsThreadTeb added
+Windows.Win32.System.Threading.UMS_THREAD_INFO_CLASS.UmsThreadUserContext added
