@@ -11,6 +11,5 @@
 #include <shlobj_core.h>
 #include <propsys.h>
 #include <shobjidl_core.h>
-#include <propvarutil.h>
 #include <propidl.h>
 #include <shellapi.h>

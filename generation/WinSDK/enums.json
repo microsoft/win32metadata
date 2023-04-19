@@ -36468,6 +36468,25 @@
         "field": "ContextFlags"
       }
     ]
+  },
+  {
+    "name": "VAR_CHANGE_FLAGS",
+    "type": "ushort",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "VARIANT_",
+      "header": "OleAuto.h"
+    },
+    "uses": [
+      {
+        "method": "VariantChangeType",
+        "parameter": "wFlags"
+      },
+      {
+        "method": "VariantChangeTypeEx",
+        "parameter": "wFlags"
+      }
+    ]
   }
 ]
 }

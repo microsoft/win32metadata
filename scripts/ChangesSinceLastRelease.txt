@@ -1499,3 +1499,406 @@ Windows.Win32.UI.Shell.FILEGROUPDESCRIPTORW.fgd :  => [FlexibleArray]
 Windows.Win32.UI.Shell.NRESARRAY.nr :  => [FlexibleArray]
 Windows.Win32.UI.Shell.QCMINFO_IDMAP.pIdList :  => [FlexibleArray]
 Windows.Win32.UI.WindowsAndMessaging.MESSAGE_RESOURCE_DATA.Blocks :  => [FlexibleArray]
+# Fixed #1019.
+Windows.Win32.Data.HtmlHelp.HH_GLOBAL_PROPERTY.var...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
+Windows.Win32.Devices.ImageAcquisition.WIA_PROPERTY_INFO.vt...Windows.Win32.System.Com.VARENUM => Windows.Win32.System.Variant.VARENUM
+Windows.Win32.Media.Speech.SPPHRASEPROPERTY.vValue...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
+Windows.Win32.Media.Speech.SPPROPERTYINFO.vValue...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
+Windows.Win32.Networking.ActiveDirectory.DS_SELECTION.pvarFetchedAttributes...Windows.Win32.System.Com.VARIANT* => Windows.Win32.System.Variant.VARIANT*
+Windows.Win32.System.Com.CUSTDATAITEM.varValue...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
+Windows.Win32.System.Com.DISPPARAMS.rgvarg...Windows.Win32.System.Com.VARIANT* => Windows.Win32.System.Variant.VARIANT*
+Windows.Win32.System.Com.Marshal.Apis.VARIANT_UserFree => Windows.Win32.System.Variant.Apis.VARIANT_UserFree
+Windows.Win32.System.Com.Marshal.Apis.VARIANT_UserFree64 => Windows.Win32.System.Variant.Apis.VARIANT_UserFree64
+Windows.Win32.System.Com.Marshal.Apis.VARIANT_UserMarshal => Windows.Win32.System.Variant.Apis.VARIANT_UserMarshal
+Windows.Win32.System.Com.Marshal.Apis.VARIANT_UserMarshal64 => Windows.Win32.System.Variant.Apis.VARIANT_UserMarshal64
+Windows.Win32.System.Com.Marshal.Apis.VARIANT_UserSize => Windows.Win32.System.Variant.Apis.VARIANT_UserSize
+Windows.Win32.System.Com.Marshal.Apis.VARIANT_UserSize64 => Windows.Win32.System.Variant.Apis.VARIANT_UserSize64
+Windows.Win32.System.Com.Marshal.Apis.VARIANT_UserUnmarshal => Windows.Win32.System.Variant.Apis.VARIANT_UserUnmarshal
+Windows.Win32.System.Com.Marshal.Apis.VARIANT_UserUnmarshal64 => Windows.Win32.System.Variant.Apis.VARIANT_UserUnmarshal64
+Windows.Win32.System.Com.StructuredStorage.PROPBAG2.vt...Windows.Win32.System.Com.VARENUM => Windows.Win32.System.Variant.VARENUM
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_CHANGE_FLAGS added
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_CHANGE_FLAGS.PVCHF_ALPHABOOL added
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_CHANGE_FLAGS.PVCHF_DEFAULT added
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_CHANGE_FLAGS.PVCHF_LOCALBOOL added
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_CHANGE_FLAGS.PVCHF_NOHEXSTRING added
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_CHANGE_FLAGS.PVCHF_NOUSEROVERRIDE added
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_CHANGE_FLAGS.PVCHF_NOVALUEPROP added
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_COMPARE_FLAGS added
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_COMPARE_FLAGS.PVCF_DEFAULT added
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_COMPARE_FLAGS.PVCF_DIGITSASNUMBERS_CASESENSITIVE added
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_COMPARE_FLAGS.PVCF_TREATEMPTYASGREATERTHAN added
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_COMPARE_FLAGS.PVCF_USESTRCMP added
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_COMPARE_FLAGS.PVCF_USESTRCMPC added
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_COMPARE_FLAGS.PVCF_USESTRCMPI added
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_COMPARE_FLAGS.PVCF_USESTRCMPIC added
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_COMPARE_UNIT added
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_COMPARE_UNIT.PVCU_DAY added
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_COMPARE_UNIT.PVCU_DEFAULT added
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_COMPARE_UNIT.PVCU_HOUR added
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_COMPARE_UNIT.PVCU_MINUTE added
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_COMPARE_UNIT.PVCU_MONTH added
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_COMPARE_UNIT.PVCU_SECOND added
+Windows.Win32.System.Com.StructuredStorage.PROPVAR_COMPARE_UNIT.PVCU_YEAR added
+Windows.Win32.System.Com.StructuredStorage.PROPVARIANT._Anonymous_e__Union._Anonymous_e__Struct.vt...Windows.Win32.System.Com.VARENUM => Windows.Win32.System.Variant.VARENUM
+Windows.Win32.System.Com.StructuredStorage.STATPROPSTG.vt...Windows.Win32.System.Com.VARENUM => Windows.Win32.System.Variant.VARENUM
+Windows.Win32.System.Com.TYPEDESC.vt...Windows.Win32.System.Com.VARENUM => Windows.Win32.System.Variant.VARENUM
+Windows.Win32.System.Com.VARDESC._Anonymous_e__Union.lpvarValue...Windows.Win32.System.Com.VARIANT* => Windows.Win32.System.Variant.VARIANT*
+Windows.Win32.System.Com.VARENUM removed
+Windows.Win32.System.Com.VARENUM.VT_ARRAY removed
+Windows.Win32.System.Com.VARENUM.VT_BLOB removed
+Windows.Win32.System.Com.VARENUM.VT_BLOB_OBJECT removed
+Windows.Win32.System.Com.VARENUM.VT_BOOL removed
+Windows.Win32.System.Com.VARENUM.VT_BSTR removed
+Windows.Win32.System.Com.VARENUM.VT_BSTR_BLOB removed
+Windows.Win32.System.Com.VARENUM.VT_BYREF removed
+Windows.Win32.System.Com.VARENUM.VT_CARRAY removed
+Windows.Win32.System.Com.VARENUM.VT_CF removed
+Windows.Win32.System.Com.VARENUM.VT_CLSID removed
+Windows.Win32.System.Com.VARENUM.VT_CY removed
+Windows.Win32.System.Com.VARENUM.VT_DATE removed
+Windows.Win32.System.Com.VARENUM.VT_DECIMAL removed
+Windows.Win32.System.Com.VARENUM.VT_DISPATCH removed
+Windows.Win32.System.Com.VARENUM.VT_EMPTY removed
+Windows.Win32.System.Com.VARENUM.VT_ERROR removed
+Windows.Win32.System.Com.VARENUM.VT_FILETIME removed
+Windows.Win32.System.Com.VARENUM.VT_HRESULT removed
+Windows.Win32.System.Com.VARENUM.VT_I1 removed
+Windows.Win32.System.Com.VARENUM.VT_I2 removed
+Windows.Win32.System.Com.VARENUM.VT_I4 removed
+Windows.Win32.System.Com.VARENUM.VT_I8 removed
+Windows.Win32.System.Com.VARENUM.VT_ILLEGAL removed
+Windows.Win32.System.Com.VARENUM.VT_ILLEGALMASKED removed
+Windows.Win32.System.Com.VARENUM.VT_INT removed
+Windows.Win32.System.Com.VARENUM.VT_INT_PTR removed
+Windows.Win32.System.Com.VARENUM.VT_LPSTR removed
+Windows.Win32.System.Com.VARENUM.VT_LPWSTR removed
+Windows.Win32.System.Com.VARENUM.VT_NULL removed
+Windows.Win32.System.Com.VARENUM.VT_PTR removed
+Windows.Win32.System.Com.VARENUM.VT_R4 removed
+Windows.Win32.System.Com.VARENUM.VT_R8 removed
+Windows.Win32.System.Com.VARENUM.VT_RECORD removed
+Windows.Win32.System.Com.VARENUM.VT_RESERVED removed
+Windows.Win32.System.Com.VARENUM.VT_SAFEARRAY removed
+Windows.Win32.System.Com.VARENUM.VT_STORAGE removed
+Windows.Win32.System.Com.VARENUM.VT_STORED_OBJECT removed
+Windows.Win32.System.Com.VARENUM.VT_STREAM removed
+Windows.Win32.System.Com.VARENUM.VT_STREAMED_OBJECT removed
+Windows.Win32.System.Com.VARENUM.VT_TYPEMASK removed
+Windows.Win32.System.Com.VARENUM.VT_UI1 removed
+Windows.Win32.System.Com.VARENUM.VT_UI2 removed
+Windows.Win32.System.Com.VARENUM.VT_UI4 removed
+Windows.Win32.System.Com.VARENUM.VT_UI8 removed
+Windows.Win32.System.Com.VARENUM.VT_UINT removed
+Windows.Win32.System.Com.VARENUM.VT_UINT_PTR removed
+Windows.Win32.System.Com.VARENUM.VT_UNKNOWN removed
+Windows.Win32.System.Com.VARENUM.VT_USERDEFINED removed
+Windows.Win32.System.Com.VARENUM.VT_VARIANT removed
+Windows.Win32.System.Com.VARENUM.VT_VECTOR removed
+Windows.Win32.System.Com.VARENUM.VT_VERSIONED_STREAM removed
+Windows.Win32.System.Com.VARENUM.VT_VOID removed
+Windows.Win32.System.Com.VARIANT removed
+Windows.Win32.System.Diagnostics.Debug.ExtendedDebugPropertyInfo.varValue...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
+Windows.Win32.System.Mmc.MMC_SNAPIN_PROPERTY.varValue...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
+Windows.Win32.System.Ole.Apis.DosDateTimeToVariantTime => Windows.Win32.System.Variant.Apis.DosDateTimeToVariantTime
+Windows.Win32.System.Ole.Apis.SystemTimeToVariantTime => Windows.Win32.System.Variant.Apis.SystemTimeToVariantTime
+Windows.Win32.System.Ole.Apis.VARIANT_ALPHABOOL removed
+Windows.Win32.System.Ole.Apis.VARIANT_CALENDAR_GREGORIAN removed
+Windows.Win32.System.Ole.Apis.VARIANT_CALENDAR_HIJRI removed
+Windows.Win32.System.Ole.Apis.VARIANT_CALENDAR_THAI removed
+Windows.Win32.System.Ole.Apis.VARIANT_LOCALBOOL removed
+Windows.Win32.System.Ole.Apis.VARIANT_NOUSEROVERRIDE removed
+Windows.Win32.System.Ole.Apis.VARIANT_NOVALUEPROP removed
+Windows.Win32.System.Ole.Apis.VARIANT_USE_NLS removed
+Windows.Win32.System.Ole.Apis.VariantChangeType removed
+Windows.Win32.System.Ole.Apis.VariantChangeTypeEx removed
+Windows.Win32.System.Ole.Apis.VariantClear => Windows.Win32.System.Variant.Apis.VariantClear
+Windows.Win32.System.Ole.Apis.VariantCopy => Windows.Win32.System.Variant.Apis.VariantCopy
+Windows.Win32.System.Ole.Apis.VariantCopyInd => Windows.Win32.System.Variant.Apis.VariantCopyInd
+Windows.Win32.System.Ole.Apis.VariantInit => Windows.Win32.System.Variant.Apis.VariantInit
+Windows.Win32.System.Ole.Apis.VariantTimeToDosDateTime => Windows.Win32.System.Variant.Apis.VariantTimeToDosDateTime
+Windows.Win32.System.Ole.Apis.VariantTimeToSystemTime => Windows.Win32.System.Variant.Apis.VariantTimeToSystemTime
+Windows.Win32.System.Ole.METHODDATA.vtReturn...Windows.Win32.System.Com.VARENUM => Windows.Win32.System.Variant.VARENUM
+Windows.Win32.System.Ole.PARAMDATA.vt...Windows.Win32.System.Com.VARENUM => Windows.Win32.System.Variant.VARENUM
+Windows.Win32.System.Ole.PARAMDESCEX.varDefaultValue...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
+Windows.Win32.System.Search.DBPROP.vValue(X64, Arm64)...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
+Windows.Win32.System.Search.DBPROP.vValue(X86)...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
+Windows.Win32.System.Search.DBPROPINFO.vtType(X64, Arm64)...Windows.Win32.System.Com.VARENUM => Windows.Win32.System.Variant.VARENUM
+Windows.Win32.System.Search.DBPROPINFO.vtType(X86)...Windows.Win32.System.Com.VARENUM => Windows.Win32.System.Variant.VARENUM
+Windows.Win32.System.Search.DBPROPINFO.vValues(X64, Arm64)...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
+Windows.Win32.System.Search.DBPROPINFO.vValues(X86)...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
+Windows.Win32.System.Search.DCINFO.vData...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
+Windows.Win32.System.Search.ITEMPROP.variantValue...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
+Windows.Win32.System.Search.KAGGETDIAG.vDiagInfo...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
+Windows.Win32.System.Search.KAGREQDIAG.vt...Windows.Win32.System.Com.VARENUM => Windows.Win32.System.Variant.VARENUM
+Windows.Win32.System.Search.RMTPACK.rgArray(X64, Arm64)...Windows.Win32.System.Com.VARIANT* => Windows.Win32.System.Variant.VARIANT*
+Windows.Win32.System.Search.RMTPACK.rgArray(X86)...Windows.Win32.System.Com.VARIANT* => Windows.Win32.System.Variant.VARIANT*
+Windows.Win32.System.Search.RMTPACK.rgVARIANT(X64, Arm64)...Windows.Win32.System.Com.VARIANT* => Windows.Win32.System.Variant.VARIANT*
+Windows.Win32.System.Search.RMTPACK.rgVARIANT(X86)...Windows.Win32.System.Com.VARIANT* => Windows.Win32.System.Variant.VARIANT*
+Windows.Win32.System.Variant.Apis.VariantChangeType added
+Windows.Win32.System.Variant.Apis.VariantChangeTypeEx added
+Windows.Win32.System.Variant.DRAWPROGRESSFLAGS added
+Windows.Win32.System.Variant.DRAWPROGRESSFLAGS.DPF_ERROR added
+Windows.Win32.System.Variant.DRAWPROGRESSFLAGS.DPF_MARQUEE added
+Windows.Win32.System.Variant.DRAWPROGRESSFLAGS.DPF_MARQUEE_COMPLETE added
+Windows.Win32.System.Variant.DRAWPROGRESSFLAGS.DPF_NONE added
+Windows.Win32.System.Variant.DRAWPROGRESSFLAGS.DPF_STOPPED added
+Windows.Win32.System.Variant.DRAWPROGRESSFLAGS.DPF_WARNING added
+Windows.Win32.System.Variant.PSTIME_FLAGS added
+Windows.Win32.System.Variant.PSTIME_FLAGS.PSTF_LOCAL added
+Windows.Win32.System.Variant.PSTIME_FLAGS.PSTF_UTC added
+Windows.Win32.System.Variant.VAR_CHANGE_FLAGS added
+Windows.Win32.System.Variant.VAR_CHANGE_FLAGS.VARIANT_ALPHABOOL added
+Windows.Win32.System.Variant.VAR_CHANGE_FLAGS.VARIANT_CALENDAR_GREGORIAN added
+Windows.Win32.System.Variant.VAR_CHANGE_FLAGS.VARIANT_CALENDAR_HIJRI added
+Windows.Win32.System.Variant.VAR_CHANGE_FLAGS.VARIANT_CALENDAR_THAI added
+Windows.Win32.System.Variant.VAR_CHANGE_FLAGS.VARIANT_LOCALBOOL added
+Windows.Win32.System.Variant.VAR_CHANGE_FLAGS.VARIANT_NOUSEROVERRIDE added
+Windows.Win32.System.Variant.VAR_CHANGE_FLAGS.VARIANT_NOVALUEPROP added
+Windows.Win32.System.Variant.VAR_CHANGE_FLAGS.VARIANT_USE_NLS added
+Windows.Win32.System.Variant.VARENUM added
+Windows.Win32.System.Variant.VARENUM.VT_ARRAY added
+Windows.Win32.System.Variant.VARENUM.VT_BLOB added
+Windows.Win32.System.Variant.VARENUM.VT_BLOB_OBJECT added
+Windows.Win32.System.Variant.VARENUM.VT_BOOL added
+Windows.Win32.System.Variant.VARENUM.VT_BSTR added
+Windows.Win32.System.Variant.VARENUM.VT_BSTR_BLOB added
+Windows.Win32.System.Variant.VARENUM.VT_BYREF added
+Windows.Win32.System.Variant.VARENUM.VT_CARRAY added
+Windows.Win32.System.Variant.VARENUM.VT_CF added
+Windows.Win32.System.Variant.VARENUM.VT_CLSID added
+Windows.Win32.System.Variant.VARENUM.VT_CY added
+Windows.Win32.System.Variant.VARENUM.VT_DATE added
+Windows.Win32.System.Variant.VARENUM.VT_DECIMAL added
+Windows.Win32.System.Variant.VARENUM.VT_DISPATCH added
+Windows.Win32.System.Variant.VARENUM.VT_EMPTY added
+Windows.Win32.System.Variant.VARENUM.VT_ERROR added
+Windows.Win32.System.Variant.VARENUM.VT_FILETIME added
+Windows.Win32.System.Variant.VARENUM.VT_HRESULT added
+Windows.Win32.System.Variant.VARENUM.VT_I1 added
+Windows.Win32.System.Variant.VARENUM.VT_I2 added
+Windows.Win32.System.Variant.VARENUM.VT_I4 added
+Windows.Win32.System.Variant.VARENUM.VT_I8 added
+Windows.Win32.System.Variant.VARENUM.VT_ILLEGAL added
+Windows.Win32.System.Variant.VARENUM.VT_ILLEGALMASKED added
+Windows.Win32.System.Variant.VARENUM.VT_INT added
+Windows.Win32.System.Variant.VARENUM.VT_INT_PTR added
+Windows.Win32.System.Variant.VARENUM.VT_LPSTR added
+Windows.Win32.System.Variant.VARENUM.VT_LPWSTR added
+Windows.Win32.System.Variant.VARENUM.VT_NULL added
+Windows.Win32.System.Variant.VARENUM.VT_PTR added
+Windows.Win32.System.Variant.VARENUM.VT_R4 added
+Windows.Win32.System.Variant.VARENUM.VT_R8 added
+Windows.Win32.System.Variant.VARENUM.VT_RECORD added
+Windows.Win32.System.Variant.VARENUM.VT_RESERVED added
+Windows.Win32.System.Variant.VARENUM.VT_SAFEARRAY added
+Windows.Win32.System.Variant.VARENUM.VT_STORAGE added
+Windows.Win32.System.Variant.VARENUM.VT_STORED_OBJECT added
+Windows.Win32.System.Variant.VARENUM.VT_STREAM added
+Windows.Win32.System.Variant.VARENUM.VT_STREAMED_OBJECT added
+Windows.Win32.System.Variant.VARENUM.VT_TYPEMASK added
+Windows.Win32.System.Variant.VARENUM.VT_UI1 added
+Windows.Win32.System.Variant.VARENUM.VT_UI2 added
+Windows.Win32.System.Variant.VARENUM.VT_UI4 added
+Windows.Win32.System.Variant.VARENUM.VT_UI8 added
+Windows.Win32.System.Variant.VARENUM.VT_UINT added
+Windows.Win32.System.Variant.VARENUM.VT_UINT_PTR added
+Windows.Win32.System.Variant.VARENUM.VT_UNKNOWN added
+Windows.Win32.System.Variant.VARENUM.VT_USERDEFINED added
+Windows.Win32.System.Variant.VARENUM.VT_VARIANT added
+Windows.Win32.System.Variant.VARENUM.VT_VECTOR added
+Windows.Win32.System.Variant.VARENUM.VT_VERSIONED_STREAM added
+Windows.Win32.System.Variant.VARENUM.VT_VOID added
+Windows.Win32.System.Variant.VARIANT added
+Windows.Win32.UI.Accessibility.UiaChangeInfo.extraInfo...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
+Windows.Win32.UI.Accessibility.UiaChangeInfo.payload...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
+Windows.Win32.UI.Accessibility.UiaPropertyChangedEventArgs.NewValue...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
+Windows.Win32.UI.Accessibility.UiaPropertyChangedEventArgs.OldValue...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
+Windows.Win32.UI.Accessibility.UiaPropertyCondition.Value...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.ClearPropVariantArray => Windows.Win32.System.Com.StructuredStorage.Apis.ClearPropVariantArray
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.ClearVariantArray => Windows.Win32.System.Variant.Apis.ClearVariantArray
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitPropVariantFromBooleanVector => Windows.Win32.System.Com.StructuredStorage.Apis.InitPropVariantFromBooleanVector
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitPropVariantFromBuffer => Windows.Win32.System.Com.StructuredStorage.Apis.InitPropVariantFromBuffer
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitPropVariantFromCLSID => Windows.Win32.System.Com.StructuredStorage.Apis.InitPropVariantFromCLSID
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitPropVariantFromDoubleVector => Windows.Win32.System.Com.StructuredStorage.Apis.InitPropVariantFromDoubleVector
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitPropVariantFromFileTime => Windows.Win32.System.Com.StructuredStorage.Apis.InitPropVariantFromFileTime
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitPropVariantFromFileTimeVector => Windows.Win32.System.Com.StructuredStorage.Apis.InitPropVariantFromFileTimeVector
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitPropVariantFromGUIDAsString => Windows.Win32.System.Com.StructuredStorage.Apis.InitPropVariantFromGUIDAsString
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitPropVariantFromInt16Vector => Windows.Win32.System.Com.StructuredStorage.Apis.InitPropVariantFromInt16Vector
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitPropVariantFromInt32Vector => Windows.Win32.System.Com.StructuredStorage.Apis.InitPropVariantFromInt32Vector
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitPropVariantFromInt64Vector => Windows.Win32.System.Com.StructuredStorage.Apis.InitPropVariantFromInt64Vector
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitPropVariantFromPropVariantVectorElem => Windows.Win32.System.Com.StructuredStorage.Apis.InitPropVariantFromPropVariantVectorElem
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitPropVariantFromResource => Windows.Win32.System.Com.StructuredStorage.Apis.InitPropVariantFromResource
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitPropVariantFromStringAsVector => Windows.Win32.System.Com.StructuredStorage.Apis.InitPropVariantFromStringAsVector
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitPropVariantFromStringVector => Windows.Win32.System.Com.StructuredStorage.Apis.InitPropVariantFromStringVector
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitPropVariantFromStrRet => Windows.Win32.UI.Shell.Apis.InitPropVariantFromStrRet
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitPropVariantFromUInt16Vector => Windows.Win32.System.Com.StructuredStorage.Apis.InitPropVariantFromUInt16Vector
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitPropVariantFromUInt32Vector => Windows.Win32.System.Com.StructuredStorage.Apis.InitPropVariantFromUInt32Vector
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitPropVariantFromUInt64Vector => Windows.Win32.System.Com.StructuredStorage.Apis.InitPropVariantFromUInt64Vector
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitPropVariantVectorFromPropVariant => Windows.Win32.System.Com.StructuredStorage.Apis.InitPropVariantVectorFromPropVariant
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitVariantFromBooleanArray => Windows.Win32.System.Variant.Apis.InitVariantFromBooleanArray
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitVariantFromBuffer => Windows.Win32.System.Variant.Apis.InitVariantFromBuffer
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitVariantFromDoubleArray => Windows.Win32.System.Variant.Apis.InitVariantFromDoubleArray
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitVariantFromFileTime => Windows.Win32.System.Variant.Apis.InitVariantFromFileTime
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitVariantFromFileTimeArray => Windows.Win32.System.Variant.Apis.InitVariantFromFileTimeArray
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitVariantFromGUIDAsString => Windows.Win32.System.Variant.Apis.InitVariantFromGUIDAsString
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitVariantFromInt16Array => Windows.Win32.System.Variant.Apis.InitVariantFromInt16Array
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitVariantFromInt32Array => Windows.Win32.System.Variant.Apis.InitVariantFromInt32Array
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitVariantFromInt64Array => Windows.Win32.System.Variant.Apis.InitVariantFromInt64Array
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitVariantFromResource => Windows.Win32.System.Variant.Apis.InitVariantFromResource
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitVariantFromStringArray => Windows.Win32.System.Variant.Apis.InitVariantFromStringArray
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitVariantFromStrRet => Windows.Win32.UI.Shell.Apis.InitVariantFromStrRet
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitVariantFromUInt16Array => Windows.Win32.System.Variant.Apis.InitVariantFromUInt16Array
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitVariantFromUInt32Array => Windows.Win32.System.Variant.Apis.InitVariantFromUInt32Array
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitVariantFromUInt64Array => Windows.Win32.System.Variant.Apis.InitVariantFromUInt64Array
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.InitVariantFromVariantArrayElem => Windows.Win32.System.Variant.Apis.InitVariantFromVariantArrayElem
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantChangeType => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantChangeType
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantCompareEx => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantCompareEx
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantGetBooleanElem => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantGetBooleanElem
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantGetDoubleElem => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantGetDoubleElem
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantGetElementCount => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantGetElementCount
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantGetFileTimeElem => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantGetFileTimeElem
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantGetInt16Elem => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantGetInt16Elem
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantGetInt32Elem => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantGetInt32Elem
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantGetInt64Elem => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantGetInt64Elem
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantGetStringElem => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantGetStringElem
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantGetUInt16Elem => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantGetUInt16Elem
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantGetUInt32Elem => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantGetUInt32Elem
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantGetUInt64Elem => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantGetUInt64Elem
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToBoolean => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToBoolean
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToBooleanVector => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToBooleanVector
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToBooleanVectorAlloc => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToBooleanVectorAlloc
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToBooleanWithDefault => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToBooleanWithDefault
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToBSTR => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToBSTR
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToBuffer => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToBuffer
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToDouble => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToDouble
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToDoubleVector => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToDoubleVector
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToDoubleVectorAlloc => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToDoubleVectorAlloc
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToDoubleWithDefault => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToDoubleWithDefault
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToFileTime => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToFileTime
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToFileTimeVector => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToFileTimeVector
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToFileTimeVectorAlloc => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToFileTimeVectorAlloc
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToGUID => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToGUID
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToInt16 => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToInt16
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToInt16Vector => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToInt16Vector
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToInt16VectorAlloc => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToInt16VectorAlloc
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToInt16WithDefault => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToInt16WithDefault
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToInt32 => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToInt32
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToInt32Vector => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToInt32Vector
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToInt32VectorAlloc => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToInt32VectorAlloc
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToInt32WithDefault => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToInt32WithDefault
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToInt64 => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToInt64
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToInt64Vector => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToInt64Vector
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToInt64VectorAlloc => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToInt64VectorAlloc
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToInt64WithDefault => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToInt64WithDefault
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToString => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToString
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToStringAlloc => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToStringAlloc
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToStringVector => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToStringVector
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToStringVectorAlloc => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToStringVectorAlloc
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToStringWithDefault => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToStringWithDefault
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToStrRet => Windows.Win32.UI.Shell.Apis.PropVariantToStrRet
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToUInt16 => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToUInt16
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToUInt16Vector => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToUInt16Vector
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToUInt16VectorAlloc => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToUInt16VectorAlloc
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToUInt16WithDefault => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToUInt16WithDefault
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToUInt32 => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToUInt32
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToUInt32Vector => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToUInt32Vector
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToUInt32VectorAlloc => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToUInt32VectorAlloc
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToUInt32WithDefault => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToUInt32WithDefault
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToUInt64 => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToUInt64
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToUInt64Vector => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToUInt64Vector
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToUInt64VectorAlloc => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToUInt64VectorAlloc
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToUInt64WithDefault => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToUInt64WithDefault
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToVariant => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToVariant
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantToWinRTPropertyValue => Windows.Win32.System.Com.StructuredStorage.Apis.PropVariantToWinRTPropertyValue
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantCompare => Windows.Win32.System.Variant.Apis.VariantCompare
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantGetBooleanElem => Windows.Win32.System.Variant.Apis.VariantGetBooleanElem
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantGetDoubleElem => Windows.Win32.System.Variant.Apis.VariantGetDoubleElem
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantGetElementCount => Windows.Win32.System.Variant.Apis.VariantGetElementCount
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantGetInt16Elem => Windows.Win32.System.Variant.Apis.VariantGetInt16Elem
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantGetInt32Elem => Windows.Win32.System.Variant.Apis.VariantGetInt32Elem
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantGetInt64Elem => Windows.Win32.System.Variant.Apis.VariantGetInt64Elem
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantGetStringElem => Windows.Win32.System.Variant.Apis.VariantGetStringElem
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantGetUInt16Elem => Windows.Win32.System.Variant.Apis.VariantGetUInt16Elem
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantGetUInt32Elem => Windows.Win32.System.Variant.Apis.VariantGetUInt32Elem
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantGetUInt64Elem => Windows.Win32.System.Variant.Apis.VariantGetUInt64Elem
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToBoolean => Windows.Win32.System.Variant.Apis.VariantToBoolean
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToBooleanArray => Windows.Win32.System.Variant.Apis.VariantToBooleanArray
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToBooleanArrayAlloc => Windows.Win32.System.Variant.Apis.VariantToBooleanArrayAlloc
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToBooleanWithDefault => Windows.Win32.System.Variant.Apis.VariantToBooleanWithDefault
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToBuffer => Windows.Win32.System.Variant.Apis.VariantToBuffer
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToDosDateTime => Windows.Win32.System.Variant.Apis.VariantToDosDateTime
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToDouble => Windows.Win32.System.Variant.Apis.VariantToDouble
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToDoubleArray => Windows.Win32.System.Variant.Apis.VariantToDoubleArray
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToDoubleArrayAlloc => Windows.Win32.System.Variant.Apis.VariantToDoubleArrayAlloc
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToDoubleWithDefault => Windows.Win32.System.Variant.Apis.VariantToDoubleWithDefault
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToFileTime => Windows.Win32.System.Variant.Apis.VariantToFileTime
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToGUID => Windows.Win32.System.Variant.Apis.VariantToGUID
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToInt16 => Windows.Win32.System.Variant.Apis.VariantToInt16
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToInt16Array => Windows.Win32.System.Variant.Apis.VariantToInt16Array
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToInt16ArrayAlloc => Windows.Win32.System.Variant.Apis.VariantToInt16ArrayAlloc
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToInt16WithDefault => Windows.Win32.System.Variant.Apis.VariantToInt16WithDefault
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToInt32 => Windows.Win32.System.Variant.Apis.VariantToInt32
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToInt32Array => Windows.Win32.System.Variant.Apis.VariantToInt32Array
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToInt32ArrayAlloc => Windows.Win32.System.Variant.Apis.VariantToInt32ArrayAlloc
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToInt32WithDefault => Windows.Win32.System.Variant.Apis.VariantToInt32WithDefault
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToInt64 => Windows.Win32.System.Variant.Apis.VariantToInt64
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToInt64Array => Windows.Win32.System.Variant.Apis.VariantToInt64Array
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToInt64ArrayAlloc => Windows.Win32.System.Variant.Apis.VariantToInt64ArrayAlloc
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToInt64WithDefault => Windows.Win32.System.Variant.Apis.VariantToInt64WithDefault
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToPropVariant => Windows.Win32.System.Com.StructuredStorage.Apis.VariantToPropVariant
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToString => Windows.Win32.System.Variant.Apis.VariantToString
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToStringAlloc => Windows.Win32.System.Variant.Apis.VariantToStringAlloc
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToStringArray => Windows.Win32.System.Variant.Apis.VariantToStringArray
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToStringArrayAlloc => Windows.Win32.System.Variant.Apis.VariantToStringArrayAlloc
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToStringWithDefault => Windows.Win32.System.Variant.Apis.VariantToStringWithDefault
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToStrRet => Windows.Win32.UI.Shell.Apis.VariantToStrRet
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToUInt16 => Windows.Win32.System.Variant.Apis.VariantToUInt16
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToUInt16Array => Windows.Win32.System.Variant.Apis.VariantToUInt16Array
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToUInt16ArrayAlloc => Windows.Win32.System.Variant.Apis.VariantToUInt16ArrayAlloc
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToUInt16WithDefault => Windows.Win32.System.Variant.Apis.VariantToUInt16WithDefault
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToUInt32 => Windows.Win32.System.Variant.Apis.VariantToUInt32
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToUInt32Array => Windows.Win32.System.Variant.Apis.VariantToUInt32Array
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToUInt32ArrayAlloc => Windows.Win32.System.Variant.Apis.VariantToUInt32ArrayAlloc
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToUInt32WithDefault => Windows.Win32.System.Variant.Apis.VariantToUInt32WithDefault
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToUInt64 => Windows.Win32.System.Variant.Apis.VariantToUInt64
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToUInt64Array => Windows.Win32.System.Variant.Apis.VariantToUInt64Array
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToUInt64ArrayAlloc => Windows.Win32.System.Variant.Apis.VariantToUInt64ArrayAlloc
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.VariantToUInt64WithDefault => Windows.Win32.System.Variant.Apis.VariantToUInt64WithDefault
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.WinRTPropertyValueToPropVariant => Windows.Win32.System.Com.StructuredStorage.Apis.WinRTPropertyValueToPropVariant
+Windows.Win32.UI.Shell.PropertiesSystem.DRAWPROGRESSFLAGS removed
+Windows.Win32.UI.Shell.PropertiesSystem.DRAWPROGRESSFLAGS.DPF_ERROR removed
+Windows.Win32.UI.Shell.PropertiesSystem.DRAWPROGRESSFLAGS.DPF_MARQUEE removed
+Windows.Win32.UI.Shell.PropertiesSystem.DRAWPROGRESSFLAGS.DPF_MARQUEE_COMPLETE removed
+Windows.Win32.UI.Shell.PropertiesSystem.DRAWPROGRESSFLAGS.DPF_NONE removed
+Windows.Win32.UI.Shell.PropertiesSystem.DRAWPROGRESSFLAGS.DPF_STOPPED removed
+Windows.Win32.UI.Shell.PropertiesSystem.DRAWPROGRESSFLAGS.DPF_WARNING removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_CHANGE_FLAGS removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_CHANGE_FLAGS.PVCHF_ALPHABOOL removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_CHANGE_FLAGS.PVCHF_DEFAULT removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_CHANGE_FLAGS.PVCHF_LOCALBOOL removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_CHANGE_FLAGS.PVCHF_NOHEXSTRING removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_CHANGE_FLAGS.PVCHF_NOUSEROVERRIDE removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_CHANGE_FLAGS.PVCHF_NOVALUEPROP removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_COMPARE_FLAGS removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_COMPARE_FLAGS.PVCF_DEFAULT removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_COMPARE_FLAGS.PVCF_DIGITSASNUMBERS_CASESENSITIVE removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_COMPARE_FLAGS.PVCF_TREATEMPTYASGREATERTHAN removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_COMPARE_FLAGS.PVCF_USESTRCMP removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_COMPARE_FLAGS.PVCF_USESTRCMPC removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_COMPARE_FLAGS.PVCF_USESTRCMPI removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_COMPARE_FLAGS.PVCF_USESTRCMPIC removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_COMPARE_UNIT removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_COMPARE_UNIT.PVCU_DAY removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_COMPARE_UNIT.PVCU_DEFAULT removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_COMPARE_UNIT.PVCU_HOUR removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_COMPARE_UNIT.PVCU_MINUTE removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_COMPARE_UNIT.PVCU_MONTH removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_COMPARE_UNIT.PVCU_SECOND removed
+Windows.Win32.UI.Shell.PropertiesSystem.PROPVAR_COMPARE_UNIT.PVCU_YEAR removed
+Windows.Win32.UI.Shell.PropertiesSystem.PSTIME_FLAGS removed
+Windows.Win32.UI.Shell.PropertiesSystem.PSTIME_FLAGS.PSTF_LOCAL removed
+Windows.Win32.UI.Shell.PropertiesSystem.PSTIME_FLAGS.PSTF_UTC removed
+Windows.Win32.UI.Shell.SHCOLUMNINFO.vt...Windows.Win32.System.Com.VARENUM => Windows.Win32.System.Variant.VARENUM
+Windows.Win32.UI.TabletPC.IEC_GESTUREINFO.Gestures...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
+Windows.Win32.UI.TextServices.TF_PROPERTYVAL.varValue...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
+Windows.Win32.UI.TextServices.TS_ATTRVAL.varValue...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT

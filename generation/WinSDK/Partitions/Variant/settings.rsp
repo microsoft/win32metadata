@@ -1,0 +1,4 @@
+--traverse
+<IncludeRoot>/um/propvarutil.h
+--namespace
+Windows.Win32.System.Variant
