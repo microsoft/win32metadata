@@ -1936,5 +1936,239 @@
     "ValueType": "void*",
     "InvalidHandleValues": [ 0 ],
     "NativeTypeDef": false
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UBiDi",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UBiDiTransform",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UBreakIterator",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UCaseMap",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UCharsetDetector",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UCharsetMatch",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UCollationElements",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UCollator",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UConstrainedFieldPosition",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UConverter",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UConverterSelector",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UCPMap",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UDateIntervalFormat",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UEnumeration",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UFieldPositionIterator",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UFormattedDateInterval",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UFormattedList",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UFormattedNumber",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UFormattedRelativeDateTime",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UFormattedValue",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UGenderInfo",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UIDNA",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UListFormatter",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "ULocaleData",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "ULocaleDisplayNames",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UMutableCPTrie",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UNormalizer2",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UNumberFormatter",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UNumberingSystem",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UPluralRules",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "URegion",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "URegularExpression",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "URelativeDateTimeFormatter",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UResourceBundle",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "USet",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "USpoofChecker",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "USpoofCheckResult",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UStringPrepProfile",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UStringSearch",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
   }
 ]

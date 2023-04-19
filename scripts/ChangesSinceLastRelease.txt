@@ -1973,3 +1973,82 @@ Windows.Win32.System.Threading.UMS_THREAD_INFO_CLASS.UmsThreadMaxInfoClass added
 Windows.Win32.System.Threading.UMS_THREAD_INFO_CLASS.UmsThreadPriority added
 Windows.Win32.System.Threading.UMS_THREAD_INFO_CLASS.UmsThreadTeb added
 Windows.Win32.System.Threading.UMS_THREAD_INFO_CLASS.UmsThreadUserContext added
+# Added missing ICU opaque structs.
+Windows.Win32.Globalization.UBiDi :  => [NativeTypedef]
+Windows.Win32.Globalization.UBiDi.Value added
+Windows.Win32.Globalization.UBiDiTransform :  => [NativeTypedef]
+Windows.Win32.Globalization.UBiDiTransform.Value added
+Windows.Win32.Globalization.UBreakIterator :  => [NativeTypedef]
+Windows.Win32.Globalization.UBreakIterator.Value added
+Windows.Win32.Globalization.UCaseMap :  => [NativeTypedef]
+Windows.Win32.Globalization.UCaseMap.Value added
+Windows.Win32.Globalization.UCharsetDetector :  => [NativeTypedef]
+Windows.Win32.Globalization.UCharsetDetector.Value added
+Windows.Win32.Globalization.UCharsetMatch :  => [NativeTypedef]
+Windows.Win32.Globalization.UCharsetMatch.Value added
+Windows.Win32.Globalization.UCollationElements :  => [NativeTypedef]
+Windows.Win32.Globalization.UCollationElements.Value added
+Windows.Win32.Globalization.UCollator :  => [NativeTypedef]
+Windows.Win32.Globalization.UCollator.Value added
+Windows.Win32.Globalization.UConstrainedFieldPosition :  => [NativeTypedef]
+Windows.Win32.Globalization.UConstrainedFieldPosition.Value added
+Windows.Win32.Globalization.UConverter :  => [NativeTypedef]
+Windows.Win32.Globalization.UConverter.Value added
+Windows.Win32.Globalization.UConverterSelector :  => [NativeTypedef]
+Windows.Win32.Globalization.UConverterSelector.Value added
+Windows.Win32.Globalization.UCPMap :  => [NativeTypedef]
+Windows.Win32.Globalization.UCPMap.Value added
+Windows.Win32.Globalization.UDateIntervalFormat :  => [NativeTypedef]
+Windows.Win32.Globalization.UDateIntervalFormat.Value added
+Windows.Win32.Globalization.UEnumeration :  => [NativeTypedef]
+Windows.Win32.Globalization.UEnumeration.Value added
+Windows.Win32.Globalization.UFieldPositionIterator :  => [NativeTypedef]
+Windows.Win32.Globalization.UFieldPositionIterator.Value added
+Windows.Win32.Globalization.UFormattedDateInterval :  => [NativeTypedef]
+Windows.Win32.Globalization.UFormattedDateInterval.Value added
+Windows.Win32.Globalization.UFormattedList :  => [NativeTypedef]
+Windows.Win32.Globalization.UFormattedList.Value added
+Windows.Win32.Globalization.UFormattedNumber :  => [NativeTypedef]
+Windows.Win32.Globalization.UFormattedNumber.Value added
+Windows.Win32.Globalization.UFormattedRelativeDateTime :  => [NativeTypedef]
+Windows.Win32.Globalization.UFormattedRelativeDateTime.Value added
+Windows.Win32.Globalization.UFormattedValue :  => [NativeTypedef]
+Windows.Win32.Globalization.UFormattedValue.Value added
+Windows.Win32.Globalization.UGenderInfo :  => [NativeTypedef]
+Windows.Win32.Globalization.UGenderInfo.Value added
+Windows.Win32.Globalization.UIDNA :  => [NativeTypedef]
+Windows.Win32.Globalization.UIDNA.Value added
+Windows.Win32.Globalization.UListFormatter :  => [NativeTypedef]
+Windows.Win32.Globalization.UListFormatter.Value added
+Windows.Win32.Globalization.ULocaleData :  => [NativeTypedef]
+Windows.Win32.Globalization.ULocaleData.Value added
+Windows.Win32.Globalization.ULocaleDisplayNames :  => [NativeTypedef]
+Windows.Win32.Globalization.ULocaleDisplayNames.Value added
+Windows.Win32.Globalization.UMutableCPTrie :  => [NativeTypedef]
+Windows.Win32.Globalization.UMutableCPTrie.Value added
+Windows.Win32.Globalization.UNormalizer2 :  => [NativeTypedef]
+Windows.Win32.Globalization.UNormalizer2.Value added
+Windows.Win32.Globalization.UNumberFormatter :  => [NativeTypedef]
+Windows.Win32.Globalization.UNumberFormatter.Value added
+Windows.Win32.Globalization.UNumberingSystem :  => [NativeTypedef]
+Windows.Win32.Globalization.UNumberingSystem.Value added
+Windows.Win32.Globalization.UPluralRules :  => [NativeTypedef]
+Windows.Win32.Globalization.UPluralRules.Value added
+Windows.Win32.Globalization.URegion :  => [NativeTypedef]
+Windows.Win32.Globalization.URegion.Value added
+Windows.Win32.Globalization.URegularExpression :  => [NativeTypedef]
+Windows.Win32.Globalization.URegularExpression.Value added
+Windows.Win32.Globalization.URelativeDateTimeFormatter :  => [NativeTypedef]
+Windows.Win32.Globalization.URelativeDateTimeFormatter.Value added
+Windows.Win32.Globalization.UResourceBundle :  => [NativeTypedef]
+Windows.Win32.Globalization.UResourceBundle.Value added
+Windows.Win32.Globalization.USet :  => [NativeTypedef]
+Windows.Win32.Globalization.USet.Value added
+Windows.Win32.Globalization.USpoofChecker :  => [NativeTypedef]
+Windows.Win32.Globalization.USpoofChecker.Value added
+Windows.Win32.Globalization.USpoofCheckResult :  => [NativeTypedef]
+Windows.Win32.Globalization.USpoofCheckResult.Value added
+Windows.Win32.Globalization.UStringPrepProfile :  => [NativeTypedef]
+Windows.Win32.Globalization.UStringPrepProfile.Value added
+Windows.Win32.Globalization.UStringSearch :  => [NativeTypedef]
+Windows.Win32.Globalization.UStringSearch.Value added
