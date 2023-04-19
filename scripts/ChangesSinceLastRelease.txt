@@ -1902,3 +1902,10 @@ Windows.Win32.UI.Shell.SHCOLUMNINFO.vt...Windows.Win32.System.Com.VARENUM => Win
 Windows.Win32.UI.TabletPC.IEC_GESTUREINFO.Gestures...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
 Windows.Win32.UI.TextServices.TF_PROPERTYVAL.varValue...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
 Windows.Win32.UI.TextServices.TS_ATTRVAL.varValue...Windows.Win32.System.Com.VARIANT => Windows.Win32.System.Variant.VARIANT
+# Fixed #632.
+Windows.Win32.NetworkManagement.Dhcp.DHCP_CLIENT_SEARCH_UNION removed
+Windows.Win32.NetworkManagement.Dhcp.DHCP_OPTION_ELEMENT_UNION removed
+Windows.Win32.NetworkManagement.Dhcp.DHCP_OPTION_SCOPE_UNION6 removed
+Windows.Win32.NetworkManagement.Dhcp.DHCP_SUBNET_ELEMENT_UNION removed
+Windows.Win32.NetworkManagement.Dhcp.DHCP_SUBNET_ELEMENT_UNION_V4 removed
+Windows.Win32.NetworkManagement.Dhcp.DHCP_SUBNET_ELEMENT_UNION_V6 removed
