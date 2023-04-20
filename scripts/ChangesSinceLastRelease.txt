@@ -2959,3 +2959,17 @@ Windows.Win32.Networking.WinSock.RIO_BUF.BufferId...Windows.Win32.Networking.Win
 Windows.Win32.Networking.WinSock.RIO_BUFFERID added
 Windows.Win32.Networking.WinSock.RIO_CQ added
 Windows.Win32.Networking.WinSock.RIO_RQ added
+# Added missing LDAP opaque structs for #1547.
+Windows.Win32.Networking.Ldap.Apis.ldap_get_next_page : SearchHandle : [In,Out] => [In]
+Windows.Win32.Networking.Ldap.Apis.ldap_get_next_page : SearchHandle...LDAPSearch* => PLDAPSearch
+Windows.Win32.Networking.Ldap.Apis.ldap_get_next_page_s : SearchHandle : [In,Out] => [In]
+Windows.Win32.Networking.Ldap.Apis.ldap_get_next_page_s : SearchHandle...LDAPSearch* => PLDAPSearch
+Windows.Win32.Networking.Ldap.Apis.ldap_get_paged_count : SearchBlock : [In,Out] => [In]
+Windows.Win32.Networking.Ldap.Apis.ldap_get_paged_count : SearchBlock...LDAPSearch* => PLDAPSearch
+Windows.Win32.Networking.Ldap.Apis.ldap_search_abandon_page : SearchBlock : [In,Out] => [In]
+Windows.Win32.Networking.Ldap.Apis.ldap_search_abandon_page : SearchBlock...LDAPSearch* => PLDAPSearch
+Windows.Win32.Networking.Ldap.Apis.ldap_search_init_page : return...LDAPSearch* => PLDAPSearch
+Windows.Win32.Networking.Ldap.Apis.ldap_search_init_pageA : return...LDAPSearch* => PLDAPSearch
+Windows.Win32.Networking.Ldap.Apis.ldap_search_init_pageW : return...LDAPSearch* => PLDAPSearch
+Windows.Win32.Networking.Ldap.LDAPSearch removed
+Windows.Win32.Networking.Ldap.PLDAPSearch added
