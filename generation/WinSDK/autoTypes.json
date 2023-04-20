@@ -2170,5 +2170,161 @@
     "Name": "UStringSearch",
     "ValueType": "IntPtr",
     "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HCHANGE",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HCLUSCRYPTPROVIDER",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HCLUSENUM",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HCLUSENUMEX",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HCLUSTER",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HGROUP",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HGROUPENUM",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HGROUPENUMEX",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HGROUPSET",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HGROUPSETENUM",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HNETINTERFACE",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HNETINTERFACEENUM",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HNETWORK",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HNETWORKENUM",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HNODE",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HNODEENUM",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HNODEENUMEX",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HREGBATCH",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HREGBATCHNOTIFICATION",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HREGBATCHPORT",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HREGREADBATCH",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HREGREADBATCHREPLY",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HRESENUM",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HRESENUMEX",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HRESOURCE",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HRESTYPEENUM",
+    "ValueType": "IntPtr",
+    "NativeTypeDef": true
   }
 ]
