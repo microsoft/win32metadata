@@ -2879,3 +2879,53 @@ Windows.Win32.Graphics.OpenGL.GLUquadric :  => [NativeTypedef]
 Windows.Win32.Graphics.OpenGL.GLUquadric.Value added
 Windows.Win32.Graphics.OpenGL.GLUtesselator :  => [NativeTypedef]
 Windows.Win32.Graphics.OpenGL.GLUtesselator.Value added
+# Added missing RemoteManagement opaque structs for #1547.
+Windows.Win32.System.RemoteManagement.Apis.WSManCloseCommand : commandHandle...WSMAN_COMMAND* => WSMAN_COMMAND_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManCloseOperation : operationHandle...WSMAN_OPERATION* => WSMAN_OPERATION_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManCloseSession : session...WSMAN_SESSION* => WSMAN_SESSION_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManCloseShell : shellHandle...WSMAN_SHELL* => WSMAN_SHELL_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManConnectShell : session...WSMAN_SESSION* => WSMAN_SESSION_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManConnectShell : shell...WSMAN_SHELL** => WSMAN_SHELL_HANDLE**
+Windows.Win32.System.RemoteManagement.Apis.WSManConnectShellCommand : command...WSMAN_COMMAND** => WSMAN_COMMAND_HANDLE**
+Windows.Win32.System.RemoteManagement.Apis.WSManConnectShellCommand : shell...WSMAN_SHELL* => WSMAN_SHELL_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManCreateSession : apiHandle...WSMAN_API* => WSMAN_API_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManCreateSession : session...WSMAN_SESSION** => WSMAN_SESSION_HANDLE**
+Windows.Win32.System.RemoteManagement.Apis.WSManCreateShell : session...WSMAN_SESSION* => WSMAN_SESSION_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManCreateShell : shell...WSMAN_SHELL** => WSMAN_SHELL_HANDLE**
+Windows.Win32.System.RemoteManagement.Apis.WSManCreateShellEx : session...WSMAN_SESSION* => WSMAN_SESSION_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManCreateShellEx : shell...WSMAN_SHELL** => WSMAN_SHELL_HANDLE**
+Windows.Win32.System.RemoteManagement.Apis.WSManDeinitialize : apiHandle...WSMAN_API* => WSMAN_API_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManDisconnectShell : shell...WSMAN_SHELL* => WSMAN_SHELL_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManGetErrorMessage : apiHandle...WSMAN_API* => WSMAN_API_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManGetSessionOptionAsDword : session...WSMAN_SESSION* => WSMAN_SESSION_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManGetSessionOptionAsString : session...WSMAN_SESSION* => WSMAN_SESSION_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManInitialize : apiHandle...WSMAN_API** => WSMAN_API_HANDLE**
+Windows.Win32.System.RemoteManagement.Apis.WSManReceiveShellOutput : command...WSMAN_COMMAND* => WSMAN_COMMAND_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManReceiveShellOutput : receiveOperation...WSMAN_OPERATION** => WSMAN_OPERATION_HANDLE**
+Windows.Win32.System.RemoteManagement.Apis.WSManReceiveShellOutput : shell...WSMAN_SHELL* => WSMAN_SHELL_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManReconnectShell : shell...WSMAN_SHELL* => WSMAN_SHELL_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManReconnectShellCommand : commandHandle...WSMAN_COMMAND* => WSMAN_COMMAND_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManRunShellCommand : command...WSMAN_COMMAND** => WSMAN_COMMAND_HANDLE**
+Windows.Win32.System.RemoteManagement.Apis.WSManRunShellCommand : shell...WSMAN_SHELL* => WSMAN_SHELL_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManRunShellCommandEx : command...WSMAN_COMMAND** => WSMAN_COMMAND_HANDLE**
+Windows.Win32.System.RemoteManagement.Apis.WSManRunShellCommandEx : shell...WSMAN_SHELL* => WSMAN_SHELL_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManSendShellInput : command...WSMAN_COMMAND* => WSMAN_COMMAND_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManSendShellInput : sendOperation...WSMAN_OPERATION** => WSMAN_OPERATION_HANDLE**
+Windows.Win32.System.RemoteManagement.Apis.WSManSendShellInput : shell...WSMAN_SHELL* => WSMAN_SHELL_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManSetSessionOption : session...WSMAN_SESSION* => WSMAN_SESSION_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManSignalShell : command...WSMAN_COMMAND* => WSMAN_COMMAND_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManSignalShell : shell...WSMAN_SHELL* => WSMAN_SHELL_HANDLE*
+Windows.Win32.System.RemoteManagement.Apis.WSManSignalShell : signalOperation...WSMAN_OPERATION** => WSMAN_OPERATION_HANDLE**
+Windows.Win32.System.RemoteManagement.WSMAN_API removed
+Windows.Win32.System.RemoteManagement.WSMAN_API_HANDLE added
+Windows.Win32.System.RemoteManagement.WSMAN_COMMAND removed
+Windows.Win32.System.RemoteManagement.WSMAN_COMMAND_HANDLE added
+Windows.Win32.System.RemoteManagement.WSMAN_OPERATION removed
+Windows.Win32.System.RemoteManagement.WSMAN_OPERATION_HANDLE added
+Windows.Win32.System.RemoteManagement.WSMAN_SESSION removed
+Windows.Win32.System.RemoteManagement.WSMAN_SESSION_HANDLE added
+Windows.Win32.System.RemoteManagement.WSMAN_SHELL removed
+Windows.Win32.System.RemoteManagement.WSMAN_SHELL_COMPLETION_FUNCTION.Invoke : command...WSMAN_COMMAND* => WSMAN_COMMAND_HANDLE*
+Windows.Win32.System.RemoteManagement.WSMAN_SHELL_COMPLETION_FUNCTION.Invoke : operationHandle...WSMAN_OPERATION* => WSMAN_OPERATION_HANDLE*
+Windows.Win32.System.RemoteManagement.WSMAN_SHELL_COMPLETION_FUNCTION.Invoke : shell...WSMAN_SHELL* => WSMAN_SHELL_HANDLE*
+Windows.Win32.System.RemoteManagement.WSMAN_SHELL_HANDLE added

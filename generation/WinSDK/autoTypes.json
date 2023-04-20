@@ -2452,5 +2452,35 @@
     "Name": "GLUtesselator",
     "ValueType": "struct",
     "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.RemoteManagement",
+    "Name": "WSMAN_API_HANDLE",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.RemoteManagement",
+    "Name": "WSMAN_COMMAND_HANDLE",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.RemoteManagement",
+    "Name": "WSMAN_OPERATION_HANDLE",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.RemoteManagement",
+    "Name": "WSMAN_SESSION_HANDLE",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.RemoteManagement",
+    "Name": "WSMAN_SHELL_HANDLE",
+    "ValueType": "struct",
+    "NativeTypeDef": true
   }
 ]
