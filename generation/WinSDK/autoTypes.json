@@ -2488,5 +2488,23 @@
     "ValueType": "struct",
     "CloseApi": "CloseThreadpoolCleanupGroup",
     "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WinSock",
+    "Name": "RIO_BUFFERID",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WinSock",
+    "Name": "RIO_CQ",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WinSock",
+    "Name": "RIO_RQ",
+    "ValueType": "struct",
+    "NativeTypeDef": true
   }
 ]

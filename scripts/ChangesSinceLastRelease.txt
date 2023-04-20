@@ -2939,3 +2939,23 @@ Windows.Win32.System.Threading.Apis.CreateThreadpoolCleanupGroup : return...IntP
 Windows.Win32.System.Threading.PTP_CLEANUP_GROUP added
 Windows.Win32.System.Threading.TEB added
 Windows.Win32.System.Threading.TP_CALLBACK_ENVIRON_V3.CleanupGroup...System.IntPtr => Windows.Win32.System.Threading.PTP_CLEANUP_GROUP
+# Added missing WinSock opaque structs for #1547.
+Windows.Win32.Networking.WinSock.LPFN_RIOCLOSECOMPLETIONQUEUE.Invoke : CQ...RIO_CQ_t* => RIO_CQ
+Windows.Win32.Networking.WinSock.LPFN_RIOCREATECOMPLETIONQUEUE.Invoke : return...RIO_CQ_t* => RIO_CQ
+Windows.Win32.Networking.WinSock.LPFN_RIOCREATEREQUESTQUEUE.Invoke : ReceiveCQ...RIO_CQ_t* => RIO_CQ
+Windows.Win32.Networking.WinSock.LPFN_RIOCREATEREQUESTQUEUE.Invoke : return...RIO_RQ_t* => RIO_RQ
+Windows.Win32.Networking.WinSock.LPFN_RIOCREATEREQUESTQUEUE.Invoke : SendCQ...RIO_CQ_t* => RIO_CQ
+Windows.Win32.Networking.WinSock.LPFN_RIODEQUEUECOMPLETION.Invoke : CQ...RIO_CQ_t* => RIO_CQ
+Windows.Win32.Networking.WinSock.LPFN_RIODEREGISTERBUFFER.Invoke : BufferId...RIO_BUFFERID_t* => RIO_BUFFERID
+Windows.Win32.Networking.WinSock.LPFN_RIONOTIFY.Invoke : CQ...RIO_CQ_t* => RIO_CQ
+Windows.Win32.Networking.WinSock.LPFN_RIORECEIVE.Invoke : SocketQueue...RIO_RQ_t* => RIO_RQ
+Windows.Win32.Networking.WinSock.LPFN_RIORECEIVEEX.Invoke : SocketQueue...RIO_RQ_t* => RIO_RQ
+Windows.Win32.Networking.WinSock.LPFN_RIOREGISTERBUFFER.Invoke : return...RIO_BUFFERID_t* => RIO_BUFFERID
+Windows.Win32.Networking.WinSock.LPFN_RIORESIZECOMPLETIONQUEUE.Invoke : CQ...RIO_CQ_t* => RIO_CQ
+Windows.Win32.Networking.WinSock.LPFN_RIORESIZEREQUESTQUEUE.Invoke : RQ...RIO_RQ_t* => RIO_RQ
+Windows.Win32.Networking.WinSock.LPFN_RIOSEND.Invoke : SocketQueue...RIO_RQ_t* => RIO_RQ
+Windows.Win32.Networking.WinSock.LPFN_RIOSENDEX.Invoke : SocketQueue...RIO_RQ_t* => RIO_RQ
+Windows.Win32.Networking.WinSock.RIO_BUF.BufferId...Windows.Win32.Networking.WinSock.RIO_BUFFERID_t* => Windows.Win32.Networking.WinSock.RIO_BUFFERID
+Windows.Win32.Networking.WinSock.RIO_BUFFERID added
+Windows.Win32.Networking.WinSock.RIO_CQ added
+Windows.Win32.Networking.WinSock.RIO_RQ added
