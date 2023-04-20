@@ -2841,3 +2841,34 @@ Windows.Win32.Devices.BiometricFramework.WINBIO_PIPELINE.StorageContext...Window
 Windows.Win32.Devices.BiometricFramework.WINIBIO_ENGINE_CONTEXT added
 Windows.Win32.Devices.BiometricFramework.WINIBIO_SENSOR_CONTEXT added
 Windows.Win32.Devices.BiometricFramework.WINIBIO_STORAGE_CONTEXT added
+# Added missing WindowsWebServices opaque structs for #1547.
+Windows.Win32.Networking.WindowsWebServices.WS_CHANNEL :  => [NativeTypedef]
+Windows.Win32.Networking.WindowsWebServices.WS_CHANNEL.Value added
+Windows.Win32.Networking.WindowsWebServices.WS_ERROR :  => [NativeTypedef]
+Windows.Win32.Networking.WindowsWebServices.WS_ERROR.Value added
+Windows.Win32.Networking.WindowsWebServices.WS_HEAP :  => [NativeTypedef]
+Windows.Win32.Networking.WindowsWebServices.WS_HEAP.Value added
+Windows.Win32.Networking.WindowsWebServices.WS_LISTENER :  => [NativeTypedef]
+Windows.Win32.Networking.WindowsWebServices.WS_LISTENER.Value added
+Windows.Win32.Networking.WindowsWebServices.WS_MESSAGE :  => [NativeTypedef]
+Windows.Win32.Networking.WindowsWebServices.WS_MESSAGE.Value added
+Windows.Win32.Networking.WindowsWebServices.WS_METADATA :  => [NativeTypedef]
+Windows.Win32.Networking.WindowsWebServices.WS_METADATA.Value added
+Windows.Win32.Networking.WindowsWebServices.WS_OPERATION_CONTEXT :  => [NativeTypedef]
+Windows.Win32.Networking.WindowsWebServices.WS_OPERATION_CONTEXT.Value added
+Windows.Win32.Networking.WindowsWebServices.WS_POLICY :  => [NativeTypedef]
+Windows.Win32.Networking.WindowsWebServices.WS_POLICY.Value added
+Windows.Win32.Networking.WindowsWebServices.WS_SECURITY_CONTEXT :  => [NativeTypedef]
+Windows.Win32.Networking.WindowsWebServices.WS_SECURITY_CONTEXT.Value added
+Windows.Win32.Networking.WindowsWebServices.WS_SECURITY_TOKEN :  => [NativeTypedef]
+Windows.Win32.Networking.WindowsWebServices.WS_SECURITY_TOKEN.Value added
+Windows.Win32.Networking.WindowsWebServices.WS_SERVICE_HOST :  => [NativeTypedef]
+Windows.Win32.Networking.WindowsWebServices.WS_SERVICE_HOST.Value added
+Windows.Win32.Networking.WindowsWebServices.WS_SERVICE_PROXY :  => [NativeTypedef]
+Windows.Win32.Networking.WindowsWebServices.WS_SERVICE_PROXY.Value added
+Windows.Win32.Networking.WindowsWebServices.WS_XML_BUFFER :  => [NativeTypedef]
+Windows.Win32.Networking.WindowsWebServices.WS_XML_BUFFER.Value added
+Windows.Win32.Networking.WindowsWebServices.WS_XML_READER :  => [NativeTypedef]
+Windows.Win32.Networking.WindowsWebServices.WS_XML_READER.Value added
+Windows.Win32.Networking.WindowsWebServices.WS_XML_WRITER :  => [NativeTypedef]
+Windows.Win32.Networking.WindowsWebServices.WS_XML_WRITER.Value added

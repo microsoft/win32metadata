@@ -2344,5 +2344,95 @@
     "Name": "WINIBIO_STORAGE_CONTEXT",
     "ValueType": "struct",
     "NativeTypeDef": true
-  }
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_CHANNEL",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_ERROR",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_HEAP",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_LISTENER",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_MESSAGE",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_METADATA",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_OPERATION_CONTEXT",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_POLICY",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_SECURITY_CONTEXT",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_SECURITY_TOKEN",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_SERVICE_HOST",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_SERVICE_PROXY",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_XML_BUFFER",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_XML_READER",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_XML_WRITER",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
 ]
