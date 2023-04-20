@@ -56,6 +56,13 @@ namespace MetadataTasks
                         remapSection.AppendLine($"{typeName}=IntPtr");
                         remapSection.AppendLine($"{handleStructName}*={typeName}");
                     }
+                    else if (type == "struct")
+                    {
+                        var typeName = autoType.Name;
+
+                        remapSection.AppendLine($"_{typeName}={typeName}");
+                        remapSection.AppendLine($"P{typeName}={typeName}*");
+                    }
                 }
             }
 

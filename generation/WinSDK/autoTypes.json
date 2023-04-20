@@ -2326,5 +2326,23 @@
     "Name": "HRESTYPEENUM",
     "ValueType": "IntPtr",
     "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.BiometricFramework",
+    "Name": "WINIBIO_SENSOR_CONTEXT",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },  
+  {
+    "Namespace": "Windows.Win32.Devices.BiometricFramework",
+    "Name": "WINIBIO_ENGINE_CONTEXT",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },  
+  {
+    "Namespace": "Windows.Win32.Devices.BiometricFramework",
+    "Name": "WINIBIO_STORAGE_CONTEXT",
+    "ValueType": "struct",
+    "NativeTypeDef": true
   }
 ]

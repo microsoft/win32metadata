@@ -27,6 +27,10 @@ using Windows.Win32.Foundation.Metadata;
                 {
                     valueType = "long";
                 }
+                else if (valueType == "struct")
+                {
+                    valueType = "IntPtr";
+                }
 
                 if (!string.IsNullOrEmpty(item.CloseApi))
                 {

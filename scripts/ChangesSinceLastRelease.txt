@@ -2831,3 +2831,13 @@ Windows.Win32.Networking.Clustering.PRESUTIL_RESOURCE_TYPES_EQUAL.Invoke : hReso
 Windows.Win32.Networking.Clustering.PRESUTIL_RESOURCES_EQUAL.Invoke : hResource..._HRESOURCE* => HRESOURCE*
 Windows.Win32.Networking.Clustering.PRESUTIL_RESOURCES_EQUAL.Invoke : hSelf..._HRESOURCE* => HRESOURCE*
 Windows.Win32.Networking.Clustering.PRESUTIL_SET_RESOURCE_SERVICE_ENVIRONMENT.Invoke : hResource..._HRESOURCE* => HRESOURCE*
+# Added missing BiometricFramework opaque structs for #1547.
+Windows.Win32.Devices.BiometricFramework._WINIBIO_ENGINE_CONTEXT removed
+Windows.Win32.Devices.BiometricFramework._WINIBIO_SENSOR_CONTEXT removed
+Windows.Win32.Devices.BiometricFramework._WINIBIO_STORAGE_CONTEXT removed
+Windows.Win32.Devices.BiometricFramework.WINBIO_PIPELINE.EngineContext...Windows.Win32.Devices.BiometricFramework._WINIBIO_ENGINE_CONTEXT* => Windows.Win32.Devices.BiometricFramework.WINIBIO_ENGINE_CONTEXT*
+Windows.Win32.Devices.BiometricFramework.WINBIO_PIPELINE.SensorContext...Windows.Win32.Devices.BiometricFramework._WINIBIO_SENSOR_CONTEXT* => Windows.Win32.Devices.BiometricFramework.WINIBIO_SENSOR_CONTEXT*
+Windows.Win32.Devices.BiometricFramework.WINBIO_PIPELINE.StorageContext...Windows.Win32.Devices.BiometricFramework._WINIBIO_STORAGE_CONTEXT* => Windows.Win32.Devices.BiometricFramework.WINIBIO_STORAGE_CONTEXT*
+Windows.Win32.Devices.BiometricFramework.WINIBIO_ENGINE_CONTEXT added
+Windows.Win32.Devices.BiometricFramework.WINIBIO_SENSOR_CONTEXT added
+Windows.Win32.Devices.BiometricFramework.WINIBIO_STORAGE_CONTEXT added
