@@ -409,47 +409,6 @@
     "NativeTypeDef": false
   },
   {
-    "Namespace": "Windows.Win32.System.Threading",
-    "Name": "PTP_IO",
-    "ValueType": "IntPtr",
-    "InvalidHandleValues": [ 0 ],
-    "NativeTypeDef": true
-  },
-  {
-    "Namespace": "Windows.Win32.System.Threading",
-    "Name": "PTP_TIMER",
-    "ValueType": "IntPtr",
-    "InvalidHandleValues": [ 0 ],
-    "NativeTypeDef": true
-  },
-  {
-    "Namespace": "Windows.Win32.System.Threading",
-    "Name": "PTP_WAIT",
-    "ValueType": "IntPtr",
-    "InvalidHandleValues": [ 0 ],
-    "NativeTypeDef": true
-  },
-  {
-    "Namespace": "Windows.Win32.System.Threading",
-    "Name": "PTP_WORK",
-    "ValueType": "IntPtr",
-    "InvalidHandleValues": [ 0 ],
-    "NativeTypeDef": true
-  },
-  {
-    "Namespace": "Windows.Win32.System.Threading",
-    "Name": "PTP_CALLBACK_INSTANCE",
-    "ValueType": "IntPtr",
-    "InvalidHandleValues": [ 0 ],
-    "NativeTypeDef": true
-  },
-  {
-    "Name": "PTP_POOL",
-    "ValueType": "IntPtr",
-    "CloseApi": "CloseThreadpool",
-    "NativeTypeDef": true
-  },
-  {
     "Name": "NamespaceHandle",
     "ValueType": "IntPtr",
     "CloseApi": "ClosePrivateNamespace",
@@ -2481,6 +2440,53 @@
     "Namespace": "Windows.Win32.System.RemoteManagement",
     "Name": "WSMAN_SHELL_HANDLE",
     "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "PTP_IO",
+    "ValueType": "IntPtr",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "PTP_TIMER",
+    "ValueType": "IntPtr",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "PTP_WAIT",
+    "ValueType": "IntPtr",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "PTP_WORK",
+    "ValueType": "IntPtr",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "PTP_CALLBACK_INSTANCE",
+    "ValueType": "IntPtr",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypeDef": true
+  },
+  {
+    "Name": "PTP_POOL",
+    "ValueType": "IntPtr",
+    "CloseApi": "CloseThreadpool",
+    "NativeTypeDef": true
+  },
+  {
+    "Name": "PTP_CLEANUP_GROUP",
+    "ValueType": "struct",
+    "CloseApi": "CloseThreadpoolCleanupGroup",
     "NativeTypeDef": true
   }
 ]

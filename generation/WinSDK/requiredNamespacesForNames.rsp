@@ -2096,6 +2096,7 @@ PROCESS_BASIC_INFORMATION=Windows.Win32.System.Threading
 PROCESSINFOCLASS=Windows.Win32.System.Threading
 RTL_USER_PROCESS_PARAMETERS=Windows.Win32.System.Threading
 RtlNtStatusToDosError=Windows.Win32.Foundation
+TEB=Windows.Win32.System.Threading
 THREADINFOCLASS=Windows.Win32.System.Threading
 # endregion winternl.h
 # region winuser.h

@@ -2929,3 +2929,13 @@ Windows.Win32.System.RemoteManagement.WSMAN_SHELL_COMPLETION_FUNCTION.Invoke : c
 Windows.Win32.System.RemoteManagement.WSMAN_SHELL_COMPLETION_FUNCTION.Invoke : operationHandle...WSMAN_OPERATION* => WSMAN_OPERATION_HANDLE*
 Windows.Win32.System.RemoteManagement.WSMAN_SHELL_COMPLETION_FUNCTION.Invoke : shell...WSMAN_SHELL* => WSMAN_SHELL_HANDLE*
 Windows.Win32.System.RemoteManagement.WSMAN_SHELL_HANDLE added
+# Added missing Threading opaque structs for #1547.
+Windows.Win32.System.SystemServices.TEB removed
+Windows.Win32.System.SystemServices.TP_CLEANUP_GROUP removed
+Windows.Win32.System.SystemServices.TP_POOL removed
+Windows.Win32.System.Threading.Apis.CloseThreadpoolCleanupGroup : ptpcg...IntPtr => PTP_CLEANUP_GROUP
+Windows.Win32.System.Threading.Apis.CloseThreadpoolCleanupGroupMembers : ptpcg...IntPtr => PTP_CLEANUP_GROUP
+Windows.Win32.System.Threading.Apis.CreateThreadpoolCleanupGroup : return...IntPtr => PTP_CLEANUP_GROUP
+Windows.Win32.System.Threading.PTP_CLEANUP_GROUP added
+Windows.Win32.System.Threading.TEB added
+Windows.Win32.System.Threading.TP_CALLBACK_ENVIRON_V3.CleanupGroup...System.IntPtr => Windows.Win32.System.Threading.PTP_CLEANUP_GROUP
