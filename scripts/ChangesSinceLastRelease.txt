@@ -2872,3 +2872,10 @@ Windows.Win32.Networking.WindowsWebServices.WS_XML_READER :  => [NativeTypedef]
 Windows.Win32.Networking.WindowsWebServices.WS_XML_READER.Value added
 Windows.Win32.Networking.WindowsWebServices.WS_XML_WRITER :  => [NativeTypedef]
 Windows.Win32.Networking.WindowsWebServices.WS_XML_WRITER.Value added
+# Added missing OpenGL opaque structs for #1547.
+Windows.Win32.Graphics.OpenGL.GLUnurbs :  => [NativeTypedef]
+Windows.Win32.Graphics.OpenGL.GLUnurbs.Value added
+Windows.Win32.Graphics.OpenGL.GLUquadric :  => [NativeTypedef]
+Windows.Win32.Graphics.OpenGL.GLUquadric.Value added
+Windows.Win32.Graphics.OpenGL.GLUtesselator :  => [NativeTypedef]
+Windows.Win32.Graphics.OpenGL.GLUtesselator.Value added

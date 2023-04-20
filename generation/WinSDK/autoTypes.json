@@ -2435,4 +2435,22 @@
     "ValueType": "struct",
     "NativeTypeDef": true
   },
+  {
+    "Namespace": "Windows.Win32.Graphics.OpenGL",
+    "Name": "GLUnurbs",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Graphics.OpenGL",
+    "Name": "GLUquadric",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Graphics.OpenGL",
+    "Name": "GLUtesselator",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  }
 ]
