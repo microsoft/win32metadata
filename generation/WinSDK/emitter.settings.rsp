@@ -1611,3 +1611,4 @@ PeerGroupSendData::hGroup=[-NativeTypeName]
 PeerGroupSetProperties::hGroup=[-NativeTypeName]
 PeerGroupUniversalTimeToPeerTime::hGroup=[-NativeTypeName]
 PeerGroupUpdateRecord::hGroup=[-NativeTypeName]
+MDL::Process=IntPtr

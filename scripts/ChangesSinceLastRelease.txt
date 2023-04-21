@@ -2973,3 +2973,20 @@ Windows.Win32.Networking.Ldap.Apis.ldap_search_init_pageA : return...LDAPSearch*
 Windows.Win32.Networking.Ldap.Apis.ldap_search_init_pageW : return...LDAPSearch* => PLDAPSearch
 Windows.Win32.Networking.Ldap.LDAPSearch removed
 Windows.Win32.Networking.Ldap.PLDAPSearch added
+# Added missing DirectDraw opaque structs for #1547.
+Windows.Win32.Graphics.DirectDraw._DD_DESTROYDRIVERDATA removed
+Windows.Win32.Graphics.DirectDraw._DD_GETVPORTAUTOFLIPSURFACEDATA removed
+Windows.Win32.Graphics.DirectDraw._DD_SETMODEDATA removed
+Windows.Win32.Graphics.DirectDraw._DDFXROP removed
+Windows.Win32.Graphics.DirectDraw.LPDDFXROP added
+Windows.Win32.Graphics.DirectDraw.MDL._EPROCESS removed
+Windows.Win32.Graphics.DirectDraw.MDL.Process...Windows.Win32.Graphics.DirectDraw.MDL+_EPROCESS* => System.IntPtr
+Windows.Win32.Graphics.DirectDraw.PDD_DESTROYDRIVER.Invoke : param0 : [In,Out] => [In]
+Windows.Win32.Graphics.DirectDraw.PDD_DESTROYDRIVER.Invoke : param0..._DD_DESTROYDRIVERDATA* => PDD_DESTROYDRIVERDATA
+Windows.Win32.Graphics.DirectDraw.PDD_DESTROYDRIVERDATA added
+Windows.Win32.Graphics.DirectDraw.PDD_GETVPORTAUTOFLIPSURFACEDATA added
+Windows.Win32.Graphics.DirectDraw.PDD_SETMODE.Invoke : param0 : [In,Out] => [In]
+Windows.Win32.Graphics.DirectDraw.PDD_SETMODE.Invoke : param0..._DD_SETMODEDATA* => PDD_SETMODEDATA
+Windows.Win32.Graphics.DirectDraw.PDD_SETMODEDATA added
+Windows.Win32.Graphics.DirectDraw.PDD_VPORTCB_GETAUTOFLIPSURF.Invoke : param0 : [In,Out] => [In]
+Windows.Win32.Graphics.DirectDraw.PDD_VPORTCB_GETAUTOFLIPSURF.Invoke : param0..._DD_GETVPORTAUTOFLIPSURFACEDATA* => PDD_GETVPORTAUTOFLIPSURFACEDATA

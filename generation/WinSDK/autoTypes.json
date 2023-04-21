@@ -2512,5 +2512,29 @@
     "Name": "PLDAPSearch",
     "ValueType": "struct",
     "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Graphics.DirectDraw",
+    "Name": "PDD_DESTROYDRIVERDATA",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Graphics.DirectDraw",
+    "Name": "PDD_GETVPORTAUTOFLIPSURFACEDATA",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Graphics.DirectDraw",
+    "Name": "PDD_SETMODEDATA",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Graphics.DirectDraw",
+    "Name": "LPDDFXROP",
+    "ValueType": "struct",
+    "NativeTypeDef": true
   }
 ]
