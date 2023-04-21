@@ -3012,3 +3012,6 @@ Windows.Win32.UI.Shell.Apis.UnregisterAppStateChangeNotification : Registration 
 Windows.Win32.UI.Shell.Apis.UnregisterAppStateChangeNotification : Registration..._APPSTATE_REGISTRATION* => PAPPSTATE_REGISTRATION
 Windows.Win32.UI.Shell.PAPPCONSTRAIN_REGISTRATION added
 Windows.Win32.UI.Shell.PAPPSTATE_REGISTRATION added
+# Added SERIALIZEDPROPSTORAGE for #1547.
+Windows.Win32.UI.Shell.PropertiesSystem.SERIALIZEDPROPSTORAGE :  => [NativeTypedef]
+Windows.Win32.UI.Shell.PropertiesSystem.SERIALIZEDPROPSTORAGE.Value added
