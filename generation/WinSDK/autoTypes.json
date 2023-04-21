@@ -2542,5 +2542,17 @@
     "Name": "PHIDP_PREPARSED_DATA",
     "ValueType": "struct",
     "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.UI.Shell",
+    "Name": "PAPPCONSTRAIN_REGISTRATION",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.UI.Shell",
+    "Name": "PAPPSTATE_REGISTRATION",
+    "ValueType": "struct",
+    "NativeTypeDef": true
   }
 ]

@@ -3003,3 +3003,12 @@ Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_SetUsageValue : PreparsedDa
 Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_SetUsageValueArray : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
 Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_UnsetUsages : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
 Windows.Win32.Devices.HumanInterfaceDevice.PHIDP_PREPARSED_DATA added
+# Added missing Shell opaque structs for #1547.
+Windows.Win32.UI.Shell.Apis.RegisterAppConstrainedChangeNotification : Registration..._APPCONSTRAIN_REGISTRATION** => PAPPCONSTRAIN_REGISTRATION*
+Windows.Win32.UI.Shell.Apis.RegisterAppStateChangeNotification : Registration..._APPSTATE_REGISTRATION** => PAPPSTATE_REGISTRATION*
+Windows.Win32.UI.Shell.Apis.UnregisterAppConstrainedChangeNotification : Registration : [In,Out] => [In]
+Windows.Win32.UI.Shell.Apis.UnregisterAppConstrainedChangeNotification : Registration..._APPCONSTRAIN_REGISTRATION* => PAPPCONSTRAIN_REGISTRATION
+Windows.Win32.UI.Shell.Apis.UnregisterAppStateChangeNotification : Registration : [In,Out] => [In]
+Windows.Win32.UI.Shell.Apis.UnregisterAppStateChangeNotification : Registration..._APPSTATE_REGISTRATION* => PAPPSTATE_REGISTRATION
+Windows.Win32.UI.Shell.PAPPCONSTRAIN_REGISTRATION added
+Windows.Win32.UI.Shell.PAPPSTATE_REGISTRATION added
