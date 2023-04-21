@@ -2536,5 +2536,11 @@
     "Name": "LPDDFXROP",
     "ValueType": "struct",
     "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.HumanInterfaceDevice",
+    "Name": "PHIDP_PREPARSED_DATA",
+    "ValueType": "struct",
+    "NativeTypeDef": true
   }
 ]

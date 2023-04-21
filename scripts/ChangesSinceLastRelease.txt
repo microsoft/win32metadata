@@ -2990,3 +2990,32 @@ Windows.Win32.Graphics.DirectDraw.PDD_SETMODE.Invoke : param0..._DD_SETMODEDATA*
 Windows.Win32.Graphics.DirectDraw.PDD_SETMODEDATA added
 Windows.Win32.Graphics.DirectDraw.PDD_VPORTCB_GETAUTOFLIPSURF.Invoke : param0 : [In,Out] => [In]
 Windows.Win32.Graphics.DirectDraw.PDD_VPORTCB_GETAUTOFLIPSURF.Invoke : param0..._DD_GETVPORTAUTOFLIPSURFACEDATA* => PDD_GETVPORTAUTOFLIPSURFACEDATA
+# Added missing HID opaque structs for #1547.
+Windows.Win32.Devices.HumanInterfaceDevice._HIDP_PREPARSED_DATA removed
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidD_FreePreparsedData : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidD_GetPreparsedData : PreparsedData...IntPtr* => PHIDP_PREPARSED_DATA*
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_GetButtonArray : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_GetButtonCaps : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_GetCaps : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_GetData : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_GetExtendedAttributes : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_GetLinkCollectionNodes : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_GetScaledUsageValue : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_GetSpecificButtonCaps : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_GetSpecificValueCaps : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_GetUsages : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_GetUsagesEx : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_GetUsageValue : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_GetUsageValueArray : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_GetValueCaps : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_InitializeReportForID : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_MaxDataListLength : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_MaxUsageListLength : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_SetButtonArray : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_SetData : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_SetScaledUsageValue : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_SetUsages : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_SetUsageValue : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_SetUsageValueArray : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_UnsetUsages : PreparsedData...IntPtr => PHIDP_PREPARSED_DATA
+Windows.Win32.Devices.HumanInterfaceDevice.PHIDP_PREPARSED_DATA added
