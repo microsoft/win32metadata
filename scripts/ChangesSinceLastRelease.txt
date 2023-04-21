@@ -2940,7 +2940,6 @@ Windows.Win32.System.Threading.PTP_CLEANUP_GROUP added
 Windows.Win32.System.Threading.TEB added
 Windows.Win32.System.Threading.TP_CALLBACK_ENVIRON_V3.CleanupGroup...System.IntPtr => Windows.Win32.System.Threading.PTP_CLEANUP_GROUP
 # Added missing WinSock opaque structs for #1547.
-Windows.Win32.Networking.WinSock.RIO_BUF.BufferId...Windows.Win32.Networking.WinSock.RIO_BUFFERID_t* => Windows.Win32.Networking.WinSock.RIO_BUFFERID
 Windows.Win32.Networking.WinSock.RIO_BUFFERID added
 Windows.Win32.Networking.WinSock.RIO_CQ added
 Windows.Win32.Networking.WinSock.RIO_RQ added
