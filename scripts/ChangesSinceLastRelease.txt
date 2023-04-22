@@ -3015,3 +3015,7 @@ Windows.Win32.UI.Shell.PAPPSTATE_REGISTRATION added
 # Added SERIALIZEDPROPSTORAGE for #1547.
 Windows.Win32.UI.Shell.PropertiesSystem.SERIALIZEDPROPSTORAGE :  => [NativeTypedef]
 Windows.Win32.UI.Shell.PropertiesSystem.SERIALIZEDPROPSTORAGE.Value added
+# Fixed #1549.
+Windows.Win32.Data.Xml.XmlLite.Apis._IID_IXmlReader removed
+Windows.Win32.Data.Xml.XmlLite.Apis._IID_IXmlResolver removed
+Windows.Win32.Data.Xml.XmlLite.Apis._IID_IXmlWriter removed
