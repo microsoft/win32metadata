@@ -3019,3 +3019,5 @@ Windows.Win32.UI.Shell.PropertiesSystem.SERIALIZEDPROPSTORAGE.Value added
 Windows.Win32.Data.Xml.XmlLite.Apis._IID_IXmlReader removed
 Windows.Win32.Data.Xml.XmlLite.Apis._IID_IXmlResolver removed
 Windows.Win32.Data.Xml.XmlLite.Apis._IID_IXmlWriter removed
+# Removed unused empty struct.
+Windows.Win32.System.Iis._IIS_CRYPTO_BLOB removed
