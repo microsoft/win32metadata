@@ -2566,5 +2566,11 @@
     "Name": "LPMSGSESS",
     "ValueType": "struct",
     "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.WinRT",
+    "Name": "RO_REGISTRATION_COOKIE",
+    "ValueType": "struct",
+    "NativeTypeDef": true
   }
 ]
