@@ -3074,3 +3074,6 @@ Windows.Win32.Security.Authentication.Identity._HMAPPER.Value added
 # Added _ADAPTER_OBJECT for #1547.
 Windows.Win32.Storage.IscsiDisc._ADAPTER_OBJECT :  => [NativeTypedef]
 Windows.Win32.Storage.IscsiDisc._ADAPTER_OBJECT.Value added
+# Added LPWABACTIONITEM for #1547.
+Windows.Win32.System.AddressBook._WABACTIONITEM removed
+Windows.Win32.System.AddressBook.LPWABACTIONITEM added

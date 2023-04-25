@@ -2638,5 +2638,11 @@
     "Name": "_ADAPTER_OBJECT",
     "ValueType": "struct",
     "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.AddressBook",
+    "Name": "LPWABACTIONITEM",
+    "ValueType": "struct",
+    "NativeTypeDef": true
   }
 ]
