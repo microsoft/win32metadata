@@ -3021,3 +3021,11 @@ Windows.Win32.Data.Xml.XmlLite.Apis._IID_IXmlResolver removed
 Windows.Win32.Data.Xml.XmlLite.Apis._IID_IXmlWriter removed
 # Removed unused empty struct.
 Windows.Win32.System.Iis._IIS_CRYPTO_BLOB removed
+# Added LPMSGSESS for #1547.
+Windows.Win32.Storage.Imapi._MSGSESS removed
+Windows.Win32.Storage.Imapi.Apis.CloseIMsgSession : lpMsgSess : [In,Out] => [In]
+Windows.Win32.Storage.Imapi.Apis.CloseIMsgSession : lpMsgSess..._MSGSESS* => LPMSGSESS
+Windows.Win32.Storage.Imapi.Apis.OpenIMsgOnIStg : lpMsgSess : [In,Out] => [In]
+Windows.Win32.Storage.Imapi.Apis.OpenIMsgOnIStg : lpMsgSess..._MSGSESS* => LPMSGSESS
+Windows.Win32.Storage.Imapi.Apis.OpenIMsgSession : lppMsgSess..._MSGSESS** => LPMSGSESS*
+Windows.Win32.Storage.Imapi.LPMSGSESS added

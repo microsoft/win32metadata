@@ -2560,5 +2560,11 @@
     "Name": "SERIALIZEDPROPSTORAGE",
     "ValueType": "struct",
     "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Storage.Imapi",
+    "Name": "LPMSGSESS",
+    "ValueType": "struct",
+    "NativeTypeDef": true
   }
 ]
