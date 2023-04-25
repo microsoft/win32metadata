@@ -2578,5 +2578,11 @@
     "Name": "MI_Module_Self",
     "ValueType": "struct",
     "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Memory",
+    "Name": "AtlThunkData_t",
+    "ValueType": "struct",
+    "NativeTypeDef": true
   }
 ]

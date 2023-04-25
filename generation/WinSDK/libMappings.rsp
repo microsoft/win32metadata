@@ -26708,3 +26708,7 @@ LoadStringRC=MSCorEE.dll
 LoadStringRCEx=MSCorEE.dll
 LockClrVersion=MSCorEE.dll
 RunDll32ShimW=MSCorEE.dll
+AtlThunk_AllocateData=Atlthunk.dll
+AtlThunk_InitData=Atlthunk.dll
+AtlThunk_DataToCode=Atlthunk.dll
+AtlThunk_FreeData=Atlthunk.dll

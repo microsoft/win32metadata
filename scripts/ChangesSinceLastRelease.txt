@@ -3037,3 +3037,10 @@ Windows.Win32.System.WinRT.RO_REGISTRATION_COOKIE added
 # Added MI_Module_Self for #1547.
 Windows.Win32.System.Wmi.MI_Module_Self :  => [NativeTypedef]
 Windows.Win32.System.Wmi.MI_Module_Self.Value added
+# Fixed AtlThunk APIs for #1547.
+Windows.Win32.System.Memory.Apis.AtlThunk_AllocateData added
+Windows.Win32.System.Memory.Apis.AtlThunk_DataToCode added
+Windows.Win32.System.Memory.Apis.AtlThunk_FreeData added
+Windows.Win32.System.Memory.Apis.AtlThunk_InitData added
+Windows.Win32.System.Memory.AtlThunkData_t added
+Windows.Win32.System.SystemServices.AtlThunkData_t removed

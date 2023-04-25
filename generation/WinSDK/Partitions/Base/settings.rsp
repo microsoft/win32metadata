@@ -38,7 +38,6 @@ LPENCLAVE_ROUTINE
 <IncludeRoot>/shared/wtypes.h
 <IncludeRoot>/um/minwinbase.h
 <IncludeRoot>/um/storprop.h
-<IncludeRoot>/um/atlthunk.h
 <IncludeRoot>/um/dlnadeviceinterfaceids.h
 <IncludeRoot>/um/dlnametadataproviderproperties.h
 --namespace
