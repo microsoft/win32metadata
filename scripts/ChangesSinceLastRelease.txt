@@ -3071,3 +3071,6 @@ Windows.Win32.Web.MsHtml.HostDialogHelper.Value added
 # Added _HMAPPER for #1547.
 Windows.Win32.Security.Authentication.Identity._HMAPPER :  => [NativeTypedef]
 Windows.Win32.Security.Authentication.Identity._HMAPPER.Value added
+# Added _ADAPTER_OBJECT for #1547.
+Windows.Win32.Storage.IscsiDisc._ADAPTER_OBJECT :  => [NativeTypedef]
+Windows.Win32.Storage.IscsiDisc._ADAPTER_OBJECT.Value added
