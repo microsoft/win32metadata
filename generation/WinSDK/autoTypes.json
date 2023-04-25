@@ -2584,5 +2584,35 @@
     "Name": "AtlThunkData_t",
     "ValueType": "struct",
     "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Rpc",
+    "Name": "PNDR_ASYNC_MESSAGE",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Rpc",
+    "Name": "PNDR_CORRELATION_INFO",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Rpc",
+    "Name": "_NDR_PROC_CONTEXT",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Rpc",
+    "Name": "NDR_ALLOC_ALL_NODES_CONTEXT",
+    "ValueType": "struct",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Rpc",
+    "Name": "NDR_POINTER_QUEUE_STATE",
+    "ValueType": "struct",
+    "NativeTypeDef": true
   }
 ]

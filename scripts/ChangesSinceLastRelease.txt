@@ -3044,3 +3044,16 @@ Windows.Win32.System.Memory.Apis.AtlThunk_FreeData added
 Windows.Win32.System.Memory.Apis.AtlThunk_InitData added
 Windows.Win32.System.Memory.AtlThunkData_t added
 Windows.Win32.System.SystemServices.AtlThunkData_t removed
+# Added missing Rpc opaque structs for #1547.
+Windows.Win32.System.Rpc._NDR_ASYNC_MESSAGE removed
+Windows.Win32.System.Rpc._NDR_CORRELATION_INFO removed
+Windows.Win32.System.Rpc._NDR_PROC_CONTEXT :  => [NativeTypedef]
+Windows.Win32.System.Rpc._NDR_PROC_CONTEXT.Value added
+Windows.Win32.System.Rpc.MIDL_STUB_MESSAGE.pAsyncMsg...Windows.Win32.System.Rpc._NDR_ASYNC_MESSAGE* => Windows.Win32.System.Rpc.PNDR_ASYNC_MESSAGE
+Windows.Win32.System.Rpc.MIDL_STUB_MESSAGE.pCorrInfo...Windows.Win32.System.Rpc._NDR_CORRELATION_INFO* => Windows.Win32.System.Rpc.PNDR_CORRELATION_INFO
+Windows.Win32.System.Rpc.NDR_ALLOC_ALL_NODES_CONTEXT :  => [NativeTypedef]
+Windows.Win32.System.Rpc.NDR_ALLOC_ALL_NODES_CONTEXT.Value added
+Windows.Win32.System.Rpc.NDR_POINTER_QUEUE_STATE :  => [NativeTypedef]
+Windows.Win32.System.Rpc.NDR_POINTER_QUEUE_STATE.Value added
+Windows.Win32.System.Rpc.PNDR_ASYNC_MESSAGE added
+Windows.Win32.System.Rpc.PNDR_CORRELATION_INFO added
