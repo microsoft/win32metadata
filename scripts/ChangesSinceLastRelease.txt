@@ -3065,3 +3065,6 @@ Windows.Win32.System.Services.PSC_NOTIFICATION_REGISTRATION added
 # Removed undefined IE interfaces for #1547.
 Windows.Win32.Web.InternetExplorer.HTMLPersistEvents removed
 Windows.Win32.Web.InternetExplorer.LayoutRectEvents removed
+# Added HostDialogHelper for #1547.
+Windows.Win32.Web.MsHtml.HostDialogHelper :  => [NativeTypedef]
+Windows.Win32.Web.MsHtml.HostDialogHelper.Value added

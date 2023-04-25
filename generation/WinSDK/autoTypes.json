@@ -2620,5 +2620,11 @@
     "Name": "PSC_NOTIFICATION_REGISTRATION",
     "ValueType": "struct",
     "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Web.MsHtml",
+    "Name": "HostDialogHelper",
+    "ValueType": "struct",
+    "NativeTypeDef": true
   }
 ]
