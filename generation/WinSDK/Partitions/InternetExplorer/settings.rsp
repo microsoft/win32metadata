@@ -1,3 +1,5 @@
+--config
+exclude-empty-records
 --traverse
 <IncludeRoot>/um/docobjectservice.h
 <IncludeRoot>/um/downloadmgr.h

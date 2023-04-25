@@ -3062,3 +3062,6 @@ Windows.Win32.System.Services._SC_NOTIFICATION_REGISTRATION removed
 Windows.Win32.System.Services.Apis.SubscribeServiceChangeNotifications added
 Windows.Win32.System.Services.Apis.UnsubscribeServiceChangeNotifications added
 Windows.Win32.System.Services.PSC_NOTIFICATION_REGISTRATION added
+# Removed undefined IE interfaces for #1547.
+Windows.Win32.Web.InternetExplorer.HTMLPersistEvents removed
+Windows.Win32.Web.InternetExplorer.LayoutRectEvents removed
