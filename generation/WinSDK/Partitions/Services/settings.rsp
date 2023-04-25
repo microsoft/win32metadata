@@ -1,3 +1,5 @@
+--config
+exclude-empty-records
 --with-type
 _tagSLDATATYPE=uint
 SLDATATYPE=uint

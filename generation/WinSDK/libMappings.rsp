@@ -26712,3 +26712,5 @@ AtlThunk_AllocateData=Atlthunk.dll
 AtlThunk_InitData=Atlthunk.dll
 AtlThunk_DataToCode=Atlthunk.dll
 AtlThunk_FreeData=Atlthunk.dll
+SubscribeServiceChangeNotifications=SecHost.dll
+UnsubscribeServiceChangeNotifications=SecHost.dll

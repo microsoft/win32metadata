@@ -3057,3 +3057,8 @@ Windows.Win32.System.Rpc.NDR_POINTER_QUEUE_STATE :  => [NativeTypedef]
 Windows.Win32.System.Rpc.NDR_POINTER_QUEUE_STATE.Value added
 Windows.Win32.System.Rpc.PNDR_ASYNC_MESSAGE added
 Windows.Win32.System.Rpc.PNDR_CORRELATION_INFO added
+# Added missing Services opaque structs for #1547.
+Windows.Win32.System.Services._SC_NOTIFICATION_REGISTRATION removed
+Windows.Win32.System.Services.Apis.SubscribeServiceChangeNotifications added
+Windows.Win32.System.Services.Apis.UnsubscribeServiceChangeNotifications added
+Windows.Win32.System.Services.PSC_NOTIFICATION_REGISTRATION added

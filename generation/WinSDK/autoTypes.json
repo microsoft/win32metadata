@@ -2614,5 +2614,11 @@
     "Name": "NDR_POINTER_QUEUE_STATE",
     "ValueType": "struct",
     "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Services",
+    "Name": "PSC_NOTIFICATION_REGISTRATION",
+    "ValueType": "struct",
+    "NativeTypeDef": true
   }
 ]
