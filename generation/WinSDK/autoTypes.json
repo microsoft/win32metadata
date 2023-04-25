@@ -2572,5 +2572,11 @@
     "Name": "RO_REGISTRATION_COOKIE",
     "ValueType": "struct",
     "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Wmi",
+    "Name": "MI_Module_Self",
+    "ValueType": "struct",
+    "NativeTypeDef": true
   }
 ]

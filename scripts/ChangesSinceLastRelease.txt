@@ -3034,3 +3034,6 @@ Windows.Win32.System.WinRT._RO_REGISTRATION_COOKIE removed
 Windows.Win32.System.WinRT.Apis.RoRegisterActivationFactories : cookie...IntPtr* => RO_REGISTRATION_COOKIE*
 Windows.Win32.System.WinRT.Apis.RoRevokeActivationFactories : cookie...IntPtr => RO_REGISTRATION_COOKIE
 Windows.Win32.System.WinRT.RO_REGISTRATION_COOKIE added
+# Added MI_Module_Self for #1547.
+Windows.Win32.System.Wmi.MI_Module_Self :  => [NativeTypedef]
+Windows.Win32.System.Wmi.MI_Module_Self.Value added
