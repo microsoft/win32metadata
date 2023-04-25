@@ -2626,5 +2626,11 @@
     "Name": "HostDialogHelper",
     "ValueType": "struct",
     "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Security.Authentication.Identity",
+    "Name": "_HMAPPER",
+    "ValueType": "struct",
+    "NativeTypeDef": true
   }
 ]
