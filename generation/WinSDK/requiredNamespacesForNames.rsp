@@ -138,6 +138,7 @@ IKsFormatSupport=Windows.Win32.Media.KernelStreaming
 IKsJackContainerId=Windows.Win32.Media.KernelStreaming
 IKsJackDescription=Windows.Win32.Media.KernelStreaming
 IKsJackDescription2=Windows.Win32.Media.KernelStreaming
+IKsJackDescription3=Windows.Win32.Media.KernelStreaming
 IKsJackSinkInformation=Windows.Win32.Media.KernelStreaming
 # endregion devicetopology.h
 # region dshowasf.h
@@ -763,6 +764,9 @@ UnloadUserProfile=Windows.Win32.UI.Shell
 # region uxtheme.h
 OpenThemeDataForDpi=Windows.Win32.UI.HiDpi
 # endregion uxtheme.h
+# region vidcap.h
+IKsTopologyInfo=Windows.Win32.Media.KernelStreaming
+# endregion vidcap.h
 # region winbase.h
 AccessCheckAndAuditAlarmA=Windows.Win32.Security
 AccessCheckByTypeAndAuditAlarmA=Windows.Win32.Security

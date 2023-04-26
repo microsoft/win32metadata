@@ -3080,3 +3080,56 @@ Windows.Win32.System.AddressBook.LPWABACTIONITEM added
 # Excluded D3DHAL types for #1547. See https://github.com/microsoft/wdkmetadata/issues/34.
 Windows.Win32.System.WindowsProgramming._D3DHAL_CALLBACKS removed
 Windows.Win32.System.WindowsProgramming._D3DHAL_GLOBALDRIVERDATA removed
+# Fixed #1548.
+Windows.Win32.Media.Audio.IKsJackDescription3 => Windows.Win32.Media.KernelStreaming.IKsJackDescription3
+Windows.Win32.Media.DirectShow.IKsTopologyInfo => Windows.Win32.Media.KernelStreaming.IKsTopologyInfo
+Windows.Win32.Media.KernelStreaming.ALLOCATOR_PROPERTIES_EX.NextSegments...Windows.Win32.Media.KernelStreaming.IKsAllocatorEx** => Windows.Win32.Media.KernelStreaming.IKsAllocatorEx*
+Windows.Win32.Media.KernelStreaming.ALLOCATOR_PROPERTIES_EX.PrevSegment...Windows.Win32.Media.KernelStreaming.IKsAllocatorEx* => Windows.Win32.Media.KernelStreaming.IKsAllocatorEx
+Windows.Win32.Media.KernelStreaming.Apis.KsGetMediaType added
+Windows.Win32.Media.KernelStreaming.Apis.KsGetMediaTypeCount added
+Windows.Win32.Media.KernelStreaming.Apis.KsGetMultiplePinFactoryItems added
+Windows.Win32.Media.KernelStreaming.Apis.KsOpenDefaultDevice added
+Windows.Win32.Media.KernelStreaming.Apis.KsResolveRequiredAttributes added
+Windows.Win32.Media.KernelStreaming.Apis.KsSynchronousDeviceControl added
+Windows.Win32.Media.KernelStreaming.IKsAllocator :  => [Guid(2376485017,49369,4560,132,19,0,0,248,34,254,138)]
+Windows.Win32.Media.KernelStreaming.IKsAllocator.KsGetAllocatorHandle() added
+Windows.Win32.Media.KernelStreaming.IKsAllocator.KsGetAllocatorMode() added
+Windows.Win32.Media.KernelStreaming.IKsAllocator.KsGetAllocatorStatus(AllocatorStatus) added
+Windows.Win32.Media.KernelStreaming.IKsAllocator.KsSetAllocatorMode(Mode) added
+Windows.Win32.Media.KernelStreaming.IKsAllocatorEx :  => [Guid(152811066,24639,4561,176,103,0,160,201,6,40,2)]
+Windows.Win32.Media.KernelStreaming.IKsAllocatorEx.KsCreateAllocatorAndGetHandle(KsPin) added
+Windows.Win32.Media.KernelStreaming.IKsAllocatorEx.KsGetProperties() added
+Windows.Win32.Media.KernelStreaming.IKsAllocatorEx.KsSetAllocatorHandle(AllocatorHandle) added
+Windows.Win32.Media.KernelStreaming.IKsAllocatorEx.KsSetProperties(param0) added
+Windows.Win32.Media.KernelStreaming.IKsClockPropertySet added
+Windows.Win32.Media.KernelStreaming.IKsDataTypeCompletion added
+Windows.Win32.Media.KernelStreaming.IKsDataTypeHandler added
+Windows.Win32.Media.KernelStreaming.IKsInterfaceHandler added
+Windows.Win32.Media.KernelStreaming.IKsNotifyEvent added
+Windows.Win32.Media.KernelStreaming.IKsObject added
+Windows.Win32.Media.KernelStreaming.IKsPin :  => [Guid(3054598353,41689,4559,158,83,0,170,0,162,22,161)]
+Windows.Win32.Media.KernelStreaming.IKsPin.KsCreateSinkPinHandle(Interface,Medium) added
+Windows.Win32.Media.KernelStreaming.IKsPin.KsDecrementPendingIoCount() added
+Windows.Win32.Media.KernelStreaming.IKsPin.KsDeliver(Sample,Flags) added
+Windows.Win32.Media.KernelStreaming.IKsPin.KsGetCurrentCommunication(Communication,Interface,Medium) added
+Windows.Win32.Media.KernelStreaming.IKsPin.KsIncrementPendingIoCount() added
+Windows.Win32.Media.KernelStreaming.IKsPin.KsMediaSamplesCompleted(StreamSegment) added
+Windows.Win32.Media.KernelStreaming.IKsPin.KsPeekAllocator(Operation) added
+Windows.Win32.Media.KernelStreaming.IKsPin.KsPropagateAcquire() added
+Windows.Win32.Media.KernelStreaming.IKsPin.KsQualityNotify(Proportion,TimeDelta) added
+Windows.Win32.Media.KernelStreaming.IKsPin.KsQueryInterfaces(InterfaceList) added
+Windows.Win32.Media.KernelStreaming.IKsPin.KsQueryMediums(MediumList) added
+Windows.Win32.Media.KernelStreaming.IKsPin.KsReceiveAllocator(MemAllocator) added
+Windows.Win32.Media.KernelStreaming.IKsPin.KsRenegotiateAllocator() added
+Windows.Win32.Media.KernelStreaming.IKsPinEx added
+Windows.Win32.Media.KernelStreaming.IKsPinFactory added
+Windows.Win32.Media.KernelStreaming.IKsPinPipe added
+Windows.Win32.Media.KernelStreaming.IKsPropertySet removed
+Windows.Win32.Media.KernelStreaming.IKsQualityForwarder added
+Windows.Win32.Media.KernelStreaming.KSIOOPERATION added
+Windows.Win32.Media.KernelStreaming.KSIOOPERATION.KsIoOperation_Read added
+Windows.Win32.Media.KernelStreaming.KSIOOPERATION.KsIoOperation_Write added
+Windows.Win32.Media.KernelStreaming.KSPEEKOPERATION added
+Windows.Win32.Media.KernelStreaming.KSPEEKOPERATION.KsPeekOperation_AddRef added
+Windows.Win32.Media.KernelStreaming.KSPEEKOPERATION.KsPeekOperation_PeekOnly added
+Windows.Win32.Media.KernelStreaming.KSSTREAM_SEGMENT added
