@@ -152,7 +152,7 @@ namespace ClangSharpSourceToWinmd
 
             mainWatch.Restart();
 
-            Console.WriteLine($"\r\nEmitting {outputFileName}...");
+            Console.WriteLine($"Emitting {outputFileName}...");
             var generator = 
                 ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
                     clangSharpCompliation, 
