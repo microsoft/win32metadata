@@ -3133,3 +3133,16 @@ Windows.Win32.Media.KernelStreaming.KSPEEKOPERATION added
 Windows.Win32.Media.KernelStreaming.KSPEEKOPERATION.KsPeekOperation_AddRef added
 Windows.Win32.Media.KernelStreaming.KSPEEKOPERATION.KsPeekOperation_PeekOnly added
 Windows.Win32.Media.KernelStreaming.KSSTREAM_SEGMENT added
+# Added missing COM interfaces for #1547.
+Windows.Win32.System.Com.IContext :  => [Guid(448,0,0,192,0,0,0,0,0,0,70),SupportedOSPlatform(windows5.0)]
+Windows.Win32.System.Com.IContext.EnumContextProps(ppEnumContextProps) added
+Windows.Win32.System.Com.IContext.GetProperty(rGuid,pFlags,ppUnk) added
+Windows.Win32.System.Com.IContext.RemoveProperty(rPolicyId) added
+Windows.Win32.System.Com.IContext.SetProperty(rpolicyId,flags,pUnk) added
+Windows.Win32.System.Com.IEnumContextProps :  => [Guid(449,0,0,192,0,0,0,0,0,0,70),SupportedOSPlatform(windows5.0)]
+Windows.Win32.System.Com.IEnumContextProps.Clone(ppEnumContextProps) added
+Windows.Win32.System.Com.IEnumContextProps.Count(pcelt) added
+Windows.Win32.System.Com.IEnumContextProps.Next(celt,pContextProperties,pceltFetched) added
+Windows.Win32.System.Com.IEnumContextProps.Reset() added
+Windows.Win32.System.Com.IEnumContextProps.Skip(celt) added
+Windows.Win32.System.Com.tagContextProperty added
