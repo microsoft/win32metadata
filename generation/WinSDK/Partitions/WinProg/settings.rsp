@@ -1,3 +1,5 @@
+--config
+exclude-empty-records
 --exclude
 _UNICODE_STRING
 _STRING

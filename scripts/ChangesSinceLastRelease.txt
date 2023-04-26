@@ -3077,3 +3077,6 @@ Windows.Win32.Storage.IscsiDisc._ADAPTER_OBJECT.Value added
 # Added LPWABACTIONITEM for #1547.
 Windows.Win32.System.AddressBook._WABACTIONITEM removed
 Windows.Win32.System.AddressBook.LPWABACTIONITEM added
+# Excluded D3DHAL types for #1547. See https://github.com/microsoft/wdkmetadata/issues/34.
+Windows.Win32.System.WindowsProgramming._D3DHAL_CALLBACKS removed
+Windows.Win32.System.WindowsProgramming._D3DHAL_GLOBALDRIVERDATA removed
