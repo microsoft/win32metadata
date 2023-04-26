@@ -15,5 +15,6 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Direct3D.D3D12" Version="1.610.0" GeneratePathProperty="true"/>
+    <PackageReference Include="WinPixEventRuntime" Version="1.0.230302001" GeneratePathProperty="true"/>
   </ItemGroup>
 </Project>

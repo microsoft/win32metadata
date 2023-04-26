@@ -20,6 +20,13 @@ if (!(Test-Path $d3dIncludeDir)) {
     exit -1
 }
 
+$winPixEventRuntimePath = Get-BuildToolsNugetPropsProperty("PkgWinPixEventRuntime")
+$winPixEventRuntimeIncludeDir = Join-Path $winPixEventRuntimePath "Include/WinPixEventRuntime/"
+if (!(Test-Path $winPixEventRuntimeIncludeDir)) {
+    Write-Error "Couldn't find $winPixEventRuntimeIncludeDir."
+    exit -1
+}
+
 $vcDirPath = Get-VcDirPath -Arch x86 -HostArch x86
 if (!$env:Path.Contains($vcDirPath)) {
     $env:Path += ";$vcDirPath"
@@ -38,6 +45,9 @@ Copy-Item "$sdkIncludeDir\ucrt" "$recompiledIdlHeadersDir" -Recurse
 Write-Host "Copying D3D headers from $d3dIncludeDir to $recompiledIdlHeadersDir..."
 Copy-Item "$d3dIncludeDir\*.*" "$recompiledIdlHeadersDir\um" -Exclude "dxgiformat.*" -Recurse
 Copy-Item "$d3dIncludeDir\dxgiformat.*" "$recompiledIdlHeadersDir\shared" -Recurse
+
+Write-Host "Copying WinPixEventRuntime headers from $winPixEventRuntimeIncludeDir to $recompiledIdlHeadersDir..."
+copy-item "$winPixEventRuntimeIncludeDir\*.*" "$recompiledIdlHeadersDir\um" -recurse
 
 Write-Host "Copying additional headers from $windowsWin32ProjectRoot\AdditionalHeaders to $recompiledIdlHeadersDir\um..."
 Copy-Item "$windowsWin32ProjectRoot\AdditionalHeaders\*" "$recompiledIdlHeadersDir\um" -Recurse
@@ -65,7 +75,7 @@ $idlFilesToRecompile | ForEach-Object -ThrottleLimit ([System.Math]::Max([System
     $outputLog = [System.IO.Path]::ChangeExtension($inputFileName, "txt")
 
     & $using:midl $inputFileName /out $using:recompiledIdlHeadersScratchDir /header $outputHeader /no_warn /DUNICODE /D_UNICODE /DWINVER=0x0A00 -D_APISET_MINWIN_VERSION=0x010F /DNTDDI_VERSION=0x0A00000C /DBUILD_UMS_ENABLED=0 /DBUILD_WOW64_ENABLED=0 /DBUILD_ARM64X_ENABLED=0 /DEXECUTABLE_WRITES_SUPPORT=0 -D_USE_DECLSPECS_FOR_SAL=1 -D_CONTROL_FLOW_GUARD_SVCTAB=1 -DMIDL_PASS=1 /Di386 /D_X86_ /D_WCHAR_T_DEFINED /no_stamp /nologo /no_settings_comment /lcid 1033 /sal /win32 /target NT100 /Zp8 /I$using:recompiledIdlHeadersScratchDir /I$using:recompiledIdlHeadersDir\um /I$using:recompiledIdlHeadersDir\shared /I$using:recompiledIdlHeadersDir\winrt /I"$using:PSScriptRoot\inc" 3>&1 2>&1 > $outputLog
-    
+
     if ($LASTEXITCODE -ne 0) {
         Write-Error "Failed for $($_.FullName)`n$(Get-Content $outputLog -Raw)"
     } else {

@@ -1,0 +1,7 @@
+--traverse
+<IncludeRoot>/um/pix3.h
+<IncludeRoot>/um/pix3_win.h
+<IncludeRoot>/um/PIXEvents.h
+<IncludeRoot>/um/PIXEventsCommon.h
+--namespace
+Windows.Win32.Graphics.WinPixEventRuntime
