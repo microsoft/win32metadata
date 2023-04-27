@@ -3318,3 +3318,9 @@ Windows.Win32.UI.Shell.PropertiesSystem.Apis.PSGetNamedPropertyFromPropertyStora
 Windows.Win32.UI.Shell.PropertiesSystem.Apis.PSGetPropertyFromPropertyStorage : psps...SERIALIZEDPROPSTORAGE* => PCUSERIALIZEDPROPSTORAGE
 Windows.Win32.UI.Shell.PropertiesSystem.IPersistSerializedPropStorage.SetPropertyStorage : psps...SERIALIZEDPROPSTORAGE* => PCUSERIALIZEDPROPSTORAGE
 Windows.Win32.UI.Shell.PropertiesSystem.PCUSERIALIZEDPROPSTORAGE added
+# Fixed #1550.
+Windows.Win32.Media.DirectShow.IEnumFilters.Next :  => [CanReturnMultipleSuccessValues]
+Windows.Win32.Media.DirectShow.IEnumMediaTypes.Next :  => [CanReturnMultipleSuccessValues]
+Windows.Win32.Media.DirectShow.IEnumPIDMap.Next :  => [CanReturnMultipleSuccessValues]
+Windows.Win32.Media.DirectShow.IEnumPins.Next :  => [CanReturnMultipleSuccessValues]
+Windows.Win32.Media.DirectShow.IEnumRegFilters.Next :  => [CanReturnMultipleSuccessValues]
