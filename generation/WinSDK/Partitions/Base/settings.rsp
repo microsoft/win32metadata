@@ -1,3 +1,5 @@
+--config
+exclude-empty-records
 --exclude
 _LIST_ENTRY
 _D3DCOLORVALUE

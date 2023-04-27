@@ -1899,750 +1899,792 @@
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UBiDi",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UBiDi",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UBiDiTransform",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UBiDiTransform",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UBreakIterator",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UBreakIterator",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UCaseMap",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UCaseMap",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UCharsetDetector",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UCharsetDetector",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UCharsetMatch",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UCharsetMatch",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UCollationElements",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UCollationElements",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UCollator",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UCollator",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UConstrainedFieldPosition",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UConstrainedFieldPosition",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UConverter",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UConverter",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UConverterSelector",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UConverterSelector",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UCPMap",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UCPMap",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UDateFormatSymbols",
+    "ValueType": "typedef struct UDateFormatSymbols",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UDateIntervalFormat",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UDateIntervalFormat",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UEnumeration",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UEnumeration",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UFieldPositionIterator",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UFieldPositionIterator",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UFormattedDateInterval",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UFormattedDateInterval",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UFormattedList",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UFormattedList",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UFormattedNumber",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UFormattedNumber",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UFormattedNumberRange",
+    "ValueType": "typedef struct UFormattedNumberRange",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UFormattedRelativeDateTime",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UFormattedRelativeDateTime",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UFormattedValue",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UFormattedValue",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UGenderInfo",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UGenderInfo",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UHashtable",
+    "ValueType": "typedef struct UHashtable",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UIDNA",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UIDNA",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UListFormatter",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UListFormatter",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "ULocaleData",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct ULocaleData",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "ULocaleDisplayNames",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct ULocaleDisplayNames",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UMutableCPTrie",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UMutableCPTrie",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UNormalizer2",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UNormalizer2",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UNumberFormatter",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UNumberFormatter",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UNumberingSystem",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UNumberingSystem",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UPluralRules",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UPluralRules",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "URegion",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct URegion",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "URegularExpression",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct URegularExpression",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "URelativeDateTimeFormatter",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct URelativeDateTimeFormatter",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UResourceBundle",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UResourceBundle",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "USearch",
+    "ValueType": "typedef struct USearch",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "USet",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct USet",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "USpoofChecker",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct USpoofChecker",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "USpoofCheckResult",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct USpoofCheckResult",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UStringPrepProfile",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UStringPrepProfile",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "UStringSearch",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct UStringSearch",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HCHANGE",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HCHANGE",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HCLUSCRYPTPROVIDER",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HCLUSCRYPTPROVIDER",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HCLUSENUM",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HCLUSENUM",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HCLUSENUMEX",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HCLUSENUMEX",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HCLUSTER",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HCLUSTER",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HGROUP",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HGROUP",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HGROUPENUM",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HGROUPENUM",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HGROUPENUMEX",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HGROUPENUMEX",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HGROUPSET",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HGROUPSET",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HGROUPSETENUM",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HGROUPSETENUM",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HNETINTERFACE",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HNETINTERFACE",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HNETINTERFACEENUM",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HNETINTERFACEENUM",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HNETWORK",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HNETWORK",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HNETWORKENUM",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HNETWORKENUM",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HNODE",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HNODE",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HNODEENUM",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HNODEENUM",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HNODEENUMEX",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HNODEENUMEX",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HREGBATCH",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HREGBATCH",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HREGBATCHNOTIFICATION",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HREGBATCHNOTIFICATION",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HREGBATCHPORT",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HREGBATCHPORT",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HREGREADBATCH",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HREGREADBATCH",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HREGREADBATCHREPLY",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HREGREADBATCHREPLY",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HRESENUM",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HRESENUM",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HRESENUMEX",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HRESENUMEX",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HRESOURCE",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HRESOURCE",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Clustering",
     "Name": "HRESTYPEENUM",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _HRESTYPEENUM",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.BiometricFramework",
     "Name": "WINIBIO_SENSOR_CONTEXT",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _WINIBIO_SENSOR_CONTEXT",
     "NativeTypeDef": true
   },  
   {
     "Namespace": "Windows.Win32.Devices.BiometricFramework",
     "Name": "WINIBIO_ENGINE_CONTEXT",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _WINIBIO_ENGINE_CONTEXT",
     "NativeTypeDef": true
   },  
   {
     "Namespace": "Windows.Win32.Devices.BiometricFramework",
     "Name": "WINIBIO_STORAGE_CONTEXT",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _WINIBIO_STORAGE_CONTEXT",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.WindowsWebServices",
     "Name": "WS_CHANNEL",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _WS_CHANNEL",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.WindowsWebServices",
     "Name": "WS_ERROR",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _WS_ERROR",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.WindowsWebServices",
     "Name": "WS_HEAP",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _WS_HEAP",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.WindowsWebServices",
     "Name": "WS_LISTENER",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _WS_LISTENER",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.WindowsWebServices",
     "Name": "WS_MESSAGE",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _WS_MESSAGE",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.WindowsWebServices",
     "Name": "WS_METADATA",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _WS_METADATA",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.WindowsWebServices",
     "Name": "WS_OPERATION_CONTEXT",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _WS_OPERATION_CONTEXT",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.WindowsWebServices",
     "Name": "WS_POLICY",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _WS_POLICY",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.WindowsWebServices",
     "Name": "WS_SECURITY_CONTEXT",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _WS_SECURITY_CONTEXT",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.WindowsWebServices",
     "Name": "WS_SECURITY_TOKEN",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _WS_SECURITY_TOKEN",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.WindowsWebServices",
     "Name": "WS_SERVICE_HOST",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _WS_SERVICE_HOST",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.WindowsWebServices",
     "Name": "WS_SERVICE_PROXY",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _WS_SERVICE_PROXY",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.WindowsWebServices",
     "Name": "WS_XML_BUFFER",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _WS_XML_BUFFER",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.WindowsWebServices",
     "Name": "WS_XML_READER",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _WS_XML_READER",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.WindowsWebServices",
     "Name": "WS_XML_WRITER",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _WS_XML_WRITER",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Graphics.OpenGL",
     "Name": "GLUnurbs",
-    "ValueType": "struct",
+    "ValueType": "typedef struct GLUnurbs",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Graphics.OpenGL",
     "Name": "GLUquadric",
-    "ValueType": "struct",
+    "ValueType": "typedef struct GLUquadric",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Graphics.OpenGL",
     "Name": "GLUtesselator",
-    "ValueType": "struct",
+    "ValueType": "typedef struct GLUtesselator",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.System.RemoteManagement",
     "Name": "WSMAN_API_HANDLE",
-    "ValueType": "struct",
+    "ValueType": "typedef struct WSMAN_API",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.System.RemoteManagement",
     "Name": "WSMAN_COMMAND_HANDLE",
-    "ValueType": "struct",
+    "ValueType": "typedef struct WSMAN_COMMAND",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.System.RemoteManagement",
     "Name": "WSMAN_OPERATION_HANDLE",
-    "ValueType": "struct",
+    "ValueType": "typedef struct WSMAN_OPERATION",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.System.RemoteManagement",
     "Name": "WSMAN_SESSION_HANDLE",
-    "ValueType": "struct",
+    "ValueType": "typedef struct WSMAN_SESSION",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.System.RemoteManagement",
     "Name": "WSMAN_SHELL_HANDLE",
-    "ValueType": "struct",
+    "ValueType": "typedef struct WSMAN_SHELL",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.System.Threading",
     "Name": "PTP_IO",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _TP_IO",
     "InvalidHandleValues": [ 0 ],
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.System.Threading",
     "Name": "PTP_TIMER",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _TP_TIMER",
     "InvalidHandleValues": [ 0 ],
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.System.Threading",
     "Name": "PTP_WAIT",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _TP_WAIT",
     "InvalidHandleValues": [ 0 ],
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.System.Threading",
     "Name": "PTP_WORK",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _TP_WORK",
     "InvalidHandleValues": [ 0 ],
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.System.Threading",
     "Name": "PTP_CALLBACK_INSTANCE",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _TP_CALLBACK_INSTANCE",
     "InvalidHandleValues": [ 0 ],
     "NativeTypeDef": true
   },
   {
     "Name": "PTP_POOL",
-    "ValueType": "IntPtr",
+    "ValueType": "typedef struct _TP_POOL",
     "CloseApi": "CloseThreadpool",
     "NativeTypeDef": true
   },
   {
     "Name": "PTP_CLEANUP_GROUP",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _TP_CLEANUP_GROUP",
     "CloseApi": "CloseThreadpoolCleanupGroup",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.WinSock",
     "Name": "RIO_BUFFERID",
-    "ValueType": "struct",
+    "ValueType": "typedef struct RIO_BUFFERID_t",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.WinSock",
     "Name": "RIO_CQ",
-    "ValueType": "struct",
+    "ValueType": "typedef struct RIO_CQ_t",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.WinSock",
     "Name": "RIO_RQ",
-    "ValueType": "struct",
+    "ValueType": "typedef struct RIO_RQ_t",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.Ldap",
     "Name": "PLDAPSearch",
-    "ValueType": "struct",
+    "ValueType": "typedef struct ldapsearch",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Graphics.DirectDraw",
     "Name": "PDD_DESTROYDRIVERDATA",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _DD_DESTROYDRIVERDATA",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Graphics.DirectDraw",
     "Name": "PDD_GETVPORTAUTOFLIPSURFACEDATA",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _DD_GETVPORTAUTOFLIPSURFACEDATA",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Graphics.DirectDraw",
     "Name": "PDD_SETMODEDATA",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _DD_SETMODEDATA",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Graphics.DirectDraw",
     "Name": "LPDDFXROP",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _DDFXROP",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.HumanInterfaceDevice",
     "Name": "PHIDP_PREPARSED_DATA",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _HIDP_PREPARSED_DATA",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.UI.Shell",
     "Name": "PAPPCONSTRAIN_REGISTRATION",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _APPCONSTRAIN_REGISTRATION",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.UI.Shell",
     "Name": "PAPPSTATE_REGISTRATION",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _APPSTATE_REGISTRATION",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.UI.Shell.PropertiesSystem",
     "Name": "SERIALIZEDPROPSTORAGE",
-    "ValueType": "struct",
+    "ValueType": "typedef struct tagSERIALIZEDPROPSTORAGE",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.UI.Shell.PropertiesSystem",
+    "Name": "PCUSERIALIZEDPROPSTORAGE",
+    "ValueType": "typedef struct tagSERIALIZEDPROPSTORAGE",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Storage.Imapi",
     "Name": "LPMSGSESS",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _MSGSESS",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.System.WinRT",
     "Name": "RO_REGISTRATION_COOKIE",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _RO_REGISTRATION_COOKIE",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.System.Wmi",
     "Name": "MI_Module_Self",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _MI_Module_Self",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.System.Memory",
     "Name": "AtlThunkData_t",
-    "ValueType": "struct",
+    "ValueType": "typedef struct AtlThunkData_t",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.System.Rpc",
     "Name": "PNDR_ASYNC_MESSAGE",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _NDR_ASYNC_MESSAGE",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.System.Rpc",
     "Name": "PNDR_CORRELATION_INFO",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _NDR_CORRELATION_INFO",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.System.Rpc",
     "Name": "_NDR_PROC_CONTEXT",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _NDR_PROC_CONTEXT",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.System.Rpc",
     "Name": "NDR_ALLOC_ALL_NODES_CONTEXT",
-    "ValueType": "struct",
+    "ValueType": "typedef struct NDR_ALLOC_ALL_NODES_CONTEXT",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.System.Rpc",
     "Name": "NDR_POINTER_QUEUE_STATE",
-    "ValueType": "struct",
+    "ValueType": "typedef struct NDR_POINTER_QUEUE_STATE",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.System.Services",
     "Name": "PSC_NOTIFICATION_REGISTRATION",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _SC_NOTIFICATION_REGISTRATION",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Web.MsHtml",
     "Name": "HostDialogHelper",
-    "ValueType": "struct",
+    "ValueType": "typedef struct HostDialogHelper",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Security.Authentication.Identity",
     "Name": "_HMAPPER",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _HMAPPER",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.Storage.IscsiDisc",
     "Name": "_ADAPTER_OBJECT",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _ADAPTER_OBJECT",
     "NativeTypeDef": true
   },
   {
     "Namespace": "Windows.Win32.System.AddressBook",
     "Name": "LPWABACTIONITEM",
-    "ValueType": "struct",
+    "ValueType": "typedef struct _WABACTIONITEM",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.DeviceQuery",
+    "Name": "HDRVDIALOGINSTANCE",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Com",
+    "Name": "MachineGlobalObjectTableRegistrationToken",
+    "ValueType": "DECLARE_HANDLE",
     "NativeTypeDef": true
   }
 ]

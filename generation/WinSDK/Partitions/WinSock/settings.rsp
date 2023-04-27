@@ -1,3 +1,5 @@
+--config
+exclude-empty-records
 --exclude
 DL_ADDRESS_TYPE
 --traverse

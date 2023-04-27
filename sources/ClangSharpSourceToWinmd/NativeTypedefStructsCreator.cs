@@ -22,14 +22,17 @@ using Windows.Win32.Foundation.Metadata;
                 if (valueType == "DECLARE_HANDLE" || valueType == "AllJoynHandle")
                 {
                     valueType = "IntPtr";
+                    item.NativeTypeDef = true;
                 }
                 else if (valueType == "DECLARE_OPAQUE_KEY")
                 {
                     valueType = "long";
+                    item.NativeTypeDef = true;
                 }
-                else if (valueType == "struct")
+                else if (valueType.StartsWith("typedef struct"))
                 {
                     valueType = "IntPtr";
+                    item.NativeTypeDef = true;
                 }
 
                 if (!string.IsNullOrEmpty(item.CloseApi))

@@ -1,3 +1,5 @@
+--config
+exclude-empty-records
 --exclude
 _SecPkgContext_IssuerListInfoEx
 --traverse
