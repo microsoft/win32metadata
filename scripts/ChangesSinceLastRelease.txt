@@ -3145,4 +3145,4 @@ Windows.Win32.System.Com.IEnumContextProps.Count(pcelt) added
 Windows.Win32.System.Com.IEnumContextProps.Next(celt,pContextProperties,pceltFetched) added
 Windows.Win32.System.Com.IEnumContextProps.Reset() added
 Windows.Win32.System.Com.IEnumContextProps.Skip(celt) added
-Windows.Win32.System.Com.tagContextProperty added
+Windows.Win32.System.Com.ContextProperty added
