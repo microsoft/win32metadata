@@ -3146,3 +3146,12 @@ Windows.Win32.System.Com.IEnumContextProps.Next(celt,pContextProperties,pceltFet
 Windows.Win32.System.Com.IEnumContextProps.Reset() added
 Windows.Win32.System.Com.IEnumContextProps.Skip(celt) added
 Windows.Win32.System.Com.ContextProperty added
+# Added missing Search APIs for #1547.
+Windows.Win32.System.Search.DBCOLUMNFLAGSDEPRECATED added
+Windows.Win32.System.Search.DBCOLUMNFLAGSDEPRECATED.DBCOLUMNFLAGS_KEYCOLUMN added
+Windows.Win32.System.Search.DBPROPENUMDEPRECATED added
+Windows.Win32.System.Search.DBPROPENUMDEPRECATED.DBPROP_FILTEROPS added
+Windows.Win32.System.Search.DBPROPENUMDEPRECATED.DBPROP_IRowsetExactScroll added
+Windows.Win32.System.Search.DBPROPENUMDEPRECATED.DBPROP_MARSHALLABLE added
+Windows.Win32.System.Search.IRowsetExactScroll :  => [Guid(208878207,10780,4558,173,229,0,170,0,68,119,61)]
+Windows.Win32.System.Search.IRowsetExactScroll.GetExactPosition(hChapter,cbBookmark,pBookmark,pulPosition,pcRows) added
