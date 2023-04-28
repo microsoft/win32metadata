@@ -1,0 +1,22 @@
+# Fixed BCRYPT handle types.
+Windows.Win32.Security.Cryptography.Apis.BCryptCloseAlgorithmProvider : hAlgorithm : [In] => [In,Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptCreateHash : hAlgorithm : [In] => [In,Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptCreateMultiHash : hAlgorithm : [In] => [In,Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptDecrypt : hKey : [In] => [In,Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptDestroyHash : hHash : [In] => [In,Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptDestroyKey : hKey : [In] => [In,Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptDestroySecret : hSecret : [In] => [In,Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptEncrypt : hKey : [In] => [In,Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptFinalizeKeyPair : hKey : [In] => [In,Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptFinishHash : hHash : [In] => [In,Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptGenerateKeyPair : hAlgorithm : [In] => [In,Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptGenerateSymmetricKey : hAlgorithm : [In] => [In,Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptHash : hAlgorithm : [In] => [In,Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptHashData : hHash : [In] => [In,Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptProcessMultiOperations : hObject : [In] => [In,Out]
+Windows.Win32.Security.Cryptography.Apis.BCryptSetProperty : hObject : [In] => [In,Out]
+Windows.Win32.Security.Cryptography.BCRYPT_ALG_HANDLE.Value...System.IntPtr => System.Void*
+Windows.Win32.Security.Cryptography.BCRYPT_HANDLE.Value...System.IntPtr => System.Void*
+Windows.Win32.Security.Cryptography.BCRYPT_HASH_HANDLE.Value...System.IntPtr => System.Void*
+Windows.Win32.Security.Cryptography.BCRYPT_KEY_HANDLE.Value...System.IntPtr => System.Void*
+Windows.Win32.Security.Cryptography.BCRYPT_SECRET_HANDLE.Value...System.IntPtr => System.Void*
