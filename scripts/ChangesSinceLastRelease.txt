@@ -3430,3 +3430,17 @@ Windows.Win32.System.WinRT.Xaml.ITrackerOwner.SetTrackerValue : handle...Tracker
 Windows.Win32.System.WinRT.Xaml.ITrackerOwner.TryGetSafeTrackerValue : handle...TrackerHandle__* => TrackerHandle
 Windows.Win32.System.WinRT.Xaml.TrackerHandle__ removed
 Windows.Win32.UI.Input.Ime.Apis.ImmGetHotKey : phKL...IntPtr* => HKL*
+# Added exclude-empty-records to project settings.
+Windows.Win32.Data.HtmlHelp.IITGroup removed
+Windows.Win32.Data.HtmlHelp.IITQuery removed
+Windows.Win32.Data.HtmlHelp.IITStopWordList removed
+Windows.Win32.Data.HtmlHelp.IITWordWheel removed
+Windows.Win32.Data.HtmlHelp.WORD_WHEEL_OPEN_FLAGS removed
+Windows.Win32.Data.HtmlHelp.WORD_WHEEL_OPEN_FLAGS.ITWW_OPEN_CONNECT removed
+Windows.Win32.Graphics.Direct3D11.CD3D11_VIDEO_DEFAULT removed
+Windows.Win32.Storage.Vss.IVssExamineWriterMetadata removed
+Windows.Win32.Storage.Vss.IVssWriterImpl removed
+Windows.Win32.System.Com.StructuredStorage.Apis.StgConvertPropertyToVariant removed
+Windows.Win32.System.Com.StructuredStorage.PMemoryAllocator removed
+Windows.Win32.System.SystemServices.WORD_WHEEL_OPEN_FLAGS added
+Windows.Win32.System.SystemServices.WORD_WHEEL_OPEN_FLAGS.ITWW_OPEN_CONNECT added

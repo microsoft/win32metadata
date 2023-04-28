@@ -1,5 +1,3 @@
---config
-exclude-empty-records
 --with-type
 HANDLE_OPTIONS=uint
 --with-attribute

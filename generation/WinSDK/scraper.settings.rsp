@@ -1,3 +1,5 @@
+--config
+exclude-empty-records
 --with-librarypath
 VerifierEnumerateResource=verifier.dll
 --with-type
@@ -86,6 +88,7 @@ _OLD_LARGE_INTEGER
 _LARGE_INTEGER
 _ULARGE_INTEGER
 IVssCreateWriterMetadataEx
+IVssWriterImpl
 _SLIST_ENTRY
 __RPCPROXY_H_VERSION__
 _DISPATCHER_CONTEXT_ARM64
@@ -147,6 +150,10 @@ HINSTANCE__
 _IID_IXmlReader
 _IID_IXmlResolver
 _IID_IXmlWriter
+IITWordWheel
+CreateWriterEx
+D3D11_VIDEO_DEFAULT
+StgConvertPropertyToVariant
 --remap
 ABI::Windows::Foundation::IActivatableClassRegistration=IActivatableClassRegistration
 adpcmcoef_tag=ADPCMCOEFSET

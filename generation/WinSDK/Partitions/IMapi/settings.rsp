@@ -1,5 +1,3 @@
---config
-exclude-empty-records
 --traverse
 <IncludeRoot>/um/imapierror.h
 <IncludeRoot>/um/imapi2.h

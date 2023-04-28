@@ -1,5 +1,3 @@
---config
-exclude-empty-records
 --with-type
 CLUSTER_PROPERTY_SYNTAX=uint
 --traverse

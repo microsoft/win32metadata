@@ -1,5 +1,3 @@
---config
-exclude-empty-records
 --exclude
 NDR_SCONTEXT
 --traverse

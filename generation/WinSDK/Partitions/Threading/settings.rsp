@@ -1,5 +1,3 @@
---config
-exclude-empty-records
 --exclude
 _LIST_ENTRY
 LIST_ENTRY32

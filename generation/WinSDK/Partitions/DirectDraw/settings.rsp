@@ -1,5 +1,3 @@
---config
-exclude-empty-records
 --traverse
 <IncludeRoot>/um/ddraw.h
 <IncludeRoot>/um/ddrawi.h

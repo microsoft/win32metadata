@@ -1,5 +1,3 @@
---config
-exclude-empty-records
 --remap
 _NavigateToPidl=_NavigateToPidl2
 --traverse
