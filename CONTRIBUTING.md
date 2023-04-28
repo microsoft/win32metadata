@@ -15,6 +15,7 @@ You can contribute to this project by contributing to:
 * [Namespaces](#Namespaces)
 * [Enums](#Enums)
 * [Constants](#Constants)
+* [Typedefs](#Typedefs)
 * [Attributes](#Attributes)
 * [Projections](docs/projections.md)
 
@@ -153,6 +154,37 @@ Constants can be assigned to different namespaces than their header files by add
 The ConstantsScraper uses [regular expression matching](sources/MetadataUtils/ConstantsScraper.cs) on the header files to automatically extract constants. If a constant is not being detected, either a regular expression needs to be added or a regular expression would be insufficient. For cases where regular expressions would be insufficient, you can manually define constants in `.cs` files within [manual](generation/WinSDK/manual) (e.g. [RestartManager.cs](generation/WinSDK/manual/RestartManager.cs)).
 
 Constants are removed from the metadata when they are detected as members of an enum.
+
+## Typedefs
+
+Typedefs are friendly aliases for types that add more intuitive names and type safety to APIs. Typedefs in the metadata are defined in [autotypes.json](generation/WinSDK/autoTypes.json). Each object in the JSON array is a typedef with the following properties:
+
+* `Namespace` - Optional property indicating the namespace for the typedef
+  * Note: If omitted, the typedef will inherit the namespace of the `CloseApi`
+* `Name` - The name of the typedef
+* `ValueType` - The type that the typedef represents. In addition to base types, the below [special patterns](https://github.com/microsoft/win32metadata/blob/e49534798f50469837c93dbcefa02c2ca952dd08/sources/GeneratorSdk/MetadataTasks/PrepSettingsForAutoTypes.cs#L40-L73) are recognized:
+  * `DECLARE_HANDLE` - For typedefs defined with the `DECLARE_HANDLE` macro in the headers
+  * `typedef struct <TYPE>` - For opaque structs
+  * Note: These special patterns automatically handle the remaps and exclusions necessary to achieve the optimal result so should always be used when applicable
+* `CloseApi` - Optional property indicating the API that must be used to close the handle
+* `InvalidHandleValues` - A list of invalid values for the handle
+* `NativeTypedef` - Whether this typedef exists in the native headers
+  * Note: While adding metadata-only typedefs can improve API usability, projections may wish to ignore typedefs that don't exist in the headers to provide an experience closer to the native headers. This property allows projections to differentiate native typedefs vs. metadata typedefs.
+
+In the example below, a native typedef called `BCRYPT_KEY_HANDLE` is defined representing `void*` aligned with the original typedef from the headers `typedef PVOID BCRYPT_KEY_HANDLE;`. The typedef must be closed with `BCryptDestroyKey` and has an `InvalidHandleValue` of `0`. Since no `Namespace` is specified, the typedef will live in the same namespace as `BCryptDestroyKey`.
+
+```json
+{
+  "Name": "BCRYPT_KEY_HANDLE",
+  "ValueType": "void*",
+  "CloseApi": "BCryptDestroyKey",
+  "AlsoUsableFor": "BCRYPT_HANDLE",
+  "InvalidHandleValues": [ 0 ],
+  "NativeTypedef": true
+}
+```
+
+You can add new typedefs or modify existing typedefs by modifying [autotypes.json](generation/WinSDK/autoTypes.json).
 
 ## Attributes
 

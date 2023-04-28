@@ -22,17 +22,17 @@ using Windows.Win32.Foundation.Metadata;
                 if (valueType == "DECLARE_HANDLE" || valueType == "AllJoynHandle")
                 {
                     valueType = "IntPtr";
-                    item.NativeTypeDef = true;
+                    item.NativeTypedef = true;
                 }
                 else if (valueType == "DECLARE_OPAQUE_KEY")
                 {
                     valueType = "long";
-                    item.NativeTypeDef = true;
+                    item.NativeTypedef = true;
                 }
                 else if (valueType.StartsWith("typedef struct"))
                 {
                     valueType = "IntPtr";
-                    item.NativeTypeDef = true;
+                    item.NativeTypedef = true;
                 }
 
                 if (!string.IsNullOrEmpty(item.CloseApi))
@@ -92,7 +92,7 @@ $@"namespace {currentNamespace}
                 }
 
                 writer.WriteLine(
-$@"    [{(item.NativeTypeDef ? "NativeTypedef" : "MetadataTypedef")}]
+$@"    [{(item.NativeTypedef ? "NativeTypedef" : "MetadataTypedef")}]
     public {safety}struct {item.Name}
     {{
         public {valueType} Value;
