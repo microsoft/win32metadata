@@ -2683,12 +2683,6 @@
     "NativeTypeDef": true
   },
   {
-    "Namespace": "Windows.Win32.Devices.DeviceQuery",
-    "Name": "HDRVDIALOGINSTANCE",
-    "ValueType": "DECLARE_HANDLE",
-    "NativeTypeDef": true
-  },
-  {
     "Namespace": "Windows.Win32.System.Com",
     "Name": "MachineGlobalObjectTableRegistrationToken",
     "ValueType": "DECLARE_HANDLE",
@@ -2709,6 +2703,96 @@
   {
     "Namespace": "Windows.Win32.System.WinRT.Xaml",
     "Name": "TrackerHandle",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypeDef": true
+  },
+  {
+    "Name": "HIORING",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "CloseIoRing",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Tapi",
+    "Name": "HDRVCALL",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Tapi",
+    "Name": "HDRVLINE",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Tapi",
+    "Name": "HDRVPHONE",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Tapi",
+    "Name": "HDRVMSPLINE",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Tapi",
+    "Name": "HDRVDIALOGINSTANCE",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Tapi",
+    "Name": "HTAPICALL",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Tapi",
+    "Name": "HTAPILINE",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Tapi",
+    "Name": "HTAPIPHONE",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Tapi",
+    "Name": "HPROVIDER",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "HSPRITE",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "HSTR",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "HUMPD",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "HLSURF",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.DeviceQuery",
+    "Name": "HDEVQUERY",
     "ValueType": "DECLARE_HANDLE",
     "NativeTypeDef": true
   }

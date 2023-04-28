@@ -2389,9 +2389,7 @@ Windows.Win32.System.Search.DBPROPENUMDEPRECATED.DBPROP_MARSHALLABLE added
 Windows.Win32.System.Search.IRowsetExactScroll :  => [Guid(208878207,10780,4558,173,229,0,170,0,68,119,61)]
 Windows.Win32.System.Search.IRowsetExactScroll.GetExactPosition(hChapter,cbBookmark,pBookmark,pulPosition,pcRows) added
 # Refactored opaque struct handling.
-Windows.Win32.Devices.DeviceQuery.HDRVDIALOGINSTANCE added
 Windows.Win32.Devices.Tapi.HDRVDIALOGINSTANCE__ removed
-Windows.Win32.Devices.Tapi.TUISPICREATEDIALOGINSTANCEPARAMS.hdDlgInst...Windows.Win32.Devices.Tapi.HDRVDIALOGINSTANCE__* => Windows.Win32.Devices.DeviceQuery.HDRVDIALOGINSTANCE
 Windows.Win32.Globalization.UDateFormatSymbols :  => [NativeTypedef]
 Windows.Win32.Globalization.UDateFormatSymbols.Value added
 Windows.Win32.Globalization.UFormattedNumberRange :  => [NativeTypedef]
@@ -3329,3 +3327,106 @@ Windows.Win32.Security.Authorization.AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE added
 Windows.Win32.Storage.Packaging.Appx.PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE added
 Windows.Win32.Storage.Packaging.Appx.PACKAGEDEPENDENCY_CONTEXT added
 Windows.Win32.System.WinRT.Xaml.TrackerHandle added
+# Added missing handles.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Register_Notification : pNotifyContext...IntPtr* => HCMNOTIFICATION*
+Windows.Win32.Devices.DeviceQuery.Apis.DevCloseObjectQuery : hDevQuery...HDEVQUERY__* => HDEVQUERY
+Windows.Win32.Devices.DeviceQuery.Apis.DevCreateObjectQuery : phDevQuery...HDEVQUERY__** => HDEVQUERY*
+Windows.Win32.Devices.DeviceQuery.Apis.DevCreateObjectQueryEx : phDevQuery...HDEVQUERY__** => HDEVQUERY*
+Windows.Win32.Devices.DeviceQuery.Apis.DevCreateObjectQueryFromId : phDevQuery...HDEVQUERY__** => HDEVQUERY*
+Windows.Win32.Devices.DeviceQuery.Apis.DevCreateObjectQueryFromIdEx : phDevQuery...HDEVQUERY__** => HDEVQUERY*
+Windows.Win32.Devices.DeviceQuery.Apis.DevCreateObjectQueryFromIds : phDevQuery...HDEVQUERY__** => HDEVQUERY*
+Windows.Win32.Devices.DeviceQuery.Apis.DevCreateObjectQueryFromIdsEx : phDevQuery...HDEVQUERY__** => HDEVQUERY*
+Windows.Win32.Devices.DeviceQuery.HDEVQUERY added
+Windows.Win32.Devices.DeviceQuery.HDEVQUERY__ removed
+Windows.Win32.Devices.DeviceQuery.PDEV_QUERY_RESULT_CALLBACK.Invoke : hDevQuery...HDEVQUERY__* => HDEVQUERY
+Windows.Win32.Devices.Enumeration.Pnp.Apis.SwDeviceCreate : phSwDevice...IntPtr* => HSWDEVICE*
+Windows.Win32.Devices.SerialCommunication.Apis.ComDBOpen : PHComDB...IntPtr* => HCOMDB*
+Windows.Win32.Devices.Tapi.Apis.lineGetIcon : lphIcon...IntPtr* => HICON*
+Windows.Win32.Devices.Tapi.Apis.lineGetIconA : lphIcon...IntPtr* => HICON*
+Windows.Win32.Devices.Tapi.Apis.lineGetIconW : lphIcon...IntPtr* => HICON*
+Windows.Win32.Devices.Tapi.Apis.phoneGetIcon : lphIcon...IntPtr* => HICON*
+Windows.Win32.Devices.Tapi.Apis.phoneGetIconA : lphIcon...IntPtr* => HICON*
+Windows.Win32.Devices.Tapi.Apis.phoneGetIconW : lphIcon...IntPtr* => HICON*
+Windows.Win32.Devices.Tapi.HDRVCALL added
+Windows.Win32.Devices.Tapi.HDRVCALL__ removed
+Windows.Win32.Devices.Tapi.HDRVDIALOGINSTANCE added
+Windows.Win32.Devices.Tapi.HDRVLINE added
+Windows.Win32.Devices.Tapi.HDRVLINE__ removed
+Windows.Win32.Devices.Tapi.HDRVMSPLINE added
+Windows.Win32.Devices.Tapi.HDRVMSPLINE__ removed
+Windows.Win32.Devices.Tapi.HDRVPHONE added
+Windows.Win32.Devices.Tapi.HDRVPHONE__ removed
+Windows.Win32.Devices.Tapi.HPROVIDER added
+Windows.Win32.Devices.Tapi.HPROVIDER__ removed
+Windows.Win32.Devices.Tapi.HTAPICALL added
+Windows.Win32.Devices.Tapi.HTAPICALL__ removed
+Windows.Win32.Devices.Tapi.HTAPILINE added
+Windows.Win32.Devices.Tapi.HTAPILINE__ removed
+Windows.Win32.Devices.Tapi.HTAPIPHONE added
+Windows.Win32.Devices.Tapi.HTAPIPHONE__ removed
+Windows.Win32.Devices.Tapi.LINEEVENT.Invoke : htCall : [In,Out] => [In]
+Windows.Win32.Devices.Tapi.LINEEVENT.Invoke : htCall...HTAPICALL__* => HTAPICALL
+Windows.Win32.Devices.Tapi.LINEEVENT.Invoke : htLine : [In,Out] => [In]
+Windows.Win32.Devices.Tapi.LINEEVENT.Invoke : htLine...HTAPILINE__* => HTAPILINE
+Windows.Win32.Devices.Tapi.PHONEEVENT.Invoke : htPhone : [In,Out] => [In]
+Windows.Win32.Devices.Tapi.PHONEEVENT.Invoke : htPhone...HTAPIPHONE__* => HTAPIPHONE
+Windows.Win32.Devices.Tapi.TUISPICREATEDIALOGINSTANCEPARAMS.hdDlgInst...Windows.Win32.Devices.Tapi.HDRVDIALOGINSTANCE__* => Windows.Win32.Devices.Tapi.HDRVDIALOGINSTANCE
+Windows.Win32.Foundation.HLSURF added
+Windows.Win32.Foundation.HLSURF__ removed
+Windows.Win32.Foundation.HSPRITE added
+Windows.Win32.Foundation.HSPRITE__ removed
+Windows.Win32.Foundation.HSTR added
+Windows.Win32.Foundation.HSTR__ removed
+Windows.Win32.Foundation.HUMPD added
+Windows.Win32.Foundation.HUMPD__ removed
+Windows.Win32.Media.Audio.Apis.acmDriverAddA : phadid...IntPtr* => HACMDRIVERID*
+Windows.Win32.Media.Audio.Apis.acmDriverAddW : phadid...IntPtr* => HACMDRIVERID*
+Windows.Win32.Media.Audio.Apis.acmDriverID : phadid...IntPtr* => HACMDRIVERID*
+Windows.Win32.Media.Audio.Apis.acmDriverOpen : phad...IntPtr* => HACMDRIVER*
+Windows.Win32.Media.Audio.Apis.acmStreamOpen : phas...IntPtr* => HACMSTREAM*
+Windows.Win32.Media.Audio.Apis.mixerOpen : phmx...IntPtr* => HMIXER*
+Windows.Win32.Networking.Clustering.Apis.ResUtilSetResourceServiceStartParameters : phService...IntPtr* => SC_HANDLE*
+Windows.Win32.Networking.Clustering.Apis.ResUtilSetResourceServiceStartParametersEx : phService...IntPtr* => SC_HANDLE*
+Windows.Win32.Networking.Clustering.Apis.ResUtilStartResourceService : phServiceHandle...IntPtr* => SC_HANDLE*
+Windows.Win32.Networking.Clustering.PRESUTIL_SET_RESOURCE_SERVICE_START_PARAMETERS_EX.Invoke : phService...IntPtr* => SC_HANDLE*
+Windows.Win32.Networking.Clustering.PRESUTIL_SET_RESOURCE_SERVICE_START_PARAMETERS.Invoke : phService...IntPtr* => SC_HANDLE*
+Windows.Win32.Networking.Clustering.PRESUTIL_START_RESOURCE_SERVICE.Invoke : phServiceHandle...IntPtr* => SC_HANDLE*
+Windows.Win32.Security.Authorization.Apis.AuthzAccessCheck : phAccessCheckResults...IntPtr* => AUTHZ_ACCESS_CHECK_RESULTS_HANDLE*
+Windows.Win32.Security.Authorization.Apis.AuthzInitializeObjectAccessAuditEvent : phAuditEvent...IntPtr* => AUTHZ_AUDIT_EVENT_HANDLE*
+Windows.Win32.Security.Authorization.Apis.AuthzInitializeObjectAccessAuditEvent2 : phAuditEvent...IntPtr* => AUTHZ_AUDIT_EVENT_HANDLE*
+Windows.Win32.Security.Authorization.Apis.AuthzRegisterCapChangeNotification : phCapChangeSubscription...AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE__** => AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE*
+Windows.Win32.Security.Authorization.Apis.AuthzRegisterSecurityEventSource : phEventProvider...IntPtr* => AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE*
+Windows.Win32.Security.Authorization.Apis.AuthzUnregisterCapChangeNotification : hCapChangeSubscription...AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE__* => AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE
+Windows.Win32.Security.Authorization.Apis.AuthzUnregisterSecurityEventSource : phEventProvider...IntPtr* => AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE*
+Windows.Win32.Security.Authorization.AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE__ removed
+Windows.Win32.Storage.Compression.Apis.CreateCompressor : CompressorHandle...IntPtr* => COMPRESSOR_HANDLE*
+Windows.Win32.Storage.FileSystem.Apis.BuildIoRingCancelRequest : ioRing...HIORING__* => HIORING
+Windows.Win32.Storage.FileSystem.Apis.BuildIoRingReadFile : ioRing...HIORING__* => HIORING
+Windows.Win32.Storage.FileSystem.Apis.BuildIoRingRegisterBuffers : ioRing...HIORING__* => HIORING
+Windows.Win32.Storage.FileSystem.Apis.BuildIoRingRegisterFileHandles : ioRing...HIORING__* => HIORING
+Windows.Win32.Storage.FileSystem.Apis.CloseIoRing : ioRing...HIORING__* => HIORING
+Windows.Win32.Storage.FileSystem.Apis.CreateIoRing : h...HIORING__** => HIORING*
+Windows.Win32.Storage.FileSystem.Apis.GetIoRingInfo : ioRing...HIORING__* => HIORING
+Windows.Win32.Storage.FileSystem.Apis.IsIoRingOpSupported : ioRing...HIORING__* => HIORING
+Windows.Win32.Storage.FileSystem.Apis.PopIoRingCompletion : ioRing...HIORING__* => HIORING
+Windows.Win32.Storage.FileSystem.Apis.SetIoRingCompletionEvent : ioRing...HIORING__* => HIORING
+Windows.Win32.Storage.FileSystem.Apis.SubmitIoRing : ioRing...HIORING__* => HIORING
+Windows.Win32.Storage.FileSystem.HIORING added
+Windows.Win32.Storage.FileSystem.HIORING__ removed
+Windows.Win32.Storage.Packaging.Appx.Apis.ActivatePackageVirtualizationContext : context...PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__* => PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE
+Windows.Win32.Storage.Packaging.Appx.Apis.AddPackageDependency : packageDependencyContext...PACKAGEDEPENDENCY_CONTEXT__** => PACKAGEDEPENDENCY_CONTEXT*
+Windows.Win32.Storage.Packaging.Appx.Apis.CreatePackageVirtualizationContext : context...PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__** => PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE*
+Windows.Win32.Storage.Packaging.Appx.Apis.DuplicatePackageVirtualizationContext : destContext...PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__** => PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE*
+Windows.Win32.Storage.Packaging.Appx.Apis.DuplicatePackageVirtualizationContext : sourceContext...PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__* => PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE
+Windows.Win32.Storage.Packaging.Appx.Apis.GetCurrentPackageVirtualizationContext : return...PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__* => PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE
+Windows.Win32.Storage.Packaging.Appx.Apis.GetIdForPackageDependencyContext : packageDependencyContext...PACKAGEDEPENDENCY_CONTEXT__* => PACKAGEDEPENDENCY_CONTEXT
+Windows.Win32.Storage.Packaging.Appx.Apis.ReleasePackageVirtualizationContext : context...PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__* => PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE
+Windows.Win32.Storage.Packaging.Appx.Apis.RemovePackageDependency : packageDependencyContext...PACKAGEDEPENDENCY_CONTEXT__* => PACKAGEDEPENDENCY_CONTEXT
+Windows.Win32.Storage.Packaging.Appx.PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE__ removed
+Windows.Win32.Storage.Packaging.Appx.PACKAGEDEPENDENCY_CONTEXT__ removed
+Windows.Win32.System.WinRT.Xaml.ITrackerOwner.CreateTrackerHandle : returnValue...TrackerHandle__** => TrackerHandle*
+Windows.Win32.System.WinRT.Xaml.ITrackerOwner.DeleteTrackerHandle : handle...TrackerHandle__* => TrackerHandle
+Windows.Win32.System.WinRT.Xaml.ITrackerOwner.SetTrackerValue : handle...TrackerHandle__* => TrackerHandle
+Windows.Win32.System.WinRT.Xaml.ITrackerOwner.TryGetSafeTrackerValue : handle...TrackerHandle__* => TrackerHandle
+Windows.Win32.System.WinRT.Xaml.TrackerHandle__ removed
+Windows.Win32.UI.Input.Ime.Apis.ImmGetHotKey : phKL...IntPtr* => HKL*

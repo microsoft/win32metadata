@@ -45,6 +45,8 @@ namespace MetadataTasks
                         typesToExclude.Add(handleStructName);
 
                         remapSection.AppendLine($"{typeName}={nativeType}");
+                        remapSection.AppendLine($"P{typeName}={typeName}*");
+                        remapSection.AppendLine($"LP{typeName}={typeName}*");
                         remapSection.AppendLine($"{handleStructName}*={typeName}");
                     }
                     else if (type == "AllJoynHandle")
