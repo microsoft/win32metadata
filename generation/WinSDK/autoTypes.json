@@ -796,6 +796,13 @@
   },
   {
     "Namespace": "Windows.Win32.Security.Authorization",
+    "Name": "AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Security.Authorization",
     "Name": "AUTHZ_CLIENT_CONTEXT_HANDLE",
     "ValueType": "DECLARE_HANDLE",
     "InvalidHandleValues": [ -1, 0 ],
@@ -2684,6 +2691,24 @@
   {
     "Namespace": "Windows.Win32.System.Com",
     "Name": "MachineGlobalObjectTableRegistrationToken",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Storage.Packaging.Appx",
+    "Name": "PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Storage.Packaging.Appx",
+    "Name": "PACKAGEDEPENDENCY_CONTEXT",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypeDef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.WinRT.Xaml",
+    "Name": "TrackerHandle",
     "ValueType": "DECLARE_HANDLE",
     "NativeTypeDef": true
   }

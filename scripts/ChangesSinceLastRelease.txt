@@ -3324,3 +3324,8 @@ Windows.Win32.Media.DirectShow.IEnumMediaTypes.Next :  => [CanReturnMultipleSucc
 Windows.Win32.Media.DirectShow.IEnumPIDMap.Next :  => [CanReturnMultipleSuccessValues]
 Windows.Win32.Media.DirectShow.IEnumPins.Next :  => [CanReturnMultipleSuccessValues]
 Windows.Win32.Media.DirectShow.IEnumRegFilters.Next :  => [CanReturnMultipleSuccessValues]
+# Added missing handles.
+Windows.Win32.Security.Authorization.AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE added
+Windows.Win32.Storage.Packaging.Appx.PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE added
+Windows.Win32.Storage.Packaging.Appx.PACKAGEDEPENDENCY_CONTEXT added
+Windows.Win32.System.WinRT.Xaml.TrackerHandle added
