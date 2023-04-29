@@ -905,6 +905,7 @@ FILE_COMPRESSION_INFO=Windows.Win32.Storage.FileSystem
 FILE_DISPOSITION_INFO=Windows.Win32.Storage.FileSystem
 FILE_DISPOSITION_INFO_EX=Windows.Win32.Storage.FileSystem
 FILE_END_OF_FILE_INFO=Windows.Win32.Storage.FileSystem
+FILE_FLUSH_MODE=Windows.Win32.Storage.FileSystem
 FILE_FULL_DIR_INFO=Windows.Win32.Storage.FileSystem
 FILE_ID_BOTH_DIR_INFO=Windows.Win32.Storage.FileSystem
 FILE_ID_DESCRIPTOR=Windows.Win32.Storage.FileSystem
@@ -918,6 +919,7 @@ FILE_RENAME_INFO=Windows.Win32.Storage.FileSystem
 FILE_STANDARD_INFO=Windows.Win32.Storage.FileSystem
 FILE_STORAGE_INFO=Windows.Win32.Storage.FileSystem
 FILE_STREAM_INFO=Windows.Win32.Storage.FileSystem
+FILE_WRITE_FLAGS=Windows.Win32.Storage.FileSystem
 FileEncryptionStatusA=Windows.Win32.Storage.FileSystem
 FileEncryptionStatusW=Windows.Win32.Storage.FileSystem
 FindActCtxSectionGuid=Windows.Win32.System.ApplicationInstallationAndServicing
@@ -2089,6 +2091,7 @@ HSTRING_UserUnmarshal=Windows.Win32.System.WinRT
 HSTRING_UserUnmarshal64=Windows.Win32.System.WinRT
 # endregion winstring.h (duplicate definitions in many headers)
 # region winternl.h
+IO_STATUS_BLOCK=Windows.Win32.Storage.FileSystem
 NtQueryInformationProcess=Windows.Win32.System.Threading
 NtQueryInformationThread=Windows.Win32.System.Threading
 NtSetInformationThread=Windows.Win32.System.Threading
