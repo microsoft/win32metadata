@@ -36487,6 +36487,128 @@
         "parameter": "wFlags"
       }
     ]
+  },
+  {
+    "name": "SIGNER_SIGN_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "SPC_EXC_|SPC_INC_|SPC_DIGEST_",
+      "header": "mssip.h"
+    },
+    "members": [
+      {
+        "name": "SIG_APPEND"
+      }
+    ],
+    "uses": [
+      {
+        "method": "SignerSignEx",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "SignerSignEx2",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "SignerSignEx3",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "SIGNER_TIMESTAMP_FLAGS",
+    "autoPopulate": {
+      "filter": "SIGNER_TIMESTAMP_",
+      "header": "mssign.h"
+    },
+    "uses": [
+      {
+        "method": "SignerTimeStampEx2",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "SignerTimeStampEx3",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "SignerSignEx2",
+        "parameter": "dwTimestampFlags"
+      },
+      {
+        "method": "SignerSignEx3",
+        "parameter": "dwTimestampFlags"
+      }
+    ]
+  },
+  {
+    "name": "SIGNER_SUBJECT_CHOICE",
+    "autoPopulate": {
+      "filter": "SIGNER_SUBJECT_",
+      "header": "mssign.h"
+    },
+    "uses": [
+      {
+        "struct": "SIGNER_SUBJECT_INFO",
+        "field": "dwSubjectChoice"
+      }
+    ]
+  },
+  {
+    "name": "SIGNER_SIGNATURE_ATTRIBUTE_CHOICE",
+    "members": [
+      {
+        "name": "SIGNER_NO_ATTR"
+      },
+      {
+        "name": "SIGNER_AUTHCODE_ATTR"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "SIGNER_SIGNATURE_INFO",
+        "field": "dwAttrChoice"
+      }
+    ]
+  },
+  {
+    "name": "SIGNER_PRIVATE_KEY_CHOICE",
+    "autoPopulate": {
+      "filter": "PVK_TYPE_",
+      "header": "mssign.h"
+    },
+    "uses": [
+      {
+        "struct": "SIGNER_PROVIDER_INFO",
+        "field": "dwPvkChoice"
+      }
+    ]
+  },
+  {
+    "name": "SIGNER_CERT_POLICY",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "SIGNER_CERT_POLICY_",
+      "header": "mssign.h"
+    },
+    "uses": [
+      {
+        "struct": "SIGNER_CERT_STORE_INFO",
+        "field": "dwCertPolicy"
+      }
+    ]
+  },
+  {
+    "name": "SIGNER_CERT_CHOICE",
+    "autoPopulate": {
+      "filter": "SIGNER_CERT_(?!POLICY)",
+      "header": "mssign.h"
+    },
+    "uses": [
+      {
+        "struct": "SIGNER_CERT",
+        "field": "dwCertChoice"
+      }
+    ]
   }
 ]
 }
