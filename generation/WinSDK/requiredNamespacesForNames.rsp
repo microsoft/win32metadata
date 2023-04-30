@@ -2091,20 +2091,19 @@ HSTRING_UserUnmarshal=Windows.Win32.System.WinRT
 HSTRING_UserUnmarshal64=Windows.Win32.System.WinRT
 # endregion winstring.h (duplicate definitions in many headers)
 # region winternl.h
-IO_STATUS_BLOCK=Windows.Win32.Storage.FileSystem
+IO_STATUS_BLOCK=Windows.Win32.System.IO
 NtQueryInformationProcess=Windows.Win32.System.Threading
 NtQueryInformationThread=Windows.Win32.System.Threading
 NtSetInformationThread=Windows.Win32.System.Threading
-NtCreateFile=Windows.Win32.Storage.FileSystem
+OBJECT_ATTRIBUTES=Windows.Win32.Foundation
 PEB_LDR_DATA=Windows.Win32.System.Threading
-PPS_POST_PROCESS_INIT_ROUTINE=Windows.Win32.System.Threading
 PEB=Windows.Win32.System.Threading
+PIO_APC_ROUTINE=Windows.Win32.System.IO
+PPS_POST_PROCESS_INIT_ROUTINE=Windows.Win32.System.Threading
 PROCESS_BASIC_INFORMATION=Windows.Win32.System.Threading
-PROCESSINFOCLASS=Windows.Win32.System.Threading
 RTL_USER_PROCESS_PARAMETERS=Windows.Win32.System.Threading
 RtlNtStatusToDosError=Windows.Win32.Foundation
 TEB=Windows.Win32.System.Threading
-THREADINFOCLASS=Windows.Win32.System.Threading
 # endregion winternl.h
 # region winuser.h
 _TrackMouseEvent=Windows.Win32.UI.Input.KeyboardAndMouse
