@@ -129,9 +129,9 @@ typedef struct _SIGNER_DIGEST_SIGN_INFO {
 } SIGNER_DIGEST_SIGN_INFO, *PSIGNER_DIGEST_SIGN_INFO;
 
 typedef struct SIGNER_DIGEST_SIGN_INFO_V1 {
-    DWORD cbSize;                                                //Required: should be set to sizeof(SIGNER_DIGEST_SIGN_INFO_V1)
-    PFN_AUTHENTICODE_DIGEST_SIGN pfnAuthenticodeDigestSign;      //Required: pointer to AuthenticodeDigestSign function
-    PCRYPT_DATA_BLOB pMetadataBlob;                              //Optional: metadata blob (opaque to SignerSignEx3)
+    DWORD cbSize;
+    PFN_AUTHENTICODE_DIGEST_SIGN pfnAuthenticodeDigestSign;
+    PCRYPT_DATA_BLOB pMetadataBlob;
 } SIGNER_DIGEST_SIGN_INFO_V1, *PSIGNER_DIGEST_SIGN_INFO_V1;
 
 typedef struct SIGNER_DIGEST_SIGN_INFO_V2 {
@@ -281,5 +281,5 @@ HRESULT WINAPI SignerTimeStampEx3(
     );
 
 #ifdef __cplusplus
-}       // Balance extern "C" above
+}
 #endif
