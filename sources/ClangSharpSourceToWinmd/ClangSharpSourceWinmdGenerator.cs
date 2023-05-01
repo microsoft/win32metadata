@@ -540,6 +540,16 @@ namespace ClangSharpSourceToWinmd
                                     this.nameToSymbols[typeInfo.Name] = typeSymbol;
                                 }
                             }
+                            else if (typeInfo is MetadataUtils.DelegateTypeInfo)
+                            {
+                                var fullName = $"{typeInfo.Namespace}.{typeInfo.Name}";
+                                var typeSymbol = this.compilation.GetTypeByMetadataName(fullName);
+
+                                if (typeSymbol != null)
+                                {
+                                    this.nameToSymbols[typeInfo.Name] = typeSymbol;
+                                }
+                            }
                         }
                     }
                 }
