@@ -2,3 +2,7 @@
 	path = ext/sdk-api
 	url = https://github.com/MicrosoftDocs/sdk-api
 	shallow = true
+[submodule "ext/win32"]
+	path = ext/win32
+	url = https://github.com/MicrosoftDocs/win32
+	shallow = true
