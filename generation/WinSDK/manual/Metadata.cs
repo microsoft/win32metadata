@@ -63,6 +63,13 @@ public class CppAttributeList : Attribute
     }
 }
 
+public class DocumentationAttribute : Attribute
+{
+    public DocumentationAttribute(String Uri)
+    {
+    }
+}
+
 public class DoNotReleaseAttribute : Attribute
 {
     public DoNotReleaseAttribute()
