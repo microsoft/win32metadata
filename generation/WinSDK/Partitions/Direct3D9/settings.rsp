@@ -1,9 +1,11 @@
 --with-type
 D3DFORMAT=uint
 --traverse
-<IncludeRoot>/shared/d3d9types.h
-<IncludeRoot>/shared/d3d9caps.h
-<IncludeRoot>/um/d3d9helper.h
 <IncludeRoot>/shared/d3d9.h
+<IncludeRoot>/shared/d3d9caps.h
+<IncludeRoot>/shared/d3d9types.h
+<IncludeRoot>/um/d3d9helper.h
+<IncludeRoot>/um/d3dcaps.h
+<IncludeRoot>/um/d3dtypes.h
 --namespace
 Windows.Win32.Graphics.Direct3D9
