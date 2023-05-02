@@ -4126,7 +4126,32 @@
       {
         "name": "NO_ERROR",
         "value": 0
+      }
+    ],
+    "uses": [
+      {
+        "method": "GetLastError",
+        "parameter": "return"
       },
+      {
+        "method": "SetLastError",
+        "parameter": "dwErrCode"
+      },
+      {
+        "method": "SetLastErrorEx",
+        "parameter": "dwErrCode"
+      },
+      {
+        "struct": "NETINFOSTRUCT",
+        "field": "dwStatus"
+      }
+    ]
+  },
+  {
+    "namespace": "Windows.Win32.Foundation",
+    "type": "uint",
+    "name": "WAIT_EVENT",
+    "members": [
       {
         "name": "WAIT_OBJECT_0",
         "value": 0
@@ -4154,19 +4179,11 @@
     ],
     "uses": [
       {
-        "method": "GetLastError",
+        "method": "WaitForSingleObject",
         "parameter": "return"
       },
       {
-        "method": "SetLastError",
-        "parameter": "dwErrCode"
-      },
-      {
-        "method": "SetLastErrorEx",
-        "parameter": "dwErrCode"
-      },
-      {
-        "method": "SignalObjectAndWait",
+        "method": "WaitForSingleObjectEx",
         "parameter": "return"
       },
       {
@@ -4175,14 +4192,6 @@
       },
       {
         "method": "WaitForMultipleObjectsEx",
-        "parameter": "return"
-      },
-      {
-        "method": "WaitForSingleObject",
-        "parameter": "return"
-      },
-      {
-        "method": "WaitForSingleObjectEx",
         "parameter": "return"
       },
       {
@@ -4198,8 +4207,8 @@
         "parameter": "return"
       },
       {
-        "struct": "NETINFOSTRUCT",
-        "field": "dwStatus"
+        "method": "SignalObjectAndWait",
+        "parameter": "return"
       }
     ]
   },

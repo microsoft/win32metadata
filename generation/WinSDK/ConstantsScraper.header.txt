@@ -3,6 +3,7 @@ using Windows.Win32.Devices.Properties;  // For DEVPROPKEY
 using static Windows.Win32.Data.Xml.MsXml.Apis; // Various constants
 using static Windows.Win32.Devices.DeviceAccess.Apis; // Various constants
 using static Windows.Win32.Foundation.Apis; // Various constants
+using static Windows.Win32.Foundation.WAIT_EVENT;
 using static Windows.Win32.Foundation.WIN32_ERROR;
 using static Windows.Win32.Graphics.Direct3D9.D3DFORMAT; // For D3DFMT_* constants
 using static Windows.Win32.Media.Apis; // Various constants
