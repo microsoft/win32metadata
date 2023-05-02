@@ -4186,6 +4186,18 @@
         "parameter": "return"
       },
       {
+        "method": "MsgWaitForMultipleObjects",
+        "parameter": "return"
+      },
+      {
+        "method": "MsgWaitForMultipleObjectsEx",
+        "parameter": "return"
+      },
+      {
+        "method": "WSAWaitForMultipleEvents",
+        "parameter": "return"
+      },
+      {
         "struct": "NETINFOSTRUCT",
         "field": "dwStatus"
       }

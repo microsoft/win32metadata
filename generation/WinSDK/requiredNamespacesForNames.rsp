@@ -1198,6 +1198,7 @@ SetVolumeLabelW=Windows.Win32.Storage.FileSystem
 SetVolumeMountPointA=Windows.Win32.Storage.FileSystem
 SetVolumeMountPointW=Windows.Win32.Storage.FileSystem
 SetXStateFeaturesMask=Windows.Win32.System.Diagnostics.Debug
+SignalObjectAndWait=Windows.Win32.System.Threading
 STARTUPINFOEXA=Windows.Win32.System.Threading
 STARTUPINFOEXW=Windows.Win32.System.Threading
 SwitchToFiber=Windows.Win32.System.Threading
