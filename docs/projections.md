@@ -60,7 +60,7 @@ DISCLAIMER: This list is a work in progress and is not yet comprehensive.
 * Handle parameters or return values decorated with `[ReturnsUnownedHandle]` are unowned ([#792](https://github.com/microsoft/win32metadata/issues/792))
 * Handle parameters decorated with `[IgnoreIfReturn]` are undefined in failure scenarios and should be ignored if the value specified by the attribute is returned. Multiple return values are represented by multiple attributes. ([#1312](https://github.com/microsoft/win32metadata/issues/1312))
 * Return value parameters marked with the `_retval_` SAL annotation are decorated with the `[RetVal]` attribute
-* Functions that return alternate success codes or return errors as success are decorated with `[CanReturnAlternateSuccessCodes]` and `[CanReturnErrorsAsSuccess]` ([#1315](https://github.com/microsoft/win32metadata/issues/1315))
+* Functions that return multiple success values or return errors as success are decorated with `[CanReturnMultipleSuccessValues]` and `[CanReturnErrorsAsSuccess]` ([#1315](https://github.com/microsoft/win32metadata/issues/1315))
 * Variadic functions contain `__arglist` as the final parameter
 * Agile interfaces are decorated with the `[Agile]` attribute
 * Structs decorated with `[StructSizeField("<FIELDNAME>")]` indicate that `<FIELDNAME>` should be automatically populated with the size of the struct ([#433](https://github.com/microsoft/win32metadata/issues/433))
