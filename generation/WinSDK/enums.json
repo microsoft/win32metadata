@@ -793,6 +793,10 @@
         "parameter": "nShowCmd"
       },
       {
+        "method": "ShellExecuteA",
+        "parameter": "nShowCmd"
+      },
+      {
         "struct": "WINDOWPLACEMENT",
         "field": "showCmd"
       },
@@ -5931,14 +5935,6 @@
         "parameter": "ulAttribute"
       },
       {
-        "method": "QueryContextAttributesW",
-        "parameter": "ulAttribute"
-      },
-      {
-        "method": "QueryContextAttributesA",
-        "parameter": "ulAttribute"
-      },
-      {
         "method": "QueryContextAttributesExW",
         "parameter": "ulAttribute"
       },
@@ -6035,22 +6031,6 @@
       {
         "method": "GetNamedPipeInfo",
         "parameter": "lpFlags"
-      },
-      {
-        "method": "GetNamedPipeHandleStateA",
-        "parameter": "lpState"
-      },
-      {
-        "method": "GetNamedPipeHandleStateW",
-        "parameter": "lpState"
-      },
-      {
-        "method": "SetNamedPipeHandleState",
-        "parameter": "lpMode"
-      },
-      {
-        "method": "SetNamedPipeHandleState",
-        "parameter": "lpMode"
       },
       {
         "method": "SetNamedPipeHandleState",
@@ -7164,19 +7144,7 @@
         "parameter": "lpdwFlags"
       },
       {
-        "method": "InternetGetConnectedStateEx",
-        "parameter": "lpdwFlags"
-      },
-      {
         "method": "InternetGetConnectedStateExA",
-        "parameter": "lpdwFlags"
-      },
-      {
-        "method": "InternetGetConnectedStateExA",
-        "parameter": "lpdwFlags"
-      },
-      {
-        "method": "InternetGetConnectedStateExW",
         "parameter": "lpdwFlags"
       },
       {
@@ -7537,16 +7505,6 @@
     ]
   },
   {
-    "addUsesTo": "OBJ_TYPE",
-    "members": [],
-    "uses": [
-      {
-        "method": "GetCurrentObject",
-        "parameter": "type"
-      }
-    ]
-  },
-  {
     "name": "SERVICE_ERROR",
     "members": [
       {
@@ -7702,14 +7660,6 @@
       }
     ],
     "uses": [
-      {
-        "method": "ImmSetCompositionStringW",
-        "parameter": "dwIndex"
-      },
-      {
-        "method": "ImmSetCompositionStringA",
-        "parameter": "dwIndex"
-      },
       {
         "method": "ImmSetCompositionStringW",
         "parameter": "dwIndex"
@@ -8626,6 +8576,10 @@
       {
         "method": "CreateDIBPatternBrush",
         "parameter": "iUsage"
+      },
+      {
+        "method": "CreateDIBSection",
+        "parameter": "usage"
       }
     ]
   },
@@ -9497,18 +9451,6 @@
       {
         "method": "NCryptSignHash",
         "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptSecretAgreement",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptExportKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptImportKey",
-        "parameter": "dwFlags"
       }
     ]
   },
@@ -10264,14 +10206,6 @@
       {
         "method": "ImmGetGuideLineW",
         "parameter": "dwIndex"
-      },
-      {
-        "method": "ImmGetGuideLineA",
-        "parameter": "dwIndex"
-      },
-      {
-        "method": "ImmGetGuideLineW",
-        "parameter": "dwIndex"
       }
     ]
   },
@@ -10553,10 +10487,6 @@
       }
     ],
     "uses": [
-      {
-        "method": "ImmNotifyIME",
-        "parameter": "dwIndex"
-      },
       {
         "method": "ImmNotifyIME",
         "parameter": "dwIndex"
@@ -12452,20 +12382,6 @@
     ]
   },
   {
-    "addUsesTo": "REG_OPEN_CREATE_OPTIONS",
-    "members": [],
-    "uses": [
-      {
-        "method": "RegCreateKeyTransactedA",
-        "parameter": "dwOptions"
-      },
-      {
-        "method": "RegCreateKeyTransactedW",
-        "parameter": "dwOptions"
-      }
-    ]
-  },
-  {
     "name": "NOTIFY_IME_ACTION",
     "members": [
       {
@@ -12494,10 +12410,6 @@
       }
     ],
     "uses": [
-      {
-        "method": "ImmNotifyIME",
-        "parameter": "dwAction"
-      },
       {
         "method": "ImmNotifyIME",
         "parameter": "dwAction"
@@ -12647,14 +12559,6 @@
     "uses": [
       {
         "method": "ImmGetConversionListW",
-        "parameter": "uFlag"
-      },
-      {
-        "method": "ImmGetConversionListW",
-        "parameter": "uFlag"
-      },
-      {
-        "method": "ImmGetConversionListA",
         "parameter": "uFlag"
       },
       {
@@ -13125,10 +13029,6 @@
       }
     ],
     "uses": [
-      {
-        "method": "DetectAutoProxyUrl",
-        "parameter": "dwDetectFlags"
-      },
       {
         "method": "DetectAutoProxyUrl",
         "parameter": "dwDetectFlags"
@@ -15438,10 +15338,6 @@
       {
         "method": "InternetAutodial",
         "parameter": "dwFlags"
-      },
-      {
-        "method": "InternetAutodial",
-        "parameter": "dwFlags"
       }
     ]
   },
@@ -16901,20 +16797,6 @@
       {
         "method": "SymFindFileInPath",
         "parameter": "flags"
-      }
-    ]
-  },
-  {
-    "addUsesTo": "REG_OPEN_CREATE_OPTIONS",
-    "members": [],
-    "uses": [
-      {
-        "method": "RegCreateKeyExA",
-        "parameter": "dwOptions"
-      },
-      {
-        "method": "RegCreateKeyExW",
-        "parameter": "dwOptions"
       }
     ]
   },
@@ -21371,10 +21253,6 @@
       {
         "struct": "VDS_PACK_NOTIFICATION",
         "field": "ulEvent"
-      },
-      {
-        "struct": "VDS_PACK_NOTIFICATION",
-        "field": "ulEvent"
       }
     ]
   },
@@ -21614,10 +21492,6 @@
       {
         "struct": "VDS_FILE_SYSTEM_NOTIFICATION",
         "field": "ulEvent"
-      },
-      {
-        "struct": "VDS_FILE_SYSTEM_NOTIFICATION",
-        "field": "ulEvent"
       }
     ]
   },
@@ -21809,10 +21683,6 @@
       }
     ],
     "uses": [
-      {
-        "struct": "PROPSPEC",
-        "field": "ulKind"
-      },
       {
         "struct": "PROPSPEC",
         "field": "ulKind"
@@ -22874,10 +22744,6 @@
       {
         "struct": "VDS_CONTROLLER_NOTIFICATION",
         "field": "ulEvent"
-      },
-      {
-        "struct": "VDS_CONTROLLER_NOTIFICATION",
-        "field": "ulEvent"
       }
     ]
   },
@@ -23236,17 +23102,6 @@
       {
         "struct": "PARAFORMAT2",
         "field": "wBorders"
-      }
-    ]
-  },
-  {
-    "addUsesTo": "JOB_OBJECT_LIMIT",
-    "flags": true,
-    "members": [],
-    "uses": [
-      {
-        "struct": "JOBOBJECT_BASIC_LIMIT_INFORMATION",
-        "field": "LimitFlags"
       }
     ]
   },
@@ -23843,17 +23698,6 @@
     ]
   },
   {
-    "addUsesTo": "JOB_OBJECT_SECURITY",
-    "flags": true,
-    "members": [],
-    "uses": [
-      {
-        "struct": "JOBOBJECT_SECURITY_LIMIT_INFORMATION",
-        "field": "SecurityLimitFlags"
-      }
-    ]
-  },
-  {
     "name": "WINTRUST_DATA_STATE_ACTION",
     "members": [
       {
@@ -24032,10 +23876,6 @@
       {
         "struct": "VDS_DRIVE_NOTIFICATION",
         "field": "ulEvent"
-      },
-      {
-        "struct": "VDS_DRIVE_NOTIFICATION",
-        "field": "ulEvent"
       }
     ]
   },
@@ -24060,10 +23900,6 @@
       }
     ],
     "uses": [
-      {
-        "struct": "VDS_PORT_NOTIFICATION",
-        "field": "ulEvent"
-      },
       {
         "struct": "VDS_PORT_NOTIFICATION",
         "field": "ulEvent"
@@ -24630,21 +24466,6 @@
       {
         "struct": "JOBOBJECT_END_OF_JOB_TIME_INFORMATION",
         "field": "EndOfJobTimeAction"
-      }
-    ]
-  },
-  {
-    "addUsesTo": "JOB_OBJECT_LIMIT",
-    "flags": true,
-    "members": [],
-    "uses": [
-      {
-        "struct": "JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2",
-        "field": "LimitFlags"
-      },
-      {
-        "struct": "JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2",
-        "field": "LimitFlags"
       }
     ]
   },
@@ -25634,21 +25455,6 @@
     ]
   },
   {
-    "addUsesTo": "JOB_OBJECT_LIMIT",
-    "flags": true,
-    "members": [],
-    "uses": [
-      {
-        "struct": "JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION",
-        "field": "LimitFlags"
-      },
-      {
-        "struct": "JOBOBJECT_LIMIT_VIOLATION_INFORMATION",
-        "field": "LimitFlags"
-      }
-    ]
-  },
-  {
     "name": "CERT_CHAIN_POLICY_FLAGS",
     "members": [
       {
@@ -26073,17 +25879,6 @@
     ]
   },
   {
-    "addUsesTo": "JOB_OBJECT_UILIMIT",
-    "flags": true,
-    "members": [],
-    "uses": [
-      {
-        "struct": "JOBOBJECT_BASIC_UI_RESTRICTIONS",
-        "field": "UIRestrictionsClass"
-      }
-    ]
-  },
-  {
     "name": "TBINSERTMARK_FLAGS",
     "members": [
       {
@@ -26257,17 +26052,6 @@
       {
         "struct": "SESSION_INFO_1",
         "field": "sesi1_user_flags"
-      }
-    ]
-  },
-  {
-    "addUsesTo": "JOB_OBJECT_LIMIT",
-    "flags": true,
-    "members": [],
-    "uses": [
-      {
-        "struct": "JOBOBJECT_LIMIT_VIOLATION_INFORMATION",
-        "field": "ViolationLimitFlags"
       }
     ]
   },
@@ -27503,10 +27287,6 @@
       {
         "struct": "VDS_LUN_NOTIFICATION",
         "field": "ulEvent"
-      },
-      {
-        "struct": "VDS_LUN_NOTIFICATION",
-        "field": "ulEvent"
       }
     ]
   },
@@ -28046,10 +27826,6 @@
       }
     ],
     "uses": [
-      {
-        "struct": "VDS_DISK_NOTIFICATION",
-        "field": "ulEvent"
-      },
       {
         "struct": "VDS_DISK_NOTIFICATION",
         "field": "ulEvent"
@@ -29020,17 +28796,6 @@
       {
         "struct": "LVFOOTERITEM",
         "field": "mask"
-      }
-    ]
-  },
-  {
-    "addUsesTo": "JOB_OBJECT_LIMIT",
-    "flags": true,
-    "members": [],
-    "uses": [
-      {
-        "struct": "JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2",
-        "field": "ViolationLimitFlags"
       }
     ]
   },
@@ -34258,16 +34023,6 @@
     ],
     "uses": [
       {
-        "interface": "ITextRangeProvider",
-        "method": "FindAttribute",
-        "parameter": "attributeId"
-      },
-      {
-        "interface": "ITextRangeProvider",
-        "method": "GetAttributeValue",
-        "parameter": "attributeId"
-      },
-      {
         "interface": "IUIAutomationTextRange",
         "method": "FindAttribute",
         "parameter": "attr"
@@ -34281,6 +34036,16 @@
         "interface": "IUIAutomationTextRange3",
         "method": "GetAttributeValues",
         "parameter": "attributeIds"
+      },
+      {
+        "interface": "ITextRangeProvider",
+        "method": "FindAttribute",
+        "parameter": "attributeId"
+      },
+      {
+        "interface": "ITextRangeProvider",
+        "method": "GetAttributeValue",
+        "parameter": "attributeId"
       }
     ]
   },
@@ -34661,11 +34426,6 @@
     ],
     "uses": [
       {
-        "interface": "IStylesProvider",
-        "method": "get_StyleId",
-        "parameter": "retVal"
-      },
-      {
         "interface": "IUIAutomationStylesPattern",
         "method": "get_CachedStyleId",
         "parameter": "retVal"
@@ -34673,6 +34433,11 @@
       {
         "interface": "IUIAutomationStylesPattern",
         "method": "get_CurrentStyleId",
+        "parameter": "retVal"
+      },
+      {
+        "interface": "IStylesProvider",
+        "method": "get_StyleId",
         "parameter": "retVal"
       }
     ]
@@ -34772,6 +34537,7 @@
     ]
   },
   {
+    "namespace": "Windows.Win32.UI.Accessibility",
     "name": "UIA_CHANGE_ID",
     "members": [ 
       {

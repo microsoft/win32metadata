@@ -229,7 +229,15 @@ namespace ClangSharpSourceToWinmd
                     {
                         string name = item.Substring(0, firstEqual);
                         string value = item.Substring(firstEqual + 1);
-                        ret[name] = value;
+
+                        if (ret.ContainsKey(name))
+                        {
+                            ret[name] += value;
+                        }
+                        else
+                        {
+                            ret[name] = value;
+                        }
                     }
                 }
             }

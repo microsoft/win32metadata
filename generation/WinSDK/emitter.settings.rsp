@@ -172,9 +172,7 @@ SpVerifySignatureFn
 SpSealMessageFn
 SpUnsealMessageFn
 SpGetContextTokenFn
-SpQueryContextAttributesFn
 SpCompleteAuthTokenFn
-SpDeleteContextFn
 SpFormatCredentialsFn
 SpMarshallSupplementalCredsFn
 SpExportSecurityContextFn
@@ -218,15 +216,9 @@ CreateProcessAsUserA::dwCreationFlags=PROCESS_CREATION_FLAGS
 CreateProcessAsUserW::dwCreationFlags=PROCESS_CREATION_FLAGS
 CreateProcessWithLogonW::dwCreationFlags=PROCESS_CREATION_FLAGS
 CreateProcessWithTokenW::dwCreationFlags=PROCESS_CREATION_FLAGS
-DefineDosDeviceW::dwFlags=DEFINE_DOS_DEVICE_FLAGS
-FindFirstChangeNotificationA::dwNotifyFilter=FILE_NOTIFY_CHANGE
-FindFirstChangeNotificationw::dwNotifyFilter=FILE_NOTIFY_CHANGE
 GetStdHandle::nStdHandle=STD_HANDLE
 SetStdHandle::nStdHandle=STD_HANDLE
 SetStdHandleEx::nStdHandle=STD_HANDLE
-CreateFileA::dwFlagsAndAttributes=FILE_FLAGS_AND_ATTRIBUTES
-CreateFileW::dwFlagsAndAttributes=FILE_FLAGS_AND_ATTRIBUTES
-ReOpenFile::dwFlagsAndAttributes=FILE_FLAGS_AND_ATTRIBUTES
 CreateLogFile::fFlagsAndAttributes=FILE_FLAGS_AND_ATTRIBUTES
 OpenFileById::dwFlagsAndAttributes=FILE_FLAGS_AND_ATTRIBUTES
 IEnumDebugPropertyInfo::Next::pi=[NativeArrayInfo(CountParamIndex = 0)]
@@ -358,7 +350,6 @@ JOBOBJECT_LIMIT_VIOLATION_INFORMATION::LimitFlags=JOB_OBJECT_LIMIT
 JOBOBJECT_LIMIT_VIOLATION_INFORMATION::ViolationLimitFlags=JOB_OBJECT_LIMIT
 JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2::LimitFlags=JOB_OBJECT_LIMIT
 JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2::ViolationLimitFlags=JOB_OBJECT_LIMIT
-JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION::LimitFlags=JOB_OBJECT_LIMIT
 JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2::LimitFlags=JOB_OBJECT_LIMIT
 JOBOBJECT_SECURITY_LIMIT_INFORMATION::SecurityLimitFlags=JOB_OBJECT_SECURITY
 SHChangeNotify::wEventId=SHCNE_ID
@@ -378,30 +369,19 @@ SHValidateUNC::fConnect=VALIDATEUNC_OPTION
 IShellFolderViewCB::MessageSFVCB::uMsg=SFVM_MESSAGE_ID
 IShellFolderView::Select::dwFlags=SFVS_SELECT
 SHGetSetSettings::dwMask=SSF_MASK
-FormatMessageA::dwFlags=FORMAT_MESSAGE_OPTIONS
-FormatMessageW::dwFlags=FORMAT_MESSAGE_OPTIONS
 IStream::Seek::dwOrigin=STREAM_SEEK
 SHGetKnownFolderPath::ppszPath=[FreeWith("CoTaskMemFree")]
-CombineRgn::iMode=RGN_COMBINE_MODE
-SetROP2::rop2=R2_MODE
 PSINJECTDATA::InjectionPoint=PSINJECT_POINT
 EnumObjects::nType=OBJ_TYPE
 EnumSystemFirmwareTables::pFirmwareTableEnumBuffer=byte*
 GetSystemFirmwareTable::pFirmwareTableBuffer=byte*
 GetCurrentObject::type=OBJ_TYPE
-DrawIconEx::diFlags=DI_FLAGS
-StretchDIBits::iUsage=DIB_USAGE
-CreateDIBSection::usage=DIB_USAGE
-SetDIBits::ColorUse=DIB_USAGE
-SetDIBitsToDevice::ColorUse=DIB_USAGE
 ISpellingError::get_Replacement::value=[FreeWith("CoTaskMemFree")]
 CloseEventLog::hEventLog=EventLogHandle
 DeregisterEventSource::hEventLog=EventSourceHandle
 IAMMultiMediaStream::Initialize::dwFlags=AMMSF_MMS_INIT_FLAGS
 IAMMultiMediaStream::AddMediaStream::dwFlags=AMMSF_MS_FLAGS
 IMultiMediaStream::GetInformation::pdwFlags=MMSSF_GET_INFORMATION_FLAGS*
-IIdentityProvider::Advise::dwIdentityUpdateEvents=IdentityUpdateEvent
-IIdentityAdvise::IdentityUpdated::dwIdentityUpdateEvents=IdentityUpdateEvent
 RegQueryValueExA::lpType=REG_VALUE_TYPE*
 RegQueryValueExW::lpType=REG_VALUE_TYPE*
 RegSetValueA::dwType=REG_VALUE_TYPE
@@ -471,14 +451,8 @@ IMAGE_OPTIONAL_HEADER64::LoaderFlags=[Obsolete]
 MsiGetFeatureValidStates::lpInstallStates=INSTALLSTATE
 MsiEnumClientsExA::dwContext=MSIINSTALLCONTEXT
 MsiEnumClientsExW::dwContext=MSIINSTALLCONTEXT
-MsiProvideAssemblyA::dwInstallMode=INSTALLMODE
-MsiProvideAssemblyW::dwInstallMode=INSTALLMODE
 IVBGetControl::EnumControls::dwOleContF=OLECONTF
 MsiAdvertiseScript::dwFlags=SCRIPTFLAGS
-TTTOOLINFOA::uFlags=TTTOOLINFO_FLAGS
-TTTOOLINFOW::uFlags=TTTOOLINFO_FLAGS
-CERT_VIEWPROPERTIES_STRUCT_A::dwFlags=CERT_VIEWPROPERTIES_STRUCT_FLAGS
-CERT_VIEWPROPERTIES_STRUCT_W::dwFlags=CERT_VIEWPROPERTIES_STRUCT_FLAGS
 IWPCWebSettings::GetSettings::pdwSettings=WPCFLAG_WEB_SETTING*
 MsiDatabaseApplyTransformA::iErrorConditions=MSITRANSFORM_ERROR
 MsiDatabaseApplyTransformW::iErrorConditions=MSITRANSFORM_ERROR
@@ -887,7 +861,6 @@ IMILBitmapEffectPrimitiveImpl::IsDirty=[CanReturnMultipleSuccessValues]
 IMoniker::IsDirty=[CanReturnMultipleSuccessValues]
 IOfflineFilesChangeInfo::IsDirty=[CanReturnMultipleSuccessValues]
 IPersistFile::IsDirty=[CanReturnMultipleSuccessValues]
-IPersistFile::IsDirty=[CanReturnMultipleSuccessValues]
 IPersistMemory::IsDirty=[CanReturnMultipleSuccessValues]
 IPersistMoniker::IsDirty=[CanReturnMultipleSuccessValues]
 IPersistPropertyBag2::IsDirty=[CanReturnMultipleSuccessValues]
@@ -921,7 +894,6 @@ DxcCreateInstance::ppv=[ComOutPtr]
 DxcCreateInstance2::ppv=[ComOutPtr]
 IWbemServices::CreateInstanceEnum::ppEnum=[ComOutPtr]
 StiCreateInstanceW::ppSti=[ComOutPtr]
-SHCoCreateInstance::ppv=[ComOutPtr]
 IMFImageSharingEngineClassFactory::CreateInstanceFromUDN::ppEngine=[ComOutPtr]
 IMFReadWriteClassFactory::CreateInstanceFromURL::ppvObject=[ComOutPtr]
 IMFReadWriteClassFactory::CreateInstanceFromObject::ppvObject=[ComOutPtr]
@@ -944,7 +916,6 @@ IDirectorySearch::GetFirstRow::hSearchResult=ADS_SEARCH_HANDLE
 IDirectorySearch::GetNextColumnName::hSearchHandle=ADS_SEARCH_HANDLE
 IDirectorySearch::GetNextRow::hSearchResult=ADS_SEARCH_HANDLE
 IDirectorySearch::GetPreviousRow::hSearchResult=ADS_SEARCH_HANDLE
-IDirectorySearch::GetNextColumnName::hSearchHandle=ADS_SEARCH_HANDLE
 AcceptSecurityContext=[CanReturnMultipleSuccessValues]
 SaslAcceptSecurityContext=[CanReturnMultipleSuccessValues]
 InitializeSecurityContextA=[CanReturnMultipleSuccessValues]
@@ -981,9 +952,7 @@ SysAllocStringByteLen::psz=[NativeArrayInfo(CountParamIndex = 1)]
 CloseTrace::return=WIN32_ERROR
 CloseTrace::TraceHandle=PROCESSTRACE_HANDLE
 ControlTraceA::return=WIN32_ERROR
-ControlTraceA::return=WIN32_ERROR
 ControlTraceA::TraceHandle=CONTROLTRACE_HANDLE
-ControlTraceW::return=WIN32_ERROR
 ControlTraceW::return=WIN32_ERROR
 ControlTraceW::TraceHandle=CONTROLTRACE_HANDLE
 CreateTraceInstanceId::return=WIN32_ERROR
@@ -1029,7 +998,6 @@ TraceMessage::return=WIN32_ERROR
 TraceMessageVa::return=WIN32_ERROR
 TraceQueryInformation::return=WIN32_ERROR
 TraceQueryInformation::SessionHandle=CONTROLTRACE_HANDLE
-TraceSetInformation::return=WIN32_ERROR
 TraceSetInformation::return=WIN32_ERROR
 TraceSetInformation::SessionHandle=CONTROLTRACE_HANDLE
 UpdateTraceA::return=WIN32_ERROR
@@ -1169,8 +1137,6 @@ AssocQueryKeyW::flags=ASSOCF
 # snmp.h
 AsnAny=[StructLayout(LayoutKind.Sequential, Pack = 4)]
 SnmpVarBind=[StructLayout(LayoutKind.Sequential, Pack = 4)]
-ShellExecuteW::nShowCmd=SHOW_WINDOW_CMD
-ShellExecuteA::nShowCmd=SHOW_WINDOW_CMD
 SHGetKnownFolderPath::dwFlags=KNOWN_FOLDER_FLAG
 OleCreateFontIndirect::lpFontDesc=[In]
 OleCreateFontIndirect::lplpvObj=[Out]
@@ -1371,8 +1337,6 @@ WTSGetListenerSecurityW::hServer=[Optional][Reserved]
 WTSLogoffSession::hServer=[Optional]
 WTSQueryListenerConfigA::hServer=[Optional][Reserved]
 WTSQueryListenerConfigW::hServer=[Optional][Reserved]
-WTSQuerySessionInformationA::hServer=[Optional]
-WTSQuerySessionInformationW::hServer=[Optional]
 WTSRegisterSessionNotificationEx::hServer=[Optional]
 WTSSendMessageA::hServer=[Optional]
 WTSSendMessageW::hServer=[Optional]
