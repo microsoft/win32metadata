@@ -34,12 +34,12 @@ namespace ScrapeDocs
         private static readonly Regex InlineCodeTag = new Regex(@"\<code\>(.*)\</code\>", RegexOptions.Compiled);
         private static readonly Regex EnumNameCell = new Regex(@"\<td[^\>]*\>\<a id=""([^""]+)""", RegexOptions.Compiled);
         private static readonly Regex EnumOrdinalValue = new Regex(@"\<dt\>([\dxa-f]+)\<\/dt\>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        private readonly string contentBasePath;
+        private readonly string contentBasePaths;
         private readonly string outputPath;
 
-        private Program(string contentBasePath, string outputPath)
+        private Program(string contentBasePaths, string outputPath)
         {
-            this.contentBasePath = contentBasePath;
+            this.contentBasePaths = contentBasePaths;
             this.outputPath = outputPath;
         }
 
@@ -61,13 +61,13 @@ namespace ScrapeDocs
                 return 1;
             }
 
-            string contentBasePath = args[0];
+            string contentBasePaths = args[0];
             string outputPath = args[1];
             bool emitEnums = args.Length > 2 ? args[2] == "enums" : false;
 
             try
             {
-                new Program(contentBasePath, outputPath) { EmitEnums = true }.Worker(cts.Token);
+                new Program(contentBasePaths, outputPath) { EmitEnums = true }.Worker(cts.Token);
             }
             catch (OperationCanceledException ex) when (ex.CancellationToken == cts.Token)
             {
@@ -217,16 +217,21 @@ namespace ScrapeDocs
         private void Worker(CancellationToken cancellationToken)
         {
             Console.WriteLine("Enumerating documents to be parsed...");
-            string[] paths = Directory.GetFiles(this.contentBasePath, "??-*-*.md", SearchOption.AllDirectories)
-                ////.Where(p => p.Contains(@"ns-winsock2-blob", StringComparison.OrdinalIgnoreCase)).ToArray()
-                ;
+            var paths = new List<string>();
+
+            foreach (var path in this.contentBasePaths.Split(';'))
+            {
+                paths.AddRange(Directory.GetFiles(path, "*.md", SearchOption.AllDirectories).
+                               Where(p => !Regex.IsMatch(p, "(index.md|TOC.md)$", RegexOptions.IgnoreCase)));
+            }
 
             Console.WriteLine("Parsing documents...");
             var timer = Stopwatch.StartNew();
             var parsedNodes = from path in paths.AsParallel()
-                              let result = this.ParseDocFile(path)
-                              where result is not null
-                              select (Path: path, result.Value.ApiName, result.Value.Docs, result.Value.EnumsByParameter, result.Value.EnumsByField);
+                              let parseResults = this.ParseDocFile(path)
+                              where parseResults is not null
+                              from result in parseResults
+                              select (Path: path, result.ApiName, result.Docs, result.EnumsByParameter, result.EnumsByField);
             var results = new ConcurrentDictionary<string, ApiDetails>();
             var parameterEnums = new ConcurrentDictionary<(string MethodName, string ParameterName, string HelpLink), DocEnum>();
             var fieldEnums = new ConcurrentDictionary<(string StructName, string FieldName, string HelpLink), DocEnum>();
@@ -256,13 +261,13 @@ namespace ScrapeDocs
                         }
                     }
                 });
-            if (paths.Length == 0)
+            if (paths.Count == 0)
             {
                 Console.Error.WriteLine("No documents found to parse.");
             }
             else
             {
-                Console.WriteLine("Parsed {2} documents in {0} ({1} per document)", timer.Elapsed, timer.Elapsed / paths.Length, paths.Length);
+                Console.WriteLine("Parsed {2} documents in {0} ({1} per document)", timer.Elapsed, timer.Elapsed / paths.Count, paths.Count);
                 Console.WriteLine($"Found {parameterEnums.Count + fieldEnums.Count} enums.");
             }
 
@@ -276,7 +281,7 @@ namespace ScrapeDocs
             MessagePackSerializer.Serialize(outputFileStream, results.ToDictionary(kv => kv.Key, kv => kv.Value), MessagePackSerializerOptions.Standard);
         }
 
-        private (string ApiName, ApiDetails Docs, IReadOnlyDictionary<string, DocEnum> EnumsByParameter, IReadOnlyDictionary<string, DocEnum> EnumsByField)? ParseDocFile(string filePath)
+        private List<(string ApiName, ApiDetails Docs, IReadOnlyDictionary<string, DocEnum> EnumsByParameter, IReadOnlyDictionary<string, DocEnum> EnumsByField)> ParseDocFile(string filePath)
         {
             try
             {
@@ -303,7 +308,18 @@ namespace ScrapeDocs
                     return null;
                 }
 
-                YamlSequenceNode methodNames = (YamlSequenceNode)yaml.Documents[0].RootNode["api_name"];
+                YamlSequenceNode methodNames;
+
+                try
+                {
+                    methodNames = (YamlSequenceNode)yaml.Documents[0].RootNode["api_name"];
+                }
+                catch
+                {
+                    Debug.WriteLine("WARNING: Could not find api_name node in: {0}", filePath);
+                    return null;
+                }
+
                 bool TryGetProperName(string searchFor, string? suffix, [NotNullWhen(true)] out string? match)
                 {
                     if (suffix is string)
@@ -329,21 +345,43 @@ namespace ScrapeDocs
                     return match is object;
                 }
 
-                string presumedMethodName = FileNamePattern.Match(Path.GetFileNameWithoutExtension(filePath)).Groups[1].Value;
+                string? properName = null;
 
-                // Some structures have filenames that include the W or A suffix when the content doesn't. So try some fuzzy matching.
-                if (!TryGetProperName(presumedMethodName, null, out string? properName) &&
-                    !TryGetProperName(presumedMethodName, "a", out properName) &&
-                    !TryGetProperName(presumedMethodName, "w", out properName) &&
-                    !TryGetProperName(presumedMethodName, "32", out properName) &&
-                    !TryGetProperName(presumedMethodName, "64", out properName))
+                if (filePath.Contains(@"ext/sdk-api/sdk-api-src/content"))
                 {
-                    Debug.WriteLine("WARNING: Could not find proper API name in: {0}", filePath);
-                    return null;
+                    string presumedMethodName = FileNamePattern.Match(Path.GetFileNameWithoutExtension(filePath)).Groups[1].Value;
+                    // Some structures have filenames that include the W or A suffix when the content doesn't. So try some fuzzy matching.
+                    if (!TryGetProperName(presumedMethodName, null, out properName) &&
+                        !TryGetProperName(presumedMethodName, "a", out properName) &&
+                        !TryGetProperName(presumedMethodName, "w", out properName) &&
+                        !TryGetProperName(presumedMethodName, "32", out properName) &&
+                        !TryGetProperName(presumedMethodName, "64", out properName))
+                    {
+                        Debug.WriteLine("WARNING: Could not find proper API name in: {0}", filePath);
+                        return null;
+                    }
+                }
+                else if (filePath.Contains(@"ext/win32/desktop-src"))
+                {
+                    properName = methodNames.Children.Cast<YamlScalarNode>().FirstOrDefault()?.Value;
+
+                    if (properName is null)
+                    {
+                        Debug.WriteLine("WARNING: Could not find proper API name in: {0}", filePath);
+                        return null;
+                    }
                 }
 
-                Uri helpLink = new Uri("https://docs.microsoft.com/windows/win32/api/" + filePath.Substring(this.contentBasePath.Length, filePath.Length - 3 - this.contentBasePath.Length).Replace('\\', '/'));
-                docs.HelpLink = helpLink;
+                if (filePath.Contains(@"ext/sdk-api/sdk-api-src/content"))
+                {
+                    Uri helpLink = new Uri("https://docs.microsoft.com/windows/win32/api/" + (new FileInfo(filePath).Directory!.Name! + "/" + Path.GetFileNameWithoutExtension(filePath)).Replace('\\', '/'));
+                    docs.HelpLink = helpLink;
+                }
+                else if (filePath.Contains(@"ext/win32/desktop-src"))
+                {
+                    Uri helpLink = new Uri("https://docs.microsoft.com/windows/win32/" + (new FileInfo(filePath).Directory!.Name! + "/" + Path.GetFileNameWithoutExtension(filePath)).Replace('\\', '/'));
+                    docs.HelpLink = helpLink;
+                }
 
                 var description = ((YamlMappingNode)yaml.Documents[0].RootNode).Children.FirstOrDefault(n => n.Key is YamlScalarNode { Value: "description" }).Value as YamlScalarNode;
                 docs.Description = description?.Value;
@@ -587,7 +625,21 @@ namespace ScrapeDocs
                     }
                 }
 
-                return (properName, docs, enumsByParameter, enumsByField);
+                var result = new List<(string ApiName, ApiDetails Docs, IReadOnlyDictionary<string, DocEnum> EnumsByParameter, IReadOnlyDictionary<string, DocEnum> EnumsByField)>();
+
+                if (filePath.Contains(@"ext/sdk-api/sdk-api-src/content"))
+                {
+                    result.Add((properName!, docs, enumsByParameter, enumsByField));
+                }
+                else if (filePath.Contains(@"ext/win32/desktop-src"))
+                {
+                    foreach (var methodName in methodNames.Children.Cast<YamlScalarNode>())
+                    {
+                        result.Add((methodName.Value!.StartsWith("_") ? methodName.Value![1..] : methodName.Value!, docs, enumsByParameter, enumsByField));
+                    }
+                }
+
+                return result;
             }
             catch (Exception ex)
             {
