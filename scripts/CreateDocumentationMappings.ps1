@@ -57,8 +57,7 @@ ForEach-Object {
     $content = Get-Content $_ -TotalCount 20
 
     if ($_.FullName.StartsWith($MicrosoftDocsSdkApiPath)) {
-        $match = [regex]::Match($content, "title: ([^\s\(]+)")
-        $api = $match.Groups[1].Value -replace "\.", "::"
+        $api = [regex]::Match($content, "title: ([^\s\(]+)").Groups[1].Value -replace "\.", "::"
 
         $output.AppendLine("$api=[Documentation(""https://docs.microsoft.com/windows/win32/api/$($_.Directory.Name)/$($_.BaseName)"")]") | Out-Null
         
@@ -66,10 +65,34 @@ ForEach-Object {
     elseif ($_.FullName.StartsWith($MicrosoftDocsWin32Path)) {
         $match = [regex]::Match($content, "ms.topic: ([^\s]+)")
         if ($match.Success -and $match.Groups[1].Value -eq "reference") {
-            $match = [regex]::Match($content, "title: ([^\s\(]+)")
-            $api = $match.Groups[1].Value -replace "\.", "::"
-            
-            $output.AppendLine("$api=[Documentation(""https://docs.microsoft.com/windows/win32/$($_.Directory.Name)/$($_.BaseName)"")]") | Out-Null
+            $baseApi = [regex]::Match($content, "title: ([^\s\(]+)").Groups[1].Value
+            $api_names = $content | Select-String "api_name" -Context 0,3
+
+            if ($api_names -ne $null) {
+                $match = [regex]::Matches($api_names, "- ($($baseApi -replace "::", "\.")[\w\.:]*)")
+
+                # If api_names includes variants of the base API, create mappings for each.
+                # Example: ext/win32/desktop-src/printdocs/addprinter.md
+                if ($match.Count -gt 0 -and $match.Groups[1].Value -eq ($baseApi -replace "::", "\.")) {
+                    $apis = $match.Groups | Where-Object { $_.Name -eq "1" } | ForEach-Object { $_.Value -replace "\.", "::"}
+                    
+                    foreach ($api in $apis) {
+                        $output.AppendLine("$api=[Documentation(""https://docs.microsoft.com/windows/win32/$($_.Directory.Name)/$($_.BaseName)"")]") | Out-Null
+                    }
+                }
+                # If api_names doesn't include the base API, create a mapping just for the base API.
+                # Example: ext/win32/desktop-src/Controls/em-getfileline.md
+                else {
+                    $api = $baseApi -replace "\.", "::"
+    
+                    $output.AppendLine("$api=[Documentation(""https://docs.microsoft.com/windows/win32/$($_.Directory.Name)/$($_.BaseName)"")]") | Out-Null
+                }
+            }
+            else {
+                $api = $baseApi -replace "\.", "::"
+
+                $output.AppendLine("$api=[Documentation(""https://docs.microsoft.com/windows/win32/$($_.Directory.Name)/$($_.BaseName)"")]") | Out-Null
+            }
         }
     }
 }
