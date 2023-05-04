@@ -1807,6 +1807,11 @@ namespace ClangSharpSourceToWinmd
                     throw new InvalidOperationException($"Enum {node.Identifier.Text} has a member with no name.");
                 }
 
+                if (Regex.IsMatch(memberName, @"_FORCE_(DWORD|UINT(\d\d)?|ULONG(\d\d)?)$"))
+                {
+                    return;
+                }
+
                 var fieldDefinitionHandle = this.metadataBuilder.AddFieldDefinition(
                     enumFieldAttributes,
                     this.metadataBuilder.GetOrAddString(memberName),
