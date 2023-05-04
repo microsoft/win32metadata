@@ -430,7 +430,7 @@ namespace ScrapeDocs
                         docBuilder.AppendLine(line);
                     }
 
-                    text = docBuilder.ToString();
+                    text = docBuilder.ToString().Trim();
 
                     docBuilder.Clear();
                 }
