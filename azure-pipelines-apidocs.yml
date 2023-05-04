@@ -7,7 +7,13 @@ trigger:
       - apidocs
   batch: true
   
-pr: none
+pr:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+      - apidocs
 
 variables:
   BuildConfiguration: Release
