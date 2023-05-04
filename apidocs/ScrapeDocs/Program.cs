@@ -1,4 +1,4 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace ScrapeDocs
@@ -49,11 +49,13 @@ namespace ScrapeDocs
 
         private readonly string contentBasePaths;
         private readonly string outputPath;
+        private readonly string documentationMappingsRsp;
 
         private Program(string contentBasePaths, string outputPath)
         {
             this.contentBasePaths = contentBasePaths;
             this.outputPath = outputPath;
+            this.documentationMappingsRsp = Path.Combine(Path.GetDirectoryName(this.outputPath)!, "documentationMappings.rsp").Replace("\\", "/");
         }
 
         private bool EmitEnums { get; set; }
@@ -288,10 +290,21 @@ namespace ScrapeDocs
             int constantsCount = this.AnalyzeEnums(results, parameterEnums, fieldEnums);
             Console.WriteLine($"Found docs for {constantsCount} constants.");
 
-            Console.WriteLine("Writing results to \"{0}\"", this.outputPath);
+            Console.WriteLine("Writing results to \"{0}\" and \"{1}\"", this.outputPath, this.documentationMappingsRsp);
+
             Directory.CreateDirectory(Path.GetDirectoryName(this.outputPath)!);
             using var outputFileStream = File.OpenWrite(this.outputPath);
-            MessagePackSerializer.Serialize(outputFileStream, results.ToDictionary(kv => kv.Key, kv => kv.Value), MessagePackSerializerOptions.Standard);
+            var sortedResults = new SortedDictionary<string, ApiDetails>(results);
+            MessagePackSerializer.Serialize(outputFileStream, sortedResults, MessagePackSerializerOptions.Standard);
+
+            var documentationMappingsBuilder = new StringBuilder();
+            documentationMappingsBuilder.AppendLine("--memberRemap");
+            foreach (var api in sortedResults)
+            {
+                documentationMappingsBuilder.AppendLine($"{api.Key}=[Documentation({api.Value.HelpLink})]");
+            }
+
+            File.WriteAllText(this.documentationMappingsRsp, documentationMappingsBuilder.ToString());
         }
 
         private List<(string ApiName, ApiDetails Docs, IReadOnlyDictionary<string, DocEnum> EnumsByParameter, IReadOnlyDictionary<string, DocEnum> EnumsByField)> ParseDocFile(string filePath)
