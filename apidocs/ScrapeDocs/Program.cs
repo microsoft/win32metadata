@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace ScrapeDocs
@@ -313,7 +313,7 @@ namespace ScrapeDocs
                         yamlBuilder.AppendLine(line);
                     }
                 }
-                catch (InvalidOperationException ex)
+                catch (InvalidOperationException)
                 {
                     Debug.WriteLine("WARNING: Skipping content without YAML headers {0}", filePath);
                     return null;
@@ -340,9 +340,9 @@ namespace ScrapeDocs
                 }
 
                 YamlSequenceNode methodNames = null;
-                if (mapping.Children.ContainsKey("api_name"))
+                if (mapping.Children.ContainsKey("api_name") && mapping.Children["api_name"] is YamlSequenceNode)
                 {
-                    methodNames = (YamlSequenceNode)yaml.Documents[0].RootNode["api_name"];
+                    methodNames = (YamlSequenceNode)mapping.Children["api_name"];
                 }
                 else
                 {
@@ -398,7 +398,14 @@ namespace ScrapeDocs
                 }
                 else
                 {
-                    properName = TitlePattern.Match(yaml.Documents[0].RootNode["title"].ToString()).Groups[1].Value.Replace("::", ".");
+                    if (mapping.Children.ContainsKey("title"))
+                    {
+                        properName = TitlePattern.Match(mapping.Children["title"].ToString()).Groups[1].Value.Replace("::", ".");
+                    }
+                    else if (mapping.Children.ContainsKey("comtitle"))
+                    {
+                        properName = TitlePattern.Match(mapping.Children["comtitle"].ToString()).Groups[1].Value.Replace("::", ".");
+                    }
                 }
 
                 foreach (var baseUri in BaseUris.Keys)
@@ -694,7 +701,9 @@ namespace ScrapeDocs
                             // Example: ext/win32/desktop-src/printdocs/addprinter.md
                             foreach (var methodName in methodNames.Children.Cast<YamlScalarNode>())
                             {
-                                result.Add((methodName.Value!, docs, enumsByParameter, enumsByField));
+                                var fixedMethodName = methodName.Value!.StartsWith("_") ? methodName.Value![1..] : methodName.Value!;
+
+                                result.Add((fixedMethodName, docs, enumsByParameter, enumsByField));
                             }
                         }
                         else
