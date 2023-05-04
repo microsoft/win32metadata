@@ -1,10 +1,19 @@
 trigger:
-  batch: true
   branches:
     include:
     - main
+  paths:
+    exclude:
+      - apidocs
+  batch: true
+
 pr:
-- main
+  branches:
+    include:
+    - main
+  paths:
+    exclude:
+      - apidocs
 
 variables:
   BuildConfiguration: Release
