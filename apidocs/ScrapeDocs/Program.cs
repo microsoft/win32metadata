@@ -309,8 +309,15 @@ namespace ScrapeDocs
                     return null;
                 }
 
-                var topic = yaml.Documents[0].RootNode["ms.topic"];
-                if (topic is null || topic.ToString() != "reference")
+                try
+                {
+                    if (yaml.Documents[0].RootNode["ms.topic"].ToString() != "reference")
+                    {
+                        Debug.WriteLine("WARNING: Skipping non-reference content {0}", filePath);
+                        return null;
+                    }
+                }
+                catch
                 {
                     Debug.WriteLine("WARNING: Skipping non-reference content {0}", filePath);
                     return null;
