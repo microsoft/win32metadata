@@ -326,7 +326,6 @@ namespace ScrapeDocs
                     }
                 }
 
-                string baseApi = TitlePattern.Match(yaml.Documents[0].RootNode["title"].ToString()).Groups[1].Value.Replace("::", ".");
                 YamlSequenceNode methodNames = null;
                 try
                 {
@@ -386,7 +385,7 @@ namespace ScrapeDocs
                 }
                 else if (filePath.Contains(@"ext/win32/desktop-src"))
                 {
-                    properName = baseApi;
+                    properName = TitlePattern.Match(yaml.Documents[0].RootNode["title"].ToString()).Groups[1].Value.Replace("::", ".");
                 }
 
                 if (filePath.Contains(@"ext/sdk-api/sdk-api-src/content"))
