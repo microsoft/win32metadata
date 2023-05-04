@@ -309,18 +309,21 @@ namespace ScrapeDocs
                     return null;
                 }
 
-                try
+                if (!filePath.Contains(@"ext/sdk-api/sdk-api-src/content"))
                 {
-                    if (yaml.Documents[0].RootNode["ms.topic"].ToString() != "reference")
+                    try
+                    {
+                        if (yaml.Documents[0].RootNode["ms.topic"].ToString() != "reference")
+                        {
+                            Debug.WriteLine("WARNING: Skipping non-reference content {0}", filePath);
+                            return null;
+                        }
+                    }
+                    catch
                     {
                         Debug.WriteLine("WARNING: Skipping non-reference content {0}", filePath);
                         return null;
                     }
-                }
-                catch
-                {
-                    Debug.WriteLine("WARNING: Skipping non-reference content {0}", filePath);
-                    return null;
                 }
 
                 string baseApi = TitlePattern.Match(yaml.Documents[0].RootNode["title"].ToString()).Groups[1].Value.Replace("::", ".");
