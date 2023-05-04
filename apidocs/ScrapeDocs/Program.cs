@@ -30,8 +30,8 @@ namespace ScrapeDocs
         private static readonly Regex TitlePattern = new Regex(@"([^\s\(]+)", RegexOptions.Compiled);
         private static readonly Regex ParameterHeaderPattern = new Regex(@"^### -param (\w+)", RegexOptions.Compiled);
         private static readonly Regex FieldHeaderPattern = new Regex(@"^### -field (?:\w+\.)*(\w+)", RegexOptions.Compiled);
-        private static readonly Regex ReturnHeaderPattern = new Regex(@"^## -returns", RegexOptions.Compiled);
-        private static readonly Regex RemarksHeaderPattern = new Regex(@"^## -remarks", RegexOptions.Compiled);
+        private static readonly Regex ReturnHeaderPattern = new Regex(@"^## (-returns|Return value)", RegexOptions.Compiled);
+        private static readonly Regex RemarksHeaderPattern = new Regex(@"^## (-remarks|Remarks)", RegexOptions.Compiled);
         private static readonly Regex InlineCodeTag = new Regex(@"\<code\>(.*)\</code\>", RegexOptions.Compiled);
         private static readonly Regex EnumNameCell = new Regex(@"\<td[^\>]*\>\<a id=""([^""]+)""", RegexOptions.Compiled);
         private static readonly Regex EnumOrdinalValue = new Regex(@"\<dt\>([\dxa-f]+)\<\/dt\>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -601,37 +601,11 @@ namespace ScrapeDocs
                         ParseTextSection(out remarks);
                         docs.Remarks = remarks;
                     }
-                    else
+                    else if (ReturnHeaderPattern.Match(line) is Match { Success: true } returnMatch)
                     {
-                        // TODO: don't break out of this loop so soon... remarks sometimes follows return value docs.
-                        if (line is object && ReturnHeaderPattern.IsMatch(line))
-                        {
-                            break;
-                        }
-
-                        line = mdFileReader.ReadLine();
-                    }
-                }
-
-                // Search for return value documentation
-                while (line is object)
-                {
-                    Match m = ReturnHeaderPattern.Match(line);
-                    if (m.Success)
-                    {
-                        while ((line = mdFileReader.ReadLine()) is object)
-                        {
-                            if (line.StartsWith('#'))
-                            {
-                                break;
-                            }
-
-                            docBuilder.AppendLine(line);
-                        }
-
-                        docs.ReturnValue = docBuilder.ToString().Trim();
-                        docBuilder.Clear();
-                        break;
+                        string returnValue;
+                        ParseTextSection(out returnValue);
+                        docs.ReturnValue = returnValue;
                     }
                     else
                     {
