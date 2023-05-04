@@ -28,7 +28,9 @@ namespace ScrapeDocs
     {
         private static readonly Regex FileNamePattern = new Regex(@"^\w\w-\w+-([\w\-]+)$", RegexOptions.Compiled);
         private static readonly Regex TitlePattern = new Regex(@"([^\s\(]+)", RegexOptions.Compiled);
+        private static readonly Regex ParametersHeaderPattern = new Regex(@"^## Parameters", RegexOptions.Compiled);
         private static readonly Regex ParameterHeaderPattern = new Regex(@"^### -param (\w+)", RegexOptions.Compiled);
+        private static readonly Regex MembersHeaderPattern = new Regex(@"^## Members", RegexOptions.Compiled);
         private static readonly Regex FieldHeaderPattern = new Regex(@"^### -field (?:\w+\.)*(\w+)", RegexOptions.Compiled);
         private static readonly Regex ReturnHeaderPattern = new Regex(@"^## (-returns|Return value)", RegexOptions.Compiled);
         private static readonly Regex RemarksHeaderPattern = new Regex(@"^## (-remarks|Remarks)", RegexOptions.Compiled);
@@ -536,62 +538,111 @@ namespace ScrapeDocs
 
                 void ParseSection(Match match, IDictionary<string, string> receivingMap, bool lookForParameterEnums = false, bool lookForFieldEnums = false)
                 {
-                    string sectionName = match.Groups[1].Value;
-                    bool foundEnum = false;
-                    bool foundEnumIsFlags = false;
-                    while ((line = mdFileReader.ReadLine()) is object)
+                    if (match.Value == "## Parameters" || match.Value == "## Members")
                     {
-                        if (line.StartsWith('#'))
-                        {
-                            break;
-                        }
+                        var parameterPattern = new Regex(@"^(\*{1,2})(\w+)\1");
+                        var excludePattern = new Regex(@"^</?d[ltd]>");
 
-                        if (lookForParameterEnums || lookForFieldEnums)
+                        string sectionName = string.Empty;
+                        while ((line = mdFileReader.ReadLine()) is object)
                         {
-                            if (foundEnum)
+                            if (line.StartsWith('#'))
                             {
-                                if (line == "<table>")
+                                break;
+                            }
+
+                            if (excludePattern.IsMatch(line))
+                            {
+                                continue;
+                            }
+
+                            if (parameterPattern.Match(line) is Match { Success: true } parameterMatch)
+                            {
+                                if (!string.IsNullOrEmpty(sectionName))
                                 {
-                                    IReadOnlyDictionary<string, (ulong? Value, string? Doc)> enumNamesAndDocs = ParseEnumTable();
-                                    if (enumNamesAndDocs.Count > 0)
-                                    {
-                                        var enums = lookForParameterEnums ? enumsByParameter : enumsByField;
-                                        if (!enums.ContainsKey(sectionName))
-                                        {
-                                            enums.Add(sectionName, new DocEnum(foundEnumIsFlags, enumNamesAndDocs));
-                                        }
-                                    }
-
-                                    lookForParameterEnums = false;
-                                    lookForFieldEnums = false;
+                                    receivingMap.TryAdd(sectionName, docBuilder.ToString().Trim());
+                                    docBuilder.Clear();
                                 }
-                            }
-                            else
-                            {
-                                foundEnum = line.Contains("of the following values", StringComparison.OrdinalIgnoreCase);
-                                foundEnumIsFlags = line.Contains("combination of", StringComparison.OrdinalIgnoreCase)
-                                    || line.Contains("zero or more of", StringComparison.OrdinalIgnoreCase)
-                                    || line.Contains("one or both of", StringComparison.OrdinalIgnoreCase)
-                                    || line.Contains("one or more of", StringComparison.OrdinalIgnoreCase);
-                            }
-                        }
 
-                        if (!foundEnum)
-                        {
+                                sectionName = parameterMatch.Groups[2].Value;
+
+                                continue;
+                            }
+
                             line = FixupLine(line);
                             docBuilder.AppendLine(line);
                         }
-                    }
 
-                    receivingMap.TryAdd(sectionName, docBuilder.ToString().Trim());
-                    docBuilder.Clear();
+                        receivingMap.TryAdd(sectionName, docBuilder.ToString().Trim());
+                        docBuilder.Clear();
+                    }
+                    else
+                    {
+                        string sectionName = match.Groups[1].Value;
+                        bool foundEnum = false;
+                        bool foundEnumIsFlags = false;
+                        while ((line = mdFileReader.ReadLine()) is object)
+                        {
+                            if (line.StartsWith('#'))
+                            {
+                                break;
+                            }
+
+                            if (lookForParameterEnums || lookForFieldEnums)
+                            {
+                                if (foundEnum)
+                                {
+                                    if (line == "<table>")
+                                    {
+                                        IReadOnlyDictionary<string, (ulong? Value, string? Doc)> enumNamesAndDocs = ParseEnumTable();
+                                        if (enumNamesAndDocs.Count > 0)
+                                        {
+                                            var enums = lookForParameterEnums ? enumsByParameter : enumsByField;
+                                            if (!enums.ContainsKey(sectionName))
+                                            {
+                                                enums.Add(sectionName, new DocEnum(foundEnumIsFlags, enumNamesAndDocs));
+                                            }
+                                        }
+
+                                        lookForParameterEnums = false;
+                                        lookForFieldEnums = false;
+                                    }
+                                }
+                                else
+                                {
+                                    foundEnum = line.Contains("of the following values", StringComparison.OrdinalIgnoreCase);
+                                    foundEnumIsFlags = line.Contains("combination of", StringComparison.OrdinalIgnoreCase)
+                                        || line.Contains("zero or more of", StringComparison.OrdinalIgnoreCase)
+                                        || line.Contains("one or both of", StringComparison.OrdinalIgnoreCase)
+                                        || line.Contains("one or more of", StringComparison.OrdinalIgnoreCase);
+                                }
+                            }
+
+                            if (!foundEnum)
+                            {
+                                line = FixupLine(line);
+                                docBuilder.AppendLine(line);
+                            }
+                        }
+
+                        receivingMap.TryAdd(sectionName, docBuilder.ToString().Trim());
+                        docBuilder.Clear();
+                    }
                 }
 
                 while (line is object)
                 {
-                    if (ParameterHeaderPattern.Match(line) is Match { Success: true } parameterMatch)
+                    if (ParametersHeaderPattern.Match(line) is Match { Success: true } parametersMatch)
+                    {
+                        ParseSection(parametersMatch, docs.Parameters, lookForParameterEnums: true);
+                    }
+                    else if (ParameterHeaderPattern.Match(line) is Match { Success: true } parameterMatch)
                     {
                         ParseSection(parameterMatch, docs.Parameters, lookForParameterEnums: true);
+                    }
+                    else if (MembersHeaderPattern.Match(line) is Match { Success: true } membersMatch)
+                    {
+                        ParseSection(membersMatch, docs.Fields, lookForParameterEnums: true);
                     }
                     else if (FieldHeaderPattern.Match(line) is Match { Success: true } fieldMatch)
                     {
