@@ -27,6 +27,7 @@ namespace ScrapeDocs
     internal class Program
     {
         private static readonly Regex FileNamePattern = new Regex(@"^\w\w-\w+-([\w\-]+)$", RegexOptions.Compiled);
+        private static readonly Regex TitlePattern = new Regex(@"([^\s\(]+)", RegexOptions.Compiled);
         private static readonly Regex ParameterHeaderPattern = new Regex(@"^### -param (\w+)", RegexOptions.Compiled);
         private static readonly Regex FieldHeaderPattern = new Regex(@"^### -field (?:\w+\.)*(\w+)", RegexOptions.Compiled);
         private static readonly Regex ReturnHeaderPattern = new Regex(@"^## -returns", RegexOptions.Compiled);
@@ -308,8 +309,15 @@ namespace ScrapeDocs
                     return null;
                 }
 
-                YamlSequenceNode methodNames;
+                var topic = yaml.Documents[0].RootNode["ms.topic"];
+                if (topic is null || topic.ToString() != "reference")
+                {
+                    Debug.WriteLine("WARNING: Skipping non-reference content {0}", filePath);
+                    return null;
+                }
 
+                string baseApi = TitlePattern.Match(yaml.Documents[0].RootNode["title"].ToString()).Groups[1].Value.Replace("::", ".");
+                YamlSequenceNode methodNames = null;
                 try
                 {
                     methodNames = (YamlSequenceNode)yaml.Documents[0].RootNode["api_name"];
@@ -317,7 +325,6 @@ namespace ScrapeDocs
                 catch
                 {
                     Debug.WriteLine("WARNING: Could not find api_name node in: {0}", filePath);
-                    return null;
                 }
 
                 bool TryGetProperName(string searchFor, string? suffix, [NotNullWhen(true)] out string? match)
@@ -333,6 +340,12 @@ namespace ScrapeDocs
                             match = null;
                             return false;
                         }
+                    }
+
+                    if (methodNames is null)
+                    {
+                        match = null;
+                        return false;
                     }
 
                     match = methodNames.Children.Cast<YamlScalarNode>().FirstOrDefault(c => string.Equals(c.Value?.Replace('.', '-'), searchFor, StringComparison.OrdinalIgnoreCase))?.Value;
@@ -363,13 +376,7 @@ namespace ScrapeDocs
                 }
                 else if (filePath.Contains(@"ext/win32/desktop-src"))
                 {
-                    properName = methodNames.Children.Cast<YamlScalarNode>().FirstOrDefault()?.Value;
-
-                    if (properName is null)
-                    {
-                        Debug.WriteLine("WARNING: Could not find proper API name in: {0}", filePath);
-                        return null;
-                    }
+                    properName = baseApi;
                 }
 
                 if (filePath.Contains(@"ext/sdk-api/sdk-api-src/content"))
@@ -633,9 +640,29 @@ namespace ScrapeDocs
                 }
                 else if (filePath.Contains(@"ext/win32/desktop-src"))
                 {
-                    foreach (var methodName in methodNames.Children.Cast<YamlScalarNode>())
+                    if (methodNames is not null)
                     {
-                        result.Add((methodName.Value!.StartsWith("_") ? methodName.Value![1..] : methodName.Value!, docs, enumsByParameter, enumsByField));
+                        var firstMethodName = methodNames.Children.Cast<YamlScalarNode>().FirstOrDefault()?.Value;
+
+                        if (firstMethodName == properName)
+                        {
+                            // If api_names includes variants of the base API, create mappings for each.
+                            // Example: ext/win32/desktop-src/printdocs/addprinter.md
+                            foreach (var methodName in methodNames.Children.Cast<YamlScalarNode>())
+                            {
+                                result.Add((methodName.Value!, docs, enumsByParameter, enumsByField));
+                            }
+                        }
+                        else
+                        {
+                            // If api_names doesn't include the base API, create a mapping just for the base API.
+                            // Example: ext/win32/desktop-src/Controls/em-getfileline.md
+                            result.Add((properName!, docs, enumsByParameter, enumsByField));
+                        }
+                    }
+                    else
+                    {
+                        result.Add((properName!, docs, enumsByParameter, enumsByField));
                     }
                 }
 
