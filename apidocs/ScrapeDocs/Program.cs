@@ -40,6 +40,13 @@ namespace ScrapeDocs
         private static readonly Regex EnumOrdinalValue = new Regex(@"\<dt\>([\dxa-f]+)\<\/dt\>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private static readonly Regex ExcludePattern = new Regex(@"^</?d[ltd]>");
 
+        private static readonly Dictionary<string, string> BaseUris = new()
+        {
+            { @"/ext/sdk-api/sdk-api-src/content", @"https://docs.microsoft.com/windows/win32/api/" },
+            { @"/ext/win32/desktop-src", @"https://docs.microsoft.com/windows/win32/" },
+            { @"/ext/Console-Docs/docs", @"https://docs.microsoft.com/windows/console/" },
+        };
+
         private readonly string contentBasePaths;
         private readonly string outputPath;
 
@@ -299,9 +306,17 @@ namespace ScrapeDocs
                 var yamlBuilder = new StringBuilder();
                 ApiDetails docs = new();
                 string? line;
-                while ((line = markdownToYamlReader.ReadLine()) is object)
+                try
                 {
-                    yamlBuilder.AppendLine(line);
+                    while ((line = markdownToYamlReader.ReadLine()) is object)
+                    {
+                        yamlBuilder.AppendLine(line);
+                    }
+                }
+                catch (InvalidOperationException ex)
+                {
+                    Debug.WriteLine("WARNING: Skipping content without YAML headers {0}", filePath);
+                    return null;
                 }
 
                 try
@@ -314,29 +329,22 @@ namespace ScrapeDocs
                     return null;
                 }
 
-                if (!filePath.Contains(@"ext/sdk-api/sdk-api-src/content"))
+                var mapping = (YamlMappingNode)yaml.Documents[0].RootNode;
+
+                if (!mapping.Children.Any(c =>
+                (c.Key.ToString() == "ms.topic" && c.Value.ToString().ToLower() == "reference") ||
+                (c.Key.ToString() == "topic_type" && (c.Value as YamlSequenceNode)!.Children.Any(i => i.ToString().ToLower() == "apiref"))))
                 {
-                    try
-                    {
-                        if (yaml.Documents[0].RootNode["ms.topic"].ToString() != "reference")
-                        {
-                            Debug.WriteLine("WARNING: Skipping non-reference content {0}", filePath);
-                            return null;
-                        }
-                    }
-                    catch
-                    {
-                        Debug.WriteLine("WARNING: Skipping non-reference content {0}", filePath);
-                        return null;
-                    }
+                    Debug.WriteLine("WARNING: Skipping non-reference content {0}", filePath);
+                    return null;
                 }
 
                 YamlSequenceNode methodNames = null;
-                try
+                if (mapping.Children.ContainsKey("api_name"))
                 {
                     methodNames = (YamlSequenceNode)yaml.Documents[0].RootNode["api_name"];
                 }
-                catch
+                else
                 {
                     Debug.WriteLine("WARNING: Could not find api_name node in: {0}", filePath);
                 }
@@ -388,20 +396,19 @@ namespace ScrapeDocs
                         return null;
                     }
                 }
-                else if (filePath.Contains(@"ext/win32/desktop-src"))
+                else
                 {
                     properName = TitlePattern.Match(yaml.Documents[0].RootNode["title"].ToString()).Groups[1].Value.Replace("::", ".");
                 }
 
-                if (filePath.Contains(@"ext/sdk-api/sdk-api-src/content"))
+                foreach (var baseUri in BaseUris.Keys)
                 {
-                    Uri helpLink = new Uri("https://docs.microsoft.com/windows/win32/api/" + (new FileInfo(filePath).Directory!.Name! + "/" + Path.GetFileNameWithoutExtension(filePath)).Replace('\\', '/'));
-                    docs.HelpLink = helpLink;
-                }
-                else if (filePath.Contains(@"ext/win32/desktop-src"))
-                {
-                    Uri helpLink = new Uri("https://docs.microsoft.com/windows/win32/" + (new FileInfo(filePath).Directory!.Name! + "/" + Path.GetFileNameWithoutExtension(filePath)).Replace('\\', '/'));
-                    docs.HelpLink = helpLink;
+                    if (filePath.Replace("\\", "/").Contains(baseUri))
+                    {
+                        docs.HelpLink = new Uri(BaseUris[baseUri] + filePath[(filePath.IndexOf(baseUri) + baseUri.Length + 1)..(filePath.Length - 3)].Replace("\\", "/"));
+
+                        break;
+                    }
                 }
 
                 var description = ((YamlMappingNode)yaml.Documents[0].RootNode).Children.FirstOrDefault(n => n.Key is YamlScalarNode { Value: "description" }).Value as YamlScalarNode;
@@ -573,8 +580,11 @@ namespace ScrapeDocs
                             docBuilder.AppendLine(line);
                         }
 
-                        receivingMap.TryAdd(sectionName, docBuilder.ToString().Trim());
-                        docBuilder.Clear();
+                        if (!string.IsNullOrEmpty(sectionName))
+                        {
+                            receivingMap.TryAdd(sectionName, docBuilder.ToString().Trim());
+                            docBuilder.Clear();
+                        }
                     }
                     else
                     {
@@ -672,7 +682,7 @@ namespace ScrapeDocs
                 {
                     result.Add((properName!, docs, enumsByParameter, enumsByField));
                 }
-                else if (filePath.Contains(@"ext/win32/desktop-src"))
+                else
                 {
                     if (methodNames is not null)
                     {

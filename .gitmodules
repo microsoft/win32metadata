@@ -6,3 +6,7 @@
 	path = ext/win32
 	url = https://github.com/MicrosoftDocs/win32
 	shallow = true
+[submodule "ext/Console-Docs"]
+	path = ext/Console-Docs
+	url = https://github.com/MicrosoftDocs/Console-Docs
+	shallow = true
