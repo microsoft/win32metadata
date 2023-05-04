@@ -32,11 +32,14 @@ namespace ScrapeDocs
         private static readonly Regex ParameterHeaderPattern = new Regex(@"^### -param (\w+)", RegexOptions.Compiled);
         private static readonly Regex MembersHeaderPattern = new Regex(@"^## Members", RegexOptions.Compiled);
         private static readonly Regex FieldHeaderPattern = new Regex(@"^### -field (?:\w+\.)*(\w+)", RegexOptions.Compiled);
+        private static readonly Regex ParameterMemberPattern = new Regex(@"^(\*{1,2})(\w+)\1", RegexOptions.Compiled);
         private static readonly Regex ReturnHeaderPattern = new Regex(@"^## (-returns|Return value)", RegexOptions.Compiled);
         private static readonly Regex RemarksHeaderPattern = new Regex(@"^## (-remarks|Remarks)", RegexOptions.Compiled);
         private static readonly Regex InlineCodeTag = new Regex(@"\<code\>(.*)\</code\>", RegexOptions.Compiled);
         private static readonly Regex EnumNameCell = new Regex(@"\<td[^\>]*\>\<a id=""([^""]+)""", RegexOptions.Compiled);
         private static readonly Regex EnumOrdinalValue = new Regex(@"\<dt\>([\dxa-f]+)\<\/dt\>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex ExcludePattern = new Regex(@"^</?d[ltd]>");
+
         private readonly string contentBasePaths;
         private readonly string outputPath;
 
@@ -540,9 +543,6 @@ namespace ScrapeDocs
                 {
                     if (match.Value == "## Parameters" || match.Value == "## Members")
                     {
-                        var parameterPattern = new Regex(@"^(\*{1,2})(\w+)\1");
-                        var excludePattern = new Regex(@"^</?d[ltd]>");
-
                         string sectionName = string.Empty;
                         while ((line = mdFileReader.ReadLine()) is object)
                         {
@@ -551,12 +551,12 @@ namespace ScrapeDocs
                                 break;
                             }
 
-                            if (excludePattern.IsMatch(line))
+                            if (ExcludePattern.IsMatch(line))
                             {
                                 continue;
                             }
 
-                            if (parameterPattern.Match(line) is Match { Success: true } parameterMatch)
+                            if (ParameterMemberPattern.Match(line) is Match { Success: true } parameterMemberMatch)
                             {
                                 if (!string.IsNullOrEmpty(sectionName))
                                 {
@@ -564,7 +564,7 @@ namespace ScrapeDocs
                                     docBuilder.Clear();
                                 }
 
-                                sectionName = parameterMatch.Groups[2].Value;
+                                sectionName = parameterMemberMatch.Groups[2].Value;
 
                                 continue;
                             }
