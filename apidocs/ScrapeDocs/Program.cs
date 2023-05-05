@@ -25,19 +25,19 @@ using YamlDotNet.RepresentationModel;
 /// </summary>
 internal class Program
 {
-    private static readonly Regex FileNamePattern = new Regex(@"^\w\w-\w+-([\w\-]+)$", RegexOptions.Compiled);
-    private static readonly Regex TitlePattern = new Regex(@"([^\s\(]+)", RegexOptions.Compiled);
-    private static readonly Regex ParametersHeaderPattern = new Regex(@"^## Parameters", RegexOptions.Compiled);
-    private static readonly Regex ParameterHeaderPattern = new Regex(@"^### -param (\w+)", RegexOptions.Compiled);
-    private static readonly Regex MembersHeaderPattern = new Regex(@"^## Members", RegexOptions.Compiled);
-    private static readonly Regex FieldHeaderPattern = new Regex(@"^### -field (?:\w+\.)*(\w+)", RegexOptions.Compiled);
-    private static readonly Regex ParameterMemberPattern = new Regex(@"^(\*{1,2})(\w+)\1", RegexOptions.Compiled);
-    private static readonly Regex ReturnHeaderPattern = new Regex(@"^## (-returns|Return value)", RegexOptions.Compiled);
-    private static readonly Regex RemarksHeaderPattern = new Regex(@"^## (-remarks|Remarks)", RegexOptions.Compiled);
-    private static readonly Regex InlineCodeTag = new Regex(@"\<code\>(.*)\</code\>", RegexOptions.Compiled);
-    private static readonly Regex EnumNameCell = new Regex(@"\<td[^\>]*\>\<a id=""([^""]+)""", RegexOptions.Compiled);
-    private static readonly Regex EnumOrdinalValue = new Regex(@"\<dt\>([\dxa-f]+)\<\/dt\>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-    private static readonly Regex ExcludePattern = new Regex(@"^</?d[ltd]>");
+    private static readonly Regex FileNamePattern = new(@"^\w\w-\w+-([\w\-]+)$", RegexOptions.Compiled);
+    private static readonly Regex TitlePattern = new(@"([^\s\(]+)", RegexOptions.Compiled);
+    private static readonly Regex ParametersHeaderPattern = new(@"^## Parameters", RegexOptions.Compiled);
+    private static readonly Regex ParameterHeaderPattern = new(@"^### -param (\w+)", RegexOptions.Compiled);
+    private static readonly Regex MembersHeaderPattern = new(@"^## Members", RegexOptions.Compiled);
+    private static readonly Regex FieldHeaderPattern = new(@"^### -field (?:\w+\.)*(\w+)", RegexOptions.Compiled);
+    private static readonly Regex ParameterMemberPattern = new(@"^(\*{1,2})(\w+)\1", RegexOptions.Compiled);
+    private static readonly Regex ReturnHeaderPattern = new(@"^## (-returns|Return value)", RegexOptions.Compiled);
+    private static readonly Regex RemarksHeaderPattern = new(@"^## (-remarks|Remarks)", RegexOptions.Compiled);
+    private static readonly Regex InlineCodeTag = new(@"\<code\>(.*)\</code\>", RegexOptions.Compiled);
+    private static readonly Regex EnumNameCell = new(@"\<td[^\>]*\>\<a id=""([^""]+)""", RegexOptions.Compiled);
+    private static readonly Regex EnumOrdinalValue = new(@"\<dt\>([\dxa-f]+)\<\/dt\>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+    private static readonly Regex ExcludePattern = new(@"^</?d[ltd]>");
 
     private static readonly Dictionary<string, string> BaseUris = new()
     {
@@ -159,7 +159,7 @@ internal class Program
         Directory.CreateDirectory(Path.GetDirectoryName(this.outputPath)!);
         using var outputFileStream = File.OpenWrite(this.outputPath);
         var sortedResults = new SortedDictionary<string, ApiDetails>(results);
-        MessagePackSerializer.Serialize(outputFileStream, sortedResults, MessagePackSerializerOptions.Standard);
+        MessagePackSerializer.Serialize(outputFileStream, sortedResults, MessagePackSerializerOptions.Standard, CancellationToken.None);
 
         var documentationMappingsBuilder = new StringBuilder();
         documentationMappingsBuilder.AppendLine("--memberRemap");
@@ -220,9 +220,9 @@ internal class Program
             }
 
             YamlSequenceNode apiNames = null!;
-            if (yamlRootNode.Children.ContainsKey("api_name") && yamlRootNode.Children["api_name"] is YamlSequenceNode)
+            if (yamlRootNode.Children.ContainsKey("api_name") && yamlRootNode.Children["api_name"] is YamlSequenceNode node)
             {
-                apiNames = (YamlSequenceNode)yamlRootNode.Children["api_name"];
+                apiNames = node;
             }
             else
             {
@@ -352,7 +352,7 @@ internal class Program
                 if (match.Value == "## Parameters" || match.Value == "## Members")
                 {
                     string sectionName = string.Empty;
-                    while ((line = mdFileReader.ReadLine()) is object)
+                    while ((line = mdFileReader.ReadLine()) is not null)
                     {
                         if (line.StartsWith('#'))
                         {
@@ -573,7 +573,7 @@ internal class Program
                 {
                     if (searchFor.EndsWith(suffix, StringComparison.Ordinal))
                     {
-                        searchFor = searchFor.Substring(0, searchFor.Length - suffix.Length);
+                        searchFor = searchFor[..^suffix.Length];
                     }
                     else
                     {
