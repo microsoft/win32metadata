@@ -120,7 +120,7 @@ jobs:
   - publish: bin/Packages/$(BuildConfiguration)/NuGet
     artifact: ApiDocsNuGetPackages
     displayName: 📢 Publish package
-  - publish: bin/$(BuildConfiguration)/documentationMappings.rsp
+  - publish: bin/$(BuildConfiguration)/netstandard2.0/documentationMappings.rsp
     artifact: ApiDocsMetadata
     displayName: 📢 Publish metadata
   #   # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
