@@ -2,9 +2,10 @@
   "$schema": "https://raw.githubusercontent.com/dotnet/Nerdbank.GitVersioning/master/src/NerdBank.GitVersioning/version.schema.json",
   "inherit": true,
   "version": "0.1-alpha",
-  "versionHeightOffset": 0, // manually +1 each time the ext/sdk-api submodule tree is updated
+  "versionHeightOffset": 1, // manually +1 each time the ext/sdk-api submodule tree is updated
   "pathFilters": [
     ".",
-    "../ext/sdk-api" // doesn't work yet: https://github.com/dotnet/Nerdbank.GitVersioning/issues/625
+    "../ext/sdk-api", // doesn't work yet: https://github.com/dotnet/Nerdbank.GitVersioning/issues/625
+    "../ext/win32" // doesn't work yet: https://github.com/dotnet/Nerdbank.GitVersioning/issues/625
   ]
 }

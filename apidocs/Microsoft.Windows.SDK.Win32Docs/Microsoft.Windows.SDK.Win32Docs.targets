@@ -20,7 +20,7 @@
           Outputs="@(DocOutputPath)"
           Condition=" '$(DesignTimeBuild)' != 'true' ">
     <Message Importance="high" Text="Generating @(DocOutputPath->'%(FullPath)'). This may take a few minutes..." />
-    <Exec Command="dotnet @(ScraperTool) ../../ext/sdk-api/sdk-api-src/content @(DocOutputPath)"
+    <Exec Command="dotnet @(ScraperTool) '../../ext/sdk-api/sdk-api-src/content;../../ext/win32/desktop-src;../../ext/Console-Docs/docs' @(DocOutputPath)"
           StandardOutputImportance="high"/>
   </Target>
 

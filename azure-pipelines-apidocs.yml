@@ -117,9 +117,12 @@ jobs:
       MaxConcurrency: 50
       MaxRetryAttempts: 5
     condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
-  # - publish: bin/Packages/$(BuildConfiguration)/NuGet
-  #   artifact: ApiDocsNuGetPackages
-  #   displayName: 📢 Publish package
+  - publish: bin/Packages/$(BuildConfiguration)/NuGet
+    artifact: ApiDocsNuGetPackages
+    displayName: 📢 Publish package
+  - publish: bin/$(BuildConfiguration)/netstandard2.0/documentationMappings.rsp
+    artifact: ApiDocsMetadata
+    displayName: 📢 Publish metadata
   #   # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
   #   # Don't publish if we're using pre-generated source
   # - task: 333b11bd-d341-40d9-afcf-b32d5ce6f23b@2
