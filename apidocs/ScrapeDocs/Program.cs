@@ -166,7 +166,7 @@ internal class Program
 
         foreach (var api in sortedResults)
         {
-            documentationMappingsBuilder.AppendLine($"{api.Key.Replace(".", "::")}=[Documentation({api.Value.HelpLink})]");
+            documentationMappingsBuilder.AppendLine($"{api.Key.Replace(".", "::")}=[Documentation(\"{api.Value.HelpLink}\")]");
         }
 
         File.WriteAllText(this.documentationMappingsRsp, documentationMappingsBuilder.ToString());
