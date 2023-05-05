@@ -98,7 +98,7 @@ internal class Program
         foreach (var path in this.contentBasePaths.Split(';'))
         {
             paths.AddRange(Directory.GetFiles(path, "*.md", SearchOption.AllDirectories).
-                           Where(p => !Regex.IsMatch(p, "(index.md|TOC.md)$", RegexOptions.IgnoreCase)));
+                           Where(p => !Regex.IsMatch(p, @"(CIMWin32Prov|index\.md|TOC\.md)", RegexOptions.IgnoreCase)));
         }
 
         Console.WriteLine("Parsing documents...");
