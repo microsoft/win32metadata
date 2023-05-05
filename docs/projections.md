@@ -49,7 +49,7 @@ DISCLAIMER: This list is a work in progress and is not yet comprehensive.
   * Calling convention is captured in the [CallingConvention](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute.callingconvention) property
   * Whether a function calls `SetLastError` before returning is captured in the [SetLastError](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute.setlasterror) property
 * Architecture-specific types are represented as types with the same name where each type is decorated with the `[SupportedArchitecture]` attribute indicating the architecture(s) where that type is supported
-* Documentation links are captured in the `[Documentation]` attribute
+* Documentation links are captured in the `[Documentation]` attribute. Rich documentation to power Intellisense can also be loaded from the [Microsoft.Windows.SDK.Win32Docs](https://www.nuget.org/packages/Microsoft.Windows.SDK.Win32Docs/) package which provides a [MessagePack](https://msgpack.org/) dictionary where the keys are API names and the values are [ApiDetails](../apidocs/Microsoft.Windows.SDK.Win32Docs/ApiDetails.cs) objects.
 * Input and output parameters are decorated with `[In]` and `[Out]` attributes. Parameters that are both input and output will contain both attributes. COM output pointer parameters are also decorated with the `[ComOutPtr]` attribute.
 * Optional parameters are decorated with the `[Optional]` attribute. Optional parameters may be `NULL`.
 * Reserved parameters are decorated with the `[Reserved]` attribute. Since reserved parameters always expect a `NULL` value, projections can choose to abstract away these parameters to improve the developer experience.
