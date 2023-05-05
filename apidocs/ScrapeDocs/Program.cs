@@ -46,7 +46,7 @@ internal class Program
         { @"/ext/Console-Docs/docs", @"https://docs.microsoft.com/windows/console/" },
     };
 
-    private static readonly string ExcludedContentPattern = @"(ADSchema|CIMWin32Prov|DMWmiBridgeProv|gdiplus|HyperV_v2|SecAuthZ|TermServ|WmiSdk|index\.md|TOC\.md)";
+    private static readonly string ExcludedContentPattern = @"(ADSchema|CIMWin32Prov|DMWmiBridgeProv|gdiplus|HyperV_v2|Midl|SecAuthZ|TermServ|WmiCoreProv|WmiSdk|index\.md|TOC\.md)";
 
     private readonly string contentBasePaths;
     private readonly string outputPath;
