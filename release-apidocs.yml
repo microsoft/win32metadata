@@ -4,7 +4,7 @@ pr: none
 resources:
   pipelines:
   - pipeline: win32metadata
-    source: Win32 Metadata ApiDocs
+    source: Win32 Docs
     trigger:
       tags:
       - auto-release
