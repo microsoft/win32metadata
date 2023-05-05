@@ -9,6 +9,7 @@ resources:
       tags:
       - auto-release
 
+stages:
 - stage: nuget_org
   displayName: nuget.org
   jobs:
