@@ -29,7 +29,7 @@ stages:
             inputs:
               versionSpec: 5.x
           - powershell: |
-              Get-ChildItems .\ApiDocsNuGetPackages\*.nupkg |% {
+              Get-ChildItem .\ApiDocsNuGetPackages\*.nupkg |% {
                 nuget push $_ -Source https://api.nuget.org/v3/index.json -SkipDuplicate -ApiKey $(NuGetOrgApiKey)
               }
             displayName: Push packages to nuget.org
