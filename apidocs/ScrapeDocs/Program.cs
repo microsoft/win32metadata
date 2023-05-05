@@ -46,6 +46,8 @@ internal class Program
         { @"/ext/Console-Docs/docs", @"https://docs.microsoft.com/windows/console/" },
     };
 
+    private static readonly string ExcludedContentPattern = @"(ADSchema|CIMWin32Prov|DMWmiBridgeProv|gdiplus|HyperV_v2|SecAuthZ|TermServ|WmiSdk|index\.md|TOC\.md)";
+
     private readonly string contentBasePaths;
     private readonly string outputPath;
     private readonly string documentationMappingsRsp;
@@ -98,7 +100,7 @@ internal class Program
         foreach (var path in this.contentBasePaths.Split(';'))
         {
             paths.AddRange(Directory.GetFiles(path, "*.md", SearchOption.AllDirectories).
-                           Where(p => !Regex.IsMatch(p, @"(CIMWin32Prov|index\.md|TOC\.md)", RegexOptions.IgnoreCase)));
+                           Where(p => !Regex.IsMatch(p, ExcludedContentPattern, RegexOptions.IgnoreCase)));
         }
 
         Console.WriteLine("Parsing documents...");
