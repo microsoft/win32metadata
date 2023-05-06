@@ -125,7 +125,15 @@ internal class Program
         WithCancellation<(string Path, string ApiName, ApiDetails Docs, IReadOnlyDictionary<string, DocEnum> EnumsByParameter, IReadOnlyDictionary<string, DocEnum> EnumsByField)>(cancellationToken).
         ForAll(result =>
         {
-            results.TryAdd(result.ApiName, result.Docs);
+            if (!results.TryAdd(result.ApiName, result.Docs))
+            {
+                // Prefer a more specific HelpLink if multiple results were returned.
+                if (!results[result.ApiName].HelpLink!.ToString().ToLower().Contains(result.ApiName.Replace(".", "-").ToLower()))
+                {
+                    results[result.ApiName] = result.Docs;
+                }
+            }
+
             foreach (var e in result.EnumsByParameter)
             {
                 if (result.Docs.HelpLink is not null)
