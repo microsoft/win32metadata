@@ -318,11 +318,18 @@ internal class Program
                     // Example: ext/win32/desktop-src/printdocs/addprinter.md
                     foreach (var methodName in apiNames.Children.Cast<YamlScalarNode>())
                     {
-                        var fixedMethodName = methodName.Value!.StartsWith("_") && methodName.Value! != firstMethodName ? methodName.Value![1..] : methodName.Value!;
-
-                        if (!Regex.IsMatch(fixedMethodName, @"^[_{2}\?]"))
+                        if (methodName.Value! == firstMethodName)
                         {
-                            result.Add((fixedMethodName, apiDetails, enumsByParameter, enumsByField));
+                            result.Add((methodName.Value!, apiDetails, enumsByParameter, enumsByField));
+                        }
+                        else
+                        {
+                            var fixedMethodName = methodName.Value!.StartsWith("_") ? methodName.Value![1..] : methodName.Value!;
+
+                            if (!fixedMethodName.StartsWith(@"?"))
+                            {
+                                result.Add((fixedMethodName, apiDetails, enumsByParameter, enumsByField));
+                            }
                         }
                     }
                 }
