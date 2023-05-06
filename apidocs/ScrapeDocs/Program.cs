@@ -310,7 +310,7 @@ internal class Program
                     // Example: ext/win32/desktop-src/printdocs/addprinter.md
                     foreach (var methodName in apiNames.Children.Cast<YamlScalarNode>())
                     {
-                        var fixedMethodName = methodName.Value!.StartsWith("_") ? methodName.Value![1..] : methodName.Value!;
+                        var fixedMethodName = methodName.Value!.StartsWith("_") && methodName.Value! != firstMethodName ? methodName.Value![1..] : methodName.Value!;
 
                         if (!Regex.IsMatch(fixedMethodName, @"^[_{2}\?]"))
                         {
