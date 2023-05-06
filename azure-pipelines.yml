@@ -5,6 +5,7 @@ trigger:
   paths:
     exclude:
       - apidocs
+      - docs
   batch: true
 
 pr:
@@ -14,6 +15,7 @@ pr:
   paths:
     exclude:
       - apidocs
+      - docs
 
 variables:
   BuildConfiguration: Release
