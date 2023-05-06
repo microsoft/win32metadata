@@ -312,7 +312,10 @@ internal class Program
                     {
                         var fixedMethodName = methodName.Value!.StartsWith("_") ? methodName.Value![1..] : methodName.Value!;
 
-                        result.Add((fixedMethodName, apiDetails, enumsByParameter, enumsByField));
+                        if (!Regex.IsMatch(fixedMethodName, @"^[_{2}\?]"))
+                        {
+                            result.Add((fixedMethodName, apiDetails, enumsByParameter, enumsByField));
+                        }
                     }
                 }
                 else
