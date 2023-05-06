@@ -154,20 +154,21 @@ internal class Program
         }
 
         Console.WriteLine("Analyzing and naming enums and collecting docs on their members...");
+        var sortedResultsWithoutEnums = new SortedDictionary<string, ApiDetails>(results);
         int constantsCount = this.AnalyzeEnums(results, parameterEnums, fieldEnums);
+        var sortedResultsWithEnums = new SortedDictionary<string, ApiDetails>(results);
         Console.WriteLine($"Found docs for {constantsCount} constants.");
 
         Console.WriteLine("Writing results to \"{0}\" and \"{1}\"", this.outputPath, this.documentationMappingsRsp);
 
         Directory.CreateDirectory(Path.GetDirectoryName(this.outputPath)!);
         using var outputFileStream = File.OpenWrite(this.outputPath);
-        var sortedResults = new SortedDictionary<string, ApiDetails>(results);
-        MessagePackSerializer.Serialize(outputFileStream, sortedResults, MessagePackSerializerOptions.Standard, CancellationToken.None);
+        MessagePackSerializer.Serialize(outputFileStream, sortedResultsWithEnums, MessagePackSerializerOptions.Standard, CancellationToken.None);
 
         var documentationMappingsBuilder = new StringBuilder();
         documentationMappingsBuilder.AppendLine("--memberRemap");
 
-        foreach (var api in sortedResults)
+        foreach (var api in sortedResultsWithoutEnums)
         {
             documentationMappingsBuilder.AppendLine($"{api.Key.Replace(".", "::")}=[Documentation(\"{api.Value.HelpLink}\")]");
         }
@@ -643,6 +644,9 @@ internal class Program
 
         foreach (var item in constantsDocs)
         {
+            // Sort by API name to make results more deterministic.
+            item.Value.Sort();
+
             var docNode = new ApiDetails
             {
                 Description = item.Value[0].Doc,
@@ -665,7 +669,6 @@ internal class Program
             }
             else
             {
-                // Just point to any arbitrary method that documents it.
                 docNode.HelpLink = new Uri(item.Value[0].HelpLink);
             }
 
