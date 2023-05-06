@@ -234,33 +234,18 @@ internal class Program
             }
 
             // Populate ApiName.
-            string? properName = null;
-            if (filePath.Contains(@"ext/sdk-api/sdk-api-src/content"))
-            {
-                string presumedMethodName = FileNamePattern.Match(Path.GetFileNameWithoutExtension(filePath)).Groups[1].Value;
+            string? apiName = null;
 
-                // Some structures have filenames that include the W or A suffix when the content doesn't. So try some fuzzy matching.
-                if (!TryGetProperName(presumedMethodName, null, out properName) &&
-                    !TryGetProperName(presumedMethodName, "a", out properName) &&
-                    !TryGetProperName(presumedMethodName, "w", out properName) &&
-                    !TryGetProperName(presumedMethodName, "32", out properName) &&
-                    !TryGetProperName(presumedMethodName, "64", out properName))
-                {
-                    Debug.WriteLine("WARNING: Could not find proper API name in: {0}", filePath);
-                    return null!;
-                }
-            }
-            else
+            if (yamlRootNode.Children.ContainsKey("title"))
             {
-                if (yamlRootNode.Children.ContainsKey("title"))
-                {
-                    properName = TitlePattern.Match(yamlRootNode.Children["title"].ToString()).Groups[1].Value.Replace("::", ".");
-                }
-                else if (yamlRootNode.Children.ContainsKey("comtitle"))
-                {
-                    properName = TitlePattern.Match(yamlRootNode.Children["comtitle"].ToString()).Groups[1].Value.Replace("::", ".");
-                }
+                apiName = TitlePattern.Match(yamlRootNode.Children["title"].ToString()).Groups[1].Value.Replace("::", ".");
             }
+            else if (yamlRootNode.Children.ContainsKey("comtitle"))
+            {
+                apiName = TitlePattern.Match(yamlRootNode.Children["comtitle"].ToString()).Groups[1].Value.Replace("::", ".");
+            }
+
+            apiName = apiName!.Replace("\\", string.Empty);
 
             // Populate HelpLink.
             foreach (var baseUri in BaseUris.Keys)
@@ -315,38 +300,31 @@ internal class Program
             }
 
             var result = new List<(string ApiName, ApiDetails Docs, IReadOnlyDictionary<string, DocEnum> EnumsByParameter, IReadOnlyDictionary<string, DocEnum> EnumsByField)>();
-            if (filePath.Contains(@"ext/sdk-api/sdk-api-src/content"))
+            if (apiNames is not null)
             {
-                result.Add((properName!, apiDetails, enumsByParameter, enumsByField));
-            }
-            else
-            {
-                if (apiNames is not null)
+                var firstMethodName = apiNames.Children.Cast<YamlScalarNode>().FirstOrDefault()?.Value;
+
+                if (firstMethodName == apiName)
                 {
-                    var firstMethodName = apiNames.Children.Cast<YamlScalarNode>().FirstOrDefault()?.Value;
-
-                    if (firstMethodName == properName)
+                    // If api_names includes variants of the base API, create mappings for each.
+                    // Example: ext/win32/desktop-src/printdocs/addprinter.md
+                    foreach (var methodName in apiNames.Children.Cast<YamlScalarNode>())
                     {
-                        // If api_names includes variants of the base API, create mappings for each.
-                        // Example: ext/win32/desktop-src/printdocs/addprinter.md
-                        foreach (var methodName in apiNames.Children.Cast<YamlScalarNode>())
-                        {
-                            var fixedMethodName = methodName.Value!.StartsWith("_") ? methodName.Value![1..] : methodName.Value!;
+                        var fixedMethodName = methodName.Value!.StartsWith("_") ? methodName.Value![1..] : methodName.Value!;
 
-                            result.Add((fixedMethodName, apiDetails, enumsByParameter, enumsByField));
-                        }
-                    }
-                    else
-                    {
-                        // If api_names doesn't include the base API, create a mapping just for the base API.
-                        // Example: ext/win32/desktop-src/Controls/em-getfileline.md
-                        result.Add((properName!, apiDetails, enumsByParameter, enumsByField));
+                        result.Add((fixedMethodName, apiDetails, enumsByParameter, enumsByField));
                     }
                 }
                 else
                 {
-                    result.Add((properName!, apiDetails, enumsByParameter, enumsByField));
+                    // If api_names doesn't include the base API, create a mapping just for the base API.
+                    // Example: ext/win32/desktop-src/Controls/em-getfileline.md
+                    result.Add((apiName!, apiDetails, enumsByParameter, enumsByField));
                 }
+            }
+            else
+            {
+                result.Add((apiName!, apiDetails, enumsByParameter, enumsByField));
             }
 
             return result;
@@ -569,37 +547,6 @@ internal class Program
                 line = line.Replace("href=\"/", "href=\"https://docs.microsoft.com/");
                 line = InlineCodeTag.Replace(line, match => $"<c>{match.Groups[1].Value}</c>");
                 return line;
-            }
-
-            bool TryGetProperName(string searchFor, string? suffix, [NotNullWhen(true)] out string? match)
-            {
-                if (suffix is not null)
-                {
-                    if (searchFor.EndsWith(suffix, StringComparison.Ordinal))
-                    {
-                        searchFor = searchFor[..^suffix.Length];
-                    }
-                    else
-                    {
-                        match = null;
-                        return false;
-                    }
-                }
-
-                if (apiNames is null)
-                {
-                    match = null;
-                    return false;
-                }
-
-                match = apiNames.Children.Cast<YamlScalarNode>().FirstOrDefault(c => string.Equals(c.Value?.Replace('.', '-'), searchFor, StringComparison.OrdinalIgnoreCase))?.Value;
-
-                if (suffix is not null && match is not null)
-                {
-                    match += suffix.ToUpper(CultureInfo.InvariantCulture);
-                }
-
-                return match is not null;
             }
         }
         catch (Exception ex)
