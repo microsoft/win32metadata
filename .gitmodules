@@ -1,12 +1,15 @@
+[submodule "ext/Console-Docs"]
+	path = ext/Console-Docs
+	url = https://github.com/MicrosoftDocs/Console-Docs
+	shallow = true
 [submodule "ext/sdk-api"]
 	path = ext/sdk-api
 	url = https://github.com/MicrosoftDocs/sdk-api
 	shallow = true
+[submodule "ext/Virtualization-Documentation"]
+	path = ext/Virtualization-Documentation
+	url = https://github.com/MicrosoftDocs/Virtualization-Documentation
 [submodule "ext/win32"]
 	path = ext/win32
 	url = https://github.com/MicrosoftDocs/win32
-	shallow = true
-[submodule "ext/Console-Docs"]
-	path = ext/Console-Docs
-	url = https://github.com/MicrosoftDocs/Console-Docs
 	shallow = true

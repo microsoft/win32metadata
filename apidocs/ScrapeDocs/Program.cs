@@ -31,8 +31,8 @@ internal class Program
     private static readonly Regex ParameterHeaderPattern = new(@"^### -param (\w+)", RegexOptions.Compiled);
     private static readonly Regex MembersHeaderPattern = new(@"^## Members", RegexOptions.Compiled);
     private static readonly Regex FieldHeaderPattern = new(@"^### -field (?:\w+\.)*(\w+)", RegexOptions.Compiled);
-    private static readonly Regex ParameterMemberPattern = new(@"^(\*{1,2})(\w+)\1", RegexOptions.Compiled);
-    private static readonly Regex ReturnHeaderPattern = new(@"^## (-returns|Return value)", RegexOptions.Compiled);
+    private static readonly Regex ParameterMemberPattern = new(@"^([\*{1,2}`])(\w+)\1", RegexOptions.Compiled);
+    private static readonly Regex ReturnHeaderPattern = new(@"^## (-returns|Return [vV]alues?)", RegexOptions.Compiled);
     private static readonly Regex RemarksHeaderPattern = new(@"^## (-remarks|Remarks)", RegexOptions.Compiled);
     private static readonly Regex InlineCodeTag = new(@"\<code\>(.*)\</code\>", RegexOptions.Compiled);
     private static readonly Regex EnumNameCell = new(@"\<td[^\>]*\>\<a id=""([^""]+)""", RegexOptions.Compiled);
@@ -41,9 +41,10 @@ internal class Program
 
     private static readonly Dictionary<string, string> BaseUris = new()
     {
-        { @"/ext/sdk-api/sdk-api-src/content", @"https://docs.microsoft.com/windows/win32/api/" },
-        { @"/ext/win32/desktop-src", @"https://docs.microsoft.com/windows/win32/" },
         { @"/ext/Console-Docs/docs", @"https://docs.microsoft.com/windows/console/" },
+        { @"/ext/sdk-api/sdk-api-src/content", @"https://docs.microsoft.com/windows/win32/api/" },
+        { @"/ext/Virtualization-Documentation", @"https://docs.microsoft.com/" },
+        { @"/ext/win32/desktop-src", @"https://docs.microsoft.com/windows/win32/" },
     };
 
     private static readonly string ExcludedContentPattern = @"(ADSchema|CIMWin32Prov|DMWmiBridgeProv|gdiplus|HyperV_v2|Midl|SecAuthZ|TermServ|WmiCoreProv|WmiSdk|index\.md|TOC\.md)";

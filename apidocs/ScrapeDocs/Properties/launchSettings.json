@@ -2,7 +2,7 @@
   "profiles": {
     "ScrapeDocs": {
       "commandName": "Project",
-      "commandLineArgs": "../../../ext/win32/desktop-src ../../../bin/Debug/apidocs.msgpack"
+      "commandLineArgs": "../../../ext/Virtualization-Documentation/virtualization/api/hcs/Reference ../../../bin/Debug/apidocs.msgpack"
     }
   }
 }
