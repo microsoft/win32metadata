@@ -17,6 +17,7 @@
 [submodule "ext/Virtualization-Documentation"]
 	path = ext/Virtualization-Documentation
 	url = https://github.com/MicrosoftDocs/Virtualization-Documentation
+	shallow = true
 [submodule "ext/win32"]
 	path = ext/win32
 	url = https://github.com/MicrosoftDocs/win32
