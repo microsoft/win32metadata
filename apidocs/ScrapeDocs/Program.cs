@@ -247,14 +247,14 @@ internal class Program
 
             if (yamlRootNode.Children.ContainsKey("title"))
             {
-                apiName = TitlePattern.Match(yamlRootNode.Children["title"].ToString()).Groups[1].Value.Replace("::", ".");
+                apiName = TitlePattern.Match(yamlRootNode.Children["title"].ToString()).Groups[1].Value;
             }
             else if (yamlRootNode.Children.ContainsKey("comtitle"))
             {
-                apiName = TitlePattern.Match(yamlRootNode.Children["comtitle"].ToString()).Groups[1].Value.Replace("::", ".");
+                apiName = TitlePattern.Match(yamlRootNode.Children["comtitle"].ToString()).Groups[1].Value;
             }
 
-            apiName = apiName!.Replace("\\", string.Empty);
+            apiName = apiName!.Replace("::", ".").Replace("\\", string.Empty);
 
             // Populate HelpLink.
             foreach (var baseUri in BaseUris.Keys)
@@ -278,7 +278,7 @@ internal class Program
             {
                 if (ApiNamePattern.Match(line) is Match { Success: true } apiNameMatch)
                 {
-                    apiName = apiNameMatch.Groups[1].Value.Replace("::", ".");
+                    apiName = apiNameMatch.Groups[1].Value.Replace("::", ".").Replace("\\", string.Empty);
 
                     line = mdFileReader.ReadLine();
                 }
