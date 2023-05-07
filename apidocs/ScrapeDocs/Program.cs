@@ -346,6 +346,13 @@ internal class Program
                     }
                 }
             }
+            else if (apiName.EndsWith("A/W"))
+            {
+                // If apiName includes variants of an API, create mappings for each.
+                // Example: ext/win32/desktop-src/DevNotes/patchapi-createpatchfileex.md
+                result.Add((apiName![..^3] + "A", apiDetails, enumsByParameter, enumsByField));
+                result.Add((apiName![..^3] + "W", apiDetails, enumsByParameter, enumsByField));
+            }
             else
             {
                 // If api_names doesn't include the base API, create a mapping just for the base API.
