@@ -26,7 +26,7 @@ using YamlDotNet.RepresentationModel;
 internal class Program
 {
     private static readonly Regex TitlePattern = new(@"([^\s\(]+)", RegexOptions.Compiled);
-    private static readonly Regex ApiNamePattern = new(@"^# ([^\s\(]+)", RegexOptions.Compiled);
+    private static readonly Regex ApiNamePattern = new(@"^# (<(\w+)[\s>].*</\2>)?\s*([^\s\(]+)", RegexOptions.Compiled);
     private static readonly Regex ParametersHeaderPattern = new(@"^## Parameters", RegexOptions.Compiled);
     private static readonly Regex ParameterHeaderPattern = new(@"^### -param (\w+)", RegexOptions.Compiled);
     private static readonly Regex MembersHeaderPattern = new(@"^## Members", RegexOptions.Compiled);
@@ -278,9 +278,18 @@ internal class Program
             {
                 if (ApiNamePattern.Match(line) is Match { Success: true } apiNameMatch)
                 {
-                    apiName = apiNameMatch.Groups[1].Value.Replace("::", ".").Replace("\\", string.Empty);
+                    var headerApiName = apiNameMatch.Groups[3].Value.Replace("::", ".").Replace("\\", string.Empty);
 
-                    line = mdFileReader.ReadLine();
+                    if (apiName.Contains('.') && !headerApiName.Contains('.'))
+                    {
+                        line = mdFileReader.ReadLine();
+                    }
+                    else
+                    {
+                        apiName = headerApiName;
+
+                        line = mdFileReader.ReadLine();
+                    }
                 }
                 else if (ParametersHeaderPattern.Match(line) is Match { Success: true } parametersMatch)
                 {
