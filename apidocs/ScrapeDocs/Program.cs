@@ -129,7 +129,7 @@ internal class Program
             if (!results.TryAdd(result.ApiName, result.Docs))
             {
                 // Prefer a more specific HelpLink if multiple results were returned.
-                if (!results[result.ApiName].HelpLink!.ToString().ToLower().Contains(result.ApiName.Replace(".", "-").ToLower()))
+                if (!results[result.ApiName].HelpLink!.ToString().ToLower().EndsWith(result.ApiName.Replace(".", "-").ToLower()))
                 {
                     results[result.ApiName] = result.Docs;
                 }
