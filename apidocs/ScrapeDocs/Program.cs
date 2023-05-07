@@ -26,11 +26,12 @@ using YamlDotNet.RepresentationModel;
 internal class Program
 {
     private static readonly Regex TitlePattern = new(@"([^\s\(]+)", RegexOptions.Compiled);
+    private static readonly Regex ApiNamePattern = new(@"^# ([^\s\(]+)", RegexOptions.Compiled);
     private static readonly Regex ParametersHeaderPattern = new(@"^## Parameters", RegexOptions.Compiled);
     private static readonly Regex ParameterHeaderPattern = new(@"^### -param (\w+)", RegexOptions.Compiled);
     private static readonly Regex MembersHeaderPattern = new(@"^## Members", RegexOptions.Compiled);
     private static readonly Regex FieldHeaderPattern = new(@"^### -field (?:\w+\.)*(\w+)", RegexOptions.Compiled);
-    private static readonly Regex ParameterMemberPattern = new(@"^([\*{1,2}`])(\w+)\1", RegexOptions.Compiled);
+    private static readonly Regex ParameterMemberPattern = new(@"^\s?(([\*`_])\2?)(\w+)\1", RegexOptions.Compiled);
     private static readonly Regex ReturnHeaderPattern = new(@"^## (-returns|Return [vV]alues?)", RegexOptions.Compiled);
     private static readonly Regex RemarksHeaderPattern = new(@"^## (-remarks|Remarks)", RegexOptions.Compiled);
     private static readonly Regex InlineCodeTag = new(@"\<code\>(.*)\</code\>", RegexOptions.Compiled);
@@ -41,6 +42,7 @@ internal class Program
     private static readonly Dictionary<string, string> BaseUris = new()
     {
         { @"/ext/Console-Docs/docs", @"https://docs.microsoft.com/windows/console/" },
+        { @"/ext/office-developer-client-docs/docs", @"https://docs.microsoft.com/office/client-developer/" },
         { @"/ext/sdk-api/sdk-api-src/content", @"https://docs.microsoft.com/windows/win32/api/" },
         { @"/ext/Virtualization-Documentation", @"https://docs.microsoft.com/" },
         { @"/ext/win32/desktop-src", @"https://docs.microsoft.com/windows/win32/" },
@@ -274,7 +276,13 @@ internal class Program
             line = mdFileReader.ReadLine();
             while (line is not null)
             {
-                if (ParametersHeaderPattern.Match(line) is Match { Success: true } parametersMatch)
+                if (ApiNamePattern.Match(line) is Match { Success: true } apiNameMatch)
+                {
+                    apiName = apiNameMatch.Groups[1].Value.Replace("::", ".");
+
+                    line = mdFileReader.ReadLine();
+                }
+                else if (ParametersHeaderPattern.Match(line) is Match { Success: true } parametersMatch)
                 {
                     ParseSection(parametersMatch, apiDetails.Parameters, lookForParameterEnums: true);
                 }
@@ -371,7 +379,7 @@ internal class Program
                                 docBuilder.Clear();
                             }
 
-                            sectionName = parameterMemberMatch.Groups[2].Value;
+                            sectionName = parameterMemberMatch.Groups[3].Value;
 
                             continue;
                         }

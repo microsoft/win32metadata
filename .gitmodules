@@ -2,6 +2,10 @@
 	path = ext/Console-Docs
 	url = https://github.com/MicrosoftDocs/Console-Docs
 	shallow = true
+[submodule "ext/office-developer-client-docs"]
+	path = ext/office-developer-client-docs
+	url = https://github.com/MicrosoftDocs/office-developer-client-docs
+	shallow = true
 [submodule "ext/sdk-api"]
 	path = ext/sdk-api
 	url = https://github.com/MicrosoftDocs/sdk-api
