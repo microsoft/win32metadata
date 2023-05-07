@@ -280,7 +280,7 @@ internal class Program
                 {
                     var headerApiName = apiNameMatch.Groups[3].Value.Replace("::", ".").Replace("\\", string.Empty);
 
-                    if (apiName.Contains('.') && !headerApiName.Contains('.'))
+                    if ((apiName.Contains('.') && !headerApiName.Contains('.')) || headerApiName.Contains('*'))
                     {
                         line = mdFileReader.ReadLine();
                     }
