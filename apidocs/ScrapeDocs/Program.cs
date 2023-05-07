@@ -48,7 +48,7 @@ internal class Program
         { @"/ext/win32/desktop-src", @"https://docs.microsoft.com/windows/win32/" },
     };
 
-    private static readonly string ExcludedContentPattern = @"(ADSchema|CIMWin32Prov|DMWmiBridgeProv|gdiplus|HyperV_v2|Midl\b|SecAuthZ|TermServ|WmiCoreProv|WmiSdk|index\.md|TOC\.md)";
+    private static readonly string ExcludedContentPattern = @"(ADSchema|CIMWin32Prov|delivery_optimization|DMWmiBridgeProv|gdiplus|HyperV_v2|Midl\b|SecAuthZ|TermServ|WmiCoreProv|WmiSdk|index\.md|TOC\.md)";
 
     private readonly string contentBasePaths;
     private readonly string outputPath;
