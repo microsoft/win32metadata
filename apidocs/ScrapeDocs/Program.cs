@@ -27,13 +27,13 @@ internal class Program
 {
     private static readonly Regex TitlePattern = new(@"([^\s\(]+)", RegexOptions.Compiled);
     private static readonly Regex ApiNamePattern = new(@"^# (<(\w+)[\s>].*</\2>)?\s*([^\s\(]+)", RegexOptions.Compiled);
-    private static readonly Regex ParametersHeaderPattern = new(@"^## Parameters", RegexOptions.Compiled);
+    private static readonly Regex ParametersHeaderPattern = new(@"^## (Parameters|Arguments)", RegexOptions.Compiled);
     private static readonly Regex ParameterHeaderPattern = new(@"^### -param (\w+)", RegexOptions.Compiled);
     private static readonly Regex MembersHeaderPattern = new(@"^## Members", RegexOptions.Compiled);
     private static readonly Regex FieldHeaderPattern = new(@"^### -field (?:\w+\.)*(\w+)", RegexOptions.Compiled);
     private static readonly Regex ParameterMemberPattern = new(@"^\s?(([\*`_])\2?)(\w+)\1", RegexOptions.Compiled);
-    private static readonly Regex ReturnHeaderPattern = new(@"^## (-returns|Return [vV]alues?)", RegexOptions.Compiled);
-    private static readonly Regex RemarksHeaderPattern = new(@"^## (-remarks|Remarks)", RegexOptions.Compiled);
+    private static readonly Regex ReturnHeaderPattern = new(@"^## (-returns|Return [vV]alues?|Returns)", RegexOptions.Compiled);
+    private static readonly Regex RemarksHeaderPattern = new(@"^## (-remarks|Remarks|Comments)", RegexOptions.Compiled);
     private static readonly Regex InlineCodeTag = new(@"\<code\>(.*)\</code\>", RegexOptions.Compiled);
     private static readonly Regex EnumNameCell = new(@"\<td[^\>]*\>\<a id=""([^""]+)""", RegexOptions.Compiled);
     private static readonly Regex EnumOrdinalValue = new(@"\<dt\>([\dxa-f]+)\<\/dt\>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -44,6 +44,7 @@ internal class Program
         { @"/ext/Console-Docs/docs", @"https://docs.microsoft.com/windows/console/" },
         { @"/ext/office-developer-client-docs/docs", @"https://docs.microsoft.com/office/client-developer/" },
         { @"/ext/sdk-api/sdk-api-src/content", @"https://docs.microsoft.com/windows/win32/api/" },
+        { @"/ext/sql-docs/docs", @"https://docs.microsoft.com/sql/" },
         { @"/ext/Virtualization-Documentation", @"https://docs.microsoft.com/" },
         { @"/ext/win32/desktop-src", @"https://docs.microsoft.com/windows/win32/" },
     };
@@ -365,7 +366,7 @@ internal class Program
 
             void ParseSection(Match match, IDictionary<string, string> receivingMap, bool lookForParameterEnums = false, bool lookForFieldEnums = false)
             {
-                if (match.Value == "## Parameters" || match.Value == "## Members")
+                if (match.Value == "## Parameters" || match.Value == "## Arguments" || match.Value == "## Members")
                 {
                     string sectionName = string.Empty;
                     while ((line = mdFileReader.ReadLine()) is not null)

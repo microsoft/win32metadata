@@ -10,6 +10,10 @@
 	path = ext/sdk-api
 	url = https://github.com/MicrosoftDocs/sdk-api
 	shallow = true
+[submodule "ext/sql-docs"]
+	path = ext/sql-docs
+	url = https://github.com/MicrosoftDocs/sql-docs
+	shallow = true
 [submodule "ext/Virtualization-Documentation"]
 	path = ext/Virtualization-Documentation
 	url = https://github.com/MicrosoftDocs/Virtualization-Documentation
