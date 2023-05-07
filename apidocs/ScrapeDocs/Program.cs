@@ -25,7 +25,6 @@ using YamlDotNet.RepresentationModel;
 /// </summary>
 internal class Program
 {
-    private static readonly Regex FileNamePattern = new(@"^\w\w-\w+-([\w\-]+)$", RegexOptions.Compiled);
     private static readonly Regex TitlePattern = new(@"([^\s\(]+)", RegexOptions.Compiled);
     private static readonly Regex ParametersHeaderPattern = new(@"^## Parameters", RegexOptions.Compiled);
     private static readonly Regex ParameterHeaderPattern = new(@"^### -param (\w+)", RegexOptions.Compiled);
