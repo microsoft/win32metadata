@@ -325,40 +325,31 @@ internal class Program
             }
 
             var result = new List<(string ApiName, ApiDetails Docs, IReadOnlyDictionary<string, DocEnum> EnumsByParameter, IReadOnlyDictionary<string, DocEnum> EnumsByField)>();
-            if (apiNames is not null)
+            if (apiNames is not null && apiNames.Children.Contains(apiName))
             {
-                var firstMethodName = apiNames.Children.Cast<YamlScalarNode>().FirstOrDefault()?.Value;
-
-                if (firstMethodName == apiName)
+                // If api_names includes variants of the base API, create mappings for each.
+                // Example: ext/win32/desktop-src/printdocs/addprinter.md
+                foreach (var methodName in apiNames.Children.Cast<YamlScalarNode>())
                 {
-                    // If api_names includes variants of the base API, create mappings for each.
-                    // Example: ext/win32/desktop-src/printdocs/addprinter.md
-                    foreach (var methodName in apiNames.Children.Cast<YamlScalarNode>())
+                    if (methodName.Value! == apiName)
                     {
-                        if (methodName.Value! == firstMethodName)
-                        {
-                            result.Add((methodName.Value!, apiDetails, enumsByParameter, enumsByField));
-                        }
-                        else
-                        {
-                            var fixedMethodName = methodName.Value!.StartsWith("_") ? methodName.Value![1..] : methodName.Value!;
+                        result.Add((methodName.Value!, apiDetails, enumsByParameter, enumsByField));
+                    }
+                    else
+                    {
+                        var fixedMethodName = methodName.Value!.StartsWith("_") ? methodName.Value![1..] : methodName.Value!;
 
-                            if (!fixedMethodName.StartsWith(@"?"))
-                            {
-                                result.Add((fixedMethodName, apiDetails, enumsByParameter, enumsByField));
-                            }
+                        if (!fixedMethodName.StartsWith(@"?"))
+                        {
+                            result.Add((fixedMethodName, apiDetails, enumsByParameter, enumsByField));
                         }
                     }
-                }
-                else
-                {
-                    // If api_names doesn't include the base API, create a mapping just for the base API.
-                    // Example: ext/win32/desktop-src/Controls/em-getfileline.md
-                    result.Add((apiName!, apiDetails, enumsByParameter, enumsByField));
                 }
             }
             else
             {
+                // If api_names doesn't include the base API, create a mapping just for the base API.
+                // Example: ext/win32/desktop-src/Controls/em-getfileline.md
                 result.Add((apiName!, apiDetails, enumsByParameter, enumsByField));
             }
 
