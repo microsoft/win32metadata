@@ -1,5 +1,4 @@
 --traverse
-<IncludeRoot>/um/atlthunk.h
 <IncludeRoot>/um/heapapi.h
 <IncludeRoot>/um/memoryapi.h
 --namespace

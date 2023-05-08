@@ -3827,3 +3827,8 @@ Windows.Win32.UI.WindowsAndMessaging.Apis.SetAdditionalForegroundBoostProcesses 
 Windows.Win32.UI.WindowsAndMessaging.TOOLTIP_DISMISS_FLAGS :  => [Documentation(https://docs.microsoft.com/windows/win32/api/winuser/ne-winuser-tooltip_dismiss_flags)]
 Windows.Win32.UI.Wpf.IMILBitmapEffectConnectorInfo.GetIndex :  => [Documentation(https://docs.microsoft.com/windows/win32/api/mileffects/nf-mileffects-imilbitmapeffectconnectorinfo-getindex)]
 Windows.Win32.UI.Xaml.Diagnostics.IVisualTreeService2.GetPropertyIndex :  => [Documentation(https://docs.microsoft.com/windows/win32/api/xamlom/nf-xamlom-ivisualtreeservice2-getpropertyindex)]
+# Fixed #1567.
+Windows.Win32.System.Memory.Apis.AtlThunk_AllocateData removed
+Windows.Win32.System.Memory.Apis.AtlThunk_DataToCode removed
+Windows.Win32.System.Memory.Apis.AtlThunk_FreeData removed
+Windows.Win32.System.Memory.Apis.AtlThunk_InitData removed
