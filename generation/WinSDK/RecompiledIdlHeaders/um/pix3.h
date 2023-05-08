@@ -55,12 +55,12 @@ union PIXCaptureParameters
         Memory = 0,
     };
 
-    struct GpuCaptureParameters
+    struct
     {
         PCWSTR FileName;
     } GpuCaptureParameters;
 
-    struct TimingCaptureParameters
+    struct
     {
         PCWSTR FileName;
         UINT32 MaximumToolingMemorySizeMb;
