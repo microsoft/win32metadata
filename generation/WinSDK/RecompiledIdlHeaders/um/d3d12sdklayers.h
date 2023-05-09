@@ -1,15 +1,10 @@
-/*-------------------------------------------------------------------------------------
- *
- * Copyright (c) Microsoft Corporation
- * Licensed under the MIT license
- *
- *-------------------------------------------------------------------------------------*/
 
 
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
  /* File created by MIDL compiler version 8.01.0628 */
+/* @@MIDL_FILE_HEADING(  ) */
 
 
 
@@ -242,7 +237,9 @@ EXTERN_C const IID IID_ID3D12Debug;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12Debug * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -345,7 +342,9 @@ EXTERN_C const IID IID_ID3D12Debug1;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12Debug1 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -443,7 +442,9 @@ EXTERN_C const IID IID_ID3D12Debug2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12Debug2 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -532,7 +533,9 @@ EXTERN_C const IID IID_ID3D12Debug3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12Debug3 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -638,7 +641,9 @@ EXTERN_C const IID IID_ID3D12Debug4;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12Debug4 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -753,7 +758,9 @@ EXTERN_C const IID IID_ID3D12Debug5;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12Debug5 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -877,7 +884,9 @@ EXTERN_C const IID IID_ID3D12Debug6;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12Debug6 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -1068,11 +1077,13 @@ EXTERN_C const IID IID_ID3D12DebugDevice1;
     public:
         virtual HRESULT STDMETHODCALLTYPE SetDebugParameter( 
             D3D12_DEBUG_DEVICE_PARAMETER_TYPE Type,
+            /* [annotation] */ 
             _In_reads_bytes_(DataSize)  const void *pData,
             UINT DataSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDebugParameter( 
             D3D12_DEBUG_DEVICE_PARAMETER_TYPE Type,
+            /* [annotation] */ 
             _Out_writes_bytes_(DataSize)  void *pData,
             UINT DataSize) = 0;
         
@@ -1091,7 +1102,9 @@ EXTERN_C const IID IID_ID3D12DebugDevice1;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12DebugDevice1 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -1106,6 +1119,7 @@ EXTERN_C const IID IID_ID3D12DebugDevice1;
         HRESULT ( STDMETHODCALLTYPE *SetDebugParameter )( 
             ID3D12DebugDevice1 * This,
             D3D12_DEBUG_DEVICE_PARAMETER_TYPE Type,
+            /* [annotation] */ 
             _In_reads_bytes_(DataSize)  const void *pData,
             UINT DataSize);
         
@@ -1113,6 +1127,7 @@ EXTERN_C const IID IID_ID3D12DebugDevice1;
         HRESULT ( STDMETHODCALLTYPE *GetDebugParameter )( 
             ID3D12DebugDevice1 * This,
             D3D12_DEBUG_DEVICE_PARAMETER_TYPE Type,
+            /* [annotation] */ 
             _Out_writes_bytes_(DataSize)  void *pData,
             UINT DataSize);
         
@@ -1199,7 +1214,9 @@ EXTERN_C const IID IID_ID3D12DebugDevice;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12DebugDevice * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -1284,11 +1301,13 @@ EXTERN_C const IID IID_ID3D12DebugDevice2;
     public:
         virtual HRESULT STDMETHODCALLTYPE SetDebugParameter( 
             D3D12_DEBUG_DEVICE_PARAMETER_TYPE Type,
+            /* [annotation] */ 
             _In_reads_bytes_(DataSize)  const void *pData,
             UINT DataSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDebugParameter( 
             D3D12_DEBUG_DEVICE_PARAMETER_TYPE Type,
+            /* [annotation] */ 
             _Out_writes_bytes_(DataSize)  void *pData,
             UINT DataSize) = 0;
         
@@ -1304,7 +1323,9 @@ EXTERN_C const IID IID_ID3D12DebugDevice2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12DebugDevice2 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -1333,6 +1354,7 @@ EXTERN_C const IID IID_ID3D12DebugDevice2;
         HRESULT ( STDMETHODCALLTYPE *SetDebugParameter )( 
             ID3D12DebugDevice2 * This,
             D3D12_DEBUG_DEVICE_PARAMETER_TYPE Type,
+            /* [annotation] */ 
             _In_reads_bytes_(DataSize)  const void *pData,
             UINT DataSize);
         
@@ -1340,6 +1362,7 @@ EXTERN_C const IID IID_ID3D12DebugDevice2;
         HRESULT ( STDMETHODCALLTYPE *GetDebugParameter )( 
             ID3D12DebugDevice2 * This,
             D3D12_DEBUG_DEVICE_PARAMETER_TYPE Type,
+            /* [annotation] */ 
             _Out_writes_bytes_(DataSize)  void *pData,
             UINT DataSize);
         
@@ -1418,6 +1441,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandQueue;
     {
     public:
         virtual BOOL STDMETHODCALLTYPE AssertResourceState( 
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
             UINT Subresource,
             UINT State) = 0;
@@ -1434,7 +1458,9 @@ EXTERN_C const IID IID_ID3D12DebugCommandQueue;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12DebugCommandQueue * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -1448,6 +1474,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandQueue;
         DECLSPEC_XFGVIRT(ID3D12DebugCommandQueue, AssertResourceState)
         BOOL ( STDMETHODCALLTYPE *AssertResourceState )( 
             ID3D12DebugCommandQueue * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
             UINT Subresource,
             UINT State);
@@ -1505,11 +1532,13 @@ EXTERN_C const IID IID_ID3D12DebugCommandQueue1;
     {
     public:
         virtual void STDMETHODCALLTYPE AssertResourceAccess( 
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
             UINT Subresource,
             D3D12_BARRIER_ACCESS Access) = 0;
         
         virtual void STDMETHODCALLTYPE AssertTextureLayout( 
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
             UINT Subresource,
             D3D12_BARRIER_LAYOUT Layout) = 0;
@@ -1526,7 +1555,9 @@ EXTERN_C const IID IID_ID3D12DebugCommandQueue1;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12DebugCommandQueue1 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -1540,6 +1571,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandQueue1;
         DECLSPEC_XFGVIRT(ID3D12DebugCommandQueue, AssertResourceState)
         BOOL ( STDMETHODCALLTYPE *AssertResourceState )( 
             ID3D12DebugCommandQueue1 * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
             UINT Subresource,
             UINT State);
@@ -1547,6 +1579,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandQueue1;
         DECLSPEC_XFGVIRT(ID3D12DebugCommandQueue1, AssertResourceAccess)
         void ( STDMETHODCALLTYPE *AssertResourceAccess )( 
             ID3D12DebugCommandQueue1 * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
             UINT Subresource,
             D3D12_BARRIER_ACCESS Access);
@@ -1554,6 +1587,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandQueue1;
         DECLSPEC_XFGVIRT(ID3D12DebugCommandQueue1, AssertTextureLayout)
         void ( STDMETHODCALLTYPE *AssertTextureLayout )( 
             ID3D12DebugCommandQueue1 * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
             UINT Subresource,
             D3D12_BARRIER_LAYOUT Layout);
@@ -1637,17 +1671,20 @@ EXTERN_C const IID IID_ID3D12DebugCommandList1;
     {
     public:
         virtual BOOL STDMETHODCALLTYPE AssertResourceState( 
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
             UINT Subresource,
             UINT State) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDebugParameter( 
             D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE Type,
+            /* [annotation] */ 
             _In_reads_bytes_(DataSize)  const void *pData,
             UINT DataSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDebugParameter( 
             D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE Type,
+            /* [annotation] */ 
             _Out_writes_bytes_(DataSize)  void *pData,
             UINT DataSize) = 0;
         
@@ -1663,7 +1700,9 @@ EXTERN_C const IID IID_ID3D12DebugCommandList1;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12DebugCommandList1 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -1677,6 +1716,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandList1;
         DECLSPEC_XFGVIRT(ID3D12DebugCommandList1, AssertResourceState)
         BOOL ( STDMETHODCALLTYPE *AssertResourceState )( 
             ID3D12DebugCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
             UINT Subresource,
             UINT State);
@@ -1685,6 +1725,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandList1;
         HRESULT ( STDMETHODCALLTYPE *SetDebugParameter )( 
             ID3D12DebugCommandList1 * This,
             D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE Type,
+            /* [annotation] */ 
             _In_reads_bytes_(DataSize)  const void *pData,
             UINT DataSize);
         
@@ -1692,6 +1733,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandList1;
         HRESULT ( STDMETHODCALLTYPE *GetDebugParameter )( 
             ID3D12DebugCommandList1 * This,
             D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE Type,
+            /* [annotation] */ 
             _Out_writes_bytes_(DataSize)  void *pData,
             UINT DataSize);
         
@@ -1754,6 +1796,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandList;
     {
     public:
         virtual BOOL STDMETHODCALLTYPE AssertResourceState( 
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
             UINT Subresource,
             UINT State) = 0;
@@ -1775,7 +1818,9 @@ EXTERN_C const IID IID_ID3D12DebugCommandList;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12DebugCommandList * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -1789,6 +1834,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandList;
         DECLSPEC_XFGVIRT(ID3D12DebugCommandList, AssertResourceState)
         BOOL ( STDMETHODCALLTYPE *AssertResourceState )( 
             ID3D12DebugCommandList * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
             UINT Subresource,
             UINT State);
@@ -1862,11 +1908,13 @@ EXTERN_C const IID IID_ID3D12DebugCommandList2;
     public:
         virtual HRESULT STDMETHODCALLTYPE SetDebugParameter( 
             D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE Type,
+            /* [annotation] */ 
             _In_reads_bytes_(DataSize)  const void *pData,
             UINT DataSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDebugParameter( 
             D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE Type,
+            /* [annotation] */ 
             _Out_writes_bytes_(DataSize)  void *pData,
             UINT DataSize) = 0;
         
@@ -1882,7 +1930,9 @@ EXTERN_C const IID IID_ID3D12DebugCommandList2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12DebugCommandList2 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -1896,6 +1946,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandList2;
         DECLSPEC_XFGVIRT(ID3D12DebugCommandList, AssertResourceState)
         BOOL ( STDMETHODCALLTYPE *AssertResourceState )( 
             ID3D12DebugCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
             UINT Subresource,
             UINT State);
@@ -1913,6 +1964,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandList2;
         HRESULT ( STDMETHODCALLTYPE *SetDebugParameter )( 
             ID3D12DebugCommandList2 * This,
             D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE Type,
+            /* [annotation] */ 
             _In_reads_bytes_(DataSize)  const void *pData,
             UINT DataSize);
         
@@ -1920,6 +1972,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandList2;
         HRESULT ( STDMETHODCALLTYPE *GetDebugParameter )( 
             ID3D12DebugCommandList2 * This,
             D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE Type,
+            /* [annotation] */ 
             _Out_writes_bytes_(DataSize)  void *pData,
             UINT DataSize);
         
@@ -1989,11 +2042,13 @@ EXTERN_C const IID IID_ID3D12DebugCommandList3;
     {
     public:
         virtual void STDMETHODCALLTYPE AssertResourceAccess( 
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
             UINT Subresource,
             D3D12_BARRIER_ACCESS Access) = 0;
         
         virtual void STDMETHODCALLTYPE AssertTextureLayout( 
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
             UINT Subresource,
             D3D12_BARRIER_LAYOUT Layout) = 0;
@@ -2010,7 +2065,9 @@ EXTERN_C const IID IID_ID3D12DebugCommandList3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12DebugCommandList3 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -2024,6 +2081,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandList3;
         DECLSPEC_XFGVIRT(ID3D12DebugCommandList, AssertResourceState)
         BOOL ( STDMETHODCALLTYPE *AssertResourceState )( 
             ID3D12DebugCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
             UINT Subresource,
             UINT State);
@@ -2041,6 +2099,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandList3;
         HRESULT ( STDMETHODCALLTYPE *SetDebugParameter )( 
             ID3D12DebugCommandList3 * This,
             D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE Type,
+            /* [annotation] */ 
             _In_reads_bytes_(DataSize)  const void *pData,
             UINT DataSize);
         
@@ -2048,12 +2107,14 @@ EXTERN_C const IID IID_ID3D12DebugCommandList3;
         HRESULT ( STDMETHODCALLTYPE *GetDebugParameter )( 
             ID3D12DebugCommandList3 * This,
             D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE Type,
+            /* [annotation] */ 
             _Out_writes_bytes_(DataSize)  void *pData,
             UINT DataSize);
         
         DECLSPEC_XFGVIRT(ID3D12DebugCommandList3, AssertResourceAccess)
         void ( STDMETHODCALLTYPE *AssertResourceAccess )( 
             ID3D12DebugCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
             UINT Subresource,
             D3D12_BARRIER_ACCESS Access);
@@ -2061,6 +2122,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandList3;
         DECLSPEC_XFGVIRT(ID3D12DebugCommandList3, AssertTextureLayout)
         void ( STDMETHODCALLTYPE *AssertTextureLayout )( 
             ID3D12DebugCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
             UINT Subresource,
             D3D12_BARRIER_LAYOUT Layout);
@@ -2138,18 +2200,23 @@ EXTERN_C const IID IID_ID3D12SharingContract;
     {
     public:
         virtual void STDMETHODCALLTYPE Present( 
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
             UINT Subresource,
+            /* [annotation] */ 
             _In_  HWND window) = 0;
         
         virtual void STDMETHODCALLTYPE SharedFenceSignal( 
+            /* [annotation] */ 
             _In_  ID3D12Fence *pFence,
             UINT64 FenceValue) = 0;
         
         virtual void STDMETHODCALLTYPE BeginCapturableWork( 
+            /* [annotation] */ 
             _In_  REFGUID guid) = 0;
         
         virtual void STDMETHODCALLTYPE EndCapturableWork( 
+            /* [annotation] */ 
             _In_  REFGUID guid) = 0;
         
     };
@@ -2164,7 +2231,9 @@ EXTERN_C const IID IID_ID3D12SharingContract;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12SharingContract * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -2178,24 +2247,29 @@ EXTERN_C const IID IID_ID3D12SharingContract;
         DECLSPEC_XFGVIRT(ID3D12SharingContract, Present)
         void ( STDMETHODCALLTYPE *Present )( 
             ID3D12SharingContract * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
             UINT Subresource,
+            /* [annotation] */ 
             _In_  HWND window);
         
         DECLSPEC_XFGVIRT(ID3D12SharingContract, SharedFenceSignal)
         void ( STDMETHODCALLTYPE *SharedFenceSignal )( 
             ID3D12SharingContract * This,
+            /* [annotation] */ 
             _In_  ID3D12Fence *pFence,
             UINT64 FenceValue);
         
         DECLSPEC_XFGVIRT(ID3D12SharingContract, BeginCapturableWork)
         void ( STDMETHODCALLTYPE *BeginCapturableWork )( 
             ID3D12SharingContract * This,
+            /* [annotation] */ 
             _In_  REFGUID guid);
         
         DECLSPEC_XFGVIRT(ID3D12SharingContract, EndCapturableWork)
         void ( STDMETHODCALLTYPE *EndCapturableWork )( 
             ID3D12SharingContract * This,
+            /* [annotation] */ 
             _In_  REFGUID guid);
         
         END_INTERFACE
@@ -2261,6 +2335,7 @@ EXTERN_C const IID IID_ID3D12ManualWriteTrackingResource;
     public:
         virtual void STDMETHODCALLTYPE TrackWrite( 
             UINT Subresource,
+            /* [annotation] */ 
             _In_opt_  const D3D12_RANGE *pWrittenRange) = 0;
         
     };
@@ -2275,7 +2350,9 @@ EXTERN_C const IID IID_ID3D12ManualWriteTrackingResource;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12ManualWriteTrackingResource * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -2290,6 +2367,7 @@ EXTERN_C const IID IID_ID3D12ManualWriteTrackingResource;
         void ( STDMETHODCALLTYPE *TrackWrite )( 
             ID3D12ManualWriteTrackingResource * This,
             UINT Subresource,
+            /* [annotation] */ 
             _In_opt_  const D3D12_RANGE *pWrittenRange);
         
         END_INTERFACE
@@ -3311,17 +3389,21 @@ typedef struct D3D12_MESSAGE
     D3D12_MESSAGE_CATEGORY Category;
     D3D12_MESSAGE_SEVERITY Severity;
     D3D12_MESSAGE_ID ID;
-    _Field_size_(DescriptionByteLength)  const char *pDescription;
+    /* [annotation] */ 
+    _Field_size_(DescriptionByteLength)  const unsigned char *pDescription;
     SIZE_T DescriptionByteLength;
     } 	D3D12_MESSAGE;
 
 typedef struct D3D12_INFO_QUEUE_FILTER_DESC
     {
     UINT NumCategories;
+    /* [annotation] */ 
     _Field_size_(NumCategories)  D3D12_MESSAGE_CATEGORY *pCategoryList;
     UINT NumSeverities;
+    /* [annotation] */ 
     _Field_size_(NumSeverities)  D3D12_MESSAGE_SEVERITY *pSeverityList;
     UINT NumIDs;
+    /* [annotation] */ 
     _Field_size_(NumIDs)  D3D12_MESSAGE_ID *pIDList;
     } 	D3D12_INFO_QUEUE_FILTER_DESC;
 
@@ -3353,13 +3435,17 @@ EXTERN_C const IID IID_ID3D12InfoQueue;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetMessageCountLimit( 
+            /* [annotation] */ 
             _In_  UINT64 MessageCountLimit) = 0;
         
         virtual void STDMETHODCALLTYPE ClearStoredMessages( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMessage( 
+            /* [annotation] */ 
             _In_  UINT64 MessageIndex,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_(*pMessageByteLength)  D3D12_MESSAGE *pMessage,
+            /* [annotation] */ 
             _Inout_  SIZE_T *pMessageByteLength) = 0;
         
         virtual UINT64 STDMETHODCALLTYPE GetNumMessagesAllowedByStorageFilter( void) = 0;
@@ -3375,10 +3461,13 @@ EXTERN_C const IID IID_ID3D12InfoQueue;
         virtual UINT64 STDMETHODCALLTYPE GetMessageCountLimit( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddStorageFilterEntries( 
+            /* [annotation] */ 
             _In_  D3D12_INFO_QUEUE_FILTER *pFilter) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStorageFilter( 
+            /* [annotation] */ 
             _Out_writes_bytes_opt_(*pFilterByteLength)  D3D12_INFO_QUEUE_FILTER *pFilter,
+            /* [annotation] */ 
             _Inout_  SIZE_T *pFilterByteLength) = 0;
         
         virtual void STDMETHODCALLTYPE ClearStorageFilter( void) = 0;
@@ -3388,6 +3477,7 @@ EXTERN_C const IID IID_ID3D12InfoQueue;
         virtual HRESULT STDMETHODCALLTYPE PushCopyOfStorageFilter( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PushStorageFilter( 
+            /* [annotation] */ 
             _In_  D3D12_INFO_QUEUE_FILTER *pFilter) = 0;
         
         virtual void STDMETHODCALLTYPE PopStorageFilter( void) = 0;
@@ -3395,10 +3485,13 @@ EXTERN_C const IID IID_ID3D12InfoQueue;
         virtual UINT STDMETHODCALLTYPE GetStorageFilterStackSize( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddRetrievalFilterEntries( 
+            /* [annotation] */ 
             _In_  D3D12_INFO_QUEUE_FILTER *pFilter) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRetrievalFilter( 
+            /* [annotation] */ 
             _Out_writes_bytes_opt_(*pFilterByteLength)  D3D12_INFO_QUEUE_FILTER *pFilter,
+            /* [annotation] */ 
             _Inout_  SIZE_T *pFilterByteLength) = 0;
         
         virtual void STDMETHODCALLTYPE ClearRetrievalFilter( void) = 0;
@@ -3408,6 +3501,7 @@ EXTERN_C const IID IID_ID3D12InfoQueue;
         virtual HRESULT STDMETHODCALLTYPE PushCopyOfRetrievalFilter( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PushRetrievalFilter( 
+            /* [annotation] */ 
             _In_  D3D12_INFO_QUEUE_FILTER *pFilter) = 0;
         
         virtual void STDMETHODCALLTYPE PopRetrievalFilter( void) = 0;
@@ -3415,37 +3509,53 @@ EXTERN_C const IID IID_ID3D12InfoQueue;
         virtual UINT STDMETHODCALLTYPE GetRetrievalFilterStackSize( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddMessage( 
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_CATEGORY Category,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_SEVERITY Severity,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_ID ID,
+            /* [annotation] */ 
             _In_  LPCSTR pDescription) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddApplicationMessage( 
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_SEVERITY Severity,
+            /* [annotation] */ 
             _In_  LPCSTR pDescription) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetBreakOnCategory( 
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_CATEGORY Category,
+            /* [annotation] */ 
             _In_  BOOL bEnable) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetBreakOnSeverity( 
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_SEVERITY Severity,
+            /* [annotation] */ 
             _In_  BOOL bEnable) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetBreakOnID( 
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_ID ID,
+            /* [annotation] */ 
             _In_  BOOL bEnable) = 0;
         
         virtual BOOL STDMETHODCALLTYPE GetBreakOnCategory( 
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_CATEGORY Category) = 0;
         
         virtual BOOL STDMETHODCALLTYPE GetBreakOnSeverity( 
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_SEVERITY Severity) = 0;
         
         virtual BOOL STDMETHODCALLTYPE GetBreakOnID( 
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_ID ID) = 0;
         
         virtual void STDMETHODCALLTYPE SetMuteDebugOutput( 
+            /* [annotation] */ 
             _In_  BOOL bMute) = 0;
         
         virtual BOOL STDMETHODCALLTYPE GetMuteDebugOutput( void) = 0;
@@ -3462,7 +3572,9 @@ EXTERN_C const IID IID_ID3D12InfoQueue;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12InfoQueue * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -3476,6 +3588,7 @@ EXTERN_C const IID IID_ID3D12InfoQueue;
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, SetMessageCountLimit)
         HRESULT ( STDMETHODCALLTYPE *SetMessageCountLimit )( 
             ID3D12InfoQueue * This,
+            /* [annotation] */ 
             _In_  UINT64 MessageCountLimit);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, ClearStoredMessages)
@@ -3485,8 +3598,11 @@ EXTERN_C const IID IID_ID3D12InfoQueue;
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, GetMessage)
         HRESULT ( STDMETHODCALLTYPE *GetMessage )( 
             ID3D12InfoQueue * This,
+            /* [annotation] */ 
             _In_  UINT64 MessageIndex,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_(*pMessageByteLength)  D3D12_MESSAGE *pMessage,
+            /* [annotation] */ 
             _Inout_  SIZE_T *pMessageByteLength);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, GetNumMessagesAllowedByStorageFilter)
@@ -3516,12 +3632,15 @@ EXTERN_C const IID IID_ID3D12InfoQueue;
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, AddStorageFilterEntries)
         HRESULT ( STDMETHODCALLTYPE *AddStorageFilterEntries )( 
             ID3D12InfoQueue * This,
+            /* [annotation] */ 
             _In_  D3D12_INFO_QUEUE_FILTER *pFilter);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, GetStorageFilter)
         HRESULT ( STDMETHODCALLTYPE *GetStorageFilter )( 
             ID3D12InfoQueue * This,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_(*pFilterByteLength)  D3D12_INFO_QUEUE_FILTER *pFilter,
+            /* [annotation] */ 
             _Inout_  SIZE_T *pFilterByteLength);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, ClearStorageFilter)
@@ -3539,6 +3658,7 @@ EXTERN_C const IID IID_ID3D12InfoQueue;
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, PushStorageFilter)
         HRESULT ( STDMETHODCALLTYPE *PushStorageFilter )( 
             ID3D12InfoQueue * This,
+            /* [annotation] */ 
             _In_  D3D12_INFO_QUEUE_FILTER *pFilter);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, PopStorageFilter)
@@ -3552,12 +3672,15 @@ EXTERN_C const IID IID_ID3D12InfoQueue;
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, AddRetrievalFilterEntries)
         HRESULT ( STDMETHODCALLTYPE *AddRetrievalFilterEntries )( 
             ID3D12InfoQueue * This,
+            /* [annotation] */ 
             _In_  D3D12_INFO_QUEUE_FILTER *pFilter);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, GetRetrievalFilter)
         HRESULT ( STDMETHODCALLTYPE *GetRetrievalFilter )( 
             ID3D12InfoQueue * This,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_(*pFilterByteLength)  D3D12_INFO_QUEUE_FILTER *pFilter,
+            /* [annotation] */ 
             _Inout_  SIZE_T *pFilterByteLength);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, ClearRetrievalFilter)
@@ -3575,6 +3698,7 @@ EXTERN_C const IID IID_ID3D12InfoQueue;
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, PushRetrievalFilter)
         HRESULT ( STDMETHODCALLTYPE *PushRetrievalFilter )( 
             ID3D12InfoQueue * This,
+            /* [annotation] */ 
             _In_  D3D12_INFO_QUEUE_FILTER *pFilter);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, PopRetrievalFilter)
@@ -3588,53 +3712,69 @@ EXTERN_C const IID IID_ID3D12InfoQueue;
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, AddMessage)
         HRESULT ( STDMETHODCALLTYPE *AddMessage )( 
             ID3D12InfoQueue * This,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_CATEGORY Category,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_SEVERITY Severity,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_ID ID,
+            /* [annotation] */ 
             _In_  LPCSTR pDescription);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, AddApplicationMessage)
         HRESULT ( STDMETHODCALLTYPE *AddApplicationMessage )( 
             ID3D12InfoQueue * This,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_SEVERITY Severity,
+            /* [annotation] */ 
             _In_  LPCSTR pDescription);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, SetBreakOnCategory)
         HRESULT ( STDMETHODCALLTYPE *SetBreakOnCategory )( 
             ID3D12InfoQueue * This,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_CATEGORY Category,
+            /* [annotation] */ 
             _In_  BOOL bEnable);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, SetBreakOnSeverity)
         HRESULT ( STDMETHODCALLTYPE *SetBreakOnSeverity )( 
             ID3D12InfoQueue * This,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_SEVERITY Severity,
+            /* [annotation] */ 
             _In_  BOOL bEnable);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, SetBreakOnID)
         HRESULT ( STDMETHODCALLTYPE *SetBreakOnID )( 
             ID3D12InfoQueue * This,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_ID ID,
+            /* [annotation] */ 
             _In_  BOOL bEnable);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, GetBreakOnCategory)
         BOOL ( STDMETHODCALLTYPE *GetBreakOnCategory )( 
             ID3D12InfoQueue * This,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_CATEGORY Category);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, GetBreakOnSeverity)
         BOOL ( STDMETHODCALLTYPE *GetBreakOnSeverity )( 
             ID3D12InfoQueue * This,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_SEVERITY Severity);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, GetBreakOnID)
         BOOL ( STDMETHODCALLTYPE *GetBreakOnID )( 
             ID3D12InfoQueue * This,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_ID ID);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, SetMuteDebugOutput)
         void ( STDMETHODCALLTYPE *SetMuteDebugOutput )( 
             ID3D12InfoQueue * This,
+            /* [annotation] */ 
             _In_  BOOL bMute);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, GetMuteDebugOutput)
@@ -3819,12 +3959,17 @@ EXTERN_C const IID IID_ID3D12InfoQueue1;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RegisterMessageCallback( 
+            /* [annotation] */ 
             _In_  D3D12MessageFunc CallbackFunc,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_CALLBACK_FLAGS CallbackFilterFlags,
+            /* [annotation] */ 
             _In_  void *pContext,
+            /* [annotation] */ 
             _Inout_  DWORD *pCallbackCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnregisterMessageCallback( 
+            /* [annotation] */ 
             _In_  DWORD CallbackCookie) = 0;
         
     };
@@ -3839,7 +3984,9 @@ EXTERN_C const IID IID_ID3D12InfoQueue1;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12InfoQueue1 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -3853,6 +4000,7 @@ EXTERN_C const IID IID_ID3D12InfoQueue1;
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, SetMessageCountLimit)
         HRESULT ( STDMETHODCALLTYPE *SetMessageCountLimit )( 
             ID3D12InfoQueue1 * This,
+            /* [annotation] */ 
             _In_  UINT64 MessageCountLimit);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, ClearStoredMessages)
@@ -3862,8 +4010,11 @@ EXTERN_C const IID IID_ID3D12InfoQueue1;
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, GetMessage)
         HRESULT ( STDMETHODCALLTYPE *GetMessage )( 
             ID3D12InfoQueue1 * This,
+            /* [annotation] */ 
             _In_  UINT64 MessageIndex,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_(*pMessageByteLength)  D3D12_MESSAGE *pMessage,
+            /* [annotation] */ 
             _Inout_  SIZE_T *pMessageByteLength);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, GetNumMessagesAllowedByStorageFilter)
@@ -3893,12 +4044,15 @@ EXTERN_C const IID IID_ID3D12InfoQueue1;
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, AddStorageFilterEntries)
         HRESULT ( STDMETHODCALLTYPE *AddStorageFilterEntries )( 
             ID3D12InfoQueue1 * This,
+            /* [annotation] */ 
             _In_  D3D12_INFO_QUEUE_FILTER *pFilter);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, GetStorageFilter)
         HRESULT ( STDMETHODCALLTYPE *GetStorageFilter )( 
             ID3D12InfoQueue1 * This,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_(*pFilterByteLength)  D3D12_INFO_QUEUE_FILTER *pFilter,
+            /* [annotation] */ 
             _Inout_  SIZE_T *pFilterByteLength);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, ClearStorageFilter)
@@ -3916,6 +4070,7 @@ EXTERN_C const IID IID_ID3D12InfoQueue1;
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, PushStorageFilter)
         HRESULT ( STDMETHODCALLTYPE *PushStorageFilter )( 
             ID3D12InfoQueue1 * This,
+            /* [annotation] */ 
             _In_  D3D12_INFO_QUEUE_FILTER *pFilter);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, PopStorageFilter)
@@ -3929,12 +4084,15 @@ EXTERN_C const IID IID_ID3D12InfoQueue1;
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, AddRetrievalFilterEntries)
         HRESULT ( STDMETHODCALLTYPE *AddRetrievalFilterEntries )( 
             ID3D12InfoQueue1 * This,
+            /* [annotation] */ 
             _In_  D3D12_INFO_QUEUE_FILTER *pFilter);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, GetRetrievalFilter)
         HRESULT ( STDMETHODCALLTYPE *GetRetrievalFilter )( 
             ID3D12InfoQueue1 * This,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_(*pFilterByteLength)  D3D12_INFO_QUEUE_FILTER *pFilter,
+            /* [annotation] */ 
             _Inout_  SIZE_T *pFilterByteLength);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, ClearRetrievalFilter)
@@ -3952,6 +4110,7 @@ EXTERN_C const IID IID_ID3D12InfoQueue1;
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, PushRetrievalFilter)
         HRESULT ( STDMETHODCALLTYPE *PushRetrievalFilter )( 
             ID3D12InfoQueue1 * This,
+            /* [annotation] */ 
             _In_  D3D12_INFO_QUEUE_FILTER *pFilter);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, PopRetrievalFilter)
@@ -3965,53 +4124,69 @@ EXTERN_C const IID IID_ID3D12InfoQueue1;
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, AddMessage)
         HRESULT ( STDMETHODCALLTYPE *AddMessage )( 
             ID3D12InfoQueue1 * This,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_CATEGORY Category,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_SEVERITY Severity,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_ID ID,
+            /* [annotation] */ 
             _In_  LPCSTR pDescription);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, AddApplicationMessage)
         HRESULT ( STDMETHODCALLTYPE *AddApplicationMessage )( 
             ID3D12InfoQueue1 * This,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_SEVERITY Severity,
+            /* [annotation] */ 
             _In_  LPCSTR pDescription);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, SetBreakOnCategory)
         HRESULT ( STDMETHODCALLTYPE *SetBreakOnCategory )( 
             ID3D12InfoQueue1 * This,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_CATEGORY Category,
+            /* [annotation] */ 
             _In_  BOOL bEnable);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, SetBreakOnSeverity)
         HRESULT ( STDMETHODCALLTYPE *SetBreakOnSeverity )( 
             ID3D12InfoQueue1 * This,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_SEVERITY Severity,
+            /* [annotation] */ 
             _In_  BOOL bEnable);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, SetBreakOnID)
         HRESULT ( STDMETHODCALLTYPE *SetBreakOnID )( 
             ID3D12InfoQueue1 * This,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_ID ID,
+            /* [annotation] */ 
             _In_  BOOL bEnable);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, GetBreakOnCategory)
         BOOL ( STDMETHODCALLTYPE *GetBreakOnCategory )( 
             ID3D12InfoQueue1 * This,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_CATEGORY Category);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, GetBreakOnSeverity)
         BOOL ( STDMETHODCALLTYPE *GetBreakOnSeverity )( 
             ID3D12InfoQueue1 * This,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_SEVERITY Severity);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, GetBreakOnID)
         BOOL ( STDMETHODCALLTYPE *GetBreakOnID )( 
             ID3D12InfoQueue1 * This,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_ID ID);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, SetMuteDebugOutput)
         void ( STDMETHODCALLTYPE *SetMuteDebugOutput )( 
             ID3D12InfoQueue1 * This,
+            /* [annotation] */ 
             _In_  BOOL bMute);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue, GetMuteDebugOutput)
@@ -4021,14 +4196,19 @@ EXTERN_C const IID IID_ID3D12InfoQueue1;
         DECLSPEC_XFGVIRT(ID3D12InfoQueue1, RegisterMessageCallback)
         HRESULT ( STDMETHODCALLTYPE *RegisterMessageCallback )( 
             ID3D12InfoQueue1 * This,
+            /* [annotation] */ 
             _In_  D3D12MessageFunc CallbackFunc,
+            /* [annotation] */ 
             _In_  D3D12_MESSAGE_CALLBACK_FLAGS CallbackFilterFlags,
+            /* [annotation] */ 
             _In_  void *pContext,
+            /* [annotation] */ 
             _Inout_  DWORD *pCallbackCookie);
         
         DECLSPEC_XFGVIRT(ID3D12InfoQueue1, UnregisterMessageCallback)
         HRESULT ( STDMETHODCALLTYPE *UnregisterMessageCallback )( 
             ID3D12InfoQueue1 * This,
+            /* [annotation] */ 
             _In_  DWORD CallbackCookie);
         
         END_INTERFACE

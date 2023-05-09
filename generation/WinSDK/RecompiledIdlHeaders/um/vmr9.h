@@ -2492,8 +2492,8 @@ EXTERN_C const IID IID_IVMRDeinterlaceControl9;
         virtual HRESULT STDMETHODCALLTYPE GetNumberOfDeinterlaceModes( 
             /* [annotation][in] */ 
             _In_  VMR9VideoDesc *lpVideoDescription,
-            /* [annotation][out][annotation][in] */ 
-            _Out_  LPDWORD lpdwNumDeinterlaceModes,
+            /* [annotation][out][in] */ 
+            _Inout_  LPDWORD lpdwNumDeinterlaceModes,
             /* [annotation][out] */ 
             _Out_  LPGUID lpDeinterlaceModes) = 0;
         
@@ -2561,8 +2561,8 @@ EXTERN_C const IID IID_IVMRDeinterlaceControl9;
             IVMRDeinterlaceControl9 * This,
             /* [annotation][in] */ 
             _In_  VMR9VideoDesc *lpVideoDescription,
-            /* [annotation][out][annotation][in] */ 
-            _Out_  LPDWORD lpdwNumDeinterlaceModes,
+            /* [annotation][out][in] */ 
+            _Inout_  LPDWORD lpdwNumDeinterlaceModes,
             /* [annotation][out] */ 
             _Out_  LPGUID lpDeinterlaceModes);
         

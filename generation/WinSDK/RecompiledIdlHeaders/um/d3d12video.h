@@ -1,15 +1,10 @@
-/*-------------------------------------------------------------------------------------
- *
- * Copyright (c) Microsoft Corporation
- * Licensed under the MIT license
- *
- *-------------------------------------------------------------------------------------*/
 
 
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
  /* File created by MIDL compiler version 8.01.0628 */
+/* @@MIDL_FILE_HEADING(  ) */
 
 
 
@@ -491,12 +486,7 @@ EXTERN_C const IID IID_ID3D12VideoDecoderHeap;
     ID3D12VideoDecoderHeap : public ID3D12Pageable
     {
     public:
-#if defined(_MSC_VER) || !defined(_WIN32)
         virtual D3D12_VIDEO_DECODER_HEAP_DESC STDMETHODCALLTYPE GetDesc( void) = 0;
-#else
-        virtual D3D12_VIDEO_DECODER_HEAP_DESC *STDMETHODCALLTYPE GetDesc( 
-            D3D12_VIDEO_DECODER_HEAP_DESC * RetVal) = 0;
-#endif
         
     };
     
@@ -510,7 +500,9 @@ EXTERN_C const IID IID_ID3D12VideoDecoderHeap;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoDecoderHeap * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -524,45 +516,48 @@ EXTERN_C const IID IID_ID3D12VideoDecoderHeap;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoDecoderHeap * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoDecoderHeap * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoDecoderHeap * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoDecoderHeap * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoDecoderHeap * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecoderHeap, GetDesc)
-#if !defined(_WIN32)
         D3D12_VIDEO_DECODER_HEAP_DESC ( STDMETHODCALLTYPE *GetDesc )( 
             ID3D12VideoDecoderHeap * This);
-        
-#else
-        D3D12_VIDEO_DECODER_HEAP_DESC *( STDMETHODCALLTYPE *GetDesc )( 
-            ID3D12VideoDecoderHeap * This,
-            D3D12_VIDEO_DECODER_HEAP_DESC * RetVal);
-        
-#endif
         
         END_INTERFACE
     } ID3D12VideoDecoderHeapVtbl;
@@ -604,20 +599,26 @@ EXTERN_C const IID IID_ID3D12VideoDecoderHeap;
     ( (This)->lpVtbl -> GetDevice(This,riid,ppvDevice) ) 
 
 
-#if !defined(_WIN32)
 
 #define ID3D12VideoDecoderHeap_GetDesc(This)	\
     ( (This)->lpVtbl -> GetDesc(This) ) 
-#else
-#define ID3D12VideoDecoderHeap_GetDesc(This,RetVal)	\
-    ( (This)->lpVtbl -> GetDesc(This,RetVal) ) 
-#endif
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
+
+
+D3D12_VIDEO_DECODER_HEAP_DESC STDMETHODCALLTYPE ID3D12VideoDecoderHeap_GetDesc_Proxy( 
+    ID3D12VideoDecoderHeap * This);
+
+
+void __RPC_STUB ID3D12VideoDecoderHeap_GetDesc_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
 
 
 
@@ -641,25 +642,36 @@ EXTERN_C const IID IID_ID3D12VideoDevice;
     public:
         virtual HRESULT STDMETHODCALLTYPE CheckFeatureSupport( 
             D3D12_FEATURE_VIDEO FeatureVideo,
+            /* [annotation] */ 
             _Inout_updates_bytes_(FeatureSupportDataSize)  void *pFeatureSupportData,
             UINT FeatureSupportDataSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateVideoDecoder( 
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODER_DESC *pDesc,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoDecoder) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateVideoDecoderHeap( 
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODER_HEAP_DESC *pVideoDecoderHeapDesc,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoDecoderHeap) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateVideoProcessor( 
             UINT NodeMask,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC *pOutputStreamDesc,
             UINT NumInputStreamDescs,
+            /* [annotation] */ 
             _In_reads_(NumInputStreamDescs)  const D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC *pInputStreamDescs,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoProcessor) = 0;
         
     };
@@ -674,7 +686,9 @@ EXTERN_C const IID IID_ID3D12VideoDevice;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoDevice * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -689,31 +703,42 @@ EXTERN_C const IID IID_ID3D12VideoDevice;
         HRESULT ( STDMETHODCALLTYPE *CheckFeatureSupport )( 
             ID3D12VideoDevice * This,
             D3D12_FEATURE_VIDEO FeatureVideo,
+            /* [annotation] */ 
             _Inout_updates_bytes_(FeatureSupportDataSize)  void *pFeatureSupportData,
             UINT FeatureSupportDataSize);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice, CreateVideoDecoder)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoDecoder )( 
             ID3D12VideoDevice * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODER_DESC *pDesc,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoDecoder);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice, CreateVideoDecoderHeap)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoDecoderHeap )( 
             ID3D12VideoDevice * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODER_HEAP_DESC *pVideoDecoderHeapDesc,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoDecoderHeap);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice, CreateVideoProcessor)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoProcessor )( 
             ID3D12VideoDevice * This,
             UINT NodeMask,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC *pOutputStreamDesc,
             UINT NumInputStreamDescs,
+            /* [annotation] */ 
             _In_reads_(NumInputStreamDescs)  const D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC *pInputStreamDescs,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoProcessor);
         
         END_INTERFACE
@@ -777,12 +802,7 @@ EXTERN_C const IID IID_ID3D12VideoDecoder;
     ID3D12VideoDecoder : public ID3D12Pageable
     {
     public:
-#if defined(_MSC_VER) || !defined(_WIN32)
         virtual D3D12_VIDEO_DECODER_DESC STDMETHODCALLTYPE GetDesc( void) = 0;
-#else
-        virtual D3D12_VIDEO_DECODER_DESC *STDMETHODCALLTYPE GetDesc( 
-            D3D12_VIDEO_DECODER_DESC * RetVal) = 0;
-#endif
         
     };
     
@@ -796,7 +816,9 @@ EXTERN_C const IID IID_ID3D12VideoDecoder;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoDecoder * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -810,45 +832,48 @@ EXTERN_C const IID IID_ID3D12VideoDecoder;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoDecoder * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoDecoder * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoDecoder * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoDecoder * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoDecoder * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecoder, GetDesc)
-#if !defined(_WIN32)
         D3D12_VIDEO_DECODER_DESC ( STDMETHODCALLTYPE *GetDesc )( 
             ID3D12VideoDecoder * This);
-        
-#else
-        D3D12_VIDEO_DECODER_DESC *( STDMETHODCALLTYPE *GetDesc )( 
-            ID3D12VideoDecoder * This,
-            D3D12_VIDEO_DECODER_DESC * RetVal);
-        
-#endif
         
         END_INTERFACE
     } ID3D12VideoDecoderVtbl;
@@ -890,20 +915,26 @@ EXTERN_C const IID IID_ID3D12VideoDecoder;
     ( (This)->lpVtbl -> GetDevice(This,riid,ppvDevice) ) 
 
 
-#if !defined(_WIN32)
 
 #define ID3D12VideoDecoder_GetDesc(This)	\
     ( (This)->lpVtbl -> GetDesc(This) ) 
-#else
-#define ID3D12VideoDecoder_GetDesc(This,RetVal)	\
-    ( (This)->lpVtbl -> GetDesc(This,RetVal) ) 
-#endif
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
+
+
+D3D12_VIDEO_DECODER_DESC STDMETHODCALLTYPE ID3D12VideoDecoder_GetDesc_Proxy( 
+    ID3D12VideoDecoder * This);
+
+
+void __RPC_STUB ID3D12VideoDecoder_GetDesc_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
 
 
 
@@ -984,6 +1015,7 @@ typedef struct D3D12_FEATURE_DATA_VIDEO_DECODE_PROFILES
     {
     UINT NodeIndex;
     UINT ProfileCount;
+    /* [annotation] */ 
     _Field_size_full_(ProfileCount)  GUID *pProfiles;
     } 	D3D12_FEATURE_DATA_VIDEO_DECODE_PROFILES;
 
@@ -999,6 +1031,7 @@ typedef struct D3D12_FEATURE_DATA_VIDEO_DECODE_FORMATS
     UINT NodeIndex;
     D3D12_VIDEO_DECODE_CONFIGURATION Configuration;
     UINT FormatCount;
+    /* [annotation] */ 
     _Field_size_full_(FormatCount)  DXGI_FORMAT *pOutputFormats;
     } 	D3D12_FEATURE_DATA_VIDEO_DECODE_FORMATS;
 
@@ -1109,14 +1142,18 @@ typedef struct D3D12_VIDEO_DECODE_FRAME_ARGUMENT
     {
     D3D12_VIDEO_DECODE_ARGUMENT_TYPE Type;
     UINT Size;
+    /* [annotation] */ 
     _Field_size_bytes_full_(Size)  void *pData;
     } 	D3D12_VIDEO_DECODE_FRAME_ARGUMENT;
 
 typedef struct D3D12_VIDEO_DECODE_REFERENCE_FRAMES
     {
     UINT NumTexture2Ds;
+    /* [annotation] */ 
     _Field_size_full_(NumTexture2Ds)  ID3D12Resource **ppTexture2Ds;
+    /* [annotation] */ 
     _Field_size_full_(NumTexture2Ds)  UINT *pSubresources;
+    /* [annotation] */ 
     _Field_size_full_opt_(NumTexture2Ds)  ID3D12VideoDecoderHeap **ppHeaps;
     } 	D3D12_VIDEO_DECODE_REFERENCE_FRAMES;
 
@@ -1178,14 +1215,10 @@ EXTERN_C const IID IID_ID3D12VideoProcessor;
         
         virtual HRESULT STDMETHODCALLTYPE GetInputStreamDescs( 
             UINT NumInputStreamDescs,
+            /* [annotation] */ 
             _Out_writes_(NumInputStreamDescs)  D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC *pInputStreamDescs) = 0;
         
-#if defined(_MSC_VER) || !defined(_WIN32)
         virtual D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC STDMETHODCALLTYPE GetOutputStreamDesc( void) = 0;
-#else
-        virtual D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC *STDMETHODCALLTYPE GetOutputStreamDesc( 
-            D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC * RetVal) = 0;
-#endif
         
     };
     
@@ -1199,7 +1232,9 @@ EXTERN_C const IID IID_ID3D12VideoProcessor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoProcessor * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -1213,32 +1248,43 @@ EXTERN_C const IID IID_ID3D12VideoProcessor;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoProcessor * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoProcessor * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoProcessor * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoProcessor * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoProcessor * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessor, GetNodeMask)
@@ -1253,19 +1299,12 @@ EXTERN_C const IID IID_ID3D12VideoProcessor;
         HRESULT ( STDMETHODCALLTYPE *GetInputStreamDescs )( 
             ID3D12VideoProcessor * This,
             UINT NumInputStreamDescs,
+            /* [annotation] */ 
             _Out_writes_(NumInputStreamDescs)  D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC *pInputStreamDescs);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessor, GetOutputStreamDesc)
-#if !defined(_WIN32)
         D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC ( STDMETHODCALLTYPE *GetOutputStreamDesc )( 
             ID3D12VideoProcessor * This);
-        
-#else
-        D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC *( STDMETHODCALLTYPE *GetOutputStreamDesc )( 
-            ID3D12VideoProcessor * This,
-            D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC * RetVal);
-        
-#endif
         
         END_INTERFACE
     } ID3D12VideoProcessorVtbl;
@@ -1316,20 +1355,26 @@ EXTERN_C const IID IID_ID3D12VideoProcessor;
 
 #define ID3D12VideoProcessor_GetInputStreamDescs(This,NumInputStreamDescs,pInputStreamDescs)	\
     ( (This)->lpVtbl -> GetInputStreamDescs(This,NumInputStreamDescs,pInputStreamDescs) ) 
-#if !defined(_WIN32)
 
 #define ID3D12VideoProcessor_GetOutputStreamDesc(This)	\
     ( (This)->lpVtbl -> GetOutputStreamDesc(This) ) 
-#else
-#define ID3D12VideoProcessor_GetOutputStreamDesc(This,RetVal)	\
-    ( (This)->lpVtbl -> GetOutputStreamDesc(This,RetVal) ) 
-#endif
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
+
+
+D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC STDMETHODCALLTYPE ID3D12VideoProcessor_GetOutputStreamDesc_Proxy( 
+    ID3D12VideoProcessor * This);
+
+
+void __RPC_STUB ID3D12VideoProcessor_GetOutputStreamDesc_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
 
 
 
@@ -1520,61 +1565,88 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList;
         virtual HRESULT STDMETHODCALLTYPE Close( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( 
+            /* [annotation] */ 
             _In_  ID3D12CommandAllocator *pAllocator) = 0;
         
         virtual void STDMETHODCALLTYPE ClearState( void) = 0;
         
         virtual void STDMETHODCALLTYPE ResourceBarrier( 
+            /* [annotation] */ 
             _In_  UINT NumBarriers,
+            /* [annotation] */ 
             _In_reads_(NumBarriers)  const D3D12_RESOURCE_BARRIER *pBarriers) = 0;
         
         virtual void STDMETHODCALLTYPE DiscardResource( 
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
+            /* [annotation] */ 
             _In_opt_  const D3D12_DISCARD_REGION *pRegion) = 0;
         
         virtual void STDMETHODCALLTYPE BeginQuery( 
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index) = 0;
         
         virtual void STDMETHODCALLTYPE EndQuery( 
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index) = 0;
         
         virtual void STDMETHODCALLTYPE ResolveQueryData( 
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT StartIndex,
+            /* [annotation] */ 
             _In_  UINT NumQueries,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pDestinationBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedDestinationBufferOffset) = 0;
         
         virtual void STDMETHODCALLTYPE SetPredication( 
+            /* [annotation] */ 
             _In_opt_  ID3D12Resource *pBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedBufferOffset,
+            /* [annotation] */ 
             _In_  D3D12_PREDICATION_OP Operation) = 0;
         
         virtual void STDMETHODCALLTYPE SetMarker( 
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size) = 0;
         
         virtual void STDMETHODCALLTYPE BeginEvent( 
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size) = 0;
         
         virtual void STDMETHODCALLTYPE EndEvent( void) = 0;
         
         virtual void STDMETHODCALLTYPE DecodeFrame( 
+            /* [annotation] */ 
             _In_  ID3D12VideoDecoder *pDecoder,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS *pOutputArguments,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS *pInputArguments) = 0;
         
         virtual void STDMETHODCALLTYPE WriteBufferImmediate( 
             UINT Count,
+            /* [annotation] */ 
             _In_reads_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_PARAMETER *pParams,
+            /* [annotation] */ 
             _In_reads_opt_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_MODE *pModes) = 0;
         
     };
@@ -1589,7 +1661,9 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoDecodeCommandList * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -1603,32 +1677,43 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoDecodeCommandList * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoDecodeCommandList * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoDecodeCommandList * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoDecodeCommandList * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoDecodeCommandList * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12CommandList, GetType)
@@ -1642,6 +1727,7 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList;
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             ID3D12VideoDecodeCommandList * This,
+            /* [annotation] */ 
             _In_  ID3D12CommandAllocator *pAllocator);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, ClearState)
@@ -1651,50 +1737,70 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList;
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, ResourceBarrier)
         void ( STDMETHODCALLTYPE *ResourceBarrier )( 
             ID3D12VideoDecodeCommandList * This,
+            /* [annotation] */ 
             _In_  UINT NumBarriers,
+            /* [annotation] */ 
             _In_reads_(NumBarriers)  const D3D12_RESOURCE_BARRIER *pBarriers);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, DiscardResource)
         void ( STDMETHODCALLTYPE *DiscardResource )( 
             ID3D12VideoDecodeCommandList * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
+            /* [annotation] */ 
             _In_opt_  const D3D12_DISCARD_REGION *pRegion);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, BeginQuery)
         void ( STDMETHODCALLTYPE *BeginQuery )( 
             ID3D12VideoDecodeCommandList * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, EndQuery)
         void ( STDMETHODCALLTYPE *EndQuery )( 
             ID3D12VideoDecodeCommandList * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, ResolveQueryData)
         void ( STDMETHODCALLTYPE *ResolveQueryData )( 
             ID3D12VideoDecodeCommandList * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT StartIndex,
+            /* [annotation] */ 
             _In_  UINT NumQueries,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pDestinationBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedDestinationBufferOffset);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, SetPredication)
         void ( STDMETHODCALLTYPE *SetPredication )( 
             ID3D12VideoDecodeCommandList * This,
+            /* [annotation] */ 
             _In_opt_  ID3D12Resource *pBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedBufferOffset,
+            /* [annotation] */ 
             _In_  D3D12_PREDICATION_OP Operation);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, SetMarker)
         void ( STDMETHODCALLTYPE *SetMarker )( 
             ID3D12VideoDecodeCommandList * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -1702,6 +1808,7 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList;
         void ( STDMETHODCALLTYPE *BeginEvent )( 
             ID3D12VideoDecodeCommandList * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -1712,15 +1819,20 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList;
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, DecodeFrame)
         void ( STDMETHODCALLTYPE *DecodeFrame )( 
             ID3D12VideoDecodeCommandList * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoDecoder *pDecoder,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS *pOutputArguments,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS *pInputArguments);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, WriteBufferImmediate)
         void ( STDMETHODCALLTYPE *WriteBufferImmediate )( 
             ID3D12VideoDecodeCommandList * This,
             UINT Count,
+            /* [annotation] */ 
             _In_reads_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_PARAMETER *pParams,
+            /* [annotation] */ 
             _In_reads_opt_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_MODE *pModes);
         
         END_INTERFACE
@@ -1838,62 +1950,89 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList;
         virtual HRESULT STDMETHODCALLTYPE Close( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( 
+            /* [annotation] */ 
             _In_  ID3D12CommandAllocator *pAllocator) = 0;
         
         virtual void STDMETHODCALLTYPE ClearState( void) = 0;
         
         virtual void STDMETHODCALLTYPE ResourceBarrier( 
+            /* [annotation] */ 
             _In_  UINT NumBarriers,
+            /* [annotation] */ 
             _In_reads_(NumBarriers)  const D3D12_RESOURCE_BARRIER *pBarriers) = 0;
         
         virtual void STDMETHODCALLTYPE DiscardResource( 
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
+            /* [annotation] */ 
             _In_opt_  const D3D12_DISCARD_REGION *pRegion) = 0;
         
         virtual void STDMETHODCALLTYPE BeginQuery( 
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index) = 0;
         
         virtual void STDMETHODCALLTYPE EndQuery( 
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index) = 0;
         
         virtual void STDMETHODCALLTYPE ResolveQueryData( 
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT StartIndex,
+            /* [annotation] */ 
             _In_  UINT NumQueries,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pDestinationBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedDestinationBufferOffset) = 0;
         
         virtual void STDMETHODCALLTYPE SetPredication( 
+            /* [annotation] */ 
             _In_opt_  ID3D12Resource *pBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedBufferOffset,
+            /* [annotation] */ 
             _In_  D3D12_PREDICATION_OP Operation) = 0;
         
         virtual void STDMETHODCALLTYPE SetMarker( 
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size) = 0;
         
         virtual void STDMETHODCALLTYPE BeginEvent( 
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size) = 0;
         
         virtual void STDMETHODCALLTYPE EndEvent( void) = 0;
         
         virtual void STDMETHODCALLTYPE ProcessFrames( 
+            /* [annotation] */ 
             _In_  ID3D12VideoProcessor *pVideoProcessor,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS *pOutputArguments,
             UINT NumInputStreams,
+            /* [annotation] */ 
             _In_reads_(NumInputStreams)  const D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS *pInputArguments) = 0;
         
         virtual void STDMETHODCALLTYPE WriteBufferImmediate( 
             UINT Count,
+            /* [annotation] */ 
             _In_reads_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_PARAMETER *pParams,
+            /* [annotation] */ 
             _In_reads_opt_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_MODE *pModes) = 0;
         
     };
@@ -1908,7 +2047,9 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoProcessCommandList * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -1922,32 +2063,43 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoProcessCommandList * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoProcessCommandList * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoProcessCommandList * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoProcessCommandList * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoProcessCommandList * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12CommandList, GetType)
@@ -1961,6 +2113,7 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList;
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             ID3D12VideoProcessCommandList * This,
+            /* [annotation] */ 
             _In_  ID3D12CommandAllocator *pAllocator);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, ClearState)
@@ -1970,50 +2123,70 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList;
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, ResourceBarrier)
         void ( STDMETHODCALLTYPE *ResourceBarrier )( 
             ID3D12VideoProcessCommandList * This,
+            /* [annotation] */ 
             _In_  UINT NumBarriers,
+            /* [annotation] */ 
             _In_reads_(NumBarriers)  const D3D12_RESOURCE_BARRIER *pBarriers);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, DiscardResource)
         void ( STDMETHODCALLTYPE *DiscardResource )( 
             ID3D12VideoProcessCommandList * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
+            /* [annotation] */ 
             _In_opt_  const D3D12_DISCARD_REGION *pRegion);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, BeginQuery)
         void ( STDMETHODCALLTYPE *BeginQuery )( 
             ID3D12VideoProcessCommandList * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, EndQuery)
         void ( STDMETHODCALLTYPE *EndQuery )( 
             ID3D12VideoProcessCommandList * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, ResolveQueryData)
         void ( STDMETHODCALLTYPE *ResolveQueryData )( 
             ID3D12VideoProcessCommandList * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT StartIndex,
+            /* [annotation] */ 
             _In_  UINT NumQueries,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pDestinationBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedDestinationBufferOffset);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, SetPredication)
         void ( STDMETHODCALLTYPE *SetPredication )( 
             ID3D12VideoProcessCommandList * This,
+            /* [annotation] */ 
             _In_opt_  ID3D12Resource *pBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedBufferOffset,
+            /* [annotation] */ 
             _In_  D3D12_PREDICATION_OP Operation);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, SetMarker)
         void ( STDMETHODCALLTYPE *SetMarker )( 
             ID3D12VideoProcessCommandList * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -2021,6 +2194,7 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList;
         void ( STDMETHODCALLTYPE *BeginEvent )( 
             ID3D12VideoProcessCommandList * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -2031,16 +2205,21 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList;
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, ProcessFrames)
         void ( STDMETHODCALLTYPE *ProcessFrames )( 
             ID3D12VideoProcessCommandList * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoProcessor *pVideoProcessor,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS *pOutputArguments,
             UINT NumInputStreams,
+            /* [annotation] */ 
             _In_reads_(NumInputStreams)  const D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS *pInputArguments);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, WriteBufferImmediate)
         void ( STDMETHODCALLTYPE *WriteBufferImmediate )( 
             ID3D12VideoProcessCommandList * This,
             UINT Count,
+            /* [annotation] */ 
             _In_reads_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_PARAMETER *pParams,
+            /* [annotation] */ 
             _In_reads_opt_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_MODE *pModes);
         
         END_INTERFACE
@@ -2189,8 +2368,11 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList1;
     {
     public:
         virtual void STDMETHODCALLTYPE DecodeFrame1( 
+            /* [annotation] */ 
             _In_  ID3D12VideoDecoder *pDecoder,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS1 *pOutputArguments,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS *pInputArguments) = 0;
         
     };
@@ -2205,7 +2387,9 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList1;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoDecodeCommandList1 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -2219,32 +2403,43 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList1;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoDecodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoDecodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoDecodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoDecodeCommandList1 * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoDecodeCommandList1 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12CommandList, GetType)
@@ -2258,6 +2453,7 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList1;
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             ID3D12VideoDecodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12CommandAllocator *pAllocator);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, ClearState)
@@ -2267,50 +2463,70 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList1;
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, ResourceBarrier)
         void ( STDMETHODCALLTYPE *ResourceBarrier )( 
             ID3D12VideoDecodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  UINT NumBarriers,
+            /* [annotation] */ 
             _In_reads_(NumBarriers)  const D3D12_RESOURCE_BARRIER *pBarriers);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, DiscardResource)
         void ( STDMETHODCALLTYPE *DiscardResource )( 
             ID3D12VideoDecodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
+            /* [annotation] */ 
             _In_opt_  const D3D12_DISCARD_REGION *pRegion);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, BeginQuery)
         void ( STDMETHODCALLTYPE *BeginQuery )( 
             ID3D12VideoDecodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, EndQuery)
         void ( STDMETHODCALLTYPE *EndQuery )( 
             ID3D12VideoDecodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, ResolveQueryData)
         void ( STDMETHODCALLTYPE *ResolveQueryData )( 
             ID3D12VideoDecodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT StartIndex,
+            /* [annotation] */ 
             _In_  UINT NumQueries,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pDestinationBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedDestinationBufferOffset);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, SetPredication)
         void ( STDMETHODCALLTYPE *SetPredication )( 
             ID3D12VideoDecodeCommandList1 * This,
+            /* [annotation] */ 
             _In_opt_  ID3D12Resource *pBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedBufferOffset,
+            /* [annotation] */ 
             _In_  D3D12_PREDICATION_OP Operation);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, SetMarker)
         void ( STDMETHODCALLTYPE *SetMarker )( 
             ID3D12VideoDecodeCommandList1 * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -2318,6 +2534,7 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList1;
         void ( STDMETHODCALLTYPE *BeginEvent )( 
             ID3D12VideoDecodeCommandList1 * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -2328,22 +2545,30 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList1;
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, DecodeFrame)
         void ( STDMETHODCALLTYPE *DecodeFrame )( 
             ID3D12VideoDecodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoDecoder *pDecoder,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS *pOutputArguments,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS *pInputArguments);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, WriteBufferImmediate)
         void ( STDMETHODCALLTYPE *WriteBufferImmediate )( 
             ID3D12VideoDecodeCommandList1 * This,
             UINT Count,
+            /* [annotation] */ 
             _In_reads_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_PARAMETER *pParams,
+            /* [annotation] */ 
             _In_reads_opt_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_MODE *pModes);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList1, DecodeFrame1)
         void ( STDMETHODCALLTYPE *DecodeFrame1 )( 
             ID3D12VideoDecodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoDecoder *pDecoder,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS1 *pOutputArguments,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS *pInputArguments);
         
         END_INTERFACE
@@ -2482,9 +2707,12 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList1;
     {
     public:
         virtual void STDMETHODCALLTYPE ProcessFrames1( 
+            /* [annotation] */ 
             _In_  ID3D12VideoProcessor *pVideoProcessor,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS *pOutputArguments,
             UINT NumInputStreams,
+            /* [annotation] */ 
             _In_reads_(NumInputStreams)  const D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS1 *pInputArguments) = 0;
         
     };
@@ -2499,7 +2727,9 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList1;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoProcessCommandList1 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -2513,32 +2743,43 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList1;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoProcessCommandList1 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoProcessCommandList1 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoProcessCommandList1 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoProcessCommandList1 * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoProcessCommandList1 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12CommandList, GetType)
@@ -2552,6 +2793,7 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList1;
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             ID3D12VideoProcessCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12CommandAllocator *pAllocator);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, ClearState)
@@ -2561,50 +2803,70 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList1;
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, ResourceBarrier)
         void ( STDMETHODCALLTYPE *ResourceBarrier )( 
             ID3D12VideoProcessCommandList1 * This,
+            /* [annotation] */ 
             _In_  UINT NumBarriers,
+            /* [annotation] */ 
             _In_reads_(NumBarriers)  const D3D12_RESOURCE_BARRIER *pBarriers);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, DiscardResource)
         void ( STDMETHODCALLTYPE *DiscardResource )( 
             ID3D12VideoProcessCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
+            /* [annotation] */ 
             _In_opt_  const D3D12_DISCARD_REGION *pRegion);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, BeginQuery)
         void ( STDMETHODCALLTYPE *BeginQuery )( 
             ID3D12VideoProcessCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, EndQuery)
         void ( STDMETHODCALLTYPE *EndQuery )( 
             ID3D12VideoProcessCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, ResolveQueryData)
         void ( STDMETHODCALLTYPE *ResolveQueryData )( 
             ID3D12VideoProcessCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT StartIndex,
+            /* [annotation] */ 
             _In_  UINT NumQueries,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pDestinationBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedDestinationBufferOffset);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, SetPredication)
         void ( STDMETHODCALLTYPE *SetPredication )( 
             ID3D12VideoProcessCommandList1 * This,
+            /* [annotation] */ 
             _In_opt_  ID3D12Resource *pBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedBufferOffset,
+            /* [annotation] */ 
             _In_  D3D12_PREDICATION_OP Operation);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, SetMarker)
         void ( STDMETHODCALLTYPE *SetMarker )( 
             ID3D12VideoProcessCommandList1 * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -2612,6 +2874,7 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList1;
         void ( STDMETHODCALLTYPE *BeginEvent )( 
             ID3D12VideoProcessCommandList1 * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -2622,24 +2885,32 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList1;
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, ProcessFrames)
         void ( STDMETHODCALLTYPE *ProcessFrames )( 
             ID3D12VideoProcessCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoProcessor *pVideoProcessor,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS *pOutputArguments,
             UINT NumInputStreams,
+            /* [annotation] */ 
             _In_reads_(NumInputStreams)  const D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS *pInputArguments);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, WriteBufferImmediate)
         void ( STDMETHODCALLTYPE *WriteBufferImmediate )( 
             ID3D12VideoProcessCommandList1 * This,
             UINT Count,
+            /* [annotation] */ 
             _In_reads_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_PARAMETER *pParams,
+            /* [annotation] */ 
             _In_reads_opt_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_MODE *pModes);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList1, ProcessFrames1)
         void ( STDMETHODCALLTYPE *ProcessFrames1 )( 
             ID3D12VideoProcessCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoProcessor *pVideoProcessor,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS *pOutputArguments,
             UINT NumInputStreams,
+            /* [annotation] */ 
             _In_reads_(NumInputStreams)  const D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS1 *pInputArguments);
         
         END_INTERFACE
@@ -2836,15 +3107,12 @@ EXTERN_C const IID IID_ID3D12VideoMotionEstimator;
     ID3D12VideoMotionEstimator : public ID3D12Pageable
     {
     public:
-#if defined(_MSC_VER) || !defined(_WIN32)
         virtual D3D12_VIDEO_MOTION_ESTIMATOR_DESC STDMETHODCALLTYPE GetDesc( void) = 0;
-#else
-        virtual D3D12_VIDEO_MOTION_ESTIMATOR_DESC *STDMETHODCALLTYPE GetDesc( 
-            D3D12_VIDEO_MOTION_ESTIMATOR_DESC * RetVal) = 0;
-#endif
         
         virtual HRESULT STDMETHODCALLTYPE GetProtectedResourceSession( 
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppProtectedSession) = 0;
         
     };
@@ -2859,7 +3127,9 @@ EXTERN_C const IID IID_ID3D12VideoMotionEstimator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoMotionEstimator * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -2873,50 +3143,55 @@ EXTERN_C const IID IID_ID3D12VideoMotionEstimator;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoMotionEstimator * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoMotionEstimator * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoMotionEstimator * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoMotionEstimator * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoMotionEstimator * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12VideoMotionEstimator, GetDesc)
-#if !defined(_WIN32)
         D3D12_VIDEO_MOTION_ESTIMATOR_DESC ( STDMETHODCALLTYPE *GetDesc )( 
             ID3D12VideoMotionEstimator * This);
-        
-#else
-        D3D12_VIDEO_MOTION_ESTIMATOR_DESC *( STDMETHODCALLTYPE *GetDesc )( 
-            ID3D12VideoMotionEstimator * This,
-            D3D12_VIDEO_MOTION_ESTIMATOR_DESC * RetVal);
-        
-#endif
         
         DECLSPEC_XFGVIRT(ID3D12VideoMotionEstimator, GetProtectedResourceSession)
         HRESULT ( STDMETHODCALLTYPE *GetProtectedResourceSession )( 
             ID3D12VideoMotionEstimator * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppProtectedSession);
         
         END_INTERFACE
@@ -2959,14 +3234,9 @@ EXTERN_C const IID IID_ID3D12VideoMotionEstimator;
     ( (This)->lpVtbl -> GetDevice(This,riid,ppvDevice) ) 
 
 
-#if !defined(_WIN32)
 
 #define ID3D12VideoMotionEstimator_GetDesc(This)	\
     ( (This)->lpVtbl -> GetDesc(This) ) 
-#else
-#define ID3D12VideoMotionEstimator_GetDesc(This,RetVal)	\
-    ( (This)->lpVtbl -> GetDesc(This,RetVal) ) 
-#endif
 
 #define ID3D12VideoMotionEstimator_GetProtectedResourceSession(This,riid,ppProtectedSession)	\
     ( (This)->lpVtbl -> GetProtectedResourceSession(This,riid,ppProtectedSession) ) 
@@ -2976,6 +3246,17 @@ EXTERN_C const IID IID_ID3D12VideoMotionEstimator;
 
 #endif 	/* C style interface */
 
+
+
+D3D12_VIDEO_MOTION_ESTIMATOR_DESC STDMETHODCALLTYPE ID3D12VideoMotionEstimator_GetDesc_Proxy( 
+    ID3D12VideoMotionEstimator * This);
+
+
+void __RPC_STUB ID3D12VideoMotionEstimator_GetDesc_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
 
 
 
@@ -3014,15 +3295,12 @@ EXTERN_C const IID IID_ID3D12VideoMotionVectorHeap;
     ID3D12VideoMotionVectorHeap : public ID3D12Pageable
     {
     public:
-#if defined(_MSC_VER) || !defined(_WIN32)
         virtual D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC STDMETHODCALLTYPE GetDesc( void) = 0;
-#else
-        virtual D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC *STDMETHODCALLTYPE GetDesc( 
-            D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC * RetVal) = 0;
-#endif
         
         virtual HRESULT STDMETHODCALLTYPE GetProtectedResourceSession( 
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppProtectedSession) = 0;
         
     };
@@ -3037,7 +3315,9 @@ EXTERN_C const IID IID_ID3D12VideoMotionVectorHeap;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoMotionVectorHeap * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -3051,50 +3331,55 @@ EXTERN_C const IID IID_ID3D12VideoMotionVectorHeap;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoMotionVectorHeap * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoMotionVectorHeap * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoMotionVectorHeap * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoMotionVectorHeap * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoMotionVectorHeap * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12VideoMotionVectorHeap, GetDesc)
-#if !defined(_WIN32)
         D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC ( STDMETHODCALLTYPE *GetDesc )( 
             ID3D12VideoMotionVectorHeap * This);
-        
-#else
-        D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC *( STDMETHODCALLTYPE *GetDesc )( 
-            ID3D12VideoMotionVectorHeap * This,
-            D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC * RetVal);
-        
-#endif
         
         DECLSPEC_XFGVIRT(ID3D12VideoMotionVectorHeap, GetProtectedResourceSession)
         HRESULT ( STDMETHODCALLTYPE *GetProtectedResourceSession )( 
             ID3D12VideoMotionVectorHeap * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppProtectedSession);
         
         END_INTERFACE
@@ -3137,14 +3422,9 @@ EXTERN_C const IID IID_ID3D12VideoMotionVectorHeap;
     ( (This)->lpVtbl -> GetDevice(This,riid,ppvDevice) ) 
 
 
-#if !defined(_WIN32)
 
 #define ID3D12VideoMotionVectorHeap_GetDesc(This)	\
     ( (This)->lpVtbl -> GetDesc(This) ) 
-#else
-#define ID3D12VideoMotionVectorHeap_GetDesc(This,RetVal)	\
-    ( (This)->lpVtbl -> GetDesc(This,RetVal) ) 
-#endif
 
 #define ID3D12VideoMotionVectorHeap_GetProtectedResourceSession(This,riid,ppProtectedSession)	\
     ( (This)->lpVtbl -> GetProtectedResourceSession(This,riid,ppProtectedSession) ) 
@@ -3154,6 +3434,17 @@ EXTERN_C const IID IID_ID3D12VideoMotionVectorHeap;
 
 #endif 	/* C style interface */
 
+
+
+D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC STDMETHODCALLTYPE ID3D12VideoMotionVectorHeap_GetDesc_Proxy( 
+    ID3D12VideoMotionVectorHeap * This);
+
+
+void __RPC_STUB ID3D12VideoMotionVectorHeap_GetDesc_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
 
 
 
@@ -3176,15 +3467,23 @@ EXTERN_C const IID IID_ID3D12VideoDevice1;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateVideoMotionEstimator( 
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_MOTION_ESTIMATOR_DESC *pDesc,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoMotionEstimator) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateVideoMotionVectorHeap( 
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC *pDesc,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoMotionVectorHeap) = 0;
         
     };
@@ -3199,7 +3498,9 @@ EXTERN_C const IID IID_ID3D12VideoDevice1;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoDevice1 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -3214,47 +3515,66 @@ EXTERN_C const IID IID_ID3D12VideoDevice1;
         HRESULT ( STDMETHODCALLTYPE *CheckFeatureSupport )( 
             ID3D12VideoDevice1 * This,
             D3D12_FEATURE_VIDEO FeatureVideo,
+            /* [annotation] */ 
             _Inout_updates_bytes_(FeatureSupportDataSize)  void *pFeatureSupportData,
             UINT FeatureSupportDataSize);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice, CreateVideoDecoder)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoDecoder )( 
             ID3D12VideoDevice1 * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODER_DESC *pDesc,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoDecoder);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice, CreateVideoDecoderHeap)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoDecoderHeap )( 
             ID3D12VideoDevice1 * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODER_HEAP_DESC *pVideoDecoderHeapDesc,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoDecoderHeap);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice, CreateVideoProcessor)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoProcessor )( 
             ID3D12VideoDevice1 * This,
             UINT NodeMask,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC *pOutputStreamDesc,
             UINT NumInputStreamDescs,
+            /* [annotation] */ 
             _In_reads_(NumInputStreamDescs)  const D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC *pInputStreamDescs,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoProcessor);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice1, CreateVideoMotionEstimator)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoMotionEstimator )( 
             ID3D12VideoDevice1 * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_MOTION_ESTIMATOR_DESC *pDesc,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoMotionEstimator);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice1, CreateVideoMotionVectorHeap)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoMotionVectorHeap )( 
             ID3D12VideoDevice1 * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC *pDesc,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoMotionVectorHeap);
         
         END_INTERFACE
@@ -3371,56 +3691,81 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList;
         virtual HRESULT STDMETHODCALLTYPE Close( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( 
+            /* [annotation] */ 
             _In_  ID3D12CommandAllocator *pAllocator) = 0;
         
         virtual void STDMETHODCALLTYPE ClearState( void) = 0;
         
         virtual void STDMETHODCALLTYPE ResourceBarrier( 
+            /* [annotation] */ 
             _In_  UINT NumBarriers,
+            /* [annotation] */ 
             _In_reads_(NumBarriers)  const D3D12_RESOURCE_BARRIER *pBarriers) = 0;
         
         virtual void STDMETHODCALLTYPE DiscardResource( 
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
+            /* [annotation] */ 
             _In_opt_  const D3D12_DISCARD_REGION *pRegion) = 0;
         
         virtual void STDMETHODCALLTYPE BeginQuery( 
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index) = 0;
         
         virtual void STDMETHODCALLTYPE EndQuery( 
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index) = 0;
         
         virtual void STDMETHODCALLTYPE ResolveQueryData( 
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT StartIndex,
+            /* [annotation] */ 
             _In_  UINT NumQueries,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pDestinationBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedDestinationBufferOffset) = 0;
         
         virtual void STDMETHODCALLTYPE SetPredication( 
+            /* [annotation] */ 
             _In_opt_  ID3D12Resource *pBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedBufferOffset,
+            /* [annotation] */ 
             _In_  D3D12_PREDICATION_OP Operation) = 0;
         
         virtual void STDMETHODCALLTYPE SetMarker( 
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size) = 0;
         
         virtual void STDMETHODCALLTYPE BeginEvent( 
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size) = 0;
         
         virtual void STDMETHODCALLTYPE EndEvent( void) = 0;
         
         virtual void STDMETHODCALLTYPE EstimateMotion( 
+            /* [annotation] */ 
             _In_  ID3D12VideoMotionEstimator *pMotionEstimator,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_MOTION_ESTIMATOR_OUTPUT *pOutputArguments,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_MOTION_ESTIMATOR_INPUT *pInputArguments) = 0;
         
         virtual void STDMETHODCALLTYPE ResolveMotionVectorHeap( 
@@ -3429,10 +3774,13 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList;
         
         virtual void STDMETHODCALLTYPE WriteBufferImmediate( 
             UINT Count,
+            /* [annotation] */ 
             _In_reads_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_PARAMETER *pParams,
+            /* [annotation] */ 
             _In_reads_opt_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_MODE *pModes) = 0;
         
         virtual void STDMETHODCALLTYPE SetProtectedResourceSession( 
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession) = 0;
         
     };
@@ -3447,7 +3795,9 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoEncodeCommandList * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -3461,32 +3811,43 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoEncodeCommandList * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoEncodeCommandList * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoEncodeCommandList * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoEncodeCommandList * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoEncodeCommandList * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12CommandList, GetType)
@@ -3500,6 +3861,7 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList;
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             ID3D12VideoEncodeCommandList * This,
+            /* [annotation] */ 
             _In_  ID3D12CommandAllocator *pAllocator);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, ClearState)
@@ -3509,50 +3871,70 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList;
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, ResourceBarrier)
         void ( STDMETHODCALLTYPE *ResourceBarrier )( 
             ID3D12VideoEncodeCommandList * This,
+            /* [annotation] */ 
             _In_  UINT NumBarriers,
+            /* [annotation] */ 
             _In_reads_(NumBarriers)  const D3D12_RESOURCE_BARRIER *pBarriers);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, DiscardResource)
         void ( STDMETHODCALLTYPE *DiscardResource )( 
             ID3D12VideoEncodeCommandList * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
+            /* [annotation] */ 
             _In_opt_  const D3D12_DISCARD_REGION *pRegion);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, BeginQuery)
         void ( STDMETHODCALLTYPE *BeginQuery )( 
             ID3D12VideoEncodeCommandList * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, EndQuery)
         void ( STDMETHODCALLTYPE *EndQuery )( 
             ID3D12VideoEncodeCommandList * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, ResolveQueryData)
         void ( STDMETHODCALLTYPE *ResolveQueryData )( 
             ID3D12VideoEncodeCommandList * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT StartIndex,
+            /* [annotation] */ 
             _In_  UINT NumQueries,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pDestinationBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedDestinationBufferOffset);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, SetPredication)
         void ( STDMETHODCALLTYPE *SetPredication )( 
             ID3D12VideoEncodeCommandList * This,
+            /* [annotation] */ 
             _In_opt_  ID3D12Resource *pBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedBufferOffset,
+            /* [annotation] */ 
             _In_  D3D12_PREDICATION_OP Operation);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, SetMarker)
         void ( STDMETHODCALLTYPE *SetMarker )( 
             ID3D12VideoEncodeCommandList * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -3560,6 +3942,7 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList;
         void ( STDMETHODCALLTYPE *BeginEvent )( 
             ID3D12VideoEncodeCommandList * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -3570,8 +3953,11 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList;
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, EstimateMotion)
         void ( STDMETHODCALLTYPE *EstimateMotion )( 
             ID3D12VideoEncodeCommandList * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoMotionEstimator *pMotionEstimator,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_MOTION_ESTIMATOR_OUTPUT *pOutputArguments,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_MOTION_ESTIMATOR_INPUT *pInputArguments);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, ResolveMotionVectorHeap)
@@ -3584,12 +3970,15 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList;
         void ( STDMETHODCALLTYPE *WriteBufferImmediate )( 
             ID3D12VideoEncodeCommandList * This,
             UINT Count,
+            /* [annotation] */ 
             _In_reads_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_PARAMETER *pParams,
+            /* [annotation] */ 
             _In_reads_opt_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_MODE *pModes);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, SetProtectedResourceSession)
         void ( STDMETHODCALLTYPE *SetProtectedResourceSession )( 
             ID3D12VideoEncodeCommandList * This,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession);
         
         END_INTERFACE
@@ -3798,6 +4187,7 @@ typedef struct D3D12_FEATURE_DATA_VIDEO_EXTENSION_COMMANDS
     {
     UINT NodeIndex;
     UINT CommandCount;
+    /* [annotation] */ 
     _Field_size_full_(CommandCount)  D3D12_VIDEO_EXTENSION_COMMAND_INFO *pCommandInfos;
     } 	D3D12_FEATURE_DATA_VIDEO_EXTENSION_COMMANDS;
 
@@ -3821,6 +4211,7 @@ typedef struct D3D12_FEATURE_DATA_VIDEO_EXTENSION_COMMAND_PARAMETERS
     GUID CommandId;
     D3D12_VIDEO_EXTENSION_COMMAND_PARAMETER_STAGE Stage;
     UINT ParameterCount;
+    /* [annotation] */ 
     _Field_size_full_(ParameterCount)  D3D12_VIDEO_EXTENSION_COMMAND_PARAMETER_INFO *pParameterInfos;
     } 	D3D12_FEATURE_DATA_VIDEO_EXTENSION_COMMAND_PARAMETERS;
 
@@ -3828,8 +4219,10 @@ typedef struct D3D12_FEATURE_DATA_VIDEO_EXTENSION_COMMAND_SUPPORT
     {
     UINT NodeIndex;
     GUID CommandId;
+    /* [annotation] */ 
     _Field_size_bytes_full_opt_(InputDataSizeInBytes)  const void *pInputData;
     SIZE_T InputDataSizeInBytes;
+    /* [annotation] */ 
     _Field_size_bytes_full_opt_(OutputDataSizeInBytes)  void *pOutputData;
     SIZE_T OutputDataSizeInBytes;
     } 	D3D12_FEATURE_DATA_VIDEO_EXTENSION_COMMAND_SUPPORT;
@@ -3838,6 +4231,7 @@ typedef struct D3D12_FEATURE_DATA_VIDEO_EXTENSION_COMMAND_SIZE
     {
     UINT NodeIndex;
     GUID CommandId;
+    /* [annotation] */ 
     _Field_size_bytes_full_(CreationParametersDataSizeInBytes)  const void *pCreationParameters;
     SIZE_T CreationParametersSizeInBytes;
     UINT64 MemoryPoolL0Size;
@@ -3871,7 +4265,9 @@ EXTERN_C const IID IID_ID3D12VideoDecoder1;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetProtectedResourceSession( 
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppProtectedSession) = 0;
         
     };
@@ -3886,7 +4282,9 @@ EXTERN_C const IID IID_ID3D12VideoDecoder1;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoDecoder1 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -3900,50 +4298,55 @@ EXTERN_C const IID IID_ID3D12VideoDecoder1;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoDecoder1 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoDecoder1 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoDecoder1 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoDecoder1 * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoDecoder1 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecoder, GetDesc)
-#if !defined(_WIN32)
         D3D12_VIDEO_DECODER_DESC ( STDMETHODCALLTYPE *GetDesc )( 
             ID3D12VideoDecoder1 * This);
-        
-#else
-        D3D12_VIDEO_DECODER_DESC *( STDMETHODCALLTYPE *GetDesc )( 
-            ID3D12VideoDecoder1 * This,
-            D3D12_VIDEO_DECODER_DESC * RetVal);
-        
-#endif
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecoder1, GetProtectedResourceSession)
         HRESULT ( STDMETHODCALLTYPE *GetProtectedResourceSession )( 
             ID3D12VideoDecoder1 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppProtectedSession);
         
         END_INTERFACE
@@ -3986,14 +4389,9 @@ EXTERN_C const IID IID_ID3D12VideoDecoder1;
     ( (This)->lpVtbl -> GetDevice(This,riid,ppvDevice) ) 
 
 
-#if !defined(_WIN32)
 
 #define ID3D12VideoDecoder1_GetDesc(This)	\
     ( (This)->lpVtbl -> GetDesc(This) ) 
-#else
-#define ID3D12VideoDecoder1_GetDesc(This,RetVal)	\
-    ( (This)->lpVtbl -> GetDesc(This,RetVal) ) 
-#endif
 
 
 #define ID3D12VideoDecoder1_GetProtectedResourceSession(This,riid,ppProtectedSession)	\
@@ -4026,7 +4424,9 @@ EXTERN_C const IID IID_ID3D12VideoDecoderHeap1;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetProtectedResourceSession( 
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppProtectedSession) = 0;
         
     };
@@ -4041,7 +4441,9 @@ EXTERN_C const IID IID_ID3D12VideoDecoderHeap1;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoDecoderHeap1 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -4055,50 +4457,55 @@ EXTERN_C const IID IID_ID3D12VideoDecoderHeap1;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoDecoderHeap1 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoDecoderHeap1 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoDecoderHeap1 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoDecoderHeap1 * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoDecoderHeap1 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecoderHeap, GetDesc)
-#if !defined(_WIN32)
         D3D12_VIDEO_DECODER_HEAP_DESC ( STDMETHODCALLTYPE *GetDesc )( 
             ID3D12VideoDecoderHeap1 * This);
-        
-#else
-        D3D12_VIDEO_DECODER_HEAP_DESC *( STDMETHODCALLTYPE *GetDesc )( 
-            ID3D12VideoDecoderHeap1 * This,
-            D3D12_VIDEO_DECODER_HEAP_DESC * RetVal);
-        
-#endif
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecoderHeap1, GetProtectedResourceSession)
         HRESULT ( STDMETHODCALLTYPE *GetProtectedResourceSession )( 
             ID3D12VideoDecoderHeap1 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppProtectedSession);
         
         END_INTERFACE
@@ -4141,14 +4548,9 @@ EXTERN_C const IID IID_ID3D12VideoDecoderHeap1;
     ( (This)->lpVtbl -> GetDevice(This,riid,ppvDevice) ) 
 
 
-#if !defined(_WIN32)
 
 #define ID3D12VideoDecoderHeap1_GetDesc(This)	\
     ( (This)->lpVtbl -> GetDesc(This) ) 
-#else
-#define ID3D12VideoDecoderHeap1_GetDesc(This,RetVal)	\
-    ( (This)->lpVtbl -> GetDesc(This,RetVal) ) 
-#endif
 
 
 #define ID3D12VideoDecoderHeap1_GetProtectedResourceSession(This,riid,ppProtectedSession)	\
@@ -4181,7 +4583,9 @@ EXTERN_C const IID IID_ID3D12VideoProcessor1;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetProtectedResourceSession( 
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppProtectedSession) = 0;
         
     };
@@ -4196,7 +4600,9 @@ EXTERN_C const IID IID_ID3D12VideoProcessor1;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoProcessor1 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -4210,32 +4616,43 @@ EXTERN_C const IID IID_ID3D12VideoProcessor1;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoProcessor1 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoProcessor1 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoProcessor1 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoProcessor1 * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoProcessor1 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessor, GetNodeMask)
@@ -4250,24 +4667,19 @@ EXTERN_C const IID IID_ID3D12VideoProcessor1;
         HRESULT ( STDMETHODCALLTYPE *GetInputStreamDescs )( 
             ID3D12VideoProcessor1 * This,
             UINT NumInputStreamDescs,
+            /* [annotation] */ 
             _Out_writes_(NumInputStreamDescs)  D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC *pInputStreamDescs);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessor, GetOutputStreamDesc)
-#if !defined(_WIN32)
         D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC ( STDMETHODCALLTYPE *GetOutputStreamDesc )( 
             ID3D12VideoProcessor1 * This);
-        
-#else
-        D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC *( STDMETHODCALLTYPE *GetOutputStreamDesc )( 
-            ID3D12VideoProcessor1 * This,
-            D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC * RetVal);
-        
-#endif
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessor1, GetProtectedResourceSession)
         HRESULT ( STDMETHODCALLTYPE *GetProtectedResourceSession )( 
             ID3D12VideoProcessor1 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppProtectedSession);
         
         END_INTERFACE
@@ -4319,14 +4731,9 @@ EXTERN_C const IID IID_ID3D12VideoProcessor1;
 
 #define ID3D12VideoProcessor1_GetInputStreamDescs(This,NumInputStreamDescs,pInputStreamDescs)	\
     ( (This)->lpVtbl -> GetInputStreamDescs(This,NumInputStreamDescs,pInputStreamDescs) ) 
-#if !defined(_WIN32)
 
 #define ID3D12VideoProcessor1_GetOutputStreamDesc(This)	\
     ( (This)->lpVtbl -> GetOutputStreamDesc(This) ) 
-#else
-#define ID3D12VideoProcessor1_GetOutputStreamDesc(This,RetVal)	\
-    ( (This)->lpVtbl -> GetOutputStreamDesc(This,RetVal) ) 
-#endif
 
 
 #define ID3D12VideoProcessor1_GetProtectedResourceSession(This,riid,ppProtectedSession)	\
@@ -4358,15 +4765,12 @@ EXTERN_C const IID IID_ID3D12VideoExtensionCommand;
     ID3D12VideoExtensionCommand : public ID3D12Pageable
     {
     public:
-#if defined(_MSC_VER) || !defined(_WIN32)
         virtual D3D12_VIDEO_EXTENSION_COMMAND_DESC STDMETHODCALLTYPE GetDesc( void) = 0;
-#else
-        virtual D3D12_VIDEO_EXTENSION_COMMAND_DESC *STDMETHODCALLTYPE GetDesc( 
-            D3D12_VIDEO_EXTENSION_COMMAND_DESC * RetVal) = 0;
-#endif
         
         virtual HRESULT STDMETHODCALLTYPE GetProtectedResourceSession( 
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppProtectedSession) = 0;
         
     };
@@ -4381,7 +4785,9 @@ EXTERN_C const IID IID_ID3D12VideoExtensionCommand;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoExtensionCommand * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -4395,50 +4801,55 @@ EXTERN_C const IID IID_ID3D12VideoExtensionCommand;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoExtensionCommand * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoExtensionCommand * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoExtensionCommand * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoExtensionCommand * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoExtensionCommand * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12VideoExtensionCommand, GetDesc)
-#if !defined(_WIN32)
         D3D12_VIDEO_EXTENSION_COMMAND_DESC ( STDMETHODCALLTYPE *GetDesc )( 
             ID3D12VideoExtensionCommand * This);
-        
-#else
-        D3D12_VIDEO_EXTENSION_COMMAND_DESC *( STDMETHODCALLTYPE *GetDesc )( 
-            ID3D12VideoExtensionCommand * This,
-            D3D12_VIDEO_EXTENSION_COMMAND_DESC * RetVal);
-        
-#endif
         
         DECLSPEC_XFGVIRT(ID3D12VideoExtensionCommand, GetProtectedResourceSession)
         HRESULT ( STDMETHODCALLTYPE *GetProtectedResourceSession )( 
             ID3D12VideoExtensionCommand * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppProtectedSession);
         
         END_INTERFACE
@@ -4481,14 +4892,9 @@ EXTERN_C const IID IID_ID3D12VideoExtensionCommand;
     ( (This)->lpVtbl -> GetDevice(This,riid,ppvDevice) ) 
 
 
-#if !defined(_WIN32)
 
 #define ID3D12VideoExtensionCommand_GetDesc(This)	\
     ( (This)->lpVtbl -> GetDesc(This) ) 
-#else
-#define ID3D12VideoExtensionCommand_GetDesc(This,RetVal)	\
-    ( (This)->lpVtbl -> GetDesc(This,RetVal) ) 
-#endif
 
 #define ID3D12VideoExtensionCommand_GetProtectedResourceSession(This,riid,ppProtectedSession)	\
     ( (This)->lpVtbl -> GetProtectedResourceSession(This,riid,ppProtectedSession) ) 
@@ -4498,6 +4904,17 @@ EXTERN_C const IID IID_ID3D12VideoExtensionCommand;
 
 #endif 	/* C style interface */
 
+
+
+D3D12_VIDEO_EXTENSION_COMMAND_DESC STDMETHODCALLTYPE ID3D12VideoExtensionCommand_GetDesc_Proxy( 
+    ID3D12VideoExtensionCommand * This);
+
+
+void __RPC_STUB ID3D12VideoExtensionCommand_GetDesc_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
 
 
 
@@ -4520,38 +4937,59 @@ EXTERN_C const IID IID_ID3D12VideoDevice2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateVideoDecoder1( 
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODER_DESC *pDesc,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoDecoder) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateVideoDecoderHeap1( 
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODER_HEAP_DESC *pVideoDecoderHeapDesc,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoDecoderHeap) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateVideoProcessor1( 
             UINT NodeMask,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC *pOutputStreamDesc,
             UINT NumInputStreamDescs,
+            /* [annotation] */ 
             _In_reads_(NumInputStreamDescs)  const D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC *pInputStreamDescs,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoProcessor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateVideoExtensionCommand( 
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_EXTENSION_COMMAND_DESC *pDesc,
+            /* [annotation] */ 
             _In_reads_bytes_(CreationParametersDataSizeInBytes)  const void *pCreationParameters,
             SIZE_T CreationParametersDataSizeInBytes,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation] */ 
             _COM_Outptr_  void **ppVideoExtensionCommand) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ExecuteExtensionCommand( 
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(ExecutionParametersSizeInBytes)  const void *pExecutionParameters,
             SIZE_T ExecutionParametersSizeInBytes,
+            /* [annotation] */ 
             _Out_writes_bytes_(OutputDataSizeInBytes)  void *pOutputData,
             SIZE_T OutputDataSizeInBytes) = 0;
         
@@ -4567,7 +5005,9 @@ EXTERN_C const IID IID_ID3D12VideoDevice2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoDevice2 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -4582,92 +5022,132 @@ EXTERN_C const IID IID_ID3D12VideoDevice2;
         HRESULT ( STDMETHODCALLTYPE *CheckFeatureSupport )( 
             ID3D12VideoDevice2 * This,
             D3D12_FEATURE_VIDEO FeatureVideo,
+            /* [annotation] */ 
             _Inout_updates_bytes_(FeatureSupportDataSize)  void *pFeatureSupportData,
             UINT FeatureSupportDataSize);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice, CreateVideoDecoder)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoDecoder )( 
             ID3D12VideoDevice2 * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODER_DESC *pDesc,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoDecoder);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice, CreateVideoDecoderHeap)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoDecoderHeap )( 
             ID3D12VideoDevice2 * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODER_HEAP_DESC *pVideoDecoderHeapDesc,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoDecoderHeap);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice, CreateVideoProcessor)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoProcessor )( 
             ID3D12VideoDevice2 * This,
             UINT NodeMask,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC *pOutputStreamDesc,
             UINT NumInputStreamDescs,
+            /* [annotation] */ 
             _In_reads_(NumInputStreamDescs)  const D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC *pInputStreamDescs,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoProcessor);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice1, CreateVideoMotionEstimator)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoMotionEstimator )( 
             ID3D12VideoDevice2 * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_MOTION_ESTIMATOR_DESC *pDesc,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoMotionEstimator);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice1, CreateVideoMotionVectorHeap)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoMotionVectorHeap )( 
             ID3D12VideoDevice2 * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC *pDesc,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoMotionVectorHeap);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice2, CreateVideoDecoder1)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoDecoder1 )( 
             ID3D12VideoDevice2 * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODER_DESC *pDesc,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoDecoder);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice2, CreateVideoDecoderHeap1)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoDecoderHeap1 )( 
             ID3D12VideoDevice2 * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODER_HEAP_DESC *pVideoDecoderHeapDesc,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoDecoderHeap);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice2, CreateVideoProcessor1)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoProcessor1 )( 
             ID3D12VideoDevice2 * This,
             UINT NodeMask,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC *pOutputStreamDesc,
             UINT NumInputStreamDescs,
+            /* [annotation] */ 
             _In_reads_(NumInputStreamDescs)  const D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC *pInputStreamDescs,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoProcessor);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice2, CreateVideoExtensionCommand)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoExtensionCommand )( 
             ID3D12VideoDevice2 * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_EXTENSION_COMMAND_DESC *pDesc,
+            /* [annotation] */ 
             _In_reads_bytes_(CreationParametersDataSizeInBytes)  const void *pCreationParameters,
             SIZE_T CreationParametersDataSizeInBytes,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation] */ 
             _COM_Outptr_  void **ppVideoExtensionCommand);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice2, ExecuteExtensionCommand)
         HRESULT ( STDMETHODCALLTYPE *ExecuteExtensionCommand )( 
             ID3D12VideoDevice2 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(ExecutionParametersSizeInBytes)  const void *pExecutionParameters,
             SIZE_T ExecutionParametersSizeInBytes,
+            /* [annotation] */ 
             _Out_writes_bytes_(OutputDataSizeInBytes)  void *pOutputData,
             SIZE_T OutputDataSizeInBytes);
         
@@ -4756,15 +5236,20 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList2;
     {
     public:
         virtual void STDMETHODCALLTYPE SetProtectedResourceSession( 
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession) = 0;
         
         virtual void STDMETHODCALLTYPE InitializeExtensionCommand( 
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(InitializationParametersSizeInBytes)  const void *pInitializationParameters,
             SIZE_T InitializationParametersSizeInBytes) = 0;
         
         virtual void STDMETHODCALLTYPE ExecuteExtensionCommand( 
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(ExecutionParametersSizeInBytes)  const void *pExecutionParameters,
             SIZE_T ExecutionParametersSizeInBytes) = 0;
         
@@ -4780,7 +5265,9 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoDecodeCommandList2 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -4794,32 +5281,43 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList2;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoDecodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoDecodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoDecodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoDecodeCommandList2 * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoDecodeCommandList2 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12CommandList, GetType)
@@ -4833,6 +5331,7 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList2;
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             ID3D12VideoDecodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12CommandAllocator *pAllocator);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, ClearState)
@@ -4842,50 +5341,70 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList2;
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, ResourceBarrier)
         void ( STDMETHODCALLTYPE *ResourceBarrier )( 
             ID3D12VideoDecodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  UINT NumBarriers,
+            /* [annotation] */ 
             _In_reads_(NumBarriers)  const D3D12_RESOURCE_BARRIER *pBarriers);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, DiscardResource)
         void ( STDMETHODCALLTYPE *DiscardResource )( 
             ID3D12VideoDecodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
+            /* [annotation] */ 
             _In_opt_  const D3D12_DISCARD_REGION *pRegion);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, BeginQuery)
         void ( STDMETHODCALLTYPE *BeginQuery )( 
             ID3D12VideoDecodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, EndQuery)
         void ( STDMETHODCALLTYPE *EndQuery )( 
             ID3D12VideoDecodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, ResolveQueryData)
         void ( STDMETHODCALLTYPE *ResolveQueryData )( 
             ID3D12VideoDecodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT StartIndex,
+            /* [annotation] */ 
             _In_  UINT NumQueries,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pDestinationBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedDestinationBufferOffset);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, SetPredication)
         void ( STDMETHODCALLTYPE *SetPredication )( 
             ID3D12VideoDecodeCommandList2 * This,
+            /* [annotation] */ 
             _In_opt_  ID3D12Resource *pBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedBufferOffset,
+            /* [annotation] */ 
             _In_  D3D12_PREDICATION_OP Operation);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, SetMarker)
         void ( STDMETHODCALLTYPE *SetMarker )( 
             ID3D12VideoDecodeCommandList2 * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -4893,6 +5412,7 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList2;
         void ( STDMETHODCALLTYPE *BeginEvent )( 
             ID3D12VideoDecodeCommandList2 * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -4903,40 +5423,53 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList2;
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, DecodeFrame)
         void ( STDMETHODCALLTYPE *DecodeFrame )( 
             ID3D12VideoDecodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoDecoder *pDecoder,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS *pOutputArguments,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS *pInputArguments);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, WriteBufferImmediate)
         void ( STDMETHODCALLTYPE *WriteBufferImmediate )( 
             ID3D12VideoDecodeCommandList2 * This,
             UINT Count,
+            /* [annotation] */ 
             _In_reads_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_PARAMETER *pParams,
+            /* [annotation] */ 
             _In_reads_opt_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_MODE *pModes);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList1, DecodeFrame1)
         void ( STDMETHODCALLTYPE *DecodeFrame1 )( 
             ID3D12VideoDecodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoDecoder *pDecoder,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS1 *pOutputArguments,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS *pInputArguments);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList2, SetProtectedResourceSession)
         void ( STDMETHODCALLTYPE *SetProtectedResourceSession )( 
             ID3D12VideoDecodeCommandList2 * This,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList2, InitializeExtensionCommand)
         void ( STDMETHODCALLTYPE *InitializeExtensionCommand )( 
             ID3D12VideoDecodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(InitializationParametersSizeInBytes)  const void *pInitializationParameters,
             SIZE_T InitializationParametersSizeInBytes);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList2, ExecuteExtensionCommand)
         void ( STDMETHODCALLTYPE *ExecuteExtensionCommand )( 
             ID3D12VideoDecodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(ExecutionParametersSizeInBytes)  const void *pExecutionParameters,
             SIZE_T ExecutionParametersSizeInBytes);
         
@@ -5068,6 +5601,7 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList3;
     public:
         virtual void STDMETHODCALLTYPE Barrier( 
             UINT32 NumBarrierGroups,
+            /* [annotation] */ 
             _In_reads_(NumBarrierGroups)  const D3D12_BARRIER_GROUP *pBarrierGroups) = 0;
         
     };
@@ -5082,7 +5616,9 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoDecodeCommandList3 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -5096,32 +5632,43 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList3;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoDecodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoDecodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoDecodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoDecodeCommandList3 * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoDecodeCommandList3 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12CommandList, GetType)
@@ -5135,6 +5682,7 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList3;
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             ID3D12VideoDecodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12CommandAllocator *pAllocator);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, ClearState)
@@ -5144,50 +5692,70 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList3;
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, ResourceBarrier)
         void ( STDMETHODCALLTYPE *ResourceBarrier )( 
             ID3D12VideoDecodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  UINT NumBarriers,
+            /* [annotation] */ 
             _In_reads_(NumBarriers)  const D3D12_RESOURCE_BARRIER *pBarriers);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, DiscardResource)
         void ( STDMETHODCALLTYPE *DiscardResource )( 
             ID3D12VideoDecodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
+            /* [annotation] */ 
             _In_opt_  const D3D12_DISCARD_REGION *pRegion);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, BeginQuery)
         void ( STDMETHODCALLTYPE *BeginQuery )( 
             ID3D12VideoDecodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, EndQuery)
         void ( STDMETHODCALLTYPE *EndQuery )( 
             ID3D12VideoDecodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, ResolveQueryData)
         void ( STDMETHODCALLTYPE *ResolveQueryData )( 
             ID3D12VideoDecodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT StartIndex,
+            /* [annotation] */ 
             _In_  UINT NumQueries,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pDestinationBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedDestinationBufferOffset);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, SetPredication)
         void ( STDMETHODCALLTYPE *SetPredication )( 
             ID3D12VideoDecodeCommandList3 * This,
+            /* [annotation] */ 
             _In_opt_  ID3D12Resource *pBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedBufferOffset,
+            /* [annotation] */ 
             _In_  D3D12_PREDICATION_OP Operation);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, SetMarker)
         void ( STDMETHODCALLTYPE *SetMarker )( 
             ID3D12VideoDecodeCommandList3 * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -5195,6 +5763,7 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList3;
         void ( STDMETHODCALLTYPE *BeginEvent )( 
             ID3D12VideoDecodeCommandList3 * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -5205,40 +5774,53 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList3;
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, DecodeFrame)
         void ( STDMETHODCALLTYPE *DecodeFrame )( 
             ID3D12VideoDecodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoDecoder *pDecoder,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS *pOutputArguments,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS *pInputArguments);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList, WriteBufferImmediate)
         void ( STDMETHODCALLTYPE *WriteBufferImmediate )( 
             ID3D12VideoDecodeCommandList3 * This,
             UINT Count,
+            /* [annotation] */ 
             _In_reads_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_PARAMETER *pParams,
+            /* [annotation] */ 
             _In_reads_opt_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_MODE *pModes);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList1, DecodeFrame1)
         void ( STDMETHODCALLTYPE *DecodeFrame1 )( 
             ID3D12VideoDecodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoDecoder *pDecoder,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS1 *pOutputArguments,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS *pInputArguments);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList2, SetProtectedResourceSession)
         void ( STDMETHODCALLTYPE *SetProtectedResourceSession )( 
             ID3D12VideoDecodeCommandList3 * This,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList2, InitializeExtensionCommand)
         void ( STDMETHODCALLTYPE *InitializeExtensionCommand )( 
             ID3D12VideoDecodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(InitializationParametersSizeInBytes)  const void *pInitializationParameters,
             SIZE_T InitializationParametersSizeInBytes);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDecodeCommandList2, ExecuteExtensionCommand)
         void ( STDMETHODCALLTYPE *ExecuteExtensionCommand )( 
             ID3D12VideoDecodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(ExecutionParametersSizeInBytes)  const void *pExecutionParameters,
             SIZE_T ExecutionParametersSizeInBytes);
         
@@ -5246,6 +5828,7 @@ EXTERN_C const IID IID_ID3D12VideoDecodeCommandList3;
         void ( STDMETHODCALLTYPE *Barrier )( 
             ID3D12VideoDecodeCommandList3 * This,
             UINT32 NumBarrierGroups,
+            /* [annotation] */ 
             _In_reads_(NumBarrierGroups)  const D3D12_BARRIER_GROUP *pBarrierGroups);
         
         END_INTERFACE
@@ -5379,15 +5962,20 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList2;
     {
     public:
         virtual void STDMETHODCALLTYPE SetProtectedResourceSession( 
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession) = 0;
         
         virtual void STDMETHODCALLTYPE InitializeExtensionCommand( 
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(InitializationParametersSizeInBytes)  const void *pInitializationParameters,
             SIZE_T InitializationParametersSizeInBytes) = 0;
         
         virtual void STDMETHODCALLTYPE ExecuteExtensionCommand( 
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(ExecutionParametersSizeInBytes)  const void *pExecutionParameters,
             SIZE_T ExecutionParametersSizeInBytes) = 0;
         
@@ -5403,7 +5991,9 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoProcessCommandList2 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -5417,32 +6007,43 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList2;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoProcessCommandList2 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoProcessCommandList2 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoProcessCommandList2 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoProcessCommandList2 * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoProcessCommandList2 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12CommandList, GetType)
@@ -5456,6 +6057,7 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList2;
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             ID3D12VideoProcessCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12CommandAllocator *pAllocator);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, ClearState)
@@ -5465,50 +6067,70 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList2;
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, ResourceBarrier)
         void ( STDMETHODCALLTYPE *ResourceBarrier )( 
             ID3D12VideoProcessCommandList2 * This,
+            /* [annotation] */ 
             _In_  UINT NumBarriers,
+            /* [annotation] */ 
             _In_reads_(NumBarriers)  const D3D12_RESOURCE_BARRIER *pBarriers);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, DiscardResource)
         void ( STDMETHODCALLTYPE *DiscardResource )( 
             ID3D12VideoProcessCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
+            /* [annotation] */ 
             _In_opt_  const D3D12_DISCARD_REGION *pRegion);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, BeginQuery)
         void ( STDMETHODCALLTYPE *BeginQuery )( 
             ID3D12VideoProcessCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, EndQuery)
         void ( STDMETHODCALLTYPE *EndQuery )( 
             ID3D12VideoProcessCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, ResolveQueryData)
         void ( STDMETHODCALLTYPE *ResolveQueryData )( 
             ID3D12VideoProcessCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT StartIndex,
+            /* [annotation] */ 
             _In_  UINT NumQueries,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pDestinationBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedDestinationBufferOffset);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, SetPredication)
         void ( STDMETHODCALLTYPE *SetPredication )( 
             ID3D12VideoProcessCommandList2 * This,
+            /* [annotation] */ 
             _In_opt_  ID3D12Resource *pBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedBufferOffset,
+            /* [annotation] */ 
             _In_  D3D12_PREDICATION_OP Operation);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, SetMarker)
         void ( STDMETHODCALLTYPE *SetMarker )( 
             ID3D12VideoProcessCommandList2 * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -5516,6 +6138,7 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList2;
         void ( STDMETHODCALLTYPE *BeginEvent )( 
             ID3D12VideoProcessCommandList2 * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -5526,42 +6149,55 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList2;
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, ProcessFrames)
         void ( STDMETHODCALLTYPE *ProcessFrames )( 
             ID3D12VideoProcessCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoProcessor *pVideoProcessor,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS *pOutputArguments,
             UINT NumInputStreams,
+            /* [annotation] */ 
             _In_reads_(NumInputStreams)  const D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS *pInputArguments);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, WriteBufferImmediate)
         void ( STDMETHODCALLTYPE *WriteBufferImmediate )( 
             ID3D12VideoProcessCommandList2 * This,
             UINT Count,
+            /* [annotation] */ 
             _In_reads_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_PARAMETER *pParams,
+            /* [annotation] */ 
             _In_reads_opt_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_MODE *pModes);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList1, ProcessFrames1)
         void ( STDMETHODCALLTYPE *ProcessFrames1 )( 
             ID3D12VideoProcessCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoProcessor *pVideoProcessor,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS *pOutputArguments,
             UINT NumInputStreams,
+            /* [annotation] */ 
             _In_reads_(NumInputStreams)  const D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS1 *pInputArguments);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList2, SetProtectedResourceSession)
         void ( STDMETHODCALLTYPE *SetProtectedResourceSession )( 
             ID3D12VideoProcessCommandList2 * This,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList2, InitializeExtensionCommand)
         void ( STDMETHODCALLTYPE *InitializeExtensionCommand )( 
             ID3D12VideoProcessCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(InitializationParametersSizeInBytes)  const void *pInitializationParameters,
             SIZE_T InitializationParametersSizeInBytes);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList2, ExecuteExtensionCommand)
         void ( STDMETHODCALLTYPE *ExecuteExtensionCommand )( 
             ID3D12VideoProcessCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(ExecutionParametersSizeInBytes)  const void *pExecutionParameters,
             SIZE_T ExecutionParametersSizeInBytes);
         
@@ -5693,6 +6329,7 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList3;
     public:
         virtual void STDMETHODCALLTYPE Barrier( 
             UINT32 NumBarrierGroups,
+            /* [annotation] */ 
             _In_reads_(NumBarrierGroups)  const D3D12_BARRIER_GROUP *pBarrierGroups) = 0;
         
     };
@@ -5707,7 +6344,9 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoProcessCommandList3 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -5721,32 +6360,43 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList3;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoProcessCommandList3 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoProcessCommandList3 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoProcessCommandList3 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoProcessCommandList3 * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoProcessCommandList3 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12CommandList, GetType)
@@ -5760,6 +6410,7 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList3;
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             ID3D12VideoProcessCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12CommandAllocator *pAllocator);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, ClearState)
@@ -5769,50 +6420,70 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList3;
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, ResourceBarrier)
         void ( STDMETHODCALLTYPE *ResourceBarrier )( 
             ID3D12VideoProcessCommandList3 * This,
+            /* [annotation] */ 
             _In_  UINT NumBarriers,
+            /* [annotation] */ 
             _In_reads_(NumBarriers)  const D3D12_RESOURCE_BARRIER *pBarriers);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, DiscardResource)
         void ( STDMETHODCALLTYPE *DiscardResource )( 
             ID3D12VideoProcessCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
+            /* [annotation] */ 
             _In_opt_  const D3D12_DISCARD_REGION *pRegion);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, BeginQuery)
         void ( STDMETHODCALLTYPE *BeginQuery )( 
             ID3D12VideoProcessCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, EndQuery)
         void ( STDMETHODCALLTYPE *EndQuery )( 
             ID3D12VideoProcessCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, ResolveQueryData)
         void ( STDMETHODCALLTYPE *ResolveQueryData )( 
             ID3D12VideoProcessCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT StartIndex,
+            /* [annotation] */ 
             _In_  UINT NumQueries,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pDestinationBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedDestinationBufferOffset);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, SetPredication)
         void ( STDMETHODCALLTYPE *SetPredication )( 
             ID3D12VideoProcessCommandList3 * This,
+            /* [annotation] */ 
             _In_opt_  ID3D12Resource *pBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedBufferOffset,
+            /* [annotation] */ 
             _In_  D3D12_PREDICATION_OP Operation);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, SetMarker)
         void ( STDMETHODCALLTYPE *SetMarker )( 
             ID3D12VideoProcessCommandList3 * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -5820,6 +6491,7 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList3;
         void ( STDMETHODCALLTYPE *BeginEvent )( 
             ID3D12VideoProcessCommandList3 * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -5830,42 +6502,55 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList3;
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, ProcessFrames)
         void ( STDMETHODCALLTYPE *ProcessFrames )( 
             ID3D12VideoProcessCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoProcessor *pVideoProcessor,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS *pOutputArguments,
             UINT NumInputStreams,
+            /* [annotation] */ 
             _In_reads_(NumInputStreams)  const D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS *pInputArguments);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList, WriteBufferImmediate)
         void ( STDMETHODCALLTYPE *WriteBufferImmediate )( 
             ID3D12VideoProcessCommandList3 * This,
             UINT Count,
+            /* [annotation] */ 
             _In_reads_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_PARAMETER *pParams,
+            /* [annotation] */ 
             _In_reads_opt_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_MODE *pModes);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList1, ProcessFrames1)
         void ( STDMETHODCALLTYPE *ProcessFrames1 )( 
             ID3D12VideoProcessCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoProcessor *pVideoProcessor,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS *pOutputArguments,
             UINT NumInputStreams,
+            /* [annotation] */ 
             _In_reads_(NumInputStreams)  const D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS1 *pInputArguments);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList2, SetProtectedResourceSession)
         void ( STDMETHODCALLTYPE *SetProtectedResourceSession )( 
             ID3D12VideoProcessCommandList3 * This,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList2, InitializeExtensionCommand)
         void ( STDMETHODCALLTYPE *InitializeExtensionCommand )( 
             ID3D12VideoProcessCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(InitializationParametersSizeInBytes)  const void *pInitializationParameters,
             SIZE_T InitializationParametersSizeInBytes);
         
         DECLSPEC_XFGVIRT(ID3D12VideoProcessCommandList2, ExecuteExtensionCommand)
         void ( STDMETHODCALLTYPE *ExecuteExtensionCommand )( 
             ID3D12VideoProcessCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(ExecutionParametersSizeInBytes)  const void *pExecutionParameters,
             SIZE_T ExecutionParametersSizeInBytes);
         
@@ -5873,6 +6558,7 @@ EXTERN_C const IID IID_ID3D12VideoProcessCommandList3;
         void ( STDMETHODCALLTYPE *Barrier )( 
             ID3D12VideoProcessCommandList3 * This,
             UINT32 NumBarrierGroups,
+            /* [annotation] */ 
             _In_reads_(NumBarrierGroups)  const D3D12_BARRIER_GROUP *pBarrierGroups);
         
         END_INTERFACE
@@ -6006,12 +6692,16 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList1;
     {
     public:
         virtual void STDMETHODCALLTYPE InitializeExtensionCommand( 
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(InitializationParametersSizeInBytes)  const void *pInitializationParameters,
             SIZE_T InitializationParametersSizeInBytes) = 0;
         
         virtual void STDMETHODCALLTYPE ExecuteExtensionCommand( 
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(ExecutionParametersSizeInBytes)  const void *pExecutionParameters,
             SIZE_T ExecutionParametersSizeInBytes) = 0;
         
@@ -6027,7 +6717,9 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList1;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoEncodeCommandList1 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -6041,32 +6733,43 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList1;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoEncodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoEncodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoEncodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoEncodeCommandList1 * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoEncodeCommandList1 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12CommandList, GetType)
@@ -6080,6 +6783,7 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList1;
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             ID3D12VideoEncodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12CommandAllocator *pAllocator);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, ClearState)
@@ -6089,50 +6793,70 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList1;
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, ResourceBarrier)
         void ( STDMETHODCALLTYPE *ResourceBarrier )( 
             ID3D12VideoEncodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  UINT NumBarriers,
+            /* [annotation] */ 
             _In_reads_(NumBarriers)  const D3D12_RESOURCE_BARRIER *pBarriers);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, DiscardResource)
         void ( STDMETHODCALLTYPE *DiscardResource )( 
             ID3D12VideoEncodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
+            /* [annotation] */ 
             _In_opt_  const D3D12_DISCARD_REGION *pRegion);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, BeginQuery)
         void ( STDMETHODCALLTYPE *BeginQuery )( 
             ID3D12VideoEncodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, EndQuery)
         void ( STDMETHODCALLTYPE *EndQuery )( 
             ID3D12VideoEncodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, ResolveQueryData)
         void ( STDMETHODCALLTYPE *ResolveQueryData )( 
             ID3D12VideoEncodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT StartIndex,
+            /* [annotation] */ 
             _In_  UINT NumQueries,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pDestinationBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedDestinationBufferOffset);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, SetPredication)
         void ( STDMETHODCALLTYPE *SetPredication )( 
             ID3D12VideoEncodeCommandList1 * This,
+            /* [annotation] */ 
             _In_opt_  ID3D12Resource *pBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedBufferOffset,
+            /* [annotation] */ 
             _In_  D3D12_PREDICATION_OP Operation);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, SetMarker)
         void ( STDMETHODCALLTYPE *SetMarker )( 
             ID3D12VideoEncodeCommandList1 * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -6140,6 +6864,7 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList1;
         void ( STDMETHODCALLTYPE *BeginEvent )( 
             ID3D12VideoEncodeCommandList1 * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -6150,8 +6875,11 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList1;
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, EstimateMotion)
         void ( STDMETHODCALLTYPE *EstimateMotion )( 
             ID3D12VideoEncodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoMotionEstimator *pMotionEstimator,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_MOTION_ESTIMATOR_OUTPUT *pOutputArguments,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_MOTION_ESTIMATOR_INPUT *pInputArguments);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, ResolveMotionVectorHeap)
@@ -6164,25 +6892,32 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList1;
         void ( STDMETHODCALLTYPE *WriteBufferImmediate )( 
             ID3D12VideoEncodeCommandList1 * This,
             UINT Count,
+            /* [annotation] */ 
             _In_reads_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_PARAMETER *pParams,
+            /* [annotation] */ 
             _In_reads_opt_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_MODE *pModes);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, SetProtectedResourceSession)
         void ( STDMETHODCALLTYPE *SetProtectedResourceSession )( 
             ID3D12VideoEncodeCommandList1 * This,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList1, InitializeExtensionCommand)
         void ( STDMETHODCALLTYPE *InitializeExtensionCommand )( 
             ID3D12VideoEncodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(InitializationParametersSizeInBytes)  const void *pInitializationParameters,
             SIZE_T InitializationParametersSizeInBytes);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList1, ExecuteExtensionCommand)
         void ( STDMETHODCALLTYPE *ExecuteExtensionCommand )( 
             ID3D12VideoEncodeCommandList1 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(ExecutionParametersSizeInBytes)  const void *pExecutionParameters,
             SIZE_T ExecutionParametersSizeInBytes);
         
@@ -6547,6 +7282,7 @@ typedef struct D3D12_FEATURE_DATA_VIDEO_ENCODER_OUTPUT_RESOLUTION
     D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC MaxResolutionSupported;
     UINT ResolutionWidthMultipleRequirement;
     UINT ResolutionHeightMultipleRequirement;
+    /* [annotation] */ 
     _Field_size_full_(ResolutionRatiosCount)  D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_RATIO_DESC *pResolutionRatios;
     } 	D3D12_FEATURE_DATA_VIDEO_ENCODER_OUTPUT_RESOLUTION;
 
@@ -6619,6 +7355,7 @@ typedef struct D3D12_VIDEO_ENCODER_HEAP_DESC
     D3D12_VIDEO_ENCODER_PROFILE_DESC EncodeProfile;
     D3D12_VIDEO_ENCODER_LEVEL_SETTING EncodeLevel;
     UINT ResolutionsListCount;
+    /* [annotation] */ 
     _Field_size_full_(ResolutionsListCount)  const D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC *pResolutionList;
     } 	D3D12_VIDEO_ENCODER_HEAP_DESC;
 
@@ -6940,6 +7677,7 @@ typedef struct D3D12_FEATURE_DATA_VIDEO_ENCODER_SUPPORT
     D3D12_VIDEO_ENCODER_SUPPORT_FLAGS SupportFlags;
     D3D12_VIDEO_ENCODER_PROFILE_DESC SuggestedProfile;
     D3D12_VIDEO_ENCODER_LEVEL_SETTING SuggestedLevel;
+    /* [annotation] */ 
     _Field_size_full_(ResolutionsListCount)  D3D12_FEATURE_DATA_VIDEO_ENCODER_RESOLUTION_SUPPORT_LIMITS *pResolutionDependentSupport;
     } 	D3D12_FEATURE_DATA_VIDEO_ENCODER_SUPPORT;
 
@@ -7001,9 +7739,11 @@ EXTERN_C const IID IID_ID3D12VideoEncoder;
         virtual D3D12_VIDEO_ENCODER_CODEC STDMETHODCALLTYPE GetCodec( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCodecProfile( 
+            /* [annotation] */ 
             _Inout_  D3D12_VIDEO_ENCODER_PROFILE_DESC dstProfile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCodecConfiguration( 
+            /* [annotation] */ 
             _Inout_  D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION dstCodecConfig) = 0;
         
         virtual DXGI_FORMAT STDMETHODCALLTYPE GetInputFormat( void) = 0;
@@ -7022,7 +7762,9 @@ EXTERN_C const IID IID_ID3D12VideoEncoder;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoEncoder * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -7036,32 +7778,43 @@ EXTERN_C const IID IID_ID3D12VideoEncoder;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoEncoder * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoEncoder * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoEncoder * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoEncoder * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoEncoder * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncoder, GetNodeMask)
@@ -7079,11 +7832,13 @@ EXTERN_C const IID IID_ID3D12VideoEncoder;
         DECLSPEC_XFGVIRT(ID3D12VideoEncoder, GetCodecProfile)
         HRESULT ( STDMETHODCALLTYPE *GetCodecProfile )( 
             ID3D12VideoEncoder * This,
+            /* [annotation] */ 
             _Inout_  D3D12_VIDEO_ENCODER_PROFILE_DESC dstProfile);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncoder, GetCodecConfiguration)
         HRESULT ( STDMETHODCALLTYPE *GetCodecConfiguration )( 
             ID3D12VideoEncoder * This,
+            /* [annotation] */ 
             _Inout_  D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION dstCodecConfig);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncoder, GetInputFormat)
@@ -7189,15 +7944,18 @@ EXTERN_C const IID IID_ID3D12VideoEncoderHeap;
         virtual D3D12_VIDEO_ENCODER_CODEC STDMETHODCALLTYPE GetCodec( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCodecProfile( 
+            /* [annotation] */ 
             _Inout_  D3D12_VIDEO_ENCODER_PROFILE_DESC dstProfile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCodecLevel( 
+            /* [annotation] */ 
             _Inout_  D3D12_VIDEO_ENCODER_LEVEL_SETTING dstLevel) = 0;
         
         virtual UINT STDMETHODCALLTYPE GetResolutionListCount( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetResolutionList( 
             const UINT ResolutionsListCount,
+            /* [annotation] */ 
             _Out_writes_(ResolutionsListCount)  D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC *pResolutionList) = 0;
         
     };
@@ -7212,7 +7970,9 @@ EXTERN_C const IID IID_ID3D12VideoEncoderHeap;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoEncoderHeap * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -7226,32 +7986,43 @@ EXTERN_C const IID IID_ID3D12VideoEncoderHeap;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoEncoderHeap * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoEncoderHeap * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoEncoderHeap * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoEncoderHeap * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoEncoderHeap * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncoderHeap, GetNodeMask)
@@ -7269,11 +8040,13 @@ EXTERN_C const IID IID_ID3D12VideoEncoderHeap;
         DECLSPEC_XFGVIRT(ID3D12VideoEncoderHeap, GetCodecProfile)
         HRESULT ( STDMETHODCALLTYPE *GetCodecProfile )( 
             ID3D12VideoEncoderHeap * This,
+            /* [annotation] */ 
             _Inout_  D3D12_VIDEO_ENCODER_PROFILE_DESC dstProfile);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncoderHeap, GetCodecLevel)
         HRESULT ( STDMETHODCALLTYPE *GetCodecLevel )( 
             ID3D12VideoEncoderHeap * This,
+            /* [annotation] */ 
             _Inout_  D3D12_VIDEO_ENCODER_LEVEL_SETTING dstLevel);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncoderHeap, GetResolutionListCount)
@@ -7284,6 +8057,7 @@ EXTERN_C const IID IID_ID3D12VideoEncoderHeap;
         HRESULT ( STDMETHODCALLTYPE *GetResolutionList )( 
             ID3D12VideoEncoderHeap * This,
             const UINT ResolutionsListCount,
+            /* [annotation] */ 
             _Out_writes_(ResolutionsListCount)  D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_DESC *pResolutionList);
         
         END_INTERFACE
@@ -7375,13 +8149,19 @@ EXTERN_C const IID IID_ID3D12VideoDevice3;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateVideoEncoder( 
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_ENCODER_DESC *pDesc,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation] */ 
             _COM_Outptr_  void **ppVideoEncoder) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateVideoEncoderHeap( 
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_ENCODER_HEAP_DESC *pDesc,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation] */ 
             _COM_Outptr_  void **ppVideoEncoderHeap) = 0;
         
     };
@@ -7396,7 +8176,9 @@ EXTERN_C const IID IID_ID3D12VideoDevice3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoDevice3 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -7411,107 +8193,153 @@ EXTERN_C const IID IID_ID3D12VideoDevice3;
         HRESULT ( STDMETHODCALLTYPE *CheckFeatureSupport )( 
             ID3D12VideoDevice3 * This,
             D3D12_FEATURE_VIDEO FeatureVideo,
+            /* [annotation] */ 
             _Inout_updates_bytes_(FeatureSupportDataSize)  void *pFeatureSupportData,
             UINT FeatureSupportDataSize);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice, CreateVideoDecoder)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoDecoder )( 
             ID3D12VideoDevice3 * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODER_DESC *pDesc,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoDecoder);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice, CreateVideoDecoderHeap)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoDecoderHeap )( 
             ID3D12VideoDevice3 * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODER_HEAP_DESC *pVideoDecoderHeapDesc,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoDecoderHeap);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice, CreateVideoProcessor)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoProcessor )( 
             ID3D12VideoDevice3 * This,
             UINT NodeMask,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC *pOutputStreamDesc,
             UINT NumInputStreamDescs,
+            /* [annotation] */ 
             _In_reads_(NumInputStreamDescs)  const D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC *pInputStreamDescs,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoProcessor);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice1, CreateVideoMotionEstimator)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoMotionEstimator )( 
             ID3D12VideoDevice3 * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_MOTION_ESTIMATOR_DESC *pDesc,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoMotionEstimator);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice1, CreateVideoMotionVectorHeap)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoMotionVectorHeap )( 
             ID3D12VideoDevice3 * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_MOTION_VECTOR_HEAP_DESC *pDesc,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoMotionVectorHeap);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice2, CreateVideoDecoder1)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoDecoder1 )( 
             ID3D12VideoDevice3 * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODER_DESC *pDesc,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoDecoder);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice2, CreateVideoDecoderHeap1)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoDecoderHeap1 )( 
             ID3D12VideoDevice3 * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_DECODER_HEAP_DESC *pVideoDecoderHeapDesc,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoDecoderHeap);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice2, CreateVideoProcessor1)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoProcessor1 )( 
             ID3D12VideoDevice3 * This,
             UINT NodeMask,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC *pOutputStreamDesc,
             UINT NumInputStreamDescs,
+            /* [annotation] */ 
             _In_reads_(NumInputStreamDescs)  const D3D12_VIDEO_PROCESS_INPUT_STREAM_DESC *pInputStreamDescs,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppVideoProcessor);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice2, CreateVideoExtensionCommand)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoExtensionCommand )( 
             ID3D12VideoDevice3 * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_EXTENSION_COMMAND_DESC *pDesc,
+            /* [annotation] */ 
             _In_reads_bytes_(CreationParametersDataSizeInBytes)  const void *pCreationParameters,
             SIZE_T CreationParametersDataSizeInBytes,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation] */ 
             _COM_Outptr_  void **ppVideoExtensionCommand);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice2, ExecuteExtensionCommand)
         HRESULT ( STDMETHODCALLTYPE *ExecuteExtensionCommand )( 
             ID3D12VideoDevice3 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(ExecutionParametersSizeInBytes)  const void *pExecutionParameters,
             SIZE_T ExecutionParametersSizeInBytes,
+            /* [annotation] */ 
             _Out_writes_bytes_(OutputDataSizeInBytes)  void *pOutputData,
             SIZE_T OutputDataSizeInBytes);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice3, CreateVideoEncoder)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoEncoder )( 
             ID3D12VideoDevice3 * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_ENCODER_DESC *pDesc,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation] */ 
             _COM_Outptr_  void **ppVideoEncoder);
         
         DECLSPEC_XFGVIRT(ID3D12VideoDevice3, CreateVideoEncoderHeap)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoEncoderHeap )( 
             ID3D12VideoDevice3 * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_ENCODER_HEAP_DESC *pDesc,
+            /* [annotation] */ 
             _In_  REFIID riid,
+            /* [annotation] */ 
             _COM_Outptr_  void **ppVideoEncoderHeap);
         
         END_INTERFACE
@@ -7646,19 +8474,26 @@ typedef struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264
     UINT FrameDecodingOrderNumber;
     UINT TemporalLayerIndex;
     UINT List0ReferenceFramesCount;
+    /* [annotation] */ 
     _Field_size_full_(List0ReferenceFramesCount)  UINT *pList0ReferenceFrames;
     UINT List1ReferenceFramesCount;
+    /* [annotation] */ 
     _Field_size_full_(List1ReferenceFramesCount)  UINT *pList1ReferenceFrames;
     UINT ReferenceFramesReconPictureDescriptorsCount;
+    /* [annotation] */ 
     _Field_size_full_(ReferenceFramesReconPictureDescriptorsCount)  D3D12_VIDEO_ENCODER_REFERENCE_PICTURE_DESCRIPTOR_H264 *pReferenceFramesReconPictureDescriptors;
     UCHAR adaptive_ref_pic_marking_mode_flag;
     UINT RefPicMarkingOperationsCommandsCount;
+    /* [annotation] */ 
     _Field_size_full_(RefPicMarkingOperationsCommandsCount)  D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264_REFERENCE_PICTURE_MARKING_OPERATION *pRefPicMarkingOperationsCommands;
     UINT List0RefPicModificationsCount;
+    /* [annotation] */ 
     _Field_size_full_(List0RefPicModificationsCount)  D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264_REFERENCE_PICTURE_LIST_MODIFICATION_OPERATION *pList0RefPicModifications;
     UINT List1RefPicModificationsCount;
+    /* [annotation] */ 
     _Field_size_full_(List1RefPicModificationsCount)  D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264_REFERENCE_PICTURE_LIST_MODIFICATION_OPERATION *pList1RefPicModifications;
     UINT QPMapValuesCount;
+    /* [annotation] */ 
     _Field_size_full_(QPMapValuesCount)  INT8 *pRateControlQPMap;
     } 	D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264;
 
@@ -7696,16 +8531,22 @@ typedef struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC
     UINT PictureOrderCountNumber;
     UINT TemporalLayerIndex;
     UINT List0ReferenceFramesCount;
+    /* [annotation] */ 
     _Field_size_full_(List0ReferenceFramesCount)  UINT *pList0ReferenceFrames;
     UINT List1ReferenceFramesCount;
+    /* [annotation] */ 
     _Field_size_full_(List1ReferenceFramesCount)  UINT *pList1ReferenceFrames;
     UINT ReferenceFramesReconPictureDescriptorsCount;
+    /* [annotation] */ 
     _Field_size_full_(ReferenceFramesReconPictureDescriptorsCount)  D3D12_VIDEO_ENCODER_REFERENCE_PICTURE_DESCRIPTOR_HEVC *pReferenceFramesReconPictureDescriptors;
     UINT List0RefPicModificationsCount;
+    /* [annotation] */ 
     _Field_size_full_(List0RefPicModificationsCount)  UINT *pList0RefPicModifications;
     UINT List1RefPicModificationsCount;
+    /* [annotation] */ 
     _Field_size_full_(List1RefPicModificationsCount)  UINT *pList1RefPicModifications;
     UINT QPMapValuesCount;
+    /* [annotation] */ 
     _Field_size_full_(QPMapValuesCount)  INT8 *pRateControlQPMap;
     } 	D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC;
 
@@ -7722,7 +8563,9 @@ typedef struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA
 typedef struct D3D12_VIDEO_ENCODE_REFERENCE_FRAMES
     {
     UINT NumTexture2Ds;
+    /* [annotation] */ 
     _Field_size_full_(NumTexture2Ds)  ID3D12Resource **ppTexture2Ds;
+    /* [annotation] */ 
     _Field_size_full_(NumTexture2Ds)  UINT *pSubresources;
     } 	D3D12_VIDEO_ENCODE_REFERENCE_FRAMES;
 
@@ -7892,13 +8735,19 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList2;
     {
     public:
         virtual void STDMETHODCALLTYPE EncodeFrame( 
+            /* [annotation] */ 
             _In_  ID3D12VideoEncoder *pEncoder,
+            /* [annotation] */ 
             _In_  ID3D12VideoEncoderHeap *pHeap,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_ENCODER_ENCODEFRAME_INPUT_ARGUMENTS *pInputArguments,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_ENCODER_ENCODEFRAME_OUTPUT_ARGUMENTS *pOutputArguments) = 0;
         
         virtual void STDMETHODCALLTYPE ResolveEncoderOutputMetadata( 
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_ENCODER_RESOLVE_METADATA_INPUT_ARGUMENTS *pInputArguments,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_ENCODER_RESOLVE_METADATA_OUTPUT_ARGUMENTS *pOutputArguments) = 0;
         
     };
@@ -7913,7 +8762,9 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoEncodeCommandList2 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -7927,32 +8778,43 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList2;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoEncodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoEncodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoEncodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoEncodeCommandList2 * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoEncodeCommandList2 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12CommandList, GetType)
@@ -7966,6 +8828,7 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList2;
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             ID3D12VideoEncodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12CommandAllocator *pAllocator);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, ClearState)
@@ -7975,50 +8838,70 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList2;
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, ResourceBarrier)
         void ( STDMETHODCALLTYPE *ResourceBarrier )( 
             ID3D12VideoEncodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  UINT NumBarriers,
+            /* [annotation] */ 
             _In_reads_(NumBarriers)  const D3D12_RESOURCE_BARRIER *pBarriers);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, DiscardResource)
         void ( STDMETHODCALLTYPE *DiscardResource )( 
             ID3D12VideoEncodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
+            /* [annotation] */ 
             _In_opt_  const D3D12_DISCARD_REGION *pRegion);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, BeginQuery)
         void ( STDMETHODCALLTYPE *BeginQuery )( 
             ID3D12VideoEncodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, EndQuery)
         void ( STDMETHODCALLTYPE *EndQuery )( 
             ID3D12VideoEncodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, ResolveQueryData)
         void ( STDMETHODCALLTYPE *ResolveQueryData )( 
             ID3D12VideoEncodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT StartIndex,
+            /* [annotation] */ 
             _In_  UINT NumQueries,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pDestinationBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedDestinationBufferOffset);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, SetPredication)
         void ( STDMETHODCALLTYPE *SetPredication )( 
             ID3D12VideoEncodeCommandList2 * This,
+            /* [annotation] */ 
             _In_opt_  ID3D12Resource *pBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedBufferOffset,
+            /* [annotation] */ 
             _In_  D3D12_PREDICATION_OP Operation);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, SetMarker)
         void ( STDMETHODCALLTYPE *SetMarker )( 
             ID3D12VideoEncodeCommandList2 * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -8026,6 +8909,7 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList2;
         void ( STDMETHODCALLTYPE *BeginEvent )( 
             ID3D12VideoEncodeCommandList2 * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -8036,8 +8920,11 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList2;
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, EstimateMotion)
         void ( STDMETHODCALLTYPE *EstimateMotion )( 
             ID3D12VideoEncodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoMotionEstimator *pMotionEstimator,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_MOTION_ESTIMATOR_OUTPUT *pOutputArguments,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_MOTION_ESTIMATOR_INPUT *pInputArguments);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, ResolveMotionVectorHeap)
@@ -8050,40 +8937,53 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList2;
         void ( STDMETHODCALLTYPE *WriteBufferImmediate )( 
             ID3D12VideoEncodeCommandList2 * This,
             UINT Count,
+            /* [annotation] */ 
             _In_reads_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_PARAMETER *pParams,
+            /* [annotation] */ 
             _In_reads_opt_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_MODE *pModes);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, SetProtectedResourceSession)
         void ( STDMETHODCALLTYPE *SetProtectedResourceSession )( 
             ID3D12VideoEncodeCommandList2 * This,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList1, InitializeExtensionCommand)
         void ( STDMETHODCALLTYPE *InitializeExtensionCommand )( 
             ID3D12VideoEncodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(InitializationParametersSizeInBytes)  const void *pInitializationParameters,
             SIZE_T InitializationParametersSizeInBytes);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList1, ExecuteExtensionCommand)
         void ( STDMETHODCALLTYPE *ExecuteExtensionCommand )( 
             ID3D12VideoEncodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(ExecutionParametersSizeInBytes)  const void *pExecutionParameters,
             SIZE_T ExecutionParametersSizeInBytes);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList2, EncodeFrame)
         void ( STDMETHODCALLTYPE *EncodeFrame )( 
             ID3D12VideoEncodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoEncoder *pEncoder,
+            /* [annotation] */ 
             _In_  ID3D12VideoEncoderHeap *pHeap,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_ENCODER_ENCODEFRAME_INPUT_ARGUMENTS *pInputArguments,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_ENCODER_ENCODEFRAME_OUTPUT_ARGUMENTS *pOutputArguments);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList2, ResolveEncoderOutputMetadata)
         void ( STDMETHODCALLTYPE *ResolveEncoderOutputMetadata )( 
             ID3D12VideoEncodeCommandList2 * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_ENCODER_RESOLVE_METADATA_INPUT_ARGUMENTS *pInputArguments,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_ENCODER_RESOLVE_METADATA_OUTPUT_ARGUMENTS *pOutputArguments);
         
         END_INTERFACE
@@ -8220,6 +9120,7 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList3;
     public:
         virtual void STDMETHODCALLTYPE Barrier( 
             UINT32 NumBarrierGroups,
+            /* [annotation] */ 
             _In_reads_(NumBarrierGroups)  const D3D12_BARRIER_GROUP *pBarrierGroups) = 0;
         
     };
@@ -8234,7 +9135,9 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12VideoEncodeCommandList3 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -8248,32 +9151,43 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList3;
         DECLSPEC_XFGVIRT(ID3D12Object, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D12VideoEncodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _Inout_  UINT *pDataSize,
+            /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D12VideoEncodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_  UINT DataSize,
+            /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D12VideoEncodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  REFGUID guid,
+            /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
         DECLSPEC_XFGVIRT(ID3D12Object, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             ID3D12VideoEncodeCommandList3 * This,
+            /* [annotation] */ 
             _In_z_  LPCWSTR Name);
         
         DECLSPEC_XFGVIRT(ID3D12DeviceChild, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D12VideoEncodeCommandList3 * This,
-            REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D12CommandList, GetType)
@@ -8287,6 +9201,7 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList3;
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             ID3D12VideoEncodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12CommandAllocator *pAllocator);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, ClearState)
@@ -8296,50 +9211,70 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList3;
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, ResourceBarrier)
         void ( STDMETHODCALLTYPE *ResourceBarrier )( 
             ID3D12VideoEncodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  UINT NumBarriers,
+            /* [annotation] */ 
             _In_reads_(NumBarriers)  const D3D12_RESOURCE_BARRIER *pBarriers);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, DiscardResource)
         void ( STDMETHODCALLTYPE *DiscardResource )( 
             ID3D12VideoEncodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pResource,
+            /* [annotation] */ 
             _In_opt_  const D3D12_DISCARD_REGION *pRegion);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, BeginQuery)
         void ( STDMETHODCALLTYPE *BeginQuery )( 
             ID3D12VideoEncodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, EndQuery)
         void ( STDMETHODCALLTYPE *EndQuery )( 
             ID3D12VideoEncodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT Index);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, ResolveQueryData)
         void ( STDMETHODCALLTYPE *ResolveQueryData )( 
             ID3D12VideoEncodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12QueryHeap *pQueryHeap,
+            /* [annotation] */ 
             _In_  D3D12_QUERY_TYPE Type,
+            /* [annotation] */ 
             _In_  UINT StartIndex,
+            /* [annotation] */ 
             _In_  UINT NumQueries,
+            /* [annotation] */ 
             _In_  ID3D12Resource *pDestinationBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedDestinationBufferOffset);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, SetPredication)
         void ( STDMETHODCALLTYPE *SetPredication )( 
             ID3D12VideoEncodeCommandList3 * This,
+            /* [annotation] */ 
             _In_opt_  ID3D12Resource *pBuffer,
+            /* [annotation] */ 
             _In_  UINT64 AlignedBufferOffset,
+            /* [annotation] */ 
             _In_  D3D12_PREDICATION_OP Operation);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, SetMarker)
         void ( STDMETHODCALLTYPE *SetMarker )( 
             ID3D12VideoEncodeCommandList3 * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -8347,6 +9282,7 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList3;
         void ( STDMETHODCALLTYPE *BeginEvent )( 
             ID3D12VideoEncodeCommandList3 * This,
             UINT Metadata,
+            /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pData,
             UINT Size);
         
@@ -8357,8 +9293,11 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList3;
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, EstimateMotion)
         void ( STDMETHODCALLTYPE *EstimateMotion )( 
             ID3D12VideoEncodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoMotionEstimator *pMotionEstimator,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_MOTION_ESTIMATOR_OUTPUT *pOutputArguments,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_MOTION_ESTIMATOR_INPUT *pInputArguments);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, ResolveMotionVectorHeap)
@@ -8371,46 +9310,60 @@ EXTERN_C const IID IID_ID3D12VideoEncodeCommandList3;
         void ( STDMETHODCALLTYPE *WriteBufferImmediate )( 
             ID3D12VideoEncodeCommandList3 * This,
             UINT Count,
+            /* [annotation] */ 
             _In_reads_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_PARAMETER *pParams,
+            /* [annotation] */ 
             _In_reads_opt_(Count)  const D3D12_WRITEBUFFERIMMEDIATE_MODE *pModes);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList, SetProtectedResourceSession)
         void ( STDMETHODCALLTYPE *SetProtectedResourceSession )( 
             ID3D12VideoEncodeCommandList3 * This,
+            /* [annotation] */ 
             _In_opt_  ID3D12ProtectedResourceSession *pProtectedResourceSession);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList1, InitializeExtensionCommand)
         void ( STDMETHODCALLTYPE *InitializeExtensionCommand )( 
             ID3D12VideoEncodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(InitializationParametersSizeInBytes)  const void *pInitializationParameters,
             SIZE_T InitializationParametersSizeInBytes);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList1, ExecuteExtensionCommand)
         void ( STDMETHODCALLTYPE *ExecuteExtensionCommand )( 
             ID3D12VideoEncodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoExtensionCommand *pExtensionCommand,
+            /* [annotation] */ 
             _In_reads_bytes_(ExecutionParametersSizeInBytes)  const void *pExecutionParameters,
             SIZE_T ExecutionParametersSizeInBytes);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList2, EncodeFrame)
         void ( STDMETHODCALLTYPE *EncodeFrame )( 
             ID3D12VideoEncodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  ID3D12VideoEncoder *pEncoder,
+            /* [annotation] */ 
             _In_  ID3D12VideoEncoderHeap *pHeap,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_ENCODER_ENCODEFRAME_INPUT_ARGUMENTS *pInputArguments,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_ENCODER_ENCODEFRAME_OUTPUT_ARGUMENTS *pOutputArguments);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList2, ResolveEncoderOutputMetadata)
         void ( STDMETHODCALLTYPE *ResolveEncoderOutputMetadata )( 
             ID3D12VideoEncodeCommandList3 * This,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_ENCODER_RESOLVE_METADATA_INPUT_ARGUMENTS *pInputArguments,
+            /* [annotation] */ 
             _In_  const D3D12_VIDEO_ENCODER_RESOLVE_METADATA_OUTPUT_ARGUMENTS *pOutputArguments);
         
         DECLSPEC_XFGVIRT(ID3D12VideoEncodeCommandList3, Barrier)
         void ( STDMETHODCALLTYPE *Barrier )( 
             ID3D12VideoEncodeCommandList3 * This,
             UINT32 NumBarrierGroups,
+            /* [annotation] */ 
             _In_reads_(NumBarrierGroups)  const D3D12_BARRIER_GROUP *pBarrierGroups);
         
         END_INTERFACE

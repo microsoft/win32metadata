@@ -1224,9 +1224,9 @@ EXTERN_C const IID IID_IActiveScriptProfilerCallback;
             _In_  PROFILER_TOKEN functionId,
             /* [annotation][in] */ 
             _In_  PROFILER_TOKEN scriptId,
-            /* [string][annotation][in] */ 
+            /* [annotation][string][in] */ 
             _In_  const WCHAR *pwszFunctionName,
-            /* [string][annotation][in] */ 
+            /* [annotation][string][in] */ 
             _In_  const WCHAR *pwszFunctionNameHint,
             /* [annotation][in] */ 
             _In_  IUnknown *pIDebugDocumentContext) = 0;
@@ -1297,9 +1297,9 @@ EXTERN_C const IID IID_IActiveScriptProfilerCallback;
             _In_  PROFILER_TOKEN functionId,
             /* [annotation][in] */ 
             _In_  PROFILER_TOKEN scriptId,
-            /* [string][annotation][in] */ 
+            /* [annotation][string][in] */ 
             _In_  const WCHAR *pwszFunctionName,
-            /* [string][annotation][in] */ 
+            /* [annotation][string][in] */ 
             _In_  const WCHAR *pwszFunctionNameHint,
             /* [annotation][in] */ 
             _In_  IUnknown *pIDebugDocumentContext);
@@ -1453,9 +1453,9 @@ EXTERN_C const IID IID_IActiveScriptProfilerCallback2;
             _In_  PROFILER_TOKEN functionId,
             /* [annotation][in] */ 
             _In_  PROFILER_TOKEN scriptId,
-            /* [string][annotation][in] */ 
+            /* [annotation][string][in] */ 
             _In_  const WCHAR *pwszFunctionName,
-            /* [string][annotation][in] */ 
+            /* [annotation][string][in] */ 
             _In_  const WCHAR *pwszFunctionNameHint,
             /* [annotation][in] */ 
             _In_  IUnknown *pIDebugDocumentContext);
@@ -1624,9 +1624,9 @@ EXTERN_C const IID IID_IActiveScriptProfilerCallback3;
             _In_  PROFILER_TOKEN functionId,
             /* [annotation][in] */ 
             _In_  PROFILER_TOKEN scriptId,
-            /* [string][annotation][in] */ 
+            /* [annotation][string][in] */ 
             _In_  const WCHAR *pwszFunctionName,
-            /* [string][annotation][in] */ 
+            /* [annotation][string][in] */ 
             _In_  const WCHAR *pwszFunctionNameHint,
             /* [annotation][in] */ 
             _In_  IUnknown *pIDebugDocumentContext);

@@ -14418,8 +14418,8 @@ EXTERN_C const IID IID_IPBDA_EIT;
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
             /* [annotation][in] */ 
             _In_  DWORD size,
-            /* [size_is][annotation][in] */ 
-            _In_  const BYTE *pBuffer) = 0;
+            /* [annotation][size_is][in] */ 
+            _In_reads_(size)  const BYTE *pBuffer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTableId( 
             /* [annotation][out] */ 
@@ -14509,8 +14509,8 @@ EXTERN_C const IID IID_IPBDA_EIT;
             IPBDA_EIT * This,
             /* [annotation][in] */ 
             _In_  DWORD size,
-            /* [size_is][annotation][in] */ 
-            _In_  const BYTE *pBuffer);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(size)  const BYTE *pBuffer);
         
         DECLSPEC_XFGVIRT(IPBDA_EIT, GetTableId)
         HRESULT ( STDMETHODCALLTYPE *GetTableId )( 
@@ -14675,8 +14675,8 @@ EXTERN_C const IID IID_IPBDA_Services;
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
             /* [annotation][in] */ 
             _In_  DWORD size,
-            /* [size_is][annotation][in] */ 
-            _In_  BYTE *pBuffer) = 0;
+            /* [annotation][size_is][in] */ 
+            _In_reads_(size)  BYTE *pBuffer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
             /* [annotation][out] */ 
@@ -14718,8 +14718,8 @@ EXTERN_C const IID IID_IPBDA_Services;
             IPBDA_Services * This,
             /* [annotation][in] */ 
             _In_  DWORD size,
-            /* [size_is][annotation][in] */ 
-            _In_  BYTE *pBuffer);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(size)  BYTE *pBuffer);
         
         DECLSPEC_XFGVIRT(IPBDA_Services, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 

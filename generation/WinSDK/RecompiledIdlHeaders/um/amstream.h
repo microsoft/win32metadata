@@ -760,7 +760,8 @@ EXTERN_C const IID IID_IMediaStreamFilter;
         DECLSPEC_XFGVIRT(IMediaFilter, GetState)
         HRESULT ( STDMETHODCALLTYPE *GetState )( 
             IMediaStreamFilter * This,
-            /* [in] */ DWORD dwMilliSecsTimeout,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMilliSecsTimeout,
             /* [annotation][out] */ 
             _Out_  FILTER_STATE *State);
         
@@ -785,7 +786,8 @@ EXTERN_C const IID IID_IMediaStreamFilter;
         DECLSPEC_XFGVIRT(IBaseFilter, FindPin)
         HRESULT ( STDMETHODCALLTYPE *FindPin )( 
             IMediaStreamFilter * This,
-            /* [string][in] */ LPCWSTR Id,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR Id,
             /* [annotation][out] */ 
             _Out_  IPin **ppPin);
         

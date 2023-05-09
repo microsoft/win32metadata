@@ -34,6 +34,12 @@ foreach ($line in $srcLines)
         # Keep track of where we need to look next in the line
         $beginLookAt = 0
 
+        # Merge multiple MIDL attribute lists into one so all annotations are consolidated into one annotation attribute.
+        if ($line -match "^\s*\[.*[^;]$")
+        {
+            $line = $line -replace "\]\s*\[", ", "
+        }
+
         # Look for an attribute list
         while ($attrListFinderPattern.IsMatch($line, $beginLookAt))
         {
