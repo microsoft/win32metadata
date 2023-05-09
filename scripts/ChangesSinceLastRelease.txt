@@ -4350,3 +4350,7 @@ Windows.Win32.UI.WindowsAndMessaging.WNDCLASSEXW.hInstance...Windows.Win32.Found
 Windows.Win32.UI.WindowsAndMessaging.WNDCLASSW.hInstance...Windows.Win32.Foundation.HMODULE => Windows.Win32.Foundation.HINSTANCE
 Windows.Win32.Web.InternetExplorer.Apis.RatingClickedOnPRFInternal : param1...HMODULE => HINSTANCE
 Windows.Win32.Web.InternetExplorer.Apis.RatingClickedOnRATInternal : param1...HMODULE => HINSTANCE
+# Fixed #1569.
+Windows.Win32.Media.DirectShow.IMediaSample.IsDiscontinuity : [Documentation(https://docs.microsoft.com/windows/win32/api/strmif/nf-strmif-imediasample-isdiscontinuity)] => [CanReturnMultipleSuccessValues,Documentation(https://docs.microsoft.com/windows/win32/api/strmif/nf-strmif-imediasample-isdiscontinuity)]
+Windows.Win32.Media.DirectShow.IMediaSample.IsPreroll : [Documentation(https://docs.microsoft.com/windows/win32/api/strmif/nf-strmif-imediasample-ispreroll)] => [CanReturnMultipleSuccessValues,Documentation(https://docs.microsoft.com/windows/win32/api/strmif/nf-strmif-imediasample-ispreroll)]
+Windows.Win32.Media.DirectShow.IMediaSample.IsSyncPoint : [Documentation(https://docs.microsoft.com/windows/win32/api/strmif/nf-strmif-imediasample-issyncpoint)] => [CanReturnMultipleSuccessValues,Documentation(https://docs.microsoft.com/windows/win32/api/strmif/nf-strmif-imediasample-issyncpoint)]
