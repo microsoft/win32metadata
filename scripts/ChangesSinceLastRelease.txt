@@ -4354,3 +4354,5 @@ Windows.Win32.Web.InternetExplorer.Apis.RatingClickedOnRATInternal : param1...HM
 Windows.Win32.Media.DirectShow.IMediaSample.IsDiscontinuity : [Documentation(https://docs.microsoft.com/windows/win32/api/strmif/nf-strmif-imediasample-isdiscontinuity)] => [CanReturnMultipleSuccessValues,Documentation(https://docs.microsoft.com/windows/win32/api/strmif/nf-strmif-imediasample-isdiscontinuity)]
 Windows.Win32.Media.DirectShow.IMediaSample.IsPreroll : [Documentation(https://docs.microsoft.com/windows/win32/api/strmif/nf-strmif-imediasample-ispreroll)] => [CanReturnMultipleSuccessValues,Documentation(https://docs.microsoft.com/windows/win32/api/strmif/nf-strmif-imediasample-ispreroll)]
 Windows.Win32.Media.DirectShow.IMediaSample.IsSyncPoint : [Documentation(https://docs.microsoft.com/windows/win32/api/strmif/nf-strmif-imediasample-issyncpoint)] => [CanReturnMultipleSuccessValues,Documentation(https://docs.microsoft.com/windows/win32/api/strmif/nf-strmif-imediasample-issyncpoint)]
+# Fixed #1570.
+Windows.Win32.Media.DirectShow.IAMStreamConfig.SetFormat : pmt : [In,Out] => [In]
