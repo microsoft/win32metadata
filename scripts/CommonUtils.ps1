@@ -58,7 +58,9 @@ function Remove-Directory([string[]] $Path)
 
 function Reset-Directory([string[]] $Path)
 {
-    Remove-Directory $Path && New-Directory $Path
+    Remove-Directory $Path
+
+    New-Directory $Path
 }
 
 function Install-BuildTools
