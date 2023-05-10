@@ -7,6 +7,7 @@ $MicrosoftDocsWin32Path = "$rootDir\ext\win32"
 $windowsWin32ProjectRoot = "$rootDir\generation\WinSDK"
 $sdkGeneratedSourceDir = "$windowsWin32ProjectRoot\obj\generated"
 $recompiledIdlHeadersDir = "$windowsWin32ProjectRoot\RecompiledIdlHeaders"
+$recompiledIdlHeadersScratchDir = "$rootDir\obj\RecompiledIdlHeaders"
 $metadataToolsBin = "$binDir\release\net6.0"
 
 # [VS 1673159]
@@ -39,11 +40,11 @@ if (!(Test-Path -Path $binDir))
     New-Item -ItemType Directory -Force -Path $binDir | Out-Null
 }
 
-function Create-Directory([string[]] $Path)
+function New-Directory([string[]] $Path)
 {
     if (!(Test-Path -Path $Path))
     {
-        New-Item -Path $Path -Force -ItemType "Directory" | Out-Null
+        New-Item -Path $Path -ItemType "Directory" -Force | Out-Null
     }
 }
 
@@ -53,6 +54,11 @@ function Remove-Directory([string[]] $Path)
     {
         Remove-Item $Path -Recurse
     }
+}
+
+function Reset-Directory([string[]] $Path)
+{
+    Remove-Directory $Path && New-Directory $Path
 }
 
 function Install-BuildTools
