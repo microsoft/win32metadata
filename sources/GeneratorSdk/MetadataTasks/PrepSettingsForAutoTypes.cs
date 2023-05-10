@@ -45,6 +45,8 @@ namespace MetadataTasks
                         typesToExclude.Add(handleStructName);
 
                         remapSection.AppendLine($"{typeName}={nativeType}");
+                        remapSection.AppendLine($"P{typeName}={typeName}*");
+                        remapSection.AppendLine($"LP{typeName}={typeName}*");
                         remapSection.AppendLine($"{handleStructName}*={typeName}");
                     }
                     else if (type == "AllJoynHandle")
@@ -55,6 +57,18 @@ namespace MetadataTasks
 
                         remapSection.AppendLine($"{typeName}=IntPtr");
                         remapSection.AppendLine($"{handleStructName}*={typeName}");
+                    }
+                    else if (type.StartsWith("typedef struct"))
+                    {
+                        var typeName = autoType.Name;
+                        var handleStructName = type[15..];
+                        typesToExclude.Add(handleStructName);
+
+                        if (typeName != handleStructName && !remapSection.ToString().Contains($"{handleStructName}=IntPtr"))
+                        {
+                            remapSection.AppendLine($"{handleStructName}=IntPtr");
+                            remapSection.AppendLine($"P{typeName}={typeName}*");
+                        }
                     }
                 }
             }

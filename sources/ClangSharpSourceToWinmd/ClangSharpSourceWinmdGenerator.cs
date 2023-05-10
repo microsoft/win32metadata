@@ -9,15 +9,16 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Reflection.Metadata.Ecma335;
 using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using MetadataUtils;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using MetadataUtils;
+using Newtonsoft.Json.Linq;
 
 namespace ClangSharpSourceToWinmd
 {
@@ -26,13 +27,11 @@ namespace ClangSharpSourceToWinmd
         public const string Win32WideStringType = "Windows.Win32.Foundation.PWSTR";
         public const string Win32StringType = "Windows.Win32.Foundation.PSTR";
 
-        private const string InteropNamespace = "Windows.Win32.Interop";
         private const string ScannedSuffix = "__scanned__";
         private const string RemovePrefix = "__remove__";
         private const string ForceConstPrefix = "__forceconst__";
 
         private const string SystemAssemblyName = "netstandard";
-        private const string Win32InteropAssemblyName = "Windows.Win32.Interop";
         private const string Win32MetadataAssemblyName = "Windows.Win32.winmd";
 
         private static readonly Regex TypeImportRegex = new Regex(@"<(([^,]+),\s*Version=(\d+\.\d+\.\d+\.\d+),\s*Culture=([^,]+),\s*PublicKeyToken=([^>]+))>(\S+)");
@@ -100,7 +99,7 @@ namespace ClangSharpSourceToWinmd
 
             void VerifySymbolsLoadedByCompiler()
             {
-                string[] standardSymbolNames = new string[] { "System.Object", "System.Attribute", $"{InteropNamespace}.ConstAttribute" };
+                string[] standardSymbolNames = new string[] { "System.Object", "System.Attribute" };
 
                 foreach (var name in standardSymbolNames)
                 {
@@ -156,17 +155,6 @@ namespace ClangSharpSourceToWinmd
                         default,
                         default);
                 this.assemblyNamesToRefHandles[SystemAssemblyName] = systemAssemblyRef;
-
-                var interopAssembly = this.compilation.ReferencedAssemblyNames.ToList().Find(a => a.Name == Win32InteropAssemblyName);
-                var interopAssemblyRef =
-                    this.metadataBuilder.AddAssemblyReference(
-                        this.metadataBuilder.GetOrAddString(InteropNamespace),
-                        interopAssembly.Version,
-                        default,
-                        this.metadataBuilder.GetOrAddBlob(interopAssembly.PublicKeyToken),
-                        default,
-                        default);
-                this.assemblyNamesToRefHandles[Win32InteropAssemblyName] = interopAssemblyRef;
 
                 var win32Assembly = this.compilation.ReferencedAssemblyNames.ToList().Find(a => a.Name == Win32MetadataAssemblyName);
                 if (win32Assembly != null)
@@ -257,7 +245,7 @@ namespace ClangSharpSourceToWinmd
 
         private static bool HasGuidAttribute(SyntaxList<AttributeListSyntax> attributeLists)
         {
-            bool ret = attributeLists.Any(list => list.Attributes.Any(attr => attr.Name.ToString() == "Windows.Win32.Interop.Guid"));
+            bool ret = attributeLists.Any(list => list.Attributes.Any(attr => attr.Name.ToString() == "Windows.Win32.Foundation.Metadata.Guid"));
             return ret;
         }
 
@@ -591,6 +579,16 @@ namespace ClangSharpSourceToWinmd
                                     this.nameToSymbols[typeInfo.Name] = typeSymbol;
                                 }
                             }
+                            else if (typeInfo is MetadataUtils.DelegateTypeInfo)
+                            {
+                                var fullName = $"{typeInfo.Namespace}.{typeInfo.Name}";
+                                var typeSymbol = this.compilation.GetTypeByMetadataName(fullName);
+
+                                if (typeSymbol != null)
+                                {
+                                    this.nameToSymbols[typeInfo.Name] = typeSymbol;
+                                }
+                            }
                         }
                     }
                 }
@@ -635,10 +633,6 @@ namespace ClangSharpSourceToWinmd
                     if (@namespace.StartsWith("System"))
                     {
                         scopeRef = this.assemblyNamesToRefHandles[SystemAssemblyName];
-                    }
-                    else if (@namespace.StartsWith(InteropNamespace))
-                    {
-                        scopeRef = this.assemblyNamesToRefHandles[Win32InteropAssemblyName];
                     }
                     else
                     {
@@ -1010,7 +1004,7 @@ namespace ClangSharpSourceToWinmd
 
                 if (!fixedName.Contains("."))
                 {
-                    foreach (string @namespace in new string[] { InteropNamespace, "System" })
+                    foreach (string @namespace in new string[] { "System" })
                     {
                         var fullNameToCheck = GetQualifiedName(@namespace, fixedName);
                         ret = this.compilation.GetTypeByMetadataName(fullNameToCheck);
@@ -1302,11 +1296,16 @@ namespace ClangSharpSourceToWinmd
 
                 if (!fieldSymbol.IsConst)
                 {
-                    fieldAttributes = FieldAttributes.Public | FieldAttributes.Static;
+                    fieldAttributes = FieldAttributes.Public;
 
-                    if (!HasGuidAttribute(field.AttributeLists) && !HasConstantAttribute(field.AttributeLists))
+                    if (node.BaseList?.Types[0]?.ToString() != "Attribute")
                     {
-                        continue;
+                        fieldAttributes |= FieldAttributes.Static;
+
+                        if (!HasGuidAttribute(field.AttributeLists) && !HasConstantAttribute(field.AttributeLists))
+                        {
+                            continue;
+                        }
                     }
 
                     if (fieldSymbol.Name.StartsWith("IID_"))
@@ -1390,6 +1389,25 @@ namespace ClangSharpSourceToWinmd
             var classSymbol = model.GetDeclaredSymbol(node);
             MethodDefinitionHandle firstMethod = default;
             string classFullName = this.GetFullNameForSymbol(classSymbol);
+
+            foreach (ConstructorDeclarationSyntax constructor in node.Members.Where(m => m is ConstructorDeclarationSyntax))
+            {
+                var symbol = model.GetDeclaredSymbol(constructor);
+
+                MethodImplAttributes methodImplAttributes = MethodImplAttributes.Managed;
+                var methodDef =
+                    this.AddMethodViaSymbol(
+                        symbol,
+                        MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName,
+                        methodImplAttributes,
+                        false,
+                        false);
+
+                if (firstMethod.IsNil)
+                {
+                    firstMethod = methodDef;
+                }
+            }
 
             foreach (MethodDeclarationSyntax method in node.Members.Where(m => m is MethodDeclarationSyntax))
             {
@@ -1515,7 +1533,8 @@ namespace ClangSharpSourceToWinmd
             var name = node.Identifier.ValueText;
             string fullName = symbol.ConstructedFrom.ToString();
 
-            TypeAttributes typeAttributes = TypeAttributes.Public | TypeAttributes.AutoClass | TypeAttributes.Abstract | TypeAttributes.Sealed | TypeAttributes.BeforeFieldInit;
+            TypeAttributes typeAttributes = TypeAttributes.Public | TypeAttributes.Sealed | TypeAttributes.AutoClass | TypeAttributes.BeforeFieldInit;
+            typeAttributes |= node.BaseList is null ? TypeAttributes.Abstract : TypeAttributes.Class;
 
             if (methodDefinition.IsNil)
             {
@@ -1532,9 +1551,11 @@ namespace ClangSharpSourceToWinmd
                     typeAttributes,
                     nsHandle,
                     this.metadataBuilder.GetOrAddString(name),
-                    this.GetTypeReference("System", "Object"),
+                    this.GetTypeReference("System", node.BaseList is null ? "Object" : node.BaseList.Types[0].ToString()),
                     fieldList: fieldDefinition,
                     methodList: methodDefinition);
+
+            this.AddCustomAttributes(symbol.GetAttributes(), destTypeDefHandle);
 
             this.namesToTypeDefHandles[fullName] = destTypeDefHandle;
         }
@@ -1825,10 +1846,17 @@ namespace ClangSharpSourceToWinmd
                     throw new InvalidOperationException($"Enum {node.Identifier.Text} has a member with no name.");
                 }
 
+                if (Regex.IsMatch(memberName, @"_FORCE_(DWORD|UINT(\d\d)?|ULONG(\d\d)?)$"))
+                {
+                    return;
+                }
+
                 var fieldDefinitionHandle = this.metadataBuilder.AddFieldDefinition(
                     enumFieldAttributes,
                     this.metadataBuilder.GetOrAddString(memberName),
                     this.metadataBuilder.GetOrAddBlob(fieldSignature));
+
+                this.AddCustomAttributes(symbol, fieldDefinitionHandle);
 
                 if (symbol.HasConstantValue)
                 {
@@ -2475,7 +2503,7 @@ namespace ClangSharpSourceToWinmd
                 {
                     if (paramType is INamedTypeSymbol namedType)
                     {
-                        if (namedType.GetAttributes().Any(a => a.AttributeClass.Name == "NativeTypedefAttribute"))
+                        if (namedType.GetAttributes().Any(a => a.AttributeClass.Name == "NativeTypedefAttribute" || a.AttributeClass.Name == "MetadataTypedefAttribute"))
                         {
                             isPointer = (paramType.GetMembers("Value").First() as IFieldSymbol).Type is IPointerTypeSymbol;
 

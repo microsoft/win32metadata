@@ -6,6 +6,8 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
+#define UNICODE
+
 #include <setupapi.h>
 #include <cfg.h>
 #include <cfgmgr32.h>

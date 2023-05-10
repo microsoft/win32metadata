@@ -11,7 +11,7 @@ namespace ClangSharpSourceToWinmd
             using var writer = new StreamWriter(output, leaveOpen: true);
             writer.Write(
 @"using System;
-using Windows.Win32.Interop;
+using Windows.Win32.Foundation.Metadata;
 
 ");
             string currentNamespace = null;
@@ -22,10 +22,17 @@ using Windows.Win32.Interop;
                 if (valueType == "DECLARE_HANDLE" || valueType == "AllJoynHandle")
                 {
                     valueType = "IntPtr";
+                    item.NativeTypedef = true;
                 }
                 else if (valueType == "DECLARE_OPAQUE_KEY")
                 {
                     valueType = "long";
+                    item.NativeTypedef = true;
+                }
+                else if (valueType.StartsWith("typedef struct"))
+                {
+                    valueType = "IntPtr";
+                    item.NativeTypedef = true;
                 }
 
                 if (!string.IsNullOrEmpty(item.CloseApi))
@@ -85,7 +92,7 @@ $@"namespace {currentNamespace}
                 }
 
                 writer.WriteLine(
-$@"    [NativeTypedef]    
+$@"    [{(item.NativeTypedef ? "NativeTypedef" : "MetadataTypedef")}]
     public {safety}struct {item.Name}
     {{
         public {valueType} Value;

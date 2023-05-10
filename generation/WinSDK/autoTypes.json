@@ -2,1581 +2,2801 @@
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "BOOL",
-    "ValueType": "int"
+    "ValueType": "int",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "BOOLEAN",
-    "ValueType": "byte"
+    "ValueType": "byte",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "VARIANT_BOOL",
-    "ValueType": "short"
+    "ValueType": "short",
+    "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.Foundation",
     "Name": "BSTR",
     "ValueType": "char*",
-    "CloseApi": "SysFreeString"
+    "CloseApi": "SysFreeString",
+    "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.Foundation",
     "Name": "HANDLE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "CloseHandle",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "HMODULE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "FreeLibrary",
-    "InvalidHandleValues": [ 0 ]
+    "AlsoUsableFor": "HINSTANCE",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "HINSTANCE",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "FreeLibrary",
+    "AlsoUsableFor": "HMODULE",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "HRESULT",
-    "ValueType": "int"
+    "ValueType": "int",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "HWND",
-    "ValueType": "DECLARE_HANDLE"
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "LPARAM",
-    "ValueType": "IntPtr"
+    "ValueType": "IntPtr",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "LRESULT",
-    "ValueType": "IntPtr"
+    "ValueType": "IntPtr",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "NTSTATUS",
-    "ValueType": "int"
+    "ValueType": "int",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "PSID",
-    "ValueType": "void*"
+    "ValueType": "void*",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "PSTR",
-    "ValueType": "byte*"
+    "ValueType": "byte*",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "PWSTR",
-    "ValueType": "char*"
+    "ValueType": "char*",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "WPARAM",
-    "ValueType": "UIntPtr"
+    "ValueType": "UIntPtr",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "COLORREF",
-    "ValueType": "uint"
+    "ValueType": "uint",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.System.DataExchange",
     "Name": "HSZ",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.System.DataExchange",
     "Name": "HCONV",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.System.DataExchange",
     "Name": "HCONVLIST",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.System.DataExchange",
     "Name": "HDDEDATA",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.Input.Touch",
     "Name": "HGESTUREINFO",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HGLRC",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "wglDeleteContext",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.TextServices",
     "Name": "HKL",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HMIDI",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HMIDIIN",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HMIDIOUT",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HMIDISTRM",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HMIXER",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HMIXEROBJ",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HWAVE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HWAVEOUT",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HWAVEIN",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.Input",
     "Name": "HRAWINPUT",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "HRSRC",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.Display",
     "Name": "HSURF",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.Controls",
     "Name": "HSYNTHETICPOINTERDEVICE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Media",
     "Name": "HTASK",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.Input.Touch",
     "Name": "HTOUCHINPUT",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HWINEVENTHOOK",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "UnhookWinEvent",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HWINSTA",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "CloseWindowStation",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HSTRING",
     "ValueType": "DECLARE_HANDLE",
-    "CloseApi": "WindowsDeleteString"
+    "CloseApi": "WindowsDeleteString",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.System.WinRT",
     "Name": "HSTRING_BUFFER",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HDC",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "ReleaseDC",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "CreatedHDC",
     "ValueType": "IntPtr",
     "CloseApi": "DeleteDC",
     "AlsoUsableFor": "HDC",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Namespace": "Windows.Win32.Graphics.Gdi",
     "Name": "HGDIOBJ",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HBITMAP",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "DeleteObject",
     "AlsoUsableFor": "HGDIOBJ",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HRGN",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "DeleteObject",
     "AlsoUsableFor": "HGDIOBJ",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HPEN",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "DeleteObject",
     "AlsoUsableFor": "HGDIOBJ",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HBRUSH",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "DeleteObject",
     "AlsoUsableFor": "HGDIOBJ",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HFONT",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "DeleteObject",
     "AlsoUsableFor": "HGDIOBJ",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HMETAFILE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "DeleteMetaFile",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HENHMETAFILE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "DeleteEnhMetaFile",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Graphics.Gdi",
     "Name": "HMONITOR",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HPALETTE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "DeleteObject",
     "AlsoUsableFor": "HGDIOBJ",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HHOOK",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "UnhookWindowsHookEx",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HICON",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "DestroyIcon",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HMENU",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "DestroyMenu",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HCURSOR",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "DestroyCursor",
     "AlsoUsableFor": "HICON",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "TimerQueueHandle",
     "ValueType": "IntPtr",
     "CloseApi": "DeleteTimerQueueEx",
-    "InvalidHandleValues": [ 0 ]
-  },
-  {
-    "Namespace": "Windows.Win32.System.Threading",
-    "Name": "PTP_IO",
-    "ValueType": "IntPtr",
-    "InvalidHandleValues": [ 0 ]
-  },
-  {
-    "Namespace": "Windows.Win32.System.Threading",
-    "Name": "PTP_TIMER",
-    "ValueType": "IntPtr",
-    "InvalidHandleValues": [ 0 ]
-  },
-  {
-    "Namespace": "Windows.Win32.System.Threading",
-    "Name": "PTP_WAIT",
-    "ValueType": "IntPtr",
-    "InvalidHandleValues": [ 0 ]
-  },
-  {
-    "Namespace": "Windows.Win32.System.Threading",
-    "Name": "PTP_WORK",
-    "ValueType": "IntPtr",
-    "InvalidHandleValues": [ 0 ]
-  },
-  {
-    "Namespace": "Windows.Win32.System.Threading",
-    "Name": "PTP_CALLBACK_INSTANCE",
-    "ValueType": "IntPtr",
-    "InvalidHandleValues": [ 0 ]
-  },
-  {
-    "Name": "PTP_POOL",
-    "ValueType": "IntPtr",
-    "CloseApi": "CloseThreadpool"
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "NamespaceHandle",
     "ValueType": "IntPtr",
     "CloseApi": "ClosePrivateNamespace",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "BoundaryDescriptorHandle",
     "ValueType": "IntPtr",
     "CloseApi": "DeleteBoundaryDescriptor",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "FindFileHandle",
     "ValueType": "IntPtr",
     "CloseApi": "FindClose",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "FindFileNameHandle",
     "ValueType": "IntPtr",
     "CloseApi": "FindClose",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "FindStreamHandle",
     "ValueType": "IntPtr",
     "CloseApi": "FindClose",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "FindChangeNotificationHandle",
     "ValueType": "IntPtr",
     "CloseApi": "FindCloseChangeNotification",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "FindVolumeHandle",
     "ValueType": "IntPtr",
     "CloseApi": "FindVolumeClose",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "FindVolumeMountPointHandle",
     "ValueType": "IntPtr",
     "CloseApi": "FindVolumeMountPointClose",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "EventLogHandle",
     "ValueType": "IntPtr",
     "CloseApi": "CloseEventLog",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "EventSourceHandle",
     "ValueType": "IntPtr",
     "CloseApi": "DeregisterEventSource",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
-    "Name": "HWSAEVENT",
+    "Name": "WSAEVENT",
     "ValueType": "IntPtr",
     "CloseApi": "WSACloseEvent",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HFILTER",
     "ValueType": "IntPtr",
     "CloseApi": "FilterClose",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "ShFindChangeNotificationHandle",
     "ValueType": "IntPtr",
     "CloseApi": "SHChangeNotification_Unlock",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "CriticalPolicySectionHandle",
     "ValueType": "IntPtr",
     "CloseApi": "LeaveCriticalPolicySection",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "HwtsVirtualChannelHandle",
     "ValueType": "IntPtr",
     "CloseApi": "WTSVirtualChannelClose",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "IcmpHandle",
     "ValueType": "IntPtr",
     "CloseApi": "IcmpCloseHandle",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "HdcMetdataFileHandle",
     "ValueType": "IntPtr",
     "CloseApi": "DeleteMetaFile",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "HdcMetdataEnhFileHandle",
     "ValueType": "IntPtr",
     "CloseApi": "DeleteEnhMetaFile",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "HeapHandle",
     "ValueType": "IntPtr",
     "CloseApi": "HeapDestroy",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "HLOCAL",
-    "ValueType": "DECLARE_HANDLE",
+    "ValueType": "void*",
     "CloseApi": "LocalFree",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "HGLOBAL",
-    "ValueType": "DECLARE_HANDLE",
+    "ValueType": "void*",
     "CloseApi": "GlobalFree",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HCOLORSPACE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "DeleteColorSpace",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HDESK",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "CloseDesktop",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HACCEL",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "DestroyAcceleratorTable",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HPROPSHEETPAGE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "DestroyPropertySheetPage",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HKEY",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "RegCloseKey",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HIMAGELIST",
     "ValueType": "IntPtr",
     "CloseApi": "ImageList_Destroy",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "NetEnumHandle",
     "ValueType": "IntPtr",
     "CloseApi": "WNetCloseEnum",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "HCRYPTASYNC",
     "ValueType": "IntPtr",
     "CloseApi": "CryptCloseAsyncHandle",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HCERTCHAINENGINE",
     "ValueType": "IntPtr",
     "CloseApi": "CertFreeCertificateChainEngine",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HPOWERNOTIFY",
     "ValueType": "IntPtr",
     "CloseApi": "UnregisterPowerSettingNotification",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "LSA_HANDLE",
     "ValueType": "IntPtr",
     "CloseApi": "LsaClose",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "PerfProviderHandle",
     "ValueType": "IntPtr",
     "CloseApi": "PerfStopProvider",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "PerfQueryHandle",
     "ValueType": "IntPtr",
     "CloseApi": "PerfCloseQueryHandle",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "DnsContextHandle",
     "ValueType": "IntPtr",
     "CloseApi": "DnsReleaseContextHandle",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "HFILTER_INSTANCE",
     "ValueType": "IntPtr",
     "CloseApi": "FilterInstanceClose",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "FilterFindHandle",
     "ValueType": "IntPtr",
     "CloseApi": "FilterFindClose",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "FilterVolumeFindHandle",
     "ValueType": "IntPtr",
     "CloseApi": "FilterVolumeFindClose",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "FilterInstanceFindHandle",
     "ValueType": "IntPtr",
     "CloseApi": "FilterInstanceFindClose",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "FilterVolumeInstanceFindHandle",
     "ValueType": "IntPtr",
     "CloseApi": "FilterVolumeInstanceFindClose",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "GetDcContextHandle",
     "ValueType": "IntPtr",
     "CloseApi": "DsGetDcCloseW",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": false
   },
   {
     "Name": "TDH_HANDLE",
     "ValueType": "IntPtr",
     "CloseApi": "TdhCloseDecodingHandle",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "COMPRESSOR_HANDLE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "CloseDecompressor",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "MSIHANDLE",
     "ValueType": "uint",
     "CloseApi": "MsiCloseHandle",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HREPORT",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "WerReportCloseHandle",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HREPORTSTORE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "WerStoreClose",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.Animation",
     "Name": "UI_ANIMATION_KEYFRAME",
-    "ValueType": "IntPtr"
+    "ValueType": "IntPtr",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.TabletPC",
     "Name": "HRECOALT",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.TabletPC",
     "Name": "HRECOCONTEXT",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.TabletPC",
     "Name": "HRECOGNIZER",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.TabletPC",
     "Name": "HRECOLATTICE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.TabletPC",
     "Name": "HRECOWORDLIST",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.System.Antimalware",
     "Name": "HAMSICONTEXT",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.System.Antimalware",
     "Name": "HAMSISESSION",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security.Authorization",
     "Name": "AUTHZ_ACCESS_CHECK_RESULTS_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Security.Authorization",
+    "Name": "AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security.Authorization",
     "Name": "AUTHZ_CLIENT_CONTEXT_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security.Authorization",
     "Name": "AUTHZ_RESOURCE_MANAGER_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security.Authorization",
     "Name": "AUTHZ_AUDIT_EVENT_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security.Authorization",
     "Name": "AUTHZ_AUDIT_EVENT_TYPE_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security.Authorization",
     "Name": "AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
     "Name": "HCMNOTIFICATION",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.System.Com",
     "Name": "CO_MTA_USAGE_COOKIE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.System.Com",
     "Name": "CO_DEVICE_CATALOG_COOKIE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.System.WindowsProgramming",
     "Name": "HWINWATCH",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security",
     "Name": "HDIAGNOSTIC_DATA_QUERY_SESSION",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security",
     "Name": "HDIAGNOSTIC_REPORT",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security",
     "Name": "HDIAGNOSTIC_EVENT_TAG_DESCRIPTION",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security",
     "Name": "HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security",
     "Name": "HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security",
     "Name": "HDIAGNOSTIC_RECORD",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.System.WindowsProgramming",
     "Name": "FEATURE_STATE_CHANGE_SUBSCRIPTION",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.System.WindowsProgramming",
     "Name": "FH_SERVICE_PIPE_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "HIMC",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "HIMCC",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.InteractionContext",
     "Name": "HINTERACTIONCONTEXT",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.NetworkManagement.IpHelper",
     "Name": "HIFTIMESTAMPCHANGE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.NetworkManagement.QoS",
     "Name": "LPM_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.NetworkManagement.QoS",
     "Name": "RHANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Media.Multimedia",
     "Name": "HMMIO",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Media.Multimedia",
     "Name": "HDRVR",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HACMDRIVERID",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HACMDRIVER",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HACMSTREAM",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HACMOBJ",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.SerialCommunication",
     "Name": "HCOMDB",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security",
     "Name": "NCRYPT_DESCRIPTOR_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security",
     "Name": "NCRYPT_STREAM_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Storage.Xps",
     "Name": "HPTPROVIDER",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.System.Diagnostics.ProcessSnapshotting",
     "Name": "HPSS",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.System.Diagnostics.ProcessSnapshotting",
     "Name": "HPSSWALK",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Storage.ProjectedFileSystem",
     "Name": "PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.NetworkManagement.Rras",
     "Name": "HRASCONN",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.Shell",
     "Name": "HDROP",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.Shell",
     "Name": "HPSXA",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.Enumeration.Pnp",
     "Name": "HSWDEVICE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.Accessibility",
     "Name": "HUIANODE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.Accessibility",
     "Name": "HUIAPATTERNOBJECT",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.Accessibility",
     "Name": "HUIATEXTRANGE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.Accessibility",
     "Name": "HUIAEVENT",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Media.Multimedia",
     "Name": "HIC",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Media.Multimedia",
     "Name": "HVIDEO",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.WebSocket",
     "Name": "WEB_SOCKET_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.WinInet",
     "Name": "HTTP_PUSH_WAIT_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Globalization",
     "Name": "HSAVEDUILANGUAGES",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security",
     "Name": "SAFER_LEVEL_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security",
     "Name": "SC_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.System.Services",
     "Name": "SERVICE_STATUS_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.HiDpi",
     "Name": "DPI_AWARENESS_CONTEXT",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.System.WinRT",
     "Name": "ROPARAMIIDHANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.System.WinRT",
     "Name": "APARTMENT_SHUTDOWN_REGISTRATION_COOKIE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Storage.ProjectedFileSystem",
     "Name": "PRJ_DIR_ENTRY_BUFFER_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HSEMAPHORE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "EngDeleteSemaphore",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.Display",
     "Name": "HFASTMUTEX",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.Display",
     "Name": "HDRVOBJ",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.Display",
     "Name": "HDEV",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.Display",
     "Name": "HBM",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.Display",
     "Name": "DHSURF",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.Display",
     "Name": "DHPDEV",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
-  },
-  {
-    "Namespace": "Windows.Win32.System.SystemInformation",
-    "Name": "FIRMWARE_TABLE_ID",
-    "ValueType": "uint"
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Storage.CloudFilters",
     "Name": "CF_CONNECTION_KEY",
     "ValueType": "DECLARE_OPAQUE_KEY",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_aboutdata",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_aboutdatalistener",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_abouticon",
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_abouticonobj",
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.AllJoyn",
+    "Name": "alljoyn_abouticonproxy",
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_aboutlistener",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_aboutobj",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_aboutobjectdescription",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_aboutproxy",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_applicationstatelistener",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_authlistener",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_autopinger",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_busattachment",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_buslistener",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_busobject",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_credentials",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_interfacedescription",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_keystore",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_keystorelistener",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_message",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_msgarg",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_observer",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_observerlistener",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_permissionconfigurationlistener",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_permissionconfigurator",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_pinglistener",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_proxybusobject",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_proxybusobject_ref",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_securityapplicationproxy",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_sessionlistener",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_sessionopts",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_sessionportlistener",
-    "ValueType": "AllJoynHandle"
+    "ValueType": "AllJoynHandle",
+    "NativeTypedef": true
   },
   {
     "Name": "HPCON",
     "ValueType": "IntPtr",
     "CloseApi": "ClosePseudoConsole",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.Controls",
     "Name": "HTREEITEM",
-    "ValueType": "IntPtr"
+    "ValueType": "IntPtr",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.Controls",
     "Name": "HDSA",
     "ValueType": "IntPtr",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.Controls",
     "Name": "HDPA",
     "ValueType": "IntPtr",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.System.Threading",
     "Name": "LPPROC_THREAD_ATTRIBUTE_LIST",
-    "ValueType": "void*"
+    "ValueType": "void*",
+    "NativeTypedef": true
   },
   {
     "Name": "WHV_PARTITION_HANDLE",
     "ValueType": "IntPtr",
     "CloseApi": "WHvDeletePartition",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "CHAR",
-    "ValueType": "byte"
+    "ValueType": "byte",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Storage.StructuredStorage",
     "Name": "JET_HANDLE",
     "ValueType": "UIntPtr",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Storage.StructuredStorage",
     "Name": "JET_INSTANCE",
     "ValueType": "UIntPtr",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Storage.StructuredStorage",
     "Name": "JET_SESID",
     "ValueType": "UIntPtr",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Storage.StructuredStorage",
     "Name": "JET_TABLEID",
     "ValueType": "UIntPtr",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Storage.StructuredStorage",
     "Name": "JET_API_PTR",
     "ValueType": "UIntPtr",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Storage.Jet",
     "Name": "JET_OSSNAPID",
     "ValueType": "UIntPtr",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Storage.Jet",
     "Name": "JET_LS",
     "ValueType": "UIntPtr",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "SHANDLE_PTR",
-    "ValueType": "IntPtr"
+    "ValueType": "IntPtr",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "HANDLE_PTR",
-    "ValueType": "UIntPtr"
+    "ValueType": "UIntPtr",
+    "NativeTypedef": true
   },
   {
     "Name": "SOCKET",
     "ValueType": "UIntPtr",
-    "CloseApi": "closesocket"
+    "CloseApi": "closesocket",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security.Cryptography",
     "Name": "BCRYPT_HANDLE",
-    "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ 0 ]
+    "ValueType": "void*",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "BCRYPT_ALG_HANDLE",
-    "ValueType": "DECLARE_HANDLE",
+    "ValueType": "void*",
     "CloseApi": "BCryptCloseAlgorithmProvider",
     "AlsoUsableFor": "BCRYPT_HANDLE",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "BCRYPT_KEY_HANDLE",
-    "ValueType": "DECLARE_HANDLE",
+    "ValueType": "void*",
     "CloseApi": "BCryptDestroyKey",
     "AlsoUsableFor": "BCRYPT_HANDLE",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "BCRYPT_HASH_HANDLE",
-    "ValueType": "DECLARE_HANDLE",
+    "ValueType": "void*",
     "CloseApi": "BCryptDestroyHash",
     "AlsoUsableFor": "BCRYPT_HANDLE",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "BCRYPT_SECRET_HANDLE",
-    "ValueType": "DECLARE_HANDLE",
+    "ValueType": "void*",
     "CloseApi": "BCryptDestroySecret",
     "AlsoUsableFor": "BCRYPT_HANDLE",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HCS_OPERATION",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "HcsCloseOperation",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HCS_SYSTEM",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "HcsCloseComputeSystem",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "HCS_PROCESS",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "HcsCloseProcess",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.System.HostCompute",
     "Name": "HCS_CALLBACK",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Devices.Bluetooth",
     "Name": "HANDLE_SDP_TYPE",
     "ValueType": "ulong",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security.Cryptography",
     "Name": "NCRYPT_HANDLE",
     "ValueType": "UIntPtr",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.Security.Cryptography",
     "Name": "NCRYPT_PROV_HANDLE",
     "ValueType": "UIntPtr",
     "CloseApi": "NCryptFreeObject",
     "AlsoUsableFor": "NCRYPT_HANDLE",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.Security.Cryptography",
     "Name": "NCRYPT_KEY_HANDLE",
     "ValueType": "UIntPtr",
     "CloseApi": "NCryptFreeObject",
     "AlsoUsableFor": "NCRYPT_HANDLE",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security.Cryptography",
     "Name": "NCRYPT_HASH_HANDLE",
     "ValueType": "UIntPtr",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security.Cryptography",
     "Name": "NCRYPT_SECRET_HANDLE",
     "ValueType": "UIntPtr",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security.Cryptography",
     "Name": "HCRYPTPROV_LEGACY",
     "ValueType": "UIntPtr",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security.Cryptography",
     "Name": "HCRYPTPROV_OR_NCRYPT_KEY_HANDLE",
     "ValueType": "UIntPtr",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security.Cryptography",
     "Name": "HCERTSTORE",
     "ValueType": "void*",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security.Cryptography",
     "Name": "HCERTSTOREPROV",
     "ValueType": "void*",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Security",
     "Name": "PSECURITY_DESCRIPTOR",
     "ValueType": "void*",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
     "Name": "HDEVINFO",
     "ValueType": "IntPtr",
     "CloseApi": "SetupDiDestroyDeviceInfoList",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.ActiveDirectory",
     "Name": "ADS_SEARCH_HANDLE",
     "ValueType": "IntPtr",
-    "InvalidHandleValues": [ -1, 0 ]
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.System.Diagnostics.Etw",
     "Name": "PROCESSTRACE_HANDLE",
     "ValueType": "ulong",
-    "CloseApi": "CloseTrace"
+    "CloseApi": "CloseTrace",
+    "NativeTypedef": false
   },
   {
     "Namespace": "Windows.Win32.System.Diagnostics.Etw",
     "Name": "CONTROLTRACE_HANDLE",
     "ValueType": "ulong",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": false
   },
   {
     "Namespace": "Windows.Win32.System.Diagnostics.Etw",
     "Name": "RELOGSTREAM_HANDLE",
     "ValueType": "ulong",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": false
   },
   {
     "Namespace": "Windows.Win32.System.Search",
     "Name": "HACCESSOR",
     "ValueType": "UIntPtr",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.UI.Controls",
     "Name": "HTHEME",
     "ValueType": "IntPtr",
     "InvalidHandleValues": [ 0 ],
-    "CloseApi": "CloseThemeData"
+    "CloseApi": "CloseThemeData",
+    "NativeTypedef": true
   },
   {
     "Name": "EVT_HANDLE",
     "ValueType": "IntPtr",
     "InvalidHandleValues": [ 0 ],
-    "CloseApi": "EvtClose"
+    "CloseApi": "EvtClose",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.WindowsAndMessaging",
     "Name": "HDWP",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.System.Ole",
     "Name": "OLE_HANDLE",
     "ValueType": "uint",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "WINUSB_INTERFACE_HANDLE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "WinUsb_Free",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
   },
   {
     "Name": "UPDATERESOURCE_HANDLE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "EndUpdateResourceW",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": false
   },
   {
     "Namespace": "Windows.Win32.UI.WindowsAndMessaging",
     "Name": "LOADIMAGE_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ 0 ]
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": false
   },
   {
     "Namespace": "Windows.Win32.Networking.WinSock",
     "Name": "socklen_t",
-    "ValueType": "int"
+    "ValueType": "int",
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Networking.WinSock",
     "Name": "sa_family_t",
-    "ValueType": "ushort"
+    "ValueType": "ushort",
+    "NativeTypedef": false
   },
   {
     "Namespace": "Windows.Win32.Devices.Usb",
     "Name": "USB_CHANGE_REGISTRATION_HANDLE",
-    "ValueType": "DECLARE_HANDLE"
-  },
-  {
-    "Namespace": "Windows.Win32.System.Memory",
-    "Name": "MEMORYMAPPEDVIEW_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": [ -1, 0 ]
+    "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.System.Iis",
     "Name": "HCONN",
-    "ValueType": "void*"
+    "ValueType": "void*",
+    "NativeTypedef": true
+  },
+  {
+    "Name": "HBLUETOOTH_DEVICE_FIND",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "BluetoothFindDeviceClose",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
+  },
+  {
+    "Name": "HBLUETOOTH_RADIO_FIND",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "BluetoothFindRadioClose",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
+  },
+  {
+    "Name": "HDEVNOTIFY",
+    "ValueType": "void*",
+    "CloseApi": "UnregisterDeviceNotification",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Speech",
+    "Name": "SPSTATEHANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Speech",
+    "Name": "SPWORDHANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Speech",
+    "Name": "SPRULEHANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Speech",
+    "Name": "SPGRAMMARHANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Speech",
+    "Name": "SPRECOCONTEXTHANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Speech",
+    "Name": "SPPHRASERULEHANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Speech",
+    "Name": "SPPHRASEPROPERTYHANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Media.Speech",
+    "Name": "SPTRANSITIONID",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Memory",
+    "Name": "MEMORY_MAPPED_VIEW_ADDRESS",
+    "ValueType": "void*",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": false
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UBiDi",
+    "ValueType": "typedef struct UBiDi",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UBiDiTransform",
+    "ValueType": "typedef struct UBiDiTransform",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UBreakIterator",
+    "ValueType": "typedef struct UBreakIterator",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UCaseMap",
+    "ValueType": "typedef struct UCaseMap",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UCharsetDetector",
+    "ValueType": "typedef struct UCharsetDetector",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UCharsetMatch",
+    "ValueType": "typedef struct UCharsetMatch",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UCollationElements",
+    "ValueType": "typedef struct UCollationElements",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UCollator",
+    "ValueType": "typedef struct UCollator",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UConstrainedFieldPosition",
+    "ValueType": "typedef struct UConstrainedFieldPosition",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UConverter",
+    "ValueType": "typedef struct UConverter",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UConverterSelector",
+    "ValueType": "typedef struct UConverterSelector",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UCPMap",
+    "ValueType": "typedef struct UCPMap",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UDateFormatSymbols",
+    "ValueType": "typedef struct UDateFormatSymbols",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UDateIntervalFormat",
+    "ValueType": "typedef struct UDateIntervalFormat",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UEnumeration",
+    "ValueType": "typedef struct UEnumeration",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UFieldPositionIterator",
+    "ValueType": "typedef struct UFieldPositionIterator",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UFormattedDateInterval",
+    "ValueType": "typedef struct UFormattedDateInterval",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UFormattedList",
+    "ValueType": "typedef struct UFormattedList",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UFormattedNumber",
+    "ValueType": "typedef struct UFormattedNumber",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UFormattedNumberRange",
+    "ValueType": "typedef struct UFormattedNumberRange",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UFormattedRelativeDateTime",
+    "ValueType": "typedef struct UFormattedRelativeDateTime",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UFormattedValue",
+    "ValueType": "typedef struct UFormattedValue",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UGenderInfo",
+    "ValueType": "typedef struct UGenderInfo",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UHashtable",
+    "ValueType": "typedef struct UHashtable",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UIDNA",
+    "ValueType": "typedef struct UIDNA",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UListFormatter",
+    "ValueType": "typedef struct UListFormatter",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "ULocaleData",
+    "ValueType": "typedef struct ULocaleData",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "ULocaleDisplayNames",
+    "ValueType": "typedef struct ULocaleDisplayNames",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UMutableCPTrie",
+    "ValueType": "typedef struct UMutableCPTrie",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UNormalizer2",
+    "ValueType": "typedef struct UNormalizer2",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UNumberFormatter",
+    "ValueType": "typedef struct UNumberFormatter",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UNumberingSystem",
+    "ValueType": "typedef struct UNumberingSystem",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UPluralRules",
+    "ValueType": "typedef struct UPluralRules",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "URegion",
+    "ValueType": "typedef struct URegion",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "URegularExpression",
+    "ValueType": "typedef struct URegularExpression",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "URelativeDateTimeFormatter",
+    "ValueType": "typedef struct URelativeDateTimeFormatter",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UResourceBundle",
+    "ValueType": "typedef struct UResourceBundle",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "USearch",
+    "ValueType": "typedef struct USearch",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "USet",
+    "ValueType": "typedef struct USet",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "USpoofChecker",
+    "ValueType": "typedef struct USpoofChecker",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "USpoofCheckResult",
+    "ValueType": "typedef struct USpoofCheckResult",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UStringPrepProfile",
+    "ValueType": "typedef struct UStringPrepProfile",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Globalization",
+    "Name": "UStringSearch",
+    "ValueType": "typedef struct UStringSearch",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HCHANGE",
+    "ValueType": "typedef struct _HCHANGE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HCLUSCRYPTPROVIDER",
+    "ValueType": "typedef struct _HCLUSCRYPTPROVIDER",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HCLUSENUM",
+    "ValueType": "typedef struct _HCLUSENUM",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HCLUSENUMEX",
+    "ValueType": "typedef struct _HCLUSENUMEX",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HCLUSTER",
+    "ValueType": "typedef struct _HCLUSTER",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HGROUP",
+    "ValueType": "typedef struct _HGROUP",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HGROUPENUM",
+    "ValueType": "typedef struct _HGROUPENUM",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HGROUPENUMEX",
+    "ValueType": "typedef struct _HGROUPENUMEX",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HGROUPSET",
+    "ValueType": "typedef struct _HGROUPSET",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HGROUPSETENUM",
+    "ValueType": "typedef struct _HGROUPSETENUM",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HNETINTERFACE",
+    "ValueType": "typedef struct _HNETINTERFACE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HNETINTERFACEENUM",
+    "ValueType": "typedef struct _HNETINTERFACEENUM",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HNETWORK",
+    "ValueType": "typedef struct _HNETWORK",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HNETWORKENUM",
+    "ValueType": "typedef struct _HNETWORKENUM",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HNODE",
+    "ValueType": "typedef struct _HNODE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HNODEENUM",
+    "ValueType": "typedef struct _HNODEENUM",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HNODEENUMEX",
+    "ValueType": "typedef struct _HNODEENUMEX",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HREGBATCH",
+    "ValueType": "typedef struct _HREGBATCH",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HREGBATCHNOTIFICATION",
+    "ValueType": "typedef struct _HREGBATCHNOTIFICATION",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HREGBATCHPORT",
+    "ValueType": "typedef struct _HREGBATCHPORT",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HREGREADBATCH",
+    "ValueType": "typedef struct _HREGREADBATCH",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HREGREADBATCHREPLY",
+    "ValueType": "typedef struct _HREGREADBATCHREPLY",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HRESENUM",
+    "ValueType": "typedef struct _HRESENUM",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HRESENUMEX",
+    "ValueType": "typedef struct _HRESENUMEX",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HRESOURCE",
+    "ValueType": "typedef struct _HRESOURCE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Clustering",
+    "Name": "HRESTYPEENUM",
+    "ValueType": "typedef struct _HRESTYPEENUM",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.BiometricFramework",
+    "Name": "WINIBIO_SENSOR_CONTEXT",
+    "ValueType": "typedef struct _WINIBIO_SENSOR_CONTEXT",
+    "NativeTypedef": true
+  },  
+  {
+    "Namespace": "Windows.Win32.Devices.BiometricFramework",
+    "Name": "WINIBIO_ENGINE_CONTEXT",
+    "ValueType": "typedef struct _WINIBIO_ENGINE_CONTEXT",
+    "NativeTypedef": true
+  },  
+  {
+    "Namespace": "Windows.Win32.Devices.BiometricFramework",
+    "Name": "WINIBIO_STORAGE_CONTEXT",
+    "ValueType": "typedef struct _WINIBIO_STORAGE_CONTEXT",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_CHANNEL",
+    "ValueType": "typedef struct _WS_CHANNEL",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_ERROR",
+    "ValueType": "typedef struct _WS_ERROR",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_HEAP",
+    "ValueType": "typedef struct _WS_HEAP",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_LISTENER",
+    "ValueType": "typedef struct _WS_LISTENER",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_MESSAGE",
+    "ValueType": "typedef struct _WS_MESSAGE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_METADATA",
+    "ValueType": "typedef struct _WS_METADATA",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_OPERATION_CONTEXT",
+    "ValueType": "typedef struct _WS_OPERATION_CONTEXT",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_POLICY",
+    "ValueType": "typedef struct _WS_POLICY",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_SECURITY_CONTEXT",
+    "ValueType": "typedef struct _WS_SECURITY_CONTEXT",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_SECURITY_TOKEN",
+    "ValueType": "typedef struct _WS_SECURITY_TOKEN",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_SERVICE_HOST",
+    "ValueType": "typedef struct _WS_SERVICE_HOST",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_SERVICE_PROXY",
+    "ValueType": "typedef struct _WS_SERVICE_PROXY",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_XML_BUFFER",
+    "ValueType": "typedef struct _WS_XML_BUFFER",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_XML_READER",
+    "ValueType": "typedef struct _WS_XML_READER",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WindowsWebServices",
+    "Name": "WS_XML_WRITER",
+    "ValueType": "typedef struct _WS_XML_WRITER",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Graphics.OpenGL",
+    "Name": "GLUnurbs",
+    "ValueType": "typedef struct GLUnurbs",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Graphics.OpenGL",
+    "Name": "GLUquadric",
+    "ValueType": "typedef struct GLUquadric",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Graphics.OpenGL",
+    "Name": "GLUtesselator",
+    "ValueType": "typedef struct GLUtesselator",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.RemoteManagement",
+    "Name": "WSMAN_API_HANDLE",
+    "ValueType": "typedef struct WSMAN_API",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.RemoteManagement",
+    "Name": "WSMAN_COMMAND_HANDLE",
+    "ValueType": "typedef struct WSMAN_COMMAND",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.RemoteManagement",
+    "Name": "WSMAN_OPERATION_HANDLE",
+    "ValueType": "typedef struct WSMAN_OPERATION",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.RemoteManagement",
+    "Name": "WSMAN_SESSION_HANDLE",
+    "ValueType": "typedef struct WSMAN_SESSION",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.RemoteManagement",
+    "Name": "WSMAN_SHELL_HANDLE",
+    "ValueType": "typedef struct WSMAN_SHELL",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "PTP_IO",
+    "ValueType": "typedef struct _TP_IO",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "PTP_TIMER",
+    "ValueType": "typedef struct _TP_TIMER",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "PTP_WAIT",
+    "ValueType": "typedef struct _TP_WAIT",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "PTP_WORK",
+    "ValueType": "typedef struct _TP_WORK",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "PTP_CALLBACK_INSTANCE",
+    "ValueType": "typedef struct _TP_CALLBACK_INSTANCE",
+    "InvalidHandleValues": [ 0 ],
+    "NativeTypedef": true
+  },
+  {
+    "Name": "PTP_POOL",
+    "ValueType": "typedef struct _TP_POOL",
+    "CloseApi": "CloseThreadpool",
+    "NativeTypedef": true
+  },
+  {
+    "Name": "PTP_CLEANUP_GROUP",
+    "ValueType": "typedef struct _TP_CLEANUP_GROUP",
+    "CloseApi": "CloseThreadpoolCleanupGroup",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WinSock",
+    "Name": "RIO_BUFFERID",
+    "ValueType": "typedef struct RIO_BUFFERID_t",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WinSock",
+    "Name": "RIO_CQ",
+    "ValueType": "typedef struct RIO_CQ_t",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WinSock",
+    "Name": "RIO_RQ",
+    "ValueType": "typedef struct RIO_RQ_t",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.Ldap",
+    "Name": "PLDAPSearch",
+    "ValueType": "typedef struct ldapsearch",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Graphics.DirectDraw",
+    "Name": "PDD_DESTROYDRIVERDATA",
+    "ValueType": "typedef struct _DD_DESTROYDRIVERDATA",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Graphics.DirectDraw",
+    "Name": "PDD_GETVPORTAUTOFLIPSURFACEDATA",
+    "ValueType": "typedef struct _DD_GETVPORTAUTOFLIPSURFACEDATA",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Graphics.DirectDraw",
+    "Name": "PDD_SETMODEDATA",
+    "ValueType": "typedef struct _DD_SETMODEDATA",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Graphics.DirectDraw",
+    "Name": "LPDDFXROP",
+    "ValueType": "typedef struct _DDFXROP",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.HumanInterfaceDevice",
+    "Name": "PHIDP_PREPARSED_DATA",
+    "ValueType": "typedef struct _HIDP_PREPARSED_DATA",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.UI.Shell",
+    "Name": "PAPPCONSTRAIN_REGISTRATION",
+    "ValueType": "typedef struct _APPCONSTRAIN_REGISTRATION",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.UI.Shell",
+    "Name": "PAPPSTATE_REGISTRATION",
+    "ValueType": "typedef struct _APPSTATE_REGISTRATION",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.UI.Shell.PropertiesSystem",
+    "Name": "SERIALIZEDPROPSTORAGE",
+    "ValueType": "typedef struct tagSERIALIZEDPROPSTORAGE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.UI.Shell.PropertiesSystem",
+    "Name": "PCUSERIALIZEDPROPSTORAGE",
+    "ValueType": "typedef struct tagSERIALIZEDPROPSTORAGE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Storage.Imapi",
+    "Name": "LPMSGSESS",
+    "ValueType": "typedef struct _MSGSESS",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.WinRT",
+    "Name": "RO_REGISTRATION_COOKIE",
+    "ValueType": "typedef struct _RO_REGISTRATION_COOKIE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Wmi",
+    "Name": "MI_Module_Self",
+    "ValueType": "typedef struct _MI_Module_Self",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Memory",
+    "Name": "AtlThunkData_t",
+    "ValueType": "typedef struct AtlThunkData_t",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Rpc",
+    "Name": "PNDR_ASYNC_MESSAGE",
+    "ValueType": "typedef struct _NDR_ASYNC_MESSAGE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Rpc",
+    "Name": "PNDR_CORRELATION_INFO",
+    "ValueType": "typedef struct _NDR_CORRELATION_INFO",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Rpc",
+    "Name": "_NDR_PROC_CONTEXT",
+    "ValueType": "typedef struct _NDR_PROC_CONTEXT",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Rpc",
+    "Name": "NDR_ALLOC_ALL_NODES_CONTEXT",
+    "ValueType": "typedef struct NDR_ALLOC_ALL_NODES_CONTEXT",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Rpc",
+    "Name": "NDR_POINTER_QUEUE_STATE",
+    "ValueType": "typedef struct NDR_POINTER_QUEUE_STATE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Services",
+    "Name": "PSC_NOTIFICATION_REGISTRATION",
+    "ValueType": "typedef struct _SC_NOTIFICATION_REGISTRATION",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Web.MsHtml",
+    "Name": "HostDialogHelper",
+    "ValueType": "typedef struct HostDialogHelper",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Security.Authentication.Identity",
+    "Name": "_HMAPPER",
+    "ValueType": "typedef struct _HMAPPER",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Storage.IscsiDisc",
+    "Name": "_ADAPTER_OBJECT",
+    "ValueType": "typedef struct _ADAPTER_OBJECT",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.AddressBook",
+    "Name": "LPWABACTIONITEM",
+    "ValueType": "typedef struct _WABACTIONITEM",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.Com",
+    "Name": "MachineGlobalObjectTableRegistrationToken",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Storage.Packaging.Appx",
+    "Name": "PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Storage.Packaging.Appx",
+    "Name": "PACKAGEDEPENDENCY_CONTEXT",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.System.WinRT.Xaml",
+    "Name": "TrackerHandle",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypedef": true
+  },
+  {
+    "Name": "HIORING",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "CloseIoRing",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Tapi",
+    "Name": "HDRVCALL",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Tapi",
+    "Name": "HDRVLINE",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Tapi",
+    "Name": "HDRVPHONE",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Tapi",
+    "Name": "HDRVMSPLINE",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Tapi",
+    "Name": "HDRVDIALOGINSTANCE",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Tapi",
+    "Name": "HTAPICALL",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Tapi",
+    "Name": "HTAPILINE",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Tapi",
+    "Name": "HTAPIPHONE",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Tapi",
+    "Name": "HPROVIDER",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "HSPRITE",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "HSTR",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "HUMPD",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "HLSURF",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.DeviceQuery",
+    "Name": "HDEVQUERY",
+    "ValueType": "DECLARE_HANDLE",
+    "NativeTypedef": true
   }
 ]

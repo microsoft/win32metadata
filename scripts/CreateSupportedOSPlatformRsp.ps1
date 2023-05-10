@@ -61,7 +61,7 @@ try
     $stream = [System.IO.StreamWriter] $outputFileName
     $stream.WriteLine("--with-attribute")
 
-    foreach ($funcFile in Get-ChildItem "$sdkApiPath\n*.md" -r)
+    foreach ($funcFile in Get-ChildItem "$MicrosoftDocsSdkApiPath\n*.md" -r)
     {
         $name = ""
         $version = ""

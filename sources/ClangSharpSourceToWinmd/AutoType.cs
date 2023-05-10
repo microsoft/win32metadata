@@ -10,5 +10,6 @@ namespace ClangSharpSourceToWinmd
         public string CloseApi { get; set; }
         public string AlsoUsableFor { get; set; }
         public long[] InvalidHandleValues { get; set; }
+        public bool NativeTypedef { get; set; }
     }
 }

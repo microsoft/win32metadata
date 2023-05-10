@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.IO.Abstractions;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -34,7 +35,7 @@ namespace MetadataUtils
 
             private static readonly Regex DefineConstantRegex =
                 new Regex(
-                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE[AW]{0,1}\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+))|([a-z0-9_]+U?\s*[\+\-]\s*(\d+|0x[0-de-f]+)U?)|(\(NTSTATUS\)((?:0x)?[\da-f]+L?))|(\s*\(DWORD\)\s*\(?\s*-1(L|\b)\s*\)?)|(\(DWORD\)((?:0x)?[\da-f]+L?))|(\(BCRYPT_ALG_HANDLE\)\s*((?:0x)?[\da-f]+L?))|(\{\s*(?:(?:0x)?[\da-f]{4,8}L?,?\s*){3}\s*\{\s*(?:(?:0x)?[\da-f]{1,2}L?,?\s*){8}\s*\}\s*\})|(HIDP_ERROR_CODES\((.*),(.*)\))|([a-z0-9_]+))$", RegexOptions.IgnoreCase);
+                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE[AW]{0,1}\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+))|([a-z0-9_]+U?\s*[\+\-]\s*(\d+|0x[0-de-f]+)U?)|(\(NTSTATUS\)((?:0x)?[\da-f]+L?))|(\s*\(DWORD\)\s*\(?\s*-1(L|\b)\s*\)?)|(\(DWORD\)((?:0x)?[\da-f]+L?))|(\(BCRYPT_ALG_HANDLE\)\s*((?:0x)?[\da-f]+L?))|(\{\s*(?:(?:0x)?[\da-f]{4,8}L?,?\s*){3}\s*\{\s*(?:(?:0x)?[\da-f]{1,2}L?,?\s*){8}\s*\}\s*\})|(HIDP_ERROR_CODES\((.*),(.*)\))|(MAKEDIPROP\(\s*(\d+)\s*\))|([a-z0-9_]+))$", RegexOptions.IgnoreCase);
 
             private static readonly Regex DefineGuidConstRegex =
                 new Regex(
@@ -76,18 +77,18 @@ namespace MetadataUtils
 
             private static readonly Regex ContainsLowerCase = new Regex(@"[a-z]+");
 
-            private Dictionary<string, EnumWriter> namespacesToEnumWriters = new Dictionary<string, EnumWriter>();
-            private Dictionary<string, ConstantWriter> namespacesToConstantWriters = new Dictionary<string, ConstantWriter>();
+            private Dictionary<string, EnumWriter> namespacesToEnumWriters = new();
+            private Dictionary<string, IConstantWriter> namespacesToConstantWriters = new();
             private WildcardDictionary requiredNamespaces;
             private Dictionary<string, string> scannedNamesToNamespaces;
             private Dictionary<string, string> writtenConstants;
 
-            private List<EnumObject> enumObjectsFromJsons;
+            private List<EnumObject> enumObjectsFromJsons = new();
             private Dictionary<string, string> withTypes;
             private Dictionary<string, string> withAttributes;
 
             private Dictionary<string, List<EnumObject>> enumMemberNameToEnumObj;
-            private HashSet<string> exclusionNames;
+            private HashSet<string> exclusionNames = new();
 
             private string scraperOutputDir;
             private string constantsHeaderText;
@@ -107,7 +108,9 @@ namespace MetadataUtils
                 new RegexConstMaker() { Pattern = @"_WSAIORW\((.+),(.+)\)", ConstType = "uint", OutputFormat = "(IOC_INOUT|({0})|({1}))" },
             };
 
-            private RegexConstHelper regexConstHelper;
+            private IRegexConstHelper regexConstHelper;
+
+            internal IFileSystem _fileSystem { get; set; } = new FileSystem();
 
             public ConstantsScraperImpl()
             {
@@ -211,7 +214,7 @@ namespace MetadataUtils
             {
                 foreach (string file in Directory.GetFiles(this.scraperOutputDir).Where(f => f.EndsWith(".enums.cs") || f.EndsWith(".constants.cs")))
                 {
-                    File.Delete(file);
+                    this._fileSystem.File.Delete(file);
                 }
             }
 
@@ -220,12 +223,12 @@ namespace MetadataUtils
                 if (this.enumFlagsFixupFileName == null)
                 {
                     this.enumFlagsFixupFileName = Path.Combine(this.scraperOutputDir, "enumsMakeFlags.generated.rsp");
-                    if (File.Exists(this.enumFlagsFixupFileName))
+                    if (this._fileSystem.File.Exists(this.enumFlagsFixupFileName))
                     {
-                        File.Delete(this.enumFlagsFixupFileName);
+                        this._fileSystem.File.Delete(this.enumFlagsFixupFileName);
                     }
 
-                    File.AppendAllText(this.enumFlagsFixupFileName, "--enumMakeFlags\r\n");
+                    this._fileSystem.File.AppendAllText(this.enumFlagsFixupFileName, "--enumMakeFlags\r\n");
                 }
             }
 
@@ -399,7 +402,19 @@ namespace MetadataUtils
                 this.writtenConstants.Add(name, finalType);
             }
 
-            private ConstantWriter GetConstantWriter(string originalNamespace, string name)
+            private void AddConstantShort(string originalNamespace, string nativeTypeName, string name, string valueText)
+            {
+                if (this.writtenConstants.ContainsKey(name))
+                {
+                    return;
+                }
+
+                var writer = this.GetConstantWriter(originalNamespace, name);
+                writer.AddShort(nativeTypeName, name, valueText, out var finalType);
+                this.writtenConstants.Add(name, finalType);
+            }
+
+            private IConstantWriter GetConstantWriter(string originalNamespace, string name)
             {
                 string foundNamespace = originalNamespace;
 
@@ -409,15 +424,16 @@ namespace MetadataUtils
                     foundNamespace = newNamespace;
                 }
 
-                if (!this.namespacesToConstantWriters.TryGetValue(foundNamespace, out ConstantWriter constantWriter))
+                if (!this.namespacesToConstantWriters.TryGetValue(foundNamespace, out IConstantWriter constantWriter))
                 {
                     string partConstantsFile = Path.Combine(this.scraperOutputDir, $@"{foundNamespace}.constants.cs");
-                    if (File.Exists(partConstantsFile))
+                    if (this._fileSystem.File.Exists(partConstantsFile))
                     {
-                        File.Delete(partConstantsFile);
+                        this._fileSystem.File.Delete(partConstantsFile);
                     }
 
-                    constantWriter = new ConstantWriter(partConstantsFile, foundNamespace, this.constantsHeaderText, this.withAttributes);
+                    var fileStream = this._fileSystem.File.OpenWrite(partConstantsFile);
+                    constantWriter = new ConstantWriter(fileStream, foundNamespace, this.constantsHeaderText, this.withAttributes);
                     this.namespacesToConstantWriters.Add(foundNamespace, constantWriter);
                 }
 
@@ -426,7 +442,7 @@ namespace MetadataUtils
 
             private HashSet<string> GetManualEnumMemberNames()
             {
-                List<EnumObject> enumObjectsFromManualSources = LoadEnumsFromSourceFiles(Directory.GetFiles(this.scraperOutputDir, "*.manual.cs"));
+                List<EnumObject> enumObjectsFromManualSources = LoadEnumsFromSourceFiles(this._fileSystem.Directory.GetFiles(this.scraperOutputDir, "*.manual.cs"));
                 HashSet<string> manualEnumMemberNames = new HashSet<string>();
                 foreach (EnumObject obj in enumObjectsFromManualSources)
                 {
@@ -465,7 +481,7 @@ namespace MetadataUtils
                     var header = item.Key;
                     var currentNamespace = item.Value;
 
-                    if (!File.Exists(header))
+                    if (!this._fileSystem.File.Exists(header))
                     {
                         continue;
                     }
@@ -501,7 +517,7 @@ namespace MetadataUtils
                     string defineRegexContinuation = null;
                     bool processingGuidMultiLine = false;
                     string defineGuidKeyword = null;
-                    foreach (string currentLine in File.ReadAllLines(header))
+                    foreach (string currentLine in this._fileSystem.File.ReadAllLines(header))
                     {
                         string fixedCurrentLine = currentLine;
 
@@ -744,7 +760,7 @@ namespace MetadataUtils
                                     nativeTypeName = "LPCWSTR";
                                 }
                                 valueText = match.Groups[12].Value;
-                                this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
+                                this.AddConstantShort(currentNamespace, nativeTypeName, name, valueText);
                                 continue;
                             }
                             // (HWND)-4
@@ -806,10 +822,19 @@ namespace MetadataUtils
 
                                 continue;
                             }
-                            // SOME_OTHER_CONSTANT
+                            // MAKEDIPROP(1)
                             else if (match.Groups[29].Success)
                             {
-                                string otherName = match.Groups[29].Value;
+                                var value = Convert.ToUInt32(match.Groups[30].Value).ToString("X2");
+                                var defineGuidLine = $"{name}, 0x00000000L, 0x0000, 0x0000, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x{value})";
+                                this.AddConstantGuid("MAKEDIPROP", currentNamespace, defineGuidLine);
+
+                                continue;
+                            }
+                            // SOME_OTHER_CONSTANT
+                            else if (match.Groups[31].Success)
+                            {
+                                string otherName = match.Groups[31].Value;
 
                                 matchedToOtherName = true;
 
@@ -939,7 +964,7 @@ namespace MetadataUtils
                     var enumName = match.Groups[1].Value;
 
                     this.InitEnumFlagsFixupFile();
-                    File.AppendAllText(this.enumFlagsFixupFileName, $"{enumName}\r\n");
+                    this._fileSystem.File.AppendAllText(this.enumFlagsFixupFileName, $"{enumName}\r\n");
                 }
             }
 
@@ -1065,9 +1090,9 @@ namespace MetadataUtils
                         {
                             string fixedNamespaceName = foundNamespace.Replace("Windows.Win32.", string.Empty);
                             string enumFile = Path.Combine(this.scraperOutputDir, $"{fixedNamespaceName}.enums.cs");
-                            if (File.Exists(enumFile))
+                            if (this._fileSystem.File.Exists(enumFile))
                             {
-                                File.Delete(enumFile);
+                                this._fileSystem.File.Delete(enumFile);
                             }
 
                             enumWriter = new EnumWriter(enumFile, foundNamespace, this.constantsHeaderText);
@@ -1109,7 +1134,7 @@ namespace MetadataUtils
 
                 if (!linesAdded)
                 {
-                    File.Delete(enumRemapsFileName);
+                    this._fileSystem.File.Delete(enumRemapsFileName);
                 }
 
                 if (this.suggestedEnumRenames.Count != 0)
@@ -1127,7 +1152,7 @@ namespace MetadataUtils
                 public string ConstType { get; set; }
             }
 
-            private class RegexConstHelper
+            private class RegexConstHelper : IRegexConstHelper
             {
                 private ConstantsScraperImpl owner;
                 private List<RegexConstMakerProcessor> processors = new List<RegexConstMakerProcessor>();

@@ -2155,12 +2155,14 @@ EXTERN_C const IID IID_IStreamBufferMediaSeeking;
         DECLSPEC_XFGVIRT(IMediaSeeking, CheckCapabilities)
         HRESULT ( STDMETHODCALLTYPE *CheckCapabilities )( 
             __RPC__in IStreamBufferMediaSeeking * This,
-            /* [out][in] */ __RPC__inout DWORD *pCapabilities);
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pCapabilities);
         
         DECLSPEC_XFGVIRT(IMediaSeeking, IsFormatSupported)
         HRESULT ( STDMETHODCALLTYPE *IsFormatSupported )( 
             __RPC__in IStreamBufferMediaSeeking * This,
-            /* [in] */ __RPC__in const GUID *pFormat);
+            /* [annotation][in] */ 
+            _In_  const GUID *pFormat);
         
         DECLSPEC_XFGVIRT(IMediaSeeking, QueryPreferredFormat)
         HRESULT ( STDMETHODCALLTYPE *QueryPreferredFormat )( 
@@ -2177,12 +2179,14 @@ EXTERN_C const IID IID_IStreamBufferMediaSeeking;
         DECLSPEC_XFGVIRT(IMediaSeeking, IsUsingTimeFormat)
         HRESULT ( STDMETHODCALLTYPE *IsUsingTimeFormat )( 
             __RPC__in IStreamBufferMediaSeeking * This,
-            /* [in] */ __RPC__in const GUID *pFormat);
+            /* [annotation][in] */ 
+            _In_  const GUID *pFormat);
         
         DECLSPEC_XFGVIRT(IMediaSeeking, SetTimeFormat)
         HRESULT ( STDMETHODCALLTYPE *SetTimeFormat )( 
             __RPC__in IStreamBufferMediaSeeking * This,
-            /* [in] */ __RPC__in const GUID *pFormat);
+            /* [annotation][in] */ 
+            _In_  const GUID *pFormat);
         
         DECLSPEC_XFGVIRT(IMediaSeeking, GetDuration)
         HRESULT ( STDMETHODCALLTYPE *GetDuration )( 
@@ -2209,7 +2213,8 @@ EXTERN_C const IID IID_IStreamBufferMediaSeeking;
             _Out_  LONGLONG *pTarget,
             /* [annotation][in] */ 
             _In_opt_  const GUID *pTargetFormat,
-            /* [in] */ LONGLONG Source,
+            /* [annotation][in] */ 
+            _In_  LONGLONG Source,
             /* [annotation][in] */ 
             _In_opt_  const GUID *pSourceFormat);
         
@@ -2218,10 +2223,12 @@ EXTERN_C const IID IID_IStreamBufferMediaSeeking;
             __RPC__in IStreamBufferMediaSeeking * This,
             /* [annotation][out][in] */ 
             _Inout_opt_  LONGLONG *pCurrent,
-            /* [in] */ DWORD dwCurrentFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCurrentFlags,
             /* [annotation][out][in] */ 
             _Inout_opt_  LONGLONG *pStop,
-            /* [in] */ DWORD dwStopFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwStopFlags);
         
         DECLSPEC_XFGVIRT(IMediaSeeking, GetPositions)
         HRESULT ( STDMETHODCALLTYPE *GetPositions )( 
@@ -2242,7 +2249,8 @@ EXTERN_C const IID IID_IStreamBufferMediaSeeking;
         DECLSPEC_XFGVIRT(IMediaSeeking, SetRate)
         HRESULT ( STDMETHODCALLTYPE *SetRate )( 
             __RPC__in IStreamBufferMediaSeeking * This,
-            /* [in] */ double dRate);
+            /* [annotation][in] */ 
+            _In_  double dRate);
         
         DECLSPEC_XFGVIRT(IMediaSeeking, GetRate)
         HRESULT ( STDMETHODCALLTYPE *GetRate )( 
@@ -2397,12 +2405,14 @@ EXTERN_C const IID IID_IStreamBufferMediaSeeking2;
         DECLSPEC_XFGVIRT(IMediaSeeking, CheckCapabilities)
         HRESULT ( STDMETHODCALLTYPE *CheckCapabilities )( 
             __RPC__in IStreamBufferMediaSeeking2 * This,
-            /* [out][in] */ __RPC__inout DWORD *pCapabilities);
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pCapabilities);
         
         DECLSPEC_XFGVIRT(IMediaSeeking, IsFormatSupported)
         HRESULT ( STDMETHODCALLTYPE *IsFormatSupported )( 
             __RPC__in IStreamBufferMediaSeeking2 * This,
-            /* [in] */ __RPC__in const GUID *pFormat);
+            /* [annotation][in] */ 
+            _In_  const GUID *pFormat);
         
         DECLSPEC_XFGVIRT(IMediaSeeking, QueryPreferredFormat)
         HRESULT ( STDMETHODCALLTYPE *QueryPreferredFormat )( 
@@ -2419,12 +2429,14 @@ EXTERN_C const IID IID_IStreamBufferMediaSeeking2;
         DECLSPEC_XFGVIRT(IMediaSeeking, IsUsingTimeFormat)
         HRESULT ( STDMETHODCALLTYPE *IsUsingTimeFormat )( 
             __RPC__in IStreamBufferMediaSeeking2 * This,
-            /* [in] */ __RPC__in const GUID *pFormat);
+            /* [annotation][in] */ 
+            _In_  const GUID *pFormat);
         
         DECLSPEC_XFGVIRT(IMediaSeeking, SetTimeFormat)
         HRESULT ( STDMETHODCALLTYPE *SetTimeFormat )( 
             __RPC__in IStreamBufferMediaSeeking2 * This,
-            /* [in] */ __RPC__in const GUID *pFormat);
+            /* [annotation][in] */ 
+            _In_  const GUID *pFormat);
         
         DECLSPEC_XFGVIRT(IMediaSeeking, GetDuration)
         HRESULT ( STDMETHODCALLTYPE *GetDuration )( 
@@ -2451,7 +2463,8 @@ EXTERN_C const IID IID_IStreamBufferMediaSeeking2;
             _Out_  LONGLONG *pTarget,
             /* [annotation][in] */ 
             _In_opt_  const GUID *pTargetFormat,
-            /* [in] */ LONGLONG Source,
+            /* [annotation][in] */ 
+            _In_  LONGLONG Source,
             /* [annotation][in] */ 
             _In_opt_  const GUID *pSourceFormat);
         
@@ -2460,10 +2473,12 @@ EXTERN_C const IID IID_IStreamBufferMediaSeeking2;
             __RPC__in IStreamBufferMediaSeeking2 * This,
             /* [annotation][out][in] */ 
             _Inout_opt_  LONGLONG *pCurrent,
-            /* [in] */ DWORD dwCurrentFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCurrentFlags,
             /* [annotation][out][in] */ 
             _Inout_opt_  LONGLONG *pStop,
-            /* [in] */ DWORD dwStopFlags);
+            /* [annotation][in] */ 
+            _In_  DWORD dwStopFlags);
         
         DECLSPEC_XFGVIRT(IMediaSeeking, GetPositions)
         HRESULT ( STDMETHODCALLTYPE *GetPositions )( 
@@ -2484,7 +2499,8 @@ EXTERN_C const IID IID_IStreamBufferMediaSeeking2;
         DECLSPEC_XFGVIRT(IMediaSeeking, SetRate)
         HRESULT ( STDMETHODCALLTYPE *SetRate )( 
             __RPC__in IStreamBufferMediaSeeking2 * This,
-            /* [in] */ double dRate);
+            /* [annotation][in] */ 
+            _In_  double dRate);
         
         DECLSPEC_XFGVIRT(IMediaSeeking, GetRate)
         HRESULT ( STDMETHODCALLTYPE *GetRate )( 

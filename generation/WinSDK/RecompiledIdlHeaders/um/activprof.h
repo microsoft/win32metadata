@@ -1224,9 +1224,9 @@ EXTERN_C const IID IID_IActiveScriptProfilerCallback;
             _In_  PROFILER_TOKEN functionId,
             /* [annotation][in] */ 
             _In_  PROFILER_TOKEN scriptId,
-            /* [string][annotation][in] */ 
+            /* [annotation][string][in] */ 
             _In_  const WCHAR *pwszFunctionName,
-            /* [string][annotation][in] */ 
+            /* [annotation][string][in] */ 
             _In_  const WCHAR *pwszFunctionNameHint,
             /* [annotation][in] */ 
             _In_  IUnknown *pIDebugDocumentContext) = 0;
@@ -1297,9 +1297,9 @@ EXTERN_C const IID IID_IActiveScriptProfilerCallback;
             _In_  PROFILER_TOKEN functionId,
             /* [annotation][in] */ 
             _In_  PROFILER_TOKEN scriptId,
-            /* [string][annotation][in] */ 
+            /* [annotation][string][in] */ 
             _In_  const WCHAR *pwszFunctionName,
-            /* [string][annotation][in] */ 
+            /* [annotation][string][in] */ 
             _In_  const WCHAR *pwszFunctionNameHint,
             /* [annotation][in] */ 
             _In_  IUnknown *pIDebugDocumentContext);
@@ -1388,13 +1388,13 @@ EXTERN_C const IID IID_IActiveScriptProfilerCallback2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnFunctionEnterByName( 
-            /* [string][annotation][in] */ 
+            /* [annotation][string][in] */ 
             _In_  const WCHAR *pwszFunctionName,
             /* [annotation][in] */ 
             _In_  PROFILER_SCRIPT_TYPE type) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnFunctionExitByName( 
-            /* [string][annotation][in] */ 
+            /* [annotation][string][in] */ 
             _In_  const WCHAR *pwszFunctionName,
             /* [annotation][in] */ 
             _In_  PROFILER_SCRIPT_TYPE type) = 0;
@@ -1453,9 +1453,9 @@ EXTERN_C const IID IID_IActiveScriptProfilerCallback2;
             _In_  PROFILER_TOKEN functionId,
             /* [annotation][in] */ 
             _In_  PROFILER_TOKEN scriptId,
-            /* [string][annotation][in] */ 
+            /* [annotation][string][in] */ 
             _In_  const WCHAR *pwszFunctionName,
-            /* [string][annotation][in] */ 
+            /* [annotation][string][in] */ 
             _In_  const WCHAR *pwszFunctionNameHint,
             /* [annotation][in] */ 
             _In_  IUnknown *pIDebugDocumentContext);
@@ -1479,7 +1479,7 @@ EXTERN_C const IID IID_IActiveScriptProfilerCallback2;
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback2, OnFunctionEnterByName)
         HRESULT ( STDMETHODCALLTYPE *OnFunctionEnterByName )( 
             __RPC__in IActiveScriptProfilerCallback2 * This,
-            /* [string][annotation][in] */ 
+            /* [annotation][string][in] */ 
             _In_  const WCHAR *pwszFunctionName,
             /* [annotation][in] */ 
             _In_  PROFILER_SCRIPT_TYPE type);
@@ -1487,7 +1487,7 @@ EXTERN_C const IID IID_IActiveScriptProfilerCallback2;
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback2, OnFunctionExitByName)
         HRESULT ( STDMETHODCALLTYPE *OnFunctionExitByName )( 
             __RPC__in IActiveScriptProfilerCallback2 * This,
-            /* [string][annotation][in] */ 
+            /* [annotation][string][in] */ 
             _In_  const WCHAR *pwszFunctionName,
             /* [annotation][in] */ 
             _In_  PROFILER_SCRIPT_TYPE type);
@@ -1624,9 +1624,9 @@ EXTERN_C const IID IID_IActiveScriptProfilerCallback3;
             _In_  PROFILER_TOKEN functionId,
             /* [annotation][in] */ 
             _In_  PROFILER_TOKEN scriptId,
-            /* [string][annotation][in] */ 
+            /* [annotation][string][in] */ 
             _In_  const WCHAR *pwszFunctionName,
-            /* [string][annotation][in] */ 
+            /* [annotation][string][in] */ 
             _In_  const WCHAR *pwszFunctionNameHint,
             /* [annotation][in] */ 
             _In_  IUnknown *pIDebugDocumentContext);
@@ -1650,7 +1650,7 @@ EXTERN_C const IID IID_IActiveScriptProfilerCallback3;
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback2, OnFunctionEnterByName)
         HRESULT ( STDMETHODCALLTYPE *OnFunctionEnterByName )( 
             __RPC__in IActiveScriptProfilerCallback3 * This,
-            /* [string][annotation][in] */ 
+            /* [annotation][string][in] */ 
             _In_  const WCHAR *pwszFunctionName,
             /* [annotation][in] */ 
             _In_  PROFILER_SCRIPT_TYPE type);
@@ -1658,7 +1658,7 @@ EXTERN_C const IID IID_IActiveScriptProfilerCallback3;
         DECLSPEC_XFGVIRT(IActiveScriptProfilerCallback2, OnFunctionExitByName)
         HRESULT ( STDMETHODCALLTYPE *OnFunctionExitByName )( 
             __RPC__in IActiveScriptProfilerCallback3 * This,
-            /* [string][annotation][in] */ 
+            /* [annotation][string][in] */ 
             _In_  const WCHAR *pwszFunctionName,
             /* [annotation][in] */ 
             _In_  PROFILER_SCRIPT_TYPE type);

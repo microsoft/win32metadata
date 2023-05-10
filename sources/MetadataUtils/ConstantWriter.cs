@@ -5,23 +5,20 @@ using System.Text.RegularExpressions;
 
 namespace MetadataUtils
 {
-    public class ConstantWriter : IDisposable
+    public class ConstantWriter : IDisposable, IConstantWriter
     {
-        private string path;
+        private Stream outputStream;
         private string @namespace;
         private string headerText;
         private StreamWriter writer;
         private Dictionary<string, string> namesToValues = new Dictionary<string, string>();
         private Dictionary<string, string> withAttributes;
 
-        public ConstantWriter(string path, string @namespace, string sourceHeaderText, Dictionary<string, string> withAttributes)
+        public ConstantWriter(Stream outputStream, string @namespace, string sourceHeaderText, Dictionary<string, string> withAttributes)
         {
-            if (sourceHeaderText == null)
-            {
-                sourceHeaderText = string.Empty;
-            }
+            sourceHeaderText ??= string.Empty;
 
-            this.path = path;
+            this.outputStream = outputStream;
             this.@namespace = @namespace;
             this.headerText = sourceHeaderText;
             this.withAttributes = withAttributes;
@@ -210,6 +207,29 @@ $"        public const {type} {name} = {valueText};");
             return valueText;
         }
 
+        public void AddShort(string nativeTypeName, string name, string valueText, out string finalType)
+        {
+            if (nativeTypeName == "LPCWSTR" || nativeTypeName == "LPCSTR")
+            {
+                finalType = "ushort";
+                if (valueText.StartsWith("-"))
+                {
+                    valueText = $"unchecked((ushort) {valueText})";
+                }
+            }
+            else
+            {
+                finalType = "short";
+            }
+
+            if (!string.IsNullOrWhiteSpace(nativeTypeName))
+            {
+                this.Writer.WriteLine($"[NativeTypeName(\"{nativeTypeName}\")]");
+            }
+
+            this.AddValue(finalType, name, valueText);
+        }
+
         public void AddInt(string forceType, string nativeTypeName, string name, string valueText, out string finalType)
         {
             finalType = null;
@@ -247,7 +267,7 @@ $"        [NativeTypeName(\"{nativeTypeName}\")]");
         {
             if (this.writer == null)
             {
-                this.writer = new StreamWriter(this.path);
+                this.writer = new StreamWriter(this.outputStream);
                 this.writer.WriteLine(
 @$"{this.headerText}
 

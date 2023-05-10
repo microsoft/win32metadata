@@ -304,8 +304,8 @@ EXTERN_C const IID IID_IUnbufferedFileHandleProvider;
         virtual HRESULT STDMETHODCALLTYPE OpenUnbufferedFileHandle( 
             /* [annotation][in] */ 
             _In_  IUnbufferedFileHandleOplockCallback *oplockBreakCallback,
-            /* [retval][annotation][out] */ 
-            _Out_  DWORD_PTR *fileHandle) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD_PTR *fileHandle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CloseUnbufferedFileHandle( void) = 0;
         
@@ -339,8 +339,8 @@ EXTERN_C const IID IID_IUnbufferedFileHandleProvider;
             __RPC__in IUnbufferedFileHandleProvider * This,
             /* [annotation][in] */ 
             _In_  IUnbufferedFileHandleOplockCallback *oplockBreakCallback,
-            /* [retval][annotation][out] */ 
-            _Out_  DWORD_PTR *fileHandle);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD_PTR *fileHandle);
         
         DECLSPEC_XFGVIRT(IUnbufferedFileHandleProvider, CloseUnbufferedFileHandle)
         HRESULT ( STDMETHODCALLTYPE *CloseUnbufferedFileHandle )( 

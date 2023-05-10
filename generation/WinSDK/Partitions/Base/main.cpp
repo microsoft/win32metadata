@@ -27,7 +27,6 @@
 #include <winioctl.h>
 #include <storprop.h>
 #include <ioapiset.h>
-#include <atlthunk.h>
 #include <lmserver.h>
 #include <windowsceip.h>
 #include <realtimeapiset.h>

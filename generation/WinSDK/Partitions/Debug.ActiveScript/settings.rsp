@@ -1,0 +1,9 @@
+--traverse
+<IncludeRoot>/um/activaut.h
+<IncludeRoot>/um/activdbg.h
+<IncludeRoot>/um/activdbg100.h
+<IncludeRoot>/um/activprof.h
+<IncludeRoot>/um/activscp.h
+<IncludeRoot>/um/jscript9diag.h
+--namespace
+Windows.Win32.System.Diagnostics.Debug.ActiveScript

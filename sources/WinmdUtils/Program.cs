@@ -15,7 +15,6 @@ using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.Metadata;
 using ICSharpCode.Decompiler.TypeSystem;
 using MetadataUtils;
-using Windows.Win32.Interop;
 
 namespace WinmdUtilsProgram
 {
@@ -47,9 +46,10 @@ namespace WinmdUtilsProgram
             var showDuplicateImports = new Command("showDuplicateImports", "Show duplicate imports in a single winmd files.")
             {
                 new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
+                new Option<string>("--allowItem", "Item to allow and not flag as an error.", ArgumentArity.OneOrMore)
             };
 
-            showDuplicateImports.Handler = CommandHandler.Create<FileInfo, IConsole>(ShowDuplicateImports);
+            showDuplicateImports.Handler = CommandHandler.Create<FileInfo, string[], IConsole>(ShowDuplicateImports);
 
             var showDuplicateTypes = new Command("showDuplicateTypes", "Show duplicate types in a single winmd files.")
             {
@@ -314,7 +314,7 @@ namespace WinmdUtilsProgram
                 foreach (var importInfo in LibScraper.GetImportInfos(libFile))
                 {
                     List<string> dlls;
-                    string fixedDll = Path.GetFileNameWithoutExtension(importInfo.Dll);
+                    string dll = importInfo.Dll;
 
                     // Skip mangled names
                     if (importInfo.ProcName.StartsWith('?'))
@@ -332,19 +332,19 @@ namespace WinmdUtilsProgram
                     {
                         dlls = new List<string>();
                         procNameToDll[importInfo.ProcName] = dlls;
-                        dlls.Add(fixedDll);
+                        dlls.Add(dll);
                     }
                     else
                     {
                         dlls = (List<string>)procNameToDll[importInfo.ProcName];
 
                         // Don't overwrite an existing value with an API set
-                        if (fixedDll.StartsWith("api-ms") || fixedDll.StartsWith("ext-ms"))
+                        if (dll.StartsWith("api-ms") || dll.StartsWith("ext-ms"))
                         {
                             continue;
                         }
 
-                        if (dlls.Contains(fixedDll))
+                        if (dlls.Contains(dll))
                         {
                             continue;
                         }
@@ -354,11 +354,11 @@ namespace WinmdUtilsProgram
                         string oldValue = dlls[0];
                         if (!oldValue.StartsWith("api-ms") && !oldValue.StartsWith("ext-ms"))
                         {
-                            dlls.Add(fixedDll);
+                            dlls.Add(dll);
                         }
                         else
                         {
-                            dlls[0] = fixedDll;
+                            dlls[0] = dll;
                         }
                     }
                 }
@@ -455,29 +455,27 @@ namespace WinmdUtilsProgram
         {
             HashSet<string> allowTable = new HashSet<string>(allowItem);
             using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName);
+            var suggestedRemappings = new HashSet<string>();
+            var suggestedRemappingRegEx = new Regex(@"Recommended remapping: '([^\']*)'");
             bool suggestedRemappingsFound = false;
 
-            var scriptPath = $"{Path.GetTempFileName()}.ps1";
-            var scratchPath = Path.Combine(projectRoot, "obj/scratch");
-            File.WriteAllText(scriptPath, string.Format(
-            @"Get-ChildItem {0} -Recurse -Filter '*.txt' |
-            Select-String -Pattern ""Recommended remapping: \'([^\']*)\'"" |
-            ForEach-Object {{ $_.Matches.Groups[1].Value }} |
-            Select-Object -Unique", scratchPath));
-
-            var process = new Process();
-            process.StartInfo.FileName = @"pwsh.exe";
-            process.StartInfo.Arguments = string.Format("-NoProfile -File \"{0}\"", scriptPath);
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.Start();
-
-            StreamReader reader = process.StandardOutput;
-            var suggestedRemappings = reader.ReadToEnd().Split("\r\n");
-
-            foreach (var remapping in suggestedRemappings)
+            var files = Directory.GetFiles(Path.Combine(projectRoot, "obj/scratch"), "*.txt", SearchOption.AllDirectories);
+            foreach (var file in files)
             {
-                if (string.IsNullOrEmpty(remapping) || allowTable.Contains(remapping))
+                var lines = File.ReadLines(file);
+                foreach (var line in lines)
+                {
+                    var match = suggestedRemappingRegEx.Match(line);
+                    if (match.Success)
+                    {
+                        suggestedRemappings.Add(match.Groups[1].Value);
+                    }
+                }
+            }
+
+            foreach (var suggestedRemapping in suggestedRemappings)
+            {
+                if (string.IsNullOrEmpty(suggestedRemapping) || allowTable.Contains(suggestedRemapping))
                 {
                     continue;
                 }
@@ -488,7 +486,7 @@ namespace WinmdUtilsProgram
                     suggestedRemappingsFound = true;
                 }
 
-                console?.Out.Write($"{remapping}\r\n");
+                console?.Out.Write($"{suggestedRemapping}\r\n");
             }
 
             if (!suggestedRemappingsFound)
@@ -725,7 +723,7 @@ namespace WinmdUtilsProgram
 
         private static string GetArchInfo(IEnumerable<IAttribute> attributes)
         {
-            var archAttr = attributes.FirstOrDefault(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute");
+            var archAttr = attributes.FirstOrDefault(a => a.AttributeType.Name == "SupportedArchitectureAttribute");
             if (archAttr != null)
             {
                 Architecture arch = (Architecture)archAttr.FixedArguments[0].Value;
@@ -770,7 +768,7 @@ namespace WinmdUtilsProgram
                 foreach (var archType in foundArchTypes)
                 {
                     var typeArchAttr =
-                        archType.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute");
+                        archType.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute");
 
                     var typeArch = (Architecture)typeArchAttr.FixedArguments[0].Value;
                     typeArches |= typeArch;
@@ -822,7 +820,7 @@ namespace WinmdUtilsProgram
 
             foreach (var type in winmd1.GetTopLevelTypeDefinitions()
                 .Where(t => t.GetAttributes()
-                    .Any(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute")))
+                    .Any(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute")))
             {
                 if (!namesToArchDefs.TryGetValue(type.FullName, out var list))
                 {
@@ -835,7 +833,7 @@ namespace WinmdUtilsProgram
 
             foreach (var type in namesToArchDefs.SelectMany(map => map.Value))
             {
-                var archAttr = type.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute");
+                var archAttr = type.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute");
                 Architecture arch = (Architecture)archAttr.FixedArguments[0].Value;
 
                 if (!VerifyTypeHasRightArch(namesToArchDefs, type, type, arch, console))
@@ -848,9 +846,9 @@ namespace WinmdUtilsProgram
             {
                 foreach (var method in apisClass.Methods.Where(
                     m => m.IsStatic && m.DeclaringType == apisClass && m.GetAttributes()
-                        .Any(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute")))
+                        .Any(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute")))
                 {
-                    var archAttr = method.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute");
+                    var archAttr = method.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute");
                     Architecture arch = (Architecture)archAttr.FixedArguments[0].Value;
 
                     foreach (var param in method.Parameters)
@@ -1012,12 +1010,13 @@ namespace WinmdUtilsProgram
             return 0;
         }
 
-        public static int ShowDuplicateImports(FileInfo winmd, IConsole console)
+        public static int ShowDuplicateImports(FileInfo winmd, string[] allowItem, IConsole console)
         {
             DecompilerSettings settings = new DecompilerSettings() { ThrowOnAssemblyResolveErrors = false };
             DecompilerTypeSystem winmd1 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(winmd.FullName);
 
             Dictionary<string, List<string>> dllImportsToClassNames = new Dictionary<string, List<string>>();
+            HashSet<string> allowTable = new HashSet<string>(allowItem);
 
             foreach (var type1 in winmd1.GetTopLevelTypeDefinitions())
             {
@@ -1075,6 +1074,11 @@ namespace WinmdUtilsProgram
             bool dupsFound = false;
             foreach (var pair in dllImportsToClassNames)
             {
+                if (allowTable.Contains(pair.Key))
+                {
+                    continue;
+                }
+
                 if (pair.Value.Count > 1)
                 {
                     if (dupsFound == false)
@@ -1105,7 +1109,7 @@ namespace WinmdUtilsProgram
         {
             int before = writer.DifferencesCount;
 
-            CompareAttributes(field1.Name, field1.GetAttributes(), field2.GetAttributes(), writer);
+            CompareAttributes(field1.FullName, field1.GetAttributes(), field2.GetAttributes(), writer);
 
             string fullField1Name = GetFullMemberName(field1);
 
@@ -1137,6 +1141,13 @@ namespace WinmdUtilsProgram
                         if (fieldVal2 == null)
                         {
                             writer.WriteDifference($"winmd2: {fullField1Name} is a constant with a null value");
+                        }
+
+                        var fieldInitType1 = fieldVal1.GetType().Name;
+                        var fieldInitType2 = fieldVal2.GetType().Name;
+                        if (fieldInitType1 != fieldInitType2)
+                        {
+                            writer.WriteDifference($"{fullField1Name} value init changed {fieldInitType1}->{fieldInitType2}");
                         }
 
                         string val1 = fieldVal1?.ToString();

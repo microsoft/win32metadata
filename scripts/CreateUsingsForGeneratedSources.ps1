@@ -27,7 +27,7 @@ $outputFileName = "$PSScriptRoot\..\generation\header.txt"
 $stream = [System.IO.StreamWriter] $outputFileName
 
 $stream.WriteLine("// Copyright © Microsoft")
-$stream.WriteLine("using Windows.Win32.Interop;")
+$stream.WriteLine("using Windows.Win32.Foundation.Metadata;")
 $stream.WriteLine()
 
 $sortedKeys = $namespaces.Keys | Sort-Object

@@ -329,3 +329,4 @@ File,Skipping,Reason
 /um/DbgHelp.h,true,Subset of ImageHlp.h
 /um/httpserv.h,true,C++ classes
 /um/httpcompression.h,true,For IIS but can't find a lib for it
+/um/atlthunk.h,https://github.com/microsoft/win32metadata/issues/1567

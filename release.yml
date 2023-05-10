@@ -4,7 +4,7 @@ pr: none
 resources:
   pipelines:
   - pipeline: win32metadata
-    source: microsoft.win32metadata
+    source: Win32 Metadata
     trigger:
       tags:
       - auto-release
@@ -31,7 +31,7 @@ stages:
           - task: GitHubRelease@1
             displayName: GitHub release (create)
             inputs:
-              gitHubConnection: github.com_chenss3
+              gitHubConnection: github.com_mikebattista
               repositoryName: $(Build.Repository.Name)
               target: $(resources.pipeline.win32metadata.sourceCommit)
               tagSource: userSpecifiedTag
@@ -60,15 +60,12 @@ stages:
           - download: win32metadata
             artifact: NuGetPackages
             displayName: Download metadata and generators
-          - download: win32metadata
-            artifact: ApiDocsNuGetPackages
-            displayName: Download API docs
           - task: NuGetToolInstaller@1
             displayName: Use NuGet 5.x
             inputs:
               versionSpec: 5.x
           - powershell: |
-              Get-ChildItem .\NuGetPackages\*.nupkg,.\ApiDocsNuGetPackages\*.nupkg -Exclude Microsoft.Dia.Win32Metadata.*.nupkg |% {
+              Get-ChildItem .\NuGetPackages\*.nupkg -Exclude Microsoft.Dia.Win32Metadata.*.nupkg |% {
                 nuget push $_ -Source https://api.nuget.org/v3/index.json -SkipDuplicate -ApiKey $(NuGetOrgApiKey)
               }
             displayName: Push packages to nuget.org

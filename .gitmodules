@@ -1,4 +1,24 @@
+[submodule "ext/Console-Docs"]
+	path = ext/Console-Docs
+	url = https://github.com/MicrosoftDocs/Console-Docs
+	shallow = true
+[submodule "ext/office-developer-client-docs"]
+	path = ext/office-developer-client-docs
+	url = https://github.com/MicrosoftDocs/office-developer-client-docs
+	shallow = true
 [submodule "ext/sdk-api"]
 	path = ext/sdk-api
 	url = https://github.com/MicrosoftDocs/sdk-api
+	shallow = true
+[submodule "ext/sql-docs"]
+	path = ext/sql-docs
+	url = https://github.com/MicrosoftDocs/sql-docs
+	shallow = true
+[submodule "ext/Virtualization-Documentation"]
+	path = ext/Virtualization-Documentation
+	url = https://github.com/MicrosoftDocs/Virtualization-Documentation
+	shallow = true
+[submodule "ext/win32"]
+	path = ext/win32
+	url = https://github.com/MicrosoftDocs/win32
 	shallow = true

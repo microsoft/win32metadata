@@ -1,9 +1,3 @@
-/*-------------------------------------------------------------------------------------
- *
- * Copyright (c) Microsoft Corporation
- * Licensed under the MIT license
- *
- *-------------------------------------------------------------------------------------*/
 
 
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
@@ -434,7 +428,8 @@ EXTERN_C const IID IID_ID3D10Blob;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D10Blob * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -549,7 +544,8 @@ EXTERN_C const IID IID_ID3DDestructionNotifier;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3DDestructionNotifier * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         

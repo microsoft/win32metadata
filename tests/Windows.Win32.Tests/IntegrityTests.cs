@@ -17,7 +17,8 @@ namespace Windows.Win32.Tests
         [Fact]
         public void NoDuplicateImports()
         {
-            string args = $"showDuplicateImports --winmd \"{TestUtils.Win32WinmdPath}\"";
+            string allowedDuplicateImportsFileName = TestUtils.GetAssetFile("duplicateImportsAllowList.rsp");
+            string args = $"showDuplicateImports --winmd \"{TestUtils.Win32WinmdPath}\" \"@{allowedDuplicateImportsFileName}\"";
             this.ExecWinmdUtils(args);
         }
 

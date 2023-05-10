@@ -7,6 +7,9 @@
 #include <sdkddkver.h>
 #include <commdlg.h>
 
+#define __STREAMS__
+
 #include <ks.h>
 #include <ksmedia.h>
+#include <strmif.h>
 #include <ksproxy.h>

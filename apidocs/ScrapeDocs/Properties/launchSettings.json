@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ScrapeDocs": {
+      "commandName": "Project",
+      "commandLineArgs": "../../../ext/Virtualization-Documentation/virtualization/api/hcs/Reference ../../../bin/Debug/apidocs.msgpack"
+    }
+  }
+}

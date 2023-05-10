@@ -25,6 +25,7 @@ namespace ClangSharpSourceToWinmd
 
         private class TreeRewriter : CSharpSyntaxRewriter
         {
+            private static readonly Regex NativeTypeNameArrayRegex = new Regex(@"\[\s*(\d+)\s*\]$");
             private static readonly Regex ElementCountRegex = new Regex(@"(?:elementCount|byteCount)\((?:_Old_\()?([^\)]+)\)+");
             private static readonly Regex IsRegex = new Regex(@"[^\w::]");
 
@@ -292,7 +293,7 @@ namespace ClangSharpSourceToWinmd
                                     SyntaxFactory.AttributeList(
                                         SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
                                             SyntaxFactory.Attribute(
-                                                SyntaxFactory.ParseName("Windows.Win32.Interop.Guid"),
+                                                SyntaxFactory.ParseName("Windows.Win32.Foundation.Metadata.Guid"),
                                                 SyntaxFactory.ParseAttributeArgumentList(argsFormatted))));
 
                                 node = node.AddAttributeLists(attrsList).WithLeadingTrivia(node.GetLeadingTrivia());
@@ -329,6 +330,26 @@ namespace ClangSharpSourceToWinmd
                         node = node.WithDeclaration(node.Declaration.WithVariables(SyntaxFactory.SingletonSeparatedList(variable)));
 
                         return node;
+                    }
+                }
+
+                // Assume [0] or [1] (ANYSIZE_ARRAY) at the end of a struct indicates flexible arrays and add the FlexibleArray attribute.
+                // Parse NativeTypeName instead of the field declaration to support scenarios like arrays of structs which aren't scraped as arrays.
+                var nativeTypeName = SyntaxUtils.GetNativeTypeNameFromAttributesLists(node.AttributeLists);
+                if (nativeTypeName != null)
+                {
+                    var match = NativeTypeNameArrayRegex.Match(nativeTypeName);
+                    if (match.Success && match.Groups[1].Value == "0" || match.Groups[1].Value == "1")
+                    {
+                        if (node.ToString() == (node.Parent as StructDeclarationSyntax).Members.Where(m => m is FieldDeclarationSyntax).Last().ToString())
+                        {
+                            var attributeList = SyntaxFactory.AttributeList(
+                                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
+                                        SyntaxFactory.Attribute(
+                                            SyntaxFactory.ParseName("FlexibleArray"))));
+
+                            node = node.AddAttributeLists(attributeList);
+                        }
                     }
                 }
 
@@ -468,6 +489,18 @@ namespace ClangSharpSourceToWinmd
                                         SyntaxFactory.Attribute(SyntaxFactory.ParseName("global::System.Flags")))).WithLeadingTrivia(node.GetLeadingTrivia()));
                     }
                 }
+
+                return node;
+            }
+
+            public override SyntaxNode VisitEnumMemberDeclaration(EnumMemberDeclarationSyntax node)
+            {
+                string fullName = GetFullNameWithoutArchSuffix(node);
+
+                this.GetRemapInfo(fullName, node.AttributeLists, out var listAttributes, string.Empty, out string newType, out string newName);
+
+                node = (EnumMemberDeclarationSyntax)base.VisitEnumMemberDeclaration(node);
+                node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes));
 
                 return node;
             }
@@ -804,6 +837,7 @@ namespace ClangSharpSourceToWinmd
                 bool isComOutPtr = false;
                 bool isRetVal = false;
                 bool isNullNullTerminated;
+                bool isByteBuffer = false;
                 bool? pre = null;
                 bool? post = null;
 
@@ -875,6 +909,7 @@ namespace ClangSharpSourceToWinmd
                         else if (salAttr.P1.StartsWith("_Outptr_") && !isComOutPtr)
                         {
                             isOut = true;
+                            isByteBuffer = salAttr.P1.Contains("bytebuffer");
                             continue;
                         }
                         else if (salAttr.P1 == "_Reserved_")
@@ -939,9 +974,9 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 // If we didn't add marshal as yet, try again without using pre
-                if (!marshalAsAdded)
+                if (!marshalAsAdded && !isByteBuffer)
                 {
-                    var salAttr = salAttrs.FirstOrDefault(attr => attr.Name == "SAL_readableTo" || attr.Name == "SAL_writeableTo");
+                    var salAttr = salAttrs.FirstOrDefault(attr => attr.Name == "SAL_writableTo" || attr.Name == "SAL_readableTo");
                     if (salAttr != null)
                     {
                         nativeArrayInfoParams = GetArrayMarshalAsFromP1(paramNode, salAttr.P1);
@@ -952,12 +987,29 @@ namespace ClangSharpSourceToWinmd
                     }
                 }
 
+                var nativeTypeName = SyntaxUtils.GetNativeTypeNameFromAttributesLists((cppAttrList.Parent as ParameterSyntax).AttributeLists);
                 if (!string.IsNullOrEmpty(nativeArrayInfoParams))
                 {
                     var attrName = SyntaxFactory.ParseName(nativeArrayInfoParams.Contains("BytesParamIndex") ? "MemorySize" : "NativeArrayInfo");
                     var args = SyntaxFactory.ParseAttributeArgumentList(nativeArrayInfoParams.ToString());
                     var finalAttr = SyntaxFactory.Attribute(attrName, args);
                     attributesList.Add(finalAttr);
+                }
+                else if (nativeTypeName != null)
+                {
+                    var match = NativeTypeNameArrayRegex.Match(nativeTypeName);
+                    if (match.Success)
+                    {
+                        var size = Convert.ToUInt32(match.Groups[1].Value);
+
+                        // Don't bother marking this as an array if it has 1 or less
+                        if (size > 1)
+                        {
+                            var attrName = SyntaxFactory.ParseName("NativeArrayInfo");
+                            var args = SyntaxFactory.ParseAttributeArgumentList($"(CountConst = {size})");
+                            attributesList.Add(SyntaxFactory.Attribute(attrName, args));
+                        }
+                    }
                 }
 
                 if (isIn)

@@ -734,6 +734,14 @@
         "parameter": "nShowCmd"
       },
       {
+        "method": "ShellExecuteA",
+        "parameter": "nShowCmd"
+      },
+      {
+        "struct": "WINDOWPLACEMENT",
+        "field": "showCmd"
+      },
+      {
         "interface": "IShellLinkW",
         "method": "SetShowCmd",
         "parameter": "iShowCmd"
@@ -2441,10 +2449,6 @@
       {
         "method": "ReOpenFile",
         "parameter": "dwShareMode"
-      },
-      {
-        "method": "NtCreateFile",
-        "parameter": "ShareAccess"
       }
     ]
   },
@@ -4051,7 +4055,32 @@
       {
         "name": "NO_ERROR",
         "value": 0
+      }
+    ],
+    "uses": [
+      {
+        "method": "GetLastError",
+        "parameter": "return"
       },
+      {
+        "method": "SetLastError",
+        "parameter": "dwErrCode"
+      },
+      {
+        "method": "SetLastErrorEx",
+        "parameter": "dwErrCode"
+      },
+      {
+        "struct": "NETINFOSTRUCT",
+        "field": "dwStatus"
+      }
+    ]
+  },
+  {
+    "namespace": "Windows.Win32.Foundation",
+    "type": "uint",
+    "name": "WAIT_EVENT",
+    "members": [
       {
         "name": "WAIT_OBJECT_0",
         "value": 0
@@ -4079,19 +4108,11 @@
     ],
     "uses": [
       {
-        "method": "GetLastError",
+        "method": "WaitForSingleObject",
         "parameter": "return"
       },
       {
-        "method": "SetLastError",
-        "parameter": "dwErrCode"
-      },
-      {
-        "method": "SetLastErrorEx",
-        "parameter": "dwErrCode"
-      },
-      {
-        "method": "SignalObjectAndWait",
+        "method": "WaitForSingleObjectEx",
         "parameter": "return"
       },
       {
@@ -4103,16 +4124,20 @@
         "parameter": "return"
       },
       {
-        "method": "WaitForSingleObject",
+        "method": "MsgWaitForMultipleObjects",
         "parameter": "return"
       },
       {
-        "method": "WaitForSingleObjectEx",
+        "method": "MsgWaitForMultipleObjectsEx",
         "parameter": "return"
       },
       {
-        "struct": "NETINFOSTRUCT",
-        "field": "dwStatus"
+        "method": "WSAWaitForMultipleEvents",
+        "parameter": "return"
+      },
+      {
+        "method": "SignalObjectAndWait",
+        "parameter": "return"
       }
     ]
   },
@@ -5418,10 +5443,6 @@
         "parameter": "dwNewMode"
       },
       {
-        "method": "SetThreadErrorMode",
-        "parameter": "lpOldMode"
-      },
-      {
         "method": "SetErrorMode",
         "parameter": "uMode"
       }
@@ -5835,14 +5856,6 @@
         "parameter": "ulAttribute"
       },
       {
-        "method": "QueryContextAttributesW",
-        "parameter": "ulAttribute"
-      },
-      {
-        "method": "QueryContextAttributesA",
-        "parameter": "ulAttribute"
-      },
-      {
         "method": "QueryContextAttributesExW",
         "parameter": "ulAttribute"
       },
@@ -5939,22 +5952,6 @@
       {
         "method": "GetNamedPipeInfo",
         "parameter": "lpFlags"
-      },
-      {
-        "method": "GetNamedPipeHandleStateA",
-        "parameter": "lpState"
-      },
-      {
-        "method": "GetNamedPipeHandleStateW",
-        "parameter": "lpState"
-      },
-      {
-        "method": "SetNamedPipeHandleState",
-        "parameter": "lpMode"
-      },
-      {
-        "method": "SetNamedPipeHandleState",
-        "parameter": "lpMode"
       },
       {
         "method": "SetNamedPipeHandleState",
@@ -7029,19 +7026,7 @@
         "parameter": "lpdwFlags"
       },
       {
-        "method": "InternetGetConnectedStateEx",
-        "parameter": "lpdwFlags"
-      },
-      {
         "method": "InternetGetConnectedStateExA",
-        "parameter": "lpdwFlags"
-      },
-      {
-        "method": "InternetGetConnectedStateExA",
-        "parameter": "lpdwFlags"
-      },
-      {
-        "method": "InternetGetConnectedStateExW",
         "parameter": "lpdwFlags"
       },
       {
@@ -7140,17 +7125,11 @@
     ]
   },
   {
-    "name": "FILE_NAME",
-    "members": [
-      {
-        "name": "FILE_NAME_NORMALIZED",
-        "value": "0"
-      },
-      {
-        "name": "FILE_NAME_OPENED",
-        "value": "8"
-      }
-    ],
+    "name": "GETFINALPATHNAMEBYHANDLE_FLAGS",
+    "autoPopulate": {
+      "header": "winbase.h",
+      "filter": "FILE_NAME|VOLUME_NAME"
+    },
     "uses": [
       {
         "method": "GetFinalPathNameByHandleA",
@@ -7559,14 +7538,6 @@
       }
     ],
     "uses": [
-      {
-        "method": "ImmSetCompositionStringW",
-        "parameter": "dwIndex"
-      },
-      {
-        "method": "ImmSetCompositionStringA",
-        "parameter": "dwIndex"
-      },
       {
         "method": "ImmSetCompositionStringW",
         "parameter": "dwIndex"
@@ -8487,6 +8458,10 @@
       {
         "method": "CreateDIBPatternBrush",
         "parameter": "iUsage"
+      },
+      {
+        "method": "CreateDIBSection",
+        "parameter": "usage"
       }
     ]
   },
@@ -9359,18 +9334,6 @@
       {
         "method": "NCryptSignHash",
         "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptSecretAgreement",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptExportKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptImportKey",
-        "parameter": "dwFlags"
       }
     ]
   },
@@ -10117,14 +10080,6 @@
       {
         "method": "ImmGetGuideLineW",
         "parameter": "dwIndex"
-      },
-      {
-        "method": "ImmGetGuideLineA",
-        "parameter": "dwIndex"
-      },
-      {
-        "method": "ImmGetGuideLineW",
-        "parameter": "dwIndex"
       }
     ]
   },
@@ -10407,10 +10362,6 @@
       }
     ],
     "uses": [
-      {
-        "method": "ImmNotifyIME",
-        "parameter": "dwIndex"
-      },
       {
         "method": "ImmNotifyIME",
         "parameter": "dwIndex"
@@ -11687,24 +11638,69 @@
     ]
   },
   {
+    "namespace": "Windows.Win32.System.SystemInformation",
     "name": "PROCESSOR_ARCHITECTURE",
     "type": "ushort",
     "members": [
       {
-        "name": "PROCESSOR_ARCHITECTURE_AMD64",
-        "value": "9"
+        "name": "PROCESSOR_ARCHITECTURE_INTEL",
+        "value": "0"
+      },
+      {
+        "name": "PROCESSOR_ARCHITECTURE_MIPS",
+        "value": "1"
+      },
+      {
+        "name": "PROCESSOR_ARCHITECTURE_ALPHA",
+        "value": "2"
+      },
+      {
+        "name": "PROCESSOR_ARCHITECTURE_PPC",
+        "value": "3"
+      },
+      {
+        "name": "PROCESSOR_ARCHITECTURE_SHX",
+        "value": "4"
+      },
+      {
+        "name": "PROCESSOR_ARCHITECTURE_ARM",
+        "value": "5"
       },
       {
         "name": "PROCESSOR_ARCHITECTURE_IA64",
         "value": "6"
       },
       {
-        "name": "PROCESSOR_ARCHITECTURE_INTEL",
-        "value": "0"
+        "name": "PROCESSOR_ARCHITECTURE_ALPHA64",
+        "value": "7"
       },
       {
-        "name": "PROCESSOR_ARCHITECTURE_ARM",
-        "value": "5"
+        "name": "PROCESSOR_ARCHITECTURE_MSIL",
+        "value": "8"
+      },
+      {
+        "name": "PROCESSOR_ARCHITECTURE_AMD64",
+        "value": "9"
+      },
+      {
+        "name": "PROCESSOR_ARCHITECTURE_IA32_ON_WIN64",
+        "value": "10"
+      },
+      {
+        "name": "PROCESSOR_ARCHITECTURE_NEUTRAL",
+        "value": "11"
+      },
+      {
+        "name": "PROCESSOR_ARCHITECTURE_ARM64",
+        "value": "12"
+      },
+      {
+        "name": "PROCESSOR_ARCHITECTURE_ARM32_ON_WIN64",
+        "value": "13"
+      },
+      {
+        "name": "PROCESSOR_ARCHITECTURE_IA32_ON_ARM64",
+        "value": "14"
       },
       {
         "name": "PROCESSOR_ARCHITECTURE_UNKNOWN",
@@ -11713,12 +11709,12 @@
     ],
     "uses": [
       {
-        "struct": "MINIDUMP_SYSTEM_INFO",
-        "field": "ProcessorArchitecture"
-      },
-      {
         "struct": "SYSTEM_INFO::_Anonymous_e__Union::_Anonymous_e__Struct",
         "field": "wProcessorArchitecture"
+      },
+      {
+        "struct": "MINIDUMP_SYSTEM_INFO",
+        "field": "ProcessorArchitecture"
       }
     ]
   },
@@ -12194,20 +12190,6 @@
     ]
   },
   {
-    "addUsesTo": "REG_OPEN_CREATE_OPTIONS",
-    "members": [],
-    "uses": [
-      {
-        "method": "RegCreateKeyTransactedA",
-        "parameter": "dwOptions"
-      },
-      {
-        "method": "RegCreateKeyTransactedW",
-        "parameter": "dwOptions"
-      }
-    ]
-  },
-  {
     "name": "NOTIFY_IME_ACTION",
     "members": [
       {
@@ -12236,10 +12218,6 @@
       }
     ],
     "uses": [
-      {
-        "method": "ImmNotifyIME",
-        "parameter": "dwAction"
-      },
       {
         "method": "ImmNotifyIME",
         "parameter": "dwAction"
@@ -12389,14 +12367,6 @@
     "uses": [
       {
         "method": "ImmGetConversionListW",
-        "parameter": "uFlag"
-      },
-      {
-        "method": "ImmGetConversionListW",
-        "parameter": "uFlag"
-      },
-      {
-        "method": "ImmGetConversionListA",
         "parameter": "uFlag"
       },
       {
@@ -12848,10 +12818,6 @@
       }
     ],
     "uses": [
-      {
-        "method": "DetectAutoProxyUrl",
-        "parameter": "dwDetectFlags"
-      },
       {
         "method": "DetectAutoProxyUrl",
         "parameter": "dwDetectFlags"
@@ -15146,10 +15112,6 @@
       {
         "method": "InternetAutodial",
         "parameter": "dwFlags"
-      },
-      {
-        "method": "InternetAutodial",
-        "parameter": "dwFlags"
       }
     ]
   },
@@ -15972,35 +15934,6 @@
     ]
   },
   {
-    "name": "NT_CREATE_FILE_DISPOSITION",
-    "members": [
-      {
-        "name": "FILE_SUPERSEDE"
-      },
-      {
-        "name": "FILE_CREATE"
-      },
-      {
-        "name": "FILE_OPEN"
-      },
-      {
-        "name": "FILE_OPEN_IF"
-      },
-      {
-        "name": "FILE_OVERWRITE"
-      },
-      {
-        "name": "FILE_OVERWRITE_IF"
-      }
-    ],
-    "uses": [
-      {
-        "method": "NtCreateFile",
-        "parameter": "CreateDisposition"
-      }
-    ]
-  },
-  {
     "name": "CREATE_FONT_PACKAGE_SUBSET_ENCODING",
     "type": "ushort",
     "members": [
@@ -16609,20 +16542,6 @@
       {
         "method": "SymFindFileInPath",
         "parameter": "flags"
-      }
-    ]
-  },
-  {
-    "addUsesTo": "REG_OPEN_CREATE_OPTIONS",
-    "members": [],
-    "uses": [
-      {
-        "method": "RegCreateKeyExA",
-        "parameter": "dwOptions"
-      },
-      {
-        "method": "RegCreateKeyExW",
-        "parameter": "dwOptions"
       }
     ]
   },
@@ -19128,7 +19047,7 @@
     ]
   },
   {
-    "name": "DEVICE_CAPABILITIES",
+    "name": "PRINTER_DEVICE_CAPABILITIES",
     "type": "ushort",
     "members": [
       {
@@ -20975,10 +20894,6 @@
       {
         "struct": "VDS_PACK_NOTIFICATION",
         "field": "ulEvent"
-      },
-      {
-        "struct": "VDS_PACK_NOTIFICATION",
-        "field": "ulEvent"
       }
     ]
   },
@@ -21218,10 +21133,6 @@
       {
         "struct": "VDS_FILE_SYSTEM_NOTIFICATION",
         "field": "ulEvent"
-      },
-      {
-        "struct": "VDS_FILE_SYSTEM_NOTIFICATION",
-        "field": "ulEvent"
       }
     ]
   },
@@ -21399,10 +21310,6 @@
       }
     ],
     "uses": [
-      {
-        "struct": "PROPSPEC",
-        "field": "ulKind"
-      },
       {
         "struct": "PROPSPEC",
         "field": "ulKind"
@@ -22436,10 +22343,6 @@
       {
         "struct": "VDS_CONTROLLER_NOTIFICATION",
         "field": "ulEvent"
-      },
-      {
-        "struct": "VDS_CONTROLLER_NOTIFICATION",
-        "field": "ulEvent"
       }
     ]
   },
@@ -22784,17 +22687,6 @@
       {
         "struct": "PARAFORMAT2",
         "field": "wBorders"
-      }
-    ]
-  },
-  {
-    "addUsesTo": "JOB_OBJECT_LIMIT",
-    "flags": true,
-    "members": [],
-    "uses": [
-      {
-        "struct": "JOBOBJECT_BASIC_LIMIT_INFORMATION",
-        "field": "LimitFlags"
       }
     ]
   },
@@ -23367,17 +23259,6 @@
     ]
   },
   {
-    "addUsesTo": "JOB_OBJECT_SECURITY",
-    "flags": true,
-    "members": [],
-    "uses": [
-      {
-        "struct": "JOBOBJECT_SECURITY_LIMIT_INFORMATION",
-        "field": "SecurityLimitFlags"
-      }
-    ]
-  },
-  {
     "name": "WINTRUST_DATA_STATE_ACTION",
     "members": [
       {
@@ -23556,10 +23437,6 @@
       {
         "struct": "VDS_DRIVE_NOTIFICATION",
         "field": "ulEvent"
-      },
-      {
-        "struct": "VDS_DRIVE_NOTIFICATION",
-        "field": "ulEvent"
       }
     ]
   },
@@ -23584,10 +23461,6 @@
       }
     ],
     "uses": [
-      {
-        "struct": "VDS_PORT_NOTIFICATION",
-        "field": "ulEvent"
-      },
       {
         "struct": "VDS_PORT_NOTIFICATION",
         "field": "ulEvent"
@@ -24155,21 +24028,6 @@
       {
         "struct": "JOBOBJECT_END_OF_JOB_TIME_INFORMATION",
         "field": "EndOfJobTimeAction"
-      }
-    ]
-  },
-  {
-    "addUsesTo": "JOB_OBJECT_LIMIT",
-    "flags": true,
-    "members": [],
-    "uses": [
-      {
-        "struct": "JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2",
-        "field": "LimitFlags"
-      },
-      {
-        "struct": "JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2",
-        "field": "LimitFlags"
       }
     ]
   },
@@ -25146,21 +25004,6 @@
     ]
   },
   {
-    "addUsesTo": "JOB_OBJECT_LIMIT",
-    "flags": true,
-    "members": [],
-    "uses": [
-      {
-        "struct": "JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION",
-        "field": "LimitFlags"
-      },
-      {
-        "struct": "JOBOBJECT_LIMIT_VIOLATION_INFORMATION",
-        "field": "LimitFlags"
-      }
-    ]
-  },
-  {
     "name": "CERT_CHAIN_POLICY_FLAGS",
     "members": [
       {
@@ -25575,17 +25418,6 @@
     ]
   },
   {
-    "addUsesTo": "JOB_OBJECT_UILIMIT",
-    "flags": true,
-    "members": [],
-    "uses": [
-      {
-        "struct": "JOBOBJECT_BASIC_UI_RESTRICTIONS",
-        "field": "UIRestrictionsClass"
-      }
-    ]
-  },
-  {
     "name": "TBINSERTMARK_FLAGS",
     "members": [
       {
@@ -25759,17 +25591,6 @@
       {
         "struct": "SESSION_INFO_1",
         "field": "sesi1_user_flags"
-      }
-    ]
-  },
-  {
-    "addUsesTo": "JOB_OBJECT_LIMIT",
-    "flags": true,
-    "members": [],
-    "uses": [
-      {
-        "struct": "JOBOBJECT_LIMIT_VIOLATION_INFORMATION",
-        "field": "ViolationLimitFlags"
       }
     ]
   },
@@ -26985,10 +26806,6 @@
       {
         "struct": "VDS_LUN_NOTIFICATION",
         "field": "ulEvent"
-      },
-      {
-        "struct": "VDS_LUN_NOTIFICATION",
-        "field": "ulEvent"
       }
     ]
   },
@@ -27528,10 +27345,6 @@
       }
     ],
     "uses": [
-      {
-        "struct": "VDS_DISK_NOTIFICATION",
-        "field": "ulEvent"
-      },
       {
         "struct": "VDS_DISK_NOTIFICATION",
         "field": "ulEvent"
@@ -28461,17 +28274,6 @@
       {
         "struct": "LVFOOTERITEM",
         "field": "mask"
-      }
-    ]
-  },
-  {
-    "addUsesTo": "JOB_OBJECT_LIMIT",
-    "flags": true,
-    "members": [],
-    "uses": [
-      {
-        "struct": "JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2",
-        "field": "ViolationLimitFlags"
       }
     ]
   },
@@ -33367,16 +33169,6 @@
     ],
     "uses": [
       {
-        "interface": "ITextRangeProvider",
-        "method": "FindAttribute",
-        "parameter": "attributeId"
-      },
-      {
-        "interface": "ITextRangeProvider",
-        "method": "GetAttributeValue",
-        "parameter": "attributeId"
-      },
-      {
         "interface": "IUIAutomationTextRange",
         "method": "FindAttribute",
         "parameter": "attr"
@@ -33390,6 +33182,16 @@
         "interface": "IUIAutomationTextRange3",
         "method": "GetAttributeValues",
         "parameter": "attributeIds"
+      },
+      {
+        "interface": "ITextRangeProvider",
+        "method": "FindAttribute",
+        "parameter": "attributeId"
+      },
+      {
+        "interface": "ITextRangeProvider",
+        "method": "GetAttributeValue",
+        "parameter": "attributeId"
       }
     ]
   },
@@ -33770,11 +33572,6 @@
     ],
     "uses": [
       {
-        "interface": "IStylesProvider",
-        "method": "get_StyleId",
-        "parameter": "retVal"
-      },
-      {
         "interface": "IUIAutomationStylesPattern",
         "method": "get_CachedStyleId",
         "parameter": "retVal"
@@ -33782,6 +33579,11 @@
       {
         "interface": "IUIAutomationStylesPattern",
         "method": "get_CurrentStyleId",
+        "parameter": "retVal"
+      },
+      {
+        "interface": "IStylesProvider",
+        "method": "get_StyleId",
         "parameter": "retVal"
       }
     ]
@@ -33881,6 +33683,7 @@
     ]
   },
   {
+    "namespace": "Windows.Win32.UI.Accessibility",
     "name": "UIA_CHANGE_ID",
     "members": [ 
       {
@@ -35116,6 +34919,539 @@
         "interface": "ICLRHostProtectionManager",
         "method": "SetProtectedCategories",
         "parameter": "categories"
+      }
+    ]
+  },
+  {
+    "name": "COMPARESTRING_RESULT",
+    "autoPopulate": {
+      "header": "winnls.h",
+      "filter": "CSTR_"
+    },
+    "uses": [
+      {
+        "method": "CompareStringA",
+        "parameter": "return"
+      },
+      {
+        "method": "CompareStringW",
+        "parameter": "return"
+      },
+      {
+        "method": "CompareStringEx",
+        "parameter": "return"
+      },
+      {
+        "method": "CompareStringOrdinal",
+        "parameter": "return"
+      }
+    ]
+  },
+  {
+    "name": "BCRYPTGENRANDOM_FLAGS",
+    "members": [
+      {
+        "name": "BCRYPT_RNG_USE_ENTROPY_IN_BUFFER"
+      },
+      {
+        "name": "BCRYPT_USE_SYSTEM_PREFERRED_RNG"
+      }
+    ],
+    "uses": [
+      {
+        "method": "BCryptGenRandom",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "FILE_DISPOSITION_INFO_EX_FLAGS",
+    "autoPopulate": {
+      "header": "winbase.h",
+      "filter": "FILE_DISPOSITION_FLAG_"
+    },
+    "uses": [
+      {
+        "struct": "FILE_DISPOSITION_INFO_EX",
+        "field": "Flags"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "WBEM_CONDITION_FLAG_TYPE",
+    "members": [],
+    "uses": [
+      {
+        "interface": "IWbemClassObject",
+        "method": "GetNames",
+        "parameter": "lFlags"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "WBEM_COMPARISON_FLAG",
+    "members": [],
+    "uses": [
+      {
+        "interface": "IWbemClassObject",
+        "method": "CompareTo",
+        "parameter": "lFlags"
+      }
+    ]
+  },
+  {
+    "name": "CONTEXT_FLAGS",
+    "type": "uint",
+    "flags": true,
+    "members": [
+      {
+        "name": "CONTEXT_AMD64"
+      },
+      {
+        "name": "CONTEXT_CONTROL_AMD64",
+        "value": "(CONTEXT_AMD64 | 0x00000001)"
+      },
+      {
+        "name": "CONTEXT_INTEGER_AMD64",
+        "value": "(CONTEXT_AMD64 | 0x00000002)"
+      },
+      {
+        "name": "CONTEXT_SEGMENTS_AMD64",
+        "value": "(CONTEXT_AMD64 | 0x00000004)"
+      },
+      {
+        "name": "CONTEXT_FLOATING_POINT_AMD64",
+        "value": "(CONTEXT_AMD64 | 0x00000008)"
+      },
+      {
+        "name": "CONTEXT_DEBUG_REGISTERS_AMD64",
+        "value": "(CONTEXT_AMD64 | 0x00000010)"
+      },
+      {
+        "name": "CONTEXT_FULL_AMD64",
+        "value": "(CONTEXT_CONTROL_AMD64 | CONTEXT_INTEGER_AMD64 | CONTEXT_FLOATING_POINT_AMD64)"
+      },
+      {
+        "name": "CONTEXT_ALL_AMD64",
+        "value": "(CONTEXT_CONTROL_AMD64 | CONTEXT_INTEGER_AMD64 | CONTEXT_SEGMENTS_AMD64 | CONTEXT_FLOATING_POINT_AMD64 | CONTEXT_DEBUG_REGISTERS_AMD64)"
+      },
+      {
+        "name": "CONTEXT_XSTATE_AMD64",
+        "value": "(CONTEXT_AMD64 | 0x00000040)"
+      },
+      {
+        "name": "CONTEXT_KERNEL_CET_AMD64",
+        "value": "(CONTEXT_AMD64 | 0x00000080)"
+      },
+      {
+        "name": "CONTEXT_KERNEL_DEBUGGER_AMD64",
+        "value": "0x04000000L"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_ACTIVE_AMD64",
+        "value": "0x08000000"
+      },
+      {
+        "name": "CONTEXT_SERVICE_ACTIVE_AMD64",
+        "value": "0x10000000"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_REQUEST_AMD64",
+        "value": "0x40000000"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_REPORTING_AMD64",
+        "value": "0x80000000"
+      },
+      {
+        "name": "CONTEXT_UNWOUND_TO_CALL_AMD64",
+        "value": "0x20000000"
+      },
+      {
+        "name": "CONTEXT_X86",
+        "value": "0x00010000L"
+      },
+      {
+        "name": "CONTEXT_CONTROL_X86",
+        "value": "(CONTEXT_X86 | 0x00000001)"
+      },
+      {
+        "name": "CONTEXT_INTEGER_X86",
+        "value": "(CONTEXT_X86 | 0x00000002)"
+      },
+      {
+        "name": "CONTEXT_SEGMENTS_X86",
+        "value": "(CONTEXT_X86 | 0x00000004)"
+      },
+      {
+        "name": "CONTEXT_FLOATING_POINT_X86",
+        "value": "(CONTEXT_X86 | 0x00000008)"
+      },
+      {
+        "name": "CONTEXT_DEBUG_REGISTERS_X86",
+        "value": "(CONTEXT_X86 | 0x00000010)"
+      },
+      {
+        "name": "CONTEXT_EXTENDED_REGISTERS_X86",
+        "value": "(CONTEXT_X86 | 0x00000020)"
+      },
+      {
+        "name": "CONTEXT_FULL_X86",
+        "value": "(CONTEXT_CONTROL_X86 | CONTEXT_INTEGER_X86 | CONTEXT_SEGMENTS_X86)"
+      },
+      {
+        "name": "CONTEXT_ALL_X86",
+        "value": "(CONTEXT_CONTROL_X86 | CONTEXT_INTEGER_X86 | CONTEXT_SEGMENTS_X86 | CONTEXT_FLOATING_POINT_X86 | CONTEXT_DEBUG_REGISTERS_X86 | CONTEXT_EXTENDED_REGISTERS_X86)"
+      },
+      {
+        "name": "CONTEXT_XSTATE_X86",
+        "value": "(CONTEXT_X86 | 0x00000040)"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_ACTIVE_X86",
+        "value": "0x08000000"
+      },
+      {
+        "name": "CONTEXT_SERVICE_ACTIVE_X86",
+        "value": "0x10000000"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_REQUEST_X86",
+        "value": "0x40000000"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_REPORTING_X86",
+        "value": "0x80000000"
+      },
+      {
+        "name": "CONTEXT_ARM64"
+      },
+      {
+        "name": "CONTEXT_CONTROL_ARM64",
+        "value": "(CONTEXT_ARM64 | 0x00000001)"
+      },
+      {
+        "name": "CONTEXT_INTEGER_ARM64",
+        "value": "(CONTEXT_ARM64 | 0x00000002)"
+      },
+      {
+        "name": "CONTEXT_FLOATING_POINT_ARM64",
+        "value": "(CONTEXT_ARM64 | 0x00000004)"
+      },
+      {
+        "name": "CONTEXT_DEBUG_REGISTERS_ARM64",
+        "value": "(CONTEXT_ARM64 | 0x00000008)"
+      },
+      {
+        "name": "CONTEXT_X18_ARM64",
+        "value": "(CONTEXT_ARM64 | 0x00000010)"
+      },
+      {
+        "name": "CONTEXT_FULL_ARM64",
+        "value": "(CONTEXT_CONTROL_ARM64 | CONTEXT_INTEGER_ARM64 | CONTEXT_FLOATING_POINT_ARM64)"
+      },
+      {
+        "name": "CONTEXT_ALL_ARM64",
+        "value": "(CONTEXT_CONTROL_ARM64 | CONTEXT_INTEGER_ARM64 | CONTEXT_FLOATING_POINT_ARM64 | CONTEXT_DEBUG_REGISTERS_ARM64 | CONTEXT_X18_ARM64)"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_ACTIVE_ARM64",
+        "value": "0x08000000"
+      },
+      {
+        "name": "CONTEXT_SERVICE_ACTIVE_ARM64",
+        "value": "0x10000000"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_REQUEST_ARM64",
+        "value": "0x40000000"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_REPORTING_ARM64",
+        "value": "0x80000000"
+      },
+      {
+        "name": "CONTEXT_UNWOUND_TO_CALL_ARM64",
+        "value": "0x20000000"
+      },
+      {
+        "name": "CONTEXT_RET_TO_GUEST_ARM64",
+        "value": "0x40000000"
+      },
+      {
+        "name": "CONTEXT_ARM"
+      },
+      {
+        "name": "CONTEXT_CONTROL_ARM",
+        "value": "(CONTEXT_ARM | 0x00000001)"
+      },
+      {
+        "name": "CONTEXT_INTEGER_ARM",
+        "value": "(CONTEXT_ARM | 0x00000002)"
+      },
+      {
+        "name": "CONTEXT_FLOATING_POINT_ARM",
+        "value": "(CONTEXT_ARM | 0x00000004)"
+      },
+      {
+        "name": "CONTEXT_DEBUG_REGISTERS_ARM",
+        "value": "(CONTEXT_ARM | 0x00000008)"
+      },
+      {
+        "name": "CONTEXT_FULL_ARM",
+        "value": "(CONTEXT_CONTROL_ARM | CONTEXT_INTEGER_ARM | CONTEXT_FLOATING_POINT_ARM)"
+      },
+      {
+        "name": "CONTEXT_ALL_ARM",
+        "value": "(CONTEXT_CONTROL_ARM | CONTEXT_INTEGER_ARM | CONTEXT_FLOATING_POINT_ARM | CONTEXT_DEBUG_REGISTERS_ARM)"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_ACTIVE_ARM",
+        "value": "0x08000000"
+      },
+      {
+        "name": "CONTEXT_SERVICE_ACTIVE_ARM",
+        "value": "0x10000000"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_REQUEST_ARM",
+        "value": "0x40000000"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_REPORTING_ARM",
+        "value": "0x80000000"
+      },
+      {
+        "name": "CONTEXT_UNWOUND_TO_CALL_ARM",
+        "value": "0x20000000"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "CONTEXT",
+        "field": "ContextFlags"
+      },
+      {
+        "method": "InitializeContext",
+        "parameter": "ContextFlags"
+      },
+      {
+        "method": "InitializeContext2",
+        "parameter": "ContextFlags"
+      },
+      {
+        "method": "CopyContext",
+        "parameter": "ContextFlags"
+      }
+    ]
+  },
+  {
+    "name": "WOW64_CONTEXT_FLAGS",
+    "type": "uint",
+    "flags": true,
+    "members": [
+      {
+        "name": "WOW64_CONTEXT_X86",
+        "value": "0x00010000L"
+      },
+      {
+        "name": "WOW64_CONTEXT_CONTROL",
+        "value": "(WOW64_CONTEXT_X86 | 0x00000001)"
+      },
+      {
+        "name": "WOW64_CONTEXT_INTEGER",
+        "value": "(WOW64_CONTEXT_X86 | 0x00000002)"
+      },
+      {
+        "name": "WOW64_CONTEXT_SEGMENTS",
+        "value": "(WOW64_CONTEXT_X86 | 0x00000004)"
+      },
+      {
+        "name": "WOW64_CONTEXT_FLOATING_POINT",
+        "value": "(WOW64_CONTEXT_X86 | 0x00000008)"
+      },
+      {
+        "name": "WOW64_CONTEXT_DEBUG_REGISTERS",
+        "value": "(WOW64_CONTEXT_X86 | 0x00000010)"
+      },
+      {
+        "name": "WOW64_CONTEXT_EXTENDED_REGISTERS",
+        "value": "(WOW64_CONTEXT_X86 | 0x00000020)"
+      },
+      {
+        "name": "WOW64_CONTEXT_FULL",
+        "value": "(WOW64_CONTEXT_CONTROL | WOW64_CONTEXT_INTEGER | WOW64_CONTEXT_SEGMENTS)"
+      },
+      {
+        "name": "WOW64_CONTEXT_ALL",
+        "value": "(WOW64_CONTEXT_CONTROL | WOW64_CONTEXT_INTEGER | WOW64_CONTEXT_SEGMENTS | WOW64_CONTEXT_FLOATING_POINT | WOW64_CONTEXT_DEBUG_REGISTERS | WOW64_CONTEXT_EXTENDED_REGISTERS)"
+      },
+      {
+        "name": "WOW64_CONTEXT_XSTATE",
+        "value": "(WOW64_CONTEXT_X86 | 0x00000040)"
+      },
+      {
+        "name": "WOW64_CONTEXT_EXCEPTION_ACTIVE",
+        "value": "0x08000000"
+      },
+      {
+        "name": "WOW64_CONTEXT_SERVICE_ACTIVE",
+        "value": "0x10000000"
+      },
+      {
+        "name": "WOW64_CONTEXT_EXCEPTION_REQUEST",
+        "value": "0x40000000"
+      },
+      {
+        "name": "WOW64_CONTEXT_EXCEPTION_REPORTING",
+        "value": "0x80000000"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "WOW64_CONTEXT",
+        "field": "ContextFlags"
+      }
+    ]
+  },
+  {
+    "name": "VAR_CHANGE_FLAGS",
+    "type": "ushort",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "VARIANT_",
+      "header": "OleAuto.h"
+    },
+    "uses": [
+      {
+        "method": "VariantChangeType",
+        "parameter": "wFlags"
+      },
+      {
+        "method": "VariantChangeTypeEx",
+        "parameter": "wFlags"
+      }
+    ]
+  },
+  {
+    "name": "SIGNER_SIGN_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "SPC_EXC_|SPC_INC_|SPC_DIGEST_",
+      "header": "mssip.h"
+    },
+    "members": [
+      {
+        "name": "SIG_APPEND"
+      }
+    ],
+    "uses": [
+      {
+        "method": "SignerSignEx",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "SignerSignEx2",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "SignerSignEx3",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "SIGNER_TIMESTAMP_FLAGS",
+    "autoPopulate": {
+      "filter": "SIGNER_TIMESTAMP_",
+      "header": "mssign.h"
+    },
+    "uses": [
+      {
+        "method": "SignerTimeStampEx2",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "SignerTimeStampEx3",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "SignerSignEx2",
+        "parameter": "dwTimestampFlags"
+      },
+      {
+        "method": "SignerSignEx3",
+        "parameter": "dwTimestampFlags"
+      }
+    ]
+  },
+  {
+    "name": "SIGNER_SUBJECT_CHOICE",
+    "autoPopulate": {
+      "filter": "SIGNER_SUBJECT_",
+      "header": "mssign.h"
+    },
+    "uses": [
+      {
+        "struct": "SIGNER_SUBJECT_INFO",
+        "field": "dwSubjectChoice"
+      }
+    ]
+  },
+  {
+    "name": "SIGNER_SIGNATURE_ATTRIBUTE_CHOICE",
+    "members": [
+      {
+        "name": "SIGNER_NO_ATTR"
+      },
+      {
+        "name": "SIGNER_AUTHCODE_ATTR"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "SIGNER_SIGNATURE_INFO",
+        "field": "dwAttrChoice"
+      }
+    ]
+  },
+  {
+    "name": "SIGNER_PRIVATE_KEY_CHOICE",
+    "autoPopulate": {
+      "filter": "PVK_TYPE_",
+      "header": "mssign.h"
+    },
+    "uses": [
+      {
+        "struct": "SIGNER_PROVIDER_INFO",
+        "field": "dwPvkChoice"
+      }
+    ]
+  },
+  {
+    "name": "SIGNER_CERT_POLICY",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "SIGNER_CERT_POLICY_",
+      "header": "mssign.h"
+    },
+    "uses": [
+      {
+        "struct": "SIGNER_CERT_STORE_INFO",
+        "field": "dwCertPolicy"
+      }
+    ]
+  },
+  {
+    "name": "SIGNER_CERT_CHOICE",
+    "autoPopulate": {
+      "filter": "SIGNER_CERT_(?!POLICY)",
+      "header": "mssign.h"
+    },
+    "uses": [
+      {
+        "struct": "SIGNER_CERT",
+        "field": "dwCertChoice"
       }
     ]
   }
