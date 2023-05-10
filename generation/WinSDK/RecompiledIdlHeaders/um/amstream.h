@@ -696,8 +696,8 @@ EXTERN_C const IID IID_IMediaStreamFilter;
             _In_  BOOL bRenderer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReferenceTimeToStreamTime( 
-            /* [annotation][out][annotation][in] */ 
-            _Out_  REFERENCE_TIME *pTime) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  REFERENCE_TIME *pTime) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentStreamTime( 
             /* [annotation][out] */ 
@@ -842,8 +842,8 @@ EXTERN_C const IID IID_IMediaStreamFilter;
         DECLSPEC_XFGVIRT(IMediaStreamFilter, ReferenceTimeToStreamTime)
         HRESULT ( STDMETHODCALLTYPE *ReferenceTimeToStreamTime )( 
             IMediaStreamFilter * This,
-            /* [annotation][out][annotation][in] */ 
-            _Out_  REFERENCE_TIME *pTime);
+            /* [annotation][out][in] */ 
+            _Inout_  REFERENCE_TIME *pTime);
         
         DECLSPEC_XFGVIRT(IMediaStreamFilter, GetCurrentStreamTime)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentStreamTime )( 

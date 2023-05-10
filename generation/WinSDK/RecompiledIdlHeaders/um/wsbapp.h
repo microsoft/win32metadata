@@ -111,7 +111,8 @@ EXTERN_C const IID IID_IWsbApplicationBackupSupport;
             _In_  LPWSTR wszComponentName,
             /* [annotation][string][unique][in] */ 
             _In_  LPWSTR wszComponentLogicalPath,
-            /* [in][range] */ __RPC__in_range(0,1000) DWORD cVolumes,
+            /* [annotation][in][range] */ 
+            _In_  DWORD cVolumes,
             /* [annotation][size_is][string][unique][in] */ 
             _In_reads_(cVolumes)  LPWSTR *rgwszSourceVolumePath,
             /* [annotation][size_is][string][unique][in] */ 
@@ -153,7 +154,8 @@ EXTERN_C const IID IID_IWsbApplicationBackupSupport;
             _In_  LPWSTR wszComponentName,
             /* [annotation][string][unique][in] */ 
             _In_  LPWSTR wszComponentLogicalPath,
-            /* [in][range] */ __RPC__in_range(0,1000) DWORD cVolumes,
+            /* [annotation][in][range] */ 
+            _In_  DWORD cVolumes,
             /* [annotation][size_is][string][unique][in] */ 
             _In_reads_(cVolumes)  LPWSTR *rgwszSourceVolumePath,
             /* [annotation][size_is][string][unique][in] */ 
@@ -234,7 +236,8 @@ EXTERN_C const IID IID_IWsbApplicationRestoreSupport;
             _In_  BOOLEAN bNoRollForward) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OrderComponents( 
-            /* [in][range] */ __RPC__in_range(0,10000) DWORD cComponents,
+            /* [annotation][in][range] */ 
+            _In_  DWORD cComponents,
             /* [annotation][size_is][string][in] */ 
             _In_reads_(cComponents)  LPWSTR *rgComponentName,
             /* [annotation][size_is][string][in] */ 
@@ -300,7 +303,8 @@ EXTERN_C const IID IID_IWsbApplicationRestoreSupport;
         DECLSPEC_XFGVIRT(IWsbApplicationRestoreSupport, OrderComponents)
         HRESULT ( STDMETHODCALLTYPE *OrderComponents )( 
             __RPC__in IWsbApplicationRestoreSupport * This,
-            /* [in][range] */ __RPC__in_range(0,10000) DWORD cComponents,
+            /* [annotation][in][range] */ 
+            _In_  DWORD cComponents,
             /* [annotation][size_is][string][in] */ 
             _In_reads_(cComponents)  LPWSTR *rgComponentName,
             /* [annotation][size_is][string][in] */ 

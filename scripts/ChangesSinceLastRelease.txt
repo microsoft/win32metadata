@@ -5007,3 +5007,6 @@ Windows.Win32.System.Search.ITrusteeGroupAdmin.IsMember : pMemberTrustee : [In,O
 Windows.Win32.Media.DirectShow.IVMRDeinterlaceControl9.GetNumberOfDeinterlaceModes : lpdwNumDeinterlaceModes : [Out] => [In,Out]
 Windows.Win32.Media.DirectShow.Tv.IPBDA_EIT.Initialize : pBuffer : [Const,In] => [Const,In,NativeArrayInfo(CountParamIndex=0)]
 Windows.Win32.Media.DirectShow.Tv.IPBDA_Services.Initialize : pBuffer : [In] => [In,NativeArrayInfo(CountParamIndex=0)]
+# Fixed additional IDL parsing bugs handling multiple attribute lists.
+Windows.Win32.Media.DirectShow.IMediaStreamFilter.ReferenceTimeToStreamTime : pTime : [Out] => [In,Out]
+Windows.Win32.System.WinRT.Storage.IUnbufferedFileHandleProvider.OpenUnbufferedFileHandle : fileHandle : [Out] => [Out,RetVal]
