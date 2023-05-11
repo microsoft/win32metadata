@@ -290,19 +290,11 @@
     "NativeTypedef": true
   },
   {
+    "Namespace": "Windows.Win32.Graphics.Gdi",
     "Name": "HDC",
     "ValueType": "DECLARE_HANDLE",
-    "CloseApi": "ReleaseDC",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
-  },
-  {
-    "Name": "CreatedHDC",
-    "ValueType": "IntPtr",
-    "CloseApi": "DeleteDC",
-    "AlsoUsableFor": "HDC",
-    "InvalidHandleValues": [ -1, 0 ],
-    "NativeTypedef": false
   },
   {
     "Namespace": "Windows.Win32.Graphics.Gdi",

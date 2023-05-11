@@ -5039,3 +5039,12 @@ Windows.Win32.Graphics.Dxgi.IDXGIResource.SetEvictionPriority : EvictionPriority
 # Fixed MetadataTypedef definitions.
 Windows.Win32.System.LibraryLoader.UPDATERESOURCE_HANDLE : [InvalidHandleValue(0),NativeTypedef,RAIIFree(EndUpdateResourceW)] => [InvalidHandleValue(0),MetadataTypedef,RAIIFree(EndUpdateResourceW)]
 Windows.Win32.UI.WindowsAndMessaging.LOADIMAGE_HANDLE : [InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(0),MetadataTypedef]
+# Fixed #1575.
+Windows.Win32.Graphics.Gdi.Apis.CreateCompatibleDC : return...CreatedHDC => HDC
+Windows.Win32.Graphics.Gdi.Apis.CreateDCA : return...CreatedHDC => HDC
+Windows.Win32.Graphics.Gdi.Apis.CreateDCW : return...CreatedHDC => HDC
+Windows.Win32.Graphics.Gdi.Apis.CreateICA : return...CreatedHDC => HDC
+Windows.Win32.Graphics.Gdi.Apis.CreateICW : return...CreatedHDC => HDC
+Windows.Win32.Graphics.Gdi.Apis.DeleteDC : hdc...CreatedHDC => HDC
+Windows.Win32.Graphics.Gdi.CreatedHDC removed
+Windows.Win32.Graphics.Gdi.HDC : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(ReleaseDC)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef]
