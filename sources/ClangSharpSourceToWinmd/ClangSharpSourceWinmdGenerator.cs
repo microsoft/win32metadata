@@ -437,8 +437,12 @@ namespace ClangSharpSourceToWinmd
 
                     if (enumSize != nativeSize || enumSign != nativeSign)
                     {
-                        throw new InvalidOperationException(
-                            $"{parent}.{name} was remapped to enum {namedType} (type {underlyingType}, size {enumSize}) but the original field was of type {nativeType} (size {nativeSize}). Either don't use an enum or make sure the enum is of the same size and sign.");
+                        // Allow functions to return WIN32_ERROR even if the return type isn't uint. Otherwise, fail the build.
+                        if (!(name == "return" && namedType.Name == "WIN32_ERROR"))
+                        {
+                            throw new InvalidOperationException(
+                                $"{parent}.{name} was remapped to enum {namedType} (type {underlyingType}, size {enumSize}) but the original field was of type {nativeType} (size {nativeSize}). Either don't use an enum or make sure the enum is of the same size and sign.");
+                        }
                     }
                 }
             }
