@@ -5010,3 +5010,16 @@ Windows.Win32.Media.DirectShow.Tv.IPBDA_Services.Initialize : pBuffer : [In] => 
 # Fixed additional IDL parsing bugs handling multiple attribute lists.
 Windows.Win32.Media.DirectShow.IMediaStreamFilter.ReferenceTimeToStreamTime : pTime : [Out] => [In,Out]
 Windows.Win32.System.WinRT.Storage.IUnbufferedFileHandleProvider.OpenUnbufferedFileHandle : fileHandle : [Out] => [Out,RetVal]
+# Fixed #1574.
+Windows.Win32.System.Environment.VBS_BASIC_ENCLAVE_BASIC_CALL_CREATE_THREAD removed
+Windows.Win32.System.Environment.VBS_BASIC_ENCLAVE_BASIC_CALL_CREATE_THREAD(X64, Arm64) added
+Windows.Win32.System.Environment.VBS_BASIC_ENCLAVE_BASIC_CALL_CREATE_THREAD(X86) added
+Windows.Win32.System.Environment.VBS_BASIC_ENCLAVE_BASIC_CALL_INTERRUPT_THREAD removed
+Windows.Win32.System.Environment.VBS_BASIC_ENCLAVE_BASIC_CALL_INTERRUPT_THREAD(X64, Arm64) added
+Windows.Win32.System.Environment.VBS_BASIC_ENCLAVE_BASIC_CALL_INTERRUPT_THREAD(X86) added
+Windows.Win32.System.Environment.VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_EXCEPTION removed
+Windows.Win32.System.Environment.VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_EXCEPTION(X64) added
+Windows.Win32.System.Environment.VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_EXCEPTION(X86, Arm64) added
+Windows.Win32.System.Environment.VBS_BASIC_ENCLAVE_BASIC_CALL_TERMINATE_THREAD removed
+Windows.Win32.System.Environment.VBS_BASIC_ENCLAVE_BASIC_CALL_TERMINATE_THREAD(X64, Arm64) added
+Windows.Win32.System.Environment.VBS_BASIC_ENCLAVE_BASIC_CALL_TERMINATE_THREAD(X86) added
