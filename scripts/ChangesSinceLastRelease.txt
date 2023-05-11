@@ -5036,3 +5036,6 @@ Windows.Win32.Graphics.Dxgi.DXGI_RESOURCE_PRIORITY.DXGI_RESOURCE_PRIORITY_MAXIMU
 Windows.Win32.Graphics.Dxgi.DXGI_RESOURCE_PRIORITY.DXGI_RESOURCE_PRIORITY_MINIMUM removed
 Windows.Win32.Graphics.Dxgi.DXGI_RESOURCE_PRIORITY.DXGI_RESOURCE_PRIORITY_NORMAL removed
 Windows.Win32.Graphics.Dxgi.IDXGIResource.SetEvictionPriority : EvictionPriority...DXGI_RESOURCE_PRIORITY => UInt32
+# Fixed MetadataTypedef definitions.
+Windows.Win32.System.LibraryLoader.UPDATERESOURCE_HANDLE : [InvalidHandleValue(0),NativeTypedef,RAIIFree(EndUpdateResourceW)] => [InvalidHandleValue(0),MetadataTypedef,RAIIFree(EndUpdateResourceW)]
+Windows.Win32.UI.WindowsAndMessaging.LOADIMAGE_HANDLE : [InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(0),MetadataTypedef]

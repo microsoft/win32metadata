@@ -1786,7 +1786,7 @@
   },
   {
     "Name": "UPDATERESOURCE_HANDLE",
-    "ValueType": "DECLARE_HANDLE",
+    "ValueType": "IntPtr",
     "CloseApi": "EndUpdateResourceW",
     "InvalidHandleValues": [ 0 ],
     "NativeTypedef": false
@@ -1794,7 +1794,7 @@
   {
     "Namespace": "Windows.Win32.UI.WindowsAndMessaging",
     "Name": "LOADIMAGE_HANDLE",
-    "ValueType": "DECLARE_HANDLE",
+    "ValueType": "IntPtr",
     "InvalidHandleValues": [ 0 ],
     "NativeTypedef": false
   },
