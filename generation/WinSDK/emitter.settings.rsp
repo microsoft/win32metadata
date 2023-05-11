@@ -365,7 +365,6 @@ PSINJECTDATA::InjectionPoint=PSINJECT_POINT
 EnumObjects::nType=OBJ_TYPE
 EnumSystemFirmwareTables::pFirmwareTableEnumBuffer=byte*
 GetSystemFirmwareTable::pFirmwareTableBuffer=byte*
-GetCurrentObject::type=OBJ_TYPE
 ISpellingError::get_Replacement::value=[FreeWith("CoTaskMemFree")]
 CloseEventLog::hEventLog=EventLogHandle
 DeregisterEventSource::hEventLog=EventSourceHandle
@@ -430,9 +429,6 @@ MOUSEINPUT::mouseData=int
 IMAGE_OPTIONAL_HEADER32::LoaderFlags=[Obsolete]
 IMAGE_OPTIONAL_HEADER64::LoaderFlags=[Obsolete]
 MsiGetFeatureValidStates::lpInstallStates=INSTALLSTATE
-MsiEnumClientsExA::dwContext=MSIINSTALLCONTEXT
-MsiEnumClientsExW::dwContext=MSIINSTALLCONTEXT
-IVBGetControl::EnumControls::dwOleContF=OLECONTF
 MsiAdvertiseScript::dwFlags=SCRIPTFLAGS
 IWPCWebSettings::GetSettings::pdwSettings=WPCFLAG_WEB_SETTING*
 MsiDatabaseApplyTransformA::iErrorConditions=MSITRANSFORM_ERROR
@@ -705,7 +701,6 @@ SHRegEnumUSKeyA::return=WIN32_ERROR
 SHRegEnumUSKeyW::return=WIN32_ERROR
 SHRegEnumUSValueA::return=WIN32_ERROR
 SHRegEnumUSValueW::return=WIN32_ERROR
-SHRegGetIntW::return=WIN32_ERROR
 SHRegGetPathA::return=WIN32_ERROR
 SHRegGetPathW::return=WIN32_ERROR
 SHRegGetUSValueA::return=WIN32_ERROR
@@ -1042,7 +1037,6 @@ AssocQueryKeyW::flags=ASSOCF
 # snmp.h
 AsnAny=[StructLayout(LayoutKind.Sequential, Pack = 4)]
 SnmpVarBind=[StructLayout(LayoutKind.Sequential, Pack = 4)]
-SHGetKnownFolderPath::dwFlags=KNOWN_FOLDER_FLAG
 OleCreateFontIndirect::lpFontDesc=[In]
 OleCreateFontIndirect::lplpvObj=[Out]
 OleCreatePictureIndirect::lpPictDesc=[In]

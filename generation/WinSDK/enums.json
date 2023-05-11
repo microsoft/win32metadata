@@ -738,10 +738,6 @@
         "parameter": "nShowCmd"
       },
       {
-        "struct": "WINDOWPLACEMENT",
-        "field": "showCmd"
-      },
-      {
         "interface": "IShellLinkW",
         "method": "SetShowCmd",
         "parameter": "iShowCmd"
@@ -4247,9 +4243,8 @@
     ]
   },
   {
-    "type": "int",
-    "namespace": "Windows.Win32.Graphics.Gdi",
     "name": "TEXT_ALIGN_OPTIONS",
+    "type": "uint",
     "flags": true,
     "members": [
       {
@@ -4318,15 +4313,6 @@
       }
     ],
     "uses": [
-      {
-        "interface": "ITextRange2",
-        "method": "InsertImage",
-        "parameter": "Type"
-      },
-      {
-        "struct": "RICHEDIT_IMAGE_PARAMETERS",
-        "field": "Type"
-      },
       {
         "method": "GetTextAlign",
         "parameter": "return"
@@ -4692,10 +4678,6 @@
       {
         "method": "CreatePen",
         "parameter": "iStyle"
-      },
-      {
-        "method": "ExtCreatePen",
-        "parameter": "iPenStyle"
       }
     ]
   },
@@ -12660,7 +12642,7 @@
   },
   {
     "name": "ENABLE_SCROLL_BAR_ARROWS",
-    "type": "int",
+    "type": "uint",
     "members": [
       {
         "name": "ESB_DISABLE_BOTH"
@@ -12689,9 +12671,8 @@
     ],
     "uses": [
       {
-        "interface": "ITextHost",
-        "method": "TxEnableScrollBar",
-        "parameter": "fuArrowflags"
+        "method": "EnableScrollBar",
+        "parameter": "wArrows"
       }
     ]
   },
@@ -13615,6 +13596,7 @@
   },
   {
     "name": "ARC_DIRECTION",
+    "type": "int",
     "members": [
       {
         "name": "AD_COUNTERCLOCKWISE"
@@ -13990,6 +13972,7 @@
   },
   {
     "name": "STRETCH_BLT_MODE",
+    "type": "int",
     "members": [
       {
         "name": "BLACKONWHITE"
@@ -15935,7 +15918,7 @@
   },
   {
     "name": "CREATE_FONT_PACKAGE_SUBSET_ENCODING",
-    "type": "ushort",
+    "type": "short",
     "members": [
       {
         "name": "TTFCFP_STD_MAC_CHAR_SET"
@@ -17208,6 +17191,7 @@
   },
   {
     "name": "GRAPHICS_MODE",
+    "type": "int",
     "members": [
       {
         "name": "GM_COMPATIBLE"
@@ -18496,7 +18480,7 @@
   },
   {
     "name": "CREATE_FONT_PACKAGE_SUBSET_PLATFORM",
-    "type": "ushort",
+    "type": "short",
     "members": [
       {
         "name": "TTFCFP_UNICODE_PLATFORMID"
@@ -34924,6 +34908,7 @@
   },
   {
     "name": "COMPARESTRING_RESULT",
+    "type": "int",
     "autoPopulate": {
       "header": "winnls.h",
       "filter": "CSTR_"
