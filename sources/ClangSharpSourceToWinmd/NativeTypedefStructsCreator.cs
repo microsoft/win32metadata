@@ -6,7 +6,7 @@ namespace ClangSharpSourceToWinmd
 {
     public static class NativeTypedefStructsCreator
     {
-        public static void WriteToStream(Dictionary<string, string> methodNamesToNamespaces, IEnumerable<AutoType> items, Stream output)
+        public static void WriteToStream(Dictionary<string, string> apiNamesToNamespaces, IEnumerable<AutoType> items, Stream output)
         {
             using var writer = new StreamWriter(output, leaveOpen: true);
             writer.Write(
@@ -37,7 +37,7 @@ using Windows.Win32.Foundation.Metadata;
 
                 if (!string.IsNullOrEmpty(item.CloseApi))
                 {
-                    if (!methodNamesToNamespaces.TryGetValue(item.CloseApi, out var apiNamespace))
+                    if (!apiNamesToNamespaces.TryGetValue(item.CloseApi, out var apiNamespace))
                     {
                         throw new System.InvalidOperationException($"The API {item.CloseApi} was not found in the .cs files. The auto type {item.Name} needs to be given an explicit namespace.");
                     }
