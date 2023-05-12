@@ -19137,33 +19137,6 @@
     ]
   },
   {
-    "name": "DXGI_RESOURCE_PRIORITY",
-    "members": [
-      {
-        "name": "DXGI_RESOURCE_PRIORITY_MINIMUM"
-      },
-      {
-        "name": "DXGI_RESOURCE_PRIORITY_LOW"
-      },
-      {
-        "name": "DXGI_RESOURCE_PRIORITY_NORMAL"
-      },
-      {
-        "name": "DXGI_RESOURCE_PRIORITY_HIGH"
-      },
-      {
-        "name": "DXGI_RESOURCE_PRIORITY_MAXIMUM"
-      }
-    ],
-    "uses": [
-      {
-        "interface": "IDXGIResource",
-        "method": "SetEvictionPriority",
-        "parameter": "EvictionPriority"
-      }
-    ]
-  },
-  {
     "name": "NETSETUP_PROVISION",
     "flags": true,
     "members": [

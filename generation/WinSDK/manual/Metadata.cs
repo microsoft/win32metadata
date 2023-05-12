@@ -18,6 +18,13 @@ public class AlsoUsableForAttribute : Attribute
     }
 }
 
+public class AnsiAttribute : Attribute
+{
+    public AnsiAttribute()
+    {
+    }
+}
+
 public class AssociatedEnumAttribute : Attribute
 {
     public AssociatedEnumAttribute(string Name)
@@ -303,6 +310,13 @@ public class SupportedArchitectureAttribute : Attribute
 public class SupportedOSPlatformAttribute : Attribute
 {
     public SupportedOSPlatformAttribute(string platform)
+    {
+    }
+}
+
+public class UnicodeAttribute : Attribute
+{
+    public UnicodeAttribute()
     {
     }
 }

@@ -74,16 +74,16 @@ namespace ClangSharpSourceToWinmd
             string archForAutoTypes = arch == "crossarch" ? "common" : arch;
             string archSourceDir = Path.Combine(sourceDirectory, archForAutoTypes);
 
-            Dictionary<string, string> methodNamesToNamespaces = MetadataUtils.ScraperUtils.GetNameToNamespaceMap(sourceDirectory, MetadataUtils.ScraperUtils.NameOptions.Methods);
+            Dictionary<string, string> apiNamesToNamespaces = MetadataUtils.ScraperUtils.GetNameToNamespaceMap(sourceDirectory, MetadataUtils.ScraperUtils.NameOptions.Methods | MetadataUtils.ScraperUtils.NameOptions.Structs | MetadataUtils.ScraperUtils.NameOptions.Delegates);
 
             if (requiredNamespaceValuePairs != null)
             {
                 // Merge the requiredNamespaceForName entries into what we found the scraped source files
                 foreach (KeyValuePair<string, string> requiredItem in requiredNamespaces)
                 {
-                    if (methodNamesToNamespaces.ContainsKey(requiredItem.Key))
+                    if (apiNamesToNamespaces.ContainsKey(requiredItem.Key))
                     {
-                        methodNamesToNamespaces[requiredItem.Key] = requiredItem.Value;
+                        apiNamesToNamespaces[requiredItem.Key] = requiredItem.Value;
                     }
                 }
             }
@@ -100,7 +100,7 @@ namespace ClangSharpSourceToWinmd
                     }
 
                     using var fileStream = new FileStream(outputFilePath, FileMode.Create, FileAccess.Write, FileShare.Read);
-                    NativeTypedefStructsCreator.WriteToStream(methodNamesToNamespaces, autoTypes, fileStream);
+                    NativeTypedefStructsCreator.WriteToStream(apiNamesToNamespaces, autoTypes, fileStream);
                 }
             }
             catch (Exception e)
@@ -116,7 +116,7 @@ namespace ClangSharpSourceToWinmd
 
             ClangSharpSourceCompilation clangSharpCompliation =
                 ClangSharpSourceCompilation.Create(
-                    sourceDirectory, arch, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels, refs, staticLibs);
+                    sourceDirectory, arch, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels, refs, staticLibs, apiNamesToNamespaces);
 
             System.Diagnostics.Stopwatch errorsWatch = System.Diagnostics.Stopwatch.StartNew();
             Console.WriteLine("  Looking for compilation errors...");
