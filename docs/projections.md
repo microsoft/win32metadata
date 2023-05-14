@@ -73,7 +73,7 @@ DISCLAIMER: This list is a work in progress and is not yet comprehensive.
   * `AlsoUsableFor` indicates that the type is implicitly convertible to another type (e.g. `BCRYPT_HANDLE`)
   * `RAIIFree` indicates what function should be used to close the handle (e.g. `BCryptDestroyKey`)
   * `InvalidHandleValue` attributes indicate invalid handle values (e.g. `0L`)
-  * NOTE: `BCRYPT_KEY_HANDLE` demonstrates all of these attributes.
+  * NOTE: `AlsoUsableFor` and `RAIIFree` APIs exist in the same namespace as the typedef.
 * Constant variables marked with the `const` keyword are decorated with the `[Const]` attribute
 * Struct initializers are defined as constants where the type of the constant is the struct and the initializer string is contained in the `[Constant]` attribute ([#1337](https://github.com/microsoft/win32metadata/issues/1337))
   * NOTE: `SECURITY_NT_AUTHORITY` and all `DEVPROPKEY` and `PROPERTYKEY` constants demonstrate struct initializers.
