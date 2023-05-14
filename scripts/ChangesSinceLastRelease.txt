@@ -10117,3 +10117,7 @@ Windows.Win32.UI.WindowsAndMessaging.WNDCLASSA : [Documentation(https://docs.mic
 Windows.Win32.UI.WindowsAndMessaging.WNDCLASSEXA : [Documentation(https://docs.microsoft.com/windows/win32/api/winuser/ns-winuser-wndclassexa),StructSizeField(cbSize)] => [Ansi,Documentation(https://docs.microsoft.com/windows/win32/api/winuser/ns-winuser-wndclassexa),StructSizeField(cbSize)]
 Windows.Win32.UI.WindowsAndMessaging.WNDCLASSEXW : [Documentation(https://docs.microsoft.com/windows/win32/api/winuser/ns-winuser-wndclassexw),StructSizeField(cbSize)] => [Documentation(https://docs.microsoft.com/windows/win32/api/winuser/ns-winuser-wndclassexw),StructSizeField(cbSize),Unicode]
 Windows.Win32.UI.WindowsAndMessaging.WNDCLASSW : [Documentation(https://docs.microsoft.com/windows/win32/api/winuser/ns-winuser-wndclassw)] => [Documentation(https://docs.microsoft.com/windows/win32/api/winuser/ns-winuser-wndclassw),Unicode]
+# Resolved MDL type conflict with the WDK.
+Windows.Win32.Graphics.DirectDraw.DDMDL added
+Windows.Win32.Graphics.DirectDraw.DDTRANSFERININFO.lpDestMDL...Windows.Win32.Graphics.DirectDraw.MDL* => Windows.Win32.Graphics.DirectDraw.DDMDL*
+Windows.Win32.Graphics.DirectDraw.MDL removed
