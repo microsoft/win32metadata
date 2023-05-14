@@ -10121,3 +10121,7 @@ Windows.Win32.UI.WindowsAndMessaging.WNDCLASSW : [Documentation(https://docs.mic
 Windows.Win32.Graphics.DirectDraw.DDMDL added
 Windows.Win32.Graphics.DirectDraw.DDTRANSFERININFO.lpDestMDL...Windows.Win32.Graphics.DirectDraw.MDL* => Windows.Win32.Graphics.DirectDraw.DDMDL*
 Windows.Win32.Graphics.DirectDraw.MDL removed
+# Fixed #389.
+Windows.Win32.System.LibraryLoader.Apis.FreeLibrary => Windows.Win32.Foundation.Apis.FreeLibrary
+Windows.Win32.System.Memory.Apis.GlobalFree => Windows.Win32.Foundation.Apis.GlobalFree
+Windows.Win32.System.Memory.Apis.LocalFree => Windows.Win32.Foundation.Apis.LocalFree

@@ -8,13 +8,16 @@ namespace ClangSharpSourceToWinmd
     {
         public static void WriteToStream(Dictionary<string, string> apiNamesToNamespaces, IEnumerable<AutoType> items, Stream output)
         {
+            Dictionary<string, string> autotypesToNamespaces = new Dictionary<string, string>();
+            string currentNamespace = null;
+
             using var writer = new StreamWriter(output, leaveOpen: true);
             writer.Write(
 @"using System;
 using Windows.Win32.Foundation.Metadata;
 
 ");
-            string currentNamespace = null;
+
             foreach (AutoType item in items.OrderBy(a => a.Namespace))
             {
                 string safety = item.ValueType.Contains("*") ? "unsafe " : string.Empty;
@@ -98,11 +101,27 @@ $@"    [{(item.NativeTypedef ? "NativeTypedef" : "MetadataTypedef")}]
         public {valueType} Value;
     }}
 ");
+
+                autotypesToNamespaces.Add(item.Name, item.Namespace);
             }
 
             if (currentNamespace != null)
             {
                 writer.WriteLine("}");
+            }
+
+            // Enforce that all CloseApi relationships exist in the same namespace.
+            var closeApiNamespaceMismatches = items.Where(a => !string.IsNullOrEmpty(a.CloseApi) && autotypesToNamespaces[a.Name] != apiNamesToNamespaces[a.CloseApi]);
+            if (closeApiNamespaceMismatches.Any())
+            {
+                throw new System.InvalidOperationException($"{string.Join(", ", closeApiNamespaceMismatches.Select((a, i) => a.Name))} not in the same namespace as CloseApi. CloseApi relationships must exist in the same namespace.");
+            }
+
+            // Enforce that all AlsoUsableFor relationships exist in the same namespace.
+            var alsoUsableForNamespaceMismatches = items.Where(a => !string.IsNullOrEmpty(a.AlsoUsableFor) && autotypesToNamespaces[a.Name] != autotypesToNamespaces[a.AlsoUsableFor]);
+            if (alsoUsableForNamespaceMismatches.Any())
+            {
+                throw new System.InvalidOperationException($"{string.Join(", ", alsoUsableForNamespaceMismatches.Select((a, i) => a.Name))} not in the same namespace as AlsoUsableFor. AlsoUsableFor relationships must exist in the same namespace.");
             }
         }
     }
