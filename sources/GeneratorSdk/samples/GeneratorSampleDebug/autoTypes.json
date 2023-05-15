@@ -1,6 +1,5 @@
 [
   {
-    "Namespace": "GeneratorSampleDebug.Handles.Cleanup",
     "Name": "SAMPLE_HANDLE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "CloseSampleHandle"
