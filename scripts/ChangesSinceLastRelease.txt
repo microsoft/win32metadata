@@ -10125,3 +10125,7 @@ Windows.Win32.Graphics.DirectDraw.MDL removed
 Windows.Win32.System.LibraryLoader.Apis.FreeLibrary => Windows.Win32.Foundation.Apis.FreeLibrary
 Windows.Win32.System.Memory.Apis.GlobalFree => Windows.Win32.Foundation.Apis.GlobalFree
 Windows.Win32.System.Memory.Apis.LocalFree => Windows.Win32.Foundation.Apis.LocalFree
+# Fixed #1578.
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDI_ERROR...System.UInt32 => Windows.Win32.Foundation.PWSTR
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDI_INFORMATION...System.UInt32 => Windows.Win32.Foundation.PWSTR
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDI_WARNING...System.UInt32 => Windows.Win32.Foundation.PWSTR
