@@ -1584,3 +1584,4 @@ LocalFree=[CanReturnErrorsAsSuccess]
 IMediaSample::IsDiscontinuity=[CanReturnMultipleSuccessValues]
 IMediaSample::IsPreroll=[CanReturnMultipleSuccessValues]
 IMediaSample::IsSyncPoint=[CanReturnMultipleSuccessValues]
+D3D12_COMMAND_QUEUE_DESC::Priority=D3D12_COMMAND_QUEUE_PRIORITY
