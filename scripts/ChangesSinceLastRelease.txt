@@ -10129,3 +10129,41 @@ Windows.Win32.System.Memory.Apis.LocalFree => Windows.Win32.Foundation.Apis.Loca
 Windows.Win32.UI.WindowsAndMessaging.Apis.IDI_ERROR...System.UInt32 => Windows.Win32.Foundation.PWSTR
 Windows.Win32.UI.WindowsAndMessaging.Apis.IDI_INFORMATION...System.UInt32 => Windows.Win32.Foundation.PWSTR
 Windows.Win32.UI.WindowsAndMessaging.Apis.IDI_WARNING...System.UInt32 => Windows.Win32.Foundation.PWSTR
+# Fixed #1580.
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_ARRAY value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_BOOLEAN value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_BYREF value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_CHAR value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_CLASS value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_CMOD_OPT value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_CMOD_REQD value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_END value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_FNPTR value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_GENERICINST value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_I value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_I1 value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_I2 value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_I4 value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_I8 value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_INTERNAL value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_MAX value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_MODIFIER value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_MVAR value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_OBJECT value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_PINNED value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_PTR value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_R4 value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_R8 value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_SENTINEL value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_STRING value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_SZARRAY value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_TYPEDBYREF value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_U value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_U1 value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_U2 value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_U4 value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_U8 value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_VALUETYPE value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_VAR value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_VOID value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.value__...System.Int32 => System.Byte

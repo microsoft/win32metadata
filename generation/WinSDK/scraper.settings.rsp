@@ -54,6 +54,7 @@ EVT_SUBSCRIBE_FLAGS=uint
 READ_EVENT_LOG_READ_FLAGS=uint
 D3D11_CLEAR_FLAG=uint
 CeeSectionAttr=long
+CorElementType=byte
 --exclude
 _TREEITEM
 _IMAGELIST
