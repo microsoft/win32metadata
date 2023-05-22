@@ -4610,6 +4610,949 @@ Windows.Win32.Media.DirectShow.Tv.IPBDA_Services.Initialize : pBuffer : [In] => 
 # Fixed additional IDL parsing bugs handling multiple attribute lists.
 Windows.Win32.Media.DirectShow.IMediaStreamFilter.ReferenceTimeToStreamTime : pTime : [Out] => [In,Out]
 Windows.Win32.System.WinRT.Storage.IUnbufferedFileHandleProvider.OpenUnbufferedFileHandle : fileHandle : [Out] => [Out,RetVal]
+# Removed or corrected enums with mismatched sizes.
+Windows.Win32.Data.HtmlHelp.Apis.HtmlHelpA : uCommand...HTML_HELP_COMMAND => UInt32
+Windows.Win32.Data.HtmlHelp.Apis.HtmlHelpW : uCommand...HTML_HELP_COMMAND => UInt32
+Windows.Win32.Globalization.COMPARESTRING_RESULT.CSTR_EQUAL value init changed UInt32->Int32
+Windows.Win32.Globalization.COMPARESTRING_RESULT.CSTR_GREATER_THAN value init changed UInt32->Int32
+Windows.Win32.Globalization.COMPARESTRING_RESULT.CSTR_LESS_THAN value init changed UInt32->Int32
+Windows.Win32.Globalization.COMPARESTRING_RESULT.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct3D11.D3D11_BUFFER_DESC.BindFlags...Windows.Win32.Graphics.Direct3D11.D3D11_BIND_FLAG => System.UInt32
+Windows.Win32.Graphics.Direct3D11.D3D11_BUFFER_DESC.CPUAccessFlags...Windows.Win32.Graphics.Direct3D11.D3D11_CPU_ACCESS_FLAG => System.UInt32
+Windows.Win32.Graphics.Direct3D11.D3D11_BUFFER_DESC.MiscFlags...Windows.Win32.Graphics.Direct3D11.D3D11_RESOURCE_MISC_FLAG => System.UInt32
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE1D_DESC.BindFlags...Windows.Win32.Graphics.Direct3D11.D3D11_BIND_FLAG => System.UInt32
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE1D_DESC.CPUAccessFlags...Windows.Win32.Graphics.Direct3D11.D3D11_CPU_ACCESS_FLAG => System.UInt32
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE1D_DESC.MiscFlags...Windows.Win32.Graphics.Direct3D11.D3D11_RESOURCE_MISC_FLAG => System.UInt32
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE2D_DESC.BindFlags...Windows.Win32.Graphics.Direct3D11.D3D11_BIND_FLAG => System.UInt32
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE2D_DESC.CPUAccessFlags...Windows.Win32.Graphics.Direct3D11.D3D11_CPU_ACCESS_FLAG => System.UInt32
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE2D_DESC.MiscFlags...Windows.Win32.Graphics.Direct3D11.D3D11_RESOURCE_MISC_FLAG => System.UInt32
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE2D_DESC1.BindFlags...Windows.Win32.Graphics.Direct3D11.D3D11_BIND_FLAG => System.UInt32
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE2D_DESC1.CPUAccessFlags...Windows.Win32.Graphics.Direct3D11.D3D11_CPU_ACCESS_FLAG => System.UInt32
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE2D_DESC1.MiscFlags...Windows.Win32.Graphics.Direct3D11.D3D11_RESOURCE_MISC_FLAG => System.UInt32
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE3D_DESC.BindFlags...Windows.Win32.Graphics.Direct3D11.D3D11_BIND_FLAG => System.UInt32
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE3D_DESC.CPUAccessFlags...Windows.Win32.Graphics.Direct3D11.D3D11_CPU_ACCESS_FLAG => System.UInt32
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE3D_DESC.MiscFlags...Windows.Win32.Graphics.Direct3D11.D3D11_RESOURCE_MISC_FLAG => System.UInt32
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE3D_DESC1.BindFlags...Windows.Win32.Graphics.Direct3D11.D3D11_BIND_FLAG => System.UInt32
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE3D_DESC1.CPUAccessFlags...Windows.Win32.Graphics.Direct3D11.D3D11_CPU_ACCESS_FLAG => System.UInt32
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE3D_DESC1.MiscFlags...Windows.Win32.Graphics.Direct3D11.D3D11_RESOURCE_MISC_FLAG => System.UInt32
+Windows.Win32.Graphics.Dwm.Apis.DwmGetWindowAttribute : dwAttribute...DWMWINDOWATTRIBUTE => UInt32
+Windows.Win32.Graphics.Dwm.Apis.DwmSetWindowAttribute : dwAttribute...DWMWINDOWATTRIBUTE => UInt32
+Windows.Win32.Graphics.Gdi.Apis.ExtCreatePen : iPenStyle...PEN_STYLE => UInt32
+Windows.Win32.Graphics.Gdi.Apis.GetBkMode : return...BACKGROUND_MODE => Int32
+Windows.Win32.Graphics.Gdi.Apis.GetCurrentObject : type...OBJ_TYPE => UInt32
+Windows.Win32.Graphics.Gdi.Apis.GetDeviceCaps : index...GET_DEVICE_CAPS_INDEX => Int32
+Windows.Win32.Graphics.Gdi.Apis.SetBkMode : mode...BACKGROUND_MODE => Int32
+Windows.Win32.Graphics.Gdi.ARC_DIRECTION.AD_CLOCKWISE value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.ARC_DIRECTION.AD_COUNTERCLOCKWISE value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.ARC_DIRECTION.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Gdi.BI_COMPRESSION.BI_BITFIELDS value init changed Int32->UInt32
+Windows.Win32.Graphics.Gdi.BI_COMPRESSION.BI_JPEG value init changed Int32->UInt32
+Windows.Win32.Graphics.Gdi.BI_COMPRESSION.BI_PNG value init changed Int32->UInt32
+Windows.Win32.Graphics.Gdi.BI_COMPRESSION.BI_RGB value init changed Int32->UInt32
+Windows.Win32.Graphics.Gdi.BI_COMPRESSION.BI_RLE4 value init changed Int32->UInt32
+Windows.Win32.Graphics.Gdi.BI_COMPRESSION.BI_RLE8 value init changed Int32->UInt32
+Windows.Win32.Graphics.Gdi.BI_COMPRESSION.value__...System.Int32 => System.UInt32
+Windows.Win32.Graphics.Gdi.CREATE_FONT_PACKAGE_SUBSET_ENCODING.TTFCFP_STD_MAC_CHAR_SET value init changed UInt16->Int16
+Windows.Win32.Graphics.Gdi.CREATE_FONT_PACKAGE_SUBSET_ENCODING.TTFCFP_SYMBOL_CHAR_SET value init changed UInt16->Int16
+Windows.Win32.Graphics.Gdi.CREATE_FONT_PACKAGE_SUBSET_ENCODING.TTFCFP_UNICODE_CHAR_SET value init changed UInt16->Int16
+Windows.Win32.Graphics.Gdi.CREATE_FONT_PACKAGE_SUBSET_ENCODING.value__...System.UInt16 => System.Int16
+Windows.Win32.Graphics.Gdi.CREATE_FONT_PACKAGE_SUBSET_PLATFORM.TTFCFP_ISO_PLATFORMID value init changed UInt16->Int16
+Windows.Win32.Graphics.Gdi.CREATE_FONT_PACKAGE_SUBSET_PLATFORM.TTFCFP_UNICODE_PLATFORMID value init changed UInt16->Int16
+Windows.Win32.Graphics.Gdi.CREATE_FONT_PACKAGE_SUBSET_PLATFORM.value__...System.UInt16 => System.Int16
+Windows.Win32.Graphics.Gdi.CREATE_POLYGON_RGN_MODE.ALTERNATE value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.CREATE_POLYGON_RGN_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Gdi.CREATE_POLYGON_RGN_MODE.WINDING value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.DEVMODE_COLLATE.DMCOLLATE_FALSE value init changed UInt16->Int16
+Windows.Win32.Graphics.Gdi.DEVMODE_COLLATE.DMCOLLATE_TRUE value init changed UInt16->Int16
+Windows.Win32.Graphics.Gdi.DEVMODE_COLLATE.value__...System.UInt16 => System.Int16
+Windows.Win32.Graphics.Gdi.DEVMODE_COLOR.DMCOLOR_COLOR value init changed UInt16->Int16
+Windows.Win32.Graphics.Gdi.DEVMODE_COLOR.DMCOLOR_MONOCHROME value init changed UInt16->Int16
+Windows.Win32.Graphics.Gdi.DEVMODE_COLOR.value__...System.UInt16 => System.Int16
+Windows.Win32.Graphics.Gdi.DEVMODE_DUPLEX.DMDUP_HORIZONTAL value init changed UInt16->Int16
+Windows.Win32.Graphics.Gdi.DEVMODE_DUPLEX.DMDUP_SIMPLEX value init changed UInt16->Int16
+Windows.Win32.Graphics.Gdi.DEVMODE_DUPLEX.DMDUP_VERTICAL value init changed UInt16->Int16
+Windows.Win32.Graphics.Gdi.DEVMODE_DUPLEX.value__...System.UInt16 => System.Int16
+Windows.Win32.Graphics.Gdi.DEVMODE_TRUETYPE_OPTION.DMTT_BITMAP value init changed UInt16->Int16
+Windows.Win32.Graphics.Gdi.DEVMODE_TRUETYPE_OPTION.DMTT_DOWNLOAD value init changed UInt16->Int16
+Windows.Win32.Graphics.Gdi.DEVMODE_TRUETYPE_OPTION.DMTT_DOWNLOAD_OUTLINE value init changed UInt16->Int16
+Windows.Win32.Graphics.Gdi.DEVMODE_TRUETYPE_OPTION.DMTT_SUBDEV value init changed UInt16->Int16
+Windows.Win32.Graphics.Gdi.DEVMODE_TRUETYPE_OPTION.value__...System.UInt16 => System.Int16
+Windows.Win32.Graphics.Gdi.EMREXTSELECTCLIPRGN.iMode...Windows.Win32.Graphics.Gdi.RGN_COMBINE_MODE => System.UInt32
+Windows.Win32.Graphics.Gdi.EXTLOGPEN.elpPenStyle...Windows.Win32.Graphics.Gdi.PEN_STYLE => System.UInt32
+Windows.Win32.Graphics.Gdi.EXTLOGPEN32.elpPenStyle...Windows.Win32.Graphics.Gdi.PEN_STYLE => System.UInt32
+Windows.Win32.Graphics.Gdi.GET_STOCK_OBJECT_FLAGS.ANSI_FIXED_FONT value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.GET_STOCK_OBJECT_FLAGS.ANSI_VAR_FONT value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.GET_STOCK_OBJECT_FLAGS.BLACK_BRUSH value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.GET_STOCK_OBJECT_FLAGS.BLACK_PEN value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.GET_STOCK_OBJECT_FLAGS.DC_BRUSH value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.GET_STOCK_OBJECT_FLAGS.DC_PEN value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.GET_STOCK_OBJECT_FLAGS.DEFAULT_GUI_FONT value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.GET_STOCK_OBJECT_FLAGS.DEFAULT_PALETTE value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.GET_STOCK_OBJECT_FLAGS.DEVICE_DEFAULT_FONT value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.GET_STOCK_OBJECT_FLAGS.DKGRAY_BRUSH value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.GET_STOCK_OBJECT_FLAGS.GRAY_BRUSH value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.GET_STOCK_OBJECT_FLAGS.HOLLOW_BRUSH value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.GET_STOCK_OBJECT_FLAGS.LTGRAY_BRUSH value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.GET_STOCK_OBJECT_FLAGS.NULL_BRUSH value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.GET_STOCK_OBJECT_FLAGS.NULL_PEN value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.GET_STOCK_OBJECT_FLAGS.OEM_FIXED_FONT value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.GET_STOCK_OBJECT_FLAGS.SYSTEM_FIXED_FONT value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.GET_STOCK_OBJECT_FLAGS.SYSTEM_FONT value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.GET_STOCK_OBJECT_FLAGS.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Gdi.GET_STOCK_OBJECT_FLAGS.WHITE_BRUSH value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.GET_STOCK_OBJECT_FLAGS.WHITE_PEN value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.GRAPHICS_MODE.GM_ADVANCED value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.GRAPHICS_MODE.GM_COMPATIBLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.GRAPHICS_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Gdi.HATCH_BRUSH_STYLE.HS_BDIAGONAL value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.HATCH_BRUSH_STYLE.HS_CROSS value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.HATCH_BRUSH_STYLE.HS_DIAGCROSS value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.HATCH_BRUSH_STYLE.HS_FDIAGONAL value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.HATCH_BRUSH_STYLE.HS_HORIZONTAL value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.HATCH_BRUSH_STYLE.HS_VERTICAL value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.HATCH_BRUSH_STYLE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Gdi.HDC_MAP_MODE.MM_ANISOTROPIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.HDC_MAP_MODE.MM_HIENGLISH value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.HDC_MAP_MODE.MM_HIMETRIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.HDC_MAP_MODE.MM_ISOTROPIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.HDC_MAP_MODE.MM_LOENGLISH value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.HDC_MAP_MODE.MM_LOMETRIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.HDC_MAP_MODE.MM_TEXT value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.HDC_MAP_MODE.MM_TWIPS value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.HDC_MAP_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Gdi.LOGPEN.lopnStyle...Windows.Win32.Graphics.Gdi.PEN_STYLE => System.UInt32
+Windows.Win32.Graphics.Gdi.PEN_STYLE.PS_ALTERNATE value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.PEN_STYLE.PS_COSMETIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.PEN_STYLE.PS_DASH value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.PEN_STYLE.PS_DASHDOT value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.PEN_STYLE.PS_DASHDOTDOT value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.PEN_STYLE.PS_DOT value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.PEN_STYLE.PS_ENDCAP_FLAT value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.PEN_STYLE.PS_ENDCAP_MASK value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.PEN_STYLE.PS_ENDCAP_ROUND value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.PEN_STYLE.PS_ENDCAP_SQUARE value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.PEN_STYLE.PS_GEOMETRIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.PEN_STYLE.PS_INSIDEFRAME value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.PEN_STYLE.PS_JOIN_BEVEL value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.PEN_STYLE.PS_JOIN_MASK value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.PEN_STYLE.PS_JOIN_MITER value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.PEN_STYLE.PS_JOIN_ROUND value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.PEN_STYLE.PS_NULL value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.PEN_STYLE.PS_SOLID value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.PEN_STYLE.PS_STYLE_MASK value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.PEN_STYLE.PS_TYPE_MASK value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.PEN_STYLE.PS_USERSTYLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.PEN_STYLE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Gdi.STRETCH_BLT_MODE.BLACKONWHITE value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.STRETCH_BLT_MODE.COLORONCOLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.STRETCH_BLT_MODE.HALFTONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.STRETCH_BLT_MODE.STRETCH_ANDSCANS value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.STRETCH_BLT_MODE.STRETCH_DELETESCANS value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.STRETCH_BLT_MODE.STRETCH_HALFTONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.STRETCH_BLT_MODE.STRETCH_ORSCANS value init changed UInt32->Int32
+Windows.Win32.Graphics.Gdi.STRETCH_BLT_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Gdi.STRETCH_BLT_MODE.WHITEONBLACK value init changed UInt32->Int32
+Windows.Win32.Graphics.OpenGL.PFD_PIXEL_TYPE.PFD_TYPE_COLORINDEX value init changed SByte->Byte
+Windows.Win32.Graphics.OpenGL.PFD_PIXEL_TYPE.PFD_TYPE_RGBA value init changed SByte->Byte
+Windows.Win32.Graphics.OpenGL.PFD_PIXEL_TYPE.value__...System.SByte => System.Byte
+Windows.Win32.Graphics.OpenGL.PIXELFORMATDESCRIPTOR.iLayerType...Windows.Win32.Graphics.OpenGL.PFD_LAYER_TYPE => System.Byte
+Windows.Win32.Graphics.Printing.PRINTER_OPTIONSA.dwFlags...Windows.Win32.Graphics.Printing.PRINTER_OPTION_FLAGS => System.UInt32
+Windows.Win32.Graphics.Printing.PRINTER_OPTIONSW.dwFlags...Windows.Win32.Graphics.Printing.PRINTER_OPTION_FLAGS => System.UInt32
+Windows.Win32.Media.DirectShow.IAMMultiMediaStream.AddMediaStream : dwFlags...AMMSF_MS_FLAGS => UInt32
+Windows.Win32.Media.DirectShow.IAMMultiMediaStream.Initialize : dwFlags...AMMSF_MMS_INIT_FLAGS => UInt32
+Windows.Win32.Media.MediaFoundation.Apis.MFTEnum2 : Flags...MFT_ENUM_FLAG => UInt32
+Windows.Win32.Media.MediaFoundation.Apis.MFTEnumEx : Flags...MFT_ENUM_FLAG => UInt32
+Windows.Win32.Media.MediaFoundation.DXVA2_DecodeBufferDesc.CompressedBufferType...Windows.Win32.Media.MediaFoundation.DXVA2_BufferfType => System.UInt32
+Windows.Win32.Media.MediaFoundation.IDirectXVideoAccelerationService.CreateSurface : DxvaType...DXVA2_VideoRenderTargetType => UInt32
+Windows.Win32.Media.MediaFoundation.IDirectXVideoDecoder.GetBuffer : BufferType...DXVA2_BufferfType => UInt32
+Windows.Win32.Networking.Ldap.Apis.LdapMapErrorToWin32 : LdapError...LDAP_RETCODE => UInt32
+Windows.Win32.Networking.WinHttp.WINHTTP_INTERNET_SCHEME.value__...System.UInt32 => System.Int32
+Windows.Win32.Networking.WinHttp.WINHTTP_INTERNET_SCHEME.WINHTTP_INTERNET_SCHEME_FTP value init changed UInt32->Int32
+Windows.Win32.Networking.WinHttp.WINHTTP_INTERNET_SCHEME.WINHTTP_INTERNET_SCHEME_HTTP value init changed UInt32->Int32
+Windows.Win32.Networking.WinHttp.WINHTTP_INTERNET_SCHEME.WINHTTP_INTERNET_SCHEME_HTTPS value init changed UInt32->Int32
+Windows.Win32.Networking.WinHttp.WINHTTP_INTERNET_SCHEME.WINHTTP_INTERNET_SCHEME_SOCKS value init changed UInt32->Int32
+Windows.Win32.NetworkManagement.NetManagement.NET_REMOTE_COMPUTER_SUPPORTS_OPTIONS.SUPPORTS_LOCAL value init changed Int32->UInt32
+Windows.Win32.NetworkManagement.NetManagement.NET_REMOTE_COMPUTER_SUPPORTS_OPTIONS.SUPPORTS_REMOTE_ADMIN_PROTOCOL value init changed Int32->UInt32
+Windows.Win32.NetworkManagement.NetManagement.NET_REMOTE_COMPUTER_SUPPORTS_OPTIONS.SUPPORTS_RPC value init changed Int32->UInt32
+Windows.Win32.NetworkManagement.NetManagement.NET_REMOTE_COMPUTER_SUPPORTS_OPTIONS.SUPPORTS_SAM_PROTOCOL value init changed Int32->UInt32
+Windows.Win32.NetworkManagement.NetManagement.NET_REMOTE_COMPUTER_SUPPORTS_OPTIONS.SUPPORTS_UNICODE value init changed Int32->UInt32
+Windows.Win32.NetworkManagement.NetManagement.NET_REMOTE_COMPUTER_SUPPORTS_OPTIONS.value__...System.Int32 => System.UInt32
+Windows.Win32.NetworkManagement.NetManagement.SERVER_INFO_HIDDEN.SV_HIDDEN value init changed UInt32->Int32
+Windows.Win32.NetworkManagement.NetManagement.SERVER_INFO_HIDDEN.SV_VISIBLE value init changed UInt32->Int32
+Windows.Win32.NetworkManagement.NetManagement.SERVER_INFO_HIDDEN.value__...System.UInt32 => System.Int32
+Windows.Win32.NetworkManagement.Snmp.Apis.SnmpSvcSetLogType : nLogType...SNMP_OUTPUT_LOG_TYPE => Int32
+Windows.Win32.NetworkManagement.Snmp.SNMP_LOG.SNMP_LOG_ERROR value init changed UInt32->Int32
+Windows.Win32.NetworkManagement.Snmp.SNMP_LOG.SNMP_LOG_FATAL value init changed UInt32->Int32
+Windows.Win32.NetworkManagement.Snmp.SNMP_LOG.SNMP_LOG_SILENT value init changed UInt32->Int32
+Windows.Win32.NetworkManagement.Snmp.SNMP_LOG.SNMP_LOG_TRACE value init changed UInt32->Int32
+Windows.Win32.NetworkManagement.Snmp.SNMP_LOG.SNMP_LOG_VERBOSE value init changed UInt32->Int32
+Windows.Win32.NetworkManagement.Snmp.SNMP_LOG.SNMP_LOG_WARNING value init changed UInt32->Int32
+Windows.Win32.NetworkManagement.Snmp.SNMP_LOG.value__...System.UInt32 => System.Int32
+Windows.Win32.Security.Authentication.Identity.Provider.IIdentityAdvise.IdentityUpdated : dwIdentityUpdateEvents...IdentityUpdateEvent => UInt32
+Windows.Win32.Security.Authentication.Identity.Provider.IIdentityProvider.Advise : dwIdentityUpdateEvents...IdentityUpdateEvent => UInt32
+Windows.Win32.Security.Authorization.IAzClientContext3.GetGroups : ulOptions...AZ_PROP_CONSTANTS => UInt32
+Windows.Win32.Security.ConfigurationSnapin.SCE_LOG_ERR_LEVEL.SCE_LOG_LEVEL_ALWAYS value init changed UInt32->Int32
+Windows.Win32.Security.ConfigurationSnapin.SCE_LOG_ERR_LEVEL.SCE_LOG_LEVEL_DEBUG value init changed UInt32->Int32
+Windows.Win32.Security.ConfigurationSnapin.SCE_LOG_ERR_LEVEL.SCE_LOG_LEVEL_DETAIL value init changed UInt32->Int32
+Windows.Win32.Security.ConfigurationSnapin.SCE_LOG_ERR_LEVEL.SCE_LOG_LEVEL_ERROR value init changed UInt32->Int32
+Windows.Win32.Security.ConfigurationSnapin.SCE_LOG_ERR_LEVEL.value__...System.UInt32 => System.Int32
+Windows.Win32.Security.Cryptography.CERT_RDN_ATTR_VALUE_TYPE.CERT_RDN_ANY_TYPE value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.CERT_RDN_ATTR_VALUE_TYPE.CERT_RDN_BMP_STRING value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.CERT_RDN_ATTR_VALUE_TYPE.CERT_RDN_ENCODED_BLOB value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.CERT_RDN_ATTR_VALUE_TYPE.CERT_RDN_GENERAL_STRING value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.CERT_RDN_ATTR_VALUE_TYPE.CERT_RDN_GRAPHIC_STRING value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.CERT_RDN_ATTR_VALUE_TYPE.CERT_RDN_IA5_STRING value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.CERT_RDN_ATTR_VALUE_TYPE.CERT_RDN_INT4_STRING value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.CERT_RDN_ATTR_VALUE_TYPE.CERT_RDN_ISO646_STRING value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.CERT_RDN_ATTR_VALUE_TYPE.CERT_RDN_NUMERIC_STRING value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.CERT_RDN_ATTR_VALUE_TYPE.CERT_RDN_OCTET_STRING value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.CERT_RDN_ATTR_VALUE_TYPE.CERT_RDN_PRINTABLE_STRING value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.CERT_RDN_ATTR_VALUE_TYPE.CERT_RDN_T61_STRING value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.CERT_RDN_ATTR_VALUE_TYPE.CERT_RDN_TELETEX_STRING value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.CERT_RDN_ATTR_VALUE_TYPE.CERT_RDN_UNICODE_STRING value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.CERT_RDN_ATTR_VALUE_TYPE.CERT_RDN_UNIVERSAL_STRING value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.CERT_RDN_ATTR_VALUE_TYPE.CERT_RDN_UTF8_STRING value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.CERT_RDN_ATTR_VALUE_TYPE.CERT_RDN_VIDEOTEX_STRING value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.CERT_RDN_ATTR_VALUE_TYPE.CERT_RDN_VISIBLE_STRING value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.CERT_RDN_ATTR_VALUE_TYPE.value__...System.UInt32 => System.Int32
+Windows.Win32.Security.Cryptography.CERT_RDN_ATTR.dwValueType...Windows.Win32.Security.Cryptography.CERT_RDN_ATTR_VALUE_TYPE => System.UInt32
+Windows.Win32.Security.Cryptography.Certificates.ADDED_CERT_TYPE.value__...System.UInt32 => System.Int32
+Windows.Win32.Security.Cryptography.Certificates.ADDED_CERT_TYPE.XECT_EXTENSION_V1 value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.ADDED_CERT_TYPE.XECT_EXTENSION_V2 value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_ALT_NAME.CERT_ALT_NAME_DIRECTORY_NAME value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_ALT_NAME.CERT_ALT_NAME_DNS_NAME value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_ALT_NAME.CERT_ALT_NAME_IP_ADDRESS value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_ALT_NAME.CERT_ALT_NAME_OTHER_NAME value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_ALT_NAME.CERT_ALT_NAME_REGISTERED_ID value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_ALT_NAME.CERT_ALT_NAME_RFC822_NAME value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_ALT_NAME.CERT_ALT_NAME_URL value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_ALT_NAME.value__...System.UInt32 => System.Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_CREATE_REQUEST_FLAGS.value__...System.UInt32 => System.Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_CREATE_REQUEST_FLAGS.XECR_CMC value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_CREATE_REQUEST_FLAGS.XECR_PKCS10_V1_5 value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_CREATE_REQUEST_FLAGS.XECR_PKCS10_V2_0 value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_CREATE_REQUEST_FLAGS.XECR_PKCS7 value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_DELETE_ROW_FLAGS.CDR_EXPIRED value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_DELETE_ROW_FLAGS.CDR_REQUEST_LAST_CHANGED value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_DELETE_ROW_FLAGS.value__...System.UInt32 => System.Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_GET_CONFIG_FLAGS.CC_DEFAULTCONFIG value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_GET_CONFIG_FLAGS.CC_FIRSTCONFIG value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_GET_CONFIG_FLAGS.CC_LOCALACTIVECONFIG value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_GET_CONFIG_FLAGS.CC_LOCALCONFIG value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_GET_CONFIG_FLAGS.CC_UIPICKCONFIG value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_GET_CONFIG_FLAGS.CC_UIPICKCONFIGSKIPLOCALCA value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_GET_CONFIG_FLAGS.value__...System.UInt32 => System.Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_IMPORT_FLAGS.CR_IN_BASE64 value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_IMPORT_FLAGS.CR_IN_BASE64HEADER value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_IMPORT_FLAGS.CR_IN_BINARY value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_IMPORT_FLAGS.value__...System.UInt32 => System.Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_PROPERTY_TYPE.PROPTYPE_BINARY value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_PROPERTY_TYPE.PROPTYPE_DATE value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_PROPERTY_TYPE.PROPTYPE_LONG value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_PROPERTY_TYPE.PROPTYPE_STRING value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_PROPERTY_TYPE.value__...System.UInt32 => System.Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_REQUEST_OUT_TYPE.CR_OUT_BASE64 value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_REQUEST_OUT_TYPE.CR_OUT_BASE64HEADER value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_REQUEST_OUT_TYPE.CR_OUT_BINARY value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_REQUEST_OUT_TYPE.value__...System.UInt32 => System.Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_VIEW_SEEK_OPERATOR_FLAGS.CVR_SEEK_EQ value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_VIEW_SEEK_OPERATOR_FLAGS.CVR_SEEK_GE value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_VIEW_SEEK_OPERATOR_FLAGS.CVR_SEEK_GT value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_VIEW_SEEK_OPERATOR_FLAGS.CVR_SEEK_LE value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_VIEW_SEEK_OPERATOR_FLAGS.CVR_SEEK_LT value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CERT_VIEW_SEEK_OPERATOR_FLAGS.value__...System.UInt32 => System.Int32
+Windows.Win32.Security.Cryptography.Certificates.CVRC_COLUMN.CVRC_COLUMN_MASK value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CVRC_COLUMN.CVRC_COLUMN_RESULT value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CVRC_COLUMN.CVRC_COLUMN_SCHEMA value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CVRC_COLUMN.CVRC_COLUMN_VALUE value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CVRC_COLUMN.value__...System.UInt32 => System.Int32
+Windows.Win32.Security.Cryptography.Certificates.CVRC_TABLE.CVRC_TABLE_ATTRIBUTES value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CVRC_TABLE.CVRC_TABLE_CRL value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CVRC_TABLE.CVRC_TABLE_EXTENSIONS value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CVRC_TABLE.CVRC_TABLE_REQCERT value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.CVRC_TABLE.value__...System.UInt32 => System.Int32
+Windows.Win32.Security.Cryptography.Certificates.ENUM_CERT_COLUMN_VALUE_FLAGS.CV_OUT_BASE64 value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.ENUM_CERT_COLUMN_VALUE_FLAGS.CV_OUT_BASE64HEADER value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.ENUM_CERT_COLUMN_VALUE_FLAGS.CV_OUT_BASE64REQUESTHEADER value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.ENUM_CERT_COLUMN_VALUE_FLAGS.CV_OUT_BASE64X509CRLHEADER value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.ENUM_CERT_COLUMN_VALUE_FLAGS.CV_OUT_BINARY value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.ENUM_CERT_COLUMN_VALUE_FLAGS.CV_OUT_HEX value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.ENUM_CERT_COLUMN_VALUE_FLAGS.CV_OUT_HEXADDR value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.ENUM_CERT_COLUMN_VALUE_FLAGS.CV_OUT_HEXASCII value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.ENUM_CERT_COLUMN_VALUE_FLAGS.CV_OUT_HEXASCIIADDR value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.ENUM_CERT_COLUMN_VALUE_FLAGS.value__...System.UInt32 => System.Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.FR_PROP_ATTESTATIONCHALLENGE value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.FR_PROP_ATTESTATIONPROVIDERNAME value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.FR_PROP_BODYPARTSTRING value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.FR_PROP_CAEXCHANGECERTIFICATE value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.FR_PROP_CAEXCHANGECERTIFICATECHAIN value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.FR_PROP_CAEXCHANGECERTIFICATECRLCHAIN value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.FR_PROP_CAEXCHANGECERTIFICATEHASH value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.FR_PROP_ENCRYPTEDKEYHASH value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.FR_PROP_FAILINFO value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.FR_PROP_FULLRESPONSE value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.FR_PROP_FULLRESPONSENOPKCS7 value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.FR_PROP_ISSUEDCERTIFICATE value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.FR_PROP_ISSUEDCERTIFICATECHAIN value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.FR_PROP_ISSUEDCERTIFICATECRLCHAIN value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.FR_PROP_ISSUEDCERTIFICATEHASH value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.FR_PROP_NONE value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.FR_PROP_OTHERINFOCHOICE value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.FR_PROP_PENDINFOTIME value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.FR_PROP_PENDINFOTOKEN value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.FR_PROP_STATUS value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.FR_PROP_STATUSINFOCOUNT value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.FR_PROP_STATUSSTRING value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.FULL_RESPONSE_PROPERTY_ID.value__...System.UInt32 => System.Int32
+Windows.Win32.Security.Cryptography.Certificates.PENDING_REQUEST_DESIRED_PROPERTY.value__...System.UInt32 => System.Int32
+Windows.Win32.Security.Cryptography.Certificates.PENDING_REQUEST_DESIRED_PROPERTY.XEPR_CADNS value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.PENDING_REQUEST_DESIRED_PROPERTY.XEPR_CAFRIENDLYNAME value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.PENDING_REQUEST_DESIRED_PROPERTY.XEPR_CANAME value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.PENDING_REQUEST_DESIRED_PROPERTY.XEPR_HASH value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.PENDING_REQUEST_DESIRED_PROPERTY.XEPR_REQUESTID value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.XEKL_KEYSIZE.value__...System.UInt32 => System.Int32
+Windows.Win32.Security.Cryptography.Certificates.XEKL_KEYSIZE.XEKL_KEYSIZE_INC value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.XEKL_KEYSIZE.XEKL_KEYSIZE_MAX value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.XEKL_KEYSIZE.XEKL_KEYSIZE_MIN value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.XEKL_KEYSPEC.value__...System.UInt32 => System.Int32
+Windows.Win32.Security.Cryptography.Certificates.XEKL_KEYSPEC.XEKL_KEYSPEC_KEYX value init changed UInt32->Int32
+Windows.Win32.Security.Cryptography.Certificates.XEKL_KEYSPEC.XEKL_KEYSPEC_SIG value init changed UInt32->Int32
+Windows.Win32.Storage.FileSystem.CREATE_TAPE_PARTITION_METHOD.TAPE_FIXED_PARTITIONS value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.CREATE_TAPE_PARTITION_METHOD.TAPE_INITIATOR_PARTITIONS value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.CREATE_TAPE_PARTITION_METHOD.TAPE_SELECT_PARTITIONS value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.CREATE_TAPE_PARTITION_METHOD.value__...System.Int32 => System.UInt32
+Windows.Win32.Storage.FileSystem.ERASE_TAPE_TYPE.TAPE_ERASE_LONG value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.ERASE_TAPE_TYPE.TAPE_ERASE_SHORT value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.ERASE_TAPE_TYPE.value__...System.Int32 => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_DRIVEINFORMATIONA.State...Windows.Win32.Storage.FileSystem.NtmsDriveState => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_DRIVEINFORMATIONW.State...Windows.Win32.Storage.FileSystem.NtmsDriveState => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_IEDOORINFORMATION.State...Windows.Win32.Storage.FileSystem.NtmsDoorState => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_IEPORTINFORMATION.Content...Windows.Win32.Storage.FileSystem.NtmsPortContent => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_IEPORTINFORMATION.Position...Windows.Win32.Storage.FileSystem.NtmsPortPosition => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_LIBRARYINFORMATION.dwFlags...Windows.Win32.Storage.FileSystem.NtmsLibraryFlags => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_LIBRARYINFORMATION.InventoryMethod...Windows.Win32.Storage.FileSystem.NtmsInventoryMethod => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_LIBRARYINFORMATION.LibraryType...Windows.Win32.Storage.FileSystem.NtmsLibraryType => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_LIBREQUESTINFORMATIONA.OperationCode...Windows.Win32.Storage.FileSystem.NtmsLmOperation => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_LIBREQUESTINFORMATIONA.State...Windows.Win32.Storage.FileSystem.NtmsLmState => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_LIBREQUESTINFORMATIONW.OperationCode...Windows.Win32.Storage.FileSystem.NtmsLmOperation => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_LIBREQUESTINFORMATIONW.State...Windows.Win32.Storage.FileSystem.NtmsLmState => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_MEDIATYPEINFORMATION.ReadWriteCharacteristics...Windows.Win32.Storage.FileSystem.NtmsReadWriteCharacteristics => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_NOTIFICATIONINFORMATION.dwOperation...Windows.Win32.Storage.FileSystem.NtmsNotificationOperations => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_OBJECTINFORMATIONA.dwOperationalState...Windows.Win32.Storage.FileSystem.NtmsOperationalState => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_OBJECTINFORMATIONA.dwType...Windows.Win32.Storage.FileSystem.NtmsObjectsTypes => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_OBJECTINFORMATIONW.dwOperationalState...Windows.Win32.Storage.FileSystem.NtmsOperationalState => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_OBJECTINFORMATIONW.dwType...Windows.Win32.Storage.FileSystem.NtmsObjectsTypes => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_OPREQUESTINFORMATIONA.Arg1Type...Windows.Win32.Storage.FileSystem.NtmsObjectsTypes => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_OPREQUESTINFORMATIONA.Arg2Type...Windows.Win32.Storage.FileSystem.NtmsObjectsTypes => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_OPREQUESTINFORMATIONA.Request...Windows.Win32.Storage.FileSystem.NtmsOpreqCommand => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_OPREQUESTINFORMATIONA.State...Windows.Win32.Storage.FileSystem.NtmsOpreqState => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_OPREQUESTINFORMATIONW.Arg1Type...Windows.Win32.Storage.FileSystem.NtmsObjectsTypes => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_OPREQUESTINFORMATIONW.Arg2Type...Windows.Win32.Storage.FileSystem.NtmsObjectsTypes => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_OPREQUESTINFORMATIONW.Request...Windows.Win32.Storage.FileSystem.NtmsOpreqCommand => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_OPREQUESTINFORMATIONW.State...Windows.Win32.Storage.FileSystem.NtmsOpreqState => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_PARTITIONINFORMATIONA.State...Windows.Win32.Storage.FileSystem.NtmsPartitionState => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_PARTITIONINFORMATIONW.State...Windows.Win32.Storage.FileSystem.NtmsPartitionState => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_PMIDINFORMATIONA.BarCodeState...Windows.Win32.Storage.FileSystem.NtmsBarCodeState => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_PMIDINFORMATIONA.MediaState...Windows.Win32.Storage.FileSystem.NtmsMediaState => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_PMIDINFORMATIONW.BarCodeState...Windows.Win32.Storage.FileSystem.NtmsBarCodeState => System.UInt32
+Windows.Win32.Storage.FileSystem.NTMS_PMIDINFORMATIONW.MediaState...Windows.Win32.Storage.FileSystem.NtmsMediaState => System.UInt32
+Windows.Win32.Storage.FileSystem.PREPARE_TAPE_OPERATION.TAPE_FORMAT value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.PREPARE_TAPE_OPERATION.TAPE_LOAD value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.PREPARE_TAPE_OPERATION.TAPE_LOCK value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.PREPARE_TAPE_OPERATION.TAPE_TENSION value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.PREPARE_TAPE_OPERATION.TAPE_UNLOAD value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.PREPARE_TAPE_OPERATION.TAPE_UNLOCK value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.PREPARE_TAPE_OPERATION.value__...System.Int32 => System.UInt32
+Windows.Win32.Storage.FileSystem.TAPE_POSITION_METHOD.TAPE_ABSOLUTE_BLOCK value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.TAPE_POSITION_METHOD.TAPE_LOGICAL_BLOCK value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.TAPE_POSITION_METHOD.TAPE_REWIND value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.TAPE_POSITION_METHOD.TAPE_SPACE_END_OF_DATA value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.TAPE_POSITION_METHOD.TAPE_SPACE_FILEMARKS value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.TAPE_POSITION_METHOD.TAPE_SPACE_RELATIVE_BLOCKS value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.TAPE_POSITION_METHOD.TAPE_SPACE_SEQUENTIAL_FMKS value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.TAPE_POSITION_METHOD.TAPE_SPACE_SEQUENTIAL_SMKS value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.TAPE_POSITION_METHOD.TAPE_SPACE_SETMARKS value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.TAPE_POSITION_METHOD.value__...System.Int32 => System.UInt32
+Windows.Win32.Storage.FileSystem.TAPE_POSITION_TYPE.TAPE_ABSOLUTE_POSITION value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.TAPE_POSITION_TYPE.TAPE_LOGICAL_POSITION value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.TAPE_POSITION_TYPE.value__...System.Int32 => System.UInt32
+Windows.Win32.Storage.FileSystem.TAPEMARK_TYPE.TAPE_FILEMARKS value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.TAPEMARK_TYPE.TAPE_LONG_FILEMARKS value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.TAPEMARK_TYPE.TAPE_SETMARKS value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.TAPEMARK_TYPE.TAPE_SHORT_FILEMARKS value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.TAPEMARK_TYPE.value__...System.Int32 => System.UInt32
+Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FILE_OS.value__...System.Int32 => System.UInt32
+Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FILE_OS.VOS__BASE value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FILE_OS.VOS__PM16 value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FILE_OS.VOS__PM32 value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FILE_OS.VOS__WINDOWS16 value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FILE_OS.VOS__WINDOWS32 value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FILE_OS.VOS_DOS value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FILE_OS.VOS_DOS_WINDOWS16 value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FILE_OS.VOS_DOS_WINDOWS32 value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FILE_OS.VOS_NT value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FILE_OS.VOS_NT_WINDOWS32 value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FILE_OS.VOS_OS216 value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FILE_OS.VOS_OS216_PM16 value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FILE_OS.VOS_OS232 value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FILE_OS.VOS_OS232_PM32 value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FILE_OS.VOS_UNKNOWN value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FILE_OS.VOS_WINCE value init changed Int32->UInt32
+Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO.dwFileSubtype...Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FILE_SUBTYPE => System.UInt32
+Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO.dwFileType...Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FILE_TYPE => System.UInt32
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiEnableLogA : dwLogMode...INSTALLLOGMODE => UInt32
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiEnableLogW : dwLogMode...INSTALLLOGMODE => UInt32
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiEnumClientsExA : dwContext...MSIINSTALLCONTEXT => UInt32
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiEnumClientsExW : dwContext...MSIINSTALLCONTEXT => UInt32
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiProvideAssemblyA : dwInstallMode...INSTALLMODE => UInt32
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiProvideAssemblyW : dwInstallMode...INSTALLMODE => UInt32
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiProvideComponentA : dwInstallMode...INSTALLMODE => UInt32
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiProvideComponentW : dwInstallMode...INSTALLMODE => UInt32
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiProvideQualifiedComponentA : dwInstallMode...INSTALLMODE => UInt32
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiProvideQualifiedComponentExA : dwInstallMode...INSTALLMODE => UInt32
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiProvideQualifiedComponentExW : dwInstallMode...INSTALLMODE => UInt32
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiProvideQualifiedComponentW : dwInstallMode...INSTALLMODE => UInt32
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiReinstallFeatureA : dwReinstallMode...REINSTALLMODE => UInt32
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiReinstallFeatureW : dwReinstallMode...REINSTALLMODE => UInt32
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiReinstallProductA : szReinstallMode...REINSTALLMODE => UInt32
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiReinstallProductW : szReinstallMode...REINSTALLMODE => UInt32
+Windows.Win32.System.ApplicationVerifier.Apis.VerifierEnumerateResource : ResourceType...eAvrfResourceTypes => UInt32
+Windows.Win32.System.Com.Apis.CoGetClassObject : dwClsContext...CLSCTX => UInt32
+Windows.Win32.System.Com.Apis.CoInitializeEx : dwCoInit...COINIT => UInt32
+Windows.Win32.System.Com.Apis.CoInitializeSecurity : dwCapabilities...EOLE_AUTHENTICATION_CAPABILITIES => UInt32
+Windows.Win32.System.Com.Apis.CoRegisterClassObject : flags...REGCLS => UInt32
+Windows.Win32.System.Com.Apis.CoSetProxyBlanket : dwCapabilities...EOLE_AUTHENTICATION_CAPABILITIES => UInt32
+Windows.Win32.System.Com.IClientSecurity.QueryBlanket : pCapabilites...EOLE_AUTHENTICATION_CAPABILITIES* => UInt32*
+Windows.Win32.System.Com.IClientSecurity.SetBlanket : dwCapabilities...EOLE_AUTHENTICATION_CAPABILITIES => UInt32
+Windows.Win32.System.Com.IStream.Commit : grfCommitFlags...STGC => UInt32
+Windows.Win32.System.Com.IStream.LockRegion : dwLockType...LOCKTYPE => UInt32
+Windows.Win32.System.Com.IStream.Stat : grfStatFlag...STATFLAG => UInt32
+Windows.Win32.System.Com.RemSTGMEDIUM.tymed...Windows.Win32.System.Com.TYMED => System.UInt32
+Windows.Win32.System.Com.STATSTG.grfLocksSupported...Windows.Win32.System.Com.LOCKTYPE => System.UInt32
+Windows.Win32.System.Com.STGMEDIUM.tymed...Windows.Win32.System.Com.TYMED => System.UInt32
+Windows.Win32.System.Com.StructuredStorage.ILockBytes.LockRegion : dwLockType...LOCKTYPE => UInt32
+Windows.Win32.System.Com.StructuredStorage.ILockBytes.Stat : grfStatFlag...STATFLAG => UInt32
+Windows.Win32.System.Com.StructuredStorage.IStorage.Commit : grfCommitFlags...STGC => UInt32
+Windows.Win32.System.Com.StructuredStorage.IStorage.MoveElementTo : grfFlags...STGMOVE => UInt32
+Windows.Win32.System.Com.StructuredStorage.IStorage.Stat : grfStatFlag...STATFLAG => UInt32
+Windows.Win32.System.Diagnostics.Debug.Apis.SymGetHomeDirectory : type...IMAGEHLP_HD_TYPE => UInt32
+Windows.Win32.System.Diagnostics.Debug.Apis.SymGetHomeDirectoryW : type...IMAGEHLP_HD_TYPE => UInt32
+Windows.Win32.System.Diagnostics.Debug.Apis.SymGetSymbolFile : Type...IMAGEHLP_SF_TYPE => UInt32
+Windows.Win32.System.Diagnostics.Debug.Apis.SymGetSymbolFileW : Type...IMAGEHLP_SF_TYPE => UInt32
+Windows.Win32.System.JobObjects.JOBOBJECT_IO_RATE_CONTROL_INFORMATION.ControlFlags...Windows.Win32.System.JobObjects.JOB_OBJECT_IO_RATE_CONTROL_FLAGS => System.UInt32
+Windows.Win32.System.Ole.Apis.OleCreate : renderopt...OLERENDER => UInt32
+Windows.Win32.System.Ole.Apis.OleCreateEx : renderopt...OLERENDER => UInt32
+Windows.Win32.System.Ole.Apis.OleCreateFromData : renderopt...OLERENDER => UInt32
+Windows.Win32.System.Ole.Apis.OleCreateFromDataEx : renderopt...OLERENDER => UInt32
+Windows.Win32.System.Ole.Apis.OleCreateFromFile : renderopt...OLERENDER => UInt32
+Windows.Win32.System.Ole.Apis.OleCreateFromFileEx : renderopt...OLERENDER => UInt32
+Windows.Win32.System.Ole.Apis.OleCreateLink : renderopt...OLERENDER => UInt32
+Windows.Win32.System.Ole.Apis.OleCreateLinkEx : renderopt...OLERENDER => UInt32
+Windows.Win32.System.Ole.Apis.OleCreateLinkFromData : renderopt...OLERENDER => UInt32
+Windows.Win32.System.Ole.Apis.OleCreateLinkFromDataEx : renderopt...OLERENDER => UInt32
+Windows.Win32.System.Ole.Apis.OleCreateLinkToFile : renderopt...OLERENDER => UInt32
+Windows.Win32.System.Ole.Apis.OleCreateLinkToFileEx : renderopt...OLERENDER => UInt32
+Windows.Win32.System.Ole.Apis.OleCreateStaticFromData : renderopt...OLERENDER => UInt32
+Windows.Win32.System.Ole.Apis.OleRegGetUserType : dwFormOfType...USERCLASSTYPE => UInt32
+Windows.Win32.System.Ole.CHANGE_ICON_FLAGS.CIF_SELECTCURRENT value init changed Int32->UInt32
+Windows.Win32.System.Ole.CHANGE_ICON_FLAGS.CIF_SELECTDEFAULT value init changed Int32->UInt32
+Windows.Win32.System.Ole.CHANGE_ICON_FLAGS.CIF_SELECTFROMFILE value init changed Int32->UInt32
+Windows.Win32.System.Ole.CHANGE_ICON_FLAGS.CIF_SHOWHELP value init changed Int32->UInt32
+Windows.Win32.System.Ole.CHANGE_ICON_FLAGS.CIF_USEICONEXE value init changed Int32->UInt32
+Windows.Win32.System.Ole.CHANGE_ICON_FLAGS.value__...System.Int32 => System.UInt32
+Windows.Win32.System.Ole.CONTROLINFO.dwFlags...Windows.Win32.System.Ole.CTRLINFO => System.UInt32
+Windows.Win32.System.Ole.IOleClientSite.GetMoniker : dwAssign...OLEGETMONIKER => UInt32
+Windows.Win32.System.Ole.IOleClientSite.GetMoniker : dwWhichMoniker...OLEWHICHMK => UInt32
+Windows.Win32.System.Ole.IOleContainer.EnumObjects : grfFlags...OLECONTF => UInt32
+Windows.Win32.System.Ole.IOleControlSite.TransformCoords : dwFlags...XFORMCOORDS => UInt32
+Windows.Win32.System.Ole.IOleObject.Close : dwSaveOption...OLECLOSE => UInt32
+Windows.Win32.System.Ole.IOleObject.GetMoniker : dwAssign...OLEGETMONIKER => UInt32
+Windows.Win32.System.Ole.IOleObject.GetMoniker : dwWhichMoniker...OLEWHICHMK => UInt32
+Windows.Win32.System.Ole.IOleObject.GetUserType : dwFormOfType...USERCLASSTYPE => UInt32
+Windows.Win32.System.Ole.IOleObject.SetMoniker : dwWhichMoniker...OLEWHICHMK => UInt32
+Windows.Win32.System.Ole.IPicture.get_Type : pType...Int16* => PICTYPE*
+Windows.Win32.System.Ole.IPropertyPage.Show : nCmdShow...SHOW_WINDOW_CMD => UInt32
+Windows.Win32.System.Ole.IPropertyPageSite.OnStatusChange : dwFlags...PROPPAGESTATUS => UInt32
+Windows.Win32.System.Ole.IRecordInfo.PutField : wFlags...INVOKEKIND => UInt32
+Windows.Win32.System.Ole.IRecordInfo.PutFieldNoCopy : wFlags...INVOKEKIND => UInt32
+Windows.Win32.System.Ole.IVBGetControl.EnumControls : dwOleContF...OLECONTF => UInt32
+Windows.Win32.System.Ole.IViewObject.SetAdvise : advf...ADVF => UInt32
+Windows.Win32.System.Ole.OLECMD.cmdf...Windows.Win32.System.Ole.OLECMDF => System.UInt32
+Windows.Win32.System.Ole.OLECMD.cmdID...Windows.Win32.System.Ole.OLECMDID => System.UInt32
+Windows.Win32.System.Ole.OLEVERB.grfAttribs...Windows.Win32.System.Ole.OLEVERBATTRIB => System.UInt32
+Windows.Win32.System.Ole.PICTDESC.picType...Windows.Win32.System.Ole.PICTYPE => System.UInt32
+Windows.Win32.System.Ole.PICTYPE.PICTYPE_BITMAP value init changed Int32->Int16
+Windows.Win32.System.Ole.PICTYPE.PICTYPE_ENHMETAFILE value init changed Int32->Int16
+Windows.Win32.System.Ole.PICTYPE.PICTYPE_ICON value init changed Int32->Int16
+Windows.Win32.System.Ole.PICTYPE.PICTYPE_METAFILE value init changed Int32->Int16
+Windows.Win32.System.Ole.PICTYPE.PICTYPE_NONE value init changed Int32->Int16
+Windows.Win32.System.Ole.PICTYPE.PICTYPE_UNINITIALIZED value init changed Int32->Int16
+Windows.Win32.System.Ole.PICTYPE.value__...System.Int32 => System.Int16
+Windows.Win32.System.Ole.QACONTAINER.dwAmbientFlags...Windows.Win32.System.Ole.QACONTAINERFLAGS => System.UInt32
+Windows.Win32.System.Ole.QACONTROL.dwMiscStatus...Windows.Win32.System.Ole.OLEMISC => System.UInt32
+Windows.Win32.System.Ole.QACONTROL.dwPointerActivationPolicy...Windows.Win32.System.Ole.POINTERINACTIVE => System.UInt32
+Windows.Win32.System.Ole.QACONTROL.dwViewStatus...Windows.Win32.System.Ole.VIEWSTATUS => System.UInt32
+Windows.Win32.System.ParentalControls.IWPCProviderConfig.RequestOverride : dwFlags...WPCFLAG_RESTRICTION => UInt32
+Windows.Win32.System.Registry.Apis.RegRestoreKeyA : dwFlags...REG_RESTORE_KEY_FLAGS => UInt32
+Windows.Win32.System.Registry.Apis.RegRestoreKeyW : dwFlags...REG_RESTORE_KEY_FLAGS => UInt32
+Windows.Win32.System.SecurityCenter.IWSCProductList.Initialize : provider...WSC_SECURITY_PROVIDER => UInt32
+Windows.Win32.System.StationsAndDesktops.USER_OBJECT_INFORMATION_INDEX.UOI_FLAGS value init changed UInt32->Int32
+Windows.Win32.System.StationsAndDesktops.USER_OBJECT_INFORMATION_INDEX.UOI_HEAPSIZE value init changed UInt32->Int32
+Windows.Win32.System.StationsAndDesktops.USER_OBJECT_INFORMATION_INDEX.UOI_IO value init changed UInt32->Int32
+Windows.Win32.System.StationsAndDesktops.USER_OBJECT_INFORMATION_INDEX.UOI_NAME value init changed UInt32->Int32
+Windows.Win32.System.StationsAndDesktops.USER_OBJECT_INFORMATION_INDEX.UOI_TYPE value init changed UInt32->Int32
+Windows.Win32.System.StationsAndDesktops.USER_OBJECT_INFORMATION_INDEX.UOI_USER_SID value init changed UInt32->Int32
+Windows.Win32.System.StationsAndDesktops.USER_OBJECT_INFORMATION_INDEX.value__...System.UInt32 => System.Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_ActiveTextPositionChangedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_AsyncContentLoadedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_AutomationFocusChangedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_AutomationPropertyChangedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_ChangesEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_Drag_DragCancelEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_Drag_DragCompleteEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_Drag_DragStartEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_DropTarget_DragEnterEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_DropTarget_DragLeaveEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_DropTarget_DroppedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_HostedFragmentRootsInvalidatedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_InputDiscardedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_InputReachedOtherElementEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_InputReachedTargetEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_Invoke_InvokedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_LayoutInvalidatedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_LiveRegionChangedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_MenuClosedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_MenuModeEndEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_MenuModeStartEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_MenuOpenedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_NotificationEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_Selection_InvalidatedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_SelectionItem_ElementAddedToSelectionEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_SelectionItem_ElementRemovedFromSelectionEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_SelectionItem_ElementSelectedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_StructureChangedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_SystemAlertEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_Text_TextChangedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_Text_TextSelectionChangedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_TextEdit_ConversionTargetChangedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_TextEdit_TextChangedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_ToolTipClosedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_ToolTipOpenedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_Window_WindowClosedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.UIA_Window_WindowOpenedEventId value init changed UInt32->Int32
+Windows.Win32.UI.Accessibility.UIA_EVENT_ID.value__...System.UInt32 => System.Int32
+Windows.Win32.UI.ColorSystem.COLOR_MATCH_TO_TARGET_ACTION.CS_DELETE_TRANSFORM value init changed Int32->UInt32
+Windows.Win32.UI.ColorSystem.COLOR_MATCH_TO_TARGET_ACTION.CS_DISABLE value init changed Int32->UInt32
+Windows.Win32.UI.ColorSystem.COLOR_MATCH_TO_TARGET_ACTION.CS_ENABLE value init changed Int32->UInt32
+Windows.Win32.UI.ColorSystem.COLOR_MATCH_TO_TARGET_ACTION.value__...System.Int32 => System.UInt32
+Windows.Win32.UI.Controls.Apis.EnableScrollBar : wSBflags...SCROLLBAR_CONSTANTS => UInt32
+Windows.Win32.UI.Controls.Apis.FlatSB_SetScrollProp : index...WSB_PROP => UInt32
+Windows.Win32.UI.Controls.Apis.GetThemeBitmap : iPropId...THEME_PROPERTY_SYMBOL_ID => Int32
+Windows.Win32.UI.Controls.Apis.GetThemeBool : iPropId...THEME_PROPERTY_SYMBOL_ID => Int32
+Windows.Win32.UI.Controls.Apis.GetThemeColor : iPropId...THEME_PROPERTY_SYMBOL_ID => Int32
+Windows.Win32.UI.Controls.Apis.GetThemeEnumValue : iPropId...THEME_PROPERTY_SYMBOL_ID => Int32
+Windows.Win32.UI.Controls.Apis.GetThemeFilename : iPropId...THEME_PROPERTY_SYMBOL_ID => Int32
+Windows.Win32.UI.Controls.Apis.GetThemeInt : iPropId...THEME_PROPERTY_SYMBOL_ID => Int32
+Windows.Win32.UI.Controls.Apis.GetThemeIntList : iPropId...THEME_PROPERTY_SYMBOL_ID => Int32
+Windows.Win32.UI.Controls.Apis.GetThemeMargins : iPropId...THEME_PROPERTY_SYMBOL_ID => Int32
+Windows.Win32.UI.Controls.Apis.GetThemeMetric : iPropId...THEME_PROPERTY_SYMBOL_ID => Int32
+Windows.Win32.UI.Controls.Apis.GetThemePosition : iPropId...THEME_PROPERTY_SYMBOL_ID => Int32
+Windows.Win32.UI.Controls.Apis.GetThemeSysBool : iBoolId...THEME_PROPERTY_SYMBOL_ID => Int32
+Windows.Win32.UI.Controls.Apis.GetThemeSysColorBrush : iColorId...THEME_PROPERTY_SYMBOL_ID => Int32
+Windows.Win32.UI.Controls.Apis.GetThemeSysFont : iFontId...THEME_PROPERTY_SYMBOL_ID => Int32
+Windows.Win32.UI.Controls.Apis.GetThemeSysInt : iIntId...THEME_PROPERTY_SYMBOL_ID => Int32
+Windows.Win32.UI.Controls.Apis.GetThemeSysString : iStringId...THEME_PROPERTY_SYMBOL_ID => Int32
+Windows.Win32.UI.Controls.EDITBALLOONTIP_ICON.TTI_ERROR value init changed UInt32->Int32
+Windows.Win32.UI.Controls.EDITBALLOONTIP_ICON.TTI_ERROR_LARGE value init changed UInt32->Int32
+Windows.Win32.UI.Controls.EDITBALLOONTIP_ICON.TTI_INFO value init changed UInt32->Int32
+Windows.Win32.UI.Controls.EDITBALLOONTIP_ICON.TTI_INFO_LARGE value init changed UInt32->Int32
+Windows.Win32.UI.Controls.EDITBALLOONTIP_ICON.TTI_NONE value init changed UInt32->Int32
+Windows.Win32.UI.Controls.EDITBALLOONTIP_ICON.TTI_WARNING value init changed UInt32->Int32
+Windows.Win32.UI.Controls.EDITBALLOONTIP_ICON.TTI_WARNING_LARGE value init changed UInt32->Int32
+Windows.Win32.UI.Controls.EDITBALLOONTIP_ICON.value__...System.UInt32 => System.Int32
+Windows.Win32.UI.Controls.HEADER_CONTROL_NOTIFICATION_BUTTON.HEADER_CONTROL_NOTIFICATION_BUTTON_LEFT value init changed UInt32->Int32
+Windows.Win32.UI.Controls.HEADER_CONTROL_NOTIFICATION_BUTTON.HEADER_CONTROL_NOTIFICATION_BUTTON_MIDDLE value init changed UInt32->Int32
+Windows.Win32.UI.Controls.HEADER_CONTROL_NOTIFICATION_BUTTON.HEADER_CONTROL_NOTIFICATION_BUTTON_RIGHT value init changed UInt32->Int32
+Windows.Win32.UI.Controls.HEADER_CONTROL_NOTIFICATION_BUTTON.value__...System.UInt32 => System.Int32
+Windows.Win32.UI.Controls.LVCOLUMNW_FORMAT.LVCFMT_BITMAP_ON_RIGHT value init changed UInt32->Int32
+Windows.Win32.UI.Controls.LVCOLUMNW_FORMAT.LVCFMT_CENTER value init changed UInt32->Int32
+Windows.Win32.UI.Controls.LVCOLUMNW_FORMAT.LVCFMT_COL_HAS_IMAGES value init changed UInt32->Int32
+Windows.Win32.UI.Controls.LVCOLUMNW_FORMAT.LVCFMT_FIXED_RATIO value init changed UInt32->Int32
+Windows.Win32.UI.Controls.LVCOLUMNW_FORMAT.LVCFMT_FIXED_WIDTH value init changed UInt32->Int32
+Windows.Win32.UI.Controls.LVCOLUMNW_FORMAT.LVCFMT_IMAGE value init changed UInt32->Int32
+Windows.Win32.UI.Controls.LVCOLUMNW_FORMAT.LVCFMT_JUSTIFYMASK value init changed UInt32->Int32
+Windows.Win32.UI.Controls.LVCOLUMNW_FORMAT.LVCFMT_LEFT value init changed UInt32->Int32
+Windows.Win32.UI.Controls.LVCOLUMNW_FORMAT.LVCFMT_NO_DPI_SCALE value init changed UInt32->Int32
+Windows.Win32.UI.Controls.LVCOLUMNW_FORMAT.LVCFMT_RIGHT value init changed UInt32->Int32
+Windows.Win32.UI.Controls.LVCOLUMNW_FORMAT.LVCFMT_SPLITBUTTON value init changed UInt32->Int32
+Windows.Win32.UI.Controls.LVCOLUMNW_FORMAT.value__...System.UInt32 => System.Int32
+Windows.Win32.UI.Controls.NMPGSCROLL_DIR.PGF_SCROLLDOWN value init changed UInt32->Int32
+Windows.Win32.UI.Controls.NMPGSCROLL_DIR.PGF_SCROLLLEFT value init changed UInt32->Int32
+Windows.Win32.UI.Controls.NMPGSCROLL_DIR.PGF_SCROLLRIGHT value init changed UInt32->Int32
+Windows.Win32.UI.Controls.NMPGSCROLL_DIR.PGF_SCROLLUP value init changed UInt32->Int32
+Windows.Win32.UI.Controls.NMPGSCROLL_DIR.value__...System.UInt32 => System.Int32
+Windows.Win32.UI.Controls.RichEdit.CHANGENOTIFY.dwChangeType...Windows.Win32.UI.Controls.RichEdit.CHANGETYPE => System.UInt32
+Windows.Win32.UI.Controls.RichEdit.ITextRange2.InsertImage : Type...TEXT_ALIGN_OPTIONS => Int32
+Windows.Win32.UI.Controls.RichEdit.RICHEDIT_IMAGE_PARAMETERS.Type(X64, Arm64)...Windows.Win32.Graphics.Gdi.TEXT_ALIGN_OPTIONS => System.Int32
+Windows.Win32.UI.Controls.RichEdit.RICHEDIT_IMAGE_PARAMETERS.Type(X86)...Windows.Win32.Graphics.Gdi.TEXT_ALIGN_OPTIONS => System.Int32
+Windows.Win32.UI.Controls.WORD_BREAK_ACTION.value__...System.UInt32 => System.Int32
+Windows.Win32.UI.Controls.WORD_BREAK_ACTION.WB_CLASSIFY value init changed UInt32->Int32
+Windows.Win32.UI.Controls.WORD_BREAK_ACTION.WB_ISDELIMITER value init changed UInt32->Int32
+Windows.Win32.UI.Controls.WORD_BREAK_ACTION.WB_LEFT value init changed UInt32->Int32
+Windows.Win32.UI.Controls.WORD_BREAK_ACTION.WB_LEFTBREAK value init changed UInt32->Int32
+Windows.Win32.UI.Controls.WORD_BREAK_ACTION.WB_MOVEWORDLEFT value init changed UInt32->Int32
+Windows.Win32.UI.Controls.WORD_BREAK_ACTION.WB_MOVEWORDRIGHT value init changed UInt32->Int32
+Windows.Win32.UI.Controls.WORD_BREAK_ACTION.WB_RIGHT value init changed UInt32->Int32
+Windows.Win32.UI.Controls.WORD_BREAK_ACTION.WB_RIGHTBREAK value init changed UInt32->Int32
+Windows.Win32.UI.Input.Ime.IImePad.Request : reqId...IME_PAD_REQUEST_FLAGS => Int32
+Windows.Win32.UI.Shell.Apis.PathCleanupSpec : return...PCS_RET => Int32
+Windows.Win32.UI.Shell.Apis.PathResolve : fFlags...PRF_FLAGS => UInt32
+Windows.Win32.UI.Shell.Apis.SHChangeNotify : wEventId...SHCNE_ID => Int32
+Windows.Win32.UI.Shell.Apis.SHFormatDrive : options...SHFMT_OPT => UInt32
+Windows.Win32.UI.Shell.Apis.SHGetKnownFolderPath : dwFlags...KNOWN_FOLDER_FLAG => UInt32
+Windows.Win32.UI.Shell.Apis.SHObjectProperties : shopObjectType...SHOP_TYPE => UInt32
+Windows.Win32.UI.Shell.Apis.SHRegGetIntW : return...WIN32_ERROR => Int32
+Windows.Win32.UI.Shell.Apis.SHValidateUNC : fConnect...VALIDATEUNC_OPTION => UInt32
+Windows.Win32.UI.Shell.IFolderView.ItemCount : uFlags..._SVGIO => UInt32
+Windows.Win32.UI.Shell.IFolderView.Items : uFlags..._SVGIO => UInt32
+Windows.Win32.UI.Shell.IQueryInfo.GetInfoTip : dwFlags...QITIPF_FLAGS => UInt32
+Windows.Win32.UI.Shell.IShellFolderView.Select : dwFlags...SFVS_SELECT => UInt32
+Windows.Win32.UI.Shell.IShellFolderViewCB.MessageSFVCB : uMsg...SFVM_MESSAGE_ID => UInt32
+Windows.Win32.UI.Shell.IShellView.GetItemObject : uItem..._SVGIO => UInt32
+Windows.Win32.UI.Shell.SHDESCRIPTIONID.dwDescriptionId...Windows.Win32.UI.Shell.SHDID_ID => System.UInt32
+Windows.Win32.UI.Shell.SHGFI_FLAGS.SHGFI_ADDOVERLAYS value init changed Int32->UInt32
+Windows.Win32.UI.Shell.SHGFI_FLAGS.SHGFI_ATTR_SPECIFIED value init changed Int32->UInt32
+Windows.Win32.UI.Shell.SHGFI_FLAGS.SHGFI_ATTRIBUTES value init changed Int32->UInt32
+Windows.Win32.UI.Shell.SHGFI_FLAGS.SHGFI_DISPLAYNAME value init changed Int32->UInt32
+Windows.Win32.UI.Shell.SHGFI_FLAGS.SHGFI_EXETYPE value init changed Int32->UInt32
+Windows.Win32.UI.Shell.SHGFI_FLAGS.SHGFI_ICON value init changed Int32->UInt32
+Windows.Win32.UI.Shell.SHGFI_FLAGS.SHGFI_ICONLOCATION value init changed Int32->UInt32
+Windows.Win32.UI.Shell.SHGFI_FLAGS.SHGFI_LARGEICON value init changed Int32->UInt32
+Windows.Win32.UI.Shell.SHGFI_FLAGS.SHGFI_LINKOVERLAY value init changed Int32->UInt32
+Windows.Win32.UI.Shell.SHGFI_FLAGS.SHGFI_OPENICON value init changed Int32->UInt32
+Windows.Win32.UI.Shell.SHGFI_FLAGS.SHGFI_OVERLAYINDEX value init changed Int32->UInt32
+Windows.Win32.UI.Shell.SHGFI_FLAGS.SHGFI_PIDL value init changed Int32->UInt32
+Windows.Win32.UI.Shell.SHGFI_FLAGS.SHGFI_SELECTED value init changed Int32->UInt32
+Windows.Win32.UI.Shell.SHGFI_FLAGS.SHGFI_SHELLICONSIZE value init changed Int32->UInt32
+Windows.Win32.UI.Shell.SHGFI_FLAGS.SHGFI_SMALLICON value init changed Int32->UInt32
+Windows.Win32.UI.Shell.SHGFI_FLAGS.SHGFI_SYSICONINDEX value init changed Int32->UInt32
+Windows.Win32.UI.Shell.SHGFI_FLAGS.SHGFI_TYPENAME value init changed Int32->UInt32
+Windows.Win32.UI.Shell.SHGFI_FLAGS.SHGFI_USEFILEATTRIBUTES value init changed Int32->UInt32
+Windows.Win32.UI.Shell.SHGFI_FLAGS.value__...System.Int32 => System.UInt32
+Windows.Win32.UI.WindowsAndMessaging.SCROLLBAR_CONSTANTS.SB_BOTH value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SCROLLBAR_CONSTANTS.SB_CTL value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SCROLLBAR_CONSTANTS.SB_HORZ value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SCROLLBAR_CONSTANTS.SB_VERT value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SCROLLBAR_CONSTANTS.value__...System.UInt32 => System.Int32
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_FORCEMINIMIZE value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_HIDE value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_MAX value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_MAXIMIZE value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_MINIMIZE value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_NORMAL value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_RESTORE value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_SHOW value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_SHOWDEFAULT value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_SHOWMAXIMIZED value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_SHOWMINIMIZED value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_SHOWMINNOACTIVE value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_SHOWNA value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_SHOWNOACTIVATE value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_SHOWNORMAL value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.value__...System.UInt32 => System.Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_ARRANGE value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CLEANBOOT value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CMONITORS value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CMOUSEBUTTONS value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CONVERTIBLESLATEMODE value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXBORDER value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXCURSOR value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXDLGFRAME value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXDOUBLECLK value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXDRAG value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXEDGE value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXFIXEDFRAME value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXFOCUSBORDER value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXFRAME value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXFULLSCREEN value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXHSCROLL value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXHTHUMB value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXICON value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXICONSPACING value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXMAXIMIZED value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXMAXTRACK value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXMENUCHECK value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXMENUSIZE value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXMIN value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXMINIMIZED value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXMINSPACING value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXMINTRACK value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXPADDEDBORDER value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXSCREEN value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXSIZE value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXSIZEFRAME value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXSMICON value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXSMSIZE value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXVIRTUALSCREEN value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CXVSCROLL value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYBORDER value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYCAPTION value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYCURSOR value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYDLGFRAME value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYDOUBLECLK value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYDRAG value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYEDGE value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYFIXEDFRAME value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYFOCUSBORDER value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYFRAME value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYFULLSCREEN value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYHSCROLL value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYICON value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYICONSPACING value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYKANJIWINDOW value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYMAXIMIZED value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYMAXTRACK value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYMENU value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYMENUCHECK value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYMENUSIZE value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYMIN value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYMINIMIZED value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYMINSPACING value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYMINTRACK value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYSCREEN value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYSIZE value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYSIZEFRAME value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYSMCAPTION value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYSMICON value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYSMSIZE value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYVIRTUALSCREEN value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYVSCROLL value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_CYVTHUMB value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_DBCSENABLED value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_DEBUG value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_DIGITIZER value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_IMMENABLED value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_MAXIMUMTOUCHES value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_MEDIACENTER value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_MENUDROPALIGNMENT value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_MIDEASTENABLED value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_MOUSEHORIZONTALWHEELPRESENT value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_MOUSEPRESENT value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_MOUSEWHEELPRESENT value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_NETWORK value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_PENWINDOWS value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_REMOTECONTROL value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_REMOTESESSION value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_SAMEDISPLAYFORMAT value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_SECURE value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_SERVERR2 value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_SHOWSOUNDS value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_SHUTTINGDOWN value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_SLOWMACHINE value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_STARTER value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_SWAPBUTTON value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_SYSTEMDOCKED value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_TABLETPC value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_XVIRTUALSCREEN value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.SM_YVIRTUALSCREEN value init changed UInt32->Int32
+Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX.value__...System.UInt32 => System.Int32
+Windows.Win32.UI.WindowsAndMessaging.WINDOWPLACEMENT.showCmd...Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD => System.UInt32
+Windows.Win32.Web.MsHtml.DOCHOSTUIINFO.dwDoubleClick...Windows.Win32.Web.MsHtml.DOCHOSTUIDBLCLK => System.UInt32
+Windows.Win32.Web.MsHtml.DOCHOSTUIINFO.dwFlags...Windows.Win32.Web.MsHtml.DOCHOSTUIFLAG => System.UInt32
+# Removed or corrected enums with mismatched sizes.
+Windows.Win32.UI.Controls.RichEdit.ITextHost.TxEnableScrollBar : fuArrowflags...ENABLE_SCROLL_BAR_ARROWS => Int32
+# Added AssociatedEnum attributes.
+Windows.Win32.Data.HtmlHelp.Apis.HtmlHelpA : uCommand : [In] => [AssociatedEnum(HTML_HELP_COMMAND),In]
+Windows.Win32.Data.HtmlHelp.Apis.HtmlHelpW : uCommand : [In] => [AssociatedEnum(HTML_HELP_COMMAND),In]
+Windows.Win32.Foundation.Metadata.AssociatedEnumAttribute added
+Windows.Win32.Graphics.Direct3D11.D3D11_BUFFER_DESC.BindFlags :  => [AssociatedEnum(D3D11_BIND_FLAG)]
+Windows.Win32.Graphics.Direct3D11.D3D11_BUFFER_DESC.CPUAccessFlags :  => [AssociatedEnum(D3D11_CPU_ACCESS_FLAG)]
+Windows.Win32.Graphics.Direct3D11.D3D11_BUFFER_DESC.MiscFlags :  => [AssociatedEnum(D3D11_RESOURCE_MISC_FLAG)]
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE1D_DESC.BindFlags :  => [AssociatedEnum(D3D11_BIND_FLAG)]
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE1D_DESC.CPUAccessFlags :  => [AssociatedEnum(D3D11_CPU_ACCESS_FLAG)]
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE1D_DESC.MiscFlags :  => [AssociatedEnum(D3D11_RESOURCE_MISC_FLAG)]
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE2D_DESC.BindFlags :  => [AssociatedEnum(D3D11_BIND_FLAG)]
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE2D_DESC.CPUAccessFlags :  => [AssociatedEnum(D3D11_CPU_ACCESS_FLAG)]
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE2D_DESC.MiscFlags :  => [AssociatedEnum(D3D11_RESOURCE_MISC_FLAG)]
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE2D_DESC1.BindFlags :  => [AssociatedEnum(D3D11_BIND_FLAG)]
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE2D_DESC1.CPUAccessFlags :  => [AssociatedEnum(D3D11_CPU_ACCESS_FLAG)]
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE2D_DESC1.MiscFlags :  => [AssociatedEnum(D3D11_RESOURCE_MISC_FLAG)]
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE3D_DESC.BindFlags :  => [AssociatedEnum(D3D11_BIND_FLAG)]
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE3D_DESC.CPUAccessFlags :  => [AssociatedEnum(D3D11_CPU_ACCESS_FLAG)]
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE3D_DESC.MiscFlags :  => [AssociatedEnum(D3D11_RESOURCE_MISC_FLAG)]
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE3D_DESC1.BindFlags :  => [AssociatedEnum(D3D11_BIND_FLAG)]
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE3D_DESC1.CPUAccessFlags :  => [AssociatedEnum(D3D11_CPU_ACCESS_FLAG)]
+Windows.Win32.Graphics.Direct3D11.D3D11_TEXTURE3D_DESC1.MiscFlags :  => [AssociatedEnum(D3D11_RESOURCE_MISC_FLAG)]
+Windows.Win32.Graphics.Dwm.Apis.DwmGetWindowAttribute : dwAttribute : [In] => [AssociatedEnum(DWMWINDOWATTRIBUTE),In]
+Windows.Win32.Graphics.Dwm.Apis.DwmSetWindowAttribute : dwAttribute : [In] => [AssociatedEnum(DWMWINDOWATTRIBUTE),In]
+Windows.Win32.Graphics.Gdi.Apis.ExtCreatePen : iPenStyle : [In] => [AssociatedEnum(PEN_STYLE),In]
+Windows.Win32.Graphics.Gdi.Apis.GetBkMode : return :  => [AssociatedEnum(BACKGROUND_MODE)]
+Windows.Win32.Graphics.Gdi.Apis.GetCurrentObject : type : [In] => [AssociatedEnum(OBJ_TYPE),In]
+Windows.Win32.Graphics.Gdi.Apis.GetDeviceCaps : index : [In] => [AssociatedEnum(GET_DEVICE_CAPS_INDEX),In]
+Windows.Win32.Graphics.Gdi.Apis.SetBkMode : mode : [In] => [AssociatedEnum(BACKGROUND_MODE),In]
+Windows.Win32.Graphics.Gdi.EMREXTSELECTCLIPRGN.iMode :  => [AssociatedEnum(RGN_COMBINE_MODE)]
+Windows.Win32.Graphics.Gdi.EXTLOGPEN.elpPenStyle :  => [AssociatedEnum(PEN_STYLE)]
+Windows.Win32.Graphics.Gdi.EXTLOGPEN32.elpPenStyle :  => [AssociatedEnum(PEN_STYLE)]
+Windows.Win32.Graphics.Gdi.LOGPEN.lopnStyle :  => [AssociatedEnum(PEN_STYLE)]
+Windows.Win32.Graphics.OpenGL.PIXELFORMATDESCRIPTOR.iLayerType :  => [AssociatedEnum(PFD_LAYER_TYPE)]
+Windows.Win32.Graphics.Printing.PRINTER_OPTIONSA.dwFlags :  => [AssociatedEnum(PRINTER_OPTION_FLAGS)]
+Windows.Win32.Graphics.Printing.PRINTER_OPTIONSW.dwFlags :  => [AssociatedEnum(PRINTER_OPTION_FLAGS)]
+Windows.Win32.Media.DirectShow.IAMMultiMediaStream.AddMediaStream : dwFlags : [In] => [AssociatedEnum(AMMSF_MS_FLAGS),In]
+Windows.Win32.Media.DirectShow.IAMMultiMediaStream.Initialize : dwFlags : [In] => [AssociatedEnum(AMMSF_MMS_INIT_FLAGS),In]
+Windows.Win32.Media.MediaFoundation.Apis.MFTEnum2 : Flags : [In] => [AssociatedEnum(MFT_ENUM_FLAG),In]
+Windows.Win32.Media.MediaFoundation.Apis.MFTEnumEx : Flags : [In] => [AssociatedEnum(MFT_ENUM_FLAG),In]
+Windows.Win32.Media.MediaFoundation.DXVA2_DecodeBufferDesc.CompressedBufferType :  => [AssociatedEnum(DXVA2_BufferfType)]
+Windows.Win32.Media.MediaFoundation.IDirectXVideoAccelerationService.CreateSurface : DxvaType : [In] => [AssociatedEnum(DXVA2_VideoRenderTargetType),In]
+Windows.Win32.Media.MediaFoundation.IDirectXVideoDecoder.GetBuffer : BufferType : [In] => [AssociatedEnum(DXVA2_BufferfType),In]
+Windows.Win32.Networking.Ldap.Apis.LdapMapErrorToWin32 : LdapError : [In] => [AssociatedEnum(LDAP_RETCODE),In]
+Windows.Win32.NetworkManagement.Snmp.Apis.SnmpSvcSetLogType : nLogType : [In] => [AssociatedEnum(SNMP_OUTPUT_LOG_TYPE),In]
+Windows.Win32.Security.Authentication.Identity.Provider.IIdentityAdvise.IdentityUpdated : dwIdentityUpdateEvents : [In] => [AssociatedEnum(IdentityUpdateEvent),In]
+Windows.Win32.Security.Authentication.Identity.Provider.IIdentityProvider.Advise : dwIdentityUpdateEvents : [In] => [AssociatedEnum(IdentityUpdateEvent),In]
+Windows.Win32.Security.Authorization.IAzClientContext3.GetGroups : ulOptions : [In] => [AssociatedEnum(AZ_PROP_CONSTANTS),In]
+Windows.Win32.Security.Cryptography.CERT_RDN_ATTR.dwValueType :  => [AssociatedEnum(CERT_RDN_ATTR_VALUE_TYPE)]
+Windows.Win32.Storage.FileSystem.NTMS_DRIVEINFORMATIONA.State :  => [AssociatedEnum(NtmsDriveState)]
+Windows.Win32.Storage.FileSystem.NTMS_DRIVEINFORMATIONW.State :  => [AssociatedEnum(NtmsDriveState)]
+Windows.Win32.Storage.FileSystem.NTMS_IEDOORINFORMATION.State :  => [AssociatedEnum(NtmsDoorState)]
+Windows.Win32.Storage.FileSystem.NTMS_IEPORTINFORMATION.Content :  => [AssociatedEnum(NtmsPortContent)]
+Windows.Win32.Storage.FileSystem.NTMS_IEPORTINFORMATION.Position :  => [AssociatedEnum(NtmsPortPosition)]
+Windows.Win32.Storage.FileSystem.NTMS_LIBRARYINFORMATION.dwFlags :  => [AssociatedEnum(NtmsLibraryFlags)]
+Windows.Win32.Storage.FileSystem.NTMS_LIBRARYINFORMATION.InventoryMethod :  => [AssociatedEnum(NtmsInventoryMethod)]
+Windows.Win32.Storage.FileSystem.NTMS_LIBRARYINFORMATION.LibraryType :  => [AssociatedEnum(NtmsLibraryType)]
+Windows.Win32.Storage.FileSystem.NTMS_LIBREQUESTINFORMATIONA.OperationCode :  => [AssociatedEnum(NtmsLmOperation)]
+Windows.Win32.Storage.FileSystem.NTMS_LIBREQUESTINFORMATIONA.State :  => [AssociatedEnum(NtmsLmState)]
+Windows.Win32.Storage.FileSystem.NTMS_LIBREQUESTINFORMATIONW.OperationCode :  => [AssociatedEnum(NtmsLmOperation)]
+Windows.Win32.Storage.FileSystem.NTMS_LIBREQUESTINFORMATIONW.State :  => [AssociatedEnum(NtmsLmState)]
+Windows.Win32.Storage.FileSystem.NTMS_MEDIATYPEINFORMATION.ReadWriteCharacteristics :  => [AssociatedEnum(NtmsReadWriteCharacteristics)]
+Windows.Win32.Storage.FileSystem.NTMS_NOTIFICATIONINFORMATION.dwOperation :  => [AssociatedEnum(NtmsNotificationOperations)]
+Windows.Win32.Storage.FileSystem.NTMS_OBJECTINFORMATIONA.dwOperationalState :  => [AssociatedEnum(NtmsOperationalState)]
+Windows.Win32.Storage.FileSystem.NTMS_OBJECTINFORMATIONA.dwType :  => [AssociatedEnum(NtmsObjectsTypes)]
+Windows.Win32.Storage.FileSystem.NTMS_OBJECTINFORMATIONW.dwOperationalState :  => [AssociatedEnum(NtmsOperationalState)]
+Windows.Win32.Storage.FileSystem.NTMS_OBJECTINFORMATIONW.dwType :  => [AssociatedEnum(NtmsObjectsTypes)]
+Windows.Win32.Storage.FileSystem.NTMS_OPREQUESTINFORMATIONA.Arg1Type :  => [AssociatedEnum(NtmsObjectsTypes)]
+Windows.Win32.Storage.FileSystem.NTMS_OPREQUESTINFORMATIONA.Arg2Type :  => [AssociatedEnum(NtmsObjectsTypes)]
+Windows.Win32.Storage.FileSystem.NTMS_OPREQUESTINFORMATIONA.Request :  => [AssociatedEnum(NtmsOpreqCommand)]
+Windows.Win32.Storage.FileSystem.NTMS_OPREQUESTINFORMATIONA.State :  => [AssociatedEnum(NtmsOpreqState)]
+Windows.Win32.Storage.FileSystem.NTMS_OPREQUESTINFORMATIONW.Arg1Type :  => [AssociatedEnum(NtmsObjectsTypes)]
+Windows.Win32.Storage.FileSystem.NTMS_OPREQUESTINFORMATIONW.Arg2Type :  => [AssociatedEnum(NtmsObjectsTypes)]
+Windows.Win32.Storage.FileSystem.NTMS_OPREQUESTINFORMATIONW.Request :  => [AssociatedEnum(NtmsOpreqCommand)]
+Windows.Win32.Storage.FileSystem.NTMS_OPREQUESTINFORMATIONW.State :  => [AssociatedEnum(NtmsOpreqState)]
+Windows.Win32.Storage.FileSystem.NTMS_PARTITIONINFORMATIONA.State :  => [AssociatedEnum(NtmsPartitionState)]
+Windows.Win32.Storage.FileSystem.NTMS_PARTITIONINFORMATIONW.State :  => [AssociatedEnum(NtmsPartitionState)]
+Windows.Win32.Storage.FileSystem.NTMS_PMIDINFORMATIONA.BarCodeState :  => [AssociatedEnum(NtmsBarCodeState)]
+Windows.Win32.Storage.FileSystem.NTMS_PMIDINFORMATIONA.MediaState :  => [AssociatedEnum(NtmsMediaState)]
+Windows.Win32.Storage.FileSystem.NTMS_PMIDINFORMATIONW.BarCodeState :  => [AssociatedEnum(NtmsBarCodeState)]
+Windows.Win32.Storage.FileSystem.NTMS_PMIDINFORMATIONW.MediaState :  => [AssociatedEnum(NtmsMediaState)]
+Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO.dwFileSubtype :  => [AssociatedEnum(VS_FIXEDFILEINFO_FILE_SUBTYPE)]
+Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO.dwFileType :  => [AssociatedEnum(VS_FIXEDFILEINFO_FILE_TYPE)]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiEnableLogA : dwLogMode : [In] => [AssociatedEnum(INSTALLLOGMODE),In]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiEnableLogW : dwLogMode : [In] => [AssociatedEnum(INSTALLLOGMODE),In]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiEnumClientsExA : dwContext : [In] => [AssociatedEnum(MSIINSTALLCONTEXT),In]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiEnumClientsExW : dwContext : [In] => [AssociatedEnum(MSIINSTALLCONTEXT),In]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiProvideAssemblyA : dwInstallMode : [In] => [AssociatedEnum(INSTALLMODE),In]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiProvideAssemblyW : dwInstallMode : [In] => [AssociatedEnum(INSTALLMODE),In]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiProvideComponentA : dwInstallMode : [In] => [AssociatedEnum(INSTALLMODE),In]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiProvideComponentW : dwInstallMode : [In] => [AssociatedEnum(INSTALLMODE),In]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiProvideQualifiedComponentA : dwInstallMode : [In] => [AssociatedEnum(INSTALLMODE),In]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiProvideQualifiedComponentExA : dwInstallMode : [In] => [AssociatedEnum(INSTALLMODE),In]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiProvideQualifiedComponentExW : dwInstallMode : [In] => [AssociatedEnum(INSTALLMODE),In]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiProvideQualifiedComponentW : dwInstallMode : [In] => [AssociatedEnum(INSTALLMODE),In]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiReinstallFeatureA : dwReinstallMode : [In] => [AssociatedEnum(REINSTALLMODE),In]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiReinstallFeatureW : dwReinstallMode : [In] => [AssociatedEnum(REINSTALLMODE),In]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiReinstallProductA : szReinstallMode : [In] => [AssociatedEnum(REINSTALLMODE),In]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiReinstallProductW : szReinstallMode : [In] => [AssociatedEnum(REINSTALLMODE),In]
+Windows.Win32.System.ApplicationVerifier.Apis.VerifierEnumerateResource : ResourceType : [In] => [AssociatedEnum(eAvrfResourceTypes),In]
+Windows.Win32.System.Com.Apis.CoGetClassObject : dwClsContext : [In] => [AssociatedEnum(CLSCTX),In]
+Windows.Win32.System.Com.Apis.CoInitializeEx : dwCoInit : [In] => [AssociatedEnum(COINIT),In]
+Windows.Win32.System.Com.Apis.CoInitializeSecurity : dwCapabilities : [In] => [AssociatedEnum(EOLE_AUTHENTICATION_CAPABILITIES),In]
+Windows.Win32.System.Com.Apis.CoRegisterClassObject : flags : [In] => [AssociatedEnum(REGCLS),In]
+Windows.Win32.System.Com.Apis.CoSetProxyBlanket : dwCapabilities : [In] => [AssociatedEnum(EOLE_AUTHENTICATION_CAPABILITIES),In]
+Windows.Win32.System.Com.IClientSecurity.QueryBlanket : pCapabilites : [Optional,Out] => [AssociatedEnum(EOLE_AUTHENTICATION_CAPABILITIES),Optional,Out]
+Windows.Win32.System.Com.IClientSecurity.SetBlanket : dwCapabilities : [In] => [AssociatedEnum(EOLE_AUTHENTICATION_CAPABILITIES),In]
+Windows.Win32.System.Com.IStream.Commit : grfCommitFlags : [In] => [AssociatedEnum(STGC),In]
+Windows.Win32.System.Com.IStream.LockRegion : dwLockType : [In] => [AssociatedEnum(LOCKTYPE),In]
+Windows.Win32.System.Com.IStream.Stat : grfStatFlag : [In] => [AssociatedEnum(STATFLAG),In]
+Windows.Win32.System.Com.RemSTGMEDIUM.tymed :  => [AssociatedEnum(TYMED)]
+Windows.Win32.System.Com.STATSTG.grfLocksSupported :  => [AssociatedEnum(LOCKTYPE)]
+Windows.Win32.System.Com.STGMEDIUM.tymed :  => [AssociatedEnum(TYMED)]
+Windows.Win32.System.Com.StructuredStorage.IStorage.MoveElementTo : grfFlags : [In] => [AssociatedEnum(STGMOVE),In]
+Windows.Win32.System.Diagnostics.Debug.Apis.SymGetHomeDirectory : type : [In] => [AssociatedEnum(IMAGEHLP_HD_TYPE),In]
+Windows.Win32.System.Diagnostics.Debug.Apis.SymGetHomeDirectoryW : type : [In] => [AssociatedEnum(IMAGEHLP_HD_TYPE),In]
+Windows.Win32.System.Diagnostics.Debug.Apis.SymGetSymbolFile : Type : [In] => [AssociatedEnum(IMAGEHLP_SF_TYPE),In]
+Windows.Win32.System.Diagnostics.Debug.Apis.SymGetSymbolFileW : Type : [In] => [AssociatedEnum(IMAGEHLP_SF_TYPE),In]
+Windows.Win32.System.JobObjects.JOBOBJECT_IO_RATE_CONTROL_INFORMATION.ControlFlags :  => [AssociatedEnum(JOB_OBJECT_IO_RATE_CONTROL_FLAGS)]
+Windows.Win32.System.Ole.Apis.OleCreate : renderopt : [In] => [AssociatedEnum(OLERENDER),In]
+Windows.Win32.System.Ole.Apis.OleCreateEx : renderopt : [In] => [AssociatedEnum(OLERENDER),In]
+Windows.Win32.System.Ole.Apis.OleCreateFromData : renderopt : [In] => [AssociatedEnum(OLERENDER),In]
+Windows.Win32.System.Ole.Apis.OleCreateFromDataEx : renderopt : [In] => [AssociatedEnum(OLERENDER),In]
+Windows.Win32.System.Ole.Apis.OleCreateFromFile : renderopt : [In] => [AssociatedEnum(OLERENDER),In]
+Windows.Win32.System.Ole.Apis.OleCreateFromFileEx : renderopt : [In] => [AssociatedEnum(OLERENDER),In]
+Windows.Win32.System.Ole.Apis.OleCreateLink : renderopt : [In] => [AssociatedEnum(OLERENDER),In]
+Windows.Win32.System.Ole.Apis.OleCreateLinkEx : renderopt : [In] => [AssociatedEnum(OLERENDER),In]
+Windows.Win32.System.Ole.Apis.OleCreateLinkFromData : renderopt : [In] => [AssociatedEnum(OLERENDER),In]
+Windows.Win32.System.Ole.Apis.OleCreateLinkFromDataEx : renderopt : [In] => [AssociatedEnum(OLERENDER),In]
+Windows.Win32.System.Ole.Apis.OleCreateLinkToFile : renderopt : [In] => [AssociatedEnum(OLERENDER),In]
+Windows.Win32.System.Ole.Apis.OleCreateLinkToFileEx : renderopt : [In] => [AssociatedEnum(OLERENDER),In]
+Windows.Win32.System.Ole.Apis.OleCreateStaticFromData : renderopt : [In] => [AssociatedEnum(OLERENDER),In]
+Windows.Win32.System.Ole.Apis.OleRegGetUserType : dwFormOfType : [In] => [AssociatedEnum(USERCLASSTYPE),In]
+Windows.Win32.System.Ole.CONTROLINFO.dwFlags :  => [AssociatedEnum(CTRLINFO)]
+Windows.Win32.System.Ole.IOleClientSite.GetMoniker : dwAssign : [In] => [AssociatedEnum(OLEGETMONIKER),In]
+Windows.Win32.System.Ole.IOleClientSite.GetMoniker : dwWhichMoniker : [In] => [AssociatedEnum(OLEWHICHMK),In]
+Windows.Win32.System.Ole.IOleContainer.EnumObjects : grfFlags : [In] => [AssociatedEnum(OLECONTF),In]
+Windows.Win32.System.Ole.IOleControlSite.TransformCoords : dwFlags : [In] => [AssociatedEnum(XFORMCOORDS),In]
+Windows.Win32.System.Ole.IOleObject.Close : dwSaveOption : [In] => [AssociatedEnum(OLECLOSE),In]
+Windows.Win32.System.Ole.IOleObject.GetMoniker : dwAssign : [In] => [AssociatedEnum(OLEGETMONIKER),In]
+Windows.Win32.System.Ole.IOleObject.GetMoniker : dwWhichMoniker : [In] => [AssociatedEnum(OLEWHICHMK),In]
+Windows.Win32.System.Ole.IOleObject.GetUserType : dwFormOfType : [In] => [AssociatedEnum(USERCLASSTYPE),In]
+Windows.Win32.System.Ole.IOleObject.SetMoniker : dwWhichMoniker : [In] => [AssociatedEnum(OLEWHICHMK),In]
+Windows.Win32.System.Ole.IPropertyPageSite.OnStatusChange : dwFlags : [In] => [AssociatedEnum(PROPPAGESTATUS),In]
+Windows.Win32.System.Ole.IVBGetControl.EnumControls : dwOleContF : [In] => [AssociatedEnum(OLECONTF),In]
+Windows.Win32.System.Ole.OLECMD.cmdf :  => [AssociatedEnum(OLECMDF)]
+Windows.Win32.System.Ole.OLECMD.cmdID :  => [AssociatedEnum(OLECMDID)]
+Windows.Win32.System.Ole.OLEVERB.grfAttribs :  => [AssociatedEnum(OLEVERBATTRIB)]
+Windows.Win32.System.Ole.PICTDESC.picType :  => [AssociatedEnum(PICTYPE)]
+Windows.Win32.System.Ole.QACONTAINER.dwAmbientFlags :  => [AssociatedEnum(QACONTAINERFLAGS)]
+Windows.Win32.System.Ole.QACONTROL.dwMiscStatus :  => [AssociatedEnum(OLEMISC)]
+Windows.Win32.System.Ole.QACONTROL.dwPointerActivationPolicy :  => [AssociatedEnum(POINTERINACTIVE)]
+Windows.Win32.System.Ole.QACONTROL.dwViewStatus :  => [AssociatedEnum(VIEWSTATUS)]
+Windows.Win32.System.ParentalControls.IWPCProviderConfig.RequestOverride : dwFlags : [In] => [AssociatedEnum(WPCFLAG_RESTRICTION),In]
+Windows.Win32.System.Registry.Apis.RegRestoreKeyA : dwFlags : [In] => [AssociatedEnum(REG_RESTORE_KEY_FLAGS),In]
+Windows.Win32.System.Registry.Apis.RegRestoreKeyW : dwFlags : [In] => [AssociatedEnum(REG_RESTORE_KEY_FLAGS),In]
+Windows.Win32.System.SecurityCenter.IWSCProductList.Initialize : provider : [In] => [AssociatedEnum(WSC_SECURITY_PROVIDER),In]
+Windows.Win32.UI.Controls.Apis.FlatSB_SetScrollProp : index : [In] => [AssociatedEnum(WSB_PROP),In]
+Windows.Win32.UI.Controls.Apis.GetThemeBitmap : iPropId : [In] => [AssociatedEnum(THEME_PROPERTY_SYMBOL_ID),In]
+Windows.Win32.UI.Controls.Apis.GetThemeBool : iPropId : [In] => [AssociatedEnum(THEME_PROPERTY_SYMBOL_ID),In]
+Windows.Win32.UI.Controls.Apis.GetThemeColor : iPropId : [In] => [AssociatedEnum(THEME_PROPERTY_SYMBOL_ID),In]
+Windows.Win32.UI.Controls.Apis.GetThemeEnumValue : iPropId : [In] => [AssociatedEnum(THEME_PROPERTY_SYMBOL_ID),In]
+Windows.Win32.UI.Controls.Apis.GetThemeFilename : iPropId : [In] => [AssociatedEnum(THEME_PROPERTY_SYMBOL_ID),In]
+Windows.Win32.UI.Controls.Apis.GetThemeInt : iPropId : [In] => [AssociatedEnum(THEME_PROPERTY_SYMBOL_ID),In]
+Windows.Win32.UI.Controls.Apis.GetThemeIntList : iPropId : [In] => [AssociatedEnum(THEME_PROPERTY_SYMBOL_ID),In]
+Windows.Win32.UI.Controls.Apis.GetThemeMargins : iPropId : [In] => [AssociatedEnum(THEME_PROPERTY_SYMBOL_ID),In]
+Windows.Win32.UI.Controls.Apis.GetThemeMetric : iPropId : [In] => [AssociatedEnum(THEME_PROPERTY_SYMBOL_ID),In]
+Windows.Win32.UI.Controls.Apis.GetThemePosition : iPropId : [In] => [AssociatedEnum(THEME_PROPERTY_SYMBOL_ID),In]
+Windows.Win32.UI.Controls.Apis.GetThemeSysBool : iBoolId : [In] => [AssociatedEnum(THEME_PROPERTY_SYMBOL_ID),In]
+Windows.Win32.UI.Controls.Apis.GetThemeSysColorBrush : iColorId : [In] => [AssociatedEnum(THEME_PROPERTY_SYMBOL_ID),In]
+Windows.Win32.UI.Controls.Apis.GetThemeSysFont : iFontId : [In] => [AssociatedEnum(THEME_PROPERTY_SYMBOL_ID),In]
+Windows.Win32.UI.Controls.Apis.GetThemeSysInt : iIntId : [In] => [AssociatedEnum(THEME_PROPERTY_SYMBOL_ID),In]
+Windows.Win32.UI.Controls.Apis.GetThemeSysString : iStringId : [In] => [AssociatedEnum(THEME_PROPERTY_SYMBOL_ID),In]
+Windows.Win32.UI.Controls.RichEdit.CHANGENOTIFY.dwChangeType :  => [AssociatedEnum(CHANGETYPE)]
+Windows.Win32.UI.Input.Ime.IImePad.Request : reqId : [In] => [AssociatedEnum(IME_PAD_REQUEST_FLAGS),In]
+Windows.Win32.UI.Shell.Apis.PathCleanupSpec : return :  => [AssociatedEnum(PCS_RET)]
+Windows.Win32.UI.Shell.Apis.PathResolve : fFlags : [In] => [AssociatedEnum(PRF_FLAGS),In]
+Windows.Win32.UI.Shell.Apis.SHChangeNotify : wEventId : [In] => [AssociatedEnum(SHCNE_ID),In]
+Windows.Win32.UI.Shell.Apis.SHFormatDrive : options : [In] => [AssociatedEnum(SHFMT_OPT),In]
+Windows.Win32.UI.Shell.Apis.SHGetKnownFolderPath : dwFlags : [In] => [AssociatedEnum(KNOWN_FOLDER_FLAG),In]
+Windows.Win32.UI.Shell.Apis.SHObjectProperties : shopObjectType : [In] => [AssociatedEnum(SHOP_TYPE),In]
+Windows.Win32.UI.Shell.Apis.SHValidateUNC : fConnect : [In] => [AssociatedEnum(VALIDATEUNC_OPTION),In]
+Windows.Win32.UI.Shell.IFolderView.ItemCount : uFlags : [In] => [AssociatedEnum(_SVGIO),In]
+Windows.Win32.UI.Shell.IFolderView.Items : uFlags : [In] => [AssociatedEnum(_SVGIO),In]
+Windows.Win32.UI.Shell.IQueryInfo.GetInfoTip : dwFlags : [In] => [AssociatedEnum(QITIPF_FLAGS),In]
+Windows.Win32.UI.Shell.IShellFolderView.Select : dwFlags : [In] => [AssociatedEnum(SFVS_SELECT),In]
+Windows.Win32.UI.Shell.IShellFolderViewCB.MessageSFVCB : uMsg : [In] => [AssociatedEnum(SFVM_MESSAGE_ID),In]
+Windows.Win32.UI.Shell.IShellView.GetItemObject : uItem : [In] => [AssociatedEnum(_SVGIO),In]
+Windows.Win32.UI.Shell.SHDESCRIPTIONID.dwDescriptionId :  => [AssociatedEnum(SHDID_ID)]
+Windows.Win32.UI.WindowsAndMessaging.WINDOWPLACEMENT.showCmd :  => [AssociatedEnum(SHOW_WINDOW_CMD)]
+Windows.Win32.Web.MsHtml.DOCHOSTUIINFO.dwDoubleClick :  => [AssociatedEnum(DOCHOSTUIDBLCLK)]
+Windows.Win32.Web.MsHtml.DOCHOSTUIINFO.dwFlags :  => [AssociatedEnum(DOCHOSTUIFLAG)]
 # Fixed #1574.
 Windows.Win32.System.Environment.VBS_BASIC_ENCLAVE_BASIC_CALL_CREATE_THREAD removed
 Windows.Win32.System.Environment.VBS_BASIC_ENCLAVE_BASIC_CALL_CREATE_THREAD(X64, Arm64) added

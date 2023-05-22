@@ -25,6 +25,13 @@ public class AnsiAttribute : Attribute
     }
 }
 
+public class AssociatedEnumAttribute : Attribute
+{
+    public AssociatedEnumAttribute(string Name)
+    {
+    }
+}
+
 public class CanReturnErrorsAsSuccessAttribute : Attribute
 {
     public CanReturnErrorsAsSuccessAttribute()

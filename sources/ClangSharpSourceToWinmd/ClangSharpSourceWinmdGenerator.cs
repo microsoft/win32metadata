@@ -264,36 +264,53 @@ namespace ClangSharpSourceToWinmd
             return name;
         }
 
-        private static int GetSizeFromEnumType(INamedTypeSymbol underlyingType)
+        private static (int, int) GetSizeAndSignFromEnumType(INamedTypeSymbol underlyingType)
         {
             int enumSize;
+            int enumSign;
             switch (underlyingType.SpecialType)
             {
                 case SpecialType.System_Byte:
+                    enumSize = 1;
+                    enumSign = 1;
+                    break;
                 case SpecialType.System_SByte:
                     enumSize = 1;
-                    break;
-
-                case SpecialType.System_UInt32:
-                case SpecialType.System_Int32:
-                    enumSize = 4;
+                    enumSign = -1;
                     break;
 
                 case SpecialType.System_UInt16:
+                    enumSize = 2;
+                    enumSign = 1;
+                    break;
                 case SpecialType.System_Int16:
                     enumSize = 2;
+                    enumSign = -1;
+                    break;
+
+                case SpecialType.System_UInt32:
+                    enumSize = 4;
+                    enumSign = 1;
+                    break;
+                case SpecialType.System_Int32:
+                    enumSize = 4;
+                    enumSign = -1;
                     break;
 
                 case SpecialType.System_UInt64:
+                    enumSize = 8;
+                    enumSign = 1;
+                    break;
                 case SpecialType.System_Int64:
                     enumSize = 8;
+                    enumSign = -1;
                     break;
 
                 default:
                     throw new InvalidOperationException($"Enum type {underlyingType} not handled in EnsureEnumSizeMatchesOriginalSize.");
             }
 
-            return enumSize;
+            return (enumSize, enumSign);
         }
 
         /// <summary>
@@ -333,55 +350,77 @@ namespace ClangSharpSourceToWinmd
                 if (nativeType != null)
                 {
                     int nativeSize;
+                    int nativeSign = nativeType.StartsWith("unsigned", StringComparison.OrdinalIgnoreCase) ? 1 : 0;
 
                     nativeType = nativeType.Replace("const ", string.Empty);
                     nativeType = nativeType.Replace("enum ", string.Empty);
                     nativeType = nativeType.Replace("unsigned ", string.Empty);
                     switch (nativeType.ToUpperInvariant())
                     {
-                        case "CHAR":
-                        case "INT8":
                         case "UINT8":
+                        case "CHAR":
                         case "BYTE":
                             nativeSize = 1;
+                            nativeSign = 1;
                             break;
 
-                        case "SHORT":
+                        case "INT8":
+                        case "SBYTE":
+                            nativeSize = 1;
+                            nativeSign = nativeSign == 0 ? -1 : nativeSign;
+                            break;
+
+                        case "UINT16":
                         case "USHORT":
                         case "WORD":
-                        case "INT16":
-                        case "UINT16":
                             nativeSize = 2;
+                            nativeSign = 1;
+                            break;
+
+                        case "INT16":
+                        case "SHORT":
+                            nativeSize = 2;
+                            nativeSign = nativeSign == 0 ? -1 : nativeSign;
+                            break;
+
+                        case "UINT32":
+                        case "UINT":
+                        case "ULONG32":
+                        case "ULONG":
+                        case "DWORD32":
+                        case "DWORD":
+                            nativeSize = 4;
+                            nativeSign = 1;
                             break;
 
                         case "LONG":
                         case "LONG32":
-                        case "ULONG":
-                        case "ULONG32":
-                        case "DWORD":
-                        case "DWORD32":
                         case "INT":
                         case "INT32":
-                        case "UINT":
-                        case "UINT32":
                         case "BOOL":
                             nativeSize = 4;
+                            nativeSign = nativeSign == 0 ? -1 : nativeSign;
                             break;
 
                         case "DWORDLONG":
                         case "DWORD64":
                         case "ULONG64":
-                        case "INT64":
                         case "UINT64":
+                            nativeSize = 8;
+                            nativeSign = 1;
+                            break;
+
+                        case "INT64":
                         case "__INT64":
                             nativeSize = 8;
+                            nativeSign = nativeSign == 0 ? -1 : nativeSign;
                             break;
 
                         default:
                             var nativeTypeSymbol = this.GetTypeFromShortName(nativeType);
                             if (nativeTypeSymbol != null && nativeTypeSymbol is INamedTypeSymbol nativeNamedTypeSymbol && nativeNamedTypeSymbol.EnumUnderlyingType != null)
                             {
-                                nativeSize = GetSizeFromEnumType(nativeNamedTypeSymbol.EnumUnderlyingType);
+                                (nativeSize, nativeSign) = GetSizeAndSignFromEnumType(nativeNamedTypeSymbol.EnumUnderlyingType);
                             }
                             else
                             {
@@ -394,12 +433,16 @@ namespace ClangSharpSourceToWinmd
                             break;
                     }
 
-                    int enumSize = GetSizeFromEnumType(underlyingType);
+                    (int enumSize, int enumSign) = GetSizeAndSignFromEnumType(underlyingType);
 
-                    if (enumSize != nativeSize)
+                    if (enumSize != nativeSize || enumSign != nativeSign)
                     {
-                        throw new InvalidOperationException(
-                            $"{parent}.{name} was remapped to enum {namedType} (type {underlyingType}, size {enumSize}) but the original field was of type {nativeType} (size {nativeSize}). Either don't use an enum or make sure the enum is of the same size.");
+                        // Allow functions to return WIN32_ERROR even if the return type isn't uint. Otherwise, fail the build.
+                        if (!(name == "return" && namedType.Name == "WIN32_ERROR"))
+                        {
+                            throw new InvalidOperationException(
+                                $"{parent}.{name} was remapped to enum {namedType} (type {underlyingType}, size {enumSize}) but the original field was of type {nativeType} (size {nativeSize}). Either don't use an enum or make sure the enum is of the same size and sign.");
+                        }
                     }
                 }
             }
