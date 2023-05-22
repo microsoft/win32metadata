@@ -71,7 +71,7 @@ DISCLAIMER: This list is a work in progress and is not yet comprehensive.
 * Scoped enums are decorated with the `[ScopedEnum]` attribute
 * typedefs (e.g. `BCRYPT_KEY_HANDLE`) are represented as CLR structs with a single field where either the `NativeTypedef` or `MetadataTypedef` attribute is applied to the struct. `NativeTypedef` represents typedefs that exist in the Win32 headers while `MetadataTypedef` represents metadata-only typedefs added to improve API usability. Projections can choose to unwrap `MetadataTypedef` structs in order to align with the original header definitions. The type being defined is given by the name of the struct, and the type it is being defined as is the type of the struct field. typedefs can include the attributes `AlsoUsableFor`, `RAIIFree` and `InvalidHandleValue`:
   * `AlsoUsableFor` indicates that the type is implicitly convertible to another type (e.g. `BCRYPT_HANDLE`)
-  * `RAIIFree` indicates what function should be used to close the handle (e.g. `BCryptDestroyKey`)
+  * `RAIIFree` indicates the default function that should be used to close the handle (e.g. `HANDLE -> CloseHandle`). `RAIIFree` may also be decorated in context on a return value or `[Out]` parameter to indicate a more specific function that should be used to close the handle (e.g. `HeapCreate -> [return: RAIIFree("HeapDestroy")]`).
   * `InvalidHandleValue` attributes indicate invalid handle values (e.g. `0L`)
   * NOTE: `AlsoUsableFor` and `RAIIFree` APIs exist in the same namespace as the typedef.
 * Constant variables marked with the `const` keyword are decorated with the `[Const]` attribute
