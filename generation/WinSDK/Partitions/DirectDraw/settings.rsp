@@ -1,3 +1,6 @@
+--remap
+_MDL=DDMDL
+PMDL=DDMDL*
 --traverse
 <IncludeRoot>/um/ddraw.h
 <IncludeRoot>/um/ddrawi.h

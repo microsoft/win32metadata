@@ -202,6 +202,7 @@ WORDREP_BREAK_TYPE=Windows.Win32.Storage.IndexServer
 # endregion indexsrv.h
 # region libloaderapi.h
 FindStringOrdinal=Windows.Win32.Globalization
+FreeLibrary=Windows.Win32.Foundation
 # endregion libloaderapi.h
 # region lmerr.h (also defined in wincred.h)
 NERR_BASE=Windows.Win32.NetworkManagement.NetManagement
@@ -1025,7 +1026,7 @@ GlobalDeleteAtom=Windows.Win32.System.DataExchange
 GlobalFindAtomA=Windows.Win32.System.DataExchange
 GlobalFindAtomW=Windows.Win32.System.DataExchange
 GlobalFlags=Windows.Win32.System.Memory
-GlobalFree=Windows.Win32.System.Memory
+GlobalFree=Windows.Win32.Foundation
 GlobalGetAtomNameA=Windows.Win32.System.DataExchange
 GlobalGetAtomNameW=Windows.Win32.System.DataExchange
 GlobalHandle=Windows.Win32.System.Memory
@@ -1049,7 +1050,7 @@ LoadModule=Windows.Win32.System.LibraryLoader
 LoadPackagedLibrary=Windows.Win32.System.LibraryLoader
 LocalAlloc=Windows.Win32.System.Memory
 LocalFlags=Windows.Win32.System.Memory
-LocalFree=Windows.Win32.System.Memory
+LocalFree=Windows.Win32.Foundation
 LocalHandle=Windows.Win32.System.Memory
 LocalLock=Windows.Win32.System.Memory
 LocalReAlloc=Windows.Win32.System.Memory

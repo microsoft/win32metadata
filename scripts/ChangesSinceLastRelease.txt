@@ -5580,8 +5580,6 @@ Windows.Win32.Graphics.Dxgi.DXGI_RESOURCE_PRIORITY.DXGI_RESOURCE_PRIORITY_MINIMU
 Windows.Win32.Graphics.Dxgi.DXGI_RESOURCE_PRIORITY.DXGI_RESOURCE_PRIORITY_NORMAL removed
 Windows.Win32.Graphics.Dxgi.IDXGIResource.SetEvictionPriority : EvictionPriority...DXGI_RESOURCE_PRIORITY => UInt32
 # Fixed MetadataTypedef definitions.
-Windows.Win32.System.LibraryLoader.UPDATERESOURCE_HANDLE : [InvalidHandleValue(0),NativeTypedef,RAIIFree(EndUpdateResourceW)] => [InvalidHandleValue(0),MetadataTypedef,RAIIFree(EndUpdateResourceW)]
-Windows.Win32.UI.WindowsAndMessaging.LOADIMAGE_HANDLE : [InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(0),MetadataTypedef]
 # Fixed #1575.
 Windows.Win32.Graphics.Gdi.Apis.CreateCompatibleDC : return...CreatedHDC => HDC
 Windows.Win32.Graphics.Gdi.Apis.CreateDCA : return...CreatedHDC => HDC
@@ -11060,3 +11058,254 @@ Windows.Win32.UI.WindowsAndMessaging.WNDCLASSA : [Documentation(https://docs.mic
 Windows.Win32.UI.WindowsAndMessaging.WNDCLASSEXA : [Documentation(https://docs.microsoft.com/windows/win32/api/winuser/ns-winuser-wndclassexa),StructSizeField(cbSize)] => [Ansi,Documentation(https://docs.microsoft.com/windows/win32/api/winuser/ns-winuser-wndclassexa),StructSizeField(cbSize)]
 Windows.Win32.UI.WindowsAndMessaging.WNDCLASSEXW : [Documentation(https://docs.microsoft.com/windows/win32/api/winuser/ns-winuser-wndclassexw),StructSizeField(cbSize)] => [Documentation(https://docs.microsoft.com/windows/win32/api/winuser/ns-winuser-wndclassexw),StructSizeField(cbSize),Unicode]
 Windows.Win32.UI.WindowsAndMessaging.WNDCLASSW : [Documentation(https://docs.microsoft.com/windows/win32/api/winuser/ns-winuser-wndclassw)] => [Documentation(https://docs.microsoft.com/windows/win32/api/winuser/ns-winuser-wndclassw),Unicode]
+# Resolved MDL type conflict with the WDK.
+Windows.Win32.Graphics.DirectDraw.DDMDL added
+Windows.Win32.Graphics.DirectDraw.DDTRANSFERININFO.lpDestMDL...Windows.Win32.Graphics.DirectDraw.MDL* => Windows.Win32.Graphics.DirectDraw.DDMDL*
+Windows.Win32.Graphics.DirectDraw.MDL removed
+# Fixed #389.
+Windows.Win32.System.LibraryLoader.Apis.FreeLibrary => Windows.Win32.Foundation.Apis.FreeLibrary
+Windows.Win32.System.Memory.Apis.GlobalFree => Windows.Win32.Foundation.Apis.GlobalFree
+Windows.Win32.System.Memory.Apis.LocalFree => Windows.Win32.Foundation.Apis.LocalFree
+# Fixed #1578.
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDI_ERROR...System.UInt32 => Windows.Win32.Foundation.PWSTR
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDI_INFORMATION...System.UInt32 => Windows.Win32.Foundation.PWSTR
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDI_WARNING...System.UInt32 => Windows.Win32.Foundation.PWSTR
+# Fixed #1580.
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_ARRAY value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_BOOLEAN value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_BYREF value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_CHAR value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_CLASS value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_CMOD_OPT value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_CMOD_REQD value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_END value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_FNPTR value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_GENERICINST value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_I value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_I1 value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_I2 value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_I4 value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_I8 value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_INTERNAL value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_MAX value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_MODIFIER value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_MVAR value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_OBJECT value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_PINNED value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_PTR value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_R4 value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_R8 value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_SENTINEL value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_STRING value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_SZARRAY value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_TYPEDBYREF value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_U value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_U1 value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_U2 value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_U4 value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_U8 value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_VALUETYPE value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_VAR value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.ELEMENT_TYPE_VOID value init changed Int32->Byte
+Windows.Win32.System.WinRT.Metadata.CorElementType.value__...System.Int32 => System.Byte
+# Fixed #1575.
+Windows.Win32.Graphics.Gdi.Apis.CreateEnhMetaFileA : return :  => [RAIIFree(DeleteEnhMetaFile)]
+Windows.Win32.Graphics.Gdi.Apis.CreateEnhMetaFileA : return...HdcMetdataEnhFileHandle => HDC
+Windows.Win32.Graphics.Gdi.Apis.CreateEnhMetaFileW : return :  => [RAIIFree(DeleteEnhMetaFile)]
+Windows.Win32.Graphics.Gdi.Apis.CreateEnhMetaFileW : return...HdcMetdataEnhFileHandle => HDC
+Windows.Win32.Graphics.Gdi.Apis.CreateMetaFileA : return :  => [RAIIFree(DeleteMetaFile)]
+Windows.Win32.Graphics.Gdi.Apis.CreateMetaFileA : return...HdcMetdataFileHandle => HDC
+Windows.Win32.Graphics.Gdi.Apis.CreateMetaFileW : return :  => [RAIIFree(DeleteMetaFile)]
+Windows.Win32.Graphics.Gdi.Apis.CreateMetaFileW : return...HdcMetdataFileHandle => HDC
+Windows.Win32.Graphics.Gdi.HdcMetdataEnhFileHandle removed
+Windows.Win32.Graphics.Gdi.HdcMetdataFileHandle removed
+Windows.Win32.Networking.ActiveDirectory.Apis.DsGetDcCloseW : GetDcContextHandle...GetDcContextHandle => HANDLE
+Windows.Win32.Networking.ActiveDirectory.Apis.DsGetDcOpenA : RetGetDcContext : [Out] => [Out,RAIIFree(DsGetDcCloseW)]
+Windows.Win32.Networking.ActiveDirectory.Apis.DsGetDcOpenA : RetGetDcContext...GetDcContextHandle* => HANDLE*
+Windows.Win32.Networking.ActiveDirectory.Apis.DsGetDcOpenW : RetGetDcContext : [Out] => [Out,RAIIFree(DsGetDcCloseW)]
+Windows.Win32.Networking.ActiveDirectory.Apis.DsGetDcOpenW : RetGetDcContext...GetDcContextHandle* => HANDLE*
+Windows.Win32.Networking.ActiveDirectory.GetDcContextHandle removed
+Windows.Win32.NetworkManagement.Dns.Apis.DnsAcquireContextHandle_A : pContext : [Out] => [Out,RAIIFree(DnsReleaseContextHandle)]
+Windows.Win32.NetworkManagement.Dns.Apis.DnsAcquireContextHandle_A : pContext...DnsContextHandle* => HANDLE*
+Windows.Win32.NetworkManagement.Dns.Apis.DnsAcquireContextHandle_W : pContext : [Out] => [Out,RAIIFree(DnsReleaseContextHandle)]
+Windows.Win32.NetworkManagement.Dns.Apis.DnsAcquireContextHandle_W : pContext...DnsContextHandle* => HANDLE*
+Windows.Win32.NetworkManagement.Dns.DnsContextHandle removed
+Windows.Win32.NetworkManagement.IpHelper.Apis.Icmp6CreateFile : return :  => [RAIIFree(IcmpCloseHandle)]
+Windows.Win32.NetworkManagement.IpHelper.Apis.Icmp6CreateFile : return...IcmpHandle => HANDLE
+Windows.Win32.NetworkManagement.IpHelper.Apis.Icmp6SendEcho2 : IcmpHandle...IcmpHandle => HANDLE
+Windows.Win32.NetworkManagement.IpHelper.Apis.IcmpCloseHandle : IcmpHandle...IcmpHandle => HANDLE
+Windows.Win32.NetworkManagement.IpHelper.Apis.IcmpCreateFile : return :  => [RAIIFree(IcmpCloseHandle)]
+Windows.Win32.NetworkManagement.IpHelper.Apis.IcmpCreateFile : return...IcmpHandle => HANDLE
+Windows.Win32.NetworkManagement.IpHelper.Apis.IcmpSendEcho : IcmpHandle...IcmpHandle => HANDLE
+Windows.Win32.NetworkManagement.IpHelper.Apis.IcmpSendEcho2 : IcmpHandle...IcmpHandle => HANDLE
+Windows.Win32.NetworkManagement.IpHelper.Apis.IcmpSendEcho2Ex : IcmpHandle...IcmpHandle => HANDLE
+Windows.Win32.NetworkManagement.IpHelper.IcmpHandle removed
+Windows.Win32.NetworkManagement.WNet.Apis.WNetOpenEnumA : lphEnum : [Out] => [Out,RAIIFree(WNetCloseEnum)]
+Windows.Win32.NetworkManagement.WNet.Apis.WNetOpenEnumA : lphEnum...NetEnumHandle* => HANDLE*
+Windows.Win32.NetworkManagement.WNet.Apis.WNetOpenEnumW : lphEnum : [Out] => [Out,RAIIFree(WNetCloseEnum)]
+Windows.Win32.NetworkManagement.WNet.Apis.WNetOpenEnumW : lphEnum...NetEnumHandle* => HANDLE*
+Windows.Win32.NetworkManagement.WNet.NetEnumHandle removed
+Windows.Win32.Storage.FileSystem.Apis.FindClose : hFindFile...FindFileHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindCloseChangeNotification : hChangeHandle...FindChangeNotificationHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindFirstChangeNotificationA : return :  => [RAIIFree(FindCloseChangeNotification)]
+Windows.Win32.Storage.FileSystem.Apis.FindFirstChangeNotificationA : return...FindChangeNotificationHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindFirstChangeNotificationW : return :  => [RAIIFree(FindCloseChangeNotification)]
+Windows.Win32.Storage.FileSystem.Apis.FindFirstChangeNotificationW : return...FindChangeNotificationHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindFirstFileA : return :  => [RAIIFree(FindClose)]
+Windows.Win32.Storage.FileSystem.Apis.FindFirstFileA : return...FindFileHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindFirstFileExA : return :  => [RAIIFree(FindClose)]
+Windows.Win32.Storage.FileSystem.Apis.FindFirstFileExA : return...FindFileHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindFirstFileExW : return :  => [RAIIFree(FindClose)]
+Windows.Win32.Storage.FileSystem.Apis.FindFirstFileExW : return...FindFileHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindFirstFileNameTransactedW : return :  => [RAIIFree(FindClose)]
+Windows.Win32.Storage.FileSystem.Apis.FindFirstFileNameTransactedW : return...FindFileNameHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindFirstFileNameW : return :  => [RAIIFree(FindClose)]
+Windows.Win32.Storage.FileSystem.Apis.FindFirstFileNameW : return...FindFileNameHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindFirstFileTransactedA : return :  => [RAIIFree(FindClose)]
+Windows.Win32.Storage.FileSystem.Apis.FindFirstFileTransactedA : return...FindFileHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindFirstFileTransactedW : return :  => [RAIIFree(FindClose)]
+Windows.Win32.Storage.FileSystem.Apis.FindFirstFileTransactedW : return...FindFileHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindFirstFileW : return :  => [RAIIFree(FindClose)]
+Windows.Win32.Storage.FileSystem.Apis.FindFirstFileW : return...FindFileHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindFirstStreamTransactedW : return :  => [RAIIFree(FindClose)]
+Windows.Win32.Storage.FileSystem.Apis.FindFirstStreamTransactedW : return...FindStreamHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindFirstStreamW : return :  => [RAIIFree(FindClose)]
+Windows.Win32.Storage.FileSystem.Apis.FindFirstStreamW : return...FindStreamHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindFirstVolumeA : return :  => [RAIIFree(FindVolumeClose)]
+Windows.Win32.Storage.FileSystem.Apis.FindFirstVolumeA : return...FindVolumeHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindFirstVolumeMountPointA : return :  => [RAIIFree(FindVolumeMountPointClose)]
+Windows.Win32.Storage.FileSystem.Apis.FindFirstVolumeMountPointA : return...FindVolumeMountPointHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindFirstVolumeMountPointW : return :  => [RAIIFree(FindVolumeMountPointClose)]
+Windows.Win32.Storage.FileSystem.Apis.FindFirstVolumeMountPointW : return...FindVolumeMountPointHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindFirstVolumeW : return :  => [RAIIFree(FindVolumeClose)]
+Windows.Win32.Storage.FileSystem.Apis.FindFirstVolumeW : return...FindVolumeHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindNextChangeNotification : hChangeHandle...FindChangeNotificationHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindNextFileA : hFindFile...FindFileHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindNextFileNameW : hFindStream...FindFileNameHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindNextFileW : hFindFile...FindFileHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindNextStreamW : hFindStream...FindStreamHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindNextVolumeA : hFindVolume...FindVolumeHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindNextVolumeMountPointA : hFindVolumeMountPoint...FindVolumeMountPointHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindNextVolumeMountPointW : hFindVolumeMountPoint...FindVolumeMountPointHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindNextVolumeW : hFindVolume...FindVolumeHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindVolumeClose : hFindVolume...FindVolumeHandle => HANDLE
+Windows.Win32.Storage.FileSystem.Apis.FindVolumeMountPointClose : hFindVolumeMountPoint...FindVolumeMountPointHandle => HANDLE
+Windows.Win32.Storage.FileSystem.FindChangeNotificationHandle removed
+Windows.Win32.Storage.FileSystem.FindFileHandle removed
+Windows.Win32.Storage.FileSystem.FindFileNameHandle removed
+Windows.Win32.Storage.FileSystem.FindStreamHandle removed
+Windows.Win32.Storage.FileSystem.FindVolumeHandle removed
+Windows.Win32.Storage.FileSystem.FindVolumeMountPointHandle removed
+Windows.Win32.Storage.InstallableFileSystems.Apis.FilterFindFirst : lpFilterFind : [Out] => [Out,RAIIFree(FilterFindClose)]
+Windows.Win32.Storage.InstallableFileSystems.Apis.FilterFindFirst : lpFilterFind...FilterFindHandle* => HANDLE*
+Windows.Win32.Storage.InstallableFileSystems.Apis.FilterInstanceFindFirst : lpFilterInstanceFind : [Out] => [Out,RAIIFree(FilterInstanceFindClose)]
+Windows.Win32.Storage.InstallableFileSystems.Apis.FilterInstanceFindFirst : lpFilterInstanceFind...FilterInstanceFindHandle* => HANDLE*
+Windows.Win32.Storage.InstallableFileSystems.Apis.FilterVolumeFindFirst : lpVolumeFind : [Out] => [Out,RAIIFree(FilterVolumeFindClose)]
+Windows.Win32.Storage.InstallableFileSystems.Apis.FilterVolumeFindFirst : lpVolumeFind...FilterVolumeFindHandle* => HANDLE*
+Windows.Win32.Storage.InstallableFileSystems.Apis.FilterVolumeInstanceFindFirst : lpVolumeInstanceFind : [Out] => [Out,RAIIFree(FilterVolumeInstanceFindClose)]
+Windows.Win32.Storage.InstallableFileSystems.Apis.FilterVolumeInstanceFindFirst : lpVolumeInstanceFind...FilterVolumeInstanceFindHandle* => HANDLE*
+Windows.Win32.Storage.InstallableFileSystems.FilterFindHandle removed
+Windows.Win32.Storage.InstallableFileSystems.FilterInstanceFindHandle removed
+Windows.Win32.Storage.InstallableFileSystems.FilterVolumeFindHandle removed
+Windows.Win32.Storage.InstallableFileSystems.FilterVolumeInstanceFindHandle removed
+Windows.Win32.System.EventLog.Apis.BackupEventLogA : hEventLog...EventLogHandle => HANDLE
+Windows.Win32.System.EventLog.Apis.BackupEventLogW : hEventLog...EventLogHandle => HANDLE
+Windows.Win32.System.EventLog.Apis.ClearEventLogA : hEventLog...EventLogHandle => HANDLE
+Windows.Win32.System.EventLog.Apis.ClearEventLogW : hEventLog...EventLogHandle => HANDLE
+Windows.Win32.System.EventLog.Apis.CloseEventLog : hEventLog...EventLogHandle => HANDLE
+Windows.Win32.System.EventLog.Apis.DeregisterEventSource : hEventLog...EventSourceHandle => HANDLE
+Windows.Win32.System.EventLog.Apis.GetEventLogInformation : hEventLog...EventLogHandle => HANDLE
+Windows.Win32.System.EventLog.Apis.GetNumberOfEventLogRecords : hEventLog...EventLogHandle => HANDLE
+Windows.Win32.System.EventLog.Apis.GetOldestEventLogRecord : hEventLog...EventLogHandle => HANDLE
+Windows.Win32.System.EventLog.Apis.NotifyChangeEventLog : hEventLog...EventLogHandle => HANDLE
+Windows.Win32.System.EventLog.Apis.OpenBackupEventLogA : return :  => [RAIIFree(CloseEventLog)]
+Windows.Win32.System.EventLog.Apis.OpenBackupEventLogA : return...EventLogHandle => HANDLE
+Windows.Win32.System.EventLog.Apis.OpenBackupEventLogW : return :  => [RAIIFree(CloseEventLog)]
+Windows.Win32.System.EventLog.Apis.OpenBackupEventLogW : return...EventLogHandle => HANDLE
+Windows.Win32.System.EventLog.Apis.OpenEventLogA : return :  => [RAIIFree(CloseEventLog)]
+Windows.Win32.System.EventLog.Apis.OpenEventLogA : return...EventLogHandle => HANDLE
+Windows.Win32.System.EventLog.Apis.OpenEventLogW : return :  => [RAIIFree(CloseEventLog)]
+Windows.Win32.System.EventLog.Apis.OpenEventLogW : return...EventLogHandle => HANDLE
+Windows.Win32.System.EventLog.Apis.ReadEventLogA : hEventLog...EventLogHandle => HANDLE
+Windows.Win32.System.EventLog.Apis.ReadEventLogW : hEventLog...EventLogHandle => HANDLE
+Windows.Win32.System.EventLog.Apis.RegisterEventSourceA : return :  => [RAIIFree(DeregisterEventSource)]
+Windows.Win32.System.EventLog.Apis.RegisterEventSourceA : return...EventSourceHandle => HANDLE
+Windows.Win32.System.EventLog.Apis.RegisterEventSourceW : return :  => [RAIIFree(DeregisterEventSource)]
+Windows.Win32.System.EventLog.Apis.RegisterEventSourceW : return...EventSourceHandle => HANDLE
+Windows.Win32.System.EventLog.Apis.ReportEventA : hEventLog...EventSourceHandle => HANDLE
+Windows.Win32.System.EventLog.Apis.ReportEventW : hEventLog...EventSourceHandle => HANDLE
+Windows.Win32.System.EventLog.EventLogHandle removed
+Windows.Win32.System.EventLog.EventSourceHandle removed
+Windows.Win32.System.GroupPolicy.CriticalPolicySectionHandle removed
+Windows.Win32.System.LibraryLoader.Apis.BeginUpdateResourceA : return :  => [RAIIFree(EndUpdateResourceA)]
+Windows.Win32.System.LibraryLoader.Apis.BeginUpdateResourceA : return...UPDATERESOURCE_HANDLE => HANDLE
+Windows.Win32.System.LibraryLoader.Apis.BeginUpdateResourceW : return :  => [RAIIFree(EndUpdateResourceW)]
+Windows.Win32.System.LibraryLoader.Apis.BeginUpdateResourceW : return...UPDATERESOURCE_HANDLE => HANDLE
+Windows.Win32.System.LibraryLoader.Apis.EndUpdateResourceA : hUpdate...UPDATERESOURCE_HANDLE => HANDLE
+Windows.Win32.System.LibraryLoader.Apis.EndUpdateResourceW : hUpdate...UPDATERESOURCE_HANDLE => HANDLE
+Windows.Win32.System.LibraryLoader.Apis.UpdateResourceA : hUpdate...UPDATERESOURCE_HANDLE => HANDLE
+Windows.Win32.System.LibraryLoader.Apis.UpdateResourceW : hUpdate...UPDATERESOURCE_HANDLE => HANDLE
+Windows.Win32.System.LibraryLoader.UPDATERESOURCE_HANDLE removed
+Windows.Win32.System.Memory.Apis.GetProcessHeap : return...HeapHandle => HANDLE
+Windows.Win32.System.Memory.Apis.GetProcessHeaps : ProcessHeaps...HeapHandle* => HANDLE*
+Windows.Win32.System.Memory.Apis.HeapAlloc : hHeap...HeapHandle => HANDLE
+Windows.Win32.System.Memory.Apis.HeapCompact : hHeap...HeapHandle => HANDLE
+Windows.Win32.System.Memory.Apis.HeapCreate : return :  => [RAIIFree(HeapDestroy)]
+Windows.Win32.System.Memory.Apis.HeapCreate : return...HeapHandle => HANDLE
+Windows.Win32.System.Memory.Apis.HeapDestroy : hHeap...HeapHandle => HANDLE
+Windows.Win32.System.Memory.Apis.HeapFree : hHeap...HeapHandle => HANDLE
+Windows.Win32.System.Memory.Apis.HeapLock : hHeap...HeapHandle => HANDLE
+Windows.Win32.System.Memory.Apis.HeapQueryInformation : HeapHandle...HeapHandle => HANDLE
+Windows.Win32.System.Memory.Apis.HeapReAlloc : hHeap...HeapHandle => HANDLE
+Windows.Win32.System.Memory.Apis.HeapSetInformation : HeapHandle...HeapHandle => HANDLE
+Windows.Win32.System.Memory.Apis.HeapSize : hHeap...HeapHandle => HANDLE
+Windows.Win32.System.Memory.Apis.HeapUnlock : hHeap...HeapHandle => HANDLE
+Windows.Win32.System.Memory.Apis.HeapValidate : hHeap...HeapHandle => HANDLE
+Windows.Win32.System.Memory.Apis.HeapWalk : hHeap...HeapHandle => HANDLE
+Windows.Win32.System.Memory.HeapHandle removed
+Windows.Win32.System.Performance.Apis.PerfAddCounters : hQuery...PerfQueryHandle => HANDLE
+Windows.Win32.System.Performance.Apis.PerfCreateInstance : ProviderHandle...PerfProviderHandle => HANDLE
+Windows.Win32.System.Performance.Apis.PerfDeleteCounters : hQuery...PerfQueryHandle => HANDLE
+Windows.Win32.System.Performance.Apis.PerfDeleteInstance : Provider...PerfProviderHandle => HANDLE
+Windows.Win32.System.Performance.Apis.PerfOpenQueryHandle : phQuery : [Out] => [Out,RAIIFree(PerfCloseQueryHandle)]
+Windows.Win32.System.Performance.Apis.PerfOpenQueryHandle : phQuery...PerfQueryHandle* => HANDLE*
+Windows.Win32.System.Performance.Apis.PerfQueryCounterData : hQuery...PerfQueryHandle => HANDLE
+Windows.Win32.System.Performance.Apis.PerfQueryCounterInfo : hQuery...PerfQueryHandle => HANDLE
+Windows.Win32.System.Performance.Apis.PerfStartProvider : phProvider : [Out] => [Out,RAIIFree(PerfStopProvider)]
+Windows.Win32.System.Performance.Apis.PerfStartProvider : phProvider...PerfProviderHandle* => HANDLE*
+Windows.Win32.System.Performance.Apis.PerfStartProviderEx : Provider : [Out] => [Out,RAIIFree(PerfStopProvider)]
+Windows.Win32.System.Performance.Apis.PerfStartProviderEx : Provider...PerfProviderHandle* => HANDLE*
+Windows.Win32.System.Performance.Apis.PerfStopProvider : ProviderHandle...PerfProviderHandle => HANDLE
+Windows.Win32.System.Performance.PerfProviderHandle removed
+Windows.Win32.System.Performance.PerfQueryHandle removed
+Windows.Win32.System.RemoteDesktop.Apis.WTSVirtualChannelOpen : return :  => [RAIIFree(WTSVirtualChannelClose)]
+Windows.Win32.System.RemoteDesktop.Apis.WTSVirtualChannelOpen : return...HwtsVirtualChannelHandle => HANDLE
+Windows.Win32.System.RemoteDesktop.Apis.WTSVirtualChannelOpenEx : return :  => [RAIIFree(WTSVirtualChannelClose)]
+Windows.Win32.System.RemoteDesktop.Apis.WTSVirtualChannelOpenEx : return...HwtsVirtualChannelHandle => HANDLE
+Windows.Win32.System.RemoteDesktop.HwtsVirtualChannelHandle removed
+Windows.Win32.System.Threading.Apis.ClosePrivateNamespace : Handle...NamespaceHandle => HANDLE
+Windows.Win32.System.Threading.Apis.CreateBoundaryDescriptorA : return :  => [RAIIFree(DeleteBoundaryDescriptor)]
+Windows.Win32.System.Threading.Apis.CreateBoundaryDescriptorA : return...BoundaryDescriptorHandle => HANDLE
+Windows.Win32.System.Threading.Apis.CreateBoundaryDescriptorW : return :  => [RAIIFree(DeleteBoundaryDescriptor)]
+Windows.Win32.System.Threading.Apis.CreateBoundaryDescriptorW : return...BoundaryDescriptorHandle => HANDLE
+Windows.Win32.System.Threading.Apis.CreatePrivateNamespaceA : return :  => [RAIIFree(ClosePrivateNamespace)]
+Windows.Win32.System.Threading.Apis.CreatePrivateNamespaceA : return...NamespaceHandle => HANDLE
+Windows.Win32.System.Threading.Apis.CreatePrivateNamespaceW : return :  => [RAIIFree(ClosePrivateNamespace)]
+Windows.Win32.System.Threading.Apis.CreatePrivateNamespaceW : return...NamespaceHandle => HANDLE
+Windows.Win32.System.Threading.Apis.DeleteBoundaryDescriptor : BoundaryDescriptor...BoundaryDescriptorHandle => HANDLE
+Windows.Win32.System.Threading.Apis.OpenPrivateNamespaceA : return :  => [RAIIFree(ClosePrivateNamespace)]
+Windows.Win32.System.Threading.Apis.OpenPrivateNamespaceA : return...NamespaceHandle => HANDLE
+Windows.Win32.System.Threading.Apis.OpenPrivateNamespaceW : return :  => [RAIIFree(ClosePrivateNamespace)]
+Windows.Win32.System.Threading.Apis.OpenPrivateNamespaceW : return...NamespaceHandle => HANDLE
+Windows.Win32.System.Threading.BoundaryDescriptorHandle removed
+Windows.Win32.System.Threading.NamespaceHandle removed
+Windows.Win32.System.Threading.TimerQueueHandle removed
+Windows.Win32.UI.Shell.Apis.SHChangeNotification_Lock : return :  => [RAIIFree(SHChangeNotification_Unlock)]
+Windows.Win32.UI.Shell.Apis.SHChangeNotification_Lock : return...ShFindChangeNotificationHandle => HANDLE
+Windows.Win32.UI.Shell.ShFindChangeNotificationHandle removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.LoadImageA : return...LOADIMAGE_HANDLE => HANDLE
+Windows.Win32.UI.WindowsAndMessaging.Apis.LoadImageW : return...LOADIMAGE_HANDLE => HANDLE
+Windows.Win32.UI.WindowsAndMessaging.LOADIMAGE_HANDLE removed
+# Fixed #1581.
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.CreateActCtxA : return :  => [RAIIFree(ReleaseActCtx)]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.CreateActCtxW : return :  => [RAIIFree(ReleaseActCtx)]
