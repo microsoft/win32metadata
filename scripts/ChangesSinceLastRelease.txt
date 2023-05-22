@@ -10363,3 +10363,6 @@ Windows.Win32.UI.Shell.ShFindChangeNotificationHandle removed
 Windows.Win32.UI.WindowsAndMessaging.Apis.LoadImageA : return...LOADIMAGE_HANDLE => HANDLE
 Windows.Win32.UI.WindowsAndMessaging.Apis.LoadImageW : return...LOADIMAGE_HANDLE => HANDLE
 Windows.Win32.UI.WindowsAndMessaging.LOADIMAGE_HANDLE removed
+# Fixed #1581.
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.CreateActCtxA : return :  => [RAIIFree(ReleaseActCtx)]
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.CreateActCtxW : return :  => [RAIIFree(ReleaseActCtx)]
