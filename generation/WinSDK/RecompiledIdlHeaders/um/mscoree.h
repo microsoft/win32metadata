@@ -411,6 +411,30 @@ typedef interface ICatalogServices ICatalogServices;
 #endif 	/* __ICatalogServices_FWD_DEFINED__ */
 
 
+#ifndef __ComCallUnmarshal_FWD_DEFINED__
+#define __ComCallUnmarshal_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class ComCallUnmarshal ComCallUnmarshal;
+#else
+typedef struct ComCallUnmarshal ComCallUnmarshal;
+#endif /* __cplusplus */
+
+#endif 	/* __ComCallUnmarshal_FWD_DEFINED__ */
+
+
+#ifndef __ComCallUnmarshalV4_FWD_DEFINED__
+#define __ComCallUnmarshalV4_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class ComCallUnmarshalV4 ComCallUnmarshalV4;
+#else
+typedef struct ComCallUnmarshalV4 ComCallUnmarshalV4;
+#endif /* __cplusplus */
+
+#endif 	/* __ComCallUnmarshalV4_FWD_DEFINED__ */
+
+
 #ifndef __CorRuntimeHost_FWD_DEFINED__
 #define __CorRuntimeHost_FWD_DEFINED__
 
@@ -460,6 +484,11 @@ typedef interface IHostSecurityManager IHostSecurityManager;
 
 #endif 	/* __IHostSecurityManager_FWD_DEFINED__ */
 
+#ifndef __ICLRAppDomainResourceMonitor_FWD_DEFINED__
+#define __ICLRAppDomainResourceMonitor_FWD_DEFINED__
+typedef interface ICLRAppDomainResourceMonitor ICLRAppDomainResourceMonitor;
+
+#endif 	/* __ICLRAppDomainResourceMonitor_FWD_DEFINED__ */
 
 /* header files for imported files */
 #include "unknwn.h"
@@ -499,6 +528,8 @@ EXTERN_GUID(LIBID_mscoree, 0x5477469e,0x83b1,0x11d2,0x8b,0x49,0x00,0xa0,0xc9,0xb
 EXTERN_GUID(CLSID_CorRuntimeHost, 0xcb2f6723, 0xab3a, 0x11d2, 0x9c, 0x40, 0x00, 0xc0, 0x4f, 0xa3, 0x0a, 0x3e);
 EXTERN_GUID(CLSID_TypeNameFactory, 0xB81FF171, 0x20F3, 0x11d2, 0x8d, 0xcc, 0x00, 0xa0, 0xc9, 0xb0, 0x05, 0x25);
 EXTERN_GUID(CLSID_CLRRuntimeHost, 0x90F1A06E, 0x7712, 0x4762, 0x86, 0xB5, 0x7A, 0x5E, 0xBA, 0x6B, 0xDB, 0x02);
+EXTERN_GUID(CLSID_ComCallUnmarshal, 0x3F281000,0xE95A,0x11d2,0x88,0x6B,0x00,0xC0,0x4F,0x86,0x9F,0x04);
+EXTERN_GUID(CLSID_ComCallUnmarshalV4, 0x45fb4600,0xe6e8,0x4928,0xb2,0x5e,0x50,0x47,0x6f,0xf7,0x94,0x25);
 EXTERN_GUID(IID_IObjectHandle, 0xc460e2b4, 0xe199, 0x412a, 0x84, 0x56, 0x84, 0xdc, 0x3e, 0x48, 0x38, 0xc3);
 EXTERN_GUID(IID_IApartmentCallback, 0x178e5337, 0x1528, 0x4591, 0xb1, 0xc9, 0x1c, 0x6e, 0x48, 0x46, 0x86, 0xd8);
 EXTERN_GUID(IID_ICatalogServices, 0x04c6be1e, 0x1db1, 0x4058, 0xab, 0x7a, 0x70, 0x0c, 0xcc, 0xfb, 0xf2, 0x54);
@@ -522,6 +553,7 @@ EXTERN_GUID(IID_IHostAutoEvent, 0x50B0CFCE, 0x4063, 0x4278, 0x96, 0x73, 0xe5, 0x
 EXTERN_GUID(IID_IHostManualEvent, 0x1BF4EC38, 0xAFFE, 0x4fb9, 0x85, 0xa6, 0x52, 0x52, 0x68, 0xf1, 0x5b, 0x54);
 EXTERN_GUID(IID_IHostSemaphore, 0x855efd47, 0xcc09, 0x463a, 0xa9, 0x7d, 0x16, 0xac, 0xab, 0x88, 0x26, 0x61);
 EXTERN_GUID(IID_ICLRSyncManager, 0x55FF199D, 0xAD21, 0x48f9, 0xa1, 0x6c, 0xf2, 0x4e, 0xbb, 0xb8, 0x72, 0x7d);
+EXTERN_GUID(IID_ICLRAppDomainResourceMonitor, 0XC62DE18C, 0X2E23, 0X4AEA, 0X84, 0X23, 0XB4, 0X0C, 0X1F, 0XC5, 0X9E, 0XAE);
 EXTERN_GUID(IID_ICLRPolicyManager, 0x7D290010, 0xD781, 0x45da, 0xA6, 0xF8, 0xAA, 0x5D, 0x71, 0x1A, 0x73, 0x0E);
 EXTERN_GUID(IID_ICLRGCManager, 0x54D9007E, 0xA8E2, 0x4885, 0xB7, 0xBF, 0xF9, 0x98, 0xDE, 0xEE, 0x4F, 0x2A);
 EXTERN_GUID(IID_ICLRGCManager2, 0x0603B793, 0xA97A, 0x4712, 0x9C, 0xB4, 0x0C, 0xD1, 0xC7, 0x4C, 0x0F, 0x7C);
@@ -564,6 +596,7 @@ DEPRECATED_CLR_STDAPI CallFunctionShim(LPCWSTR szDllName, LPCSTR szFunctionName,
 DEPRECATED_CLR_STDAPI GetRealProcAddress(LPCSTR pwszProcName, VOID** ppv);
 DECLARE_DEPRECATED void STDMETHODCALLTYPE CorExitProcess(int exitCode);
 DEPRECATED_CLR_STDAPI LoadStringRC(UINT iResouceID, _Out_writes_z_(iMax) LPWSTR szBuffer, int iMax, int bQuiet);
+DEPRECATED_CLR_STDAPI LoadStringRCEx(LCID lcid, UINT iResouceID, _Out_writes_z_(iMax) LPWSTR szBuffer, int iMax, int bQuiet, int *pcwchUsed);
 typedef HRESULT (__stdcall *FLockClrVersionCallback) ();
 DEPRECATED_CLR_STDAPI LockClrVersion(FLockClrVersionCallback hostCallback,FLockClrVersionCallback *pBeginHostSetup,FLockClrVersionCallback *pEndHostSetup);
 DEPRECATED_CLR_STDAPI CreateDebuggingInterfaceFromVersion(int iDebuggerVersion, LPCWSTR szDebuggeeVersion, IUnknown ** ppCordb);
@@ -8457,6 +8490,100 @@ EXTERN_C const IID IID_IApartmentCallback;
 #endif 	/* __IApartmentCallback_INTERFACE_DEFINED__ */
 
 
+#ifndef __IManagedObject_INTERFACE_DEFINED__
+#define __IManagedObject_INTERFACE_DEFINED__
+
+/* interface IManagedObject */
+/* [proxy][unique][helpstring][uuid][oleautomation][object] */ 
+
+
+EXTERN_C const IID IID_IManagedObject;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("C3FCC19E-A970-11d2-8B5A-00A0C9B7C9C4")
+    IManagedObject : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE GetSerializedBuffer( 
+            /* [out] */ __RPC__deref_out_opt BSTR *pBSTR) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetObjectIdentity( 
+            /* [out] */ __RPC__deref_out_opt BSTR *pBSTRGUID,
+            /* [out] */ __RPC__out int *AppDomainID,
+            /* [out] */ __RPC__out int *pCCW) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IManagedObjectVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IManagedObject * This,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IManagedObject * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IManagedObject * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetSerializedBuffer )( 
+            __RPC__in IManagedObject * This,
+            /* [out] */ __RPC__deref_out_opt BSTR *pBSTR);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetObjectIdentity )( 
+            __RPC__in IManagedObject * This,
+            /* [out] */ __RPC__deref_out_opt BSTR *pBSTRGUID,
+            /* [out] */ __RPC__out int *AppDomainID,
+            /* [out] */ __RPC__out int *pCCW);
+        
+        END_INTERFACE
+    } IManagedObjectVtbl;
+
+    interface IManagedObject
+    {
+        CONST_VTBL struct IManagedObjectVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IManagedObject_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IManagedObject_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IManagedObject_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IManagedObject_GetSerializedBuffer(This,pBSTR)	\
+    ( (This)->lpVtbl -> GetSerializedBuffer(This,pBSTR) ) 
+
+#define IManagedObject_GetObjectIdentity(This,pBSTRGUID,AppDomainID,pCCW)	\
+    ( (This)->lpVtbl -> GetObjectIdentity(This,pBSTRGUID,AppDomainID,pCCW) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IManagedObject_INTERFACE_DEFINED__ */
+
+
 #ifndef __ICatalogServices_INTERFACE_DEFINED__
 #define __ICatalogServices_INTERFACE_DEFINED__
 
@@ -8547,6 +8674,23 @@ EXTERN_C const IID IID_ICatalogServices;
 
 
 #endif 	/* __ICatalogServices_INTERFACE_DEFINED__ */
+
+
+EXTERN_C const CLSID CLSID_ComCallUnmarshal;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("3F281000-E95A-11d2-886B-00C04F869F04")
+ComCallUnmarshal;
+#endif
+
+EXTERN_C const CLSID CLSID_ComCallUnmarshalV4;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("45FB4600-E6E8-4928-B25E-50476FF79425")
+ComCallUnmarshalV4;
+#endif
 
 
 EXTERN_C const CLSID CLSID_CorRuntimeHost;
@@ -8839,6 +8983,113 @@ EXTERN_C const IID IID_IHostSecurityManager;
 
 #endif 	/* __IHostSecurityManager_INTERFACE_DEFINED__ */
 
+
+#ifndef __ICLRAppDomainResourceMonitor_INTERFACE_DEFINED__
+#define __ICLRAppDomainResourceMonitor_INTERFACE_DEFINED__
+
+/* interface ICLRAppDomainResourceMonitor */
+/* [object][local][unique][helpstring][uuid][version] */ 
+
+
+EXTERN_C const IID IID_ICLRAppDomainResourceMonitor;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("c62de18c-2e23-4aea-8423-b40c1fc59eae")
+    ICLRAppDomainResourceMonitor : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE GetCurrentAllocated( 
+            /* [in] */ DWORD dwAppDomainId,
+            /* [out] */ ULONGLONG *pBytesAllocated) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetCurrentSurvived( 
+            /* [in] */ DWORD dwAppDomainId,
+            /* [out] */ ULONGLONG *pAppDomainBytesSurvived,
+            /* [out] */ ULONGLONG *pTotalBytesSurvived) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetCurrentCpuTime( 
+            /* [in] */ DWORD dwAppDomainId,
+            /* [out] */ ULONGLONG *pMilliseconds) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ICLRAppDomainResourceMonitorVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ICLRAppDomainResourceMonitor * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ICLRAppDomainResourceMonitor * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ICLRAppDomainResourceMonitor * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetCurrentAllocated )( 
+            ICLRAppDomainResourceMonitor * This,
+            /* [in] */ DWORD dwAppDomainId,
+            /* [out] */ ULONGLONG *pBytesAllocated);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetCurrentSurvived )( 
+            ICLRAppDomainResourceMonitor * This,
+            /* [in] */ DWORD dwAppDomainId,
+            /* [out] */ ULONGLONG *pAppDomainBytesSurvived,
+            /* [out] */ ULONGLONG *pTotalBytesSurvived);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetCurrentCpuTime )( 
+            ICLRAppDomainResourceMonitor * This,
+            /* [in] */ DWORD dwAppDomainId,
+            /* [out] */ ULONGLONG *pMilliseconds);
+        
+        END_INTERFACE
+    } ICLRAppDomainResourceMonitorVtbl;
+
+    interface ICLRAppDomainResourceMonitor
+    {
+        CONST_VTBL struct ICLRAppDomainResourceMonitorVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ICLRAppDomainResourceMonitor_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ICLRAppDomainResourceMonitor_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ICLRAppDomainResourceMonitor_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ICLRAppDomainResourceMonitor_GetCurrentAllocated(This,dwAppDomainId,pBytesAllocated)	\
+    ( (This)->lpVtbl -> GetCurrentAllocated(This,dwAppDomainId,pBytesAllocated) ) 
+
+#define ICLRAppDomainResourceMonitor_GetCurrentSurvived(This,dwAppDomainId,pAppDomainBytesSurvived,pTotalBytesSurvived)	\
+    ( (This)->lpVtbl -> GetCurrentSurvived(This,dwAppDomainId,pAppDomainBytesSurvived,pTotalBytesSurvived) ) 
+
+#define ICLRAppDomainResourceMonitor_GetCurrentCpuTime(This,dwAppDomainId,pMilliseconds)	\
+    ( (This)->lpVtbl -> GetCurrentCpuTime(This,dwAppDomainId,pMilliseconds) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ICLRAppDomainResourceMonitor_INTERFACE_DEFINED__ */
 
 /* interface __MIDL_itf_mscoree_0000_0050 */
 /* [local] */ 

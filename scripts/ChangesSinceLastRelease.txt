@@ -1,10 +1,6 @@
 # Fixed #1582.
 Windows.Win32.System.ClrHosting.Apis.CLRCreateInstance : ppInterface : [In,Out] => [ComOutPtr,Out]
-Windows.Win32.System.ClrHosting.Apis.LoadStringRCEx removed
-Windows.Win32.System.ClrHosting.ComCallUnmarshal removed
-Windows.Win32.System.ClrHosting.ComCallUnmarshalV4 removed
 Windows.Win32.System.ClrHosting.IActionOnCLREvent.OnEvent : data : [In,Out] => [In]
-Windows.Win32.System.ClrHosting.ICLRAppDomainResourceMonitor removed
 Windows.Win32.System.ClrHosting.ICLRAssemblyIdentityManager.IsStronglyNamed : pbIsStronglyNamed : [In,Out] => [Out]
 Windows.Win32.System.ClrHosting.ICLRControl.GetCLRManager : ppObject : [In,Out] => [Out]
 Windows.Win32.System.ClrHosting.ICLRDebugging.OpenVirtualProcess : pdwFlags : [In,Out] => [Out]
@@ -170,7 +166,6 @@ Windows.Win32.System.ClrHosting.IHostThreadpoolManager.GetAvailableThreads : pdw
 Windows.Win32.System.ClrHosting.IHostThreadpoolManager.GetMaxThreads : pdwMaxWorkerThreads : [In,Out] => [Out]
 Windows.Win32.System.ClrHosting.IHostThreadpoolManager.GetMinThreads : pdwMinIOCompletionThreads : [In,Out] => [Out]
 Windows.Win32.System.ClrHosting.IHostThreadpoolManager.QueueUserWorkItem : Context : [In,Out] => [In]
-Windows.Win32.System.ClrHosting.IManagedObject removed
 Windows.Win32.System.ClrHosting.IObjectHandle.Unwrap : ppv : [Out] => [Out,RetVal]
 Windows.Win32.System.ClrHosting.ITypeName.GetAssemblyName : rgbszAssemblyNames : [Out] => [Out,RetVal]
 Windows.Win32.System.ClrHosting.ITypeName.GetModifierLength : pCount : [Out] => [Out,RetVal]
