@@ -3,15 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.00.0603 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
-#pragma warning( disable: 4049 )  /* more than 64k source lines */
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 475
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -24,7 +23,7 @@
 
 #ifndef __RPCNDR_H_VERSION__
 #error this stub requires an updated version of <rpcndr.h>
-#endif // __RPCNDR_H_VERSION__
+#endif /* __RPCNDR_H_VERSION__ */
 
 #ifndef COM_NO_WINDOWS_H
 #include "windows.h"
@@ -36,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if defined(_CONTROL_FLOW_GUARD_XFG)
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -120,21 +127,28 @@ EXTERN_C const IID IID_IGCHost;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetGCStartupLimits( 
-            /* [in] */ DWORD SegmentSize,
-            /* [in] */ DWORD MaxGen0Size) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD SegmentSize,
+            /* [annotation][in] */ 
+            _In_  DWORD MaxGen0Size) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Collect( 
-            /* [in] */ LONG Generation) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG Generation) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStats( 
-            /* [out][in] */ COR_GC_STATS *pStats) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  COR_GC_STATS *pStats) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetThreadStats( 
-            /* [in] */ DWORD *pFiberCookie,
-            /* [out][in] */ COR_GC_THREAD_STATS *pStats) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD *pFiberCookie,
+            /* [annotation][out][in] */ 
+            _Inout_  COR_GC_THREAD_STATS *pStats) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetVirtualMemLimit( 
-            /* [in] */ SIZE_T sztMaxVirtualMemMB) = 0;
+            /* [annotation][in] */ 
+            _In_  SIZE_T sztMaxVirtualMemMB) = 0;
         
     };
     
@@ -145,39 +159,55 @@ EXTERN_C const IID IID_IGCHost;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IGCHost * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IGCHost * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IGCHost * This);
         
+        DECLSPEC_XFGVIRT(IGCHost, SetGCStartupLimits)
         HRESULT ( STDMETHODCALLTYPE *SetGCStartupLimits )( 
             IGCHost * This,
-            /* [in] */ DWORD SegmentSize,
-            /* [in] */ DWORD MaxGen0Size);
+            /* [annotation][in] */ 
+            _In_  DWORD SegmentSize,
+            /* [annotation][in] */ 
+            _In_  DWORD MaxGen0Size);
         
+        DECLSPEC_XFGVIRT(IGCHost, Collect)
         HRESULT ( STDMETHODCALLTYPE *Collect )( 
             IGCHost * This,
-            /* [in] */ LONG Generation);
+            /* [annotation][in] */ 
+            _In_  LONG Generation);
         
+        DECLSPEC_XFGVIRT(IGCHost, GetStats)
         HRESULT ( STDMETHODCALLTYPE *GetStats )( 
             IGCHost * This,
-            /* [out][in] */ COR_GC_STATS *pStats);
+            /* [annotation][out][in] */ 
+            _Inout_  COR_GC_STATS *pStats);
         
+        DECLSPEC_XFGVIRT(IGCHost, GetThreadStats)
         HRESULT ( STDMETHODCALLTYPE *GetThreadStats )( 
             IGCHost * This,
-            /* [in] */ DWORD *pFiberCookie,
-            /* [out][in] */ COR_GC_THREAD_STATS *pStats);
+            /* [annotation][in] */ 
+            _In_  DWORD *pFiberCookie,
+            /* [annotation][out][in] */ 
+            _Inout_  COR_GC_THREAD_STATS *pStats);
         
+        DECLSPEC_XFGVIRT(IGCHost, SetVirtualMemLimit)
         HRESULT ( STDMETHODCALLTYPE *SetVirtualMemLimit )( 
             IGCHost * This,
-            /* [in] */ SIZE_T sztMaxVirtualMemMB);
+            /* [annotation][in] */ 
+            _In_  SIZE_T sztMaxVirtualMemMB);
         
         END_INTERFACE
     } IGCHostVtbl;
@@ -244,8 +274,10 @@ EXTERN_C const IID IID_IGCHost2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetGCStartupLimitsEx( 
-            /* [in] */ SIZE_T SegmentSize,
-            /* [in] */ SIZE_T MaxGen0Size) = 0;
+            /* [annotation][in] */ 
+            _In_  SIZE_T SegmentSize,
+            /* [annotation][in] */ 
+            _In_  SIZE_T MaxGen0Size) = 0;
         
     };
     
@@ -256,44 +288,63 @@ EXTERN_C const IID IID_IGCHost2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IGCHost2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IGCHost2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IGCHost2 * This);
         
+        DECLSPEC_XFGVIRT(IGCHost, SetGCStartupLimits)
         HRESULT ( STDMETHODCALLTYPE *SetGCStartupLimits )( 
             IGCHost2 * This,
-            /* [in] */ DWORD SegmentSize,
-            /* [in] */ DWORD MaxGen0Size);
+            /* [annotation][in] */ 
+            _In_  DWORD SegmentSize,
+            /* [annotation][in] */ 
+            _In_  DWORD MaxGen0Size);
         
+        DECLSPEC_XFGVIRT(IGCHost, Collect)
         HRESULT ( STDMETHODCALLTYPE *Collect )( 
             IGCHost2 * This,
-            /* [in] */ LONG Generation);
+            /* [annotation][in] */ 
+            _In_  LONG Generation);
         
+        DECLSPEC_XFGVIRT(IGCHost, GetStats)
         HRESULT ( STDMETHODCALLTYPE *GetStats )( 
             IGCHost2 * This,
-            /* [out][in] */ COR_GC_STATS *pStats);
+            /* [annotation][out][in] */ 
+            _Inout_  COR_GC_STATS *pStats);
         
+        DECLSPEC_XFGVIRT(IGCHost, GetThreadStats)
         HRESULT ( STDMETHODCALLTYPE *GetThreadStats )( 
             IGCHost2 * This,
-            /* [in] */ DWORD *pFiberCookie,
-            /* [out][in] */ COR_GC_THREAD_STATS *pStats);
+            /* [annotation][in] */ 
+            _In_  DWORD *pFiberCookie,
+            /* [annotation][out][in] */ 
+            _Inout_  COR_GC_THREAD_STATS *pStats);
         
+        DECLSPEC_XFGVIRT(IGCHost, SetVirtualMemLimit)
         HRESULT ( STDMETHODCALLTYPE *SetVirtualMemLimit )( 
             IGCHost2 * This,
-            /* [in] */ SIZE_T sztMaxVirtualMemMB);
+            /* [annotation][in] */ 
+            _In_  SIZE_T sztMaxVirtualMemMB);
         
+        DECLSPEC_XFGVIRT(IGCHost2, SetGCStartupLimitsEx)
         HRESULT ( STDMETHODCALLTYPE *SetGCStartupLimitsEx )( 
             IGCHost2 * This,
-            /* [in] */ SIZE_T SegmentSize,
-            /* [in] */ SIZE_T MaxGen0Size);
+            /* [annotation][in] */ 
+            _In_  SIZE_T SegmentSize,
+            /* [annotation][in] */ 
+            _In_  SIZE_T MaxGen0Size);
         
         END_INTERFACE
     } IGCHost2Vtbl;

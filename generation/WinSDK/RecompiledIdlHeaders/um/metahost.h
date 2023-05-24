@@ -3,15 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.00.0603 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
-#pragma warning( disable: 4049 )  /* more than 64k source lines */
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 475
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -24,7 +23,7 @@
 
 #ifndef __RPCNDR_H_VERSION__
 #error this stub requires an updated version of <rpcndr.h>
-#endif // __RPCNDR_H_VERSION__
+#endif /* __RPCNDR_H_VERSION__ */
 
 #ifndef COM_NO_WINDOWS_H
 #include "windows.h"
@@ -36,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if defined(_CONTROL_FLOW_GUARD_XFG)
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -225,32 +232,44 @@ EXTERN_C const IID IID_ICLRMetaHost;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetRuntime( 
-            /* [in] */ LPCWSTR pwzVersion,
-            /* [in] */ REFIID riid,
-            /* [retval][iid_is][out] */ LPVOID *ppRuntime) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzVersion,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  LPVOID *ppRuntime) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersionFromFile( 
-            /* [in] */ LPCWSTR pwzFilePath,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFilePath,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_(*pcchBuffer)  LPWSTR pwzBuffer,
-            /* [out][in] */ DWORD *pcchBuffer) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchBuffer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumerateInstalledRuntimes( 
-            /* [retval][out] */ IEnumUnknown **ppEnumerator) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumUnknown **ppEnumerator) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumerateLoadedRuntimes( 
-            /* [in] */ HANDLE hndProcess,
-            /* [retval][out] */ IEnumUnknown **ppEnumerator) = 0;
+            /* [annotation][in] */ 
+            _In_  HANDLE hndProcess,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumUnknown **ppEnumerator) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestRuntimeLoadedNotification( 
-            /* [in] */ RuntimeLoadedCallbackFnPtr pCallbackFunction) = 0;
+            /* [annotation][in] */ 
+            _In_  RuntimeLoadedCallbackFnPtr pCallbackFunction) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryLegacyV2RuntimeBinding( 
-            /* [in] */ REFIID riid,
-            /* [retval][iid_is][out] */ LPVOID *ppUnk) = 0;
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  LPVOID *ppUnk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ExitProcess( 
-            /* [in] */ INT32 iExitCode) = 0;
+            /* [annotation][in] */ 
+            _In_  INT32 iExitCode) = 0;
         
     };
     
@@ -261,52 +280,75 @@ EXTERN_C const IID IID_ICLRMetaHost;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRMetaHost * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRMetaHost * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRMetaHost * This);
         
+        DECLSPEC_XFGVIRT(ICLRMetaHost, GetRuntime)
         HRESULT ( STDMETHODCALLTYPE *GetRuntime )( 
             ICLRMetaHost * This,
-            /* [in] */ LPCWSTR pwzVersion,
-            /* [in] */ REFIID riid,
-            /* [retval][iid_is][out] */ LPVOID *ppRuntime);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzVersion,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  LPVOID *ppRuntime);
         
+        DECLSPEC_XFGVIRT(ICLRMetaHost, GetVersionFromFile)
         HRESULT ( STDMETHODCALLTYPE *GetVersionFromFile )( 
             ICLRMetaHost * This,
-            /* [in] */ LPCWSTR pwzFilePath,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFilePath,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_(*pcchBuffer)  LPWSTR pwzBuffer,
-            /* [out][in] */ DWORD *pcchBuffer);
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchBuffer);
         
+        DECLSPEC_XFGVIRT(ICLRMetaHost, EnumerateInstalledRuntimes)
         HRESULT ( STDMETHODCALLTYPE *EnumerateInstalledRuntimes )( 
             ICLRMetaHost * This,
-            /* [retval][out] */ IEnumUnknown **ppEnumerator);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumUnknown **ppEnumerator);
         
+        DECLSPEC_XFGVIRT(ICLRMetaHost, EnumerateLoadedRuntimes)
         HRESULT ( STDMETHODCALLTYPE *EnumerateLoadedRuntimes )( 
             ICLRMetaHost * This,
-            /* [in] */ HANDLE hndProcess,
-            /* [retval][out] */ IEnumUnknown **ppEnumerator);
+            /* [annotation][in] */ 
+            _In_  HANDLE hndProcess,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  IEnumUnknown **ppEnumerator);
         
+        DECLSPEC_XFGVIRT(ICLRMetaHost, RequestRuntimeLoadedNotification)
         HRESULT ( STDMETHODCALLTYPE *RequestRuntimeLoadedNotification )( 
             ICLRMetaHost * This,
-            /* [in] */ RuntimeLoadedCallbackFnPtr pCallbackFunction);
+            /* [annotation][in] */ 
+            _In_  RuntimeLoadedCallbackFnPtr pCallbackFunction);
         
+        DECLSPEC_XFGVIRT(ICLRMetaHost, QueryLegacyV2RuntimeBinding)
         HRESULT ( STDMETHODCALLTYPE *QueryLegacyV2RuntimeBinding )( 
             ICLRMetaHost * This,
-            /* [in] */ REFIID riid,
-            /* [retval][iid_is][out] */ LPVOID *ppUnk);
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  LPVOID *ppUnk);
         
+        DECLSPEC_XFGVIRT(ICLRMetaHost, ExitProcess)
         HRESULT ( STDMETHODCALLTYPE *ExitProcess )( 
             ICLRMetaHost * This,
-            /* [in] */ INT32 iExitCode);
+            /* [annotation][in] */ 
+            _In_  INT32 iExitCode);
         
         END_INTERFACE
     } ICLRMetaHostVtbl;
@@ -408,18 +450,26 @@ EXTERN_C const IID IID_ICLRMetaHostPolicy;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetRequestedRuntime( 
-            /* [in] */ METAHOST_POLICY_FLAGS dwPolicyFlags,
-            /* [in] */ LPCWSTR pwzBinary,
-            /* [in] */ IStream *pCfgStream,
+            /* [annotation][in] */ 
+            _In_  METAHOST_POLICY_FLAGS dwPolicyFlags,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzBinary,
+            /* [annotation][in] */ 
+            _In_  IStream *pCfgStream,
             /* [annotation][size_is][out][in] */ 
             _Inout_updates_all_opt_(*pcchVersion)  LPWSTR pwzVersion,
-            /* [out][in] */ DWORD *pcchVersion,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchVersion,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_opt_(*pcchImageVersion)  LPWSTR pwzImageVersion,
-            /* [out][in] */ DWORD *pcchImageVersion,
-            /* [out] */ DWORD *pdwConfigFlags,
-            /* [in] */ REFIID riid,
-            /* [retval][iid_is][out] */ LPVOID *ppRuntime) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchImageVersion,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwConfigFlags,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  LPVOID *ppRuntime) = 0;
         
     };
     
@@ -430,32 +480,45 @@ EXTERN_C const IID IID_ICLRMetaHostPolicy;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRMetaHostPolicy * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRMetaHostPolicy * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRMetaHostPolicy * This);
         
+        DECLSPEC_XFGVIRT(ICLRMetaHostPolicy, GetRequestedRuntime)
         HRESULT ( STDMETHODCALLTYPE *GetRequestedRuntime )( 
             ICLRMetaHostPolicy * This,
-            /* [in] */ METAHOST_POLICY_FLAGS dwPolicyFlags,
-            /* [in] */ LPCWSTR pwzBinary,
-            /* [in] */ IStream *pCfgStream,
+            /* [annotation][in] */ 
+            _In_  METAHOST_POLICY_FLAGS dwPolicyFlags,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzBinary,
+            /* [annotation][in] */ 
+            _In_  IStream *pCfgStream,
             /* [annotation][size_is][out][in] */ 
             _Inout_updates_all_opt_(*pcchVersion)  LPWSTR pwzVersion,
-            /* [out][in] */ DWORD *pcchVersion,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchVersion,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_opt_(*pcchImageVersion)  LPWSTR pwzImageVersion,
-            /* [out][in] */ DWORD *pcchImageVersion,
-            /* [out] */ DWORD *pdwConfigFlags,
-            /* [in] */ REFIID riid,
-            /* [retval][iid_is][out] */ LPVOID *ppRuntime);
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchImageVersion,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwConfigFlags,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  LPVOID *ppRuntime);
         
         END_INTERFACE
     } ICLRMetaHostPolicyVtbl;
@@ -510,12 +573,18 @@ EXTERN_C const IID IID_ICLRProfiling;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AttachProfiler( 
-            /* [in] */ DWORD dwProfileeProcessID,
-            /* [in] */ DWORD dwMillisecondsMax,
-            /* [in] */ const CLSID *pClsidProfiler,
-            /* [in] */ LPCWSTR wszProfilerPath,
-            /* [size_is][in] */ void *pvClientData,
-            /* [in] */ UINT cbClientData) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwProfileeProcessID,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMillisecondsMax,
+            /* [annotation][in] */ 
+            _In_  const CLSID *pClsidProfiler,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR wszProfilerPath,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbClientData)  void *pvClientData,
+            /* [annotation][in] */ 
+            _In_  UINT cbClientData) = 0;
         
     };
     
@@ -526,26 +595,37 @@ EXTERN_C const IID IID_ICLRProfiling;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRProfiling * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRProfiling * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRProfiling * This);
         
+        DECLSPEC_XFGVIRT(ICLRProfiling, AttachProfiler)
         HRESULT ( STDMETHODCALLTYPE *AttachProfiler )( 
             ICLRProfiling * This,
-            /* [in] */ DWORD dwProfileeProcessID,
-            /* [in] */ DWORD dwMillisecondsMax,
-            /* [in] */ const CLSID *pClsidProfiler,
-            /* [in] */ LPCWSTR wszProfilerPath,
-            /* [size_is][in] */ void *pvClientData,
-            /* [in] */ UINT cbClientData);
+            /* [annotation][in] */ 
+            _In_  DWORD dwProfileeProcessID,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMillisecondsMax,
+            /* [annotation][in] */ 
+            _In_  const CLSID *pClsidProfiler,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR wszProfilerPath,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbClientData)  void *pvClientData,
+            /* [annotation][in] */ 
+            _In_  UINT cbClientData);
         
         END_INTERFACE
     } ICLRProfilingVtbl;
@@ -624,10 +704,14 @@ EXTERN_C const IID IID_ICLRDebuggingLibraryProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ProvideLibrary( 
-            /* [in] */ const WCHAR *pwszFileName,
-            /* [in] */ DWORD dwTimestamp,
-            /* [in] */ DWORD dwSizeOfImage,
-            /* [out] */ HMODULE *phModule) = 0;
+            /* [annotation][in] */ 
+            _In_  const WCHAR *pwszFileName,
+            /* [annotation][in] */ 
+            _In_  DWORD dwTimestamp,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSizeOfImage,
+            /* [annotation][out] */ 
+            _Out_  HMODULE *phModule) = 0;
         
     };
     
@@ -638,24 +722,33 @@ EXTERN_C const IID IID_ICLRDebuggingLibraryProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRDebuggingLibraryProvider * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRDebuggingLibraryProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRDebuggingLibraryProvider * This);
         
+        DECLSPEC_XFGVIRT(ICLRDebuggingLibraryProvider, ProvideLibrary)
         HRESULT ( STDMETHODCALLTYPE *ProvideLibrary )( 
             ICLRDebuggingLibraryProvider * This,
-            /* [in] */ const WCHAR *pwszFileName,
-            /* [in] */ DWORD dwTimestamp,
-            /* [in] */ DWORD dwSizeOfImage,
-            /* [out] */ HMODULE *phModule);
+            /* [annotation][in] */ 
+            _In_  const WCHAR *pwszFileName,
+            /* [annotation][in] */ 
+            _In_  DWORD dwTimestamp,
+            /* [annotation][in] */ 
+            _In_  DWORD dwSizeOfImage,
+            /* [annotation][out] */ 
+            _Out_  HMODULE *phModule);
         
         END_INTERFACE
     } ICLRDebuggingLibraryProviderVtbl;
@@ -710,14 +803,22 @@ EXTERN_C const IID IID_ICLRDebugging;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OpenVirtualProcess( 
-            /* [in] */ ULONG64 moduleBaseAddress,
-            /* [in] */ IUnknown *pDataTarget,
-            /* [in] */ ICLRDebuggingLibraryProvider *pLibraryProvider,
-            /* [in] */ CLR_DEBUGGING_VERSION *pMaxDebuggerSupportedVersion,
-            /* [in] */ REFIID riidProcess,
-            /* [iid_is][out] */ IUnknown **ppProcess,
-            /* [out][in] */ CLR_DEBUGGING_VERSION *pVersion,
-            /* [out] */ CLR_DEBUGGING_PROCESS_FLAGS *pdwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG64 moduleBaseAddress,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pDataTarget,
+            /* [annotation][in] */ 
+            _In_  ICLRDebuggingLibraryProvider *pLibraryProvider,
+            /* [annotation][in] */ 
+            _In_  CLR_DEBUGGING_VERSION *pMaxDebuggerSupportedVersion,
+            /* [annotation][in] */ 
+            _In_  REFIID riidProcess,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  IUnknown **ppProcess,
+            /* [annotation][out][in] */ 
+            _Inout_  CLR_DEBUGGING_VERSION *pVersion,
+            /* [annotation][out] */ 
+            _Out_  CLR_DEBUGGING_PROCESS_FLAGS *pdwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CanUnloadNow( 
             HMODULE hModule) = 0;
@@ -731,29 +832,43 @@ EXTERN_C const IID IID_ICLRDebugging;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRDebugging * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRDebugging * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRDebugging * This);
         
+        DECLSPEC_XFGVIRT(ICLRDebugging, OpenVirtualProcess)
         HRESULT ( STDMETHODCALLTYPE *OpenVirtualProcess )( 
             ICLRDebugging * This,
-            /* [in] */ ULONG64 moduleBaseAddress,
-            /* [in] */ IUnknown *pDataTarget,
-            /* [in] */ ICLRDebuggingLibraryProvider *pLibraryProvider,
-            /* [in] */ CLR_DEBUGGING_VERSION *pMaxDebuggerSupportedVersion,
-            /* [in] */ REFIID riidProcess,
-            /* [iid_is][out] */ IUnknown **ppProcess,
-            /* [out][in] */ CLR_DEBUGGING_VERSION *pVersion,
-            /* [out] */ CLR_DEBUGGING_PROCESS_FLAGS *pdwFlags);
+            /* [annotation][in] */ 
+            _In_  ULONG64 moduleBaseAddress,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pDataTarget,
+            /* [annotation][in] */ 
+            _In_  ICLRDebuggingLibraryProvider *pLibraryProvider,
+            /* [annotation][in] */ 
+            _In_  CLR_DEBUGGING_VERSION *pMaxDebuggerSupportedVersion,
+            /* [annotation][in] */ 
+            _In_  REFIID riidProcess,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  IUnknown **ppProcess,
+            /* [annotation][out][in] */ 
+            _Inout_  CLR_DEBUGGING_VERSION *pVersion,
+            /* [annotation][out] */ 
+            _Out_  CLR_DEBUGGING_PROCESS_FLAGS *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICLRDebugging, CanUnloadNow)
         HRESULT ( STDMETHODCALLTYPE *CanUnloadNow )( 
             ICLRDebugging * This,
             HMODULE hModule);
@@ -816,55 +931,75 @@ EXTERN_C const IID IID_ICLRRuntimeInfo;
         virtual HRESULT STDMETHODCALLTYPE GetVersionString( 
             /* [annotation][size_is][out] */ 
             _Out_writes_all_opt_(*pcchBuffer)  LPWSTR pwzBuffer,
-            /* [out][in] */ DWORD *pcchBuffer) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchBuffer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRuntimeDirectory( 
             /* [annotation][size_is][out] */ 
             _Out_writes_all_(*pcchBuffer)  LPWSTR pwzBuffer,
-            /* [out][in] */ DWORD *pcchBuffer) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchBuffer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsLoaded( 
-            /* [in] */ HANDLE hndProcess,
-            /* [retval][out] */ BOOL *pbLoaded) = 0;
+            /* [annotation][in] */ 
+            _In_  HANDLE hndProcess,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *pbLoaded) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LoadErrorString( 
-            /* [in] */ UINT iResourceID,
+            /* [annotation][in] */ 
+            _In_  UINT iResourceID,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_(*pcchBuffer)  LPWSTR pwzBuffer,
-            /* [out][in] */ DWORD *pcchBuffer,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchBuffer,
             /* [lcid][in] */ LONG iLocaleID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LoadLibrary( 
-            /* [in] */ LPCWSTR pwzDllName,
-            /* [retval][out] */ HMODULE *phndModule) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzDllName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HMODULE *phndModule) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProcAddress( 
-            /* [in] */ LPCSTR pszProcName,
-            /* [retval][out] */ LPVOID *ppProc) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCSTR pszProcName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LPVOID *ppProc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetInterface( 
-            /* [in] */ REFCLSID rclsid,
-            /* [in] */ REFIID riid,
-            /* [retval][iid_is][out] */ LPVOID *ppUnk) = 0;
+            /* [annotation][in] */ 
+            _In_  REFCLSID rclsid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  LPVOID *ppUnk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsLoadable( 
-            /* [retval][out] */ BOOL *pbLoadable) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *pbLoadable) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDefaultStartupFlags( 
-            /* [in] */ DWORD dwStartupFlags,
-            /* [in] */ LPCWSTR pwzHostConfigFile) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwStartupFlags,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzHostConfigFile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDefaultStartupFlags( 
-            /* [out] */ DWORD *pdwStartupFlags,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwStartupFlags,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_opt_(*pcchHostConfigFile)  LPWSTR pwzHostConfigFile,
-            /* [out][in] */ DWORD *pcchHostConfigFile) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchHostConfigFile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE BindAsLegacyV2Runtime( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsStarted( 
-            /* [out] */ BOOL *pbStarted,
-            /* [out] */ DWORD *pdwStartupFlags) = 0;
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbStarted,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwStartupFlags) = 0;
         
     };
     
@@ -875,82 +1010,118 @@ EXTERN_C const IID IID_ICLRRuntimeInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRRuntimeInfo * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRRuntimeInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRRuntimeInfo * This);
         
+        DECLSPEC_XFGVIRT(ICLRRuntimeInfo, GetVersionString)
         HRESULT ( STDMETHODCALLTYPE *GetVersionString )( 
             ICLRRuntimeInfo * This,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_opt_(*pcchBuffer)  LPWSTR pwzBuffer,
-            /* [out][in] */ DWORD *pcchBuffer);
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchBuffer);
         
+        DECLSPEC_XFGVIRT(ICLRRuntimeInfo, GetRuntimeDirectory)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeDirectory )( 
             ICLRRuntimeInfo * This,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_(*pcchBuffer)  LPWSTR pwzBuffer,
-            /* [out][in] */ DWORD *pcchBuffer);
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchBuffer);
         
+        DECLSPEC_XFGVIRT(ICLRRuntimeInfo, IsLoaded)
         HRESULT ( STDMETHODCALLTYPE *IsLoaded )( 
             ICLRRuntimeInfo * This,
-            /* [in] */ HANDLE hndProcess,
-            /* [retval][out] */ BOOL *pbLoaded);
+            /* [annotation][in] */ 
+            _In_  HANDLE hndProcess,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *pbLoaded);
         
+        DECLSPEC_XFGVIRT(ICLRRuntimeInfo, LoadErrorString)
         HRESULT ( STDMETHODCALLTYPE *LoadErrorString )( 
             ICLRRuntimeInfo * This,
-            /* [in] */ UINT iResourceID,
+            /* [annotation][in] */ 
+            _In_  UINT iResourceID,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_(*pcchBuffer)  LPWSTR pwzBuffer,
-            /* [out][in] */ DWORD *pcchBuffer,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchBuffer,
             /* [lcid][in] */ LONG iLocaleID);
         
+        DECLSPEC_XFGVIRT(ICLRRuntimeInfo, LoadLibrary)
         HRESULT ( STDMETHODCALLTYPE *LoadLibrary )( 
             ICLRRuntimeInfo * This,
-            /* [in] */ LPCWSTR pwzDllName,
-            /* [retval][out] */ HMODULE *phndModule);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzDllName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  HMODULE *phndModule);
         
+        DECLSPEC_XFGVIRT(ICLRRuntimeInfo, GetProcAddress)
         HRESULT ( STDMETHODCALLTYPE *GetProcAddress )( 
             ICLRRuntimeInfo * This,
-            /* [in] */ LPCSTR pszProcName,
-            /* [retval][out] */ LPVOID *ppProc);
+            /* [annotation][in] */ 
+            _In_  LPCSTR pszProcName,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  LPVOID *ppProc);
         
+        DECLSPEC_XFGVIRT(ICLRRuntimeInfo, GetInterface)
         HRESULT ( STDMETHODCALLTYPE *GetInterface )( 
             ICLRRuntimeInfo * This,
-            /* [in] */ REFCLSID rclsid,
-            /* [in] */ REFIID riid,
-            /* [retval][iid_is][out] */ LPVOID *ppUnk);
+            /* [annotation][in] */ 
+            _In_  REFCLSID rclsid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][retval][iid_is][out] */ 
+            _COM_Outptr_retval_  LPVOID *ppUnk);
         
+        DECLSPEC_XFGVIRT(ICLRRuntimeInfo, IsLoadable)
         HRESULT ( STDMETHODCALLTYPE *IsLoadable )( 
             ICLRRuntimeInfo * This,
-            /* [retval][out] */ BOOL *pbLoadable);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOL *pbLoadable);
         
+        DECLSPEC_XFGVIRT(ICLRRuntimeInfo, SetDefaultStartupFlags)
         HRESULT ( STDMETHODCALLTYPE *SetDefaultStartupFlags )( 
             ICLRRuntimeInfo * This,
-            /* [in] */ DWORD dwStartupFlags,
-            /* [in] */ LPCWSTR pwzHostConfigFile);
+            /* [annotation][in] */ 
+            _In_  DWORD dwStartupFlags,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzHostConfigFile);
         
+        DECLSPEC_XFGVIRT(ICLRRuntimeInfo, GetDefaultStartupFlags)
         HRESULT ( STDMETHODCALLTYPE *GetDefaultStartupFlags )( 
             ICLRRuntimeInfo * This,
-            /* [out] */ DWORD *pdwStartupFlags,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwStartupFlags,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_opt_(*pcchHostConfigFile)  LPWSTR pwzHostConfigFile,
-            /* [out][in] */ DWORD *pcchHostConfigFile);
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchHostConfigFile);
         
+        DECLSPEC_XFGVIRT(ICLRRuntimeInfo, BindAsLegacyV2Runtime)
         HRESULT ( STDMETHODCALLTYPE *BindAsLegacyV2Runtime )( 
             ICLRRuntimeInfo * This);
         
+        DECLSPEC_XFGVIRT(ICLRRuntimeInfo, IsStarted)
         HRESULT ( STDMETHODCALLTYPE *IsStarted )( 
             ICLRRuntimeInfo * This,
-            /* [out] */ BOOL *pbStarted,
-            /* [out] */ DWORD *pdwStartupFlags);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbStarted,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwStartupFlags);
         
         END_INTERFACE
     } ICLRRuntimeInfoVtbl;
@@ -1038,154 +1209,254 @@ EXTERN_C const IID IID_ICLRStrongName;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetHashFromAssemblyFile( 
-            /* [in] */ LPCSTR pszFilePath,
-            /* [out][in] */ unsigned int *piHashAlg,
-            /* [length_is][size_is][out] */ BYTE *pbHash,
-            /* [in] */ DWORD cchHash,
-            /* [out] */ DWORD *pchHash) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCSTR pszFilePath,
+            /* [annotation][out][in] */ 
+            _Inout_  unsigned int *piHashAlg,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cchHash,*pchHash)  BYTE *pbHash,
+            /* [annotation][in] */ 
+            _In_  DWORD cchHash,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pchHash) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetHashFromAssemblyFileW( 
-            /* [in] */ LPCWSTR pwzFilePath,
-            /* [out][in] */ unsigned int *piHashAlg,
-            /* [length_is][size_is][out] */ BYTE *pbHash,
-            /* [in] */ DWORD cchHash,
-            /* [out] */ DWORD *pchHash) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFilePath,
+            /* [annotation][out][in] */ 
+            _Inout_  unsigned int *piHashAlg,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cchHash,*pchHash)  BYTE *pbHash,
+            /* [annotation][in] */ 
+            _In_  DWORD cchHash,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pchHash) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetHashFromBlob( 
-            /* [in] */ BYTE *pbBlob,
-            /* [in] */ DWORD cchBlob,
-            /* [out][in] */ unsigned int *piHashAlg,
-            /* [length_is][size_is][out] */ BYTE *pbHash,
-            /* [in] */ DWORD cchHash,
-            /* [out] */ DWORD *pchHash) = 0;
+            /* [annotation][in] */ 
+            _In_  BYTE *pbBlob,
+            /* [annotation][in] */ 
+            _In_  DWORD cchBlob,
+            /* [annotation][out][in] */ 
+            _Inout_  unsigned int *piHashAlg,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cchHash,*pchHash)  BYTE *pbHash,
+            /* [annotation][in] */ 
+            _In_  DWORD cchHash,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pchHash) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetHashFromFile( 
-            /* [in] */ LPCSTR pszFilePath,
-            /* [out][in] */ unsigned int *piHashAlg,
-            /* [length_is][size_is][out] */ BYTE *pbHash,
-            /* [in] */ DWORD cchHash,
-            /* [out] */ DWORD *pchHash) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCSTR pszFilePath,
+            /* [annotation][out][in] */ 
+            _Inout_  unsigned int *piHashAlg,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cchHash,*pchHash)  BYTE *pbHash,
+            /* [annotation][in] */ 
+            _In_  DWORD cchHash,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pchHash) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetHashFromFileW( 
-            /* [in] */ LPCWSTR pwzFilePath,
-            /* [out][in] */ unsigned int *piHashAlg,
-            /* [length_is][size_is][out] */ BYTE *pbHash,
-            /* [in] */ DWORD cchHash,
-            /* [out] */ DWORD *pchHash) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFilePath,
+            /* [annotation][out][in] */ 
+            _Inout_  unsigned int *piHashAlg,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cchHash,*pchHash)  BYTE *pbHash,
+            /* [annotation][in] */ 
+            _In_  DWORD cchHash,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pchHash) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetHashFromHandle( 
-            /* [in] */ HANDLE hFile,
-            /* [out][in] */ unsigned int *piHashAlg,
-            /* [length_is][size_is][out] */ BYTE *pbHash,
-            /* [in] */ DWORD cchHash,
-            /* [out] */ DWORD *pchHash) = 0;
+            /* [annotation][in] */ 
+            _In_  HANDLE hFile,
+            /* [annotation][out][in] */ 
+            _Inout_  unsigned int *piHashAlg,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cchHash,*pchHash)  BYTE *pbHash,
+            /* [annotation][in] */ 
+            _In_  DWORD cchHash,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pchHash) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StrongNameCompareAssemblies( 
-            /* [in] */ LPCWSTR pwzAssembly1,
-            /* [in] */ LPCWSTR pwzAssembly2,
-            /* [retval][out] */ DWORD *pdwResult) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzAssembly1,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzAssembly2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pdwResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StrongNameFreeBuffer( 
-            /* [in] */ BYTE *pbMemory) = 0;
+            /* [annotation][in] */ 
+            _In_  BYTE *pbMemory) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StrongNameGetBlob( 
-            /* [in] */ LPCWSTR pwzFilePath,
-            /* [length_is][size_is][out][in] */ BYTE *pbBlob,
-            /* [out][in] */ DWORD *pcbBlob) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFilePath,
+            /* [annotation][length_is][size_is][out][in] */ 
+            _Inout_updates_to_(*pcbBlob,*pcbBlob)  BYTE *pbBlob,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcbBlob) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StrongNameGetBlobFromImage( 
-            /* [size_is][in] */ BYTE *pbBase,
-            /* [in] */ DWORD dwLength,
-            /* [length_is][size_is][out] */ BYTE *pbBlob,
-            /* [out][in] */ DWORD *pcbBlob) = 0;
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwLength)  BYTE *pbBase,
+            /* [annotation][in] */ 
+            _In_  DWORD dwLength,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(*pcbBlob,*pcbBlob)  BYTE *pbBlob,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcbBlob) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StrongNameGetPublicKey( 
-            /* [in] */ LPCWSTR pwzKeyContainer,
-            /* [in] */ BYTE *pbKeyBlob,
-            /* [in] */ ULONG cbKeyBlob,
-            /* [out] */ BYTE **ppbPublicKeyBlob,
-            /* [out] */ ULONG *pcbPublicKeyBlob) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzKeyContainer,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbKeyBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG cbKeyBlob,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbPublicKeyBlob,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbPublicKeyBlob) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StrongNameHashSize( 
-            /* [in] */ ULONG ulHashAlg,
-            /* [retval][out] */ DWORD *pcbSize) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG ulHashAlg,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pcbSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StrongNameKeyDelete( 
-            /* [in] */ LPCWSTR pwzKeyContainer) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzKeyContainer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StrongNameKeyGen( 
-            /* [in] */ LPCWSTR pwzKeyContainer,
-            /* [in] */ DWORD dwFlags,
-            /* [out] */ BYTE **ppbKeyBlob,
-            /* [out] */ ULONG *pcbKeyBlob) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzKeyContainer,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbKeyBlob,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbKeyBlob) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StrongNameKeyGenEx( 
-            /* [in] */ LPCWSTR pwzKeyContainer,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD dwKeySize,
-            /* [out] */ BYTE **ppbKeyBlob,
-            /* [out] */ ULONG *pcbKeyBlob) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzKeyContainer,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwKeySize,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbKeyBlob,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbKeyBlob) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StrongNameKeyInstall( 
-            /* [in] */ LPCWSTR pwzKeyContainer,
-            /* [in] */ BYTE *pbKeyBlob,
-            /* [in] */ ULONG cbKeyBlob) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzKeyContainer,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbKeyBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG cbKeyBlob) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StrongNameSignatureGeneration( 
-            /* [in] */ LPCWSTR pwzFilePath,
-            /* [in] */ LPCWSTR pwzKeyContainer,
-            /* [in] */ BYTE *pbKeyBlob,
-            /* [in] */ ULONG cbKeyBlob,
-            /* [out] */ BYTE **ppbSignatureBlob,
-            /* [out] */ ULONG *pcbSignatureBlob) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFilePath,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzKeyContainer,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbKeyBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG cbKeyBlob,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbSignatureBlob,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbSignatureBlob) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StrongNameSignatureGenerationEx( 
-            /* [in] */ LPCWSTR wszFilePath,
-            /* [in] */ LPCWSTR wszKeyContainer,
-            /* [in] */ BYTE *pbKeyBlob,
-            /* [in] */ ULONG cbKeyBlob,
-            /* [out] */ BYTE **ppbSignatureBlob,
-            /* [out] */ ULONG *pcbSignatureBlob,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR wszFilePath,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR wszKeyContainer,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbKeyBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG cbKeyBlob,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbSignatureBlob,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbSignatureBlob,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StrongNameSignatureSize( 
-            /* [in] */ BYTE *pbPublicKeyBlob,
-            /* [in] */ ULONG cbPublicKeyBlob,
-            /* [in] */ DWORD *pcbSize) = 0;
+            /* [annotation][in] */ 
+            _In_  BYTE *pbPublicKeyBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG cbPublicKeyBlob,
+            /* [annotation][in] */ 
+            _In_  DWORD *pcbSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StrongNameSignatureVerification( 
-            /* [in] */ LPCWSTR pwzFilePath,
-            /* [in] */ DWORD dwInFlags,
-            /* [retval][out] */ DWORD *pdwOutFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFilePath,
+            /* [annotation][in] */ 
+            _In_  DWORD dwInFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pdwOutFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StrongNameSignatureVerificationEx( 
-            /* [in] */ LPCWSTR pwzFilePath,
-            /* [in] */ BOOLEAN fForceVerification,
-            /* [retval][out] */ BOOLEAN *pfWasVerified) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFilePath,
+            /* [annotation][in] */ 
+            _In_  BOOLEAN fForceVerification,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOLEAN *pfWasVerified) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StrongNameSignatureVerificationFromImage( 
-            /* [in] */ BYTE *pbBase,
-            /* [in] */ DWORD dwLength,
-            /* [in] */ DWORD dwInFlags,
-            /* [retval][out] */ DWORD *pdwOutFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  BYTE *pbBase,
+            /* [annotation][in] */ 
+            _In_  DWORD dwLength,
+            /* [annotation][in] */ 
+            _In_  DWORD dwInFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pdwOutFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StrongNameTokenFromAssembly( 
-            /* [in] */ LPCWSTR pwzFilePath,
-            /* [out] */ BYTE **ppbStrongNameToken,
-            /* [out] */ ULONG *pcbStrongNameToken) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFilePath,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbStrongNameToken,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbStrongNameToken) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StrongNameTokenFromAssemblyEx( 
-            /* [in] */ LPCWSTR pwzFilePath,
-            /* [out] */ BYTE **ppbStrongNameToken,
-            /* [out] */ ULONG *pcbStrongNameToken,
-            /* [out] */ BYTE **ppbPublicKeyBlob,
-            /* [out] */ ULONG *pcbPublicKeyBlob) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFilePath,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbStrongNameToken,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbStrongNameToken,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbPublicKeyBlob,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbPublicKeyBlob) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StrongNameTokenFromPublicKey( 
-            /* [in] */ BYTE *pbPublicKeyBlob,
-            /* [in] */ ULONG cbPublicKeyBlob,
-            /* [out] */ BYTE **ppbStrongNameToken,
-            /* [out] */ ULONG *pcbStrongNameToken) = 0;
+            /* [annotation][in] */ 
+            _In_  BYTE *pbPublicKeyBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG cbPublicKeyBlob,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbStrongNameToken,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbStrongNameToken) = 0;
         
     };
     
@@ -1196,192 +1467,321 @@ EXTERN_C const IID IID_ICLRStrongName;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRStrongName * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRStrongName * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRStrongName * This);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, GetHashFromAssemblyFile)
         HRESULT ( STDMETHODCALLTYPE *GetHashFromAssemblyFile )( 
             ICLRStrongName * This,
-            /* [in] */ LPCSTR pszFilePath,
-            /* [out][in] */ unsigned int *piHashAlg,
-            /* [length_is][size_is][out] */ BYTE *pbHash,
-            /* [in] */ DWORD cchHash,
-            /* [out] */ DWORD *pchHash);
+            /* [annotation][in] */ 
+            _In_  LPCSTR pszFilePath,
+            /* [annotation][out][in] */ 
+            _Inout_  unsigned int *piHashAlg,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cchHash,*pchHash)  BYTE *pbHash,
+            /* [annotation][in] */ 
+            _In_  DWORD cchHash,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pchHash);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, GetHashFromAssemblyFileW)
         HRESULT ( STDMETHODCALLTYPE *GetHashFromAssemblyFileW )( 
             ICLRStrongName * This,
-            /* [in] */ LPCWSTR pwzFilePath,
-            /* [out][in] */ unsigned int *piHashAlg,
-            /* [length_is][size_is][out] */ BYTE *pbHash,
-            /* [in] */ DWORD cchHash,
-            /* [out] */ DWORD *pchHash);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFilePath,
+            /* [annotation][out][in] */ 
+            _Inout_  unsigned int *piHashAlg,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cchHash,*pchHash)  BYTE *pbHash,
+            /* [annotation][in] */ 
+            _In_  DWORD cchHash,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pchHash);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, GetHashFromBlob)
         HRESULT ( STDMETHODCALLTYPE *GetHashFromBlob )( 
             ICLRStrongName * This,
-            /* [in] */ BYTE *pbBlob,
-            /* [in] */ DWORD cchBlob,
-            /* [out][in] */ unsigned int *piHashAlg,
-            /* [length_is][size_is][out] */ BYTE *pbHash,
-            /* [in] */ DWORD cchHash,
-            /* [out] */ DWORD *pchHash);
+            /* [annotation][in] */ 
+            _In_  BYTE *pbBlob,
+            /* [annotation][in] */ 
+            _In_  DWORD cchBlob,
+            /* [annotation][out][in] */ 
+            _Inout_  unsigned int *piHashAlg,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cchHash,*pchHash)  BYTE *pbHash,
+            /* [annotation][in] */ 
+            _In_  DWORD cchHash,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pchHash);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, GetHashFromFile)
         HRESULT ( STDMETHODCALLTYPE *GetHashFromFile )( 
             ICLRStrongName * This,
-            /* [in] */ LPCSTR pszFilePath,
-            /* [out][in] */ unsigned int *piHashAlg,
-            /* [length_is][size_is][out] */ BYTE *pbHash,
-            /* [in] */ DWORD cchHash,
-            /* [out] */ DWORD *pchHash);
+            /* [annotation][in] */ 
+            _In_  LPCSTR pszFilePath,
+            /* [annotation][out][in] */ 
+            _Inout_  unsigned int *piHashAlg,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cchHash,*pchHash)  BYTE *pbHash,
+            /* [annotation][in] */ 
+            _In_  DWORD cchHash,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pchHash);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, GetHashFromFileW)
         HRESULT ( STDMETHODCALLTYPE *GetHashFromFileW )( 
             ICLRStrongName * This,
-            /* [in] */ LPCWSTR pwzFilePath,
-            /* [out][in] */ unsigned int *piHashAlg,
-            /* [length_is][size_is][out] */ BYTE *pbHash,
-            /* [in] */ DWORD cchHash,
-            /* [out] */ DWORD *pchHash);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFilePath,
+            /* [annotation][out][in] */ 
+            _Inout_  unsigned int *piHashAlg,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cchHash,*pchHash)  BYTE *pbHash,
+            /* [annotation][in] */ 
+            _In_  DWORD cchHash,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pchHash);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, GetHashFromHandle)
         HRESULT ( STDMETHODCALLTYPE *GetHashFromHandle )( 
             ICLRStrongName * This,
-            /* [in] */ HANDLE hFile,
-            /* [out][in] */ unsigned int *piHashAlg,
-            /* [length_is][size_is][out] */ BYTE *pbHash,
-            /* [in] */ DWORD cchHash,
-            /* [out] */ DWORD *pchHash);
+            /* [annotation][in] */ 
+            _In_  HANDLE hFile,
+            /* [annotation][out][in] */ 
+            _Inout_  unsigned int *piHashAlg,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(cchHash,*pchHash)  BYTE *pbHash,
+            /* [annotation][in] */ 
+            _In_  DWORD cchHash,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pchHash);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, StrongNameCompareAssemblies)
         HRESULT ( STDMETHODCALLTYPE *StrongNameCompareAssemblies )( 
             ICLRStrongName * This,
-            /* [in] */ LPCWSTR pwzAssembly1,
-            /* [in] */ LPCWSTR pwzAssembly2,
-            /* [retval][out] */ DWORD *pdwResult);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzAssembly1,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzAssembly2,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pdwResult);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, StrongNameFreeBuffer)
         HRESULT ( STDMETHODCALLTYPE *StrongNameFreeBuffer )( 
             ICLRStrongName * This,
-            /* [in] */ BYTE *pbMemory);
+            /* [annotation][in] */ 
+            _In_  BYTE *pbMemory);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, StrongNameGetBlob)
         HRESULT ( STDMETHODCALLTYPE *StrongNameGetBlob )( 
             ICLRStrongName * This,
-            /* [in] */ LPCWSTR pwzFilePath,
-            /* [length_is][size_is][out][in] */ BYTE *pbBlob,
-            /* [out][in] */ DWORD *pcbBlob);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFilePath,
+            /* [annotation][length_is][size_is][out][in] */ 
+            _Inout_updates_to_(*pcbBlob,*pcbBlob)  BYTE *pbBlob,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcbBlob);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, StrongNameGetBlobFromImage)
         HRESULT ( STDMETHODCALLTYPE *StrongNameGetBlobFromImage )( 
             ICLRStrongName * This,
-            /* [size_is][in] */ BYTE *pbBase,
-            /* [in] */ DWORD dwLength,
-            /* [length_is][size_is][out] */ BYTE *pbBlob,
-            /* [out][in] */ DWORD *pcbBlob);
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwLength)  BYTE *pbBase,
+            /* [annotation][in] */ 
+            _In_  DWORD dwLength,
+            /* [annotation][length_is][size_is][out] */ 
+            _Out_writes_to_(*pcbBlob,*pcbBlob)  BYTE *pbBlob,
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcbBlob);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, StrongNameGetPublicKey)
         HRESULT ( STDMETHODCALLTYPE *StrongNameGetPublicKey )( 
             ICLRStrongName * This,
-            /* [in] */ LPCWSTR pwzKeyContainer,
-            /* [in] */ BYTE *pbKeyBlob,
-            /* [in] */ ULONG cbKeyBlob,
-            /* [out] */ BYTE **ppbPublicKeyBlob,
-            /* [out] */ ULONG *pcbPublicKeyBlob);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzKeyContainer,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbKeyBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG cbKeyBlob,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbPublicKeyBlob,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbPublicKeyBlob);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, StrongNameHashSize)
         HRESULT ( STDMETHODCALLTYPE *StrongNameHashSize )( 
             ICLRStrongName * This,
-            /* [in] */ ULONG ulHashAlg,
-            /* [retval][out] */ DWORD *pcbSize);
+            /* [annotation][in] */ 
+            _In_  ULONG ulHashAlg,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pcbSize);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, StrongNameKeyDelete)
         HRESULT ( STDMETHODCALLTYPE *StrongNameKeyDelete )( 
             ICLRStrongName * This,
-            /* [in] */ LPCWSTR pwzKeyContainer);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzKeyContainer);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, StrongNameKeyGen)
         HRESULT ( STDMETHODCALLTYPE *StrongNameKeyGen )( 
             ICLRStrongName * This,
-            /* [in] */ LPCWSTR pwzKeyContainer,
-            /* [in] */ DWORD dwFlags,
-            /* [out] */ BYTE **ppbKeyBlob,
-            /* [out] */ ULONG *pcbKeyBlob);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzKeyContainer,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbKeyBlob,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbKeyBlob);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, StrongNameKeyGenEx)
         HRESULT ( STDMETHODCALLTYPE *StrongNameKeyGenEx )( 
             ICLRStrongName * This,
-            /* [in] */ LPCWSTR pwzKeyContainer,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ DWORD dwKeySize,
-            /* [out] */ BYTE **ppbKeyBlob,
-            /* [out] */ ULONG *pcbKeyBlob);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzKeyContainer,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  DWORD dwKeySize,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbKeyBlob,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbKeyBlob);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, StrongNameKeyInstall)
         HRESULT ( STDMETHODCALLTYPE *StrongNameKeyInstall )( 
             ICLRStrongName * This,
-            /* [in] */ LPCWSTR pwzKeyContainer,
-            /* [in] */ BYTE *pbKeyBlob,
-            /* [in] */ ULONG cbKeyBlob);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzKeyContainer,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbKeyBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG cbKeyBlob);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, StrongNameSignatureGeneration)
         HRESULT ( STDMETHODCALLTYPE *StrongNameSignatureGeneration )( 
             ICLRStrongName * This,
-            /* [in] */ LPCWSTR pwzFilePath,
-            /* [in] */ LPCWSTR pwzKeyContainer,
-            /* [in] */ BYTE *pbKeyBlob,
-            /* [in] */ ULONG cbKeyBlob,
-            /* [out] */ BYTE **ppbSignatureBlob,
-            /* [out] */ ULONG *pcbSignatureBlob);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFilePath,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzKeyContainer,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbKeyBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG cbKeyBlob,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbSignatureBlob,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbSignatureBlob);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, StrongNameSignatureGenerationEx)
         HRESULT ( STDMETHODCALLTYPE *StrongNameSignatureGenerationEx )( 
             ICLRStrongName * This,
-            /* [in] */ LPCWSTR wszFilePath,
-            /* [in] */ LPCWSTR wszKeyContainer,
-            /* [in] */ BYTE *pbKeyBlob,
-            /* [in] */ ULONG cbKeyBlob,
-            /* [out] */ BYTE **ppbSignatureBlob,
-            /* [out] */ ULONG *pcbSignatureBlob,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR wszFilePath,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR wszKeyContainer,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbKeyBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG cbKeyBlob,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbSignatureBlob,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbSignatureBlob,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, StrongNameSignatureSize)
         HRESULT ( STDMETHODCALLTYPE *StrongNameSignatureSize )( 
             ICLRStrongName * This,
-            /* [in] */ BYTE *pbPublicKeyBlob,
-            /* [in] */ ULONG cbPublicKeyBlob,
-            /* [in] */ DWORD *pcbSize);
+            /* [annotation][in] */ 
+            _In_  BYTE *pbPublicKeyBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG cbPublicKeyBlob,
+            /* [annotation][in] */ 
+            _In_  DWORD *pcbSize);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, StrongNameSignatureVerification)
         HRESULT ( STDMETHODCALLTYPE *StrongNameSignatureVerification )( 
             ICLRStrongName * This,
-            /* [in] */ LPCWSTR pwzFilePath,
-            /* [in] */ DWORD dwInFlags,
-            /* [retval][out] */ DWORD *pdwOutFlags);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFilePath,
+            /* [annotation][in] */ 
+            _In_  DWORD dwInFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pdwOutFlags);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, StrongNameSignatureVerificationEx)
         HRESULT ( STDMETHODCALLTYPE *StrongNameSignatureVerificationEx )( 
             ICLRStrongName * This,
-            /* [in] */ LPCWSTR pwzFilePath,
-            /* [in] */ BOOLEAN fForceVerification,
-            /* [retval][out] */ BOOLEAN *pfWasVerified);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFilePath,
+            /* [annotation][in] */ 
+            _In_  BOOLEAN fForceVerification,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BOOLEAN *pfWasVerified);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, StrongNameSignatureVerificationFromImage)
         HRESULT ( STDMETHODCALLTYPE *StrongNameSignatureVerificationFromImage )( 
             ICLRStrongName * This,
-            /* [in] */ BYTE *pbBase,
-            /* [in] */ DWORD dwLength,
-            /* [in] */ DWORD dwInFlags,
-            /* [retval][out] */ DWORD *pdwOutFlags);
+            /* [annotation][in] */ 
+            _In_  BYTE *pbBase,
+            /* [annotation][in] */ 
+            _In_  DWORD dwLength,
+            /* [annotation][in] */ 
+            _In_  DWORD dwInFlags,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pdwOutFlags);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, StrongNameTokenFromAssembly)
         HRESULT ( STDMETHODCALLTYPE *StrongNameTokenFromAssembly )( 
             ICLRStrongName * This,
-            /* [in] */ LPCWSTR pwzFilePath,
-            /* [out] */ BYTE **ppbStrongNameToken,
-            /* [out] */ ULONG *pcbStrongNameToken);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFilePath,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbStrongNameToken,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbStrongNameToken);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, StrongNameTokenFromAssemblyEx)
         HRESULT ( STDMETHODCALLTYPE *StrongNameTokenFromAssemblyEx )( 
             ICLRStrongName * This,
-            /* [in] */ LPCWSTR pwzFilePath,
-            /* [out] */ BYTE **ppbStrongNameToken,
-            /* [out] */ ULONG *pcbStrongNameToken,
-            /* [out] */ BYTE **ppbPublicKeyBlob,
-            /* [out] */ ULONG *pcbPublicKeyBlob);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFilePath,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbStrongNameToken,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbStrongNameToken,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbPublicKeyBlob,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbPublicKeyBlob);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName, StrongNameTokenFromPublicKey)
         HRESULT ( STDMETHODCALLTYPE *StrongNameTokenFromPublicKey )( 
             ICLRStrongName * This,
-            /* [in] */ BYTE *pbPublicKeyBlob,
-            /* [in] */ ULONG cbPublicKeyBlob,
-            /* [out] */ BYTE **ppbStrongNameToken,
-            /* [out] */ ULONG *pcbStrongNameToken);
+            /* [annotation][in] */ 
+            _In_  BYTE *pbPublicKeyBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG cbPublicKeyBlob,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbStrongNameToken,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbStrongNameToken);
         
         END_INTERFACE
     } ICLRStrongNameVtbl;
@@ -1508,20 +1908,32 @@ EXTERN_C const IID IID_ICLRStrongName2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE StrongNameGetPublicKeyEx( 
-            /* [in] */ LPCWSTR pwzKeyContainer,
-            /* [in] */ BYTE *pbKeyBlob,
-            /* [in] */ ULONG cbKeyBlob,
-            /* [out] */ BYTE **ppbPublicKeyBlob,
-            /* [out] */ ULONG *pcbPublicKeyBlob,
-            /* [in] */ ULONG uHashAlgId,
-            /* [in] */ ULONG uReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzKeyContainer,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbKeyBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG cbKeyBlob,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbPublicKeyBlob,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbPublicKeyBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG uHashAlgId,
+            /* [annotation][in] */ 
+            _In_  ULONG uReserved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StrongNameSignatureVerificationEx2( 
-            /* [in] */ LPCWSTR wszFilePath,
-            /* [in] */ BOOLEAN fForceVerification,
-            /* [in] */ BYTE *pbEcmaPublicKey,
-            /* [in] */ DWORD cbEcmaPublicKey,
-            /* [out] */ BOOLEAN *pfWasVerified) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR wszFilePath,
+            /* [annotation][in] */ 
+            _In_  BOOLEAN fForceVerification,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbEcmaPublicKey,
+            /* [annotation][in] */ 
+            _In_  DWORD cbEcmaPublicKey,
+            /* [annotation][out] */ 
+            _Out_  BOOLEAN *pfWasVerified) = 0;
         
     };
     
@@ -1532,35 +1944,53 @@ EXTERN_C const IID IID_ICLRStrongName2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRStrongName2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRStrongName2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRStrongName2 * This);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName2, StrongNameGetPublicKeyEx)
         HRESULT ( STDMETHODCALLTYPE *StrongNameGetPublicKeyEx )( 
             ICLRStrongName2 * This,
-            /* [in] */ LPCWSTR pwzKeyContainer,
-            /* [in] */ BYTE *pbKeyBlob,
-            /* [in] */ ULONG cbKeyBlob,
-            /* [out] */ BYTE **ppbPublicKeyBlob,
-            /* [out] */ ULONG *pcbPublicKeyBlob,
-            /* [in] */ ULONG uHashAlgId,
-            /* [in] */ ULONG uReserved);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzKeyContainer,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbKeyBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG cbKeyBlob,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbPublicKeyBlob,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbPublicKeyBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG uHashAlgId,
+            /* [annotation][in] */ 
+            _In_  ULONG uReserved);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName2, StrongNameSignatureVerificationEx2)
         HRESULT ( STDMETHODCALLTYPE *StrongNameSignatureVerificationEx2 )( 
             ICLRStrongName2 * This,
-            /* [in] */ LPCWSTR wszFilePath,
-            /* [in] */ BOOLEAN fForceVerification,
-            /* [in] */ BYTE *pbEcmaPublicKey,
-            /* [in] */ DWORD cbEcmaPublicKey,
-            /* [out] */ BOOLEAN *pfWasVerified);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR wszFilePath,
+            /* [annotation][in] */ 
+            _In_  BOOLEAN fForceVerification,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbEcmaPublicKey,
+            /* [annotation][in] */ 
+            _In_  DWORD cbEcmaPublicKey,
+            /* [annotation][out] */ 
+            _Out_  BOOLEAN *pfWasVerified);
         
         END_INTERFACE
     } ICLRStrongName2Vtbl;
@@ -1618,26 +2048,42 @@ EXTERN_C const IID IID_ICLRStrongName3;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE StrongNameDigestGenerate( 
-            /* [in] */ LPCWSTR wszFilePath,
-            /* [out] */ BYTE **ppbDigestBlob,
-            /* [out] */ ULONG *pcbDigestBlob,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR wszFilePath,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbDigestBlob,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbDigestBlob,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StrongNameDigestSign( 
-            /* [in] */ LPCWSTR wszKeyContainer,
-            /* [size_is][in] */ BYTE *pbKeyBlob,
-            /* [in] */ ULONG cbKeyBlob,
-            /* [size_is][in] */ BYTE *pbDigestBlob,
-            /* [in] */ ULONG cbDigestBlob,
-            /* [in] */ DWORD hashAlgId,
-            /* [out] */ BYTE **ppbSignatureBlob,
-            /* [out] */ ULONG *pcbSignatureBlob,
-            /* [in] */ DWORD dwFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR wszKeyContainer,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbKeyBlob)  BYTE *pbKeyBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG cbKeyBlob,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbDigestBlob)  BYTE *pbDigestBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG cbDigestBlob,
+            /* [annotation][in] */ 
+            _In_  DWORD hashAlgId,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbSignatureBlob,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbSignatureBlob,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StrongNameDigestEmbed( 
-            /* [in] */ LPCWSTR wszFilePath,
-            /* [size_is][in] */ BYTE *pbSignatureBlob,
-            /* [in] */ ULONG cbSignatureBlob) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR wszFilePath,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbSignatureBlob)  BYTE *pbSignatureBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG cbSignatureBlob) = 0;
         
     };
     
@@ -1648,42 +2094,65 @@ EXTERN_C const IID IID_ICLRStrongName3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRStrongName3 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRStrongName3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRStrongName3 * This);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName3, StrongNameDigestGenerate)
         HRESULT ( STDMETHODCALLTYPE *StrongNameDigestGenerate )( 
             ICLRStrongName3 * This,
-            /* [in] */ LPCWSTR wszFilePath,
-            /* [out] */ BYTE **ppbDigestBlob,
-            /* [out] */ ULONG *pcbDigestBlob,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR wszFilePath,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbDigestBlob,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbDigestBlob,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName3, StrongNameDigestSign)
         HRESULT ( STDMETHODCALLTYPE *StrongNameDigestSign )( 
             ICLRStrongName3 * This,
-            /* [in] */ LPCWSTR wszKeyContainer,
-            /* [size_is][in] */ BYTE *pbKeyBlob,
-            /* [in] */ ULONG cbKeyBlob,
-            /* [size_is][in] */ BYTE *pbDigestBlob,
-            /* [in] */ ULONG cbDigestBlob,
-            /* [in] */ DWORD hashAlgId,
-            /* [out] */ BYTE **ppbSignatureBlob,
-            /* [out] */ ULONG *pcbSignatureBlob,
-            /* [in] */ DWORD dwFlags);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR wszKeyContainer,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbKeyBlob)  BYTE *pbKeyBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG cbKeyBlob,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbDigestBlob)  BYTE *pbDigestBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG cbDigestBlob,
+            /* [annotation][in] */ 
+            _In_  DWORD hashAlgId,
+            /* [annotation][out] */ 
+            _Out_  BYTE **ppbSignatureBlob,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcbSignatureBlob,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(ICLRStrongName3, StrongNameDigestEmbed)
         HRESULT ( STDMETHODCALLTYPE *StrongNameDigestEmbed )( 
             ICLRStrongName3 * This,
-            /* [in] */ LPCWSTR wszFilePath,
-            /* [size_is][in] */ BYTE *pbSignatureBlob,
-            /* [in] */ ULONG cbSignatureBlob);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR wszFilePath,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbSignatureBlob)  BYTE *pbSignatureBlob,
+            /* [annotation][in] */ 
+            _In_  ULONG cbSignatureBlob);
         
         END_INTERFACE
     } ICLRStrongName3Vtbl;
