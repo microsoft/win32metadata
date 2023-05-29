@@ -15,9 +15,9 @@ namespace ClangSharpSourceToWinmd
     {
         public const string ArgListVarName = "__arglist__";
 
-        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath)
+        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath)
         {
-            TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, staticLibs, nonEmptyStructs, enumMemberNames);
+            TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, staticLibs, apiNamesToNamespaces, nonEmptyStructs, enumMemberNames);
             var newRoot = (CSharpSyntaxNode)treeRewriter.Visit(tree.GetRoot());
             var ret = CSharpSyntaxTree.Create(newRoot, null, filePath);
             return ret;
@@ -25,6 +25,7 @@ namespace ClangSharpSourceToWinmd
 
         private class TreeRewriter : CSharpSyntaxRewriter
         {
+            private static readonly Regex NativeTypeNameArrayRegex = new Regex(@"\[\s*(\d+)\s*\]$");
             private static readonly Regex ElementCountRegex = new Regex(@"(?:elementCount|byteCount)\((?:_Old_\()?([^\)]+)\)+");
             private static readonly Regex IsRegex = new Regex(@"[^\w::]");
 
@@ -34,6 +35,7 @@ namespace ClangSharpSourceToWinmd
             private Dictionary<string, Dictionary<string, string>> enumAdditions;
             private Dictionary<string, string> requiredNamespaces;
             private Dictionary<string, string> staticLibs;
+            private Dictionary<string, string> apiNamesToNamespaces;
             private HashSet<string> visitedDelegateNames = new HashSet<string>();
             private HashSet<string> visitedStaticMethodNames = new HashSet<string>();
             private HashSet<string> nonEmptyStructs;
@@ -41,7 +43,7 @@ namespace ClangSharpSourceToWinmd
             private HashSet<string> enumsToMakeFlags;
             private HashSet<string> usingNamespaces = new HashSet<string>();
 
-            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames)
+            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames)
             {
                 this.remaps = remaps;
                 this.InitRegexRemaps();
@@ -49,6 +51,7 @@ namespace ClangSharpSourceToWinmd
                 this.enumAdditions = enumAdditions;
                 this.requiredNamespaces = requiredNamespaces;
                 this.staticLibs = staticLibs;
+                this.apiNamesToNamespaces = apiNamesToNamespaces;
                 this.nonEmptyStructs = nonEmptyStructs;
                 this.enumMemberNames = enumMemberNames;
                 this.enumsToMakeFlags = enumsToMakeFlags;
@@ -159,7 +162,7 @@ namespace ClangSharpSourceToWinmd
 
                     node = (ParameterSyntax)base.VisitParameter(node);
                     node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes));
-                        
+
                     if (newName != null)
                     {
                         node = node.WithIdentifier(SyntaxFactory.Identifier(newName));
@@ -192,7 +195,29 @@ namespace ClangSharpSourceToWinmd
                     return null;
                 }
 
+                string name = node.Identifier.Text;
                 string fullName = GetFullNameWithoutArchSuffix(node);
+
+                // Add Ansi or Unicode attributes to -A/-W APIs.
+                if (name.EndsWith("A") && this.apiNamesToNamespaces.ContainsKey($"{name[0..^1]}W"))
+                {
+                    var attributeList = SyntaxFactory.AttributeList(
+                            SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
+                                SyntaxFactory.Attribute(
+                                    SyntaxFactory.ParseName("Ansi"))));
+
+                    node = node.AddAttributeLists(attributeList);
+                }
+                else if (name.EndsWith("W") && this.apiNamesToNamespaces.ContainsKey($"{name[0..^1]}A"))
+                {
+                    var attributeList = SyntaxFactory.AttributeList(
+                            SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
+                                SyntaxFactory.Attribute(
+                                    SyntaxFactory.ParseName("Unicode"))));
+
+                    node = node.AddAttributeLists(attributeList);
+                }
+
                 if (this.GetRemapInfo(fullName, node.AttributeLists, out var listAttributes, null, out _, out string newName))
                 {
                     node = (StructDeclarationSyntax)base.VisitStructDeclaration(node);
@@ -292,7 +317,7 @@ namespace ClangSharpSourceToWinmd
                                     SyntaxFactory.AttributeList(
                                         SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
                                             SyntaxFactory.Attribute(
-                                                SyntaxFactory.ParseName("Windows.Win32.Interop.Guid"),
+                                                SyntaxFactory.ParseName("Windows.Win32.Foundation.Metadata.Guid"),
                                                 SyntaxFactory.ParseAttributeArgumentList(argsFormatted))));
 
                                 node = node.AddAttributeLists(attrsList).WithLeadingTrivia(node.GetLeadingTrivia());
@@ -329,6 +354,26 @@ namespace ClangSharpSourceToWinmd
                         node = node.WithDeclaration(node.Declaration.WithVariables(SyntaxFactory.SingletonSeparatedList(variable)));
 
                         return node;
+                    }
+                }
+
+                // Assume [0] or [1] (ANYSIZE_ARRAY) at the end of a struct indicates flexible arrays and add the FlexibleArray attribute.
+                // Parse NativeTypeName instead of the field declaration to support scenarios like arrays of structs which aren't scraped as arrays.
+                var nativeTypeName = SyntaxUtils.GetNativeTypeNameFromAttributesLists(node.AttributeLists);
+                if (nativeTypeName != null)
+                {
+                    var match = NativeTypeNameArrayRegex.Match(nativeTypeName);
+                    if (match.Success && match.Groups[1].Value == "0" || match.Groups[1].Value == "1")
+                    {
+                        if (node.ToString() == (node.Parent as StructDeclarationSyntax).Members.Where(m => m is FieldDeclarationSyntax).Last().ToString())
+                        {
+                            var attributeList = SyntaxFactory.AttributeList(
+                                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
+                                        SyntaxFactory.Attribute(
+                                            SyntaxFactory.ParseName("FlexibleArray"))));
+
+                            node = node.AddAttributeLists(attributeList);
+                        }
                     }
                 }
 
@@ -472,9 +517,23 @@ namespace ClangSharpSourceToWinmd
                 return node;
             }
 
+            public override SyntaxNode VisitEnumMemberDeclaration(EnumMemberDeclarationSyntax node)
+            {
+                string fullName = GetFullNameWithoutArchSuffix(node);
+
+                this.GetRemapInfo(fullName, node.AttributeLists, out var listAttributes, string.Empty, out string newType, out string newName);
+
+                node = (EnumMemberDeclarationSyntax)base.VisitEnumMemberDeclaration(node);
+                node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes));
+
+                return node;
+            }
+
             public override SyntaxNode VisitDelegateDeclaration(DelegateDeclarationSyntax node)
             {
+                string name = node.Identifier.Text;
                 string fullName = SyntaxUtils.GetFullName(node);
+                string fixedName = GetFullNameWithoutArchSuffix(node);
 
                 // Remove duplicate delegates in this tree
                 if (this.visitedDelegateNames.Contains(fullName))
@@ -484,7 +543,26 @@ namespace ClangSharpSourceToWinmd
 
                 this.visitedDelegateNames.Add(fullName);
 
-                string fixedName = GetFullNameWithoutArchSuffix(node);
+                // Add Ansi or Unicode attributes to -A/-W APIs.
+                if (name.EndsWith("A") && this.apiNamesToNamespaces.ContainsKey($"{name[0..^1]}W"))
+                {
+                    var attributeList = SyntaxFactory.AttributeList(
+                            SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
+                                SyntaxFactory.Attribute(
+                                    SyntaxFactory.ParseName("Ansi"))));
+
+                    node = node.AddAttributeLists(attributeList);
+                }
+                else if (name.EndsWith("W") && this.apiNamesToNamespaces.ContainsKey($"{name[0..^1]}A"))
+                {
+                    var attributeList = SyntaxFactory.AttributeList(
+                            SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
+                                SyntaxFactory.Attribute(
+                                    SyntaxFactory.ParseName("Unicode"))));
+
+                    node = node.AddAttributeLists(attributeList);
+                }
+
                 string returnFullName = $"{fixedName}::return";
 
                 if (this.GetRemapInfo(returnFullName, node.AttributeLists, out var listAttributes, node.ReturnType.ToString(), out var newType, out _))
@@ -519,6 +597,7 @@ namespace ClangSharpSourceToWinmd
                     return null;
                 }
 
+                string name = node.Identifier.Text;
                 string fullName = SyntaxUtils.GetFullName(node);
                 string fixedFullName = GetFullNameWithoutArchSuffix(node);
 
@@ -551,10 +630,27 @@ namespace ClangSharpSourceToWinmd
                     return null;
                 }
 
-                string returnFullName = $"{fixedFullName}::return";
-                string nodeReturnType = node.ReturnType.ToString();
-
                 node = (MethodDeclarationSyntax)base.VisitMethodDeclaration(node);
+
+                // Add Ansi or Unicode attributes to -A/-W APIs.
+                if (name.EndsWith("A") && this.apiNamesToNamespaces.ContainsKey($"{name[0..^1]}W"))
+                {
+                    var attributeList = SyntaxFactory.AttributeList(
+                            SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
+                                SyntaxFactory.Attribute(
+                                    SyntaxFactory.ParseName("Ansi"))));
+
+                    node = node.AddAttributeLists(attributeList);
+                }
+                else if (name.EndsWith("W") && this.apiNamesToNamespaces.ContainsKey($"{name[0..^1]}A"))
+                {
+                    var attributeList = SyntaxFactory.AttributeList(
+                            SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
+                                SyntaxFactory.Attribute(
+                                    SyntaxFactory.ParseName("Unicode"))));
+
+                    node = node.AddAttributeLists(attributeList);
+                }
 
                 // Add the StaticLibrary attribute if one was specified for this DLL.
                 if (!string.IsNullOrEmpty(dllName) && this.staticLibs.TryGetValue(dllName, out string staticLib))
@@ -572,6 +668,9 @@ namespace ClangSharpSourceToWinmd
                 {
                     node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, methodAttributes));
                 }
+
+                string returnFullName = $"{fixedFullName}::return";
+                string nodeReturnType = node.ReturnType.ToString();
 
                 // Find remap info for the return parameter for this method and apply any that we find
                 if (this.GetRemapInfo(returnFullName, node.AttributeLists, out var listAttributes, nodeReturnType, out var newType, out _))
@@ -804,6 +903,7 @@ namespace ClangSharpSourceToWinmd
                 bool isComOutPtr = false;
                 bool isRetVal = false;
                 bool isNullNullTerminated;
+                bool isByteBuffer = false;
                 bool? pre = null;
                 bool? post = null;
 
@@ -875,6 +975,7 @@ namespace ClangSharpSourceToWinmd
                         else if (salAttr.P1.StartsWith("_Outptr_") && !isComOutPtr)
                         {
                             isOut = true;
+                            isByteBuffer = salAttr.P1.Contains("bytebuffer");
                             continue;
                         }
                         else if (salAttr.P1 == "_Reserved_")
@@ -939,9 +1040,9 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 // If we didn't add marshal as yet, try again without using pre
-                if (!marshalAsAdded)
+                if (!marshalAsAdded && !isByteBuffer)
                 {
-                    var salAttr = salAttrs.FirstOrDefault(attr => attr.Name == "SAL_readableTo" || attr.Name == "SAL_writeableTo");
+                    var salAttr = salAttrs.FirstOrDefault(attr => attr.Name == "SAL_writableTo" || attr.Name == "SAL_readableTo");
                     if (salAttr != null)
                     {
                         nativeArrayInfoParams = GetArrayMarshalAsFromP1(paramNode, salAttr.P1);
@@ -952,12 +1053,29 @@ namespace ClangSharpSourceToWinmd
                     }
                 }
 
+                var nativeTypeName = SyntaxUtils.GetNativeTypeNameFromAttributesLists((cppAttrList.Parent as ParameterSyntax).AttributeLists);
                 if (!string.IsNullOrEmpty(nativeArrayInfoParams))
                 {
                     var attrName = SyntaxFactory.ParseName(nativeArrayInfoParams.Contains("BytesParamIndex") ? "MemorySize" : "NativeArrayInfo");
                     var args = SyntaxFactory.ParseAttributeArgumentList(nativeArrayInfoParams.ToString());
                     var finalAttr = SyntaxFactory.Attribute(attrName, args);
                     attributesList.Add(finalAttr);
+                }
+                else if (nativeTypeName != null)
+                {
+                    var match = NativeTypeNameArrayRegex.Match(nativeTypeName);
+                    if (match.Success)
+                    {
+                        var size = Convert.ToUInt32(match.Groups[1].Value);
+
+                        // Don't bother marking this as an array if it has 1 or less
+                        if (size > 1)
+                        {
+                            var attrName = SyntaxFactory.ParseName("NativeArrayInfo");
+                            var args = SyntaxFactory.ParseAttributeArgumentList($"(CountConst = {size})");
+                            attributesList.Add(SyntaxFactory.Attribute(attrName, args));
+                        }
+                    }
                 }
 
                 if (isIn)

@@ -652,20 +652,28 @@ EXTERN_C const IID IID_ICommandTree;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE FindErrorNodes( 
-            /* [in] */ const DBCOMMANDTREE *pRoot,
-            /* [out] */ ULONG *pcErrorNodes,
-            /* [out] */ DBCOMMANDTREE ***prgErrorNodes) = 0;
+            /* [annotation][in] */ 
+            _In_  const DBCOMMANDTREE *pRoot,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcErrorNodes,
+            /* [annotation][out] */ 
+            _Out_  DBCOMMANDTREE ***prgErrorNodes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FreeCommandTree( 
-            /* [in] */ DBCOMMANDTREE **ppRoot) = 0;
+            /* [annotation][in] */ 
+            _In_  DBCOMMANDTREE **ppRoot) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCommandTree( 
-            /* [out] */ DBCOMMANDTREE **ppRoot) = 0;
+            /* [annotation][out] */ 
+            _Out_  DBCOMMANDTREE **ppRoot) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCommandTree( 
-            /* [in] */ DBCOMMANDTREE **ppRoot,
-            /* [in] */ DBCOMMANDREUSE dwCommandReuse,
-            /* [in] */ BOOL fCopy) = 0;
+            /* [annotation][in] */ 
+            _In_  DBCOMMANDTREE **ppRoot,
+            /* [annotation][in] */ 
+            _In_  DBCOMMANDREUSE dwCommandReuse,
+            /* [annotation][in] */ 
+            _In_  BOOL fCopy) = 0;
         
     };
     
@@ -695,26 +703,34 @@ EXTERN_C const IID IID_ICommandTree;
         DECLSPEC_XFGVIRT(ICommandTree, FindErrorNodes)
         HRESULT ( STDMETHODCALLTYPE *FindErrorNodes )( 
             ICommandTree * This,
-            /* [in] */ const DBCOMMANDTREE *pRoot,
-            /* [out] */ ULONG *pcErrorNodes,
-            /* [out] */ DBCOMMANDTREE ***prgErrorNodes);
+            /* [annotation][in] */ 
+            _In_  const DBCOMMANDTREE *pRoot,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcErrorNodes,
+            /* [annotation][out] */ 
+            _Out_  DBCOMMANDTREE ***prgErrorNodes);
         
         DECLSPEC_XFGVIRT(ICommandTree, FreeCommandTree)
         HRESULT ( STDMETHODCALLTYPE *FreeCommandTree )( 
             ICommandTree * This,
-            /* [in] */ DBCOMMANDTREE **ppRoot);
+            /* [annotation][in] */ 
+            _In_  DBCOMMANDTREE **ppRoot);
         
         DECLSPEC_XFGVIRT(ICommandTree, GetCommandTree)
         HRESULT ( STDMETHODCALLTYPE *GetCommandTree )( 
             ICommandTree * This,
-            /* [out] */ DBCOMMANDTREE **ppRoot);
+            /* [annotation][out] */ 
+            _Out_  DBCOMMANDTREE **ppRoot);
         
         DECLSPEC_XFGVIRT(ICommandTree, SetCommandTree)
         HRESULT ( STDMETHODCALLTYPE *SetCommandTree )( 
             ICommandTree * This,
-            /* [in] */ DBCOMMANDTREE **ppRoot,
-            /* [in] */ DBCOMMANDREUSE dwCommandReuse,
-            /* [in] */ BOOL fCopy);
+            /* [annotation][in] */ 
+            _In_  DBCOMMANDTREE **ppRoot,
+            /* [annotation][in] */ 
+            _In_  DBCOMMANDREUSE dwCommandReuse,
+            /* [annotation][in] */ 
+            _In_  BOOL fCopy);
         
         END_INTERFACE
     } ICommandTreeVtbl;
@@ -791,11 +807,14 @@ EXTERN_C const IID IID_IQuery;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddPostProcessing( 
-            /* [in] */ DBCOMMANDTREE **ppRoot,
-            /* [in] */ BOOL fCopy) = 0;
+            /* [annotation][in] */ 
+            _In_  DBCOMMANDTREE **ppRoot,
+            /* [annotation][in] */ 
+            _In_  BOOL fCopy) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCardinalityEstimate( 
-            /* [out] */ DBORDINAL *pulCardinality) = 0;
+            /* [annotation][out] */ 
+            _Out_  DBORDINAL *pulCardinality) = 0;
         
     };
     
@@ -825,37 +844,48 @@ EXTERN_C const IID IID_IQuery;
         DECLSPEC_XFGVIRT(ICommandTree, FindErrorNodes)
         HRESULT ( STDMETHODCALLTYPE *FindErrorNodes )( 
             IQuery * This,
-            /* [in] */ const DBCOMMANDTREE *pRoot,
-            /* [out] */ ULONG *pcErrorNodes,
-            /* [out] */ DBCOMMANDTREE ***prgErrorNodes);
+            /* [annotation][in] */ 
+            _In_  const DBCOMMANDTREE *pRoot,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcErrorNodes,
+            /* [annotation][out] */ 
+            _Out_  DBCOMMANDTREE ***prgErrorNodes);
         
         DECLSPEC_XFGVIRT(ICommandTree, FreeCommandTree)
         HRESULT ( STDMETHODCALLTYPE *FreeCommandTree )( 
             IQuery * This,
-            /* [in] */ DBCOMMANDTREE **ppRoot);
+            /* [annotation][in] */ 
+            _In_  DBCOMMANDTREE **ppRoot);
         
         DECLSPEC_XFGVIRT(ICommandTree, GetCommandTree)
         HRESULT ( STDMETHODCALLTYPE *GetCommandTree )( 
             IQuery * This,
-            /* [out] */ DBCOMMANDTREE **ppRoot);
+            /* [annotation][out] */ 
+            _Out_  DBCOMMANDTREE **ppRoot);
         
         DECLSPEC_XFGVIRT(ICommandTree, SetCommandTree)
         HRESULT ( STDMETHODCALLTYPE *SetCommandTree )( 
             IQuery * This,
-            /* [in] */ DBCOMMANDTREE **ppRoot,
-            /* [in] */ DBCOMMANDREUSE dwCommandReuse,
-            /* [in] */ BOOL fCopy);
+            /* [annotation][in] */ 
+            _In_  DBCOMMANDTREE **ppRoot,
+            /* [annotation][in] */ 
+            _In_  DBCOMMANDREUSE dwCommandReuse,
+            /* [annotation][in] */ 
+            _In_  BOOL fCopy);
         
         DECLSPEC_XFGVIRT(IQuery, AddPostProcessing)
         HRESULT ( STDMETHODCALLTYPE *AddPostProcessing )( 
             IQuery * This,
-            /* [in] */ DBCOMMANDTREE **ppRoot,
-            /* [in] */ BOOL fCopy);
+            /* [annotation][in] */ 
+            _In_  DBCOMMANDTREE **ppRoot,
+            /* [annotation][in] */ 
+            _In_  BOOL fCopy);
         
         DECLSPEC_XFGVIRT(IQuery, GetCardinalityEstimate)
         HRESULT ( STDMETHODCALLTYPE *GetCardinalityEstimate )( 
             IQuery * This,
-            /* [out] */ DBORDINAL *pulCardinality);
+            /* [annotation][out] */ 
+            _Out_  DBORDINAL *pulCardinality);
         
         END_INTERFACE
     } IQueryVtbl;

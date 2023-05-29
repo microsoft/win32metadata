@@ -1,6 +1,7 @@
 using System;
+using Windows.Win32.Foundation.Metadata;
 using System.Runtime.InteropServices;
-using Windows.Win32.Interop;
+using Windows.Win32.Foundation.Metadata;
 using static Windows.Win32.Foundation.Apis;
 using static Windows.Win32.System.SystemServices.Apis;
 
@@ -20,7 +21,7 @@ namespace Windows.Win32.UI.Shell
     }
 
     [Flags]
-    public enum SHGFI_FLAGS
+    public enum SHGFI_FLAGS : uint
     {
         SHGFI_ADDOVERLAYS = 0x000000020,
         SHGFI_ATTR_SPECIFIED = 0x000020000,

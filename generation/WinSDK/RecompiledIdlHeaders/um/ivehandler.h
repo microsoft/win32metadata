@@ -3,15 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.00.0603 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
-#pragma warning( disable: 4049 )  /* more than 64k source lines */
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 475
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -24,18 +23,26 @@
 
 #ifndef __RPCNDR_H_VERSION__
 #error this stub requires an updated version of <rpcndr.h>
-#endif // __RPCNDR_H_VERSION__
+#endif /* __RPCNDR_H_VERSION__ */
 
 #ifndef COM_NO_WINDOWS_H
 #include "windows.h"
 #include "ole2.h"
 #endif /*COM_NO_WINDOWS_H*/
 
-#ifndef __IVEHandler_h__
-#define __IVEHandler_h__
+#ifndef __ivehandler_h__
+#define __ivehandler_h__
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if defined(_CONTROL_FLOW_GUARD_XFG)
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -67,7 +74,7 @@ extern "C"{
 #endif 
 
 
-/* interface __MIDL_itf_IVEHandler_0000_0000 */
+/* interface __MIDL_itf_ivehandler_0000_0000 */
 /* [local] */ 
 
 typedef struct tag_VerError
@@ -87,8 +94,8 @@ typedef _VerError VEContext;
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_IVEHandler_0000_0000_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_IVEHandler_0000_0000_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_ivehandler_0000_0000_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_ivehandler_0000_0000_v0_0_s_ifspec;
 
 
 #ifndef __VEHandlerLib_LIBRARY_DEFINED__
@@ -125,12 +132,16 @@ EXTERN_C const IID IID_IVEHandler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE VEHandler( 
-            /* [in] */ HRESULT VECode,
-            /* [in] */ VEContext Context,
-            /* [in] */ __RPC__in SAFEARRAY * psa) = 0;
+            /* [annotation][in] */ 
+            _In_  HRESULT VECode,
+            /* [annotation][in] */ 
+            _In_  VEContext Context,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * psa) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetReporterFtn( 
-            /* [in] */ __int64 lFnPtr) = 0;
+            /* [annotation][in] */ 
+            _In_  __int64 lFnPtr) = 0;
         
     };
     
@@ -141,27 +152,37 @@ EXTERN_C const IID IID_IVEHandler;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVEHandler * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVEHandler * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVEHandler * This);
         
+        DECLSPEC_XFGVIRT(IVEHandler, VEHandler)
         HRESULT ( STDMETHODCALLTYPE *VEHandler )( 
             __RPC__in IVEHandler * This,
-            /* [in] */ HRESULT VECode,
-            /* [in] */ VEContext Context,
-            /* [in] */ __RPC__in SAFEARRAY * psa);
+            /* [annotation][in] */ 
+            _In_  HRESULT VECode,
+            /* [annotation][in] */ 
+            _In_  VEContext Context,
+            /* [annotation][in] */ 
+            _In_  SAFEARRAY * psa);
         
+        DECLSPEC_XFGVIRT(IVEHandler, SetReporterFtn)
         HRESULT ( STDMETHODCALLTYPE *SetReporterFtn )( 
             __RPC__in IVEHandler * This,
-            /* [in] */ __int64 lFnPtr);
+            /* [annotation][in] */ 
+            _In_  __int64 lFnPtr);
         
         END_INTERFACE
     } IVEHandlerVtbl;
@@ -209,6 +230,11 @@ unsigned long             __RPC_USER  LPSAFEARRAY_UserSize(     __RPC__in unsign
 unsigned char * __RPC_USER  LPSAFEARRAY_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in LPSAFEARRAY * ); 
 unsigned char * __RPC_USER  LPSAFEARRAY_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out LPSAFEARRAY * ); 
 void                      __RPC_USER  LPSAFEARRAY_UserFree(     __RPC__in unsigned long *, __RPC__in LPSAFEARRAY * ); 
+
+unsigned long             __RPC_USER  LPSAFEARRAY_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in LPSAFEARRAY * ); 
+unsigned char * __RPC_USER  LPSAFEARRAY_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in LPSAFEARRAY * ); 
+unsigned char * __RPC_USER  LPSAFEARRAY_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out LPSAFEARRAY * ); 
+void                      __RPC_USER  LPSAFEARRAY_UserFree64(     __RPC__in unsigned long *, __RPC__in LPSAFEARRAY * ); 
 
 /* end of Additional Prototypes */
 

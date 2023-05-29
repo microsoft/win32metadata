@@ -4,7 +4,6 @@
     <ProjectReference Include="..\sources\ConstantsScraper\ConstantsScraper.csproj"/>
     <ProjectReference Include="..\sources\ClangSharpSourceToWinmd\ClangSharpSourceToWinmd.csproj"/>
     <ProjectReference Include="..\sources\WinmdUtils\WinmdUtils.csproj"/>
-    <ProjectReference Include="..\sources\Win32MetadataInterop\Win32MetadataInterop.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
@@ -15,6 +14,6 @@
     <PackageReference Include="Microsoft.Windows.SDK.Win32Metadata" Version="$(LastWin32MetadataReleaseVersion)" GeneratePathProperty="True">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Direct3D.D3D12" Version="1.608.2" GeneratePathProperty="true"/>
+    <PackageReference Include="Microsoft.Direct3D.D3D12" Version="1.610.0" GeneratePathProperty="true"/>
   </ItemGroup>
 </Project>

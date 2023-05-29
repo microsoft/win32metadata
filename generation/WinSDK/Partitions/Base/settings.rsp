@@ -1,3 +1,5 @@
+--config
+exclude-empty-records
 --exclude
 _LIST_ENTRY
 _D3DCOLORVALUE
@@ -32,13 +34,9 @@ _D3DTEXTURETRANSFORMFLAGS
 PENCLAVE_ROUTINE
 LPENCLAVE_ROUTINE
 --traverse
-<IncludeRoot>/um/d3dnthal.h
-<IncludeRoot>/um/d3dcaps.h
-<IncludeRoot>/um/d3dtypes.h
 <IncludeRoot>/shared/wtypes.h
 <IncludeRoot>/um/minwinbase.h
 <IncludeRoot>/um/storprop.h
-<IncludeRoot>/um/atlthunk.h
 <IncludeRoot>/um/dlnadeviceinterfaceids.h
 <IncludeRoot>/um/dlnametadataproviderproperties.h
 --namespace

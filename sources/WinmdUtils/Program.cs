@@ -15,7 +15,6 @@ using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.Metadata;
 using ICSharpCode.Decompiler.TypeSystem;
 using MetadataUtils;
-using Windows.Win32.Interop;
 
 namespace WinmdUtilsProgram
 {
@@ -315,7 +314,7 @@ namespace WinmdUtilsProgram
                 foreach (var importInfo in LibScraper.GetImportInfos(libFile))
                 {
                     List<string> dlls;
-                    string fixedDll = Path.GetFileNameWithoutExtension(importInfo.Dll);
+                    string dll = importInfo.Dll;
 
                     // Skip mangled names
                     if (importInfo.ProcName.StartsWith('?'))
@@ -333,19 +332,19 @@ namespace WinmdUtilsProgram
                     {
                         dlls = new List<string>();
                         procNameToDll[importInfo.ProcName] = dlls;
-                        dlls.Add(fixedDll);
+                        dlls.Add(dll);
                     }
                     else
                     {
                         dlls = (List<string>)procNameToDll[importInfo.ProcName];
 
                         // Don't overwrite an existing value with an API set
-                        if (fixedDll.StartsWith("api-ms") || fixedDll.StartsWith("ext-ms"))
+                        if (dll.StartsWith("api-ms") || dll.StartsWith("ext-ms"))
                         {
                             continue;
                         }
 
-                        if (dlls.Contains(fixedDll))
+                        if (dlls.Contains(dll))
                         {
                             continue;
                         }
@@ -355,11 +354,11 @@ namespace WinmdUtilsProgram
                         string oldValue = dlls[0];
                         if (!oldValue.StartsWith("api-ms") && !oldValue.StartsWith("ext-ms"))
                         {
-                            dlls.Add(fixedDll);
+                            dlls.Add(dll);
                         }
                         else
                         {
-                            dlls[0] = fixedDll;
+                            dlls[0] = dll;
                         }
                     }
                 }
@@ -724,7 +723,7 @@ namespace WinmdUtilsProgram
 
         private static string GetArchInfo(IEnumerable<IAttribute> attributes)
         {
-            var archAttr = attributes.FirstOrDefault(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute");
+            var archAttr = attributes.FirstOrDefault(a => a.AttributeType.Name == "SupportedArchitectureAttribute");
             if (archAttr != null)
             {
                 Architecture arch = (Architecture)archAttr.FixedArguments[0].Value;
@@ -769,7 +768,7 @@ namespace WinmdUtilsProgram
                 foreach (var archType in foundArchTypes)
                 {
                     var typeArchAttr =
-                        archType.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute");
+                        archType.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute");
 
                     var typeArch = (Architecture)typeArchAttr.FixedArguments[0].Value;
                     typeArches |= typeArch;
@@ -821,7 +820,7 @@ namespace WinmdUtilsProgram
 
             foreach (var type in winmd1.GetTopLevelTypeDefinitions()
                 .Where(t => t.GetAttributes()
-                    .Any(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute")))
+                    .Any(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute")))
             {
                 if (!namesToArchDefs.TryGetValue(type.FullName, out var list))
                 {
@@ -834,7 +833,7 @@ namespace WinmdUtilsProgram
 
             foreach (var type in namesToArchDefs.SelectMany(map => map.Value))
             {
-                var archAttr = type.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute");
+                var archAttr = type.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute");
                 Architecture arch = (Architecture)archAttr.FixedArguments[0].Value;
 
                 if (!VerifyTypeHasRightArch(namesToArchDefs, type, type, arch, console))
@@ -847,9 +846,9 @@ namespace WinmdUtilsProgram
             {
                 foreach (var method in apisClass.Methods.Where(
                     m => m.IsStatic && m.DeclaringType == apisClass && m.GetAttributes()
-                        .Any(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute")))
+                        .Any(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute")))
                 {
-                    var archAttr = method.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute");
+                    var archAttr = method.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute");
                     Architecture arch = (Architecture)archAttr.FixedArguments[0].Value;
 
                     foreach (var param in method.Parameters)
@@ -1110,7 +1109,7 @@ namespace WinmdUtilsProgram
         {
             int before = writer.DifferencesCount;
 
-            CompareAttributes(field1.Name, field1.GetAttributes(), field2.GetAttributes(), writer);
+            CompareAttributes(field1.FullName, field1.GetAttributes(), field2.GetAttributes(), writer);
 
             string fullField1Name = GetFullMemberName(field1);
 

@@ -23,7 +23,6 @@ namespace ClangSharpSourceToWinmd
             {
                 new Option<string>("--sourceDir", "The location of the source files.") { IsRequired = true },
                 new Option<string>("--arch", () => "x64", "The CPU architecture."),
-                new Option<string>("--interopFileName", "The path to Windows.Win32.Interop.dll") { IsRequired = true },
                 new Option<string>("--outputFileName", "The path to the .winmd to create") { IsRequired = true },
                 new Option<string>("--version", description: "The version to use on the .winmd", getDefaultValue: () => "1.0.0.0"),
                 new Option<string>("--memberRemap", "Remaps fields and parameters by adding attributes or changing the type.", ArgumentArity.OneOrMore),
@@ -48,7 +47,6 @@ namespace ClangSharpSourceToWinmd
         {
             string sourceDirectory = context.ParseResult.ValueForOption<string>("--sourceDir");
             string arch = context.ParseResult.ValueForOption<string>("--arch");
-            string interopFileName = context.ParseResult.ValueForOption<string>("--interopFileName");
             string outputFileName = context.ParseResult.ValueForOption<string>("--outputFileName");
             string version = context.ParseResult.ValueForOption<string>("--version");
             var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("--memberRemap");
@@ -76,16 +74,16 @@ namespace ClangSharpSourceToWinmd
             string archForAutoTypes = arch == "crossarch" ? "common" : arch;
             string archSourceDir = Path.Combine(sourceDirectory, archForAutoTypes);
 
-            Dictionary<string, string> methodNamesToNamespaces = MetadataUtils.ScraperUtils.GetNameToNamespaceMap(sourceDirectory, MetadataUtils.ScraperUtils.NameOptions.Methods);
+            Dictionary<string, string> apiNamesToNamespaces = MetadataUtils.ScraperUtils.GetNameToNamespaceMap(sourceDirectory, MetadataUtils.ScraperUtils.NameOptions.Methods | MetadataUtils.ScraperUtils.NameOptions.Structs | MetadataUtils.ScraperUtils.NameOptions.Delegates);
 
             if (requiredNamespaceValuePairs != null)
             {
                 // Merge the requiredNamespaceForName entries into what we found the scraped source files
                 foreach (KeyValuePair<string, string> requiredItem in requiredNamespaces)
                 {
-                    if (methodNamesToNamespaces.ContainsKey(requiredItem.Key))
+                    if (apiNamesToNamespaces.ContainsKey(requiredItem.Key))
                     {
-                        methodNamesToNamespaces[requiredItem.Key] = requiredItem.Value;
+                        apiNamesToNamespaces[requiredItem.Key] = requiredItem.Value;
                     }
                 }
             }
@@ -102,7 +100,7 @@ namespace ClangSharpSourceToWinmd
                     }
 
                     using var fileStream = new FileStream(outputFilePath, FileMode.Create, FileAccess.Write, FileShare.Read);
-                    NativeTypedefStructsCreator.WriteToStream(methodNamesToNamespaces, autoTypes, fileStream);
+                    NativeTypedefStructsCreator.WriteToStream(apiNamesToNamespaces, autoTypes, fileStream);
                 }
             }
             catch (Exception e)
@@ -118,7 +116,7 @@ namespace ClangSharpSourceToWinmd
 
             ClangSharpSourceCompilation clangSharpCompliation =
                 ClangSharpSourceCompilation.Create(
-                    sourceDirectory, arch, interopFileName, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels, refs, staticLibs);
+                    sourceDirectory, arch, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels, refs, staticLibs, apiNamesToNamespaces);
 
             System.Diagnostics.Stopwatch errorsWatch = System.Diagnostics.Stopwatch.StartNew();
             Console.WriteLine("  Looking for compilation errors...");
@@ -154,7 +152,7 @@ namespace ClangSharpSourceToWinmd
 
             mainWatch.Restart();
 
-            Console.WriteLine($"\r\nEmitting {outputFileName}...");
+            Console.WriteLine($"Emitting {outputFileName}...");
             var generator = 
                 ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
                     clangSharpCompliation, 
@@ -231,7 +229,15 @@ namespace ClangSharpSourceToWinmd
                     {
                         string name = item.Substring(0, firstEqual);
                         string value = item.Substring(firstEqual + 1);
-                        ret[name] = value;
+
+                        if (ret.ContainsKey(name))
+                        {
+                            ret[name] += value;
+                        }
+                        else
+                        {
+                            ret[name] = value;
+                        }
                     }
                 }
             }

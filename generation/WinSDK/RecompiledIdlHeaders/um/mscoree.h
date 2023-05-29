@@ -3,15 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.00.0603 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
-#pragma warning( disable: 4049 )  /* more than 64k source lines */
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 475
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -24,7 +23,7 @@
 
 #ifndef __RPCNDR_H_VERSION__
 #error this stub requires an updated version of <rpcndr.h>
-#endif // __RPCNDR_H_VERSION__
+#endif /* __RPCNDR_H_VERSION__ */
 
 #ifndef COM_NO_WINDOWS_H
 #include "windows.h"
@@ -36,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if defined(_CONTROL_FLOW_GUARD_XFG)
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -397,13 +404,6 @@ typedef interface IApartmentCallback IApartmentCallback;
 #endif 	/* __IApartmentCallback_FWD_DEFINED__ */
 
 
-#ifndef __IManagedObject_FWD_DEFINED__
-#define __IManagedObject_FWD_DEFINED__
-typedef interface IManagedObject IManagedObject;
-
-#endif 	/* __IManagedObject_FWD_DEFINED__ */
-
-
 #ifndef __ICatalogServices_FWD_DEFINED__
 #define __ICatalogServices_FWD_DEFINED__
 typedef interface ICatalogServices ICatalogServices;
@@ -484,13 +484,11 @@ typedef interface IHostSecurityManager IHostSecurityManager;
 
 #endif 	/* __IHostSecurityManager_FWD_DEFINED__ */
 
-
 #ifndef __ICLRAppDomainResourceMonitor_FWD_DEFINED__
 #define __ICLRAppDomainResourceMonitor_FWD_DEFINED__
 typedef interface ICLRAppDomainResourceMonitor ICLRAppDomainResourceMonitor;
 
 #endif 	/* __ICLRAppDomainResourceMonitor_FWD_DEFINED__ */
-
 
 /* header files for imported files */
 #include "unknwn.h"
@@ -518,7 +516,7 @@ extern "C"{
 
 #define	CLR_MINOR_VERSION	( 0 )
 
-#define	CLR_BUILD_VERSION	( 30319 )
+#define	CLR_BUILD_VERSION	( 22220 )
 
 #define	CLR_ASSEMBLY_MAJOR_VERSION	( 4 )
 
@@ -533,7 +531,6 @@ EXTERN_GUID(CLSID_CLRRuntimeHost, 0x90F1A06E, 0x7712, 0x4762, 0x86, 0xB5, 0x7A, 
 EXTERN_GUID(CLSID_ComCallUnmarshal, 0x3F281000,0xE95A,0x11d2,0x88,0x6B,0x00,0xC0,0x4F,0x86,0x9F,0x04);
 EXTERN_GUID(CLSID_ComCallUnmarshalV4, 0x45fb4600,0xe6e8,0x4928,0xb2,0x5e,0x50,0x47,0x6f,0xf7,0x94,0x25);
 EXTERN_GUID(IID_IObjectHandle, 0xc460e2b4, 0xe199, 0x412a, 0x84, 0x56, 0x84, 0xdc, 0x3e, 0x48, 0x38, 0xc3);
-EXTERN_GUID(IID_IManagedObject, 0xc3fcc19e, 0xa970, 0x11d2, 0x8b, 0x5a, 0x00, 0xa0, 0xc9, 0xb7, 0xc9, 0xc4);
 EXTERN_GUID(IID_IApartmentCallback, 0x178e5337, 0x1528, 0x4591, 0xb1, 0xc9, 0x1c, 0x6e, 0x48, 0x46, 0x86, 0xd8);
 EXTERN_GUID(IID_ICatalogServices, 0x04c6be1e, 0x1db1, 0x4058, 0xab, 0x7a, 0x70, 0x0c, 0xcc, 0xfb, 0xf2, 0x54);
 EXTERN_GUID(IID_ICorRuntimeHost, 0xcb2f6722, 0xab3a, 0x11d2, 0x9c, 0x40, 0x00, 0xc0, 0x4f, 0xa3, 0x0a, 0x3e);
@@ -654,7 +651,8 @@ enum __MIDL___MIDL_itf_mscoree_0000_0000_0004
         RUNTIME_INFO_DONT_RETURN_DIRECTORY	= 0x10,
         RUNTIME_INFO_DONT_RETURN_VERSION	= 0x20,
         RUNTIME_INFO_DONT_SHOW_ERROR_DIALOG	= 0x40,
-        RUNTIME_INFO_IGNORE_ERROR_MODE	= 0x1000
+        RUNTIME_INFO_IGNORE_ERROR_MODE	= 0x1000,
+        RUNTIME_INFO_REQUEST_ARM64	= 0x2000
     } 	RUNTIME_INFO_FLAGS;
 
 typedef /* [public] */ 
@@ -688,7 +686,8 @@ EXTERN_C const IID IID_IObjectHandle;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Unwrap( 
-            /* [retval][out] */ __RPC__out VARIANT *ppv) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *ppv) = 0;
         
     };
     
@@ -699,21 +698,27 @@ EXTERN_C const IID IID_IObjectHandle;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IObjectHandle * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IObjectHandle * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IObjectHandle * This);
         
+        DECLSPEC_XFGVIRT(IObjectHandle, Unwrap)
         HRESULT ( STDMETHODCALLTYPE *Unwrap )( 
             __RPC__in IObjectHandle * This,
-            /* [retval][out] */ __RPC__out VARIANT *ppv);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  VARIANT *ppv);
         
         END_INTERFACE
     } IObjectHandleVtbl;
@@ -768,7 +773,8 @@ EXTERN_C const IID IID_IAppDomainBinding;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnAppDomain( 
-            /* [in] */ IUnknown *pAppdomain) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *pAppdomain) = 0;
         
     };
     
@@ -779,21 +785,27 @@ EXTERN_C const IID IID_IAppDomainBinding;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAppDomainBinding * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAppDomainBinding * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAppDomainBinding * This);
         
+        DECLSPEC_XFGVIRT(IAppDomainBinding, OnAppDomain)
         HRESULT ( STDMETHODCALLTYPE *OnAppDomain )( 
             IAppDomainBinding * This,
-            /* [in] */ IUnknown *pAppdomain);
+            /* [annotation][in] */ 
+            _In_  IUnknown *pAppdomain);
         
         END_INTERFACE
     } IAppDomainBindingVtbl;
@@ -863,24 +875,31 @@ EXTERN_C const IID IID_IGCThreadControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IGCThreadControl * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IGCThreadControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IGCThreadControl * This);
         
+        DECLSPEC_XFGVIRT(IGCThreadControl, ThreadIsBlockingForSuspension)
         HRESULT ( STDMETHODCALLTYPE *ThreadIsBlockingForSuspension )( 
             IGCThreadControl * This);
         
+        DECLSPEC_XFGVIRT(IGCThreadControl, SuspensionStarting)
         HRESULT ( STDMETHODCALLTYPE *SuspensionStarting )( 
             IGCThreadControl * This);
         
+        DECLSPEC_XFGVIRT(IGCThreadControl, SuspensionEnding)
         HRESULT ( STDMETHODCALLTYPE *SuspensionEnding )( 
             IGCThreadControl * This,
             DWORD Generation);
@@ -944,8 +963,10 @@ EXTERN_C const IID IID_IGCHostControl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RequestVirtualMemLimit( 
-            /* [in] */ SIZE_T sztMaxVirtualMemMB,
-            /* [out][in] */ SIZE_T *psztNewMaxVirtualMemMB) = 0;
+            /* [annotation][in] */ 
+            _In_  SIZE_T sztMaxVirtualMemMB,
+            /* [annotation][out][in] */ 
+            _Inout_  SIZE_T *psztNewMaxVirtualMemMB) = 0;
         
     };
     
@@ -956,22 +977,29 @@ EXTERN_C const IID IID_IGCHostControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IGCHostControl * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IGCHostControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IGCHostControl * This);
         
+        DECLSPEC_XFGVIRT(IGCHostControl, RequestVirtualMemLimit)
         HRESULT ( STDMETHODCALLTYPE *RequestVirtualMemLimit )( 
             IGCHostControl * This,
-            /* [in] */ SIZE_T sztMaxVirtualMemMB,
-            /* [out][in] */ SIZE_T *psztNewMaxVirtualMemMB);
+            /* [annotation][in] */ 
+            _In_  SIZE_T sztMaxVirtualMemMB,
+            /* [annotation][out][in] */ 
+            _Inout_  SIZE_T *psztNewMaxVirtualMemMB);
         
         END_INTERFACE
     } IGCHostControlVtbl;
@@ -1053,64 +1081,102 @@ EXTERN_C const IID IID_ICorThreadpool;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CorRegisterWaitForSingleObject( 
-            /* [in] */ HANDLE *phNewWaitObject,
-            /* [in] */ HANDLE hWaitObject,
-            /* [in] */ WAITORTIMERCALLBACK Callback,
-            /* [in] */ PVOID Context,
-            /* [in] */ ULONG timeout,
-            /* [in] */ BOOL executeOnlyOnce,
-            /* [out] */ BOOL *result) = 0;
+            /* [annotation][in] */ 
+            _In_  HANDLE *phNewWaitObject,
+            /* [annotation][in] */ 
+            _In_  HANDLE hWaitObject,
+            /* [annotation][in] */ 
+            _In_  WAITORTIMERCALLBACK Callback,
+            /* [annotation][in] */ 
+            _In_  PVOID Context,
+            /* [annotation][in] */ 
+            _In_  ULONG timeout,
+            /* [annotation][in] */ 
+            _In_  BOOL executeOnlyOnce,
+            /* [annotation][out] */ 
+            _Out_  BOOL *result) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CorUnregisterWait( 
-            /* [in] */ HANDLE hWaitObject,
-            /* [in] */ HANDLE CompletionEvent,
-            /* [out] */ BOOL *result) = 0;
+            /* [annotation][in] */ 
+            _In_  HANDLE hWaitObject,
+            /* [annotation][in] */ 
+            _In_  HANDLE CompletionEvent,
+            /* [annotation][out] */ 
+            _Out_  BOOL *result) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CorQueueUserWorkItem( 
-            /* [in] */ LPTHREAD_START_ROUTINE Function,
-            /* [in] */ PVOID Context,
-            /* [in] */ BOOL executeOnlyOnce,
-            /* [out] */ BOOL *result) = 0;
+            /* [annotation][in] */ 
+            _In_  LPTHREAD_START_ROUTINE Function,
+            /* [annotation][in] */ 
+            _In_  PVOID Context,
+            /* [annotation][in] */ 
+            _In_  BOOL executeOnlyOnce,
+            /* [annotation][out] */ 
+            _Out_  BOOL *result) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CorCreateTimer( 
-            /* [in] */ HANDLE *phNewTimer,
-            /* [in] */ WAITORTIMERCALLBACK Callback,
-            /* [in] */ PVOID Parameter,
-            /* [in] */ DWORD DueTime,
-            /* [in] */ DWORD Period,
-            /* [out] */ BOOL *result) = 0;
+            /* [annotation][in] */ 
+            _In_  HANDLE *phNewTimer,
+            /* [annotation][in] */ 
+            _In_  WAITORTIMERCALLBACK Callback,
+            /* [annotation][in] */ 
+            _In_  PVOID Parameter,
+            /* [annotation][in] */ 
+            _In_  DWORD DueTime,
+            /* [annotation][in] */ 
+            _In_  DWORD Period,
+            /* [annotation][out] */ 
+            _Out_  BOOL *result) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CorChangeTimer( 
-            /* [in] */ HANDLE Timer,
-            /* [in] */ ULONG DueTime,
-            /* [in] */ ULONG Period,
-            /* [out] */ BOOL *result) = 0;
+            /* [annotation][in] */ 
+            _In_  HANDLE Timer,
+            /* [annotation][in] */ 
+            _In_  ULONG DueTime,
+            /* [annotation][in] */ 
+            _In_  ULONG Period,
+            /* [annotation][out] */ 
+            _Out_  BOOL *result) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CorDeleteTimer( 
-            /* [in] */ HANDLE Timer,
-            /* [in] */ HANDLE CompletionEvent,
-            /* [out] */ BOOL *result) = 0;
+            /* [annotation][in] */ 
+            _In_  HANDLE Timer,
+            /* [annotation][in] */ 
+            _In_  HANDLE CompletionEvent,
+            /* [annotation][out] */ 
+            _Out_  BOOL *result) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CorBindIoCompletionCallback( 
-            /* [in] */ HANDLE fileHandle,
-            /* [in] */ LPOVERLAPPED_COMPLETION_ROUTINE callback) = 0;
+            /* [annotation][in] */ 
+            _In_  HANDLE fileHandle,
+            /* [annotation][in] */ 
+            _In_  LPOVERLAPPED_COMPLETION_ROUTINE callback) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CorCallOrQueueUserWorkItem( 
-            /* [in] */ LPTHREAD_START_ROUTINE Function,
-            /* [in] */ PVOID Context,
-            /* [out] */ BOOL *result) = 0;
+            /* [annotation][in] */ 
+            _In_  LPTHREAD_START_ROUTINE Function,
+            /* [annotation][in] */ 
+            _In_  PVOID Context,
+            /* [annotation][out] */ 
+            _Out_  BOOL *result) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CorSetMaxThreads( 
-            /* [in] */ DWORD MaxWorkerThreads,
-            /* [in] */ DWORD MaxIOCompletionThreads) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD MaxWorkerThreads,
+            /* [annotation][in] */ 
+            _In_  DWORD MaxIOCompletionThreads) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CorGetMaxThreads( 
-            /* [out] */ DWORD *MaxWorkerThreads,
-            /* [out] */ DWORD *MaxIOCompletionThreads) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *MaxWorkerThreads,
+            /* [annotation][out] */ 
+            _Out_  DWORD *MaxIOCompletionThreads) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CorGetAvailableThreads( 
-            /* [out] */ DWORD *AvailableWorkerThreads,
-            /* [out] */ DWORD *AvailableIOCompletionThreads) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *AvailableWorkerThreads,
+            /* [annotation][out] */ 
+            _Out_  DWORD *AvailableIOCompletionThreads) = 0;
         
     };
     
@@ -1121,88 +1187,141 @@ EXTERN_C const IID IID_ICorThreadpool;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICorThreadpool * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICorThreadpool * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICorThreadpool * This);
         
+        DECLSPEC_XFGVIRT(ICorThreadpool, CorRegisterWaitForSingleObject)
         HRESULT ( STDMETHODCALLTYPE *CorRegisterWaitForSingleObject )( 
             ICorThreadpool * This,
-            /* [in] */ HANDLE *phNewWaitObject,
-            /* [in] */ HANDLE hWaitObject,
-            /* [in] */ WAITORTIMERCALLBACK Callback,
-            /* [in] */ PVOID Context,
-            /* [in] */ ULONG timeout,
-            /* [in] */ BOOL executeOnlyOnce,
-            /* [out] */ BOOL *result);
+            /* [annotation][in] */ 
+            _In_  HANDLE *phNewWaitObject,
+            /* [annotation][in] */ 
+            _In_  HANDLE hWaitObject,
+            /* [annotation][in] */ 
+            _In_  WAITORTIMERCALLBACK Callback,
+            /* [annotation][in] */ 
+            _In_  PVOID Context,
+            /* [annotation][in] */ 
+            _In_  ULONG timeout,
+            /* [annotation][in] */ 
+            _In_  BOOL executeOnlyOnce,
+            /* [annotation][out] */ 
+            _Out_  BOOL *result);
         
+        DECLSPEC_XFGVIRT(ICorThreadpool, CorUnregisterWait)
         HRESULT ( STDMETHODCALLTYPE *CorUnregisterWait )( 
             ICorThreadpool * This,
-            /* [in] */ HANDLE hWaitObject,
-            /* [in] */ HANDLE CompletionEvent,
-            /* [out] */ BOOL *result);
+            /* [annotation][in] */ 
+            _In_  HANDLE hWaitObject,
+            /* [annotation][in] */ 
+            _In_  HANDLE CompletionEvent,
+            /* [annotation][out] */ 
+            _Out_  BOOL *result);
         
+        DECLSPEC_XFGVIRT(ICorThreadpool, CorQueueUserWorkItem)
         HRESULT ( STDMETHODCALLTYPE *CorQueueUserWorkItem )( 
             ICorThreadpool * This,
-            /* [in] */ LPTHREAD_START_ROUTINE Function,
-            /* [in] */ PVOID Context,
-            /* [in] */ BOOL executeOnlyOnce,
-            /* [out] */ BOOL *result);
+            /* [annotation][in] */ 
+            _In_  LPTHREAD_START_ROUTINE Function,
+            /* [annotation][in] */ 
+            _In_  PVOID Context,
+            /* [annotation][in] */ 
+            _In_  BOOL executeOnlyOnce,
+            /* [annotation][out] */ 
+            _Out_  BOOL *result);
         
+        DECLSPEC_XFGVIRT(ICorThreadpool, CorCreateTimer)
         HRESULT ( STDMETHODCALLTYPE *CorCreateTimer )( 
             ICorThreadpool * This,
-            /* [in] */ HANDLE *phNewTimer,
-            /* [in] */ WAITORTIMERCALLBACK Callback,
-            /* [in] */ PVOID Parameter,
-            /* [in] */ DWORD DueTime,
-            /* [in] */ DWORD Period,
-            /* [out] */ BOOL *result);
+            /* [annotation][in] */ 
+            _In_  HANDLE *phNewTimer,
+            /* [annotation][in] */ 
+            _In_  WAITORTIMERCALLBACK Callback,
+            /* [annotation][in] */ 
+            _In_  PVOID Parameter,
+            /* [annotation][in] */ 
+            _In_  DWORD DueTime,
+            /* [annotation][in] */ 
+            _In_  DWORD Period,
+            /* [annotation][out] */ 
+            _Out_  BOOL *result);
         
+        DECLSPEC_XFGVIRT(ICorThreadpool, CorChangeTimer)
         HRESULT ( STDMETHODCALLTYPE *CorChangeTimer )( 
             ICorThreadpool * This,
-            /* [in] */ HANDLE Timer,
-            /* [in] */ ULONG DueTime,
-            /* [in] */ ULONG Period,
-            /* [out] */ BOOL *result);
+            /* [annotation][in] */ 
+            _In_  HANDLE Timer,
+            /* [annotation][in] */ 
+            _In_  ULONG DueTime,
+            /* [annotation][in] */ 
+            _In_  ULONG Period,
+            /* [annotation][out] */ 
+            _Out_  BOOL *result);
         
+        DECLSPEC_XFGVIRT(ICorThreadpool, CorDeleteTimer)
         HRESULT ( STDMETHODCALLTYPE *CorDeleteTimer )( 
             ICorThreadpool * This,
-            /* [in] */ HANDLE Timer,
-            /* [in] */ HANDLE CompletionEvent,
-            /* [out] */ BOOL *result);
+            /* [annotation][in] */ 
+            _In_  HANDLE Timer,
+            /* [annotation][in] */ 
+            _In_  HANDLE CompletionEvent,
+            /* [annotation][out] */ 
+            _Out_  BOOL *result);
         
+        DECLSPEC_XFGVIRT(ICorThreadpool, CorBindIoCompletionCallback)
         HRESULT ( STDMETHODCALLTYPE *CorBindIoCompletionCallback )( 
             ICorThreadpool * This,
-            /* [in] */ HANDLE fileHandle,
-            /* [in] */ LPOVERLAPPED_COMPLETION_ROUTINE callback);
+            /* [annotation][in] */ 
+            _In_  HANDLE fileHandle,
+            /* [annotation][in] */ 
+            _In_  LPOVERLAPPED_COMPLETION_ROUTINE callback);
         
+        DECLSPEC_XFGVIRT(ICorThreadpool, CorCallOrQueueUserWorkItem)
         HRESULT ( STDMETHODCALLTYPE *CorCallOrQueueUserWorkItem )( 
             ICorThreadpool * This,
-            /* [in] */ LPTHREAD_START_ROUTINE Function,
-            /* [in] */ PVOID Context,
-            /* [out] */ BOOL *result);
+            /* [annotation][in] */ 
+            _In_  LPTHREAD_START_ROUTINE Function,
+            /* [annotation][in] */ 
+            _In_  PVOID Context,
+            /* [annotation][out] */ 
+            _Out_  BOOL *result);
         
+        DECLSPEC_XFGVIRT(ICorThreadpool, CorSetMaxThreads)
         HRESULT ( STDMETHODCALLTYPE *CorSetMaxThreads )( 
             ICorThreadpool * This,
-            /* [in] */ DWORD MaxWorkerThreads,
-            /* [in] */ DWORD MaxIOCompletionThreads);
+            /* [annotation][in] */ 
+            _In_  DWORD MaxWorkerThreads,
+            /* [annotation][in] */ 
+            _In_  DWORD MaxIOCompletionThreads);
         
+        DECLSPEC_XFGVIRT(ICorThreadpool, CorGetMaxThreads)
         HRESULT ( STDMETHODCALLTYPE *CorGetMaxThreads )( 
             ICorThreadpool * This,
-            /* [out] */ DWORD *MaxWorkerThreads,
-            /* [out] */ DWORD *MaxIOCompletionThreads);
+            /* [annotation][out] */ 
+            _Out_  DWORD *MaxWorkerThreads,
+            /* [annotation][out] */ 
+            _Out_  DWORD *MaxIOCompletionThreads);
         
+        DECLSPEC_XFGVIRT(ICorThreadpool, CorGetAvailableThreads)
         HRESULT ( STDMETHODCALLTYPE *CorGetAvailableThreads )( 
             ICorThreadpool * This,
-            /* [out] */ DWORD *AvailableWorkerThreads,
-            /* [out] */ DWORD *AvailableIOCompletionThreads);
+            /* [annotation][out] */ 
+            _Out_  DWORD *AvailableWorkerThreads,
+            /* [annotation][out] */ 
+            _Out_  DWORD *AvailableIOCompletionThreads);
         
         END_INTERFACE
     } ICorThreadpoolVtbl;
@@ -1311,24 +1430,31 @@ EXTERN_C const IID IID_IDebuggerThreadControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDebuggerThreadControl * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDebuggerThreadControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDebuggerThreadControl * This);
         
+        DECLSPEC_XFGVIRT(IDebuggerThreadControl, ThreadIsBlockingForDebugger)
         HRESULT ( STDMETHODCALLTYPE *ThreadIsBlockingForDebugger )( 
             IDebuggerThreadControl * This);
         
+        DECLSPEC_XFGVIRT(IDebuggerThreadControl, ReleaseAllRuntimeThreads)
         HRESULT ( STDMETHODCALLTYPE *ReleaseAllRuntimeThreads )( 
             IDebuggerThreadControl * This);
         
+        DECLSPEC_XFGVIRT(IDebuggerThreadControl, StartBlockingForDebugger)
         HRESULT ( STDMETHODCALLTYPE *StartBlockingForDebugger )( 
             IDebuggerThreadControl * This,
             DWORD dwUnused);
@@ -1401,7 +1527,8 @@ EXTERN_C const IID IID_IDebuggerInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE IsDebuggerAttached( 
-            /* [out] */ BOOL *pbAttached) = 0;
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbAttached) = 0;
         
     };
     
@@ -1412,21 +1539,27 @@ EXTERN_C const IID IID_IDebuggerInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDebuggerInfo * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDebuggerInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDebuggerInfo * This);
         
+        DECLSPEC_XFGVIRT(IDebuggerInfo, IsDebuggerAttached)
         HRESULT ( STDMETHODCALLTYPE *IsDebuggerAttached )( 
             IDebuggerInfo * This,
-            /* [out] */ BOOL *pbAttached);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbAttached);
         
         END_INTERFACE
     } IDebuggerInfoVtbl;
@@ -1490,16 +1623,20 @@ EXTERN_C const IID IID_ICorConfiguration;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetGCThreadControl( 
-            /* [in] */ IGCThreadControl *pGCThreadControl) = 0;
+            /* [annotation][in] */ 
+            _In_  IGCThreadControl *pGCThreadControl) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetGCHostControl( 
-            /* [in] */ IGCHostControl *pGCHostControl) = 0;
+            /* [annotation][in] */ 
+            _In_  IGCHostControl *pGCHostControl) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDebuggerThreadControl( 
-            /* [in] */ IDebuggerThreadControl *pDebuggerThreadControl) = 0;
+            /* [annotation][in] */ 
+            _In_  IDebuggerThreadControl *pDebuggerThreadControl) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddDebuggerSpecialThread( 
-            /* [in] */ DWORD dwSpecialThreadId) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwSpecialThreadId) = 0;
         
     };
     
@@ -1510,33 +1647,45 @@ EXTERN_C const IID IID_ICorConfiguration;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICorConfiguration * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICorConfiguration * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICorConfiguration * This);
         
+        DECLSPEC_XFGVIRT(ICorConfiguration, SetGCThreadControl)
         HRESULT ( STDMETHODCALLTYPE *SetGCThreadControl )( 
             ICorConfiguration * This,
-            /* [in] */ IGCThreadControl *pGCThreadControl);
+            /* [annotation][in] */ 
+            _In_  IGCThreadControl *pGCThreadControl);
         
+        DECLSPEC_XFGVIRT(ICorConfiguration, SetGCHostControl)
         HRESULT ( STDMETHODCALLTYPE *SetGCHostControl )( 
             ICorConfiguration * This,
-            /* [in] */ IGCHostControl *pGCHostControl);
+            /* [annotation][in] */ 
+            _In_  IGCHostControl *pGCHostControl);
         
+        DECLSPEC_XFGVIRT(ICorConfiguration, SetDebuggerThreadControl)
         HRESULT ( STDMETHODCALLTYPE *SetDebuggerThreadControl )( 
             ICorConfiguration * This,
-            /* [in] */ IDebuggerThreadControl *pDebuggerThreadControl);
+            /* [annotation][in] */ 
+            _In_  IDebuggerThreadControl *pDebuggerThreadControl);
         
+        DECLSPEC_XFGVIRT(ICorConfiguration, AddDebuggerSpecialThread)
         HRESULT ( STDMETHODCALLTYPE *AddDebuggerSpecialThread )( 
             ICorConfiguration * This,
-            /* [in] */ DWORD dwSpecialThreadId);
+            /* [annotation][in] */ 
+            _In_  DWORD dwSpecialThreadId);
         
         END_INTERFACE
     } ICorConfigurationVtbl;
@@ -1614,60 +1763,82 @@ EXTERN_C const IID IID_ICorRuntimeHost;
         virtual HRESULT STDMETHODCALLTYPE DeleteLogicalThreadState( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SwitchInLogicalThreadState( 
-            /* [in] */ DWORD *pFiberCookie) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD *pFiberCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SwitchOutLogicalThreadState( 
-            /* [out] */ DWORD **pFiberCookie) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD **pFiberCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LocksHeldByLogicalThread( 
-            /* [out] */ DWORD *pCount) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE MapFile( 
-            /* [in] */ HANDLE hFile,
-            /* [out] */ HMODULE *hMapAddress) = 0;
+            /* [annotation][in] */ 
+            _In_  HANDLE hFile,
+            /* [annotation][out] */ 
+            _Out_  HMODULE *hMapAddress) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetConfiguration( 
-            /* [out] */ ICorConfiguration **pConfiguration) = 0;
+            /* [annotation][out] */ 
+            _Out_  ICorConfiguration **pConfiguration) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Start( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Stop( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateDomain( 
-            /* [in] */ LPCWSTR pwzFriendlyName,
-            /* [in] */ IUnknown *pIdentityArray,
-            /* [out] */ IUnknown **pAppDomain) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFriendlyName,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pIdentityArray,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **pAppDomain) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDefaultDomain( 
-            /* [out] */ IUnknown **pAppDomain) = 0;
+            /* [annotation][out] */ 
+            _Out_  IUnknown **pAppDomain) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumDomains( 
-            /* [out] */ HDOMAINENUM *hEnum) = 0;
+            /* [annotation][out] */ 
+            _Out_  HDOMAINENUM *hEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NextDomain( 
-            /* [in] */ HDOMAINENUM hEnum,
-            /* [out] */ IUnknown **pAppDomain) = 0;
+            /* [annotation][in] */ 
+            _In_  HDOMAINENUM hEnum,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **pAppDomain) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CloseEnum( 
-            /* [in] */ HDOMAINENUM hEnum) = 0;
+            /* [annotation][in] */ 
+            _In_  HDOMAINENUM hEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateDomainEx( 
-            /* [in] */ LPCWSTR pwzFriendlyName,
-            /* [in] */ IUnknown *pSetup,
-            /* [in] */ IUnknown *pEvidence,
-            /* [out] */ IUnknown **pAppDomain) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFriendlyName,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pSetup,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pEvidence,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **pAppDomain) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateDomainSetup( 
-            /* [out] */ IUnknown **pAppDomainSetup) = 0;
+            /* [annotation][out] */ 
+            _Out_  IUnknown **pAppDomainSetup) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateEvidence( 
-            /* [out] */ IUnknown **pEvidence) = 0;
+            /* [annotation][out] */ 
+            _Out_  IUnknown **pEvidence) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnloadDomain( 
-            /* [in] */ IUnknown *pAppDomain) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *pAppDomain) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CurrentDomain( 
-            /* [out] */ IUnknown **pAppDomain) = 0;
+            /* [annotation][out] */ 
+            _Out_  IUnknown **pAppDomain) = 0;
         
     };
     
@@ -1678,96 +1849,141 @@ EXTERN_C const IID IID_ICorRuntimeHost;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICorRuntimeHost * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICorRuntimeHost * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICorRuntimeHost * This);
         
+        DECLSPEC_XFGVIRT(ICorRuntimeHost, CreateLogicalThreadState)
         HRESULT ( STDMETHODCALLTYPE *CreateLogicalThreadState )( 
             ICorRuntimeHost * This);
         
+        DECLSPEC_XFGVIRT(ICorRuntimeHost, DeleteLogicalThreadState)
         HRESULT ( STDMETHODCALLTYPE *DeleteLogicalThreadState )( 
             ICorRuntimeHost * This);
         
+        DECLSPEC_XFGVIRT(ICorRuntimeHost, SwitchInLogicalThreadState)
         HRESULT ( STDMETHODCALLTYPE *SwitchInLogicalThreadState )( 
             ICorRuntimeHost * This,
-            /* [in] */ DWORD *pFiberCookie);
+            /* [annotation][in] */ 
+            _In_  DWORD *pFiberCookie);
         
+        DECLSPEC_XFGVIRT(ICorRuntimeHost, SwitchOutLogicalThreadState)
         HRESULT ( STDMETHODCALLTYPE *SwitchOutLogicalThreadState )( 
             ICorRuntimeHost * This,
-            /* [out] */ DWORD **pFiberCookie);
+            /* [annotation][out] */ 
+            _Out_  DWORD **pFiberCookie);
         
+        DECLSPEC_XFGVIRT(ICorRuntimeHost, LocksHeldByLogicalThread)
         HRESULT ( STDMETHODCALLTYPE *LocksHeldByLogicalThread )( 
             ICorRuntimeHost * This,
-            /* [out] */ DWORD *pCount);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pCount);
         
+        DECLSPEC_XFGVIRT(ICorRuntimeHost, MapFile)
         HRESULT ( STDMETHODCALLTYPE *MapFile )( 
             ICorRuntimeHost * This,
-            /* [in] */ HANDLE hFile,
-            /* [out] */ HMODULE *hMapAddress);
+            /* [annotation][in] */ 
+            _In_  HANDLE hFile,
+            /* [annotation][out] */ 
+            _Out_  HMODULE *hMapAddress);
         
+        DECLSPEC_XFGVIRT(ICorRuntimeHost, GetConfiguration)
         HRESULT ( STDMETHODCALLTYPE *GetConfiguration )( 
             ICorRuntimeHost * This,
-            /* [out] */ ICorConfiguration **pConfiguration);
+            /* [annotation][out] */ 
+            _Out_  ICorConfiguration **pConfiguration);
         
+        DECLSPEC_XFGVIRT(ICorRuntimeHost, Start)
         HRESULT ( STDMETHODCALLTYPE *Start )( 
             ICorRuntimeHost * This);
         
+        DECLSPEC_XFGVIRT(ICorRuntimeHost, Stop)
         HRESULT ( STDMETHODCALLTYPE *Stop )( 
             ICorRuntimeHost * This);
         
+        DECLSPEC_XFGVIRT(ICorRuntimeHost, CreateDomain)
         HRESULT ( STDMETHODCALLTYPE *CreateDomain )( 
             ICorRuntimeHost * This,
-            /* [in] */ LPCWSTR pwzFriendlyName,
-            /* [in] */ IUnknown *pIdentityArray,
-            /* [out] */ IUnknown **pAppDomain);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFriendlyName,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pIdentityArray,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **pAppDomain);
         
+        DECLSPEC_XFGVIRT(ICorRuntimeHost, GetDefaultDomain)
         HRESULT ( STDMETHODCALLTYPE *GetDefaultDomain )( 
             ICorRuntimeHost * This,
-            /* [out] */ IUnknown **pAppDomain);
+            /* [annotation][out] */ 
+            _Out_  IUnknown **pAppDomain);
         
+        DECLSPEC_XFGVIRT(ICorRuntimeHost, EnumDomains)
         HRESULT ( STDMETHODCALLTYPE *EnumDomains )( 
             ICorRuntimeHost * This,
-            /* [out] */ HDOMAINENUM *hEnum);
+            /* [annotation][out] */ 
+            _Out_  HDOMAINENUM *hEnum);
         
+        DECLSPEC_XFGVIRT(ICorRuntimeHost, NextDomain)
         HRESULT ( STDMETHODCALLTYPE *NextDomain )( 
             ICorRuntimeHost * This,
-            /* [in] */ HDOMAINENUM hEnum,
-            /* [out] */ IUnknown **pAppDomain);
+            /* [annotation][in] */ 
+            _In_  HDOMAINENUM hEnum,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **pAppDomain);
         
+        DECLSPEC_XFGVIRT(ICorRuntimeHost, CloseEnum)
         HRESULT ( STDMETHODCALLTYPE *CloseEnum )( 
             ICorRuntimeHost * This,
-            /* [in] */ HDOMAINENUM hEnum);
+            /* [annotation][in] */ 
+            _In_  HDOMAINENUM hEnum);
         
+        DECLSPEC_XFGVIRT(ICorRuntimeHost, CreateDomainEx)
         HRESULT ( STDMETHODCALLTYPE *CreateDomainEx )( 
             ICorRuntimeHost * This,
-            /* [in] */ LPCWSTR pwzFriendlyName,
-            /* [in] */ IUnknown *pSetup,
-            /* [in] */ IUnknown *pEvidence,
-            /* [out] */ IUnknown **pAppDomain);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFriendlyName,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pSetup,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pEvidence,
+            /* [annotation][out] */ 
+            _Out_  IUnknown **pAppDomain);
         
+        DECLSPEC_XFGVIRT(ICorRuntimeHost, CreateDomainSetup)
         HRESULT ( STDMETHODCALLTYPE *CreateDomainSetup )( 
             ICorRuntimeHost * This,
-            /* [out] */ IUnknown **pAppDomainSetup);
+            /* [annotation][out] */ 
+            _Out_  IUnknown **pAppDomainSetup);
         
+        DECLSPEC_XFGVIRT(ICorRuntimeHost, CreateEvidence)
         HRESULT ( STDMETHODCALLTYPE *CreateEvidence )( 
             ICorRuntimeHost * This,
-            /* [out] */ IUnknown **pEvidence);
+            /* [annotation][out] */ 
+            _Out_  IUnknown **pEvidence);
         
+        DECLSPEC_XFGVIRT(ICorRuntimeHost, UnloadDomain)
         HRESULT ( STDMETHODCALLTYPE *UnloadDomain )( 
             ICorRuntimeHost * This,
-            /* [in] */ IUnknown *pAppDomain);
+            /* [annotation][in] */ 
+            _In_  IUnknown *pAppDomain);
         
+        DECLSPEC_XFGVIRT(ICorRuntimeHost, CurrentDomain)
         HRESULT ( STDMETHODCALLTYPE *CurrentDomain )( 
             ICorRuntimeHost * This,
-            /* [out] */ IUnknown **pAppDomain);
+            /* [annotation][out] */ 
+            _Out_  IUnknown **pAppDomain);
         
         END_INTERFACE
     } ICorRuntimeHostVtbl;
@@ -1909,7 +2125,8 @@ EXTERN_C const IID IID_ICLRMemoryNotificationCallback;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnMemoryNotification( 
-            /* [in] */ EMemoryAvailable eMemoryAvailable) = 0;
+            /* [annotation][in] */ 
+            _In_  EMemoryAvailable eMemoryAvailable) = 0;
         
     };
     
@@ -1920,21 +2137,27 @@ EXTERN_C const IID IID_ICLRMemoryNotificationCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRMemoryNotificationCallback * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRMemoryNotificationCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRMemoryNotificationCallback * This);
         
+        DECLSPEC_XFGVIRT(ICLRMemoryNotificationCallback, OnMemoryNotification)
         HRESULT ( STDMETHODCALLTYPE *OnMemoryNotification )( 
             ICLRMemoryNotificationCallback * This,
-            /* [in] */ EMemoryAvailable eMemoryAvailable);
+            /* [annotation][in] */ 
+            _In_  EMemoryAvailable eMemoryAvailable);
         
         END_INTERFACE
     } ICLRMemoryNotificationCallbackVtbl;
@@ -1989,21 +2212,28 @@ EXTERN_C const IID IID_IHostMalloc;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Alloc( 
-            /* [in] */ SIZE_T cbSize,
-            /* [in] */ EMemoryCriticalLevel eCriticalLevel,
-            /* [out] */ void **ppMem) = 0;
+            /* [annotation][in] */ 
+            _In_  SIZE_T cbSize,
+            /* [annotation][in] */ 
+            _In_  EMemoryCriticalLevel eCriticalLevel,
+            /* [annotation][out] */ 
+            _Out_  void **ppMem) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DebugAlloc( 
-            /* [in] */ SIZE_T cbSize,
-            /* [in] */ EMemoryCriticalLevel eCriticalLevel,
             /* [annotation][in] */ 
-            _In_   char *pszFileName,
-            /* [in] */ int iLineNo,
+            _In_  SIZE_T cbSize,
+            /* [annotation][in] */ 
+            _In_  EMemoryCriticalLevel eCriticalLevel,
+            /* [annotation][in] */ 
+            _In_   unsigned char *pszFileName,
+            /* [annotation][in] */ 
+            _In_  int iLineNo,
             /* [annotation][out] */ 
             _Outptr_result_maybenull_  void **ppMem) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Free( 
-            /* [in] */ void *pMem) = 0;
+            /* [annotation][in] */ 
+            _In_  void *pMem) = 0;
         
     };
     
@@ -2014,37 +2244,51 @@ EXTERN_C const IID IID_IHostMalloc;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IHostMalloc * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IHostMalloc * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IHostMalloc * This);
         
+        DECLSPEC_XFGVIRT(IHostMalloc, Alloc)
         HRESULT ( STDMETHODCALLTYPE *Alloc )( 
             IHostMalloc * This,
-            /* [in] */ SIZE_T cbSize,
-            /* [in] */ EMemoryCriticalLevel eCriticalLevel,
-            /* [out] */ void **ppMem);
+            /* [annotation][in] */ 
+            _In_  SIZE_T cbSize,
+            /* [annotation][in] */ 
+            _In_  EMemoryCriticalLevel eCriticalLevel,
+            /* [annotation][out] */ 
+            _Out_  void **ppMem);
         
+        DECLSPEC_XFGVIRT(IHostMalloc, DebugAlloc)
         HRESULT ( STDMETHODCALLTYPE *DebugAlloc )( 
             IHostMalloc * This,
-            /* [in] */ SIZE_T cbSize,
-            /* [in] */ EMemoryCriticalLevel eCriticalLevel,
             /* [annotation][in] */ 
-            _In_   char *pszFileName,
-            /* [in] */ int iLineNo,
+            _In_  SIZE_T cbSize,
+            /* [annotation][in] */ 
+            _In_  EMemoryCriticalLevel eCriticalLevel,
+            /* [annotation][in] */ 
+            _In_   unsigned char *pszFileName,
+            /* [annotation][in] */ 
+            _In_  int iLineNo,
             /* [annotation][out] */ 
             _Outptr_result_maybenull_  void **ppMem);
         
+        DECLSPEC_XFGVIRT(IHostMalloc, Free)
         HRESULT ( STDMETHODCALLTYPE *Free )( 
             IHostMalloc * This,
-            /* [in] */ void *pMem);
+            /* [annotation][in] */ 
+            _In_  void *pMem);
         
         END_INTERFACE
     } IHostMallocVtbl;
@@ -2120,51 +2364,78 @@ EXTERN_C const IID IID_IHostMemoryManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateMalloc( 
-            /* [in] */ DWORD dwMallocType,
-            /* [out] */ IHostMalloc **ppMalloc) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwMallocType,
+            /* [annotation][out] */ 
+            _Out_  IHostMalloc **ppMalloc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE VirtualAlloc( 
-            /* [in] */ void *pAddress,
-            /* [in] */ SIZE_T dwSize,
-            /* [in] */ DWORD flAllocationType,
-            /* [in] */ DWORD flProtect,
-            /* [in] */ EMemoryCriticalLevel eCriticalLevel,
-            /* [out] */ void **ppMem) = 0;
+            /* [annotation][in] */ 
+            _In_  void *pAddress,
+            /* [annotation][in] */ 
+            _In_  SIZE_T dwSize,
+            /* [annotation][in] */ 
+            _In_  DWORD flAllocationType,
+            /* [annotation][in] */ 
+            _In_  DWORD flProtect,
+            /* [annotation][in] */ 
+            _In_  EMemoryCriticalLevel eCriticalLevel,
+            /* [annotation][out] */ 
+            _Out_  void **ppMem) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE VirtualFree( 
-            /* [in] */ LPVOID lpAddress,
-            /* [in] */ SIZE_T dwSize,
-            /* [in] */ DWORD dwFreeType) = 0;
+            /* [annotation][in] */ 
+            _In_  LPVOID lpAddress,
+            /* [annotation][in] */ 
+            _In_  SIZE_T dwSize,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFreeType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE VirtualQuery( 
-            /* [in] */ void *lpAddress,
-            /* [out] */ void *lpBuffer,
-            /* [in] */ SIZE_T dwLength,
-            /* [out] */ SIZE_T *pResult) = 0;
+            /* [annotation][in] */ 
+            _In_  void *lpAddress,
+            /* [annotation][out] */ 
+            _Out_  void *lpBuffer,
+            /* [annotation][in] */ 
+            _In_  SIZE_T dwLength,
+            /* [annotation][out] */ 
+            _Out_  SIZE_T *pResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE VirtualProtect( 
-            /* [in] */ void *lpAddress,
-            /* [in] */ SIZE_T dwSize,
-            /* [in] */ DWORD flNewProtect,
-            /* [out] */ DWORD *pflOldProtect) = 0;
+            /* [annotation][in] */ 
+            _In_  void *lpAddress,
+            /* [annotation][in] */ 
+            _In_  SIZE_T dwSize,
+            /* [annotation][in] */ 
+            _In_  DWORD flNewProtect,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pflOldProtect) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMemoryLoad( 
-            /* [out] */ DWORD *pMemoryLoad,
-            /* [out] */ SIZE_T *pAvailableBytes) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pMemoryLoad,
+            /* [annotation][out] */ 
+            _Out_  SIZE_T *pAvailableBytes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterMemoryNotificationCallback( 
-            /* [in] */ ICLRMemoryNotificationCallback *pCallback) = 0;
+            /* [annotation][in] */ 
+            _In_  ICLRMemoryNotificationCallback *pCallback) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NeedsVirtualAddressSpace( 
-            /* [in] */ LPVOID startAddress,
-            /* [in] */ SIZE_T size) = 0;
+            /* [annotation][in] */ 
+            _In_  LPVOID startAddress,
+            /* [annotation][in] */ 
+            _In_  SIZE_T size) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AcquiredVirtualAddressSpace( 
-            /* [in] */ LPVOID startAddress,
-            /* [in] */ SIZE_T size) = 0;
+            /* [annotation][in] */ 
+            _In_  LPVOID startAddress,
+            /* [annotation][in] */ 
+            _In_  SIZE_T size) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReleasedVirtualAddressSpace( 
-            /* [in] */ LPVOID startAddress) = 0;
+            /* [annotation][in] */ 
+            _In_  LPVOID startAddress) = 0;
         
     };
     
@@ -2175,74 +2446,115 @@ EXTERN_C const IID IID_IHostMemoryManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IHostMemoryManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IHostMemoryManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IHostMemoryManager * This);
         
+        DECLSPEC_XFGVIRT(IHostMemoryManager, CreateMalloc)
         HRESULT ( STDMETHODCALLTYPE *CreateMalloc )( 
             IHostMemoryManager * This,
-            /* [in] */ DWORD dwMallocType,
-            /* [out] */ IHostMalloc **ppMalloc);
+            /* [annotation][in] */ 
+            _In_  DWORD dwMallocType,
+            /* [annotation][out] */ 
+            _Out_  IHostMalloc **ppMalloc);
         
+        DECLSPEC_XFGVIRT(IHostMemoryManager, VirtualAlloc)
         HRESULT ( STDMETHODCALLTYPE *VirtualAlloc )( 
             IHostMemoryManager * This,
-            /* [in] */ void *pAddress,
-            /* [in] */ SIZE_T dwSize,
-            /* [in] */ DWORD flAllocationType,
-            /* [in] */ DWORD flProtect,
-            /* [in] */ EMemoryCriticalLevel eCriticalLevel,
-            /* [out] */ void **ppMem);
+            /* [annotation][in] */ 
+            _In_  void *pAddress,
+            /* [annotation][in] */ 
+            _In_  SIZE_T dwSize,
+            /* [annotation][in] */ 
+            _In_  DWORD flAllocationType,
+            /* [annotation][in] */ 
+            _In_  DWORD flProtect,
+            /* [annotation][in] */ 
+            _In_  EMemoryCriticalLevel eCriticalLevel,
+            /* [annotation][out] */ 
+            _Out_  void **ppMem);
         
+        DECLSPEC_XFGVIRT(IHostMemoryManager, VirtualFree)
         HRESULT ( STDMETHODCALLTYPE *VirtualFree )( 
             IHostMemoryManager * This,
-            /* [in] */ LPVOID lpAddress,
-            /* [in] */ SIZE_T dwSize,
-            /* [in] */ DWORD dwFreeType);
+            /* [annotation][in] */ 
+            _In_  LPVOID lpAddress,
+            /* [annotation][in] */ 
+            _In_  SIZE_T dwSize,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFreeType);
         
+        DECLSPEC_XFGVIRT(IHostMemoryManager, VirtualQuery)
         HRESULT ( STDMETHODCALLTYPE *VirtualQuery )( 
             IHostMemoryManager * This,
-            /* [in] */ void *lpAddress,
-            /* [out] */ void *lpBuffer,
-            /* [in] */ SIZE_T dwLength,
-            /* [out] */ SIZE_T *pResult);
+            /* [annotation][in] */ 
+            _In_  void *lpAddress,
+            /* [annotation][out] */ 
+            _Out_  void *lpBuffer,
+            /* [annotation][in] */ 
+            _In_  SIZE_T dwLength,
+            /* [annotation][out] */ 
+            _Out_  SIZE_T *pResult);
         
+        DECLSPEC_XFGVIRT(IHostMemoryManager, VirtualProtect)
         HRESULT ( STDMETHODCALLTYPE *VirtualProtect )( 
             IHostMemoryManager * This,
-            /* [in] */ void *lpAddress,
-            /* [in] */ SIZE_T dwSize,
-            /* [in] */ DWORD flNewProtect,
-            /* [out] */ DWORD *pflOldProtect);
+            /* [annotation][in] */ 
+            _In_  void *lpAddress,
+            /* [annotation][in] */ 
+            _In_  SIZE_T dwSize,
+            /* [annotation][in] */ 
+            _In_  DWORD flNewProtect,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pflOldProtect);
         
+        DECLSPEC_XFGVIRT(IHostMemoryManager, GetMemoryLoad)
         HRESULT ( STDMETHODCALLTYPE *GetMemoryLoad )( 
             IHostMemoryManager * This,
-            /* [out] */ DWORD *pMemoryLoad,
-            /* [out] */ SIZE_T *pAvailableBytes);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pMemoryLoad,
+            /* [annotation][out] */ 
+            _Out_  SIZE_T *pAvailableBytes);
         
+        DECLSPEC_XFGVIRT(IHostMemoryManager, RegisterMemoryNotificationCallback)
         HRESULT ( STDMETHODCALLTYPE *RegisterMemoryNotificationCallback )( 
             IHostMemoryManager * This,
-            /* [in] */ ICLRMemoryNotificationCallback *pCallback);
+            /* [annotation][in] */ 
+            _In_  ICLRMemoryNotificationCallback *pCallback);
         
+        DECLSPEC_XFGVIRT(IHostMemoryManager, NeedsVirtualAddressSpace)
         HRESULT ( STDMETHODCALLTYPE *NeedsVirtualAddressSpace )( 
             IHostMemoryManager * This,
-            /* [in] */ LPVOID startAddress,
-            /* [in] */ SIZE_T size);
+            /* [annotation][in] */ 
+            _In_  LPVOID startAddress,
+            /* [annotation][in] */ 
+            _In_  SIZE_T size);
         
+        DECLSPEC_XFGVIRT(IHostMemoryManager, AcquiredVirtualAddressSpace)
         HRESULT ( STDMETHODCALLTYPE *AcquiredVirtualAddressSpace )( 
             IHostMemoryManager * This,
-            /* [in] */ LPVOID startAddress,
-            /* [in] */ SIZE_T size);
+            /* [annotation][in] */ 
+            _In_  LPVOID startAddress,
+            /* [annotation][in] */ 
+            _In_  SIZE_T size);
         
+        DECLSPEC_XFGVIRT(IHostMemoryManager, ReleasedVirtualAddressSpace)
         HRESULT ( STDMETHODCALLTYPE *ReleasedVirtualAddressSpace )( 
             IHostMemoryManager * This,
-            /* [in] */ LPVOID startAddress);
+            /* [annotation][in] */ 
+            _In_  LPVOID startAddress);
         
         END_INTERFACE
     } IHostMemoryManagerVtbl;
@@ -2336,12 +2648,14 @@ EXTERN_C const IID IID_ICLRTask;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SwitchIn( 
-            /* [in] */ HANDLE threadHandle) = 0;
+            /* [annotation][in] */ 
+            _In_  HANDLE threadHandle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SwitchOut( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMemStats( 
-            /* [out] */ COR_GC_THREAD_STATS *memUsage) = 0;
+            /* [annotation][out] */ 
+            _Out_  COR_GC_THREAD_STATS *memUsage) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( 
             BOOL fFull) = 0;
@@ -2353,15 +2667,18 @@ EXTERN_C const IID IID_ICLRTask;
         virtual HRESULT STDMETHODCALLTYPE RudeAbort( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NeedsPriorityScheduling( 
-            /* [out] */ BOOL *pbNeedsPriorityScheduling) = 0;
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbNeedsPriorityScheduling) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE YieldTask( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LocksHeld( 
-            /* [out] */ SIZE_T *pLockCount) = 0;
+            /* [annotation][out] */ 
+            _Out_  SIZE_T *pLockCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTaskIdentifier( 
-            /* [in] */ TASKID asked) = 0;
+            /* [annotation][in] */ 
+            _In_  TASKID asked) = 0;
         
     };
     
@@ -2372,56 +2689,76 @@ EXTERN_C const IID IID_ICLRTask;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRTask * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRTask * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRTask * This);
         
+        DECLSPEC_XFGVIRT(ICLRTask, SwitchIn)
         HRESULT ( STDMETHODCALLTYPE *SwitchIn )( 
             ICLRTask * This,
-            /* [in] */ HANDLE threadHandle);
+            /* [annotation][in] */ 
+            _In_  HANDLE threadHandle);
         
+        DECLSPEC_XFGVIRT(ICLRTask, SwitchOut)
         HRESULT ( STDMETHODCALLTYPE *SwitchOut )( 
             ICLRTask * This);
         
+        DECLSPEC_XFGVIRT(ICLRTask, GetMemStats)
         HRESULT ( STDMETHODCALLTYPE *GetMemStats )( 
             ICLRTask * This,
-            /* [out] */ COR_GC_THREAD_STATS *memUsage);
+            /* [annotation][out] */ 
+            _Out_  COR_GC_THREAD_STATS *memUsage);
         
+        DECLSPEC_XFGVIRT(ICLRTask, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             ICLRTask * This,
             BOOL fFull);
         
+        DECLSPEC_XFGVIRT(ICLRTask, ExitTask)
         HRESULT ( STDMETHODCALLTYPE *ExitTask )( 
             ICLRTask * This);
         
+        DECLSPEC_XFGVIRT(ICLRTask, Abort)
         HRESULT ( STDMETHODCALLTYPE *Abort )( 
             ICLRTask * This);
         
+        DECLSPEC_XFGVIRT(ICLRTask, RudeAbort)
         HRESULT ( STDMETHODCALLTYPE *RudeAbort )( 
             ICLRTask * This);
         
+        DECLSPEC_XFGVIRT(ICLRTask, NeedsPriorityScheduling)
         HRESULT ( STDMETHODCALLTYPE *NeedsPriorityScheduling )( 
             ICLRTask * This,
-            /* [out] */ BOOL *pbNeedsPriorityScheduling);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbNeedsPriorityScheduling);
         
+        DECLSPEC_XFGVIRT(ICLRTask, YieldTask)
         HRESULT ( STDMETHODCALLTYPE *YieldTask )( 
             ICLRTask * This);
         
+        DECLSPEC_XFGVIRT(ICLRTask, LocksHeld)
         HRESULT ( STDMETHODCALLTYPE *LocksHeld )( 
             ICLRTask * This,
-            /* [out] */ SIZE_T *pLockCount);
+            /* [annotation][out] */ 
+            _Out_  SIZE_T *pLockCount);
         
+        DECLSPEC_XFGVIRT(ICLRTask, SetTaskIdentifier)
         HRESULT ( STDMETHODCALLTYPE *SetTaskIdentifier )( 
             ICLRTask * This,
-            /* [in] */ TASKID asked);
+            /* [annotation][in] */ 
+            _In_  TASKID asked);
         
         END_INTERFACE
     } ICLRTaskVtbl;
@@ -2518,60 +2855,82 @@ EXTERN_C const IID IID_ICLRTask2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRTask2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRTask2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRTask2 * This);
         
+        DECLSPEC_XFGVIRT(ICLRTask, SwitchIn)
         HRESULT ( STDMETHODCALLTYPE *SwitchIn )( 
             ICLRTask2 * This,
-            /* [in] */ HANDLE threadHandle);
+            /* [annotation][in] */ 
+            _In_  HANDLE threadHandle);
         
+        DECLSPEC_XFGVIRT(ICLRTask, SwitchOut)
         HRESULT ( STDMETHODCALLTYPE *SwitchOut )( 
             ICLRTask2 * This);
         
+        DECLSPEC_XFGVIRT(ICLRTask, GetMemStats)
         HRESULT ( STDMETHODCALLTYPE *GetMemStats )( 
             ICLRTask2 * This,
-            /* [out] */ COR_GC_THREAD_STATS *memUsage);
+            /* [annotation][out] */ 
+            _Out_  COR_GC_THREAD_STATS *memUsage);
         
+        DECLSPEC_XFGVIRT(ICLRTask, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             ICLRTask2 * This,
             BOOL fFull);
         
+        DECLSPEC_XFGVIRT(ICLRTask, ExitTask)
         HRESULT ( STDMETHODCALLTYPE *ExitTask )( 
             ICLRTask2 * This);
         
+        DECLSPEC_XFGVIRT(ICLRTask, Abort)
         HRESULT ( STDMETHODCALLTYPE *Abort )( 
             ICLRTask2 * This);
         
+        DECLSPEC_XFGVIRT(ICLRTask, RudeAbort)
         HRESULT ( STDMETHODCALLTYPE *RudeAbort )( 
             ICLRTask2 * This);
         
+        DECLSPEC_XFGVIRT(ICLRTask, NeedsPriorityScheduling)
         HRESULT ( STDMETHODCALLTYPE *NeedsPriorityScheduling )( 
             ICLRTask2 * This,
-            /* [out] */ BOOL *pbNeedsPriorityScheduling);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbNeedsPriorityScheduling);
         
+        DECLSPEC_XFGVIRT(ICLRTask, YieldTask)
         HRESULT ( STDMETHODCALLTYPE *YieldTask )( 
             ICLRTask2 * This);
         
+        DECLSPEC_XFGVIRT(ICLRTask, LocksHeld)
         HRESULT ( STDMETHODCALLTYPE *LocksHeld )( 
             ICLRTask2 * This,
-            /* [out] */ SIZE_T *pLockCount);
+            /* [annotation][out] */ 
+            _Out_  SIZE_T *pLockCount);
         
+        DECLSPEC_XFGVIRT(ICLRTask, SetTaskIdentifier)
         HRESULT ( STDMETHODCALLTYPE *SetTaskIdentifier )( 
             ICLRTask2 * This,
-            /* [in] */ TASKID asked);
+            /* [annotation][in] */ 
+            _In_  TASKID asked);
         
+        DECLSPEC_XFGVIRT(ICLRTask2, BeginPreventAsyncAbort)
         HRESULT ( STDMETHODCALLTYPE *BeginPreventAsyncAbort )( 
             ICLRTask2 * This);
         
+        DECLSPEC_XFGVIRT(ICLRTask2, EndPreventAsyncAbort)
         HRESULT ( STDMETHODCALLTYPE *EndPreventAsyncAbort )( 
             ICLRTask2 * This);
         
@@ -2669,17 +3028,22 @@ EXTERN_C const IID IID_IHostTask;
         virtual HRESULT STDMETHODCALLTYPE Alert( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Join( 
-            /* [in] */ DWORD dwMilliseconds,
-            /* [in] */ DWORD option) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwMilliseconds,
+            /* [annotation][in] */ 
+            _In_  DWORD option) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetPriority( 
-            /* [in] */ int newPriority) = 0;
+            /* [annotation][in] */ 
+            _In_  int newPriority) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPriority( 
-            /* [out] */ int *pPriority) = 0;
+            /* [annotation][out] */ 
+            _Out_  int *pPriority) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCLRTask( 
-            /* [in] */ ICLRTask *pCLRTask) = 0;
+            /* [annotation][in] */ 
+            _In_  ICLRTask *pCLRTask) = 0;
         
     };
     
@@ -2690,40 +3054,55 @@ EXTERN_C const IID IID_IHostTask;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IHostTask * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IHostTask * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IHostTask * This);
         
+        DECLSPEC_XFGVIRT(IHostTask, Start)
         HRESULT ( STDMETHODCALLTYPE *Start )( 
             IHostTask * This);
         
+        DECLSPEC_XFGVIRT(IHostTask, Alert)
         HRESULT ( STDMETHODCALLTYPE *Alert )( 
             IHostTask * This);
         
+        DECLSPEC_XFGVIRT(IHostTask, Join)
         HRESULT ( STDMETHODCALLTYPE *Join )( 
             IHostTask * This,
-            /* [in] */ DWORD dwMilliseconds,
-            /* [in] */ DWORD option);
+            /* [annotation][in] */ 
+            _In_  DWORD dwMilliseconds,
+            /* [annotation][in] */ 
+            _In_  DWORD option);
         
+        DECLSPEC_XFGVIRT(IHostTask, SetPriority)
         HRESULT ( STDMETHODCALLTYPE *SetPriority )( 
             IHostTask * This,
-            /* [in] */ int newPriority);
+            /* [annotation][in] */ 
+            _In_  int newPriority);
         
+        DECLSPEC_XFGVIRT(IHostTask, GetPriority)
         HRESULT ( STDMETHODCALLTYPE *GetPriority )( 
             IHostTask * This,
-            /* [out] */ int *pPriority);
+            /* [annotation][out] */ 
+            _Out_  int *pPriority);
         
+        DECLSPEC_XFGVIRT(IHostTask, SetCLRTask)
         HRESULT ( STDMETHODCALLTYPE *SetCLRTask )( 
             IHostTask * This,
-            /* [in] */ ICLRTask *pCLRTask);
+            /* [annotation][in] */ 
+            _In_  ICLRTask *pCLRTask);
         
         END_INTERFACE
     } IHostTaskVtbl;
@@ -2817,19 +3196,24 @@ EXTERN_C const IID IID_ICLRTaskManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateTask( 
-            /* [out] */ ICLRTask **pTask) = 0;
+            /* [annotation][out] */ 
+            _Out_  ICLRTask **pTask) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentTask( 
-            /* [out] */ ICLRTask **pTask) = 0;
+            /* [annotation][out] */ 
+            _Out_  ICLRTask **pTask) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetUILocale( 
-            /* [in] */ LCID lcid) = 0;
+            /* [annotation][in] */ 
+            _In_  LCID lcid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetLocale( 
-            /* [in] */ LCID lcid) = 0;
+            /* [annotation][in] */ 
+            _In_  LCID lcid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentTaskType( 
-            /* [out] */ ETaskType *pTaskType) = 0;
+            /* [annotation][out] */ 
+            _Out_  ETaskType *pTaskType) = 0;
         
     };
     
@@ -2840,37 +3224,51 @@ EXTERN_C const IID IID_ICLRTaskManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRTaskManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRTaskManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRTaskManager * This);
         
+        DECLSPEC_XFGVIRT(ICLRTaskManager, CreateTask)
         HRESULT ( STDMETHODCALLTYPE *CreateTask )( 
             ICLRTaskManager * This,
-            /* [out] */ ICLRTask **pTask);
+            /* [annotation][out] */ 
+            _Out_  ICLRTask **pTask);
         
+        DECLSPEC_XFGVIRT(ICLRTaskManager, GetCurrentTask)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentTask )( 
             ICLRTaskManager * This,
-            /* [out] */ ICLRTask **pTask);
+            /* [annotation][out] */ 
+            _Out_  ICLRTask **pTask);
         
+        DECLSPEC_XFGVIRT(ICLRTaskManager, SetUILocale)
         HRESULT ( STDMETHODCALLTYPE *SetUILocale )( 
             ICLRTaskManager * This,
-            /* [in] */ LCID lcid);
+            /* [annotation][in] */ 
+            _In_  LCID lcid);
         
+        DECLSPEC_XFGVIRT(ICLRTaskManager, SetLocale)
         HRESULT ( STDMETHODCALLTYPE *SetLocale )( 
             ICLRTaskManager * This,
-            /* [in] */ LCID lcid);
+            /* [annotation][in] */ 
+            _In_  LCID lcid);
         
+        DECLSPEC_XFGVIRT(ICLRTaskManager, GetCurrentTaskType)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentTaskType )( 
             ICLRTaskManager * This,
-            /* [out] */ ETaskType *pTaskType);
+            /* [annotation][out] */ 
+            _Out_  ETaskType *pTaskType);
         
         END_INTERFACE
     } ICLRTaskManagerVtbl;
@@ -2937,33 +3335,46 @@ EXTERN_C const IID IID_IHostTaskManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCurrentTask( 
-            /* [out] */ IHostTask **pTask) = 0;
+            /* [annotation][out] */ 
+            _Out_  IHostTask **pTask) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateTask( 
-            /* [in] */ DWORD dwStackSize,
-            /* [in] */ LPTHREAD_START_ROUTINE pStartAddress,
-            /* [in] */ PVOID pParameter,
-            /* [out] */ IHostTask **ppTask) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwStackSize,
+            /* [annotation][in] */ 
+            _In_  LPTHREAD_START_ROUTINE pStartAddress,
+            /* [annotation][in] */ 
+            _In_  PVOID pParameter,
+            /* [annotation][out] */ 
+            _Out_  IHostTask **ppTask) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Sleep( 
-            /* [in] */ DWORD dwMilliseconds,
-            /* [in] */ DWORD option) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwMilliseconds,
+            /* [annotation][in] */ 
+            _In_  DWORD option) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SwitchToTask( 
-            /* [in] */ DWORD option) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD option) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetUILocale( 
-            /* [in] */ LCID lcid) = 0;
+            /* [annotation][in] */ 
+            _In_  LCID lcid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetLocale( 
-            /* [in] */ LCID lcid) = 0;
+            /* [annotation][in] */ 
+            _In_  LCID lcid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CallNeedsHostHook( 
-            /* [in] */ SIZE_T target,
-            /* [out] */ BOOL *pbCallNeedsHostHook) = 0;
+            /* [annotation][in] */ 
+            _In_  SIZE_T target,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbCallNeedsHostHook) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LeaveRuntime( 
-            /* [in] */ SIZE_T target) = 0;
+            /* [annotation][in] */ 
+            _In_  SIZE_T target) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnterRuntime( void) = 0;
         
@@ -2980,13 +3391,16 @@ EXTERN_C const IID IID_IHostTaskManager;
         virtual HRESULT STDMETHODCALLTYPE EndThreadAffinity( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStackGuarantee( 
-            /* [in] */ ULONG guarantee) = 0;
+            /* [annotation][in] */ 
+            _In_  ULONG guarantee) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStackGuarantee( 
-            /* [out] */ ULONG *pGuarantee) = 0;
+            /* [annotation][out] */ 
+            _Out_  ULONG *pGuarantee) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCLRTaskManager( 
-            /* [in] */ ICLRTaskManager *ppManager) = 0;
+            /* [annotation][in] */ 
+            _In_  ICLRTaskManager *ppManager) = 0;
         
     };
     
@@ -2997,87 +3411,125 @@ EXTERN_C const IID IID_IHostTaskManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IHostTaskManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IHostTaskManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IHostTaskManager * This);
         
+        DECLSPEC_XFGVIRT(IHostTaskManager, GetCurrentTask)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentTask )( 
             IHostTaskManager * This,
-            /* [out] */ IHostTask **pTask);
+            /* [annotation][out] */ 
+            _Out_  IHostTask **pTask);
         
+        DECLSPEC_XFGVIRT(IHostTaskManager, CreateTask)
         HRESULT ( STDMETHODCALLTYPE *CreateTask )( 
             IHostTaskManager * This,
-            /* [in] */ DWORD dwStackSize,
-            /* [in] */ LPTHREAD_START_ROUTINE pStartAddress,
-            /* [in] */ PVOID pParameter,
-            /* [out] */ IHostTask **ppTask);
+            /* [annotation][in] */ 
+            _In_  DWORD dwStackSize,
+            /* [annotation][in] */ 
+            _In_  LPTHREAD_START_ROUTINE pStartAddress,
+            /* [annotation][in] */ 
+            _In_  PVOID pParameter,
+            /* [annotation][out] */ 
+            _Out_  IHostTask **ppTask);
         
+        DECLSPEC_XFGVIRT(IHostTaskManager, Sleep)
         HRESULT ( STDMETHODCALLTYPE *Sleep )( 
             IHostTaskManager * This,
-            /* [in] */ DWORD dwMilliseconds,
-            /* [in] */ DWORD option);
+            /* [annotation][in] */ 
+            _In_  DWORD dwMilliseconds,
+            /* [annotation][in] */ 
+            _In_  DWORD option);
         
+        DECLSPEC_XFGVIRT(IHostTaskManager, SwitchToTask)
         HRESULT ( STDMETHODCALLTYPE *SwitchToTask )( 
             IHostTaskManager * This,
-            /* [in] */ DWORD option);
+            /* [annotation][in] */ 
+            _In_  DWORD option);
         
+        DECLSPEC_XFGVIRT(IHostTaskManager, SetUILocale)
         HRESULT ( STDMETHODCALLTYPE *SetUILocale )( 
             IHostTaskManager * This,
-            /* [in] */ LCID lcid);
+            /* [annotation][in] */ 
+            _In_  LCID lcid);
         
+        DECLSPEC_XFGVIRT(IHostTaskManager, SetLocale)
         HRESULT ( STDMETHODCALLTYPE *SetLocale )( 
             IHostTaskManager * This,
-            /* [in] */ LCID lcid);
+            /* [annotation][in] */ 
+            _In_  LCID lcid);
         
+        DECLSPEC_XFGVIRT(IHostTaskManager, CallNeedsHostHook)
         HRESULT ( STDMETHODCALLTYPE *CallNeedsHostHook )( 
             IHostTaskManager * This,
-            /* [in] */ SIZE_T target,
-            /* [out] */ BOOL *pbCallNeedsHostHook);
+            /* [annotation][in] */ 
+            _In_  SIZE_T target,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbCallNeedsHostHook);
         
+        DECLSPEC_XFGVIRT(IHostTaskManager, LeaveRuntime)
         HRESULT ( STDMETHODCALLTYPE *LeaveRuntime )( 
             IHostTaskManager * This,
-            /* [in] */ SIZE_T target);
+            /* [annotation][in] */ 
+            _In_  SIZE_T target);
         
+        DECLSPEC_XFGVIRT(IHostTaskManager, EnterRuntime)
         HRESULT ( STDMETHODCALLTYPE *EnterRuntime )( 
             IHostTaskManager * This);
         
+        DECLSPEC_XFGVIRT(IHostTaskManager, ReverseLeaveRuntime)
         HRESULT ( STDMETHODCALLTYPE *ReverseLeaveRuntime )( 
             IHostTaskManager * This);
         
+        DECLSPEC_XFGVIRT(IHostTaskManager, ReverseEnterRuntime)
         HRESULT ( STDMETHODCALLTYPE *ReverseEnterRuntime )( 
             IHostTaskManager * This);
         
+        DECLSPEC_XFGVIRT(IHostTaskManager, BeginDelayAbort)
         HRESULT ( STDMETHODCALLTYPE *BeginDelayAbort )( 
             IHostTaskManager * This);
         
+        DECLSPEC_XFGVIRT(IHostTaskManager, EndDelayAbort)
         HRESULT ( STDMETHODCALLTYPE *EndDelayAbort )( 
             IHostTaskManager * This);
         
+        DECLSPEC_XFGVIRT(IHostTaskManager, BeginThreadAffinity)
         HRESULT ( STDMETHODCALLTYPE *BeginThreadAffinity )( 
             IHostTaskManager * This);
         
+        DECLSPEC_XFGVIRT(IHostTaskManager, EndThreadAffinity)
         HRESULT ( STDMETHODCALLTYPE *EndThreadAffinity )( 
             IHostTaskManager * This);
         
+        DECLSPEC_XFGVIRT(IHostTaskManager, SetStackGuarantee)
         HRESULT ( STDMETHODCALLTYPE *SetStackGuarantee )( 
             IHostTaskManager * This,
-            /* [in] */ ULONG guarantee);
+            /* [annotation][in] */ 
+            _In_  ULONG guarantee);
         
+        DECLSPEC_XFGVIRT(IHostTaskManager, GetStackGuarantee)
         HRESULT ( STDMETHODCALLTYPE *GetStackGuarantee )( 
             IHostTaskManager * This,
-            /* [out] */ ULONG *pGuarantee);
+            /* [annotation][out] */ 
+            _Out_  ULONG *pGuarantee);
         
+        DECLSPEC_XFGVIRT(IHostTaskManager, SetCLRTaskManager)
         HRESULT ( STDMETHODCALLTYPE *SetCLRTaskManager )( 
             IHostTaskManager * This,
-            /* [in] */ ICLRTaskManager *ppManager);
+            /* [annotation][in] */ 
+            _In_  ICLRTaskManager *ppManager);
         
         END_INTERFACE
     } IHostTaskManagerVtbl;
@@ -3183,24 +3635,32 @@ EXTERN_C const IID IID_IHostThreadpoolManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE QueueUserWorkItem( 
-            /* [in] */ LPTHREAD_START_ROUTINE Function,
-            /* [in] */ PVOID Context,
-            /* [in] */ ULONG Flags) = 0;
+            /* [annotation][in] */ 
+            _In_  LPTHREAD_START_ROUTINE Function,
+            /* [annotation][in] */ 
+            _In_  PVOID Context,
+            /* [annotation][in] */ 
+            _In_  ULONG Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetMaxThreads( 
-            /* [in] */ DWORD dwMaxWorkerThreads) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwMaxWorkerThreads) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMaxThreads( 
-            /* [out] */ DWORD *pdwMaxWorkerThreads) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMaxWorkerThreads) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAvailableThreads( 
-            /* [out] */ DWORD *pdwAvailableWorkerThreads) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwAvailableWorkerThreads) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetMinThreads( 
-            /* [in] */ DWORD dwMinIOCompletionThreads) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwMinIOCompletionThreads) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMinThreads( 
-            /* [out] */ DWORD *pdwMinIOCompletionThreads) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMinIOCompletionThreads) = 0;
         
     };
     
@@ -3211,43 +3671,61 @@ EXTERN_C const IID IID_IHostThreadpoolManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IHostThreadpoolManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IHostThreadpoolManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IHostThreadpoolManager * This);
         
+        DECLSPEC_XFGVIRT(IHostThreadpoolManager, QueueUserWorkItem)
         HRESULT ( STDMETHODCALLTYPE *QueueUserWorkItem )( 
             IHostThreadpoolManager * This,
-            /* [in] */ LPTHREAD_START_ROUTINE Function,
-            /* [in] */ PVOID Context,
-            /* [in] */ ULONG Flags);
+            /* [annotation][in] */ 
+            _In_  LPTHREAD_START_ROUTINE Function,
+            /* [annotation][in] */ 
+            _In_  PVOID Context,
+            /* [annotation][in] */ 
+            _In_  ULONG Flags);
         
+        DECLSPEC_XFGVIRT(IHostThreadpoolManager, SetMaxThreads)
         HRESULT ( STDMETHODCALLTYPE *SetMaxThreads )( 
             IHostThreadpoolManager * This,
-            /* [in] */ DWORD dwMaxWorkerThreads);
+            /* [annotation][in] */ 
+            _In_  DWORD dwMaxWorkerThreads);
         
+        DECLSPEC_XFGVIRT(IHostThreadpoolManager, GetMaxThreads)
         HRESULT ( STDMETHODCALLTYPE *GetMaxThreads )( 
             IHostThreadpoolManager * This,
-            /* [out] */ DWORD *pdwMaxWorkerThreads);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMaxWorkerThreads);
         
+        DECLSPEC_XFGVIRT(IHostThreadpoolManager, GetAvailableThreads)
         HRESULT ( STDMETHODCALLTYPE *GetAvailableThreads )( 
             IHostThreadpoolManager * This,
-            /* [out] */ DWORD *pdwAvailableWorkerThreads);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwAvailableWorkerThreads);
         
+        DECLSPEC_XFGVIRT(IHostThreadpoolManager, SetMinThreads)
         HRESULT ( STDMETHODCALLTYPE *SetMinThreads )( 
             IHostThreadpoolManager * This,
-            /* [in] */ DWORD dwMinIOCompletionThreads);
+            /* [annotation][in] */ 
+            _In_  DWORD dwMinIOCompletionThreads);
         
+        DECLSPEC_XFGVIRT(IHostThreadpoolManager, GetMinThreads)
         HRESULT ( STDMETHODCALLTYPE *GetMinThreads )( 
             IHostThreadpoolManager * This,
-            /* [out] */ DWORD *pdwMinIOCompletionThreads);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMinIOCompletionThreads);
         
         END_INTERFACE
     } IHostThreadpoolManagerVtbl;
@@ -3317,9 +3795,12 @@ EXTERN_C const IID IID_ICLRIoCompletionManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnComplete( 
-            /* [in] */ DWORD dwErrorCode,
-            /* [in] */ DWORD NumberOfBytesTransferred,
-            /* [in] */ void *pvOverlapped) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwErrorCode,
+            /* [annotation][in] */ 
+            _In_  DWORD NumberOfBytesTransferred,
+            /* [annotation][in] */ 
+            _In_  void *pvOverlapped) = 0;
         
     };
     
@@ -3330,23 +3811,31 @@ EXTERN_C const IID IID_ICLRIoCompletionManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRIoCompletionManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRIoCompletionManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRIoCompletionManager * This);
         
+        DECLSPEC_XFGVIRT(ICLRIoCompletionManager, OnComplete)
         HRESULT ( STDMETHODCALLTYPE *OnComplete )( 
             ICLRIoCompletionManager * This,
-            /* [in] */ DWORD dwErrorCode,
-            /* [in] */ DWORD NumberOfBytesTransferred,
-            /* [in] */ void *pvOverlapped);
+            /* [annotation][in] */ 
+            _In_  DWORD dwErrorCode,
+            /* [annotation][in] */ 
+            _In_  DWORD NumberOfBytesTransferred,
+            /* [annotation][in] */ 
+            _In_  void *pvOverlapped);
         
         END_INTERFACE
     } ICLRIoCompletionManagerVtbl;
@@ -3401,38 +3890,50 @@ EXTERN_C const IID IID_IHostIoCompletionManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateIoCompletionPort( 
-            /* [out] */ HANDLE *phPort) = 0;
+            /* [annotation][out] */ 
+            _Out_  HANDLE *phPort) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CloseIoCompletionPort( 
-            /* [in] */ HANDLE hPort) = 0;
+            /* [annotation][in] */ 
+            _In_  HANDLE hPort) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetMaxThreads( 
-            /* [in] */ DWORD dwMaxIOCompletionThreads) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwMaxIOCompletionThreads) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMaxThreads( 
-            /* [out] */ DWORD *pdwMaxIOCompletionThreads) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMaxIOCompletionThreads) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAvailableThreads( 
-            /* [out] */ DWORD *pdwAvailableIOCompletionThreads) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwAvailableIOCompletionThreads) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetHostOverlappedSize( 
-            /* [out] */ DWORD *pcbSize) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcbSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCLRIoCompletionManager( 
-            /* [in] */ ICLRIoCompletionManager *pManager) = 0;
+            /* [annotation][in] */ 
+            _In_  ICLRIoCompletionManager *pManager) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InitializeHostOverlapped( 
-            /* [in] */ void *pvOverlapped) = 0;
+            /* [annotation][in] */ 
+            _In_  void *pvOverlapped) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Bind( 
-            /* [in] */ HANDLE hPort,
-            /* [in] */ HANDLE hHandle) = 0;
+            /* [annotation][in] */ 
+            _In_  HANDLE hPort,
+            /* [annotation][in] */ 
+            _In_  HANDLE hHandle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetMinThreads( 
-            /* [in] */ DWORD dwMinIOCompletionThreads) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwMinIOCompletionThreads) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMinThreads( 
-            /* [out] */ DWORD *pdwMinIOCompletionThreads) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMinIOCompletionThreads) = 0;
         
     };
     
@@ -3443,62 +3944,89 @@ EXTERN_C const IID IID_IHostIoCompletionManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IHostIoCompletionManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IHostIoCompletionManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IHostIoCompletionManager * This);
         
+        DECLSPEC_XFGVIRT(IHostIoCompletionManager, CreateIoCompletionPort)
         HRESULT ( STDMETHODCALLTYPE *CreateIoCompletionPort )( 
             IHostIoCompletionManager * This,
-            /* [out] */ HANDLE *phPort);
+            /* [annotation][out] */ 
+            _Out_  HANDLE *phPort);
         
+        DECLSPEC_XFGVIRT(IHostIoCompletionManager, CloseIoCompletionPort)
         HRESULT ( STDMETHODCALLTYPE *CloseIoCompletionPort )( 
             IHostIoCompletionManager * This,
-            /* [in] */ HANDLE hPort);
+            /* [annotation][in] */ 
+            _In_  HANDLE hPort);
         
+        DECLSPEC_XFGVIRT(IHostIoCompletionManager, SetMaxThreads)
         HRESULT ( STDMETHODCALLTYPE *SetMaxThreads )( 
             IHostIoCompletionManager * This,
-            /* [in] */ DWORD dwMaxIOCompletionThreads);
+            /* [annotation][in] */ 
+            _In_  DWORD dwMaxIOCompletionThreads);
         
+        DECLSPEC_XFGVIRT(IHostIoCompletionManager, GetMaxThreads)
         HRESULT ( STDMETHODCALLTYPE *GetMaxThreads )( 
             IHostIoCompletionManager * This,
-            /* [out] */ DWORD *pdwMaxIOCompletionThreads);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMaxIOCompletionThreads);
         
+        DECLSPEC_XFGVIRT(IHostIoCompletionManager, GetAvailableThreads)
         HRESULT ( STDMETHODCALLTYPE *GetAvailableThreads )( 
             IHostIoCompletionManager * This,
-            /* [out] */ DWORD *pdwAvailableIOCompletionThreads);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwAvailableIOCompletionThreads);
         
+        DECLSPEC_XFGVIRT(IHostIoCompletionManager, GetHostOverlappedSize)
         HRESULT ( STDMETHODCALLTYPE *GetHostOverlappedSize )( 
             IHostIoCompletionManager * This,
-            /* [out] */ DWORD *pcbSize);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pcbSize);
         
+        DECLSPEC_XFGVIRT(IHostIoCompletionManager, SetCLRIoCompletionManager)
         HRESULT ( STDMETHODCALLTYPE *SetCLRIoCompletionManager )( 
             IHostIoCompletionManager * This,
-            /* [in] */ ICLRIoCompletionManager *pManager);
+            /* [annotation][in] */ 
+            _In_  ICLRIoCompletionManager *pManager);
         
+        DECLSPEC_XFGVIRT(IHostIoCompletionManager, InitializeHostOverlapped)
         HRESULT ( STDMETHODCALLTYPE *InitializeHostOverlapped )( 
             IHostIoCompletionManager * This,
-            /* [in] */ void *pvOverlapped);
+            /* [annotation][in] */ 
+            _In_  void *pvOverlapped);
         
+        DECLSPEC_XFGVIRT(IHostIoCompletionManager, Bind)
         HRESULT ( STDMETHODCALLTYPE *Bind )( 
             IHostIoCompletionManager * This,
-            /* [in] */ HANDLE hPort,
-            /* [in] */ HANDLE hHandle);
+            /* [annotation][in] */ 
+            _In_  HANDLE hPort,
+            /* [annotation][in] */ 
+            _In_  HANDLE hHandle);
         
+        DECLSPEC_XFGVIRT(IHostIoCompletionManager, SetMinThreads)
         HRESULT ( STDMETHODCALLTYPE *SetMinThreads )( 
             IHostIoCompletionManager * This,
-            /* [in] */ DWORD dwMinIOCompletionThreads);
+            /* [annotation][in] */ 
+            _In_  DWORD dwMinIOCompletionThreads);
         
+        DECLSPEC_XFGVIRT(IHostIoCompletionManager, GetMinThreads)
         HRESULT ( STDMETHODCALLTYPE *GetMinThreads )( 
             IHostIoCompletionManager * This,
-            /* [out] */ DWORD *pdwMinIOCompletionThreads);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwMinIOCompletionThreads);
         
         END_INTERFACE
     } IHostIoCompletionManagerVtbl;
@@ -3599,29 +4127,38 @@ EXTERN_C const IID IID_ICLRDebugManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE BeginConnection( 
-            /* [in] */ CONNID dwConnectionId,
+            /* [annotation][in] */ 
+            _In_  CONNID dwConnectionId,
             /* [annotation][string][in] */ 
             _In_  wchar_t *szConnectionName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetConnectionTasks( 
-            /* [in] */ CONNID id,
-            /* [in] */ DWORD dwCount,
-            /* [size_is][in] */ ICLRTask **ppCLRTask) = 0;
+            /* [annotation][in] */ 
+            _In_  CONNID id,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwCount)  ICLRTask **ppCLRTask) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EndConnection( 
-            /* [in] */ CONNID dwConnectionId) = 0;
+            /* [annotation][in] */ 
+            _In_  CONNID dwConnectionId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDacl( 
-            /* [in] */ PACL pacl) = 0;
+            /* [annotation][in] */ 
+            _In_  PACL pacl) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDacl( 
-            /* [out] */ PACL *pacl) = 0;
+            /* [annotation][out] */ 
+            _Out_  PACL *pacl) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsDebuggerAttached( 
-            /* [out] */ BOOL *pbAttached) = 0;
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbAttached) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSymbolReadingPolicy( 
-            /* [in] */ ESymbolReadingPolicy policy) = 0;
+            /* [annotation][in] */ 
+            _In_  ESymbolReadingPolicy policy) = 0;
         
     };
     
@@ -3632,49 +4169,69 @@ EXTERN_C const IID IID_ICLRDebugManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRDebugManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRDebugManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRDebugManager * This);
         
+        DECLSPEC_XFGVIRT(ICLRDebugManager, BeginConnection)
         HRESULT ( STDMETHODCALLTYPE *BeginConnection )( 
             ICLRDebugManager * This,
-            /* [in] */ CONNID dwConnectionId,
+            /* [annotation][in] */ 
+            _In_  CONNID dwConnectionId,
             /* [annotation][string][in] */ 
             _In_  wchar_t *szConnectionName);
         
+        DECLSPEC_XFGVIRT(ICLRDebugManager, SetConnectionTasks)
         HRESULT ( STDMETHODCALLTYPE *SetConnectionTasks )( 
             ICLRDebugManager * This,
-            /* [in] */ CONNID id,
-            /* [in] */ DWORD dwCount,
-            /* [size_is][in] */ ICLRTask **ppCLRTask);
+            /* [annotation][in] */ 
+            _In_  CONNID id,
+            /* [annotation][in] */ 
+            _In_  DWORD dwCount,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(dwCount)  ICLRTask **ppCLRTask);
         
+        DECLSPEC_XFGVIRT(ICLRDebugManager, EndConnection)
         HRESULT ( STDMETHODCALLTYPE *EndConnection )( 
             ICLRDebugManager * This,
-            /* [in] */ CONNID dwConnectionId);
+            /* [annotation][in] */ 
+            _In_  CONNID dwConnectionId);
         
+        DECLSPEC_XFGVIRT(ICLRDebugManager, SetDacl)
         HRESULT ( STDMETHODCALLTYPE *SetDacl )( 
             ICLRDebugManager * This,
-            /* [in] */ PACL pacl);
+            /* [annotation][in] */ 
+            _In_  PACL pacl);
         
+        DECLSPEC_XFGVIRT(ICLRDebugManager, GetDacl)
         HRESULT ( STDMETHODCALLTYPE *GetDacl )( 
             ICLRDebugManager * This,
-            /* [out] */ PACL *pacl);
+            /* [annotation][out] */ 
+            _Out_  PACL *pacl);
         
+        DECLSPEC_XFGVIRT(ICLRDebugManager, IsDebuggerAttached)
         HRESULT ( STDMETHODCALLTYPE *IsDebuggerAttached )( 
             ICLRDebugManager * This,
-            /* [out] */ BOOL *pbAttached);
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbAttached);
         
+        DECLSPEC_XFGVIRT(ICLRDebugManager, SetSymbolReadingPolicy)
         HRESULT ( STDMETHODCALLTYPE *SetSymbolReadingPolicy )( 
             ICLRDebugManager * This,
-            /* [in] */ ESymbolReadingPolicy policy);
+            /* [annotation][in] */ 
+            _In_  ESymbolReadingPolicy policy);
         
         END_INTERFACE
     } ICLRDebugManagerVtbl;
@@ -3805,12 +4362,16 @@ EXTERN_C const IID IID_ICLRErrorReportingManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetBucketParametersForCurrentException( 
-            /* [out] */ BucketParameters *pParams) = 0;
+            /* [annotation][out] */ 
+            _Out_  BucketParameters *pParams) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE BeginCustomDump( 
-            /* [in] */ ECustomDumpFlavor dwFlavor,
-            /* [in] */ DWORD dwNumItems,
-            /* [length_is][size_is][in] */ CustomDumpItem *items,
+            /* [annotation][in] */ 
+            _In_  ECustomDumpFlavor dwFlavor,
+            /* [annotation][in] */ 
+            _In_  DWORD dwNumItems,
+            /* [annotation][length_is][size_is][in] */ 
+            _In_reads_(dwNumItems)  CustomDumpItem *items,
             DWORD dwReserved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EndCustomDump( void) = 0;
@@ -3824,29 +4385,40 @@ EXTERN_C const IID IID_ICLRErrorReportingManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRErrorReportingManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRErrorReportingManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRErrorReportingManager * This);
         
+        DECLSPEC_XFGVIRT(ICLRErrorReportingManager, GetBucketParametersForCurrentException)
         HRESULT ( STDMETHODCALLTYPE *GetBucketParametersForCurrentException )( 
             ICLRErrorReportingManager * This,
-            /* [out] */ BucketParameters *pParams);
+            /* [annotation][out] */ 
+            _Out_  BucketParameters *pParams);
         
+        DECLSPEC_XFGVIRT(ICLRErrorReportingManager, BeginCustomDump)
         HRESULT ( STDMETHODCALLTYPE *BeginCustomDump )( 
             ICLRErrorReportingManager * This,
-            /* [in] */ ECustomDumpFlavor dwFlavor,
-            /* [in] */ DWORD dwNumItems,
-            /* [length_is][size_is][in] */ CustomDumpItem *items,
+            /* [annotation][in] */ 
+            _In_  ECustomDumpFlavor dwFlavor,
+            /* [annotation][in] */ 
+            _In_  DWORD dwNumItems,
+            /* [annotation][length_is][size_is][in] */ 
+            _In_reads_(dwNumItems)  CustomDumpItem *items,
             DWORD dwReserved);
         
+        DECLSPEC_XFGVIRT(ICLRErrorReportingManager, EndCustomDump)
         HRESULT ( STDMETHODCALLTYPE *EndCustomDump )( 
             ICLRErrorReportingManager * This);
         
@@ -3909,16 +4481,20 @@ EXTERN_C const IID IID_IHostCrst;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Enter( 
-            /* [in] */ DWORD option) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD option) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Leave( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE TryEnter( 
-            /* [in] */ DWORD option,
-            /* [out] */ BOOL *pbSucceeded) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD option,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbSucceeded) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSpinCount( 
-            /* [in] */ DWORD dwSpinCount) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwSpinCount) = 0;
         
     };
     
@@ -3929,33 +4505,45 @@ EXTERN_C const IID IID_IHostCrst;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IHostCrst * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IHostCrst * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IHostCrst * This);
         
+        DECLSPEC_XFGVIRT(IHostCrst, Enter)
         HRESULT ( STDMETHODCALLTYPE *Enter )( 
             IHostCrst * This,
-            /* [in] */ DWORD option);
+            /* [annotation][in] */ 
+            _In_  DWORD option);
         
+        DECLSPEC_XFGVIRT(IHostCrst, Leave)
         HRESULT ( STDMETHODCALLTYPE *Leave )( 
             IHostCrst * This);
         
+        DECLSPEC_XFGVIRT(IHostCrst, TryEnter)
         HRESULT ( STDMETHODCALLTYPE *TryEnter )( 
             IHostCrst * This,
-            /* [in] */ DWORD option,
-            /* [out] */ BOOL *pbSucceeded);
+            /* [annotation][in] */ 
+            _In_  DWORD option,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbSucceeded);
         
+        DECLSPEC_XFGVIRT(IHostCrst, SetSpinCount)
         HRESULT ( STDMETHODCALLTYPE *SetSpinCount )( 
             IHostCrst * This,
-            /* [in] */ DWORD dwSpinCount);
+            /* [annotation][in] */ 
+            _In_  DWORD dwSpinCount);
         
         END_INTERFACE
     } IHostCrstVtbl;
@@ -4019,8 +4607,10 @@ EXTERN_C const IID IID_IHostAutoEvent;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Wait( 
-            /* [in] */ DWORD dwMilliseconds,
-            /* [in] */ DWORD option) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwMilliseconds,
+            /* [annotation][in] */ 
+            _In_  DWORD option) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Set( void) = 0;
         
@@ -4033,23 +4623,31 @@ EXTERN_C const IID IID_IHostAutoEvent;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IHostAutoEvent * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IHostAutoEvent * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IHostAutoEvent * This);
         
+        DECLSPEC_XFGVIRT(IHostAutoEvent, Wait)
         HRESULT ( STDMETHODCALLTYPE *Wait )( 
             IHostAutoEvent * This,
-            /* [in] */ DWORD dwMilliseconds,
-            /* [in] */ DWORD option);
+            /* [annotation][in] */ 
+            _In_  DWORD dwMilliseconds,
+            /* [annotation][in] */ 
+            _In_  DWORD option);
         
+        DECLSPEC_XFGVIRT(IHostAutoEvent, Set)
         HRESULT ( STDMETHODCALLTYPE *Set )( 
             IHostAutoEvent * This);
         
@@ -4109,8 +4707,10 @@ EXTERN_C const IID IID_IHostManualEvent;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Wait( 
-            /* [in] */ DWORD dwMilliseconds,
-            /* [in] */ DWORD option) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwMilliseconds,
+            /* [annotation][in] */ 
+            _In_  DWORD option) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
@@ -4125,26 +4725,35 @@ EXTERN_C const IID IID_IHostManualEvent;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IHostManualEvent * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IHostManualEvent * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IHostManualEvent * This);
         
+        DECLSPEC_XFGVIRT(IHostManualEvent, Wait)
         HRESULT ( STDMETHODCALLTYPE *Wait )( 
             IHostManualEvent * This,
-            /* [in] */ DWORD dwMilliseconds,
-            /* [in] */ DWORD option);
+            /* [annotation][in] */ 
+            _In_  DWORD dwMilliseconds,
+            /* [annotation][in] */ 
+            _In_  DWORD option);
         
+        DECLSPEC_XFGVIRT(IHostManualEvent, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IHostManualEvent * This);
         
+        DECLSPEC_XFGVIRT(IHostManualEvent, Set)
         HRESULT ( STDMETHODCALLTYPE *Set )( 
             IHostManualEvent * This);
         
@@ -4207,12 +4816,16 @@ EXTERN_C const IID IID_IHostSemaphore;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Wait( 
-            /* [in] */ DWORD dwMilliseconds,
-            /* [in] */ DWORD option) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwMilliseconds,
+            /* [annotation][in] */ 
+            _In_  DWORD option) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReleaseSemaphore( 
-            /* [in] */ LONG lReleaseCount,
-            /* [out] */ LONG *lpPreviousCount) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG lReleaseCount,
+            /* [annotation][out] */ 
+            _Out_  LONG *lpPreviousCount) = 0;
         
     };
     
@@ -4223,27 +4836,37 @@ EXTERN_C const IID IID_IHostSemaphore;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IHostSemaphore * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IHostSemaphore * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IHostSemaphore * This);
         
+        DECLSPEC_XFGVIRT(IHostSemaphore, Wait)
         HRESULT ( STDMETHODCALLTYPE *Wait )( 
             IHostSemaphore * This,
-            /* [in] */ DWORD dwMilliseconds,
-            /* [in] */ DWORD option);
+            /* [annotation][in] */ 
+            _In_  DWORD dwMilliseconds,
+            /* [annotation][in] */ 
+            _In_  DWORD option);
         
+        DECLSPEC_XFGVIRT(IHostSemaphore, ReleaseSemaphore)
         HRESULT ( STDMETHODCALLTYPE *ReleaseSemaphore )( 
             IHostSemaphore * This,
-            /* [in] */ LONG lReleaseCount,
-            /* [out] */ LONG *lpPreviousCount);
+            /* [annotation][in] */ 
+            _In_  LONG lReleaseCount,
+            /* [annotation][out] */ 
+            _Out_  LONG *lpPreviousCount);
         
         END_INTERFACE
     } IHostSemaphoreVtbl;
@@ -4301,19 +4924,26 @@ EXTERN_C const IID IID_ICLRSyncManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetMonitorOwner( 
-            /* [in] */ SIZE_T Cookie,
-            /* [out] */ IHostTask **ppOwnerHostTask) = 0;
+            /* [annotation][in] */ 
+            _In_  SIZE_T Cookie,
+            /* [annotation][out] */ 
+            _Out_  IHostTask **ppOwnerHostTask) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateRWLockOwnerIterator( 
-            /* [in] */ SIZE_T Cookie,
-            /* [out] */ SIZE_T *pIterator) = 0;
+            /* [annotation][in] */ 
+            _In_  SIZE_T Cookie,
+            /* [annotation][out] */ 
+            _Out_  SIZE_T *pIterator) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRWLockOwnerNext( 
-            /* [in] */ SIZE_T Iterator,
-            /* [out] */ IHostTask **ppOwnerHostTask) = 0;
+            /* [annotation][in] */ 
+            _In_  SIZE_T Iterator,
+            /* [annotation][out] */ 
+            _Out_  IHostTask **ppOwnerHostTask) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeleteRWLockOwnerIterator( 
-            /* [in] */ SIZE_T Iterator) = 0;
+            /* [annotation][in] */ 
+            _In_  SIZE_T Iterator) = 0;
         
     };
     
@@ -4324,36 +4954,51 @@ EXTERN_C const IID IID_ICLRSyncManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRSyncManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRSyncManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRSyncManager * This);
         
+        DECLSPEC_XFGVIRT(ICLRSyncManager, GetMonitorOwner)
         HRESULT ( STDMETHODCALLTYPE *GetMonitorOwner )( 
             ICLRSyncManager * This,
-            /* [in] */ SIZE_T Cookie,
-            /* [out] */ IHostTask **ppOwnerHostTask);
+            /* [annotation][in] */ 
+            _In_  SIZE_T Cookie,
+            /* [annotation][out] */ 
+            _Out_  IHostTask **ppOwnerHostTask);
         
+        DECLSPEC_XFGVIRT(ICLRSyncManager, CreateRWLockOwnerIterator)
         HRESULT ( STDMETHODCALLTYPE *CreateRWLockOwnerIterator )( 
             ICLRSyncManager * This,
-            /* [in] */ SIZE_T Cookie,
-            /* [out] */ SIZE_T *pIterator);
+            /* [annotation][in] */ 
+            _In_  SIZE_T Cookie,
+            /* [annotation][out] */ 
+            _Out_  SIZE_T *pIterator);
         
+        DECLSPEC_XFGVIRT(ICLRSyncManager, GetRWLockOwnerNext)
         HRESULT ( STDMETHODCALLTYPE *GetRWLockOwnerNext )( 
             ICLRSyncManager * This,
-            /* [in] */ SIZE_T Iterator,
-            /* [out] */ IHostTask **ppOwnerHostTask);
+            /* [annotation][in] */ 
+            _In_  SIZE_T Iterator,
+            /* [annotation][out] */ 
+            _Out_  IHostTask **ppOwnerHostTask);
         
+        DECLSPEC_XFGVIRT(ICLRSyncManager, DeleteRWLockOwnerIterator)
         HRESULT ( STDMETHODCALLTYPE *DeleteRWLockOwnerIterator )( 
             ICLRSyncManager * This,
-            /* [in] */ SIZE_T Iterator);
+            /* [annotation][in] */ 
+            _In_  SIZE_T Iterator);
         
         END_INTERFACE
     } ICLRSyncManagerVtbl;
@@ -4417,39 +5062,56 @@ EXTERN_C const IID IID_IHostSyncManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetCLRSyncManager( 
-            /* [in] */ ICLRSyncManager *pManager) = 0;
+            /* [annotation][in] */ 
+            _In_  ICLRSyncManager *pManager) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateCrst( 
-            /* [out] */ IHostCrst **ppCrst) = 0;
+            /* [annotation][out] */ 
+            _Out_  IHostCrst **ppCrst) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateCrstWithSpinCount( 
-            /* [in] */ DWORD dwSpinCount,
-            /* [out] */ IHostCrst **ppCrst) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwSpinCount,
+            /* [annotation][out] */ 
+            _Out_  IHostCrst **ppCrst) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateAutoEvent( 
-            /* [out] */ IHostAutoEvent **ppEvent) = 0;
+            /* [annotation][out] */ 
+            _Out_  IHostAutoEvent **ppEvent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateManualEvent( 
-            /* [in] */ BOOL bInitialState,
-            /* [out] */ IHostManualEvent **ppEvent) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL bInitialState,
+            /* [annotation][out] */ 
+            _Out_  IHostManualEvent **ppEvent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateMonitorEvent( 
-            /* [in] */ SIZE_T Cookie,
-            /* [out] */ IHostAutoEvent **ppEvent) = 0;
+            /* [annotation][in] */ 
+            _In_  SIZE_T Cookie,
+            /* [annotation][out] */ 
+            _Out_  IHostAutoEvent **ppEvent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateRWLockWriterEvent( 
-            /* [in] */ SIZE_T Cookie,
-            /* [out] */ IHostAutoEvent **ppEvent) = 0;
+            /* [annotation][in] */ 
+            _In_  SIZE_T Cookie,
+            /* [annotation][out] */ 
+            _Out_  IHostAutoEvent **ppEvent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateRWLockReaderEvent( 
-            /* [in] */ BOOL bInitialState,
-            /* [in] */ SIZE_T Cookie,
-            /* [out] */ IHostManualEvent **ppEvent) = 0;
+            /* [annotation][in] */ 
+            _In_  BOOL bInitialState,
+            /* [annotation][in] */ 
+            _In_  SIZE_T Cookie,
+            /* [annotation][out] */ 
+            _Out_  IHostManualEvent **ppEvent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateSemaphore( 
-            /* [in] */ DWORD dwInitial,
-            /* [in] */ DWORD dwMax,
-            /* [out] */ IHostSemaphore **ppSemaphore) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwInitial,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMax,
+            /* [annotation][out] */ 
+            _Out_  IHostSemaphore **ppSemaphore) = 0;
         
     };
     
@@ -4460,61 +5122,91 @@ EXTERN_C const IID IID_IHostSyncManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IHostSyncManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IHostSyncManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IHostSyncManager * This);
         
+        DECLSPEC_XFGVIRT(IHostSyncManager, SetCLRSyncManager)
         HRESULT ( STDMETHODCALLTYPE *SetCLRSyncManager )( 
             IHostSyncManager * This,
-            /* [in] */ ICLRSyncManager *pManager);
+            /* [annotation][in] */ 
+            _In_  ICLRSyncManager *pManager);
         
+        DECLSPEC_XFGVIRT(IHostSyncManager, CreateCrst)
         HRESULT ( STDMETHODCALLTYPE *CreateCrst )( 
             IHostSyncManager * This,
-            /* [out] */ IHostCrst **ppCrst);
+            /* [annotation][out] */ 
+            _Out_  IHostCrst **ppCrst);
         
+        DECLSPEC_XFGVIRT(IHostSyncManager, CreateCrstWithSpinCount)
         HRESULT ( STDMETHODCALLTYPE *CreateCrstWithSpinCount )( 
             IHostSyncManager * This,
-            /* [in] */ DWORD dwSpinCount,
-            /* [out] */ IHostCrst **ppCrst);
+            /* [annotation][in] */ 
+            _In_  DWORD dwSpinCount,
+            /* [annotation][out] */ 
+            _Out_  IHostCrst **ppCrst);
         
+        DECLSPEC_XFGVIRT(IHostSyncManager, CreateAutoEvent)
         HRESULT ( STDMETHODCALLTYPE *CreateAutoEvent )( 
             IHostSyncManager * This,
-            /* [out] */ IHostAutoEvent **ppEvent);
+            /* [annotation][out] */ 
+            _Out_  IHostAutoEvent **ppEvent);
         
+        DECLSPEC_XFGVIRT(IHostSyncManager, CreateManualEvent)
         HRESULT ( STDMETHODCALLTYPE *CreateManualEvent )( 
             IHostSyncManager * This,
-            /* [in] */ BOOL bInitialState,
-            /* [out] */ IHostManualEvent **ppEvent);
+            /* [annotation][in] */ 
+            _In_  BOOL bInitialState,
+            /* [annotation][out] */ 
+            _Out_  IHostManualEvent **ppEvent);
         
+        DECLSPEC_XFGVIRT(IHostSyncManager, CreateMonitorEvent)
         HRESULT ( STDMETHODCALLTYPE *CreateMonitorEvent )( 
             IHostSyncManager * This,
-            /* [in] */ SIZE_T Cookie,
-            /* [out] */ IHostAutoEvent **ppEvent);
+            /* [annotation][in] */ 
+            _In_  SIZE_T Cookie,
+            /* [annotation][out] */ 
+            _Out_  IHostAutoEvent **ppEvent);
         
+        DECLSPEC_XFGVIRT(IHostSyncManager, CreateRWLockWriterEvent)
         HRESULT ( STDMETHODCALLTYPE *CreateRWLockWriterEvent )( 
             IHostSyncManager * This,
-            /* [in] */ SIZE_T Cookie,
-            /* [out] */ IHostAutoEvent **ppEvent);
+            /* [annotation][in] */ 
+            _In_  SIZE_T Cookie,
+            /* [annotation][out] */ 
+            _Out_  IHostAutoEvent **ppEvent);
         
+        DECLSPEC_XFGVIRT(IHostSyncManager, CreateRWLockReaderEvent)
         HRESULT ( STDMETHODCALLTYPE *CreateRWLockReaderEvent )( 
             IHostSyncManager * This,
-            /* [in] */ BOOL bInitialState,
-            /* [in] */ SIZE_T Cookie,
-            /* [out] */ IHostManualEvent **ppEvent);
+            /* [annotation][in] */ 
+            _In_  BOOL bInitialState,
+            /* [annotation][in] */ 
+            _In_  SIZE_T Cookie,
+            /* [annotation][out] */ 
+            _Out_  IHostManualEvent **ppEvent);
         
+        DECLSPEC_XFGVIRT(IHostSyncManager, CreateSemaphore)
         HRESULT ( STDMETHODCALLTYPE *CreateSemaphore )( 
             IHostSyncManager * This,
-            /* [in] */ DWORD dwInitial,
-            /* [in] */ DWORD dwMax,
-            /* [out] */ IHostSemaphore **ppSemaphore);
+            /* [annotation][in] */ 
+            _In_  DWORD dwInitial,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMax,
+            /* [annotation][out] */ 
+            _Out_  IHostSemaphore **ppSemaphore);
         
         END_INTERFACE
     } IHostSyncManagerVtbl;
@@ -4650,28 +5342,40 @@ EXTERN_C const IID IID_ICLRPolicyManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetDefaultAction( 
-            /* [in] */ EClrOperation operation,
-            /* [in] */ EPolicyAction action) = 0;
+            /* [annotation][in] */ 
+            _In_  EClrOperation operation,
+            /* [annotation][in] */ 
+            _In_  EPolicyAction action) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTimeout( 
-            /* [in] */ EClrOperation operation,
-            /* [in] */ DWORD dwMilliseconds) = 0;
+            /* [annotation][in] */ 
+            _In_  EClrOperation operation,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMilliseconds) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetActionOnTimeout( 
-            /* [in] */ EClrOperation operation,
-            /* [in] */ EPolicyAction action) = 0;
+            /* [annotation][in] */ 
+            _In_  EClrOperation operation,
+            /* [annotation][in] */ 
+            _In_  EPolicyAction action) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTimeoutAndAction( 
-            /* [in] */ EClrOperation operation,
-            /* [in] */ DWORD dwMilliseconds,
-            /* [in] */ EPolicyAction action) = 0;
+            /* [annotation][in] */ 
+            _In_  EClrOperation operation,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMilliseconds,
+            /* [annotation][in] */ 
+            _In_  EPolicyAction action) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetActionOnFailure( 
-            /* [in] */ EClrFailure failure,
-            /* [in] */ EPolicyAction action) = 0;
+            /* [annotation][in] */ 
+            _In_  EClrFailure failure,
+            /* [annotation][in] */ 
+            _In_  EPolicyAction action) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetUnhandledExceptionPolicy( 
-            /* [in] */ EClrUnhandledException policy) = 0;
+            /* [annotation][in] */ 
+            _In_  EClrUnhandledException policy) = 0;
         
     };
     
@@ -4682,47 +5386,69 @@ EXTERN_C const IID IID_ICLRPolicyManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRPolicyManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRPolicyManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRPolicyManager * This);
         
+        DECLSPEC_XFGVIRT(ICLRPolicyManager, SetDefaultAction)
         HRESULT ( STDMETHODCALLTYPE *SetDefaultAction )( 
             ICLRPolicyManager * This,
-            /* [in] */ EClrOperation operation,
-            /* [in] */ EPolicyAction action);
+            /* [annotation][in] */ 
+            _In_  EClrOperation operation,
+            /* [annotation][in] */ 
+            _In_  EPolicyAction action);
         
+        DECLSPEC_XFGVIRT(ICLRPolicyManager, SetTimeout)
         HRESULT ( STDMETHODCALLTYPE *SetTimeout )( 
             ICLRPolicyManager * This,
-            /* [in] */ EClrOperation operation,
-            /* [in] */ DWORD dwMilliseconds);
+            /* [annotation][in] */ 
+            _In_  EClrOperation operation,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMilliseconds);
         
+        DECLSPEC_XFGVIRT(ICLRPolicyManager, SetActionOnTimeout)
         HRESULT ( STDMETHODCALLTYPE *SetActionOnTimeout )( 
             ICLRPolicyManager * This,
-            /* [in] */ EClrOperation operation,
-            /* [in] */ EPolicyAction action);
+            /* [annotation][in] */ 
+            _In_  EClrOperation operation,
+            /* [annotation][in] */ 
+            _In_  EPolicyAction action);
         
+        DECLSPEC_XFGVIRT(ICLRPolicyManager, SetTimeoutAndAction)
         HRESULT ( STDMETHODCALLTYPE *SetTimeoutAndAction )( 
             ICLRPolicyManager * This,
-            /* [in] */ EClrOperation operation,
-            /* [in] */ DWORD dwMilliseconds,
-            /* [in] */ EPolicyAction action);
+            /* [annotation][in] */ 
+            _In_  EClrOperation operation,
+            /* [annotation][in] */ 
+            _In_  DWORD dwMilliseconds,
+            /* [annotation][in] */ 
+            _In_  EPolicyAction action);
         
+        DECLSPEC_XFGVIRT(ICLRPolicyManager, SetActionOnFailure)
         HRESULT ( STDMETHODCALLTYPE *SetActionOnFailure )( 
             ICLRPolicyManager * This,
-            /* [in] */ EClrFailure failure,
-            /* [in] */ EPolicyAction action);
+            /* [annotation][in] */ 
+            _In_  EClrFailure failure,
+            /* [annotation][in] */ 
+            _In_  EPolicyAction action);
         
+        DECLSPEC_XFGVIRT(ICLRPolicyManager, SetUnhandledExceptionPolicy)
         HRESULT ( STDMETHODCALLTYPE *SetUnhandledExceptionPolicy )( 
             ICLRPolicyManager * This,
-            /* [in] */ EClrUnhandledException policy);
+            /* [annotation][in] */ 
+            _In_  EClrUnhandledException policy);
         
         END_INTERFACE
     } ICLRPolicyManagerVtbl;
@@ -4792,16 +5518,22 @@ EXTERN_C const IID IID_IHostPolicyManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnDefaultAction( 
-            /* [in] */ EClrOperation operation,
-            /* [in] */ EPolicyAction action) = 0;
+            /* [annotation][in] */ 
+            _In_  EClrOperation operation,
+            /* [annotation][in] */ 
+            _In_  EPolicyAction action) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnTimeout( 
-            /* [in] */ EClrOperation operation,
-            /* [in] */ EPolicyAction action) = 0;
+            /* [annotation][in] */ 
+            _In_  EClrOperation operation,
+            /* [annotation][in] */ 
+            _In_  EPolicyAction action) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnFailure( 
-            /* [in] */ EClrFailure failure,
-            /* [in] */ EPolicyAction action) = 0;
+            /* [annotation][in] */ 
+            _In_  EClrFailure failure,
+            /* [annotation][in] */ 
+            _In_  EPolicyAction action) = 0;
         
     };
     
@@ -4812,32 +5544,45 @@ EXTERN_C const IID IID_IHostPolicyManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IHostPolicyManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IHostPolicyManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IHostPolicyManager * This);
         
+        DECLSPEC_XFGVIRT(IHostPolicyManager, OnDefaultAction)
         HRESULT ( STDMETHODCALLTYPE *OnDefaultAction )( 
             IHostPolicyManager * This,
-            /* [in] */ EClrOperation operation,
-            /* [in] */ EPolicyAction action);
+            /* [annotation][in] */ 
+            _In_  EClrOperation operation,
+            /* [annotation][in] */ 
+            _In_  EPolicyAction action);
         
+        DECLSPEC_XFGVIRT(IHostPolicyManager, OnTimeout)
         HRESULT ( STDMETHODCALLTYPE *OnTimeout )( 
             IHostPolicyManager * This,
-            /* [in] */ EClrOperation operation,
-            /* [in] */ EPolicyAction action);
+            /* [annotation][in] */ 
+            _In_  EClrOperation operation,
+            /* [annotation][in] */ 
+            _In_  EPolicyAction action);
         
+        DECLSPEC_XFGVIRT(IHostPolicyManager, OnFailure)
         HRESULT ( STDMETHODCALLTYPE *OnFailure )( 
             IHostPolicyManager * This,
-            /* [in] */ EClrFailure failure,
-            /* [in] */ EPolicyAction action);
+            /* [annotation][in] */ 
+            _In_  EClrFailure failure,
+            /* [annotation][in] */ 
+            _In_  EPolicyAction action);
         
         END_INTERFACE
     } IHostPolicyManagerVtbl;
@@ -4936,8 +5681,10 @@ EXTERN_C const IID IID_IActionOnCLREvent;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnEvent( 
-            /* [in] */ EClrEvent event,
-            /* [in] */ PVOID data) = 0;
+            /* [annotation][in] */ 
+            _In_  EClrEvent event,
+            /* [annotation][in] */ 
+            _In_  PVOID data) = 0;
         
     };
     
@@ -4948,22 +5695,29 @@ EXTERN_C const IID IID_IActionOnCLREvent;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IActionOnCLREvent * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IActionOnCLREvent * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IActionOnCLREvent * This);
         
+        DECLSPEC_XFGVIRT(IActionOnCLREvent, OnEvent)
         HRESULT ( STDMETHODCALLTYPE *OnEvent )( 
             IActionOnCLREvent * This,
-            /* [in] */ EClrEvent event,
-            /* [in] */ PVOID data);
+            /* [annotation][in] */ 
+            _In_  EClrEvent event,
+            /* [annotation][in] */ 
+            _In_  PVOID data);
         
         END_INTERFACE
     } IActionOnCLREventVtbl;
@@ -5018,12 +5772,16 @@ EXTERN_C const IID IID_ICLROnEventManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RegisterActionOnEvent( 
-            /* [in] */ EClrEvent event,
-            /* [in] */ IActionOnCLREvent *pAction) = 0;
+            /* [annotation][in] */ 
+            _In_  EClrEvent event,
+            /* [annotation][in] */ 
+            _In_  IActionOnCLREvent *pAction) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnregisterActionOnEvent( 
-            /* [in] */ EClrEvent event,
-            /* [in] */ IActionOnCLREvent *pAction) = 0;
+            /* [annotation][in] */ 
+            _In_  EClrEvent event,
+            /* [annotation][in] */ 
+            _In_  IActionOnCLREvent *pAction) = 0;
         
     };
     
@@ -5034,27 +5792,37 @@ EXTERN_C const IID IID_ICLROnEventManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLROnEventManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLROnEventManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLROnEventManager * This);
         
+        DECLSPEC_XFGVIRT(ICLROnEventManager, RegisterActionOnEvent)
         HRESULT ( STDMETHODCALLTYPE *RegisterActionOnEvent )( 
             ICLROnEventManager * This,
-            /* [in] */ EClrEvent event,
-            /* [in] */ IActionOnCLREvent *pAction);
+            /* [annotation][in] */ 
+            _In_  EClrEvent event,
+            /* [annotation][in] */ 
+            _In_  IActionOnCLREvent *pAction);
         
+        DECLSPEC_XFGVIRT(ICLROnEventManager, UnregisterActionOnEvent)
         HRESULT ( STDMETHODCALLTYPE *UnregisterActionOnEvent )( 
             ICLROnEventManager * This,
-            /* [in] */ EClrEvent event,
-            /* [in] */ IActionOnCLREvent *pAction);
+            /* [annotation][in] */ 
+            _In_  EClrEvent event,
+            /* [annotation][in] */ 
+            _In_  IActionOnCLREvent *pAction);
         
         END_INTERFACE
     } ICLROnEventManagerVtbl;
@@ -5127,24 +5895,31 @@ EXTERN_C const IID IID_IHostGCManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IHostGCManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IHostGCManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IHostGCManager * This);
         
+        DECLSPEC_XFGVIRT(IHostGCManager, ThreadIsBlockingForSuspension)
         HRESULT ( STDMETHODCALLTYPE *ThreadIsBlockingForSuspension )( 
             IHostGCManager * This);
         
+        DECLSPEC_XFGVIRT(IHostGCManager, SuspensionStarting)
         HRESULT ( STDMETHODCALLTYPE *SuspensionStarting )( 
             IHostGCManager * This);
         
+        DECLSPEC_XFGVIRT(IHostGCManager, SuspensionEnding)
         HRESULT ( STDMETHODCALLTYPE *SuspensionEnding )( 
             IHostGCManager * This,
             DWORD Generation);
@@ -5208,10 +5983,12 @@ EXTERN_C const IID IID_ICLRAssemblyReferenceList;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE IsStringAssemblyReferenceInList( 
-            /* [in] */ LPCWSTR pwzAssemblyName) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzAssemblyName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsAssemblyReferenceInList( 
-            /* [in] */ IUnknown *pName) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *pName) = 0;
         
     };
     
@@ -5222,25 +5999,33 @@ EXTERN_C const IID IID_ICLRAssemblyReferenceList;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRAssemblyReferenceList * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRAssemblyReferenceList * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRAssemblyReferenceList * This);
         
+        DECLSPEC_XFGVIRT(ICLRAssemblyReferenceList, IsStringAssemblyReferenceInList)
         HRESULT ( STDMETHODCALLTYPE *IsStringAssemblyReferenceInList )( 
             ICLRAssemblyReferenceList * This,
-            /* [in] */ LPCWSTR pwzAssemblyName);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzAssemblyName);
         
+        DECLSPEC_XFGVIRT(ICLRAssemblyReferenceList, IsAssemblyReferenceInList)
         HRESULT ( STDMETHODCALLTYPE *IsAssemblyReferenceInList )( 
             ICLRAssemblyReferenceList * This,
-            /* [in] */ IUnknown *pName);
+            /* [annotation][in] */ 
+            _In_  IUnknown *pName);
         
         END_INTERFACE
     } ICLRAssemblyReferenceListVtbl;
@@ -5298,10 +6083,12 @@ EXTERN_C const IID IID_ICLRReferenceAssemblyEnum;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Get( 
-            /* [in] */ DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_(*pcchBufferSize)  LPWSTR pwzBuffer,
-            /* [out][in] */ DWORD *pcchBufferSize) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchBufferSize) = 0;
         
     };
     
@@ -5312,24 +6099,31 @@ EXTERN_C const IID IID_ICLRReferenceAssemblyEnum;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRReferenceAssemblyEnum * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRReferenceAssemblyEnum * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRReferenceAssemblyEnum * This);
         
+        DECLSPEC_XFGVIRT(ICLRReferenceAssemblyEnum, Get)
         HRESULT ( STDMETHODCALLTYPE *Get )( 
             ICLRReferenceAssemblyEnum * This,
-            /* [in] */ DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_(*pcchBufferSize)  LPWSTR pwzBuffer,
-            /* [out][in] */ DWORD *pcchBufferSize);
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchBufferSize);
         
         END_INTERFACE
     } ICLRReferenceAssemblyEnumVtbl;
@@ -5384,10 +6178,12 @@ EXTERN_C const IID IID_ICLRProbingAssemblyEnum;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Get( 
-            /* [in] */ DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_(*pcchBufferSize)  LPWSTR pwzBuffer,
-            /* [out][in] */ DWORD *pcchBufferSize) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchBufferSize) = 0;
         
     };
     
@@ -5398,24 +6194,31 @@ EXTERN_C const IID IID_ICLRProbingAssemblyEnum;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRProbingAssemblyEnum * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRProbingAssemblyEnum * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRProbingAssemblyEnum * This);
         
+        DECLSPEC_XFGVIRT(ICLRProbingAssemblyEnum, Get)
         HRESULT ( STDMETHODCALLTYPE *Get )( 
             ICLRProbingAssemblyEnum * This,
-            /* [in] */ DWORD dwIndex,
+            /* [annotation][in] */ 
+            _In_  DWORD dwIndex,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_(*pcchBufferSize)  LPWSTR pwzBuffer,
-            /* [out][in] */ DWORD *pcchBufferSize);
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchBufferSize);
         
         END_INTERFACE
     } ICLRProbingAssemblyEnumVtbl;
@@ -5484,45 +6287,68 @@ EXTERN_C const IID IID_ICLRAssemblyIdentityManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCLRAssemblyReferenceList( 
-            /* [in] */ LPCWSTR *ppwzAssemblyReferences,
-            /* [in] */ DWORD dwNumOfReferences,
-            /* [out] */ ICLRAssemblyReferenceList **ppReferenceList) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR *ppwzAssemblyReferences,
+            /* [annotation][in] */ 
+            _In_  DWORD dwNumOfReferences,
+            /* [annotation][out] */ 
+            _Out_  ICLRAssemblyReferenceList **ppReferenceList) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBindingIdentityFromFile( 
-            /* [in] */ LPCWSTR pwzFilePath,
-            /* [in] */ DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFilePath,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_(*pcchBufferSize)  LPWSTR pwzBuffer,
-            /* [out][in] */ DWORD *pcchBufferSize) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchBufferSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBindingIdentityFromStream( 
-            /* [in] */ IStream *pStream,
-            /* [in] */ DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  IStream *pStream,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_(*pcchBufferSize)  LPWSTR pwzBuffer,
-            /* [out][in] */ DWORD *pcchBufferSize) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchBufferSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetReferencedAssembliesFromFile( 
-            /* [in] */ LPCWSTR pwzFilePath,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ ICLRAssemblyReferenceList *pExcludeAssembliesList,
-            /* [out] */ ICLRReferenceAssemblyEnum **ppReferenceEnum) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFilePath,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  ICLRAssemblyReferenceList *pExcludeAssembliesList,
+            /* [annotation][out] */ 
+            _Out_  ICLRReferenceAssemblyEnum **ppReferenceEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetReferencedAssembliesFromStream( 
-            /* [in] */ IStream *pStream,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ ICLRAssemblyReferenceList *pExcludeAssembliesList,
-            /* [out] */ ICLRReferenceAssemblyEnum **ppReferenceEnum) = 0;
+            /* [annotation][in] */ 
+            _In_  IStream *pStream,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  ICLRAssemblyReferenceList *pExcludeAssembliesList,
+            /* [annotation][out] */ 
+            _Out_  ICLRReferenceAssemblyEnum **ppReferenceEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProbingAssembliesFromReference( 
-            /* [in] */ DWORD dwMachineType,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ LPCWSTR pwzReferenceIdentity,
-            /* [out] */ ICLRProbingAssemblyEnum **ppProbingAssemblyEnum) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwMachineType,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzReferenceIdentity,
+            /* [annotation][out] */ 
+            _Out_  ICLRProbingAssemblyEnum **ppProbingAssemblyEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsStronglyNamed( 
-            /* [in] */ LPCWSTR pwzAssemblyIdentity,
-            /* [out] */ BOOL *pbIsStronglyNamed) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzAssemblyIdentity,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbIsStronglyNamed) = 0;
         
     };
     
@@ -5533,65 +6359,99 @@ EXTERN_C const IID IID_ICLRAssemblyIdentityManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRAssemblyIdentityManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRAssemblyIdentityManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRAssemblyIdentityManager * This);
         
+        DECLSPEC_XFGVIRT(ICLRAssemblyIdentityManager, GetCLRAssemblyReferenceList)
         HRESULT ( STDMETHODCALLTYPE *GetCLRAssemblyReferenceList )( 
             ICLRAssemblyIdentityManager * This,
-            /* [in] */ LPCWSTR *ppwzAssemblyReferences,
-            /* [in] */ DWORD dwNumOfReferences,
-            /* [out] */ ICLRAssemblyReferenceList **ppReferenceList);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR *ppwzAssemblyReferences,
+            /* [annotation][in] */ 
+            _In_  DWORD dwNumOfReferences,
+            /* [annotation][out] */ 
+            _Out_  ICLRAssemblyReferenceList **ppReferenceList);
         
+        DECLSPEC_XFGVIRT(ICLRAssemblyIdentityManager, GetBindingIdentityFromFile)
         HRESULT ( STDMETHODCALLTYPE *GetBindingIdentityFromFile )( 
             ICLRAssemblyIdentityManager * This,
-            /* [in] */ LPCWSTR pwzFilePath,
-            /* [in] */ DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFilePath,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_(*pcchBufferSize)  LPWSTR pwzBuffer,
-            /* [out][in] */ DWORD *pcchBufferSize);
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchBufferSize);
         
+        DECLSPEC_XFGVIRT(ICLRAssemblyIdentityManager, GetBindingIdentityFromStream)
         HRESULT ( STDMETHODCALLTYPE *GetBindingIdentityFromStream )( 
             ICLRAssemblyIdentityManager * This,
-            /* [in] */ IStream *pStream,
-            /* [in] */ DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  IStream *pStream,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_(*pcchBufferSize)  LPWSTR pwzBuffer,
-            /* [out][in] */ DWORD *pcchBufferSize);
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchBufferSize);
         
+        DECLSPEC_XFGVIRT(ICLRAssemblyIdentityManager, GetReferencedAssembliesFromFile)
         HRESULT ( STDMETHODCALLTYPE *GetReferencedAssembliesFromFile )( 
             ICLRAssemblyIdentityManager * This,
-            /* [in] */ LPCWSTR pwzFilePath,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ ICLRAssemblyReferenceList *pExcludeAssembliesList,
-            /* [out] */ ICLRReferenceAssemblyEnum **ppReferenceEnum);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzFilePath,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  ICLRAssemblyReferenceList *pExcludeAssembliesList,
+            /* [annotation][out] */ 
+            _Out_  ICLRReferenceAssemblyEnum **ppReferenceEnum);
         
+        DECLSPEC_XFGVIRT(ICLRAssemblyIdentityManager, GetReferencedAssembliesFromStream)
         HRESULT ( STDMETHODCALLTYPE *GetReferencedAssembliesFromStream )( 
             ICLRAssemblyIdentityManager * This,
-            /* [in] */ IStream *pStream,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ ICLRAssemblyReferenceList *pExcludeAssembliesList,
-            /* [out] */ ICLRReferenceAssemblyEnum **ppReferenceEnum);
+            /* [annotation][in] */ 
+            _In_  IStream *pStream,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  ICLRAssemblyReferenceList *pExcludeAssembliesList,
+            /* [annotation][out] */ 
+            _Out_  ICLRReferenceAssemblyEnum **ppReferenceEnum);
         
+        DECLSPEC_XFGVIRT(ICLRAssemblyIdentityManager, GetProbingAssembliesFromReference)
         HRESULT ( STDMETHODCALLTYPE *GetProbingAssembliesFromReference )( 
             ICLRAssemblyIdentityManager * This,
-            /* [in] */ DWORD dwMachineType,
-            /* [in] */ DWORD dwFlags,
-            /* [in] */ LPCWSTR pwzReferenceIdentity,
-            /* [out] */ ICLRProbingAssemblyEnum **ppProbingAssemblyEnum);
+            /* [annotation][in] */ 
+            _In_  DWORD dwMachineType,
+            /* [annotation][in] */ 
+            _In_  DWORD dwFlags,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzReferenceIdentity,
+            /* [annotation][out] */ 
+            _Out_  ICLRProbingAssemblyEnum **ppProbingAssemblyEnum);
         
+        DECLSPEC_XFGVIRT(ICLRAssemblyIdentityManager, IsStronglyNamed)
         HRESULT ( STDMETHODCALLTYPE *IsStronglyNamed )( 
             ICLRAssemblyIdentityManager * This,
-            /* [in] */ LPCWSTR pwzAssemblyIdentity,
-            /* [out] */ BOOL *pbIsStronglyNamed);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzAssemblyIdentity,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pbIsStronglyNamed);
         
         END_INTERFACE
     } ICLRAssemblyIdentityManagerVtbl;
@@ -5681,23 +6541,34 @@ EXTERN_C const IID IID_ICLRHostBindingPolicyManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ModifyApplicationPolicy( 
-            /* [in] */ LPCWSTR pwzSourceAssemblyIdentity,
-            /* [in] */ LPCWSTR pwzTargetAssemblyIdentity,
-            /* [in] */ BYTE *pbApplicationPolicy,
-            /* [in] */ DWORD cbAppPolicySize,
-            /* [in] */ DWORD dwPolicyModifyFlags,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzSourceAssemblyIdentity,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzTargetAssemblyIdentity,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbApplicationPolicy,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAppPolicySize,
+            /* [annotation][in] */ 
+            _In_  DWORD dwPolicyModifyFlags,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_(*pcbNewAppPolicySize)  BYTE *pbNewApplicationPolicy,
-            /* [out][in] */ DWORD *pcbNewAppPolicySize) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcbNewAppPolicySize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EvaluatePolicy( 
-            /* [in] */ LPCWSTR pwzReferenceIdentity,
-            /* [in] */ BYTE *pbApplicationPolicy,
-            /* [in] */ DWORD cbAppPolicySize,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzReferenceIdentity,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbApplicationPolicy,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAppPolicySize,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_(*pcchPostPolicyReferenceIdentity)  LPWSTR pwzPostPolicyReferenceIdentity,
-            /* [out][in] */ DWORD *pcchPostPolicyReferenceIdentity,
-            /* [out] */ DWORD *pdwPoliciesApplied) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchPostPolicyReferenceIdentity,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwPoliciesApplied) = 0;
         
     };
     
@@ -5708,38 +6579,55 @@ EXTERN_C const IID IID_ICLRHostBindingPolicyManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRHostBindingPolicyManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRHostBindingPolicyManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRHostBindingPolicyManager * This);
         
+        DECLSPEC_XFGVIRT(ICLRHostBindingPolicyManager, ModifyApplicationPolicy)
         HRESULT ( STDMETHODCALLTYPE *ModifyApplicationPolicy )( 
             ICLRHostBindingPolicyManager * This,
-            /* [in] */ LPCWSTR pwzSourceAssemblyIdentity,
-            /* [in] */ LPCWSTR pwzTargetAssemblyIdentity,
-            /* [in] */ BYTE *pbApplicationPolicy,
-            /* [in] */ DWORD cbAppPolicySize,
-            /* [in] */ DWORD dwPolicyModifyFlags,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzSourceAssemblyIdentity,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzTargetAssemblyIdentity,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbApplicationPolicy,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAppPolicySize,
+            /* [annotation][in] */ 
+            _In_  DWORD dwPolicyModifyFlags,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_(*pcbNewAppPolicySize)  BYTE *pbNewApplicationPolicy,
-            /* [out][in] */ DWORD *pcbNewAppPolicySize);
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcbNewAppPolicySize);
         
+        DECLSPEC_XFGVIRT(ICLRHostBindingPolicyManager, EvaluatePolicy)
         HRESULT ( STDMETHODCALLTYPE *EvaluatePolicy )( 
             ICLRHostBindingPolicyManager * This,
-            /* [in] */ LPCWSTR pwzReferenceIdentity,
-            /* [in] */ BYTE *pbApplicationPolicy,
-            /* [in] */ DWORD cbAppPolicySize,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzReferenceIdentity,
+            /* [annotation][in] */ 
+            _In_  BYTE *pbApplicationPolicy,
+            /* [annotation][in] */ 
+            _In_  DWORD cbAppPolicySize,
             /* [annotation][size_is][out] */ 
             _Out_writes_all_(*pcchPostPolicyReferenceIdentity)  LPWSTR pwzPostPolicyReferenceIdentity,
-            /* [out][in] */ DWORD *pcchPostPolicyReferenceIdentity,
-            /* [out] */ DWORD *pdwPoliciesApplied);
+            /* [annotation][out][in] */ 
+            _Inout_  DWORD *pcchPostPolicyReferenceIdentity,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwPoliciesApplied);
         
         END_INTERFACE
     } ICLRHostBindingPolicyManagerVtbl;
@@ -5797,14 +6685,18 @@ EXTERN_C const IID IID_ICLRGCManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Collect( 
-            /* [in] */ LONG Generation) = 0;
+            /* [annotation][in] */ 
+            _In_  LONG Generation) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStats( 
-            /* [out][in] */ COR_GC_STATS *pStats) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  COR_GC_STATS *pStats) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetGCStartupLimits( 
-            /* [in] */ DWORD SegmentSize,
-            /* [in] */ DWORD MaxGen0Size) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD SegmentSize,
+            /* [annotation][in] */ 
+            _In_  DWORD MaxGen0Size) = 0;
         
     };
     
@@ -5815,30 +6707,41 @@ EXTERN_C const IID IID_ICLRGCManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRGCManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRGCManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRGCManager * This);
         
+        DECLSPEC_XFGVIRT(ICLRGCManager, Collect)
         HRESULT ( STDMETHODCALLTYPE *Collect )( 
             ICLRGCManager * This,
-            /* [in] */ LONG Generation);
+            /* [annotation][in] */ 
+            _In_  LONG Generation);
         
+        DECLSPEC_XFGVIRT(ICLRGCManager, GetStats)
         HRESULT ( STDMETHODCALLTYPE *GetStats )( 
             ICLRGCManager * This,
-            /* [out][in] */ COR_GC_STATS *pStats);
+            /* [annotation][out][in] */ 
+            _Inout_  COR_GC_STATS *pStats);
         
+        DECLSPEC_XFGVIRT(ICLRGCManager, SetGCStartupLimits)
         HRESULT ( STDMETHODCALLTYPE *SetGCStartupLimits )( 
             ICLRGCManager * This,
-            /* [in] */ DWORD SegmentSize,
-            /* [in] */ DWORD MaxGen0Size);
+            /* [annotation][in] */ 
+            _In_  DWORD SegmentSize,
+            /* [annotation][in] */ 
+            _In_  DWORD MaxGen0Size);
         
         END_INTERFACE
     } ICLRGCManagerVtbl;
@@ -5899,8 +6802,10 @@ EXTERN_C const IID IID_ICLRGCManager2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetGCStartupLimitsEx( 
-            /* [in] */ SIZE_T SegmentSize,
-            /* [in] */ SIZE_T MaxGen0Size) = 0;
+            /* [annotation][in] */ 
+            _In_  SIZE_T SegmentSize,
+            /* [annotation][in] */ 
+            _In_  SIZE_T MaxGen0Size) = 0;
         
     };
     
@@ -5911,35 +6816,49 @@ EXTERN_C const IID IID_ICLRGCManager2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRGCManager2 * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRGCManager2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRGCManager2 * This);
         
+        DECLSPEC_XFGVIRT(ICLRGCManager, Collect)
         HRESULT ( STDMETHODCALLTYPE *Collect )( 
             ICLRGCManager2 * This,
-            /* [in] */ LONG Generation);
+            /* [annotation][in] */ 
+            _In_  LONG Generation);
         
+        DECLSPEC_XFGVIRT(ICLRGCManager, GetStats)
         HRESULT ( STDMETHODCALLTYPE *GetStats )( 
             ICLRGCManager2 * This,
-            /* [out][in] */ COR_GC_STATS *pStats);
+            /* [annotation][out][in] */ 
+            _Inout_  COR_GC_STATS *pStats);
         
+        DECLSPEC_XFGVIRT(ICLRGCManager, SetGCStartupLimits)
         HRESULT ( STDMETHODCALLTYPE *SetGCStartupLimits )( 
             ICLRGCManager2 * This,
-            /* [in] */ DWORD SegmentSize,
-            /* [in] */ DWORD MaxGen0Size);
+            /* [annotation][in] */ 
+            _In_  DWORD SegmentSize,
+            /* [annotation][in] */ 
+            _In_  DWORD MaxGen0Size);
         
+        DECLSPEC_XFGVIRT(ICLRGCManager2, SetGCStartupLimitsEx)
         HRESULT ( STDMETHODCALLTYPE *SetGCStartupLimitsEx )( 
             ICLRGCManager2 * This,
-            /* [in] */ SIZE_T SegmentSize,
-            /* [in] */ SIZE_T MaxGen0Size);
+            /* [annotation][in] */ 
+            _In_  SIZE_T SegmentSize,
+            /* [annotation][in] */ 
+            _In_  SIZE_T MaxGen0Size);
         
         END_INTERFACE
     } ICLRGCManager2Vtbl;
@@ -6046,17 +6965,26 @@ EXTERN_C const IID IID_IHostAssemblyStore;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ProvideAssembly( 
-            /* [in] */ AssemblyBindInfo *pBindInfo,
-            /* [out] */ UINT64 *pAssemblyId,
-            /* [out] */ UINT64 *pContext,
-            /* [out] */ IStream **ppStmAssemblyImage,
-            /* [out] */ IStream **ppStmPDB) = 0;
+            /* [annotation][in] */ 
+            _In_  AssemblyBindInfo *pBindInfo,
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pAssemblyId,
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pContext,
+            /* [annotation][out] */ 
+            _Out_  IStream **ppStmAssemblyImage,
+            /* [annotation][out] */ 
+            _Out_  IStream **ppStmPDB) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProvideModule( 
-            /* [in] */ ModuleBindInfo *pBindInfo,
-            /* [out] */ DWORD *pdwModuleId,
-            /* [out] */ IStream **ppStmModuleImage,
-            /* [out] */ IStream **ppStmPDB) = 0;
+            /* [annotation][in] */ 
+            _In_  ModuleBindInfo *pBindInfo,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwModuleId,
+            /* [annotation][out] */ 
+            _Out_  IStream **ppStmModuleImage,
+            /* [annotation][out] */ 
+            _Out_  IStream **ppStmPDB) = 0;
         
     };
     
@@ -6067,32 +6995,47 @@ EXTERN_C const IID IID_IHostAssemblyStore;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IHostAssemblyStore * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IHostAssemblyStore * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IHostAssemblyStore * This);
         
+        DECLSPEC_XFGVIRT(IHostAssemblyStore, ProvideAssembly)
         HRESULT ( STDMETHODCALLTYPE *ProvideAssembly )( 
             IHostAssemblyStore * This,
-            /* [in] */ AssemblyBindInfo *pBindInfo,
-            /* [out] */ UINT64 *pAssemblyId,
-            /* [out] */ UINT64 *pContext,
-            /* [out] */ IStream **ppStmAssemblyImage,
-            /* [out] */ IStream **ppStmPDB);
+            /* [annotation][in] */ 
+            _In_  AssemblyBindInfo *pBindInfo,
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pAssemblyId,
+            /* [annotation][out] */ 
+            _Out_  UINT64 *pContext,
+            /* [annotation][out] */ 
+            _Out_  IStream **ppStmAssemblyImage,
+            /* [annotation][out] */ 
+            _Out_  IStream **ppStmPDB);
         
+        DECLSPEC_XFGVIRT(IHostAssemblyStore, ProvideModule)
         HRESULT ( STDMETHODCALLTYPE *ProvideModule )( 
             IHostAssemblyStore * This,
-            /* [in] */ ModuleBindInfo *pBindInfo,
-            /* [out] */ DWORD *pdwModuleId,
-            /* [out] */ IStream **ppStmModuleImage,
-            /* [out] */ IStream **ppStmPDB);
+            /* [annotation][in] */ 
+            _In_  ModuleBindInfo *pBindInfo,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwModuleId,
+            /* [annotation][out] */ 
+            _Out_  IStream **ppStmModuleImage,
+            /* [annotation][out] */ 
+            _Out_  IStream **ppStmPDB);
         
         END_INTERFACE
     } IHostAssemblyStoreVtbl;
@@ -6150,10 +7093,12 @@ EXTERN_C const IID IID_IHostAssemblyManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetNonHostStoreAssemblies( 
-            /* [out] */ ICLRAssemblyReferenceList **ppReferenceList) = 0;
+            /* [annotation][out] */ 
+            _Out_  ICLRAssemblyReferenceList **ppReferenceList) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAssemblyStore( 
-            /* [out] */ IHostAssemblyStore **ppAssemblyStore) = 0;
+            /* [annotation][out] */ 
+            _Out_  IHostAssemblyStore **ppAssemblyStore) = 0;
         
     };
     
@@ -6164,25 +7109,33 @@ EXTERN_C const IID IID_IHostAssemblyManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IHostAssemblyManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IHostAssemblyManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IHostAssemblyManager * This);
         
+        DECLSPEC_XFGVIRT(IHostAssemblyManager, GetNonHostStoreAssemblies)
         HRESULT ( STDMETHODCALLTYPE *GetNonHostStoreAssemblies )( 
             IHostAssemblyManager * This,
-            /* [out] */ ICLRAssemblyReferenceList **ppReferenceList);
+            /* [annotation][out] */ 
+            _Out_  ICLRAssemblyReferenceList **ppReferenceList);
         
+        DECLSPEC_XFGVIRT(IHostAssemblyManager, GetAssemblyStore)
         HRESULT ( STDMETHODCALLTYPE *GetAssemblyStore )( 
             IHostAssemblyManager * This,
-            /* [out] */ IHostAssemblyStore **ppAssemblyStore);
+            /* [annotation][out] */ 
+            _Out_  IHostAssemblyStore **ppAssemblyStore);
         
         END_INTERFACE
     } IHostAssemblyManagerVtbl;
@@ -6250,12 +7203,16 @@ EXTERN_C const IID IID_IHostControl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetHostManager( 
-            /* [in] */ REFIID riid,
-            /* [out] */ void **ppObject) = 0;
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][out] */ 
+            _Out_  void **ppObject) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAppDomainManager( 
-            /* [in] */ DWORD dwAppDomainID,
-            /* [in] */ IUnknown *pUnkAppDomainManager) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwAppDomainID,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkAppDomainManager) = 0;
         
     };
     
@@ -6266,27 +7223,37 @@ EXTERN_C const IID IID_IHostControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IHostControl * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IHostControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IHostControl * This);
         
+        DECLSPEC_XFGVIRT(IHostControl, GetHostManager)
         HRESULT ( STDMETHODCALLTYPE *GetHostManager )( 
             IHostControl * This,
-            /* [in] */ REFIID riid,
-            /* [out] */ void **ppObject);
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][out] */ 
+            _Out_  void **ppObject);
         
+        DECLSPEC_XFGVIRT(IHostControl, SetAppDomainManager)
         HRESULT ( STDMETHODCALLTYPE *SetAppDomainManager )( 
             IHostControl * This,
-            /* [in] */ DWORD dwAppDomainID,
-            /* [in] */ IUnknown *pUnkAppDomainManager);
+            /* [annotation][in] */ 
+            _In_  DWORD dwAppDomainID,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkAppDomainManager);
         
         END_INTERFACE
     } IHostControlVtbl;
@@ -6353,12 +7320,16 @@ EXTERN_C const IID IID_ICLRControl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCLRManager( 
-            /* [in] */ REFIID riid,
-            /* [out] */ void **ppObject) = 0;
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][out] */ 
+            _Out_  void **ppObject) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAppDomainManagerType( 
-            /* [in] */ LPCWSTR pwzAppDomainManagerAssembly,
-            /* [in] */ LPCWSTR pwzAppDomainManagerType) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzAppDomainManagerAssembly,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzAppDomainManagerType) = 0;
         
     };
     
@@ -6369,27 +7340,37 @@ EXTERN_C const IID IID_ICLRControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRControl * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRControl * This);
         
+        DECLSPEC_XFGVIRT(ICLRControl, GetCLRManager)
         HRESULT ( STDMETHODCALLTYPE *GetCLRManager )( 
             ICLRControl * This,
-            /* [in] */ REFIID riid,
-            /* [out] */ void **ppObject);
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][out] */ 
+            _Out_  void **ppObject);
         
+        DECLSPEC_XFGVIRT(ICLRControl, SetAppDomainManagerType)
         HRESULT ( STDMETHODCALLTYPE *SetAppDomainManagerType )( 
             ICLRControl * This,
-            /* [in] */ LPCWSTR pwzAppDomainManagerAssembly,
-            /* [in] */ LPCWSTR pwzAppDomainManagerType);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzAppDomainManagerAssembly,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzAppDomainManagerType);
         
         END_INTERFACE
     } ICLRControlVtbl;
@@ -6451,37 +7432,56 @@ EXTERN_C const IID IID_ICLRRuntimeHost;
         virtual HRESULT STDMETHODCALLTYPE Stop( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetHostControl( 
-            /* [in] */ IHostControl *pHostControl) = 0;
+            /* [annotation][in] */ 
+            _In_  IHostControl *pHostControl) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCLRControl( 
-            /* [out] */ ICLRControl **pCLRControl) = 0;
+            /* [annotation][out] */ 
+            _Out_  ICLRControl **pCLRControl) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnloadAppDomain( 
-            /* [in] */ DWORD dwAppDomainId,
-            /* [in] */ BOOL fWaitUntilDone) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwAppDomainId,
+            /* [annotation][in] */ 
+            _In_  BOOL fWaitUntilDone) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ExecuteInAppDomain( 
-            /* [in] */ DWORD dwAppDomainId,
-            /* [in] */ FExecuteInAppDomainCallback pCallback,
-            /* [in] */ void *cookie) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwAppDomainId,
+            /* [annotation][in] */ 
+            _In_  FExecuteInAppDomainCallback pCallback,
+            /* [annotation][in] */ 
+            _In_  void *cookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentAppDomainId( 
-            /* [out] */ DWORD *pdwAppDomainId) = 0;
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwAppDomainId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ExecuteApplication( 
-            /* [in] */ LPCWSTR pwzAppFullName,
-            /* [in] */ DWORD dwManifestPaths,
-            /* [in] */ LPCWSTR *ppwzManifestPaths,
-            /* [in] */ DWORD dwActivationData,
-            /* [in] */ LPCWSTR *ppwzActivationData,
-            /* [out] */ int *pReturnValue) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzAppFullName,
+            /* [annotation][in] */ 
+            _In_  DWORD dwManifestPaths,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR *ppwzManifestPaths,
+            /* [annotation][in] */ 
+            _In_  DWORD dwActivationData,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR *ppwzActivationData,
+            /* [annotation][out] */ 
+            _Out_  int *pReturnValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ExecuteInDefaultAppDomain( 
-            /* [in] */ LPCWSTR pwzAssemblyPath,
-            /* [in] */ LPCWSTR pwzTypeName,
-            /* [in] */ LPCWSTR pwzMethodName,
-            /* [in] */ LPCWSTR pwzArgument,
-            /* [out] */ DWORD *pReturnValue) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzAssemblyPath,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzTypeName,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzMethodName,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzArgument,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pReturnValue) = 0;
         
     };
     
@@ -6492,63 +7492,95 @@ EXTERN_C const IID IID_ICLRRuntimeHost;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICLRRuntimeHost * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICLRRuntimeHost * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICLRRuntimeHost * This);
         
+        DECLSPEC_XFGVIRT(ICLRRuntimeHost, Start)
         HRESULT ( STDMETHODCALLTYPE *Start )( 
             ICLRRuntimeHost * This);
         
+        DECLSPEC_XFGVIRT(ICLRRuntimeHost, Stop)
         HRESULT ( STDMETHODCALLTYPE *Stop )( 
             ICLRRuntimeHost * This);
         
+        DECLSPEC_XFGVIRT(ICLRRuntimeHost, SetHostControl)
         HRESULT ( STDMETHODCALLTYPE *SetHostControl )( 
             ICLRRuntimeHost * This,
-            /* [in] */ IHostControl *pHostControl);
+            /* [annotation][in] */ 
+            _In_  IHostControl *pHostControl);
         
+        DECLSPEC_XFGVIRT(ICLRRuntimeHost, GetCLRControl)
         HRESULT ( STDMETHODCALLTYPE *GetCLRControl )( 
             ICLRRuntimeHost * This,
-            /* [out] */ ICLRControl **pCLRControl);
+            /* [annotation][out] */ 
+            _Out_  ICLRControl **pCLRControl);
         
+        DECLSPEC_XFGVIRT(ICLRRuntimeHost, UnloadAppDomain)
         HRESULT ( STDMETHODCALLTYPE *UnloadAppDomain )( 
             ICLRRuntimeHost * This,
-            /* [in] */ DWORD dwAppDomainId,
-            /* [in] */ BOOL fWaitUntilDone);
+            /* [annotation][in] */ 
+            _In_  DWORD dwAppDomainId,
+            /* [annotation][in] */ 
+            _In_  BOOL fWaitUntilDone);
         
+        DECLSPEC_XFGVIRT(ICLRRuntimeHost, ExecuteInAppDomain)
         HRESULT ( STDMETHODCALLTYPE *ExecuteInAppDomain )( 
             ICLRRuntimeHost * This,
-            /* [in] */ DWORD dwAppDomainId,
-            /* [in] */ FExecuteInAppDomainCallback pCallback,
-            /* [in] */ void *cookie);
+            /* [annotation][in] */ 
+            _In_  DWORD dwAppDomainId,
+            /* [annotation][in] */ 
+            _In_  FExecuteInAppDomainCallback pCallback,
+            /* [annotation][in] */ 
+            _In_  void *cookie);
         
+        DECLSPEC_XFGVIRT(ICLRRuntimeHost, GetCurrentAppDomainId)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentAppDomainId )( 
             ICLRRuntimeHost * This,
-            /* [out] */ DWORD *pdwAppDomainId);
+            /* [annotation][out] */ 
+            _Out_  DWORD *pdwAppDomainId);
         
+        DECLSPEC_XFGVIRT(ICLRRuntimeHost, ExecuteApplication)
         HRESULT ( STDMETHODCALLTYPE *ExecuteApplication )( 
             ICLRRuntimeHost * This,
-            /* [in] */ LPCWSTR pwzAppFullName,
-            /* [in] */ DWORD dwManifestPaths,
-            /* [in] */ LPCWSTR *ppwzManifestPaths,
-            /* [in] */ DWORD dwActivationData,
-            /* [in] */ LPCWSTR *ppwzActivationData,
-            /* [out] */ int *pReturnValue);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzAppFullName,
+            /* [annotation][in] */ 
+            _In_  DWORD dwManifestPaths,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR *ppwzManifestPaths,
+            /* [annotation][in] */ 
+            _In_  DWORD dwActivationData,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR *ppwzActivationData,
+            /* [annotation][out] */ 
+            _Out_  int *pReturnValue);
         
+        DECLSPEC_XFGVIRT(ICLRRuntimeHost, ExecuteInDefaultAppDomain)
         HRESULT ( STDMETHODCALLTYPE *ExecuteInDefaultAppDomain )( 
             ICLRRuntimeHost * This,
-            /* [in] */ LPCWSTR pwzAssemblyPath,
-            /* [in] */ LPCWSTR pwzTypeName,
-            /* [in] */ LPCWSTR pwzMethodName,
-            /* [in] */ LPCWSTR pwzArgument,
-            /* [out] */ DWORD *pReturnValue);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzAssemblyPath,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzTypeName,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzMethodName,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR pwzArgument,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pReturnValue);
         
         END_INTERFACE
     } ICLRRuntimeHostVtbl;
@@ -6651,7 +7683,8 @@ EXTERN_C const IID IID_ICLRHostProtectionManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetProtectedCategories( 
-            /* [in] */ EApiCategories categories) = 0;
+            /* [annotation][in] */ 
+            _In_  EApiCategories categories) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetEagerSerializeGrantSets( void) = 0;
         
@@ -6664,22 +7697,29 @@ EXTERN_C const IID IID_ICLRHostProtectionManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICLRHostProtectionManager * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICLRHostProtectionManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICLRHostProtectionManager * This);
         
+        DECLSPEC_XFGVIRT(ICLRHostProtectionManager, SetProtectedCategories)
         HRESULT ( STDMETHODCALLTYPE *SetProtectedCategories )( 
             __RPC__in ICLRHostProtectionManager * This,
-            /* [in] */ EApiCategories categories);
+            /* [annotation][in] */ 
+            _In_  EApiCategories categories);
         
+        DECLSPEC_XFGVIRT(ICLRHostProtectionManager, SetEagerSerializeGrantSets)
         HRESULT ( STDMETHODCALLTYPE *SetEagerSerializeGrantSets )( 
             __RPC__in ICLRHostProtectionManager * This);
         
@@ -6754,14 +7794,20 @@ EXTERN_C const IID IID_ICLRDomainManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetAppDomainManagerType( 
-            /* [in] */ __RPC__in LPCWSTR wszAppDomainManagerAssembly,
-            /* [in] */ __RPC__in LPCWSTR wszAppDomainManagerType,
-            /* [in] */ EInitializeNewDomainFlags dwInitializeDomainFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR wszAppDomainManagerAssembly,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR wszAppDomainManagerType,
+            /* [annotation][in] */ 
+            _In_  EInitializeNewDomainFlags dwInitializeDomainFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetPropertiesForDefaultAppDomain( 
-            /* [in] */ DWORD nProperties,
-            /* [in] */ __RPC__deref_in_opt LPCWSTR *pwszPropertyNames,
-            /* [in] */ __RPC__deref_in_opt LPCWSTR *pwszPropertyValues) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD nProperties,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR *pwszPropertyNames,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR *pwszPropertyValues) = 0;
         
     };
     
@@ -6772,29 +7818,41 @@ EXTERN_C const IID IID_ICLRDomainManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICLRDomainManager * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICLRDomainManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICLRDomainManager * This);
         
+        DECLSPEC_XFGVIRT(ICLRDomainManager, SetAppDomainManagerType)
         HRESULT ( STDMETHODCALLTYPE *SetAppDomainManagerType )( 
             __RPC__in ICLRDomainManager * This,
-            /* [in] */ __RPC__in LPCWSTR wszAppDomainManagerAssembly,
-            /* [in] */ __RPC__in LPCWSTR wszAppDomainManagerType,
-            /* [in] */ EInitializeNewDomainFlags dwInitializeDomainFlags);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR wszAppDomainManagerAssembly,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR wszAppDomainManagerType,
+            /* [annotation][in] */ 
+            _In_  EInitializeNewDomainFlags dwInitializeDomainFlags);
         
+        DECLSPEC_XFGVIRT(ICLRDomainManager, SetPropertiesForDefaultAppDomain)
         HRESULT ( STDMETHODCALLTYPE *SetPropertiesForDefaultAppDomain )( 
             __RPC__in ICLRDomainManager * This,
-            /* [in] */ DWORD nProperties,
-            /* [in] */ __RPC__deref_in_opt LPCWSTR *pwszPropertyNames,
-            /* [in] */ __RPC__deref_in_opt LPCWSTR *pwszPropertyValues);
+            /* [annotation][in] */ 
+            _In_  DWORD nProperties,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR *pwszPropertyNames,
+            /* [annotation][in] */ 
+            _In_  LPCWSTR *pwszPropertyValues);
         
         END_INTERFACE
     } ICLRDomainManagerVtbl;
@@ -6862,31 +7920,44 @@ EXTERN_C const IID IID_ITypeName;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetNameCount( 
-            /* [retval][out] */ __RPC__out DWORD *pCount) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNames( 
-            /* [in] */ DWORD count,
-            /* [out] */ __RPC__deref_out_opt BSTR *rgbszNames,
-            /* [retval][out] */ __RPC__out DWORD *pCount) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD count,
+            /* [annotation][out] */ 
+            _Out_  BSTR *rgbszNames,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTypeArgumentCount( 
-            /* [retval][out] */ __RPC__out DWORD *pCount) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTypeArguments( 
-            /* [in] */ DWORD count,
-            /* [out] */ __RPC__deref_out_opt ITypeName **rgpArguments,
-            /* [retval][out] */ __RPC__out DWORD *pCount) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD count,
+            /* [annotation][out] */ 
+            _Out_  ITypeName **rgpArguments,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetModifierLength( 
-            /* [retval][out] */ __RPC__out DWORD *pCount) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetModifiers( 
-            /* [in] */ DWORD count,
-            /* [out] */ __RPC__out DWORD *rgModifiers,
-            /* [retval][out] */ __RPC__out DWORD *pCount) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD count,
+            /* [annotation][out] */ 
+            _Out_  DWORD *rgModifiers,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAssemblyName( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *rgbszAssemblyNames) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *rgbszAssemblyNames) = 0;
         
     };
     
@@ -6897,51 +7968,75 @@ EXTERN_C const IID IID_ITypeName;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITypeName * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITypeName * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITypeName * This);
         
+        DECLSPEC_XFGVIRT(ITypeName, GetNameCount)
         HRESULT ( STDMETHODCALLTYPE *GetNameCount )( 
             __RPC__in ITypeName * This,
-            /* [retval][out] */ __RPC__out DWORD *pCount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pCount);
         
+        DECLSPEC_XFGVIRT(ITypeName, GetNames)
         HRESULT ( STDMETHODCALLTYPE *GetNames )( 
             __RPC__in ITypeName * This,
-            /* [in] */ DWORD count,
-            /* [out] */ __RPC__deref_out_opt BSTR *rgbszNames,
-            /* [retval][out] */ __RPC__out DWORD *pCount);
+            /* [annotation][in] */ 
+            _In_  DWORD count,
+            /* [annotation][out] */ 
+            _Out_  BSTR *rgbszNames,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pCount);
         
+        DECLSPEC_XFGVIRT(ITypeName, GetTypeArgumentCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeArgumentCount )( 
             __RPC__in ITypeName * This,
-            /* [retval][out] */ __RPC__out DWORD *pCount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pCount);
         
+        DECLSPEC_XFGVIRT(ITypeName, GetTypeArguments)
         HRESULT ( STDMETHODCALLTYPE *GetTypeArguments )( 
             __RPC__in ITypeName * This,
-            /* [in] */ DWORD count,
-            /* [out] */ __RPC__deref_out_opt ITypeName **rgpArguments,
-            /* [retval][out] */ __RPC__out DWORD *pCount);
+            /* [annotation][in] */ 
+            _In_  DWORD count,
+            /* [annotation][out] */ 
+            _Out_  ITypeName **rgpArguments,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pCount);
         
+        DECLSPEC_XFGVIRT(ITypeName, GetModifierLength)
         HRESULT ( STDMETHODCALLTYPE *GetModifierLength )( 
             __RPC__in ITypeName * This,
-            /* [retval][out] */ __RPC__out DWORD *pCount);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pCount);
         
+        DECLSPEC_XFGVIRT(ITypeName, GetModifiers)
         HRESULT ( STDMETHODCALLTYPE *GetModifiers )( 
             __RPC__in ITypeName * This,
-            /* [in] */ DWORD count,
-            /* [out] */ __RPC__out DWORD *rgModifiers,
-            /* [retval][out] */ __RPC__out DWORD *pCount);
+            /* [annotation][in] */ 
+            _In_  DWORD count,
+            /* [annotation][out] */ 
+            _Out_  DWORD *rgModifiers,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  DWORD *pCount);
         
+        DECLSPEC_XFGVIRT(ITypeName, GetAssemblyName)
         HRESULT ( STDMETHODCALLTYPE *GetAssemblyName )( 
             __RPC__in ITypeName * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *rgbszAssemblyNames);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *rgbszAssemblyNames);
         
         END_INTERFACE
     } ITypeNameVtbl;
@@ -7022,7 +8117,8 @@ EXTERN_C const IID IID_ITypeNameBuilder;
         virtual HRESULT STDMETHODCALLTYPE CloseGenericArgument( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddName( 
-            /* [in] */ __RPC__in LPCWSTR szName) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddPointer( void) = 0;
         
@@ -7031,13 +8127,16 @@ EXTERN_C const IID IID_ITypeNameBuilder;
         virtual HRESULT STDMETHODCALLTYPE AddSzArray( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddArray( 
-            /* [in] */ DWORD rank) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD rank) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddAssemblySpec( 
-            /* [in] */ __RPC__in LPCWSTR szAssemblySpec) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szAssemblySpec) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ToString( 
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszStringRepresentation) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszStringRepresentation) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clear( void) = 0;
         
@@ -7050,55 +8149,75 @@ EXTERN_C const IID IID_ITypeNameBuilder;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITypeNameBuilder * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITypeNameBuilder * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITypeNameBuilder * This);
         
+        DECLSPEC_XFGVIRT(ITypeNameBuilder, OpenGenericArguments)
         HRESULT ( STDMETHODCALLTYPE *OpenGenericArguments )( 
             __RPC__in ITypeNameBuilder * This);
         
+        DECLSPEC_XFGVIRT(ITypeNameBuilder, CloseGenericArguments)
         HRESULT ( STDMETHODCALLTYPE *CloseGenericArguments )( 
             __RPC__in ITypeNameBuilder * This);
         
+        DECLSPEC_XFGVIRT(ITypeNameBuilder, OpenGenericArgument)
         HRESULT ( STDMETHODCALLTYPE *OpenGenericArgument )( 
             __RPC__in ITypeNameBuilder * This);
         
+        DECLSPEC_XFGVIRT(ITypeNameBuilder, CloseGenericArgument)
         HRESULT ( STDMETHODCALLTYPE *CloseGenericArgument )( 
             __RPC__in ITypeNameBuilder * This);
         
+        DECLSPEC_XFGVIRT(ITypeNameBuilder, AddName)
         HRESULT ( STDMETHODCALLTYPE *AddName )( 
             __RPC__in ITypeNameBuilder * This,
-            /* [in] */ __RPC__in LPCWSTR szName);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szName);
         
+        DECLSPEC_XFGVIRT(ITypeNameBuilder, AddPointer)
         HRESULT ( STDMETHODCALLTYPE *AddPointer )( 
             __RPC__in ITypeNameBuilder * This);
         
+        DECLSPEC_XFGVIRT(ITypeNameBuilder, AddByRef)
         HRESULT ( STDMETHODCALLTYPE *AddByRef )( 
             __RPC__in ITypeNameBuilder * This);
         
+        DECLSPEC_XFGVIRT(ITypeNameBuilder, AddSzArray)
         HRESULT ( STDMETHODCALLTYPE *AddSzArray )( 
             __RPC__in ITypeNameBuilder * This);
         
+        DECLSPEC_XFGVIRT(ITypeNameBuilder, AddArray)
         HRESULT ( STDMETHODCALLTYPE *AddArray )( 
             __RPC__in ITypeNameBuilder * This,
-            /* [in] */ DWORD rank);
+            /* [annotation][in] */ 
+            _In_  DWORD rank);
         
+        DECLSPEC_XFGVIRT(ITypeNameBuilder, AddAssemblySpec)
         HRESULT ( STDMETHODCALLTYPE *AddAssemblySpec )( 
             __RPC__in ITypeNameBuilder * This,
-            /* [in] */ __RPC__in LPCWSTR szAssemblySpec);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szAssemblySpec);
         
+        DECLSPEC_XFGVIRT(ITypeNameBuilder, ToString)
         HRESULT ( STDMETHODCALLTYPE *ToString )( 
             __RPC__in ITypeNameBuilder * This,
-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszStringRepresentation);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  BSTR *pszStringRepresentation);
         
+        DECLSPEC_XFGVIRT(ITypeNameBuilder, Clear)
         HRESULT ( STDMETHODCALLTYPE *Clear )( 
             __RPC__in ITypeNameBuilder * This);
         
@@ -7188,12 +8307,16 @@ EXTERN_C const IID IID_ITypeNameFactory;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ParseTypeName( 
-            /* [in] */ __RPC__in LPCWSTR szName,
-            /* [out] */ __RPC__out DWORD *pError,
-            /* [retval][out] */ __RPC__deref_out_opt ITypeName **ppTypeName) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szName,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pError,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITypeName **ppTypeName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTypeNameBuilder( 
-            /* [retval][out] */ __RPC__deref_out_opt ITypeNameBuilder **ppTypeBuilder) = 0;
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITypeNameBuilder **ppTypeBuilder) = 0;
         
     };
     
@@ -7204,27 +8327,37 @@ EXTERN_C const IID IID_ITypeNameFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITypeNameFactory * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITypeNameFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITypeNameFactory * This);
         
+        DECLSPEC_XFGVIRT(ITypeNameFactory, ParseTypeName)
         HRESULT ( STDMETHODCALLTYPE *ParseTypeName )( 
             __RPC__in ITypeNameFactory * This,
-            /* [in] */ __RPC__in LPCWSTR szName,
-            /* [out] */ __RPC__out DWORD *pError,
-            /* [retval][out] */ __RPC__deref_out_opt ITypeName **ppTypeName);
+            /* [annotation][in] */ 
+            _In_  LPCWSTR szName,
+            /* [annotation][out] */ 
+            _Out_  DWORD *pError,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITypeName **ppTypeName);
         
+        DECLSPEC_XFGVIRT(ITypeNameFactory, GetTypeNameBuilder)
         HRESULT ( STDMETHODCALLTYPE *GetTypeNameBuilder )( 
             __RPC__in ITypeNameFactory * This,
-            /* [retval][out] */ __RPC__deref_out_opt ITypeNameBuilder **ppTypeBuilder);
+            /* [annotation][retval][out] */ 
+            _Out_retval_  ITypeNameBuilder **ppTypeBuilder);
         
         END_INTERFACE
     } ITypeNameFactoryVtbl;
@@ -7282,8 +8415,10 @@ EXTERN_C const IID IID_IApartmentCallback;
     {
     public:
         virtual HRESULT __stdcall DoCallback( 
-            /* [in] */ SIZE_T pFunc,
-            /* [in] */ SIZE_T pData) = 0;
+            /* [annotation][in] */ 
+            _In_  SIZE_T pFunc,
+            /* [annotation][in] */ 
+            _In_  SIZE_T pData) = 0;
         
     };
     
@@ -7294,22 +8429,29 @@ EXTERN_C const IID IID_IApartmentCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IApartmentCallback * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IApartmentCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IApartmentCallback * This);
         
+        DECLSPEC_XFGVIRT(IApartmentCallback, DoCallback)
         HRESULT ( __stdcall *DoCallback )( 
             __RPC__in IApartmentCallback * This,
-            /* [in] */ SIZE_T pFunc,
-            /* [in] */ SIZE_T pData);
+            /* [annotation][in] */ 
+            _In_  SIZE_T pFunc,
+            /* [annotation][in] */ 
+            _In_  SIZE_T pData);
         
         END_INTERFACE
     } IApartmentCallbackVtbl;
@@ -7470,21 +8612,27 @@ EXTERN_C const IID IID_ICatalogServices;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICatalogServices * This,
-            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICatalogServices * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICatalogServices * This);
         
+        DECLSPEC_XFGVIRT(ICatalogServices, Autodone)
         HRESULT ( STDMETHODCALLTYPE *Autodone )( 
             __RPC__in ICatalogServices * This);
         
+        DECLSPEC_XFGVIRT(ICatalogServices, NotAutodone)
         HRESULT ( STDMETHODCALLTYPE *NotAutodone )( 
             __RPC__in ICatalogServices * This);
         
@@ -7544,6 +8692,7 @@ class DECLSPEC_UUID("45FB4600-E6E8-4928-B25E-50476FF79425")
 ComCallUnmarshalV4;
 #endif
 
+
 EXTERN_C const CLSID CLSID_CorRuntimeHost;
 
 #ifdef __cplusplus
@@ -7600,7 +8749,8 @@ EXTERN_C const IID IID_IHostSecurityContext;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Capture( 
-            /* [out] */ IHostSecurityContext **ppClonedContext) = 0;
+            /* [annotation][out] */ 
+            _Out_  IHostSecurityContext **ppClonedContext) = 0;
         
     };
     
@@ -7611,21 +8761,27 @@ EXTERN_C const IID IID_IHostSecurityContext;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IHostSecurityContext * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IHostSecurityContext * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IHostSecurityContext * This);
         
+        DECLSPEC_XFGVIRT(IHostSecurityContext, Capture)
         HRESULT ( STDMETHODCALLTYPE *Capture )( 
             IHostSecurityContext * This,
-            /* [out] */ IHostSecurityContext **ppClonedContext);
+            /* [annotation][out] */ 
+            _Out_  IHostSecurityContext **ppClonedContext);
         
         END_INTERFACE
     } IHostSecurityContextVtbl;
@@ -7680,25 +8836,34 @@ EXTERN_C const IID IID_IHostSecurityManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ImpersonateLoggedOnUser( 
-            /* [in] */ HANDLE hToken) = 0;
+            /* [annotation][in] */ 
+            _In_  HANDLE hToken) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RevertToSelf( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OpenThreadToken( 
-            /* [in] */ DWORD dwDesiredAccess,
-            /* [in] */ BOOL bOpenAsSelf,
-            /* [out] */ HANDLE *phThreadToken) = 0;
+            /* [annotation][in] */ 
+            _In_  DWORD dwDesiredAccess,
+            /* [annotation][in] */ 
+            _In_  BOOL bOpenAsSelf,
+            /* [annotation][out] */ 
+            _Out_  HANDLE *phThreadToken) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetThreadToken( 
-            /* [in] */ HANDLE hToken) = 0;
+            /* [annotation][in] */ 
+            _In_  HANDLE hToken) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSecurityContext( 
-            /* [in] */ EContextType eContextType,
-            /* [out] */ IHostSecurityContext **ppSecurityContext) = 0;
+            /* [annotation][in] */ 
+            _In_  EContextType eContextType,
+            /* [annotation][out] */ 
+            _Out_  IHostSecurityContext **ppSecurityContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSecurityContext( 
-            /* [in] */ EContextType eContextType,
-            /* [in] */ IHostSecurityContext *pSecurityContext) = 0;
+            /* [annotation][in] */ 
+            _In_  EContextType eContextType,
+            /* [annotation][in] */ 
+            _In_  IHostSecurityContext *pSecurityContext) = 0;
         
     };
     
@@ -7709,44 +8874,63 @@ EXTERN_C const IID IID_IHostSecurityManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IHostSecurityManager * This,
-            /* [in] */ REFIID riid,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IHostSecurityManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IHostSecurityManager * This);
         
+        DECLSPEC_XFGVIRT(IHostSecurityManager, ImpersonateLoggedOnUser)
         HRESULT ( STDMETHODCALLTYPE *ImpersonateLoggedOnUser )( 
             IHostSecurityManager * This,
-            /* [in] */ HANDLE hToken);
+            /* [annotation][in] */ 
+            _In_  HANDLE hToken);
         
+        DECLSPEC_XFGVIRT(IHostSecurityManager, RevertToSelf)
         HRESULT ( STDMETHODCALLTYPE *RevertToSelf )( 
             IHostSecurityManager * This);
         
+        DECLSPEC_XFGVIRT(IHostSecurityManager, OpenThreadToken)
         HRESULT ( STDMETHODCALLTYPE *OpenThreadToken )( 
             IHostSecurityManager * This,
-            /* [in] */ DWORD dwDesiredAccess,
-            /* [in] */ BOOL bOpenAsSelf,
-            /* [out] */ HANDLE *phThreadToken);
+            /* [annotation][in] */ 
+            _In_  DWORD dwDesiredAccess,
+            /* [annotation][in] */ 
+            _In_  BOOL bOpenAsSelf,
+            /* [annotation][out] */ 
+            _Out_  HANDLE *phThreadToken);
         
+        DECLSPEC_XFGVIRT(IHostSecurityManager, SetThreadToken)
         HRESULT ( STDMETHODCALLTYPE *SetThreadToken )( 
             IHostSecurityManager * This,
-            /* [in] */ HANDLE hToken);
+            /* [annotation][in] */ 
+            _In_  HANDLE hToken);
         
+        DECLSPEC_XFGVIRT(IHostSecurityManager, GetSecurityContext)
         HRESULT ( STDMETHODCALLTYPE *GetSecurityContext )( 
             IHostSecurityManager * This,
-            /* [in] */ EContextType eContextType,
-            /* [out] */ IHostSecurityContext **ppSecurityContext);
+            /* [annotation][in] */ 
+            _In_  EContextType eContextType,
+            /* [annotation][out] */ 
+            _Out_  IHostSecurityContext **ppSecurityContext);
         
+        DECLSPEC_XFGVIRT(IHostSecurityManager, SetSecurityContext)
         HRESULT ( STDMETHODCALLTYPE *SetSecurityContext )( 
             IHostSecurityManager * This,
-            /* [in] */ EContextType eContextType,
-            /* [in] */ IHostSecurityContext *pSecurityContext);
+            /* [annotation][in] */ 
+            _In_  EContextType eContextType,
+            /* [annotation][in] */ 
+            _In_  IHostSecurityContext *pSecurityContext);
         
         END_INTERFACE
     } IHostSecurityManagerVtbl;
@@ -7907,8 +9091,7 @@ EXTERN_C const IID IID_ICLRAppDomainResourceMonitor;
 
 #endif 	/* __ICLRAppDomainResourceMonitor_INTERFACE_DEFINED__ */
 
-
-/* interface __MIDL_itf_mscoree_0000_0051 */
+/* interface __MIDL_itf_mscoree_0000_0050 */
 /* [local] */ 
 
 #undef DEPRECATED_CLR_STDAPI
@@ -7916,8 +9099,8 @@ EXTERN_C const IID IID_ICLRAppDomainResourceMonitor;
 #undef DEPRECATED_CLR_API_MESG
 
 
-extern RPC_IF_HANDLE __MIDL_itf_mscoree_0000_0051_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_mscoree_0000_0051_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mscoree_0000_0050_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mscoree_0000_0050_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 
@@ -7925,6 +9108,11 @@ unsigned long             __RPC_USER  VARIANT_UserSize(     __RPC__in unsigned l
 unsigned char * __RPC_USER  VARIANT_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in VARIANT * ); 
 unsigned char * __RPC_USER  VARIANT_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * ); 
 void                      __RPC_USER  VARIANT_UserFree(     __RPC__in unsigned long *, __RPC__in VARIANT * ); 
+
+unsigned long             __RPC_USER  VARIANT_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in VARIANT * ); 
+unsigned char * __RPC_USER  VARIANT_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in VARIANT * ); 
+unsigned char * __RPC_USER  VARIANT_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out VARIANT * ); 
+void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned long *, __RPC__in VARIANT * ); 
 
 /* end of Additional Prototypes */
 

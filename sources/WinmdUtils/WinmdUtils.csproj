@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MetadataUtils\MetadataUtils.csproj" />
-    <ProjectReference Include="..\Win32MetadataInterop\Win32MetadataInterop.csproj" />
   </ItemGroup>
 
 </Project>

@@ -9,6 +9,7 @@
 #include <winbase.h>
 #include <winnt.h>
 #include <winuser.h>
+#include <menutemplate.h>
 #include <resourceindexer.h>
 #include <strsafe.h>
 #include <mrmresourceindexer.h>

@@ -1,12 +1,12 @@
 #define SECURITY_WIN32 // For sspi.h
 #define QCC_OS_GROUP_WINDOWS
+#define QUERY_H_RESTRICTION_PERMISSIVE 1
+#define oledb_deprecated
 
 #include "intrinfix.h"
 
 #include "windows.fixed.h"
 #include <sdkddkver.h>
-
-#define QUERY_H_RESTRICTION_PERMISSIVE 1
 
 #include <filter.h>
 #include <indexsrv.h>

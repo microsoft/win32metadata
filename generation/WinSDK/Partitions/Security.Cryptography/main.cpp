@@ -22,6 +22,7 @@ typedef NTSTATUS* PNTSTATUS;
 #include <ncryptprotect.h>
 #include <ncrypt.h>
 #include <wincrypt.h>
+#include <mssign.h>
 #include <cryptxml.h>
 #include <cryptdlg.h>
 #include <cryptuiapi.h>

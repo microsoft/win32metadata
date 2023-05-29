@@ -61,7 +61,6 @@ namespace MetadataTasks
             var builder = new CommandLineBuilder();
             builder.AppendFileNameIfNotNull(Path.Combine(this.ToolsBinDir, "ClangSharpSourceToWinmd.dll"));
 
-            string interopPath = Path.Combine(this.Win32WinmdBinDir, "Windows.Win32.Interop.dll");
             string win32WinmdPath = Path.Combine(this.Win32WinmdBinDir, "Windows.Win32.winmd");
 
             this.outputWinmdFullPath = this.OutputWinmd;
@@ -72,7 +71,6 @@ namespace MetadataTasks
 
             builder.AppendSwitchIfNotNull("--sourceDir ", this.EmitterSourceDir);
             builder.AppendSwitchIfNotNull("--arch ", "crossarch");
-            builder.AppendSwitchIfNotNull("--interopFileName ", interopPath);
 
             if (!StringComparer.OrdinalIgnoreCase.Equals(
                 Path.GetFileName(this.outputWinmdFullPath),

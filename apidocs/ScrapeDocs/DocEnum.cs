@@ -74,15 +74,15 @@ namespace ScrapeDocs
             string? enumName = null;
             if (uses.Count == 1)
             {
-                var oneValue = uses[0];
-                if (oneValue.ParameterName.Contains("flags", StringComparison.OrdinalIgnoreCase))
+                var (methodName, parameterName, _, _) = uses[0];
+                if (parameterName.Contains("flags", StringComparison.OrdinalIgnoreCase))
                 {
                     // Only appears in one method, on a parameter named something like "flags".
-                    enumName = $"{oneValue.MethodName}Flags";
+                    enumName = $"{methodName}Flags";
                 }
                 else
                 {
-                    enumName = $"{oneValue.MethodName}_{oneValue.ParameterName}Flags";
+                    enumName = $"{methodName}_{parameterName}Flags";
                 }
             }
             else
@@ -106,7 +106,7 @@ namespace ScrapeDocs
                     if (commonPrefixLength > 1 && firstName[commonPrefixLength - 1] == '_')
                     {
                         // The enum values share a common prefix suitable to imply a name for the enum.
-                        enumName = firstName.Substring(0, commonPrefixLength - 1);
+                        enumName = firstName[..(commonPrefixLength - 1)];
                     }
                 }
             }

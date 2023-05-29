@@ -11,3 +11,5 @@
 //#include <d3d9helper.h>
 #include <d3d9types.h>
 #include <d3d9caps.h>
+#include <d3dtypes.h>
+#include <d3dcaps.h>

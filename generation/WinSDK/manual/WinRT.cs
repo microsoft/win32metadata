@@ -1,7 +1,7 @@
 ﻿using System;
-using System;
 using System.Collections.Generic;
 using System.Text;
+using Windows.Win32.Foundation.Metadata;
 
 namespace Windows.Win32.System.WinRT
 {

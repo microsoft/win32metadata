@@ -6,15 +6,18 @@ namespace ClangSharpSourceToWinmd
 {
     public static class NativeTypedefStructsCreator
     {
-        public static void WriteToStream(Dictionary<string, string> methodNamesToNamespaces, IEnumerable<AutoType> items, Stream output)
+        public static void WriteToStream(Dictionary<string, string> apiNamesToNamespaces, IEnumerable<AutoType> items, Stream output)
         {
+            Dictionary<string, string> autotypesToNamespaces = new Dictionary<string, string>();
+            string currentNamespace = null;
+
             using var writer = new StreamWriter(output, leaveOpen: true);
             writer.Write(
 @"using System;
-using Windows.Win32.Interop;
+using Windows.Win32.Foundation.Metadata;
 
 ");
-            string currentNamespace = null;
+
             foreach (AutoType item in items.OrderBy(a => a.Namespace))
             {
                 string safety = item.ValueType.Contains("*") ? "unsafe " : string.Empty;
@@ -22,15 +25,22 @@ using Windows.Win32.Interop;
                 if (valueType == "DECLARE_HANDLE" || valueType == "AllJoynHandle")
                 {
                     valueType = "IntPtr";
+                    item.NativeTypedef = true;
                 }
                 else if (valueType == "DECLARE_OPAQUE_KEY")
                 {
                     valueType = "long";
+                    item.NativeTypedef = true;
+                }
+                else if (valueType.StartsWith("typedef struct"))
+                {
+                    valueType = "IntPtr";
+                    item.NativeTypedef = true;
                 }
 
                 if (!string.IsNullOrEmpty(item.CloseApi))
                 {
-                    if (!methodNamesToNamespaces.TryGetValue(item.CloseApi, out var apiNamespace))
+                    if (!apiNamesToNamespaces.TryGetValue(item.CloseApi, out var apiNamespace))
                     {
                         throw new System.InvalidOperationException($"The API {item.CloseApi} was not found in the .cs files. The auto type {item.Name} needs to be given an explicit namespace.");
                     }
@@ -85,17 +95,33 @@ $@"namespace {currentNamespace}
                 }
 
                 writer.WriteLine(
-$@"    [NativeTypedef]    
+$@"    [{(item.NativeTypedef ? "NativeTypedef" : "MetadataTypedef")}]
     public {safety}struct {item.Name}
     {{
         public {valueType} Value;
     }}
 ");
+
+                autotypesToNamespaces.Add(item.Name, item.Namespace);
             }
 
             if (currentNamespace != null)
             {
                 writer.WriteLine("}");
+            }
+
+            // Enforce that all CloseApi relationships exist in the same namespace.
+            var closeApiNamespaceMismatches = items.Where(a => !string.IsNullOrEmpty(a.CloseApi) && autotypesToNamespaces[a.Name] != apiNamesToNamespaces[a.CloseApi]);
+            if (closeApiNamespaceMismatches.Any())
+            {
+                throw new System.InvalidOperationException($"{string.Join(", ", closeApiNamespaceMismatches.Select((a, i) => a.Name))} not in the same namespace as CloseApi. CloseApi relationships must exist in the same namespace.");
+            }
+
+            // Enforce that all AlsoUsableFor relationships exist in the same namespace.
+            var alsoUsableForNamespaceMismatches = items.Where(a => !string.IsNullOrEmpty(a.AlsoUsableFor) && autotypesToNamespaces[a.Name] != autotypesToNamespaces[a.AlsoUsableFor]);
+            if (alsoUsableForNamespaceMismatches.Any())
+            {
+                throw new System.InvalidOperationException($"{string.Join(", ", alsoUsableForNamespaceMismatches.Select((a, i) => a.Name))} not in the same namespace as AlsoUsableFor. AlsoUsableFor relationships must exist in the same namespace.");
             }
         }
     }

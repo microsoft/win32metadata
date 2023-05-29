@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -72,23 +71,23 @@ namespace ClangSharpSourceToWinmd
             }
         }
 
-        private static Windows.Win32.Interop.Architecture GetArchitectureForFileName(string fileName)
+        private static Architecture GetArchitectureForFileName(string fileName)
         {
             string potentialArch = Path.GetFileName(Path.GetDirectoryName(fileName));
 
             switch (potentialArch)
             {
                 case "x64":
-                    return Windows.Win32.Interop.Architecture.X64;
+                    return Architecture.X64;
 
                 case "x86":
-                    return Windows.Win32.Interop.Architecture.X86;
+                    return Architecture.X86;
 
                 case "arm64":
-                    return Windows.Win32.Interop.Architecture.Arm64;
+                    return Architecture.Arm64;
 
                 default:
-                    return Windows.Win32.Interop.Architecture.None;
+                    return Architecture.None;
             }
         }
 
@@ -96,8 +95,8 @@ namespace ClangSharpSourceToWinmd
         {
             CrossArchSyntaxMap crossArchSyntaxMap = new CrossArchSyntaxMap();
 
-            var nonx86Files = files.Where(f => GetArchitectureForFileName(f) == Windows.Win32.Interop.Architecture.X64 || GetArchitectureForFileName(f) == Windows.Win32.Interop.Architecture.Arm64);
-            var x86Files = files.Where(f => GetArchitectureForFileName(f) == Windows.Win32.Interop.Architecture.X86);
+            var nonx86Files = files.Where(f => GetArchitectureForFileName(f) == Architecture.X64 || GetArchitectureForFileName(f) == Architecture.Arm64);
+            var x86Files = files.Where(f => GetArchitectureForFileName(f) == Architecture.X86);
 
             // Add non-x86 first so that x86 has a chance to see if it can merge structs not marked
             // with 4-byte packing with 64-bit versions that are marked. The default packing is 4
@@ -123,7 +122,6 @@ namespace ClangSharpSourceToWinmd
         public static ClangSharpSourceCompilation Create(
             string sourceDirectory,
             string arch,
-            string interopFileName,
             Dictionary<string, string> remaps,
             Dictionary<string, Dictionary<string, string>> enumAdditions,
             IEnumerable<string> enumsMakeFlags,
@@ -131,7 +129,8 @@ namespace ClangSharpSourceToWinmd
             Dictionary<string, string> requiredNamespaces,
             HashSet<string> reducePointerLevels,
             IEnumerable<string> addedRefs,
-            Dictionary<string, string> staticLibs)
+            Dictionary<string, string> staticLibs,
+            Dictionary<string, string> apiNamesToNamespaces)
         {
             sourceDirectory = Path.GetFullPath(sourceDirectory);
 
@@ -151,7 +150,6 @@ namespace ClangSharpSourceToWinmd
             }
 
             List<MetadataReference> refs = new List<MetadataReference>();
-            refs.Add(MetadataReference.CreateFromFile(interopFileName));
             refs.Add(MetadataReference.CreateFromFile(netstandardPath));
 
             if (addedRefs != null)
@@ -223,7 +221,7 @@ namespace ClangSharpSourceToWinmd
             HashSet<string> enumsMakeFlagsHashSet = enumsMakeFlags != null ? new HashSet<string>(enumsMakeFlags) : new HashSet<string>();
             System.Threading.Tasks.Parallel.ForEach(FilesToTrees(modifiedFiles), opt, (tree) =>
             {
-                var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, staticLibs, infoFinder.EmptyStructs, infoFinder.EnumMemberNames, tree.FilePath);
+                var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, staticLibs, apiNamesToNamespaces, infoFinder.EmptyStructs, infoFinder.EnumMemberNames, tree.FilePath);
                 WriteTree(cleanedTree, cleanedTree.FilePath);
             });
 
@@ -238,7 +236,7 @@ namespace ClangSharpSourceToWinmd
                 watch.Restart();
 
                 List<string> filesToMerge = new List<string>();
-                foreach (string x86FileName in modifiedFiles.Where(f => GetArchitectureForFileName(f) == Windows.Win32.Interop.Architecture.X86))
+                foreach (string x86FileName in modifiedFiles.Where(f => GetArchitectureForFileName(f) == Architecture.X86))
                 {
                     string x64FileName = x86FileName.Replace(@"\x86\", @"\x64\", StringComparison.OrdinalIgnoreCase);
                     string arm64FileName = x86FileName.Replace(@"\x86\", @"\arm64\", StringComparison.OrdinalIgnoreCase);
@@ -268,7 +266,7 @@ namespace ClangSharpSourceToWinmd
                 HashSet<string> nonX86TreesUsedForX86 = crossArchSyntaxMap.Get64BitTreesUsedForX86();
 
                 CrossArchTreeMerger crossArchTreeMerger = new CrossArchTreeMerger(crossArchSyntaxMap);
-                System.Threading.Tasks.Parallel.ForEach(FilesToTrees(filesToMerge.Where(f => GetArchitectureForFileName(f) == Windows.Win32.Interop.Architecture.X86)), opt, (x86Tree) =>
+                System.Threading.Tasks.Parallel.ForEach(FilesToTrees(filesToMerge.Where(f => GetArchitectureForFileName(f) == Architecture.X86)), opt, (x86Tree) =>
                 {
                     string x64FileName = x86Tree.FilePath.Replace(@"\x86\", @"\x64\", StringComparison.OrdinalIgnoreCase);
                     string arm64FileName = x86Tree.FilePath.Replace(@"\x86\", @"\arm64\", StringComparison.OrdinalIgnoreCase);

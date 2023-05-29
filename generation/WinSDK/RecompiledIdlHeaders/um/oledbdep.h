@@ -321,9 +321,12 @@ EXTERN_C const IID IID_IRowsetNextRowset;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetNextRowset( 
-            /* [in] */ IUnknown *pUnkOuter,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ IUnknown **ppNextRowset) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  IUnknown **ppNextRowset) = 0;
         
     };
     
@@ -353,9 +356,12 @@ EXTERN_C const IID IID_IRowsetNextRowset;
         DECLSPEC_XFGVIRT(IRowsetNextRowset, GetNextRowset)
         HRESULT ( STDMETHODCALLTYPE *GetNextRowset )( 
             IRowsetNextRowset * This,
-            /* [in] */ IUnknown *pUnkOuter,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ IUnknown **ppNextRowset);
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  IUnknown **ppNextRowset);
         
         END_INTERFACE
     } IRowsetNextRowsetVtbl;
@@ -423,12 +429,18 @@ EXTERN_C const IID IID_IRowsetNewRowAfter;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetNewDataAfter( 
-            /* [in] */ HCHAPTER hChapter,
-            /* [in] */ ULONG cbbmPrevious,
-            /* [size_is][in] */ const BYTE *pbmPrevious,
-            /* [in] */ HACCESSOR hAccessor,
-            /* [in] */ BYTE *pData,
-            /* [out] */ HROW *phRow) = 0;
+            /* [annotation][in] */ 
+            _In_  HCHAPTER hChapter,
+            /* [annotation][in] */ 
+            _In_  ULONG cbbmPrevious,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbbmPrevious)  const BYTE *pbmPrevious,
+            /* [annotation][in] */ 
+            _In_  HACCESSOR hAccessor,
+            /* [annotation][in] */ 
+            _In_  BYTE *pData,
+            /* [annotation][out] */ 
+            _Out_  HROW *phRow) = 0;
         
     };
     
@@ -458,12 +470,18 @@ EXTERN_C const IID IID_IRowsetNewRowAfter;
         DECLSPEC_XFGVIRT(IRowsetNewRowAfter, SetNewDataAfter)
         HRESULT ( STDMETHODCALLTYPE *SetNewDataAfter )( 
             IRowsetNewRowAfter * This,
-            /* [in] */ HCHAPTER hChapter,
-            /* [in] */ ULONG cbbmPrevious,
-            /* [size_is][in] */ const BYTE *pbmPrevious,
-            /* [in] */ HACCESSOR hAccessor,
-            /* [in] */ BYTE *pData,
-            /* [out] */ HROW *phRow);
+            /* [annotation][in] */ 
+            _In_  HCHAPTER hChapter,
+            /* [annotation][in] */ 
+            _In_  ULONG cbbmPrevious,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbbmPrevious)  const BYTE *pbmPrevious,
+            /* [annotation][in] */ 
+            _In_  HACCESSOR hAccessor,
+            /* [annotation][in] */ 
+            _In_  BYTE *pData,
+            /* [annotation][out] */ 
+            _Out_  HROW *phRow);
         
         END_INTERFACE
     } IRowsetNewRowAfterVtbl;
@@ -531,14 +549,20 @@ EXTERN_C const IID IID_IRowsetWithParameters;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetParameterInfo( 
-            /* [out][in] */ DB_UPARAMS *pcParams,
-            /* [size_is][size_is][out] */ DBPARAMINFO **prgParamInfo,
-            /* [out] */ OLECHAR **ppNamesBuffer) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  DB_UPARAMS *pcParams,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcParams)  DBPARAMINFO **prgParamInfo,
+            /* [annotation][out] */ 
+            _Out_  OLECHAR **ppNamesBuffer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Requery( 
-            /* [in] */ DBPARAMS *pParams,
-            /* [out] */ ULONG *pulErrorParam,
-            /* [out] */ HCHAPTER *phReserved) = 0;
+            /* [annotation][in] */ 
+            _In_  DBPARAMS *pParams,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pulErrorParam,
+            /* [annotation][out] */ 
+            _Out_  HCHAPTER *phReserved) = 0;
         
     };
     
@@ -568,16 +592,22 @@ EXTERN_C const IID IID_IRowsetWithParameters;
         DECLSPEC_XFGVIRT(IRowsetWithParameters, GetParameterInfo)
         HRESULT ( STDMETHODCALLTYPE *GetParameterInfo )( 
             IRowsetWithParameters * This,
-            /* [out][in] */ DB_UPARAMS *pcParams,
-            /* [size_is][size_is][out] */ DBPARAMINFO **prgParamInfo,
-            /* [out] */ OLECHAR **ppNamesBuffer);
+            /* [annotation][out][in] */ 
+            _Inout_  DB_UPARAMS *pcParams,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcParams)  DBPARAMINFO **prgParamInfo,
+            /* [annotation][out] */ 
+            _Out_  OLECHAR **ppNamesBuffer);
         
         DECLSPEC_XFGVIRT(IRowsetWithParameters, Requery)
         HRESULT ( STDMETHODCALLTYPE *Requery )( 
             IRowsetWithParameters * This,
-            /* [in] */ DBPARAMS *pParams,
-            /* [out] */ ULONG *pulErrorParam,
-            /* [out] */ HCHAPTER *phReserved);
+            /* [annotation][in] */ 
+            _In_  DBPARAMS *pParams,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pulErrorParam,
+            /* [annotation][out] */ 
+            _Out_  HCHAPTER *phReserved);
         
         END_INTERFACE
     } IRowsetWithParametersVtbl;
@@ -648,10 +678,14 @@ EXTERN_C const IID IID_IRowsetAsynch;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RatioFinished( 
-            /* [out] */ DBCOUNTITEM *pulDenominator,
-            /* [out] */ DBCOUNTITEM *pulNumerator,
-            /* [out] */ DBCOUNTITEM *pcRows,
-            /* [out] */ BOOL *pfNewRows) = 0;
+            /* [annotation][out] */ 
+            _Out_  DBCOUNTITEM *pulDenominator,
+            /* [annotation][out] */ 
+            _Out_  DBCOUNTITEM *pulNumerator,
+            /* [annotation][out] */ 
+            _Out_  DBCOUNTITEM *pcRows,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfNewRows) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Stop( void) = 0;
         
@@ -683,10 +717,14 @@ EXTERN_C const IID IID_IRowsetAsynch;
         DECLSPEC_XFGVIRT(IRowsetAsynch, RatioFinished)
         HRESULT ( STDMETHODCALLTYPE *RatioFinished )( 
             IRowsetAsynch * This,
-            /* [out] */ DBCOUNTITEM *pulDenominator,
-            /* [out] */ DBCOUNTITEM *pulNumerator,
-            /* [out] */ DBCOUNTITEM *pcRows,
-            /* [out] */ BOOL *pfNewRows);
+            /* [annotation][out] */ 
+            _Out_  DBCOUNTITEM *pulDenominator,
+            /* [annotation][out] */ 
+            _Out_  DBCOUNTITEM *pulNumerator,
+            /* [annotation][out] */ 
+            _Out_  DBCOUNTITEM *pcRows,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfNewRows);
         
         DECLSPEC_XFGVIRT(IRowsetAsynch, Stop)
         HRESULT ( STDMETHODCALLTYPE *Stop )( 
@@ -761,8 +799,10 @@ EXTERN_C const IID IID_IRowsetKeys;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ListKeys( 
-            /* [out][in] */ DBORDINAL *pcColumns,
-            /* [size_is][size_is][out] */ DBORDINAL **prgColumns) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  DBORDINAL *pcColumns,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcColumns)  DBORDINAL **prgColumns) = 0;
         
     };
     
@@ -792,8 +832,10 @@ EXTERN_C const IID IID_IRowsetKeys;
         DECLSPEC_XFGVIRT(IRowsetKeys, ListKeys)
         HRESULT ( STDMETHODCALLTYPE *ListKeys )( 
             IRowsetKeys * This,
-            /* [out][in] */ DBORDINAL *pcColumns,
-            /* [size_is][size_is][out] */ DBORDINAL **prgColumns);
+            /* [annotation][out][in] */ 
+            _Inout_  DBORDINAL *pcColumns,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcColumns)  DBORDINAL **prgColumns);
         
         END_INTERFACE
     } IRowsetKeysVtbl;
@@ -984,8 +1026,10 @@ EXTERN_C const IID IID_IRowsetWatchNotify;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnChange( 
-            /* [in] */ IRowset *pRowset,
-            /* [in] */ DBWATCHNOTIFY eChangeReason) = 0;
+            /* [annotation][in] */ 
+            _In_  IRowset *pRowset,
+            /* [annotation][in] */ 
+            _In_  DBWATCHNOTIFY eChangeReason) = 0;
         
     };
     
@@ -1015,8 +1059,10 @@ EXTERN_C const IID IID_IRowsetWatchNotify;
         DECLSPEC_XFGVIRT(IRowsetWatchNotify, OnChange)
         HRESULT ( STDMETHODCALLTYPE *OnChange )( 
             IRowsetWatchNotify * This,
-            /* [in] */ IRowset *pRowset,
-            /* [in] */ DBWATCHNOTIFY eChangeReason);
+            /* [annotation][in] */ 
+            _In_  IRowset *pRowset,
+            /* [annotation][in] */ 
+            _In_  DBWATCHNOTIFY eChangeReason);
         
         END_INTERFACE
     } IRowsetWatchNotifyVtbl;
@@ -1112,34 +1158,52 @@ EXTERN_C const IID IID_IRowsetWatchRegion;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateWatchRegion( 
-            /* [in] */ DBWATCHMODE dwWatchMode,
-            /* [out] */ HWATCHREGION *phRegion) = 0;
+            /* [annotation][in] */ 
+            _In_  DBWATCHMODE dwWatchMode,
+            /* [annotation][out] */ 
+            _Out_  HWATCHREGION *phRegion) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ChangeWatchMode( 
-            /* [in] */ HWATCHREGION hRegion,
-            /* [in] */ DBWATCHMODE dwWatchMode) = 0;
+            /* [annotation][in] */ 
+            _In_  HWATCHREGION hRegion,
+            /* [annotation][in] */ 
+            _In_  DBWATCHMODE dwWatchMode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeleteWatchRegion( 
-            /* [in] */ HWATCHREGION hRegion) = 0;
+            /* [annotation][in] */ 
+            _In_  HWATCHREGION hRegion) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetWatchRegionInfo( 
-            /* [in] */ HWATCHREGION hRegion,
-            /* [out] */ DBWATCHMODE *pdwWatchMode,
-            /* [out] */ HCHAPTER *phChapter,
-            /* [out][in] */ DBBKMARK *pcbBookmark,
-            /* [size_is][size_is][out] */ BYTE **ppBookmark,
-            /* [out] */ DBROWCOUNT *pcRows) = 0;
+            /* [annotation][in] */ 
+            _In_  HWATCHREGION hRegion,
+            /* [annotation][out] */ 
+            _Out_  DBWATCHMODE *pdwWatchMode,
+            /* [annotation][out] */ 
+            _Out_  HCHAPTER *phChapter,
+            /* [annotation][out][in] */ 
+            _Inout_  DBBKMARK *pcbBookmark,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcbBookmark)  BYTE **ppBookmark,
+            /* [annotation][out] */ 
+            _Out_  DBROWCOUNT *pcRows) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Refresh( 
-            /* [out][in] */ DBCOUNTITEM *pcChangesObtained,
-            /* [size_is][size_is][out] */ DBROWWATCHCHANGE **prgChanges) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  DBCOUNTITEM *pcChangesObtained,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcChangesObtained)  DBROWWATCHCHANGE **prgChanges) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ShrinkWatchRegion( 
-            /* [in] */ HWATCHREGION hRegion,
-            /* [in] */ HCHAPTER hChapter,
-            /* [in] */ DBBKMARK cbBookmark,
-            /* [size_is][in] */ BYTE *pBookmark,
-            /* [in] */ DBROWCOUNT cRows) = 0;
+            /* [annotation][in] */ 
+            _In_  HWATCHREGION hRegion,
+            /* [annotation][in] */ 
+            _In_  HCHAPTER hChapter,
+            /* [annotation][in] */ 
+            _In_  DBBKMARK cbBookmark,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbBookmark)  BYTE *pBookmark,
+            /* [annotation][in] */ 
+            _In_  DBROWCOUNT cRows) = 0;
         
     };
     
@@ -1181,44 +1245,62 @@ EXTERN_C const IID IID_IRowsetWatchRegion;
         DECLSPEC_XFGVIRT(IRowsetWatchRegion, CreateWatchRegion)
         HRESULT ( STDMETHODCALLTYPE *CreateWatchRegion )( 
             IRowsetWatchRegion * This,
-            /* [in] */ DBWATCHMODE dwWatchMode,
-            /* [out] */ HWATCHREGION *phRegion);
+            /* [annotation][in] */ 
+            _In_  DBWATCHMODE dwWatchMode,
+            /* [annotation][out] */ 
+            _Out_  HWATCHREGION *phRegion);
         
         DECLSPEC_XFGVIRT(IRowsetWatchRegion, ChangeWatchMode)
         HRESULT ( STDMETHODCALLTYPE *ChangeWatchMode )( 
             IRowsetWatchRegion * This,
-            /* [in] */ HWATCHREGION hRegion,
-            /* [in] */ DBWATCHMODE dwWatchMode);
+            /* [annotation][in] */ 
+            _In_  HWATCHREGION hRegion,
+            /* [annotation][in] */ 
+            _In_  DBWATCHMODE dwWatchMode);
         
         DECLSPEC_XFGVIRT(IRowsetWatchRegion, DeleteWatchRegion)
         HRESULT ( STDMETHODCALLTYPE *DeleteWatchRegion )( 
             IRowsetWatchRegion * This,
-            /* [in] */ HWATCHREGION hRegion);
+            /* [annotation][in] */ 
+            _In_  HWATCHREGION hRegion);
         
         DECLSPEC_XFGVIRT(IRowsetWatchRegion, GetWatchRegionInfo)
         HRESULT ( STDMETHODCALLTYPE *GetWatchRegionInfo )( 
             IRowsetWatchRegion * This,
-            /* [in] */ HWATCHREGION hRegion,
-            /* [out] */ DBWATCHMODE *pdwWatchMode,
-            /* [out] */ HCHAPTER *phChapter,
-            /* [out][in] */ DBBKMARK *pcbBookmark,
-            /* [size_is][size_is][out] */ BYTE **ppBookmark,
-            /* [out] */ DBROWCOUNT *pcRows);
+            /* [annotation][in] */ 
+            _In_  HWATCHREGION hRegion,
+            /* [annotation][out] */ 
+            _Out_  DBWATCHMODE *pdwWatchMode,
+            /* [annotation][out] */ 
+            _Out_  HCHAPTER *phChapter,
+            /* [annotation][out][in] */ 
+            _Inout_  DBBKMARK *pcbBookmark,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcbBookmark)  BYTE **ppBookmark,
+            /* [annotation][out] */ 
+            _Out_  DBROWCOUNT *pcRows);
         
         DECLSPEC_XFGVIRT(IRowsetWatchRegion, Refresh)
         HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             IRowsetWatchRegion * This,
-            /* [out][in] */ DBCOUNTITEM *pcChangesObtained,
-            /* [size_is][size_is][out] */ DBROWWATCHCHANGE **prgChanges);
+            /* [annotation][out][in] */ 
+            _Inout_  DBCOUNTITEM *pcChangesObtained,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcChangesObtained)  DBROWWATCHCHANGE **prgChanges);
         
         DECLSPEC_XFGVIRT(IRowsetWatchRegion, ShrinkWatchRegion)
         HRESULT ( STDMETHODCALLTYPE *ShrinkWatchRegion )( 
             IRowsetWatchRegion * This,
-            /* [in] */ HWATCHREGION hRegion,
-            /* [in] */ HCHAPTER hChapter,
-            /* [in] */ DBBKMARK cbBookmark,
-            /* [size_is][in] */ BYTE *pBookmark,
-            /* [in] */ DBROWCOUNT cRows);
+            /* [annotation][in] */ 
+            _In_  HWATCHREGION hRegion,
+            /* [annotation][in] */ 
+            _In_  HCHAPTER hChapter,
+            /* [annotation][in] */ 
+            _In_  DBBKMARK cbBookmark,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbBookmark)  BYTE *pBookmark,
+            /* [annotation][in] */ 
+            _In_  DBROWCOUNT cRows);
         
         END_INTERFACE
     } IRowsetWatchRegionVtbl;
@@ -1313,28 +1395,44 @@ EXTERN_C const IID IID_IRowsetCopyRows;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CloseSource( 
-            /* [in] */ HSOURCE hSourceID) = 0;
+            /* [annotation][in] */ 
+            _In_  HSOURCE hSourceID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CopyByHROWS( 
-            /* [in] */ HSOURCE hSourceID,
-            /* [in] */ HCHAPTER hReserved,
-            /* [in] */ DBROWCOUNT cRows,
-            /* [size_is][in] */ const HROW rghRows[  ],
-            /* [in] */ ULONG bFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  HSOURCE hSourceID,
+            /* [annotation][in] */ 
+            _In_  HCHAPTER hReserved,
+            /* [annotation][in] */ 
+            _In_  DBROWCOUNT cRows,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cRows)  const HROW rghRows[  ],
+            /* [annotation][in] */ 
+            _In_  ULONG bFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CopyRows( 
-            /* [in] */ HSOURCE hSourceID,
-            /* [in] */ HCHAPTER hReserved,
-            /* [in] */ DBROWCOUNT cRows,
-            /* [in] */ ULONG bFlags,
-            /* [out] */ DBCOUNTITEM *pcRowsCopied) = 0;
+            /* [annotation][in] */ 
+            _In_  HSOURCE hSourceID,
+            /* [annotation][in] */ 
+            _In_  HCHAPTER hReserved,
+            /* [annotation][in] */ 
+            _In_  DBROWCOUNT cRows,
+            /* [annotation][in] */ 
+            _In_  ULONG bFlags,
+            /* [annotation][out] */ 
+            _Out_  DBCOUNTITEM *pcRowsCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DefineSource( 
-            /* [in] */ const IRowset *pRowsetSource,
-            /* [in] */ const DBORDINAL cColIds,
-            /* [size_is][in] */ const DB_LORDINAL rgSourceColumns[  ],
-            /* [size_is][in] */ const DB_LORDINAL rgTargetColumns[  ],
-            /* [out] */ HSOURCE *phSourceID) = 0;
+            /* [annotation][in] */ 
+            _In_  const IRowset *pRowsetSource,
+            /* [annotation][in] */ 
+            _In_  const DBORDINAL cColIds,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cColIds)  const DB_LORDINAL rgSourceColumns[  ],
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cColIds)  const DB_LORDINAL rgTargetColumns[  ],
+            /* [annotation][out] */ 
+            _Out_  HSOURCE *phSourceID) = 0;
         
     };
     
@@ -1364,34 +1462,50 @@ EXTERN_C const IID IID_IRowsetCopyRows;
         DECLSPEC_XFGVIRT(IRowsetCopyRows, CloseSource)
         HRESULT ( STDMETHODCALLTYPE *CloseSource )( 
             IRowsetCopyRows * This,
-            /* [in] */ HSOURCE hSourceID);
+            /* [annotation][in] */ 
+            _In_  HSOURCE hSourceID);
         
         DECLSPEC_XFGVIRT(IRowsetCopyRows, CopyByHROWS)
         HRESULT ( STDMETHODCALLTYPE *CopyByHROWS )( 
             IRowsetCopyRows * This,
-            /* [in] */ HSOURCE hSourceID,
-            /* [in] */ HCHAPTER hReserved,
-            /* [in] */ DBROWCOUNT cRows,
-            /* [size_is][in] */ const HROW rghRows[  ],
-            /* [in] */ ULONG bFlags);
+            /* [annotation][in] */ 
+            _In_  HSOURCE hSourceID,
+            /* [annotation][in] */ 
+            _In_  HCHAPTER hReserved,
+            /* [annotation][in] */ 
+            _In_  DBROWCOUNT cRows,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cRows)  const HROW rghRows[  ],
+            /* [annotation][in] */ 
+            _In_  ULONG bFlags);
         
         DECLSPEC_XFGVIRT(IRowsetCopyRows, CopyRows)
         HRESULT ( STDMETHODCALLTYPE *CopyRows )( 
             IRowsetCopyRows * This,
-            /* [in] */ HSOURCE hSourceID,
-            /* [in] */ HCHAPTER hReserved,
-            /* [in] */ DBROWCOUNT cRows,
-            /* [in] */ ULONG bFlags,
-            /* [out] */ DBCOUNTITEM *pcRowsCopied);
+            /* [annotation][in] */ 
+            _In_  HSOURCE hSourceID,
+            /* [annotation][in] */ 
+            _In_  HCHAPTER hReserved,
+            /* [annotation][in] */ 
+            _In_  DBROWCOUNT cRows,
+            /* [annotation][in] */ 
+            _In_  ULONG bFlags,
+            /* [annotation][out] */ 
+            _Out_  DBCOUNTITEM *pcRowsCopied);
         
         DECLSPEC_XFGVIRT(IRowsetCopyRows, DefineSource)
         HRESULT ( STDMETHODCALLTYPE *DefineSource )( 
             IRowsetCopyRows * This,
-            /* [in] */ const IRowset *pRowsetSource,
-            /* [in] */ const DBORDINAL cColIds,
-            /* [size_is][in] */ const DB_LORDINAL rgSourceColumns[  ],
-            /* [size_is][in] */ const DB_LORDINAL rgTargetColumns[  ],
-            /* [out] */ HSOURCE *phSourceID);
+            /* [annotation][in] */ 
+            _In_  const IRowset *pRowsetSource,
+            /* [annotation][in] */ 
+            _In_  const DBORDINAL cColIds,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cColIds)  const DB_LORDINAL rgSourceColumns[  ],
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cColIds)  const DB_LORDINAL rgTargetColumns[  ],
+            /* [annotation][out] */ 
+            _Out_  HSOURCE *phSourceID);
         
         END_INTERFACE
     } IRowsetCopyRowsVtbl;
@@ -1468,19 +1582,30 @@ EXTERN_C const IID IID_IReadData;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ReadData( 
-            /* [in] */ HCHAPTER hChapter,
-            /* [in] */ DBBKMARK cbBookmark,
-            /* [size_is][in] */ const BYTE *pBookmark,
-            /* [in] */ DBROWOFFSET lRowsOffset,
-            /* [in] */ HACCESSOR hAccessor,
-            /* [in] */ DBROWCOUNT cRows,
-            /* [out] */ DBCOUNTITEM *pcRowsObtained,
-            /* [out][in] */ BYTE **ppFixedData,
-            /* [out][in] */ DBLENGTH *pcbVariableTotal,
-            /* [out][in] */ BYTE **ppVariableData) = 0;
+            /* [annotation][in] */ 
+            _In_  HCHAPTER hChapter,
+            /* [annotation][in] */ 
+            _In_  DBBKMARK cbBookmark,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbBookmark)  const BYTE *pBookmark,
+            /* [annotation][in] */ 
+            _In_  DBROWOFFSET lRowsOffset,
+            /* [annotation][in] */ 
+            _In_  HACCESSOR hAccessor,
+            /* [annotation][in] */ 
+            _In_  DBROWCOUNT cRows,
+            /* [annotation][out] */ 
+            _Out_  DBCOUNTITEM *pcRowsObtained,
+            /* [annotation][out][in] */ 
+            _Inout_  BYTE **ppFixedData,
+            /* [annotation][out][in] */ 
+            _Inout_  DBLENGTH *pcbVariableTotal,
+            /* [annotation][out][in] */ 
+            _Inout_  BYTE **ppVariableData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReleaseChapter( 
-            /* [in] */ HCHAPTER hChapter) = 0;
+            /* [annotation][in] */ 
+            _In_  HCHAPTER hChapter) = 0;
         
     };
     
@@ -1510,21 +1635,32 @@ EXTERN_C const IID IID_IReadData;
         DECLSPEC_XFGVIRT(IReadData, ReadData)
         HRESULT ( STDMETHODCALLTYPE *ReadData )( 
             IReadData * This,
-            /* [in] */ HCHAPTER hChapter,
-            /* [in] */ DBBKMARK cbBookmark,
-            /* [size_is][in] */ const BYTE *pBookmark,
-            /* [in] */ DBROWOFFSET lRowsOffset,
-            /* [in] */ HACCESSOR hAccessor,
-            /* [in] */ DBROWCOUNT cRows,
-            /* [out] */ DBCOUNTITEM *pcRowsObtained,
-            /* [out][in] */ BYTE **ppFixedData,
-            /* [out][in] */ DBLENGTH *pcbVariableTotal,
-            /* [out][in] */ BYTE **ppVariableData);
+            /* [annotation][in] */ 
+            _In_  HCHAPTER hChapter,
+            /* [annotation][in] */ 
+            _In_  DBBKMARK cbBookmark,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cbBookmark)  const BYTE *pBookmark,
+            /* [annotation][in] */ 
+            _In_  DBROWOFFSET lRowsOffset,
+            /* [annotation][in] */ 
+            _In_  HACCESSOR hAccessor,
+            /* [annotation][in] */ 
+            _In_  DBROWCOUNT cRows,
+            /* [annotation][out] */ 
+            _Out_  DBCOUNTITEM *pcRowsObtained,
+            /* [annotation][out][in] */ 
+            _Inout_  BYTE **ppFixedData,
+            /* [annotation][out][in] */ 
+            _Inout_  DBLENGTH *pcbVariableTotal,
+            /* [annotation][out][in] */ 
+            _Inout_  BYTE **ppVariableData);
         
         DECLSPEC_XFGVIRT(IReadData, ReleaseChapter)
         HRESULT ( STDMETHODCALLTYPE *ReleaseChapter )( 
             IReadData * This,
-            /* [in] */ HCHAPTER hChapter);
+            /* [annotation][in] */ 
+            _In_  HCHAPTER hChapter);
         
         END_INTERFACE
     } IReadDataVtbl;
@@ -1650,35 +1786,54 @@ EXTERN_C const IID IID_ICommandCost;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetAccumulatedCost( 
-            /* [in] */ LPCOLESTR pwszRowsetName,
-            /* [out][in] */ ULONG *pcCostLimits,
-            /* [size_is][size_is][out] */ DBCOST **prgCostLimits) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pwszRowsetName,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *pcCostLimits,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcCostLimits)  DBCOST **prgCostLimits) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCostEstimate( 
-            /* [in] */ LPCOLESTR pwszRowsetName,
-            /* [out] */ ULONG *pcCostEstimates,
-            /* [out] */ DBCOST *prgCostEstimates) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pwszRowsetName,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcCostEstimates,
+            /* [annotation][out] */ 
+            _Out_  DBCOST *prgCostEstimates) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCostGoals( 
-            /* [in] */ LPCOLESTR pwszRowsetName,
-            /* [out] */ ULONG *pcCostGoals,
-            /* [out] */ DBCOST *prgCostGoals) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pwszRowsetName,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcCostGoals,
+            /* [annotation][out] */ 
+            _Out_  DBCOST *prgCostGoals) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCostLimits( 
-            /* [in] */ LPCOLESTR pwszRowsetName,
-            /* [out] */ ULONG *pcCostLimits,
-            /* [out] */ DBCOST *prgCostLimits) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pwszRowsetName,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcCostLimits,
+            /* [annotation][out] */ 
+            _Out_  DBCOST *prgCostLimits) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCostGoals( 
-            /* [in] */ LPCOLESTR pwszRowsetName,
-            /* [in] */ ULONG cCostGoals,
-            /* [size_is][in] */ const DBCOST rgCostGoals[  ]) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pwszRowsetName,
+            /* [annotation][in] */ 
+            _In_  ULONG cCostGoals,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cCostGoals)  const DBCOST rgCostGoals[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCostLimits( 
-            /* [in] */ LPCOLESTR pwszRowsetName,
-            /* [in] */ ULONG cCostLimits,
-            /* [in] */ DBCOST *prgCostLimits,
-            /* [in] */ DBEXECLIMITS dwExecutionFlags) = 0;
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pwszRowsetName,
+            /* [annotation][in] */ 
+            _In_  ULONG cCostLimits,
+            /* [annotation][in] */ 
+            _In_  DBCOST *prgCostLimits,
+            /* [annotation][in] */ 
+            _In_  DBEXECLIMITS dwExecutionFlags) = 0;
         
     };
     
@@ -1708,45 +1863,64 @@ EXTERN_C const IID IID_ICommandCost;
         DECLSPEC_XFGVIRT(ICommandCost, GetAccumulatedCost)
         HRESULT ( STDMETHODCALLTYPE *GetAccumulatedCost )( 
             ICommandCost * This,
-            /* [in] */ LPCOLESTR pwszRowsetName,
-            /* [out][in] */ ULONG *pcCostLimits,
-            /* [size_is][size_is][out] */ DBCOST **prgCostLimits);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pwszRowsetName,
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *pcCostLimits,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcCostLimits)  DBCOST **prgCostLimits);
         
         DECLSPEC_XFGVIRT(ICommandCost, GetCostEstimate)
         HRESULT ( STDMETHODCALLTYPE *GetCostEstimate )( 
             ICommandCost * This,
-            /* [in] */ LPCOLESTR pwszRowsetName,
-            /* [out] */ ULONG *pcCostEstimates,
-            /* [out] */ DBCOST *prgCostEstimates);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pwszRowsetName,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcCostEstimates,
+            /* [annotation][out] */ 
+            _Out_  DBCOST *prgCostEstimates);
         
         DECLSPEC_XFGVIRT(ICommandCost, GetCostGoals)
         HRESULT ( STDMETHODCALLTYPE *GetCostGoals )( 
             ICommandCost * This,
-            /* [in] */ LPCOLESTR pwszRowsetName,
-            /* [out] */ ULONG *pcCostGoals,
-            /* [out] */ DBCOST *prgCostGoals);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pwszRowsetName,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcCostGoals,
+            /* [annotation][out] */ 
+            _Out_  DBCOST *prgCostGoals);
         
         DECLSPEC_XFGVIRT(ICommandCost, GetCostLimits)
         HRESULT ( STDMETHODCALLTYPE *GetCostLimits )( 
             ICommandCost * This,
-            /* [in] */ LPCOLESTR pwszRowsetName,
-            /* [out] */ ULONG *pcCostLimits,
-            /* [out] */ DBCOST *prgCostLimits);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pwszRowsetName,
+            /* [annotation][out] */ 
+            _Out_  ULONG *pcCostLimits,
+            /* [annotation][out] */ 
+            _Out_  DBCOST *prgCostLimits);
         
         DECLSPEC_XFGVIRT(ICommandCost, SetCostGoals)
         HRESULT ( STDMETHODCALLTYPE *SetCostGoals )( 
             ICommandCost * This,
-            /* [in] */ LPCOLESTR pwszRowsetName,
-            /* [in] */ ULONG cCostGoals,
-            /* [size_is][in] */ const DBCOST rgCostGoals[  ]);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pwszRowsetName,
+            /* [annotation][in] */ 
+            _In_  ULONG cCostGoals,
+            /* [annotation][size_is][in] */ 
+            _In_reads_(cCostGoals)  const DBCOST rgCostGoals[  ]);
         
         DECLSPEC_XFGVIRT(ICommandCost, SetCostLimits)
         HRESULT ( STDMETHODCALLTYPE *SetCostLimits )( 
             ICommandCost * This,
-            /* [in] */ LPCOLESTR pwszRowsetName,
-            /* [in] */ ULONG cCostLimits,
-            /* [in] */ DBCOST *prgCostLimits,
-            /* [in] */ DBEXECLIMITS dwExecutionFlags);
+            /* [annotation][in] */ 
+            _In_  LPCOLESTR pwszRowsetName,
+            /* [annotation][in] */ 
+            _In_  ULONG cCostLimits,
+            /* [annotation][in] */ 
+            _In_  DBCOST *prgCostLimits,
+            /* [annotation][in] */ 
+            _In_  DBEXECLIMITS dwExecutionFlags);
         
         END_INTERFACE
     } ICommandCostVtbl;
@@ -1934,15 +2108,22 @@ EXTERN_C const IID IID_ITableRename;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RenameColumn( 
-            /* [in] */ DBID *pTableId,
-            /* [in] */ DBID *pOldColumnId,
-            /* [in] */ DBID *pNewColumnId) = 0;
+            /* [annotation][in] */ 
+            _In_  DBID *pTableId,
+            /* [annotation][in] */ 
+            _In_  DBID *pOldColumnId,
+            /* [annotation][in] */ 
+            _In_  DBID *pNewColumnId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RenameTable( 
-            /* [in] */ DBID *pOldTableId,
-            /* [in] */ DBID *pOldIndexId,
-            /* [in] */ DBID *pNewTableId,
-            /* [in] */ DBID *pNewIndexId) = 0;
+            /* [annotation][in] */ 
+            _In_  DBID *pOldTableId,
+            /* [annotation][in] */ 
+            _In_  DBID *pOldIndexId,
+            /* [annotation][in] */ 
+            _In_  DBID *pNewTableId,
+            /* [annotation][in] */ 
+            _In_  DBID *pNewIndexId) = 0;
         
     };
     
@@ -1972,17 +2153,24 @@ EXTERN_C const IID IID_ITableRename;
         DECLSPEC_XFGVIRT(ITableRename, RenameColumn)
         HRESULT ( STDMETHODCALLTYPE *RenameColumn )( 
             ITableRename * This,
-            /* [in] */ DBID *pTableId,
-            /* [in] */ DBID *pOldColumnId,
-            /* [in] */ DBID *pNewColumnId);
+            /* [annotation][in] */ 
+            _In_  DBID *pTableId,
+            /* [annotation][in] */ 
+            _In_  DBID *pOldColumnId,
+            /* [annotation][in] */ 
+            _In_  DBID *pNewColumnId);
         
         DECLSPEC_XFGVIRT(ITableRename, RenameTable)
         HRESULT ( STDMETHODCALLTYPE *RenameTable )( 
             ITableRename * This,
-            /* [in] */ DBID *pOldTableId,
-            /* [in] */ DBID *pOldIndexId,
-            /* [in] */ DBID *pNewTableId,
-            /* [in] */ DBID *pNewIndexId);
+            /* [annotation][in] */ 
+            _In_  DBID *pOldTableId,
+            /* [annotation][in] */ 
+            _In_  DBID *pOldIndexId,
+            /* [annotation][in] */ 
+            _In_  DBID *pNewTableId,
+            /* [annotation][in] */ 
+            _In_  DBID *pNewIndexId);
         
         END_INTERFACE
     } ITableRenameVtbl;
@@ -2053,13 +2241,18 @@ EXTERN_C const IID IID_IDBSchemaCommand;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCommand( 
-            /* [in] */ IUnknown *pUnkOuter,
-            /* [in] */ REFGUID rguidSchema,
-            /* [out] */ ICommand **ppCommand) = 0;
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidSchema,
+            /* [annotation][out] */ 
+            _Out_  ICommand **ppCommand) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSchemas( 
-            /* [out][in] */ ULONG *pcSchemas,
-            /* [size_is][size_is][out] */ GUID **prgSchemas) = 0;
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *pcSchemas,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcSchemas)  GUID **prgSchemas) = 0;
         
     };
     
@@ -2089,15 +2282,20 @@ EXTERN_C const IID IID_IDBSchemaCommand;
         DECLSPEC_XFGVIRT(IDBSchemaCommand, GetCommand)
         HRESULT ( STDMETHODCALLTYPE *GetCommand )( 
             IDBSchemaCommand * This,
-            /* [in] */ IUnknown *pUnkOuter,
-            /* [in] */ REFGUID rguidSchema,
-            /* [out] */ ICommand **ppCommand);
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnkOuter,
+            /* [annotation][in] */ 
+            _In_  REFGUID rguidSchema,
+            /* [annotation][out] */ 
+            _Out_  ICommand **ppCommand);
         
         DECLSPEC_XFGVIRT(IDBSchemaCommand, GetSchemas)
         HRESULT ( STDMETHODCALLTYPE *GetSchemas )( 
             IDBSchemaCommand * This,
-            /* [out][in] */ ULONG *pcSchemas,
-            /* [size_is][size_is][out] */ GUID **prgSchemas);
+            /* [annotation][out][in] */ 
+            _Inout_  ULONG *pcSchemas,
+            /* [annotation][size_is][size_is][out] */ 
+            _Out_writes_(*pcSchemas)  GUID **prgSchemas);
         
         END_INTERFACE
     } IDBSchemaCommandVtbl;
@@ -2168,7 +2366,8 @@ EXTERN_C const IID IID_IProvideMoniker;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetMoniker( 
-            /* [out] */ IMoniker **ppIMoniker) = 0;
+            /* [annotation][out] */ 
+            _Out_  IMoniker **ppIMoniker) = 0;
         
     };
     
@@ -2198,7 +2397,8 @@ EXTERN_C const IID IID_IProvideMoniker;
         DECLSPEC_XFGVIRT(IProvideMoniker, GetMoniker)
         HRESULT ( STDMETHODCALLTYPE *GetMoniker )( 
             IProvideMoniker * This,
-            /* [out] */ IMoniker **ppIMoniker);
+            /* [annotation][out] */ 
+            _Out_  IMoniker **ppIMoniker);
         
         END_INTERFACE
     } IProvideMonikerVtbl;

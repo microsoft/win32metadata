@@ -6,7 +6,6 @@ using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Windows.Win32.Interop;
 using MetadataUtils;
 
 namespace ClangSharpSourceToWinmd
@@ -235,7 +234,7 @@ namespace ClangSharpSourceToWinmd
                             ret.Append(" | ");
                         }
 
-                        ret.Append($"Windows.Win32.Interop.Architecture.{val}");
+                        ret.Append($"Windows.Win32.Foundation.Metadata.Architecture.{val}");
                     }
                 }
 

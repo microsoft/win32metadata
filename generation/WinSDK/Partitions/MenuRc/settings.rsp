@@ -5,6 +5,7 @@
 <IncludeRoot>/um/mrmresourceindexer.h
 <IncludeRoot>/um/ResourceIndexer.h
 <IncludeRoot>/um/WinUser.h
+<IncludeRoot>/um/menutemplate.h
 --namespace
 Windows.Win32.UI.WindowsAndMessaging
 --exclude

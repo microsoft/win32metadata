@@ -1,0 +1,36 @@
+trigger: none # We only want to trigger manually or based on resources
+pr: none
+
+resources:
+  pipelines:
+  - pipeline: win32metadata
+    source: Win32 Docs
+    trigger:
+      tags:
+      - auto-release
+
+stages:
+- stage: nuget_org
+  displayName: nuget.org
+  jobs:
+  - deployment: push
+    pool:
+      vmImage: windows-2019
+    environment: No-Approval 2
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: win32metadata
+            artifact: ApiDocsNuGetPackages
+            displayName: Download API docs
+          - task: NuGetToolInstaller@1
+            displayName: Use NuGet 5.x
+            inputs:
+              versionSpec: 5.x
+          - powershell: |
+              Get-ChildItem .\ApiDocsNuGetPackages\*.nupkg |% {
+                nuget push $_ -Source https://api.nuget.org/v3/index.json -SkipDuplicate -ApiKey $(NuGetOrgApiKey)
+              }
+            displayName: Push packages to nuget.org
+            workingDirectory: $(Pipeline.Workspace)/win32metadata

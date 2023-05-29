@@ -1,6 +1,6 @@
 Write-Host "Name,Title,Header,TechRoot"
 
-foreach ($funcFile in Get-ChildItem "$sdkApiPath\n*.md" -r)
+foreach ($funcFile in Get-ChildItem "$MicrosoftDocsSdkApiPath\n*.md" -r)
 {
     $funcName = ""
     $reqHeader = ""
