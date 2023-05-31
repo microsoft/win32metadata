@@ -435,3 +435,6 @@ winmd1: Windows.Win32.System.Diagnostics.ClrProfiling.COR_PRF_MONITOR.COR_PRF_AL
 winmd1: Windows.Win32.System.Diagnostics.ClrProfiling.COR_PRF_MONITOR.COR_PRF_MONITOR_IMMUTABLE = -285422592, winmd2 = -285684736
 # Turn DXGI_SWAP_CHAIN_DESC1.Flags into DXGI_SWAP_CHAIN_FLAG type
 Windows.Win32.Graphics.Dxgi.DXGI_SWAP_CHAIN_DESC1.Flags :  => [AssociatedEnum(DXGI_SWAP_CHAIN_FLAG)]
+# Fixed #1585.
+Windows.Win32.Media.DirectShow.IKsNodeControl => Windows.Win32.Media.KernelStreaming.IKsNodeControl
+Windows.Win32.Media.KernelStreaming.IKsPropertySet added

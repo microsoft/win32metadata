@@ -1,5 +1,3 @@
---exclude
-IKsPropertySet
 --traverse
 <IncludeRoot>/um/audevcod.h
 <IncludeRoot>/um/evcode.h

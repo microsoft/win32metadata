@@ -695,6 +695,7 @@ AM_MEDIA_TYPE=Windows.Win32.Media.MediaFoundation
 TIMECODE_SAMPLE=Windows.Win32.Media
 TIMECODE=Windows.Win32.Media
 VIDEOENCODER_BITRATE_MODE=Windows.Win32.Media.DirectShow
+IKsPropertySet=Windows.Win32.Media.KernelStreaming
 IReferenceClock=Windows.Win32.Media
 IReferenceClock2=Windows.Win32.Media
 IReferenceClockTimerControl=Windows.Win32.Media
@@ -766,6 +767,7 @@ UnloadUserProfile=Windows.Win32.UI.Shell
 OpenThemeDataForDpi=Windows.Win32.UI.HiDpi
 # endregion uxtheme.h
 # region vidcap.h
+IKsNodeControl=Windows.Win32.Media.KernelStreaming
 IKsTopologyInfo=Windows.Win32.Media.KernelStreaming
 # endregion vidcap.h
 # region winbase.h
