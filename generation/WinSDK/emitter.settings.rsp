@@ -1302,6 +1302,7 @@ D3D12_ROOT_SIGNATURE_DESC1::pStaticSamplers=[NativeArrayInfo(CountFieldName = "N
 D3D12_STREAM_OUTPUT_DESC::pBufferStrides=[NativeArrayInfo(CountFieldName = "NumStrides")]
 D3D12_STREAM_OUTPUT_DESC::pSODeclaration=[NativeArrayInfo(CountFieldName = "NumEntries")]
 D3D12_VIEW_INSTANCING_DESC::pViewInstanceLocations=[NativeArrayInfo(CountFieldName = "ViewInstanceCount")]
+DXGI_SWAP_CHAIN_DESC1::Flags=[AssociatedEnum("DXGI_SWAP_CHAIN_FLAG")]
 CreatePipe::hReadPipe=[IgnoreIfReturn("0")]
 CreatePipe::hWritePipe=[IgnoreIfReturn("0")]
 MapViewOfFile::return=MEMORY_MAPPED_VIEW_ADDRESS
