@@ -4,8 +4,8 @@
  * Licensed under the MIT license
  *
  *-------------------------------------------------------------------------------------*/
-import "OAIdl.idl";
-import "OCIdl.idl";
+import "oaidl.idl";
+import "ocidl.idl";
 
 import "d3d11on12.idl";
 
