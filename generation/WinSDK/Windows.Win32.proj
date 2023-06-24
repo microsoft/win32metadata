@@ -32,7 +32,6 @@
   <ItemGroup>
     <EmitterRsp Include="emitter.settings.rsp"/>
     <EmitterRsp Include="requiredNamespacesForNames.rsp"/>
-    <EmitterRsp Include="documentationMappings.rsp"/>
   </ItemGroup>
 
   <PropertyGroup>

@@ -50,7 +50,6 @@ DISCLAIMER: This list is a work in progress and is not yet comprehensive.
   * Whether a function calls `SetLastError` before returning is captured in the [SetLastError](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute.setlasterror) property
 * Architecture-specific types are represented as types with the same name where each type is decorated with the `[SupportedArchitecture]` attribute indicating the architecture(s) where that type is supported
 * Ansi and Unicode variants of APIs (-A/-W) are decorated with `[Ansi]` and `[Unicode]` attributes, respectively. Projections can choose to expose one set or the other and remove the suffix to declutter Intellisense and emulate the [unsuffixed macros provided by the headers](https://github.com/microsoft/win32metadata/blob/3608e3fff8cfecfef728bcf1811cdea9f1e86a46/generation/WinSDK/RecompiledIdlHeaders/um/synchapi.h#L446-L451). ([#711](https://github.com/microsoft/win32metadata/issues/711))
-* Documentation links are captured in the `[Documentation]` attribute. Rich documentation to power Intellisense can also be loaded from the [Microsoft.Windows.SDK.Win32Docs](https://www.nuget.org/packages/Microsoft.Windows.SDK.Win32Docs/) package which provides a [MessagePack](https://msgpack.org/) dictionary where the keys are API names and the values are [ApiDetails](../apidocs/Microsoft.Windows.SDK.Win32Docs/ApiDetails.cs) objects.
 * Input and output parameters are decorated with `[In]` and `[Out]` attributes. Parameters that are both input and output will contain both attributes. COM output pointer parameters are also decorated with the `[ComOutPtr]` attribute.
 * Optional parameters are decorated with the `[Optional]` attribute. Optional parameters may be `NULL`.
 * Reserved parameters are decorated with the `[Reserved]` attribute. Since reserved parameters always expect a `NULL` value, projections can choose to abstract away these parameters to improve the developer experience.
@@ -88,7 +87,6 @@ DISCLAIMER: This list is a work in progress and is not yet comprehensive.
 * [Windows.Win32.UI.WindowsAndMessaging.SetWindowLongPtrW](https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setwindowlongptrw)
   * DllImport attribute
   * SupportedArchitecture attribute
-  * Documentation attribute
   * NativeTypedef parameter (HWND)
   * Enum parameter (WINDOW_LONG_PTR_INDEX)
 * [Windows.Win32.Security.Cryptography.BcryptEncrypt](https://learn.microsoft.com/windows/win32/api/bcrypt/nf-bcrypt-bcryptencrypt)
