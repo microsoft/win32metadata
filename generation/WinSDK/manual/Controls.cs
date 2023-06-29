@@ -53,6 +53,8 @@ namespace Windows.Win32.UI.Controls
         public const uint EM_GETLIMITTEXT = 0x00D5;
         public const uint EM_POSFROMCHAR = 0x00D6;
         public const uint EM_CHARFROMPOS = 0x00D7;
+
+        public const uint HOTKEYF_EXT = 0x08;
     }
 
     public enum POPUPSUBMENUHCHOTSTATES

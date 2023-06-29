@@ -942,3 +942,5 @@ Windows.Win32.Graphics.Dxgi.IDXGISwapChain4 : [Documentation(https://docs.micros
 Windows.Win32.Graphics.Dxgi.IDXGISwapChainMedia : [Documentation(https://docs.microsoft.com/windows/win32/api/dxgi1_3/nn-dxgi1_3-idxgiswapchainmedia),Guid(3717576971,61535,20330,189,101,37,191,178,100,189,132),SupportedOSPlatform(windows8.1)] => [Agile,Documentation(https://docs.microsoft.com/windows/win32/api/dxgi1_3/nn-dxgi1_3-idxgiswapchainmedia),Guid(3717576971,61535,20330,189,101,37,191,178,100,189,132),SupportedOSPlatform(windows8.1)]
 # Fixed #1592.
 Windows.Win32.Storage.CloudFilters.Apis.CfReleaseTransferKey : TransferKey : [Out] => [In]
+# Fixed #1595.
+winmd1: Windows.Win32.UI.Controls.Apis.HOTKEYF_EXT = 128, winmd2 = 8
