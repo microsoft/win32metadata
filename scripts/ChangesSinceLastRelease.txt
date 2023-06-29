@@ -954,3 +954,1381 @@ Windows.Win32.Security.Authentication.Identity.eTlsAlgorithmUsage.TlsParametersC
 Windows.Win32.Security.Authentication.Identity.eTlsAlgorithmUsage.TlsParametersCngAlgUsageSignature added
 Windows.Win32.Security.Authentication.Identity.SCH_CREDENTIALS added
 Windows.Win32.Security.Authentication.Identity.TLS_PARAMETERS added
+# Updated to ClangSharp 16.0.
+Windows.Win32.Graphics.Direct2D.Common.D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE.D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_ANISOTROPIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE.D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE.D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_HIGH_QUALITY_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE.D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE.D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_MULTI_SAMPLE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE.D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_NEAREST_NEIGHBOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_ALPHA_MODE.D2D1_ALPHA_MODE_IGNORE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_ALPHA_MODE.D2D1_ALPHA_MODE_PREMULTIPLIED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_ALPHA_MODE.D2D1_ALPHA_MODE_STRAIGHT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_ALPHA_MODE.D2D1_ALPHA_MODE_UNKNOWN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_ALPHA_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_COLOR_BURN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_COLOR_DODGE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_DARKEN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_DARKER_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_DIFFERENCE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_DISSOLVE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_DIVISION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_EXCLUSION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_HARD_LIGHT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_HARD_MIX value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_HUE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_LIGHTEN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_LIGHTER_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_LINEAR_BURN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_LINEAR_DODGE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_LINEAR_LIGHT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_LUMINOSITY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_MULTIPLY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_OVERLAY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_PIN_LIGHT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_SATURATION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_SCREEN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_SOFT_LIGHT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_SUBTRACT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.D2D1_BLEND_MODE_VIVID_LIGHT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BLEND_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BORDER_MODE.D2D1_BORDER_MODE_HARD value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BORDER_MODE.D2D1_BORDER_MODE_SOFT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_BORDER_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_COLORMATRIX_ALPHA_MODE.D2D1_COLORMATRIX_ALPHA_MODE_PREMULTIPLIED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_COLORMATRIX_ALPHA_MODE.D2D1_COLORMATRIX_ALPHA_MODE_STRAIGHT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_COLORMATRIX_ALPHA_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_COMPOSITE_MODE.D2D1_COMPOSITE_MODE_BOUNDED_SOURCE_COPY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_COMPOSITE_MODE.D2D1_COMPOSITE_MODE_DESTINATION_ATOP value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_COMPOSITE_MODE.D2D1_COMPOSITE_MODE_DESTINATION_IN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_COMPOSITE_MODE.D2D1_COMPOSITE_MODE_DESTINATION_OUT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_COMPOSITE_MODE.D2D1_COMPOSITE_MODE_DESTINATION_OVER value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_COMPOSITE_MODE.D2D1_COMPOSITE_MODE_MASK_INVERT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_COMPOSITE_MODE.D2D1_COMPOSITE_MODE_PLUS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_COMPOSITE_MODE.D2D1_COMPOSITE_MODE_SOURCE_ATOP value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_COMPOSITE_MODE.D2D1_COMPOSITE_MODE_SOURCE_COPY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_COMPOSITE_MODE.D2D1_COMPOSITE_MODE_SOURCE_IN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_COMPOSITE_MODE.D2D1_COMPOSITE_MODE_SOURCE_OUT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_COMPOSITE_MODE.D2D1_COMPOSITE_MODE_SOURCE_OVER value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_COMPOSITE_MODE.D2D1_COMPOSITE_MODE_XOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_COMPOSITE_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_FIGURE_BEGIN.D2D1_FIGURE_BEGIN_FILLED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_FIGURE_BEGIN.D2D1_FIGURE_BEGIN_HOLLOW value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_FIGURE_BEGIN.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_FIGURE_END.D2D1_FIGURE_END_CLOSED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_FIGURE_END.D2D1_FIGURE_END_OPEN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_FIGURE_END.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_FILL_MODE.D2D1_FILL_MODE_ALTERNATE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_FILL_MODE.D2D1_FILL_MODE_WINDING value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_FILL_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_PATH_SEGMENT.D2D1_PATH_SEGMENT_FORCE_ROUND_LINE_JOIN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_PATH_SEGMENT.D2D1_PATH_SEGMENT_FORCE_UNSTROKED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_PATH_SEGMENT.D2D1_PATH_SEGMENT_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_PATH_SEGMENT.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_TURBULENCE_NOISE.D2D1_TURBULENCE_NOISE_FRACTAL_SUM value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_TURBULENCE_NOISE.D2D1_TURBULENCE_NOISE_TURBULENCE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.Common.D2D1_TURBULENCE_NOISE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_2DAFFINETRANSFORM_PROP.D2D1_2DAFFINETRANSFORM_PROP_BORDER_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_2DAFFINETRANSFORM_PROP.D2D1_2DAFFINETRANSFORM_PROP_INTERPOLATION_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_2DAFFINETRANSFORM_PROP.D2D1_2DAFFINETRANSFORM_PROP_SHARPNESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_2DAFFINETRANSFORM_PROP.D2D1_2DAFFINETRANSFORM_PROP_TRANSFORM_MATRIX value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_2DAFFINETRANSFORM_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DPERSPECTIVETRANSFORM_INTERPOLATION_MODE.D2D1_3DPERSPECTIVETRANSFORM_INTERPOLATION_MODE_ANISOTROPIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DPERSPECTIVETRANSFORM_INTERPOLATION_MODE.D2D1_3DPERSPECTIVETRANSFORM_INTERPOLATION_MODE_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DPERSPECTIVETRANSFORM_INTERPOLATION_MODE.D2D1_3DPERSPECTIVETRANSFORM_INTERPOLATION_MODE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DPERSPECTIVETRANSFORM_INTERPOLATION_MODE.D2D1_3DPERSPECTIVETRANSFORM_INTERPOLATION_MODE_MULTI_SAMPLE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DPERSPECTIVETRANSFORM_INTERPOLATION_MODE.D2D1_3DPERSPECTIVETRANSFORM_INTERPOLATION_MODE_NEAREST_NEIGHBOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DPERSPECTIVETRANSFORM_INTERPOLATION_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DPERSPECTIVETRANSFORM_PROP.D2D1_3DPERSPECTIVETRANSFORM_PROP_BORDER_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DPERSPECTIVETRANSFORM_PROP.D2D1_3DPERSPECTIVETRANSFORM_PROP_DEPTH value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DPERSPECTIVETRANSFORM_PROP.D2D1_3DPERSPECTIVETRANSFORM_PROP_GLOBAL_OFFSET value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DPERSPECTIVETRANSFORM_PROP.D2D1_3DPERSPECTIVETRANSFORM_PROP_INTERPOLATION_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DPERSPECTIVETRANSFORM_PROP.D2D1_3DPERSPECTIVETRANSFORM_PROP_LOCAL_OFFSET value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DPERSPECTIVETRANSFORM_PROP.D2D1_3DPERSPECTIVETRANSFORM_PROP_PERSPECTIVE_ORIGIN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DPERSPECTIVETRANSFORM_PROP.D2D1_3DPERSPECTIVETRANSFORM_PROP_ROTATION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DPERSPECTIVETRANSFORM_PROP.D2D1_3DPERSPECTIVETRANSFORM_PROP_ROTATION_ORIGIN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DPERSPECTIVETRANSFORM_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DTRANSFORM_INTERPOLATION_MODE.D2D1_3DTRANSFORM_INTERPOLATION_MODE_ANISOTROPIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DTRANSFORM_INTERPOLATION_MODE.D2D1_3DTRANSFORM_INTERPOLATION_MODE_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DTRANSFORM_INTERPOLATION_MODE.D2D1_3DTRANSFORM_INTERPOLATION_MODE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DTRANSFORM_INTERPOLATION_MODE.D2D1_3DTRANSFORM_INTERPOLATION_MODE_MULTI_SAMPLE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DTRANSFORM_INTERPOLATION_MODE.D2D1_3DTRANSFORM_INTERPOLATION_MODE_NEAREST_NEIGHBOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DTRANSFORM_INTERPOLATION_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DTRANSFORM_PROP.D2D1_3DTRANSFORM_PROP_BORDER_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DTRANSFORM_PROP.D2D1_3DTRANSFORM_PROP_INTERPOLATION_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DTRANSFORM_PROP.D2D1_3DTRANSFORM_PROP_TRANSFORM_MATRIX value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_3DTRANSFORM_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_ANTIALIAS_MODE.D2D1_ANTIALIAS_MODE_ALIASED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_ANTIALIAS_MODE.D2D1_ANTIALIAS_MODE_PER_PRIMITIVE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_ANTIALIAS_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_ARC_SIZE.D2D1_ARC_SIZE_LARGE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_ARC_SIZE.D2D1_ARC_SIZE_SMALL value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_ARC_SIZE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_ARITHMETICCOMPOSITE_PROP.D2D1_ARITHMETICCOMPOSITE_PROP_CLAMP_OUTPUT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_ARITHMETICCOMPOSITE_PROP.D2D1_ARITHMETICCOMPOSITE_PROP_COEFFICIENTS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_ARITHMETICCOMPOSITE_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_ATLAS_PROP.D2D1_ATLAS_PROP_INPUT_PADDING_RECT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_ATLAS_PROP.D2D1_ATLAS_PROP_INPUT_RECT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_ATLAS_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAP_INTERPOLATION_MODE.D2D1_BITMAP_INTERPOLATION_MODE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAP_INTERPOLATION_MODE.D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAP_INTERPOLATION_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAP_OPTIONS.D2D1_BITMAP_OPTIONS_CANNOT_DRAW value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAP_OPTIONS.D2D1_BITMAP_OPTIONS_CPU_READ value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAP_OPTIONS.D2D1_BITMAP_OPTIONS_GDI_COMPATIBLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAP_OPTIONS.D2D1_BITMAP_OPTIONS_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAP_OPTIONS.D2D1_BITMAP_OPTIONS_TARGET value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAP_OPTIONS.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_ALPHA_MODE.D2D1_BITMAPSOURCE_ALPHA_MODE_PREMULTIPLIED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_ALPHA_MODE.D2D1_BITMAPSOURCE_ALPHA_MODE_STRAIGHT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_ALPHA_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_INTERPOLATION_MODE.D2D1_BITMAPSOURCE_INTERPOLATION_MODE_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_INTERPOLATION_MODE.D2D1_BITMAPSOURCE_INTERPOLATION_MODE_FANT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_INTERPOLATION_MODE.D2D1_BITMAPSOURCE_INTERPOLATION_MODE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_INTERPOLATION_MODE.D2D1_BITMAPSOURCE_INTERPOLATION_MODE_MIPMAP_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_INTERPOLATION_MODE.D2D1_BITMAPSOURCE_INTERPOLATION_MODE_NEAREST_NEIGHBOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_INTERPOLATION_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_ORIENTATION.D2D1_BITMAPSOURCE_ORIENTATION_DEFAULT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_ORIENTATION.D2D1_BITMAPSOURCE_ORIENTATION_FLIP_HORIZONTAL value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_ORIENTATION.D2D1_BITMAPSOURCE_ORIENTATION_ROTATE_CLOCKWISE180 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_ORIENTATION.D2D1_BITMAPSOURCE_ORIENTATION_ROTATE_CLOCKWISE180_FLIP_HORIZONTAL value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_ORIENTATION.D2D1_BITMAPSOURCE_ORIENTATION_ROTATE_CLOCKWISE270 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_ORIENTATION.D2D1_BITMAPSOURCE_ORIENTATION_ROTATE_CLOCKWISE270_FLIP_HORIZONTAL value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_ORIENTATION.D2D1_BITMAPSOURCE_ORIENTATION_ROTATE_CLOCKWISE90 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_ORIENTATION.D2D1_BITMAPSOURCE_ORIENTATION_ROTATE_CLOCKWISE90_FLIP_HORIZONTAL value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_ORIENTATION.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_PROP.D2D1_BITMAPSOURCE_PROP_ALPHA_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_PROP.D2D1_BITMAPSOURCE_PROP_ENABLE_DPI_CORRECTION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_PROP.D2D1_BITMAPSOURCE_PROP_INTERPOLATION_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_PROP.D2D1_BITMAPSOURCE_PROP_ORIENTATION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_PROP.D2D1_BITMAPSOURCE_PROP_SCALE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_PROP.D2D1_BITMAPSOURCE_PROP_WIC_BITMAP_SOURCE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BITMAPSOURCE_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BLEND_OPERATION.D2D1_BLEND_OPERATION_ADD value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BLEND_OPERATION.D2D1_BLEND_OPERATION_MAX value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BLEND_OPERATION.D2D1_BLEND_OPERATION_MIN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BLEND_OPERATION.D2D1_BLEND_OPERATION_REV_SUBTRACT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BLEND_OPERATION.D2D1_BLEND_OPERATION_SUBTRACT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BLEND_OPERATION.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BLEND_PROP.D2D1_BLEND_PROP_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BLEND_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BLEND.D2D1_BLEND_BLEND_FACTOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BLEND.D2D1_BLEND_DEST_ALPHA value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BLEND.D2D1_BLEND_DEST_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BLEND.D2D1_BLEND_INV_BLEND_FACTOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BLEND.D2D1_BLEND_INV_DEST_ALPHA value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BLEND.D2D1_BLEND_INV_DEST_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BLEND.D2D1_BLEND_INV_SRC_ALPHA value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BLEND.D2D1_BLEND_INV_SRC_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BLEND.D2D1_BLEND_ONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BLEND.D2D1_BLEND_SRC_ALPHA value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BLEND.D2D1_BLEND_SRC_ALPHA_SAT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BLEND.D2D1_BLEND_SRC_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BLEND.D2D1_BLEND_ZERO value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BLEND.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BORDER_EDGE_MODE.D2D1_BORDER_EDGE_MODE_CLAMP value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BORDER_EDGE_MODE.D2D1_BORDER_EDGE_MODE_MIRROR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BORDER_EDGE_MODE.D2D1_BORDER_EDGE_MODE_WRAP value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BORDER_EDGE_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BORDER_PROP.D2D1_BORDER_PROP_EDGE_MODE_X value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BORDER_PROP.D2D1_BORDER_PROP_EDGE_MODE_Y value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BORDER_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BRIGHTNESS_PROP.D2D1_BRIGHTNESS_PROP_BLACK_POINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BRIGHTNESS_PROP.D2D1_BRIGHTNESS_PROP_WHITE_POINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BRIGHTNESS_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BUFFER_PRECISION.D2D1_BUFFER_PRECISION_16BPC_FLOAT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BUFFER_PRECISION.D2D1_BUFFER_PRECISION_16BPC_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BUFFER_PRECISION.D2D1_BUFFER_PRECISION_32BPC_FLOAT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BUFFER_PRECISION.D2D1_BUFFER_PRECISION_8BPC_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BUFFER_PRECISION.D2D1_BUFFER_PRECISION_8BPC_UNORM_SRGB value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BUFFER_PRECISION.D2D1_BUFFER_PRECISION_UNKNOWN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_BUFFER_PRECISION.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CAP_STYLE.D2D1_CAP_STYLE_FLAT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CAP_STYLE.D2D1_CAP_STYLE_ROUND value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CAP_STYLE.D2D1_CAP_STYLE_SQUARE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CAP_STYLE.D2D1_CAP_STYLE_TRIANGLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CAP_STYLE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CHANGE_TYPE.D2D1_CHANGE_TYPE_CONTEXT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CHANGE_TYPE.D2D1_CHANGE_TYPE_GRAPH value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CHANGE_TYPE.D2D1_CHANGE_TYPE_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CHANGE_TYPE.D2D1_CHANGE_TYPE_PROPERTIES value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CHANGE_TYPE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CHANNEL_DEPTH.D2D1_CHANNEL_DEPTH_1 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CHANNEL_DEPTH.D2D1_CHANNEL_DEPTH_4 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CHANNEL_DEPTH.D2D1_CHANNEL_DEPTH_DEFAULT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CHANNEL_DEPTH.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CHANNEL_SELECTOR.D2D1_CHANNEL_SELECTOR_A value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CHANNEL_SELECTOR.D2D1_CHANNEL_SELECTOR_B value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CHANNEL_SELECTOR.D2D1_CHANNEL_SELECTOR_G value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CHANNEL_SELECTOR.D2D1_CHANNEL_SELECTOR_R value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CHANNEL_SELECTOR.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CHROMAKEY_PROP.D2D1_CHROMAKEY_PROP_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CHROMAKEY_PROP.D2D1_CHROMAKEY_PROP_FEATHER value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CHROMAKEY_PROP.D2D1_CHROMAKEY_PROP_INVERT_ALPHA value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CHROMAKEY_PROP.D2D1_CHROMAKEY_PROP_TOLERANCE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CHROMAKEY_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION.D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION_DEFAULT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION.D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION_DISABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLOR_CONTEXT_TYPE.D2D1_COLOR_CONTEXT_TYPE_DXGI value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLOR_CONTEXT_TYPE.D2D1_COLOR_CONTEXT_TYPE_ICC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLOR_CONTEXT_TYPE.D2D1_COLOR_CONTEXT_TYPE_SIMPLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLOR_CONTEXT_TYPE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLOR_INTERPOLATION_MODE.D2D1_COLOR_INTERPOLATION_MODE_PREMULTIPLIED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLOR_INTERPOLATION_MODE.D2D1_COLOR_INTERPOLATION_MODE_STRAIGHT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLOR_INTERPOLATION_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLOR_SPACE.D2D1_COLOR_SPACE_CUSTOM value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLOR_SPACE.D2D1_COLOR_SPACE_SCRGB value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLOR_SPACE.D2D1_COLOR_SPACE_SRGB value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLOR_SPACE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMANAGEMENT_ALPHA_MODE.D2D1_COLORMANAGEMENT_ALPHA_MODE_PREMULTIPLIED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMANAGEMENT_ALPHA_MODE.D2D1_COLORMANAGEMENT_ALPHA_MODE_STRAIGHT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMANAGEMENT_ALPHA_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMANAGEMENT_PROP.D2D1_COLORMANAGEMENT_PROP_ALPHA_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMANAGEMENT_PROP.D2D1_COLORMANAGEMENT_PROP_DESTINATION_COLOR_CONTEXT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMANAGEMENT_PROP.D2D1_COLORMANAGEMENT_PROP_DESTINATION_RENDERING_INTENT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMANAGEMENT_PROP.D2D1_COLORMANAGEMENT_PROP_QUALITY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMANAGEMENT_PROP.D2D1_COLORMANAGEMENT_PROP_SOURCE_COLOR_CONTEXT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMANAGEMENT_PROP.D2D1_COLORMANAGEMENT_PROP_SOURCE_RENDERING_INTENT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMANAGEMENT_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMANAGEMENT_QUALITY.D2D1_COLORMANAGEMENT_QUALITY_BEST value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMANAGEMENT_QUALITY.D2D1_COLORMANAGEMENT_QUALITY_NORMAL value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMANAGEMENT_QUALITY.D2D1_COLORMANAGEMENT_QUALITY_PROOF value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMANAGEMENT_QUALITY.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMANAGEMENT_RENDERING_INTENT.D2D1_COLORMANAGEMENT_RENDERING_INTENT_ABSOLUTE_COLORIMETRIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMANAGEMENT_RENDERING_INTENT.D2D1_COLORMANAGEMENT_RENDERING_INTENT_PERCEPTUAL value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMANAGEMENT_RENDERING_INTENT.D2D1_COLORMANAGEMENT_RENDERING_INTENT_RELATIVE_COLORIMETRIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMANAGEMENT_RENDERING_INTENT.D2D1_COLORMANAGEMENT_RENDERING_INTENT_SATURATION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMANAGEMENT_RENDERING_INTENT.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMATRIX_PROP.D2D1_COLORMATRIX_PROP_ALPHA_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMATRIX_PROP.D2D1_COLORMATRIX_PROP_CLAMP_OUTPUT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMATRIX_PROP.D2D1_COLORMATRIX_PROP_COLOR_MATRIX value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COLORMATRIX_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COMBINE_MODE.D2D1_COMBINE_MODE_EXCLUDE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COMBINE_MODE.D2D1_COMBINE_MODE_INTERSECT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COMBINE_MODE.D2D1_COMBINE_MODE_UNION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COMBINE_MODE.D2D1_COMBINE_MODE_XOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COMBINE_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS.D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS_GDI_COMPATIBLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS.D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COMPOSITE_PROP.D2D1_COMPOSITE_PROP_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_COMPOSITE_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CONTRAST_PROP.D2D1_CONTRAST_PROP_CLAMP_INPUT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CONTRAST_PROP.D2D1_CONTRAST_PROP_CONTRAST value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CONTRAST_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CONVOLVEMATRIX_PROP.D2D1_CONVOLVEMATRIX_PROP_BIAS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CONVOLVEMATRIX_PROP.D2D1_CONVOLVEMATRIX_PROP_BORDER_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CONVOLVEMATRIX_PROP.D2D1_CONVOLVEMATRIX_PROP_CLAMP_OUTPUT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CONVOLVEMATRIX_PROP.D2D1_CONVOLVEMATRIX_PROP_DIVISOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CONVOLVEMATRIX_PROP.D2D1_CONVOLVEMATRIX_PROP_KERNEL_MATRIX value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CONVOLVEMATRIX_PROP.D2D1_CONVOLVEMATRIX_PROP_KERNEL_OFFSET value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CONVOLVEMATRIX_PROP.D2D1_CONVOLVEMATRIX_PROP_KERNEL_SIZE_X value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CONVOLVEMATRIX_PROP.D2D1_CONVOLVEMATRIX_PROP_KERNEL_SIZE_Y value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CONVOLVEMATRIX_PROP.D2D1_CONVOLVEMATRIX_PROP_KERNEL_UNIT_LENGTH value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CONVOLVEMATRIX_PROP.D2D1_CONVOLVEMATRIX_PROP_PRESERVE_ALPHA value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CONVOLVEMATRIX_PROP.D2D1_CONVOLVEMATRIX_PROP_SCALE_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CONVOLVEMATRIX_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CONVOLVEMATRIX_SCALE_MODE.D2D1_CONVOLVEMATRIX_SCALE_MODE_ANISOTROPIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CONVOLVEMATRIX_SCALE_MODE.D2D1_CONVOLVEMATRIX_SCALE_MODE_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CONVOLVEMATRIX_SCALE_MODE.D2D1_CONVOLVEMATRIX_SCALE_MODE_HIGH_QUALITY_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CONVOLVEMATRIX_SCALE_MODE.D2D1_CONVOLVEMATRIX_SCALE_MODE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CONVOLVEMATRIX_SCALE_MODE.D2D1_CONVOLVEMATRIX_SCALE_MODE_MULTI_SAMPLE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CONVOLVEMATRIX_SCALE_MODE.D2D1_CONVOLVEMATRIX_SCALE_MODE_NEAREST_NEIGHBOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CONVOLVEMATRIX_SCALE_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CROP_PROP.D2D1_CROP_PROP_BORDER_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CROP_PROP.D2D1_CROP_PROP_RECT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CROP_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CROSSFADE_PROP.D2D1_CROSSFADE_PROP_WEIGHT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_CROSSFADE_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DASH_STYLE.D2D1_DASH_STYLE_CUSTOM value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DASH_STYLE.D2D1_DASH_STYLE_DASH value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DASH_STYLE.D2D1_DASH_STYLE_DASH_DOT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DASH_STYLE.D2D1_DASH_STYLE_DASH_DOT_DOT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DASH_STYLE.D2D1_DASH_STYLE_DOT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DASH_STYLE.D2D1_DASH_STYLE_SOLID value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DASH_STYLE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DC_INITIALIZE_MODE.D2D1_DC_INITIALIZE_MODE_CLEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DC_INITIALIZE_MODE.D2D1_DC_INITIALIZE_MODE_COPY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DC_INITIALIZE_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DEBUG_LEVEL.D2D1_DEBUG_LEVEL_ERROR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DEBUG_LEVEL.D2D1_DEBUG_LEVEL_INFORMATION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DEBUG_LEVEL.D2D1_DEBUG_LEVEL_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DEBUG_LEVEL.D2D1_DEBUG_LEVEL_WARNING value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DEBUG_LEVEL.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DEVICE_CONTEXT_OPTIONS.D2D1_DEVICE_CONTEXT_OPTIONS_ENABLE_MULTITHREADED_OPTIMIZATIONS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DEVICE_CONTEXT_OPTIONS.D2D1_DEVICE_CONTEXT_OPTIONS_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DEVICE_CONTEXT_OPTIONS.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DIRECTIONALBLUR_OPTIMIZATION.D2D1_DIRECTIONALBLUR_OPTIMIZATION_BALANCED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DIRECTIONALBLUR_OPTIMIZATION.D2D1_DIRECTIONALBLUR_OPTIMIZATION_QUALITY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DIRECTIONALBLUR_OPTIMIZATION.D2D1_DIRECTIONALBLUR_OPTIMIZATION_SPEED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DIRECTIONALBLUR_OPTIMIZATION.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DIRECTIONALBLUR_PROP.D2D1_DIRECTIONALBLUR_PROP_ANGLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DIRECTIONALBLUR_PROP.D2D1_DIRECTIONALBLUR_PROP_BORDER_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DIRECTIONALBLUR_PROP.D2D1_DIRECTIONALBLUR_PROP_OPTIMIZATION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DIRECTIONALBLUR_PROP.D2D1_DIRECTIONALBLUR_PROP_STANDARD_DEVIATION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DIRECTIONALBLUR_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISCRETETRANSFER_PROP.D2D1_DISCRETETRANSFER_PROP_ALPHA_DISABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISCRETETRANSFER_PROP.D2D1_DISCRETETRANSFER_PROP_ALPHA_TABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISCRETETRANSFER_PROP.D2D1_DISCRETETRANSFER_PROP_BLUE_DISABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISCRETETRANSFER_PROP.D2D1_DISCRETETRANSFER_PROP_BLUE_TABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISCRETETRANSFER_PROP.D2D1_DISCRETETRANSFER_PROP_CLAMP_OUTPUT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISCRETETRANSFER_PROP.D2D1_DISCRETETRANSFER_PROP_GREEN_DISABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISCRETETRANSFER_PROP.D2D1_DISCRETETRANSFER_PROP_GREEN_TABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISCRETETRANSFER_PROP.D2D1_DISCRETETRANSFER_PROP_RED_DISABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISCRETETRANSFER_PROP.D2D1_DISCRETETRANSFER_PROP_RED_TABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISCRETETRANSFER_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISPLACEMENTMAP_PROP.D2D1_DISPLACEMENTMAP_PROP_SCALE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISPLACEMENTMAP_PROP.D2D1_DISPLACEMENTMAP_PROP_X_CHANNEL_SELECT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISPLACEMENTMAP_PROP.D2D1_DISPLACEMENTMAP_PROP_Y_CHANNEL_SELECT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISPLACEMENTMAP_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTDIFFUSE_PROP.D2D1_DISTANTDIFFUSE_PROP_AZIMUTH value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTDIFFUSE_PROP.D2D1_DISTANTDIFFUSE_PROP_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTDIFFUSE_PROP.D2D1_DISTANTDIFFUSE_PROP_DIFFUSE_CONSTANT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTDIFFUSE_PROP.D2D1_DISTANTDIFFUSE_PROP_ELEVATION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTDIFFUSE_PROP.D2D1_DISTANTDIFFUSE_PROP_KERNEL_UNIT_LENGTH value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTDIFFUSE_PROP.D2D1_DISTANTDIFFUSE_PROP_SCALE_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTDIFFUSE_PROP.D2D1_DISTANTDIFFUSE_PROP_SURFACE_SCALE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTDIFFUSE_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTDIFFUSE_SCALE_MODE.D2D1_DISTANTDIFFUSE_SCALE_MODE_ANISOTROPIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTDIFFUSE_SCALE_MODE.D2D1_DISTANTDIFFUSE_SCALE_MODE_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTDIFFUSE_SCALE_MODE.D2D1_DISTANTDIFFUSE_SCALE_MODE_HIGH_QUALITY_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTDIFFUSE_SCALE_MODE.D2D1_DISTANTDIFFUSE_SCALE_MODE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTDIFFUSE_SCALE_MODE.D2D1_DISTANTDIFFUSE_SCALE_MODE_MULTI_SAMPLE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTDIFFUSE_SCALE_MODE.D2D1_DISTANTDIFFUSE_SCALE_MODE_NEAREST_NEIGHBOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTDIFFUSE_SCALE_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTSPECULAR_PROP.D2D1_DISTANTSPECULAR_PROP_AZIMUTH value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTSPECULAR_PROP.D2D1_DISTANTSPECULAR_PROP_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTSPECULAR_PROP.D2D1_DISTANTSPECULAR_PROP_ELEVATION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTSPECULAR_PROP.D2D1_DISTANTSPECULAR_PROP_KERNEL_UNIT_LENGTH value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTSPECULAR_PROP.D2D1_DISTANTSPECULAR_PROP_SCALE_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTSPECULAR_PROP.D2D1_DISTANTSPECULAR_PROP_SPECULAR_CONSTANT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTSPECULAR_PROP.D2D1_DISTANTSPECULAR_PROP_SPECULAR_EXPONENT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTSPECULAR_PROP.D2D1_DISTANTSPECULAR_PROP_SURFACE_SCALE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTSPECULAR_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTSPECULAR_SCALE_MODE.D2D1_DISTANTSPECULAR_SCALE_MODE_ANISOTROPIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTSPECULAR_SCALE_MODE.D2D1_DISTANTSPECULAR_SCALE_MODE_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTSPECULAR_SCALE_MODE.D2D1_DISTANTSPECULAR_SCALE_MODE_HIGH_QUALITY_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTSPECULAR_SCALE_MODE.D2D1_DISTANTSPECULAR_SCALE_MODE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTSPECULAR_SCALE_MODE.D2D1_DISTANTSPECULAR_SCALE_MODE_MULTI_SAMPLE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTSPECULAR_SCALE_MODE.D2D1_DISTANTSPECULAR_SCALE_MODE_NEAREST_NEIGHBOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DISTANTSPECULAR_SCALE_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DPICOMPENSATION_INTERPOLATION_MODE.D2D1_DPICOMPENSATION_INTERPOLATION_MODE_ANISOTROPIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DPICOMPENSATION_INTERPOLATION_MODE.D2D1_DPICOMPENSATION_INTERPOLATION_MODE_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DPICOMPENSATION_INTERPOLATION_MODE.D2D1_DPICOMPENSATION_INTERPOLATION_MODE_HIGH_QUALITY_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DPICOMPENSATION_INTERPOLATION_MODE.D2D1_DPICOMPENSATION_INTERPOLATION_MODE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DPICOMPENSATION_INTERPOLATION_MODE.D2D1_DPICOMPENSATION_INTERPOLATION_MODE_MULTI_SAMPLE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DPICOMPENSATION_INTERPOLATION_MODE.D2D1_DPICOMPENSATION_INTERPOLATION_MODE_NEAREST_NEIGHBOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DPICOMPENSATION_INTERPOLATION_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DPICOMPENSATION_PROP.D2D1_DPICOMPENSATION_PROP_BORDER_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DPICOMPENSATION_PROP.D2D1_DPICOMPENSATION_PROP_INPUT_DPI value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DPICOMPENSATION_PROP.D2D1_DPICOMPENSATION_PROP_INTERPOLATION_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DPICOMPENSATION_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DRAW_TEXT_OPTIONS.D2D1_DRAW_TEXT_OPTIONS_CLIP value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DRAW_TEXT_OPTIONS.D2D1_DRAW_TEXT_OPTIONS_DISABLE_COLOR_BITMAP_SNAPPING value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DRAW_TEXT_OPTIONS.D2D1_DRAW_TEXT_OPTIONS_ENABLE_COLOR_FONT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DRAW_TEXT_OPTIONS.D2D1_DRAW_TEXT_OPTIONS_NO_SNAP value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DRAW_TEXT_OPTIONS.D2D1_DRAW_TEXT_OPTIONS_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_DRAW_TEXT_OPTIONS.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_EDGEDETECTION_MODE.D2D1_EDGEDETECTION_MODE_PREWITT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_EDGEDETECTION_MODE.D2D1_EDGEDETECTION_MODE_SOBEL value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_EDGEDETECTION_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_EDGEDETECTION_PROP.D2D1_EDGEDETECTION_PROP_ALPHA_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_EDGEDETECTION_PROP.D2D1_EDGEDETECTION_PROP_BLUR_RADIUS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_EDGEDETECTION_PROP.D2D1_EDGEDETECTION_PROP_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_EDGEDETECTION_PROP.D2D1_EDGEDETECTION_PROP_OVERLAY_EDGES value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_EDGEDETECTION_PROP.D2D1_EDGEDETECTION_PROP_STRENGTH value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_EDGEDETECTION_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_EMBOSS_PROP.D2D1_EMBOSS_PROP_DIRECTION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_EMBOSS_PROP.D2D1_EMBOSS_PROP_HEIGHT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_EMBOSS_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_EXPOSURE_PROP.D2D1_EXPOSURE_PROP_EXPOSURE_VALUE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_EXPOSURE_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_EXTEND_MODE.D2D1_EXTEND_MODE_CLAMP value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_EXTEND_MODE.D2D1_EXTEND_MODE_MIRROR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_EXTEND_MODE.D2D1_EXTEND_MODE_WRAP value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_EXTEND_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_FACTORY_TYPE.D2D1_FACTORY_TYPE_MULTI_THREADED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_FACTORY_TYPE.D2D1_FACTORY_TYPE_SINGLE_THREADED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_FACTORY_TYPE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_FEATURE_LEVEL.D2D1_FEATURE_LEVEL_10 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_FEATURE_LEVEL.D2D1_FEATURE_LEVEL_9 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_FEATURE_LEVEL.D2D1_FEATURE_LEVEL_DEFAULT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_FEATURE_LEVEL.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_FEATURE.D2D1_FEATURE_D3D10_X_HARDWARE_OPTIONS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_FEATURE.D2D1_FEATURE_DOUBLES value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_FEATURE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_FILTER.D2D1_FILTER_ANISOTROPIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_FILTER.D2D1_FILTER_MIN_LINEAR_MAG_MIP_POINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_FILTER.D2D1_FILTER_MIN_LINEAR_MAG_POINT_MIP_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_FILTER.D2D1_FILTER_MIN_MAG_LINEAR_MIP_POINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_FILTER.D2D1_FILTER_MIN_MAG_MIP_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_FILTER.D2D1_FILTER_MIN_MAG_MIP_POINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_FILTER.D2D1_FILTER_MIN_MAG_POINT_MIP_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_FILTER.D2D1_FILTER_MIN_POINT_MAG_LINEAR_MIP_POINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_FILTER.D2D1_FILTER_MIN_POINT_MAG_MIP_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_FILTER.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_FLOOD_PROP.D2D1_FLOOD_PROP_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_FLOOD_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMA.D2D1_GAMMA_1_0 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMA.D2D1_GAMMA_2_2 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMA.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMA1.D2D1_GAMMA1_G10 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMA1.D2D1_GAMMA1_G2084 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMA1.D2D1_GAMMA1_G22 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMA1.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMATRANSFER_PROP.D2D1_GAMMATRANSFER_PROP_ALPHA_AMPLITUDE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMATRANSFER_PROP.D2D1_GAMMATRANSFER_PROP_ALPHA_DISABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMATRANSFER_PROP.D2D1_GAMMATRANSFER_PROP_ALPHA_EXPONENT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMATRANSFER_PROP.D2D1_GAMMATRANSFER_PROP_ALPHA_OFFSET value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMATRANSFER_PROP.D2D1_GAMMATRANSFER_PROP_BLUE_AMPLITUDE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMATRANSFER_PROP.D2D1_GAMMATRANSFER_PROP_BLUE_DISABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMATRANSFER_PROP.D2D1_GAMMATRANSFER_PROP_BLUE_EXPONENT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMATRANSFER_PROP.D2D1_GAMMATRANSFER_PROP_BLUE_OFFSET value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMATRANSFER_PROP.D2D1_GAMMATRANSFER_PROP_CLAMP_OUTPUT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMATRANSFER_PROP.D2D1_GAMMATRANSFER_PROP_GREEN_AMPLITUDE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMATRANSFER_PROP.D2D1_GAMMATRANSFER_PROP_GREEN_DISABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMATRANSFER_PROP.D2D1_GAMMATRANSFER_PROP_GREEN_EXPONENT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMATRANSFER_PROP.D2D1_GAMMATRANSFER_PROP_GREEN_OFFSET value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMATRANSFER_PROP.D2D1_GAMMATRANSFER_PROP_RED_AMPLITUDE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMATRANSFER_PROP.D2D1_GAMMATRANSFER_PROP_RED_DISABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMATRANSFER_PROP.D2D1_GAMMATRANSFER_PROP_RED_EXPONENT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMATRANSFER_PROP.D2D1_GAMMATRANSFER_PROP_RED_OFFSET value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAMMATRANSFER_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAUSSIANBLUR_OPTIMIZATION.D2D1_GAUSSIANBLUR_OPTIMIZATION_BALANCED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAUSSIANBLUR_OPTIMIZATION.D2D1_GAUSSIANBLUR_OPTIMIZATION_QUALITY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAUSSIANBLUR_OPTIMIZATION.D2D1_GAUSSIANBLUR_OPTIMIZATION_SPEED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAUSSIANBLUR_OPTIMIZATION.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAUSSIANBLUR_PROP.D2D1_GAUSSIANBLUR_PROP_BORDER_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAUSSIANBLUR_PROP.D2D1_GAUSSIANBLUR_PROP_OPTIMIZATION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAUSSIANBLUR_PROP.D2D1_GAUSSIANBLUR_PROP_STANDARD_DEVIATION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GAUSSIANBLUR_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GEOMETRY_RELATION.D2D1_GEOMETRY_RELATION_CONTAINS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GEOMETRY_RELATION.D2D1_GEOMETRY_RELATION_DISJOINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GEOMETRY_RELATION.D2D1_GEOMETRY_RELATION_IS_CONTAINED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GEOMETRY_RELATION.D2D1_GEOMETRY_RELATION_OVERLAP value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GEOMETRY_RELATION.D2D1_GEOMETRY_RELATION_UNKNOWN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GEOMETRY_RELATION.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GEOMETRY_SIMPLIFICATION_OPTION.D2D1_GEOMETRY_SIMPLIFICATION_OPTION_CUBICS_AND_LINES value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GEOMETRY_SIMPLIFICATION_OPTION.D2D1_GEOMETRY_SIMPLIFICATION_OPTION_LINES value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_GEOMETRY_SIMPLIFICATION_OPTION.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HDRTONEMAP_DISPLAY_MODE.D2D1_HDRTONEMAP_DISPLAY_MODE_HDR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HDRTONEMAP_DISPLAY_MODE.D2D1_HDRTONEMAP_DISPLAY_MODE_SDR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HDRTONEMAP_DISPLAY_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HDRTONEMAP_PROP.D2D1_HDRTONEMAP_PROP_DISPLAY_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HDRTONEMAP_PROP.D2D1_HDRTONEMAP_PROP_INPUT_MAX_LUMINANCE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HDRTONEMAP_PROP.D2D1_HDRTONEMAP_PROP_OUTPUT_MAX_LUMINANCE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HDRTONEMAP_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HIGHLIGHTSANDSHADOWS_INPUT_GAMMA.D2D1_HIGHLIGHTSANDSHADOWS_INPUT_GAMMA_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HIGHLIGHTSANDSHADOWS_INPUT_GAMMA.D2D1_HIGHLIGHTSANDSHADOWS_INPUT_GAMMA_SRGB value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HIGHLIGHTSANDSHADOWS_INPUT_GAMMA.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HIGHLIGHTSANDSHADOWS_PROP.D2D1_HIGHLIGHTSANDSHADOWS_PROP_CLARITY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HIGHLIGHTSANDSHADOWS_PROP.D2D1_HIGHLIGHTSANDSHADOWS_PROP_HIGHLIGHTS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HIGHLIGHTSANDSHADOWS_PROP.D2D1_HIGHLIGHTSANDSHADOWS_PROP_INPUT_GAMMA value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HIGHLIGHTSANDSHADOWS_PROP.D2D1_HIGHLIGHTSANDSHADOWS_PROP_MASK_BLUR_RADIUS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HIGHLIGHTSANDSHADOWS_PROP.D2D1_HIGHLIGHTSANDSHADOWS_PROP_SHADOWS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HIGHLIGHTSANDSHADOWS_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HISTOGRAM_PROP.D2D1_HISTOGRAM_PROP_CHANNEL_SELECT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HISTOGRAM_PROP.D2D1_HISTOGRAM_PROP_HISTOGRAM_OUTPUT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HISTOGRAM_PROP.D2D1_HISTOGRAM_PROP_NUM_BINS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HISTOGRAM_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HUEROTATION_PROP.D2D1_HUEROTATION_PROP_ANGLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HUEROTATION_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HUETORGB_INPUT_COLOR_SPACE.D2D1_HUETORGB_INPUT_COLOR_SPACE_HUE_SATURATION_LIGHTNESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HUETORGB_INPUT_COLOR_SPACE.D2D1_HUETORGB_INPUT_COLOR_SPACE_HUE_SATURATION_VALUE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HUETORGB_INPUT_COLOR_SPACE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HUETORGB_PROP.D2D1_HUETORGB_PROP_INPUT_COLOR_SPACE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_HUETORGB_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS.D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS_LOW_QUALITY_PRIMARY_CONVERSION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS.D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_IMAGE_SOURCE_LOADING_OPTIONS.D2D1_IMAGE_SOURCE_LOADING_OPTIONS_CACHE_ON_DEMAND value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_IMAGE_SOURCE_LOADING_OPTIONS.D2D1_IMAGE_SOURCE_LOADING_OPTIONS_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_IMAGE_SOURCE_LOADING_OPTIONS.D2D1_IMAGE_SOURCE_LOADING_OPTIONS_RELEASE_SOURCE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_IMAGE_SOURCE_LOADING_OPTIONS.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_INK_NIB_SHAPE.D2D1_INK_NIB_SHAPE_ROUND value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_INK_NIB_SHAPE.D2D1_INK_NIB_SHAPE_SQUARE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_INK_NIB_SHAPE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_INTERPOLATION_MODE.D2D1_INTERPOLATION_MODE_ANISOTROPIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_INTERPOLATION_MODE.D2D1_INTERPOLATION_MODE_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_INTERPOLATION_MODE.D2D1_INTERPOLATION_MODE_HIGH_QUALITY_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_INTERPOLATION_MODE.D2D1_INTERPOLATION_MODE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_INTERPOLATION_MODE.D2D1_INTERPOLATION_MODE_MULTI_SAMPLE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_INTERPOLATION_MODE.D2D1_INTERPOLATION_MODE_NEAREST_NEIGHBOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_INTERPOLATION_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LAYER_OPTIONS.D2D1_LAYER_OPTIONS_INITIALIZE_FOR_CLEARTYPE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LAYER_OPTIONS.D2D1_LAYER_OPTIONS_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LAYER_OPTIONS.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LAYER_OPTIONS1.D2D1_LAYER_OPTIONS1_IGNORE_ALPHA value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LAYER_OPTIONS1.D2D1_LAYER_OPTIONS1_INITIALIZE_FROM_BACKGROUND value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LAYER_OPTIONS1.D2D1_LAYER_OPTIONS1_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LAYER_OPTIONS1.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LINE_JOIN.D2D1_LINE_JOIN_BEVEL value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LINE_JOIN.D2D1_LINE_JOIN_MITER value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LINE_JOIN.D2D1_LINE_JOIN_MITER_OR_BEVEL value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LINE_JOIN.D2D1_LINE_JOIN_ROUND value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LINE_JOIN.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LINEARTRANSFER_PROP.D2D1_LINEARTRANSFER_PROP_ALPHA_DISABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LINEARTRANSFER_PROP.D2D1_LINEARTRANSFER_PROP_ALPHA_SLOPE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LINEARTRANSFER_PROP.D2D1_LINEARTRANSFER_PROP_ALPHA_Y_INTERCEPT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LINEARTRANSFER_PROP.D2D1_LINEARTRANSFER_PROP_BLUE_DISABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LINEARTRANSFER_PROP.D2D1_LINEARTRANSFER_PROP_BLUE_SLOPE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LINEARTRANSFER_PROP.D2D1_LINEARTRANSFER_PROP_BLUE_Y_INTERCEPT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LINEARTRANSFER_PROP.D2D1_LINEARTRANSFER_PROP_CLAMP_OUTPUT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LINEARTRANSFER_PROP.D2D1_LINEARTRANSFER_PROP_GREEN_DISABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LINEARTRANSFER_PROP.D2D1_LINEARTRANSFER_PROP_GREEN_SLOPE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LINEARTRANSFER_PROP.D2D1_LINEARTRANSFER_PROP_GREEN_Y_INTERCEPT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LINEARTRANSFER_PROP.D2D1_LINEARTRANSFER_PROP_RED_DISABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LINEARTRANSFER_PROP.D2D1_LINEARTRANSFER_PROP_RED_SLOPE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LINEARTRANSFER_PROP.D2D1_LINEARTRANSFER_PROP_RED_Y_INTERCEPT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LINEARTRANSFER_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LOOKUPTABLE3D_PROP.D2D1_LOOKUPTABLE3D_PROP_ALPHA_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LOOKUPTABLE3D_PROP.D2D1_LOOKUPTABLE3D_PROP_LUT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_LOOKUPTABLE3D_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_MAP_OPTIONS.D2D1_MAP_OPTIONS_DISCARD value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_MAP_OPTIONS.D2D1_MAP_OPTIONS_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_MAP_OPTIONS.D2D1_MAP_OPTIONS_READ value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_MAP_OPTIONS.D2D1_MAP_OPTIONS_WRITE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_MAP_OPTIONS.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_MORPHOLOGY_MODE.D2D1_MORPHOLOGY_MODE_DILATE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_MORPHOLOGY_MODE.D2D1_MORPHOLOGY_MODE_ERODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_MORPHOLOGY_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_MORPHOLOGY_PROP.D2D1_MORPHOLOGY_PROP_HEIGHT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_MORPHOLOGY_PROP.D2D1_MORPHOLOGY_PROP_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_MORPHOLOGY_PROP.D2D1_MORPHOLOGY_PROP_WIDTH value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_MORPHOLOGY_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_OPACITY_MASK_CONTENT.D2D1_OPACITY_MASK_CONTENT_GRAPHICS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_OPACITY_MASK_CONTENT.D2D1_OPACITY_MASK_CONTENT_TEXT_GDI_COMPATIBLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_OPACITY_MASK_CONTENT.D2D1_OPACITY_MASK_CONTENT_TEXT_NATURAL value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_OPACITY_MASK_CONTENT.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_OPACITY_PROP.D2D1_OPACITY_PROP_OPACITY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_OPACITY_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_OPACITYMETADATA_PROP.D2D1_OPACITYMETADATA_PROP_INPUT_OPAQUE_RECT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_OPACITYMETADATA_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_ORIENTATION.D2D1_ORIENTATION_DEFAULT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_ORIENTATION.D2D1_ORIENTATION_FLIP_HORIZONTAL value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_ORIENTATION.D2D1_ORIENTATION_ROTATE_CLOCKWISE180 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_ORIENTATION.D2D1_ORIENTATION_ROTATE_CLOCKWISE180_FLIP_HORIZONTAL value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_ORIENTATION.D2D1_ORIENTATION_ROTATE_CLOCKWISE270 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_ORIENTATION.D2D1_ORIENTATION_ROTATE_CLOCKWISE270_FLIP_HORIZONTAL value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_ORIENTATION.D2D1_ORIENTATION_ROTATE_CLOCKWISE90 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_ORIENTATION.D2D1_ORIENTATION_ROTATE_CLOCKWISE90_FLIP_HORIZONTAL value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_ORIENTATION.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PATCH_EDGE_MODE.D2D1_PATCH_EDGE_MODE_ALIASED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PATCH_EDGE_MODE.D2D1_PATCH_EDGE_MODE_ALIASED_INFLATED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PATCH_EDGE_MODE.D2D1_PATCH_EDGE_MODE_ANTIALIASED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PATCH_EDGE_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PIXEL_OPTIONS.D2D1_PIXEL_OPTIONS_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PIXEL_OPTIONS.D2D1_PIXEL_OPTIONS_TRIVIAL_SAMPLING value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PIXEL_OPTIONS.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTDIFFUSE_PROP.D2D1_POINTDIFFUSE_PROP_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTDIFFUSE_PROP.D2D1_POINTDIFFUSE_PROP_DIFFUSE_CONSTANT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTDIFFUSE_PROP.D2D1_POINTDIFFUSE_PROP_KERNEL_UNIT_LENGTH value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTDIFFUSE_PROP.D2D1_POINTDIFFUSE_PROP_LIGHT_POSITION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTDIFFUSE_PROP.D2D1_POINTDIFFUSE_PROP_SCALE_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTDIFFUSE_PROP.D2D1_POINTDIFFUSE_PROP_SURFACE_SCALE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTDIFFUSE_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTDIFFUSE_SCALE_MODE.D2D1_POINTDIFFUSE_SCALE_MODE_ANISOTROPIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTDIFFUSE_SCALE_MODE.D2D1_POINTDIFFUSE_SCALE_MODE_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTDIFFUSE_SCALE_MODE.D2D1_POINTDIFFUSE_SCALE_MODE_HIGH_QUALITY_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTDIFFUSE_SCALE_MODE.D2D1_POINTDIFFUSE_SCALE_MODE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTDIFFUSE_SCALE_MODE.D2D1_POINTDIFFUSE_SCALE_MODE_MULTI_SAMPLE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTDIFFUSE_SCALE_MODE.D2D1_POINTDIFFUSE_SCALE_MODE_NEAREST_NEIGHBOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTDIFFUSE_SCALE_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTSPECULAR_PROP.D2D1_POINTSPECULAR_PROP_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTSPECULAR_PROP.D2D1_POINTSPECULAR_PROP_KERNEL_UNIT_LENGTH value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTSPECULAR_PROP.D2D1_POINTSPECULAR_PROP_LIGHT_POSITION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTSPECULAR_PROP.D2D1_POINTSPECULAR_PROP_SCALE_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTSPECULAR_PROP.D2D1_POINTSPECULAR_PROP_SPECULAR_CONSTANT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTSPECULAR_PROP.D2D1_POINTSPECULAR_PROP_SPECULAR_EXPONENT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTSPECULAR_PROP.D2D1_POINTSPECULAR_PROP_SURFACE_SCALE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTSPECULAR_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTSPECULAR_SCALE_MODE.D2D1_POINTSPECULAR_SCALE_MODE_ANISOTROPIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTSPECULAR_SCALE_MODE.D2D1_POINTSPECULAR_SCALE_MODE_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTSPECULAR_SCALE_MODE.D2D1_POINTSPECULAR_SCALE_MODE_HIGH_QUALITY_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTSPECULAR_SCALE_MODE.D2D1_POINTSPECULAR_SCALE_MODE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTSPECULAR_SCALE_MODE.D2D1_POINTSPECULAR_SCALE_MODE_MULTI_SAMPLE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTSPECULAR_SCALE_MODE.D2D1_POINTSPECULAR_SCALE_MODE_NEAREST_NEIGHBOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POINTSPECULAR_SCALE_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POSTERIZE_PROP.D2D1_POSTERIZE_PROP_BLUE_VALUE_COUNT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POSTERIZE_PROP.D2D1_POSTERIZE_PROP_GREEN_VALUE_COUNT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POSTERIZE_PROP.D2D1_POSTERIZE_PROP_RED_VALUE_COUNT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_POSTERIZE_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PRESENT_OPTIONS.D2D1_PRESENT_OPTIONS_IMMEDIATELY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PRESENT_OPTIONS.D2D1_PRESENT_OPTIONS_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PRESENT_OPTIONS.D2D1_PRESENT_OPTIONS_RETAIN_CONTENTS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PRESENT_OPTIONS.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PRIMITIVE_BLEND.D2D1_PRIMITIVE_BLEND_ADD value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PRIMITIVE_BLEND.D2D1_PRIMITIVE_BLEND_COPY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PRIMITIVE_BLEND.D2D1_PRIMITIVE_BLEND_MAX value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PRIMITIVE_BLEND.D2D1_PRIMITIVE_BLEND_MIN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PRIMITIVE_BLEND.D2D1_PRIMITIVE_BLEND_SOURCE_OVER value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PRIMITIVE_BLEND.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PRINT_FONT_SUBSET_MODE.D2D1_PRINT_FONT_SUBSET_MODE_DEFAULT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PRINT_FONT_SUBSET_MODE.D2D1_PRINT_FONT_SUBSET_MODE_EACHPAGE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PRINT_FONT_SUBSET_MODE.D2D1_PRINT_FONT_SUBSET_MODE_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PRINT_FONT_SUBSET_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY_TYPE.D2D1_PROPERTY_TYPE_ARRAY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY_TYPE.D2D1_PROPERTY_TYPE_BLOB value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY_TYPE.D2D1_PROPERTY_TYPE_BOOL value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY_TYPE.D2D1_PROPERTY_TYPE_CLSID value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY_TYPE.D2D1_PROPERTY_TYPE_COLOR_CONTEXT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY_TYPE.D2D1_PROPERTY_TYPE_ENUM value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY_TYPE.D2D1_PROPERTY_TYPE_FLOAT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY_TYPE.D2D1_PROPERTY_TYPE_INT32 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY_TYPE.D2D1_PROPERTY_TYPE_IUNKNOWN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY_TYPE.D2D1_PROPERTY_TYPE_MATRIX_3X2 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY_TYPE.D2D1_PROPERTY_TYPE_MATRIX_4X3 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY_TYPE.D2D1_PROPERTY_TYPE_MATRIX_4X4 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY_TYPE.D2D1_PROPERTY_TYPE_MATRIX_5X4 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY_TYPE.D2D1_PROPERTY_TYPE_STRING value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY_TYPE.D2D1_PROPERTY_TYPE_UINT32 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY_TYPE.D2D1_PROPERTY_TYPE_UNKNOWN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY_TYPE.D2D1_PROPERTY_TYPE_VECTOR2 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY_TYPE.D2D1_PROPERTY_TYPE_VECTOR3 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY_TYPE.D2D1_PROPERTY_TYPE_VECTOR4 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY_TYPE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY.D2D1_PROPERTY_AUTHOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY.D2D1_PROPERTY_CACHED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY.D2D1_PROPERTY_CATEGORY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY.D2D1_PROPERTY_CLSID value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY.D2D1_PROPERTY_DESCRIPTION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY.D2D1_PROPERTY_DISPLAYNAME value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY.D2D1_PROPERTY_INPUTS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY.D2D1_PROPERTY_MAX_INPUTS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY.D2D1_PROPERTY_MIN_INPUTS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY.D2D1_PROPERTY_PRECISION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_RENDER_TARGET_TYPE.D2D1_RENDER_TARGET_TYPE_DEFAULT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_RENDER_TARGET_TYPE.D2D1_RENDER_TARGET_TYPE_HARDWARE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_RENDER_TARGET_TYPE.D2D1_RENDER_TARGET_TYPE_SOFTWARE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_RENDER_TARGET_TYPE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_RENDER_TARGET_USAGE.D2D1_RENDER_TARGET_USAGE_FORCE_BITMAP_REMOTING value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_RENDER_TARGET_USAGE.D2D1_RENDER_TARGET_USAGE_GDI_COMPATIBLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_RENDER_TARGET_USAGE.D2D1_RENDER_TARGET_USAGE_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_RENDER_TARGET_USAGE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_RENDERING_PRIORITY.D2D1_RENDERING_PRIORITY_LOW value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_RENDERING_PRIORITY.D2D1_RENDERING_PRIORITY_NORMAL value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_RENDERING_PRIORITY.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_RGBTOHUE_OUTPUT_COLOR_SPACE.D2D1_RGBTOHUE_OUTPUT_COLOR_SPACE_HUE_SATURATION_LIGHTNESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_RGBTOHUE_OUTPUT_COLOR_SPACE.D2D1_RGBTOHUE_OUTPUT_COLOR_SPACE_HUE_SATURATION_VALUE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_RGBTOHUE_OUTPUT_COLOR_SPACE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_RGBTOHUE_PROP.D2D1_RGBTOHUE_PROP_OUTPUT_COLOR_SPACE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_RGBTOHUE_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SATURATION_PROP.D2D1_SATURATION_PROP_SATURATION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SATURATION_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SCALE_INTERPOLATION_MODE.D2D1_SCALE_INTERPOLATION_MODE_ANISOTROPIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SCALE_INTERPOLATION_MODE.D2D1_SCALE_INTERPOLATION_MODE_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SCALE_INTERPOLATION_MODE.D2D1_SCALE_INTERPOLATION_MODE_HIGH_QUALITY_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SCALE_INTERPOLATION_MODE.D2D1_SCALE_INTERPOLATION_MODE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SCALE_INTERPOLATION_MODE.D2D1_SCALE_INTERPOLATION_MODE_MULTI_SAMPLE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SCALE_INTERPOLATION_MODE.D2D1_SCALE_INTERPOLATION_MODE_NEAREST_NEIGHBOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SCALE_INTERPOLATION_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SCALE_PROP.D2D1_SCALE_PROP_BORDER_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SCALE_PROP.D2D1_SCALE_PROP_CENTER_POINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SCALE_PROP.D2D1_SCALE_PROP_INTERPOLATION_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SCALE_PROP.D2D1_SCALE_PROP_SCALE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SCALE_PROP.D2D1_SCALE_PROP_SHARPNESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SCALE_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SEPIA_PROP.D2D1_SEPIA_PROP_ALPHA_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SEPIA_PROP.D2D1_SEPIA_PROP_INTENSITY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SEPIA_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SHADOW_OPTIMIZATION.D2D1_SHADOW_OPTIMIZATION_BALANCED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SHADOW_OPTIMIZATION.D2D1_SHADOW_OPTIMIZATION_QUALITY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SHADOW_OPTIMIZATION.D2D1_SHADOW_OPTIMIZATION_SPEED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SHADOW_OPTIMIZATION.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SHADOW_PROP.D2D1_SHADOW_PROP_BLUR_STANDARD_DEVIATION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SHADOW_PROP.D2D1_SHADOW_PROP_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SHADOW_PROP.D2D1_SHADOW_PROP_OPTIMIZATION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SHADOW_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SHARPEN_PROP.D2D1_SHARPEN_PROP_SHARPNESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SHARPEN_PROP.D2D1_SHARPEN_PROP_THRESHOLD value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SHARPEN_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTDIFFUSE_PROP.D2D1_SPOTDIFFUSE_PROP_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTDIFFUSE_PROP.D2D1_SPOTDIFFUSE_PROP_DIFFUSE_CONSTANT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTDIFFUSE_PROP.D2D1_SPOTDIFFUSE_PROP_FOCUS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTDIFFUSE_PROP.D2D1_SPOTDIFFUSE_PROP_KERNEL_UNIT_LENGTH value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTDIFFUSE_PROP.D2D1_SPOTDIFFUSE_PROP_LIGHT_POSITION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTDIFFUSE_PROP.D2D1_SPOTDIFFUSE_PROP_LIMITING_CONE_ANGLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTDIFFUSE_PROP.D2D1_SPOTDIFFUSE_PROP_POINTS_AT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTDIFFUSE_PROP.D2D1_SPOTDIFFUSE_PROP_SCALE_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTDIFFUSE_PROP.D2D1_SPOTDIFFUSE_PROP_SURFACE_SCALE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTDIFFUSE_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTDIFFUSE_SCALE_MODE.D2D1_SPOTDIFFUSE_SCALE_MODE_ANISOTROPIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTDIFFUSE_SCALE_MODE.D2D1_SPOTDIFFUSE_SCALE_MODE_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTDIFFUSE_SCALE_MODE.D2D1_SPOTDIFFUSE_SCALE_MODE_HIGH_QUALITY_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTDIFFUSE_SCALE_MODE.D2D1_SPOTDIFFUSE_SCALE_MODE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTDIFFUSE_SCALE_MODE.D2D1_SPOTDIFFUSE_SCALE_MODE_MULTI_SAMPLE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTDIFFUSE_SCALE_MODE.D2D1_SPOTDIFFUSE_SCALE_MODE_NEAREST_NEIGHBOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTDIFFUSE_SCALE_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTSPECULAR_PROP.D2D1_SPOTSPECULAR_PROP_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTSPECULAR_PROP.D2D1_SPOTSPECULAR_PROP_FOCUS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTSPECULAR_PROP.D2D1_SPOTSPECULAR_PROP_KERNEL_UNIT_LENGTH value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTSPECULAR_PROP.D2D1_SPOTSPECULAR_PROP_LIGHT_POSITION value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTSPECULAR_PROP.D2D1_SPOTSPECULAR_PROP_LIMITING_CONE_ANGLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTSPECULAR_PROP.D2D1_SPOTSPECULAR_PROP_POINTS_AT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTSPECULAR_PROP.D2D1_SPOTSPECULAR_PROP_SCALE_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTSPECULAR_PROP.D2D1_SPOTSPECULAR_PROP_SPECULAR_CONSTANT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTSPECULAR_PROP.D2D1_SPOTSPECULAR_PROP_SPECULAR_EXPONENT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTSPECULAR_PROP.D2D1_SPOTSPECULAR_PROP_SURFACE_SCALE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTSPECULAR_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTSPECULAR_SCALE_MODE.D2D1_SPOTSPECULAR_SCALE_MODE_ANISOTROPIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTSPECULAR_SCALE_MODE.D2D1_SPOTSPECULAR_SCALE_MODE_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTSPECULAR_SCALE_MODE.D2D1_SPOTSPECULAR_SCALE_MODE_HIGH_QUALITY_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTSPECULAR_SCALE_MODE.D2D1_SPOTSPECULAR_SCALE_MODE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTSPECULAR_SCALE_MODE.D2D1_SPOTSPECULAR_SCALE_MODE_MULTI_SAMPLE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTSPECULAR_SCALE_MODE.D2D1_SPOTSPECULAR_SCALE_MODE_NEAREST_NEIGHBOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPOTSPECULAR_SCALE_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPRITE_OPTIONS.D2D1_SPRITE_OPTIONS_CLAMP_TO_SOURCE_RECTANGLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPRITE_OPTIONS.D2D1_SPRITE_OPTIONS_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SPRITE_OPTIONS.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_STRAIGHTEN_PROP.D2D1_STRAIGHTEN_PROP_ANGLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_STRAIGHTEN_PROP.D2D1_STRAIGHTEN_PROP_MAINTAIN_SIZE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_STRAIGHTEN_PROP.D2D1_STRAIGHTEN_PROP_SCALE_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_STRAIGHTEN_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_STRAIGHTEN_SCALE_MODE.D2D1_STRAIGHTEN_SCALE_MODE_ANISOTROPIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_STRAIGHTEN_SCALE_MODE.D2D1_STRAIGHTEN_SCALE_MODE_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_STRAIGHTEN_SCALE_MODE.D2D1_STRAIGHTEN_SCALE_MODE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_STRAIGHTEN_SCALE_MODE.D2D1_STRAIGHTEN_SCALE_MODE_MULTI_SAMPLE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_STRAIGHTEN_SCALE_MODE.D2D1_STRAIGHTEN_SCALE_MODE_NEAREST_NEIGHBOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_STRAIGHTEN_SCALE_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_STROKE_TRANSFORM_TYPE.D2D1_STROKE_TRANSFORM_TYPE_FIXED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_STROKE_TRANSFORM_TYPE.D2D1_STROKE_TRANSFORM_TYPE_HAIRLINE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_STROKE_TRANSFORM_TYPE.D2D1_STROKE_TRANSFORM_TYPE_NORMAL value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_STROKE_TRANSFORM_TYPE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SUBPROPERTY.D2D1_SUBPROPERTY_DEFAULT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SUBPROPERTY.D2D1_SUBPROPERTY_DISPLAYNAME value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SUBPROPERTY.D2D1_SUBPROPERTY_FIELDS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SUBPROPERTY.D2D1_SUBPROPERTY_INDEX value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SUBPROPERTY.D2D1_SUBPROPERTY_ISREADONLY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SUBPROPERTY.D2D1_SUBPROPERTY_MAX value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SUBPROPERTY.D2D1_SUBPROPERTY_MIN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SUBPROPERTY.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ASPECT_ALIGN.D2D1_SVG_ASPECT_ALIGN_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ASPECT_ALIGN.D2D1_SVG_ASPECT_ALIGN_X_MAX_Y_MAX value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ASPECT_ALIGN.D2D1_SVG_ASPECT_ALIGN_X_MAX_Y_MID value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ASPECT_ALIGN.D2D1_SVG_ASPECT_ALIGN_X_MAX_Y_MIN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ASPECT_ALIGN.D2D1_SVG_ASPECT_ALIGN_X_MID_Y_MAX value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ASPECT_ALIGN.D2D1_SVG_ASPECT_ALIGN_X_MID_Y_MID value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ASPECT_ALIGN.D2D1_SVG_ASPECT_ALIGN_X_MID_Y_MIN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ASPECT_ALIGN.D2D1_SVG_ASPECT_ALIGN_X_MIN_Y_MAX value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ASPECT_ALIGN.D2D1_SVG_ASPECT_ALIGN_X_MIN_Y_MID value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ASPECT_ALIGN.D2D1_SVG_ASPECT_ALIGN_X_MIN_Y_MIN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ASPECT_ALIGN.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ASPECT_SCALING.D2D1_SVG_ASPECT_SCALING_MEET value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ASPECT_SCALING.D2D1_SVG_ASPECT_SCALING_SLICE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ASPECT_SCALING.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ATTRIBUTE_POD_TYPE.D2D1_SVG_ATTRIBUTE_POD_TYPE_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ATTRIBUTE_POD_TYPE.D2D1_SVG_ATTRIBUTE_POD_TYPE_DISPLAY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ATTRIBUTE_POD_TYPE.D2D1_SVG_ATTRIBUTE_POD_TYPE_EXTEND_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ATTRIBUTE_POD_TYPE.D2D1_SVG_ATTRIBUTE_POD_TYPE_FILL_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ATTRIBUTE_POD_TYPE.D2D1_SVG_ATTRIBUTE_POD_TYPE_FLOAT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ATTRIBUTE_POD_TYPE.D2D1_SVG_ATTRIBUTE_POD_TYPE_LENGTH value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ATTRIBUTE_POD_TYPE.D2D1_SVG_ATTRIBUTE_POD_TYPE_LINE_CAP value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ATTRIBUTE_POD_TYPE.D2D1_SVG_ATTRIBUTE_POD_TYPE_LINE_JOIN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ATTRIBUTE_POD_TYPE.D2D1_SVG_ATTRIBUTE_POD_TYPE_MATRIX value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ATTRIBUTE_POD_TYPE.D2D1_SVG_ATTRIBUTE_POD_TYPE_OVERFLOW value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ATTRIBUTE_POD_TYPE.D2D1_SVG_ATTRIBUTE_POD_TYPE_PRESERVE_ASPECT_RATIO value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ATTRIBUTE_POD_TYPE.D2D1_SVG_ATTRIBUTE_POD_TYPE_UNIT_TYPE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ATTRIBUTE_POD_TYPE.D2D1_SVG_ATTRIBUTE_POD_TYPE_VIEWBOX value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ATTRIBUTE_POD_TYPE.D2D1_SVG_ATTRIBUTE_POD_TYPE_VISIBILITY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ATTRIBUTE_POD_TYPE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ATTRIBUTE_STRING_TYPE.D2D1_SVG_ATTRIBUTE_STRING_TYPE_ID value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ATTRIBUTE_STRING_TYPE.D2D1_SVG_ATTRIBUTE_STRING_TYPE_SVG value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_ATTRIBUTE_STRING_TYPE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_DISPLAY.D2D1_SVG_DISPLAY_INLINE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_DISPLAY.D2D1_SVG_DISPLAY_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_DISPLAY.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_LENGTH_UNITS.D2D1_SVG_LENGTH_UNITS_NUMBER value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_LENGTH_UNITS.D2D1_SVG_LENGTH_UNITS_PERCENTAGE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_LENGTH_UNITS.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_LINE_CAP.D2D1_SVG_LINE_CAP_BUTT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_LINE_CAP.D2D1_SVG_LINE_CAP_ROUND value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_LINE_CAP.D2D1_SVG_LINE_CAP_SQUARE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_LINE_CAP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_LINE_JOIN.D2D1_SVG_LINE_JOIN_BEVEL value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_LINE_JOIN.D2D1_SVG_LINE_JOIN_MITER value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_LINE_JOIN.D2D1_SVG_LINE_JOIN_ROUND value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_LINE_JOIN.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_OVERFLOW.D2D1_SVG_OVERFLOW_HIDDEN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_OVERFLOW.D2D1_SVG_OVERFLOW_VISIBLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_OVERFLOW.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PAINT_TYPE.D2D1_SVG_PAINT_TYPE_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PAINT_TYPE.D2D1_SVG_PAINT_TYPE_CURRENT_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PAINT_TYPE.D2D1_SVG_PAINT_TYPE_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PAINT_TYPE.D2D1_SVG_PAINT_TYPE_URI value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PAINT_TYPE.D2D1_SVG_PAINT_TYPE_URI_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PAINT_TYPE.D2D1_SVG_PAINT_TYPE_URI_CURRENT_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PAINT_TYPE.D2D1_SVG_PAINT_TYPE_URI_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PAINT_TYPE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PATH_COMMAND.D2D1_SVG_PATH_COMMAND_ARC_ABSOLUTE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PATH_COMMAND.D2D1_SVG_PATH_COMMAND_ARC_RELATIVE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PATH_COMMAND.D2D1_SVG_PATH_COMMAND_CLOSE_PATH value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PATH_COMMAND.D2D1_SVG_PATH_COMMAND_CUBIC_ABSOLUTE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PATH_COMMAND.D2D1_SVG_PATH_COMMAND_CUBIC_RELATIVE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PATH_COMMAND.D2D1_SVG_PATH_COMMAND_CUBIC_SMOOTH_ABSOLUTE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PATH_COMMAND.D2D1_SVG_PATH_COMMAND_CUBIC_SMOOTH_RELATIVE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PATH_COMMAND.D2D1_SVG_PATH_COMMAND_HORIZONTAL_ABSOLUTE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PATH_COMMAND.D2D1_SVG_PATH_COMMAND_HORIZONTAL_RELATIVE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PATH_COMMAND.D2D1_SVG_PATH_COMMAND_LINE_ABSOLUTE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PATH_COMMAND.D2D1_SVG_PATH_COMMAND_LINE_RELATIVE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PATH_COMMAND.D2D1_SVG_PATH_COMMAND_MOVE_ABSOLUTE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PATH_COMMAND.D2D1_SVG_PATH_COMMAND_MOVE_RELATIVE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PATH_COMMAND.D2D1_SVG_PATH_COMMAND_QUADRADIC_ABSOLUTE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PATH_COMMAND.D2D1_SVG_PATH_COMMAND_QUADRADIC_RELATIVE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PATH_COMMAND.D2D1_SVG_PATH_COMMAND_QUADRADIC_SMOOTH_ABSOLUTE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PATH_COMMAND.D2D1_SVG_PATH_COMMAND_QUADRADIC_SMOOTH_RELATIVE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PATH_COMMAND.D2D1_SVG_PATH_COMMAND_VERTICAL_ABSOLUTE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PATH_COMMAND.D2D1_SVG_PATH_COMMAND_VERTICAL_RELATIVE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_PATH_COMMAND.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_UNIT_TYPE.D2D1_SVG_UNIT_TYPE_OBJECT_BOUNDING_BOX value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_UNIT_TYPE.D2D1_SVG_UNIT_TYPE_USER_SPACE_ON_USE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_UNIT_TYPE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_VISIBILITY.D2D1_SVG_VISIBILITY_HIDDEN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_VISIBILITY.D2D1_SVG_VISIBILITY_VISIBLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SVG_VISIBILITY.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SWEEP_DIRECTION.D2D1_SWEEP_DIRECTION_CLOCKWISE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SWEEP_DIRECTION.D2D1_SWEEP_DIRECTION_COUNTER_CLOCKWISE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_SWEEP_DIRECTION.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TABLETRANSFER_PROP.D2D1_TABLETRANSFER_PROP_ALPHA_DISABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TABLETRANSFER_PROP.D2D1_TABLETRANSFER_PROP_ALPHA_TABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TABLETRANSFER_PROP.D2D1_TABLETRANSFER_PROP_BLUE_DISABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TABLETRANSFER_PROP.D2D1_TABLETRANSFER_PROP_BLUE_TABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TABLETRANSFER_PROP.D2D1_TABLETRANSFER_PROP_CLAMP_OUTPUT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TABLETRANSFER_PROP.D2D1_TABLETRANSFER_PROP_GREEN_DISABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TABLETRANSFER_PROP.D2D1_TABLETRANSFER_PROP_GREEN_TABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TABLETRANSFER_PROP.D2D1_TABLETRANSFER_PROP_RED_DISABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TABLETRANSFER_PROP.D2D1_TABLETRANSFER_PROP_RED_TABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TABLETRANSFER_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TEMPERATUREANDTINT_PROP.D2D1_TEMPERATUREANDTINT_PROP_TEMPERATURE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TEMPERATUREANDTINT_PROP.D2D1_TEMPERATUREANDTINT_PROP_TINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TEMPERATUREANDTINT_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TEXT_ANTIALIAS_MODE.D2D1_TEXT_ANTIALIAS_MODE_ALIASED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TEXT_ANTIALIAS_MODE.D2D1_TEXT_ANTIALIAS_MODE_CLEARTYPE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TEXT_ANTIALIAS_MODE.D2D1_TEXT_ANTIALIAS_MODE_DEFAULT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TEXT_ANTIALIAS_MODE.D2D1_TEXT_ANTIALIAS_MODE_GRAYSCALE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TEXT_ANTIALIAS_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_THREADING_MODE.D2D1_THREADING_MODE_MULTI_THREADED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_THREADING_MODE.D2D1_THREADING_MODE_SINGLE_THREADED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_THREADING_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TILE_PROP.D2D1_TILE_PROP_RECT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TILE_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TINT_PROP.D2D1_TINT_PROP_CLAMP_OUTPUT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TINT_PROP.D2D1_TINT_PROP_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TINT_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TRANSFORMED_IMAGE_SOURCE_OPTIONS.D2D1_TRANSFORMED_IMAGE_SOURCE_OPTIONS_DISABLE_DPI_SCALE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TRANSFORMED_IMAGE_SOURCE_OPTIONS.D2D1_TRANSFORMED_IMAGE_SOURCE_OPTIONS_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TRANSFORMED_IMAGE_SOURCE_OPTIONS.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TURBULENCE_PROP.D2D1_TURBULENCE_PROP_BASE_FREQUENCY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TURBULENCE_PROP.D2D1_TURBULENCE_PROP_NOISE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TURBULENCE_PROP.D2D1_TURBULENCE_PROP_NUM_OCTAVES value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TURBULENCE_PROP.D2D1_TURBULENCE_PROP_OFFSET value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TURBULENCE_PROP.D2D1_TURBULENCE_PROP_SEED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TURBULENCE_PROP.D2D1_TURBULENCE_PROP_SIZE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TURBULENCE_PROP.D2D1_TURBULENCE_PROP_STITCHABLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_TURBULENCE_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_UNIT_MODE.D2D1_UNIT_MODE_DIPS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_UNIT_MODE.D2D1_UNIT_MODE_PIXELS value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_UNIT_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_VERTEX_OPTIONS.D2D1_VERTEX_OPTIONS_ASSUME_NO_OVERLAP value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_VERTEX_OPTIONS.D2D1_VERTEX_OPTIONS_DO_NOT_CLEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_VERTEX_OPTIONS.D2D1_VERTEX_OPTIONS_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_VERTEX_OPTIONS.D2D1_VERTEX_OPTIONS_USE_DEPTH_BUFFER value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_VERTEX_OPTIONS.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_VERTEX_USAGE.D2D1_VERTEX_USAGE_DYNAMIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_VERTEX_USAGE.D2D1_VERTEX_USAGE_STATIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_VERTEX_USAGE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_VIGNETTE_PROP.D2D1_VIGNETTE_PROP_COLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_VIGNETTE_PROP.D2D1_VIGNETTE_PROP_STRENGTH value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_VIGNETTE_PROP.D2D1_VIGNETTE_PROP_TRANSITION_SIZE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_VIGNETTE_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_WHITELEVELADJUSTMENT_PROP.D2D1_WHITELEVELADJUSTMENT_PROP_INPUT_WHITE_LEVEL value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_WHITELEVELADJUSTMENT_PROP.D2D1_WHITELEVELADJUSTMENT_PROP_OUTPUT_WHITE_LEVEL value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_WHITELEVELADJUSTMENT_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_WINDOW_STATE.D2D1_WINDOW_STATE_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_WINDOW_STATE.D2D1_WINDOW_STATE_OCCLUDED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_WINDOW_STATE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_YCBCR_CHROMA_SUBSAMPLING.D2D1_YCBCR_CHROMA_SUBSAMPLING_420 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_YCBCR_CHROMA_SUBSAMPLING.D2D1_YCBCR_CHROMA_SUBSAMPLING_422 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_YCBCR_CHROMA_SUBSAMPLING.D2D1_YCBCR_CHROMA_SUBSAMPLING_440 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_YCBCR_CHROMA_SUBSAMPLING.D2D1_YCBCR_CHROMA_SUBSAMPLING_444 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_YCBCR_CHROMA_SUBSAMPLING.D2D1_YCBCR_CHROMA_SUBSAMPLING_AUTO value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_YCBCR_CHROMA_SUBSAMPLING.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_YCBCR_INTERPOLATION_MODE.D2D1_YCBCR_INTERPOLATION_MODE_ANISOTROPIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_YCBCR_INTERPOLATION_MODE.D2D1_YCBCR_INTERPOLATION_MODE_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_YCBCR_INTERPOLATION_MODE.D2D1_YCBCR_INTERPOLATION_MODE_HIGH_QUALITY_CUBIC value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_YCBCR_INTERPOLATION_MODE.D2D1_YCBCR_INTERPOLATION_MODE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_YCBCR_INTERPOLATION_MODE.D2D1_YCBCR_INTERPOLATION_MODE_MULTI_SAMPLE_LINEAR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_YCBCR_INTERPOLATION_MODE.D2D1_YCBCR_INTERPOLATION_MODE_NEAREST_NEIGHBOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_YCBCR_INTERPOLATION_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.D2D1_YCBCR_PROP.D2D1_YCBCR_PROP_CHROMA_SUBSAMPLING value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_YCBCR_PROP.D2D1_YCBCR_PROP_INTERPOLATION_MODE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_YCBCR_PROP.D2D1_YCBCR_PROP_TRANSFORM_MATRIX value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct2D.D2D1_YCBCR_PROP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct2D.ID2D1Factory.GetDesktopDpi : [Documentation(https://docs.microsoft.com/windows/win32/api/d2d1/nf-d2d1-id2d1factory-getdesktopdpi),Obsolete(Deprecated. Use DisplayInformation::LogicalDpi for Windows Store Apps or GetDpiForWindow for desktop apps)] => [Documentation(https://docs.microsoft.com/windows/win32/api/d2d1/nf-d2d1-id2d1factory-getdesktopdpi),Obsolete(Deprecated. Use DisplayInformation::LogicalDpi for Windows Store Apps or GetDpiForWindow for desktop apps.)]
+Windows.Win32.Graphics.Direct3D9.D3DBACKBUFFER_TYPE.D3DBACKBUFFER_TYPE_LEFT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBACKBUFFER_TYPE.D3DBACKBUFFER_TYPE_MONO value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBACKBUFFER_TYPE.D3DBACKBUFFER_TYPE_RIGHT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBACKBUFFER_TYPE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLEND.D3DBLEND_BLENDFACTOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLEND.D3DBLEND_BOTHINVSRCALPHA value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLEND.D3DBLEND_BOTHSRCALPHA value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLEND.D3DBLEND_DESTALPHA value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLEND.D3DBLEND_DESTCOLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLEND.D3DBLEND_INVBLENDFACTOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLEND.D3DBLEND_INVDESTALPHA value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLEND.D3DBLEND_INVDESTCOLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLEND.D3DBLEND_INVSRCALPHA value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLEND.D3DBLEND_INVSRCCOLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLEND.D3DBLEND_INVSRCCOLOR2 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLEND.D3DBLEND_ONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLEND.D3DBLEND_SRCALPHA value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLEND.D3DBLEND_SRCALPHASAT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLEND.D3DBLEND_SRCCOLOR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLEND.D3DBLEND_SRCCOLOR2 value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLEND.D3DBLEND_ZERO value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLEND.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLENDOP.D3DBLENDOP_ADD value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLENDOP.D3DBLENDOP_MAX value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLENDOP.D3DBLENDOP_MIN value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLENDOP.D3DBLENDOP_REVSUBTRACT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLENDOP.D3DBLENDOP_SUBTRACT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DBLENDOP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct3D9.D3DCULL.D3DCULL_CCW value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DCULL.D3DCULL_CW value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DCULL.D3DCULL_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DCULL.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct3D9.D3DDEVTYPE.D3DDEVTYPE_HAL value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DDEVTYPE.D3DDEVTYPE_NULLREF value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DDEVTYPE.D3DDEVTYPE_REF value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DDEVTYPE.D3DDEVTYPE_SW value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DDEVTYPE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct3D9.D3DPOOL.D3DPOOL_DEFAULT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DPOOL.D3DPOOL_MANAGED value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DPOOL.D3DPOOL_SCRATCH value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DPOOL.D3DPOOL_SYSTEMMEM value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DPOOL.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct3D9.D3DSTENCILOP.D3DSTENCILOP_DECR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DSTENCILOP.D3DSTENCILOP_DECRSAT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DSTENCILOP.D3DSTENCILOP_INCR value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DSTENCILOP.D3DSTENCILOP_INCRSAT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DSTENCILOP.D3DSTENCILOP_INVERT value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DSTENCILOP.D3DSTENCILOP_KEEP value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DSTENCILOP.D3DSTENCILOP_REPLACE value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DSTENCILOP.D3DSTENCILOP_ZERO value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DSTENCILOP.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Direct3D9.D3DSWAPEFFECT.D3DSWAPEFFECT_COPY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DSWAPEFFECT.D3DSWAPEFFECT_DISCARD value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DSWAPEFFECT.D3DSWAPEFFECT_FLIP value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DSWAPEFFECT.D3DSWAPEFFECT_FLIPEX value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DSWAPEFFECT.D3DSWAPEFFECT_OVERLAY value init changed UInt32->Int32
+Windows.Win32.Graphics.Direct3D9.D3DSWAPEFFECT.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_ALPHA_MODE.DXGI_ALPHA_MODE_IGNORE value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_ALPHA_MODE.DXGI_ALPHA_MODE_PREMULTIPLIED value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_ALPHA_MODE.DXGI_ALPHA_MODE_STRAIGHT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_ALPHA_MODE.DXGI_ALPHA_MODE_UNSPECIFIED value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_ALPHA_MODE.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_420_OPAQUE value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_A4B4G4R4_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_A8_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_A8P8 value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_AI44 value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_AYUV value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_B4G4R4A4_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_B5G5R5A1_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_B5G6R5_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_B8G8R8A8_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_B8G8R8A8_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_B8G8R8A8_UNORM_SRGB value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_B8G8R8X8_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_B8G8R8X8_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_B8G8R8X8_UNORM_SRGB value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_BC1_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_BC1_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_BC1_UNORM_SRGB value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_BC2_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_BC2_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_BC2_UNORM_SRGB value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_BC3_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_BC3_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_BC3_UNORM_SRGB value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_BC4_SNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_BC4_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_BC4_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_BC5_SNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_BC5_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_BC5_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_BC6H_SF16 value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_BC6H_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_BC6H_UF16 value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_BC7_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_BC7_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_BC7_UNORM_SRGB value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_D16_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_D24_UNORM_S8_UINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_D32_FLOAT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_D32_FLOAT_S8X24_UINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_G8R8_G8B8_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_IA44 value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_NV11 value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_NV12 value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_P010 value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_P016 value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_P208 value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_P8 value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R1_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R10G10B10_XR_BIAS_A2_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R10G10B10A2_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R10G10B10A2_UINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R10G10B10A2_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R11G11B10_FLOAT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R16_FLOAT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R16_SINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R16_SNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R16_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R16_UINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R16_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R16G16_FLOAT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R16G16_SINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R16G16_SNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R16G16_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R16G16_UINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R16G16_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R16G16B16A16_FLOAT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R16G16B16A16_SINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R16G16B16A16_SNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R16G16B16A16_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R16G16B16A16_UINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R16G16B16A16_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R24_UNORM_X8_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R24G8_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R32_FLOAT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R32_FLOAT_X8X24_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R32_SINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R32_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R32_UINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R32G32_FLOAT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R32G32_SINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R32G32_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R32G32_UINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R32G32B32_FLOAT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R32G32B32_SINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R32G32B32_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R32G32B32_UINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R32G32B32A32_FLOAT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R32G32B32A32_SINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R32G32B32A32_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R32G32B32A32_UINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R32G8X24_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R8_SINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R8_SNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R8_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R8_UINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R8_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R8G8_B8G8_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R8G8_SINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R8G8_SNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R8G8_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R8G8_UINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R8G8_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R8G8B8A8_SINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R8G8B8A8_SNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R8G8B8A8_TYPELESS value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R8G8B8A8_UINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R8G8B8A8_UNORM value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R8G8B8A8_UNORM_SRGB value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_R9G9B9E5_SHAREDEXP value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_SAMPLER_FEEDBACK_MIN_MIP_OPAQUE value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_SAMPLER_FEEDBACK_MIP_REGION_USED_OPAQUE value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_UNKNOWN value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_V208 value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_V408 value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_X24_TYPELESS_G8_UINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_X32_TYPELESS_G8X24_UINT value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_Y210 value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_Y216 value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_Y410 value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_Y416 value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.DXGI_FORMAT_YUY2 value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_FLAG.DXGI_ADAPTER_FLAG_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_FLAG.DXGI_ADAPTER_FLAG_REMOTE value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_FLAG.DXGI_ADAPTER_FLAG_SOFTWARE value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_FLAG.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_FLAG3.DXGI_ADAPTER_FLAG3_ACG_COMPATIBLE value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_FLAG3.DXGI_ADAPTER_FLAG3_KEYED_MUTEX_CONFORMANCE value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_FLAG3.DXGI_ADAPTER_FLAG3_NONE value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_FLAG3.DXGI_ADAPTER_FLAG3_REMOTE value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_FLAG3.DXGI_ADAPTER_FLAG3_SOFTWARE value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_FLAG3.DXGI_ADAPTER_FLAG3_SUPPORT_MONITORED_FENCES value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_FLAG3.DXGI_ADAPTER_FLAG3_SUPPORT_NON_MONITORED_FENCES value init changed UInt32->Int32
+Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_FLAG3.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WIC8BIMIptcDigestProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WIC8BIMIptcDigestProperties.WIC8BIMIptcDigestIptcDigest value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WIC8BIMIptcDigestProperties.WIC8BIMIptcDigestPString value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WIC8BIMIptcProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WIC8BIMIptcProperties.WIC8BIMIptcEmbeddedIPTC value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WIC8BIMIptcProperties.WIC8BIMIptcPString value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WIC8BIMResolutionInfoProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WIC8BIMResolutionInfoProperties.WIC8BIMResolutionInfoHeightUnit value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WIC8BIMResolutionInfoProperties.WIC8BIMResolutionInfoHResolution value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WIC8BIMResolutionInfoProperties.WIC8BIMResolutionInfoHResolutionUnit value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WIC8BIMResolutionInfoProperties.WIC8BIMResolutionInfoPString value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WIC8BIMResolutionInfoProperties.WIC8BIMResolutionInfoVResolution value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WIC8BIMResolutionInfoProperties.WIC8BIMResolutionInfoVResolutionUnit value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WIC8BIMResolutionInfoProperties.WIC8BIMResolutionInfoWidthUnit value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifApplicationExtensionProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICGifApplicationExtensionProperties.WICGifApplicationExtensionApplication value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifApplicationExtensionProperties.WICGifApplicationExtensionData value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifCommentExtensionProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICGifCommentExtensionProperties.WICGifCommentExtensionText value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifGraphicControlExtensionProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICGifGraphicControlExtensionProperties.WICGifGraphicControlExtensionDelay value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifGraphicControlExtensionProperties.WICGifGraphicControlExtensionDisposal value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifGraphicControlExtensionProperties.WICGifGraphicControlExtensionTransparencyFlag value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifGraphicControlExtensionProperties.WICGifGraphicControlExtensionTransparentColorIndex value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifGraphicControlExtensionProperties.WICGifGraphicControlExtensionUserInputFlag value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifImageDescriptorProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICGifImageDescriptorProperties.WICGifImageDescriptorHeight value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifImageDescriptorProperties.WICGifImageDescriptorInterlaceFlag value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifImageDescriptorProperties.WICGifImageDescriptorLeft value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifImageDescriptorProperties.WICGifImageDescriptorLocalColorTableFlag value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifImageDescriptorProperties.WICGifImageDescriptorLocalColorTableSize value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifImageDescriptorProperties.WICGifImageDescriptorSortFlag value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifImageDescriptorProperties.WICGifImageDescriptorTop value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifImageDescriptorProperties.WICGifImageDescriptorWidth value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifLogicalScreenDescriptorProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICGifLogicalScreenDescriptorProperties.WICGifLogicalScreenDescriptorBackgroundColorIndex value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifLogicalScreenDescriptorProperties.WICGifLogicalScreenDescriptorColorResolution value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifLogicalScreenDescriptorProperties.WICGifLogicalScreenDescriptorGlobalColorTableFlag value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifLogicalScreenDescriptorProperties.WICGifLogicalScreenDescriptorGlobalColorTableSize value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifLogicalScreenDescriptorProperties.WICGifLogicalScreenDescriptorHeight value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifLogicalScreenDescriptorProperties.WICGifLogicalScreenDescriptorPixelAspectRatio value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifLogicalScreenDescriptorProperties.WICGifLogicalScreenDescriptorSortFlag value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifLogicalScreenDescriptorProperties.WICGifLogicalScreenDescriptorWidth value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICGifLogicalScreenDescriptorProperties.WICGifLogicalScreenSignature value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICHeifHdrProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICHeifHdrProperties.WICHeifHdrCustomVideoPrimaries value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICHeifHdrProperties.WICHeifHdrMaximumFrameAverageLuminanceLevel value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICHeifHdrProperties.WICHeifHdrMaximumLuminanceLevel value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICHeifHdrProperties.WICHeifHdrMaximumMasteringDisplayLuminanceLevel value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICHeifHdrProperties.WICHeifHdrMinimumMasteringDisplayLuminanceLevel value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICHeifProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICHeifProperties.WICHeifOrientation value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICJpegChrominanceProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICJpegChrominanceProperties.WICJpegChrominanceTable value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICJpegCommentProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICJpegCommentProperties.WICJpegCommentText value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICJpegIndexingOptions.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICJpegIndexingOptions.WICJpegIndexingOptionsGenerateOnDemand value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICJpegIndexingOptions.WICJpegIndexingOptionsGenerateOnLoad value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICJpegLuminanceProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICJpegLuminanceProperties.WICJpegLuminanceTable value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICJpegScanType.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICJpegScanType.WICJpegScanTypeInterleaved value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICJpegScanType.WICJpegScanTypePlanarComponents value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICJpegScanType.WICJpegScanTypeProgressive value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICJpegTransferMatrix.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICJpegTransferMatrix.WICJpegTransferMatrixBT601 value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICJpegTransferMatrix.WICJpegTransferMatrixIdentity value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPixelFormatNumericRepresentation.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICPixelFormatNumericRepresentation.WICPixelFormatNumericRepresentationFixed value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPixelFormatNumericRepresentation.WICPixelFormatNumericRepresentationFloat value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPixelFormatNumericRepresentation.WICPixelFormatNumericRepresentationIndexed value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPixelFormatNumericRepresentation.WICPixelFormatNumericRepresentationSignedInteger value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPixelFormatNumericRepresentation.WICPixelFormatNumericRepresentationUnsignedInteger value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPixelFormatNumericRepresentation.WICPixelFormatNumericRepresentationUnspecified value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngBkgdProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICPngBkgdProperties.WICPngBkgdBackgroundColor value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngChrmProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICPngChrmProperties.WICPngChrmBlueX value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngChrmProperties.WICPngChrmBlueY value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngChrmProperties.WICPngChrmGreenX value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngChrmProperties.WICPngChrmGreenY value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngChrmProperties.WICPngChrmRedX value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngChrmProperties.WICPngChrmRedY value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngChrmProperties.WICPngChrmWhitePointX value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngChrmProperties.WICPngChrmWhitePointY value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngGamaProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICPngGamaProperties.WICPngGamaGamma value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngHistProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICPngHistProperties.WICPngHistFrequencies value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngIccpProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICPngIccpProperties.WICPngIccpProfileData value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngIccpProperties.WICPngIccpProfileName value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngItxtProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICPngItxtProperties.WICPngItxtCompressionFlag value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngItxtProperties.WICPngItxtKeyword value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngItxtProperties.WICPngItxtLanguageTag value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngItxtProperties.WICPngItxtText value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngItxtProperties.WICPngItxtTranslatedKeyword value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngSrgbProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICPngSrgbProperties.WICPngSrgbRenderingIntent value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngTimeProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICPngTimeProperties.WICPngTimeDay value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngTimeProperties.WICPngTimeHour value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngTimeProperties.WICPngTimeMinute value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngTimeProperties.WICPngTimeMonth value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngTimeProperties.WICPngTimeSecond value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICPngTimeProperties.WICPngTimeYear value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICSectionAccessLevel.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICSectionAccessLevel.WICSectionAccessLevelRead value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICSectionAccessLevel.WICSectionAccessLevelReadWrite value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICWebpAnimProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICWebpAnimProperties.WICWebpAnimLoopCount value init changed UInt32->Int32
+Windows.Win32.Graphics.Imaging.WICWebpAnmfProperties.value__...System.UInt32 => System.Int32
+Windows.Win32.Graphics.Imaging.WICWebpAnmfProperties.WICWebpAnmfFrameDuration value init changed UInt32->Int32
+Windows.Win32.Networking.WinSock.ADDRINFOEX2A : [Ansi,Documentation(https://docs.microsoft.com/windows/win32/api/ws2def/ns-ws2def-addrinfoex2a),Obsolete(ADDRINFOEX2)] => [Ansi,Documentation(https://docs.microsoft.com/windows/win32/api/ws2def/ns-ws2def-addrinfoex2a),Obsolete(ADDRINFOEX2W)]
+Windows.Win32.Networking.WinSock.ADDRINFOEXA : [Ansi,Documentation(https://docs.microsoft.com/windows/win32/api/ws2def/ns-ws2def-addrinfoexa),Obsolete(ADDRINFOEX)] => [Ansi,Documentation(https://docs.microsoft.com/windows/win32/api/ws2def/ns-ws2def-addrinfoexa),Obsolete(ADDRINFOEXW)]
+Windows.Win32.Networking.WinSock.Apis.FreeAddrInfoEx : [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-freeaddrinfoex),Obsolete(FreeAddrInfoExW(),SupportedOSPlatform(windows8.1)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-freeaddrinfoex),Obsolete(FreeAddrInfoExW()),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.GetAddrInfoExA : [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfoexa),Obsolete(GetAddrInfoExW(),SupportedOSPlatform(windows6.0.6000)] => [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfoexa),Obsolete(GetAddrInfoExW()),SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.Networking.WinSock.Apis.gethostbyaddr : [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-gethostbyaddr),Obsolete(getnameinfo() or GetNameInfoW(),SupportedOSPlatform(windows8.1)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-gethostbyaddr),Obsolete(getnameinfo() or GetNameInfoW()),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.gethostbyname : [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-gethostbyname),Obsolete(getaddrinfo() or GetAddrInfoW(),SupportedOSPlatform(windows8.1)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-gethostbyname),Obsolete(getaddrinfo() or GetAddrInfoW()),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.inet_addr : [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-inet_addr),Obsolete(inet_pton() or InetPton(),SupportedOSPlatform(windows8.1)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-inet_addr),Obsolete(inet_pton() or InetPton()),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.inet_ntoa : [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-inet_ntoa),Obsolete(inet_ntop() or InetNtop(),SupportedOSPlatform(windows8.1)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-inet_ntoa),Obsolete(inet_ntop() or InetNtop()),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.SetAddrInfoExA : [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-setaddrinfoexa),Obsolete(SetAddrInfoExW(),SupportedOSPlatform(windows8.1)] => [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-setaddrinfoexa),Obsolete(SetAddrInfoExW()),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSAAddressToStringA : [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaaddresstostringa),Obsolete(WSAAddressToStringW(),SupportedOSPlatform(windows8.1)] => [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaaddresstostringa),Obsolete(WSAAddressToStringW()),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSAAsyncGetHostByAddr : [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaasyncgethostbyaddr),Obsolete(getnameinfo() or GetNameInfoW(),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaasyncgethostbyaddr),Obsolete(getnameinfo() or GetNameInfoW()),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSAAsyncGetHostByName : [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaasyncgethostbyname),Obsolete(GetAddrInfoExW(),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaasyncgethostbyname),Obsolete(GetAddrInfoExW()),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSAAsyncGetProtoByName : [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaasyncgetprotobyname),Obsolete(getprotobyname(),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaasyncgetprotobyname),Obsolete(getprotobyname()),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSAAsyncGetProtoByNumber : [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaasyncgetprotobynumber),Obsolete(getprotobynumber(),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaasyncgetprotobynumber),Obsolete(getprotobynumber()),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSAAsyncGetServByName : [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaasyncgetservbyname),Obsolete(getservbyname(),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaasyncgetservbyname),Obsolete(getservbyname()),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSAAsyncGetServByPort : [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaasyncgetservbyport),Obsolete(getservbyport(),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaasyncgetservbyport),Obsolete(getservbyport()),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSAAsyncSelect : [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaasyncselect),Obsolete(WSAEventSelect(),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaasyncselect),Obsolete(WSAEventSelect()),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSACancelBlockingCall : [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsacancelblockingcall),Obsolete(Winsock )] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsacancelblockingcall),Obsolete(Winsock 2)]
+Windows.Win32.Networking.WinSock.Apis.WSAConnectByNameA : [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaconnectbynamea),Obsolete(WSAConnectByNameW(),SupportedOSPlatform(windows8.1)] => [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaconnectbynamea),Obsolete(WSAConnectByNameW()),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSADuplicateSocketA : [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaduplicatesocketa),Obsolete(WSADuplicateSocketW(),SupportedOSPlatform(windows8.1)] => [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaduplicatesocketa),Obsolete(WSADuplicateSocketW()),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSAEnumNameSpaceProvidersA : [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaenumnamespaceprovidersa),Obsolete(WSAEnumNameSpaceProvidersW(),SupportedOSPlatform(windows8.1)] => [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaenumnamespaceprovidersa),Obsolete(WSAEnumNameSpaceProvidersW()),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSAEnumNameSpaceProvidersExA : [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaenumnamespaceprovidersexa),Obsolete(WSAEnumNameSpaceProvidersW(),SupportedOSPlatform(windows8.1)] => [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaenumnamespaceprovidersexa),Obsolete(WSAEnumNameSpaceProvidersW()),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSAEnumProtocolsA : [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaenumprotocolsa),Obsolete(WSAEnumProtocolsW(),SupportedOSPlatform(windows8.1)] => [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaenumprotocolsa),Obsolete(WSAEnumProtocolsW()),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSAGetServiceClassInfoA : [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsagetserviceclassinfoa),Obsolete(WSAGetServiceClassInfoW(),SupportedOSPlatform(windows5.0)] => [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsagetserviceclassinfoa),Obsolete(WSAGetServiceClassInfoW()),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSAGetServiceClassNameByClassIdA : [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsagetserviceclassnamebyclassida),Obsolete(WSAGetServiceClassNameByClassIdW(),SupportedOSPlatform(windows5.0)] => [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsagetserviceclassnamebyclassida),Obsolete(WSAGetServiceClassNameByClassIdW()),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSAInstallServiceClassA : [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsainstallserviceclassa),Obsolete(WSAInstallServiceClassW(),SupportedOSPlatform(windows5.0)] => [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsainstallserviceclassa),Obsolete(WSAInstallServiceClassW()),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSAIsBlocking : [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaisblocking),Obsolete(Winsock )] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaisblocking),Obsolete(Winsock 2)]
+Windows.Win32.Networking.WinSock.Apis.WSALookupServiceBeginA : [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsalookupservicebegina),Obsolete(WSALookupServiceBeginW(),SupportedOSPlatform(windows8.1)] => [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsalookupservicebegina),Obsolete(WSALookupServiceBeginW()),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSALookupServiceNextA : [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsalookupservicenexta),Obsolete(WSALookupServiceNextW(),SupportedOSPlatform(windows8.1)] => [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsalookupservicenexta),Obsolete(WSALookupServiceNextW()),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSARecvDisconnect : [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsarecvdisconnect),Obsolete(WSARecv(),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsarecvdisconnect),Obsolete(WSARecv()),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSARecvEx : [DllImport(MSWSOCK.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/mswsock/nf-mswsock-wsarecvex),Obsolete(WSARecv(),SupportedOSPlatform(windows5.0)] => [DllImport(MSWSOCK.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/mswsock/nf-mswsock-wsarecvex),Obsolete(WSARecv()),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSASendDisconnect : [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsasenddisconnect),Obsolete(WSASend(),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsasenddisconnect),Obsolete(WSASend()),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSASetBlockingHook : [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsasetblockinghook),Obsolete(Winsock )] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsasetblockinghook),Obsolete(Winsock 2)]
+Windows.Win32.Networking.WinSock.Apis.WSASetServiceA : [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsasetservicea),Obsolete(WSASetServiceW(),SupportedOSPlatform(windows8.1)] => [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsasetservicea),Obsolete(WSASetServiceW()),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSASocketA : [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsasocketa),Obsolete(WSASocketW(),SupportedOSPlatform(windows8.1)] => [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsasocketa),Obsolete(WSASocketW()),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSAStringToAddressA : [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsastringtoaddressa),Obsolete(WSAStringToAddressW(),SupportedOSPlatform(windows8.1)] => [Ansi,DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsastringtoaddressa),Obsolete(WSAStringToAddressW()),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSAUnhookBlockingHook : [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaunhookblockinghook),Obsolete(Winsock )] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaunhookblockinghook),Obsolete(Winsock 2)]
+Windows.Win32.Networking.WinSock.WSANAMESPACE_INFOA : [Ansi,Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/ns-winsock2-wsanamespace_infoa),Obsolete(WSANAMESPACE_INFO)] => [Ansi,Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/ns-winsock2-wsanamespace_infoa),Obsolete(WSANAMESPACE_INFOW)]
+Windows.Win32.Networking.WinSock.WSANAMESPACE_INFOEXA : [Ansi,Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/ns-winsock2-wsanamespace_infoexa),Obsolete(WSANAMESPACE_INFOEX)] => [Ansi,Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/ns-winsock2-wsanamespace_infoexa),Obsolete(WSANAMESPACE_INFOEXW)]
+Windows.Win32.Networking.WinSock.WSANSCLASSINFOA : [Ansi,Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/ns-winsock2-wsansclassinfoa),Obsolete(WSANSCLASSINFO)] => [Ansi,Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/ns-winsock2-wsansclassinfoa),Obsolete(WSANSCLASSINFOW)]
+Windows.Win32.Networking.WinSock.WSAPROTOCOL_INFOA : [Ansi,Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/ns-winsock2-wsaprotocol_infoa),Obsolete(WSAPROTOCOL_INFO)] => [Ansi,Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/ns-winsock2-wsaprotocol_infoa),Obsolete(WSAPROTOCOL_INFOW)]
+Windows.Win32.Networking.WinSock.WSAQUERYSET2A : [Ansi,Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/ns-winsock2-wsaqueryset2a),Obsolete(WSAQUERYSET2)] => [Ansi,Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/ns-winsock2-wsaqueryset2a),Obsolete(WSAQUERYSET2W)]
+Windows.Win32.Networking.WinSock.WSAQUERYSETA : [Ansi,Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/ns-winsock2-wsaqueryseta),Obsolete(WSAQUERYSET)] => [Ansi,Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/ns-winsock2-wsaqueryseta),Obsolete(WSAQUERYSETW)]
+Windows.Win32.Networking.WinSock.WSASERVICECLASSINFOA : [Ansi,Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/ns-winsock2-wsaserviceclassinfoa),Obsolete(WSASERVICECLASSINFO)] => [Ansi,Documentation(https://docs.microsoft.com/windows/win32/api/winsock2/ns-winsock2-wsaserviceclassinfoa),Obsolete(WSASERVICECLASSINFOW)]
+Windows.Win32.NetworkManagement.P2P.PEER_APP_LAUNCH_INFO.pContact :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_APP_LAUNCH_INFO.pEndpoint :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_APP_LAUNCH_INFO.pInvitation :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_APPLICATION_REGISTRATION_INFO.application :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_APPLICATION.data :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_COLLAB_EVENT_DATA._Anonymous_e__Union.applicationChangedData : [FieldOffset(0)] => [FieldOffset(0),Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_COLLAB_EVENT_DATA._Anonymous_e__Union.endpointChangedData : [FieldOffset(0)] => [FieldOffset(0),Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_COLLAB_EVENT_DATA._Anonymous_e__Union.objectChangedData : [FieldOffset(0)] => [FieldOffset(0),Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_COLLAB_EVENT_DATA._Anonymous_e__Union.peopleNearMeChangedData : [FieldOffset(0)] => [FieldOffset(0),Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_COLLAB_EVENT_DATA._Anonymous_e__Union.presenceChangedData : [FieldOffset(0)] => [FieldOffset(0),Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_COLLAB_EVENT_DATA._Anonymous_e__Union.requestStatusChangedData : [FieldOffset(0)] => [FieldOffset(0),Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_COLLAB_EVENT_DATA._Anonymous_e__Union.watchListChangedData : [FieldOffset(0)] => [FieldOffset(0),Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_COLLAB_EVENT_DATA.eventType :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_COLLAB_EVENT_REGISTRATION.eventType :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_CONNECTION_INFO.address :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_CONTACT.credentials :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_CONTACT.WatcherPermissions :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_ENDPOINT.address :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_APPLICATION_CHANGED_DATA.changeType :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_APPLICATION_CHANGED_DATA.pApplication :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_APPLICATION_CHANGED_DATA.pContact :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_APPLICATION_CHANGED_DATA.pEndpoint :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_CONNECTION_CHANGE_DATA.status :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_ENDPOINT_CHANGED_DATA.pContact :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_ENDPOINT_CHANGED_DATA.pEndpoint :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_INCOMING_DATA.data :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_MEMBER_CHANGE_DATA.changeType :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_NODE_CHANGE_DATA.changeType :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_OBJECT_CHANGED_DATA.changeType :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_OBJECT_CHANGED_DATA.pContact :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_OBJECT_CHANGED_DATA.pEndpoint :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_OBJECT_CHANGED_DATA.pObject :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA.changeType :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA.pPeopleNearMe :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_PRESENCE_CHANGED_DATA.changeType :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_PRESENCE_CHANGED_DATA.pContact :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_PRESENCE_CHANGED_DATA.pEndpoint :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_PRESENCE_CHANGED_DATA.pPresenceInfo :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_RECORD_CHANGE_DATA.changeType :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_REQUEST_STATUS_CHANGED_DATA.pEndpoint :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_WATCHLIST_CHANGED_DATA.changeType :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_EVENT_WATCHLIST_CHANGED_DATA.pContact :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_GRAPH_EVENT_DATA._Anonymous_e__Union.connectionChangeData : [FieldOffset(0)] => [FieldOffset(0),Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_GRAPH_EVENT_DATA._Anonymous_e__Union.dwStatus : [FieldOffset(0)] => [FieldOffset(0),Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_GRAPH_EVENT_DATA._Anonymous_e__Union.incomingData : [FieldOffset(0)] => [FieldOffset(0),Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_GRAPH_EVENT_DATA._Anonymous_e__Union.nodeChangeData : [FieldOffset(0)] => [FieldOffset(0),Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_GRAPH_EVENT_DATA._Anonymous_e__Union.recordChangeData : [FieldOffset(0)] => [FieldOffset(0),Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_GRAPH_EVENT_DATA._Anonymous_e__Union.synchronizedData : [FieldOffset(0)] => [FieldOffset(0),Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_GRAPH_EVENT_DATA.eventType :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_GRAPH_EVENT_REGISTRATION.eventType :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_GROUP_EVENT_DATA._Anonymous_e__Union.connectionChangeData : [FieldOffset(0)] => [FieldOffset(0),Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_GROUP_EVENT_DATA._Anonymous_e__Union.dwStatus : [FieldOffset(0)] => [FieldOffset(0),Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_GROUP_EVENT_DATA._Anonymous_e__Union.incomingData : [FieldOffset(0)] => [FieldOffset(0),Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_GROUP_EVENT_DATA._Anonymous_e__Union.memberChangeData : [FieldOffset(0)] => [FieldOffset(0),Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_GROUP_EVENT_DATA._Anonymous_e__Union.recordChangeData : [FieldOffset(0)] => [FieldOffset(0),Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_GROUP_EVENT_DATA.eventType :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_GROUP_EVENT_REGISTRATION.eventType :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_GROUP_PROPERTIES.groupPasswordRole :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_INVITATION_INFO.authScheme :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_INVITATION_RESPONSE.action :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_INVITATION.applicationData :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_NODE_INFO.pAddresses :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_OBJECT.data :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_PEOPLE_NEAR_ME.endpoint :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_PNRP_ENDPOINT_INFO.payload :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_PNRP_REGISTRATION_INFO.payload :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_PRESENCE_INFO.status :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_RECORD.data :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_RECORD.securityData :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_SECURITY_INTERFACE.pfnAuthFailed :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_SECURITY_INTERFACE.pfnFreeSecurityData :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_SECURITY_INTERFACE.pfnSecureRecord :  => [Obsolete]
+Windows.Win32.NetworkManagement.P2P.PEER_SECURITY_INTERFACE.pfnValidateRecord :  => [Obsolete]
+Windows.Win32.Storage.FileHistory.Apis.FhServiceBlockBackup : [DllImport(fhsvcctl.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/fhsvcctl/nf-fhsvcctl-fhserviceblockbackup),Obsolete(FhServiceBlockBackup is deprecated and might not work on all platforms. For more info, see MSDN),SupportedOSPlatform(windows8.0)] => [DllImport(fhsvcctl.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/fhsvcctl/nf-fhsvcctl-fhserviceblockbackup),Obsolete(FhServiceBlockBackup is deprecated and might not work on all platforms. For more info, see MSDN.),SupportedOSPlatform(windows8.0)]
+Windows.Win32.Storage.FileHistory.Apis.FhServiceClosePipe : [DllImport(fhsvcctl.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/fhsvcctl/nf-fhsvcctl-fhserviceclosepipe),Obsolete(FhServiceClosePipe is deprecated and might not work on all platforms. For more info, see MSDN),SupportedOSPlatform(windows8.0)] => [DllImport(fhsvcctl.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/fhsvcctl/nf-fhsvcctl-fhserviceclosepipe),Obsolete(FhServiceClosePipe is deprecated and might not work on all platforms. For more info, see MSDN.),SupportedOSPlatform(windows8.0)]
+Windows.Win32.Storage.FileHistory.Apis.FhServiceOpenPipe : [DllImport(fhsvcctl.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/fhsvcctl/nf-fhsvcctl-fhserviceopenpipe),Obsolete(FhServiceOpenPipe is deprecated and might not work on all platforms. For more info, see MSDN),SupportedOSPlatform(windows8.0)] => [DllImport(fhsvcctl.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/fhsvcctl/nf-fhsvcctl-fhserviceopenpipe),Obsolete(FhServiceOpenPipe is deprecated and might not work on all platforms. For more info, see MSDN.),SupportedOSPlatform(windows8.0)]
+Windows.Win32.Storage.FileHistory.Apis.FhServiceReloadConfiguration : [DllImport(fhsvcctl.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/fhsvcctl/nf-fhsvcctl-fhservicereloadconfiguration),Obsolete(FhServiceReloadConfiguration is deprecated and might not work on all platforms. For more info, see MSDN),SupportedOSPlatform(windows8.0)] => [DllImport(fhsvcctl.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/fhsvcctl/nf-fhsvcctl-fhservicereloadconfiguration),Obsolete(FhServiceReloadConfiguration is deprecated and might not work on all platforms. For more info, see MSDN.),SupportedOSPlatform(windows8.0)]
+Windows.Win32.Storage.FileHistory.Apis.FhServiceStartBackup : [DllImport(fhsvcctl.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/fhsvcctl/nf-fhsvcctl-fhservicestartbackup),Obsolete(FhServiceStartBackup is deprecated and might not work on all platforms. For more info, see MSDN),SupportedOSPlatform(windows8.0)] => [DllImport(fhsvcctl.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/fhsvcctl/nf-fhsvcctl-fhservicestartbackup),Obsolete(FhServiceStartBackup is deprecated and might not work on all platforms. For more info, see MSDN.),SupportedOSPlatform(windows8.0)]
+Windows.Win32.Storage.FileHistory.Apis.FhServiceStopBackup : [DllImport(fhsvcctl.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/fhsvcctl/nf-fhsvcctl-fhservicestopbackup),Obsolete(FhServiceStopBackup is deprecated and might not work on all platforms. For more info, see MSDN),SupportedOSPlatform(windows8.0)] => [DllImport(fhsvcctl.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/fhsvcctl/nf-fhsvcctl-fhservicestopbackup),Obsolete(FhServiceStopBackup is deprecated and might not work on all platforms. For more info, see MSDN.),SupportedOSPlatform(windows8.0)]
+Windows.Win32.Storage.FileHistory.Apis.FhServiceUnblockBackup : [DllImport(fhsvcctl.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/fhsvcctl/nf-fhsvcctl-fhserviceunblockbackup),Obsolete(FhServiceUnblockBackup is deprecated and might not work on all platforms. For more info, see MSDN),SupportedOSPlatform(windows8.0)] => [DllImport(fhsvcctl.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/windows/win32/api/fhsvcctl/nf-fhsvcctl-fhserviceunblockbackup),Obsolete(FhServiceUnblockBackup is deprecated and might not work on all platforms. For more info, see MSDN.),SupportedOSPlatform(windows8.0)]
+Windows.Win32.System.RemoteManagement.WSMAN_PLUGIN_REQUEST.shutdownNotification...System.Int32 => Windows.Win32.Foundation.BOOL
+Windows.Win32.System.Search.Apis.SQLBindParam(X64, Arm64) : [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(ODBC API: SQLBindParam is deprecated. Please use SQLBindParameter instead),SupportedArchitecture(6)] => [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(ODBC API: SQLBindParam is deprecated. Please use SQLBindParameter instead.),SupportedArchitecture(6)]
+Windows.Win32.System.Search.Apis.SQLBindParam(X86) : [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(ODBC API: SQLBindParam is deprecated. Please use SQLBindParameter instead),SupportedArchitecture(1)] => [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(ODBC API: SQLBindParam is deprecated. Please use SQLBindParameter instead.),SupportedArchitecture(1)]
+Windows.Win32.System.Search.Apis.SQLGetConnectOption : [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/sql/odbc/reference/syntax/sqlgetconnectoption-function),Obsolete(ODBC API: SQLGetConnectOption is deprecated. Please use SQLGetConnectAttr instead)] => [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/sql/odbc/reference/syntax/sqlgetconnectoption-function),Obsolete(ODBC API: SQLGetConnectOption is deprecated. Please use SQLGetConnectAttr instead.)]
+Windows.Win32.System.Search.Apis.SQLGetStmtOption : [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/sql/odbc/reference/syntax/sqlgetstmtoption-function),Obsolete(ODBC API: SQLGetStmtOption is deprecated. Please use SQLGetStmtAttr instead)] => [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/sql/odbc/reference/syntax/sqlgetstmtoption-function),Obsolete(ODBC API: SQLGetStmtOption is deprecated. Please use SQLGetStmtAttr instead.)]
+Windows.Win32.System.Search.Apis.SQLSetConnectOption(X64, Arm64) : [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/sql/odbc/reference/syntax/sqlsetconnectoption-function),Obsolete(ODBC API: SQLSetConnectOption is deprecated. Please use SQLSetConnectAttr instead),SupportedArchitecture(6)] => [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/sql/odbc/reference/syntax/sqlsetconnectoption-function),Obsolete(ODBC API: SQLSetConnectOption is deprecated. Please use SQLSetConnectAttr instead.),SupportedArchitecture(6)]
+Windows.Win32.System.Search.Apis.SQLSetConnectOption(X86) : [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/sql/odbc/reference/syntax/sqlsetconnectoption-function),Obsolete(ODBC API: SQLSetConnectOption is deprecated. Please use SQLSetConnectAttr instead),SupportedArchitecture(1)] => [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/sql/odbc/reference/syntax/sqlsetconnectoption-function),Obsolete(ODBC API: SQLSetConnectOption is deprecated. Please use SQLSetConnectAttr instead.),SupportedArchitecture(1)]
+Windows.Win32.System.Search.Apis.SQLSetParam(X64, Arm64) : [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/sql/odbc/reference/syntax/sqlsetparam-function),Obsolete(ODBC API: SQLSetParam is deprecated. Please use SQLBindParameter instead),SupportedArchitecture(6)] => [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/sql/odbc/reference/syntax/sqlsetparam-function),Obsolete(ODBC API: SQLSetParam is deprecated. Please use SQLBindParameter instead.),SupportedArchitecture(6)]
+Windows.Win32.System.Search.Apis.SQLSetParam(X86) : [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/sql/odbc/reference/syntax/sqlsetparam-function),Obsolete(ODBC API: SQLSetParam is deprecated. Please use SQLBindParameter instead),SupportedArchitecture(1)] => [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/sql/odbc/reference/syntax/sqlsetparam-function),Obsolete(ODBC API: SQLSetParam is deprecated. Please use SQLBindParameter instead.),SupportedArchitecture(1)]
+Windows.Win32.System.Search.Apis.SQLSetStmtOption(X64, Arm64) : [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/sql/odbc/reference/syntax/sqlsetstmtoption-function),Obsolete(ODBC API: SQLSetStmtOption is deprecated. Please use SQLSetStmtAttr instead),SupportedArchitecture(6)] => [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/sql/odbc/reference/syntax/sqlsetstmtoption-function),Obsolete(ODBC API: SQLSetStmtOption is deprecated. Please use SQLSetStmtAttr instead.),SupportedArchitecture(6)]
+Windows.Win32.System.Search.Apis.SQLSetStmtOption(X86) : [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/sql/odbc/reference/syntax/sqlsetstmtoption-function),Obsolete(ODBC API: SQLSetStmtOption is deprecated. Please use SQLSetStmtAttr instead),SupportedArchitecture(1)] => [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://docs.microsoft.com/sql/odbc/reference/syntax/sqlsetstmtoption-function),Obsolete(ODBC API: SQLSetStmtOption is deprecated. Please use SQLSetStmtAttr instead.),SupportedArchitecture(1)]
+winmd1: Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY.D2D1_PROPERTY_AUTHOR = 2147483650, winmd2 = -2147483646
+winmd1: Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY.D2D1_PROPERTY_CACHED = 2147483654, winmd2 = -2147483642
+winmd1: Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY.D2D1_PROPERTY_CATEGORY = 2147483651, winmd2 = -2147483645
+winmd1: Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY.D2D1_PROPERTY_CLSID = 2147483648, winmd2 = -2147483648
+winmd1: Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY.D2D1_PROPERTY_DESCRIPTION = 2147483652, winmd2 = -2147483644
+winmd1: Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY.D2D1_PROPERTY_DISPLAYNAME = 2147483649, winmd2 = -2147483647
+winmd1: Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY.D2D1_PROPERTY_INPUTS = 2147483653, winmd2 = -2147483643
+winmd1: Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY.D2D1_PROPERTY_MAX_INPUTS = 2147483657, winmd2 = -2147483639
+winmd1: Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY.D2D1_PROPERTY_MIN_INPUTS = 2147483656, winmd2 = -2147483640
+winmd1: Windows.Win32.Graphics.Direct2D.D2D1_PROPERTY.D2D1_PROPERTY_PRECISION = 2147483655, winmd2 = -2147483641
+winmd1: Windows.Win32.Graphics.Direct2D.D2D1_SUBPROPERTY.D2D1_SUBPROPERTY_DEFAULT = 2147483652, winmd2 = -2147483644
+winmd1: Windows.Win32.Graphics.Direct2D.D2D1_SUBPROPERTY.D2D1_SUBPROPERTY_DISPLAYNAME = 2147483648, winmd2 = -2147483648
+winmd1: Windows.Win32.Graphics.Direct2D.D2D1_SUBPROPERTY.D2D1_SUBPROPERTY_FIELDS = 2147483653, winmd2 = -2147483643
+winmd1: Windows.Win32.Graphics.Direct2D.D2D1_SUBPROPERTY.D2D1_SUBPROPERTY_INDEX = 2147483654, winmd2 = -2147483642
+winmd1: Windows.Win32.Graphics.Direct2D.D2D1_SUBPROPERTY.D2D1_SUBPROPERTY_ISREADONLY = 2147483649, winmd2 = -2147483647
+winmd1: Windows.Win32.Graphics.Direct2D.D2D1_SUBPROPERTY.D2D1_SUBPROPERTY_MAX = 2147483651, winmd2 = -2147483645
+winmd1: Windows.Win32.Graphics.Direct2D.D2D1_SUBPROPERTY.D2D1_SUBPROPERTY_MIN = 2147483650, winmd2 = -2147483646
