@@ -1202,20 +1202,22 @@ namespace ClangSharpSourceToWinmd
                     return null;
                 }
 
-                if (this.remaps.TryGetValue(fullName, out var remapData))
+                string remapData = null;
+
+                if (this.remaps.TryGetValue(fullName, out var remap))
                 {
-                    return remapData;
+                    remapData += remap;
                 }
 
                 foreach (var pair in this.regexRemaps)
                 {
                     if (pair.Key.IsMatch(fullName))
                     {
-                        return pair.Value;
+                        remapData += pair.Value;
                     }
                 }
 
-                return null;
+                return remapData;
             }
 
             private bool GetRemapInfo(string fullName, SyntaxList<AttributeListSyntax> existingAttrList, out List<AttributeSyntax> listAttributes, string currentType, out string newType, out string newName)
