@@ -944,3 +944,13 @@ Windows.Win32.Graphics.Dxgi.IDXGISwapChainMedia : [Documentation(https://docs.mi
 Windows.Win32.Storage.CloudFilters.Apis.CfReleaseTransferKey : TransferKey : [Out] => [In]
 # Fixed #1595.
 winmd1: Windows.Win32.UI.Controls.Apis.HOTKEYF_EXT = 128, winmd2 = 8
+# Fixed #1593.
+Windows.Win32.Security.Authentication.Identity.CRYPTO_SETTINGS added
+Windows.Win32.Security.Authentication.Identity.eTlsAlgorithmUsage added
+Windows.Win32.Security.Authentication.Identity.eTlsAlgorithmUsage.TlsParametersCngAlgUsageCertSig added
+Windows.Win32.Security.Authentication.Identity.eTlsAlgorithmUsage.TlsParametersCngAlgUsageCipher added
+Windows.Win32.Security.Authentication.Identity.eTlsAlgorithmUsage.TlsParametersCngAlgUsageDigest added
+Windows.Win32.Security.Authentication.Identity.eTlsAlgorithmUsage.TlsParametersCngAlgUsageKeyExchange added
+Windows.Win32.Security.Authentication.Identity.eTlsAlgorithmUsage.TlsParametersCngAlgUsageSignature added
+Windows.Win32.Security.Authentication.Identity.SCH_CREDENTIALS added
+Windows.Win32.Security.Authentication.Identity.TLS_PARAMETERS added

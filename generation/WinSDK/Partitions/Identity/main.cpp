@@ -13,6 +13,8 @@
 #include <sspi.h>
 #include <wincred.h>
 #include <NTSecPKG.h>
+
+#define SCHANNEL_USE_BLACKLISTS
 extern "C" {
 #include <schannel.h>
 }
