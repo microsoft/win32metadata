@@ -954,3 +954,5 @@ Windows.Win32.Security.Authentication.Identity.eTlsAlgorithmUsage.TlsParametersC
 Windows.Win32.Security.Authentication.Identity.eTlsAlgorithmUsage.TlsParametersCngAlgUsageSignature added
 Windows.Win32.Security.Authentication.Identity.SCH_CREDENTIALS added
 Windows.Win32.Security.Authentication.Identity.TLS_PARAMETERS added
+# Mark SHGetPropertyStoreForWindow::ppv as a ComOutPtr
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.SHGetPropertyStoreForWindow : ppv : [Out] => [ComOutPtr,Out]
