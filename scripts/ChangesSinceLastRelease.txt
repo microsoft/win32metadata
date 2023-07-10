@@ -956,3 +956,6 @@ Windows.Win32.Security.Authentication.Identity.SCH_CREDENTIALS added
 Windows.Win32.Security.Authentication.Identity.TLS_PARAMETERS added
 # Mark SHGetPropertyStoreForWindow::ppv as a ComOutPtr
 Windows.Win32.UI.Shell.PropertiesSystem.Apis.SHGetPropertyStoreForWindow : ppv : [Out] => [ComOutPtr,Out]
+# Add missing bcrypt helpers
+Windows.Win32.Security.Cryptography.Apis.ProcessPrng added
+Windows.Win32.Security.Cryptography.Apis.SystemPrng added
