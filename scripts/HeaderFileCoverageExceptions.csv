@@ -52,7 +52,6 @@ File,Skipping,Reason
 /shared/ntddtdi.h,false,Need Transport driver interface partition
 /shared/ntdskreg.h,true,Pre-vista stuff
 /shared/ntverp.h,true,Build version stuff
-/shared/nvme.h,false,Need NVMe partition
 /shared/packoff.h,true,Pack stuff
 /shared/packon.h,true,Pack stuff
 /shared/poppack.h,true,Pack stuff

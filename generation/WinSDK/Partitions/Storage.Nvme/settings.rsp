@@ -1,0 +1,4 @@
+--traverse
+<IncludeRoot>/shared/nvme.h
+--namespace
+Windows.Win32.Storage.Nvme
