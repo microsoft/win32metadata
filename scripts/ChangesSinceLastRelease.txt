@@ -769,3 +769,5 @@ Windows.Win32.Storage.Nvme.ZONE_STATE.NVME_STATE_ZSF added
 Windows.Win32.Storage.Nvme.ZONE_STATE.NVME_STATE_ZSIO added
 Windows.Win32.Storage.Nvme.ZONE_STATE.NVME_STATE_ZSO added
 Windows.Win32.Storage.Nvme.ZONE_STATE.NVME_STATE_ZSRO added
+# Fixed #1615.
+Windows.Win32.System.Restore.Apis.SRRemoveRestorePoint added

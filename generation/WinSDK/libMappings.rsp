@@ -23248,6 +23248,7 @@ SetupVerifyInfFileA=SETUPAPI.dll
 SetupWriteTextLogError=SETUPAPI.dll
 SetupWriteTextLogInfLine=SETUPAPI.dll
 pSetupDiCrimsonLogDeviceInstall=SETUPAPI.dll
+SRRemoveRestorePoint=SrClient.dll
 SRSetRestorePoint=sfc.dll
 SRSetRestorePointA=sfc.dll
 SRSetRestorePointW=sfc.dll
