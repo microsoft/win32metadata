@@ -773,3 +773,5 @@ Windows.Win32.Storage.Nvme.ZONE_STATE.NVME_STATE_ZSRO added
 Windows.Win32.System.Restore.Apis.SRRemoveRestorePoint added
 # Fixed #1614.
 Windows.Win32.System.Restore.STATEMGRSTATUS.nStatus...System.UInt32 => Windows.Win32.Foundation.WIN32_ERROR
+# Fixed #1612.
+Windows.Win32.UI.Controls.Apis.ImageList_GetIcon : flags...UInt32 => IMAGE_LIST_DRAW_STYLE

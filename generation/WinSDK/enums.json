@@ -12734,6 +12734,10 @@
       {
         "method": "ImageList_DrawEx",
         "parameter": "fStyle"
+      },
+      {
+        "method": "ImageList_GetIcon",
+        "parameter": "flags"
       }
     ]
   },
