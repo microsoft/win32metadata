@@ -253,9 +253,9 @@ File,Skipping,Reason
 /um/provexce.h,true,Can't use C++ classes
 /um/provider.h,true,Can't use C++ classes
 /um/refptrco.h,true,Can't use C++ classes
-/um/ringtonedeviceservice.h,Undocumented can't find uses
+/um/ringtonedeviceservice.h,true,Undocumented can't find uses
 /um/sapi51.h,true,Superceded by sapi53.h
-/um/sapiddk51.h,Superceded by sapiddk.h
+/um/sapiddk51.h,true,Superceded by sapiddk.h
 /um/sberrors.h,true,What is Session Broker
 /um/scclient.h,true,Can't use C++ classes
 /um/schemadef.h,true,Undocumented can't find uses
@@ -328,4 +328,4 @@ File,Skipping,Reason
 /um/DbgHelp.h,true,Subset of ImageHlp.h
 /um/httpserv.h,true,C++ classes
 /um/httpcompression.h,true,For IIS but can't find a lib for it
-/um/atlthunk.h,https://github.com/microsoft/win32metadata/issues/1567
+/um/atlthunk.h,true,https://github.com/microsoft/win32metadata/issues/1567
