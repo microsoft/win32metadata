@@ -1668,3 +1668,4 @@ WTSVirtualChannelOpen::return=[RAIIFree("WTSVirtualChannelClose")]
 WTSVirtualChannelOpenEx::return=[RAIIFree("WTSVirtualChannelClose")]
 CLRCreateInstance::ppInterface=[Out][ComOutPtr]
 CfReleaseTransferKey::TransferKey=[-Out][In]
+STATEMGRSTATUS::nStatus=WIN32_ERROR
