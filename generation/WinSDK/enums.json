@@ -35419,6 +35419,7 @@
   },
   {
     "name": "DIINSTALLDEVICE_FLAGS",
+    "flags": true,
     "autoPopulate": {
       "header": "newdev.h",
       "filter": "DIIDFLAG_"
@@ -35433,6 +35434,7 @@
   },
   {
     "name": "DIINSTALLDRIVER_FLAGS",
+    "flags": true,
     "autoPopulate": {
       "header": "newdev.h",
       "filter": "DIIRFLAG_"
@@ -35460,6 +35462,7 @@
   },
   {
     "name": "DIUNINSTALLDRIVER_FLAGS",
+    "flags": true,
     "autoPopulate": {
       "header": "newdev.h",
       "filter": "DIURFLAG_"
@@ -35483,6 +35486,7 @@
   },
   {
     "name": "DIROLLBACKDRIVER_FLAGS",
+    "flags": true,
     "autoPopulate": {
       "header": "newdev.h",
       "filter": "ROLLBACK_"
