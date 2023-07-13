@@ -35416,6 +35416,84 @@
         "field": "dwCertChoice"
       }
     ]
+  },
+  {
+    "name": "DIINSTALLDEVICE_FLAGS",
+    "autoPopulate": {
+      "header": "newdev.h",
+      "filter": "DIIDFLAG_"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "DiInstallDevice",
+        "parameter": "Flags"
+      }
+    ]
+  },
+  {
+    "name": "DIINSTALLDRIVER_FLAGS",
+    "autoPopulate": {
+      "header": "newdev.h",
+      "filter": "DIIRFLAG_"
+    },
+    "members": [
+      {
+        "name": "DIIRFLAG_BITS",
+        "value": "(DIIRFLAG_FORCE_INF | DIIRFLAG_HOTPATCH  | DIIRFLAG_PRE_CONFIGURE_INF | DIIRFLAG_INSTALL_AS_SET)"
+      },
+      {
+        "name": "DIIRFLAG_SYSTEM_BITS",
+        "value": "(DIIRFLAG_INF_ALREADY_COPIED | DIIRFLAG_FORCE_INF | DIIRFLAG_HW_USING_THE_INF | DIIRFLAG_HOTPATCH | DIIRFLAG_NOBACKUP | DIIRFLAG_PRE_CONFIGURE_INF | DIIRFLAG_INSTALL_AS_SET)"
+      }
+    ],
+    "uses": [
+      {
+        "method": "DiInstallDriverA",
+        "parameter": "Flags"
+      },
+      {
+        "method": "DiInstallDriverW",
+        "parameter": "Flags"
+      }
+    ]
+  },
+  {
+    "name": "DIUNINSTALLDRIVER_FLAGS",
+    "autoPopulate": {
+      "header": "newdev.h",
+      "filter": "DIURFLAG_"
+    },
+    "members": [
+      {
+        "name": "DIURFLAG_VALID",
+        "value": "(DIURFLAG_NO_REMOVE_INF | DIURFLAG_RESERVED)"
+      }
+    ],
+    "uses": [
+      {
+        "method": "DiUninstallDriverA",
+        "parameter": "Flags"
+      },
+      {
+        "method": "DiUninstallDriverW",
+        "parameter": "Flags"
+      }
+    ]
+  },
+  {
+    "name": "DIROLLBACKDRIVER_FLAGS",
+    "autoPopulate": {
+      "header": "newdev.h",
+      "filter": "ROLLBACK_"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "DiRollbackDriver",
+        "parameter": "Flags"
+      }
+    ]
   }
 ]
 }

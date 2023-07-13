@@ -775,3 +775,49 @@ Windows.Win32.System.Restore.Apis.SRRemoveRestorePoint added
 Windows.Win32.System.Restore.STATEMGRSTATUS.nStatus...System.UInt32 => Windows.Win32.Foundation.WIN32_ERROR
 # Fixed #1612.
 Windows.Win32.UI.Controls.Apis.ImageList_GetIcon : flags...UInt32 => IMAGE_LIST_DRAW_STYLE
+# Fixed #1617.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIIDFLAG_BITS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIIDFLAG_INSTALLCOPYINFDRIVERS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIIDFLAG_INSTALLNULLDRIVER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIIDFLAG_NOFINISHINSTALLUI removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIIDFLAG_SHOWSEARCHUI removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DiInstallDevice : Flags...UInt32 => DIINSTALLDEVICE_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DiInstallDriverA : Flags...UInt32 => DIINSTALLDRIVER_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DiInstallDriverW : Flags...UInt32 => DIINSTALLDRIVER_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIIRFLAG_FORCE_INF removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIIRFLAG_HOTPATCH removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIIRFLAG_HW_USING_THE_INF removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIIRFLAG_INF_ALREADY_COPIED removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIIRFLAG_INSTALL_AS_SET removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIIRFLAG_NOBACKUP removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIIRFLAG_PRE_CONFIGURE_INF removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DiRollbackDriver : Flags...UInt32 => DIROLLBACKDRIVER_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DiUninstallDriverA : Flags...UInt32 => DIUNINSTALLDRIVER_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DiUninstallDriverW : Flags...UInt32 => DIUNINSTALLDRIVER_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIURFLAG_NO_REMOVE_INF removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIURFLAG_RESERVED removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.ROLLBACK_BITS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.ROLLBACK_FLAG_NO_UI removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIINSTALLDEVICE_FLAGS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIINSTALLDEVICE_FLAGS.DIIDFLAG_BITS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIINSTALLDEVICE_FLAGS.DIIDFLAG_INSTALLCOPYINFDRIVERS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIINSTALLDEVICE_FLAGS.DIIDFLAG_INSTALLNULLDRIVER added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIINSTALLDEVICE_FLAGS.DIIDFLAG_NOFINISHINSTALLUI added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIINSTALLDEVICE_FLAGS.DIIDFLAG_SHOWSEARCHUI added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIINSTALLDRIVER_FLAGS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIINSTALLDRIVER_FLAGS.DIIRFLAG_BITS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIINSTALLDRIVER_FLAGS.DIIRFLAG_FORCE_INF added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIINSTALLDRIVER_FLAGS.DIIRFLAG_HOTPATCH added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIINSTALLDRIVER_FLAGS.DIIRFLAG_HW_USING_THE_INF added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIINSTALLDRIVER_FLAGS.DIIRFLAG_INF_ALREADY_COPIED added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIINSTALLDRIVER_FLAGS.DIIRFLAG_INSTALL_AS_SET added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIINSTALLDRIVER_FLAGS.DIIRFLAG_NOBACKUP added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIINSTALLDRIVER_FLAGS.DIIRFLAG_PRE_CONFIGURE_INF added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIINSTALLDRIVER_FLAGS.DIIRFLAG_SYSTEM_BITS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIROLLBACKDRIVER_FLAGS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIROLLBACKDRIVER_FLAGS.ROLLBACK_BITS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIROLLBACKDRIVER_FLAGS.ROLLBACK_FLAG_NO_UI added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIUNINSTALLDRIVER_FLAGS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIUNINSTALLDRIVER_FLAGS.DIURFLAG_NO_REMOVE_INF added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIUNINSTALLDRIVER_FLAGS.DIURFLAG_RESERVED added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DIUNINSTALLDRIVER_FLAGS.DIURFLAG_VALID added
