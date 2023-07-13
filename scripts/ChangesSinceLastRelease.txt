@@ -821,3 +821,9 @@ Windows.Win32.Devices.DeviceAndDriverInstallation.DIUNINSTALLDRIVER_FLAGS added
 Windows.Win32.Devices.DeviceAndDriverInstallation.DIUNINSTALLDRIVER_FLAGS.DIURFLAG_NO_REMOVE_INF added
 Windows.Win32.Devices.DeviceAndDriverInstallation.DIUNINSTALLDRIVER_FLAGS.DIURFLAG_RESERVED added
 Windows.Win32.Devices.DeviceAndDriverInstallation.DIUNINSTALLDRIVER_FLAGS.DIURFLAG_VALID added
+# Fixed #1616.
+Windows.Win32.NetworkManagement.WindowsFirewall.Apis.NcFreeNetconProperties added
+Windows.Win32.NetworkManagement.WindowsFirewall.Apis.NcIsValidConnectionName added
+Windows.Win32.NetworkManagement.WindowsFirewall.Apis.NetworkIsolationEnumerateAppContainerRules added
+Windows.Win32.NetworkManagement.WindowsFirewall.Apis.NetworkIsolationGetEnterpriseIdAsync added
+Windows.Win32.NetworkManagement.WindowsFirewall.Apis.NetworkIsolationGetEnterpriseIdClose added
