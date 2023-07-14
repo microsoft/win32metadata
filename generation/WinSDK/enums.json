@@ -12734,6 +12734,10 @@
       {
         "method": "ImageList_DrawEx",
         "parameter": "fStyle"
+      },
+      {
+        "method": "ImageList_GetIcon",
+        "parameter": "flags"
       }
     ]
   },
@@ -18826,120 +18830,11 @@
   },
   {
     "name": "PROCESSOR_FEATURE_ID",
-    "members": [
-      {
-        "name": "PF_ARM_64BIT_LOADSTORE_ATOMIC",
-        "value": "25"
-      },
-      {
-        "name": "PF_ARM_DIVIDE_INSTRUCTION_AVAILABLE",
-        "value": "24"
-      },
-      {
-        "name": "PF_ARM_EXTERNAL_CACHE_AVAILABLE",
-        "value": "26"
-      },
-      {
-        "name": "PF_ARM_FMAC_INSTRUCTIONS_AVAILABLE",
-        "value": "27"
-      },
-      {
-        "name": "PF_ARM_VFP_32_REGISTERS_AVAILABLE",
-        "value": "18"
-      },
-      {
-        "name": "PF_3DNOW_INSTRUCTIONS_AVAILABLE",
-        "value": "7"
-      },
-      {
-        "name": "PF_CHANNELS_ENABLED",
-        "value": "16"
-      },
-      {
-        "name": "PF_COMPARE_EXCHANGE_DOUBLE",
-        "value": "2"
-      },
-      {
-        "name": "PF_COMPARE_EXCHANGE128",
-        "value": "14"
-      },
-      {
-        "name": "PF_COMPARE64_EXCHANGE128",
-        "value": "15"
-      },
-      {
-        "name": "PF_FASTFAIL_AVAILABLE",
-        "value": "23"
-      },
-      {
-        "name": "PF_FLOATING_POINT_EMULATED",
-        "value": "1"
-      },
-      {
-        "name": "PF_FLOATING_POINT_PRECISION_ERRATA",
-        "value": "0"
-      },
-      {
-        "name": "PF_MMX_INSTRUCTIONS_AVAILABLE",
-        "value": "3"
-      },
-      {
-        "name": "PF_NX_ENABLED",
-        "value": "12"
-      },
-      {
-        "name": "PF_PAE_ENABLED",
-        "value": "9"
-      },
-      {
-        "name": "PF_RDTSC_INSTRUCTION_AVAILABLE",
-        "value": "8"
-      },
-      {
-        "name": "PF_RDWRFSGSBASE_AVAILABLE",
-        "value": "22"
-      },
-      {
-        "name": "PF_SECOND_LEVEL_ADDRESS_TRANSLATION",
-        "value": "20"
-      },
-      {
-        "name": "PF_SSE3_INSTRUCTIONS_AVAILABLE",
-        "value": "13"
-      },
-      {
-        "name": "PF_VIRT_FIRMWARE_ENABLED",
-        "value": "21"
-      },
-      {
-        "name": "PF_XMMI_INSTRUCTIONS_AVAILABLE",
-        "value": "6"
-      },
-      {
-        "name": "PF_XMMI64_INSTRUCTIONS_AVAILABLE",
-        "value": "10"
-      },
-      {
-        "name": "PF_XSAVE_ENABLED",
-        "value": "17"
-      },
-      {
-        "name": "PF_ARM_V8_INSTRUCTIONS_AVAILABLE",
-        "value": "29"
-      },
-      {
-        "name": "PF_ARM_V8_CRYPTO_INSTRUCTIONS_AVAILABLE",
-        "value": "30"
-      },
-      {
-        "name": "PF_ARM_V8_CRC32_INSTRUCTIONS_AVAILABLE",
-        "value": "31"
-      },
-      {
-        "name": "PF_ARM_V81_ATOMIC_INSTRUCTIONS_AVAILABLE",
-        "value": "34"
-      }
-    ],
+    "autoPopulate": {
+      "filter": "PF_(?!TEMPORAL|NON_TEMPORAL)",
+      "header": "winnt.h"
+    },
+    "members": [],
     "uses": [
       {
         "method": "IsProcessorFeaturePresent",
@@ -35410,6 +35305,88 @@
       {
         "struct": "SIGNER_CERT",
         "field": "dwCertChoice"
+      }
+    ]
+  },
+  {
+    "name": "DIINSTALLDEVICE_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "header": "newdev.h",
+      "filter": "DIIDFLAG_"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "DiInstallDevice",
+        "parameter": "Flags"
+      }
+    ]
+  },
+  {
+    "name": "DIINSTALLDRIVER_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "header": "newdev.h",
+      "filter": "DIIRFLAG_"
+    },
+    "members": [
+      {
+        "name": "DIIRFLAG_BITS",
+        "value": "(DIIRFLAG_FORCE_INF | DIIRFLAG_HOTPATCH  | DIIRFLAG_PRE_CONFIGURE_INF | DIIRFLAG_INSTALL_AS_SET)"
+      },
+      {
+        "name": "DIIRFLAG_SYSTEM_BITS",
+        "value": "(DIIRFLAG_INF_ALREADY_COPIED | DIIRFLAG_FORCE_INF | DIIRFLAG_HW_USING_THE_INF | DIIRFLAG_HOTPATCH | DIIRFLAG_NOBACKUP | DIIRFLAG_PRE_CONFIGURE_INF | DIIRFLAG_INSTALL_AS_SET)"
+      }
+    ],
+    "uses": [
+      {
+        "method": "DiInstallDriverA",
+        "parameter": "Flags"
+      },
+      {
+        "method": "DiInstallDriverW",
+        "parameter": "Flags"
+      }
+    ]
+  },
+  {
+    "name": "DIUNINSTALLDRIVER_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "header": "newdev.h",
+      "filter": "DIURFLAG_"
+    },
+    "members": [
+      {
+        "name": "DIURFLAG_VALID",
+        "value": "(DIURFLAG_NO_REMOVE_INF | DIURFLAG_RESERVED)"
+      }
+    ],
+    "uses": [
+      {
+        "method": "DiUninstallDriverA",
+        "parameter": "Flags"
+      },
+      {
+        "method": "DiUninstallDriverW",
+        "parameter": "Flags"
+      }
+    ]
+  },
+  {
+    "name": "DIROLLBACKDRIVER_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "header": "newdev.h",
+      "filter": "ROLLBACK_"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "DiRollbackDriver",
+        "parameter": "Flags"
       }
     ]
   }
