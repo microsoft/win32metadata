@@ -176,7 +176,7 @@ public class NativeArrayInfoAttribute : Attribute
 [AttributeUsage(AttributeTargets.Field, AllowMultiple = true, Inherited = true)]
 public class NativeBitfieldAttribute : Attribute
 {    
-    public NativeBitfieldAttribute(string Name, long offset, long length)
+    public NativeBitfieldAttribute(string name, long offset, long length)
     {
     }
 }
