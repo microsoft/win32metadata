@@ -172,6 +172,15 @@ public class NativeArrayInfoAttribute : Attribute
     }
 }
 
+/// <summary>Defines the layout of a bitfield as it was used in the native signature.</summary>
+[AttributeUsage(AttributeTargets.Field, AllowMultiple = true, Inherited = true)]
+public class NativeBitfieldAttribute : Attribute
+{    
+    public NativeBitfieldAttribute(string name, long offset, long length)
+    {
+    }
+}
+
 /// <summary>Defines the encoding of a string as it was defined in the native signature.</summary>
 //[Conditional("DEBUG")]
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]

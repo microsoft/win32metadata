@@ -234,3 +234,5 @@ _WS_SERVICE_PROXY=WS_SERVICE_PROXY
 _WS_METADATA=WS_METADATA
 _WS_POLICY=WS_POLICY
 _MDL=MDL
+ABI::Windows::Foundation::Collections::IPropertySet=__PropertySet__
+ABI::Windows::Storage::Streams::IPropertySetSerializer=__IPropertySetSerializer__

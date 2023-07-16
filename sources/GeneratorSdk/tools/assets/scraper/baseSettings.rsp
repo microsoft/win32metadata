@@ -24,6 +24,7 @@ log-exclusions
 log-potential-typedef-remappings
 exclude-funcs-with-body
 generate-cpp-attributes
+generate-native-bitfield-attribute
 generate-native-inheritance-attribute
 dont-use-using-statics-for-enums
 exclude-anonymous-field-helpers
