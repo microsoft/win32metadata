@@ -41,12 +41,12 @@ internal class Program
 
     private static readonly Dictionary<string, string> BaseUris = new()
     {
-        { @"/ext/Console-Docs/docs", @"https://docs.microsoft.com/windows/console/" },
-        { @"/ext/office-developer-client-docs/docs", @"https://docs.microsoft.com/office/client-developer/" },
-        { @"/ext/sdk-api/sdk-api-src/content", @"https://docs.microsoft.com/windows/win32/api/" },
-        { @"/ext/sql-docs/docs", @"https://docs.microsoft.com/sql/" },
-        { @"/ext/Virtualization-Documentation", @"https://docs.microsoft.com/" },
-        { @"/ext/win32/desktop-src", @"https://docs.microsoft.com/windows/win32/" },
+        { @"/ext/Console-Docs/docs", @"https://learn.microsoft.com/windows/console/" },
+        { @"/ext/office-developer-client-docs/docs", @"https://learn.microsoft.com/office/client-developer/" },
+        { @"/ext/sdk-api/sdk-api-src/content", @"https://learn.microsoft.com/windows/win32/api/" },
+        { @"/ext/sql-docs/docs", @"https://learn.microsoft.com/sql/" },
+        { @"/ext/Virtualization-Documentation", @"https://learn.microsoft.com/" },
+        { @"/ext/win32/desktop-src", @"https://learn.microsoft.com/windows/win32/" },
     };
 
     private static readonly string ExcludedContentPattern = @"(ADSchema|CIMWin32Prov|delivery_optimization|DMWmiBridgeProv|gdiplus|HyperV_v2|Midl\b|SecAuthZ|TermServ|WmiCoreProv|WmiSdk|\bindex\.md|\bTOC\.md)";
