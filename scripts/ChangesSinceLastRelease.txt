@@ -2679,3 +2679,7 @@ winmd1: Windows.Win32.Graphics.Direct2D.D2D1_SUBPROPERTY.D2D1_SUBPROPERTY_INDEX 
 winmd1: Windows.Win32.Graphics.Direct2D.D2D1_SUBPROPERTY.D2D1_SUBPROPERTY_ISREADONLY = 2147483649, winmd2 = -2147483647
 winmd1: Windows.Win32.Graphics.Direct2D.D2D1_SUBPROPERTY.D2D1_SUBPROPERTY_MAX = 2147483651, winmd2 = -2147483645
 winmd1: Windows.Win32.Graphics.Direct2D.D2D1_SUBPROPERTY.D2D1_SUBPROPERTY_MIN = 2147483650, winmd2 = -2147483646
+# Fixed #1621.
+Windows.Win32.Devices.Properties.Apis.DEVPROP_FALSE added
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TRUE added
+Windows.Win32.Devices.Properties.DEVPROP_BOOLEAN added

@@ -2587,5 +2587,11 @@
     "Name": "HDEVQUERY",
     "ValueType": "DECLARE_HANDLE",
     "NativeTypedef": true
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Properties",
+    "Name": "DEVPROP_BOOLEAN",
+    "ValueType": "char",
+    "NativeTypedef": true
   }
 ]
