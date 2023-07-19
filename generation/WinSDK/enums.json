@@ -35389,6 +35389,67 @@
         "parameter": "Flags"
       }
     ]
+  },
+  {
+    "name": "GPO_OPEN_FLAGS",
+    "autoPopulate": {
+      "header": "GPEdit.h",
+      "filter": "GPO_OPEN_"
+    },
+    "members": [],
+    "uses": [
+      {
+        "interface": "IGroupPolicyObject",
+        "method": "OpenLocalMachineGPO",
+        "parameter": "dwFlags"
+      },
+      {
+        "interface": "IGroupPolicyObject",
+        "method": "OpenRemoteMachineGPO",
+        "parameter": "dwFlags"
+      },
+      {
+        "interface": "IGroupPolicyObject",
+        "method": "OpenDSGPO",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "GPO_OPTIONS",
+    "flags": true,
+    "autoPopulate": {
+      "header": "GPEdit.h",
+      "filter": "GPO_OPTION_"
+    },
+    "members": [],
+    "uses": [
+      {
+        "interface": "IGroupPolicyObject",
+        "method": "GetOptions",
+        "parameter": "dwOptions"
+      },
+      {
+        "interface": "IGroupPolicyObject",
+        "method": "SetOptions",
+        "parameter": "dwOptions"
+      }
+    ]
+  },
+  {
+    "name": "GPO_SECTION",
+    "autoPopulate": {
+      "header": "GPEdit.h",
+      "filter": "GPO_SECTION_"
+    },
+    "members": [],
+    "uses": [
+      {
+        "interface": "IGroupPolicyObject",
+        "method": "GetRegistryKey",
+        "parameter": "dwSection"
+      }
+    ]
   }
 ]
 }
