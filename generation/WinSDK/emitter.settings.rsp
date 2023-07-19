@@ -1141,7 +1141,7 @@ PrivateExtractIconsA::piconid=[-NativeArrayInfo]
 PrivateExtractIconsW::piconid=[-NativeArrayInfo]
 CfConnectSyncRoot::CallbackTable=[NativeArrayInfo]
 CERT_INFO::rgExtension=[NativeArrayInfo(CountFieldName="cExtension")]
-GetClipboardData::return=[ReturnsUnownedHandle]
+GetClipboardData::return=[DoNotRelease]
 GetCommandLineA::return=[Const]
 GetCommandLineW::return=[Const]
 EXTENSION_CONTROL_BLOCK::GetServerVariable=PFN_IIS_GETSERVERVARIABLE
@@ -1682,3 +1682,4 @@ RmRestart::return=WIN32_ERROR
 RmShutdown::return=WIN32_ERROR
 RmStartSession::return=WIN32_ERROR
 IServiceProvider::QueryService::ppvObject=[ComOutPtr]
+LoadResource::return=[DoNotRelease]

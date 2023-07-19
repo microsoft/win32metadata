@@ -251,13 +251,6 @@ public class ReservedAttribute : Attribute
     }
 }
 
-public class ReturnsUnownedHandle : Attribute
-{
-    public ReturnsUnownedHandle()
-    {
-    }
-}
-
 [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = true)]
 public class RetValAttribute : Attribute
 {
