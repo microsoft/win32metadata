@@ -1681,3 +1681,4 @@ RmRemoveFilter::return=WIN32_ERROR
 RmRestart::return=WIN32_ERROR
 RmShutdown::return=WIN32_ERROR
 RmStartSession::return=WIN32_ERROR
+IServiceProvider::QueryService::ppvObject=[ComOutPtr]
