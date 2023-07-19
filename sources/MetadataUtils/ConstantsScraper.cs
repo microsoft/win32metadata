@@ -35,7 +35,7 @@ namespace MetadataUtils
 
             private static readonly Regex DefineConstantRegex =
                 new Regex(
-                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE[AW]{0,1}\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+))|([a-z0-9_]+U?\s*[\+\-]\s*(\d+|0x[0-de-f]+)U?)|(\(NTSTATUS\)((?:0x)?[\da-f]+L?))|(\s*\(DWORD\)\s*\(?\s*-1(L|\b)\s*\)?)|(\(DWORD\)((?:0x)?[\da-f]+L?))|(\(BCRYPT_ALG_HANDLE\)\s*((?:0x)?[\da-f]+L?))|(\{\s*(?:(?:0x)?[\da-f]{4,8}L?,?\s*){3}\s*\{\s*(?:(?:0x)?[\da-f]{1,2}L?,?\s*){8}\s*\}\s*\})|(HIDP_ERROR_CODES\((.*),(.*)\))|(MAKEDIPROP\(\s*(\d+)\s*\))|([a-z0-9_]+))$", RegexOptions.IgnoreCase);
+                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE[AW]{0,1}\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+))|([a-z0-9_]+U?\s*[\+\-]\s*(\d+|0x[0-de-f]+)U?)|(\(NTSTATUS\)((?:0x)?[\da-f]+L?))|(\s*\(DWORD\)\s*\(?\s*-1(L|\b)\s*\)?)|(\(DWORD\)((?:0x)?[\da-f]+L?))|(\(BCRYPT_ALG_HANDLE\)\s*((?:0x)?[\da-f]+L?))|(\{\s*(?:(?:0x)?[\da-f]{4,8}L?,?\s*){3}\s*\{\s*(?:(?:0x)?[\da-f]{1,2}L?,?\s*){8}\s*\}\s*\})|(HIDP_ERROR_CODES\((.*),(.*)\))|(MAKEDIPROP\(\s*(\d+)\s*\))|(\{\s*(?:(?:0x)?[\da-f]{4,8}L?,?\s*){3}\s*(?:(?:0x)?[\da-f]{1,2}L?,?\s*){8}\s*\})|([a-z0-9_]+))$", RegexOptions.IgnoreCase);
 
             private static readonly Regex DefineGuidConstRegex =
                 new Regex(
@@ -831,10 +831,20 @@ namespace MetadataUtils
 
                                 continue;
                             }
-                            // SOME_OTHER_CONSTANT
+                            // { 0x35378EAC, 0x683F, 0x11D2, 0xA8, 0x9A, 0x00, 0xC0, 0x4F, 0xBB, 0xCF, 0xA2 }
                             else if (match.Groups[31].Success)
                             {
-                                string otherName = match.Groups[31].Value;
+                                valueText = match.Groups[31].Value.Replace("{", "").Replace("}", "").Replace(" ", "");
+
+                                var defineGuidLine = $"{name}, {valueText})";
+                                this.AddConstantGuid("", currentNamespace, defineGuidLine);
+
+                                continue;
+                            }
+                            // SOME_OTHER_CONSTANT
+                            else if (match.Groups[32].Success)
+                            {
+                                string otherName = match.Groups[32].Value;
 
                                 matchedToOtherName = true;
 
