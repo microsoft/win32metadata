@@ -1669,3 +1669,4 @@ WTSVirtualChannelOpenEx::return=[RAIIFree("WTSVirtualChannelClose")]
 CLRCreateInstance::ppInterface=[Out][ComOutPtr]
 CfReleaseTransferKey::TransferKey=[-Out][In]
 STATEMGRSTATUS::nStatus=WIN32_ERROR
+RM_PROCESS_INFO::AppStatus=[AssociatedEnum("RM_APP_STATUS")]
