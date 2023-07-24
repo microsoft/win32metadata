@@ -35464,6 +35464,85 @@
         "parameter": "ResourceID"
       }
     ]
+  },
+  {
+    "name": "CM_GET_DEVICE_INTERFACE_LIST_FLAGS",
+    "autoPopulate": {
+      "filter": "CM_GET_DEVICE_INTERFACE_LIST_",
+      "header": "cfgmgr32.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "CM_Get_Device_Interface_ListA",
+        "parameter": "ulFlags"
+      },
+      {
+        "method": "CM_Get_Device_Interface_ListW",
+        "parameter": "ulFlags"
+      },
+      {
+        "method": "CM_Get_Device_Interface_ListExA",
+        "parameter": "ulFlags"
+      },
+      {
+        "method": "CM_Get_Device_Interface_ListExW",
+        "parameter": "ulFlags"
+      },
+      {
+        "method": "CM_Get_Device_Interface_SizeA",
+        "parameter": "ulFlags"
+      },
+      {
+        "method": "CM_Get_Device_Interface_SizeW",
+        "parameter": "ulFlags"
+      },
+      {
+        "method": "CM_Get_Device_Interface_SizeExA",
+        "parameter": "ulFlags"
+      },
+      {
+        "method": "CM_Get_Device_Interface_SizeExW",
+        "parameter": "ulFlags"
+      }
+    ]
+  },
+  {
+    "name": "CM_LOCATE_DEVNODE_FLAGS",
+    "autoPopulate": {
+      "filter": "CM_LOCATE_DEVNODE_",
+      "header": "cfgmgr32.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "CM_Locate_DevNodeA",
+        "parameter": "ulFlags"
+      },
+      {
+        "method": "CM_Locate_DevNodeW",
+        "parameter": "ulFlags"
+      }
+    ]
+  },
+  {
+    "name": "CM_REENUMERATE_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "CM_REENUMERATE_",
+      "header": "cfgmgr32.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "CM_Reenumerate_DevNode",
+        "parameter": "ulFlags"
+      },
+      {
+        "method": "CM_Reenumerate_DevNodeEx",
+        "parameter": "ulFlags"
+      }
+    ]
   }
 ]
 }
