@@ -11480,6 +11480,7 @@
   },
   {
     "name": "REGISTER_NOTIFICATION_FLAGS",
+    "flags": true,
     "members": [
       {
         "name": "DEVICE_NOTIFY_SERVICE_HANDLE",
