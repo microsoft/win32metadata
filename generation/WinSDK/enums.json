@@ -35450,6 +35450,20 @@
         "parameter": "InstallFlags"
       }
     ]
+  },
+  {
+    "name": "CM_QUERY_RESOURCE_CONFLICT_LIST_RESTYPE",
+    "autoPopulate": {
+      "filter": "ResType_",
+      "header": "cfgmgr32.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "CM_Query_Resource_Conflict_List",
+        "parameter": "ResourceID"
+      }
+    ]
   }
 ]
 }
