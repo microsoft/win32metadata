@@ -35431,6 +35431,25 @@
         "parameter": "dwSection"
       }
     ]
+  },
+  {
+    "name": "UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "INSTALLFLAG_",
+      "header": "newdev.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "UpdateDriverForPlugAndPlayDevicesA",
+        "parameter": "InstallFlags"
+      },
+      {
+        "method": "UpdateDriverForPlugAndPlayDevicesW",
+        "parameter": "InstallFlags"
+      }
+    ]
   }
 ]
 }
