@@ -18027,32 +18027,12 @@
   },
   {
     "name": "EXIT_WINDOWS_FLAGS",
-    "members": [
-      {
-        "name": "EWX_HYBRID_SHUTDOWN",
-        "value": "4194304"
-      },
-      {
-        "name": "EWX_LOGOFF",
-        "value": "0"
-      },
-      {
-        "name": "EWX_POWEROFF",
-        "value": "8"
-      },
-      {
-        "name": "EWX_REBOOT",
-        "value": "2"
-      },
-      {
-        "name": "EWX_RESTARTAPPS",
-        "value": "64"
-      },
-      {
-        "name": "EWX_SHUTDOWN",
-        "value": "1"
-      }
-    ],
+    "flags": true,
+    "autoPopulate": {
+      "filter": "EWX_",
+      "header": "winuser.h"
+    },
+    "members": [],
     "uses": [
       {
         "method": "ExitWindowsEx",
