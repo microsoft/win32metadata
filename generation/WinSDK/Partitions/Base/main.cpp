@@ -33,5 +33,3 @@
 
 #include <devpkey.h>
 #include <apdevpkey.h>
-#include <dlnadeviceinterfaceids.h>
-#include <dlnametadataproviderproperties.h>

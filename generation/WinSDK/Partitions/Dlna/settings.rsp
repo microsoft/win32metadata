@@ -1,0 +1,5 @@
+--traverse
+<IncludeRoot>/um/dlnadeviceinterfaceids.h
+<IncludeRoot>/um/dlnametadataproviderproperties.h
+--namespace
+Windows.Win32.Media.Streaming

@@ -37,7 +37,5 @@ LPENCLAVE_ROUTINE
 <IncludeRoot>/shared/wtypes.h
 <IncludeRoot>/um/minwinbase.h
 <IncludeRoot>/um/storprop.h
-<IncludeRoot>/um/dlnadeviceinterfaceids.h
-<IncludeRoot>/um/dlnametadataproviderproperties.h
 --namespace
 Windows.Win32.System.SystemServices
