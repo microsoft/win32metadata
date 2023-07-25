@@ -6,4 +6,5 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
+#include <ntddser.h>
 #include <msports.h>

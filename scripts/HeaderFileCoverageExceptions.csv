@@ -47,7 +47,6 @@ File,Skipping,Reason
 /shared/ntddmodm.h,false,Need modem partition
 /shared/ntddpar.h,false,Need parallel partition
 /shared/ntddscm.h,true,Duplicated ioctl constants
-/shared/ntddser.h,true,Duplicated ioctl constants
 /shared/ntddtape.h,false,Need tape partition
 /shared/ntddtdi.h,false,Need Transport driver interface partition
 /shared/ntdskreg.h,true,Pre-vista stuff
