@@ -19,8 +19,8 @@
 
   <files>
     <file src="images\windows.png" target="images"/>
-    <file src="sources\GeneratorSdk\sdk\sdk.stamped.props" target="sdk\sdk.props"/>
-    <file src="sources\GeneratorSdk\sdk\sdk.targets" target="sdk"/>
+    <file src="sources\GeneratorSdk\sdk\sdk.stamped.props" target="sdk\Sdk.props"/>
+    <file src="sources\GeneratorSdk\sdk\sdk.targets" target="sdk\Sdk.targets"/>
 
     <file src="bin\release\net6.0\*.deps.json" target="tools\net6.0"/>
     <file src="bin\release\net6.0\*.runtimeconfig.json" target="tools\net6.0"/>
