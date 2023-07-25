@@ -1,4 +1,5 @@
 --traverse
+<IncludeRoot>/um/httprequest.h
 <IncludeRoot>/um/winhttp.h
 --namespace
 Windows.Win32.Networking.WinHttp
