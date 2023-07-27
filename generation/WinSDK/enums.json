@@ -35452,13 +35452,29 @@
     ]
   },
   {
-    "name": "CM_QUERY_RESOURCE_CONFLICT_LIST_RESTYPE",
+    "name": "CM_RESTYPE",
     "autoPopulate": {
       "filter": "ResType_",
       "header": "cfgmgr32.h"
     },
     "members": [],
     "uses": [
+      {
+        "method": "CM_Get_Next_Res_Des",
+        "parameter": "ForResource"
+      },
+      {
+        "method": "CM_Get_Next_Res_Des",
+        "parameter": "pResourceID"
+      },
+      {
+        "method": "CM_Get_Next_Res_Des_Ex",
+        "parameter": "ForResource"
+      },
+      {
+        "method": "CM_Get_Next_Res_Des_Ex",
+        "parameter": "pResourceID"
+      },
       {
         "method": "CM_Query_Resource_Conflict_List",
         "parameter": "ResourceID"
