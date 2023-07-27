@@ -35543,6 +35543,21 @@
         "parameter": "ulFlags"
       }
     ]
+  },
+  {
+    "name": "SETPROCESSWORKINGSETSIZEEX_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "QUOTA_LIMITS_HARDWS_",
+      "header": "winnt.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "SetProcessWorkingSetSizeEx",
+        "parameter": "Flags"
+      }
+    ]
   }
 ]
 }
