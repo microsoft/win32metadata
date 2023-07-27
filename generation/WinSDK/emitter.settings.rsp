@@ -1684,3 +1684,4 @@ RmStartSession::return=WIN32_ERROR
 IServiceProvider::QueryService::ppvObject=[ComOutPtr]
 LoadResource::return=[DoNotRelease]
 CertOpenStore::hCryptProv=[Reserved]
+WlanOpenHandle::phClientHandle=[RAIIFree("WlanCloseHandle")]
