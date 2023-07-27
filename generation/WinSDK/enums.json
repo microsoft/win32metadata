@@ -35558,6 +35558,25 @@
         "parameter": "Flags"
       }
     ]
+  },
+  {
+    "name": "CM_ENUMERATE_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "CM_ENUMERATE_",
+      "header": "cfgmgr32.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "CM_Enumerate_Classes",
+        "parameter": "ulFlags"
+      },
+      {
+        "method": "CM_Enumerate_Classes_Ex",
+        "parameter": "ulFlags"
+      }
+    ]
   }
 ]
 }
