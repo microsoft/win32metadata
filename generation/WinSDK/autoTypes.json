@@ -58,6 +58,7 @@
     "Namespace": "Windows.Win32.Foundation",
     "Name": "HWND",
     "ValueType": "DECLARE_HANDLE",
+    "AlsoUsableFor": "HANDLE",
     "NativeTypedef": true
   },
   {
