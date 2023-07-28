@@ -26443,26 +26443,6 @@
     ]
   },
   {
-    "name": "SP_INF_STYLE",
-    "members": [
-      {
-        "name": "INF_STYLE_NONE"
-      },
-      {
-        "name": "INF_STYLE_OLDNT"
-      },
-      {
-        "name": "INF_STYLE_WIN4"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "SP_INF_INFORMATION",
-        "field": "InfStyle"
-      }
-    ]
-  },
-  {
     "name": "MEMORY_PRIORITY",
     "members": [
       {
@@ -35591,6 +35571,37 @@
       {
         "method": "CM_Enumerate_Classes_Ex",
         "parameter": "ulFlags"
+      }
+    ]
+  },
+  {
+    "name": "INF_STYLE",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "INF_STYLE_",
+      "header": "SetupAPI.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "SetupGetInfFileListA",
+        "parameter": "InfStyle"
+      },
+      {
+        "method": "SetupGetInfFileListW",
+        "parameter": "InfStyle"
+      },
+      {
+        "method": "SetupOpenInfFileA",
+        "parameter": "InfStyle"
+      },
+      {
+        "method": "SetupOpenInfFileW",
+        "parameter": "InfStyle"
+      },
+      {
+        "struct": "SP_INF_INFORMATION",
+        "field": "InfStyle"
       }
     ]
   }
