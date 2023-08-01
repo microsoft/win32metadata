@@ -35604,6 +35604,25 @@
         "field": "InfStyle"
       }
     ]
+  },
+  {
+    "name": "SETUPSCANFILEQUEUE_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "SPQ_SCAN_",
+      "header": "SetupAPI.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "SetupScanFileQueueA",
+        "parameter": "Flags"
+      },
+      {
+        "method": "SetupScanFileQueueW",
+        "parameter": "Flags"
+      }
+    ]
   }
 ]
 }
