@@ -1025,57 +1025,16 @@
       "filter": "SP_COPY_",
       "header": "SetupAPI.h"
     },
-    "members": [
-      {
-        "name": "SP_COPY_DELETESOURCE"
-      },
-      {
-        "name": "SP_COPY_REPLACEONLY"
-      },
-      {
-        "name": "SP_COPY_NEWER_OR_SAME"
-      },
-      {
-        "name": "SP_COPY_NEWER_ONLY"
-      },
-      {
-        "name": "SP_COPY_NOOVERWRITE"
-      },
-      {
-        "name": "SP_COPY_NODECOMP"
-      },
-      {
-        "name": "SP_COPY_LANGUAGEAWARE"
-      },
-      {
-        "name": "SP_COPY_SOURCE_ABSOLUTE"
-      },
-      {
-        "name": "SP_COPY_SOURCEPATH_ABSOLUTE"
-      },
-      {
-        "name": "SP_COPY_FORCE_IN_USE"
-      },
-      {
-        "name": "SP_COPY_IN_USE_NEEDS_REBOOT"
-      },
-      {
-        "name": "SP_COPY_NOSKIP"
-      },
-      {
-        "name": "SP_COPY_FORCE_NOOVERWRITE"
-      },
-      {
-        "name": "SP_COPY_FORCE_NEWER"
-      },
-      {
-        "name": "SP_COPY_WARNIFSKIP"
-      },
-      {
-        "name": "SP_COPY_NOBROWSE"
-      }
-    ],
+    "members": [],
     "uses": [
+      {
+        "method": "SetupCopyOEMInfA",
+        "parameter": "CopyStyle"
+      },
+      {
+        "method": "SetupCopyOEMInfW",
+        "parameter": "CopyStyle"
+      },
       {
         "method": "SetupInstallFileExW",
         "parameter": "CopyStyle"
