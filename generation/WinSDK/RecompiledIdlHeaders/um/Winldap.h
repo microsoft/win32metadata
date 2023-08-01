@@ -773,7 +773,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_set_optionW( LDAP *ld, int option, const void *inv
 //
 // To retrieve information on an secure connection, a pointer to a
 // SecPkgContext_connectionInfo structure (defined in schannel.h) must be
-// passed in. On success, it is filled with relevent security information.
+// passed in. On success, it is filled with relevant security information.
 //
 
 #define LDAP_OPT_SSL_INFO           0x93
