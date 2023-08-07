@@ -106,6 +106,30 @@
     "members": [],
     "uses": [
       {
+        "method": "CredDeleteA",
+        "parameter": "Type"
+      },
+      {
+        "method": "CredDeleteW",
+        "parameter": "Type"
+      },
+      {
+        "method": "CredReadA",
+        "parameter": "Type"
+      },
+      {
+        "method": "CredReadW",
+        "parameter": "Type"
+      },
+      {
+        "method": "CredRenameA",
+        "parameter": "Type"
+      },
+      {
+        "method": "CredRenameW",
+        "parameter": "Type"
+      },
+      {
         "struct": "CREDENTIALA",
         "field": "Type"
       },
