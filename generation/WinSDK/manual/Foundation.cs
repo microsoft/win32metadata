@@ -73,6 +73,8 @@ namespace Windows.Win32.Foundation
         [NativeTypeName("NTSTATUS")]
         public const int EXCEPTION_POSSIBLE_DEADLOCK = STATUS_POSSIBLE_DEADLOCK;
         [NativeTypeName("NTSTATUS")]
+        public const int EXCEPTION_SPAPI_UNRECOVERABLE_STACK_OVERFLOW = unchecked((int)WIN32_ERROR.ERROR_UNRECOVERABLE_STACK_OVERFLOW);
+        [NativeTypeName("NTSTATUS")]
         public const int CONTROL_C_EXIT = STATUS_CONTROL_C_EXIT;
     }
 }

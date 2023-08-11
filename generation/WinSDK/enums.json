@@ -4034,6 +4034,366 @@
       {
         "name": "NO_ERROR",
         "value": 0
+      },
+      {
+        "name": "ERROR_EXPECTED_SECTION_NAME",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0)"
+      },
+      {
+        "name": "ERROR_BAD_SECTION_NAME_LINE",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|1)"
+      },
+      {
+        "name": "ERROR_SECTION_NAME_TOO_LONG",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|2)"
+      },
+      {
+        "name": "ERROR_GENERAL_SYNTAX",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|3)"
+      },
+      {
+        "name": "ERROR_WRONG_INF_STYLE",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x100)"
+      },
+      {
+        "name": "ERROR_SECTION_NOT_FOUND",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x101)"
+      },
+      {
+        "name": "ERROR_LINE_NOT_FOUND",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x102)"
+      },
+      {
+        "name": "ERROR_NO_BACKUP",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x103)"
+      },
+      {
+        "name": "ERROR_NO_ASSOCIATED_CLASS",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x200)"
+      },
+      {
+        "name": "ERROR_CLASS_MISMATCH",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x201)"
+      },
+      {
+        "name": "ERROR_DUPLICATE_FOUND",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x202)"
+      },
+      {
+        "name": "ERROR_NO_DRIVER_SELECTED",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x203)"
+      },
+      {
+        "name": "ERROR_KEY_DOES_NOT_EXIST",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x204)"
+      },
+      {
+        "name": "ERROR_INVALID_DEVINST_NAME",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x205)"
+      },
+      {
+        "name": "ERROR_INVALID_CLASS",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x206)"
+      },
+      {
+        "name": "ERROR_DEVINST_ALREADY_EXISTS",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x207)"
+      },
+      {
+        "name": "ERROR_DEVINFO_NOT_REGISTERED",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x208)"
+      },
+      {
+        "name": "ERROR_INVALID_REG_PROPERTY",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x209)"
+      },
+      {
+        "name": "ERROR_NO_INF",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x20A)"
+      },
+      {
+        "name": "ERROR_NO_SUCH_DEVINST",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x20B)"
+      },
+      {
+        "name": "ERROR_CANT_LOAD_CLASS_ICON",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x20C)"
+      },
+      {
+        "name": "ERROR_INVALID_CLASS_INSTALLER",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x20D)"
+      },
+      {
+        "name": "ERROR_DI_DO_DEFAULT",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x20E)"
+      },
+      {
+        "name": "ERROR_DI_NOFILECOPY",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x20F)"
+      },
+      {
+        "name": "ERROR_INVALID_HWPROFILE",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x210)"
+      },
+      {
+        "name": "ERROR_NO_DEVICE_SELECTED",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x211)"
+      },
+      {
+        "name": "ERROR_DEVINFO_LIST_LOCKED",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x212)"
+      },
+      {
+        "name": "ERROR_DEVINFO_DATA_LOCKED",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x213)"
+      },
+      {
+        "name": "ERROR_DI_BAD_PATH",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x214)"
+      },
+      {
+        "name": "ERROR_NO_CLASSINSTALL_PARAMS",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x215)"
+      },
+      {
+        "name": "ERROR_FILEQUEUE_LOCKED",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x216)"
+      },
+      {
+        "name": "ERROR_BAD_SERVICE_INSTALLSECT",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x217)"
+      },
+      {
+        "name": "ERROR_NO_CLASS_DRIVER_LIST",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x218)"
+      },
+      {
+        "name": "ERROR_NO_ASSOCIATED_SERVICE",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x219)"
+      },
+      {
+        "name": "ERROR_NO_DEFAULT_DEVICE_INTERFACE",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x21A)"
+      },
+      {
+        "name": "ERROR_DEVICE_INTERFACE_ACTIVE",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x21B)"
+      },
+      {
+        "name": "ERROR_DEVICE_INTERFACE_REMOVED",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x21C)"
+      },
+      {
+        "name": "ERROR_BAD_INTERFACE_INSTALLSECT",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x21D)"
+      },
+      {
+        "name": "ERROR_NO_SUCH_INTERFACE_CLASS",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x21E)"
+      },
+      {
+        "name": "ERROR_INVALID_REFERENCE_STRING",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x21F)"
+      },
+      {
+        "name": "ERROR_INVALID_MACHINENAME",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x220)"
+      },
+      {
+        "name": "ERROR_REMOTE_COMM_FAILURE",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x221)"
+      },
+      {
+        "name": "ERROR_MACHINE_UNAVAILABLE",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x222)"
+      },
+      {
+        "name": "ERROR_NO_CONFIGMGR_SERVICES",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x223)"
+      },
+      {
+        "name": "ERROR_INVALID_PROPPAGE_PROVIDER",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x224)"
+      },
+      {
+        "name": "ERROR_NO_SUCH_DEVICE_INTERFACE",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x225)"
+      },
+      {
+        "name": "ERROR_DI_POSTPROCESSING_REQUIRED",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x226)"
+      },
+      {
+        "name": "ERROR_INVALID_COINSTALLER",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x227)"
+      },
+      {
+        "name": "ERROR_NO_COMPAT_DRIVERS",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x228)"
+      },
+      {
+        "name": "ERROR_NO_DEVICE_ICON",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x229)"
+      },
+      {
+        "name": "ERROR_INVALID_INF_LOGCONFIG",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x22A)"
+      },
+      {
+        "name": "ERROR_DI_DONT_INSTALL",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x22B)"
+      },
+      {
+        "name": "ERROR_INVALID_FILTER_DRIVER",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x22C)"
+      },
+      {
+        "name": "ERROR_NON_WINDOWS_NT_DRIVER",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x22D)"
+      },
+      {
+        "name": "ERROR_NON_WINDOWS_DRIVER",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x22E)"
+      },
+      {
+        "name": "ERROR_NO_CATALOG_FOR_OEM_INF",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x22F)"
+      },
+      {
+        "name": "ERROR_DEVINSTALL_QUEUE_NONNATIVE",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x230)"
+      },
+      {
+        "name": "ERROR_NOT_DISABLEABLE",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x231)"
+      },
+      {
+        "name": "ERROR_CANT_REMOVE_DEVINST",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x232)"
+      },
+      {
+        "name": "ERROR_INVALID_TARGET",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x233)"
+      },
+      {
+        "name": "ERROR_DRIVER_NONNATIVE",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x234)"
+      },
+      {
+        "name": "ERROR_IN_WOW64",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x235)"
+      },
+      {
+        "name": "ERROR_SET_SYSTEM_RESTORE_POINT",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x236)"
+      },
+      {
+        "name": "ERROR_SCE_DISABLED",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x238)"
+      },
+      {
+        "name": "ERROR_UNKNOWN_EXCEPTION",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x239)"
+      },
+      {
+        "name": "ERROR_PNP_REGISTRY_ERROR",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x23A)"
+      },
+      {
+        "name": "ERROR_REMOTE_REQUEST_UNSUPPORTED",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x23B)"
+      },
+      {
+        "name": "ERROR_NOT_AN_INSTALLED_OEM_INF",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x23C)"
+      },
+      {
+        "name": "ERROR_INF_IN_USE_BY_DEVICES",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x23D)"
+      },
+      {
+        "name": "ERROR_DI_FUNCTION_OBSOLETE",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x23E)"
+      },
+      {
+        "name": "ERROR_NO_AUTHENTICODE_CATALOG",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x23F)"
+      },
+      {
+        "name": "ERROR_AUTHENTICODE_DISALLOWED",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x240)"
+      },
+      {
+        "name": "ERROR_AUTHENTICODE_TRUSTED_PUBLISHER",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x241)"
+      },
+      {
+        "name": "ERROR_AUTHENTICODE_TRUST_NOT_ESTABLISHED",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x242)"
+      },
+      {
+        "name": "ERROR_AUTHENTICODE_PUBLISHER_NOT_TRUSTED",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x243)"
+      },
+      {
+        "name": "ERROR_SIGNATURE_OSATTRIBUTE_MISMATCH",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x244)"
+      },
+      {
+        "name": "ERROR_ONLY_VALIDATE_VIA_AUTHENTICODE",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x245)"
+      },
+      {
+        "name": "ERROR_DEVICE_INSTALLER_NOT_READY",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x246)"
+      },
+      {
+        "name": "ERROR_DRIVER_STORE_ADD_FAILED",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x247)"
+      },
+      {
+        "name": "ERROR_DEVICE_INSTALL_BLOCKED",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x248)"
+      },
+      {
+        "name": "ERROR_DRIVER_INSTALL_BLOCKED",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x249)"
+      },
+      {
+        "name": "ERROR_WRONG_INF_TYPE",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x24A)"
+      },
+      {
+        "name": "ERROR_FILE_HASH_NOT_IN_CATALOG",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x24B)"
+      },
+      {
+        "name": "ERROR_DRIVER_STORE_DELETE_FAILED",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x24C)"
+      },
+      {
+        "name": "ERROR_UNRECOVERABLE_STACK_OVERFLOW",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x300)"
+      },
+      {
+        "name": "ERROR_NO_DEFAULT_INTERFACE_DEVICE",
+        "value": "ERROR_NO_DEFAULT_DEVICE_INTERFACE"
+      },
+      {
+        "name": "ERROR_INTERFACE_DEVICE_ACTIVE",
+        "value": "ERROR_DEVICE_INTERFACE_ACTIVE"
+      },
+      {
+        "name": "ERROR_INTERFACE_DEVICE_REMOVED",
+        "value": "ERROR_DEVICE_INTERFACE_REMOVED"
+      },
+      {
+        "name": "ERROR_NO_SUCH_INTERFACE_DEVICE",
+        "value": "ERROR_NO_SUCH_DEVICE_INTERFACE"
+      },
+      {
+        "name": "ERROR_NOT_INSTALLED",
+        "value": "(APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x1000)"
       }
     ],
     "uses": [
