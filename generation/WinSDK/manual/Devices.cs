@@ -8,9 +8,9 @@ namespace Windows.Win32.Devices.Properties
     {
 
         [NativeTypeName("DEVPROP_BOOLEAN")]
-        public const char DEVPROP_TRUE  = unchecked((char)-1);
+        public const byte DEVPROP_TRUE  = unchecked((byte)-1);
 
         [NativeTypeName("DEVPROP_BOOLEAN")]
-        public const char DEVPROP_FALSE = (char)0;
+        public const byte DEVPROP_FALSE = (byte)0;
     }
 }

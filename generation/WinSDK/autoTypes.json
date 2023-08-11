@@ -2592,7 +2592,7 @@
   {
     "Namespace": "Windows.Win32.Devices.Properties",
     "Name": "DEVPROP_BOOLEAN",
-    "ValueType": "char",
+    "ValueType": "byte",
     "NativeTypedef": true
   }
 ]

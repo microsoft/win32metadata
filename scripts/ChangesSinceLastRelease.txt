@@ -3,3 +3,7 @@ Windows.Win32.System.WindowsProgramming.Apis.CancelTimerQueueTimer => Windows.Wi
 Windows.Win32.System.WindowsProgramming.Apis.CreateWaitableTimerA => Windows.Win32.System.Threading.Apis.CreateWaitableTimerA
 Windows.Win32.System.WindowsProgramming.Apis.CreateWaitableTimerExA => Windows.Win32.System.Threading.Apis.CreateWaitableTimerExA
 Windows.Win32.System.WindowsProgramming.Apis.OpenWaitableTimerA => Windows.Win32.System.Threading.Apis.OpenWaitableTimerA
+# Fixed #1675.
+Windows.Win32.Devices.Properties.Apis.DEVPROP_FALSE...System.Char => Windows.Win32.Devices.Properties.DEVPROP_BOOLEAN
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TRUE...System.Char => Windows.Win32.Devices.Properties.DEVPROP_BOOLEAN
+Windows.Win32.Devices.Properties.DEVPROP_BOOLEAN.Value...System.Char => System.Byte
