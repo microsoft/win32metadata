@@ -1,0 +1,5 @@
+# Fixed #1676.
+Windows.Win32.System.WindowsProgramming.Apis.CancelTimerQueueTimer => Windows.Win32.System.Threading.Apis.CancelTimerQueueTimer
+Windows.Win32.System.WindowsProgramming.Apis.CreateWaitableTimerA => Windows.Win32.System.Threading.Apis.CreateWaitableTimerA
+Windows.Win32.System.WindowsProgramming.Apis.CreateWaitableTimerExA => Windows.Win32.System.Threading.Apis.CreateWaitableTimerExA
+Windows.Win32.System.WindowsProgramming.Apis.OpenWaitableTimerA => Windows.Win32.System.Threading.Apis.OpenWaitableTimerA
