@@ -126,3 +126,25 @@ Windows.Win32.Globalization.Apis.GetGeoInfoA : GeoType...UInt32 => SYSGEOTYPE
 Windows.Win32.Globalization.Apis.GetGeoInfoEx : geoType...UInt32 => SYSGEOTYPE
 Windows.Win32.Globalization.Apis.GetGeoInfoW : GeoType...UInt32 => SYSGEOTYPE
 Windows.Win32.Globalization.Apis.GetUserGeoID : GeoClass...UInt32 => SYSGEOCLASS
+# Fixed #1665.
+Windows.Win32.NetworkManagement.WiFi.Apis.WLAN_NOTIFICATION_SOURCE_ACM removed
+Windows.Win32.NetworkManagement.WiFi.Apis.WLAN_NOTIFICATION_SOURCE_ALL removed
+Windows.Win32.NetworkManagement.WiFi.Apis.WLAN_NOTIFICATION_SOURCE_DEVICE_SERVICE removed
+Windows.Win32.NetworkManagement.WiFi.Apis.WLAN_NOTIFICATION_SOURCE_HNWK removed
+Windows.Win32.NetworkManagement.WiFi.Apis.WLAN_NOTIFICATION_SOURCE_IHV removed
+Windows.Win32.NetworkManagement.WiFi.Apis.WLAN_NOTIFICATION_SOURCE_MSM removed
+Windows.Win32.NetworkManagement.WiFi.Apis.WLAN_NOTIFICATION_SOURCE_NONE removed
+Windows.Win32.NetworkManagement.WiFi.Apis.WLAN_NOTIFICATION_SOURCE_ONEX removed
+Windows.Win32.NetworkManagement.WiFi.Apis.WLAN_NOTIFICATION_SOURCE_SECURITY removed
+Windows.Win32.NetworkManagement.WiFi.Apis.WlanRegisterNotification : dwNotifSource...UInt32 => WLAN_NOTIFICATION_SOURCES
+Windows.Win32.NetworkManagement.WiFi.L2_NOTIFICATION_DATA.NotificationSource...System.UInt32 => Windows.Win32.NetworkManagement.WiFi.WLAN_NOTIFICATION_SOURCES
+Windows.Win32.NetworkManagement.WiFi.WLAN_NOTIFICATION_SOURCES added
+Windows.Win32.NetworkManagement.WiFi.WLAN_NOTIFICATION_SOURCES.WLAN_NOTIFICATION_SOURCE_ACM added
+Windows.Win32.NetworkManagement.WiFi.WLAN_NOTIFICATION_SOURCES.WLAN_NOTIFICATION_SOURCE_ALL added
+Windows.Win32.NetworkManagement.WiFi.WLAN_NOTIFICATION_SOURCES.WLAN_NOTIFICATION_SOURCE_DEVICE_SERVICE added
+Windows.Win32.NetworkManagement.WiFi.WLAN_NOTIFICATION_SOURCES.WLAN_NOTIFICATION_SOURCE_HNWK added
+Windows.Win32.NetworkManagement.WiFi.WLAN_NOTIFICATION_SOURCES.WLAN_NOTIFICATION_SOURCE_IHV added
+Windows.Win32.NetworkManagement.WiFi.WLAN_NOTIFICATION_SOURCES.WLAN_NOTIFICATION_SOURCE_MSM added
+Windows.Win32.NetworkManagement.WiFi.WLAN_NOTIFICATION_SOURCES.WLAN_NOTIFICATION_SOURCE_NONE added
+Windows.Win32.NetworkManagement.WiFi.WLAN_NOTIFICATION_SOURCES.WLAN_NOTIFICATION_SOURCE_ONEX added
+Windows.Win32.NetworkManagement.WiFi.WLAN_NOTIFICATION_SOURCES.WLAN_NOTIFICATION_SOURCE_SECURITY added

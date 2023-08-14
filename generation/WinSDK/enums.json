@@ -36071,6 +36071,25 @@
         "parameter": "Flags"
       }
     ]
+  },
+  {
+    "name": "WLAN_NOTIFICATION_SOURCES",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "WLAN_NOTIFICATION_SOURCE_",
+      "header": "wlanapi.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "WlanRegisterNotification",
+        "parameter": "dwNotifSource"
+      },
+      {
+        "struct": "L2_NOTIFICATION_DATA",
+        "field": "NotificationSource"
+      }
+    ]
   }
 ]
 }
