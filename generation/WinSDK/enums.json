@@ -36090,6 +36090,25 @@
         "field": "NotificationSource"
       }
     ]
+  },
+  {
+    "name": "CM_CDMASK",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "CM_CDMASK_",
+      "header": "cfgmgr32.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "CONFLICT_DETAILS_A",
+        "field": "CD_ulMask"
+      },
+      {
+        "struct": "CONFLICT_DETAILS_W",
+        "field": "CD_ulMask"
+      }
+    ]
   }
 ]
 }

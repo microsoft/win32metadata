@@ -148,3 +148,17 @@ Windows.Win32.NetworkManagement.WiFi.WLAN_NOTIFICATION_SOURCES.WLAN_NOTIFICATION
 Windows.Win32.NetworkManagement.WiFi.WLAN_NOTIFICATION_SOURCES.WLAN_NOTIFICATION_SOURCE_NONE added
 Windows.Win32.NetworkManagement.WiFi.WLAN_NOTIFICATION_SOURCES.WLAN_NOTIFICATION_SOURCE_ONEX added
 Windows.Win32.NetworkManagement.WiFi.WLAN_NOTIFICATION_SOURCES.WLAN_NOTIFICATION_SOURCE_SECURITY added
+# Fixed #1669.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_CDMASK_DESCRIPTION removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_CDMASK_DEVINST removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_CDMASK_FLAGS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_CDMASK_RESDES removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_CDMASK_VALID removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.CM_CDMASK added
+Windows.Win32.Devices.DeviceAndDriverInstallation.CM_CDMASK.CM_CDMASK_DESCRIPTION added
+Windows.Win32.Devices.DeviceAndDriverInstallation.CM_CDMASK.CM_CDMASK_DEVINST added
+Windows.Win32.Devices.DeviceAndDriverInstallation.CM_CDMASK.CM_CDMASK_FLAGS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.CM_CDMASK.CM_CDMASK_RESDES added
+Windows.Win32.Devices.DeviceAndDriverInstallation.CM_CDMASK.CM_CDMASK_VALID added
+Windows.Win32.Devices.DeviceAndDriverInstallation.CONFLICT_DETAILS_A.CD_ulMask...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.CM_CDMASK
+Windows.Win32.Devices.DeviceAndDriverInstallation.CONFLICT_DETAILS_W.CD_ulMask...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.CM_CDMASK
