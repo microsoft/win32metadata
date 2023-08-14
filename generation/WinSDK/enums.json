@@ -34470,9 +34470,114 @@
     "uses": [
       {
         "interface": "IWbemServices",
+        "method": "CreateClassEnumAsync",
+        "parameter": "lFlags"
+      },
+      {
+        "interface": "IWbemServices",
+        "method": "CreateInstanceEnumAsync",
+        "parameter": "lFlags"
+      },
+      {
+        "interface": "IWbemServices",
+        "method": "DeleteClassAsync",
+        "parameter": "lFlags"
+      },
+      {
+        "interface": "IWbemServices",
+        "method": "DeleteInstanceAsync",
+        "parameter": "lFlags"
+      },
+      {
+        "interface": "IWbemServices",
+        "method": "ExecMethodAsync",
+        "parameter": "lFlags"
+      },
+      {
+        "interface": "IWbemServices",
+        "method": "ExecNotificationQueryAsync",
+        "parameter": "lFlags"
+      },
+      {
+        "interface": "IWbemServices",
+        "method": "ExecQueryAsync",
+        "parameter": "lFlags"
+      },
+      {
+        "interface": "IWbemServices",
+        "method": "GetObjectAsync",
+        "parameter": "lFlags"
+      },
+      {
+        "interface": "IWbemServices",
+        "method": "PutClassAsync",
+        "parameter": "lFlags"
+      },
+      {
+        "interface": "IWbemServices",
+        "method": "PutInstanceAsync",
+        "parameter": "lFlags"
+      },
+      {
+        "interface": "IWbemServices",
+        "method": "CreateClassEnum",
+        "parameter": "lFlags"
+      },
+      {
+        "interface": "IWbemServices",
+        "method": "CreateInstanceEnum",
+        "parameter": "lFlags"
+      },
+      {
+        "interface": "IWbemServices",
+        "method": "DeleteClass",
+        "parameter": "lFlags"
+      },
+      {
+        "interface": "IWbemServices",
+        "method": "DeleteInstance",
+        "parameter": "lFlags"
+      },
+      {
+        "interface": "IWbemServices",
+        "method": "ExecMethod",
+        "parameter": "lFlags"
+      },
+      {
+        "interface": "IWbemServices",
+        "method": "ExecNotificationQuery",
+        "parameter": "lFlags"
+      },
+      {
+        "interface": "IWbemServices",
         "method": "ExecQuery",
         "parameter": "lFlags"
-      }
+      },
+      {
+        "interface": "IWbemServices",
+        "method": "GetObject",
+        "parameter": "lFlags"
+      },
+      {
+        "interface": "IWbemServices",
+        "method": "OpenNamespace",
+        "parameter": "lFlags"
+      },
+      {
+        "interface": "IWbemServices",
+        "method": "PutClass",
+        "parameter": "lFlags"
+      },
+      {
+        "interface": "IWbemServices",
+        "method": "PutInstance",
+        "parameter": "lFlags"
+      },
+      {
+        "interface": "IWbemServices",
+        "method": "QueryObjectSink",
+        "parameter": "lFlags"
+        }
     ]
   },
   {

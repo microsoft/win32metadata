@@ -99,3 +99,25 @@ Windows.Win32.Foundation.WIN32_ERROR.ERROR_UNKNOWN_EXCEPTION added
 Windows.Win32.Foundation.WIN32_ERROR.ERROR_UNRECOVERABLE_STACK_OVERFLOW added
 Windows.Win32.Foundation.WIN32_ERROR.ERROR_WRONG_INF_STYLE added
 Windows.Win32.Foundation.WIN32_ERROR.ERROR_WRONG_INF_TYPE added
+# Fixed #1674.
+Windows.Win32.System.Wmi.IWbemServices.CreateClassEnum : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
+Windows.Win32.System.Wmi.IWbemServices.CreateClassEnumAsync : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
+Windows.Win32.System.Wmi.IWbemServices.CreateInstanceEnum : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
+Windows.Win32.System.Wmi.IWbemServices.CreateInstanceEnumAsync : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
+Windows.Win32.System.Wmi.IWbemServices.DeleteClass : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
+Windows.Win32.System.Wmi.IWbemServices.DeleteClassAsync : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
+Windows.Win32.System.Wmi.IWbemServices.DeleteInstance : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
+Windows.Win32.System.Wmi.IWbemServices.DeleteInstanceAsync : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
+Windows.Win32.System.Wmi.IWbemServices.ExecMethod : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
+Windows.Win32.System.Wmi.IWbemServices.ExecMethodAsync : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
+Windows.Win32.System.Wmi.IWbemServices.ExecNotificationQuery : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
+Windows.Win32.System.Wmi.IWbemServices.ExecNotificationQueryAsync : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
+Windows.Win32.System.Wmi.IWbemServices.ExecQueryAsync : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
+Windows.Win32.System.Wmi.IWbemServices.GetObject : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
+Windows.Win32.System.Wmi.IWbemServices.GetObjectAsync : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
+Windows.Win32.System.Wmi.IWbemServices.OpenNamespace : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
+Windows.Win32.System.Wmi.IWbemServices.PutClass : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
+Windows.Win32.System.Wmi.IWbemServices.PutClassAsync : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
+Windows.Win32.System.Wmi.IWbemServices.PutInstance : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
+Windows.Win32.System.Wmi.IWbemServices.PutInstanceAsync : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
+Windows.Win32.System.Wmi.IWbemServices.QueryObjectSink : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
