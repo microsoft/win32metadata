@@ -1686,3 +1686,7 @@ LoadResource::return=[DoNotRelease]
 CertOpenStore::hCryptProv=[Reserved]
 WlanOpenHandle::phClientHandle=[RAIIFree("WlanCloseHandle")]
 IAudioSessionControl2::IsSystemSoundsSession=[CanReturnMultipleSuccessValues]
+GetUserGeoID::GeoClass=SYSGEOCLASS
+GetGeoInfoA::GeoType=SYSGEOTYPE
+GetGeoInfoW::GeoType=SYSGEOTYPE
+GetGeoInfoEx::geoType=SYSGEOTYPE

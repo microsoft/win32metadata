@@ -121,3 +121,8 @@ Windows.Win32.System.Wmi.IWbemServices.PutClassAsync : lFlags...Int32 => WBEM_GE
 Windows.Win32.System.Wmi.IWbemServices.PutInstance : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
 Windows.Win32.System.Wmi.IWbemServices.PutInstanceAsync : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
 Windows.Win32.System.Wmi.IWbemServices.QueryObjectSink : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
+# Fixed #1673.
+Windows.Win32.Globalization.Apis.GetGeoInfoA : GeoType...UInt32 => SYSGEOTYPE
+Windows.Win32.Globalization.Apis.GetGeoInfoEx : geoType...UInt32 => SYSGEOTYPE
+Windows.Win32.Globalization.Apis.GetGeoInfoW : GeoType...UInt32 => SYSGEOTYPE
+Windows.Win32.Globalization.Apis.GetUserGeoID : GeoClass...UInt32 => SYSGEOCLASS
