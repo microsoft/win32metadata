@@ -1917,3 +1917,20 @@ Windows.Win32.Graphics.GdiPlus.SmoothingMode.SmoothingModeAntiAlias8x8 added
 Windows.Win32.Graphics.GdiPlus.Status.ProfileNotFound added
 Windows.Win32.Graphics.GdiPlus.Tint added
 Windows.Win32.Graphics.GdiPlus.TintParams added
+# Add GDI+ startup/shutdown APIs
+Windows.Win32.Graphics.GdiPlus.Apis.GdiplusShutdown added
+Windows.Win32.Graphics.GdiPlus.Apis.GdiplusStartup added
+Windows.Win32.Graphics.GdiPlus.DebugEventLevel added
+Windows.Win32.Graphics.GdiPlus.DebugEventLevel.DebugEventLevelFatal added
+Windows.Win32.Graphics.GdiPlus.DebugEventLevel.DebugEventLevelWarning added
+Windows.Win32.Graphics.GdiPlus.DebugEventProc added
+Windows.Win32.Graphics.GdiPlus.GdiplusStartupInput added
+Windows.Win32.Graphics.GdiPlus.GdiplusStartupInputEx added
+Windows.Win32.Graphics.GdiPlus.GdiplusStartupOutput added
+Windows.Win32.Graphics.GdiPlus.GdiplusStartupParams added
+Windows.Win32.Graphics.GdiPlus.GdiplusStartupParams.GdiplusStartupDefault added
+Windows.Win32.Graphics.GdiPlus.GdiplusStartupParams.GdiplusStartupNoSetRound added
+Windows.Win32.Graphics.GdiPlus.GdiplusStartupParams.GdiplusStartupSetPSValue added
+Windows.Win32.Graphics.GdiPlus.GdiplusStartupParams.GdiplusStartupTransparencyMask added
+Windows.Win32.Graphics.GdiPlus.NotificationHookProc added
+Windows.Win32.Graphics.GdiPlus.NotificationUnhookProc added

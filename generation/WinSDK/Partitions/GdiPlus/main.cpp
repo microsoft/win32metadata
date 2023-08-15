@@ -7,6 +7,7 @@
 #define GDIPVER 0x0110
 
 #include <gdiplus.h>
+#include <gdiplusinit.h>
 #include <gdiplusenums.h>
 #include <gdiplustypes.h>
 #include <gdiplusmetaheader.h>
