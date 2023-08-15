@@ -7,6 +7,7 @@
 <IncludeRoot>/um/gdiplusmetaheader.h
 <IncludeRoot>/um/gdipluspixelformats.h
 <IncludeRoot>/um/gdiplustypes.h
+<IncludeRoot>/um/gdipluseffects.h
 <IncludeRoot>/um/gdiplusflat.h
 --namespace
 Windows.Win32.Graphics.GdiPlus

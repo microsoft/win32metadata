@@ -156,10 +156,14 @@ namespace Windows.Win32.Graphics.GdiPlus
     }
 
     [NativeTypedef]
-    public unsafe partial struct Matrix
+    public unsafe partial struct CGpEffect
     {
         public IntPtr Value;
     }
 
-
+    [NativeTypedef]
+    public unsafe partial struct Matrix
+    {
+        public IntPtr Value;
+    }
 }
