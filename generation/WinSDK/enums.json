@@ -36385,7 +36385,7 @@
     "name": "CM_DEVNODE_STATUS_FLAGS",
     "flags": true,
     "autoPopulate": {
-      "filter": "DM_",
+      "filter": "DN_",
       "header": "cfg.h"
     },
     "members": [
