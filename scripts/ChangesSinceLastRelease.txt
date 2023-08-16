@@ -2030,3 +2030,5 @@ Windows.Win32.System.ApplicationInstallationAndServicing.Apis.GetDeltaSignatureA
 Windows.Win32.System.ApplicationInstallationAndServicing.Apis.GetDeltaSignatureB : HashAlgId...UInt32 => ALG_ID
 Windows.Win32.System.ApplicationInstallationAndServicing.Apis.GetDeltaSignatureW : HashAlgId...UInt32 => ALG_ID
 Windows.Win32.System.ApplicationInstallationAndServicing.DELTA_HEADER_INFO.TargetHashAlgId...System.UInt32 => Windows.Win32.Security.Cryptography.ALG_ID
+# Fixed #1680.
+Windows.Win32.System.SystemServices.Apis.ALL_PROCESSOR_GROUPS...System.UInt32 => System.UInt16

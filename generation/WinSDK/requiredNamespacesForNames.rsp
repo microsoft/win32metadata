@@ -785,6 +785,7 @@ AddConditionalAce=Windows.Win32.Security
 AddIntegrityLabelToBoundaryDescriptor=Windows.Win32.System.Threading
 AddRefActCtx=Windows.Win32.System.ApplicationInstallationAndServicing
 AddSecureMemoryCacheCallback=Windows.Win32.System.Memory
+ALL_PROCESSOR_GROUPS=Windows.Win32.System.Threading
 ApplicationRecoveryFinished=Windows.Win32.System.Recovery
 ApplicationRecoveryInProgress=Windows.Win32.System.Recovery
 BackupEventLogA=Windows.Win32.System.EventLog
