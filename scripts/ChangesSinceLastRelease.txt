@@ -1934,3 +1934,99 @@ Windows.Win32.Graphics.GdiPlus.GdiplusStartupParams.GdiplusStartupSetPSValue add
 Windows.Win32.Graphics.GdiPlus.GdiplusStartupParams.GdiplusStartupTransparencyMask added
 Windows.Win32.Graphics.GdiPlus.NotificationHookProc added
 Windows.Win32.Graphics.GdiPlus.NotificationUnhookProc added
+# Fixed #1682.
+Windows.Win32.Networking.WinInet.Apis.InternetAlgIdToStringA : ai...UInt32 => ALG_ID
+Windows.Win32.Networking.WinInet.Apis.InternetAlgIdToStringW : ai...UInt32 => ALG_ID
+Windows.Win32.Security.AppLocker.SAFER_CODE_PROPERTIES_V1.HashAlgorithm...System.UInt32 => Windows.Win32.Security.Cryptography.ALG_ID
+Windows.Win32.Security.AppLocker.SAFER_CODE_PROPERTIES_V2.HashAlgorithm...System.UInt32 => Windows.Win32.Security.Cryptography.ALG_ID
+Windows.Win32.Security.AppLocker.SAFER_HASH_IDENTIFICATION.HashAlgorithm...System.UInt32 => Windows.Win32.Security.Cryptography.ALG_ID
+Windows.Win32.Security.AppLocker.SAFER_HASH_IDENTIFICATION2.HashAlgorithm...System.UInt32 => Windows.Win32.Security.Cryptography.ALG_ID
+Windows.Win32.Security.Authentication.Identity.SCHANNEL_CLIENT_SIGNATURE.aiHash...System.UInt32 => Windows.Win32.Security.Cryptography.ALG_ID
+Windows.Win32.Security.Authentication.Identity.SCHANNEL_CRED.palgSupportedAlgs...System.UInt32* => Windows.Win32.Security.Cryptography.ALG_ID*
+Windows.Win32.Security.Authentication.Identity.SecPkgContext_ConnectionInfo.aiCipher...System.UInt32 => Windows.Win32.Security.Cryptography.ALG_ID
+Windows.Win32.Security.Authentication.Identity.SecPkgContext_ConnectionInfo.aiExch...System.UInt32 => Windows.Win32.Security.Cryptography.ALG_ID
+Windows.Win32.Security.Authentication.Identity.SecPkgContext_ConnectionInfo.aiHash...System.UInt32 => Windows.Win32.Security.Cryptography.ALG_ID
+Windows.Win32.Security.Authentication.Identity.SecPkgCred_SupportedAlgs.palgSupportedAlgs...System.UInt32* => Windows.Win32.Security.Cryptography.ALG_ID*
+Windows.Win32.Security.Authentication.Identity.X509Certificate.SignatureAlgorithm...System.UInt32 => Windows.Win32.Security.Cryptography.ALG_ID
+Windows.Win32.Security.Cryptography.ALG_ID added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_3DES added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_3DES_112 added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_AES added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_AES_128 added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_AES_192 added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_AES_256 added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_AGREEDKEY_ANY added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_CYLINK_MEK added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_DES added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_DESX added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_DH_EPHEM added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_DH_SF added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_DSS_SIGN added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_ECDH added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_ECDH_EPHEM added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_ECDSA added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_ECMQV added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_HASH_REPLACE_OWF added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_HMAC added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_HUGHES_MD5 added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_KEA_KEYX added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_MAC added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_MD2 added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_MD4 added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_MD5 added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_NO_SIGN added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_NULLCIPHER added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_PCT1_MASTER added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_RC2 added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_RC4 added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_RC5 added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_RSA_KEYX added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_RSA_SIGN added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_SCHANNEL_ENC_KEY added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_SCHANNEL_MAC_KEY added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_SCHANNEL_MASTER_HASH added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_SEAL added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_SHA added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_SHA_256 added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_SHA_384 added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_SHA_512 added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_SHA1 added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_SKIPJACK added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_SSL2_MASTER added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_SSL3_MASTER added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_SSL3_SHAMD5 added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_TEK added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_THIRDPARTY_CIPHER added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_THIRDPARTY_HASH added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_THIRDPARTY_KEY_EXCHANGE added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_THIRDPARTY_SIGNATURE added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_TLS1_MASTER added
+Windows.Win32.Security.Cryptography.ALG_ID.CALG_TLS1PRF added
+Windows.Win32.Security.Cryptography.Apis.CryptCreateHash : Algid...UInt32 => ALG_ID
+Windows.Win32.Security.Cryptography.Apis.CryptDeriveKey : Algid...UInt32 => ALG_ID
+Windows.Win32.Security.Cryptography.Apis.CryptGenKey : Algid...UInt32 => ALG_ID
+Windows.Win32.Security.Cryptography.Apis.CryptHashCertificate : Algid...UInt32 => ALG_ID
+Windows.Win32.Security.Cryptography.Apis.CryptHashPublicKeyInfo : Algid...UInt32 => ALG_ID
+Windows.Win32.Security.Cryptography.Apis.CryptImportPublicKeyInfoEx : aiKeyAlg...UInt32 => ALG_ID
+Windows.Win32.Security.Cryptography.Apis.SignerTimeStampEx2 : dwAlgId...UInt32 => ALG_ID
+Windows.Win32.Security.Cryptography.CMS_DH_KEY_INFO.Algid...System.UInt32 => Windows.Win32.Security.Cryptography.ALG_ID
+Windows.Win32.Security.Cryptography.CMS_KEY_INFO.Algid...System.UInt32 => Windows.Win32.Security.Cryptography.ALG_ID
+Windows.Win32.Security.Cryptography.CRYPT_OID_INFO._Anonymous_e__Union.Algid...System.UInt32 => Windows.Win32.Security.Cryptography.ALG_ID
+Windows.Win32.Security.Cryptography.HMAC_INFO.HashAlgid...System.UInt32 => Windows.Win32.Security.Cryptography.ALG_ID
+Windows.Win32.Security.Cryptography.PFN_AUTHENTICODE_DIGEST_SIGN_EX_WITHFILEHANDLE.Invoke : digestAlgId...UInt32 => ALG_ID
+Windows.Win32.Security.Cryptography.PFN_AUTHENTICODE_DIGEST_SIGN_EX.Invoke : digestAlgId...UInt32 => ALG_ID
+Windows.Win32.Security.Cryptography.PFN_AUTHENTICODE_DIGEST_SIGN_WITHFILEHANDLE.Invoke : digestAlgId...UInt32 => ALG_ID
+Windows.Win32.Security.Cryptography.PFN_AUTHENTICODE_DIGEST_SIGN.Invoke : digestAlgId...UInt32 => ALG_ID
+Windows.Win32.Security.Cryptography.PROV_ENUMALGS_EX.aiAlgid...System.UInt32 => Windows.Win32.Security.Cryptography.ALG_ID
+Windows.Win32.Security.Cryptography.PROV_ENUMALGS.aiAlgid...System.UInt32 => Windows.Win32.Security.Cryptography.ALG_ID
+Windows.Win32.Security.Cryptography.PUBLICKEYSTRUC.aiKeyAlg...System.UInt32 => Windows.Win32.Security.Cryptography.ALG_ID
+Windows.Win32.Security.Cryptography.SCHANNEL_ALG.Algid...System.UInt32 => Windows.Win32.Security.Cryptography.ALG_ID
+Windows.Win32.Security.Cryptography.SIGNER_SIGNATURE_INFO.algidHash...System.UInt32 => Windows.Win32.Security.Cryptography.ALG_ID
+Windows.Win32.Storage.FileSystem.EFS_KEY_INFO.Algorithm...System.UInt32 => Windows.Win32.Security.Cryptography.ALG_ID
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.CreateDeltaA : HashAlgId...UInt32 => ALG_ID
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.CreateDeltaB : HashAlgId...UInt32 => ALG_ID
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.CreateDeltaW : HashAlgId...UInt32 => ALG_ID
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.GetDeltaSignatureA : HashAlgId...UInt32 => ALG_ID
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.GetDeltaSignatureB : HashAlgId...UInt32 => ALG_ID
+Windows.Win32.System.ApplicationInstallationAndServicing.Apis.GetDeltaSignatureW : HashAlgId...UInt32 => ALG_ID
+Windows.Win32.System.ApplicationInstallationAndServicing.DELTA_HEADER_INFO.TargetHashAlgId...System.UInt32 => Windows.Win32.Security.Cryptography.ALG_ID

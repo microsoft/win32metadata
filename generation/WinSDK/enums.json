@@ -36109,6 +36109,225 @@
         "field": "CD_ulMask"
       }
     ]
+  },
+  {
+    "namespace": "Windows.Win32.Security.Cryptography",
+    "name": "ALG_ID",
+    "members": [
+      {
+        "name": "CALG_MD2",
+        "value": "(ALG_CLASS_HASH | ALG_TYPE_ANY | ALG_SID_MD2)"
+      },
+      {
+        "name": "CALG_MD4",
+        "value": "(ALG_CLASS_HASH | ALG_TYPE_ANY | ALG_SID_MD4)"
+      },
+      {
+        "name": "CALG_MD5",
+        "value": "(ALG_CLASS_HASH | ALG_TYPE_ANY | ALG_SID_MD5)"
+      },
+      {
+        "name": "CALG_SHA",
+        "value": "(ALG_CLASS_HASH | ALG_TYPE_ANY | ALG_SID_SHA)"
+      },
+      {
+        "name": "CALG_SHA1",
+        "value": "(ALG_CLASS_HASH | ALG_TYPE_ANY | ALG_SID_SHA1)"
+      },
+      {
+        "name": "CALG_MAC",
+        "value": "(ALG_CLASS_HASH | ALG_TYPE_ANY | ALG_SID_MAC)"
+      },
+      {
+        "name": "CALG_RSA_SIGN",
+        "value": "(ALG_CLASS_SIGNATURE | ALG_TYPE_RSA | ALG_SID_RSA_ANY)"
+      },
+      {
+        "name": "CALG_DSS_SIGN",
+        "value": "(ALG_CLASS_SIGNATURE | ALG_TYPE_DSS | ALG_SID_DSS_ANY)"
+      },
+      {
+        "name": "CALG_NO_SIGN",
+        "value": "(ALG_CLASS_SIGNATURE | ALG_TYPE_ANY | ALG_SID_ANY)"
+      },
+      {
+        "name": "CALG_RSA_KEYX",
+        "value": "(ALG_CLASS_KEY_EXCHANGE|ALG_TYPE_RSA|ALG_SID_RSA_ANY)"
+      },
+      {
+        "name": "CALG_DES",
+        "value": "(ALG_CLASS_DATA_ENCRYPT|ALG_TYPE_BLOCK|ALG_SID_DES)"
+      },
+      {
+        "name": "CALG_3DES_112",
+        "value": "(ALG_CLASS_DATA_ENCRYPT|ALG_TYPE_BLOCK|ALG_SID_3DES_112)"
+      },
+      {
+        "name": "CALG_3DES",
+        "value": "(ALG_CLASS_DATA_ENCRYPT|ALG_TYPE_BLOCK|ALG_SID_3DES)"
+      },
+      {
+        "name": "CALG_DESX",
+        "value": "(ALG_CLASS_DATA_ENCRYPT|ALG_TYPE_BLOCK|ALG_SID_DESX)"
+      },
+      {
+        "name": "CALG_RC2",
+        "value": "(ALG_CLASS_DATA_ENCRYPT|ALG_TYPE_BLOCK|ALG_SID_RC2)"
+      },
+      {
+        "name": "CALG_RC4",
+        "value": "(ALG_CLASS_DATA_ENCRYPT|ALG_TYPE_STREAM|ALG_SID_RC4)"
+      },
+      {
+        "name": "CALG_SEAL",
+        "value": "(ALG_CLASS_DATA_ENCRYPT|ALG_TYPE_STREAM|ALG_SID_SEAL)"
+      },
+      {
+        "name": "CALG_DH_SF",
+        "value": "(ALG_CLASS_KEY_EXCHANGE|ALG_TYPE_DH|ALG_SID_DH_SANDF)"
+      },
+      {
+        "name": "CALG_DH_EPHEM",
+        "value": "(ALG_CLASS_KEY_EXCHANGE|ALG_TYPE_DH|ALG_SID_DH_EPHEM)"
+      },
+      {
+        "name": "CALG_AGREEDKEY_ANY",
+        "value": "(ALG_CLASS_KEY_EXCHANGE|ALG_TYPE_DH|ALG_SID_AGREED_KEY_ANY)"
+      },
+      {
+        "name": "CALG_KEA_KEYX",
+        "value": "(ALG_CLASS_KEY_EXCHANGE|ALG_TYPE_DH|ALG_SID_KEA)"
+      },
+      {
+        "name": "CALG_HUGHES_MD5",
+        "value": "(ALG_CLASS_KEY_EXCHANGE|ALG_TYPE_ANY|ALG_SID_MD5)"
+      },
+      {
+        "name": "CALG_SKIPJACK",
+        "value": "(ALG_CLASS_DATA_ENCRYPT|ALG_TYPE_BLOCK|ALG_SID_SKIPJACK)"
+      },
+      {
+        "name": "CALG_TEK",
+        "value": "(ALG_CLASS_DATA_ENCRYPT|ALG_TYPE_BLOCK|ALG_SID_TEK)"
+      },
+      {
+        "name": "CALG_CYLINK_MEK",
+        "value": "(ALG_CLASS_DATA_ENCRYPT|ALG_TYPE_BLOCK|ALG_SID_CYLINK_MEK)"
+      },
+      {
+        "name": "CALG_SSL3_SHAMD5",
+        "value": "(ALG_CLASS_HASH | ALG_TYPE_ANY | ALG_SID_SSL3SHAMD5)"
+      },
+      {
+        "name": "CALG_SSL3_MASTER",
+        "value": "(ALG_CLASS_MSG_ENCRYPT|ALG_TYPE_SECURECHANNEL|ALG_SID_SSL3_MASTER)"
+      },
+      {
+        "name": "CALG_SCHANNEL_MASTER_HASH",
+        "value": "(ALG_CLASS_MSG_ENCRYPT|ALG_TYPE_SECURECHANNEL|ALG_SID_SCHANNEL_MASTER_HASH)"
+      },
+      {
+        "name": "CALG_SCHANNEL_MAC_KEY",
+        "value": "(ALG_CLASS_MSG_ENCRYPT|ALG_TYPE_SECURECHANNEL|ALG_SID_SCHANNEL_MAC_KEY)"
+      },
+      {
+        "name": "CALG_SCHANNEL_ENC_KEY",
+        "value": "(ALG_CLASS_MSG_ENCRYPT|ALG_TYPE_SECURECHANNEL|ALG_SID_SCHANNEL_ENC_KEY)"
+      },
+      {
+        "name": "CALG_PCT1_MASTER",
+        "value": "(ALG_CLASS_MSG_ENCRYPT|ALG_TYPE_SECURECHANNEL|ALG_SID_PCT1_MASTER)"
+      },
+      {
+        "name": "CALG_SSL2_MASTER",
+        "value": "(ALG_CLASS_MSG_ENCRYPT|ALG_TYPE_SECURECHANNEL|ALG_SID_SSL2_MASTER)"
+      },
+      {
+        "name": "CALG_TLS1_MASTER",
+        "value": "(ALG_CLASS_MSG_ENCRYPT|ALG_TYPE_SECURECHANNEL|ALG_SID_TLS1_MASTER)"
+      },
+      {
+        "name": "CALG_RC5",
+        "value": "(ALG_CLASS_DATA_ENCRYPT|ALG_TYPE_BLOCK|ALG_SID_RC5)"
+      },
+      {
+        "name": "CALG_HMAC",
+        "value": "(ALG_CLASS_HASH | ALG_TYPE_ANY | ALG_SID_HMAC)"
+      },
+      {
+        "name": "CALG_TLS1PRF",
+        "value": "(ALG_CLASS_HASH | ALG_TYPE_ANY | ALG_SID_TLS1PRF)"
+      },
+      {
+        "name": "CALG_HASH_REPLACE_OWF",
+        "value": "(ALG_CLASS_HASH | ALG_TYPE_ANY | ALG_SID_HASH_REPLACE_OWF)"
+      },
+      {
+        "name": "CALG_AES_128",
+        "value": "(ALG_CLASS_DATA_ENCRYPT|ALG_TYPE_BLOCK|ALG_SID_AES_128)"
+      },
+      {
+        "name": "CALG_AES_192",
+        "value": "(ALG_CLASS_DATA_ENCRYPT|ALG_TYPE_BLOCK|ALG_SID_AES_192)"
+      },
+      {
+        "name": "CALG_AES_256",
+        "value": "(ALG_CLASS_DATA_ENCRYPT|ALG_TYPE_BLOCK|ALG_SID_AES_256)"
+      },
+      {
+        "name": "CALG_AES",
+        "value": "(ALG_CLASS_DATA_ENCRYPT|ALG_TYPE_BLOCK|ALG_SID_AES)"
+      },
+      {
+        "name": "CALG_SHA_256",
+        "value": "(ALG_CLASS_HASH | ALG_TYPE_ANY | ALG_SID_SHA_256)"
+      },
+      {
+        "name": "CALG_SHA_384",
+        "value": "(ALG_CLASS_HASH | ALG_TYPE_ANY | ALG_SID_SHA_384)"
+      },
+      {
+        "name": "CALG_SHA_512",
+        "value": "(ALG_CLASS_HASH | ALG_TYPE_ANY | ALG_SID_SHA_512)"
+      },
+      {
+        "name": "CALG_ECDH",
+        "value": "(ALG_CLASS_KEY_EXCHANGE | ALG_TYPE_DH | ALG_SID_ECDH)"
+      },
+      {
+        "name": "CALG_ECDH_EPHEM",
+        "value": "(ALG_CLASS_KEY_EXCHANGE | ALG_TYPE_ECDH | ALG_SID_ECDH_EPHEM)"
+      },
+      {
+        "name": "CALG_ECMQV",
+        "value": "(ALG_CLASS_KEY_EXCHANGE | ALG_TYPE_ANY | ALG_SID_ECMQV)"
+      },
+      {
+        "name": "CALG_ECDSA",
+        "value": "(ALG_CLASS_SIGNATURE | ALG_TYPE_DSS | ALG_SID_ECDSA)"
+      },
+      {
+        "name": "CALG_NULLCIPHER",
+        "value": "(ALG_CLASS_DATA_ENCRYPT | ALG_TYPE_ANY | 0)"
+      },
+      {
+        "name": "CALG_THIRDPARTY_KEY_EXCHANGE",
+        "value": "(ALG_CLASS_KEY_EXCHANGE | ALG_TYPE_THIRDPARTY | ALG_SID_THIRDPARTY_ANY)"
+      },
+      {
+        "name": "CALG_THIRDPARTY_SIGNATURE",
+        "value": "(ALG_CLASS_SIGNATURE | ALG_TYPE_THIRDPARTY | ALG_SID_THIRDPARTY_ANY)"
+      },
+      {
+        "name": "CALG_THIRDPARTY_CIPHER",
+        "value": "(ALG_CLASS_DATA_ENCRYPT | ALG_TYPE_THIRDPARTY | ALG_SID_THIRDPARTY_ANY)"
+      },
+      {
+        "name": "CALG_THIRDPARTY_HASH",
+        "value": "(ALG_CLASS_HASH | ALG_TYPE_THIRDPARTY | ALG_SID_THIRDPARTY_ANY)"
+      }
+    ],
+    "uses": []
   }
 ]
 }
