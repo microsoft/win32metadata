@@ -35948,6 +35948,22 @@
       {
         "method": "CM_Get_Device_Interface_SizeExW",
         "parameter": "ulFlags"
+      },
+      {
+        "method": "CM_Get_Device_Interface_List_SizeA",
+        "parameter": "ulFlags"
+      },
+      {
+        "method": "CM_Get_Device_Interface_List_SizeW",
+        "parameter": "ulFlags"
+      },
+      {
+        "method": "CM_Get_Device_Interface_List_Size_ExA",
+        "parameter": "ulFlags"
+      },
+      {
+        "method": "CM_Get_Device_Interface_List_Size_ExW",
+        "parameter": "ulFlags"
       }
     ]
   },

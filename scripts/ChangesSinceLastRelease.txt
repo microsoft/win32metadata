@@ -2032,3 +2032,9 @@ Windows.Win32.System.ApplicationInstallationAndServicing.Apis.GetDeltaSignatureW
 Windows.Win32.System.ApplicationInstallationAndServicing.DELTA_HEADER_INFO.TargetHashAlgId...System.UInt32 => Windows.Win32.Security.Cryptography.ALG_ID
 # Fixed #1680.
 Windows.Win32.System.SystemServices.Apis.ALL_PROCESSOR_GROUPS...System.UInt32 => System.UInt16
+# Fixed #1681.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_List_Size_ExA : ulFlags...UInt32 => CM_GET_DEVICE_INTERFACE_LIST_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_List_Size_ExW : ulFlags...UInt32 => CM_GET_DEVICE_INTERFACE_LIST_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_List_SizeA : ulFlags...UInt32 => CM_GET_DEVICE_INTERFACE_LIST_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_List_SizeW : ulFlags...UInt32 => CM_GET_DEVICE_INTERFACE_LIST_FLAGS
+Windows.Win32.System.SystemServices.Apis.ALL_PROCESSOR_GROUPS => Windows.Win32.System.Threading.Apis.ALL_PROCESSOR_GROUPS
