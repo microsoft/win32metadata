@@ -36344,6 +36344,42 @@
       }
     ],
     "uses": []
+  },
+  {
+    "name": "CM_LOG_CONF",
+    "members": [
+      {
+        "name": "BASIC_LOG_CONF"
+      },
+      {
+        "name": "FILTERED_LOG_CONF"
+      },
+      {
+        "name": "ALLOC_LOG_CONF"
+      },
+      {
+        "name": "BOOT_LOG_CONF"
+      },
+      {
+        "name": "FORCED_LOG_CONF"
+      },
+      {
+        "name": "OVERRIDE_LOG_CONF"
+      },
+      {
+        "name": "NUM_LOG_CONF"
+      }
+    ],
+    "uses": [
+      {
+        "method": "CM_Get_First_Log_Conf",
+        "parameter": "ulFlags"
+      },
+      {
+        "method": "CM_Get_First_Log_Conf_Ex",
+        "parameter": "ulFlags"
+      }
+    ]
   }
 ]
 }

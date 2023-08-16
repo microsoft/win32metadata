@@ -2038,3 +2038,23 @@ Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_L
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_List_Size_ExW : ulFlags...UInt32 => CM_GET_DEVICE_INTERFACE_LIST_FLAGS
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_List_SizeA : ulFlags...UInt32 => CM_GET_DEVICE_INTERFACE_LIST_FLAGS
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_List_SizeW : ulFlags...UInt32 => CM_GET_DEVICE_INTERFACE_LIST_FLAGS
+# Fixed #1649.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.ALLOC_LOG_CONF removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.BASIC_LOG_CONF removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.BOOT_LOG_CONF removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_First_Log_Conf : ulFlags...UInt32 => CM_LOG_CONF
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_First_Log_Conf_Ex : ulFlags...UInt32 => CM_LOG_CONF
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Next_Log_Conf : ulFlags : [In] => [In,Reserved]
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Next_Log_Conf_Ex : ulFlags : [In] => [In,Reserved]
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.FILTERED_LOG_CONF removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.FORCED_LOG_CONF removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.NUM_LOG_CONF removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.OVERRIDE_LOG_CONF removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.CM_LOG_CONF added
+Windows.Win32.Devices.DeviceAndDriverInstallation.CM_LOG_CONF.ALLOC_LOG_CONF added
+Windows.Win32.Devices.DeviceAndDriverInstallation.CM_LOG_CONF.BASIC_LOG_CONF added
+Windows.Win32.Devices.DeviceAndDriverInstallation.CM_LOG_CONF.BOOT_LOG_CONF added
+Windows.Win32.Devices.DeviceAndDriverInstallation.CM_LOG_CONF.FILTERED_LOG_CONF added
+Windows.Win32.Devices.DeviceAndDriverInstallation.CM_LOG_CONF.FORCED_LOG_CONF added
+Windows.Win32.Devices.DeviceAndDriverInstallation.CM_LOG_CONF.NUM_LOG_CONF added
+Windows.Win32.Devices.DeviceAndDriverInstallation.CM_LOG_CONF.OVERRIDE_LOG_CONF added
