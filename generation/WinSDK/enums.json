@@ -36380,6 +36380,47 @@
         "parameter": "ulFlags"
       }
     ]
+  },
+  {
+    "name": "CM_DEVNODE_STATUS_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DM_",
+      "header": "cfg.h"
+    },
+    "members": [
+      {
+        "name": "DN_CHANGEABLE_FLAGS",
+        "value": "(DN_NOT_FIRST_TIME+DN_HARDWARE_ENUM+DN_HAS_MARK+DN_DISABLEABLE+DN_REMOVABLE+DN_MF_CHILD+DN_MF_PARENT+DN_NOT_FIRST_TIMEE+DN_STOP_FREE_RES+DN_REBAL_CANDIDATE+DN_NT_ENUMERATOR+DN_NT_DRIVER+DN_SILENT_INSTALL+DN_NO_SHOW_IN_DM)"
+      }
+    ],
+    "uses": [
+      {
+        "method": "CM_Get_DevNode_Status",
+        "parameter": "pulStatus"
+      },
+      {
+        "method": "CM_Get_DevNode_Status_Ex",
+        "parameter": "pulStatus"
+      }
+    ]
+  },
+  {
+    "name": "CM_PROB",
+    "autoPopulate": {
+      "filter": "CM_PROB_",
+      "header": "cfg.h"
+    },
+    "uses": [
+      {
+        "method": "CM_Get_DevNode_Status",
+        "parameter": "pulProblemNumber"
+      },
+      {
+        "method": "CM_Get_DevNode_Status_Ex",
+        "parameter": "pulProblemNumber"
+      }
+    ]
   }
 ]
 }
