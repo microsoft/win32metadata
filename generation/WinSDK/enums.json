@@ -8984,6 +8984,14 @@
         "parameter": "dwServiceType"
       },
       {
+        "method": "ChangeServiceConfigA",
+        "parameter": "dwServiceType"
+      },
+      {
+        "method": "ChangeServiceConfigW",
+        "parameter": "dwServiceType"
+      },
+      {
         "struct": "SERVICE_STATUS",
         "field": "dwServiceType"
       },

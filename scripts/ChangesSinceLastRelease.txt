@@ -498,3 +498,10 @@ Windows.Win32.UI.WindowsAndMessaging.Apis.TrackPopupMenu : [DllImport(USER32.dll
 Windows.Win32.UI.WindowsAndMessaging.Apis.TrackPopupMenuEx : [DllImport(USER32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-trackpopupmenuex),SupportedOSPlatform(windows5.0)] => [CanReturnMultipleSuccessValues,DllImport(USER32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-trackpopupmenuex),SupportedOSPlatform(windows5.0)]
 # Fixed #1661.
 Windows.Win32.Media.DirectShow.IAMStreamConfig.GetStreamCaps : pSCC : [Out] => [NativeArrayInfo,Out]
+# Fixed #1629.
+Windows.Win32.Foundation.Metadata.AssociatedConstantAttribute added
+Windows.Win32.System.Services.Apis.ChangeServiceConfigA : dwServiceType...UInt32 => ENUM_SERVICE_TYPE
+Windows.Win32.System.Services.Apis.ChangeServiceConfigW : dwServiceType...UInt32 => ENUM_SERVICE_TYPE
+Windows.Win32.System.Services.ENUM_SERVICE_TYPE : [Flags] => [AssociatedConstant(SERVICE_NO_CHANGE),Flags]
+Windows.Win32.System.Services.SERVICE_ERROR :  => [AssociatedConstant(SERVICE_NO_CHANGE)]
+Windows.Win32.System.Services.SERVICE_START_TYPE :  => [AssociatedConstant(SERVICE_NO_CHANGE)]

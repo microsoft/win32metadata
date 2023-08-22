@@ -25,6 +25,15 @@ public class AnsiAttribute : Attribute
     }
 }
 
+
+[AttributeUsage(AttributeTargets.Enum, AllowMultiple = true)]
+public class AssociatedConstantAttribute : Attribute
+{
+    public AssociatedConstantAttribute(string Name)
+    {
+    }
+}
+
 public class AssociatedEnumAttribute : Attribute
 {
     public AssociatedEnumAttribute(string Name)
