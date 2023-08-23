@@ -36494,6 +36494,42 @@
         "parameter": "dwOperationFlags"
       }
     ]
-  }
+  },
+  {
+    "namespace": "Windows.Win32.NetworkManagement.WindowsFilteringPlatform",
+    "name": "FWP_ACTION_TYPE",
+    "members": [
+      {
+        "name": "FWP_ACTION_BLOCK",
+        "value": "(0x00000001 | FWP_ACTION_FLAG_TERMINATING)"
+      },
+      {
+        "name": "FWP_ACTION_PERMIT",
+        "value": "(0x00000002 | FWP_ACTION_FLAG_TERMINATING)"
+      },
+      {
+        "name": "FWP_ACTION_CALLOUT_TERMINATING",
+        "value": "(0x00000003 | FWP_ACTION_FLAG_CALLOUT | FWP_ACTION_FLAG_TERMINATING)"
+      },
+      {
+        "name": "FWP_ACTION_CALLOUT_INSPECTION",
+        "value": "(0x00000004 | FWP_ACTION_FLAG_CALLOUT | FWP_ACTION_FLAG_NON_TERMINATING)"
+      },
+      {
+        "name": "FWP_ACTION_CALLOUT_UNKNOWN",
+        "value": "(0x00000005 | FWP_ACTION_FLAG_CALLOUT)"
+      },
+      {
+        "name": "FWP_ACTION_CONTINUE",
+        "value": "(0x00000006 | FWP_ACTION_FLAG_NON_TERMINATING)"
+      },
+      {
+        "name": "FWP_ACTION_NONE"
+      },
+      {
+        "name": "FWP_ACTION_NONE_NO_MATCH"
+      }
+    ]
+  },
 ]
 }

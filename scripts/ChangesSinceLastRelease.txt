@@ -573,3 +573,16 @@ Windows.Win32.UI.Shell.FILEOPERATION_FLAGS.FOFX_RECYCLEONDELETE added
 Windows.Win32.UI.Shell.FILEOPERATION_FLAGS.FOFX_REQUIREELEVATION added
 Windows.Win32.UI.Shell.FILEOPERATION_FLAGS.FOFX_SHOWELEVATIONPROMPT added
 Windows.Win32.UI.Shell.IFileOperation.SetOperationFlags : dwOperationFlags...UInt32 => FILEOPERATION_FLAGS
+# Fixed #1688.
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FWP_ACTION_NONE removed
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FWP_ACTION_NONE_NO_MATCH removed
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWP_ACTION_TYPE added
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWP_ACTION_TYPE.FWP_ACTION_BLOCK added
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWP_ACTION_TYPE.FWP_ACTION_CALLOUT_INSPECTION added
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWP_ACTION_TYPE.FWP_ACTION_CALLOUT_TERMINATING added
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWP_ACTION_TYPE.FWP_ACTION_CALLOUT_UNKNOWN added
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWP_ACTION_TYPE.FWP_ACTION_CONTINUE added
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWP_ACTION_TYPE.FWP_ACTION_NONE added
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWP_ACTION_TYPE.FWP_ACTION_NONE_NO_MATCH added
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWP_ACTION_TYPE.FWP_ACTION_PERMIT added
+Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWPM_ACTION0.type...System.UInt32 => Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWP_ACTION_TYPE
