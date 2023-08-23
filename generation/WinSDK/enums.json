@@ -36429,6 +36429,71 @@
         "parameter": "pulProblemNumber"
       }
     ]
+  },
+  {
+    "name": "FILEOPERATION_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "FOF_",
+      "header": "shellapi.h"
+    },
+    "members": [
+      {
+        "name": "FOFX_NOSKIPJUNCTIONS"
+      },
+      {
+        "name": "FOFX_PREFERHARDLINK"
+      },
+      {
+        "name": "FOFX_SHOWELEVATIONPROMPT"
+      },
+      {
+        "name": "FOFX_RECYCLEONDELETE"
+      },
+      {
+        "name": "FOFX_EARLYFAILURE"
+      },
+      {
+        "name": "FOFX_PRESERVEFILEEXTENSIONS"
+      },
+      {
+        "name": "FOFX_KEEPNEWERFILE"
+      },
+      {
+        "name": "FOFX_NOCOPYHOOKS"
+      },
+      {
+        "name": "FOFX_NOMINIMIZEBOX"
+      },
+      {
+        "name": "FOFX_MOVEACLSACROSSVOLUMES"
+      },
+      {
+        "name": "FOFX_DONTDISPLAYSOURCEPATH"
+      },
+      {
+        "name": "FOFX_DONTDISPLAYDESTPATH"
+      },
+      {
+        "name": "FOFX_REQUIREELEVATION"
+      },
+      {
+        "name": "FOFX_ADDUNDORECORD"
+      },
+      {
+        "name": "FOFX_COPYASDOWNLOAD"
+      },
+      {
+        "name": "FOFX_DONTDISPLAYLOCATIONS"
+      }
+    ],
+    "uses": [
+      {
+        "interface": "IFileOperation",
+        "method": "SetOperationFlags",
+        "parameter": "dwOperationFlags"
+      }
+    ]
   }
 ]
 }
