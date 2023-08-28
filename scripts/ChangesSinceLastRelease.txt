@@ -586,3 +586,5 @@ Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWP_ACTION_TYPE.FWP_ACT
 Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWP_ACTION_TYPE.FWP_ACTION_NONE_NO_MATCH added
 Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWP_ACTION_TYPE.FWP_ACTION_PERMIT added
 Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWPM_ACTION0.type...System.UInt32 => Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWP_ACTION_TYPE
+# Fixed #1689.
+Windows.Win32.UI.Input.KeyboardAndMouse.MOUSEINPUT.mouseData...System.Int32 => System.UInt32
