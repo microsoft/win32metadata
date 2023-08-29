@@ -588,3 +588,33 @@ Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWP_ACTION_TYPE.FWP_ACT
 Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWPM_ACTION0.type...System.UInt32 => Windows.Win32.NetworkManagement.WindowsFilteringPlatform.FWP_ACTION_TYPE
 # Fixed #1689.
 Windows.Win32.UI.Input.KeyboardAndMouse.MOUSEINPUT.mouseData...System.Int32 => System.UInt32
+# Initial support for UCHAR constants
+Windows.Win32.Devices.BiometricFramework.Apis.WINBIO_ANSI_381_IMG_BIT_PACKED added
+Windows.Win32.Devices.BiometricFramework.Apis.WINBIO_ANSI_381_IMG_COMPRESSED_JPEG added
+Windows.Win32.Devices.BiometricFramework.Apis.WINBIO_ANSI_381_IMG_COMPRESSED_JPEG2000 added
+Windows.Win32.Devices.BiometricFramework.Apis.WINBIO_ANSI_381_IMG_COMPRESSED_PNG added
+Windows.Win32.Devices.BiometricFramework.Apis.WINBIO_ANSI_381_IMG_COMPRESSED_WSQ added
+Windows.Win32.Devices.BiometricFramework.Apis.WINBIO_ANSI_381_IMG_UNCOMPRESSED added
+Windows.Win32.Devices.BiometricFramework.Apis.WINBIO_ANSI_381_IMP_TYPE_LATENT added
+Windows.Win32.Devices.BiometricFramework.Apis.WINBIO_ANSI_381_IMP_TYPE_LIVE_SCAN_CONTACTLESS added
+Windows.Win32.Devices.BiometricFramework.Apis.WINBIO_ANSI_381_IMP_TYPE_LIVE_SCAN_PLAIN added
+Windows.Win32.Devices.BiometricFramework.Apis.WINBIO_ANSI_381_IMP_TYPE_LIVE_SCAN_ROLLED added
+Windows.Win32.Devices.BiometricFramework.Apis.WINBIO_ANSI_381_IMP_TYPE_NONLIVE_SCAN_PLAIN added
+Windows.Win32.Devices.BiometricFramework.Apis.WINBIO_ANSI_381_IMP_TYPE_NONLIVE_SCAN_ROLLED added
+Windows.Win32.Devices.BiometricFramework.Apis.WINBIO_ANSI_381_IMP_TYPE_SWIPE added
+# Additional UCHAR constants
+Windows.Win32.Devices.BiometricFramework.Apis.WINBIO_ANSI_381_PIXELS_PER_CM added
+Windows.Win32.Devices.BiometricFramework.Apis.WINBIO_ANSI_381_PIXELS_PER_INCH added
+Windows.Win32.Devices.BiometricFramework.Apis.WINBIO_DATA_FLAG_INTEGRITY added
+Windows.Win32.Devices.BiometricFramework.Apis.WINBIO_DATA_FLAG_INTERMEDIATE added
+Windows.Win32.Devices.BiometricFramework.Apis.WINBIO_DATA_FLAG_OPTION_MASK_PRESENT added
+Windows.Win32.Devices.BiometricFramework.Apis.WINBIO_DATA_FLAG_PRIVACY added
+Windows.Win32.Devices.BiometricFramework.Apis.WINBIO_DATA_FLAG_PROCESSED added
+Windows.Win32.Devices.BiometricFramework.Apis.WINBIO_DATA_FLAG_RAW added
+Windows.Win32.Devices.BiometricFramework.Apis.WINBIO_DATA_FLAG_SIGNED added
+Windows.Win32.Devices.SerialCommunication.Apis.SERIAL_LSRMST_ESCAPE added
+Windows.Win32.Devices.SerialCommunication.Apis.SERIAL_LSRMST_LSR_DATA added
+Windows.Win32.Devices.SerialCommunication.Apis.SERIAL_LSRMST_LSR_NODATA added
+Windows.Win32.Devices.SerialCommunication.Apis.SERIAL_LSRMST_MST added
+Windows.Win32.Networking.WinSock.Apis.TCP_INITIAL_RTO_NO_SYN_RETRANSMISSIONS added
+Windows.Win32.Networking.WinSock.Apis.TCP_INITIAL_RTO_UNSPECIFIED_MAX_SYN_RETRANSMISSIONS added
