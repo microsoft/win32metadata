@@ -36116,25 +36116,6 @@
     ]
   },
   {
-    "name": "CM_CDMASK",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "CM_CDMASK_",
-      "header": "cfgmgr32.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "CONFLICT_DETAILS_A",
-        "field": "CD_ulMask"
-      },
-      {
-        "struct": "CONFLICT_DETAILS_W",
-        "field": "CD_ulMask"
-      }
-    ]
-  },
-  {
     "namespace": "Windows.Win32.Security.Cryptography",
     "name": "ALG_ID",
     "members": [
@@ -36554,6 +36535,44 @@
       {
         "method": "SetupInstallServicesFromInfSectionExW",
         "parameter": "Flags"
+      }
+    ]
+  },
+  {
+    "name": "CM_CDMASK",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "CM_CDMASK_",
+      "header": "cfgmgr32.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "CONFLICT_DETAILS_A",
+        "field": "CD_ulMask"
+      },
+      {
+        "struct": "CONFLICT_DETAILS_W",
+        "field": "CD_ulMask"
+      }
+    ]
+  },
+  {
+    "name": "CM_CDFLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "CM_CDFLAGS_",
+      "header": "cfgmgr32.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "CONFLICT_DETAILS_A",
+        "field": "CD_ulFlags"
+      },
+      {
+        "struct": "CONFLICT_DETAILS_W",
+        "field": "CD_ulFlags"
       }
     ]
   }

@@ -660,3 +660,13 @@ Windows.Win32.Devices.DeviceAndDriverInstallation.SPSVCINST_FLAGS.SPSVCINST_STAR
 Windows.Win32.Devices.DeviceAndDriverInstallation.SPSVCINST_FLAGS.SPSVCINST_STOPSERVICE added
 Windows.Win32.Devices.DeviceAndDriverInstallation.SPSVCINST_FLAGS.SPSVCINST_TAGTOFRONT added
 Windows.Win32.Devices.DeviceAndDriverInstallation.SPSVCINST_FLAGS.SPSVCINST_UNIQUE_NAME added
+# Fixed #1646.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_CDFLAGS_DRIVER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_CDFLAGS_RESERVED removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_CDFLAGS_ROOT_OWNED removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.CM_CDFLAGS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.CM_CDFLAGS.CM_CDFLAGS_DRIVER added
+Windows.Win32.Devices.DeviceAndDriverInstallation.CM_CDFLAGS.CM_CDFLAGS_RESERVED added
+Windows.Win32.Devices.DeviceAndDriverInstallation.CM_CDFLAGS.CM_CDFLAGS_ROOT_OWNED added
+Windows.Win32.Devices.DeviceAndDriverInstallation.CONFLICT_DETAILS_A.CD_ulFlags...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.CM_CDFLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.CONFLICT_DETAILS_W.CD_ulFlags...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.CM_CDFLAGS
