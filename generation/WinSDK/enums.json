@@ -36531,5 +36531,31 @@
       }
     ]
   },
+  {
+    "name": "SPSVCINST_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "SPSVCINST_",
+      "header": "SetupAPI.h"
+    },
+    "uses": [
+      {
+        "method": "SetupInstallServicesFromInfSectionA",
+        "parameter": "Flags"
+      },
+      {
+        "method": "SetupInstallServicesFromInfSectionW",
+        "parameter": "Flags"
+      },
+      {
+        "method": "SetupInstallServicesFromInfSectionExA",
+        "parameter": "Flags"
+      },
+      {
+        "method": "SetupInstallServicesFromInfSectionExW",
+        "parameter": "Flags"
+      }
+    ]
+  }
 ]
 }
