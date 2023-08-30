@@ -36575,6 +36575,126 @@
         "field": "CD_ulFlags"
       }
     ]
+  },
+  {
+    "namespace": "Windows.Win32.NetworkManagement.WiFi",
+    "name": "DEVPROP_PCIROOTBUS_SECONDARYINTERFACE",
+    "autoPopulate": {
+      "filter": "DevProp_PciRootBus_SecondaryInterface_",
+      "header": "pciprop.h"
+    }
+  },
+  {
+    "namespace": "Windows.Win32.NetworkManagement.WiFi",
+    "name": "DEVPROP_PCIROOTBUS_CURRENTSPEEDANDMODE",
+    "autoPopulate": {
+      "filter": "DevProp_PciRootBus_CurrentSpeedAndMode_",
+      "header": "pciprop.h"
+    }
+  },
+  {
+    "namespace": "Windows.Win32.NetworkManagement.WiFi",
+    "name": "DEVPROP_PCIROOTBUS_SUPPORTEDSPEEDSANDMODES",
+    "autoPopulate": {
+      "filter": "DevProp_PciRootBus_SupportedSpeedsAndModes_",
+      "header": "pciprop.h"
+    }
+  },
+  {
+    "namespace": "Windows.Win32.NetworkManagement.WiFi",
+    "name": "DEVPROP_PCIROOTBUS_BUSWIDTH",
+    "autoPopulate": {
+      "filter": "DevProp_PciRootBus_BusWidth_",
+      "header": "pciprop.h"
+    }
+  },
+  {
+    "namespace": "Windows.Win32.NetworkManagement.WiFi",
+    "name": "DEVPROP_PCIDEVICE_DEVICEBRIDGETYPE",
+    "autoPopulate": {
+      "filter": "DevProp_PciDevice_DeviceType_|DevProp_PciDevice_BridgeType_",
+      "header": "pciprop.h"
+    }
+  },
+  {
+    "namespace": "Windows.Win32.NetworkManagement.WiFi",
+    "name": "DEVPROP_PCIDEVICE_CURRENTSPEEDANDMODE",
+    "autoPopulate": {
+      "filter": "DevProp_PciDevice_CurrentSpeedAndMode_",
+      "header": "pciprop.h"
+    }
+  },
+  {
+    "namespace": "Windows.Win32.NetworkManagement.WiFi",
+    "name": "DEVPROP_PCIEXPRESSDEVICE_PAYLOADORREQUESTSIZE",
+    "autoPopulate": {
+      "filter": "DevProp_PciExpressDevice_PayloadOrRequestSize_",
+      "header": "pciprop.h"
+    }
+  },
+  {
+    "namespace": "Windows.Win32.NetworkManagement.WiFi",
+    "name": "DEVPROP_PCIEXPRESSDEVICE_LINKSPEED",
+    "autoPopulate": {
+      "filter": "DevProp_PciExpressDevice_LinkSpeed_",
+      "header": "pciprop.h"
+    }
+  },
+  {
+    "namespace": "Windows.Win32.NetworkManagement.WiFi",
+    "name": "DEVPROP_PCIEXPRESSDEVICE_LINKWIDTH",
+    "autoPopulate": {
+      "filter": "DevProp_PciExpressDevice_LinkWidth_",
+      "header": "pciprop.h"
+    }
+  },
+  {
+    "namespace": "Windows.Win32.NetworkManagement.WiFi",
+    "name": "DEVPROP_PCIEXPRESSDEVICE_SPEC_VERSION",
+    "autoPopulate": {
+      "filter": "DevProp_PciExpressDevice_Spec_Version_",
+      "header": "pciprop.h"
+    }
+  },
+  {
+    "namespace": "Windows.Win32.NetworkManagement.WiFi",
+    "name": "DEVPROP_PCIDEVICE_INTERRUPTTYPE",
+    "autoPopulate": {
+      "filter": "DevProp_PciDevice_InterruptType_",
+      "header": "pciprop.h"
+    }
+  },
+  {
+    "namespace": "Windows.Win32.NetworkManagement.WiFi",
+    "name": "DEVPROP_PCIDEVICE_SRIOVSUPPORT",
+    "autoPopulate": {
+      "filter": "DevProp_PciDevice_SriovSupport_",
+      "header": "pciprop.h"
+    }
+  },
+  {
+    "namespace": "Windows.Win32.NetworkManagement.WiFi",
+    "name": "DEVPROP_PCIDEVICE_ACSSUPPORT",
+    "autoPopulate": {
+      "filter": "DevProp_PciDevice_AcsSupport_",
+      "header": "pciprop.h"
+    }
+  },
+  {
+    "namespace": "Windows.Win32.NetworkManagement.WiFi",
+    "name": "DEVPROP_PCIDEVICE_ACSCOMPATIBLEUPHIERARCHY",
+    "autoPopulate": {
+      "filter": "DevProp_PciDevice_AcsCompatibleUpHierarchy_",
+      "header": "pciprop.h"
+    }
+  },
+  {
+    "namespace": "Windows.Win32.NetworkManagement.WiFi",
+    "name": "DEVPROP_PCIDEVICE_SUPPORTEDSPEEDSANDMODE",
+    "autoPopulate": {
+      "filter": "DevProp_PciDevice_SupportedSpeedsAndMode_",
+      "header": "pciprop.h"
+    }
   }
 ]
 }
