@@ -10675,6 +10675,126 @@
       {
         "method": "NCryptGetProperty",
         "parameter": "dwFlags"
+      },
+      {
+        "method": "ConvertSecurityDescriptorToStringSecurityDescriptorA",
+        "parameter": "SecurityInformation"
+      },
+      {
+        "method": "ConvertSecurityDescriptorToStringSecurityDescriptorW",
+        "parameter": "SecurityInformation"
+      },
+      {
+        "method": "TreeResetNamedSecurityInfoA",
+        "parameter": "SecurityInfo"
+      },
+      {
+        "method": "TreeResetNamedSecurityInfoW",
+        "parameter": "SecurityInfo"
+      },
+      {
+        "method": "TreeSetNamedSecurityInfoA",
+        "parameter": "SecurityInfo"
+      },
+      {
+        "method": "TreeSetNamedSecurityInfoW",
+        "parameter": "SecurityInfo"
+      },
+      {
+        "method": "ClusterRegSetKeySecurityEx",
+        "parameter": "SecurityInformation"
+      },
+      {
+        "method": "MQSetQueueSecurity",
+        "parameter": "SecurityInformation"
+      },
+      {
+        "method": "LsaQuerySecurityObject",
+        "parameter": "SecurityInformation"
+      },
+      {
+        "method": "SetNtmsObjectSecurity",
+        "parameter": "SecurityInformation"
+      },
+      {
+        "method": "AuditSetSecurity",
+        "parameter": "SecurityInformation"
+      },
+      {
+        "method": "AuditQuerySecurity",
+        "parameter": "SecurityInformation"
+      },
+      {
+        "method": "GetPrivateObjectSecurity",
+        "parameter": "SecurityInformation"
+      },
+      {
+        "method": "QuerySecurityAccessMask",
+        "parameter": "SecurityInformation"
+      },
+      {
+        "method": "SetFileSecurityW",
+        "parameter": "SecurityInformation"
+      },
+      {
+        "method": "SetKernelObjectSecurity",
+        "parameter": "SecurityInformation"
+      },
+      {
+        "method": "SetPrivateObjectSecurity",
+        "parameter": "SecurityInformation"
+      },
+      {
+        "method": "SetPrivateObjectSecurityEx",
+        "parameter": "SecurityInformation"
+      },
+      {
+        "method": "SetSecurityAccessMask",
+        "parameter": "SecurityInformation"
+      },
+      {
+        "method": "SetFileSecurityA",
+        "parameter": "SecurityInformation"
+      },
+      {
+        "method": "RegGetKeySecurity",
+        "parameter": "SecurityInformation"
+      },
+      {
+        "method": "RegSetKeySecurity",
+        "parameter": "SecurityInformation"
+      },
+      {
+        "method": "WTSSetListenerSecurityW",
+        "parameter": "SecurityInformation"
+      },
+      {
+        "method": "WTSSetListenerSecurityA",
+        "parameter": "SecurityInformation"
+      },
+      {
+        "method": "WTSGetListenerSecurityW",
+        "parameter": "SecurityInformation"
+      },
+      {
+        "method": "WTSGetListenerSecurityA",
+        "parameter": "SecurityInformation"
+      },
+      {
+        "method": "SetSecurityInfo",
+        "parameter": "SecurityInfo"
+      },
+      {
+        "method": "GetSecurityInfo",
+        "parameter": "SecurityInfo"
+      },
+      {
+        "method": "GetInheritanceSourceA",
+        "parameter": "SecurityInfo"
+      },
+      {
+        "method": "GetInheritanceSourceW",
+        "parameter": "SecurityInfo"
       }
     ]
   },
