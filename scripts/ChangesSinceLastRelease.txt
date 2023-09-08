@@ -863,3 +863,47 @@ Windows.Win32.NetworkManagement.WiFi.DEVPROP_PCIROOTBUS_SUPPORTEDSPEEDSANDMODES.
 Windows.Win32.NetworkManagement.WiFi.DEVPROP_PCIROOTBUS_SUPPORTEDSPEEDSANDMODES.DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_266Mhz added
 Windows.Win32.NetworkManagement.WiFi.DEVPROP_PCIROOTBUS_SUPPORTEDSPEEDSANDMODES.DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_533Mhz added
 Windows.Win32.NetworkManagement.WiFi.DEVPROP_PCIROOTBUS_SUPPORTEDSPEEDSANDMODES.DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_66Mhz added
+# Fixed #1695.
+Windows.Win32.NetworkManagement.WNet.Apis.WNetAddConnection2A : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetAddConnection2W : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetAddConnection3A : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetAddConnection3W : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetAddConnection4A : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetAddConnection4W : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetAddConnectionA : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetAddConnectionW : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetCancelConnection2A : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetCancelConnection2W : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetCancelConnectionA : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetCancelConnectionW : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetCloseEnum : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetConnectionDialog : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetConnectionDialog1A : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetConnectionDialog1W : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetDisconnectDialog : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetDisconnectDialog1A : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetDisconnectDialog1W : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetEnumResourceA : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetEnumResourceW : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetGetConnectionA : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetGetConnectionW : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetGetLastErrorA : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetGetLastErrorW : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetGetNetworkInformationA : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetGetNetworkInformationW : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetGetProviderNameA : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetGetProviderNameW : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetGetResourceInformationA : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetGetResourceInformationW : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetGetResourceParentA : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetGetResourceParentW : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetGetUniversalNameA : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetGetUniversalNameW : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetGetUserA : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetGetUserW : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetOpenEnumA : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetOpenEnumW : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetUseConnection4A : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetUseConnection4W : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetUseConnectionA : return...UInt32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.WNet.Apis.WNetUseConnectionW : return...UInt32 => WIN32_ERROR
