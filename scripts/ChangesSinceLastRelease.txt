@@ -907,3 +907,5 @@ Windows.Win32.NetworkManagement.WNet.Apis.WNetUseConnection4A : return...UInt32 
 Windows.Win32.NetworkManagement.WNet.Apis.WNetUseConnection4W : return...UInt32 => WIN32_ERROR
 Windows.Win32.NetworkManagement.WNet.Apis.WNetUseConnectionA : return...UInt32 => WIN32_ERROR
 Windows.Win32.NetworkManagement.WNet.Apis.WNetUseConnectionW : return...UInt32 => WIN32_ERROR
+# Fixed #1693.
+Windows.Win32.Storage.Jet.Apis.JET_errSuccess...System.UInt32 => System.Int32
