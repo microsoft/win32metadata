@@ -23294,25 +23294,15 @@
     ]
   },
   {
+    "namespace": "Windows.Win32.UI.Controls",
     "name": "LVITEMA_GROUP_ID",
-    "members": [
-      {
-        "name": "I_GROUPIDCALLBACK"
-      },
-      {
-        "name": "I_GROUPIDNONE"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "LVITEMA",
-        "field": "iGroupId"
-      },
-      {
-        "struct": "LVITEMW",
-        "field": "iGroupId"
-      }
-    ]
+    "type": "int",
+    "autoPopulate": {
+      "filter": "I_GROUPID",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": []
   },
   {
     "name": "SCHANNEL_CRED_FLAGS",
