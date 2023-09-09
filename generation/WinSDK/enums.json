@@ -30950,7 +30950,12 @@
       "filter": "LVIM_",
       "header": "commctrl.h"
     },
-    "members": [],
+    "members": [
+      {
+        "name": "LVIM_BEFORE",
+        "value" : "0x0000"
+      }
+    ],
     "uses": [
       {
         "struct": "LVINSERTMARK",
