@@ -938,6 +938,8 @@ Windows.Win32.System.RemoteDesktop.Apis.WTSGetListenerSecurityA : SecurityInform
 Windows.Win32.System.RemoteDesktop.Apis.WTSGetListenerSecurityW : SecurityInformation...UInt32 => OBJECT_SECURITY_INFORMATION
 Windows.Win32.System.RemoteDesktop.Apis.WTSSetListenerSecurityA : SecurityInformation...UInt32 => OBJECT_SECURITY_INFORMATION
 Windows.Win32.System.RemoteDesktop.Apis.WTSSetListenerSecurityW : SecurityInformation...UInt32 => OBJECT_SECURITY_INFORMATION
+# Added hexidecimal lookup to scrapper for HWND_ constants
+Windows.Win32.UI.WindowsAndMessaging.Apis.HWND_BROADCAST added
 # Added missing values to LVGROUP_MASK enum
 Windows.Win32.UI.Controls.Apis.LVGF_ALIGN removed
 Windows.Win32.UI.Controls.Apis.LVGF_DESCRIPTIONBOTTOM removed
