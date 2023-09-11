@@ -30944,21 +30944,6 @@
     ]
   },
   {
-    "name": "LIST_VIEW_INSERT_MARK_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "LVIM_",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "LVINSERTMARK",
-        "field": "dwFlags"
-      }
-    ]
-  },
-  {
     "name": "LIST_VIEW_ITEM_COLUMN_FORMAT_FLAGS",
     "type": "int",
     "flags": true,
