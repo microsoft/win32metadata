@@ -25852,20 +25852,11 @@
   {
     "name": "LVGROUP_MASK",
     "flags": true,
-    "members": [
-      {
-        "name": "LVGF_NONE"
-      },
-      {
-        "name": "LVGF_HEADER"
-      },
-      {
-        "name": "LVGF_FOOTER"
-      },
-      {
-        "name": "LVGF_STATE"
-      }
-    ],
+    "autoPopulate": {
+      "filter": "LVGF_",
+      "header": "commctrl.h"
+    },
+    "members": [],
     "uses": [
       {
         "struct": "LVGROUP",
