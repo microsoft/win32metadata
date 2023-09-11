@@ -941,3 +941,35 @@ Windows.Win32.System.RemoteDesktop.Apis.WTSSetListenerSecurityW : SecurityInform
 # iGroupId is not limited to the enum
 Windows.Win32.UI.Controls.LVITEMA.iGroupId...Windows.Win32.UI.Controls.LVITEMA_GROUP_ID => System.Int32
 Windows.Win32.UI.Controls.LVITEMW.iGroupId...Windows.Win32.UI.Controls.LVITEMA_GROUP_ID => System.Int32
+# Added hexidecimal lookup to scrapper for HWND_ constants
+Windows.Win32.UI.WindowsAndMessaging.Apis.HWND_BROADCAST added
+# Added missing values to LVGROUP_MASK enum
+Windows.Win32.UI.Controls.Apis.LVGF_ALIGN removed
+Windows.Win32.UI.Controls.Apis.LVGF_DESCRIPTIONBOTTOM removed
+Windows.Win32.UI.Controls.Apis.LVGF_DESCRIPTIONTOP removed
+Windows.Win32.UI.Controls.Apis.LVGF_EXTENDEDIMAGE removed
+Windows.Win32.UI.Controls.Apis.LVGF_GROUPID removed
+Windows.Win32.UI.Controls.Apis.LVGF_ITEMS removed
+Windows.Win32.UI.Controls.Apis.LVGF_SUBSET removed
+Windows.Win32.UI.Controls.Apis.LVGF_SUBSETITEMS removed
+Windows.Win32.UI.Controls.Apis.LVGF_SUBTITLE removed
+Windows.Win32.UI.Controls.Apis.LVGF_TASK removed
+Windows.Win32.UI.Controls.Apis.LVGF_TITLEIMAGE removed
+Windows.Win32.UI.Controls.LVGROUP_MASK.LVGF_ALIGN added
+Windows.Win32.UI.Controls.LVGROUP_MASK.LVGF_DESCRIPTIONBOTTOM added
+Windows.Win32.UI.Controls.LVGROUP_MASK.LVGF_DESCRIPTIONTOP added
+Windows.Win32.UI.Controls.LVGROUP_MASK.LVGF_EXTENDEDIMAGE added
+Windows.Win32.UI.Controls.LVGROUP_MASK.LVGF_GROUPID added
+Windows.Win32.UI.Controls.LVGROUP_MASK.LVGF_ITEMS added
+Windows.Win32.UI.Controls.LVGROUP_MASK.LVGF_SUBSET added
+Windows.Win32.UI.Controls.LVGROUP_MASK.LVGF_SUBSETITEMS added
+Windows.Win32.UI.Controls.LVGROUP_MASK.LVGF_SUBTITLE added
+Windows.Win32.UI.Controls.LVGROUP_MASK.LVGF_TASK added
+Windows.Win32.UI.Controls.LVGROUP_MASK.LVGF_TITLEIMAGE added
+# Added missing values to TASKDIALOG_COMMON_BUTTON_FLAGS
+Windows.Win32.UI.Controls.TASKDIALOG_COMMON_BUTTON_FLAGS :  => [Flags]
+Windows.Win32.UI.Controls.TASKDIALOG_COMMON_BUTTON_FLAGS.TDCBF_ABORT_BUTTON added
+Windows.Win32.UI.Controls.TASKDIALOG_COMMON_BUTTON_FLAGS.TDCBF_CONTINUE_BUTTON added
+Windows.Win32.UI.Controls.TASKDIALOG_COMMON_BUTTON_FLAGS.TDCBF_HELP_BUTTON added
+Windows.Win32.UI.Controls.TASKDIALOG_COMMON_BUTTON_FLAGS.TDCBF_IGNORE_BUTTON added
+Windows.Win32.UI.Controls.TASKDIALOG_COMMON_BUTTON_FLAGS.TDCBF_TRYAGAIN_BUTTON added
