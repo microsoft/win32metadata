@@ -36806,6 +36806,63 @@
       "filter": "DevProp_PciDevice_SupportedSpeedsAndMode_",
       "header": "pciprop.h"
     }
+  },
+  {
+    "name": "TASKDIALOG_COMMON_BUTTON_FLAGS",
+    "flags": true,
+    "type": "int",
+    "members": [
+      {
+        "name": "TDCBF_OK_BUTTON",
+        "value": "0x00000001"
+      },
+      {
+        "name": "TDCBF_YES_BUTTON",
+        "value": "0x00000002"
+      },
+      {
+        "name": "TDCBF_NO_BUTTON",
+        "value": "0x00000004"
+      },
+      {
+        "name": "TDCBF_CANCEL_BUTTON",
+        "value": "0x00000008"
+      },
+      {
+        "name": "TDCBF_RETRY_BUTTON",
+        "value": "0x00000010"
+      },
+      {
+        "name": "TDCBF_CLOSE_BUTTON",
+        "value": "0x00000020"
+      },
+      {
+        "name": "TDCBF_ABORT_BUTTON",
+        "value": "0x00010000"
+      },
+      {
+        "name": "TDCBF_IGNORE_BUTTON",
+        "value": "0x00020000"
+      },
+      {
+        "name": "TDCBF_TRYAGAIN_BUTTON",
+        "value": "0x00040000"
+      },
+      {
+        "name": "TDCBF_CONTINUE_BUTTON",
+        "value": "0x00080000"
+      },
+      {
+        "name": "TDCBF_HELP_BUTTON",
+        "value": "0x00100000"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "TASKDIALOGCONFIG",
+        "field": "dwCommonButtons"
+      }
+    ]
   }
 ]
 }
