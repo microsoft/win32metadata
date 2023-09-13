@@ -36773,6 +36773,31 @@
         "field": "dwCommonButtons"
       }
     ]
+  },
+  {
+    "namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
+    "name": "CM_REMOVAL_POLICY",
+    "autoPopulate": {
+      "filter": "CM_REMOVAL_POLICY_",
+      "header": "cfgmgr32.h"
+    }
+  },
+  {
+    "namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
+    "name": "CM_INSTALL_STATE",
+    "autoPopulate": {
+      "filter": "CM_INSTALL_STATE_",
+      "header": "cfgmgr32.h"
+    }
+  },
+  {
+    "namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
+    "name": "CM_DEVCAP",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "CM_DEVCAP_",
+      "header": "cfgmgr32.h"
+    }
   }
 ]
 }
