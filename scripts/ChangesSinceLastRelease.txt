@@ -978,3 +978,5 @@ Windows.Win32.UI.Controls.Apis.LVIM_AFTER added
 Windows.Win32.UI.Controls.LIST_VIEW_INSERT_MARK_FLAGS removed
 Windows.Win32.UI.Controls.LIST_VIEW_INSERT_MARK_FLAGS.LVIM_AFTER removed
 Windows.Win32.UI.Controls.LVINSERTMARK.dwFlags...Windows.Win32.UI.Controls.LIST_VIEW_INSERT_MARK_FLAGS => System.UInt32
+# Fixed #1705.
+Windows.Win32.Security.Cryptography.CERT_OPEN_STORE_FLAGS :  => [Flags]

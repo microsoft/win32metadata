@@ -16615,6 +16615,7 @@
   },
   {
     "name": "CERT_OPEN_STORE_FLAGS",
+    "flags": true,
     "members": [
       {
         "name": "CERT_STORE_BACKUP_RESTORE_FLAG"
