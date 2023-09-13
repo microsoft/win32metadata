@@ -22097,76 +22097,10 @@
   {
     "name": "FINDREPLACE_FLAGS",
     "flags": true,
-    "members": [
-      {
-        "name": "FR_DIALOGTERM",
-        "value": "64"
-      },
-      {
-        "name": "FR_DOWN",
-        "value": "1"
-      },
-      {
-        "name": "FR_ENABLEHOOK",
-        "value": "256"
-      },
-      {
-        "name": "FR_ENABLETEMPLATE",
-        "value": "512"
-      },
-      {
-        "name": "FR_ENABLETEMPLATEHANDLE",
-        "value": "8192"
-      },
-      {
-        "name": "FR_FINDNEXT",
-        "value": "8"
-      },
-      {
-        "name": "FR_HIDEUPDOWN",
-        "value": "16384"
-      },
-      {
-        "name": "FR_HIDEMATCHCASE",
-        "value": "32768"
-      },
-      {
-        "name": "FR_HIDEWHOLEWORD",
-        "value": "65536"
-      },
-      {
-        "name": "FR_MATCHCASE",
-        "value": "4"
-      },
-      {
-        "name": "FR_NOMATCHCASE",
-        "value": "2048"
-      },
-      {
-        "name": "FR_NOUPDOWN",
-        "value": "1024"
-      },
-      {
-        "name": "FR_NOWHOLEWORD",
-        "value": "4096"
-      },
-      {
-        "name": "FR_REPLACE",
-        "value": "16"
-      },
-      {
-        "name": "FR_REPLACEALL",
-        "value": "32"
-      },
-      {
-        "name": "FR_SHOWHELP",
-        "value": "128"
-      },
-      {
-        "name": "FR_WHOLEWORD",
-        "value": "2"
-      }
-    ],
+    "autoPopulate": {
+      "filter": "FR_",
+      "header": "commdlg.h"
+    },
     "uses": [
       {
         "struct": "FINDREPLACEW",

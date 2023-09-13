@@ -980,3 +980,18 @@ Windows.Win32.UI.Controls.LIST_VIEW_INSERT_MARK_FLAGS.LVIM_AFTER removed
 Windows.Win32.UI.Controls.LVINSERTMARK.dwFlags...Windows.Win32.UI.Controls.LIST_VIEW_INSERT_MARK_FLAGS => System.UInt32
 # Fixed #1705.
 Windows.Win32.Security.Cryptography.CERT_OPEN_STORE_FLAGS :  => [Flags]
+# Fixed #1704.
+Windows.Win32.UI.Controls.Dialogs.Apis.FR_NOWRAPAROUND removed
+Windows.Win32.UI.Controls.Dialogs.Apis.FR_RAW removed
+Windows.Win32.UI.Controls.Dialogs.Apis.FR_SHOWWRAPAROUND removed
+Windows.Win32.UI.Controls.Dialogs.Apis.FR_WRAPAROUND removed
+Windows.Win32.UI.Controls.Dialogs.FINDREPLACE_FLAGS.FR_MATCHALEFHAMZA added
+Windows.Win32.UI.Controls.Dialogs.FINDREPLACE_FLAGS.FR_MATCHDIAC added
+Windows.Win32.UI.Controls.Dialogs.FINDREPLACE_FLAGS.FR_MATCHKASHIDA added
+Windows.Win32.UI.Controls.Dialogs.FINDREPLACE_FLAGS.FR_NOWRAPAROUND added
+Windows.Win32.UI.Controls.Dialogs.FINDREPLACE_FLAGS.FR_RAW added
+Windows.Win32.UI.Controls.Dialogs.FINDREPLACE_FLAGS.FR_SHOWWRAPAROUND added
+Windows.Win32.UI.Controls.Dialogs.FINDREPLACE_FLAGS.FR_WRAPAROUND added
+Windows.Win32.UI.Controls.RichEdit.Apis.FR_MATCHALEFHAMZA removed
+Windows.Win32.UI.Controls.RichEdit.Apis.FR_MATCHDIAC removed
+Windows.Win32.UI.Controls.RichEdit.Apis.FR_MATCHKASHIDA removed
