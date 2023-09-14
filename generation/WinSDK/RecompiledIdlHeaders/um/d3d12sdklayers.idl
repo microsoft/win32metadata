@@ -1748,10 +1748,10 @@ typedef enum D3D12_MESSAGE_CALLBACK_FLAGS
 cpp_quote( "DEFINE_ENUM_FLAG_OPERATORS(D3D12_MESSAGE_CALLBACK_FLAGS)")
 
 typedef void (__stdcall *D3D12MessageFunc) (D3D12_MESSAGE_CATEGORY Category,
-    D3D12_MESSAGE_SEVERITY Severity,
-    D3D12_MESSAGE_ID ID,
-    LPCSTR pDescription,
-    void* pContext);
+    [annotation("_In_")]    D3D12_MESSAGE_SEVERITY Severity,
+    [annotation("_In_")]    D3D12_MESSAGE_ID ID,
+    [annotation("_In_")]    LPCSTR pDescription,
+    [annotation("_In_")]    void* pContext);
 
 [ uuid( 2852dd88-b484-4c0c-b6b1-67168500e600 ), object, local, pointer_default( unique ) ]
 interface ID3D12InfoQueue1

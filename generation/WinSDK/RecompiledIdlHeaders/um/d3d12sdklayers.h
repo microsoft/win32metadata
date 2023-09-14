@@ -3932,11 +3932,11 @@ enum D3D12_MESSAGE_CALLBACK_FLAGS
 
 DEFINE_ENUM_FLAG_OPERATORS(D3D12_MESSAGE_CALLBACK_FLAGS)
 typedef void ( __stdcall *D3D12MessageFunc )( 
-    D3D12_MESSAGE_CATEGORY Category,
-    D3D12_MESSAGE_SEVERITY Severity,
-    D3D12_MESSAGE_ID ID,
-    LPCSTR pDescription,
-    void *pContext);
+    _In_ D3D12_MESSAGE_CATEGORY Category,
+    _In_ D3D12_MESSAGE_SEVERITY Severity,
+    _In_ D3D12_MESSAGE_ID ID,
+    _In_ LPCSTR pDescription,
+    _In_ void *pContext);
 
 
 
