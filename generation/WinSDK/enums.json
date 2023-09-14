@@ -10901,26 +10901,10 @@
   {
     "name": "CRYPT_ACQUIRE_FLAGS",
     "flags": true,
-    "members": [
-      {
-        "name": "CRYPT_ACQUIRE_CACHE_FLAG"
-      },
-      {
-        "name": "CRYPT_ACQUIRE_COMPARE_KEY_FLAG"
-      },
-      {
-        "name": "CRYPT_ACQUIRE_NO_HEALING"
-      },
-      {
-        "name": "CRYPT_ACQUIRE_SILENT_FLAG"
-      },
-      {
-        "name": "CRYPT_ACQUIRE_USE_PROV_INFO_FLAG"
-      },
-      {
-        "name": "CRYPT_ACQUIRE__WINDOWS_HANDLE_FLAG"
-      }
-    ],
+    "autoPopulate": {
+      "header": "wincrypt.h",
+      "filter": "CRYPT_ACQUIRE_"
+    },
     "uses": [
       {
         "method": "CryptAcquireCertificatePrivateKey",
