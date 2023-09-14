@@ -50,3 +50,5 @@ sqlite3_syscall_ptr
 FLockClrVersionCallback
 CallbackThreadSetFnPtr
 CallbackThreadUnsetFnPtr
+DrawImageAbort
+GetThumbnailImageAbort
