@@ -650,10 +650,10 @@ namespace WinmdUtilsProgram
                     typeName += $"({archInfo})";
                 }
 
-                if (!nameToNamespaces.TryGetValue(typeName.ToUpper(), out var namespaces))
+                if (!nameToNamespaces.TryGetValue(typeName, out var namespaces))
                 {
                     namespaces = new List<string>();
-                    nameToNamespaces[typeName.ToUpper()] = namespaces;
+                    nameToNamespaces[typeName] = namespaces;
                 }
 
                 namespaces.Add(type1.Namespace);
