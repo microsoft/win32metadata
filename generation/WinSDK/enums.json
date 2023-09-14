@@ -1674,32 +1674,11 @@
   {
     "name": "PARAFORMAT_MASK",
     "flags": true,
-    "members": [
-      {
-        "name": "PFM_ALIGNMENT"
-      },
-      {
-        "name": "PFM_NUMBERING"
-      },
-      {
-        "name": "PFM_OFFSET"
-      },
-      {
-        "name": "PFM_OFFSETINDENT"
-      },
-      {
-        "name": "PFM_RIGHTINDENT"
-      },
-      {
-        "name": "PFM_RTLPARA"
-      },
-      {
-        "name": "PFM_STARTINDENT"
-      },
-      {
-        "name": "PFM_TABSTOPS"
-      }
-    ],
+    "autoPopulate": {
+      "filter": "PFM_",
+      "header": "richedit.h"
+    },
+    "members": [],
     "uses": [
       {
         "struct": "PARAFORMAT",
@@ -19023,26 +19002,11 @@
     "name": "RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE",
     "type": "ushort",
     "flags": true,
-    "members": [
-      {
-        "name": "SEL_EMPTY"
-      },
-      {
-        "name": "SEL_TEXT"
-      },
-      {
-        "name": "SEL_OBJECT"
-      },
-      {
-        "name": "SEL_MULTICHAR"
-      },
-      {
-        "name": "SEL_MULTIOBJECT"
-      },
-      {
-        "name": "GCM_RIGHTMOUSEDROP"
-      }
-    ],
+    "autoPopulate": {
+      "filter": "SEL_|GCM_RIGHTMOUSEDROP",
+      "header": "richedit.h"
+    },
+    "members": [],
     "uses": [
       {
         "interface": "IRichEditOleCallback",
@@ -28464,17 +28428,11 @@
   {
     "name": "PARAFORMAT_ALIGNMENT",
     "type": "ushort",
-    "members": [
-      {
-        "name": "PFA_CENTER"
-      },
-      {
-        "name": "PFA_LEFT"
-      },
-      {
-        "name": "PFA_RIGHT"
-      }
-    ],
+    "autoPopulate": {
+      "filter": "PFA_",
+      "header": "richedit.h"
+    },
+    "members": [],
     "uses": [
       {
         "struct": "PARAFORMAT",
