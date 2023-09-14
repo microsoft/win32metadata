@@ -1595,12 +1595,6 @@
     "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.Networking.WinSock",
-    "Name": "sa_family_t",
-    "ValueType": "ushort",
-    "NativeTypedef": false
-  },
-  {
     "Namespace": "Windows.Win32.Devices.Usb",
     "Name": "USB_CHANGE_REGISTRATION_HANDLE",
     "ValueType": "DECLARE_HANDLE",

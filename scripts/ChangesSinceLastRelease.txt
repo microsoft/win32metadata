@@ -1035,3 +1035,5 @@ Windows.Win32.Devices.DeviceAndDriverInstallation.CM_REMOVAL_POLICY added
 Windows.Win32.Devices.DeviceAndDriverInstallation.CM_REMOVAL_POLICY.CM_REMOVAL_POLICY_EXPECT_NO_REMOVAL added
 Windows.Win32.Devices.DeviceAndDriverInstallation.CM_REMOVAL_POLICY.CM_REMOVAL_POLICY_EXPECT_ORDERLY_REMOVAL added
 Windows.Win32.Devices.DeviceAndDriverInstallation.CM_REMOVAL_POLICY.CM_REMOVAL_POLICY_EXPECT_SURPRISE_REMOVAL added
+# Remove sa_family_t typedef
+Windows.Win32.Networking.WinSock.sa_family_t removed
