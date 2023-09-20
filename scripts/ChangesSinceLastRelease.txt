@@ -2894,3 +2894,13 @@ Windows.Win32.Graphics.GdiPlus.SmoothingMode.SmoothingModeAntiAlias8x8 added
 Windows.Win32.Graphics.GdiPlus.Status.ProfileNotFound added
 Windows.Win32.Graphics.GdiPlus.Tint added
 Windows.Win32.Graphics.GdiPlus.TintParams added
+# Add missing BYTE constants
+Windows.Win32.Media.Audio.Apis.MEVT_COMMENT added
+Windows.Win32.Media.Audio.Apis.MEVT_LONGMSG added
+Windows.Win32.Media.Audio.Apis.MEVT_NOP added
+Windows.Win32.Media.Audio.Apis.MEVT_SHORTMSG added
+Windows.Win32.Media.Audio.Apis.MEVT_TEMPO added
+Windows.Win32.Media.Audio.Apis.MEVT_VERSION added
+Windows.Win32.NetworkManagement.IpHelper.Apis.FILTER_ICMP_CODE_ANY added
+Windows.Win32.NetworkManagement.IpHelper.Apis.FILTER_ICMP_TYPE_ANY added
+Windows.Win32.System.SystemServices.Apis.DECIMAL_NEG added

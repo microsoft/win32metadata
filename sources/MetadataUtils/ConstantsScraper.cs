@@ -35,7 +35,7 @@ namespace MetadataUtils
 
             private static readonly Regex DefineConstantRegex =
                 new Regex(
-                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE[AW]{0,1}\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+|(?:0x)?[\da-f]+))|([a-z0-9_]+U?\s*[\+\-]\s*(\d+|0x[0-de-f]+)U?)|(\(NTSTATUS\)((?:0x)?[\da-f]+L?))|(\s*\(DWORD\)\s*\(?\s*-1(L|\b)\s*\)?)|(\(DWORD\)((?:0x)?[\da-f]+L?))|(\(BCRYPT_ALG_HANDLE\)\s*((?:0x)?[\da-f]+L?))|(\{\s*(?:(?:0x)?[\da-f]{4,8}L?,?\s*){3}\s*\{\s*(?:(?:0x)?[\da-f]{1,2}L?,?\s*){8}\s*\}\s*\})|(HIDP_ERROR_CODES\((.*),(.*)\))|(MAKEDIPROP\(\s*(\d+)\s*\))|(\{\s*(?:(?:0x)?[\da-f]{4,8}L?,?\s*){3}\s*(?:(?:0x)?[\da-f]{1,2}L?,?\s*){8}\s*\})|(\(UCHAR\)\s*((?:0x)?\d+))|(\(UCHAR\)\s*(-\d+))|([a-z0-9_]+))$", RegexOptions.IgnoreCase);
+                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE[AW]{0,1}\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+|(?:0x)?[\da-f]+))|([a-z0-9_]+U?\s*[\+\-]\s*(\d+|0x[0-de-f]+)U?)|(\(NTSTATUS\)((?:0x)?[\da-f]+L?))|(\s*\(DWORD\)\s*\(?\s*-1(L|\b)\s*\)?)|(\(DWORD\)((?:0x)?[\da-f]+L?))|(\(BCRYPT_ALG_HANDLE\)\s*((?:0x)?[\da-f]+L?))|(\{\s*(?:(?:0x)?[\da-f]{4,8}L?,?\s*){3}\s*\{\s*(?:(?:0x)?[\da-f]{1,2}L?,?\s*){8}\s*\}\s*\})|(HIDP_ERROR_CODES\((.*),(.*)\))|(MAKEDIPROP\(\s*(\d+)\s*\))|(\{\s*(?:(?:0x)?[\da-f]{4,8}L?,?\s*){3}\s*(?:(?:0x)?[\da-f]{1,2}L?,?\s*){8}\s*\})|(\(UCHAR\)\s*((?:0x)?\d+))|(\(UCHAR\)\s*(-\d+))|(\(BYTE\)((?:0x)?[\da-f]+L?))|([a-z0-9_]+))$", RegexOptions.IgnoreCase);
 
             private static readonly Regex DefineGuidConstRegex =
                 new Regex(
@@ -868,10 +868,16 @@ namespace MetadataUtils
                                 this.AddConstantValue(currentNamespace, "ushort", name, $"unchecked((ushort){match.Groups[35].Value})");
                                 continue;
                             }
-                            // SOME_OTHER_CONSTANT
+                            // (BYTE) 0x42
                             else if (match.Groups[36].Success)
                             {
-                                string otherName = match.Groups[36].Value;
+                                this.AddConstantValue(currentNamespace, "byte", name, match.Groups[37].Value);
+                                continue;
+                            }
+                            // SOME_OTHER_CONSTANT
+                            else if (match.Groups[38].Success)
+                            {
+                                string otherName = match.Groups[38].Value;
 
                                 matchedToOtherName = true;
 
