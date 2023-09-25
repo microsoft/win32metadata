@@ -35897,11 +35897,11 @@
         "parameter": "ulFlags"
       },
       {
-        "method": "CM_Get_Device_Interface_ListExA",
+        "method": "CM_Get_Device_Interface_List_ExA",
         "parameter": "ulFlags"
       },
       {
-        "method": "CM_Get_Device_Interface_ListExW",
+        "method": "CM_Get_Device_Interface_List_ExW",
         "parameter": "ulFlags"
       },
       {
@@ -35913,11 +35913,11 @@
         "parameter": "ulFlags"
       },
       {
-        "method": "CM_Get_Device_Interface_SizeExA",
+        "method": "CM_Get_Device_Interface_Size_ExA",
         "parameter": "ulFlags"
       },
       {
-        "method": "CM_Get_Device_Interface_SizeExW",
+        "method": "CM_Get_Device_Interface_Size_ExW",
         "parameter": "ulFlags"
       },
       {
