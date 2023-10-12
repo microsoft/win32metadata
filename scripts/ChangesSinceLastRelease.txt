@@ -1,3 +1,5 @@
 # Fixed #1717.
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_List_ExA : ulFlags...UInt32 => CM_GET_DEVICE_INTERFACE_LIST_FLAGS
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_List_ExW : ulFlags...UInt32 => CM_GET_DEVICE_INTERFACE_LIST_FLAGS
+# Fixed #1724.
+Windows.Win32.UI.Shell.IShellView.TranslateAccelerator: => [CanReturnMultipleSuccessValues]
