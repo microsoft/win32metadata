@@ -2,4 +2,5 @@
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_List_ExA : ulFlags...UInt32 => CM_GET_DEVICE_INTERFACE_LIST_FLAGS
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_List_ExW : ulFlags...UInt32 => CM_GET_DEVICE_INTERFACE_LIST_FLAGS
 # Fixed #1724.
-Windows.Win32.UI.Shell.IShellView.TranslateAccelerator: => [CanReturnMultipleSuccessValues]
+# Fixed baseline error.
+Windows.Win32.UI.Shell.IShellView.TranslateAccelerator : [Documentation(https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-ishellview-translateaccelerator)] => [CanReturnMultipleSuccessValues,Documentation(https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-ishellview-translateaccelerator)]
