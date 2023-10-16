@@ -31919,7 +31919,8 @@
   },
   {
     "name": "UIA_PATTERN_ID",
-    "members": [ 
+    "type": "int",
+    "members": [
       {
         "name": "UIA_InvokePatternId",
         "value": 10000
@@ -32310,6 +32311,7 @@
   },
   {
     "name": "UIA_PROPERTY_ID",
+    "type": "int",
     "members": [ 
       {
         "name": "UIA_RuntimeIdPropertyId",
@@ -33116,6 +33118,7 @@
   },
   {
     "name": "UIA_TEXTATTRIBUTE_ID",
+    "type": "int",
     "members": [ 
       {
         "name": "UIA_AnimationStyleAttributeId",
@@ -33324,6 +33327,7 @@
   },
   {
     "name": "UIA_CONTROLTYPE_ID",
+    "type": "int",
     "members": [ 
       {
         "name": "UIA_ButtonControlTypeId",
@@ -33505,6 +33509,7 @@
   },
   {
     "name": "UIA_ANNOTATIONTYPE",
+    "type": "int",
     "members": [ 
       {
         "name": "AnnotationType_Unknown",
@@ -33627,6 +33632,7 @@
   },
   {
     "name": "UIA_STYLE_ID",
+    "type": "int",
     "members": [ 
       {
         "name": "StyleId_Custom",
@@ -33717,6 +33723,7 @@
   },
   {
     "name": "UIA_LANDMARKTYPE_ID",
+    "type": "int",
     "members": [ 
       {
         "name": "UIA_CustomLandmarkTypeId",
@@ -33754,6 +33761,7 @@
   },
   {
     "name": "UIA_HEADINGLEVEL_ID",
+    "type": "int",
     "members": [ 
       {
         "name": "HeadingLevel_None",
@@ -33812,6 +33820,7 @@
   {
     "namespace": "Windows.Win32.UI.Accessibility",
     "name": "UIA_CHANGE_ID",
+    "type": "int",
     "members": [ 
       {
         "name": "UIA_SummaryChangeId",
@@ -33821,6 +33830,7 @@
   },
   {
     "name": "UIA_METADATA_ID",
+    "type": "int",
     "members": [ 
       {
         "name": "UIA_SayAsInterpretAsMetadataId",
