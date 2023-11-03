@@ -661,3 +661,24 @@ Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_VALIDATION_FLAGS.D3D12_V
 winmd1: Windows.Win32.Graphics.Direct3D12.Apis.D3D12_PREVIEW_SDK_VERSION = 710, winmd2 = 712
 winmd1: Windows.Win32.Graphics.Direct3D12.Apis.D3D12_SDK_VERSION = 610, winmd2 = 611
 winmd1: Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_D3D12_MESSAGES_END = 1381, winmd2 = 1387
+# Fixed #1728.
+Windows.Win32.Foundation.Apis.RPC_S_ACCESS_DENIED added
+Windows.Win32.Foundation.Apis.RPC_S_ASYNC_CALL_PENDING added
+Windows.Win32.Foundation.Apis.RPC_S_BUFFER_TOO_SMALL added
+Windows.Win32.Foundation.Apis.RPC_S_INVALID_ARG added
+Windows.Win32.Foundation.Apis.RPC_S_INVALID_LEVEL added
+Windows.Win32.Foundation.Apis.RPC_S_INVALID_SECURITY_DESC added
+Windows.Win32.Foundation.Apis.RPC_S_NOT_ENOUGH_QUOTA added
+Windows.Win32.Foundation.Apis.RPC_S_OUT_OF_MEMORY added
+Windows.Win32.Foundation.Apis.RPC_S_OUT_OF_THREADS added
+Windows.Win32.Foundation.Apis.RPC_S_SERVER_OUT_OF_MEMORY added
+Windows.Win32.Foundation.Apis.RPC_S_UNKNOWN_PRINCIPAL added
+Windows.Win32.Foundation.Apis.RPC_X_ENUM_VALUE_TOO_LARGE added
+Windows.Win32.Foundation.Apis.RPC_X_INVALID_BOUND added
+Windows.Win32.Foundation.Apis.RPC_X_INVALID_BUFFER added
+Windows.Win32.Foundation.Apis.RPC_X_INVALID_PIPE_OPERATION added
+Windows.Win32.Foundation.Apis.RPC_X_INVALID_TAG added
+Windows.Win32.Foundation.Apis.RPC_X_NO_MEMORY added
+Windows.Win32.Foundation.Apis.RPC_X_PIPE_APP_MEMORY added
+Windows.Win32.Foundation.Apis.RPC_X_SS_CONTEXT_MISMATCH added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_OK added

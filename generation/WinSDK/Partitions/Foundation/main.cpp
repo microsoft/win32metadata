@@ -9,6 +9,7 @@
 #include <minwindef.h>
 #include <handleapi.h>
 #include <winerror.h>
+#include <rpcnterr.h>
 #include <ntstatus.h>
 #include <cierror.h>
 #include <mprerror.h>

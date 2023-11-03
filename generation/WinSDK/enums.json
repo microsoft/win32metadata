@@ -4476,7 +4476,12 @@
       "filter": "RPC_S_|EPT_S_",
       "header": "winerror.h"
     },
-    "members": [],
+    "members": [
+      {
+        "name": "RPC_S_OK",
+        "value": "0"
+      }
+    ],
     "uses": []
   },
   {

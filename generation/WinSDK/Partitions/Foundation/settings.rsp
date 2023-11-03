@@ -4,6 +4,7 @@
 <IncludeRoot>/shared/ntstatus.h
 <IncludeRoot>/shared/windef.h
 <IncludeRoot>/shared/winerror.h
+<IncludeRoot>/shared/rpcnterr.h
 <IncludeRoot>/um/cierror.h
 <IncludeRoot>/um/handleapi.h
 <IncludeRoot>/um/mprerror.h
