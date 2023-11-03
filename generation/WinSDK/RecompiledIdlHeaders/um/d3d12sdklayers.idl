@@ -1773,7 +1773,7 @@ interface ID3D12InfoQueue1
     HRESULT RegisterMessageCallback(
         [annotation("_In_")]    D3D12MessageFunc CallbackFunc, 
         [annotation("_In_")]    D3D12_MESSAGE_CALLBACK_FLAGS CallbackFilterFlags,
-        [annotation("_In_")]    void* pContext, 
+        [annotation("_Inout_")] void* pContext, 
         [annotation("_Inout_")] DWORD *pCallbackCookie);
 
     HRESULT UnregisterMessageCallback(

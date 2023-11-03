@@ -3973,7 +3973,7 @@ EXTERN_C const IID IID_ID3D12InfoQueue1;
             /* [annotation] */ 
             _In_  D3D12_MESSAGE_CALLBACK_FLAGS CallbackFilterFlags,
             /* [annotation] */ 
-            _In_  void *pContext,
+            _Inout_  void *pContext,
             /* [annotation] */ 
             _Inout_  DWORD *pCallbackCookie) = 0;
         
@@ -4210,7 +4210,7 @@ EXTERN_C const IID IID_ID3D12InfoQueue1;
             /* [annotation] */ 
             _In_  D3D12_MESSAGE_CALLBACK_FLAGS CallbackFilterFlags,
             /* [annotation] */ 
-            _In_  void *pContext,
+            _Inout_  void *pContext,
             /* [annotation] */ 
             _Inout_  DWORD *pCallbackCookie);
         

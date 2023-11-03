@@ -682,3 +682,5 @@ Windows.Win32.Foundation.Apis.RPC_X_NO_MEMORY added
 Windows.Win32.Foundation.Apis.RPC_X_PIPE_APP_MEMORY added
 Windows.Win32.Foundation.Apis.RPC_X_SS_CONTEXT_MISMATCH added
 Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_OK added
+# Fixed #1734 and #1677.
+Windows.Win32.Graphics.Direct3D12.ID3D12InfoQueue1.RegisterMessageCallback : pContext : [In] => [In,Out]
