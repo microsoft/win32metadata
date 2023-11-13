@@ -688,3 +688,5 @@ Windows.Win32.Graphics.Direct3D12.ID3D12InfoQueue1.RegisterMessageCallback : pCo
 Windows.Win32.System.Diagnostics.Debug.Apis.EXCEPTION_CONTINUE_EXECUTION added
 Windows.Win32.System.Diagnostics.Debug.Apis.EXCEPTION_CONTINUE_SEARCH added
 Windows.Win32.System.Diagnostics.Debug.Apis.EXCEPTION_EXECUTE_HANDLER added
+# Fixed #1730.
+Windows.Win32.Networking.HttpServer.Apis.HttpReceiveHttpRequest : Overlapped : [In,Optional] => [In,Optional,Out]

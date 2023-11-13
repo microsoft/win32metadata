@@ -1747,3 +1747,4 @@ WNetUseConnection4A::return=WIN32_ERROR
 WNetUseConnection4W::return=WIN32_ERROR
 WNetUseConnectionA::return=WIN32_ERROR
 WNetUseConnectionW::return=WIN32_ERROR
+HttpReceiveHttpRequest::Overlapped=[Out]
