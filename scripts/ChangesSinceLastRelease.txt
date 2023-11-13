@@ -894,5 +894,3 @@ Windows.Win32.Devices.DeviceAndDriverInstallation.PCD_FLAGS.mPCD_MEM1_WS added
 Windows.Win32.Devices.DeviceAndDriverInstallation.PCD_FLAGS.mPCD_MEM2_WS added
 Windows.Win32.Devices.DeviceAndDriverInstallation.PMF_FLAGS added
 Windows.Win32.Devices.DeviceAndDriverInstallation.PMF_FLAGS.fPMF_AUDIO_ENABLE added
-# Fixed #1735.
-Windows.Win32.Security.Authentication.Identity.Apis.LsaRegisterLogonProcess : SecurityMode : [Out] => [Out,Reserved]
