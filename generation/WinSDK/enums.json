@@ -36755,6 +36755,100 @@
       "filter": "CM_DEVCAP_",
       "header": "cfgmgr32.h"
     }
+  },
+  {
+    "namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
+    "name": "DD_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "fDD_|mDD_",
+      "header": "cfgmgr32.h"
+    },
+    "uses": [
+      {
+        "struct": "DMA_DES",
+        "field": "DD_Flags"
+      }
+    ]
+  },
+  {
+    "namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
+    "name": "IOD_DESFLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "fIOD_",
+      "header": "cfgmgr32.h"
+    },
+    "uses": [
+      {
+        "struct": "IO_DES",
+        "field": "IOD_DesFlags"
+      }
+    ]
+  },
+  {
+    "namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
+    "name": "IRQD_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "fIRQD_|mIRQD_",
+      "header": "cfgmgr32.h"
+    },
+    "uses": [
+      {
+        "struct": "IRQ_DES_64",
+        "field": "IRQD_Flags"
+      },
+      {
+        "struct": "IRQ_DES_32",
+        "field": "IRQD_Flags"
+      }
+    ]
+  },
+  {
+    "namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
+    "name": "MD_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "fMD_|mMD_",
+      "header": "cfgmgr32.h"
+    },
+    "uses": [
+      {
+        "struct": "MEM_DES",
+        "field": "MD_Flags"
+      }
+    ]
+  },
+  {
+    "namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
+    "name": "PMF_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "fPMF_",
+      "header": "cfgmgr32.h"
+    },
+    "uses": [
+      {
+        "struct": "MFCARD_DES",
+        "field": "PMF_Flags"
+      }
+    ]
+  },
+  {
+    "namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
+    "name": "PCD_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "fPCD_|mPCD_",
+      "header": "cfgmgr32.h"
+    },
+    "uses": [
+      {
+        "struct": "PCCARD_DES",
+        "field": "PCD_Flags"
+      }
+    ]
   }
 ]
 }
