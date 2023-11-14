@@ -25,7 +25,7 @@
     <PackageProjectUrl>https://github.com/microsoft/win32metadata</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageIcon>images/windows.png</PackageIcon>
-    <LastWin32MetadataReleaseVersion>55.0.45-preview</LastWin32MetadataReleaseVersion>
+    <LastWin32MetadataReleaseVersion>56.0.13-preview</LastWin32MetadataReleaseVersion>
   </PropertyGroup>
 
   <ItemGroup>
