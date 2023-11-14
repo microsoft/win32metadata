@@ -1,0 +1,2 @@
+# Fixed #1733.
+Windows.Win32.UI.Controls.PFTASKDIALOGCALLBACK.Invoke : msg : [In] => [AssociatedEnum(TASKDIALOG_NOTIFICATIONS),In]
