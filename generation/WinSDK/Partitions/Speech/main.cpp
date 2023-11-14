@@ -6,6 +6,6 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
-#include <sapi53.h>
-//#include <sapiddk.h> -- Can't compile with sapi53.h
+#define _SAPI_VER 0x053
+#include <sapiddk.h>
 #include <sperror.h>
