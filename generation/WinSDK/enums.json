@@ -36768,6 +36768,10 @@
       {
         "struct": "DMA_DES",
         "field": "DD_Flags"
+      },
+      {
+        "struct": "DMA_RANGE",
+        "field": "DR_Flags"
       }
     ]
   },
@@ -36783,6 +36787,10 @@
       {
         "struct": "IO_DES",
         "field": "IOD_DesFlags"
+      },
+      {
+        "struct": "IO_RANGE",
+        "field": "IOR_RangeFlags"
       }
     ]
   },
@@ -36802,6 +36810,10 @@
       {
         "struct": "IRQ_DES_32",
         "field": "IRQD_Flags"
+      },
+      {
+        "struct": "IRQ_RANGE",
+        "field": "IRQR_Flags"
       }
     ]
   },
@@ -36817,6 +36829,10 @@
       {
         "struct": "MEM_DES",
         "field": "MD_Flags"
+      },
+      {
+        "struct": "MEM_RANGE",
+        "field": "MR_Flags"
       }
     ]
   },

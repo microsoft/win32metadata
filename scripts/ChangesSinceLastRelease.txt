@@ -80,5 +80,10 @@ Windows.Win32.Media.Speech.SPWORDENTRY added
 Windows.Win32.Media.Speech.SPWORDINFOOPT added
 Windows.Win32.Media.Speech.SPWORDINFOOPT.SPWIO_NONE added
 Windows.Win32.Media.Speech.SPWORDINFOOPT.SPWIO_WANT_TEXT added
-Windows.Win32.Media.Speech.tagSPPHRASEALT added
-Windows.Win32.Media.Speech.tagSPPHRASEALTREQUEST added
+# Fixed #1739.
+Windows.Win32.Devices.DeviceAndDriverInstallation.DMA_RANGE.DR_Flags...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.DD_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.IO_RANGE.IOR_RangeFlags...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.IOD_DESFLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.IRQ_RANGE.IRQR_Flags...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.IRQD_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.MEM_RANGE.MR_Flags...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.MD_FLAGS
+Windows.Win32.Media.Speech.SPPHRASEALT added
+Windows.Win32.Media.Speech.SPPHRASEALTREQUEST added
