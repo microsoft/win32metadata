@@ -89,3 +89,6 @@ Windows.Win32.Media.Speech.SPPHRASEALT added
 Windows.Win32.Media.Speech.SPPHRASEALTREQUEST added
 # Fixed #1743.
 Windows.Win32.System.SystemInformation.Apis.GlobalMemoryStatusEx : lpBuffer : [Out] => [In,Out]
+# Fixed #1741.
+Windows.Win32.NetworkManagement.IpHelper.Apis.FreeInterfaceDnsSettings : return...WIN32_ERROR => Void
+Windows.Win32.NetworkManagement.IpHelper.Apis.FreeMibTable : return...WIN32_ERROR => Void
