@@ -87,3 +87,5 @@ Windows.Win32.Devices.DeviceAndDriverInstallation.IRQ_RANGE.IRQR_Flags...System.
 Windows.Win32.Devices.DeviceAndDriverInstallation.MEM_RANGE.MR_Flags...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.MD_FLAGS
 Windows.Win32.Media.Speech.SPPHRASEALT added
 Windows.Win32.Media.Speech.SPPHRASEALTREQUEST added
+# Fixed #1743.
+Windows.Win32.System.SystemInformation.Apis.GlobalMemoryStatusEx : lpBuffer : [Out] => [In,Out]

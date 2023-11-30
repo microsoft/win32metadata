@@ -1749,3 +1749,4 @@ WNetUseConnectionA::return=WIN32_ERROR
 WNetUseConnectionW::return=WIN32_ERROR
 HttpReceiveHttpRequest::Overlapped=[Out]
 PFTASKDIALOGCALLBACK::msg=[AssociatedEnum("TASKDIALOG_NOTIFICATIONS")]
+GlobalMemoryStatusEx::lpBuffer=[In]
