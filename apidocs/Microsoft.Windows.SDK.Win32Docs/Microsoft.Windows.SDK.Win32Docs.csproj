@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ScrapeDocs\ScrapeDocs.csproj" ReferenceOutputAssembly="false" OutputItemType="ScraperTool" SetTargetFramework="TargetFramework=net6.0" />
+    <ProjectReference Include="..\ScrapeDocs\ScrapeDocs.csproj" ReferenceOutputAssembly="false" OutputItemType="ScraperTool" SetTargetFramework="TargetFramework=net8.0" />
   </ItemGroup>
 
   <Import Project="Microsoft.Windows.SDK.Win32Docs.targets" />
