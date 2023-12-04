@@ -92,3 +92,6 @@ Windows.Win32.System.SystemInformation.Apis.GlobalMemoryStatusEx : lpBuffer : [O
 # Fixed #1741.
 Windows.Win32.NetworkManagement.IpHelper.Apis.FreeInterfaceDnsSettings : return...WIN32_ERROR => Void
 Windows.Win32.NetworkManagement.IpHelper.Apis.FreeMibTable : return...WIN32_ERROR => Void
+# Correct HtmlHelp libs
+Windows.Win32.Data.HtmlHelp.Apis.HtmlHelpA : [Ansi,DllImport(htmlhelp.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/htmlhelp/nf-htmlhelp-htmlhelpa)] => [Ansi,DllImport(hhctrl.ocx,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/htmlhelp/nf-htmlhelp-htmlhelpa)]
+Windows.Win32.Data.HtmlHelp.Apis.HtmlHelpW : [DllImport(htmlhelp.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/htmlhelp/nf-htmlhelp-htmlhelpw),Unicode] => [DllImport(hhctrl.ocx,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/htmlhelp/nf-htmlhelp-htmlhelpw),Unicode]
