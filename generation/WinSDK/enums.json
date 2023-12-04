@@ -36865,6 +36865,24 @@
         "field": "PCD_Flags"
       }
     ]
+  },
+  {
+    "namespace": "Windows.Win32.Graphics.Gdi",
+    "name": "LCSCSTYPE",
+    "type": "int",
+    "members": [
+      {
+        "name": "LCS_CALIBRATED_RGB"
+      },
+      {
+        "name": "LCS_sRGB",
+        "value": "0x73524742"
+      },
+      {
+        "name": "LCS_WINDOWS_COLOR_SPACE",
+        "value": "0x57696E20"
+      }
+    ]
   }
 ]
 }

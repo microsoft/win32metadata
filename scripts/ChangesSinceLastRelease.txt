@@ -95,3 +95,11 @@ Windows.Win32.NetworkManagement.IpHelper.Apis.FreeMibTable : return...WIN32_ERRO
 # Correct HtmlHelp libs
 Windows.Win32.Data.HtmlHelp.Apis.HtmlHelpA : [Ansi,DllImport(htmlhelp.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/htmlhelp/nf-htmlhelp-htmlhelpa)] => [Ansi,DllImport(hhctrl.ocx,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/htmlhelp/nf-htmlhelp-htmlhelpa)]
 Windows.Win32.Data.HtmlHelp.Apis.HtmlHelpW : [DllImport(htmlhelp.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/htmlhelp/nf-htmlhelp-htmlhelpw),Unicode] => [DllImport(hhctrl.ocx,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/htmlhelp/nf-htmlhelp-htmlhelpw),Unicode]
+# Fixed #1740.
+Windows.Win32.Graphics.Gdi.Apis.LCS_CALIBRATED_RGB removed
+Windows.Win32.Graphics.Gdi.LCSCSTYPE added
+Windows.Win32.Graphics.Gdi.LCSCSTYPE.LCS_CALIBRATED_RGB added
+Windows.Win32.Graphics.Gdi.LCSCSTYPE.LCS_sRGB added
+Windows.Win32.Graphics.Gdi.LCSCSTYPE.LCS_WINDOWS_COLOR_SPACE added
+Windows.Win32.UI.ColorSystem.LOGCOLORSPACEA.lcsCSType...System.Int32 => Windows.Win32.Graphics.Gdi.LCSCSTYPE
+Windows.Win32.UI.ColorSystem.LOGCOLORSPACEW.lcsCSType...System.Int32 => Windows.Win32.Graphics.Gdi.LCSCSTYPE
