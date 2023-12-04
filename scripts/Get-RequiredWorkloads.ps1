@@ -2,7 +2,7 @@
 
 # Please keep this list sorted.
 
-'Microsoft.NetCore.Component.Runtime.6.0'
+'Microsoft.NetCore.Component.Runtime.8.0'
 'Microsoft.NetCore.Component.SDK'
 'Microsoft.VisualStudio.Component.VC.Tools.ARM64'
 'Microsoft.VisualStudio.Component.VC.Tools.x86.x64'
