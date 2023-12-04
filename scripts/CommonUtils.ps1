@@ -8,7 +8,7 @@ $windowsWin32ProjectRoot = "$rootDir\generation\WinSDK"
 $sdkGeneratedSourceDir = "$windowsWin32ProjectRoot\obj\generated"
 $recompiledIdlHeadersDir = "$windowsWin32ProjectRoot\RecompiledIdlHeaders"
 $recompiledIdlHeadersScratchDir = "$rootDir\obj\RecompiledIdlHeaders"
-$metadataToolsBin = "$binDir\release\net8.0"
+$metadataToolsBin = "$binDir\release\net6.0"
 
 # [VS 1673159]
 # Temporarily disable strict mode to address bug introduced

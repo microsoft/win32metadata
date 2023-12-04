@@ -27,7 +27,7 @@ else {
     Write-Host "Installing apps"
     $apps = @(
     @{packageID = "icsharpcode.ILSpy" },
-    @{packageID = "Microsoft.DotNet.SDK.8" },
+    @{packageID = "Microsoft.DotNet.SDK.6" },
     @{packageID = "Microsoft.VisualStudioCode" }
     );
     Foreach ($app in $apps) {
