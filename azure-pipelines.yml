@@ -40,6 +40,13 @@ jobs:
       useGlobalJson: true
 
   - task: PowerShell@2
+    displayName: Install VS workloads
+    inputs:
+      targetType: inline
+      script: |
+        .\scripts\Install-VS.ps1
+
+  - task: PowerShell@2
     displayName: Set build version
     inputs:
       targetType: inline
