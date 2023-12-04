@@ -15,7 +15,7 @@
     <OutputPath>$(RepoRootPath)bin\$(Configuration)</OutputPath>
     <PackageOutputPath>$(MSBuildThisFileDirectory)bin\Packages\$(Configuration)\NuGet\</PackageOutputPath>
 
-    <LocalTaskBinDir>$(RepoRootPath)bin\$(Configuration)\net8.0\</LocalTaskBinDir>
+    <LocalTaskBinDir>$(RepoRootPath)bin\$(Configuration)\net6.0\</LocalTaskBinDir>
 
     <LangVersion>9</LangVersion>
 

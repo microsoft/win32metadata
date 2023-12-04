@@ -22,8 +22,8 @@
 
   <PropertyGroup>
     <Win32MetadataSdkRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..'))</Win32MetadataSdkRoot>
-    <TaskBinDir Condition="'$(TaskBinDir)' == ''">$(Win32MetadataSdkRoot)\tools\net8.0</TaskBinDir>
-    <ToolsBinDir Condition="'$(ToolsBinDir)' == ''">$(Win32MetadataSdkRoot)\tools\net8.0</ToolsBinDir>
+    <TaskBinDir Condition="'$(TaskBinDir)' == ''">$(Win32MetadataSdkRoot)\tools\net6.0</TaskBinDir>
+    <ToolsBinDir Condition="'$(ToolsBinDir)' == ''">$(Win32MetadataSdkRoot)\tools\net6.0</ToolsBinDir>
     <LibToolsBinDir Condition="'$(LibToolsBinDir)' == ''">$(Win32MetadataSdkRoot)\tools</LibToolsBinDir>
     <ScriptsDir Condition="'$(ScriptsDir)' == ''">$(Win32MetadataSdkRoot)\scripts</ScriptsDir>
     <ObjDir Condition="'$(ObjDir)' == ''">$(MSBuildProjectDirectory)\obj</ObjDir>

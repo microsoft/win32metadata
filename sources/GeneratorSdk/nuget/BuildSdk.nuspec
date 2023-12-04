@@ -22,9 +22,9 @@
     <file src="sources\GeneratorSdk\sdk\sdk.stamped.props" target="sdk\Sdk.props"/>
     <file src="sources\GeneratorSdk\sdk\sdk.targets" target="sdk\Sdk.targets"/>
 
-    <file src="bin\release\net8.0\*.deps.json" target="tools\net8.0"/>
-    <file src="bin\release\net8.0\*.runtimeconfig.json" target="tools\net8.0"/>
-    <file src="bin\release\net8.0\*.dll" target="tools\net8.0" />
+    <file src="bin\release\net6.0\*.deps.json" target="tools\net6.0"/>
+    <file src="bin\release\net6.0\*.runtimeconfig.json" target="tools\net6.0"/>
+    <file src="bin\release\net6.0\*.dll" target="tools\net6.0" />
     <file src="scripts\Install-DotNetTool.ps1" target="scripts"/>
     <file src="scripts\ConvertMidlAttributesToSalAnnotations.ps1" target="scripts"/>
     <file src="scripts\GetVcDirPath.ps1" target="scripts"/>

@@ -5,7 +5,7 @@
 
   <!-- These are for debugging purposes only. A normal project wouldn't set these -->
   <PropertyGroup>
-    <ToolsBinDir>$(RepoRootPath)bin\$(Configuration)\net8.0</ToolsBinDir>
+    <ToolsBinDir>$(RepoRootPath)bin\$(Configuration)\net6.0</ToolsBinDir>
     <LibToolsBinDir>$(RepoRootPath)tools</LibToolsBinDir>
     <ScriptsDir>$(RepoRootPath)scripts</ScriptsDir>
     <Win32MetadataAssetsDir>$(RepoRootPath)sources\GeneratorSdk\tools\assets</Win32MetadataAssetsDir>

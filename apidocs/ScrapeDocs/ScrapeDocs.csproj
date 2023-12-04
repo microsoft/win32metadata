@@ -3,15 +3,15 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <!-- Use plural TargetFrameworks here because we set the singular as a global property in a referencing project. -->
-    <TargetFrameworks>net8.0</TargetFrameworks>
+    <TargetFrameworks>net6.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0|AnyCPU'">
     <LangVersion>10.0</LangVersion>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0|AnyCPU'">
     <LangVersion>10.0</LangVersion>
   </PropertyGroup>
 
