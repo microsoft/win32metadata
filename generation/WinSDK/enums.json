@@ -36867,7 +36867,7 @@
     ]
   },
   {
-    "namespace": "Windows.Win32.Graphics.Gdi",
+    "namespace": "Windows.Win32.UI.ColorSystem",
     "name": "LCSCSTYPE",
     "type": "int",
     "members": [
