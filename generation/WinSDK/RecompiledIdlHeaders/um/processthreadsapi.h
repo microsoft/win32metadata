@@ -1147,16 +1147,18 @@ SetThreadIdealProcessor(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
 
 typedef enum _PROCESS_INFORMATION_CLASS {
-    ProcessMemoryPriority,          // MEMORY_PRIORITY_INFORMATION
-    ProcessMemoryExhaustionInfo,    // PROCESS_MEMORY_EXHAUSTION_INFO
-    ProcessAppMemoryInfo,           // APP_MEMORY_INFORMATION
-    ProcessInPrivateInfo,           // BOOLEAN
-    ProcessPowerThrottling,         // PROCESS_POWER_THROTTLING_STATE
-    ProcessReservedValue1,          // Used to be for ProcessActivityThrottlePolicyInfo
-    ProcessTelemetryCoverageInfo,   // TELEMETRY_COVERAGE_POINT
-    ProcessProtectionLevelInfo,     // PROCESS_PROTECTION_LEVEL_INFORMATION
-    ProcessLeapSecondInfo,          // PROCESS_LEAP_SECOND_INFO
-    ProcessMachineTypeInfo,         // PROCESS_MACHINE_INFORMATION
+    ProcessMemoryPriority,                       // MEMORY_PRIORITY_INFORMATION
+    ProcessMemoryExhaustionInfo,                 // PROCESS_MEMORY_EXHAUSTION_INFO
+    ProcessAppMemoryInfo,                        // APP_MEMORY_INFORMATION
+    ProcessInPrivateInfo,                        // BOOLEAN
+    ProcessPowerThrottling,                      // PROCESS_POWER_THROTTLING_STATE
+    ProcessReservedValue1,                       // Used to be for ProcessActivityThrottlePolicyInfo
+    ProcessTelemetryCoverageInfo,                // TELEMETRY_COVERAGE_POINT
+    ProcessProtectionLevelInfo,                  // PROCESS_PROTECTION_LEVEL_INFORMATION
+    ProcessLeapSecondInfo,                       // PROCESS_LEAP_SECOND_INFO
+    ProcessMachineTypeInfo,                      // PROCESS_MACHINE_INFORMATION
+    ProcessOverrideSubsequentPrefetchParameter,  // OVERRIDE_PREFETCH_PARAMETER
+    ProcessMaxOverridePrefetchParameter,         // OVERRIDE_PREFETCH_PARAMETER
     ProcessInformationClassMax
 } PROCESS_INFORMATION_CLASS;
 
@@ -1182,6 +1184,10 @@ typedef struct _PROCESS_MACHINE_INFORMATION {
     USHORT Res0;
     MACHINE_ATTRIBUTES MachineAttributes;
 } PROCESS_MACHINE_INFORMATION;
+
+typedef struct OVERRIDE_PREFETCH_PARAMETER {
+    UINT32 Value;
+} OVERRIDE_PREFETCH_PARAMETER;
 
 //
 // Constants and structures needed to enable the fail fast on commit failure

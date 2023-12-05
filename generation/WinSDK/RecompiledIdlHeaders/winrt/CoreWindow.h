@@ -75,6 +75,13 @@ typedef interface ICoreWindowAdapterInterop ICoreWindowAdapterInterop;
 #endif 	/* __ICoreWindowAdapterInterop_FWD_DEFINED__ */
 
 
+#ifndef __ICoreInputInterop2_FWD_DEFINED__
+#define __ICoreInputInterop2_FWD_DEFINED__
+typedef interface ICoreInputInterop2 ICoreInputInterop2;
+
+#endif 	/* __ICoreInputInterop2_FWD_DEFINED__ */
+
+
 /* header files for imported files */
 #include "oaidl.h"
 #include "ocidl.h"
@@ -617,12 +624,145 @@ EXTERN_C const IID IID_ICoreWindowAdapterInterop;
 /* [local] */ 
 
 #endif // NTDDI_VERSION >= NTDDI_THRESHOLD
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-#pragma endregion
+#if (NTDDI_VERSION >= NTDDI_WIN10_19H1)
 
 
 extern RPC_IF_HANDLE __MIDL_itf_corewindow_0000_0004_v0_0_c_ifspec;
 extern RPC_IF_HANDLE __MIDL_itf_corewindow_0000_0004_v0_0_s_ifspec;
+
+#ifndef __ICoreInputInterop2_INTERFACE_DEFINED__
+#define __ICoreInputInterop2_INTERFACE_DEFINED__
+
+/* interface ICoreInputInterop2 */
+/* [uuid][object] */ 
+
+
+EXTERN_C const IID IID_ICoreInputInterop2;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("B8A2ACD7-A0F0-40EE-8EE7-C82F59CC5CD4")
+    ICoreInputInterop2 : public IInspectable
+    {
+    public:
+        virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_WindowHandle( 
+            /* [retval][out] */ __RPC__deref_out_opt HWND *window) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE ChangeHostingContext( 
+            /* [in] */ __RPC__in HWND newParentWindow,
+            /* [in] */ UINT32 newViewInstanceId) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ICoreInputInterop2Vtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in ICoreInputInterop2 * This,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in ICoreInputInterop2 * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in ICoreInputInterop2 * This);
+        
+        DECLSPEC_XFGVIRT(IInspectable, GetIids)
+        HRESULT ( STDMETHODCALLTYPE *GetIids )( 
+            __RPC__in ICoreInputInterop2 * This,
+            /* [out] */ __RPC__out ULONG *iidCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*iidCount) IID **iids);
+        
+        DECLSPEC_XFGVIRT(IInspectable, GetRuntimeClassName)
+        HRESULT ( STDMETHODCALLTYPE *GetRuntimeClassName )( 
+            __RPC__in ICoreInputInterop2 * This,
+            /* [out] */ __RPC__deref_out_opt HSTRING *className);
+        
+        DECLSPEC_XFGVIRT(IInspectable, GetTrustLevel)
+        HRESULT ( STDMETHODCALLTYPE *GetTrustLevel )( 
+            __RPC__in ICoreInputInterop2 * This,
+            /* [out] */ __RPC__out TrustLevel *trustLevel);
+        
+        DECLSPEC_XFGVIRT(ICoreInputInterop2, get_WindowHandle)
+        /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WindowHandle )( 
+            __RPC__in ICoreInputInterop2 * This,
+            /* [retval][out] */ __RPC__deref_out_opt HWND *window);
+        
+        DECLSPEC_XFGVIRT(ICoreInputInterop2, ChangeHostingContext)
+        HRESULT ( STDMETHODCALLTYPE *ChangeHostingContext )( 
+            __RPC__in ICoreInputInterop2 * This,
+            /* [in] */ __RPC__in HWND newParentWindow,
+            /* [in] */ UINT32 newViewInstanceId);
+        
+        END_INTERFACE
+    } ICoreInputInterop2Vtbl;
+
+    interface ICoreInputInterop2
+    {
+        CONST_VTBL struct ICoreInputInterop2Vtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ICoreInputInterop2_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ICoreInputInterop2_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ICoreInputInterop2_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ICoreInputInterop2_GetIids(This,iidCount,iids)	\
+    ( (This)->lpVtbl -> GetIids(This,iidCount,iids) ) 
+
+#define ICoreInputInterop2_GetRuntimeClassName(This,className)	\
+    ( (This)->lpVtbl -> GetRuntimeClassName(This,className) ) 
+
+#define ICoreInputInterop2_GetTrustLevel(This,trustLevel)	\
+    ( (This)->lpVtbl -> GetTrustLevel(This,trustLevel) ) 
+
+
+#define ICoreInputInterop2_get_WindowHandle(This,window)	\
+    ( (This)->lpVtbl -> get_WindowHandle(This,window) ) 
+
+#define ICoreInputInterop2_ChangeHostingContext(This,newParentWindow,newViewInstanceId)	\
+    ( (This)->lpVtbl -> ChangeHostingContext(This,newParentWindow,newViewInstanceId) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ICoreInputInterop2_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_corewindow_0000_0005 */
+/* [local] */ 
+
+#endif // NTDDI_VERSION >= NTDDI_WIN10_19H1
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+#pragma endregion
+
+
+extern RPC_IF_HANDLE __MIDL_itf_corewindow_0000_0005_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_corewindow_0000_0005_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

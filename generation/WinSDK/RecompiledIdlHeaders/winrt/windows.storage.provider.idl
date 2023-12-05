@@ -37,6 +37,8 @@ namespace Windows
         interface IStorageItem;
 
         runtimeclass StorageFile;
+
+        runtimeclass StorageFolder;
     }
 }
 namespace Windows
@@ -80,6 +82,8 @@ namespace Windows
 
             typedef enum StorageProviderInSyncPolicy StorageProviderInSyncPolicy;
 
+            typedef enum StorageProviderKnownFolderSyncStatus StorageProviderKnownFolderSyncStatus;
+
             typedef enum StorageProviderPopulationPolicy StorageProviderPopulationPolicy;
 
             typedef enum StorageProviderProtectionMode StorageProviderProtectionMode;
@@ -93,6 +97,8 @@ namespace Windows
             typedef enum UIStatus UIStatus;
 
             typedef enum WriteActivationMode WriteActivationMode;
+
+            delegate StorageProviderKnownFolderSyncRequestedHandler;
 
             interface ICachedFileUpdaterStatics;
 
@@ -123,6 +129,16 @@ namespace Windows
             interface IStorageProviderItemPropertyDefinition;
 
             interface IStorageProviderItemPropertySource;
+
+            interface IStorageProviderKnownFolderEntry;
+
+            interface IStorageProviderKnownFolderSyncInfo;
+
+            interface IStorageProviderKnownFolderSyncInfoSource;
+
+            interface IStorageProviderKnownFolderSyncInfoSourceFactory;
+
+            interface IStorageProviderKnownFolderSyncRequestArgs;
 
             interface IStorageProviderMoreInfoUI;
 
@@ -172,6 +188,12 @@ namespace Windows
 
             runtimeclass StorageProviderItemPropertyDefinition;
 
+            runtimeclass StorageProviderKnownFolderEntry;
+
+            runtimeclass StorageProviderKnownFolderSyncInfo;
+
+            runtimeclass StorageProviderKnownFolderSyncRequestArgs;
+
             runtimeclass StorageProviderMoreInfoUI;
 
             runtimeclass StorageProviderQuotaUI;
@@ -202,6 +224,8 @@ namespace Windows
 
                 interface Windows.Foundation.Collections.IIterable<Windows.Storage.Provider.StorageProviderItemPropertyDefinition*>;
 
+                interface Windows.Foundation.Collections.IIterable<Windows.Storage.Provider.StorageProviderKnownFolderEntry*>;
+
                 interface Windows.Foundation.Collections.IIterable<Windows.Storage.Provider.StorageProviderSyncRootInfo*>;
 
                 interface Windows.Foundation.Collections.IIterator<Windows.Storage.Provider.IStorageProviderUICommand*>;
@@ -212,6 +236,8 @@ namespace Windows
 
                 interface Windows.Foundation.Collections.IIterator<Windows.Storage.Provider.StorageProviderItemPropertyDefinition*>;
 
+                interface Windows.Foundation.Collections.IIterator<Windows.Storage.Provider.StorageProviderKnownFolderEntry*>;
+
                 interface Windows.Foundation.Collections.IIterator<Windows.Storage.Provider.StorageProviderSyncRootInfo*>;
 
                 interface Windows.Foundation.Collections.IVectorView<Windows.Storage.Provider.IStorageProviderUICommand*>;
@@ -219,6 +245,8 @@ namespace Windows
                 interface Windows.Foundation.Collections.IVectorView<Windows.Storage.Provider.StorageProviderFileTypeInfo*>;
 
                 interface Windows.Foundation.Collections.IVectorView<Windows.Storage.Provider.StorageProviderItemPropertyDefinition*>;
+
+                interface Windows.Foundation.Collections.IVectorView<Windows.Storage.Provider.StorageProviderKnownFolderEntry*>;
 
                 interface Windows.Foundation.Collections.IVectorView<Windows.Storage.Provider.StorageProviderSyncRootInfo*>;
 
@@ -228,11 +256,15 @@ namespace Windows
 
                 interface Windows.Foundation.Collections.IVector<Windows.Storage.Provider.StorageProviderItemPropertyDefinition*>;
 
+                interface Windows.Foundation.Collections.IVector<Windows.Storage.Provider.StorageProviderKnownFolderEntry*>;
+
                 interface Windows.Foundation.IAsyncOperation<Windows.Storage.Provider.FileUpdateStatus>;
 
                 interface Windows.Foundation.TypedEventHandler<Windows.Storage.Provider.CachedFileUpdaterUI*, IInspectable*>;
 
                 interface Windows.Foundation.TypedEventHandler<Windows.Storage.Provider.CachedFileUpdaterUI*, Windows.Storage.Provider.FileUpdateRequestedEventArgs*>;
+
+                interface Windows.Foundation.TypedEventHandler<Windows.Storage.Provider.IStorageProviderKnownFolderSyncInfoSource*, IInspectable*>;
 
                 interface Windows.Foundation.TypedEventHandler<Windows.Storage.Provider.IStorageProviderStatusUISource*, IInspectable*>;
             }
@@ -335,6 +367,14 @@ namespace Windows
                 PreserveInsyncForSyncEngine = 0x80000000
             };
 
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            enum StorageProviderKnownFolderSyncStatus
+            {
+                Available = 0,
+                Enrolling = 1,
+                Enrolled  = 2
+            };
+
             [contract(Windows.Storage.Provider.CloudFilesContract, 1.0)]
             enum StorageProviderPopulationPolicy
             {
@@ -392,6 +432,11 @@ namespace Windows
                 NotNeeded  = 1,
                 AfterWrite = 2
             };
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [uuid(C4CBB4F5-13DD-5C8E-8B96-336FC30C629B)]
+            delegate
+                HRESULT StorageProviderKnownFolderSyncRequestedHandler([in] Windows.Storage.Provider.StorageProviderKnownFolderSyncRequestArgs* args);
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [exclusiveto(Windows.Storage.Provider.CachedFileUpdater)]
@@ -545,6 +590,54 @@ namespace Windows
             interface IStorageProviderItemPropertySource : IInspectable
             {
                 HRESULT GetItemProperties([in] HSTRING itemPath, [out] [retval] Windows.Foundation.Collections.IIterable<Windows.Storage.Provider.StorageProviderItemProperty*>** result);
+            }
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [exclusiveto(Windows.Storage.Provider.StorageProviderKnownFolderEntry)]
+            [uuid(EFFA7DB0-1D44-596B-8464-928800C5E2D8)]
+            interface IStorageProviderKnownFolderEntry : IInspectable
+            {
+                [propget] HRESULT KnownFolderId([out] [retval] GUID* value);
+                [propput] HRESULT KnownFolderId([in] GUID value);
+                [propget] HRESULT Status([out] [retval] Windows.Storage.Provider.StorageProviderKnownFolderSyncStatus* value);
+                [propput] HRESULT Status([in] Windows.Storage.Provider.StorageProviderKnownFolderSyncStatus value);
+            }
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [exclusiveto(Windows.Storage.Provider.StorageProviderKnownFolderSyncInfo)]
+            [uuid(98B017CE-FFC1-5B11-AE77-CC17AFEC1049)]
+            interface IStorageProviderKnownFolderSyncInfo : IInspectable
+            {
+                [propget] HRESULT ProviderDisplayName([out] [retval] HSTRING* value);
+                [propput] HRESULT ProviderDisplayName([in] HSTRING value);
+                [propget] HRESULT KnownFolderEntries([out] [retval] Windows.Foundation.Collections.IVector<Windows.Storage.Provider.StorageProviderKnownFolderEntry*>** value);
+                [propget] HRESULT SyncRequested([out] [retval] Windows.Storage.Provider.StorageProviderKnownFolderSyncRequestedHandler** value);
+                [propput] HRESULT SyncRequested([in] Windows.Storage.Provider.StorageProviderKnownFolderSyncRequestedHandler* value);
+            }
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [uuid(51359342-F7C0-53D0-BBB6-1CDC098EBDA9)]
+            interface IStorageProviderKnownFolderSyncInfoSource : IInspectable
+            {
+                HRESULT GetKnownFolderSyncInfo([out] [retval] Windows.Storage.Provider.StorageProviderKnownFolderSyncInfo** result);
+                [eventadd] HRESULT KnownFolderSyncInfoChanged([in] Windows.Foundation.TypedEventHandler<Windows.Storage.Provider.IStorageProviderKnownFolderSyncInfoSource*, IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT KnownFolderSyncInfoChanged([in] EventRegistrationToken token);
+            }
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [uuid(AAEE03A7-A7F6-50BE-A9B0-8E82D0C81082)]
+            interface IStorageProviderKnownFolderSyncInfoSourceFactory : IInspectable
+            {
+                HRESULT GetKnownFolderSyncInfoSource([out] [retval] Windows.Storage.Provider.IStorageProviderKnownFolderSyncInfoSource** result);
+            }
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [exclusiveto(Windows.Storage.Provider.StorageProviderKnownFolderSyncRequestArgs)]
+            [uuid(EDA6D569-B4E8-542F-AB8D-F3613F250A4A)]
+            interface IStorageProviderKnownFolderSyncRequestArgs : IInspectable
+            {
+                [propget] HRESULT KnownFolders([out] [retval] Windows.Foundation.Collections.IVectorView<GUID>** value);
+                [propget] HRESULT Source([out] [retval] Windows.Storage.StorageFolder** value);
             }
 
             [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
@@ -797,6 +890,31 @@ namespace Windows
             runtimeclass StorageProviderItemPropertyDefinition
             {
                 [default] interface Windows.Storage.Provider.IStorageProviderItemPropertyDefinition;
+            }
+
+            [activatable(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass StorageProviderKnownFolderEntry
+            {
+                [default] interface Windows.Storage.Provider.IStorageProviderKnownFolderEntry;
+            }
+
+            [activatable(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass StorageProviderKnownFolderSyncInfo
+            {
+                [default] interface Windows.Storage.Provider.IStorageProviderKnownFolderSyncInfo;
+            }
+
+            [contract(Windows.Storage.Provider.CloudFilesContract, 7.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass StorageProviderKnownFolderSyncRequestArgs
+            {
+                [default] interface Windows.Storage.Provider.IStorageProviderKnownFolderSyncRequestArgs;
             }
 
             [activatable(Windows.Storage.Provider.CloudFilesContract, 7.0)]

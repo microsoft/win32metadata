@@ -69,6 +69,8 @@ namespace Windows
         {
             typedef enum DirectXAlphaMode DirectXAlphaMode;
 
+            typedef enum DirectXColorSpace DirectXColorSpace;
+
             typedef enum DirectXPixelFormat DirectXPixelFormat;
         }
     }
@@ -374,6 +376,10 @@ namespace Windows
 
             interface ICompositionTargetFactory;
 
+            interface ICompositionTexture;
+
+            interface ICompositionTextureFactory;
+
             interface ICompositionTransform;
 
             interface ICompositionTransformFactory;
@@ -653,6 +659,8 @@ namespace Windows
             runtimeclass CompositionSurfaceBrush;
 
             runtimeclass CompositionTarget;
+
+            runtimeclass CompositionTexture;
 
             runtimeclass CompositionTransform;
 
@@ -2087,6 +2095,26 @@ namespace Windows
             [exclusiveto(Windows.UI.Composition.CompositionTarget)]
             [uuid(93CD9D2B-8516-4B14-A8CE-F49E2119EC42)]
             interface ICompositionTargetFactory : IInspectable
+            {
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.UI.Composition.CompositionTexture)]
+            [uuid(347D03A0-1C0A-4C0B-B232-8570B2B1A4EA)]
+            interface ICompositionTexture : IInspectable
+            {
+                [propget] HRESULT SourceRect([out] [retval] Windows.Graphics.RectInt32* value);
+                [propput] HRESULT SourceRect([in] Windows.Graphics.RectInt32 value);
+                [propget] HRESULT AlphaMode([out] [retval] Windows.Graphics.DirectX.DirectXAlphaMode* value);
+                [propput] HRESULT AlphaMode([in] Windows.Graphics.DirectX.DirectXAlphaMode value);
+                [propget] HRESULT ColorSpace([out] [retval] Windows.Graphics.DirectX.DirectXColorSpace* value);
+                [propput] HRESULT ColorSpace([in] Windows.Graphics.DirectX.DirectXColorSpace value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.UI.Composition.CompositionTexture)]
+            [uuid(09D9523D-471C-5AB5-B053-B568EE46EBFB)]
+            interface ICompositionTextureFactory : IInspectable
             {
             }
 
@@ -3535,6 +3563,16 @@ namespace Windows
             runtimeclass CompositionTarget : Windows.UI.Composition.CompositionObject
             {
                 [default] interface Windows.UI.Composition.ICompositionTarget;
+            }
+
+            [composable(Windows.UI.Composition.ICompositionTextureFactory, public, Windows.Foundation.UniversalApiContract, 15.0)]
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass CompositionTexture : Windows.UI.Composition.CompositionObject
+            {
+                [default] interface Windows.UI.Composition.ICompositionTexture;
+                interface Windows.UI.Composition.ICompositionSurface;
             }
 
             [composable(Windows.UI.Composition.ICompositionTransformFactory, public, Windows.Foundation.UniversalApiContract, 8.0)]

@@ -3292,6 +3292,10 @@ CryptDecodeObject(
 #define szOID_NTDS_CA_SECURITY_EXT  "1.3.6.1.4.1.311.25.2"    // OID arc for Microsoft CA custom security extension
 #define szOID_NTDS_OBJECTSID        "1.3.6.1.4.1.311.25.2.1"  // OID for objectSid info
 
+//+-------------------------------------------------------------------------
+//  URI Prefixes for use with the MS Directory Service
+//--------------------------------------------------------------------------
+#define wszURI_NTDS_OBJECTSID_PREFIX L"tag:microsoft.com,2022-09-14:sid:" // URI for objectSid info in the SAN, to be followed by a string SID
 
 //+-------------------------------------------------------------------------
 //  Extension Object Identifiers

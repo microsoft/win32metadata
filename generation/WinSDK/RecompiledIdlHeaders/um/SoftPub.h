@@ -318,13 +318,35 @@ typedef struct CONFIG_CI_PROV_INFO_RESULT_
     DWORD dwPolicyIndex;
     BOOLEAN fIsExplicitDeny;
 } CONFIG_CI_PROV_INFO_RESULT;
-typedef struct CONFIG_CI_PROV_INFO_
+
+typedef
+_Struct_size_bytes_(cbSize)
+struct CONFIG_CI_PROV_INFO_RESULT2_
+{
+    DWORD cbSize;                       // IN
+
+    HRESULT hr;                         // OUT
+    DWORD dwResult;                     // OUT
+    DWORD dwPolicyIndex;                // OUT
+    BOOLEAN fIsExplicitDeny;            // OUT
+
+    DWORD cbCalculatedFileHash;         // OUT
+    _Field_size_bytes_(cbCalculatedFileHash)
+    BYTE *pbCalculatedFileHash;         // OUT: client MUST free this via LocalFree!!!
+
+} CONFIG_CI_PROV_INFO_RESULT2;
+
+
+typedef 
+_Struct_size_bytes_(cbSize)
+struct CONFIG_CI_PROV_INFO_
 {
     DWORD cbSize;
     DWORD dwPolicies;
     _Field_size_(dwPolicies) CRYPT_DATA_BLOB *pPolicies;
     CONFIG_CI_PROV_INFO_RESULT result;
     DWORD dwScenario;
+    CONFIG_CI_PROV_INFO_RESULT2 *result2;
 } CONFIG_CI_PROV_INFO;
 
 #pragma warning (pop)

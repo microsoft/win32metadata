@@ -579,7 +579,6 @@ typedef struct _CAINFO
 #define wszREGENABLEREQUESTEXTENSIONLIST  TEXT("EnableRequestExtensionList")
 #define wszREGENABLEENROLLEEREQUESTEXTENSIONLIST  TEXT("EnableEnrolleeRequestExtensionList")
 #define wszREGDISABLEEXTENSIONLIST  TEXT("DisableExtensionList")
-#define wszREGDISABLESECEXTENSION    TEXT("DisableSecExtension")
 
 // This REG_MULTISZ value allows administrators to control
 // which certificate requests get written to the database.

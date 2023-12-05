@@ -109,11 +109,19 @@ enum DWRITE_GLYPH_IMAGE_FORMATS
     /// The glyph has raw 32-bit premultiplied BGRA data.
     /// </summary>
     DWRITE_GLYPH_IMAGE_FORMATS_PREMULTIPLIED_B8G8R8A8 = 0x00000080,
+
+    /// <summary>
+    /// The glyph is represented by a tree of paint elements in the
+    /// font's COLR table.
+    /// </summary>
+    DWRITE_GLYPH_IMAGE_FORMATS_COLR_PAINT_TREE = 0x00000100,
 };
 
 #ifdef DEFINE_ENUM_FLAG_OPERATORS
 DEFINE_ENUM_FLAG_OPERATORS(DWRITE_GLYPH_IMAGE_FORMATS);
 #endif
+
+#define DWRITE_GLYPH_IMAGE_FORMATS_COLR_PAINT_TREE_DEFINED
 
 #endif
 

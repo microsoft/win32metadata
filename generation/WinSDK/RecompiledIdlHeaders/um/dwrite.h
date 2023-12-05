@@ -25,6 +25,10 @@
 #define DWRITE_DECLARE_INTERFACE(iid) DECLSPEC_UUID(iid) DECLSPEC_NOVTABLE
 #endif
 
+#ifndef DWRITE_BEGIN_INTERFACE
+#define DWRITE_BEGIN_INTERFACE(name, iid) interface DWRITE_DECLARE_INTERFACE(iid) name
+#endif
+
 #ifndef DWRITE_EXPORT
 #define DWRITE_EXPORT __declspec(dllimport) WINAPI
 #endif

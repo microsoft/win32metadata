@@ -138,6 +138,12 @@ DEFINE_DEVPROPKEY(DEVPKEY_Device_IsAssociateableByUserAction, 0x80d81ea6, 0x7473
 DEFINE_DEVPROPKEY(DEVPKEY_Device_ShowInUninstallUI,           0x80d81ea6, 0x7473, 0x4b0c, 0x82, 0x16, 0xef, 0xc1, 0x1a, 0x2c, 0x4c, 0x8b, 8); // DEVPROP_TYPE_BOOLEAN
 
 //
+// Hardware Support App (HSA) properties
+//
+DEFINE_DEVPROPKEY(DEVPKEY_Device_CompanionApps,            0x6a742654, 0xd0b2, 0x4420, 0xa5, 0x23, 0xe0, 0x68, 0x35, 0x2a, 0xc1, 0xdf, 2);    // DEVPROP_TYPE_STRING_LIST
+DEFINE_DEVPROPKEY(DEVPKEY_Device_PrimaryCompanionApp,      0x6a742654, 0xd0b2, 0x4420, 0xa5, 0x23, 0xe0, 0x68, 0x35, 0x2a, 0xc1, 0xdf, 3);    // DEVPROP_TYPE_STRING
+
+//
 // Other Device properties
 //
 #define DEVPKEY_Numa_Proximity_Domain  DEVPKEY_Device_Numa_Proximity_Domain

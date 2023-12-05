@@ -2407,6 +2407,63 @@ DECLARE_INTERFACE_IID_(IDCompositionInkTrailDevice, IUnknown, "DF0C7CEC-CDEB-4D4
         ) PURE;
 };
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
+
+//+-----------------------------------------------------------------------------
+//
+//  Interface:
+//      IDCompositionTexture
+//
+//  Synopsis:
+//      An interface representing a raw D3D texture that can be bound to a
+//      dcomp visual as content.
+//
+//------------------------------------------------------------------------------
+#undef INTERFACE
+#define INTERFACE IDCompositionTexture
+DECLARE_INTERFACE_IID_(IDCompositionTexture, IUnknown, "929BB1AA-725F-433B-ABD7-273075A835F2")
+{
+    STDMETHOD(SetSourceRect)(THIS_
+        _In_ const D2D_RECT_U& sourceRect) PURE;
+
+    STDMETHOD(SetColorSpace)(THIS_
+        _In_ DXGI_COLOR_SPACE_TYPE colorSpace) PURE;
+
+    STDMETHOD(SetAlphaMode)(THIS_
+        _In_ DXGI_ALPHA_MODE alphaMode) PURE;
+
+    STDMETHOD(GetAvailableFence)(THIS_
+        _Out_ UINT64* fenceValue,
+        _In_ REFIID iid,
+        _Outptr_result_maybenull_ void** availableFence) PURE;
+};
+
+//+-----------------------------------------------------------------------------
+//
+//  Interface:
+//      IDCompositionDevice4
+//
+//  Synopsis:
+//      Serves as the root factory for composition textures.
+//
+//------------------------------------------------------------------------------
+#undef INTERFACE
+#define INTERFACE IDCompositionDevice4
+DECLARE_INTERFACE_IID_(IDCompositionDevice4, IDCompositionDevice3, "85FC5CCA-2DA6-494C-86B6-4A775C049B8A")
+{
+    // Determine whether or not the backing D3D device Supports composition textures
+    STDMETHOD(CheckCompositionTextureSupport)(THIS_
+        _In_ IUnknown* renderingDevice,
+        _Out_ BOOL* supportsCompositionTextures) PURE;
+
+    // Call to create a composition texture referencing the passed D3D texture
+    STDMETHOD(CreateCompositionTexture)(THIS_
+        _In_ IUnknown* d3dTexture,
+        _Outptr_result_maybenull_ IDCompositionTexture** compositionTexture) PURE;
+};
+
+#endif // #if (NTDDI_VERSION >= NTDDI_WIN10_NI)
+
 #endif  // (_WIN32_WINNT >= _WIN32_WINNT_WINTHRESHOLD)
 
 #undef INTERFACE

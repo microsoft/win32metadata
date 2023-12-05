@@ -2938,6 +2938,14 @@ DEFINE_PROPERTYKEY(PKEY_StorageProviderError, 0xFCEFF153, 0xE839, 0x4CF3, 0xA9, 
 DEFINE_PROPERTYKEY(PKEY_StorageProviderFileChecksum, 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B, 5);
 #define INIT_PKEY_StorageProviderFileChecksum { { 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B }, 5 }
 
+//  Name:     System.StorageProviderFileCreatedBy -- PKEY_StorageProviderFileCreatedBy
+//  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
+//  FormatID: {B2F9B9D6-FEC4-4DD5-94D7-8957488C807B}, 10
+//
+//  The display name of the user who created the file or folder specified by the storage provider.
+DEFINE_PROPERTYKEY(PKEY_StorageProviderFileCreatedBy, 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B, 10);
+#define INIT_PKEY_StorageProviderFileCreatedBy { { 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B }, 10 }
+
 //  Name:     System.StorageProviderFileFlags -- PKEY_StorageProviderFileFlags
 //  Type:     UInt32 -- VT_UI4
 //  FormatID: {B2F9B9D6-FEC4-4DD5-94D7-8957488C807B}, 8
@@ -2961,6 +2969,14 @@ DEFINE_PROPERTYKEY(PKEY_StorageProviderFileHasConflict, 0xB2F9B9D6, 0xFEC4, 0x4D
 //  The storage provider identifier for this file.
 DEFINE_PROPERTYKEY(PKEY_StorageProviderFileIdentifier, 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B, 3);
 #define INIT_PKEY_StorageProviderFileIdentifier { { 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B }, 3 }
+
+//  Name:     System.StorageProviderFileModifiedBy -- PKEY_StorageProviderFileModifiedBy
+//  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
+//  FormatID: {B2F9B9D6-FEC4-4DD5-94D7-8957488C807B}, 11
+//
+//  The display name of the user who last modified the file or folder specified by the storage provider.
+DEFINE_PROPERTYKEY(PKEY_StorageProviderFileModifiedBy, 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B, 11);
+#define INIT_PKEY_StorageProviderFileModifiedBy { { 0xB2F9B9D6, 0xFEC4, 0x4DD5, 0x94, 0xD7, 0x89, 0x57, 0x48, 0x8C, 0x80, 0x7B }, 11 }
 
 //  Name:     System.StorageProviderFileRemoteUri -- PKEY_StorageProviderFileRemoteUri
 //  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
@@ -6512,6 +6528,65 @@ DEFINE_PROPERTYKEY(PKEY_Message_ToName, 0xE3E0584C, 0xB788, 0x4A5A, 0xBB, 0x20, 
 #define INIT_PKEY_Message_ToName { { 0xE3E0584C, 0xB788, 0x4A5A, 0xBB, 0x20, 0x7F, 0x5A, 0x44, 0xC9, 0xAC, 0xDD }, 17 }
 
 //-----------------------------------------------------------------------------
+// MsGraph properties
+
+//  Name:     System.MsGraph.CompositeId -- PKEY_MsGraph_CompositeId
+//  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
+//  FormatID: {4F85567E-FFF0-4DF5-B1D9-98B314FF0729}, 2
+//
+//  The Microsoft Graph unique composite identifier of this item.
+DEFINE_PROPERTYKEY(PKEY_MsGraph_CompositeId, 0x4F85567E, 0xFFF0, 0x4DF5, 0xB1, 0xD9, 0x98, 0xB3, 0x14, 0xFF, 0x07, 0x29, 2);
+#define INIT_PKEY_MsGraph_CompositeId { { 0x4F85567E, 0xFFF0, 0x4DF5, 0xB1, 0xD9, 0x98, 0xB3, 0x14, 0xFF, 0x07, 0x29 }, 2 }
+
+//  Name:     System.MsGraph.DriveId -- PKEY_MsGraph_DriveId
+//  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
+//  FormatID: {4F85567E-FFF0-4DF5-B1D9-98B314FF0729}, 3
+//
+//  The Microsoft Graph unique identifier of the drive instance that contains the item.
+DEFINE_PROPERTYKEY(PKEY_MsGraph_DriveId, 0x4F85567E, 0xFFF0, 0x4DF5, 0xB1, 0xD9, 0x98, 0xB3, 0x14, 0xFF, 0x07, 0x29, 3);
+#define INIT_PKEY_MsGraph_DriveId { { 0x4F85567E, 0xFFF0, 0x4DF5, 0xB1, 0xD9, 0x98, 0xB3, 0x14, 0xFF, 0x07, 0x29 }, 3 }
+
+//  Name:     System.MsGraph.ItemId -- PKEY_MsGraph_ItemId
+//  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
+//  FormatID: {4F85567E-FFF0-4DF5-B1D9-98B314FF0729}, 4
+//
+//  The Microsoft Graph unique identifier of this item in the drive.
+DEFINE_PROPERTYKEY(PKEY_MsGraph_ItemId, 0x4F85567E, 0xFFF0, 0x4DF5, 0xB1, 0xD9, 0x98, 0xB3, 0x14, 0xFF, 0x07, 0x29, 4);
+#define INIT_PKEY_MsGraph_ItemId { { 0x4F85567E, 0xFFF0, 0x4DF5, 0xB1, 0xD9, 0x98, 0xB3, 0x14, 0xFF, 0x07, 0x29 }, 4 }
+
+//  Name:     System.MsGraph.RecommendationReason -- PKEY_MsGraph_RecommendationReason
+//  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
+//  FormatID: {4F85567E-FFF0-4DF5-B1D9-98B314FF0729}, 8
+//
+//  The JSON object representing information about the reason marker for a recommended item
+DEFINE_PROPERTYKEY(PKEY_MsGraph_RecommendationReason, 0x4F85567E, 0xFFF0, 0x4DF5, 0xB1, 0xD9, 0x98, 0xB3, 0x14, 0xFF, 0x07, 0x29, 8);
+#define INIT_PKEY_MsGraph_RecommendationReason { { 0x4F85567E, 0xFFF0, 0x4DF5, 0xB1, 0xD9, 0x98, 0xB3, 0x14, 0xFF, 0x07, 0x29 }, 8 }
+
+//  Name:     System.MsGraph.RecommendationReferenceId -- PKEY_MsGraph_RecommendationReferenceId
+//  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
+//  FormatID: {4F85567E-FFF0-4DF5-B1D9-98B314FF0729}, 5
+//
+//  The 3S Recommendations reference Id used as a unique Id for recommended items.
+DEFINE_PROPERTYKEY(PKEY_MsGraph_RecommendationReferenceId, 0x4F85567E, 0xFFF0, 0x4DF5, 0xB1, 0xD9, 0x98, 0xB3, 0x14, 0xFF, 0x07, 0x29, 5);
+#define INIT_PKEY_MsGraph_RecommendationReferenceId { { 0x4F85567E, 0xFFF0, 0x4DF5, 0xB1, 0xD9, 0x98, 0xB3, 0x14, 0xFF, 0x07, 0x29 }, 5 }
+
+//  Name:     System.MsGraph.RecommendationResultSourceId -- PKEY_MsGraph_RecommendationResultSourceId
+//  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
+//  FormatID: {4F85567E-FFF0-4DF5-B1D9-98B314FF0729}, 7
+//
+//  The recommendation result source Id.
+DEFINE_PROPERTYKEY(PKEY_MsGraph_RecommendationResultSourceId, 0x4F85567E, 0xFFF0, 0x4DF5, 0xB1, 0xD9, 0x98, 0xB3, 0x14, 0xFF, 0x07, 0x29, 7);
+#define INIT_PKEY_MsGraph_RecommendationResultSourceId { { 0x4F85567E, 0xFFF0, 0x4DF5, 0xB1, 0xD9, 0x98, 0xB3, 0x14, 0xFF, 0x07, 0x29 }, 7 }
+
+//  Name:     System.MsGraph.WebAccountId -- PKEY_MsGraph_WebAccountId
+//  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
+//  FormatID: {4F85567E-FFF0-4DF5-B1D9-98B314FF0729}, 6
+//
+//  The WAM account identifier associated with this item.
+DEFINE_PROPERTYKEY(PKEY_MsGraph_WebAccountId, 0x4F85567E, 0xFFF0, 0x4DF5, 0xB1, 0xD9, 0x98, 0xB3, 0x14, 0xFF, 0x07, 0x29, 6);
+#define INIT_PKEY_MsGraph_WebAccountId { { 0x4F85567E, 0xFFF0, 0x4DF5, 0xB1, 0xD9, 0x98, 0xB3, 0x14, 0xFF, 0x07, 0x29 }, 6 }
+
+//-----------------------------------------------------------------------------
 // Music properties
 
 //  Name:     System.Music.AlbumArtist -- PKEY_Music_AlbumArtist
@@ -7889,6 +7964,14 @@ DEFINE_PROPERTYKEY(PKEY_RecordedTV_StationName, 0x1B5439E7, 0xEBA1, 0x4AF8, 0xBD
 //-----------------------------------------------------------------------------
 // Search properties
 
+//  Name:     System.LocationEmptyString -- PKEY_LocationEmptyString
+//  Type:     Unspecified -- VT_NULL
+//  FormatID: {62D2D9AB-8B64-498D-B865-402D4796F865}, 3
+//
+//  The display string shown when the user navigates to a location, but the location is empty.
+DEFINE_PROPERTYKEY(PKEY_LocationEmptyString, 0x62D2D9AB, 0x8B64, 0x498D, 0xB8, 0x65, 0x40, 0x2D, 0x47, 0x96, 0xF8, 0x65, 3);
+#define INIT_PKEY_LocationEmptyString { { 0x62D2D9AB, 0x8B64, 0x498D, 0xB8, 0x65, 0x40, 0x2D, 0x47, 0x96, 0xF8, 0x65 }, 3 }
+
 //  Name:     System.Search.AutoSummary -- PKEY_Search_AutoSummary
 //  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
 //  FormatID: {560C36C0-503A-11CF-BAA1-00004C752A9A}, 2
@@ -8070,6 +8153,14 @@ DEFINE_PROPERTYKEY(PKEY_Supplemental_Tag, 0x0C73B141, 0x39D6, 0x4653, 0xA6, 0x83
 //-----------------------------------------------------------------------------
 // Shell properties
 
+//  Name:     System.ActivityInfo -- PKEY_ActivityInfo
+//  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
+//  FormatID: {30C8EEF4-A832-41E2-AB32-E3C3CA28FD29}, 17
+//
+//  What is the activity that made the graph item show. For example, recently used or shared
+DEFINE_PROPERTYKEY(PKEY_ActivityInfo, 0x30C8EEF4, 0xA832, 0x41E2, 0xAB, 0x32, 0xE3, 0xC3, 0xCA, 0x28, 0xFD, 0x29, 17);
+#define INIT_PKEY_ActivityInfo { { 0x30C8EEF4, 0xA832, 0x41E2, 0xAB, 0x32, 0xE3, 0xC3, 0xCA, 0x28, 0xFD, 0x29 }, 17 }
+
 //  Name:     System.DescriptionID -- PKEY_DescriptionID
 //  Type:     Buffer -- VT_VECTOR | VT_UI1  (For variants: VT_ARRAY | VT_UI1)
 //  FormatID: (FMTID_ShellDetails) {28636AA6-953D-11D2-B5D6-00C04FD918D0}, 2 (PID_DESCRIPTIONID)
@@ -8077,6 +8168,35 @@ DEFINE_PROPERTYKEY(PKEY_Supplemental_Tag, 0x0C73B141, 0x39D6, 0x4653, 0xA6, 0x83
 //  The contents of a SHDESCRIPTIONID structure as a buffer of bytes.
 DEFINE_PROPERTYKEY(PKEY_DescriptionID, 0x28636AA6, 0x953D, 0x11D2, 0xB5, 0xD6, 0x00, 0xC0, 0x4F, 0xD9, 0x18, 0xD0, 2);
 #define INIT_PKEY_DescriptionID { { 0x28636AA6, 0x953D, 0x11D2, 0xB5, 0xD6, 0x00, 0xC0, 0x4F, 0xD9, 0x18, 0xD0 }, 2 }
+
+//  Name:     System.Home.Grouping -- PKEY_Home_Grouping
+//  Type:     UInt32 -- VT_UI4
+//  FormatID: {30C8EEF4-A832-41E2-AB32-E3C3CA28FD29}, 2
+//
+//  Which group the element belongs to frequent, pinned, recent or recommendations
+DEFINE_PROPERTYKEY(PKEY_Home_Grouping, 0x30C8EEF4, 0xA832, 0x41E2, 0xAB, 0x32, 0xE3, 0xC3, 0xCA, 0x28, 0xFD, 0x29, 2);
+#define INIT_PKEY_Home_Grouping { { 0x30C8EEF4, 0xA832, 0x41E2, 0xAB, 0x32, 0xE3, 0xC3, 0xCA, 0x28, 0xFD, 0x29 }, 2 }
+
+// Possible discrete values for PKEY_Home_Grouping are:
+#define HOMEGROUPING_UNSPECIFIED            0ul
+#define HOMEGROUPING_FREQUENT               1ul
+#define HOMEGROUPING_PINNED                 2ul
+#define HOMEGROUPING_RECENT                 3ul
+#define HOMEGROUPING_RECOMMENDATIONS        4ul
+
+//  Name:     System.Home.IsPinned -- PKEY_Home_IsPinned
+//  Type:     Boolean -- VT_BOOL
+//  FormatID: {30C8EEF4-A832-41E2-AB32-E3C3CA28FD29}, 4
+DEFINE_PROPERTYKEY(PKEY_Home_IsPinned, 0x30C8EEF4, 0xA832, 0x41E2, 0xAB, 0x32, 0xE3, 0xC3, 0xCA, 0x28, 0xFD, 0x29, 4);
+#define INIT_PKEY_Home_IsPinned { { 0x30C8EEF4, 0xA832, 0x41E2, 0xAB, 0x32, 0xE3, 0xC3, 0xCA, 0x28, 0xFD, 0x29 }, 4 }
+
+//  Name:     System.Home.ItemFolderPathDisplay -- PKEY_Home_ItemFolderPathDisplay
+//  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
+//  FormatID: {30C8EEF4-A832-41E2-AB32-E3C3CA28FD29}, 6
+//
+//  Friendly name used for the folder path when displayed on File Explorer Home"
+DEFINE_PROPERTYKEY(PKEY_Home_ItemFolderPathDisplay, 0x30C8EEF4, 0xA832, 0x41E2, 0xAB, 0x32, 0xE3, 0xC3, 0xCA, 0x28, 0xFD, 0x29, 6);
+#define INIT_PKEY_Home_ItemFolderPathDisplay { { 0x30C8EEF4, 0xA832, 0x41E2, 0xAB, 0x32, 0xE3, 0xC3, 0xCA, 0x28, 0xFD, 0x29 }, 6 }
 
 //  Name:     System.InternalName -- PKEY_InternalName
 //  Type:     String -- VT_LPWSTR  (For variants: VT_BSTR)
@@ -8154,6 +8274,43 @@ DEFINE_PROPERTYKEY(PKEY_StatusBarSelectedItemCount, 0x26DC287C, 0x6E3D, 0x4BD3, 
 //  Count of items in the view
 DEFINE_PROPERTYKEY(PKEY_StatusBarViewItemCount, 0x26DC287C, 0x6E3D, 0x4BD3, 0xB2, 0xB0, 0x6A, 0x26, 0xBA, 0x2E, 0x34, 0x6D, 2);
 #define INIT_PKEY_StatusBarViewItemCount { { 0x26DC287C, 0x6E3D, 0x4BD3, 0xB2, 0xB0, 0x6A, 0x26, 0xBA, 0x2E, 0x34, 0x6D }, 2 }
+
+//  Name:     System.StorageProviderState -- PKEY_StorageProviderState
+//  Type:     UInt32 -- VT_UI4
+//  FormatID: {E77E90DF-6271-4F5B-834F-2DD1F245DDA4}, 3
+//
+//  Property for the cloud file state icon.
+DEFINE_PROPERTYKEY(PKEY_StorageProviderState, 0xE77E90DF, 0x6271, 0x4F5B, 0x83, 0x4F, 0x2D, 0xD1, 0xF2, 0x45, 0xDD, 0xA4, 3);
+#define INIT_PKEY_StorageProviderState { { 0xE77E90DF, 0x6271, 0x4F5B, 0x83, 0x4F, 0x2D, 0xD1, 0xF2, 0x45, 0xDD, 0xA4 }, 3 }
+
+// Possible discrete values for PKEY_StorageProviderState are:
+#define STORAGEPROVIDERSTATE_NONE           0ul
+#define STORAGEPROVIDERSTATE_SPARSE         1ul
+#define STORAGEPROVIDERSTATE_IN_SYNC        2ul
+#define STORAGEPROVIDERSTATE_PINNED         3ul
+#define STORAGEPROVIDERSTATE_PENDING_UPLOAD 4ul
+#define STORAGEPROVIDERSTATE_PENDING_DOWNLOAD 5ul
+#define STORAGEPROVIDERSTATE_TRANSFERRING   6ul
+#define STORAGEPROVIDERSTATE_ERROR          7ul
+#define STORAGEPROVIDERSTATE_WARNING        8ul
+#define STORAGEPROVIDERSTATE_EXCLUDED       9ul
+#define STORAGEPROVIDERSTATE_PENDING_UNSPECIFIED 10ul
+
+//  Name:     System.StorageProviderTransferProgress -- PKEY_StorageProviderTransferProgress
+//  Type:     Multivalue UInt32 -- VT_VECTOR | VT_UI4  (For variants: VT_ARRAY | VT_UI4)
+//  FormatID: {E77E90DF-6271-4F5B-834F-2DD1F245DDA4}, 4
+//
+//  An array of two UInt32 values (max value, current value).
+DEFINE_PROPERTYKEY(PKEY_StorageProviderTransferProgress, 0xE77E90DF, 0x6271, 0x4F5B, 0x83, 0x4F, 0x2D, 0xD1, 0xF2, 0x45, 0xDD, 0xA4, 4);
+#define INIT_PKEY_StorageProviderTransferProgress { { 0xE77E90DF, 0x6271, 0x4F5B, 0x83, 0x4F, 0x2D, 0xD1, 0xF2, 0x45, 0xDD, 0xA4 }, 4 }
+
+//  Name:     System.StorageProviderUIStatus -- PKEY_StorageProviderUIStatus
+//  Type:     Blob -- VT_BLOB
+//  FormatID: {E77E90DF-6271-4F5B-834F-2DD1F245DDA4}, 2
+//
+//  The container property for the cloud file state icon.
+DEFINE_PROPERTYKEY(PKEY_StorageProviderUIStatus, 0xE77E90DF, 0x6271, 0x4F5B, 0x83, 0x4F, 0x2D, 0xD1, 0xF2, 0x45, 0xDD, 0xA4, 2);
+#define INIT_PKEY_StorageProviderUIStatus { { 0xE77E90DF, 0x6271, 0x4F5B, 0x83, 0x4F, 0x2D, 0xD1, 0xF2, 0x45, 0xDD, 0xA4 }, 2 }
 
 //-----------------------------------------------------------------------------
 // Software properties

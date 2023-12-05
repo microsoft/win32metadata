@@ -853,6 +853,18 @@ WINLDAPAPI ULONG LDAPAPI ldap_set_optionW( LDAP *ld, int option, const void *inv
 #define LDAP_OPT_SOCKET_BIND_ADDRESSES  0x44
 
 //
+// Allows configuration of the ld_cldaptimeout value for
+// connections opened in CLDAP\UDP mode.
+//
+#define LDAP_OPT_CLDAP_TIMEOUT          0x45
+
+//
+// Allows configuration of the ld_cldaptries value for
+// connections opened in CLDAP\UDP mode.
+//
+#define LDAP_OPT_CLDAP_TRIES            0x46
+
+//
 //  End of Microsoft only options
 //
 

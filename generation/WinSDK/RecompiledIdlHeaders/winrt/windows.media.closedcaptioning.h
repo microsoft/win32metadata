@@ -123,9 +123,49 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace ClosedCaptioning {
+                interface IClosedCaptionPropertiesStatics2;
+            } /* ClosedCaptioning */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2 ABI::Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics2
+
+#endif // ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2_FWD_DEFINED__
+
 // Parameterized interface forward declarations (C++)
 
 // Collection interface definitions
+
+#ifndef DEF___FIEventHandler_1_IInspectable_USE
+#define DEF___FIEventHandler_1_IInspectable_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("c50898f6-c536-5f47-8583-8b2c2438a13b"))
+IEventHandler<IInspectable*> : IEventHandler_impl<IInspectable*>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.EventHandler`1<Object>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IEventHandler<IInspectable*> __FIEventHandler_1_IInspectable_t;
+#define __FIEventHandler_1_IInspectable ABI::Windows::Foundation::__FIEventHandler_1_IInspectable_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIEventHandler_1_IInspectable_USE */
+
+
 namespace ABI {
     namespace Windows {
         namespace UI {
@@ -393,11 +433,52 @@ EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaption
 
 /*
  *
+ * Interface Windows.Media.ClosedCaptioning.IClosedCaptionPropertiesStatics2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.ClosedCaptioning.ClosedCaptionProperties
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_ClosedCaptioning_IClosedCaptionPropertiesStatics2[] = L"Windows.Media.ClosedCaptioning.IClosedCaptionPropertiesStatics2";
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace ClosedCaptioning {
+                MIDL_INTERFACE("9de26870-37de-4197-8845-9a48dc5ac317")
+                IClosedCaptionPropertiesStatics2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE add_PropertiesChanged(
+                        __FIEventHandler_1_IInspectable* handler,
+                        EventRegistrationToken* token
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE remove_PropertiesChanged(
+                        EventRegistrationToken token
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IClosedCaptionPropertiesStatics2 = _uuidof(IClosedCaptionPropertiesStatics2);
+            } /* ClosedCaptioning */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Class Windows.Media.ClosedCaptioning.ClosedCaptionProperties
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Media.ClosedCaptioning.IClosedCaptionPropertiesStatics2 interface starting with version 15.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.ClosedCaptioning.IClosedCaptionPropertiesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
@@ -420,9 +501,62 @@ typedef interface __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPrope
 
 #endif // ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2 __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2;
+
+#endif // ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2_FWD_DEFINED__
+
 // Parameterized interface forward declarations (C)
 
 // Collection interface definitions
+
+#if !defined(____FIEventHandler_1_IInspectable_INTERFACE_DEFINED__)
+#define ____FIEventHandler_1_IInspectable_INTERFACE_DEFINED__
+
+typedef interface __FIEventHandler_1_IInspectable __FIEventHandler_1_IInspectable;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIEventHandler_1_IInspectable;
+
+typedef struct __FIEventHandler_1_IInspectableVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIEventHandler_1_IInspectable* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIEventHandler_1_IInspectable* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIEventHandler_1_IInspectable* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FIEventHandler_1_IInspectable* This,
+        IInspectable* sender,
+        IInspectable* args);
+
+    END_INTERFACE
+} __FIEventHandler_1_IInspectableVtbl;
+
+interface __FIEventHandler_1_IInspectable
+{
+    CONST_VTBL struct __FIEventHandler_1_IInspectableVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIEventHandler_1_IInspectable_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIEventHandler_1_IInspectable_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIEventHandler_1_IInspectable_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIEventHandler_1_IInspectable_Invoke(This, sender, args) \
+    ((This)->lpVtbl->Invoke(This, sender, args))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIEventHandler_1_IInspectable_INTERFACE_DEFINED__
 
 typedef struct __x_ABI_CWindows_CUI_CColor __x_ABI_CWindows_CUI_CColor;
 
@@ -660,11 +794,87 @@ EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaption
 
 /*
  *
+ * Interface Windows.Media.ClosedCaptioning.IClosedCaptionPropertiesStatics2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.ClosedCaptioning.ClosedCaptionProperties
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_ClosedCaptioning_IClosedCaptionPropertiesStatics2[] = L"Windows.Media.ClosedCaptioning.IClosedCaptionPropertiesStatics2";
+typedef struct __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* add_PropertiesChanged)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2* This,
+        __FIEventHandler_1_IInspectable* handler,
+        EventRegistrationToken* token);
+    HRESULT (STDMETHODCALLTYPE* remove_PropertiesChanged)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2* This,
+        EventRegistrationToken token);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2Vtbl;
+
+interface __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2_add_PropertiesChanged(This, handler, token) \
+    ((This)->lpVtbl->add_PropertiesChanged(This, handler, token))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2_remove_PropertiesChanged(This, token) \
+    ((This)->lpVtbl->remove_PropertiesChanged(This, token))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Class Windows.Media.ClosedCaptioning.ClosedCaptionProperties
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Media.ClosedCaptioning.IClosedCaptionPropertiesStatics2 interface starting with version 15.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.ClosedCaptioning.IClosedCaptionPropertiesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment

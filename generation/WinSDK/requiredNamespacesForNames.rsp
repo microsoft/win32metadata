@@ -100,6 +100,7 @@ D2D1_ALPHA_MODE=Windows.Win32.Graphics.Direct2D.Common
 D2D1_COLOR_F=Windows.Win32.Graphics.Direct2D.Common
 D2D1_COLORMATRIX_ALPHA_MODE=Windows.Win32.Graphics.Direct2D.Common
 D2D1_TURBULENCE_NOISE=Windows.Win32.Graphics.Direct2D.Common
+D2D1_GRADIENT_STOP=Windows.Win32.Graphics.Direct2D.Common
 # endregion d2d1.h
 # region d2d1_1.h
 # Moved up to avoid dragging in D2D when only the types are needed

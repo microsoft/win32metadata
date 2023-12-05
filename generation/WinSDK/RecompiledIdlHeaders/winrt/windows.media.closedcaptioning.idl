@@ -45,6 +45,8 @@ namespace Windows
 
             interface IClosedCaptionPropertiesStatics;
 
+            interface IClosedCaptionPropertiesStatics2;
+
             runtimeclass ClosedCaptionProperties;
         }
     }
@@ -136,9 +138,19 @@ namespace Windows
                 [propget] HRESULT RegionOpacity([out] [retval] Windows.Media.ClosedCaptioning.ClosedCaptionOpacity* value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Media.ClosedCaptioning.ClosedCaptionProperties)]
+            [uuid(9DE26870-37DE-4197-8845-9A48DC5AC317)]
+            interface IClosedCaptionPropertiesStatics2 : IInspectable
+            {
+                [eventadd] HRESULT PropertiesChanged([in] Windows.Foundation.EventHandler<IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT PropertiesChanged([in] EventRegistrationToken token);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [marshaling_behavior(agile)]
             [static(Windows.Media.ClosedCaptioning.IClosedCaptionPropertiesStatics, Windows.Foundation.UniversalApiContract, 1.0)]
+            [static(Windows.Media.ClosedCaptioning.IClosedCaptionPropertiesStatics2, Windows.Foundation.UniversalApiContract, 15.0)]
             [threading(both)]
             runtimeclass ClosedCaptionProperties
             {

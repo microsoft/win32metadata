@@ -1875,8 +1875,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.ApplicationModel.Search.SearchContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Search.ISearchPaneStatics interface starting with version 1.0 of the Windows.ApplicationModel.Search.SearchContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Search.ISearchPaneStaticsWithHideThisApplication interface starting with version 1.0 of the Windows.ApplicationModel.Search.SearchContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Search.ISearchPaneStatics interface starting with version 1.0 of the Windows.ApplicationModel.Search.SearchContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Search.ISearchPane ** Default Interface **
@@ -5018,8 +5018,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.ApplicationModel.Search.SearchContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Search.ISearchPaneStatics interface starting with version 1.0 of the Windows.ApplicationModel.Search.SearchContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Search.ISearchPaneStaticsWithHideThisApplication interface starting with version 1.0 of the Windows.ApplicationModel.Search.SearchContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Search.ISearchPaneStatics interface starting with version 1.0 of the Windows.ApplicationModel.Search.SearchContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Search.ISearchPane ** Default Interface **

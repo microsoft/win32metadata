@@ -66,6 +66,20 @@ typedef struct IsolatedAppLauncher IsolatedAppLauncher;
 #endif 	/* __IsolatedAppLauncher_FWD_DEFINED__ */
 
 
+#ifndef __IIsolatedProcessLauncher_FWD_DEFINED__
+#define __IIsolatedProcessLauncher_FWD_DEFINED__
+typedef interface IIsolatedProcessLauncher IIsolatedProcessLauncher;
+
+#endif 	/* __IIsolatedProcessLauncher_FWD_DEFINED__ */
+
+
+#ifndef __IIsolatedProcessLauncher2_FWD_DEFINED__
+#define __IIsolatedProcessLauncher2_FWD_DEFINED__
+typedef interface IIsolatedProcessLauncher2 IIsolatedProcessLauncher2;
+
+#endif 	/* __IIsolatedProcessLauncher2_FWD_DEFINED__ */
+
+
 /* header files for imported files */
 #include "oaidl.h"
 #include "ocidl.h"
@@ -219,10 +233,328 @@ STDAPI IsProcessInWDAGContainer(_In_ PVOID Reserved, _Out_ BOOL *isProcessInWDAG
 STDAPI IsProcessInIsolatedContainer(_Out_ BOOL *isProcessInIsolatedContainer);
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
 #pragma endregion
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
 
 
 extern RPC_IF_HANDLE __MIDL_itf_isolatedapplauncher_0000_0002_v0_0_c_ifspec;
 extern RPC_IF_HANDLE __MIDL_itf_isolatedapplauncher_0000_0002_v0_0_s_ifspec;
+
+#ifndef __IIsolatedProcessLauncher_INTERFACE_DEFINED__
+#define __IIsolatedProcessLauncher_INTERFACE_DEFINED__
+
+/* interface IIsolatedProcessLauncher */
+/* [uuid][object] */ 
+
+
+EXTERN_C const IID IID_IIsolatedProcessLauncher;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("1aa24232-9a91-4201-88cb-122f9d6522e0")
+    IIsolatedProcessLauncher : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE LaunchProcess( 
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR process,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR arguments,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR workingDirectory) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE ShareDirectory( 
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR hostPath,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR containerPath,
+            /* [annotation][in] */ 
+            _In_  BOOL readOnly) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetContainerGuid( 
+            /* [annotation][out] */ 
+            _Out_  GUID *guid) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE AllowSetForegroundAccess( 
+            /* [annotation][in] */ 
+            _In_  UINT pid) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE IsContainerRunning( 
+            /* [annotation][out] */ 
+            _Out_  BOOL *running) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IIsolatedProcessLauncherVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IIsolatedProcessLauncher * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IIsolatedProcessLauncher * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IIsolatedProcessLauncher * This);
+        
+        DECLSPEC_XFGVIRT(IIsolatedProcessLauncher, LaunchProcess)
+        HRESULT ( STDMETHODCALLTYPE *LaunchProcess )( 
+            __RPC__in IIsolatedProcessLauncher * This,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR process,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR arguments,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR workingDirectory);
+        
+        DECLSPEC_XFGVIRT(IIsolatedProcessLauncher, ShareDirectory)
+        HRESULT ( STDMETHODCALLTYPE *ShareDirectory )( 
+            __RPC__in IIsolatedProcessLauncher * This,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR hostPath,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR containerPath,
+            /* [annotation][in] */ 
+            _In_  BOOL readOnly);
+        
+        DECLSPEC_XFGVIRT(IIsolatedProcessLauncher, GetContainerGuid)
+        HRESULT ( STDMETHODCALLTYPE *GetContainerGuid )( 
+            __RPC__in IIsolatedProcessLauncher * This,
+            /* [annotation][out] */ 
+            _Out_  GUID *guid);
+        
+        DECLSPEC_XFGVIRT(IIsolatedProcessLauncher, AllowSetForegroundAccess)
+        HRESULT ( STDMETHODCALLTYPE *AllowSetForegroundAccess )( 
+            __RPC__in IIsolatedProcessLauncher * This,
+            /* [annotation][in] */ 
+            _In_  UINT pid);
+        
+        DECLSPEC_XFGVIRT(IIsolatedProcessLauncher, IsContainerRunning)
+        HRESULT ( STDMETHODCALLTYPE *IsContainerRunning )( 
+            __RPC__in IIsolatedProcessLauncher * This,
+            /* [annotation][out] */ 
+            _Out_  BOOL *running);
+        
+        END_INTERFACE
+    } IIsolatedProcessLauncherVtbl;
+
+    interface IIsolatedProcessLauncher
+    {
+        CONST_VTBL struct IIsolatedProcessLauncherVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IIsolatedProcessLauncher_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IIsolatedProcessLauncher_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IIsolatedProcessLauncher_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IIsolatedProcessLauncher_LaunchProcess(This,process,arguments,workingDirectory)	\
+    ( (This)->lpVtbl -> LaunchProcess(This,process,arguments,workingDirectory) ) 
+
+#define IIsolatedProcessLauncher_ShareDirectory(This,hostPath,containerPath,readOnly)	\
+    ( (This)->lpVtbl -> ShareDirectory(This,hostPath,containerPath,readOnly) ) 
+
+#define IIsolatedProcessLauncher_GetContainerGuid(This,guid)	\
+    ( (This)->lpVtbl -> GetContainerGuid(This,guid) ) 
+
+#define IIsolatedProcessLauncher_AllowSetForegroundAccess(This,pid)	\
+    ( (This)->lpVtbl -> AllowSetForegroundAccess(This,pid) ) 
+
+#define IIsolatedProcessLauncher_IsContainerRunning(This,running)	\
+    ( (This)->lpVtbl -> IsContainerRunning(This,running) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IIsolatedProcessLauncher_INTERFACE_DEFINED__ */
+
+
+#ifndef __IIsolatedProcessLauncher2_INTERFACE_DEFINED__
+#define __IIsolatedProcessLauncher2_INTERFACE_DEFINED__
+
+/* interface IIsolatedProcessLauncher2 */
+/* [uuid][object] */ 
+
+
+EXTERN_C const IID IID_IIsolatedProcessLauncher2;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("780e4416-5e72-4123-808e-66dc6479feef")
+    IIsolatedProcessLauncher2 : public IIsolatedProcessLauncher
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE LaunchProcess2( 
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR process,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR arguments,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR workingDirectory,
+            /* [annotation][in] */ 
+            _In_  REFGUID correlationGuid) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IIsolatedProcessLauncher2Vtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IIsolatedProcessLauncher2 * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IIsolatedProcessLauncher2 * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IIsolatedProcessLauncher2 * This);
+        
+        DECLSPEC_XFGVIRT(IIsolatedProcessLauncher, LaunchProcess)
+        HRESULT ( STDMETHODCALLTYPE *LaunchProcess )( 
+            __RPC__in IIsolatedProcessLauncher2 * This,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR process,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR arguments,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR workingDirectory);
+        
+        DECLSPEC_XFGVIRT(IIsolatedProcessLauncher, ShareDirectory)
+        HRESULT ( STDMETHODCALLTYPE *ShareDirectory )( 
+            __RPC__in IIsolatedProcessLauncher2 * This,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR hostPath,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR containerPath,
+            /* [annotation][in] */ 
+            _In_  BOOL readOnly);
+        
+        DECLSPEC_XFGVIRT(IIsolatedProcessLauncher, GetContainerGuid)
+        HRESULT ( STDMETHODCALLTYPE *GetContainerGuid )( 
+            __RPC__in IIsolatedProcessLauncher2 * This,
+            /* [annotation][out] */ 
+            _Out_  GUID *guid);
+        
+        DECLSPEC_XFGVIRT(IIsolatedProcessLauncher, AllowSetForegroundAccess)
+        HRESULT ( STDMETHODCALLTYPE *AllowSetForegroundAccess )( 
+            __RPC__in IIsolatedProcessLauncher2 * This,
+            /* [annotation][in] */ 
+            _In_  UINT pid);
+        
+        DECLSPEC_XFGVIRT(IIsolatedProcessLauncher, IsContainerRunning)
+        HRESULT ( STDMETHODCALLTYPE *IsContainerRunning )( 
+            __RPC__in IIsolatedProcessLauncher2 * This,
+            /* [annotation][out] */ 
+            _Out_  BOOL *running);
+        
+        DECLSPEC_XFGVIRT(IIsolatedProcessLauncher2, LaunchProcess2)
+        HRESULT ( STDMETHODCALLTYPE *LaunchProcess2 )( 
+            __RPC__in IIsolatedProcessLauncher2 * This,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR process,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR arguments,
+            /* [annotation][string][in] */ 
+            _In_  LPCWSTR workingDirectory,
+            /* [annotation][in] */ 
+            _In_  REFGUID correlationGuid);
+        
+        END_INTERFACE
+    } IIsolatedProcessLauncher2Vtbl;
+
+    interface IIsolatedProcessLauncher2
+    {
+        CONST_VTBL struct IIsolatedProcessLauncher2Vtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IIsolatedProcessLauncher2_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IIsolatedProcessLauncher2_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IIsolatedProcessLauncher2_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IIsolatedProcessLauncher2_LaunchProcess(This,process,arguments,workingDirectory)	\
+    ( (This)->lpVtbl -> LaunchProcess(This,process,arguments,workingDirectory) ) 
+
+#define IIsolatedProcessLauncher2_ShareDirectory(This,hostPath,containerPath,readOnly)	\
+    ( (This)->lpVtbl -> ShareDirectory(This,hostPath,containerPath,readOnly) ) 
+
+#define IIsolatedProcessLauncher2_GetContainerGuid(This,guid)	\
+    ( (This)->lpVtbl -> GetContainerGuid(This,guid) ) 
+
+#define IIsolatedProcessLauncher2_AllowSetForegroundAccess(This,pid)	\
+    ( (This)->lpVtbl -> AllowSetForegroundAccess(This,pid) ) 
+
+#define IIsolatedProcessLauncher2_IsContainerRunning(This,running)	\
+    ( (This)->lpVtbl -> IsContainerRunning(This,running) ) 
+
+
+#define IIsolatedProcessLauncher2_LaunchProcess2(This,process,arguments,workingDirectory,correlationGuid)	\
+    ( (This)->lpVtbl -> LaunchProcess2(This,process,arguments,workingDirectory,correlationGuid) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IIsolatedProcessLauncher2_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_isolatedapplauncher_0000_0004 */
+/* [local] */ 
+
+#endif // NTDDI_WIN10_NI
+
+
+extern RPC_IF_HANDLE __MIDL_itf_isolatedapplauncher_0000_0004_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_isolatedapplauncher_0000_0004_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

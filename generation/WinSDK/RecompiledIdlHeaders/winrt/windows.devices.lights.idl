@@ -82,6 +82,8 @@ namespace Windows
 
             interface ILampArray;
 
+            interface ILampArray2;
+
             interface ILampArrayStatics;
 
             interface ILampAvailabilityChangedEventArgs;
@@ -115,6 +117,8 @@ namespace Windows
                 interface Windows.Foundation.IAsyncOperation<Windows.Devices.Lights.LampArray*>;
 
                 interface Windows.Foundation.TypedEventHandler<Windows.Devices.Lights.Lamp*, Windows.Devices.Lights.LampAvailabilityChangedEventArgs*>;
+
+                interface Windows.Foundation.TypedEventHandler<Windows.Devices.Lights.LampArray*, IInspectable*>;
             }
         }
     }
@@ -140,7 +144,9 @@ namespace Windows
                 Chassis        = 7,
                 Wearable       = 8,
                 Furniture      = 9,
-                Art            = 10
+                Art            = 10,
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+                Headset        = 11
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 7.0)]
@@ -208,6 +214,16 @@ namespace Windows
                 HRESULT RequestMessageAsync([in] INT32 messageId, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Storage.Streams.IBuffer*>** operation);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Devices.Lights.LampArray)]
+            [uuid(050C181F-60A8-4711-A1AF-1B1B4C658EA2)]
+            interface ILampArray2 : IInspectable
+            {
+                [propget] HRESULT IsAvailable([out] [retval] boolean* value);
+                [eventadd] HRESULT AvailabilityChanged([in] Windows.Foundation.TypedEventHandler<Windows.Devices.Lights.LampArray*, IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT AvailabilityChanged([in] EventRegistrationToken token);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 7.0)]
             [exclusiveto(Windows.Devices.Lights.LampArray)]
             [uuid(7BB8C98D-5FC1-452D-BB1F-4AD410D398FF)]
@@ -269,6 +285,7 @@ namespace Windows
             runtimeclass LampArray
             {
                 [default] interface Windows.Devices.Lights.ILampArray;
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Devices.Lights.ILampArray2;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]

@@ -496,12 +496,33 @@ typedef PROCESS_MEMORY_COUNTERS_EX *PPROCESS_MEMORY_COUNTERS_EX;
 
 #endif
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
+
+typedef struct _PROCESS_MEMORY_COUNTERS_EX2 {
+    DWORD cb;
+    DWORD PageFaultCount;
+    SIZE_T PeakWorkingSetSize;
+    SIZE_T WorkingSetSize;
+    SIZE_T QuotaPeakPagedPoolUsage;
+    SIZE_T QuotaPagedPoolUsage;
+    SIZE_T QuotaPeakNonPagedPoolUsage;
+    SIZE_T QuotaNonPagedPoolUsage;
+    SIZE_T PagefileUsage;
+    SIZE_T PeakPagefileUsage;
+    SIZE_T PrivateUsage;
+    SIZE_T PrivateWorkingSetSize;
+    ULONG64 SharedCommitUsage;
+} PROCESS_MEMORY_COUNTERS_EX2;
+typedef PROCESS_MEMORY_COUNTERS_EX2 *PPROCESS_MEMORY_COUNTERS_EX2;
+
+#endif
+
 BOOL
 WINAPI
-GetProcessMemoryInfo(
-    HANDLE Process,
-    PPROCESS_MEMORY_COUNTERS ppsmemCounters,
-    DWORD cb
+GetProcessMemoryInfo (
+    _In_ HANDLE Process,
+    _Out_writes_bytes_(cb) PPROCESS_MEMORY_COUNTERS ppsmemCounters,
+    _In_ DWORD cb
     );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */

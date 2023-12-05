@@ -677,7 +677,31 @@ SetComputerNameExA(
 #define SetComputerNameEx SetComputerNameExA
 #endif
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+#pragma endregion
+
+#pragma region Desktop Family or OneCore Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+
+typedef enum DEVELOPER_DRIVE_ENABLEMENT_STATE {
+    DeveloperDriveEnablementStateError,
+    DeveloperDriveEnabled,
+    DeveloperDriveDisabledBySystemPolicy,
+    DeveloperDriveDisabledByGroupPolicy
+} DEVELOPER_DRIVE_ENABLEMENT_STATE;
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_NI)
+
+WINBASEAPI
+DEVELOPER_DRIVE_ENABLEMENT_STATE
+WINAPI
+GetDeveloperDriveEnablementState(
+    VOID
+    );
+
+#endif // NTDDI_VERSION
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
 
 #ifdef __cplusplus

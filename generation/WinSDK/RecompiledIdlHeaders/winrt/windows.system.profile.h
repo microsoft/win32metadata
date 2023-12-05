@@ -2046,8 +2046,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.System.Profile.ProfileSharedModeContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.Profile.ISharedModeSettingsStatics2 interface starting with version 2.0 of the Windows.System.Profile.ProfileSharedModeContract API contract
  *   Static Methods exist on the Windows.System.Profile.ISharedModeSettingsStatics interface starting with version 1.0 of the Windows.System.Profile.ProfileSharedModeContract API contract
+ *   Static Methods exist on the Windows.System.Profile.ISharedModeSettingsStatics2 interface starting with version 2.0 of the Windows.System.Profile.ProfileSharedModeContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -5226,8 +5226,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.System.Profile.ProfileSharedModeContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.Profile.ISharedModeSettingsStatics2 interface starting with version 2.0 of the Windows.System.Profile.ProfileSharedModeContract API contract
  *   Static Methods exist on the Windows.System.Profile.ISharedModeSettingsStatics interface starting with version 1.0 of the Windows.System.Profile.ProfileSharedModeContract API contract
+ *   Static Methods exist on the Windows.System.Profile.ISharedModeSettingsStatics2 interface starting with version 2.0 of the Windows.System.Profile.ProfileSharedModeContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

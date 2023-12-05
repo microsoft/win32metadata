@@ -34634,6 +34634,7 @@
   },
   {
     "name": "DNS_QUERY_OPTIONS",
+    "type": "uint",
     "flags": true,
     "autoPopulate": {
       "header": "windns.h",

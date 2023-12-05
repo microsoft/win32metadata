@@ -1969,7 +1969,7 @@ interface DWRITE_DECLARE_INTERFACE("4B0B5BD3-0797-4549-8AC5-FE915CC53856") IDWri
     /// pre-transform coordinates.</param>
     /// <param name="glyphRun">Pointer to the original "base" glyph run.</param>
     /// <param name="glyphRunDescription">Optional glyph run description.</param>
-    /// <param name="glyphImageFormats">Which data formats TranslateColorGlyphRun
+    /// <param name="desiredGlyphImageFormats">Which data formats TranslateColorGlyphRun
     /// should split the runs into.</param>
     /// <param name="measuringMode">Measuring mode, needed to compute the origins
     /// of each glyph.</param>
@@ -3731,5 +3731,822 @@ interface DWRITE_DECLARE_INTERFACE("EEC175FC-BEA9-4C86-8B53-CCBDD7DF0C82") IDWri
 };
 
 #endif // NTDDI_VERSION >= NTDDI_WIN10_NI
+
+#if NTDDI_VERSION >= NTDDI_WIN10_NI
+
+/// <summary>
+/// Contains information about a bitmap associated with an IDWriteBitmapRenderTarget.
+/// The bitmap is top-down with 32-bits per pixel and no padding between scan lines.
+/// </summary>
+struct DWRITE_BITMAP_DATA_BGRA32
+{
+    UINT32 width;
+    UINT32 height;
+    _Field_size_(width * height) UINT32* pixels;
+};
+
+/// <summary>
+/// Encapsulates a bitmap which can be used for rendering glyphs.
+/// </summary>
+DWRITE_BEGIN_INTERFACE(IDWriteBitmapRenderTarget2, "C553A742-FC01-44DA-A66E-B8B9ED6C3995") : IDWriteBitmapRenderTarget1
+{
+    /// <summary>
+    /// Gets the demensions and a pointer to the system memory bitmap encapsulated by this
+    /// bitmap render target object. The pointer is owned by the render target object, and
+    /// remains valid as long as the object exists.
+    /// </summary>
+    STDMETHOD(GetBitmapData)(_Out_ DWRITE_BITMAP_DATA_BGRA32* bitmapData) PURE;
+};
+
+/// <summary>
+/// Defines known feature level for use with the IDWritePaintReader interface and 
+/// related APIs. A feature level represents a level of functionality. For example, it
+/// determines what DWRITE_PAINT_TYPE values might be returned.
+/// </summary>
+/// <remarks>
+/// See the DWRITE_PAINT_TYPE enumeration for which paint types are required for each
+/// feature level.
+/// </remarks>
+enum DWRITE_PAINT_FEATURE_LEVEL : INT32
+{
+    /// <summary>
+    /// No paint API support.
+    /// </summary>
+    DWRITE_PAINT_FEATURE_LEVEL_NONE = 0,
+
+    /// <summary>
+    /// Specifies a level of functionality corresponding to OpenType COLR version 0.
+    /// </summary>
+    DWRITE_PAINT_FEATURE_LEVEL_COLR_V0 = 1,
+
+    /// <summary>
+    /// Specifies a level of functionality corresponding to OpenType COLR version 1.
+    /// </summary>
+    DWRITE_PAINT_FEATURE_LEVEL_COLR_V1 = 2
+};
+
+/// <summary>
+/// Combination of flags specifying attributes of a color glyph or of specific color values in
+/// a color glyph.
+/// </summary>
+enum DWRITE_PAINT_ATTRIBUTES
+{
+    DWRITE_PAINT_ATTRIBUTES_NONE = 0,
+
+    /// <summary>
+    /// Specifies that the color value (or any color value in the glyph) comes from the font's
+    /// color palette. This means the appearance may depend on the current palette index, which
+    /// may be important to clients that cache color glyphs.
+    /// </summary>
+    DWRITE_PAINT_ATTRIBUTES_USES_PALETTE = 0x01,
+
+    /// <summary>
+    /// Specifies that the color value (or any color value in the glyph) comes from the client-specified
+    /// text color. This means the appearance may depend on the text color, which may be important to
+    /// clients that cache color glyphs.
+    /// </summary>
+    DWRITE_PAINT_ATTRIBUTES_USES_TEXT_COLOR = 0x02
+};
+#ifdef DEFINE_ENUM_FLAG_OPERATORS
+DEFINE_ENUM_FLAG_OPERATORS(DWRITE_PAINT_ATTRIBUTES)
+#endif
+
+/// <summary>
+/// Represents a color in a color glyph.
+/// </summary>
+struct DWRITE_PAINT_COLOR
+{
+    /// <summary>
+    /// Color value (not premultiplied). See the colorAttributes member for information about how
+    /// the color is determined.
+    /// </summary>
+    DWRITE_COLOR_F value;
+
+    /// <summary>
+    /// If the colorAttributes member is DWRITE_PAINT_ATTRIBUTES_USES_PALETTE, this member is
+    /// the index of a palette entry in the selected color palette. Otherwise, this member is
+    /// DWRITE_NO_PALETTE_INDEX (0xFFFF).
+    /// </summary>
+    UINT16 paletteEntryIndex;
+
+    /// <summary>
+    /// Specifies an alpha value multiplier in the range 0 to 1 that was used to compute the color
+    /// value. Color glyph descriptions may include alpha values to be multiplied with the alpha
+    /// values of palette entries.
+    /// </summary>
+    float alphaMultiplier;
+
+    /// <summary>
+    /// Specifies how the color value is determined. If this member is 
+    /// DWRITE_PAINT_ATTRIBUTES_USES_PALETTE, the color value is determined by getting the color at
+    /// paletteEntryIndex in the current color palette. The color's alpha value is then multiplied
+    /// by alphaMultiplier. If a font has multiple color palettes, a client can set the current color
+    /// palette using the IDWritePaintReader::SetColorPaletteIndex method. A client that uses a custom
+    /// palette can use the paletteEntryIndex and alphaMultiplier methods to compute the color. If this
+    /// member is DWRITE_PAINT_ATTRIBUTES_USES_TEXT_COLOR, the color value is equal to the text 
+    /// foreground color, which can be set using the IDWritePaintReader::SetTextColor method.
+    /// </summary>
+    DWRITE_PAINT_ATTRIBUTES colorAttributes;
+};
+
+/// <summary>
+/// Specifies a composite mode for combining source and destination paint elements in a
+/// color glyph. These are taken from the W3C Compositing and Blending Level 1 specification.
+/// </summary>
+enum DWRITE_COLOR_COMPOSITE_MODE
+{
+    // Porter-Duff modes.
+    DWRITE_COLOR_COMPOSITE_CLEAR,
+    DWRITE_COLOR_COMPOSITE_SRC,
+    DWRITE_COLOR_COMPOSITE_DEST,
+    DWRITE_COLOR_COMPOSITE_SRC_OVER,
+    DWRITE_COLOR_COMPOSITE_DEST_OVER,
+    DWRITE_COLOR_COMPOSITE_SRC_IN,
+    DWRITE_COLOR_COMPOSITE_DEST_IN,
+    DWRITE_COLOR_COMPOSITE_SRC_OUT,
+    DWRITE_COLOR_COMPOSITE_DEST_OUT,
+    DWRITE_COLOR_COMPOSITE_SRC_ATOP,
+    DWRITE_COLOR_COMPOSITE_DEST_ATOP,
+    DWRITE_COLOR_COMPOSITE_XOR,
+    DWRITE_COLOR_COMPOSITE_PLUS,
+
+    // Separable color blend modes.
+    DWRITE_COLOR_COMPOSITE_SCREEN,
+    DWRITE_COLOR_COMPOSITE_OVERLAY,
+    DWRITE_COLOR_COMPOSITE_DARKEN,
+    DWRITE_COLOR_COMPOSITE_LIGHTEN,
+    DWRITE_COLOR_COMPOSITE_COLOR_DODGE,
+    DWRITE_COLOR_COMPOSITE_COLOR_BURN,
+    DWRITE_COLOR_COMPOSITE_HARD_LIGHT,
+    DWRITE_COLOR_COMPOSITE_SOFT_LIGHT,
+    DWRITE_COLOR_COMPOSITE_DIFFERENCE,
+    DWRITE_COLOR_COMPOSITE_EXCLUSION,
+    DWRITE_COLOR_COMPOSITE_MULTIPLY,
+
+    // Non-separable color blend modes.
+    DWRITE_COLOR_COMPOSITE_HSL_HUE,
+    DWRITE_COLOR_COMPOSITE_HSL_SATURATION,
+    DWRITE_COLOR_COMPOSITE_HSL_COLOR,
+    DWRITE_COLOR_COMPOSITE_HSL_LUMINOSITY
+};
+
+/// <summary>
+/// Identifies a type of paint element in a color glyph. A color glyph's visual representation
+/// is defined by a tree of paint elements. A paint element's properties are specified by a
+/// DWRITE_PAINT_ELEMENT structure, which combines a paint type an a union.
+/// </summary>
+/// <remarks>
+/// For more information about each paint type, see DWRITE_PAINT_ELEMENT. 
+/// </remarks>
+enum DWRITE_PAINT_TYPE
+{
+    // The following paint types may be returned for color feature levels greater than
+    // or equal to DWRITE_PAINT_FEATURE_LEVEL_COLR_V0.
+    DWRITE_PAINT_TYPE_NONE,
+    DWRITE_PAINT_TYPE_LAYERS,
+    DWRITE_PAINT_TYPE_SOLID_GLYPH,
+
+    // The following paint types may be returned for color feature levels greater than
+    // or equal to DWRITE_PAINT_FEATURE_LEVEL_COLR_V1.
+    DWRITE_PAINT_TYPE_SOLID,
+    DWRITE_PAINT_TYPE_LINEAR_GRADIENT,
+    DWRITE_PAINT_TYPE_RADIAL_GRADIENT,
+    DWRITE_PAINT_TYPE_SWEEP_GRADIENT,
+    DWRITE_PAINT_TYPE_GLYPH,
+    DWRITE_PAINT_TYPE_COLOR_GLYPH,
+    DWRITE_PAINT_TYPE_TRANSFORM,
+    DWRITE_PAINT_TYPE_COMPOSITE
+};
+
+/// <summary>
+/// Specifies properties of a paint element, which is one node in a visual tree associated
+/// with a color glyph. This is passed as an output parameter to various IDWritePaintReader
+/// methods.
+/// </summary>
+/// <remarks>
+/// For a detailed description of how paint elements should be rendered, see the OpenType COLR
+/// table specification. Comments below reference the COLR paint record formats associated with
+/// each paint type.
+///
+/// Note that this structure (and its size) may differ for different versions of the API, as
+/// newer versions may have additional union members for new paint types. For this reason,
+/// IDWritePaintReader methods that take a DWRITE_PAINT_ELEMENT output parameter also take a
+/// structSize parameter, for which the caller should specify actual size of the structure
+/// allocated by the caller, i.e., sizeof(DWRITE_PAINT_ELEMENT). Clients should use caution
+/// when passing DWRITE_PAINT_ELEMENT objects between components that may have been compiled
+/// against different versions of this header file.
+/// </remarks>
+struct DWRITE_PAINT_ELEMENT
+{
+    /// <summary>
+    /// Specifies the paint type, and thus which member of the union is valid.
+    /// </summary>
+    DWRITE_PAINT_TYPE paintType;
+
+    /// <summary>
+    /// Specifies type-specific properties of the paint element.
+    /// </summary>
+    union PAINT_UNION
+    {
+        /// <summary>
+        /// Valid for paint elements of type DWRITE_PAINT_TYPE_LAYERS.
+        /// Contains one or more child paint elements to be drawn in bottom-up order.
+        /// </summary>
+        /// <remarks>
+        /// This corresponds to a PaintColrLayers record in the OpenType COLR table.
+        /// Or it may correspond to a BaseGlyph record defined by COLR version 0.
+        /// </remarks>
+        struct PAINT_LAYERS
+        {
+            /// <summary>
+            /// Number of child paint elements in bottom-up order. Use the IDWritePaintReader
+            /// interface's MoveFirstChild and MoveNextSibling methods to retrieve the child paint
+            /// elements. Use the MoveParent method to return to the parent element.
+            /// </summary>
+            UINT32 childCount;
+        } layers;
+
+        /// <summary>
+        /// Valid for paint elements of type DWRITE_PAINT_TYPE_SOLID_GLYPH.
+        /// Specifies a glyph with a solid color fill.
+        /// This paint element has no child elements.
+        /// </summary>
+        /// <remarks>
+        /// This corresponds to a combination of two paint records in the OpenType COLR table:
+        /// a PaintGlyph record, which references either a PaintSolid or PaintVarSolid record.
+        /// Or it may correspond to a Layer record defined by COLR version 0.
+        /// </remarks>
+        struct PAINT_SOLID_GLYPH
+        {
+            /// <summary>
+            /// Glyph index defining the shape to be filled.
+            /// </summary>
+            UINT32 glyphIndex;
+
+            /// <summary>
+            /// Glyph color used to fill the glyph shape.
+            /// </summary>
+            DWRITE_PAINT_COLOR color;
+        } solidGlyph;
+
+        /// <summary>
+        /// Valid for paint elements of type DWRITE_PAINT_TYPE_SOLID.
+        /// Specifies a solid color used to fill the current shape or clip.
+        /// This paint element has no child elements.
+        /// </summary>
+        /// <remarks>
+        /// This corresponds to a PaintSolid or PaintVarSolid record in the OpenType COLR table.
+        /// </remarks>
+        DWRITE_PAINT_COLOR solid;
+
+        /// <summary>
+        /// Valid for paint elements of type DWRITE_PAINT_TYPE_LINEAR_GRADIENT.
+        /// Specifies a linear gradient used to fill the current shape or clip.
+        /// This paint element has no child elements.
+        /// </summary>
+        /// <remarks>
+        /// This corresponds to a PaintLinearGradient or PaintVarLinearGradient record in the OpenType
+        /// COLR table.
+        /// </remarks>
+        struct PAINT_LINEAR_GRADIENT
+        {
+            /// <summary>
+            /// D2D1_EXTEND_MODE value speciying how colors outside the interval are defined.
+            /// </summary>
+            UINT32 extendMode;
+
+            /// <summary>
+            /// Number of gradient stops. Use the IDWritePaintReader::GetGradientStops method to
+            /// get the gradient stops.
+            /// </summary>
+            UINT32 gradientStopCount;
+
+            /// <summary>
+            /// X coordinate of the start point of the color line.
+            /// </summary>
+            float x0;
+
+            /// <summary>
+            /// Y coordinate of the start point of the color line.
+            /// </summary>
+            float y0;
+
+            /// <summary>
+            /// X coordinate of the end point of the color line.
+            /// </summary>
+            float x1;
+
+            /// <summary>
+            /// Y coordinate of the end point of the color line.
+            /// </summary>
+            float y1;
+
+            /// <summary>
+            /// X coordinate of the rotation point of the color line.
+            /// </summary>
+            float x2;
+
+            /// <summary>
+            /// Y coordinate of the rotation point of the color line.
+            /// </summary>
+            float y2;
+        } linearGradient;
+
+        /// <summary>
+        /// Valid for paint elements of type DWRITE_PAINT_TYPE_RADIAL_GRADIENT.
+        /// Specifies a radial gradient used to fill the current shape or clip.
+        /// This paint element has no child elements.
+        /// </summary>
+        /// <remarks>
+        /// This corresponds to a PaintRadialGradient or PaintVarRadialGradient record in the OpenType
+        /// COLR table.
+        /// </remarks>
+        struct PAINT_RADIAL_GRADIENT
+        {
+            /// <summary>
+            /// D2D1_EXTEND_MODE value speciying how colors outside the interval are defined.
+            /// </summary>
+            UINT32 extendMode;
+
+            /// <summary>
+            /// Number of gradient stops. Use the IDWritePaintReader::GetGradientStops method to
+            /// get the gradient stops.
+            /// </summary>
+            UINT32 gradientStopCount;
+
+            /// <summary>
+            /// Center X coordinate of the start circle.
+            /// </summary>
+            float x0;
+
+            /// <summary>
+            /// Center Y coordinate of the start circle.
+            /// </summary>
+            float y0;
+
+            /// <summary>
+            /// Radius of the start circle.
+            /// </summary>
+            float radius0;
+
+            /// <summary>
+            /// Center X coordinate of the end circle.
+            /// </summary>
+            float x1;
+
+            /// <summary>
+            /// Center Y coordinate of the end circle.
+            /// </summary>
+            float y1;
+
+            /// <summary>
+            /// Radius of the end circle.
+            /// </summary>
+            float radius1;
+        } radialGradient;
+
+        /// <summary>
+        /// Valid for paint elements of type DWRITE_PAINT_TYPE_SWEEP_GRADIENT.
+        /// Specifies a sweep gradient used to fill the current shape or clip.
+        /// This paint element has no child elements.
+        /// </summary>
+        /// <remarks>
+        /// This corresponds to a PaintSweepGradient or PaintVarSweepGradient record in the OpenType
+        /// COLR table.
+        /// </remarks>
+        struct PAINT_SWEEP_GRADIENT
+        {
+            /// <summary>
+            /// D2D1_EXTEND_MODE value speciying how colors outside the interval are defined.
+            /// </summary>
+            UINT32 extendMode;
+
+            /// <summary>
+            /// Number of gradient stops. Use the IDWritePaintReader::GetGradientStops method to
+            /// get the gradient stops.
+            /// </summary>
+            UINT32 gradientStopCount;
+
+            /// <summary>
+            /// Center X coordinate.
+            /// </summary>
+            float centerX;
+
+            /// <summary>
+            /// Center Y coordinate.
+            /// </summary>
+            float centerY;
+
+            /// <summary>
+            /// Start of the angular range of the gradient, measured in counter-clockwise degrees
+            /// from the direction of the positive x axis.
+            /// </summary>
+            float startAngle;
+
+            /// <summary>
+            /// End of the angular range of the gradient, measured in counter-clockwise degrees
+            /// from the direction of the positive x axis.
+            /// </summary>
+            float endAngle;
+        } sweepGradient;
+
+        /// <summary>
+        /// Valid for paint elements of type DWRITE_PAINT_TYPE_GLYPH.
+        /// Specifies a glyph shape to be filled or, equivalently, a clip region.
+        /// This paint element has one child element.
+        /// </summary>
+        /// <remarks>
+        /// The child paint element defines how the glyph shape is filled. The child element can be a single paint
+        /// element, such as a linear gradient. Or the child element can be the root of a visual tree to be rendered
+        /// with the glyph shape as a clip region.
+        /// This corresponds to a PaintGlyph record in the OpenType COLR table.
+        /// </remarks>
+        struct PAINT_GLYPH
+        {
+            /// <summary>
+            /// Glyph index of the glyph that defines the shape to be filled.
+            /// </summary>
+            UINT32 glyphIndex;
+        } glyph;
+
+        /// <summary>
+        /// Valid for paint elements of type DWRITE_PAINT_TYPE_COLOR_GLYPH.
+        /// Specifies another color glyph, used as a reusable component.
+        /// This paint element has one child element, which is the root paint element of the specified color glyph.
+        /// </summary>
+        /// <remarks>
+        /// This corresponds to a PaintColorGlyph record in the OpenType COLR table.
+        /// </remarks>
+        struct PAINT_COLOR_GLYPH
+        {
+            /// <summary>
+            /// Glyph index of the referenced color glyph.
+            /// </summary>
+            UINT32 glyphIndex;
+
+            /// <summary>
+            /// Clip box of the referenced color glyph, in ems. This is an empty rectangle of the color glyph does 
+            /// not specify a clip box. If it is not an empty rect, the client is required to clip the child content
+            /// to this box.
+            /// </summary>
+            D2D_RECT_F clipBox;
+        } colorGlyph;
+
+        /// <summary>
+        /// Valid for paint elements of type DWRITE_PAINT_TYPE_TRANSFORM.
+        /// Specifies an affine transform to be applied to child content.
+        /// This paint element has one child element, which is the transformed content.
+        /// </summary>
+        /// <remarks>
+        /// This corresponds to paint formats 12 through 31 in the OpenType COLR table.
+        /// </remarks>
+        DWRITE_MATRIX transform;
+
+        /// <summary>
+        /// Valid for paint elements of type DWRITE_PAINT_TYPE_COMPOSITE.
+        /// Combines the two child paint elements using the specified compositing or blending mode.
+        /// This paint element has two child elements. The first child is the paint source. The 
+        /// second child is the paint destination (or backdrop).
+        /// </summary>
+        /// <remarks>
+        /// This corresponds to a PaintComposite record in the OpenType COLR table.
+        /// </remarks>
+        struct PAINT_COMPOSITE
+        {
+            /// <summary>
+            /// Specifies the compositing or blending mode.
+            /// </summary>
+            DWRITE_COLOR_COMPOSITE_MODE mode;
+        } composite;
+    } paint;
+};
+
+struct D2D1_GRADIENT_STOP;
+
+/// <summary>
+/// Interface used to read color glyph data for a specific font. A color glyph is
+/// represented as a visual tree of paint elements.
+/// </summary>
+DWRITE_BEGIN_INTERFACE(IDWritePaintReader, "8128E912-3B97-42A5-AB6C-24AAD3A86E54") : IUnknown
+{
+    /// <summary>
+    /// Sets the current glyph and positions the reader on the root paint element of the
+    /// selected glyph's visual tree.
+    /// </summary>
+    /// <param name="glyphIndex">Glyph index to get the color glyph representation for.</param>
+    /// <param name="paintElement">Receives information about the root paint element of the
+    /// glyph's visual tree.</param>
+    /// <param name="structSize">Size of the DWRITE_PAINT_ELEMENT structure, in bytes.</param>
+    /// <param name="clipBox">Receives a precomputed glyph box (in ems) for the specified glyph,
+    /// if one is specified by the font. Otherwise, the glyph box is set to an empty rectangle
+    /// (all zeros). If a non-empty clip box is specified, the client must clip the color
+    /// glyph's representation to the specified box.</param>
+    /// <param name="glyphAttributes">Receives optional paint attributes for the glyph.</param>
+    /// <returns>
+    /// Standard HRESULT error code.
+    /// </returns>
+    /// <remarks>
+    /// If the specified glyph index is not a color glyph, the method succeeds, but the paintType
+    /// member of the DWRITE_PAINT_ELEMENT structure is set to DWRITE_PAINT_TYPE_NONE. In this
+    /// case, the application should draw the input glyph as a non-color glyph.
+    /// </remarks>
+    STDMETHOD(SetCurrentGlyph)(
+        UINT32 glyphIndex,
+        _Out_writes_bytes_(structSize) DWRITE_PAINT_ELEMENT* paintElement,
+        UINT32 structSize,
+        _Out_ D2D_RECT_F* clipBox,
+        _Out_opt_ DWRITE_PAINT_ATTRIBUTES* glyphAttributes = nullptr
+        ) PURE;
+
+    // Inline overload of SetCurrentGlyph, in which structSize is implied.
+    HRESULT SetCurrentGlyph(
+        UINT32 glyphIndex,
+        _Out_writes_bytes_(structSize) DWRITE_PAINT_ELEMENT* paintElement,
+        _Out_ D2D_RECT_F* clipBox,
+        _Out_opt_ DWRITE_PAINT_ATTRIBUTES* glyphAttributes = nullptr
+        )
+    {
+        return SetCurrentGlyph(
+            glyphIndex,
+            paintElement,
+            sizeof(DWRITE_PAINT_ELEMENT),
+            clipBox,
+            glyphAttributes
+            );
+    }
+
+    /// <summary>
+    /// Sets the client-defined text color. The default value is transparent black. Changing the text color
+    /// can affect the appearance of a glyph if its definition uses the current text color. If this is the 
+    /// case, the SetCurrentGlyph method returns the DWRITE_PAINT_ATTRIBUTES_USES_TEXT_COLOR flag via the 
+    /// glyphAttributes output parameter.
+    /// </summary>
+    /// <param name="textColor">Specifies the text color.</param>
+    /// <returns>
+    /// Standard HRESULT error code.
+    /// </returns>
+    STDMETHOD(SetTextColor)(
+        DWRITE_COLOR_F const& textColor
+        ) PURE;
+
+    /// <summary>
+    /// Sets the current color palette index. The default value is zero. Changing the palette index can affect
+    /// the appearance of a glyph if its definition references colors in the color palette. If this is the case,
+    /// the SetCurrentGlyph method returns the DWRITE_PAINT_ATTRIBUTES_USES_PALETTE flag via the glyphAttributes
+    /// output parameter.
+    /// </summary>
+    /// <param name="textColor">Specifies the color palette index.</param>
+    /// <returns>
+    /// Standard HRESULT error code.
+    /// </returns>
+    STDMETHOD(SetColorPaletteIndex)(
+        UINT32 colorPaletteIndex
+        ) PURE;
+
+    /// <summary>
+    /// Sets a custom color palette with client-defined palette entries instead of using a font-defined color
+    /// palette. Changing the color palette can affect the appearance of a glyph if its definition references
+    /// colors in the color palette. If this is the case, the SetCurrentGlyph method returns the 
+    /// DWRITE_PAINT_ATTRIBUTES_USES_PALETTE flag via the glyphAttributes output parameter.
+    /// </summary>
+    /// <param name="paletteEntries">Array of palette entries for the client-defined color palette.</param>
+    /// <param name="paletteEntryCount">Size of the paletteEntries array. This must equal the font's palette
+    /// entry count as returned by IDWriteFontFace2::GetPaletteEntryCount.</param>
+    /// <returns>
+    /// Standard HRESULT error code.
+    /// </returns>
+    STDMETHOD(SetCustomColorPalette)(
+        _In_reads_(paletteEntryCount) DWRITE_COLOR_F const* paletteEntries,
+        UINT32 paletteEntryCount
+        ) PURE;
+
+    /// <summary>
+    /// Sets the current position in the visual tree to the first child of the current paint element, and returns
+    /// the newly-selected element's properties via the paintElement output parameter.
+    /// </summary>
+    /// <param name="paintElement">Receives the properties of the newly-selected element.</param>
+    /// <param name="structSize">Size of the DWRITE_PAINT_ELEMENT structure, in bytes.</param>
+    /// <returns>
+    /// Standard HRESULT error code. The return value is E_INVALIDARG if the current paint element doesn't have
+    /// any children.
+    /// </returns>
+    /// <remarks>
+    /// Whether a paint element has children (and how many) can be determined a priori from its paint type and
+    /// properties. For more information, see DWRITE_PAINT_ELEMENT.
+    /// </remarks>
+    STDMETHOD(MoveToFirstChild)(
+        _Out_writes_bytes_(structSize) DWRITE_PAINT_ELEMENT* paintElement,
+        UINT32 structSize = sizeof(DWRITE_PAINT_ELEMENT)
+        ) PURE;
+
+    /// <summary>
+    /// Sets the current position in the visual tree to the next sibling of the current paint element, and returns
+    /// the newly-selected element's properties via the paintElement output parameter.
+    /// </summary>
+    /// <param name="paintElement">Receives the properties of the newly-selected element.</param>
+    /// <param name="structSize">Size of the DWRITE_PAINT_ELEMENT structure, in bytes.</param>
+    /// <returns>
+    /// Standard HRESULT error code. The return value is E_INVALIDARG if the current paint element doesn't have
+    /// a next sibling.
+    /// </returns>
+    /// <remarks>
+    /// Whether a paint element has children (and how many) can be determined a priori from its paint type and
+    /// properties. For more information, see DWRITE_PAINT_ELEMENT.
+    /// </remarks>
+    STDMETHOD(MoveToNextSibling)(
+        _Out_writes_bytes_(structSize) DWRITE_PAINT_ELEMENT* paintElement,
+        UINT32 structSize = sizeof(DWRITE_PAINT_ELEMENT)
+        ) PURE;
+
+    /// <summary>
+    /// Sets the current position in the visual tree to the parent of the current paint element.
+    /// </summary>
+    /// <returns>
+    /// Standard HRESULT error code. The return value is E_INVALIDARG if the current paint element is the root
+    /// element of the visual tree.
+    /// </returns>
+    STDMETHOD(MoveToParent)() PURE;
+
+    /// <summary>
+    /// Returns gradient stops of the current paint element.
+    /// </summary>
+    /// <param name="firstGradientStopIndex">Index of the first gradient stop to get.</param>
+    /// <param name="gradientStopCount">Number of gradient stops to get.</param>
+    /// <param name="gradientStops">Receives the gradient stops.</param>
+    /// <returns>Standard HRESULT error code.</returns>
+    /// <remarks>Gradient stops are guaranteed to be in ascending order by position.</remarks>
+    STDMETHOD(GetGradientStops)(
+        UINT32 firstGradientStopIndex,
+        UINT32 gradientStopCount,
+        _Out_writes_(gradientStopCount) D2D1_GRADIENT_STOP* gradientStops
+        ) PURE;
+
+    /// <summary>
+    /// Returns color information about each gradient stop, such as palette indices.
+    /// </summary>
+    /// <param name="firstGradientStopIndex">Index of the first gradient stop to get.</param>
+    /// <param name="gradientStopCount">Number of gradient stops to get.</param>
+    /// <param name="gradientStopColors">Receives the gradient stop colors.</param>
+    /// <returns>Standard HRESULT error code.</returns>
+    STDMETHOD(GetGradientStopColors)(
+        UINT32 firstGradientStopIndex,
+        UINT32 gradientStopCount,
+        _Out_writes_(gradientStopCount) DWRITE_PAINT_COLOR* gradientStopColors
+        ) PURE;
+};
+
+DWRITE_BEGIN_INTERFACE(IDWriteFontFace7, "3945B85B-BC95-40F7-B72C-8B73BFC7E13B") : IDWriteFontFace6
+{
+    /// <summary>
+    /// Returns the maximum paint feature level supported for the specified glyph image format.
+    /// Possible values are specified by the DWRITE_PAINT_FEATURE_LEVEL enumeration,
+    /// but additional feature levels may be added over time.
+    /// </summary>
+    /// <param name="glyphImageFormat">Glyph image format to get the paint feature level for.
+    /// The return value is zero if the image format is not supported by the IDWritePaintReader API,
+    /// or if the font doesn't contain image data in that format.</param>
+    STDMETHOD_(DWRITE_PAINT_FEATURE_LEVEL, GetPaintFeatureLevel)(
+        DWRITE_GLYPH_IMAGE_FORMATS glyphImageFormat
+        ) PURE;
+
+    /// <summary>
+    /// Creates a paint reader object, which can be used to retrieve vector graphic information
+    /// for color glyphs in the font.
+    /// </summary>
+    /// <param name="glyphImageFormat">Specifies the type of glyph data the reader will obtain. The only
+    /// glyph image format currently supported by this method is DWRITE_GLYPH_IMAGE_FORMATS_COLR_PAINT_TREE.</param>
+    /// <param name="paintFeatureLevel">Specifies the maximum paint feature level supported by the client.
+    /// This affects the types of paint elements that may be returned by the paint reader.</param>
+    /// <param name="paintReader">Receives a pointer to the newly-created object.</param>
+    /// <returns>Standard HRESULT error code.</returns>
+    STDMETHOD(CreatePaintReader)(
+        DWRITE_GLYPH_IMAGE_FORMATS glyphImageFormat,
+        DWRITE_PAINT_FEATURE_LEVEL paintFeatureLevel,
+        _COM_Outptr_ IDWritePaintReader** paintReader
+        ) PURE;
+};
+
+
+DWRITE_BEGIN_INTERFACE(IDWriteFactory8, "EE0A7FB5-DEF4-4C23-A454-C9C7DC878398") : IDWriteFactory7
+{
+    /// <summary>
+    /// Translates a glyph run to a sequence of color glyph runs, which can be
+    /// rendered to produce a color representation of the original "base" run.
+    /// </summary>
+    /// <param name="baselineOriginX">Horizontal and vertical origin of the base glyph run in
+    /// pre-transform coordinates.</param>
+    /// <param name="glyphRun">Pointer to the original "base" glyph run.</param>
+    /// <param name="glyphRunDescription">Optional glyph run description.</param>
+    /// <param name="desiredGlyphImageFormats">Which data formats TranslateColorGlyphRun
+    /// should split the runs into.</param>
+    /// <param name="paintFeatureLevel">Paint feature level supported by the caller. Used
+    /// when desiredGlyphImageFormats includes DWRITE_GLYPH_IMAGE_FORMATS_COLR_PAINT_TREE. See
+    /// DWRITE_PAINT_FEATURE_LEVEL for more information.</param>
+    /// <param name="measuringMode">Measuring mode, needed to compute the origins
+    /// of each glyph.</param>
+    /// <param name="worldToDeviceTransform">Matrix converting from the client's
+    /// coordinate space to device coordinates (pixels), i.e., the world transform
+    /// multiplied by any DPI scaling.</param>
+    /// <param name="colorPaletteIndex">Zero-based index of the color palette to use.
+    /// Valid indices are less than the number of palettes in the font, as returned
+    /// by IDWriteFontFace2::GetColorPaletteCount.</param>
+    /// <param name="colorEnumerator">If the function succeeds, receives a pointer
+    /// to an enumerator object that can be used to obtain the color glyph runs.
+    /// If the base run has no color glyphs, then the output pointer is NULL
+    /// and the method returns DWRITE_E_NOCOLOR.</param>
+    /// <returns>
+    /// Returns DWRITE_E_NOCOLOR if the font has no color information, the glyph run
+    /// does not contain any color glyphs, or the specified color palette index
+    /// is out of range. In this case, the client should render the original glyph 
+    /// run. Otherwise, returns a standard HRESULT error code.
+    /// </returns>
+    /// <remarks>
+    /// The old IDWriteFactory2::TranslateColorGlyphRun is equivalent to passing
+    /// DWRITE_GLYPH_IMAGE_FORMATS_TRUETYPE|CFF|COLR.
+    /// </remarks>
+    STDMETHOD(TranslateColorGlyphRun)(
+        D2D1_POINT_2F baselineOrigin,
+        _In_ DWRITE_GLYPH_RUN const* glyphRun,
+        _In_opt_ DWRITE_GLYPH_RUN_DESCRIPTION const* glyphRunDescription,
+        DWRITE_GLYPH_IMAGE_FORMATS desiredGlyphImageFormats,
+        DWRITE_PAINT_FEATURE_LEVEL paintFeatureLevel,
+        DWRITE_MEASURING_MODE measuringMode,
+        _In_opt_ DWRITE_MATRIX const* worldAndDpiTransform,
+        UINT32 colorPaletteIndex,
+        _COM_Outptr_ IDWriteColorGlyphRunEnumerator1** colorEnumerator
+        ) PURE;
+};
+
+/// <summary>
+/// Encapsulates a bitmap which can be used for rendering glyphs.
+/// </summary>
+DWRITE_BEGIN_INTERFACE(IDWriteBitmapRenderTarget3, "AEEC37DB-C337-40F1-8E2A-9A41B167B238") : IDWriteBitmapRenderTarget2
+{
+    /// <summary>
+    /// Returns the paint feature level supported by this render target.
+    /// A client can pass the return value of this method to IDWriteFactory8::TranslateColorGlyphRun.
+    /// </summary>
+    STDMETHOD_(DWRITE_PAINT_FEATURE_LEVEL, GetPaintFeatureLevel)() PURE;
+
+    /// <summary>
+    /// Draws a glyph run in a "paint" image format returned by IDWriteColorGlyphRunEnumerator1.
+    /// </summary>
+    /// <param name="baselineOriginX">X-coordinate of the baseline.</param>
+    /// <param name="baselineOriginY">Y-coordinate of the baseline.</param>
+    /// <param name="measuringMode">Specifies measuring mode for positioning glyphs in the run.</param>
+    /// <param name="glyphRun">The glyph run to draw.</param>
+    /// <param name="glyphImageFormat">The image format of the color glyph run, as returned by
+    /// IDWriteColorGlyphRunEnumerator1. This must be one of the "paint" image formats.</param>
+    /// <param name="textColor">Foreground color of the text, used in cases where a color glyph
+    /// uses the text color.</param>
+    /// <param name="colorPaletteIndex">Zero-based index of the font-defined color palette to use.</param>
+    /// <param name="blackBoxRect">Optional rectangle that receives the bounding box (in pixels not DIPs) of all the pixels affected by 
+    /// drawing the glyph run. The black box rectangle may extend beyond the dimensions of the bitmap.</param>
+    /// <returns>
+    /// Standard HRESULT error code.
+    /// </returns>
+    STDMETHOD(DrawPaintGlyphRun)(
+        FLOAT baselineOriginX,
+        FLOAT baselineOriginY,
+        DWRITE_MEASURING_MODE measuringMode,
+        _In_ DWRITE_GLYPH_RUN const* glyphRun,
+        DWRITE_GLYPH_IMAGE_FORMATS glyphImageFormat,
+        COLORREF textColor,
+        UINT32 colorPaletteIndex = 0,
+        _Out_opt_ RECT* blackBoxRect = NULL
+        ) PURE;
+
+    /// <summary>
+    /// Draws a glyph run, using color representations of glyphs if available in the font.
+    /// </summary>
+    /// <param name="baselineOriginX">X-coordinate of the baseline.</param>
+    /// <param name="baselineOriginY">Y-coordinate of the baseline.</param>
+    /// <param name="measuringMode">Specifies measuring mode for positioning glyphs in the run.</param>
+    /// <param name="glyphRun">The glyph run to draw.</param>
+    /// <param name="renderingParams">Object that controls rendering behavior.</param>
+    /// <param name="textColor">Foreground color of the text.</param>
+    /// <param name="colorPaletteIndex">Zero-based index of the font-defined color palette to use.</param>
+    /// <param name="blackBoxRect">Optional rectangle that receives the bounding box (in pixels not DIPs) of all the pixels affected by 
+    /// drawing the glyph run. The black box rectangle may extend beyond the dimensions of the bitmap.</param>
+    /// <returns>
+    /// Standard HRESULT error code.
+    /// </returns>
+    /// <remarks>
+    /// This method internally calls TranslateColorGlyphRun and then automatically calls the appropriate
+    /// lower-level methods to render monochrome or color glyph runs.
+    /// </remarks>
+    STDMETHOD(DrawGlyphRunWithColorSupport)(
+        FLOAT baselineOriginX,
+        FLOAT baselineOriginY,
+        DWRITE_MEASURING_MODE measuringMode,
+        _In_ DWRITE_GLYPH_RUN const* glyphRun,
+        _In_ IDWriteRenderingParams* renderingParams,
+        COLORREF textColor,
+        UINT32 colorPaletteIndex = 0,
+        _Out_opt_ RECT* blackBoxRect = NULL
+        ) PURE;
+};
+
+#endif
 
 #endif // DWRITE_3_H_INCLUDED

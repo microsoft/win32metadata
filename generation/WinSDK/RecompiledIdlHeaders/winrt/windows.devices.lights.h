@@ -145,6 +145,21 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CDevices_CLights_CILampArray_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CDevices_CLights_CILampArray2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CLights_CILampArray2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Lights {
+                interface ILampArray2;
+            } /* Lights */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CLights_CILampArray2 ABI::Windows::Devices::Lights::ILampArray2
+
+#endif // ____x_ABI_CWindows_CDevices_CLights_CILampArray2_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CDevices_CLights_CILampArrayStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CLights_CILampArrayStatics_FWD_DEFINED__
 namespace ABI {
@@ -479,6 +494,33 @@ typedef ITypedEventHandler<ABI::Windows::Devices::Lights::Lamp*, ABI::Windows::D
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
+
+#ifndef DEF___FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable_USE
+#define DEF___FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("1229c9f2-783e-5bc8-9a1e-772e45e66401"))
+ITypedEventHandler<ABI::Windows::Devices::Lights::LampArray*, IInspectable*> : ITypedEventHandler_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::Devices::Lights::LampArray*, ABI::Windows::Devices::Lights::ILampArray*>, IInspectable*>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.TypedEventHandler`2<Windows.Devices.Lights.LampArray, Object>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef ITypedEventHandler<ABI::Windows::Devices::Lights::LampArray*, IInspectable*> __FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable_t;
+#define __FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable ABI::Windows::Foundation::__FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
+
 #ifndef ____x_ABI_CWindows_CFoundation_CIAsyncAction_FWD_DEFINED__
 #define ____x_ABI_CWindows_CFoundation_CIAsyncAction_FWD_DEFINED__
 namespace ABI {
@@ -599,6 +641,9 @@ namespace ABI {
                     LampArrayKind_Wearable = 8,
                     LampArrayKind_Furniture = 9,
                     LampArrayKind_Art = 10,
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+                    LampArrayKind_Headset = 11,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
                 };
             } /* Lights */
         } /* Devices */
@@ -835,6 +880,49 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CLights_CILampArray;
 
 /*
  *
+ * Interface Windows.Devices.Lights.ILampArray2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Lights.LampArray
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CDevices_CLights_CILampArray2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CLights_CILampArray2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Lights_ILampArray2[] = L"Windows.Devices.Lights.ILampArray2";
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Lights {
+                MIDL_INTERFACE("050c181f-60a8-4711-a1af-1b1b4c658ea2")
+                ILampArray2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_IsAvailable(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE add_AvailabilityChanged(
+                        __FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable* handler,
+                        EventRegistrationToken* token
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE remove_AvailabilityChanged(
+                        EventRegistrationToken token
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_ILampArray2 = _uuidof(ILampArray2);
+            } /* Lights */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CLights_CILampArray2;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CLights_CILampArray2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Interface Windows.Devices.Lights.ILampArrayStatics
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 7.0
@@ -1052,6 +1140,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Lights.ILampArray ** Default Interface **
+ *    Windows.Devices.Lights.ILampArray2
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -1118,6 +1207,12 @@ typedef interface __x_ABI_CWindows_CDevices_CLights_CILamp __x_ABI_CWindows_CDev
 typedef interface __x_ABI_CWindows_CDevices_CLights_CILampArray __x_ABI_CWindows_CDevices_CLights_CILampArray;
 
 #endif // ____x_ABI_CWindows_CDevices_CLights_CILampArray_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CLights_CILampArray2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CLights_CILampArray2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CLights_CILampArray2 __x_ABI_CWindows_CDevices_CLights_CILampArray2;
+
+#endif // ____x_ABI_CWindows_CDevices_CLights_CILampArray2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CDevices_CLights_CILampArrayStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CLights_CILampArrayStatics_FWD_DEFINED__
@@ -1645,6 +1740,55 @@ interface __FITypedEventHandler_2_Windows__CDevices__CLights__CLamp_Windows__CDe
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
+#if !defined(____FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable_INTERFACE_DEFINED__)
+#define ____FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable_INTERFACE_DEFINED__
+
+typedef interface __FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable __FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable;
+
+typedef struct __FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectableVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable* This,
+        __x_ABI_CWindows_CDevices_CLights_CILampArray* sender,
+        IInspectable* args);
+
+    END_INTERFACE
+} __FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectableVtbl;
+
+interface __FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable
+{
+    CONST_VTBL struct __FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectableVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable_Invoke(This, sender, args) \
+    ((This)->lpVtbl->Invoke(This, sender, args))
+
+#endif /* COBJMACROS */
+
+#endif // ____FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
+
 #ifndef ____x_ABI_CWindows_CFoundation_CIAsyncAction_FWD_DEFINED__
 #define ____x_ABI_CWindows_CFoundation_CIAsyncAction_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CFoundation_CIAsyncAction __x_ABI_CWindows_CFoundation_CIAsyncAction;
@@ -1694,6 +1838,9 @@ enum __x_ABI_CWindows_CDevices_CLights_CLampArrayKind
     LampArrayKind_Wearable = 8,
     LampArrayKind_Furniture = 9,
     LampArrayKind_Art = 10,
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+    LampArrayKind_Headset = 11,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
 
@@ -2047,6 +2194,86 @@ interface __x_ABI_CWindows_CDevices_CLights_CILampArray
 EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CLights_CILampArray;
 #endif /* !defined(____x_ABI_CWindows_CDevices_CLights_CILampArray_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
+
+/*
+ *
+ * Interface Windows.Devices.Lights.ILampArray2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Lights.LampArray
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CDevices_CLights_CILampArray2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CLights_CILampArray2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Lights_ILampArray2[] = L"Windows.Devices.Lights.ILampArray2";
+typedef struct __x_ABI_CWindows_CDevices_CLights_CILampArray2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CLights_CILampArray2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CLights_CILampArray2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CLights_CILampArray2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CLights_CILampArray2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CLights_CILampArray2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CLights_CILampArray2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_IsAvailable)(__x_ABI_CWindows_CDevices_CLights_CILampArray2* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* add_AvailabilityChanged)(__x_ABI_CWindows_CDevices_CLights_CILampArray2* This,
+        __FITypedEventHandler_2_Windows__CDevices__CLights__CLampArray_IInspectable* handler,
+        EventRegistrationToken* token);
+    HRESULT (STDMETHODCALLTYPE* remove_AvailabilityChanged)(__x_ABI_CWindows_CDevices_CLights_CILampArray2* This,
+        EventRegistrationToken token);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CDevices_CLights_CILampArray2Vtbl;
+
+interface __x_ABI_CWindows_CDevices_CLights_CILampArray2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CDevices_CLights_CILampArray2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CDevices_CLights_CILampArray2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CDevices_CLights_CILampArray2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CDevices_CLights_CILampArray2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CDevices_CLights_CILampArray2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CDevices_CLights_CILampArray2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CDevices_CLights_CILampArray2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CDevices_CLights_CILampArray2_get_IsAvailable(This, value) \
+    ((This)->lpVtbl->get_IsAvailable(This, value))
+
+#define __x_ABI_CWindows_CDevices_CLights_CILampArray2_add_AvailabilityChanged(This, handler, token) \
+    ((This)->lpVtbl->add_AvailabilityChanged(This, handler, token))
+
+#define __x_ABI_CWindows_CDevices_CLights_CILampArray2_remove_AvailabilityChanged(This, token) \
+    ((This)->lpVtbl->remove_AvailabilityChanged(This, token))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CLights_CILampArray2;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CLights_CILampArray2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -2423,6 +2650,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Lights.ILampArray ** Default Interface **
+ *    Windows.Devices.Lights.ILampArray2
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

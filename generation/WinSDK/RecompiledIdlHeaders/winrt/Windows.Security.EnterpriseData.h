@@ -3258,9 +3258,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Security.EnterpriseData.EnterpriseDataContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.EnterpriseData.IFileProtectionManagerStatics interface starting with version 1.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
- *   Static Methods exist on the Windows.Security.EnterpriseData.IFileProtectionManagerStatics2 interface starting with version 2.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *   Static Methods exist on the Windows.Security.EnterpriseData.IFileProtectionManagerStatics3 interface starting with version 4.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
+ *   Static Methods exist on the Windows.Security.EnterpriseData.IFileProtectionManagerStatics2 interface starting with version 2.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
+ *   Static Methods exist on the Windows.Security.EnterpriseData.IFileProtectionManagerStatics interface starting with version 1.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -3475,9 +3475,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Security.EnterpriseData.EnterpriseDataContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics2 interface starting with version 2.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
- *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics interface starting with version 1.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics4 interface starting with version 4.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
+ *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics interface starting with version 1.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
+ *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics2 interface starting with version 2.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics3 interface starting with version 3.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *
  * Class implements the following interfaces:
@@ -8123,9 +8123,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Security.EnterpriseData.EnterpriseDataContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.EnterpriseData.IFileProtectionManagerStatics interface starting with version 1.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
- *   Static Methods exist on the Windows.Security.EnterpriseData.IFileProtectionManagerStatics2 interface starting with version 2.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *   Static Methods exist on the Windows.Security.EnterpriseData.IFileProtectionManagerStatics3 interface starting with version 4.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
+ *   Static Methods exist on the Windows.Security.EnterpriseData.IFileProtectionManagerStatics2 interface starting with version 2.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
+ *   Static Methods exist on the Windows.Security.EnterpriseData.IFileProtectionManagerStatics interface starting with version 1.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -8340,9 +8340,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Security.EnterpriseData.EnterpriseDataContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics2 interface starting with version 2.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
- *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics interface starting with version 1.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics4 interface starting with version 4.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
+ *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics interface starting with version 1.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
+ *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics2 interface starting with version 2.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *   Static Methods exist on the Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics3 interface starting with version 3.0 of the Windows.Security.EnterpriseData.EnterpriseDataContract API contract
  *
  * Class implements the following interfaces:

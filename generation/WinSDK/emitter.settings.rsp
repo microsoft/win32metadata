@@ -5,6 +5,7 @@ IPropertySetSerializer(interface)=<Windows.Foundation.UniversalApiContract, Vers
 ICompositionSurface(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.ICompositionSurface
 ICompositionCapabilities(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.CompositionCapabilities
 ICompositionGraphicsDevice(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.CompositionGraphicsDevice
+ICompositionTexture(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.ICompositionTexture
 ICompositor(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.Compositor
 IGraphicsEffectSource(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.Graphics.Effects.IGraphicsEffectSource
 IDesktopWindowTarget(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.Desktop.DesktopWindowTarget

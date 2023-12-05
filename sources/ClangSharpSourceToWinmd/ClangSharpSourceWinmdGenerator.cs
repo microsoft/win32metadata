@@ -1072,7 +1072,7 @@ namespace ClangSharpSourceToWinmd
             if (typeSymbol.SpecialType == SpecialType.System_IntPtr && nativeType.Contains("(*)"))
             {
                 string fullName = $"{owner}.{name}";
-                this.diagnostics.Add(new GeneratorDiagnostic($"{fullName} is a pointer to a function: {nativeType}. To express this properly in metadata, define a delegate and map {fullName} to use it.", DiagnosticSeverity.Warning));
+                //this.diagnostics.Add(new GeneratorDiagnostic($"{fullName} is a pointer to a function: {nativeType}. To express this properly in metadata, define a delegate and map {fullName} to use it.", DiagnosticSeverity.Warning));
                 return;
             }
 

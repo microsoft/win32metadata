@@ -8347,7 +8347,7 @@ cpp_quote("#if (_WIN32_IE >= _WIN32_IE_IE70)")
 typedef [v1_enum] enum LIBRARYMANAGEDIALOGOPTIONS
 {
     LMD_DEFAULT                             = 0x00000000,
-    LMD_ALLOWUNINDEXABLENETWORKLOCATIONS    = 0x00000001,   // The caller of SHShowManageLibraryUI does not want to show any warning dialogs about network locations that cannot be indexed
+    LMD_ALLOWUNINDEXABLENETWORKLOCATIONS    = 0x00000001,      // The caller of SHShowManageLibraryUI does not want to show any warning dialogs about network locations that cannot be indexed
 } LIBRARYMANAGEDIALOGOPTIONS;
 
 cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(LIBRARYMANAGEDIALOGOPTIONS)")

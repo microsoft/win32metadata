@@ -1127,6 +1127,15 @@
 #define EVENT_GATHER_RECOVERY_FAILURE    0xC0000E12L
 
 //
+// MessageId: EVENT_GATHER_INPLACE_INDEX_REBUILD
+//
+// MessageText:
+//
+// The Windows Search Service is rebuilding the index inplace.%1
+//
+#define EVENT_GATHER_INPLACE_INDEX_REBUILD 0x40000E13L
+
+//
 // MessageId: EVENT_INDEXER_STARTED
 //
 // MessageText:

@@ -21,6 +21,7 @@ namespace Composition {
 typedef interface ICompositionDrawingSurfaceInterop ICompositionDrawingSurfaceInterop;
 typedef interface ICompositionDrawingSurfaceInterop2 ICompositionDrawingSurfaceInterop2;
 typedef interface ICompositorInterop ICompositorInterop;
+typedef interface ICompositionTexture ICompositionTexture;
 
 
 #undef INTERFACE
@@ -101,6 +102,36 @@ DECLARE_INTERFACE_IID_(ICompositorInterop, IUnknown, "25297D5C-3AD4-4C9C-B5CF-E3
         _COM_Outptr_ ICompositionGraphicsDevice ** result
         ) PURE;
 };
+
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
+
+#undef INTERFACE
+#define INTERFACE ICompositorInterop2
+DECLARE_INTERFACE_IID_(ICompositorInterop2, IUnknown, "D3EEF34C-0667-4AFC-8D13-867607B0FE91")
+{
+    IFACEMETHOD(CheckCompositionTextureSupport)(
+        _In_ IUnknown * renderingDevice,
+        _Out_ BOOL * supportsCompositionTextures) PURE;
+
+    IFACEMETHOD(CreateCompositionTexture)(
+        _In_ IUnknown * d3dTexture,
+        _Outptr_ ICompositionTexture ** compositionTexture) PURE;
+};
+
+
+#undef INTERFACE
+#define INTERFACE ICompositionTextureInterop
+DECLARE_INTERFACE_IID_(ICompositionTextureInterop, IUnknown, "D528A265-F0A5-422F-A39D-EF62D7CD1CC4")
+{
+    IFACEMETHOD(GetAvailableFence)(
+        _Out_ UINT64 * fenceValue,
+        _In_ REFIID iid,
+        _Outptr_result_maybenull_ void ** availableFence) PURE;
+};
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_NI)
+
 
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)

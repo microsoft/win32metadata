@@ -1234,6 +1234,78 @@ interface IWRdsWddmIddProps : IUnknown
 };
 
 
+[
+    object,
+    uuid(60F71B1A-3682-4BC7-997E-4E4F02A08148),
+    pointer_default(unique)
+]
+interface IWRdsWddmIddProps1 : IUnknown
+{
+    //=============================================================================
+    //
+    // GetHardwareId()
+    //
+    // Purpose:
+    //      Protocol stack uses this method to return hardware Id of WDDM ID driver.
+    //
+    // Parameters:
+    //      pDisplayDriverHardwareId - Pointer to array to receive hardware id string.
+    //      Count                    - Size in elements of hardware id string.
+    //
+    // Return values:
+    //      S_OK or error code
+    //
+    //=============================================================================
+    HRESULT
+    GetHardwareId(
+        [in, string, size_is(Count)] WCHAR* pDisplayDriverHardwareId,
+        [in]                         DWORD Count
+        );
+
+    //============================================================================
+    //
+    // OnDriverLoad()
+    //
+    // Purpose:
+    //      Termsrv uses this method to notify protocol stack that WDDM ID driver
+    //      is loaded. It delivers driver interface instance that protocol stack 
+    //      use to obtain driver handle.
+    //
+    // Parameters:
+    //      SessionId - ID of a session driver is loaded for.
+    //      DeviceInstance – String that represents IDD device instance.
+    //
+    // Return values:
+    //      S_OK or error code
+    //
+    //============================================================================
+    HRESULT
+    OnDriverLoad(
+        [in] ULONG SessionId,
+        [in] LPCWSTR DeviceInstance
+        );
+
+    //=============================================================================
+    //
+    // OnDriverUnload()
+    //
+    // Purpose:
+    //      Termsrv uses this method to tell protocol stack that PnP unloaded the
+    //      WDDM ID driver.
+    //
+    // Parameters: 
+    //      SessionId - ID of a session driver is unloaded from.
+    //
+    // Return values:
+    //      S_OK or error code
+    //
+    //=============================================================================
+    HRESULT
+    OnDriverUnload(
+        [in] ULONG SessionId
+        );
+};
+
 
 //
 // Following interfaces are for Windows 10 20H1

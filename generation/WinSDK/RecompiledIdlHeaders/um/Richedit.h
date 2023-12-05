@@ -324,6 +324,9 @@ typedef enum tagTextMode
 #define EM_GETQUERYRTFOBJ		(WM_USER + 269)
 #define EM_SETQUERYRTFOBJ		(WM_USER + 270)
 
+#define EM_SETQUERYCONVERTOLELINKCALLBACK	(WM_USER + 403)
+#define EM_SETDISABLEOLELINKCONVERSION		(WM_USER + 404)
+
 // EM_SETPAGEROTATE wparam values
 #define EPR_0					0		// Text flows left to right and top to bottom
 #define EPR_270 				1		// Text flows top to bottom and right to left

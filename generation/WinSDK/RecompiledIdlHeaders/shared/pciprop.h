@@ -553,6 +553,45 @@ DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_OnPostPath, 37);
 
 DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_D3ColdSupport, 38);
 
+//
+// This property contains the PCI serial number.
+//
+
+DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_SerialNumber, 40);
+
+//
+// This property contains the port type that is read from the USB4 DVSEC Capability.
+//
+
+DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_UsbDvsecPortType, 41);
+
+//
+// This property contains the port specific attributes read from the USB4 DVSEC Capability.
+//
+
+DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_UsbDvsecPortSpecificAttributes, 42);
+
+//
+// This property contains a boolean to indicate whether or not a tunneled
+// USB4 port uses component relation
+//
+
+DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_UsbComponentRelation, 43);
+
+//
+// This property contains the host router name that this device
+// is mapped to.
+//
+
+DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_UsbHostRouterName, 44);
+
+//
+// This property contains the serial number of the
+// parent device.
+//
+
+DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_ParentSerialNumber,  45);
+
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 

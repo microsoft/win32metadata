@@ -66,6 +66,9 @@
 /* extended create function flags */
 #define OLECREATE_LEAVERUNNING	0x00000001
 
+#define OLESTREAM_CONVERSION_DEFAULT 0x00000000L
+#define OLESTREAM_CONVERSION_DISABLEOLELINK 0x00000001L
+
 /* pull in the MIDL generated header */
 
 #include <oleidl.h>
@@ -301,11 +304,27 @@ typedef struct _OLESTREAM
     LPOLESTREAMVTBL lpstbl;
 } OLESTREAM;
 
+typedef HRESULT(STDAPICALLTYPE *OLESTREAMQUERYCONVERTOLELINKCALLBACK)
+    (_In_ LPCLSID       pClsid,
+    _In_ LPOLESTR       szClass,
+    _In_opt_ LPOLESTR   szTopicName,
+    _In_opt_ LPOLESTR   szItemName,
+    _In_opt_ LPOLESTR   szUNCName,
+    _In_opt_ ULONG      linkUpdatingOption,
+    _In_opt_ PVOID      pvContext);
 
 WINOLEAPI OleConvertOLESTREAMToIStorage
     (IN LPOLESTREAM                lpolestream,
     OUT LPSTORAGE                   pstg,
     IN const DVTARGETDEVICE FAR*   ptd);
+
+WINOLEAPI OleConvertOLESTREAMToIStorage2
+    (_In_ LPOLESTREAM                   lpolestream,
+    _Out_ LPSTORAGE                     pstg,
+    _In_opt_ const DVTARGETDEVICE FAR*  ptd,
+    _In_opt_ DWORD                      opt,
+    _In_opt_ PVOID                      pvCallbackContext,
+    _In_opt_ OLESTREAMQUERYCONVERTOLELINKCALLBACK pQueryConvertOLELinkCallback);
 
 WINOLEAPI OleConvertIStorageToOLESTREAM
     (IN LPSTORAGE      pstg,
@@ -340,6 +359,19 @@ WINOLEAPI OleConvertOLESTREAMToIStorageEx
      OUT LONG FAR*          plHeight,   //      height
      OUT DWORD FAR*         pdwSize,    //      size in bytes
      OUT LPSTGMEDIUM        pmedium);   //      bits
+
+WINOLEAPI OleConvertOLESTREAMToIStorageEx2
+    (_In_ LPOLESTREAM        polestm,
+     _Out_ LPSTORAGE          pstg,
+                                    // Presentation data from OLESTREAM
+     _Out_ CLIPFORMAT FAR*    pcfFormat,  //      format
+     _Out_ LONG FAR*          plwWidth,   //      width
+     _Out_ LONG FAR*          plHeight,   //      height
+     _Out_ DWORD FAR*         pdwSize,    //      size in bytes
+     _Out_ LPSTGMEDIUM        pmedium,    //      bits
+     _In_opt_ DWORD           opt,
+     _In_opt_ PVOID           pvCallbackContext,
+     _In_opt_ OLESTREAMQUERYCONVERTOLELINKCALLBACK pQueryConvertOLELinkCallback);
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion

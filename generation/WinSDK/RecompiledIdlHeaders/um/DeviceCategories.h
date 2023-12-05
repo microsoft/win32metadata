@@ -18,7 +18,9 @@
 // Audio
 #define DEVICEDISPLAY_CATEGORY_AUDIO                                L"Audio"
 #define DEVICEDISPLAY_CATEGORY_AUDIO_ADAPTER                        L"Audio.Adapter"
+#define DEVICEDISPLAY_CATEGORY_AUDIO_EARBUDS                        L"Audio.Earbuds"
 #define DEVICEDISPLAY_CATEGORY_AUDIO_HEADPHONE                      L"Audio.Headphone"
+#define DEVICEDISPLAY_CATEGORY_AUDIO_HEARING_AID                    L"Audio.HearingAid"
 #define DEVICEDISPLAY_CATEGORY_AUDIO_MICROPHONE                     L"Audio.Microphone"
 #define DEVICEDISPLAY_CATEGORY_AUDIO_SPEAKERPHONE                   L"Audio.Speakerphone"
 #define DEVICEDISPLAY_CATEGORY_AUDIO_SPEAKERS                       L"Audio.Speakers"

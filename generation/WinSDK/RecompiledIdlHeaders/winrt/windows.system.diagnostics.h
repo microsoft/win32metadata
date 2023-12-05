@@ -1963,8 +1963,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.Diagnostics.IProcessDiagnosticInfoStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.Diagnostics.IProcessDiagnosticInfoStatics2 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.Diagnostics.IProcessDiagnosticInfoStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.Diagnostics.IProcessDiagnosticInfo ** Default Interface **
@@ -2115,8 +2115,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.Diagnostics.ISystemDiagnosticInfoStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.Diagnostics.ISystemDiagnosticInfoStatics2 interface starting with version 11.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.Diagnostics.ISystemDiagnosticInfoStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.Diagnostics.ISystemDiagnosticInfo ** Default Interface **
@@ -4858,8 +4858,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.Diagnostics.IProcessDiagnosticInfoStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.Diagnostics.IProcessDiagnosticInfoStatics2 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.Diagnostics.IProcessDiagnosticInfoStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.Diagnostics.IProcessDiagnosticInfo ** Default Interface **
@@ -5010,8 +5010,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.Diagnostics.ISystemDiagnosticInfoStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.Diagnostics.ISystemDiagnosticInfoStatics2 interface starting with version 11.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.Diagnostics.ISystemDiagnosticInfoStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.System.Diagnostics.ISystemDiagnosticInfo ** Default Interface **

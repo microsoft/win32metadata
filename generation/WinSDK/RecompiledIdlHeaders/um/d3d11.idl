@@ -2802,6 +2802,7 @@ typedef enum D3D11_FORMAT_SUPPORT2
     D3D11_FORMAT_SUPPORT2_TILED                                             = 0x00000200,
     D3D11_FORMAT_SUPPORT2_SHAREABLE                                         = 0x00000400,
     D3D11_FORMAT_SUPPORT2_MULTIPLANE_OVERLAY                                = 0x00004000,
+    D3D11_FORMAT_SUPPORT2_DISPLAYABLE                                       = 0x00010000,
 } D3D11_FORMAT_SUPPORT2;
 
 

@@ -468,6 +468,12 @@
     </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="ST_Capability_Uap_15a">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="humanPresence"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="ST_Capability_Mobile">
     <xs:restriction base="xs:string">
       <xs:enumeration value="recordedCallsFolder"/>

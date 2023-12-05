@@ -760,6 +760,11 @@ interface DWRITE_DECLARE_INTERFACE("d8b768ff-64bc-4e66-982b-ec8e87f693f7") IDWri
 };
 
 /// <summary>
+/// Reserved palette entry index that does not specify any palette entry.
+/// </summary>
+#define DWRITE_NO_PALETTE_INDEX 0xFFFF
+
+/// <summary>
 /// Represents a color glyph run. The IDWriteFactory2::TranslateColorGlyphRun
 /// method returns an ordered collection of color glyph runs, which can be
 /// layered on top of each other to produce a color representation of the
@@ -784,19 +789,19 @@ struct DWRITE_COLOR_GLYPH_RUN
     FLOAT baselineOriginY;
 
     /// <summary>
-    /// Color to use for this layer, if any. This is the same color that
-    /// IDWriteFontFace2::GetPaletteEntries would return for the current
-    /// palette index if the paletteIndex member is less than 0xFFFF. If
-    /// the paletteIndex member is 0xFFFF then there is no associated
-    /// palette entry, this member is set to { 0, 0, 0, 0 }, and the client
-    /// should use the current foreground brush.
+    /// Color to use for this layer, if any. If the paletteIndex member is
+    /// DWRITE_NO_PALETTE_INDEX (0xFFFF) then no color is specifed by the font,
+    /// this member is set to { 0, 0, 0, 0 }, and the client should use the 
+    /// current foreground brush. Otherwise, this member is set to a color from
+    /// the font's color palette, i.e., the same color that would be returned
+    /// by IDWriteFontFace2::GetPaletteEntries for the current palette index.
     /// </summary>
     DWRITE_COLOR_F runColor;
 
     /// <summary>
     /// Zero-based index of this layer's color entry in the current color
-    /// palette, or 0xFFFF if this layer is to be rendered using 
-    /// the current foreground brush.
+    /// palette, or DWRITE_NO_PALETTE_INDEX (0xFFFF) if this layer
+    /// is to be rendered using the current foreground brush.
     /// </summary>
     UINT16 paletteIndex;
 };

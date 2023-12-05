@@ -979,7 +979,7 @@
 #define PbCopyReadNoWait 0x644
 #define PbCopyReadWait 0x648
 #define PbCopyReadNoWaitMiss 0x64c
-#define PbAlignmentFixupCount 0xd10
+#define PbAlignmentFixupCount 0xd18
 #define PbExceptionDispatchCount 0x934
 #define PbProcessorVendorString 0x508
 #define PbFeatureBits 0x50c

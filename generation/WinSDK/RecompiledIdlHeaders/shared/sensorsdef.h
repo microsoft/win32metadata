@@ -477,6 +477,7 @@ typedef enum HUMAN_PRESENCE_DETECTION_TYPE_COUNT
 
 typedef enum HUMAN_PRESENCE_DETECTION_TYPE
 {
+    HumanPresenceDetectionType_Undefined                    = 0x00000000,
     HumanPresenceDetectionType_VendorDefinedNonBiometric    = 0x00000001,
     HumanPresenceDetectionType_VendorDefinedBiometric       = 0x00000002,
     HumanPresenceDetectionType_FacialBiometric              = 0x00000004,

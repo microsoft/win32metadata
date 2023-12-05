@@ -106,6 +106,8 @@ namespace Windows
 
             interface IStoreContext4;
 
+            interface IStoreContext5;
+
             interface IStoreContextStatics;
 
             interface IStoreImage;
@@ -123,6 +125,8 @@ namespace Windows
             interface IStorePackageUpdateResult2;
 
             interface IStorePrice;
+
+            interface IStorePrice2;
 
             interface IStoreProduct;
 
@@ -618,6 +622,16 @@ namespace Windows
                 HRESULT SetInstallOrderForAssociatedStoreQueueItemsAsync([in] Windows.Foundation.Collections.IIterable<Windows.Services.Store.StoreQueueItem*>* items, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVectorView<Windows.Services.Store.StoreQueueItem*>*>** operation);
             }
 
+            [contract(Windows.Services.Store.StoreContract, 4.0)]
+            [exclusiveto(Windows.Services.Store.StoreContext)]
+            [uuid(6DE6C52B-C43A-5953-B39A-71643C57D96E)]
+            interface IStoreContext5 : IInspectable
+            {
+                HRESULT GetUserPurchaseHistoryAsync([in] Windows.Foundation.Collections.IIterable<HSTRING>* productKinds, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Services.Store.StoreProductQueryResult*>** operation);
+                HRESULT GetAssociatedStoreProductsByInAppOfferTokenAsync([in] Windows.Foundation.Collections.IIterable<HSTRING>* inAppOfferTokens, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Services.Store.StoreProductQueryResult*>** operation);
+                HRESULT RequestPurchaseByInAppOfferTokenAsync([in] HSTRING inAppOfferToken, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Services.Store.StorePurchaseResult*>** operation);
+            }
+
             [contract(Windows.Services.Store.StoreContract, 1.0)]
             [exclusiveto(Windows.Services.Store.StoreContext)]
             [uuid(9C06EE5F-15C0-4E72-9330-D6191CEBD19C)]
@@ -711,6 +725,16 @@ namespace Windows
                 [propget] HRESULT SaleEndDate([out] [retval] Windows.Foundation.DateTime* value);
                 [propget] HRESULT CurrencyCode([out] [retval] HSTRING* value);
                 [propget] HRESULT FormattedRecurrencePrice([out] [retval] HSTRING* value);
+            }
+
+            [contract(Windows.Services.Store.StoreContract, 4.0)]
+            [exclusiveto(Windows.Services.Store.StorePrice)]
+            [uuid(F711573C-40E6-5641-B063-F1DF42B2B12A)]
+            interface IStorePrice2 : IInspectable
+            {
+                [propget] HRESULT UnformattedBasePrice([out] [retval] HSTRING* value);
+                [propget] HRESULT UnformattedPrice([out] [retval] HSTRING* value);
+                [propget] HRESULT UnformattedRecurrencePrice([out] [retval] HSTRING* value);
             }
 
             [contract(Windows.Services.Store.StoreContract, 1.0)]
@@ -1002,6 +1026,7 @@ namespace Windows
                 [contract(Windows.Services.Store.StoreContract, 2.0)] interface Windows.Services.Store.IStoreContext2;
                 [contract(Windows.Services.Store.StoreContract, 3.0)] interface Windows.Services.Store.IStoreContext3;
                 [contract(Windows.Services.Store.StoreContract, 4.0)] interface Windows.Services.Store.IStoreContext4;
+                [contract(Windows.Services.Store.StoreContract, 4.0)] interface Windows.Services.Store.IStoreContext5;
             }
 
             [contract(Windows.Services.Store.StoreContract, 1.0)]
@@ -1061,6 +1086,7 @@ namespace Windows
             runtimeclass StorePrice
             {
                 [default] interface Windows.Services.Store.IStorePrice;
+                [contract(Windows.Services.Store.StoreContract, 4.0)] interface Windows.Services.Store.IStorePrice2;
             }
 
             [contract(Windows.Services.Store.StoreContract, 1.0)]

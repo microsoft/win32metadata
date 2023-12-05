@@ -486,6 +486,8 @@ typedef enum _ATTACH_VIRTUAL_DISK_FLAG
     // Register the non-PnP disk as a volume with mount manager.
     ATTACH_VIRTUAL_DISK_FLAG_REGISTER_VOLUME                = 0x00000200,
 
+    // Reattach a virtual disk the next time the system boots.
+    ATTACH_VIRTUAL_DISK_FLAG_AT_BOOT                        = 0x00000400,
 } ATTACH_VIRTUAL_DISK_FLAG;
 
 #if !defined(VIRTDISK_DEFINE_FLAGS)

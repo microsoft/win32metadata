@@ -187,6 +187,60 @@ class MSFT_Volume : MSFT_StorageObject {
         );
 
     //
+    // Method: Format2
+    //
+
+    UInt32 Format2(
+        [In]
+        String FileSystem,
+
+        [In]
+        String FileSystemLabel,
+
+        [In, Units("Bytes")]
+        UInt32 AllocationUnitSize,
+
+        [In]
+        Boolean Full,
+
+        [In]
+        Boolean Force,
+
+        [In]
+        Boolean Compress,
+
+        [In]
+        Boolean ShortFileNameSupport,
+
+        [In]
+        Boolean SetIntegrityStreams,
+
+        [In]
+        Boolean UseLargeFRS,
+
+        [In]
+        Boolean DisableHeatGathering,
+
+        [In]
+        Boolean IsDAX,
+
+        [In]
+        Boolean NoTrim,
+
+        [In]
+        Boolean DevDrive,
+
+        [Out, EmbeddedInstance("MSFT_Volume")]
+        String FormattedVolume,
+
+        [Out]
+        MSFT_StorageJob REF CreatedStorageJob,
+
+        [Out, EmbeddedInstance("MSFT_StorageExtendedStatus")]
+        String ExtendedStatus
+        );
+
+    //
     // Method: Repair
     //
 

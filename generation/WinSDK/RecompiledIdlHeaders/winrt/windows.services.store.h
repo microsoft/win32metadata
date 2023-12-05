@@ -293,6 +293,21 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CServices_CStore_CIStoreContext4_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CServices_CStore_CIStoreContext5_FWD_DEFINED__
+#define ____x_ABI_CWindows_CServices_CStore_CIStoreContext5_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Services {
+            namespace Store {
+                interface IStoreContext5;
+            } /* Store */
+        } /* Services */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CServices_CStore_CIStoreContext5 ABI::Windows::Services::Store::IStoreContext5
+
+#endif // ____x_ABI_CWindows_CServices_CStore_CIStoreContext5_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CServices_CStore_CIStoreContextStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CServices_CStore_CIStoreContextStatics_FWD_DEFINED__
 namespace ABI {
@@ -427,6 +442,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CServices_CStore_CIStorePrice ABI::Windows::Services::Store::IStorePrice
 
 #endif // ____x_ABI_CWindows_CServices_CStore_CIStorePrice_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CServices_CStore_CIStorePrice2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CServices_CStore_CIStorePrice2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Services {
+            namespace Store {
+                interface IStorePrice2;
+            } /* Store */
+        } /* Services */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CServices_CStore_CIStorePrice2 ABI::Windows::Services::Store::IStorePrice2
+
+#endif // ____x_ABI_CWindows_CServices_CStore_CIStorePrice2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CServices_CStore_CIStoreProduct_FWD_DEFINED__
 #define ____x_ABI_CWindows_CServices_CStore_CIStoreProduct_FWD_DEFINED__
@@ -4057,6 +4087,51 @@ EXTERN_C const IID IID___x_ABI_CWindows_CServices_CStore_CIStoreContext4;
 
 /*
  *
+ * Interface Windows.Services.Store.IStoreContext5
+ *
+ * Introduced to Windows.Services.Store.StoreContract in version 4.0
+ *
+ * Interface is a part of the implementation of type Windows.Services.Store.StoreContext
+ *
+ */
+#if WINDOWS_SERVICES_STORE_STORECONTRACT_VERSION >= 0x40000
+#if !defined(____x_ABI_CWindows_CServices_CStore_CIStoreContext5_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CServices_CStore_CIStoreContext5_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Services_Store_IStoreContext5[] = L"Windows.Services.Store.IStoreContext5";
+namespace ABI {
+    namespace Windows {
+        namespace Services {
+            namespace Store {
+                MIDL_INTERFACE("6de6c52b-c43a-5953-b39a-71643c57d96e")
+                IStoreContext5 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE GetUserPurchaseHistoryAsync(
+                        __FIIterable_1_HSTRING* productKinds,
+                        __FIAsyncOperation_1_Windows__CServices__CStore__CStoreProductQueryResult** operation
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE GetAssociatedStoreProductsByInAppOfferTokenAsync(
+                        __FIIterable_1_HSTRING* inAppOfferTokens,
+                        __FIAsyncOperation_1_Windows__CServices__CStore__CStoreProductQueryResult** operation
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE RequestPurchaseByInAppOfferTokenAsync(
+                        HSTRING inAppOfferToken,
+                        __FIAsyncOperation_1_Windows__CServices__CStore__CStorePurchaseResult** operation
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IStoreContext5 = _uuidof(IStoreContext5);
+            } /* Store */
+        } /* Services */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CServices_CStore_CIStoreContext5;
+#endif /* !defined(____x_ABI_CWindows_CServices_CStore_CIStoreContext5_INTERFACE_DEFINED__) */
+#endif // WINDOWS_SERVICES_STORE_STORECONTRACT_VERSION >= 0x40000
+
+/*
+ *
  * Interface Windows.Services.Store.IStoreContextStatics
  *
  * Introduced to Windows.Services.Store.StoreContract in version 1.0
@@ -4444,6 +4519,48 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CServices_CStore_CIStorePrice;
 #endif /* !defined(____x_ABI_CWindows_CServices_CStore_CIStorePrice_INTERFACE_DEFINED__) */
 #endif // WINDOWS_SERVICES_STORE_STORECONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Services.Store.IStorePrice2
+ *
+ * Introduced to Windows.Services.Store.StoreContract in version 4.0
+ *
+ * Interface is a part of the implementation of type Windows.Services.Store.StorePrice
+ *
+ */
+#if WINDOWS_SERVICES_STORE_STORECONTRACT_VERSION >= 0x40000
+#if !defined(____x_ABI_CWindows_CServices_CStore_CIStorePrice2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CServices_CStore_CIStorePrice2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Services_Store_IStorePrice2[] = L"Windows.Services.Store.IStorePrice2";
+namespace ABI {
+    namespace Windows {
+        namespace Services {
+            namespace Store {
+                MIDL_INTERFACE("f711573c-40e6-5641-b063-f1df42b2b12a")
+                IStorePrice2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_UnformattedBasePrice(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_UnformattedPrice(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_UnformattedRecurrencePrice(
+                        HSTRING* value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IStorePrice2 = _uuidof(IStorePrice2);
+            } /* Store */
+        } /* Services */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CServices_CStore_CIStorePrice2;
+#endif /* !defined(____x_ABI_CWindows_CServices_CStore_CIStorePrice2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_SERVICES_STORE_STORECONTRACT_VERSION >= 0x40000
 
 /*
  *
@@ -5524,6 +5641,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.Services.Store.IStoreContext2
  *    Windows.Services.Store.IStoreContext3
  *    Windows.Services.Store.IStoreContext4
+ *    Windows.Services.Store.IStoreContext5
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -5676,6 +5794,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Services.Store.IStorePrice ** Default Interface **
+ *    Windows.Services.Store.IStorePrice2
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -6123,6 +6242,12 @@ typedef interface __x_ABI_CWindows_CServices_CStore_CIStoreContext4 __x_ABI_CWin
 
 #endif // ____x_ABI_CWindows_CServices_CStore_CIStoreContext4_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CServices_CStore_CIStoreContext5_FWD_DEFINED__
+#define ____x_ABI_CWindows_CServices_CStore_CIStoreContext5_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CServices_CStore_CIStoreContext5 __x_ABI_CWindows_CServices_CStore_CIStoreContext5;
+
+#endif // ____x_ABI_CWindows_CServices_CStore_CIStoreContext5_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CServices_CStore_CIStoreContextStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CServices_CStore_CIStoreContextStatics_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CServices_CStore_CIStoreContextStatics __x_ABI_CWindows_CServices_CStore_CIStoreContextStatics;
@@ -6176,6 +6301,12 @@ typedef interface __x_ABI_CWindows_CServices_CStore_CIStorePackageUpdateResult2 
 typedef interface __x_ABI_CWindows_CServices_CStore_CIStorePrice __x_ABI_CWindows_CServices_CStore_CIStorePrice;
 
 #endif // ____x_ABI_CWindows_CServices_CStore_CIStorePrice_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CServices_CStore_CIStorePrice2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CServices_CStore_CIStorePrice2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CServices_CStore_CIStorePrice2 __x_ABI_CWindows_CServices_CStore_CIStorePrice2;
+
+#endif // ____x_ABI_CWindows_CServices_CStore_CIStorePrice2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CServices_CStore_CIStoreProduct_FWD_DEFINED__
 #define ____x_ABI_CWindows_CServices_CStore_CIStoreProduct_FWD_DEFINED__
@@ -12484,6 +12615,88 @@ EXTERN_C const IID IID___x_ABI_CWindows_CServices_CStore_CIStoreContext4;
 
 /*
  *
+ * Interface Windows.Services.Store.IStoreContext5
+ *
+ * Introduced to Windows.Services.Store.StoreContract in version 4.0
+ *
+ * Interface is a part of the implementation of type Windows.Services.Store.StoreContext
+ *
+ */
+#if WINDOWS_SERVICES_STORE_STORECONTRACT_VERSION >= 0x40000
+#if !defined(____x_ABI_CWindows_CServices_CStore_CIStoreContext5_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CServices_CStore_CIStoreContext5_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Services_Store_IStoreContext5[] = L"Windows.Services.Store.IStoreContext5";
+typedef struct __x_ABI_CWindows_CServices_CStore_CIStoreContext5Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CServices_CStore_CIStoreContext5* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CServices_CStore_CIStoreContext5* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CServices_CStore_CIStoreContext5* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CServices_CStore_CIStoreContext5* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CServices_CStore_CIStoreContext5* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CServices_CStore_CIStoreContext5* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetUserPurchaseHistoryAsync)(__x_ABI_CWindows_CServices_CStore_CIStoreContext5* This,
+        __FIIterable_1_HSTRING* productKinds,
+        __FIAsyncOperation_1_Windows__CServices__CStore__CStoreProductQueryResult** operation);
+    HRESULT (STDMETHODCALLTYPE* GetAssociatedStoreProductsByInAppOfferTokenAsync)(__x_ABI_CWindows_CServices_CStore_CIStoreContext5* This,
+        __FIIterable_1_HSTRING* inAppOfferTokens,
+        __FIAsyncOperation_1_Windows__CServices__CStore__CStoreProductQueryResult** operation);
+    HRESULT (STDMETHODCALLTYPE* RequestPurchaseByInAppOfferTokenAsync)(__x_ABI_CWindows_CServices_CStore_CIStoreContext5* This,
+        HSTRING inAppOfferToken,
+        __FIAsyncOperation_1_Windows__CServices__CStore__CStorePurchaseResult** operation);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CServices_CStore_CIStoreContext5Vtbl;
+
+interface __x_ABI_CWindows_CServices_CStore_CIStoreContext5
+{
+    CONST_VTBL struct __x_ABI_CWindows_CServices_CStore_CIStoreContext5Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CServices_CStore_CIStoreContext5_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CServices_CStore_CIStoreContext5_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CServices_CStore_CIStoreContext5_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CServices_CStore_CIStoreContext5_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CServices_CStore_CIStoreContext5_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CServices_CStore_CIStoreContext5_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CServices_CStore_CIStoreContext5_GetUserPurchaseHistoryAsync(This, productKinds, operation) \
+    ((This)->lpVtbl->GetUserPurchaseHistoryAsync(This, productKinds, operation))
+
+#define __x_ABI_CWindows_CServices_CStore_CIStoreContext5_GetAssociatedStoreProductsByInAppOfferTokenAsync(This, inAppOfferTokens, operation) \
+    ((This)->lpVtbl->GetAssociatedStoreProductsByInAppOfferTokenAsync(This, inAppOfferTokens, operation))
+
+#define __x_ABI_CWindows_CServices_CStore_CIStoreContext5_RequestPurchaseByInAppOfferTokenAsync(This, inAppOfferToken, operation) \
+    ((This)->lpVtbl->RequestPurchaseByInAppOfferTokenAsync(This, inAppOfferToken, operation))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CServices_CStore_CIStoreContext5;
+#endif /* !defined(____x_ABI_CWindows_CServices_CStore_CIStoreContext5_INTERFACE_DEFINED__) */
+#endif // WINDOWS_SERVICES_STORE_STORECONTRACT_VERSION >= 0x40000
+
+/*
+ *
  * Interface Windows.Services.Store.IStoreContextStatics
  *
  * Introduced to Windows.Services.Store.StoreContract in version 1.0
@@ -13211,6 +13424,85 @@ interface __x_ABI_CWindows_CServices_CStore_CIStorePrice
 EXTERN_C const IID IID___x_ABI_CWindows_CServices_CStore_CIStorePrice;
 #endif /* !defined(____x_ABI_CWindows_CServices_CStore_CIStorePrice_INTERFACE_DEFINED__) */
 #endif // WINDOWS_SERVICES_STORE_STORECONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Services.Store.IStorePrice2
+ *
+ * Introduced to Windows.Services.Store.StoreContract in version 4.0
+ *
+ * Interface is a part of the implementation of type Windows.Services.Store.StorePrice
+ *
+ */
+#if WINDOWS_SERVICES_STORE_STORECONTRACT_VERSION >= 0x40000
+#if !defined(____x_ABI_CWindows_CServices_CStore_CIStorePrice2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CServices_CStore_CIStorePrice2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Services_Store_IStorePrice2[] = L"Windows.Services.Store.IStorePrice2";
+typedef struct __x_ABI_CWindows_CServices_CStore_CIStorePrice2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CServices_CStore_CIStorePrice2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CServices_CStore_CIStorePrice2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CServices_CStore_CIStorePrice2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CServices_CStore_CIStorePrice2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CServices_CStore_CIStorePrice2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CServices_CStore_CIStorePrice2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_UnformattedBasePrice)(__x_ABI_CWindows_CServices_CStore_CIStorePrice2* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* get_UnformattedPrice)(__x_ABI_CWindows_CServices_CStore_CIStorePrice2* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* get_UnformattedRecurrencePrice)(__x_ABI_CWindows_CServices_CStore_CIStorePrice2* This,
+        HSTRING* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CServices_CStore_CIStorePrice2Vtbl;
+
+interface __x_ABI_CWindows_CServices_CStore_CIStorePrice2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CServices_CStore_CIStorePrice2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CServices_CStore_CIStorePrice2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CServices_CStore_CIStorePrice2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CServices_CStore_CIStorePrice2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CServices_CStore_CIStorePrice2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CServices_CStore_CIStorePrice2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CServices_CStore_CIStorePrice2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CServices_CStore_CIStorePrice2_get_UnformattedBasePrice(This, value) \
+    ((This)->lpVtbl->get_UnformattedBasePrice(This, value))
+
+#define __x_ABI_CWindows_CServices_CStore_CIStorePrice2_get_UnformattedPrice(This, value) \
+    ((This)->lpVtbl->get_UnformattedPrice(This, value))
+
+#define __x_ABI_CWindows_CServices_CStore_CIStorePrice2_get_UnformattedRecurrencePrice(This, value) \
+    ((This)->lpVtbl->get_UnformattedRecurrencePrice(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CServices_CStore_CIStorePrice2;
+#endif /* !defined(____x_ABI_CWindows_CServices_CStore_CIStorePrice2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_SERVICES_STORE_STORECONTRACT_VERSION >= 0x40000
 
 /*
  *
@@ -15091,6 +15383,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.Services.Store.IStoreContext2
  *    Windows.Services.Store.IStoreContext3
  *    Windows.Services.Store.IStoreContext4
+ *    Windows.Services.Store.IStoreContext5
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -15243,6 +15536,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Services.Store.IStorePrice ** Default Interface **
+ *    Windows.Services.Store.IStorePrice2
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

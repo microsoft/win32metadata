@@ -882,7 +882,7 @@
 #define PcPrcbLock 0x9a8
 #define PcGroupSetMember 0x10e0
 #define PcFeatureBits 0x1214
-#define PcVirtualApicAssist 0x2128
+#define PcVirtualApicAssist 0x21a8
 #define PcTrappedSecurityDomain 0x1578
 #define PcEmulatedFaultSyndrome 0x1230
 #define PcEmulatedAccess 0x122c
@@ -920,7 +920,7 @@
 #define PcSkipTick 0x1898
 #define PcStartCycles 0x18c8
 #define PcSpBase 0x1480
-#define ProcessorControlRegisterLength 0x29dc0
+#define ProcessorControlRegisterLength 0x29e40
 
 //
 // Defines for user shared data
@@ -966,18 +966,18 @@
 #define PbPriorityState 0x30
 #define PbLockQueue 0x780
 #define PbPPLookasideList 0x900
-#define PbPPNPagedLookasideList 0x6780
-#define PbPPPagedLookasideList 0x7380
+#define PbPPNPagedLookasideList 0x6800
+#define PbPPPagedLookasideList 0x7400
 #define PbPacketBarrier 0xa00
 #define PbDeferredReadyListHead 0xa08
 #define PbLookasideIrpFloat 0xa58
-#define PbRequestMailbox 0x9400
+#define PbRequestMailbox 0x9480
 #define PbMailbox 0xa80
 #define PbDpcGate 0xb80
 #define PbWaitListHead 0xc00
 #define PbCcFastMdlReadNoWait 0x1180
 #define PbPowerState 0x1200
-#define PbSpinLockAcquireCount 0x1800
+#define PbSpinLockAcquireCount 0x1880
 #define PbSystemCalls 0xa38
 #define PbReadOperationCount 0xa5c
 #define PbWriteOperationCount 0xa60
@@ -1020,11 +1020,11 @@
 #define PbCopyReadNoWait 0xa4c
 #define PbCopyReadWait 0xa50
 #define PbCopyReadNoWaitMiss 0xa54
-#define PbAlignmentFixupCount 0x1470
+#define PbAlignmentFixupCount 0x1478
 #define PbExceptionDispatchCount 0xf34
 #define PbProcessorVendorString 0x890
 #define PbFeatureBits 0x894
-#define PbPanicStackBase 0x18d8
+#define PbPanicStackBase 0x1958
 
 //
 // KTHREAD state
@@ -1879,6 +1879,19 @@
 #define PsbSelfMap 0x0
 #define PsbTiledTtb0 0x8
 #define ProcessorStartBlockLength 0x10
+
+//
+// Enclave call dispatch frame
+//
+
+#define EcFramePointer 0x0
+#define EcReturnAddress 0x8
+#define EcOriginalFramePointer 0x10
+#define EcOriginalReturn 0x18
+#define EcEnclaveNumber 0x20
+#define EcParameterAddress 0x28
+#define EcParameterValue 0x30
+#define EnclaveDispatchFrameLength 0x40
 
 //
 // EPROCESS

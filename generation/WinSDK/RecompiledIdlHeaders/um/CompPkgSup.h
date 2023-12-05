@@ -44,6 +44,9 @@ STDAPI GetMediaExtensionCommunicationFactory(_Outptr_ LPVOID* factory);
 STDAPI_(BOOL) IsMediaBehaviorEnabled(_In_ GUID mediaBehavior);
 STDAPI  GetMediaComponentPackageInfo( _In_ bool trustedOnly, _In_ HSTRING category,
     _COM_Outptr_ ABI::Windows::Foundation::Collections::IVector<ABI::Windows::Foundation::Collections::IPropertySet*> **codecPropertiesVector);
+#if (NTDDI_VERSION >= NTDDI_WIN11_GA)
+STDAPI GetSystemNativeProcessorSignature(_Out_ DWORD* processorSignature);
+#endif // NTDDI_VERSION >= NTDDI_WIN11_GA
 
 //
 // MF behavior GUIDs

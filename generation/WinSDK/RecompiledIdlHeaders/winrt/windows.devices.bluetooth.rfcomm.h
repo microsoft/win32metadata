@@ -1463,8 +1463,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CRfcomm_CIRfcommServ
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Bluetooth.Rfcomm.IRfcommDeviceServiceStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.Bluetooth.Rfcomm.IRfcommDeviceServiceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.Bluetooth.Rfcomm.IRfcommDeviceServiceStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.Rfcomm.IRfcommDeviceService ** Default Interface **
@@ -3708,8 +3708,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CBluetooth_CRfcomm_CIRfcommServ
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Bluetooth.Rfcomm.IRfcommDeviceServiceStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.Bluetooth.Rfcomm.IRfcommDeviceServiceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.Bluetooth.Rfcomm.IRfcommDeviceServiceStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.Rfcomm.IRfcommDeviceService ** Default Interface **

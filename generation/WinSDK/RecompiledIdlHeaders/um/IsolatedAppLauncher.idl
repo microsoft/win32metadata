@@ -60,3 +60,53 @@ cpp_quote("STDAPI IsProcessInIsolatedContainer(_Out_ BOOL *isProcessInIsolatedCo
 
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
 #pragma endregion
+
+cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_NI)")
+[
+    object,
+    uuid(1aa24232-9a91-4201-88cb-122f9d6522e0)
+]
+interface IIsolatedProcessLauncher : IUnknown
+{
+    HRESULT LaunchProcess(
+        [in, string] LPCWSTR process, 
+        [in, string] LPCWSTR arguments,
+        [in, string] LPCWSTR workingDirectory);
+
+    /*
+      ShareDirectory
+        This API will create/resume the container if it isn't already running.
+        Re-sharing a folder is a no-op. (Unspecified behavior if the readOnly
+          flag changes though).
+     */
+    HRESULT ShareDirectory(
+        [in, string] LPCWSTR hostPath,
+        [in, string] LPCWSTR containerPath,
+        [in] BOOL readOnly);
+
+    /*
+      GetContainerGuid
+        This will fail if the container hasn't been created yet.
+     */
+    HRESULT GetContainerGuid(
+        [out] GUID* guid);
+
+    HRESULT AllowSetForegroundAccess(
+        [in] UINT pid);
+
+    HRESULT IsContainerRunning([out] BOOL *running);
+}
+
+[
+    object,
+    uuid(780e4416-5e72-4123-808e-66dc6479feef)
+]
+interface IIsolatedProcessLauncher2 : IIsolatedProcessLauncher
+{
+    HRESULT LaunchProcess2(
+        [in, string] LPCWSTR process, 
+        [in, string] LPCWSTR arguments,
+        [in, string] LPCWSTR workingDirectory,
+        [in] REFGUID correlationGuid);
+}
+cpp_quote("#endif // NTDDI_WIN10_NI")

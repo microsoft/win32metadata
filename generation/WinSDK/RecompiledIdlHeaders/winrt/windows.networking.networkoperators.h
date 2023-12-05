@@ -13790,10 +13790,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics3 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics4 interface starting with version 10.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Networking.NetworkOperators.INetworkOperatorTetheringManager ** Default Interface **
@@ -34537,10 +34537,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics3 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics4 interface starting with version 10.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Networking.NetworkOperators.INetworkOperatorTetheringManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Networking.NetworkOperators.INetworkOperatorTetheringManager ** Default Interface **

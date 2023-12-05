@@ -2038,6 +2038,7 @@ typedef enum _POLICY_INFORMATION_CLASS {
     PolicyDnsDomainInformationInt,
     PolicyLocalAccountDomainInformation,
     PolicyMachineAccountInformation,
+    PolicyMachineAccountInformation2,
     PolicyLastEntry
 
 } POLICY_INFORMATION_CLASS, *PPOLICY_INFORMATION_CLASS;
@@ -2425,6 +2426,19 @@ typedef struct _POLICY_MACHINE_ACCT_INFO {
 } POLICY_MACHINE_ACCT_INFO, *PPOLICY_MACHINE_ACCT_INFO;
 
 //
+// The following structure corresponds to the PolicyMachineAccountInformation2
+// information class.  Only valid when the machine is joined to an AD domain.
+// When not joined, will return 0+NULL+GUID_NULL.
+//
+typedef struct _POLICY_MACHINE_ACCT_INFO2 {
+
+    ULONG Rid;
+    PSID Sid;
+    GUID ObjectGuid;
+
+} POLICY_MACHINE_ACCT_INFO2, *PPOLICY_MACHINE_ACCT_INFO2;
+
+//
 // The following data type defines the classes of Policy Information / Policy Domain Information
 // that may be used to request notification
 //
@@ -2649,7 +2663,9 @@ typedef PLSA_TRUST_INFORMATION PTRUSTED_DOMAIN_INFORMATION_BASIC;
 #define TRUST_TYPE_DCE                  0x00000004  // Trust with a DCE realm
 #endif
 
-// Levels 0x5 - 0x000FFFFF reserved for future use
+#define TRUST_TYPE_AAD                  0x00000005 // Trust with Azure AD
+
+// Levels 0x6 - 0x000FFFFF reserved for future use
 // Provider specific trust levels are from 0x00100000 to 0xFFF00000
 
 #define TRUST_ATTRIBUTE_NON_TRANSITIVE                0x00000001  // Disallow transitivity
@@ -3518,6 +3534,15 @@ LsaCreateSecret(
     _In_ PLSA_UNICODE_STRING SecretName,
     _In_ ACCESS_MASK DesiredAccess,
     _Out_ PLSA_HANDLE SecretHandle
+    );
+
+//
+// Note: This is not implemented for arm64-EC lsasrv.dll
+//
+NTSTATUS
+NTAPI
+LsaIsCredentialGuardRunning(
+    _Out_ PBOOLEAN IsCredentialGuardRunning
     );
 
 ///////////////////////////////////////////////////////////////////////////////

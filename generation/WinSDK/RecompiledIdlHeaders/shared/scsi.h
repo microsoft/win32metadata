@@ -5363,7 +5363,7 @@ typedef struct _MODE_COMMAND_DURATION_LIMIT_PAGE_T2A_SUBPAGE {
     UCHAR PageLength[2];        // Page length is 0x00E4 for T2A subpage
     UCHAR Reserved[3];
     UCHAR Reserved1                         : 4;
-    UCHAR PerfvsComandDurationGuidelines    : 4;
+    UCHAR PerfvsCommandDurationGuidelines   : 4;
     T2_COMMAND_DURATION_LIMIT_DESCRIPTOR T2CommandDurationLimitDescriptors[DURATION_LIMIT_T2_DESCRIPTOR_COUNT];
 } MODE_COMMAND_DURATION_LIMIT_PAGE_T2A_SUBPAGE, *PMODE_COMMAND_DURATION_LIMIT_PAGE_T2A_SUBPAGE;
 

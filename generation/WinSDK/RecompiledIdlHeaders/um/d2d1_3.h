@@ -492,6 +492,9 @@ EXTERN_C CONST IID IID_ID2D1CommandSink5;
 EXTERN_C CONST IID IID_ID2D1DeviceContext6;
 EXTERN_C CONST IID IID_ID2D1Device6;
 EXTERN_C CONST IID IID_ID2D1Factory7;
+EXTERN_C CONST IID IID_ID2D1DeviceContext7;
+EXTERN_C CONST IID IID_ID2D1Device7;
+EXTERN_C CONST IID IID_ID2D1Factory8;
 
 
 #ifndef D2D_USE_C_DEFINITIONS
@@ -1785,6 +1788,108 @@ interface DX_DECLARE_INTERFACE("bdc2bdd3-b96c-4de6-bdf7-99d4745454de") ID2D1Fact
 
 
 #endif
+#if NTDDI_VERSION >= NTDDI_WIN10_NI
+enum DWRITE_PAINT_FEATURE_LEVEL : INT32;
+
+interface DX_DECLARE_INTERFACE("ec891cf7-9b69-4851-9def-4e0915771e62") ID2D1DeviceContext7  : public ID2D1DeviceContext6
+{
+    
+    /// <summary>
+    /// Get the maximum paint feature level supported by DrawPaintGlyphRun.
+    /// </summary>
+    STDMETHOD_(DWRITE_PAINT_FEATURE_LEVEL, GetPaintFeatureLevel)(
+        ) PURE;
+    
+    /// <summary>
+    /// Draws a color glyph run that has the format of
+    /// DWRITE_GLYPH_IMAGE_FORMATS_COLR_PAINT_TREE.
+    /// </summary>
+    /// <param name="colorPaletteIndex">The index used to select a color palette within
+    /// a color font. Note that this not the same as the paletteIndex in the
+    /// DWRITE_COLOR_GLYPH_RUN struct, which is not relevant for paint glyphs.</param>
+    STDMETHOD_(void, DrawPaintGlyphRun)(
+        D2D1_POINT_2F baselineOrigin,
+        _In_ CONST DWRITE_GLYPH_RUN *glyphRun,
+        _In_opt_ ID2D1Brush *defaultFillBrush = NULL,
+        UINT32 colorPaletteIndex = 0,
+        DWRITE_MEASURING_MODE measuringMode = DWRITE_MEASURING_MODE_NATURAL 
+        ) PURE;
+    
+    /// <summary>
+    /// Draws a glyph run, using color representations of glyphs if available.
+    /// </summary>
+    STDMETHOD_(void, DrawGlyphRunWithColorSupport)(
+        D2D1_POINT_2F baselineOrigin,
+        _In_ CONST DWRITE_GLYPH_RUN *glyphRun,
+        _In_opt_ CONST DWRITE_GLYPH_RUN_DESCRIPTION *glyphRunDescription,
+        _In_opt_ ID2D1Brush *foregroundBrush,
+        _In_opt_ ID2D1SvgGlyphStyle *svgGlyphStyle,
+        UINT32 colorPaletteIndex = 0,
+        DWRITE_MEASURING_MODE measuringMode = DWRITE_MEASURING_MODE_NATURAL,
+        D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION bitmapSnapOption = D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION_DEFAULT 
+        ) PURE;
+}; // interface ID2D1DeviceContext7
+
+
+interface DX_DECLARE_INTERFACE("f07c8968-dd4e-4ba6-9cbd-eb6d3752dcbb") ID2D1Device7  : public ID2D1Device6
+{
+    
+    /// <summary>
+    /// Creates a new device context with no initially assigned target.
+    /// </summary>
+    STDMETHOD(CreateDeviceContext)(
+        D2D1_DEVICE_CONTEXT_OPTIONS options,
+        _COM_Outptr_ ID2D1DeviceContext7 **deviceContext 
+        ) PURE;
+    
+    using ID2D1Device6::CreateDeviceContext;
+    
+    using ID2D1Device5::CreateDeviceContext;
+    
+    using ID2D1Device4::CreateDeviceContext;
+    
+    using ID2D1Device3::CreateDeviceContext;
+    
+    using ID2D1Device2::CreateDeviceContext;
+    
+    using ID2D1Device1::CreateDeviceContext;
+    
+    using ID2D1Device::CreateDeviceContext;
+}; // interface ID2D1Device7
+
+
+/// <summary>
+/// Creates Direct2D resources. This interface also enables the creation of
+/// ID2D1Device7 objects.
+/// </summary>
+interface DX_DECLARE_INTERFACE("677c9311-f36d-4b1f-ae86-86d1223ffd3a") ID2D1Factory8  : public ID2D1Factory7
+{
+    
+    /// <summary>
+    /// This creates a new Direct2D device from the given IDXGIDevice.
+    /// </summary>
+    STDMETHOD(CreateDevice)(
+        _In_ IDXGIDevice *dxgiDevice,
+        _COM_Outptr_ ID2D1Device7 **d2dDevice6 
+        ) PURE;
+    
+    using ID2D1Factory7::CreateDevice;
+    
+    using ID2D1Factory6::CreateDevice;
+    
+    using ID2D1Factory5::CreateDevice;
+    
+    using ID2D1Factory4::CreateDevice;
+    
+    using ID2D1Factory3::CreateDevice;
+    
+    using ID2D1Factory2::CreateDevice;
+    
+    using ID2D1Factory1::CreateDevice;
+}; // interface ID2D1Factory8
+
+
+#endif // #if NTDDI_VERSION >= NTDDI_WIN10_NI
 
 #endif
 

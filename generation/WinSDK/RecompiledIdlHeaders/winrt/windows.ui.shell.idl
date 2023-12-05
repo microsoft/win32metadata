@@ -11,6 +11,8 @@ import "EventToken.idl";
 import "windowscontracts.idl";
 import "Windows.Foundation.idl";
 import "Windows.ApplicationModel.Core.idl";
+import "Windows.Graphics.Imaging.idl";
+import "Windows.Storage.Streams.idl";
 import "Windows.UI.idl";
 import "Windows.UI.StartScreen.idl";
 
@@ -31,9 +33,31 @@ namespace Windows
     {
         typedef struct DateTime DateTime;
 
+        runtimeclass Deferral;
+
         apicontract UniversalApiContract;
 
         runtimeclass Uri;
+    }
+}
+namespace Windows
+{
+    namespace Graphics
+    {
+        namespace Imaging
+        {
+            typedef struct BitmapSize BitmapSize;
+        }
+    }
+}
+namespace Windows
+{
+    namespace Storage
+    {
+        namespace Streams
+        {
+            interface IRandomAccessStreamReference;
+        }
     }
 }
 namespace Windows
@@ -60,6 +84,8 @@ namespace Windows
         namespace Shell
         {
             apicontract SecurityAppManagerContract;
+
+            apicontract WindowTabManagerContract;
 
             typedef enum SecurityAppKind SecurityAppKind;
 
@@ -91,7 +117,31 @@ namespace Windows
 
             interface ITaskbarManager2;
 
+            interface ITaskbarManagerDesktopAppSupportStatics;
+
             interface ITaskbarManagerStatics;
+
+            interface IWindowTab;
+
+            interface IWindowTabCloseRequestedEventArgs;
+
+            interface IWindowTabCollection;
+
+            interface IWindowTabGroup;
+
+            interface IWindowTabIcon;
+
+            interface IWindowTabIconStatics;
+
+            interface IWindowTabManager;
+
+            interface IWindowTabManagerStatics;
+
+            interface IWindowTabSwitchRequestedEventArgs;
+
+            interface IWindowTabTearOutRequestedEventArgs;
+
+            interface IWindowTabThumbnailRequestedEventArgs;
 
             runtimeclass AdaptiveCardBuilder;
 
@@ -106,6 +156,24 @@ namespace Windows
             runtimeclass ShareWindowCommandSource;
 
             runtimeclass TaskbarManager;
+
+            runtimeclass WindowTab;
+
+            runtimeclass WindowTabCloseRequestedEventArgs;
+
+            runtimeclass WindowTabCollection;
+
+            runtimeclass WindowTabGroup;
+
+            runtimeclass WindowTabIcon;
+
+            runtimeclass WindowTabManager;
+
+            runtimeclass WindowTabSwitchRequestedEventArgs;
+
+            runtimeclass WindowTabTearOutRequestedEventArgs;
+
+            runtimeclass WindowTabThumbnailRequestedEventArgs;
         }
     }
 }
@@ -119,9 +187,25 @@ namespace Windows
         {
             declare
             {
+                interface Windows.Foundation.Collections.IIterable<Windows.UI.Shell.WindowTab*>;
+
+                interface Windows.Foundation.Collections.IIterator<Windows.UI.Shell.WindowTab*>;
+
+                interface Windows.Foundation.Collections.IVectorView<Windows.UI.Shell.WindowTab*>;
+
+                interface Windows.Foundation.Collections.IVector<Windows.UI.Shell.WindowTab*>;
+
                 interface Windows.Foundation.TypedEventHandler<Windows.UI.Shell.FocusSessionManager*, IInspectable*>;
 
                 interface Windows.Foundation.TypedEventHandler<Windows.UI.Shell.ShareWindowCommandSource*, Windows.UI.Shell.ShareWindowCommandEventArgs*>;
+
+                interface Windows.Foundation.TypedEventHandler<Windows.UI.Shell.WindowTabManager*, Windows.UI.Shell.WindowTabCloseRequestedEventArgs*>;
+
+                interface Windows.Foundation.TypedEventHandler<Windows.UI.Shell.WindowTabManager*, Windows.UI.Shell.WindowTabSwitchRequestedEventArgs*>;
+
+                interface Windows.Foundation.TypedEventHandler<Windows.UI.Shell.WindowTabManager*, Windows.UI.Shell.WindowTabTearOutRequestedEventArgs*>;
+
+                interface Windows.Foundation.TypedEventHandler<Windows.UI.Shell.WindowTabManager*, Windows.UI.Shell.WindowTabThumbnailRequestedEventArgs*>;
             }
         }
     }
@@ -136,6 +220,11 @@ namespace Windows
         {
             [contractversion(1.0)]
             apicontract SecurityAppManagerContract
+            {
+            }
+
+            [contractversion(1.0)]
+            apicontract WindowTabManagerContract
             {
             }
 
@@ -282,12 +371,140 @@ namespace Windows
                 HRESULT TryUnpinSecondaryTileAsync([in] HSTRING tileId, [out] [retval] Windows.Foundation.IAsyncOperation<boolean>** operation);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.UI.Shell.TaskbarManager)]
+            [uuid(CDFEFD63-E879-4134-B9A7-8283F05F9480)]
+            interface ITaskbarManagerDesktopAppSupportStatics : IInspectable
+            {
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 5.0)]
             [exclusiveto(Windows.UI.Shell.TaskbarManager)]
             [uuid(DB32AB74-DE52-4FE6-B7B6-95FF9F8395DF)]
             interface ITaskbarManagerStatics : IInspectable
             {
                 HRESULT GetDefault([out] [retval] Windows.UI.Shell.TaskbarManager** result);
+            }
+
+            [contract(Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [exclusiveto(Windows.UI.Shell.WindowTab)]
+            [uuid(551E776A-7928-4D60-BDD9-672B5A5758EB)]
+            interface IWindowTab : IInspectable
+            {
+                [propget] HRESULT Tag([out] [retval] IInspectable** value);
+                [propput] HRESULT Tag([in] IInspectable* value);
+                [propget] HRESULT Title([out] [retval] HSTRING* value);
+                [propput] HRESULT Title([in] HSTRING value);
+                [propget] HRESULT Icon([out] [retval] Windows.UI.Shell.WindowTabIcon** value);
+                [propput] HRESULT Icon([in] Windows.UI.Shell.WindowTabIcon* value);
+                [propget] HRESULT TreatAsSecondaryTileId([out] [retval] HSTRING* value);
+                [propput] HRESULT TreatAsSecondaryTileId([in] HSTRING value);
+                [propget] HRESULT Group([out] [retval] Windows.UI.Shell.WindowTabGroup** value);
+                [propput] HRESULT Group([in] Windows.UI.Shell.WindowTabGroup* value);
+                HRESULT ReportThumbnailAvailable();
+            }
+
+            [contract(Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [exclusiveto(Windows.UI.Shell.WindowTabCloseRequestedEventArgs)]
+            [uuid(477282E9-EEC4-5882-9889-2DD64D0F9FB6)]
+            interface IWindowTabCloseRequestedEventArgs : IInspectable
+            {
+                [propget] HRESULT Tab([out] [retval] Windows.UI.Shell.WindowTab** value);
+            }
+
+            [contract(Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [exclusiveto(Windows.UI.Shell.WindowTabCollection)]
+            [uuid(ACCD0D6C-ED07-519A-8C33-17E02E7E9B0F)]
+            interface IWindowTabCollection : IInspectable
+            {
+                HRESULT MoveTab([in] Windows.UI.Shell.WindowTab* tab, [in] UINT32 index);
+            }
+
+            [contract(Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [exclusiveto(Windows.UI.Shell.WindowTabGroup)]
+            [uuid(A9C2C4FE-6CFE-449C-8B57-5756771ABE56)]
+            interface IWindowTabGroup : IInspectable
+            {
+                [propget] HRESULT Title([out] [retval] HSTRING* value);
+                [propput] HRESULT Title([in] HSTRING value);
+                [propget] HRESULT Icon([out] [retval] Windows.UI.Shell.WindowTabIcon** value);
+                [propput] HRESULT Icon([in] Windows.UI.Shell.WindowTabIcon* value);
+            }
+
+            [contract(Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [exclusiveto(Windows.UI.Shell.WindowTabIcon)]
+            [uuid(F92F398F-3669-4D0C-A183-14DDAE6F6538)]
+            interface IWindowTabIcon : IInspectable
+            {
+            }
+
+            [contract(Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [exclusiveto(Windows.UI.Shell.WindowTabIcon)]
+            [uuid(2E18D95E-2CBB-4084-AF0C-36EE1C2D54B1)]
+            interface IWindowTabIconStatics : IInspectable
+            {
+                [overload("CreateFromFontGlyph")] HRESULT CreateFromFontGlyph([in] HSTRING glyph, [in] HSTRING fontFamily, [out] [retval] Windows.UI.Shell.WindowTabIcon** result);
+                [overload("CreateFromFontGlyph")] HRESULT CreateFromFontGlyphWithUri([in] HSTRING glyph, [in] HSTRING fontFamily, [in] Windows.Foundation.Uri* fontUri, [out] [retval] Windows.UI.Shell.WindowTabIcon** result);
+                HRESULT CreateFromImage([in] Windows.Storage.Streams.IRandomAccessStreamReference* image, [out] [retval] Windows.UI.Shell.WindowTabIcon** result);
+            }
+
+            [contract(Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [exclusiveto(Windows.UI.Shell.WindowTabManager)]
+            [uuid(97B3C697-F43A-43E7-B3A2-E889A9835599)]
+            interface IWindowTabManager : IInspectable
+            {
+                [propget] HRESULT Tabs([out] [retval] Windows.UI.Shell.WindowTabCollection** value);
+                HRESULT SetActiveTab([in] Windows.UI.Shell.WindowTab* tab);
+                [eventadd] HRESULT TabSwitchRequested([in] Windows.Foundation.TypedEventHandler<Windows.UI.Shell.WindowTabManager*, Windows.UI.Shell.WindowTabSwitchRequestedEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT TabSwitchRequested([in] EventRegistrationToken token);
+                [eventadd] HRESULT TabCloseRequested([in] Windows.Foundation.TypedEventHandler<Windows.UI.Shell.WindowTabManager*, Windows.UI.Shell.WindowTabCloseRequestedEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT TabCloseRequested([in] EventRegistrationToken token);
+                [eventadd] HRESULT TabTearOutRequested([in] Windows.Foundation.TypedEventHandler<Windows.UI.Shell.WindowTabManager*, Windows.UI.Shell.WindowTabTearOutRequestedEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT TabTearOutRequested([in] EventRegistrationToken token);
+                [eventadd] HRESULT TabThumbnailRequested([in] Windows.Foundation.TypedEventHandler<Windows.UI.Shell.WindowTabManager*, Windows.UI.Shell.WindowTabThumbnailRequestedEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT TabThumbnailRequested([in] EventRegistrationToken token);
+            }
+
+            [contract(Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [exclusiveto(Windows.UI.Shell.WindowTabManager)]
+            [uuid(76755668-45F0-4E0B-8172-4E6D9D0F87BD)]
+            interface IWindowTabManagerStatics : IInspectable
+            {
+                HRESULT GetForWindow([in] Windows.UI.WindowId id, [out] [retval] Windows.UI.Shell.WindowTabManager** result);
+                HRESULT IsSupported([out] [retval] boolean* result);
+                HRESULT IsTabTearOutSupported([out] [retval] boolean* result);
+            }
+
+            [contract(Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [exclusiveto(Windows.UI.Shell.WindowTabSwitchRequestedEventArgs)]
+            [uuid(7CBC421A-58A4-568B-A351-F8A947A5AAD8)]
+            interface IWindowTabSwitchRequestedEventArgs : IInspectable
+            {
+                [propget] HRESULT Tab([out] [retval] Windows.UI.Shell.WindowTab** value);
+            }
+
+            [contract(Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [exclusiveto(Windows.UI.Shell.WindowTabTearOutRequestedEventArgs)]
+            [uuid(17D66659-5005-5ECE-99AF-566306E73642)]
+            interface IWindowTabTearOutRequestedEventArgs : IInspectable
+            {
+                [propget] HRESULT Tab([out] [retval] Windows.UI.Shell.WindowTab** value);
+                [propget] HRESULT WindowId([out] [retval] UINT64* value);
+                [propput] HRESULT WindowId([in] UINT64 value);
+                HRESULT GetDeferral([out] [retval] Windows.Foundation.Deferral** result);
+            }
+
+            [contract(Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [exclusiveto(Windows.UI.Shell.WindowTabThumbnailRequestedEventArgs)]
+            [uuid(2D558E54-9C4E-5ABC-AB72-3350FB4937A0)]
+            interface IWindowTabThumbnailRequestedEventArgs : IInspectable
+            {
+                [propget] HRESULT Tab([out] [retval] Windows.UI.Shell.WindowTab** value);
+                [propget] HRESULT RequestedSize([out] [retval] Windows.Graphics.Imaging.BitmapSize* value);
+                [propget] HRESULT Image([out] [retval] Windows.Storage.Streams.IRandomAccessStreamReference** value);
+                [propput] HRESULT Image([in] Windows.Storage.Streams.IRandomAccessStreamReference* value);
+                HRESULT GetDeferral([out] [retval] Windows.Foundation.Deferral** result);
+                [propget] HRESULT IsCompositedOnWindow([out] [retval] boolean* value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 5.0)]
@@ -341,12 +558,86 @@ namespace Windows
 
             [contract(Windows.Foundation.UniversalApiContract, 5.0)]
             [marshaling_behavior(agile)]
+            [static(Windows.UI.Shell.ITaskbarManagerDesktopAppSupportStatics, Windows.Foundation.UniversalApiContract, 15.0)]
             [static(Windows.UI.Shell.ITaskbarManagerStatics, Windows.Foundation.UniversalApiContract, 5.0)]
             [threading(both)]
             runtimeclass TaskbarManager
             {
                 [default] interface Windows.UI.Shell.ITaskbarManager;
                 [contract(Windows.Foundation.UniversalApiContract, 7.0)] interface Windows.UI.Shell.ITaskbarManager2;
+            }
+
+            [activatable(Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [contract(Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass WindowTab
+            {
+                [default] interface Windows.UI.Shell.IWindowTab;
+            }
+
+            [contract(Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass WindowTabCloseRequestedEventArgs
+            {
+                [default] interface Windows.UI.Shell.IWindowTabCloseRequestedEventArgs;
+            }
+
+            [contract(Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass WindowTabCollection
+            {
+                [default] interface Windows.UI.Shell.IWindowTabCollection;
+                interface Windows.Foundation.Collections.IVector<Windows.UI.Shell.WindowTab*>;
+                interface Windows.Foundation.Collections.IIterable<Windows.UI.Shell.WindowTab*>;
+            }
+
+            [activatable(Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [contract(Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass WindowTabGroup
+            {
+                [default] interface Windows.UI.Shell.IWindowTabGroup;
+            }
+
+            [contract(Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [marshaling_behavior(agile)]
+            [static(Windows.UI.Shell.IWindowTabIconStatics, Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [threading(both)]
+            runtimeclass WindowTabIcon
+            {
+                [default] interface Windows.UI.Shell.IWindowTabIcon;
+            }
+
+            [contract(Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [marshaling_behavior(agile)]
+            [static(Windows.UI.Shell.IWindowTabManagerStatics, Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [threading(both)]
+            runtimeclass WindowTabManager
+            {
+                [default] interface Windows.UI.Shell.IWindowTabManager;
+            }
+
+            [contract(Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass WindowTabSwitchRequestedEventArgs
+            {
+                [default] interface Windows.UI.Shell.IWindowTabSwitchRequestedEventArgs;
+            }
+
+            [contract(Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass WindowTabTearOutRequestedEventArgs
+            {
+                [default] interface Windows.UI.Shell.IWindowTabTearOutRequestedEventArgs;
+            }
+
+            [contract(Windows.UI.Shell.WindowTabManagerContract, 1.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass WindowTabThumbnailRequestedEventArgs
+            {
+                [default] interface Windows.UI.Shell.IWindowTabThumbnailRequestedEventArgs;
             }
         }
     }

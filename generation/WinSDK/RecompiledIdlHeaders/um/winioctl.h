@@ -10952,18 +10952,28 @@ typedef enum _CHANGER_DEVICE_PROBLEM_TYPE {
 #define FSCTL_REFS_QUERY_VOLUME_COMPRESSION_INFO  CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 278, METHOD_BUFFERED, FILE_ANY_ACCESS)
 #endif
 #if (NTDDI_VERSION >= NTDDI_WIN10_NI)
-#define FSCTL_DUPLICATE_CLUSTER                 CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 279, METHOD_BUFFERED, FILE_ANY_ACCESS)
-#define FSCTL_CREATE_LCN_WEAK_REFERENCE         CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 280, METHOD_BUFFERED, FILE_ANY_ACCESS)
-#define FSCTL_DELETE_LCN_WEAK_REFERENCE         CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 281, METHOD_BUFFERED, FILE_ANY_ACCESS)
-#define FSCTL_QUERY_LCN_WEAK_REFERENCE          CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 282, METHOD_BUFFERED, FILE_ANY_ACCESS)
-#define FSCTL_DELETE_LCN_WEAK_REFERENCES        CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 283, METHOD_BUFFERED, FILE_ANY_ACCESS)
-#endif
-#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
-#define FSCTL_REFS_SET_VOLUME_DEDUP_INFO        CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 284, METHOD_BUFFERED, FILE_ANY_ACCESS)
-#define FSCTL_REFS_QUERY_VOLUME_DEDUP_INFO      CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 285, METHOD_BUFFERED, FILE_ANY_ACCESS)
+#define FSCTL_DUPLICATE_CLUSTER                     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 279, METHOD_BUFFERED, FILE_ANY_ACCESS)
+#define FSCTL_CREATE_LCN_WEAK_REFERENCE             CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 280, METHOD_BUFFERED, FILE_ANY_ACCESS)
+#define FSCTL_CLEAR_LCN_WEAK_REFERENCE              CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 281, METHOD_BUFFERED, FILE_ANY_ACCESS)
+#define FSCTL_QUERY_LCN_WEAK_REFERENCE              CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 282, METHOD_BUFFERED, FILE_ANY_ACCESS)
+#define FSCTL_CLEAR_ALL_LCN_WEAK_REFERENCES         CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 283, METHOD_BUFFERED, FILE_ANY_ACCESS)
+#define FSCTL_REFS_SET_VOLUME_DEDUP_INFO            CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 284, METHOD_BUFFERED, FILE_ANY_ACCESS)
+#define FSCTL_REFS_QUERY_VOLUME_DEDUP_INFO          CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 285, METHOD_BUFFERED, FILE_ANY_ACCESS)
 #endif
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
-#define FSCTL_LMR_QUERY_INFO                    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 286, METHOD_BUFFERED, FILE_ANY_ACCESS)
+#define FSCTL_LMR_QUERY_INFO                        CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 286, METHOD_BUFFERED, FILE_ANY_ACCESS)
+#endif
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
+#define FSCTL_REFS_CHECKPOINT_VOLUME                CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 287, METHOD_BUFFERED, FILE_ANY_ACCESS)
+#define FSCTL_REFS_QUERY_VOLUME_TOTAL_SHARED_LCNS   CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 288, METHOD_BUFFERED, FILE_ANY_ACCESS)
+#endif
+#if (NTDDI_VERSION >= NTDDI_WIN10_CU)
+#define FSCTL_UPGRADE_VOLUME                    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 289, METHOD_BUFFERED, FILE_ANY_ACCESS)
+#endif
+/* ABRACADABRA_WIN10_ZN?  ABRACADABRA_WIN10_ZN? */
+#if (NTDDI_VERSION >= NTDDI_WIN10_CU)
+#define FSCTL_REFS_SET_VOLUME_IO_METRICS_INFO       CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 290, METHOD_BUFFERED, FILE_ANY_ACCESS)
+#define FSCTL_REFS_QUERY_VOLUME_IO_METRICS_INFO     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 291, METHOD_BUFFERED, FILE_ANY_ACCESS)
 #endif
 //
 // AVIO IOCTLS.
@@ -11089,7 +11099,10 @@ typedef struct {
 
     DWORD DestagesFastTierToSlowTierRate;       // in clusters per second
 
-    LARGE_INTEGER Reserved[9];
+    WORD   MetadataChecksumType;
+
+    BYTE  Reserved0[6];
+    LARGE_INTEGER Reserved[8];
 
 } REFS_VOLUME_DATA_BUFFER, *PREFS_VOLUME_DATA_BUFFER;
 
@@ -13824,6 +13837,36 @@ typedef struct _FILE_FS_PERSISTENT_VOLUME_INFORMATION {
 
 #endif // #if (NTDDI_VERSION >= NTDDI_WIN10_MN)
 
+#if defined(NTDDI_WIN10_NI) && (NTDDI_VERSION >= NTDDI_WIN10_NI)
+
+//
+//  The volume was formatted as a developer volume.  This can be used by the
+//  file system and other system components to enable optimizations that doe
+//  not require an administrator to trust the volume on a given machine.
+//
+//  This is set at format time and can only be queried.
+//
+
+#define PERSISTENT_VOLUME_STATE_DEV_VOLUME                          (0x00002000)
+
+//
+//  An adminstrator on a given machine had trust this volume and is willing
+//  to enable optimizations like not having anti-virus filters attach to the
+//  volume.  This information is persisted in the registry on a given machine.
+//  This can be used by the file system and other system components to enable
+//  optimizations that require an administrator to trust the volume on a given
+//  machine.
+//
+//  NOTE: Today only developer volumes can be trusted, i.e. this flag can be
+//  set only when PERSISTENT_VOLUME_STATE_DEV_VOLUME is set.
+//
+//  This can be set and queried.
+//
+
+#define PERSISTENT_VOLUME_STATE_TRUSTED_VOLUME                      (0x00004000)
+
+#endif // #if (NTDDI_VERSION >= NTDDI_WIN10_NI)
+
 //
 //==================== FSCTL_QUERY_FILE_SYSTEM_RECOGNITION ====================
 //
@@ -13876,8 +13919,14 @@ typedef struct _REQUEST_OPLOCK_INPUT_BUFFER {
 
 } REQUEST_OPLOCK_INPUT_BUFFER, *PREQUEST_OPLOCK_INPUT_BUFFER;
 
-#define REQUEST_OPLOCK_OUTPUT_FLAG_ACK_REQUIRED     (0x00000001)
-#define REQUEST_OPLOCK_OUTPUT_FLAG_MODES_PROVIDED   (0x00000002)
+#define REQUEST_OPLOCK_OUTPUT_FLAG_ACK_REQUIRED                 (0x00000001)
+#define REQUEST_OPLOCK_OUTPUT_FLAG_MODES_PROVIDED               (0x00000002)
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
+// If the oplock request fails with STATUS_OPLOCK_NOT_GRANTED, this flag indicates that the oplock
+// could not be granted due to the presence of a writable user-mapped section.
+#define REQUEST_OPLOCK_OUTPUT_FLAG_WRITABLE_SECTION_PRESENT     (0x00000004)
+#endif
 
 typedef struct _REQUEST_OPLOCK_OUTPUT_BUFFER {
 
@@ -15345,13 +15394,14 @@ typedef struct _STREAM_EXTENT_ENTRY {
 //==================== FSCTL_GET_INTEGRITY_INFORMATION / FSCTL_SET_INTEGRITY_INFORMATION ===========================
 //
 
-#define CHECKSUM_TYPE_UNCHANGED        (-1)
+#define CHECKSUM_TYPE_UNCHANGED         (WORD  )0xFFFF
 
 #define CHECKSUM_TYPE_NONE              (0)
 #define CHECKSUM_TYPE_CRC32             (1)
 #define CHECKSUM_TYPE_CRC64             (2)
 #define CHECKSUM_TYPE_ECC               (3)
-#define CHECKSUM_TYPE_FIRST_UNUSED_TYPE (4)
+#define CHECKSUM_TYPE_SHA256            (4)
+#define CHECKSUM_TYPE_FIRST_UNUSED_TYPE (5)
 
 #define FSCTL_INTEGRITY_FLAG_CHECKSUM_ENFORCEMENT_OFF        (1)
 

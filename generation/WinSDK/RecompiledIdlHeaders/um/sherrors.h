@@ -29,6 +29,8 @@
                                                                                 // during a file operation but the source resolved the collision
                                                                                 // on the users behalf
 #define COPYENGINE_S_PROGRESS_PAUSE              _HRESULT_TYPEDEF_(0x0027000FL)
+#define COPYENGINE_S_PENDING_DELETE              _HRESULT_TYPEDEF_(0x00270010L) // Returned by initiating async delete operation. It's different
+                                                                                // from COPYENGINE_S_PENDING which is used for operation queued due to error.
 
 // Failure/Error codes
 #define COPYENGINE_E_USER_CANCELLED      _HRESULT_TYPEDEF_(0x80270000L)  // User wants to canceled entire job

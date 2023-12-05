@@ -82,6 +82,7 @@ FORCEINLINE bool IS_DO_TRANSIENT_ERROR(HRESULT hr)
 #define DO_E_CLOUD_SERVICES_UNREACHABLE             _HRESULT_TYPEDEF_(0x80D0380AL) // Unable to contact one or more DO cloud services
 #define DO_E_DOWNLOADMODE_SET_FOR_UNREG_CALLER      _HRESULT_TYPEDEF_(0x80D0380BL) // DO job download mode restricted for unregistered caller
 #define DO_E_DOWNLOADMODE_SET_FOR_SIMPLE_RANGES     _HRESULT_TYPEDEF_(0x80D0380CL) // DO job is using the simple ranges download in simple mode
+#define DO_E_UNEXPECTED_HTTP_STATUS_2XX             _HRESULT_TYPEDEF_(0x80D0380DL) // DO job paused due to unexpected HTTP response codes (e.g. 204)
 
 // HTTP
 

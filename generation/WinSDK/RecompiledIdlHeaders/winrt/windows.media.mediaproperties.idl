@@ -87,11 +87,15 @@ namespace Windows
 
             interface IAudioEncodingPropertiesWithFormatUserData;
 
+            interface IAv1ProfileIdsStatics;
+
             interface IContainerEncodingProperties;
 
             interface IContainerEncodingProperties2;
 
             interface IH264ProfileIdsStatics;
+
+            interface IHevcProfileIdsStatics;
 
             interface IImageEncodingProperties;
 
@@ -115,6 +119,8 @@ namespace Windows
 
             interface IMediaEncodingProfileStatics3;
 
+            interface IMediaEncodingProfileStatics4;
+
             interface IMediaEncodingProperties;
 
             interface IMediaEncodingSubtypesStatics;
@@ -128,6 +134,8 @@ namespace Windows
             interface IMediaEncodingSubtypesStatics5;
 
             interface IMediaEncodingSubtypesStatics6;
+
+            interface IMediaEncodingSubtypesStatics7;
 
             interface IMediaRatio;
 
@@ -151,11 +159,19 @@ namespace Windows
 
             interface IVideoEncodingPropertiesStatics2;
 
+            interface IVideoEncodingPropertiesStatics3;
+
+            interface IVp9ProfileIdsStatics;
+
             runtimeclass AudioEncodingProperties;
+
+            runtimeclass Av1ProfileIds;
 
             runtimeclass ContainerEncodingProperties;
 
             runtimeclass H264ProfileIds;
+
+            runtimeclass HevcProfileIds;
 
             runtimeclass ImageEncodingProperties;
 
@@ -172,6 +188,8 @@ namespace Windows
             runtimeclass TimedMetadataEncodingProperties;
 
             runtimeclass VideoEncodingProperties;
+
+            runtimeclass Vp9ProfileIds;
         }
     }
 }
@@ -355,6 +373,25 @@ namespace Windows
                 HRESULT GetFormatUserData([out] UINT32* __valueSize, [out] [size_is(, *__valueSize)] BYTE** value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Media.MediaProperties.Av1ProfileIds)]
+            [uuid(9105812B-7C09-5882-88A4-678008A5174D)]
+            interface IAv1ProfileIdsStatics : IInspectable
+            {
+                [propget] HRESULT MainChromaSubsampling420BitDepth8([out] [retval] INT32* value);
+                [propget] HRESULT MainChromaSubsampling420BitDepth10([out] [retval] INT32* value);
+                [propget] HRESULT MainChromaSubsampling400BitDepth8([out] [retval] INT32* value);
+                [propget] HRESULT MainChromaSubsampling400BitDepth10([out] [retval] INT32* value);
+                [propget] HRESULT HighChromaSubsampling444BitDepth8([out] [retval] INT32* value);
+                [propget] HRESULT HighChromaSubsampling444BitDepth10([out] [retval] INT32* value);
+                [propget] HRESULT ProfessionalChromaSubsampling420BitDepth12([out] [retval] INT32* value);
+                [propget] HRESULT ProfessionalChromaSubsampling400BitDepth12([out] [retval] INT32* value);
+                [propget] HRESULT ProfessionalChromaSubsampling444BitDepth12([out] [retval] INT32* value);
+                [propget] HRESULT ProfessionalChromaSubsampling422BitDepth8([out] [retval] INT32* value);
+                [propget] HRESULT ProfessionalChromaSubsampling422BitDepth10([out] [retval] INT32* value);
+                [propget] HRESULT ProfessionalChromaSubsampling422BitDepth12([out] [retval] INT32* value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [exclusiveto(Windows.Media.MediaProperties.ContainerEncodingProperties)]
             [uuid(59AC2A57-B32A-479E-8A61-4B7F2E9E7EA0)]
@@ -387,6 +424,35 @@ namespace Windows
                 [propget] HRESULT High444([out] [retval] INT32* value);
                 [propget] HRESULT StereoHigh([out] [retval] INT32* value);
                 [propget] HRESULT MultiviewHigh([out] [retval] INT32* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Media.MediaProperties.HevcProfileIds)]
+            [uuid(1E50D280-2AA7-53C1-973F-2189FA656F53)]
+            interface IHevcProfileIdsStatics : IInspectable
+            {
+                [propget] HRESULT MainChromaSubsampling420BitDepth8([out] [retval] INT32* value);
+                [propget] HRESULT MainChromaSubsampling420BitDepth10([out] [retval] INT32* value);
+                [propget] HRESULT MainChromaSubsampling420BitDepth12([out] [retval] INT32* value);
+                [propget] HRESULT MainChromaSubsampling422BitDepth10([out] [retval] INT32* value);
+                [propget] HRESULT MainChromaSubsampling422BitDepth12([out] [retval] INT32* value);
+                [propget] HRESULT MainChromaSubsampling444BitDepth8([out] [retval] INT32* value);
+                [propget] HRESULT MainChromaSubsampling444BitDepth10([out] [retval] INT32* value);
+                [propget] HRESULT MainChromaSubsampling444BitDepth12([out] [retval] INT32* value);
+                [propget] HRESULT MonochromeBitDepth12([out] [retval] INT32* value);
+                [propget] HRESULT MonochromeBitDepth16([out] [retval] INT32* value);
+                [propget] HRESULT MainIntraChromaSubsampling420BitDepth8([out] [retval] INT32* value);
+                [propget] HRESULT MainIntraChromaSubsampling420BitDepth10([out] [retval] INT32* value);
+                [propget] HRESULT MainIntraChromaSubsampling420BitDepth12([out] [retval] INT32* value);
+                [propget] HRESULT MainIntraChromaSubsampling422BitDepth10([out] [retval] INT32* value);
+                [propget] HRESULT MainIntraChromaSubsampling422BitDepth12([out] [retval] INT32* value);
+                [propget] HRESULT MainIntraChromaSubsampling444BitDepth8([out] [retval] INT32* value);
+                [propget] HRESULT MainIntraChromaSubsampling444BitDepth10([out] [retval] INT32* value);
+                [propget] HRESULT MainIntraChromaSubsampling444BitDepth12([out] [retval] INT32* value);
+                [propget] HRESULT MainIntraChromaSubsampling444BitDepth16([out] [retval] INT32* value);
+                [propget] HRESULT MainStillChromaSubsampling420BitDepth8([out] [retval] INT32* value);
+                [propget] HRESULT MainStillChromaSubsampling444BitDepth8([out] [retval] INT32* value);
+                [propget] HRESULT MainStillChromaSubsampling444BitDepth16([out] [retval] INT32* value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -503,6 +569,15 @@ namespace Windows
                 HRESULT CreateHevc([in] Windows.Media.MediaProperties.VideoEncodingQuality quality, [out] [retval] Windows.Media.MediaProperties.MediaEncodingProfile** value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Media.MediaProperties.MediaEncodingProfile)]
+            [uuid(6FAFD7B5-9404-514A-81DD-C9444D648AF0)]
+            interface IMediaEncodingProfileStatics4 : IInspectable
+            {
+                HRESULT CreateVp9([in] Windows.Media.MediaProperties.VideoEncodingQuality quality, [out] [retval] Windows.Media.MediaProperties.MediaEncodingProfile** result);
+                HRESULT CreateAv1([in] Windows.Media.MediaProperties.VideoEncodingQuality quality, [out] [retval] Windows.Media.MediaProperties.MediaEncodingProfile** result);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [uuid(B4002AF6-ACD4-4E5A-A24B-5D7498A8B8C4)]
             interface IMediaEncodingProperties : IInspectable
@@ -605,6 +680,14 @@ namespace Windows
                 [propget] HRESULT Srt([out] [retval] HSTRING* value);
                 [propget] HRESULT Ssa([out] [retval] HSTRING* value);
                 [propget] HRESULT VobSub([out] [retval] HSTRING* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Media.MediaProperties.MediaEncodingSubtypes)]
+            [uuid(92F2DCA7-9937-52A1-B619-DDFAD81CD99C)]
+            interface IMediaEncodingSubtypesStatics7 : IInspectable
+            {
+                [propget] HRESULT Av1([out] [retval] HSTRING* value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -721,6 +804,25 @@ namespace Windows
                 HRESULT CreateHevc([out] [retval] Windows.Media.MediaProperties.VideoEncodingProperties** value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Media.MediaProperties.VideoEncodingProperties)]
+            [uuid(65B46685-60DA-5E51-91A2-B38C4763B872)]
+            interface IVideoEncodingPropertiesStatics3 : IInspectable
+            {
+                HRESULT CreateVp9([out] [retval] Windows.Media.MediaProperties.VideoEncodingProperties** result);
+                HRESULT CreateAv1([out] [retval] Windows.Media.MediaProperties.VideoEncodingProperties** result);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Media.MediaProperties.Vp9ProfileIds)]
+            [uuid(20311A55-FE06-5883-92D9-6080C97743E5)]
+            interface IVp9ProfileIdsStatics : IInspectable
+            {
+                [propget] HRESULT Profile0ChromaSubsampling420BitDepth8([out] [retval] INT32* value);
+                [propget] HRESULT Profile2ChromaSubsampling420BitDepth10([out] [retval] INT32* value);
+                [propget] HRESULT Profile2ChromaSubsampling420BitDepth12([out] [retval] INT32* value);
+            }
+
             [activatable(Windows.Foundation.UniversalApiContract, 1.0)]
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [marshaling_behavior(agile)]
@@ -734,6 +836,14 @@ namespace Windows
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)] interface Windows.Media.MediaProperties.IAudioEncodingPropertiesWithFormatUserData;
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)] interface Windows.Media.MediaProperties.IAudioEncodingProperties2;
                 [contract(Windows.Foundation.UniversalApiContract, 6.0)] interface Windows.Media.MediaProperties.IAudioEncodingProperties3;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [marshaling_behavior(agile)]
+            [static(Windows.Media.MediaProperties.IAv1ProfileIdsStatics, Windows.Foundation.UniversalApiContract, 15.0)]
+            [threading(both)]
+            runtimeclass Av1ProfileIds
+            {
             }
 
             [activatable(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -752,6 +862,14 @@ namespace Windows
             [static(Windows.Media.MediaProperties.IH264ProfileIdsStatics, Windows.Foundation.UniversalApiContract, 1.0)]
             [threading(both)]
             runtimeclass H264ProfileIds
+            {
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [marshaling_behavior(agile)]
+            [static(Windows.Media.MediaProperties.IHevcProfileIdsStatics, Windows.Foundation.UniversalApiContract, 15.0)]
+            [threading(both)]
+            runtimeclass HevcProfileIds
             {
             }
 
@@ -775,6 +893,7 @@ namespace Windows
             [static(Windows.Media.MediaProperties.IMediaEncodingProfileStatics, Windows.Foundation.UniversalApiContract, 1.0)]
             [static(Windows.Media.MediaProperties.IMediaEncodingProfileStatics2, Windows.Foundation.UniversalApiContract, 1.0)]
             [static(Windows.Media.MediaProperties.IMediaEncodingProfileStatics3, Windows.Foundation.UniversalApiContract, 4.0)]
+            [static(Windows.Media.MediaProperties.IMediaEncodingProfileStatics4, Windows.Foundation.UniversalApiContract, 15.0)]
             [threading(mta)]
             runtimeclass MediaEncodingProfile
             {
@@ -791,6 +910,7 @@ namespace Windows
             [static(Windows.Media.MediaProperties.IMediaEncodingSubtypesStatics4, Windows.Foundation.UniversalApiContract, 6.0)]
             [static(Windows.Media.MediaProperties.IMediaEncodingSubtypesStatics5, Windows.Foundation.UniversalApiContract, 7.0)]
             [static(Windows.Media.MediaProperties.IMediaEncodingSubtypesStatics6, Windows.Foundation.UniversalApiContract, 10.0)]
+            [static(Windows.Media.MediaProperties.IMediaEncodingSubtypesStatics7, Windows.Foundation.UniversalApiContract, 15.0)]
             [threading(both)]
             runtimeclass MediaEncodingSubtypes
             {
@@ -838,6 +958,7 @@ namespace Windows
             [marshaling_behavior(agile)]
             [static(Windows.Media.MediaProperties.IVideoEncodingPropertiesStatics, Windows.Foundation.UniversalApiContract, 1.0)]
             [static(Windows.Media.MediaProperties.IVideoEncodingPropertiesStatics2, Windows.Foundation.UniversalApiContract, 4.0)]
+            [static(Windows.Media.MediaProperties.IVideoEncodingPropertiesStatics3, Windows.Foundation.UniversalApiContract, 15.0)]
             [threading(both)]
             runtimeclass VideoEncodingProperties
             {
@@ -847,6 +968,14 @@ namespace Windows
                 [contract(Windows.Foundation.UniversalApiContract, 3.0)] interface Windows.Media.MediaProperties.IVideoEncodingProperties3;
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)] interface Windows.Media.MediaProperties.IVideoEncodingProperties4;
                 [contract(Windows.Foundation.UniversalApiContract, 6.0)] interface Windows.Media.MediaProperties.IVideoEncodingProperties5;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [marshaling_behavior(agile)]
+            [static(Windows.Media.MediaProperties.IVp9ProfileIdsStatics, Windows.Foundation.UniversalApiContract, 15.0)]
+            [threading(both)]
+            runtimeclass Vp9ProfileIds
+            {
             }
         }
     }

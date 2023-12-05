@@ -858,6 +858,7 @@ typedef LSA_CALLBACK_FUNCTION * PLSA_CALLBACK_FUNCTION;
 #define PRIMARY_CRED_ARSO_LOGON                     0x00200000
 #define PRIMARY_CRED_SUPPLEMENTAL                   0x00400000  // The update is only to move supplemental credentials around
                                                                 // all primary credentials fields except the LogonId should be ignored
+#define PRIMARY_CRED_FOR_PASSWORD_CHANGE            0x00800000  // The credential will be used for a password change
 
 #define PRIMARY_CRED_LOGON_PACKAGE_SHIFT            24
 #define PRIMARY_CRED_PACKAGE_MASK                   0xff000000
