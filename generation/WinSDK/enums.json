@@ -19878,7 +19878,7 @@
         "name": "PERF_AGGREGATE_MIN"
       },
       {
-        "name": "PERF_AGGREGATE_MAX_"
+        "name": "PERF_AGGREGATE_MAX"
       }
     ],
     "uses": [

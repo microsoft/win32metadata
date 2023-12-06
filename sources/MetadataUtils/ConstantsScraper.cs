@@ -205,9 +205,26 @@ namespace MetadataUtils
                         inQuote = !inQuote;
                     }
 
-                    if (!inQuote && rawValue[i] == '/' && (rawValue[i + 1] == '/' || rawValue[i + 1] == '*' ))
+                    if (!inQuote && rawValue[i] == '/')
                     {
-                        return rawValue.Substring(0, i).Trim();
+                        if (rawValue[i + 1] == '/')
+                        {
+                            // Remove trailing line comments.
+                            return rawValue.Substring(0, i).Trim();
+                        }
+                        else if (rawValue[i + 1] == '*')
+                        {
+                            if (rawValue.LastIndexOf("*/") == -1)
+                            {
+                                // Remove trailing block comments that aren't closed.
+                                return rawValue.Substring(0, i).Trim();
+                            }
+                            else
+                            {
+                                // Remove inline block comments that are closed.
+                                return rawValue.Substring(0, i).Trim() + rawValue.Substring(rawValue.LastIndexOf("*/") + 2).Trim();
+                            }
+                        }
                     }
                 }
 

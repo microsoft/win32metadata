@@ -391,3 +391,9 @@ winmd1: Windows.Win32.Security.Authentication.Identity.POLICY_INFORMATION_CLASS.
 winmd1: Windows.Win32.System.Ioctl.Apis.CHECKSUM_TYPE_FIRST_UNUSED_TYPE = 4, winmd2 = 5
 winmd1: Windows.Win32.System.Threading.PROCESS_INFORMATION_CLASS.ProcessInformationClassMax = 10, winmd2 = 12
 winmd1: Windows.Win32.System.Threading.PROCESS_MITIGATION_POLICY.MaxProcessMitigationPolicy = 19, winmd2 = 20
+# Fixed #1745.
+Windows.Win32.Networking.WinSock.Apis.WSAID_MULTIPLE_RIO added
+Windows.Win32.Networking.WinSock.Apis.WSAID_WSASENDMSG added
+Windows.Win32.Security.Cryptography.UI.Apis.CERT_CERTIFICATE_ACTION_VERIFY added
+Windows.Win32.System.Performance.Apis.PERF_AGGREGATE_MAX removed
+Windows.Win32.System.Performance.PERF_COUNTER_AGGREGATE_FUNC.PERF_AGGREGATE_MAX added
