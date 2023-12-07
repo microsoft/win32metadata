@@ -291,3 +291,15 @@ Windows.Win32.UI.WindowsAndMessaging.Apis.SendMessageTimeoutW : [DllImport(USER3
 # Fixed #1866.
 Windows.Win32.System.WinRT.Printing.IPrintDocumentPageSource added
 Windows.Win32.System.WinRT.Printing.IPrintPreviewPageCollection added
+# Associate DXGI function parameters and struct fields with the corresponding enum type
+Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_DESC1.Flags :  => [AssociatedEnum(DXGI_ADAPTER_FLAG)]
+Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_DESC2.Flags :  => [AssociatedEnum(DXGI_ADAPTER_FLAG)]
+Windows.Win32.Graphics.Dxgi.DXGI_DECODE_SWAP_CHAIN_DESC.Flags :  => [AssociatedEnum(DXGI_SWAP_CHAIN_FLAG)]
+Windows.Win32.Graphics.Dxgi.DXGI_SWAP_CHAIN_DESC.Flags :  => [AssociatedEnum(DXGI_SWAP_CHAIN_FLAG)]
+Windows.Win32.Graphics.Dxgi.IDXGIDevice4.OfferResources1 : Flags : [In] => [AssociatedEnum(DXGI_OFFER_RESOURCE_FLAGS),In]
+Windows.Win32.Graphics.Dxgi.IDXGIOutput3.CheckOverlaySupport : pFlags : [Out] => [AssociatedEnum(DXGI_OVERLAY_SUPPORT_FLAG),Out]
+Windows.Win32.Graphics.Dxgi.IDXGIOutput4.CheckOverlayColorSpaceSupport : pFlags : [Out] => [AssociatedEnum(DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG),Out]
+Windows.Win32.Graphics.Dxgi.IDXGIOutput6.CheckHardwareCompositionSupport : pFlags : [Out] => [AssociatedEnum(DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS),Out]
+Windows.Win32.Graphics.Dxgi.IDXGISwapChain.ResizeBuffers : SwapChainFlags : [In] => [AssociatedEnum(DXGI_SWAP_CHAIN_FLAG),In]
+Windows.Win32.Graphics.Dxgi.IDXGISwapChain3.CheckColorSpaceSupport : pColorSpaceSupport : [Out] => [AssociatedEnum(DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG),Out]
+Windows.Win32.Graphics.Dxgi.IDXGISwapChain3.ResizeBuffers1 : SwapChainFlags : [In] => [AssociatedEnum(DXGI_SWAP_CHAIN_FLAG),In]
