@@ -1,15 +1,18 @@
 --typeImport
+# Windows 10 (19041.1)
 IPropertyValue(interface)=<Windows.Foundation.FoundationContract, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.Foundation.IPropertyValue
 IPropertySet(interface)=<Windows.Foundation.FoundationContract, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.Foundation.Collections.IPropertySet
-IPropertySetSerializer(interface)=<Windows.Foundation.UniversalApiContract, Version=14.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.Storage.Streams.IPropertySetSerializer
 ICompositionSurface(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.ICompositionSurface
 ICompositionCapabilities(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.CompositionCapabilities
 ICompositionGraphicsDevice(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.CompositionGraphicsDevice
-ICompositionTexture(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.ICompositionTexture
 ICompositor(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.Compositor
 IGraphicsEffectSource(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.Graphics.Effects.IGraphicsEffectSource
 IDesktopWindowTarget(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.Desktop.DesktopWindowTarget
 IDispatcherQueueController(interface)=<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.System.DispatcherQueueController
+# Windows 11 (22000.194)
+IPropertySetSerializer(interface)=<Windows.Foundation.UniversalApiContract, Version=14.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.Storage.Streams.IPropertySetSerializer
+# Windows 11 (22621.2428)
+ICompositionTexture(interface)=<Windows.Foundation.UniversalApiContract, Version=15.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.ICompositionTexture
 --enumAddition
 CLSCTX::CLSCTX_ALL=CLSCTX_INPROC_SERVER|CLSCTX_INPROC_HANDLER|CLSCTX_LOCAL_SERVER|CLSCTX_REMOTE_SERVER
 CLSCTX::CLSCTX_SERVER=CLSCTX_INPROC_SERVER|CLSCTX_LOCAL_SERVER|CLSCTX_REMOTE_SERVER
