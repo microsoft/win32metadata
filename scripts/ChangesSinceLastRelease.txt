@@ -293,3 +293,12 @@ Windows.Win32.System.WinRT.Printing.IPrintDocumentPageSource added
 Windows.Win32.System.WinRT.Printing.IPrintPreviewPageCollection added
 # Add missing NotifyIcon notification constant
 Windows.Win32.UI.Shell.Apis.NIN_KEYSELECT added
+# Adjust NIN/WM constant types
+Windows.Win32.UI.Shell.Apis.NIN_BALLOONHIDE...System.UInt32 => System.Int32
+Windows.Win32.UI.Shell.Apis.NIN_BALLOONSHOW...System.UInt32 => System.Int32
+Windows.Win32.UI.Shell.Apis.NIN_BALLOONTIMEOUT...System.UInt32 => System.Int32
+Windows.Win32.UI.Shell.Apis.NIN_BALLOONUSERCLICK...System.UInt32 => System.Int32
+Windows.Win32.UI.Shell.Apis.NIN_POPUPCLOSE...System.UInt32 => System.Int32
+Windows.Win32.UI.Shell.Apis.NIN_POPUPOPEN...System.UInt32 => System.Int32
+Windows.Win32.UI.Shell.Apis.NIN_SELECT...System.UInt32 => System.Int32
+Windows.Win32.UI.WindowsAndMessaging.Apis.WM_USER...System.UInt32 => System.Int32
