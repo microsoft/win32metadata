@@ -16,6 +16,8 @@ namespace Windows.Win32.UI.Shell
         [NativeTypeName("HRESULT")]
         public const int HLINK_S_FIRST = OLE_S_LAST + 1;
 
+        public const uint NIN_KEYSELECT = NIN_SELECT | NINF_KEY;
+
         [DllImport("SHELL32.dll", EntryPoint = "#660", CallingConvention = CallingConvention.StdCall, ExactSpelling = true)]
         public static extern BOOL FileIconInit([In]BOOL fRestoreCache)
     }
