@@ -223,19 +223,19 @@ To update the Windows SDK dependency, run [scripts/UpdateSDK.ps1](scripts/Update
 
 Once the script completes, modify [libMappings.rsp](generation/WinSDK/libMappings.rsp) to undo removal of any manually added changes (typically at the end of the file).
 
-Run a [Full Build](#full-builds), fix any metadata issues that surface, then update the baseline.
+Run a [full build](#full-builds), fix any metadata issues that surface, then update the baseline.
 
 ### Direct3D Agility SDK
 
 To update the Direct3D Agility SDK dependency, update the corresponding PackageReference version number in [BuildTools.proj](BuildTools/BuildTools.proj) and run [scripts/RecompileIdlFilesForScraping.ps1](scripts/RecompileIdlFilesForScraping.ps1).
 
-Run a [Full Build](#full-builds), fix any metadata issues that surface, then update the baseline.
+Run a [full build](#full-builds), fix any metadata issues that surface, then update the baseline.
 
 ### ClangSharp
 
 To update the ClangSharp dependency, modify the version number in [ScrapeHeaders.cs](https://github.com/microsoft/win32metadata/blob/fca56d40752c1e8beee7c616e89f06c409fe09b7/sources/GeneratorSdk/MetadataTasks/ScrapeHeaders.cs#L15).
 
-Run a [Full Build](#full-builds), fix any metadata issues that surface, then update the baseline.
+Run a [full build](#full-builds), fix any metadata issues that surface, then update the baseline.
 
 ## Validating changes
 
