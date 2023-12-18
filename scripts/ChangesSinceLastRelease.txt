@@ -397,3 +397,10 @@ Windows.Win32.Networking.WinSock.Apis.WSAID_WSASENDMSG added
 Windows.Win32.Security.Cryptography.UI.Apis.CERT_CERTIFICATE_ACTION_VERIFY added
 Windows.Win32.System.Performance.Apis.PERF_AGGREGATE_MAX removed
 Windows.Win32.System.Performance.PERF_COUNTER_AGGREGATE_FUNC.PERF_AGGREGATE_MAX added
+# Adjust NOTIFYICONDATA flags, types
+Windows.Win32.UI.Shell.NOTIFY_ICON_INFOTIP_FLAGS :  => [Flags]
+Windows.Win32.UI.Shell.NOTIFY_ICON_STATE :  => [Flags]
+Windows.Win32.UI.Shell.NOTIFYICONDATAA.dwStateMask(X64, Arm64)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
+Windows.Win32.UI.Shell.NOTIFYICONDATAA.dwStateMask(X86)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
+Windows.Win32.UI.Shell.NOTIFYICONDATAW.dwStateMask(X64, Arm64)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
+Windows.Win32.UI.Shell.NOTIFYICONDATAW.dwStateMask(X86)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
