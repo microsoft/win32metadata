@@ -33871,6 +33871,7 @@
   },
   {
     "type": "uint",
+    "flags": true,
     "name": "NOTIFY_ICON_INFOTIP_FLAGS",
     "autoPopulate": {
       "filter": "NIIF_",
@@ -33890,6 +33891,7 @@
   },
   {
     "type": "uint",
+    "flags": true,
     "name": "NOTIFY_ICON_STATE",
     "autoPopulate": {
       "filter": "NIS_",
@@ -33902,8 +33904,16 @@
         "field": "dwState"
       },
       {
+        "struct": "NOTIFYICONDATAW",
+        "field": "dwStateMask"
+      },
+      {
         "struct": "NOTIFYICONDATAA",
         "field": "dwState"
+      },
+      {
+        "struct": "NOTIFYICONDATAA",
+        "field": "dwStateMask"
       }
     ]
   },
