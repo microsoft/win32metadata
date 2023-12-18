@@ -17,6 +17,7 @@ You can contribute to this project by contributing to:
 * [Constants](#Constants)
 * [Typedefs](#Typedefs)
 * [Attributes](#Attributes)
+* [Dependencies](#Dependencies)
 * [Projections](docs/projections.md)
 
 If you intend to contribute code changes, learn how to [set up your development environment](#Set-up-your-development-environment).
@@ -207,6 +208,34 @@ Attributes scanned from headers sometimes may not be desired. In those cases, yo
   * Removes an attribute from an API
 
 Language projections can use the context provided by attributes to improve the developer experience for decorated APIs.
+
+## Dependencies
+
+Win32 Metadata depends on the following:
+
+* [Windows SDK](#windows-sdk)
+* [Direct3D Agility SDK](#direct3d-agility-sdk)
+* [ClangSharp](#clangsharp)
+
+### Windows SDK
+
+To update the Windows SDK dependency, run [scripts/UpdateSDK.ps1](scripts/UpdateSDK.ps1) with the desired SDK version (e.g. 10.0.22621.2428).
+
+Once the script completes, modify [libMappings.rsp](generation/WinSDK/libMappings.rsp) to undo removal of any manually added changes (typically at the end of the file).
+
+Run a [Full Build](#full-builds), fix any metadata issues that surface, then update the baseline.
+
+### Direct3D Agility SDK
+
+To update the Direct3D Agility SDK dependency, update the corresponding PackageReference version number in [BuildTools.proj](BuildTools/BuildTools.proj) and run [scripts/RecompileIdlFilesForScraping.ps1](scripts/RecompileIdlFilesForScraping.ps1).
+
+Run a [Full Build](#full-builds), fix any metadata issues that surface, then update the baseline.
+
+### ClangSharp
+
+To update the ClangSharp dependency, modify the version number in [ScrapeHeaders.cs](https://github.com/microsoft/win32metadata/blob/fca56d40752c1e8beee7c616e89f06c409fe09b7/sources/GeneratorSdk/MetadataTasks/ScrapeHeaders.cs#L15).
+
+Run a [Full Build](#full-builds), fix any metadata issues that surface, then update the baseline.
 
 ## Validating changes
 
