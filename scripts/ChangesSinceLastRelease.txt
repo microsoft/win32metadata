@@ -404,3 +404,16 @@ Windows.Win32.UI.Shell.NOTIFYICONDATAA.dwStateMask(X64, Arm64)...System.UInt32 =
 Windows.Win32.UI.Shell.NOTIFYICONDATAA.dwStateMask(X86)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
 Windows.Win32.UI.Shell.NOTIFYICONDATAW.dwStateMask(X64, Arm64)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
 Windows.Win32.UI.Shell.NOTIFYICONDATAW.dwStateMask(X86)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
+# Fixed #1787.
+Windows.Win32.Media.Audio.Apis.DEVICE_STATE_ACTIVE removed
+Windows.Win32.Media.Audio.Apis.DEVICE_STATE_DISABLED removed
+Windows.Win32.Media.Audio.Apis.DEVICE_STATE_NOTPRESENT removed
+Windows.Win32.Media.Audio.Apis.DEVICE_STATE_UNPLUGGED removed
+Windows.Win32.Media.Audio.DEVICE_STATE added
+Windows.Win32.Media.Audio.DEVICE_STATE.DEVICE_STATE_ACTIVE added
+Windows.Win32.Media.Audio.DEVICE_STATE.DEVICE_STATE_DISABLED added
+Windows.Win32.Media.Audio.DEVICE_STATE.DEVICE_STATE_NOTPRESENT added
+Windows.Win32.Media.Audio.DEVICE_STATE.DEVICE_STATE_UNPLUGGED added
+Windows.Win32.Media.Audio.IMMDevice.GetState : return...HRESULT => DEVICE_STATE
+Windows.Win32.Media.Audio.IMMDeviceEnumerator.EnumAudioEndpoints : dwStateMask...UInt32 => DEVICE_STATE
+Windows.Win32.Media.Audio.IMMNotificationClient.OnDeviceStateChanged : dwNewState...UInt32 => DEVICE_STATE

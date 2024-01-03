@@ -36894,6 +36894,30 @@
         "value": "0x57696E20"
       }
     ]
+  },
+  {
+    "name": "DEVICE_STATE",
+    "autoPopulate": {
+      "filter": "DEVICE_STATE_",
+      "header": "mmdeviceapi.h"
+    },
+    "uses": [
+      {
+        "interface": "IMMNotificationClient",
+        "method": "OnDeviceStateChanged",
+        "parameter": "dwNewState"
+      },
+      {
+        "interface": "IMMDeviceEnumerator",
+        "method": "EnumAudioEndpoints",
+        "parameter": "dwStateMask"
+      },
+      {
+        "interface": "IMMDevice",
+        "method": "GetState",
+        "parameter": "return"
+      }
+    ]
   }
 ]
 }
