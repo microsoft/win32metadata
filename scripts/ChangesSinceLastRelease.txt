@@ -434,3 +434,6 @@ Windows.Win32.UI.Input.RAWMOUSE.usFlags...System.UInt16 => Windows.Win32.UI.Inpu
 Windows.Win32.System.Power.Apis.RegisterPowerSettingNotification : Flags...UInt32 => REGISTER_NOTIFICATION_FLAGS
 # Fixed #1774.
 Windows.Win32.UI.Shell.Apis.SHCreateItemInKnownFolder : dwKFFlags : [In] => [AssociatedEnum(KNOWN_FOLDER_FLAG),In]
+# Fixed #1780.
+Windows.Win32.System.WindowsProgramming.FILE_INFORMATION_CLASS removed
+Windows.Win32.System.WindowsProgramming.FILE_INFORMATION_CLASS.FileDirectoryInformation removed
