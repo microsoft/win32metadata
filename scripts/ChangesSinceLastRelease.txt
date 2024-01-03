@@ -430,3 +430,5 @@ Windows.Win32.UI.Input.MOUSE_STATE.MOUSE_MOVE_NOCOALESCE added
 Windows.Win32.UI.Input.MOUSE_STATE.MOUSE_MOVE_RELATIVE added
 Windows.Win32.UI.Input.MOUSE_STATE.MOUSE_VIRTUAL_DESKTOP added
 Windows.Win32.UI.Input.RAWMOUSE.usFlags...System.UInt16 => Windows.Win32.UI.Input.MOUSE_STATE
+# Fixed #1779.
+Windows.Win32.System.Power.Apis.RegisterPowerSettingNotification : Flags...UInt32 => REGISTER_NOTIFICATION_FLAGS

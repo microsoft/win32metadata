@@ -11956,6 +11956,10 @@
       {
         "method": "PowerRegisterSuspendResumeNotification",
         "parameter": "Flags"
+      },
+      {
+        "method": "RegisterPowerSettingNotification",
+        "parameter": "Flags"
       }
     ]
   },
