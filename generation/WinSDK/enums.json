@@ -36918,6 +36918,33 @@
         "parameter": "return"
       }
     ]
+  },
+  {
+    "name": "MOUSE_STATE",
+    "type": "ushort",
+    "members": [
+      {
+        "name": "MOUSE_MOVE_RELATIVE"
+      },
+      {
+        "name": "MOUSE_MOVE_ABSOLUTE"
+      },
+      {
+        "name": "MOUSE_VIRTUAL_DESKTOP"
+      },
+      {
+        "name": "MOUSE_ATTRIBUTES_CHANGED"
+      },
+      {
+        "name": "MOUSE_MOVE_NOCOALESCE"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "RAWMOUSE",
+        "field": "usFlags"
+      }
+    ]
   }
 ]
 }

@@ -417,3 +417,16 @@ Windows.Win32.Media.Audio.DEVICE_STATE.DEVICE_STATE_UNPLUGGED added
 Windows.Win32.Media.Audio.IMMDevice.GetState : return...HRESULT => DEVICE_STATE
 Windows.Win32.Media.Audio.IMMDeviceEnumerator.EnumAudioEndpoints : dwStateMask...UInt32 => DEVICE_STATE
 Windows.Win32.Media.Audio.IMMNotificationClient.OnDeviceStateChanged : dwNewState...UInt32 => DEVICE_STATE
+# Fixed #1786.
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.MOUSE_ATTRIBUTES_CHANGED removed
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.MOUSE_MOVE_ABSOLUTE removed
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.MOUSE_MOVE_NOCOALESCE removed
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.MOUSE_MOVE_RELATIVE removed
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.MOUSE_VIRTUAL_DESKTOP removed
+Windows.Win32.UI.Input.MOUSE_STATE added
+Windows.Win32.UI.Input.MOUSE_STATE.MOUSE_ATTRIBUTES_CHANGED added
+Windows.Win32.UI.Input.MOUSE_STATE.MOUSE_MOVE_ABSOLUTE added
+Windows.Win32.UI.Input.MOUSE_STATE.MOUSE_MOVE_NOCOALESCE added
+Windows.Win32.UI.Input.MOUSE_STATE.MOUSE_MOVE_RELATIVE added
+Windows.Win32.UI.Input.MOUSE_STATE.MOUSE_VIRTUAL_DESKTOP added
+Windows.Win32.UI.Input.RAWMOUSE.usFlags...System.UInt16 => Windows.Win32.UI.Input.MOUSE_STATE
