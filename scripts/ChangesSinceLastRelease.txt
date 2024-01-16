@@ -437,3 +437,18 @@ Windows.Win32.UI.Shell.Apis.SHCreateItemInKnownFolder : dwKFFlags : [In] => [Ass
 # Fixed #1780.
 Windows.Win32.System.WindowsProgramming.FILE_INFORMATION_CLASS removed
 Windows.Win32.System.WindowsProgramming.FILE_INFORMATION_CLASS.FileDirectoryInformation removed
+# Add new Retained attribute to OVERLAPPED parameters
+Windows.Win32.Foundation.Metadata.RetainedAttribute added
+Windows.Win32.Networking.HttpServer.Apis.HttpAddFragmentToCache : Overlapped : [In,Optional] => [In,Optional,Out,Retained]
+Windows.Win32.Networking.HttpServer.Apis.HttpCancelHttpRequest : Overlapped : [In,Optional] => [In,Optional,Out,Retained]
+Windows.Win32.Networking.HttpServer.Apis.HttpFlushResponseCache : Overlapped : [In,Optional] => [In,Optional,Out,Retained]
+Windows.Win32.Networking.HttpServer.Apis.HttpReadFragmentFromCache : Overlapped : [In,Optional] => [In,Optional,Out,Retained]
+Windows.Win32.Networking.HttpServer.Apis.HttpReceiveClientCertificate : Overlapped : [In,Optional] => [In,Optional,Out,Retained]
+Windows.Win32.Networking.HttpServer.Apis.HttpReceiveHttpRequest : Overlapped : [In,Optional,Out] => [In,Optional,Out,Retained]
+Windows.Win32.Networking.HttpServer.Apis.HttpReceiveRequestEntityBody : Overlapped : [In,Optional] => [In,Optional,Out,Retained]
+Windows.Win32.Networking.HttpServer.Apis.HttpSendHttpResponse : Overlapped : [In,Optional] => [In,Optional,Out,Retained]
+Windows.Win32.Networking.HttpServer.Apis.HttpSendResponseEntityBody : Overlapped : [In,Optional] => [In,Optional,Out,Retained]
+Windows.Win32.Networking.HttpServer.Apis.HttpWaitForDemandStart : Overlapped : [In,Optional] => [In,Optional,Out,Retained]
+Windows.Win32.Networking.HttpServer.Apis.HttpWaitForDisconnect : Overlapped : [In,Optional] => [In,Optional,Out,Retained]
+Windows.Win32.Networking.HttpServer.Apis.HttpWaitForDisconnectEx : Overlapped : [In,Optional] => [In,Optional,Out,Retained]
+Windows.Win32.Storage.FileSystem.Apis.FlushLogBuffers : pOverlapped : [In,Optional,Out] => [In,Optional,Out,Retained]
