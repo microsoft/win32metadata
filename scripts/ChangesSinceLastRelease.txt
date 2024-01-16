@@ -937,3 +937,9 @@ Windows.Win32.System.Diagnostics.TraceLogging.Apis.WINEVENT_OPCODE_STOP added
 Windows.Win32.System.Diagnostics.TraceLogging.Apis.WINEVENT_OPCODE_SUSPEND added
 Windows.Win32.System.Diagnostics.TraceLogging.Apis.WINEVENT_TASK_NONE added
 Windows.Win32.System.Diagnostics.TraceLogging.Apis.WINEVT_KEYWORD_ANY added
+# Fixed #1810.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassImageList : ClassImageListData : [Out] => [In,Out]
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassImageListExA : ClassImageListData : [Out] => [In,Out]
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassImageListExW : ClassImageListData : [Out] => [In,Out]
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetDriverInstallParamsA : DriverInstallParams : [Out] => [In,Out]
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetDriverInstallParamsW : DriverInstallParams : [Out] => [In,Out]
