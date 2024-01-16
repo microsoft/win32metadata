@@ -17221,7 +17221,7 @@
     ]
   },
   {
-    "name": "SETUP_DI_BUILD_DRIVER_DRIVER_TYPE",
+    "name": "SETUP_DI_DRIVER_TYPE",
     "members": [
       {
         "name": "SPDIT_CLASSDRIVER"
@@ -17233,6 +17233,18 @@
     "uses": [
       {
         "method": "SetupDiBuildDriverInfoList",
+        "parameter": "DriverType"
+      },
+      {
+        "method": "SetupDiEnumDriverInfoA",
+        "parameter": "DriverType"
+      },
+      {
+        "method": "SetupDiEnumDriverInfoW",
+        "parameter": "DriverType"
+      },
+      {
+        "method": "SetupDiDestroyDriverInfoList",
         "parameter": "DriverType"
       }
     ]

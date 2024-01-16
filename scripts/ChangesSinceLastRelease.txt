@@ -943,3 +943,14 @@ Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassImageListE
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassImageListExW : ClassImageListData : [Out] => [In,Out]
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetDriverInstallParamsA : DriverInstallParams : [Out] => [In,Out]
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetDriverInstallParamsW : DriverInstallParams : [Out] => [In,Out]
+# Fixed #1805.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiBuildDriverInfoList : DriverType...SETUP_DI_BUILD_DRIVER_DRIVER_TYPE => SETUP_DI_DRIVER_TYPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiDestroyDriverInfoList : DriverType...UInt32 => SETUP_DI_DRIVER_TYPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiEnumDriverInfoA : DriverType...UInt32 => SETUP_DI_DRIVER_TYPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiEnumDriverInfoW : DriverType...UInt32 => SETUP_DI_DRIVER_TYPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_BUILD_DRIVER_DRIVER_TYPE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_BUILD_DRIVER_DRIVER_TYPE.SPDIT_CLASSDRIVER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_BUILD_DRIVER_DRIVER_TYPE.SPDIT_COMPATDRIVER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_TYPE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_TYPE.SPDIT_CLASSDRIVER added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_TYPE.SPDIT_COMPATDRIVER added
