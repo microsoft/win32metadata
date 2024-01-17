@@ -954,3 +954,26 @@ Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_BUILD_DRIVER_DRIVER_T
 Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_TYPE added
 Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_TYPE.SPDIT_CLASSDRIVER added
 Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_TYPE.SPDIT_COMPATDRIVER added
+# Fixed #1782.
+Windows.Win32.Globalization.Apis.AdjustCalendarDate added
+Windows.Win32.Globalization.Apis.ConvertCalDateTimeToSystemTime added
+Windows.Win32.Globalization.Apis.ConvertSystemTimeToCalDateTime added
+Windows.Win32.Globalization.Apis.GetCalendarDateFormatEx added
+Windows.Win32.Globalization.Apis.GetCalendarSupportedDateRange added
+Windows.Win32.Globalization.Apis.IsCalendarLeapYear added
+Windows.Win32.Globalization.Apis.UpdateCalendarDayOfWeek added
+Windows.Win32.Globalization.CALDATETIME added
+Windows.Win32.Globalization.CALDATETIME_DATEUNIT added
+Windows.Win32.Globalization.CALDATETIME_DATEUNIT.DayUnit added
+Windows.Win32.Globalization.CALDATETIME_DATEUNIT.EraUnit added
+Windows.Win32.Globalization.CALDATETIME_DATEUNIT.HourUnit added
+Windows.Win32.Globalization.CALDATETIME_DATEUNIT.MinuteUnit added
+Windows.Win32.Globalization.CALDATETIME_DATEUNIT.MonthUnit added
+Windows.Win32.Globalization.CALDATETIME_DATEUNIT.SecondUnit added
+Windows.Win32.Globalization.CALDATETIME_DATEUNIT.TickUnit added
+Windows.Win32.Globalization.CALDATETIME_DATEUNIT.WeekUnit added
+Windows.Win32.Globalization.CALDATETIME_DATEUNIT.YearUnit added
+Windows.Win32.Storage.Packaging.Appx.Apis.GetCurrentPackageInfo3 added
+Windows.Win32.Storage.Packaging.Appx.PackageInfo3Type added
+Windows.Win32.Storage.Packaging.Appx.PackageInfo3Type.PackageInfo3Type_PackageInfoGeneration added
+Windows.Win32.UI.WindowsAndMessaging.Apis.IsWindowArranged added

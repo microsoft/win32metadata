@@ -1,4 +1,5 @@
 --traverse
+<IncludeRoot>/um/calendarapis.h
 <IncludeRoot>/um/ElsCore.h
 <IncludeRoot>/um/WinNls.h
 <IncludeRoot>/um/stringapiset.h
