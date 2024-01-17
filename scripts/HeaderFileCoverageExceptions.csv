@@ -211,7 +211,6 @@ File,Skipping,Reason
 /um/microsoft.diagnostics.appanalysis.h,true,Seems to be WinRT stuff
 /um/mimedisp.h,true,DISP ids--can't find anything that uses them
 /um/mimeinfo.h,true,Undocumented--can't find uses of it
-/um/minappmodel.h,true,Undocumented constants--can't find uses of it
 /um/minidrv.h,true,Macros we can't use
 /um/msado15_backcompat.h,true,Empty of anything
 /um/msado15.h,true,Empty of anything

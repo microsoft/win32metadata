@@ -979,3 +979,32 @@ Windows.Win32.Storage.Packaging.Appx.PackageInfo3Type.PackageInfo3Type_PackageIn
 Windows.Win32.UI.WindowsAndMessaging.Apis.IsWindowArranged added
 # Fixed #1811.
 Windows.Win32.Foundation.CHAR.Value...System.Byte => System.SByte
+# Fixed #1776.
+Windows.Win32.Storage.Packaging.Appx.Apis.APPLICATION_USER_MODEL_ID_MAX_LENGTH added
+Windows.Win32.Storage.Packaging.Appx.Apis.APPLICATION_USER_MODEL_ID_MIN_LENGTH added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_APPLICATIONS_MAX_COUNT added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_APPLICATIONS_MIN_COUNT added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_ARCHITECTURE_MAX_LENGTH added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_ARCHITECTURE_MIN_LENGTH added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_FAMILY_MAX_RESOURCE_PACKAGES added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_FAMILY_MIN_RESOURCE_PACKAGES added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_FAMILY_NAME_MAX_LENGTH added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_FAMILY_NAME_MIN_LENGTH added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_FULL_NAME_MAX_LENGTH added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_FULL_NAME_MIN_LENGTH added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_GRAPH_MAX_SIZE added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_GRAPH_MIN_SIZE added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_MAX_DEPENDENCIES added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_MIN_DEPENDENCIES added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_NAME_MAX_LENGTH added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_NAME_MIN_LENGTH added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_PUBLISHER_MAX_LENGTH added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_PUBLISHER_MIN_LENGTH added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_PUBLISHERID_MAX_LENGTH added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_PUBLISHERID_MIN_LENGTH added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_RELATIVE_APPLICATION_ID_MAX_LENGTH added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_RELATIVE_APPLICATION_ID_MIN_LENGTH added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_RESOURCEID_MAX_LENGTH added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_RESOURCEID_MIN_LENGTH added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_VERSION_MAX_LENGTH added
+Windows.Win32.Storage.Packaging.Appx.Apis.PACKAGE_VERSION_MIN_LENGTH added
