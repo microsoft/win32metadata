@@ -977,3 +977,5 @@ Windows.Win32.Storage.Packaging.Appx.Apis.GetCurrentPackageInfo3 added
 Windows.Win32.Storage.Packaging.Appx.PackageInfo3Type added
 Windows.Win32.Storage.Packaging.Appx.PackageInfo3Type.PackageInfo3Type_PackageInfoGeneration added
 Windows.Win32.UI.WindowsAndMessaging.Apis.IsWindowArranged added
+# Fixed #1811.
+Windows.Win32.Foundation.CHAR.Value...System.Byte => System.SByte

@@ -1296,7 +1296,7 @@
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "CHAR",
-    "ValueType": "byte",
+    "ValueType": "sbyte",
     "NativeTypedef": true
   },
   {
