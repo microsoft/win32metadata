@@ -1054,3 +1054,5 @@ Windows.Win32.System.Console.CONSOLECONTROL.Reserved3 added
 Windows.Win32.System.Console.CONSOLEENDTASK added
 Windows.Win32.System.Console.CONSOLESETFOREGROUND added
 Windows.Win32.System.Console.CONSOLEWINDOWOWNER added
+# Fixed #1827.
+Windows.Win32.UI.Controls.TASKDIALOG_FLAGS :  => [Flags]
