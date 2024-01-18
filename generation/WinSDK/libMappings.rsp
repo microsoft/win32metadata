@@ -26746,3 +26746,4 @@ ConvertCalDateTimeToSystemTime=KERNEL32.dll
 IsCalendarLeapYear=KERNEL32.dll
 IsWindowArranged=USER32.dll
 GetCurrentPackageInfo3=KERNEL32.dll
+ConsoleControl=USER32.dll

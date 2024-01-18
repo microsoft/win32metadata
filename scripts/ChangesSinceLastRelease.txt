@@ -1038,3 +1038,19 @@ Windows.Win32.UI.Shell.Apis.SHGetAttributesFromDataObject : [DllImport(SHELL32.d
 Windows.Win32.UI.Shell.IEnumFullIDList.Next : [Documentation(https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-ienumfullidlist-next)] => [CanReturnMultipleSuccessValues,Documentation(https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-ienumfullidlist-next)]
 Windows.Win32.UI.Shell.ISyncMgrSyncItemInfo.IsConnected : [Documentation(https://learn.microsoft.com/windows/win32/api/syncmgr/nf-syncmgr-isyncmgrsynciteminfo-isconnected)] => [CanReturnMultipleSuccessValues,Documentation(https://learn.microsoft.com/windows/win32/api/syncmgr/nf-syncmgr-isyncmgrsynciteminfo-isconnected)]
 Windows.Win32.UI.Shell.ISyncMgrUIOperation.Run : [Documentation(https://learn.microsoft.com/windows/win32/api/syncmgr/nf-syncmgr-isyncmgruioperation-run)] => [CanReturnMultipleSuccessValues,Documentation(https://learn.microsoft.com/windows/win32/api/syncmgr/nf-syncmgr-isyncmgruioperation-run)]
+# Added ConsoleControl.
+Windows.Win32.System.Console.Apis.ConsoleControl added
+Windows.Win32.System.Console.CONSOLE_CARET_INFO added
+Windows.Win32.System.Console.CONSOLE_PROCESS_INFO added
+Windows.Win32.System.Console.CONSOLECONTROL added
+Windows.Win32.System.Console.CONSOLECONTROL.ConsoleEndTask added
+Windows.Win32.System.Console.CONSOLECONTROL.ConsoleNotifyConsoleApplication added
+Windows.Win32.System.Console.CONSOLECONTROL.ConsoleSetCaretInfo added
+Windows.Win32.System.Console.CONSOLECONTROL.ConsoleSetForeground added
+Windows.Win32.System.Console.CONSOLECONTROL.ConsoleSetWindowOwner added
+Windows.Win32.System.Console.CONSOLECONTROL.Reserved1 added
+Windows.Win32.System.Console.CONSOLECONTROL.Reserved2 added
+Windows.Win32.System.Console.CONSOLECONTROL.Reserved3 added
+Windows.Win32.System.Console.CONSOLEENDTASK added
+Windows.Win32.System.Console.CONSOLESETFOREGROUND added
+Windows.Win32.System.Console.CONSOLEWINDOWOWNER added
