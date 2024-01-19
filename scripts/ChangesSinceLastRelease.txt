@@ -1,0 +1,16 @@
+# Fixed #1788.
+Windows.Win32.System.SystemServices.Apis.RTL_CONDITION_VARIABLE_LOCKMODE_SHARED removed
+Windows.Win32.System.SystemServices.Apis.RTL_CRITICAL_SECTION_ALL_FLAG_BITS => Windows.Win32.System.Threading.Apis.RTL_CRITICAL_SECTION_ALL_FLAG_BITS
+Windows.Win32.System.SystemServices.Apis.RTL_CRITICAL_SECTION_DEBUG_FLAG_STATIC_INIT => Windows.Win32.System.Threading.Apis.RTL_CRITICAL_SECTION_DEBUG_FLAG_STATIC_INIT
+Windows.Win32.System.SystemServices.Apis.RTL_CRITICAL_SECTION_FLAG_DYNAMIC_SPIN => Windows.Win32.System.Threading.Apis.RTL_CRITICAL_SECTION_FLAG_DYNAMIC_SPIN
+Windows.Win32.System.SystemServices.Apis.RTL_CRITICAL_SECTION_FLAG_FORCE_DEBUG_INFO => Windows.Win32.System.Threading.Apis.RTL_CRITICAL_SECTION_FLAG_FORCE_DEBUG_INFO
+Windows.Win32.System.SystemServices.Apis.RTL_CRITICAL_SECTION_FLAG_NO_DEBUG_INFO => Windows.Win32.System.Threading.Apis.RTL_CRITICAL_SECTION_FLAG_NO_DEBUG_INFO
+Windows.Win32.System.SystemServices.Apis.RTL_CRITICAL_SECTION_FLAG_RESOURCE_TYPE => Windows.Win32.System.Threading.Apis.RTL_CRITICAL_SECTION_FLAG_RESOURCE_TYPE
+Windows.Win32.System.SystemServices.Apis.RTL_CRITICAL_SECTION_FLAG_STATIC_INIT => Windows.Win32.System.Threading.Apis.RTL_CRITICAL_SECTION_FLAG_STATIC_INIT
+Windows.Win32.System.SystemServices.Apis.RTL_RUN_ONCE_ASYNC removed
+Windows.Win32.System.SystemServices.Apis.RTL_RUN_ONCE_CHECK_ONLY removed
+Windows.Win32.System.SystemServices.Apis.RTL_RUN_ONCE_CTX_RESERVED_BITS removed
+Windows.Win32.System.SystemServices.Apis.RTL_RUN_ONCE_INIT_FAILED removed
+Windows.Win32.System.Threading.Apis.CONDITION_VARIABLE_INIT added
+Windows.Win32.System.Threading.Apis.INIT_ONCE_STATIC_INIT added
+Windows.Win32.System.Threading.Apis.SRWLOCK_INIT added
