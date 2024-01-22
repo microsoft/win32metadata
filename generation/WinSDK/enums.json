@@ -12141,6 +12141,10 @@
       {
         "struct": "MINIDUMP_SYSTEM_INFO",
         "field": "ProcessorArchitecture"
+      },
+      {
+        "struct": "SP_ALTPLATFORM_INFO_V2",
+        "field": "ProcessorArchitecture"
       }
     ]
   },

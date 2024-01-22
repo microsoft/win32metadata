@@ -22,3 +22,6 @@ Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPEMOD_ARRAY removed
 Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPEMOD_LIST removed
 Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPEMOD_ARRAY added
 Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPEMOD_LIST added
+# Fixed #1816.
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_ALTPLATFORM_INFO_V2.ProcessorArchitecture(X64, Arm64)...System.UInt16 => Windows.Win32.System.SystemInformation.PROCESSOR_ARCHITECTURE
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_ALTPLATFORM_INFO_V2.ProcessorArchitecture(X86)...System.UInt16 => Windows.Win32.System.SystemInformation.PROCESSOR_ARCHITECTURE
