@@ -16,3 +16,4 @@
 #include <propidlbase.h>
 #include <coml2api.h>
 #include <propapi.h>
+#include "manual.h"
