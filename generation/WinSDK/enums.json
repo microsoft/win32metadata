@@ -37008,6 +37008,20 @@
         "parameter": "CreationFlags"
       }
     ]
+  },
+  {
+    "name": "SETUP_DI_DRIVER_INSTALL_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DNF_",
+      "header": "setupapi.h"
+    },
+    "uses": [
+      {
+        "struct": "SP_DRVINSTALL_PARAMS",
+        "field": "Flags"
+      }
+    ]
   }
 ]
 }
