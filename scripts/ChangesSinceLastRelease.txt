@@ -14,3 +14,6 @@ Windows.Win32.System.SystemServices.Apis.RTL_RUN_ONCE_INIT_FAILED removed
 Windows.Win32.System.Threading.Apis.CONDITION_VARIABLE_INIT added
 Windows.Win32.System.Threading.Apis.INIT_ONCE_STATIC_INIT added
 Windows.Win32.System.Threading.Apis.SRWLOCK_INIT added
+# Restore StgConvertPropertyToVariant
+Windows.Win32.System.Com.StructuredStorage.Apis.StgConvertPropertyToVariant added
+Windows.Win32.System.Com.StructuredStorage.IMemoryAllocator added
