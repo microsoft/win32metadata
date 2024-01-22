@@ -36965,6 +36965,31 @@
         "field": "usFlags"
       }
     ]
+  },
+  {
+    "name": "SETUP_DI_REGISTRY_PROPERTY",
+    "autoPopulate": {
+      "filter": "SPDRP_",
+      "header": "setupapi.h"
+    },
+    "uses": [
+      {
+        "method": "SetupDiGetDeviceRegistryPropertyA",
+        "parameter": "Property"
+      },
+      {
+        "method": "SetupDiGetDeviceRegistryPropertyW",
+        "parameter": "Property"
+      },
+      {
+        "method": "SetupDiSetDeviceRegistryPropertyA",
+        "parameter": "Property"
+      },
+      {
+        "method": "SetupDiSetDeviceRegistryPropertyW",
+        "parameter": "Property"
+      }
+    ]
   }
 ]
 }
