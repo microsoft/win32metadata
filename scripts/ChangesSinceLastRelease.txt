@@ -17,3 +17,8 @@ Windows.Win32.System.Threading.Apis.SRWLOCK_INIT added
 # Restore StgConvertPropertyToVariant
 Windows.Win32.System.Com.StructuredStorage.Apis.StgConvertPropertyToVariant added
 Windows.Win32.System.Com.StructuredStorage.IMemoryAllocator added
+# Fixed #1818.
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPEMOD_ARRAY removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPEMOD_LIST removed
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPEMOD_ARRAY added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPEMOD_LIST added
