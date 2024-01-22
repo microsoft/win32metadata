@@ -183,3 +183,6 @@ Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.
 Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_UNUSED2 added
 Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DRVINSTALL_PARAMS.Flags(X64, Arm64)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS
 Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DRVINSTALL_PARAMS.Flags(X86)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS
+# Fixed #1829.
+Windows.Win32.System.Com.IMoniker.BindToObject : ppvResult : [Out] => [ComOutPtr,Out]
+Windows.Win32.System.Com.IMoniker.BindToStorage : ppvObj : [Out] => [ComOutPtr,Out]
