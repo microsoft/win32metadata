@@ -107,3 +107,11 @@ Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPD
 Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_UNUSED1 added
 Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_UNUSED2 added
 Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_UPPERFILTERS added
+# Fixed #1808.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICD_GENERATE_ID removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICD_INHERIT_CLASSDRVS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiCreateDeviceInfoA : CreationFlags...UInt32 => SETUP_DI_DEVICE_CREATION_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiCreateDeviceInfoW : CreationFlags...UInt32 => SETUP_DI_DEVICE_CREATION_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CREATION_FLAGS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CREATION_FLAGS.DICD_GENERATE_ID added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CREATION_FLAGS.DICD_INHERIT_CLASSDRVS added

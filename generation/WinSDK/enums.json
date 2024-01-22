@@ -36990,6 +36990,24 @@
         "parameter": "Property"
       }
     ]
+  },
+  {
+    "name": "SETUP_DI_DEVICE_CREATION_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DICD_",
+      "header": "setupapi.h"
+    },
+    "uses": [
+      {
+        "method": "SetupDiCreateDeviceInfoA",
+        "parameter": "CreationFlags"
+      },
+      {
+        "method": "SetupDiCreateDeviceInfoW",
+        "parameter": "CreationFlags"
+      }
+    ]
   }
 ]
 }
