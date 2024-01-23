@@ -285,6 +285,7 @@ DEPRECATED_CLR_API_MESG=Windows.Win32.System.ClrHosting
 # endregion mscoree.h
 # region mssip.h
 MS_ADDINFO_CATALOGMEMBER=Windows.Win32.Security.Cryptography.Catalog
+SIP_INDIRECT_DATA=Windows.Win32.Security.Cryptography
 # endregion mssip.h
 # region ntifs.h
 RtlConvertSidToUnicodeString=Windows.Win32.Security
@@ -433,7 +434,6 @@ ILayoutStorage=Windows.Win32.System.Com.StructuredStorage
 ILockBytes=Windows.Win32.System.Com.StructuredStorage
 IRootStorage=Windows.Win32.System.Com.StructuredStorage
 #ISequentialStream=Windows.Win32.System.Com.StructuredStorage
-IStorage=Windows.Win32.System.Com.StructuredStorage
 #IStream=Windows.Win32.System.Com.StructuredStorage
 #IPersistStream=Windows.Win32.System.Com.StructuredStorage
 IPersistStorage=Windows.Win32.System.Com.StructuredStorage
@@ -714,6 +714,9 @@ GetSystemCpuSetInformation=Windows.Win32.System.SystemInformation
 # region tvout.h
 VIDEOPARAMETERS=Windows.Win32.Devices.Display
 # endregion tvout.h
+# region unknwn.h
+IUnknown=Windows.Win32.Foundation
+# endregion unknwnbase.h
 # region unknwnbase.h
 IUnknown_AddRef_Proxy=Windows.Win32.System.Rpc
 IUnknown_QueryInterface_Proxy=Windows.Win32.System.Rpc
