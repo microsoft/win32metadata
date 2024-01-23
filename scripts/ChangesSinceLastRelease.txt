@@ -195,17 +195,25 @@ Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICS_FLAG_GLOBAL removed
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICS_PROPCHANGE removed
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICS_START removed
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICS_STOP removed
-Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_SCOPE added
-Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_SCOPE.DICS_FLAG_CONFIGGENERAL added
-Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_SCOPE.DICS_FLAG_CONFIGSPECIFIC added
-Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_SCOPE.DICS_FLAG_GLOBAL added
 Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE added
 Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE.DICS_DISABLE added
 Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE.DICS_ENABLE added
 Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE.DICS_PROPCHANGE added
 Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE.DICS_START added
 Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE.DICS_STOP added
-Windows.Win32.Devices.DeviceAndDriverInstallation.SP_PROPCHANGE_PARAMS.Scope(X64, Arm64)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_SCOPE
-Windows.Win32.Devices.DeviceAndDriverInstallation.SP_PROPCHANGE_PARAMS.Scope(X86)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_SCOPE
 Windows.Win32.Devices.DeviceAndDriverInstallation.SP_PROPCHANGE_PARAMS.StateChange(X64, Arm64)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE
 Windows.Win32.Devices.DeviceAndDriverInstallation.SP_PROPCHANGE_PARAMS.StateChange(X86)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE
+# Fixed #1803.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_REMOVEDEVICE_CONFIGSPECIFIC removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_REMOVEDEVICE_GLOBAL removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_PROPERTY_CHANGE_SCOPE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_PROPERTY_CHANGE_SCOPE.DICS_FLAG_CONFIGGENERAL added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_PROPERTY_CHANGE_SCOPE.DICS_FLAG_CONFIGSPECIFIC added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_PROPERTY_CHANGE_SCOPE.DICS_FLAG_GLOBAL added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REMOVE_DEVICE_SCOPE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REMOVE_DEVICE_SCOPE.DI_REMOVEDEVICE_CONFIGSPECIFIC added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REMOVE_DEVICE_SCOPE.DI_REMOVEDEVICE_GLOBAL added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_PROPCHANGE_PARAMS.Scope(X64, Arm64)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_PROPERTY_CHANGE_SCOPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_PROPCHANGE_PARAMS.Scope(X86)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_PROPERTY_CHANGE_SCOPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_REMOVEDEVICE_PARAMS.Scope(X64, Arm64)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REMOVE_DEVICE_SCOPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_REMOVEDEVICE_PARAMS.Scope(X86)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REMOVE_DEVICE_SCOPE

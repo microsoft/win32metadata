@@ -37037,7 +37037,7 @@
     ]
   },
   {
-    "name": "SETUP_DI_SCOPE",
+    "name": "SETUP_DI_PROPERTY_CHANGE_SCOPE",
     "autoPopulate": {
       "filter": "DICS_FLAG_",
       "header": "setupapi.h"
@@ -37045,6 +37045,19 @@
     "uses": [
       {
         "struct": "SP_PROPCHANGE_PARAMS",
+        "field": "Scope"
+      }
+    ]
+  },
+  {
+    "name": "SETUP_DI_REMOVE_DEVICE_SCOPE",
+    "autoPopulate": {
+      "filter": "DI_REMOVEDEVICE_",
+      "header": "setupapi.h"
+    },
+    "uses": [
+      {
+        "struct": "SP_REMOVEDEVICE_PARAMS",
         "field": "Scope"
       }
     ]
