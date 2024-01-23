@@ -15,3 +15,4 @@
 #include <mrmresourceindexer.h>
 #include <dbt.h>
 #include <ioevent.h>
+#include <iswindowarranged.h>

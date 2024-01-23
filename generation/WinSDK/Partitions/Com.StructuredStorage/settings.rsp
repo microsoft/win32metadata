@@ -5,10 +5,13 @@ FreePropVariantArray
 CoFileTimeNow
 CLSIDFromProgIDEx
 CreateDataAdviseHolder
+--remap
+PMemoryAllocator=IMemoryAllocator
 --traverse
 <IncludeRoot>/um/PropIdl.h
 <IncludeRoot>/um/PropIdlBase.h
 <IncludeRoot>/um/coml2api.h
 <IncludeRoot>/um/propapi.h
+<PartitionDir>/manual.h
 --namespace
 Windows.Win32.System.Com.StructuredStorage

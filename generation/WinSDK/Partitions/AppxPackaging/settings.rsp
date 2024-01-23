@@ -1,6 +1,8 @@
 --traverse
 <IncludeRoot>/um/AppxPackaging.h
 <IncludeRoot>/um/appmodel.h
+<IncludeRoot>/um/minappmodel.h
 <IncludeRoot>/um/packagevirtualizationcontext.h
+<IncludeRoot>/um/getcurrentpackageinfo3.h
 --namespace
 Windows.Win32.Storage.Packaging.Appx

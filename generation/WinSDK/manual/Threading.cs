@@ -12,6 +12,21 @@ namespace Windows.Win32.System.Threading
         public const uint WAIT_ABANDONED_0 = 0x00000080;
         public const uint WAIT_IO_COMPLETION = 0x000000C0;
 
+        public const uint CONDITION_VARIABLE_LOCKMODE_SHARED = 0x1;
+        public const uint INIT_ONCE_CHECK_ONLY = 0x00000001;
+        public const uint INIT_ONCE_ASYNC = 0x00000002;
+        public const uint INIT_ONCE_INIT_FAILED = 0x00000004;
+        public const uint INIT_ONCE_CTX_RESERVED_BITS = 2;
+
+        [Constant("0")]
+        public static CONDITION_VARIABLE CONDITION_VARIABLE_INIT;
+
+        [Constant("0")]
+        public static SRWLOCK SRWLOCK_INIT;
+
+        [Constant("0")]
+        public static INIT_ONCE INIT_ONCE_STATIC_INIT;
+
         [DllImport("FORCEINLINE")]
         [Constant("-4")]
         [return: DoNotRelease]

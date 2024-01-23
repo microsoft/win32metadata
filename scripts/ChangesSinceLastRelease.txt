@@ -1,439 +1,513 @@
-# Fixed #1733.
-Windows.Win32.UI.Controls.PFTASKDIALOGCALLBACK.Invoke : msg : [In] => [AssociatedEnum(TASKDIALOG_NOTIFICATIONS),In]
-#1736: AddSAPI Engine-Level Interfaces
-Windows.Win32.Media.Speech._ISpPrivateEngineCall added
-Windows.Win32.Media.Speech.ISpCFGInterpreter added
-Windows.Win32.Media.Speech.ISpCFGInterpreterSite added
-Windows.Win32.Media.Speech.ISpErrorLog added
-Windows.Win32.Media.Speech.ISpGramCompBackend added
-Windows.Win32.Media.Speech.ISpGrammarCompiler added
-Windows.Win32.Media.Speech.ISpITNProcessor added
-Windows.Win32.Media.Speech.ISpObjectTokenEnumBuilder added
-Windows.Win32.Media.Speech.ISpPhraseBuilder added
-Windows.Win32.Media.Speech.ISpPrivateEngineCallEx added
-Windows.Win32.Media.Speech.ISpSRAlternates added
-Windows.Win32.Media.Speech.ISpSRAlternates2 added
-Windows.Win32.Media.Speech.ISpSREngine added
-Windows.Win32.Media.Speech.ISpSREngine2 added
-Windows.Win32.Media.Speech.ISpSREngineSite added
-Windows.Win32.Media.Speech.ISpSREngineSite2 added
-Windows.Win32.Media.Speech.ISpTask added
-Windows.Win32.Media.Speech.ISpTaskManager added
-Windows.Win32.Media.Speech.ISpThreadControl added
-Windows.Win32.Media.Speech.ISpThreadTask added
-Windows.Win32.Media.Speech.ISpTokenUI added
-Windows.Win32.Media.Speech.ISpTTSEngine added
-Windows.Win32.Media.Speech.ISpTTSEngineSite added
-Windows.Win32.Media.Speech.SPCFGNOTIFY added
-Windows.Win32.Media.Speech.SPCFGNOTIFY.SPCFGN_ACTIVATE added
-Windows.Win32.Media.Speech.SPCFGNOTIFY.SPCFGN_ADD added
-Windows.Win32.Media.Speech.SPCFGNOTIFY.SPCFGN_DEACTIVATE added
-Windows.Win32.Media.Speech.SPCFGNOTIFY.SPCFGN_INVALIDATE added
-Windows.Win32.Media.Speech.SPCFGNOTIFY.SPCFGN_REMOVE added
-Windows.Win32.Media.Speech.SpDataKey added
-Windows.Win32.Media.Speech.SpGramCompBackend added
-Windows.Win32.Media.Speech.SpGrammarCompiler added
-Windows.Win32.Media.Speech.SpITNProcessor added
-Windows.Win32.Media.Speech.SpObjectTokenEnum added
-Windows.Win32.Media.Speech.SPPARSEINFO added
-Windows.Win32.Media.Speech.SPPATHENTRY added
-Windows.Win32.Media.Speech.SpPhraseBuilder added
-Windows.Win32.Media.Speech.SPPROPSRC added
-Windows.Win32.Media.Speech.SPPROPSRC.SPPROPSRC_RECO_CTX added
-Windows.Win32.Media.Speech.SPPROPSRC.SPPROPSRC_RECO_GRAMMAR added
-Windows.Win32.Media.Speech.SPPROPSRC.SPPROPSRC_RECO_INST added
-Windows.Win32.Media.Speech.SPRECORESULTINFO added
-Windows.Win32.Media.Speech.SPRECORESULTINFOEX added
-Windows.Win32.Media.Speech.SPRESULTTYPE added
-Windows.Win32.Media.Speech.SPRESULTTYPE.SPRT_CFG added
-Windows.Win32.Media.Speech.SPRESULTTYPE.SPRT_EMULATED added
-Windows.Win32.Media.Speech.SPRESULTTYPE.SPRT_EXTENDABLE_PARSE added
-Windows.Win32.Media.Speech.SPRESULTTYPE.SPRT_FALSE_RECOGNITION added
-Windows.Win32.Media.Speech.SPRESULTTYPE.SPRT_PROPRIETARY added
-Windows.Win32.Media.Speech.SPRESULTTYPE.SPRT_SLM added
-Windows.Win32.Media.Speech.SPRESULTTYPE.SPRT_TYPE_MASK added
-Windows.Win32.Media.Speech.SPRULEENTRY added
-Windows.Win32.Media.Speech.SPRULEINFOOPT added
-Windows.Win32.Media.Speech.SPRULEINFOOPT.SPRIO_NONE added
-Windows.Win32.Media.Speech.SPSTATEINFO added
-Windows.Win32.Media.Speech.SPTMTHREADINFO added
-Windows.Win32.Media.Speech.SPTRANSITIONENTRY added
-Windows.Win32.Media.Speech.SPTRANSITIONPROPERTY added
-Windows.Win32.Media.Speech.SPTRANSITIONTYPE added
-Windows.Win32.Media.Speech.SPTRANSITIONTYPE.SPTRANSDICTATION added
-Windows.Win32.Media.Speech.SPTRANSITIONTYPE.SPTRANSEPSILON added
-Windows.Win32.Media.Speech.SPTRANSITIONTYPE.SPTRANSRULE added
-Windows.Win32.Media.Speech.SPTRANSITIONTYPE.SPTRANSTEXTBUF added
-Windows.Win32.Media.Speech.SPTRANSITIONTYPE.SPTRANSWILDCARD added
-Windows.Win32.Media.Speech.SPTRANSITIONTYPE.SPTRANSWORD added
-Windows.Win32.Media.Speech.SPVESACTIONS added
-Windows.Win32.Media.Speech.SPVESACTIONS.SPVES_ABORT added
-Windows.Win32.Media.Speech.SPVESACTIONS.SPVES_CONTINUE added
-Windows.Win32.Media.Speech.SPVESACTIONS.SPVES_RATE added
-Windows.Win32.Media.Speech.SPVESACTIONS.SPVES_SKIP added
-Windows.Win32.Media.Speech.SPVESACTIONS.SPVES_VOLUME added
-Windows.Win32.Media.Speech.SPVSKIPTYPE added
-Windows.Win32.Media.Speech.SPVSKIPTYPE.SPVST_SENTENCE added
-Windows.Win32.Media.Speech.SPVTEXTFRAG added
-Windows.Win32.Media.Speech.SpW3CGrammarCompiler added
-Windows.Win32.Media.Speech.SPWORDENTRY added
-Windows.Win32.Media.Speech.SPWORDINFOOPT added
-Windows.Win32.Media.Speech.SPWORDINFOOPT.SPWIO_NONE added
-Windows.Win32.Media.Speech.SPWORDINFOOPT.SPWIO_WANT_TEXT added
-# Fixed #1739.
-Windows.Win32.Devices.DeviceAndDriverInstallation.DMA_RANGE.DR_Flags...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.DD_FLAGS
-Windows.Win32.Devices.DeviceAndDriverInstallation.IO_RANGE.IOR_RangeFlags...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.IOD_DESFLAGS
-Windows.Win32.Devices.DeviceAndDriverInstallation.IRQ_RANGE.IRQR_Flags...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.IRQD_FLAGS
-Windows.Win32.Devices.DeviceAndDriverInstallation.MEM_RANGE.MR_Flags...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.MD_FLAGS
-Windows.Win32.Media.Speech.SPPHRASEALT added
-Windows.Win32.Media.Speech.SPPHRASEALTREQUEST added
-# Fixed #1743.
-Windows.Win32.System.SystemInformation.Apis.GlobalMemoryStatusEx : lpBuffer : [Out] => [In,Out]
-# Fixed #1741.
-Windows.Win32.NetworkManagement.IpHelper.Apis.FreeInterfaceDnsSettings : return...WIN32_ERROR => Void
-Windows.Win32.NetworkManagement.IpHelper.Apis.FreeMibTable : return...WIN32_ERROR => Void
-# Correct HtmlHelp libs
-Windows.Win32.Data.HtmlHelp.Apis.HtmlHelpA : [Ansi,DllImport(htmlhelp.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/htmlhelp/nf-htmlhelp-htmlhelpa)] => [Ansi,DllImport(hhctrl.ocx,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/htmlhelp/nf-htmlhelp-htmlhelpa)]
-Windows.Win32.Data.HtmlHelp.Apis.HtmlHelpW : [DllImport(htmlhelp.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/htmlhelp/nf-htmlhelp-htmlhelpw),Unicode] => [DllImport(hhctrl.ocx,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/htmlhelp/nf-htmlhelp-htmlhelpw),Unicode]
-# Fixed #1740.
-Windows.Win32.Graphics.Gdi.Apis.LCS_CALIBRATED_RGB removed
-# Fixed namespace for #1740.
-Windows.Win32.UI.ColorSystem.LCSCSTYPE added
-Windows.Win32.UI.ColorSystem.LCSCSTYPE.LCS_CALIBRATED_RGB added
-Windows.Win32.UI.ColorSystem.LCSCSTYPE.LCS_sRGB added
-Windows.Win32.UI.ColorSystem.LCSCSTYPE.LCS_WINDOWS_COLOR_SPACE added
-Windows.Win32.UI.ColorSystem.LOGCOLORSPACEA.lcsCSType...System.Int32 => Windows.Win32.UI.ColorSystem.LCSCSTYPE
-Windows.Win32.UI.ColorSystem.LOGCOLORSPACEW.lcsCSType...System.Int32 => Windows.Win32.UI.ColorSystem.LCSCSTYPE
-# Fixed #1751.
-Windows.Win32.Devices.Bluetooth.Apis.BDIF_CONNECTION_INBOUND removed
-Windows.Win32.Devices.HumanInterfaceDevice.Apis.HID_USAGE_KEYBOARD_KEYPAD_0_AND_INSERT added
-Windows.Win32.Devices.HumanInterfaceDevice.Apis.HID_USAGE_KEYBOARD_KEYPAD_1_AND_END added
-Windows.Win32.Devices.Properties.Apis.DEVPKEY_Device_CompanionApps added
-Windows.Win32.Devices.Properties.Apis.DEVPKEY_Device_PrimaryCompanionApp added
-Windows.Win32.Devices.Sensors.HUMAN_PRESENCE_DETECTION_TYPE.HumanPresenceDetectionType_Undefined added
-Windows.Win32.Foundation.Apis.CONVERT10_E_OLELINK_DISABLED added
-Windows.Win32.Foundation.Apis.STATUS_CANT_ATTACH_TO_DEV_VOLUME added
-Windows.Win32.Foundation.Apis.STATUS_FS_GUID_MISMATCH added
-Windows.Win32.Foundation.Apis.STATUS_INVALID_CONFIG_VALUE added
-Windows.Win32.Foundation.Apis.STATUS_LAPS_ENCRYPTION_REQUIRES_2016_DFL added
-Windows.Win32.Foundation.Apis.STATUS_LAPS_LEGACY_SCHEMA_MISSING added
-Windows.Win32.Foundation.Apis.STATUS_LAPS_SCHEMA_MISSING added
-Windows.Win32.Foundation.Apis.STATUS_NOT_A_DEV_VOLUME added
-Windows.Win32.Foundation.Apis.STATUS_POLICY_CONTROLLED_ACCOUNT added
-Windows.Win32.Foundation.Apis.STATUS_SYSTEM_INTEGRITY_REPUTATION_EXPLICIT_DENY_FILE added
-Windows.Win32.Foundation.Apis.STATUS_VHD_UNEXPECTED_ID added
-Windows.Win32.Foundation.Apis.STATUS_VOLUME_UPGRADE_DISABLED added
-Windows.Win32.Foundation.Apis.STATUS_VOLUME_UPGRADE_DISABLED_TILL_OS_DOWNGRADE_EXPIRED added
-Windows.Win32.Foundation.Apis.STATUS_VOLUME_UPGRADE_NOT_NEEDED added
-Windows.Win32.Foundation.Apis.STATUS_VOLUME_UPGRADE_PENDING added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_CANT_ATTACH_TO_DEV_VOLUME added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_FS_GUID_MISMATCH added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_INVALID_CONFIG_VALUE added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_LAPS_ENCRYPTION_REQUIRES_2016_DFL added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_LAPS_LEGACY_SCHEMA_MISSING added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_LAPS_SCHEMA_MISSING added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_NOT_A_DEV_VOLUME added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_POLICY_CONTROLLED_ACCOUNT added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_SYSTEM_INTEGRITY_REPUTATION_EXPLICIT_DENY_FILE added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_VHD_UNEXPECTED_ID added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_VOLUME_UPGRADE_DISABLED added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_VOLUME_UPGRADE_DISABLED_TILL_OS_DOWNGRADE_EXPIRED added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_VOLUME_UPGRADE_NOT_NEEDED added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_VOLUME_UPGRADE_PENDING added
-Windows.Win32.Graphics.Direct2D.D2D1_GRADIENT_STOP => Windows.Win32.Graphics.Direct2D.Common.D2D1_GRADIENT_STOP
-Windows.Win32.Graphics.Direct2D.DWRITE_PAINT_FEATURE_LEVEL added
-Windows.Win32.Graphics.Direct2D.ID2D1Device7 added
-Windows.Win32.Graphics.Direct2D.ID2D1DeviceContext7 added
-Windows.Win32.Graphics.Direct2D.ID2D1Factory8 added
-Windows.Win32.Graphics.Direct3D11.D3D11_FORMAT_SUPPORT2.D3D11_FORMAT_SUPPORT2_DISPLAYABLE added
-Windows.Win32.Graphics.DirectComposition.IDCompositionDevice4 added
-Windows.Win32.Graphics.DirectComposition.IDCompositionTexture added
-Windows.Win32.Graphics.DirectWrite.Apis.DWRITE_NO_PALETTE_INDEX added
-Windows.Win32.Graphics.DirectWrite.DWRITE_BITMAP_DATA_BGRA32 added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_CLEAR added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_COLOR_BURN added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_COLOR_DODGE added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_DARKEN added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_DEST added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_DEST_ATOP added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_DEST_IN added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_DEST_OUT added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_DEST_OVER added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_DIFFERENCE added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_EXCLUSION added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_HARD_LIGHT added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_HSL_COLOR added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_HSL_HUE added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_HSL_LUMINOSITY added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_HSL_SATURATION added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_LIGHTEN added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_MULTIPLY added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_OVERLAY added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_PLUS added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_SCREEN added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_SOFT_LIGHT added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_SRC added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_SRC_ATOP added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_SRC_IN added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_SRC_OUT added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_SRC_OVER added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_XOR added
-Windows.Win32.Graphics.DirectWrite.DWRITE_GLYPH_IMAGE_FORMATS.DWRITE_GLYPH_IMAGE_FORMATS_COLR_PAINT_TREE added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_ATTRIBUTES added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_ATTRIBUTES.DWRITE_PAINT_ATTRIBUTES_NONE added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_ATTRIBUTES.DWRITE_PAINT_ATTRIBUTES_USES_PALETTE added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_ATTRIBUTES.DWRITE_PAINT_ATTRIBUTES_USES_TEXT_COLOR added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_COLOR added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_ELEMENT added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_FEATURE_LEVEL added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_FEATURE_LEVEL.DWRITE_PAINT_FEATURE_LEVEL_COLR_V0 added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_FEATURE_LEVEL.DWRITE_PAINT_FEATURE_LEVEL_COLR_V1 added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_FEATURE_LEVEL.DWRITE_PAINT_FEATURE_LEVEL_NONE added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE.DWRITE_PAINT_TYPE_COLOR_GLYPH added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE.DWRITE_PAINT_TYPE_COMPOSITE added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE.DWRITE_PAINT_TYPE_GLYPH added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE.DWRITE_PAINT_TYPE_LAYERS added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE.DWRITE_PAINT_TYPE_LINEAR_GRADIENT added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE.DWRITE_PAINT_TYPE_NONE added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE.DWRITE_PAINT_TYPE_RADIAL_GRADIENT added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE.DWRITE_PAINT_TYPE_SOLID added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE.DWRITE_PAINT_TYPE_SOLID_GLYPH added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE.DWRITE_PAINT_TYPE_SWEEP_GRADIENT added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE.DWRITE_PAINT_TYPE_TRANSFORM added
-Windows.Win32.Graphics.DirectWrite.IDWriteBitmapRenderTarget2 added
-Windows.Win32.Graphics.DirectWrite.IDWriteBitmapRenderTarget3 added
-Windows.Win32.Graphics.DirectWrite.IDWriteFactory8 added
-Windows.Win32.Graphics.DirectWrite.IDWriteFontFace7 added
-Windows.Win32.Graphics.DirectWrite.IDWritePaintReader added
-Windows.Win32.Graphics.Printing.Apis.SPLCLIENT_INFO_INTERNAL_LEVEL added
-Windows.Win32.Graphics.Printing.SPLCLIENT_INFO_INTERNAL added
-Windows.Win32.Management.MobileDeviceManagementRegistration.Apis.MENROLL_E_CUSTOMSERVERERROR added
-Windows.Win32.Management.MobileDeviceManagementRegistration.Apis.RegisterDeviceDualEnrollMmpcUsingAADDeviceCredentials removed
-Windows.Win32.Networking.Ldap.Apis.LDAP_OPT_CLDAP_TIMEOUT added
-Windows.Win32.Networking.Ldap.Apis.LDAP_OPT_CLDAP_TRIES added
-Windows.Win32.Networking.WindowsWebServices.Apis.CTAPCBOR_HYBRID_STORAGE_LINKED_DATA_CURRENT_VERSION added
-Windows.Win32.Networking.WindowsWebServices.Apis.CTAPCBOR_HYBRID_STORAGE_LINKED_DATA_VERSION_1 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_API_VERSION_5 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_API_VERSION_6 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_API_VERSION_7 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_ASSERTION_VERSION_4 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_ASSERTION_VERSION_5 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS_VERSION_7 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS_VERSION_6 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS_VERSION_7 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CREDENTIAL_ATTESTATION_VERSION_5 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CREDENTIAL_ATTESTATION_VERSION_6 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CREDENTIAL_DETAILS_VERSION_2 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CTAP_TRANSPORT_HYBRID added
-Windows.Win32.Networking.WindowsWebServices.CTAPCBOR_HYBRID_STORAGE_LINKED_DATA added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_ASSERTION.cbUnsignedExtensionOutputs added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_ASSERTION.dwUsedTransport added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_ASSERTION.pbUnsignedExtensionOutputs added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS.bAutoFill added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS.cbJsonExt added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS.pbJsonExt added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS.pLinkedDevice added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS.bEnablePrf added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS.cbJsonExt added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS.pbJsonExt added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS.pLinkedDevice added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_CREDENTIAL_ATTESTATION.bPrfEnabled added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_CREDENTIAL_ATTESTATION.cbUnsignedExtensionOutputs added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_CREDENTIAL_ATTESTATION.pbUnsignedExtensionOutputs added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_CREDENTIAL_DETAILS.bBackedUp added
-Windows.Win32.NetworkManagement.Dns.Apis.DNS_PROTOCOL_DOH added
-Windows.Win32.NetworkManagement.Dns.Apis.DNS_PROTOCOL_NO_WIRE added
-Windows.Win32.NetworkManagement.Dns.Apis.DNS_PROTOCOL_TCP added
-Windows.Win32.NetworkManagement.Dns.Apis.DNS_PROTOCOL_UDP added
-Windows.Win32.NetworkManagement.Dns.Apis.DNS_PROTOCOL_UNSPECIFIED added
-Windows.Win32.NetworkManagement.Dns.Apis.DnsCancelQueryRaw added
-Windows.Win32.NetworkManagement.Dns.Apis.DnsQueryRaw added
-Windows.Win32.NetworkManagement.Dns.Apis.DnsQueryRawResultFree added
-Windows.Win32.NetworkManagement.Dns.DNS_QUERY_OPTIONS.DNS_QUERY_RAW_OPTION_BEST_EFFORT_PARSE added
-Windows.Win32.NetworkManagement.Dns.DNS_QUERY_OPTIONS.DNS_QUERY_RAW_REQUEST_VERSION1 added
-Windows.Win32.NetworkManagement.Dns.DNS_QUERY_OPTIONS.DNS_QUERY_RAW_RESULTS_VERSION1 added
-Windows.Win32.NetworkManagement.Dns.DNS_QUERY_RAW_CANCEL added
-Windows.Win32.NetworkManagement.Dns.DNS_QUERY_RAW_COMPLETION_ROUTINE added
-Windows.Win32.NetworkManagement.Dns.DNS_QUERY_RAW_REQUEST added
-Windows.Win32.NetworkManagement.Dns.DNS_QUERY_RAW_RESULT added
-Windows.Win32.NetworkManagement.NetManagement.Apis.NETLOG_NetlogonRc4Allowed added
-Windows.Win32.NetworkManagement.NetManagement.Apis.NETLOG_NetlogonRc4Denied added
-Windows.Win32.NetworkManagement.NetManagement.Apis.NETLOG_NetlogonRpcSigningClient added
-Windows.Win32.NetworkManagement.NetManagement.Apis.NETLOG_NetlogonRpcSigningTrust added
-Windows.Win32.Security.Apis.SIGNING_LEVEL_FILE_CACHE_FLAG_NOT_VALIDATED added
-Windows.Win32.Security.Apis.SIGNING_LEVEL_FILE_CACHE_FLAG_VALIDATE_ONLY added
-Windows.Win32.Security.Apis.SIGNING_LEVEL_MICROSOFT added
-Windows.Win32.Security.Authentication.Identity.Apis.PRIMARY_CRED_FOR_PASSWORD_CHANGE added
-Windows.Win32.Security.Authentication.Identity.Apis.SEC_CHANNEL_BINDINGS_AUDIT_BINDINGS added
-Windows.Win32.Security.Authentication.Identity.Apis.SEC_CHANNEL_BINDINGS_RESULT_ABSENT added
-Windows.Win32.Security.Authentication.Identity.Apis.SEC_CHANNEL_BINDINGS_RESULT_CLIENT_SUPPORT added
-Windows.Win32.Security.Authentication.Identity.Apis.SEC_CHANNEL_BINDINGS_RESULT_NOTVALID_MISMATCH added
-Windows.Win32.Security.Authentication.Identity.Apis.SEC_CHANNEL_BINDINGS_RESULT_NOTVALID_MISSING added
-Windows.Win32.Security.Authentication.Identity.Apis.SEC_CHANNEL_BINDINGS_RESULT_VALID_MATCHED added
-Windows.Win32.Security.Authentication.Identity.Apis.SEC_CHANNEL_BINDINGS_RESULT_VALID_MISSING added
-Windows.Win32.Security.Authentication.Identity.Apis.SEC_CHANNEL_BINDINGS_RESULT_VALID_PROXY added
-Windows.Win32.Security.Authentication.Identity.Apis.SEC_CHANNEL_BINDINGS_VALID_FLAGS added
-Windows.Win32.Security.Authentication.Identity.Apis.SECBUFFER_CHANNEL_BINDINGS_RESULT added
-Windows.Win32.Security.Authentication.Identity.Apis.SspiSetChannelBindingFlags added
-Windows.Win32.Security.Authentication.Identity.Apis.TRUST_TYPE_AAD added
-Windows.Win32.Security.Authentication.Identity.POLICY_INFORMATION_CLASS.PolicyMachineAccountInformation2 added
-Windows.Win32.Security.Authentication.Identity.POLICY_MACHINE_ACCT_INFO2 added
-Windows.Win32.Security.Authentication.Identity.SEC_CHANNEL_BINDINGS_EX added
-Windows.Win32.Security.Authentication.Identity.SEC_CHANNEL_BINDINGS_RESULT added
-Windows.Win32.Security.Cryptography.Apis.NCRYPT_REQUIRE_KDS_LRPC_BIND_FLAG added
-Windows.Win32.Security.Cryptography.Apis.wszURI_NTDS_OBJECTSID_PREFIX added
-Windows.Win32.Security.Cryptography.Certificates.Apis.wszREGDISABLESECEXTENSION removed
-Windows.Win32.Security.Isolation.IIsolatedProcessLauncher added
-Windows.Win32.Security.Isolation.IIsolatedProcessLauncher2 added
-Windows.Win32.Security.WinTrust.CONFIG_CI_PROV_INFO_RESULT2 added
-Windows.Win32.Security.WinTrust.CONFIG_CI_PROV_INFO.result2 added
-Windows.Win32.Storage.EnhancedStorage.Apis.HOMEGROUPING_FREQUENT added
-Windows.Win32.Storage.EnhancedStorage.Apis.HOMEGROUPING_PINNED added
-Windows.Win32.Storage.EnhancedStorage.Apis.HOMEGROUPING_RECENT added
-Windows.Win32.Storage.EnhancedStorage.Apis.HOMEGROUPING_RECOMMENDATIONS added
-Windows.Win32.Storage.EnhancedStorage.Apis.HOMEGROUPING_UNSPECIFIED added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_ActivityInfo added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_Home_Grouping added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_Home_IsPinned added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_Home_ItemFolderPathDisplay added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_LocationEmptyString added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_MsGraph_CompositeId added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_MsGraph_DriveId added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_MsGraph_ItemId added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_MsGraph_RecommendationReason added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_MsGraph_RecommendationReferenceId added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_MsGraph_RecommendationResultSourceId added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_MsGraph_WebAccountId added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_StorageProviderFileCreatedBy added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_StorageProviderFileModifiedBy added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_StorageProviderState added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_StorageProviderTransferProgress added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_StorageProviderUIStatus added
-Windows.Win32.Storage.EnhancedStorage.Apis.STORAGEPROVIDERSTATE_ERROR added
-Windows.Win32.Storage.EnhancedStorage.Apis.STORAGEPROVIDERSTATE_EXCLUDED added
-Windows.Win32.Storage.EnhancedStorage.Apis.STORAGEPROVIDERSTATE_IN_SYNC added
-Windows.Win32.Storage.EnhancedStorage.Apis.STORAGEPROVIDERSTATE_NONE added
-Windows.Win32.Storage.EnhancedStorage.Apis.STORAGEPROVIDERSTATE_PENDING_DOWNLOAD added
-Windows.Win32.Storage.EnhancedStorage.Apis.STORAGEPROVIDERSTATE_PENDING_UNSPECIFIED added
-Windows.Win32.Storage.EnhancedStorage.Apis.STORAGEPROVIDERSTATE_PENDING_UPLOAD added
-Windows.Win32.Storage.EnhancedStorage.Apis.STORAGEPROVIDERSTATE_PINNED added
-Windows.Win32.Storage.EnhancedStorage.Apis.STORAGEPROVIDERSTATE_SPARSE added
-Windows.Win32.Storage.EnhancedStorage.Apis.STORAGEPROVIDERSTATE_TRANSFERRING added
-Windows.Win32.Storage.EnhancedStorage.Apis.STORAGEPROVIDERSTATE_WARNING added
-Windows.Win32.Storage.Vhd.ATTACH_VIRTUAL_DISK_FLAG.ATTACH_VIRTUAL_DISK_FLAG_AT_BOOT added
-Windows.Win32.System.Diagnostics.Debug.BUGCHECK_ERROR.MSSECCORE_ASSERTION_FAILURE added
-Windows.Win32.System.Ioctl.Apis.CHECKSUM_TYPE_SHA256 added
-Windows.Win32.System.Ioctl.Apis.CHECKSUM_TYPE_UNCHANGED removed
-Windows.Win32.System.Ioctl.Apis.FSCTL_CLEAR_ALL_LCN_WEAK_REFERENCES added
-Windows.Win32.System.Ioctl.Apis.FSCTL_CLEAR_LCN_WEAK_REFERENCE added
-Windows.Win32.System.Ioctl.Apis.FSCTL_DELETE_LCN_WEAK_REFERENCE removed
-Windows.Win32.System.Ioctl.Apis.FSCTL_DELETE_LCN_WEAK_REFERENCES removed
-Windows.Win32.System.Ioctl.Apis.FSCTL_REFS_CHECKPOINT_VOLUME added
-Windows.Win32.System.Ioctl.Apis.FSCTL_REFS_QUERY_VOLUME_IO_METRICS_INFO added
-Windows.Win32.System.Ioctl.Apis.FSCTL_REFS_QUERY_VOLUME_TOTAL_SHARED_LCNS added
-Windows.Win32.System.Ioctl.Apis.FSCTL_REFS_SET_VOLUME_IO_METRICS_INFO added
-Windows.Win32.System.Ioctl.Apis.FSCTL_UPGRADE_VOLUME added
-Windows.Win32.System.Ioctl.Apis.PERSISTENT_VOLUME_STATE_DEV_VOLUME added
-Windows.Win32.System.Ioctl.Apis.PERSISTENT_VOLUME_STATE_TRUSTED_VOLUME added
-Windows.Win32.System.Ioctl.Apis.REQUEST_OPLOCK_OUTPUT_FLAG_WRITABLE_SECTION_PRESENT added
-Windows.Win32.System.Ioctl.REFS_VOLUME_DATA_BUFFER.MetadataChecksumType added
-Windows.Win32.System.Ioctl.REFS_VOLUME_DATA_BUFFER.Reserved0 added
-Windows.Win32.System.Ole.Apis.OleConvertOLESTREAMToIStorage2 added
-Windows.Win32.System.Ole.Apis.OleConvertOLESTREAMToIStorageEx2 added
-Windows.Win32.System.Ole.Apis.OLESTREAM_CONVERSION_DEFAULT added
-Windows.Win32.System.Ole.Apis.OLESTREAM_CONVERSION_DISABLEOLELINK added
-Windows.Win32.System.Ole.OLESTREAMQUERYCONVERTOLELINKCALLBACK added
-Windows.Win32.System.ProcessStatus.Apis.GetProcessMemoryInfo : ppsmemCounters : [In,Out] => [MemorySize(BytesParamIndex=2),Out]
-Windows.Win32.System.ProcessStatus.Apis.K32GetProcessMemoryInfo : ppsmemCounters : [In,Out] => [MemorySize(BytesParamIndex=2),Out]
-Windows.Win32.System.ProcessStatus.PROCESS_MEMORY_COUNTERS_EX2 added
-Windows.Win32.System.RemoteDesktop.IWRdsWddmIddProps1 added
-Windows.Win32.System.Search.Apis.EVENT_GATHER_INPLACE_INDEX_REBUILD added
-Windows.Win32.System.SystemInformation.Apis.GetDeveloperDriveEnablementState added
-Windows.Win32.System.SystemInformation.DEVELOPER_DRIVE_ENABLEMENT_STATE added
-Windows.Win32.System.SystemInformation.DEVELOPER_DRIVE_ENABLEMENT_STATE.DeveloperDriveDisabledByGroupPolicy added
-Windows.Win32.System.SystemInformation.DEVELOPER_DRIVE_ENABLEMENT_STATE.DeveloperDriveDisabledBySystemPolicy added
-Windows.Win32.System.SystemInformation.DEVELOPER_DRIVE_ENABLEMENT_STATE.DeveloperDriveEnabled added
-Windows.Win32.System.SystemInformation.DEVELOPER_DRIVE_ENABLEMENT_STATE.DeveloperDriveEnablementStateError added
-Windows.Win32.System.SystemServices.Apis.GUID_HUPR_ADAPTIVE_AWAY_DIM_TIMEOUT added
-Windows.Win32.System.SystemServices.Apis.GUID_HUPR_ADAPTIVE_AWAY_DISPLAY_TIMEOUT added
-Windows.Win32.System.SystemServices.Apis.GUID_HUPR_ADAPTIVE_DIM_TIMEOUT removed
-Windows.Win32.System.SystemServices.Apis.GUID_HUPR_ADAPTIVE_DISPLAY_TIMEOUT removed
-Windows.Win32.System.SystemServices.Apis.GUID_HUPR_ADAPTIVE_INATTENTIVE_DIM_TIMEOUT added
-Windows.Win32.System.SystemServices.Apis.GUID_HUPR_ADAPTIVE_INATTENTIVE_DISPLAY_TIMEOUT added
-Windows.Win32.System.SystemServices.Apis.IO_REPARSE_TAG_RESERVED_INVALID added
-Windows.Win32.System.SystemServices.PROCESS_MITIGATION_ACTIVATION_CONTEXT_TRUST_POLICY added
-Windows.Win32.System.SystemServices.PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY._Anonymous_e__Union._Anonymous_e__Struct._bitfield : [NativeBitfield(DisallowWin32kSystemCalls,0,1),NativeBitfield(AuditDisallowWin32kSystemCalls,1,1),NativeBitfield(ReservedFlags,2,30)] => [NativeBitfield(DisallowWin32kSystemCalls,0,1),NativeBitfield(AuditDisallowWin32kSystemCalls,1,1),NativeBitfield(DisallowFsctlSystemCalls,2,1),NativeBitfield(AuditDisallowFsctlSystemCalls,3,1),NativeBitfield(ReservedFlags,4,28)]
-Windows.Win32.System.Threading.OVERRIDE_PREFETCH_PARAMETER added
-Windows.Win32.System.Threading.PROCESS_INFORMATION_CLASS.ProcessMaxOverridePrefetchParameter added
-Windows.Win32.System.Threading.PROCESS_INFORMATION_CLASS.ProcessOverrideSubsequentPrefetchParameter added
-Windows.Win32.System.Threading.PROCESS_MITIGATION_POLICY.ProcessActivationContextTrustPolicy added
-Windows.Win32.System.UpdateAgent.Apis.WU_E_PT_DATA_BOUNDARY_RESTRICTED added
-Windows.Win32.System.UpdateAgent.Apis.WU_E_PT_GENERAL_AAD_CLIENT_ERROR added
-Windows.Win32.System.UpdateAgent.Apis.WU_S_AAD_DEVICE_TICKET_NOT_NEEDED added
-Windows.Win32.System.WindowsProgramming.Apis.FILE_FLAG_IGNORE_IMPERSONATED_DEVICEMAP added
-Windows.Win32.System.WinRT.Composition.ICompositionTextureInterop added
-Windows.Win32.System.WinRT.Composition.ICompositorInterop2 added
-Windows.Win32.System.WinRT.ICoreInputInterop2 added
-Windows.Win32.UI.Controls.RichEdit.Apis.EM_SETDISABLEOLELINKCONVERSION added
-Windows.Win32.UI.Controls.RichEdit.Apis.EM_SETQUERYCONVERTOLELINKCALLBACK added
-Windows.Win32.UI.Shell.Apis.CLSID_CUrlHistoryBoth added
-Windows.Win32.UI.Shell.Apis.COPYENGINE_S_PENDING_DELETE added
-winmd1: Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_API_CURRENT_VERSION = 4, winmd2 = 7
-winmd1: Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_ASSERTION_CURRENT_VERSION = 3, winmd2 = 5
-winmd1: Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS_CURRENT_VERSION = 6, winmd2 = 7
-winmd1: Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS_CURRENT_VERSION = 5, winmd2 = 7
-winmd1: Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CREDENTIAL_ATTESTATION_CURRENT_VERSION = 4, winmd2 = 6
-winmd1: Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CREDENTIAL_DETAILS_CURRENT_VERSION = 1, winmd2 = 2
-winmd1: Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CTAP_TRANSPORT_FLAGS_MASK = 31, winmd2 = 63
-winmd1: Windows.Win32.Security.Authentication.Identity.POLICY_INFORMATION_CLASS.PolicyLastEntry = 16, winmd2 = 17
-winmd1: Windows.Win32.System.Ioctl.Apis.CHECKSUM_TYPE_FIRST_UNUSED_TYPE = 4, winmd2 = 5
-winmd1: Windows.Win32.System.Threading.PROCESS_INFORMATION_CLASS.ProcessInformationClassMax = 10, winmd2 = 12
-winmd1: Windows.Win32.System.Threading.PROCESS_MITIGATION_POLICY.MaxProcessMitigationPolicy = 19, winmd2 = 20
-# Fixed #1745.
-Windows.Win32.Networking.WinSock.Apis.WSAID_MULTIPLE_RIO added
-Windows.Win32.Networking.WinSock.Apis.WSAID_WSASENDMSG added
-Windows.Win32.Security.Cryptography.UI.Apis.CERT_CERTIFICATE_ACTION_VERIFY added
-Windows.Win32.System.Performance.Apis.PERF_AGGREGATE_MAX removed
-Windows.Win32.System.Performance.PERF_COUNTER_AGGREGATE_FUNC.PERF_AGGREGATE_MAX added
-# Adjust NOTIFYICONDATA flags, types
-Windows.Win32.UI.Shell.NOTIFY_ICON_INFOTIP_FLAGS :  => [Flags]
-Windows.Win32.UI.Shell.NOTIFY_ICON_STATE :  => [Flags]
-Windows.Win32.UI.Shell.NOTIFYICONDATAA.dwStateMask(X64, Arm64)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
-Windows.Win32.UI.Shell.NOTIFYICONDATAA.dwStateMask(X86)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
-Windows.Win32.UI.Shell.NOTIFYICONDATAW.dwStateMask(X64, Arm64)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
-Windows.Win32.UI.Shell.NOTIFYICONDATAW.dwStateMask(X86)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
-# Fixed #1787.
-Windows.Win32.Media.Audio.Apis.DEVICE_STATE_ACTIVE removed
-Windows.Win32.Media.Audio.Apis.DEVICE_STATE_DISABLED removed
-Windows.Win32.Media.Audio.Apis.DEVICE_STATE_NOTPRESENT removed
-Windows.Win32.Media.Audio.Apis.DEVICE_STATE_UNPLUGGED removed
-Windows.Win32.Media.Audio.DEVICE_STATE added
-Windows.Win32.Media.Audio.DEVICE_STATE.DEVICE_STATE_ACTIVE added
-Windows.Win32.Media.Audio.DEVICE_STATE.DEVICE_STATE_DISABLED added
-Windows.Win32.Media.Audio.DEVICE_STATE.DEVICE_STATE_NOTPRESENT added
-Windows.Win32.Media.Audio.DEVICE_STATE.DEVICE_STATE_UNPLUGGED added
-Windows.Win32.Media.Audio.IMMDevice.GetState : return...HRESULT => DEVICE_STATE
-Windows.Win32.Media.Audio.IMMDeviceEnumerator.EnumAudioEndpoints : dwStateMask...UInt32 => DEVICE_STATE
-Windows.Win32.Media.Audio.IMMNotificationClient.OnDeviceStateChanged : dwNewState...UInt32 => DEVICE_STATE
-# Fixed #1786.
-Windows.Win32.Devices.HumanInterfaceDevice.Apis.MOUSE_ATTRIBUTES_CHANGED removed
-Windows.Win32.Devices.HumanInterfaceDevice.Apis.MOUSE_MOVE_ABSOLUTE removed
-Windows.Win32.Devices.HumanInterfaceDevice.Apis.MOUSE_MOVE_NOCOALESCE removed
-Windows.Win32.Devices.HumanInterfaceDevice.Apis.MOUSE_MOVE_RELATIVE removed
-Windows.Win32.Devices.HumanInterfaceDevice.Apis.MOUSE_VIRTUAL_DESKTOP removed
-Windows.Win32.UI.Input.MOUSE_STATE added
-Windows.Win32.UI.Input.MOUSE_STATE.MOUSE_ATTRIBUTES_CHANGED added
-Windows.Win32.UI.Input.MOUSE_STATE.MOUSE_MOVE_ABSOLUTE added
-Windows.Win32.UI.Input.MOUSE_STATE.MOUSE_MOVE_NOCOALESCE added
-Windows.Win32.UI.Input.MOUSE_STATE.MOUSE_MOVE_RELATIVE added
-Windows.Win32.UI.Input.MOUSE_STATE.MOUSE_VIRTUAL_DESKTOP added
-Windows.Win32.UI.Input.RAWMOUSE.usFlags...System.UInt16 => Windows.Win32.UI.Input.MOUSE_STATE
-# Fixed #1779.
-Windows.Win32.System.Power.Apis.RegisterPowerSettingNotification : Flags...UInt32 => REGISTER_NOTIFICATION_FLAGS
-# Fixed #1774.
-Windows.Win32.UI.Shell.Apis.SHCreateItemInKnownFolder : dwKFFlags : [In] => [AssociatedEnum(KNOWN_FOLDER_FLAG),In]
-# Fixed #1780.
-Windows.Win32.System.WindowsProgramming.FILE_INFORMATION_CLASS removed
-Windows.Win32.System.WindowsProgramming.FILE_INFORMATION_CLASS.FileDirectoryInformation removed
+# Fixed #1788.
+Windows.Win32.System.SystemServices.Apis.RTL_CONDITION_VARIABLE_LOCKMODE_SHARED removed
+Windows.Win32.System.SystemServices.Apis.RTL_CRITICAL_SECTION_ALL_FLAG_BITS => Windows.Win32.System.Threading.Apis.RTL_CRITICAL_SECTION_ALL_FLAG_BITS
+Windows.Win32.System.SystemServices.Apis.RTL_CRITICAL_SECTION_DEBUG_FLAG_STATIC_INIT => Windows.Win32.System.Threading.Apis.RTL_CRITICAL_SECTION_DEBUG_FLAG_STATIC_INIT
+Windows.Win32.System.SystemServices.Apis.RTL_CRITICAL_SECTION_FLAG_DYNAMIC_SPIN => Windows.Win32.System.Threading.Apis.RTL_CRITICAL_SECTION_FLAG_DYNAMIC_SPIN
+Windows.Win32.System.SystemServices.Apis.RTL_CRITICAL_SECTION_FLAG_FORCE_DEBUG_INFO => Windows.Win32.System.Threading.Apis.RTL_CRITICAL_SECTION_FLAG_FORCE_DEBUG_INFO
+Windows.Win32.System.SystemServices.Apis.RTL_CRITICAL_SECTION_FLAG_NO_DEBUG_INFO => Windows.Win32.System.Threading.Apis.RTL_CRITICAL_SECTION_FLAG_NO_DEBUG_INFO
+Windows.Win32.System.SystemServices.Apis.RTL_CRITICAL_SECTION_FLAG_RESOURCE_TYPE => Windows.Win32.System.Threading.Apis.RTL_CRITICAL_SECTION_FLAG_RESOURCE_TYPE
+Windows.Win32.System.SystemServices.Apis.RTL_CRITICAL_SECTION_FLAG_STATIC_INIT => Windows.Win32.System.Threading.Apis.RTL_CRITICAL_SECTION_FLAG_STATIC_INIT
+Windows.Win32.System.SystemServices.Apis.RTL_RUN_ONCE_ASYNC removed
+Windows.Win32.System.SystemServices.Apis.RTL_RUN_ONCE_CHECK_ONLY removed
+Windows.Win32.System.SystemServices.Apis.RTL_RUN_ONCE_CTX_RESERVED_BITS removed
+Windows.Win32.System.SystemServices.Apis.RTL_RUN_ONCE_INIT_FAILED removed
+Windows.Win32.System.Threading.Apis.CONDITION_VARIABLE_INIT added
+Windows.Win32.System.Threading.Apis.INIT_ONCE_STATIC_INIT added
+Windows.Win32.System.Threading.Apis.SRWLOCK_INIT added
+# Restore StgConvertPropertyToVariant
+Windows.Win32.System.Com.StructuredStorage.Apis.StgConvertPropertyToVariant added
+Windows.Win32.System.Com.StructuredStorage.IMemoryAllocator added
+# Fixed #1818.
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPEMOD_ARRAY removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPEMOD_LIST removed
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPEMOD_ARRAY added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPEMOD_LIST added
+# Fixed #1816.
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_ALTPLATFORM_INFO_V2.ProcessorArchitecture(X64, Arm64)...System.UInt16 => Windows.Win32.System.SystemInformation.PROCESSOR_ARCHITECTURE
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_ALTPLATFORM_INFO_V2.ProcessorArchitecture(X86)...System.UInt16 => Windows.Win32.System.SystemInformation.PROCESSOR_ARCHITECTURE
+# Fixed 1809.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetDeviceRegistryPropertyA : Property...UInt32 => SETUP_DI_REGISTRY_PROPERTY
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetDeviceRegistryPropertyW : Property...UInt32 => SETUP_DI_REGISTRY_PROPERTY
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiSetDeviceRegistryPropertyA : Property...UInt32 => SETUP_DI_REGISTRY_PROPERTY
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiSetDeviceRegistryPropertyW : Property...UInt32 => SETUP_DI_REGISTRY_PROPERTY
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_ADDRESS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_BASE_CONTAINERID removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_BUSNUMBER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_BUSTYPEGUID removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_CAPABILITIES removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_CHARACTERISTICS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_CLASS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_CLASSGUID removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_COMPATIBLEIDS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_CONFIGFLAGS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_DEVICE_POWER_DATA removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_DEVICEDESC removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_DEVTYPE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_DRIVER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_ENUMERATOR_NAME removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_EXCLUSIVE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_FRIENDLYNAME removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_HARDWAREID removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_INSTALL_STATE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_LEGACYBUSTYPE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_LOCATION_INFORMATION removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_LOCATION_PATHS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_LOWERFILTERS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_MAXIMUM_PROPERTY removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_MFG removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_PHYSICAL_DEVICE_OBJECT_NAME removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_REMOVAL_POLICY removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_REMOVAL_POLICY_HW_DEFAULT removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_REMOVAL_POLICY_OVERRIDE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_SECURITY removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_SECURITY_SDS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_SERVICE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_UI_NUMBER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_UI_NUMBER_DESC_FORMAT removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_UNUSED0 removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_UNUSED1 removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_UNUSED2 removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SPDRP_UPPERFILTERS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_ADDRESS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_BASE_CONTAINERID added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_BUSNUMBER added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_BUSTYPEGUID added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_CAPABILITIES added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_CHARACTERISTICS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_CLASS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_CLASSGUID added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_COMPATIBLEIDS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_CONFIGFLAGS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_DEVICE_POWER_DATA added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_DEVICEDESC added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_DEVTYPE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_DRIVER added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_ENUMERATOR_NAME added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_EXCLUSIVE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_FRIENDLYNAME added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_HARDWAREID added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_INSTALL_STATE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_LEGACYBUSTYPE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_LOCATION_INFORMATION added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_LOCATION_PATHS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_LOWERFILTERS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_MAXIMUM_PROPERTY added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_MFG added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_PHYSICAL_DEVICE_OBJECT_NAME added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_REMOVAL_POLICY added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_REMOVAL_POLICY_HW_DEFAULT added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_REMOVAL_POLICY_OVERRIDE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_SECURITY added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_SECURITY_SDS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_SERVICE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_UI_NUMBER added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_UI_NUMBER_DESC_FORMAT added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_UNUSED0 added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_UNUSED1 added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_UNUSED2 added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REGISTRY_PROPERTY.SPDRP_UPPERFILTERS added
+# Fixed #1808.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICD_GENERATE_ID removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICD_INHERIT_CLASSDRVS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiCreateDeviceInfoA : CreationFlags...UInt32 => SETUP_DI_DEVICE_CREATION_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiCreateDeviceInfoW : CreationFlags...UInt32 => SETUP_DI_DEVICE_CREATION_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CREATION_FLAGS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CREATION_FLAGS.DICD_GENERATE_ID added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CREATION_FLAGS.DICD_INHERIT_CLASSDRVS added
+# Fixed #1807.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_ALWAYSEXCLUDEFROMLIST removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_AUTHENTICODE_SIGNED removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_BAD_DRIVER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_BASIC_DRIVER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_CLASS_DRIVER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_COMPATIBLE_DRIVER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_DUPDESC removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_DUPDRIVERVER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_DUPPROVIDER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_EXCLUDEFROMLIST removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_INBOX_DRIVER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_INET_DRIVER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_INF_IS_SIGNED removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_INSTALLEDDRIVER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_LEGACYINF removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_NODRIVER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_OEM_F6_INF removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_OLD_INET_DRIVER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_OLDDRIVER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_REQUESTADDITIONALSOFTWARE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_UNUSED_22 removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_UNUSED_23 removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_UNUSED_24 removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_UNUSED_25 removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_UNUSED_26 removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_UNUSED_27 removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_UNUSED_28 removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_UNUSED_29 removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_UNUSED_30 removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_UNUSED_31 removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_UNUSED1 removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DNF_UNUSED2 removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_ALWAYSEXCLUDEFROMLIST added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_AUTHENTICODE_SIGNED added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_BAD_DRIVER added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_BASIC_DRIVER added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_CLASS_DRIVER added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_COMPATIBLE_DRIVER added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_DUPDESC added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_DUPDRIVERVER added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_DUPPROVIDER added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_EXCLUDEFROMLIST added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_INBOX_DRIVER added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_INET_DRIVER added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_INF_IS_SIGNED added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_INSTALLEDDRIVER added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_LEGACYINF added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_NODRIVER added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_OEM_F6_INF added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_OLD_INET_DRIVER added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_OLDDRIVER added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_REQUESTADDITIONALSOFTWARE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_UNUSED_22 added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_UNUSED_23 added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_UNUSED_24 added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_UNUSED_25 added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_UNUSED_26 added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_UNUSED_27 added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_UNUSED_28 added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_UNUSED_29 added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_UNUSED_30 added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_UNUSED_31 added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_UNUSED1 added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS.DNF_UNUSED2 added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DRVINSTALL_PARAMS.Flags(X64, Arm64)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DRVINSTALL_PARAMS.Flags(X86)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DRIVER_INSTALL_FLAGS
+# Fixed #1829.
+Windows.Win32.System.Com.IMoniker.BindToObject : ppvResult : [Out] => [ComOutPtr,Out]
+Windows.Win32.System.Com.IMoniker.BindToStorage : ppvObj : [Out] => [ComOutPtr,Out]
+# Fixed #1806.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICS_DISABLE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICS_ENABLE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICS_FLAG_CONFIGGENERAL removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICS_FLAG_CONFIGSPECIFIC removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICS_FLAG_GLOBAL removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICS_PROPCHANGE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICS_START removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICS_STOP removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE.DICS_DISABLE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE.DICS_ENABLE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE.DICS_PROPCHANGE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE.DICS_START added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE.DICS_STOP added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_PROPCHANGE_PARAMS.StateChange(X64, Arm64)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_PROPCHANGE_PARAMS.StateChange(X86)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE
+# Fixed #1803.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_REMOVEDEVICE_CONFIGSPECIFIC removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_REMOVEDEVICE_GLOBAL removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_PROPERTY_CHANGE_SCOPE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_PROPERTY_CHANGE_SCOPE.DICS_FLAG_CONFIGGENERAL added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_PROPERTY_CHANGE_SCOPE.DICS_FLAG_CONFIGSPECIFIC added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_PROPERTY_CHANGE_SCOPE.DICS_FLAG_GLOBAL added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REMOVE_DEVICE_SCOPE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REMOVE_DEVICE_SCOPE.DI_REMOVEDEVICE_CONFIGSPECIFIC added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REMOVE_DEVICE_SCOPE.DI_REMOVEDEVICE_GLOBAL added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_PROPCHANGE_PARAMS.Scope(X64, Arm64)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_PROPERTY_CHANGE_SCOPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_PROPCHANGE_PARAMS.Scope(X86)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_PROPERTY_CHANGE_SCOPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_REMOVEDEVICE_PARAMS.Scope(X64, Arm64)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REMOVE_DEVICE_SCOPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_REMOVEDEVICE_PARAMS.Scope(X86)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REMOVE_DEVICE_SCOPE
+# Fixed #1800.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIGCF_ALLCLASSES removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIGCF_DEFAULT removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIGCF_DEVICEINTERFACE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIGCF_INTERFACEDEVICE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIGCF_PRESENT removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIGCF_PROFILE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassDevsA : Flags...UInt32 => SETUP_DI_GET_CLASS_DEVS_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassDevsExA : Flags...UInt32 => SETUP_DI_GET_CLASS_DEVS_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassDevsExW : Flags...UInt32 => SETUP_DI_GET_CLASS_DEVS_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassDevsW : Flags...UInt32 => SETUP_DI_GET_CLASS_DEVS_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_GET_CLASS_DEVS_FLAGS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_ALLCLASSES added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_DEFAULT added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_DEVICEINTERFACE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_INTERFACEDEVICE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_PRESENT added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_PROFILE added
+# Fixed #1802.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_ADDPROPERTYPAGE_ADVANCED removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_ADDPROPERTYPAGE_BASIC removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_ADDREMOTEPROPERTYPAGE_ADVANCED removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_ALLOW_INSTALL removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_ASSIGNRESOURCES removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_CALCDISKSPACE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_DESTROYPRIVATEDATA removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_DESTROYWIZARDDATA removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_DETECT removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_DETECTCANCEL removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_DETECTVERIFY removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_ENABLECLASS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_FINISHINSTALL_ACTION removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_FIRSTTIMESETUP removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_FOUNDDEVICE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_INSTALLCLASSDRIVERS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_INSTALLDEVICE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_INSTALLDEVICEFILES removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_INSTALLINTERFACES removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_INSTALLWIZARD removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_MOVEDEVICE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_NEWDEVICEWIZARD_FINISHINSTALL removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_NEWDEVICEWIZARD_POSTANALYZE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_NEWDEVICEWIZARD_PREANALYZE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_NEWDEVICEWIZARD_PRESELECT removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_NEWDEVICEWIZARD_SELECT removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_POWERMESSAGEWAKE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_PROPERTIES removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_PROPERTYCHANGE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_REGISTER_COINSTALLERS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_REGISTERDEVICE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_REMOVE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_RESERVED1 removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_RESERVED2 removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_SELECTBESTCOMPATDRV removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_SELECTCLASSDRIVERS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_SELECTDEVICE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_TROUBLESHOOTER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_UNREMOVE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_UNUSED1 removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_UPDATEDRIVER_UI removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_VALIDATECLASSDRIVERS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIF_VALIDATEDRIVER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiCallClassInstaller : InstallFunction...UInt32 => DI_FUNCTION
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_ADDPROPERTYPAGE_ADVANCED added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_ADDPROPERTYPAGE_BASIC added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_ADDREMOTEPROPERTYPAGE_ADVANCED added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_ALLOW_INSTALL added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_ASSIGNRESOURCES added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_CALCDISKSPACE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_DESTROYPRIVATEDATA added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_DESTROYWIZARDDATA added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_DETECT added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_DETECTCANCEL added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_DETECTVERIFY added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_ENABLECLASS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_FINISHINSTALL_ACTION added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_FIRSTTIMESETUP added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_FOUNDDEVICE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_INSTALLCLASSDRIVERS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_INSTALLDEVICE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_INSTALLDEVICEFILES added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_INSTALLINTERFACES added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_INSTALLWIZARD added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_MOVEDEVICE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_NEWDEVICEWIZARD_FINISHINSTALL added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_NEWDEVICEWIZARD_POSTANALYZE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_NEWDEVICEWIZARD_PREANALYZE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_NEWDEVICEWIZARD_PRESELECT added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_NEWDEVICEWIZARD_SELECT added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_POWERMESSAGEWAKE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_PROPERTIES added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_PROPERTYCHANGE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_REGISTER_COINSTALLERS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_REGISTERDEVICE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_REMOVE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_RESERVED1 added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_RESERVED2 added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_SELECTBESTCOMPATDRV added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_SELECTCLASSDRIVERS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_SELECTDEVICE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_TROUBLESHOOTER added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_UNREMOVE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_UNUSED1 added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_UPDATEDRIVER_UI added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_VALIDATECLASSDRIVERS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION.DIF_VALIDATEDRIVER added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_CLASSINSTALL_HEADER.InstallFunction(X64, Arm64)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_CLASSINSTALL_HEADER.InstallFunction(X86)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.DI_FUNCTION
+# Fixed #1801.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_AUTOASSIGNRES removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_CLASSINSTALLPARAMS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_COMPAT_FROM_CLASS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_DIDCLASS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_DIDCOMPAT removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_DISABLED removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_DONOTCALLCONFIGMG removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_DRIVERPAGE_ADDED removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_ENUMSINGLEINF removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_ALLOWEXCLUDEDDRVS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_ALTPLATFORM_DRVSEARCH removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_ALWAYSWRITEIDS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_APPENDDRIVERLIST removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_BACKUPONREPLACE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_CI_FAILED removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_DEVICECHANGE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_DIDCOMPATINFO removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_DIDINFOLIST removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_DRIVERLIST_FROM_URL removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_EXCLUDE_OLD_INET_DRIVERS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_FILTERCLASSES removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_FILTERSIMILARDRIVERS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_FINISHINSTALL_ACTION removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_IN_SYSTEM_SETUP removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_INET_DRIVER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_INSTALLEDDRIVER removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_NO_CLASSLIST_NODE_MERGE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_NO_DRVREG_MODIFY removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_NOUIONQUERYREMOVE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_POWERPAGE_ADDED removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_PREINSTALLBACKUP removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_PROPCHANGE_PENDING removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_RECURSIVESEARCH removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_RESERVED1 removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_RESERVED2 removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_RESERVED3 removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_RESERVED4 removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_RESTART_DEVICE_ONLY removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_SEARCH_PUBLISHED_INFS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_SETFAILEDINSTALL removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FLAGSEX_USECLASSFORCOMPAT removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_FORCECOPY removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_GENERALPAGE_ADDED removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_INF_IS_SORTED removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_INSTALLDISABLED removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_MULTMFGS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_NEEDREBOOT removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_NEEDRESTART removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_NOBROWSE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_NODI_DEFAULTACTION removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_NOFILECOPY removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_NOSELECTICONS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_NOVCP removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_NOWRITE_IDS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_OVERRIDE_INFFLAGS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_PROPERTIES_CHANGE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_PROPS_NOCHANGEUSAGE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_QUIETINSTALL removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_RESOURCEPAGE_ADDED removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_SHOWALL removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_SHOWCLASS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_SHOWCOMPAT removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_SHOWOEM removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_UNREMOVEDEVICE_CONFIGSPECIFIC removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DI_USECI_SELECTSTRINGS removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.NDW_INSTALLFLAG_NEEDREBOOT removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.NDW_INSTALLFLAG_NEEDRESTART removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_ALLOWEXCLUDEDDRVS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_ALTPLATFORM_DRVSEARCH added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_ALWAYSWRITEIDS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_APPENDDRIVERLIST added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_BACKUPONREPLACE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_CI_FAILED added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_DEVICECHANGE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_DIDCOMPATINFO added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_DIDINFOLIST added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_DRIVERLIST_FROM_URL added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_EXCLUDE_OLD_INET_DRIVERS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_FILTERCLASSES added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_FILTERSIMILARDRIVERS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_FINISHINSTALL_ACTION added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_IN_SYSTEM_SETUP added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_INET_DRIVER added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_INSTALLEDDRIVER added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_NO_CLASSLIST_NODE_MERGE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_NO_DRVREG_MODIFY added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_NOUIONQUERYREMOVE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_POWERPAGE_ADDED added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_PREINSTALLBACKUP added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_PROPCHANGE_PENDING added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_RECURSIVESEARCH added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_RESERVED1 added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_RESERVED2 added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_RESERVED3 added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_RESERVED4 added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_RESTART_DEVICE_ONLY added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_SEARCH_PUBLISHED_INFS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_SETFAILEDINSTALL added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX.DI_FLAGSEX_USECLASSFORCOMPAT added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_AUTOASSIGNRES added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_CLASSINSTALLPARAMS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_COMPAT_FROM_CLASS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_DIDCLASS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_DIDCOMPAT added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_DISABLED added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_DONOTCALLCONFIGMG added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_DRIVERPAGE_ADDED added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_ENUMSINGLEINF added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_FORCECOPY added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_GENERALPAGE_ADDED added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_INF_IS_SORTED added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_INSTALLDISABLED added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_MULTMFGS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_NEEDREBOOT added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_NEEDRESTART added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_NOBROWSE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_NODI_DEFAULTACTION added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_NOFILECOPY added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_NOSELECTICONS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_NOVCP added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_NOWRITE_IDS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_OVERRIDE_INFFLAGS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_PROPERTIES_CHANGE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_PROPS_NOCHANGEUSAGE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_QUIETINSTALL added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_RESOURCEPAGE_ADDED added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_SHOWALL added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_SHOWCLASS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_SHOWCOMPAT added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_SHOWOEM added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_UNREMOVEDEVICE_CONFIGSPECIFIC added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS.DI_USECI_SELECTSTRINGS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVINSTALL_PARAMS_A.Flags(X64, Arm64)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVINSTALL_PARAMS_A.Flags(X86)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVINSTALL_PARAMS_A.FlagsEx(X64, Arm64)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVINSTALL_PARAMS_A.FlagsEx(X86)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVINSTALL_PARAMS_W.Flags(X64, Arm64)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVINSTALL_PARAMS_W.Flags(X86)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVINSTALL_PARAMS_W.FlagsEx(X64, Arm64)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DEVINSTALL_PARAMS_W.FlagsEx(X86)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_INSTALL_FLAGS_EX
+# Fixed #1794.
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CONFIGURATION_FLAGS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CONFIGURATION_FLAGS.CONFIGFLAG_BOOT_DEVICE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CONFIGURATION_FLAGS.CONFIGFLAG_CANTSTOPACHILD added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CONFIGURATION_FLAGS.CONFIGFLAG_DISABLED added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CONFIGURATION_FLAGS.CONFIGFLAG_FAILEDINSTALL added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CONFIGURATION_FLAGS.CONFIGFLAG_FINISH_INSTALL added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CONFIGURATION_FLAGS.CONFIGFLAG_FINISHINSTALL_ACTION added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CONFIGURATION_FLAGS.CONFIGFLAG_FINISHINSTALL_UI added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CONFIGURATION_FLAGS.CONFIGFLAG_IGNORE_BOOT_LC added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CONFIGURATION_FLAGS.CONFIGFLAG_MANUAL_INSTALL added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CONFIGURATION_FLAGS.CONFIGFLAG_NEEDS_CLASS_CONFIG added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CONFIGURATION_FLAGS.CONFIGFLAG_NEEDS_FORCED_CONFIG added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CONFIGURATION_FLAGS.CONFIGFLAG_NET_BOOT added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CONFIGURATION_FLAGS.CONFIGFLAG_NETBOOT_CARD added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CONFIGURATION_FLAGS.CONFIGFLAG_NOREMOVEEXIT added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CONFIGURATION_FLAGS.CONFIGFLAG_OKREMOVEROM added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CONFIGURATION_FLAGS.CONFIGFLAG_PARTIAL_LOG_CONF added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CONFIGURATION_FLAGS.CONFIGFLAG_REINSTALL added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CONFIGURATION_FLAGS.CONFIGFLAG_REMOVED added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CONFIGURATION_FLAGS.CONFIGFLAG_SUPPRESS_SURPRISE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_DEVICE_CONFIGURATION_FLAGS.CONFIGFLAG_VERIFY_HARDWARE added
+Windows.Win32.System.Registry.Apis.CONFIGFLAG_BOOT_DEVICE removed
+Windows.Win32.System.Registry.Apis.CONFIGFLAG_CANTSTOPACHILD removed
+Windows.Win32.System.Registry.Apis.CONFIGFLAG_DISABLED removed
+Windows.Win32.System.Registry.Apis.CONFIGFLAG_FAILEDINSTALL removed
+Windows.Win32.System.Registry.Apis.CONFIGFLAG_FINISH_INSTALL removed
+Windows.Win32.System.Registry.Apis.CONFIGFLAG_FINISHINSTALL_ACTION removed
+Windows.Win32.System.Registry.Apis.CONFIGFLAG_FINISHINSTALL_UI removed
+Windows.Win32.System.Registry.Apis.CONFIGFLAG_IGNORE_BOOT_LC removed
+Windows.Win32.System.Registry.Apis.CONFIGFLAG_MANUAL_INSTALL removed
+Windows.Win32.System.Registry.Apis.CONFIGFLAG_NEEDS_CLASS_CONFIG removed
+Windows.Win32.System.Registry.Apis.CONFIGFLAG_NEEDS_FORCED_CONFIG removed
+Windows.Win32.System.Registry.Apis.CONFIGFLAG_NET_BOOT removed
+Windows.Win32.System.Registry.Apis.CONFIGFLAG_NETBOOT_CARD removed
+Windows.Win32.System.Registry.Apis.CONFIGFLAG_NOREMOVEEXIT removed
+Windows.Win32.System.Registry.Apis.CONFIGFLAG_OKREMOVEROM removed
+Windows.Win32.System.Registry.Apis.CONFIGFLAG_PARTIAL_LOG_CONF removed
+Windows.Win32.System.Registry.Apis.CONFIGFLAG_REINSTALL removed
+Windows.Win32.System.Registry.Apis.CONFIGFLAG_REMOVED removed
+Windows.Win32.System.Registry.Apis.CONFIGFLAG_SUPPRESS_SURPRISE removed
+Windows.Win32.System.Registry.Apis.CONFIGFLAG_VERIFY_HARDWARE removed
