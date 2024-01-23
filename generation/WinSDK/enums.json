@@ -37087,6 +37087,23 @@
         "parameter": "Flags"
       }
     ]
+  },
+  {
+    "name": "DI_FUNCTION",
+    "autoPopulate": {
+      "filter": "DIF_",
+      "header": "setupapi.h"
+    },
+    "uses": [
+      {
+        "method": "SetupDiCallClassInstaller",
+        "parameter": "InstallFunction"
+      },
+      {
+        "struct": "SP_CLASSINSTALL_HEADER",
+        "field": "InstallFunction"
+      }
+    ]
   }
 ]
 }
