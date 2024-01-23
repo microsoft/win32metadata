@@ -37104,6 +37104,42 @@
         "field": "InstallFunction"
       }
     ]
+  },
+  {
+    "name": "SETUP_DI_DEVICE_INSTALL_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DI_(?!FLAGSEX)",
+      "header": "setupapi.h"
+    },
+    "uses": [
+      {
+        "struct": "SP_DEVINSTALL_PARAMS_A",
+        "field": "Flags"
+      },
+      {
+        "struct": "SP_DEVINSTALL_PARAMS_W",
+        "field": "Flags"
+      }
+    ]
+  },
+  {
+    "name": "SETUP_DI_DEVICE_INSTALL_FLAGS_EX",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DI_FLAGSEX_",
+      "header": "setupapi.h"
+    },
+    "uses": [
+      {
+        "struct": "SP_DEVINSTALL_PARAMS_A",
+        "field": "FlagsEx"
+      },
+      {
+        "struct": "SP_DEVINSTALL_PARAMS_W",
+        "field": "FlagsEx"
+      }
+    ]
   }
 ]
 }
