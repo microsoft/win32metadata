@@ -37140,6 +37140,15 @@
         "field": "FlagsEx"
       }
     ]
+  },
+  {
+    "namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
+    "name": "SETUP_DI_DEVICE_CONFIGURATION_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "CONFIGFLAG_",
+      "header": "regstr.h"
+    }
   }
 ]
 }
