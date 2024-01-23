@@ -37061,6 +37061,32 @@
         "field": "Scope"
       }
     ]
+  },
+  {
+    "name": "SETUP_DI_GET_CLASS_DEVS_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DIGCF_",
+      "header": "setupapi.h"
+    },
+    "uses": [
+      {
+        "method": "SetupDiGetClassDevsA",
+        "parameter": "Flags"
+      },
+      {
+        "method": "SetupDiGetClassDevsW",
+        "parameter": "Flags"
+      },
+      {
+        "method": "SetupDiGetClassDevsExA",
+        "parameter": "Flags"
+      },
+      {
+        "method": "SetupDiGetClassDevsExW",
+        "parameter": "Flags"
+      }
+    ]
   }
 ]
 }

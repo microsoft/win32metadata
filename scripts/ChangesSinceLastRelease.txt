@@ -217,3 +217,21 @@ Windows.Win32.Devices.DeviceAndDriverInstallation.SP_PROPCHANGE_PARAMS.Scope(X64
 Windows.Win32.Devices.DeviceAndDriverInstallation.SP_PROPCHANGE_PARAMS.Scope(X86)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_PROPERTY_CHANGE_SCOPE
 Windows.Win32.Devices.DeviceAndDriverInstallation.SP_REMOVEDEVICE_PARAMS.Scope(X64, Arm64)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REMOVE_DEVICE_SCOPE
 Windows.Win32.Devices.DeviceAndDriverInstallation.SP_REMOVEDEVICE_PARAMS.Scope(X86)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_REMOVE_DEVICE_SCOPE
+# Fixed #1800.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIGCF_ALLCLASSES removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIGCF_DEFAULT removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIGCF_DEVICEINTERFACE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIGCF_INTERFACEDEVICE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIGCF_PRESENT removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DIGCF_PROFILE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassDevsA : Flags...UInt32 => SETUP_DI_GET_CLASS_DEVS_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassDevsExA : Flags...UInt32 => SETUP_DI_GET_CLASS_DEVS_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassDevsExW : Flags...UInt32 => SETUP_DI_GET_CLASS_DEVS_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassDevsW : Flags...UInt32 => SETUP_DI_GET_CLASS_DEVS_FLAGS
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_GET_CLASS_DEVS_FLAGS added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_ALLCLASSES added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_DEFAULT added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_DEVICEINTERFACE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_INTERFACEDEVICE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_PRESENT added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_GET_CLASS_DEVS_FLAGS.DIGCF_PROFILE added
