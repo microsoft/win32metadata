@@ -37022,6 +37022,32 @@
         "field": "Flags"
       }
     ]
+  },
+  {
+    "name": "SETUP_DI_STATE_CHANGE",
+    "autoPopulate": {
+      "filter": "DICS_(?!FLAG)",
+      "header": "setupapi.h"
+    },
+    "uses": [
+      {
+        "struct": "SP_PROPCHANGE_PARAMS",
+        "field": "StateChange"
+      }
+    ]
+  },
+  {
+    "name": "SETUP_DI_SCOPE",
+    "autoPopulate": {
+      "filter": "DICS_FLAG_",
+      "header": "setupapi.h"
+    },
+    "uses": [
+      {
+        "struct": "SP_PROPCHANGE_PARAMS",
+        "field": "Scope"
+      }
+    ]
   }
 ]
 }

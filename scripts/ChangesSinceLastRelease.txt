@@ -186,3 +186,26 @@ Windows.Win32.Devices.DeviceAndDriverInstallation.SP_DRVINSTALL_PARAMS.Flags(X86
 # Fixed #1829.
 Windows.Win32.System.Com.IMoniker.BindToObject : ppvResult : [Out] => [ComOutPtr,Out]
 Windows.Win32.System.Com.IMoniker.BindToStorage : ppvObj : [Out] => [ComOutPtr,Out]
+# Fixed #1806.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICS_DISABLE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICS_ENABLE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICS_FLAG_CONFIGGENERAL removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICS_FLAG_CONFIGSPECIFIC removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICS_FLAG_GLOBAL removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICS_PROPCHANGE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICS_START removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.DICS_STOP removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_SCOPE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_SCOPE.DICS_FLAG_CONFIGGENERAL added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_SCOPE.DICS_FLAG_CONFIGSPECIFIC added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_SCOPE.DICS_FLAG_GLOBAL added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE.DICS_DISABLE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE.DICS_ENABLE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE.DICS_PROPCHANGE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE.DICS_START added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE.DICS_STOP added
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_PROPCHANGE_PARAMS.Scope(X64, Arm64)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_SCOPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_PROPCHANGE_PARAMS.Scope(X86)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_SCOPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_PROPCHANGE_PARAMS.StateChange(X64, Arm64)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE
+Windows.Win32.Devices.DeviceAndDriverInstallation.SP_PROPCHANGE_PARAMS.StateChange(X86)...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.SETUP_DI_STATE_CHANGE
