@@ -714,9 +714,6 @@ GetSystemCpuSetInformation=Windows.Win32.System.SystemInformation
 # region tvout.h
 VIDEOPARAMETERS=Windows.Win32.Devices.Display
 # endregion tvout.h
-# region unknwn.h
-IUnknown=Windows.Win32.Foundation
-# endregion unknwnbase.h
 # region unknwnbase.h
 IUnknown_AddRef_Proxy=Windows.Win32.System.Rpc
 IUnknown_QueryInterface_Proxy=Windows.Win32.System.Rpc
