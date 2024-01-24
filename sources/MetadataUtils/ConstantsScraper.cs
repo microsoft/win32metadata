@@ -53,6 +53,10 @@ namespace MetadataUtils
                 new Regex(
                     @"^\s*(DEFINE_PCI_ROOT_BUS_DEVPKEY)\s*\(\s*(.*),\s*(.*)\s*\);");
 
+            private static readonly Regex DefinePciDeviceDevPkeyRegex =
+                new Regex(
+                    @"^\s*(DEFINE_PCI_DEVICE_DEVPKEY)\s*\(\s*(.*),\s*(.*)\s*\);");
+
             private static readonly Regex FccRegex =
                 new Regex(
                     @"FCC\(\'(.{4})\'\)");
@@ -632,6 +636,17 @@ namespace MetadataUtils
                             var guidName = definePciRootBusDevPkeyRegexMatch.Groups[2].Value;
                             var pid = definePciRootBusDevPkeyRegexMatch.Groups[3].Value;
                             var defineGuidLine = $"{guidName}, 0xd817fc28, 0x793e, 0x4b9e, 0x99, 0x70, 0x46, 0x9d, 0x8b, 0xe6, 0x30, 0x73, {pid})";
+                            this.AddConstantGuid(defineGuidKeyword, currentNamespace, defineGuidLine);
+                            continue;
+                        }
+
+                        Match definePciDeviceDevPkeyRegexMatch = DefinePciDeviceDevPkeyRegex.Match(line);
+                        if (definePciDeviceDevPkeyRegexMatch.Success)
+                        {
+                            defineGuidKeyword = "DEFINE_DEVPROPKEY";
+                            var guidName = definePciDeviceDevPkeyRegexMatch.Groups[2].Value;
+                            var pid = definePciDeviceDevPkeyRegexMatch.Groups[3].Value;
+                            var defineGuidLine = $"{guidName}, 0x3ab22e31, 0x8264, 0x4b4e, 0x9a, 0xf5, 0xa8, 0xd2, 0xd8, 0xe3, 0x3e, 0x62, {pid})";
                             this.AddConstantGuid(defineGuidKeyword, currentNamespace, defineGuidLine);
                             continue;
                         }
