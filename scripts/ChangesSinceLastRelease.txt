@@ -556,3 +556,5 @@ Windows.Win32.NetworkManagement.WiFi.Apis.DEVPKEY_PciDevice_UsbComponentRelation
 Windows.Win32.NetworkManagement.WiFi.Apis.DEVPKEY_PciDevice_UsbDvsecPortSpecificAttributes added
 Windows.Win32.NetworkManagement.WiFi.Apis.DEVPKEY_PciDevice_UsbDvsecPortType added
 Windows.Win32.NetworkManagement.WiFi.Apis.DEVPKEY_PciDevice_UsbHostRouterName added
+# Fixed #1812.
+Windows.Win32.Graphics.Direct3D.Dxc.Apis.CLSID_DxcUtils added
