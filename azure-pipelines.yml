@@ -20,315 +20,323 @@ pr:
 variables:
   BuildConfiguration: Release
 
-jobs:
-- job: scrape_x64
-  displayName: "Scrape headers: x64"
-  timeoutInMinutes: 60
-  pool:
-    vmImage: windows-2022
-  workspace:
-    clean: all
+resources:
+  repositories:
+  - repository: 1ESPipelineTemplates
+    type: git
+    name: 1ESPipelineTemplates/1ESPipelineTemplates
+    ref: refs/tags/release
 
-  steps:
-  - checkout: self
-    lfs: true
+extends:
+  template: v1/1ES.Official.PipelineTemplate.yml@1ESPipelineTemplates
+  parameters:
+    pool:
+      name: Azure-Pipelines-1ESPT-ExDShared
+      image: windows-2022
+      os: windows
+    customBuildTags:
+    - ES365AIMigrationTooling
+    jobs:
+    - job: scrape_x64
+      displayName: "Scrape headers: x64"
+      timeoutInMinutes: 60
+      workspace:
+        clean: all
 
-  - task: UseDotNet@2
-    displayName: ⚙ Install .NET SDK
-    inputs:
-      packageType: sdk
-      useGlobalJson: true
+      steps:
+      - checkout: self
+        lfs: true
 
-  - task: PowerShell@2
-    displayName: Set build version
-    inputs:
-      targetType: inline
-      script: |
-        .\scripts\Install-DotNetTool.ps1 -Name nbgv
-        nbgv cloud
+      - task: UseDotNet@2
+        displayName: ⚙ Install .NET SDK
+        inputs:
+          packageType: sdk
+          useGlobalJson: true
 
-  - task: PowerShell@2
-    displayName: GenerateMetadataSource.ps1 - x64
-    inputs:
-      filePath: 'scripts\GenerateMetadataSource.ps1'
-      arguments: '-arch x64'
-      errorActionPreference: 'continue'
-      pwsh: true
+      - task: PowerShell@2
+        displayName: Set build version
+        inputs:
+          targetType: inline
+          script: |
+            .\scripts\Install-DotNetTool.ps1 -Name nbgv
+            nbgv cloud
 
-  - publish: 'generation\WinSDK\obj'
-    displayName: Publish x64 generated assets
-    artifact: 'generated_x64'
+      - task: PowerShell@2
+        displayName: GenerateMetadataSource.ps1 - x64
+        inputs:
+          filePath: 'scripts\GenerateMetadataSource.ps1'
+          arguments: '-arch x64'
+          errorActionPreference: 'continue'
+          pwsh: true
 
-- job: scrape_x86
-  displayName: "Scrape headers: x86"
-  timeoutInMinutes: 60
-  pool:
-    vmImage: windows-2022
-  workspace:
-    clean: all
-  steps:
-  - checkout: self
-    lfs: true
-  - task: UseDotNet@2
-    displayName: ⚙ Install .NET SDK
-    inputs:
-      packageType: sdk
-      useGlobalJson: true
+      - publish: 'generation\WinSDK\obj'
+        displayName: Publish x64 generated assets
+        artifact: 'generated_x64'
 
-  - task: PowerShell@2
-    displayName: GenerateMetadataSource.ps1 - x86
-    inputs:
-      filePath: 'scripts\GenerateMetadataSource.ps1'
-      arguments: '-arch x86 -scrapeConstants'
-      errorActionPreference: 'continue'
-      pwsh: true
+    - job: scrape_x86
+      displayName: "Scrape headers: x86"
+      timeoutInMinutes: 60
+      workspace:
+        clean: all
+      steps:
+      - checkout: self
+        lfs: true
+      - task: UseDotNet@2
+        displayName: ⚙ Install .NET SDK
+        inputs:
+          packageType: sdk
+          useGlobalJson: true
 
-  - publish: 'generation\WinSDK\obj'
-    displayName: Publish x86 generated assets
-    artifact: 'generated_x86'
+      - task: PowerShell@2
+        displayName: GenerateMetadataSource.ps1 - x86
+        inputs:
+          filePath: 'scripts\GenerateMetadataSource.ps1'
+          arguments: '-arch x86 -scrapeConstants'
+          errorActionPreference: 'continue'
+          pwsh: true
 
-- job: scrape_arm64
-  displayName: "Scrape headers: arm64"
-  timeoutInMinutes: 60
-  pool:
-    vmImage: windows-2022
-  workspace:
-    clean: all
-  steps:
-  - checkout: self
-    lfs: true
-  - task: UseDotNet@2
-    displayName: ⚙ Install .NET SDK
-    inputs:
-      packageType: sdk
-      useGlobalJson: true
+      - publish: 'generation\WinSDK\obj'
+        displayName: Publish x86 generated assets
+        artifact: 'generated_x86'
 
-  - task: PowerShell@2
-    displayName: GenerateMetadataSource.ps1 - arm64
-    inputs:
-      filePath: 'scripts\GenerateMetadataSource.ps1'
-      arguments: '-arch arm64'
-      errorActionPreference: 'continue'
-      pwsh: true
+    - job: scrape_arm64
+      displayName: "Scrape headers: arm64"
+      timeoutInMinutes: 60
+      workspace:
+        clean: all
+      steps:
+      - checkout: self
+        lfs: true
+      - task: UseDotNet@2
+        displayName: ⚙ Install .NET SDK
+        inputs:
+          packageType: sdk
+          useGlobalJson: true
 
-  - publish: 'generation\WinSDK\obj'
-    displayName: Publish arm64 generated assets
-    artifact: 'generated_arm64'
+      - task: PowerShell@2
+        displayName: GenerateMetadataSource.ps1 - arm64
+        inputs:
+          filePath: 'scripts\GenerateMetadataSource.ps1'
+          arguments: '-arch arm64'
+          errorActionPreference: 'continue'
+          pwsh: true
 
-- job: build_winmd
-  displayName: Build, test, sign, package winmd
-  workspace:
-    clean: all
-  dependsOn: ['scrape_x64','scrape_x86','scrape_arm64']
-  variables:
-    OutputPackagesDir: $(Build.SourcesDirectory)\bin\Packages\Release\NuGet
-  pool:
-    vmImage: windows-2022
-  steps:
-  - checkout: self
-    lfs: true
+      - publish: 'generation\WinSDK\obj'
+        displayName: Publish arm64 generated assets
+        artifact: 'generated_arm64'
 
-  - task: BatchScript@1
-    displayName: Set up VS environment
-    inputs:
-      filename: 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat'
-      modifyEnvironment: true
+    - job: build_winmd
+      displayName: Build, test, sign, package winmd
+      workspace:
+        clean: all
+      dependsOn: ['scrape_x64','scrape_x86','scrape_arm64']
+      variables:
+        OutputPackagesDir: $(Build.SourcesDirectory)\bin\Packages\Release\NuGet
+      steps:
+      - checkout: self
+        lfs: true
 
-  - task: UseDotNet@2
-    displayName: ⚙ Install .NET SDK
-    inputs:
-      packageType: sdk
-      useGlobalJson: true
+      - task: BatchScript@1
+        displayName: Set up VS environment
+        inputs:
+          filename: 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat'
+          modifyEnvironment: true
 
-    # ESRP Authenticode sign package DLLs
-  - task: UseDotNet@2
-    displayName: Install DotNet 2.1.x for signing tasks
-    inputs:
-      packageType: runtime
-      version: 2.1.x
+      - task: UseDotNet@2
+        displayName: ⚙ Install .NET SDK
+        inputs:
+          packageType: sdk
+          useGlobalJson: true
 
-  - script: dotnet --info
-    displayName: Display .NET SDK/runtime info
+        # ESRP Authenticode sign package DLLs
+      - task: UseDotNet@2
+        displayName: Install DotNet 2.1.x for signing tasks
+        inputs:
+          packageType: runtime
+          version: 2.1.x
 
-  - task: DownloadPipelineArtifact@2
-    displayName: Download x64 generated assets
-    inputs:
-      artifact: 'generated_x64'
-      path: 'generation\WinSDK\obj'
+      - script: dotnet --info
+        displayName: Display .NET SDK/runtime info
 
-  - task: DownloadPipelineArtifact@2
-    displayName: Download x86 generated assets
-    inputs:
-      artifact: 'generated_x86'
-      path: 'generation\WinSDK\obj'
+      - task: DownloadPipelineArtifact@2
+        displayName: Download x64 generated assets
+        inputs:
+          artifact: 'generated_x64'
+          path: 'generation\WinSDK\obj'
 
-  - task: DownloadPipelineArtifact@2
-    displayName: Download arm64 generated assets
-    inputs:
-      artifact: 'generated_arm64'
-      path: 'generation\WinSDK\obj'
+      - task: DownloadPipelineArtifact@2
+        displayName: Download x86 generated assets
+        inputs:
+          artifact: 'generated_x86'
+          path: 'generation\WinSDK\obj'
 
-  - task: PowerShell@2
-    displayName: Build metadata binary
-    inputs:
-      filePath: 'scripts\BuildMetadataBin.ps1'
-      arguments: '-assetsScrapedSeparately'
-      pwsh: true
+      - task: DownloadPipelineArtifact@2
+        displayName: Download arm64 generated assets
+        inputs:
+          artifact: 'generated_arm64'
+          path: 'generation\WinSDK\obj'
 
-  - task: EsrpCodeSigning@1
-    displayName: 'Authenticode Sign Binaries in Metadata package'
-    inputs:
-      ConnectedServiceName: 'Xlang Code Signing'
-      FolderPath: '$(Build.SourcesDirectory)\bin'
-      Pattern: 'Windows.Win32.winmd'
-      signConfigType: 'inlineSignParams'
-      inlineOperation: |
-        [
-          {
-            "keyCode": "CP-230012",
-            "operationSetCode": "SigntoolSign",
-            "parameters": [
+      - task: PowerShell@2
+        displayName: Build metadata binary
+        inputs:
+          filePath: 'scripts\BuildMetadataBin.ps1'
+          arguments: '-assetsScrapedSeparately'
+          pwsh: true
+
+      - task: EsrpCodeSigning@1
+        displayName: 'Authenticode Sign Binaries in Metadata package'
+        inputs:
+          ConnectedServiceName: 'Xlang Code Signing'
+          FolderPath: '$(Build.SourcesDirectory)\bin'
+          Pattern: 'Windows.Win32.winmd'
+          signConfigType: 'inlineSignParams'
+          inlineOperation: |
+            [
               {
-                "parameterName": "OpusName",
-                "parameterValue": "Microsoft"
-              },
-              {
-                "parameterName": "OpusInfo",
-                "parameterValue": "http://www.microsoft.com"
-              },
-              {
-                "parameterName": "PageHash",
-                "parameterValue": "/NPH"
-              },
-              {
-                "parameterName": "FileDigest",
-                "parameterValue": "/fd sha256"
-              },
-              {
-                "parameterName": "TimeStamp",
-                "parameterValue": "/tr \"http://rfc3161.gtm.corp.microsoft.com/TSS/HttpTspServer\" /td sha256"
+                "keyCode": "CP-230012",
+                "operationSetCode": "SigntoolSign",
+                "parameters": [
+                  {
+                    "parameterName": "OpusName",
+                    "parameterValue": "Microsoft"
+                  },
+                  {
+                    "parameterName": "OpusInfo",
+                    "parameterValue": "http://www.microsoft.com"
+                  },
+                  {
+                    "parameterName": "PageHash",
+                    "parameterValue": "/NPH"
+                  },
+                  {
+                    "parameterName": "FileDigest",
+                    "parameterValue": "/fd sha256"
+                  },
+                  {
+                    "parameterName": "TimeStamp",
+                    "parameterValue": "/tr \"http://rfc3161.gtm.corp.microsoft.com/TSS/HttpTspServer\" /td sha256"
+                  }
+                ],
+                "toolName": "signtool.exe",
+                "toolVersion": "6.2.9304.0"
               }
-            ],
-            "toolName": "signtool.exe",
-            "toolVersion": "6.2.9304.0"
-          }
-        ]
-      SessionTimeout: '60'
-      MaxConcurrency: '50'
-      MaxRetryAttempts: '2'
-    condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
+            ]
+          SessionTimeout: '60'
+          MaxConcurrency: '50'
+          MaxRetryAttempts: '2'
+        condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
 
-  - task: EsrpCodeSigning@1
-    displayName: Authenticode sign net8.0 binaries in Generator SDK package
-    inputs:
-      ConnectedServiceName: 'Xlang Code Signing'
-      FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\net8.0'
-      Pattern: 'ClangSharpSourceToWinmd.dll,ConstantsScraper.dll,CsvHelper.dll,ICSharpCode.Decompiler.dll,MetadataTasks.dll,MetadataUtils.dll,WinmdUtils.dll'
-      signConfigType: 'inlineSignParams'
-      inlineOperation: |
-        [
-          {
-            "keyCode": "CP-230012",
-            "operationSetCode": "SigntoolSign",
-            "parameters": [
+      - task: EsrpCodeSigning@1
+        displayName: Authenticode sign net8.0 binaries in Generator SDK package
+        inputs:
+          ConnectedServiceName: 'Xlang Code Signing'
+          FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\net8.0'
+          Pattern: 'ClangSharpSourceToWinmd.dll,ConstantsScraper.dll,CsvHelper.dll,ICSharpCode.Decompiler.dll,MetadataTasks.dll,MetadataUtils.dll,WinmdUtils.dll'
+          signConfigType: 'inlineSignParams'
+          inlineOperation: |
+            [
               {
-                "parameterName": "OpusName",
-                "parameterValue": "Microsoft"
-              },
-              {
-                "parameterName": "OpusInfo",
-                "parameterValue": "http://www.microsoft.com"
-              },
-              {
-                "parameterName": "PageHash",
-                "parameterValue": "/NPH"
-              },
-              {
-                "parameterName": "FileDigest",
-                "parameterValue": "/fd sha256"
-              },
-              {
-                "parameterName": "TimeStamp",
-                "parameterValue": "/tr \"http://rfc3161.gtm.corp.microsoft.com/TSS/HttpTspServer\" /td sha256"
+                "keyCode": "CP-230012",
+                "operationSetCode": "SigntoolSign",
+                "parameters": [
+                  {
+                    "parameterName": "OpusName",
+                    "parameterValue": "Microsoft"
+                  },
+                  {
+                    "parameterName": "OpusInfo",
+                    "parameterValue": "http://www.microsoft.com"
+                  },
+                  {
+                    "parameterName": "PageHash",
+                    "parameterValue": "/NPH"
+                  },
+                  {
+                    "parameterName": "FileDigest",
+                    "parameterValue": "/fd sha256"
+                  },
+                  {
+                    "parameterName": "TimeStamp",
+                    "parameterValue": "/tr \"http://rfc3161.gtm.corp.microsoft.com/TSS/HttpTspServer\" /td sha256"
+                  }
+                ],
+                "toolName": "signtool.exe",
+                "toolVersion": "6.2.9304.0"
               }
-            ],
-            "toolName": "signtool.exe",
-            "toolVersion": "6.2.9304.0"
-          }
-        ]
-      SessionTimeout: '60'
-      MaxConcurrency: '50'
-      MaxRetryAttempts: '2'
-    condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
+            ]
+          SessionTimeout: '60'
+          MaxConcurrency: '50'
+          MaxRetryAttempts: '2'
+        condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
 
-  - task: PowerShell@2
-    displayName: Do packages
-    inputs:
-      filePath: $(Build.SourcesDirectory)\scripts\DoPackages.ps1
-      arguments: -SkipInstallTools
-      pwsh: true
+      - task: PowerShell@2
+        displayName: Do packages
+        inputs:
+          filePath: $(Build.SourcesDirectory)\scripts\DoPackages.ps1
+          arguments: -SkipInstallTools
+          pwsh: true
 
-  - task: PowerShell@2
-    displayName: Do samples
-    inputs:
-      filePath: $(Build.SourcesDirectory)\scripts\DoSamples.ps1
-      arguments: -SkipInstallTools
-      pwsh: true
+      - task: PowerShell@2
+        displayName: Do samples
+        inputs:
+          filePath: $(Build.SourcesDirectory)\scripts\DoSamples.ps1
+          arguments: -SkipInstallTools
+          pwsh: true
 
-  - task: PowerShell@2
-    displayName: Do tests
-    inputs:
-      filePath: $(Build.SourcesDirectory)\scripts\DoTests.ps1
-      arguments: -SkipInstallTools
-      pwsh: true
+      - task: PowerShell@2
+        displayName: Do tests
+        inputs:
+          filePath: $(Build.SourcesDirectory)\scripts\DoTests.ps1
+          arguments: -SkipInstallTools
+          pwsh: true
 
-  - task: EsrpCodeSigning@1
-    displayName: 'Sign nuget packages'
-    inputs:
-      ConnectedServiceName: 'Xlang Code Signing'
-      FolderPath: '$(OutputPackagesDir)'
-      Pattern: '*.nupkg'
-      signConfigType: 'inlineSignParams'
-      inlineOperation: |
-        [
-          {
-            "KeyCode" : "CP-401405",
-            "OperationCode" : "NuGetSign",
-            "Parameters" : {},
-            "ToolName" : "sign",
-            "ToolVersion" : "1.0"
-          },
-          {
-              "KeyCode" : "CP-401405",
-              "OperationCode" : "NuGetVerify",
-              "Parameters" : {},
-              "ToolName" : "sign",
-              "ToolVersion" : "1.0"
-          }
-        ]
-      SessionTimeout: '60'
-      MaxConcurrency: '50'
-      MaxRetryAttempts: '2'
-    condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
+      - task: EsrpCodeSigning@1
+        displayName: 'Sign nuget packages'
+        inputs:
+          ConnectedServiceName: 'Xlang Code Signing'
+          FolderPath: '$(OutputPackagesDir)'
+          Pattern: '*.nupkg'
+          signConfigType: 'inlineSignParams'
+          inlineOperation: |
+            [
+              {
+                "KeyCode" : "CP-401405",
+                "OperationCode" : "NuGetSign",
+                "Parameters" : {},
+                "ToolName" : "sign",
+                "ToolVersion" : "1.0"
+              },
+              {
+                  "KeyCode" : "CP-401405",
+                  "OperationCode" : "NuGetVerify",
+                  "Parameters" : {},
+                  "ToolName" : "sign",
+                  "ToolVersion" : "1.0"
+              }
+            ]
+          SessionTimeout: '60'
+          MaxConcurrency: '50'
+          MaxRetryAttempts: '2'
+        condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
 
-  - publish: bin/logs
-    artifact: build_logs
-    displayName: 📢 Publish build logs
-    condition: always()
+      - publish: bin/logs
+        artifact: build_logs
+        displayName: 📢 Publish build logs
+        condition: always()
 
-  - task: PublishPipelineArtifact@1
-    displayName: 'Publish NuGet packages to pipeline artifacts'
-    inputs:
-      targetPath: '$(OutputPackagesDir)'
-      artifact: NuGetPackages
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish NuGet packages to pipeline artifacts'
+        inputs:
+          targetPath: '$(OutputPackagesDir)'
+          artifact: NuGetPackages
 
-    # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
-    # Don't publish if we're using pre-generated source
-  - task: 333b11bd-d341-40d9-afcf-b32d5ce6f23b@2
-    displayName: 'NuGet push'
-    inputs:
-      command: push
-      packagesToPush: '$(OutputPackagesDir)/**/*.nupkg;!$(OutputPackagesDir)/**/*.symbols.nupkg'
-      publishVstsFeed: 'c1408dcb-1833-4ae4-9af5-1a891a12cc3c'
-      allowPackageConflicts: true
-    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+        # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
+        # Don't publish if we're using pre-generated source
+      - task: 333b11bd-d341-40d9-afcf-b32d5ce6f23b@2
+        displayName: 'NuGet push'
+        inputs:
+          command: push
+          packagesToPush: '$(OutputPackagesDir)/**/*.nupkg;!$(OutputPackagesDir)/**/*.symbols.nupkg'
+          publishVstsFeed: 'c1408dcb-1833-4ae4-9af5-1a891a12cc3c'
+          allowPackageConflicts: true
+        condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
