@@ -112,3 +112,8 @@ Windows.Win32.Devices.Fax.PFAXSTARTPRINTJOBW.Invoke : FaxContextInfo : [In,Out] 
 Windows.Win32.Devices.Fax.PFAXSTARTPRINTJOBW.Invoke : FaxJobId : [In,Out] => [Out]
 # Fixed #1841.
 Windows.Win32.System.Diagnostics.Debug.Apis.SetErrorMode : return...UInt32 => THREAD_ERROR_MODE
+# Fixed #1839.
+Windows.Win32.Security.Credentials.Apis.CredUIParseUserNameA : return...UInt32 => WIN32_ERROR
+Windows.Win32.Security.Credentials.Apis.CredUIParseUserNameW : return...UInt32 => WIN32_ERROR
+Windows.Win32.Security.Credentials.Apis.CredUIPromptForCredentialsA : return...UInt32 => WIN32_ERROR
+Windows.Win32.Security.Credentials.Apis.CredUIPromptForCredentialsW : return...UInt32 => WIN32_ERROR

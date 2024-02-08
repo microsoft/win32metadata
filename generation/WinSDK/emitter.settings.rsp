@@ -1790,3 +1790,7 @@ ISyncMgrSyncItemInfo::IsConnected=[CanReturnMultipleSuccessValues]
 ICodecAPI::IsModifiable=[CanReturnMultipleSuccessValues]
 IMoniker::BindToObject::ppvResult=[ComOutPtr]
 IMoniker::BindToStorage::ppvObj=[ComOutPtr]
+CredUIParseUserNameA::return=WIN32_ERROR
+CredUIParseUserNameW::return=WIN32_ERROR
+CredUIPromptForCredentialsA::return=WIN32_ERROR
+CredUIPromptForCredentialsW::return=WIN32_ERROR
