@@ -117,3 +117,5 @@ Windows.Win32.Security.Credentials.Apis.CredUIParseUserNameA : return...UInt32 =
 Windows.Win32.Security.Credentials.Apis.CredUIParseUserNameW : return...UInt32 => WIN32_ERROR
 Windows.Win32.Security.Credentials.Apis.CredUIPromptForCredentialsA : return...UInt32 => WIN32_ERROR
 Windows.Win32.Security.Credentials.Apis.CredUIPromptForCredentialsW : return...UInt32 => WIN32_ERROR
+# Fixed #1834.
+Windows.Win32.UI.Shell.IShellFolder2.GetDefaultColumnState : pcsFlags...UInt32* => SHCOLSTATE*
