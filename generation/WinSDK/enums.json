@@ -5754,6 +5754,10 @@
       {
         "method": "SetErrorMode",
         "parameter": "uMode"
+      },
+      {
+        "method": "SetErrorMode",
+        "parameter": "return"
       }
     ]
   },
