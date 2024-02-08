@@ -119,3 +119,5 @@ Windows.Win32.Security.Credentials.Apis.CredUIPromptForCredentialsA : return...U
 Windows.Win32.Security.Credentials.Apis.CredUIPromptForCredentialsW : return...UInt32 => WIN32_ERROR
 # Fixed #1834.
 Windows.Win32.UI.Shell.IShellFolder2.GetDefaultColumnState : pcsFlags...UInt32* => SHCOLSTATE*
+# Fixed #1833.
+Windows.Win32.UI.Shell.IShellFolder.CompareIDs : [Documentation(https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-ishellfolder-compareids)] => [CanReturnMultipleSuccessValues,Documentation(https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-ishellfolder-compareids)]
