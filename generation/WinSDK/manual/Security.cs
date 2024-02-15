@@ -12,6 +12,8 @@ namespace Windows.Win32.Security
         [NativeTypeName("BOOLEAN")]
         public const byte SECURITY_STATIC_TRACKING = 0;
 
+        public const uint SECURITY_MAX_SID_SIZE = 68;
+
         [Constant("{0, 0, 0, 0, 0, 0}")]
         public static readonly SID_IDENTIFIER_AUTHORITY SECURITY_NULL_SID_AUTHORITY;
         [Constant("{0, 0, 0, 0, 0, 1}")]
