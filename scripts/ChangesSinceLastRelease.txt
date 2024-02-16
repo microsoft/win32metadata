@@ -131,3 +131,19 @@ Windows.Win32.Security.Apis.SECURITY_MAX_SID_SIZE added
 # Fixed #1835.
 Windows.Win32.UI.WindowsAndMessaging.Apis.WINSTA_ALL_ACCESS added
 Windows.Win32.UI.WindowsAndMessaging.Apis.WVR_REDRAW added
+# Fixed #1847.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.FILE_COMPRESSION_MSZIP removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.FILE_COMPRESSION_NONE removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.FILE_COMPRESSION_NTCAB removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.FILE_COMPRESSION_WINLZA removed
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDecompressOrCopyFileA : CompressionType...UInt32* => FILE_COMPRESSION_TYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDecompressOrCopyFileW : CompressionType...UInt32* => FILE_COMPRESSION_TYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupGetFileCompressionInfoA : CompressionType...UInt32* => FILE_COMPRESSION_TYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupGetFileCompressionInfoExA : CompressionType...UInt32* => FILE_COMPRESSION_TYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupGetFileCompressionInfoExW : CompressionType...UInt32* => FILE_COMPRESSION_TYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupGetFileCompressionInfoW : CompressionType...UInt32* => FILE_COMPRESSION_TYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.FILE_COMPRESSION_TYPE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.FILE_COMPRESSION_TYPE.FILE_COMPRESSION_MSZIP added
+Windows.Win32.Devices.DeviceAndDriverInstallation.FILE_COMPRESSION_TYPE.FILE_COMPRESSION_NONE added
+Windows.Win32.Devices.DeviceAndDriverInstallation.FILE_COMPRESSION_TYPE.FILE_COMPRESSION_NTCAB added
+Windows.Win32.Devices.DeviceAndDriverInstallation.FILE_COMPRESSION_TYPE.FILE_COMPRESSION_WINLZA added

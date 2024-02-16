@@ -37153,6 +37153,40 @@
       "filter": "CONFIGFLAG_",
       "header": "regstr.h"
     }
+  },
+  {
+    "name": "FILE_COMPRESSION_TYPE",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "FILE_COMPRESSION_",
+      "header": "setupapi.h"
+    },
+    "uses": [
+      {
+        "method": "SetupGetFileCompressionInfoA",
+        "parameter": "CompressionType"
+      },
+      {
+        "method": "SetupGetFileCompressionInfoW",
+        "parameter": "CompressionType"
+      },
+      {
+        "method": "SetupGetFileCompressionInfoExA",
+        "parameter": "CompressionType"
+      },
+      {
+        "method": "SetupGetFileCompressionInfoExW",
+        "parameter": "CompressionType"
+      },
+      {
+        "method": "SetupDecompressOrCopyFileA",
+        "parameter": "CompressionType"
+      },
+      {
+        "method": "SetupDecompressOrCopyFileW",
+        "parameter": "CompressionType"
+      }
+    ]
   }
 ]
 }
