@@ -1796,3 +1796,5 @@ CredUIPromptForCredentialsA::return=WIN32_ERROR
 CredUIPromptForCredentialsW::return=WIN32_ERROR
 IShellFolder2::GetDefaultColumnState::pcsFlags=SHCOLSTATE
 IShellFolder::CompareIDs=[CanReturnMultipleSuccessValues]
+WriteConsoleA::lpBuffer=PSTR
+WriteConsoleW::lpBuffer=PWSTR

@@ -147,3 +147,6 @@ Windows.Win32.Devices.DeviceAndDriverInstallation.FILE_COMPRESSION_TYPE.FILE_COM
 Windows.Win32.Devices.DeviceAndDriverInstallation.FILE_COMPRESSION_TYPE.FILE_COMPRESSION_NONE added
 Windows.Win32.Devices.DeviceAndDriverInstallation.FILE_COMPRESSION_TYPE.FILE_COMPRESSION_NTCAB added
 Windows.Win32.Devices.DeviceAndDriverInstallation.FILE_COMPRESSION_TYPE.FILE_COMPRESSION_WINLZA added
+# Fixed #1840.
+Windows.Win32.System.Console.Apis.WriteConsoleA : lpBuffer...Void* => PSTR
+Windows.Win32.System.Console.Apis.WriteConsoleW : lpBuffer...Void* => PWSTR
