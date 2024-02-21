@@ -1798,3 +1798,4 @@ IShellFolder2::GetDefaultColumnState::pcsFlags=SHCOLSTATE
 IShellFolder::CompareIDs=[CanReturnMultipleSuccessValues]
 WriteConsoleA::lpBuffer=PSTR
 WriteConsoleW::lpBuffer=PWSTR
+PopIoRingCompletion=[CanReturnMultipleSuccessValues]
