@@ -964,9 +964,10 @@
     "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.Security",
+    "Namespace": "Windows.Win32.System.Services",
     "Name": "SC_HANDLE",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "CloseServiceHandle",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
