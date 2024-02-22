@@ -1,0 +1,2 @@
+# fix IoRing api results
+Windows.Win32.Storage.FileSystem.Apis.PopIoRingCompletion : [DllImport(api-ms-win-core-ioring-l1-1-0.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-popioringcompletion)] => [CanReturnMultipleSuccessValues,DllImport(api-ms-win-core-ioring-l1-1-0.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-popioringcompletion)]
