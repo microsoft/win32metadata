@@ -12,7 +12,7 @@ IDispatcherQueueController(interface)=<Windows.Foundation.UniversalApiContract, 
 # Windows 11 (22000.194)
 IPropertySetSerializer(interface)=<Windows.Foundation.UniversalApiContract, Version=14.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.Storage.Streams.IPropertySetSerializer
 # Windows 11 (22621.2428)
-ICompositionTexture(interface)=<Windows.Foundation.UniversalApiContract, Version=15.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.ICompositionTexture
+ICompositionTexture(interface)=<Windows.Foundation.UniversalApiContract, Version=15.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.CompositionTexture
 --enumAddition
 CLSCTX::CLSCTX_ALL=CLSCTX_INPROC_SERVER|CLSCTX_INPROC_HANDLER|CLSCTX_LOCAL_SERVER|CLSCTX_REMOTE_SERVER
 CLSCTX::CLSCTX_SERVER=CLSCTX_INPROC_SERVER|CLSCTX_LOCAL_SERVER|CLSCTX_REMOTE_SERVER
