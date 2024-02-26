@@ -3,3 +3,5 @@ Windows.Win32.Storage.FileSystem.Apis.PopIoRingCompletion : [DllImport(api-ms-wi
 # Fixed #1852.
 Windows.Win32.Security.SC_HANDLE removed
 Windows.Win32.System.Services.SC_HANDLE added
+# Correct ICompositionTexture reference
+Windows.Win32.System.WinRT.Composition.ICompositorInterop2.CreateCompositionTexture : compositionTexture...ICompositionTexture* => CompositionTexture*
