@@ -27,11 +27,13 @@ stages:
       type: windows
     steps:
     - template: win32metadata-checkout.yml
+
     - task: UseDotNet@2
       displayName: ⚙ Install .NET SDK
       inputs:
         packageType: sdk
         useGlobalJson: true
+        
     # TODO - this no longer sets an Azure Devops pipeline build number, OneBranch has a different way of doing that
     - task: PowerShell@2
       displayName: Set build version
@@ -41,6 +43,7 @@ stages:
         script: |
           .\scripts\Install-DotNetTool.ps1 -Name nbgv
           nbgv cloud 
+
     - task: PowerShell@2
       displayName: GenerateMetadataSource.ps1 - 
       inputs:
@@ -65,8 +68,7 @@ stages:
     pool:
       type: windows
     steps:
-    - checkout: self
-      lfs: true
+    - template: win32metadata-checkout.yml
 
     - task: BatchScript@1
       displayName: Set up VS environment
