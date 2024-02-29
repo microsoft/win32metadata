@@ -4,10 +4,10 @@ steps:
   lfs: false
   displayName: Checkout win32metadata from github
 - task: Powershell@2
-    inputs:
-      targetType: 'inline'
-      script: |
-        Write-Host $(Build.SourcesDirectory)
-        dir $(Build.SourcesDirectory)
-        Move-Item -Path $(Build.SourcesDirectory)\win32metadata\* -Destination $(Build.SourcesDirectory) -Force
-    displayName: Move Win32Metadata repo to Build.SourcesDirectory
+  inputs:
+    targetType: 'inline'
+    script: |
+      Write-Host $(Build.SourcesDirectory)
+      dir $(Build.SourcesDirectory)
+      Move-Item -Path $(Build.SourcesDirectory)\win32metadata\* -Destination $(Build.SourcesDirectory) -Force
+  displayName: Move Win32Metadata repo to Build.SourcesDirectory
