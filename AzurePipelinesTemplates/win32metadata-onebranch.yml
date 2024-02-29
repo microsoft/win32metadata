@@ -33,7 +33,7 @@ stages:
       inputs:
         packageType: sdk
         useGlobalJson: true
-        
+
     # TODO - this no longer sets an Azure Devops pipeline build number, OneBranch has a different way of doing that
     - task: PowerShell@2
       displayName: Set build version
@@ -62,7 +62,7 @@ stages:
       clean: all
     variables:
       OutputPackagesDir: $(Build.SourcesDirectory)\bin\Packages\Release\NuGet
-      ob_outputDirectory: '$(ArtifactStagingDirectory)'
+      ob_outputDirectory: '$(Build.ArtifactStagingDirectory)'
       ob_artifactBaseName: 'NuGetPackages'
       ob_sdl_binskim_break: true # https://aka.ms/obpipelines/sdl
     pool:
@@ -70,7 +70,7 @@ stages:
     steps:
     - template: win32metadata-checkout.yml
 
-    - task: BatchScript@1
+    - task: CmdLine@2
       displayName: Set up VS environment
       inputs:
         filename: 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat'
