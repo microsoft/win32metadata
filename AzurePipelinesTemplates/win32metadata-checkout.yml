@@ -3,6 +3,7 @@ steps:
   path: s/win32metadata
   lfs: false
   displayName: Checkout win32metadata from github
+  submodules: false
 - task: Powershell@2
   inputs:
     targetType: 'inline'
