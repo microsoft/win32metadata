@@ -1,0 +1,25 @@
+parameters:
+- name: "PipelineType"
+  type: string
+  default: "PullRequest"
+
+jobs:
+- job: main
+  pool:
+    type: windows
+  variables:
+    ob_outputDirectory: '$(Build.ArtifactStagingDirectory)'
+    ob_sdl_binskim_break: true # https://aka.ms/obpipelines/sdl
+  steps:
+  - checkout: win32metadata
+    path: s/win32metadata
+    lfs: false
+    displayName: Checkout win32metadata from github
+  - task: Powershell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        Write-Host $(Build.SourcesDirectory)
+        dir $(Build.SourcesDirectory)
+        Move-Item -Path $(Build.SourcesDirectory)\win32metadata\* -Destination $(Build.SourcesDirectory) -Force
+    displayName: Move Win32Metadata repo to Build.SourcesDirectory
