@@ -5,6 +5,7 @@ parameters:
 
 stages:
 - stage: scrape
+  displayName: "Scrape"
   jobs:
   - job: scrape
     strategy:
@@ -34,7 +35,7 @@ stages:
     # TODO - this no longer sets an Azure Devops pipeline build number, OneBranch has a different way of doing that
     - task: PowerShell@2
       displayName: Set build version
-      condition: eq($(arch), 'x64') # Only needed for x64
+      condition: eq(variables.arch, 'x64') # Only needed for x64
       inputs:
         targetType: inline
         script: |
@@ -49,6 +50,7 @@ stages:
         pwsh: true
 
 - stage: build_winmd
+  displayName: "Build WinMD"
   dependsOn: 'scrape'
   jobs:
   - job: build_winmd
