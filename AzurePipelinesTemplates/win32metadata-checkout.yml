@@ -1,14 +1,11 @@
+parameters:
+- name: "RepoDirectory"
+  type: string
+  default: "win32metadata"
+
 steps:
 - checkout: win32metadata
-  path: s/win32metadata
+  path: s/${{ parameters.RepoDirectory }}
   lfs: false
   displayName: Checkout win32metadata from github
   submodules: recursive
-# - task: Powershell@2
-#   inputs:
-#     targetType: 'inline'
-#     script: |
-#       Write-Host $(Build.SourcesDirectory)
-#       dir $(Build.SourcesDirectory)
-#       Move-Item -Path $(Build.SourcesDirectory)\win32metadata\* -Destination $(Build.SourcesDirectory) -Force
-#   displayName: Move Win32Metadata repo to Build.SourcesDirectory
