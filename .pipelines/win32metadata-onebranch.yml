@@ -4,22 +4,71 @@ parameters:
   default: "PullRequest"
 
 jobs:
-- job: main
+- job: scrape_x64
+  strategy:
+    matrix:
+      x86:
+        arch: 'x86'
+      x64:
+        arch: 'x64'
+      arm64:
+        arch: 'arm64'
+  displayName: "Scrape headers: $(arch)"
+  timeoutInMinutes: 60
   pool:
     type: windows
   variables:
-    ob_outputDirectory: '$(Build.ArtifactStagingDirectory)'
+    ob_outputDirectory: 'generation\WinSDK\obj'
+    ob_artifactBaseName: 'generated'
+    ob_artifactSuffix: '$(arch)'
     ob_sdl_binskim_break: true # https://aka.ms/obpipelines/sdl
+
   steps:
-  - checkout: win32metadata
-    path: s/win32metadata
-    lfs: false
-    displayName: Checkout win32metadata from github
-  - task: Powershell@2
+  - template: win32metadata-checkout.yml
+
+  - task: UseDotNet@2
+    displayName: ⚙ Install .NET SDK
     inputs:
-      targetType: 'inline'
+      packageType: sdk
+      useGlobalJson: true
+
+  - task: PowerShell@2
+    displayName: Set build version
+    inputs:
+      targetType: inline
       script: |
-        Write-Host $(Build.SourcesDirectory)
-        dir $(Build.SourcesDirectory)
-        Move-Item -Path $(Build.SourcesDirectory)\win32metadata\* -Destination $(Build.SourcesDirectory) -Force
-    displayName: Move Win32Metadata repo to Build.SourcesDirectory
+        .\scripts\Install-DotNetTool.ps1 -Name nbgv
+        nbgv cloud
+
+  - task: PowerShell@2
+    displayName: GenerateMetadataSource.ps1 - 
+    inputs:
+      filePath: 'scripts\GenerateMetadataSource.ps1'
+      arguments: '-arch $(arch)'
+      errorActionPreference: 'continue'
+      pwsh: true
+
+  # - publish: 'generation\WinSDK\obj'
+  #   displayName: Publish $(arch) generated assets
+  #   artifact: 'generated_$(arch)'
+
+
+# - job: main
+#   pool:
+#     type: windows
+#   variables:
+#     ob_outputDirectory: '$(Build.ArtifactStagingDirectory)'
+#     ob_sdl_binskim_break: true # https://aka.ms/obpipelines/sdl
+#   steps:
+#   - checkout: win32metadata
+#     path: s/win32metadata
+#     lfs: false
+#     displayName: Checkout win32metadata from github
+#   - task: Powershell@2
+#     inputs:
+#       targetType: 'inline'
+#       script: |
+#         Write-Host $(Build.SourcesDirectory)
+#         dir $(Build.SourcesDirectory)
+#         Move-Item -Path $(Build.SourcesDirectory)\win32metadata\* -Destination $(Build.SourcesDirectory) -Force
+#     displayName: Move Win32Metadata repo to Build.SourcesDirectory
