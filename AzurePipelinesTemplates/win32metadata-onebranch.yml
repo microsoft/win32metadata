@@ -55,7 +55,6 @@ stages:
     displayName: Build, test, sign, package winmd
     workspace:
       clean: all
-    dependsOn: ['scrape_x64','scrape_x86','scrape_arm64']
     variables:
       OutputPackagesDir: $(Build.SourcesDirectory)\bin\Packages\Release\NuGet
       ob_outputDirectory: '$(ArtifactStagingDirectory)'
