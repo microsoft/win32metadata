@@ -36939,7 +36939,7 @@
       {
         "interface": "IMMDevice",
         "method": "GetState",
-        "parameter": "return"
+        "parameter": "pdwState"
       }
     ]
   },

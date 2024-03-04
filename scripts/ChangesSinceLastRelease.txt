@@ -5,3 +5,6 @@ Windows.Win32.Security.SC_HANDLE removed
 Windows.Win32.System.Services.SC_HANDLE added
 # Correct ICompositionTexture reference
 Windows.Win32.System.WinRT.Composition.ICompositorInterop2.CreateCompositionTexture : compositionTexture...ICompositionTexture* => CompositionTexture*
+# Fixed #1856.
+Windows.Win32.Media.Audio.IMMDevice.GetState : pdwState...UInt32* => DEVICE_STATE*
+Windows.Win32.Media.Audio.IMMDevice.GetState : return...DEVICE_STATE => HRESULT
