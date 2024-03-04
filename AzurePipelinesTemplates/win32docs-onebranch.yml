@@ -86,7 +86,7 @@ stages:
     #   condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
     - script: dotnet pack Microsoft.Windows.SDK.Win32Docs --no-build -c ${{ parameters.BuildConfiguration }} -p:BuildProjectReferences=false
       displayName: 📦 dotnet pack
-      workingDirectory: ${{ parameters.RepoDirectory }}/apidocs
+      workingDirectory: ${{ parameters.RepoDirectory }}\apidocs
     # - task: EsrpCodeSigning@1
     #   displayName: ✒ NuGet sign
     #   inputs:

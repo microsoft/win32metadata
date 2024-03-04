@@ -20,7 +20,7 @@
           Outputs="@(DocOutputPath)"
           Condition=" '$(DesignTimeBuild)' != 'true' ">
     <Message Importance="high" Text="Generating @(DocOutputPath->'%(FullPath)'). This may take a few minutes..." />
-    <Exec Command="dotnet @(ScraperTool) '../../ext/Console-Docs/docs;../../ext/office-developer-client-docs/docs/outlook/mapi;../../ext/sdk-api/sdk-api-src/content;../../ext/sql-docs/docs/odbc/reference/syntax;../../ext/sql-docs/docs/relational-databases/native-client-odbc-extensions-bulk-copy-functions;../../ext/Virtualization-Documentation;../../ext/win32/desktop-src' @(DocOutputPath)"
+    <Exec Command="dotnet @(ScraperTool) '..\..\ext\Console-Docs\docs;..\..\ext\office-developer-client-docs\docs\outlook\mapi;..\..\ext\sdk-api\sdk-api-src\content;..\..\ext\sql-docs\docs\odbc\reference\syntax;..\..\ext\sql-docs\docs\relational-databases\native-client-odbc-extensions-bulk-copy-functions;..\..\ext\Virtualization-Documentation;..\..\ext\win32\desktop-src' @(DocOutputPath)"
           StandardOutputImportance="high"/>
   </Target>
 
