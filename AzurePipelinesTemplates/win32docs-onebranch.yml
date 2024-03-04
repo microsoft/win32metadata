@@ -20,7 +20,7 @@ stages:
       ob_artifactBaseName: 'ApiDocs'
       ob_sdl_binskim_break: true # https://aka.ms/obpipelines/sdl
     pool:
-      type: linux
+      type: windows
     steps:
     - template: win32metadata-checkout.yml
       parameters:
