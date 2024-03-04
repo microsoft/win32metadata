@@ -8,3 +8,8 @@ Windows.Win32.System.WinRT.Composition.ICompositorInterop2.CreateCompositionText
 # Fixed #1856.
 Windows.Win32.Media.Audio.IMMDevice.GetState : pdwState...UInt32* => DEVICE_STATE*
 Windows.Win32.Media.Audio.IMMDevice.GetState : return...DEVICE_STATE => HRESULT
+# Fixed #1859.
+Windows.Win32.UI.WindowsAndMessaging.CREATESTRUCTA.dwExStyle...System.UInt32 => Windows.Win32.UI.WindowsAndMessaging.WINDOW_EX_STYLE
+Windows.Win32.UI.WindowsAndMessaging.CREATESTRUCTA.style :  => [AssociatedEnum(WINDOW_STYLE)]
+Windows.Win32.UI.WindowsAndMessaging.CREATESTRUCTW.dwExStyle...System.UInt32 => Windows.Win32.UI.WindowsAndMessaging.WINDOW_EX_STYLE
+Windows.Win32.UI.WindowsAndMessaging.CREATESTRUCTW.style :  => [AssociatedEnum(WINDOW_STYLE)]

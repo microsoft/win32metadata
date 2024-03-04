@@ -988,6 +988,14 @@
       {
         "method": "AdjustWindowRectExForDpi",
         "parameter": "dwExStyle"
+      },
+      {
+        "struct": "CREATESTRUCTA",
+        "field": "dwExStyle"
+      },
+      {
+        "struct": "CREATESTRUCTW",
+        "field": "dwExStyle"
       }
     ]
   },

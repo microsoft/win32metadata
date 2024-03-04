@@ -1799,3 +1799,5 @@ IShellFolder::CompareIDs=[CanReturnMultipleSuccessValues]
 WriteConsoleA::lpBuffer=PSTR
 WriteConsoleW::lpBuffer=PWSTR
 PopIoRingCompletion=[CanReturnMultipleSuccessValues]
+CREATESTRUCTA::style=[AssociatedEnum("WINDOW_STYLE")]
+CREATESTRUCTW::style=[AssociatedEnum("WINDOW_STYLE")]
