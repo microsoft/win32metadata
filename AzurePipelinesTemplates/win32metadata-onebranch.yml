@@ -104,19 +104,22 @@ stages:
       displayName: Download x64 generated assets
       inputs:
         artifact: 'generated_x64'
-        path: 'generation\WinSDK\obj'
+        path: '$(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\generation\WinSDK\obj'
 
     - task: DownloadPipelineArtifact@2
       displayName: Download x86 generated assets
       inputs:
         artifact: 'generated_x86'
-        path: 'generation\WinSDK\obj'
+        path: '$(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\generation\WinSDK\obj'
 
     - task: DownloadPipelineArtifact@2
       displayName: Download arm64 generated assets
       inputs:
         artifact: 'generated_arm64'
-        path: 'generation\WinSDK\obj'
+        path: '$(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\generation\WinSDK\obj'
+
+    - script: dir /s $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}
+      displayName: Print generated files directory ($(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\)
 
     - task: PowerShell@2
       displayName: Build metadata binary
