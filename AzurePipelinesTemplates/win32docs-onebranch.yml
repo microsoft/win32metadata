@@ -21,6 +21,9 @@ stages:
       ob_sdl_binskim_break: true # https://aka.ms/obpipelines/sdl
     pool:
       type: linux
+      isCustom: true
+      name: 'Azure Pipelines'
+      vmImage: 'Ubuntu 20.04'
     steps:
     - template: win32metadata-checkout.yml
       parameters:
