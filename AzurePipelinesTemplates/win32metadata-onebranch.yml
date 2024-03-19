@@ -118,7 +118,7 @@ stages:
         artifact: 'generated_arm64'
         path: '$(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\generation\WinSDK\obj'
 
-    - script: dir /s $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}
+    - script: dir /s $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\generation\WinSDK\obj
       displayName: Print generated files directory ($(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\)
 
     - task: PowerShell@2
