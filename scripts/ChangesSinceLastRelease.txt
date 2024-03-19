@@ -195,3 +195,56 @@ winmd1: Windows.Win32.Graphics.Direct3D12.Apis.D3D12_SDK_VERSION = 611, winmd2 =
 winmd1: Windows.Win32.Graphics.Direct3D12.D3D_SHADER_MODEL.D3D_HIGHEST_SHADER_MODEL = 104, winmd2 = 105
 winmd1: Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_D3D12_MESSAGES_END = 1387, winmd2 = 1415
 winmd1: Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_MAX_VALID = 13, winmd2 = 31
+# Fixed #1872.
+Windows.Win32.NetworkManagement.WNet.Apis.CONNECT_CRED_RESET removed
+Windows.Win32.NetworkManagement.WNet.Apis.CONNECT_CURRENT_MEDIA removed
+Windows.Win32.NetworkManagement.WNet.Apis.CONNECT_GLOBAL_MAPPING removed
+Windows.Win32.NetworkManagement.WNet.Apis.CONNECT_LOCALDRIVE removed
+Windows.Win32.NetworkManagement.WNet.Apis.CONNECT_NEED_DRIVE removed
+Windows.Win32.NetworkManagement.WNet.Apis.CONNECT_REFCOUNT removed
+Windows.Win32.NetworkManagement.WNet.Apis.CONNECT_REQUIRE_INTEGRITY removed
+Windows.Win32.NetworkManagement.WNet.Apis.CONNECT_REQUIRE_PRIVACY removed
+Windows.Win32.NetworkManagement.WNet.Apis.CONNECT_RESERVED removed
+Windows.Win32.NetworkManagement.WNet.Apis.CONNECT_WRITE_THROUGH_SEMANTICS removed
+Windows.Win32.NetworkManagement.WNet.Apis.NPAddConnection3 : dwFlags...NET_USE_CONNECT_FLAGS => NET_CONNECT_FLAGS
+Windows.Win32.NetworkManagement.WNet.Apis.WNetAddConnection2A : dwFlags...UInt32 => NET_CONNECT_FLAGS
+Windows.Win32.NetworkManagement.WNet.Apis.WNetAddConnection2W : dwFlags...UInt32 => NET_CONNECT_FLAGS
+Windows.Win32.NetworkManagement.WNet.Apis.WNetAddConnection3A : dwFlags...UInt32 => NET_CONNECT_FLAGS
+Windows.Win32.NetworkManagement.WNet.Apis.WNetAddConnection3W : dwFlags...UInt32 => NET_CONNECT_FLAGS
+Windows.Win32.NetworkManagement.WNet.Apis.WNetAddConnection4A : dwFlags...UInt32 => NET_CONNECT_FLAGS
+Windows.Win32.NetworkManagement.WNet.Apis.WNetAddConnection4W : dwFlags...UInt32 => NET_CONNECT_FLAGS
+Windows.Win32.NetworkManagement.WNet.Apis.WNetCancelConnection2A : dwFlags...UInt32 => NET_CONNECT_FLAGS
+Windows.Win32.NetworkManagement.WNet.Apis.WNetCancelConnection2W : dwFlags...UInt32 => NET_CONNECT_FLAGS
+Windows.Win32.NetworkManagement.WNet.Apis.WNetUseConnectionA : dwFlags...NET_USE_CONNECT_FLAGS => NET_CONNECT_FLAGS
+Windows.Win32.NetworkManagement.WNet.Apis.WNetUseConnectionW : dwFlags...NET_USE_CONNECT_FLAGS => NET_CONNECT_FLAGS
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_CMD_SAVECRED added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_COMMANDLINE added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_CRED_RESET added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_CURRENT_MEDIA added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_DEFERRED added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_GLOBAL_MAPPING added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_INTERACTIVE added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_LOCALDRIVE added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_NEED_DRIVE added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_PROMPT added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_REDIRECT added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_REFCOUNT added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_REQUIRE_INTEGRITY added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_REQUIRE_PRIVACY added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_RESERVED added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_TEMPORARY added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_UPDATE_PROFILE added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_UPDATE_RECENT added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_WRITE_THROUGH_SEMANTICS added
+Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS removed
+Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS.CONNECT_CMD_SAVECRED removed
+Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS.CONNECT_COMMANDLINE removed
+Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS.CONNECT_DEFERRED removed
+Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS.CONNECT_INTERACTIVE removed
+Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS.CONNECT_PROMPT removed
+Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS.CONNECT_REDIRECT removed
+Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS.CONNECT_TEMPORARY removed
+Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS.CONNECT_UPDATE_PROFILE removed
+Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS.CONNECT_UPDATE_RECENT removed
+Windows.Win32.NetworkManagement.WNet.NOTIFYADD.dwAddFlags...Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS => Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS

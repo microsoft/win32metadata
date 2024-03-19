@@ -12199,38 +12199,45 @@
     ]
   },
   {
-    "name": "NET_USE_CONNECT_FLAGS",
+    "name": "NET_CONNECT_FLAGS",
     "flags": true,
-    "members": [
-      {
-        "name": "CONNECT_INTERACTIVE"
-      },
-      {
-        "name": "CONNECT_PROMPT"
-      },
-      {
-        "name": "CONNECT_REDIRECT"
-      },
-      {
-        "name": "CONNECT_UPDATE_PROFILE"
-      },
-      {
-        "name": "CONNECT_COMMANDLINE"
-      },
-      {
-        "name": "CONNECT_CMD_SAVECRED"
-      },
-      {
-        "name": "CONNECT_TEMPORARY"
-      },
-      {
-        "name": "CONNECT_DEFERRED"
-      },
-      {
-        "name": "CONNECT_UPDATE_RECENT"
-      }
-    ],
+    "autoPopulate": {
+      "filter": "CONNECT_",
+      "header": "winnetwk.h"
+    },
     "uses": [
+      {
+        "method": "WNetAddConnection2A",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "WNetAddConnection2W",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "WNetAddConnection3A",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "WNetAddConnection3W",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "WNetAddConnection4A",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "WNetAddConnection4W",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "WNetCancelConnection2A",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "WNetCancelConnection2W",
+        "parameter": "dwFlags"
+      },
       {
         "method": "WNetUseConnectionW",
         "parameter": "dwFlags"
