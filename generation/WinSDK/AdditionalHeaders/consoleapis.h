@@ -1,5 +1,4 @@
 #include <windows.h>
-#include <ntdef.h>
 
 #ifdef __cplusplus
 extern "C" {

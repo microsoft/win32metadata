@@ -15,7 +15,6 @@ enum CALDATETIME_DATEUNIT {
   MinuteUnit, 
   SecondUnit, 
   TickUnit 
-
 };
 
 typedef struct _caldatetime {
