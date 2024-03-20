@@ -4487,7 +4487,59 @@
     "members": [
       {
         "name": "RPC_S_OK",
-        "value": "0"
+        "value": "(int)WIN32_ERROR.ERROR_SUCCESS"
+      },
+      {
+        "name": "RPC_S_ACCESS_DENIED",
+        "value": "(int)WIN32_ERROR.ERROR_ACCESS_DENIED"
+      },
+      {
+        "name": "RPC_S_INVALID_ARG",
+        "value": "(int)WIN32_ERROR.ERROR_INVALID_PARAMETER"
+      },
+      {
+        "name": "RPC_S_OUT_OF_MEMORY",
+        "value": "(int)WIN32_ERROR.ERROR_OUTOFMEMORY"
+      },
+      {
+        "name": "RPC_S_OUT_OF_THREADS",
+        "value": "(int)WIN32_ERROR.ERROR_MAX_THRDS_REACHED"
+      },
+      {
+        "name": "RPC_S_INVALID_LEVEL",
+        "value": "(int)WIN32_ERROR.ERROR_INVALID_PARAMETER"
+      },
+      {
+        "name": "RPC_S_BUFFER_TOO_SMALL",
+        "value": "(int)WIN32_ERROR.ERROR_INSUFFICIENT_BUFFER"
+      },
+      {
+        "name": "RPC_S_INVALID_SECURITY_DESC",
+        "value": "(int)WIN32_ERROR.ERROR_INVALID_SECURITY_DESCR"
+      },
+      {
+        "name": "RPC_S_SERVER_OUT_OF_MEMORY",
+        "value": "(int)WIN32_ERROR.ERROR_NOT_ENOUGH_SERVER_MEMORY"
+      },
+      {
+        "name": "RPC_S_ASYNC_CALL_PENDING",
+        "value": "(int)WIN32_ERROR.ERROR_IO_PENDING"
+      },
+      {
+        "name": "RPC_S_UNKNOWN_PRINCIPAL",
+        "value": "(int)WIN32_ERROR.ERROR_NONE_MAPPED"
+      },
+      {
+        "name": "RPC_S_TIMEOUT",
+        "value": "(int)WIN32_ERROR.ERROR_TIMEOUT"
+      },
+      {
+        "name": "RPC_S_RUNTIME_UNINITIALIZED",
+        "value": "(int)WIN32_ERROR.ERROR_INVALID_FUNCTION"
+      },
+      {
+        "name": "RPC_S_NOT_ENOUGH_QUOTA",
+        "value": "(int)WIN32_ERROR.ERROR_NOT_ENOUGH_QUOTA"
       }
     ],
     "uses": []

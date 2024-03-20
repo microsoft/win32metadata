@@ -248,3 +248,28 @@ Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS.CONNECT_TEMPORARY rem
 Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS.CONNECT_UPDATE_PROFILE removed
 Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS.CONNECT_UPDATE_RECENT removed
 Windows.Win32.NetworkManagement.WNet.NOTIFYADD.dwAddFlags...Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS => Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS
+# Fixed #1857.
+Windows.Win32.Foundation.Apis.RPC_S_ACCESS_DENIED removed
+Windows.Win32.Foundation.Apis.RPC_S_ASYNC_CALL_PENDING removed
+Windows.Win32.Foundation.Apis.RPC_S_BUFFER_TOO_SMALL removed
+Windows.Win32.Foundation.Apis.RPC_S_INVALID_ARG removed
+Windows.Win32.Foundation.Apis.RPC_S_INVALID_LEVEL removed
+Windows.Win32.Foundation.Apis.RPC_S_INVALID_SECURITY_DESC removed
+Windows.Win32.Foundation.Apis.RPC_S_NOT_ENOUGH_QUOTA removed
+Windows.Win32.Foundation.Apis.RPC_S_OUT_OF_MEMORY removed
+Windows.Win32.Foundation.Apis.RPC_S_OUT_OF_THREADS removed
+Windows.Win32.Foundation.Apis.RPC_S_SERVER_OUT_OF_MEMORY removed
+Windows.Win32.Foundation.Apis.RPC_S_UNKNOWN_PRINCIPAL removed
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_ACCESS_DENIED added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_ASYNC_CALL_PENDING added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_BUFFER_TOO_SMALL added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_INVALID_ARG added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_INVALID_LEVEL added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_INVALID_SECURITY_DESC added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_NOT_ENOUGH_QUOTA added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_OUT_OF_MEMORY added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_OUT_OF_THREADS added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_RUNTIME_UNINITIALIZED added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_SERVER_OUT_OF_MEMORY added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_TIMEOUT added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_UNKNOWN_PRINCIPAL added
