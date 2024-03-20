@@ -386,3 +386,15 @@ Windows.Win32.Graphics.Dxgi.IDXGIResource.SetEvictionPriority : EvictionPriority
 Windows.Win32.Graphics.Dxgi.IDXGISurface.Map : MapFlags...UInt32 => DXGI_MAP_FLAGS
 Windows.Win32.Graphics.Dxgi.IDXGISwapChain.Present : Flags...UInt32 => DXGI_PRESENT
 Windows.Win32.Graphics.Dxgi.IDXGISwapChain1.Present1 : PresentFlags...UInt32 => DXGI_PRESENT
+# dxgi: Annotate GetDesc::pDesc with RetVal attribute
+Windows.Win32.Graphics.Dxgi.IDXGIAdapter.GetDesc : pDesc : [Out] => [Out,RetVal]
+Windows.Win32.Graphics.Dxgi.IDXGIAdapter1.GetDesc1 : pDesc : [Out] => [Out,RetVal]
+Windows.Win32.Graphics.Dxgi.IDXGIAdapter2.GetDesc2 : pDesc : [Out] => [Out,RetVal]
+Windows.Win32.Graphics.Dxgi.IDXGIAdapter4.GetDesc3 : pDesc : [Out] => [Out,RetVal]
+Windows.Win32.Graphics.Dxgi.IDXGIOutput.GetDesc : pDesc : [Out] => [Out,RetVal]
+Windows.Win32.Graphics.Dxgi.IDXGIOutput6.GetDesc1 : pDesc : [Out] => [Out,RetVal]
+Windows.Win32.Graphics.Dxgi.IDXGIOutputDuplication.GetDesc : pDesc : [Out] => [Out,RetVal]
+Windows.Win32.Graphics.Dxgi.IDXGISurface.GetDesc : pDesc : [Out] => [Out,RetVal]
+Windows.Win32.Graphics.Dxgi.IDXGISwapChain.GetDesc : pDesc : [Out] => [Out,RetVal]
+Windows.Win32.Graphics.Dxgi.IDXGISwapChain1.GetDesc1 : pDesc : [Out] => [Out,RetVal]
+Windows.Win32.Graphics.Dxgi.IDXGISwapChain1.GetFullscreenDesc : pDesc : [Out] => [Out,RetVal]
