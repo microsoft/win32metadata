@@ -10,4 +10,5 @@
 
 #include <Print3DManagerInterop.h>
 #include <PrintManagerInterop.h>
+#include <DocumentSource.h>
 #include <windows.graphics.printing.workflow.native.h>
