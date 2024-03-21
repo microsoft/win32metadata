@@ -119,9 +119,6 @@ stages:
         artifact: 'generated_arm64'
         path: '$(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\generation\WinSDK\obj'
 
-    - script: dir /s $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\generation\WinSDK\obj
-      displayName: Print generated files directory ($(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\)
-
     - task: PowerShell@2
       displayName: Build metadata binary
       inputs:
@@ -214,6 +211,9 @@ stages:
     #     MaxConcurrency: '50'
     #     MaxRetryAttempts: '2'
     #   condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
+
+    - script: dir /s $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\sources\GeneratorSdk\samples\diasdk
+      displayName: Print DiaSDK directory ($(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\)
 
     - task: PowerShell@2
       displayName: Do packages
