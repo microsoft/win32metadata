@@ -250,7 +250,7 @@
     "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.Media",
+    "Namespace": "Windows.Win32.Foundation",
     "Name": "HTASK",
     "ValueType": "DECLARE_HANDLE",
     "InvalidHandleValues": [ -1, 0 ],
