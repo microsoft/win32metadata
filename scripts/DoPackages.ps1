@@ -28,5 +28,7 @@ dir -S "$PSScriptRoot\..\sources\GeneratorSdk\samples\diasdk"
 
 Get-Content "$PSScriptRoot\..\sources\GeneratorSdk\samples\diasdk\obj\dia2.idl"
 
+dotnet build "$PSScriptRoot\..\sources\GeneratorSdk\samples\diasdk" -c Release
+
 dotnet pack "$PSScriptRoot\..\sources\GeneratorSdk\samples\diasdk" -c Release
 ThrowOnNativeProcessError

@@ -220,7 +220,6 @@ stages:
       displayName: Do packages
       inputs:
         filePath: $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\scripts\DoPackages.ps1
-        arguments: -SkipInstallTools
         pwsh: true
 
     # - task: DotNetCoreCLI@2
