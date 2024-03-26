@@ -222,6 +222,13 @@ stages:
         arguments: -SkipInstallTools
         pwsh: true
 
+    - task: DotNetCoreCLI@2
+      displayName: Do packages (pack)
+      inputs:
+        command: 'pack'
+        projects: '$(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\sources\GeneratorSdk\samples\diasdk'
+        configuration: 'Release'
+
     - task: PowerShell@2
       displayName: Do samples
       inputs:
