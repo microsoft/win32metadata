@@ -226,8 +226,11 @@ stages:
       displayName: Do packages (pack)
       inputs:
         command: 'pack'
-        projects: '$(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\sources\GeneratorSdk\samples\diasdk'
+        packagesToPack: '$(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\sources\GeneratorSdk\samples\DiaSdk\DiaSdk.proj'
         configuration: 'Release'
+
+    - script: dir /s $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\sources\GeneratorSdk\samples\diasdk
+      displayName: Print DiaSDK directory ($(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\)
 
     - task: PowerShell@2
       displayName: Do samples
