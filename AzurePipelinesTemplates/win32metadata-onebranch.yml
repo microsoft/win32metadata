@@ -228,6 +228,7 @@ stages:
         command: 'pack'
         packagesToPack: '$(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\sources\GeneratorSdk\samples\DiaSdk\DiaSdk.proj'
         configuration: 'Release'
+        workingDirectory: '$(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\sources\GeneratorSdk\samples\DiaSdk\'
 
     - script: dir /s $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\sources\GeneratorSdk\samples\diasdk
       displayName: Print DiaSDK directory ($(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\)
