@@ -54,7 +54,7 @@ stages:
           nbgv cloud 
 
     - task: PowerShell@2
-      displayName: GenerateMetadataSource.ps1 - 
+      displayName: GenerateMetadataSource.ps1
       inputs:
         filePath: '${{ parameters.RepoDirectory }}\scripts\GenerateMetadataSource.ps1'
         arguments: '-arch $(arch) $(generateMetadataArgs)'
