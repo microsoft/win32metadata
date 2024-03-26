@@ -19,11 +19,14 @@ ThrowOnNativeProcessError
 
 dotnet clean "$PSScriptRoot\..\sources\GeneratorSdk\samples\diasdk" -c Release
 
-# dotnet build "$PSScriptRoot\..\sources\GeneratorSdk\samples\diasdk" -c Release
 
-# dir -S "$PSScriptRoot\..\sources\GeneratorSdk\samples\diasdk"
+& "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat"
 
-# Get-Content "$PSScriptRoot\..\sources\GeneratorSdk\samples\diasdk\obj\dia2.idl"
+dotnet build "$PSScriptRoot\..\sources\GeneratorSdk\samples\diasdk" -c Release
 
-# dotnet pack "$PSScriptRoot\..\sources\GeneratorSdk\samples\diasdk" -c Release
+dir -S "$PSScriptRoot\..\sources\GeneratorSdk\samples\diasdk"
+
+Get-Content "$PSScriptRoot\..\sources\GeneratorSdk\samples\diasdk\obj\dia2.idl"
+
+dotnet pack "$PSScriptRoot\..\sources\GeneratorSdk\samples\diasdk" -c Release
 ThrowOnNativeProcessError
