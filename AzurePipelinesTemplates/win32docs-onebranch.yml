@@ -8,6 +8,9 @@ parameters:
 - name: BuildConfiguration
   type: string
   default: Release
+- name: OfficialBuild
+  type: boolean
+  default: false
 
 stages:
 - stage: build_docs
@@ -45,6 +48,15 @@ stages:
     - script: dotnet build -c ${{ parameters.BuildConfiguration }}
       displayName: 🏭 dotnet build
       workingDirectory: $(Build.SourcesDirectory)/apidocs
+      
+    - task: onebranch.pipeline.signing@1
+      displayName: '🔒 Onebranch Signing for nuget packages'
+      condition: eq(${{ parameters.OfficialBuild }}, 'true')
+      inputs:
+        command: sign
+        signing_profile: external_distribution
+        files_to_sign: '*.dll'
+        search_root: $(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/${{parameters.BuildConfiguration}}/netstandard2.0
     # - task: EsrpCodeSigning@1
     #   displayName: ✒ Assembly sign
     #   inputs:
@@ -90,6 +102,15 @@ stages:
     - script: dotnet pack Microsoft.Windows.SDK.Win32Docs --no-build -c ${{ parameters.BuildConfiguration }} -p:BuildProjectReferences=false
       displayName: 📦 dotnet pack
       workingDirectory: $(Build.SourcesDirectory)/apidocs
+
+    - task: onebranch.pipeline.signing@1
+      displayName: '🔒 Onebranch Signing for nuget packages'
+      condition: eq(${{ parameters.OfficialBuild }}, 'true')
+      inputs:
+        command: sign
+        signing_profile: external_distribution
+        files_to_sign: '*.nupkg'
+        search_root: $(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/Packages/${{parameters.BuildConfiguration}}/NuGet
     # - task: EsrpCodeSigning@1
     #   displayName: ✒ NuGet sign
     #   inputs:
@@ -123,14 +144,14 @@ stages:
       displayName: 📢 Stage package for publishing
       inputs:
         Contents: |
-          bin/Packages/${{parameters.BuildConfiguration}}/NuGet
+          $(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/Packages/${{parameters.BuildConfiguration}}/NuGet/**
         TargetFolder: '$(Build.ArtifactStagingDirectory)/ApiDocsNuGetPackages'
 
     - task: CopyFiles@2
       displayName: 📢 Stage metadata for publishing
       inputs:
         Contents: |
-          bin/${{parameters.BuildConfiguration}}/netstandard2.0/documentationMappings.rsp
+          $(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/${{parameters.BuildConfiguration}}/netstandard2.0/documentationMappings.rsp
         TargetFolder: '$(Build.ArtifactStagingDirectory)/ApiDocsMetadata'
 
     #   # There's a problem on microsoft.visualstudio.com that requires the guid instead of NuGetCommand@2
