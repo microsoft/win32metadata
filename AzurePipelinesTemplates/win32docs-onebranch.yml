@@ -49,14 +49,15 @@ stages:
       displayName: 🏭 dotnet build
       workingDirectory: $(Build.SourcesDirectory)/apidocs
       
-    - task: onebranch.pipeline.signing@1
-      displayName: '🔒 Onebranch Signing for nuget packages'
-      condition: eq(${{ parameters.OfficialBuild }}, 'true')
-      inputs:
-        command: sign
-        signing_profile: external_distribution
-        files_to_sign: '*.dll'
-        search_root: $(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/${{parameters.BuildConfiguration}}/netstandard2.0
+    # - task: onebranch.pipeline.signing@1
+    #   displayName: '🔒 Onebranch Signing for nuget packages'
+    #   condition: eq(${{ parameters.OfficialBuild }}, 'true')
+    #   inputs:
+    #     command: sign
+    #     signing_profile: external_distribution
+    #     files_to_sign: '*.dll'
+    #     search_root: $(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/${{parameters.BuildConfiguration}}/netstandard2.0
+    
     # - task: EsrpCodeSigning@1
     #   displayName: ✒ Assembly sign
     #   inputs:

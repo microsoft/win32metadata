@@ -131,29 +131,16 @@ stages:
         pwsh: true
 
     - task: onebranch.pipeline.signing@1
-      displayName: '🔒 Onebranch Signing for Binaries in Metadata package'
-      condition: eq(${{ parameters.OfficialBuild }}, 'true')
-      inputs:
-        command: sign
-        signing_profile: external_distribution
-        files_to_sign: 'Windows.Win32.winmd'
-        search_root: $(Build.SourcesDirectory)\${{ parameters.RepoDirectory }}\bin
-
-    - task: onebranch.pipeline.signing@1
       displayName: '🔒 Onebranch Signing for net8.0 binaries in Generator SDK package'
       condition: eq(${{ parameters.OfficialBuild }}, 'true')
       inputs:
         command: sign
         signing_profile: external_distribution
         files_to_sign: |
-          ClangSharpSourceToWinmd.dll;
-          ConstantsScraper.dll;
-          CsvHelper.dll;
-          ICSharpCode.Decompiler.dll;
-          MetadataTasks.dll;
-          MetadataUtils.dll;
-          WinmdUtils.dll;
-        search_root: $(Build.SourcesDirectory)\${{ parameters.RepoDirectory }}\bin\$(BuildConfiguration)\net8.0
+          bin/$(BuildConfiguration)/net8.0/*.dll
+          bin/Windows.Win32.winmd
+          scripts/*.ps1
+        search_root: $(Build.SourcesDirectory)\${{ parameters.RepoDirectory }}
 
     - task: PowerShell@2
       displayName: Do packages
