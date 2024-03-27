@@ -8,6 +8,9 @@ parameters:
 - name: BuildConfiguration
   type: string
   default: Release
+- name: OfficialBuild
+  type: boolean
+  default: false
 
 stages:
 - stage: scrape
