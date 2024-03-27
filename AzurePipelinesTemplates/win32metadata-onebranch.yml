@@ -213,9 +213,6 @@ stages:
     #     MaxRetryAttempts: '2'
     #   condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
 
-    - script: dir /s $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\sources\GeneratorSdk\samples\diasdk
-      displayName: Print DiaSDK directory ($(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\)
-
     - task: PowerShell@2
       displayName: Do packages
       inputs:
@@ -230,21 +227,16 @@ stages:
     #     configuration: 'Release'
     #     workingDirectory: '$(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\sources\GeneratorSdk\samples\DiaSdk\'
 
-    - script: dir /s $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\sources\GeneratorSdk\samples\diasdk
-      displayName: Print DiaSDK directory ($(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\)
-
     - task: PowerShell@2
       displayName: Do samples
       inputs:
         filePath: $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\scripts\DoSamples.ps1
-        arguments: -SkipInstallTools
         pwsh: true
 
     - task: PowerShell@2
       displayName: Do tests
       inputs:
         filePath: $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\scripts\DoTests.ps1
-        arguments: -SkipInstallTools
         pwsh: true
 
     # - task: EsrpCodeSigning@1
