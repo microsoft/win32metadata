@@ -59,7 +59,7 @@ stages:
         filePath: '${{ parameters.RepoDirectory }}\scripts\GenerateMetadataSource.ps1'
         arguments: '-arch $(arch) $(generateMetadataArgs)'
         errorActionPreference: 'continue'
-        pwsh: true
+        pwsh: true 
 
 - stage: build_winmd
   displayName: "Build WinMD"
