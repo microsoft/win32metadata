@@ -127,105 +127,97 @@ stages:
         arguments: '-assetsScrapedSeparately'
         pwsh: true
 
-    # - task: EsrpCodeSigning@1
-    #   displayName: 'Authenticode Sign Binaries in Metadata package'
-    #   inputs:
-    #     ConnectedServiceName: 'Xlang Code Signing'
-    #     FolderPath: '$(Build.SourcesDirectory)\bin'
-    #     Pattern: 'Windows.Win32.winmd'
-    #     signConfigType: 'inlineSignParams'
-    #     inlineOperation: |
-    #       [
-    #         {
-    #           "keyCode": "CP-230012",
-    #           "operationSetCode": "SigntoolSign",
-    #           "parameters": [
-    #             {
-    #               "parameterName": "OpusName",
-    #               "parameterValue": "Microsoft"
-    #             },
-    #             {
-    #               "parameterName": "OpusInfo",
-    #               "parameterValue": "http://www.microsoft.com"
-    #             },
-    #             {
-    #               "parameterName": "PageHash",
-    #               "parameterValue": "/NPH"
-    #             },
-    #             {
-    #               "parameterName": "FileDigest",
-    #               "parameterValue": "/fd sha256"
-    #             },
-    #             {
-    #               "parameterName": "TimeStamp",
-    #               "parameterValue": "/tr \"http://rfc3161.gtm.corp.microsoft.com/TSS/HttpTspServer\" /td sha256"
-    #             }
-    #           ],
-    #           "toolName": "signtool.exe",
-    #           "toolVersion": "6.2.9304.0"
-    #         }
-    #       ]
-    #     SessionTimeout: '60'
-    #     MaxConcurrency: '50'
-    #     MaxRetryAttempts: '2'
-    #   condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
+    - task: EsrpCodeSigning@1
+      displayName: 'Authenticode Sign Binaries in Metadata package'
+      inputs:
+        ConnectedServiceName: 'Xlang Code Signing'
+        FolderPath: '$(Build.SourcesDirectory)\bin'
+        Pattern: 'Windows.Win32.winmd'
+        signConfigType: 'inlineSignParams'
+        inlineOperation: |
+          [
+            {
+              "keyCode": "CP-230012",
+              "operationSetCode": "SigntoolSign",
+              "parameters": [
+                {
+                  "parameterName": "OpusName",
+                  "parameterValue": "Microsoft"
+                },
+                {
+                  "parameterName": "OpusInfo",
+                  "parameterValue": "http://www.microsoft.com"
+                },
+                {
+                  "parameterName": "PageHash",
+                  "parameterValue": "/NPH"
+                },
+                {
+                  "parameterName": "FileDigest",
+                  "parameterValue": "/fd sha256"
+                },
+                {
+                  "parameterName": "TimeStamp",
+                  "parameterValue": "/tr \"http://rfc3161.gtm.corp.microsoft.com/TSS/HttpTspServer\" /td sha256"
+                }
+              ],
+              "toolName": "signtool.exe",
+              "toolVersion": "6.2.9304.0"
+            }
+          ]
+        SessionTimeout: '60'
+        MaxConcurrency: '50'
+        MaxRetryAttempts: '2'
+      condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
 
-    # - task: EsrpCodeSigning@1
-    #   displayName: Authenticode sign net8.0 binaries in Generator SDK package
-    #   inputs:
-    #     ConnectedServiceName: 'Xlang Code Signing'
-    #     FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\net8.0'
-    #     Pattern: 'ClangSharpSourceToWinmd.dll,ConstantsScraper.dll,CsvHelper.dll,ICSharpCode.Decompiler.dll,MetadataTasks.dll,MetadataUtils.dll,WinmdUtils.dll'
-    #     signConfigType: 'inlineSignParams'
-    #     inlineOperation: |
-    #       [
-    #         {
-    #           "keyCode": "CP-230012",
-    #           "operationSetCode": "SigntoolSign",
-    #           "parameters": [
-    #             {
-    #               "parameterName": "OpusName",
-    #               "parameterValue": "Microsoft"
-    #             },
-    #             {
-    #               "parameterName": "OpusInfo",
-    #               "parameterValue": "http://www.microsoft.com"
-    #             },
-    #             {
-    #               "parameterName": "PageHash",
-    #               "parameterValue": "/NPH"
-    #             },
-    #             {
-    #               "parameterName": "FileDigest",
-    #               "parameterValue": "/fd sha256"
-    #             },
-    #             {
-    #               "parameterName": "TimeStamp",
-    #               "parameterValue": "/tr \"http://rfc3161.gtm.corp.microsoft.com/TSS/HttpTspServer\" /td sha256"
-    #             }
-    #           ],
-    #           "toolName": "signtool.exe",
-    #           "toolVersion": "6.2.9304.0"
-    #         }
-    #       ]
-    #     SessionTimeout: '60'
-    #     MaxConcurrency: '50'
-    #     MaxRetryAttempts: '2'
-    #   condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
+    - task: EsrpCodeSigning@1
+      displayName: Authenticode sign net8.0 binaries in Generator SDK package
+      inputs:
+        ConnectedServiceName: 'Xlang Code Signing'
+        FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\net8.0'
+        Pattern: 'ClangSharpSourceToWinmd.dll,ConstantsScraper.dll,CsvHelper.dll,ICSharpCode.Decompiler.dll,MetadataTasks.dll,MetadataUtils.dll,WinmdUtils.dll'
+        signConfigType: 'inlineSignParams'
+        inlineOperation: |
+          [
+            {
+              "keyCode": "CP-230012",
+              "operationSetCode": "SigntoolSign",
+              "parameters": [
+                {
+                  "parameterName": "OpusName",
+                  "parameterValue": "Microsoft"
+                },
+                {
+                  "parameterName": "OpusInfo",
+                  "parameterValue": "http://www.microsoft.com"
+                },
+                {
+                  "parameterName": "PageHash",
+                  "parameterValue": "/NPH"
+                },
+                {
+                  "parameterName": "FileDigest",
+                  "parameterValue": "/fd sha256"
+                },
+                {
+                  "parameterName": "TimeStamp",
+                  "parameterValue": "/tr \"http://rfc3161.gtm.corp.microsoft.com/TSS/HttpTspServer\" /td sha256"
+                }
+              ],
+              "toolName": "signtool.exe",
+              "toolVersion": "6.2.9304.0"
+            }
+          ]
+        SessionTimeout: '60'
+        MaxConcurrency: '50'
+        MaxRetryAttempts: '2'
+      condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
 
     - task: PowerShell@2
       displayName: Do packages
       inputs:
         filePath: $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\scripts\DoPackages.ps1
         pwsh: true
-
-    # - task: DotNetCoreCLI@2
-    #   displayName: Do packages (pack)
-    #   inputs:
-    #     command: 'pack'
-    #     packagesToPack: '$(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\sources\GeneratorSdk\samples\DiaSdk\DiaSdk.proj'
-    #     configuration: 'Release'
-    #     workingDirectory: '$(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\sources\GeneratorSdk\samples\DiaSdk\'
 
     - task: PowerShell@2
       displayName: Do samples
@@ -239,34 +231,48 @@ stages:
         filePath: $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\scripts\DoTests.ps1
         pwsh: true
 
-    # - task: EsrpCodeSigning@1
-    #   displayName: 'Sign nuget packages'
-    #   inputs:
-    #     ConnectedServiceName: 'Xlang Code Signing'
-    #     FolderPath: '$(OutputPackagesDir)'
-    #     Pattern: '*.nupkg'
-    #     signConfigType: 'inlineSignParams'
-    #     inlineOperation: |
-    #       [
-    #         {
-    #           "KeyCode" : "CP-401405",
-    #           "OperationCode" : "NuGetSign",
-    #           "Parameters" : {},
-    #           "ToolName" : "sign",
-    #           "ToolVersion" : "1.0"
-    #         },
-    #         {
-    #             "KeyCode" : "CP-401405",
-    #             "OperationCode" : "NuGetVerify",
-    #             "Parameters" : {},
-    #             "ToolName" : "sign",
-    #             "ToolVersion" : "1.0"
-    #         }
-    #       ]
-    #     SessionTimeout: '60'
-    #     MaxConcurrency: '50'
-    #     MaxRetryAttempts: '2'
-    #   condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
+    - task: EsrpCodeSigning@1
+      displayName: 'Sign nuget packages'
+      inputs:
+        ConnectedServiceName: 'Xlang Code Signing'
+        FolderPath: '$(OutputPackagesDir)'
+        Pattern: '*.nupkg'
+        signConfigType: 'inlineSignParams'
+        inlineOperation: |
+          [
+            {
+              "KeyCode" : "CP-401405",
+              "OperationCode" : "NuGetSign",
+              "Parameters" : {},
+              "ToolName" : "sign",
+              "ToolVersion" : "1.0"
+            },
+            {
+                "KeyCode" : "CP-401405",
+                "OperationCode" : "NuGetVerify",
+                "Parameters" : {},
+                "ToolName" : "sign",
+                "ToolVersion" : "1.0"
+            }
+          ]
+        SessionTimeout: '60'
+        MaxConcurrency: '50'
+        MaxRetryAttempts: '2'
+      condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
+
+    # Copy build logs to artifact staging directory
+    - task: CopyFiles@2
+      displayName: 📢 Copy build logs to pipeline artifact staging directory 
+      inputs:
+        SourceFolder: '$(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/logs'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+    # Copy nuget package to artifact staging directory
+    - task: CopyFiles@2
+      displayName: Copy NuGet packages to pipeline artifact staging directory
+      inputs:
+        SourceFolder: '$(OutputPackagesDir)'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
     # - publish: bin/logs
     #   artifact: build_logs
