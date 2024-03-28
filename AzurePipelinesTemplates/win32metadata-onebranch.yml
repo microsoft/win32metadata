@@ -133,10 +133,7 @@ stages:
       inputs:
         command: 'sign'
         signing_profile: external_distribution
-        files_to_sign: |
-          **\bin\Release\net8.0\*.dll;
-          **\bin\*.winmd;
-          **\scripts\*.ps1;
+        files_to_sign: '**/*.dll;**/*.winmd;**/*.ps1;'
         search_root: $(Build.SourcesDirectory)/${{ parameters.RepoDirectory }}
 
     - task: PowerShell@2
