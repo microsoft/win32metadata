@@ -173,6 +173,7 @@ stages:
       inputs:
         filePath: $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\scripts\DoPackages.ps1
         pwsh: true
+        arguments: -SkipInstallTools
 
     - task: PowerShell@2
       displayName: Debug bin printing
@@ -186,12 +187,14 @@ stages:
       inputs:
         filePath: $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\scripts\DoSamples.ps1
         pwsh: true
+        arguments: -SkipInstallTools
 
     - task: PowerShell@2
       displayName: Do tests
       inputs:
         filePath: $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\scripts\DoTests.ps1
         pwsh: true
+        arguments: -SkipInstallTools
 
     - task: onebranch.pipeline.signing@1
       displayName: '🔒 Onebranch Signing for nuget packages'
