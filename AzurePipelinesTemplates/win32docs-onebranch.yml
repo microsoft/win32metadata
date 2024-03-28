@@ -46,7 +46,7 @@ stages:
     - powershell: dotnet tool update --global nbgv
       displayName: ⚙ Install nbgv
     - task: PowerShell@2
-      displayName: Build docs
+      displayName: 🏭 dotnet build
       inputs:
         filePath: $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\scripts\BuildDocs.ps1
         pwsh: true
@@ -105,9 +105,15 @@ stages:
     #     MaxConcurrency: 50
     #     MaxRetryAttempts: 5
     #   condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
-    - script: dotnet pack Microsoft.Windows.SDK.Win32Docs --no-build -c ${{ parameters.BuildConfiguration }} -p:BuildProjectReferences=false
+
+    - task: PowerShell@2
       displayName: 📦 dotnet pack
-      workingDirectory: $(Build.SourcesDirectory)/apidocs
+      inputs:
+        filePath: $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\scripts\PackDocs.ps1
+        pwsh: true
+    # - script: dotnet pack Microsoft.Windows.SDK.Win32Docs --no-build -c ${{ parameters.BuildConfiguration }} -p:BuildProjectReferences=false
+    #   displayName: 📦 dotnet pack
+    #   workingDirectory: $(Build.SourcesDirectory)/apidocs
 
     - task: onebranch.pipeline.signing@1
       displayName: '🔒 Onebranch Signing for nuget packages'
