@@ -17,7 +17,7 @@
     <icon>images\windows.png</icon>
     <repository type="git" url="https://github.com/microsoft/win32metadata.git" />
     <dependencies>
-      <dependency id="Microsoft.Windows.SDK.Win32Metadata" version="60.0.46-preview-gbc17b1a0fb" />
+      <dependency id="Microsoft.Windows.SDK.Win32Metadata" version="60.0.65-preview-gd17a6a2228" />
     </dependencies>
   </metadata>
 
