@@ -12,8 +12,8 @@ if (!$skipInstallTools)
 
 Write-Host "*** Building Docs..." -ForegroundColor Blue
 
-dotnet clean "$PSScriptRoot\..\apidocs" -c Release
+dotnet clean "$PSScriptRoot\..\apidocs\ApiDocs.sln" -c Release
 
-dotnet build "$PSScriptRoot\..\apidocs" -c Release
+dotnet build "$PSScriptRoot\..\apidocs\ApiDocs.sln" -c Release
 
 ThrowOnNativeProcessError
