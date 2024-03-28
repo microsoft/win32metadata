@@ -133,7 +133,16 @@ stages:
       inputs:
         command: 'sign'
         signing_profile: external_distribution
-        files_to_sign: '**/*.dll;**/*.winmd;**/*.ps1;'
+        files_to_sign: |
+          bin\Release\net8.0\ClangSharpSourceToWinmd.dll;
+          bin\Release\net8.0\ConstantsScraper.dll;
+          bin\Release\net8.0\CsvHelper.dll;
+          bin\Release\net8.0\ICSharpCode.Decompiler.dll;
+          bin\Release\net8.0\MetadataTasks.dll;
+          bin\Release\net8.0\MetadataUtils.dll;
+          bin\Release\net8.0\WinmdUtils.dll;
+          bin\Windows.Win32.winmd;
+          scripts\*.ps1;
         search_root: $(Build.SourcesDirectory)/${{ parameters.RepoDirectory }}
 
     - task: PowerShell@2
