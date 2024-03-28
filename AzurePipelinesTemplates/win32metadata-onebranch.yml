@@ -135,21 +135,30 @@ stages:
           dir -S $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\bin\release\net8.0
 
     - task: onebranch.pipeline.signing@1
-      displayName: '🔒 Onebranch Signing for binaries'
+      displayName: '🔒 Onebranch Signing for nuget packages'
       condition: eq(${{ parameters.OfficialBuild }}, 'true')
       inputs:
-        command: 'sign'
+        command: sign
         signing_profile: external_distribution
-        files_to_sign: |
-          bin\release\net8.0\ClangSharpSourceToWinmd.dll;
-          bin\release\net8.0\ConstantsScraper.dll;
-          bin\release\net8.0\CsvHelper.dll;
-          bin\release\net8.0\ICSharpCode.Decompiler.dll;
-          bin\release\net8.0\MetadataTasks.dll;
-          bin\release\net8.0\MetadataUtils.dll;
-          bin\release\net8.0\WinmdUtils.dll;
-          bin\Windows.Win32.winmd;
-          scripts\*.ps1;
+        files_to_sign: '**/*.dll'
+        search_root: $(Build.SourcesDirectory)/${{ parameters.RepoDirectory }}
+
+    - task: onebranch.pipeline.signing@1
+      displayName: '🔒 Onebranch Signing for nuget packages'
+      condition: eq(${{ parameters.OfficialBuild }}, 'true')
+      inputs:
+        command: sign
+        signing_profile: external_distribution
+        files_to_sign: '**/*.ps1'
+        search_root: $(Build.SourcesDirectory)/${{ parameters.RepoDirectory }}
+
+    - task: onebranch.pipeline.signing@1
+      displayName: '🔒 Onebranch Signing for nuget packages'
+      condition: eq(${{ parameters.OfficialBuild }}, 'true')
+      inputs:
+        command: sign
+        signing_profile: external_distribution
+        files_to_sign: '**/*.dll'
         search_root: $(Build.SourcesDirectory)/${{ parameters.RepoDirectory }}
 
     - task: PowerShell@2
