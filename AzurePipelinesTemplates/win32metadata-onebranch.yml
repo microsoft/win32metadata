@@ -132,7 +132,6 @@ stages:
       condition: eq(${{ parameters.OfficialBuild }}, 'true')
       inputs:
         command: 'sign'
-        cp_code: 'CP-230012'
         signing_profile: external_distribution
         files_to_sign: |
           **\bin\Release\net8.0\*.dll;
