@@ -23,12 +23,10 @@ stages:
       ob_artifactBaseName: 'ApiDocs'
       ob_sdl_binskim_break: true # https://aka.ms/obpipelines/sdl
     pool:
-      type: linux
-      # type: linux
+      type: windows
       # isCustom: true
       # name: 'Azure Pipelines'
       # vmImage: 'Ubuntu 20.04'
-      type: linux
     steps:
     - template: win32metadata-checkout.yml
       parameters:
@@ -47,9 +45,14 @@ stages:
         version: 2.1.x
     - powershell: dotnet tool update --global nbgv
       displayName: ⚙ Install nbgv
-    - script: dotnet build -c ${{ parameters.BuildConfiguration }}
-      displayName: 🏭 dotnet build
-      workingDirectory: $(Build.SourcesDirectory)/apidocs
+    - task: PowerShell@2
+      displayName: Build docs
+      inputs:
+        filePath: $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\scripts\BuildDocs.ps1
+        pwsh: true
+    # - script: dotnet build -c ${{ parameters.BuildConfiguration }}
+    #   displayName: 🏭 dotnet build
+    #   workingDirectory: $(Build.SourcesDirectory)/apidocs
       
     # - task: onebranch.pipeline.signing@1
     #   displayName: '🔒 Onebranch Signing for nuget packages'
