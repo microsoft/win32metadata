@@ -137,9 +137,9 @@ stages:
         command: sign
         signing_profile: external_distribution
         files_to_sign: |
-          bin/$(BuildConfiguration)/net8.0/*.dll
-          bin/Windows.Win32.winmd
-          scripts/*.ps1
+          bin/Release/net8.0/*.dll;
+          bin/Windows.Win32.winmd;
+          scripts/*.ps1;
         search_root: $(Build.SourcesDirectory)\${{ parameters.RepoDirectory }}
 
     - task: PowerShell@2
