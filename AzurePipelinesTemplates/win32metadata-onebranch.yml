@@ -128,16 +128,17 @@ stages:
         pwsh: true
 
     - task: onebranch.pipeline.signing@1
-      displayName: '🔒 Onebranch Signing for net8.0 binaries in Generator SDK package'
+      displayName: '🔒 Onebranch Signing for binaries'
       condition: eq(${{ parameters.OfficialBuild }}, 'true')
       inputs:
-        command: sign
+        command: 'sign'
+        cp_code: 'CP-230012'
         signing_profile: external_distribution
         files_to_sign: |
-          bin/Release/net8.0/*.dll;
-          bin/Windows.Win32.winmd;
-          scripts/*.ps1;
-        search_root: $(Build.SourcesDirectory)\${{ parameters.RepoDirectory }}
+          **\bin\Release\net8.0\*.dll;
+          **\bin\*.winmd;
+          **\scripts\*.ps1;
+        search_root: $(Build.SourcesDirectory)/${{ parameters.RepoDirectory }}
 
     - task: PowerShell@2
       displayName: Do packages

@@ -113,7 +113,7 @@ stages:
       displayName: '🔒 Onebranch Signing for nuget packages'
       condition: eq(${{ parameters.OfficialBuild }}, 'true')
       inputs:
-        command: sign
+        command: 'sign'
         signing_profile: external_distribution
         files_to_sign: '*.nupkg'
         search_root: $(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/Packages/${{parameters.BuildConfiguration}}/NuGet
