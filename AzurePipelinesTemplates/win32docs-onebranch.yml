@@ -24,9 +24,11 @@ stages:
       ob_sdl_binskim_break: true # https://aka.ms/obpipelines/sdl
     pool:
       type: linux
-      isCustom: true
-      name: 'Azure Pipelines'
-      vmImage: 'Ubuntu 20.04'
+      # type: linux
+      # isCustom: true
+      # name: 'Azure Pipelines'
+      # vmImage: 'Ubuntu 20.04'
+      type: linux
     steps:
     - template: win32metadata-checkout.yml
       parameters:
@@ -57,7 +59,7 @@ stages:
     #     signing_profile: external_distribution
     #     files_to_sign: '*.dll'
     #     search_root: $(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/${{parameters.BuildConfiguration}}/netstandard2.0
-    
+
     # - task: EsrpCodeSigning@1
     #   displayName: ✒ Assembly sign
     #   inputs:

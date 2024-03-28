@@ -5,9 +5,6 @@ parameters:
 - name: "RepoDirectory"
   type: string
   default: "win32metadata"
-- name: BuildConfiguration
-  type: string
-  default: Release
 - name: OfficialBuild
   type: boolean
   default: false
