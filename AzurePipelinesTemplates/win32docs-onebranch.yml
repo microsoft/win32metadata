@@ -24,9 +24,6 @@ stages:
       ob_sdl_binskim_break: true # https://aka.ms/obpipelines/sdl
     pool:
       type: windows
-      # isCustom: true
-      # name: 'Azure Pipelines'
-      # vmImage: 'Ubuntu 20.04'
     steps:
     - template: win32metadata-checkout.yml
       parameters:
@@ -50,9 +47,6 @@ stages:
       inputs:
         filePath: $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\scripts\BuildDocs.ps1
         pwsh: true
-    # - script: dotnet build -c ${{ parameters.BuildConfiguration }}
-    #   displayName: 🏭 dotnet build
-    #   workingDirectory: $(Build.SourcesDirectory)/apidocs
       
     - task: onebranch.pipeline.signing@1
       displayName: '🔒 Onebranch Signing for nuget packages'
@@ -63,57 +57,11 @@ stages:
         files_to_sign: '*.dll'
         search_root: $(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/${{parameters.BuildConfiguration}}/netstandard2.0
 
-    # - task: EsrpCodeSigning@1
-    #   displayName: ✒ Assembly sign
-    #   inputs:
-    #     ConnectedServiceName: Xlang Code Signing
-    #     FolderPath: $(System.DefaultWorkingDirectory)/bin/${{parameters.BuildConfiguration}}/netstandard2.0
-    #     Pattern: '*.dll'
-    #     signConfigType: inlineSignParams
-    #     inlineOperation: |
-    #       [
-    #         {
-    #           "keyCode": "CP-230012",
-    #           "operationSetCode": "SigntoolSign",
-    #           "parameters": [
-    #             {
-    #               "parameterName": "OpusName",
-    #               "parameterValue": "Microsoft"
-    #             },
-    #             {
-    #               "parameterName": "OpusInfo",
-    #               "parameterValue": "http://www.microsoft.com"
-    #             },
-    #             {
-    #               "parameterName": "PageHash",
-    #               "parameterValue": "/NPH"
-    #             },
-    #             {
-    #               "parameterName": "FileDigest",
-    #               "parameterValue": "/fd sha256"
-    #             },
-    #             {
-    #               "parameterName": "TimeStamp",
-    #               "parameterValue": "/tr \"http://rfc3161.gtm.corp.microsoft.com/TSS/HttpTspServer\" /td sha256"
-    #             }
-    #           ],
-    #           "toolName": "signtool.exe",
-    #           "toolVersion": "6.2.9304.0"
-    #         }
-    #       ]
-    #     SessionTimeout: 60
-    #     MaxConcurrency: 50
-    #     MaxRetryAttempts: 5
-    #   condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
-
     - task: PowerShell@2
       displayName: 📦 dotnet pack
       inputs:
         filePath: $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\scripts\PackDocs.ps1
         pwsh: true
-    # - script: dotnet pack Microsoft.Windows.SDK.Win32Docs --no-build -c ${{ parameters.BuildConfiguration }} -p:BuildProjectReferences=false
-    #   displayName: 📦 dotnet pack
-    #   workingDirectory: $(Build.SourcesDirectory)/apidocs
 
     - task: onebranch.pipeline.signing@1
       displayName: '🔒 Onebranch Signing for nuget packages'
@@ -123,34 +71,6 @@ stages:
         signing_profile: external_distribution
         files_to_sign: '*.nupkg'
         search_root: $(Build.SourcesDirectory)/${{parameters.RepoDirectory}}/bin/Packages/${{parameters.BuildConfiguration}}/NuGet
-    # - task: EsrpCodeSigning@1
-    #   displayName: ✒ NuGet sign
-    #   inputs:
-    #     ConnectedServiceName: Xlang Code Signing
-    #     FolderPath: $(System.DefaultWorkingDirectory)/bin/Packages/${{parameters.BuildConfiguration}}/NuGet
-    #     Pattern: '*.nupkg'
-    #     signConfigType: inlineSignParams
-    #     inlineOperation: |
-    #       [
-    #         {
-    #           "KeyCode" : "CP-401405",
-    #           "OperationCode" : "NuGetSign",
-    #           "Parameters" : {},
-    #           "ToolName" : "sign",
-    #           "ToolVersion" : "1.0"
-    #         },
-    #         {
-    #           "KeyCode" : "CP-401405",
-    #           "OperationCode" : "NuGetVerify",
-    #           "Parameters" : {},
-    #           "ToolName" : "sign",
-    #           "ToolVersion" : "1.0"
-    #         }
-    #       ]
-    #     SessionTimeout: 60
-    #     MaxConcurrency: 50
-    #     MaxRetryAttempts: 5
-    #   condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
 
     - task: CopyFiles@2
       displayName: 📢 Stage package for publishing
