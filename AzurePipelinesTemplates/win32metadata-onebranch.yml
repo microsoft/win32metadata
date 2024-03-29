@@ -126,13 +126,6 @@ stages:
         filePath: '${{ parameters.RepoDirectory }}\scripts\BuildMetadataBin.ps1'
         arguments: '-assetsScrapedSeparately'
         pwsh: true
-    
-    - task: PowerShell@2
-      displayName: Debug bin printing
-      inputs:
-        targetType: inline
-        script: |
-          dir -S $(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\bin\release\net8.0
 
     - task: onebranch.pipeline.signing@1
       displayName: '🔒 Onebranch Signing for nuget packages'
@@ -141,13 +134,13 @@ stages:
         command: sign
         signing_profile: external_distribution
         files_to_sign: |
-          Release/net8.0/ClangSharpSourceToWinmd.dll;
-          Release/net8.0/ConstantsScraper.dll;
-          Release/net8.0/CsvHelper.dll;
-          Release/net8.0/ICSharpCode.Decompiler.dll;
-          Release/net8.0/MetadataTasks.dll;
-          Release/net8.0/MetadataUtils.dll;
-          Release/net8.0/WinmdUtils.dll;
+          bin/Release/net8.0/ClangSharpSourceToWinmd.dll;
+          bin/Release/net8.0/ConstantsScraper.dll;
+          bin/Release/net8.0/CsvHelper.dll;
+          bin/Release/net8.0/ICSharpCode.Decompiler.dll;
+          bin/Release/net8.0/MetadataTasks.dll;
+          bin/Release/net8.0/MetadataUtils.dll;
+          bin/Release/net8.0/WinmdUtils.dll;
           bin/Windows.Win32.winmd;
           scripts/*.ps1;
         search_root: $(Build.SourcesDirectory)/${{ parameters.RepoDirectory }}
