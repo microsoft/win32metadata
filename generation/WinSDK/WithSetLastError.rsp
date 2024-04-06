@@ -677,6 +677,7 @@ CryptStringToBinaryA
 CryptStringToBinaryW
 CryptUIDlgViewCertificateA
 CryptUIDlgViewCertificateW
+CryptUIWizDigitalSign
 CryptUIWizExport
 CryptUIWizImport
 CryptUninstallDefaultContext

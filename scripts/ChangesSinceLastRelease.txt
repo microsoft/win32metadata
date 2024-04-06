@@ -291,3 +291,5 @@ Windows.Win32.UI.WindowsAndMessaging.Apis.SendMessageTimeoutW : [DllImport(USER3
 # Fixed #1866.
 Windows.Win32.System.WinRT.Printing.IPrintDocumentPageSource added
 Windows.Win32.System.WinRT.Printing.IPrintPreviewPageCollection added
+# CryptUIWizDigitalSign sets the last error on failure.
+Windows.Win32.Security.Cryptography.UI.Apis.CryptUIWizDigitalSign : [DllImport(CRYPTUI.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/cryptuiapi/nf-cryptuiapi-cryptuiwizdigitalsign),SupportedOSPlatform(windows5.1.2600)] => [DllImport(CRYPTUI.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/cryptuiapi/nf-cryptuiapi-cryptuiwizdigitalsign),SupportedOSPlatform(windows5.1.2600)]
