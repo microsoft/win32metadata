@@ -2,6 +2,7 @@
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.IO;
+using System.Text;
 using MetadataUtils;
 
 namespace ConstantsScraperApp
@@ -27,7 +28,8 @@ namespace ConstantsScraperApp
                 new Option<string>("--with-attribute", "Add an attribute to a constant.", ArgumentArity.OneOrMore),
                 new Option<string>("--memberRemap", "A field or parameter that should get remapped to a certain type.", ArgumentArity.OneOrMore),
                 new Option<string>("--with-type", "Use a type for a constant.", ArgumentArity.OneOrMore),
-                new Option<string>("--enumsJson", "A json file with enum information.", ArgumentArity.OneOrMore)
+                new Option<string>("--enumsJson", "A json file with enum information.", ArgumentArity.OneOrMore),
+                new Option<string>("--useConstantsFrom", "Namespaces to import other constants from.", ArgumentArity.OneOrMore)
             };
 
             rootCommand.Handler = CommandHandler.Create<InvocationContext>(Run);
@@ -46,6 +48,7 @@ namespace ConstantsScraperApp
             var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("--memberRemap");
             var withTypeValuePairs = context.ParseResult.ValueForOption<string[]>("--with-type");
             var withAttributeValuePairs = context.ParseResult.ValueForOption<string[]>("--with-attribute");
+            var useConstantsFrom = context.ParseResult.ValueForOption<string[]>("--useConstantsFrom");
 
             var exclusionNames = new HashSet<string>(excludeItems ?? (new string[0]));
             Dictionary<string, string> traversedHeadersToNamespaces = ConvertValuePairsToDictionary(traversedHeaderToNamespaceValuePairs);
@@ -54,7 +57,21 @@ namespace ConstantsScraperApp
             Dictionary<string, string> withTypes = ConvertValuePairsToDictionary(withTypeValuePairs);
             Dictionary<string, string> withAttributes = ConvertValuePairsToDictionary(withAttributeValuePairs);
 
-            var headerText = !string.IsNullOrEmpty(headerTextFile) ? File.ReadAllText(headerTextFile) : string.Empty;
+            StringBuilder headerTextBuilder = new StringBuilder();
+            if (!string.IsNullOrEmpty(headerTextFile))
+            {
+                headerTextBuilder.Append(File.ReadAllText(headerTextFile));
+                headerTextBuilder.AppendLine();
+            }
+            foreach (var name in useConstantsFrom)
+            {
+                headerTextBuilder.AppendLine($"using static {name};");
+            }
+            if (useConstantsFrom.Length > 0)
+            {
+                headerTextBuilder.AppendLine();
+            }
+            var headerText = headerTextBuilder.ToString();
 
             // Always exclude this
             exclusionNames.Add("__cplusplus");
