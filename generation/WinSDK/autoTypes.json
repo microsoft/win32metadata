@@ -82,6 +82,7 @@
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "PSID",
+    "CloseApi": "FreeSid",
     "ValueType": "void*",
     "NativeTypedef": true
   },
@@ -120,6 +121,7 @@
     "Namespace": "Windows.Win32.System.DataExchange",
     "Name": "HCONV",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DdeDisconnect",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -127,6 +129,7 @@
     "Namespace": "Windows.Win32.System.DataExchange",
     "Name": "HCONVLIST",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DdeDisconnectList",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -134,6 +137,7 @@
     "Namespace": "Windows.Win32.System.DataExchange",
     "Name": "HDDEDATA",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DdeFreeDataHandle",
     "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
@@ -141,6 +145,7 @@
     "Namespace": "Windows.Win32.UI.Input.Touch",
     "Name": "HGESTUREINFO",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "CloseGestureInfoHandle",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -155,6 +160,7 @@
     "Namespace": "Windows.Win32.UI.TextServices",
     "Name": "HKL",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "UnloadKeyboardLayout",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -170,6 +176,7 @@
     "Name": "HMIDIIN",
     "ValueType": "DECLARE_HANDLE",
     "InvalidHandleValues": [ -1, 0 ],
+    "CloseApi": "midiInClose",
     "NativeTypedef": true
   },
   {
@@ -177,12 +184,14 @@
     "Name": "HMIDIOUT",
     "ValueType": "DECLARE_HANDLE",
     "InvalidHandleValues": [ -1, 0 ],
+    "CloseApi": "midiOutClose",
     "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HMIDISTRM",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "midiStreamClose",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -190,6 +199,7 @@
     "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HMIXER",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "mixerClose",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -211,6 +221,7 @@
     "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HWAVEOUT",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "waveOutClose",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -218,6 +229,7 @@
     "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HWAVEIN",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "waveInClose",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -246,6 +258,7 @@
     "Namespace": "Windows.Win32.UI.Controls",
     "Name": "HSYNTHETICPOINTERDEVICE",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DestroySyntheticPointerDevice",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -260,6 +273,7 @@
     "Namespace": "Windows.Win32.UI.Input.Touch",
     "Name": "HTOUCHINPUT",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "CloseTouchInputHandle",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -287,6 +301,7 @@
     "Namespace": "Windows.Win32.System.WinRT",
     "Name": "HSTRING_BUFFER",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "WindowsDeleteStringBuffer",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -301,6 +316,7 @@
     "Namespace": "Windows.Win32.Graphics.Gdi",
     "Name": "HGDIOBJ",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DeleteObject",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -554,6 +570,7 @@
     "Namespace": "Windows.Win32.UI.TabletPC",
     "Name": "HRECOALT",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DestroyAlternate",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -561,6 +578,7 @@
     "Namespace": "Windows.Win32.UI.TabletPC",
     "Name": "HRECOCONTEXT",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DestroyContext",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -568,6 +586,7 @@
     "Namespace": "Windows.Win32.UI.TabletPC",
     "Name": "HRECOGNIZER",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DestroyRecognizer",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -582,6 +601,7 @@
     "Namespace": "Windows.Win32.UI.TabletPC",
     "Name": "HRECOWORDLIST",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DestroyWordList",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -603,6 +623,7 @@
     "Namespace": "Windows.Win32.Security.Authorization",
     "Name": "AUTHZ_ACCESS_CHECK_RESULTS_HANDLE",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "AuthzFreeHandle",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -610,6 +631,7 @@
     "Namespace": "Windows.Win32.Security.Authorization",
     "Name": "AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "AuthzUnregisterCapChangeNotification",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -617,6 +639,7 @@
     "Namespace": "Windows.Win32.Security.Authorization",
     "Name": "AUTHZ_CLIENT_CONTEXT_HANDLE",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "AuthzFreeContext",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -624,6 +647,7 @@
     "Namespace": "Windows.Win32.Security.Authorization",
     "Name": "AUTHZ_RESOURCE_MANAGER_HANDLE",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "AuthzFreeResourceManager",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -631,6 +655,7 @@
     "Namespace": "Windows.Win32.Security.Authorization",
     "Name": "AUTHZ_AUDIT_EVENT_HANDLE",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "AuthzFreeAuditEvent",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -652,6 +677,7 @@
     "Namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
     "Name": "HCMNOTIFICATION",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "CM_Unregister_Notification",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -659,6 +685,7 @@
     "Namespace": "Windows.Win32.System.Com",
     "Name": "CO_MTA_USAGE_COOKIE",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "CoDecrementMTAUsage",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -666,6 +693,7 @@
     "Namespace": "Windows.Win32.System.Com",
     "Name": "CO_DEVICE_CATALOG_COOKIE",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "CoRevokeDeviceCatalog",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -680,6 +708,7 @@
     "Namespace": "Windows.Win32.Security",
     "Name": "HDIAGNOSTIC_DATA_QUERY_SESSION",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DdqCloseSession",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -687,6 +716,7 @@
     "Namespace": "Windows.Win32.Security",
     "Name": "HDIAGNOSTIC_REPORT",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DdqFreeDiagnosticReport",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -694,6 +724,7 @@
     "Namespace": "Windows.Win32.Security",
     "Name": "HDIAGNOSTIC_EVENT_TAG_DESCRIPTION",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DdqFreeDiagnosticRecordLocaleTags",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -701,6 +732,7 @@
     "Namespace": "Windows.Win32.Security",
     "Name": "HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DdqFreeDiagnosticRecordProducers",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -708,6 +740,7 @@
     "Namespace": "Windows.Win32.Security",
     "Name": "HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DdqFreeDiagnosticRecordProducerCategories",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -715,6 +748,7 @@
     "Namespace": "Windows.Win32.Security",
     "Name": "HDIAGNOSTIC_RECORD",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DdqFreeDiagnosticRecordPage",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -722,6 +756,7 @@
     "Namespace": "Windows.Win32.System.WindowsProgramming",
     "Name": "FEATURE_STATE_CHANGE_SUBSCRIPTION",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "UnsubscribeFeatureStateChangeNotification",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -729,6 +764,7 @@
     "Namespace": "Windows.Win32.System.WindowsProgramming",
     "Name": "FH_SERVICE_PIPE_HANDLE",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "FhServiceClosePipe",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -736,6 +772,7 @@
     "Namespace": "Windows.Win32.Globalization",
     "Name": "HIMC",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "ImmDestroyContext",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -750,6 +787,7 @@
     "Namespace": "Windows.Win32.UI.InteractionContext",
     "Name": "HINTERACTIONCONTEXT",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "DestroyInteractionContext",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -757,6 +795,7 @@
     "Namespace": "Windows.Win32.NetworkManagement.IpHelper",
     "Name": "HIFTIMESTAMPCHANGE",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "UnregisterInterfaceTimestampConfigChange",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -764,6 +803,7 @@
     "Namespace": "Windows.Win32.NetworkManagement.QoS",
     "Name": "LPM_HANDLE",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "LPM_Deinitialize",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -799,6 +839,7 @@
     "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HACMDRIVER",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "acmDriverClose",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -806,6 +847,7 @@
     "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HACMSTREAM",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "acmStreamClose",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -820,6 +862,7 @@
     "Namespace": "Windows.Win32.Devices.SerialCommunication",
     "Name": "HCOMDB",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "ComDBClose",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -841,6 +884,7 @@
     "Namespace": "Windows.Win32.Storage.Xps",
     "Name": "HPTPROVIDER",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "PTCloseProvider",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -855,6 +899,7 @@
     "Namespace": "Windows.Win32.System.Diagnostics.ProcessSnapshotting",
     "Name": "HPSSWALK",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "PssWalkMarkerFree",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -883,6 +928,7 @@
     "Namespace": "Windows.Win32.UI.Shell",
     "Name": "HPSXA",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "SHDestroyPropSheetExtArray",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -890,6 +936,7 @@
     "Namespace": "Windows.Win32.Devices.Enumeration.Pnp",
     "Name": "HSWDEVICE",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "SwDeviceClose",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -897,6 +944,7 @@
     "Namespace": "Windows.Win32.UI.Accessibility",
     "Name": "HUIANODE",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "UiaNodeRelease",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -904,6 +952,7 @@
     "Namespace": "Windows.Win32.UI.Accessibility",
     "Name": "HUIAPATTERNOBJECT",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "UiaPatternRelease",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -911,6 +960,7 @@
     "Namespace": "Windows.Win32.UI.Accessibility",
     "Name": "HUIATEXTRANGE",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "UiaTextRangeRelease",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -918,6 +968,7 @@
     "Namespace": "Windows.Win32.UI.Accessibility",
     "Name": "HUIAEVENT",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "UiaRemoveEvent",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -925,6 +976,7 @@
     "Namespace": "Windows.Win32.Media.Multimedia",
     "Name": "HIC",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "ICClose",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -939,6 +991,7 @@
     "Namespace": "Windows.Win32.Networking.WebSocket",
     "Name": "WEB_SOCKET_HANDLE",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "WebSocketDeleteHandle",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -989,6 +1042,7 @@
     "Namespace": "Windows.Win32.System.WinRT",
     "Name": "ROPARAMIIDHANDLE",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "RoFreeParameterizedTypeExtra",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -1059,6 +1113,7 @@
     "Namespace": "Windows.Win32.Storage.CloudFilters",
     "Name": "CF_CONNECTION_KEY",
     "ValueType": "DECLARE_OPAQUE_KEY",
+    "CloseApi": "CfDisconnectSyncRoot",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -1271,6 +1326,7 @@
     "Namespace": "Windows.Win32.UI.Controls",
     "Name": "HDSA",
     "ValueType": "IntPtr",
+    "CloseApi": "DSA_Destroy",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -1278,6 +1334,7 @@
     "Namespace": "Windows.Win32.UI.Controls",
     "Name": "HDPA",
     "ValueType": "IntPtr",
+    "CloseApi": "DPA_Destroy",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
@@ -1285,6 +1342,7 @@
     "Namespace": "Windows.Win32.System.Threading",
     "Name": "LPPROC_THREAD_ATTRIBUTE_LIST",
     "ValueType": "void*",
+    "CloseApi": "DeleteProcThreadAttributeList",
     "NativeTypedef": true
   },
   {
@@ -1312,12 +1370,14 @@
     "Name": "JET_INSTANCE",
     "ValueType": "UIntPtr",
     "InvalidHandleValues": [ 0 ],
+    "CloseApi": "JetTerm",
     "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Storage.StructuredStorage",
     "Name": "JET_SESID",
     "ValueType": "UIntPtr",
+    "CloseApi": "JetEndSession",
     "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
@@ -1370,6 +1430,7 @@
   {
     "Namespace": "Windows.Win32.Security.Cryptography",
     "Name": "BCRYPT_HANDLE",
+    "CloseApi": "BCryptDestroyHash",
     "ValueType": "void*",
     "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
@@ -1445,6 +1506,7 @@
     "Namespace": "Windows.Win32.Security.Cryptography",
     "Name": "NCRYPT_HANDLE",
     "ValueType": "UIntPtr",
+    "CloseApi": "NCryptFreeObject",
     "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
@@ -2265,6 +2327,7 @@
     "Namespace": "Windows.Win32.System.Threading",
     "Name": "PTP_IO",
     "ValueType": "typedef struct _TP_IO",
+    "CloseApi": "CloseThreadpoolIo",
     "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
@@ -2272,6 +2335,7 @@
     "Namespace": "Windows.Win32.System.Threading",
     "Name": "PTP_TIMER",
     "ValueType": "typedef struct _TP_TIMER",
+    "CloseApi": "CloseThreadpoolTimer",
     "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
@@ -2279,6 +2343,7 @@
     "Namespace": "Windows.Win32.System.Threading",
     "Name": "PTP_WAIT",
     "ValueType": "typedef struct _TP_WAIT",
+    "CloseApi": "CloseThreadpoolWait",
     "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
@@ -2286,6 +2351,7 @@
     "Namespace": "Windows.Win32.System.Threading",
     "Name": "PTP_WORK",
     "ValueType": "typedef struct _TP_WORK",
+    "CloseApi": "CloseThreadpoolWork",
     "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
