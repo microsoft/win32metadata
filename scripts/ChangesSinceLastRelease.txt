@@ -291,3 +291,8 @@ Windows.Win32.UI.WindowsAndMessaging.Apis.SendMessageTimeoutW : [DllImport(USER3
 # Fixed #1866.
 Windows.Win32.System.WinRT.Printing.IPrintDocumentPageSource added
 Windows.Win32.System.WinRT.Printing.IPrintPreviewPageCollection added
+# Add additional InvalidHandleValue metadata
+Windows.Win32.Networking.WinSock.SOCKET : [NativeTypedef,RAIIFree(closesocket)] => [InvalidHandleValue(-1),NativeTypedef,RAIIFree(closesocket)]
+Windows.Win32.Storage.FileSystem.HIORING : [NativeTypedef,RAIIFree(CloseIoRing)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(CloseIoRing)]
+Windows.Win32.System.Threading.PTP_CLEANUP_GROUP : [NativeTypedef,RAIIFree(CloseThreadpoolCleanupGroup)] => [InvalidHandleValue(0),NativeTypedef,RAIIFree(CloseThreadpoolCleanupGroup)]
+Windows.Win32.System.Threading.PTP_POOL : [NativeTypedef,RAIIFree(CloseThreadpool)] => [InvalidHandleValue(0),NativeTypedef,RAIIFree(CloseThreadpool)]
