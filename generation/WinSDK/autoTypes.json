@@ -80,7 +80,7 @@
     "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.Foundation",
+    "Namespace": "Windows.Win32.Security",
     "Name": "PSID",
     "CloseApi": "FreeSid",
     "ValueType": "void*",
@@ -157,7 +157,7 @@
     "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.UI.TextServices",
+    "Namespace": "Windows.Win32.UI.Input.KeyboardAndMouse",
     "Name": "HKL",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "UnloadKeyboardLayout",
@@ -705,7 +705,7 @@
     "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.Security",
+    "Namespace": "Windows.Win32.Security.DiagnosticDataQuery",
     "Name": "HDIAGNOSTIC_DATA_QUERY_SESSION",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "DdqCloseSession",
@@ -713,7 +713,7 @@
     "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.Security",
+    "Namespace": "Windows.Win32.Security.DiagnosticDataQuery",
     "Name": "HDIAGNOSTIC_REPORT",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "DdqFreeDiagnosticReport",
@@ -721,7 +721,7 @@
     "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.Security",
+    "Namespace": "Windows.Win32.Security.DiagnosticDataQuery",
     "Name": "HDIAGNOSTIC_EVENT_TAG_DESCRIPTION",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "DdqFreeDiagnosticRecordLocaleTags",
@@ -729,7 +729,7 @@
     "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.Security",
+    "Namespace": "Windows.Win32.Security.DiagnosticDataQuery",
     "Name": "HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "DdqFreeDiagnosticRecordProducers",
@@ -737,7 +737,7 @@
     "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.Security",
+    "Namespace": "Windows.Win32.Security.DiagnosticDataQuery",
     "Name": "HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "DdqFreeDiagnosticRecordProducerCategories",
@@ -745,7 +745,7 @@
     "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.Security",
+    "Namespace": "Windows.Win32.Security.DiagnosticDataQuery",
     "Name": "HDIAGNOSTIC_RECORD",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "DdqFreeDiagnosticRecordPage",
@@ -761,7 +761,7 @@
     "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.System.WindowsProgramming",
+    "Namespace": "Windows.Win32.Storage.FileHistory",
     "Name": "FH_SERVICE_PIPE_HANDLE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "FhServiceClosePipe",
@@ -769,7 +769,7 @@
     "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.Globalization",
+    "Namespace": "Windows.Win32.UI.Input.Ime",
     "Name": "HIMC",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "ImmDestroyContext",
@@ -777,7 +777,7 @@
     "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.Globalization",
+    "Namespace": "Windows.Win32.UI.Input.Ime",
     "Name": "HIMCC",
     "ValueType": "DECLARE_HANDLE",
     "InvalidHandleValues": [ -1, 0 ],
@@ -881,7 +881,7 @@
     "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.Storage.Xps",
+    "Namespace": "Windows.Win32.Graphics.Printing.PrintTicket",
     "Name": "HPTPROVIDER",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "PTCloseProvider",
@@ -1039,7 +1039,7 @@
     "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.System.WinRT",
+    "Namespace": "Windows.Win32.System.WinRT.Metadata",
     "Name": "ROPARAMIIDHANDLE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "RoFreeParameterizedTypeExtra",
@@ -1366,7 +1366,7 @@
     "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.Storage.StructuredStorage",
+    "Namespace": "Windows.Win32.Storage.Jet",
     "Name": "JET_INSTANCE",
     "ValueType": "UIntPtr",
     "InvalidHandleValues": [ 0 ],
@@ -1374,7 +1374,7 @@
     "NativeTypedef": true
   },
   {
-    "Namespace": "Windows.Win32.Storage.StructuredStorage",
+    "Namespace": "Windows.Win32.Storage.Jet",
     "Name": "JET_SESID",
     "ValueType": "UIntPtr",
     "CloseApi": "JetEndSession",

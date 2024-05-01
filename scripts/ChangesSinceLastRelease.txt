@@ -291,3 +291,147 @@ Windows.Win32.UI.WindowsAndMessaging.Apis.SendMessageTimeoutW : [DllImport(USER3
 # Fixed #1866.
 Windows.Win32.System.WinRT.Printing.IPrintDocumentPageSource added
 Windows.Win32.System.WinRT.Printing.IPrintPreviewPageCollection added
+# Moved several types closer to creation/destruction functions
+Windows.Win32.Devices.DeviceAndDriverInstallation.HCMNOTIFICATION : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(CM_Unregister_Notification)]
+Windows.Win32.Devices.Enumeration.Pnp.HSWDEVICE : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(SwDeviceClose)]
+Windows.Win32.Devices.SerialCommunication.HCOMDB : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(ComDBClose)]
+Windows.Win32.Foundation.PSID removed
+Windows.Win32.Globalization.HIMC removed
+Windows.Win32.Globalization.HIMCC => Windows.Win32.UI.Input.Ime.HIMCC
+Windows.Win32.Graphics.Gdi.HGDIOBJ : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DeleteObject)]
+Windows.Win32.Graphics.Printing.PrintTicket.HPTPROVIDER added
+Windows.Win32.Media.Audio.HACMDRIVER : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(acmDriverClose)]
+Windows.Win32.Media.Audio.HACMSTREAM : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(acmStreamClose)]
+Windows.Win32.Media.Audio.HMIDIIN : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(midiInClose)]
+Windows.Win32.Media.Audio.HMIDIOUT : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(midiOutClose)]
+Windows.Win32.Media.Audio.HMIDISTRM : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(midiStreamClose)]
+Windows.Win32.Media.Audio.HMIXER : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(mixerClose)]
+Windows.Win32.Media.Audio.HWAVEIN : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(waveInClose)]
+Windows.Win32.Media.Audio.HWAVEOUT : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(waveOutClose)]
+Windows.Win32.Media.Multimedia.HIC : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(ICClose)]
+Windows.Win32.Networking.ActiveDirectory.DS_DOMAIN_TRUSTSA.DomainSid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Networking.ActiveDirectory.DS_DOMAIN_TRUSTSW.DomainSid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Networking.WebSocket.WEB_SOCKET_HANDLE : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(WebSocketDeleteHandle)]
+Windows.Win32.NetworkManagement.IpHelper.HIFTIMESTAMPCHANGE : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(UnregisterInterfaceTimestampConfigChange)]
+Windows.Win32.NetworkManagement.NetManagement.GROUP_INFO_3.grpi3_group_sid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.NetworkManagement.NetManagement.LOCALGROUP_MEMBERS_INFO_0.lgrmi0_sid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.NetworkManagement.NetManagement.LOCALGROUP_MEMBERS_INFO_1.lgrmi1_sid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.NetworkManagement.NetManagement.LOCALGROUP_MEMBERS_INFO_2.lgrmi2_sid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.NetworkManagement.NetManagement.USER_INFO_23.usri23_user_sid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.NetworkManagement.NetManagement.USER_INFO_24.usri24_user_sid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.NetworkManagement.NetManagement.USER_INFO_4.usri4_user_sid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.NetworkManagement.NetManagement.USER_MODALS_INFO_2.usrmod2_domain_id...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.NetworkManagement.QoS.LPM_HANDLE : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(LPM_Deinitialize)]
+Windows.Win32.Security.Authentication.Identity.CENTRAL_ACCESS_POLICY.CAPID...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.Authentication.Identity.LSA_ENUMERATION_INFORMATION.Sid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.Authentication.Identity.LSA_FOREST_TRUST_DOMAIN_INFO.Sid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.Authentication.Identity.LSA_FOREST_TRUST_SCANNER_INFO.DomainSid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.Authentication.Identity.LSA_TRANSLATED_SID2.Sid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.Authentication.Identity.LSA_TRUST_INFORMATION.Sid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.Authentication.Identity.POLICY_ACCOUNT_DOMAIN_INFO.DomainSid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.Authentication.Identity.POLICY_AUDIT_SID_ARRAY.UserSidArray...Windows.Win32.Foundation.PSID* => Windows.Win32.Security.PSID*
+Windows.Win32.Security.Authentication.Identity.POLICY_DNS_DOMAIN_INFO.Sid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.Authentication.Identity.POLICY_MACHINE_ACCT_INFO.Sid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.Authentication.Identity.POLICY_MACHINE_ACCT_INFO2.Sid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.Authentication.Identity.POLICY_PRIMARY_DOMAIN_INFO.Sid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.Authentication.Identity.SECPKG_PARAMETERS.DomainSid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.Authentication.Identity.SECPKG_PRIMARY_CRED_EX.UserSid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.Authentication.Identity.SECPKG_PRIMARY_CRED.UserSid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.Authentication.Identity.SECPKG_TARGETINFO.DomainSid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.Authentication.Identity.SECURITY_LOGON_SESSION_DATA.Sid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.Authentication.Identity.SECURITY_USER_DATA.pSid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.Authentication.Identity.TRUSTED_DOMAIN_INFORMATION_EX.Sid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.Authentication.Identity.TRUSTED_DOMAIN_INFORMATION_EX2.Sid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.Authorization.AUTHZ_ACCESS_CHECK_RESULTS_HANDLE : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(AuthzFreeHandle)]
+Windows.Win32.Security.Authorization.AUTHZ_ACCESS_REQUEST.PrincipalSelfSid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.Authorization.AUTHZ_AUDIT_EVENT_HANDLE : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(AuthzFreeAuditEvent)]
+Windows.Win32.Security.Authorization.AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(AuthzUnregisterCapChangeNotification)]
+Windows.Win32.Security.Authorization.AUTHZ_CLIENT_CONTEXT_HANDLE : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(AuthzFreeContext)]
+Windows.Win32.Security.Authorization.AUTHZ_RESOURCE_MANAGER_HANDLE : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(AuthzFreeResourceManager)]
+Windows.Win32.Security.Authorization.UI.SID_INFO.pSid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.Cryptography.BCRYPT_HANDLE : [InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(0),NativeTypedef,RAIIFree(BCryptDestroyHash)]
+Windows.Win32.Security.Cryptography.NCRYPT_HANDLE : [InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(0),NativeTypedef,RAIIFree(NCryptFreeObject)]
+Windows.Win32.Security.DiagnosticDataQuery.HDIAGNOSTIC_DATA_QUERY_SESSION added
+Windows.Win32.Security.DiagnosticDataQuery.HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION added
+Windows.Win32.Security.DiagnosticDataQuery.HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION added
+Windows.Win32.Security.DiagnosticDataQuery.HDIAGNOSTIC_EVENT_TAG_DESCRIPTION added
+Windows.Win32.Security.DiagnosticDataQuery.HDIAGNOSTIC_RECORD added
+Windows.Win32.Security.DiagnosticDataQuery.HDIAGNOSTIC_REPORT added
+Windows.Win32.Security.HDIAGNOSTIC_DATA_QUERY_SESSION removed
+Windows.Win32.Security.HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION removed
+Windows.Win32.Security.HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION removed
+Windows.Win32.Security.HDIAGNOSTIC_EVENT_TAG_DESCRIPTION removed
+Windows.Win32.Security.HDIAGNOSTIC_RECORD removed
+Windows.Win32.Security.HDIAGNOSTIC_REPORT removed
+Windows.Win32.Security.PSID added
+Windows.Win32.Security.SE_ACCESS_REQUEST.PrincipalSelfSid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.SECURITY_CAPABILITIES.AppContainerSid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.SECURITY_DESCRIPTOR.Group...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.SECURITY_DESCRIPTOR.Owner...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.SID_AND_ATTRIBUTES.Sid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.TOKEN_ACCESS_INFORMATION.PackageSid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.TOKEN_ACCESS_INFORMATION.TrustLevelSid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.TOKEN_APPCONTAINER_INFORMATION.TokenAppContainer...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.TOKEN_OWNER.Owner...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Security.TOKEN_PRIMARY_GROUP.PrimaryGroup...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.Storage.CloudFilters.CF_CONNECTION_KEY : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(CfDisconnectSyncRoot)]
+Windows.Win32.Storage.FileHistory.FH_SERVICE_PIPE_HANDLE added
+Windows.Win32.Storage.Jet.JET_INSTANCE added
+Windows.Win32.Storage.Jet.JET_INSTANCE_INFO_A.hInstanceId...Windows.Win32.Storage.StructuredStorage.JET_INSTANCE => Windows.Win32.Storage.Jet.JET_INSTANCE
+Windows.Win32.Storage.Jet.JET_INSTANCE_INFO_W.hInstanceId...Windows.Win32.Storage.StructuredStorage.JET_INSTANCE => Windows.Win32.Storage.Jet.JET_INSTANCE
+Windows.Win32.Storage.Jet.JET_SESID added
+Windows.Win32.Storage.StructuredStorage.JET_INSTANCE removed
+Windows.Win32.Storage.StructuredStorage.JET_SESID removed
+Windows.Win32.Storage.Xps.HPTPROVIDER removed
+Windows.Win32.System.Com.CO_DEVICE_CATALOG_COOKIE : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(CoRevokeDeviceCatalog)]
+Windows.Win32.System.Com.CO_MTA_USAGE_COOKIE : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(CoDecrementMTAUsage)]
+Windows.Win32.System.DataExchange.HCONV : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DdeDisconnect)]
+Windows.Win32.System.DataExchange.HCONVLIST : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DdeDisconnectList)]
+Windows.Win32.System.DataExchange.HDDEDATA : [InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(0),NativeTypedef,RAIIFree(DdeFreeDataHandle)]
+Windows.Win32.System.Diagnostics.ProcessSnapshotting.HPSSWALK : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(PssWalkMarkerFree)]
+Windows.Win32.System.EventLog.EVT_VARIANT._Anonymous_e__Union.SidArr...Windows.Win32.Foundation.PSID* => Windows.Win32.Security.PSID*
+Windows.Win32.System.EventLog.EVT_VARIANT._Anonymous_e__Union.SidVal...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.System.RemoteDesktop.WTS_PROCESS_INFO_EXA.pUserSid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.System.RemoteDesktop.WTS_PROCESS_INFO_EXW.pUserSid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.System.RemoteDesktop.WTS_PROCESS_INFOA.pUserSid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.System.RemoteDesktop.WTS_PROCESS_INFOW.pUserSid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.System.SystemServices.TOKEN_SID_INFORMATION.Sid...Windows.Win32.Foundation.PSID => Windows.Win32.Security.PSID
+Windows.Win32.System.Threading.LPPROC_THREAD_ATTRIBUTE_LIST : [NativeTypedef] => [NativeTypedef,RAIIFree(DeleteProcThreadAttributeList)]
+Windows.Win32.System.Threading.PTP_IO : [InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(0),NativeTypedef,RAIIFree(CloseThreadpoolIo)]
+Windows.Win32.System.Threading.PTP_TIMER : [InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(0),NativeTypedef,RAIIFree(CloseThreadpoolTimer)]
+Windows.Win32.System.Threading.PTP_WAIT : [InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(0),NativeTypedef,RAIIFree(CloseThreadpoolWait)]
+Windows.Win32.System.Threading.PTP_WORK : [InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(0),NativeTypedef,RAIIFree(CloseThreadpoolWork)]
+Windows.Win32.System.WindowsProgramming.FEATURE_STATE_CHANGE_SUBSCRIPTION : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(UnsubscribeFeatureStateChangeNotification)]
+Windows.Win32.System.WindowsProgramming.FH_SERVICE_PIPE_HANDLE removed
+Windows.Win32.System.WinRT.HSTRING_BUFFER : [Documentation(https://learn.microsoft.com/windows/win32/WinRT/hstring-buffer),InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [Documentation(https://learn.microsoft.com/windows/win32/WinRT/hstring-buffer),InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(WindowsDeleteStringBuffer)]
+Windows.Win32.System.WinRT.Metadata.ROPARAMIIDHANDLE added
+Windows.Win32.System.WinRT.ROPARAMIIDHANDLE removed
+Windows.Win32.UI.Accessibility.HUIAEVENT : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(UiaRemoveEvent)]
+Windows.Win32.UI.Accessibility.HUIANODE : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(UiaNodeRelease)]
+Windows.Win32.UI.Accessibility.HUIAPATTERNOBJECT : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(UiaPatternRelease)]
+Windows.Win32.UI.Accessibility.HUIATEXTRANGE : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(UiaTextRangeRelease)]
+Windows.Win32.UI.Controls.HDPA : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DPA_Destroy)]
+Windows.Win32.UI.Controls.HDSA : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DSA_Destroy)]
+Windows.Win32.UI.Controls.HSYNTHETICPOINTERDEVICE : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DestroySyntheticPointerDevice)]
+Windows.Win32.UI.Input.Ime.HIMC added
+Windows.Win32.UI.Input.Ime.IMEKMS.hIMC...Windows.Win32.Globalization.HIMC => Windows.Win32.UI.Input.Ime.HIMC
+Windows.Win32.UI.Input.Ime.IMEKMSINVK.hIMC...Windows.Win32.Globalization.HIMC => Windows.Win32.UI.Input.Ime.HIMC
+Windows.Win32.UI.Input.Ime.IMEKMSKMP.hIMC...Windows.Win32.Globalization.HIMC => Windows.Win32.UI.Input.Ime.HIMC
+Windows.Win32.UI.Input.Ime.IMEKMSNTFY.hIMC...Windows.Win32.Globalization.HIMC => Windows.Win32.UI.Input.Ime.HIMC
+Windows.Win32.UI.Input.Ime.INPUTCONTEXT.hCandInfo...Windows.Win32.Globalization.HIMCC => Windows.Win32.UI.Input.Ime.HIMCC
+Windows.Win32.UI.Input.Ime.INPUTCONTEXT.hCompStr...Windows.Win32.Globalization.HIMCC => Windows.Win32.UI.Input.Ime.HIMCC
+Windows.Win32.UI.Input.Ime.INPUTCONTEXT.hGuideLine...Windows.Win32.Globalization.HIMCC => Windows.Win32.UI.Input.Ime.HIMCC
+Windows.Win32.UI.Input.Ime.INPUTCONTEXT.hMsgBuf...Windows.Win32.Globalization.HIMCC => Windows.Win32.UI.Input.Ime.HIMCC
+Windows.Win32.UI.Input.Ime.INPUTCONTEXT.hPrivate...Windows.Win32.Globalization.HIMCC => Windows.Win32.UI.Input.Ime.HIMCC
+Windows.Win32.UI.Input.KeyboardAndMouse.HKL added
+Windows.Win32.UI.Input.Touch.HGESTUREINFO : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(CloseGestureInfoHandle)]
+Windows.Win32.UI.Input.Touch.HTOUCHINPUT : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(CloseTouchInputHandle)]
+Windows.Win32.UI.InteractionContext.HINTERACTIONCONTEXT : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DestroyInteractionContext)]
+Windows.Win32.UI.Shell.HPSXA : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(SHDestroyPropSheetExtArray)]
+Windows.Win32.UI.TabletPC.HRECOALT : [Documentation(https://learn.microsoft.com/windows/win32/tablet/hrecoalt-handle),InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [Documentation(https://learn.microsoft.com/windows/win32/tablet/hrecoalt-handle),InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DestroyAlternate)]
+Windows.Win32.UI.TabletPC.HRECOCONTEXT : [Documentation(https://learn.microsoft.com/windows/win32/tablet/hrecocontext-handle),InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [Documentation(https://learn.microsoft.com/windows/win32/tablet/hrecocontext-handle),InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DestroyContext)]
+Windows.Win32.UI.TabletPC.HRECOGNIZER : [Documentation(https://learn.microsoft.com/windows/win32/tablet/hrecognizer-handle),InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [Documentation(https://learn.microsoft.com/windows/win32/tablet/hrecognizer-handle),InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DestroyRecognizer)]
+Windows.Win32.UI.TabletPC.HRECOWORDLIST : [Documentation(https://learn.microsoft.com/windows/win32/tablet/hrecowordlist-handle),InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef] => [Documentation(https://learn.microsoft.com/windows/win32/tablet/hrecowordlist-handle),InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(DestroyWordList)]
+Windows.Win32.UI.TextServices.HKL removed
+Windows.Win32.UI.TextServices.TF_INPUTPROCESSORPROFILE.hkl...Windows.Win32.UI.TextServices.HKL => Windows.Win32.UI.Input.KeyboardAndMouse.HKL
+Windows.Win32.UI.TextServices.TF_INPUTPROCESSORPROFILE.hklSubstitute...Windows.Win32.UI.TextServices.HKL => Windows.Win32.UI.Input.KeyboardAndMouse.HKL
