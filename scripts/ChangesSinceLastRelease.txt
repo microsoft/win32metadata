@@ -306,3 +306,5 @@ Windows.Win32.Networking.HttpServer.Apis.HttpWaitForDemandStart : Overlapped : [
 Windows.Win32.Networking.HttpServer.Apis.HttpWaitForDisconnect : Overlapped : [In,Optional] => [In,Optional,Out,Retained]
 Windows.Win32.Networking.HttpServer.Apis.HttpWaitForDisconnectEx : Overlapped : [In,Optional] => [In,Optional,Out,Retained]
 Windows.Win32.Storage.FileSystem.Apis.FlushLogBuffers : pOverlapped : [In,Optional,Out] => [In,Optional,Out,Retained]
+# Add Retained attribute to DeviceIoControl overlapped param
+Windows.Win32.System.IO.Apis.DeviceIoControl : lpOverlapped : [In,Optional,Out] => [In,Optional,Out,Retained]
