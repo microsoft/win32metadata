@@ -1,442 +1,296 @@
-# Fixed #1733.
-Windows.Win32.UI.Controls.PFTASKDIALOGCALLBACK.Invoke : msg : [In] => [AssociatedEnum(TASKDIALOG_NOTIFICATIONS),In]
-#1736: AddSAPI Engine-Level Interfaces
-Windows.Win32.Media.Speech._ISpPrivateEngineCall added
-Windows.Win32.Media.Speech.ISpCFGInterpreter added
-Windows.Win32.Media.Speech.ISpCFGInterpreterSite added
-Windows.Win32.Media.Speech.ISpErrorLog added
-Windows.Win32.Media.Speech.ISpGramCompBackend added
-Windows.Win32.Media.Speech.ISpGrammarCompiler added
-Windows.Win32.Media.Speech.ISpITNProcessor added
-Windows.Win32.Media.Speech.ISpObjectTokenEnumBuilder added
-Windows.Win32.Media.Speech.ISpPhraseBuilder added
-Windows.Win32.Media.Speech.ISpPrivateEngineCallEx added
-Windows.Win32.Media.Speech.ISpSRAlternates added
-Windows.Win32.Media.Speech.ISpSRAlternates2 added
-Windows.Win32.Media.Speech.ISpSREngine added
-Windows.Win32.Media.Speech.ISpSREngine2 added
-Windows.Win32.Media.Speech.ISpSREngineSite added
-Windows.Win32.Media.Speech.ISpSREngineSite2 added
-Windows.Win32.Media.Speech.ISpTask added
-Windows.Win32.Media.Speech.ISpTaskManager added
-Windows.Win32.Media.Speech.ISpThreadControl added
-Windows.Win32.Media.Speech.ISpThreadTask added
-Windows.Win32.Media.Speech.ISpTokenUI added
-Windows.Win32.Media.Speech.ISpTTSEngine added
-Windows.Win32.Media.Speech.ISpTTSEngineSite added
-Windows.Win32.Media.Speech.SPCFGNOTIFY added
-Windows.Win32.Media.Speech.SPCFGNOTIFY.SPCFGN_ACTIVATE added
-Windows.Win32.Media.Speech.SPCFGNOTIFY.SPCFGN_ADD added
-Windows.Win32.Media.Speech.SPCFGNOTIFY.SPCFGN_DEACTIVATE added
-Windows.Win32.Media.Speech.SPCFGNOTIFY.SPCFGN_INVALIDATE added
-Windows.Win32.Media.Speech.SPCFGNOTIFY.SPCFGN_REMOVE added
-Windows.Win32.Media.Speech.SpDataKey added
-Windows.Win32.Media.Speech.SpGramCompBackend added
-Windows.Win32.Media.Speech.SpGrammarCompiler added
-Windows.Win32.Media.Speech.SpITNProcessor added
-Windows.Win32.Media.Speech.SpObjectTokenEnum added
-Windows.Win32.Media.Speech.SPPARSEINFO added
-Windows.Win32.Media.Speech.SPPATHENTRY added
-Windows.Win32.Media.Speech.SpPhraseBuilder added
-Windows.Win32.Media.Speech.SPPROPSRC added
-Windows.Win32.Media.Speech.SPPROPSRC.SPPROPSRC_RECO_CTX added
-Windows.Win32.Media.Speech.SPPROPSRC.SPPROPSRC_RECO_GRAMMAR added
-Windows.Win32.Media.Speech.SPPROPSRC.SPPROPSRC_RECO_INST added
-Windows.Win32.Media.Speech.SPRECORESULTINFO added
-Windows.Win32.Media.Speech.SPRECORESULTINFOEX added
-Windows.Win32.Media.Speech.SPRESULTTYPE added
-Windows.Win32.Media.Speech.SPRESULTTYPE.SPRT_CFG added
-Windows.Win32.Media.Speech.SPRESULTTYPE.SPRT_EMULATED added
-Windows.Win32.Media.Speech.SPRESULTTYPE.SPRT_EXTENDABLE_PARSE added
-Windows.Win32.Media.Speech.SPRESULTTYPE.SPRT_FALSE_RECOGNITION added
-Windows.Win32.Media.Speech.SPRESULTTYPE.SPRT_PROPRIETARY added
-Windows.Win32.Media.Speech.SPRESULTTYPE.SPRT_SLM added
-Windows.Win32.Media.Speech.SPRESULTTYPE.SPRT_TYPE_MASK added
-Windows.Win32.Media.Speech.SPRULEENTRY added
-Windows.Win32.Media.Speech.SPRULEINFOOPT added
-Windows.Win32.Media.Speech.SPRULEINFOOPT.SPRIO_NONE added
-Windows.Win32.Media.Speech.SPSTATEINFO added
-Windows.Win32.Media.Speech.SPTMTHREADINFO added
-Windows.Win32.Media.Speech.SPTRANSITIONENTRY added
-Windows.Win32.Media.Speech.SPTRANSITIONPROPERTY added
-Windows.Win32.Media.Speech.SPTRANSITIONTYPE added
-Windows.Win32.Media.Speech.SPTRANSITIONTYPE.SPTRANSDICTATION added
-Windows.Win32.Media.Speech.SPTRANSITIONTYPE.SPTRANSEPSILON added
-Windows.Win32.Media.Speech.SPTRANSITIONTYPE.SPTRANSRULE added
-Windows.Win32.Media.Speech.SPTRANSITIONTYPE.SPTRANSTEXTBUF added
-Windows.Win32.Media.Speech.SPTRANSITIONTYPE.SPTRANSWILDCARD added
-Windows.Win32.Media.Speech.SPTRANSITIONTYPE.SPTRANSWORD added
-Windows.Win32.Media.Speech.SPVESACTIONS added
-Windows.Win32.Media.Speech.SPVESACTIONS.SPVES_ABORT added
-Windows.Win32.Media.Speech.SPVESACTIONS.SPVES_CONTINUE added
-Windows.Win32.Media.Speech.SPVESACTIONS.SPVES_RATE added
-Windows.Win32.Media.Speech.SPVESACTIONS.SPVES_SKIP added
-Windows.Win32.Media.Speech.SPVESACTIONS.SPVES_VOLUME added
-Windows.Win32.Media.Speech.SPVSKIPTYPE added
-Windows.Win32.Media.Speech.SPVSKIPTYPE.SPVST_SENTENCE added
-Windows.Win32.Media.Speech.SPVTEXTFRAG added
-Windows.Win32.Media.Speech.SpW3CGrammarCompiler added
-Windows.Win32.Media.Speech.SPWORDENTRY added
-Windows.Win32.Media.Speech.SPWORDINFOOPT added
-Windows.Win32.Media.Speech.SPWORDINFOOPT.SPWIO_NONE added
-Windows.Win32.Media.Speech.SPWORDINFOOPT.SPWIO_WANT_TEXT added
-# Fixed #1739.
-Windows.Win32.Devices.DeviceAndDriverInstallation.DMA_RANGE.DR_Flags...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.DD_FLAGS
-Windows.Win32.Devices.DeviceAndDriverInstallation.IO_RANGE.IOR_RangeFlags...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.IOD_DESFLAGS
-Windows.Win32.Devices.DeviceAndDriverInstallation.IRQ_RANGE.IRQR_Flags...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.IRQD_FLAGS
-Windows.Win32.Devices.DeviceAndDriverInstallation.MEM_RANGE.MR_Flags...System.UInt32 => Windows.Win32.Devices.DeviceAndDriverInstallation.MD_FLAGS
-Windows.Win32.Media.Speech.SPPHRASEALT added
-Windows.Win32.Media.Speech.SPPHRASEALTREQUEST added
-# Fixed #1743.
-Windows.Win32.System.SystemInformation.Apis.GlobalMemoryStatusEx : lpBuffer : [Out] => [In,Out]
-# Fixed #1741.
-Windows.Win32.NetworkManagement.IpHelper.Apis.FreeInterfaceDnsSettings : return...WIN32_ERROR => Void
-Windows.Win32.NetworkManagement.IpHelper.Apis.FreeMibTable : return...WIN32_ERROR => Void
-# Correct HtmlHelp libs
-Windows.Win32.Data.HtmlHelp.Apis.HtmlHelpA : [Ansi,DllImport(htmlhelp.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/htmlhelp/nf-htmlhelp-htmlhelpa)] => [Ansi,DllImport(hhctrl.ocx,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/htmlhelp/nf-htmlhelp-htmlhelpa)]
-Windows.Win32.Data.HtmlHelp.Apis.HtmlHelpW : [DllImport(htmlhelp.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/htmlhelp/nf-htmlhelp-htmlhelpw),Unicode] => [DllImport(hhctrl.ocx,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/htmlhelp/nf-htmlhelp-htmlhelpw),Unicode]
-# Fixed #1740.
-Windows.Win32.Graphics.Gdi.Apis.LCS_CALIBRATED_RGB removed
-# Fixed namespace for #1740.
-Windows.Win32.UI.ColorSystem.LCSCSTYPE added
-Windows.Win32.UI.ColorSystem.LCSCSTYPE.LCS_CALIBRATED_RGB added
-Windows.Win32.UI.ColorSystem.LCSCSTYPE.LCS_sRGB added
-Windows.Win32.UI.ColorSystem.LCSCSTYPE.LCS_WINDOWS_COLOR_SPACE added
-Windows.Win32.UI.ColorSystem.LOGCOLORSPACEA.lcsCSType...System.Int32 => Windows.Win32.UI.ColorSystem.LCSCSTYPE
-Windows.Win32.UI.ColorSystem.LOGCOLORSPACEW.lcsCSType...System.Int32 => Windows.Win32.UI.ColorSystem.LCSCSTYPE
-# Fixed #1751.
-Windows.Win32.Devices.Bluetooth.Apis.BDIF_CONNECTION_INBOUND removed
-Windows.Win32.Devices.HumanInterfaceDevice.Apis.HID_USAGE_KEYBOARD_KEYPAD_0_AND_INSERT added
-Windows.Win32.Devices.HumanInterfaceDevice.Apis.HID_USAGE_KEYBOARD_KEYPAD_1_AND_END added
-Windows.Win32.Devices.Properties.Apis.DEVPKEY_Device_CompanionApps added
-Windows.Win32.Devices.Properties.Apis.DEVPKEY_Device_PrimaryCompanionApp added
-Windows.Win32.Devices.Sensors.HUMAN_PRESENCE_DETECTION_TYPE.HumanPresenceDetectionType_Undefined added
-Windows.Win32.Foundation.Apis.CONVERT10_E_OLELINK_DISABLED added
-Windows.Win32.Foundation.Apis.STATUS_CANT_ATTACH_TO_DEV_VOLUME added
-Windows.Win32.Foundation.Apis.STATUS_FS_GUID_MISMATCH added
-Windows.Win32.Foundation.Apis.STATUS_INVALID_CONFIG_VALUE added
-Windows.Win32.Foundation.Apis.STATUS_LAPS_ENCRYPTION_REQUIRES_2016_DFL added
-Windows.Win32.Foundation.Apis.STATUS_LAPS_LEGACY_SCHEMA_MISSING added
-Windows.Win32.Foundation.Apis.STATUS_LAPS_SCHEMA_MISSING added
-Windows.Win32.Foundation.Apis.STATUS_NOT_A_DEV_VOLUME added
-Windows.Win32.Foundation.Apis.STATUS_POLICY_CONTROLLED_ACCOUNT added
-Windows.Win32.Foundation.Apis.STATUS_SYSTEM_INTEGRITY_REPUTATION_EXPLICIT_DENY_FILE added
-Windows.Win32.Foundation.Apis.STATUS_VHD_UNEXPECTED_ID added
-Windows.Win32.Foundation.Apis.STATUS_VOLUME_UPGRADE_DISABLED added
-Windows.Win32.Foundation.Apis.STATUS_VOLUME_UPGRADE_DISABLED_TILL_OS_DOWNGRADE_EXPIRED added
-Windows.Win32.Foundation.Apis.STATUS_VOLUME_UPGRADE_NOT_NEEDED added
-Windows.Win32.Foundation.Apis.STATUS_VOLUME_UPGRADE_PENDING added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_CANT_ATTACH_TO_DEV_VOLUME added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_FS_GUID_MISMATCH added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_INVALID_CONFIG_VALUE added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_LAPS_ENCRYPTION_REQUIRES_2016_DFL added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_LAPS_LEGACY_SCHEMA_MISSING added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_LAPS_SCHEMA_MISSING added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_NOT_A_DEV_VOLUME added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_POLICY_CONTROLLED_ACCOUNT added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_SYSTEM_INTEGRITY_REPUTATION_EXPLICIT_DENY_FILE added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_VHD_UNEXPECTED_ID added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_VOLUME_UPGRADE_DISABLED added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_VOLUME_UPGRADE_DISABLED_TILL_OS_DOWNGRADE_EXPIRED added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_VOLUME_UPGRADE_NOT_NEEDED added
-Windows.Win32.Foundation.WIN32_ERROR.ERROR_VOLUME_UPGRADE_PENDING added
-Windows.Win32.Graphics.Direct2D.D2D1_GRADIENT_STOP => Windows.Win32.Graphics.Direct2D.Common.D2D1_GRADIENT_STOP
-Windows.Win32.Graphics.Direct2D.DWRITE_PAINT_FEATURE_LEVEL added
-Windows.Win32.Graphics.Direct2D.ID2D1Device7 added
-Windows.Win32.Graphics.Direct2D.ID2D1DeviceContext7 added
-Windows.Win32.Graphics.Direct2D.ID2D1Factory8 added
-Windows.Win32.Graphics.Direct3D11.D3D11_FORMAT_SUPPORT2.D3D11_FORMAT_SUPPORT2_DISPLAYABLE added
-Windows.Win32.Graphics.DirectComposition.IDCompositionDevice4 added
-Windows.Win32.Graphics.DirectComposition.IDCompositionTexture added
-Windows.Win32.Graphics.DirectWrite.Apis.DWRITE_NO_PALETTE_INDEX added
-Windows.Win32.Graphics.DirectWrite.DWRITE_BITMAP_DATA_BGRA32 added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_CLEAR added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_COLOR_BURN added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_COLOR_DODGE added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_DARKEN added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_DEST added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_DEST_ATOP added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_DEST_IN added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_DEST_OUT added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_DEST_OVER added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_DIFFERENCE added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_EXCLUSION added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_HARD_LIGHT added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_HSL_COLOR added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_HSL_HUE added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_HSL_LUMINOSITY added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_HSL_SATURATION added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_LIGHTEN added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_MULTIPLY added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_OVERLAY added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_PLUS added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_SCREEN added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_SOFT_LIGHT added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_SRC added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_SRC_ATOP added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_SRC_IN added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_SRC_OUT added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_SRC_OVER added
-Windows.Win32.Graphics.DirectWrite.DWRITE_COLOR_COMPOSITE_MODE.DWRITE_COLOR_COMPOSITE_XOR added
-Windows.Win32.Graphics.DirectWrite.DWRITE_GLYPH_IMAGE_FORMATS.DWRITE_GLYPH_IMAGE_FORMATS_COLR_PAINT_TREE added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_ATTRIBUTES added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_ATTRIBUTES.DWRITE_PAINT_ATTRIBUTES_NONE added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_ATTRIBUTES.DWRITE_PAINT_ATTRIBUTES_USES_PALETTE added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_ATTRIBUTES.DWRITE_PAINT_ATTRIBUTES_USES_TEXT_COLOR added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_COLOR added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_ELEMENT added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_FEATURE_LEVEL added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_FEATURE_LEVEL.DWRITE_PAINT_FEATURE_LEVEL_COLR_V0 added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_FEATURE_LEVEL.DWRITE_PAINT_FEATURE_LEVEL_COLR_V1 added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_FEATURE_LEVEL.DWRITE_PAINT_FEATURE_LEVEL_NONE added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE.DWRITE_PAINT_TYPE_COLOR_GLYPH added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE.DWRITE_PAINT_TYPE_COMPOSITE added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE.DWRITE_PAINT_TYPE_GLYPH added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE.DWRITE_PAINT_TYPE_LAYERS added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE.DWRITE_PAINT_TYPE_LINEAR_GRADIENT added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE.DWRITE_PAINT_TYPE_NONE added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE.DWRITE_PAINT_TYPE_RADIAL_GRADIENT added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE.DWRITE_PAINT_TYPE_SOLID added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE.DWRITE_PAINT_TYPE_SOLID_GLYPH added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE.DWRITE_PAINT_TYPE_SWEEP_GRADIENT added
-Windows.Win32.Graphics.DirectWrite.DWRITE_PAINT_TYPE.DWRITE_PAINT_TYPE_TRANSFORM added
-Windows.Win32.Graphics.DirectWrite.IDWriteBitmapRenderTarget2 added
-Windows.Win32.Graphics.DirectWrite.IDWriteBitmapRenderTarget3 added
-Windows.Win32.Graphics.DirectWrite.IDWriteFactory8 added
-Windows.Win32.Graphics.DirectWrite.IDWriteFontFace7 added
-Windows.Win32.Graphics.DirectWrite.IDWritePaintReader added
-Windows.Win32.Graphics.Printing.Apis.SPLCLIENT_INFO_INTERNAL_LEVEL added
-Windows.Win32.Graphics.Printing.SPLCLIENT_INFO_INTERNAL added
-Windows.Win32.Management.MobileDeviceManagementRegistration.Apis.MENROLL_E_CUSTOMSERVERERROR added
-Windows.Win32.Management.MobileDeviceManagementRegistration.Apis.RegisterDeviceDualEnrollMmpcUsingAADDeviceCredentials removed
-Windows.Win32.Networking.Ldap.Apis.LDAP_OPT_CLDAP_TIMEOUT added
-Windows.Win32.Networking.Ldap.Apis.LDAP_OPT_CLDAP_TRIES added
-Windows.Win32.Networking.WindowsWebServices.Apis.CTAPCBOR_HYBRID_STORAGE_LINKED_DATA_CURRENT_VERSION added
-Windows.Win32.Networking.WindowsWebServices.Apis.CTAPCBOR_HYBRID_STORAGE_LINKED_DATA_VERSION_1 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_API_VERSION_5 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_API_VERSION_6 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_API_VERSION_7 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_ASSERTION_VERSION_4 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_ASSERTION_VERSION_5 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS_VERSION_7 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS_VERSION_6 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS_VERSION_7 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CREDENTIAL_ATTESTATION_VERSION_5 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CREDENTIAL_ATTESTATION_VERSION_6 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CREDENTIAL_DETAILS_VERSION_2 added
-Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CTAP_TRANSPORT_HYBRID added
-Windows.Win32.Networking.WindowsWebServices.CTAPCBOR_HYBRID_STORAGE_LINKED_DATA added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_ASSERTION.cbUnsignedExtensionOutputs added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_ASSERTION.dwUsedTransport added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_ASSERTION.pbUnsignedExtensionOutputs added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS.bAutoFill added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS.cbJsonExt added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS.pbJsonExt added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS.pLinkedDevice added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS.bEnablePrf added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS.cbJsonExt added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS.pbJsonExt added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS.pLinkedDevice added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_CREDENTIAL_ATTESTATION.bPrfEnabled added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_CREDENTIAL_ATTESTATION.cbUnsignedExtensionOutputs added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_CREDENTIAL_ATTESTATION.pbUnsignedExtensionOutputs added
-Windows.Win32.Networking.WindowsWebServices.WEBAUTHN_CREDENTIAL_DETAILS.bBackedUp added
-Windows.Win32.NetworkManagement.Dns.Apis.DNS_PROTOCOL_DOH added
-Windows.Win32.NetworkManagement.Dns.Apis.DNS_PROTOCOL_NO_WIRE added
-Windows.Win32.NetworkManagement.Dns.Apis.DNS_PROTOCOL_TCP added
-Windows.Win32.NetworkManagement.Dns.Apis.DNS_PROTOCOL_UDP added
-Windows.Win32.NetworkManagement.Dns.Apis.DNS_PROTOCOL_UNSPECIFIED added
-Windows.Win32.NetworkManagement.Dns.Apis.DnsCancelQueryRaw added
-Windows.Win32.NetworkManagement.Dns.Apis.DnsQueryRaw added
-Windows.Win32.NetworkManagement.Dns.Apis.DnsQueryRawResultFree added
-Windows.Win32.NetworkManagement.Dns.DNS_QUERY_OPTIONS.DNS_QUERY_RAW_OPTION_BEST_EFFORT_PARSE added
-Windows.Win32.NetworkManagement.Dns.DNS_QUERY_OPTIONS.DNS_QUERY_RAW_REQUEST_VERSION1 added
-Windows.Win32.NetworkManagement.Dns.DNS_QUERY_OPTIONS.DNS_QUERY_RAW_RESULTS_VERSION1 added
-Windows.Win32.NetworkManagement.Dns.DNS_QUERY_RAW_CANCEL added
-Windows.Win32.NetworkManagement.Dns.DNS_QUERY_RAW_COMPLETION_ROUTINE added
-Windows.Win32.NetworkManagement.Dns.DNS_QUERY_RAW_REQUEST added
-Windows.Win32.NetworkManagement.Dns.DNS_QUERY_RAW_RESULT added
-Windows.Win32.NetworkManagement.NetManagement.Apis.NETLOG_NetlogonRc4Allowed added
-Windows.Win32.NetworkManagement.NetManagement.Apis.NETLOG_NetlogonRc4Denied added
-Windows.Win32.NetworkManagement.NetManagement.Apis.NETLOG_NetlogonRpcSigningClient added
-Windows.Win32.NetworkManagement.NetManagement.Apis.NETLOG_NetlogonRpcSigningTrust added
-Windows.Win32.Security.Apis.SIGNING_LEVEL_FILE_CACHE_FLAG_NOT_VALIDATED added
-Windows.Win32.Security.Apis.SIGNING_LEVEL_FILE_CACHE_FLAG_VALIDATE_ONLY added
-Windows.Win32.Security.Apis.SIGNING_LEVEL_MICROSOFT added
-Windows.Win32.Security.Authentication.Identity.Apis.PRIMARY_CRED_FOR_PASSWORD_CHANGE added
-Windows.Win32.Security.Authentication.Identity.Apis.SEC_CHANNEL_BINDINGS_AUDIT_BINDINGS added
-Windows.Win32.Security.Authentication.Identity.Apis.SEC_CHANNEL_BINDINGS_RESULT_ABSENT added
-Windows.Win32.Security.Authentication.Identity.Apis.SEC_CHANNEL_BINDINGS_RESULT_CLIENT_SUPPORT added
-Windows.Win32.Security.Authentication.Identity.Apis.SEC_CHANNEL_BINDINGS_RESULT_NOTVALID_MISMATCH added
-Windows.Win32.Security.Authentication.Identity.Apis.SEC_CHANNEL_BINDINGS_RESULT_NOTVALID_MISSING added
-Windows.Win32.Security.Authentication.Identity.Apis.SEC_CHANNEL_BINDINGS_RESULT_VALID_MATCHED added
-Windows.Win32.Security.Authentication.Identity.Apis.SEC_CHANNEL_BINDINGS_RESULT_VALID_MISSING added
-Windows.Win32.Security.Authentication.Identity.Apis.SEC_CHANNEL_BINDINGS_RESULT_VALID_PROXY added
-Windows.Win32.Security.Authentication.Identity.Apis.SEC_CHANNEL_BINDINGS_VALID_FLAGS added
-Windows.Win32.Security.Authentication.Identity.Apis.SECBUFFER_CHANNEL_BINDINGS_RESULT added
-Windows.Win32.Security.Authentication.Identity.Apis.SspiSetChannelBindingFlags added
-Windows.Win32.Security.Authentication.Identity.Apis.TRUST_TYPE_AAD added
-Windows.Win32.Security.Authentication.Identity.POLICY_INFORMATION_CLASS.PolicyMachineAccountInformation2 added
-Windows.Win32.Security.Authentication.Identity.POLICY_MACHINE_ACCT_INFO2 added
-Windows.Win32.Security.Authentication.Identity.SEC_CHANNEL_BINDINGS_EX added
-Windows.Win32.Security.Authentication.Identity.SEC_CHANNEL_BINDINGS_RESULT added
-Windows.Win32.Security.Cryptography.Apis.NCRYPT_REQUIRE_KDS_LRPC_BIND_FLAG added
-Windows.Win32.Security.Cryptography.Apis.wszURI_NTDS_OBJECTSID_PREFIX added
-Windows.Win32.Security.Cryptography.Certificates.Apis.wszREGDISABLESECEXTENSION removed
-Windows.Win32.Security.Isolation.IIsolatedProcessLauncher added
-Windows.Win32.Security.Isolation.IIsolatedProcessLauncher2 added
-Windows.Win32.Security.WinTrust.CONFIG_CI_PROV_INFO_RESULT2 added
-Windows.Win32.Security.WinTrust.CONFIG_CI_PROV_INFO.result2 added
-Windows.Win32.Storage.EnhancedStorage.Apis.HOMEGROUPING_FREQUENT added
-Windows.Win32.Storage.EnhancedStorage.Apis.HOMEGROUPING_PINNED added
-Windows.Win32.Storage.EnhancedStorage.Apis.HOMEGROUPING_RECENT added
-Windows.Win32.Storage.EnhancedStorage.Apis.HOMEGROUPING_RECOMMENDATIONS added
-Windows.Win32.Storage.EnhancedStorage.Apis.HOMEGROUPING_UNSPECIFIED added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_ActivityInfo added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_Home_Grouping added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_Home_IsPinned added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_Home_ItemFolderPathDisplay added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_LocationEmptyString added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_MsGraph_CompositeId added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_MsGraph_DriveId added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_MsGraph_ItemId added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_MsGraph_RecommendationReason added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_MsGraph_RecommendationReferenceId added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_MsGraph_RecommendationResultSourceId added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_MsGraph_WebAccountId added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_StorageProviderFileCreatedBy added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_StorageProviderFileModifiedBy added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_StorageProviderState added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_StorageProviderTransferProgress added
-Windows.Win32.Storage.EnhancedStorage.Apis.PKEY_StorageProviderUIStatus added
-Windows.Win32.Storage.EnhancedStorage.Apis.STORAGEPROVIDERSTATE_ERROR added
-Windows.Win32.Storage.EnhancedStorage.Apis.STORAGEPROVIDERSTATE_EXCLUDED added
-Windows.Win32.Storage.EnhancedStorage.Apis.STORAGEPROVIDERSTATE_IN_SYNC added
-Windows.Win32.Storage.EnhancedStorage.Apis.STORAGEPROVIDERSTATE_NONE added
-Windows.Win32.Storage.EnhancedStorage.Apis.STORAGEPROVIDERSTATE_PENDING_DOWNLOAD added
-Windows.Win32.Storage.EnhancedStorage.Apis.STORAGEPROVIDERSTATE_PENDING_UNSPECIFIED added
-Windows.Win32.Storage.EnhancedStorage.Apis.STORAGEPROVIDERSTATE_PENDING_UPLOAD added
-Windows.Win32.Storage.EnhancedStorage.Apis.STORAGEPROVIDERSTATE_PINNED added
-Windows.Win32.Storage.EnhancedStorage.Apis.STORAGEPROVIDERSTATE_SPARSE added
-Windows.Win32.Storage.EnhancedStorage.Apis.STORAGEPROVIDERSTATE_TRANSFERRING added
-Windows.Win32.Storage.EnhancedStorage.Apis.STORAGEPROVIDERSTATE_WARNING added
-Windows.Win32.Storage.Vhd.ATTACH_VIRTUAL_DISK_FLAG.ATTACH_VIRTUAL_DISK_FLAG_AT_BOOT added
-Windows.Win32.System.Diagnostics.Debug.BUGCHECK_ERROR.MSSECCORE_ASSERTION_FAILURE added
-Windows.Win32.System.Ioctl.Apis.CHECKSUM_TYPE_SHA256 added
-Windows.Win32.System.Ioctl.Apis.CHECKSUM_TYPE_UNCHANGED removed
-Windows.Win32.System.Ioctl.Apis.FSCTL_CLEAR_ALL_LCN_WEAK_REFERENCES added
-Windows.Win32.System.Ioctl.Apis.FSCTL_CLEAR_LCN_WEAK_REFERENCE added
-Windows.Win32.System.Ioctl.Apis.FSCTL_DELETE_LCN_WEAK_REFERENCE removed
-Windows.Win32.System.Ioctl.Apis.FSCTL_DELETE_LCN_WEAK_REFERENCES removed
-Windows.Win32.System.Ioctl.Apis.FSCTL_REFS_CHECKPOINT_VOLUME added
-Windows.Win32.System.Ioctl.Apis.FSCTL_REFS_QUERY_VOLUME_IO_METRICS_INFO added
-Windows.Win32.System.Ioctl.Apis.FSCTL_REFS_QUERY_VOLUME_TOTAL_SHARED_LCNS added
-Windows.Win32.System.Ioctl.Apis.FSCTL_REFS_SET_VOLUME_IO_METRICS_INFO added
-Windows.Win32.System.Ioctl.Apis.FSCTL_UPGRADE_VOLUME added
-Windows.Win32.System.Ioctl.Apis.PERSISTENT_VOLUME_STATE_DEV_VOLUME added
-Windows.Win32.System.Ioctl.Apis.PERSISTENT_VOLUME_STATE_TRUSTED_VOLUME added
-Windows.Win32.System.Ioctl.Apis.REQUEST_OPLOCK_OUTPUT_FLAG_WRITABLE_SECTION_PRESENT added
-Windows.Win32.System.Ioctl.REFS_VOLUME_DATA_BUFFER.MetadataChecksumType added
-Windows.Win32.System.Ioctl.REFS_VOLUME_DATA_BUFFER.Reserved0 added
-Windows.Win32.System.Ole.Apis.OleConvertOLESTREAMToIStorage2 added
-Windows.Win32.System.Ole.Apis.OleConvertOLESTREAMToIStorageEx2 added
-Windows.Win32.System.Ole.Apis.OLESTREAM_CONVERSION_DEFAULT added
-Windows.Win32.System.Ole.Apis.OLESTREAM_CONVERSION_DISABLEOLELINK added
-Windows.Win32.System.Ole.OLESTREAMQUERYCONVERTOLELINKCALLBACK added
-Windows.Win32.System.ProcessStatus.Apis.GetProcessMemoryInfo : ppsmemCounters : [In,Out] => [MemorySize(BytesParamIndex=2),Out]
-Windows.Win32.System.ProcessStatus.Apis.K32GetProcessMemoryInfo : ppsmemCounters : [In,Out] => [MemorySize(BytesParamIndex=2),Out]
-Windows.Win32.System.ProcessStatus.PROCESS_MEMORY_COUNTERS_EX2 added
-Windows.Win32.System.RemoteDesktop.IWRdsWddmIddProps1 added
-Windows.Win32.System.Search.Apis.EVENT_GATHER_INPLACE_INDEX_REBUILD added
-Windows.Win32.System.SystemInformation.Apis.GetDeveloperDriveEnablementState added
-Windows.Win32.System.SystemInformation.DEVELOPER_DRIVE_ENABLEMENT_STATE added
-Windows.Win32.System.SystemInformation.DEVELOPER_DRIVE_ENABLEMENT_STATE.DeveloperDriveDisabledByGroupPolicy added
-Windows.Win32.System.SystemInformation.DEVELOPER_DRIVE_ENABLEMENT_STATE.DeveloperDriveDisabledBySystemPolicy added
-Windows.Win32.System.SystemInformation.DEVELOPER_DRIVE_ENABLEMENT_STATE.DeveloperDriveEnabled added
-Windows.Win32.System.SystemInformation.DEVELOPER_DRIVE_ENABLEMENT_STATE.DeveloperDriveEnablementStateError added
-Windows.Win32.System.SystemServices.Apis.GUID_HUPR_ADAPTIVE_AWAY_DIM_TIMEOUT added
-Windows.Win32.System.SystemServices.Apis.GUID_HUPR_ADAPTIVE_AWAY_DISPLAY_TIMEOUT added
-Windows.Win32.System.SystemServices.Apis.GUID_HUPR_ADAPTIVE_DIM_TIMEOUT removed
-Windows.Win32.System.SystemServices.Apis.GUID_HUPR_ADAPTIVE_DISPLAY_TIMEOUT removed
-Windows.Win32.System.SystemServices.Apis.GUID_HUPR_ADAPTIVE_INATTENTIVE_DIM_TIMEOUT added
-Windows.Win32.System.SystemServices.Apis.GUID_HUPR_ADAPTIVE_INATTENTIVE_DISPLAY_TIMEOUT added
-Windows.Win32.System.SystemServices.Apis.IO_REPARSE_TAG_RESERVED_INVALID added
-Windows.Win32.System.SystemServices.PROCESS_MITIGATION_ACTIVATION_CONTEXT_TRUST_POLICY added
-Windows.Win32.System.SystemServices.PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY._Anonymous_e__Union._Anonymous_e__Struct._bitfield : [NativeBitfield(DisallowWin32kSystemCalls,0,1),NativeBitfield(AuditDisallowWin32kSystemCalls,1,1),NativeBitfield(ReservedFlags,2,30)] => [NativeBitfield(DisallowWin32kSystemCalls,0,1),NativeBitfield(AuditDisallowWin32kSystemCalls,1,1),NativeBitfield(DisallowFsctlSystemCalls,2,1),NativeBitfield(AuditDisallowFsctlSystemCalls,3,1),NativeBitfield(ReservedFlags,4,28)]
-Windows.Win32.System.Threading.OVERRIDE_PREFETCH_PARAMETER added
-Windows.Win32.System.Threading.PROCESS_INFORMATION_CLASS.ProcessMaxOverridePrefetchParameter added
-Windows.Win32.System.Threading.PROCESS_INFORMATION_CLASS.ProcessOverrideSubsequentPrefetchParameter added
-Windows.Win32.System.Threading.PROCESS_MITIGATION_POLICY.ProcessActivationContextTrustPolicy added
-Windows.Win32.System.UpdateAgent.Apis.WU_E_PT_DATA_BOUNDARY_RESTRICTED added
-Windows.Win32.System.UpdateAgent.Apis.WU_E_PT_GENERAL_AAD_CLIENT_ERROR added
-Windows.Win32.System.UpdateAgent.Apis.WU_S_AAD_DEVICE_TICKET_NOT_NEEDED added
-Windows.Win32.System.WindowsProgramming.Apis.FILE_FLAG_IGNORE_IMPERSONATED_DEVICEMAP added
-Windows.Win32.System.WinRT.Composition.ICompositionTextureInterop added
-Windows.Win32.System.WinRT.Composition.ICompositorInterop2 added
-Windows.Win32.System.WinRT.ICoreInputInterop2 added
-Windows.Win32.UI.Controls.RichEdit.Apis.EM_SETDISABLEOLELINKCONVERSION added
-Windows.Win32.UI.Controls.RichEdit.Apis.EM_SETQUERYCONVERTOLELINKCALLBACK added
-Windows.Win32.UI.Shell.Apis.CLSID_CUrlHistoryBoth added
-Windows.Win32.UI.Shell.Apis.COPYENGINE_S_PENDING_DELETE added
-winmd1: Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_API_CURRENT_VERSION = 4, winmd2 = 7
-winmd1: Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_ASSERTION_CURRENT_VERSION = 3, winmd2 = 5
-winmd1: Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS_CURRENT_VERSION = 6, winmd2 = 7
-winmd1: Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS_CURRENT_VERSION = 5, winmd2 = 7
-winmd1: Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CREDENTIAL_ATTESTATION_CURRENT_VERSION = 4, winmd2 = 6
-winmd1: Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CREDENTIAL_DETAILS_CURRENT_VERSION = 1, winmd2 = 2
-winmd1: Windows.Win32.Networking.WindowsWebServices.Apis.WEBAUTHN_CTAP_TRANSPORT_FLAGS_MASK = 31, winmd2 = 63
-winmd1: Windows.Win32.Security.Authentication.Identity.POLICY_INFORMATION_CLASS.PolicyLastEntry = 16, winmd2 = 17
-winmd1: Windows.Win32.System.Ioctl.Apis.CHECKSUM_TYPE_FIRST_UNUSED_TYPE = 4, winmd2 = 5
-winmd1: Windows.Win32.System.Threading.PROCESS_INFORMATION_CLASS.ProcessInformationClassMax = 10, winmd2 = 12
-winmd1: Windows.Win32.System.Threading.PROCESS_MITIGATION_POLICY.MaxProcessMitigationPolicy = 19, winmd2 = 20
-# Fixed #1745.
-Windows.Win32.Networking.WinSock.Apis.WSAID_MULTIPLE_RIO added
-Windows.Win32.Networking.WinSock.Apis.WSAID_WSASENDMSG added
-Windows.Win32.Security.Cryptography.UI.Apis.CERT_CERTIFICATE_ACTION_VERIFY added
-Windows.Win32.System.Performance.Apis.PERF_AGGREGATE_MAX removed
-Windows.Win32.System.Performance.PERF_COUNTER_AGGREGATE_FUNC.PERF_AGGREGATE_MAX added
-# Adjust NOTIFYICONDATA flags, types
-Windows.Win32.UI.Shell.NOTIFY_ICON_INFOTIP_FLAGS :  => [Flags]
-Windows.Win32.UI.Shell.NOTIFY_ICON_STATE :  => [Flags]
-Windows.Win32.UI.Shell.NOTIFYICONDATAA.dwStateMask(X64, Arm64)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
-Windows.Win32.UI.Shell.NOTIFYICONDATAA.dwStateMask(X86)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
-Windows.Win32.UI.Shell.NOTIFYICONDATAW.dwStateMask(X64, Arm64)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
-Windows.Win32.UI.Shell.NOTIFYICONDATAW.dwStateMask(X86)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
-# Fixed #1787.
-Windows.Win32.Media.Audio.Apis.DEVICE_STATE_ACTIVE removed
-Windows.Win32.Media.Audio.Apis.DEVICE_STATE_DISABLED removed
-Windows.Win32.Media.Audio.Apis.DEVICE_STATE_NOTPRESENT removed
-Windows.Win32.Media.Audio.Apis.DEVICE_STATE_UNPLUGGED removed
-Windows.Win32.Media.Audio.DEVICE_STATE added
-Windows.Win32.Media.Audio.DEVICE_STATE.DEVICE_STATE_ACTIVE added
-Windows.Win32.Media.Audio.DEVICE_STATE.DEVICE_STATE_DISABLED added
-Windows.Win32.Media.Audio.DEVICE_STATE.DEVICE_STATE_NOTPRESENT added
-Windows.Win32.Media.Audio.DEVICE_STATE.DEVICE_STATE_UNPLUGGED added
-Windows.Win32.Media.Audio.IMMDevice.GetState : return...HRESULT => DEVICE_STATE
-Windows.Win32.Media.Audio.IMMDeviceEnumerator.EnumAudioEndpoints : dwStateMask...UInt32 => DEVICE_STATE
-Windows.Win32.Media.Audio.IMMNotificationClient.OnDeviceStateChanged : dwNewState...UInt32 => DEVICE_STATE
-# Fixed #1786.
-Windows.Win32.Devices.HumanInterfaceDevice.Apis.MOUSE_ATTRIBUTES_CHANGED removed
-Windows.Win32.Devices.HumanInterfaceDevice.Apis.MOUSE_MOVE_ABSOLUTE removed
-Windows.Win32.Devices.HumanInterfaceDevice.Apis.MOUSE_MOVE_NOCOALESCE removed
-Windows.Win32.Devices.HumanInterfaceDevice.Apis.MOUSE_MOVE_RELATIVE removed
-Windows.Win32.Devices.HumanInterfaceDevice.Apis.MOUSE_VIRTUAL_DESKTOP removed
-Windows.Win32.UI.Input.MOUSE_STATE added
-Windows.Win32.UI.Input.MOUSE_STATE.MOUSE_ATTRIBUTES_CHANGED added
-Windows.Win32.UI.Input.MOUSE_STATE.MOUSE_MOVE_ABSOLUTE added
-Windows.Win32.UI.Input.MOUSE_STATE.MOUSE_MOVE_NOCOALESCE added
-Windows.Win32.UI.Input.MOUSE_STATE.MOUSE_MOVE_RELATIVE added
-Windows.Win32.UI.Input.MOUSE_STATE.MOUSE_VIRTUAL_DESKTOP added
-Windows.Win32.UI.Input.RAWMOUSE.usFlags...System.UInt16 => Windows.Win32.UI.Input.MOUSE_STATE
-# Fixed #1779.
-Windows.Win32.System.Power.Apis.RegisterPowerSettingNotification : Flags...UInt32 => REGISTER_NOTIFICATION_FLAGS
-# Fixed #1774.
-Windows.Win32.UI.Shell.Apis.SHCreateItemInKnownFolder : dwKFFlags : [In] => [AssociatedEnum(KNOWN_FOLDER_FLAG),In]
-# Fixed #1780.
-Windows.Win32.System.WindowsProgramming.FILE_INFORMATION_CLASS removed
-Windows.Win32.System.WindowsProgramming.FILE_INFORMATION_CLASS.FileDirectoryInformation removed
+# fix IoRing api results
+Windows.Win32.Storage.FileSystem.Apis.PopIoRingCompletion : [DllImport(api-ms-win-core-ioring-l1-1-0.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-popioringcompletion)] => [CanReturnMultipleSuccessValues,DllImport(api-ms-win-core-ioring-l1-1-0.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-popioringcompletion)]
+# Fixed #1852.
+Windows.Win32.Security.SC_HANDLE removed
+Windows.Win32.System.Services.SC_HANDLE added
+# Correct ICompositionTexture reference
+Windows.Win32.System.WinRT.Composition.ICompositorInterop2.CreateCompositionTexture : compositionTexture...ICompositionTexture* => CompositionTexture*
+# Fixed #1856.
+Windows.Win32.Media.Audio.IMMDevice.GetState : pdwState...UInt32* => DEVICE_STATE*
+Windows.Win32.Media.Audio.IMMDevice.GetState : return...DEVICE_STATE => HRESULT
+# Fixed #1859.
+Windows.Win32.UI.WindowsAndMessaging.CREATESTRUCTA.dwExStyle...System.UInt32 => Windows.Win32.UI.WindowsAndMessaging.WINDOW_EX_STYLE
+Windows.Win32.UI.WindowsAndMessaging.CREATESTRUCTA.style :  => [AssociatedEnum(WINDOW_STYLE)]
+Windows.Win32.UI.WindowsAndMessaging.CREATESTRUCTW.dwExStyle...System.UInt32 => Windows.Win32.UI.WindowsAndMessaging.WINDOW_EX_STYLE
+Windows.Win32.UI.WindowsAndMessaging.CREATESTRUCTW.style :  => [AssociatedEnum(WINDOW_STYLE)]
+# Update D3D12 Agility SDK to 1.613
+Windows.Win32.Graphics.Direct3D.Apis.D3D_SHADER_FEATURE_SAMPLE_CMP_GRADIENT_OR_BIAS added
+Windows.Win32.Graphics.Direct3D.D3D_REGISTER_COMPONENT_TYPE.D3D_REGISTER_COMPONENT_FLOAT16 added
+Windows.Win32.Graphics.Direct3D.D3D_REGISTER_COMPONENT_TYPE.D3D_REGISTER_COMPONENT_FLOAT64 added
+Windows.Win32.Graphics.Direct3D.D3D_REGISTER_COMPONENT_TYPE.D3D_REGISTER_COMPONENT_SINT16 added
+Windows.Win32.Graphics.Direct3D.D3D_REGISTER_COMPONENT_TYPE.D3D_REGISTER_COMPONENT_SINT64 added
+Windows.Win32.Graphics.Direct3D.D3D_REGISTER_COMPONENT_TYPE.D3D_REGISTER_COMPONENT_UINT16 added
+Windows.Win32.Graphics.Direct3D.D3D_REGISTER_COMPONENT_TYPE.D3D_REGISTER_COMPONENT_UINT64 added
+Windows.Win32.Graphics.Direct3D.D3D_REGISTER_COMPONENT_TYPE.D3D10_REGISTER_COMPONENT_FLOAT16 added
+Windows.Win32.Graphics.Direct3D.D3D_REGISTER_COMPONENT_TYPE.D3D10_REGISTER_COMPONENT_FLOAT64 added
+Windows.Win32.Graphics.Direct3D.D3D_REGISTER_COMPONENT_TYPE.D3D10_REGISTER_COMPONENT_SINT16 added
+Windows.Win32.Graphics.Direct3D.D3D_REGISTER_COMPONENT_TYPE.D3D10_REGISTER_COMPONENT_SINT64 added
+Windows.Win32.Graphics.Direct3D.D3D_REGISTER_COMPONENT_TYPE.D3D10_REGISTER_COMPONENT_UINT16 added
+Windows.Win32.Graphics.Direct3D.D3D_REGISTER_COMPONENT_TYPE.D3D10_REGISTER_COMPONENT_UINT64 added
+Windows.Win32.Graphics.Direct3D12.Apis.D3D_SHADER_FEATURE_ADVANCED_TEXTURE_OPS => Windows.Win32.Graphics.Direct3D.Apis.D3D_SHADER_FEATURE_ADVANCED_TEXTURE_OPS
+Windows.Win32.Graphics.Direct3D12.Apis.D3D_SHADER_FEATURE_WRITEABLE_MSAA_TEXTURES => Windows.Win32.Graphics.Direct3D.Apis.D3D_SHADER_FEATURE_WRITEABLE_MSAA_TEXTURES
+Windows.Win32.Graphics.Direct3D12.Apis.D3D_SHADER_REQUIRES_ADVANCED_TEXTURE_OPS added
+Windows.Win32.Graphics.Direct3D12.Apis.D3D_SHADER_REQUIRES_SAMPLE_CMP_GRADIENT_OR_BIAS added
+Windows.Win32.Graphics.Direct3D12.Apis.D3D_SHADER_REQUIRES_WRITEABLE_MSAA_TEXTURES added
+Windows.Win32.Graphics.Direct3D12.Apis.D3D12_WORK_GRAPHS_BACKING_MEMORY_ALIGNMENT_IN_BYTES added
+Windows.Win32.Graphics.Direct3D12.Apis.D3D12_WORK_GRAPHS_MAX_NODE_DEPTH added
+Windows.Win32.Graphics.Direct3D12.D3D_SHADER_MODEL.D3D_SHADER_MODEL_6_9 added
+Windows.Win32.Graphics.Direct3D12.D3D_SHADER_MODEL.D3D_SHADER_MODEL_NONE added
+Windows.Win32.Graphics.Direct3D12.D3D12_AUTO_BREADCRUMB_OP.D3D12_AUTO_BREADCRUMB_OP_DISPATCHGRAPH added
+Windows.Win32.Graphics.Direct3D12.D3D12_AUTO_BREADCRUMB_OP.D3D12_AUTO_BREADCRUMB_OP_SETPROGRAM added
+Windows.Win32.Graphics.Direct3D12.D3D12_BROADCASTING_LAUNCH_OVERRIDES added
+Windows.Win32.Graphics.Direct3D12.D3D12_COALESCING_LAUNCH_OVERRIDES added
+Windows.Win32.Graphics.Direct3D12.D3D12_COMMON_COMPUTE_NODE_OVERRIDES added
+Windows.Win32.Graphics.Direct3D12.D3D12_DEPTH_STENCIL_FORMAT added
+Windows.Win32.Graphics.Direct3D12.D3D12_DISPATCH_GRAPH_DESC added
+Windows.Win32.Graphics.Direct3D12.D3D12_DISPATCH_MODE added
+Windows.Win32.Graphics.Direct3D12.D3D12_DISPATCH_MODE.D3D12_DISPATCH_MODE_MULTI_NODE_CPU_INPUT added
+Windows.Win32.Graphics.Direct3D12.D3D12_DISPATCH_MODE.D3D12_DISPATCH_MODE_MULTI_NODE_GPU_INPUT added
+Windows.Win32.Graphics.Direct3D12.D3D12_DISPATCH_MODE.D3D12_DISPATCH_MODE_NODE_CPU_INPUT added
+Windows.Win32.Graphics.Direct3D12.D3D12_DISPATCH_MODE.D3D12_DISPATCH_MODE_NODE_GPU_INPUT added
+Windows.Win32.Graphics.Direct3D12.D3D12_EXECUTE_INDIRECT_TIER added
+Windows.Win32.Graphics.Direct3D12.D3D12_EXECUTE_INDIRECT_TIER.D3D12_EXECUTE_INDIRECT_TIER_1_0 added
+Windows.Win32.Graphics.Direct3D12.D3D12_EXECUTE_INDIRECT_TIER.D3D12_EXECUTE_INDIRECT_TIER_1_1 added
+Windows.Win32.Graphics.Direct3D12.D3D12_FEATURE_DATA_D3D12_OPTIONS21 added
+Windows.Win32.Graphics.Direct3D12.D3D12_FEATURE.D3D12_FEATURE_D3D12_OPTIONS21 added
+Windows.Win32.Graphics.Direct3D12.D3D12_GENERIC_PROGRAM_DESC added
+Windows.Win32.Graphics.Direct3D12.D3D12_IB_STRIP_CUT_VALUE added
+Windows.Win32.Graphics.Direct3D12.D3D12_INDIRECT_ARGUMENT_DESC._Anonymous_e__Union._IncrementingConstant_e__Struct added
+Windows.Win32.Graphics.Direct3D12.D3D12_INDIRECT_ARGUMENT_DESC._Anonymous_e__Union.IncrementingConstant added
+Windows.Win32.Graphics.Direct3D12.D3D12_INDIRECT_ARGUMENT_TYPE.D3D12_INDIRECT_ARGUMENT_TYPE_INCREMENTING_CONSTANT added
+Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_CREATE_STATE_OBJECT_WARNING added
+Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_DISPATCH_GRAPH_INVALID added
+Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_GPU_BASED_VALIDATION_STRUCTURED_BUFFER_STRIDE_MISMATCH added
+Windows.Win32.Graphics.Direct3D12.D3D12_MULTI_NODE_CPU_INPUT added
+Windows.Win32.Graphics.Direct3D12.D3D12_MULTI_NODE_GPU_INPUT added
+Windows.Win32.Graphics.Direct3D12.D3D12_NODE added
+Windows.Win32.Graphics.Direct3D12.D3D12_NODE_CPU_INPUT added
+Windows.Win32.Graphics.Direct3D12.D3D12_NODE_GPU_INPUT added
+Windows.Win32.Graphics.Direct3D12.D3D12_NODE_ID added
+Windows.Win32.Graphics.Direct3D12.D3D12_NODE_OUTPUT_OVERRIDES added
+Windows.Win32.Graphics.Direct3D12.D3D12_NODE_OVERRIDES_TYPE added
+Windows.Win32.Graphics.Direct3D12.D3D12_NODE_OVERRIDES_TYPE.D3D12_NODE_OVERRIDES_TYPE_BROADCASTING_LAUNCH added
+Windows.Win32.Graphics.Direct3D12.D3D12_NODE_OVERRIDES_TYPE.D3D12_NODE_OVERRIDES_TYPE_COALESCING_LAUNCH added
+Windows.Win32.Graphics.Direct3D12.D3D12_NODE_OVERRIDES_TYPE.D3D12_NODE_OVERRIDES_TYPE_COMMON_COMPUTE added
+Windows.Win32.Graphics.Direct3D12.D3D12_NODE_OVERRIDES_TYPE.D3D12_NODE_OVERRIDES_TYPE_NONE added
+Windows.Win32.Graphics.Direct3D12.D3D12_NODE_OVERRIDES_TYPE.D3D12_NODE_OVERRIDES_TYPE_THREAD_LAUNCH added
+Windows.Win32.Graphics.Direct3D12.D3D12_NODE_TYPE added
+Windows.Win32.Graphics.Direct3D12.D3D12_NODE_TYPE.D3D12_NODE_TYPE_SHADER added
+Windows.Win32.Graphics.Direct3D12.D3D12_PRIMITIVE_TOPOLOGY_DESC added
+Windows.Win32.Graphics.Direct3D12.D3D12_PROGRAM_IDENTIFIER added
+Windows.Win32.Graphics.Direct3D12.D3D12_PROGRAM_TYPE added
+Windows.Win32.Graphics.Direct3D12.D3D12_PROGRAM_TYPE.D3D12_PROGRAM_TYPE_GENERIC_PIPELINE added
+Windows.Win32.Graphics.Direct3D12.D3D12_PROGRAM_TYPE.D3D12_PROGRAM_TYPE_RAYTRACING_PIPELINE added
+Windows.Win32.Graphics.Direct3D12.D3D12_PROGRAM_TYPE.D3D12_PROGRAM_TYPE_WORK_GRAPH added
+Windows.Win32.Graphics.Direct3D12.D3D12_SAMPLE_MASK added
+Windows.Win32.Graphics.Direct3D12.D3D12_SET_GENERIC_PIPELINE_DESC added
+Windows.Win32.Graphics.Direct3D12.D3D12_SET_PROGRAM_DESC added
+Windows.Win32.Graphics.Direct3D12.D3D12_SET_RAYTRACING_PIPELINE_DESC added
+Windows.Win32.Graphics.Direct3D12.D3D12_SET_WORK_GRAPH_DESC added
+Windows.Win32.Graphics.Direct3D12.D3D12_SET_WORK_GRAPH_FLAGS added
+Windows.Win32.Graphics.Direct3D12.D3D12_SET_WORK_GRAPH_FLAGS.D3D12_SET_WORK_GRAPH_FLAG_INITIALIZE added
+Windows.Win32.Graphics.Direct3D12.D3D12_SET_WORK_GRAPH_FLAGS.D3D12_SET_WORK_GRAPH_FLAG_NONE added
+Windows.Win32.Graphics.Direct3D12.D3D12_SHADER_NODE added
+Windows.Win32.Graphics.Direct3D12.D3D12_SHADER_VERSION_TYPE.D3D12_SHVER_NODE_SHADER added
+Windows.Win32.Graphics.Direct3D12.D3D12_STANDARD_MULTISAMPLE_QUALITY_LEVELS added
+Windows.Win32.Graphics.Direct3D12.D3D12_STANDARD_MULTISAMPLE_QUALITY_LEVELS.D3D12_CENTER_MULTISAMPLE_PATTERN added
+Windows.Win32.Graphics.Direct3D12.D3D12_STANDARD_MULTISAMPLE_QUALITY_LEVELS.D3D12_STANDARD_MULTISAMPLE_PATTERN added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATE_OBJECT_TYPE.D3D12_STATE_OBJECT_TYPE_EXECUTABLE added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_BLEND added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_DEPTH_STENCIL added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_DEPTH_STENCIL_FORMAT added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_DEPTH_STENCIL1 added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_DEPTH_STENCIL2 added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_FLAGS added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_GENERIC_PROGRAM added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_IB_STRIP_CUT_VALUE added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_INPUT_LAYOUT added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_PRIMITIVE_TOPOLOGY added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_RASTERIZER added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_RENDER_TARGET_FORMATS added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_SAMPLE_DESC added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_SAMPLE_MASK added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_STREAM_OUTPUT added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_VIEW_INSTANCING added
+Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_WORK_GRAPH added
+Windows.Win32.Graphics.Direct3D12.D3D12_THREAD_LAUNCH_OVERRIDES added
+Windows.Win32.Graphics.Direct3D12.D3D12_WORK_GRAPH_DESC added
+Windows.Win32.Graphics.Direct3D12.D3D12_WORK_GRAPH_FLAGS added
+Windows.Win32.Graphics.Direct3D12.D3D12_WORK_GRAPH_FLAGS.D3D12_WORK_GRAPH_FLAG_INCLUDE_ALL_AVAILABLE_NODES added
+Windows.Win32.Graphics.Direct3D12.D3D12_WORK_GRAPH_FLAGS.D3D12_WORK_GRAPH_FLAG_NONE added
+Windows.Win32.Graphics.Direct3D12.D3D12_WORK_GRAPH_MEMORY_REQUIREMENTS added
+Windows.Win32.Graphics.Direct3D12.D3D12_WORK_GRAPHS_TIER added
+Windows.Win32.Graphics.Direct3D12.D3D12_WORK_GRAPHS_TIER.D3D12_WORK_GRAPHS_TIER_1_0 added
+Windows.Win32.Graphics.Direct3D12.D3D12_WORK_GRAPHS_TIER.D3D12_WORK_GRAPHS_TIER_NOT_SUPPORTED added
+Windows.Win32.Graphics.Direct3D12.ID3D12Device14 added
+Windows.Win32.Graphics.Direct3D12.ID3D12DeviceConfiguration1 added
+Windows.Win32.Graphics.Direct3D12.ID3D12GBVDiagnostics added
+Windows.Win32.Graphics.Direct3D12.ID3D12GraphicsCommandList10 added
+Windows.Win32.Graphics.Direct3D12.ID3D12StateObjectProperties1 added
+Windows.Win32.Graphics.Direct3D12.ID3D12WorkGraphProperties added
+Windows.Win32.Media.MediaFoundation.Apis.D3D12_VIDEO_DECODE_PROFILE_JPEG_VLD_420 added
+Windows.Win32.Media.MediaFoundation.Apis.D3D12_VIDEO_DECODE_PROFILE_JPEG_VLD_422 added
+Windows.Win32.Media.MediaFoundation.Apis.D3D12_VIDEO_DECODE_PROFILE_JPEG_VLD_444 added
+Windows.Win32.Media.MediaFoundation.Apis.D3D12_VIDEO_DECODE_PROFILE_MJPEG_VLD_420 added
+Windows.Win32.Media.MediaFoundation.Apis.D3D12_VIDEO_DECODE_PROFILE_MJPEG_VLD_422 added
+Windows.Win32.Media.MediaFoundation.Apis.D3D12_VIDEO_DECODE_PROFILE_MJPEG_VLD_444 added
+Windows.Win32.Media.MediaFoundation.Apis.D3D12_VIDEO_DECODE_PROFILE_MJPEG_VLD_4444 added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_DECODE_ARGUMENT_TYPE.D3D12_VIDEO_DECODE_ARGUMENT_TYPE_HUFFMAN_TABLE added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_DECODE_ARGUMENT_TYPE.D3D12_VIDEO_DECODE_ARGUMENT_TYPE_MAX_VALID removed
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAG_CABAC_BYPASS_ALIGNMENT added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAG_EXPLICIT_RDPCM added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAG_EXTENDED_PRECISION_PROCESSING added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAG_HIGH_PRECISION_OFFSETS added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAG_IMPLICIT_RDPCM added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAG_INTRA_SMOOTHING_DISABLED added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAG_PERSISTENT_RICE_ADAPTATION added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAG_SEPARATE_COLOUR_PLANE added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAG_TRANSFORM_SKIP_CONTEXT added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC_FLAG_TRANSFORM_SKIP_ROTATION added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_H264_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_H264_FLAG_NUM_REF_IDX_ACTIVE_OVERRIDE_FLAG_SLICE_SUPPORT added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_CABAC_BYPASS_ALIGNMENT_ENABLED_REQUIRED added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_CABAC_BYPASS_ALIGNMENT_ENABLED_SUPPORT added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_CHROMA_QP_OFFSET_LIST_ENABLED_FLAG_REQUIRED added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_CHROMA_QP_OFFSET_LIST_ENABLED_FLAG_SUPPORT added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_CROSS_COMPONENT_PREDICTION_ENABLED_FLAG_REQUIRED added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_CROSS_COMPONENT_PREDICTION_ENABLED_FLAG_SUPPORT added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_EXPLICIT_RDPCM_ENABLED_REQUIRED added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_EXPLICIT_RDPCM_ENABLED_SUPPORT added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_EXTENDED_PRECISION_PROCESSING_REQUIRED added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_EXTENDED_PRECISION_PROCESSING_SUPPORT added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_HIGH_PRECISION_OFFSETS_ENABLED_REQUIRED added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_HIGH_PRECISION_OFFSETS_ENABLED_SUPPORT added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_IMPLICIT_RDPCM_ENABLED_REQUIRED added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_IMPLICIT_RDPCM_ENABLED_SUPPORT added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_INTRA_SMOOTHING_DISABLED_REQUIRED added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_INTRA_SMOOTHING_DISABLED_SUPPORT added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_NUM_REF_IDX_ACTIVE_OVERRIDE_FLAG_SLICE_SUPPORT added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_PERSISTENT_RICE_ADAPTATION_ENABLED_REQUIRED added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_PERSISTENT_RICE_ADAPTATION_ENABLED_SUPPORT added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_TRANSFORM_SKIP_CONTEXT_ENABLED_REQUIRED added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_TRANSFORM_SKIP_CONTEXT_ENABLED_SUPPORT added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_TRANSFORM_SKIP_ROTATION_ENABLED_REQUIRED added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG_TRANSFORM_SKIP_ROTATION_ENABLED_SUPPORT added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS1 added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS1.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG1_NONE added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS1.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG1_SEPARATE_COLOUR_PLANE_REQUIRED added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS1.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAG1_SEPARATE_COLOUR_PLANE_SUPPORT added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC1 added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT._Anonymous_e__Union.pHEVCSupport1 added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264_FLAGS.D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264_FLAG_REQUEST_NUM_REF_IDX_ACTIVE_OVERRIDE_FLAG_SLICE added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC_FLAGS.D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC_FLAG_CHROMA_QP_OFFSET_LIST added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC_FLAGS.D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC_FLAG_CROSS_COMPONENT_PREDICTION added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC_FLAGS.D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC_FLAG_REQUEST_NUM_REF_IDX_ACTIVE_OVERRIDE_FLAG_SLICE added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC1 added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA._Anonymous_e__Union.pHEVCPicData1 added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_PROFILE_HEVC.D3D12_VIDEO_ENCODER_PROFILE_HEVC_MAIN_444 added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_PROFILE_HEVC.D3D12_VIDEO_ENCODER_PROFILE_HEVC_MAIN10_422 added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_PROFILE_HEVC.D3D12_VIDEO_ENCODER_PROFILE_HEVC_MAIN10_444 added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_PROFILE_HEVC.D3D12_VIDEO_ENCODER_PROFILE_HEVC_MAIN12 added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_PROFILE_HEVC.D3D12_VIDEO_ENCODER_PROFILE_HEVC_MAIN12_422 added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_PROFILE_HEVC.D3D12_VIDEO_ENCODER_PROFILE_HEVC_MAIN12_444 added
+Windows.Win32.Media.MediaFoundation.D3D12_VIDEO_ENCODER_PROFILE_HEVC.D3D12_VIDEO_ENCODER_PROFILE_HEVC_MAIN16_444 added
+winmd1: Windows.Win32.Graphics.Direct3D12.Apis.D3D12_PREVIEW_SDK_VERSION = 712, winmd2 = 713
+winmd1: Windows.Win32.Graphics.Direct3D12.Apis.D3D12_SDK_VERSION = 611, winmd2 = 613
+winmd1: Windows.Win32.Graphics.Direct3D12.D3D_SHADER_MODEL.D3D_HIGHEST_SHADER_MODEL = 104, winmd2 = 105
+winmd1: Windows.Win32.Graphics.Direct3D12.D3D12_MESSAGE_ID.D3D12_MESSAGE_ID_D3D12_MESSAGES_END = 1387, winmd2 = 1415
+winmd1: Windows.Win32.Graphics.Direct3D12.D3D12_STATE_SUBOBJECT_TYPE.D3D12_STATE_SUBOBJECT_TYPE_MAX_VALID = 13, winmd2 = 31
+# Fixed #1872.
+Windows.Win32.NetworkManagement.WNet.Apis.CONNECT_CRED_RESET removed
+Windows.Win32.NetworkManagement.WNet.Apis.CONNECT_CURRENT_MEDIA removed
+Windows.Win32.NetworkManagement.WNet.Apis.CONNECT_GLOBAL_MAPPING removed
+Windows.Win32.NetworkManagement.WNet.Apis.CONNECT_LOCALDRIVE removed
+Windows.Win32.NetworkManagement.WNet.Apis.CONNECT_NEED_DRIVE removed
+Windows.Win32.NetworkManagement.WNet.Apis.CONNECT_REFCOUNT removed
+Windows.Win32.NetworkManagement.WNet.Apis.CONNECT_REQUIRE_INTEGRITY removed
+Windows.Win32.NetworkManagement.WNet.Apis.CONNECT_REQUIRE_PRIVACY removed
+Windows.Win32.NetworkManagement.WNet.Apis.CONNECT_RESERVED removed
+Windows.Win32.NetworkManagement.WNet.Apis.CONNECT_WRITE_THROUGH_SEMANTICS removed
+Windows.Win32.NetworkManagement.WNet.Apis.NPAddConnection3 : dwFlags...NET_USE_CONNECT_FLAGS => NET_CONNECT_FLAGS
+Windows.Win32.NetworkManagement.WNet.Apis.WNetAddConnection2A : dwFlags...UInt32 => NET_CONNECT_FLAGS
+Windows.Win32.NetworkManagement.WNet.Apis.WNetAddConnection2W : dwFlags...UInt32 => NET_CONNECT_FLAGS
+Windows.Win32.NetworkManagement.WNet.Apis.WNetAddConnection3A : dwFlags...UInt32 => NET_CONNECT_FLAGS
+Windows.Win32.NetworkManagement.WNet.Apis.WNetAddConnection3W : dwFlags...UInt32 => NET_CONNECT_FLAGS
+Windows.Win32.NetworkManagement.WNet.Apis.WNetAddConnection4A : dwFlags...UInt32 => NET_CONNECT_FLAGS
+Windows.Win32.NetworkManagement.WNet.Apis.WNetAddConnection4W : dwFlags...UInt32 => NET_CONNECT_FLAGS
+Windows.Win32.NetworkManagement.WNet.Apis.WNetCancelConnection2A : dwFlags...UInt32 => NET_CONNECT_FLAGS
+Windows.Win32.NetworkManagement.WNet.Apis.WNetCancelConnection2W : dwFlags...UInt32 => NET_CONNECT_FLAGS
+Windows.Win32.NetworkManagement.WNet.Apis.WNetUseConnectionA : dwFlags...NET_USE_CONNECT_FLAGS => NET_CONNECT_FLAGS
+Windows.Win32.NetworkManagement.WNet.Apis.WNetUseConnectionW : dwFlags...NET_USE_CONNECT_FLAGS => NET_CONNECT_FLAGS
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_CMD_SAVECRED added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_COMMANDLINE added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_CRED_RESET added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_CURRENT_MEDIA added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_DEFERRED added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_GLOBAL_MAPPING added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_INTERACTIVE added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_LOCALDRIVE added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_NEED_DRIVE added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_PROMPT added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_REDIRECT added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_REFCOUNT added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_REQUIRE_INTEGRITY added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_REQUIRE_PRIVACY added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_RESERVED added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_TEMPORARY added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_UPDATE_PROFILE added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_UPDATE_RECENT added
+Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS.CONNECT_WRITE_THROUGH_SEMANTICS added
+Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS removed
+Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS.CONNECT_CMD_SAVECRED removed
+Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS.CONNECT_COMMANDLINE removed
+Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS.CONNECT_DEFERRED removed
+Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS.CONNECT_INTERACTIVE removed
+Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS.CONNECT_PROMPT removed
+Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS.CONNECT_REDIRECT removed
+Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS.CONNECT_TEMPORARY removed
+Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS.CONNECT_UPDATE_PROFILE removed
+Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS.CONNECT_UPDATE_RECENT removed
+Windows.Win32.NetworkManagement.WNet.NOTIFYADD.dwAddFlags...Windows.Win32.NetworkManagement.WNet.NET_USE_CONNECT_FLAGS => Windows.Win32.NetworkManagement.WNet.NET_CONNECT_FLAGS
+# Fixed #1857.
+Windows.Win32.Foundation.Apis.RPC_S_ACCESS_DENIED removed
+Windows.Win32.Foundation.Apis.RPC_S_ASYNC_CALL_PENDING removed
+Windows.Win32.Foundation.Apis.RPC_S_BUFFER_TOO_SMALL removed
+Windows.Win32.Foundation.Apis.RPC_S_INVALID_ARG removed
+Windows.Win32.Foundation.Apis.RPC_S_INVALID_LEVEL removed
+Windows.Win32.Foundation.Apis.RPC_S_INVALID_SECURITY_DESC removed
+Windows.Win32.Foundation.Apis.RPC_S_NOT_ENOUGH_QUOTA removed
+Windows.Win32.Foundation.Apis.RPC_S_OUT_OF_MEMORY removed
+Windows.Win32.Foundation.Apis.RPC_S_OUT_OF_THREADS removed
+Windows.Win32.Foundation.Apis.RPC_S_SERVER_OUT_OF_MEMORY removed
+Windows.Win32.Foundation.Apis.RPC_S_UNKNOWN_PRINCIPAL removed
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_ACCESS_DENIED added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_ASYNC_CALL_PENDING added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_BUFFER_TOO_SMALL added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_INVALID_ARG added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_INVALID_LEVEL added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_INVALID_SECURITY_DESC added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_NOT_ENOUGH_QUOTA added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_OUT_OF_MEMORY added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_OUT_OF_THREADS added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_RUNTIME_UNINITIALIZED added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_SERVER_OUT_OF_MEMORY added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_TIMEOUT added
+Windows.Win32.System.Rpc.RPC_STATUS.RPC_S_UNKNOWN_PRINCIPAL added
+# Fixed #1858.
+Windows.Win32.Security.Cryptography.Apis.CertCreateCertificateContext : [DllImport(CRYPT32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certcreatecertificatecontext),SupportedOSPlatform(windows5.1.2600)] => [CanReturnMultipleSuccessValues,DllImport(CRYPT32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certcreatecertificatecontext),SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.Storage.FileSystem.Apis.GetFileAttributesA : [Ansi,DllImport(KERNEL32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getfileattributesa),SupportedOSPlatform(windows5.1.2600)] => [Ansi,CanReturnMultipleSuccessValues,DllImport(KERNEL32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getfileattributesa),SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.Storage.FileSystem.Apis.GetFileAttributesW : [DllImport(KERNEL32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getfileattributesw),SupportedOSPlatform(windows5.1.2600),Unicode] => [CanReturnMultipleSuccessValues,DllImport(KERNEL32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getfileattributesw),SupportedOSPlatform(windows5.1.2600),Unicode]
+Windows.Win32.Storage.FileSystem.Apis.GetFileVersionInfoSizeA : [Ansi,DllImport(VERSION.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/winver/nf-winver-getfileversioninfosizea),SupportedOSPlatform(windows5.0)] => [Ansi,CanReturnMultipleSuccessValues,DllImport(VERSION.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/winver/nf-winver-getfileversioninfosizea),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Storage.FileSystem.Apis.GetFileVersionInfoSizeW : [DllImport(VERSION.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/winver/nf-winver-getfileversioninfosizew),SupportedOSPlatform(windows5.0),Unicode] => [CanReturnMultipleSuccessValues,DllImport(VERSION.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/winver/nf-winver-getfileversioninfosizew),SupportedOSPlatform(windows5.0),Unicode]
+Windows.Win32.Storage.FileSystem.Apis.QueryDosDeviceA : [Ansi,DllImport(KERNEL32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-querydosdevicea),SupportedOSPlatform(windows5.1.2600)] => [Ansi,CanReturnMultipleSuccessValues,DllImport(KERNEL32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-querydosdevicea),SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.Storage.FileSystem.Apis.QueryDosDeviceW : [DllImport(KERNEL32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-querydosdevicew),SupportedOSPlatform(windows5.1.2600),Unicode] => [CanReturnMultipleSuccessValues,DllImport(KERNEL32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-querydosdevicew),SupportedOSPlatform(windows5.1.2600),Unicode]
+Windows.Win32.System.Power.Apis.PowerReadACValueIndex : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerWriteACValueIndex : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Threading.Apis.AttachThreadInput : [DllImport(USER32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-attachthreadinput),SupportedOSPlatform(windows5.1.2600)] => [CanReturnMultipleSuccessValues,DllImport(USER32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-attachthreadinput),SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.SetActiveWindow : [DllImport(USER32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setactivewindow),SupportedOSPlatform(windows5.0)] => [CanReturnMultipleSuccessValues,DllImport(USER32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setactivewindow),SupportedOSPlatform(windows5.0)]
+Windows.Win32.UI.WindowsAndMessaging.Apis.GetWindowThreadProcessId : [DllImport(USER32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid),SupportedOSPlatform(windows5.0)] => [CanReturnMultipleSuccessValues,DllImport(USER32.dll,ExactSpelling=True,PreserveSig=False),Documentation(https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid),SupportedOSPlatform(windows5.0)]
+Windows.Win32.UI.WindowsAndMessaging.Apis.SendMessageTimeoutA : [Ansi,DllImport(USER32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendmessagetimeouta),SupportedOSPlatform(windows5.0)] => [Ansi,CanReturnMultipleSuccessValues,DllImport(USER32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendmessagetimeouta),SupportedOSPlatform(windows5.0)]
+Windows.Win32.UI.WindowsAndMessaging.Apis.SendMessageTimeoutW : [DllImport(USER32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendmessagetimeoutw),SupportedOSPlatform(windows5.0),Unicode] => [CanReturnMultipleSuccessValues,DllImport(USER32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Documentation(https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendmessagetimeoutw),SupportedOSPlatform(windows5.0),Unicode]
+# Fixed #1866.
+Windows.Win32.System.WinRT.Printing.IPrintDocumentPageSource added
+Windows.Win32.System.WinRT.Printing.IPrintPreviewPageCollection added
 # Add new Retained attribute to OVERLAPPED parameters
 Windows.Win32.Foundation.Metadata.RetainedAttribute added
 Windows.Win32.Networking.HttpServer.Apis.HttpAddFragmentToCache : Overlapped : [In,Optional] => [In,Optional,Out,Retained]

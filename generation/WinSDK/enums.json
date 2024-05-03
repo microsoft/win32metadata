@@ -988,6 +988,14 @@
       {
         "method": "AdjustWindowRectExForDpi",
         "parameter": "dwExStyle"
+      },
+      {
+        "struct": "CREATESTRUCTA",
+        "field": "dwExStyle"
+      },
+      {
+        "struct": "CREATESTRUCTW",
+        "field": "dwExStyle"
       }
     ]
   },
@@ -4479,7 +4487,59 @@
     "members": [
       {
         "name": "RPC_S_OK",
-        "value": "0"
+        "value": "(int)WIN32_ERROR.ERROR_SUCCESS"
+      },
+      {
+        "name": "RPC_S_ACCESS_DENIED",
+        "value": "(int)WIN32_ERROR.ERROR_ACCESS_DENIED"
+      },
+      {
+        "name": "RPC_S_INVALID_ARG",
+        "value": "(int)WIN32_ERROR.ERROR_INVALID_PARAMETER"
+      },
+      {
+        "name": "RPC_S_OUT_OF_MEMORY",
+        "value": "(int)WIN32_ERROR.ERROR_OUTOFMEMORY"
+      },
+      {
+        "name": "RPC_S_OUT_OF_THREADS",
+        "value": "(int)WIN32_ERROR.ERROR_MAX_THRDS_REACHED"
+      },
+      {
+        "name": "RPC_S_INVALID_LEVEL",
+        "value": "(int)WIN32_ERROR.ERROR_INVALID_PARAMETER"
+      },
+      {
+        "name": "RPC_S_BUFFER_TOO_SMALL",
+        "value": "(int)WIN32_ERROR.ERROR_INSUFFICIENT_BUFFER"
+      },
+      {
+        "name": "RPC_S_INVALID_SECURITY_DESC",
+        "value": "(int)WIN32_ERROR.ERROR_INVALID_SECURITY_DESCR"
+      },
+      {
+        "name": "RPC_S_SERVER_OUT_OF_MEMORY",
+        "value": "(int)WIN32_ERROR.ERROR_NOT_ENOUGH_SERVER_MEMORY"
+      },
+      {
+        "name": "RPC_S_ASYNC_CALL_PENDING",
+        "value": "(int)WIN32_ERROR.ERROR_IO_PENDING"
+      },
+      {
+        "name": "RPC_S_UNKNOWN_PRINCIPAL",
+        "value": "(int)WIN32_ERROR.ERROR_NONE_MAPPED"
+      },
+      {
+        "name": "RPC_S_TIMEOUT",
+        "value": "(int)WIN32_ERROR.ERROR_TIMEOUT"
+      },
+      {
+        "name": "RPC_S_RUNTIME_UNINITIALIZED",
+        "value": "(int)WIN32_ERROR.ERROR_INVALID_FUNCTION"
+      },
+      {
+        "name": "RPC_S_NOT_ENOUGH_QUOTA",
+        "value": "(int)WIN32_ERROR.ERROR_NOT_ENOUGH_QUOTA"
       }
     ],
     "uses": []
@@ -5754,6 +5814,10 @@
       {
         "method": "SetErrorMode",
         "parameter": "uMode"
+      },
+      {
+        "method": "SetErrorMode",
+        "parameter": "return"
       }
     ]
   },
@@ -12141,6 +12205,10 @@
       {
         "struct": "MINIDUMP_SYSTEM_INFO",
         "field": "ProcessorArchitecture"
+      },
+      {
+        "struct": "SP_ALTPLATFORM_INFO_V2",
+        "field": "ProcessorArchitecture"
       }
     ]
   },
@@ -12183,38 +12251,45 @@
     ]
   },
   {
-    "name": "NET_USE_CONNECT_FLAGS",
+    "name": "NET_CONNECT_FLAGS",
     "flags": true,
-    "members": [
-      {
-        "name": "CONNECT_INTERACTIVE"
-      },
-      {
-        "name": "CONNECT_PROMPT"
-      },
-      {
-        "name": "CONNECT_REDIRECT"
-      },
-      {
-        "name": "CONNECT_UPDATE_PROFILE"
-      },
-      {
-        "name": "CONNECT_COMMANDLINE"
-      },
-      {
-        "name": "CONNECT_CMD_SAVECRED"
-      },
-      {
-        "name": "CONNECT_TEMPORARY"
-      },
-      {
-        "name": "CONNECT_DEFERRED"
-      },
-      {
-        "name": "CONNECT_UPDATE_RECENT"
-      }
-    ],
+    "autoPopulate": {
+      "filter": "CONNECT_",
+      "header": "winnetwk.h"
+    },
     "uses": [
+      {
+        "method": "WNetAddConnection2A",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "WNetAddConnection2W",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "WNetAddConnection3A",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "WNetAddConnection3W",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "WNetAddConnection4A",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "WNetAddConnection4W",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "WNetCancelConnection2A",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "WNetCancelConnection2W",
+        "parameter": "dwFlags"
+      },
       {
         "method": "WNetUseConnectionW",
         "parameter": "dwFlags"
@@ -17221,7 +17296,7 @@
     ]
   },
   {
-    "name": "SETUP_DI_BUILD_DRIVER_DRIVER_TYPE",
+    "name": "SETUP_DI_DRIVER_TYPE",
     "members": [
       {
         "name": "SPDIT_CLASSDRIVER"
@@ -17233,6 +17308,18 @@
     "uses": [
       {
         "method": "SetupDiBuildDriverInfoList",
+        "parameter": "DriverType"
+      },
+      {
+        "method": "SetupDiEnumDriverInfoA",
+        "parameter": "DriverType"
+      },
+      {
+        "method": "SetupDiEnumDriverInfoW",
+        "parameter": "DriverType"
+      },
+      {
+        "method": "SetupDiDestroyDriverInfoList",
         "parameter": "DriverType"
       }
     ]
@@ -35002,7 +35089,7 @@
     "namespace": "Windows.Win32.Devices.Properties",
     "name": "DEVPROPTYPE",
     "autoPopulate": {
-      "filter": "DEVPROP_TYPE_",
+      "filter": "DEVPROP_TYPE_|DEVPROP_TYPEMOD_",
       "header": "devpropdef.h"
     },
     "uses": []
@@ -36919,7 +37006,7 @@
       {
         "interface": "IMMDevice",
         "method": "GetState",
-        "parameter": "return"
+        "parameter": "pdwState"
       }
     ]
   },
@@ -36947,6 +37034,224 @@
       {
         "struct": "RAWMOUSE",
         "field": "usFlags"
+      }
+    ]
+  },
+  {
+    "name": "SETUP_DI_REGISTRY_PROPERTY",
+    "autoPopulate": {
+      "filter": "SPDRP_",
+      "header": "setupapi.h"
+    },
+    "uses": [
+      {
+        "method": "SetupDiGetDeviceRegistryPropertyA",
+        "parameter": "Property"
+      },
+      {
+        "method": "SetupDiGetDeviceRegistryPropertyW",
+        "parameter": "Property"
+      },
+      {
+        "method": "SetupDiSetDeviceRegistryPropertyA",
+        "parameter": "Property"
+      },
+      {
+        "method": "SetupDiSetDeviceRegistryPropertyW",
+        "parameter": "Property"
+      }
+    ]
+  },
+  {
+    "name": "SETUP_DI_DEVICE_CREATION_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DICD_",
+      "header": "setupapi.h"
+    },
+    "uses": [
+      {
+        "method": "SetupDiCreateDeviceInfoA",
+        "parameter": "CreationFlags"
+      },
+      {
+        "method": "SetupDiCreateDeviceInfoW",
+        "parameter": "CreationFlags"
+      }
+    ]
+  },
+  {
+    "name": "SETUP_DI_DRIVER_INSTALL_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DNF_",
+      "header": "setupapi.h"
+    },
+    "uses": [
+      {
+        "struct": "SP_DRVINSTALL_PARAMS",
+        "field": "Flags"
+      }
+    ]
+  },
+  {
+    "name": "SETUP_DI_STATE_CHANGE",
+    "autoPopulate": {
+      "filter": "DICS_(?!FLAG)",
+      "header": "setupapi.h"
+    },
+    "uses": [
+      {
+        "struct": "SP_PROPCHANGE_PARAMS",
+        "field": "StateChange"
+      }
+    ]
+  },
+  {
+    "name": "SETUP_DI_PROPERTY_CHANGE_SCOPE",
+    "autoPopulate": {
+      "filter": "DICS_FLAG_",
+      "header": "setupapi.h"
+    },
+    "uses": [
+      {
+        "struct": "SP_PROPCHANGE_PARAMS",
+        "field": "Scope"
+      }
+    ]
+  },
+  {
+    "name": "SETUP_DI_REMOVE_DEVICE_SCOPE",
+    "autoPopulate": {
+      "filter": "DI_REMOVEDEVICE_",
+      "header": "setupapi.h"
+    },
+    "uses": [
+      {
+        "struct": "SP_REMOVEDEVICE_PARAMS",
+        "field": "Scope"
+      }
+    ]
+  },
+  {
+    "name": "SETUP_DI_GET_CLASS_DEVS_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DIGCF_",
+      "header": "setupapi.h"
+    },
+    "uses": [
+      {
+        "method": "SetupDiGetClassDevsA",
+        "parameter": "Flags"
+      },
+      {
+        "method": "SetupDiGetClassDevsW",
+        "parameter": "Flags"
+      },
+      {
+        "method": "SetupDiGetClassDevsExA",
+        "parameter": "Flags"
+      },
+      {
+        "method": "SetupDiGetClassDevsExW",
+        "parameter": "Flags"
+      }
+    ]
+  },
+  {
+    "name": "DI_FUNCTION",
+    "autoPopulate": {
+      "filter": "DIF_",
+      "header": "setupapi.h"
+    },
+    "uses": [
+      {
+        "method": "SetupDiCallClassInstaller",
+        "parameter": "InstallFunction"
+      },
+      {
+        "struct": "SP_CLASSINSTALL_HEADER",
+        "field": "InstallFunction"
+      }
+    ]
+  },
+  {
+    "name": "SETUP_DI_DEVICE_INSTALL_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DI_(?!FLAGSEX)",
+      "header": "setupapi.h"
+    },
+    "uses": [
+      {
+        "struct": "SP_DEVINSTALL_PARAMS_A",
+        "field": "Flags"
+      },
+      {
+        "struct": "SP_DEVINSTALL_PARAMS_W",
+        "field": "Flags"
+      }
+    ]
+  },
+  {
+    "name": "SETUP_DI_DEVICE_INSTALL_FLAGS_EX",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DI_FLAGSEX_",
+      "header": "setupapi.h"
+    },
+    "uses": [
+      {
+        "struct": "SP_DEVINSTALL_PARAMS_A",
+        "field": "FlagsEx"
+      },
+      {
+        "struct": "SP_DEVINSTALL_PARAMS_W",
+        "field": "FlagsEx"
+      }
+    ]
+  },
+  {
+    "namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
+    "name": "SETUP_DI_DEVICE_CONFIGURATION_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "CONFIGFLAG_",
+      "header": "regstr.h"
+    }
+  },
+  {
+    "name": "FILE_COMPRESSION_TYPE",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "FILE_COMPRESSION_",
+      "header": "setupapi.h"
+    },
+    "uses": [
+      {
+        "method": "SetupGetFileCompressionInfoA",
+        "parameter": "CompressionType"
+      },
+      {
+        "method": "SetupGetFileCompressionInfoW",
+        "parameter": "CompressionType"
+      },
+      {
+        "method": "SetupGetFileCompressionInfoExA",
+        "parameter": "CompressionType"
+      },
+      {
+        "method": "SetupGetFileCompressionInfoExW",
+        "parameter": "CompressionType"
+      },
+      {
+        "method": "SetupDecompressOrCopyFileA",
+        "parameter": "CompressionType"
+      },
+      {
+        "method": "SetupDecompressOrCopyFileW",
+        "parameter": "CompressionType"
       }
     ]
   }

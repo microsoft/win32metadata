@@ -12,7 +12,7 @@ IDispatcherQueueController(interface)=<Windows.Foundation.UniversalApiContract, 
 # Windows 11 (22000.194)
 IPropertySetSerializer(interface)=<Windows.Foundation.UniversalApiContract, Version=14.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.Storage.Streams.IPropertySetSerializer
 # Windows 11 (22621.2428)
-ICompositionTexture(interface)=<Windows.Foundation.UniversalApiContract, Version=15.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.ICompositionTexture
+ICompositionTexture(interface)=<Windows.Foundation.UniversalApiContract, Version=15.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.UI.Composition.CompositionTexture
 --enumAddition
 CLSCTX::CLSCTX_ALL=CLSCTX_INPROC_SERVER|CLSCTX_INPROC_HANDLER|CLSCTX_LOCAL_SERVER|CLSCTX_REMOTE_SERVER
 CLSCTX::CLSCTX_SERVER=CLSCTX_INPROC_SERVER|CLSCTX_LOCAL_SERVER|CLSCTX_REMOTE_SERVER
@@ -100,6 +100,7 @@ STGC
 SYNC_ENGINE_STATE_FLAGS
 SYNC_TRANSFER_STATUS
 TAKE_SNAPSHOT_VHDSET_FLAG
+TASKDIALOG_FLAGS
 VIRTUAL_DISK_ACCESS_MASK
 WBEM_GENERIC_FLAG_TYPE
 --reducePointerLevel
@@ -1028,6 +1029,7 @@ PowerDeleteScheme::return=WIN32_ERROR
 PowerDuplicateScheme::return=WIN32_ERROR
 PowerEnumerate::return=WIN32_ERROR
 PowerImportPowerScheme::return=WIN32_ERROR
+PowerReadACValueIndex::return=WIN32_ERROR
 PowerReadDescription::return=WIN32_ERROR
 PowerReadFriendlyName::return=WIN32_ERROR
 PowerReadIconResourceSpecifier::return=WIN32_ERROR
@@ -1045,6 +1047,7 @@ PowerRestoreDefaultPowerSchemes::return=WIN32_ERROR
 PowerRestoreIndividualDefaultPowerScheme::return=WIN32_ERROR
 PowerSettingAccessCheck::return=WIN32_ERROR
 PowerSettingAccessCheckEx::return=WIN32_ERROR
+PowerWriteACValueIndex::return=WIN32_ERROR
 PowerWriteDescription::return=WIN32_ERROR
 PowerWriteFriendlyName::return=WIN32_ERROR
 PowerWriteIconResourceSpecifier::return=WIN32_ERROR
@@ -1753,3 +1756,62 @@ HttpReceiveHttpRequest::Overlapped=[In][Out][Optional][Retained]
 PFTASKDIALOGCALLBACK::msg=[AssociatedEnum("TASKDIALOG_NOTIFICATIONS")]
 GlobalMemoryStatusEx::lpBuffer=[In]
 SHCreateItemInKnownFolder::dwKFFlags=[AssociatedEnum("KNOWN_FOLDER_FLAG")]
+SetupDiGetClassImageList::ClassImageListData=[In]
+SetupDiGetClassImageListExA::ClassImageListData=[In]
+SetupDiGetClassImageListExW::ClassImageListData=[In]
+SetupDiGetDriverInstallParamsA::DriverInstallParams=[In]
+SetupDiGetDriverInstallParamsW::DriverInstallParams=[In]
+SHDefExtractIconW=[CanReturnMultipleSuccessValues]
+SHDefExtractIconA=[CanReturnMultipleSuccessValues]
+PathCchAddBackslash=[CanReturnMultipleSuccessValues]
+PathCchAddBackslashEx=[CanReturnMultipleSuccessValues]
+PathCchRemoveBackslash=[CanReturnMultipleSuccessValues]
+PathCchStripToRoot=[CanReturnMultipleSuccessValues]
+PathCchStripPrefix=[CanReturnMultipleSuccessValues]
+GetApplicationRecoveryCallback=[CanReturnMultipleSuccessValues]
+ScriptIsComplex=[CanReturnMultipleSuccessValues]
+IFEDictionary::ExistWord=[CanReturnMultipleSuccessValues]
+CoGetTreatAsClass=[CanReturnMultipleSuccessValues]
+CoInitialize=[CanReturnMultipleSuccessValues]
+CoInitializeEx=[CanReturnMultipleSuccessValues]
+IOleUndoManager::Close=[CanReturnMultipleSuccessValues]
+ISyncMgrUIOperation::Run=[CanReturnMultipleSuccessValues]
+IEnumFullIDList::Next=[CanReturnMultipleSuccessValues]
+SHGetAttributesFromDataObject=[CanReturnMultipleSuccessValues]
+IPin::QueryAccept=[CanReturnMultipleSuccessValues]
+IEnumUnknown::Next=[CanReturnMultipleSuccessValues]
+IEnumConnectionPoints::Next=[CanReturnMultipleSuccessValues]
+IEnumOleUndoUnits::Next=[CanReturnMultipleSuccessValues]
+IEnumFORMATETC::Next=[CanReturnMultipleSuccessValues]
+IEnumConnections::Next=[CanReturnMultipleSuccessValues]
+IEnumEventObject::Reset=[CanReturnMultipleSuccessValues]
+IPinConnection::IsEndPin=[CanReturnMultipleSuccessValues]
+IBitsPeerCacheAdministration::SetMaximumContentAge=[CanReturnMultipleSuccessValues]
+IMoniker::IsEqual=[CanReturnMultipleSuccessValues]
+ISyncMgrSyncItemInfo::IsConnected=[CanReturnMultipleSuccessValues]
+ICodecAPI::IsModifiable=[CanReturnMultipleSuccessValues]
+IMoniker::BindToObject::ppvResult=[ComOutPtr]
+IMoniker::BindToStorage::ppvObj=[ComOutPtr]
+CredUIParseUserNameA::return=WIN32_ERROR
+CredUIParseUserNameW::return=WIN32_ERROR
+CredUIPromptForCredentialsA::return=WIN32_ERROR
+CredUIPromptForCredentialsW::return=WIN32_ERROR
+IShellFolder2::GetDefaultColumnState::pcsFlags=SHCOLSTATE
+IShellFolder::CompareIDs=[CanReturnMultipleSuccessValues]
+WriteConsoleA::lpBuffer=PSTR
+WriteConsoleW::lpBuffer=PWSTR
+PopIoRingCompletion=[CanReturnMultipleSuccessValues]
+CREATESTRUCTA::style=[AssociatedEnum("WINDOW_STYLE")]
+CREATESTRUCTW::style=[AssociatedEnum("WINDOW_STYLE")]
+SendMessageTimeoutA=[CanReturnMultipleSuccessValues]
+SendMessageTimeoutW=[CanReturnMultipleSuccessValues]
+GetWindowThreadProcessId=[CanReturnMultipleSuccessValues]
+AttachThreadInput=[CanReturnMultipleSuccessValues]
+SetActiveWindow=[CanReturnMultipleSuccessValues]
+QueryDosDeviceA=[CanReturnMultipleSuccessValues]
+QueryDosDeviceW=[CanReturnMultipleSuccessValues]
+GetFileAttributesA=[CanReturnMultipleSuccessValues]
+GetFileAttributesW=[CanReturnMultipleSuccessValues]
+GetFileVersionInfoSizeA=[CanReturnMultipleSuccessValues]
+GetFileVersionInfoSizeW=[CanReturnMultipleSuccessValues]
+CertCreateCertificateContext=[CanReturnMultipleSuccessValues]

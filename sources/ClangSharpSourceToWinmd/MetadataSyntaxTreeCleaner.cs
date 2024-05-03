@@ -199,7 +199,8 @@ namespace ClangSharpSourceToWinmd
                 string fullName = GetFullNameWithoutArchSuffix(node);
 
                 // Add Ansi or Unicode attributes to -A/-W APIs.
-                if (name.EndsWith("A") && this.apiNamesToNamespaces.ContainsKey($"{name[0..^1]}W"))
+                if ((name.EndsWith("A") && this.apiNamesToNamespaces.ContainsKey($"{name[0..^1]}W")) ||
+                   (!name.EndsWith("W") && this.apiNamesToNamespaces.ContainsKey($"{name}W")))
                 {
                     var attributeList = SyntaxFactory.AttributeList(
                             SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
@@ -208,7 +209,7 @@ namespace ClangSharpSourceToWinmd
 
                     node = node.AddAttributeLists(attributeList);
                 }
-                else if (name.EndsWith("W") && this.apiNamesToNamespaces.ContainsKey($"{name[0..^1]}A"))
+                else if (name.EndsWith("W") && (this.apiNamesToNamespaces.ContainsKey($"{name[0..^1]}A") || this.apiNamesToNamespaces.ContainsKey($"{name[0..^1]}")))
                 {
                     var attributeList = SyntaxFactory.AttributeList(
                             SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
@@ -544,7 +545,8 @@ namespace ClangSharpSourceToWinmd
                 this.visitedDelegateNames.Add(fullName);
 
                 // Add Ansi or Unicode attributes to -A/-W APIs.
-                if (name.EndsWith("A") && this.apiNamesToNamespaces.ContainsKey($"{name[0..^1]}W"))
+                if ((name.EndsWith("A") && this.apiNamesToNamespaces.ContainsKey($"{name[0..^1]}W")) ||
+                   (!name.EndsWith("W") && this.apiNamesToNamespaces.ContainsKey($"{name}W")))
                 {
                     var attributeList = SyntaxFactory.AttributeList(
                             SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
@@ -553,7 +555,7 @@ namespace ClangSharpSourceToWinmd
 
                     node = node.AddAttributeLists(attributeList);
                 }
-                else if (name.EndsWith("W") && this.apiNamesToNamespaces.ContainsKey($"{name[0..^1]}A"))
+                else if (name.EndsWith("W") && (this.apiNamesToNamespaces.ContainsKey($"{name[0..^1]}A") || this.apiNamesToNamespaces.ContainsKey($"{name[0..^1]}")))
                 {
                     var attributeList = SyntaxFactory.AttributeList(
                             SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
@@ -630,10 +632,13 @@ namespace ClangSharpSourceToWinmd
                     return null;
                 }
 
+                var isInterface = node.Parent is StructDeclarationSyntax;
+
                 node = (MethodDeclarationSyntax)base.VisitMethodDeclaration(node);
 
                 // Add Ansi or Unicode attributes to -A/-W APIs.
-                if (name.EndsWith("A") && this.apiNamesToNamespaces.ContainsKey($"{name[0..^1]}W"))
+                if ((name.EndsWith("A") && this.apiNamesToNamespaces.ContainsKey($"{name[0..^1]}W")) ||
+                   (!name.EndsWith("W") && this.apiNamesToNamespaces.ContainsKey($"{name}W") && !isInterface))
                 {
                     var attributeList = SyntaxFactory.AttributeList(
                             SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
@@ -642,7 +647,7 @@ namespace ClangSharpSourceToWinmd
 
                     node = node.AddAttributeLists(attributeList);
                 }
-                else if (name.EndsWith("W") && this.apiNamesToNamespaces.ContainsKey($"{name[0..^1]}A"))
+                else if (name.EndsWith("W") && (this.apiNamesToNamespaces.ContainsKey($"{name[0..^1]}A") || this.apiNamesToNamespaces.ContainsKey($"{name[0..^1]}")))
                 {
                     var attributeList = SyntaxFactory.AttributeList(
                             SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(

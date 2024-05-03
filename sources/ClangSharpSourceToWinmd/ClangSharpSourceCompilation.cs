@@ -143,22 +143,7 @@ namespace ClangSharpSourceToWinmd
             string objDir = Path.Combine(topObjDir, arch);
             Directory.CreateDirectory(objDir);
 
-            var netstandardPath = FindNetstandardDllPath();
-            if (!File.Exists(netstandardPath))
-            {
-                throw new FileNotFoundException("Failed to find the netstandard DLL.");
-            }
-
-            List<MetadataReference> refs = new List<MetadataReference>();
-            refs.Add(MetadataReference.CreateFromFile(netstandardPath));
-
-            if (addedRefs != null)
-            {
-                foreach (var r in addedRefs)
-                {
-                    refs.Add(MetadataReference.CreateFromFile(r));
-                }
-            }
+            var refs = (addedRefs ?? Enumerable.Empty<string>()).Select(r => MetadataReference.CreateFromFile(r)).ToArray();
 
             TreeInfoFinder infoFinder = new TreeInfoFinder();
 
@@ -318,6 +303,18 @@ namespace ClangSharpSourceToWinmd
                     FilesToTrees(modifiedFiles.Where(f => File.Exists(f))),
                     refs,
                     compilationOptions);
+
+            // If netstandard.dll was not provided, inject it in.
+            if (!comp.ReferencedAssemblyNames.Any(ran => ran.Name == "netstandard" && ran.Version.Major == 2 && ran.Version.Minor == 1))
+            {
+                var netstandardPath = FindNetstandardDllPath();
+                if (!File.Exists(netstandardPath))
+                {
+                    throw new FileNotFoundException("Failed to find the netstandard DLL.");
+                }
+
+                comp = comp.AddReferences(MetadataReference.CreateFromFile(netstandardPath));
+            }
 
             Console.WriteLine($"  {OutputUtils.FormatTimespan(watch.Elapsed)}");
             ShowMemory();

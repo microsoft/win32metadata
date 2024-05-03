@@ -1,0 +1,4 @@
+--traverse
+<IncludeRoot>/um/winmeta.h
+--namespace
+Windows.Win32.System.Diagnostics.TraceLogging

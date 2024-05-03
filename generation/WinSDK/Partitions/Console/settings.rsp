@@ -3,6 +3,7 @@
 <IncludeRoot>/um/consoleapi.h
 <IncludeRoot>/um/consoleapi2.h
 <IncludeRoot>/um/consoleapi3.h
+<IncludeRoot>/um/consoleapis.h
 <IncludeRoot>/um/wincontypes.h
 --namespace
 Windows.Win32.System.Console

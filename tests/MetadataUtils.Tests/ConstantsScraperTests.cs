@@ -84,7 +84,7 @@ namespace MetadataUtils.Tests
             }
 
             // Assert
-            Assert.Collection(mockFileSystem.GetFile("output.txt").TextContents.Split(Environment.NewLine),
+            Assert.Collection(mockFileSystem.GetFile("output.txt").TextContents.Split("\n"),
                 e => { },
                 e => { },
                 e => { /* namespace */ },

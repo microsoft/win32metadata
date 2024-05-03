@@ -6,6 +6,7 @@
 <IncludeRoot>/um/ResourceIndexer.h
 <IncludeRoot>/um/WinUser.h
 <IncludeRoot>/um/menutemplate.h
+<IncludeRoot>/um/iswindowarranged.h
 --namespace
 Windows.Win32.UI.WindowsAndMessaging
 --exclude

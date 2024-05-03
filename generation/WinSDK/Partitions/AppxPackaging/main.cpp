@@ -8,3 +8,5 @@
 #include <appxpackaging.h>
 #include <appmodel.h>
 #include <packagevirtualizationcontext.h>
+#include <getcurrentpackageinfo3.h>
+#include <minappmodel.h>

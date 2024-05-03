@@ -1532,7 +1532,6 @@ GetSystemDirectoryA
 GetSystemDirectoryW
 GetSystemFileCacheSize
 GetSystemFirmwareTable
-GetSystemMetrics
 GetSystemMetricsForDpi
 GetSystemPowerStatus
 GetSystemPreferredUILanguages

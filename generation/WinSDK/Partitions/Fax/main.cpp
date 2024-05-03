@@ -7,6 +7,8 @@
 #include <sdkddkver.h>
 
 #define WIN32 1
+#define IN _In_
+#define OUT _Out_
 
 #include <winfax.h>
 #include <faxdev.h>

@@ -7,3 +7,4 @@
 
 #include <windows.h>
 #include <wincon.h>
+#include <consoleapis.h>
