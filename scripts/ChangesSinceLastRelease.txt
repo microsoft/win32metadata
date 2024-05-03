@@ -291,3 +291,23 @@ Windows.Win32.UI.WindowsAndMessaging.Apis.SendMessageTimeoutW : [DllImport(USER3
 # Fixed #1866.
 Windows.Win32.System.WinRT.Printing.IPrintDocumentPageSource added
 Windows.Win32.System.WinRT.Printing.IPrintPreviewPageCollection added
+# Add missing NotifyIcon notification constant
+Windows.Win32.UI.Shell.Apis.NIN_KEYSELECT added
+# Adjust NIN/WM constant types
+Windows.Win32.UI.Shell.Apis.NIN_BALLOONHIDE...System.UInt32 => System.Int32
+Windows.Win32.UI.Shell.Apis.NIN_BALLOONSHOW...System.UInt32 => System.Int32
+Windows.Win32.UI.Shell.Apis.NIN_BALLOONTIMEOUT...System.UInt32 => System.Int32
+Windows.Win32.UI.Shell.Apis.NIN_BALLOONUSERCLICK...System.UInt32 => System.Int32
+Windows.Win32.UI.Shell.Apis.NIN_POPUPCLOSE...System.UInt32 => System.Int32
+Windows.Win32.UI.Shell.Apis.NIN_POPUPOPEN...System.UInt32 => System.Int32
+Windows.Win32.UI.Shell.Apis.NIN_SELECT...System.UInt32 => System.Int32
+Windows.Win32.UI.WindowsAndMessaging.Apis.WM_USER...System.UInt32 => System.Int32
+# Adjust NOTIFYICONDATA flags, types
+Windows.Win32.UI.Shell.NOTIFY_ICON_INFOTIP_FLAGS :  => [Flags]
+Windows.Win32.UI.Shell.NOTIFY_ICON_STATE :  => [Flags]
+Windows.Win32.UI.Shell.NOTIFYICONDATAA.dwStateMask(X64, Arm64)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
+Windows.Win32.UI.Shell.NOTIFYICONDATAA.dwStateMask(X86)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
+Windows.Win32.UI.Shell.NOTIFYICONDATAW.dwStateMask(X64, Arm64)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
+Windows.Win32.UI.Shell.NOTIFYICONDATAW.dwStateMask(X86)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
+# Correct NIN flag type
+Windows.Win32.UI.Shell.Apis.NINF_KEY...System.UInt32 => System.Int32
