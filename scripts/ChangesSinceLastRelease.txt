@@ -398,3 +398,8 @@ Windows.Win32.Graphics.Dxgi.IDXGISurface.GetDesc : pDesc : [Out] => [Out,RetVal]
 Windows.Win32.Graphics.Dxgi.IDXGISwapChain.GetDesc : pDesc : [Out] => [Out,RetVal]
 Windows.Win32.Graphics.Dxgi.IDXGISwapChain1.GetDesc1 : pDesc : [Out] => [Out,RetVal]
 Windows.Win32.Graphics.Dxgi.IDXGISwapChain1.GetFullscreenDesc : pDesc : [Out] => [Out,RetVal]
+# Add additional InvalidHandleValue metadata
+Windows.Win32.Networking.WinSock.SOCKET : [NativeTypedef,RAIIFree(closesocket)] => [InvalidHandleValue(-1),NativeTypedef,RAIIFree(closesocket)]
+Windows.Win32.Storage.FileSystem.HIORING : [NativeTypedef,RAIIFree(CloseIoRing)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(CloseIoRing)]
+Windows.Win32.System.Threading.PTP_CLEANUP_GROUP : [NativeTypedef,RAIIFree(CloseThreadpoolCleanupGroup)] => [InvalidHandleValue(0),NativeTypedef,RAIIFree(CloseThreadpoolCleanupGroup)]
+Windows.Win32.System.Threading.PTP_POOL : [NativeTypedef,RAIIFree(CloseThreadpool)] => [InvalidHandleValue(0),NativeTypedef,RAIIFree(CloseThreadpool)]
