@@ -296,3 +296,5 @@ Windows.Win32.Networking.WinSock.SOCKET : [NativeTypedef,RAIIFree(closesocket)] 
 Windows.Win32.Storage.FileSystem.HIORING : [NativeTypedef,RAIIFree(CloseIoRing)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(CloseIoRing)]
 Windows.Win32.System.Threading.PTP_CLEANUP_GROUP : [NativeTypedef,RAIIFree(CloseThreadpoolCleanupGroup)] => [InvalidHandleValue(0),NativeTypedef,RAIIFree(CloseThreadpoolCleanupGroup)]
 Windows.Win32.System.Threading.PTP_POOL : [NativeTypedef,RAIIFree(CloseThreadpool)] => [InvalidHandleValue(0),NativeTypedef,RAIIFree(CloseThreadpool)]
+# Remove invalid D2D DWRITE_PAINT_FEATURE_LEVEL enum
+Windows.Win32.Graphics.Direct2D.DWRITE_PAINT_FEATURE_LEVEL removed
