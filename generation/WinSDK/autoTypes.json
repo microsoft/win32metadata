@@ -1425,6 +1425,7 @@
     "Name": "SOCKET",
     "ValueType": "UIntPtr",
     "CloseApi": "closesocket",
+    "InvalidHandleValues": [ -1 ],
     "NativeTypedef": true
   },
   {
@@ -2366,12 +2367,14 @@
     "Name": "PTP_POOL",
     "ValueType": "typedef struct _TP_POOL",
     "CloseApi": "CloseThreadpool",
+    "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
   {
     "Name": "PTP_CLEANUP_GROUP",
     "ValueType": "typedef struct _TP_CLEANUP_GROUP",
     "CloseApi": "CloseThreadpoolCleanupGroup",
+    "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
   {
@@ -2564,6 +2567,7 @@
     "Name": "HIORING",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "CloseIoRing",
+    "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
   {
