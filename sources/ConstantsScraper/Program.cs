@@ -63,13 +63,16 @@ namespace ConstantsScraperApp
                 headerTextBuilder.Append(File.ReadAllText(headerTextFile));
                 headerTextBuilder.AppendLine();
             }
-            foreach (var name in useConstantsFrom)
+            if (useConstantsFrom is not null)
             {
-                headerTextBuilder.AppendLine($"using static {name};");
-            }
-            if (useConstantsFrom.Length > 0)
-            {
-                headerTextBuilder.AppendLine();
+                foreach (var name in useConstantsFrom)
+                {
+                    headerTextBuilder.AppendLine($"using static {name};");
+                }
+                if (useConstantsFrom.Length > 0)
+                {
+                    headerTextBuilder.AppendLine();
+                }
             }
             var headerText = headerTextBuilder.ToString();
 
