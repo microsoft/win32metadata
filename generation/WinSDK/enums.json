@@ -32199,7 +32199,7 @@
   {
     "name": "UIA_EVENT_ID",
     "type": "int",
-    "members": [ 
+    "members": [
       {
         "name": "UIA_ToolTipOpenedEventId",
         "value": 20000
@@ -32408,7 +32408,7 @@
   {
     "name": "UIA_PROPERTY_ID",
     "type": "int",
-    "members": [ 
+    "members": [
       {
         "name": "UIA_RuntimeIdPropertyId",
         "value": 30000
@@ -33215,7 +33215,7 @@
   {
     "name": "UIA_TEXTATTRIBUTE_ID",
     "type": "int",
-    "members": [ 
+    "members": [
       {
         "name": "UIA_AnimationStyleAttributeId",
         "value": 40000
@@ -33424,7 +33424,7 @@
   {
     "name": "UIA_CONTROLTYPE_ID",
     "type": "int",
-    "members": [ 
+    "members": [
       {
         "name": "UIA_ButtonControlTypeId",
         "value": 50000
@@ -33606,7 +33606,7 @@
   {
     "name": "UIA_ANNOTATIONTYPE",
     "type": "int",
-    "members": [ 
+    "members": [
       {
         "name": "AnnotationType_Unknown",
         "value": 60000
@@ -33729,7 +33729,7 @@
   {
     "name": "UIA_STYLE_ID",
     "type": "int",
-    "members": [ 
+    "members": [
       {
         "name": "StyleId_Custom",
         "value": 70000
@@ -33820,7 +33820,7 @@
   {
     "name": "UIA_LANDMARKTYPE_ID",
     "type": "int",
-    "members": [ 
+    "members": [
       {
         "name": "UIA_CustomLandmarkTypeId",
         "value": 80000
@@ -33858,7 +33858,7 @@
   {
     "name": "UIA_HEADINGLEVEL_ID",
     "type": "int",
-    "members": [ 
+    "members": [
       {
         "name": "HeadingLevel_None",
         "value": 80050
@@ -33917,7 +33917,7 @@
     "namespace": "Windows.Win32.UI.Accessibility",
     "name": "UIA_CHANGE_ID",
     "type": "int",
-    "members": [ 
+    "members": [
       {
         "name": "UIA_SummaryChangeId",
         "value": 90000
@@ -33927,7 +33927,7 @@
   {
     "name": "UIA_METADATA_ID",
     "type": "int",
-    "members": [ 
+    "members": [
       {
         "name": "UIA_SayAsInterpretAsMetadataId",
         "value": 100000
@@ -34491,7 +34491,7 @@
     ]
   },
   {
-    "type": "int", 
+    "type": "int",
     "namespace": "Windows.Win32.UI.WindowsAndMessaging",
     "name": "SCROLLBAR_COMMAND",
     "members": [
@@ -34757,6 +34757,7 @@
     ]
   },
   {
+    "namespace": "Windows.Win32.Graphics.Dxgi",
     "type": "uint",
     "name": "DXGI_USAGE",
     "flags": true,
@@ -34764,7 +34765,6 @@
       "filter": "DXGI_USAGE_",
       "header": "dxgi.h"
     },
-    "members": [],
     "uses": [
       {
         "struct": "DXGI_SWAP_CHAIN_DESC",
@@ -34779,6 +34779,141 @@
         "interface": "IDXGIDevice",
         "method": "CreateSurface",
         "parameter": "Usage"
+      }
+    ]
+  },
+  {
+    "namespace": "Windows.Win32.Graphics.Dxgi",
+    "type": "uint",
+    "name": "DXGI_PRESENT",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DXGI_PRESENT_",
+      "header": "dxgi.h"
+    },
+    "uses": [
+      {
+        "interface": "IDXGISwapChain",
+        "method": "Present",
+        "parameter": "Flags"
+      },
+      {
+        "interface": "IDXGISwapChain1",
+        "method": "Present1",
+        "parameter": "PresentFlags"
+      },
+      {
+        "interface": "IDXGIDecodeSwapChain",
+        "method": "PresentBuffer",
+        "parameter": "Flags"
+      }
+    ]
+  },
+  {
+    "namespace": "Windows.Win32.Graphics.Dxgi",
+    "type": "uint",
+    "name": "DXGI_ENUM_MODES",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DXGI_ENUM_MODES_",
+      "header": "dxgi.h;dxgi1_2.h"
+    },
+    "uses": [
+      {
+        "interface": "IDXGIOutput",
+        "method": "GetDisplayModeList",
+        "parameter": "Flags"
+      },
+      {
+        "interface": "IDXGIOutput1",
+        "method": "GetDisplayModeList1",
+        "parameter": "Flags"
+      }
+    ]
+  },
+  {
+    "namespace": "Windows.Win32.Graphics.Dxgi",
+    "type": "uint",
+    "name": "DXGI_MWA_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DXGI_MWA_",
+      "header": "dxgi.h"
+    },
+    "uses": [
+      {
+        "interface": "IDXGIFactory",
+        "method": "MakeWindowAssociation",
+        "parameter": "Flags"
+      }
+    ]
+  },
+  {
+    "namespace": "Windows.Win32.Graphics.Dxgi",
+    "type": "uint",
+    "name": "DXGI_MAP_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DXGI_MAP_",
+      "header": "dxgi.h"
+    },
+    "uses": [
+      {
+        "interface": "IDXGISurface",
+        "method": "Map",
+        "parameter": "MapFlags"
+      }
+    ]
+  },
+  {
+    "namespace": "Windows.Win32.Graphics.Dxgi",
+    "type": "uint",
+    "name": "DXGI_RESOURCE_PRIORITY",
+    "autoPopulate": {
+      "filter": "DXGI_RESOURCE_PRIORITY_",
+      "header": "dxgi.h"
+    },
+    "uses": [
+      {
+        "interface": "IDXGIResource",
+        "method": "SetEvictionPriority",
+        "parameter": "EvictionPriority"
+      },
+      {
+        "interface": "IDXGIResource",
+        "method": "GetEvictionPriority",
+        "parameter": "pEvictionPriority"
+      }
+    ]
+  },
+  {
+    "namespace": "Windows.Win32.Graphics.Dxgi",
+    "type": "uint",
+    "name": "DXGI_SHARED_RESOURCE_RW",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DXGI_SHARED_RESOURCE_",
+      "header": "dxgi1_2.h"
+    }
+  },
+  {
+    "namespace": "Windows.Win32.Graphics.Dxgi",
+    "type": "uint",
+    "name": "DXGI_CREATE_FACTORY_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DXGI_CREATE_FACTORY_",
+      "header": "dxgi1_3.h"
+    },
+    "uses": [
+      {
+        "method": "CreateDXGIFactory2",
+        "parameter": "Flags"
+      },
+      {
+        "interface": "IDXGIFactory3",
+        "method": "GetCreationFlags",
+        "parameter": "return"
       }
     ]
   },
