@@ -360,7 +360,7 @@ namespace MetadataUtils
 
                 this.writtenConstants.Add(name, type);
             }
-            
+
             private void AddConstantGuid(string defineGuidKeyword, string originalNamespace, string line)
             {
                 int firstComma = line.IndexOf(',');
@@ -518,7 +518,7 @@ namespace MetadataUtils
                             .Where(
                                 e => e.autoPopulate != null &&
                                 !string.IsNullOrEmpty(e.autoPopulate.filter) &&
-                                e.autoPopulate.header.ToLowerInvariant() == currentHeaderName)
+                                e.autoPopulate.header.ToLowerInvariant().Split(';').Contains(currentHeaderName))
                             .ToArray();
                     Regex autoPopulateReg = null;
 

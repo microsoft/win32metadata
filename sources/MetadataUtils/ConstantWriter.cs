@@ -270,7 +270,6 @@ $"        [NativeTypeName(\"{nativeTypeName}\")]");
                 this.writer = new StreamWriter(this.outputStream);
                 this.writer.WriteLine(
 @$"{this.headerText}
-
 namespace {this.@namespace}
 {{
     public static partial class Apis

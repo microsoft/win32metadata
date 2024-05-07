@@ -144,31 +144,17 @@ namespace ClangSharpSourceToWinmd
 
             void InitReferences()
             {
-                Version systemVersion = new Version(2, 1, 0, 0);
-                var netstandardAssembly = this.compilation.ReferencedAssemblyNames.ToList().Find(a => a.Name == SystemAssemblyName);
-                var systemAssemblyRef =
-                    this.metadataBuilder.AddAssemblyReference(
-                        this.metadataBuilder.GetOrAddString(netstandardAssembly.Name),
-                        netstandardAssembly.Version,
-                        default,
-                        this.metadataBuilder.GetOrAddBlob(netstandardAssembly.PublicKeyToken),
-                        default,
-                        default);
-                this.assemblyNamesToRefHandles[SystemAssemblyName] = systemAssemblyRef;
-
-                var win32Assembly = this.compilation.ReferencedAssemblyNames.ToList().Find(a => a.Name == Win32MetadataAssemblyName);
-                if (win32Assembly != null)
+                foreach (var assembly in this.compilation.ReferencedAssemblyNames)
                 {
-                    var win32MetadataAssemblyRef =
+                    var assemblyRef =
                         this.metadataBuilder.AddAssemblyReference(
-                            this.metadataBuilder.GetOrAddString(win32Assembly.Name),
-                            win32Assembly.Version,
+                            this.metadataBuilder.GetOrAddString(assembly.Name),
+                            assembly.Version,
                             default,
-                            this.metadataBuilder.GetOrAddBlob(win32Assembly.PublicKeyToken),
+                            this.metadataBuilder.GetOrAddBlob(assembly.PublicKeyToken),
                             default,
                             default);
-
-                    this.assemblyNamesToRefHandles[Win32MetadataAssemblyName] = win32MetadataAssemblyRef;
+                    this.assemblyNamesToRefHandles[assembly.Name] = assemblyRef;
                 }
             }
         }
