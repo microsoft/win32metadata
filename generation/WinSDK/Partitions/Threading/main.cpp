@@ -8,6 +8,7 @@
 #include <winnt.h>
 #include <avrt.h>
 #include <rtworkq.h>
+#include <getprocesshandlefromhwnd.h>
 
 #define MakeProcThreadAttributeConst(value) \
     const DWORD __forceconst__##value = value;

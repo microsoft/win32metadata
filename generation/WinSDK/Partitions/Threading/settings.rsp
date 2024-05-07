@@ -12,6 +12,7 @@ SignalObjectAndWait
 --traverse
 <IncludeRoot>/um/avrt.h
 <IncludeRoot>/um/fibersapi.h
+<IncludeRoot>/um/getprocesshandlefromhwnd.h
 <IncludeRoot>/um/interlockedapi.h
 <IncludeRoot>/um/namespaceapi.h
 <IncludeRoot>/um/processthreadsapi.h
