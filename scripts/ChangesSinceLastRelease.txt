@@ -895,3 +895,5 @@ Windows.Win32.Networking.WinSock.LPWPURESETEVENT.Invoke : hEvent...HANDLE => WSA
 Windows.Win32.Networking.WinSock.LPWPUSETEVENT.Invoke : hEvent...HANDLE => WSAEVENT
 Windows.Win32.Networking.WinSock.LPWSPEVENTSELECT.Invoke : hEventObject...HANDLE => WSAEVENT
 Windows.Win32.Networking.WinSock.WSAEVENT : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(WSACloseEvent)] => [InvalidHandleValue(0),NativeTypedef,RAIIFree(WSACloseEvent)]
+# Fixed #1813.
+Windows.Win32.System.Com.Apis.CLSID_GlobalOptions added

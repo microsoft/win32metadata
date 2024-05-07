@@ -11,5 +11,7 @@ namespace Windows.Win32.System.Com
         public const int COLE_DEFAULT_PRINCIPAL = -1;
         [NativeTypeName("void*")]
         public const int COLE_DEFAULT_AUTHINFO = -1;
+
+        public static readonly Guid CLSID_GlobalOptions  = new Guid("0000034B-0000-0000-C000-000000000046");
     }
 }
