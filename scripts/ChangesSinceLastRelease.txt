@@ -869,3 +869,5 @@ Windows.Win32.System.Diagnostics.Etw.Apis.EventWriteEx : RegHandle...UInt64 => R
 Windows.Win32.System.Diagnostics.Etw.Apis.EventWriteString : RegHandle...UInt64 => REGHANDLE
 Windows.Win32.System.Diagnostics.Etw.Apis.EventWriteTransfer : RegHandle...UInt64 => REGHANDLE
 Windows.Win32.System.Diagnostics.Etw.REGHANDLE added
+# Fixed #1884.
+Windows.Win32.System.Variant.VARENUM : [Documentation(https://learn.microsoft.com/windows/win32/api/wtypes/ne-wtypes-varenum)] => [Documentation(https://learn.microsoft.com/windows/win32/api/wtypes/ne-wtypes-varenum),Flags]
