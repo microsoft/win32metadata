@@ -879,3 +879,5 @@ Windows.Win32.Storage.Compression.Apis.ResetDecompressor : DecompressorHandle...
 Windows.Win32.Storage.Compression.Apis.SetDecompressorInformation : DecompressorHandle...IntPtr => DECOMPRESSOR_HANDLE
 Windows.Win32.Storage.Compression.COMPRESSOR_HANDLE : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(CloseDecompressor)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(CloseCompressor)]
 Windows.Win32.Storage.Compression.DECOMPRESSOR_HANDLE added
+# Fixed #1883.
+Windows.Win32.UI.WindowsAndMessaging.Apis.RT_MANIFEST...System.UInt32 => Windows.Win32.Foundation.PWSTR
