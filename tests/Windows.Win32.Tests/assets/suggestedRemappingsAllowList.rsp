@@ -258,3 +258,4 @@ Gdiplus::BrushType=GpBrushType
 Gdiplus::MatrixOrder=GpMatrixOrder
 Gdiplus::FlushIntention=GpFlushIntention
 Gdiplus::PathData=GpPathData
+_KNONVOLATILE_CONTEXT_POINTERS_ARM64=KNONVOLATILE_CONTEXT_POINTERS_ARM64

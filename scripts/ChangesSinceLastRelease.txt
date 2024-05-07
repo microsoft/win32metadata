@@ -873,6 +873,7 @@ Windows.Win32.System.Diagnostics.Etw.REGHANDLE added
 Windows.Win32.System.Variant.VARENUM : [Documentation(https://learn.microsoft.com/windows/win32/api/wtypes/ne-wtypes-varenum)] => [Documentation(https://learn.microsoft.com/windows/win32/api/wtypes/ne-wtypes-varenum),Flags]
 # Fixed #1892.
 Windows.Win32.Storage.Compression.Apis.CloseDecompressor : DecompressorHandle...IntPtr => DECOMPRESSOR_HANDLE
+Windows.Win32.Storage.Compression.Apis.CreateDecompressor : DecompressorHandle...IntPtr* => DECOMPRESSOR_HANDLE*
 Windows.Win32.Storage.Compression.Apis.Decompress : DecompressorHandle...IntPtr => DECOMPRESSOR_HANDLE
 Windows.Win32.Storage.Compression.Apis.QueryDecompressorInformation : DecompressorHandle...IntPtr => DECOMPRESSOR_HANDLE
 Windows.Win32.Storage.Compression.Apis.ResetDecompressor : DecompressorHandle...IntPtr => DECOMPRESSOR_HANDLE
@@ -897,3 +898,7 @@ Windows.Win32.Networking.WinSock.LPWSPEVENTSELECT.Invoke : hEventObject...HANDLE
 Windows.Win32.Networking.WinSock.WSAEVENT : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(WSACloseEvent)] => [InvalidHandleValue(0),NativeTypedef,RAIIFree(WSACloseEvent)]
 # Fixed #1813.
 Windows.Win32.System.Com.Apis.CLSID_GlobalOptions added
+# Fixed #480.
+Windows.Win32.System.Diagnostics.Debug.Apis.RtlVirtualUnwind(Arm64) : ContextPointers...KNONVOLATILE_CONTEXT_POINTERS_ARM64* => KNONVOLATILE_CONTEXT_POINTERS*
+Windows.Win32.System.Diagnostics.Debug.KNONVOLATILE_CONTEXT_POINTERS_ARM64(Arm64) removed
+Windows.Win32.System.Diagnostics.Debug.KNONVOLATILE_CONTEXT_POINTERS(Arm64) added
