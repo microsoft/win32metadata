@@ -871,3 +871,11 @@ Windows.Win32.System.Diagnostics.Etw.Apis.EventWriteTransfer : RegHandle...UInt6
 Windows.Win32.System.Diagnostics.Etw.REGHANDLE added
 # Fixed #1884.
 Windows.Win32.System.Variant.VARENUM : [Documentation(https://learn.microsoft.com/windows/win32/api/wtypes/ne-wtypes-varenum)] => [Documentation(https://learn.microsoft.com/windows/win32/api/wtypes/ne-wtypes-varenum),Flags]
+# Fixed #1892.
+Windows.Win32.Storage.Compression.Apis.CloseDecompressor : DecompressorHandle...IntPtr => DECOMPRESSOR_HANDLE
+Windows.Win32.Storage.Compression.Apis.Decompress : DecompressorHandle...IntPtr => DECOMPRESSOR_HANDLE
+Windows.Win32.Storage.Compression.Apis.QueryDecompressorInformation : DecompressorHandle...IntPtr => DECOMPRESSOR_HANDLE
+Windows.Win32.Storage.Compression.Apis.ResetDecompressor : DecompressorHandle...IntPtr => DECOMPRESSOR_HANDLE
+Windows.Win32.Storage.Compression.Apis.SetDecompressorInformation : DecompressorHandle...IntPtr => DECOMPRESSOR_HANDLE
+Windows.Win32.Storage.Compression.COMPRESSOR_HANDLE : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(CloseDecompressor)] => [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(CloseCompressor)]
+Windows.Win32.Storage.Compression.DECOMPRESSOR_HANDLE added

@@ -535,6 +535,13 @@
   {
     "Name": "COMPRESSOR_HANDLE",
     "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "CloseCompressor",
+    "InvalidHandleValues": [ -1, 0 ],
+    "NativeTypedef": true
+  },
+  {
+    "Name": "DECOMPRESSOR_HANDLE",
+    "ValueType": "DECLARE_HANDLE",
     "CloseApi": "CloseDecompressor",
     "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
