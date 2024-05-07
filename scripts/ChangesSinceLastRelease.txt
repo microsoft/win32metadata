@@ -859,3 +859,13 @@ Windows.Win32.System.Threading.PTP_CLEANUP_GROUP : [NativeTypedef,RAIIFree(Close
 Windows.Win32.System.Threading.PTP_POOL : [NativeTypedef,RAIIFree(CloseThreadpool)] => [InvalidHandleValue(0),NativeTypedef,RAIIFree(CloseThreadpool)]
 # Remove invalid D2D DWRITE_PAINT_FEATURE_LEVEL enum
 Windows.Win32.Graphics.Direct2D.DWRITE_PAINT_FEATURE_LEVEL removed
+# Fixed #1894.
+Windows.Win32.System.Diagnostics.Etw.Apis.EventEnabled : RegHandle...UInt64 => REGHANDLE
+Windows.Win32.System.Diagnostics.Etw.Apis.EventProviderEnabled : RegHandle...UInt64 => REGHANDLE
+Windows.Win32.System.Diagnostics.Etw.Apis.EventSetInformation : RegHandle...UInt64 => REGHANDLE
+Windows.Win32.System.Diagnostics.Etw.Apis.EventUnregister : RegHandle...UInt64 => REGHANDLE
+Windows.Win32.System.Diagnostics.Etw.Apis.EventWrite : RegHandle...UInt64 => REGHANDLE
+Windows.Win32.System.Diagnostics.Etw.Apis.EventWriteEx : RegHandle...UInt64 => REGHANDLE
+Windows.Win32.System.Diagnostics.Etw.Apis.EventWriteString : RegHandle...UInt64 => REGHANDLE
+Windows.Win32.System.Diagnostics.Etw.Apis.EventWriteTransfer : RegHandle...UInt64 => REGHANDLE
+Windows.Win32.System.Diagnostics.Etw.REGHANDLE added

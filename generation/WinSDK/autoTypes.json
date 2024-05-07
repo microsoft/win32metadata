@@ -2887,5 +2887,11 @@
     "Name": "Region",
     "ValueType": "IntPtr",
     "NativeTypedef": true
+  },
+  {
+    "Name": "REGHANDLE",
+    "ValueType": "long",
+    "CloseApi": "EventUnregister",
+    "NativeTypedef": true
   }
   ]
