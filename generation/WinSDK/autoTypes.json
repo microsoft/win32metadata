@@ -422,7 +422,7 @@
     "Name": "WSAEVENT",
     "ValueType": "IntPtr",
     "CloseApi": "WSACloseEvent",
-    "InvalidHandleValues": [ -1, 0 ],
+    "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
   {

@@ -14,6 +14,9 @@ namespace Windows.Win32.Networking.WinSock
 
         public const uint WSA_INFINITE = 0xFFFFFFFF;
 
+        [NativeTypeName("WSAEVENT")]
+        public const int WSA_INVALID_EVENT = 0;
+
         public const uint IOC_INOUT = 0x80000000 | 0x40000000;
         
         public const int FIONREAD = 1074030207;

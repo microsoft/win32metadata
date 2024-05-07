@@ -883,3 +883,15 @@ Windows.Win32.Storage.Compression.DECOMPRESSOR_HANDLE added
 Windows.Win32.UI.WindowsAndMessaging.Apis.RT_MANIFEST...System.UInt32 => Windows.Win32.Foundation.PWSTR
 # Fixed #1876.
 Windows.Win32.System.Threading.Apis.GetProcessHandleFromHwnd added
+# Fixed #1587.
+Windows.Win32.Networking.WinSock.Apis.WSA_INVALID_EVENT added
+Windows.Win32.Networking.WinSock.Apis.WSACloseEvent : hEvent...HANDLE => WSAEVENT
+Windows.Win32.Networking.WinSock.Apis.WSACreateEvent : return...HANDLE => WSAEVENT
+Windows.Win32.Networking.WinSock.Apis.WSAEnumNetworkEvents : hEventObject...HANDLE => WSAEVENT
+Windows.Win32.Networking.WinSock.Apis.WSAEventSelect : hEventObject...HANDLE => WSAEVENT
+Windows.Win32.Networking.WinSock.LPWPUCLOSEEVENT.Invoke : hEvent...HANDLE => WSAEVENT
+Windows.Win32.Networking.WinSock.LPWPUCREATEEVENT.Invoke : return...HANDLE => WSAEVENT
+Windows.Win32.Networking.WinSock.LPWPURESETEVENT.Invoke : hEvent...HANDLE => WSAEVENT
+Windows.Win32.Networking.WinSock.LPWPUSETEVENT.Invoke : hEvent...HANDLE => WSAEVENT
+Windows.Win32.Networking.WinSock.LPWSPEVENTSELECT.Invoke : hEventObject...HANDLE => WSAEVENT
+Windows.Win32.Networking.WinSock.WSAEVENT : [InvalidHandleValue(-1),InvalidHandleValue(0),NativeTypedef,RAIIFree(WSACloseEvent)] => [InvalidHandleValue(0),NativeTypedef,RAIIFree(WSACloseEvent)]
