@@ -902,3 +902,5 @@ Windows.Win32.System.Com.Apis.CLSID_GlobalOptions added
 Windows.Win32.System.Diagnostics.Debug.Apis.RtlVirtualUnwind(Arm64) : ContextPointers...KNONVOLATILE_CONTEXT_POINTERS_ARM64* => KNONVOLATILE_CONTEXT_POINTERS*
 Windows.Win32.System.Diagnostics.Debug.KNONVOLATILE_CONTEXT_POINTERS_ARM64(Arm64) removed
 Windows.Win32.System.Diagnostics.Debug.KNONVOLATILE_CONTEXT_POINTERS(Arm64) added
+# Fixed #1766.
+Windows.Win32.UI.WindowsAndMessaging.Apis.IDC_STATIC added

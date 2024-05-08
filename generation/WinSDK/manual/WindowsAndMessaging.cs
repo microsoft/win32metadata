@@ -49,6 +49,8 @@ namespace Windows.Win32.UI.WindowsAndMessaging
 
         [NativeTypeName("LPCWSTR")]
         public const ushort RT_MANIFEST = 24;
+
+        public const int IDC_STATIC = -1;
     }
 
     [UnmanagedFunctionPointer]
