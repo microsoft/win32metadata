@@ -1852,3 +1852,4 @@ WSACloseEvent::hEvent=WSAEVENT
 WSACreateEvent::return=WSAEVENT
 WSAEnumNetworkEvents::hEventObject=WSAEVENT
 WSAEventSelect::hEventObject=WSAEVENT
+ScriptStringAnalyse::piDx=[-NativeArrayInfo]

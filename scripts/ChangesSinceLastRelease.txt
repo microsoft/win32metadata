@@ -1,0 +1,2 @@
+# Remove incomplete metadata for ScriptStringAnalyse
+Windows.Win32.Globalization.Apis.ScriptStringAnalyse : piDx : [Const,In,NativeArrayInfo(CountParamIndex=2),Optional] => [Const,In,Optional]
