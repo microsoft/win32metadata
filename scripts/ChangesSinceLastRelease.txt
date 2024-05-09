@@ -1,0 +1,5 @@
+# Add missing lang/locale default constants
+Windows.Win32.Globalization.Apis.LANG_SYSTEM_DEFAULT added
+Windows.Win32.Globalization.Apis.LANG_USER_DEFAULT added
+Windows.Win32.Globalization.Apis.LOCALE_SYSTEM_DEFAULT added
+Windows.Win32.Globalization.Apis.LOCALE_USER_DEFAULT added
