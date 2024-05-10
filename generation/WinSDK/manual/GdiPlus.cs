@@ -6,11 +6,11 @@ namespace Windows.Win32.Graphics.GdiPlus
 {
     public struct GpGraphics;
     public struct GpBrush;
-    public struct GpTexture
-    public struct GpSolidFill
-    public struct GpLineGradient
-    public struct GpPathGradient
-    public struct GpHatch
+    public struct GpTexture;
+    public struct GpSolidFill;
+    public struct GpLineGradient;
+    public struct GpPathGradient;
+    public struct GpHatch;
     public struct GpPen;
     public struct GpCustomLineCap;
     public struct GpAdjustableArrowCap;
