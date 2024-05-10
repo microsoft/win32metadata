@@ -5,6 +5,8 @@ Windows.Win32.Globalization.Apis.LOCALE_SYSTEM_DEFAULT added
 Windows.Win32.Globalization.Apis.LOCALE_USER_DEFAULT added
 # Remove incomplete metadata for ScriptStringAnalyse
 Windows.Win32.Globalization.Apis.ScriptStringAnalyse : piDx : [Const,In,NativeArrayInfo(CountParamIndex=2),Optional] => [Const,In,Optional]
+# Add global resource flag
+Windows.Win32.System.Threading.GET_GUI_RESOURCES_FLAGS.GR_GLOBAL added
 # Add missing resource type constants
 Windows.Win32.UI.WindowsAndMessaging.Apis.RT_GROUP_CURSOR added
 Windows.Win32.UI.WindowsAndMessaging.Apis.RT_GROUP_ICON added
