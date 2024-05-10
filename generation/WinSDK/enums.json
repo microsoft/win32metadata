@@ -19856,6 +19856,10 @@
     "name": "GET_GUI_RESOURCES_FLAGS",
     "members": [
       {
+        "name": "GR_GLOBAL",
+        "value": "unchecked((uint)-2)"
+      },
+      {
         "name": "GR_GDIOBJECTS",
         "value": "0"
       },
