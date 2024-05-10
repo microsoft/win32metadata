@@ -54,3 +54,8 @@ Windows.Win32.Graphics.GdiPlus.GpStringFormat : [NativeTypedef] =>
 Windows.Win32.Graphics.GdiPlus.GpStringFormat.Value removed
 Windows.Win32.Graphics.GdiPlus.GpTexture : [NativeTypedef] => 
 Windows.Win32.Graphics.GdiPlus.GpTexture.Value removed
+# Add global resource flag
+Windows.Win32.System.Threading.GET_GUI_RESOURCES_FLAGS.GR_GLOBAL added
+# Add missing resource type constants
+Windows.Win32.UI.WindowsAndMessaging.Apis.RT_GROUP_CURSOR added
+Windows.Win32.UI.WindowsAndMessaging.Apis.RT_GROUP_ICON added
