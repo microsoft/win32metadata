@@ -5,3 +5,52 @@ Windows.Win32.Globalization.Apis.LOCALE_SYSTEM_DEFAULT added
 Windows.Win32.Globalization.Apis.LOCALE_USER_DEFAULT added
 # Remove incomplete metadata for ScriptStringAnalyse
 Windows.Win32.Globalization.Apis.ScriptStringAnalyse : piDx : [Const,In,NativeArrayInfo(CountParamIndex=2),Optional] => [Const,In,Optional]
+# Make GDI+ private types opaque
+Windows.Win32.Graphics.GdiPlus.GpAdjustableArrowCap : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpAdjustableArrowCap.Value removed
+Windows.Win32.Graphics.GdiPlus.GpBitmap : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpBitmap.Value removed
+Windows.Win32.Graphics.GdiPlus.GpBrush : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpBrush.Value removed
+Windows.Win32.Graphics.GdiPlus.GpCachedBitmap : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpCachedBitmap.Value removed
+Windows.Win32.Graphics.GdiPlus.GpCustomLineCap : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpCustomLineCap.Value removed
+Windows.Win32.Graphics.GdiPlus.GpFont : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpFont.Value removed
+Windows.Win32.Graphics.GdiPlus.GpFontCollection : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpFontCollection.Value removed
+Windows.Win32.Graphics.GdiPlus.GpFontFamily : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpFontFamily.Value removed
+Windows.Win32.Graphics.GdiPlus.GpGraphics : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpGraphics.Value removed
+Windows.Win32.Graphics.GdiPlus.GpHatch : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpHatch.Value removed
+Windows.Win32.Graphics.GdiPlus.GpImage : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpImage.Value removed
+Windows.Win32.Graphics.GdiPlus.GpImageAttributes : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpImageAttributes.Value removed
+Windows.Win32.Graphics.GdiPlus.GpInstalledFontCollection : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpInstalledFontCollection.Value removed
+Windows.Win32.Graphics.GdiPlus.GpLineGradient : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpLineGradient.Value removed
+Windows.Win32.Graphics.GdiPlus.GpMetafile : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpMetafile.Value removed
+Windows.Win32.Graphics.GdiPlus.GpPath : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpPath.Value removed
+Windows.Win32.Graphics.GdiPlus.GpPathGradient : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpPathGradient.Value removed
+Windows.Win32.Graphics.GdiPlus.GpPathIterator : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpPathIterator.Value removed
+Windows.Win32.Graphics.GdiPlus.GpPen : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpPen.Value removed
+Windows.Win32.Graphics.GdiPlus.GpPrivateFontCollection : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpPrivateFontCollection.Value removed
+Windows.Win32.Graphics.GdiPlus.GpRegion : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpRegion.Value removed
+Windows.Win32.Graphics.GdiPlus.GpSolidFill : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpSolidFill.Value removed
+Windows.Win32.Graphics.GdiPlus.GpStringFormat : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpStringFormat.Value removed
+Windows.Win32.Graphics.GdiPlus.GpTexture : [NativeTypedef] => 
+Windows.Win32.Graphics.GdiPlus.GpTexture.Value removed
