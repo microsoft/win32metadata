@@ -34871,6 +34871,65 @@
     ]
   },
   {
+    "namespace": "Windows.Win32.Graphics.Dxgi",
+    "type": "uint",
+    "name": "DXGI_OUTDUPL_FLAG",
+    "flags": true,
+    "uses": [
+      {
+        "interface": "IDXGIOutput5",
+        "method": "DuplicateOutput1",
+        "parameter": "Flags"
+      }
+    ]
+  },
+  {
+    "namespace": "Windows.Win32.Graphics.Dxgi",
+    "type": "uint",
+    "name": "DXGI_SWAP_CHAIN_FLAG",
+    "flags": true,
+    "uses": [
+      {
+        "struct": "DXGI_DECODE_SWAP_CHAIN_DESC",
+        "field": "Flags"
+      },
+      {
+        "struct": "DXGI_SWAP_CHAIN_DESC",
+        "field": "Flags"
+      },
+      {
+        "struct": "DXGI_SWAP_CHAIN_DESC1",
+        "field": "Flags"
+      },
+      {
+        "interface": "IDXGISwapChain",
+        "method": "ResizeBuffers",
+        "parameter": "SwapChainFlags"
+      },
+      {
+        "interface": "IDXGISwapChain3",
+        "method": "ResizeBuffers1",
+        "parameter": "SwapChainFlags"
+      }
+    ]
+  },
+  {
+    "namespace": "Windows.Win32.Graphics.Dxgi",
+    "type": "uint",
+    "name": "DXGI_ADAPTER_FLAG",
+    "flags": true,
+    "uses": [
+      {
+        "struct": "DXGI_ADAPTER_DESC1",
+        "field": "Flags"
+      },
+      {
+        "struct": "DXGI_ADAPTER_DESC2",
+        "field": "Flags"
+      }
+    ]
+  },
+  {
     "namespace": "Windows.Win32.Data.HtmlHelp",
     "name": "HTML_HELP_COMMAND",
     "autoPopulate": {
