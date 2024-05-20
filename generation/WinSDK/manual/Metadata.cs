@@ -260,6 +260,18 @@ public class ReservedAttribute : Attribute
     }
 }
 
+/// <summary>
+/// Indicates that the attributed parameter must point to a structure that remains allocated
+/// throughout the lifetime of the asynchronous operation.
+/// </summary>
+[AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = true)]
+public class RetainedAttribute : Attribute
+{
+    public RetainedAttribute()
+    {
+    }
+}
+
 [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = true)]
 public class RetValAttribute : Attribute
 {

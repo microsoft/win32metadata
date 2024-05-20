@@ -23620,7 +23620,7 @@ typedef struct D3D12_NODE_CPU_INPUT
     {
     UINT EntrypointIndex;
     UINT NumRecords;
-    void *pRecords;
+    const void *pRecords;
     UINT64 RecordStrideInBytes;
     } 	D3D12_NODE_CPU_INPUT;
 
@@ -23634,7 +23634,7 @@ typedef struct D3D12_NODE_GPU_INPUT
 typedef struct D3D12_MULTI_NODE_CPU_INPUT
     {
     UINT NumNodeInputs;
-    D3D12_NODE_CPU_INPUT *pNodeInputs;
+    const D3D12_NODE_CPU_INPUT *pNodeInputs;
     UINT64 NodeInputStrideInBytes;
     } 	D3D12_MULTI_NODE_CPU_INPUT;
 

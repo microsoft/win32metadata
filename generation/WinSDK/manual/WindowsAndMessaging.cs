@@ -46,6 +46,17 @@ namespace Windows.Win32.UI.WindowsAndMessaging
         public const int WINSTA_ALL_ACCESS = WINSTA_ENUMDESKTOPS | WINSTA_READATTRIBUTES | WINSTA_ACCESSCLIPBOARD | WINSTA_CREATEDESKTOP | WINSTA_WRITEATTRIBUTES | WINSTA_ACCESSGLOBALATOMS | WINSTA_EXITWINDOWS | WINSTA_ENUMERATE | WINSTA_READSCREEN;
 
         public const uint WVR_REDRAW = WVR_HREDRAW | WVR_VREDRAW;
+
+        [NativeTypeName("LPCWSTR")]
+        public const ushort RT_GROUP_CURSOR = 12;
+
+        [NativeTypeName("LPCWSTR")]
+        public const ushort RT_GROUP_ICON = 14;
+
+        [NativeTypeName("LPCWSTR")]
+        public const ushort RT_MANIFEST = 24;
+
+        public const int IDC_STATIC = -1;
     }
 
     [UnmanagedFunctionPointer]

@@ -3,6 +3,7 @@ IWICBitmapSource
 IWICBitmap
 DWRITE_GLYPH_RUN
 DWRITE_GLYPH_RUN_DESCRIPTION
+DWRITE_PAINT_FEATURE_LEVEL
 --traverse
 <IncludeRoot>/um/d2d1_2helper.h
 <IncludeRoot>/um/d2d1_3helper.h
