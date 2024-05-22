@@ -59,3 +59,14 @@ Windows.Win32.System.Threading.GET_GUI_RESOURCES_FLAGS.GR_GLOBAL added
 # Add missing resource type constants
 Windows.Win32.UI.WindowsAndMessaging.Apis.RT_GROUP_CURSOR added
 Windows.Win32.UI.WindowsAndMessaging.Apis.RT_GROUP_ICON added
+# dxgi: Override enum (flags) ABI type to UINT when used in structures
+Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_DESC1.Flags : [AssociatedEnum(DXGI_ADAPTER_FLAG)] => 
+Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_DESC2.Flags : [AssociatedEnum(DXGI_ADAPTER_FLAG)] => 
+Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_FLAG : [Documentation(https://learn.microsoft.com/windows/win32/api/dxgi/ne-dxgi-dxgi_adapter_flag),Flags] => [Documentation(https://learn.microsoft.com/windows/win32/api/dxgi/ne-dxgi-dxgi_adapter_flag)]
+Windows.Win32.Graphics.Dxgi.DXGI_DECODE_SWAP_CHAIN_DESC.Flags : [AssociatedEnum(DXGI_SWAP_CHAIN_FLAG)] => 
+Windows.Win32.Graphics.Dxgi.DXGI_OUTDUPL_FLAG : [Flags] => 
+Windows.Win32.Graphics.Dxgi.DXGI_SWAP_CHAIN_DESC.Flags : [AssociatedEnum(DXGI_SWAP_CHAIN_FLAG)] => 
+Windows.Win32.Graphics.Dxgi.DXGI_SWAP_CHAIN_DESC1.Flags : [AssociatedEnum(DXGI_SWAP_CHAIN_FLAG)] => 
+Windows.Win32.Graphics.Dxgi.DXGI_SWAP_CHAIN_FLAG : [Documentation(https://learn.microsoft.com/windows/win32/api/dxgi/ne-dxgi-dxgi_swap_chain_flag),Flags] => [Documentation(https://learn.microsoft.com/windows/win32/api/dxgi/ne-dxgi-dxgi_swap_chain_flag)]
+Windows.Win32.Graphics.Dxgi.IDXGISwapChain.ResizeBuffers : SwapChainFlags : [AssociatedEnum(DXGI_SWAP_CHAIN_FLAG),In] => [In]
+Windows.Win32.Graphics.Dxgi.IDXGISwapChain3.ResizeBuffers1 : SwapChainFlags : [AssociatedEnum(DXGI_SWAP_CHAIN_FLAG),In] => [In]
