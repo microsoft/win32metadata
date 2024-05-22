@@ -34922,9 +34922,8 @@
     ]
   },
   {
-    "namespace": "Windows.Win32.Graphics.Dxgi",
     "type": "uint",
-    "name": "DXGI_OUTDUPL_FLAG",
+    "addUsesTo": "DXGI_OUTDUPL_FLAG",
     "flags": true,
     "uses": [
       {
@@ -34935,9 +34934,8 @@
     ]
   },
   {
-    "namespace": "Windows.Win32.Graphics.Dxgi",
     "type": "uint",
-    "name": "DXGI_SWAP_CHAIN_FLAG",
+    "addUsesTo": "DXGI_SWAP_CHAIN_FLAG",
     "flags": true,
     "uses": [
       {
@@ -34965,9 +34963,8 @@
     ]
   },
   {
-    "namespace": "Windows.Win32.Graphics.Dxgi",
     "type": "uint",
-    "name": "DXGI_ADAPTER_FLAG",
+    "addUsesTo": "DXGI_ADAPTER_FLAG",
     "flags": true,
     "uses": [
       {
