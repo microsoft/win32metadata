@@ -1438,7 +1438,6 @@
   {
     "Namespace": "Windows.Win32.Security.Cryptography",
     "Name": "BCRYPT_HANDLE",
-    "CloseApi": "BCryptDestroyHash",
     "ValueType": "void*",
     "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
