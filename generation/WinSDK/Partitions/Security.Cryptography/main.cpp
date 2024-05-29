@@ -30,4 +30,9 @@ typedef NTSTATUS* PNTSTATUS;
 #include <infocard.h>
 #include <dpapi.h>
 #include <casetup.h>
-
+#include <bcrypt_provider.h>
+#include <ncrypt_provider.h>
+#include <sslprovider.h>
+#include <cspdk.h>
+#include <msclmd.h>
+#include <cardmod.h>
