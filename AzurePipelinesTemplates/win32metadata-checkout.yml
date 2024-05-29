@@ -9,4 +9,3 @@ steps:
   lfs: false
   displayName: Checkout win32metadata from github
   submodules: recursive
-  longpaths: true
