@@ -131,7 +131,7 @@ namespace MetadataUtils
             }
         }
 
-        public IEnumerable<TypeInfo> GetTypes()
+        public IEnumerable<TypeInfo> GetTypes(List<WinmdUtils> allWinmds)
         {
             foreach (var typeDefHandle in this.metadataReader.TypeDefinitions)
             {
@@ -185,7 +185,7 @@ namespace MetadataUtils
                 }
                 else if (typeDef.Attributes.HasFlag(TypeAttributes.Interface))
                 {
-                    var implementedMethodCount = this.InternalGetImplementedMethodCount(typeDef);
+                    var implementedMethodCount = this.InternalGetImplementedMethodCount(typeDef, allWinmds);
                     var methodInfos = this.GetMethodInfos(typeDef.GetMethods());
                     yield return new InterfaceInfo(ns, name, methodInfos, implementedMethodCount);
                 }
@@ -207,7 +207,7 @@ namespace MetadataUtils
             }
         }
 
-        private int InternalGetImplementedMethodCount(TypeDefinition typeDef)
+        private int InternalGetImplementedMethodCount(TypeDefinition typeDef, List<WinmdUtils> allWinmds)
         {
             int methodCount = typeDef.GetMethods().Count;
             var interfaceImplHandles = typeDef.GetInterfaceImplementations();
@@ -220,12 +220,7 @@ namespace MetadataUtils
                 {
                     case HandleKind.TypeReference:
                         {
-                            var interfaceTypeRefHandle = this.metadataReader.GetTypeReference((TypeReferenceHandle)interfaceImpl.Interface);
-                            interfaceTypeDef = this.metadataReader.TypeDefinitions
-                                .Select(h => this.metadataReader.GetTypeDefinition(h))
-                                .First(iterType =>
-                                    this.metadataReader.GetString(iterType.Name) == this.metadataReader.GetString(interfaceTypeRefHandle.Name) &&
-                                    this.metadataReader.GetString(iterType.Namespace) == this.metadataReader.GetString(interfaceTypeRefHandle.Namespace));
+                            interfaceTypeDef = this.GetDefinitionFromReference(this.metadataReader.GetTypeReference((TypeReferenceHandle)interfaceImpl.Interface), allWinmds);
                             break;
                         }
 
@@ -242,6 +237,27 @@ namespace MetadataUtils
             }
 
             return methodCount;
+        }
+
+        public TypeDefinition GetDefinitionFromReference(TypeReference typeReference, List<WinmdUtils> allWinmds)
+        {
+            var name = this.metadataReader.GetString(typeReference.Name);
+            var @namespace = this.metadataReader.GetString(typeReference.Namespace);
+
+            foreach (var winmd in allWinmds)
+            {
+                foreach (var typeDefinitionHandle in winmd.metadataReader.TypeDefinitions)
+                {
+                    var typeDefinition = winmd.metadataReader.GetTypeDefinition(typeDefinitionHandle);
+                    if (winmd.metadataReader.GetString(typeDefinition.Name) == name &&
+                        winmd.metadataReader.GetString(typeDefinition.Namespace) == @namespace)
+                    {
+                        return typeDefinition;
+                    }
+                }
+            }
+
+            throw new InvalidOperationException($"Could not find definition for '{@namespace}.{name}'");
         }
     }
 

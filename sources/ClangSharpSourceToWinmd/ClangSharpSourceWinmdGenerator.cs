@@ -544,43 +544,42 @@ namespace ClangSharpSourceToWinmd
                     interfaceWalker.Visit(tree.GetRoot());
                 }
 
-                foreach (var r in this.compilation.References)
+                var allWinmds = this.compilation.References.Where(r => !r.Display.EndsWith("netstandard.dll")).Select(r => MetadataUtils.WinmdUtils.LoadFromFile(r.Display)).ToList();
+
+                foreach (var winmd in allWinmds)
                 {
-                    if (r.Display.EndsWith("netstandard.dll"))
+                    foreach (var typeInfo in winmd.GetTypes(allWinmds))
                     {
-                        continue;
-                    }
-
-                    using (var winmd = MetadataUtils.WinmdUtils.LoadFromFile(r.Display))
-                    {
-                        foreach (var typeInfo in winmd.GetTypes())
+                        if (typeInfo is MetadataUtils.InterfaceInfo interfaceInfo)
                         {
-                            if (typeInfo is MetadataUtils.InterfaceInfo interfaceInfo)
-                            {
-                                this.CacheInterfaceInfo(interfaceInfo);
-                            }
-                            else if (typeInfo is MetadataUtils.StructInfo)
-                            {
-                                var fullName = $"{typeInfo.Namespace}.{typeInfo.Name}";
-                                var typeSymbol = this.compilation.GetTypeByMetadataName(fullName);
+                            this.CacheInterfaceInfo(interfaceInfo);
+                        }
+                        else if (typeInfo is MetadataUtils.StructInfo)
+                        {
+                            var fullName = $"{typeInfo.Namespace}.{typeInfo.Name}";
+                            var typeSymbol = this.compilation.GetTypeByMetadataName(fullName);
 
-                                if (typeSymbol != null)
-                                {
-                                    this.nameToSymbols[typeInfo.Name] = typeSymbol;
-                                }
-                            }
-                            else if (typeInfo is MetadataUtils.DelegateTypeInfo)
+                            if (typeSymbol != null)
                             {
-                                var fullName = $"{typeInfo.Namespace}.{typeInfo.Name}";
-                                var typeSymbol = this.compilation.GetTypeByMetadataName(fullName);
+                                this.nameToSymbols[typeInfo.Name] = typeSymbol;
+                            }
+                        }
+                        else if (typeInfo is MetadataUtils.DelegateTypeInfo)
+                        {
+                            var fullName = $"{typeInfo.Namespace}.{typeInfo.Name}";
+                            var typeSymbol = this.compilation.GetTypeByMetadataName(fullName);
 
-                                if (typeSymbol != null)
-                                {
-                                    this.nameToSymbols[typeInfo.Name] = typeSymbol;
-                                }
+                            if (typeSymbol != null)
+                            {
+                                this.nameToSymbols[typeInfo.Name] = typeSymbol;
                             }
                         }
                     }
+                }
+
+                foreach (var winmd in allWinmds)
+                {
+                    winmd.Dispose();
                 }
             }
         }
