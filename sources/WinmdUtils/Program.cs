@@ -417,13 +417,14 @@ namespace WinmdUtilsProgram
 
         public static int ShowPointersToDelegates(FileInfo winmd, string[] allowItem, IConsole console)
         {
+            List<WinmdUtils> allWinmds = new List<WinmdUtils>();
             HashSet<string> allowTable = new HashSet<string>(allowItem);
             using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName);
             bool pointersFound = false;
 
-            HashSet<string> delegateNames = new HashSet<string>(w1.GetTypes().Where(t => t is DelegateTypeInfo).Select(d => $"{d.Namespace}.{d.Name}"));
+            HashSet<string> delegateNames = new HashSet<string>(w1.GetTypes(allWinmds).Where(t => t is DelegateTypeInfo).Select(d => $"{d.Namespace}.{d.Name}"));
 
-            foreach (var type in w1.GetTypes())
+            foreach (var type in w1.GetTypes(allWinmds))
             {
                 foreach (var pointerInUse in PointerToOneOfNamesInUse(delegateNames, type))
                 {
@@ -690,10 +691,11 @@ namespace WinmdUtilsProgram
 
         public static int ShowEmptyDelegates(FileInfo winmd, string[] allowItem, IConsole console)
         {
+            List<WinmdUtils> allWinmds = new List<WinmdUtils>();
             HashSet<string> allowTable = new HashSet<string>(allowItem);
             using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName);
             bool emptyFound = false;
-            foreach (DelegateTypeInfo type in w1.GetTypes().Where(t => t is DelegateTypeInfo))
+            foreach (DelegateTypeInfo type in w1.GetTypes(allWinmds).Where(t => t is DelegateTypeInfo))
             {
                 if (!type.Parameters.Any())
                 {
