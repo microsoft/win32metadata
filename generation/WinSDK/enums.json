@@ -37393,6 +37393,16 @@
         "parameter": "CompressionType"
       }
     ]
+  },
+  {
+    "namespace": "Windows.Win32.System.Power",
+    "name": "DEVICE_POWER_CAPABILITIES",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "PDCAP_",
+      "header": "powrprof.h;winnt.h"
+    },
+    "uses": []
   }
 ]
 }
