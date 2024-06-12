@@ -79,6 +79,8 @@ stages:
       type: windows
     steps:
     - template: win32metadata-checkout.yml
+      parameters:
+        RepoDirectory: ${{ parameters.RepoDirectory }}
 
     - task: PowerShell@2
       displayName: Set up VS environment
