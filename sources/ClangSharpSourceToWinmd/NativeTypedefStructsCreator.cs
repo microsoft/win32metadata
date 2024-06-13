@@ -22,7 +22,13 @@ using Windows.Win32.Foundation.Metadata;
             {
                 string safety = item.ValueType.Contains("*") ? "unsafe " : string.Empty;
                 var valueType = item.ValueType;
-                if (valueType == "DECLARE_HANDLE" || valueType == "AllJoynHandle")
+                if (valueType == "DECLARE_HANDLE")
+                {
+                    safety = "unsafe ";
+                    valueType = "void*";
+                    item.NativeTypedef = true;
+                }
+                else if (valueType == "AllJoynHandle")
                 {
                     valueType = "IntPtr";
                     item.NativeTypedef = true;
