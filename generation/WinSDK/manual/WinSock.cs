@@ -29,5 +29,11 @@ namespace Windows.Win32.Networking.WinSock
         public const int SIOCATMARK = 1074033415;
 
         public const ushort POLLIN = POLLRDNORM | POLLRDBAND;
+
+        public const uint INADDR_ANY = 0;
+        public const uint INADDR_BROADCAST = uint.MaxValue
+
+        public const int SO_DONTLINGER = -129;
+        public const int SO_EXCLUSIVEADDRUSE = -5;
     }
 }

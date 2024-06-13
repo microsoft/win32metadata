@@ -885,3 +885,11 @@ Windows.Win32.UI.WindowsAndMessaging.HDWP.Value...System.IntPtr => System.Void*
 Windows.Win32.UI.WindowsAndMessaging.HHOOK.Value...System.IntPtr => System.Void*
 Windows.Win32.UI.WindowsAndMessaging.HICON.Value...System.IntPtr => System.Void*
 Windows.Win32.UI.WindowsAndMessaging.HMENU.Value...System.IntPtr => System.Void*
+# Fixed #1785.
+Windows.Win32.Networking.WinSock.Apis.ADDR_ANY added
+Windows.Win32.Networking.WinSock.Apis.IN4ADDR_ANY added
+Windows.Win32.Networking.WinSock.Apis.IN4ADDR_BROADCAST added
+Windows.Win32.Networking.WinSock.Apis.INADDR_ANY added
+Windows.Win32.Networking.WinSock.Apis.INADDR_BROADCAST added
+Windows.Win32.Networking.WinSock.Apis.SO_DONTLINGER added
+Windows.Win32.Networking.WinSock.Apis.SO_EXCLUSIVEADDRUSE added
