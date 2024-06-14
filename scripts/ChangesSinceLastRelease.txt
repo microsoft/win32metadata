@@ -893,3 +893,5 @@ Windows.Win32.Networking.WinSock.Apis.INADDR_ANY added
 Windows.Win32.Networking.WinSock.Apis.INADDR_BROADCAST added
 Windows.Win32.Networking.WinSock.Apis.SO_DONTLINGER added
 Windows.Win32.Networking.WinSock.Apis.SO_EXCLUSIVEADDRUSE added
+# Fixed #1925.
+Windows.Win32.Security.Cryptography.SslGetCipherSuitePRFHashAlgorithmFn added
