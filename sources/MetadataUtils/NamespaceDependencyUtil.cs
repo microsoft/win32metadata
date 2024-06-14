@@ -45,8 +45,11 @@ namespace MetadataUtils
             {
                 DecompilerTypeSystem winmd1 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(winmdFileName);
 
-                foreach (var type1 in winmd1.GetTopLevelTypeDefinitions())
+                var types = new Queue<ITypeDefinition>(winmd1.GetTopLevelTypeDefinitions());
+                while (types.Any())
                 {
+                    var type1 = types.Dequeue();
+
                     if (type1.FullName == "<Module>")
                     {
                         continue;
@@ -70,6 +73,14 @@ namespace MetadataUtils
                         {
                             string broughtInBy = $"{type1.Name}.{field.Name}";
                             this.AddTypeDependency(type1, depends, broughtInBy, field.Type);
+                        }
+
+                        foreach (var nested in type1.GetNestedTypes())
+                        {
+                            var def = nested.GetDefinition();
+                            if (def != null) {
+                                types.Enqueue(def);
+                            }
                         }
                     }
                     else if (type1.Kind == TypeKind.Class && type1.Name == "Apis")
