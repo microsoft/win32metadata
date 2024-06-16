@@ -4,7 +4,7 @@ parameters:
   default: "PullRequest"
 - name: "RepoDirectory"
   type: string
-  default: "win32metadata"
+  default: "s"
 - name: BuildConfiguration
   type: string
   default: Release
