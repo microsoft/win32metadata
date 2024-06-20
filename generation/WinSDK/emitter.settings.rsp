@@ -1853,3 +1853,5 @@ WSACreateEvent::return=WSAEVENT
 WSAEnumNetworkEvents::hEventObject=WSAEVENT
 WSAEventSelect::hEventObject=WSAEVENT
 ScriptStringAnalyse::piDx=[-NativeArrayInfo]
+LoadIconMetric::hinst=[In][Optional]
+LoadIconWithScaleDown::hinst=[In][Optional]

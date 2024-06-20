@@ -1,0 +1,3 @@
+# Fixed #1932.
+Windows.Win32.UI.Controls.Apis.LoadIconMetric : hinst : [In] => [In,Optional]
+Windows.Win32.UI.Controls.Apis.LoadIconWithScaleDown : hinst : [In] => [In,Optional]
