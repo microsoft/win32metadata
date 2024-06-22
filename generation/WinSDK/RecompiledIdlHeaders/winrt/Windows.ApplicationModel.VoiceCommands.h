@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_GLOBALIZATION_GLOBALIZATIONJAPANESEPHONETICANALYZERCONTRACT_VERSION)
@@ -1186,7 +1186,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoiceCommand = _uuidof(IVoiceCommand);
+                MIDL_CONST_ID IID& IID_IVoiceCommand = __uuidof(IVoiceCommand);
             } /* VoiceCommands */
         } /* ApplicationModel */
     } /* Windows */
@@ -1222,7 +1222,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoiceCommandCompletedEventArgs = _uuidof(IVoiceCommandCompletedEventArgs);
+                MIDL_CONST_ID IID& IID_IVoiceCommandCompletedEventArgs = __uuidof(IVoiceCommandCompletedEventArgs);
             } /* VoiceCommands */
         } /* ApplicationModel */
     } /* Windows */
@@ -1258,7 +1258,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoiceCommandConfirmationResult = _uuidof(IVoiceCommandConfirmationResult);
+                MIDL_CONST_ID IID& IID_IVoiceCommandConfirmationResult = __uuidof(IVoiceCommandConfirmationResult);
             } /* VoiceCommands */
         } /* ApplicationModel */
     } /* Windows */
@@ -1339,7 +1339,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoiceCommandContentTile = _uuidof(IVoiceCommandContentTile);
+                MIDL_CONST_ID IID& IID_IVoiceCommandContentTile = __uuidof(IVoiceCommandContentTile);
             } /* VoiceCommands */
         } /* ApplicationModel */
     } /* Windows */
@@ -1383,7 +1383,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoiceCommandDefinition = _uuidof(IVoiceCommandDefinition);
+                MIDL_CONST_ID IID& IID_IVoiceCommandDefinition = __uuidof(IVoiceCommandDefinition);
             } /* VoiceCommands */
         } /* ApplicationModel */
     } /* Windows */
@@ -1423,7 +1423,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoiceCommandDefinitionManagerStatics = _uuidof(IVoiceCommandDefinitionManagerStatics);
+                MIDL_CONST_ID IID& IID_IVoiceCommandDefinitionManagerStatics = __uuidof(IVoiceCommandDefinitionManagerStatics);
             } /* VoiceCommands */
         } /* ApplicationModel */
     } /* Windows */
@@ -1459,7 +1459,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoiceCommandDisambiguationResult = _uuidof(IVoiceCommandDisambiguationResult);
+                MIDL_CONST_ID IID& IID_IVoiceCommandDisambiguationResult = __uuidof(IVoiceCommandDisambiguationResult);
             } /* VoiceCommands */
         } /* ApplicationModel */
     } /* Windows */
@@ -1513,7 +1513,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoiceCommandResponse = _uuidof(IVoiceCommandResponse);
+                MIDL_CONST_ID IID& IID_IVoiceCommandResponse = __uuidof(IVoiceCommandResponse);
             } /* VoiceCommands */
         } /* ApplicationModel */
     } /* Windows */
@@ -1569,7 +1569,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoiceCommandResponseStatics = _uuidof(IVoiceCommandResponseStatics);
+                MIDL_CONST_ID IID& IID_IVoiceCommandResponseStatics = __uuidof(IVoiceCommandResponseStatics);
             } /* VoiceCommands */
         } /* ApplicationModel */
     } /* Windows */
@@ -1639,7 +1639,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoiceCommandServiceConnection = _uuidof(IVoiceCommandServiceConnection);
+                MIDL_CONST_ID IID& IID_IVoiceCommandServiceConnection = __uuidof(IVoiceCommandServiceConnection);
             } /* VoiceCommands */
         } /* ApplicationModel */
     } /* Windows */
@@ -1676,7 +1676,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoiceCommandServiceConnectionStatics = _uuidof(IVoiceCommandServiceConnectionStatics);
+                MIDL_CONST_ID IID& IID_IVoiceCommandServiceConnectionStatics = __uuidof(IVoiceCommandServiceConnectionStatics);
             } /* VoiceCommands */
         } /* ApplicationModel */
     } /* Windows */
@@ -1721,7 +1721,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoiceCommandUserMessage = _uuidof(IVoiceCommandUserMessage);
+                MIDL_CONST_ID IID& IID_IVoiceCommandUserMessage = __uuidof(IVoiceCommandUserMessage);
             } /* VoiceCommands */
         } /* ApplicationModel */
     } /* Windows */

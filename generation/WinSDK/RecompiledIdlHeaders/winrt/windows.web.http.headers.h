@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_GLOBALIZATION_GLOBALIZATIONJAPANESEPHONETICANALYZERCONTRACT_VERSION)
@@ -3460,7 +3460,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpCacheDirectiveHeaderValueCollection = _uuidof(IHttpCacheDirectiveHeaderValueCollection);
+                    MIDL_CONST_ID IID& IID_IHttpCacheDirectiveHeaderValueCollection = __uuidof(IHttpCacheDirectiveHeaderValueCollection);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -3504,7 +3504,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpChallengeHeaderValue = _uuidof(IHttpChallengeHeaderValue);
+                    MIDL_CONST_ID IID& IID_IHttpChallengeHeaderValue = __uuidof(IHttpChallengeHeaderValue);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -3546,7 +3546,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpChallengeHeaderValueCollection = _uuidof(IHttpChallengeHeaderValueCollection);
+                    MIDL_CONST_ID IID& IID_IHttpChallengeHeaderValueCollection = __uuidof(IHttpChallengeHeaderValueCollection);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -3590,7 +3590,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpChallengeHeaderValueFactory = _uuidof(IHttpChallengeHeaderValueFactory);
+                    MIDL_CONST_ID IID& IID_IHttpChallengeHeaderValueFactory = __uuidof(IHttpChallengeHeaderValueFactory);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -3634,7 +3634,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpChallengeHeaderValueStatics = _uuidof(IHttpChallengeHeaderValueStatics);
+                    MIDL_CONST_ID IID& IID_IHttpChallengeHeaderValueStatics = __uuidof(IHttpChallengeHeaderValueStatics);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -3672,7 +3672,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpConnectionOptionHeaderValue = _uuidof(IHttpConnectionOptionHeaderValue);
+                    MIDL_CONST_ID IID& IID_IHttpConnectionOptionHeaderValue = __uuidof(IHttpConnectionOptionHeaderValue);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -3714,7 +3714,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpConnectionOptionHeaderValueCollection = _uuidof(IHttpConnectionOptionHeaderValueCollection);
+                    MIDL_CONST_ID IID& IID_IHttpConnectionOptionHeaderValueCollection = __uuidof(IHttpConnectionOptionHeaderValueCollection);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -3753,7 +3753,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpConnectionOptionHeaderValueFactory = _uuidof(IHttpConnectionOptionHeaderValueFactory);
+                    MIDL_CONST_ID IID& IID_IHttpConnectionOptionHeaderValueFactory = __uuidof(IHttpConnectionOptionHeaderValueFactory);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -3797,7 +3797,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpConnectionOptionHeaderValueStatics = _uuidof(IHttpConnectionOptionHeaderValueStatics);
+                    MIDL_CONST_ID IID& IID_IHttpConnectionOptionHeaderValueStatics = __uuidof(IHttpConnectionOptionHeaderValueStatics);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -3835,7 +3835,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpContentCodingHeaderValue = _uuidof(IHttpContentCodingHeaderValue);
+                    MIDL_CONST_ID IID& IID_IHttpContentCodingHeaderValue = __uuidof(IHttpContentCodingHeaderValue);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -3877,7 +3877,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpContentCodingHeaderValueCollection = _uuidof(IHttpContentCodingHeaderValueCollection);
+                    MIDL_CONST_ID IID& IID_IHttpContentCodingHeaderValueCollection = __uuidof(IHttpContentCodingHeaderValueCollection);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -3916,7 +3916,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpContentCodingHeaderValueFactory = _uuidof(IHttpContentCodingHeaderValueFactory);
+                    MIDL_CONST_ID IID& IID_IHttpContentCodingHeaderValueFactory = __uuidof(IHttpContentCodingHeaderValueFactory);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -3960,7 +3960,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpContentCodingHeaderValueStatics = _uuidof(IHttpContentCodingHeaderValueStatics);
+                    MIDL_CONST_ID IID& IID_IHttpContentCodingHeaderValueStatics = __uuidof(IHttpContentCodingHeaderValueStatics);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -4001,7 +4001,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpContentCodingWithQualityHeaderValue = _uuidof(IHttpContentCodingWithQualityHeaderValue);
+                    MIDL_CONST_ID IID& IID_IHttpContentCodingWithQualityHeaderValue = __uuidof(IHttpContentCodingWithQualityHeaderValue);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -4043,7 +4043,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpContentCodingWithQualityHeaderValueCollection = _uuidof(IHttpContentCodingWithQualityHeaderValueCollection);
+                    MIDL_CONST_ID IID& IID_IHttpContentCodingWithQualityHeaderValueCollection = __uuidof(IHttpContentCodingWithQualityHeaderValueCollection);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -4087,7 +4087,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpContentCodingWithQualityHeaderValueFactory = _uuidof(IHttpContentCodingWithQualityHeaderValueFactory);
+                    MIDL_CONST_ID IID& IID_IHttpContentCodingWithQualityHeaderValueFactory = __uuidof(IHttpContentCodingWithQualityHeaderValueFactory);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -4131,7 +4131,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpContentCodingWithQualityHeaderValueStatics = _uuidof(IHttpContentCodingWithQualityHeaderValueStatics);
+                    MIDL_CONST_ID IID& IID_IHttpContentCodingWithQualityHeaderValueStatics = __uuidof(IHttpContentCodingWithQualityHeaderValueStatics);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -4199,7 +4199,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpContentDispositionHeaderValue = _uuidof(IHttpContentDispositionHeaderValue);
+                    MIDL_CONST_ID IID& IID_IHttpContentDispositionHeaderValue = __uuidof(IHttpContentDispositionHeaderValue);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -4238,7 +4238,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpContentDispositionHeaderValueFactory = _uuidof(IHttpContentDispositionHeaderValueFactory);
+                    MIDL_CONST_ID IID& IID_IHttpContentDispositionHeaderValueFactory = __uuidof(IHttpContentDispositionHeaderValueFactory);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -4282,7 +4282,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpContentDispositionHeaderValueStatics = _uuidof(IHttpContentDispositionHeaderValueStatics);
+                    MIDL_CONST_ID IID& IID_IHttpContentDispositionHeaderValueStatics = __uuidof(IHttpContentDispositionHeaderValueStatics);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -4380,7 +4380,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpContentHeaderCollection = _uuidof(IHttpContentHeaderCollection);
+                    MIDL_CONST_ID IID& IID_IHttpContentHeaderCollection = __uuidof(IHttpContentHeaderCollection);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -4430,7 +4430,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpContentRangeHeaderValue = _uuidof(IHttpContentRangeHeaderValue);
+                    MIDL_CONST_ID IID& IID_IHttpContentRangeHeaderValue = __uuidof(IHttpContentRangeHeaderValue);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -4480,7 +4480,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpContentRangeHeaderValueFactory = _uuidof(IHttpContentRangeHeaderValueFactory);
+                    MIDL_CONST_ID IID& IID_IHttpContentRangeHeaderValueFactory = __uuidof(IHttpContentRangeHeaderValueFactory);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -4524,7 +4524,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpContentRangeHeaderValueStatics = _uuidof(IHttpContentRangeHeaderValueStatics);
+                    MIDL_CONST_ID IID& IID_IHttpContentRangeHeaderValueStatics = __uuidof(IHttpContentRangeHeaderValueStatics);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -4568,7 +4568,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpCookiePairHeaderValue = _uuidof(IHttpCookiePairHeaderValue);
+                    MIDL_CONST_ID IID& IID_IHttpCookiePairHeaderValue = __uuidof(IHttpCookiePairHeaderValue);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -4610,7 +4610,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpCookiePairHeaderValueCollection = _uuidof(IHttpCookiePairHeaderValueCollection);
+                    MIDL_CONST_ID IID& IID_IHttpCookiePairHeaderValueCollection = __uuidof(IHttpCookiePairHeaderValueCollection);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -4654,7 +4654,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpCookiePairHeaderValueFactory = _uuidof(IHttpCookiePairHeaderValueFactory);
+                    MIDL_CONST_ID IID& IID_IHttpCookiePairHeaderValueFactory = __uuidof(IHttpCookiePairHeaderValueFactory);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -4698,7 +4698,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpCookiePairHeaderValueStatics = _uuidof(IHttpCookiePairHeaderValueStatics);
+                    MIDL_CONST_ID IID& IID_IHttpCookiePairHeaderValueStatics = __uuidof(IHttpCookiePairHeaderValueStatics);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -4742,7 +4742,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpCredentialsHeaderValue = _uuidof(IHttpCredentialsHeaderValue);
+                    MIDL_CONST_ID IID& IID_IHttpCredentialsHeaderValue = __uuidof(IHttpCredentialsHeaderValue);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -4786,7 +4786,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpCredentialsHeaderValueFactory = _uuidof(IHttpCredentialsHeaderValueFactory);
+                    MIDL_CONST_ID IID& IID_IHttpCredentialsHeaderValueFactory = __uuidof(IHttpCredentialsHeaderValueFactory);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -4830,7 +4830,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpCredentialsHeaderValueStatics = _uuidof(IHttpCredentialsHeaderValueStatics);
+                    MIDL_CONST_ID IID& IID_IHttpCredentialsHeaderValueStatics = __uuidof(IHttpCredentialsHeaderValueStatics);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -4871,7 +4871,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpDateOrDeltaHeaderValue = _uuidof(IHttpDateOrDeltaHeaderValue);
+                    MIDL_CONST_ID IID& IID_IHttpDateOrDeltaHeaderValue = __uuidof(IHttpDateOrDeltaHeaderValue);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -4915,7 +4915,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpDateOrDeltaHeaderValueStatics = _uuidof(IHttpDateOrDeltaHeaderValueStatics);
+                    MIDL_CONST_ID IID& IID_IHttpDateOrDeltaHeaderValueStatics = __uuidof(IHttpDateOrDeltaHeaderValueStatics);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -4962,7 +4962,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpExpectationHeaderValue = _uuidof(IHttpExpectationHeaderValue);
+                    MIDL_CONST_ID IID& IID_IHttpExpectationHeaderValue = __uuidof(IHttpExpectationHeaderValue);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5004,7 +5004,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpExpectationHeaderValueCollection = _uuidof(IHttpExpectationHeaderValueCollection);
+                    MIDL_CONST_ID IID& IID_IHttpExpectationHeaderValueCollection = __uuidof(IHttpExpectationHeaderValueCollection);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5048,7 +5048,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpExpectationHeaderValueFactory = _uuidof(IHttpExpectationHeaderValueFactory);
+                    MIDL_CONST_ID IID& IID_IHttpExpectationHeaderValueFactory = __uuidof(IHttpExpectationHeaderValueFactory);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5092,7 +5092,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpExpectationHeaderValueStatics = _uuidof(IHttpExpectationHeaderValueStatics);
+                    MIDL_CONST_ID IID& IID_IHttpExpectationHeaderValueStatics = __uuidof(IHttpExpectationHeaderValueStatics);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5134,7 +5134,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpLanguageHeaderValueCollection = _uuidof(IHttpLanguageHeaderValueCollection);
+                    MIDL_CONST_ID IID& IID_IHttpLanguageHeaderValueCollection = __uuidof(IHttpLanguageHeaderValueCollection);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5175,7 +5175,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpLanguageRangeWithQualityHeaderValue = _uuidof(IHttpLanguageRangeWithQualityHeaderValue);
+                    MIDL_CONST_ID IID& IID_IHttpLanguageRangeWithQualityHeaderValue = __uuidof(IHttpLanguageRangeWithQualityHeaderValue);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5217,7 +5217,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpLanguageRangeWithQualityHeaderValueCollection = _uuidof(IHttpLanguageRangeWithQualityHeaderValueCollection);
+                    MIDL_CONST_ID IID& IID_IHttpLanguageRangeWithQualityHeaderValueCollection = __uuidof(IHttpLanguageRangeWithQualityHeaderValueCollection);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5261,7 +5261,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpLanguageRangeWithQualityHeaderValueFactory = _uuidof(IHttpLanguageRangeWithQualityHeaderValueFactory);
+                    MIDL_CONST_ID IID& IID_IHttpLanguageRangeWithQualityHeaderValueFactory = __uuidof(IHttpLanguageRangeWithQualityHeaderValueFactory);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5305,7 +5305,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpLanguageRangeWithQualityHeaderValueStatics = _uuidof(IHttpLanguageRangeWithQualityHeaderValueStatics);
+                    MIDL_CONST_ID IID& IID_IHttpLanguageRangeWithQualityHeaderValueStatics = __uuidof(IHttpLanguageRangeWithQualityHeaderValueStatics);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5355,7 +5355,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpMediaTypeHeaderValue = _uuidof(IHttpMediaTypeHeaderValue);
+                    MIDL_CONST_ID IID& IID_IHttpMediaTypeHeaderValue = __uuidof(IHttpMediaTypeHeaderValue);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5394,7 +5394,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpMediaTypeHeaderValueFactory = _uuidof(IHttpMediaTypeHeaderValueFactory);
+                    MIDL_CONST_ID IID& IID_IHttpMediaTypeHeaderValueFactory = __uuidof(IHttpMediaTypeHeaderValueFactory);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5438,7 +5438,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpMediaTypeHeaderValueStatics = _uuidof(IHttpMediaTypeHeaderValueStatics);
+                    MIDL_CONST_ID IID& IID_IHttpMediaTypeHeaderValueStatics = __uuidof(IHttpMediaTypeHeaderValueStatics);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5494,7 +5494,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpMediaTypeWithQualityHeaderValue = _uuidof(IHttpMediaTypeWithQualityHeaderValue);
+                    MIDL_CONST_ID IID& IID_IHttpMediaTypeWithQualityHeaderValue = __uuidof(IHttpMediaTypeWithQualityHeaderValue);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5536,7 +5536,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpMediaTypeWithQualityHeaderValueCollection = _uuidof(IHttpMediaTypeWithQualityHeaderValueCollection);
+                    MIDL_CONST_ID IID& IID_IHttpMediaTypeWithQualityHeaderValueCollection = __uuidof(IHttpMediaTypeWithQualityHeaderValueCollection);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5580,7 +5580,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpMediaTypeWithQualityHeaderValueFactory = _uuidof(IHttpMediaTypeWithQualityHeaderValueFactory);
+                    MIDL_CONST_ID IID& IID_IHttpMediaTypeWithQualityHeaderValueFactory = __uuidof(IHttpMediaTypeWithQualityHeaderValueFactory);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5624,7 +5624,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpMediaTypeWithQualityHeaderValueStatics = _uuidof(IHttpMediaTypeWithQualityHeaderValueStatics);
+                    MIDL_CONST_ID IID& IID_IHttpMediaTypeWithQualityHeaderValueStatics = __uuidof(IHttpMediaTypeWithQualityHeaderValueStatics);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5666,7 +5666,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpMethodHeaderValueCollection = _uuidof(IHttpMethodHeaderValueCollection);
+                    MIDL_CONST_ID IID& IID_IHttpMethodHeaderValueCollection = __uuidof(IHttpMethodHeaderValueCollection);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5710,7 +5710,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpNameValueHeaderValue = _uuidof(IHttpNameValueHeaderValue);
+                    MIDL_CONST_ID IID& IID_IHttpNameValueHeaderValue = __uuidof(IHttpNameValueHeaderValue);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5754,7 +5754,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpNameValueHeaderValueFactory = _uuidof(IHttpNameValueHeaderValueFactory);
+                    MIDL_CONST_ID IID& IID_IHttpNameValueHeaderValueFactory = __uuidof(IHttpNameValueHeaderValueFactory);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5798,7 +5798,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpNameValueHeaderValueStatics = _uuidof(IHttpNameValueHeaderValueStatics);
+                    MIDL_CONST_ID IID& IID_IHttpNameValueHeaderValueStatics = __uuidof(IHttpNameValueHeaderValueStatics);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5839,7 +5839,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpProductHeaderValue = _uuidof(IHttpProductHeaderValue);
+                    MIDL_CONST_ID IID& IID_IHttpProductHeaderValue = __uuidof(IHttpProductHeaderValue);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5883,7 +5883,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpProductHeaderValueFactory = _uuidof(IHttpProductHeaderValueFactory);
+                    MIDL_CONST_ID IID& IID_IHttpProductHeaderValueFactory = __uuidof(IHttpProductHeaderValueFactory);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5927,7 +5927,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpProductHeaderValueStatics = _uuidof(IHttpProductHeaderValueStatics);
+                    MIDL_CONST_ID IID& IID_IHttpProductHeaderValueStatics = __uuidof(IHttpProductHeaderValueStatics);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -5968,7 +5968,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpProductInfoHeaderValue = _uuidof(IHttpProductInfoHeaderValue);
+                    MIDL_CONST_ID IID& IID_IHttpProductInfoHeaderValue = __uuidof(IHttpProductInfoHeaderValue);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -6010,7 +6010,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpProductInfoHeaderValueCollection = _uuidof(IHttpProductInfoHeaderValueCollection);
+                    MIDL_CONST_ID IID& IID_IHttpProductInfoHeaderValueCollection = __uuidof(IHttpProductInfoHeaderValueCollection);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -6054,7 +6054,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpProductInfoHeaderValueFactory = _uuidof(IHttpProductInfoHeaderValueFactory);
+                    MIDL_CONST_ID IID& IID_IHttpProductInfoHeaderValueFactory = __uuidof(IHttpProductInfoHeaderValueFactory);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -6098,7 +6098,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpProductInfoHeaderValueStatics = _uuidof(IHttpProductInfoHeaderValueStatics);
+                    MIDL_CONST_ID IID& IID_IHttpProductInfoHeaderValueStatics = __uuidof(IHttpProductInfoHeaderValueStatics);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -6223,7 +6223,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpRequestHeaderCollection = _uuidof(IHttpRequestHeaderCollection);
+                    MIDL_CONST_ID IID& IID_IHttpRequestHeaderCollection = __uuidof(IHttpRequestHeaderCollection);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -6309,7 +6309,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpResponseHeaderCollection = _uuidof(IHttpResponseHeaderCollection);
+                    MIDL_CONST_ID IID& IID_IHttpResponseHeaderCollection = __uuidof(IHttpResponseHeaderCollection);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -6350,7 +6350,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpTransferCodingHeaderValue = _uuidof(IHttpTransferCodingHeaderValue);
+                    MIDL_CONST_ID IID& IID_IHttpTransferCodingHeaderValue = __uuidof(IHttpTransferCodingHeaderValue);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -6392,7 +6392,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpTransferCodingHeaderValueCollection = _uuidof(IHttpTransferCodingHeaderValueCollection);
+                    MIDL_CONST_ID IID& IID_IHttpTransferCodingHeaderValueCollection = __uuidof(IHttpTransferCodingHeaderValueCollection);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -6431,7 +6431,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpTransferCodingHeaderValueFactory = _uuidof(IHttpTransferCodingHeaderValueFactory);
+                    MIDL_CONST_ID IID& IID_IHttpTransferCodingHeaderValueFactory = __uuidof(IHttpTransferCodingHeaderValueFactory);
                 } /* Headers */
             } /* Http */
         } /* Web */
@@ -6475,7 +6475,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHttpTransferCodingHeaderValueStatics = _uuidof(IHttpTransferCodingHeaderValueStatics);
+                    MIDL_CONST_ID IID& IID_IHttpTransferCodingHeaderValueStatics = __uuidof(IHttpTransferCodingHeaderValueStatics);
                 } /* Headers */
             } /* Http */
         } /* Web */

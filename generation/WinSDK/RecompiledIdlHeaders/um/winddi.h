@@ -1,3 +1,4 @@
+
 /*++
 
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -246,9 +247,7 @@ typedef struct _FD_DEVICEMETRICS {       // devm
     LONG      lMinA;
     LONG      lMinC;
     LONG      lMinD;
-
     LONG      alReserved[1]; // just in case we need it.
-
 } FD_DEVICEMETRICS, *PFD_DEVICEMETRICS;
 
 typedef struct _LIGATURE { /* lig */
@@ -420,13 +419,14 @@ typedef struct _FD_KERNINGPAIR {
 //
 // IFMETRICS::fsSelection flags
 //
-#define  FM_SEL_ITALIC          0x0001
-#define  FM_SEL_UNDERSCORE      0x0002
-#define  FM_SEL_NEGATIVE        0x0004
-#define  FM_SEL_OUTLINED        0x0008
-#define  FM_SEL_STRIKEOUT       0x0010
-#define  FM_SEL_BOLD            0x0020
-#define  FM_SEL_REGULAR         0x0040
+#define  FM_SEL_ITALIC           0x0001
+#define  FM_SEL_UNDERSCORE       0x0002
+#define  FM_SEL_NEGATIVE         0x0004
+#define  FM_SEL_OUTLINED         0x0008
+#define  FM_SEL_STRIKEOUT        0x0010
+#define  FM_SEL_BOLD             0x0020
+#define  FM_SEL_REGULAR          0x0040
+#define  FM_SEL_USE_TYPO_METRICS 0x0080
 
 //
 // The FONTDIFF structure contains all of the fields that could
@@ -1178,7 +1178,7 @@ typedef struct  tagCDDDXGK_REDIRBITMAPPRESENTINFO
 //
 //     * The CMY_INVERTED Mode has all non-black, non white indices centered
 //       and even distributed within the total 256 palette indices.  For
-//       example; if a CMY=333 levels then it has total 3x3x3=27 indices,
+//       example, if a CMY=333 levels then it has total 3x3x3=27 indices,
 //       these 27 indices will be centered by packing 114 black indices at
 //       begining and packing 114 white indices at end to ensure that ROP
 //       will be correct rendered.
@@ -1589,6 +1589,8 @@ typedef struct _FONTOBJ
     PVOID      pvProducer;
 } FONTOBJ;
 
+
+
 typedef struct _BLENDOBJ
 {
     BLENDFUNCTION BlendFunction;
@@ -1819,12 +1821,6 @@ BOOL APIENTRY CLIPOBJ_bEnum(
 PATHOBJ* APIENTRY CLIPOBJ_ppoGetPath(
     CLIPOBJ* pco
     );
-
-#if (NTDDI_VERSION >= NTDDI_VISTA)
-HANDLE APIENTRY CLIPOBJ_GetRgn(
-    CLIPOBJ* pco
-    );
-#endif
 
 /*
  *   FONTOBJ callbacks
@@ -2883,6 +2879,7 @@ BOOL APIENTRY DrvUnloadFontFile(
     ULONG_PTR   iFile
     );
 
+_Success_(return != DDI_ERROR)
 LONG APIENTRY DrvQueryTrueTypeTable(
     ULONG_PTR   iFile,
     ULONG      ulFont,
@@ -3211,6 +3208,7 @@ ULONG APIENTRY DrvGetGlyphMode(
     _In_                FONTOBJ *
     );
 
+_Success_(return == 1)
 ULONG APIENTRY DrvFontManagement(
     _In_                SURFOBJ *pso,
     _In_opt_            FONTOBJ *pfo,
@@ -3428,89 +3426,9 @@ VOID APIENTRY WNDOBJ_vSetConsumer(
     PVOID    pvConsumer
     );
 
+
+
 #if (NTDDI_VERSION >= NTDDI_VISTA)
-/*
- * Engine callback - Region support.
- */
-
-HANDLE APIENTRY EngCreateRectRgn(INT left, INT top, INT right, INT bottom);
-
-VOID APIENTRY EngDeleteRgn(
-    HANDLE hrgn
-    );
-
-INT APIENTRY  EngCombineRgn(
-    HANDLE hrgnTrg,
-    HANDLE hrgnSrc1,
-    HANDLE hrgnSrc2,
-    int    imode
-    );
-
-INT APIENTRY EngCopyRgn(
-    HANDLE hrgnDst,
-    HANDLE hrgnSrc
-    );
-
-INT APIENTRY EngIntersectRgn(
-    HANDLE hrgnResult,
-    HANDLE hRgnA,
-    HANDLE hRgnB
-    );
-
-INT APIENTRY EngSubtractRgn(
-    HANDLE hrgnResult,
-    HANDLE hRgnA,
-    HANDLE hRgnB
-    );
-
-INT APIENTRY EngUnionRgn(
-    HANDLE hrgnResult,
-    HANDLE hRgnA,
-    HANDLE hRgnB
-    );
-
-INT APIENTRY EngXorRgn(
-    HANDLE hrgnResult,
-    HANDLE hRgnA,
-    HANDLE hRgnB
-    );
-
-BOOL APIENTRY EngRectInRgn(
-    HANDLE hrgn,
-    LPRECT prcl
-    );
-
-BOOL APIENTRY EngEqualRgn(
-    HANDLE hrgn1,
-    HANDLE hrgn2
-    );
-
-DWORD APIENTRY EngGetRgnData(
-    HANDLE hrgn,
-    DWORD  nCount,
-    LPRGNDATA lpRgnData
-    );
-
-BOOL APIENTRY EngSetRectRgn(
-    HANDLE hrgn,
-    INT left,
-    INT top,
-    INT right,
-    INT bottom
-    );
-
-INT APIENTRY EngGetRgnBox(
-    HANDLE hrgn,
-    LPRECT prcl
-    );
-
-INT APIENTRY EngOffsetRgn(
-    HANDLE hrgn,
-    INT x,
-    INT y
-    );
-
-
 /*
  * Engine Render Hint
  */
@@ -4823,6 +4741,7 @@ EngQuerySystemAttribute(
 #define ENG_FNT_CACHE_READ_FAULT    0x1
 #define ENG_FNT_CACHE_WRITE_FAULT   0x2
 
+_Success_(return != nullptr)
 ENGAPI
 _Post_writable_byte_size_(*pulSize)
 PVOID APIENTRY  EngFntCacheLookUp(
@@ -5017,47 +4936,6 @@ typedef struct _DRH_APIBITMAPDATA
 
 #define DRH_APIBITMAP 0x00000001
 
-typedef HANDLE (APIENTRY *PFN_EngCreateRectRgn)(INT left, INT top, INT right, INT bottom);
-
-typedef VOID (APIENTRY *PFN_EngDeleteRgn)(
-    HANDLE hrgn
-    );
-
-typedef INT (APIENTRY *PFN_EngCombineRgn)(
-    HANDLE hrgnTrg,
-    HANDLE hrgnSrc1,
-    HANDLE hrgnSrc2,
-    int    imode
-    );
-
-typedef INT (APIENTRY *PFN_EngCopyRgn)(
-    HANDLE hrgnDst,
-    HANDLE hrgnSrc
-    );
-
-typedef INT (APIENTRY *PFN_EngIntersectRgn)(
-    HANDLE hrgnResult,
-    HANDLE hRgnA,
-    HANDLE hRgnB
-    );
-
-typedef INT (APIENTRY *PFN_EngSubtractRgn)(
-    HANDLE hrgnResult,
-    HANDLE hRgnA,
-    HANDLE hRgnB
-    );
-
-typedef INT (APIENTRY *PFN_EngUnionRgn)(
-    HANDLE hrgnResult,
-    HANDLE hRgnA,
-    HANDLE hRgnB
-    );
-
-typedef INT (APIENTRY *PFN_EngXorRgn)(
-    HANDLE hrgnResult,
-    HANDLE hRgnA,
-    HANDLE hRgnB
-    );
 #endif // (NTDDI_VERSION >= NTDDI_VISTA) 
 
 #if (NTDDI_VERSION >= NTDDI_WIN7)

@@ -226,7 +226,9 @@ namespace Windows
                 [contract(Windows.Foundation.UniversalApiContract, 10.0)]
                 SamplerFeedbackMinMipOpaque        = 189,
                 [contract(Windows.Foundation.UniversalApiContract, 10.0)]
-                SamplerFeedbackMipRegionUsedOpaque = 190
+                SamplerFeedbackMipRegionUsedOpaque = 190,
+                [contract(Windows.Foundation.UniversalApiContract, 16.0)]
+                A4B4G4R4                           = 191
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 8.0)]

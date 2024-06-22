@@ -52,12 +52,12 @@ typedef ULONG_PTR HCRYPTHASH;
 //
 #define NCRYPT_MAX_ALG_ID_LENGTH        512
 
-/****************************************************************************
-
-  NCRYPT memory management routines for functions that require
-  the caller to allocate memory
-
-****************************************************************************/
+//***************************************************************************
+//
+//  NCRYPT memory management routines for functions that require
+//  the caller to allocate memory
+//
+//****************************************************************************
 typedef LPVOID (WINAPI *PFN_NCRYPT_ALLOC)(
     _In_ SIZE_T cbSize
     );
@@ -221,10 +221,6 @@ typedef struct NCRYPT_ALLOC_PARA {
 #define NCRYPTBUFFER_ATTESTATION_CLAIM_TYPE                 52
 #define NCRYPTBUFFER_ATTESTATION_CLAIM_CHALLENGE_REQUIRED   53
 
-#if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
-#define NCRYPTBUFFER_VSM_KEY_ATTESTATION_CLAIM_RESTRICTIONS 54
-#endif
-
 #if (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
 //for generic ecc
 #define NCRYPTBUFFER_ECC_CURVE_NAME                         60
@@ -245,6 +241,21 @@ typedef struct NCRYPT_ALLOC_PARA {
 #define NCRYPTBUFFER_TPM_PLATFORM_CLAIM_NONCE               81
 #define NCRYPTBUFFER_TPM_PLATFORM_CLAIM_STATIC_CREATE       82
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_SV3)
+
+#define NCRYPTBUFFER_ATTESTATION_STATEMENT_SIGNATURE_HASH              90
+#define NCRYPTBUFFER_ATTESTATION_STATEMENT_SIGNATURE_PADDING_SCHEME    91
+#define NCRYPTBUFFER_ATTESTATION_STATEMENT_SIGNATURE_PADDING_ALGO      92
+#define NCRYPTBUFFER_ATTESTATION_STATEMENT_SIGNATURE_PADDING_SALT_SIZE 93
+#define NCRYPTBUFFER_ATTESTATION_STATEMENT_SIGNATURE_PADDING_SALT      NCRYPTBUFFER_ATTESTATION_STATEMENT_SIGNATURE_PADDING_SALT_SIZE // Added to avoid failure for existing users
+#define NCRYPTBUFFER_ATTESTATION_STATEMENT_NONCE                       NCRYPTBUFFER_CLAIM_KEYATTESTATION_NONCE
+
+#define NCRYPTBUFFER_VBS_ATTESTATION_STATEMENT_ROOT_DETAILS          94
+#define NCRYPTBUFFER_VBS_ATTESTATION_STATEMENT_IDENTITY_DETAILS      95
+
+#endif
+
 
 // NCRYPT shares the same BCRYPT definitions
 typedef BCryptBuffer     NCryptBuffer;
@@ -334,15 +345,26 @@ typedef struct _NCRYPT_KEY_ATTEST_PADDING_INFO {
 
 #define NCRYPT_CLAIM_AUTHORITY_ONLY                         0x00000001
 #define NCRYPT_CLAIM_SUBJECT_ONLY                           0x00000002
-#define NCRYPT_CLAIM_WEB_AUTH_SUBJECT_ONLY                  0x00000102
 #define NCRYPT_CLAIM_AUTHORITY_AND_SUBJECT                  0x00000003
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
-#define NCRYPT_CLAIM_VSM_KEY_ATTESTATION_STATEMENT          0x00000004
+//
+// The NCRYPT_CLAIM_VBS_KEY_ATTESTATION_STATEMENT claim type is automatically transformed to NCRYPT_CLAIM_VBS_ROOT in
+// NCryptCreateClaim and NCryptVerifyClaim.
+#define NCRYPT_CLAIM_VBS_KEY_ATTESTATION_STATEMENT          0x00000004
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS3)
+#if (NTDDI_VERSION >= NTDDI_WIN11_SV3)
+#define NCRYPT_CLAIM_VBS_ROOT                               0x00000005
+#define NCRYPT_CLAIM_VBS_IDENTITY                           0x00000006
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_SV3)
+#define NCRYPT_CLAIM_WEB_AUTH_SUBJECT_ONLY                  0x00000102
 #define NCRYPT_CLAIM_UNKNOWN                                0x00001000
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
 #define NCRYPT_CLAIM_PLATFORM                               0x00010000
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_SV3)
+#define NCRYPT_CLAIM_WEB_AUTH_SUBJECT_ONLY_V2               0x00000103
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_SV3)
 
 #endif // (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
 
@@ -353,48 +375,36 @@ typedef struct _NCRYPT_KEY_ATTEST_PADDING_INFO {
 #define NCRYPT_ISOLATED_KEY_FLAG_CREATED_IN_ISOLATION 0x00000001 // if set, this key was generated in isolation, not imported
 #define NCRYPT_ISOLATED_KEY_FLAG_IMPORT_ONLY          0x00000002 // if set, this key can only be used for importing other keys
 
+#if (NTDDI_VERSION >= NTDDI_WIN11_SV3)
+#define NCRYPT_ISOLATED_KEY_FLAG_PER_BOOT_KEY         0x00000004 // Indicates renewed keys per boot
+#define NCRYPT_VBS_KEY_FLAG_CREATED_IN_ISOLATION      NCRYPT_ISOLATED_KEY_FLAG_CREATED_IN_ISOLATION
+#define NCRYPT_VBS_KEY_FLAG_IMPORT_ONLY               NCRYPT_ISOLATED_KEY_FLAG_IMPORT_ONLY
+#define NCRYPT_VBS_KEY_FLAG_PER_BOOT_KEY              NCRYPT_ISOLATED_KEY_FLAG_PER_BOOT_KEY
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_SV3)
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_SV4)
+// Indicates that the key may be used to import ephemeral keys. This is useful in pkcs11 import
+#define NCRYPT_VBS_KEY_FLAG_IMPORT_EPHEMERAL_ONLY     0x00000008
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_SV4)
 #define NCRYPT_ISOLATED_KEY_ATTESTED_ATTRIBUTES_V0 0
 #define NCRYPT_ISOLATED_KEY_ATTESTED_ATTRIBUTES_CURRENT_VERSION NCRYPT_ISOLATED_KEY_ATTESTED_ATTRIBUTES_V0
 
 typedef struct _NCRYPT_ISOLATED_KEY_ATTESTED_ATTRIBUTES
 {
    ULONG Version; // set to NCRYPT_ISOLATED_KEY_ATTESTED_ATTRIBUTES_V0
-   ULONG Flags;   // NCRYPT_ISOLATED_KEY_FLAG_ flags
+   ULONG Flags;   // NCRYPT_VBS_KEY_FLAG_... flags
    ULONG cbPublicKeyBlob;
    // pbPublicKeyBlob[cbPublicKeyBlob] - exported public key
 } NCRYPT_ISOLATED_KEY_ATTESTED_ATTRIBUTES, *PNCRYPT_ISOLATED_KEY_ATTESTED_ATTRIBUTES;
 
-#define NCRYPT_VSM_KEY_ATTESTATION_STATEMENT_V0 0
-#define NCRYPT_VSM_KEY_ATTESTATION_STATEMENT_CURRENT_VERSION NCRYPT_VSM_KEY_ATTESTATION_STATEMENT_V0
+#if (NTDDI_VERSION >= NTDDI_WIN11_SV3)
 
-typedef struct _NCRYPT_VSM_KEY_ATTESTATION_STATEMENT
-{
-    ULONG Magic;        // {'I', 'M', 'S', 'V'} - 'VSMI' for VSM Isolated
-    ULONG Version;      // Set to NCRYPT_VSM_KEY_ATTESTATION_STATEMENT_CURRENT_VERSION
-    ULONG cbSignature;  // Secure kernel signature over the isolation report
-    ULONG cbReport;     // Key isolation report from the secure kernel
-    ULONG cbAttributes; // Attributes of the isolated key including public key blob
-    // UCHAR Signature[cbSignature]    -- Secure kernel signature of the report
-    // UCHAR Report[cbReport]          -- Secure kernel report including hash of Attributes
-    // UCHAR Attributes[cbAttributes]  -- Trustlet-reported attributes of the key
-} NCRYPT_VSM_KEY_ATTESTATION_STATEMENT, *PNCRYPT_VSM_KEY_ATTESTATION_STATEMENT;
+#define NCRYPT_VBS_KEY_ATTESTED_ATTRIBUTES                 NCRYPT_ISOLATED_KEY_ATTESTED_ATTRIBUTES
+#define PNCRYPT_VBS_KEY_ATTESTED_ATTRIBUTES                PNCRYPT_ISOLATED_KEY_ATTESTED_ATTRIBUTES
+#define NCRYPT_VBS_KEY_ATTESTED_ATTRIBUTES_CURRENT_VERSION NCRYPT_ISOLATED_KEY_ATTESTED_ATTRIBUTES_CURRENT_VERSION
 
-// Buffer contents for NCryptVerifyClaim (for buffer type NCRYPTBUFFER_ISOLATED_KEY_ATTESTATION_CLAIM_RESTRICTIONS)
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_SV3)
 
-#define NCRYPT_VSM_KEY_ATTESTATION_CLAIM_RESTRICTIONS_V0 0
-#define NCRYPT_VSM_KEY_ATTESTATION_CLAIM_RESTRICTIONS_CURRENT_VERSION NCRYPT_VSM_KEY_ATTESTATION_CLAIM_RESTRICTIONS_V0
-
-#pragma warning(disable:4214) // bit fields type other than int
-typedef struct _NCRYPT_VSM_KEY_ATTESTATION_CLAIM_RESTRICTIONS
-{
-    ULONG Version;            // Set to NCRYPT_VSM_KEY_ATTESTATION_CLAIM_RESTRICTIONS_V0
-    ULONGLONG TrustletId;     // Trustlet type
-    ULONG MinSvn;             // Minimum acceptable trustlet SVN, 0 if don't care
-    ULONG FlagsMask;          // Which of NCRYPT_ISOLATED_KEY_ flags to check
-    ULONG FlagsExpected;      // Expected values of flags inside the mask
-    ULONG AllowDebugging : 1; // Is it okay for the trustlet to be debugged, 0 if no
-    ULONG Reserved : 31;      // Future extension area, must be 0
-} NCRYPT_VSM_KEY_ATTESTATION_CLAIM_RESTRICTIONS, *PNCRYPT_VSM_KEY_ATTESTATION_CLAIM_RESTRICTIONS;
 #pragma warning(default:4214) // bit fields type other than int
 
 // Structures to assist with importation of isolated keys
@@ -428,7 +438,114 @@ typedef struct _NCRYPT_EXPORTED_ISOLATED_KEY_ENVELOPE
     // UCHAR IsolatedKeyBlob[Header.cbIsolatedKey] -- AES-GCM encrypted key to import
 } NCRYPT_EXPORTED_ISOLATED_KEY_ENVELOPE, *PNCRYPT_EXPORTED_ISOLATED_KEY_ENVELOPE;
 
-#endif
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_RS3)
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_RS3) // && (NTDDI_VERSION < NTDDI_WIN11_SV3) // Keep on backward compitability for VSM_KEY_ATTESTATION
+
+#endif // #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_SV3) // NTDDI_WIN11_SV3 is not final
+
+// Header used for claims of type NCRYPT_CLAIM_VBS_ROOT
+#define NCRYPT_VBS_ROOT_ATTESTATION_HEADER_V0 0
+#define NCRYPT_VBS_ROOT_ATTESTATION_HEADER_CURRENT_VERSION NCRYPT_VBS_ROOT_ATTESTATION_HEADER_V0
+#define VBS_ROOT_ATTESTATION_HEADER_MAGIC 0x48435256 // 'VRCH' = 0x56, 0x52, 0x43, 0x48.
+
+typedef struct _NCRYPT_VBS_ROOT_ATTESTATION_HEADER
+{
+    ULONG Magic;        // {'H', 'C', 'R', 'V'} - 'VRCH' for VBS Root Claim Header
+    ULONG Version;      // Set to NCRYPT_VBS_ROOT_ATTESTATION_HEADER_CURRENT_VERSION
+    ULONG cbAttributes; // Number of bytes in attributes of the isolated key (including public key blob )
+    ULONG cbNonce;      // Number of bytes in the provided nonce, can be 0 if nonce doesn't exist
+    ULONG cbReport;     // Number of bytes in key isolation report from the secure kernel
+    ULONG cbSignature;  // Number of bytes in the secure kernel signature over the isolation report
+    // UCHAR Attributes[cbAttributes]  -- Trustlet-reported attributes of the key
+    // UCHAR Nonce[cbNonce]            -- Nonce value to be used when hashing Attributes
+    // UCHAR Report[cbReport]          -- Secure kernel report including hash of Attributes, dwFlags and nonce (if available)
+    // UCHAR Signature[cbSignature]    -- Secure kernel signature of the report
+} NCRYPT_VBS_ROOT_ATTESTATION_HEADER, * PNCRYPT_VBS_ROOT_ATTESTATION_HEADER;
+
+// Padding structure for identity claims
+#define NCRYPT_VBS_IDENTITY_ATTESTATION_PADDING_V0 0
+#define NCRYPT_VBS_IDENTITY_ATTESTATION_PADDING_CURRENT_VERSION NCRYPT_VBS_IDENTITY_ATTESTATION_PADDING_V0
+
+typedef struct _NCRYPT_VBS_IDENTITY_ATTESTATION_PADDING
+{
+    ULONG Version;         // Set to NCRYPT_VBS_IDENTITY_ATTESTATION_PADDING_CURRENT_VERSION
+    ULONG ulPaddingScheme; // Padding scheme of the signing algorithm that was used through claim creation.
+    ULONG cbHashAlg;       // Number of bytes in Unicode name that identifies the cryptographic padding algorithm. This algorithm must be a hashing algorithm.
+    ULONG ulSalt;          // Number of bytes in of the random salt to use for the padding.
+    // UCHAR HashAlg[cbHashAlg]  -- Unicode name of hash algorithm used through attributes signing to create padding
+} NCRYPT_VBS_IDENTITY_ATTESTATION_PADDING, * PNCRYPT_VBS_IDENTITY_ATTESTATION_PADDING;
+
+//  Header used for claims of type NCRYPT_CLAIM_VBS_IDENTITY
+#define NCRYPT_VBS_IDENTITY_ATTESTATION_HEADER_V0 0
+#define NCRYPT_VBS_IDENTITY_ATTESTATION_HEADER_CURRENT_VERSION NCRYPT_VBS_IDENTITY_ATTESTATION_HEADER_V0
+#define VBS_IDENTITY_ATTESTATION_HEADER_MAGIC 0x48434956 // 'VICH' = 0x56, 0x49, 0x43, 0x48.
+
+typedef struct _NCRYPT_VBS_IDENTITY_ATTESTATION_HEADER
+{
+    ULONG Magic;           // {'H', 'C', 'I', 'V'} - 'VICH' for VBS Identity Claim Header
+    ULONG Version;         // Set to NCRYPT_VBS_IDENTITY_ATTESTATION_HEADER_CURRENT_VERSION
+    ULONG cbAttributes;    // Number of bytes in attributes of the isolated key (including public key blob )
+    ULONG cbNonce;         // Number of bytes in the provided nonce, can be 0 if nonce doesn't exist
+    ULONG cbHashAlg;       // Number of bytes in Unicode name of hash algorithm used
+    ULONG cbPadding;       // Padding info (scheme and more) of the signing algorithm that was used through claim creation
+    ULONG cbSignatureAlg;  // Number of bytes in Unicode name of the signing hash algorithm used
+    ULONG cbSignature;     // Number of bytes in the signature over the hash of Attributes, dwFlags and nonce (if available)
+    // UCHAR Attributes[cbAttributes]     -- Trustlet-reported attributes of the subject key blob
+    // UCHAR Nonce[cbNonce]               -- Nonce value to be used when hashing Attributes
+    // UCHAR HashAlg[cbHashAlg]           -- Unicode name of hash algorithm used through attributes signing
+    // UCHAR Padding[cbPadding]           -- Padding information that is set through identity hash signing
+    // UCHAR SignatureAlg[cbSignatureAlg] -- Unicode name of signing algorithm used
+    // UCHAR Signature[cbSignature]       -- Signature over the hash of Attributes and nonce (if available)
+} NCRYPT_VBS_IDENTITY_ATTESTATION_HEADER, * PNCRYPT_VBS_IDENTITY_ATTESTATION_HEADER;
+
+
+#define NCRYPT_VBS_KEY_ATTESTATION_STATEMENT_V1 1
+#define NCRYPT_VBS_KEY_ATTESTATION_STATEMENT_V2 2
+#define NCRYPT_VBS_KEY_ATTESTATION_STATEMENT_CURRENT_VERSION NCRYPT_VBS_KEY_ATTESTATION_STATEMENT_V2
+#define VBS_KEY_ATTESTATION_STATEMENT_MAGIC 0x53414B56 // 'VKAS' = 0x56, 0x4B, 0x41, 0x53.
+
+typedef struct _NCRYPT_VBS_KEY_ATTESTATION_STATEMENT
+{
+    ULONG Magic;        // {'S', 'A', 'K', 'V'} - 'VKAS' for VBS Key Attestation Statement
+    ULONG Version;      // Set to NCRYPT_VBS_KEY_ATTESTATION_STATEMENT_CURRENT_VERSION
+    ULONG ClaimType;    // The claim type in the memory that follows this structure
+    // Root binary data - NCRYPT_VBS_ROOT_ATTESTATION_HEADER
+    // UCHAR Attributes[cbAttributes]  -- Trustlet-reported attributes of the key
+    // UCHAR Nonce[cbNonce]            -- Nonce value to be used when hashing Attributes
+    // UCHAR Report[cbReport]          -- Secure kernel report including hash of Attributes, dwFlags and nonce (if available)
+    // UCHAR Signature[cbSignature]    -- Secure kernel signature of the report
+    // --------------------------------------------------------------------------------------
+    // Identity binary data - NCRYPT_VBS_IDENTITY_ATTESTATION_HEADER
+    // UCHAR Attributes[cbAttributes]      -- Trustlet-reported attributes of the subject key blob
+    // UCHAR Nonce[cbNonce]                -- Nonce value to be used when hashing Attributes
+    // UCHAR HashAlg[cbHashAlg]            -- Unicode name of hash algorithm used through attributes signing
+    // UCHAR Padding[cbPadding]            -- Padding information that is set through identity hash signing
+    // UCHAR SignatureAlg[cbSignatureAlg]  -- Unicode name of signing algorithm used
+    // UCHAR Signature[cbSignature]        -- Signature over the hash of Attributes and nonce (if available)
+} NCRYPT_VBS_KEY_ATTESTATION_STATEMENT, * PNCRYPT_VBS_KEY_ATTESTATION_STATEMENT;
+
+typedef struct _NCRYPT_VBS_ROOT_KEY_ATTESTATION_CLAIM_DETAILS
+{
+    ULONG     ulKeyFlags;                       // NCRYPT_ISOLATED_KEY_ flags
+    ULONGLONG ullTrustletId;                    // Trustlet ID
+    ULONG     ulTrustletSecurityVersion;        // Trustlet Security Version Number
+    ULONG     ulTrustletDebuggable;             // Indicates that the Trustlet can be debugged
+} NCRYPT_VBS_ROOT_KEY_ATTESTATION_CLAIM_DETAILS, * PNCRYPT_VBS_ROOT_KEY_ATTESTATION_CLAIM_DETAILS;
+
+
+typedef struct _NCRYPT_VBS_IDENTITY_KEY_ATTESTATION_CLAIM_DETAILS
+{
+    ULONG    ulKeyFlags;          // NCRYPT_ISOLATED_KEY_ flags
+    LPCWSTR  pszSignatureHashAlg; // A pointer to a Unicode string of the claim signature hash algorithm
+    ULONG    ulPaddingScheme;    // Padding scheme of the signing algorithm that was used through claim creation
+    LPCWSTR  pszPaddingHashAlg;   // A pointer to a Unicode string of the claim padding hash algorithm
+    ULONG    ulPaddingSalt;       // Padding salt of the signing algorithm that was used through claim creation
+} NCRYPT_VBS_IDENTITY_KEY_ATTESTATION_CLAIM_DETAILS, * PNCRYPT_VBS_IDENTITY_KEY_ATTESTATION_CLAIM_DETAILS;
+
+#endif  // (NTDDI_VERSION >= NTDDI_WIN11_SV3)
 
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 
@@ -502,18 +619,26 @@ typedef struct _NCRYPT_TPM_PLATFORM_ATTESTATION_STATEMENT
 #endif // (NTDDI_VERSION >= NTDDI_WINBLUE)
 #if (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
 #define NCRYPT_TREAT_NIST_AS_GENERIC_ECC_FLAG   0x00002000
-#define NCRYPT_NO_CACHED_PASSWORD				0x00004000
-#define	NCRYPT_PROTECT_TO_LOCAL_SYSTEM			0x00008000
+#define NCRYPT_NO_CACHED_PASSWORD               0x00004000
+#define NCRYPT_PROTECT_TO_LOCAL_SYSTEM          0x00008000
 #endif // (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
 #define NCRYPT_REQUIRE_KDS_LRPC_BIND_FLAG       0x20000000
 #define NCRYPT_PERSIST_ONLY_FLAG                0x40000000
 #define NCRYPT_PERSIST_FLAG                     0x80000000
+
 
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 #define NCRYPT_PREFER_VIRTUAL_ISOLATION_FLAG    0x00010000 // NCryptCreatePersistedKey NCryptImportKey
 #define NCRYPT_USE_VIRTUAL_ISOLATION_FLAG       0x00020000 // NCryptCreatePersistedKey NCryptImportKey
 #define NCRYPT_USE_PER_BOOT_KEY_FLAG            0x00040000 // NCryptCreatePersistedKey NCryptImportKey
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS2)
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_SV3)
+#define NCRYPT_PREFER_VBS_FLAG                  NCRYPT_PREFER_VIRTUAL_ISOLATION_FLAG // NCryptCreatePersistedKey NCryptImportKey
+#define NCRYPT_REQUIRE_VBS_FLAG                 NCRYPT_USE_VIRTUAL_ISOLATION_FLAG    // NCryptCreatePersistedKey NCryptImportKey
+#define NCRYPT_USE_VBS_PER_BOOT_KEY_FLAG        NCRYPT_USE_PER_BOOT_KEY_FLAG         // NCryptCreatePersistedKey NCryptImportKey
+#define NCRYPT_VBS_RETURN_CLAIM_DETAILS_FLAG    0x00100000 // NCryptVerifyClaim
+#endif
 
 //
 // Functions used to manage persisted keys.
@@ -621,7 +746,7 @@ NCryptEnumStorageProviders(
 
 
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+#endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 #pragma endregion
 
 SECURITY_STATUS
@@ -672,6 +797,7 @@ NCryptCreatePersistedKey(
 
 // Standard property names.
 #define NCRYPT_NAME_PROPERTY                    L"Name"
+#define NCRYPT_EPHEMERAL_NAME_PROPERTY          L"Ephemeral Name"
 #define NCRYPT_UNIQUE_NAME_PROPERTY             L"Unique Name"
 #define NCRYPT_ALGORITHM_PROPERTY               L"Algorithm Name"
 #define NCRYPT_LENGTH_PROPERTY                  L"Length"
@@ -736,6 +862,16 @@ NCryptCreatePersistedKey(
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
 #define NCRYPT_DISMISS_UI_TIMEOUT_SEC_PROPERTY  L"SmartCardDismissUITimeoutSeconds"
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+#if (NTDDI_VERSION >= NTDDI_WIN11_SV3) // NTDDI_WIN11_SV3 is not final
+#define NCRYPT_VBS_ROOT_PUB_PROPERTY            L"VBS_ROOT_PUB"
+#define NCRYPT_CERTIFICATE_FROM_NVRAM_PROPERTY  L"KeyCertificateFromTpmNvram"
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_SV3)
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_GA)
+#define NCRYPT_PKCS11_KWP_AES_KEY_BITS_PROPERTY   L"Pkcs11AesKeyBits"
+#define NCRYPT_PKCS11_KWP_OAEP_HASH_ALGO_PROPERTY L"Pkcs11OaepHashAlgorithm"
+#define NCRYPT_PKCS11_KWP_OAEP_LABEL_PROPERTY     L"Pkcs11OaepLabel"
+#endif // #if (NTDDI_VERSION >= NTDDI_WIN11_GA)
 
 //
 // Additional property strings specific for the Platform Crypto Provider
@@ -872,7 +1008,7 @@ NCryptCreatePersistedKey(
 #endif // (NTDDI_VERSION >= NTDDI_WIN8)
 
 #if (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
-#define NCRYPT_CHANGEPASSWORD_PROPERTY	NCRYPT_PCP_CHANGEPASSWORD_PROPERTY
+#define NCRYPT_CHANGEPASSWORD_PROPERTY  NCRYPT_PCP_CHANGEPASSWORD_PROPERTY
 #define NCRYPT_ALTERNATE_KEY_STORAGE_LOCATION_PROPERTY  NCRYPT_PCP_ALTERNATE_KEY_STORAGE_LOCATION_PROPERTY
 #define NCRYPT_KEY_ACCESS_POLICY_PROPERTY   L"Key Access Policy"
 #endif // (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
@@ -888,6 +1024,9 @@ NCryptCreatePersistedKey(
 #define NCRYPT_ALLOW_PLAINTEXT_EXPORT_FLAG      0x00000002
 #define NCRYPT_ALLOW_ARCHIVING_FLAG             0x00000004
 #define NCRYPT_ALLOW_PLAINTEXT_ARCHIVING_FLAG   0x00000008
+#if (NTDDI_VERSION >= NTDDI_WIN11_GA)
+#define NCRYPT_ALLOW_PKCS11_RSA_AES_EXPORT_FLAG 0x00000010
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_GA)
 
 // NCRYPT_IMPL_TYPE_PROPERTY property flags.
 #define NCRYPT_IMPL_HARDWARE_FLAG               0x00000001
@@ -903,7 +1042,14 @@ NCryptCreatePersistedKey(
 #define NCRYPT_ALLOW_SIGNING_FLAG               0x00000002
 #define NCRYPT_ALLOW_KEY_AGREEMENT_FLAG         0x00000004
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
-#define NCRYPT_ALLOW_KEY_IMPORT_FLAG            0x00000008
+#define NCRYPT_ALLOW_KEY_ENVELOPE_FLAG          0x00000008
+#define NCRYPT_ALLOW_KEY_IMPORT_FLAG            NCRYPT_ALLOW_KEY_ENVELOPE_FLAG
+#endif
+#if (NTDDI_VERSION >= NTDDI_WIN11_SV3)
+#define NCRYPT_ALLOW_KEY_ATTESTATION_FLAG       0x00000010
+#endif
+#if (NTDDI_VERSION >= NTDDI_WIN11_SV4)
+#define NCRYPT_ALLOW_KEY_IMPORT_EPHEMERAL_FLAG  0x00000020
 #endif
 #define NCRYPT_ALLOW_ALL_USAGES                 0x00ffffff
 
@@ -979,14 +1125,14 @@ typedef struct __NCRYPT_UI_POLICY
 
 #if (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
 #define NCRYPT_KEY_ACCESS_POLICY_VERSION 1
-#define NCRYPT_ALLOW_SILENT_KEY_ACCESS	 0x00000001
+#define NCRYPT_ALLOW_SILENT_KEY_ACCESS   0x00000001
 typedef struct __NCRYPT_KEY_ACCESS_POLICY_BLOB
 {
-	DWORD   dwVersion;
-	DWORD   dwPolicyFlags;
-	DWORD	cbUserSid;
-    DWORD	cbApplicationSid;
-	//  User Sid
+    DWORD   dwVersion;
+    DWORD   dwPolicyFlags;
+    DWORD   cbUserSid;
+    DWORD   cbApplicationSid;
+    //  User Sid
     //  Application Sid
 }NCRYPT_KEY_ACCESS_POLICY_BLOB;
 #endif // (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
@@ -1140,6 +1286,17 @@ typedef struct NCRYPT_TPM_LOADABLE_KEY_BLOB_HEADER
 #define NCRYPT_TPM_LOADABLE_KEY_BLOB L"PcpTpmProtectedKeyBlob"
 #define NCRYPT_TPM_LOADABLE_KEY_BLOB_MAGIC 0x4D54504B //'MTPK'
 
+typedef struct NCRYPT_TPM_PERSISTENT_KEY_BLOB_HEADER
+{
+    DWORD magic;
+    DWORD cbHeader;
+    DWORD tpmHandle;
+} NCRYPT_TPM_PERSISTENT_KEY_BLOB_HEADER, *PNCRYPT_TPM_PERSISTENT_KEY_BLOB_HEADER;
+
+#define NCRYPT_TPM_PERSISTENT_KEY_BLOB_MIN_SIZE sizeof(NCRYPT_TPM_PERSISTENT_KEY_BLOB_HEADER)
+#define NCRYPT_TPM_PERSISTENT_KEY_BLOB L"PcpTpmPersistentKeyBlob"
+#define NCRYPT_TPM_PERSISTENT_KEY_BLOB_MAGIC 0x4D54504B //'MTPE'
+
 #define NCRYPT_PKCS7_ENVELOPE_BLOB      L"PKCS7_ENVELOPE"
 #define NCRYPT_PKCS8_PRIVATE_KEY_BLOB   L"PKCS8_PRIVATEKEY"
 #define NCRYPT_OPAQUETRANSPORT_BLOB     L"OpaqueTransport"
@@ -1245,7 +1402,7 @@ NCryptTranslateHandle(
     _In_opt_ DWORD  dwLegacyKeySpec,
     _In_    DWORD   dwFlags);
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+#endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 #pragma endregion
 
 
@@ -1267,7 +1424,7 @@ NCryptNotifyChangeKey(
 
 
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+#endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 #pragma endregion
 
 _Check_return_
@@ -1361,5 +1518,4 @@ NCryptVerifyClaim(
 #endif
 
 #endif // __NCRYPT_H__
-
 

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -567,7 +567,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IErrorReceivedEventArgs = _uuidof(IErrorReceivedEventArgs);
+                MIDL_CONST_ID IID& IID_IErrorReceivedEventArgs = __uuidof(IErrorReceivedEventArgs);
             } /* SerialCommunication */
         } /* Devices */
     } /* Windows */
@@ -603,7 +603,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPinChangedEventArgs = _uuidof(IPinChangedEventArgs);
+                MIDL_CONST_ID IID& IID_IPinChangedEventArgs = __uuidof(IPinChangedEventArgs);
             } /* SerialCommunication */
         } /* Devices */
     } /* Windows */
@@ -740,7 +740,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISerialDevice = _uuidof(ISerialDevice);
+                MIDL_CONST_ID IID& IID_ISerialDevice = __uuidof(ISerialDevice);
             } /* SerialCommunication */
         } /* Devices */
     } /* Windows */
@@ -789,7 +789,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISerialDeviceStatics = _uuidof(ISerialDeviceStatics);
+                MIDL_CONST_ID IID& IID_ISerialDeviceStatics = __uuidof(ISerialDeviceStatics);
             } /* SerialCommunication */
         } /* Devices */
     } /* Windows */

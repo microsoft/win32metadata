@@ -195,6 +195,8 @@ namespace Windows
 {
     namespace Foundation
     {
+        typedef struct DateTime DateTime;
+
         typedef struct TimeSpan TimeSpan;
 
         apicontract UniversalApiContract;
@@ -291,6 +293,8 @@ namespace Windows
 
             typedef enum DeviceTriggerResult DeviceTriggerResult;
 
+            typedef enum EnergyUseLevel EnergyUseLevel;
+
             typedef enum LocationTriggerType LocationTriggerType;
 
             typedef enum MediaProcessingTriggerResult MediaProcessingTriggerResult;
@@ -343,6 +347,10 @@ namespace Windows
 
             interface IBackgroundTaskBuilder5;
 
+            interface IBackgroundTaskBuilder6;
+
+            interface IBackgroundTaskBuilderStatics;
+
             interface IBackgroundTaskCompletedEventArgs;
 
             interface IBackgroundTaskDeferral;
@@ -361,6 +369,8 @@ namespace Windows
 
             interface IBackgroundTaskRegistration3;
 
+            interface IBackgroundTaskRegistration4;
+
             interface IBackgroundTaskRegistrationGroup;
 
             interface IBackgroundTaskRegistrationGroupFactory;
@@ -372,6 +382,8 @@ namespace Windows
             interface IBackgroundTrigger;
 
             interface IBackgroundWorkCostStatics;
+
+            interface IBackgroundWorkCostStatics2;
 
             interface IBluetoothLEAdvertisementPublisherTrigger;
 
@@ -801,6 +813,15 @@ namespace Windows
                 LowBattery     = 3
             };
 
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            enum EnergyUseLevel
+            {
+                Unknown           = 0,
+                UnderHalfOfBudget = 1,
+                OverHalfOfBudget  = 2,
+                OverBudget        = 3
+            };
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             enum LocationTriggerType
             {
@@ -1060,6 +1081,25 @@ namespace Windows
                 HRESULT SetTaskEntryPointClsid([in] GUID TaskEntryPoint);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.ApplicationModel.Background.BackgroundTaskBuilder)]
+            [uuid(80B47B17-EC8B-5653-850B-7508A01F52E7)]
+            interface IBackgroundTaskBuilder6 : IInspectable
+            {
+                [propget] HRESULT AllowRunningTaskInStandby([out] [retval] boolean* value);
+                [propput] HRESULT AllowRunningTaskInStandby([in] boolean value);
+                HRESULT Validate([out] [retval] boolean* result);
+                HRESULT Register([in] HSTRING taskName, [out] [retval] Windows.ApplicationModel.Background.BackgroundTaskRegistration** result);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.ApplicationModel.Background.BackgroundTaskBuilder)]
+            [uuid(D1EB5046-06F2-55B4-9BB7-A6457EBF3300)]
+            interface IBackgroundTaskBuilderStatics : IInspectable
+            {
+                [propget] HRESULT IsRunningTaskInStandbySupported([out] [retval] boolean* value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [exclusiveto(Windows.ApplicationModel.Background.BackgroundTaskCompletedEventArgs)]
             [uuid(565D25CF-F209-48F4-9967-2B184F7BFBF0)]
@@ -1150,6 +1190,15 @@ namespace Windows
                 [propget] HRESULT TaskGroup([out] [retval] Windows.ApplicationModel.Background.BackgroundTaskRegistrationGroup** value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.ApplicationModel.Background.BackgroundTaskRegistration)]
+            [uuid(169C09C9-B0DE-5576-A05B-A02067989879)]
+            interface IBackgroundTaskRegistration4 : IInspectable
+            {
+                [propget] HRESULT TaskLastThrottledInStandbyTimestamp([out] [retval] Windows.Foundation.DateTime* value);
+                [propget] HRESULT AppEnergyUsePredictionContribution([out] [retval] DOUBLE* value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]
             [exclusiveto(Windows.ApplicationModel.Background.BackgroundTaskRegistrationGroup)]
             [uuid(2AB1919A-871B-4167-8A76-055CD67B5B23)]
@@ -1200,6 +1249,16 @@ namespace Windows
             interface IBackgroundWorkCostStatics : IInspectable
             {
                 [propget] HRESULT CurrentBackgroundWorkCost([out] [retval] Windows.ApplicationModel.Background.BackgroundWorkCostValue* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.ApplicationModel.Background.BackgroundWorkCost)]
+            [uuid(D868C976-81F6-57C8-AB2B-400B749E21D6)]
+            interface IBackgroundWorkCostStatics2 : IInspectable
+            {
+                [propget] HRESULT AppEnergyUseLevel([out] [retval] Windows.ApplicationModel.Background.EnergyUseLevel* value);
+                [propget] HRESULT AppEnergyUsePrediction([out] [retval] Windows.ApplicationModel.Background.EnergyUseLevel* value);
+                [propget] HRESULT AppLastThrottledInStandbyTimestamp([out] [retval] Windows.Foundation.DateTime* value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -1868,6 +1927,7 @@ namespace Windows
             [activatable(Windows.Foundation.UniversalApiContract, 1.0)]
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [marshaling_behavior(standard)]
+            [static(Windows.ApplicationModel.Background.IBackgroundTaskBuilderStatics, Windows.Foundation.UniversalApiContract, 15.0)]
             [threading(mta)]
             runtimeclass BackgroundTaskBuilder
             {
@@ -1876,6 +1936,7 @@ namespace Windows
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)] interface Windows.ApplicationModel.Background.IBackgroundTaskBuilder3;
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)] interface Windows.ApplicationModel.Background.IBackgroundTaskBuilder4;
                 [contract(Windows.Foundation.UniversalApiContract, 10.0)] interface Windows.ApplicationModel.Background.IBackgroundTaskBuilder5;
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.ApplicationModel.Background.IBackgroundTaskBuilder6;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -1912,6 +1973,7 @@ namespace Windows
                 [default] interface Windows.ApplicationModel.Background.IBackgroundTaskRegistration;
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)] interface Windows.ApplicationModel.Background.IBackgroundTaskRegistration2;
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)] interface Windows.ApplicationModel.Background.IBackgroundTaskRegistration3;
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.ApplicationModel.Background.IBackgroundTaskRegistration4;
             }
 
             [activatable(Windows.ApplicationModel.Background.IBackgroundTaskRegistrationGroupFactory, Windows.Foundation.UniversalApiContract, 4.0)]
@@ -1926,6 +1988,7 @@ namespace Windows
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [marshaling_behavior(agile)]
             [static(Windows.ApplicationModel.Background.IBackgroundWorkCostStatics, Windows.Foundation.UniversalApiContract, 1.0)]
+            [static(Windows.ApplicationModel.Background.IBackgroundWorkCostStatics2, Windows.Foundation.UniversalApiContract, 15.0)]
             [threading(both)]
             runtimeclass BackgroundWorkCost
             {

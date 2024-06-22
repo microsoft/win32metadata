@@ -148,6 +148,11 @@ cpp_quote("#define DPX_OPTION_HARDLINK_ASSETS L\"hardlink_assets\"")
 #define DPX_OPTION_COMPLETE_SELF_COPIES L"complete_self_copies"
 cpp_quote("#define DPX_OPTION_COMPLETE_SELF_COPIES L\"complete_self_copies\"")
 
+#define DPX_OPTION_IGNORE_FNF_WARNINGS L"ignore_filenotfound_warnings"
+cpp_quote("#define DPX_OPTION_IGNORE_FNF_WARNINGS L\"ignore_filenotfound_warnings\"")
+
+#define DPX_OPTION_SKIP_EXTRACTION_FOR_FILE L"skip_extraction_for_file"
+cpp_quote( "#define DPX_OPTION_SKIP_EXTRACTION_FOR_FILE L\"skip_extraction_for_file\"" )
 
 [ uuid( ddc1b711-0e55-452f-838e-d1505b866e2b ), object, pointer_default( unique ) ]
 interface IDpxJob : IUnknown

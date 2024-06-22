@@ -411,13 +411,19 @@ typedef struct _SCHANNEL_CRED
     // then you must define UNICODE_STRING and PUNICODE_STRING
     // or include Ntdef.h, SubAuth.h or Winternl.h.
 
+// These values distinguish between the different RSA padding modes and can
+// be specified in the CRYPTO_SETTINGS strCngAlgId field, in addition to the
+// CNG algorithm identifiers.
+#define SCHANNEL_RSA_PSS_PADDING_ALGORITHM L"SCH_RSA_PSS_PAD"
+#define SCHANNEL_RSA_PKCS_PADDING_ALGORITHM L"SCH_RSA_PKCS_PAD"
+
 typedef enum _eTlsAlgorithmUsage
 {
     TlsParametersCngAlgUsageKeyExchange,          // Key exchange algorithm. RSA, ECHDE, DHE, etc.
     TlsParametersCngAlgUsageSignature,            // Signature algorithm. RSA, DSA, ECDSA, etc.
     TlsParametersCngAlgUsageCipher,               // Encryption algorithm. AES, DES, RC4, etc.
     TlsParametersCngAlgUsageDigest,               // Digest of cipher suite. SHA1, SHA256, SHA384, etc.
-    TlsParametersCngAlgUsageCertSig               // Signature and/or hash used to sign certificate. RSA, DSA, ECDSA, SHA1, SHA256, etc.
+    TlsParametersCngAlgUsageCertSig               // Signature, hash and/or padding mode components of a TLS signature suite. RSA, DSA, ECDSA, SHA1, SHA256, PSS, etc.
 } eTlsAlgorithmUsage;
 
 //

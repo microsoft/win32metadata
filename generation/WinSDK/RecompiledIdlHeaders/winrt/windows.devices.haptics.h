@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -637,7 +637,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IKnownSimpleHapticsControllerWaveformsStatics = _uuidof(IKnownSimpleHapticsControllerWaveformsStatics);
+                MIDL_CONST_ID IID& IID_IKnownSimpleHapticsControllerWaveformsStatics = __uuidof(IKnownSimpleHapticsControllerWaveformsStatics);
             } /* Haptics */
         } /* Devices */
     } /* Windows */
@@ -700,7 +700,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IKnownSimpleHapticsControllerWaveformsStatics2 = _uuidof(IKnownSimpleHapticsControllerWaveformsStatics2);
+                MIDL_CONST_ID IID& IID_IKnownSimpleHapticsControllerWaveformsStatics2 = __uuidof(IKnownSimpleHapticsControllerWaveformsStatics2);
             } /* Haptics */
         } /* Devices */
     } /* Windows */
@@ -770,7 +770,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISimpleHapticsController = _uuidof(ISimpleHapticsController);
+                MIDL_CONST_ID IID& IID_ISimpleHapticsController = __uuidof(ISimpleHapticsController);
             } /* Haptics */
         } /* Devices */
     } /* Windows */
@@ -809,7 +809,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ISimpleHapticsControllerFeedback = _uuidof(ISimpleHapticsControllerFeedback);
+                MIDL_CONST_ID IID& IID_ISimpleHapticsControllerFeedback = __uuidof(ISimpleHapticsControllerFeedback);
             } /* Haptics */
         } /* Devices */
     } /* Windows */
@@ -848,7 +848,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVibrationDevice = _uuidof(IVibrationDevice);
+                MIDL_CONST_ID IID& IID_IVibrationDevice = __uuidof(IVibrationDevice);
             } /* Haptics */
         } /* Devices */
     } /* Windows */
@@ -897,7 +897,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVibrationDeviceStatics = _uuidof(IVibrationDeviceStatics);
+                MIDL_CONST_ID IID& IID_IVibrationDeviceStatics = __uuidof(IVibrationDeviceStatics);
             } /* Haptics */
         } /* Devices */
     } /* Windows */

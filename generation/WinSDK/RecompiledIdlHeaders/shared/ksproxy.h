@@ -724,7 +724,7 @@ DEFINE_GUID(IID_IKsPropertySet, STATIC_IID_IKsPropertySet);
 #if !defined(__cplusplus) || _MSC_VER < 1100
 DEFINE_GUID(CLSID_Proxy, STATIC_CLSID_Proxy);
 #else  // defined(__cplusplus) && _MSC_VER >= 1100
-DECLSPEC_UUID("17CCA71B-ECD7-11D0-B908-00A0C9223196") CLSID_Proxy;
+class DECLSPEC_UUID("17CCA71B-ECD7-11D0-B908-00A0C9223196") CLSID_Proxy;
 #endif  // defined(__cplusplus) && _MSC_VER >= 1100
 
 #endif // !_KS_

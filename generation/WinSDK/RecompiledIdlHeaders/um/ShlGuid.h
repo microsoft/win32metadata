@@ -822,6 +822,9 @@ DEFINE_GUID(FOLDERTYPEID_StorageProviderMusic,     0x672ECD7E, 0xAF04, 0x4399, 0
 // FOLDERTYPEID_StorageProviderVideos:    {51294DA1-D7B1-485b-9E9A-17CFFE33E187}
 DEFINE_GUID(FOLDERTYPEID_StorageProviderVideos,    0x51294DA1, 0xD7B1, 0x485b, 0x9E, 0x9A, 0x17, 0xCF, 0xFE, 0x33, 0xE1, 0x87);
 
+// FOLDERTYPEID_VersionControl: {69F1E26B-EC64-4280-BC83-F1EB887EC35A}
+DEFINE_GUID(FOLDERTYPEID_VersionControl, 0x69f1e26b, 0xec64, 0x4280, 0xbc, 0x83, 0xf1, 0xeb, 0x88, 0x7e, 0xc3, 0x5a);
+
 
 //
 // Sync Manager object IDs.  These are GUIDs used in calls to the GetObject()

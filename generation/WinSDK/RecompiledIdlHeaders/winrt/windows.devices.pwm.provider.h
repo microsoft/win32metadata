@@ -279,7 +279,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPwmControllerProvider = _uuidof(IPwmControllerProvider);
+                    MIDL_CONST_ID IID& IID_IPwmControllerProvider = __uuidof(IPwmControllerProvider);
                 } /* Provider */
             } /* Pwm */
         } /* Devices */
@@ -315,7 +315,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPwmProvider = _uuidof(IPwmProvider);
+                    MIDL_CONST_ID IID& IID_IPwmProvider = __uuidof(IPwmProvider);
                 } /* Provider */
             } /* Pwm */
         } /* Devices */

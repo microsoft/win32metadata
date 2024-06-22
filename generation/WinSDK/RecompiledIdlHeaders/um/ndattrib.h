@@ -57,8 +57,7 @@ extern "C"{
 
 //+--------------------------------------------------------------------------
 //
-//  Microsoft Windows
-//  Copyright (C) Microsoft Corporation, 1992-2004.
+// Copyright (C) Microsoft Corporation. All rights reserved.
 //
 //---------------------------------------------------------------------------
 #include <winapifamily.h>

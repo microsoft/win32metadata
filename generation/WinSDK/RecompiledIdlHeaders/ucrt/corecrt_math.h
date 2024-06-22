@@ -81,20 +81,43 @@ _CRT_BEGIN_C_HEADER
     #endif
 #endif
 
+#if !defined __cplusplus && !defined __midl 
+inline float __ucrt_int_to_float(int i)
+{
+    union {
+        int i;
+        float f;
+    } __my_int_to_float;
+
+    __my_int_to_float.i = i;
+    return __my_int_to_float.f;
+}
+#endif
+
 #ifndef _HUGE_ENUF
     #define _HUGE_ENUF  1e+300  // _HUGE_ENUF*_HUGE_ENUF must overflow
 #endif
-
+#ifndef _UCRT_LEGACY_INFINITY
+#define INFINITY   ((float)(_HUGE_ENUF))
+#else
 #define INFINITY   ((float)(_HUGE_ENUF * _HUGE_ENUF))
+#endif
 #define HUGE_VAL   ((double)INFINITY)
 #define HUGE_VALF  ((float)INFINITY)
 #define HUGE_VALL  ((long double)INFINITY)
-#ifndef _UCRT_NEGATIVE_NAN
-// This operation creates a negative NAN adding a - to make it positive
-#define NAN        (-(float)(INFINITY * 0.0F))
+
+#if defined _UCRT_NOISY_NAN || defined __midl
+#define _UCRT_NAN (-(float)(((float)(_HUGE_ENUF * _HUGE_ENUF)) * 0.0F))
+#elif defined __cplusplus
+#define _UCRT_NAN (__builtin_nanf("0"))
 #else
-// Keep this for backwards compatibility
-#define NAN        ((float)(INFINITY * 0.0F))
+#define _UCRT_NAN (__ucrt_int_to_float(0x7FC00000))
+#endif
+
+#ifdef _UCRT_NEGATIVE_NAN
+#define NAN (-_UCRT_NAN)
+#else
+#define NAN _UCRT_NAN
 #endif
 
 #define _DENORM    (-2)
@@ -665,15 +688,16 @@ extern "C++"
 
     #endif
 
-    #if defined _M_ARM || defined _M_ARM64 || defined _M_HYBRID_X86_ARM64 || defined _M_ARM64EC
+    #if defined _M_ARM || defined _M_ARM64 || defined _M_HYBRID_X86_ARM64
 
         _Check_return_ _CRT_JIT_INTRINSIC _ACRTIMP float __cdecl fabsf(_In_ float  _X);
 
-    #if defined _M_ARM64EC
-    #pragma intrinsic(fabsf)
-    #endif
-
     #else
+
+    #if defined _M_ARM64EC
+        _Check_return_ __inline float __CRTDECL fabsf(_In_ float _X);
+        #pragma function(fabsf)
+    #endif
 
         _Check_return_ __inline float __CRTDECL fabsf(_In_ float _X)
         {

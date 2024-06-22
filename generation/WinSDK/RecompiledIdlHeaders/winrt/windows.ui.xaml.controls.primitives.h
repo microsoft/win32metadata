@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -4827,7 +4827,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IDragCompletedEventHandler = _uuidof(IDragCompletedEventHandler);
+                        MIDL_CONST_ID IID& IID_IDragCompletedEventHandler = __uuidof(IDragCompletedEventHandler);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -4865,7 +4865,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IDragDeltaEventHandler = _uuidof(IDragDeltaEventHandler);
+                        MIDL_CONST_ID IID& IID_IDragDeltaEventHandler = __uuidof(IDragDeltaEventHandler);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -4903,7 +4903,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IDragStartedEventHandler = _uuidof(IDragStartedEventHandler);
+                        MIDL_CONST_ID IID& IID_IDragStartedEventHandler = __uuidof(IDragStartedEventHandler);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -4941,7 +4941,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IItemsChangedEventHandler = _uuidof(IItemsChangedEventHandler);
+                        MIDL_CONST_ID IID& IID_IItemsChangedEventHandler = __uuidof(IItemsChangedEventHandler);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -4979,7 +4979,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IRangeBaseValueChangedEventHandler = _uuidof(IRangeBaseValueChangedEventHandler);
+                        MIDL_CONST_ID IID& IID_IRangeBaseValueChangedEventHandler = __uuidof(IRangeBaseValueChangedEventHandler);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -5017,7 +5017,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IScrollEventHandler = _uuidof(IScrollEventHandler);
+                        MIDL_CONST_ID IID& IID_IScrollEventHandler = __uuidof(IScrollEventHandler);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -5057,7 +5057,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAppBarButtonTemplateSettings = _uuidof(IAppBarButtonTemplateSettings);
+                        MIDL_CONST_ID IID& IID_IAppBarButtonTemplateSettings = __uuidof(IAppBarButtonTemplateSettings);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -5115,7 +5115,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAppBarTemplateSettings = _uuidof(IAppBarTemplateSettings);
+                        MIDL_CONST_ID IID& IID_IAppBarTemplateSettings = __uuidof(IAppBarTemplateSettings);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -5161,7 +5161,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAppBarTemplateSettings2 = _uuidof(IAppBarTemplateSettings2);
+                        MIDL_CONST_ID IID& IID_IAppBarTemplateSettings2 = __uuidof(IAppBarTemplateSettings2);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -5201,7 +5201,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IAppBarToggleButtonTemplateSettings = _uuidof(IAppBarToggleButtonTemplateSettings);
+                        MIDL_CONST_ID IID& IID_IAppBarToggleButtonTemplateSettings = __uuidof(IAppBarToggleButtonTemplateSettings);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -5269,7 +5269,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IButtonBase = _uuidof(IButtonBase);
+                        MIDL_CONST_ID IID& IID_IButtonBase = __uuidof(IButtonBase);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -5311,7 +5311,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IButtonBaseFactory = _uuidof(IButtonBaseFactory);
+                        MIDL_CONST_ID IID& IID_IButtonBaseFactory = __uuidof(IButtonBaseFactory);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -5363,7 +5363,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IButtonBaseStatics = _uuidof(IButtonBaseStatics);
+                        MIDL_CONST_ID IID& IID_IButtonBaseStatics = __uuidof(IButtonBaseStatics);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -5400,7 +5400,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICalendarPanel = _uuidof(ICalendarPanel);
+                        MIDL_CONST_ID IID& IID_ICalendarPanel = __uuidof(ICalendarPanel);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -5482,7 +5482,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICalendarViewTemplateSettings = _uuidof(ICalendarViewTemplateSettings);
+                        MIDL_CONST_ID IID& IID_ICalendarViewTemplateSettings = __uuidof(ICalendarViewTemplateSettings);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -5578,7 +5578,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICarouselPanel = _uuidof(ICarouselPanel);
+                        MIDL_CONST_ID IID& IID_ICarouselPanel = __uuidof(ICarouselPanel);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -5620,7 +5620,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICarouselPanelFactory = _uuidof(ICarouselPanelFactory);
+                        MIDL_CONST_ID IID& IID_ICarouselPanelFactory = __uuidof(ICarouselPanelFactory);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -5663,7 +5663,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IColorPickerSlider = _uuidof(IColorPickerSlider);
+                        MIDL_CONST_ID IID& IID_IColorPickerSlider = __uuidof(IColorPickerSlider);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -5705,7 +5705,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IColorPickerSliderFactory = _uuidof(IColorPickerSliderFactory);
+                        MIDL_CONST_ID IID& IID_IColorPickerSliderFactory = __uuidof(IColorPickerSliderFactory);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -5745,7 +5745,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IColorPickerSliderStatics = _uuidof(IColorPickerSliderStatics);
+                        MIDL_CONST_ID IID& IID_IColorPickerSliderStatics = __uuidof(IColorPickerSliderStatics);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -5849,7 +5849,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IColorSpectrum = _uuidof(IColorSpectrum);
+                        MIDL_CONST_ID IID& IID_IColorSpectrum = __uuidof(IColorSpectrum);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -5891,7 +5891,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IColorSpectrumFactory = _uuidof(IColorSpectrumFactory);
+                        MIDL_CONST_ID IID& IID_IColorSpectrumFactory = __uuidof(IColorSpectrumFactory);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -5958,7 +5958,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IColorSpectrumStatics = _uuidof(IColorSpectrumStatics);
+                        MIDL_CONST_ID IID& IID_IColorSpectrumStatics = __uuidof(IColorSpectrumStatics);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -6007,7 +6007,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IComboBoxTemplateSettings = _uuidof(IComboBoxTemplateSettings);
+                        MIDL_CONST_ID IID& IID_IComboBoxTemplateSettings = __uuidof(IComboBoxTemplateSettings);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -6047,7 +6047,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IComboBoxTemplateSettings2 = _uuidof(IComboBoxTemplateSettings2);
+                        MIDL_CONST_ID IID& IID_IComboBoxTemplateSettings2 = __uuidof(IComboBoxTemplateSettings2);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -6087,7 +6087,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICommandBarFlyoutCommandBar = _uuidof(ICommandBarFlyoutCommandBar);
+                        MIDL_CONST_ID IID& IID_ICommandBarFlyoutCommandBar = __uuidof(ICommandBarFlyoutCommandBar);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -6129,7 +6129,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICommandBarFlyoutCommandBarFactory = _uuidof(ICommandBarFlyoutCommandBarFactory);
+                        MIDL_CONST_ID IID& IID_ICommandBarFlyoutCommandBarFactory = __uuidof(ICommandBarFlyoutCommandBarFactory);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -6226,7 +6226,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICommandBarFlyoutCommandBarTemplateSettings = _uuidof(ICommandBarFlyoutCommandBarTemplateSettings);
+                        MIDL_CONST_ID IID& IID_ICommandBarFlyoutCommandBarTemplateSettings = __uuidof(ICommandBarFlyoutCommandBarTemplateSettings);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -6284,7 +6284,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICommandBarTemplateSettings = _uuidof(ICommandBarTemplateSettings);
+                        MIDL_CONST_ID IID& IID_ICommandBarTemplateSettings = __uuidof(ICommandBarTemplateSettings);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -6324,7 +6324,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICommandBarTemplateSettings2 = _uuidof(ICommandBarTemplateSettings2);
+                        MIDL_CONST_ID IID& IID_ICommandBarTemplateSettings2 = __uuidof(ICommandBarTemplateSettings2);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -6364,7 +6364,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICommandBarTemplateSettings3 = _uuidof(ICommandBarTemplateSettings3);
+                        MIDL_CONST_ID IID& IID_ICommandBarTemplateSettings3 = __uuidof(ICommandBarTemplateSettings3);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -6410,7 +6410,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ICommandBarTemplateSettings4 = _uuidof(ICommandBarTemplateSettings4);
+                        MIDL_CONST_ID IID& IID_ICommandBarTemplateSettings4 = __uuidof(ICommandBarTemplateSettings4);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -6456,7 +6456,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IDragCompletedEventArgs = _uuidof(IDragCompletedEventArgs);
+                        MIDL_CONST_ID IID& IID_IDragCompletedEventArgs = __uuidof(IDragCompletedEventArgs);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -6501,7 +6501,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IDragCompletedEventArgsFactory = _uuidof(IDragCompletedEventArgsFactory);
+                        MIDL_CONST_ID IID& IID_IDragCompletedEventArgsFactory = __uuidof(IDragCompletedEventArgsFactory);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -6544,7 +6544,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IDragDeltaEventArgs = _uuidof(IDragDeltaEventArgs);
+                        MIDL_CONST_ID IID& IID_IDragDeltaEventArgs = __uuidof(IDragDeltaEventArgs);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -6588,7 +6588,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IDragDeltaEventArgsFactory = _uuidof(IDragDeltaEventArgsFactory);
+                        MIDL_CONST_ID IID& IID_IDragDeltaEventArgsFactory = __uuidof(IDragDeltaEventArgsFactory);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -6631,7 +6631,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IDragStartedEventArgs = _uuidof(IDragStartedEventArgs);
+                        MIDL_CONST_ID IID& IID_IDragStartedEventArgs = __uuidof(IDragStartedEventArgs);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -6675,7 +6675,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IDragStartedEventArgsFactory = _uuidof(IDragStartedEventArgsFactory);
+                        MIDL_CONST_ID IID& IID_IDragStartedEventArgsFactory = __uuidof(IDragStartedEventArgsFactory);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -6743,7 +6743,7 @@ namespace ABI {
                             virtual HRESULT STDMETHODCALLTYPE Hide(void) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlyoutBase = _uuidof(IFlyoutBase);
+                        MIDL_CONST_ID IID& IID_IFlyoutBase = __uuidof(IFlyoutBase);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -6814,7 +6814,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlyoutBase2 = _uuidof(IFlyoutBase2);
+                        MIDL_CONST_ID IID& IID_IFlyoutBase2 = __uuidof(IFlyoutBase2);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -6857,7 +6857,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlyoutBase3 = _uuidof(IFlyoutBase3);
+                        MIDL_CONST_ID IID& IID_IFlyoutBase3 = __uuidof(IFlyoutBase3);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -6897,7 +6897,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlyoutBase4 = _uuidof(IFlyoutBase4);
+                        MIDL_CONST_ID IID& IID_IFlyoutBase4 = __uuidof(IFlyoutBase4);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -6956,7 +6956,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlyoutBase5 = _uuidof(IFlyoutBase5);
+                        MIDL_CONST_ID IID& IID_IFlyoutBase5 = __uuidof(IFlyoutBase5);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -7008,7 +7008,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlyoutBase6 = _uuidof(IFlyoutBase6);
+                        MIDL_CONST_ID IID& IID_IFlyoutBase6 = __uuidof(IFlyoutBase6);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -7051,7 +7051,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlyoutBaseClosingEventArgs = _uuidof(IFlyoutBaseClosingEventArgs);
+                        MIDL_CONST_ID IID& IID_IFlyoutBaseClosingEventArgs = __uuidof(IFlyoutBaseClosingEventArgs);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -7093,7 +7093,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlyoutBaseFactory = _uuidof(IFlyoutBaseFactory);
+                        MIDL_CONST_ID IID& IID_IFlyoutBaseFactory = __uuidof(IFlyoutBaseFactory);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -7133,7 +7133,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlyoutBaseOverrides = _uuidof(IFlyoutBaseOverrides);
+                        MIDL_CONST_ID IID& IID_IFlyoutBaseOverrides = __uuidof(IFlyoutBaseOverrides);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -7173,7 +7173,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlyoutBaseOverrides4 = _uuidof(IFlyoutBaseOverrides4);
+                        MIDL_CONST_ID IID& IID_IFlyoutBaseOverrides4 = __uuidof(IFlyoutBaseOverrides4);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -7227,7 +7227,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlyoutBaseStatics = _uuidof(IFlyoutBaseStatics);
+                        MIDL_CONST_ID IID& IID_IFlyoutBaseStatics = __uuidof(IFlyoutBaseStatics);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -7276,7 +7276,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlyoutBaseStatics2 = _uuidof(IFlyoutBaseStatics2);
+                        MIDL_CONST_ID IID& IID_IFlyoutBaseStatics2 = __uuidof(IFlyoutBaseStatics2);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -7316,7 +7316,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlyoutBaseStatics3 = _uuidof(IFlyoutBaseStatics3);
+                        MIDL_CONST_ID IID& IID_IFlyoutBaseStatics3 = __uuidof(IFlyoutBaseStatics3);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -7368,7 +7368,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlyoutBaseStatics5 = _uuidof(IFlyoutBaseStatics5);
+                        MIDL_CONST_ID IID& IID_IFlyoutBaseStatics5 = __uuidof(IFlyoutBaseStatics5);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -7408,7 +7408,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlyoutBaseStatics6 = _uuidof(IFlyoutBaseStatics6);
+                        MIDL_CONST_ID IID& IID_IFlyoutBaseStatics6 = __uuidof(IFlyoutBaseStatics6);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -7469,7 +7469,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlyoutShowOptions = _uuidof(IFlyoutShowOptions);
+                        MIDL_CONST_ID IID& IID_IFlyoutShowOptions = __uuidof(IFlyoutShowOptions);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -7511,7 +7511,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IFlyoutShowOptionsFactory = _uuidof(IFlyoutShowOptionsFactory);
+                        MIDL_CONST_ID IID& IID_IFlyoutShowOptionsFactory = __uuidof(IFlyoutShowOptionsFactory);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -7548,7 +7548,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IGeneratorPositionHelper = _uuidof(IGeneratorPositionHelper);
+                        MIDL_CONST_ID IID& IID_IGeneratorPositionHelper = __uuidof(IGeneratorPositionHelper);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -7590,7 +7590,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IGeneratorPositionHelperStatics = _uuidof(IGeneratorPositionHelperStatics);
+                        MIDL_CONST_ID IID& IID_IGeneratorPositionHelperStatics = __uuidof(IGeneratorPositionHelperStatics);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -7777,7 +7777,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IGridViewItemPresenter = _uuidof(IGridViewItemPresenter);
+                        MIDL_CONST_ID IID& IID_IGridViewItemPresenter = __uuidof(IGridViewItemPresenter);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -7819,7 +7819,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IGridViewItemPresenterFactory = _uuidof(IGridViewItemPresenterFactory);
+                        MIDL_CONST_ID IID& IID_IGridViewItemPresenterFactory = __uuidof(IGridViewItemPresenterFactory);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -7931,7 +7931,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IGridViewItemPresenterStatics = _uuidof(IGridViewItemPresenterStatics);
+                        MIDL_CONST_ID IID& IID_IGridViewItemPresenterStatics = __uuidof(IGridViewItemPresenterStatics);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -7971,7 +7971,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IGridViewItemTemplateSettings = _uuidof(IGridViewItemTemplateSettings);
+                        MIDL_CONST_ID IID& IID_IGridViewItemTemplateSettings = __uuidof(IGridViewItemTemplateSettings);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -8023,7 +8023,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IItemsChangedEventArgs = _uuidof(IItemsChangedEventArgs);
+                        MIDL_CONST_ID IID& IID_IItemsChangedEventArgs = __uuidof(IItemsChangedEventArgs);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -8072,7 +8072,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IJumpListItemBackgroundConverter = _uuidof(IJumpListItemBackgroundConverter);
+                        MIDL_CONST_ID IID& IID_IJumpListItemBackgroundConverter = __uuidof(IJumpListItemBackgroundConverter);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -8115,7 +8115,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IJumpListItemBackgroundConverterStatics = _uuidof(IJumpListItemBackgroundConverterStatics);
+                        MIDL_CONST_ID IID& IID_IJumpListItemBackgroundConverterStatics = __uuidof(IJumpListItemBackgroundConverterStatics);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -8164,7 +8164,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IJumpListItemForegroundConverter = _uuidof(IJumpListItemForegroundConverter);
+                        MIDL_CONST_ID IID& IID_IJumpListItemForegroundConverter = __uuidof(IJumpListItemForegroundConverter);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -8207,7 +8207,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IJumpListItemForegroundConverterStatics = _uuidof(IJumpListItemForegroundConverterStatics);
+                        MIDL_CONST_ID IID& IID_IJumpListItemForegroundConverterStatics = __uuidof(IJumpListItemForegroundConverterStatics);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -8244,7 +8244,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ILayoutInformation = _uuidof(ILayoutInformation);
+                        MIDL_CONST_ID IID& IID_ILayoutInformation = __uuidof(ILayoutInformation);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -8289,7 +8289,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ILayoutInformationStatics = _uuidof(ILayoutInformationStatics);
+                        MIDL_CONST_ID IID& IID_ILayoutInformationStatics = __uuidof(ILayoutInformationStatics);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -8330,7 +8330,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ILayoutInformationStatics2 = _uuidof(ILayoutInformationStatics2);
+                        MIDL_CONST_ID IID& IID_ILayoutInformationStatics2 = __uuidof(ILayoutInformationStatics2);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -8517,7 +8517,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListViewItemPresenter = _uuidof(IListViewItemPresenter);
+                        MIDL_CONST_ID IID& IID_IListViewItemPresenter = __uuidof(IListViewItemPresenter);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -8590,7 +8590,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListViewItemPresenter2 = _uuidof(IListViewItemPresenter2);
+                        MIDL_CONST_ID IID& IID_IListViewItemPresenter2 = __uuidof(IListViewItemPresenter2);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -8651,7 +8651,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListViewItemPresenter3 = _uuidof(IListViewItemPresenter3);
+                        MIDL_CONST_ID IID& IID_IListViewItemPresenter3 = __uuidof(IListViewItemPresenter3);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -8850,7 +8850,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListViewItemPresenter4 = _uuidof(IListViewItemPresenter4);
+                        MIDL_CONST_ID IID& IID_IListViewItemPresenter4 = __uuidof(IListViewItemPresenter4);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -8892,7 +8892,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListViewItemPresenterFactory = _uuidof(IListViewItemPresenterFactory);
+                        MIDL_CONST_ID IID& IID_IListViewItemPresenterFactory = __uuidof(IListViewItemPresenterFactory);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -9004,7 +9004,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListViewItemPresenterStatics = _uuidof(IListViewItemPresenterStatics);
+                        MIDL_CONST_ID IID& IID_IListViewItemPresenterStatics = __uuidof(IListViewItemPresenterStatics);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -9059,7 +9059,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListViewItemPresenterStatics2 = _uuidof(IListViewItemPresenterStatics2);
+                        MIDL_CONST_ID IID& IID_IListViewItemPresenterStatics2 = __uuidof(IListViewItemPresenterStatics2);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -9108,7 +9108,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListViewItemPresenterStatics3 = _uuidof(IListViewItemPresenterStatics3);
+                        MIDL_CONST_ID IID& IID_IListViewItemPresenterStatics3 = __uuidof(IListViewItemPresenterStatics3);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -9226,7 +9226,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListViewItemPresenterStatics4 = _uuidof(IListViewItemPresenterStatics4);
+                        MIDL_CONST_ID IID& IID_IListViewItemPresenterStatics4 = __uuidof(IListViewItemPresenterStatics4);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -9266,7 +9266,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IListViewItemTemplateSettings = _uuidof(IListViewItemTemplateSettings);
+                        MIDL_CONST_ID IID& IID_IListViewItemTemplateSettings = __uuidof(IListViewItemTemplateSettings);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -9352,7 +9352,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ILoopingSelector = _uuidof(ILoopingSelector);
+                        MIDL_CONST_ID IID& IID_ILoopingSelector = __uuidof(ILoopingSelector);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -9389,7 +9389,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ILoopingSelectorItem = _uuidof(ILoopingSelectorItem);
+                        MIDL_CONST_ID IID& IID_ILoopingSelectorItem = __uuidof(ILoopingSelectorItem);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -9426,7 +9426,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ILoopingSelectorPanel = _uuidof(ILoopingSelectorPanel);
+                        MIDL_CONST_ID IID& IID_ILoopingSelectorPanel = __uuidof(ILoopingSelectorPanel);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -9484,7 +9484,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ILoopingSelectorStatics = _uuidof(ILoopingSelectorStatics);
+                        MIDL_CONST_ID IID& IID_ILoopingSelectorStatics = __uuidof(ILoopingSelectorStatics);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -9524,7 +9524,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMenuFlyoutItemTemplateSettings = _uuidof(IMenuFlyoutItemTemplateSettings);
+                        MIDL_CONST_ID IID& IID_IMenuFlyoutItemTemplateSettings = __uuidof(IMenuFlyoutItemTemplateSettings);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -9564,7 +9564,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMenuFlyoutPresenterTemplateSettings = _uuidof(IMenuFlyoutPresenterTemplateSettings);
+                        MIDL_CONST_ID IID& IID_IMenuFlyoutPresenterTemplateSettings = __uuidof(IMenuFlyoutPresenterTemplateSettings);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -9607,7 +9607,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_INavigationViewItemPresenter = _uuidof(INavigationViewItemPresenter);
+                        MIDL_CONST_ID IID& IID_INavigationViewItemPresenter = __uuidof(INavigationViewItemPresenter);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -9649,7 +9649,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_INavigationViewItemPresenterFactory = _uuidof(INavigationViewItemPresenterFactory);
+                        MIDL_CONST_ID IID& IID_INavigationViewItemPresenterFactory = __uuidof(INavigationViewItemPresenterFactory);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -9689,7 +9689,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_INavigationViewItemPresenterStatics = _uuidof(INavigationViewItemPresenterStatics);
+                        MIDL_CONST_ID IID& IID_INavigationViewItemPresenterStatics = __uuidof(INavigationViewItemPresenterStatics);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -9785,7 +9785,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IOrientedVirtualizingPanel = _uuidof(IOrientedVirtualizingPanel);
+                        MIDL_CONST_ID IID& IID_IOrientedVirtualizingPanel = __uuidof(IOrientedVirtualizingPanel);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -9822,7 +9822,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IOrientedVirtualizingPanelFactory = _uuidof(IOrientedVirtualizingPanelFactory);
+                        MIDL_CONST_ID IID& IID_IOrientedVirtualizingPanelFactory = __uuidof(IOrientedVirtualizingPanelFactory);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -9859,7 +9859,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPickerFlyoutBase = _uuidof(IPickerFlyoutBase);
+                        MIDL_CONST_ID IID& IID_IPickerFlyoutBase = __uuidof(IPickerFlyoutBase);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -9901,7 +9901,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPickerFlyoutBaseFactory = _uuidof(IPickerFlyoutBaseFactory);
+                        MIDL_CONST_ID IID& IID_IPickerFlyoutBaseFactory = __uuidof(IPickerFlyoutBaseFactory);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -9942,7 +9942,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPickerFlyoutBaseOverrides = _uuidof(IPickerFlyoutBaseOverrides);
+                        MIDL_CONST_ID IID& IID_IPickerFlyoutBaseOverrides = __uuidof(IPickerFlyoutBaseOverrides);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -9990,7 +9990,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPickerFlyoutBaseStatics = _uuidof(IPickerFlyoutBaseStatics);
+                        MIDL_CONST_ID IID& IID_IPickerFlyoutBaseStatics = __uuidof(IPickerFlyoutBaseStatics);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -10027,7 +10027,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPivotHeaderItem = _uuidof(IPivotHeaderItem);
+                        MIDL_CONST_ID IID& IID_IPivotHeaderItem = __uuidof(IPivotHeaderItem);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -10069,7 +10069,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPivotHeaderItemFactory = _uuidof(IPivotHeaderItemFactory);
+                        MIDL_CONST_ID IID& IID_IPivotHeaderItemFactory = __uuidof(IPivotHeaderItemFactory);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -10106,7 +10106,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPivotHeaderPanel = _uuidof(IPivotHeaderPanel);
+                        MIDL_CONST_ID IID& IID_IPivotHeaderPanel = __uuidof(IPivotHeaderPanel);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -10143,7 +10143,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPivotPanel = _uuidof(IPivotPanel);
+                        MIDL_CONST_ID IID& IID_IPivotPanel = __uuidof(IPivotPanel);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -10230,7 +10230,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPopup = _uuidof(IPopup);
+                        MIDL_CONST_ID IID& IID_IPopup = __uuidof(IPopup);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -10273,7 +10273,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPopup2 = _uuidof(IPopup2);
+                        MIDL_CONST_ID IID& IID_IPopup2 = __uuidof(IPopup2);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -10319,7 +10319,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPopup3 = _uuidof(IPopup3);
+                        MIDL_CONST_ID IID& IID_IPopup3 = __uuidof(IPopup3);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -10378,7 +10378,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPopup4 = _uuidof(IPopup4);
+                        MIDL_CONST_ID IID& IID_IPopup4 = __uuidof(IPopup4);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -10433,7 +10433,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPopupStatics = _uuidof(IPopupStatics);
+                        MIDL_CONST_ID IID& IID_IPopupStatics = __uuidof(IPopupStatics);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -10473,7 +10473,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPopupStatics2 = _uuidof(IPopupStatics2);
+                        MIDL_CONST_ID IID& IID_IPopupStatics2 = __uuidof(IPopupStatics2);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -10513,7 +10513,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPopupStatics3 = _uuidof(IPopupStatics3);
+                        MIDL_CONST_ID IID& IID_IPopupStatics3 = __uuidof(IPopupStatics3);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -10556,7 +10556,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IPopupStatics4 = _uuidof(IPopupStatics4);
+                        MIDL_CONST_ID IID& IID_IPopupStatics4 = __uuidof(IPopupStatics4);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -10614,7 +10614,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IProgressBarTemplateSettings = _uuidof(IProgressBarTemplateSettings);
+                        MIDL_CONST_ID IID& IID_IProgressBarTemplateSettings = __uuidof(IProgressBarTemplateSettings);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -10660,7 +10660,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IProgressRingTemplateSettings = _uuidof(IProgressRingTemplateSettings);
+                        MIDL_CONST_ID IID& IID_IProgressRingTemplateSettings = __uuidof(IProgressRingTemplateSettings);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -10734,7 +10734,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IRangeBase = _uuidof(IRangeBase);
+                        MIDL_CONST_ID IID& IID_IRangeBase = __uuidof(IRangeBase);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -10776,7 +10776,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IRangeBaseFactory = _uuidof(IRangeBaseFactory);
+                        MIDL_CONST_ID IID& IID_IRangeBaseFactory = __uuidof(IRangeBaseFactory);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -10825,7 +10825,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IRangeBaseOverrides = _uuidof(IRangeBaseOverrides);
+                        MIDL_CONST_ID IID& IID_IRangeBaseOverrides = __uuidof(IRangeBaseOverrides);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -10877,7 +10877,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IRangeBaseStatics = _uuidof(IRangeBaseStatics);
+                        MIDL_CONST_ID IID& IID_IRangeBaseStatics = __uuidof(IRangeBaseStatics);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -10920,7 +10920,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IRangeBaseValueChangedEventArgs = _uuidof(IRangeBaseValueChangedEventArgs);
+                        MIDL_CONST_ID IID& IID_IRangeBaseValueChangedEventArgs = __uuidof(IRangeBaseValueChangedEventArgs);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -10969,7 +10969,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IRepeatButton = _uuidof(IRepeatButton);
+                        MIDL_CONST_ID IID& IID_IRepeatButton = __uuidof(IRepeatButton);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -11012,7 +11012,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IRepeatButtonStatics = _uuidof(IRepeatButtonStatics);
+                        MIDL_CONST_ID IID& IID_IRepeatButtonStatics = __uuidof(IRepeatButtonStatics);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -11074,7 +11074,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IScrollBar = _uuidof(IScrollBar);
+                        MIDL_CONST_ID IID& IID_IScrollBar = __uuidof(IScrollBar);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -11120,7 +11120,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IScrollBarStatics = _uuidof(IScrollBarStatics);
+                        MIDL_CONST_ID IID& IID_IScrollBarStatics = __uuidof(IScrollBarStatics);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -11163,7 +11163,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IScrollEventArgs = _uuidof(IScrollEventArgs);
+                        MIDL_CONST_ID IID& IID_IScrollEventArgs = __uuidof(IScrollEventArgs);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -11229,7 +11229,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IScrollSnapPointsInfo = _uuidof(IScrollSnapPointsInfo);
+                        MIDL_CONST_ID IID& IID_IScrollSnapPointsInfo = __uuidof(IScrollSnapPointsInfo);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -11303,7 +11303,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ISelector = _uuidof(ISelector);
+                        MIDL_CONST_ID IID& IID_ISelector = __uuidof(ISelector);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -11340,7 +11340,7 @@ namespace ABI {
                         public:
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ISelectorFactory = _uuidof(ISelectorFactory);
+                        MIDL_CONST_ID IID& IID_ISelectorFactory = __uuidof(ISelectorFactory);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -11383,7 +11383,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ISelectorItem = _uuidof(ISelectorItem);
+                        MIDL_CONST_ID IID& IID_ISelectorItem = __uuidof(ISelectorItem);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -11425,7 +11425,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ISelectorItemFactory = _uuidof(ISelectorItemFactory);
+                        MIDL_CONST_ID IID& IID_ISelectorItemFactory = __uuidof(ISelectorItemFactory);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -11465,7 +11465,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ISelectorItemStatics = _uuidof(ISelectorItemStatics);
+                        MIDL_CONST_ID IID& IID_ISelectorItemStatics = __uuidof(ISelectorItemStatics);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -11521,7 +11521,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ISelectorStatics = _uuidof(ISelectorStatics);
+                        MIDL_CONST_ID IID& IID_ISelectorStatics = __uuidof(ISelectorStatics);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -11576,7 +11576,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ISettingsFlyoutTemplateSettings = _uuidof(ISettingsFlyoutTemplateSettings);
+                        MIDL_CONST_ID IID& IID_ISettingsFlyoutTemplateSettings = __uuidof(ISettingsFlyoutTemplateSettings);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -11631,7 +11631,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ISplitViewTemplateSettings = _uuidof(ISplitViewTemplateSettings);
+                        MIDL_CONST_ID IID& IID_ISplitViewTemplateSettings = __uuidof(ISplitViewTemplateSettings);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -11693,7 +11693,7 @@ namespace ABI {
                             virtual HRESULT STDMETHODCALLTYPE CancelDrag(void) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IThumb = _uuidof(IThumb);
+                        MIDL_CONST_ID IID& IID_IThumb = __uuidof(IThumb);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -11733,7 +11733,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IThumbStatics = _uuidof(IThumbStatics);
+                        MIDL_CONST_ID IID& IID_IThumbStatics = __uuidof(IThumbStatics);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -11776,7 +11776,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ITickBar = _uuidof(ITickBar);
+                        MIDL_CONST_ID IID& IID_ITickBar = __uuidof(ITickBar);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -11816,7 +11816,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_ITickBarStatics = _uuidof(ITickBarStatics);
+                        MIDL_CONST_ID IID& IID_ITickBarStatics = __uuidof(ITickBarStatics);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -11886,7 +11886,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IToggleButton = _uuidof(IToggleButton);
+                        MIDL_CONST_ID IID& IID_IToggleButton = __uuidof(IToggleButton);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -11928,7 +11928,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IToggleButtonFactory = _uuidof(IToggleButtonFactory);
+                        MIDL_CONST_ID IID& IID_IToggleButtonFactory = __uuidof(IToggleButtonFactory);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -11966,7 +11966,7 @@ namespace ABI {
                             virtual HRESULT STDMETHODCALLTYPE OnToggle(void) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IToggleButtonOverrides = _uuidof(IToggleButtonOverrides);
+                        MIDL_CONST_ID IID& IID_IToggleButtonOverrides = __uuidof(IToggleButtonOverrides);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -12009,7 +12009,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IToggleButtonStatics = _uuidof(IToggleButtonStatics);
+                        MIDL_CONST_ID IID& IID_IToggleButtonStatics = __uuidof(IToggleButtonStatics);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -12070,7 +12070,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IToggleSwitchTemplateSettings = _uuidof(IToggleSwitchTemplateSettings);
+                        MIDL_CONST_ID IID& IID_IToggleSwitchTemplateSettings = __uuidof(IToggleSwitchTemplateSettings);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -12113,7 +12113,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IToolTipTemplateSettings = _uuidof(IToolTipTemplateSettings);
+                        MIDL_CONST_ID IID& IID_IToolTipTemplateSettings = __uuidof(IToolTipTemplateSettings);
                     } /* Primitives */
                 } /* Controls */
             } /* Xaml */
@@ -12486,11 +12486,11 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IFlyoutBaseStatics6 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IFlyoutBaseStatics3 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IFlyoutBaseStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IFlyoutBaseStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IFlyoutBaseStatics5 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IFlyoutBaseStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IFlyoutBaseStatics6 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Controls.Primitives.IFlyoutBase ** Default Interface **
@@ -12730,10 +12730,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IListViewItemPresenterStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IListViewItemPresenterStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IListViewItemPresenterStatics4 interface starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IListViewItemPresenterStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IListViewItemPresenterStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IListViewItemPresenterStatics4 interface starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Controls.Primitives.IListViewItemPresenter ** Default Interface **
@@ -13035,10 +13035,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IPopupStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IPopupStatics4 interface starting with version 14.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IPopupStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IPopupStatics3 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IPopupStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IPopupStatics4 interface starting with version 14.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Controls.Primitives.IPopup ** Default Interface **
@@ -28843,11 +28843,11 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IFlyoutBaseStatics6 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IFlyoutBaseStatics3 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IFlyoutBaseStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IFlyoutBaseStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IFlyoutBaseStatics5 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IFlyoutBaseStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IFlyoutBaseStatics6 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Controls.Primitives.IFlyoutBase ** Default Interface **
@@ -29087,10 +29087,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IListViewItemPresenterStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IListViewItemPresenterStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IListViewItemPresenterStatics4 interface starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IListViewItemPresenterStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IListViewItemPresenterStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IListViewItemPresenterStatics4 interface starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Controls.Primitives.IListViewItemPresenter ** Default Interface **
@@ -29392,10 +29392,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IPopupStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IPopupStatics4 interface starting with version 14.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IPopupStatics2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IPopupStatics3 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IPopupStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Controls.Primitives.IPopupStatics4 interface starting with version 14.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Controls.Primitives.IPopup ** Default Interface **

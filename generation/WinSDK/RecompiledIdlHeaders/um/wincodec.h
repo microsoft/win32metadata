@@ -201,6 +201,13 @@ typedef interface IWICBitmapSourceTransform IWICBitmapSourceTransform;
 #endif 	/* __IWICBitmapSourceTransform_FWD_DEFINED__ */
 
 
+#ifndef __IWICBitmapSourceTransform2_FWD_DEFINED__
+#define __IWICBitmapSourceTransform2_FWD_DEFINED__
+typedef interface IWICBitmapSourceTransform2 IWICBitmapSourceTransform2;
+
+#endif 	/* __IWICBitmapSourceTransform2_FWD_DEFINED__ */
+
+
 #ifndef __IWICPlanarBitmapSourceTransform_FWD_DEFINED__
 #define __IWICPlanarBitmapSourceTransform_FWD_DEFINED__
 typedef interface IWICPlanarBitmapSourceTransform IWICPlanarBitmapSourceTransform;
@@ -220,6 +227,13 @@ typedef interface IWICBitmapFrameDecode IWICBitmapFrameDecode;
 typedef interface IWICProgressiveLevelControl IWICProgressiveLevelControl;
 
 #endif 	/* __IWICProgressiveLevelControl_FWD_DEFINED__ */
+
+
+#ifndef __IWICDisplayAdaptationControl_FWD_DEFINED__
+#define __IWICDisplayAdaptationControl_FWD_DEFINED__
+typedef interface IWICDisplayAdaptationControl IWICDisplayAdaptationControl;
+
+#endif 	/* __IWICDisplayAdaptationControl_FWD_DEFINED__ */
 
 
 #ifndef __IWICProgressCallback_FWD_DEFINED__
@@ -404,6 +418,8 @@ DEFINE_GUID(CLSID_WICHeifDecoder,  0xe9A4A80a, 0x44fe, 0x4DE4, 0x89, 0x71, 0x71,
 DEFINE_GUID(CLSID_WICHeifEncoder,  0x0dbecec1, 0x9eb3, 0x4860, 0x9c, 0x6f, 0xdd, 0xbe, 0x86, 0x63, 0x45, 0x75);
 DEFINE_GUID(CLSID_WICWebpDecoder,  0x7693E886, 0x51C9, 0x4070, 0x84, 0x19, 0x9F, 0x70, 0X73, 0X8E, 0XC8, 0XFA);
 DEFINE_GUID(CLSID_WICRAWDecoder,   0x41945702, 0x8302, 0x44A6, 0x94, 0x45, 0xAC, 0x98, 0xE8, 0xAF, 0xA0, 0x86);
+DEFINE_GUID(CLSID_WICJpegXLDecoder, 0xfc6ceece, 0xaef5, 0x4a23, 0x96, 0xec, 0x59, 0x84, 0xff, 0xb4, 0x86, 0xd9);
+DEFINE_GUID(CLSID_WICJpegXLEncoder, 0x0e4ecd3b, 0x1ba6, 0x4636, 0x81, 0x98, 0x56, 0xc7, 0x30, 0x40, 0x96, 0x4a);
 DEFINE_GUID(GUID_ContainerFormatBmp,  0x0af1d87e, 0xfcfe, 0x4188, 0xbd, 0xeb, 0xa7, 0x90, 0x64, 0x71, 0xcb, 0xe3);
 DEFINE_GUID(GUID_ContainerFormatPng,  0x1b7cfaf4, 0x713f, 0x473c, 0xbb, 0xcd, 0x61, 0x37, 0x42, 0x5f, 0xae, 0xaf);
 DEFINE_GUID(GUID_ContainerFormatIco,  0xa3a860c4, 0x338f, 0x4c17, 0x91, 0x9a, 0xfb, 0xa4, 0xb5, 0x62, 0x8f, 0x21);
@@ -416,6 +432,7 @@ DEFINE_GUID(GUID_ContainerFormatAdng, 0xf3ff6d0d, 0x38c0, 0x41c4, 0xb1, 0xfe, 0x
 DEFINE_GUID(GUID_ContainerFormatHeif, 0xe1e62521, 0x6787, 0x405b, 0xa3, 0x39, 0x50, 0x07, 0x15, 0xb5, 0x76, 0x3f);
 DEFINE_GUID(GUID_ContainerFormatWebp, 0xe094b0e2, 0x67f2, 0x45b3, 0xb0, 0xea, 0x11, 0x53, 0x37, 0xca, 0x7c, 0xf3);
 DEFINE_GUID(GUID_ContainerFormatRaw,  0xfe99ce60, 0xf19c, 0x433c, 0xa3, 0xae, 0x00, 0xac, 0xef, 0xa9, 0xca, 0x21);
+DEFINE_GUID(GUID_ContainerFormatJpegXL, 0xfec14e3f, 0x427a, 0x4736, 0xaa, 0xe6, 0x27, 0xed, 0x84, 0xf6, 0x93, 0x22);
 DEFINE_GUID(CLSID_WICImagingCategories, 0xfae3d380, 0xfea4, 0x4623, 0x8c, 0x75, 0xc6, 0xb6, 0x11, 0x10, 0xb6, 0x81);
 DEFINE_GUID(CATID_WICBitmapDecoders,    0x7ed96837, 0x96f0, 0x4812, 0xb2, 0x11, 0xf1, 0x3c, 0x24, 0x11, 0x7e, 0xd3);
 DEFINE_GUID(CATID_WICBitmapEncoders,    0xac757296, 0x3522, 0x4e11, 0x98, 0x62, 0xc1, 0x7b, 0xe5, 0xa1, 0x76, 0x7e);
@@ -528,6 +545,8 @@ DEFINE_GUID(GUID_WICPixelFormat2bppGray,   0x6fddc324, 0x4e03, 0x4bfe, 0xb1, 0x8
 DEFINE_GUID(GUID_WICPixelFormat4bppGray,   0x6fddc324, 0x4e03, 0x4bfe, 0xb1, 0x85, 0x3d, 0x77, 0x76, 0x8d, 0xc9, 0x07);
 DEFINE_GUID(GUID_WICPixelFormat8bppGray,   0x6fddc324, 0x4e03, 0x4bfe, 0xb1, 0x85, 0x3d, 0x77, 0x76, 0x8d, 0xc9, 0x08);
 DEFINE_GUID(GUID_WICPixelFormat8bppAlpha, 0xe6cd0116, 0xeeba, 0x4161, 0xaa, 0x85, 0x27, 0xdd, 0x9f, 0xb3, 0xa8, 0x95);
+DEFINE_GUID(GUID_WICPixelFormat8bppDepth, 0x4c9c9f45, 0x1d89, 0x4e31, 0x9b, 0xc7, 0x69, 0x34, 0x3a, 0x0d, 0xca, 0x69);
+DEFINE_GUID(GUID_WICPixelFormat8bppGain, 0xa884022a, 0xaf13, 0x4c16, 0xb7, 0x46, 0x61, 0x9b, 0xf6, 0x18, 0xb8, 0x78);
 DEFINE_GUID(GUID_WICPixelFormat16bppBGR555, 0x6fddc324, 0x4e03, 0x4bfe, 0xb1, 0x85, 0x3d, 0x77, 0x76, 0x8d, 0xc9, 0x09);
 DEFINE_GUID(GUID_WICPixelFormat16bppBGR565, 0x6fddc324, 0x4e03, 0x4bfe, 0xb1, 0x85, 0x3d, 0x77, 0x76, 0x8d, 0xc9, 0x0a);
 DEFINE_GUID(GUID_WICPixelFormat16bppBGRA5551, 0x05ec7c2b, 0xf1e6, 0x4961, 0xad, 0x46, 0xe1, 0xcc, 0x81, 0x0a, 0x87, 0xd2);
@@ -1000,6 +1019,23 @@ enum WICWebpAnmfProperties
         WICWebpAnmfFrameDuration	= 0x1,
         WICWebpAnmfProperties_FORCE_DWORD	= 0x7fffffff
     } 	WICWebpAnmfProperties;
+
+typedef /* [public] */ 
+enum WICJpegXLAnimProperties
+    {
+        WICJpegXLAnimLoopCount	= 0x1,
+        WICJpegXLAnimFrameTicksPerSecondNumerator	= 0x2,
+        WICJpegXLAnimFrameTicksPerSecondDenominator	= 0x3,
+        WICJpegXLAnimProperties_FORCE_DWORD	= 0x7fffffff
+    } 	WICJpegXLAnimProperties;
+
+typedef /* [public] */ 
+enum WICJpegXLAnimFrameProperties
+    {
+        WICJpegXLAnimFrameDurationInTicks	= 0x1,
+        WICJpegXLAnimFrameName	= 0x2,
+        WICJpegXLAnimFrameProperties_FORCE_DWORD	= 0x7fffffff
+    } 	WICJpegXLAnimFrameProperties;
 
 typedef /* [public] */ 
 enum WICSectionAccessLevel
@@ -4854,6 +4890,160 @@ EXTERN_C const IID IID_IWICBitmapSourceTransform;
 #endif 	/* __IWICBitmapSourceTransform_INTERFACE_DEFINED__ */
 
 
+#ifndef __IWICBitmapSourceTransform2_INTERFACE_DEFINED__
+#define __IWICBitmapSourceTransform2_INTERFACE_DEFINED__
+
+/* interface IWICBitmapSourceTransform2 */
+/* [uuid][object] */ 
+
+
+EXTERN_C const IID IID_IWICBitmapSourceTransform2;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("c3373fdf-6d39-4e5f-8e79-bf40c0b7ed77")
+    IWICBitmapSourceTransform2 : public IWICBitmapSourceTransform
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE GetColorContextsForPixelFormat( 
+            /* [annotation][unique][in] */ 
+            _In_  WICPixelFormatGUID *pPixelFormat,
+            /* [annotation][in] */ 
+            _In_  UINT cCount,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cCount)  IWICColorContext **ppIColorContexts,
+            /* [annotation][out] */ 
+            _Out_  UINT *pcActualCount) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IWICBitmapSourceTransform2Vtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IWICBitmapSourceTransform2 * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IWICBitmapSourceTransform2 * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IWICBitmapSourceTransform2 * This);
+        
+        DECLSPEC_XFGVIRT(IWICBitmapSourceTransform, CopyPixels)
+        HRESULT ( STDMETHODCALLTYPE *CopyPixels )( 
+            __RPC__in IWICBitmapSourceTransform2 * This,
+            /* [annotation][unique][in] */ 
+            _In_  const WICRect *prc,
+            /* [annotation][in] */ 
+            _In_  UINT uiWidth,
+            /* [annotation][in] */ 
+            _In_  UINT uiHeight,
+            /* [annotation][unique][in] */ 
+            _In_  WICPixelFormatGUID *pguidDstFormat,
+            /* [annotation][in] */ 
+            _In_  WICBitmapTransformOptions dstTransform,
+            /* [annotation][in] */ 
+            _In_  UINT nStride,
+            /* [annotation][in] */ 
+            _In_  UINT cbBufferSize,
+            /* [annotation][size_is][out] */ 
+            _Out_writes_(cbBufferSize)  BYTE *pbBuffer);
+        
+        DECLSPEC_XFGVIRT(IWICBitmapSourceTransform, GetClosestSize)
+        HRESULT ( STDMETHODCALLTYPE *GetClosestSize )( 
+            __RPC__in IWICBitmapSourceTransform2 * This,
+            /* [annotation][out][in] */ 
+            _Inout_  UINT *puiWidth,
+            /* [annotation][out][in] */ 
+            _Inout_  UINT *puiHeight);
+        
+        DECLSPEC_XFGVIRT(IWICBitmapSourceTransform, GetClosestPixelFormat)
+        HRESULT ( STDMETHODCALLTYPE *GetClosestPixelFormat )( 
+            __RPC__in IWICBitmapSourceTransform2 * This,
+            /* [annotation][out][in] */ 
+            _Inout_  WICPixelFormatGUID *pguidDstFormat);
+        
+        DECLSPEC_XFGVIRT(IWICBitmapSourceTransform, DoesSupportTransform)
+        HRESULT ( STDMETHODCALLTYPE *DoesSupportTransform )( 
+            __RPC__in IWICBitmapSourceTransform2 * This,
+            /* [annotation][in] */ 
+            _In_  WICBitmapTransformOptions dstTransform,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfIsSupported);
+        
+        DECLSPEC_XFGVIRT(IWICBitmapSourceTransform2, GetColorContextsForPixelFormat)
+        HRESULT ( STDMETHODCALLTYPE *GetColorContextsForPixelFormat )( 
+            __RPC__in IWICBitmapSourceTransform2 * This,
+            /* [annotation][unique][in] */ 
+            _In_  WICPixelFormatGUID *pPixelFormat,
+            /* [annotation][in] */ 
+            _In_  UINT cCount,
+            /* [annotation][size_is][unique][in] */ 
+            _In_reads_(cCount)  IWICColorContext **ppIColorContexts,
+            /* [annotation][out] */ 
+            _Out_  UINT *pcActualCount);
+        
+        END_INTERFACE
+    } IWICBitmapSourceTransform2Vtbl;
+
+    interface IWICBitmapSourceTransform2
+    {
+        CONST_VTBL struct IWICBitmapSourceTransform2Vtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWICBitmapSourceTransform2_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IWICBitmapSourceTransform2_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IWICBitmapSourceTransform2_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IWICBitmapSourceTransform2_CopyPixels(This,prc,uiWidth,uiHeight,pguidDstFormat,dstTransform,nStride,cbBufferSize,pbBuffer)	\
+    ( (This)->lpVtbl -> CopyPixels(This,prc,uiWidth,uiHeight,pguidDstFormat,dstTransform,nStride,cbBufferSize,pbBuffer) ) 
+
+#define IWICBitmapSourceTransform2_GetClosestSize(This,puiWidth,puiHeight)	\
+    ( (This)->lpVtbl -> GetClosestSize(This,puiWidth,puiHeight) ) 
+
+#define IWICBitmapSourceTransform2_GetClosestPixelFormat(This,pguidDstFormat)	\
+    ( (This)->lpVtbl -> GetClosestPixelFormat(This,pguidDstFormat) ) 
+
+#define IWICBitmapSourceTransform2_DoesSupportTransform(This,dstTransform,pfIsSupported)	\
+    ( (This)->lpVtbl -> DoesSupportTransform(This,dstTransform,pfIsSupported) ) 
+
+
+#define IWICBitmapSourceTransform2_GetColorContextsForPixelFormat(This,pPixelFormat,cCount,ppIColorContexts,pcActualCount)	\
+    ( (This)->lpVtbl -> GetColorContextsForPixelFormat(This,pPixelFormat,cCount,ppIColorContexts,pcActualCount) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IWICBitmapSourceTransform2_INTERFACE_DEFINED__ */
+
+
 #ifndef __IWICPlanarBitmapSourceTransform_INTERFACE_DEFINED__
 #define __IWICPlanarBitmapSourceTransform_INTERFACE_DEFINED__
 
@@ -5278,6 +5468,123 @@ EXTERN_C const IID IID_IWICProgressiveLevelControl;
 
 
 #endif 	/* __IWICProgressiveLevelControl_INTERFACE_DEFINED__ */
+
+
+#ifndef __IWICDisplayAdaptationControl_INTERFACE_DEFINED__
+#define __IWICDisplayAdaptationControl_INTERFACE_DEFINED__
+
+/* interface IWICDisplayAdaptationControl */
+/* [uuid][object] */ 
+
+
+EXTERN_C const IID IID_IWICDisplayAdaptationControl;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("de9d91d2-70b4-4f41-836c-25fcd39626d3")
+    IWICDisplayAdaptationControl : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE DoesSupportChangingMaxLuminance( 
+            /* [annotation][unique][in] */ 
+            _In_  WICPixelFormatGUID *pguidDstFormat,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfIsSupported) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE SetDisplayMaxLuminance( 
+            /* [annotation][in] */ 
+            _In_  FLOAT fLuminanceInNits) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetDisplayMaxLuminance( 
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FLOAT *pfLuminanceInNits) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IWICDisplayAdaptationControlVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            __RPC__in IWICDisplayAdaptationControl * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            __RPC__in IWICDisplayAdaptationControl * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            __RPC__in IWICDisplayAdaptationControl * This);
+        
+        DECLSPEC_XFGVIRT(IWICDisplayAdaptationControl, DoesSupportChangingMaxLuminance)
+        HRESULT ( STDMETHODCALLTYPE *DoesSupportChangingMaxLuminance )( 
+            __RPC__in IWICDisplayAdaptationControl * This,
+            /* [annotation][unique][in] */ 
+            _In_  WICPixelFormatGUID *pguidDstFormat,
+            /* [annotation][out] */ 
+            _Out_  BOOL *pfIsSupported);
+        
+        DECLSPEC_XFGVIRT(IWICDisplayAdaptationControl, SetDisplayMaxLuminance)
+        HRESULT ( STDMETHODCALLTYPE *SetDisplayMaxLuminance )( 
+            __RPC__in IWICDisplayAdaptationControl * This,
+            /* [annotation][in] */ 
+            _In_  FLOAT fLuminanceInNits);
+        
+        DECLSPEC_XFGVIRT(IWICDisplayAdaptationControl, GetDisplayMaxLuminance)
+        HRESULT ( STDMETHODCALLTYPE *GetDisplayMaxLuminance )( 
+            __RPC__in IWICDisplayAdaptationControl * This,
+            /* [annotation][retval][out] */ 
+            _Out_retval_  FLOAT *pfLuminanceInNits);
+        
+        END_INTERFACE
+    } IWICDisplayAdaptationControlVtbl;
+
+    interface IWICDisplayAdaptationControl
+    {
+        CONST_VTBL struct IWICDisplayAdaptationControlVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWICDisplayAdaptationControl_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IWICDisplayAdaptationControl_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IWICDisplayAdaptationControl_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IWICDisplayAdaptationControl_DoesSupportChangingMaxLuminance(This,pguidDstFormat,pfIsSupported)	\
+    ( (This)->lpVtbl -> DoesSupportChangingMaxLuminance(This,pguidDstFormat,pfIsSupported) ) 
+
+#define IWICDisplayAdaptationControl_SetDisplayMaxLuminance(This,fLuminanceInNits)	\
+    ( (This)->lpVtbl -> SetDisplayMaxLuminance(This,fLuminanceInNits) ) 
+
+#define IWICDisplayAdaptationControl_GetDisplayMaxLuminance(This,pfLuminanceInNits)	\
+    ( (This)->lpVtbl -> GetDisplayMaxLuminance(This,pfLuminanceInNits) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IWICDisplayAdaptationControl_INTERFACE_DEFINED__ */
 
 
 #ifndef __IWICProgressCallback_INTERFACE_DEFINED__
@@ -8004,14 +8311,14 @@ EXTERN_C const IID IID_IWICImagingFactory;
 #endif 	/* __IWICImagingFactory_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_wincodec_0000_0035 */
+/* interface __MIDL_itf_wincodec_0000_0037 */
 /* [local] */ 
 
 #if (_WIN32_WINNT >= _WIN32_WINNT_WIN8) || defined(_WIN7_PLATFORM_UPDATE)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_wincodec_0000_0035_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_wincodec_0000_0035_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_wincodec_0000_0037_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_wincodec_0000_0037_v0_0_s_ifspec;
 
 #ifndef __IWICImagingFactory2_INTERFACE_DEFINED__
 #define __IWICImagingFactory2_INTERFACE_DEFINED__
@@ -8418,7 +8725,7 @@ EXTERN_C const IID IID_IWICImagingFactory2;
 #endif 	/* __IWICImagingFactory2_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_wincodec_0000_0036 */
+/* interface __MIDL_itf_wincodec_0000_0038 */
 /* [local] */ 
 
 #endif
@@ -8511,6 +8818,16 @@ enum WICPngFilterOption
         WICPngFilterAdaptive	= 0x6,
         WICPNGFILTEROPTION_FORCE_DWORD	= 0x7fffffff
     } 	WICPngFilterOption;
+
+typedef /* [public] */ 
+enum WICHeifCompressionOption
+    {
+        WICHeifCompressionDontCare	= 0,
+        WICHeifCompressionNone	= 0x1,
+        WICHeifCompressionHEVC	= 0x2,
+        WICHeifCompressionAV1	= 0x3,
+        WICHEIFCOMPRESSIONOPTION_FORCE_DWORD	= 0x7fffffff
+    } 	WICHeifCompressionOption;
 
 typedef /* [public] */ 
 enum WICNamedWhitePoint
@@ -8616,8 +8933,8 @@ typedef /* [public] */ struct WICRawToneCurve
 #define WICRawChangeNotification_RenderMode                 0x00002000
 
 
-extern RPC_IF_HANDLE __MIDL_itf_wincodec_0000_0036_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_wincodec_0000_0036_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_wincodec_0000_0038_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_wincodec_0000_0038_v0_0_s_ifspec;
 
 #ifndef __IWICDevelopRawNotificationCallback_INTERFACE_DEFINED__
 #define __IWICDevelopRawNotificationCallback_INTERFACE_DEFINED__
@@ -9363,7 +9680,7 @@ void __RPC_STUB IWICDevelopRaw_Remote_GetToneCurve_Stub(
 #endif 	/* __IWICDevelopRaw_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_wincodec_0000_0038 */
+/* interface __MIDL_itf_wincodec_0000_0040 */
 /* [local] */ 
 
 typedef /* [public] */ 
@@ -9401,8 +9718,8 @@ typedef /* [public] */ struct WICDdsParameters
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_wincodec_0000_0038_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_wincodec_0000_0038_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_wincodec_0000_0040_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_wincodec_0000_0040_v0_0_s_ifspec;
 
 #ifndef __IWICDdsDecoder_INTERFACE_DEFINED__
 #define __IWICDdsDecoder_INTERFACE_DEFINED__
@@ -9635,7 +9952,7 @@ EXTERN_C const IID IID_IWICDdsEncoder;
 #endif 	/* __IWICDdsEncoder_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_wincodec_0000_0040 */
+/* interface __MIDL_itf_wincodec_0000_0042 */
 /* [local] */ 
 
 typedef /* [public] */ struct WICDdsFormatInfo
@@ -9648,8 +9965,8 @@ typedef /* [public] */ struct WICDdsFormatInfo
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_wincodec_0000_0040_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_wincodec_0000_0040_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_wincodec_0000_0042_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_wincodec_0000_0042_v0_0_s_ifspec;
 
 #ifndef __IWICDdsFrameDecode_INTERFACE_DEFINED__
 #define __IWICDdsFrameDecode_INTERFACE_DEFINED__

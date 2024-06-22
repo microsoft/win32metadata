@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -2395,7 +2395,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAnnotationPatternIdentifiers = _uuidof(IAnnotationPatternIdentifiers);
+                    MIDL_CONST_ID IID& IID_IAnnotationPatternIdentifiers = __uuidof(IAnnotationPatternIdentifiers);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -2445,7 +2445,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAnnotationPatternIdentifiersStatics = _uuidof(IAnnotationPatternIdentifiersStatics);
+                    MIDL_CONST_ID IID& IID_IAnnotationPatternIdentifiersStatics = __uuidof(IAnnotationPatternIdentifiersStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -2492,7 +2492,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationAnnotation = _uuidof(IAutomationAnnotation);
+                    MIDL_CONST_ID IID& IID_IAutomationAnnotation = __uuidof(IAutomationAnnotation);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -2536,7 +2536,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationAnnotationFactory = _uuidof(IAutomationAnnotationFactory);
+                    MIDL_CONST_ID IID& IID_IAutomationAnnotationFactory = __uuidof(IAutomationAnnotationFactory);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -2577,7 +2577,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationAnnotationStatics = _uuidof(IAutomationAnnotationStatics);
+                    MIDL_CONST_ID IID& IID_IAutomationAnnotationStatics = __uuidof(IAutomationAnnotationStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -2612,7 +2612,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationElementIdentifiers = _uuidof(IAutomationElementIdentifiers);
+                    MIDL_CONST_ID IID& IID_IAutomationElementIdentifiers = __uuidof(IAutomationElementIdentifiers);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -2716,7 +2716,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationElementIdentifiersStatics = _uuidof(IAutomationElementIdentifiersStatics);
+                    MIDL_CONST_ID IID& IID_IAutomationElementIdentifiersStatics = __uuidof(IAutomationElementIdentifiersStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -2754,7 +2754,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationElementIdentifiersStatics2 = _uuidof(IAutomationElementIdentifiersStatics2);
+                    MIDL_CONST_ID IID& IID_IAutomationElementIdentifiersStatics2 = __uuidof(IAutomationElementIdentifiersStatics2);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -2801,7 +2801,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationElementIdentifiersStatics3 = _uuidof(IAutomationElementIdentifiersStatics3);
+                    MIDL_CONST_ID IID& IID_IAutomationElementIdentifiersStatics3 = __uuidof(IAutomationElementIdentifiersStatics3);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -2842,7 +2842,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationElementIdentifiersStatics4 = _uuidof(IAutomationElementIdentifiersStatics4);
+                    MIDL_CONST_ID IID& IID_IAutomationElementIdentifiersStatics4 = __uuidof(IAutomationElementIdentifiersStatics4);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -2895,7 +2895,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationElementIdentifiersStatics5 = _uuidof(IAutomationElementIdentifiersStatics5);
+                    MIDL_CONST_ID IID& IID_IAutomationElementIdentifiersStatics5 = __uuidof(IAutomationElementIdentifiersStatics5);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -2933,7 +2933,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationElementIdentifiersStatics6 = _uuidof(IAutomationElementIdentifiersStatics6);
+                    MIDL_CONST_ID IID& IID_IAutomationElementIdentifiersStatics6 = __uuidof(IAutomationElementIdentifiersStatics6);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -2971,7 +2971,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationElementIdentifiersStatics7 = _uuidof(IAutomationElementIdentifiersStatics7);
+                    MIDL_CONST_ID IID& IID_IAutomationElementIdentifiersStatics7 = __uuidof(IAutomationElementIdentifiersStatics7);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -3009,7 +3009,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationElementIdentifiersStatics8 = _uuidof(IAutomationElementIdentifiersStatics8);
+                    MIDL_CONST_ID IID& IID_IAutomationElementIdentifiersStatics8 = __uuidof(IAutomationElementIdentifiersStatics8);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -3044,7 +3044,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationProperties = _uuidof(IAutomationProperties);
+                    MIDL_CONST_ID IID& IID_IAutomationProperties = __uuidof(IAutomationProperties);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -3189,7 +3189,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationPropertiesStatics = _uuidof(IAutomationPropertiesStatics);
+                    MIDL_CONST_ID IID& IID_IAutomationPropertiesStatics = __uuidof(IAutomationPropertiesStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -3242,7 +3242,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationPropertiesStatics2 = _uuidof(IAutomationPropertiesStatics2);
+                    MIDL_CONST_ID IID& IID_IAutomationPropertiesStatics2 = __uuidof(IAutomationPropertiesStatics2);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -3317,7 +3317,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationPropertiesStatics3 = _uuidof(IAutomationPropertiesStatics3);
+                    MIDL_CONST_ID IID& IID_IAutomationPropertiesStatics3 = __uuidof(IAutomationPropertiesStatics3);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -3374,7 +3374,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationPropertiesStatics4 = _uuidof(IAutomationPropertiesStatics4);
+                    MIDL_CONST_ID IID& IID_IAutomationPropertiesStatics4 = __uuidof(IAutomationPropertiesStatics4);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -3474,7 +3474,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationPropertiesStatics5 = _uuidof(IAutomationPropertiesStatics5);
+                    MIDL_CONST_ID IID& IID_IAutomationPropertiesStatics5 = __uuidof(IAutomationPropertiesStatics5);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -3520,7 +3520,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationPropertiesStatics6 = _uuidof(IAutomationPropertiesStatics6);
+                    MIDL_CONST_ID IID& IID_IAutomationPropertiesStatics6 = __uuidof(IAutomationPropertiesStatics6);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -3566,7 +3566,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationPropertiesStatics7 = _uuidof(IAutomationPropertiesStatics7);
+                    MIDL_CONST_ID IID& IID_IAutomationPropertiesStatics7 = __uuidof(IAutomationPropertiesStatics7);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -3612,7 +3612,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationPropertiesStatics8 = _uuidof(IAutomationPropertiesStatics8);
+                    MIDL_CONST_ID IID& IID_IAutomationPropertiesStatics8 = __uuidof(IAutomationPropertiesStatics8);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -3658,7 +3658,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationPropertiesStatics9 = _uuidof(IAutomationPropertiesStatics9);
+                    MIDL_CONST_ID IID& IID_IAutomationPropertiesStatics9 = __uuidof(IAutomationPropertiesStatics9);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -3693,7 +3693,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAutomationProperty = _uuidof(IAutomationProperty);
+                    MIDL_CONST_ID IID& IID_IAutomationProperty = __uuidof(IAutomationProperty);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -3728,7 +3728,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDockPatternIdentifiers = _uuidof(IDockPatternIdentifiers);
+                    MIDL_CONST_ID IID& IID_IDockPatternIdentifiers = __uuidof(IDockPatternIdentifiers);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -3766,7 +3766,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDockPatternIdentifiersStatics = _uuidof(IDockPatternIdentifiersStatics);
+                    MIDL_CONST_ID IID& IID_IDockPatternIdentifiersStatics = __uuidof(IDockPatternIdentifiersStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -3801,7 +3801,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDragPatternIdentifiers = _uuidof(IDragPatternIdentifiers);
+                    MIDL_CONST_ID IID& IID_IDragPatternIdentifiers = __uuidof(IDragPatternIdentifiers);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -3848,7 +3848,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDragPatternIdentifiersStatics = _uuidof(IDragPatternIdentifiersStatics);
+                    MIDL_CONST_ID IID& IID_IDragPatternIdentifiersStatics = __uuidof(IDragPatternIdentifiersStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -3883,7 +3883,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDropTargetPatternIdentifiers = _uuidof(IDropTargetPatternIdentifiers);
+                    MIDL_CONST_ID IID& IID_IDropTargetPatternIdentifiers = __uuidof(IDropTargetPatternIdentifiers);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -3924,7 +3924,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDropTargetPatternIdentifiersStatics = _uuidof(IDropTargetPatternIdentifiersStatics);
+                    MIDL_CONST_ID IID& IID_IDropTargetPatternIdentifiersStatics = __uuidof(IDropTargetPatternIdentifiersStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -3959,7 +3959,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IExpandCollapsePatternIdentifiers = _uuidof(IExpandCollapsePatternIdentifiers);
+                    MIDL_CONST_ID IID& IID_IExpandCollapsePatternIdentifiers = __uuidof(IExpandCollapsePatternIdentifiers);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -3997,7 +3997,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IExpandCollapsePatternIdentifiersStatics = _uuidof(IExpandCollapsePatternIdentifiersStatics);
+                    MIDL_CONST_ID IID& IID_IExpandCollapsePatternIdentifiersStatics = __uuidof(IExpandCollapsePatternIdentifiersStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4032,7 +4032,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGridItemPatternIdentifiers = _uuidof(IGridItemPatternIdentifiers);
+                    MIDL_CONST_ID IID& IID_IGridItemPatternIdentifiers = __uuidof(IGridItemPatternIdentifiers);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4082,7 +4082,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGridItemPatternIdentifiersStatics = _uuidof(IGridItemPatternIdentifiersStatics);
+                    MIDL_CONST_ID IID& IID_IGridItemPatternIdentifiersStatics = __uuidof(IGridItemPatternIdentifiersStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4117,7 +4117,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGridPatternIdentifiers = _uuidof(IGridPatternIdentifiers);
+                    MIDL_CONST_ID IID& IID_IGridPatternIdentifiers = __uuidof(IGridPatternIdentifiers);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4158,7 +4158,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGridPatternIdentifiersStatics = _uuidof(IGridPatternIdentifiersStatics);
+                    MIDL_CONST_ID IID& IID_IGridPatternIdentifiersStatics = __uuidof(IGridPatternIdentifiersStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4193,7 +4193,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IMultipleViewPatternIdentifiers = _uuidof(IMultipleViewPatternIdentifiers);
+                    MIDL_CONST_ID IID& IID_IMultipleViewPatternIdentifiers = __uuidof(IMultipleViewPatternIdentifiers);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4234,7 +4234,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IMultipleViewPatternIdentifiersStatics = _uuidof(IMultipleViewPatternIdentifiersStatics);
+                    MIDL_CONST_ID IID& IID_IMultipleViewPatternIdentifiersStatics = __uuidof(IMultipleViewPatternIdentifiersStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4269,7 +4269,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IRangeValuePatternIdentifiers = _uuidof(IRangeValuePatternIdentifiers);
+                    MIDL_CONST_ID IID& IID_IRangeValuePatternIdentifiers = __uuidof(IRangeValuePatternIdentifiers);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4322,7 +4322,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IRangeValuePatternIdentifiersStatics = _uuidof(IRangeValuePatternIdentifiersStatics);
+                    MIDL_CONST_ID IID& IID_IRangeValuePatternIdentifiersStatics = __uuidof(IRangeValuePatternIdentifiersStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4357,7 +4357,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IScrollPatternIdentifiers = _uuidof(IScrollPatternIdentifiers);
+                    MIDL_CONST_ID IID& IID_IScrollPatternIdentifiers = __uuidof(IScrollPatternIdentifiers);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4413,7 +4413,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IScrollPatternIdentifiersStatics = _uuidof(IScrollPatternIdentifiersStatics);
+                    MIDL_CONST_ID IID& IID_IScrollPatternIdentifiersStatics = __uuidof(IScrollPatternIdentifiersStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4448,7 +4448,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISelectionItemPatternIdentifiers = _uuidof(ISelectionItemPatternIdentifiers);
+                    MIDL_CONST_ID IID& IID_ISelectionItemPatternIdentifiers = __uuidof(ISelectionItemPatternIdentifiers);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4489,7 +4489,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISelectionItemPatternIdentifiersStatics = _uuidof(ISelectionItemPatternIdentifiersStatics);
+                    MIDL_CONST_ID IID& IID_ISelectionItemPatternIdentifiersStatics = __uuidof(ISelectionItemPatternIdentifiersStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4524,7 +4524,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISelectionPatternIdentifiers = _uuidof(ISelectionPatternIdentifiers);
+                    MIDL_CONST_ID IID& IID_ISelectionPatternIdentifiers = __uuidof(ISelectionPatternIdentifiers);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4568,7 +4568,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISelectionPatternIdentifiersStatics = _uuidof(ISelectionPatternIdentifiersStatics);
+                    MIDL_CONST_ID IID& IID_ISelectionPatternIdentifiersStatics = __uuidof(ISelectionPatternIdentifiersStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4603,7 +4603,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISpreadsheetItemPatternIdentifiers = _uuidof(ISpreadsheetItemPatternIdentifiers);
+                    MIDL_CONST_ID IID& IID_ISpreadsheetItemPatternIdentifiers = __uuidof(ISpreadsheetItemPatternIdentifiers);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4641,7 +4641,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ISpreadsheetItemPatternIdentifiersStatics = _uuidof(ISpreadsheetItemPatternIdentifiersStatics);
+                    MIDL_CONST_ID IID& IID_ISpreadsheetItemPatternIdentifiersStatics = __uuidof(ISpreadsheetItemPatternIdentifiersStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4676,7 +4676,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IStylesPatternIdentifiers = _uuidof(IStylesPatternIdentifiers);
+                    MIDL_CONST_ID IID& IID_IStylesPatternIdentifiers = __uuidof(IStylesPatternIdentifiers);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4732,7 +4732,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IStylesPatternIdentifiersStatics = _uuidof(IStylesPatternIdentifiersStatics);
+                    MIDL_CONST_ID IID& IID_IStylesPatternIdentifiersStatics = __uuidof(IStylesPatternIdentifiersStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4767,7 +4767,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ITableItemPatternIdentifiers = _uuidof(ITableItemPatternIdentifiers);
+                    MIDL_CONST_ID IID& IID_ITableItemPatternIdentifiers = __uuidof(ITableItemPatternIdentifiers);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4808,7 +4808,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ITableItemPatternIdentifiersStatics = _uuidof(ITableItemPatternIdentifiersStatics);
+                    MIDL_CONST_ID IID& IID_ITableItemPatternIdentifiersStatics = __uuidof(ITableItemPatternIdentifiersStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4843,7 +4843,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ITablePatternIdentifiers = _uuidof(ITablePatternIdentifiers);
+                    MIDL_CONST_ID IID& IID_ITablePatternIdentifiers = __uuidof(ITablePatternIdentifiers);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4887,7 +4887,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ITablePatternIdentifiersStatics = _uuidof(ITablePatternIdentifiersStatics);
+                    MIDL_CONST_ID IID& IID_ITablePatternIdentifiersStatics = __uuidof(ITablePatternIdentifiersStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4922,7 +4922,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ITogglePatternIdentifiers = _uuidof(ITogglePatternIdentifiers);
+                    MIDL_CONST_ID IID& IID_ITogglePatternIdentifiers = __uuidof(ITogglePatternIdentifiers);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4960,7 +4960,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ITogglePatternIdentifiersStatics = _uuidof(ITogglePatternIdentifiersStatics);
+                    MIDL_CONST_ID IID& IID_ITogglePatternIdentifiersStatics = __uuidof(ITogglePatternIdentifiersStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -4995,7 +4995,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ITransformPattern2Identifiers = _uuidof(ITransformPattern2Identifiers);
+                    MIDL_CONST_ID IID& IID_ITransformPattern2Identifiers = __uuidof(ITransformPattern2Identifiers);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -5042,7 +5042,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ITransformPattern2IdentifiersStatics = _uuidof(ITransformPattern2IdentifiersStatics);
+                    MIDL_CONST_ID IID& IID_ITransformPattern2IdentifiersStatics = __uuidof(ITransformPattern2IdentifiersStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -5077,7 +5077,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ITransformPatternIdentifiers = _uuidof(ITransformPatternIdentifiers);
+                    MIDL_CONST_ID IID& IID_ITransformPatternIdentifiers = __uuidof(ITransformPatternIdentifiers);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -5121,7 +5121,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ITransformPatternIdentifiersStatics = _uuidof(ITransformPatternIdentifiersStatics);
+                    MIDL_CONST_ID IID& IID_ITransformPatternIdentifiersStatics = __uuidof(ITransformPatternIdentifiersStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -5156,7 +5156,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IValuePatternIdentifiers = _uuidof(IValuePatternIdentifiers);
+                    MIDL_CONST_ID IID& IID_IValuePatternIdentifiers = __uuidof(IValuePatternIdentifiers);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -5197,7 +5197,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IValuePatternIdentifiersStatics = _uuidof(IValuePatternIdentifiersStatics);
+                    MIDL_CONST_ID IID& IID_IValuePatternIdentifiersStatics = __uuidof(IValuePatternIdentifiersStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -5232,7 +5232,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IWindowPatternIdentifiers = _uuidof(IWindowPatternIdentifiers);
+                    MIDL_CONST_ID IID& IID_IWindowPatternIdentifiers = __uuidof(IWindowPatternIdentifiers);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -5285,7 +5285,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IWindowPatternIdentifiersStatics = _uuidof(IWindowPatternIdentifiersStatics);
+                    MIDL_CONST_ID IID& IID_IWindowPatternIdentifiersStatics = __uuidof(IWindowPatternIdentifiersStatics);
                 } /* Automation */
             } /* Xaml */
         } /* UI */
@@ -5355,14 +5355,14 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics6 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics7 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics5 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics8 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics4 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics6 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics5 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics4 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Automation.IAutomationElementIdentifiers ** Default Interface **
@@ -5386,15 +5386,15 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics9 interface starting with version 14.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics8 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics4 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics6 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics5 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics7 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics6 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics8 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics9 interface starting with version 14.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics4 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics5 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Automation.IAutomationProperties ** Default Interface **
@@ -13106,14 +13106,14 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics6 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics7 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics5 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics8 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics4 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics6 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics5 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics4 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Automation.IAutomationElementIdentifiers ** Default Interface **
@@ -13137,15 +13137,15 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics9 interface starting with version 14.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics8 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics4 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics6 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics5 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics7 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics6 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics8 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics9 interface starting with version 14.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics4 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics5 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Automation.IAutomationProperties ** Default Interface **

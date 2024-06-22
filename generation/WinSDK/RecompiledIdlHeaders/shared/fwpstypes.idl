@@ -60,13 +60,15 @@ cpp_quote("#define FWPS_FILTER_FLAG_OR_CONDITIONS   (0x0004)")
 cpp_quote("#define FWPS_FILTER_FLAG_HAS_SECURITY_REALM_PROVIDER_CONTEXT (0x0008)")
 // The filter is in silent mode
 cpp_quote("#define FWPS_FILTER_FLAG_SILENT_MODE     (0x0010)")
-// (used for s2s IPsec tunnel policies) 
+// (used for s2s IPsec tunnel policies)
 // Do not initiate IPsec acquire, if packet matches a IPsec policy from a filter with this flag
 cpp_quote("#define FWPS_FILTER_FLAG_IPSEC_NO_ACQUIRE_INITIATE (0x0020)")
 // The flag is reserved
 cpp_quote("#define FWPS_FILTER_FLAG_RESERVED0 (0x0040)")
 // The flag is reserved
 cpp_quote("#define FWPS_FILTER_FLAG_RESERVED1 (0x0080)")
+// The flag is reserved
+cpp_quote("#define FWPS_FILTER_FLAG_RESERVED2 (0x0100)")
 
 typedef struct FWPM_PROVIDER_CONTEXT0_ FWPM_PROVIDER_CONTEXT0;
 
@@ -283,7 +285,7 @@ cpp_quote("#define FWPS_L2_INCOMING_FLAG_IS_RAW_IPV6_FRAMING             (0x0000
 cpp_quote("#define FWPS_L2_INCOMING_FLAG_RECLASSIFY_MULTI_DESTINATION    (0x00000008)")
 cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_19H1)")
 cpp_quote("#define FWPS_INCOMING_FLAG_RESERVED0                          (0x00000100)")
-cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN10_19H1)")  
+cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN10_19H1)")
 cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN8)")
 cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN7)")
 
@@ -327,7 +329,7 @@ typedef struct FWPS_CLASSIFY_OUT0_
 // Types of notifications dispatched to callouts.
 typedef enum FWPS_CALLOUT_NOTIFY_TYPE_
 {
-   // A filter invoking the callout has been added.   
+   // A filter invoking the callout has been added.
    FWPS_CALLOUT_NOTIFY_ADD_FILTER,
    // A filter invoking the callout has been deleted.
    FWPS_CALLOUT_NOTIFY_DELETE_FILTER,

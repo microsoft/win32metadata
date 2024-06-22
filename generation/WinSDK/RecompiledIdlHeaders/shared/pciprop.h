@@ -554,6 +554,12 @@ DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_OnPostPath, 37);
 DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_D3ColdSupport, 38);
 
 //
+// This property contains the virtual channel resource control registers.
+//
+
+DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_VirtualChannelControlRegisters, 39);
+
+//
 // This property contains the PCI serial number.
 //
 
@@ -591,6 +597,20 @@ DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_UsbHostRouterName, 44);
 //
 
 DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_ParentSerialNumber,  45);
+
+//
+// This property contains a boolean to indicate whether the device
+// supports DMWr along the entire device tree from the root to the device.
+//
+
+DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_SupportsDmwrOnEntireDeviceTree, 46);
+
+//
+// This property contains a boolean to indicate whether the device
+// is a tunneled device.
+//
+
+DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_IsTunneledDevice, 47);
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion

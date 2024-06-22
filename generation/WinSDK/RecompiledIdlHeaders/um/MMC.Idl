@@ -1356,7 +1356,14 @@ enum
 //   Perform the normal validation of the menu item parameters and return the appropriate
 //   result code, but do not actually add the menu item.
 //
-    CCM_SPECIAL_TESTONLY          = 0x0010
+    CCM_SPECIAL_TESTONLY          = 0x0010,
+//
+// CCM_SPECIAL_ELEVATION_ICON
+//   This menu item should include the elevation shield icon to indicate to the user that
+//   operation requires Administrator elevation. This is only for cosmetic menu display
+//   purposes, where the actual elevation should be handled by the caller.
+//
+    CCM_SPECIAL_ELEVATION_ICON    = 0x0020
 };
 
 

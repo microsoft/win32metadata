@@ -17,6 +17,7 @@
            xmlns:desktop5="http://schemas.microsoft.com/appx/manifest/desktop/windows10/5"
            xmlns:desktop7="http://schemas.microsoft.com/appx/manifest/desktop/windows10/7"
            xmlns:desktop10="http://schemas.microsoft.com/appx/manifest/desktop/windows10/10"
+           xmlns:desktop11="http://schemas.microsoft.com/appx/manifest/desktop/windows10/11"
            xmlns:previewappcompat="http://schemas.microsoft.com/appx/manifest/preview/windows10/msixappcompatsupport"
            xmlns:previewappcompat3="http://schemas.microsoft.com/appx/manifest/preview/windows10/msixappcompatsupport/3"
            >
@@ -33,6 +34,7 @@
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/5"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/7"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/10"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/11"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/preview/windows10/msixappcompatsupport"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/preview/windows10/msixappcompatsupport/3"/>
@@ -146,6 +148,7 @@
         <xs:element name="VoipCall" type="CT_VoipCall"/>
       </xs:choice>
       <xs:attribute name="Category" type="t:ST_ApplicationExtensionCategory_Uap" use="required"/>
+      <xs:attribute ref="desktop11:AppLifecycleBehavior" use="optional"/>
       <xs:attributeGroup ref="t:ExtensionBaseAttributes"/>
       <xs:attributeGroup ref="uap10:TrustLevelGroup"/>
       <xs:attributeGroup ref="uap11:ManganeseExtensionAttributesGroup"/>

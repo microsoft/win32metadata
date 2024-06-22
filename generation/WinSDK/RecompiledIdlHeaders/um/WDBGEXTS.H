@@ -1729,6 +1729,27 @@ typedef struct _SYM_DUMP_PARAM {
    ULONG               Reserved:27;   // unused
 } SYM_DUMP_PARAM, *PSYM_DUMP_PARAM;
 
+typedef union _POOL_HEADER_SIZE_64 {
+
+    struct {
+        UCHAR UnsafePrevSize;
+        UCHAR Unused1;
+        UCHAR UnsafeSize;
+        UCHAR UnsafePoolType;
+    };
+
+    ULONG Ulong1;
+
+} POOL_HEADER_SIZE_64, *PPOOL_HEADER_SIZE_64;
+
+typedef enum _POOL_HEADER_FIELD_NAME {
+    DbgkdPreviousSize,
+    DbgkdPoolIndex,
+    DbgkdBlockSize,
+    DbgkdPoolType,
+    DbgkdUlong1
+} POOL_HEADER_FIELD_NAME;
+
 #ifdef __cplusplus
 #define CPPMOD extern "C"
 #else
@@ -2694,6 +2715,135 @@ GetFieldOffset (
    return Err;
 }
 
+//
+// This is used to decode pool header fields.
+//
+
+__inline
+ULONG
+DecodeNtPoolHeaderSizes (
+    IN ULONG64 Address,
+    IN ULONG Sizes,
+    IN ULONG PoolKey
+    )
+{
+    return Sizes ^ (ULONG)Address ^ PoolKey;
+}
+
+__inline
+ULONG
+GetPoolHeaderSizeFieldValue (
+    IN ULONG64 pHeader,
+    IN POOL_HEADER_FIELD_NAME FieldName,
+    OUT PULONG FieldValue
+    )
+{
+    ULONG64 StateLoc;
+    ULONG PoolKey;
+    POOL_HEADER_SIZE_64 PoolSizes = {0};
+    ULONG PlainPoolHeader;
+    ULONG FieldValueTmp = 0;
+    PCSTR FieldNameStr;
+    ULONG Status = ERROR_SUCCESS;
+
+    *FieldValue = 0;
+
+    StateLoc = GetExpression("nt!ExPoolState");
+
+    if (StateLoc == 0) {
+        dprintf("Unable to get global pool state.\n");
+        return ERROR_INVALID_DATA;
+    }
+
+    PlainPoolHeader = GetFieldValue(StateLoc,
+                                    "nt!_EX_POOL_HEAP_MANAGER_STATE",
+                                    "PoolKey",
+                                    PoolKey);
+
+    if (PlainPoolHeader) {
+        switch (FieldName) {
+            case DbgkdBlockSize:
+                FieldNameStr = "BlockSize";
+                break;
+
+            case DbgkdPreviousSize:
+                FieldNameStr = "PreviousSize";
+                break;
+
+            case DbgkdPoolType:
+                FieldNameStr = "PoolType";
+                break;
+
+            case DbgkdUlong1:
+                FieldNameStr = "Ulong1";
+                break;
+
+            case DbgkdPoolIndex:
+                FieldNameStr = "PoolIndex";
+                break;
+
+            default:
+                dprintf("Unknown pool header field.\n");
+                Status = ERROR_INVALID_FIELD;
+                goto Exit;
+                break;
+            }
+
+        Status = GetFieldValue(pHeader,
+                               "nt!_POOL_HEADER",
+                               FieldNameStr,
+                               FieldValueTmp);
+
+        if (Status) {
+            goto Exit;
+        }
+
+        *FieldValue = FieldValueTmp;
+    } else {
+        Status = GetFieldValue(pHeader,
+                               "nt!_POOL_HEADER",
+                               "Sizes",
+                               PoolSizes);
+
+        if (Status) {
+            goto Exit;
+        }
+
+        PoolSizes.Ulong1 = DecodeNtPoolHeaderSizes(pHeader, PoolSizes.Ulong1, PoolKey);
+
+        switch (FieldName) {
+            case DbgkdBlockSize:
+                *FieldValue = PoolSizes.UnsafeSize;
+                break;
+
+            case DbgkdPreviousSize:
+                *FieldValue = PoolSizes.UnsafePrevSize;
+                break;
+
+            case DbgkdPoolType:
+                *FieldValue = PoolSizes.UnsafePoolType;
+                break;
+
+            case DbgkdUlong1:
+                *FieldValue = PoolSizes.Ulong1;
+                break;
+
+            case DbgkdPoolIndex:
+                *FieldValue = PoolSizes.Unused1;
+                break;
+
+            default:
+                dprintf("Unknown pool header field.\n");
+                Status = ERROR_INVALID_FIELD;
+                goto Exit;
+                break;
+        }
+    }
+
+Exit:
+
+    return Status;
+}
 
 #endif // defined(KDEXT_64BIT)
 

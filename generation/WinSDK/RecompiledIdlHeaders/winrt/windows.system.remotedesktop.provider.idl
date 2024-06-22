@@ -47,6 +47,8 @@ namespace Windows
 
                 interface IRemoteDesktopConnectionInfo;
 
+                interface IRemoteDesktopConnectionInfo2;
+
                 interface IRemoteDesktopConnectionInfoStatics;
 
                 interface IRemoteDesktopConnectionRemoteInfo;
@@ -122,7 +124,11 @@ namespace Windows
                 [contract(Windows.Foundation.UniversalApiContract, 15.0)]
                 enum RemoteDesktopLocalAction
                 {
-                    ShowBluetoothSettings = 0
+                    ShowBluetoothSettings     = 0,
+                    ShowSystemSoundSettings   = 1,
+                    ShowSystemDisplaySettings = 2,
+                    ShowSystemAccountSettings = 3,
+                    ShowLocalSettings         = 4
                 };
 
                 [contract(Windows.Foundation.UniversalApiContract, 15.0)]
@@ -140,6 +146,14 @@ namespace Windows
                 {
                     HRESULT SetConnectionStatus([in] Windows.System.RemoteDesktop.Provider.RemoteDesktopConnectionStatus value);
                     HRESULT SwitchToLocalSession();
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+                [exclusiveto(Windows.System.RemoteDesktop.Provider.RemoteDesktopConnectionInfo)]
+                [uuid(871C0B26-23BF-5D3C-BC35-A85C405E25E6)]
+                interface IRemoteDesktopConnectionInfo2 : IInspectable
+                {
+                    HRESULT PerformLocalActionFromRemote([in] Windows.System.RemoteDesktop.Provider.RemoteDesktopLocalAction action);
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 15.0)]
@@ -211,6 +225,7 @@ namespace Windows
                 runtimeclass RemoteDesktopConnectionInfo
                 {
                     [default] interface Windows.System.RemoteDesktop.Provider.IRemoteDesktopConnectionInfo;
+                    [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.System.RemoteDesktop.Provider.IRemoteDesktopConnectionInfo2;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 15.0)]

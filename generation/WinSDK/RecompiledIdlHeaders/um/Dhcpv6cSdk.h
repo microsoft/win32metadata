@@ -70,6 +70,8 @@ extern "C" {
 #define    DHCPV6_OPTION_NIS_DOMAIN_NAME  29
 #define    DHCPV6_OPTION_NISP_DOMAIN_NAME  30
 
+#define    DHCPV6_OPTION_DNR    144
+
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
 
@@ -113,14 +115,14 @@ typedef struct _DHCPV6CAPI_CLASSID {                // defines a client class id
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 
 typedef
-enum 
+enum
 {
     STATUS_NO_ERROR,                         //Prefix successfully leased, renewed.
     STATUS_UNSPECIFIED_FAILURE,  //Some unspecified failure occurred  while trying to process the prefix.
     STATUS_NO_BINDING = 3,          //The server doesn't have binding for the prefix.
     STATUS_NOPREFIX_AVAIL = 6   //The server doesn't have prefix to offer to the requesting client.
 }StatusCode;
-    
+
 typedef struct _DHCPV6Prefix{
     UCHAR  prefix[16];               //128 bit prefix
     DWORD prefixLength;		//(48-64 bits)
@@ -138,7 +140,7 @@ typedef struct _DHCPV6PrefixLeaseInformation {
 	time_t MaxLeaseExpirationTime; //The absolute maximum lease expiration time of all the prefix leases in this structure.
 	time_t LastRenewalTime;        // The absolute time at which the last renewal for the prefixes happened.
 	StatusCode status;              //The status code returned by the server for the IAPD
-        _Field_size_bytes_(ServerIdLen) LPBYTE ServerId;		// The server DUID from which the prefix is received. This is used in subsequent Renews.	
+        _Field_size_bytes_(ServerIdLen) LPBYTE ServerId;		// The server DUID from which the prefix is received. This is used in subsequent Renews.
 	DWORD  ServerIdLen;		// The length of the above DUID data.
 } DHCPV6PrefixLeaseInformation, *PDHCPV6PrefixLeaseInformation, *LPDHCPV6PrefixLeaseInformation;
 
@@ -181,7 +183,7 @@ IN OUT  LPDWORD                		pSize
 DWORD
 APIENTRY
 Dhcpv6RequestPrefix(
-IN _In_ LPWSTR		adapterName, 
+IN _In_ LPWSTR		adapterName,
 IN LPDHCPV6CAPI_CLASSID 		pclassId,
 IN OUT LPDHCPV6PrefixLeaseInformation	prefixleaseInfo,
 _Out_ DWORD* 			pdwTimeToWait
@@ -190,7 +192,7 @@ _Out_ DWORD* 			pdwTimeToWait
 DWORD
 APIENTRY
 Dhcpv6RenewPrefix(
-IN _In_ LPWSTR		adapterName, 
+IN _In_ LPWSTR		adapterName,
 IN LPDHCPV6CAPI_CLASSID 		pclassId,
 IN OUT LPDHCPV6PrefixLeaseInformation	prefixleaseInfo,
 _Out_ DWORD* 			pdwTimeToWait,
@@ -200,7 +202,7 @@ IN DWORD 				bValidatePrefix
 DWORD
 APIENTRY
 Dhcpv6ReleasePrefix(
-_In_ IN LPWSTR				adapterName, 
+_In_ IN LPWSTR				adapterName,
 IN LPDHCPV6CAPI_CLASSID     		classId,
 IN LPDHCPV6PrefixLeaseInformation	leaseInfo
 );

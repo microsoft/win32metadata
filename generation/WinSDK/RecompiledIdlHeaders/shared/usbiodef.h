@@ -139,6 +139,8 @@ Revision History:
 
 #define USB_GET_DEVICE_CHARACTERISTICS                      288
 
+#define USB_GET_NODE_CONNECTION_SUPERSPEEDPLUS_INFORMATION  289
+
 // IOCTL codes starting here and beyond are for windows' internal use
 #define USB_RESERVED_USER_BASE                              1024
 

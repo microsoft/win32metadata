@@ -1,24 +1,8 @@
-//+-------------------------------------------------------------------------
+// Copyright (C) Microsoft Corporation. All rights reserved.
 //
-//  Microsoft Windows
-//  Copyright (C) Microsoft Corporation, 1992-2004.
-//
-//  NDHelper.idl : IDL source for Network Diagnostics Helper Class
-//                 provider
-//
-// This file will be processed by the MIDL tool to
-// produce the .h file for C++ COM client.
-// type library and marshaling code are registered by the .NET serviced component
-//
-//
-//--------------------------------------------------------------------------
+// IDL source for Network Diagnostics Helper Class provider
 
-cpp_quote("//+--------------------------------------------------------------------------")
-cpp_quote("//")
-cpp_quote("//  Microsoft Windows")
-cpp_quote("//  Copyright (C) Microsoft Corporation, 1992-2007.")
-cpp_quote("//")
-cpp_quote("//---------------------------------------------------------------------------")
+cpp_quote("// Copyright (C) Microsoft Corporation. All rights reserved.")
 
 cpp_quote("#include <winapifamily.h>")
 
@@ -44,12 +28,12 @@ cpp_quote("")
 //
 // Reserved GUIDS for our use
 // CLSID and LIBID
-//c0b35736-ebf5-11d8-bbe9-505054503030      
+//c0b35736-ebf5-11d8-bbe9-505054503030
 //c0b35737-ebf5-11d8-bbe9-505054503030      LIBID_NetDiagEng
 //c0b35738-ebf5-11d8-bbe9-505054503030      CLSID_NetDiagEng
 //c0b35739-ebf5-11d8-bbe9-505054503030
 //c0b3573a-ebf5-11d8-bbe9-505054503030
-//c0b3573b-ebf5-11d8-bbe9-505054503030      
+//c0b3573b-ebf5-11d8-bbe9-505054503030
 //c0b3573c-ebf5-11d8-bbe9-505054503030
 //c0b3573d-ebf5-11d8-bbe9-505054503030
 //c0b3573e-ebf5-11d8-bbe9-505054503030
@@ -57,7 +41,7 @@ cpp_quote("")
 // IID
 //c0b35740-ebf5-11d8-bbe9-505054503030      IID_INetDiagClientCallback
 //c0b35741-ebf5-11d8-bbe9-505054503030      IID_INetDiagClientIncident
-//c0b35742-ebf5-11d8-bbe9-505054503030      
+//c0b35742-ebf5-11d8-bbe9-505054503030
 //c0b35743-ebf5-11d8-bbe9-505054503030
 //c0b35744-ebf5-11d8-bbe9-505054503030
 //c0b35745-ebf5-11d8-bbe9-505054503030
@@ -91,7 +75,7 @@ interface INetDiagHelper;
 //
 // types for network diagnostics framework
 //
-typedef [v1_enum] enum tagDIAGNOSIS_STATUS 
+typedef [v1_enum] enum tagDIAGNOSIS_STATUS
 {
     DS_NOT_IMPLEMENTED = 0,
     DS_CONFIRMED,
@@ -101,7 +85,7 @@ typedef [v1_enum] enum tagDIAGNOSIS_STATUS
     DS_PASSTHROUGH
 }DIAGNOSIS_STATUS;
 
-typedef [v1_enum] enum tagREPAIR_STATUS 
+typedef [v1_enum] enum tagREPAIR_STATUS
 {
     RS_NOT_IMPLEMENTED = 0,
     RS_REPAIRED,
@@ -147,16 +131,21 @@ typedef struct tagDiagnosticsInfo
     ULONG flags;
 } DiagnosticsInfo, *PDiagnosticsInfo;
 
+cpp_quote("#if defined(FKG_FORCED_USAGE) || defined(BUILD_WINDOWS)")
+cpp_quote("#define NOT_BUILD_WINDOWS_NDHELPER_DEPRECATE(x)")
+cpp_quote("#else")
+cpp_quote("#define NOT_BUILD_WINDOWS_NDHELPER_DEPRECATE(x) __pragma(deprecated(x))")
+cpp_quote("#endif")
+
 //
 // interfaces implemented by Network Diagnostics Helper Classes
 //
 [
   object,
   uuid(c0b35746-ebf5-11d8-bbe9-505054503030),
-  helpstring("INetDiagHelper Interface"),
-  pointer_default(unique) // default embedded ptrs to [unique]    
+  pointer_default(unique) // default embedded ptrs to [unique]
 ]
-interface INetDiagHelper : IUnknown 
+interface INetDiagHelper : IUnknown
 {
 
     HRESULT  Initialize(
@@ -185,7 +174,7 @@ interface INetDiagHelper : IUnknown
                     [out, string] LPWSTR* ppwszDescription,
                     [out] long* pDeferredTime,
                     [out] DIAGNOSIS_STATUS* pStatus);
-    
+
     HRESULT  GetLowerHypotheses(
                     [out] ULONG* pcelt,
                     [out, size_is(,*pcelt)] HYPOTHESIS** pprgHypotheses
@@ -207,7 +196,7 @@ interface INetDiagHelper : IUnknown
                     );
 
     HRESULT  Repair(
-                    [in] RepairInfo* pInfo, 
+                    [in] RepairInfo* pInfo,
                     [out] long* pDeferredTime,
                     [out] REPAIR_STATUS* pStatus);
 
@@ -246,6 +235,7 @@ interface INetDiagHelper : IUnknown
     //...
 
 };
+cpp_quote("NOT_BUILD_WINDOWS_NDHELPER_DEPRECATE(INetDiagHelper)")
 
 typedef struct tagHypothesisResult
 {
@@ -255,7 +245,6 @@ typedef struct tagHypothesisResult
 
 [     object,
       uuid(104613FB-BC57-4178-95BA-88809698354A),
-      helpstring("INetDiagHelperUtilFactory Interface"),
       pointer_default(unique) // default embedded ptrs to [unique]
 ]
 interface INetDiagHelperUtilFactory : IUnknown
@@ -265,6 +254,7 @@ interface INetDiagHelperUtilFactory : IUnknown
       [out, iid_is(riid)] void ** ppvObject
     );
 }
+cpp_quote("NOT_BUILD_WINDOWS_NDHELPER_DEPRECATE(INetDiagHelperUtilFactory)")
 
 //
 // interface implemented by Network Diagnostics Helper Classes
@@ -272,12 +262,11 @@ interface INetDiagHelperUtilFactory : IUnknown
 [
   object,
   uuid(972DAB4D-E4E3-4fc6-AE54-5F65CCDE4A15),
-  helpstring("INetDiagHelperEx Interface"),
-  pointer_default(unique) // default embedded ptrs to [unique]   
+  pointer_default(unique) // default embedded ptrs to [unique]
 ]
-interface INetDiagHelperEx : IUnknown 
+interface INetDiagHelperEx : IUnknown
 {
-   HRESULT ReconfirmLowHealth( 
+   HRESULT ReconfirmLowHealth(
       [in] ULONG celt,
       [in, size_is(celt)] HypothesisResult *pResults,
       [out, string] LPWSTR *ppwszUpdatedDescription,
@@ -290,8 +279,9 @@ interface INetDiagHelperEx : IUnknown
 
    HRESULT ReproduceFailure(
       );
-      
+
 }
+cpp_quote("NOT_BUILD_WINDOWS_NDHELPER_DEPRECATE(INetDiagHelperEx)")
 
 //
 // interfaces implemented by Network Diagnostics Helper Classes
@@ -299,10 +289,9 @@ interface INetDiagHelperEx : IUnknown
 [
   object,
   uuid(c0b35747-ebf5-11d8-bbe9-505054503030),
-  helpstring("INetDiagHelperInfo Interface"),
-  pointer_default(unique) // default embedded ptrs to [unique]   
+  pointer_default(unique) // default embedded ptrs to [unique]
 ]
-interface INetDiagHelperInfo : IUnknown 
+interface INetDiagHelperInfo : IUnknown
 {
     HRESULT  GetAttributeInfo(
                     [out] ULONG* pcelt,
@@ -310,6 +299,7 @@ interface INetDiagHelperInfo : IUnknown
                     HelperAttributeInfo** pprgAttributeInfos
                     );
 }
+cpp_quote("NOT_BUILD_WINDOWS_NDHELPER_DEPRECATE(INetDiagHelperInfo)")
 
 //
 // interface implemented by Extensible Helper Class
@@ -317,9 +307,7 @@ interface INetDiagHelperInfo : IUnknown
 [
   object,
   uuid(c0b35748-ebf5-11d8-bbe9-505054503030),
-  helpstring("INetDiagExtensibleHelper Interface"),
   pointer_default(unique) // default embedded ptrs to [unique]
-
 ]
 interface INetDiagExtensibleHelper : IUnknown
 {
@@ -327,9 +315,10 @@ interface INetDiagExtensibleHelper : IUnknown
                 [in] ULONG celt,
                 [in, size_is(celt)] HELPER_ATTRIBUTE rgKeyAttributes[],
                 [out] ULONG* pcelt,
-                [out, size_is(,*pcelt)] HELPER_ATTRIBUTE** prgMatchValues       
+                [out, size_is(,*pcelt)] HELPER_ATTRIBUTE** prgMatchValues
             );
 }
+cpp_quote("NOT_BUILD_WINDOWS_NDHELPER_DEPRECATE(INetDiagExtensibleHelper)")
 
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
 #pragma endregion

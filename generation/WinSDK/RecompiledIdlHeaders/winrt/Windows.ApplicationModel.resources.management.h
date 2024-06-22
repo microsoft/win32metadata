@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -655,7 +655,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IIndexedResourceCandidate = _uuidof(IIndexedResourceCandidate);
+                    MIDL_CONST_ID IID& IID_IIndexedResourceCandidate = __uuidof(IIndexedResourceCandidate);
                 } /* Management */
             } /* Resources */
         } /* ApplicationModel */
@@ -696,7 +696,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IIndexedResourceQualifier = _uuidof(IIndexedResourceQualifier);
+                    MIDL_CONST_ID IID& IID_IIndexedResourceQualifier = __uuidof(IIndexedResourceQualifier);
                 } /* Management */
             } /* Resources */
         } /* ApplicationModel */
@@ -748,7 +748,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IResourceIndexer = _uuidof(IResourceIndexer);
+                    MIDL_CONST_ID IID& IID_IResourceIndexer = __uuidof(IResourceIndexer);
                 } /* Management */
             } /* Resources */
         } /* ApplicationModel */
@@ -793,7 +793,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IResourceIndexerFactory = _uuidof(IResourceIndexerFactory);
+                    MIDL_CONST_ID IID& IID_IResourceIndexerFactory = __uuidof(IResourceIndexerFactory);
                 } /* Management */
             } /* Resources */
         } /* ApplicationModel */
@@ -839,7 +839,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IResourceIndexerFactory2 = _uuidof(IResourceIndexerFactory2);
+                    MIDL_CONST_ID IID& IID_IResourceIndexerFactory2 = __uuidof(IResourceIndexerFactory2);
                 } /* Management */
             } /* Resources */
         } /* ApplicationModel */

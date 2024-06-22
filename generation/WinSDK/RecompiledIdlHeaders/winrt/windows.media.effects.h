@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_MEDIA_MEDIACONTROLCONTRACT_VERSION)
@@ -144,6 +144,21 @@
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
 /* Forward Declarations */
+#ifndef ____x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Effects {
+                interface IAcousticEchoCancellationConfiguration;
+            } /* Effects */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration ABI::Windows::Media::Effects::IAcousticEchoCancellationConfiguration
+
+#endif // ____x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CMedia_CEffects_CIAudioCaptureEffectsManager_FWD_DEFINED__
 #define ____x_ABI_CWindows_CMedia_CEffects_CIAudioCaptureEffectsManager_FWD_DEFINED__
 namespace ABI {
@@ -173,6 +188,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CMedia_CEffects_CIAudioEffect ABI::Windows::Media::Effects::IAudioEffect
 
 #endif // ____x_ABI_CWindows_CMedia_CEffects_CIAudioEffect_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Effects {
+                interface IAudioEffect2;
+            } /* Effects */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2 ABI::Windows::Media::Effects::IAudioEffect2
+
+#endif // ____x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CMedia_CEffects_CIAudioEffectDefinition_FWD_DEFINED__
 #define ____x_ABI_CWindows_CMedia_CEffects_CIAudioEffectDefinition_FWD_DEFINED__
@@ -1165,6 +1195,16 @@ namespace ABI {
     namespace Windows {
         namespace Media {
             namespace Effects {
+                typedef enum AudioEffectState : int AudioEffectState;
+            } /* Effects */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Effects {
                 typedef enum AudioEffectType : int AudioEffectType;
             } /* Effects */
         } /* Media */
@@ -1186,6 +1226,16 @@ namespace ABI {
         namespace Media {
             namespace Effects {
                 typedef enum MediaMemoryTypes : int MediaMemoryTypes;
+            } /* Effects */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Effects {
+                class AcousticEchoCancellationConfiguration;
             } /* Effects */
         } /* Media */
     } /* Windows */
@@ -1260,6 +1310,29 @@ namespace ABI {
         } /* Media */
     } /* Windows */
 } /* ABI */
+
+/*
+ *
+ * Struct Windows.Media.Effects.AudioEffectState
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Effects {
+                enum AudioEffectState : int
+                {
+                    AudioEffectState_Off = 0,
+                    AudioEffectState_On = 1,
+                };
+            } /* Effects */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -1357,6 +1430,42 @@ namespace ABI {
 
 /*
  *
+ * Interface Windows.Media.Effects.IAcousticEchoCancellationConfiguration
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.Effects.AcousticEchoCancellationConfiguration
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_Effects_IAcousticEchoCancellationConfiguration[] = L"Windows.Media.Effects.IAcousticEchoCancellationConfiguration";
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Effects {
+                MIDL_INTERFACE("587e735b-175b-5177-a407-2e33bafe33a5")
+                IAcousticEchoCancellationConfiguration : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE SetEchoCancellationRenderEndpoint(
+                        HSTRING deviceId
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IAcousticEchoCancellationConfiguration = __uuidof(IAcousticEchoCancellationConfiguration);
+            } /* Effects */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
  * Interface Windows.Media.Effects.IAudioCaptureEffectsManager
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -1388,7 +1497,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAudioCaptureEffectsManager = _uuidof(IAudioCaptureEffectsManager);
+                MIDL_CONST_ID IID& IID_IAudioCaptureEffectsManager = __uuidof(IAudioCaptureEffectsManager);
             } /* Effects */
         } /* Media */
     } /* Windows */
@@ -1424,7 +1533,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAudioEffect = _uuidof(IAudioEffect);
+                MIDL_CONST_ID IID& IID_IAudioEffect = __uuidof(IAudioEffect);
             } /* Effects */
         } /* Media */
     } /* Windows */
@@ -1433,6 +1542,51 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CEffects_CIAudioEffect;
 #endif /* !defined(____x_ABI_CWindows_CMedia_CEffects_CIAudioEffect_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Media.Effects.IAudioEffect2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.Effects.AudioEffect
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_Effects_IAudioEffect2[] = L"Windows.Media.Effects.IAudioEffect2";
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Effects {
+                MIDL_INTERFACE("06703cb0-757e-5757-8af0-6ba58a8b2990")
+                IAudioEffect2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_AcousticEchoCancellationConfiguration(
+                        ABI::Windows::Media::Effects::IAcousticEchoCancellationConfiguration** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_CanSetState(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_State(
+                        ABI::Windows::Media::Effects::AudioEffectState* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE SetState(
+                        ABI::Windows::Media::Effects::AudioEffectState newState
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IAudioEffect2 = __uuidof(IAudioEffect2);
+            } /* Effects */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -1461,7 +1615,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAudioEffectDefinition = _uuidof(IAudioEffectDefinition);
+                MIDL_CONST_ID IID& IID_IAudioEffectDefinition = __uuidof(IAudioEffectDefinition);
             } /* Effects */
         } /* Media */
     } /* Windows */
@@ -1503,7 +1657,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAudioEffectDefinitionFactory = _uuidof(IAudioEffectDefinitionFactory);
+                MIDL_CONST_ID IID& IID_IAudioEffectDefinitionFactory = __uuidof(IAudioEffectDefinitionFactory);
             } /* Effects */
         } /* Media */
     } /* Windows */
@@ -1558,7 +1712,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAudioEffectsManagerStatics = _uuidof(IAudioEffectsManagerStatics);
+                MIDL_CONST_ID IID& IID_IAudioEffectsManagerStatics = __uuidof(IAudioEffectsManagerStatics);
             } /* Effects */
         } /* Media */
     } /* Windows */
@@ -1601,7 +1755,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAudioRenderEffectsManager = _uuidof(IAudioRenderEffectsManager);
+                MIDL_CONST_ID IID& IID_IAudioRenderEffectsManager = __uuidof(IAudioRenderEffectsManager);
             } /* Effects */
         } /* Media */
     } /* Windows */
@@ -1653,7 +1807,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE ShowSettingsUI(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IAudioRenderEffectsManager2 = _uuidof(IAudioRenderEffectsManager2);
+                MIDL_CONST_ID IID& IID_IAudioRenderEffectsManager2 = __uuidof(IAudioRenderEffectsManager2);
             } /* Effects */
         } /* Media */
     } /* Windows */
@@ -1703,7 +1857,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE DiscardQueuedFrames(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBasicAudioEffect = _uuidof(IBasicAudioEffect);
+                MIDL_CONST_ID IID& IID_IBasicAudioEffect = __uuidof(IBasicAudioEffect);
             } /* Effects */
         } /* Media */
     } /* Windows */
@@ -1760,7 +1914,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE DiscardQueuedFrames(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBasicVideoEffect = _uuidof(IBasicVideoEffect);
+                MIDL_CONST_ID IID& IID_IBasicVideoEffect = __uuidof(IBasicVideoEffect);
             } /* Effects */
         } /* Media */
     } /* Windows */
@@ -1806,7 +1960,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICompositeVideoFrameContext = _uuidof(ICompositeVideoFrameContext);
+                MIDL_CONST_ID IID& IID_ICompositeVideoFrameContext = __uuidof(ICompositeVideoFrameContext);
             } /* Effects */
         } /* Media */
     } /* Windows */
@@ -1845,7 +1999,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProcessAudioFrameContext = _uuidof(IProcessAudioFrameContext);
+                MIDL_CONST_ID IID& IID_IProcessAudioFrameContext = __uuidof(IProcessAudioFrameContext);
             } /* Effects */
         } /* Media */
     } /* Windows */
@@ -1884,7 +2038,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProcessVideoFrameContext = _uuidof(IProcessVideoFrameContext);
+                MIDL_CONST_ID IID& IID_IProcessVideoFrameContext = __uuidof(IProcessVideoFrameContext);
             } /* Effects */
         } /* Media */
     } /* Windows */
@@ -1932,7 +2086,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE DiscardQueuedFrames(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVideoCompositor = _uuidof(IVideoCompositor);
+                MIDL_CONST_ID IID& IID_IVideoCompositor = __uuidof(IVideoCompositor);
             } /* Effects */
         } /* Media */
     } /* Windows */
@@ -1969,7 +2123,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVideoCompositorDefinition = _uuidof(IVideoCompositorDefinition);
+                MIDL_CONST_ID IID& IID_IVideoCompositorDefinition = __uuidof(IVideoCompositorDefinition);
             } /* Effects */
         } /* Media */
     } /* Windows */
@@ -2011,7 +2165,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVideoCompositorDefinitionFactory = _uuidof(IVideoCompositorDefinitionFactory);
+                MIDL_CONST_ID IID& IID_IVideoCompositorDefinitionFactory = __uuidof(IVideoCompositorDefinitionFactory);
             } /* Effects */
         } /* Media */
     } /* Windows */
@@ -2048,7 +2202,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVideoEffectDefinition = _uuidof(IVideoEffectDefinition);
+                MIDL_CONST_ID IID& IID_IVideoEffectDefinition = __uuidof(IVideoEffectDefinition);
             } /* Effects */
         } /* Media */
     } /* Windows */
@@ -2090,7 +2244,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVideoEffectDefinitionFactory = _uuidof(IVideoEffectDefinitionFactory);
+                MIDL_CONST_ID IID& IID_IVideoEffectDefinitionFactory = __uuidof(IVideoEffectDefinitionFactory);
             } /* Effects */
         } /* Media */
     } /* Windows */
@@ -2162,7 +2316,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVideoTransformEffectDefinition = _uuidof(IVideoTransformEffectDefinition);
+                MIDL_CONST_ID IID& IID_IVideoTransformEffectDefinition = __uuidof(IVideoTransformEffectDefinition);
             } /* Effects */
         } /* Media */
     } /* Windows */
@@ -2198,7 +2352,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVideoTransformEffectDefinition2 = _uuidof(IVideoTransformEffectDefinition2);
+                MIDL_CONST_ID IID& IID_IVideoTransformEffectDefinition2 = __uuidof(IVideoTransformEffectDefinition2);
             } /* Effects */
         } /* Media */
     } /* Windows */
@@ -2261,7 +2415,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVideoTransformSphericalProjection = _uuidof(IVideoTransformSphericalProjection);
+                MIDL_CONST_ID IID& IID_IVideoTransformSphericalProjection = __uuidof(IVideoTransformSphericalProjection);
             } /* Effects */
         } /* Media */
     } /* Windows */
@@ -2270,6 +2424,25 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CEffects_CIVideoTransformSphericalProjection;
 #endif /* !defined(____x_ABI_CWindows_CMedia_CEffects_CIVideoTransformSphericalProjection_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x60000
+
+/*
+ *
+ * Class Windows.Media.Effects.AcousticEchoCancellationConfiguration
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.Media.Effects.IAcousticEchoCancellationConfiguration ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_Media_Effects_AcousticEchoCancellationConfiguration_DEFINED
+#define RUNTIMECLASS_Windows_Media_Effects_AcousticEchoCancellationConfiguration_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Media_Effects_AcousticEchoCancellationConfiguration[] = L"Windows.Media.Effects.AcousticEchoCancellationConfiguration";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -2300,6 +2473,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Media.Effects.IAudioEffect ** Default Interface **
+ *    Windows.Media.Effects.IAudioEffect2
  *
  * Class Threading Model:  Multi Threaded Apartment
  *
@@ -2540,6 +2714,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 #else // !defined(__cplusplus)
 /* Forward Declarations */
+#ifndef ____x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration __x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration;
+
+#endif // ____x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CMedia_CEffects_CIAudioCaptureEffectsManager_FWD_DEFINED__
 #define ____x_ABI_CWindows_CMedia_CEffects_CIAudioCaptureEffectsManager_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CMedia_CEffects_CIAudioCaptureEffectsManager __x_ABI_CWindows_CMedia_CEffects_CIAudioCaptureEffectsManager;
@@ -2551,6 +2731,12 @@ typedef interface __x_ABI_CWindows_CMedia_CEffects_CIAudioCaptureEffectsManager 
 typedef interface __x_ABI_CWindows_CMedia_CEffects_CIAudioEffect __x_ABI_CWindows_CMedia_CEffects_CIAudioEffect;
 
 #endif // ____x_ABI_CWindows_CMedia_CEffects_CIAudioEffect_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2 __x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2;
+
+#endif // ____x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CMedia_CEffects_CIAudioEffectDefinition_FWD_DEFINED__
 #define ____x_ABI_CWindows_CMedia_CEffects_CIAudioEffectDefinition_FWD_DEFINED__
@@ -3766,11 +3952,28 @@ typedef interface __x_ABI_CWindows_CStorage_CStreams_CIRandomAccessStreamWithCon
 
 typedef struct __x_ABI_CWindows_CUI_CColor __x_ABI_CWindows_CUI_CColor;
 
+typedef enum __x_ABI_CWindows_CMedia_CEffects_CAudioEffectState __x_ABI_CWindows_CMedia_CEffects_CAudioEffectState;
+
 typedef enum __x_ABI_CWindows_CMedia_CEffects_CAudioEffectType __x_ABI_CWindows_CMedia_CEffects_CAudioEffectType;
 
 typedef enum __x_ABI_CWindows_CMedia_CEffects_CMediaEffectClosedReason __x_ABI_CWindows_CMedia_CEffects_CMediaEffectClosedReason;
 
 typedef enum __x_ABI_CWindows_CMedia_CEffects_CMediaMemoryTypes __x_ABI_CWindows_CMedia_CEffects_CMediaMemoryTypes;
+
+/*
+ *
+ * Struct Windows.Media.Effects.AudioEffectState
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+enum __x_ABI_CWindows_CMedia_CEffects_CAudioEffectState
+{
+    AudioEffectState_Off = 0,
+    AudioEffectState_On = 1,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -3841,6 +4044,75 @@ enum __x_ABI_CWindows_CMedia_CEffects_CMediaMemoryTypes
     MediaMemoryTypes_GpuAndCpu = 2,
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Media.Effects.IAcousticEchoCancellationConfiguration
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.Effects.AcousticEchoCancellationConfiguration
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_Effects_IAcousticEchoCancellationConfiguration[] = L"Windows.Media.Effects.IAcousticEchoCancellationConfiguration";
+typedef struct __x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfigurationVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* SetEchoCancellationRenderEndpoint)(__x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration* This,
+        HSTRING deviceId);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfigurationVtbl;
+
+interface __x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration
+{
+    CONST_VTBL struct __x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfigurationVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration_SetEchoCancellationRenderEndpoint(This, deviceId) \
+    ((This)->lpVtbl->SetEchoCancellationRenderEndpoint(This, deviceId))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -3990,6 +4262,90 @@ interface __x_ABI_CWindows_CMedia_CEffects_CIAudioEffect
 EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CEffects_CIAudioEffect;
 #endif /* !defined(____x_ABI_CWindows_CMedia_CEffects_CIAudioEffect_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.Media.Effects.IAudioEffect2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.Effects.AudioEffect
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_Effects_IAudioEffect2[] = L"Windows.Media.Effects.IAudioEffect2";
+typedef struct __x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_AcousticEchoCancellationConfiguration)(__x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2* This,
+        __x_ABI_CWindows_CMedia_CEffects_CIAcousticEchoCancellationConfiguration** value);
+    HRESULT (STDMETHODCALLTYPE* get_CanSetState)(__x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* get_State)(__x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2* This,
+        enum __x_ABI_CWindows_CMedia_CEffects_CAudioEffectState* value);
+    HRESULT (STDMETHODCALLTYPE* SetState)(__x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2* This,
+        enum __x_ABI_CWindows_CMedia_CEffects_CAudioEffectState newState);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2Vtbl;
+
+interface __x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2_get_AcousticEchoCancellationConfiguration(This, value) \
+    ((This)->lpVtbl->get_AcousticEchoCancellationConfiguration(This, value))
+
+#define __x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2_get_CanSetState(This, value) \
+    ((This)->lpVtbl->get_CanSetState(This, value))
+
+#define __x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2_get_State(This, value) \
+    ((This)->lpVtbl->get_State(This, value))
+
+#define __x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2_SetState(This, newState) \
+    ((This)->lpVtbl->SetState(This, newState))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CEffects_CIAudioEffect2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -5546,6 +5902,25 @@ EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CEffects_CIVideoTransformSpherica
 
 /*
  *
+ * Class Windows.Media.Effects.AcousticEchoCancellationConfiguration
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.Media.Effects.IAcousticEchoCancellationConfiguration ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_Media_Effects_AcousticEchoCancellationConfiguration_DEFINED
+#define RUNTIMECLASS_Windows_Media_Effects_AcousticEchoCancellationConfiguration_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Media_Effects_AcousticEchoCancellationConfiguration[] = L"Windows.Media.Effects.AcousticEchoCancellationConfiguration";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
  * Class Windows.Media.Effects.AudioCaptureEffectsManager
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -5573,6 +5948,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Media.Effects.IAudioEffect ** Default Interface **
+ *    Windows.Media.Effects.IAudioEffect2
  *
  * Class Threading Model:  Multi Threaded Apartment
  *

@@ -8210,6 +8210,15 @@
 //
 #define FILTER_E_UNKNOWNFORMAT           ((HRESULT)0x8004170CL)
 
+//
+// MessageId: FILTER_E_NO_IMAGE_FRAMES
+//
+// MessageText:
+//
+// No image frames in current chunk.
+//
+#define FILTER_E_NO_IMAGE_FRAMES         ((HRESULT)0x8004170EL)
+
 #endif // _FILTERR_H_
 /*++ BUILD Version: 0001    // Increment this if a change has global effects
 

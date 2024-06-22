@@ -17,6 +17,18 @@ DECLARE_HANDLE(CIMFS_IMAGE_HANDLE);
 
 DECLARE_HANDLE(CIMFS_STREAM_HANDLE);
 
+typedef enum CIM_CREATE_IMAGE_FLAGS
+{
+    CIM_CREATE_IMAGE_NONE               = 0x00000000,
+    CIM_CREATE_DO_NOT_EXPAND_PE_IMAGES  = 0x00000001,
+    CIM_CREATE_FIXED_SIZE_CHUNKS        = 0x00000002,
+    CIM_CREATE_IMAGE_BLOCK_CIM          = 0x00000004,
+} CIM_CREATE_IMAGE_FLAGS;
+
+#ifdef DEFINE_ENUM_FLAG_OPERATORS
+DEFINE_ENUM_FLAG_OPERATORS(CIM_CREATE_IMAGE_FLAGS);
+#endif
+
 typedef enum CIM_MOUNT_IMAGE_FLAGS
 {
     CIM_MOUNT_IMAGE_NONE    = 0x00000000,
@@ -24,6 +36,7 @@ typedef enum CIM_MOUNT_IMAGE_FLAGS
     CIM_MOUNT_ENABLE_DAX    = 0x00000002,
     CIM_MOUNT_CACHE_FILES   = 0x00000004,
     CIM_MOUNT_CACHE_REGIONS = 0x00000008,
+    CIM_MOUNT_BLOCK_CIM     = 0x00000010,
 } CIM_MOUNT_IMAGE_FLAGS;
 
 #ifdef DEFINE_ENUM_FLAG_OPERATORS
@@ -62,6 +75,19 @@ CimCreateImage(_In_ PCWSTR imageContainingPath,
                _In_opt_ PCWSTR existingImageName,
                _In_opt_ PCWSTR newImageName,
                _Out_ CIMFS_IMAGE_HANDLE* cimImageHandle);
+
+//
+//  Creates a handle representing a new image at the location
+//  specified, optionally based on an existing image at that
+//  location. Also take in a flags parameter.
+//
+
+STDAPI
+CimCreateImage2(_In_ PCWSTR imageContainingPath,
+                _In_ CIM_CREATE_IMAGE_FLAGS createImageFlags,
+                _In_opt_ PCWSTR existingImageName,
+                _In_opt_ PCWSTR newImageName,
+                _Out_ CIMFS_IMAGE_HANDLE* cimImageHandle);
 
 //
 //  Adds a file with the specified metadata at a path relative
@@ -157,6 +183,42 @@ CimMountImage(_In_ PCWSTR imageContainingPath,
 
 STDAPI
 CimDismountImage(_In_ const GUID* volumeId);
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_GA)
+
+//
+// Reads a file from the CIM at a given offset. Returns the read bytes in
+// in the buffer provided, the number of bytes read, and the number of bytes
+// remaining in the file.
+//
+STDAPI
+CimReadFile(_In_ PCWSTR imagePath,
+            _In_ PCWSTR filePath,
+            _In_ UINT64 offset,
+            _Out_ void* buffer,
+            _In_ UINT64 bufferSize,
+            _Out_ UINT64* bytesRead,
+            _Out_ UINT64* bytesRemaining);
+//
+// Queries the file stat info for a file from the CIM.
+// Returns the FILE_STAT_BASIC_INFORMATION
+//
+STDAPI
+CimGetFileStatBasicInformation(_In_ PCWSTR imagePath,
+                               _In_ PCWSTR filePath,
+                               _Out_ FILE_STAT_BASIC_INFORMATION* statInfo);
+
+//
+// This API takes a path that contains a block format cim, the cim name
+// and a path to a new location where it converts the block format cim
+// to a file format cim.
+//
+STDAPI
+CimConvertBlockImage(_In_ PCWSTR imageContainingPath,
+                     _In_ PCWSTR existingImageName,
+                     _In_ PCWSTR newImageContainingPath);
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_GA)
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 

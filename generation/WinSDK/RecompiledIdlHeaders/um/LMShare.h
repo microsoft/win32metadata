@@ -632,29 +632,6 @@ typedef struct _FILE_INFO_3 {
 } FILE_INFO_3, *PFILE_INFO_3, *LPFILE_INFO_3;
 
 //
-// Data Structures - Certificate
-//
-typedef enum _SERVER_CERTIFICATE_TYPE {
-QUIC
-} SERVER_CERTIFICATE_TYPE;
-
-typedef struct _SERVER_CERTIFICATE_INFO_0 {
-    LMSTR      srvci0_name;
-    LMSTR      srvci0_subject;
-    LMSTR      srvci0_issuer;
-    LMSTR      srvci0_thumbprint;
-    LMSTR      srvci0_friendlyname;
-    LMSTR      srvci0_notbefore;
-    LMSTR      srvci0_notafter;
-    LMSTR      srvci0_storelocation;
-    LMSTR      srvci0_storename;
-    LMSTR      srvci0_renewalchain;
-    DWORD      srvci0_type;
-    DWORD      srvci0_flags;
-    DWORD      srvci0_mapping_status;
-} SERVER_CERTIFICATE_INFO_0, *PSERVER_CERTIFICATE_INFO_0, *LPSERVER_CERTIFICATE_INFO_0;
-
-//
 // Special Values and Constants - File
 //
 

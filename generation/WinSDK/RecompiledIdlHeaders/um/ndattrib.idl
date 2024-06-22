@@ -1,24 +1,10 @@
-
-
-//+-------------------------------------------------------------------------
+// Copyright (C) Microsoft Corporation. All rights reserved.
 //
-//  Microsoft Windows
-//  Copyright (C) Microsoft Corporation, 1992-2004.
-//
-//  NDAttrib.idl : IDL source for Network Diagnostics Helper Attribute
-//                 and Repair Info structures.
-//
-// This file will be processed by the MIDL tool to
-// produce the .h file for C++ COM client.
-// type library and marshaling code are registered by the .NET serviced component
-//
-//
-//--------------------------------------------------------------------------
+// IDL source for Network Diagnostics Helper Attribute and Repair Info structures.
 
 cpp_quote("//+--------------------------------------------------------------------------")
 cpp_quote("//")
-cpp_quote("//  Microsoft Windows")
-cpp_quote("//  Copyright (C) Microsoft Corporation, 1992-2004.")
+cpp_quote("// Copyright (C) Microsoft Corporation. All rights reserved.")
 cpp_quote("//")
 cpp_quote("//---------------------------------------------------------------------------")
 

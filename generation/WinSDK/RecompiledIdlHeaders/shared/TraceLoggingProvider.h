@@ -495,10 +495,7 @@ typedef struct _tlgProvider_t const* TraceLoggingHProvider;
 /*
 Macro TRACELOGGING_DEFINE_PROVIDER(hProviderVariableName, "ProviderName", providerId, [option]):
 Invoke this macro to allocate static storage for a provider and define a
-TraceLoggingHProvider variable that references the storage. The provider name
-must be a string literal (not a variable) and must not contain any '\0'
-characters. The handle and copies of the handle are valid as long as the
-original handle is in scope.
+TraceLoggingHProvider variable that references the storage.
 
 An invocation of
 
@@ -512,10 +509,39 @@ can be thought of as expanding to something like this:
     static [ProviderStateType] uniqueVarName = { ... }; // stores provider state
     extern "C" const TraceLoggingHProvider g_hMyProvider = &uniqueVarName; // defines a handle
 
-The providerId specifies the ETW provider GUID. The providerId parameter must
-be a parenthesized list of 11 compile-time constant integers e.g.
-(g1, g2, g3, ... g11). The integers will be used to initialize the provider ID
-as follows:
+The "ProviderName" specifies a name that identifies the provider in the logged
+events. It must be a char string literal (not a variable) and must not contain
+any '\0' characters. It must be specific enough to distinguish your provider
+from other providers on the system. Typically, provider names use a hierarchy
+for unique identification, e.g. "MyCompany.MyOrganization.MyComponent".
+
+The providerId specifies the ETW provider GUID. This GUID must be linked with
+the "ProviderName", i.e. the name should never be used with any other GUID, and
+the GUID should never be used with any other name. While it is acceptable to
+generate the GUID using guidgen or another UUID generation tool, we recommend
+that the GUID be generated as a hash of the name using the algorithm shown in
+this C# code:
+
+    static Guid ProviderIdFromName(string name)
+    {
+        var signature = new byte[] {
+            0x48, 0x2C, 0x2D, 0xB2, 0xC3, 0x90, 0x47, 0xC8,
+            0x87, 0xF8, 0x1A, 0x15, 0xBF, 0xC1, 0x30, 0xFB };
+        var nameBytes = Encoding.BigEndianUnicode.GetBytes(name.ToUpperInvariant());
+        using (var sha1 = new SHA1Managed())
+        {
+            sha1.TransformBlock(signature, 0, signature.Length, null, 0);
+            sha1.TransformFinalBlock(nameBytes, 0, nameBytes.Length);
+            var hash = sha1.Hash;
+            Array.Resize(ref hash, 16);
+            hash[7] = (byte)((hash[7] & 0x0F) | 0x50);
+            return new Guid(hash);
+        }
+    }
+
+The providerId parameter must be a parenthesized list of 11 compile-time
+constant integers e.g.  (g1, g2, g3, ... g11). The integers will be used to
+initialize the provider ID as follows:
 
     GUID providerId = { g1, g2, g3, g4, g5, g6, g7, g8, g9, g10, g11 };
 
@@ -599,11 +625,12 @@ using the TRACELOGGING_DEFINE_PROVIDER macro.
 
 /*
 Macro TraceLoggingOptionGroup(g1, g2, g3, g4, g5, g6, g7, g8, g9, g10, g11):
-Wrapper macro for use in TRACELOGGING_DEFINE_PROVIDER that declares the
-provider's membership in a provider group. A provider can be a member of no
-more than one group. The semantics of group membership are determined by
-ETW controllers that make use of the group membership information to configure
-providers via their group.
+Advanced scenarios: Wrapper macro for use in TRACELOGGING_DEFINE_PROVIDER that
+declares the provider's membership in a provider group (see
+https://learn.microsoft.com/windows/win32/etw/provider-traits#provider-groups).
+A provider can be a member of no more than one group. The semantics of group
+membership are determined by ETW controllers that make use of the group
+membership information to configure providers via their group.
 
 The parameters to this macro are 11 compile-time constant integers that will
 form the group GUID. The GUID will be initialized as follows:
@@ -619,7 +646,34 @@ Example:
         TraceLoggingOptionGroup(0xfaaf2f61, 0x9b26, 0x4591, 0x9b, 0xb1, 0xb9, 0xb8, 0xba, 0xe2, 0xd3, 0x4c));
 */
 #define TraceLoggingOptionGroup(g1, g2, g3, g4, g5, g6, g7, g8, g9, g10, g11) \
-    _tlgOption_Group(g1, g2, g3, g4, g5, g6, g7, g8, g9, g10, g11)
+    TraceLoggingOptionTrait(_TlgOptionGroup, GUID, ({ g1, g2, g3, { g4, g5, g6, g7, g8, g9, g10, g11 } }))
+
+/*
+Macro TraceLoggingOptionTrait(traitType, ctype, value):
+Advanced scenarios: Wrapper macro for use in TRACELOGGING_DEFINE_PROVIDER that
+adds a custom provider trait to a provider definition (see
+https://learn.microsoft.com/en-us/windows/win32/etw/provider-traits#custom-traits).
+
+Parameters:
+
+- traitType: Compile-time constant integer value from 128-255 indicating the
+  user-defined trait type to use for the trait.
+
+- ctype: C/C++ type to be used for the trait value, e.g. UINT32 or GUID.
+
+- value: Compile-time constant expression that initializes the trait value,
+  enclosed in parenthesis, e.g. (32) or ({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}).
+
+Example:
+
+    TRACELOGGING_DEFINE_PROVIDER(
+        g_hMyProvider,
+        "MyProvider",
+        (0xb3864c38, 0x4273, 0x58c5, 0x54, 0x5b, 0x8b, 0x36, 0x08, 0x34, 0x34, 0x71),
+        TraceLoggingOptionTrait(128, UINT32, ( 45 ));
+*/
+#define TraceLoggingOptionTrait(traitType, ctype, value) \
+    (_tlgOption, traitType, ctype, value)
 
 /*
 Function TraceLoggingUnregister(hProvider):
@@ -751,6 +805,29 @@ Call this function to determine whether the given provider is enabled for
 events with the specified level and keyword. Use 0 for eventLevel to determine
 whether the provider is enabled for any level. Use 0 for eventKeyword to
 determine whether the provider is enabled for any keyword.
+
+This function can be used to avoid doing extra work before calling
+TraceLoggingWrite. For example, you might use TraceLoggingProviderEnabled for
+something like this:
+
+    if (TraceLoggingProviderEnabled(provider, level, keyword))
+    {
+        string expensiveValue = ComputeExpensiveValue();
+        TraceLoggingWriteImpl(provider, name, level, keyword, expensiveValue);
+    }
+
+Do not use TraceLoggingProviderEnabled simply to avoid calling
+TraceLoggingWrite. TraceLoggingWrite performs its own test, i.e. a
+TraceLoggingWrite(provider, name, level, keyword, args...) already includes a
+check, approximately like:
+
+    if (TraceLoggingProviderEnabled(provider, level, keyword))
+    {
+        TraceLoggingWriteImpl(provider, name, level, keyword, args...);
+    }
+
+In this case, making your own call to TraceLoggingProviderEnabled would be
+redundant.
 */
 _IRQL_requires_max_(HIGH_LEVEL)
 TLG_PFORCEINLINE
@@ -789,6 +866,18 @@ any '\0' characters.
 Supports up to 99 args (subject to compiler limitations). Each arg must be a
 wrapper macro such as TraceLoggingLevel, TraceLoggingKeyword, TraceLoggingInt32,
 TraceLoggingString, etc.
+
+Note that TraceLoggingWrite(hProvider, eventName, args...) is a macro that
+checks whether the provider is enabled before evaluating args... and before
+writing the data to ETW. In other words, an event like
+TraceLoggingWrite(hProvider, eventName, TraceLoggingLevel(level), args...)
+expands to an implementation that works as follows:
+
+    if (TraceLoggingProviderEnabled(hProvider, level, keyword))
+    {
+        TraceLoggingWriteImpl(hProvider, eventName,
+            TraceLoggingLevel(level), args...);
+    }
 
 Note that TraceLoggingWrite(hProvider, eventName, args...) is equivalent to
 TraceLoggingWriteActivity(hProvider, eventName, NULL, NULL, args...).
@@ -1181,16 +1270,8 @@ Based on the type of val, TraceLoggingValue(val, ...) is equivalent to:
 - char               --> TraceLoggingChar(val, ...)
 - char16_t           --> TraceLoggingChar16(val, ...)
 - wchar_t            --> TraceLoggingWChar(val, ...) // only for native wchar_t type, not for USHORT
-- signed   char      --> TraceLoggingInt8(val, ...)
-- unsigned char      --> TraceLoggingUInt8(val, ...)
-- signed   short     --> TraceLoggingInt16(val, ...)
-- unsigned short     --> TraceLoggingUInt16(val, ...)
-- signed   int       --> TraceLoggingInt32(val, ...)
-- unsigned int       --> TraceLoggingUInt32(val, ...)
-- signed   long      --> TraceLoggingLong(val, ...)
-- unsigned long      --> TraceLoggingULong(val, ...)
-- signed   long long --> TraceLoggingInt64(val, ...)
-- unsigned long long --> TraceLoggingUInt64(val, ...)
+- intNN_t            --> TraceLoggingIntNN(val, ...)
+- uintNN_t           --> TraceLoggingUIntNN(val, ...)
 - float              --> TraceLoggingFloat32(val, ...)
 - double             --> TraceLoggingFloat64(val, ...)
 - GUID               --> TraceLoggingGuid(val, ...)
@@ -1198,9 +1279,9 @@ Based on the type of val, TraceLoggingValue(val, ...) is equivalent to:
 - SYSTEMTIME         --> TraceLoggingSystemTime(val, ...)
 - SID*               --> TraceLoggingSid(val, ...)        // Requires non-NULL, valid SID.
 - void*              --> TraceLoggingPointer(val, ...)    // Logs the pointer's value, not the pointed-at data.
-- char*              --> TraceLoggingString(val, ...)     // Assumes nul-terminated ANSI string.
-- char16_t*          --> TraceLoggingString16(val, ...)   // Assumes nul-terminated utf-16 string.
-- wchar_t*           --> TraceLoggingWideString(val, ...) // Assumes nul-terminated utf-16 string.
+- char*              --> TraceLoggingString(val, ...)     // Assumes nul-terminated ANSI string. NULL is the same as "".
+- char16_t*          --> TraceLoggingString16(val, ...)   // Assumes nul-terminated utf-16 string. NULL is the same as u"".
+- wchar_t*           --> TraceLoggingWideString(val, ...) // Assumes nul-terminated utf-16 string. NULL is the same as L"".
 */
 #define TraceLoggingValue(value, ...) \
     _tlgArgAuto(value, __VA_ARGS__)
@@ -1243,42 +1324,44 @@ Examples:
 #define TraceLoggingUInt16(value, ...)        _tlgArgScalarVal(UINT16,            value, TlgInUINT16,    (),                  __VA_ARGS__)
 #define TraceLoggingInt32(value, ...)         _tlgArgScalarVal(INT32,             value, TlgInINT32,     (),                  __VA_ARGS__)
 #define TraceLoggingUInt32(value, ...)        _tlgArgScalarVal(UINT32,            value, TlgInUINT32,    (),                  __VA_ARGS__)
-#define TraceLoggingLong(value, ...)          _tlgArgScalarVal(LONG,              value, TlgInLONG,      (),                  __VA_ARGS__)
-#define TraceLoggingULong(value, ...)         _tlgArgScalarVal(ULONG,             value, TlgInULONG,     (),                  __VA_ARGS__)
 #define TraceLoggingInt64(value, ...)         _tlgArgScalarVal(INT64,             value, TlgInINT64,     (),                  __VA_ARGS__)
 #define TraceLoggingUInt64(value, ...)        _tlgArgScalarVal(UINT64,            value, TlgInUINT64,    (),                  __VA_ARGS__)
+#define TraceLoggingIntPtr(value, ...)        _tlgArgScalarVal(INT_PTR,           value, TlgInINTPTR,    (),                  __VA_ARGS__)
+#define TraceLoggingUIntPtr(value, ...)       _tlgArgScalarVal(UINT_PTR,          value, TlgInUINTPTR,   (),                  __VA_ARGS__)
+#define TraceLoggingLong(value, ...)          _tlgArgScalarVal(LONG,              value, TlgInLONG,      (),                  __VA_ARGS__)
+#define TraceLoggingULong(value, ...)         _tlgArgScalarVal(ULONG,             value, TlgInULONG,     (),                  __VA_ARGS__)
 #define TraceLoggingHexInt8(value, ...)       _tlgArgScalarVal(INT8,              value, TlgInUINT8,     (TlgOutHEX),         __VA_ARGS__)
 #define TraceLoggingHexUInt8(value, ...)      _tlgArgScalarVal(UINT8,             value, TlgInUINT8,     (TlgOutHEX),         __VA_ARGS__)
 #define TraceLoggingHexInt16(value, ...)      _tlgArgScalarVal(INT16,             value, TlgInUINT16,    (TlgOutHEX),         __VA_ARGS__)
 #define TraceLoggingHexUInt16(value, ...)     _tlgArgScalarVal(UINT16,            value, TlgInUINT16,    (TlgOutHEX),         __VA_ARGS__)
 #define TraceLoggingHexInt32(value, ...)      _tlgArgScalarVal(INT32,             value, TlgInHEXINT32,  (),                  __VA_ARGS__)
 #define TraceLoggingHexUInt32(value, ...)     _tlgArgScalarVal(UINT32,            value, TlgInHEXINT32,  (),                  __VA_ARGS__)
-#define TraceLoggingHexLong(value, ...)       _tlgArgScalarVal(LONG,              value, TlgInHEXLONG,   (),                  __VA_ARGS__)
-#define TraceLoggingHexULong(value, ...)      _tlgArgScalarVal(ULONG,             value, TlgInHEXLONG,   (),                  __VA_ARGS__)
 #define TraceLoggingHexInt64(value, ...)      _tlgArgScalarVal(INT64,             value, TlgInHEXINT64,  (),                  __VA_ARGS__)
 #define TraceLoggingHexUInt64(value, ...)     _tlgArgScalarVal(UINT64,            value, TlgInHEXINT64,  (),                  __VA_ARGS__)
-#define TraceLoggingIntPtr(value, ...)        _tlgArgScalarVal(INT_PTR,           value, TlgInINTPTR,    (),                  __VA_ARGS__)
-#define TraceLoggingUIntPtr(value, ...)       _tlgArgScalarVal(UINT_PTR,          value, TlgInUINTPTR,   (),                  __VA_ARGS__)
+#define TraceLoggingHexIntPtr(value, ...)     _tlgArgScalarVal(INT_PTR,           value, TlgInPOINTER,   (),                  __VA_ARGS__)
+#define TraceLoggingHexUIntPtr(value, ...)    _tlgArgScalarVal(UINT_PTR,          value, TlgInPOINTER,   (),                  __VA_ARGS__)
+#define TraceLoggingHexLong(value, ...)       _tlgArgScalarVal(LONG,              value, TlgInHEXLONG,   (),                  __VA_ARGS__)
+#define TraceLoggingHexULong(value, ...)      _tlgArgScalarVal(ULONG,             value, TlgInHEXLONG,   (),                  __VA_ARGS__)
 #define TraceLoggingFloat32(value, ...)       _tlgArgScalarVal(float,             value, TlgInFLOAT,     (),                  __VA_ARGS__)
 #define TraceLoggingFloat64(value, ...)       _tlgArgScalarVal(double,            value, TlgInDOUBLE,    (),                  __VA_ARGS__)
-#define TraceLoggingBool(value, ...)          _tlgArgScalarVal(INT32,             value, TlgInBOOL32,    (),                  __VA_ARGS__)
 #define TraceLoggingBoolean(value, ...)       _tlgArgScalarVal(BOOLEAN,           value, TlgInUINT8,     (TlgOutBOOLEAN),     __VA_ARGS__)
+#define TraceLoggingBool(value, ...)          _tlgArgScalarVal(INT32,             value, TlgInBOOL32,    (),                  __VA_ARGS__)
 #define TraceLoggingChar(value, ...)          _tlgArgScalarVal(char,              value, TlgInUINT8,     (TlgOutSTRING),      __VA_ARGS__)
 #define TraceLoggingChar16(value, ...)        _tlgArgScalarVal(char16_t,          value, TlgInUINT16,    (TlgOutSTRING),      __VA_ARGS__)
 #define TraceLoggingWChar(value, ...)         _tlgArgScalarVal(wchar_t,           value, TlgInUINT16,    (TlgOutSTRING),      __VA_ARGS__)
 #define TraceLoggingPointer(value, ...)       _tlgArgScalarVal(void const*,       value, TlgInPOINTER,   (),                  __VA_ARGS__)
 #define TraceLoggingCodePointer(value, ...)   _tlgArgScalarVal(void const*,       value, TlgInPOINTER,   (TlgOutCODE_POINTER),__VA_ARGS__)
-#define TraceLoggingGuid(value, ...)          _tlgArgScalarRef(GUID,              value, TlgInGUID,      (),                  __VA_ARGS__)
-#define TraceLoggingFileTime(value, ...)      _tlgArgScalarRef(struct _FILETIME,  value, TlgInFILETIME,  (),                  __VA_ARGS__)
-#define TraceLoggingFileTimeUtc(value, ...)   _tlgArgScalarRef(struct _FILETIME,  value, TlgInFILETIME,  (TlgOutDATETIME_UTC),__VA_ARGS__)
-#define TraceLoggingSystemTime(value, ...)    _tlgArgScalarRef(struct _SYSTEMTIME,value, TlgInSYSTEMTIME,(),                  __VA_ARGS__)
-#define TraceLoggingSystemTimeUtc(value, ...) _tlgArgScalarRef(struct _SYSTEMTIME,value, TlgInSYSTEMTIME,(TlgOutDATETIME_UTC),__VA_ARGS__)
 #define TraceLoggingPid(value, ...)           _tlgArgScalarVal(UINT32,            value, TlgInUINT32,    (TlgOutPID),         __VA_ARGS__)
 #define TraceLoggingTid(value, ...)           _tlgArgScalarVal(UINT32,            value, TlgInUINT32,    (TlgOutTID),         __VA_ARGS__)
 #define TraceLoggingPort(value, ...)          _tlgArgScalarVal(UINT16,            value, TlgInUINT16,    (TlgOutPORT),        __VA_ARGS__)
 #define TraceLoggingWinError(value, ...)      _tlgArgScalarVal(UINT32,            value, TlgInUINT32,    (TlgOutWIN32ERROR),  __VA_ARGS__)
 #define TraceLoggingNTStatus(value, ...)      _tlgArgScalarVal(NTSTATUS,          value, TlgInUINT32,    (TlgOutNTSTATUS),    __VA_ARGS__)
 #define TraceLoggingHResult(value, ...)       _tlgArgScalarVal(HRESULT,           value, TlgInINT32,     (TlgOutHRESULT),     __VA_ARGS__)
+#define TraceLoggingFileTime(value, ...)      _tlgArgScalarRef(struct _FILETIME,  value, TlgInFILETIME,  (),                  __VA_ARGS__)
+#define TraceLoggingFileTimeUtc(value, ...)   _tlgArgScalarRef(struct _FILETIME,  value, TlgInFILETIME,  (TlgOutDATETIME_UTC),__VA_ARGS__)
+#define TraceLoggingSystemTime(value, ...)    _tlgArgScalarRef(struct _SYSTEMTIME,value, TlgInSYSTEMTIME,(),                  __VA_ARGS__)
+#define TraceLoggingSystemTimeUtc(value, ...) _tlgArgScalarRef(struct _SYSTEMTIME,value, TlgInSYSTEMTIME,(TlgOutDATETIME_UTC),__VA_ARGS__)
+#define TraceLoggingGuid(value, ...)          _tlgArgScalarRef(GUID,              value, TlgInGUID,      (),                  __VA_ARGS__)
 
 /*
 Wrapper macros for event fields with zero-terminated or counted string values.
@@ -1564,36 +1647,38 @@ Examples:
 #define TraceLoggingUInt16FixedArray(pValues, cValues, ...)        _tlgArgFixedArray(UINT16,             pValues, cValues, TlgInUINT16,     (),                   __VA_ARGS__)
 #define TraceLoggingInt32FixedArray(pValues, cValues, ...)         _tlgArgFixedArray(INT32,              pValues, cValues, TlgInINT32,      (),                   __VA_ARGS__)
 #define TraceLoggingUInt32FixedArray(pValues, cValues, ...)        _tlgArgFixedArray(UINT32,             pValues, cValues, TlgInUINT32,     (),                   __VA_ARGS__)
-#define TraceLoggingLongFixedArray(pValues, cValues, ...)          _tlgArgFixedArray(LONG,               pValues, cValues, TlgInLONG,       (),                   __VA_ARGS__)
-#define TraceLoggingULongFixedArray(pValues, cValues, ...)         _tlgArgFixedArray(ULONG,              pValues, cValues, TlgInULONG,      (),                   __VA_ARGS__)
 #define TraceLoggingInt64FixedArray(pValues, cValues, ...)         _tlgArgFixedArray(INT64,              pValues, cValues, TlgInINT64,      (),                   __VA_ARGS__)
 #define TraceLoggingUInt64FixedArray(pValues, cValues, ...)        _tlgArgFixedArray(UINT64,             pValues, cValues, TlgInUINT64,     (),                   __VA_ARGS__)
+#define TraceLoggingIntPtrFixedArray(pValues, cValues, ...)        _tlgArgFixedArray(INT_PTR,            pValues, cValues, TlgInINTPTR,     (),                   __VA_ARGS__)
+#define TraceLoggingUIntPtrFixedArray(pValues, cValues, ...)       _tlgArgFixedArray(UINT_PTR,           pValues, cValues, TlgInUINTPTR,    (),                   __VA_ARGS__)
+#define TraceLoggingLongFixedArray(pValues, cValues, ...)          _tlgArgFixedArray(LONG,               pValues, cValues, TlgInLONG,       (),                   __VA_ARGS__)
+#define TraceLoggingULongFixedArray(pValues, cValues, ...)         _tlgArgFixedArray(ULONG,              pValues, cValues, TlgInULONG,      (),                   __VA_ARGS__)
 #define TraceLoggingHexInt8FixedArray(pValues, cValues, ...)       _tlgArgFixedArray(INT8,               pValues, cValues, TlgInUINT8,      (TlgOutHEX),          __VA_ARGS__)
 #define TraceLoggingHexUInt8FixedArray(pValues, cValues, ...)      _tlgArgFixedArray(UINT8,              pValues, cValues, TlgInUINT8,      (TlgOutHEX),          __VA_ARGS__)
 #define TraceLoggingHexInt16FixedArray(pValues, cValues, ...)      _tlgArgFixedArray(INT16,              pValues, cValues, TlgInUINT16,     (TlgOutHEX),          __VA_ARGS__)
 #define TraceLoggingHexUInt16FixedArray(pValues, cValues, ...)     _tlgArgFixedArray(UINT16,             pValues, cValues, TlgInUINT16,     (TlgOutHEX),          __VA_ARGS__)
 #define TraceLoggingHexInt32FixedArray(pValues, cValues, ...)      _tlgArgFixedArray(INT32,              pValues, cValues, TlgInHEXINT32,   (),                   __VA_ARGS__)
 #define TraceLoggingHexUInt32FixedArray(pValues, cValues, ...)     _tlgArgFixedArray(UINT32,             pValues, cValues, TlgInHEXINT32,   (),                   __VA_ARGS__)
-#define TraceLoggingHexLongFixedArray(pValues, cValues, ...)       _tlgArgFixedArray(LONG,               pValues, cValues, TlgInHEXLONG,    (),                   __VA_ARGS__)
-#define TraceLoggingHexULongFixedArray(pValues, cValues, ...)      _tlgArgFixedArray(ULONG,              pValues, cValues, TlgInHEXLONG,    (),                   __VA_ARGS__)
 #define TraceLoggingHexInt64FixedArray(pValues, cValues, ...)      _tlgArgFixedArray(INT64,              pValues, cValues, TlgInHEXINT64,   (),                   __VA_ARGS__)
 #define TraceLoggingHexUInt64FixedArray(pValues, cValues, ...)     _tlgArgFixedArray(UINT64,             pValues, cValues, TlgInHEXINT64,   (),                   __VA_ARGS__)
-#define TraceLoggingIntPtrFixedArray(pValues, cValues, ...)        _tlgArgFixedArray(INT_PTR,            pValues, cValues, TlgInINTPTR,     (),                   __VA_ARGS__)
-#define TraceLoggingUIntPtrFixedArray(pValues, cValues, ...)       _tlgArgFixedArray(UINT_PTR,           pValues, cValues, TlgInUINTPTR,    (),                   __VA_ARGS__)
+#define TraceLoggingHexIntPtrFixedArray(pValues, cValues, ...)     _tlgArgFixedArray(INT_PTR,            pValues, cValues, TlgInPOINTER,    (),                   __VA_ARGS__)
+#define TraceLoggingHexUIntPtrFixedArray(pValues, cValues, ...)    _tlgArgFixedArray(UINT_PTR,           pValues, cValues, TlgInPOINTER,    (),                   __VA_ARGS__)
+#define TraceLoggingHexLongFixedArray(pValues, cValues, ...)       _tlgArgFixedArray(LONG,               pValues, cValues, TlgInHEXLONG,    (),                   __VA_ARGS__)
+#define TraceLoggingHexULongFixedArray(pValues, cValues, ...)      _tlgArgFixedArray(ULONG,              pValues, cValues, TlgInHEXLONG,    (),                   __VA_ARGS__)
 #define TraceLoggingFloat32FixedArray(pValues, cValues, ...)       _tlgArgFixedArray(float,              pValues, cValues, TlgInFLOAT,      (),                   __VA_ARGS__)
 #define TraceLoggingFloat64FixedArray(pValues, cValues, ...)       _tlgArgFixedArray(double,             pValues, cValues, TlgInDOUBLE,     (),                   __VA_ARGS__)
-#define TraceLoggingBoolFixedArray(pValues, cValues, ...)          _tlgArgFixedArray(INT32,              pValues, cValues, TlgInBOOL32,     (),                   __VA_ARGS__)
 #define TraceLoggingBooleanFixedArray(pValues, cValues, ...)       _tlgArgFixedArray(BOOLEAN,            pValues, cValues, TlgInUINT8,      (TlgOutBOOLEAN),      __VA_ARGS__)
+#define TraceLoggingBoolFixedArray(pValues, cValues, ...)          _tlgArgFixedArray(INT32,              pValues, cValues, TlgInBOOL32,     (),                   __VA_ARGS__)
 #define TraceLoggingCharFixedArray(pValues, cValues, ...)          _tlgArgFixedArray(char,               pValues, cValues, TlgInUINT8,      (TlgOutSTRING),       __VA_ARGS__)
 #define TraceLoggingChar16FixedArray(pValues, cValues, ...)        _tlgArgFixedArray(char16_t,           pValues, cValues, TlgInUINT16,     (TlgOutSTRING),       __VA_ARGS__)
 #define TraceLoggingWCharFixedArray(pValues, cValues, ...)         _tlgArgFixedArray(wchar_t,            pValues, cValues, TlgInUINT16,     (TlgOutSTRING),       __VA_ARGS__)
 #define TraceLoggingPointerFixedArray(pValues, cValues, ...)       _tlgArgFixedArray(LPVOID,             pValues, cValues, TlgInPOINTER,    (),                   __VA_ARGS__)
 #define TraceLoggingCodePointerFixedArray(pValues, cValues, ...)   _tlgArgFixedArray(LPVOID,             pValues, cValues, TlgInPOINTER,    (TlgOutCODE_POINTER), __VA_ARGS__)
-#define TraceLoggingGuidFixedArray(pValues, cValues, ...)          _tlgArgFixedArray(GUID,               pValues, cValues, TlgInGUID,       (),                   __VA_ARGS__)
 #define TraceLoggingFileTimeFixedArray(pValues, cValues, ...)      _tlgArgFixedArray(struct _FILETIME,   pValues, cValues, TlgInFILETIME,   (),                   __VA_ARGS__)
 #define TraceLoggingFileTimeUtcFixedArray(pValues, cValues, ...)   _tlgArgFixedArray(struct _FILETIME,   pValues, cValues, TlgInFILETIME,   (TlgOutDATETIME_UTC), __VA_ARGS__)
 #define TraceLoggingSystemTimeFixedArray(pValues, cValues, ...)    _tlgArgFixedArray(struct _SYSTEMTIME, pValues, cValues, TlgInSYSTEMTIME, (),                   __VA_ARGS__)
 #define TraceLoggingSystemTimeUtcFixedArray(pValues, cValues, ...) _tlgArgFixedArray(struct _SYSTEMTIME, pValues, cValues, TlgInSYSTEMTIME, (TlgOutDATETIME_UTC), __VA_ARGS__)
+#define TraceLoggingGuidFixedArray(pValues, cValues, ...)          _tlgArgFixedArray(GUID,               pValues, cValues, TlgInGUID,       (),                   __VA_ARGS__)
 
 /*
 Wrapper macros for event fields with values that are variable-length arrays.
@@ -1628,36 +1713,38 @@ Examples:
 #define TraceLoggingUInt16Array(pValues, cValues, ...)        _tlgArgArray(UINT16,             pValues, cValues, TlgInUINT16,     (),                   __VA_ARGS__)
 #define TraceLoggingInt32Array(pValues, cValues, ...)         _tlgArgArray(INT32,              pValues, cValues, TlgInINT32,      (),                   __VA_ARGS__)
 #define TraceLoggingUInt32Array(pValues, cValues, ...)        _tlgArgArray(UINT32,             pValues, cValues, TlgInUINT32,     (),                   __VA_ARGS__)
-#define TraceLoggingLongArray(pValues, cValues, ...)          _tlgArgArray(LONG,               pValues, cValues, TlgInLONG,       (),                   __VA_ARGS__)
-#define TraceLoggingULongArray(pValues, cValues, ...)         _tlgArgArray(ULONG,              pValues, cValues, TlgInULONG,      (),                   __VA_ARGS__)
 #define TraceLoggingInt64Array(pValues, cValues, ...)         _tlgArgArray(INT64,              pValues, cValues, TlgInINT64,      (),                   __VA_ARGS__)
 #define TraceLoggingUInt64Array(pValues, cValues, ...)        _tlgArgArray(UINT64,             pValues, cValues, TlgInUINT64,     (),                   __VA_ARGS__)
+#define TraceLoggingIntPtrArray(pValues, cValues, ...)        _tlgArgArray(INT_PTR,            pValues, cValues, TlgInINTPTR,     (),                   __VA_ARGS__)
+#define TraceLoggingUIntPtrArray(pValues, cValues, ...)       _tlgArgArray(UINT_PTR,           pValues, cValues, TlgInUINTPTR,    (),                   __VA_ARGS__)
+#define TraceLoggingLongArray(pValues, cValues, ...)          _tlgArgArray(LONG,               pValues, cValues, TlgInLONG,       (),                   __VA_ARGS__)
+#define TraceLoggingULongArray(pValues, cValues, ...)         _tlgArgArray(ULONG,              pValues, cValues, TlgInULONG,      (),                   __VA_ARGS__)
 #define TraceLoggingHexInt8Array(pValues, cValues, ...)       _tlgArgArray(INT8,               pValues, cValues, TlgInUINT8,      (TlgOutHEX),          __VA_ARGS__)
 #define TraceLoggingHexUInt8Array(pValues, cValues, ...)      _tlgArgArray(UINT8,              pValues, cValues, TlgInUINT8,      (TlgOutHEX),          __VA_ARGS__)
 #define TraceLoggingHexInt16Array(pValues, cValues, ...)      _tlgArgArray(INT16,              pValues, cValues, TlgInUINT16,     (TlgOutHEX),          __VA_ARGS__)
 #define TraceLoggingHexUInt16Array(pValues, cValues, ...)     _tlgArgArray(UINT16,             pValues, cValues, TlgInUINT16,     (TlgOutHEX),          __VA_ARGS__)
 #define TraceLoggingHexInt32Array(pValues, cValues, ...)      _tlgArgArray(INT32,              pValues, cValues, TlgInHEXINT32,   (),                   __VA_ARGS__)
 #define TraceLoggingHexUInt32Array(pValues, cValues, ...)     _tlgArgArray(UINT32,             pValues, cValues, TlgInHEXINT32,   (),                   __VA_ARGS__)
-#define TraceLoggingHexLongArray(pValues, cValues, ...)       _tlgArgArray(LONG,               pValues, cValues, TlgInHEXLONG,    (),                   __VA_ARGS__)
-#define TraceLoggingHexULongArray(pValues, cValues, ...)      _tlgArgArray(ULONG,              pValues, cValues, TlgInHEXLONG,    (),                   __VA_ARGS__)
 #define TraceLoggingHexInt64Array(pValues, cValues, ...)      _tlgArgArray(INT64,              pValues, cValues, TlgInHEXINT64,   (),                   __VA_ARGS__)
 #define TraceLoggingHexUInt64Array(pValues, cValues, ...)     _tlgArgArray(UINT64,             pValues, cValues, TlgInHEXINT64,   (),                   __VA_ARGS__)
-#define TraceLoggingIntPtrArray(pValues, cValues, ...)        _tlgArgArray(INT_PTR,            pValues, cValues, TlgInINTPTR,     (),                   __VA_ARGS__)
-#define TraceLoggingUIntPtrArray(pValues, cValues, ...)       _tlgArgArray(UINT_PTR,           pValues, cValues, TlgInUINTPTR,    (),                   __VA_ARGS__)
+#define TraceLoggingHexIntPtrArray(pValues, cValues, ...)     _tlgArgArray(INT_PTR,            pValues, cValues, TlgInPOINTER,    (),                   __VA_ARGS__)
+#define TraceLoggingHexUIntPtrArray(pValues, cValues, ...)    _tlgArgArray(UINT_PTR,           pValues, cValues, TlgInPOINTER,    (),                   __VA_ARGS__)
+#define TraceLoggingHexLongArray(pValues, cValues, ...)       _tlgArgArray(LONG,               pValues, cValues, TlgInHEXLONG,    (),                   __VA_ARGS__)
+#define TraceLoggingHexULongArray(pValues, cValues, ...)      _tlgArgArray(ULONG,              pValues, cValues, TlgInHEXLONG,    (),                   __VA_ARGS__)
 #define TraceLoggingFloat32Array(pValues, cValues, ...)       _tlgArgArray(float,              pValues, cValues, TlgInFLOAT,      (),                   __VA_ARGS__)
 #define TraceLoggingFloat64Array(pValues, cValues, ...)       _tlgArgArray(double,             pValues, cValues, TlgInDOUBLE,     (),                   __VA_ARGS__)
-#define TraceLoggingBoolArray(pValues, cValues, ...)          _tlgArgArray(INT32,              pValues, cValues, TlgInBOOL32,     (),                   __VA_ARGS__)
 #define TraceLoggingBooleanArray(pValues, cValues, ...)       _tlgArgArray(BOOLEAN,            pValues, cValues, TlgInUINT8,      (TlgOutBOOLEAN),      __VA_ARGS__)
+#define TraceLoggingBoolArray(pValues, cValues, ...)          _tlgArgArray(INT32,              pValues, cValues, TlgInBOOL32,     (),                   __VA_ARGS__)
 #define TraceLoggingCharArray(pValues, cValues, ...)          _tlgArgArray(char,               pValues, cValues, TlgInUINT8,      (TlgOutSTRING),       __VA_ARGS__)
 #define TraceLoggingChar16Array(pValues, cValues, ...)        _tlgArgArray(char16_t,           pValues, cValues, TlgInUINT16,     (TlgOutSTRING),       __VA_ARGS__)
 #define TraceLoggingWCharArray(pValues, cValues, ...)         _tlgArgArray(wchar_t,            pValues, cValues, TlgInUINT16,     (TlgOutSTRING),       __VA_ARGS__)
 #define TraceLoggingPointerArray(pValues, cValues, ...)       _tlgArgArray(LPVOID,             pValues, cValues, TlgInPOINTER,    (),                   __VA_ARGS__)
 #define TraceLoggingCodePointerArray(pValues, cValues, ...)   _tlgArgArray(LPVOID,             pValues, cValues, TlgInPOINTER,    (TlgOutCODE_POINTER), __VA_ARGS__)
-#define TraceLoggingGuidArray(pValues, cValues, ...)          _tlgArgArray(GUID,               pValues, cValues, TlgInGUID,       (),                   __VA_ARGS__)
 #define TraceLoggingFileTimeArray(pValues, cValues, ...)      _tlgArgArray(struct _FILETIME,   pValues, cValues, TlgInFILETIME,   (),                   __VA_ARGS__)
 #define TraceLoggingFileTimeUtcArray(pValues, cValues, ...)   _tlgArgArray(struct _FILETIME,   pValues, cValues, TlgInFILETIME,   (TlgOutDATETIME_UTC), __VA_ARGS__)
 #define TraceLoggingSystemTimeArray(pValues, cValues, ...)    _tlgArgArray(struct _SYSTEMTIME, pValues, cValues, TlgInSYSTEMTIME, (),                   __VA_ARGS__)
 #define TraceLoggingSystemTimeUtcArray(pValues, cValues, ...) _tlgArgArray(struct _SYSTEMTIME, pValues, cValues, TlgInSYSTEMTIME, (TlgOutDATETIME_UTC), __VA_ARGS__)
+#define TraceLoggingGuidArray(pValues, cValues, ...)          _tlgArgArray(GUID,               pValues, cValues, TlgInGUID,       (),                   __VA_ARGS__)
 
 /*
 Wrapper macros for manually-packed fields (advanced scenarios).
@@ -2039,7 +2126,7 @@ memory.
 
 #if TLG_DEBUG
   // Not for use outside of TraceLoggingProvider.h.
-  #define _tlg_ASSERT(exp, str) ((void)(!(exp) ? (__annotation(L"Debug", L"AssertFail", L"TraceLogging: " _tlg_LSTRINGIZE(exp) L" : " L##str), TLG_RAISEASSERTIONFAILURE(), 0) : 0))
+  #define _tlg_ASSERT(exp, str) ((void)(!(exp) ? (__annotation(L"Debug", L"AssertFail", L"TraceLogging: " _tlg_LSTRINGIZE(exp) L" : " str), TLG_RAISEASSERTIONFAILURE(), 0) : 0))
 #else // TLG_DEBUG
   // Not for use outside of TraceLoggingProvider.h.
   #define _tlg_ASSERT(exp, str) ((void)0)
@@ -2244,7 +2331,7 @@ Core field types and flags.
 */
 enum TlgIn_t
 {
-    TlgInNULL,
+    TlgInNULL, // Invalid type.
     TlgInUNICODESTRING,
     TlgInANSISTRING,
     TlgInINT8,
@@ -2457,15 +2544,13 @@ understand the given OutType), the field formatting should be "signed decimal".
 
 Some InType values have special behaviors or limitations:
 
-- TlgInNULL: This means the field has no data (size = 0). Array of NULL is
-  illegal. In addition, many decoders do not correctly support NULL fields.
+- TlgInNULL: Invalid field type.
 - TlgInBINARY: Array of BINARY should not be used. Array of BINARY is legal,
   but TDH cannot decode a field with type array of BINARY.
 - _TlgInPOINTER_unsupported: Do not use. This value is reserved because the
   corresponding TDH value is TDH_INTYPE_POINTER. TraceLogging does not directly
   support a POINTER type. Instead, TraceLogging defines TlgInPOINTER as
-  TlgInHEXINT32 for 32-bit binaries and defines TlgInPOINTER as TlgInHEXINT64
-  for 64-bit binaries.
+  TlgInHEXINT32 for 32-bit binaries or TlgInHEXINT64 for 64-bit binaries.
 - A struct has no data for itself, but it groups the following N logical fields
   together into a single logical field. The value N is encoded in the OutType.
   Arrays of struct are allowed, and structs can contain other structs (or
@@ -2491,8 +2576,8 @@ Each scalar field's data is appended end-to-end with no alignment or padding.
 A fixed-length array is encoded by appending the data for N values end-to-end
 with no alignment or padding, where N is the number of values as encoded in
 the field's metadata. This rule applies even if the data is variable-length or
-complex (e.g. it applies even if the field is a structure). Note that a length
-of 0 for a fixed-length array can cause problems with some decoders.
+complex (e.g. it applies even if the field is a structure). Note that an array
+length of 0 for a fixed-length array should not be used.
 
 A variable-length array is encoded as a UINT16 containing the number of values
 followed by the data for those values, end-to-end.
@@ -2510,7 +2595,7 @@ value types are variable-size:
 /*
 The following information is not part of the TraceLogging protocol - it
 describes how the information needed by this header is stored in memory.
-The following information is internal implementation information, and may
+The following information is internal implementation information and may
 change in future revisions of this header.
 */
 
@@ -2662,7 +2747,7 @@ that T::Provider() returns an HProvider.
 Example:
 template<
     typename ProviderType,
-    typename TlgReflectorTag = _TlgReflectorTag_Param0IsHProvider>
+    typename TlgReflectorTag = _TlgReflectorTag_Param0IsProviderType>
 class Activity
 {
     static TraceLoggingHProvider Provider()
@@ -2995,6 +3080,7 @@ _tlgWriteCommon(
 #else
 #pragma warning(suppress: 28931) // Unused assignment
         volatileVar = cbMetadata;
+        UNREFERENCED_PARAMETER(volatileVar);
 #endif
     }
 }
@@ -3915,41 +4001,18 @@ _tlgInTypeBaseDecl(false, wchar_t const*, TlgInUNICODESTRING);
 #define _tlgExpandProviderId(a, b, c, d, e, f, g, h, i, j, k) \
     { a, b, c, { d, e, f, g, h, i, j , k } }
 
-#define _tlgParseOption(option) \
-    _tlg_TraceLogging_Unrecognized_provider_option_##option
-#define _tlg_TraceLogging_Unrecognized_provider_option__tlgOption_Group(g1, g2, g3, g4, g5, g6, g7, g8, g9, g10, g11) /* recognized */ \
-    { g1, g2, g3, { g4, g5, g6, g7, g8, g9, g10, g11 } }
-
-#define _tlgProviderStorage_imp(    storageVariable, providerName, providerId, annotationFunc, ...)  _tlgProviderStorage_impN( \
-           _tlg_NARGS(__VA_ARGS__), storageVariable, providerName, providerId, annotationFunc, __VA_ARGS__)
-#define _tlgProviderStorage_impN(n, storageVariable, providerName, providerId, annotationFunc, ...) _tlgProviderStorage_impN_CALL(_tlg_PASTE2(_tlgProviderStorage_imp, n), \
-                                 (  storageVariable, providerName, providerId, annotationFunc, __VA_ARGS__))
-#define _tlgProviderStorage_impN_CALL(macro, args) macro args
-
-#define _tlgProviderStorage_imp0(storageVariable, providerName, providerId, annotationFunc, ...) \
-    _tlgProviderStorage_impx(storageVariable, providerName, providerId, annotationFunc \
-        , () \
-        , () \
-        )
-
-#define _tlgProviderStorage_imp1(storageVariable, providerName, providerId, annotationFunc, groupOption) \
-    _tlgProviderStorage_impx(storageVariable, providerName, providerId, annotationFunc \
-        , (UINT16 _tlgOptionSize1; UINT8 _tlgOptionEnum1; GUID _tlgOptionVal1; ) \
-        , (, 3 + sizeof(GUID), _TlgOptionGroup, _tlgParseOption(groupOption)) \
-        )
-
-#define _tlgProviderStorage_impx(storageVariable, providerName, providerId, annotationFunc, optionVars, optionVals) \
+#define _tlgProviderStorage_imp(storageVariable, providerName, providerId, annotationFunc, ...) \
     _tlgPragmaUtf8Begin \
     __pragma(pack(push, 1)) \
     _tlgValidateProviderId(providerId) \
     static struct { \
         struct _tlgProviderMetadata_t _tlgProv; \
         char _tlgName[sizeof(providerName)]; \
-        _tlg_FLATTEN optionVars \
+        _tlg_FOREACH(_tlgProvVar, __VA_ARGS__) \
     } const __declspec(allocate(_tlgSegMetadataProviders)) __declspec(align(1)) storageVariable##_Meta = { \
         { _TlgBlobProvider3, _tlgExpandProviderId providerId, sizeof(storageVariable##_Meta) - 1 - _tlg_PROVIDER_METADATA_PREAMBLE }, \
         (providerName) \
-        _tlg_FLATTEN optionVals \
+        _tlg_FOREACH(_tlgProvVal, __VA_ARGS__) \
     }; \
     __pragma(pack(pop)) \
     _tlgPragmaUtf8End \
@@ -3958,6 +4021,14 @@ _tlgInTypeBaseDecl(false, wchar_t const*, TlgInUNICODESTRING);
         0, 0, 0, 0, 0 \
         _tlgAnnotationFunc_imp(annotationFunc, storageVariable) \
     }
+
+#define _tlgProvVar(n, args) _tlgApplyArgsN(_tlgProvVar, n, args)
+#define _tlgProvVar_tlgOption(n, traitType, ctype, value) \
+    UINT16 _tlgOptionSize##n; UINT8 _tlgTraitType##n; ctype _tlgOptionVal##n;
+
+#define _tlgProvVal(n, args) _tlgApplyArgs(_tlgProvVal, args)
+#define _tlgProvVal_tlgOption(traitType, ctype, value) \
+    , 3 + sizeof(ctype), traitType, _tlg_FLATTEN value
 
 #define _tlgAnnotationFunc_imp(use_annotationFunc, storageVariable) _tlg_PASTE2(_tlgAnnotationFunc_imp, use_annotationFunc) (storageVariable)
 #define _tlgAnnotationFunc_imp0(storageVariable)
@@ -3992,8 +4063,8 @@ _tlgNDT(value, __VA_ARGS__) --> "fieldName", L"description", tags, hasTags
 */
 #define _tlgNDT_imp0(value, ...)               #value,      ,     , 0
 #define _tlgNDT_imp1(value, name)              name,        ,     , 0
-#define _tlgNDT_imp2(value, name, desc)        name, L##desc,     , 0
-#define _tlgNDT_imp3(value, name, desc, tags)  name, L##desc, tags, 1
+#define _tlgNDT_imp2(value, name, desc)        name, L"" desc,    , 0
+#define _tlgNDT_imp3(value, name, desc, tags)  name, L"" desc, tags, 1
 #define _tlgNDT_impB(macro, args)              macro args
 #define _tlgNDT_impA(n, args)                  _tlgNDT_impB(_tlg_PASTE2(_tlgNDT_imp, n), args)
 #define _tlgNDT(value, ...)                    _tlgNDT_impA(_tlg_NARGS(__VA_ARGS__), (value, __VA_ARGS__))
@@ -4003,8 +4074,8 @@ _tlgDT: Extracts Name/Description/Tags from varargs of wrapper macro with requir
 _tlgDT(name, __VA_ARGS__) --> "fieldName", L"description", tags, hasTags
 */
 #define _tlgDT_imp0(name, ...)                 name,        ,     , 0
-#define _tlgDT_imp1(name, desc)                name, L##desc,     , 0
-#define _tlgDT_imp2(name, desc, tags)          name, L##desc, tags, 1
+#define _tlgDT_imp1(name, desc)                name, L"" desc,     , 0
+#define _tlgDT_imp2(name, desc, tags)          name, L"" desc, tags, 1
 #define _tlgDT_impB(macro, args)               macro args
 #define _tlgDT_impA(n, args)                   _tlgDT_impB(_tlg_PASTE2(_tlgDT_imp, n), args)
 #define _tlgDT(name, ...)                      _tlgDT_impA(_tlg_NARGS(__VA_ARGS__), (name, __VA_ARGS__))
@@ -4240,7 +4311,7 @@ we can use &dataDescriptor[1].Size as the pointer to the count.
 #define _tlgChannelVal_tlgPackedData( ctype, pValue,   cbValue, dataDescType, hasType                              )
 #define _tlgChannelVal_tlgCustom(     ctype, pValue,   cbValue, protocol,bSchema,cbSchema,name, desc, tags, hasTags)
 #define _tlgChannelVal_tlgStruct(                      fieldCount,inType,                 name, desc, tags, hasTags)
-#define _tlgChannelVal_tlgChannel(    eventChannel                                                                 ) &0|_tlgConst(Channel, eventChannel)
+#define _tlgChannelVal_tlgChannel(    eventChannel                                                                 ) &0|(eventChannel)
 #define _tlgChannelVal_tlgLevel(      eventLevel                                                                   )
 #define _tlgChannelVal_tlgOpcode(     eventOpcode                                                                  )
 #define _tlgChannelVal_tlgKeyword(    eventKeyword                                                                 )
@@ -4265,7 +4336,7 @@ we can use &dataDescriptor[1].Size as the pointer to the count.
 #define _tlgLevelVal_tlgCustom(     ctype, pValue,   cbValue, protocol,bSchema,cbSchema,name, desc, tags, hasTags)
 #define _tlgLevelVal_tlgStruct(                      fieldCount,inType,                 name, desc, tags, hasTags)
 #define _tlgLevelVal_tlgChannel(    eventChannel                                                                 )
-#define _tlgLevelVal_tlgLevel(      eventLevel                                                                   ) &0|_tlgConst(Level, eventLevel)
+#define _tlgLevelVal_tlgLevel(      eventLevel                                                                   ) &0|(eventLevel)
 #define _tlgLevelVal_tlgOpcode(     eventOpcode                                                                  )
 #define _tlgLevelVal_tlgKeyword(    eventKeyword                                                                 )
 #define _tlgLevelVal_tlgTag(        eventTag                                                                     )
@@ -4290,7 +4361,7 @@ we can use &dataDescriptor[1].Size as the pointer to the count.
 #define _tlgOpcodeVal_tlgStruct(                      fieldCount,inType,                 name, desc, tags, hasTags)
 #define _tlgOpcodeVal_tlgChannel(    eventChannel                                                                 )
 #define _tlgOpcodeVal_tlgLevel(      eventLevel                                                                   )
-#define _tlgOpcodeVal_tlgOpcode(     eventOpcode                                                                  )  &0|_tlgConst(Opcode, eventOpcode)
+#define _tlgOpcodeVal_tlgOpcode(     eventOpcode                                                                  )  &0|(eventOpcode)
 #define _tlgOpcodeVal_tlgKeyword(    eventKeyword                                                                 )
 #define _tlgOpcodeVal_tlgTag(        eventTag                                                                     )
 #define _tlgOpcodeVal_tlgDesc(       eventDescription                                                             )
@@ -4315,7 +4386,7 @@ we can use &dataDescriptor[1].Size as the pointer to the count.
 #define _tlgKeywordVal_tlgChannel(    eventChannel                                                                 )
 #define _tlgKeywordVal_tlgLevel(      eventLevel                                                                   )
 #define _tlgKeywordVal_tlgOpcode(     eventOpcode                                                                  )
-#define _tlgKeywordVal_tlgKeyword(    eventKeyword                                                                 ) |_tlgConst(Keyword, eventKeyword)
+#define _tlgKeywordVal_tlgKeyword(    eventKeyword                                                                 ) |(eventKeyword)
 #define _tlgKeywordVal_tlgTag(        eventTag                                                                     )
 #define _tlgKeywordVal_tlgDesc(       eventDescription                                                             )
 #define _tlgKeywordVal_tlgCustomAnnot(key, value                                                                   )
@@ -4366,7 +4437,7 @@ we can use &dataDescriptor[1].Size as the pointer to the count.
 #define _tlgAnnotes_tlgKeyword(    eventKeyword                                                                 )
 #define _tlgAnnotes_tlgTag(        eventTag                                                                     )
 #define _tlgAnnotes_tlgDesc(       eventDescription                                                             )
-#define _tlgAnnotes_tlgCustomAnnot(key, value                                                                   ) L"|" L##key L"=" value
+#define _tlgAnnotes_tlgCustomAnnot(key, value                                                                   ) L"|" key L"=" value
 
 #define _tlgDescVal(n, args) _tlgApplyArgs(_tlgDescVal, args)
 #define _tlgDescVal_tlgAuto(              value,                                       name, desc, tags, hasTags)
@@ -4394,12 +4465,9 @@ we can use &dataDescriptor[1].Size as the pointer to the count.
 
 #ifdef __cplusplus
 
-template<class T, T n> struct _tlgIntegralConstant { static T const value = n; };
-template<UCHAR n> struct _traceLoggingChannel : _tlgIntegralConstant<UCHAR, n> { };
-template<UCHAR n> struct _traceLoggingLevel : _tlgIntegralConstant<UCHAR, n> { };
-template<UCHAR n> struct _traceLoggingOpcode : _tlgIntegralConstant<UCHAR, n> { };
-template<ULONGLONG n> struct _traceLoggingKeyword : _tlgIntegralConstant<ULONGLONG, n> { };
-template<UINT32 n> struct _traceLoggingEventTag : _tlgIntegralConstant<UINT32, n> { };
+template<ULONGLONG n>
+struct _traceLoggingKeyword { static ULONGLONG const value = n; };
+#define _tlgKeywordConst(n) _traceLoggingKeyword<n>::value
 
 template<
     UINT32 eventTag,
@@ -4447,7 +4515,6 @@ struct _tlgTagEnc<eventTag, 4>
 #define _tlgEvtTagType             _tlgTagTy::type
 #define _tlgEvtTagInit             _tlgTagTy::value
 
-#define _tlgConst(name, n) _traceLogging##name<n>::value
 #define _tlg_AssertValidPackedMetadataInTypeCppOnly(inType) _tlg_AssertValidPackedMetadataInType(inType);
 #define _tlgCheckStructFieldCountCppOnly(fieldCount) _tlgCheckStructFieldCount<fieldCount>::value
 
@@ -4459,6 +4526,8 @@ struct _tlgTagEnc<eventTag, 4>
 
 #else // __cplusplus
 
+#define _tlgKeywordConst(n) n
+
 #define _tlgEvtTagDecl(eventTag)   enum { _tlgTagConst = (eventTag) }
 #define _tlgEvtTagType             UINT16
 #define _tlgEvtTagInit \
@@ -4468,7 +4537,6 @@ struct _tlgTagEnc<eventTag, 4>
     |((0x0003fff&(UINT32)_tlgTagConst)<<16) /* Trigger warning for 0x00003fff bits */ \
     |(~(0x0FFFFFFF|~(UINT32)_tlgTagConst))  /* Trigger warning for any other bits  */ \
 
-#define _tlgConst(name, n) (n)
 #define _tlg_AssertValidPackedMetadataInTypeCppOnly(inType)
 #define _tlgCheckStructFieldCountCppOnly(fieldCount) 0
 
@@ -4488,7 +4556,9 @@ struct _tlgTagEnc<eventTag, 4>
         __pragma(pack(push, 1)) \
         _tlgPragmaUtf8Begin \
         _tlgEvtTagDecl(0 _tlg_FOREACH(_tlgEvtTagVal, __VA_ARGS__)); \
-        enum { _tlgLevelConst = 5 _tlg_FOREACH(_tlgLevelVal, __VA_ARGS__) }; \
+        enum { _tlgChannelConst = (11u _tlg_FOREACH(_tlgChannelVal, __VA_ARGS__)) }; \
+        enum { _tlgLevelConst = (5u _tlg_FOREACH(_tlgLevelVal, __VA_ARGS__)) }; \
+        enum { _tlgOpcodeConst = (0u _tlg_FOREACH(_tlgOpcodeVal, __VA_ARGS__)) }; \
         static struct { \
             UCHAR _tlgBlobTyp; UCHAR _tlgChannel; UCHAR _tlgLevel; UCHAR _tlgOpcode; ULONGLONG _tlgKeyword; \
             UINT16 _tlgEvtMetaSize; \
@@ -4497,10 +4567,10 @@ struct _tlgTagEnc<eventTag, 4>
             _tlg_FOREACH(_tlgInfoVars, __VA_ARGS__) \
         } __declspec(allocate(_tlgSegMetadataEvents)) __declspec(align(1)) const _tlgEvent = { \
             _TlgBlobEvent4, \
-            11 _tlg_FOREACH(_tlgChannelVal, __VA_ARGS__), \
+            _tlgChannelConst, \
             _tlgLevelConst, \
-            0 _tlg_FOREACH(_tlgOpcodeVal, __VA_ARGS__), \
-            0 _tlg_FOREACH(_tlgKeywordVal, __VA_ARGS__), \
+            _tlgOpcodeConst, \
+            _tlgKeywordConst(0u _tlg_FOREACH(_tlgKeywordVal, __VA_ARGS__)), \
             sizeof(_tlgEvent)-_tlg_EVENT_METADATA_PREAMBLE-1, \
             _tlgEvtTagInit, \
             (eventName) \
@@ -4523,7 +4593,7 @@ struct _tlgTagEnc<eventTag, 4>
     _tlgDefineProvider_functionWrapperBegin##requiresWrapper(functionPostfix) \
         __annotation( \
             L"_TlgDefineProvider:|" _tlg_LSTRINGIZE(__LINE__) L"|" _tlg_LSTRINGIZE(hProvider) L"|" \
-            L##providerName \
+            providerName \
         ); \
     _tlgDefineProvider_functionWrapperEnd##requiresWrapper
 

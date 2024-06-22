@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -2249,7 +2249,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Start(void) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailDataProviderConnection = _uuidof(IEmailDataProviderConnection);
+                    MIDL_CONST_ID IID& IID_IEmailDataProviderConnection = __uuidof(IEmailDataProviderConnection);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -2287,7 +2287,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailDataProviderTriggerDetails = _uuidof(IEmailDataProviderTriggerDetails);
+                    MIDL_CONST_ID IID& IID_IEmailDataProviderTriggerDetails = __uuidof(IEmailDataProviderTriggerDetails);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -2339,7 +2339,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxCreateFolderRequest = _uuidof(IEmailMailboxCreateFolderRequest);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxCreateFolderRequest = __uuidof(IEmailMailboxCreateFolderRequest);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -2380,7 +2380,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxCreateFolderRequestEventArgs = _uuidof(IEmailMailboxCreateFolderRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxCreateFolderRequestEventArgs = __uuidof(IEmailMailboxCreateFolderRequestEventArgs);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -2428,7 +2428,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxDeleteFolderRequest = _uuidof(IEmailMailboxDeleteFolderRequest);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxDeleteFolderRequest = __uuidof(IEmailMailboxDeleteFolderRequest);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -2469,7 +2469,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxDeleteFolderRequestEventArgs = _uuidof(IEmailMailboxDeleteFolderRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxDeleteFolderRequestEventArgs = __uuidof(IEmailMailboxDeleteFolderRequestEventArgs);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -2519,7 +2519,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxDownloadAttachmentRequest = _uuidof(IEmailMailboxDownloadAttachmentRequest);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxDownloadAttachmentRequest = __uuidof(IEmailMailboxDownloadAttachmentRequest);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -2560,7 +2560,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxDownloadAttachmentRequestEventArgs = _uuidof(IEmailMailboxDownloadAttachmentRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxDownloadAttachmentRequestEventArgs = __uuidof(IEmailMailboxDownloadAttachmentRequestEventArgs);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -2607,7 +2607,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxDownloadMessageRequest = _uuidof(IEmailMailboxDownloadMessageRequest);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxDownloadMessageRequest = __uuidof(IEmailMailboxDownloadMessageRequest);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -2648,7 +2648,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxDownloadMessageRequestEventArgs = _uuidof(IEmailMailboxDownloadMessageRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxDownloadMessageRequestEventArgs = __uuidof(IEmailMailboxDownloadMessageRequestEventArgs);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -2696,7 +2696,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxEmptyFolderRequest = _uuidof(IEmailMailboxEmptyFolderRequest);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxEmptyFolderRequest = __uuidof(IEmailMailboxEmptyFolderRequest);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -2737,7 +2737,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxEmptyFolderRequestEventArgs = _uuidof(IEmailMailboxEmptyFolderRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxEmptyFolderRequestEventArgs = __uuidof(IEmailMailboxEmptyFolderRequestEventArgs);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -2799,7 +2799,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxForwardMeetingRequest = _uuidof(IEmailMailboxForwardMeetingRequest);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxForwardMeetingRequest = __uuidof(IEmailMailboxForwardMeetingRequest);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -2840,7 +2840,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxForwardMeetingRequestEventArgs = _uuidof(IEmailMailboxForwardMeetingRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxForwardMeetingRequestEventArgs = __uuidof(IEmailMailboxForwardMeetingRequestEventArgs);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -2888,7 +2888,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxGetAutoReplySettingsRequest = _uuidof(IEmailMailboxGetAutoReplySettingsRequest);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxGetAutoReplySettingsRequest = __uuidof(IEmailMailboxGetAutoReplySettingsRequest);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -2929,7 +2929,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxGetAutoReplySettingsRequestEventArgs = _uuidof(IEmailMailboxGetAutoReplySettingsRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxGetAutoReplySettingsRequestEventArgs = __uuidof(IEmailMailboxGetAutoReplySettingsRequestEventArgs);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -2982,7 +2982,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxMoveFolderRequest = _uuidof(IEmailMailboxMoveFolderRequest);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxMoveFolderRequest = __uuidof(IEmailMailboxMoveFolderRequest);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -3023,7 +3023,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxMoveFolderRequestEventArgs = _uuidof(IEmailMailboxMoveFolderRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxMoveFolderRequestEventArgs = __uuidof(IEmailMailboxMoveFolderRequestEventArgs);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -3082,7 +3082,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxProposeNewTimeForMeetingRequest = _uuidof(IEmailMailboxProposeNewTimeForMeetingRequest);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxProposeNewTimeForMeetingRequest = __uuidof(IEmailMailboxProposeNewTimeForMeetingRequest);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -3123,7 +3123,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxProposeNewTimeForMeetingRequestEventArgs = _uuidof(IEmailMailboxProposeNewTimeForMeetingRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxProposeNewTimeForMeetingRequestEventArgs = __uuidof(IEmailMailboxProposeNewTimeForMeetingRequestEventArgs);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -3171,7 +3171,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxResolveRecipientsRequest = _uuidof(IEmailMailboxResolveRecipientsRequest);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxResolveRecipientsRequest = __uuidof(IEmailMailboxResolveRecipientsRequest);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -3212,7 +3212,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxResolveRecipientsRequestEventArgs = _uuidof(IEmailMailboxResolveRecipientsRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxResolveRecipientsRequestEventArgs = __uuidof(IEmailMailboxResolveRecipientsRequestEventArgs);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -3273,7 +3273,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxServerSearchReadBatchRequest = _uuidof(IEmailMailboxServerSearchReadBatchRequest);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxServerSearchReadBatchRequest = __uuidof(IEmailMailboxServerSearchReadBatchRequest);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -3314,7 +3314,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxServerSearchReadBatchRequestEventArgs = _uuidof(IEmailMailboxServerSearchReadBatchRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxServerSearchReadBatchRequestEventArgs = __uuidof(IEmailMailboxServerSearchReadBatchRequestEventArgs);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -3361,7 +3361,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxSetAutoReplySettingsRequest = _uuidof(IEmailMailboxSetAutoReplySettingsRequest);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxSetAutoReplySettingsRequest = __uuidof(IEmailMailboxSetAutoReplySettingsRequest);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -3402,7 +3402,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxSetAutoReplySettingsRequestEventArgs = _uuidof(IEmailMailboxSetAutoReplySettingsRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxSetAutoReplySettingsRequestEventArgs = __uuidof(IEmailMailboxSetAutoReplySettingsRequestEventArgs);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -3446,7 +3446,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxSyncManagerSyncRequest = _uuidof(IEmailMailboxSyncManagerSyncRequest);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxSyncManagerSyncRequest = __uuidof(IEmailMailboxSyncManagerSyncRequest);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -3487,7 +3487,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxSyncManagerSyncRequestEventArgs = _uuidof(IEmailMailboxSyncManagerSyncRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxSyncManagerSyncRequestEventArgs = __uuidof(IEmailMailboxSyncManagerSyncRequestEventArgs);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -3546,7 +3546,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxUpdateMeetingResponseRequest = _uuidof(IEmailMailboxUpdateMeetingResponseRequest);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxUpdateMeetingResponseRequest = __uuidof(IEmailMailboxUpdateMeetingResponseRequest);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -3587,7 +3587,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxUpdateMeetingResponseRequestEventArgs = _uuidof(IEmailMailboxUpdateMeetingResponseRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxUpdateMeetingResponseRequestEventArgs = __uuidof(IEmailMailboxUpdateMeetingResponseRequestEventArgs);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -3635,7 +3635,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxValidateCertificatesRequest = _uuidof(IEmailMailboxValidateCertificatesRequest);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxValidateCertificatesRequest = __uuidof(IEmailMailboxValidateCertificatesRequest);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */
@@ -3676,7 +3676,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IEmailMailboxValidateCertificatesRequestEventArgs = _uuidof(IEmailMailboxValidateCertificatesRequestEventArgs);
+                    MIDL_CONST_ID IID& IID_IEmailMailboxValidateCertificatesRequestEventArgs = __uuidof(IEmailMailboxValidateCertificatesRequestEventArgs);
                 } /* DataProvider */
             } /* Email */
         } /* ApplicationModel */

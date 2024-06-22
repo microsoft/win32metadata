@@ -1483,6 +1483,15 @@ EXTERN_C const IID IID_IMbnConnection;
 #endif 	/* __IMbnConnection_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_mbnapi_0000_0002 */
+/* [local] */ 
+
+#pragma deprecated(IMbnConnection) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0002_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0002_v0_0_s_ifspec;
+
 #ifndef __IMbnConnectionEvents_INTERFACE_DEFINED__
 #define __IMbnConnectionEvents_INTERFACE_DEFINED__
 
@@ -1624,6 +1633,15 @@ EXTERN_C const IID IID_IMbnConnectionEvents;
 
 #endif 	/* __IMbnConnectionEvents_INTERFACE_DEFINED__ */
 
+
+/* interface __MIDL_itf_mbnapi_0000_0003 */
+/* [local] */ 
+
+#pragma deprecated(IMbnConnectionEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0003_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0003_v0_0_s_ifspec;
 
 #ifndef __IMbnInterface_INTERFACE_DEFINED__
 #define __IMbnInterface_INTERFACE_DEFINED__
@@ -1838,6 +1856,15 @@ EXTERN_C const IID IID_IMbnInterface;
 #endif 	/* __IMbnInterface_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_mbnapi_0000_0004 */
+/* [local] */ 
+
+#pragma deprecated(IMbnInterface) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0004_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0004_v0_0_s_ifspec;
+
 #ifndef __IMbnInterfaceEvents_INTERFACE_DEFINED__
 #define __IMbnInterfaceEvents_INTERFACE_DEFINED__
 
@@ -2032,6 +2059,15 @@ EXTERN_C const IID IID_IMbnInterfaceEvents;
 #endif 	/* __IMbnInterfaceEvents_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_mbnapi_0000_0005 */
+/* [local] */ 
+
+#pragma deprecated(IMbnInterfaceEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0005_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0005_v0_0_s_ifspec;
+
 #ifndef __IMbnInterfaceManager_INTERFACE_DEFINED__
 #define __IMbnInterfaceManager_INTERFACE_DEFINED__
 
@@ -2132,6 +2168,15 @@ EXTERN_C const IID IID_IMbnInterfaceManager;
 #endif 	/* __IMbnInterfaceManager_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_mbnapi_0000_0006 */
+/* [local] */ 
+
+#pragma deprecated(IMbnInterfaceManager) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0006_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0006_v0_0_s_ifspec;
+
 #ifndef __IMbnInterfaceManagerEvents_INTERFACE_DEFINED__
 #define __IMbnInterfaceManagerEvents_INTERFACE_DEFINED__
 
@@ -2231,6 +2276,15 @@ EXTERN_C const IID IID_IMbnInterfaceManagerEvents;
 
 #endif 	/* __IMbnInterfaceManagerEvents_INTERFACE_DEFINED__ */
 
+
+/* interface __MIDL_itf_mbnapi_0000_0007 */
+/* [local] */ 
+
+#pragma deprecated(IMbnInterfaceManagerEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0007_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0007_v0_0_s_ifspec;
 
 #ifndef __IMbnRegistration_INTERFACE_DEFINED__
 #define __IMbnRegistration_INTERFACE_DEFINED__
@@ -2430,6 +2484,15 @@ EXTERN_C const IID IID_IMbnRegistration;
 #endif 	/* __IMbnRegistration_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_mbnapi_0000_0008 */
+/* [local] */ 
+
+#pragma deprecated(IMbnRegistration) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0008_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0008_v0_0_s_ifspec;
+
 #ifndef __IMbnRegistrationEvents_INTERFACE_DEFINED__
 #define __IMbnRegistrationEvents_INTERFACE_DEFINED__
 
@@ -2564,6 +2627,15 @@ EXTERN_C const IID IID_IMbnRegistrationEvents;
 #endif 	/* __IMbnRegistrationEvents_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_mbnapi_0000_0009 */
+/* [local] */ 
+
+#pragma deprecated(IMbnRegistrationEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0009_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0009_v0_0_s_ifspec;
+
 #ifndef __IMbnConnectionManager_INTERFACE_DEFINED__
 #define __IMbnConnectionManager_INTERFACE_DEFINED__
 
@@ -2664,6 +2736,15 @@ EXTERN_C const IID IID_IMbnConnectionManager;
 #endif 	/* __IMbnConnectionManager_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_mbnapi_0000_0010 */
+/* [local] */ 
+
+#pragma deprecated(IMbnConnectionManager) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0010_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0010_v0_0_s_ifspec;
+
 #ifndef __IMbnConnectionManagerEvents_INTERFACE_DEFINED__
 #define __IMbnConnectionManagerEvents_INTERFACE_DEFINED__
 
@@ -2763,6 +2844,15 @@ EXTERN_C const IID IID_IMbnConnectionManagerEvents;
 
 #endif 	/* __IMbnConnectionManagerEvents_INTERFACE_DEFINED__ */
 
+
+/* interface __MIDL_itf_mbnapi_0000_0011 */
+/* [local] */ 
+
+#pragma deprecated(IMbnConnectionManagerEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0011_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0011_v0_0_s_ifspec;
 
 #ifndef __IMbnPinManager_INTERFACE_DEFINED__
 #define __IMbnPinManager_INTERFACE_DEFINED__
@@ -2877,6 +2967,15 @@ EXTERN_C const IID IID_IMbnPinManager;
 #endif 	/* __IMbnPinManager_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_mbnapi_0000_0012 */
+/* [local] */ 
+
+#pragma deprecated(IMbnPinManager) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0012_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0012_v0_0_s_ifspec;
+
 #ifndef __IMbnPinManagerEvents_INTERFACE_DEFINED__
 #define __IMbnPinManagerEvents_INTERFACE_DEFINED__
 
@@ -2988,6 +3087,15 @@ EXTERN_C const IID IID_IMbnPinManagerEvents;
 
 #endif 	/* __IMbnPinManagerEvents_INTERFACE_DEFINED__ */
 
+
+/* interface __MIDL_itf_mbnapi_0000_0013 */
+/* [local] */ 
+
+#pragma deprecated(IMbnPinManagerEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0013_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0013_v0_0_s_ifspec;
 
 #ifndef __IMbnPinEvents_INTERFACE_DEFINED__
 #define __IMbnPinEvents_INTERFACE_DEFINED__
@@ -3181,6 +3289,7 @@ EXTERN_C const IID IID_IMbnPinEvents;
 /* interface __MIDL_itf_mbnapi_0000_0014 */
 /* [local] */ 
 
+#pragma deprecated(IMbnPinEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
 #pragma endregion
 #pragma region Desktop Family
@@ -3297,6 +3406,15 @@ EXTERN_C const IID IID_IMbnSubscriberInformation;
 #endif 	/* __IMbnSubscriberInformation_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_mbnapi_0000_0015 */
+/* [local] */ 
+
+#pragma deprecated(IMbnSubscriberInformation) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0015_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0015_v0_0_s_ifspec;
+
 #ifndef __IMbnSignal_INTERFACE_DEFINED__
 #define __IMbnSignal_INTERFACE_DEFINED__
 
@@ -3393,6 +3511,15 @@ EXTERN_C const IID IID_IMbnSignal;
 #endif 	/* __IMbnSignal_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_mbnapi_0000_0016 */
+/* [local] */ 
+
+#pragma deprecated(IMbnSignal) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0016_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0016_v0_0_s_ifspec;
+
 #ifndef __IMbnSignalEvents_INTERFACE_DEFINED__
 #define __IMbnSignalEvents_INTERFACE_DEFINED__
 
@@ -3479,6 +3606,15 @@ EXTERN_C const IID IID_IMbnSignalEvents;
 
 #endif 	/* __IMbnSignalEvents_INTERFACE_DEFINED__ */
 
+
+/* interface __MIDL_itf_mbnapi_0000_0017 */
+/* [local] */ 
+
+#pragma deprecated(IMbnSignalEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0017_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0017_v0_0_s_ifspec;
 
 #ifndef __IMbnConnectionContext_INTERFACE_DEFINED__
 #define __IMbnConnectionContext_INTERFACE_DEFINED__
@@ -3585,6 +3721,15 @@ EXTERN_C const IID IID_IMbnConnectionContext;
 
 #endif 	/* __IMbnConnectionContext_INTERFACE_DEFINED__ */
 
+
+/* interface __MIDL_itf_mbnapi_0000_0018 */
+/* [local] */ 
+
+#pragma deprecated(IMbnConnectionContext) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0018_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0018_v0_0_s_ifspec;
 
 #ifndef __IMbnConnectionContextEvents_INTERFACE_DEFINED__
 #define __IMbnConnectionContextEvents_INTERFACE_DEFINED__
@@ -3693,6 +3838,15 @@ EXTERN_C const IID IID_IMbnConnectionContextEvents;
 
 #endif 	/* __IMbnConnectionContextEvents_INTERFACE_DEFINED__ */
 
+
+/* interface __MIDL_itf_mbnapi_0000_0019 */
+/* [local] */ 
+
+#pragma deprecated(IMbnConnectionContextEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0019_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0019_v0_0_s_ifspec;
 
 #ifndef __IMbnConnectionProfileManager_INTERFACE_DEFINED__
 #define __IMbnConnectionProfileManager_INTERFACE_DEFINED__
@@ -3815,6 +3969,15 @@ EXTERN_C const IID IID_IMbnConnectionProfileManager;
 #endif 	/* __IMbnConnectionProfileManager_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_mbnapi_0000_0020 */
+/* [local] */ 
+
+#pragma deprecated(IMbnConnectionProfileManager) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0020_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0020_v0_0_s_ifspec;
+
 #ifndef __IMbnConnectionProfile_INTERFACE_DEFINED__
 #define __IMbnConnectionProfile_INTERFACE_DEFINED__
 
@@ -3922,6 +4085,15 @@ EXTERN_C const IID IID_IMbnConnectionProfile;
 #endif 	/* __IMbnConnectionProfile_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_mbnapi_0000_0021 */
+/* [local] */ 
+
+#pragma deprecated(IMbnConnectionProfile) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0021_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0021_v0_0_s_ifspec;
+
 #ifndef __IMbnConnectionProfileEvents_INTERFACE_DEFINED__
 #define __IMbnConnectionProfileEvents_INTERFACE_DEFINED__
 
@@ -4008,6 +4180,15 @@ EXTERN_C const IID IID_IMbnConnectionProfileEvents;
 
 #endif 	/* __IMbnConnectionProfileEvents_INTERFACE_DEFINED__ */
 
+
+/* interface __MIDL_itf_mbnapi_0000_0022 */
+/* [local] */ 
+
+#pragma deprecated(IMbnConnectionProfileEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0022_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0022_v0_0_s_ifspec;
 
 #ifndef __IMbnSmsConfiguration_INTERFACE_DEFINED__
 #define __IMbnSmsConfiguration_INTERFACE_DEFINED__
@@ -4153,6 +4334,15 @@ EXTERN_C const IID IID_IMbnSmsConfiguration;
 #endif 	/* __IMbnSmsConfiguration_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_mbnapi_0000_0023 */
+/* [local] */ 
+
+#pragma deprecated(IMbnSmsConfiguration) // Replaced by WinRT API in Windows.Devices.Sms namespace
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0023_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0023_v0_0_s_ifspec;
+
 #ifndef __IMbnSmsReadMsgPdu_INTERFACE_DEFINED__
 #define __IMbnSmsReadMsgPdu_INTERFACE_DEFINED__
 
@@ -4270,6 +4460,15 @@ EXTERN_C const IID IID_IMbnSmsReadMsgPdu;
 
 #endif 	/* __IMbnSmsReadMsgPdu_INTERFACE_DEFINED__ */
 
+
+/* interface __MIDL_itf_mbnapi_0000_0024 */
+/* [local] */ 
+
+#pragma deprecated(IMbnSmsReadMsgPdu) // Replaced by WinRT API in Windows.Devices.Sms namespace
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0024_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0024_v0_0_s_ifspec;
 
 #ifndef __IMbnSmsReadMsgTextCdma_INTERFACE_DEFINED__
 #define __IMbnSmsReadMsgTextCdma_INTERFACE_DEFINED__
@@ -4432,6 +4631,15 @@ EXTERN_C const IID IID_IMbnSmsReadMsgTextCdma;
 
 #endif 	/* __IMbnSmsReadMsgTextCdma_INTERFACE_DEFINED__ */
 
+
+/* interface __MIDL_itf_mbnapi_0000_0025 */
+/* [local] */ 
+
+#pragma deprecated(IMbnSmsReadMsgTextCdma) // Replaced by WinRT API in Windows.Devices.Sms namespace
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0025_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0025_v0_0_s_ifspec;
 
 #ifndef __IMbnSms_INTERFACE_DEFINED__
 #define __IMbnSms_INTERFACE_DEFINED__
@@ -4651,6 +4859,15 @@ EXTERN_C const IID IID_IMbnSms;
 #endif 	/* __IMbnSms_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_mbnapi_0000_0026 */
+/* [local] */ 
+
+#pragma deprecated(IMbnSms) // Replaced by WinRT API in Windows.Devices.Sms namespace
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0026_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0026_v0_0_s_ifspec;
+
 #ifndef __IMbnSmsEvents_INTERFACE_DEFINED__
 #define __IMbnSmsEvents_INTERFACE_DEFINED__
 
@@ -4868,6 +5085,15 @@ EXTERN_C const IID IID_IMbnSmsEvents;
 #endif 	/* __IMbnSmsEvents_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_mbnapi_0000_0027 */
+/* [local] */ 
+
+#pragma deprecated(IMbnSmsEvents) // Replaced by WinRT API in Windows.Devices.Sms namespace
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0027_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0027_v0_0_s_ifspec;
+
 #ifndef __IMbnServiceActivation_INTERFACE_DEFINED__
 #define __IMbnServiceActivation_INTERFACE_DEFINED__
 
@@ -4958,6 +5184,15 @@ EXTERN_C const IID IID_IMbnServiceActivation;
 
 #endif 	/* __IMbnServiceActivation_INTERFACE_DEFINED__ */
 
+
+/* interface __MIDL_itf_mbnapi_0000_0028 */
+/* [local] */ 
+
+#pragma deprecated(IMbnServiceActivation) // Replaced by WinRT Windows.Networking.NetworkOperators.MobileBroadbandDeviceService
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0028_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0028_v0_0_s_ifspec;
 
 #ifndef __IMbnServiceActivationEvents_INTERFACE_DEFINED__
 #define __IMbnServiceActivationEvents_INTERFACE_DEFINED__
@@ -5062,6 +5297,15 @@ EXTERN_C const IID IID_IMbnServiceActivationEvents;
 #endif 	/* __IMbnServiceActivationEvents_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_mbnapi_0000_0029 */
+/* [local] */ 
+
+#pragma deprecated(IMbnServiceActivationEvents) // Replaced by WinRT Windows.Networking.NetworkOperators.MobileBroadbandDeviceService
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0029_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0029_v0_0_s_ifspec;
+
 #ifndef __IMbnVendorSpecificOperation_INTERFACE_DEFINED__
 #define __IMbnVendorSpecificOperation_INTERFACE_DEFINED__
 
@@ -5150,6 +5394,15 @@ EXTERN_C const IID IID_IMbnVendorSpecificOperation;
 
 #endif 	/* __IMbnVendorSpecificOperation_INTERFACE_DEFINED__ */
 
+
+/* interface __MIDL_itf_mbnapi_0000_0030 */
+/* [local] */ 
+
+#pragma deprecated(IMbnVendorSpecificOperation) // Replaced by WinRT Windows.Networking.NetworkOperators.MobileBroadbandDeviceService
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0030_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0030_v0_0_s_ifspec;
 
 #ifndef __IMbnVendorSpecificEvents_INTERFACE_DEFINED__
 #define __IMbnVendorSpecificEvents_INTERFACE_DEFINED__
@@ -5263,6 +5516,15 @@ EXTERN_C const IID IID_IMbnVendorSpecificEvents;
 #endif 	/* __IMbnVendorSpecificEvents_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_mbnapi_0000_0031 */
+/* [local] */ 
+
+#pragma deprecated(IMbnVendorSpecificEvents) // Replaced by WinRT Windows.Networking.NetworkOperators.MobileBroadbandDeviceService
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0031_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0031_v0_0_s_ifspec;
+
 #ifndef __IMbnConnectionProfileManagerEvents_INTERFACE_DEFINED__
 #define __IMbnConnectionProfileManagerEvents_INTERFACE_DEFINED__
 
@@ -5362,6 +5624,15 @@ EXTERN_C const IID IID_IMbnConnectionProfileManagerEvents;
 
 #endif 	/* __IMbnConnectionProfileManagerEvents_INTERFACE_DEFINED__ */
 
+
+/* interface __MIDL_itf_mbnapi_0000_0032 */
+/* [local] */ 
+
+#pragma deprecated(IMbnConnectionProfileManagerEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0032_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0032_v0_0_s_ifspec;
 
 #ifndef __IMbnRadio_INTERFACE_DEFINED__
 #define __IMbnRadio_INTERFACE_DEFINED__
@@ -5476,6 +5747,15 @@ EXTERN_C const IID IID_IMbnRadio;
 #endif 	/* __IMbnRadio_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_mbnapi_0000_0033 */
+/* [local] */ 
+
+#pragma deprecated(IMbnRadio) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0033_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0033_v0_0_s_ifspec;
+
 #ifndef __IMbnRadioEvents_INTERFACE_DEFINED__
 #define __IMbnRadioEvents_INTERFACE_DEFINED__
 
@@ -5583,6 +5863,15 @@ EXTERN_C const IID IID_IMbnRadioEvents;
 
 #endif 	/* __IMbnRadioEvents_INTERFACE_DEFINED__ */
 
+
+/* interface __MIDL_itf_mbnapi_0000_0034 */
+/* [local] */ 
+
+#pragma deprecated(IMbnRadioEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0034_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0034_v0_0_s_ifspec;
 
 #ifndef __IMbnMultiCarrier_INTERFACE_DEFINED__
 #define __IMbnMultiCarrier_INTERFACE_DEFINED__
@@ -5737,6 +6026,15 @@ EXTERN_C const IID IID_IMbnMultiCarrier;
 
 #endif 	/* __IMbnMultiCarrier_INTERFACE_DEFINED__ */
 
+
+/* interface __MIDL_itf_mbnapi_0000_0035 */
+/* [local] */ 
+
+#pragma deprecated(IMbnMultiCarrier) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0035_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0035_v0_0_s_ifspec;
 
 #ifndef __IMbnMultiCarrierEvents_INTERFACE_DEFINED__
 #define __IMbnMultiCarrierEvents_INTERFACE_DEFINED__
@@ -5893,6 +6191,15 @@ EXTERN_C const IID IID_IMbnMultiCarrierEvents;
 #endif 	/* __IMbnMultiCarrierEvents_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_mbnapi_0000_0036 */
+/* [local] */ 
+
+#pragma deprecated(IMbnMultiCarrierEvents) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0036_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0036_v0_0_s_ifspec;
+
 #ifndef __IMbnDeviceServiceStateEvents_INTERFACE_DEFINED__
 #define __IMbnDeviceServiceStateEvents_INTERFACE_DEFINED__
 
@@ -5987,6 +6294,7 @@ EXTERN_C const IID IID_IMbnDeviceServiceStateEvents;
 /* interface __MIDL_itf_mbnapi_0000_0037 */
 /* [local] */ 
 
+#pragma deprecated(IMbnDeviceServiceStateEvents) // Replaced by WinRT Windows.Networking.NetworkOperators.MobileBroadbandDeviceService
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 #pragma region Application Family
@@ -6084,6 +6392,15 @@ EXTERN_C const IID IID_IMbnDeviceServicesManager;
 
 #endif 	/* __IMbnDeviceServicesManager_INTERFACE_DEFINED__ */
 
+
+/* interface __MIDL_itf_mbnapi_0000_0038 */
+/* [local] */ 
+
+#pragma deprecated(IMbnDeviceServicesManager) // Replaced by WinRT Windows.Networking.NetworkOperators.MobileBroadbandDeviceService
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0038_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0038_v0_0_s_ifspec;
 
 #ifndef __IMbnDeviceServicesContext_INTERFACE_DEFINED__
 #define __IMbnDeviceServicesContext_INTERFACE_DEFINED__
@@ -6208,6 +6525,15 @@ EXTERN_C const IID IID_IMbnDeviceServicesContext;
 
 #endif 	/* __IMbnDeviceServicesContext_INTERFACE_DEFINED__ */
 
+
+/* interface __MIDL_itf_mbnapi_0000_0039 */
+/* [local] */ 
+
+#pragma deprecated(IMbnDeviceServicesContext) // Replaced by WinRT Windows.Networking.NetworkOperators.MobileBroadbandDeviceService
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0039_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0039_v0_0_s_ifspec;
 
 #ifndef __IMbnDeviceServicesEvents_INTERFACE_DEFINED__
 #define __IMbnDeviceServicesEvents_INTERFACE_DEFINED__
@@ -6526,6 +6852,15 @@ EXTERN_C const IID IID_IMbnDeviceServicesEvents;
 #endif 	/* __IMbnDeviceServicesEvents_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_mbnapi_0000_0040 */
+/* [local] */ 
+
+#pragma deprecated(IMbnDeviceServicesEvents) // Replaced by WinRT Windows.Networking.NetworkOperators.MobileBroadbandDeviceService
+
+
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0040_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_mbnapi_0000_0040_v0_0_s_ifspec;
+
 #ifndef __IMbnDeviceService_INTERFACE_DEFINED__
 #define __IMbnDeviceService_INTERFACE_DEFINED__
 
@@ -6767,6 +7102,7 @@ EXTERN_C const IID IID_IMbnDeviceService;
 /* interface __MIDL_itf_mbnapi_0000_0041 */
 /* [local] */ 
 
+#pragma deprecated(IMbnDeviceService) // Replaced by WinRT Windows.Networking.NetworkOperators.MobileBroadbandDeviceService
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
 #pragma endregion
 
@@ -6842,6 +7178,7 @@ typedef /* [hidden] */ struct __DummyPinType__
 
 
 
+#pragma deprecated(IMbnPin) // Replaced by WinRT API in Windows.Networking.Connectivity and Windows.Networking.NetworkOperators namespaces
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 #pragma region Application Family

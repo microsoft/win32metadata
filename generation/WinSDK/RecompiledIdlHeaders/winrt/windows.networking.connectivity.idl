@@ -299,7 +299,7 @@ namespace Windows
     {
         namespace Connectivity
         {
-            [contractversion(2.0)]
+            [contractversion(3.0)]
             apicontract WwanContract
             {
             }
@@ -439,21 +439,25 @@ namespace Windows
             [flags]
             enum WwanDataClass
             {
-                None           = 0x0,
-                Gprs           = 0x1,
-                Edge           = 0x2,
-                Umts           = 0x4,
-                Hsdpa          = 0x8,
-                Hsupa          = 0x10,
-                LteAdvanced    = 0x20,
-                Cdma1xRtt      = 0x10000,
-                Cdma1xEvdo     = 0x20000,
-                Cdma1xEvdoRevA = 0x40000,
-                Cdma1xEvdv     = 0x80000,
-                Cdma3xRtt      = 0x100000,
-                Cdma1xEvdoRevB = 0x200000,
-                CdmaUmb        = 0x400000,
-                Custom         = 0x80000000
+                None                  = 0x0,
+                Gprs                  = 0x1,
+                Edge                  = 0x2,
+                Umts                  = 0x4,
+                Hsdpa                 = 0x8,
+                Hsupa                 = 0x10,
+                LteAdvanced           = 0x20,
+                [contract(Windows.Networking.Connectivity.WwanContract, 3.0)]
+                NewRadioNonStandalone = 0x40,
+                [contract(Windows.Networking.Connectivity.WwanContract, 3.0)]
+                NewRadioStandalone    = 0x80,
+                Cdma1xRtt             = 0x10000,
+                Cdma1xEvdo            = 0x20000,
+                Cdma1xEvdoRevA        = 0x40000,
+                Cdma1xEvdv            = 0x80000,
+                Cdma3xRtt             = 0x100000,
+                Cdma1xEvdoRevB        = 0x200000,
+                CdmaUmb               = 0x400000,
+                Custom                = 0x80000000
             };
 
             [contract(Windows.Networking.Connectivity.WwanContract, 2.0)]

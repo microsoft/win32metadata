@@ -485,6 +485,40 @@ typedef struct _USER_MODALS_INFO_1007 {
      LPWSTR  usrmod1007_primary;
 } USER_MODALS_INFO_1007, *PUSER_MODALS_INFO_1007, *LPUSER_MODALS_INFO_1007;
 
+//
+//  Data Structures - Service
+//
+
+typedef enum _MSA_INFO_LEVEL {
+    MsaInfoLevel0 = 0,
+    MsaInfoLevel1 = 1,
+    MsaInfoLevelMax
+} MSA_INFO_LEVEL, *PMSA_INFO_LEVEL;
+
+typedef enum _MSA_INFO_ACCOUNT_TYPE {
+    MsaAccountFalse = 0,
+    StandAloneManagedServiceAccount,
+    GroupManagedServiceAccount,
+    DelegatedManagedServiceAccount
+} MSA_INFO_ACCOUNT_TYPE, *PMSA_INFO_ACCOUNT_TYPE;
+
+typedef enum _MSA_INFO_STATE {
+    MsaInfoNotExist = 1,
+    MsaInfoNotService,
+    MsaInfoCannotInstall,
+    MsaInfoCanInstall,
+    MsaInfoInstalled
+} MSA_INFO_STATE, *PMSA_INFO_STATE;
+
+typedef struct _MSA_INFO_0 {
+    MSA_INFO_STATE State;
+} MSA_INFO_0, *PMSA_INFO_0, *LPMSA_INFO_0;
+
+typedef struct _MSA_INFO_1 {
+    MSA_INFO_STATE State;
+    MSA_INFO_ACCOUNT_TYPE AccountType;
+} MSA_INFO_1, *PMSA_INFO_1, *LPMSA_INFO_1;
+
 
 //
 // Special Values and Constants - User
@@ -511,6 +545,7 @@ typedef struct _USER_MODALS_INFO_1007 {
 #define UF_INTERDOMAIN_TRUST_ACCOUNT    0x0800
 #define UF_WORKSTATION_TRUST_ACCOUNT    0x1000
 #define UF_SERVER_TRUST_ACCOUNT         0x2000
+
 
 #define UF_MACHINE_ACCOUNT_MASK ( UF_INTERDOMAIN_TRUST_ACCOUNT | \
                                   UF_WORKSTATION_TRUST_ACCOUNT | \
@@ -1667,6 +1702,7 @@ typedef struct _NETLOGON_INFO_4 {
 
 #define SERVICE_ACCOUNT_PASSWORD TEXT("_SA_{262E99C9-6160-4871-ACEC-4E61736B6F21}")
 #define SERVICE_ACCOUNT_SECRET_PREFIX TEXT("_SC_{262E99C9-6160-4871-ACEC-4E61736B6F21}_")
+#define DELEGATED_MANAGED_SERVICE_ACCOUNT_PASSWORD TEXT("_SA_{F8262F4C-499B-4770-88B4-A75C91D0D8E9}")
 
 DEFINE_GUID( //262e99c9-6160-4871-acec-4e61736b6f21
     ServiceAccountPasswordGUID,
@@ -1720,32 +1756,18 @@ NetIsServiceAccount(
     _Out_ BOOL *IsService);
 
 NTSTATUS
+NetIsServiceAccount2(
+    _In_opt_ LPWSTR ServerName,
+    _In_ LPWSTR AccountName,
+    _Out_ BOOL * IsService,
+    _Out_ MSA_INFO_ACCOUNT_TYPE * AccountType);
+
+NTSTATUS
 NetQueryServiceAccount(
     _In_opt_ LPWSTR ServerName,
     _In_ LPWSTR AccountName,
     _In_ DWORD InfoLevel,
     _Outptr_ PBYTE* Buffer);
-
-//
-//  Data Structures - Service
-//
-
-typedef enum _MSA_INFO_LEVEL {
-    MsaInfoLevel0 = 0,
-    MsaInfoLevelMax
-} MSA_INFO_LEVEL, *PMSA_INFO_LEVEL;
-
-typedef enum _MSA_INFO_STATE {
-    MsaInfoNotExist = 1,
-    MsaInfoNotService,
-    MsaInfoCannotInstall,
-    MsaInfoCanInstall,
-    MsaInfoInstalled
-}MSA_INFO_STATE, *PMSA_INFO_STATE;
-
-typedef struct _MSA_INFO_0 {
-    MSA_INFO_STATE State;
-}MSA_INFO_0, *PMSA_INFO_0, *LPMSA_INFO_0;
 
 #ifdef __cplusplus
 }

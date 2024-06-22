@@ -71,6 +71,7 @@ DEFINE_GUID(GUID_DEVINTERFACE_ZNSDISK,                0xb87941c5L, 0xffdb, 0x43c
 // not reported  through conventional APIs
 //
 
+DEFINE_GUID(GUID_DEVINTERFACE_HIDDEN_DISK,            0x7fccc86cL, 0x228a, 0x40ad, 0x8a, 0x58, 0xf5, 0x90, 0xaf, 0x7b, 0xfd, 0xce);
 DEFINE_GUID(GUID_DEVINTERFACE_SERVICE_VOLUME,         0x6ead3d82L, 0x25ec, 0x46bc, 0xb7, 0xfd, 0xc1, 0xf0, 0xdf, 0x8f, 0x50, 0x37);
 DEFINE_GUID(GUID_DEVINTERFACE_HIDDEN_VOLUME,          0x7f108a28L, 0x9833, 0x4b3b, 0xb7, 0x80, 0x2c, 0x6b, 0x5f, 0xa5, 0xc0, 0x62);
 
@@ -746,6 +747,7 @@ typedef enum _STORAGE_BUS_TYPE {
     BusTypeNvme,
     BusTypeSCM,
     BusTypeUfs,
+    BusTypeNvmeof,
     BusTypeMax,
     BusTypeMaxReserved = 0x7F
 } STORAGE_BUS_TYPE, *PSTORAGE_BUS_TYPE;
@@ -959,6 +961,9 @@ typedef enum _STORAGE_PROPERTY_ID {
     StorageDeviceLedStateProperty,
     StorageDeviceSelfEncryptionProperty = 64,
     StorageFruIdProperty,
+    StorageStackProperty,
+    StorageAdapterProtocolSpecificPropertyEx,
+    StorageDeviceProtocolSpecificPropertyEx,
 } STORAGE_PROPERTY_ID, *PSTORAGE_PROPERTY_ID;
 
 
@@ -1312,7 +1317,8 @@ typedef struct _STORAGE_MINIPORT_DESCRIPTOR {
     union {
         struct {
             UCHAR LogicalPoFxForDisk : 1;
-            UCHAR Reserved : 7;
+            UCHAR ForwardIo : 1;
+            UCHAR Reserved : 6;
         } DUMMYSTRUCTNAME;
         UCHAR AsUCHAR;
     } Flags;
@@ -1696,12 +1702,15 @@ typedef enum _STORAGE_CRYPTO_KEY_SIZE {
 
 } STORAGE_CRYPTO_KEY_SIZE, *PSTORAGE_CRYPTO_KEY_SIZE;
 
+#pragma warning(push)
+#pragma warning(disable:4201) // nameless struct/unions
+
 #define STORAGE_CRYPTO_CAPABILITY_VERSION_1           1
 
 typedef struct _STORAGE_CRYPTO_CAPABILITY {
 
     //
-    // To enable versioning of this structure. This shall bet set
+    // To enable versioning of this structure. This shall be set
     // to STORAGE_CRYPTO_CAPABILITY_VERSION_1
     //
 
@@ -1742,6 +1751,72 @@ typedef struct _STORAGE_CRYPTO_CAPABILITY {
 
 } STORAGE_CRYPTO_CAPABILITY, *PSTORAGE_CRYPTO_CAPABILITY;
 
+#define STORAGE_CRYPTO_CAPABILITY_VERSION_2           2
+
+typedef struct _STORAGE_CRYPTO_CAPABILITY_V2 {
+
+    //
+    // To enable versioning of this structure. This shall be set
+    // to STORAGE_CRYPTO_CAPABILITY_VERSION_2
+    //
+
+    ULONG Version;
+
+    //
+    // Size of this structure. This shall be set to
+    // sizeof(STORAGE_CRYPTO_CAPABILITY_V2)
+    //
+
+    ULONG Size;
+
+    //
+    // The index for this crypto capability
+    //
+
+    ULONG CryptoCapabilityIndex;
+
+    //
+    // Supported algorithm for this crypto capability
+    //
+
+    STORAGE_CRYPTO_ALGORITHM_ID AlgorithmId;
+
+    //
+    // The supported key size for this algorithm
+    //
+
+    STORAGE_CRYPTO_KEY_SIZE KeySize;
+
+    //
+    // Bitmask for the supported sizes of encryptable data blocks. When bit
+    // j is set (j=0...7), a data unit size of 512*2^j bytes is supported.
+    // Bit 0 represents 512 bytes, 1 represents 1 KB, bit 7 represents 64 KB
+    //
+
+    ULONG DataUnitSizeBitmask;
+
+    //
+    // Maximum supported initialization vector bit size. This can be 0 if
+    // this concept does not apply to the algorithm.
+    //
+
+    USHORT MaxIVBitSize;
+    USHORT Reserved;
+
+    //
+    // Bitmask of compliant security standards at the algorithm level.
+    //
+
+    union {
+        struct {
+            UCHAR FIPS : 1;
+            UCHAR Reserved : 7;
+        };
+        UCHAR AsUchar;
+    } SecurityComplianceBitmask;
+
+} STORAGE_CRYPTO_CAPABILITY_V2, *PSTORAGE_CRYPTO_CAPABILITY_V2;
+
 #define STORAGE_CRYPTO_DESCRIPTOR_VERSION_1           1
 
 typedef struct _STORAGE_CRYPTO_DESCRIPTOR {
@@ -1780,6 +1855,73 @@ typedef struct _STORAGE_CRYPTO_DESCRIPTOR {
     _Field_size_(NumCryptoCapabilities) STORAGE_CRYPTO_CAPABILITY CryptoCapabilities[ANYSIZE_ARRAY];
 
 } STORAGE_CRYPTO_DESCRIPTOR, *PSTORAGE_CRYPTO_DESCRIPTOR;
+
+#define STORAGE_CRYPTO_DESCRIPTOR_VERSION_2           2
+
+typedef enum _STORAGE_ICE_TYPE {
+
+    StorageIceTypeUnknown = 0,
+    StorageIceTypeUfs,
+    StorageIceTypeNvme,
+
+} STORAGE_ICE_TYPE, *PSTORAGE_ICE_TYPE;
+
+typedef struct _STORAGE_CRYPTO_DESCRIPTOR_V2 {
+
+    //
+    // Keep compatible with STORAGE_DESCRIPTOR_HEADER
+    // Shall be set to STORAGE_CRYPTO_DESCRIPTOR_VERSION_2
+    //
+
+    ULONG Version;
+
+    //
+    // Keep compatible with STORAGE_DESCRIPTOR_HEADER
+    // Shall be set to sizeof(STORAGE_CRYPTO_DESCRIPTOR_V2)
+    //
+
+    ULONG Size;
+
+    //
+    // The number of keys the crypto engine in the adapter supports
+    //
+
+    ULONG NumKeysSupported;
+
+    //
+    // The number of crypto capability entries. This outlines the
+    // crypto configurations the adapter supports
+    //
+
+    ULONG NumCryptoCapabilities;
+
+    //
+    // Which type of inline crypto engine this is
+    //
+
+    STORAGE_ICE_TYPE IceType;
+
+    //
+    // Bitmask of compliant security standards.
+    //
+
+    union {
+        struct {
+            UCHAR FIPS : 1;
+            UCHAR Reserved : 7;
+        };
+        UCHAR AsUchar;
+    } SecurityComplianceBitmask;
+
+    //
+    // Array of Crypto Capabilities
+    //
+
+    _Field_size_(NumCryptoCapabilities) STORAGE_CRYPTO_CAPABILITY_V2 CryptoCapabilities[ANYSIZE_ARRAY];
+
+} STORAGE_CRYPTO_DESCRIPTOR_V2, *PSTORAGE_CRYPTO_DESCRIPTOR_V2;
+
+#pragma warning(pop)
 
 // end_winioctl
 // begin_winioctl
@@ -1979,18 +2121,48 @@ typedef enum _STORAGE_PROTOCOL_NVME_DATA_TYPE {
                                 //      ProtocolDataRequestSubValue3 - Controller Id (CNTID)
                                 //      ProtocolDataRequestSubValue4 - Command Set Identifier (CSI)
 
-
     NVMeDataTypeLogPage,        // Retrieved by command - GET LOG PAGE
                                 // Corresponding values in STORAGE_PROTOCOL_SPECIFIC_DATA,
                                 //      ProtocolDataRequestValue - Log page id
                                 //      ProtocolDataRequestSubValue - Lower 32-bit offset value
                                 //      ProtocolDataRequestSubValue2 - Upper 32-bit offset value
                                 //      ProtocolDataRequestSubValue3 - Log specific identifier
+                                //      ProtocolDataRequestSubValue4 - STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE
 
-    NVMeDataTypeFeature,        // Retrieved by command - GET FEATURES
-                                // Corresponding values in STORAGE_PROTOCOL_SPECIFIC_DATA,
-                                //      ProtocolDataRequestValue - Defined in NVME_FEATURES
+    NVMeDataTypeFeature,        // Retrieved by command - GET FEATURES or SET FEATURES
+                                // Corresponding values in STORAGE_PROTOCOL_SPECIFIC_DATA (get) or STORAGE_PROTOCOL_SPECIFIC_DATA_EXT (set),
+                                //      ProtocolDataRequestValue - Defined in NVME_CDW10_GET_FEATURES / NVME_CDW10_SET_FEATURES
                                 //      ProtocolDataRequestSubValue - Defined in NVME_CDW11_FEATURES
+                                //      ProtocolDataRequestSubValue2 - Defined in NVME_CDW12_FEATURES
+                                //      ProtocolDataRequestSubValue3 - Defined in NVME_CDW13_FEATURES
+                                //      ProtocolDataRequestSubValue4 - Defined in NVME_CDW14_FEATURES
+                                //      ProtocolDataRequestSubValue5 - Defined in NVME_CDW15_FEATURES
+
+    NVMeDataTypeLogPageEx,      // Retrieved by command - GET LOG PAGE
+                                // Corresponding values in STORAGE_PROTOCOL_SPECIFIC_DATA_EXT,
+                                //      ProtocolDataValue - Defined in NVME_CDW10_GET_LOG_PAGE
+                                //      ProtocolDataSubValue - Defined in NVME_CDW11_GET_LOG_PAGE
+                                //      ProtocolDataSubValue2 - Defined in NVME_CDW12_GET_LOG_PAGE
+                                //      ProtocolDataSubValue3 - Defined in NVME_CDW13_GET_LOG_PAGE
+                                //      ProtocolDataSubValue4 - Defined in NVME_CDW14_GET_LOG_PAGE
+                                //      ProtocolDataSubValue5 - Defined in NVME_CDW15_GET_LOG_PAGE (not used currently)
+                                //      ProtocolDataSubValue6 - Namespace ID
+
+    NVMeDataTypeFeatureEx,      // Retrieved by command - GET FEATURES or SET FEATURES
+                                // Corresponding values in STORAGE_cd PROTOCOL_SPECIFIC_DATA_EXT,
+                                //      ProtocolDataValue - Defined in NVME_CDW10_GET_FEATURES / NVME_CDW10_SET_FEATURES
+                                //      ProtocolDataSubValue - Defined in NVME_CDW11_FEATURES
+                                //      ProtocolDataSubValue2 - Defined in NVME_CDW12_FEATURES
+                                //      ProtocolDataSubValue3 - Defined in NVME_CDW13_FEATURES
+                                //      ProtocolDataSubValue4 - Defined in NVME_CDW14_FEATURES
+                                //      ProtocolDataSubValue5 - Defined in NVME_CDW15_FEATURES
+                                //      ProtocolDataSubValue6 - Namespace ID
+
+    // For NVMeDataTypeLogPageEx and NVMeDataTypeFeatureEx the namespace ID field is only used for requests sent to 
+    // an adapter or controller.  In these scenarios, the caller sets ProtocolDataSubValue6 to either 0 (NSID not used) or 
+    // FFFFFFFFF (request applies to all namespaces). For requests being targeted at a disk, the storage stack driver
+    // will substitute in the corresponding NSID automatically.  Callers must set ProtocolDataSubValue6 to 0 for these requests.
+
 } STORAGE_PROTOCOL_NVME_DATA_TYPE, *PSTORAGE_PROTOCOL_NVME_DATA_TYPE;
 
 typedef enum _STORAGE_PROTOCOL_ATA_DATA_TYPE {
@@ -2022,11 +2194,11 @@ typedef union _STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE {
 
     struct {
 
-        ULONG RetainAsynEvent : 1;
-
-        ULONG LogSpecificField : 4;
-
-        ULONG Reserved : 27;
+        ULONG RetainAsynEvent   :  1;
+        ULONG LogSpecificField  :  4;
+        ULONG Reserved0         :  3;
+        ULONG UUIDIndex         :  7;
+        ULONG Reserved          : 17;
 
     } DUMMYSTRUCTNAME;
 
@@ -2069,12 +2241,12 @@ typedef struct _STORAGE_PROTOCOL_SPECIFIC_DATA {
 typedef struct _STORAGE_PROTOCOL_SPECIFIC_DATA_EXT {
 
     STORAGE_PROTOCOL_TYPE ProtocolType;
-    ULONG   DataType;                   // The value will be protocol specific, as defined in STORAGE_PROTOCOL_NVME_DATA_TYPE or STORAGE_PROTOCOL_ATA_DATA_TYPE.
+    ULONG   DataType;                  // The value will be protocol specific, as defined in STORAGE_PROTOCOL_NVME_DATA_TYPE or STORAGE_PROTOCOL_ATA_DATA_TYPE.
 
     ULONG   ProtocolDataValue;
     ULONG   ProtocolDataSubValue;      // Data sub request value
 
-    ULONG   ProtocolDataOffset;         // The offset of data buffer is from beginning of this data structure.
+    ULONG   ProtocolDataOffset;        // The offset of data buffer is from beginning of this data structure.
     ULONG   ProtocolDataLength;
 
     ULONG   FixedProtocolReturnData;
@@ -2084,17 +2256,21 @@ typedef struct _STORAGE_PROTOCOL_SPECIFIC_DATA_EXT {
     ULONG   ProtocolDataSubValue4;     // Third additional data sub request value
 
     ULONG   ProtocolDataSubValue5;     // Fourth additional data sub request value
-    ULONG   Reserved[5];
+    ULONG   ProtocolDataSubValue6;     // Fifth additional data sub request value
+
+    ULONG   Reserved[4];
+
 } STORAGE_PROTOCOL_SPECIFIC_DATA_EXT, *PSTORAGE_PROTOCOL_SPECIFIC_DATA_EXT;
 
 //
-// Input parameters for StorageAdapterProtocolSpecificProperty (or StorageDeviceProtocolSpecificProperty) & PropertyStandardQuery
+// Input parameter for StorageAdapterProtocolSpecificProperty (or StorageDeviceProtocolSpecificProperty) & PropertyStandardQuery
 // will be data structure STORAGE_PROPERTY_QUERY, where the data field "AdditionalParameters" is a buffer
 // in format of STORAGE_PROTOCOL_SPECIFIC_DATA.
 //
 
 //
-// Out parameters for StorageAdapterProtocolSpecificProperty (or StorageDeviceProtocolSpecificProperty) & PropertyStandardQuery
+// Out parameter for StorageAdapterProtocolSpecificProperty (or StorageDeviceProtocolSpecificProperty) & PropertyStandardQuery
+// will be STORAGE_PROTOCOL_DATA_DESCRIPTOR.
 //
 typedef struct _STORAGE_PROTOCOL_DATA_DESCRIPTOR {
 
@@ -2106,13 +2282,23 @@ typedef struct _STORAGE_PROTOCOL_DATA_DESCRIPTOR {
 } STORAGE_PROTOCOL_DATA_DESCRIPTOR, *PSTORAGE_PROTOCOL_DATA_DESCRIPTOR;
 
 //
-// Input parameters for StorageAdapterProtocolSpecificProperty (or StorageDeviceProtocolSpecificProperty) & PropertyStandardQuery (or PropertyStandardSet)
-// will be data structure STORAGE_PROPERTY_QUERY/STORAGE_PROPERTY_SET, where the data field "AdditionalParameters" is a buffer
-// in format of STORAGE_PROTOCOL_SPECIFIC_DATA.
+// Input parameter for StorageAdapterProtocolSpecificProperty (or StorageDeviceProtocolSpecificProperty) & PropertyStandardSet
+// will be data structure STORAGE_PROPERTY_SET, where the data field "AdditionalParameters" is a buffer
+// in format of STORAGE_PROTOCOL_SPECIFIC_DATA_EXT.
 //
 
 //
-// Out parameters for StorageAdapterProtocolSpecificProperty (or StorageDeviceProtocolSpecificProperty) & PropertyStandardQuery (or PropertyStandardSet)
+// Input parameter for StorageAdapterProtocolSpecificPropertyEx (or StorageDeviceProtocolSpecificPropertyEx) & PropertyStandardQuery (or PropertyStandardSet)
+// will be data structure STORAGE_PROPERTY_QUERY/STORAGE_PROPERTY_SET, where the data field "AdditionalParameters" is a buffer
+// in format of STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT.
+//
+// N.B. this differs from the non-Ex properties which use STORAGE_PROTOCOL_SPECIFIC_DATA_EXT in the AdditionalParameters field.
+//
+
+//
+// Out parameter for StorageAdapterProtocolSpecificProperty/StorageAdapterProtocolSpecificPropertyEx
+// (or StorageDeviceProtocolSpecificProperty/StorageDeviceProtocolSpecificPropertyEx) & PropertyStandardSet
+// will be STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT.
 //
 typedef struct _STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT {
 
@@ -2123,6 +2309,11 @@ typedef struct _STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT {
 
 } STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT, *PSTORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT;
 
+//
+// For StorageAdapterProtocolSpecificPropertyEx/StorageDeviceProtocolSpecificPropertyEx we require an actual
+// version whereas the older properties used the sizeof as a version.
+//
+#define STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT_VERSION 1
 
 //
 // Parameters for StorageAdapterTemperatureProperty (or StorageDeviceTemperatureProperty) & PropertyStandardQuery
@@ -2819,6 +3010,39 @@ typedef struct _STORAGE_HW_ENDURANCE_DATA_DESCRIPTOR {
 
 } STORAGE_HW_ENDURANCE_DATA_DESCRIPTOR, *PSTORAGE_HW_ENDURANCE_DATA_DESCRIPTOR;
 
+//
+// Output buffer for StorageStackProperty.
+//
+
+typedef enum _STORAGE_STACK_TYPE {
+    StorageStackTypeUnknown = 0,
+    StorageStackTypeScsi,
+    StorageStackTypeNVMe,
+} STORAGE_STACK_TYPE, *PSTORAGE_STACK_TYPE;
+
+typedef _Struct_size_bytes_(Size) struct _STORAGE_STACK_DESCRIPTOR {
+
+    //
+    // Size of this structure serves as the version
+    //
+
+    ULONG Version;
+
+    //
+    // Size of buffer. The returned value indicates how big the buffer should be
+    // to store complete data.
+    //
+
+    ULONG Size;
+
+    //
+    // Type of storage stack for the device.
+    //
+
+    STORAGE_STACK_TYPE StorageStackType;
+
+} STORAGE_STACK_DESCRIPTOR, *PSTORAGE_STACK_DESCRIPTOR;
+
 #pragma warning(pop)
 
 //
@@ -2963,6 +3187,7 @@ typedef ULONG DEVICE_DATA_MANAGEMENT_SET_ACTION, DEVICE_DSM_ACTION;
 #define DeviceDsmAction_GetFreeSpace            (0x0000001Bu | DeviceDsmActionFlag_NonDestructive)
 #define DeviceDsmAction_ConversionQuery         (0x0000001Cu | DeviceDsmActionFlag_NonDestructive)
 #define DeviceDsmAction_VdtSet                  (0x0000001Du)
+#define DeviceDsmAction_QueryPreferLocalRepair  (0x0000001Eu | DeviceDsmActionFlag_NonDestructive)
 
 //
 // DEVICE_DSM_INPUT.Flags
@@ -3555,6 +3780,34 @@ typedef struct _DEVICE_DATA_SET_REPAIR_OUTPUT {
 
 ////////////////////////////////////////////////////////////////////////////////
 //
+// DeviceDsmAction_QueryPreferLocalRepair
+//
+
+typedef struct _DEVICE_DSM_QUERY_PREFER_LOCAL_REPAIR_OUTPUT {
+
+    ULONG Version;
+    BOOLEAN PreferLocalRepair;
+
+} DEVICE_DSM_QUERY_PREFER_LOCAL_REPAIR_OUTPUT, *PDEVICE_DSM_QUERY_PREFER_LOCAL_REPAIR_OUTPUT;
+
+//
+// SingleRange    - No
+// ParameterBlock - No
+// Output         - Yes
+// OutputBlock    - Yes
+//
+
+#define DeviceDsmDefinition_QueryPreferLocalRepair {DeviceDsmAction_QueryPreferLocalRepair, \
+                                                    FALSE,                                  \
+                                                    0,                                      \
+                                                    0,                                      \
+                                                    TRUE,                                   \
+                                                    __alignof(DEVICE_DSM_QUERY_PREFER_LOCAL_REPAIR_OUTPUT), \
+                                                    sizeof(DEVICE_DSM_QUERY_PREFER_LOCAL_REPAIR_OUTPUT)}
+
+
+////////////////////////////////////////////////////////////////////////////////
+//
 // DeviceDsmAction_Scrub
 //
 
@@ -4066,7 +4319,11 @@ typedef struct _DEVICE_DSM_REPORT_ZONES_DATA {
 
     ULONG Size;
 
+    //
+    // Represents the number of ZoneDescriptors.
+    //
     ULONG ZoneCount;
+
     STORAGE_ZONES_ATTRIBUTES Attributes;
 
     ULONG Reserved0;
@@ -6260,16 +6517,28 @@ typedef _Struct_size_bytes_(Size) struct _STORAGE_COUNTERS {
 #define STORAGE_HW_FIRMWARE_REQUEST_FLAG_FIRST_SEGMENT                  0x00000004
 
 //
+// Indicate that the existing firmware in slot should be activated immediately without 
+// controller reset. Only valid for IOCTL_STORAGE_FIRMWARE_ACTIVATE.
+//
+#define STORAGE_HW_FIRMWARE_REQUEST_FLAG_SWITCH_TO_FIRMWARE_WITHOUT_RESET   0x10000000
+
+//
+// Indicate that any existing firmware in slot should be replaced with the downloaded image,
+// and activated with controller reset. Only valid for IOCTL_STORAGE_FIRMWARE_ACTIVATE.
+//
+#define STORAGE_HW_FIRMWARE_REQUEST_FLAG_REPLACE_AND_SWITCH_UPON_RESET      0x20000000
+
+//
 // Indicate that any existing firmware in slot should be replaced with the downloaded image.
 // Only valid for IOCTL_STORAGE_FIRMWARE_ACTIVATE.
 //
-#define STORAGE_HW_FIRMWARE_REQUEST_FLAG_REPLACE_EXISTING_IMAGE         0x40000000
+#define STORAGE_HW_FIRMWARE_REQUEST_FLAG_REPLACE_EXISTING_IMAGE             0x40000000
 
 //
-// Indicate that the existing firmware in slot should be activated.
+// Indicate that the existing firmware in slot should be activated with a controller reset.
 // Only valid for IOCTL_STORAGE_FIRMWARE_ACTIVATE.
 //
-#define STORAGE_HW_FIRMWARE_REQUEST_FLAG_SWITCH_TO_EXISTING_FIRMWARE    0x80000000
+#define STORAGE_HW_FIRMWARE_REQUEST_FLAG_SWITCH_TO_EXISTING_FIRMWARE        0x80000000
 
 //
 // Input parameter for IOCTL_STORAGE_FIRMWARE_GET_INFO
@@ -6435,7 +6704,8 @@ typedef struct _STORAGE_PROTOCOL_COMMAND {
     ULONG   Reserved0;
 
     ULONG   FixedProtocolReturnData;        // return data, optional. Some protocol, such as NVMe, may return a small amount data (DWORD0 from completion queue entry) without the need of separate device data transfer.
-    ULONG   Reserved1[3];
+    ULONG   FixedProtocolReturnData2;       // return data2, optional. Some protocol, such as NVMe, may return a small amount data (DWORD1 from completion queue entry) without the need of separate device data transfer.
+    ULONG   Reserved1[2];
 
     _Field_size_bytes_full_(CommandLength) UCHAR Command[ANYSIZE_ARRAY];
 
@@ -6477,7 +6747,7 @@ typedef struct _STORAGE_PROTOCOL_COMMAND {
 //  1.  When flag STORAGE_PROTOCOL_COMMAND_FLAG_ADAPTER_REQUEST is set, or the request is sent through adapter, namespace Id from "Command" field is used;
 //      otherwise, the underneath driver should determine namespace Id from the device that receives the command.
 //  2.  When a command fails, the "ErrorCode" field contains value from NVMe Completion Queue Entry - DW3 - Status Field.
-//  3.  "CommandLength" field must have value of 64. e.g. STORAGE_PROTOCOL_COMMAND_LENGTH_NVME.
+//  3.  "CommandLength" field must have value of 64. i.e. STORAGE_PROTOCOL_COMMAND_LENGTH_NVME.
 //  4.  "CommandSpecific" field must have value of either STORAGE_PROTOCOL_SPECIFIC_NVME_ADMIN_COMMAND, or STORAGE_PROTOCOL_SPECIFIC_NVME_NVM_COMMAND.
 //  5.  When a command succeeds, field "FixedProtocolReturnData" may contain value from NVMe Completion Queue Entry - DW0.
 //
@@ -6575,6 +6845,7 @@ typedef struct _STORAGE_ATTRIBUTE_MGMT {
 // Bypass IO feature. If set, the driver understands bypass IO and supports bypass IO related IOCTL(s).
 //
 #define STORAGE_SUPPORTED_FEATURES_BYPASS_IO    0x00000001
+
 
 //
 // Supported Features Mask. This is "OR" of all defined bits of supported features.

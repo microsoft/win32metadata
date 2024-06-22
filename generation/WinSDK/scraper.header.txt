@@ -183,6 +183,7 @@ using Windows.Win32.System.EventCollector;
 using Windows.Win32.System.EventLog;
 using Windows.Win32.System.EventNotificationService;
 using Windows.Win32.System.GroupPolicy;
+using Windows.Win32.System.Hypervisor;
 using Windows.Win32.System.IO;
 using Windows.Win32.System.Ioctl;
 using Windows.Win32.System.JobObjects;

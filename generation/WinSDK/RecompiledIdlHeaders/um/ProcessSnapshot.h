@@ -92,7 +92,8 @@ typedef enum
     PSS_WALK_AUXILIARY_PAGES = 0,
     PSS_WALK_VA_SPACE = 1,
     PSS_WALK_HANDLES = 2,
-    PSS_WALK_THREADS = 3
+    PSS_WALK_THREADS = 3,
+    PSS_WALK_THREAD_NAME = 4
 } PSS_WALK_INFORMATION_CLASS;
 
 // PssDuplicateSnapshot flags.
@@ -347,6 +348,12 @@ typedef struct
     PCONTEXT ContextRecord;         // valid for life time of walk marker
 } PSS_THREAD_ENTRY;
 
+typedef struct
+{
+    WORD ThreadNameSize;
+    wchar_t const* ThreadName;      // valid for life time of walk marker
+} PSS_THREAD_NAME;
+
 // Allocator API structure for walk marker allocations.
 typedef struct
 {
@@ -360,7 +367,7 @@ typedef struct
 #pragma region App Family or OneCore Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
 
-#if (NTDDI_VERSION >= NTDDI_WIN8)
+#if (NTDDI_VERSION >= NTDDI_WINBLUE)
 
 // Win32 APIs.
 _Success_(return == ERROR_SUCCESS)
@@ -442,7 +449,7 @@ PssWalkMarkerSeekToBeginning(
     _In_ HPSSWALK WalkMarkerHandle
     );
 
-#endif // (NTDDI_VERSION >= NTDDI_WIN8)
+#endif // (NTDDI_VERSION >= NTDDI_WINBLUE)
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
 

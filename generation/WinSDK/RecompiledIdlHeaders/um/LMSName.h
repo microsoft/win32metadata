@@ -116,6 +116,9 @@ Environment:
 #define SERVICE_KDC               TEXT("kdc")
 #define SERVICE_LM20_KDC          SERVICE_KDC
 
+#define SERVICE_LOCALKDC          TEXT("localkdc")
+#define SERVICE_LM20_LOCALKDC     SERVICE_LOCALKDC
+
 #define SERVICE_RPCLOCATOR        TEXT("RPCLOCATOR")
 #define SERVICE_LM20_RPCLOCATOR   SERVICE_RPCLOCATOR
 

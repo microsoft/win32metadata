@@ -63,6 +63,7 @@ enum DWMWINDOWATTRIBUTE
     DWMWA_TEXT_COLOR,                           // [set] COLORREF, The color of the caption text
     DWMWA_VISIBLE_FRAME_BORDER_THICKNESS,       // [get] UINT, width of the visible border around a thick frame window
     DWMWA_SYSTEMBACKDROP_TYPE,                  // [get, set] SYSTEMBACKDROP_TYPE, Controls the system-drawn backdrop material of a window, including behind the non-client area.
+    DWMWA_REDIRECTIONBITMAP_ALPHA,              // [set] BOOL, GDI redirection bitmap containspremultiplied alpha
     DWMWA_LAST
 };
 

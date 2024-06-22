@@ -102,6 +102,8 @@ namespace Windows
 
                 typedef enum PrintWorkflowJobAbortReason PrintWorkflowJobAbortReason;
 
+                typedef enum PrintWorkflowJobIssueKind PrintWorkflowJobIssueKind;
+
                 typedef enum PrintWorkflowPdlConversionType PrintWorkflowPdlConversionType;
 
                 typedef enum PrintWorkflowPrinterJobStatus PrintWorkflowPrinterJobStatus;
@@ -128,13 +130,21 @@ namespace Windows
 
                 interface IPrintWorkflowJobBackgroundSession;
 
+                interface IPrintWorkflowJobBackgroundSession2;
+
+                interface IPrintWorkflowJobIssueDetectedEventArgs;
+
                 interface IPrintWorkflowJobNotificationEventArgs;
 
                 interface IPrintWorkflowJobStartingEventArgs;
 
+                interface IPrintWorkflowJobStartingEventArgs2;
+
                 interface IPrintWorkflowJobTriggerDetails;
 
                 interface IPrintWorkflowJobUISession;
+
+                interface IPrintWorkflowJobUISession2;
 
                 interface IPrintWorkflowObjectModelSourceFileContent;
 
@@ -158,6 +168,8 @@ namespace Windows
 
                 interface IPrintWorkflowPrinterJob;
 
+                interface IPrintWorkflowPrinterJob2;
+
                 interface IPrintWorkflowSourceContent;
 
                 interface IPrintWorkflowSpoolStreamContent;
@@ -176,6 +188,14 @@ namespace Windows
 
                 interface IPrintWorkflowUILauncher;
 
+                interface IPrintWorkflowVirtualPrinterDataAvailableEventArgs;
+
+                interface IPrintWorkflowVirtualPrinterSession;
+
+                interface IPrintWorkflowVirtualPrinterTriggerDetails;
+
+                interface IPrintWorkflowVirtualPrinterUIEventArgs;
+
                 interface IPrintWorkflowXpsDataAvailableEventArgs;
 
                 runtimeclass PrintWorkflowBackgroundSession;
@@ -191,6 +211,8 @@ namespace Windows
                 runtimeclass PrintWorkflowJobActivatedEventArgs;
 
                 runtimeclass PrintWorkflowJobBackgroundSession;
+
+                runtimeclass PrintWorkflowJobIssueDetectedEventArgs;
 
                 runtimeclass PrintWorkflowJobNotificationEventArgs;
 
@@ -234,6 +256,14 @@ namespace Windows
 
                 runtimeclass PrintWorkflowUILauncher;
 
+                runtimeclass PrintWorkflowVirtualPrinterDataAvailableEventArgs;
+
+                runtimeclass PrintWorkflowVirtualPrinterSession;
+
+                runtimeclass PrintWorkflowVirtualPrinterTriggerDetails;
+
+                runtimeclass PrintWorkflowVirtualPrinterUIEventArgs;
+
                 runtimeclass PrintWorkflowXpsDataAvailableEventArgs;
             }
         }
@@ -261,6 +291,8 @@ namespace Windows
 
                     interface Windows.Foundation.TypedEventHandler<Windows.Graphics.Printing.Workflow.PrintWorkflowForegroundSession*, Windows.Graphics.Printing.Workflow.PrintWorkflowXpsDataAvailableEventArgs*>;
 
+                    interface Windows.Foundation.TypedEventHandler<Windows.Graphics.Printing.Workflow.PrintWorkflowJobBackgroundSession*, Windows.Graphics.Printing.Workflow.PrintWorkflowJobIssueDetectedEventArgs*>;
+
                     interface Windows.Foundation.TypedEventHandler<Windows.Graphics.Printing.Workflow.PrintWorkflowJobBackgroundSession*, Windows.Graphics.Printing.Workflow.PrintWorkflowJobStartingEventArgs*>;
 
                     interface Windows.Foundation.TypedEventHandler<Windows.Graphics.Printing.Workflow.PrintWorkflowJobBackgroundSession*, Windows.Graphics.Printing.Workflow.PrintWorkflowPdlModificationRequestedEventArgs*>;
@@ -268,6 +300,10 @@ namespace Windows
                     interface Windows.Foundation.TypedEventHandler<Windows.Graphics.Printing.Workflow.PrintWorkflowJobUISession*, Windows.Graphics.Printing.Workflow.PrintWorkflowJobNotificationEventArgs*>;
 
                     interface Windows.Foundation.TypedEventHandler<Windows.Graphics.Printing.Workflow.PrintWorkflowJobUISession*, Windows.Graphics.Printing.Workflow.PrintWorkflowPdlDataAvailableEventArgs*>;
+
+                    interface Windows.Foundation.TypedEventHandler<Windows.Graphics.Printing.Workflow.PrintWorkflowJobUISession*, Windows.Graphics.Printing.Workflow.PrintWorkflowVirtualPrinterUIEventArgs*>;
+
+                    interface Windows.Foundation.TypedEventHandler<Windows.Graphics.Printing.Workflow.PrintWorkflowVirtualPrinterSession*, Windows.Graphics.Printing.Workflow.PrintWorkflowVirtualPrinterDataAvailableEventArgs*>;
                 }
             }
         }
@@ -310,12 +346,30 @@ namespace Windows
                     UserCanceled = 1
                 };
 
+                [contract(Windows.Foundation.UniversalApiContract, 17.0)]
+                enum PrintWorkflowJobIssueKind
+                {
+                    Other                = 0,
+                    AttentionRequired    = 1,
+                    DoorOpen             = 2,
+                    MarkerSupplyLow      = 3,
+                    MarkerSupplyEmpty    = 4,
+                    MediaJam             = 5,
+                    MediaEmpty           = 6,
+                    MediaLow             = 7,
+                    OutputAreaAlmostFull = 8,
+                    OutputAreaFull       = 9,
+                    JobPrintingError     = 10
+                };
+
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)]
                 enum PrintWorkflowPdlConversionType
                 {
                     XpsToPdf  = 0,
                     XpsToPwgr = 1,
-                    XpsToPclm = 2
+                    XpsToPclm = 2,
+                    [contract(Windows.Foundation.UniversalApiContract, 17.0)]
+                    XpsToTiff = 3
                 };
 
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)]
@@ -441,6 +495,30 @@ namespace Windows
                     HRESULT Start();
                 }
 
+                [contract(Windows.Foundation.UniversalApiContract, 17.0)]
+                [exclusiveto(Windows.Graphics.Printing.Workflow.PrintWorkflowJobBackgroundSession)]
+                [uuid(592AADAF-EF26-5A55-AD21-5F63FFCF8366)]
+                interface IPrintWorkflowJobBackgroundSession2 : IInspectable
+                {
+                    [eventadd] HRESULT JobIssueDetected([in] Windows.Foundation.TypedEventHandler<Windows.Graphics.Printing.Workflow.PrintWorkflowJobBackgroundSession*, Windows.Graphics.Printing.Workflow.PrintWorkflowJobIssueDetectedEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                    [eventremove] HRESULT JobIssueDetected([in] EventRegistrationToken token);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 17.0)]
+                [exclusiveto(Windows.Graphics.Printing.Workflow.PrintWorkflowJobIssueDetectedEventArgs)]
+                [uuid(DE58A46E-E41E-550A-A9FB-4B1F93FB9D98)]
+                interface IPrintWorkflowJobIssueDetectedEventArgs : IInspectable
+                {
+                    [propget] HRESULT JobIssueKind([out] [retval] Windows.Graphics.Printing.Workflow.PrintWorkflowJobIssueKind* value);
+                    [propget] HRESULT ExtendedError([out] [retval] HRESULT* value);
+                    [propget] HRESULT SkipSystemErrorToast([out] [retval] boolean* value);
+                    [propput] HRESULT SkipSystemErrorToast([in] boolean value);
+                    [propget] HRESULT PrinterJob([out] [retval] Windows.Graphics.Printing.Workflow.PrintWorkflowPrinterJob** value);
+                    [propget] HRESULT Configuration([out] [retval] Windows.Graphics.Printing.Workflow.PrintWorkflowConfiguration** value);
+                    [propget] HRESULT UILauncher([out] [retval] Windows.Graphics.Printing.Workflow.PrintWorkflowUILauncher** value);
+                    HRESULT GetDeferral([out] [retval] Windows.Foundation.Deferral** result);
+                }
+
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)]
                 [exclusiveto(Windows.Graphics.Printing.Workflow.PrintWorkflowJobNotificationEventArgs)]
                 [uuid(0AE16FBA-5398-5EBA-B472-978650186A9A)]
@@ -462,6 +540,17 @@ namespace Windows
                     HRESULT GetDeferral([out] [retval] Windows.Foundation.Deferral** result);
                 }
 
+                [contract(Windows.Foundation.UniversalApiContract, 17.0)]
+                [exclusiveto(Windows.Graphics.Printing.Workflow.PrintWorkflowJobStartingEventArgs)]
+                [uuid(7DEDED67-D3DC-5B23-8690-4EBFC0F0914A)]
+                interface IPrintWorkflowJobStartingEventArgs2 : IInspectable
+                {
+                    [propget] HRESULT IsIppCompressionEnabled([out] [retval] boolean* value);
+                    HRESULT DisableIppCompressionForJob();
+                    [propget] HRESULT SkipSystemFaxUI([out] [retval] boolean* value);
+                    [propput] HRESULT SkipSystemFaxUI([in] boolean value);
+                }
+
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)]
                 [exclusiveto(Windows.Graphics.Printing.Workflow.PrintWorkflowJobTriggerDetails)]
                 [uuid(FF296129-60E2-51DB-BA8C-E2CCDDB516B9)]
@@ -481,6 +570,15 @@ namespace Windows
                     [eventadd] HRESULT JobNotification([in] Windows.Foundation.TypedEventHandler<Windows.Graphics.Printing.Workflow.PrintWorkflowJobUISession*, Windows.Graphics.Printing.Workflow.PrintWorkflowJobNotificationEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
                     [eventremove] HRESULT JobNotification([in] EventRegistrationToken token);
                     HRESULT Start();
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [exclusiveto(Windows.Graphics.Printing.Workflow.PrintWorkflowJobUISession)]
+                [uuid(A8529368-9174-5C78-9FDB-894A82E92ADA)]
+                interface IPrintWorkflowJobUISession2 : IInspectable
+                {
+                    [eventadd] HRESULT VirtualPrinterUIDataAvailable([in] Windows.Foundation.TypedEventHandler<Windows.Graphics.Printing.Workflow.PrintWorkflowJobUISession*, Windows.Graphics.Printing.Workflow.PrintWorkflowVirtualPrinterUIEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                    [eventremove] HRESULT VirtualPrinterUIDataAvailable([in] EventRegistrationToken token);
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 5.0)]
@@ -591,6 +689,14 @@ namespace Windows
                     HRESULT SetJobAttributes([in] Windows.Foundation.Collections.IIterable<Windows.Foundation.Collections.IKeyValuePair<HSTRING, Windows.Devices.Printers.IppAttributeValue*>*>* jobAttributes, [out] [retval] Windows.Devices.Printers.IppSetAttributesResult** result);
                 }
 
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [exclusiveto(Windows.Graphics.Printing.Workflow.PrintWorkflowPrinterJob)]
+                [uuid(747E21D7-69A9-5229-B8F0-874CA1A8871B)]
+                interface IPrintWorkflowPrinterJob2 : IInspectable
+                {
+                    HRESULT ConvertPrintTicketToJobAttributes([in] Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicket* printTicket, [in] HSTRING targetPdlFormat, [out] [retval] Windows.Foundation.Collections.IMap<HSTRING, Windows.Devices.Printers.IppAttributeValue*>** result);
+                }
+
                 [contract(Windows.Foundation.UniversalApiContract, 5.0)]
                 [exclusiveto(Windows.Graphics.Printing.Workflow.PrintWorkflowSourceContent)]
                 [uuid(1A28C641-CEB1-4533-BB73-FBE63EEFDB18)]
@@ -674,6 +780,52 @@ namespace Windows
                     HRESULT LaunchAndCompleteUIAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.Graphics.Printing.Workflow.PrintWorkflowUICompletionStatus>** operation);
                 }
 
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [exclusiveto(Windows.Graphics.Printing.Workflow.PrintWorkflowVirtualPrinterDataAvailableEventArgs)]
+                [uuid(6B7D5003-14A8-5D52-A428-07330FBAB11F)]
+                interface IPrintWorkflowVirtualPrinterDataAvailableEventArgs : IInspectable
+                {
+                    [propget] HRESULT Configuration([out] [retval] Windows.Graphics.Printing.Workflow.PrintWorkflowConfiguration** value);
+                    [propget] HRESULT SourceContent([out] [retval] Windows.Graphics.Printing.Workflow.PrintWorkflowPdlSourceContent** value);
+                    [propget] HRESULT UILauncher([out] [retval] Windows.Graphics.Printing.Workflow.PrintWorkflowUILauncher** value);
+                    HRESULT GetJobPrintTicket([out] [retval] Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicket** result);
+                    HRESULT GetPdlConverter([in] Windows.Graphics.Printing.Workflow.PrintWorkflowPdlConversionType conversionType, [out] [retval] Windows.Graphics.Printing.Workflow.PrintWorkflowPdlConverter** result);
+                    HRESULT GetTargetFileAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.Storage.StorageFile*>** operation);
+                    HRESULT CompleteJob([in] Windows.Graphics.Printing.Workflow.PrintWorkflowSubmittedStatus status);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [exclusiveto(Windows.Graphics.Printing.Workflow.PrintWorkflowVirtualPrinterSession)]
+                [uuid(AA3926F2-8485-5C27-A016-9D39E3BA2614)]
+                interface IPrintWorkflowVirtualPrinterSession : IInspectable
+                {
+                    [propget] HRESULT Status([out] [retval] Windows.Graphics.Printing.Workflow.PrintWorkflowSessionStatus* value);
+                    [propget] HRESULT Printer([out] [retval] Windows.Devices.Printers.IppPrintDevice** value);
+                    [eventadd] HRESULT VirtualPrinterDataAvailable([in] Windows.Foundation.TypedEventHandler<Windows.Graphics.Printing.Workflow.PrintWorkflowVirtualPrinterSession*, Windows.Graphics.Printing.Workflow.PrintWorkflowVirtualPrinterDataAvailableEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                    [eventremove] HRESULT VirtualPrinterDataAvailable([in] EventRegistrationToken token);
+                    HRESULT Start();
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [exclusiveto(Windows.Graphics.Printing.Workflow.PrintWorkflowVirtualPrinterTriggerDetails)]
+                [uuid(FF8F2297-727B-53EC-B9E0-F393F72D4E50)]
+                interface IPrintWorkflowVirtualPrinterTriggerDetails : IInspectable
+                {
+                    [propget] HRESULT VirtualPrinterSession([out] [retval] Windows.Graphics.Printing.Workflow.PrintWorkflowVirtualPrinterSession** value);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [exclusiveto(Windows.Graphics.Printing.Workflow.PrintWorkflowVirtualPrinterUIEventArgs)]
+                [uuid(334DBBCA-BF10-585F-B7E0-58C4AA43A03F)]
+                interface IPrintWorkflowVirtualPrinterUIEventArgs : IInspectable
+                {
+                    [propget] HRESULT Configuration([out] [retval] Windows.Graphics.Printing.Workflow.PrintWorkflowConfiguration** value);
+                    [propget] HRESULT Printer([out] [retval] Windows.Devices.Printers.IppPrintDevice** value);
+                    [propget] HRESULT SourceContent([out] [retval] Windows.Graphics.Printing.Workflow.PrintWorkflowPdlSourceContent** value);
+                    HRESULT GetJobPrintTicket([out] [retval] Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicket** result);
+                    HRESULT GetDeferral([out] [retval] Windows.Foundation.Deferral** result);
+                }
+
                 [contract(Windows.Foundation.UniversalApiContract, 5.0)]
                 [exclusiveto(Windows.Graphics.Printing.Workflow.PrintWorkflowXpsDataAvailableEventArgs)]
                 [uuid(4D11C331-54D1-434E-BE0E-82C5FA58E5B2)]
@@ -737,6 +889,14 @@ namespace Windows
                 runtimeclass PrintWorkflowJobBackgroundSession
                 {
                     [default] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowJobBackgroundSession;
+                    [contract(Windows.Foundation.UniversalApiContract, 17.0)] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowJobBackgroundSession2;
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 17.0)]
+                [marshaling_behavior(agile)]
+                runtimeclass PrintWorkflowJobIssueDetectedEventArgs
+                {
+                    [default] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowJobIssueDetectedEventArgs;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)]
@@ -751,6 +911,7 @@ namespace Windows
                 runtimeclass PrintWorkflowJobStartingEventArgs
                 {
                     [default] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowJobStartingEventArgs;
+                    [contract(Windows.Foundation.UniversalApiContract, 17.0)] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowJobStartingEventArgs2;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)]
@@ -765,6 +926,7 @@ namespace Windows
                 runtimeclass PrintWorkflowJobUISession
                 {
                     [default] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowJobUISession;
+                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowJobUISession2;
                 }
 
                 [activatable(Windows.Graphics.Printing.Workflow.IPrintWorkflowObjectModelSourceFileContentFactory, Windows.Foundation.UniversalApiContract, 13.0)]
@@ -826,6 +988,7 @@ namespace Windows
                 runtimeclass PrintWorkflowPrinterJob
                 {
                     [default] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPrinterJob;
+                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPrinterJob2;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 5.0)]
@@ -899,6 +1062,34 @@ namespace Windows
                 runtimeclass PrintWorkflowUILauncher
                 {
                     [default] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowUILauncher;
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [marshaling_behavior(agile)]
+                runtimeclass PrintWorkflowVirtualPrinterDataAvailableEventArgs
+                {
+                    [default] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowVirtualPrinterDataAvailableEventArgs;
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [marshaling_behavior(agile)]
+                runtimeclass PrintWorkflowVirtualPrinterSession
+                {
+                    [default] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowVirtualPrinterSession;
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [marshaling_behavior(agile)]
+                runtimeclass PrintWorkflowVirtualPrinterTriggerDetails
+                {
+                    [default] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowVirtualPrinterTriggerDetails;
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [marshaling_behavior(agile)]
+                runtimeclass PrintWorkflowVirtualPrinterUIEventArgs
+                {
+                    [default] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowVirtualPrinterUIEventArgs;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 5.0)]

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -944,7 +944,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMicrosoftAccountMultiFactorAuthenticationManager = _uuidof(IMicrosoftAccountMultiFactorAuthenticationManager);
+                        MIDL_CONST_ID IID& IID_IMicrosoftAccountMultiFactorAuthenticationManager = __uuidof(IMicrosoftAccountMultiFactorAuthenticationManager);
                     } /* Core */
                 } /* Identity */
             } /* Authentication */
@@ -984,7 +984,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMicrosoftAccountMultiFactorAuthenticatorStatics = _uuidof(IMicrosoftAccountMultiFactorAuthenticatorStatics);
+                        MIDL_CONST_ID IID& IID_IMicrosoftAccountMultiFactorAuthenticatorStatics = __uuidof(IMicrosoftAccountMultiFactorAuthenticatorStatics);
                     } /* Core */
                 } /* Identity */
             } /* Authentication */
@@ -1027,7 +1027,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMicrosoftAccountMultiFactorGetSessionsResult = _uuidof(IMicrosoftAccountMultiFactorGetSessionsResult);
+                        MIDL_CONST_ID IID& IID_IMicrosoftAccountMultiFactorGetSessionsResult = __uuidof(IMicrosoftAccountMultiFactorGetSessionsResult);
                     } /* Core */
                 } /* Identity */
             } /* Authentication */
@@ -1076,7 +1076,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMicrosoftAccountMultiFactorOneTimeCodedInfo = _uuidof(IMicrosoftAccountMultiFactorOneTimeCodedInfo);
+                        MIDL_CONST_ID IID& IID_IMicrosoftAccountMultiFactorOneTimeCodedInfo = __uuidof(IMicrosoftAccountMultiFactorOneTimeCodedInfo);
                     } /* Core */
                 } /* Identity */
             } /* Authentication */
@@ -1134,7 +1134,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMicrosoftAccountMultiFactorSessionInfo = _uuidof(IMicrosoftAccountMultiFactorSessionInfo);
+                        MIDL_CONST_ID IID& IID_IMicrosoftAccountMultiFactorSessionInfo = __uuidof(IMicrosoftAccountMultiFactorSessionInfo);
                     } /* Core */
                 } /* Identity */
             } /* Authentication */
@@ -1180,7 +1180,7 @@ namespace ABI {
                                 ) = 0;
                         };
 
-                        extern MIDL_CONST_ID IID& IID_IMicrosoftAccountMultiFactorUnregisteredAccountsAndSessionInfo = _uuidof(IMicrosoftAccountMultiFactorUnregisteredAccountsAndSessionInfo);
+                        MIDL_CONST_ID IID& IID_IMicrosoftAccountMultiFactorUnregisteredAccountsAndSessionInfo = __uuidof(IMicrosoftAccountMultiFactorUnregisteredAccountsAndSessionInfo);
                     } /* Core */
                 } /* Identity */
             } /* Authentication */

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_MEDIA_PROTECTION_PROTECTIONRENEWALCONTRACT_VERSION)
@@ -1038,7 +1038,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IComponentLoadFailedEventHandler = _uuidof(IComponentLoadFailedEventHandler);
+                MIDL_CONST_ID IID& IID_IComponentLoadFailedEventHandler = __uuidof(IComponentLoadFailedEventHandler);
             } /* Protection */
         } /* Media */
     } /* Windows */
@@ -1071,7 +1071,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IRebootNeededEventHandler = _uuidof(IRebootNeededEventHandler);
+                MIDL_CONST_ID IID& IID_IRebootNeededEventHandler = __uuidof(IRebootNeededEventHandler);
             } /* Protection */
         } /* Media */
     } /* Windows */
@@ -1105,7 +1105,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IServiceRequestedEventHandler = _uuidof(IServiceRequestedEventHandler);
+                MIDL_CONST_ID IID& IID_IServiceRequestedEventHandler = __uuidof(IServiceRequestedEventHandler);
             } /* Protection */
         } /* Media */
     } /* Windows */
@@ -1144,7 +1144,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IComponentLoadFailedEventArgs = _uuidof(IComponentLoadFailedEventArgs);
+                MIDL_CONST_ID IID& IID_IComponentLoadFailedEventArgs = __uuidof(IComponentLoadFailedEventArgs);
             } /* Protection */
         } /* Media */
     } /* Windows */
@@ -1181,7 +1181,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IComponentRenewalStatics = _uuidof(IComponentRenewalStatics);
+                MIDL_CONST_ID IID& IID_IComponentRenewalStatics = __uuidof(IComponentRenewalStatics);
             } /* Protection */
         } /* Media */
     } /* Windows */
@@ -1235,7 +1235,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IHdcpSession = _uuidof(IHdcpSession);
+                MIDL_CONST_ID IID& IID_IHdcpSession = __uuidof(IHdcpSession);
             } /* Protection */
         } /* Media */
     } /* Windows */
@@ -1292,7 +1292,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaProtectionManager = _uuidof(IMediaProtectionManager);
+                MIDL_CONST_ID IID& IID_IMediaProtectionManager = __uuidof(IMediaProtectionManager);
             } /* Protection */
         } /* Media */
     } /* Windows */
@@ -1328,7 +1328,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaProtectionPMPServer = _uuidof(IMediaProtectionPMPServer);
+                MIDL_CONST_ID IID& IID_IMediaProtectionPMPServer = __uuidof(IMediaProtectionPMPServer);
             } /* Protection */
         } /* Media */
     } /* Windows */
@@ -1365,7 +1365,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaProtectionPMPServerFactory = _uuidof(IMediaProtectionPMPServerFactory);
+                MIDL_CONST_ID IID& IID_IMediaProtectionPMPServerFactory = __uuidof(IMediaProtectionPMPServerFactory);
             } /* Protection */
         } /* Media */
     } /* Windows */
@@ -1401,7 +1401,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaProtectionServiceCompletion = _uuidof(IMediaProtectionServiceCompletion);
+                MIDL_CONST_ID IID& IID_IMediaProtectionServiceCompletion = __uuidof(IMediaProtectionServiceCompletion);
             } /* Protection */
         } /* Media */
     } /* Windows */
@@ -1438,7 +1438,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMediaProtectionServiceRequest = _uuidof(IMediaProtectionServiceRequest);
+                MIDL_CONST_ID IID& IID_IMediaProtectionServiceRequest = __uuidof(IMediaProtectionServiceRequest);
             } /* Protection */
         } /* Media */
     } /* Windows */
@@ -1476,7 +1476,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IProtectionCapabilities = _uuidof(IProtectionCapabilities);
+                MIDL_CONST_ID IID& IID_IProtectionCapabilities = __uuidof(IProtectionCapabilities);
             } /* Protection */
         } /* Media */
     } /* Windows */
@@ -1512,7 +1512,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IRevocationAndRenewalInformation = _uuidof(IRevocationAndRenewalInformation);
+                MIDL_CONST_ID IID& IID_IRevocationAndRenewalInformation = __uuidof(IRevocationAndRenewalInformation);
             } /* Protection */
         } /* Media */
     } /* Windows */
@@ -1560,7 +1560,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IRevocationAndRenewalItem = _uuidof(IRevocationAndRenewalItem);
+                MIDL_CONST_ID IID& IID_IRevocationAndRenewalItem = __uuidof(IRevocationAndRenewalItem);
             } /* Protection */
         } /* Media */
     } /* Windows */
@@ -1599,7 +1599,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IServiceRequestedEventArgs = _uuidof(IServiceRequestedEventArgs);
+                MIDL_CONST_ID IID& IID_IServiceRequestedEventArgs = __uuidof(IServiceRequestedEventArgs);
             } /* Protection */
         } /* Media */
     } /* Windows */
@@ -1635,7 +1635,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IServiceRequestedEventArgs2 = _uuidof(IServiceRequestedEventArgs2);
+                MIDL_CONST_ID IID& IID_IServiceRequestedEventArgs2 = __uuidof(IServiceRequestedEventArgs2);
             } /* Protection */
         } /* Media */
     } /* Windows */

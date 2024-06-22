@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -131,6 +131,23 @@ namespace ABI {
 #define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter ABI::Windows::Devices::Display::Core::IDisplayAdapter
 
 #endif // ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Display {
+                namespace Core {
+                    interface IDisplayAdapter2;
+                } /* Core */
+            } /* Display */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2 ABI::Windows::Devices::Display::Core::IDisplayAdapter2
+
+#endif // ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapterStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapterStatics_FWD_DEFINED__
@@ -183,6 +200,23 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDevice2_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Display {
+                namespace Core {
+                    interface IDisplayDeviceRenderAdapter;
+                } /* Core */
+            } /* Display */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter ABI::Windows::Devices::Display::Core::IDisplayDeviceRenderAdapter
+
+#endif // ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayFence_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayFence_FWD_DEFINED__
 namespace ABI {
@@ -216,6 +250,40 @@ namespace ABI {
 #define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager ABI::Windows::Devices::Display::Core::IDisplayManager
 
 #endif // ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Display {
+                namespace Core {
+                    interface IDisplayManager2;
+                } /* Core */
+            } /* Display */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2 ABI::Windows::Devices::Display::Core::IDisplayManager2
+
+#endif // ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Display {
+                namespace Core {
+                    interface IDisplayManager3;
+                } /* Core */
+            } /* Display */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3 ABI::Windows::Devices::Display::Core::IDisplayManager3
+
+#endif // ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManagerChangedEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManagerChangedEventArgs_FWD_DEFINED__
@@ -352,6 +420,40 @@ namespace ABI {
 #define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayModeInfo2 ABI::Windows::Devices::Display::Core::IDisplayModeInfo2
 
 #endif // ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayModeInfo2_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Display {
+                namespace Core {
+                    interface IDisplayMuxDevice;
+                } /* Core */
+            } /* Display */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice ABI::Windows::Devices::Display::Core::IDisplayMuxDevice
+
+#endif // ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Display {
+                namespace Core {
+                    interface IDisplayMuxDeviceStatics;
+                } /* Core */
+            } /* Display */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics ABI::Windows::Devices::Display::Core::IDisplayMuxDeviceStatics
+
+#endif // ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayPath_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayPath_FWD_DEFINED__
@@ -713,6 +815,72 @@ namespace ABI {
 // Parameterized interface forward declarations (C++)
 
 // Collection interface definitions
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Display {
+                namespace Core {
+                    class DisplayMuxDevice;
+                } /* Core */
+            } /* Display */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+#ifndef DEF___FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_USE
+#define DEF___FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("066c3b59-099b-5f37-89eb-1d54fd93e9b3"))
+IAsyncOperation<ABI::Windows::Devices::Display::Core::DisplayMuxDevice*> : IAsyncOperation_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::Devices::Display::Core::DisplayMuxDevice*, ABI::Windows::Devices::Display::Core::IDisplayMuxDevice*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.IAsyncOperation`1<Windows.Devices.Display.Core.DisplayMuxDevice>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperation<ABI::Windows::Devices::Display::Core::DisplayMuxDevice*> __FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_t;
+#define __FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice ABI::Windows::Foundation::__FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+#ifndef DEF___FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_USE
+#define DEF___FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("61c7b405-e1e1-53b9-a440-4bae01636d23"))
+IAsyncOperationCompletedHandler<ABI::Windows::Devices::Display::Core::DisplayMuxDevice*> : IAsyncOperationCompletedHandler_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::Devices::Display::Core::DisplayMuxDevice*, ABI::Windows::Devices::Display::Core::IDisplayMuxDevice*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.AsyncOperationCompletedHandler`1<Windows.Devices.Display.Core.DisplayMuxDevice>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperationCompletedHandler<ABI::Windows::Devices::Display::Core::DisplayMuxDevice*> __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_t;
+#define __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice ABI::Windows::Foundation::__FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
 namespace ABI {
     namespace Windows {
         namespace Devices {
@@ -1640,6 +1808,33 @@ typedef ITypedEventHandler<ABI::Windows::Devices::Display::Core::DisplayManager*
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+#ifndef DEF___FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable_USE
+#define DEF___FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("f63ed5f6-c9fb-5876-9e02-a31a9fee1157"))
+ITypedEventHandler<ABI::Windows::Devices::Display::Core::DisplayMuxDevice*, IInspectable*> : ITypedEventHandler_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::Devices::Display::Core::DisplayMuxDevice*, ABI::Windows::Devices::Display::Core::IDisplayMuxDevice*>, IInspectable*>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.TypedEventHandler`2<Windows.Devices.Display.Core.DisplayMuxDevice, Object>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef ITypedEventHandler<ABI::Windows::Devices::Display::Core::DisplayMuxDevice*, IInspectable*> __FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable_t;
+#define __FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable ABI::Windows::Foundation::__FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
 namespace ABI {
     namespace Windows {
         namespace Devices {
@@ -1734,6 +1929,19 @@ namespace ABI {
 #define __x_ABI_CWindows_CFoundation_CIDeferral ABI::Windows::Foundation::IDeferral
 
 #endif // ____x_ABI_CWindows_CFoundation_CIDeferral_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CFoundation_CIAsyncAction_FWD_DEFINED__
+#define ____x_ABI_CWindows_CFoundation_CIAsyncAction_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Foundation {
+            interface IAsyncAction;
+        } /* Foundation */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CFoundation_CIAsyncAction ABI::Windows::Foundation::IAsyncAction
+
+#endif // ____x_ABI_CWindows_CFoundation_CIAsyncAction_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CFoundation_CIClosable_FWD_DEFINED__
 #define ____x_ABI_CWindows_CFoundation_CIClosable_FWD_DEFINED__
@@ -2851,7 +3059,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayAdapter = _uuidof(IDisplayAdapter);
+                    MIDL_CONST_ID IID& IID_IDisplayAdapter = __uuidof(IDisplayAdapter);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -2861,6 +3069,47 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter;
 #endif /* !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
+
+/*
+ *
+ * Interface Windows.Devices.Display.Core.IDisplayAdapter2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Display.Core.DisplayAdapter
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Display_Core_IDisplayAdapter2[] = L"Windows.Devices.Display.Core.IDisplayAdapter2";
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Display {
+                namespace Core {
+                    MIDL_INTERFACE("9ab49b18-b3c7-5546-8374-a9127111edd8")
+                    IDisplayAdapter2 : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE get_IsIndirectDisplayDevice(
+                            boolean* value
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE get_PreferredRenderAdapter(
+                            ABI::Windows::Devices::Display::Core::IDisplayAdapter** value
+                            ) = 0;
+                    };
+
+                    MIDL_CONST_ID IID& IID_IDisplayAdapter2 = __uuidof(IDisplayAdapter2);
+                } /* Core */
+            } /* Display */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -2890,7 +3139,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayAdapterStatics = _uuidof(IDisplayAdapterStatics);
+                    MIDL_CONST_ID IID& IID_IDisplayAdapterStatics = __uuidof(IDisplayAdapterStatics);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -2956,7 +3205,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayDevice = _uuidof(IDisplayDevice);
+                    MIDL_CONST_ID IID& IID_IDisplayDevice = __uuidof(IDisplayDevice);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -3000,7 +3249,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayDevice2 = _uuidof(IDisplayDevice2);
+                    MIDL_CONST_ID IID& IID_IDisplayDevice2 = __uuidof(IDisplayDevice2);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -3010,6 +3259,44 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDevice2;
 #endif /* !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDevice2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.Devices.Display.Core.IDisplayDeviceRenderAdapter
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Display.Core.DisplayDevice
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Display_Core_IDisplayDeviceRenderAdapter[] = L"Windows.Devices.Display.Core.IDisplayDeviceRenderAdapter";
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Display {
+                namespace Core {
+                    MIDL_INTERFACE("41c86ce5-b18f-573f-9d59-70463115e4cc")
+                    IDisplayDeviceRenderAdapter : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE get_RenderAdapterId(
+                            ABI::Windows::Graphics::DisplayAdapterId* value
+                            ) = 0;
+                    };
+
+                    MIDL_CONST_ID IID& IID_IDisplayDeviceRenderAdapter = __uuidof(IDisplayDeviceRenderAdapter);
+                } /* Core */
+            } /* Display */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -3035,7 +3322,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayFence = _uuidof(IDisplayFence);
+                    MIDL_CONST_ID IID& IID_IDisplayFence = __uuidof(IDisplayFence);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -3133,7 +3420,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Stop(void) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayManager = _uuidof(IDisplayManager);
+                    MIDL_CONST_ID IID& IID_IDisplayManager = __uuidof(IDisplayManager);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -3143,6 +3430,84 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager;
 #endif /* !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
+
+/*
+ *
+ * Interface Windows.Devices.Display.Core.IDisplayManager2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Display.Core.DisplayManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Display_Core_IDisplayManager2[] = L"Windows.Devices.Display.Core.IDisplayManager2";
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Display {
+                namespace Core {
+                    MIDL_INTERFACE("e001ec1e-7eb1-597f-9a30-14d3fe3714cd")
+                    IDisplayManager2 : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE TryReadCurrentStateForModeQuery(
+                            ABI::Windows::Devices::Display::Core::IDisplayManagerResultWithState** result
+                            ) = 0;
+                    };
+
+                    MIDL_CONST_ID IID& IID_IDisplayManager2 = __uuidof(IDisplayManager2);
+                } /* Core */
+            } /* Display */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
+ * Interface Windows.Devices.Display.Core.IDisplayManager3
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Display.Core.DisplayManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Display_Core_IDisplayManager3[] = L"Windows.Devices.Display.Core.IDisplayManager3";
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Display {
+                namespace Core {
+                    MIDL_INTERFACE("6f14cb89-7f49-587d-93ce-77487cbcb530")
+                    IDisplayManager3 : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE CreateDisplayDeviceForIndirectAdapter(
+                            ABI::Windows::Devices::Display::Core::IDisplayAdapter* indirectAdapter,
+                            ABI::Windows::Devices::Display::Core::IDisplayAdapter* renderAdapter,
+                            ABI::Windows::Devices::Display::Core::IDisplayDevice** result
+                            ) = 0;
+                    };
+
+                    MIDL_CONST_ID IID& IID_IDisplayManager3 = __uuidof(IDisplayManager3);
+                } /* Core */
+            } /* Display */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -3177,7 +3542,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayManagerChangedEventArgs = _uuidof(IDisplayManagerChangedEventArgs);
+                    MIDL_CONST_ID IID& IID_IDisplayManagerChangedEventArgs = __uuidof(IDisplayManagerChangedEventArgs);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -3221,7 +3586,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayManagerDisabledEventArgs = _uuidof(IDisplayManagerDisabledEventArgs);
+                    MIDL_CONST_ID IID& IID_IDisplayManagerDisabledEventArgs = __uuidof(IDisplayManagerDisabledEventArgs);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -3265,7 +3630,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayManagerEnabledEventArgs = _uuidof(IDisplayManagerEnabledEventArgs);
+                    MIDL_CONST_ID IID& IID_IDisplayManagerEnabledEventArgs = __uuidof(IDisplayManagerEnabledEventArgs);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -3309,7 +3674,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayManagerPathsFailedOrInvalidatedEventArgs = _uuidof(IDisplayManagerPathsFailedOrInvalidatedEventArgs);
+                    MIDL_CONST_ID IID& IID_IDisplayManagerPathsFailedOrInvalidatedEventArgs = __uuidof(IDisplayManagerPathsFailedOrInvalidatedEventArgs);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -3353,7 +3718,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayManagerResultWithState = _uuidof(IDisplayManagerResultWithState);
+                    MIDL_CONST_ID IID& IID_IDisplayManagerResultWithState = __uuidof(IDisplayManagerResultWithState);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -3392,7 +3757,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayManagerStatics = _uuidof(IDisplayManagerStatics);
+                    MIDL_CONST_ID IID& IID_IDisplayManagerStatics = __uuidof(IDisplayManagerStatics);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -3456,7 +3821,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayModeInfo = _uuidof(IDisplayModeInfo);
+                    MIDL_CONST_ID IID& IID_IDisplayModeInfo = __uuidof(IDisplayModeInfo);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -3494,7 +3859,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayModeInfo2 = _uuidof(IDisplayModeInfo2);
+                    MIDL_CONST_ID IID& IID_IDisplayModeInfo2 = __uuidof(IDisplayModeInfo2);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -3504,6 +3869,115 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayModeInfo2;
 #endif /* !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayModeInfo2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.Devices.Display.Core.IDisplayMuxDevice
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Display.Core.DisplayMuxDevice
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Display_Core_IDisplayMuxDevice[] = L"Windows.Devices.Display.Core.IDisplayMuxDevice";
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Display {
+                namespace Core {
+                    MIDL_INTERFACE("d81c4925-83dd-52c9-ab4e-e0833fc75068")
+                    IDisplayMuxDevice : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE get_Id(
+                            HSTRING* value
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE get_IsActive(
+                            boolean* value
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE GetAvailableMuxTargets(
+                            __FIVectorView_1_Windows__CDevices__CDisplay__CCore__CDisplayTarget** result
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE get_CurrentTarget(
+                            ABI::Windows::Devices::Display::Core::IDisplayTarget** value
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE get_PreferredTarget(
+                            ABI::Windows::Devices::Display::Core::IDisplayTarget** value
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE get_IsAutomaticTargetSwitchingEnabled(
+                            boolean* value
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE SetPreferredTarget(
+                            ABI::Windows::Devices::Display::Core::IDisplayTarget* target,
+                            ABI::Windows::Foundation::IAsyncAction** operation
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE SetAutomaticTargetSwitching(
+                            ABI::Windows::Foundation::IAsyncAction** operation
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE add_Changed(
+                            __FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable* handler,
+                            EventRegistrationToken* token
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE remove_Changed(
+                            EventRegistrationToken token
+                            ) = 0;
+                    };
+
+                    MIDL_CONST_ID IID& IID_IDisplayMuxDevice = __uuidof(IDisplayMuxDevice);
+                } /* Core */
+            } /* Display */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
+ * Interface Windows.Devices.Display.Core.IDisplayMuxDeviceStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Display.Core.DisplayMuxDevice
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Display_Core_IDisplayMuxDeviceStatics[] = L"Windows.Devices.Display.Core.IDisplayMuxDeviceStatics";
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Display {
+                namespace Core {
+                    MIDL_INTERFACE("7b37a64a-0465-53da-baee-70028480ced0")
+                    IDisplayMuxDeviceStatics : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE GetDeviceSelector(
+                            HSTRING* result
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE FromIdAsync(
+                            HSTRING deviceInterfaceId,
+                            __FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice** operation
+                            ) = 0;
+                    };
+
+                    MIDL_CONST_ID IID& IID_IDisplayMuxDeviceStatics = __uuidof(IDisplayMuxDeviceStatics);
+                } /* Core */
+            } /* Display */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -3602,7 +4076,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayPath = _uuidof(IDisplayPath);
+                    MIDL_CONST_ID IID& IID_IDisplayPath = __uuidof(IDisplayPath);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -3643,7 +4117,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayPath2 = _uuidof(IDisplayPath2);
+                    MIDL_CONST_ID IID& IID_IDisplayPath2 = __uuidof(IDisplayPath2);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -3699,7 +4173,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayPrimaryDescription = _uuidof(IDisplayPrimaryDescription);
+                    MIDL_CONST_ID IID& IID_IDisplayPrimaryDescription = __uuidof(IDisplayPrimaryDescription);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -3743,7 +4217,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayPrimaryDescriptionFactory = _uuidof(IDisplayPrimaryDescriptionFactory);
+                    MIDL_CONST_ID IID& IID_IDisplayPrimaryDescriptionFactory = __uuidof(IDisplayPrimaryDescriptionFactory);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -3788,7 +4262,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayPrimaryDescriptionStatics = _uuidof(IDisplayPrimaryDescriptionStatics);
+                    MIDL_CONST_ID IID& IID_IDisplayPrimaryDescriptionStatics = __uuidof(IDisplayPrimaryDescriptionStatics);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -3823,7 +4297,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayScanout = _uuidof(IDisplayScanout);
+                    MIDL_CONST_ID IID& IID_IDisplayScanout = __uuidof(IDisplayScanout);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -3868,7 +4342,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplaySource = _uuidof(IDisplaySource);
+                    MIDL_CONST_ID IID& IID_IDisplaySource = __uuidof(IDisplaySource);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -3913,7 +4387,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplaySource2 = _uuidof(IDisplaySource2);
+                    MIDL_CONST_ID IID& IID_IDisplaySource2 = __uuidof(IDisplaySource2);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -3999,7 +4473,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayState = _uuidof(IDisplayState);
+                    MIDL_CONST_ID IID& IID_IDisplayState = __uuidof(IDisplayState);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -4040,7 +4514,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayStateOperationResult = _uuidof(IDisplayStateOperationResult);
+                    MIDL_CONST_ID IID& IID_IDisplayStateOperationResult = __uuidof(IDisplayStateOperationResult);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -4075,7 +4549,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplaySurface = _uuidof(IDisplaySurface);
+                    MIDL_CONST_ID IID& IID_IDisplaySurface = __uuidof(IDisplaySurface);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -4154,7 +4628,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayTarget = _uuidof(IDisplayTarget);
+                    MIDL_CONST_ID IID& IID_IDisplayTarget = __uuidof(IDisplayTarget);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -4196,7 +4670,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayTask = _uuidof(IDisplayTask);
+                    MIDL_CONST_ID IID& IID_IDisplayTask = __uuidof(IDisplayTask);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -4235,7 +4709,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayTask2 = _uuidof(IDisplayTask2);
+                    MIDL_CONST_ID IID& IID_IDisplayTask2 = __uuidof(IDisplayTask2);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -4279,7 +4753,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayTaskPool = _uuidof(IDisplayTaskPool);
+                    MIDL_CONST_ID IID& IID_IDisplayTaskPool = __uuidof(IDisplayTaskPool);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -4318,7 +4792,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayTaskPool2 = _uuidof(IDisplayTaskPool2);
+                    MIDL_CONST_ID IID& IID_IDisplayTaskPool2 = __uuidof(IDisplayTaskPool2);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -4362,7 +4836,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayTaskResult = _uuidof(IDisplayTaskResult);
+                    MIDL_CONST_ID IID& IID_IDisplayTaskResult = __uuidof(IDisplayTaskResult);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -4412,7 +4886,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayView = _uuidof(IDisplayView);
+                    MIDL_CONST_ID IID& IID_IDisplayView = __uuidof(IDisplayView);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -4465,7 +4939,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayWireFormat = _uuidof(IDisplayWireFormat);
+                    MIDL_CONST_ID IID& IID_IDisplayWireFormat = __uuidof(IDisplayWireFormat);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -4508,7 +4982,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayWireFormatFactory = _uuidof(IDisplayWireFormatFactory);
+                    MIDL_CONST_ID IID& IID_IDisplayWireFormatFactory = __uuidof(IDisplayWireFormatFactory);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -4552,7 +5026,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDisplayWireFormatStatics = _uuidof(IDisplayWireFormatStatics);
+                    MIDL_CONST_ID IID& IID_IDisplayWireFormatStatics = __uuidof(IDisplayWireFormatStatics);
                 } /* Core */
             } /* Display */
         } /* Devices */
@@ -4574,6 +5048,7 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayWireFor
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Display.Core.IDisplayAdapter ** Default Interface **
+ *    Windows.Devices.Display.Core.IDisplayAdapter2
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -4596,6 +5071,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class implements the following interfaces:
  *    Windows.Devices.Display.Core.IDisplayDevice ** Default Interface **
  *    Windows.Devices.Display.Core.IDisplayDevice2
+ *    Windows.Devices.Display.Core.IDisplayDeviceRenderAdapter
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -4637,6 +5113,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Display.Core.IDisplayManager ** Default Interface **
+ *    Windows.Devices.Display.Core.IDisplayManager2
+ *    Windows.Devices.Display.Core.IDisplayManager3
  *    Windows.Foundation.IClosable
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
@@ -4765,6 +5243,31 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_Display_Core_DisplayModeInfo[] = L"Windows.Devices.Display.Core.DisplayModeInfo";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
+
+/*
+ *
+ * Class Windows.Devices.Display.Core.DisplayMuxDevice
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Devices.Display.Core.IDisplayMuxDeviceStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Devices.Display.Core.IDisplayMuxDevice ** Default Interface **
+ *    Windows.Foundation.IClosable
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_Devices_Display_Core_DisplayMuxDevice_DEFINED
+#define RUNTIMECLASS_Windows_Devices_Display_Core_DisplayMuxDevice_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_Display_Core_DisplayMuxDevice[] = L"Windows.Devices.Display.Core.DisplayMuxDevice";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -5041,6 +5544,12 @@ typedef interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter __x_
 
 #endif // ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2 __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2;
+
+#endif // ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapterStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapterStatics_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapterStatics __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapterStatics;
@@ -5059,6 +5568,12 @@ typedef interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDevice2 __x_
 
 #endif // ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDevice2_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter;
+
+#endif // ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayFence_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayFence_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayFence __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayFence;
@@ -5070,6 +5585,18 @@ typedef interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayFence __x_AB
 typedef interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager;
 
 #endif // ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2 __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2;
+
+#endif // ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3 __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3;
+
+#endif // ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManagerChangedEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManagerChangedEventArgs_FWD_DEFINED__
@@ -5118,6 +5645,18 @@ typedef interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayModeInfo __x
 typedef interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayModeInfo2 __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayModeInfo2;
 
 #endif // ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayModeInfo2_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice;
+
+#endif // ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics;
+
+#endif // ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayPath_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayPath_FWD_DEFINED__
@@ -5248,6 +5787,131 @@ typedef interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayWireFormatSt
 // Parameterized interface forward declarations (C)
 
 // Collection interface definitions
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice;
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_INTERFACE_DEFINED__)
+#define ____FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice __FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice;
+
+typedef struct __FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDeviceVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* put_Completed)(__FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice* handler);
+    HRESULT (STDMETHODCALLTYPE* get_Completed)(__FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice** result);
+    HRESULT (STDMETHODCALLTYPE* GetResults)(__FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice* This,
+        __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice** result);
+
+    END_INTERFACE
+} __FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDeviceVtbl;
+
+interface __FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice
+{
+    CONST_VTBL struct __FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDeviceVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_put_Completed(This, handler) \
+    ((This)->lpVtbl->put_Completed(This, handler))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_get_Completed(This, result) \
+    ((This)->lpVtbl->get_Completed(This, result))
+
+#define __FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_GetResults(This, result) \
+    ((This)->lpVtbl->GetResults(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_INTERFACE_DEFINED__)
+#define ____FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice;
+
+typedef struct __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDeviceVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice* This,
+        __FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice* asyncInfo,
+        AsyncStatus asyncStatus);
+
+    END_INTERFACE
+} __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDeviceVtbl;
+
+interface __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice
+{
+    CONST_VTBL struct __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDeviceVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_Invoke(This, asyncInfo, asyncStatus) \
+    ((This)->lpVtbl->Invoke(This, asyncInfo, asyncStatus))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperationCompletedHandler_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
 #if !defined(____FIIterator_1_Windows__CDevices__CDisplay__CCore__CDisplayAdapter_INTERFACE_DEFINED__)
@@ -7329,6 +7993,55 @@ interface __FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMa
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable_INTERFACE_DEFINED__)
+#define ____FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable_INTERFACE_DEFINED__
+
+typedef interface __FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable __FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable;
+
+typedef struct __FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectableVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable* This,
+        __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice* sender,
+        IInspectable* args);
+
+    END_INTERFACE
+} __FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectableVtbl;
+
+interface __FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable
+{
+    CONST_VTBL struct __FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectableVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable_Invoke(This, sender, args) \
+    ((This)->lpVtbl->Invoke(This, sender, args))
+
+#endif /* COBJMACROS */
+
+#endif // ____FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
 #if !defined(____FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplaySource_IInspectable_INTERFACE_DEFINED__)
 #define ____FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplaySource_IInspectable_INTERFACE_DEFINED__
@@ -7391,6 +8104,12 @@ typedef enum __x_ABI_CWindows_CDevices_CDisplay_CDisplayMonitorUsageKind __x_ABI
 typedef interface __x_ABI_CWindows_CFoundation_CIDeferral __x_ABI_CWindows_CFoundation_CIDeferral;
 
 #endif // ____x_ABI_CWindows_CFoundation_CIDeferral_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CFoundation_CIAsyncAction_FWD_DEFINED__
+#define ____x_ABI_CWindows_CFoundation_CIAsyncAction_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CFoundation_CIAsyncAction __x_ABI_CWindows_CFoundation_CIAsyncAction;
+
+#endif // ____x_ABI_CWindows_CFoundation_CIAsyncAction_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CFoundation_CIClosable_FWD_DEFINED__
 #define ____x_ABI_CWindows_CFoundation_CIClosable_FWD_DEFINED__
@@ -7931,6 +8650,80 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter
 
 /*
  *
+ * Interface Windows.Devices.Display.Core.IDisplayAdapter2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Display.Core.DisplayAdapter
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Display_Core_IDisplayAdapter2[] = L"Windows.Devices.Display.Core.IDisplayAdapter2";
+typedef struct __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_IsIndirectDisplayDevice)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* get_PreferredRenderAdapter)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2* This,
+        __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2Vtbl;
+
+interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2_get_IsIndirectDisplayDevice(This, value) \
+    ((This)->lpVtbl->get_IsIndirectDisplayDevice(This, value))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2_get_PreferredRenderAdapter(This, value) \
+    ((This)->lpVtbl->get_PreferredRenderAdapter(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
  * Interface Windows.Devices.Display.Core.IDisplayAdapterStatics
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 7.0
@@ -8185,6 +8978,75 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDevice2
 
 /*
  *
+ * Interface Windows.Devices.Display.Core.IDisplayDeviceRenderAdapter
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Display.Core.DisplayDevice
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Display_Core_IDisplayDeviceRenderAdapter[] = L"Windows.Devices.Display.Core.IDisplayDeviceRenderAdapter";
+typedef struct __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapterVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_RenderAdapterId)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter* This,
+        struct __x_ABI_CWindows_CGraphics_CDisplayAdapterId* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapterVtbl;
+
+interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter
+{
+    CONST_VTBL struct __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapterVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter_get_RenderAdapterId(This, value) \
+    ((This)->lpVtbl->get_RenderAdapterId(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDeviceRenderAdapter_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
  * Interface Windows.Devices.Display.Core.IDisplayFence
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 7.0
@@ -8413,6 +9275,146 @@ interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager
 EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager;
 #endif /* !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
+
+/*
+ *
+ * Interface Windows.Devices.Display.Core.IDisplayManager2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Display.Core.DisplayManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Display_Core_IDisplayManager2[] = L"Windows.Devices.Display.Core.IDisplayManager2";
+typedef struct __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* TryReadCurrentStateForModeQuery)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2* This,
+        __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManagerResultWithState** result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2Vtbl;
+
+interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2_TryReadCurrentStateForModeQuery(This, result) \
+    ((This)->lpVtbl->TryReadCurrentStateForModeQuery(This, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
+ * Interface Windows.Devices.Display.Core.IDisplayManager3
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Display.Core.DisplayManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Display_Core_IDisplayManager3[] = L"Windows.Devices.Display.Core.IDisplayManager3";
+typedef struct __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* CreateDisplayDeviceForIndirectAdapter)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3* This,
+        __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter* indirectAdapter,
+        __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayAdapter* renderAdapter,
+        __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayDevice** result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3Vtbl;
+
+interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3
+{
+    CONST_VTBL struct __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3_CreateDisplayDeviceForIndirectAdapter(This, indirectAdapter, renderAdapter, result) \
+    ((This)->lpVtbl->CreateDisplayDeviceForIndirectAdapter(This, indirectAdapter, renderAdapter, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayManager3_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -9058,6 +10060,197 @@ interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayModeInfo2
 EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayModeInfo2;
 #endif /* !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayModeInfo2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.Devices.Display.Core.IDisplayMuxDevice
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Display.Core.DisplayMuxDevice
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Display_Core_IDisplayMuxDevice[] = L"Windows.Devices.Display.Core.IDisplayMuxDevice";
+typedef struct __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Id)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* get_IsActive)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* GetAvailableMuxTargets)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice* This,
+        __FIVectorView_1_Windows__CDevices__CDisplay__CCore__CDisplayTarget** result);
+    HRESULT (STDMETHODCALLTYPE* get_CurrentTarget)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice* This,
+        __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayTarget** value);
+    HRESULT (STDMETHODCALLTYPE* get_PreferredTarget)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice* This,
+        __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayTarget** value);
+    HRESULT (STDMETHODCALLTYPE* get_IsAutomaticTargetSwitchingEnabled)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* SetPreferredTarget)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice* This,
+        __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayTarget* target,
+        __x_ABI_CWindows_CFoundation_CIAsyncAction** operation);
+    HRESULT (STDMETHODCALLTYPE* SetAutomaticTargetSwitching)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice* This,
+        __x_ABI_CWindows_CFoundation_CIAsyncAction** operation);
+    HRESULT (STDMETHODCALLTYPE* add_Changed)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice* This,
+        __FITypedEventHandler_2_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice_IInspectable* handler,
+        EventRegistrationToken* token);
+    HRESULT (STDMETHODCALLTYPE* remove_Changed)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice* This,
+        EventRegistrationToken token);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceVtbl;
+
+interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice
+{
+    CONST_VTBL struct __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_get_Id(This, value) \
+    ((This)->lpVtbl->get_Id(This, value))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_get_IsActive(This, value) \
+    ((This)->lpVtbl->get_IsActive(This, value))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_GetAvailableMuxTargets(This, result) \
+    ((This)->lpVtbl->GetAvailableMuxTargets(This, result))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_get_CurrentTarget(This, value) \
+    ((This)->lpVtbl->get_CurrentTarget(This, value))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_get_PreferredTarget(This, value) \
+    ((This)->lpVtbl->get_PreferredTarget(This, value))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_get_IsAutomaticTargetSwitchingEnabled(This, value) \
+    ((This)->lpVtbl->get_IsAutomaticTargetSwitchingEnabled(This, value))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_SetPreferredTarget(This, target, operation) \
+    ((This)->lpVtbl->SetPreferredTarget(This, target, operation))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_SetAutomaticTargetSwitching(This, operation) \
+    ((This)->lpVtbl->SetAutomaticTargetSwitching(This, operation))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_add_Changed(This, handler, token) \
+    ((This)->lpVtbl->add_Changed(This, handler, token))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_remove_Changed(This, token) \
+    ((This)->lpVtbl->remove_Changed(This, token))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDevice_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
+ * Interface Windows.Devices.Display.Core.IDisplayMuxDeviceStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Display.Core.DisplayMuxDevice
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Display_Core_IDisplayMuxDeviceStatics[] = L"Windows.Devices.Display.Core.IDisplayMuxDeviceStatics";
+typedef struct __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStaticsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetDeviceSelector)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics* This,
+        HSTRING* result);
+    HRESULT (STDMETHODCALLTYPE* FromIdAsync)(__x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics* This,
+        HSTRING deviceInterfaceId,
+        __FIAsyncOperation_1_Windows__CDevices__CDisplay__CCore__CDisplayMuxDevice** operation);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStaticsVtbl;
+
+interface __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics
+{
+    CONST_VTBL struct __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStaticsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics_GetDeviceSelector(This, result) \
+    ((This)->lpVtbl->GetDeviceSelector(This, result))
+
+#define __x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics_FromIdAsync(This, deviceInterfaceId, operation) \
+    ((This)->lpVtbl->FromIdAsync(This, deviceInterfaceId, operation))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayMuxDeviceStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -10926,6 +12119,7 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CDisplay_CCore_CIDisplayWireFor
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Display.Core.IDisplayAdapter ** Default Interface **
+ *    Windows.Devices.Display.Core.IDisplayAdapter2
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -10948,6 +12142,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class implements the following interfaces:
  *    Windows.Devices.Display.Core.IDisplayDevice ** Default Interface **
  *    Windows.Devices.Display.Core.IDisplayDevice2
+ *    Windows.Devices.Display.Core.IDisplayDeviceRenderAdapter
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -10989,6 +12184,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Display.Core.IDisplayManager ** Default Interface **
+ *    Windows.Devices.Display.Core.IDisplayManager2
+ *    Windows.Devices.Display.Core.IDisplayManager3
  *    Windows.Foundation.IClosable
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
@@ -11117,6 +12314,31 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_Display_Core_DisplayModeInfo[] = L"Windows.Devices.Display.Core.DisplayModeInfo";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
+
+/*
+ *
+ * Class Windows.Devices.Display.Core.DisplayMuxDevice
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Devices.Display.Core.IDisplayMuxDeviceStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Devices.Display.Core.IDisplayMuxDevice ** Default Interface **
+ *    Windows.Foundation.IClosable
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_Devices_Display_Core_DisplayMuxDevice_DEFINED
+#define RUNTIMECLASS_Windows_Devices_Display_Core_DisplayMuxDevice_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Devices_Display_Core_DisplayMuxDevice[] = L"Windows.Devices.Display.Core.DisplayMuxDevice";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *

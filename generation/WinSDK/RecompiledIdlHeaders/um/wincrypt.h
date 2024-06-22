@@ -2898,10 +2898,18 @@ CryptDecodeObject(
 #define X509_CERT_TO_BE_SIGNED              ((LPCSTR) 2)
 #define X509_CERT_CRL_TO_BE_SIGNED          ((LPCSTR) 3)
 #define X509_CERT_REQUEST_TO_BE_SIGNED      ((LPCSTR) 4)
-#define X509_EXTENSIONS                     ((LPCSTR) 5)
 #define X509_NAME_VALUE                     ((LPCSTR) 6)
-#define X509_NAME                           ((LPCSTR) 7)
 #define X509_PUBLIC_KEY_INFO                ((LPCSTR) 8)
+
+// WINCRYPT_USE_SYMBOL_PREFIX defined to avoid symbol collision with OpenSSL
+// Only used for specific symbols which have collisions today (Apr 2022) to avoid excessive duplication
+#ifndef WINCRYPT_USE_SYMBOL_PREFIX
+    #define X509_EXTENSIONS                 ((LPCSTR) 5)
+    #define X509_NAME                       ((LPCSTR) 7)
+#else
+    #define WINCRYPT_X509_EXTENSIONS        ((LPCSTR) 5)
+    #define WINCRYPT_X509_NAME              ((LPCSTR) 7)
+#endif
 
 //+-------------------------------------------------------------------------
 //  Predefined X509 certificate extension data structures that can be
@@ -3035,10 +3043,18 @@ CryptDecodeObject(
 //  Online Certificate Status Protocol (OCSP) Data Structures
 //--------------------------------------------------------------------------
 #define OCSP_SIGNED_REQUEST                 ((LPCSTR) 65)
-#define OCSP_REQUEST                        ((LPCSTR) 66)
-#define OCSP_RESPONSE                       ((LPCSTR) 67)
 #define OCSP_BASIC_SIGNED_RESPONSE          ((LPCSTR) 68)
 #define OCSP_BASIC_RESPONSE                 ((LPCSTR) 69)
+
+// WINCRYPT_USE_SYMBOL_PREFIX defined to avoid symbol collision with OpenSSL
+// Only used for specific symbols which have collisions today (Apr 2022) to avoid excessive duplication
+#ifndef WINCRYPT_USE_SYMBOL_PREFIX
+    #define OCSP_REQUEST                    ((LPCSTR) 66)
+    #define OCSP_RESPONSE                   ((LPCSTR) 67)
+#else
+    #define WINCRYPT_OCSP_REQUEST           ((LPCSTR) 66)
+    #define WINCRYPT_OCSP_RESPONSE          ((LPCSTR) 67)
+#endif
 
 //+-------------------------------------------------------------------------
 //  Logotype and Biometric Extensions
@@ -3086,7 +3102,14 @@ CryptDecodeObject(
 //+-------------------------------------------------------------------------
 //  Predefined PKCS #7 data structures that can be encoded / decoded.
 //--------------------------------------------------------------------------
-#define PKCS7_SIGNER_INFO                   ((LPCSTR) 500)
+
+// WINCRYPT_USE_SYMBOL_PREFIX defined to avoid symbol collision with OpenSSL
+// Only used for specific symbols which have collisions today (Apr 2022) to avoid excessive duplication
+#ifndef WINCRYPT_USE_SYMBOL_PREFIX
+    #define PKCS7_SIGNER_INFO               ((LPCSTR) 500)
+#else
+    #define WINCRYPT_PKCS7_SIGNER_INFO      ((LPCSTR) 500)
+#endif
 
 //+-------------------------------------------------------------------------
 //  Predefined PKCS #7 data structures that can be encoded / decoded.
@@ -3509,6 +3532,11 @@ CryptDecodeObject(
 // a quicker sync of the autorootupdate CTL
 #define szOID_SYNC_ROOT_CTL_EXT         "1.3.6.1.4.1.311.10.3.50"
 
+// The following extension is set to identify flighted CTLs
+#define szOID_FLIGHT_CTL_EXT            "1.3.6.1.4.1.311.10.3.51"
+
+//The following extension contains the list of logging servers for CT
+#define szOID_CERT_LOG_LIST_EXT          "1.3.6.1.4.1.311.10.3.52"
 
 // CTL containing HPKP Domain Names
 #define szOID_HPKP_DOMAIN_NAME_CTL      "1.3.6.1.4.1.311.10.3.60"
@@ -3721,7 +3749,7 @@ CryptDecodeObject(
 //--------------------------------------------------------------------------
 
 //+-------------------------------------------------------------------------
-//  X509_EXTENSIONS
+//  X509_EXTENSIONS (WINCRYPT_X509_EXTENSIONS)
 //  szOID_CERT_EXTENSIONS
 //
 //  pvStructInfo points to following CERT_EXTENSIONS.
@@ -3792,7 +3820,7 @@ typedef struct _CERT_EXTENSIONS {
 //--------------------------------------------------------------------------
 
 //+-------------------------------------------------------------------------
-//  X509_NAME
+//  X509_NAME (WINCRYPT_X509_NAME)
 //
 //  pvStructInfo points to CERT_NAME_INFO.
 //--------------------------------------------------------------------------
@@ -4950,7 +4978,7 @@ typedef struct _CRYPT_RSAES_OAEP_PARAMETERS {
 
 
 //+-------------------------------------------------------------------------
-//  PKCS7_SIGNER_INFO
+//  PKCS7_SIGNER_INFO (WINCRYPT_PKCS7_SIGNER_INFO)
 //
 //  pvStructInfo points to CMSG_SIGNER_INFO.
 //--------------------------------------------------------------------------
@@ -5616,7 +5644,7 @@ typedef struct _OCSP_SIGNED_REQUEST_INFO {
 } OCSP_SIGNED_REQUEST_INFO, *POCSP_SIGNED_REQUEST_INFO;
 
 //+-------------------------------------------------------------------------
-//  OCSP_REQUEST
+//  OCSP_REQUEST (WINCRYPT_OCSP_REQUEST)
 //
 //  ToBeSigned OCSP request.
 //--------------------------------------------------------------------------
@@ -5646,7 +5674,7 @@ typedef struct _OCSP_REQUEST_INFO {
 #define OCSP_REQUEST_V1     0
 
 //+-------------------------------------------------------------------------
-//  OCSP_RESPONSE
+//  OCSP_RESPONSE (WINCRYPT_OCSP_RESPONSE)
 //
 //  OCSP outer, unsigned response wrapper.
 //--------------------------------------------------------------------------
@@ -9192,7 +9220,11 @@ typedef const CTL_CONTEXT *PCCTL_CONTEXT;
 #define CERT_NOT_BEFORE_ENHKEY_USAGE_PROP_ID   127
 #define CERT_DISALLOWED_CA_FILETIME_PROP_ID    128
 
-#define CERT_FIRST_RESERVED_PROP_ID            129
+#define CERT_SHA1_SHA256_HASH_PROP_ID          129
+
+#define CERT_FIRST_RESERVED_PROP_ID            130
+
+
 
 #define CERT_LAST_RESERVED_PROP_ID          0x00007FFF
 #define CERT_FIRST_USER_PROP_ID             0x00008000
@@ -9225,6 +9257,7 @@ typedef enum CertKeyType WINCRYPT_DWORD_CPP_ONLY
 #define IS_CERT_HASH_PROP_ID(X)     (CERT_SHA1_HASH_PROP_ID == (X) || \
                                         CERT_MD5_HASH_PROP_ID == (X) || \
                                         CERT_SHA256_HASH_PROP_ID == (X) || \
+                                        CERT_SHA1_SHA256_HASH_PROP_ID == (X) || \
                                         CERT_SIGNATURE_HASH_PROP_ID == (X))
 
 #define IS_PUBKEY_HASH_PROP_ID(X)     (CERT_ISSUER_PUBLIC_KEY_MD5_HASH_PROP_ID == (X) || \
@@ -9271,6 +9304,9 @@ typedef enum CertKeyType WINCRYPT_DWORD_CPP_ONLY
 
 // Use szOID_CERT_PROP_ID(CERT_MD5_HASH_PROP_ID) instead:
 #define szOID_CERT_MD5_HASH_PROP_ID         "1.3.6.1.4.1.311.10.11.4"
+
+// Use szOID_CERT_PROP_ID(CERT_SHA256_HASH_PROP_ID) instead:
+#define szOID_CERT_SHA256_HASH_PROP_ID         "1.3.6.1.4.1.311.10.11.107"
 
 // Use szOID_CERT_PROP_ID(CERT_SIGNATURE_HASH_PROP_ID) instead:
 #define szOID_CERT_SIGNATURE_HASH_PROP_ID   "1.3.6.1.4.1.311.10.11.15"
@@ -10987,6 +11023,8 @@ CertFindCertificateInStore(
 #define CERT_COMPARE_HASH_STR       20
 #define CERT_COMPARE_HAS_PRIVATE_KEY 21
 
+#define CERT_COMPARE_SHA256_HASH    22
+#define CERT_COMPARE_SHA1_SHA256_HASH 23
 //+-------------------------------------------------------------------------
 //  dwFindType
 //
@@ -10996,6 +11034,8 @@ CertFindCertificateInStore(
 //--------------------------------------------------------------------------
 #define CERT_FIND_ANY           (CERT_COMPARE_ANY << CERT_COMPARE_SHIFT)
 #define CERT_FIND_SHA1_HASH     (CERT_COMPARE_SHA1_HASH << CERT_COMPARE_SHIFT)
+#define CERT_FIND_SHA256_HASH   (CERT_COMPARE_SHA256_HASH << CERT_COMPARE_SHIFT)
+#define CERT_FIND_SHA1_SHA256_HASH   (CERT_COMPARE_SHA1_SHA256_HASH << CERT_COMPARE_SHIFT)
 #define CERT_FIND_MD5_HASH      (CERT_COMPARE_MD5_HASH << CERT_COMPARE_SHIFT)
 #define CERT_FIND_SIGNATURE_HASH (CERT_COMPARE_SIGNATURE_HASH << CERT_COMPARE_SHIFT)
 #define CERT_FIND_KEY_IDENTIFIER (CERT_COMPARE_KEY_IDENTIFIER << CERT_COMPARE_SHIFT)
@@ -11051,8 +11091,16 @@ CertFindCertificateInStore(
 
 //+-------------------------------------------------------------------------
 //  CERT_FIND_HASH
+//  CERT_FIND_SHA1_HASH
+//  CERT_FIND_SHA256_HASH
+//  CERT_FIND_SHA1_SHA256_HASH
 //
-//  Find a certificate with the specified hash.
+//  Find a certificate with the specified hash. 
+//
+//  For the SHA1_SHA256 case, the hash property is a concatenation 
+//  of both the SHA1 and SHA256 hash for 20+32 bytes. SHA1_SHA256 is applicable 
+//  to the CERT_SYSTEM_STORE_DEFER_READ_FLAG where we first find in the registry 
+//  via the SHA1 thumbprint name and then do a SHA256 confirmation.
 //
 //  pvFindPara points to a CRYPT_HASH_BLOB.
 //--------------------------------------------------------------------------
@@ -18360,6 +18408,26 @@ CryptCreateKeyIdentifierFromCSP(
 #define CERT_CHAIN_MIN_RSA_PUB_KEY_BIT_LENGTH_DISABLE       \
     0xFFFFFFFF
 
+// The following is a REG_DWORD that specifies the minimum RSA public
+// key length in bits needed to trigger weak RSA errors.
+#define CERT_CHAIN_MIN_WEAK_RSA_PUB_KEY_BIT_LENGTH_VALUE_NAME    \
+    L"MinWeakRsaPubKeyBitLength"
+#define CERT_CHAIN_MIN_WEAK_RSA_PUB_KEY_BIT_LENGTH_DEFAULT       2047
+
+// The following value disables checking for weak RSA public key lengths.
+#define CERT_CHAIN_MIN_WEAK_RSA_PUB_KEY_BIT_LENGTH_DISABLE       \
+    0xFFFFFFFF
+
+// The following is a REG_DWORD that specifies the minimum RSA public
+// key length in bits needed to trigger telemetry.
+#define CERT_CHAIN_MIN_TELEMETRY_RSA_PUB_KEY_BIT_LENGTH_VALUE_NAME    \
+    L"MinTelemetryRsaPubKeyBitLength"
+#define CERT_CHAIN_MIN_TELEMETRY_RSA_PUB_KEY_BIT_LENGTH_DEFAULT       2047
+
+// The following value disables telemetry for weak RSA public key lengths.
+#define CERT_CHAIN_MIN_TELEMETRY_RSA_PUB_KEY_BIT_LENGTH_DISABLE       \
+    0xFFFFFFFF
+
 // The following is a REG_BINARY containing the 8 byte FILETIME. The weak
 // RSA public key length check is disabled for timestamped files before
 // this time. If not defined or a zero FILETIME, uses the default value. 
@@ -19388,6 +19456,8 @@ typedef struct _CERT_TRUST_STATUS {
 #define CERT_TRUST_HAS_NOT_SUPPORTED_CRITICAL_EXT       0x08000000
 #define CERT_TRUST_HAS_WEAK_SIGNATURE                   0x00100000
 #define CERT_TRUST_HAS_WEAK_HYGIENE                     0x00200000
+#define CERT_TRUST_HAS_MIN_TELEMETRY_RSA                0x00400000
+#define CERT_TRUST_HAS_MIN_WEAK_RSA                     0x00800000
 
 // These can be applied to chains only
 
@@ -20140,6 +20210,7 @@ CertVerifyCertificateChainPolicy(
 #define CERT_CHAIN_POLICY_SSL_HPKP_HEADER   ((LPCSTR) 10)
 #define CERT_CHAIN_POLICY_THIRD_PARTY_ROOT  ((LPCSTR) 11)
 #define CERT_CHAIN_POLICY_SSL_KEY_PIN       ((LPCSTR) 12)
+#define CERT_CHAIN_POLICY_CT                ((LPCSTR) 13)
 
 //+-------------------------------------------------------------------------
 //  CERT_CHAIN_POLICY_BASE
@@ -20513,6 +20584,88 @@ typedef struct _SSL_KEY_PIN_EXTRA_CERT_CHAIN_POLICY_STATUS {
 #define CERT_CHAIN_POLICY_SSL_KEY_PIN_MISMATCH_WARNING  2
 
 //+-------------------------------------------------------------------------
+//  CERT_CHAIN_POLICY_CT 
+//
+//  Implements the Certificate Transparency chain policy verification checks.
+//
+//  pvExtraPolicyStatus must be set to point to the following
+//  CT_EXTRA_CHAIN_POLICY_STATUS data structure
+//--------------------------------------------------------------------------
+typedef struct _CT_EXTRA_CERT_CHAIN_POLICY_STATUS {
+    DWORD   cbSize;
+    LONG    lErrorStatus;
+    LONG    lErrorSubStatus;
+    DWORD   cEntries;
+    DWORD   cValidated;
+} CT_EXTRA_CERT_CHAIN_POLICY_STATUS, *PCT_EXTRA_CERT_CHAIN_POLICY_STATUS;
+
+//+-------------------------------------------------------------------------
+//  Certificate Transparency Errors
+//
+//  CertVerifyCertificateChainPolicy will return a CERT_CHAIN_POLICY_STATUS structure 
+//  which holds the certificate chain status information from when the certificate chains are validated. 
+//  The dwError in the returned CERT_CHAIN_POLICY_STATUS will be set to one of three Windows 
+//  API return code values: 
+//  S_OK, ERROR_SUCCESS, 0 - Indicates the leaf certificate has a verified SCT extension. 
+//  E_FAIL - Indicates the leaf certificate doesn't have an SCT extension or is unable to verify. 
+//  S_FALSE - Same as E_FAIL, however, a non-fatal reason for not finding or being able to verify. 
+//  For example, code signing certificates that were issued before CA's started adding SCT extension to code signing certificates. 
+//  The pvExtraPolicyStatus in the CERT_CHAIN_POLICY_STATUS will point to a struct containing more detailed extra error information. 
+//  The struct will contain the following two fields: 
+//  LONG lErrorStatus; 
+//      > 0 : warning - These errors can be ignored. Will map to S_FALSE 
+//      == 0 : success - Will map to S_OK 
+//      < 0 : fatal error - These errors shouldn't be ignored. Will map to E_FAIL 
+//  LONG lErrorSubStatus; 
+//  - Depends on lErrorStatus. Can override lErrorStatus. 
+//--------------------------------------------------------------------------
+#define CERT_CHAIN_POLICY_CT_ERROR_UNDECODABLE_SCT_EXTENSION               -112
+#define CERT_CHAIN_POLICY_CT_ERROR_UNRETRIEVABLE_SCT_EXTENSION             -111
+#define CERT_CHAIN_POLICY_CT_ERROR_MISSING_SCT_EXTENSION                   -110
+
+#define CERT_CHAIN_POLICY_CT_ERROR_INVALID_ISSUER_CERT                     -101
+#define CERT_CHAIN_POLICY_CT_ERROR_INVALID_SUBJECT_CERT                    -100
+
+#define CERT_CHAIN_POLICY_CT_ERROR_CANNOT_VALIDATE_SCT                      -50
+
+// Validation Statuses
+#define CERT_CHAIN_POLICY_CT_ERROR_SCT_VALIDATION_STATUS_INSUFFICIENT       -4
+#define CERT_CHAIN_POLICY_CT_ERROR_SCT_VALIDATION_STATUS_UNKNOWN_VERSION    -3
+#define CERT_CHAIN_POLICY_CT_ERROR_SCT_VALIDATION_STATUS_UNKNOWN_LOG        -2
+#define CERT_CHAIN_POLICY_CT_ERROR_SCT_VALIDATION_STATUS_INVALID            -1
+#define CERT_CHAIN_POLICY_CT_SUCCESS_SCT_VALIDIDATION_STATUS_VALID           0
+
+// Override Errors
+#define CERT_CHAIN_POLICY_CT_WARNING_OUT_OF_MEMORY                           1
+#define CERT_CHAIN_POLICY_CT_WARNING_BEFORE_CODE_SIGNING_CT_LOGGING          2
+#define CERT_CHAIN_POLICY_CT_WARNING_NOT_THIRD_PARTY_CERT                    3
+#define CERT_CHAIN_POLICY_CT_WARNING_EXPIRED_ROOT_CTL                        4
+
+// Early Failure Warnings
+#define CERT_CHAIN_POLICY_CT_WARNING_INVALID_CHAIN_CONTEXT                   50
+#define CERT_CHAIN_POLICY_CT_WARNING_NOT_SUPPORTED_CA                        51
+#define CERT_CHAIN_POLICY_CT_WARNING_MISSING_ROOT_CTL                        52
+
+#define CERT_CHAIN_POLICY_CT_WARNING_MISSING_CT_EXT                          60
+#define CERT_CHAIN_POLICY_CT_WARNING_INVALID_CT_EXT                          61
+#define CERT_CHAIN_POLICY_CT_WARNING_UNABLE_TO_DECODE_EXT                    62
+
+#define CERT_CHAIN_POLICY_CT_WARNING_UNABLE_TO_DECODE_PARAMETERS             70
+
+#define CERT_CHAIN_POLICY_CT_WARNING_INVALID_TEMP_FILE                       80
+#define CERT_CHAIN_POLICY_CT_WARNING_CANNOT_CREATE_TEMP_FILE                 81
+#define CERT_CHAIN_POLICY_CT_WARNING_CANNOT_WRITE_TEMP_FILE                  82
+#define CERT_CHAIN_POLICY_CT_WARNING_CANNOT_LOAD_CTLOG_STORE_FILE            83
+
+#define CERT_CHAIN_POLICY_CT_WARNING_FAILED_INIT                             90
+
+// General Warnings
+#define CERT_CHAIN_POLICY_CT_WARNING_HASHING_ERROR                           200
+#define CERT_CHAIN_POLICY_CT_WARNING_INVALID_STR                             201
+
+// OpenSSL Warnings
+#define CERT_CHAIN_POLICY_CT_WARNING_CANNOT_CREATE_POLICY                    300
+//+-------------------------------------------------------------------------
 // convert formatted string to binary
 // If cchString is 0, then pszString is NULL terminated and
 // cchString is obtained via strlen() + 1.
@@ -20534,6 +20687,8 @@ CryptStringToBinaryA(
     _Out_opt_ DWORD *pdwSkip,
     _Out_opt_ DWORD *pdwFlags
     );
+// OpenSSL Warnings
+#define CERT_CHAIN_POLICY_CT_WARNING_CANNOT_CREATE_POLICY                    300
 //+-------------------------------------------------------------------------
 // convert formatted string to binary
 // If cchString is 0, then pszString is NULL terminated and
@@ -20765,6 +20920,7 @@ PFXImportCertStore(
 #define PKCS12_NO_PERSIST_KEY       0x00008000  // key will not be persisted
 #define PKCS12_VIRTUAL_ISOLATION_KEY 0x00010000  // key will be saved into VSM
 #define PKCS12_IMPORT_RESERVED_MASK 0xffff0000
+#define PKCS12_NAMED_NO_PERSIST_KEY 0x00020000  // PKCS12_NO_PERSIST_KEY and PKCS12_ALWAYS_CNG_KSP also need to be set
 
 #define PKCS12_OBJECT_LOCATOR_ALL_IMPORT_FLAGS          \
               ( PKCS12_ALWAYS_CNG_KSP               |   \

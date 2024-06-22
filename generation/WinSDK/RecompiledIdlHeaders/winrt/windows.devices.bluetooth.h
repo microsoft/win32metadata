@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -2212,7 +2212,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothAdapter = _uuidof(IBluetoothAdapter);
+                MIDL_CONST_ID IID& IID_IBluetoothAdapter = __uuidof(IBluetoothAdapter);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -2251,7 +2251,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothAdapter2 = _uuidof(IBluetoothAdapter2);
+                MIDL_CONST_ID IID& IID_IBluetoothAdapter2 = __uuidof(IBluetoothAdapter2);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -2290,7 +2290,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothAdapter3 = _uuidof(IBluetoothAdapter3);
+                MIDL_CONST_ID IID& IID_IBluetoothAdapter3 = __uuidof(IBluetoothAdapter3);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -2333,7 +2333,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothAdapterStatics = _uuidof(IBluetoothAdapterStatics);
+                MIDL_CONST_ID IID& IID_IBluetoothAdapterStatics = __uuidof(IBluetoothAdapterStatics);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -2378,7 +2378,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothClassOfDevice = _uuidof(IBluetoothClassOfDevice);
+                MIDL_CONST_ID IID& IID_IBluetoothClassOfDevice = __uuidof(IBluetoothClassOfDevice);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -2421,7 +2421,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothClassOfDeviceStatics = _uuidof(IBluetoothClassOfDeviceStatics);
+                MIDL_CONST_ID IID& IID_IBluetoothClassOfDeviceStatics = __uuidof(IBluetoothClassOfDeviceStatics);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -2502,7 +2502,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothDevice = _uuidof(IBluetoothDevice);
+                MIDL_CONST_ID IID& IID_IBluetoothDevice = __uuidof(IBluetoothDevice);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -2538,7 +2538,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothDevice2 = _uuidof(IBluetoothDevice2);
+                MIDL_CONST_ID IID& IID_IBluetoothDevice2 = __uuidof(IBluetoothDevice2);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -2593,7 +2593,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothDevice3 = _uuidof(IBluetoothDevice3);
+                MIDL_CONST_ID IID& IID_IBluetoothDevice3 = __uuidof(IBluetoothDevice3);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -2629,7 +2629,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothDevice4 = _uuidof(IBluetoothDevice4);
+                MIDL_CONST_ID IID& IID_IBluetoothDevice4 = __uuidof(IBluetoothDevice4);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -2665,7 +2665,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothDevice5 = _uuidof(IBluetoothDevice5);
+                MIDL_CONST_ID IID& IID_IBluetoothDevice5 = __uuidof(IBluetoothDevice5);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -2707,7 +2707,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothDeviceId = _uuidof(IBluetoothDeviceId);
+                MIDL_CONST_ID IID& IID_IBluetoothDeviceId = __uuidof(IBluetoothDeviceId);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -2744,7 +2744,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothDeviceIdStatics = _uuidof(IBluetoothDeviceIdStatics);
+                MIDL_CONST_ID IID& IID_IBluetoothDeviceIdStatics = __uuidof(IBluetoothDeviceIdStatics);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -2792,7 +2792,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothDeviceStatics = _uuidof(IBluetoothDeviceStatics);
+                MIDL_CONST_ID IID& IID_IBluetoothDeviceStatics = __uuidof(IBluetoothDeviceStatics);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -2845,7 +2845,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothDeviceStatics2 = _uuidof(IBluetoothDeviceStatics2);
+                MIDL_CONST_ID IID& IID_IBluetoothDeviceStatics2 = __uuidof(IBluetoothDeviceStatics2);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -2887,7 +2887,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothLEAppearance = _uuidof(IBluetoothLEAppearance);
+                MIDL_CONST_ID IID& IID_IBluetoothLEAppearance = __uuidof(IBluetoothLEAppearance);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -2986,7 +2986,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothLEAppearanceCategoriesStatics = _uuidof(IBluetoothLEAppearanceCategoriesStatics);
+                MIDL_CONST_ID IID& IID_IBluetoothLEAppearanceCategoriesStatics = __uuidof(IBluetoothLEAppearanceCategoriesStatics);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -3028,7 +3028,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothLEAppearanceStatics = _uuidof(IBluetoothLEAppearanceStatics);
+                MIDL_CONST_ID IID& IID_IBluetoothLEAppearanceStatics = __uuidof(IBluetoothLEAppearanceStatics);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -3145,7 +3145,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothLEAppearanceSubcategoriesStatics = _uuidof(IBluetoothLEAppearanceSubcategoriesStatics);
+                MIDL_CONST_ID IID& IID_IBluetoothLEAppearanceSubcategoriesStatics = __uuidof(IBluetoothLEAppearanceSubcategoriesStatics);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -3187,7 +3187,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothLEConnectionParameters = _uuidof(IBluetoothLEConnectionParameters);
+                MIDL_CONST_ID IID& IID_IBluetoothLEConnectionParameters = __uuidof(IBluetoothLEConnectionParameters);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -3226,7 +3226,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothLEConnectionPhy = _uuidof(IBluetoothLEConnectionPhy);
+                MIDL_CONST_ID IID& IID_IBluetoothLEConnectionPhy = __uuidof(IBluetoothLEConnectionPhy);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -3268,7 +3268,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothLEConnectionPhyInfo = _uuidof(IBluetoothLEConnectionPhyInfo);
+                MIDL_CONST_ID IID& IID_IBluetoothLEConnectionPhyInfo = __uuidof(IBluetoothLEConnectionPhyInfo);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -3347,7 +3347,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothLEDevice = _uuidof(IBluetoothLEDevice);
+                MIDL_CONST_ID IID& IID_IBluetoothLEDevice = __uuidof(IBluetoothLEDevice);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -3389,7 +3389,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothLEDevice2 = _uuidof(IBluetoothLEDevice2);
+                MIDL_CONST_ID IID& IID_IBluetoothLEDevice2 = __uuidof(IBluetoothLEDevice2);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -3444,7 +3444,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothLEDevice3 = _uuidof(IBluetoothLEDevice3);
+                MIDL_CONST_ID IID& IID_IBluetoothLEDevice3 = __uuidof(IBluetoothLEDevice3);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -3480,7 +3480,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothLEDevice4 = _uuidof(IBluetoothLEDevice4);
+                MIDL_CONST_ID IID& IID_IBluetoothLEDevice4 = __uuidof(IBluetoothLEDevice4);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -3516,7 +3516,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothLEDevice5 = _uuidof(IBluetoothLEDevice5);
+                MIDL_CONST_ID IID& IID_IBluetoothLEDevice5 = __uuidof(IBluetoothLEDevice5);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -3573,7 +3573,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothLEDevice6 = _uuidof(IBluetoothLEDevice6);
+                MIDL_CONST_ID IID& IID_IBluetoothLEDevice6 = __uuidof(IBluetoothLEDevice6);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -3617,7 +3617,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothLEDeviceStatics = _uuidof(IBluetoothLEDeviceStatics);
+                MIDL_CONST_ID IID& IID_IBluetoothLEDeviceStatics = __uuidof(IBluetoothLEDeviceStatics);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -3680,7 +3680,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothLEDeviceStatics2 = _uuidof(IBluetoothLEDeviceStatics2);
+                MIDL_CONST_ID IID& IID_IBluetoothLEDeviceStatics2 = __uuidof(IBluetoothLEDeviceStatics2);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -3725,7 +3725,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothLEPreferredConnectionParameters = _uuidof(IBluetoothLEPreferredConnectionParameters);
+                MIDL_CONST_ID IID& IID_IBluetoothLEPreferredConnectionParameters = __uuidof(IBluetoothLEPreferredConnectionParameters);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -3761,7 +3761,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothLEPreferredConnectionParametersRequest = _uuidof(IBluetoothLEPreferredConnectionParametersRequest);
+                MIDL_CONST_ID IID& IID_IBluetoothLEPreferredConnectionParametersRequest = __uuidof(IBluetoothLEPreferredConnectionParametersRequest);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -3803,7 +3803,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothLEPreferredConnectionParametersStatics = _uuidof(IBluetoothLEPreferredConnectionParametersStatics);
+                MIDL_CONST_ID IID& IID_IBluetoothLEPreferredConnectionParametersStatics = __uuidof(IBluetoothLEPreferredConnectionParametersStatics);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -3860,7 +3860,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothSignalStrengthFilter = _uuidof(IBluetoothSignalStrengthFilter);
+                MIDL_CONST_ID IID& IID_IBluetoothSignalStrengthFilter = __uuidof(IBluetoothSignalStrengthFilter);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -3901,7 +3901,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IBluetoothUuidHelperStatics = _uuidof(IBluetoothUuidHelperStatics);
+                MIDL_CONST_ID IID& IID_IBluetoothUuidHelperStatics = __uuidof(IBluetoothUuidHelperStatics);
             } /* Bluetooth */
         } /* Devices */
     } /* Windows */
@@ -3968,8 +3968,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Bluetooth.IBluetoothDeviceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.Bluetooth.IBluetoothDeviceStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.Bluetooth.IBluetoothDeviceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.IBluetoothDevice ** Default Interface **
@@ -9892,8 +9892,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Bluetooth.IBluetoothDeviceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.Bluetooth.IBluetoothDeviceStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.Bluetooth.IBluetoothDeviceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Bluetooth.IBluetoothDevice ** Default Interface **

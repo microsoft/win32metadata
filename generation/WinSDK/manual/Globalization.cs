@@ -1,5 +1,7 @@
 namespace Windows.Win32.Globalization
 {
+    public struct UNumberRangeFormatter;
+
     public static partial class Apis
     {
         public const int LANG_SYSTEM_DEFAULT = 2048; // (MAKELANGID(LANG_NEUTRAL, SUBLANG_SYS_DEFAULT))

@@ -156,7 +156,9 @@ extern "C" {
 #define OPTION_TFTP_SERVER_NAME         66
 #define OPTION_BOOTFILE_NAME            67
 
-#define OPTION_MSFT_IE_PROXY                   252
+#define OPTION_DNR                      162
+
+#define OPTION_MSFT_IE_PROXY            252
 #define OPTION_END                      255
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */

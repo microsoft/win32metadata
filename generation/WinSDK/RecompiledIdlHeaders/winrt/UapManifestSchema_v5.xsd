@@ -14,6 +14,7 @@
            xmlns:wincap3="http://schemas.microsoft.com/appx/manifest/foundation/windows10/windowscapabilities/3"
            xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
            xmlns:desktop10="http://schemas.microsoft.com/appx/manifest/desktop/windows10/10"
+           xmlns:desktop11="http://schemas.microsoft.com/appx/manifest/desktop/windows10/11"
            xmlns:iot2="http://schemas.microsoft.com/appx/manifest/iot/windows10/2"
            >
 
@@ -28,6 +29,7 @@
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/iot/windows10/2"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/10"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/11"/>
 
   <xs:element name="Extension" substitutionGroup="f:ApplicationExtensionChoice">
     <xs:complexType>
@@ -40,6 +42,7 @@
         <xs:element name="AppExecutionAlias" type="CT_AppExecutionAlias"/>
       </xs:choice>
       <xs:attribute name="Category" type="t:ST_ApplicationExtensionCategory_Uap5" use="required"/>
+      <xs:attribute ref="desktop11:AppLifecycleBehavior" use="optional"/>
       <xs:attributeGroup ref="t:ExtensionBaseAttributes"/>
       <xs:attributeGroup ref="uap10:TrustLevelGroup"/>
       <xs:attributeGroup ref="uap11:ManganeseExtensionAttributesGroup"/>
@@ -96,9 +99,10 @@
     </xs:all>
     <xs:attribute name="DisplayName" type="t:ST_DisplayName"/>
     <xs:attribute name="Description" type="t:ST_Description"/>
-    <xs:attribute name="AppServiceName" type="t:ST_AppServiceName" use="required"/>
+    <xs:attribute name="AppServiceName" type="t:ST_AppServiceName" use="optional"/>
+    <xs:attributeGroup ref="wincap3:InprocMediaCodecAttributes"/>
   </xs:complexType>
-
+  
   <xs:complexType name="CT_VideoRendererEffect">
     <xs:all minOccurs="0">
       <xs:element name="VideoRendererExtensionProfiles">

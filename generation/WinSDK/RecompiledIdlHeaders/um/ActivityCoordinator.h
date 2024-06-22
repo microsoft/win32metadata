@@ -58,14 +58,20 @@ UnsubscribeActivityCoordinatorPolicy(
     _In_ _Post_invalid_ ACTIVITY_COORDINATOR_SUBSCRIPTION subscription
     );
 
+BOOL
+WINAPI
+IsActivityCoordinatorResourceSupported(
+    _In_ ACTIVITY_COORDINATOR_RESOURCE Resource
+    );
+
 #ifdef __cplusplus
 } // extern "C"
 #endif
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
 
-#ifndef ext_ms_win_resourcemanager_activitycoordinator_l1_1_0_query_routines
-#define ext_ms_win_resourcemanager_activitycoordinator_l1_1_0_query_routines
+#ifndef ext_ms_win_resourcemanager_activitycoordinator_l1_1_1_query_routines
+#define ext_ms_win_resourcemanager_activitycoordinator_l1_1_1_query_routines
 
 //
 //Private Extension API Query Routines
@@ -108,6 +114,12 @@ IsSubscribeActivityCoordinatorPolicyPresent(
 BOOLEAN
 __stdcall
 IsUnsubscribeActivityCoordinatorPolicyPresent(
+    VOID
+    );
+
+BOOLEAN
+__stdcall
+IsIsActivityCoordinatorResourceSupportedPresent(
     VOID
     );
 

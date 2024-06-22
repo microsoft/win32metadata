@@ -92,6 +92,9 @@ cpp_quote("DEFINE_GUID(CLSID_WICHeifEncoder,  0x0dbecec1, 0x9eb3, 0x4860, 0x9c, 
 cpp_quote("DEFINE_GUID(CLSID_WICWebpDecoder,  0x7693E886, 0x51C9, 0x4070, 0x84, 0x19, 0x9F, 0x70, 0X73, 0X8E, 0XC8, 0XFA);")
 cpp_quote("DEFINE_GUID(CLSID_WICRAWDecoder,   0x41945702, 0x8302, 0x44A6, 0x94, 0x45, 0xAC, 0x98, 0xE8, 0xAF, 0xA0, 0x86);")
 
+cpp_quote("DEFINE_GUID(CLSID_WICJpegXLDecoder, 0xfc6ceece, 0xaef5, 0x4a23, 0x96, 0xec, 0x59, 0x84, 0xff, 0xb4, 0x86, 0xd9);")
+cpp_quote("DEFINE_GUID(CLSID_WICJpegXLEncoder, 0x0e4ecd3b, 0x1ba6, 0x4636, 0x81, 0x98, 0x56, 0xc7, 0x30, 0x40, 0x96, 0x4a);")
+
 /*=========================================================================*\
     GUID Identifiers for the image container formats
 \*=========================================================================*/
@@ -108,6 +111,7 @@ cpp_quote("DEFINE_GUID(GUID_ContainerFormatAdng, 0xf3ff6d0d, 0x38c0, 0x41c4, 0xb
 cpp_quote("DEFINE_GUID(GUID_ContainerFormatHeif, 0xe1e62521, 0x6787, 0x405b, 0xa3, 0x39, 0x50, 0x07, 0x15, 0xb5, 0x76, 0x3f);")
 cpp_quote("DEFINE_GUID(GUID_ContainerFormatWebp, 0xe094b0e2, 0x67f2, 0x45b3, 0xb0, 0xea, 0x11, 0x53, 0x37, 0xca, 0x7c, 0xf3);")
 cpp_quote("DEFINE_GUID(GUID_ContainerFormatRaw,  0xfe99ce60, 0xf19c, 0x433c, 0xa3, 0xae, 0x00, 0xac, 0xef, 0xa9, 0xca, 0x21);")
+cpp_quote("DEFINE_GUID(GUID_ContainerFormatJpegXL, 0xfec14e3f, 0x427a, 0x4736, 0xaa, 0xe6, 0x27, 0xed, 0x84, 0xf6, 0x93, 0x22);")
 
 /*=========================================================================*\
     Category Identifiers
@@ -264,6 +268,14 @@ cpp_quote("DEFINE_GUID(GUID_WICPixelFormat8bppGray,   0x6fddc324, 0x4e03, 0x4bfe
 
 /* Alpha only format */
 cpp_quote("DEFINE_GUID(GUID_WICPixelFormat8bppAlpha, 0xe6cd0116, 0xeeba, 0x4161, 0xaa, 0x85, 0x27, 0xdd, 0x9f, 0xb3, 0xa8, 0x95);")
+
+/* Depth only format */
+/* 4c9c9f45-1d89-4e31-9bc7-69343a0dca69 */
+cpp_quote("DEFINE_GUID(GUID_WICPixelFormat8bppDepth, 0x4c9c9f45, 0x1d89, 0x4e31, 0x9b, 0xc7, 0x69, 0x34, 0x3a, 0x0d, 0xca, 0x69);")
+
+/* Gain only format */
+/* a884022a-af13-4c16-b746-619bf618b878 */
+cpp_quote("DEFINE_GUID(GUID_WICPixelFormat8bppGain, 0xa884022a, 0xaf13, 0x4c16, 0xb7, 0x46, 0x61, 0x9b, 0xf6, 0x18, 0xb8, 0x78);")
 
 /* sRGB formats (gamma is approx. 2.2) */
 /* For a full definition, see the sRGB spec */
@@ -997,6 +1009,29 @@ typedef [public] enum WICWebpAnmfProperties
     WICWebpAnmfFrameDuration          = 0x00000001,
     WICWebpAnmfProperties_FORCE_DWORD = CODEC_FORCE_DWORD
 } WICWebpAnmfProperties;
+
+
+/*=========================================================================*\
+    WICJpegXLAnimProperties
+\*=========================================================================*/
+typedef [public] enum WICJpegXLAnimProperties
+{
+    WICJpegXLAnimLoopCount                       = 0x00000001,
+    WICJpegXLAnimFrameTicksPerSecondNumerator    = 0x00000002,
+    WICJpegXLAnimFrameTicksPerSecondDenominator  = 0x00000003,
+    WICJpegXLAnimProperties_FORCE_DWORD          = CODEC_FORCE_DWORD
+} WICJpegXLAnimProperties;
+
+
+/*=========================================================================*\
+    WICJpegXLAnimFrameProperties
+\*=========================================================================*/
+typedef [public] enum WICJpegXLAnimFrameProperties
+{
+    WICJpegXLAnimFrameDurationInTicks            = 0x00000001,
+    WICJpegXLAnimFrameName                       = 0x00000002,
+    WICJpegXLAnimFrameProperties_FORCE_DWORD     = CODEC_FORCE_DWORD
+} WICJpegXLAnimFrameProperties;
 
 
 /*=========================================================================*\
@@ -1873,6 +1908,24 @@ interface IWICBitmapSourceTransform : IUnknown
 };
 
 /*=========================================================================*\
+    IWICBitmapSourceTransform2
+\*=========================================================================*/
+
+[
+    object,
+    uuid(c3373fdf-6d39-4e5f-8e79-bf40c0b7ed77)
+]
+interface IWICBitmapSourceTransform2 : IWICBitmapSourceTransform
+{
+    HRESULT GetColorContextsForPixelFormat(
+        [in, unique] WICPixelFormatGUID* pPixelFormat,
+        [in] UINT cCount,
+        [in, unique, size_is(cCount)] IWICColorContext** ppIColorContexts,
+        [out] UINT* pcActualCount
+        );
+};
+
+/*=========================================================================*\
     IWICPlanarBitmapSourceTransform
 \*=========================================================================*/
 
@@ -1949,6 +2002,32 @@ interface IWICProgressiveLevelControl : IUnknown
 
     HRESULT SetCurrentLevel(
         [in] UINT nLevel
+        );
+}
+
+
+/*=========================================================================*\
+    IWICDisplayAdaptationControl -
+    For adapting decoding to capabilities of the display
+\*=========================================================================*/
+
+[
+    object,
+    uuid(de9d91d2-70b4-4f41-836c-25fcd39626d3)
+]
+interface IWICDisplayAdaptationControl : IUnknown
+{
+    HRESULT DoesSupportChangingMaxLuminance(
+        [in, unique] WICPixelFormatGUID* pguidDstFormat,
+        [out] BOOL* pfIsSupported
+        );
+
+    HRESULT SetDisplayMaxLuminance(
+        [in] FLOAT fLuminanceInNits
+        );
+
+    HRESULT GetDisplayMaxLuminance(
+        [out, retval] FLOAT* pfLuminanceInNits
         );
 }
 
@@ -2553,6 +2632,20 @@ typedef [public] enum WICPngFilterOption
     WICPngFilterAdaptive           = 0x00000006,
     WICPNGFILTEROPTION_FORCE_DWORD = CODEC_FORCE_DWORD
 } WICPngFilterOption;
+
+
+/*=========================================================================*\
+    WICHeifCompressionOption
+\*=========================================================================*/
+
+typedef [public] enum WICHeifCompressionOption
+{
+    WICHeifCompressionDontCare      = 0x00000000,
+    WICHeifCompressionNone          = 0x00000001,
+    WICHeifCompressionHEVC          = 0x00000002,
+    WICHeifCompressionAV1           = 0x00000003,
+    WICHEIFCOMPRESSIONOPTION_FORCE_DWORD = CODEC_FORCE_DWORD
+} WICHeifCompressionOption;
 
 
 /*=========================================================================*\

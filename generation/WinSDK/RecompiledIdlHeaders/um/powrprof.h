@@ -378,7 +378,8 @@ typedef enum _POWER_DATA_ACCESSOR {
 
         ACCESS_PROFILE,
         ACCESS_OVERLAY_SCHEME,
-        ACCESS_ACTIVE_OVERLAY_SCHEME,
+        ACCESS_POWER_MODE = ACCESS_OVERLAY_SCHEME,
+        ACCESS_ACTIVE_OVERLAY_SCHEME
 
 } POWER_DATA_ACCESSOR, *PPOWER_DATA_ACCESSOR;
 
@@ -433,6 +434,34 @@ PowerSettingAccessCheck (
     _In_opt_ CONST GUID *PowerGuid
     );
 #endif
+
+//
+// Power Mode Functions
+//
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_GA)
+
+STDAPI_(DWORD)
+PowerGetUserConfiguredACPowerMode(
+    _Out_ GUID *PowerModeGuid
+    );
+
+STDAPI_(DWORD)
+PowerGetUserConfiguredDCPowerMode(
+    _Out_ GUID *PowerModeGuid
+    );
+
+STDAPI_(DWORD)
+PowerSetUserConfiguredACPowerMode(
+    _In_ const GUID *PowerModeGuid
+    );
+
+STDAPI_(DWORD)
+PowerSetUserConfiguredDCPowerMode(
+    _In_ const GUID *PowerModeGuid
+    );
+
+#endif //#if (NTDDI_VERSION >= NTDDI_WIN11_GA)
 
 //
 // Read functions.

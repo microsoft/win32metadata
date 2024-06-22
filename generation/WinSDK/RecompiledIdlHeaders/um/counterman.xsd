@@ -97,8 +97,8 @@
       <xs:element name="structs" type="man:structs" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>
-            If providerType=userMode, required.
-            If providerType=kernelMode, not allowed.
+            If providerType=kernelMode, required.
+            If providerType=userMode, not allowed.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -173,11 +173,6 @@
     <xs:attribute name="id" type="man:UInt32Type" use="required"/>
     <xs:attribute name="uri" type="xs:anyURI" use="required"/>
     <xs:attribute name="name" use="optional">
-      <xs:annotation>
-        <xs:documentation>
-          This attribute is required for schemaVersion >= 2.0.
-        </xs:documentation>
-      </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:string">
           <xs:maxLength value="1023"/>
@@ -187,23 +182,19 @@
     <xs:attribute name="nameID" type="man:UInt32Type" use="optional">
       <xs:annotation>
         <xs:documentation>
-          Resource ID of the name string. This attribute is required
-          for schemaVersion >= 2.0. It is not allowed for older versions.
+          Resource ID of the name string. For schemaVersion >= 2.0, this
+          attribute must be specified if the 'name` attribute was
+          specified. This attribute is not allowed for older schema versions.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="description" type="xs:string" use="optional">
-      <xs:annotation>
-        <xs:documentation>
-          This attribute is required for schemaVersion >= 2.0.
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
+    <xs:attribute name="description" type="xs:string" use="optional"/>
     <xs:attribute name="descriptionID" type="man:UInt32Type" use="optional">
       <xs:annotation>
         <xs:documentation>
-          Resource ID of the description string. This attribute is required
-          for schemaVersion >= 2.0. It is not allowed for older versions.
+          Resource ID of the description string. For schemaVersion >= 2.0, this
+          attribute must be specified if the 'description` attribute was
+          specified. This attribute is not allowed for older schema versions.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
@@ -285,16 +276,16 @@
     <xs:attribute name="struct" type="man:CSymbolType" use="optional">
       <xs:annotation>
         <xs:documentation>
-          If providerType=userMode, required.
-          If providerType=kernelMode, not allowed.
+          If providerType=kernelMode, required.
+          If providerType=userMode, not allowed.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="field" type="man:CSymbolType" use="optional">
       <xs:annotation>
         <xs:documentation>
-          If providerType=userMode, required.
-          If providerType=kernelMode, not allowed.
+          If providerType=kernelMode, required.
+          If providerType=userMode, not allowed.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>

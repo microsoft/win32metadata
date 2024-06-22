@@ -35,7 +35,11 @@ DEFINE_GUID(GUID_DEVINTERFACE_IPPUSB_PRINT, 0xf2f40381, 0xf46d, 0x4e51, 0xbc, 0x
 #define USB_PRINTER_INTERFACE_IPP     2   // Has only 7-1-4 alternate config
 #define USB_PRINTER_INTERFACE_DUAL    3   // Has both 7-1-2 and 7-1-4 alternate configs
 
-#define USBPRINT_IOCTL_INDEX  0x0000
+// Flags for IOCTL_USBPRINT_ADD_MSIPP_COMPAT_ID
+#define USB_PRINT_IPP_COMPAT_ID 1 // add 1284_CID_MS_IPP compatid to child devnode
+#define USB_PRINT_IPP_FAXOUT 2    // add PKEY_Printer_IsFaxDevice==TRUE to child devnode
+
+#define USBPRINT_IOCTL_INDEX 0x0000
 
 
 #define IOCTL_USBPRINT_GET_LPT_STATUS     CTL_CODE(FILE_DEVICE_UNKNOWN,  \
@@ -96,7 +100,7 @@ DEFINE_GUID(GUID_DEVINTERFACE_IPPUSB_PRINT, 0xf2f40381, 0xf46d, 0x4e51, 0xbc, 0x
                                                    FILE_ANY_ACCESS)
 
 //
-// Mark whether the MSIPP compat id should be added.
+// Mark whether the MSIPP compat id should be added, and indicate Fax.
 //
 #define IOCTL_USBPRINT_ADD_MSIPP_COMPAT_ID   CTL_CODE(FILE_DEVICE_UNKNOWN,  \
                                                    USBPRINT_IOCTL_INDEX+21,\
@@ -124,6 +128,10 @@ DEFINE_GUID(GUID_DEVINTERFACE_IPPUSB_PRINT, 0xf2f40381, 0xf46d, 0x4e51, 0xbc, 0x
                                                    METHOD_BUFFERED,  \
                                                    FILE_ANY_ACCESS)
 
+#define IOCTL_USBPRINT_GET_MFG_MDL_ID        CTL_CODE(FILE_DEVICE_UNKNOWN,  \
+                                                   USBPRINT_IOCTL_INDEX+25,\
+                                                   METHOD_BUFFERED,  \
+                                                   FILE_ANY_ACCESS)
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -571,7 +571,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IRadio = _uuidof(IRadio);
+                MIDL_CONST_ID IID& IID_IRadio = __uuidof(IRadio);
             } /* Radios */
         } /* Devices */
     } /* Windows */
@@ -617,7 +617,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IRadioStatics = _uuidof(IRadioStatics);
+                MIDL_CONST_ID IID& IID_IRadioStatics = __uuidof(IRadioStatics);
             } /* Radios */
         } /* Devices */
     } /* Windows */

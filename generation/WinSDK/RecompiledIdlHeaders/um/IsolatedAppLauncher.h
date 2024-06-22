@@ -92,6 +92,7 @@ extern "C"{
 /* interface __MIDL_itf_isolatedapplauncher_0000_0000 */
 /* [local] */ 
 
+#pragma warning(disable: 4995)
 #include <winapifamily.h>
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -101,6 +102,7 @@ typedef struct _IsolatedAppLauncherTelemetryParameters
     GUID CorrelationGUID;
     } 	IsolatedAppLauncherTelemetryParameters;
 
+#pragma deprecated(IsolatedAppLauncherTelemetryParameters)
 
 
 extern RPC_IF_HANDLE __MIDL_itf_isolatedapplauncher_0000_0000_v0_0_c_ifspec;
@@ -201,6 +203,15 @@ EXTERN_C const IID IID_IIsolatedAppLauncher;
 #endif 	/* __IIsolatedAppLauncher_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_isolatedapplauncher_0000_0001 */
+/* [local] */ 
+
+#pragma deprecated(IIsolatedAppLauncher)
+
+
+extern RPC_IF_HANDLE __MIDL_itf_isolatedapplauncher_0000_0001_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_isolatedapplauncher_0000_0001_v0_0_s_ifspec;
+
 
 #ifndef __IsolatedAppLauncherLibrary_LIBRARY_DEFINED__
 #define __IsolatedAppLauncherLibrary_LIBRARY_DEFINED__
@@ -223,13 +234,16 @@ IsolatedAppLauncher;
 /* interface __MIDL_itf_isolatedapplauncher_0000_0002 */
 /* [local] */ 
 
+#pragma deprecated(IsolatedAppLauncherLibrary)
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 #pragma region App Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
 #if (NTDDI_VERSION >= NTDDI_WIN10_19H1)
-STDAPI IsProcessInWDAGContainer(_In_ PVOID Reserved, _Out_ BOOL *isProcessInWDAGContainer);
+__declspec(deprecated("IsProcessInWDAGContainer is deprecated and might not work on all platforms. For more info, see MSDN."))
+STDAPI IsProcessInWDAGContainer(_In_ PVOID Reserved, _Out_ BOOL * isProcessInWDAGContainer);
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_19H1)
+__declspec(deprecated("IsProcessInIsolatedContainer is deprecated and might not work on all platforms. For more info, see MSDN."))
 STDAPI IsProcessInIsolatedContainer(_Out_ BOOL *isProcessInIsolatedContainer);
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
 #pragma endregion
@@ -394,6 +408,15 @@ EXTERN_C const IID IID_IIsolatedProcessLauncher;
 #endif 	/* __IIsolatedProcessLauncher_INTERFACE_DEFINED__ */
 
 
+/* interface __MIDL_itf_isolatedapplauncher_0000_0003 */
+/* [local] */ 
+
+#pragma deprecated(IIsolatedProcessLauncher)
+
+
+extern RPC_IF_HANDLE __MIDL_itf_isolatedapplauncher_0000_0003_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_isolatedapplauncher_0000_0003_v0_0_s_ifspec;
+
 #ifndef __IIsolatedProcessLauncher2_INTERFACE_DEFINED__
 #define __IIsolatedProcessLauncher2_INTERFACE_DEFINED__
 
@@ -550,6 +573,7 @@ EXTERN_C const IID IID_IIsolatedProcessLauncher2;
 /* interface __MIDL_itf_isolatedapplauncher_0000_0004 */
 /* [local] */ 
 
+#pragma deprecated(IIsolatedProcessLauncher2)
 #endif // NTDDI_WIN10_NI
 
 

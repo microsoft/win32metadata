@@ -29853,33 +29853,6 @@
     ]
   },
   {
-    "name": "ISC_REQ_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "ISC_REQ_(?!MESSAGES|DEFERRED_CRED_VALIDATION|NO_POST_HANDSHAKE_AUTH)",
-      "header": "sspi.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "InitializeSecurityContextA",
-        "parameter": "fContextReq"
-      },
-      {
-        "method": "InitializeSecurityContextW",
-        "parameter": "fContextReq"
-      },
-      {
-        "method": "SaslInitializeSecurityContextA",
-        "parameter": "fContextReq"
-      },
-      {
-        "method": "SaslInitializeSecurityContextW",
-        "parameter": "fContextReq"
-      }
-    ]
-  },
-  {
     "name": "ASC_REQ_HIGH_FLAGS",
     "namespace": "Windows.Win32.Security.Authentication.Identity",
     "flags": true,
@@ -29888,25 +29861,6 @@
       {
         "name": "ASC_REQ_MESSAGES",
         "value": "0x0000000100000000"
-      }
-    ]
-  },
-  {
-    "name": "ASC_REQ_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "ASC_REQ_(?!MESSAGES)",
-      "header": "sspi.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "AcceptSecurityContext",
-        "parameter": "fContextReq"
-      },
-      {
-        "method": "SaslAcceptSecurityContext",
-        "parameter": "fContextReq"
       }
     ]
   },
@@ -34734,29 +34688,6 @@
       {
         "method": "DnsQuery_UTF8",
         "parameter": "wType"
-      }
-    ]
-  },
-  {
-    "name": "DNS_QUERY_OPTIONS",
-    "type": "uint",
-    "flags": true,
-    "autoPopulate": {
-      "header": "windns.h",
-      "filter": "DNS_QUERY_"
-    },
-    "uses": [
-      {
-        "method": "DnsQuery_A",
-        "parameter": "Options"
-      },
-      {
-        "method": "DnsQuery_W",
-        "parameter": "Options"
-      },
-      {
-        "method": "DnsQuery_UTF8",
-        "parameter": "Options"
       }
     ]
   },

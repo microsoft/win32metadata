@@ -634,7 +634,7 @@
 #define NERR_DuplicateHostName             (NERR_BASE + 629)   /* The hostname is already taken by another device. */
 #define NERR_HostNameTooLong               (NERR_BASE + 630)   /* The hostname is too long. */
 #define NERR_TooManyHostNames              (NERR_BASE + 631)   /* Too many hostnames specified for the device. */
-#define NERR_AccountReuseBlockedByPolicy   (NERR_BASE + 632)   /* An account with the same name exists in Active Directory. Re-using the account was blocked by security policy.*/
+#define NERR_AccountReuseBlockedByPolicy   (NERR_BASE + 632)   /* An account with the same name exists in Active Directory. Re-using the account was blocked by security policy. */
 
 /***********WARNING ****************
  *The range 2750-2799 has been     *
@@ -665,4 +665,4 @@
 
 #endif /* NETERR_INCLUDED */
 /*INC*/
-
+

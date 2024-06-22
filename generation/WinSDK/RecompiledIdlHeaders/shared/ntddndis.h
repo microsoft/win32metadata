@@ -25,6 +25,8 @@ Notes:
 
         Version     First available in
         ------------------------------------------------------------------
+        689         Windows 11, gallium release
+        688         Windows 11, copper release
         687         Windows 11, nickel release
         686         Windows 11, cobalt release
         685         Windows 10, iron release / Windows Server 2022
@@ -1964,7 +1966,9 @@ NDIS_802_11_RADIO_STATUS, *PNDIS_802_11_RADIO_STATUS;
 #define OID_PD_OPEN_PROVIDER                            0x00010501  // method
 #define OID_PD_CLOSE_PROVIDER                           0x00010502  // set only
 #define OID_PD_QUERY_CURRENT_CONFIG                     0x00010503  // query
+
 #endif // (NDIS_SUPPORT_NDIS650)
+
 
 //
 //  The following bits are defined for OID_PNP_ENABLE_WAKE_UP
@@ -3053,6 +3057,10 @@ typedef struct _NDIS_IP_OPER_STATE
 #define NDIS_OFFLOAD_PARAMETERS_REVISION_5            5
 #endif // (NDIS_SUPPORT_NDIS683)
 
+#if (NDIS_SUPPORT_NDIS689)
+#define NDIS_OFFLOAD_PARAMETERS_REVISION_6            6
+#endif // (NDIS_SUPPORT_NDIS689)
+
 //
 // Bits used in Flags parameter of NDIS_OFFLOAD_PARAMETERS structure:
 //
@@ -3119,6 +3127,13 @@ typedef struct _NDIS_OFFLOAD_PARAMETERS
         UCHAR               IPv6;
     } UdpSegmentation;
 #endif // (NDIS_SUPPORT_NDIS683)
+
+#if (NDIS_SUPPORT_NDIS689)
+    struct
+    {
+        UCHAR               Enabled;
+    } UdpRsc;
+#endif // (NDIS_SUPPORT_NDIS689)
 } NDIS_OFFLOAD_PARAMETERS, *PNDIS_OFFLOAD_PARAMETERS;
 
 #define NDIS_SIZEOF_OFFLOAD_PARAMETERS_REVISION_1 RTL_SIZEOF_THROUGH_FIELD(NDIS_OFFLOAD_PARAMETERS, Flags)
@@ -3139,7 +3154,12 @@ typedef struct _NDIS_OFFLOAD_PARAMETERS
 #define NDIS_SIZEOF_OFFLOAD_PARAMETERS_REVISION_5 RTL_SIZEOF_THROUGH_FIELD(NDIS_OFFLOAD_PARAMETERS, UdpSegmentation)
 #endif // (NDIS_SUPPORT_NDIS683)
 
+#if (NDIS_SUPPORT_NDIS689)
+#define NDIS_SIZEOF_OFFLOAD_PARAMETERS_REVISION_6 RTL_SIZEOF_THROUGH_FIELD(NDIS_OFFLOAD_PARAMETERS, UdpRsc)
+#endif // (NDIS_SUPPORT_NDIS689)
+
 #include <ndis/offloadtypes.h>
+#include <ndis/nbluro.h>
 
 #pragma warning(push)
 #pragma warning(disable:4214) //nonstandard extension used : bit field types other than int
@@ -3509,6 +3529,10 @@ typedef struct _NDIS_UDP_SEGMENTATION_OFFLOAD
 #define NDIS_OFFLOAD_REVISION_7    7
 #endif // (NDIS_SUPPORT_NDIS685)
 
+#if (NDIS_SUPPORT_NDIS689)
+#define NDIS_OFFLOAD_REVISION_8    8
+#endif // (NDIS_SUPPORT_NDIS689)
+
 typedef struct _NDIS_OFFLOAD
 {
     NDIS_OBJECT_HEADER                       Header;
@@ -3581,6 +3605,13 @@ typedef struct _NDIS_OFFLOAD
     NDIS_UDP_SEGMENTATION_OFFLOAD            UdpSegmentation;
 #endif // (NDIS_SUPPORT_NDIS683)
 
+#if (NDIS_SUPPORT_NDIS689)
+    //
+    // UDP RSC offload.
+    //
+    NDIS_UDP_RSC_OFFLOAD                     UdpRsc;
+#endif // (NDIS_SUPPORT_NDIS689)
+
 } NDIS_OFFLOAD, *PNDIS_OFFLOAD;
 
 #define NDIS_SIZEOF_NDIS_OFFLOAD_REVISION_1   RTL_SIZEOF_THROUGH_FIELD(NDIS_OFFLOAD, Flags)
@@ -3608,6 +3639,10 @@ typedef struct _NDIS_OFFLOAD
 #if (NDIS_SUPPORT_NDIS685)
 #define NDIS_SIZEOF_NDIS_OFFLOAD_REVISION_7   RTL_SIZEOF_THROUGH_FIELD(NDIS_OFFLOAD, UdpSegmentation)
 #endif // (NDIS_SUPPORT_NDIS685)
+
+#if (NDIS_SUPPORT_NDIS689)
+#define NDIS_SIZEOF_NDIS_OFFLOAD_REVISION_8   RTL_SIZEOF_THROUGH_FIELD(NDIS_OFFLOAD, UdpRsc)
+#endif // (NDIS_SUPPORT_NDIS689)
 
 //
 // The following data structures are used with offload related WMI
@@ -3786,6 +3821,13 @@ typedef struct _NDIS_WMI_OFFLOAD
     NDIS_UDP_SEGMENTATION_OFFLOAD            UdpSegmentation;
 #endif // (NDIS_SUPPORT_NDIS683)
 
+#if (NDIS_SUPPORT_NDIS689)
+    //
+    // UDP RSC offload.
+    //
+    NDIS_UDP_RSC_OFFLOAD              UdpRsc;
+#endif // (NDIS_SUPPORT_NDIS689)
+
 } NDIS_WMI_OFFLOAD, *PNDIS_WMI_OFFLOAD;
 
 #define NDIS_SIZEOF_NDIS_WMI_OFFLOAD_REVISION_1   RTL_SIZEOF_THROUGH_FIELD(NDIS_WMI_OFFLOAD, Flags)
@@ -3801,6 +3843,10 @@ typedef struct _NDIS_WMI_OFFLOAD
 #if (NDIS_SUPPORT_NDIS683)
 #define NDIS_SIZEOF_NDIS_WMI_OFFLOAD_REVISION_4   RTL_SIZEOF_THROUGH_FIELD(NDIS_WMI_OFFLOAD, UdpSegmentation)
 #endif // (NDIS_SUPPORT_NDIS683)
+
+#if (NDIS_SUPPORT_NDIS689)
+#define NDIS_SIZEOF_NDIS_WMI_OFFLOAD_REVISION_5   RTL_SIZEOF_THROUGH_FIELD(NDIS_WMI_OFFLOAD, UdpRsc)
+#endif // (NDIS_SUPPORT_NDIS689)
 
 
 #pragma warning(push)
@@ -4130,6 +4176,12 @@ typedef struct NDIS_WMI_OUTPUT_INFO
 #define NDIS_WLAN_WAKE_ON_GTK_HANDSHAKE_ERROR_SUPPORTED           0x00000004
 #define NDIS_WLAN_WAKE_ON_4WAY_HANDSHAKE_REQUEST_SUPPORTED        0x00000008
 #endif // (NDIS_SUPPORT_NDIS630)
+#if (NDIS_SUPPORT_NDIS688)
+#define NDIS_WLAN_WAKE_ON_INCOMING_ACTION_FRAME_SUPPORTED         0x00000010
+#endif // (NDIS_SUPPORT_NDIS688)
+#if (NDIS_SUPPORT_NDIS689)
+#define NDIS_WLAN_WAKE_ON_CLIENT_DRIVER_DIAGNOSTIC_SUPPORTED     0x00000020
+#endif // (NDIS_SUPPORT_NDIS689)
 
 //
 // Flags for NDIS_PM_CAPABILITIES.MediaSpecificWakeUpEvents field
@@ -4194,7 +4246,12 @@ typedef struct NDIS_WMI_OUTPUT_INFO
 #define NDIS_WLAN_WAKE_ON_GTK_HANDSHAKE_ERROR_ENABLED           0x00000004
 #define NDIS_WLAN_WAKE_ON_4WAY_HANDSHAKE_REQUEST_ENABLED        0x00000008
 #endif // (NDIS_SUPPORT_NDIS630)
-
+#if (NDIS_SUPPORT_NDIS688)
+#define NDIS_WLAN_WAKE_ON_INCOMING_ACTION_FRAME_ENABLED         0x00000010
+#endif // (NDIS_SUPPORT_NDIS688)
+#if (NDIS_SUPPORT_NDIS689)
+#define NDIS_WLAN_WAKE_ON_CLIENT_DRIVER_DIAGNOSTIC_ENABLED     0x00000020
+#endif // (NDIS_SUPPORT_NDIS689)
 //
 // Flags for NDIS_PM_PARAMETERS.MediaSpecificWakeUpEvents field
 // when miniport's physical media type is NdisPhysicalMediumWirelessWan
@@ -4584,7 +4641,12 @@ typedef enum _NDIS_PM_WAKE_REASON_TYPE
     NdisWakeReasonWlanAPAssociationLost     = 0x1001,
     NdisWakeReasonWlanGTKHandshakeError     = 0x1002,
     NdisWakeReasonWlan4WayHandshakeRequest  = 0x1003,
-
+#if (NDIS_SUPPORT_NDIS688)
+    NdisWakeReasonWlanIncomingActionFrame   = 0x1004,
+#endif // (NDIS_SUPPORT_NDIS688)
+#if (NDIS_SUPPORT_NDIS689)
+    NdisWakeReasonWlanClientDriverDiagnostic = 0x1005,
+#endif // (NDIS_SUPPORT_NDIS689)
     // WWAN-specific wake reasons
     NdisWakeReasonWwanRegisterState         = 0x2000,
     NdisWakeReasonWwanSMSReceive            = 0x2001,
@@ -5879,6 +5941,11 @@ typedef enum _NDIS_RSS_PROFILE
     NdisRssProfileNuma,
     NdisRssProfileNumaStatic,
     NdisRssProfileConservative,
+
+#if (NDIS_SUPPORT_NDIS688)
+    NdisRssProfileBalanced,
+#endif // (NDIS_SUPPORT_NDIS688)
+
     NdisRssProfileMaximum,
 } NDIS_RSS_PROFILE, *PNDIS_RSS_PROFILE;
 #endif // (NDIS_SUPPORT_NDIS630)
@@ -6559,6 +6626,7 @@ typedef enum _NDIS_NIC_SWITCH_TYPE
 //
 #define NDIS_NIC_SWITCH_PARAMETERS_CHANGE_MASK                                                               0xFFFF0000
 #define NDIS_NIC_SWITCH_PARAMETERS_SWITCH_NAME_CHANGED                                                       0x00010000
+
 
 //
 // The following value must be used for
@@ -10819,6 +10887,16 @@ typedef struct _NDIS_HARDWARE_CROSSTIMESTAMP
 #endif //((NTDDI_VERSION >= NTDDI_WIN10_RS5) || NDIS_SUPPORT_NDIS682)
 
 
+
+#if (NDIS_SUPPORT_NDIS685)
+
+//
+// OID_QUIC_CONNECTION_ENCRYPTION is a direct OID used for QUIC connection
+// encryption offload.
+//
+#define OID_QUIC_CONNECTION_ENCRYPTION      0xFC010215
+
+#endif // (NDIS_SUPPORT_NDIS685)
 
 #ifdef __cplusplus
 }

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -1296,7 +1296,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWiFiDirectAdvertisement = _uuidof(IWiFiDirectAdvertisement);
+                MIDL_CONST_ID IID& IID_IWiFiDirectAdvertisement = __uuidof(IWiFiDirectAdvertisement);
             } /* WiFiDirect */
         } /* Devices */
     } /* Windows */
@@ -1332,7 +1332,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWiFiDirectAdvertisement2 = _uuidof(IWiFiDirectAdvertisement2);
+                MIDL_CONST_ID IID& IID_IWiFiDirectAdvertisement2 = __uuidof(IWiFiDirectAdvertisement2);
             } /* WiFiDirect */
         } /* Devices */
     } /* Windows */
@@ -1380,7 +1380,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Stop(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWiFiDirectAdvertisementPublisher = _uuidof(IWiFiDirectAdvertisementPublisher);
+                MIDL_CONST_ID IID& IID_IWiFiDirectAdvertisementPublisher = __uuidof(IWiFiDirectAdvertisementPublisher);
             } /* WiFiDirect */
         } /* Devices */
     } /* Windows */
@@ -1419,7 +1419,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWiFiDirectAdvertisementPublisherStatusChangedEventArgs = _uuidof(IWiFiDirectAdvertisementPublisherStatusChangedEventArgs);
+                MIDL_CONST_ID IID& IID_IWiFiDirectAdvertisementPublisherStatusChangedEventArgs = __uuidof(IWiFiDirectAdvertisementPublisherStatusChangedEventArgs);
             } /* WiFiDirect */
         } /* Devices */
     } /* Windows */
@@ -1459,7 +1459,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWiFiDirectConnectionListener = _uuidof(IWiFiDirectConnectionListener);
+                MIDL_CONST_ID IID& IID_IWiFiDirectConnectionListener = __uuidof(IWiFiDirectConnectionListener);
             } /* WiFiDirect */
         } /* Devices */
     } /* Windows */
@@ -1498,7 +1498,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWiFiDirectConnectionParameters = _uuidof(IWiFiDirectConnectionParameters);
+                MIDL_CONST_ID IID& IID_IWiFiDirectConnectionParameters = __uuidof(IWiFiDirectConnectionParameters);
             } /* WiFiDirect */
         } /* Devices */
     } /* Windows */
@@ -1540,7 +1540,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWiFiDirectConnectionParameters2 = _uuidof(IWiFiDirectConnectionParameters2);
+                MIDL_CONST_ID IID& IID_IWiFiDirectConnectionParameters2 = __uuidof(IWiFiDirectConnectionParameters2);
             } /* WiFiDirect */
         } /* Devices */
     } /* Windows */
@@ -1577,7 +1577,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWiFiDirectConnectionParametersStatics = _uuidof(IWiFiDirectConnectionParametersStatics);
+                MIDL_CONST_ID IID& IID_IWiFiDirectConnectionParametersStatics = __uuidof(IWiFiDirectConnectionParametersStatics);
             } /* WiFiDirect */
         } /* Devices */
     } /* Windows */
@@ -1616,7 +1616,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWiFiDirectConnectionRequest = _uuidof(IWiFiDirectConnectionRequest);
+                MIDL_CONST_ID IID& IID_IWiFiDirectConnectionRequest = __uuidof(IWiFiDirectConnectionRequest);
             } /* WiFiDirect */
         } /* Devices */
     } /* Windows */
@@ -1652,7 +1652,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWiFiDirectConnectionRequestedEventArgs = _uuidof(IWiFiDirectConnectionRequestedEventArgs);
+                MIDL_CONST_ID IID& IID_IWiFiDirectConnectionRequestedEventArgs = __uuidof(IWiFiDirectConnectionRequestedEventArgs);
             } /* WiFiDirect */
         } /* Devices */
     } /* Windows */
@@ -1704,7 +1704,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWiFiDirectDevice = _uuidof(IWiFiDirectDevice);
+                MIDL_CONST_ID IID& IID_IWiFiDirectDevice = __uuidof(IWiFiDirectDevice);
             } /* WiFiDirect */
         } /* Devices */
     } /* Windows */
@@ -1744,7 +1744,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWiFiDirectDeviceStatics = _uuidof(IWiFiDirectDeviceStatics);
+                MIDL_CONST_ID IID& IID_IWiFiDirectDeviceStatics = __uuidof(IWiFiDirectDeviceStatics);
             } /* WiFiDirect */
         } /* Devices */
     } /* Windows */
@@ -1786,7 +1786,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWiFiDirectDeviceStatics2 = _uuidof(IWiFiDirectDeviceStatics2);
+                MIDL_CONST_ID IID& IID_IWiFiDirectDeviceStatics2 = __uuidof(IWiFiDirectDeviceStatics2);
             } /* WiFiDirect */
         } /* Devices */
     } /* Windows */
@@ -1837,7 +1837,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWiFiDirectInformationElement = _uuidof(IWiFiDirectInformationElement);
+                MIDL_CONST_ID IID& IID_IWiFiDirectInformationElement = __uuidof(IWiFiDirectInformationElement);
             } /* WiFiDirect */
         } /* Devices */
     } /* Windows */
@@ -1878,7 +1878,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWiFiDirectInformationElementStatics = _uuidof(IWiFiDirectInformationElementStatics);
+                MIDL_CONST_ID IID& IID_IWiFiDirectInformationElementStatics = __uuidof(IWiFiDirectInformationElementStatics);
             } /* WiFiDirect */
         } /* Devices */
     } /* Windows */
@@ -1929,7 +1929,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IWiFiDirectLegacySettings = _uuidof(IWiFiDirectLegacySettings);
+                MIDL_CONST_ID IID& IID_IWiFiDirectLegacySettings = __uuidof(IWiFiDirectLegacySettings);
             } /* WiFiDirect */
         } /* Devices */
     } /* Windows */
@@ -2095,8 +2095,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.WiFiDirect.IWiFiDirectDeviceStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.WiFiDirect.IWiFiDirectDeviceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.WiFiDirect.IWiFiDirectDeviceStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.WiFiDirect.IWiFiDirectDevice ** Default Interface **
@@ -5077,8 +5077,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.WiFiDirect.IWiFiDirectDeviceStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Devices.WiFiDirect.IWiFiDirectDeviceStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.WiFiDirect.IWiFiDirectDeviceStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Devices.WiFiDirect.IWiFiDirectDevice ** Default Interface **

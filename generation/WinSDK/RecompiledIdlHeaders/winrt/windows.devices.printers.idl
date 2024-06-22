@@ -11,6 +11,7 @@ import "EventToken.idl";
 import "windowscontracts.idl";
 import "Windows.Foundation.idl";
 import "Windows.Graphics.Printing.idl";
+import "Windows.Graphics.Printing.PrintTicket.idl";
 import "Windows.Storage.Streams.idl";
 
 // Forward Declare
@@ -34,6 +35,19 @@ namespace Windows
         namespace Printing
         {
             runtimeclass PrintTaskOptions;
+        }
+    }
+}
+namespace Windows
+{
+    namespace Graphics
+    {
+        namespace Printing
+        {
+            namespace PrintTicket
+            {
+                runtimeclass WorkflowPrintTicket;
+            }
         }
     }
 }
@@ -65,6 +79,8 @@ namespace Windows
 
             typedef enum IppAttributeValueKind IppAttributeValueKind;
 
+            typedef enum IppPrintDeviceKind IppPrintDeviceKind;
+
             typedef enum IppResolutionUnit IppResolutionUnit;
 
             typedef enum PageConfigurationSource PageConfigurationSource;
@@ -82,6 +98,10 @@ namespace Windows
             interface IIppPrintDevice;
 
             interface IIppPrintDevice2;
+
+            interface IIppPrintDevice3;
+
+            interface IIppPrintDevice4;
 
             interface IIppPrintDeviceStatics;
 
@@ -257,6 +277,14 @@ namespace Windows
                 MimeMediaType       = 20
             };
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            enum IppPrintDeviceKind
+            {
+                Printer        = 0,
+                FaxOut         = 1,
+                VirtualPrinter = 2
+            };
+
             [contract(Windows.Foundation.UniversalApiContract, 13.0)]
             enum IppResolutionUnit
             {
@@ -392,6 +420,27 @@ namespace Windows
                 HRESULT GetMaxSupportedPdfVersion([out] [retval] HSTRING* result);
                 HRESULT IsPdlPassthroughSupported([in] HSTRING pdlContentType, [out] [retval] boolean* result);
                 HRESULT GetPdlPassthroughProvider([out] [retval] Windows.Devices.Printers.PdlPassthroughProvider** result);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 17.0)]
+            [exclusiveto(Windows.Devices.Printers.IppPrintDevice)]
+            [uuid(B6258F6D-A46D-5E37-80CE-5F69D5544712)]
+            interface IIppPrintDevice3 : IInspectable
+            {
+                [propget] HRESULT IsIppFaxOutPrinter([out] [retval] boolean* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Devices.Printers.IppPrintDevice)]
+            [uuid(8C48247E-E869-59FB-BC6D-DAEA0614F93E)]
+            interface IIppPrintDevice4 : IInspectable
+            {
+                [propget] HRESULT DeviceKind([out] [retval] Windows.Devices.Printers.IppPrintDeviceKind* value);
+                [propget] HRESULT CanModifyUserDefaultPrintTicket([out] [retval] boolean* value);
+                [propget] HRESULT UserDefaultPrintTicket([out] [retval] Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicket** value);
+                [propput] HRESULT UserDefaultPrintTicket([in] Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicket* value);
+                HRESULT RefreshPrintDeviceCapabilities();
+                HRESULT GetMaxSupportedPdlVersion([in] HSTRING pdlContentType, [out] [retval] HSTRING* result);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 15.0)]
@@ -540,6 +589,8 @@ namespace Windows
             {
                 [default] interface Windows.Devices.Printers.IIppPrintDevice;
                 [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Devices.Printers.IIppPrintDevice2;
+                [contract(Windows.Foundation.UniversalApiContract, 17.0)] interface Windows.Devices.Printers.IIppPrintDevice3;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Printers.IIppPrintDevice4;
             }
 
             [activatable(Windows.Devices.Printers.IIppResolutionFactory, Windows.Foundation.UniversalApiContract, 13.0)]

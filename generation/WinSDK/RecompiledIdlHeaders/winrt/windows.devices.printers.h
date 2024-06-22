@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -109,6 +109,7 @@
 #include "windowscontracts.h"
 #include "Windows.Foundation.h"
 #include "Windows.Graphics.Printing.h"
+#include "Windows.Graphics.Printing.PrintTicket.h"
 #include "Windows.Storage.Streams.h"
 // Importing Collections header
 #include <windows.foundation.collections.h>
@@ -219,6 +220,36 @@ namespace ABI {
 #define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice2 ABI::Windows::Devices::Printers::IIppPrintDevice2
 
 #endif // ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice2_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Printers {
+                interface IIppPrintDevice3;
+            } /* Printers */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3 ABI::Windows::Devices::Printers::IIppPrintDevice3
+
+#endif // ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Printers {
+                interface IIppPrintDevice4;
+            } /* Printers */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4 ABI::Windows::Devices::Printers::IIppPrintDevice4
+
+#endif // ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceStatics_FWD_DEFINED__
@@ -2102,6 +2133,35 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CGraphics_CPrinting_CIPrintTaskOptionsCore_FWD_DEFINED__
 
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Printing {
+                namespace PrintTicket {
+                    class WorkflowPrintTicket;
+                } /* PrintTicket */
+            } /* Printing */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+
+#ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicket_FWD_DEFINED__
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicket_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Printing {
+                namespace PrintTicket {
+                    interface IWorkflowPrintTicket;
+                } /* PrintTicket */
+            } /* Printing */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicket ABI::Windows::Graphics::Printing::PrintTicket::IWorkflowPrintTicket
+
+#endif // ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicket_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CStorage_CStreams_CIInputStream_FWD_DEFINED__
 #define ____x_ABI_CWindows_CStorage_CStreams_CIInputStream_FWD_DEFINED__
 namespace ABI {
@@ -2147,6 +2207,16 @@ namespace ABI {
         namespace Devices {
             namespace Printers {
                 typedef enum IppAttributeValueKind : int IppAttributeValueKind;
+            } /* Printers */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Printers {
+                typedef enum IppPrintDeviceKind : int IppPrintDeviceKind;
             } /* Printers */
         } /* Devices */
     } /* Windows */
@@ -2302,6 +2372,30 @@ namespace ABI {
 
 /*
  *
+ * Struct Windows.Devices.Printers.IppPrintDeviceKind
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Printers {
+                enum IppPrintDeviceKind : int
+                {
+                    IppPrintDeviceKind_Printer = 0,
+                    IppPrintDeviceKind_FaxOut = 1,
+                    IppPrintDeviceKind_VirtualPrinter = 2,
+                };
+            } /* Printers */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
  * Struct Windows.Devices.Printers.IppResolutionUnit
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
@@ -2378,7 +2472,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIppAttributeError = _uuidof(IIppAttributeError);
+                MIDL_CONST_ID IID& IID_IIppAttributeError = __uuidof(IIppAttributeError);
             } /* Printers */
         } /* Devices */
     } /* Windows */
@@ -2468,7 +2562,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIppAttributeValue = _uuidof(IIppAttributeValue);
+                MIDL_CONST_ID IID& IID_IIppAttributeValue = __uuidof(IIppAttributeValue);
             } /* Printers */
         } /* Devices */
     } /* Windows */
@@ -2654,7 +2748,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIppAttributeValueStatics = _uuidof(IIppAttributeValueStatics);
+                MIDL_CONST_ID IID& IID_IIppAttributeValueStatics = __uuidof(IIppAttributeValueStatics);
             } /* Printers */
         } /* Devices */
     } /* Windows */
@@ -2693,7 +2787,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIppIntegerRange = _uuidof(IIppIntegerRange);
+                MIDL_CONST_ID IID& IID_IIppIntegerRange = __uuidof(IIppIntegerRange);
             } /* Printers */
         } /* Devices */
     } /* Windows */
@@ -2731,7 +2825,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIppIntegerRangeFactory = _uuidof(IIppIntegerRangeFactory);
+                MIDL_CONST_ID IID& IID_IIppIntegerRangeFactory = __uuidof(IIppIntegerRangeFactory);
             } /* Printers */
         } /* Devices */
     } /* Windows */
@@ -2786,7 +2880,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIppPrintDevice = _uuidof(IIppPrintDevice);
+                MIDL_CONST_ID IID& IID_IIppPrintDevice = __uuidof(IIppPrintDevice);
             } /* Printers */
         } /* Devices */
     } /* Windows */
@@ -2832,7 +2926,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIppPrintDevice2 = _uuidof(IIppPrintDevice2);
+                MIDL_CONST_ID IID& IID_IIppPrintDevice2 = __uuidof(IIppPrintDevice2);
             } /* Printers */
         } /* Devices */
     } /* Windows */
@@ -2841,6 +2935,92 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice2;
 #endif /* !defined(____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Interface Windows.Devices.Printers.IIppPrintDevice3
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 17.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Printers.IppPrintDevice
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x110000
+#if !defined(____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Printers_IIppPrintDevice3[] = L"Windows.Devices.Printers.IIppPrintDevice3";
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Printers {
+                MIDL_INTERFACE("b6258f6d-a46d-5e37-80ce-5f69d5544712")
+                IIppPrintDevice3 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_IsIppFaxOutPrinter(
+                        boolean* value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IIppPrintDevice3 = __uuidof(IIppPrintDevice3);
+            } /* Printers */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x110000
+
+/*
+ *
+ * Interface Windows.Devices.Printers.IIppPrintDevice4
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Printers.IppPrintDevice
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Printers_IIppPrintDevice4[] = L"Windows.Devices.Printers.IIppPrintDevice4";
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Printers {
+                MIDL_INTERFACE("8c48247e-e869-59fb-bc6d-daea0614f93e")
+                IIppPrintDevice4 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_DeviceKind(
+                        ABI::Windows::Devices::Printers::IppPrintDeviceKind* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_CanModifyUserDefaultPrintTicket(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_UserDefaultPrintTicket(
+                        ABI::Windows::Graphics::Printing::PrintTicket::IWorkflowPrintTicket** value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_UserDefaultPrintTicket(
+                        ABI::Windows::Graphics::Printing::PrintTicket::IWorkflowPrintTicket* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE RefreshPrintDeviceCapabilities(void) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE GetMaxSupportedPdlVersion(
+                        HSTRING pdlContentType,
+                        HSTRING* result
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IIppPrintDevice4 = __uuidof(IIppPrintDevice4);
+            } /* Printers */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -2880,7 +3060,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIppPrintDeviceStatics = _uuidof(IIppPrintDeviceStatics);
+                MIDL_CONST_ID IID& IID_IIppPrintDeviceStatics = __uuidof(IIppPrintDeviceStatics);
             } /* Printers */
         } /* Devices */
     } /* Windows */
@@ -2922,7 +3102,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIppResolution = _uuidof(IIppResolution);
+                MIDL_CONST_ID IID& IID_IIppResolution = __uuidof(IIppResolution);
             } /* Printers */
         } /* Devices */
     } /* Windows */
@@ -2961,7 +3141,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIppResolutionFactory = _uuidof(IIppResolutionFactory);
+                MIDL_CONST_ID IID& IID_IIppResolutionFactory = __uuidof(IIppResolutionFactory);
             } /* Printers */
         } /* Devices */
     } /* Windows */
@@ -3000,7 +3180,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIppSetAttributesResult = _uuidof(IIppSetAttributesResult);
+                MIDL_CONST_ID IID& IID_IIppSetAttributesResult = __uuidof(IIppSetAttributesResult);
             } /* Printers */
         } /* Devices */
     } /* Windows */
@@ -3039,7 +3219,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIppTextWithLanguage = _uuidof(IIppTextWithLanguage);
+                MIDL_CONST_ID IID& IID_IIppTextWithLanguage = __uuidof(IIppTextWithLanguage);
             } /* Printers */
         } /* Devices */
     } /* Windows */
@@ -3077,7 +3257,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IIppTextWithLanguageFactory = _uuidof(IIppTextWithLanguageFactory);
+                MIDL_CONST_ID IID& IID_IIppTextWithLanguageFactory = __uuidof(IIppTextWithLanguageFactory);
             } /* Printers */
         } /* Devices */
     } /* Windows */
@@ -3122,7 +3302,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPageConfigurationSettings = _uuidof(IPageConfigurationSettings);
+                MIDL_CONST_ID IID& IID_IPageConfigurationSettings = __uuidof(IPageConfigurationSettings);
             } /* Printers */
         } /* Devices */
     } /* Windows */
@@ -3172,7 +3352,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPdlPassthroughProvider = _uuidof(IPdlPassthroughProvider);
+                MIDL_CONST_ID IID& IID_IPdlPassthroughProvider = __uuidof(IPdlPassthroughProvider);
             } /* Printers */
         } /* Devices */
     } /* Windows */
@@ -3212,7 +3392,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Submit(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPdlPassthroughTarget = _uuidof(IPdlPassthroughTarget);
+                MIDL_CONST_ID IID& IID_IPdlPassthroughTarget = __uuidof(IPdlPassthroughTarget);
             } /* Printers */
         } /* Devices */
     } /* Windows */
@@ -3248,7 +3428,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrint3DDevice = _uuidof(IPrint3DDevice);
+                MIDL_CONST_ID IID& IID_IPrint3DDevice = __uuidof(IPrint3DDevice);
             } /* Printers */
         } /* Devices */
     } /* Windows */
@@ -3288,7 +3468,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrint3DDeviceStatics = _uuidof(IPrint3DDeviceStatics);
+                MIDL_CONST_ID IID& IID_IPrint3DDeviceStatics = __uuidof(IPrint3DDeviceStatics);
             } /* Printers */
         } /* Devices */
     } /* Windows */
@@ -3332,7 +3512,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPrintSchema = _uuidof(IPrintSchema);
+                MIDL_CONST_ID IID& IID_IPrintSchema = __uuidof(IPrintSchema);
             } /* Printers */
         } /* Devices */
     } /* Windows */
@@ -3421,6 +3601,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class implements the following interfaces:
  *    Windows.Devices.Printers.IIppPrintDevice ** Default Interface **
  *    Windows.Devices.Printers.IIppPrintDevice2
+ *    Windows.Devices.Printers.IIppPrintDevice3
+ *    Windows.Devices.Printers.IIppPrintDevice4
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -3652,6 +3834,18 @@ typedef interface __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice __x_ABI_C
 typedef interface __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice2 __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice2;
 
 #endif // ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice2_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3 __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3;
+
+#endif // ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4 __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4;
+
+#endif // ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDeviceStatics_FWD_DEFINED__
@@ -8615,6 +8809,12 @@ typedef interface __x_ABI_CWindows_CGraphics_CPrinting_CIPrintTaskOptionsCore __
 
 #endif // ____x_ABI_CWindows_CGraphics_CPrinting_CIPrintTaskOptionsCore_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicket_FWD_DEFINED__
+#define ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicket_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicket __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicket;
+
+#endif // ____x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicket_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CStorage_CStreams_CIInputStream_FWD_DEFINED__
 #define ____x_ABI_CWindows_CStorage_CStreams_CIInputStream_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CStorage_CStreams_CIInputStream __x_ABI_CWindows_CStorage_CStreams_CIInputStream;
@@ -8630,6 +8830,8 @@ typedef interface __x_ABI_CWindows_CStorage_CStreams_CIOutputStream __x_ABI_CWin
 typedef enum __x_ABI_CWindows_CDevices_CPrinters_CIppAttributeErrorReason __x_ABI_CWindows_CDevices_CPrinters_CIppAttributeErrorReason;
 
 typedef enum __x_ABI_CWindows_CDevices_CPrinters_CIppAttributeValueKind __x_ABI_CWindows_CDevices_CPrinters_CIppAttributeValueKind;
+
+typedef enum __x_ABI_CWindows_CDevices_CPrinters_CIppPrintDeviceKind __x_ABI_CWindows_CDevices_CPrinters_CIppPrintDeviceKind;
 
 typedef enum __x_ABI_CWindows_CDevices_CPrinters_CIppResolutionUnit __x_ABI_CWindows_CDevices_CPrinters_CIppResolutionUnit;
 
@@ -8686,6 +8888,22 @@ enum __x_ABI_CWindows_CDevices_CPrinters_CIppAttributeValueKind
     IppAttributeValueKind_MimeMediaType = 20,
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Struct Windows.Devices.Printers.IppPrintDeviceKind
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+enum __x_ABI_CWindows_CDevices_CPrinters_CIppPrintDeviceKind
+{
+    IppPrintDeviceKind_Printer = 0,
+    IppPrintDeviceKind_FaxOut = 1,
+    IppPrintDeviceKind_VirtualPrinter = 2,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -9577,6 +9795,169 @@ interface __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice2
 EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice2;
 #endif /* !defined(____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Interface Windows.Devices.Printers.IIppPrintDevice3
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 17.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Printers.IppPrintDevice
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x110000
+#if !defined(____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Printers_IIppPrintDevice3[] = L"Windows.Devices.Printers.IIppPrintDevice3";
+typedef struct __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_IsIppFaxOutPrinter)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3* This,
+        boolean* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3Vtbl;
+
+interface __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3
+{
+    CONST_VTBL struct __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3_get_IsIppFaxOutPrinter(This, value) \
+    ((This)->lpVtbl->get_IsIppFaxOutPrinter(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice3_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x110000
+
+/*
+ *
+ * Interface Windows.Devices.Printers.IIppPrintDevice4
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Printers.IppPrintDevice
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Printers_IIppPrintDevice4[] = L"Windows.Devices.Printers.IIppPrintDevice4";
+typedef struct __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_DeviceKind)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4* This,
+        enum __x_ABI_CWindows_CDevices_CPrinters_CIppPrintDeviceKind* value);
+    HRESULT (STDMETHODCALLTYPE* get_CanModifyUserDefaultPrintTicket)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* get_UserDefaultPrintTicket)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4* This,
+        __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicket** value);
+    HRESULT (STDMETHODCALLTYPE* put_UserDefaultPrintTicket)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4* This,
+        __x_ABI_CWindows_CGraphics_CPrinting_CPrintTicket_CIWorkflowPrintTicket* value);
+    HRESULT (STDMETHODCALLTYPE* RefreshPrintDeviceCapabilities)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4* This);
+    HRESULT (STDMETHODCALLTYPE* GetMaxSupportedPdlVersion)(__x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4* This,
+        HSTRING pdlContentType,
+        HSTRING* result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4Vtbl;
+
+interface __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4
+{
+    CONST_VTBL struct __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_get_DeviceKind(This, value) \
+    ((This)->lpVtbl->get_DeviceKind(This, value))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_get_CanModifyUserDefaultPrintTicket(This, value) \
+    ((This)->lpVtbl->get_CanModifyUserDefaultPrintTicket(This, value))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_get_UserDefaultPrintTicket(This, value) \
+    ((This)->lpVtbl->get_UserDefaultPrintTicket(This, value))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_put_UserDefaultPrintTicket(This, value) \
+    ((This)->lpVtbl->put_UserDefaultPrintTicket(This, value))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_RefreshPrintDeviceCapabilities(This) \
+    ((This)->lpVtbl->RefreshPrintDeviceCapabilities(This))
+
+#define __x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_GetMaxSupportedPdlVersion(This, pdlContentType, result) \
+    ((This)->lpVtbl->GetMaxSupportedPdlVersion(This, pdlContentType, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CPrinters_CIIppPrintDevice4_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -10588,6 +10969,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class implements the following interfaces:
  *    Windows.Devices.Printers.IIppPrintDevice ** Default Interface **
  *    Windows.Devices.Printers.IIppPrintDevice2
+ *    Windows.Devices.Printers.IIppPrintDevice3
+ *    Windows.Devices.Printers.IIppPrintDevice4
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

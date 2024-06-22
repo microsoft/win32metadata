@@ -65,6 +65,11 @@ namespace ClangSharpSourceToWinmd
             return node.Parent is NamespaceDeclarationSyntax;
         }
 
+        public static bool IsPotentialCrossArch(EnumDeclarationSyntax node)
+        {
+            return node.Parent is NamespaceDeclarationSyntax;
+        }
+
         public static bool IsPotentialCrossArch(MethodDeclarationSyntax node)
         {
             var dllImportAttr = SyntaxUtils.GetAttribute(node.AttributeLists, "DllImport");
@@ -412,6 +417,16 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 base.VisitDelegateDeclaration(node);
+            }
+
+            public override void VisitEnumDeclaration(EnumDeclarationSyntax node)
+            {
+                if (IsPotentialCrossArch(node))
+                {
+                    this.map.AddNode(this.currentArch, node);
+                }
+
+                base.VisitEnumDeclaration(node);
             }
         }
     }

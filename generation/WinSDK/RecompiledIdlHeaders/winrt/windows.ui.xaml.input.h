@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -3193,7 +3193,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDoubleTappedEventHandler = _uuidof(IDoubleTappedEventHandler);
+                    MIDL_CONST_ID IID& IID_IDoubleTappedEventHandler = __uuidof(IDoubleTappedEventHandler);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -3229,7 +3229,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHoldingEventHandler = _uuidof(IHoldingEventHandler);
+                    MIDL_CONST_ID IID& IID_IHoldingEventHandler = __uuidof(IHoldingEventHandler);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -3265,7 +3265,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IKeyEventHandler = _uuidof(IKeyEventHandler);
+                    MIDL_CONST_ID IID& IID_IKeyEventHandler = __uuidof(IKeyEventHandler);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -3301,7 +3301,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IManipulationCompletedEventHandler = _uuidof(IManipulationCompletedEventHandler);
+                    MIDL_CONST_ID IID& IID_IManipulationCompletedEventHandler = __uuidof(IManipulationCompletedEventHandler);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -3337,7 +3337,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IManipulationDeltaEventHandler = _uuidof(IManipulationDeltaEventHandler);
+                    MIDL_CONST_ID IID& IID_IManipulationDeltaEventHandler = __uuidof(IManipulationDeltaEventHandler);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -3373,7 +3373,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IManipulationInertiaStartingEventHandler = _uuidof(IManipulationInertiaStartingEventHandler);
+                    MIDL_CONST_ID IID& IID_IManipulationInertiaStartingEventHandler = __uuidof(IManipulationInertiaStartingEventHandler);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -3409,7 +3409,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IManipulationStartedEventHandler = _uuidof(IManipulationStartedEventHandler);
+                    MIDL_CONST_ID IID& IID_IManipulationStartedEventHandler = __uuidof(IManipulationStartedEventHandler);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -3445,7 +3445,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IManipulationStartingEventHandler = _uuidof(IManipulationStartingEventHandler);
+                    MIDL_CONST_ID IID& IID_IManipulationStartingEventHandler = __uuidof(IManipulationStartingEventHandler);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -3481,7 +3481,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPointerEventHandler = _uuidof(IPointerEventHandler);
+                    MIDL_CONST_ID IID& IID_IPointerEventHandler = __uuidof(IPointerEventHandler);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -3517,7 +3517,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IRightTappedEventHandler = _uuidof(IRightTappedEventHandler);
+                    MIDL_CONST_ID IID& IID_IRightTappedEventHandler = __uuidof(IRightTappedEventHandler);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -3553,7 +3553,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ITappedEventHandler = _uuidof(ITappedEventHandler);
+                    MIDL_CONST_ID IID& IID_ITappedEventHandler = __uuidof(ITappedEventHandler);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -3588,7 +3588,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAccessKeyDisplayDismissedEventArgs = _uuidof(IAccessKeyDisplayDismissedEventArgs);
+                    MIDL_CONST_ID IID& IID_IAccessKeyDisplayDismissedEventArgs = __uuidof(IAccessKeyDisplayDismissedEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -3626,7 +3626,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAccessKeyDisplayRequestedEventArgs = _uuidof(IAccessKeyDisplayRequestedEventArgs);
+                    MIDL_CONST_ID IID& IID_IAccessKeyDisplayRequestedEventArgs = __uuidof(IAccessKeyDisplayRequestedEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -3667,7 +3667,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAccessKeyInvokedEventArgs = _uuidof(IAccessKeyInvokedEventArgs);
+                    MIDL_CONST_ID IID& IID_IAccessKeyInvokedEventArgs = __uuidof(IAccessKeyInvokedEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -3702,7 +3702,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAccessKeyManager = _uuidof(IAccessKeyManager);
+                    MIDL_CONST_ID IID& IID_IAccessKeyManager = __uuidof(IAccessKeyManager);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -3748,7 +3748,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE ExitDisplayMode(void) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAccessKeyManagerStatics = _uuidof(IAccessKeyManagerStatics);
+                    MIDL_CONST_ID IID& IID_IAccessKeyManagerStatics = __uuidof(IAccessKeyManagerStatics);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -3789,7 +3789,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IAccessKeyManagerStatics2 = _uuidof(IAccessKeyManagerStatics2);
+                    MIDL_CONST_ID IID& IID_IAccessKeyManagerStatics2 = __uuidof(IAccessKeyManagerStatics2);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -3833,7 +3833,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICanExecuteRequestedEventArgs = _uuidof(ICanExecuteRequestedEventArgs);
+                    MIDL_CONST_ID IID& IID_ICanExecuteRequestedEventArgs = __uuidof(ICanExecuteRequestedEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -3880,7 +3880,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICharacterReceivedRoutedEventArgs = _uuidof(ICharacterReceivedRoutedEventArgs);
+                    MIDL_CONST_ID IID& IID_ICharacterReceivedRoutedEventArgs = __uuidof(ICharacterReceivedRoutedEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -3927,7 +3927,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ICommand = _uuidof(ICommand);
+                    MIDL_CONST_ID IID& IID_ICommand = __uuidof(ICommand);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -3973,7 +3973,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IContextRequestedEventArgs = _uuidof(IContextRequestedEventArgs);
+                    MIDL_CONST_ID IID& IID_IContextRequestedEventArgs = __uuidof(IContextRequestedEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -4021,7 +4021,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDoubleTappedRoutedEventArgs = _uuidof(IDoubleTappedRoutedEventArgs);
+                    MIDL_CONST_ID IID& IID_IDoubleTappedRoutedEventArgs = __uuidof(IDoubleTappedRoutedEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -4059,7 +4059,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IExecuteRequestedEventArgs = _uuidof(IExecuteRequestedEventArgs);
+                    MIDL_CONST_ID IID& IID_IExecuteRequestedEventArgs = __uuidof(IExecuteRequestedEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -4118,7 +4118,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFindNextElementOptions = _uuidof(IFindNextElementOptions);
+                    MIDL_CONST_ID IID& IID_IFindNextElementOptions = __uuidof(IFindNextElementOptions);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -4153,7 +4153,7 @@ namespace ABI {
                     public:
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFocusManager = _uuidof(IFocusManager);
+                    MIDL_CONST_ID IID& IID_IFocusManager = __uuidof(IFocusManager);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -4194,7 +4194,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFocusManagerGotFocusEventArgs = _uuidof(IFocusManagerGotFocusEventArgs);
+                    MIDL_CONST_ID IID& IID_IFocusManagerGotFocusEventArgs = __uuidof(IFocusManagerGotFocusEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -4235,7 +4235,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFocusManagerLostFocusEventArgs = _uuidof(IFocusManagerLostFocusEventArgs);
+                    MIDL_CONST_ID IID& IID_IFocusManagerLostFocusEventArgs = __uuidof(IFocusManagerLostFocusEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -4273,7 +4273,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFocusManagerStatics = _uuidof(IFocusManagerStatics);
+                    MIDL_CONST_ID IID& IID_IFocusManagerStatics = __uuidof(IFocusManagerStatics);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -4312,7 +4312,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFocusManagerStatics2 = _uuidof(IFocusManagerStatics2);
+                    MIDL_CONST_ID IID& IID_IFocusManagerStatics2 = __uuidof(IFocusManagerStatics2);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -4356,7 +4356,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFocusManagerStatics3 = _uuidof(IFocusManagerStatics3);
+                    MIDL_CONST_ID IID& IID_IFocusManagerStatics3 = __uuidof(IFocusManagerStatics3);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -4413,7 +4413,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFocusManagerStatics4 = _uuidof(IFocusManagerStatics4);
+                    MIDL_CONST_ID IID& IID_IFocusManagerStatics4 = __uuidof(IFocusManagerStatics4);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -4462,7 +4462,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFocusManagerStatics5 = _uuidof(IFocusManagerStatics5);
+                    MIDL_CONST_ID IID& IID_IFocusManagerStatics5 = __uuidof(IFocusManagerStatics5);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -4525,7 +4525,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFocusManagerStatics6 = _uuidof(IFocusManagerStatics6);
+                    MIDL_CONST_ID IID& IID_IFocusManagerStatics6 = __uuidof(IFocusManagerStatics6);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -4564,7 +4564,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFocusManagerStatics7 = _uuidof(IFocusManagerStatics7);
+                    MIDL_CONST_ID IID& IID_IFocusManagerStatics7 = __uuidof(IFocusManagerStatics7);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -4602,7 +4602,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IFocusMovementResult = _uuidof(IFocusMovementResult);
+                    MIDL_CONST_ID IID& IID_IFocusMovementResult = __uuidof(IFocusMovementResult);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -4667,7 +4667,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGettingFocusEventArgs = _uuidof(IGettingFocusEventArgs);
+                    MIDL_CONST_ID IID& IID_IGettingFocusEventArgs = __uuidof(IGettingFocusEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -4709,7 +4709,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGettingFocusEventArgs2 = _uuidof(IGettingFocusEventArgs2);
+                    MIDL_CONST_ID IID& IID_IGettingFocusEventArgs2 = __uuidof(IGettingFocusEventArgs2);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -4747,7 +4747,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IGettingFocusEventArgs3 = _uuidof(IGettingFocusEventArgs3);
+                    MIDL_CONST_ID IID& IID_IGettingFocusEventArgs3 = __uuidof(IGettingFocusEventArgs3);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -4798,7 +4798,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IHoldingRoutedEventArgs = _uuidof(IHoldingRoutedEventArgs);
+                    MIDL_CONST_ID IID& IID_IHoldingRoutedEventArgs = __uuidof(IHoldingRoutedEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -4845,7 +4845,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IInertiaExpansionBehavior = _uuidof(IInertiaExpansionBehavior);
+                    MIDL_CONST_ID IID& IID_IInertiaExpansionBehavior = __uuidof(IInertiaExpansionBehavior);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -4892,7 +4892,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IInertiaRotationBehavior = _uuidof(IInertiaRotationBehavior);
+                    MIDL_CONST_ID IID& IID_IInertiaRotationBehavior = __uuidof(IInertiaRotationBehavior);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -4939,7 +4939,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IInertiaTranslationBehavior = _uuidof(IInertiaTranslationBehavior);
+                    MIDL_CONST_ID IID& IID_IInertiaTranslationBehavior = __uuidof(IInertiaTranslationBehavior);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -4977,7 +4977,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IInputScope = _uuidof(IInputScope);
+                    MIDL_CONST_ID IID& IID_IInputScope = __uuidof(IInputScope);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -5018,7 +5018,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IInputScopeName = _uuidof(IInputScopeName);
+                    MIDL_CONST_ID IID& IID_IInputScopeName = __uuidof(IInputScopeName);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -5057,7 +5057,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IInputScopeNameFactory = _uuidof(IInputScopeNameFactory);
+                    MIDL_CONST_ID IID& IID_IInputScopeNameFactory = __uuidof(IInputScopeNameFactory);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -5104,7 +5104,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IKeyRoutedEventArgs = _uuidof(IKeyRoutedEventArgs);
+                    MIDL_CONST_ID IID& IID_IKeyRoutedEventArgs = __uuidof(IKeyRoutedEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -5142,7 +5142,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IKeyRoutedEventArgs2 = _uuidof(IKeyRoutedEventArgs2);
+                    MIDL_CONST_ID IID& IID_IKeyRoutedEventArgs2 = __uuidof(IKeyRoutedEventArgs2);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -5180,7 +5180,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IKeyRoutedEventArgs3 = _uuidof(IKeyRoutedEventArgs3);
+                    MIDL_CONST_ID IID& IID_IKeyRoutedEventArgs3 = __uuidof(IKeyRoutedEventArgs3);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -5246,7 +5246,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IKeyboardAccelerator = _uuidof(IKeyboardAccelerator);
+                    MIDL_CONST_ID IID& IID_IKeyboardAccelerator = __uuidof(IKeyboardAccelerator);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -5286,7 +5286,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IKeyboardAcceleratorFactory = _uuidof(IKeyboardAcceleratorFactory);
+                    MIDL_CONST_ID IID& IID_IKeyboardAcceleratorFactory = __uuidof(IKeyboardAcceleratorFactory);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -5330,7 +5330,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IKeyboardAcceleratorInvokedEventArgs = _uuidof(IKeyboardAcceleratorInvokedEventArgs);
+                    MIDL_CONST_ID IID& IID_IKeyboardAcceleratorInvokedEventArgs = __uuidof(IKeyboardAcceleratorInvokedEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -5368,7 +5368,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IKeyboardAcceleratorInvokedEventArgs2 = _uuidof(IKeyboardAcceleratorInvokedEventArgs2);
+                    MIDL_CONST_ID IID& IID_IKeyboardAcceleratorInvokedEventArgs2 = __uuidof(IKeyboardAcceleratorInvokedEventArgs2);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -5415,7 +5415,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IKeyboardAcceleratorStatics = _uuidof(IKeyboardAcceleratorStatics);
+                    MIDL_CONST_ID IID& IID_IKeyboardAcceleratorStatics = __uuidof(IKeyboardAcceleratorStatics);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -5480,7 +5480,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILosingFocusEventArgs = _uuidof(ILosingFocusEventArgs);
+                    MIDL_CONST_ID IID& IID_ILosingFocusEventArgs = __uuidof(ILosingFocusEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -5522,7 +5522,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILosingFocusEventArgs2 = _uuidof(ILosingFocusEventArgs2);
+                    MIDL_CONST_ID IID& IID_ILosingFocusEventArgs2 = __uuidof(ILosingFocusEventArgs2);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -5560,7 +5560,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ILosingFocusEventArgs3 = _uuidof(ILosingFocusEventArgs3);
+                    MIDL_CONST_ID IID& IID_ILosingFocusEventArgs3 = __uuidof(ILosingFocusEventArgs3);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -5619,7 +5619,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IManipulationCompletedRoutedEventArgs = _uuidof(IManipulationCompletedRoutedEventArgs);
+                    MIDL_CONST_ID IID& IID_IManipulationCompletedRoutedEventArgs = __uuidof(IManipulationCompletedRoutedEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -5682,7 +5682,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IManipulationDeltaRoutedEventArgs = _uuidof(IManipulationDeltaRoutedEventArgs);
+                    MIDL_CONST_ID IID& IID_IManipulationDeltaRoutedEventArgs = __uuidof(IManipulationDeltaRoutedEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -5756,7 +5756,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IManipulationInertiaStartingRoutedEventArgs = _uuidof(IManipulationInertiaStartingRoutedEventArgs);
+                    MIDL_CONST_ID IID& IID_IManipulationInertiaStartingRoutedEventArgs = __uuidof(IManipulationInertiaStartingRoutedEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -5803,7 +5803,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IManipulationPivot = _uuidof(IManipulationPivot);
+                    MIDL_CONST_ID IID& IID_IManipulationPivot = __uuidof(IManipulationPivot);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -5843,7 +5843,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IManipulationPivotFactory = _uuidof(IManipulationPivotFactory);
+                    MIDL_CONST_ID IID& IID_IManipulationPivotFactory = __uuidof(IManipulationPivotFactory);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -5897,7 +5897,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IManipulationStartedRoutedEventArgs = _uuidof(IManipulationStartedRoutedEventArgs);
+                    MIDL_CONST_ID IID& IID_IManipulationStartedRoutedEventArgs = __uuidof(IManipulationStartedRoutedEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -5937,7 +5937,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IManipulationStartedRoutedEventArgsFactory = _uuidof(IManipulationStartedRoutedEventArgsFactory);
+                    MIDL_CONST_ID IID& IID_IManipulationStartedRoutedEventArgsFactory = __uuidof(IManipulationStartedRoutedEventArgsFactory);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -5996,7 +5996,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IManipulationStartingRoutedEventArgs = _uuidof(IManipulationStartingRoutedEventArgs);
+                    MIDL_CONST_ID IID& IID_IManipulationStartingRoutedEventArgs = __uuidof(IManipulationStartingRoutedEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -6043,7 +6043,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_INoFocusCandidateFoundEventArgs = _uuidof(INoFocusCandidateFoundEventArgs);
+                    MIDL_CONST_ID IID& IID_INoFocusCandidateFoundEventArgs = __uuidof(INoFocusCandidateFoundEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -6090,7 +6090,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPointer = _uuidof(IPointer);
+                    MIDL_CONST_ID IID& IID_IPointer = __uuidof(IPointer);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -6145,7 +6145,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPointerRoutedEventArgs = _uuidof(IPointerRoutedEventArgs);
+                    MIDL_CONST_ID IID& IID_IPointerRoutedEventArgs = __uuidof(IPointerRoutedEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -6183,7 +6183,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IPointerRoutedEventArgs2 = _uuidof(IPointerRoutedEventArgs2);
+                    MIDL_CONST_ID IID& IID_IPointerRoutedEventArgs2 = __uuidof(IPointerRoutedEventArgs2);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -6230,7 +6230,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IProcessKeyboardAcceleratorEventArgs = _uuidof(IProcessKeyboardAcceleratorEventArgs);
+                    MIDL_CONST_ID IID& IID_IProcessKeyboardAcceleratorEventArgs = __uuidof(IProcessKeyboardAcceleratorEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -6278,7 +6278,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IRightTappedRoutedEventArgs = _uuidof(IRightTappedRoutedEventArgs);
+                    MIDL_CONST_ID IID& IID_IRightTappedRoutedEventArgs = __uuidof(IRightTappedRoutedEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -6316,7 +6316,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IStandardUICommand = _uuidof(IStandardUICommand);
+                    MIDL_CONST_ID IID& IID_IStandardUICommand = __uuidof(IStandardUICommand);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -6354,7 +6354,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IStandardUICommand2 = _uuidof(IStandardUICommand2);
+                    MIDL_CONST_ID IID& IID_IStandardUICommand2 = __uuidof(IStandardUICommand2);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -6400,7 +6400,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IStandardUICommandFactory = _uuidof(IStandardUICommandFactory);
+                    MIDL_CONST_ID IID& IID_IStandardUICommandFactory = __uuidof(IStandardUICommandFactory);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -6438,7 +6438,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IStandardUICommandStatics = _uuidof(IStandardUICommandStatics);
+                    MIDL_CONST_ID IID& IID_IStandardUICommandStatics = __uuidof(IStandardUICommandStatics);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -6486,7 +6486,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_ITappedRoutedEventArgs = _uuidof(ITappedRoutedEventArgs);
+                    MIDL_CONST_ID IID& IID_ITappedRoutedEventArgs = __uuidof(ITappedRoutedEventArgs);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -6569,7 +6569,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE NotifyCanExecuteChanged(void) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXamlUICommand = _uuidof(IXamlUICommand);
+                    MIDL_CONST_ID IID& IID_IXamlUICommand = __uuidof(IXamlUICommand);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -6609,7 +6609,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXamlUICommandFactory = _uuidof(IXamlUICommandFactory);
+                    MIDL_CONST_ID IID& IID_IXamlUICommandFactory = __uuidof(IXamlUICommandFactory);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -6662,7 +6662,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IXamlUICommandStatics = _uuidof(IXamlUICommandStatics);
+                    MIDL_CONST_ID IID& IID_IXamlUICommandStatics = __uuidof(IXamlUICommandStatics);
                 } /* Input */
             } /* Xaml */
         } /* UI */
@@ -6752,8 +6752,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 3.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Input.IAccessKeyManagerStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Input.IAccessKeyManagerStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Input.IAccessKeyManagerStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Input.IAccessKeyManager ** Default Interface **
@@ -6908,13 +6908,13 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Input.IFocusManagerStatics5 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Input.IFocusManagerStatics7 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Input.IFocusManagerStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Input.IFocusManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Input.IFocusManagerStatics6 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Input.IFocusManagerStatics4 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Input.IFocusManagerStatics6 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Input.IFocusManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Input.IFocusManagerStatics7 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Input.IFocusManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Input.IFocusManagerStatics5 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Input.IFocusManager ** Default Interface **
@@ -7310,8 +7310,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.UI.Xaml.Input.IManipulationPivotFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.UI.Xaml.Input.IManipulationPivotFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Input.IManipulationPivot ** Default Interface **
@@ -16223,8 +16223,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 3.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Input.IAccessKeyManagerStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Input.IAccessKeyManagerStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Input.IAccessKeyManagerStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Input.IAccessKeyManager ** Default Interface **
@@ -16379,13 +16379,13 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Input.IFocusManagerStatics5 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Input.IFocusManagerStatics7 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Input.IFocusManagerStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Input.IFocusManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Input.IFocusManagerStatics6 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Input.IFocusManagerStatics4 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Input.IFocusManagerStatics6 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Input.IFocusManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Input.IFocusManagerStatics7 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Input.IFocusManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Input.IFocusManagerStatics5 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Input.IFocusManager ** Default Interface **
@@ -16781,8 +16781,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.UI.Xaml.Input.IManipulationPivotFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.UI.Xaml.Input.IManipulationPivotFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Input.IManipulationPivot ** Default Interface **

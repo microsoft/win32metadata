@@ -92,11 +92,11 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_NETWORKING_CONNECTIVITY_WWANCONTRACT_VERSION)
-#define WINDOWS_NETWORKING_CONNECTIVITY_WWANCONTRACT_VERSION 0x20000
+#define WINDOWS_NETWORKING_CONNECTIVITY_WWANCONTRACT_VERSION 0x30000
 #endif // defined(WINDOWS_NETWORKING_CONNECTIVITY_WWANCONTRACT_VERSION)
 
 #if !defined(WINDOWS_NETWORKING_SOCKETS_CONTROLCHANNELTRIGGERCONTRACT_VERSION)
@@ -765,7 +765,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDnssdRegistrationResult = _uuidof(IDnssdRegistrationResult);
+                    MIDL_CONST_ID IID& IID_IDnssdRegistrationResult = __uuidof(IDnssdRegistrationResult);
                 } /* Dnssd */
             } /* ServiceDiscovery */
         } /* Networking */
@@ -851,7 +851,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDnssdServiceInstance = _uuidof(IDnssdServiceInstance);
+                    MIDL_CONST_ID IID& IID_IDnssdServiceInstance = __uuidof(IDnssdServiceInstance);
                 } /* Dnssd */
             } /* ServiceDiscovery */
         } /* Networking */
@@ -892,7 +892,7 @@ namespace ABI {
                             ) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDnssdServiceInstanceFactory = _uuidof(IDnssdServiceInstanceFactory);
+                    MIDL_CONST_ID IID& IID_IDnssdServiceInstanceFactory = __uuidof(IDnssdServiceInstanceFactory);
                 } /* Dnssd */
             } /* ServiceDiscovery */
         } /* Networking */
@@ -953,7 +953,7 @@ namespace ABI {
                         virtual HRESULT STDMETHODCALLTYPE Stop(void) = 0;
                     };
 
-                    extern MIDL_CONST_ID IID& IID_IDnssdServiceWatcher = _uuidof(IDnssdServiceWatcher);
+                    MIDL_CONST_ID IID& IID_IDnssdServiceWatcher = __uuidof(IDnssdServiceWatcher);
                 } /* Dnssd */
             } /* ServiceDiscovery */
         } /* Networking */

@@ -292,6 +292,7 @@
     "NativeTypedef": true
   },
   {
+    "Namespace": "Windows.Win32.System.WinRT",
     "Name": "HSTRING",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "WindowsDeleteString",

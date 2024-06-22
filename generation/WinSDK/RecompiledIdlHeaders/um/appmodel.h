@@ -19,7 +19,7 @@
 #if defined(_MSC_VER)
 #if _MSC_VER > 1000
 #pragma once
-#endif
+#endif // _MSC_VER > 1000
 #endif // defined(_MSC_VER)
 
 #ifndef _APPMODEL_H_
@@ -35,7 +35,7 @@
 #if defined(_MSC_VER)
 #if _MSC_VER >= 1200
 #pragma warning(push)
-#endif
+#endif // _MSC_VER >= 1200
 #pragma warning(disable:4201) /* nonstandard extension used : nameless struct/union */
 #endif // defined(_MSC_VER)
 
@@ -43,7 +43,7 @@
 
 #if defined(__cplusplus)
 extern "C" {
-#endif
+#endif // defined(__cplusplus)
 
 #pragma region Application Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
@@ -213,7 +213,7 @@ typedef enum PackagePathType
     PackagePathType_MachineExternal = 3,
     PackagePathType_UserExternal = 4,
     PackagePathType_EffectiveExternal = 5
-#endif
+#endif // NTDDI_VERSION >= NTDDI_WIN10_VB
 } PackagePathType;
 
 WINBASEAPI
@@ -518,11 +518,11 @@ GetStagedPackageOrigin(
 #if NTDDI_VERSION >= NTDDI_WIN10_MN
 #define PACKAGE_PROPERTY_HOSTRUNTIME        0x00200000
 #define PACKAGE_FILTER_HOSTRUNTIME          PACKAGE_PROPERTY_HOSTRUNTIME
-#endif
+#endif // NTDDI_VERSION >= NTDDI_WIN10_MN
 
 #if defined(NTDDI_VERSION) && (NTDDI_VERSION >= NTDDI_WINBLUE)
 #pragma deprecated("PACKAGE_FILTER_ALL_LOADED")
-#endif
+#endif // defined(NTDDI_VERSION) && (NTDDI_VERSION >= NTDDI_WINBLUE)
 // Use PACKAGE_FILTER_HEAD|PACKAGE_FILTER_DIRECT instead of PACKAGE_FILTER_ALL_LOADED
 #define PACKAGE_FILTER_ALL_LOADED   0
 
@@ -681,6 +681,16 @@ typedef enum AddPackageDependencyOptions
 } AddPackageDependencyOptions;
 DEFINE_ENUM_FLAG_OPERATORS(AddPackageDependencyOptions)
 
+#if NTDDI_VERSION >= NTDDI_WIN10_GA
+typedef enum AddPackageDependencyOptions2
+{
+    AddPackageDependencyOptions2_None                       = 0,
+    AddPackageDependencyOptions2_PrependIfRankCollision     = 0x00000001,
+    AddPackageDependencyOptions2_SpecifiedPackageFamilyOnly = 0x00000002,
+} AddPackageDependencyOptions2;
+DEFINE_ENUM_FLAG_OPERATORS(AddPackageDependencyOptions2)
+#endif // NTDDI_VERSION >= NTDDI_WIN10_GA
+
 #define PACKAGE_DEPENDENCY_RANK_DEFAULT 0
 
 typedef enum PackageDependencyProcessorArchitectures
@@ -695,7 +705,10 @@ typedef enum PackageDependencyProcessorArchitectures
 } PackageDependencyProcessorArchitectures;
 DEFINE_ENUM_FLAG_OPERATORS(PackageDependencyProcessorArchitectures)
 
+#if !defined(__PACKAGEDEPENDENCY_CONTEXT_DEFINED__)
+#define __PACKAGEDEPENDENCY_CONTEXT_DEFINED__
 DECLARE_HANDLE(PACKAGEDEPENDENCY_CONTEXT);
+#endif // !defined(__PACKAGEDEPENDENCY_CONTEXT_DEFINED__)
 
 /// Define a package dependency. The criteria for a PackageDependency
 /// (package family name, minimum version, etc)
@@ -729,6 +742,7 @@ DECLARE_HANDLE(PACKAGEDEPENDENCY_CONTEXT);
 ///       CreatePackageDependencyOptions_DoNotVerifyDependencyResolution is specified. This is useful
 ///       for installers running as user contexts other than the target user (e.g. installers
 ///       running as LocalSystem).
+/// @see TryCreatePackageDependency2
 
 WINBASEAPI
 HRESULT
@@ -743,6 +757,59 @@ TryCreatePackageDependency(
     CreatePackageDependencyOptions options,
     _Outptr_result_maybenull_ PWSTR* packageDependencyId
     );
+
+#if NTDDI_VERSION >= NTDDI_WIN11_GA
+
+/// Define a package dependency. The criteria for a PackageDependency
+/// (package family name, minimum version, etc)
+/// may match multiple packages, but ensures Deployment won't remove
+/// a package if it's the only one satisfying the PackageDependency.
+///
+/// @note A package matching a PackageDependency pin can still be removed
+///       as long as there's another package that satisfies the PackageDependency.
+///       For example, if Fwk-v1 is installed and a PackageDependency specifies
+///       MinVersion=1 and then Fwk-v2 is installed, Deployment could remove
+///       Fwk-v1 because Fwk-v2 will satisfy the PackageDependency. After Fwk-v1
+///       is removed Deployment won't remove Fwk-v2 because it's the only package
+///       satisfying the PackageDependency. Thus Fwk-v1 and Fwk-v2 (and any other
+///       package matching the PackageDependency) are 'loosely pinned'. Deployment
+///       guarantees it won't remove a package if it would make a PackageDependency
+///       unsatisfied.
+///
+/// A PackageDependency specifies criteria (package family, minimum version, etc)
+/// and not a specific package. Deployment reserves the right to use a different
+/// package (e.g. higher version) to satisfy the PackageDependency if/when
+/// one becomes available.
+///
+/// @param user the user scope of the package dependency. If NULL the caller's
+///        user context is used. MUST be NULL if CreatePackageDependencyOptions_ScopeIsSystem
+///        is specified
+/// @param lifetimeArtifact MUST be NULL if lifetimeKind=PackageDependencyLifetimeKind_Process
+/// @param packageDependencyId allocated via HeapAlloc; use HeapFree to deallocate
+///
+/// @note TryCreatePackageDependency2() fails if the PackageDependency cannot be resolved to a specific
+///       package. This package resolution check is skipped if
+///       CreatePackageDependencyOptions_DoNotVerifyDependencyResolution is specified. This is useful
+///       for installers running as user contexts other than the target user (e.g. installers
+///       running as LocalSystem).
+/// @see TryCreatePackageDependency
+
+WINBASEAPI
+HRESULT
+WINAPI
+TryCreatePackageDependency2(
+    PSID user,
+    _In_ PCWSTR packageFamilyName,
+    PACKAGE_VERSION minVersion,
+    PackageDependencyProcessorArchitectures packageDependencyProcessorArchitectures,
+    PackageDependencyLifetimeKind lifetimeKind,
+    PCWSTR lifetimeArtifact,
+    CreatePackageDependencyOptions options,
+    const FILETIME* lifetimeExpiration,
+    _Outptr_result_maybenull_ PWSTR* packageDependencyId
+    );
+
+#endif // NTDDI_VERSION >= NTDDI_WIN11_GA
 
 /// Undefine a package dependency. Removing a pin on a PackageDependency is typically done at uninstall-time.
 /// This implicitly occurs if the package dependency's 'lifetime artifact' (specified via TryCreatePackageDependency)
@@ -797,6 +864,7 @@ DeletePackageDependency(
 ///
 /// @param packageDependencyContext valid until passed to RemovePackageDependency()
 /// @param packageFullName allocated via HeapAlloc; use HeapFree to deallocate
+/// @see AddPackageDependency2()
 
 WINBASEAPI
 HRESULT
@@ -808,6 +876,62 @@ AddPackageDependency(
     _Out_ PACKAGEDEPENDENCY_CONTEXT* packageDependencyContext,
     _Outptr_opt_result_maybenull_ PWSTR* packageFullName
     );
+
+#if NTDDI_VERSION >= NTDDI_WIN11_GA
+
+/// Resolve a previously-pinned PackageDependency to a specific package and
+/// add it to the invoking process' package graph. Once the dependency has
+/// been added other code-loading methods (LoadLibrary, CoCreateInstance, etc)
+/// can find the binaries in the resolved package.
+///
+/// Package resolution is specific to a user and can return different values
+/// for different users on a system.
+///
+/// Each successful AddPackageDependency2() adds the resolve packaged to the
+/// calling process' package graph, even if already present. There is no
+/// duplicate 'detection' or 'filtering' applied by the API (multiple
+/// references from a package is not harmful). Once resolution is complete
+/// the package dependency stays resolved for that user until the last reference across
+/// all processes for that user is removed via RemovePackageDependency (or
+/// process termination).
+///
+/// AddPackageDependency2() adds the resolved package to the caller's package graph,
+/// per the rank specified. A process' package graph is a list of packages sorted by
+/// rank in ascending order (-infinity...0...+infinity). If package(s) are present in the
+/// package graph with the same rank as the call to AddPackageDependency2 the resolved
+/// package is (by default) added after others of the same rank. To add a package
+/// before others o the same rank, specify AddPackageDependencyOptions2_PrependIfRankCollision.
+///
+/// Every AddPackageDependency2 can be balanced by a RemovePackageDependency
+/// to remove the entry from the package graph. If the process terminates all package
+/// references are removed, but any pins stay behind.
+///
+/// AddPackageDependency2 adds the resolved package to the process' package
+/// graph, per the rank and options parameters. The process' package
+/// graph is used to search for DLLs (per Dynamic-Link Library Search Order),
+/// WinRT objects and other resources; the caller can now load DLLs, activate
+/// WinRT objects and use other resources from the framework package until
+/// RemovePackageDependency is called. The packageDependencyId parameter
+/// must match a package dependency defined for the calling user or the
+/// system (i.e. pinned with CreatePackageDependencyOptions_ScopeIsSystem) else
+/// an error is returned.
+///
+/// @param packageDependencyContext valid until passed to RemovePackageDependency()
+/// @param packageFullName allocated via HeapAlloc; use HeapFree to deallocate
+/// @see AddPackageDependency()
+
+WINBASEAPI
+HRESULT
+WINAPI
+AddPackageDependency2(
+    _In_ PCWSTR packageDependencyId,
+    INT32 rank,
+    AddPackageDependencyOptions2 options,
+    _Out_ PACKAGEDEPENDENCY_CONTEXT* packageDependencyContext,
+    _Outptr_opt_result_maybenull_ PWSTR* packageFullName
+    );
+
+#endif // NTDDI_VERSION >= NTDDI_WIN11_GA
 
 /// Remove a resolved PackageDependency from the current process' package graph
 /// (i.e. undo AddPackageDependency). Used at runtime (i.e. the moral equivalent
@@ -831,7 +955,8 @@ RemovePackageDependency(
 ///
 /// @param packageFullName allocated via HeapAlloc; use HeapFree to deallocate.
 ///                        If the package dependency cannot be resolved the function
-///                        succeeds but packageFullName is nullptr.
+///                        succeeds but packageFullName is NULL.
+/// @see GetResolvedPackageFullNameForPackageDependency2
 
 WINBASEAPI
 HRESULT
@@ -841,11 +966,31 @@ GetResolvedPackageFullNameForPackageDependency(
     _Outptr_result_maybenull_ PWSTR* packageFullName
     );
 
+#if NTDDI_VERSION >= NTDDI_WIN11_GA
+
+/// Return the package full name that would be used if the
+/// PackageDependency were to be resolved. Does not add the
+/// package to the process graph.
+///
+/// @param packageFullName allocated via HeapAlloc; use HeapFree to deallocate.
+/// @return E_INVALIDARG if packageDependencyId is not a valid package dependency.
+/// @see GetResolvedPackageFullNameForPackageDependency
+
+WINBASEAPI
+HRESULT
+WINAPI
+GetResolvedPackageFullNameForPackageDependency2(
+    _In_ PCWSTR packageDependencyId,
+    _Outptr_result_maybenull_ PWSTR* packageFullName
+    );
+
+#endif // NTDDI_VERSION >= NTDDI_WIN11_GA
+
 /// Return the package dependency for the context.
 ///
 /// @param packageDependencyId allocated via HeapAlloc; use HeapFree to deallocate.
 ///                            If the package dependency context cannot be resolved
-///                            the function succeeds but packageDependencyId is nullptr.
+///                            the function succeeds but packageDependencyId is NULL.
 
 WINBASEAPI
 HRESULT
@@ -868,6 +1013,86 @@ GetPackageGraphRevisionId(
     );
 
 #endif // NTDDI_VERSION >= NTDDI_WIN10_NI
+
+typedef struct FindPackageDependencyCriteria {
+
+    /// Match package dependencies for this user if not NULL.
+    /// Match package dependencies for the current user if NULL (and ScopeIsSystem=FALSE).
+    /// @note This MUST be NULL if ScopeIsSystem=TRUE.
+    /// @note Admin privilege is required if User is not NULL and not the current user.
+    PSID User;
+
+    /// Match package dependencies created with CreatePackageDependencyOptions_ScopeIsSystem this is TRUE.
+    /// @note Admin privilege is required if ScopeIsSystem is TRUE.
+    BOOL ScopeIsSystem;
+
+    /// Match package dependencies with this package family. Ignore if NULL or empty ("").
+    PCWSTR PackageFamilyName;
+
+} FindPackageDependencyCriteria;
+
+#if NTDDI_VERSION >= NTDDI_WIN11_GA
+
+/// Retrieve package dependencies.
+/// @param packageDependencyIds allocated via HeapAlloc; use HeapFree to deallocate
+///
+/// @see FindPackageDependencyCriteria
+/// @see TryCreatePackageDependency2
+
+WINBASEAPI
+HRESULT
+WINAPI
+FindPackageDependency(
+    _In_ const FindPackageDependencyCriteria* findPackageDependencyCriteria,
+    _Out_ UINT32* packageDependencyIdsCount,
+    _Outptr_result_buffer_maybenull_(*packageDependencyIdsCount) PWSTR** packageDependencyIds
+    );
+
+/// Retrieve information about a package dependency.
+///
+/// @param user allocated via HeapAlloc; use HeapFree to deallocate
+/// @param packageFamilyName allocated via HeapAlloc; use HeapFree to deallocate
+/// @param lifetimeArtifact allocated via HeapAlloc; use HeapFree to deallocate
+/// @param lifetimeExpiration if specified, the value is zero if expiration date is not set.
+/// @note Admin privilege is required the package dependency was created with CreatePackageDependencyOptions_ScopeIsSystem or user is not NULL and not the current user.
+/// @see FindPackageDependency
+
+WINBASEAPI
+HRESULT
+WINAPI
+GetPackageDependencyInformation(
+    _In_ PCWSTR packageDependencyId,
+    _Outptr_opt_result_maybenull_ PSID* user,
+    _Outptr_opt_result_maybenull_ PWSTR* packageFamilyName,
+    _Out_opt_ PACKAGE_VERSION* minVersion,
+    _Out_opt_ PackageDependencyProcessorArchitectures* packageDependencyProcessorArchitectures,
+    _Out_opt_ PackageDependencyLifetimeKind* lifetimeKind,
+    _Outptr_opt_result_maybenull_ PWSTR* lifetimeArtifact,
+    _Out_opt_ CreatePackageDependencyOptions* options,
+    _Out_opt_ FILETIME* lifetimeExpiration
+    );
+
+/// Retrieve the list of processes using a package dependency.
+///
+/// @param user the user scope of the package dependency. If NULL the caller's
+///        user context is used. MUST be NULL if scopeIsSystem=TRUE.
+/// @param processIdsCount allocated via HeapAlloc; use HeapFree to deallocate
+/// @param processIds allocated via HeapAlloc; use HeapFree to deallocate
+/// @note Admin privilege is required if scopeIsSystem=TRUE or user is not NULL and not the current user.
+/// @see FindPackageDependency
+
+WINBASEAPI
+HRESULT
+WINAPI
+GetProcessesUsingPackageDependency(
+    _In_ PCWSTR packageDependencyId,
+    _In_opt_ PSID user,
+    _In_ BOOL scopeIsSystem,
+    _Out_ UINT32* processIdsCount,
+    _Outptr_result_buffer_maybenull_(*processIdsCount) DWORD** processIds
+    );
+
+#endif // NTDDI_VERSION >= NTDDI_WIN11_GA
 
 /* ---------------------------------------------------------------- */
 
@@ -1017,7 +1242,7 @@ AppPolicyGetCreateFileAccess(
 #if defined(_MSC_VER)
 #if _MSC_VER >= 1200
 #pragma warning(pop)
-#endif
+#endif // _MSC_VER >= 1200
 #endif // defined(_MSC_VER)
 
-#endif
+#endif // _APPMODEL_H_

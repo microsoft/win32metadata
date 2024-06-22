@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -508,7 +508,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPwmController = _uuidof(IPwmController);
+                MIDL_CONST_ID IID& IID_IPwmController = __uuidof(IPwmController);
             } /* Pwm */
         } /* Devices */
     } /* Windows */
@@ -545,7 +545,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPwmControllerStatics = _uuidof(IPwmControllerStatics);
+                MIDL_CONST_ID IID& IID_IPwmControllerStatics = __uuidof(IPwmControllerStatics);
             } /* Pwm */
         } /* Devices */
     } /* Windows */
@@ -581,7 +581,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPwmControllerStatics2 = _uuidof(IPwmControllerStatics2);
+                MIDL_CONST_ID IID& IID_IPwmControllerStatics2 = __uuidof(IPwmControllerStatics2);
             } /* Pwm */
         } /* Devices */
     } /* Windows */
@@ -625,7 +625,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPwmControllerStatics3 = _uuidof(IPwmControllerStatics3);
+                MIDL_CONST_ID IID& IID_IPwmControllerStatics3 = __uuidof(IPwmControllerStatics3);
             } /* Pwm */
         } /* Devices */
     } /* Windows */
@@ -681,7 +681,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPwmPin = _uuidof(IPwmPin);
+                MIDL_CONST_ID IID& IID_IPwmPin = __uuidof(IPwmPin);
             } /* Pwm */
         } /* Devices */
     } /* Windows */

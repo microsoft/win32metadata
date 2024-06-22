@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_STORAGE_PROVIDER_CLOUDFILESCONTRACT_VERSION)
@@ -3893,7 +3893,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IApplicationDataSetVersionHandler = _uuidof(IApplicationDataSetVersionHandler);
+            MIDL_CONST_ID IID& IID_IApplicationDataSetVersionHandler = __uuidof(IApplicationDataSetVersionHandler);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -3924,7 +3924,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStreamedFileDataRequestedHandler = _uuidof(IStreamedFileDataRequestedHandler);
+            MIDL_CONST_ID IID& IID_IStreamedFileDataRequestedHandler = __uuidof(IStreamedFileDataRequestedHandler);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -3982,7 +3982,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppDataPaths = _uuidof(IAppDataPaths);
+            MIDL_CONST_ID IID& IID_IAppDataPaths = __uuidof(IAppDataPaths);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -4020,7 +4020,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IAppDataPathsStatics = _uuidof(IAppDataPathsStatics);
+            MIDL_CONST_ID IID& IID_IAppDataPathsStatics = __uuidof(IAppDataPathsStatics);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -4092,7 +4092,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IApplicationData = _uuidof(IApplicationData);
+            MIDL_CONST_ID IID& IID_IApplicationData = __uuidof(IApplicationData);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -4126,7 +4126,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IApplicationData2 = _uuidof(IApplicationData2);
+            MIDL_CONST_ID IID& IID_IApplicationData2 = __uuidof(IApplicationData2);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -4168,7 +4168,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IApplicationData3 = _uuidof(IApplicationData3);
+            MIDL_CONST_ID IID& IID_IApplicationData3 = __uuidof(IApplicationData3);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -4219,7 +4219,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IApplicationDataContainer = _uuidof(IApplicationDataContainer);
+            MIDL_CONST_ID IID& IID_IApplicationDataContainer = __uuidof(IApplicationDataContainer);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -4253,7 +4253,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IApplicationDataStatics = _uuidof(IApplicationDataStatics);
+            MIDL_CONST_ID IID& IID_IApplicationDataStatics = __uuidof(IApplicationDataStatics);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -4288,7 +4288,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IApplicationDataStatics2 = _uuidof(IApplicationDataStatics2);
+            MIDL_CONST_ID IID& IID_IApplicationDataStatics2 = __uuidof(IApplicationDataStatics2);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -4326,7 +4326,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ICachedFileManagerStatics = _uuidof(ICachedFileManagerStatics);
+            MIDL_CONST_ID IID& IID_ICachedFileManagerStatics = __uuidof(ICachedFileManagerStatics);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -4375,7 +4375,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IDownloadsFolderStatics = _uuidof(IDownloadsFolderStatics);
+            MIDL_CONST_ID IID& IID_IDownloadsFolderStatics = __uuidof(IDownloadsFolderStatics);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -4428,7 +4428,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IDownloadsFolderStatics2 = _uuidof(IDownloadsFolderStatics2);
+            MIDL_CONST_ID IID& IID_IDownloadsFolderStatics2 = __uuidof(IDownloadsFolderStatics2);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -4536,7 +4536,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IFileIOStatics = _uuidof(IFileIOStatics);
+            MIDL_CONST_ID IID& IID_IFileIOStatics = __uuidof(IFileIOStatics);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -4570,7 +4570,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IKnownFoldersCameraRollStatics = _uuidof(IKnownFoldersCameraRollStatics);
+            MIDL_CONST_ID IID& IID_IKnownFoldersCameraRollStatics = __uuidof(IKnownFoldersCameraRollStatics);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -4604,7 +4604,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IKnownFoldersPlaylistsStatics = _uuidof(IKnownFoldersPlaylistsStatics);
+            MIDL_CONST_ID IID& IID_IKnownFoldersPlaylistsStatics = __uuidof(IKnownFoldersPlaylistsStatics);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -4638,7 +4638,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IKnownFoldersSavedPicturesStatics = _uuidof(IKnownFoldersSavedPicturesStatics);
+            MIDL_CONST_ID IID& IID_IKnownFoldersSavedPicturesStatics = __uuidof(IKnownFoldersSavedPicturesStatics);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -4690,7 +4690,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IKnownFoldersStatics = _uuidof(IKnownFoldersStatics);
+            MIDL_CONST_ID IID& IID_IKnownFoldersStatics = __uuidof(IKnownFoldersStatics);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -4730,7 +4730,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IKnownFoldersStatics2 = _uuidof(IKnownFoldersStatics2);
+            MIDL_CONST_ID IID& IID_IKnownFoldersStatics2 = __uuidof(IKnownFoldersStatics2);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -4766,7 +4766,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IKnownFoldersStatics3 = _uuidof(IKnownFoldersStatics3);
+            MIDL_CONST_ID IID& IID_IKnownFoldersStatics3 = __uuidof(IKnownFoldersStatics3);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -4810,7 +4810,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IKnownFoldersStatics4 = _uuidof(IKnownFoldersStatics4);
+            MIDL_CONST_ID IID& IID_IKnownFoldersStatics4 = __uuidof(IKnownFoldersStatics4);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -4918,7 +4918,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IPathIOStatics = _uuidof(IPathIOStatics);
+            MIDL_CONST_ID IID& IID_IPathIOStatics = __uuidof(IPathIOStatics);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -4950,7 +4950,7 @@ namespace ABI {
                 virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ISetVersionDeferral = _uuidof(ISetVersionDeferral);
+            MIDL_CONST_ID IID& IID_ISetVersionDeferral = __uuidof(ISetVersionDeferral);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -4990,7 +4990,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ISetVersionRequest = _uuidof(ISetVersionRequest);
+            MIDL_CONST_ID IID& IID_ISetVersionRequest = __uuidof(ISetVersionRequest);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -5075,7 +5075,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageFile = _uuidof(IStorageFile);
+            MIDL_CONST_ID IID& IID_IStorageFile = __uuidof(IStorageFile);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -5113,7 +5113,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageFile2 = _uuidof(IStorageFile2);
+            MIDL_CONST_ID IID& IID_IStorageFile2 = __uuidof(IStorageFile2);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -5145,7 +5145,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageFilePropertiesWithAvailability = _uuidof(IStorageFilePropertiesWithAvailability);
+            MIDL_CONST_ID IID& IID_IStorageFilePropertiesWithAvailability = __uuidof(IStorageFilePropertiesWithAvailability);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -5208,7 +5208,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageFileStatics = _uuidof(IStorageFileStatics);
+            MIDL_CONST_ID IID& IID_IStorageFileStatics = __uuidof(IStorageFileStatics);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -5244,7 +5244,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageFileStatics2 = _uuidof(IStorageFileStatics2);
+            MIDL_CONST_ID IID& IID_IStorageFileStatics2 = __uuidof(IStorageFileStatics2);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -5315,7 +5315,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageFolder = _uuidof(IStorageFolder);
+            MIDL_CONST_ID IID& IID_IStorageFolder = __uuidof(IStorageFolder);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -5348,7 +5348,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageFolder2 = _uuidof(IStorageFolder2);
+            MIDL_CONST_ID IID& IID_IStorageFolder2 = __uuidof(IStorageFolder2);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -5382,7 +5382,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageFolder3 = _uuidof(IStorageFolder3);
+            MIDL_CONST_ID IID& IID_IStorageFolder3 = __uuidof(IStorageFolder3);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -5417,7 +5417,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageFolderStatics = _uuidof(IStorageFolderStatics);
+            MIDL_CONST_ID IID& IID_IStorageFolderStatics = __uuidof(IStorageFolderStatics);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -5453,7 +5453,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageFolderStatics2 = _uuidof(IStorageFolderStatics2);
+            MIDL_CONST_ID IID& IID_IStorageFolderStatics2 = __uuidof(IStorageFolderStatics2);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -5517,7 +5517,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageItem = _uuidof(IStorageItem);
+            MIDL_CONST_ID IID& IID_IStorageItem = __uuidof(IStorageItem);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -5556,7 +5556,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageItem2 = _uuidof(IStorageItem2);
+            MIDL_CONST_ID IID& IID_IStorageItem2 = __uuidof(IStorageItem2);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -5612,7 +5612,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageItemProperties = _uuidof(IStorageItemProperties);
+            MIDL_CONST_ID IID& IID_IStorageItemProperties = __uuidof(IStorageItemProperties);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -5659,7 +5659,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageItemProperties2 = _uuidof(IStorageItemProperties2);
+            MIDL_CONST_ID IID& IID_IStorageItemProperties2 = __uuidof(IStorageItemProperties2);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -5694,7 +5694,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageItemPropertiesWithProvider = _uuidof(IStorageItemPropertiesWithProvider);
+            MIDL_CONST_ID IID& IID_IStorageItemPropertiesWithProvider = __uuidof(IStorageItemPropertiesWithProvider);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -5745,7 +5745,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageLibrary = _uuidof(IStorageLibrary);
+            MIDL_CONST_ID IID& IID_IStorageLibrary = __uuidof(IStorageLibrary);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -5779,7 +5779,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageLibrary2 = _uuidof(IStorageLibrary2);
+            MIDL_CONST_ID IID& IID_IStorageLibrary2 = __uuidof(IStorageLibrary2);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -5813,7 +5813,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageLibrary3 = _uuidof(IStorageLibrary3);
+            MIDL_CONST_ID IID& IID_IStorageLibrary3 = __uuidof(IStorageLibrary3);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -5860,7 +5860,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageLibraryChange = _uuidof(IStorageLibraryChange);
+            MIDL_CONST_ID IID& IID_IStorageLibraryChange = __uuidof(IStorageLibraryChange);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -5897,7 +5897,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageLibraryChangeReader = _uuidof(IStorageLibraryChangeReader);
+            MIDL_CONST_ID IID& IID_IStorageLibraryChangeReader = __uuidof(IStorageLibraryChangeReader);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -5931,7 +5931,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageLibraryChangeReader2 = _uuidof(IStorageLibraryChangeReader2);
+            MIDL_CONST_ID IID& IID_IStorageLibraryChangeReader2 = __uuidof(IStorageLibraryChangeReader2);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -5967,7 +5967,7 @@ namespace ABI {
                 virtual HRESULT STDMETHODCALLTYPE Reset(void) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageLibraryChangeTracker = _uuidof(IStorageLibraryChangeTracker);
+            MIDL_CONST_ID IID& IID_IStorageLibraryChangeTracker = __uuidof(IStorageLibraryChangeTracker);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -6002,7 +6002,7 @@ namespace ABI {
                 virtual HRESULT STDMETHODCALLTYPE Disable(void) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageLibraryChangeTracker2 = _uuidof(IStorageLibraryChangeTracker2);
+            MIDL_CONST_ID IID& IID_IStorageLibraryChangeTracker2 = __uuidof(IStorageLibraryChangeTracker2);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -6039,7 +6039,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageLibraryChangeTrackerOptions = _uuidof(IStorageLibraryChangeTrackerOptions);
+            MIDL_CONST_ID IID& IID_IStorageLibraryChangeTrackerOptions = __uuidof(IStorageLibraryChangeTrackerOptions);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -6070,7 +6070,7 @@ namespace ABI {
             public:
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageLibraryLastChangeId = _uuidof(IStorageLibraryLastChangeId);
+            MIDL_CONST_ID IID& IID_IStorageLibraryLastChangeId = __uuidof(IStorageLibraryLastChangeId);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -6104,7 +6104,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageLibraryLastChangeIdStatics = _uuidof(IStorageLibraryLastChangeIdStatics);
+            MIDL_CONST_ID IID& IID_IStorageLibraryLastChangeIdStatics = __uuidof(IStorageLibraryLastChangeIdStatics);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -6139,7 +6139,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageLibraryStatics = _uuidof(IStorageLibraryStatics);
+            MIDL_CONST_ID IID& IID_IStorageLibraryStatics = __uuidof(IStorageLibraryStatics);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -6175,7 +6175,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageLibraryStatics2 = _uuidof(IStorageLibraryStatics2);
+            MIDL_CONST_ID IID& IID_IStorageLibraryStatics2 = __uuidof(IStorageLibraryStatics2);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -6212,7 +6212,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageProvider = _uuidof(IStorageProvider);
+            MIDL_CONST_ID IID& IID_IStorageProvider = __uuidof(IStorageProvider);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -6250,7 +6250,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageProvider2 = _uuidof(IStorageProvider2);
+            MIDL_CONST_ID IID& IID_IStorageProvider2 = __uuidof(IStorageProvider2);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -6290,7 +6290,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStorageStreamTransaction = _uuidof(IStorageStreamTransaction);
+            MIDL_CONST_ID IID& IID_IStorageStreamTransaction = __uuidof(IStorageStreamTransaction);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -6322,7 +6322,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IStreamedFileDataRequest = _uuidof(IStreamedFileDataRequest);
+            MIDL_CONST_ID IID& IID_IStreamedFileDataRequest = __uuidof(IStreamedFileDataRequest);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -6356,7 +6356,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ISystemAudioProperties = _uuidof(ISystemAudioProperties);
+            MIDL_CONST_ID IID& IID_ISystemAudioProperties = __uuidof(ISystemAudioProperties);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -6435,7 +6435,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ISystemDataPaths = _uuidof(ISystemDataPaths);
+            MIDL_CONST_ID IID& IID_ISystemDataPaths = __uuidof(ISystemDataPaths);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -6469,7 +6469,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ISystemDataPathsStatics = _uuidof(ISystemDataPathsStatics);
+            MIDL_CONST_ID IID& IID_ISystemDataPathsStatics = __uuidof(ISystemDataPathsStatics);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -6506,7 +6506,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ISystemGPSProperties = _uuidof(ISystemGPSProperties);
+            MIDL_CONST_ID IID& IID_ISystemGPSProperties = __uuidof(ISystemGPSProperties);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -6543,7 +6543,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ISystemImageProperties = _uuidof(ISystemImageProperties);
+            MIDL_CONST_ID IID& IID_ISystemImageProperties = __uuidof(ISystemImageProperties);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -6592,7 +6592,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ISystemMediaProperties = _uuidof(ISystemMediaProperties);
+            MIDL_CONST_ID IID& IID_ISystemMediaProperties = __uuidof(ISystemMediaProperties);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -6647,7 +6647,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ISystemMusicProperties = _uuidof(ISystemMusicProperties);
+            MIDL_CONST_ID IID& IID_ISystemMusicProperties = __uuidof(ISystemMusicProperties);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -6693,7 +6693,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ISystemPhotoProperties = _uuidof(ISystemPhotoProperties);
+            MIDL_CONST_ID IID& IID_ISystemPhotoProperties = __uuidof(ISystemPhotoProperties);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -6763,7 +6763,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ISystemProperties = _uuidof(ISystemProperties);
+            MIDL_CONST_ID IID& IID_ISystemProperties = __uuidof(ISystemProperties);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -6809,7 +6809,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_ISystemVideoProperties = _uuidof(ISystemVideoProperties);
+            MIDL_CONST_ID IID& IID_ISystemVideoProperties = __uuidof(ISystemVideoProperties);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -6897,7 +6897,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IUserDataPaths = _uuidof(IUserDataPaths);
+            MIDL_CONST_ID IID& IID_IUserDataPaths = __uuidof(IUserDataPaths);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -6935,7 +6935,7 @@ namespace ABI {
                     ) = 0;
             };
 
-            extern MIDL_CONST_ID IID& IID_IUserDataPathsStatics = _uuidof(IUserDataPathsStatics);
+            MIDL_CONST_ID IID& IID_IUserDataPathsStatics = __uuidof(IUserDataPathsStatics);
         } /* Storage */
     } /* Windows */
 } /* ABI */
@@ -7132,11 +7132,11 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.Storage.IKnownFoldersStatics3 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Storage.IKnownFoldersPlaylistsStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Storage.IKnownFoldersStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Storage.IKnownFoldersStatics4 interface starting with version 10.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Storage.IKnownFoldersStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Storage.IKnownFoldersCameraRollStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Storage.IKnownFoldersSavedPicturesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Storage.IKnownFoldersStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Storage.IKnownFoldersStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Storage.IKnownFoldersStatics4 interface starting with version 10.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Storage.IKnownFoldersCameraRollStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -7244,8 +7244,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Storage.IStorageFolderStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Storage.IStorageFolderStatics2 interface starting with version 10.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Storage.IStorageFolderStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Storage.IStorageFolder ** Default Interface **
@@ -7273,8 +7273,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Storage.IStorageLibraryStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Storage.IStorageLibraryStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Storage.IStorageLibraryStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Storage.IStorageLibrary ** Default Interface **
@@ -19330,11 +19330,11 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.Storage.IKnownFoldersStatics3 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Storage.IKnownFoldersPlaylistsStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Storage.IKnownFoldersStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Storage.IKnownFoldersStatics4 interface starting with version 10.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Storage.IKnownFoldersStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Storage.IKnownFoldersCameraRollStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Storage.IKnownFoldersSavedPicturesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Storage.IKnownFoldersStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Storage.IKnownFoldersStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Storage.IKnownFoldersStatics4 interface starting with version 10.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Storage.IKnownFoldersCameraRollStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -19442,8 +19442,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Storage.IStorageFolderStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Storage.IStorageFolderStatics2 interface starting with version 10.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Storage.IStorageFolderStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Storage.IStorageFolder ** Default Interface **
@@ -19471,8 +19471,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Storage.IStorageLibraryStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Storage.IStorageLibraryStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Storage.IStorageLibraryStatics2 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Storage.IStorageLibrary ** Default Interface **

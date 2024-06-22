@@ -783,7 +783,7 @@ _Check_return_
 WINOLEAPI
 CoGetStandardMarshal(
     _In_ REFIID riid,
-    _In_ LPUNKNOWN pUnk,
+    _In_opt_ LPUNKNOWN pUnk,
     _In_ DWORD dwDestContext,
     _In_opt_ LPVOID pvDestContext,
     _In_ DWORD mshlflags,

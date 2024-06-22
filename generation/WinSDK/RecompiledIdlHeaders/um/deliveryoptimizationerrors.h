@@ -55,7 +55,11 @@ FORCEINLINE bool IS_DO_TRANSIENT_ERROR(HRESULT hr)
 #define DO_E_INTEGRITYCHECKINFO_UNAVAILABLE         _HRESULT_TYPEDEF_(0x80D02017L) // Download job is marked as requiring integrity checking but integrity checking info could not be retrieved
 #define DO_E_FILE_DOWNLOADSINK_UNSPECIFIED          _HRESULT_TYPEDEF_(0x80D02018L) // Unable to start a download because no download sink (either local file or stream interface) was specified
 #define DO_E_FILE_DOWNLOADSINK_ALREADY_SET          _HRESULT_TYPEDEF_(0x80D02019L) // An attempt to set a download sink failed because another type of sink is already set
+#define DO_E_FILE_SIZE_UNKNOWN_HTTP_200             _HRESULT_TYPEDEF_(0x80D0201AL) // Unable to determine file size from HTTP 200 status code
 #define DO_E_FILE_ENCRYPTION_EXPECTED               _HRESULT_TYPEDEF_(0x80D0201BL) // Decryption key was provided but file on CDN does not appear to be encrypted
+#define DO_E_FILE_SIZE_UNKNOWN_HTTP_206             _HRESULT_TYPEDEF_(0x80D0201CL) // Unable to determine file size from HTTP 206 status code
+#define DO_E_FILE_SIZE_UNKNOWN_HTTP_2XX             _HRESULT_TYPEDEF_(0x80D0201DL) // Unable to determine file size from an unexpected HTTP 2xx status code
+#define DO_E_NETWORK_ACCESS_CONSENT_NEEDED          _HRESULT_TYPEDEF_(0x80D0201EL) // User consent to access the network is required to proceed
 
 // IDODownload interface
 
@@ -102,7 +106,7 @@ FORCEINLINE bool IS_DO_TRANSIENT_ERROR(HRESULT hr)
 #define DO_E_BAD_PIECE_HASH_NO_BAN                  _HRESULT_TYPEDEF_(0x80D06806L) // Content piece hash check failed but source is not banned yet
 #define DO_E_ALREADY_HAVE_PIECE                     _HRESULT_TYPEDEF_(0x80D06807L) // The piece was rejected because it already exists in the cache
 #define DO_E_MISSING_PIECE                          _HRESULT_TYPEDEF_(0x80D06808L) // The piece requested is no longer available in the cache
-#define DO_E_METAINFO_CONTENT                       _HRESULT_TYPEDEF_(0x80D06809L) // Invalid metainfo content
+#define DO_E_METAINFO_CONTENT                       _HRESULT_TYPEDEF_(0x80D06809L) // Failed to parse JSON from input buffer
 #define DO_E_METAINFO_VERSION                       _HRESULT_TYPEDEF_(0x80D0680AL) // Invalid metainfo version
 #define DO_E_SWARM_NOT_RUNNING                      _HRESULT_TYPEDEF_(0x80D0680BL) // The swarm isn't running
 #define DO_E_UNRECOGNIZED_CONN                      _HRESULT_TYPEDEF_(0x80D0680CL) // The peer was not recognized by the connection manager
@@ -119,5 +123,15 @@ FORCEINLINE bool IS_DO_TRANSIENT_ERROR(HRESULT hr)
 #define DO_E_PEER_IS_UPLOAD                         _HRESULT_TYPEDEF_(0x80D06817L) // The peer is an upload
 #define DO_E_PIN_FAIL_NO_PEERING                    _HRESULT_TYPEDEF_(0x80D06818L) // Cannot pin a swarm because it's not in peering mode
 #define DO_E_DELETE_PINNED_SWARM                    _HRESULT_TYPEDEF_(0x80D06819L) // Cannot delete a pinned swarm without using the "force" flag
+
+#define DO_E_METAINFO_DIGEST_MATCH                  _HRESULT_TYPEDEF_(0x80D0681AL) // Hash digest of the input buffer did not match
+#define DO_E_METAINFO_HOH_MATCH                     _HRESULT_TYPEDEF_(0x80D0681BL) // Hash-of-hashes preliminary match failed
+#define DO_E_METAINFO_HOH_FINAL_MATCH               _HRESULT_TYPEDEF_(0x80D0681CL) // Computed hash-of-hashes match failed
+#define DO_E_METAINFO_CONTENT_LENGTH                _HRESULT_TYPEDEF_(0x80D0681DL) // Content length is invalid
+#define DO_E_METAINFO_PIECE_SIZE                    _HRESULT_TYPEDEF_(0x80D0681EL) // Piece size is invalid
+#define DO_E_METAINFO_PARSE_HOH                     _HRESULT_TYPEDEF_(0x80D0681FL) // Failed to parse hash-of-hashes value
+#define DO_E_METAINFO_PARSE_PIECEHASHES             _HRESULT_TYPEDEF_(0x80D06820L) // Failed to parse array of piece hashes
+#define DO_E_METAINFO_PARSE_ONE_PIECEHASH           _HRESULT_TYPEDEF_(0x80D06821L) // Failed to parse an individual piece hash digest
+#define DO_E_METAINFO_FILE_SIZE                     _HRESULT_TYPEDEF_(0x80D06822L) // Failed to get PHF file's size or size is bad
 
 #endif // __DELIVERYOPTIMIZATION_ERROR_H__

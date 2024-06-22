@@ -97,6 +97,8 @@ namespace Windows
 
             typedef enum DeviceInformationKind DeviceInformationKind;
 
+            typedef enum DevicePairingAddPairingSetMemberStatus DevicePairingAddPairingSetMemberStatus;
+
             typedef enum DevicePairingKinds DevicePairingKinds;
 
             typedef enum DevicePairingProtectionLevel DevicePairingProtectionLevel;
@@ -117,7 +119,11 @@ namespace Windows
 
             interface IDeviceAccessChangedEventArgs2;
 
+            interface IDeviceAccessChangedEventArgs3;
+
             interface IDeviceAccessInformation;
+
+            interface IDeviceAccessInformation2;
 
             interface IDeviceAccessInformationStatics;
 
@@ -125,11 +131,15 @@ namespace Windows
 
             interface IDeviceDisconnectButtonClickedEventArgs;
 
+            interface IDeviceEnumerationSettings;
+
             interface IDeviceInformation;
 
             interface IDeviceInformation2;
 
             interface IDeviceInformationCustomPairing;
+
+            interface IDeviceInformationCustomPairing2;
 
             interface IDeviceInformationPairing;
 
@@ -143,6 +153,8 @@ namespace Windows
 
             interface IDeviceInformationStatics2;
 
+            interface IDeviceInformationStatics3;
+
             interface IDeviceInformationUpdate;
 
             interface IDeviceInformationUpdate2;
@@ -151,7 +163,11 @@ namespace Windows
 
             interface IDevicePairingRequestedEventArgs2;
 
+            interface IDevicePairingRequestedEventArgs3;
+
             interface IDevicePairingResult;
+
+            interface IDevicePairingSetMembersRequestedEventArgs;
 
             interface IDevicePairingSettings;
 
@@ -198,6 +214,8 @@ namespace Windows
             runtimeclass DevicePairingRequestedEventArgs;
 
             runtimeclass DevicePairingResult;
+
+            runtimeclass DevicePairingSetMembersRequestedEventArgs;
 
             runtimeclass DevicePicker;
 
@@ -271,6 +289,8 @@ namespace Windows
 
                 interface Windows.Foundation.TypedEventHandler<Windows.Devices.Enumeration.DeviceInformationCustomPairing*, Windows.Devices.Enumeration.DevicePairingRequestedEventArgs*>;
 
+                interface Windows.Foundation.TypedEventHandler<Windows.Devices.Enumeration.DeviceInformationCustomPairing*, Windows.Devices.Enumeration.DevicePairingSetMembersRequestedEventArgs*>;
+
                 interface Windows.Foundation.TypedEventHandler<Windows.Devices.Enumeration.DevicePicker*, IInspectable*>;
 
                 interface Windows.Foundation.TypedEventHandler<Windows.Devices.Enumeration.DevicePicker*, Windows.Devices.Enumeration.DeviceDisconnectButtonClickedEventArgs*>;
@@ -329,7 +349,20 @@ namespace Windows
                 AssociationEndpointContainer = 6,
                 AssociationEndpointService   = 7,
                 [contract(Windows.Foundation.UniversalApiContract, 7.0)]
-                DevicePanel                  = 8
+                DevicePanel                  = 8,
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                AssociationEndpointProtocol  = 9
+            };
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            enum DevicePairingAddPairingSetMemberStatus
+            {
+                AddedToSet                               = 0,
+                CouldNotBeAddedToSet                     = 1,
+                SetDiscoveryNotAttemptedByProtocol       = 2,
+                SetDiscoveryCompletedByProtocol          = 3,
+                SetDiscoveryPartiallyCompletedByProtocol = 4,
+                Failed                                   = 5
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 2.0)]
@@ -342,7 +375,9 @@ namespace Windows
                 ProvidePin                = 0x4,
                 ConfirmPinMatch           = 0x8,
                 [contract(Windows.Foundation.UniversalApiContract, 8.0)]
-                ProvidePasswordCredential = 0x10
+                ProvidePasswordCredential = 0x10,
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                ProvideAddress            = 0x20
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -454,6 +489,14 @@ namespace Windows
                 [propget] HRESULT Id([out] [retval] HSTRING* value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Devices.Enumeration.DeviceAccessChangedEventArgs)]
+            [uuid(7580A878-7FD9-5CD7-8560-3C644B9B10DB)]
+            interface IDeviceAccessChangedEventArgs3 : IInspectable
+            {
+                [propget] HRESULT UserPromptRequired([out] [retval] boolean* value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [exclusiveto(Windows.Devices.Enumeration.DeviceAccessInformation)]
             [uuid(0BAA9A73-6DE5-4915-8DDD-9A0554A6F545)]
@@ -462,6 +505,14 @@ namespace Windows
                 [eventadd] HRESULT AccessChanged([in] Windows.Foundation.TypedEventHandler<Windows.Devices.Enumeration.DeviceAccessInformation*, Windows.Devices.Enumeration.DeviceAccessChangedEventArgs*>* handler, [out] [retval] EventRegistrationToken* cookie);
                 [eventremove] HRESULT AccessChanged([in] EventRegistrationToken cookie);
                 [propget] HRESULT CurrentStatus([out] [retval] Windows.Devices.Enumeration.DeviceAccessStatus* status);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Devices.Enumeration.DeviceAccessInformation)]
+            [uuid(E2B9DFF6-E88F-5D0A-9C1E-D788808DF47B)]
+            interface IDeviceAccessInformation2 : IInspectable
+            {
+                [propget] HRESULT UserPromptRequired([out] [retval] boolean* value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -488,6 +539,12 @@ namespace Windows
             interface IDeviceDisconnectButtonClickedEventArgs : IInspectable
             {
                 [propget] HRESULT Device([out] [retval] Windows.Devices.Enumeration.DeviceInformation** value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [uuid(F7710F66-9FF3-41C8-85EB-87F81148A30F)]
+            interface IDeviceEnumerationSettings : IInspectable
+            {
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -525,6 +582,16 @@ namespace Windows
                 [overload("PairAsync")] HRESULT PairWithProtectionLevelAndSettingsAsync([in] Windows.Devices.Enumeration.DevicePairingKinds pairingKindsSupported, [in] Windows.Devices.Enumeration.DevicePairingProtectionLevel minProtectionLevel, [in] Windows.Devices.Enumeration.IDevicePairingSettings* devicePairingSettings, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Devices.Enumeration.DevicePairingResult*>** result);
                 [eventadd] HRESULT PairingRequested([in] Windows.Foundation.TypedEventHandler<Windows.Devices.Enumeration.DeviceInformationCustomPairing*, Windows.Devices.Enumeration.DevicePairingRequestedEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
                 [eventremove] HRESULT PairingRequested([in] EventRegistrationToken token);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Devices.Enumeration.DeviceInformationCustomPairing)]
+            [uuid(0EBDA662-E696-5FA9-8F72-80CFEBCD851D)]
+            interface IDeviceInformationCustomPairing2 : IInspectable
+            {
+                HRESULT AddPairingSetMember([in] Windows.Devices.Enumeration.DeviceInformation* device);
+                [eventadd] HRESULT PairingSetMembersRequested([in] Windows.Foundation.TypedEventHandler<Windows.Devices.Enumeration.DeviceInformationCustomPairing*, Windows.Devices.Enumeration.DevicePairingSetMembersRequestedEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT PairingSetMembersRequested([in] EventRegistrationToken token);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -593,6 +660,16 @@ namespace Windows
                 [overload("CreateWatcher")] HRESULT CreateWatcherWithKindAqsFilterAndAdditionalProperties([in] HSTRING aqsFilter, [in] Windows.Foundation.Collections.IIterable<HSTRING>* additionalProperties, [in] Windows.Devices.Enumeration.DeviceInformationKind kind, [out] [retval] Windows.Devices.Enumeration.DeviceWatcher** watcher);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Devices.Enumeration.DeviceInformation)]
+            [uuid(25F06279-9364-5A6C-8A54-5D4A6D3D922A)]
+            interface IDeviceInformationStatics3 : IInspectable
+            {
+                [overload("CreateFromIdAsync")] HRESULT CreateFromIdAsyncWithAdditionalPropertiesKindAndSettings([in] HSTRING deviceId, [in] Windows.Foundation.Collections.IIterable<HSTRING>* additionalProperties, [in] Windows.Devices.Enumeration.DeviceInformationKind kind, [in] Windows.Devices.Enumeration.IDeviceEnumerationSettings* settings, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Devices.Enumeration.DeviceInformation*>** operation);
+                [overload("FindAllAsync")] HRESULT FindAllAsyncWithAqsFilterAdditionalPropertiesKindAndSettings([in] HSTRING aqsFilter, [in] Windows.Foundation.Collections.IIterable<HSTRING>* additionalProperties, [in] Windows.Devices.Enumeration.DeviceInformationKind kind, [in] Windows.Devices.Enumeration.IDeviceEnumerationSettings* settings, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.Devices.Enumeration.DeviceInformationCollection*>** operation);
+                [overload("CreateWatcher")] HRESULT CreateWatcherWithAqsFilterAdditionalPropertiesKindAndSettings([in] HSTRING aqsFilter, [in] Windows.Foundation.Collections.IIterable<HSTRING>* additionalProperties, [in] Windows.Devices.Enumeration.DeviceInformationKind kind, [in] Windows.Devices.Enumeration.IDeviceEnumerationSettings* settings, [out] [retval] Windows.Devices.Enumeration.DeviceWatcher** result);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [exclusiveto(Windows.Devices.Enumeration.DeviceInformationUpdate)]
             [uuid(8F315305-D972-44B7-A37E-9E822C78213B)]
@@ -631,6 +708,14 @@ namespace Windows
                 HRESULT AcceptWithPasswordCredential([in] Windows.Security.Credentials.PasswordCredential* passwordCredential);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Devices.Enumeration.DevicePairingRequestedEventArgs)]
+            [uuid(195E5A38-43DC-562F-BABE-EFC8B110088B)]
+            interface IDevicePairingRequestedEventArgs3 : IInspectable
+            {
+                HRESULT AcceptWithAddress([in] HSTRING address);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [exclusiveto(Windows.Devices.Enumeration.DevicePairingResult)]
             [uuid(072B02BF-DD95-4025-9B37-DE51ADBA37B7)]
@@ -638,6 +723,16 @@ namespace Windows
             {
                 [propget] HRESULT Status([out] [retval] Windows.Devices.Enumeration.DevicePairingResultStatus* status);
                 [propget] HRESULT ProtectionLevelUsed([out] [retval] Windows.Devices.Enumeration.DevicePairingProtectionLevel* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Devices.Enumeration.DevicePairingSetMembersRequestedEventArgs)]
+            [uuid(7FB42CFF-ECAC-5012-8D7D-A1894680A349)]
+            interface IDevicePairingSetMembersRequestedEventArgs : IInspectable
+            {
+                [propget] HRESULT Status([out] [retval] Windows.Devices.Enumeration.DevicePairingAddPairingSetMemberStatus* value);
+                [propget] HRESULT ParentDeviceInformation([out] [retval] Windows.Devices.Enumeration.DeviceInformation** value);
+                [propget] HRESULT PairingSetMembers([out] [retval] Windows.Foundation.Collections.IVectorView<Windows.Devices.Enumeration.DeviceInformation*>** value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 2.0)]
@@ -786,6 +881,7 @@ namespace Windows
             {
                 [default] interface Windows.Devices.Enumeration.IDeviceAccessChangedEventArgs;
                 [contract(Windows.Foundation.UniversalApiContract, 3.0)] interface Windows.Devices.Enumeration.IDeviceAccessChangedEventArgs2;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Enumeration.IDeviceAccessChangedEventArgs3;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -795,6 +891,7 @@ namespace Windows
             runtimeclass DeviceAccessInformation
             {
                 [default] interface Windows.Devices.Enumeration.IDeviceAccessInformation;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Enumeration.IDeviceAccessInformation2;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -817,6 +914,7 @@ namespace Windows
             [marshaling_behavior(agile)]
             [static(Windows.Devices.Enumeration.IDeviceInformationStatics, Windows.Foundation.UniversalApiContract, 1.0)]
             [static(Windows.Devices.Enumeration.IDeviceInformationStatics2, Windows.Foundation.UniversalApiContract, 1.0)]
+            [static(Windows.Devices.Enumeration.IDeviceInformationStatics3, Windows.Foundation.UniversalApiContract, 19.0)]
             [threading(both)]
             runtimeclass DeviceInformation
             {
@@ -838,6 +936,7 @@ namespace Windows
             runtimeclass DeviceInformationCustomPairing
             {
                 [default] interface Windows.Devices.Enumeration.IDeviceInformationCustomPairing;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Enumeration.IDeviceInformationCustomPairing2;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -866,6 +965,7 @@ namespace Windows
             {
                 [default] interface Windows.Devices.Enumeration.IDevicePairingRequestedEventArgs;
                 [contract(Windows.Foundation.UniversalApiContract, 8.0)] interface Windows.Devices.Enumeration.IDevicePairingRequestedEventArgs2;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Devices.Enumeration.IDevicePairingRequestedEventArgs3;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -874,6 +974,13 @@ namespace Windows
             runtimeclass DevicePairingResult
             {
                 [default] interface Windows.Devices.Enumeration.IDevicePairingResult;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass DevicePairingSetMembersRequestedEventArgs
+            {
+                [default] interface Windows.Devices.Enumeration.IDevicePairingSetMembersRequestedEventArgs;
             }
 
             [activatable(Windows.Foundation.UniversalApiContract, 1.0)]

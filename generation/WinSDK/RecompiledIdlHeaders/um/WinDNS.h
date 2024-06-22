@@ -244,11 +244,14 @@ DNS_ADDR_ARRAY, *PDNS_ADDR_ARRAY;
 //
 
 //
-//  DNS port for both UDP and TCP is 53.
+//  DNS port for both UDP and TCP is 53. For DoT, the port is 853.
 //
 
 #define DNS_PORT_HOST_ORDER     (0x0035)    // port 53
 #define DNS_PORT_NET_ORDER      (0x3500)
+
+#define INTERNET_DEFAULT_DNS_PORT DNS_PORT_HOST_ORDER
+#define INTERNET_DEFAULT_DOT_PORT (853)
 
 //
 //  DNS UDP packets no more than 512 bytes
@@ -1532,7 +1535,6 @@ typedef enum _DNS_SVCB_PARAM_TYPE
     DnsSvcbParamEch            = 5,
     DnsSvcbParamIpv6Hint       = 6,
     DnsSvcbParamDohPath        = 7,
-    DnsSvcbParamDohPathQuad9   = 65380,
     DnsSvcbParamDohPathOpenDns = 65432,
 } DNS_SVCB_PARAM_TYPE;
 
@@ -1692,7 +1694,6 @@ typedef struct _DnsRecordFlags
     DWORD   Reserved    : 24;
 }
 DNS_RECORD_FLAGS;
-
 
 //
 //  Wire Record Sections
@@ -2215,6 +2216,20 @@ DnsRecordListFree(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 
 //
+//  Sets pfFlat to FALSE if a record has been parsed into its corresponding struct format and
+//  TRUE if it has been flat read (i.e. just a data buffer), ullFlags is currently unused and
+//  exists for forwards compatibility
+//
+
+DNS_STATUS
+WINAPI
+DnsIsFlatRecord(
+    _In_    PDNS_RECORD    pRecord,
+    _In_    ULONG64        ullFlags,
+    _Out_   BOOL           *pfFlat
+    );
+
+//
 //  DNS Query API
 //
 
@@ -2243,12 +2258,67 @@ DnsRecordListFree(
 #define DNS_QUERY_APPEND_MULTILABEL         0x00800000
 #define DNS_QUERY_DNSSEC_OK                 0x01000000  // Sets DNSSEC OK (DO) bit in query
 #define DNS_QUERY_DNSSEC_CHECKING_DISABLED  0x02000000  // Sets DNSSEC checking disabled (CD) bit in query
+#define DNS_QUERY_DNSSEC_REQUIRED           0x04000000  // Sets DNSSEC OK (DO) bit in query AND requires that response contains authenticated data (AD) bit set
 #define DNS_QUERY_RESERVED                  0xf0000000
 
 //  Backward compatibility with Win2K
 //  Do not use
 
 #define DNS_QUERY_CACHE_ONLY                DNS_QUERY_NO_WIRE_QUERY
+
+//
+//  When DNS_QUERY_PARSE_ALL_RECORDS is NOT set: the following records will be parsed:
+//  DNS_TYPE_A
+//  DNS_TYPE_NS
+//  DNS_TYPE_MD
+//  DNS_TYPE_MF
+//  DNS_TYPE_CNAME
+//  DNS_TYPE_SOA
+//  DNS_TYPE_MB
+//  DNS_TYPE_MG
+//  DNS_TYPE_MR
+//  DNS_TYPE_WKS
+//  DNS_TYPE_PTR
+//  DNS_TYPE_HINFO
+//  DNS_TYPE_MINFO
+//  DNS_TYPE_MX
+//  DNS_TYPE_TEXT
+//  DNS_TYPE_RP
+//  DNS_TYPE_AFSDB
+//  DNS_TYPE_X25
+//  DNS_TYPE_ISDN
+//  DNS_TYPE_RT
+//  DNS_TYPE_SIG
+//  DNS_TYPE_KEY
+//  DNS_TYPE_AAAA
+//  DNS_TYPE_SRV
+//  DNS_TYPE_ATMA
+//  DNS_TYPE_NAPTR
+//  DNS_TYPE_DNAME
+//  DNS_TYPE_OPT
+//  DNS_TYPE_DS
+//  DNS_TYPE_RRSIG
+//  DNS_TYPE_NSEC
+//  DNS_TYPE_DNSKEY
+//  DNS_TYPE_DHCID
+//  DNS_TYPE_NSEC3
+//  DNS_TYPE_NSEC3PARAM
+//  DNS_TYPE_TLSA
+//  DNS_TYPE_TKEY
+//  DNS_TYPE_TSIG
+//  DNS_TYPE_WINS
+//  DNS_TYPE_WINSR
+//  All other record types will be returned in flat format (so long as they are flat read compatible)
+//  and it is the caller's responsibility to parse them if needed
+//  NOTE: to get any other record types back in a parsed format (where available) one must set DNS_QUERY_PARSE_ALL_RECORDS
+//
+
+//
+//  When DNS_QUERY_PARSE_ALL_RECORDS is set: ONLY parsed records will be returned (unknown records which cannot be parsed will not be returned)
+//  NOTE: for backwards compatiblity one MUST set this flag to parse DNS_TYPE_SVCB/DNS_TYPE_HTTPS, or any new record types defined in the future
+//
+
+#define DNS_QUERY_PARSE_ALL_RECORDS         0x0400000000000000
 
 
 
@@ -2339,6 +2409,7 @@ typedef DNS_QUERY_COMPLETION_ROUTINE *PDNS_QUERY_COMPLETION_ROUTINE;
 
 #define DNS_CUSTOM_SERVER_TYPE_UDP 0x1
 #define DNS_CUSTOM_SERVER_TYPE_DOH 0x2
+#define DNS_CUSTOM_SERVER_TYPE_DOT 0x3
 
 #define DNS_CUSTOM_SERVER_UDP_FALLBACK 0x1
 
@@ -2357,6 +2428,7 @@ typedef struct _DNS_CUSTOM_SERVER
     union
     {
         [case(DNS_CUSTOM_SERVER_TYPE_DOH)] PWSTR  pwszTemplate;
+        [case(DNS_CUSTOM_SERVER_TYPE_DOT)] PWSTR  pwszHostname;
         [case(DNS_CUSTOM_SERVER_TYPE_UDP)] ;
     };
 
@@ -2373,6 +2445,7 @@ typedef struct _DNS_CUSTOM_SERVER
     union
     {
         PWSTR pwszTemplate;
+        PWSTR pwszHostname;
     };
 
     union
@@ -2493,6 +2566,7 @@ DNS_QUERY_REQUEST3, *PDNS_QUERY_REQUEST3;
 #define DNS_PROTOCOL_UDP            1
 #define DNS_PROTOCOL_TCP            2
 #define DNS_PROTOCOL_DOH            3
+#define DNS_PROTOCOL_DOT            4
 #define DNS_PROTOCOL_NO_WIRE        5
 
 #define DNS_QUERY_RAW_RESULTS_VERSION1  0x1

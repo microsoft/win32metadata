@@ -57,6 +57,7 @@ DEFINE_GUID(GUID_DEVINTERFACE_ZNSDISK,                0xb87941c5L, 0xffdb, 0x43c
 // not reported  through conventional APIs
 //
 
+DEFINE_GUID(GUID_DEVINTERFACE_HIDDEN_DISK,            0x7fccc86cL, 0x228a, 0x40ad, 0x8a, 0x58, 0xf5, 0x90, 0xaf, 0x7b, 0xfd, 0xce);
 DEFINE_GUID(GUID_DEVINTERFACE_SERVICE_VOLUME,         0x6ead3d82L, 0x25ec, 0x46bc, 0xb7, 0xfd, 0xc1, 0xf0, 0xdf, 0x8f, 0x50, 0x37);
 DEFINE_GUID(GUID_DEVINTERFACE_HIDDEN_VOLUME,          0x7f108a28L, 0x9833, 0x4b3b, 0xb7, 0x80, 0x2c, 0x6b, 0x5f, 0xa5, 0xc0, 0x62);
 
@@ -254,6 +255,10 @@ DEFINE_DEVPROPKEY(DEVPKEY_Storage_Gpt_Name,           0x4d1ebee8, 0x803, 0x4774,
 #define FILE_DEVICE_EVENT_COLLECTOR     0x0000005f
 #define FILE_DEVICE_USB4                0x00000060
 #define FILE_DEVICE_SOUNDWIRE           0x00000061
+#define FILE_DEVICE_FABRIC_NVME         0x00000062
+#define FILE_DEVICE_SVM                 0x00000063
+#define FILE_DEVICE_HARDWARE_ACCELERATOR 0x00000064
+#define FILE_DEVICE_I3C                 0x00000065
 
 //
 // Macro definition for defining IOCTL and FSCTL function control codes.  Note
@@ -914,6 +919,7 @@ typedef enum _STORAGE_BUS_TYPE {
     BusTypeNvme,
     BusTypeSCM,
     BusTypeUfs,
+    BusTypeNvmeof,
     BusTypeMax,
     BusTypeMaxReserved = 0x7F
 } STORAGE_BUS_TYPE, *PSTORAGE_BUS_TYPE;
@@ -1121,6 +1127,9 @@ typedef enum _STORAGE_PROPERTY_ID {
     StorageDeviceLedStateProperty,
     StorageDeviceSelfEncryptionProperty = 64,
     StorageFruIdProperty,
+    StorageStackProperty,
+    StorageAdapterProtocolSpecificPropertyEx,
+    StorageDeviceProtocolSpecificPropertyEx,
 } STORAGE_PROPERTY_ID, *PSTORAGE_PROPERTY_ID;
 
 
@@ -1474,7 +1483,8 @@ typedef struct _STORAGE_MINIPORT_DESCRIPTOR {
     union {
         struct {
             BYTE  LogicalPoFxForDisk : 1;
-            BYTE  Reserved : 7;
+            BYTE  ForwardIo : 1;
+            BYTE  Reserved : 6;
         } DUMMYSTRUCTNAME;
         BYTE  AsBYTE ;
     } Flags;
@@ -1858,12 +1868,15 @@ typedef enum _STORAGE_CRYPTO_KEY_SIZE {
 
 } STORAGE_CRYPTO_KEY_SIZE, *PSTORAGE_CRYPTO_KEY_SIZE;
 
+#pragma warning(push)
+#pragma warning(disable:4201) // nameless struct/unions
+
 #define STORAGE_CRYPTO_CAPABILITY_VERSION_1           1
 
 typedef struct _STORAGE_CRYPTO_CAPABILITY {
 
     //
-    // To enable versioning of this structure. This shall bet set
+    // To enable versioning of this structure. This shall be set
     // to STORAGE_CRYPTO_CAPABILITY_VERSION_1
     //
 
@@ -1904,6 +1917,72 @@ typedef struct _STORAGE_CRYPTO_CAPABILITY {
 
 } STORAGE_CRYPTO_CAPABILITY, *PSTORAGE_CRYPTO_CAPABILITY;
 
+#define STORAGE_CRYPTO_CAPABILITY_VERSION_2           2
+
+typedef struct _STORAGE_CRYPTO_CAPABILITY_V2 {
+
+    //
+    // To enable versioning of this structure. This shall be set
+    // to STORAGE_CRYPTO_CAPABILITY_VERSION_2
+    //
+
+    DWORD Version;
+
+    //
+    // Size of this structure. This shall be set to
+    // sizeof(STORAGE_CRYPTO_CAPABILITY_V2)
+    //
+
+    DWORD Size;
+
+    //
+    // The index for this crypto capability
+    //
+
+    DWORD CryptoCapabilityIndex;
+
+    //
+    // Supported algorithm for this crypto capability
+    //
+
+    STORAGE_CRYPTO_ALGORITHM_ID AlgorithmId;
+
+    //
+    // The supported key size for this algorithm
+    //
+
+    STORAGE_CRYPTO_KEY_SIZE KeySize;
+
+    //
+    // Bitmask for the supported sizes of encryptable data blocks. When bit
+    // j is set (j=0...7), a data unit size of 512*2^j bytes is supported.
+    // Bit 0 represents 512 bytes, 1 represents 1 KB, bit 7 represents 64 KB
+    //
+
+    DWORD DataUnitSizeBitmask;
+
+    //
+    // Maximum supported initialization vector bit size. This can be 0 if
+    // this concept does not apply to the algorithm.
+    //
+
+    WORD   MaxIVBitSize;
+    WORD   Reserved;
+
+    //
+    // Bitmask of compliant security standards at the algorithm level.
+    //
+
+    union {
+        struct {
+            BYTE  FIPS : 1;
+            BYTE  Reserved : 7;
+        };
+        BYTE  AsUchar;
+    } SecurityComplianceBitmask;
+
+} STORAGE_CRYPTO_CAPABILITY_V2, *PSTORAGE_CRYPTO_CAPABILITY_V2;
+
 #define STORAGE_CRYPTO_DESCRIPTOR_VERSION_1           1
 
 typedef struct _STORAGE_CRYPTO_DESCRIPTOR {
@@ -1942,6 +2021,73 @@ typedef struct _STORAGE_CRYPTO_DESCRIPTOR {
     _Field_size_(NumCryptoCapabilities) STORAGE_CRYPTO_CAPABILITY CryptoCapabilities[ANYSIZE_ARRAY];
 
 } STORAGE_CRYPTO_DESCRIPTOR, *PSTORAGE_CRYPTO_DESCRIPTOR;
+
+#define STORAGE_CRYPTO_DESCRIPTOR_VERSION_2           2
+
+typedef enum _STORAGE_ICE_TYPE {
+
+    StorageIceTypeUnknown = 0,
+    StorageIceTypeUfs,
+    StorageIceTypeNvme,
+
+} STORAGE_ICE_TYPE, *PSTORAGE_ICE_TYPE;
+
+typedef struct _STORAGE_CRYPTO_DESCRIPTOR_V2 {
+
+    //
+    // Keep compatible with STORAGE_DESCRIPTOR_HEADER
+    // Shall be set to STORAGE_CRYPTO_DESCRIPTOR_VERSION_2
+    //
+
+    DWORD Version;
+
+    //
+    // Keep compatible with STORAGE_DESCRIPTOR_HEADER
+    // Shall be set to sizeof(STORAGE_CRYPTO_DESCRIPTOR_V2)
+    //
+
+    DWORD Size;
+
+    //
+    // The number of keys the crypto engine in the adapter supports
+    //
+
+    DWORD NumKeysSupported;
+
+    //
+    // The number of crypto capability entries. This outlines the
+    // crypto configurations the adapter supports
+    //
+
+    DWORD NumCryptoCapabilities;
+
+    //
+    // Which type of inline crypto engine this is
+    //
+
+    STORAGE_ICE_TYPE IceType;
+
+    //
+    // Bitmask of compliant security standards.
+    //
+
+    union {
+        struct {
+            BYTE  FIPS : 1;
+            BYTE  Reserved : 7;
+        };
+        BYTE  AsUchar;
+    } SecurityComplianceBitmask;
+
+    //
+    // Array of Crypto Capabilities
+    //
+
+    _Field_size_(NumCryptoCapabilities) STORAGE_CRYPTO_CAPABILITY_V2 CryptoCapabilities[ANYSIZE_ARRAY];
+
+} STORAGE_CRYPTO_DESCRIPTOR_V2, *PSTORAGE_CRYPTO_DESCRIPTOR_V2;
+
+#pragma warning(pop)
 
 
 //
@@ -2139,18 +2285,48 @@ typedef enum _STORAGE_PROTOCOL_NVME_DATA_TYPE {
                                 //      ProtocolDataRequestSubValue3 - Controller Id (CNTID)
                                 //      ProtocolDataRequestSubValue4 - Command Set Identifier (CSI)
 
-
     NVMeDataTypeLogPage,        // Retrieved by command - GET LOG PAGE
                                 // Corresponding values in STORAGE_PROTOCOL_SPECIFIC_DATA,
                                 //      ProtocolDataRequestValue - Log page id
                                 //      ProtocolDataRequestSubValue - Lower 32-bit offset value
                                 //      ProtocolDataRequestSubValue2 - Upper 32-bit offset value
                                 //      ProtocolDataRequestSubValue3 - Log specific identifier
+                                //      ProtocolDataRequestSubValue4 - STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE
 
-    NVMeDataTypeFeature,        // Retrieved by command - GET FEATURES
-                                // Corresponding values in STORAGE_PROTOCOL_SPECIFIC_DATA,
-                                //      ProtocolDataRequestValue - Defined in NVME_FEATURES
+    NVMeDataTypeFeature,        // Retrieved by command - GET FEATURES or SET FEATURES
+                                // Corresponding values in STORAGE_PROTOCOL_SPECIFIC_DATA (get) or STORAGE_PROTOCOL_SPECIFIC_DATA_EXT (set),
+                                //      ProtocolDataRequestValue - Defined in NVME_CDW10_GET_FEATURES / NVME_CDW10_SET_FEATURES
                                 //      ProtocolDataRequestSubValue - Defined in NVME_CDW11_FEATURES
+                                //      ProtocolDataRequestSubValue2 - Defined in NVME_CDW12_FEATURES
+                                //      ProtocolDataRequestSubValue3 - Defined in NVME_CDW13_FEATURES
+                                //      ProtocolDataRequestSubValue4 - Defined in NVME_CDW14_FEATURES
+                                //      ProtocolDataRequestSubValue5 - Defined in NVME_CDW15_FEATURES
+
+    NVMeDataTypeLogPageEx,      // Retrieved by command - GET LOG PAGE
+                                // Corresponding values in STORAGE_PROTOCOL_SPECIFIC_DATA_EXT,
+                                //      ProtocolDataValue - Defined in NVME_CDW10_GET_LOG_PAGE
+                                //      ProtocolDataSubValue - Defined in NVME_CDW11_GET_LOG_PAGE
+                                //      ProtocolDataSubValue2 - Defined in NVME_CDW12_GET_LOG_PAGE
+                                //      ProtocolDataSubValue3 - Defined in NVME_CDW13_GET_LOG_PAGE
+                                //      ProtocolDataSubValue4 - Defined in NVME_CDW14_GET_LOG_PAGE
+                                //      ProtocolDataSubValue5 - Defined in NVME_CDW15_GET_LOG_PAGE (not used currently)
+                                //      ProtocolDataSubValue6 - Namespace ID
+
+    NVMeDataTypeFeatureEx,      // Retrieved by command - GET FEATURES or SET FEATURES
+                                // Corresponding values in STORAGE_cd PROTOCOL_SPECIFIC_DATA_EXT,
+                                //      ProtocolDataValue - Defined in NVME_CDW10_GET_FEATURES / NVME_CDW10_SET_FEATURES
+                                //      ProtocolDataSubValue - Defined in NVME_CDW11_FEATURES
+                                //      ProtocolDataSubValue2 - Defined in NVME_CDW12_FEATURES
+                                //      ProtocolDataSubValue3 - Defined in NVME_CDW13_FEATURES
+                                //      ProtocolDataSubValue4 - Defined in NVME_CDW14_FEATURES
+                                //      ProtocolDataSubValue5 - Defined in NVME_CDW15_FEATURES
+                                //      ProtocolDataSubValue6 - Namespace ID
+
+    // For NVMeDataTypeLogPageEx and NVMeDataTypeFeatureEx the namespace ID field is only used for requests sent to 
+    // an adapter or controller.  In these scenarios, the caller sets ProtocolDataSubValue6 to either 0 (NSID not used) or 
+    // FFFFFFFFF (request applies to all namespaces). For requests being targeted at a disk, the storage stack driver
+    // will substitute in the corresponding NSID automatically.  Callers must set ProtocolDataSubValue6 to 0 for these requests.
+
 } STORAGE_PROTOCOL_NVME_DATA_TYPE, *PSTORAGE_PROTOCOL_NVME_DATA_TYPE;
 
 typedef enum _STORAGE_PROTOCOL_ATA_DATA_TYPE {
@@ -2182,11 +2358,11 @@ typedef union _STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE {
 
     struct {
 
-        DWORD RetainAsynEvent : 1;
-
-        DWORD LogSpecificField : 4;
-
-        DWORD Reserved : 27;
+        DWORD RetainAsynEvent   :  1;
+        DWORD LogSpecificField  :  4;
+        DWORD Reserved0         :  3;
+        DWORD UUIDIndex         :  7;
+        DWORD Reserved          : 17;
 
     } DUMMYSTRUCTNAME;
 
@@ -2229,12 +2405,12 @@ typedef struct _STORAGE_PROTOCOL_SPECIFIC_DATA {
 typedef struct _STORAGE_PROTOCOL_SPECIFIC_DATA_EXT {
 
     STORAGE_PROTOCOL_TYPE ProtocolType;
-    DWORD   DataType;                   // The value will be protocol specific, as defined in STORAGE_PROTOCOL_NVME_DATA_TYPE or STORAGE_PROTOCOL_ATA_DATA_TYPE.
+    DWORD   DataType;                  // The value will be protocol specific, as defined in STORAGE_PROTOCOL_NVME_DATA_TYPE or STORAGE_PROTOCOL_ATA_DATA_TYPE.
 
     DWORD   ProtocolDataValue;
     DWORD   ProtocolDataSubValue;      // Data sub request value
 
-    DWORD   ProtocolDataOffset;         // The offset of data buffer is from beginning of this data structure.
+    DWORD   ProtocolDataOffset;        // The offset of data buffer is from beginning of this data structure.
     DWORD   ProtocolDataLength;
 
     DWORD   FixedProtocolReturnData;
@@ -2244,17 +2420,21 @@ typedef struct _STORAGE_PROTOCOL_SPECIFIC_DATA_EXT {
     DWORD   ProtocolDataSubValue4;     // Third additional data sub request value
 
     DWORD   ProtocolDataSubValue5;     // Fourth additional data sub request value
-    DWORD   Reserved[5];
+    DWORD   ProtocolDataSubValue6;     // Fifth additional data sub request value
+
+    DWORD   Reserved[4];
+
 } STORAGE_PROTOCOL_SPECIFIC_DATA_EXT, *PSTORAGE_PROTOCOL_SPECIFIC_DATA_EXT;
 
 //
-// Input parameters for StorageAdapterProtocolSpecificProperty (or StorageDeviceProtocolSpecificProperty) & PropertyStandardQuery
+// Input parameter for StorageAdapterProtocolSpecificProperty (or StorageDeviceProtocolSpecificProperty) & PropertyStandardQuery
 // will be data structure STORAGE_PROPERTY_QUERY, where the data field "AdditionalParameters" is a buffer
 // in format of STORAGE_PROTOCOL_SPECIFIC_DATA.
 //
 
 //
-// Out parameters for StorageAdapterProtocolSpecificProperty (or StorageDeviceProtocolSpecificProperty) & PropertyStandardQuery
+// Out parameter for StorageAdapterProtocolSpecificProperty (or StorageDeviceProtocolSpecificProperty) & PropertyStandardQuery
+// will be STORAGE_PROTOCOL_DATA_DESCRIPTOR.
 //
 typedef struct _STORAGE_PROTOCOL_DATA_DESCRIPTOR {
 
@@ -2266,13 +2446,23 @@ typedef struct _STORAGE_PROTOCOL_DATA_DESCRIPTOR {
 } STORAGE_PROTOCOL_DATA_DESCRIPTOR, *PSTORAGE_PROTOCOL_DATA_DESCRIPTOR;
 
 //
-// Input parameters for StorageAdapterProtocolSpecificProperty (or StorageDeviceProtocolSpecificProperty) & PropertyStandardQuery (or PropertyStandardSet)
-// will be data structure STORAGE_PROPERTY_QUERY/STORAGE_PROPERTY_SET, where the data field "AdditionalParameters" is a buffer
-// in format of STORAGE_PROTOCOL_SPECIFIC_DATA.
+// Input parameter for StorageAdapterProtocolSpecificProperty (or StorageDeviceProtocolSpecificProperty) & PropertyStandardSet
+// will be data structure STORAGE_PROPERTY_SET, where the data field "AdditionalParameters" is a buffer
+// in format of STORAGE_PROTOCOL_SPECIFIC_DATA_EXT.
 //
 
 //
-// Out parameters for StorageAdapterProtocolSpecificProperty (or StorageDeviceProtocolSpecificProperty) & PropertyStandardQuery (or PropertyStandardSet)
+// Input parameter for StorageAdapterProtocolSpecificPropertyEx (or StorageDeviceProtocolSpecificPropertyEx) & PropertyStandardQuery (or PropertyStandardSet)
+// will be data structure STORAGE_PROPERTY_QUERY/STORAGE_PROPERTY_SET, where the data field "AdditionalParameters" is a buffer
+// in format of STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT.
+//
+// N.B. this differs from the non-Ex properties which use STORAGE_PROTOCOL_SPECIFIC_DATA_EXT in the AdditionalParameters field.
+//
+
+//
+// Out parameter for StorageAdapterProtocolSpecificProperty/StorageAdapterProtocolSpecificPropertyEx
+// (or StorageDeviceProtocolSpecificProperty/StorageDeviceProtocolSpecificPropertyEx) & PropertyStandardSet
+// will be STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT.
 //
 typedef struct _STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT {
 
@@ -2283,6 +2473,11 @@ typedef struct _STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT {
 
 } STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT, *PSTORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT;
 
+//
+// For StorageAdapterProtocolSpecificPropertyEx/StorageDeviceProtocolSpecificPropertyEx we require an actual
+// version whereas the older properties used the sizeof as a version.
+//
+#define STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT_VERSION 1
 
 //
 // Parameters for StorageAdapterTemperatureProperty (or StorageDeviceTemperatureProperty) & PropertyStandardQuery
@@ -2979,6 +3174,39 @@ typedef struct _STORAGE_HW_ENDURANCE_DATA_DESCRIPTOR {
 
 } STORAGE_HW_ENDURANCE_DATA_DESCRIPTOR, *PSTORAGE_HW_ENDURANCE_DATA_DESCRIPTOR;
 
+//
+// Output buffer for StorageStackProperty.
+//
+
+typedef enum _STORAGE_STACK_TYPE {
+    StorageStackTypeUnknown = 0,
+    StorageStackTypeScsi,
+    StorageStackTypeNVMe,
+} STORAGE_STACK_TYPE, *PSTORAGE_STACK_TYPE;
+
+typedef _Struct_size_bytes_(Size) struct _STORAGE_STACK_DESCRIPTOR {
+
+    //
+    // Size of this structure serves as the version
+    //
+
+    DWORD Version;
+
+    //
+    // Size of buffer. The returned value indicates how big the buffer should be
+    // to store complete data.
+    //
+
+    DWORD Size;
+
+    //
+    // Type of storage stack for the device.
+    //
+
+    STORAGE_STACK_TYPE StorageStackType;
+
+} STORAGE_STACK_DESCRIPTOR, *PSTORAGE_STACK_DESCRIPTOR;
+
 #pragma warning(pop)
 
 //
@@ -3123,6 +3351,7 @@ typedef DWORD DEVICE_DATA_MANAGEMENT_SET_ACTION, DEVICE_DSM_ACTION;
 #define DeviceDsmAction_GetFreeSpace            (0x0000001Bu | DeviceDsmActionFlag_NonDestructive)
 #define DeviceDsmAction_ConversionQuery         (0x0000001Cu | DeviceDsmActionFlag_NonDestructive)
 #define DeviceDsmAction_VdtSet                  (0x0000001Du)
+#define DeviceDsmAction_QueryPreferLocalRepair  (0x0000001Eu | DeviceDsmActionFlag_NonDestructive)
 
 //
 // DEVICE_DSM_INPUT.Flags
@@ -3715,6 +3944,34 @@ typedef struct _DEVICE_DATA_SET_REPAIR_OUTPUT {
 
 ////////////////////////////////////////////////////////////////////////////////
 //
+// DeviceDsmAction_QueryPreferLocalRepair
+//
+
+typedef struct _DEVICE_DSM_QUERY_PREFER_LOCAL_REPAIR_OUTPUT {
+
+    DWORD Version;
+    BOOLEAN PreferLocalRepair;
+
+} DEVICE_DSM_QUERY_PREFER_LOCAL_REPAIR_OUTPUT, *PDEVICE_DSM_QUERY_PREFER_LOCAL_REPAIR_OUTPUT;
+
+//
+// SingleRange    - No
+// ParameterBlock - No
+// Output         - Yes
+// OutputBlock    - Yes
+//
+
+#define DeviceDsmDefinition_QueryPreferLocalRepair {DeviceDsmAction_QueryPreferLocalRepair, \
+                                                    FALSE,                                  \
+                                                    0,                                      \
+                                                    0,                                      \
+                                                    TRUE,                                   \
+                                                    __alignof(DEVICE_DSM_QUERY_PREFER_LOCAL_REPAIR_OUTPUT), \
+                                                    sizeof(DEVICE_DSM_QUERY_PREFER_LOCAL_REPAIR_OUTPUT)}
+
+
+////////////////////////////////////////////////////////////////////////////////
+//
 // DeviceDsmAction_Scrub
 //
 
@@ -4226,7 +4483,11 @@ typedef struct _DEVICE_DSM_REPORT_ZONES_DATA {
 
     DWORD Size;
 
+    //
+    // Represents the number of ZoneDescriptors.
+    //
     DWORD ZoneCount;
+
     STORAGE_ZONES_ATTRIBUTES Attributes;
 
     DWORD Reserved0;
@@ -6420,16 +6681,28 @@ typedef _Struct_size_bytes_(Size) struct _STORAGE_COUNTERS {
 #define STORAGE_HW_FIRMWARE_REQUEST_FLAG_FIRST_SEGMENT                  0x00000004
 
 //
+// Indicate that the existing firmware in slot should be activated immediately without 
+// controller reset. Only valid for IOCTL_STORAGE_FIRMWARE_ACTIVATE.
+//
+#define STORAGE_HW_FIRMWARE_REQUEST_FLAG_SWITCH_TO_FIRMWARE_WITHOUT_RESET   0x10000000
+
+//
+// Indicate that any existing firmware in slot should be replaced with the downloaded image,
+// and activated with controller reset. Only valid for IOCTL_STORAGE_FIRMWARE_ACTIVATE.
+//
+#define STORAGE_HW_FIRMWARE_REQUEST_FLAG_REPLACE_AND_SWITCH_UPON_RESET      0x20000000
+
+//
 // Indicate that any existing firmware in slot should be replaced with the downloaded image.
 // Only valid for IOCTL_STORAGE_FIRMWARE_ACTIVATE.
 //
-#define STORAGE_HW_FIRMWARE_REQUEST_FLAG_REPLACE_EXISTING_IMAGE         0x40000000
+#define STORAGE_HW_FIRMWARE_REQUEST_FLAG_REPLACE_EXISTING_IMAGE             0x40000000
 
 //
-// Indicate that the existing firmware in slot should be activated.
+// Indicate that the existing firmware in slot should be activated with a controller reset.
 // Only valid for IOCTL_STORAGE_FIRMWARE_ACTIVATE.
 //
-#define STORAGE_HW_FIRMWARE_REQUEST_FLAG_SWITCH_TO_EXISTING_FIRMWARE    0x80000000
+#define STORAGE_HW_FIRMWARE_REQUEST_FLAG_SWITCH_TO_EXISTING_FIRMWARE        0x80000000
 
 //
 // Input parameter for IOCTL_STORAGE_FIRMWARE_GET_INFO
@@ -6595,7 +6868,8 @@ typedef struct _STORAGE_PROTOCOL_COMMAND {
     DWORD   Reserved0;
 
     DWORD   FixedProtocolReturnData;        // return data, optional. Some protocol, such as NVMe, may return a small amount data (DWORD0 from completion queue entry) without the need of separate device data transfer.
-    DWORD   Reserved1[3];
+    DWORD   FixedProtocolReturnData2;       // return data2, optional. Some protocol, such as NVMe, may return a small amount data (DWORD1 from completion queue entry) without the need of separate device data transfer.
+    DWORD   Reserved1[2];
 
     _Field_size_bytes_full_(CommandLength) BYTE  Command[ANYSIZE_ARRAY];
 
@@ -6637,7 +6911,7 @@ typedef struct _STORAGE_PROTOCOL_COMMAND {
 //  1.  When flag STORAGE_PROTOCOL_COMMAND_FLAG_ADAPTER_REQUEST is set, or the request is sent through adapter, namespace Id from "Command" field is used;
 //      otherwise, the underneath driver should determine namespace Id from the device that receives the command.
 //  2.  When a command fails, the "ErrorCode" field contains value from NVMe Completion Queue Entry - DW3 - Status Field.
-//  3.  "CommandLength" field must have value of 64. e.g. STORAGE_PROTOCOL_COMMAND_LENGTH_NVME.
+//  3.  "CommandLength" field must have value of 64. i.e. STORAGE_PROTOCOL_COMMAND_LENGTH_NVME.
 //  4.  "CommandSpecific" field must have value of either STORAGE_PROTOCOL_SPECIFIC_NVME_ADMIN_COMMAND, or STORAGE_PROTOCOL_SPECIFIC_NVME_NVM_COMMAND.
 //  5.  When a command succeeds, field "FixedProtocolReturnData" may contain value from NVMe Completion Queue Entry - DW0.
 //
@@ -10872,7 +11146,7 @@ typedef enum _CHANGER_DEVICE_PROBLEM_TYPE {
 #define FSCTL_GET_FILTER_FILE_IDENTIFIER        CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 241, METHOD_BUFFERED, FILE_ANY_ACCESS) // GET_FILTER_FILE_IDENTIFIER_INPUT, GET_FILTER_FILE_IDENTIFIER_OUTPUT
 #endif /* (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS1) */
 
-#if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS2)
+#if (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 #define FSCTL_STREAMS_QUERY_PARAMETERS          CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 241, METHOD_BUFFERED, FILE_ANY_ACCESS)
 #define FSCTL_STREAMS_ASSOCIATE_ID              CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 242, METHOD_BUFFERED, FILE_ANY_ACCESS)
 #define FSCTL_STREAMS_QUERY_ID                  CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 243, METHOD_BUFFERED, FILE_ANY_ACCESS)
@@ -10883,7 +11157,7 @@ typedef enum _CHANGER_DEVICE_PROBLEM_TYPE {
 
 #endif
 
-#if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS2)
+#if (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 
 #define FSCTL_REFS_DEALLOCATE_RANGES            CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 246, METHOD_BUFFERED, FILE_ANY_ACCESS)
 #endif
@@ -10918,14 +11192,14 @@ typedef enum _CHANGER_DEVICE_PROBLEM_TYPE {
 #if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS1)
 #define FSCTL_SET_REPARSE_POINT_EX              CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 259, METHOD_BUFFERED, FILE_SPECIAL_ACCESS) // REPARSE_DATA_BUFFER_EX
 #endif /* (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS1) */
-#if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS5)
+#if (NTDDI_VERSION >= NTDDI_WIN10_RS5) || (NTDDI_VERSION >= NTDDI_WIN8) //Win8 check is for backward compatibility.
 #define FSCTL_REARRANGE_FILE                    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 264, METHOD_BUFFERED, FILE_READ_ACCESS | FILE_WRITE_ACCESS) // REARRANGE_FILE_DATA
 #define FSCTL_VIRTUAL_STORAGE_PASSTHROUGH       CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 265, METHOD_BUFFERED, FILE_ANY_ACCESS)
 #define FSCTL_GET_RETRIEVAL_POINTER_COUNT       CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 266, METHOD_NEITHER,  FILE_ANY_ACCESS) // STARTING_VCN_INPUT_BUFFER, RETRIEVAL_POINTER_COUNT
 #if defined(_WIN64)
 #define FSCTL_ENABLE_PER_IO_FLAGS               CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 267, METHOD_BUFFERED, FILE_ANY_ACCESS)
 #endif /* _WIN64 */
-#endif /* (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS5) */
+#endif /* (NTDDI_VERSION >= NTDDI_WIN10_RS5) */
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
 #define FSCTL_QUERY_ASYNC_DUPLICATE_EXTENTS_STATUS  CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 268, METHOD_BUFFERED, FILE_ANY_ACCESS)
 #endif
@@ -10970,10 +11244,19 @@ typedef enum _CHANGER_DEVICE_PROBLEM_TYPE {
 #if (NTDDI_VERSION >= NTDDI_WIN10_CU)
 #define FSCTL_UPGRADE_VOLUME                    CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 289, METHOD_BUFFERED, FILE_ANY_ACCESS)
 #endif
-/* ABRACADABRA_WIN10_ZN?  ABRACADABRA_WIN10_ZN? */
-#if (NTDDI_VERSION >= NTDDI_WIN10_CU)
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
 #define FSCTL_REFS_SET_VOLUME_IO_METRICS_INFO       CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 290, METHOD_BUFFERED, FILE_ANY_ACCESS)
 #define FSCTL_REFS_QUERY_VOLUME_IO_METRICS_INFO     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 291, METHOD_BUFFERED, FILE_ANY_ACCESS)
+#endif // #if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#define FSCTL_REFS_SET_ROLLBACK_PROTECTION_INFO     CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 292, METHOD_BUFFERED, FILE_ANY_ACCESS) // REFS_SET_ROLLBACK_PROTECTION_INFO_INPUT_BUFFER
+#define FSCTL_REFS_QUERY_ROLLBACK_PROTECTION_INFO   CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 293, METHOD_BUFFERED, FILE_ANY_ACCESS) // REFS_QUERY_ROLLBACK_PROTECTION_INFO_OUTPUT_BUFFER
+#endif // #if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#define FSCTL_FILE_SOV_CHECK_RANGE                  CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 294, METHOD_BUFFERED, FILE_ANY_ACCESS)
+#endif
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#define FSCTL_CASCADES_REFS_SET_FILE_REMOTE         CTL_CODE(FILE_DEVICE_FILE_SYSTEM, 295, METHOD_BUFFERED, FILE_ANY_ACCESS)
 #endif
 //
 // AVIO IOCTLS.
@@ -11102,9 +11385,16 @@ typedef struct {
     WORD   MetadataChecksumType;
 
     BYTE  Reserved0[6];
-    LARGE_INTEGER Reserved[8];
+
+    DWORD DriverMajorVersion;
+    DWORD DriverMinorVersion;
+
+    LARGE_INTEGER Reserved[7];
 
 } REFS_VOLUME_DATA_BUFFER, *PREFS_VOLUME_DATA_BUFFER;
+
+#define REFS_VOLUME_DATA_BUFFER_CONTAINS_DRIVER_VERSION(VOLUME_DATA_BUFFER) \
+    ((VOLUME_DATA_BUFFER)->ByteCount >= RTL_SIZEOF_THROUGH_FIELD( REFS_VOLUME_DATA_BUFFER, DriverMinorVersion ))
 
 #endif /* _WIN32_WINNT >= _WIN32_WINNT_WIN8 */
 
@@ -11168,7 +11458,7 @@ typedef struct RETRIEVAL_POINTERS_BUFFER {
 } RETRIEVAL_POINTERS_BUFFER, *PRETRIEVAL_POINTERS_BUFFER;
 #endif /* _WIN32_WINNT >= _WIN32_WINNT_NT4 */
 
-#if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS2)
+#if (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 //
 //==================== FSCTL_GET_RETRIEVAL_POINTERS_AND_REFCOUNT ======================
 //
@@ -11190,9 +11480,9 @@ typedef struct RETRIEVAL_POINTERS_AND_REFCOUNT_BUFFER {
     } Extents[1];
 
 } RETRIEVAL_POINTERS_AND_REFCOUNT_BUFFER, *PRETRIEVAL_POINTERS_AND_REFCOUNT_BUFFER;
-#endif /* _WIN32_WINNT >= _WIN32_WINNT_WIN10_RS2 */
+#endif /* (NTDDI_VERSION >= NTDDI_WIN10_RS2) */
 
-#if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS5)
+#if (NTDDI_VERSION >= NTDDI_WIN10_RS5) || (NTDDI_VERSION >= NTDDI_WIN8) //Win8 check is for backward compatibility.
 //
 //==================== FSCTL_GET_RETRIEVAL_POINTER_COUNT ======================
 //
@@ -11208,7 +11498,7 @@ typedef struct RETRIEVAL_POINTER_COUNT {
     DWORD ExtentCount;
 
 } RETRIEVAL_POINTER_COUNT, *PRETRIEVAL_POINTER_COUNT;
-#endif /* _WIN32_WINNT >= _WIN32_WINNT_WIN10_RS5 */
+#endif /* #if (NTDDI_VERSION >= NTDDI_WIN10_RS5) */
 
 #if (_WIN32_WINNT >= _WIN32_WINNT_NT4)
 //
@@ -12555,7 +12845,22 @@ typedef struct _ENCRYPTED_DATA_INFO {
 //  Flag to indicate the encrypted file is sparse
 //
 
-#define ENCRYPTED_DATA_INFO_SPARSE_FILE    1
+#define ENCRYPTED_DATA_INFO_SPARSE_FILE        0x00000001
+
+//
+//  This encrypted file data is from a filesystem which has support
+//  for sparse data ranges (e.g. ReFS) for non-sparse files.
+//
+
+#define ENCRYPTED_DATA_INFO_SPARSE_DATA        0x00000002
+
+//
+//  This encrypted file data is for a sparse file from a filesystem
+//  which has a 4k sparse data unit size.  It cannot be restored to
+//  a filesystem with larger sparse unit size.
+//
+
+#define ENCRYPTED_DATA_INFO_4K_SPARSE_UNIT     0x00000004
 
 typedef struct _EXTENDED_ENCRYPTED_DATA_INFO {
 
@@ -12575,7 +12880,7 @@ typedef struct _EXTENDED_ENCRYPTED_DATA_INFO {
     DWORD Length;
 
     //
-    //  Encrypted data flags (currently only sparse is defined)
+    //  Encrypted data flags
     //
 
     DWORD Flags;
@@ -13837,7 +14142,7 @@ typedef struct _FILE_FS_PERSISTENT_VOLUME_INFORMATION {
 
 #endif // #if (NTDDI_VERSION >= NTDDI_WIN10_MN)
 
-#if defined(NTDDI_WIN10_NI) && (NTDDI_VERSION >= NTDDI_WIN10_NI)
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
 
 //
 //  The volume was formatted as a developer volume.  This can be used by the
@@ -13865,7 +14170,7 @@ typedef struct _FILE_FS_PERSISTENT_VOLUME_INFORMATION {
 
 #define PERSISTENT_VOLUME_STATE_TRUSTED_VOLUME                      (0x00004000)
 
-#endif // #if (NTDDI_VERSION >= NTDDI_WIN10_NI)
+#endif // #if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
 
 //
 //==================== FSCTL_QUERY_FILE_SYSTEM_RECOGNITION ====================
@@ -13922,7 +14227,7 @@ typedef struct _REQUEST_OPLOCK_INPUT_BUFFER {
 #define REQUEST_OPLOCK_OUTPUT_FLAG_ACK_REQUIRED                 (0x00000001)
 #define REQUEST_OPLOCK_OUTPUT_FLAG_MODES_PROVIDED               (0x00000002)
 
-#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
+#if (NTDDI_VERSION >= NTDDI_WIN10_CU)
 // If the oplock request fails with STATUS_OPLOCK_NOT_GRANTED, this flag indicates that the oplock
 // could not be granted due to the presence of a writable user-mapped section.
 #define REQUEST_OPLOCK_OUTPUT_FLAG_WRITABLE_SECTION_PRESENT     (0x00000004)
@@ -14751,7 +15056,7 @@ typedef struct _CSV_QUERY_VETO_FILE_DIRECT_IO_OUTPUT {
 
 #endif /* _WIN32_WINNT >= _WIN32_WINNT_WIN7 */
 
-#if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS5)
+#if (NTDDI_VERSION >= NTDDI_WIN10_RS5) || (NTDDI_VERSION >= NTDDI_WIN8) //Win8 check is for backward compatibility.
 //
 // Storage Reserve common definitions
 //
@@ -14766,7 +15071,7 @@ typedef enum _STORAGE_RESERVE_ID {
     StorageReserveIdMax
 
 } STORAGE_RESERVE_ID, *PSTORAGE_RESERVE_ID;
-#endif /* (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS5) */
+#endif /* (NTDDI_VERSION >= NTDDI_WIN10_RS5) */
 
 #if (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
 
@@ -14953,9 +15258,9 @@ typedef enum _QUERY_FILE_LAYOUT_FILTER_TYPE {
     QUERY_FILE_LAYOUT_FILTER_TYPE_NONE = 0,
     QUERY_FILE_LAYOUT_FILTER_TYPE_CLUSTERS = 1,
     QUERY_FILE_LAYOUT_FILTER_TYPE_FILEID = 2,
-#if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS5)
+#if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
     QUERY_FILE_LAYOUT_FILTER_TYPE_STORAGE_RESERVE_ID = 3,
-#endif /* (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS5) */
+#endif /* (NTDDI_VERSION >= NTDDI_WIN10_RS5) */
 
     QUERY_FILE_LAYOUT_NUM_FILTER_TYPES
 
@@ -15056,11 +15361,11 @@ typedef struct _QUERY_FILE_LAYOUT_INPUT {
         //  on a set of storage reserve IDs.
         //
 
-#if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS5)
+#if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
         _When_((FilterType == QUERY_FILE_LAYOUT_FILTER_TYPE_STORAGE_RESERVE_ID),
                 _Field_size_(FilterEntryCount))
         STORAGE_RESERVE_ID StorageReserveIds[1];
-#endif /* (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS5) */
+#endif /* (NTDDI_VERSION >= NTDDI_WIN10_RS5) */
 
     } Filter;
 
@@ -15152,7 +15457,8 @@ typedef struct _FILE_LAYOUT_ENTRY {
     //
     DWORD         ExtraInfoOffset;
 
-#if (_WIN32_WINNT < _WIN32_WINNT_WIN10_RS5)
+#if (NTDDI_VERSION < NTDDI_WIN10_RS5) && (NTDDI_VERSION < NTDDI_WIN10_RS1) //RS1  check is for backward compatibility.
+
     //
     // For alignment/future use.
     //
@@ -15173,7 +15479,7 @@ typedef struct _FILE_LAYOUT_ENTRY {
     // determine which fields are safe to access.
     //
     DWORD         ExtraInfoLength;
-#endif /* (_WIN32_WINNT < _WIN32_WINNT_WIN10_RS5) */
+#endif /* (NTDDI_VERSION < NTDDI_WIN10_RS5) */
 
     //
     // The structure may be extended here to support
@@ -15256,12 +15562,12 @@ typedef struct _FILE_LAYOUT_INFO_ENTRY {
     //
     USN                         Usn;
 
-#if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS5)
+#if (NTDDI_VERSION >= NTDDI_WIN10_RS5) || (NTDDI_VERSION >= NTDDI_WIN10_RS1) //RS1 check is for backward compatibility.
     //
     // Storage Reserve ID assigned to the file (0 for none).
     //
     STORAGE_RESERVE_ID  StorageReserveId;
-#endif /* (_WIN32_WINNT < _WIN32_WINNT_WIN10_RS5) */
+#endif /* (NTDDI_VERSION >= NTDDI_WIN10_RS5) */
 
 } FILE_LAYOUT_INFO_ENTRY, *PFILE_LAYOUT_INFO_ENTRY;
 
@@ -15401,7 +15707,8 @@ typedef struct _STREAM_EXTENT_ENTRY {
 #define CHECKSUM_TYPE_CRC64             (2)
 #define CHECKSUM_TYPE_ECC               (3)
 #define CHECKSUM_TYPE_SHA256            (4)
-#define CHECKSUM_TYPE_FIRST_UNUSED_TYPE (5)
+#define CHECKSUM_TYPE_XXH64             (5)
+#define CHECKSUM_TYPE_FIRST_UNUSED_TYPE (6)
 
 #define FSCTL_INTEGRITY_FLAG_CHECKSUM_ENFORCEMENT_OFF        (1)
 
@@ -16001,7 +16308,7 @@ typedef struct _DUPLICATE_EXTENTS_DATA {
     LARGE_INTEGER ByteCount;
 } DUPLICATE_EXTENTS_DATA, *PDUPLICATE_EXTENTS_DATA;
 
-#if ((_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS2) && defined(_WIN64))
+#if ((NTDDI_VERSION >= NTDDI_WIN10_RS2) && defined(_WIN64))
 
 //
 //  32/64 Bit thunking support structure
@@ -16014,7 +16321,7 @@ typedef struct _DUPLICATE_EXTENTS_DATA32 {
     LARGE_INTEGER ByteCount;
 } DUPLICATE_EXTENTS_DATA32, *PDUPLICATE_EXTENTS_DATA32;
 
-#endif /* ((_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS2) && defined(_WIN64)) */
+#endif /* ((NTDDI_VERSION >= NTDDI_WIN10_RS2) && defined(_WIN64)) */
 
 #endif /* (_WIN32_WINNT >= _WIN32_WINNT_WINBLUE) */
 
@@ -16089,7 +16396,7 @@ typedef struct _ASYNC_DUPLICATE_EXTENTS_STATUS {
 
 #endif
 
-#if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS2)
+#if (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 
 //
 //==================== FSCTL_QUERY_REFS_SMR_VOLUME_INFO =======================
@@ -16213,7 +16520,7 @@ typedef struct _STREAMS_QUERY_ID_OUTPUT_BUFFER {
 
 } STREAMS_QUERY_ID_OUTPUT_BUFFER, *PSTREAMS_QUERY_ID_OUTPUT_BUFFER;
 
-#endif // #if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS2)
+#endif // #if (NTDDI_VERSION >= NTDDI_WIN10_RS2)
 
 #if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS3)
 

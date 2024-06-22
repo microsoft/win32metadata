@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION)
 
 #if !defined(WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION)
-#define WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION 0x40000
+#define WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION 0x50000
 #endif // defined(WINDOWS_APPLICATIONMODEL_CALLS_CALLSVOIPCONTRACT_VERSION)
 
 #if !defined(WINDOWS_APPLICATIONMODEL_CALLS_LOCKSCREENCALLCONTRACT_VERSION)
@@ -104,7 +104,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -3783,7 +3783,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICallAnswerEventArgs = _uuidof(ICallAnswerEventArgs);
+                MIDL_CONST_ID IID& IID_ICallAnswerEventArgs = __uuidof(ICallAnswerEventArgs);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -3819,7 +3819,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICallRejectEventArgs = _uuidof(ICallRejectEventArgs);
+                MIDL_CONST_ID IID& IID_ICallRejectEventArgs = __uuidof(ICallRejectEventArgs);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -3855,7 +3855,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ICallStateChangeEventArgs = _uuidof(ICallStateChangeEventArgs);
+                MIDL_CONST_ID IID& IID_ICallStateChangeEventArgs = __uuidof(ICallStateChangeEventArgs);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -3889,7 +3889,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE Complete(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILockScreenCallEndCallDeferral = _uuidof(ILockScreenCallEndCallDeferral);
+                MIDL_CONST_ID IID& IID_ILockScreenCallEndCallDeferral = __uuidof(ILockScreenCallEndCallDeferral);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -3928,7 +3928,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILockScreenCallEndRequestedEventArgs = _uuidof(ILockScreenCallEndRequestedEventArgs);
+                MIDL_CONST_ID IID& IID_ILockScreenCallEndRequestedEventArgs = __uuidof(ILockScreenCallEndRequestedEventArgs);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -3982,7 +3982,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_ILockScreenCallUI = _uuidof(ILockScreenCallUI);
+                MIDL_CONST_ID IID& IID_ILockScreenCallUI = __uuidof(ILockScreenCallUI);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4018,7 +4018,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IMuteChangeEventArgs = _uuidof(IMuteChangeEventArgs);
+                MIDL_CONST_ID IID& IID_IMuteChangeEventArgs = __uuidof(IMuteChangeEventArgs);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4150,7 +4150,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCall = _uuidof(IPhoneCall);
+                MIDL_CONST_ID IID& IID_IPhoneCall = __uuidof(IPhoneCall);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4199,7 +4199,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallBlockingStatics = _uuidof(IPhoneCallBlockingStatics);
+                MIDL_CONST_ID IID& IID_IPhoneCallBlockingStatics = __uuidof(IPhoneCallBlockingStatics);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4334,7 +4334,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallHistoryEntry = _uuidof(IPhoneCallHistoryEntry);
+                MIDL_CONST_ID IID& IID_IPhoneCallHistoryEntry = __uuidof(IPhoneCallHistoryEntry);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4391,7 +4391,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallHistoryEntryAddress = _uuidof(IPhoneCallHistoryEntryAddress);
+                MIDL_CONST_ID IID& IID_IPhoneCallHistoryEntryAddress = __uuidof(IPhoneCallHistoryEntryAddress);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4429,7 +4429,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallHistoryEntryAddressFactory = _uuidof(IPhoneCallHistoryEntryAddressFactory);
+                MIDL_CONST_ID IID& IID_IPhoneCallHistoryEntryAddressFactory = __uuidof(IPhoneCallHistoryEntryAddressFactory);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4471,7 +4471,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallHistoryEntryQueryOptions = _uuidof(IPhoneCallHistoryEntryQueryOptions);
+                MIDL_CONST_ID IID& IID_IPhoneCallHistoryEntryQueryOptions = __uuidof(IPhoneCallHistoryEntryQueryOptions);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4507,7 +4507,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallHistoryEntryReader = _uuidof(IPhoneCallHistoryEntryReader);
+                MIDL_CONST_ID IID& IID_IPhoneCallHistoryEntryReader = __uuidof(IPhoneCallHistoryEntryReader);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4547,7 +4547,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallHistoryManagerForUser = _uuidof(IPhoneCallHistoryManagerForUser);
+                MIDL_CONST_ID IID& IID_IPhoneCallHistoryManagerForUser = __uuidof(IPhoneCallHistoryManagerForUser);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4584,7 +4584,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallHistoryManagerStatics = _uuidof(IPhoneCallHistoryManagerStatics);
+                MIDL_CONST_ID IID& IID_IPhoneCallHistoryManagerStatics = __uuidof(IPhoneCallHistoryManagerStatics);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4621,7 +4621,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallHistoryManagerStatics2 = _uuidof(IPhoneCallHistoryManagerStatics2);
+                MIDL_CONST_ID IID& IID_IPhoneCallHistoryManagerStatics2 = __uuidof(IPhoneCallHistoryManagerStatics2);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4699,7 +4699,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallHistoryStore = _uuidof(IPhoneCallHistoryStore);
+                MIDL_CONST_ID IID& IID_IPhoneCallHistoryStore = __uuidof(IPhoneCallHistoryStore);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4750,7 +4750,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallInfo = _uuidof(IPhoneCallInfo);
+                MIDL_CONST_ID IID& IID_IPhoneCallInfo = __uuidof(IPhoneCallInfo);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4787,7 +4787,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallManagerStatics = _uuidof(IPhoneCallManagerStatics);
+                MIDL_CONST_ID IID& IID_IPhoneCallManagerStatics = __uuidof(IPhoneCallManagerStatics);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4837,7 +4837,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallManagerStatics2 = _uuidof(IPhoneCallManagerStatics2);
+                MIDL_CONST_ID IID& IID_IPhoneCallManagerStatics2 = __uuidof(IPhoneCallManagerStatics2);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4874,7 +4874,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallStatics = _uuidof(IPhoneCallStatics);
+                MIDL_CONST_ID IID& IID_IPhoneCallStatics = __uuidof(IPhoneCallStatics);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4917,7 +4917,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallStore = _uuidof(IPhoneCallStore);
+                MIDL_CONST_ID IID& IID_IPhoneCallStore = __uuidof(IPhoneCallStore);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4953,7 +4953,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallVideoCapabilities = _uuidof(IPhoneCallVideoCapabilities);
+                MIDL_CONST_ID IID& IID_IPhoneCallVideoCapabilities = __uuidof(IPhoneCallVideoCapabilities);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -4990,7 +4990,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallVideoCapabilitiesManagerStatics = _uuidof(IPhoneCallVideoCapabilitiesManagerStatics);
+                MIDL_CONST_ID IID& IID_IPhoneCallVideoCapabilitiesManagerStatics = __uuidof(IPhoneCallVideoCapabilitiesManagerStatics);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5029,7 +5029,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneCallsResult = _uuidof(IPhoneCallsResult);
+                MIDL_CONST_ID IID& IID_IPhoneCallsResult = __uuidof(IPhoneCallsResult);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5098,7 +5098,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneDialOptions = _uuidof(IPhoneDialOptions);
+                MIDL_CONST_ID IID& IID_IPhoneDialOptions = __uuidof(IPhoneDialOptions);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5185,7 +5185,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLine = _uuidof(IPhoneLine);
+                MIDL_CONST_ID IID& IID_IPhoneLine = __uuidof(IPhoneLine);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5227,7 +5227,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLine2 = _uuidof(IPhoneLine2);
+                MIDL_CONST_ID IID& IID_IPhoneLine2 = __uuidof(IPhoneLine2);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5276,7 +5276,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLine3 = _uuidof(IPhoneLine3);
+                MIDL_CONST_ID IID& IID_IPhoneLine3 = __uuidof(IPhoneLine3);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5325,7 +5325,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLineCellularDetails = _uuidof(IPhoneLineCellularDetails);
+                MIDL_CONST_ID IID& IID_IPhoneLineCellularDetails = __uuidof(IPhoneLineCellularDetails);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5364,7 +5364,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLineConfiguration = _uuidof(IPhoneLineConfiguration);
+                MIDL_CONST_ID IID& IID_IPhoneLineConfiguration = __uuidof(IPhoneLineConfiguration);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5403,7 +5403,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLineDialResult = _uuidof(IPhoneLineDialResult);
+                MIDL_CONST_ID IID& IID_IPhoneLineDialResult = __uuidof(IPhoneLineDialResult);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5440,7 +5440,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLineStatics = _uuidof(IPhoneLineStatics);
+                MIDL_CONST_ID IID& IID_IPhoneLineStatics = __uuidof(IPhoneLineStatics);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5499,7 +5499,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLineTransportDevice = _uuidof(IPhoneLineTransportDevice);
+                MIDL_CONST_ID IID& IID_IPhoneLineTransportDevice = __uuidof(IPhoneLineTransportDevice);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5552,7 +5552,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLineTransportDevice2 = _uuidof(IPhoneLineTransportDevice2);
+                MIDL_CONST_ID IID& IID_IPhoneLineTransportDevice2 = __uuidof(IPhoneLineTransportDevice2);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5596,7 +5596,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLineTransportDeviceStatics = _uuidof(IPhoneLineTransportDeviceStatics);
+                MIDL_CONST_ID IID& IID_IPhoneLineTransportDeviceStatics = __uuidof(IPhoneLineTransportDeviceStatics);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5669,7 +5669,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLineWatcher = _uuidof(IPhoneLineWatcher);
+                MIDL_CONST_ID IID& IID_IPhoneLineWatcher = __uuidof(IPhoneLineWatcher);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5705,7 +5705,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneLineWatcherEventArgs = _uuidof(IPhoneLineWatcherEventArgs);
+                MIDL_CONST_ID IID& IID_IPhoneLineWatcherEventArgs = __uuidof(IPhoneLineWatcherEventArgs);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5750,7 +5750,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IPhoneVoicemail = _uuidof(IPhoneVoicemail);
+                MIDL_CONST_ID IID& IID_IPhoneVoicemail = __uuidof(IPhoneVoicemail);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5841,7 +5841,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoipCallCoordinator = _uuidof(IVoipCallCoordinator);
+                MIDL_CONST_ID IID& IID_IVoipCallCoordinator = __uuidof(IVoipCallCoordinator);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5885,7 +5885,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoipCallCoordinator2 = _uuidof(IVoipCallCoordinator2);
+                MIDL_CONST_ID IID& IID_IVoipCallCoordinator2 = __uuidof(IVoipCallCoordinator2);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5943,7 +5943,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoipCallCoordinator3 = _uuidof(IVoipCallCoordinator3);
+                MIDL_CONST_ID IID& IID_IVoipCallCoordinator3 = __uuidof(IVoipCallCoordinator3);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -5982,7 +5982,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoipCallCoordinator4 = _uuidof(IVoipCallCoordinator4);
+                MIDL_CONST_ID IID& IID_IVoipCallCoordinator4 = __uuidof(IVoipCallCoordinator4);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -6018,7 +6018,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoipCallCoordinatorStatics = _uuidof(IVoipCallCoordinatorStatics);
+                MIDL_CONST_ID IID& IID_IVoipCallCoordinatorStatics = __uuidof(IVoipCallCoordinatorStatics);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -6108,7 +6108,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE NotifyCallReady(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoipPhoneCall = _uuidof(IVoipPhoneCall);
+                MIDL_CONST_ID IID& IID_IVoipPhoneCall = __uuidof(IVoipPhoneCall);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -6145,7 +6145,7 @@ namespace ABI {
                     virtual HRESULT STDMETHODCALLTYPE TryShowAppUI(void) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoipPhoneCall2 = _uuidof(IVoipPhoneCall2);
+                MIDL_CONST_ID IID& IID_IVoipPhoneCall2 = __uuidof(IVoipPhoneCall2);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -6185,7 +6185,7 @@ namespace ABI {
                         ) = 0;
                 };
 
-                extern MIDL_CONST_ID IID& IID_IVoipPhoneCall3 = _uuidof(IVoipPhoneCall3);
+                MIDL_CONST_ID IID& IID_IVoipPhoneCall3 = __uuidof(IVoipPhoneCall3);
             } /* Calls */
         } /* ApplicationModel */
     } /* Windows */
@@ -6404,8 +6404,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.ApplicationModel.Calls.IPhoneCallHistoryEntryAddressFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Calls.IPhoneCallHistoryEntryAddress ** Default Interface **
@@ -16030,8 +16030,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.ApplicationModel.Calls.IPhoneCallHistoryEntryAddressFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.Calls.IPhoneCallHistoryEntryAddress ** Default Interface **

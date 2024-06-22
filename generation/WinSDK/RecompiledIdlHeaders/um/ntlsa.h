@@ -4128,6 +4128,23 @@ SeciIsProtectedUser(
     __out PBOOLEAN ProtectedUser
     );
 
+////////////////////////////////////////////////////////////////////////////
+//
+// Support for AES wire encryption
+//
+////////////////////////////////////////////////////////////////////////////
+
+//
+// LSAD RPC AES Wire Encryption constants.
+//
+#define versionbyte (0x01)
+#define versionbyte_length (1)
+#define LSAD_AES_256_ALG "AEAD-AES-256-CBC-HMAC-SHA512"
+#define LSAD_AES256_ENC_KEY_STRING "Microsoft LSAD encryption key AEAD-AES-256-CBC-HMAC-SHA512 16"
+#define LSAD_AES256_MAC_KEY_STRING "Microsoft LSAD MAC key AEAD-AES-256-CBC-HMAC-SHA512 16"
+#define LSAD_AES256_ENC_KEY_STRING_LENGTH sizeof(LSAD_AES256_ENC_KEY_STRING)
+#define LSAD_AES256_MAC_KEY_STRING_LENGTH sizeof(LSAD_AES256_MAC_KEY_STRING)
+
 #if _MSC_VER >= 1200
 #pragma warning(pop)
 #endif

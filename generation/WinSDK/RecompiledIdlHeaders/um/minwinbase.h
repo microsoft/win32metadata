@@ -110,11 +110,6 @@ typedef struct _WIN32_FIND_DATAA {
     DWORD dwReserved1;
     _Field_z_ CHAR   cFileName[ MAX_PATH ];
     _Field_z_ CHAR   cAlternateFileName[ 14 ];
-#ifdef _MAC
-    DWORD dwFileType;
-    DWORD dwCreatorType;
-    WORD  wFinderFlags;
-#endif
 } WIN32_FIND_DATAA, *PWIN32_FIND_DATAA, *LPWIN32_FIND_DATAA;
 typedef struct _WIN32_FIND_DATAW {
     DWORD dwFileAttributes;
@@ -127,11 +122,6 @@ typedef struct _WIN32_FIND_DATAW {
     DWORD dwReserved1;
     _Field_z_ WCHAR  cFileName[ MAX_PATH ];
     _Field_z_ WCHAR  cAlternateFileName[ 14 ];
-#ifdef _MAC
-    DWORD dwFileType;
-    DWORD dwCreatorType;
-    WORD  wFinderFlags;
-#endif
 } WIN32_FIND_DATAW, *PWIN32_FIND_DATAW, *LPWIN32_FIND_DATAW;
 #ifdef UNICODE
 typedef WIN32_FIND_DATAW WIN32_FIND_DATA;
@@ -219,7 +209,20 @@ typedef enum _FILE_INFO_BY_HANDLE_CLASS {
 #endif
     MaximumFileInfoByHandleClass
 } FILE_INFO_BY_HANDLE_CLASS, *PFILE_INFO_BY_HANDLE_CLASS;
-#endif
+
+#endif // (NTDDI_VERSION >= NTDDI_LONGHORN)
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
+
+typedef enum _FILE_INFO_BY_NAME_CLASS {
+    FileStatByNameInfo,
+    FileStatLxByNameInfo,
+    FileCaseSensitiveByNameInfo,
+    FileStatBasicByNameInfo,
+    MaximumFileInfoByNameClass
+} FILE_INFO_BY_NAME_CLASS, *PFILE_INFO_BY_NAME_CLASS;
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_ZN)
 
 typedef RTL_CRITICAL_SECTION CRITICAL_SECTION;
 typedef PRTL_CRITICAL_SECTION PCRITICAL_SECTION;

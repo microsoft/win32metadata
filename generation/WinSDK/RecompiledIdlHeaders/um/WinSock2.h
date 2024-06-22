@@ -1433,6 +1433,8 @@ typedef LPWSAQUERYSET2A LPWSAQUERYSET2;
 #define LUP_DNS_ONLY                 0x00020000
 #define LUP_RETURN_RESPONSE_FLAGS    0x00040000
 
+#define LUP_RESERVED_UNUSED          0x00080000
+
 #define LUP_ADDRCONFIG               0x00100000
 #define LUP_DUAL_ADDR                0x00200000
 #define LUP_FILESERVER               0x00400000
