@@ -51,7 +51,17 @@ stages:
         targetType: inline
         script: |
           .\${{parameters.RepoDirectory}}\\scripts\Install-DotNetTool.ps1 -Name nbgv
-          nbgv cloud 
+          nbgv cloud --common-vars
+
+    - task: PowerShell@2
+      displayName: Debug print build version
+      condition: eq(variables.arch, 'x64')
+      inputs:
+        targetType: inline
+        script: |
+          echo GitBuildVersion: '$(GitBuildVersion)'
+          echo GitBuildVersionSimple: '$(GitBuildVersionSimple)'
+          echo CloudBuildNumber: '$(CloudBuildNumber)'
 
     - task: PowerShell@2
       displayName: GenerateMetadataSource.ps1
