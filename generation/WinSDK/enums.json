@@ -25282,62 +25282,11 @@
   },
   {
     "name": "CERT_CHAIN_POLICY_FLAGS",
-    "members": [
-      {
-        "name": "CERT_CHAIN_POLICY_IGNORE_NOT_TIME_VALID_FLAG"
-      },
-      {
-        "name": "CERT_CHAIN_POLICY_IGNORE_CTL_NOT_TIME_VALID_FLAG"
-      },
-      {
-        "name": "CERT_CHAIN_POLICY_IGNORE_NOT_TIME_NESTED_FLAG"
-      },
-      {
-        "name": "CERT_CHAIN_POLICY_IGNORE_ALL_NOT_TIME_VALID_FLAGS"
-      },
-      {
-        "name": "CERT_CHAIN_POLICY_IGNORE_INVALID_BASIC_CONSTRAINTS_FLAG"
-      },
-      {
-        "name": "CERT_CHAIN_POLICY_ALLOW_UNKNOWN_CA_FLAG"
-      },
-      {
-        "name": "CERT_CHAIN_POLICY_IGNORE_WRONG_USAGE_FLAG"
-      },
-      {
-        "name": "CERT_CHAIN_POLICY_IGNORE_INVALID_NAME_FLAG"
-      },
-      {
-        "name": "CERT_CHAIN_POLICY_IGNORE_INVALID_POLICY_FLAG"
-      },
-      {
-        "name": "CERT_CHAIN_POLICY_IGNORE_END_REV_UNKNOWN_FLAG"
-      },
-      {
-        "name": "CERT_CHAIN_POLICY_IGNORE_CTL_SIGNER_REV_UNKNOWN_FLAG"
-      },
-      {
-        "name": "CERT_CHAIN_POLICY_IGNORE_CA_REV_UNKNOWN_FLAG"
-      },
-      {
-        "name": "CERT_CHAIN_POLICY_IGNORE_ROOT_REV_UNKNOWN_FLAG"
-      },
-      {
-        "name": "CERT_CHAIN_POLICY_IGNORE_ALL_REV_UNKNOWN_FLAGS"
-      },
-      {
-        "name": "CERT_CHAIN_POLICY_ALLOW_TESTROOT_FLAG"
-      },
-      {
-        "name": "CERT_CHAIN_POLICY_TRUST_TESTROOT_FLAG"
-      },
-      {
-        "name": "CERT_CHAIN_POLICY_IGNORE_NOT_SUPPORTED_CRITICAL_EXT_FLAG"
-      },
-      {
-        "name": "CERT_CHAIN_POLICY_IGNORE_PEER_TRUST_FLAG"
-      }
-    ],
+    "flags": true,
+    "autoPopulate": {
+      "filter": "CERT_CHAIN_POLICY_(ALLOW|IGNORE|TRUST)_|(BASIC_CONSTRAINTS|MICROSOFT_ROOT)_CERT_CHAIN_POLICY_",
+      "header": "wincrypt.h"
+    },
     "uses": [
       {
         "struct": "CERT_CHAIN_POLICY_PARA",

@@ -1,3 +1,17 @@
 # Fixed #1932.
 Windows.Win32.UI.Controls.Apis.LoadIconMetric : hinst : [In] => [In,Optional]
 Windows.Win32.UI.Controls.Apis.LoadIconWithScaleDown : hinst : [In] => [In,Optional]
+# Fixed #1937.
+Windows.Win32.Security.Cryptography.Apis.BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_CA_FLAG removed
+Windows.Win32.Security.Cryptography.Apis.BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_END_ENTITY_FLAG removed
+Windows.Win32.Security.Cryptography.Apis.CERT_CHAIN_POLICY_IGNORE_WEAK_SIGNATURE_FLAG removed
+Windows.Win32.Security.Cryptography.Apis.MICROSOFT_ROOT_CERT_CHAIN_POLICY_CHECK_APPLICATION_ROOT_FLAG removed
+Windows.Win32.Security.Cryptography.Apis.MICROSOFT_ROOT_CERT_CHAIN_POLICY_DISABLE_FLIGHT_ROOT_FLAG removed
+Windows.Win32.Security.Cryptography.Apis.MICROSOFT_ROOT_CERT_CHAIN_POLICY_ENABLE_TEST_ROOT_FLAG removed
+Windows.Win32.Security.Cryptography.CERT_CHAIN_POLICY_FLAGS :  => [Flags]
+Windows.Win32.Security.Cryptography.CERT_CHAIN_POLICY_FLAGS.BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_CA_FLAG added
+Windows.Win32.Security.Cryptography.CERT_CHAIN_POLICY_FLAGS.BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_END_ENTITY_FLAG added
+Windows.Win32.Security.Cryptography.CERT_CHAIN_POLICY_FLAGS.CERT_CHAIN_POLICY_IGNORE_WEAK_SIGNATURE_FLAG added
+Windows.Win32.Security.Cryptography.CERT_CHAIN_POLICY_FLAGS.MICROSOFT_ROOT_CERT_CHAIN_POLICY_CHECK_APPLICATION_ROOT_FLAG added
+Windows.Win32.Security.Cryptography.CERT_CHAIN_POLICY_FLAGS.MICROSOFT_ROOT_CERT_CHAIN_POLICY_DISABLE_FLIGHT_ROOT_FLAG added
+Windows.Win32.Security.Cryptography.CERT_CHAIN_POLICY_FLAGS.MICROSOFT_ROOT_CERT_CHAIN_POLICY_ENABLE_TEST_ROOT_FLAG added
