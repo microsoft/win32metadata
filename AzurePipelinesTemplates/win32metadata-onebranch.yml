@@ -60,9 +60,15 @@ stages:
       inputs:
         targetType: inline
         script: |
+          nbgv get-version -f json
           echo GitBuildVersion: '$(GitBuildVersion)'
           echo GitBuildVersionSimple: '$(GitBuildVersionSimple)'
           echo CloudBuildNumber: '$(CloudBuildNumber)'
+
+    - task: onebranch.pipeline.version@1
+      inputs:
+        system: 'Custom'
+        customVersion: '$(GitBuildVersionSimple)'
 
     - task: PowerShell@2
       displayName: GenerateMetadataSource.ps1
