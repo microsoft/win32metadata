@@ -60,15 +60,21 @@ stages:
       inputs:
         targetType: inline
         script: |
-          nbgv get-version -f json
+          $jsonString = nbgv get-version -f json
+          $nbgvData = $jsonString | ConvertFrom-Json
+          $commitId = $nbgvData.GitCommitId
+
+          $commitMessage = git log --format=%B -n 1 $commitId
+
           echo GitBuildVersion: '$(GitBuildVersion)'
           echo GitBuildVersionSimple: '$(GitBuildVersionSimple)'
           echo CloudBuildNumber: '$(CloudBuildNumber)'
+          Write-Host "##vso[task.setvariable variable=CommitMessage;]$commitMessage"
 
     - task: onebranch.pipeline.version@1
       inputs:
         system: 'Custom'
-        customVersion: '$(GitBuildVersionSimple)'
+        customVersion: '$(GitBuildVersionSimple) • $(CommitMessage)'
 
     - task: PowerShell@2
       displayName: GenerateMetadataSource.ps1
