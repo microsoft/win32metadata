@@ -47,10 +47,11 @@ stages:
     - task: PowerShell@2
       displayName: Set build version
       condition: eq(variables.arch, 'x64') # Only needed for x64
+      workingDirectory: ${{parameters.RepoDirectory}}
       inputs:
         targetType: inline
         script: |
-          .\${{parameters.RepoDirectory}}\\scripts\Install-DotNetTool.ps1 -Name nbgv
+          .\scripts\Install-DotNetTool.ps1 -Name nbgv
           nbgv cloud --common-vars
 
     - task: PowerShell@2
