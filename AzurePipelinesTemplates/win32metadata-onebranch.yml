@@ -43,7 +43,6 @@ stages:
         packageType: sdk
         useGlobalJson: true
 
-    # TODO - this no longer sets an Azure Devops pipeline build number, OneBranch has a different way of doing that
     - task: PowerShell@2
       displayName: Set build version
       condition: eq(variables.arch, 'x64') # Only needed for x64
@@ -54,6 +53,7 @@ stages:
           .\scripts\Install-DotNetTool.ps1 -Name nbgv
           nbgv cloud --common-vars
 
+    # Generate the Azure Devops pipeline build number, since nbgv cannot do it for OneBranch pipelines
     - task: PowerShell@2
       displayName: Debug print build version
       condition: eq(variables.arch, 'x64')
@@ -64,15 +64,13 @@ stages:
           $jsonString = nbgv get-version -f json
           $nbgvData = $jsonString | ConvertFrom-Json
           $commitId = $nbgvData.GitCommitId
-
           $commitMessage = git log --format=%B -n 1 $commitId
-
-          echo GitBuildVersion: '$(GitBuildVersion)'
-          echo GitBuildVersionSimple: '$(GitBuildVersionSimple)'
-          echo CloudBuildNumber: '$(CloudBuildNumber)'
+          Write-Host "Setting pipeline build number to '$(GitBuildVersionSimple) • $commitMessage'"
           Write-Host "##vso[task.setvariable variable=CommitMessage;]$commitMessage"
 
+    # Set the pipeline build number
     - task: onebranch.pipeline.version@1
+      condition: eq(variables.arch, 'x64')
       inputs:
         system: 'Custom'
         customVersion: '$(GitBuildVersionSimple) • $(CommitMessage)'
