@@ -59,6 +59,7 @@ stages:
       condition: eq(variables.arch, 'x64')
       inputs:
         targetType: inline
+        workingDirectory: ${{parameters.RepoDirectory}}
         script: |
           $jsonString = nbgv get-version -f json
           $nbgvData = $jsonString | ConvertFrom-Json
