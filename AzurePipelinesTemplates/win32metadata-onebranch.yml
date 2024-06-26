@@ -68,6 +68,9 @@ stages:
           Write-Host "Setting pipeline build number to '$(GitBuildVersionSimple) • $commitMessage'"
           Write-Host "##vso[task.setvariable variable=CommitMessage;]$commitMessage"
 
+          Write-Host "Saving Source Commit ID for github release pipeline"
+          $commitId | Out-File $(ob_outputDirectory)\SourceCommit.txt
+
     # Set the pipeline build number
     - task: onebranch.pipeline.version@1
       condition: eq(variables.arch, 'x64')
