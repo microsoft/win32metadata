@@ -55,7 +55,7 @@ stages:
 
     # Generate the Azure Devops pipeline build number, since nbgv cannot do it for OneBranch pipelines
     - task: PowerShell@2
-      displayName: Debug print build version
+      displayName: Get pipeline run name
       condition: eq(variables.arch, 'x64')
       inputs:
         targetType: inline
@@ -67,9 +67,6 @@ stages:
           $commitMessage = git log --format=%B -n 1 $commitId
           Write-Host "Setting pipeline build number to '$(GitBuildVersionSimple) • $commitMessage'"
           Write-Host "##vso[task.setvariable variable=CommitMessage;]$commitMessage"
-
-          Write-Host "Saving Source Commit ID for github release pipeline"
-          $commitId | Out-File $(Build.SourcesDirectory)\$(ob_outputDirectory)\SourceCommit.txt
 
     # Set the pipeline build number
     - task: onebranch.pipeline.version@1
@@ -85,6 +82,17 @@ stages:
         arguments: '-arch $(arch) $(generateMetadataArgs)'
         errorActionPreference: 'continue'
         pwsh: true 
+
+    # Save commit hash for use by the release pipeline    
+    - task: PowerShell@2
+      displayName: Save Source Commit
+      condition: eq(variables.arch, 'x64')
+      inputs:
+        targetType: inline
+        workingDirectory: ${{parameters.RepoDirectory}}
+        script: |
+          Write-Host "Saving Source Commit ID for github release pipeline"
+          $commitId | Out-File $(Build.SourcesDirectory)\$(ob_outputDirectory)\SourceCommit.txt
 
 - stage: build_winmd
   displayName: "Build WinMD"
